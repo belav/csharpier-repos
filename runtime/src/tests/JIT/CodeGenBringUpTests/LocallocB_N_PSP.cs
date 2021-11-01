@@ -12,7 +12,8 @@ public class BringUpTest
 
     // Reduce all values to byte
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static unsafe bool CHECK(byte check, byte expected) {
+    public static unsafe bool CHECK(byte check, byte expected)
+    {
         return check == expected;
     }
 
@@ -23,7 +24,7 @@ public class BringUpTest
         int i;
         for (i = 0; i < n; i++)
         {
-            a[i] = (byte) i;
+            a[i] = (byte)i;
         }
 
         i = 0;
@@ -31,7 +32,8 @@ public class BringUpTest
         {
             for (; i < n; i++)
             {
-                if (!CHECK(a[i], (byte) i)) return i;
+                if (!CHECK(a[i], (byte)i))
+                    return i;
             }
         }
         catch
@@ -48,25 +50,29 @@ public class BringUpTest
         int ret;
 
         ret = LocallocB_N_PSP(1);
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocB_N_PSP - Test 1: Failed on index: " + ret);
             return Fail;
         }
 
         ret = LocallocB_N_PSP(5);
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocB_N_PSP - Test 2: Failed on index: " + ret);
             return Fail;
         }
 
         ret = LocallocB_N_PSP(117);
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocB_N_PSP - Test 3: Failed on index: " + ret);
             return Fail;
         }
 
         ret = LocallocB_N_PSP(5001);
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocB_N_PSP - Test 4: Failed on index: " + ret);
             return Fail;
         }

@@ -27,7 +27,9 @@ namespace Microsoft.AspNetCore.Antiforgery
         {
             Debug.Assert(claimsPrincipal != null);
 
-            var uniqueIdentifierParameters = GetUniqueIdentifierParameters(claimsPrincipal.Identities);
+            var uniqueIdentifierParameters = GetUniqueIdentifierParameters(
+                claimsPrincipal.Identities
+            );
             if (uniqueIdentifierParameters == null)
             {
                 // No authenticated identities containing claims found.
@@ -38,7 +40,9 @@ namespace Microsoft.AspNetCore.Antiforgery
             return Convert.ToBase64String(claimUidBytes);
         }
 
-        public static IList<string>? GetUniqueIdentifierParameters(IEnumerable<ClaimsIdentity> claimsIdentities)
+        public static IList<string>? GetUniqueIdentifierParameters(
+            IEnumerable<ClaimsIdentity> claimsIdentities
+        )
         {
             var identitiesList = claimsIdentities as List<ClaimsIdentity>;
             if (identitiesList == null)
@@ -55,19 +59,21 @@ namespace Microsoft.AspNetCore.Antiforgery
                 }
 
                 var subClaim = identity.FindFirst(
-                    claim => string.Equals("sub", claim.Type, StringComparison.Ordinal));
+                    claim => string.Equals("sub", claim.Type, StringComparison.Ordinal)
+                );
                 if (subClaim != null && !string.IsNullOrEmpty(subClaim.Value))
                 {
-                    return new string[]
-                    {
-                        subClaim.Type,
-                        subClaim.Value,
-                        subClaim.Issuer
-                    };
+                    return new string[] { subClaim.Type, subClaim.Value, subClaim.Issuer };
                 }
 
                 var nameIdentifierClaim = identity.FindFirst(
-                    claim => string.Equals(ClaimTypes.NameIdentifier, claim.Type, StringComparison.Ordinal));
+                    claim =>
+                        string.Equals(
+                            ClaimTypes.NameIdentifier,
+                            claim.Type,
+                            StringComparison.Ordinal
+                        )
+                );
                 if (nameIdentifierClaim != null && !string.IsNullOrEmpty(nameIdentifierClaim.Value))
                 {
                     return new string[]
@@ -79,15 +85,11 @@ namespace Microsoft.AspNetCore.Antiforgery
                 }
 
                 var upnClaim = identity.FindFirst(
-                    claim => string.Equals(ClaimTypes.Upn, claim.Type, StringComparison.Ordinal));
+                    claim => string.Equals(ClaimTypes.Upn, claim.Type, StringComparison.Ordinal)
+                );
                 if (upnClaim != null && !string.IsNullOrEmpty(upnClaim.Value))
                 {
-                    return new string[]
-                    {
-                        upnClaim.Type,
-                        upnClaim.Value,
-                        upnClaim.Issuer
-                    };
+                    return new string[] { upnClaim.Type, upnClaim.Value, upnClaim.Issuer };
                 }
             }
 
@@ -135,7 +137,9 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 writer.Flush();
 
-                bool success = serializationContext.Stream.TryGetBuffer(out ArraySegment<byte> buffer);
+                bool success = serializationContext.Stream.TryGetBuffer(
+                    out ArraySegment<byte> buffer
+                );
                 if (!success)
                 {
                     throw new InvalidOperationException();

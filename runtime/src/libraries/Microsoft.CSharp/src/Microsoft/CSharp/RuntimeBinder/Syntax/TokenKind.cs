@@ -22,7 +22,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         TypeOf,
         Unchecked,
         Void,
-
         Equal,
         PlusEqual,
         MinusEqual,
@@ -61,7 +60,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         MinusMinus,
         Dot,
         QuestionQuestion,
-
         Unknown,
     }
 }

@@ -32,15 +32,57 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_UseInvalidValues_Throw()
         {
-            AssertExtensions.Throws<ArgumentException>("name", () => { new ProductHeaderValue(null); });
-            AssertExtensions.Throws<ArgumentException>("name", () => { new ProductHeaderValue(string.Empty); });
-            Assert.Throws<FormatException>(() => { new ProductHeaderValue(" x"); });
-            Assert.Throws<FormatException>(() => { new ProductHeaderValue("x "); });
-            Assert.Throws<FormatException>(() => { new ProductHeaderValue("x y"); });
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                {
+                    new ProductHeaderValue(null);
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                {
+                    new ProductHeaderValue(string.Empty);
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ProductHeaderValue(" x");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ProductHeaderValue("x ");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ProductHeaderValue("x y");
+                }
+            );
 
-            Assert.Throws<FormatException>(() => { new ProductHeaderValue("x", " y"); });
-            Assert.Throws<FormatException>(() => { new ProductHeaderValue("x", "y "); });
-            Assert.Throws<FormatException>(() => { new ProductHeaderValue("x", "y z"); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ProductHeaderValue("x", " y");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ProductHeaderValue("x", "y ");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ProductHeaderValue("x", "y z");
+                }
+            );
         }
 
         [Fact]
@@ -199,7 +241,12 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { ProductHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    ProductHeaderValue.Parse(input);
+                }
+            );
         }
 
         private void CheckValidTryParse(string input, ProductHeaderValue expectedResult)
@@ -216,10 +263,17 @@ namespace System.Net.Http.Tests
             Assert.Null(result);
         }
 
-        private static void CallGetProductLength(string input, int startIndex, int expectedLength,
-            out ProductHeaderValue result)
+        private static void CallGetProductLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            out ProductHeaderValue result
+        )
         {
-            Assert.Equal(expectedLength, ProductHeaderValue.GetProductLength(input, startIndex, out result));
+            Assert.Equal(
+                expectedLength,
+                ProductHeaderValue.GetProductLength(input, startIndex, out result)
+            );
         }
 
         private static void CheckInvalidGetProductLength(string input, int startIndex)

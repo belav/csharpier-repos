@@ -28,18 +28,24 @@ namespace System.Net.WebSockets
             WebSocket?.Abort();
         }
 
-        public async Task ConnectAsync(Uri uri, CancellationToken cancellationToken, ClientWebSocketOptions options)
+        public async Task ConnectAsync(
+            Uri uri,
+            CancellationToken cancellationToken,
+            ClientWebSocketOptions options
+        )
         {
             try
             {
-                cancellationToken.ThrowIfCancellationRequested();  // avoid allocating a WebSocket object if cancellation was requested before connect
+                cancellationToken.ThrowIfCancellationRequested(); // avoid allocating a WebSocket object if cancellation was requested before connect
                 CancellationTokenSource? linkedCancellation;
                 CancellationTokenSource externalAndAbortCancellation;
                 if (cancellationToken.CanBeCanceled) // avoid allocating linked source if external token is not cancelable
                 {
-                    linkedCancellation =
-                        externalAndAbortCancellation =
-                        CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _abortSource.Token);
+                    linkedCancellation = externalAndAbortCancellation =
+                        CancellationTokenSource.CreateLinkedTokenSource(
+                            cancellationToken,
+                            _abortSource.Token
+                        );
                 }
                 else
                 {
@@ -50,7 +56,13 @@ namespace System.Net.WebSockets
                 using (linkedCancellation)
                 {
                     WebSocket = new BrowserWebSocket();
-                    await ((BrowserWebSocket)WebSocket).ConnectAsyncJavaScript(uri, externalAndAbortCancellation.Token, options.RequestedSubProtocols).ConfigureAwait(continueOnCapturedContext: true);
+                    await ((BrowserWebSocket)WebSocket)
+                        .ConnectAsyncJavaScript(
+                            uri,
+                            externalAndAbortCancellation.Token,
+                            options.RequestedSubProtocols
+                        )
+                        .ConfigureAwait(continueOnCapturedContext: true);
                     externalAndAbortCancellation.Token.ThrowIfCancellationRequested();
                 }
             }
@@ -63,12 +75,18 @@ namespace System.Net.WebSockets
 
                 Abort();
 
-                switch (exc) {
+                switch (exc)
+                {
                     case WebSocketException:
-                    case OperationCanceledException _ when cancellationToken.IsCancellationRequested:
+                    case OperationCanceledException _
+                          when cancellationToken.IsCancellationRequested:
                         throw;
                     default:
-                        throw new WebSocketException(WebSocketError.Faulted, SR.net_webstatus_ConnectFailure, exc);
+                        throw new WebSocketException(
+                            WebSocketError.Faulted,
+                            SR.net_webstatus_ConnectFailure,
+                            exc
+                        );
                 }
             }
         }

@@ -8,10 +8,16 @@ using System.Numerics;
 public class GitHub_23885
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void dummy(Vector<ulong> v1, Vector<ulong> v2, Vector<ulong> v3, Vector<ulong> v4,
-                      Vector<ulong> v5, Vector<ulong> v6, Vector<ulong> v7, Vector<ulong> v8)
-    {
-    }
+    static void dummy(
+        Vector<ulong> v1,
+        Vector<ulong> v2,
+        Vector<ulong> v3,
+        Vector<ulong> v4,
+        Vector<ulong> v5,
+        Vector<ulong> v6,
+        Vector<ulong> v7,
+        Vector<ulong> v8
+    ) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void CreateVectors()
@@ -34,9 +40,7 @@ public class GitHub_23885
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void ConsumeDouble(double d)
-    {
-    }
+    static void ConsumeDouble(double d) { }
 
     static int Main(string[] args)
     {
@@ -72,8 +76,14 @@ public class GitHub_23885
         CreateVectors();
 
         Console.WriteLine("{0} {1} {2} {3} {4} {5}", xA, xB, xC, xD, xE, xF);
-        if (!xA.Equals(new Vector<ulong>((ulong)5)) || !xB.Equals(new Vector<ulong>((ulong)9)) || !xC.Equals(new Vector<ulong>((ulong)17)) ||
-            !xD.Equals(new Vector<ulong>((ulong)41)) || !xE.Equals(new Vector<ulong>((ulong)105)) || !xF.Equals(new Vector<ulong>((ulong)273)))
+        if (
+            !xA.Equals(new Vector<ulong>((ulong)5))
+            || !xB.Equals(new Vector<ulong>((ulong)9))
+            || !xC.Equals(new Vector<ulong>((ulong)17))
+            || !xD.Equals(new Vector<ulong>((ulong)41))
+            || !xE.Equals(new Vector<ulong>((ulong)105))
+            || !xF.Equals(new Vector<ulong>((ulong)273))
+        )
         {
             returnVal = -1;
         }
@@ -85,14 +95,33 @@ public class GitHub_23885
 
         CreateVectors();
 
-        Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8}", xA, xB, xC, xD, xE, xF, xG, xH, xI);
+        Console.WriteLine(
+            "{0} {1} {2} {3} {4} {5} {6} {7} {8}",
+            xA,
+            xB,
+            xC,
+            xD,
+            xE,
+            xF,
+            xG,
+            xH,
+            xI
+        );
 
         ConsumeDouble((d * d) + d);
         d = d * GetDouble();
 
-        if (!xA.Equals(new Vector<ulong>((ulong)5)) || !xB.Equals(new Vector<ulong>((ulong)9)) || !xC.Equals(new Vector<ulong>((ulong)17)) ||
-            !xD.Equals(new Vector<ulong>((ulong)41)) || !xE.Equals(new Vector<ulong>((ulong)105)) || !xF.Equals(new Vector<ulong>((ulong)273)) ||
-            !xG.Equals(Vector<ulong>.Zero) || !xH.Equals(Vector<ulong>.Zero) || !xI.Equals(Vector<ulong>.Zero))
+        if (
+            !xA.Equals(new Vector<ulong>((ulong)5))
+            || !xB.Equals(new Vector<ulong>((ulong)9))
+            || !xC.Equals(new Vector<ulong>((ulong)17))
+            || !xD.Equals(new Vector<ulong>((ulong)41))
+            || !xE.Equals(new Vector<ulong>((ulong)105))
+            || !xF.Equals(new Vector<ulong>((ulong)273))
+            || !xG.Equals(Vector<ulong>.Zero)
+            || !xH.Equals(Vector<ulong>.Zero)
+            || !xI.Equals(Vector<ulong>.Zero)
+        )
         {
             returnVal = -1;
         }

@@ -28,11 +28,13 @@ namespace System.Text.RegularExpressions.Tests
                 return;
             }
             catch (Exception e)
-            { 
+            {
                 throw new XunitException($"Expected ArgumentException -> Actual: {e}");
             }
 
-            throw new XunitException($"Expected ArgumentException with error: ({error}) -> Actual: No exception thrown");
+            throw new XunitException(
+                $"Expected ArgumentException with error: ({error}) -> Actual: No exception thrown"
+            );
         }
     }
 }

@@ -48,8 +48,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                     throw new ArgumentException(
                         Resources.FormatBinderType_MustBeIModelBinder(
                             value.FullName,
-                            typeof(IModelBinder).FullName),
-                        nameof(value));
+                            typeof(IModelBinder).FullName
+                        ),
+                        nameof(value)
+                    );
                 }
 
                 _binderType = value;

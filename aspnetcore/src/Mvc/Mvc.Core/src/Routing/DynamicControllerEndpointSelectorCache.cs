@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
     internal class DynamicControllerEndpointSelectorCache
     {
         private readonly ConcurrentDictionary<int, EndpointDataSource> _dataSourceCache = new();
-        private readonly ConcurrentDictionary<int, DynamicControllerEndpointSelector> _endpointSelectorCache = new();
+        private readonly ConcurrentDictionary<
+            int,
+            DynamicControllerEndpointSelector
+        > _endpointSelectorCache = new();
 
         public void AddDataSource(ControllerActionEndpointDataSource dataSource)
         {
@@ -25,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         public DynamicControllerEndpointSelector GetEndpointSelector(Endpoint endpoint)
         {
-            var dataSourceId = endpoint.Metadata.GetMetadata<ControllerEndpointDataSourceIdMetadata>()!;
+            var dataSourceId =
+                endpoint.Metadata.GetMetadata<ControllerEndpointDataSourceIdMetadata>()!;
             return _endpointSelectorCache.GetOrAdd(dataSourceId.Id, key => EnsureDataSource(key));
         }
 
@@ -33,7 +37,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         {
             if (!_dataSourceCache.TryGetValue(key, out var dataSource))
             {
-                throw new InvalidOperationException($"Data source with key '{key}' not registered.");
+                throw new InvalidOperationException(
+                    $"Data source with key '{key}' not registered."
+                );
             }
 
             return new DynamicControllerEndpointSelector(dataSource);

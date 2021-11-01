@@ -34,7 +34,10 @@ namespace System.Diagnostics.Tests
         public void Modules_Get_ContainsHostFileName()
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
-            Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains(RemoteExecutor.HostRunnerName));
+            Assert.Contains(
+                modules.Cast<ProcessModule>(),
+                m => m.FileName.Contains(RemoteExecutor.HostRunnerName)
+            );
         }
 
         [Fact]
@@ -43,7 +46,10 @@ namespace System.Diagnostics.Tests
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
             Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains("libcoreclr"));
-            Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains("System.Native"));
+            Assert.Contains(
+                modules.Cast<ProcessModule>(),
+                m => m.FileName.Contains("System.Native")
+            );
         }
 
         [Fact]
@@ -72,7 +78,11 @@ namespace System.Diagnostics.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/49568",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMacOsAppleSilicon)
+        )]
         public void ModulesAreDisposedWhenProcessIsDisposed()
         {
             Process process = CreateDefaultProcess();
@@ -104,11 +114,19 @@ namespace System.Diagnostics.Tests
             // Loading from new path is possible because the type exposed by the assembly is not referenced in any explicit way.
             const string libraryName = "LongPath.dll";
 
-            string testBinPath = Path.GetDirectoryName(typeof(ProcessModuleTests).Assembly.Location);
+            string testBinPath = Path.GetDirectoryName(
+                typeof(ProcessModuleTests).Assembly.Location
+            );
             string libraryToCopy = Path.Combine(testBinPath, libraryName);
-            Assert.True(File.Exists(libraryToCopy), $"{libraryName} was not present in bin folder '{testBinPath}'");
+            Assert.True(
+                File.Exists(libraryToCopy),
+                $"{libraryName} was not present in bin folder '{testBinPath}'"
+            );
 
-            string directoryWithLongName = Path.Combine(TestDirectory, new string('a', Math.Max(1, 261 - TestDirectory.Length)));
+            string directoryWithLongName = Path.Combine(
+                TestDirectory,
+                new string('a', Math.Max(1, 261 - TestDirectory.Length))
+            );
             Directory.CreateDirectory(directoryWithLongName);
 
             string longNamePath = Path.Combine(directoryWithLongName, libraryName);
@@ -118,7 +136,10 @@ namespace System.Diagnostics.Tests
 
             Assembly loaded = Assembly.LoadFile(longNamePath);
 
-            Assert.Contains(Process.GetCurrentProcess().Modules.Cast<ProcessModule>(), module => module.FileName == longNamePath);
+            Assert.Contains(
+                Process.GetCurrentProcess().Modules.Cast<ProcessModule>(),
+                module => module.FileName == longNamePath
+            );
         }
     }
 }

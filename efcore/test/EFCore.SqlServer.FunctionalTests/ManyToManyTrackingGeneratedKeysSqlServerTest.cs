@@ -8,17 +8,16 @@ namespace Microsoft.EntityFrameworkCore
     public class ManyToManyTrackingGeneratedKeysSqlServerTest
         : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingGeneratedKeysSqlServerTest.ManyToManyTrackingGeneratedKeysSqlServerFixture>
     {
-        public ManyToManyTrackingGeneratedKeysSqlServerTest(ManyToManyTrackingGeneratedKeysSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+        public ManyToManyTrackingGeneratedKeysSqlServerTest(
+            ManyToManyTrackingGeneratedKeysSqlServerFixture fixture
+        ) : base(fixture) { }
 
-        public class ManyToManyTrackingGeneratedKeysSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
+        public class ManyToManyTrackingGeneratedKeysSqlServerFixture
+            : ManyToManyTrackingSqlServerFixtureBase
         {
             protected override string StoreName { get; } = "ManyToManyTrackingGeneratedKeys";
 
-            public override bool UseGeneratedKeys
-                => true;
+            public override bool UseGeneratedKeys => true;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -27,11 +26,23 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<EntityOne>().Property(e => e.Id).ValueGeneratedOnAdd();
                 modelBuilder.Entity<EntityTwo>().Property(e => e.Id).ValueGeneratedOnAdd();
                 modelBuilder.Entity<EntityThree>().Property(e => e.Id).ValueGeneratedOnAdd();
-                modelBuilder.Entity<EntityCompositeKey>().Property(e => e.Key1).ValueGeneratedOnAdd();
+                modelBuilder
+                    .Entity<EntityCompositeKey>()
+                    .Property(e => e.Key1)
+                    .ValueGeneratedOnAdd();
                 modelBuilder.Entity<EntityRoot>().Property(e => e.Id).ValueGeneratedOnAdd();
-                modelBuilder.SharedTypeEntity<ProxyableSharedType>("PST").IndexerProperty<int>("Id").ValueGeneratedOnAdd();
-                modelBuilder.Entity<ImplicitManyToManyA>().Property(e => e.Id).ValueGeneratedOnAdd();
-                modelBuilder.Entity<ImplicitManyToManyB>().Property(e => e.Id).ValueGeneratedOnAdd();
+                modelBuilder
+                    .SharedTypeEntity<ProxyableSharedType>("PST")
+                    .IndexerProperty<int>("Id")
+                    .ValueGeneratedOnAdd();
+                modelBuilder
+                    .Entity<ImplicitManyToManyA>()
+                    .Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+                modelBuilder
+                    .Entity<ImplicitManyToManyB>()
+                    .Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
             }
         }
     }

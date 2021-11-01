@@ -17,6 +17,12 @@ namespace WebAssembly.JSInterop
         /// See: https://github.com/mono/mono/blob/90574987940959fe386008a850982ea18236a533/sdks/wasm/src/driver.c#L318-L319
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        public static extern TRes InvokeJS<T0, T1, T2, TRes>(out string exception, ref JSCallInfo callInfo, [AllowNull] T0 arg0, [AllowNull] T1 arg1, [AllowNull] T2 arg2);
+        public static extern TRes InvokeJS<T0, T1, T2, TRes>(
+            out string exception,
+            ref JSCallInfo callInfo,
+            [AllowNull] T0 arg0,
+            [AllowNull] T1 arg1,
+            [AllowNull] T2 arg2
+        );
     }
 }

@@ -36,7 +36,9 @@ namespace System.Threading
             Debug.Assert(s_processorIdRefreshRate <= ProcessorIdCacheCountDownMask);
 
             // Mask with int.MaxValue to ensure the execution Id is not negative
-            t_currentProcessorIdCache = ((currentProcessorId << ProcessorIdCacheShift) & int.MaxValue) | s_processorIdRefreshRate;
+            t_currentProcessorIdCache =
+                ((currentProcessorId << ProcessorIdCacheShift) & int.MaxValue)
+                | s_processorIdRefreshRate;
 
             return currentProcessorId;
         }

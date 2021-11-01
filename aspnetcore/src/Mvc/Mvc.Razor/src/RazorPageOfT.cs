@@ -22,6 +22,5 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         /// </summary>
         [RazorInject]
         public ViewDataDictionary<TModel> ViewData { get; set; } = default!;
-
     }
 }

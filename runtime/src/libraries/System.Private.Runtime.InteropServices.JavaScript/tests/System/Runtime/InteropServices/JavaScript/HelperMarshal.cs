@@ -10,7 +10,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 {
     public static class HelperMarshal
     {
-        internal const string INTEROP_CLASS = "[System.Private.Runtime.InteropServices.JavaScript.Tests]System.Runtime.InteropServices.JavaScript.Tests.HelperMarshal:";
+        internal const string INTEROP_CLASS =
+            "[System.Private.Runtime.InteropServices.JavaScript.Tests]System.Runtime.InteropServices.JavaScript.Tests.HelperMarshal:";
         internal static int _i32Value;
         private static void InvokeI32(int a, int b)
         {
@@ -115,7 +116,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             return _marshalledObject;
         }
 
-        internal static int _valOne, _valTwo;
+        internal static int _valOne,
+            _valTwo;
         private static void ManipulateObject(JSObject obj)
         {
             _valOne = (int)obj.Invoke("inc");
@@ -345,7 +347,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             if (math == null)
                 throw new Exception("Runtime.GetGlobalObject(Math) returned null");
             _mathMinFunction = (Function)math.GetObjectProperty("min");
-
         }
 
         internal static int _minValue = 0;
@@ -401,7 +402,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         internal static int _functionActionResultValue;
         internal static int _functionActionResultValueOfAction;
-        private static Func<int, int, Action<int,int>> CreateFunctionDelegateWithAction()
+        private static Func<int, int, Action<int, int>> CreateFunctionDelegateWithAction()
         {
             return (a, b) =>
             {
@@ -414,7 +415,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _actionResultValue;
-        private static Action<int,int> CreateActionDelegate()
+        private static Action<int, int> CreateActionDelegate()
         {
             return (a1, a2) =>
             {
@@ -465,18 +466,25 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         private static Del CreateDelegateFromAnonymousMethod_VoidString()
         {
             // Instantiate the delegate.
-            Del handler = delegate(string name) { _delegateCallResult = $"Notification received for: {name}"; };
+            Del handler = delegate(string name)
+            {
+                _delegateCallResult = $"Notification received for: {name}";
+            };
             return handler;
         }
 
         private static Del CreateDelegateFromLambda_VoidString()
         {
             // Instantiate the delegate.
-            Del handler = (string name) => { _delegateCallResult = $"Notification received for: {name}"; };
+            Del handler = (string name) =>
+            {
+                _delegateCallResult = $"Notification received for: {name}";
+            };
             return handler;
         }
 
-        public static void DelegateMethod_VoidString(string name) => _delegateCallResult = $"Notification received for: {name}";
+        public static void DelegateMethod_VoidString(string name) =>
+            _delegateCallResult = $"Notification received for: {name}";
 
         private static Del CreateDelegateFromMethod_VoidString()
         {
@@ -485,8 +493,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             return handler;
         }
 
-        private static Action<string> CreateActionT_VoidString()
-            => (string name) => _delegateCallResult = $"Notification received for: {name}";
+        private static Action<string> CreateActionT_VoidString() =>
+            (string name) => _delegateCallResult = $"Notification received for: {name}";
 
         static void Hello(string s)
         {
@@ -501,7 +509,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         delegate void CustomDelStr(string s);
         private static CustomDelStr CreateCustomMultiCastDelegate_VoidString()
         {
-            CustomDelStr hiDel, mornDel, multiDel;
+            CustomDelStr hiDel,
+                mornDel,
+                multiDel;
             hiDel = Hello;
             mornDel = GoodMorning;
             multiDel = hiDel + mornDel;
@@ -511,7 +521,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         private static Action<string> CreateMultiCastAction_VoidString()
         {
-            Action<string> hiDel, mornDel, multiDel;
+            Action<string> hiDel,
+                mornDel,
+                multiDel;
             hiDel = Hello;
             mornDel = GoodMorning;
             multiDel = hiDel + mornDel;
@@ -521,7 +533,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         internal static JSObject _funcActionBufferObjectResultValue;
         internal static int _funcActionBufferResultLengthValue;
-        private static Func<Uint8ClampedArray, Action<Uint8ClampedArray>> CreateFunctionAcceptingUint8ClampedArray()
+        private static Func<
+            Uint8ClampedArray,
+            Action<Uint8ClampedArray>
+        > CreateFunctionAcceptingUint8ClampedArray()
         {
             return (buffer) =>
             {
@@ -605,7 +620,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             };
         }
 
-        private static Func<Float32Array, Action<Float32Array>> CreateFunctionAcceptingFloat32Array()
+        private static Func<
+            Float32Array,
+            Action<Float32Array>
+        > CreateFunctionAcceptingFloat32Array()
         {
             return (buffer) =>
             {
@@ -617,7 +635,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             };
         }
 
-        private static Func<Float64Array, Action<Float64Array>> CreateFunctionAcceptingFloat64Array()
+        private static Func<
+            Float64Array,
+            Action<Float64Array>
+        > CreateFunctionAcceptingFloat64Array()
         {
             return (buffer) =>
             {
@@ -640,10 +661,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 };
             };
         }
-
     }
 
-    public enum TestEnum : uint {
+    public enum TestEnum : uint
+    {
         FirstValue = 1,
         Zero = 0,
         Five = 5,

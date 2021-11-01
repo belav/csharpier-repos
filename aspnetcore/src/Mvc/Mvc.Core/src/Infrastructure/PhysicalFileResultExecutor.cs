@@ -16,16 +16,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// <summary>
     /// A <see cref="IActionResultExecutor{PhysicalFileResult}"/> for <see cref="PhysicalFileResult"/>.
     /// </summary>
-    public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultExecutor<PhysicalFileResult>
+    public class PhysicalFileResultExecutor
+        : FileResultExecutorBase,
+          IActionResultExecutor<PhysicalFileResult>
     {
         /// <summary>
         /// Initializes a new instance of <see cref="PhysicalFileResultExecutor"/>.
         /// </summary>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
         public PhysicalFileResultExecutor(ILoggerFactory loggerFactory)
-            : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory))
-        {
-        }
+            : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory)) { }
 
         /// <inheritdoc />
         public virtual Task ExecuteAsync(ActionContext context, PhysicalFileResult result)
@@ -44,7 +44,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (!fileInfo.Exists)
             {
                 throw new FileNotFoundException(
-                    Resources.FormatFileResult_InvalidPath(result.FileName), result.FileName);
+                    Resources.FormatFileResult_InvalidPath(result.FileName),
+                    result.FileName
+                );
             }
 
             Logger.ExecutingFileResult(result, result.FileName);
@@ -56,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 fileInfo.Length,
                 result.EnableRangeProcessing,
                 lastModified,
-                result.EntityTag);
+                result.EntityTag
+            );
 
             if (serveBody)
             {
@@ -67,7 +70,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc/>
-        protected virtual Task WriteFileAsync(ActionContext context, PhysicalFileResult result, RangeItemHeaderValue? range, long rangeLength)
+        protected virtual Task WriteFileAsync(
+            ActionContext context,
+            PhysicalFileResult result,
+            RangeItemHeaderValue? range,
+            long rangeLength
+        )
         {
             if (context == null)
             {
@@ -87,7 +95,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var response = context.HttpContext.Response;
             if (!Path.IsPathRooted(result.FileName))
             {
-                throw new NotSupportedException(Resources.FormatFileResult_PathNotRooted(result.FileName));
+                throw new NotSupportedException(
+                    Resources.FormatFileResult_PathNotRooted(result.FileName)
+                );
             }
 
             if (range != null)
@@ -97,14 +107,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             if (range != null)
             {
-                return response.SendFileAsync(result.FileName,
+                return response.SendFileAsync(
+                    result.FileName,
                     offset: range.From ?? 0L,
-                    count: rangeLength);
+                    count: rangeLength
+                );
             }
 
-            return response.SendFileAsync(result.FileName,
-                offset: 0,
-                count: null);
+            return response.SendFileAsync(result.FileName, offset: 0, count: null);
         }
 
         /// <summary>
@@ -119,14 +129,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             }
 
             return new FileStream(
-                    path,
-                    FileMode.Open,
-                    FileAccess.Read,
-                    FileShare.ReadWrite,
-                    BufferSize,
-                    FileOptions.Asynchronous | FileOptions.SequentialScan);
+                path,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite,
+                BufferSize,
+                FileOptions.Asynchronous | FileOptions.SequentialScan
+            );
         }
-
 
         /// <summary>
         /// Get the file metadata for a path.

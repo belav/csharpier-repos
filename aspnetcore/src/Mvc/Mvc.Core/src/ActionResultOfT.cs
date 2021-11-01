@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Mvc
         {
             if (typeof(IActionResult).IsAssignableFrom(typeof(TValue)))
             {
-                var error = Resources.FormatInvalidTypeTForActionResultOfT(typeof(TValue), "ActionResult<T>");
+                var error = Resources.FormatInvalidTypeTForActionResultOfT(
+                    typeof(TValue),
+                    "ActionResult<T>"
+                );
                 throw new ArgumentException(error);
             }
 
@@ -39,7 +42,10 @@ namespace Microsoft.AspNetCore.Mvc
         {
             if (typeof(IActionResult).IsAssignableFrom(typeof(TValue)))
             {
-                var error = Resources.FormatInvalidTypeTForActionResultOfT(typeof(TValue), "ActionResult<T>");
+                var error = Resources.FormatInvalidTypeTForActionResultOfT(
+                    typeof(TValue),
+                    "ActionResult<T>"
+                );
                 throw new ArgumentException(error);
             }
 

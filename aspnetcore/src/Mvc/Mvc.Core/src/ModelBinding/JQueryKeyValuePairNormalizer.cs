@@ -16,12 +16,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
     {
         public static IDictionary<string, StringValues> GetValues(
             IEnumerable<KeyValuePair<string, StringValues>> originalValues,
-            int valueCount)
+            int valueCount
+        )
         {
             var builder = new StringBuilder();
             var dictionary = new Dictionary<string, StringValues>(
                 valueCount,
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (var originalValue in originalValues)
             {
                 var normalizedKey = NormalizeJQueryToMvc(builder, originalValue.Key);
@@ -49,7 +51,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var indexOpen = key.IndexOf('[');
             if (indexOpen == -1)
             {
-
                 // Fast path, no normalization needed.
                 // This skips string conversion and allocating the string builder.
                 return key;
@@ -72,8 +73,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 if (indexClose == -1)
                 {
                     throw new ArgumentException(
-                        message: Resources.FormatJQueryFormValueProviderFactory_MissingClosingBracket(key),
-                        paramName: nameof(key));
+                        message: Resources.FormatJQueryFormValueProviderFactory_MissingClosingBracket(
+                            key
+                        ),
+                        paramName: nameof(key)
+                    );
                 }
 
                 if (indexClose == indexOpen + 1)

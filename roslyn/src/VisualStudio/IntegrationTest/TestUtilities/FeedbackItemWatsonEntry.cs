@@ -127,15 +127,39 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public FeedbackItemWatsonEntry(EventRecord eventLogRecord)
         {
             EventTime = eventLogRecord.TimeCreated.Value.ToUniversalTime();
-            FaultBucket = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, FaultBucketIndex);
-            HashedBucket = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, HashedBucketIndex);
-            WatsonReportId = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, WatsonReportIdIndex);
-            EventName = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, EventNameIndex);
+            FaultBucket = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                FaultBucketIndex
+            );
+            HashedBucket = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                HashedBucketIndex
+            );
+            WatsonReportId = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                WatsonReportIdIndex
+            );
+            EventName = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                EventNameIndex
+            );
             CabId = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, CabIdIndex);
-            ApplicationName = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, ApplicationNameIndex);
-            ApplicationVersion = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, ApplicationVersionIndex);
-            FaultingModule = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, FaultingModuleIndex);
-            FaultingModuleVersion = EventLogCollector.GetEventRecordPropertyToString(eventLogRecord, FaultingModuleVersionindex);
+            ApplicationName = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                ApplicationNameIndex
+            );
+            ApplicationVersion = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                ApplicationVersionIndex
+            );
+            FaultingModule = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                FaultingModuleIndex
+            );
+            FaultingModuleVersion = EventLogCollector.GetEventRecordPropertyToString(
+                eventLogRecord,
+                FaultingModuleVersionindex
+            );
         }
 
         /// <summary>
@@ -143,12 +167,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public override bool Equals(object obj)
         {
-            if ((obj is FeedbackItemWatsonEntry watsonEntry)
+            if (
+                (obj is FeedbackItemWatsonEntry watsonEntry)
                 && (EventName == watsonEntry.EventName)
                 && (ApplicationName == watsonEntry.ApplicationName)
                 && (ApplicationVersion == watsonEntry.ApplicationVersion)
                 && (FaultingModule == watsonEntry.FaultingModule)
-                && (FaultingModuleVersion == watsonEntry.FaultingModuleVersion))
+                && (FaultingModuleVersion == watsonEntry.FaultingModuleVersion)
+            )
             {
                 return true;
             }
@@ -158,7 +184,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         public override int GetHashCode()
         {
-            return EventName.GetHashCode() ^ ApplicationName.GetHashCode() ^ ApplicationVersion.GetHashCode() ^ FaultingModule.GetHashCode() ^ FaultingModuleVersion.GetHashCode();
+            return EventName.GetHashCode()
+                ^ ApplicationName.GetHashCode()
+                ^ ApplicationVersion.GetHashCode()
+                ^ FaultingModule.GetHashCode()
+                ^ FaultingModuleVersion.GetHashCode();
         }
     }
 }

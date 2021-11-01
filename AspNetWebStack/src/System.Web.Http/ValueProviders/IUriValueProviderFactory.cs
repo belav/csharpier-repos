@@ -10,7 +10,11 @@ namespace System.Web.Http.ValueProviders
     /// the creation of a <see cref="IValueProvider"/> to access the <see cref="T:System.Uri"/> of
     /// an incoming <see cref="T:System.Net.Http.HttpRequestMessage"/>.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces", Justification = "Tagging interface is intentional to allow Linq TypeOf")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1040:AvoidEmptyInterfaces",
+        Justification = "Tagging interface is intentional to allow Linq TypeOf"
+    )]
     public interface IUriValueProviderFactory
     {
     }

@@ -9,9 +9,18 @@ namespace Microsoft.EntityFrameworkCore.Tools
 {
     internal interface IOperationExecutor : IDisposable
     {
-        IDictionary AddMigration(string name, string? outputDir, string? contextType, string? @namespace);
+        IDictionary AddMigration(
+            string name,
+            string? outputDir,
+            string? contextType,
+            string? @namespace
+        );
         IDictionary RemoveMigration(string? contextType, bool force);
-        IEnumerable<IDictionary> GetMigrations(string? contextType, string? connectionString, bool noConnect);
+        IEnumerable<IDictionary> GetMigrations(
+            string? contextType,
+            string? connectionString,
+            bool noConnect
+        );
         void DropDatabase(string? contextType);
         IDictionary GetContextInfo(string? name);
         void UpdateDatabase(string? migration, string? connectionString, string? contextType);
@@ -31,9 +40,16 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? entityNamespace,
             string? dbContextNamespace,
             bool suppressOnConfiguring,
-            bool noPluralize);
+            bool noPluralize
+        );
 
-        string ScriptMigration(string? fromMigration, string? toMigration, bool idempotent, bool noTransactions, string? contextType);
+        string ScriptMigration(
+            string? fromMigration,
+            string? toMigration,
+            bool idempotent,
+            bool noTransactions,
+            string? contextType
+        );
 
         string ScriptDbContext(string? contextType);
     }

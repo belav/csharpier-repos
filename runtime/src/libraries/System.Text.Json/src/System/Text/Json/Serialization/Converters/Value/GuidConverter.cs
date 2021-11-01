@@ -5,7 +5,11 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class GuidConverter : JsonConverter<Guid>
     {
-        public override Guid Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Guid Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetGuid();
         }
@@ -20,7 +24,12 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetGuidNoValidation();
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, Guid value, JsonSerializerOptions options, ref WriteStack state)
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            Guid value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             writer.WritePropertyName(value);
         }

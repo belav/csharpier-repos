@@ -14,31 +14,57 @@ namespace System.IO.Strategies
     internal static partial class FileStreamHelpers
     {
         // in the future we are most probably going to introduce more strategies (io_uring etc)
-        private static FileStreamStrategy ChooseStrategyCore(SafeFileHandle handle, FileAccess access, FileShare share, int bufferSize, bool isAsync)
-            => new Net5CompatFileStreamStrategy(handle, access, bufferSize, isAsync);
+        private static FileStreamStrategy ChooseStrategyCore(
+            SafeFileHandle handle,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            bool isAsync
+        ) => new Net5CompatFileStreamStrategy(handle, access, bufferSize, isAsync);
 
-        private static FileStreamStrategy ChooseStrategyCore(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-            => new Net5CompatFileStreamStrategy(path, mode, access, share, bufferSize, options);
+        private static FileStreamStrategy ChooseStrategyCore(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        ) => new Net5CompatFileStreamStrategy(path, mode, access, share, bufferSize, options);
 
-        internal static SafeFileHandle OpenHandle(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+        internal static SafeFileHandle OpenHandle(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options
+        )
         {
             // Translate the arguments into arguments for an open call.
-            Interop.Sys.OpenFlags openFlags = PreOpenConfigurationFromOptions(mode, access, share, options);
+            Interop.Sys.OpenFlags openFlags = PreOpenConfigurationFromOptions(
+                mode,
+                access,
+                share,
+                options
+            );
 
             // If the file gets created a new, we'll select the permissions for it.  Most Unix utilities by default use 666 (read and
             // write for all), so we do the same (even though this doesn't match Windows, where by default it's possible to write out
             // a file and then execute it). No matter what we choose, it'll be subject to the umask applied by the system, such that the
             // actual permissions will typically be less than what we select here.
             const Interop.Sys.Permissions OpenPermissions =
-                Interop.Sys.Permissions.S_IRUSR | Interop.Sys.Permissions.S_IWUSR |
-                Interop.Sys.Permissions.S_IRGRP | Interop.Sys.Permissions.S_IWGRP |
-                Interop.Sys.Permissions.S_IROTH | Interop.Sys.Permissions.S_IWOTH;
+                Interop.Sys.Permissions.S_IRUSR
+                | Interop.Sys.Permissions.S_IWUSR
+                | Interop.Sys.Permissions.S_IRGRP
+                | Interop.Sys.Permissions.S_IWGRP
+                | Interop.Sys.Permissions.S_IROTH
+                | Interop.Sys.Permissions.S_IWOTH;
 
             // Open the file and store the safe handle.
             return SafeFileHandle.Open(path!, openFlags, (int)OpenPermissions);
         }
 
-        internal static bool GetDefaultIsAsync(SafeFileHandle handle, bool defaultIsAsync) => handle.IsAsync ?? defaultIsAsync;
+        internal static bool GetDefaultIsAsync(SafeFileHandle handle, bool defaultIsAsync) =>
+            handle.IsAsync ?? defaultIsAsync;
 
         /// <summary>Translates the FileMode, FileAccess, and FileOptions values into flags to be passed when opening the file.</summary>
         /// <param name="mode">The FileMode provided to the stream's constructor.</param>
@@ -46,7 +72,12 @@ namespace System.IO.Strategies
         /// <param name="share">The FileShare provided to the stream's constructor</param>
         /// <param name="options">The FileOptions provided to the stream's constructor</param>
         /// <returns>The flags value to be passed to the open system call.</returns>
-        private static Interop.Sys.OpenFlags PreOpenConfigurationFromOptions(FileMode mode, FileAccess access, FileShare share, FileOptions options)
+        private static Interop.Sys.OpenFlags PreOpenConfigurationFromOptions(
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options
+        )
         {
             // Translate FileMode.  Most of the values map cleanly to one or more options for open.
             Interop.Sys.OpenFlags flags = default;

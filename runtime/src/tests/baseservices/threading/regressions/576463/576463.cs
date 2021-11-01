@@ -145,7 +145,7 @@ class Test
             Thread.Sleep(5000);
 
             // Once we're here we know that C has started running and
-            // is presumably in the Monitor.Enter code, now we release 
+            // is presumably in the Monitor.Enter code, now we release
             // the lock to let C have it
             Console.WriteLine("Main: Exiting   -- Monitor on _objLock");
             Monitor.Exit(t._objLock);
@@ -164,7 +164,9 @@ class Test
         else
         {
             Console.WriteLine("Test failed!");
-            Console.WriteLine("If some delegegates did not run, this failure is most likely due to the loopcount register not being properly tracked during assembly for monitor.");
+            Console.WriteLine(
+                "If some delegegates did not run, this failure is most likely due to the loopcount register not being properly tracked during assembly for monitor."
+            );
             return 50;
         }
     }

@@ -9,8 +9,7 @@ namespace System.DirectoryServices.Protocols
     {
         internal bool _needDispose;
 
-        public ConnectionHandle()
-            :base(true)
+        public ConnectionHandle() : base(true)
         {
             Interop.Ldap.ldap_initialize(out handle, null);
             _needDispose = true;

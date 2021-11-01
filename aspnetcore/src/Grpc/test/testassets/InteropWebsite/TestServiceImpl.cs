@@ -33,19 +33,32 @@ namespace Grpc.Testing
             return Task.FromResult(new Empty());
         }
 
-        public override async Task<SimpleResponse> UnaryCall(SimpleRequest request, ServerCallContext context)
+        public override async Task<SimpleResponse> UnaryCall(
+            SimpleRequest request,
+            ServerCallContext context
+        )
         {
             await EnsureEchoMetadataAsync(context, request.ResponseCompressed?.Value ?? false);
             EnsureEchoStatus(request.ResponseStatus, context);
             EnsureCompression(request.ExpectCompressed, context);
 
-            var response = new SimpleResponse { Payload = CreateZerosPayload(request.ResponseSize) };
+            var response = new SimpleResponse
+            {
+                Payload = CreateZerosPayload(request.ResponseSize)
+            };
             return response;
         }
 
-        public override async Task StreamingOutputCall(StreamingOutputCallRequest request, IServerStreamWriter<StreamingOutputCallResponse> responseStream, ServerCallContext context)
+        public override async Task StreamingOutputCall(
+            StreamingOutputCallRequest request,
+            IServerStreamWriter<StreamingOutputCallResponse> responseStream,
+            ServerCallContext context
+        )
         {
-            await EnsureEchoMetadataAsync(context, request.ResponseParameters.Any(rp => rp.Compressed?.Value ?? false));
+            await EnsureEchoMetadataAsync(
+                context,
+                request.ResponseParameters.Any(rp => rp.Compressed?.Value ?? false)
+            );
             EnsureEchoStatus(request.ResponseStatus, context);
 
             foreach (var responseParam in request.ResponseParameters)
@@ -54,42 +67,63 @@ namespace Grpc.Testing
                     ? new WriteOptions(WriteFlags.NoCompress)
                     : null;
 
-                var response = new StreamingOutputCallResponse { Payload = CreateZerosPayload(responseParam.Size) };
+                var response = new StreamingOutputCallResponse
+                {
+                    Payload = CreateZerosPayload(responseParam.Size)
+                };
                 await responseStream.WriteAsync(response);
             }
         }
 
-        public override async Task<StreamingInputCallResponse> StreamingInputCall(IAsyncStreamReader<StreamingInputCallRequest> requestStream, ServerCallContext context)
+        public override async Task<StreamingInputCallResponse> StreamingInputCall(
+            IAsyncStreamReader<StreamingInputCallRequest> requestStream,
+            ServerCallContext context
+        )
         {
             await EnsureEchoMetadataAsync(context);
 
             int sum = 0;
-            await requestStream.ForEachAsync(request =>
-            {
-                EnsureCompression(request.ExpectCompressed, context);
+            await requestStream.ForEachAsync(
+                request =>
+                {
+                    EnsureCompression(request.ExpectCompressed, context);
 
-                sum += request.Payload.Body.Length;
-                return Task.CompletedTask;
-            });
+                    sum += request.Payload.Body.Length;
+                    return Task.CompletedTask;
+                }
+            );
             return new StreamingInputCallResponse { AggregatedPayloadSize = sum };
         }
 
-        public override async Task FullDuplexCall(IAsyncStreamReader<StreamingOutputCallRequest> requestStream, IServerStreamWriter<StreamingOutputCallResponse> responseStream, ServerCallContext context)
+        public override async Task FullDuplexCall(
+            IAsyncStreamReader<StreamingOutputCallRequest> requestStream,
+            IServerStreamWriter<StreamingOutputCallResponse> responseStream,
+            ServerCallContext context
+        )
         {
             await EnsureEchoMetadataAsync(context);
 
-            await requestStream.ForEachAsync(async request =>
-            {
-                EnsureEchoStatus(request.ResponseStatus, context);
-                foreach (var responseParam in request.ResponseParameters)
+            await requestStream.ForEachAsync(
+                async request =>
                 {
-                    var response = new StreamingOutputCallResponse { Payload = CreateZerosPayload(responseParam.Size) };
-                    await responseStream.WriteAsync(response);
+                    EnsureEchoStatus(request.ResponseStatus, context);
+                    foreach (var responseParam in request.ResponseParameters)
+                    {
+                        var response = new StreamingOutputCallResponse
+                        {
+                            Payload = CreateZerosPayload(responseParam.Size)
+                        };
+                        await responseStream.WriteAsync(response);
+                    }
                 }
-            });
+            );
         }
 
-        public override Task HalfDuplexCall(IAsyncStreamReader<StreamingOutputCallRequest> requestStream, IServerStreamWriter<StreamingOutputCallResponse> responseStream, ServerCallContext context)
+        public override Task HalfDuplexCall(
+            IAsyncStreamReader<StreamingOutputCallRequest> requestStream,
+            IServerStreamWriter<StreamingOutputCallResponse> responseStream,
+            ServerCallContext context
+        )
         {
             throw new NotImplementedException();
         }
@@ -99,9 +133,14 @@ namespace Grpc.Testing
             return new Payload { Body = ByteString.CopyFrom(new byte[size]) };
         }
 
-        private static async Task EnsureEchoMetadataAsync(ServerCallContext context, bool enableCompression = false)
+        private static async Task EnsureEchoMetadataAsync(
+            ServerCallContext context,
+            bool enableCompression = false
+        )
         {
-            var echoInitialList = context.RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-initial").ToList();
+            var echoInitialList = context.RequestHeaders
+                .Where((entry) => entry.Key == "x-grpc-test-echo-initial")
+                .ToList();
 
             // Append grpc internal compression header if compression is requested by the client
             if (enableCompression)
@@ -109,13 +148,17 @@ namespace Grpc.Testing
                 echoInitialList.Add(new Metadata.Entry("grpc-internal-encoding-request", "gzip"));
             }
 
-            if (echoInitialList.Any()) {
+            if (echoInitialList.Any())
+            {
                 var entry = echoInitialList.Single();
                 await context.WriteResponseHeadersAsync(new Metadata { entry });
             }
 
-            var echoTrailingList = context.RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin").ToList();
-            if (echoTrailingList.Any()) {
+            var echoTrailingList = context.RequestHeaders
+                .Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin")
+                .ToList();
+            if (echoTrailingList.Any())
+            {
                 context.ResponseTrailers.Add(echoTrailingList.Single());
             }
         }
@@ -129,18 +172,33 @@ namespace Grpc.Testing
             }
         }
 
-        private static void EnsureCompression(BoolValue? expectCompressed, ServerCallContext context)
+        private static void EnsureCompression(
+            BoolValue? expectCompressed,
+            ServerCallContext context
+        )
         {
             if (expectCompressed != null)
             {
                 // ServerCallContext.RequestHeaders filters out grpc-* headers
                 // Get grpc-encoding from HttpContext instead
-                var encoding = context.GetHttpContext().Request.Headers.SingleOrDefault(h => string.Equals(h.Key, "grpc-encoding", StringComparison.OrdinalIgnoreCase)).Value.SingleOrDefault();
+                var encoding = context
+                    .GetHttpContext()
+                    .Request.Headers.SingleOrDefault(
+                        h =>
+                            string.Equals(
+                                h.Key,
+                                "grpc-encoding",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
+                    .Value.SingleOrDefault();
                 if (expectCompressed.Value)
                 {
                     if (encoding == null || encoding == "identity")
                     {
-                        throw new RpcException(new Status(StatusCode.InvalidArgument, string.Empty));
+                        throw new RpcException(
+                            new Status(StatusCode.InvalidArgument, string.Empty)
+                        );
                     }
                 }
             }

@@ -25,7 +25,10 @@ internal class DblArray4
             s_LOH_GEN = 2;
         }
 
-        Console.WriteLine("DoubleArrayToLargeObjectHeap is {0}", Environment.GetEnvironmentVariable("complus_DoubleArrayToLargeObjectHeap"));
+        Console.WriteLine(
+            "DoubleArrayToLargeObjectHeap is {0}",
+            Environment.GetEnvironmentVariable("complus_DoubleArrayToLargeObjectHeap")
+        );
 
         try
         {

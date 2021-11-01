@@ -21,13 +21,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalQueryTranslationPreprocessor(
             QueryTranslationPreprocessorDependencies dependencies,
             RelationalQueryTranslationPreprocessorDependencies relationalDependencies,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, queryCompilationContext)
         {
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
             RelationalDependencies = relationalDependencies;
-            _relationalQueryCompilationContext = (RelationalQueryCompilationContext)queryCompilationContext;
+            _relationalQueryCompilationContext =
+                (RelationalQueryCompilationContext)queryCompilationContext;
         }
 
         /// <summary>
@@ -38,9 +39,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         public override Expression NormalizeQueryableMethod(Expression expression)
         {
-            expression = new RelationalQueryMetadataExtractingExpressionVisitor(_relationalQueryCompilationContext).Visit(expression);
+            expression = new RelationalQueryMetadataExtractingExpressionVisitor(
+                _relationalQueryCompilationContext
+            ).Visit(expression);
             expression = base.NormalizeQueryableMethod(expression);
-            expression = new TableValuedFunctionToQueryRootConvertingExpressionVisitor(QueryCompilationContext.Model).Visit(expression);
+            expression = new TableValuedFunctionToQueryRootConvertingExpressionVisitor(
+                QueryCompilationContext.Model
+            ).Visit(expression);
 
             return expression;
         }
@@ -50,9 +55,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             query = base.Process(query);
 
-            return _relationalQueryCompilationContext.QuerySplittingBehavior == QuerySplittingBehavior.SplitQuery
-                ? new SplitIncludeRewritingExpressionVisitor().Visit(query)
-                : query;
+            return
+                _relationalQueryCompilationContext.QuerySplittingBehavior
+                == QuerySplittingBehavior.SplitQuery
+              ? new SplitIncludeRewritingExpressionVisitor().Visit(query)
+              : query;
         }
     }
 }

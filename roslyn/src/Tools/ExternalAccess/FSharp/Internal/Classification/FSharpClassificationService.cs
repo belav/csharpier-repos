@@ -27,30 +27,64 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Classification
             _service = service;
         }
 
-        public void AddLexicalClassifications(SourceText text, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             _service.AddLexicalClassifications(text, textSpan, result, cancellationToken);
         }
 
-        public Task AddSemanticClassificationsAsync(Document document, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public Task AddSemanticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
-            return _service.AddSemanticClassificationsAsync(document, textSpan, result, cancellationToken);
+            return _service.AddSemanticClassificationsAsync(
+                document,
+                textSpan,
+                result,
+                cancellationToken
+            );
         }
 
-        public Task AddSyntacticClassificationsAsync(Document document, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public Task AddSyntacticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
-            return _service.AddSyntacticClassificationsAsync(document, textSpan, result, cancellationToken);
+            return _service.AddSyntacticClassificationsAsync(
+                document,
+                textSpan,
+                result,
+                cancellationToken
+            );
         }
 
-        public ClassifiedSpan AdjustStaleClassification(SourceText text, ClassifiedSpan classifiedSpan)
+        public ClassifiedSpan AdjustStaleClassification(
+            SourceText text,
+            ClassifiedSpan classifiedSpan
+        )
         {
             return _service.AdjustStaleClassification(text, classifiedSpan);
         }
 
-        public ValueTask<object?> GetDataToCacheAsync(Document document, CancellationToken cancellationToken)
-            => new();
+        public ValueTask<object?> GetDataToCacheAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => new();
 
-        public ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(Document oldDocument, Document newDocument, TimeSpan timeout, CancellationToken cancellationToken)
-            => new();
+        public ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        ) => new();
     }
 }

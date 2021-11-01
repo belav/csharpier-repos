@@ -26,17 +26,34 @@ namespace System.DirectoryServices.AccountManagement
         public static bool Info => DebugLevel.Info >= s_debugLevel;
 
         [ConditionalAttribute("DEBUG")]
-        public static void WriteLineIf(bool f, string category, string message, params object[] args)
+        public static void WriteLineIf(
+            bool f,
+            string category,
+            string message,
+            params object[] args
+        )
         {
-            message = "[" + SafeNativeMethods.GetCurrentThreadId().ToString("x", CultureInfo.InvariantCulture) + "] " + message;
+            message =
+                "["
+                + SafeNativeMethods.GetCurrentThreadId().ToString("x", CultureInfo.InvariantCulture)
+                + "] "
+                + message;
 
-            Debug.WriteLineIf(f, string.Format(CultureInfo.InvariantCulture, message, args), category);
+            Debug.WriteLineIf(
+                f,
+                string.Format(CultureInfo.InvariantCulture, message, args),
+                category
+            );
         }
 
         [ConditionalAttribute("DEBUG")]
         public static void WriteLineIf(bool f, string category, string message)
         {
-            message = "[" + SafeNativeMethods.GetCurrentThreadId().ToString("x", CultureInfo.InvariantCulture) + "] " + message;
+            message =
+                "["
+                + SafeNativeMethods.GetCurrentThreadId().ToString("x", CultureInfo.InvariantCulture)
+                + "] "
+                + message;
 
             Debug.WriteLineIf(f, message, category);
         }

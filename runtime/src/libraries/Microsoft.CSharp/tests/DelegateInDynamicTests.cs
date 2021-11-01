@@ -47,7 +47,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void DelegateWithOutParameterInDynamic()
         {
-            ActionWithOut<int, string> act = (int input, out string output) => output = input.ToString();
+            ActionWithOut<int, string> act = (int input, out string output) =>
+                output = input.ToString();
             dynamic d = act;
             d(23, out string res);
             Assert.Equal("23", res);
@@ -56,7 +57,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void DelegateWithOutParametersInDynamicNamedArgumentInvocation()
         {
-            ActionWithOut<int, string> act = (int input, out string output) => output = input.ToString();
+            ActionWithOut<int, string> act = (int input, out string output) =>
+                output = input.ToString();
             dynamic d = act;
             d(output: out string res, input: 23);
             Assert.Equal("23", res);

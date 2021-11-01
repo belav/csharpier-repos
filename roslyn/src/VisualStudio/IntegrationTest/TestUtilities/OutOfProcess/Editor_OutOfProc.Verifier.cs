@@ -20,9 +20,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public class Verifier : Verifier<Editor_OutOfProc>
         {
             public Verifier(Editor_OutOfProc editor, VisualStudioInstance instance)
-                : base(editor, instance)
-            {
-            }
+                : base(editor, instance) { }
 
             public void IsNotSaved()
             {
@@ -37,7 +35,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             public void CurrentLineText(
                 string expectedText,
                 bool assertCaretPosition = false,
-                bool trimWhitespace = true)
+                bool trimWhitespace = true
+            )
             {
                 if (assertCaretPosition)
                 {
@@ -58,12 +57,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
             private void CurrentLineTextAndAssertCaretPosition(
                 string expectedText,
-                bool trimWhitespace)
+                bool trimWhitespace
+            )
             {
                 var expectedCaretIndex = expectedText.IndexOf("$$");
                 if (expectedCaretIndex < 0)
                 {
-                    throw new ArgumentException("Expected caret position to be specified with $$", nameof(expectedText));
+                    throw new ArgumentException(
+                        "Expected caret position to be specified with $$",
+                        nameof(expectedText)
+                    );
                 }
 
                 var expectedCaretMarkupEndIndex = expectedCaretIndex + "$$".Length;
@@ -99,12 +102,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
                 Assert.Equal(expectedTextBeforeCaret, lineTextBeforeCaret);
                 Assert.Equal(expectedTextAfterCaret, lineTextAfterCaret);
-                Assert.Equal(expectedTextBeforeCaret.Length + expectedTextAfterCaret.Length, lineText.Length);
+                Assert.Equal(
+                    expectedTextBeforeCaret.Length + expectedTextAfterCaret.Length,
+                    lineText.Length
+                );
             }
 
-            public void TextContains(
-                string expectedText,
-                bool assertCaretPosition = false)
+            public void TextContains(string expectedText, bool assertCaretPosition = false)
             {
                 if (assertCaretPosition)
                 {
@@ -117,13 +121,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 }
             }
 
-            private void TextContainsAndAssertCaretPosition(
-                string expectedText)
+            private void TextContainsAndAssertCaretPosition(string expectedText)
             {
                 var caretStartIndex = expectedText.IndexOf("$$");
                 if (caretStartIndex < 0)
                 {
-                    throw new ArgumentException("Expected caret position to be specified with $$", nameof(expectedText));
+                    throw new ArgumentException(
+                        "Expected caret position to be specified with $$",
+                        nameof(expectedText)
+                    );
                 }
 
                 var caretEndIndex = caretStartIndex + "$$".Length;
@@ -142,8 +148,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 Assert.Equal(caretStartIndex + index, caretPosition);
             }
 
-            public void CompletionItemDoNotExist(
-                params string[] expectedItems)
+            public void CompletionItemDoNotExist(params string[] expectedItems)
             {
                 var completionItems = _textViewWindow.GetCompletionItems();
                 foreach (var expectedItem in expectedItems)
@@ -152,15 +157,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 }
             }
 
-            public void CurrentCompletionItem(
-                string expectedItem)
+            public void CurrentCompletionItem(string expectedItem)
             {
                 var currentItem = _textViewWindow.GetCurrentCompletionItem();
                 Assert.Equal(expectedItem, currentItem);
             }
 
-            public void VerifyCurrentSignature(
-                Signature expectedSignature)
+            public void VerifyCurrentSignature(Signature expectedSignature)
             {
                 var currentSignature = _textViewWindow.GetCurrentSignature();
                 Assert.Equal(expectedSignature, currentSignature);
@@ -172,17 +175,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 Assert.Equal(content, currentSignature.Content);
             }
 
-            public void CurrentParameter(
-                string name,
-                string documentation)
+            public void CurrentParameter(string name, string documentation)
             {
                 var currentParameter = _textViewWindow.GetCurrentSignature().CurrentParameter;
                 Assert.Equal(name, currentParameter.Name);
                 Assert.Equal(documentation, currentParameter.Documentation);
             }
 
-            public void Parameters(
-                params (string name, string documentation)[] parameters)
+            public void Parameters(params (string name, string documentation)[] parameters)
             {
                 var currentParameters = _textViewWindow.GetCurrentSignature().Parameters;
                 for (var i = 0; i < parameters.Length; i++)
@@ -193,9 +193,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 }
             }
 
-            public void Dialog(
-                string dialogName,
-                bool isOpen)
+            public void Dialog(string dialogName, bool isOpen)
             {
                 _textViewWindow.VerifyDialog(dialogName, isOpen);
             }
@@ -207,11 +205,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawler,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles);
+                    FeatureAttribute.ErrorSquiggles
+                );
                 var actualTags = _textViewWindow.GetErrorTags();
                 AssertEx.EqualOrDiff(
                     string.Join(Environment.NewLine, expectedTags),
-                    string.Join(Environment.NewLine, actualTags));
+                    string.Join(Environment.NewLine, actualTags)
+                );
             }
 
             public void IsProjectItemDirty(bool expectedValue)

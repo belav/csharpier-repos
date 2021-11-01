@@ -46,11 +46,13 @@
             [Fact]
             public void Should_not_throw_exception()
             {
-                var config = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<BEntity, B>();
-                    cfg.CreateMap<AEntity, A>();
-                });
+                var config = new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<BEntity, B>();
+                        cfg.CreateMap<AEntity, A>();
+                    }
+                );
                 //config.AssertConfigurationIsValid();
 
                 var be = new BEntity();

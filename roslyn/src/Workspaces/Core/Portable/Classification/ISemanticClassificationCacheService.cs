@@ -31,7 +31,11 @@ namespace Microsoft.CodeAnalysis.Classification
         /// <param name="checksum">Pass in <see cref="DocumentStateChecksums.Text"/>.  This will ensure that the cached
         /// classifications are only returned if they match the content the file currently has.</param>
         Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(
-            DocumentKey documentKey, TextSpan textSpan, Checksum checksum, CancellationToken cancellationToken);
+            DocumentKey documentKey,
+            TextSpan textSpan,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        );
     }
 
     [ExportWorkspaceService(typeof(ISemanticClassificationCacheService)), Shared]
@@ -39,11 +43,13 @@ namespace Microsoft.CodeAnalysis.Classification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSemanticClassificationCacheService()
-        {
-        }
+        public DefaultSemanticClassificationCacheService() { }
 
-        public Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(DocumentKey documentKey, TextSpan textSpan, Checksum checksum, CancellationToken cancellationToken)
-            => SpecializedTasks.Default<ImmutableArray<ClassifiedSpan>>();
+        public Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(
+            DocumentKey documentKey,
+            TextSpan textSpan,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Default<ImmutableArray<ClassifiedSpan>>();
     }
 }

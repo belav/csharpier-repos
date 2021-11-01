@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         void ProcessIndexRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionIndex index,
-            IConventionContext<IConventionIndex> context);
+            IConventionContext<IConventionIndex> context
+        );
     }
 }

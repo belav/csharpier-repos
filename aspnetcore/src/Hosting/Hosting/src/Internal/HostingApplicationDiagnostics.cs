@@ -14,21 +14,29 @@ namespace Microsoft.AspNetCore.Hosting
 {
     internal class HostingApplicationDiagnostics
     {
-        private static readonly double TimestampToTicks = TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
+        private static readonly double TimestampToTicks =
+            TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
 
         private const string ActivityName = "Microsoft.AspNetCore.Hosting.HttpRequestIn";
         private const string ActivityStartKey = ActivityName + ".Start";
         private const string ActivityStopKey = ActivityName + ".Stop";
 
-        private const string DeprecatedDiagnosticsBeginRequestKey = "Microsoft.AspNetCore.Hosting.BeginRequest";
-        private const string DeprecatedDiagnosticsEndRequestKey = "Microsoft.AspNetCore.Hosting.EndRequest";
-        private const string DiagnosticsUnhandledExceptionKey = "Microsoft.AspNetCore.Hosting.UnhandledException";
+        private const string DeprecatedDiagnosticsBeginRequestKey =
+            "Microsoft.AspNetCore.Hosting.BeginRequest";
+        private const string DeprecatedDiagnosticsEndRequestKey =
+            "Microsoft.AspNetCore.Hosting.EndRequest";
+        private const string DiagnosticsUnhandledExceptionKey =
+            "Microsoft.AspNetCore.Hosting.UnhandledException";
 
         private readonly ActivitySource _activitySource;
         private readonly DiagnosticListener _diagnosticListener;
         private readonly ILogger _logger;
 
-        public HostingApplicationDiagnostics(ILogger logger, DiagnosticListener diagnosticListener, ActivitySource activitySource)
+        public HostingApplicationDiagnostics(
+            ILogger logger,
+            DiagnosticListener diagnosticListener,
+            ActivitySource activitySource
+        )
         {
             _logger = logger;
             _diagnosticListener = diagnosticListener;
@@ -48,13 +56,24 @@ namespace Microsoft.AspNetCore.Hosting
             }
 
             var diagnosticListenerEnabled = _diagnosticListener.IsEnabled();
-            var diagnosticListenerActivityCreationEnabled = (diagnosticListenerEnabled && _diagnosticListener.IsEnabled(ActivityName, httpContext));
+            var diagnosticListenerActivityCreationEnabled = (
+                diagnosticListenerEnabled
+                && _diagnosticListener.IsEnabled(ActivityName, httpContext)
+            );
             var loggingEnabled = _logger.IsEnabled(LogLevel.Critical);
 
-
-            if (loggingEnabled || diagnosticListenerActivityCreationEnabled || _activitySource.HasListeners())
+            if (
+                loggingEnabled
+                || diagnosticListenerActivityCreationEnabled
+                || _activitySource.HasListeners()
+            )
             {
-                context.Activity = StartActivity(httpContext, loggingEnabled, diagnosticListenerActivityCreationEnabled, out var hasDiagnosticListener);
+                context.Activity = StartActivity(
+                    httpContext,
+                    loggingEnabled,
+                    diagnosticListenerActivityCreationEnabled,
+                    out var hasDiagnosticListener
+                );
                 context.HasDiagnosticListener = hasDiagnosticListener;
             }
 
@@ -90,7 +109,11 @@ namespace Microsoft.AspNetCore.Hosting
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void RequestEnd(HttpContext httpContext, Exception? exception, HostingApplication.Context context)
+        public void RequestEnd(
+            HttpContext httpContext,
+            Exception? exception,
+            HostingApplication.Context context
+        )
         {
             // Local cache items resolved multiple items, in order of use so they are primed in cpu pipeline when used
             var startTimestamp = context.StartTimestamp;
@@ -129,9 +152,12 @@ namespace Microsoft.AspNetCore.Hosting
                     {
                         // Diagnostics is enabled for UnhandledException, but it may not be for BeginRequest
                         // so call GetTimestamp if currentTimestamp is zero (from above)
-                        RecordUnhandledExceptionDiagnostics(httpContext, currentTimestamp, exception);
+                        RecordUnhandledExceptionDiagnostics(
+                            httpContext,
+                            currentTimestamp,
+                            exception
+                        );
                     }
-
                 }
             }
 
@@ -183,25 +209,33 @@ namespace Microsoft.AspNetCore.Hosting
                 eventId: LoggerEventIds.RequestStarting,
                 state: startLog,
                 exception: null,
-                formatter: HostingRequestStartingLog.Callback);
+                formatter: HostingRequestStartingLog.Callback
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void LogRequestFinished(HostingApplication.Context context, long startTimestamp, long currentTimestamp)
+        private void LogRequestFinished(
+            HostingApplication.Context context,
+            long startTimestamp,
+            long currentTimestamp
+        )
         {
             // IsEnabled isn't checked in the caller, startTimestamp > 0 is used as a fast proxy check
             // but that may be because diagnostics are enabled, which also uses startTimestamp,
             // so check if we logged the start event
             if (context.StartLog != null)
             {
-                var elapsed = new TimeSpan((long)(TimestampToTicks * (currentTimestamp - startTimestamp)));
+                var elapsed = new TimeSpan(
+                    (long)(TimestampToTicks * (currentTimestamp - startTimestamp))
+                );
 
                 _logger.Log(
                     logLevel: LogLevel.Information,
                     eventId: LoggerEventIds.RequestFinished,
                     state: new HostingRequestFinishedLog(context, elapsed),
                     exception: null,
-                    formatter: HostingRequestFinishedLog.Callback);
+                    formatter: HostingRequestFinishedLog.Callback
+                );
             }
         }
 
@@ -210,11 +244,8 @@ namespace Microsoft.AspNetCore.Hosting
         {
             _diagnosticListener.Write(
                 DeprecatedDiagnosticsBeginRequestKey,
-                new
-                {
-                    httpContext = httpContext,
-                    timestamp = startTimestamp
-                });
+                new { httpContext = httpContext, timestamp = startTimestamp }
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -222,15 +253,16 @@ namespace Microsoft.AspNetCore.Hosting
         {
             _diagnosticListener.Write(
                 DeprecatedDiagnosticsEndRequestKey,
-                new
-                {
-                    httpContext = httpContext,
-                    timestamp = currentTimestamp
-                });
+                new { httpContext = httpContext, timestamp = currentTimestamp }
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void RecordUnhandledExceptionDiagnostics(HttpContext httpContext, long currentTimestamp, Exception exception)
+        private void RecordUnhandledExceptionDiagnostics(
+            HttpContext httpContext,
+            long currentTimestamp,
+            Exception exception
+        )
         {
             _diagnosticListener.Write(
                 DiagnosticsUnhandledExceptionKey,
@@ -239,17 +271,26 @@ namespace Microsoft.AspNetCore.Hosting
                     httpContext = httpContext,
                     timestamp = currentTimestamp,
                     exception = exception
-                });
+                }
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void RecordRequestStartEventLog(HttpContext httpContext)
         {
-            HostingEventSource.Log.RequestStart(httpContext.Request.Method, httpContext.Request.Path);
+            HostingEventSource.Log.RequestStart(
+                httpContext.Request.Method,
+                httpContext.Request.Path
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private Activity? StartActivity(HttpContext httpContext, bool loggingEnabled, bool diagnosticListenerActivityCreationEnabled, out bool hasDiagnosticListener)
+        private Activity? StartActivity(
+            HttpContext httpContext,
+            bool loggingEnabled,
+            bool diagnosticListenerActivityCreationEnabled,
+            out bool hasDiagnosticListener
+        )
         {
             var activity = _activitySource.CreateActivity(ActivityName, ActivityKind.Server);
             if (activity is null && (loggingEnabled || diagnosticListenerActivityCreationEnabled))
@@ -291,7 +332,10 @@ namespace Microsoft.AspNetCore.Hosting
                 {
                     if (NameValueHeaderValue.TryParse(baggage[i], out var baggageItem))
                     {
-                        activity.AddBaggage(baggageItem.Name.ToString(), HttpUtility.UrlDecode(baggageItem.Value.ToString()));
+                        activity.AddBaggage(
+                            baggageItem.Name.ToString(),
+                            HttpUtility.UrlDecode(baggageItem.Value.ToString())
+                        );
                     }
                 }
             }
@@ -312,7 +356,11 @@ namespace Microsoft.AspNetCore.Hosting
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void StopActivity(HttpContext httpContext, Activity activity, bool hasDiagnosticListener)
+        private void StopActivity(
+            HttpContext httpContext,
+            Activity activity,
+            bool hasDiagnosticListener
+        )
         {
             if (hasDiagnosticListener)
             {
@@ -341,7 +389,7 @@ namespace Microsoft.AspNetCore.Hosting
                 activity.SetEndTime(DateTime.UtcNow);
             }
             _diagnosticListener.Write(ActivityStopKey, httpContext);
-            activity.Stop();    // Resets Activity.Current (we want this after the Write)
+            activity.Stop(); // Resets Activity.Current (we want this after the Write)
         }
     }
 }

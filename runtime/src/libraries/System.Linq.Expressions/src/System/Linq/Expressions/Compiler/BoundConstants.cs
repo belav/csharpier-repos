@@ -57,17 +57,25 @@ namespace System.Linq.Expressions.Compiler
         /// <summary>
         /// The index of each constant in the constant array
         /// </summary>
-        private readonly Dictionary<object, int> _indexes = new Dictionary<object, int>(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<object, int> _indexes = new Dictionary<object, int>(
+            ReferenceEqualityComparer.Instance
+        );
 
         /// <summary>
         /// Each constant referenced within this lambda, and how often it was referenced
         /// </summary>
-        private readonly Dictionary<TypedConstant, int> _references = new Dictionary<TypedConstant, int>();
+        private readonly Dictionary<TypedConstant, int> _references = new Dictionary<
+            TypedConstant,
+            int
+        >();
 
         /// <summary>
         /// IL locals for storing frequently used constants
         /// </summary>
-        private readonly Dictionary<TypedConstant, LocalBuilder> _cache = new Dictionary<TypedConstant, LocalBuilder>();
+        private readonly Dictionary<TypedConstant, LocalBuilder> _cache = new Dictionary<
+            TypedConstant,
+            LocalBuilder
+        >();
 
         internal int Count => _values.Count;
 

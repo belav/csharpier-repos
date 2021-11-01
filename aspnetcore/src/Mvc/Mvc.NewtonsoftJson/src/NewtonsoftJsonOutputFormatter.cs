@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public NewtonsoftJsonOutputFormatter(
             JsonSerializerSettings serializerSettings,
             ArrayPool<char> charPool,
-            MvcOptions mvcOptions)
+            MvcOptions mvcOptions
+        )
         {
             if (serializerSettings == null)
             {
@@ -117,7 +118,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         }
 
         /// <inheritdoc />
-        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override async Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             if (context == null)
             {

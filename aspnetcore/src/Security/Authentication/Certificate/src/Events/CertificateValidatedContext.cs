@@ -20,10 +20,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
         public CertificateValidatedContext(
             HttpContext context,
             AuthenticationScheme scheme,
-            CertificateAuthenticationOptions options)
-            : base(context, scheme, options)
-        {
-        }
+            CertificateAuthenticationOptions options
+        ) : base(context, scheme, options) { }
 
         /// <summary>
         /// The certificate to validate.

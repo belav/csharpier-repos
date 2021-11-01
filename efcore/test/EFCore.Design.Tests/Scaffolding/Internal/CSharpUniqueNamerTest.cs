@@ -13,20 +13,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Returns_unique_name_for_type()
         {
-            var namer = new CSharpUniqueNamer<DatabaseColumn>(s => s.Name, new CSharpUtilities(), null);
+            var namer = new CSharpUniqueNamer<DatabaseColumn>(
+                s => s.Name,
+                new CSharpUtilities(),
+                null
+            );
             var table = new DatabaseTable { Database = new DatabaseModel(), Name = "foo" };
-            var input1 = new DatabaseColumn
-            {
-                Table = table,
-                Name = "Id",
-                StoreType = "int"
-            };
-            var input2 = new DatabaseColumn
-            {
-                Table = table,
-                Name = "Id",
-                StoreType = "int"
-            };
+            var input1 = new DatabaseColumn { Table = table, Name = "Id", StoreType = "int" };
+            var input2 = new DatabaseColumn { Table = table, Name = "Id", StoreType = "int" };
 
             Assert.Equal("Id", namer.GetName(input1));
             Assert.Equal("Id", namer.GetName(input1));
@@ -37,7 +31,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Uses_comparer()
         {
-            var namer = new CSharpUniqueNamer<DatabaseTable>(t => t.Name, new CSharpUtilities(), null);
+            var namer = new CSharpUniqueNamer<DatabaseTable>(
+                t => t.Name,
+                new CSharpUtilities(),
+                null
+            );
             var database = new DatabaseModel();
             var table1 = new DatabaseTable { Database = database, Name = "A B C" };
             var table2 = new DatabaseTable { Database = database, Name = "A_B_C" };
@@ -51,7 +49,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Singularizes_names(string input, string output)
         {
             var pluralizer = new HumanizerPluralizer();
-            var namer = new CSharpUniqueNamer<DatabaseTable>(t => t.Name, new CSharpUtilities(), pluralizer.Singularize);
+            var namer = new CSharpUniqueNamer<DatabaseTable>(
+                t => t.Name,
+                new CSharpUtilities(),
+                pluralizer.Singularize
+            );
             var table = new DatabaseTable { Database = new DatabaseModel(), Name = input };
             Assert.Equal(output, namer.GetName(table));
         }
@@ -62,7 +64,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Pluralizes_names(string input, string output)
         {
             var pluralizer = new HumanizerPluralizer();
-            var namer = new CSharpUniqueNamer<DatabaseTable>(t => t.Name, new CSharpUtilities(), pluralizer.Pluralize);
+            var namer = new CSharpUniqueNamer<DatabaseTable>(
+                t => t.Name,
+                new CSharpUtilities(),
+                pluralizer.Pluralize
+            );
             var table = new DatabaseTable { Database = new DatabaseModel(), Name = input };
             Assert.Equal(output, namer.GetName(table));
         }

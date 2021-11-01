@@ -150,9 +150,7 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
         /// class with the default category.
         /// </summary>
-        public CategoryAttribute() : this(nameof(Default))
-        {
-        }
+        public CategoryAttribute() : this(nameof(Default)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
@@ -197,7 +195,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Looks up the localized name of a given category.
         /// </summary>
-        protected virtual string? GetLocalizedString(string value) => SR.GetResourceString("PropertyCategory" + value);
+        protected virtual string? GetLocalizedString(string value) =>
+            SR.GetResourceString("PropertyCategory" + value);
 
         public override bool IsDefaultAttribute() => Category == Default.Category;
     }

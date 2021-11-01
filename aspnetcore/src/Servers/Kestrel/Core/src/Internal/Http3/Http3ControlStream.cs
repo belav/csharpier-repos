@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             _context = context;
             _serverPeerSettings = context.ServerSettings;
             _streamIdFeature = context.ConnectionFeatures.Get<IStreamIdFeature>()!;
-            _protocolErrorCodeFeature = context.ConnectionFeatures.Get<IProtocolErrorCodeFeature>()!;
+            _protocolErrorCodeFeature =
+                context.ConnectionFeatures.Get<IProtocolErrorCodeFeature>()!;
 
             _frameWriter = new Http3FrameWriter(
                 context.Transport.Output,
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 context.ConnectionId,
                 context.MemoryPool,
                 context.ServiceContext.Log,
-                _streamIdFeature);
+                _streamIdFeature
+            );
         }
 
         private void OnStreamClosed()
@@ -63,10 +65,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         public PipeReader Input => _context.Transport.Input;
         public IKestrelTrace Log => _context.ServiceContext.Log;
 
-        public void Abort(ConnectionAbortedException ex)
-        {
-
-        }
+        public void Abort(ConnectionAbortedException ex) { }
 
         public void HandleReadDataRateTimeout()
         {
@@ -124,7 +123,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 {
                     if (!readableBuffer.IsEmpty)
                     {
-                        var id = VariableLengthIntegerHelper.GetInteger(readableBuffer, out consumed, out examined);
+                        var id = VariableLengthIntegerHelper.GetInteger(
+                            readableBuffer,
+                            out consumed,
+                            out examined
+                        );
                         if (id != -1)
                         {
                             return id;
@@ -145,7 +148,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return -1;
         }
 
-        public async Task ProcessRequestAsync<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+        public async Task ProcessRequestAsync<TContext>(IHttpApplication<TContext> application)
+            where TContext : notnull
         {
             try
             {
@@ -161,7 +165,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     if (!_http3Connection.SetInboundControlStream(this))
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-6.2.1
-                        throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams("control"), Http3ErrorCode.StreamCreationError);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                                "control"
+                            ),
+                            Http3ErrorCode.StreamCreationError
+                        );
                     }
 
                     await HandleControlStream();
@@ -171,7 +180,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     if (!_http3Connection.SetInboundEncoderStream(this))
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-qpack.html#section-4.2
-                        throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams("encoder"), Http3ErrorCode.StreamCreationError);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                                "encoder"
+                            ),
+                            Http3ErrorCode.StreamCreationError
+                        );
                     }
 
                     await HandleEncodingDecodingTask();
@@ -181,7 +195,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     if (!_http3Connection.SetInboundDecoderStream(this))
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-qpack.html#section-4.2
-                        throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams("decoder"), Http3ErrorCode.StreamCreationError);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                                "decoder"
+                            ),
+                            Http3ErrorCode.StreamCreationError
+                        );
                     }
                     await HandleEncodingDecodingTask();
                 }
@@ -193,7 +212,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             catch (Http3ConnectionErrorException ex)
             {
                 Log.Http3ConnectionError(_http3Connection.ConnectionId, ex);
-                _http3Connection.Abort(new ConnectionAbortedException(ex.Message, ex), ex.ErrorCode);
+                _http3Connection.Abort(
+                    new ConnectionAbortedException(ex.Message, ex),
+                    ex.ErrorCode
+                );
             }
         }
 
@@ -211,9 +233,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     if (!readableBuffer.IsEmpty)
                     {
                         // need to kick off httpprotocol process request async here.
-                        while (Http3FrameReader.TryReadFrame(ref readableBuffer, _incomingFrame, out var framePayload))
+                        while (
+                            Http3FrameReader.TryReadFrame(
+                                ref readableBuffer,
+                                _incomingFrame,
+                                out var framePayload
+                            )
+                        )
                         {
-                            Log.Http3FrameReceived(_context.ConnectionId, _streamIdFeature.StreamId, _incomingFrame);
+                            Log.Http3FrameReceived(
+                                _context.ConnectionId,
+                                _streamIdFeature.StreamId,
+                                _incomingFrame
+                            );
 
                             consumed = examined = framePayload.End;
                             await ProcessHttp3ControlStream(framePayload);
@@ -230,7 +262,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     _protocolErrorCodeFeature.Error = (long)ex.ErrorCode;
 
                     Log.Http3ConnectionError(_http3Connection.ConnectionId, ex);
-                    _http3Connection.Abort(new ConnectionAbortedException(ex.Message, ex), ex.ErrorCode);
+                    _http3Connection.Abort(
+                        new ConnectionAbortedException(ex.Message, ex),
+                        ex.ErrorCode
+                    );
                 }
                 finally
                 {
@@ -261,7 +296,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 case Http3FrameType.Headers:
                 case Http3FrameType.PushPromise:
                     // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-7.2
-                    throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ErrorUnsupportedFrameOnControlStream(_incomingFrame.FormattedType), Http3ErrorCode.UnexpectedFrame);
+                    throw new Http3ConnectionErrorException(
+                        CoreStrings.FormatHttp3ErrorUnsupportedFrameOnControlStream(
+                            _incomingFrame.FormattedType
+                        ),
+                        Http3ErrorCode.UnexpectedFrame
+                    );
                 case Http3FrameType.Settings:
                     return ProcessSettingsFrameAsync(payload);
                 case Http3FrameType.GoAway:
@@ -280,15 +320,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             if (_haveReceivedSettingsFrame)
             {
                 // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#name-settings
-                throw new Http3ConnectionErrorException(CoreStrings.Http3ErrorControlStreamMultipleSettingsFrames, Http3ErrorCode.UnexpectedFrame);
+                throw new Http3ConnectionErrorException(
+                    CoreStrings.Http3ErrorControlStreamMultipleSettingsFrames,
+                    Http3ErrorCode.UnexpectedFrame
+                );
             }
 
             _haveReceivedSettingsFrame = true;
-            using var closedRegistration = _context.StreamContext.ConnectionClosed.Register(state => ((Http3ControlStream)state!).OnStreamClosed(), this);
+            using var closedRegistration = _context.StreamContext.ConnectionClosed.Register(
+                state => ((Http3ControlStream)state!).OnStreamClosed(),
+                this
+            );
 
             while (true)
             {
-                var id = VariableLengthIntegerHelper.GetInteger(payload, out var consumed, out var examinded);
+                var id = VariableLengthIntegerHelper.GetInteger(
+                    payload,
+                    out var consumed,
+                    out var examinded
+                );
                 if (id == -1)
                 {
                     break;
@@ -296,7 +346,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
                 payload = payload.Slice(consumed);
 
-                var value = VariableLengthIntegerHelper.GetInteger(payload, out consumed, out examinded);
+                var value = VariableLengthIntegerHelper.GetInteger(
+                    payload,
+                    out consumed,
+                    out examinded
+                );
                 if (id == -1)
                 {
                     break;
@@ -321,7 +375,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 case 0x5:
                     // HTTP/2 settings are reserved.
                     // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-7.2.4.1-5
-                    var message = CoreStrings.FormatHttp3ErrorControlStreamReservedSetting("0x" + id.ToString("X", CultureInfo.InvariantCulture));
+                    var message = CoreStrings.FormatHttp3ErrorControlStreamReservedSetting(
+                        "0x" + id.ToString("X", CultureInfo.InvariantCulture)
+                    );
                     throw new Http3ConnectionErrorException(message, Http3ErrorCode.SettingsError);
                 case (long)Http3SettingType.QPackMaxTableCapacity:
                     _http3Connection.ApplyMaxTableCapacity(value);
@@ -383,19 +439,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         {
             if (!_haveReceivedSettingsFrame)
             {
-                var message = CoreStrings.FormatHttp3ErrorControlStreamFrameReceivedBeforeSettings(Http3Formatting.ToFormattedType(frameType));
+                var message = CoreStrings.FormatHttp3ErrorControlStreamFrameReceivedBeforeSettings(
+                    Http3Formatting.ToFormattedType(frameType)
+                );
                 throw new Http3ConnectionErrorException(message, Http3ErrorCode.MissingSettings);
             }
         }
 
-        public void StopProcessingNextRequest()
-            => StopProcessingNextRequest(serverInitiated: true);
+        public void StopProcessingNextRequest() => StopProcessingNextRequest(serverInitiated: true);
 
         public void StopProcessingNextRequest(bool serverInitiated)
         {
-            var initiator = serverInitiated ? GracefulCloseInitiator.Server : GracefulCloseInitiator.Client;
+            var initiator = serverInitiated
+                ? GracefulCloseInitiator.Server
+                : GracefulCloseInitiator.Client;
 
-            if (Interlocked.CompareExchange(ref _gracefulCloseInitiator, initiator, GracefulCloseInitiator.None) == GracefulCloseInitiator.None)
+            if (
+                Interlocked.CompareExchange(
+                    ref _gracefulCloseInitiator,
+                    initiator,
+                    GracefulCloseInitiator.None
+                ) == GracefulCloseInitiator.None
+            )
             {
                 Input.CancelPendingRead();
             }

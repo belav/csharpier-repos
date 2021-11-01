@@ -15,13 +15,12 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : GrpcTestBase<TFixture>.GrpcFixtureBase
     {
-        protected GrpcTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected GrpcTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
-        protected List<EntityTypeMapping> ExpectedMappings
-            => new()
+        protected List<EntityTypeMapping> ExpectedMappings =>
+            new()
             {
                 new()
                 {
@@ -67,8 +66,14 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: Post.Title (title_, string)",
                     },
                     Indexes = { "{'AuthorId'} ", },
-                    FKs = { "ForeignKey: Post {'AuthorId'} -> Author {'AuthorId'} ToPrincipal: PostAuthor Cascade", },
-                    Navigations = { "Navigation: Post.PostAuthor (postAuthor_, Author) ToPrincipal Author", },
+                    FKs =
+                    {
+                        "ForeignKey: Post {'AuthorId'} -> Author {'AuthorId'} ToPrincipal: PostAuthor Cascade",
+                    },
+                    Navigations =
+                    {
+                        "Navigation: Post.PostAuthor (postAuthor_, Author) ToPrincipal Author",
+                    },
                     SkipNavigations =
                     {
                         "SkipNavigation: Post.TagsInPostData (tagsInPostData_, RepeatedField<Tag>) CollectionTag Inverse: PostsInTagData",
@@ -96,7 +101,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = Fixture.CreateContext();
 
-            var entityTypeMappings = context.Model.GetEntityTypes().Select(e => new EntityTypeMapping(e)).ToList();
+            var entityTypeMappings = context.Model
+                .GetEntityTypes()
+                .Select(e => new EntityTypeMapping(e))
+                .ToList();
             EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);
         }
 
@@ -105,13 +113,23 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = Fixture.CreateContext();
 
-            var post = context.Set<Post>().Include(e => e.PostAuthor).Include(e => e.TagsInPostData).Single();
+            var post = context
+                .Set<Post>()
+                .Include(e => e.PostAuthor)
+                .Include(e => e.TagsInPostData)
+                .Single();
 
             Assert.Equal("Arthur's post", post.Title);
-            Assert.Equal(new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc), post.DateCreated.ToDateTime());
+            Assert.Equal(
+                new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc),
+                post.DateCreated.ToDateTime()
+            );
             Assert.Equal(PostStatus.Published, post.PostStat);
             Assert.Equal("Arthur", post.PostAuthor.Name);
-            Assert.Equal(new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc), post.PostAuthor.DateCreated.ToDateTime());
+            Assert.Equal(
+                new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc),
+                post.PostAuthor.DateCreated.ToDateTime()
+            );
 
             Assert.Equal(2, post.TagsInPostData.Count);
             Assert.Contains("Puppies", post.TagsInPostData.Select(e => e.Name).ToList());
@@ -122,19 +140,23 @@ namespace Microsoft.EntityFrameworkCore
 
         public class GrpcContext : PoolableDbContext
         {
-            public GrpcContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public GrpcContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 var timeStampConverter = new ValueConverter<Timestamp, DateTime>(
                     v => v.ToDateTime(),
-                    v => new DateTime(v.Ticks, DateTimeKind.Utc).ToTimestamp());
+                    v => new DateTime(v.Ticks, DateTimeKind.Utc).ToTimestamp()
+                );
 
-                modelBuilder.Entity<Author>().Property(e => e.DateCreated).HasConversion(timeStampConverter);
-                modelBuilder.Entity<Post>().Property(e => e.DateCreated).HasConversion(timeStampConverter);
+                modelBuilder
+                    .Entity<Author>()
+                    .Property(e => e.DateCreated)
+                    .HasConversion(timeStampConverter);
+                modelBuilder
+                    .Entity<Post>()
+                    .Property(e => e.DateCreated)
+                    .HasConversion(timeStampConverter);
                 modelBuilder.Entity<Tag>();
             }
         }
@@ -147,11 +169,16 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var post = new Post
                 {
-                    DateCreated = Timestamp.FromDateTime(new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc)),
+                    DateCreated = Timestamp.FromDateTime(
+                        new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc)
+                    ),
                     Title = "Arthur's post",
                     PostAuthor = new Author
                     {
-                        DateCreated = Timestamp.FromDateTime(new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc)), Name = "Arthur"
+                        DateCreated = Timestamp.FromDateTime(
+                            new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc)
+                        ),
+                        Name = "Arthur"
                     },
                     PostStat = PostStatus.Published,
                     TagsInPostData = { new Tag { Name = "Kittens" }, new Tag { Name = "Puppies" } }

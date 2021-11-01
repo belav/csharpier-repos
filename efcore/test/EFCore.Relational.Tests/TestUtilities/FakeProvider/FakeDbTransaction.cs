@@ -8,7 +8,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 {
     public class FakeDbTransaction : DbTransaction
     {
-        public FakeDbTransaction(FakeDbConnection connection, IsolationLevel isolationLevel = IsolationLevel.Unspecified)
+        public FakeDbTransaction(
+            FakeDbConnection connection,
+            IsolationLevel isolationLevel = IsolationLevel.Unspecified
+        )
         {
             DbConnection = connection;
             IsolationLevel = isolationLevel;

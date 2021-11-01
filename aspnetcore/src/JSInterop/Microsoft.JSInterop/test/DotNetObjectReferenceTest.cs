@@ -50,14 +50,17 @@ namespace Microsoft.JSInterop
         {
             // Arrange
             var objRef = DotNetObjectReference.Create("Hello world");
-            var expected = $"{objRef.GetType().Name} is already being tracked by a different instance of {nameof(JSRuntime)}. A common cause is caching an instance of {nameof(DotNetObjectReference<string>)}" +
-                    $" globally. Consider creating instances of {nameof(DotNetObjectReference<string>)} at the JSInterop callsite.";
+            var expected =
+                $"{objRef.GetType().Name} is already being tracked by a different instance of {nameof(JSRuntime)}. A common cause is caching an instance of {nameof(DotNetObjectReference<string>)}"
+                + $" globally. Consider creating instances of {nameof(DotNetObjectReference<string>)} at the JSInterop callsite.";
             var jsRuntime1 = new TestJSRuntime();
             var jsRuntime2 = new TestJSRuntime();
             jsRuntime1.TrackObjectReference(objRef);
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => jsRuntime2.TrackObjectReference(objRef));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => jsRuntime2.TrackObjectReference(objRef)
+            );
 
             // Assert
             Assert.Equal(expected, ex.Message);
@@ -71,7 +74,8 @@ namespace Microsoft.JSInterop
             var jsRuntime = new TestJSRuntime();
             jsRuntime.TrackObjectReference(objRef);
             var objectId = objRef.ObjectId;
-            var expected = $"There is no tracked object with id '{objectId}'. Perhaps the DotNetObjectReference instance was already disposed.";
+            var expected =
+                $"There is no tracked object with id '{objectId}'. Perhaps the DotNetObjectReference instance was already disposed.";
 
             // Act
             Assert.Same(objRef, jsRuntime.GetObjectReference(objectId));

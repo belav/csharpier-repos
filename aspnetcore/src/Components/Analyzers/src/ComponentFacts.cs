@@ -22,10 +22,21 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 throw new ArgumentNullException(nameof(property));
             }
 
-            return property.GetAttributes().Any(a =>
-            {
-                return SymbolEqualityComparer.Default.Equals(a.AttributeClass, symbols.ParameterAttribute) || SymbolEqualityComparer.Default.Equals(a.AttributeClass, symbols.CascadingParameterAttribute);
-            });
+            return property
+                .GetAttributes()
+                .Any(
+                    a =>
+                    {
+                        return SymbolEqualityComparer.Default.Equals(
+                                a.AttributeClass,
+                                symbols.ParameterAttribute
+                            )
+                            || SymbolEqualityComparer.Default.Equals(
+                                a.AttributeClass,
+                                symbols.CascadingParameterAttribute
+                            );
+                    }
+                );
         }
 
         public static bool IsParameter(ComponentSymbols symbols, IPropertySymbol property)
@@ -40,10 +51,21 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 throw new ArgumentNullException(nameof(property));
             }
 
-            return property.GetAttributes().Any(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, symbols.ParameterAttribute));
+            return property
+                .GetAttributes()
+                .Any(
+                    a =>
+                        SymbolEqualityComparer.Default.Equals(
+                            a.AttributeClass,
+                            symbols.ParameterAttribute
+                        )
+                );
         }
 
-        public static bool IsParameterWithCaptureUnmatchedValues(ComponentSymbols symbols, IPropertySymbol property)
+        public static bool IsParameterWithCaptureUnmatchedValues(
+            ComponentSymbols symbols,
+            IPropertySymbol property
+        )
         {
             if (symbols == null)
             {
@@ -55,7 +77,15 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 throw new ArgumentNullException(nameof(property));
             }
 
-            var attribute = property.GetAttributes().FirstOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, symbols.ParameterAttribute));
+            var attribute = property
+                .GetAttributes()
+                .FirstOrDefault(
+                    a =>
+                        SymbolEqualityComparer.Default.Equals(
+                            a.AttributeClass,
+                            symbols.ParameterAttribute
+                        )
+                );
             if (attribute == null)
             {
                 return false;
@@ -63,7 +93,13 @@ namespace Microsoft.AspNetCore.Components.Analyzers
 
             foreach (var kvp in attribute.NamedArguments)
             {
-                if (string.Equals(kvp.Key, ComponentsApi.ParameterAttribute.CaptureUnmatchedValues, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        kvp.Key,
+                        ComponentsApi.ParameterAttribute.CaptureUnmatchedValues,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     return kvp.Value.Value as bool? ?? false;
                 }
@@ -84,10 +120,22 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 throw new ArgumentNullException(nameof(property));
             }
 
-            return property.GetAttributes().Any(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, symbols.CascadingParameterAttribute));
+            return property
+                .GetAttributes()
+                .Any(
+                    a =>
+                        SymbolEqualityComparer.Default.Equals(
+                            a.AttributeClass,
+                            symbols.CascadingParameterAttribute
+                        )
+                );
         }
 
-        public static bool IsComponent(ComponentSymbols symbols, Compilation compilation, INamedTypeSymbol type)
+        public static bool IsComponent(
+            ComponentSymbols symbols,
+            Compilation compilation,
+            INamedTypeSymbol type
+        )
         {
             if (symbols is null)
             {

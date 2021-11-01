@@ -17,22 +17,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         private static readonly ImmutableDictionary<string, string> s_properties =
-            ImmutableDictionary<string, string>.Empty.Add(UseIsNullConstants.Kind, UseIsNullConstants.CastAndEqualityKey);
+            ImmutableDictionary<string, string>.Empty.Add(
+                UseIsNullConstants.Kind,
+                UseIsNullConstants.CastAndEqualityKey
+            );
 
         public CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseIsNullCheckDiagnosticId,
-                   EnforceOnBuildValues.UseIsNullCheck,
-                   CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
-                   CSharpAnalyzersResources.Use_is_null_check,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Null_check_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseIsNullCheckDiagnosticId,
+                EnforceOnBuildValues.UseIsNullCheck,
+                CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
+                CSharpAnalyzersResources.Use_is_null_check,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeSyntax,
+                SyntaxKind.EqualsExpression,
+                SyntaxKind.NotEqualsExpression
+            );
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -46,7 +57,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                 return;
             }
 
-            var option = context.Options.GetOption(CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod, semanticModel.Language, syntaxTree, cancellationToken);
+            var option = context.Options.GetOption(
+                CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
+                semanticModel.Language,
+                syntaxTree,
+                cancellationToken
+            );
             if (!option.Value)
             {
                 return;
@@ -54,8 +70,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
             var binaryExpression = (BinaryExpressionSyntax)context.Node;
 
-            if (!IsObjectCastAndNullCheck(semanticModel, binaryExpression.Left, binaryExpression.Right) &&
-                !IsObjectCastAndNullCheck(semanticModel, binaryExpression.Right, binaryExpression.Left))
+            if (
+                !IsObjectCastAndNullCheck(
+                    semanticModel,
+                    binaryExpression.Left,
+                    binaryExpression.Right
+                )
+                && !IsObjectCastAndNullCheck(
+                    semanticModel,
+                    binaryExpression.Right,
+                    binaryExpression.Left
+                )
+            )
             {
                 return;
             }
@@ -63,23 +89,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             var severity = option.Notification.Severity;
             context.ReportDiagnostic(
                 DiagnosticHelper.Create(
-                    Descriptor, binaryExpression.GetLocation(), severity, additionalLocations: null, s_properties));
+                    Descriptor,
+                    binaryExpression.GetLocation(),
+                    severity,
+                    additionalLocations: null,
+                    s_properties
+                )
+            );
         }
 
         private static bool IsObjectCastAndNullCheck(
-            SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right)
+            SemanticModel semanticModel,
+            ExpressionSyntax left,
+            ExpressionSyntax right
+        )
         {
-            if (left is CastExpressionSyntax castExpression &&
-                right.IsKind(SyntaxKind.NullLiteralExpression))
+            if (
+                left is CastExpressionSyntax castExpression
+                && right.IsKind(SyntaxKind.NullLiteralExpression)
+            )
             {
                 // make sure it's a cast to object, and that the thing we're casting actually has a type.
-                if (semanticModel.GetTypeInfo(castExpression.Type).Type?.SpecialType == SpecialType.System_Object)
+                if (
+                    semanticModel.GetTypeInfo(castExpression.Type).Type?.SpecialType
+                    == SpecialType.System_Object
+                )
                 {
                     var expressionType = semanticModel.GetTypeInfo(castExpression.Expression).Type;
                     if (expressionType != null)
                     {
-                        if (expressionType is ITypeParameterSymbol typeParameter &&
-                            !typeParameter.HasReferenceTypeConstraint)
+                        if (
+                            expressionType is ITypeParameterSymbol typeParameter
+                            && !typeParameter.HasReferenceTypeConstraint
+                        )
                         {
                             return false;
                         }

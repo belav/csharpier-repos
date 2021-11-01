@@ -45,7 +45,10 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
             lock (_lock)
             {
                 _totalConnectedCount++;
-                _peakConnectedCount = Math.Max(_totalConnectedCount - _totalDisconnectedCount, _peakConnectedCount);
+                _peakConnectedCount = Math.Max(
+                    _totalConnectedCount - _totalDisconnectedCount,
+                    _peakConnectedCount
+                );
             }
         }
 

@@ -28,16 +28,33 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void InvalidArguments_Throw()
         {
-            using (Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket s = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
-                AssertExtensions.Throws<ArgumentNullException>("asyncResult", () => s.EndDisconnect(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "asyncResult",
+                    () => s.EndDisconnect(null)
+                );
                 AssertExtensions.Throws<ArgumentNullException>("e", () => s.DisconnectAsync(null));
-                AssertExtensions.Throws<ArgumentException>("asyncResult", () => s.EndDisconnect(Task.CompletedTask));
+                AssertExtensions.Throws<ArgumentException>(
+                    "asyncResult",
+                    () => s.EndDisconnect(Task.CompletedTask)
+                );
                 s.Dispose();
                 Assert.Throws<ObjectDisposedException>(() => s.Disconnect(true));
                 Assert.Throws<ObjectDisposedException>(() => s.BeginDisconnect(true, null, null));
                 Assert.Throws<ObjectDisposedException>(() => s.EndDisconnect(null));
-                Assert.Throws<ObjectDisposedException>(() => { s.DisconnectAsync(null); });
+                Assert.Throws<ObjectDisposedException>(
+                    () =>
+                    {
+                        s.DisconnectAsync(null);
+                    }
+                );
             }
         }
 
@@ -50,8 +67,18 @@ namespace System.Net.Sockets.Tests
             AutoResetEvent completed = new AutoResetEvent(false);
 
             IPEndPoint loopback = new IPEndPoint(IPAddress.Loopback, 0);
-            using (var server1 = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, loopback))
-            using (var server2 = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, loopback))
+            using (
+                var server1 = SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    loopback
+                )
+            )
+            using (
+                var server2 = SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    loopback
+                )
+            )
             {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnCompleted;
@@ -59,7 +86,13 @@ namespace System.Net.Sockets.Tests
                 args.RemoteEndPoint = server1.EndPoint;
                 args.DisconnectReuseSocket = reuseSocket;
 
-                using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                using (
+                    Socket client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
                     if (client.ConnectAsync(args))
                     {
@@ -79,7 +112,10 @@ namespace System.Net.Sockets.Tests
                         completed.WaitOne();
                     }
 
-                    Assert.Equal(reuseSocket ? SocketError.Success : SocketError.IsConnected, args.SocketError);
+                    Assert.Equal(
+                        reuseSocket ? SocketError.Success : SocketError.IsConnected,
+                        args.SocketError
+                    );
                 }
             }
         }
@@ -93,8 +129,18 @@ namespace System.Net.Sockets.Tests
             AutoResetEvent completed = new AutoResetEvent(false);
 
             IPEndPoint loopback = new IPEndPoint(IPAddress.Loopback, 0);
-            using (var server1 = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, loopback))
-            using (var server2 = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, loopback))
+            using (
+                var server1 = SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    loopback
+                )
+            )
+            using (
+                var server2 = SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    loopback
+                )
+            )
             {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnCompleted;
@@ -102,7 +148,13 @@ namespace System.Net.Sockets.Tests
                 args.RemoteEndPoint = server1.EndPoint;
                 args.DisconnectReuseSocket = reuseSocket;
 
-                using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                using (
+                    Socket client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
                     if (client.ConnectAsync(args))
                     {
@@ -126,7 +178,10 @@ namespace System.Net.Sockets.Tests
                         completed.WaitOne();
                     }
 
-                    Assert.Equal(reuseSocket ? SocketError.Success : SocketError.IsConnected, args.SocketError);
+                    Assert.Equal(
+                        reuseSocket ? SocketError.Success : SocketError.IsConnected,
+                        args.SocketError
+                    );
                 }
             }
         }
@@ -140,15 +195,31 @@ namespace System.Net.Sockets.Tests
             AutoResetEvent completed = new AutoResetEvent(false);
 
             IPEndPoint loopback = new IPEndPoint(IPAddress.Loopback, 0);
-            using (var server1 = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, loopback))
-            using (var server2 = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, loopback))
+            using (
+                var server1 = SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    loopback
+                )
+            )
+            using (
+                var server2 = SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    loopback
+                )
+            )
             {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnCompleted;
                 args.UserToken = completed;
                 args.RemoteEndPoint = server1.EndPoint;
 
-                using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                using (
+                    Socket client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
                     if (client.ConnectAsync(args))
                     {
@@ -171,7 +242,10 @@ namespace System.Net.Sockets.Tests
                         completed.WaitOne();
                     }
 
-                    Assert.Equal(reuseSocket ? SocketError.Success : SocketError.IsConnected, args.SocketError);
+                    Assert.Equal(
+                        reuseSocket ? SocketError.Success : SocketError.IsConnected,
+                        args.SocketError
+                    );
                 }
             }
         }

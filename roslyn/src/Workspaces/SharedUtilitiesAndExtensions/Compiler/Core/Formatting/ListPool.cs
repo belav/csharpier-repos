@@ -8,10 +8,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal static class ListPool<T>
     {
-        public static List<T> Allocate()
-            => SharedPools.Default<List<T>>().AllocateAndClear();
+        public static List<T> Allocate() => SharedPools.Default<List<T>>().AllocateAndClear();
 
-        public static void Free(List<T> list)
-            => SharedPools.Default<List<T>>().ClearAndFree(list);
+        public static void Free(List<T> list) => SharedPools.Default<List<T>>().ClearAndFree(list);
     }
 }

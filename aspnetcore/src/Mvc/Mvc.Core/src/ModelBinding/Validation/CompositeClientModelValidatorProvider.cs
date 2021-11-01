@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// <param name="providers">
         /// A collection of <see cref="IClientModelValidatorProvider"/> instances.
         /// </param>
-        public CompositeClientModelValidatorProvider(IEnumerable<IClientModelValidatorProvider> providers)
+        public CompositeClientModelValidatorProvider(
+            IEnumerable<IClientModelValidatorProvider> providers
+        )
         {
             if (providers == null)
             {

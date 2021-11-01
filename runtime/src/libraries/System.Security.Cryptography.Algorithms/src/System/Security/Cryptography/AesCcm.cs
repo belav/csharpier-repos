@@ -27,7 +27,13 @@ namespace System.Security.Cryptography
             ImportKey(key);
         }
 
-        public void Encrypt(byte[] nonce, byte[] plaintext, byte[] ciphertext, byte[] tag, byte[]? associatedData = null)
+        public void Encrypt(
+            byte[] nonce,
+            byte[] plaintext,
+            byte[] ciphertext,
+            byte[] tag,
+            byte[]? associatedData = null
+        )
         {
             AesAEAD.CheckArgumentsForNull(nonce, plaintext, ciphertext, tag);
             Encrypt((ReadOnlySpan<byte>)nonce, plaintext, ciphertext, tag, associatedData);
@@ -38,13 +44,20 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckParameters(plaintext, ciphertext, nonce, tag);
             EncryptInternal(nonce, plaintext, ciphertext, tag, associatedData);
         }
 
-        public void Decrypt(byte[] nonce, byte[] ciphertext, byte[] tag, byte[] plaintext, byte[]? associatedData = null)
+        public void Decrypt(
+            byte[] nonce,
+            byte[] ciphertext,
+            byte[] tag,
+            byte[] plaintext,
+            byte[]? associatedData = null
+        )
         {
             AesAEAD.CheckArgumentsForNull(nonce, plaintext, ciphertext, tag);
             Decrypt((ReadOnlySpan<byte>)nonce, ciphertext, tag, plaintext, associatedData);
@@ -55,7 +68,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckParameters(plaintext, ciphertext, nonce, tag);
             DecryptInternal(nonce, ciphertext, tag, plaintext, associatedData);
@@ -65,7 +79,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> nonce,
-            ReadOnlySpan<byte> tag)
+            ReadOnlySpan<byte> tag
+        )
         {
             if (plaintext.Length != ciphertext.Length)
                 throw new ArgumentException(SR.Cryptography_PlaintextCiphertextLengthMismatch);

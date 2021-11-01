@@ -18,12 +18,16 @@ namespace System.Web.Http.Metadata.Providers
             var provider = new DataAnnotationsModelMetadataProvider();
 
             // Act
-            IEnumerable<ModelMetadata> result = provider.GetMetadataForProperties("foo", typeof(string));
+            IEnumerable<ModelMetadata> result = provider.GetMetadataForProperties(
+                "foo",
+                typeof(string)
+            );
 
             // Assert
-            Assert.Contains(result, m => m.ModelType == typeof(int)
-                                        && m.PropertyName == "Length"
-                                        && (int)m.Model == 3);
+            Assert.Contains(
+                result,
+                m => m.ModelType == typeof(int) && m.PropertyName == "Length" && (int)m.Model == 3
+            );
         }
 
         [Fact]
@@ -65,7 +69,12 @@ namespace System.Web.Http.Metadata.Providers
             var provider = new DataAnnotationsModelMetadataProvider();
 
             // Act
-            var actual = provider.GetMetadataForProperty(null, typeof(ReadOnlyModel), propertyName).IsReadOnly;
+            var actual =
+                provider.GetMetadataForProperty(
+                    null,
+                    typeof(ReadOnlyModel),
+                    propertyName
+                ).IsReadOnly;
 
             // Assert
             Assert.Equal(expected, actual);
@@ -89,7 +98,9 @@ namespace System.Web.Http.Metadata.Providers
             var provider = new DataAnnotationsModelMetadataProvider();
 
             // Act
-            var actual = provider.GetMetadataForProperty(null, typeof(DisplayModel), propertyName).GetDisplayName();
+            var actual = provider
+                .GetMetadataForProperty(null, typeof(DisplayModel), propertyName)
+                .GetDisplayName();
 
             // Assert
             Assert.Equal(expected, actual);
@@ -106,8 +117,10 @@ namespace System.Web.Http.Metadata.Providers
             var provider = new DataAnnotationsModelMetadataProvider();
 
             // Act
-            var actual = provider.GetMetadataForProperty(null, typeof(DisplayModel), "Localized").GetDisplayName();
-            
+            var actual = provider
+                .GetMetadataForProperty(null, typeof(DisplayModel), "Localized")
+                .GetDisplayName();
+
             // Assert
             Assert.Equal(expected, actual);
         }
@@ -124,7 +137,12 @@ namespace System.Web.Http.Metadata.Providers
             var provider = new DataAnnotationsModelMetadataProvider();
 
             // Act
-            var actual = provider.GetMetadataForProperty(null, typeof(DisplayModel), propertyName).Description;
+            var actual =
+                provider.GetMetadataForProperty(
+                    null,
+                    typeof(DisplayModel),
+                    propertyName
+                ).Description;
 
             // Assert
             Assert.Equal(expected, actual);
@@ -187,7 +205,6 @@ namespace System.Web.Http.Metadata.Providers
             [ReadOnly(true)]
             [Editable(true)]
             public int BothAttributes { get; set; }
-
             // Editable trumps ReadOnly
         }
     }

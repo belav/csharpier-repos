@@ -12,8 +12,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class CustomPartitionKeyIdGenerator<T> : ValueGenerator<T>
     {
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
 
         public override T Next(EntityEntry entry)
         {
@@ -27,8 +26,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             var primaryKey = entityType.FindPrimaryKey();
             var discriminator = entityType.GetDiscriminatorValue();
-            if (discriminator != null
-                && !primaryKey.Properties.Contains(entityType.FindDiscriminatorProperty()))
+            if (
+                discriminator != null
+                && !primaryKey.Properties.Contains(entityType.FindDiscriminatorProperty())
+            )
             {
                 AppendString(builder, discriminator);
                 builder.Append("-");
@@ -37,8 +38,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             var partitionKey = entityType.GetPartitionKeyPropertyName();
             foreach (var property in primaryKey.Properties)
             {
-                if (property.Name == partitionKey
-                    || property.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName)
+                if (
+                    property.Name == partitionKey
+                    || property.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
+                )
                 {
                     continue;
                 }
@@ -86,7 +89,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                     return;
                 default:
-                    builder.Append(propertyValue == null ? "null" : propertyValue.ToString().Replace("-", "/-"));
+                    builder.Append(
+                        propertyValue == null ? "null" : propertyValue.ToString().Replace("-", "/-")
+                    );
                     return;
             }
         }

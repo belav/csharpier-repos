@@ -22,7 +22,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // "100m" to the decimal value 100.
             //
             // Validate a randomly selected number.
-            attribute.IsValid(3); 
+            attribute.IsValid(3);
 
             _max = Convert.ToString(Attribute.Maximum, CultureInfo.InvariantCulture)!;
             _min = Convert.ToString(Attribute.Minimum, CultureInfo.InvariantCulture)!;
@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 validationContext.ModelMetadata,
                 validationContext.ModelMetadata.GetDisplayName(),
                 Attribute.Minimum,
-                Attribute.Maximum);
+                Attribute.Maximum
+            );
         }
     }
 }

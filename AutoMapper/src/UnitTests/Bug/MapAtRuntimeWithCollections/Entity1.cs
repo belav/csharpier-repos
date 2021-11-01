@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OmmitedDatabaseModel3WithCollections
-{   
+{
     public class Entity1 : BaseEntity
     {
         public Entity1()

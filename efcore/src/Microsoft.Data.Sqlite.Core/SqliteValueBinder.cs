@@ -14,10 +14,7 @@ namespace Microsoft.Data.Sqlite
         private readonly object? _value;
         private readonly SqliteType? _sqliteType;
 
-        protected SqliteValueBinder(object? value)
-            : this(value, null)
-        {
-        }
+        protected SqliteValueBinder(object? value) : this(value, null) { }
 
         protected SqliteValueBinder(object? value, SqliteType? sqliteType)
         {
@@ -94,7 +91,10 @@ namespace Microsoft.Data.Sqlite
                 }
                 else
                 {
-                    var value = dateTime.ToString(@"yyyy\-MM\-dd HH\:mm\:ss.FFFFFFF", CultureInfo.InvariantCulture);
+                    var value = dateTime.ToString(
+                        @"yyyy\-MM\-dd HH\:mm\:ss.FFFFFFF",
+                        CultureInfo.InvariantCulture
+                    );
                     BindText(value);
                 }
             }
@@ -108,7 +108,10 @@ namespace Microsoft.Data.Sqlite
                 }
                 else
                 {
-                    var value = dateTimeOffset.ToString(@"yyyy\-MM\-dd HH\:mm\:ss.FFFFFFFzzz", CultureInfo.InvariantCulture);
+                    var value = dateTimeOffset.ToString(
+                        @"yyyy\-MM\-dd HH\:mm\:ss.FFFFFFFzzz",
+                        CultureInfo.InvariantCulture
+                    );
                     BindText(value);
                 }
             }
@@ -118,7 +121,10 @@ namespace Microsoft.Data.Sqlite
             }
             else if (type == typeof(decimal))
             {
-                var value = ((decimal)_value).ToString("0.0###########################", CultureInfo.InvariantCulture);
+                var value = ((decimal)_value).ToString(
+                    "0.0###########################",
+                    CultureInfo.InvariantCulture
+                );
                 BindText(value);
             }
             else if (type == typeof(double))
@@ -265,7 +271,10 @@ namespace Microsoft.Data.Sqlite
             var X2 = 306001 * (M + 1) / 10000;
             var iJD = (long)((X1 + X2 + D + B - 1524.5) * 86400000);
 
-            iJD += dateTime.Hour * 3600000 + dateTime.Minute * 60000 + (long)((dateTime.Second + dateTime.Millisecond / 1000.0) * 1000);
+            iJD +=
+                dateTime.Hour * 3600000
+                + dateTime.Minute * 60000
+                + (long)((dateTime.Second + dateTime.Millisecond / 1000.0) * 1000);
 
             return iJD / 86400000.0;
         }

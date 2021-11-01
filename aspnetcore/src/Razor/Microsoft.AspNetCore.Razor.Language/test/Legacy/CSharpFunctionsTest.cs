@@ -29,7 +29,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         if (message != null) @@SomeGitHubUserName <strong>@message</strong>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -44,7 +47,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         if (message.Length > 0) return ""Anouncement: "" + message;
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -59,7 +65,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         <h3>@message</h3>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -74,7 +83,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         <h3>@message</h3>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         // This will parse correctly in Razor, but will generate invalid C#.
@@ -87,7 +99,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 @functions {
     void Announcment(string message) => <h3>@message</h3>
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -99,7 +114,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 @functions {
     void Announcment(string message) => ""<h3>@message</h3>"";
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -111,7 +129,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 @functions {
     void Announcment(string message) => @""<h3>@message</h3>"";
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -131,7 +152,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         </div>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -151,7 +175,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         </div>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
 
         [Fact]
@@ -169,7 +196,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         }
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+                new[] { FunctionsDirective.Directive, },
+                designTime: false
+            );
         }
     }
 }

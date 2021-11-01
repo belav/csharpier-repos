@@ -31,7 +31,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var builder = new StringBuilder();
             foreach (DbParameter parameter in command.Parameters)
             {
-                builder.Append("-- ").AppendLine(parameter.FormatParameter(logParameterValues: true));
+                builder
+                    .Append("-- ")
+                    .AppendLine(parameter.FormatParameter(logParameterValues: true));
             }
 
             return builder.Append(command.CommandText).ToString();

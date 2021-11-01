@@ -5,7 +5,6 @@
 using System;
 using System.Globalization;
 
-
 namespace DefaultNamespace
 {
     public class cinfo

@@ -40,7 +40,8 @@ namespace Internal.Cryptography.Pal
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
+            bool disableAia
+        )
         {
             if (timeout == TimeSpan.Zero)
             {
@@ -65,9 +66,9 @@ namespace Internal.Cryptography.Pal
             }
 
             // Until we support the Disallowed store, ensure it's empty (which is done by the ctor)
-            using (new X509Store(StoreName.Disallowed, StoreLocation.CurrentUser, OpenFlags.ReadOnly))
-            {
-            }
+            using (
+                new X509Store(StoreName.Disallowed, StoreLocation.CurrentUser, OpenFlags.ReadOnly)
+            ) { }
 
             TimeSpan downloadTimeout = timeout;
 
@@ -76,7 +77,8 @@ namespace Internal.Cryptography.Pal
                 customTrustStore,
                 trustMode,
                 verificationTime,
-                downloadTimeout);
+                downloadTimeout
+            );
 
             Interop.Crypto.X509VerifyStatusCode status = chainPal.FindFirstChain(extraStore);
 
@@ -101,8 +103,10 @@ namespace Internal.Cryptography.Pal
 
             // In NoCheck+OK then we don't need to build the chain any more, we already
             // know it's error-free.  So skip straight to finish.
-            if (status != Interop.Crypto.X509VerifyStatusCode.X509_V_OK ||
-                revocationMode != X509RevocationMode.NoCheck)
+            if (
+                status != Interop.Crypto.X509VerifyStatusCode.X509_V_OK
+                || revocationMode != X509RevocationMode.NoCheck
+            )
             {
                 if (OpenSslX509ChainProcessor.IsCompleteChain(status))
                 {
@@ -118,7 +122,10 @@ namespace Internal.Cryptography.Pal
             {
                 X509Certificate2 reportedLeaf = chainPal.ChainElements[0].Certificate;
                 Debug.Assert(reportedLeaf != null, "reportedLeaf != null");
-                Debug.Assert(!ReferenceEquals(cert, reportedLeaf.Pal), "!ReferenceEquals(cert, reportedLeaf.Pal)");
+                Debug.Assert(
+                    !ReferenceEquals(cert, reportedLeaf.Pal),
+                    "!ReferenceEquals(cert, reportedLeaf.Pal)"
+                );
             }
 #endif
             return chainPal;
@@ -126,7 +133,12 @@ namespace Internal.Cryptography.Pal
 
         private static void SaveIntermediateCertificates(List<X509Certificate2> downloadedCerts)
         {
-            using (var userIntermediate = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser))
+            using (
+                var userIntermediate = new X509Store(
+                    StoreName.CertificateAuthority,
+                    StoreLocation.CurrentUser
+                )
+            )
             {
                 try
                 {

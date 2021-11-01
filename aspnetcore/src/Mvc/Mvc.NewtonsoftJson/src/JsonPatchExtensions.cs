@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void ApplyTo<T>(
             this JsonPatchDocument<T> patchDoc,
             T objectToApplyTo,
-            ModelStateDictionary modelState) where T : class
+            ModelStateDictionary modelState
+        ) where T : class
         {
             if (patchDoc == null)
             {
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc
             this JsonPatchDocument<T> patchDoc,
             T objectToApplyTo,
             ModelStateDictionary modelState,
-            string prefix) where T : class
+            string prefix
+        ) where T : class
         {
             if (patchDoc == null)
             {
@@ -69,13 +71,18 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(modelState));
             }
 
-            patchDoc.ApplyTo(objectToApplyTo, jsonPatchError =>
-            {
-                var affectedObjectName = jsonPatchError.AffectedObject.GetType().Name;
-                var key = string.IsNullOrEmpty(prefix) ? affectedObjectName : prefix + "." + affectedObjectName;
+            patchDoc.ApplyTo(
+                objectToApplyTo,
+                jsonPatchError =>
+                {
+                    var affectedObjectName = jsonPatchError.AffectedObject.GetType().Name;
+                    var key = string.IsNullOrEmpty(prefix)
+                        ? affectedObjectName
+                        : prefix + "." + affectedObjectName;
 
-                modelState.TryAddModelError(key, jsonPatchError.ErrorMessage);
-            });
+                    modelState.TryAddModelError(key, jsonPatchError.ErrorMessage);
+                }
+            );
         }
     }
 }

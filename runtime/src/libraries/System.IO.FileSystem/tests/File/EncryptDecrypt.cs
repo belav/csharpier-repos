@@ -7,7 +7,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class EncryptDecrypt : FileSystemTest
     {
         [Fact]
@@ -27,7 +32,11 @@ namespace System.IO.Tests
 
         // On Windows Nano Server and Home Edition, file encryption with File.Encrypt(string path) throws an IOException
         // because EFS (Encrypted File System), its underlying technology, is not available on these operating systems.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer), nameof(PlatformDetection.IsNotWindowsHomeEdition))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer),
+            nameof(PlatformDetection.IsNotWindowsHomeEdition)
+        )]
         [PlatformSpecific(TestPlatforms.Windows)]
         public static void EncryptDecrypt_Read()
         {
@@ -50,11 +59,17 @@ namespace System.IO.Tests
                 }
 
                 Assert.Equal(fileContentRead, File.ReadAllText(tmpFileName));
-                Assert.Equal(FileAttributes.Encrypted, (FileAttributes.Encrypted & File.GetAttributes(tmpFileName)));
+                Assert.Equal(
+                    FileAttributes.Encrypted,
+                    (FileAttributes.Encrypted & File.GetAttributes(tmpFileName))
+                );
 
                 File.Decrypt(tmpFileName);
                 Assert.Equal(fileContentRead, File.ReadAllText(tmpFileName));
-                Assert.NotEqual(FileAttributes.Encrypted, (FileAttributes.Encrypted & File.GetAttributes(tmpFileName)));
+                Assert.NotEqual(
+                    FileAttributes.Encrypted,
+                    (FileAttributes.Encrypted & File.GetAttributes(tmpFileName))
+                );
             }
             finally
             {

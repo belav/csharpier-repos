@@ -126,7 +126,9 @@ namespace Microsoft.AspNetCore.Routing.Template
             if (length > 28)
             {
                 // An OverflowException will be thrown by Math.Pow when greater than 28
-                throw new InvalidOperationException("Route exceeds the maximum number of allowed segments of 28 and is unable to be processed.");
+                throw new InvalidOperationException(
+                    "Route exceeds the maximum number of allowed segments of 28 and is unable to be processed."
+                );
             }
         }
 
@@ -138,20 +140,20 @@ namespace Microsoft.AspNetCore.Routing.Template
         // 1 - Unconstrained wildcard parameter segments
         private static int ComputeOutboundPrecedenceDigit(TemplateSegment segment)
         {
-            if(segment.Parts.Count > 1)
+            if (segment.Parts.Count > 1)
             {
                 return 4;
             }
 
             var part = segment.Parts[0];
-            if(part.IsLiteral)
+            if (part.IsLiteral)
             {
                 return 5;
             }
             else
             {
                 Debug.Assert(part.IsParameter);
-                var digit = part.IsCatchAll ? 1 :  3;
+                var digit = part.IsCatchAll ? 1 : 3;
 
                 if (part.InlineConstraints != null && part.InlineConstraints.Any())
                 {
@@ -233,7 +235,10 @@ namespace Microsoft.AspNetCore.Routing.Template
         // see description on ComputeInboundPrecedenceDigit(TemplateSegment segment)
         //
         // With a RoutePattern, parameters with a required value are treated as a literal segment
-        internal static int ComputeInboundPrecedenceDigit(RoutePattern routePattern, RoutePatternPathSegment pathSegment)
+        internal static int ComputeInboundPrecedenceDigit(
+            RoutePattern routePattern,
+            RoutePatternPathSegment pathSegment
+        )
         {
             if (pathSegment.Parts.Count > 1)
             {
@@ -250,8 +255,12 @@ namespace Microsoft.AspNetCore.Routing.Template
             else if (part is RoutePatternParameterPart parameterPart)
             {
                 // Parameter with a required value is matched as a literal
-                if (routePattern.RequiredValues.TryGetValue(parameterPart.Name, out var requiredValue) &&
-                    !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty))
+                if (
+                    routePattern.RequiredValues.TryGetValue(
+                        parameterPart.Name,
+                        out var requiredValue
+                    ) && !RouteValueEqualityComparer.Default.Equals(requiredValue, string.Empty)
+                )
                 {
                     return 1;
                 }

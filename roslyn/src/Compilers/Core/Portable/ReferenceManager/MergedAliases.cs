@@ -57,9 +57,7 @@ namespace Microsoft.CodeAnalysis
                 aliases = AliasesOpt;
             }
 
-            Merge(
-                aliases: aliases,
-                newAliases: reference.Properties.Aliases);
+            Merge(aliases: aliases, newAliases: reference.Properties.Aliases);
 
             (MergedReferencesOpt ??= ArrayBuilder<MetadataReference>.GetInstance()).Add(reference);
         }
@@ -74,7 +72,10 @@ namespace Microsoft.CodeAnalysis
             AddNonIncluded(aliases, newAliases);
         }
 
-        internal static ImmutableArray<string> Merge(ImmutableArray<string> aliasesOpt, ImmutableArray<string> newAliases)
+        internal static ImmutableArray<string> Merge(
+            ImmutableArray<string> aliasesOpt,
+            ImmutableArray<string> newAliases
+        )
         {
             if (aliasesOpt.IsDefault)
             {
@@ -95,7 +96,10 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static void AddNonIncluded(ArrayBuilder<string> builder, ImmutableArray<string> items)
+        private static void AddNonIncluded(
+            ArrayBuilder<string> builder,
+            ImmutableArray<string> items
+        )
         {
             int originalCount = builder.Count;
 

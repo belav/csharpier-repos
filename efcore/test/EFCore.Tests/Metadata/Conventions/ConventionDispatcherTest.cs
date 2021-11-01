@@ -30,8 +30,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 CoreStrings.ConventionsInfiniteLoop,
-                Assert.Throws<InvalidOperationException>(() =>
-                    entityBuilder.Property(typeof(int), shadowPropertyName, ConfigurationSource.Convention)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        entityBuilder.Property(
+                            typeof(int),
+                            shadowPropertyName,
+                            ConfigurationSource.Convention
+                        )
+                ).Message
+            );
         }
 
         private class InfinitePropertyAddedConvention : IPropertyAddedConvention
@@ -40,9 +47,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessPropertyAdded(
                 IConventionPropertyBuilder propertyBuilder,
-                IConventionContext<IConventionPropertyBuilder> context)
+                IConventionContext<IConventionPropertyBuilder> context
+            )
             {
-                propertyBuilder.Metadata.DeclaringEntityType.AddProperty("TempProperty" + _count++, typeof(int));
+                propertyBuilder.Metadata.DeclaringEntityType.AddProperty(
+                    "TempProperty" + _count++,
+                    typeof(int)
+                );
             }
         }
 
@@ -84,7 +95,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 _terminate = terminate;
             }
 
-            public void ProcessModelInitialized(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+            public void ProcessModelInitialized(
+                IConventionModelBuilder modelBuilder,
+                IConventionContext<IConventionModelBuilder> context
+            )
             {
                 Assert.NotNull(modelBuilder.Metadata.Builder);
 
@@ -137,7 +151,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 _terminate = terminate;
             }
 
-            public void ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+            public void ProcessModelFinalizing(
+                IConventionModelBuilder modelBuilder,
+                IConventionContext<IConventionModelBuilder> context
+            )
             {
                 Assert.NotNull(modelBuilder.Metadata.Builder);
 
@@ -155,7 +172,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnModelAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnModelAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -235,7 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.NotNull(propertyBuilder.Metadata.Builder);
 
@@ -276,7 +297,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var result = builder.Metadata.AddEntityType(typeof(Order), ConfigurationSource.Convention);
+                var result = builder.Metadata.AddEntityType(
+                    typeof(Order),
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -308,7 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessEntityTypeAdded(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionContext<IConventionEntityTypeBuilder> context)
+                IConventionContext<IConventionEntityTypeBuilder> context
+            )
             {
                 Assert.Same(entityTypeBuilder, entityTypeBuilder.Metadata.Builder);
 
@@ -316,7 +341,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    entityTypeBuilder.Metadata.Model.RemoveEntityType(entityTypeBuilder.Metadata.Name);
+                    entityTypeBuilder.Metadata.Model.RemoveEntityType(
+                        entityTypeBuilder.Metadata.Name
+                    );
                     context.StopProcessing();
                 }
             }
@@ -352,7 +379,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             builder.Entity(typeof(Order), ConfigurationSource.Convention);
             if (useBuilder)
             {
-                Assert.NotNull(builder.Ignore(typeof(Order).DisplayName(), ConfigurationSource.Convention));
+                Assert.NotNull(
+                    builder.Ignore(typeof(Order).DisplayName(), ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -393,7 +422,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionModelBuilder modelBuilder,
                 string name,
                 Type type,
-                IConventionContext<string> context)
+                IConventionContext<string> context
+            )
             {
                 Assert.Null(modelBuilder.Metadata.FindEntityType(name));
                 Calls++;
@@ -418,7 +448,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessEntityTypeRemoved(
                 IConventionModelBuilder modelBuilder,
                 IConventionEntityType entityType,
-                IConventionContext<IConventionEntityType> context)
+                IConventionContext<IConventionEntityType> context
+            )
             {
                 Assert.Null(modelBuilder.Metadata.FindEntityType(entityType.Name));
                 Calls++;
@@ -435,7 +466,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnEntityTypeMemberIgnored_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnEntityTypeMemberIgnored_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -447,7 +481,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.EntityTypeMemberIgnoredConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var entityBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention);
+            var entityBuilder = builder.Entity(
+                typeof(SpecialOrder),
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -499,7 +536,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessEntityTypeMemberIgnored(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 string name,
-                IConventionContext<string> context)
+                IConventionContext<string> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -528,8 +566,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.EntityTypeBaseTypeChangedConventions.Add(convention2);
             conventions.EntityTypeBaseTypeChangedConventions.Add(convention3);
 
-            var builder = new InternalModelBuilder(new Model(conventions))
-                .Entity(typeof(SpecialOrder), ConfigurationSource.Convention);
+            var builder = new InternalModelBuilder(new Model(conventions)).Entity(
+                typeof(SpecialOrder),
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.Model.DelayConventions() : null;
 
@@ -540,7 +580,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 builder.Metadata.SetBaseType(
-                    builder.Metadata.Model.AddEntityType(typeof(Order), ConfigurationSource.Explicit), ConfigurationSource.Convention);
+                    builder.Metadata.Model.AddEntityType(
+                        typeof(Order),
+                        ConfigurationSource.Explicit
+                    ),
+                    ConfigurationSource.Convention
+                );
             }
 
             if (useScope)
@@ -561,7 +606,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                builder.Metadata.SetBaseType(builder.Metadata.Model.FindEntityType(typeof(Order)), ConfigurationSource.Convention);
+                builder.Metadata.SetBaseType(
+                    builder.Metadata.Model.FindEntityType(typeof(Order)),
+                    ConfigurationSource.Convention
+                );
             }
 
             Assert.Equal(new[] { typeof(Order) }, convention1.Calls);
@@ -596,7 +644,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionEntityType newBaseType,
                 IConventionEntityType oldBaseType,
-                IConventionContext<IConventionEntityType> context)
+                IConventionContext<IConventionEntityType> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -634,14 +683,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention)
+                );
             }
             else
             {
                 Assert.NotNull(
                     entityBuilder.Metadata.SetPrimaryKey(
                         entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
-                        ConfigurationSource.Convention));
+                        ConfigurationSource.Convention
+                    )
+                );
             }
 
             if (useScope)
@@ -658,14 +711,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention)
+                );
             }
             else
             {
                 Assert.NotNull(
                     entityBuilder.Metadata.SetPrimaryKey(
                         entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
-                        ConfigurationSource.Convention));
+                        ConfigurationSource.Convention
+                    )
+                );
             }
 
             Assert.Equal(new string[] { null }, convention1.Calls);
@@ -674,11 +731,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.Null(entityBuilder.PrimaryKey((IReadOnlyList<string>)null, ConfigurationSource.Convention));
+                Assert.Null(
+                    entityBuilder.PrimaryKey(
+                        (IReadOnlyList<string>)null,
+                        ConfigurationSource.Convention
+                    )
+                );
             }
             else
             {
-                Assert.Null(entityBuilder.Metadata.SetPrimaryKey((Property)null, ConfigurationSource.Convention));
+                Assert.Null(
+                    entityBuilder.Metadata.SetPrimaryKey(
+                        (Property)null,
+                        ConfigurationSource.Convention
+                    )
+                );
             }
 
             Assert.Equal(new[] { null, "OrderId" }, convention1.Calls);
@@ -701,7 +768,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionKey newPrimaryKey,
                 IConventionKey previousPrimaryKey,
-                IConventionContext<IConventionKey> context)
+                IConventionContext<IConventionKey> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -719,7 +787,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnEntityTypeAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnEntityTypeAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -731,13 +802,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.EntityTypeAnnotationChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var entityBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention);
+            var entityBuilder = builder.Entity(
+                typeof(SpecialOrder),
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -757,7 +833,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    entityBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -770,7 +848,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(entityBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    entityBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -781,7 +861,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(new[] { "bar", null }, convention2.Calls);
             Assert.Empty(convention3.Calls);
 
-            entityBuilder.Metadata[CoreAnnotationNames.PropertyAccessMode] = PropertyAccessMode.Field;
+            entityBuilder.Metadata[CoreAnnotationNames.PropertyAccessMode] =
+                PropertyAccessMode.Field;
             Assert.Equal(new[] { "bar", null }, convention1.Calls);
         }
 
@@ -800,7 +881,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Calls.Add(annotation?.Value);
 
@@ -835,18 +917,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                var result = entityBuilder.HasRelationship(entityBuilder.Metadata, ConfigurationSource.Convention);
+                var result = entityBuilder.HasRelationship(
+                    entityBuilder.Metadata,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
             else
             {
                 var result = entityBuilder.Metadata.AddForeignKey(
-                    entityBuilder.Property(typeof(int), "OrderId1", ConfigurationSource.Convention).Metadata,
+                    entityBuilder.Property(
+                        typeof(int),
+                        "OrderId1",
+                        ConfigurationSource.Convention
+                    ).Metadata,
                     entityBuilder.Metadata.FindPrimaryKey(),
                     entityBuilder.Metadata,
                     ConfigurationSource.Convention,
-                    ConfigurationSource.Convention);
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -875,7 +965,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessForeignKeyAdded(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                IConventionContext<IConventionForeignKeyBuilder> context)
+                IConventionContext<IConventionForeignKeyBuilder> context
+            )
             {
                 var fk = relationshipBuilder.Metadata;
                 Assert.NotNull(fk.Builder);
@@ -884,7 +975,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    fk.DeclaringEntityType.RemoveForeignKey(fk.Properties, fk.PrincipalKey, fk.PrincipalEntityType);
+                    fk.DeclaringEntityType.RemoveForeignKey(
+                        fk.Properties,
+                        fk.PrincipalKey,
+                        fk.PrincipalEntityType
+                    );
                     context.StopProcessing();
                 }
             }
@@ -907,16 +1002,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var foreignKey = entityBuilder.Metadata.AddForeignKey(
-                new[] { entityBuilder.Property(typeof(int), "FK", ConfigurationSource.Convention).Metadata },
+                new[]
+                {
+                    entityBuilder.Property(
+                        typeof(int),
+                        "FK",
+                        ConfigurationSource.Convention
+                    ).Metadata
+                },
                 entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
                 entityBuilder.Metadata,
                 ConfigurationSource.Explicit,
-                ConfigurationSource.Explicit);
+                ConfigurationSource.Explicit
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             var result = entityBuilder.Metadata.RemoveForeignKey(
-                foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType);
+                foreignKey.Properties,
+                foreignKey.PrincipalKey,
+                foreignKey.PrincipalEntityType
+            );
 
             if (useScope)
             {
@@ -952,7 +1058,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessForeignKeyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionForeignKey foreignKey,
-                IConventionContext<IConventionForeignKey> context)
+                IConventionContext<IConventionForeignKey> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -982,13 +1089,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             entityBuilder.PrimaryKey(new[] { "OrderId" }, ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var relationship = dependentEntityBuilder
-                .HasRelationship(entityBuilder.Metadata, ConfigurationSource.Convention);
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var relationship = dependentEntityBuilder.HasRelationship(
+                entityBuilder.Metadata,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
-            relationship = relationship.HasPrincipalKey(Array.Empty<string>(), ConfigurationSource.Convention);
+            relationship = relationship.HasPrincipalKey(
+                Array.Empty<string>(),
+                ConfigurationSource.Convention
+            );
             Assert.NotNull(relationship);
 
             if (useScope)
@@ -1002,7 +1117,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(new[] { nameof(Order) }, convention2.Calls);
             Assert.Empty(convention3.Calls);
 
-            relationship = relationship.HasPrincipalKey(relationship.Metadata.PrincipalKey.Properties, ConfigurationSource.Convention);
+            relationship = relationship.HasPrincipalKey(
+                relationship.Metadata.PrincipalKey.Properties,
+                ConfigurationSource.Convention
+            );
             Assert.NotNull(relationship);
 
             Assert.Equal(new[] { nameof(Order) }, convention1.Calls);
@@ -1012,7 +1130,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             relationship.Metadata.SetPrincipalEndConfigurationSource(null);
-            relationship = relationship.HasForeignKey(Array.Empty<string>(), ConfigurationSource.Convention);
+            relationship = relationship.HasForeignKey(
+                Array.Empty<string>(),
+                ConfigurationSource.Convention
+            );
             Assert.NotNull(relationship);
 
             if (useScope)
@@ -1026,7 +1147,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(new[] { nameof(Order), nameof(Order) }, convention2.Calls);
             Assert.Empty(convention3.Calls);
 
-            relationship = relationship.HasForeignKey(relationship.Metadata.Properties, ConfigurationSource.Convention);
+            relationship = relationship.HasForeignKey(
+                relationship.Metadata.Properties,
+                ConfigurationSource.Convention
+            );
             Assert.NotNull(relationship);
 
             Assert.Equal(new[] { nameof(Order), nameof(Order) }, convention1.Calls);
@@ -1036,7 +1160,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             relationship = relationship.HasEntityTypes(
-                relationship.Metadata.DeclaringEntityType, relationship.Metadata.PrincipalEntityType, ConfigurationSource.Convention);
+                relationship.Metadata.DeclaringEntityType,
+                relationship.Metadata.PrincipalEntityType,
+                ConfigurationSource.Convention
+            );
             Assert.NotNull(relationship);
 
             if (useScope)
@@ -1046,28 +1173,53 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 scope.Dispose();
             }
 
-            Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails) }, convention1.Calls);
-            Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails) }, convention2.Calls);
+            Assert.Equal(
+                new[] { nameof(Order), nameof(Order), nameof(OrderDetails) },
+                convention1.Calls
+            );
+            Assert.Equal(
+                new[] { nameof(Order), nameof(Order), nameof(OrderDetails) },
+                convention2.Calls
+            );
             Assert.Empty(convention3.Calls);
 
             relationship = relationship.HasEntityTypes(
-                relationship.Metadata.PrincipalEntityType, relationship.Metadata.DeclaringEntityType, ConfigurationSource.DataAnnotation);
+                relationship.Metadata.PrincipalEntityType,
+                relationship.Metadata.DeclaringEntityType,
+                ConfigurationSource.DataAnnotation
+            );
             Assert.NotNull(relationship);
 
-            Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention1.Calls);
-            Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention2.Calls);
+            Assert.Equal(
+                new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+                convention1.Calls
+            );
+            Assert.Equal(
+                new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+                convention2.Calls
+            );
             Assert.Empty(convention3.Calls);
 
             relationship = relationship.HasEntityTypes(
-                relationship.Metadata.PrincipalEntityType, relationship.Metadata.DeclaringEntityType, ConfigurationSource.DataAnnotation);
+                relationship.Metadata.PrincipalEntityType,
+                relationship.Metadata.DeclaringEntityType,
+                ConfigurationSource.DataAnnotation
+            );
             Assert.NotNull(relationship);
 
-            Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention1.Calls);
-            Assert.Equal(new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) }, convention2.Calls);
+            Assert.Equal(
+                new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+                convention1.Calls
+            );
+            Assert.Equal(
+                new[] { nameof(Order), nameof(Order), nameof(OrderDetails), nameof(OrderDetails) },
+                convention2.Calls
+            );
             Assert.Empty(convention3.Calls);
         }
 
-        private class ForeignKeyPrincipalEndChangedConvention : IForeignKeyPrincipalEndChangedConvention
+        private class ForeignKeyPrincipalEndChangedConvention
+            : IForeignKeyPrincipalEndChangedConvention
         {
             private readonly bool _terminate;
             public readonly List<object> Calls = new();
@@ -1079,7 +1231,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessForeignKeyPrincipalEndChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                IConventionContext<IConventionForeignKeyBuilder> context)
+                IConventionContext<IConventionForeignKeyBuilder> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1095,7 +1248,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false)]
         [InlineData(true)]
         [ConditionalTheory]
-        public void OnForeignKeyPropertiesChangedConvention_calls_conventions_in_order(bool useScope)
+        public void OnForeignKeyPropertiesChangedConvention_calls_conventions_in_order(
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -1109,18 +1264,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var foreignKey = entityBuilder.Metadata.AddForeignKey(
-                new[] { entityBuilder.Property(typeof(int), "FK", ConfigurationSource.Convention).Metadata },
+                new[]
+                {
+                    entityBuilder.Property(
+                        typeof(int),
+                        "FK",
+                        ConfigurationSource.Convention
+                    ).Metadata
+                },
                 entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
                 entityBuilder.Metadata,
                 ConfigurationSource.Explicit,
-                ConfigurationSource.Explicit);
+                ConfigurationSource.Explicit
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             foreignKey.SetProperties(
-                new[] { entityBuilder.Property(typeof(int), "FK2", ConfigurationSource.Convention).Metadata },
+                new[]
+                {
+                    entityBuilder.Property(
+                        typeof(int),
+                        "FK2",
+                        ConfigurationSource.Convention
+                    ).Metadata
+                },
                 foreignKey.PrincipalKey,
-                ConfigurationSource.Convention);
+                ConfigurationSource.Convention
+            );
 
             if (useScope)
             {
@@ -1149,13 +1320,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IReadOnlyList<IConventionProperty> oldDependentProperties,
                 IConventionKey oldPrincipalKey,
-                IConventionContext<IReadOnlyList<IConventionProperty>> context)
+                IConventionContext<IReadOnlyList<IConventionProperty>> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
                 Assert.NotNull(oldDependentProperties);
                 Assert.NotNull(oldPrincipalKey);
 
-                Calls.Add((oldDependentProperties.First().Name, relationshipBuilder.Metadata.Properties.First().Name));
+                Calls.Add(
+                    (
+                        oldDependentProperties.First().Name,
+                        relationshipBuilder.Metadata.Properties.First().Name
+                    )
+                );
 
                 if (relationshipBuilder.Metadata.Properties.First().Name == "FK2")
                 {
@@ -1163,9 +1340,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         new[]
                         {
                             relationshipBuilder.Metadata.DeclaringEntityType.Builder.Property(
-                                typeof(int), "FK3").Metadata
+                                typeof(int),
+                                "FK3"
+                            ).Metadata
                         },
-                        relationshipBuilder.Metadata.PrincipalKey);
+                        relationshipBuilder.Metadata.PrincipalKey
+                    );
                     context.StopProcessingIfChanged(relationshipBuilder.Metadata.Properties);
                 }
 
@@ -1181,7 +1361,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnForeignKeyUniquenessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnForeignKeyUniquenessChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -1193,10 +1376,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.ForeignKeyUniquenessChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
-                .Metadata;
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var foreignKey =
+                dependentEntityBuilder.HasRelationship(
+                    principalEntityBuilder.Metadata,
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1249,7 +1441,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Same(
                 foreignKey,
                 dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+            );
         }
 
         private class ForeignKeyUniquenessChangedConvention : IForeignKeyUniquenessChangedConvention
@@ -1264,7 +1460,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessForeignKeyUniquenessChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                IConventionContext<bool?> context)
+                IConventionContext<bool?> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1282,7 +1479,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnForeignKeyRequirednessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnForeignKeyRequirednessChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -1294,10 +1494,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.ForeignKeyRequirednessChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
-                .Metadata;
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var foreignKey =
+                dependentEntityBuilder.HasRelationship(
+                    principalEntityBuilder.Metadata,
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1350,10 +1559,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Same(
                 foreignKey,
                 dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+            );
         }
 
-        private class ForeignKeyRequirednessChangedConvention : IForeignKeyRequirednessChangedConvention
+        private class ForeignKeyRequirednessChangedConvention
+            : IForeignKeyRequirednessChangedConvention
         {
             private readonly bool _terminate;
             public readonly List<bool> Calls = new();
@@ -1365,7 +1579,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessForeignKeyRequirednessChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                IConventionContext<bool?> context)
+                IConventionContext<bool?> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1383,24 +1598,45 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnForeignKeyDependentRequirednessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnForeignKeyDependentRequirednessChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
-            var convention1 = new ForeignKeyDependentRequirednessChangedConvention(terminate: false);
+            var convention1 = new ForeignKeyDependentRequirednessChangedConvention(
+                terminate: false
+            );
             var convention2 = new ForeignKeyDependentRequirednessChangedConvention(terminate: true);
-            var convention3 = new ForeignKeyDependentRequirednessChangedConvention(terminate: false);
+            var convention3 = new ForeignKeyDependentRequirednessChangedConvention(
+                terminate: false
+            );
             conventions.ForeignKeyDependentRequirednessChangedConventions.Add(convention1);
             conventions.ForeignKeyDependentRequirednessChangedConventions.Add(convention2);
             conventions.ForeignKeyDependentRequirednessChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
-                .IsUnique(true, ConfigurationSource.Convention)
-                .HasEntityTypes(principalEntityBuilder.Metadata, dependentEntityBuilder.Metadata, ConfigurationSource.Convention)
-                .Metadata;
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var foreignKey =
+                dependentEntityBuilder
+                    .HasRelationship(
+                        principalEntityBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    )
+                    .IsUnique(true, ConfigurationSource.Convention)
+                    .HasEntityTypes(
+                        principalEntityBuilder.Metadata,
+                        dependentEntityBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1453,10 +1689,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Same(
                 foreignKey,
                 dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+            );
         }
 
-        private class ForeignKeyDependentRequirednessChangedConvention : IForeignKeyDependentRequirednessChangedConvention
+        private class ForeignKeyDependentRequirednessChangedConvention
+            : IForeignKeyDependentRequirednessChangedConvention
         {
             private readonly bool _terminate;
             public readonly List<bool> Calls = new();
@@ -1468,7 +1709,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessForeignKeyDependentRequirednessChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                IConventionContext<bool?> context)
+                IConventionContext<bool?> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1486,7 +1728,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnForeignKeyOwnershipChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnForeignKeyOwnershipChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -1498,10 +1743,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.ForeignKeyOwnershipChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
-                .Metadata;
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var foreignKey =
+                dependentEntityBuilder.HasRelationship(
+                    principalEntityBuilder.Metadata,
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1555,7 +1809,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Same(
                 foreignKey,
                 dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties, foreignKey.PrincipalKey, foreignKey.PrincipalEntityType));
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                )
+            );
         }
 
         private class ForeignKeyOwnershipChangedConvention : IForeignKeyOwnershipChangedConvention
@@ -1570,7 +1828,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessForeignKeyOwnershipChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                IConventionContext<bool?> context)
+                IConventionContext<bool?> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1588,7 +1847,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnForeignKeyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnForeignKeyAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -1600,16 +1862,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.ForeignKeyAnnotationChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var foreignKey = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
-                .Metadata;
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var foreignKey =
+                dependentEntityBuilder.HasRelationship(
+                    principalEntityBuilder.Metadata,
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -1629,7 +1902,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    foreignKey.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -1642,7 +1917,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(foreignKey.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    foreignKey.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -1681,7 +1958,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1711,29 +1989,48 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.NavigationAddedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
                 var result = dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata, OrderDetails.OrderProperty, Order.OrderDetailsProperty,
-                    ConfigurationSource.Convention);
+                    principalEntityBuilder.Metadata,
+                    OrderDetails.OrderProperty,
+                    Order.OrderDetailsProperty,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
             else
             {
-                var fk = dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention)
-                    .IsUnique(true, ConfigurationSource.Convention)
-                    .Metadata;
-                var result = fk.SetDependentToPrincipal(OrderDetails.OrderProperty, ConfigurationSource.Explicit);
+                var fk =
+                    dependentEntityBuilder
+                        .HasRelationship(
+                            principalEntityBuilder.Metadata,
+                            ConfigurationSource.Convention
+                        )
+                        .IsUnique(true, ConfigurationSource.Convention).Metadata;
+                var result = fk.SetDependentToPrincipal(
+                    OrderDetails.OrderProperty,
+                    ConfigurationSource.Explicit
+                );
 
                 Assert.Equal(!useScope, result == null);
 
-                result = fk.SetPrincipalToDependent(Order.OrderDetailsProperty, ConfigurationSource.Explicit);
+                result = fk.SetPrincipalToDependent(
+                    Order.OrderDetailsProperty,
+                    ConfigurationSource.Explicit
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -1745,8 +2042,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 scope.Dispose();
             }
 
-            Assert.Equal(new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) }, convention1.Calls);
-            Assert.Equal(new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) }, convention2.Calls);
+            Assert.Equal(
+                new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) },
+                convention1.Calls
+            );
+            Assert.Equal(
+                new[] { nameof(OrderDetails.Order), nameof(Order.OrderDetails) },
+                convention2.Calls
+            );
             Assert.Empty(convention3.Calls);
         }
 
@@ -1762,7 +2065,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessNavigationAdded(
                 IConventionNavigationBuilder navigationBuilder,
-                IConventionContext<IConventionNavigationBuilder> context)
+                IConventionContext<IConventionNavigationBuilder> context
+            )
             {
                 var navigation = navigationBuilder.Metadata;
                 var foreignKey = navigation.ForeignKey;
@@ -1792,7 +2096,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnNavigationAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnNavigationAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -1804,17 +2111,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.NavigationAnnotationChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
-            var navigation = dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata, OrderDetails.OrderProperty, ConfigurationSource.Convention)
-                .Metadata.DependentToPrincipal;
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
+            var navigation =
+                dependentEntityBuilder.HasRelationship(
+                    principalEntityBuilder.Metadata,
+                    OrderDetails.OrderProperty,
+                    ConfigurationSource.Convention
+                ).Metadata.DependentToPrincipal;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -1834,7 +2152,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -1847,7 +2167,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -1879,7 +2201,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.NotNull(relationshipBuilder.Metadata.Builder);
 
@@ -1909,10 +2232,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.NavigationRemovedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var principalEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var dependentEntityBuilder = builder.Entity(typeof(OrderDetails), ConfigurationSource.Convention);
+            var principalEntityBuilder = builder.Entity(
+                typeof(Order),
+                ConfigurationSource.Convention
+            );
+            var dependentEntityBuilder = builder.Entity(
+                typeof(OrderDetails),
+                ConfigurationSource.Convention
+            );
             var relationshipBuilder = dependentEntityBuilder.HasRelationship(
-                principalEntityBuilder.Metadata, nameof(OrderDetails.Order), nameof(Order.OrderDetails), ConfigurationSource.Convention);
+                principalEntityBuilder.Metadata,
+                nameof(OrderDetails.Order),
+                nameof(Order.OrderDetails),
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1922,11 +2255,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     relationshipBuilder.HasNavigation(
                         (string)null,
                         pointsToPrincipal: true,
-                        ConfigurationSource.Convention));
+                        ConfigurationSource.Convention
+                    )
+                );
             }
             else
             {
-                var result = relationshipBuilder.Metadata.SetDependentToPrincipal((string)null, ConfigurationSource.Convention);
+                var result = relationshipBuilder.Metadata.SetDependentToPrincipal(
+                    (string)null,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -1948,11 +2286,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     relationshipBuilder.HasNavigation(
                         (string)null,
                         pointsToPrincipal: true,
-                        ConfigurationSource.Convention));
+                        ConfigurationSource.Convention
+                    )
+                );
             }
             else
             {
-                Assert.Null(relationshipBuilder.Metadata.SetDependentToPrincipal((string)null, ConfigurationSource.Convention));
+                Assert.Null(
+                    relationshipBuilder.Metadata.SetDependentToPrincipal(
+                        (string)null,
+                        ConfigurationSource.Convention
+                    )
+                );
             }
 
             Assert.Equal(new[] { nameof(OrderDetails.Order) }, convention1.Calls);
@@ -1975,7 +2320,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionEntityTypeBuilder targetEntityTypeBuilder,
                 string navigationName,
                 MemberInfo memberInfo,
-                IConventionContext<string> context)
+                IConventionContext<string> context
+            )
             {
                 Assert.NotNull(sourceEntityTypeBuilder.Metadata.Builder);
 
@@ -2006,19 +2352,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
+            var secondEntityBuilder = builder.Entity(
+                typeof(Product),
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
                 firstEntityBuilder.HasSkipNavigation(
-                    MemberIdentity.Create(nameof(Order.Products)), secondEntityBuilder.Metadata, ConfigurationSource.Convention);
+                    MemberIdentity.Create(nameof(Order.Products)),
+                    secondEntityBuilder.Metadata,
+                    ConfigurationSource.Convention
+                );
             }
             else
             {
                 var result = firstEntityBuilder.Metadata.AddSkipNavigation(
-                    nameof(Order.Products), null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+                    nameof(Order.Products),
+                    null,
+                    secondEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -2047,7 +2405,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessSkipNavigationAdded(
                 IConventionSkipNavigationBuilder skipNavigationBuilder,
-                IConventionContext<IConventionSkipNavigationBuilder> context)
+                IConventionContext<IConventionSkipNavigationBuilder> context
+            )
             {
                 Assert.True(skipNavigationBuilder.Metadata.IsInModel);
 
@@ -2055,7 +2414,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    skipNavigationBuilder.Metadata.DeclaringEntityType.RemoveSkipNavigation(skipNavigationBuilder.Metadata);
+                    skipNavigationBuilder.Metadata.DeclaringEntityType.RemoveSkipNavigation(
+                        skipNavigationBuilder.Metadata
+                    );
 
                     context.StopProcessing();
                 }
@@ -2067,7 +2428,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnSkipNavigationAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnSkipNavigationAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -2080,16 +2444,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
+            var secondEntityBuilder = builder.Entity(
+                typeof(Product),
+                ConfigurationSource.Convention
+            );
 
             var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products), null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+                nameof(Order.Products),
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2109,7 +2484,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    navigation.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2122,7 +2499,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    navigation.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2138,7 +2517,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(new[] { "bar", null }, convention1.Calls);
         }
 
-        private class SkipNavigationAnnotationChangedConvention : ISkipNavigationAnnotationChangedConvention
+        private class SkipNavigationAnnotationChangedConvention
+            : ISkipNavigationAnnotationChangedConvention
         {
             private readonly bool _terminate;
             public readonly List<object> Calls = new();
@@ -2153,7 +2533,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.True(navigationBuilder.Metadata.IsInModel);
 
@@ -2171,7 +2552,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnSkipNavigationForeignKeyChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnSkipNavigationForeignKeyChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -2184,15 +2568,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
-            var joinEntityBuilder = builder.Entity(typeof(OrderProduct), ConfigurationSource.Convention);
+            var secondEntityBuilder = builder.Entity(
+                typeof(Product),
+                ConfigurationSource.Convention
+            );
+            var joinEntityBuilder = builder.Entity(
+                typeof(OrderProduct),
+                ConfigurationSource.Convention
+            );
 
-            var foreignKey = joinEntityBuilder
-                .HasRelationship(typeof(Order), new[] { OrderProduct.OrderIdProperty }, ConfigurationSource.Convention)
-                .IsUnique(false, ConfigurationSource.Convention)
-                .Metadata;
+            var foreignKey =
+                joinEntityBuilder
+                    .HasRelationship(
+                        typeof(Order),
+                        new[] { OrderProduct.OrderIdProperty },
+                        ConfigurationSource.Convention
+                    )
+                    .IsUnique(false, ConfigurationSource.Convention).Metadata;
             var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products), null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+                nameof(Order.Products),
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2230,7 +2630,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Empty(convention3.Calls);
         }
 
-        private class SkipNavigationForeignKeyChangedConvention : ISkipNavigationForeignKeyChangedConvention
+        private class SkipNavigationForeignKeyChangedConvention
+            : ISkipNavigationForeignKeyChangedConvention
         {
             private readonly bool _terminate;
             public readonly List<object> Calls = new();
@@ -2244,7 +2645,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionSkipNavigationBuilder navigationBuilder,
                 IConventionForeignKey foreignKey,
                 IConventionForeignKey oldForeignKey,
-                IConventionContext<IConventionForeignKey> context)
+                IConventionContext<IConventionForeignKey> context
+            )
             {
                 Assert.True(navigationBuilder.Metadata.IsInModel);
 
@@ -2267,7 +2669,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnSkipNavigationInverseChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnSkipNavigationInverseChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -2280,12 +2685,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
+            var secondEntityBuilder = builder.Entity(
+                typeof(Product),
+                ConfigurationSource.Convention
+            );
 
             var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products), null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+                nameof(Order.Products),
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
             var inverse = secondEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Product.Orders), null, firstEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+                nameof(Product.Orders),
+                null,
+                firstEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2316,8 +2736,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.Equal(new[] { nameof(Product.Orders), nameof(Order.Products) }, convention1.Calls);
-                Assert.Equal(new[] { nameof(Product.Orders), nameof(Order.Products) }, convention2.Calls);
+                Assert.Equal(
+                    new[] { nameof(Product.Orders), nameof(Order.Products) },
+                    convention1.Calls
+                );
+                Assert.Equal(
+                    new[] { nameof(Product.Orders), nameof(Order.Products) },
+                    convention2.Calls
+                );
             }
             else
             {
@@ -2328,7 +2754,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Empty(convention3.Calls);
         }
 
-        private class SkipNavigationInverseChangedConvention : ISkipNavigationInverseChangedConvention
+        private class SkipNavigationInverseChangedConvention
+            : ISkipNavigationInverseChangedConvention
         {
             private readonly bool _terminate;
             public readonly List<object> Calls = new();
@@ -2342,7 +2769,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionSkipNavigationBuilder skipNavigationBuilder,
                 IConventionSkipNavigation inverse,
                 IConventionSkipNavigation oldInverse,
-                IConventionContext<IConventionSkipNavigation> context)
+                IConventionContext<IConventionSkipNavigation> context
+            )
             {
                 Assert.True(skipNavigationBuilder.Metadata.IsInModel);
 
@@ -2371,10 +2799,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var firstEntityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var secondEntityBuilder = builder.Entity(typeof(Product), ConfigurationSource.Convention);
+            var secondEntityBuilder = builder.Entity(
+                typeof(Product),
+                ConfigurationSource.Convention
+            );
 
             var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products), null, secondEntityBuilder.Metadata, true, false, ConfigurationSource.Convention);
+                nameof(Order.Products),
+                null,
+                secondEntityBuilder.Metadata,
+                true,
+                false,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2414,7 +2851,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessSkipNavigationRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionSkipNavigation navigation,
-                IConventionContext<IConventionSkipNavigation> context)
+                IConventionContext<IConventionSkipNavigation> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -2452,13 +2890,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (useBuilder)
             {
                 var result = entityBuilder.HasKey(
-                    new List<string> { keyPropertyName }, ConfigurationSource.Convention);
+                    new List<string> { keyPropertyName },
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
             else
             {
-                var property = entityBuilder.Property(keyPropertyName, ConfigurationSource.Convention).Metadata;
+                var property =
+                    entityBuilder.Property(
+                        keyPropertyName,
+                        ConfigurationSource.Convention
+                    ).Metadata;
                 property.IsNullable = false;
                 var result = ((IMutableEntityType)entityBuilder.Metadata).AddKey(property);
 
@@ -2487,7 +2931,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 _terminate = terminate;
             }
 
-            public void ProcessKeyAdded(IConventionKeyBuilder keyBuilder, IConventionContext<IConventionKeyBuilder> context)
+            public void ProcessKeyAdded(
+                IConventionKeyBuilder keyBuilder,
+                IConventionContext<IConventionKeyBuilder> context
+            )
             {
                 Assert.NotNull(keyBuilder.Metadata.Builder);
 
@@ -2495,7 +2942,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    keyBuilder.Metadata.DeclaringEntityType.RemoveKey(keyBuilder.Metadata.Properties);
+                    keyBuilder.Metadata.DeclaringEntityType.RemoveKey(
+                        keyBuilder.Metadata.Properties
+                    );
                     context.StopProcessing();
                 }
             }
@@ -2518,8 +2967,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
 
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var key = entityBuilder.HasKey(
-                new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+            var key =
+                entityBuilder.HasKey(
+                    new List<string> { "OrderId" },
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2553,7 +3005,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessKeyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionKey key,
-                IConventionContext<IConventionKey> context)
+                IConventionContext<IConventionKey> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -2571,7 +3024,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnKeyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnKeyAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -2584,14 +3040,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var key = entityBuilder.HasKey(
-                new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+            var key =
+                entityBuilder.HasKey(
+                    new List<string> { "OrderId" },
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(key.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    key.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2611,7 +3072,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(key.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    key.Builder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2624,7 +3087,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(key.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    key.Builder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2655,7 +3120,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.NotNull(keyBuilder.Metadata.Builder);
 
@@ -2692,13 +3158,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (useBuilder)
             {
                 var result = entityBuilder.HasIndex(
-                    new List<string> { "OrderId" }, ConfigurationSource.Convention);
+                    new List<string> { "OrderId" },
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
             else
             {
-                var property = entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata;
+                var property =
+                    entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata;
                 var result = ((IMutableEntityType)entityBuilder.Metadata).AddIndex(property);
 
                 Assert.Equal(!useScope, result == null);
@@ -2727,7 +3196,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 _terminate = terminate;
             }
 
-            public void ProcessIndexAdded(IConventionIndexBuilder indexBuilder, IConventionContext<IConventionIndexBuilder> context)
+            public void ProcessIndexAdded(
+                IConventionIndexBuilder indexBuilder,
+                IConventionContext<IConventionIndexBuilder> context
+            )
             {
                 Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -2735,7 +3207,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    indexBuilder.Metadata.DeclaringEntityType.RemoveIndex(indexBuilder.Metadata.Properties);
+                    indexBuilder.Metadata.DeclaringEntityType.RemoveIndex(
+                        indexBuilder.Metadata.Properties
+                    );
                     context.StopProcessing();
                 }
             }
@@ -2757,8 +3231,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var index = entityBuilder.HasIndex(
-                new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+            var index =
+                entityBuilder.HasIndex(
+                    new List<string> { "OrderId" },
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2798,7 +3275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessIndexRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionIndex index,
-                IConventionContext<IConventionIndex> context)
+                IConventionContext<IConventionIndex> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -2816,7 +3294,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnIndexUniquenessChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnIndexUniquenessChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -2829,8 +3310,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var index = entityBuilder.HasIndex(
-                new List<string> { "OrderId" }, ConfigurationSource.Convention).Metadata;
+            var index =
+                entityBuilder.HasIndex(
+                    new List<string> { "OrderId" },
+                    ConfigurationSource.Convention
+                ).Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2895,7 +3379,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessIndexUniquenessChanged(
                 IConventionIndexBuilder indexBuilder,
-                IConventionContext<bool?> context)
+                IConventionContext<bool?> context
+            )
             {
                 Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -2913,7 +3398,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnIndexAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnIndexAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -2925,14 +3413,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.IndexAnnotationChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var indexBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+            var indexBuilder = builder
+                .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
                 .HasIndex(new[] { nameof(SpecialOrder.Name) }, ConfigurationSource.Convention);
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2952,7 +3443,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    indexBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2965,7 +3458,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(indexBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    indexBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -2996,7 +3491,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.NotNull(indexBuilder.Metadata.Builder);
 
@@ -3033,14 +3529,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                var result = entityBuilder.Property(typeof(int), shadowPropertyName, ConfigurationSource.Convention);
+                var result = entityBuilder.Property(
+                    typeof(int),
+                    shadowPropertyName,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
             else
             {
                 var result = entityBuilder.Metadata.AddProperty(
-                    shadowPropertyName, typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
+                    shadowPropertyName,
+                    typeof(int),
+                    ConfigurationSource.Convention,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -3060,13 +3564,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                var result = entityBuilder.Property(Order.OrderIdProperty, ConfigurationSource.Convention);
+                var result = entityBuilder.Property(
+                    Order.OrderIdProperty,
+                    ConfigurationSource.Convention
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
             else
             {
-                var result = ((IMutableEntityType)entityBuilder.Metadata).AddProperty(Order.OrderIdProperty);
+                var result = ((IMutableEntityType)entityBuilder.Metadata).AddProperty(
+                    Order.OrderIdProperty
+                );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -3097,7 +3606,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessPropertyAdded(
                 IConventionPropertyBuilder propertyBuilder,
-                IConventionContext<IConventionPropertyBuilder> context)
+                IConventionContext<IConventionPropertyBuilder> context
+            )
             {
                 Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -3105,7 +3615,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    propertyBuilder.Metadata.DeclaringEntityType.RemoveProperty(propertyBuilder.Metadata.Name);
+                    propertyBuilder.Metadata.DeclaringEntityType.RemoveProperty(
+                        propertyBuilder.Metadata.Name
+                    );
                     context.StopProcessing();
                 }
             }
@@ -3116,7 +3628,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnPropertyNullabilityChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnPropertyNullabilityChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -3131,7 +3646,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var scope = useScope ? model.DelayConventions() : null;
 
-            var propertyBuilder = model.Builder.Entity(typeof(Order), ConfigurationSource.Convention)
+            var propertyBuilder = model.Builder
+                .Entity(typeof(Order), ConfigurationSource.Convention)
                 .Property(typeof(string), "Name", ConfigurationSource.Convention);
             if (useBuilder)
             {
@@ -3236,7 +3752,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             public void ProcessPropertyNullabilityChanged(
                 IConventionPropertyBuilder propertyBuilder,
-                IConventionContext<bool?> context)
+                IConventionContext<bool?> context
+            )
             {
                 Calls.Add(propertyBuilder.Metadata.IsNullable);
 
@@ -3252,7 +3769,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnPropertyFieldChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnPropertyFieldChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -3265,19 +3785,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var propertyBuilder = entityBuilder.Property(Order.OrderIdProperty, ConfigurationSource.Convention);
+            var propertyBuilder = entityBuilder.Property(
+                Order.OrderIdProperty,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention));
+                Assert.NotNull(
+                    propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention)
+                );
             }
             else
             {
                 propertyBuilder.Metadata.SetField(
                     nameof(Order.IntField),
-                    ConfigurationSource.Convention);
+                    ConfigurationSource.Convention
+                );
             }
 
             if (useScope)
@@ -3293,13 +3819,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention));
+                Assert.NotNull(
+                    propertyBuilder.HasField(nameof(Order.IntField), ConfigurationSource.Convention)
+                );
             }
             else
             {
                 propertyBuilder.Metadata.SetField(
                     nameof(Order.IntField),
-                    ConfigurationSource.Convention);
+                    ConfigurationSource.Convention
+                );
             }
 
             Assert.Equal(new string[] { null }, convention1.Calls);
@@ -3308,13 +3837,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(propertyBuilder.HasField((string)null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    propertyBuilder.HasField((string)null, ConfigurationSource.Convention)
+                );
             }
             else
             {
-                propertyBuilder.Metadata.SetFieldInfo(
-                    null,
-                    ConfigurationSource.Convention);
+                propertyBuilder.Metadata.SetFieldInfo(null, ConfigurationSource.Convention);
             }
 
             Assert.Equal(new[] { null, nameof(Order.IntField) }, convention1.Calls);
@@ -3336,7 +3865,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionPropertyBuilder propertyBuilder,
                 FieldInfo newFieldInfo,
                 FieldInfo oldFieldInfo,
-                IConventionContext<FieldInfo> context)
+                IConventionContext<FieldInfo> context
+            )
             {
                 Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -3354,7 +3884,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(false, true)]
         [InlineData(true, true)]
         [ConditionalTheory]
-        public void OnPropertyAnnotationChanged_calls_conventions_in_order(bool useBuilder, bool useScope)
+        public void OnPropertyAnnotationChanged_calls_conventions_in_order(
+            bool useBuilder,
+            bool useScope
+        )
         {
             var conventions = new ConventionSet();
 
@@ -3366,14 +3899,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventions.PropertyAnnotationChangedConventions.Add(convention3);
 
             var builder = new InternalModelBuilder(new Model(conventions));
-            var propertyBuilder = builder.Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
+            var propertyBuilder = builder
+                .Entity(typeof(SpecialOrder), ConfigurationSource.Convention)
                 .Property(nameof(SpecialOrder.Name), ConfigurationSource.Convention);
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             if (useBuilder)
             {
-                Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -3393,7 +3929,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention));
+                Assert.NotNull(
+                    propertyBuilder.HasAnnotation("foo", "bar", ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -3406,7 +3944,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (useBuilder)
             {
-                Assert.NotNull(propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention));
+                Assert.NotNull(
+                    propertyBuilder.HasAnnotation("foo", null, ConfigurationSource.Convention)
+                );
             }
             else
             {
@@ -3417,7 +3957,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(new[] { "bar", null }, convention2.Calls);
             Assert.Empty(convention3.Calls);
 
-            propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] = PropertySaveBehavior.Ignore;
+            propertyBuilder.Metadata[CoreAnnotationNames.AfterSaveBehavior] =
+                PropertySaveBehavior.Ignore;
 
             Assert.Equal(new[] { "bar", null }, convention1.Calls);
         }
@@ -3437,7 +3978,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 string name,
                 IConventionAnnotation annotation,
                 IConventionAnnotation oldAnnotation,
-                IConventionContext<IConventionAnnotation> context)
+                IConventionContext<IConventionAnnotation> context
+            )
             {
                 Assert.True(propertyBuilder.Metadata.IsInModel);
 
@@ -3468,7 +4010,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var shadowPropertyName = "ShadowProperty";
             var property = entityBuilder.Metadata.AddProperty(
-                shadowPropertyName, typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
+                shadowPropertyName,
+                typeof(int),
+                ConfigurationSource.Convention,
+                ConfigurationSource.Convention
+            );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3508,7 +4054,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public void ProcessPropertyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionProperty property,
-                IConventionContext<IConventionProperty> context)
+                IConventionContext<IConventionProperty> context
+            )
             {
                 Assert.NotNull(entityTypeBuilder.Metadata.Builder);
 
@@ -3523,8 +4070,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class Order
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(Order).GetProperty(nameof(OrderId));
-            public static readonly PropertyInfo OrderDetailsProperty = typeof(Order).GetProperty(nameof(OrderDetails));
+            public static readonly PropertyInfo OrderIdProperty = typeof(Order).GetProperty(
+                nameof(OrderId)
+            );
+            public static readonly PropertyInfo OrderDetailsProperty = typeof(Order).GetProperty(
+                nameof(OrderDetails)
+            );
 
             public readonly int IntField = 1;
 
@@ -3543,7 +4094,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class OrderDetails
         {
-            public static readonly PropertyInfo OrderProperty = typeof(OrderDetails).GetProperty(nameof(Order));
+            public static readonly PropertyInfo OrderProperty = typeof(OrderDetails).GetProperty(
+                nameof(Order)
+            );
 
             public int Id { get; set; }
             public virtual Order Order { get; set; }
@@ -3551,8 +4104,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class OrderProduct
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(nameof(OrderId));
-            public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(nameof(ProductId));
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
+                nameof(OrderId)
+            );
+            public static readonly PropertyInfo ProductIdProperty =
+                typeof(OrderProduct).GetProperty(nameof(ProductId));
 
             public int OrderId { get; set; }
             public int ProductId { get; set; }

@@ -17,7 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="RequestLocalizationOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddRequestLocalization(this IServiceCollection services, Action<RequestLocalizationOptions> configureOptions)
+        public static IServiceCollection AddRequestLocalization(
+            this IServiceCollection services,
+            Action<RequestLocalizationOptions> configureOptions
+        )
         {
             if (services == null)
             {
@@ -37,7 +40,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="RequestLocalizationOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddRequestLocalization<TService>(this IServiceCollection services, Action<RequestLocalizationOptions, TService> configureOptions) where TService : class
+        public static IServiceCollection AddRequestLocalization<TService>(
+            this IServiceCollection services,
+            Action<RequestLocalizationOptions, TService> configureOptions
+        ) where TService : class
         {
             if (services == null)
             {

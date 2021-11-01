@@ -30,7 +30,10 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             try
             {
                 Guid dummy;
-                ProtectWithDpapi(new Secret((byte*)&dummy, sizeof(Guid)), protectToLocalMachine: false);
+                ProtectWithDpapi(
+                    new Secret((byte*)&dummy, sizeof(Guid)),
+                    protectToLocalMachine: false
+                );
                 return true;
             }
             catch
@@ -51,7 +54,13 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     secret.WriteSecretIntoBuffer(new ArraySegment<byte>(plaintextSecret));
                     fixed (byte* pbPurpose = _purpose)
                     {
-                        return ProtectWithDpapiCore(pbPlaintextSecret, (uint)plaintextSecret.Length, pbPurpose, (uint)_purpose.Length, fLocalMachine: protectToLocalMachine);
+                        return ProtectWithDpapiCore(
+                            pbPlaintextSecret,
+                            (uint)plaintextSecret.Length,
+                            pbPurpose,
+                            (uint)_purpose.Length,
+                            fLocalMachine: protectToLocalMachine
+                        );
                     }
                 }
                 finally
@@ -62,7 +71,13 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             }
         }
 
-        internal static byte[] ProtectWithDpapiCore(byte* pbSecret, uint cbSecret, byte* pbOptionalEntropy, uint cbOptionalEntropy, bool fLocalMachine = false)
+        internal static byte[] ProtectWithDpapiCore(
+            byte* pbSecret,
+            uint cbSecret,
+            byte* pbOptionalEntropy,
+            uint cbOptionalEntropy,
+            bool fLocalMachine = false
+        )
         {
             byte dummy; // provides a valid memory address if the secret or entropy has zero length
 
@@ -90,8 +105,10 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     pOptionalEntropy: &entropy,
                     pvReserved: IntPtr.Zero,
                     pPromptStruct: IntPtr.Zero,
-                    dwFlags: CRYPTPROTECT_UI_FORBIDDEN | ((fLocalMachine) ? CRYPTPROTECT_LOCAL_MACHINE : 0),
-                    pDataOut: out dataOut);
+                    dwFlags: CRYPTPROTECT_UI_FORBIDDEN
+                        | ((fLocalMachine) ? CRYPTPROTECT_LOCAL_MACHINE : 0),
+                    pDataOut: out dataOut
+                );
                 if (!success)
                 {
                     var errorCode = Marshal.GetLastWin32Error();
@@ -114,7 +131,10 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             }
         }
 
-        public static byte[] ProtectWithDpapiNG(ISecret secret, NCryptDescriptorHandle protectionDescriptorHandle)
+        public static byte[] ProtectWithDpapiNG(
+            ISecret secret,
+            NCryptDescriptorHandle protectionDescriptorHandle
+        )
         {
             Debug.Assert(secret != null);
             Debug.Assert(protectionDescriptorHandle != null);
@@ -130,7 +150,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     return ProtectWithDpapiNGCore(
                         protectionDescriptorHandle: protectionDescriptorHandle,
                         pbData: (pbPlaintextSecret != null) ? pbPlaintextSecret : &dummy,
-                        cbData: (uint)plaintextSecret.Length);
+                        cbData: (uint)plaintextSecret.Length
+                    );
                 }
                 finally
                 {
@@ -140,7 +161,11 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             }
         }
 
-        private static byte[] ProtectWithDpapiNGCore(NCryptDescriptorHandle protectionDescriptorHandle, byte* pbData, uint cbData)
+        private static byte[] ProtectWithDpapiNGCore(
+            NCryptDescriptorHandle protectionDescriptorHandle,
+            byte* pbData,
+            uint cbData
+        )
         {
             Debug.Assert(protectionDescriptorHandle != null);
             Debug.Assert(pbData != null);
@@ -156,7 +181,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 pMemPara: IntPtr.Zero,
                 hWnd: IntPtr.Zero,
                 ppbProtectedBlob: out protectedData,
-                pcbProtectedBlob: out cbProtectedData);
+                pcbProtectedBlob: out cbProtectedData
+            );
             UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
             CryptoUtil.AssertSafeHandleIsValid(protectedData);
 
@@ -177,7 +203,11 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         try
                         {
                             protectedData.DangerousAddRef(ref handleAcquired);
-                            UnsafeBufferUtil.BlockCopy(from: (void*)protectedData.DangerousGetHandle(), to: pbRetVal, byteCount: cbProtectedData);
+                            UnsafeBufferUtil.BlockCopy(
+                                from: (void*)protectedData.DangerousGetHandle(),
+                                to: pbRetVal,
+                                byteCount: cbProtectedData
+                            );
                         }
                         finally
                         {
@@ -200,12 +230,22 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
             {
                 fixed (byte* pbPurpose = _purpose)
                 {
-                    return UnprotectWithDpapiCore(pbProtectedSecret, (uint)protectedSecret.Length, pbPurpose, (uint)_purpose.Length);
+                    return UnprotectWithDpapiCore(
+                        pbProtectedSecret,
+                        (uint)protectedSecret.Length,
+                        pbPurpose,
+                        (uint)_purpose.Length
+                    );
                 }
             }
         }
 
-        internal static Secret UnprotectWithDpapiCore(byte* pbProtectedData, uint cbProtectedData, byte* pbOptionalEntropy, uint cbOptionalEntropy)
+        internal static Secret UnprotectWithDpapiCore(
+            byte* pbProtectedData,
+            uint cbProtectedData,
+            byte* pbOptionalEntropy,
+            uint cbOptionalEntropy
+        )
         {
             byte dummy; // provides a valid memory address if the secret or entropy has zero length
 
@@ -234,7 +274,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     pvReserved: IntPtr.Zero,
                     pPromptStruct: IntPtr.Zero,
                     dwFlags: CRYPTPROTECT_UI_FORBIDDEN,
-                    pDataOut: out dataOut);
+                    pDataOut: out dataOut
+                );
                 if (!success)
                 {
                     var errorCode = Marshal.GetLastWin32Error();
@@ -264,7 +305,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 byte dummy; // used to provide a valid memory address if protected data is zero-length
                 return UnprotectWithDpapiNGCore(
                     pbData: (pbProtectedData != null) ? pbProtectedData : &dummy,
-                    cbData: (uint)protectedData.Length);
+                    cbData: (uint)protectedData.Length
+                );
             }
         }
 
@@ -283,7 +325,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 pMemPara: IntPtr.Zero,
                 hWnd: IntPtr.Zero,
                 ppbData: out unencryptedPayloadHandle,
-                pcbData: out cbUnencryptedPayload);
+                pcbData: out cbUnencryptedPayload
+            );
             UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
             CryptoUtil.AssertSafeHandleIsValid(unencryptedPayloadHandle);
 
@@ -303,13 +346,19 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 try
                 {
                     unencryptedPayloadHandle.DangerousAddRef(ref handleAcquired);
-                    return new Secret((byte*)unencryptedPayloadHandle.DangerousGetHandle(), checked((int)cbUnencryptedPayload));
+                    return new Secret(
+                        (byte*)unencryptedPayloadHandle.DangerousGetHandle(),
+                        checked((int)cbUnencryptedPayload)
+                    );
                 }
                 finally
                 {
                     if (handleAcquired)
                     {
-                        UnsafeBufferUtil.SecureZeroMemory((byte*)unencryptedPayloadHandle.DangerousGetHandle(), cbUnencryptedPayload);
+                        UnsafeBufferUtil.SecureZeroMemory(
+                            (byte*)unencryptedPayloadHandle.DangerousGetHandle(),
+                            cbUnencryptedPayload
+                        );
                         unencryptedPayloadHandle.DangerousRelease();
                     }
                 }
@@ -325,7 +374,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 byte dummy; // used to provide a valid memory address if protected data is zero-length
                 return GetRuleFromDpapiNGProtectedPayloadCore(
                     pbData: (pbProtectedData != null) ? pbProtectedData : &dummy,
-                    cbData: (uint)protectedData.Length);
+                    cbData: (uint)protectedData.Length
+                );
             }
         }
 
@@ -345,7 +395,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 pMemPara: IntPtr.Zero,
                 hWnd: IntPtr.Zero,
                 ppbData: out unprotectedDataHandle,
-                pcbData: out cbUnprotectedData);
+                pcbData: out cbUnprotectedData
+            );
             UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
             CryptoUtil.AssertSafeHandleIsValid(descriptorHandle);
 

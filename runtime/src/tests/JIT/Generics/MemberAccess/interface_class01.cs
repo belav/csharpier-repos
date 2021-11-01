@@ -6,17 +6,9 @@ using System;
 
 interface IGen<T>
 {
-    T Property
-    {
-        get;
-        set;
-    }
+    T Property { get; set; }
 
-    T this[int i]
-    {
-        get;
-        set;
-    }
+    T this[int i] { get; set; }
 
     T Method(T t);
 
@@ -55,7 +47,6 @@ class Gen<T> : IGen<T>
     {
         return t;
     }
-
 }
 
 public class Test
@@ -129,6 +120,5 @@ public class Test
         }
 
         return ret;
-
     }
 }

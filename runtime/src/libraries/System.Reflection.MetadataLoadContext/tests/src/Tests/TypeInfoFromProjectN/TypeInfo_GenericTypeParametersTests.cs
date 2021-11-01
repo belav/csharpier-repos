@@ -13,7 +13,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters1()
         {
-            VerifyGenericTypeParameters(typeof(Test_I1).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(typeof(Test_I1).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
@@ -27,21 +27,29 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters3()
         {
-            VerifyGenericTypeParameters(typeof(Test_IG1<int>).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(typeof(Test_IG1<int>).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters4()
         {
-            VerifyGenericTypeParameters(typeof(Test_IG21<,>).Project(), new string[] { "TI", "VI" }, null);
+            VerifyGenericTypeParameters(
+                typeof(Test_IG21<, >).Project(),
+                new string[] { "TI", "VI" },
+                null
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters5()
         {
-            VerifyGenericTypeParameters(typeof(Test_IG21<int, string>).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(
+                typeof(Test_IG21<int, string>).Project(),
+                new string[] {  },
+                null
+            );
         }
 
         // For Structs
@@ -49,7 +57,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters6()
         {
-            VerifyGenericTypeParameters(typeof(Test_S1).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(typeof(Test_S1).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
@@ -63,85 +71,128 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters8()
         {
-            VerifyGenericTypeParameters(typeof(Test_SG1<int>).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(typeof(Test_SG1<int>).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters9()
         {
-            VerifyGenericTypeParameters(typeof(Test_SG21<,>).Project(), new string[] { "TS", "VS" }, null);
+            VerifyGenericTypeParameters(
+                typeof(Test_SG21<, >).Project(),
+                new string[] { "TS", "VS" },
+                null
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters10()
         {
-            VerifyGenericTypeParameters(typeof(Test_SG21<int, string>).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(
+                typeof(Test_SG21<int, string>).Project(),
+                new string[] {  },
+                null
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters11()
         {
-            VerifyGenericTypeParameters(typeof(Test_SI1).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SI1).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters12()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG1<>).Project(), new string[] { "TS" }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG1<>).Project(),
+                new string[] { "TS" },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters13()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG1<int>).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG1<int>).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters14()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG21<,>).Project(), new string[] { "TS", "VS" }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG21<, >).Project(),
+                new string[] { "TS", "VS" },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters15()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG21<int, string>).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG21<int, string>).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters16()
         {
-            VerifyGenericTypeParameters(typeof(Test_SI_Int1).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SI_Int1).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters17()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG_Int1<>).Project(), new string[] { "TS" }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG_Int1<>).Project(),
+                new string[] { "TS" },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters18()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG_Int1<string>).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG_Int1<string>).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
-
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters19()
         {
-            VerifyGenericTypeParameters(typeof(Test_SIG_Int_Int1).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_SIG_Int_Int1).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         //For classes
@@ -150,7 +201,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters20()
         {
-            VerifyGenericTypeParameters(typeof(Test_C1).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(typeof(Test_C1).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
@@ -164,91 +215,137 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters22()
         {
-            VerifyGenericTypeParameters(typeof(Test_CG1<int>).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(typeof(Test_CG1<int>).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters23()
         {
-            VerifyGenericTypeParameters(typeof(Test_CG21<,>).Project(), new string[] { "T", "V" }, null);
+            VerifyGenericTypeParameters(
+                typeof(Test_CG21<, >).Project(),
+                new string[] { "T", "V" },
+                null
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters24()
         {
-            VerifyGenericTypeParameters(typeof(Test_CG21<int, string>).Project(), new string[] { }, null);
+            VerifyGenericTypeParameters(
+                typeof(Test_CG21<int, string>).Project(),
+                new string[] {  },
+                null
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters25()
         {
-            VerifyGenericTypeParameters(typeof(Test_CI1).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CI1).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters26()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG1<>).Project(), new string[] { "T" }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG1<>).Project(),
+                new string[] { "T" },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters27()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG1<int>).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG1<int>).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters28()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG21<,>).Project(), new string[] { "T", "V" }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG21<, >).Project(),
+                new string[] { "T", "V" },
+                new string[] {  }
+            );
         }
-
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters29()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG21<int, string>).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG21<int, string>).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters30()
         {
-            VerifyGenericTypeParameters(typeof(Test_CI_Int1).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CI_Int1).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters31()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG_Int1<>).Project(), new string[] { "T" }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG_Int1<>).Project(),
+                new string[] { "T" },
+                new string[] {  }
+            );
         }
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters32()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG_Int1<string>).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG_Int1<string>).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
-
 
         // Verify Generic Arguments
         [Fact]
         public static void TestGenericParameters33()
         {
-            VerifyGenericTypeParameters(typeof(Test_CIG_Int_Int1).Project(), new string[] { }, new string[] { });
+            VerifyGenericTypeParameters(
+                typeof(Test_CIG_Int_Int1).Project(),
+                new string[] {  },
+                new string[] {  }
+            );
         }
 
         //private helper methods
 
-        private static void VerifyGenericTypeParameters(Type type, string[] expectedGTP, string[] expectedBaseGTP)
+        private static void VerifyGenericTypeParameters(
+            Type type,
+            string[] expectedGTP,
+            string[] expectedBaseGTP
+        )
         {
             //Fix to initialize Reflection
             string str = typeof(object).Project().Name;

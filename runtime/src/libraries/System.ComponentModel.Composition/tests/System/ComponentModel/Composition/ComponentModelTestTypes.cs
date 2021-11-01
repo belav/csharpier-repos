@@ -47,10 +47,7 @@ namespace System.ComponentModel.Composition
         [Export("{AssemblyCatalogResolver}FactoryValueType")]
         public int Value
         {
-            get
-            {
-                return 18;
-            }
+            get { return 18; }
         }
     }
 
@@ -59,10 +56,7 @@ namespace System.ComponentModel.Composition
         [Export("{AssemblyCatalogResolver}SingletonValueType")]
         public int Value
         {
-            get
-            {
-                return 17;
-            }
+            get { return 17; }
         }
     }
 }

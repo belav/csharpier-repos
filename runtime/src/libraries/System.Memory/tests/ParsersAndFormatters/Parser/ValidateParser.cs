@@ -15,8 +15,12 @@ namespace System.Buffers.Text.Tests
             {
                 // Add several bytes of junk after the real text to ensure the parser successfully ignores it. By adding lots of junk, this also
                 // exercises the "string is too long to rule out overflow based on length" paths of the integer parsers.
-                ParserTestData<T> testDataWithExtraCharacter = new ParserTestData<T>(testData.Text + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", testData.ExpectedValue, testData.FormatSymbol, expectedSuccess: true)
-                {
+                ParserTestData<T> testDataWithExtraCharacter = new ParserTestData<T>(
+                    testData.Text + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
+                    testData.ExpectedValue,
+                    testData.FormatSymbol,
+                    expectedSuccess: true
+                ) {
                     ExpectedBytesConsumed = testData.ExpectedBytesConsumed
                 };
                 ValidateParserHelper(testDataWithExtraCharacter);
@@ -26,11 +30,18 @@ namespace System.Buffers.Text.Tests
         private static void ValidateParserHelper<T>(ParserTestData<T> testData)
         {
             ReadOnlySpan<byte> utf8Text = testData.Text.ToUtf8Span();
-            bool success = TryParseUtf8<T>(utf8Text, out T value, out int bytesConsumed, testData.FormatSymbol);
+            bool success = TryParseUtf8<T>(
+                utf8Text,
+                out T value,
+                out int bytesConsumed,
+                testData.FormatSymbol
+            );
             if (testData.ExpectedSuccess)
             {
                 if (!success)
-                    throw new TestException($"This parse attempt {testData} was expected to succeed: instead, it failed.");
+                    throw new TestException(
+                        $"This parse attempt {testData} was expected to succeed: instead, it failed."
+                    );
 
                 T expected = testData.ExpectedValue;
                 T actual = value;
@@ -38,23 +49,33 @@ namespace System.Buffers.Text.Tests
                 {
                     string expectedString = expected.DisplayString();
                     string actualString = actual.DisplayString();
-                    throw new TestException($"This parse attempt {testData} succeeded as expected but parsed to the wrong value:\n  Expected: {expectedString}\n  Actual:   {actualString}\n");
+                    throw new TestException(
+                        $"This parse attempt {testData} succeeded as expected but parsed to the wrong value:\n  Expected: {expectedString}\n  Actual:   {actualString}\n"
+                    );
                 }
 
                 int expectedBytesConsumed = testData.ExpectedBytesConsumed;
                 if (expectedBytesConsumed != bytesConsumed)
-                    throw new TestException($"This parse attempt {testData} returned the correct value but the wrong `bytesConsumed` value:\n  Expected: {expectedBytesConsumed}\n  Actual:   {bytesConsumed}\n");
+                    throw new TestException(
+                        $"This parse attempt {testData} returned the correct value but the wrong `bytesConsumed` value:\n  Expected: {expectedBytesConsumed}\n  Actual:   {bytesConsumed}\n"
+                    );
             }
             else
             {
                 if (success)
-                    throw new TestException($"This parse attempt {testData} was expected to fail: instead, it succeeded and returned {value}.");
+                    throw new TestException(
+                        $"This parse attempt {testData} was expected to fail: instead, it succeeded and returned {value}."
+                    );
 
                 if (bytesConsumed != 0)
-                    throw new TestException($"This parse attempt {testData} failed as expected but did not set `bytesConsumed` to 0");
+                    throw new TestException(
+                        $"This parse attempt {testData} failed as expected but did not set `bytesConsumed` to 0"
+                    );
 
                 if (!(value.Equals(default(T))))
-                    throw new TestException($"This parse attempt {testData} failed as expected but did not set `value` to default(T)");
+                    throw new TestException(
+                        $"This parse attempt {testData} failed as expected but did not set `value` to default(T)"
+                    );
             }
         }
 
@@ -94,7 +115,12 @@ namespace System.Buffers.Text.Tests
                 if (expectedDateTimeOffset.Offset != actualDateTimeOffset.Offset)
                     return false;
 
-                if (!IsParsedValueEqual<DateTime>(expectedDateTimeOffset.DateTime, actualDateTimeOffset.DateTime))
+                if (
+                    !IsParsedValueEqual<DateTime>(
+                        expectedDateTimeOffset.DateTime,
+                        actualDateTimeOffset.DateTime
+                    )
+                )
                     return false;
 
                 return true;
@@ -105,7 +131,6 @@ namespace System.Buffers.Text.Tests
             {
                 double expectedDouble = (double)(object)expected;
                 double actualDouble = (double)(object)actual;
-
                 unsafe
                 {
                     if (*((ulong*)&expectedDouble) != *((ulong*)&actualDouble))
@@ -120,7 +145,6 @@ namespace System.Buffers.Text.Tests
             {
                 float expectedSingle = (float)(object)expected;
                 float actualSingle = (float)(object)actual;
-
                 unsafe
                 {
                     if (*((uint*)&expectedSingle) != *((uint*)&actualSingle))
@@ -133,7 +157,12 @@ namespace System.Buffers.Text.Tests
             return expected.Equals(actual);
         }
 
-        private static bool TryParseUtf8<T>(ReadOnlySpan<byte> text, out T value, out int bytesConsumed, char format)
+        private static bool TryParseUtf8<T>(
+            ReadOnlySpan<byte> text,
+            out T value,
+            out int bytesConsumed,
+            char format
+        )
         {
             if (typeof(T) == typeof(bool))
             {
@@ -235,7 +264,12 @@ namespace System.Buffers.Text.Tests
 
             if (typeof(T) == typeof(DateTimeOffset))
             {
-                bool success = Utf8Parser.TryParse(text, out DateTimeOffset v, out bytesConsumed, format);
+                bool success = Utf8Parser.TryParse(
+                    text,
+                    out DateTimeOffset v,
+                    out bytesConsumed,
+                    format
+                );
                 value = (T)(object)v;
                 return success;
             }
@@ -250,7 +284,13 @@ namespace System.Buffers.Text.Tests
             throw new Exception("Unsupported type " + typeof(T));
         }
 
-        private static bool TryParseUtf8(Type type, ReadOnlySpan<byte> text, out object value, out int bytesConsumed, char format)
+        private static bool TryParseUtf8(
+            Type type,
+            ReadOnlySpan<byte> text,
+            out object value,
+            out int bytesConsumed,
+            char format
+        )
         {
             if (type == typeof(bool))
             {
@@ -352,7 +392,12 @@ namespace System.Buffers.Text.Tests
 
             if (type == typeof(DateTimeOffset))
             {
-                bool success = Utf8Parser.TryParse(text, out DateTimeOffset v, out bytesConsumed, format);
+                bool success = Utf8Parser.TryParse(
+                    text,
+                    out DateTimeOffset v,
+                    out bytesConsumed,
+                    format
+                );
                 value = v;
                 return success;
             }

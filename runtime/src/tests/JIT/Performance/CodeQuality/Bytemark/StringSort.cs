@@ -63,9 +63,9 @@ public class StringSort : StringSortStruct
     }
     public override double Run()
     {
-        string[][] arraybase;   /* Base pointers of array */
-        long accumtime;         /* Accumulated time */
-        double iterations;      /* Iteration counter */
+        string[][] arraybase; /* Base pointers of array */
+        long accumtime; /* Accumulated time */
+        double iterations; /* Iteration counter */
 
         /*
          ** See if we need to do self adjustment code.
@@ -94,10 +94,11 @@ public class StringSort : StringSortStruct
                 ** minimum, then allocate for more arrays and
                 ** try again.
                 */
-                if (DoStringSortIteration(arraybase,
-                                            this.numarrays,
-                                            this.arraysize) > global.min_ticks)
-                    break;          /* We're ok...exit */
+                if (
+                    DoStringSortIteration(arraybase, this.numarrays, this.arraysize)
+                    > global.min_ticks
+                )
+                    break; /* We're ok...exit */
 
                 if (this.numarrays++ > global.NUMSTRARRAYS)
                 {
@@ -124,9 +125,7 @@ public class StringSort : StringSortStruct
 
         do
         {
-            accumtime += DoStringSortIteration(arraybase,
-                this.numarrays,
-                this.arraysize);
+            accumtime += DoStringSortIteration(arraybase, this.numarrays, this.arraysize);
             iterations += (double)this.numarrays;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
@@ -152,7 +151,7 @@ public class StringSort : StringSortStruct
 
     private static int DoStringSortIteration(string[][] arraybase, int numarrays, int arraysize)
     {
-        long elapsed;            /* Elapsed ticks */
+        long elapsed; /* Elapsed ticks */
         int i;
 
         /*
@@ -188,7 +187,13 @@ public class StringSort : StringSortStruct
             */
             if (StringOrdinalComparer.Compare(arraybase[0][i + 1], arraybase[0][i]) < 0)
             {
-                Console.Write("Error in StringSort!  arraybase[0][{0}]='{1}', arraybase[0][{2}]='{3}\n", i, arraybase[0][i], i + 1, arraybase[0][i + 1]);
+                Console.Write(
+                    "Error in StringSort!  arraybase[0][{0}]='{1}', arraybase[0][{2}]='{3}\n",
+                    i,
+                    arraybase[0][i],
+                    i + 1,
+                    arraybase[0][i + 1]
+                );
                 break;
             }
         }
@@ -196,7 +201,6 @@ public class StringSort : StringSortStruct
 
         return ((int)elapsed);
     }
-
 
     /********************
     ** LoadStringArray **
@@ -207,9 +211,11 @@ public class StringSort : StringSortStruct
     ** Note that since we're creating a number of arrays, this
     ** routine builds one array, then copies it into the others.
     */
-    private static void LoadStringArray(string[][] array,          /* String array */
-                                    int arraysize,                  /* Size of array */
-                                    int numarrays)                  /* # of arrays */
+    private static void LoadStringArray(
+        string[][] array, /* String array */
+        int arraysize, /* Size of array */
+        int numarrays
+    ) /* # of arrays */
     {
         /*
         ** Initialize random number generator.
@@ -257,7 +263,6 @@ public class StringSort : StringSortStruct
         }
     }
 
-
     /****************
     ** strheapsort **
     *****************
@@ -269,9 +274,11 @@ public class StringSort : StringSortStruct
     ** an unsigned long indicating the number of strings
     ** in the array.
     */
-    private static void StrHeapSort(string[] array,
-                                int bottom,             /* lower bound */
-                                int top)                /* upper bound */
+    private static void StrHeapSort(
+        string[] array,
+        int bottom, /* lower bound */
+        int top
+    ) /* upper bound */
     {
         int i;
         string temp;
@@ -291,12 +298,11 @@ public class StringSort : StringSortStruct
         {
             strsift(array, bottom, i);
             temp = array[0];
-            array[0] = array[i];            /* perform exchange */
+            array[0] = array[i]; /* perform exchange */
             array[i] = temp;
         }
         return;
     }
-
 
     /************
     ** strsift **
@@ -309,9 +315,7 @@ public class StringSort : StringSortStruct
     ** Sift the array within the bounds of those offsets (thus
     ** building a heap).
     */
-    private static void strsift(string[] array,
-                        int i,
-                        int j)
+    private static void strsift(string[] array, int i, int j)
     {
         int k;
         string temp;

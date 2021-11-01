@@ -10,7 +10,8 @@ namespace System.Net.Primitives.Functional.Tests
     public sealed class IPAddressParsing_String : IPAddressParsing
     {
         public override IPAddress Parse(string ipString) => IPAddress.Parse(ipString);
-        public override bool TryParse(string ipString, out IPAddress address) => IPAddress.TryParse(ipString, out address);
+        public override bool TryParse(string ipString, out IPAddress address) =>
+            IPAddress.TryParse(ipString, out address);
 
         [Fact]
         public void Parse_Null_Throws()
@@ -136,9 +137,11 @@ namespace System.Net.Primitives.Functional.Tests
         [MemberData(nameof(InvalidIpv4AddressesStandalone))]
         public void ParseIPv4_InvalidAddress_Failure(string address)
         {
-            ParseInvalidAddress(address, hasInnerSocketException: !PlatformDetection.IsNetFramework);
+            ParseInvalidAddress(
+                address,
+                hasInnerSocketException: !PlatformDetection.IsNetFramework
+            );
         }
-
 
         public static readonly object[][] Ipv4AddressesWithPort =
         {
@@ -157,7 +160,11 @@ namespace System.Net.Primitives.Functional.Tests
         {
             new object[] { "Fe08::1", "fe08::1" },
             new object[] { "0000:0000:0000:0000:0000:0000:0000:0000", "::" },
-            new object[] { "FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff" },
+            new object[]
+            {
+                "FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF",
+                "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+            },
             new object[] { "0:0:0:0:0:0:0:0", "::" },
             new object[] { "1:0:0:0:0:0:0:0", "1::" },
             new object[] { "0:1:0:0:0:0:0:0", "0:1::" },
@@ -316,15 +323,16 @@ namespace System.Net.Primitives.Functional.Tests
             // can be surrounded with brackets and still parse successfully.
             if (!address.StartsWith("["))
             {
-                Assert.Equal(
-                    expected.ToLowerInvariant(),
-                    Parse("[" + address + "]").ToString());
+                Assert.Equal(expected.ToLowerInvariant(), Parse("[" + address + "]").ToString());
             }
         }
 
         [Theory]
         [MemberData(nameof(ValidIpv6Addresses))]
-        public void TryParseIPv6_ValidAddress_RoundtripMatchesExpected(string address, string expected)
+        public void TryParseIPv6_ValidAddress_RoundtripMatchesExpected(
+            string address,
+            string expected
+        )
         {
             Assert.True(TryParse(address, out IPAddress ip));
 
@@ -340,21 +348,19 @@ namespace System.Net.Primitives.Functional.Tests
             // can be surrounded with brackets and still parse successfully.
             if (!address.StartsWith("["))
             {
-                Assert.Equal(
-                    expected.ToLowerInvariant(),
-                    Parse("[" + address + "]").ToString());
+                Assert.Equal(expected.ToLowerInvariant(), Parse("[" + address + "]").ToString());
             }
         }
 
         public static readonly object[][] ScopeIds =
         {
-            new object[] { "Fe08::1%123", 123},
-            new object[] { "Fe08::1%12345678", 12345678},
-            new object[] { "fe80::e8b0:63ff:fee8:6b3b%9", 9},
-            new object[] { "fe80::e8b0:63ff:fee8:6b3b", 0},
-            new object[] { "fe80::e8b0:63ff:fee8:6b3b%abcd0", 0},
-            new object[] { "::%unknownInterface", 0},
-            new object[] { "::%0", 0},
+            new object[] { "Fe08::1%123", 123 },
+            new object[] { "Fe08::1%12345678", 12345678 },
+            new object[] { "fe80::e8b0:63ff:fee8:6b3b%9", 9 },
+            new object[] { "fe80::e8b0:63ff:fee8:6b3b", 0 },
+            new object[] { "fe80::e8b0:63ff:fee8:6b3b%abcd0", 0 },
+            new object[] { "::%unknownInterface", 0 },
+            new object[] { "::%0", 0 },
         };
 
         [Theory]
@@ -435,7 +441,10 @@ namespace System.Net.Primitives.Functional.Tests
             foreach (object[] invalidIPv4AddressArray in InvalidIpv4Addresses)
             {
                 string invalidIPv4Address = (string)invalidIPv4AddressArray[0];
-                yield return new object[] { "3fff:ffff:ffff:ffff:ffff:ffff:ffff:" + invalidIPv4Address };
+                yield return new object[]
+                {
+                    "3fff:ffff:ffff:ffff:ffff:ffff:ffff:" + invalidIPv4Address
+                };
                 yield return new object[] { "::" + invalidIPv4Address }; // SIIT
                 yield return new object[] { "::FF:" + invalidIPv4Address }; // SIIT
                 yield return new object[] { "::5EFE:" + invalidIPv4Address }; // ISATAP
@@ -465,9 +474,14 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(InvalidIpv6AddressesNoInner))]
-        public void ParseIPv6_InvalidAddress_ThrowsFormatExceptionWithNoInnerExceptionInNetfx(string invalidAddress)
+        public void ParseIPv6_InvalidAddress_ThrowsFormatExceptionWithNoInnerExceptionInNetfx(
+            string invalidAddress
+        )
         {
-            ParseInvalidAddress(invalidAddress, hasInnerSocketException: !PlatformDetection.IsNetFramework);
+            ParseInvalidAddress(
+                invalidAddress,
+                hasInnerSocketException: !PlatformDetection.IsNetFramework
+            );
         }
 
         private void ParseInvalidAddress(string invalidAddress, bool hasInnerSocketException)

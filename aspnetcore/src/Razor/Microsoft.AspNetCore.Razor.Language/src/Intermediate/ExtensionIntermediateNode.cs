@@ -10,8 +10,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
     {
         public abstract void WriteNode(CodeTarget target, CodeRenderingContext context);
 
-        protected static void AcceptExtensionNode<TNode>(TNode node, IntermediateNodeVisitor visitor)
-            where TNode : ExtensionIntermediateNode
+        protected static void AcceptExtensionNode<TNode>(
+            TNode node,
+            IntermediateNodeVisitor visitor
+        ) where TNode : ExtensionIntermediateNode
         {
             var typedVisitor = visitor as IExtensionIntermediateNodeVisitor<TNode>;
             if (typedVisitor == null)
@@ -34,8 +36,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             var documentKind = context.DocumentKind ?? string.Empty;
             context.Diagnostics.Add(
                 RazorDiagnosticFactory.CreateCodeTarget_UnsupportedExtension(
-                    documentKind, 
-                    typeof(TDependency)));
+                    documentKind,
+                    typeof(TDependency)
+                )
+            );
         }
     }
 }

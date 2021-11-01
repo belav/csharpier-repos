@@ -26,87 +26,111 @@ namespace Microsoft.AspNetCore.Rewrite.Logging
         static RewriteMiddlewareLoggingExtensions()
         {
             _requestContinueResults = LoggerMessage.Define<string>(
-                            LogLevel.Debug,
-                            new EventId(1, "RequestContinueResults"),
-                            "Request is continuing in applying rules. Current url is {currentUrl}");
+                LogLevel.Debug,
+                new EventId(1, "RequestContinueResults"),
+                "Request is continuing in applying rules. Current url is {currentUrl}"
+            );
 
             _requestResponseComplete = LoggerMessage.Define<string, int>(
-                            LogLevel.Debug,
-                            new EventId(2, "RequestResponseComplete"),
-                            "Request is done processing. Location header '{Location}' with status code '{StatusCode}'.");
+                LogLevel.Debug,
+                new EventId(2, "RequestResponseComplete"),
+                "Request is done processing. Location header '{Location}' with status code '{StatusCode}'."
+            );
 
             _requestStopRules = LoggerMessage.Define<string>(
-                            LogLevel.Debug,
-                            new EventId(3, "RequestStopRules"),
-                            "Request is done applying rules. Url was rewritten to {rewrittenUrl}");
+                LogLevel.Debug,
+                new EventId(3, "RequestStopRules"),
+                "Request is done applying rules. Url was rewritten to {rewrittenUrl}"
+            );
 
             _urlRewriteNotMatchedRule = LoggerMessage.Define<string?>(
-                            LogLevel.Debug,
-                            new EventId(4, "UrlRewriteNotMatchedRule"),
-                            "Request did not match current rule '{Name}'.");
+                LogLevel.Debug,
+                new EventId(4, "UrlRewriteNotMatchedRule"),
+                "Request did not match current rule '{Name}'."
+            );
 
             _urlRewriteMatchedRule = LoggerMessage.Define<string?>(
-                            LogLevel.Debug,
-                            new EventId(5, "UrlRewriteMatchedRule"),
-                            "Request matched current UrlRewriteRule '{Name}'.");
+                LogLevel.Debug,
+                new EventId(5, "UrlRewriteMatchedRule"),
+                "Request matched current UrlRewriteRule '{Name}'."
+            );
 
             _modRewriteNotMatchedRule = LoggerMessage.Define(
-                            LogLevel.Debug,
-                            new EventId(6, "ModRewriteNotMatchedRule"),
-                            "Request matched current ModRewriteRule.");
+                LogLevel.Debug,
+                new EventId(6, "ModRewriteNotMatchedRule"),
+                "Request matched current ModRewriteRule."
+            );
 
             _modRewriteMatchedRule = LoggerMessage.Define(
-                            LogLevel.Debug,
-                            new EventId(7, "ModRewriteMatchedRule"),
-                            "Request matched current ModRewriteRule.");
+                LogLevel.Debug,
+                new EventId(7, "ModRewriteMatchedRule"),
+                "Request matched current ModRewriteRule."
+            );
 
             _redirectedToHttps = LoggerMessage.Define(
-                            LogLevel.Information,
-                            new EventId(8, "RedirectedToHttps"),
-                            "Request redirected to HTTPS");
+                LogLevel.Information,
+                new EventId(8, "RedirectedToHttps"),
+                "Request redirected to HTTPS"
+            );
 
             _redirectedRequest = LoggerMessage.Define<string>(
-                            LogLevel.Information,
-                            new EventId(9, "RedirectedRequest"),
-                            "Request was redirected to {redirectedUrl}");
+                LogLevel.Information,
+                new EventId(9, "RedirectedRequest"),
+                "Request was redirected to {redirectedUrl}"
+            );
 
             _rewrittenRequest = LoggerMessage.Define<string>(
-                            LogLevel.Information,
-                            new EventId(10, "RewritetenRequest"),
-                            "Request was rewritten to {rewrittenUrl}");
+                LogLevel.Information,
+                new EventId(10, "RewritetenRequest"),
+                "Request was rewritten to {rewrittenUrl}"
+            );
 
             _abortedRequest = LoggerMessage.Define<string>(
-                            LogLevel.Debug,
-                            new EventId(11, "AbortedRequest"),
-                            "Request to {requestedUrl} was aborted");
+                LogLevel.Debug,
+                new EventId(11, "AbortedRequest"),
+                "Request to {requestedUrl} was aborted"
+            );
 
             _customResponse = LoggerMessage.Define<string>(
-                            LogLevel.Debug,
-                            new EventId(12, "CustomResponse"),
-                            "Request to {requestedUrl} was ended");
+                LogLevel.Debug,
+                new EventId(12, "CustomResponse"),
+                "Request to {requestedUrl} was ended"
+            );
 
             _redirectedToWww = LoggerMessage.Define(
-                            LogLevel.Information,
-                            new EventId(13, "RedirectedToWww"),
-                            "Request redirected to www");
+                LogLevel.Information,
+                new EventId(13, "RedirectedToWww"),
+                "Request redirected to www"
+            );
 
             _redirectedToNonWww = LoggerMessage.Define(
-                            LogLevel.Information,
-                            new EventId(14, "RedirectedToNonWww"),
-                            "Request redirected to root domain from www subdomain");
+                LogLevel.Information,
+                new EventId(14, "RedirectedToNonWww"),
+                "Request redirected to root domain from www subdomain"
+            );
         }
 
-        public static void RewriteMiddlewareRequestContinueResults(this ILogger logger, string currentUrl)
+        public static void RewriteMiddlewareRequestContinueResults(
+            this ILogger logger,
+            string currentUrl
+        )
         {
             _requestContinueResults(logger, currentUrl, null);
         }
 
-        public static void RewriteMiddlewareRequestResponseComplete(this ILogger logger, string location, int statusCode)
+        public static void RewriteMiddlewareRequestResponseComplete(
+            this ILogger logger,
+            string location,
+            int statusCode
+        )
         {
             _requestResponseComplete(logger, location, statusCode, null);
         }
 
-        public static void RewriteMiddlewareRequestStopRules(this ILogger logger, string rewrittenUrl)
+        public static void RewriteMiddlewareRequestStopRules(
+            this ILogger logger,
+            string rewrittenUrl
+        )
         {
             _requestStopRules(logger, rewrittenUrl, null);
         }

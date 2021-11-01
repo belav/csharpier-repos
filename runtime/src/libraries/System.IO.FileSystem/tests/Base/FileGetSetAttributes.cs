@@ -90,9 +90,7 @@ namespace System.IO.Tests
             Assert.Equal(FileAttributes.Normal, GetAttributes(path));
         }
 
-        [Theory,
-            InlineData(":bar"),
-            InlineData(":bar:$DATA")]
+        [Theory, InlineData(":bar"), InlineData(":bar:$DATA")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GettingAndSettingAttributes_AlternateDataStream_Windows(string streamName)
         {

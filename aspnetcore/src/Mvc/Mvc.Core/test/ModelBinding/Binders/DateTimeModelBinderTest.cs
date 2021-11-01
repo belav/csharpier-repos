@@ -72,7 +72,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Assert.Null(bindingContext.Result.Model);
 
             var error = Assert.Single(bindingContext.ModelState["theModelName"].Errors);
-            Assert.Equal("The value '2020-08-not-a-date' is not valid.", error.ErrorMessage, StringComparer.Ordinal);
+            Assert.Equal(
+                "The value '2020-08-not-a-date' is not valid.",
+                error.ErrorMessage,
+                StringComparer.Ordinal
+            );
             Assert.Null(error.Exception);
         }
 
@@ -109,15 +113,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [Theory]
         [InlineData("")]
         [InlineData(" \t \r\n ")]
-        public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(string value)
+        public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(
+            string value
+        )
         {
             // Arrange
             var message = $"The value '{value}' is invalid.";
             var bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value },
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value }, };
             var binder = GetBinder();
 
             // Act
@@ -135,14 +138,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [Theory]
         [InlineData("")]
         [InlineData(" \t \r\n ")]
-        public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(string value)
+        public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(
+            string value
+        )
         {
             // Arrange
             var bindingContext = GetBindingContext(typeof(DateTime?));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
             var binder = GetBinder();
 
             // Act
@@ -184,7 +186,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var bindingContext = GetBindingContext();
-            var expected = DateTime.Parse("2019-06-14T02:30:04.0000000Z", CultureInfo.InvariantCulture);
+            var expected = DateTime.Parse(
+                "2019-06-14T02:30:04.0000000Z",
+                CultureInfo.InvariantCulture
+            );
             bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
             {
                 { "theModelName", "2019-06-14T02:30:04.0000000Z" }
@@ -204,7 +209,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         private IModelBinder GetBinder(DateTimeStyles? dateTimeStyles = null)
         {
-            return new DateTimeModelBinder(dateTimeStyles ?? DateTimeModelBinderProvider.SupportedStyles, NullLoggerFactory.Instance);
+            return new DateTimeModelBinder(
+                dateTimeStyles ?? DateTimeModelBinderProvider.SupportedStyles,
+                NullLoggerFactory.Instance
+            );
         }
 
         private static DefaultModelBindingContext GetBindingContext(Type modelType = null)

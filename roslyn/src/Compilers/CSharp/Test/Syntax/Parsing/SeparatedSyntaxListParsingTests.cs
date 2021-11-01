@@ -15,9 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class SeparatedSyntaxListParsingTests : ParsingTests
     {
-        public SeparatedSyntaxListParsingTests(ITestOutputHelper output) : base(output)
-        {
-        }
+        public SeparatedSyntaxListParsingTests(ITestOutputHelper output) : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
@@ -27,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeArguments()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     A<> a1;
@@ -39,7 +38,8 @@ class C
     A<,T> a7;
     A<T U,,> a8;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -294,7 +294,8 @@ class C
         [Fact]
         public void TypeArguments2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     new C<>();
@@ -306,7 +307,9 @@ class C
 }
 
 class M<,> { }
-", options: TestOptions.Regular);
+",
+                options: TestOptions.Regular
+            );
 
             CheckTypeArguments2();
         }
@@ -614,7 +617,8 @@ class M<,> { }
         [Fact]
         public void TypeArguments2WithCSharp6()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     new C<>();
@@ -626,7 +630,9 @@ class C
 }
 
 class M<,> { }
-", TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6));
+",
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            );
 
             CheckTypeArguments2();
         }
@@ -634,7 +640,8 @@ class M<,> { }
         [Fact]
         public void ArrayRankSpecifiers()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     object a1 = new int[];
@@ -646,7 +653,8 @@ class C
     object a1 = new int[,1];
     object a1 = new int[1 1 ,,];
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {

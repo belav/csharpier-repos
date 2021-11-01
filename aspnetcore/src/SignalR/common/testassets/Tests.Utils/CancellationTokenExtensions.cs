@@ -11,10 +11,13 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public static Task WaitForCancellationAsync(this CancellationToken token)
         {
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            token.Register((t) =>
-            {
-                ((TaskCompletionSource)t).SetResult();
-            }, tcs);
+            token.Register(
+                (t) =>
+                {
+                    ((TaskCompletionSource)t).SetResult();
+                },
+                tcs
+            );
             return tcs.Task;
         }
     }

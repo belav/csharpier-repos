@@ -23,8 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddCookie(this AuthenticationBuilder builder)
-            => builder.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
+        public static AuthenticationBuilder AddCookie(this AuthenticationBuilder builder) =>
+            builder.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 
         /// <summary>
         /// Adds cookie authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
@@ -35,8 +35,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
         /// <param name="authenticationScheme">The authentication scheme.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddCookie(this AuthenticationBuilder builder, string authenticationScheme)
-            => builder.AddCookie(authenticationScheme, configureOptions: null!);
+        public static AuthenticationBuilder AddCookie(
+            this AuthenticationBuilder builder,
+            string authenticationScheme
+        ) => builder.AddCookie(authenticationScheme, configureOptions: null!);
 
         /// <summary>
         /// Adds cookie authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
@@ -48,8 +50,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
         /// <param name="configureOptions">A delegate to configure <see cref="CookieAuthenticationOptions"/>.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddCookie(this AuthenticationBuilder builder, Action<CookieAuthenticationOptions> configureOptions)
-            => builder.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, configureOptions);
+        public static AuthenticationBuilder AddCookie(
+            this AuthenticationBuilder builder,
+            Action<CookieAuthenticationOptions> configureOptions
+        ) => builder.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, configureOptions);
 
         /// <summary>
         /// Adds cookie authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
@@ -61,8 +65,16 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="authenticationScheme">The authentication scheme.</param>
         /// <param name="configureOptions">A delegate to configure <see cref="CookieAuthenticationOptions"/>.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddCookie(this AuthenticationBuilder builder, string authenticationScheme, Action<CookieAuthenticationOptions> configureOptions)
-            => builder.AddCookie(authenticationScheme, displayName: null, configureOptions: configureOptions);
+        public static AuthenticationBuilder AddCookie(
+            this AuthenticationBuilder builder,
+            string authenticationScheme,
+            Action<CookieAuthenticationOptions> configureOptions
+        ) =>
+            builder.AddCookie(
+                authenticationScheme,
+                displayName: null,
+                configureOptions: configureOptions
+            );
 
         /// <summary>
         /// Adds cookie authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
@@ -75,11 +87,30 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="displayName">A display name for the authentication handler.</param>
         /// <param name="configureOptions">A delegate to configure <see cref="CookieAuthenticationOptions"/>.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddCookie(this AuthenticationBuilder builder, string authenticationScheme, string? displayName, Action<CookieAuthenticationOptions> configureOptions)
+        public static AuthenticationBuilder AddCookie(
+            this AuthenticationBuilder builder,
+            string authenticationScheme,
+            string? displayName,
+            Action<CookieAuthenticationOptions> configureOptions
+        )
         {
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<CookieAuthenticationOptions>, PostConfigureCookieAuthenticationOptions>());
-            builder.Services.AddOptions<CookieAuthenticationOptions>(authenticationScheme).Validate(o => o.Cookie.Expiration == null, "Cookie.Expiration is ignored, use ExpireTimeSpan instead.");
-            return builder.AddScheme<CookieAuthenticationOptions, CookieAuthenticationHandler>(authenticationScheme, displayName, configureOptions);
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<CookieAuthenticationOptions>,
+                    PostConfigureCookieAuthenticationOptions
+                >()
+            );
+            builder.Services
+                .AddOptions<CookieAuthenticationOptions>(authenticationScheme)
+                .Validate(
+                    o => o.Cookie.Expiration == null,
+                    "Cookie.Expiration is ignored, use ExpireTimeSpan instead."
+                );
+            return builder.AddScheme<CookieAuthenticationOptions, CookieAuthenticationHandler>(
+                authenticationScheme,
+                displayName,
+                configureOptions
+            );
         }
     }
 }

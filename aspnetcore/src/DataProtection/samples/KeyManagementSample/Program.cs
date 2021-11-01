@@ -40,7 +40,9 @@ namespace KeyManagementSample
                 Console.WriteLine($"The key ring contains {allKeys.Count} key(s).");
                 foreach (var key in allKeys)
                 {
-                    Console.WriteLine($"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}");
+                    Console.WriteLine(
+                        $"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}"
+                    );
                 }
 
                 // revoke all keys in the key ring
@@ -50,7 +52,8 @@ namespace KeyManagementSample
                 // add a new key to the key ring with immediate activation and a 1-month expiration
                 keyManager.CreateNewKey(
                     activationDate: DateTimeOffset.Now,
-                    expirationDate: DateTimeOffset.Now.AddMonths(1));
+                    expirationDate: DateTimeOffset.Now.AddMonths(1)
+                );
                 Console.WriteLine("Added a new key.");
 
                 // list all keys in the key ring
@@ -58,7 +61,9 @@ namespace KeyManagementSample
                 Console.WriteLine($"The key ring contains {allKeys.Count} key(s).");
                 foreach (var key in allKeys)
                 {
-                    Console.WriteLine($"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}");
+                    Console.WriteLine(
+                        $"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}"
+                    );
                 }
             }
         }

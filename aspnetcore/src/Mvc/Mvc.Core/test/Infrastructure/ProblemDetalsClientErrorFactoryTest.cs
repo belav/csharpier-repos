@@ -15,13 +15,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             // Arrange
             var clientError = new UnsupportedMediaTypeResult();
-            var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-            {
-                ClientErrorMapping =
-                {
-                    [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-            }));
+            var problemDetailsFactory = new DefaultProblemDetailsFactory(
+                Options.Create(
+                    new ApiBehaviorOptions
+                    {
+                        ClientErrorMapping =
+                        {
+                            [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                        },
+                    }
+                )
+            );
             var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
             // Act
@@ -29,7 +33,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             // Assert
             var objectResult = Assert.IsType<ObjectResult>(result);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                objectResult.ContentTypes
+            );
             var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
             Assert.Equal(415, problemDetails.Status);
             Assert.Null(problemDetails.Title);
@@ -42,13 +49,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             // Arrange
             var clientError = new UnsupportedMediaTypeResult();
-            var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-            {
-                ClientErrorMapping =
-                {
-                    [415] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-            }));
+            var problemDetailsFactory = new DefaultProblemDetailsFactory(
+                Options.Create(
+                    new ApiBehaviorOptions
+                    {
+                        ClientErrorMapping =
+                        {
+                            [415] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                        },
+                    }
+                )
+            );
             var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
             // Act
@@ -56,7 +67,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             // Assert
             var objectResult = Assert.IsType<ObjectResult>(result);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                objectResult.ContentTypes
+            );
             var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
             Assert.Equal(415, problemDetails.Status);
             Assert.Equal("Some link", problemDetails.Type);
@@ -72,13 +86,21 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             using (new ActivityReplacer())
             {
                 var clientError = new UnsupportedMediaTypeResult();
-                var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-                {
-                    ClientErrorMapping =
-                {
-                    [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-                }));
+                var problemDetailsFactory = new DefaultProblemDetailsFactory(
+                    Options.Create(
+                        new ApiBehaviorOptions
+                        {
+                            ClientErrorMapping =
+                            {
+                                [405] = new ClientErrorData
+                                {
+                                    Link = "Some link",
+                                    Title = "Summary"
+                                },
+                            },
+                        }
+                    )
+                );
                 var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
                 // Act
@@ -86,7 +108,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
                 // Assert
                 var objectResult = Assert.IsType<ObjectResult>(result);
-                Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+                Assert.Equal(
+                    new[] { "application/problem+json", "application/problem+xml" },
+                    objectResult.ContentTypes
+                );
                 var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
 
                 Assert.Equal(Activity.Current.Id, problemDetails.Extensions["traceId"]);
@@ -98,13 +123,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             // Arrange
             var clientError = new UnsupportedMediaTypeResult();
-            var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-            {
-                ClientErrorMapping =
-                {
-                    [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-            }));
+            var problemDetailsFactory = new DefaultProblemDetailsFactory(
+                Options.Create(
+                    new ApiBehaviorOptions
+                    {
+                        ClientErrorMapping =
+                        {
+                            [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                        },
+                    }
+                )
+            );
             var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
             // Act
@@ -112,7 +141,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             // Assert
             var objectResult = Assert.IsType<ObjectResult>(result);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                objectResult.ContentTypes
+            );
             var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
 
             Assert.Equal("42", problemDetails.Extensions["traceId"]);
@@ -122,10 +154,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             return new ActionContext
             {
-                HttpContext = new DefaultHttpContext
-                {
-                    TraceIdentifier = "42",
-                }
+                HttpContext = new DefaultHttpContext { TraceIdentifier = "42", }
             };
         }
     }

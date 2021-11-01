@@ -20,15 +20,8 @@ public class AppleAppBuilderTask : Task
     [Required]
     public string TargetOS
     {
-        get
-        {
-            return targetOS;
-        }
-
-        set
-        {
-            targetOS = value.ToLower();
-        }
+        get { return targetOS; }
+        set { targetOS = value.ToLower(); }
     }
 
     /// <summary>
@@ -148,7 +141,9 @@ public class AppleAppBuilderTask : Task
 
         if (!File.Exists(Path.Combine(AppDir, MainLibraryFileName)))
         {
-            throw new ArgumentException($"MainLibraryFileName='{MainLibraryFileName}' was not found in AppDir='{AppDir}'");
+            throw new ArgumentException(
+                $"MainLibraryFileName='{MainLibraryFileName}' was not found in AppDir='{AppDir}'"
+            );
         }
 
         if (ProjectName.Contains(" "))
@@ -190,7 +185,9 @@ public class AppleAppBuilderTask : Task
 
         if (ForceInterpreter && ForceAOT)
         {
-            throw new InvalidOperationException("Interpreter and AOT cannot be enabled at the same time");
+            throw new InvalidOperationException(
+                "Interpreter and AOT cannot be enabled at the same time"
+            );
         }
 
         if (GenerateXcodeProject)
@@ -198,19 +195,39 @@ public class AppleAppBuilderTask : Task
             Xcode generator = new Xcode(TargetOS, Arch);
             generator.EnableRuntimeLogging = EnableRuntimeLogging;
 
-            XcodeProjectPath = generator.GenerateXCode(ProjectName, MainLibraryFileName, assemblerFiles,
-                AppDir, binDir, MonoRuntimeHeaders, !isDevice, UseConsoleUITemplate, ForceAOT, ForceInterpreter, InvariantGlobalization, Optimized, NativeMainSource);
+            XcodeProjectPath = generator.GenerateXCode(
+                ProjectName,
+                MainLibraryFileName,
+                assemblerFiles,
+                AppDir,
+                binDir,
+                MonoRuntimeHeaders,
+                !isDevice,
+                UseConsoleUITemplate,
+                ForceAOT,
+                ForceInterpreter,
+                InvariantGlobalization,
+                Optimized,
+                NativeMainSource
+            );
 
             if (BuildAppBundle)
             {
                 if (isDevice && string.IsNullOrEmpty(DevTeamProvisioning))
                 {
                     // DevTeamProvisioning shouldn't be empty for arm64 builds
-                    Utils.LogInfo("DevTeamProvisioning is not set, BuildAppBundle step is skipped.");
+                    Utils.LogInfo(
+                        "DevTeamProvisioning is not set, BuildAppBundle step is skipped."
+                    );
                 }
                 else
                 {
-                    AppBundlePath = generator.BuildAppBundle(XcodeProjectPath, Arch, Optimized, DevTeamProvisioning);
+                    AppBundlePath = generator.BuildAppBundle(
+                        XcodeProjectPath,
+                        Arch,
+                        Optimized,
+                        DevTeamProvisioning
+                    );
                 }
             }
         }

@@ -19,21 +19,63 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteDateTimeAddTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _addMilliseconds
-            = typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMilliseconds), new[] { typeof(double) });
+        private static readonly MethodInfo _addMilliseconds =
+            typeof(DateTime).GetRequiredRuntimeMethod(
+                nameof(DateTime.AddMilliseconds),
+                new[] { typeof(double) }
+            );
 
-        private static readonly MethodInfo _addTicks
-            = typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddTicks), new[] { typeof(long) });
+        private static readonly MethodInfo _addTicks = typeof(DateTime).GetRequiredRuntimeMethod(
+            nameof(DateTime.AddTicks),
+            new[] { typeof(long) }
+        );
 
-        private readonly Dictionary<MethodInfo, string> _methodInfoToUnitSuffix = new()
-        {
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddYears), new[] { typeof(int) }), " years" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMonths), new[] { typeof(int) }), " months" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddDays), new[] { typeof(double) }), " days" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddHours), new[] { typeof(double) }), " hours" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMinutes), new[] { typeof(double) }), " minutes" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddSeconds), new[] { typeof(double) }), " seconds" }
-        };
+        private readonly Dictionary<MethodInfo, string> _methodInfoToUnitSuffix =
+            new()
+            {
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddYears),
+                        new[] { typeof(int) }
+                    ),
+                    " years"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddMonths),
+                        new[] { typeof(int) }
+                    ),
+                    " months"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddDays),
+                        new[] { typeof(double) }
+                    ),
+                    " days"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddHours),
+                        new[] { typeof(double) }
+                    ),
+                    " hours"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddMinutes),
+                        new[] { typeof(double) }
+                    ),
+                    " minutes"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddSeconds),
+                        new[] { typeof(double) }
+                    ),
+                    " seconds"
+                }
+            };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -58,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -71,9 +114,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _sqlExpressionFactory.Convert(
                         _sqlExpressionFactory.Divide(
                             arguments[0],
-                            _sqlExpressionFactory.Constant(1000.0)),
-                        typeof(string)),
-                    _sqlExpressionFactory.Constant(" seconds"));
+                            _sqlExpressionFactory.Constant(1000.0)
+                        ),
+                        typeof(string)
+                    ),
+                    _sqlExpressionFactory.Constant(" seconds")
+                );
             }
             else if (_addTicks.Equals(method))
             {
@@ -81,15 +127,19 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _sqlExpressionFactory.Convert(
                         _sqlExpressionFactory.Divide(
                             arguments[0],
-                            _sqlExpressionFactory.Constant((double)TimeSpan.TicksPerDay)),
-                        typeof(string)),
-                    _sqlExpressionFactory.Constant(" seconds"));
+                            _sqlExpressionFactory.Constant((double)TimeSpan.TicksPerDay)
+                        ),
+                        typeof(string)
+                    ),
+                    _sqlExpressionFactory.Constant(" seconds")
+                );
             }
             else if (_methodInfoToUnitSuffix.TryGetValue(method, out var unitSuffix))
             {
                 modifier = _sqlExpressionFactory.Add(
                     _sqlExpressionFactory.Convert(arguments[0], typeof(string)),
-                    _sqlExpressionFactory.Constant(unitSuffix));
+                    _sqlExpressionFactory.Constant(unitSuffix)
+                );
             }
 
             if (modifier != null)
@@ -107,17 +157,20 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     method.ReturnType,
                                     "%Y-%m-%d %H:%M:%f",
                                     instance!,
-                                    new[] { modifier }),
+                                    new[] { modifier }
+                                ),
                                 _sqlExpressionFactory.Constant("0")
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true, false },
-                            method.ReturnType),
+                            method.ReturnType
+                        ),
                         _sqlExpressionFactory.Constant(".")
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, false },
-                    method.ReturnType);
+                    method.ReturnType
+                );
             }
 
             return null;

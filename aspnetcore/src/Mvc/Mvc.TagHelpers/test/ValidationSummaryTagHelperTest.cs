@@ -33,17 +33,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 var modelState = new ModelStateDictionary();
                 SetValidModelState(modelState);
 
-                return new TheoryData<ModelStateDictionary>
-                {
-                    emptyModelState,
-                    modelState,
-                };
+                return new TheoryData<ModelStateDictionary> { emptyModelState, modelState, };
             }
         }
 
         [Theory]
         [MemberData(nameof(ProcessAsync_GeneratesExpectedOutput_WithNoErrorsData))]
-        public async Task ProcessAsync_GeneratesExpectedOutput_WithNoErrors(ModelStateDictionary modelState)
+        public async Task ProcessAsync_GeneratesExpectedOutput_WithNoErrors(
+            ModelStateDictionary modelState
+        )
         {
             // Arrange
             var expectedTagName = "not-div";
@@ -61,23 +59,27 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "not-div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var output = new TagHelperOutput(
                 expectedTagName,
-                attributes: new TagHelperAttributeList
-                {
-                    { "class", "form-control" }
-                },
+                attributes: new TagHelperAttributeList { { "class", "form-control" } },
                 getChildContentAsync: (useCachedResult, encoder) =>
                 {
                     throw new InvalidOperationException("getChildContentAsync called unexpectedly");
-                });
+                }
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent("Custom Content");
 
             var model = new Model();
-            var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider, modelState);
+            var viewContext = TestableHtmlGenerator.GetViewContext(
+                model,
+                htmlGenerator,
+                metadataProvider,
+                modelState
+            );
             var validationSummaryTagHelper = new ValidationSummaryTagHelper(htmlGenerator)
             {
                 ValidationSummary = ValidationSummary.All,
@@ -88,19 +90,25 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             await validationSummaryTagHelper.ProcessAsync(tagHelperContext, output);
 
             // Assert
-            Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                output.Attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
             Assert.Equal(expectedPreContent, output.PreContent.GetContent());
             Assert.Equal(expectedContent, output.Content.GetContent());
             Assert.Equal(
                 $"Custom Content<ul><li style=\"display:none\"></li>{Environment.NewLine}</ul>",
-                output.PostContent.GetContent());
+                output.PostContent.GetContent()
+            );
             Assert.Equal(expectedTagName, output.TagName);
         }
 
         [Theory]
         [MemberData(nameof(ProcessAsync_GeneratesExpectedOutput_WithNoErrorsData))]
         public async Task ProcessAsync_SuppressesOutput_IfClientSideValidationDisabled_WithNoErrorsData(
-            ModelStateDictionary modelStateDictionary)
+            ModelStateDictionary modelStateDictionary
+        )
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
@@ -119,14 +127,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 (useCachedResult, encoder) =>
                 {
-                    throw new InvalidOperationException("getChildContentAsync called unexpectedly.");
-                });
+                    throw new InvalidOperationException(
+                        "getChildContentAsync called unexpectedly."
+                    );
+                }
+            );
 
             var context = new TagHelperContext(
                 tagName: "div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(context, output);
@@ -137,7 +149,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Assert.Empty(HtmlContentUtilities.HtmlContentToString(output));
         }
 
-        public static TheoryData<string, ModelStateDictionary> ProcessAsync_SuppressesOutput_IfModelOnlyWithNoModelErrorData
+        public static TheoryData<
+            string,
+            ModelStateDictionary
+        > ProcessAsync_SuppressesOutput_IfModelOnlyWithNoModelErrorData
         {
             get
             {
@@ -148,7 +163,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
                 var invalidModelState = new ModelStateDictionary();
                 SetValidModelState(invalidModelState);
-                invalidModelState.AddModelError($"{nameof(Model.Strings)}[1]", "This value is invalid.");
+                invalidModelState.AddModelError(
+                    $"{nameof(Model.Strings)}[1]",
+                    "This value is invalid."
+                );
 
                 return new TheoryData<string, ModelStateDictionary>
                 {
@@ -168,7 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [MemberData(nameof(ProcessAsync_SuppressesOutput_IfModelOnlyWithNoModelErrorData))]
         public async Task ProcessAsync_SuppressesOutput_IfModelOnly_WithNoModelError(
             string prefix,
-            ModelStateDictionary modelStateDictionary)
+            ModelStateDictionary modelStateDictionary
+        )
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
@@ -187,14 +206,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 (useCachedResult, encoder) =>
                 {
-                    throw new InvalidOperationException("getChildContentAsync called unexpectedly.");
-                });
+                    throw new InvalidOperationException(
+                        "getChildContentAsync called unexpectedly."
+                    );
+                }
+            );
 
             var context = new TagHelperContext(
                 tagName: "div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(context, output);
@@ -208,7 +231,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [Theory]
         [InlineData(ValidationSummary.All)]
         [InlineData(ValidationSummary.ModelOnly)]
-        public async Task ProcessAsync_GeneratesExpectedOutput_WithModelError(ValidationSummary validationSummary)
+        public async Task ProcessAsync_GeneratesExpectedOutput_WithModelError(
+            ValidationSummary validationSummary
+        )
         {
             // Arrange
             var expectedError = "I am an error.";
@@ -227,25 +252,28 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "not-div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var output = new TagHelperOutput(
                 expectedTagName,
-                attributes: new TagHelperAttributeList
-                {
-                    { "class", "form-control" }
-                },
+                attributes: new TagHelperAttributeList { { "class", "form-control" } },
                 getChildContentAsync: (useCachedResult, encoder) =>
                 {
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent("Custom Content");
 
             var model = new Model();
-            var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+            var viewContext = TestableHtmlGenerator.GetViewContext(
+                model,
+                htmlGenerator,
+                metadataProvider
+            );
             validationSummaryTagHelper.ViewContext = viewContext;
 
             var modelState = viewContext.ModelState;
@@ -261,13 +289,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Assert.Equal(
                 new TagHelperAttribute("class", "form-control validation-summary-errors"),
                 attribute,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
 
             Assert.Equal(expectedPreContent, output.PreContent.GetContent());
             Assert.Equal(expectedContent, output.Content.GetContent());
             Assert.Equal(
                 $"Custom Content<ul><li>{expectedError}</li>{Environment.NewLine}</ul>",
-                output.PostContent.GetContent());
+                output.PostContent.GetContent()
+            );
             Assert.Equal(expectedTagName, output.TagName);
         }
 
@@ -297,43 +327,57 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "not-div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var output = new TagHelperOutput(
                 expectedTagName,
-                attributes: new TagHelperAttributeList
-                {
-                    { "class", "form-control" }
-                },
+                attributes: new TagHelperAttributeList { { "class", "form-control" } },
                 getChildContentAsync: (useCachedResult, encoder) =>
                 {
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent("Custom Content");
 
             var model = new Model();
-            var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+            var viewContext = TestableHtmlGenerator.GetViewContext(
+                model,
+                htmlGenerator,
+                metadataProvider
+            );
             validationSummaryTagHelper.ViewContext = viewContext;
 
             var modelState = viewContext.ModelState;
             SetValidModelState(modelState);
-            modelState.AddModelError(key: $"{nameof(Model.Strings)}[0]", errorMessage: expectedError0);
-            modelState.AddModelError(key: $"{nameof(Model.Strings)}[2]", errorMessage: expectedError2);
+            modelState.AddModelError(
+                key: $"{nameof(Model.Strings)}[0]",
+                errorMessage: expectedError0
+            );
+            modelState.AddModelError(
+                key: $"{nameof(Model.Strings)}[2]",
+                errorMessage: expectedError2
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(tagHelperContext, output);
 
             // Assert
-            Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                output.Attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
             Assert.Equal(expectedPreContent, output.PreContent.GetContent());
             Assert.Equal(expectedContent, output.Content.GetContent());
             Assert.Equal(
-                $"Custom Content<ul><li>{expectedError0}</li>{Environment.NewLine}" +
-                $"<li>{expectedError2}</li>{Environment.NewLine}</ul>",
-                output.PostContent.GetContent());
+                $"Custom Content<ul><li>{expectedError0}</li>{Environment.NewLine}"
+                    + $"<li>{expectedError2}</li>{Environment.NewLine}</ul>",
+                output.PostContent.GetContent()
+            );
             Assert.Equal(expectedTagName, output.TagName);
         }
 
@@ -342,19 +386,24 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData(ValidationSummary.ModelOnly, true)]
         public async Task ProcessAsync_CallsIntoGenerateValidationSummaryWithExpectedParameters(
             ValidationSummary validationSummary,
-            bool expectedExcludePropertyErrors)
+            bool expectedExcludePropertyErrors
+        )
         {
             // Arrange
             var expectedViewContext = CreateViewContext();
 
             var generator = new Mock<IHtmlGenerator>();
             generator
-                .Setup(mock => mock.GenerateValidationSummary(
-                    expectedViewContext,
-                    expectedExcludePropertyErrors,
-                    null,   // message
-                    null,   // headerTag
-                    null))  // htmlAttributes
+                .Setup(
+                    mock =>
+                        mock.GenerateValidationSummary(
+                            expectedViewContext,
+                            expectedExcludePropertyErrors,
+                            null, // message
+                            null, // headerTag
+                            null
+                        )
+                ) // htmlAttributes
                 .Returns(new TagBuilder("div"))
                 .Verifiable();
 
@@ -369,8 +418,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var output = new TagHelperOutput(
                 tagName: "div",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent(expectedPostContent);
@@ -381,7 +431,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act & Assert
             await validationSummaryTagHelper.ProcessAsync(context, output);
@@ -406,12 +457,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             generator
-                .Setup(mock => mock.GenerateValidationSummary(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<bool>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+                .Setup(
+                    mock =>
+                        mock.GenerateValidationSummary(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<bool>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(tagBuilder);
 
             var validationSummaryTagHelper = new ValidationSummaryTagHelper(generator.Object)
@@ -424,8 +479,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var output = new TagHelperOutput(
                 tagName: "div",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent("Content of validation summary");
@@ -437,7 +493,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(context, output);
@@ -460,7 +517,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 {
                     Assert.Equal("data-hello", attribute.Name);
                     Assert.Equal("world", attribute.Value);
-                });
+                }
+            );
             Assert.Equal(expectedPreContent, output.PreContent.GetContent());
             Assert.Equal(expectedContent, output.Content.GetContent());
             Assert.Equal("Content of validation summaryNew HTML", output.PostContent.GetContent());
@@ -483,8 +541,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var output = new TagHelperOutput(
                 tagName: "div",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent(expectedPostContent);
@@ -496,7 +555,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(context, output);
@@ -512,7 +572,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [Theory]
         [InlineData(ValidationSummary.All)]
         [InlineData(ValidationSummary.ModelOnly)]
-        public async Task ProcessAsync_GeneratesValidationSummaryWhenNotNone(ValidationSummary validationSummary)
+        public async Task ProcessAsync_GeneratesValidationSummaryWhenNotNone(
+            ValidationSummary validationSummary
+        )
         {
             // Arrange
             var tagBuilder = new TagBuilder("span2");
@@ -520,12 +582,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>();
             generator
-                .Setup(mock => mock.GenerateValidationSummary(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<bool>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+                .Setup(
+                    mock =>
+                        mock.GenerateValidationSummary(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<bool>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(tagBuilder)
                 .Verifiable();
 
@@ -539,8 +605,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var output = new TagHelperOutput(
                 tagName: "div",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent("Content of validation message");
@@ -552,7 +619,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(context, output);
@@ -572,20 +640,23 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData(ValidationSummary.All | ValidationSummary.ModelOnly)]
         [ReplaceCulture]
         public void ValidationSummaryProperty_ThrowsWhenSetToInvalidValidationSummaryValue(
-            ValidationSummary validationSummary)
+            ValidationSummary validationSummary
+        )
         {
             // Arrange
             var generator = new TestableHtmlGenerator(new EmptyModelMetadataProvider());
 
             var validationSummaryTagHelper = new ValidationSummaryTagHelper(generator);
             var validationTypeName = typeof(ValidationSummary).FullName;
-            var expectedMessage = $"The value of argument 'value' ({validationSummary}) is invalid for Enum type '{validationTypeName}'.";
+            var expectedMessage =
+                $"The value of argument 'value' ({validationSummary}) is invalid for Enum type '{validationTypeName}'.";
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
                 () => validationSummaryTagHelper.ValidationSummary = validationSummary,
                 "value",
-                expectedMessage);
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -613,39 +684,50 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 tagName: "not-div",
                 allAttributes: new TagHelperAttributeList(),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var output = new TagHelperOutput(
                 expectedTagName,
-                attributes: new TagHelperAttributeList
-                {
-                    { "class", "form-control" }
-                },
+                attributes: new TagHelperAttributeList { { "class", "form-control" } },
                 getChildContentAsync: (useCachedResult, encoder) =>
                 {
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent("Custom Content");
 
             var model = new FormMetadata();
-            var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+            var viewContext = TestableHtmlGenerator.GetViewContext(
+                model,
+                htmlGenerator,
+                metadataProvider
+            );
             validationSummaryTagHelper.ViewContext = viewContext;
 
-            viewContext.ModelState.AddModelError(key: nameof(FormMetadata.ID), errorMessage: expectedError);
+            viewContext.ModelState.AddModelError(
+                key: nameof(FormMetadata.ID),
+                errorMessage: expectedError
+            );
 
             // Act
             await validationSummaryTagHelper.ProcessAsync(tagHelperContext, output);
 
             // Assert
-            Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                output.Attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
             Assert.Equal(expectedPreContent, output.PreContent.GetContent());
             Assert.Equal(expectedContent, output.Content.GetContent());
             Assert.Equal(
                 $"Custom Content<ul><li>{expectedError}</li>{Environment.NewLine}</ul>",
-                output.PostContent.GetContent());
+                output.PostContent.GetContent()
+            );
             Assert.Equal(expectedTagName, output.TagName);
         }
 
@@ -654,25 +736,44 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),
-                new ActionDescriptor());
+                new ActionDescriptor()
+            );
 
             return new ViewContext(
                 actionContext,
                 Mock.Of<IView>(),
                 new ViewDataDictionary(
                     new EmptyModelMetadataProvider(),
-                    new ModelStateDictionary()),
+                    new ModelStateDictionary()
+                ),
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
         }
 
         private static void SetValidModelState(ModelStateDictionary modelState)
         {
-            modelState.SetModelValue(key: nameof(Model.Empty), rawValue: null, attemptedValue: null);
-            modelState.SetModelValue(key: $"{nameof(Model.Strings)}[0]", rawValue: null, attemptedValue: null);
-            modelState.SetModelValue(key: $"{nameof(Model.Strings)}[1]", rawValue: null, attemptedValue: null);
-            modelState.SetModelValue(key: $"{nameof(Model.Strings)}[2]", rawValue: null, attemptedValue: null);
+            modelState.SetModelValue(
+                key: nameof(Model.Empty),
+                rawValue: null,
+                attemptedValue: null
+            );
+            modelState.SetModelValue(
+                key: $"{nameof(Model.Strings)}[0]",
+                rawValue: null,
+                attemptedValue: null
+            );
+            modelState.SetModelValue(
+                key: $"{nameof(Model.Strings)}[1]",
+                rawValue: null,
+                attemptedValue: null
+            );
+            modelState.SetModelValue(
+                key: $"{nameof(Model.Strings)}[2]",
+                rawValue: null,
+                attemptedValue: null
+            );
             modelState.SetModelValue(key: nameof(Model.Text), rawValue: null, attemptedValue: null);
 
             foreach (var key in modelState.Keys)

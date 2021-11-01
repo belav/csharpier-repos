@@ -13,7 +13,6 @@ namespace System.Net.NetworkInformation
         DestinationProtocolUnreachable = 11000 + 4,
         DestinationPortUnreachable = 11000 + 5,
         DestinationProhibited = 11000 + 4,
-
         NoResources = 11000 + 6,
         BadOption = 11000 + 7,
         HardwareError = 11000 + 8,
@@ -21,15 +20,12 @@ namespace System.Net.NetworkInformation
         TimedOut = 11000 + 10,
         //  BadRequest = 11000 + 11,
         BadRoute = 11000 + 12,
-
         TtlExpired = 11000 + 13,
         TtlReassemblyTimeExceeded = 11000 + 14,
-
         ParameterProblem = 11000 + 15,
         SourceQuench = 11000 + 16,
         //OptionTooBig = 11000 + 17,
         BadDestination = 11000 + 18,
-
         DestinationUnreachable = 11000 + 40,
         TimeExceeded = 11000 + 41,
         BadHeader = 11000 + 42,

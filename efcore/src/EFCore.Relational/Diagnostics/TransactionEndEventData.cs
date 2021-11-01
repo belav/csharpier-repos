@@ -34,9 +34,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             bool async,
             DateTimeOffset startTime,
-            TimeSpan duration)
-            : base(eventDefinition, messageGenerator, transaction, context, transactionId, connectionId, async, startTime)
-            => Duration = duration;
+            TimeSpan duration
+        )
+            : base(
+                eventDefinition,
+                messageGenerator,
+                transaction,
+                context,
+                transactionId,
+                connectionId,
+                async,
+                startTime
+            ) => Duration = duration;
 
         /// <summary>
         ///     The duration of this event.

@@ -9,7 +9,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
     /// </summary>
     public struct PatternTestResult
     {
-        public static readonly PatternTestResult Failed = new PatternTestResult(isSuccessful: false, stem: null);
+        public static readonly PatternTestResult Failed = new PatternTestResult(
+            isSuccessful: false,
+            stem: null
+        );
 
         public bool IsSuccessful { get; }
         public string Stem { get; }

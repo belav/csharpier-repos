@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         private class TestExtensionIntermediateNode : ExtensionIntermediateNode
         {
-            public override IntermediateNodeCollection Children => IntermediateNodeCollection.ReadOnly;
+            public override IntermediateNodeCollection Children =>
+                IntermediateNodeCollection.ReadOnly;
 
             public override void Accept(IntermediateNodeVisitor visitor)
             {
@@ -73,7 +74,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
         }
 
-        private class SpecialVisitor : IntermediateNodeVisitor, IExtensionIntermediateNodeVisitor<TestExtensionIntermediateNode>
+        private class SpecialVisitor
+            : IntermediateNodeVisitor,
+              IExtensionIntermediateNodeVisitor<TestExtensionIntermediateNode>
         {
             public bool WasStandardMethodCalled { get; private set; }
             public bool WasSpecificMethodCalled { get; private set; }

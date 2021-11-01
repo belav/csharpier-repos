@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Host
             _workspace = workspace;
 
             // make a scheduler that runs on the thread pool
-            var listenerProvider = workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             _taskQueue = new TaskQueue(listenerProvider.GetListener(), TaskScheduler.Default);
 
             _cancellationSource = new CancellationTokenSource();
@@ -56,11 +57,11 @@ namespace Microsoft.CodeAnalysis.Host
             }
         }
 
-        private void OnDocumentOpened(object sender, DocumentEventArgs args)
-            => Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
+        private void OnDocumentOpened(object sender, DocumentEventArgs args) =>
+            Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
 
-        private void OnDocumentClosed(object sender, DocumentEventArgs args)
-            => Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
+        private void OnDocumentClosed(object sender, DocumentEventArgs args) =>
+            Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
 
         private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs args)
         {
@@ -84,7 +85,6 @@ namespace Microsoft.CodeAnalysis.Host
                     {
                         Rebuild(args.NewSolution);
                     }
-
                     break;
 
                 default:
@@ -127,20 +127,29 @@ namespace Microsoft.CodeAnalysis.Host
         private Task BuildCompilationsAsync(
             Solution solution,
             ProjectId initialProject,
-            ISet<ProjectId> allProjects)
+            ISet<ProjectId> allProjects
+        )
         {
             var cancellationToken = _cancellationSource.Token;
             return _taskQueue.ScheduleTask(
                 "BackgroundCompiler.BuildCompilationsAsync",
-                () => BuildCompilationsAsync(solution, initialProject, allProjects, cancellationToken),
-                cancellationToken);
+                () =>
+                    BuildCompilationsAsync(
+                        solution,
+                        initialProject,
+                        allProjects,
+                        cancellationToken
+                    ),
+                cancellationToken
+            );
         }
 
         private Task BuildCompilationsAsync(
             Solution solution,
             ProjectId initialProject,
             ISet<ProjectId> projectsToBuild,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var allProjectIds = new List<ProjectId>();
             if (initialProject != null)
@@ -150,32 +159,43 @@ namespace Microsoft.CodeAnalysis.Host
 
             allProjectIds.AddRange(projectsToBuild.Where(p => p != initialProject));
 
-            var logger = Logger.LogBlock(FunctionId.BackgroundCompiler_BuildCompilationsAsync, cancellationToken);
+            var logger = Logger.LogBlock(
+                FunctionId.BackgroundCompiler_BuildCompilationsAsync,
+                cancellationToken
+            );
 
             // Skip performing any background compilation for projects where user has explicitly
             // set the background analysis scope to only analyze active files.
             var compilationTasks = allProjectIds
                 .Select(solution.GetProject)
-                .Where(p => p != null && SolutionCrawlerOptions.GetBackgroundAnalysisScope(p) != BackgroundAnalysisScope.ActiveFile)
+                .Where(
+                    p =>
+                        p != null
+                        && SolutionCrawlerOptions.GetBackgroundAnalysisScope(p)
+                            != BackgroundAnalysisScope.ActiveFile
+                )
                 .Select(p => p.GetCompilationAsync(cancellationToken))
                 .ToArray();
-            return Task.WhenAll(compilationTasks).SafeContinueWith(t =>
-                {
-                    logger.Dispose();
-                    if (t.Status == TaskStatus.RanToCompletion)
+            return Task.WhenAll(compilationTasks)
+                .SafeContinueWith(
+                    t =>
                     {
-                        lock (_buildGate)
+                        logger.Dispose();
+                        if (t.Status == TaskStatus.RanToCompletion)
                         {
-                            if (!cancellationToken.IsCancellationRequested)
+                            lock (_buildGate)
                             {
-                                _mostRecentCompilations = t.Result;
+                                if (!cancellationToken.IsCancellationRequested)
+                                {
+                                    _mostRecentCompilations = t.Result;
+                                }
                             }
                         }
-                    }
-                },
-                CancellationToken.None,
-                TaskContinuationOptions.None,
-                TaskScheduler.Default);
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
         }
     }
 }

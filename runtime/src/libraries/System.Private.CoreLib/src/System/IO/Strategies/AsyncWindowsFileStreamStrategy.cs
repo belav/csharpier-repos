@@ -12,15 +12,19 @@ namespace System.IO.Strategies
     {
         private ValueTaskSource? _reusableValueTaskSource; // reusable ValueTaskSource that is currently NOT being used
 
-        internal AsyncWindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access, FileShare share)
-            : base(handle, access, share)
-        {
-        }
+        internal AsyncWindowsFileStreamStrategy(
+            SafeFileHandle handle,
+            FileAccess access,
+            FileShare share
+        ) : base(handle, access, share) { }
 
-        internal AsyncWindowsFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
-            : base(path, mode, access, share, options)
-        {
-        }
+        internal AsyncWindowsFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options
+        ) : base(path, mode, access, share, options) { }
 
         internal override bool IsAsync => true;
 
@@ -31,7 +35,10 @@ namespace System.IO.Strategies
             ValueTask result = base.DisposeAsync();
             Debug.Assert(result.IsCompleted, "the method must be sync, as it performs no flushing");
 
-            Interlocked.Exchange(ref _reusableValueTaskSource, null)?._preallocatedOverlapped.Dispose();
+            Interlocked.Exchange(
+                ref _reusableValueTaskSource,
+                null
+            )?._preallocatedOverlapped.Dispose();
 
             return result;
         }
@@ -42,7 +49,10 @@ namespace System.IO.Strategies
             // before _preallocatedOverlapped is disposed
             base.Dispose(disposing);
 
-            Interlocked.Exchange(ref _reusableValueTaskSource, null)?._preallocatedOverlapped.Dispose();
+            Interlocked.Exchange(
+                ref _reusableValueTaskSource,
+                null
+            )?._preallocatedOverlapped.Dispose();
         }
 
         protected override void OnInitFromHandle(SafeFileHandle handle)
@@ -114,19 +124,29 @@ namespace System.IO.Strategies
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            ValueTask<int> vt = ReadAsyncInternal(new Memory<byte>(buffer, offset, count), CancellationToken.None);
-            return vt.IsCompleted ?
-                vt.Result :
-                vt.AsTask().GetAwaiter().GetResult();
+            ValueTask<int> vt = ReadAsyncInternal(
+                new Memory<byte>(buffer, offset, count),
+                CancellationToken.None
+            );
+            return vt.IsCompleted ? vt.Result : vt.AsTask().GetAwaiter().GetResult();
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
 
-        public override ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
-            => ReadAsyncInternal(destination, cancellationToken);
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> destination,
+            CancellationToken cancellationToken = default
+        ) => ReadAsyncInternal(destination, cancellationToken);
 
-        private unsafe ValueTask<int> ReadAsyncInternal(Memory<byte> destination, CancellationToken cancellationToken = default)
+        private unsafe ValueTask<int> ReadAsyncInternal(
+            Memory<byte> destination,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!CanRead)
             {
@@ -141,7 +161,9 @@ namespace System.IO.Strategies
             // - On buffered flush, when source memory is also the internal buffer
             // valueTaskSource is null when:
             // - First time calling ReadAsync in unbuffered mode
-            ValueTaskSource valueTaskSource = Interlocked.Exchange(ref _reusableValueTaskSource, null) ?? new ValueTaskSource(this);
+            ValueTaskSource valueTaskSource =
+                Interlocked.Exchange(ref _reusableValueTaskSource, null)
+                ?? new ValueTaskSource(this);
             NativeOverlapped* intOverlapped = valueTaskSource.Configure(destination);
 
             // Calculate position in the file we should be at after the read is done
@@ -174,7 +196,13 @@ namespace System.IO.Strategies
             }
 
             // queue an async ReadFile operation and pass in a packed overlapped
-            int r = FileStreamHelpers.ReadFileNative(_fileHandle, destination.Span, false, intOverlapped, out int errorCode);
+            int r = FileStreamHelpers.ReadFileNative(
+                _fileHandle,
+                destination.Span,
+                false,
+                intOverlapped,
+                out int errorCode
+            );
 
             // ReadFile, the OS version, will return 0 on failure.  But
             // my ReadFileNative wrapper returns -1.  My wrapper will return
@@ -203,7 +231,7 @@ namespace System.IO.Strategies
                 }
                 else if (errorCode != Interop.Errors.ERROR_IO_PENDING)
                 {
-                    if (!_fileHandle.IsClosed && CanSeek)  // Update Position - It could be anywhere.
+                    if (!_fileHandle.IsClosed && CanSeek) // Update Position - It could be anywhere.
                     {
                         _filePosition = positionBefore;
                     }
@@ -240,16 +268,33 @@ namespace System.IO.Strategies
             return new ValueTask<int>(valueTaskSource, valueTaskSource.Version);
         }
 
-        public override void Write(byte[] buffer, int offset, int count)
-            => WriteAsyncInternal(new ReadOnlyMemory<byte>(buffer, offset, count), CancellationToken.None).AsTask().GetAwaiter().GetResult();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            WriteAsyncInternal(
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    CancellationToken.None
+                )
+                .AsTask()
+                .GetAwaiter()
+                .GetResult();
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => WriteAsyncInternal(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) =>
+            WriteAsyncInternal(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-            => WriteAsyncInternal(buffer, cancellationToken);
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) => WriteAsyncInternal(buffer, cancellationToken);
 
-        private unsafe ValueTask WriteAsyncInternal(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        private unsafe ValueTask WriteAsyncInternal(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             if (!CanWrite)
             {
@@ -264,7 +309,9 @@ namespace System.IO.Strategies
             // - On buffered flush, when source memory is also the internal buffer
             // valueTaskSource is null when:
             // - First time calling WriteAsync in unbuffered mode
-            ValueTaskSource valueTaskSource = Interlocked.Exchange(ref _reusableValueTaskSource, null) ?? new ValueTaskSource(this);
+            ValueTaskSource valueTaskSource =
+                Interlocked.Exchange(ref _reusableValueTaskSource, null)
+                ?? new ValueTaskSource(this);
             NativeOverlapped* intOverlapped = valueTaskSource.Configure(source);
 
             long positionBefore = _filePosition;
@@ -283,7 +330,13 @@ namespace System.IO.Strategies
             }
 
             // queue an async WriteFile operation and pass in a packed overlapped
-            int r = FileStreamHelpers.WriteFileNative(_fileHandle, source.Span, false, intOverlapped, out int errorCode);
+            int r = FileStreamHelpers.WriteFileNative(
+                _fileHandle,
+                source.Span,
+                false,
+                intOverlapped,
+                out int errorCode
+            );
 
             // WriteFile, the OS version, will return 0 on failure.  But
             // my WriteFileNative wrapper returns -1.  My wrapper will return
@@ -308,7 +361,7 @@ namespace System.IO.Strategies
                 }
                 else if (errorCode != Interop.Errors.ERROR_IO_PENDING)
                 {
-                    if (!_fileHandle.IsClosed && CanSeek)  // Update Position - It could be anywhere.
+                    if (!_fileHandle.IsClosed && CanSeek) // Update Position - It could be anywhere.
                     {
                         _filePosition = positionBefore;
                     }
@@ -347,7 +400,11 @@ namespace System.IO.Strategies
 
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask; // no buffering = nothing to flush
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             ValidateCopyToArguments(destination, bufferSize);
 
@@ -370,7 +427,11 @@ namespace System.IO.Strategies
             return AsyncModeCopyToAsync(destination, bufferSize, cancellationToken);
         }
 
-        private async Task AsyncModeCopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        private async Task AsyncModeCopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
             Debug.Assert(CanRead, "_parent.CanRead");
@@ -378,7 +439,15 @@ namespace System.IO.Strategies
             try
             {
                 await FileStreamHelpers
-                    .AsyncModeCopyToAsync(_fileHandle, _path, CanSeek, _filePosition, destination, bufferSize, cancellationToken)
+                    .AsyncModeCopyToAsync(
+                        _fileHandle,
+                        _path,
+                        CanSeek,
+                        _filePosition,
+                        destination,
+                        bufferSize,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
             finally

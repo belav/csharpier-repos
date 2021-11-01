@@ -12,10 +12,7 @@ internal class MyCriticalHandle : CriticalHandle
     static int s_uniqueHandleValue;
     static HashSet<int> s_closedHandles = new HashSet<int>();
 
-    public MyCriticalHandle() : base(new IntPtr(-1))
-    {
-
-    }
+    public MyCriticalHandle() : base(new IntPtr(-1)) { }
 
     public override bool IsInvalid
     {
@@ -35,21 +32,15 @@ internal class MyCriticalHandle : CriticalHandle
 
     internal IntPtr Handle
     {
-        get
-        {
-            return handle;
-        }
-        set 
-        {
-            handle = value;
-        }
+        get { return handle; }
+        set { handle = value; }
     }
-    
+
     internal static IntPtr GetUniqueHandle()
     {
         return new IntPtr(s_uniqueHandleValue++);
     }
-    
+
     internal static bool IsHandleClosed(IntPtr handle)
     {
         return s_closedHandles.Contains(handle.ToInt32());
@@ -62,7 +53,10 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(1);
         Native.InCallback callback = (handle) => { };
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeInCallback(callback, handleValue), "Calling P/Invoke that invokes a delegate that has an CriticalHandle parameter");
+        Assert.Throws<MarshalDirectiveException>(
+            () => Native.InvokeInCallback(callback, handleValue),
+            "Calling P/Invoke that invokes a delegate that has an CriticalHandle parameter"
+        );
         GC.KeepAlive(callback);
     }
 
@@ -70,7 +64,10 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(2);
         Native.RetCallback callback = () => new MyCriticalHandle();
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeRetCallback(callback), "Calling P/Invoke that invokes a delegate that returns a CriticalHandle parameter");
+        Assert.Throws<MarshalDirectiveException>(
+            () => Native.InvokeRetCallback(callback),
+            "Calling P/Invoke that invokes a delegate that returns a CriticalHandle parameter"
+        );
         GC.KeepAlive(callback);
     }
 
@@ -78,7 +75,10 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(3);
         Native.OutCallback callback = (out MyCriticalHandle handle) => handle = null;
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeOutCallback(callback, ref handleValue), "Calling P/Invoke that invokes a delegate that has an out CriticalHandle parameter");
+        Assert.Throws<MarshalDirectiveException>(
+            () => Native.InvokeOutCallback(callback, ref handleValue),
+            "Calling P/Invoke that invokes a delegate that has an out CriticalHandle parameter"
+        );
         GC.KeepAlive(callback);
     }
 
@@ -86,7 +86,10 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(4);
         Native.InRefCallback callback = (ref MyCriticalHandle handle) => { };
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeInRefCallback(callback, ref handleValue), "Calling P/Invoke that invokes a delegate that has an [In] ref CriticalHandle parameter");
+        Assert.Throws<MarshalDirectiveException>(
+            () => Native.InvokeInRefCallback(callback, ref handleValue),
+            "Calling P/Invoke that invokes a delegate that has an [In] ref CriticalHandle parameter"
+        );
         GC.KeepAlive(callback);
     }
 
@@ -94,7 +97,10 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(5);
         Native.RefCallback callback = (ref MyCriticalHandle handle) => { };
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeRefCallback(callback, ref handleValue), "Calling P/Invoke that invokes a delegate that has an ref CriticalHandle parameter");
+        Assert.Throws<MarshalDirectiveException>(
+            () => Native.InvokeRefCallback(callback, ref handleValue),
+            "Calling P/Invoke that invokes a delegate that has an ref CriticalHandle parameter"
+        );
         GC.KeepAlive(callback);
     }
 
@@ -107,7 +113,7 @@ public class Reverse
         internal delegate void OutCallback(out MyCriticalHandle handle);
 
         [UnmanagedFunctionPointer(System.Runtime.InteropServices.CallingConvention.StdCall)]
-        internal delegate void InRefCallback([In]ref MyCriticalHandle handle);
+        internal delegate void InRefCallback([In] ref MyCriticalHandle handle);
 
         [UnmanagedFunctionPointer(System.Runtime.InteropServices.CallingConvention.StdCall)]
         internal delegate void RefCallback(ref MyCriticalHandle handle);
@@ -118,10 +124,18 @@ public class Reverse
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern void InvokeInCallback(InCallback callback, IntPtr handle);
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "InvokeRefCallback", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "InvokeRefCallback",
+            CallingConvention = CallingConvention.StdCall
+        )]
         internal static extern void InvokeOutCallback(OutCallback callback, ref IntPtr handle);
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "InvokeRefCallback", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "InvokeRefCallback",
+            CallingConvention = CallingConvention.StdCall
+        )]
         internal static extern void InvokeInRefCallback(InRefCallback callback, ref IntPtr handle);
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]

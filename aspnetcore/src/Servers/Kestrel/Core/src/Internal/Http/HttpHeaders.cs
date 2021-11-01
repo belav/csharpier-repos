@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         protected long? _contentLength;
         protected bool _isReadOnly;
         protected Dictionary<string, StringValues>? MaybeUnknown;
-        protected Dictionary<string, StringValues> Unknown => MaybeUnknown ??= new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+        protected Dictionary<string, StringValues> Unknown =>
+            MaybeUnknown ??= new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
 
         public long? ContentLength
         {
@@ -82,10 +83,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 }
                 return value;
             }
-            set
-            {
-                ((IHeaderDictionary)this)[key] = value;
-            }
+            set { ((IHeaderDictionary)this)[key] = value; }
         }
 
         protected static void ThrowHeadersReadOnlyException()
@@ -112,9 +110,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         bool ICollection<KeyValuePair<string, StringValues>>.IsReadOnly => _isReadOnly;
 
-        ICollection<string> IDictionary<string, StringValues>.Keys => ((IDictionary<string, StringValues>)this).Select(pair => pair.Key).ToList();
+        ICollection<string> IDictionary<string, StringValues>.Keys =>
+            ((IDictionary<string, StringValues>)this).Select(pair => pair.Key).ToList();
 
-        ICollection<StringValues> IDictionary<string, StringValues>.Values => ((IDictionary<string, StringValues>)this).Select(pair => pair.Value).ToList();
+        ICollection<StringValues> IDictionary<string, StringValues>.Values =>
+            ((IDictionary<string, StringValues>)this).Select(pair => pair.Value).ToList();
 
         public void SetReadOnly()
         {
@@ -148,36 +148,58 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        protected bool TryGetUnknown(string key, ref StringValues value) => MaybeUnknown?.TryGetValue(key, out value) ?? false;
+        protected bool TryGetUnknown(string key, ref StringValues value) =>
+            MaybeUnknown?.TryGetValue(key, out value) ?? false;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         protected bool RemoveUnknown(string key) => MaybeUnknown?.Remove(key) ?? false;
 
         protected virtual int GetCountFast()
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual bool TryGetValueFast(string key, out StringValues value)
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual void SetValueFast(string key, StringValues value)
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual bool AddValueFast(string key, StringValues value)
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual bool RemoveFast(string key)
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual void ClearFast()
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
-        protected virtual bool CopyToFast(KeyValuePair<string, StringValues>[] array, int arrayIndex)
-        { throw new NotImplementedException(); }
+        protected virtual bool CopyToFast(
+            KeyValuePair<string, StringValues>[] array,
+            int arrayIndex
+        )
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual IEnumerator<KeyValuePair<string, StringValues>> GetEnumeratorFast()
-        { throw new NotImplementedException(); }
+        {
+            throw new NotImplementedException();
+        }
 
-        void ICollection<KeyValuePair<string, StringValues>>.Add(KeyValuePair<string, StringValues> item)
+        void ICollection<KeyValuePair<string, StringValues>>.Add(
+            KeyValuePair<string, StringValues> item
+        )
         {
             ((IDictionary<string, StringValues>)this).Add(item.Key, item.Value);
         }
@@ -208,11 +230,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             ClearFast();
         }
 
-        bool ICollection<KeyValuePair<string, StringValues>>.Contains(KeyValuePair<string, StringValues> item)
+        bool ICollection<KeyValuePair<string, StringValues>>.Contains(
+            KeyValuePair<string, StringValues> item
+        )
         {
-            return
-                TryGetValueFast(item.Key, out var value) &&
-                value.Equals(item.Value);
+            return TryGetValueFast(item.Key, out var value) && value.Equals(item.Value);
         }
 
         bool IDictionary<string, StringValues>.ContainsKey(string key)
@@ -220,7 +242,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return TryGetValueFast(key, out _);
         }
 
-        void ICollection<KeyValuePair<string, StringValues>>.CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
+            KeyValuePair<string, StringValues>[] array,
+            int arrayIndex
+        )
         {
             if (!CopyToFast(array, arrayIndex))
             {
@@ -233,17 +258,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return GetEnumeratorFast();
         }
 
-        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+            KeyValuePair<string, StringValues>
+        >.GetEnumerator()
         {
             return GetEnumeratorFast();
         }
 
-        bool ICollection<KeyValuePair<string, StringValues>>.Remove(KeyValuePair<string, StringValues> item)
+        bool ICollection<KeyValuePair<string, StringValues>>.Remove(
+            KeyValuePair<string, StringValues> item
+        )
         {
-            return
-                TryGetValueFast(item.Key, out var value) &&
-                value.Equals(item.Value) &&
-                RemoveFast(item.Key);
+            return TryGetValueFast(item.Key, out var value)
+                && value.Equals(item.Value)
+                && RemoveFast(item.Key);
         }
 
         bool IDictionary<string, StringValues>.Remove(string key)
@@ -264,7 +292,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         {
             var count = headerValues.Count;
             for (var i = 0; i < count; i++)
-
             {
                 ValidateHeaderValueCharacters(headerValues[i]);
             }
@@ -366,7 +393,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                     if (c == 'k' && byteValue.Length >= (2 * sizeof(ulong) + sizeof(ushort)))
                     {
-                        if ((BinaryPrimitives.ReadUInt64LittleEndian(byteValue) | lowerCaseKeep) == keepAliveStart)
+                        if (
+                            (BinaryPrimitives.ReadUInt64LittleEndian(byteValue) | lowerCaseKeep)
+                            == keepAliveStart
+                        )
                         {
                             offset += sizeof(ulong) / 2;
                             byteValue = byteValue.Slice(sizeof(ulong));
@@ -477,16 +507,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static ulong ReadLowerCaseUInt64(ReadOnlySpan<byte> value)
-            => BinaryPrimitives.ReadUInt64LittleEndian(value) | 0x0020_0020_0020_0020;
+        private static ulong ReadLowerCaseUInt64(ReadOnlySpan<byte> value) =>
+            BinaryPrimitives.ReadUInt64LittleEndian(value) | 0x0020_0020_0020_0020;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint ReadLowerCaseUInt32(ReadOnlySpan<byte> value)
-            => BinaryPrimitives.ReadUInt32LittleEndian(value) | 0x0020_0020;
+        private static uint ReadLowerCaseUInt32(ReadOnlySpan<byte> value) =>
+            BinaryPrimitives.ReadUInt32LittleEndian(value) | 0x0020_0020;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static ushort ReadLowerCaseUInt16(ReadOnlySpan<byte> value)
-            => (ushort)(BinaryPrimitives.ReadUInt16LittleEndian(value) | 0x0020);
+        private static ushort ReadLowerCaseUInt16(ReadOnlySpan<byte> value) =>
+            (ushort)(BinaryPrimitives.ReadUInt16LittleEndian(value) | 0x0020);
 
         private static char ToLowerCase(char value) => (char)(value | (char)0x0020);
 
@@ -530,13 +560,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                     var byteValue = MemoryMarshal.AsBytes(values);
 
-                    if (ToLowerCase(c) == 'c' &&
-                        TryReadLowerCaseUInt64(byteValue, out var result64) && result64 == chunkedStart)
+                    if (
+                        ToLowerCase(c) == 'c'
+                        && TryReadLowerCaseUInt64(byteValue, out var result64)
+                        && result64 == chunkedStart
+                    )
                     {
                         offset += sizeof(ulong) / 2;
                         byteValue = byteValue.Slice(sizeof(ulong));
 
-                        if (TryReadLowerCaseUInt32(byteValue, out var result32) && result32 == chunkedEnd)
+                        if (
+                            TryReadLowerCaseUInt32(byteValue, out var result32)
+                            && result32 == chunkedEnd
+                        )
                         {
                             offset += sizeof(uint) / 2;
                             transferEncodingOptions = TransferCoding.Chunked;
@@ -621,12 +657,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         private static void ThrowInvalidContentLengthException(long value)
         {
-            throw new ArgumentOutOfRangeException(CoreStrings.FormatInvalidContentLength_InvalidNumber(value));
+            throw new ArgumentOutOfRangeException(
+                CoreStrings.FormatInvalidContentLength_InvalidNumber(value)
+            );
         }
 
         private static void ThrowInvalidHeaderCharacter(char ch)
         {
-            throw new InvalidOperationException(CoreStrings.FormatInvalidAsciiOrControlChar(string.Format(CultureInfo.InvariantCulture, "0x{0:X4}", (ushort)ch)));
+            throw new InvalidOperationException(
+                CoreStrings.FormatInvalidAsciiOrControlChar(
+                    string.Format(CultureInfo.InvariantCulture, "0x{0:X4}", (ushort)ch)
+                )
+            );
         }
 
         private static void ThrowInvalidEmptyHeaderName()

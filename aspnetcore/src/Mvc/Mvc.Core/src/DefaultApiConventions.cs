@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Get(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id) { }
+                object id
+        ) { }
 
         /// <summary>
         /// Find convention.
@@ -36,8 +37,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Find(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id)
-        { }
+                object id
+        ) { }
         #endregion
 
         /// <summary>
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Post(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model) { }
+                object model
+        ) { }
 
         /// <summary>
         /// Create convention.
@@ -65,8 +67,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Create(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-        { }
+                object model
+        ) { }
         #endregion
 
         #region PUT
@@ -83,11 +85,11 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Put(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id,
-            
+                object id,
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model) { }
+                object model
+        ) { }
 
         /// <summary>
         /// Edit convention.
@@ -102,12 +104,11 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Edit(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id,
-
+                object id,
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-        { }
+                object model
+        ) { }
 
         /// <summary>
         /// Update convention.
@@ -122,12 +123,11 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Update(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id,
-
+                object id,
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model)
-        { }
+                object model
+        ) { }
         #endregion
 
         #region DELETE
@@ -143,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc
         public static void Delete(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id) { }
+                object id
+        ) { }
         #endregion
     }
 }

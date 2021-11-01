@@ -27,23 +27,43 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
     public abstract class EditAndContinueTestBase : EmitMetadataTestBase
     {
         // PDB reader can only be accessed from a single thread, so avoid concurrent compilation:
-        protected readonly CSharpCompilationOptions ComSafeDebugDll = TestOptions.DebugDll.WithConcurrentBuild(false);
+        protected readonly CSharpCompilationOptions ComSafeDebugDll =
+            TestOptions.DebugDll.WithConcurrentBuild(false);
 
-        internal static readonly Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> EmptyLocalsProvider = handle => default(EditAndContinueMethodDebugInformation);
+        internal static readonly Func<
+            MethodDefinitionHandle,
+            EditAndContinueMethodDebugInformation
+        > EmptyLocalsProvider = handle => default(EditAndContinueMethodDebugInformation);
 
         internal static string Visualize(ModuleMetadata baseline, params PinnedMetadata[] deltas)
         {
             var result = new StringWriter();
-            new MetadataVisualizer(new[] { baseline.MetadataReader }.Concat(deltas.Select(d => d.Reader)).ToArray(), result).VisualizeAllGenerations();
+            new MetadataVisualizer(
+                new[] { baseline.MetadataReader }.Concat(deltas.Select(d => d.Reader)).ToArray(),
+                result
+            ).VisualizeAllGenerations();
             return result.ToString();
         }
 
-        internal static SourceWithMarkedNodes MarkedSource(string markedSource, string fileName = "", CSharpParseOptions options = null, bool removeTags = false)
+        internal static SourceWithMarkedNodes MarkedSource(
+            string markedSource,
+            string fileName = "",
+            CSharpParseOptions options = null,
+            bool removeTags = false
+        )
         {
-            return new SourceWithMarkedNodes(markedSource, s => Parse(s, fileName, options), s => (int)(SyntaxKind)typeof(SyntaxKind).GetField(s).GetValue(null), removeTags);
+            return new SourceWithMarkedNodes(
+                markedSource,
+                s => Parse(s, fileName, options),
+                s => (int)(SyntaxKind)typeof(SyntaxKind).GetField(s).GetValue(null),
+                removeTags
+            );
         }
 
-        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapFromMarkers(SourceWithMarkedNodes source0, SourceWithMarkedNodes source1)
+        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapFromMarkers(
+            SourceWithMarkedNodes source0,
+            SourceWithMarkedNodes source1
+        )
         {
             return SourceWithMarkedNodes.GetSyntaxMap(source0, source1);
         }
@@ -59,7 +79,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             return LocalVariableDeclaratorsCollector.GetDeclarators(sourceMethod);
         }
 
-        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapByKind(MethodSymbol method0, params SyntaxKind[] kinds)
+        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapByKind(
+            MethodSymbol method0,
+            params SyntaxKind[] kinds
+        )
         {
             return newNode =>
             {
@@ -67,7 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 {
                     if (newNode.IsKind(kind))
                     {
-                        return method0.DeclaringSyntaxReferences.Single().SyntaxTree.GetRoot().DescendantNodes().Single(n => n.IsKind(kind));
+                        return method0.DeclaringSyntaxReferences
+                            .Single()
+                            .SyntaxTree.GetRoot()
+                            .DescendantNodes()
+                            .Single(n => n.IsKind(kind));
                     }
                 }
 
@@ -75,7 +102,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             };
         }
 
-        internal static Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(MethodSymbol method1, MethodSymbol method0)
+        internal static Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(
+            MethodSymbol method1,
+            MethodSymbol method0
+        )
         {
             var tree1 = method1.Locations[0].SourceTree;
             var tree0 = method0.Locations[0].SourceTree;
@@ -129,7 +159,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             return null;
         }
 
-        internal static EditAndContinueLogEntry Row(int rowNumber, TableIndex table, EditAndContinueOperation operation)
+        internal static EditAndContinueLogEntry Row(
+            int rowNumber,
+            TableIndex table,
+            EditAndContinueOperation operation
+        )
         {
             return new EditAndContinueLogEntry(MetadataTokens.Handle(table, rowNumber), operation);
         }
@@ -139,14 +173,28 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             return MetadataTokens.Handle(table, rowNumber);
         }
 
-        internal static void CheckEncLog(MetadataReader reader, params EditAndContinueLogEntry[] rows)
+        internal static void CheckEncLog(
+            MetadataReader reader,
+            params EditAndContinueLogEntry[] rows
+        )
         {
-            AssertEx.Equal(rows, reader.GetEditAndContinueLogEntries(), itemInspector: EncLogRowToString);
+            AssertEx.Equal(
+                rows,
+                reader.GetEditAndContinueLogEntries(),
+                itemInspector: EncLogRowToString
+            );
         }
 
-        internal static void CheckEncLogDefinitions(MetadataReader reader, params EditAndContinueLogEntry[] rows)
+        internal static void CheckEncLogDefinitions(
+            MetadataReader reader,
+            params EditAndContinueLogEntry[] rows
+        )
         {
-            AssertEx.Equal(rows, reader.GetEditAndContinueLogEntries().Where(IsDefinition), itemInspector: EncLogRowToString);
+            AssertEx.Equal(
+                rows,
+                reader.GetEditAndContinueLogEntries().Where(IsDefinition),
+                itemInspector: EncLogRowToString
+            );
         }
 
         private static bool IsDefinition(EditAndContinueLogEntry entry)
@@ -191,28 +239,60 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 
         internal static void CheckEncMap(MetadataReader reader, params EntityHandle[] handles)
         {
-            AssertEx.Equal(handles, reader.GetEditAndContinueMapEntries(), itemInspector: EncMapRowToString);
+            AssertEx.Equal(
+                handles,
+                reader.GetEditAndContinueMapEntries(),
+                itemInspector: EncMapRowToString
+            );
         }
 
-        internal static void CheckAttributes(MetadataReader reader, params CustomAttributeRow[] rows)
+        internal static void CheckAttributes(
+            MetadataReader reader,
+            params CustomAttributeRow[] rows
+        )
         {
-            AssertEx.Equal(rows, reader.GetCustomAttributeRows(), itemInspector: AttributeRowToString);
+            AssertEx.Equal(
+                rows,
+                reader.GetCustomAttributeRows(),
+                itemInspector: AttributeRowToString
+            );
         }
 
-        internal static void CheckNames(MetadataReader reader, IEnumerable<StringHandle> handles, params string[] expectedNames)
+        internal static void CheckNames(
+            MetadataReader reader,
+            IEnumerable<StringHandle> handles,
+            params string[] expectedNames
+        )
         {
             CheckNames(new[] { reader }, handles, expectedNames);
         }
 
-        internal static void CheckNames(IEnumerable<MetadataReader> readers, IEnumerable<StringHandle> handles, params string[] expectedNames)
+        internal static void CheckNames(
+            IEnumerable<MetadataReader> readers,
+            IEnumerable<StringHandle> handles,
+            params string[] expectedNames
+        )
         {
             var actualNames = readers.GetStrings(handles);
             AssertEx.Equal(expectedNames, actualNames);
         }
 
-        internal static void CheckNames(IList<MetadataReader> readers, IEnumerable<(StringHandle Namespace, StringHandle Name)> handles, params string[] expectedNames)
+        internal static void CheckNames(
+            IList<MetadataReader> readers,
+            IEnumerable<(StringHandle Namespace, StringHandle Name)> handles,
+            params string[] expectedNames
+        )
         {
-            var actualNames = handles.Select(handlePair => string.Join(".", readers.GetString(handlePair.Namespace), readers.GetString(handlePair.Name))).ToArray();
+            var actualNames = handles
+                .Select(
+                    handlePair =>
+                        string.Join(
+                            ".",
+                            readers.GetString(handlePair.Namespace),
+                            readers.GetString(handlePair.Name)
+                        )
+                )
+                .ToArray();
             AssertEx.Equal(expectedNames, actualNames);
         }
 
@@ -225,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 "Row({0}, TableIndex.{1}, EditAndContinueOperation.{2})",
                 MetadataTokens.GetRowNumber(row.Handle),
                 tableIndex,
-                row.Operation);
+                row.Operation
+            );
         }
 
         internal static string EncMapRowToString(EntityHandle handle)
@@ -236,12 +317,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             return string.Format(
                 "Handle({0}, TableIndex.{1})",
                 MetadataTokens.GetRowNumber(handle),
-                tableIndex);
+                tableIndex
+            );
         }
 
         internal static string AttributeRowToString(CustomAttributeRow row)
         {
-            TableIndex parentTableIndex, constructorTableIndex;
+            TableIndex parentTableIndex,
+                constructorTableIndex;
             MetadataTokens.TryGetTableIndex(row.ParentToken.Kind, out parentTableIndex);
             MetadataTokens.TryGetTableIndex(row.ConstructorToken.Kind, out constructorTableIndex);
 
@@ -250,37 +333,63 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 MetadataTokens.GetRowNumber(row.ParentToken),
                 parentTableIndex,
                 MetadataTokens.GetRowNumber(row.ConstructorToken),
-                constructorTableIndex);
+                constructorTableIndex
+            );
         }
 
-        internal static void SaveImages(string outputDirectory, CompilationVerifier baseline, params CompilationDifference[] diffs)
+        internal static void SaveImages(
+            string outputDirectory,
+            CompilationVerifier baseline,
+            params CompilationDifference[] diffs
+        )
         {
-            bool IsPortablePdb(ImmutableArray<byte> image) => image[0] == 'B' && image[1] == 'S' && image[2] == 'J' && image[3] == 'B';
+            bool IsPortablePdb(ImmutableArray<byte> image) =>
+                image[0] == 'B' && image[1] == 'S' && image[2] == 'J' && image[3] == 'B';
 
             string baseName = baseline.Compilation.AssemblyName;
             string extSuffix = IsPortablePdb(baseline.EmittedAssemblyPdb) ? "x" : "";
 
             Directory.CreateDirectory(outputDirectory);
 
-            File.WriteAllBytes(Path.Combine(outputDirectory, baseName + ".dll" + extSuffix), baseline.EmittedAssemblyData.ToArray());
-            File.WriteAllBytes(Path.Combine(outputDirectory, baseName + ".pdb" + extSuffix), baseline.EmittedAssemblyPdb.ToArray());
+            File.WriteAllBytes(
+                Path.Combine(outputDirectory, baseName + ".dll" + extSuffix),
+                baseline.EmittedAssemblyData.ToArray()
+            );
+            File.WriteAllBytes(
+                Path.Combine(outputDirectory, baseName + ".pdb" + extSuffix),
+                baseline.EmittedAssemblyPdb.ToArray()
+            );
 
             for (int i = 0; i < diffs.Length; i++)
             {
-                File.WriteAllBytes(Path.Combine(outputDirectory, $"{baseName}.{i + 1}.metadata{extSuffix}"), diffs[i].MetadataDelta.ToArray());
-                File.WriteAllBytes(Path.Combine(outputDirectory, $"{baseName}.{i + 1}.pdb{extSuffix}"), diffs[i].PdbDelta.ToArray());
+                File.WriteAllBytes(
+                    Path.Combine(outputDirectory, $"{baseName}.{i + 1}.metadata{extSuffix}"),
+                    diffs[i].MetadataDelta.ToArray()
+                );
+                File.WriteAllBytes(
+                    Path.Combine(outputDirectory, $"{baseName}.{i + 1}.pdb{extSuffix}"),
+                    diffs[i].PdbDelta.ToArray()
+                );
             }
         }
     }
 
     public static class EditAndContinueTestExtensions
     {
-        internal static CSharpCompilation WithSource(this CSharpCompilation compilation, CSharpTestSource newSource)
+        internal static CSharpCompilation WithSource(
+            this CSharpCompilation compilation,
+            CSharpTestSource newSource
+        )
         {
-            return compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(newSource.GetSyntaxTrees(TestOptions.Regular));
+            return compilation
+                .RemoveAllSyntaxTrees()
+                .AddSyntaxTrees(newSource.GetSyntaxTrees(TestOptions.Regular));
         }
 
-        internal static CSharpCompilation WithSource(this CSharpCompilation compilation, SyntaxTree newTree)
+        internal static CSharpCompilation WithSource(
+            this CSharpCompilation compilation,
+            SyntaxTree newTree
+        )
         {
             return compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(newTree);
         }

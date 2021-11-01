@@ -15,12 +15,10 @@ namespace Microsoft.CodeAnalysis
         /// line directive. 
         /// </summary>
         BeforeFirstLineDirective = 0,
-
         /// <summary>
         /// The line is following a #line hidden directive.
         /// </summary>
         Hidden = 1,
-
         /// <summary>
         /// The line is following a #line default directive or a #line directive with at least a line number.
         /// If there is no line directive at all, Visible is returned for all lines.

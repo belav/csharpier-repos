@@ -15,11 +15,14 @@ namespace Microsoft.AspNetCore.Authorization
     public class AuthorizationMiddleware
     {
         // AppContext switch used to control whether HttpContext or endpoint is passed as a resource to AuthZ
-        private const string SuppressUseHttpContextAsAuthorizationResource = "Microsoft.AspNetCore.Authorization.SuppressUseHttpContextAsAuthorizationResource";
+        private const string SuppressUseHttpContextAsAuthorizationResource =
+            "Microsoft.AspNetCore.Authorization.SuppressUseHttpContextAsAuthorizationResource";
 
         // Property key is used by Endpoint routing to determine if Authorization has run
-        private const string AuthorizationMiddlewareInvokedWithEndpointKey = "__AuthorizationMiddlewareWithEndpointInvoked";
-        private static readonly object AuthorizationMiddlewareWithEndpointInvokedValue = new object();
+        private const string AuthorizationMiddlewareInvokedWithEndpointKey =
+            "__AuthorizationMiddlewareWithEndpointInvoked";
+        private static readonly object AuthorizationMiddlewareWithEndpointInvokedValue =
+            new object();
 
         private readonly RequestDelegate _next;
         private readonly IAuthorizationPolicyProvider _policyProvider;
@@ -29,10 +32,14 @@ namespace Microsoft.AspNetCore.Authorization
         /// </summary>
         /// <param name="next">The next middleware in the application middleware pipeline.</param>
         /// <param name="policyProvider">The <see cref="IAuthorizationPolicyProvider"/>.</param>
-        public AuthorizationMiddleware(RequestDelegate next, IAuthorizationPolicyProvider policyProvider) 
+        public AuthorizationMiddleware(
+            RequestDelegate next,
+            IAuthorizationPolicyProvider policyProvider
+        )
         {
             _next = next ?? throw new ArgumentNullException(nameof(next));
-            _policyProvider = policyProvider ?? throw new ArgumentNullException(nameof(policyProvider));
+            _policyProvider =
+                policyProvider ?? throw new ArgumentNullException(nameof(policyProvider));
         }
 
         /// <summary>
@@ -52,11 +59,14 @@ namespace Microsoft.AspNetCore.Authorization
             {
                 // EndpointRoutingMiddleware uses this flag to check if the Authorization middleware processed auth metadata on the endpoint.
                 // The Authorization middleware can only make this claim if it observes an actual endpoint.
-                context.Items[AuthorizationMiddlewareInvokedWithEndpointKey] = AuthorizationMiddlewareWithEndpointInvokedValue;
+                context.Items[AuthorizationMiddlewareInvokedWithEndpointKey] =
+                    AuthorizationMiddlewareWithEndpointInvokedValue;
             }
 
             // IMPORTANT: Changes to authorization logic should be mirrored in MVC's AuthorizeFilter
-            var authorizeData = endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>() ?? Array.Empty<IAuthorizeData>();
+            var authorizeData =
+                endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>()
+                ?? Array.Empty<IAuthorizeData>();
             var policy = await AuthorizationPolicy.CombineAsync(_policyProvider, authorizeData);
             if (policy == null)
             {
@@ -77,7 +87,12 @@ namespace Microsoft.AspNetCore.Authorization
             }
 
             object? resource;
-            if (AppContext.TryGetSwitch(SuppressUseHttpContextAsAuthorizationResource, out var useEndpointAsResource) && useEndpointAsResource)
+            if (
+                AppContext.TryGetSwitch(
+                    SuppressUseHttpContextAsAuthorizationResource,
+                    out var useEndpointAsResource
+                ) && useEndpointAsResource
+            )
             {
                 resource = endpoint;
             }
@@ -85,10 +100,21 @@ namespace Microsoft.AspNetCore.Authorization
             {
                 resource = context;
             }
-            
-            var authorizeResult = await policyEvaluator.AuthorizeAsync(policy, authenticateResult, context, resource);
-            var authorizationMiddlewareResultHandler = context.RequestServices.GetRequiredService<IAuthorizationMiddlewareResultHandler>();
-            await authorizationMiddlewareResultHandler.HandleAsync(_next, context, policy, authorizeResult);
+
+            var authorizeResult = await policyEvaluator.AuthorizeAsync(
+                policy,
+                authenticateResult,
+                context,
+                resource
+            );
+            var authorizationMiddlewareResultHandler =
+                context.RequestServices.GetRequiredService<IAuthorizationMiddlewareResultHandler>();
+            await authorizationMiddlewareResultHandler.HandleAsync(
+                _next,
+                context,
+                policy,
+                authorizeResult
+            );
         }
     }
 }

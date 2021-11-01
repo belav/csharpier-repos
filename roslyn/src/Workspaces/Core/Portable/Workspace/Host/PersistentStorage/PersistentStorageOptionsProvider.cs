@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PersistentStorageOptionsProvider()
-        {
-        }
+        public PersistentStorageOptionsProvider() { }
 
         public ImmutableArray<IOption> Options { get; } =
             ImmutableArray.Create<IOption>(PersistentStorageOptions.Enabled);

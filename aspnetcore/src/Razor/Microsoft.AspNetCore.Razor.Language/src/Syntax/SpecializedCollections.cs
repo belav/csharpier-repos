@@ -40,24 +40,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             {
                 public static new readonly IEnumerator<T> Instance = new Enumerator<T>();
 
-                protected Enumerator()
-                {
-                }
+                protected Enumerator() { }
 
                 public new T Current => throw new InvalidOperationException();
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
 
             internal class Enumerator : IEnumerator
             {
                 public static readonly IEnumerator Instance = new Enumerator();
 
-                protected Enumerator()
-                {
-                }
+                protected Enumerator() { }
 
                 public object Current => throw new InvalidOperationException();
 
@@ -74,9 +68,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             internal class Enumerable<T> : IEnumerable<T>
             {
-                // PERF: cache the instance of enumerator. 
+                // PERF: cache the instance of enumerator.
                 // accessing a generic static field is kinda slow from here,
-                // but since empty enumerables are singletons, there is no harm in having 
+                // but since empty enumerables are singletons, there is no harm in having
                 // one extra instance field
                 private readonly IEnumerator<T> _enumerator = Enumerator<T>.Instance;
 
@@ -95,9 +89,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             {
                 public static readonly ICollection<T> Instance = new Collection<T>();
 
-                protected Collection()
-                {
-                }
+                protected Collection() { }
 
                 public void Add(T item)
                 {
@@ -114,9 +106,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     return false;
                 }
 
-                public void CopyTo(T[] array, int arrayIndex)
-                {
-                }
+                public void CopyTo(T[] array, int arrayIndex) { }
 
                 public int Count => 0;
 
@@ -132,9 +122,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             {
                 public static readonly new List<T> Instance = new List<T>();
 
-                protected List()
-                {
-                }
+                protected List() { }
 
                 public int IndexOf(T item)
                 {
@@ -153,15 +141,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
                 public T this[int index]
                 {
-                    get
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(index));
-                    }
-
-                    set
-                    {
-                        throw new NotSupportedException();
-                    }
+                    get { throw new ArgumentOutOfRangeException(nameof(index)); }
+                    set { throw new NotSupportedException(); }
                 }
             }
         }

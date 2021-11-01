@@ -16,8 +16,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         private readonly IUnitTestingIncrementalAnalyzerProviderImplementation _incrementalAnalyzerProvider;
         private IIncrementalAnalyzer _analyzer;
 
-        public UnitTestingIncrementalAnalyzerProvider(IUnitTestingIncrementalAnalyzerProviderImplementation incrementalAnalyzerProvider)
-            => _incrementalAnalyzerProvider = incrementalAnalyzerProvider;
+        public UnitTestingIncrementalAnalyzerProvider(
+            IUnitTestingIncrementalAnalyzerProviderImplementation incrementalAnalyzerProvider
+        ) => _incrementalAnalyzerProvider = incrementalAnalyzerProvider;
 
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
         {
@@ -27,7 +28,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
             //       UnitTestingSolutionCrawlerServiceAccessor.Reanalyze method.
             if (_analyzer == null)
             {
-                _analyzer = new UnitTestingIncrementalAnalyzer(_incrementalAnalyzerProvider.CreateIncrementalAnalyzer());
+                _analyzer = new UnitTestingIncrementalAnalyzer(
+                    _incrementalAnalyzerProvider.CreateIncrementalAnalyzer()
+                );
             }
 
             return _analyzer;

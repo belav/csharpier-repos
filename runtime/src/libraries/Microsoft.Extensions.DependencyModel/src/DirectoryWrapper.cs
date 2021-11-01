@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Microsoft.Extensions.DependencyModel
 {
-    internal sealed class DirectoryWrapper: IDirectory
+    internal sealed class DirectoryWrapper : IDirectory
     {
         public bool Exists(string path)
         {

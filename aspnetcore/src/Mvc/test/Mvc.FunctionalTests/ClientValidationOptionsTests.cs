@@ -7,9 +7,10 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class ClientValidationOptionsTests : IClassFixture<MvcTestFixture<RazorPagesWebSite.Startup>>
+    public class ClientValidationOptionsTests
+        : IClassFixture<MvcTestFixture<RazorPagesWebSite.Startup>>
     {
-        public ClientValidationOptionsTests(MvcTestFixture<RazorPagesWebSite.Startup> fixture) => 
+        public ClientValidationOptionsTests(MvcTestFixture<RazorPagesWebSite.Startup> fixture) =>
             Fixture = fixture;
 
         public MvcTestFixture<RazorPagesWebSite.Startup> Fixture { get; }
@@ -19,7 +20,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var client = Fixture
-                .WithWebHostBuilder(whb => whb.UseStartup<RazorPagesWebSite.StartupWithClientValidationDisabled>())
+                .WithWebHostBuilder(
+                    whb => whb.UseStartup<RazorPagesWebSite.StartupWithClientValidationDisabled>()
+                )
                 .CreateClient();
 
             // Act

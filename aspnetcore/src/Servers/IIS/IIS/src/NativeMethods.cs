@@ -21,7 +21,6 @@ namespace Microsoft.AspNetCore.Server.IIS
         internal const string AspNetCoreModuleDll = "aspnetcorev2_inprocess.dll";
 
         [DllImport(KERNEL32, ExactSpelling = true, SetLastError = true)]
-
         public static extern bool CloseHandle(IntPtr handle);
 
         [DllImport("kernel32.dll")]
@@ -40,87 +39,144 @@ namespace Microsoft.AspNetCore.Server.IIS
         }
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_post_completion(NativeSafeHandle pInProcessHandler, int cbBytes);
+        private static extern int http_post_completion(
+            NativeSafeHandle pInProcessHandler,
+            int cbBytes
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_set_completion_status(NativeSafeHandle pInProcessHandler, REQUEST_NOTIFICATION_STATUS rquestNotificationStatus);
+        private static extern int http_set_completion_status(
+            NativeSafeHandle pInProcessHandler,
+            REQUEST_NOTIFICATION_STATUS rquestNotificationStatus
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern void http_indicate_completion(NativeSafeHandle pInProcessHandler, REQUEST_NOTIFICATION_STATUS notificationStatus);
+        private static extern void http_indicate_completion(
+            NativeSafeHandle pInProcessHandler,
+            REQUEST_NOTIFICATION_STATUS notificationStatus
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private unsafe static extern int register_callbacks(NativeSafeHandle pInProcessApplication,
+        private unsafe static extern int register_callbacks(
+            NativeSafeHandle pInProcessApplication,
             delegate* unmanaged<IntPtr, IntPtr, REQUEST_NOTIFICATION_STATUS> requestCallback,
             delegate* unmanaged<IntPtr, int> shutdownCallback,
             delegate* unmanaged<IntPtr, void> disconnectCallback,
             delegate* unmanaged<IntPtr, int, int, REQUEST_NOTIFICATION_STATUS> asyncCallback,
             delegate* unmanaged<IntPtr, void> requestsDrainedHandler,
             IntPtr pvRequestContext,
-            IntPtr pvShutdownContext);
+            IntPtr pvShutdownContext
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_write_response_bytes(NativeSafeHandle pInProcessHandler, HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks, int nChunks, out bool fCompletionExpected);
+        private static extern unsafe int http_write_response_bytes(
+            NativeSafeHandle pInProcessHandler,
+            HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
+            int nChunks,
+            out bool fCompletionExpected
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_flush_response_bytes(NativeSafeHandle pInProcessHandler, bool fMoreData, out bool fCompletionExpected);
+        private static extern int http_flush_response_bytes(
+            NativeSafeHandle pInProcessHandler,
+            bool fMoreData,
+            out bool fCompletionExpected
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe HttpApiTypes.HTTP_REQUEST_V2* http_get_raw_request(NativeSafeHandle pInProcessHandler);
+        private static extern unsafe HttpApiTypes.HTTP_REQUEST_V2* http_get_raw_request(
+            NativeSafeHandle pInProcessHandler
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_stop_calls_into_managed(NativeSafeHandle pInProcessApplication);
+        private static extern int http_stop_calls_into_managed(
+            NativeSafeHandle pInProcessApplication
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_stop_incoming_requests(NativeSafeHandle pInProcessApplication);
+        private static extern int http_stop_incoming_requests(
+            NativeSafeHandle pInProcessApplication
+        );
 
         [DllImport(AspNetCoreModuleDll)]
         private static extern int http_disable_buffering(NativeSafeHandle pInProcessHandler);
 
         [DllImport(AspNetCoreModuleDll, CharSet = CharSet.Ansi)]
-        private static extern int http_set_response_status_code(NativeSafeHandle pInProcessHandler, ushort statusCode, string pszReason);
+        private static extern int http_set_response_status_code(
+            NativeSafeHandle pInProcessHandler,
+            ushort statusCode,
+            string pszReason
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_read_request_bytes(NativeSafeHandle pInProcessHandler, byte* pvBuffer, int cbBuffer, out int dwBytesReceived, out bool fCompletionExpected);
+        private static extern unsafe int http_read_request_bytes(
+            NativeSafeHandle pInProcessHandler,
+            byte* pvBuffer,
+            int cbBuffer,
+            out int dwBytesReceived,
+            out bool fCompletionExpected
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern void http_get_completion_info(IntPtr pCompletionInfo, out int cbBytes, out int hr);
+        private static extern void http_get_completion_info(
+            IntPtr pCompletionInfo,
+            out int cbBytes,
+            out int hr
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_set_managed_context(NativeSafeHandle pInProcessHandler, IntPtr pvManagedContext);
+        private static extern int http_set_managed_context(
+            NativeSafeHandle pInProcessHandler,
+            IntPtr pvManagedContext
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_get_application_properties(ref IISConfigurationData iiConfigData);
+        private static extern int http_get_application_properties(
+            ref IISConfigurationData iiConfigData
+        );
 
         [DllImport(AspNetCoreModuleDll)]
         private static extern int http_get_server_variable(
             NativeSafeHandle pInProcessHandler,
             [MarshalAs(UnmanagedType.LPStr)] string variableName,
-            [MarshalAs(UnmanagedType.BStr)] out string value);
+            [MarshalAs(UnmanagedType.BStr)] out string value
+        );
 
         [DllImport(AspNetCoreModuleDll)]
         private static extern int http_set_server_variable(
             NativeSafeHandle pInProcessHandler,
             [MarshalAs(UnmanagedType.LPStr)] string variableName,
-            [MarshalAs(UnmanagedType.LPWStr)] string value);
+            [MarshalAs(UnmanagedType.LPWStr)] string value
+        );
 
         [DllImport(AspNetCoreModuleDll)]
         private static extern unsafe int http_websockets_read_bytes(
             NativeSafeHandle pInProcessHandler,
             byte* pvBuffer,
             int cbBuffer,
-            delegate* unmanaged<IntPtr, IntPtr, IntPtr, REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
+            delegate* unmanaged<
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
             IntPtr pvCompletionContext,
             out int dwBytesReceived,
-            out bool fCompletionExpected);
+            out bool fCompletionExpected
+        );
 
         [DllImport(AspNetCoreModuleDll)]
         private static extern unsafe int http_websockets_write_bytes(
             NativeSafeHandle pInProcessHandler,
             HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
             int nChunks,
-            delegate* unmanaged<IntPtr, IntPtr, IntPtr, REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
+            delegate* unmanaged<
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
             IntPtr pvCompletionContext,
-            out bool fCompletionExpected);
+            out bool fCompletionExpected
+        );
 
         [DllImport(AspNetCoreModuleDll)]
         private static extern int http_enable_websockets(NativeSafeHandle pInProcessHandler);
@@ -132,58 +188,121 @@ namespace Microsoft.AspNetCore.Server.IIS
         private static extern int http_close_connection(NativeSafeHandle pInProcessHandler);
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_response_set_unknown_header(NativeSafeHandle pInProcessHandler, byte* pszHeaderName, byte* pszHeaderValue, ushort usHeaderValueLength, bool fReplace);
+        private static extern unsafe int http_response_set_unknown_header(
+            NativeSafeHandle pInProcessHandler,
+            byte* pszHeaderName,
+            byte* pszHeaderValue,
+            ushort usHeaderValueLength,
+            bool fReplace
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_has_response4(NativeSafeHandle pInProcessHandler, out bool isResponse4);
+        private static extern unsafe int http_has_response4(
+            NativeSafeHandle pInProcessHandler,
+            out bool isResponse4
+        );
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_response_set_trailer(NativeSafeHandle pInProcessHandler, byte* pszHeaderName, byte* pszHeaderValue, ushort usHeaderValueLength, bool replace);
+        private static extern unsafe int http_response_set_trailer(
+            NativeSafeHandle pInProcessHandler,
+            byte* pszHeaderName,
+            byte* pszHeaderValue,
+            ushort usHeaderValueLength,
+            bool replace
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_reset_stream(NativeSafeHandle pInProcessHandler, ulong errorCode);
+        private static extern unsafe int http_reset_stream(
+            NativeSafeHandle pInProcessHandler,
+            ulong errorCode
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_response_set_known_header(NativeSafeHandle pInProcessHandler, int headerId, byte* pHeaderValue, ushort length, bool fReplace);
+        private static extern unsafe int http_response_set_known_header(
+            NativeSafeHandle pInProcessHandler,
+            int headerId,
+            byte* pHeaderValue,
+            ushort length,
+            bool fReplace
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern int http_get_authentication_information(NativeSafeHandle pInProcessHandler, [MarshalAs(UnmanagedType.BStr)] out string authType, out IntPtr token);
+        private static extern int http_get_authentication_information(
+            NativeSafeHandle pInProcessHandler,
+            [MarshalAs(UnmanagedType.BStr)] out string authType,
+            out IntPtr token
+        );
 
         [DllImport(AspNetCoreModuleDll)]
-        private static extern unsafe int http_set_startup_error_page_content(byte* content, int contentLength);
+        private static extern unsafe int http_set_startup_error_page_content(
+            byte* content,
+            int contentLength
+        );
 
         public static void HttpPostCompletion(NativeSafeHandle pInProcessHandler, int cbBytes)
         {
             Validate(http_post_completion(pInProcessHandler, cbBytes));
         }
 
-        public static void HttpSetCompletionStatus(NativeSafeHandle pInProcessHandler, REQUEST_NOTIFICATION_STATUS rquestNotificationStatus)
+        public static void HttpSetCompletionStatus(
+            NativeSafeHandle pInProcessHandler,
+            REQUEST_NOTIFICATION_STATUS rquestNotificationStatus
+        )
         {
             Validate(http_set_completion_status(pInProcessHandler, rquestNotificationStatus));
         }
 
-        public static unsafe void HttpRegisterCallbacks(NativeSafeHandle pInProcessApplication,
+        public static unsafe void HttpRegisterCallbacks(
+            NativeSafeHandle pInProcessApplication,
             delegate* unmanaged<IntPtr, IntPtr, REQUEST_NOTIFICATION_STATUS> requestCallback,
             delegate* unmanaged<IntPtr, int> shutdownCallback,
             delegate* unmanaged<IntPtr, void> disconnectCallback,
             delegate* unmanaged<IntPtr, int, int, REQUEST_NOTIFICATION_STATUS> asyncCallback,
             delegate* unmanaged<IntPtr, void> requestsDrainedHandler,
             IntPtr pvRequestContext,
-            IntPtr pvShutdownContext)
+            IntPtr pvShutdownContext
+        )
         {
-            Validate(register_callbacks(pInProcessApplication, requestCallback, shutdownCallback, disconnectCallback, asyncCallback, requestsDrainedHandler, pvRequestContext, pvShutdownContext));
+            Validate(
+                register_callbacks(
+                    pInProcessApplication,
+                    requestCallback,
+                    shutdownCallback,
+                    disconnectCallback,
+                    asyncCallback,
+                    requestsDrainedHandler,
+                    pvRequestContext,
+                    pvShutdownContext
+                )
+            );
         }
 
-        internal static unsafe int HttpWriteResponseBytes(NativeSafeHandle pInProcessHandler, HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks, int nChunks, out bool fCompletionExpected)
+        internal static unsafe int HttpWriteResponseBytes(
+            NativeSafeHandle pInProcessHandler,
+            HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
+            int nChunks,
+            out bool fCompletionExpected
+        )
         {
-            return http_write_response_bytes(pInProcessHandler, pDataChunks, nChunks, out fCompletionExpected);
+            return http_write_response_bytes(
+                pInProcessHandler,
+                pDataChunks,
+                nChunks,
+                out fCompletionExpected
+            );
         }
 
-        public static int HttpFlushResponseBytes(NativeSafeHandle pInProcessHandler, bool fMoreData, out bool fCompletionExpected)
+        public static int HttpFlushResponseBytes(
+            NativeSafeHandle pInProcessHandler,
+            bool fMoreData,
+            out bool fCompletionExpected
+        )
         {
             return http_flush_response_bytes(pInProcessHandler, fMoreData, out fCompletionExpected);
         }
 
-        internal static unsafe HttpApiTypes.HTTP_REQUEST_V2* HttpGetRawRequest(NativeSafeHandle pInProcessHandler)
+        internal static unsafe HttpApiTypes.HTTP_REQUEST_V2* HttpGetRawRequest(
+            NativeSafeHandle pInProcessHandler
+        )
         {
             return http_get_raw_request(pInProcessHandler);
         }
@@ -203,22 +322,45 @@ namespace Microsoft.AspNetCore.Server.IIS
             Validate(http_disable_buffering(pInProcessHandler));
         }
 
-        public static void HttpSetResponseStatusCode(NativeSafeHandle pInProcessHandler, ushort statusCode, string pszReason)
+        public static void HttpSetResponseStatusCode(
+            NativeSafeHandle pInProcessHandler,
+            ushort statusCode,
+            string pszReason
+        )
         {
             Validate(http_set_response_status_code(pInProcessHandler, statusCode, pszReason));
         }
 
-        public static unsafe int HttpReadRequestBytes(NativeSafeHandle pInProcessHandler, byte* pvBuffer, int cbBuffer, out int dwBytesReceived, out bool fCompletionExpected)
+        public static unsafe int HttpReadRequestBytes(
+            NativeSafeHandle pInProcessHandler,
+            byte* pvBuffer,
+            int cbBuffer,
+            out int dwBytesReceived,
+            out bool fCompletionExpected
+        )
         {
-            return http_read_request_bytes(pInProcessHandler, pvBuffer, cbBuffer, out dwBytesReceived, out fCompletionExpected);
+            return http_read_request_bytes(
+                pInProcessHandler,
+                pvBuffer,
+                cbBuffer,
+                out dwBytesReceived,
+                out fCompletionExpected
+            );
         }
 
-        public static void HttpGetCompletionInfo(IntPtr pCompletionInfo, out int cbBytes, out int hr)
+        public static void HttpGetCompletionInfo(
+            IntPtr pCompletionInfo,
+            out int cbBytes,
+            out int hr
+        )
         {
             http_get_completion_info(pCompletionInfo, out cbBytes, out hr);
         }
 
-        public static void HttpSetManagedContext(NativeSafeHandle pInProcessHandler, IntPtr pvManagedContext)
+        public static void HttpSetManagedContext(
+            NativeSafeHandle pInProcessHandler,
+            IntPtr pvManagedContext
+        )
         {
             Validate(http_set_managed_context(pInProcessHandler, pvManagedContext));
         }
@@ -230,12 +372,20 @@ namespace Microsoft.AspNetCore.Server.IIS
             return iisConfigurationData;
         }
 
-        public static bool HttpTryGetServerVariable(NativeSafeHandle pInProcessHandler, string variableName, out string value)
+        public static bool HttpTryGetServerVariable(
+            NativeSafeHandle pInProcessHandler,
+            string variableName,
+            out string value
+        )
         {
             return http_get_server_variable(pInProcessHandler, variableName, out value) == 0;
         }
 
-        public static void HttpSetServerVariable(NativeSafeHandle pInProcessHandler, string variableName, string value)
+        public static void HttpSetServerVariable(
+            NativeSafeHandle pInProcessHandler,
+            string variableName,
+            string value
+        )
         {
             Validate(http_set_server_variable(pInProcessHandler, variableName, value));
         }
@@ -244,22 +394,48 @@ namespace Microsoft.AspNetCore.Server.IIS
             NativeSafeHandle pInProcessHandler,
             byte* pvBuffer,
             int cbBuffer,
-            delegate* unmanaged<IntPtr, IntPtr, IntPtr, REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
-            IntPtr pvCompletionContext, out int dwBytesReceived,
-            out bool fCompletionExpected)
+            delegate* unmanaged<
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
+            IntPtr pvCompletionContext,
+            out int dwBytesReceived,
+            out bool fCompletionExpected
+        )
         {
-            return http_websockets_read_bytes(pInProcessHandler, pvBuffer, cbBuffer, pfnCompletionCallback, pvCompletionContext, out dwBytesReceived, out fCompletionExpected);
+            return http_websockets_read_bytes(
+                pInProcessHandler,
+                pvBuffer,
+                cbBuffer,
+                pfnCompletionCallback,
+                pvCompletionContext,
+                out dwBytesReceived,
+                out fCompletionExpected
+            );
         }
 
         internal static unsafe int HttpWebsocketsWriteBytes(
             NativeSafeHandle pInProcessHandler,
             HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks,
             int nChunks,
-            delegate* unmanaged<IntPtr, IntPtr, IntPtr, REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
+            delegate* unmanaged<
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                REQUEST_NOTIFICATION_STATUS> pfnCompletionCallback,
             IntPtr pvCompletionContext,
-            out bool fCompletionExpected)
+            out bool fCompletionExpected
+        )
         {
-            return http_websockets_write_bytes(pInProcessHandler, pDataChunks, nChunks, pfnCompletionCallback, pvCompletionContext, out fCompletionExpected);
+            return http_websockets_write_bytes(
+                pInProcessHandler,
+                pDataChunks,
+                nChunks,
+                pfnCompletionCallback,
+                pvCompletionContext,
+                out fCompletionExpected
+            );
         }
 
         public static void HttpEnableWebsockets(NativeSafeHandle pInProcessHandler)
@@ -286,19 +462,53 @@ namespace Microsoft.AspNetCore.Server.IIS
             Validate(http_close_connection(pInProcessHandler));
         }
 
-        public static unsafe void HttpResponseSetUnknownHeader(NativeSafeHandle pInProcessHandler, byte* pszHeaderName, byte* pszHeaderValue, ushort usHeaderValueLength, bool fReplace)
+        public static unsafe void HttpResponseSetUnknownHeader(
+            NativeSafeHandle pInProcessHandler,
+            byte* pszHeaderName,
+            byte* pszHeaderValue,
+            ushort usHeaderValueLength,
+            bool fReplace
+        )
         {
-            Validate(http_response_set_unknown_header(pInProcessHandler, pszHeaderName, pszHeaderValue, usHeaderValueLength, fReplace));
+            Validate(
+                http_response_set_unknown_header(
+                    pInProcessHandler,
+                    pszHeaderName,
+                    pszHeaderValue,
+                    usHeaderValueLength,
+                    fReplace
+                )
+            );
         }
 
-        public static unsafe void HttpResponseSetKnownHeader(NativeSafeHandle pInProcessHandler, int headerId, byte* pHeaderValue, ushort length, bool fReplace)
+        public static unsafe void HttpResponseSetKnownHeader(
+            NativeSafeHandle pInProcessHandler,
+            int headerId,
+            byte* pHeaderValue,
+            ushort length,
+            bool fReplace
+        )
         {
-            Validate(http_response_set_known_header(pInProcessHandler, headerId, pHeaderValue, length, fReplace));
+            Validate(
+                http_response_set_known_header(
+                    pInProcessHandler,
+                    headerId,
+                    pHeaderValue,
+                    length,
+                    fReplace
+                )
+            );
         }
 
-        public static void HttpGetAuthenticationInformation(NativeSafeHandle pInProcessHandler, out string authType, out IntPtr token)
+        public static void HttpGetAuthenticationInformation(
+            NativeSafeHandle pInProcessHandler,
+            out string authType,
+            out IntPtr token
+        )
         {
-            Validate(http_get_authentication_information(pInProcessHandler, out authType, out token));
+            Validate(
+                http_get_authentication_information(pInProcessHandler, out authType, out token)
+            );
         }
 
         internal static unsafe void HttpSetStartupErrorPageContent(byte[] content)
@@ -309,12 +519,29 @@ namespace Microsoft.AspNetCore.Server.IIS
             }
         }
 
-        internal static unsafe void HttpResponseSetTrailer(NativeSafeHandle pInProcessHandler, byte* pHeaderName, byte* pHeaderValue, ushort length, bool replace)
+        internal static unsafe void HttpResponseSetTrailer(
+            NativeSafeHandle pInProcessHandler,
+            byte* pHeaderName,
+            byte* pHeaderValue,
+            ushort length,
+            bool replace
+        )
         {
-            Validate(http_response_set_trailer(pInProcessHandler, pHeaderName, pHeaderValue, length, false));
+            Validate(
+                http_response_set_trailer(
+                    pInProcessHandler,
+                    pHeaderName,
+                    pHeaderValue,
+                    length,
+                    false
+                )
+            );
         }
 
-        internal static unsafe void HttpResetStream(NativeSafeHandle pInProcessHandler, ulong errorCode)
+        internal static unsafe void HttpResetStream(
+            NativeSafeHandle pInProcessHandler,
+            ulong errorCode
+        )
         {
             Validate(http_reset_stream(pInProcessHandler, errorCode));
         }

@@ -81,7 +81,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ScriptTag()
         {
-            ParseDocumentTest("<script>foo < bar && quantity.toString() !== orderQty.val()</script>");
+            ParseDocumentTest(
+                "<script>foo < bar && quantity.toString() !== orderQty.val()</script>"
+            );
         }
 
         [Fact]

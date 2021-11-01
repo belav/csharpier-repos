@@ -15,7 +15,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class BundleExtractToSpecificPath : BundleTestBase, IClassFixture<BundleExtractToSpecificPath.SharedTestState>
+    public class BundleExtractToSpecificPath
+        : BundleTestBase,
+          IClassFixture<BundleExtractToSpecificPath.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -43,20 +45,27 @@ namespace AppHost.Bundle.Tests
             var extractBaseDir = BundleHelper.GetExtractionRootDir(fixture);
             extractBaseDir.Should().NotHaveDirectory(BundleHelper.GetAppBaseName(fixture));
 
-            // Run the bundled app for the first time, and extract files to 
+            // Run the bundled app for the first time, and extract files to
             // $DOTNET_BUNDLE_EXTRACT_BASE_DIR/<app>/bundle-id
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(BundleHelper.DotnetBundleExtractBaseEnvVariable, extractBaseDir.FullName)
+                .EnvironmentVariable(
+                    BundleHelper.DotnetBundleExtractBaseEnvVariable,
+                    extractBaseDir.FullName
+                )
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             var extractDir = BundleHelper.GetExtractionDir(fixture, bundler);
-            extractDir.Should().HaveFiles(BundleHelper.GetExtractedFiles(fixture, BundleOptions.BundleNativeBinaries));
+            extractDir
+                .Should()
+                .HaveFiles(
+                    BundleHelper.GetExtractedFiles(fixture, BundleOptions.BundleNativeBinaries)
+                );
             extractDir.Should().NotHaveFiles(BundleHelper.GetFilesNeverExtracted(fixture));
         }
 
@@ -70,7 +79,10 @@ namespace AppHost.Bundle.Tests
         [InlineData("foo/bar", BundleOptions.BundleNativeBinaries)]
         [InlineData("foo\\bar", BundleOptions.BundleNativeBinaries)]
         [Theory]
-        private void Bundle_Extraction_To_Relative_Path_Succeeds(string relativePath, BundleOptions bundleOptions)
+        private void Bundle_Extraction_To_Relative_Path_Succeeds(
+            string relativePath,
+            BundleOptions bundleOptions
+        )
         {
             // As we don't modify user defined environment variables, we will not convert
             // any forward slashes to the standard Windows dir separator ('\'), thus
@@ -91,14 +103,17 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             var extractedFiles = BundleHelper.GetExtractedFiles(fixture, bundleOptions);
-            var extractedDir = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(singleFile),
-                relativePath,
-                fixture.TestProject.ProjectName,
-                bundler.BundleManifest.BundleID));
+            var extractedDir = new DirectoryInfo(
+                Path.Combine(
+                    Path.GetDirectoryName(singleFile),
+                    relativePath,
+                    fixture.TestProject.ProjectName,
+                    bundler.BundleManifest.BundleID
+                )
+            );
 
             extractedDir.Should().HaveFiles(extractedFiles);
         }
@@ -115,17 +130,20 @@ namespace AppHost.Bundle.Tests
             // Create a directory for extraction.
             var extractBaseDir = BundleHelper.GetExtractionRootDir(fixture);
 
-            // Run the bunded app for the first time, and extract files to 
+            // Run the bunded app for the first time, and extract files to
             // $DOTNET_BUNDLE_EXTRACT_BASE_DIR/<app>/bundle-id
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(BundleHelper.DotnetBundleExtractBaseEnvVariable, extractBaseDir.FullName)
+                .EnvironmentVariable(
+                    BundleHelper.DotnetBundleExtractBaseEnvVariable,
+                    extractBaseDir.FullName
+                )
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             var extractDir = BundleHelper.GetExtractionDir(fixture, bundler);
 
@@ -138,15 +156,18 @@ namespace AppHost.Bundle.Tests
             }
 
             // Run the bundled app again (reuse extracted files)
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(BundleHelper.DotnetBundleExtractBaseEnvVariable, extractBaseDir.FullName)
+                .EnvironmentVariable(
+                    BundleHelper.DotnetBundleExtractBaseEnvVariable,
+                    extractBaseDir.FullName
+                )
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             extractDir.Should().NotBeModifiedAfter(firstWriteTime);
         }
@@ -165,37 +186,49 @@ namespace AppHost.Bundle.Tests
             // Create a directory for extraction.
             var extractBaseDir = BundleHelper.GetExtractionRootDir(fixture);
 
-            // Run the bunded app for the first time, and extract files to 
+            // Run the bunded app for the first time, and extract files to
             // $DOTNET_BUNDLE_EXTRACT_BASE_DIR/<app>/bundle-id
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(BundleHelper.DotnetBundleExtractBaseEnvVariable, extractBaseDir.FullName)
+                .EnvironmentVariable(
+                    BundleHelper.DotnetBundleExtractBaseEnvVariable,
+                    extractBaseDir.FullName
+                )
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             // Remove the extracted files, but keep the extraction directory
             var extractDir = BundleHelper.GetExtractionDir(fixture, bundler);
-            var extractedFiles = BundleHelper.GetExtractedFiles(fixture, BundleOptions.BundleNativeBinaries);
+            var extractedFiles = BundleHelper.GetExtractedFiles(
+                fixture,
+                BundleOptions.BundleNativeBinaries
+            );
 
-            Array.ForEach(extractedFiles, file => File.Delete(Path.Combine(extractDir.FullName, file)));
+            Array.ForEach(
+                extractedFiles,
+                file => File.Delete(Path.Combine(extractDir.FullName, file))
+            );
 
             extractDir.Should().Exist();
             extractDir.Should().NotHaveFiles(extractedFiles);
 
             // Run the bundled app again (recover deleted files)
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(BundleHelper.DotnetBundleExtractBaseEnvVariable, extractBaseDir.FullName)
+                .EnvironmentVariable(
+                    BundleHelper.DotnetBundleExtractBaseEnvVariable,
+                    extractBaseDir.FullName
+                )
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             extractDir.Should().HaveFiles(extractedFiles);
         }

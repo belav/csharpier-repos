@@ -39,7 +39,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 CopyExtraHeaders(ref buffer, extraHeaders);
             }
 
-            static void CopyExtraHeaders(ref BufferWriter<PipeWriter> buffer, Dictionary<string, StringValues> headers)
+            static void CopyExtraHeaders(
+                ref BufferWriter<PipeWriter> buffer,
+                Dictionary<string, StringValues> headers
+            )
             {
                 foreach (var kv in headers)
                 {
@@ -69,7 +72,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         private static void ThrowInvalidContentLengthException(string value)
         {
-            throw new InvalidOperationException(CoreStrings.FormatInvalidContentLength_InvalidNumber(value));
+            throw new InvalidOperationException(
+                CoreStrings.FormatInvalidContentLength_InvalidNumber(value)
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -117,15 +122,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             object IEnumerator.Current => _current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {
                 _next = 0;
             }
         }
-
     }
 }

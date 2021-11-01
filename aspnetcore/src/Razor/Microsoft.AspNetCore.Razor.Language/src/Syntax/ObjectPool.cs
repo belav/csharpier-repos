@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         private readonly Factory _factory;
 
 #if DETECT_LEAKS
-        private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers = new ConditionalWeakTable<T, LeakTracker>();
+        private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers =
+            new ConditionalWeakTable<T, LeakTracker>();
 
         private class LeakTracker : IDisposable
         {
@@ -88,26 +89,30 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             ~LeakTracker()
             {
-                if (!this.disposed &&
-                    !Environment.HasShutdownStarted &&
-                    !AppDomain.CurrentDomain.IsFinalizingForUnload())
+                if (
+                    !this.disposed
+                    && !Environment.HasShutdownStarted
+                    && !AppDomain.CurrentDomain.IsFinalizingForUnload()
+                )
                 {
-                    string report = string.Format("Pool detected potential leaking of {0}. \n Location of the leak: \n {1} ",
+                    string report = string.Format(
+                        "Pool detected potential leaking of {0}. \n Location of the leak: \n {1} ",
                         typeof(T).ToString(),
-                        GetTrace());
+                        GetTrace()
+                    );
 
                     // If you are seeing this message it means that object has been allocated from the pool
                     // and has not been returned back. This is not critical, but turns pool into rather
                     // inefficient kind of "new".
-                    Debug.WriteLine("TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END");
+                    Debug.WriteLine(
+                        "TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END"
+                    );
                 }
             }
         }
 #endif
 
-        internal ObjectPool(Factory factory)
-            : this(factory, Environment.ProcessorCount * 2)
-        { }
+        internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }
 
         internal ObjectPool(Factory factory, int size)
         {
@@ -212,11 +217,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             }
             else
             {
-                string report = string.Format("Object of type {0} was freed, but was not from pool. \n Callstack: \n {1} ",
+                string report = string.Format(
+                    "Object of type {0} was freed, but was not from pool. \n Callstack: \n {1} ",
                     typeof(T).ToString(),
-                    new System.Diagnostics.StackTrace(false));
+                    new System.Diagnostics.StackTrace(false)
+                );
 
-                Debug.WriteLine("TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END");
+                Debug.WriteLine(
+                    "TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END"
+                );
             }
 
             if (replacement != null)

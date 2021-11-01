@@ -13,7 +13,6 @@ namespace System.Reflection.Metadata.Ecma335
         /// No local memory initialization is performed.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Zero-initialize any locals the method defines and dynamically allocated local memory.
         /// </summary>

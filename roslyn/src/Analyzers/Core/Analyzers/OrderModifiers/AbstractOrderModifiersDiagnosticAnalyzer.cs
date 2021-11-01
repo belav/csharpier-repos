@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.OrderModifiers
 {
-    internal abstract class AbstractOrderModifiersDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractOrderModifiersDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         private readonly ISyntaxFacts _syntaxFacts;
         private readonly Option2<CodeStyleOption2<string>> _option;
@@ -23,24 +24,35 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             ISyntaxFacts syntaxFacts,
             Option2<CodeStyleOption2<string>> option,
             AbstractOrderModifiersHelpers helpers,
-            string language)
-            : base(IDEDiagnosticIds.OrderModifiersDiagnosticId,
-                   EnforceOnBuildValues.OrderModifiers,
-                   option,
-                   language,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Order_modifiers), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Modifiers_are_not_ordered), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
+            string language
+        )
+            : base(
+                IDEDiagnosticIds.OrderModifiersDiagnosticId,
+                EnforceOnBuildValues.OrderModifiers,
+                option,
+                language,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Order_modifiers),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Modifiers_are_not_ordered),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            )
         {
             _syntaxFacts = syntaxFacts;
             _option = option;
             _helpers = helpers;
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
 
         private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context)
         {
@@ -58,31 +70,51 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             SyntaxTreeAnalysisContext context,
             Dictionary<int, int> preferredOrder,
             ReportDiagnostic severity,
-            SyntaxNode root);
+            SyntaxNode root
+        );
 
         protected void CheckModifiers(
             SyntaxTreeAnalysisContext context,
             Dictionary<int, int> preferredOrder,
             ReportDiagnostic severity,
-            SyntaxNode memberDeclaration)
+            SyntaxNode memberDeclaration
+        )
         {
             var modifiers = _syntaxFacts.GetModifiers(memberDeclaration);
             if (!AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers))
             {
-                if (severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) == ReportDiagnostic.Hidden)
+                if (
+                    severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                    == ReportDiagnostic.Hidden
+                )
                 {
                     // If the severity is hidden, put the marker on all the modifiers so that the
                     // user can bring up the fix anywhere in the modifier list.
                     context.ReportDiagnostic(
-                        Diagnostic.Create(Descriptor, context.Tree.GetLocation(
-                            TextSpan.FromBounds(modifiers.First().SpanStart, modifiers.Last().Span.End))));
+                        Diagnostic.Create(
+                            Descriptor,
+                            context.Tree.GetLocation(
+                                TextSpan.FromBounds(
+                                    modifiers.First().SpanStart,
+                                    modifiers.Last().Span.End
+                                )
+                            )
+                        )
+                    );
                 }
                 else
                 {
                     // If the Severity is not hidden, then just put the user visible portion on the
-                    // first token.  That way we don't 
+                    // first token.  That way we don't
                     context.ReportDiagnostic(
-                        DiagnosticHelper.Create(Descriptor, modifiers.First().GetLocation(), severity, additionalLocations: null, properties: null));
+                        DiagnosticHelper.Create(
+                            Descriptor,
+                            modifiers.First().GetLocation(),
+                            severity,
+                            additionalLocations: null,
+                            properties: null
+                        )
+                    );
                 }
             }
         }

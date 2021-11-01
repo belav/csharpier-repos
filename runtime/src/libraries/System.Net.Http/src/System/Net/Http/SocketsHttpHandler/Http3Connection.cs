@@ -21,9 +21,12 @@ namespace System.Net.Http
     internal sealed class Http3Connection : HttpConnectionBase, IDisposable
     {
         // TODO: once HTTP/3 is standardized, create APIs for this.
-        public static readonly SslApplicationProtocol Http3ApplicationProtocol29 = new SslApplicationProtocol("h3-29");
-        public static readonly SslApplicationProtocol Http3ApplicationProtocol30 = new SslApplicationProtocol("h3-30");
-        public static readonly SslApplicationProtocol Http3ApplicationProtocol31 = new SslApplicationProtocol("h3-31");
+        public static readonly SslApplicationProtocol Http3ApplicationProtocol29 =
+            new SslApplicationProtocol("h3-29");
+        public static readonly SslApplicationProtocol Http3ApplicationProtocol30 =
+            new SslApplicationProtocol("h3-30");
+        public static readonly SslApplicationProtocol Http3ApplicationProtocol31 =
+            new SslApplicationProtocol("h3-31");
 
         private readonly HttpConnectionPool _pool;
         private readonly HttpAuthority? _origin;
@@ -33,7 +36,8 @@ namespace System.Net.Http
         private Task? _connectionClosedTask;
 
         // Keep a collection of requests around so we can process GOAWAY.
-        private readonly Dictionary<QuicStream, Http3RequestStream> _activeRequests = new Dictionary<QuicStream, Http3RequestStream>();
+        private readonly Dictionary<QuicStream, Http3RequestStream> _activeRequests =
+            new Dictionary<QuicStream, Http3RequestStream>();
 
         // Set when GOAWAY is being processed, when aborting, or when disposing.
         private long _lastProcessedStreamId = -1;
@@ -52,7 +56,8 @@ namespace System.Net.Http
         // Manages MAX_STREAM count from server.
         private long _maximumRequestStreams;
         private long _requestStreamsRemaining;
-        private readonly Queue<TaskCompletionSourceWithCancellation<bool>> _waitingRequests = new Queue<TaskCompletionSourceWithCancellation<bool>>();
+        private readonly Queue<TaskCompletionSourceWithCancellation<bool>> _waitingRequests =
+            new Queue<TaskCompletionSourceWithCancellation<bool>>();
 
         // A connection-level error will abort any future operations.
         private Exception? _abortException;
@@ -76,18 +81,36 @@ namespace System.Net.Http
             }
         }
 
-        public Http3Connection(HttpConnectionPool pool, HttpAuthority? origin, HttpAuthority authority, QuicConnection connection)
+        public Http3Connection(
+            HttpConnectionPool pool,
+            HttpAuthority? origin,
+            HttpAuthority authority,
+            QuicConnection connection
+        )
         {
             _pool = pool;
             _origin = origin;
             _authority = authority;
             _connection = connection;
 
-            bool altUsedDefaultPort = pool.Kind == HttpConnectionKind.Http && authority.Port == HttpConnectionPool.DefaultHttpPort || pool.Kind == HttpConnectionKind.Https && authority.Port == HttpConnectionPool.DefaultHttpsPort;
-            string altUsedValue = altUsedDefaultPort ? authority.IdnHost : authority.IdnHost + ":" + authority.Port.ToString(Globalization.CultureInfo.InvariantCulture);
-            _altUsedEncodedHeader = QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(KnownHeaders.AltUsed.Name, altUsedValue);
+            bool altUsedDefaultPort =
+                pool.Kind == HttpConnectionKind.Http
+                    && authority.Port == HttpConnectionPool.DefaultHttpPort
+                || pool.Kind == HttpConnectionKind.Https
+                    && authority.Port == HttpConnectionPool.DefaultHttpsPort;
+            string altUsedValue = altUsedDefaultPort
+                ? authority.IdnHost
+                : authority.IdnHost
+                  + ":"
+                  + authority.Port.ToString(Globalization.CultureInfo.InvariantCulture);
+            _altUsedEncodedHeader =
+                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
+                    KnownHeaders.AltUsed.Name,
+                    altUsedValue
+                );
 
-            _maximumRequestStreams = _requestStreamsRemaining = connection.GetRemoteAvailableBidirectionalStreamCount();
+            _maximumRequestStreams = _requestStreamsRemaining =
+                connection.GetRemoteAvailableBidirectionalStreamCount();
 
             // Errors are observed via Abort().
             _ = SendSettingsAsync();
@@ -137,32 +160,45 @@ namespace System.Net.Http
 
                 if (_connectionClosedTask == null)
                 {
-                    _connectionClosedTask = _connection.CloseAsync((long)Http3ErrorCode.NoError).AsTask();
+                    _connectionClosedTask = _connection
+                        .CloseAsync((long)Http3ErrorCode.NoError)
+                        .AsTask();
                 }
 
                 QuicConnection connection = _connection;
                 _connection = null;
 
-                _ = _connectionClosedTask.ContinueWith(closeTask =>
-                {
-                    if (closeTask.IsFaulted && NetEventSource.Log.IsEnabled())
+                _ = _connectionClosedTask.ContinueWith(
+                    closeTask =>
                     {
-                        Trace($"{nameof(QuicConnection)} failed to close: {closeTask.Exception!.InnerException}");
-                    }
+                        if (closeTask.IsFaulted && NetEventSource.Log.IsEnabled())
+                        {
+                            Trace(
+                                $"{nameof(QuicConnection)} failed to close: {closeTask.Exception!.InnerException}"
+                            );
+                        }
 
-                    try
-                    {
-                        connection.Dispose();
-                    }
-                    catch (Exception ex)
-                    {
-                        Trace($"{nameof(QuicConnection)} failed to dispose: {ex}");
-                    }
-                }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                        try
+                        {
+                            connection.Dispose();
+                        }
+                        catch (Exception ex)
+                        {
+                            Trace($"{nameof(QuicConnection)} failed to dispose: {ex}");
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
             }
         }
 
-        public override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, bool async, CancellationToken cancellationToken)
+        public override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            bool async,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(async);
 
@@ -187,7 +223,9 @@ namespace System.Net.Http
 
             if (waitForAvailableStreamTcs != null)
             {
-                await waitForAvailableStreamTcs.WaitWithCancellationAsync(cancellationToken).ConfigureAwait(false);
+                await waitForAvailableStreamTcs
+                    .WaitWithCancellationAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             // Allocate an active request
@@ -209,22 +247,34 @@ namespace System.Net.Http
 
                 if (quicStream == null)
                 {
-                    throw new HttpRequestException(SR.net_http_request_aborted, null, RequestRetryType.RetryOnSameOrNextProxy);
+                    throw new HttpRequestException(
+                        SR.net_http_request_aborted,
+                        null,
+                        RequestRetryType.RetryOnSameOrNextProxy
+                    );
                 }
 
                 // 0-byte write to force QUIC to allocate a stream ID.
-                await quicStream.WriteAsync(Array.Empty<byte>(), cancellationToken).ConfigureAwait(false);
+                await quicStream
+                    .WriteAsync(Array.Empty<byte>(), cancellationToken)
+                    .ConfigureAwait(false);
                 requestStream!.StreamId = quicStream.StreamId;
 
                 bool goAway;
                 lock (SyncObj)
                 {
-                    goAway = _lastProcessedStreamId != -1 && requestStream.StreamId > _lastProcessedStreamId;
+                    goAway =
+                        _lastProcessedStreamId != -1
+                        && requestStream.StreamId > _lastProcessedStreamId;
                 }
 
                 if (goAway)
                 {
-                    throw new HttpRequestException(SR.net_http_request_aborted, null, RequestRetryType.RetryOnSameOrNextProxy);
+                    throw new HttpRequestException(
+                        SR.net_http_request_aborted,
+                        null,
+                        RequestRetryType.RetryOnSameOrNextProxy
+                    );
                 }
 
                 Task<HttpResponseMessage> responseTask = requestStream.SendAsync(cancellationToken);
@@ -238,7 +288,11 @@ namespace System.Net.Http
             {
                 // This will happen if we aborted _connection somewhere.
                 Abort(ex);
-                throw new HttpRequestException(SR.Format(SR.net_http_http3_connection_error, ex.ErrorCode), ex, RequestRetryType.RetryOnSameOrNextProxy);
+                throw new HttpRequestException(
+                    SR.Format(SR.net_http_http3_connection_error, ex.ErrorCode),
+                    ex,
+                    RequestRetryType.RetryOnSameOrNextProxy
+                );
             }
             finally
             {
@@ -281,7 +335,13 @@ namespace System.Net.Http
 
             while (_waitingRequests.TryDequeue(out TaskCompletionSourceWithCancellation<bool>? tcs))
             {
-                tcs.TrySetException(new HttpRequestException(SR.net_http_request_aborted, null, RequestRetryType.RetryOnSameOrNextProxy));
+                tcs.TrySetException(
+                    new HttpRequestException(
+                        SR.net_http_request_aborted,
+                        null,
+                        RequestRetryType.RetryOnSameOrNextProxy
+                    )
+                );
             }
         }
 
@@ -298,7 +358,12 @@ namespace System.Net.Http
                 _requestStreamsRemaining += (newMaximumStreamCount - _maximumRequestStreams);
                 _maximumRequestStreams = newMaximumStreamCount;
 
-                while (_requestStreamsRemaining != 0 && _waitingRequests.TryDequeue(out TaskCompletionSourceWithCancellation<bool>? tcs))
+                while (
+                    _requestStreamsRemaining != 0
+                    && _waitingRequests.TryDequeue(
+                        out TaskCompletionSourceWithCancellation<bool>? tcs
+                    )
+                )
                 {
                     if (tcs.TrySetResult(true))
                     {
@@ -317,11 +382,18 @@ namespace System.Net.Http
         internal Exception Abort(Exception abortException)
         {
             // Only observe the first exception we get.
-            Exception? firstException = Interlocked.CompareExchange(ref _abortException, abortException, null);
+            Exception? firstException = Interlocked.CompareExchange(
+                ref _abortException,
+                abortException,
+                null
+            );
 
             if (firstException != null)
             {
-                if (NetEventSource.Log.IsEnabled() && !ReferenceEquals(firstException, abortException))
+                if (
+                    NetEventSource.Log.IsEnabled()
+                    && !ReferenceEquals(firstException, abortException)
+                )
                 {
                     // Lost the race to set the field to another exception, so just trace this one.
                     Trace($"{nameof(abortException)}=={abortException}");
@@ -333,7 +405,9 @@ namespace System.Net.Http
             // Stop sending requests to this connection.
             _pool.InvalidateHttp3Connection(this);
 
-            Http3ErrorCode connectionResetErrorCode = (abortException as Http3ProtocolException)?.ErrorCode ?? Http3ErrorCode.InternalError;
+            Http3ErrorCode connectionResetErrorCode =
+                (abortException as Http3ProtocolException)?.ErrorCode
+                ?? Http3ErrorCode.InternalError;
 
             lock (SyncObj)
             {
@@ -347,7 +421,9 @@ namespace System.Net.Http
                 // Abort the connection. This will cause all of our streams to abort on their next I/O.
                 if (_connection != null && _connectionClosedTask == null)
                 {
-                    _connectionClosedTask = _connection.CloseAsync((long)connectionResetErrorCode).AsTask();
+                    _connectionClosedTask = _connection
+                        .CloseAsync((long)connectionResetErrorCode)
+                        .AsTask();
                 }
 
                 CancelWaiters();
@@ -373,7 +449,9 @@ namespace System.Net.Http
                     // but doesn't specify what client should do if that is violated. Ignore for now.
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        Trace("HTTP/3 server sent GOAWAY with increasing stream ID. Retried requests may have been double-processed by server.");
+                        Trace(
+                            "HTTP/3 server sent GOAWAY with increasing stream ID. Retried requests may have been double-processed by server."
+                        );
                     }
                     return;
                 }
@@ -416,20 +494,27 @@ namespace System.Net.Http
         public override void Trace(string message, [CallerMemberName] string? memberName = null) =>
             Trace(0, message, memberName);
 
-        internal void Trace(long streamId, string message, [CallerMemberName] string? memberName = null) =>
+        internal void Trace(
+            long streamId,
+            string message,
+            [CallerMemberName] string? memberName = null
+        ) =>
             NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0,    // pool ID
-                GetHashCode(),                // connection ID
-                (int)streamId,                // stream ID
-                memberName,                   // method name
-                message);                     // message
+                _pool?.GetHashCode() ?? 0, // pool ID
+                GetHashCode(), // connection ID
+                (int)streamId, // stream ID
+                memberName, // method name
+                message
+            ); // message
 
         private async Task SendSettingsAsync()
         {
             try
             {
                 _clientControl = _connection!.OpenUnidirectionalStream();
-                await _clientControl.WriteAsync(_pool.Settings.Http3SettingsFrame, CancellationToken.None).ConfigureAwait(false);
+                await _clientControl
+                    .WriteAsync(_pool.Settings.Http3SettingsFrame, CancellationToken.None)
+                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -439,9 +524,13 @@ namespace System.Net.Http
 
         public static byte[] BuildSettingsFrame(HttpConnectionSettings settings)
         {
-            Span<byte> buffer = stackalloc byte[4 + VariableLengthIntegerHelper.MaximumEncodedLength];
+            Span<byte> buffer =
+                stackalloc byte[4 + VariableLengthIntegerHelper.MaximumEncodedLength];
 
-            int integerLength = VariableLengthIntegerHelper.WriteInteger(buffer.Slice(4), settings._maxResponseHeadersLength * 1024L);
+            int integerLength = VariableLengthIntegerHelper.WriteInteger(
+                buffer.Slice(4),
+                settings._maxResponseHeadersLength * 1024L
+            );
             int payloadLength = 1 + integerLength; // includes the setting ID and the integer value.
             Debug.Assert(payloadLength <= VariableLengthIntegerHelper.OneByteLimit);
 
@@ -510,7 +599,9 @@ namespace System.Net.Http
 
                     try
                     {
-                        bytesRead = await stream.ReadAsync(buffer.AvailableMemory, CancellationToken.None).ConfigureAwait(false);
+                        bytesRead = await stream
+                            .ReadAsync(buffer.AvailableMemory, CancellationToken.None)
+                            .ConfigureAwait(false);
                     }
                     catch (QuicStreamAbortedException)
                     {
@@ -536,7 +627,9 @@ namespace System.Net.Http
                             if (Interlocked.Exchange(ref _haveServerControlStream, 1) != 0)
                             {
                                 // A second control stream has been received.
-                                throw new Http3ConnectionException(Http3ErrorCode.StreamCreationError);
+                                throw new Http3ConnectionException(
+                                    Http3ErrorCode.StreamCreationError
+                                );
                             }
 
                             // Discard the stream type header.
@@ -546,13 +639,16 @@ namespace System.Net.Http
                             ArrayBuffer bufferCopy = buffer;
                             buffer = default;
 
-                            await ProcessServerControlStreamAsync(stream, bufferCopy).ConfigureAwait(false);
+                            await ProcessServerControlStreamAsync(stream, bufferCopy)
+                                .ConfigureAwait(false);
                             return;
                         case (byte)Http3StreamType.QPackDecoder:
                             if (Interlocked.Exchange(ref _haveServerQpackDecodeStream, 1) != 0)
                             {
                                 // A second QPack decode stream has been received.
-                                throw new Http3ConnectionException(Http3ErrorCode.StreamCreationError);
+                                throw new Http3ConnectionException(
+                                    Http3ErrorCode.StreamCreationError
+                                );
                             }
 
                             // The stream must not be closed, but we aren't using QPACK right now -- ignore.
@@ -563,7 +659,9 @@ namespace System.Net.Http
                             if (Interlocked.Exchange(ref _haveServerQpackEncodeStream, 1) != 0)
                             {
                                 // A second QPack encode stream has been received.
-                                throw new Http3ConnectionException(Http3ErrorCode.StreamCreationError);
+                                throw new Http3ConnectionException(
+                                    Http3ErrorCode.StreamCreationError
+                                );
                             }
 
                             // We haven't enabled QPack in our SETTINGS frame, so we shouldn't receive any meaningful data here.
@@ -583,10 +681,20 @@ namespace System.Net.Http
                                 // Read the rest of the integer, which might be more than 1 byte, so we can log it.
 
                                 long unknownStreamType;
-                                while (!VariableLengthIntegerHelper.TryRead(buffer.ActiveSpan, out unknownStreamType, out _))
+                                while (
+                                    !VariableLengthIntegerHelper.TryRead(
+                                        buffer.ActiveSpan,
+                                        out unknownStreamType,
+                                        out _
+                                    )
+                                )
                                 {
-                                    buffer.EnsureAvailableSpace(VariableLengthIntegerHelper.MaximumEncodedLength);
-                                    bytesRead = await stream.ReadAsync(buffer.AvailableMemory, CancellationToken.None).ConfigureAwait(false);
+                                    buffer.EnsureAvailableSpace(
+                                        VariableLengthIntegerHelper.MaximumEncodedLength
+                                    );
+                                    bytesRead = await stream
+                                        .ReadAsync(buffer.AvailableMemory, CancellationToken.None)
+                                        .ConfigureAwait(false);
 
                                     if (bytesRead == 0)
                                     {
@@ -597,7 +705,10 @@ namespace System.Net.Http
                                     buffer.Commit(bytesRead);
                                 }
 
-                                NetEventSource.Info(this, $"Ignoring server-initiated stream of unknown type {unknownStreamType}.");
+                                NetEventSource.Info(
+                                    this,
+                                    $"Ignoring server-initiated stream of unknown type {unknownStreamType}."
+                                );
                             }
 
                             stream.AbortWrite((long)Http3ErrorCode.StreamCreationError);
@@ -625,7 +736,8 @@ namespace System.Net.Http
                 // Read the first frame of the control stream. Per spec:
                 // A SETTINGS frame MUST be sent as the first frame of each control stream.
 
-                (Http3FrameType? frameType, long payloadLength) = await ReadFrameEnvelopeAsync().ConfigureAwait(false);
+                (Http3FrameType? frameType, long payloadLength) = await ReadFrameEnvelopeAsync()
+                    .ConfigureAwait(false);
 
                 if (frameType == null)
                 {
@@ -644,7 +756,8 @@ namespace System.Net.Http
 
                 while (true)
                 {
-                    (frameType, payloadLength) = await ReadFrameEnvelopeAsync().ConfigureAwait(false);
+                    (frameType, payloadLength) = await ReadFrameEnvelopeAsync()
+                        .ConfigureAwait(false);
 
                     switch (frameType)
                     {
@@ -675,11 +788,17 @@ namespace System.Net.Http
                             }
                             if (!shuttingDown)
                             {
-                                throw new Http3ConnectionException(Http3ErrorCode.ClosedCriticalStream);
+                                throw new Http3ConnectionException(
+                                    Http3ErrorCode.ClosedCriticalStream
+                                );
                             }
                             return;
                         default:
-                            await SkipUnknownPayloadAsync(frameType.GetValueOrDefault(), payloadLength).ConfigureAwait(false);
+                            await SkipUnknownPayloadAsync(
+                                    frameType.GetValueOrDefault(),
+                                    payloadLength
+                                )
+                                .ConfigureAwait(false);
                             break;
                     }
                 }
@@ -687,13 +806,25 @@ namespace System.Net.Http
 
             async ValueTask<(Http3FrameType? frameType, long payloadLength)> ReadFrameEnvelopeAsync()
             {
-                long frameType, payloadLength;
+                long frameType,
+                    payloadLength;
                 int bytesRead;
 
-                while (!Http3Frame.TryReadIntegerPair(buffer.ActiveSpan, out frameType, out payloadLength, out bytesRead))
+                while (
+                    !Http3Frame.TryReadIntegerPair(
+                        buffer.ActiveSpan,
+                        out frameType,
+                        out payloadLength,
+                        out bytesRead
+                    )
+                )
                 {
-                    buffer.EnsureAvailableSpace(VariableLengthIntegerHelper.MaximumEncodedLength * 2);
-                    bytesRead = await stream.ReadAsync(buffer.AvailableMemory, CancellationToken.None).ConfigureAwait(false);
+                    buffer.EnsureAvailableSpace(
+                        VariableLengthIntegerHelper.MaximumEncodedLength * 2
+                    );
+                    bytesRead = await stream
+                        .ReadAsync(buffer.AvailableMemory, CancellationToken.None)
+                        .ConfigureAwait(false);
 
                     if (bytesRead != 0)
                     {
@@ -720,13 +851,25 @@ namespace System.Net.Http
             {
                 while (settingsPayloadLength != 0)
                 {
-                    long settingId, settingValue;
+                    long settingId,
+                        settingValue;
                     int bytesRead;
 
-                    while (!Http3Frame.TryReadIntegerPair(buffer.ActiveSpan, out settingId, out settingValue, out bytesRead))
+                    while (
+                        !Http3Frame.TryReadIntegerPair(
+                            buffer.ActiveSpan,
+                            out settingId,
+                            out settingValue,
+                            out bytesRead
+                        )
+                    )
                     {
-                        buffer.EnsureAvailableSpace(VariableLengthIntegerHelper.MaximumEncodedLength * 2);
-                        bytesRead = await stream.ReadAsync(buffer.AvailableMemory, CancellationToken.None).ConfigureAwait(false);
+                        buffer.EnsureAvailableSpace(
+                            VariableLengthIntegerHelper.MaximumEncodedLength * 2
+                        );
+                        bytesRead = await stream
+                            .ReadAsync(buffer.AvailableMemory, CancellationToken.None)
+                            .ConfigureAwait(false);
 
                         if (bytesRead != 0)
                         {
@@ -771,10 +914,18 @@ namespace System.Net.Http
                 long lastStreamId;
                 int bytesRead;
 
-                while (!VariableLengthIntegerHelper.TryRead(buffer.AvailableSpan, out lastStreamId, out bytesRead))
+                while (
+                    !VariableLengthIntegerHelper.TryRead(
+                        buffer.AvailableSpan,
+                        out lastStreamId,
+                        out bytesRead
+                    )
+                )
                 {
                     buffer.EnsureAvailableSpace(VariableLengthIntegerHelper.MaximumEncodedLength);
-                    bytesRead = await stream.ReadAsync(buffer.AvailableMemory, CancellationToken.None).ConfigureAwait(false);
+                    bytesRead = await stream
+                        .ReadAsync(buffer.AvailableMemory, CancellationToken.None)
+                        .ConfigureAwait(false);
 
                     if (bytesRead != 0)
                     {
@@ -803,7 +954,9 @@ namespace System.Net.Http
                 {
                     if (buffer.ActiveLength == 0)
                     {
-                        int bytesRead = await stream.ReadAsync(buffer.AvailableMemory, CancellationToken.None).ConfigureAwait(false);
+                        int bytesRead = await stream
+                            .ReadAsync(buffer.AvailableMemory, CancellationToken.None)
+                            .ConfigureAwait(false);
 
                         if (bytesRead != 0)
                         {

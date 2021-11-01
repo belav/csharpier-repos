@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: antiforgery,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -96,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -119,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static MvcForm BeginForm(
             this IHtmlHelper htmlHelper,
             FormMethod method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (htmlHelper == null)
             {
@@ -132,7 +136,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: null,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -162,7 +167,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             FormMethod method,
             bool? antiforgery,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (htmlHelper == null)
             {
@@ -175,7 +181,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: antiforgery,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -209,7 +216,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: routeValues,
                 method: FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -228,7 +236,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static MvcForm BeginForm(
             this IHtmlHelper htmlHelper,
             string actionName,
-            string controllerName)
+            string controllerName
+        )
         {
             if (htmlHelper == null)
             {
@@ -241,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -268,7 +278,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string actionName,
             string controllerName,
-            object routeValues)
+            object routeValues
+        )
         {
             if (htmlHelper == null)
             {
@@ -281,7 +292,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues,
                 FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -302,7 +314,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string actionName,
             string controllerName,
-            FormMethod method)
+            FormMethod method
+        )
         {
             if (htmlHelper == null)
             {
@@ -315,7 +328,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -344,7 +358,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             object routeValues,
-            FormMethod method)
+            FormMethod method
+        )
         {
             if (htmlHelper == null)
             {
@@ -357,7 +372,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues,
                 method,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -384,7 +400,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string actionName,
             string controllerName,
             FormMethod method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (htmlHelper == null)
             {
@@ -397,7 +414,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: null,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -430,7 +448,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: routeValues,
                 method: FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -456,7 +475,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <remarks>
         /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
         /// </remarks>
-        public static MvcForm BeginRouteForm(this IHtmlHelper htmlHelper, object routeValues, bool? antiforgery)
+        public static MvcForm BeginRouteForm(
+            this IHtmlHelper htmlHelper,
+            object routeValues,
+            bool? antiforgery
+        )
         {
             if (htmlHelper == null)
             {
@@ -468,7 +491,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: routeValues,
                 method: FormMethod.Post,
                 antiforgery: antiforgery,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -495,7 +519,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -515,7 +540,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <remarks>
         /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
         /// </remarks>
-        public static MvcForm BeginRouteForm(this IHtmlHelper htmlHelper, string routeName, bool? antiforgery)
+        public static MvcForm BeginRouteForm(
+            this IHtmlHelper htmlHelper,
+            string routeName,
+            bool? antiforgery
+        )
         {
             if (htmlHelper == null)
             {
@@ -527,7 +556,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: antiforgery,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -552,7 +582,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static MvcForm BeginRouteForm(
             this IHtmlHelper htmlHelper,
             string routeName,
-            object routeValues)
+            object routeValues
+        )
         {
             if (htmlHelper == null)
             {
@@ -560,11 +591,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             }
 
             return htmlHelper.BeginRouteForm(
-                routeName, 
-                routeValues, 
+                routeName,
+                routeValues,
                 FormMethod.Post,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -583,7 +615,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static MvcForm BeginRouteForm(
             this IHtmlHelper htmlHelper,
             string routeName,
-            FormMethod method)
+            FormMethod method
+        )
         {
             if (htmlHelper == null)
             {
@@ -595,7 +628,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -622,7 +656,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string routeName,
             object routeValues,
-            FormMethod method)
+            FormMethod method
+        )
         {
             if (htmlHelper == null)
             {
@@ -634,7 +669,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues,
                 method,
                 antiforgery: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -659,7 +695,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string routeName,
             FormMethod method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (htmlHelper == null)
             {
@@ -671,7 +708,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: method,
                 antiforgery: null,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
         }
     }
 }

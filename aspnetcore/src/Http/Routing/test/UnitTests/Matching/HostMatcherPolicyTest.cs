@@ -72,7 +72,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoints = new[]
             {
                 CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
-                CreateEndpoint("/", new HostAttribute(new[] { "localhost", }), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new HostAttribute(new[] { "localhost", }),
+                    new DynamicEndpointMetadata()
+                ),
             };
 
             var policy = (INodeBuilderPolicy)CreatePolicy();
@@ -99,10 +103,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var policy = (INodeBuilderPolicy)CreatePolicy();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                policy.AppliesToEndpoints(endpoints);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    policy.AppliesToEndpoints(endpoints);
+                }
+            );
         }
 
         [Fact]
@@ -126,7 +132,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new HostAttribute(Array.Empty<string>()), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new HostAttribute(Array.Empty<string>()),
+                    new DynamicEndpointMetadata()
+                ),
             };
 
             var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -145,7 +155,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoints = new[]
             {
                 CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
-                CreateEndpoint("/", new HostAttribute(new[] { "localhost", }), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new HostAttribute(new[] { "localhost", }),
+                    new DynamicEndpointMetadata()
+                ),
             };
 
             var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -186,15 +200,24 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void IEndpointSelectorPolicy_AppliesToEndpoints_InvalidHosts(string host)
         {
             // Arrange
-            var endpoints = new[] { CreateEndpoint("/", new HostAttribute(new[] { host }), new DynamicEndpointMetadata()), };
+            var endpoints = new[]
+            {
+                CreateEndpoint(
+                    "/",
+                    new HostAttribute(new[] { host }),
+                    new DynamicEndpointMetadata()
+                ),
+            };
 
             var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                policy.AppliesToEndpoints(endpoints);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    policy.AppliesToEndpoints(endpoints);
+                }
+            );
         }
 
         [Fact]
@@ -226,41 +249,67 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 e =>
                 {
                     Assert.Equal("*:*", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[7], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[7], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("*:5000", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[2], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("*:5001", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[2], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("*.contoso.com:*", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("*.sub.contoso.com:*", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("www.contoso.com:*", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[5], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[5], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("www.contoso.com:5000", e.State.ToString());
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[6], }, e.Endpoints.ToArray());
-                });
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[6], },
+                        e.Endpoints.ToArray()
+                    );
+                }
+            );
         }
 
-        private static RouteEndpoint CreateEndpoint(string template, IHostMetadata hostMetadata, params object[] more)
+        private static RouteEndpoint CreateEndpoint(
+            string template,
+            IHostMetadata hostMetadata,
+            params object[] more
+        )
         {
             var metadata = new List<object>();
             if (hostMetadata != null)
@@ -278,7 +327,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 RoutePatternFactory.Parse(template),
                 0,
                 new EndpointMetadataCollection(metadata),
-                $"test: {template} - {string.Join(", ", hostMetadata?.Hosts ?? Array.Empty<string>())}");
+                $"test: {template} - {string.Join(", ", hostMetadata?.Hosts ?? Array.Empty<string>())}"
+            );
         }
 
         private static HostMatcherPolicy CreatePolicy()

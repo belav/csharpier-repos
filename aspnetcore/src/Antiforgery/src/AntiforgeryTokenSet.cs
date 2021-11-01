@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             string? requestToken,
             string? cookieToken,
             string formFieldName,
-            string? headerName)
+            string? headerName
+        )
         {
             if (formFieldName == null)
             {

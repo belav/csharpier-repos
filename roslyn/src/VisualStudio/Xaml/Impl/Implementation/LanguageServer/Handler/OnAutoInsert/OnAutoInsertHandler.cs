@@ -18,22 +18,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(MSLSPMethods.OnAutoInsertName)]
-    internal class OnAutoInsertHandler : AbstractStatelessRequestHandler<DocumentOnAutoInsertParams, DocumentOnAutoInsertResponseItem?>
+    internal class OnAutoInsertHandler
+        : AbstractStatelessRequestHandler<
+              DocumentOnAutoInsertParams,
+              DocumentOnAutoInsertResponseItem?
+          >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OnAutoInsertHandler()
-        {
-        }
+        public OnAutoInsertHandler() { }
 
         public override string Method => MSLSPMethods.OnAutoInsertName;
 
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentOnAutoInsertParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            DocumentOnAutoInsertParams request
+        ) => request.TextDocument;
 
-        public override async Task<DocumentOnAutoInsertResponseItem?> HandleRequestAsync(DocumentOnAutoInsertParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<DocumentOnAutoInsertResponseItem?> HandleRequestAsync(
+            DocumentOnAutoInsertParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -41,15 +49,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var insertService = document.Project.LanguageServices.GetService<IXamlAutoInsertService>();
+            var insertService =
+                document.Project.LanguageServices.GetService<IXamlAutoInsertService>();
             if (insertService == null)
             {
                 return null;
             }
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
-            var result = await insertService.GetAutoInsertAsync(document, request.Character[0], offset, cancellationToken).ConfigureAwait(false);
+            var offset = text.Lines.GetPosition(
+                ProtocolConversions.PositionToLinePosition(request.Position)
+            );
+            var result = await insertService
+                .GetAutoInsertAsync(document, request.Character[0], offset, cancellationToken)
+                .ConfigureAwait(false);
             if (result == null)
             {
                 return null;

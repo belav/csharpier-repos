@@ -22,7 +22,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         // we can just operate on an array, which is much much faster.
         public readonly KeyValuePair<string, object>[] Slots;
 
-        // List of parameters to capture. Segment is the segment index, index is the 
+        // List of parameters to capture. Segment is the segment index, index is the
         // index into the values array.
         public readonly (string parameterName, int segmentIndex, int slotIndex)[] Captures;
 
@@ -40,8 +40,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         // applied to endpoints not in the set.
         //
         // The score concept boils down the system of comparisons done when ordering Endpoints
-        // to a single value that can be compared easily. This can be defeated by having 
-        // int32.MaxValue + 1 endpoints in a single set, but you would have other problems by 
+        // to a single value that can be compared easily. This can be defeated by having
+        // int32.MaxValue + 1 endpoints in a single set, but you would have other problems by
         // that point.
         //
         // Score is not part of the Endpoint itself, because it's contextual based on where
@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Slots = Array.Empty<KeyValuePair<string, object>>();
             Captures = Array.Empty<(string parameterName, int segmentIndex, int slotIndex)>();
             CatchAll = default;
-            ComplexSegments = Array.Empty<(RoutePatternPathSegment pathSegment, int segmentIndex)>();
+            ComplexSegments =
+                Array.Empty<(RoutePatternPathSegment pathSegment, int segmentIndex)>();
             Constraints = Array.Empty<KeyValuePair<string, IRouteConstraint>>();
             Score = 0;
 
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             (string parameterName, int segmentIndex, int slotIndex)[] captures,
             in (string parameterName, int segmentIndex, int slotIndex) catchAll,
             (RoutePatternPathSegment pathSegment, int segmentIndex)[] complexSegments,
-            KeyValuePair<string, IRouteConstraint>[] constraints)
+            KeyValuePair<string, IRouteConstraint>[] constraints
+        )
         {
             Endpoint = endpoint;
             Score = score;

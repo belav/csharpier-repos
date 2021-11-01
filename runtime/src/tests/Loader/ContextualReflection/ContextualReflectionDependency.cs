@@ -26,20 +26,32 @@ namespace ContextualReflectionTest
 
     public class TestResolve
     {
-        static public ResolveEvents ResolveEvent { get; set;}
+        static public ResolveEvents ResolveEvent { get; set; }
 
-        static public Assembly ResolvingTestDefault(AssemblyLoadContext alc, AssemblyName assemblyName)
+        static public Assembly ResolvingTestDefault(
+            AssemblyLoadContext alc,
+            AssemblyName assemblyName
+        )
         {
-            if (assemblyName.Name.Contains("TestDefaultLoad") && (ResolveEvent == ResolveEvents.NoEvent))
+            if (
+                assemblyName.Name.Contains("TestDefaultLoad")
+                && (ResolveEvent == ResolveEvents.NoEvent)
+            )
             {
                 ResolveEvent = ResolveEvents.ExpectedEvent;
             }
             return null;
         }
 
-        static public Assembly ResolvingTestIsolated(AssemblyLoadContext alc, AssemblyName assemblyName)
+        static public Assembly ResolvingTestIsolated(
+            AssemblyLoadContext alc,
+            AssemblyName assemblyName
+        )
         {
-            if (assemblyName.Name.Contains("TestIsolatedLoad") && (ResolveEvent == ResolveEvents.NoEvent))
+            if (
+                assemblyName.Name.Contains("TestIsolatedLoad")
+                && (ResolveEvent == ResolveEvents.NoEvent)
+            )
             {
                 ResolveEvent = ResolveEvents.ExpectedEvent;
             }
@@ -53,9 +65,7 @@ namespace ContextualReflectionTest
             {
                 action();
             }
-            catch
-            {
-            }
+            catch { }
             finally
             {
                 TestLibrary.Assert.AreEqual(expected, ResolveEvent);

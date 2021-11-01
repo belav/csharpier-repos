@@ -9,12 +9,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeFileHandle() : this(ownsHandle: true)
-        {
-        }
+        public SafeFileHandle() : this(ownsHandle: true) { }
 
-        private SafeFileHandle(bool ownsHandle)
-            : base(ownsHandle)
+        private SafeFileHandle(bool ownsHandle) : base(ownsHandle)
         {
             SetHandle(new IntPtr(-1));
         }
@@ -48,15 +45,22 @@ namespace Microsoft.Win32.SafeHandles
                 // When opening, we need to align with Windows, which considers a missing path to be
                 // FileNotFound only if the containing directory exists.
 
-                bool isDirectory = (error.Error == Interop.Error.ENOENT) &&
-                    ((flags & Interop.Sys.OpenFlags.O_CREAT) != 0
-                    || !DirectoryExists(Path.GetDirectoryName(Path.TrimEndingDirectorySeparator(path!))!));
+                bool isDirectory =
+                    (error.Error == Interop.Error.ENOENT)
+                    && (
+                        (flags & Interop.Sys.OpenFlags.O_CREAT) != 0
+                        || !DirectoryExists(
+                            Path.GetDirectoryName(Path.TrimEndingDirectorySeparator(path!))!
+                        )
+                    );
 
                 Interop.CheckIo(
                     error.Error,
                     path,
                     isDirectory,
-                    errorRewriter: e => (e.Error == Interop.Error.EISDIR) ? Interop.Error.EACCES.Info() : e);
+                    errorRewriter: e =>
+                        (e.Error == Interop.Error.EISDIR) ? Interop.Error.EACCES.Info() : e
+                );
             }
 
             // Make sure it's not a directory; we do this after opening it once we have a file descriptor
@@ -70,7 +74,11 @@ namespace Microsoft.Win32.SafeHandles
             if ((status.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR)
             {
                 handle.Dispose();
-                throw Interop.GetExceptionForIoErrno(Interop.Error.EACCES.Info(), path, isDirectory: true);
+                throw Interop.GetExceptionForIoErrno(
+                    Interop.Error.EACCES.Info(),
+                    path,
+                    isDirectory: true
+                );
             }
 
             return handle;
@@ -83,13 +91,17 @@ namespace Microsoft.Win32.SafeHandles
             // First use stat, as we want to follow symlinks.  If that fails, it could be because the symlink
             // is broken, we don't have permissions, etc., in which case fall back to using LStat to evaluate
             // based on the symlink itself.
-            if (Interop.Sys.Stat(fullPath, out fileinfo) < 0 &&
-                Interop.Sys.LStat(fullPath, out fileinfo) < 0)
+            if (
+                Interop.Sys.Stat(fullPath, out fileinfo) < 0
+                && Interop.Sys.LStat(fullPath, out fileinfo) < 0
+            )
             {
                 return false;
             }
 
-            return ((fileinfo.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR);
+            return (
+                (fileinfo.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR
+            );
         }
 
         // Each thread will have its own copy. This prevents race conditions if the handle had the last error.

@@ -25,24 +25,89 @@ namespace System.Reflection.Tests
 
         [Theory]
         // Base class
-        [InlineData(typeof(MI_NonGenericClass), nameof(MI_NonGenericClass.MethodA), new Type[] { typeof(string) }, typeof(MI_NonGenericClass))]
-        [InlineData(typeof(MI_NonGenericClass), nameof(MI_NonGenericClass.MethodA), new Type[] { typeof(string), typeof(int) }, typeof(MI_NonGenericClass))]
-        [InlineData(typeof(MI_NonGenericClass), nameof(MI_NonGenericClass.MethodA), new Type[] { typeof(int) }, typeof(MI_NonGenericClass))]
+        [InlineData(
+            typeof(MI_NonGenericClass),
+            nameof(MI_NonGenericClass.MethodA),
+            new Type[] { typeof(string) },
+            typeof(MI_NonGenericClass)
+        )]
+        [InlineData(
+            typeof(MI_NonGenericClass),
+            nameof(MI_NonGenericClass.MethodA),
+            new Type[] { typeof(string), typeof(int) },
+            typeof(MI_NonGenericClass)
+        )]
+        [InlineData(
+            typeof(MI_NonGenericClass),
+            nameof(MI_NonGenericClass.MethodA),
+            new Type[] { typeof(int) },
+            typeof(MI_NonGenericClass)
+        )]
         // Abstract base class
-        [InlineData(typeof(MI_AbstractClass), nameof(MI_AbstractClass.MethodA), new Type[0], typeof(MI_AbstractClass))]
-        [InlineData(typeof(MI_AbstractClass), nameof(MI_AbstractClass.MethodA), new Type[] { typeof(int) }, typeof(MI_AbstractClass))]
+        [InlineData(
+            typeof(MI_AbstractClass),
+            nameof(MI_AbstractClass.MethodA),
+            new Type[0],
+            typeof(MI_AbstractClass)
+        )]
+        [InlineData(
+            typeof(MI_AbstractClass),
+            nameof(MI_AbstractClass.MethodA),
+            new Type[] { typeof(int) },
+            typeof(MI_AbstractClass)
+        )]
         // Abstract sub class
-        [InlineData(typeof(MI_AbstractSubClass), nameof(MI_AbstractSubClass.MethodA), new Type[0], typeof(MI_AbstractClass))]
-        [InlineData(typeof(MI_AbstractSubClass), nameof(MI_AbstractSubClass.MethodA), new Type[] { typeof(int) }, typeof(MI_AbstractClass))]
+        [InlineData(
+            typeof(MI_AbstractSubClass),
+            nameof(MI_AbstractSubClass.MethodA),
+            new Type[0],
+            typeof(MI_AbstractClass)
+        )]
+        [InlineData(
+            typeof(MI_AbstractSubClass),
+            nameof(MI_AbstractSubClass.MethodA),
+            new Type[] { typeof(int) },
+            typeof(MI_AbstractClass)
+        )]
         // Sub class (both have implementations)
-        [InlineData(typeof(MI_BaseClass), nameof(MI_BaseClass.MethodA), new Type[] { typeof(int) }, typeof(MI_BaseClass))]
+        [InlineData(
+            typeof(MI_BaseClass),
+            nameof(MI_BaseClass.MethodA),
+            new Type[] { typeof(int) },
+            typeof(MI_BaseClass)
+        )]
         // Unrelated classes with the same method
-        [InlineData(typeof(MI_ClassWithSameMethod1), nameof(MI_ClassWithSameMethod1.MethodA), new Type[] { typeof(int) }, typeof(MI_ClassWithSameMethod1))]
-        [InlineData(typeof(MI_ClassWithSameMethod2), nameof(MI_ClassWithSameMethod1.MethodA), new Type[] { typeof(int) }, typeof(MI_ClassWithSameMethod2))]
+        [InlineData(
+            typeof(MI_ClassWithSameMethod1),
+            nameof(MI_ClassWithSameMethod1.MethodA),
+            new Type[] { typeof(int) },
+            typeof(MI_ClassWithSameMethod1)
+        )]
+        [InlineData(
+            typeof(MI_ClassWithSameMethod2),
+            nameof(MI_ClassWithSameMethod1.MethodA),
+            new Type[] { typeof(int) },
+            typeof(MI_ClassWithSameMethod2)
+        )]
         // Interfaces
-        [InlineData(typeof(MI_Interface), nameof(MI_Interface.MethodA), new Type[0], typeof(MI_Interface))]
-        [InlineData(typeof(MI_ClassWithInterface), nameof(MI_ClassWithInterface.MethodA), new Type[0], typeof(MI_ClassWithInterface))]
-        public void GetBaseDefinition(Type type, string name, Type[] typeArguments, Type declaringType)
+        [InlineData(
+            typeof(MI_Interface),
+            nameof(MI_Interface.MethodA),
+            new Type[0],
+            typeof(MI_Interface)
+        )]
+        [InlineData(
+            typeof(MI_ClassWithInterface),
+            nameof(MI_ClassWithInterface.MethodA),
+            new Type[0],
+            typeof(MI_ClassWithInterface)
+        )]
+        public void GetBaseDefinition(
+            Type type,
+            string name,
+            Type[] typeArguments,
+            Type declaringType
+        )
         {
             MethodInfo method = TypeExtensions.GetMethod(type, name, typeArguments);
             MethodInfo baseDefinition = method.GetBaseDefinition();
@@ -57,12 +122,42 @@ namespace System.Reflection.Tests
 
         public static IEnumerable<object[]> GetGenericArguments_TestData()
         {
-            yield return new object[] { typeof(MI_GenericClass<int>), nameof(MI_GenericClass<int>.TestGenericMethod), new string[0] };
-            yield return new object[] { typeof(MI_NonGenericClass), nameof(MI_NonGenericClass.TestGenericMethod), new string[] { "T", "U" } };
-            yield return new object[] { typeof(MI_NonGenericClass), nameof(MI_NonGenericClass.TestPartialGenericMethod), new string[] { "T" } };
-            yield return new object[] { typeof(MI_GenericClass<int>), nameof(MI_GenericClass<int>.TestMultipleGenericMethod), new string[] { "U" } };
-            yield return new object[] { typeof(MI_GenericClass<>), nameof(MI_GenericClass<int>.TestMethod), new string[0] };
-            yield return new object[] { typeof(MI_GenericClass<>), nameof(MI_GenericClass<int>.TestGenericReturnTypeMethod), new string[0] };
+            yield return new object[]
+            {
+                typeof(MI_GenericClass<int>),
+                nameof(MI_GenericClass<int>.TestGenericMethod),
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(MI_NonGenericClass),
+                nameof(MI_NonGenericClass.TestGenericMethod),
+                new string[] { "T", "U" }
+            };
+            yield return new object[]
+            {
+                typeof(MI_NonGenericClass),
+                nameof(MI_NonGenericClass.TestPartialGenericMethod),
+                new string[] { "T" }
+            };
+            yield return new object[]
+            {
+                typeof(MI_GenericClass<int>),
+                nameof(MI_GenericClass<int>.TestMultipleGenericMethod),
+                new string[] { "U" }
+            };
+            yield return new object[]
+            {
+                typeof(MI_GenericClass<>),
+                nameof(MI_GenericClass<int>.TestMethod),
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(MI_GenericClass<>),
+                nameof(MI_GenericClass<int>.TestGenericReturnTypeMethod),
+                new string[0]
+            };
         }
 
         [Theory]
@@ -78,8 +173,15 @@ namespace System.Reflection.Tests
         [Fact]
         public void Invoke_StringArgument_ReturnsString()
         {
-            MethodInfo method = TypeExtensions.GetMethod(typeof(MI_NonGenericClass), nameof(MI_NonGenericClass.MethodA), new Type[] { typeof(string) });
-            Assert.Equal("test string", method.Invoke(new MI_NonGenericClass(), new object[] { "test string" }));
+            MethodInfo method = TypeExtensions.GetMethod(
+                typeof(MI_NonGenericClass),
+                nameof(MI_NonGenericClass.MethodA),
+                new Type[] { typeof(string) }
+            );
+            Assert.Equal(
+                "test string",
+                method.Invoke(new MI_NonGenericClass(), new object[] { "test string" })
+            );
         }
     }
 

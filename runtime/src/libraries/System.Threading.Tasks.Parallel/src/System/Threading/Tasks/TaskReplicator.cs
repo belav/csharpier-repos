@@ -15,7 +15,11 @@ namespace System.Threading.Tasks
     //
     internal sealed class TaskReplicator
     {
-        public delegate void ReplicatableUserAction<TState>(ref TState replicaState, int timeout, out bool yieldedBeforeCompletion);
+        public delegate void ReplicatableUserAction<TState>(
+            ref TState replicaState,
+            int timeout,
+            out bool yieldedBeforeCompletion
+        );
 
         private readonly TaskScheduler _scheduler;
         private readonly bool _stopOnFirstFailure;
@@ -78,7 +82,12 @@ namespace System.Threading.Tasks
 
                     if (userActionYieldedBeforeCompletion)
                     {
-                        _pendingTask = new Task(s => ((Replica)s!).Execute(), this, CancellationToken.None, TaskCreationOptions.None);
+                        _pendingTask = new Task(
+                            s => ((Replica)s!).Execute(),
+                            this,
+                            CancellationToken.None,
+                            TaskCreationOptions.None
+                        );
                         _pendingTask.Start(_replicator._scheduler);
                     }
                     else
@@ -105,15 +114,24 @@ namespace System.Threading.Tasks
             private readonly ReplicatableUserAction<TState> _action;
             private TState _state = default!;
 
-            public Replica(TaskReplicator replicator, int maxConcurrency, int timeout, ReplicatableUserAction<TState> action)
-                : base(replicator, maxConcurrency, timeout)
+            public Replica(
+                TaskReplicator replicator,
+                int maxConcurrency,
+                int timeout,
+                ReplicatableUserAction<TState> action
+            ) : base(replicator, maxConcurrency, timeout)
             {
                 _action = action;
             }
 
             protected override void CreateNewReplica()
             {
-                Replica<TState> newReplica = new Replica<TState>(_replicator, _remainingConcurrency, GenerateCooperativeMultitaskingTaskTimeout(), _action);
+                Replica<TState> newReplica = new Replica<TState>(
+                    _replicator,
+                    _remainingConcurrency,
+                    GenerateCooperativeMultitaskingTaskTimeout(),
+                    _action
+                );
                 newReplica._pendingTask!.Start(_replicator._scheduler);
             }
 
@@ -129,12 +147,24 @@ namespace System.Threading.Tasks
             _stopOnFirstFailure = stopOnFirstFailure;
         }
 
-        public static void Run<TState>(ReplicatableUserAction<TState> action, ParallelOptions options, bool stopOnFirstFailure)
+        public static void Run<TState>(
+            ReplicatableUserAction<TState> action,
+            ParallelOptions options,
+            bool stopOnFirstFailure
+        )
         {
-            int maxConcurrencyLevel = (options.EffectiveMaxConcurrencyLevel > 0) ? options.EffectiveMaxConcurrencyLevel : int.MaxValue;
+            int maxConcurrencyLevel =
+                (options.EffectiveMaxConcurrencyLevel > 0)
+                    ? options.EffectiveMaxConcurrencyLevel
+                    : int.MaxValue;
 
             TaskReplicator replicator = new TaskReplicator(options, stopOnFirstFailure);
-            new Replica<TState>(replicator, maxConcurrencyLevel, CooperativeMultitaskingTaskTimeout_RootTask, action).Start();
+            new Replica<TState>(
+                replicator,
+                maxConcurrencyLevel,
+                CooperativeMultitaskingTaskTimeout_RootTask,
+                action
+            ).Start();
 
             Replica? nextReplica;
             while (replicator._pendingReplicas.TryDequeue(out nextReplica))
@@ -144,9 +174,8 @@ namespace System.Threading.Tasks
                 throw new AggregateException(replicator._exceptions);
         }
 
-
-        private const int CooperativeMultitaskingTaskTimeout_Min = 100;  // millisec
-        private const int CooperativeMultitaskingTaskTimeout_Increment = 50;  // millisec
+        private const int CooperativeMultitaskingTaskTimeout_Min = 100; // millisec
+        private const int CooperativeMultitaskingTaskTimeout_Increment = 50; // millisec
         private const int CooperativeMultitaskingTaskTimeout_RootTask = (int.MaxValue / 2);
 
         private static int GenerateCooperativeMultitaskingTaskTimeout()
@@ -155,7 +184,8 @@ namespace System.Threading.Tasks
             // Otherwise all worker will try to timeout at precisely the same point, which is bad if the work is just about to finish.
             int period = Environment.ProcessorCount;
             int pseudoRnd = Environment.TickCount;
-            return CooperativeMultitaskingTaskTimeout_Min + (pseudoRnd % period) * CooperativeMultitaskingTaskTimeout_Increment;
+            return CooperativeMultitaskingTaskTimeout_Min
+                + (pseudoRnd % period) * CooperativeMultitaskingTaskTimeout_Increment;
         }
     }
 }

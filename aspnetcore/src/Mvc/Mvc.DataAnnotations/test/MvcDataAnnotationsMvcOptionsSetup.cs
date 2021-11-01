@@ -20,10 +20,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations.Test
             var services = new ServiceCollection();
 
             services.AddSingleton<IWebHostEnvironment>(Mock.Of<IWebHostEnvironment>());
-            services.AddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
+            services.AddSingleton<
+                IValidationAttributeAdapterProvider,
+                ValidationAttributeAdapterProvider
+            >();
             services.AddSingleton<IOptions<MvcDataAnnotationsLocalizationOptions>>(
-                Options.Create(new MvcDataAnnotationsLocalizationOptions()));
-            services.AddSingleton<IConfigureOptions<MvcOptions>, MvcDataAnnotationsMvcOptionsSetup>();
+                Options.Create(new MvcDataAnnotationsLocalizationOptions())
+            );
+            services.AddSingleton<
+                IConfigureOptions<MvcOptions>,
+                MvcDataAnnotationsMvcOptionsSetup
+            >();
 
             var serviceProvider = services.BuildServiceProvider();
 

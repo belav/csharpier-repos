@@ -15,7 +15,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public partial class ImportThunk
     {
-        protected override void EmitCode(NodeFactory factory, ref X86Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref X86Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             switch (_thunkKind)
             {
@@ -29,12 +33,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (!relocsOnly)
                     {
                         // push table index
-                        instructionEncoder.EmitPUSH((sbyte)_containingImportSection.IndexFromBeginningOfArray);
+                        instructionEncoder.EmitPUSH(
+                            (sbyte)_containingImportSection.IndexFromBeginningOfArray
+                        );
                     }
 
                     // push [module]
                     instructionEncoder.EmitPUSH(factory.ModuleImport);
-
                     break;
 
                 case Kind.Lazy:

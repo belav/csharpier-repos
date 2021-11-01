@@ -14,12 +14,18 @@ namespace AutoMapper.Internal
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class InternalApi
     {
-        public static IGlobalConfiguration Internal(this IConfigurationProvider configuration) => (IGlobalConfiguration)configuration;
-        public static IGlobalConfigurationExpression Internal(this IMapperConfigurationExpression configuration) => (IGlobalConfigurationExpression)configuration;
-        public static IProfileExpressionInternal Internal(this IProfileExpression profile) => (IProfileExpressionInternal)profile;
+        public static IGlobalConfiguration Internal(this IConfigurationProvider configuration) =>
+            (IGlobalConfiguration)configuration;
+        public static IGlobalConfigurationExpression Internal(
+            this IMapperConfigurationExpression configuration
+        ) => (IGlobalConfigurationExpression)configuration;
+        public static IProfileExpressionInternal Internal(this IProfileExpression profile) =>
+            (IProfileExpressionInternal)profile;
     }
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IGlobalConfigurationExpression : IMapperConfigurationExpression, IProfileExpressionInternal
+    public interface IGlobalConfigurationExpression
+        : IMapperConfigurationExpression,
+          IProfileExpressionInternal
     {
         Func<Type, object> ServiceCtor { get; }
         IReadOnlyCollection<IProfileConfiguration> Profiles { get; }
@@ -128,7 +134,10 @@ namespace AutoMapper.Internal
         /// <returns>the matching mapper or null</returns>
         IObjectMapper FindMapper(in TypePair types);
         IProjectionBuilder ProjectionBuilder { get; }
-        Func<TSource, TDestination, ResolutionContext, TDestination> GetExecutionPlan<TSource, TDestination>(in MapRequest mapRequest);
+        Func<TSource, TDestination, ResolutionContext, TDestination> GetExecutionPlan<
+            TSource,
+            TDestination
+        >(in MapRequest mapRequest);
         void RegisterTypeMap(TypeMap typeMap);
         /// <summary>
         /// Builds the execution plan used to map the source to destination.
@@ -182,6 +191,9 @@ namespace AutoMapper.Internal
         /// </summary>
         /// <param name="condition">Condition</param>
         /// <param name="memberOptions">Callback for member options. Use the property map for conditional maps.</param>
-        void ForAllPropertyMaps(Func<PropertyMap, bool> condition, Action<PropertyMap, IMemberConfigurationExpression> memberOptions);
+        void ForAllPropertyMaps(
+            Func<PropertyMap, bool> condition,
+            Action<PropertyMap, IMemberConfigurationExpression> memberOptions
+        );
     }
 }

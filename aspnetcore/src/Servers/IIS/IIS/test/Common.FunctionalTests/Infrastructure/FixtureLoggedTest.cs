@@ -17,7 +17,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             Fixture = fixture;
         }
 
-        public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+        public override void Initialize(
+            TestContext context,
+            MethodInfo methodInfo,
+            object[] testMethodArguments,
+            ITestOutputHelper testOutputHelper
+        )
         {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
             Fixture.Attach(this);

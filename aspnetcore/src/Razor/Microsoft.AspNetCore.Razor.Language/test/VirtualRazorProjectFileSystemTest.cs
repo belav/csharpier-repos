@@ -182,14 +182,19 @@ namespace Microsoft.AspNetCore.Razor.Language
             projectSystem.Add(viewImport2);
 
             // Act
-            var items = projectSystem.FindHierarchicalItems("/", "/Views/Home/Index.cshtml", "_ViewImports.cshtml");
+            var items = projectSystem.FindHierarchicalItems(
+                "/",
+                "/Views/Home/Index.cshtml",
+                "_ViewImports.cshtml"
+            );
 
             // Assert
             Assert.Collection(
                 items,
                 item => Assert.Same(viewImport2, item),
                 item => Assert.False(item.Exists),
-                item => Assert.Same(viewImport1, item));
+                item => Assert.Same(viewImport1, item)
+            );
         }
 
         [Fact]
@@ -230,9 +235,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             Assert.Empty(root.Directories);
-            Assert.Collection(
-                root.Files,
-                file => Assert.Same(projectItem, file.ProjectItem));
+            Assert.Collection(root.Files, file => Assert.Same(projectItem, file.ProjectItem));
         }
 
         [Fact]
@@ -260,9 +263,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                             Assert.Equal("/Pages/Shared/", subDirectory.Path);
                             Assert.Collection(
                                 subDirectory.Files,
-                                file => Assert.Same(projectItem, file.ProjectItem));
-                        });
-                });
+                                file => Assert.Same(projectItem, file.ProjectItem)
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -293,9 +299,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                             Assert.Collection(
                                 subDirectory.Files,
                                 file => Assert.Same(projectItem1, file.ProjectItem),
-                                file => Assert.Same(projectItem2, file.ProjectItem));
-                        });
-                });
+                                file => Assert.Same(projectItem2, file.ProjectItem)
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -325,16 +334,20 @@ namespace Microsoft.AspNetCore.Razor.Language
                             Assert.Equal("/Pages/Products/", subDirectory.Path);
                             Assert.Collection(
                                 subDirectory.Files,
-                                file => Assert.Same(projectItem1, file.ProjectItem));
+                                file => Assert.Same(projectItem1, file.ProjectItem)
+                            );
                         },
                         subDirectory =>
                         {
                             Assert.Equal("/Pages/Accounts/", subDirectory.Path);
                             Assert.Collection(
                                 subDirectory.Files,
-                                file => Assert.Same(projectItem2, file.ProjectItem));
-                        });
-                });
+                                file => Assert.Same(projectItem2, file.ProjectItem)
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [Fact]

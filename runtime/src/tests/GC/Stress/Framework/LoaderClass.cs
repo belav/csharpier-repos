@@ -21,7 +21,6 @@ public enum eReasonForUnload
     Replay
 }
 
-
 /// <summary>
 /// The LoaderClass is how we communicate with other app domains.  It has to do 3 important things:  1) Load assemblies into the
 /// remote app domain (via Load/LoadFrom), 2) get back an object which represents the test (this is either an I...RelibilityTest or 
@@ -30,17 +29,15 @@ public enum eReasonForUnload
 public class LoaderClass
 #if !PROJECTK_BUILD
     : MarshalByRefObject
-#endif 
+#endif
 {
     private Assembly assem;
     string assembly;
 #if !PROJECTK_BUILD
     ReliabilityFramework myRf;
-#endif 
+#endif
 
-    public LoaderClass()
-    {
-    }
+    public LoaderClass() { }
 
     public void SuppressConsole()
     {
@@ -53,11 +50,14 @@ public class LoaderClass
     /// </summary>
     /// <param name="path">The assembly to load</param>
     /// <param name="paths">Paths to search for the given assembly</param>
-    public void LoadFrom(string path, string[] paths
+    public void LoadFrom(
+        string path,
+        string[] paths
 #if !PROJECTK_BUILD
-        , ReliabilityFramework rf
+        ,
+        ReliabilityFramework rf
 #endif
-        )
+    )
     {
 #if !PROJECTK_BUILD
         myRf = rf;
@@ -66,10 +66,14 @@ public class LoaderClass
         an.CodeBase = assembly = path;
 
         //register AssemblyLoad and DomainUnload events
-        AppDomain.CurrentDomain.AssemblyLoad += new AssemblyLoadEventHandler(this.UnloadOnAssemblyLoad);
+        AppDomain.CurrentDomain.AssemblyLoad += new AssemblyLoadEventHandler(
+            this.UnloadOnAssemblyLoad
+        );
         AppDomain.CurrentDomain.DomainUnload += new EventHandler(this.UnloadOnDomainUnload);
 #else
-        AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly());
+        AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(
+            Assembly.GetExecutingAssembly()
+        );
 #endif
         try
         {
@@ -103,7 +107,11 @@ public class LoaderClass
                     {
                         try
                         {
-                            assembly = ReliabilityConfig.ConvertPotentiallyRelativeFilenameToFullPath(basePath, path);
+                            assembly =
+                                ReliabilityConfig.ConvertPotentiallyRelativeFilenameToFullPath(
+                                    basePath,
+                                    path
+                                );
 #if !PROJECTK_BUILD
                             an = new AssemblyName();
                             an.CodeBase = assembly;
@@ -114,9 +122,7 @@ public class LoaderClass
 #endif
                             break;
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
                 }
             }
@@ -128,11 +134,14 @@ public class LoaderClass
     /// </summary>
     /// <param name="assemblyName">The assembly name to load</param>
     /// <param name="paths">paths to look in if the initial load fails</param>
-    public void Load(string assemblyName, string[] paths
+    public void Load(
+        string assemblyName,
+        string[] paths
 #if !PROJECTK_BUILD
-        , ReliabilityFramework rf
+        ,
+        ReliabilityFramework rf
 #endif
-        )
+    )
     {
 #if !PROJECTK_BUILD
         myRf = rf;
@@ -151,9 +160,8 @@ public class LoaderClass
         catch
         {
             Console.WriteLine("Load failed for: {0}", assemblyName);
-
 #if !PROJECTK_BUILD
-            LoadFrom(assemblyName, paths, rf);	// couldn't load the assembly, try doing a LoadFrom with paths.
+            LoadFrom(assemblyName, paths, rf); // couldn't load the assembly, try doing a LoadFrom with paths.
 #endif
         }
     }
@@ -201,7 +209,9 @@ public class LoaderClass
         {
             if (assembly.ToLower().IndexOf(".dll") != -1)
                 return (assembly);
-            throw new Exception(String.Format("Couldn't GetTypes for {0} ({1})", assembly, e.Message));
+            throw new Exception(
+                String.Format("Couldn't GetTypes for {0} ({1})", assembly, e.Message)
+            );
         }
 
         // now create an instance of the correct type in the app domain
@@ -210,16 +220,25 @@ public class LoaderClass
         {
             foreach (Type t in assemTypes)
             {
-                if (t.GetInterface("ISingleReliabilityTest") != null || t.GetInterface("IMultipleReliabilityTest") != null)
+                if (
+                    t.GetInterface("ISingleReliabilityTest") != null
+                    || t.GetInterface("IMultipleReliabilityTest") != null
+                )
                 {
 #if !PROJECTK_BUILD
                     ObjectHandle handle;
                     if (assembly.IndexOf("\\") != -1)
                         handle = AppDomain.CurrentDomain.CreateInstanceFrom(assembly, t.FullName);
-                    else if (assembly.ToLower().IndexOf(".exe") == -1 && assembly.ToLower().IndexOf(".dll") == -1)
+                    else if (
+                        assembly.ToLower().IndexOf(".exe") == -1
+                        && assembly.ToLower().IndexOf(".dll") == -1
+                    )
                         handle = AppDomain.CurrentDomain.CreateInstance(assembly, t.FullName);
                     else
-                        handle = AppDomain.CurrentDomain.CreateInstanceFrom(".\\" + assembly, t.FullName);
+                        handle = AppDomain.CurrentDomain.CreateInstanceFrom(
+                            ".\\" + assembly,
+                            t.FullName
+                        );
                     if (handle != null)
                     {
                         ourObj = handle.Unwrap();
@@ -229,7 +248,6 @@ public class LoaderClass
                     ourObj = Activator.CreateInstance(t);
 #endif
                 }
-
             }
         }
 
@@ -237,7 +255,9 @@ public class LoaderClass
             return (assembly);
 #if !PROJECTK_BUILD
         if (!(ourObj is MarshalByRefObject))
-            throw new ArgumentException("All tests implementing ISingleReliabilityTest or IMultipleReliabilityTest must inherit from MarshalByRefObject");
+            throw new ArgumentException(
+                "All tests implementing ISingleReliabilityTest or IMultipleReliabilityTest must inherit from MarshalByRefObject"
+            );
 #endif
 
         return (ourObj);

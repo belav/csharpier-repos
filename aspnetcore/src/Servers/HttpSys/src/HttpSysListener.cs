@@ -60,7 +60,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 throw new PlatformNotSupportedException();
             }
 
-            Debug.Assert(HttpApi.ApiVersion == HttpApiTypes.HTTP_API_VERSION.Version20, "Invalid Http api version");
+            Debug.Assert(
+                HttpApi.ApiVersion == HttpApiTypes.HTTP_API_VERSION.Version20,
+                "Invalid Http api version"
+            );
 
             Options = options;
 
@@ -82,7 +85,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
                 _urlGroup = new UrlGroup(_serverSession, Logger);
 
-                _requestQueue = new RequestQueue(_urlGroup, options.RequestQueueName, options.RequestQueueMode, Logger);
+                _requestQueue = new RequestQueue(
+                    _urlGroup,
+                    options.RequestQueueName,
+                    options.RequestQueueMode,
+                    Logger
+                );
 
                 _disconnectListener = new DisconnectListener(_requestQueue, Logger);
             }
@@ -205,7 +213,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
 
                     _state = State.Stopped;
-
                 }
             }
             catch (Exception exception)
@@ -269,7 +276,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             _urlGroup.Dispose();
 
             Debug.Assert(_serverSession != null, "ServerSessionHandle is null in CloseV2Config");
-            Debug.Assert(!_serverSession.Id.IsInvalid, "ServerSessionHandle is invalid in CloseV2Config");
+            Debug.Assert(
+                !_serverSession.Id.IsInvalid,
+                "ServerSessionHandle is invalid in CloseV2Config"
+            );
 
             _serverSession.Dispose();
         }
@@ -292,14 +302,21 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 // Block potential DOS attacks
                 if (requestMemory.UnknownHeaderCount > UnknownHeaderLimit)
                 {
-                    SendError(requestMemory.RequestId, StatusCodes.Status400BadRequest, authChallenges: null);
+                    SendError(
+                        requestMemory.RequestId,
+                        StatusCodes.Status400BadRequest,
+                        authChallenges: null
+                    );
                     return false;
                 }
 
                 if (!Options.Authentication.AllowAnonymous && !requestMemory.CheckAuthenticated())
                 {
-                    SendError(requestMemory.RequestId, StatusCodes.Status401Unauthorized,
-                        AuthenticationManager.GenerateChallenges(Options.Authentication.Schemes));
+                    SendError(
+                        requestMemory.RequestId,
+                        StatusCodes.Status401Unauthorized,
+                        AuthenticationManager.GenerateChallenges(Options.Authentication.Schemes)
+                    );
                     return false;
                 }
             }
@@ -312,7 +329,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             return true;
         }
 
-        internal unsafe void SendError(ulong requestId, int httpStatusCode, IList<string>? authChallenges = null)
+        internal unsafe void SendError(
+            ulong requestId,
+            int httpStatusCode,
+            IList<string>? authChallenges = null
+        )
         {
             HttpApiTypes.HTTP_RESPONSE_V2 httpResponse = new HttpApiTypes.HTTP_RESPONSE_V2();
             httpResponse.Response_V1.Version = new HttpApiTypes.HTTP_VERSION();
@@ -328,41 +349,55 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 {
                     pinnedHeaders = new List<GCHandle>(authChallenges.Count + 3);
 
-                    HttpApiTypes.HTTP_RESPONSE_INFO[] knownHeaderInfo = new HttpApiTypes.HTTP_RESPONSE_INFO[1];
+                    HttpApiTypes.HTTP_RESPONSE_INFO[] knownHeaderInfo =
+                        new HttpApiTypes.HTTP_RESPONSE_INFO[1];
                     gcHandle = GCHandle.Alloc(knownHeaderInfo, GCHandleType.Pinned);
                     pinnedHeaders.Add(gcHandle);
-                    httpResponse.pResponseInfo = (HttpApiTypes.HTTP_RESPONSE_INFO*)gcHandle.AddrOfPinnedObject();
+                    httpResponse.pResponseInfo =
+                        (HttpApiTypes.HTTP_RESPONSE_INFO*)gcHandle.AddrOfPinnedObject();
 
-                    knownHeaderInfo[httpResponse.ResponseInfoCount].Type = HttpApiTypes.HTTP_RESPONSE_INFO_TYPE.HttpResponseInfoTypeMultipleKnownHeaders;
+                    knownHeaderInfo[httpResponse.ResponseInfoCount].Type =
+                        HttpApiTypes.HTTP_RESPONSE_INFO_TYPE.HttpResponseInfoTypeMultipleKnownHeaders;
                     knownHeaderInfo[httpResponse.ResponseInfoCount].Length =
                         (uint)Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
 
-                    HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS header = new HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS();
+                    HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS header =
+                        new HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS();
 
-                    header.HeaderId = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderWwwAuthenticate;
+                    header.HeaderId =
+                        HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderWwwAuthenticate;
                     header.Flags = HttpApiTypes.HTTP_RESPONSE_INFO_FLAGS.PreserveOrder; // The docs say this is for www-auth only.
 
-                    HttpApiTypes.HTTP_KNOWN_HEADER[] nativeHeaderValues = new HttpApiTypes.HTTP_KNOWN_HEADER[authChallenges.Count];
+                    HttpApiTypes.HTTP_KNOWN_HEADER[] nativeHeaderValues =
+                        new HttpApiTypes.HTTP_KNOWN_HEADER[authChallenges.Count];
                     gcHandle = GCHandle.Alloc(nativeHeaderValues, GCHandleType.Pinned);
                     pinnedHeaders.Add(gcHandle);
-                    header.KnownHeaders = (HttpApiTypes.HTTP_KNOWN_HEADER*)gcHandle.AddrOfPinnedObject();
+                    header.KnownHeaders =
+                        (HttpApiTypes.HTTP_KNOWN_HEADER*)gcHandle.AddrOfPinnedObject();
 
-                    for (int headerValueIndex = 0; headerValueIndex < authChallenges.Count; headerValueIndex++)
+                    for (
+                        int headerValueIndex = 0;
+                        headerValueIndex < authChallenges.Count;
+                        headerValueIndex++
+                    )
                     {
                         // Add Value
                         string headerValue = authChallenges[headerValueIndex];
                         byte[] bytes = HeaderEncoding.GetBytes(headerValue);
-                        nativeHeaderValues[header.KnownHeaderCount].RawValueLength = (ushort)bytes.Length;
+                        nativeHeaderValues[header.KnownHeaderCount].RawValueLength =
+                            (ushort)bytes.Length;
                         gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                         pinnedHeaders.Add(gcHandle);
-                        nativeHeaderValues[header.KnownHeaderCount].pRawValue = (byte*)gcHandle.AddrOfPinnedObject();
+                        nativeHeaderValues[header.KnownHeaderCount].pRawValue =
+                            (byte*)gcHandle.AddrOfPinnedObject();
                         header.KnownHeaderCount++;
                     }
 
                     // This type is a struct, not an object, so pinning it causes a boxed copy to be created. We can't do that until after all the fields are set.
                     gcHandle = GCHandle.Alloc(header, GCHandleType.Pinned);
                     pinnedHeaders.Add(gcHandle);
-                    knownHeaderInfo[0].pInfo = (HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS*)gcHandle.AddrOfPinnedObject();
+                    knownHeaderInfo[0].pInfo =
+                        (HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS*)gcHandle.AddrOfPinnedObject();
 
                     httpResponse.ResponseInfoCount = 1;
                 }
@@ -371,7 +406,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 string? statusDescription = HttpReasonPhrase.Get(httpStatusCode);
                 uint dataWritten = 0;
                 uint statusCode;
-                byte[] byteReason = statusDescription != null ? HeaderEncoding.GetBytes(statusDescription) : Array.Empty<byte>();
+                byte[] byteReason =
+                    statusDescription != null
+                        ? HeaderEncoding.GetBytes(statusDescription)
+                        : Array.Empty<byte>();
                 fixed (byte* pReason = byteReason)
                 {
                     httpResponse.Response_V1.pReason = (byte*)pReason;
@@ -380,22 +418,26 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     byte[] byteContentLength = new byte[] { (byte)'0' };
                     fixed (byte* pContentLength = byteContentLength)
                     {
-                        (&httpResponse.Response_V1.Headers.KnownHeaders)[(int)HttpSysResponseHeader.ContentLength].pRawValue = (byte*)pContentLength;
-                        (&httpResponse.Response_V1.Headers.KnownHeaders)[(int)HttpSysResponseHeader.ContentLength].RawValueLength = (ushort)byteContentLength.Length;
+                        (&httpResponse.Response_V1.Headers.KnownHeaders)[
+                            (int)HttpSysResponseHeader.ContentLength
+                        ].pRawValue = (byte*)pContentLength;
+                        (&httpResponse.Response_V1.Headers.KnownHeaders)[
+                            (int)HttpSysResponseHeader.ContentLength
+                        ].RawValueLength = (ushort)byteContentLength.Length;
                         httpResponse.Response_V1.Headers.UnknownHeaderCount = 0;
 
-                        statusCode =
-                            HttpApi.HttpSendHttpResponse(
-                                _requestQueue.Handle,
-                                requestId,
-                                0,
-                                &httpResponse,
-                                null,
-                                &dataWritten,
-                                IntPtr.Zero,
-                                0,
-                                SafeNativeOverlapped.Zero,
-                                IntPtr.Zero);
+                        statusCode = HttpApi.HttpSendHttpResponse(
+                            _requestQueue.Handle,
+                            requestId,
+                            0,
+                            &httpResponse,
+                            null,
+                            &dataWritten,
+                            IntPtr.Zero,
+                            0,
+                            SafeNativeOverlapped.Zero,
+                            IntPtr.Zero
+                        );
                     }
                 }
                 if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)

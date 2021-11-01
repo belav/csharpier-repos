@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that adds properties to entity types corresponding to scalar public properties on the CLR type.
     /// </summary>
-    public class PropertyDiscoveryConvention : IEntityTypeAddedConvention, IEntityTypeBaseTypeChangedConvention
+    public class PropertyDiscoveryConvention
+        : IEntityTypeAddedConvention,
+          IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.
@@ -34,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             Process(entityTypeBuilder);
         }
@@ -50,11 +53,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
+            IConventionContext<IConventionEntityType> context
+        )
         {
-            if ((newBaseType == null
-                    || oldBaseType != null)
-                && entityTypeBuilder.Metadata.BaseType == newBaseType)
+            if (
+                (newBaseType == null || oldBaseType != null)
+                && entityTypeBuilder.Metadata.BaseType == newBaseType
+            )
             {
                 Process(entityTypeBuilder);
             }
@@ -76,8 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="propertyInfo"> The property. </param>
         /// <returns> <see langword="true"/> if the property should be mapped. </returns>
-        protected virtual bool IsCandidatePrimitiveProperty(PropertyInfo propertyInfo)
-            => propertyInfo.IsCandidateProperty()
-                && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null;
+        protected virtual bool IsCandidatePrimitiveProperty(PropertyInfo propertyInfo) =>
+            propertyInfo.IsCandidateProperty()
+            && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null;
     }
 }

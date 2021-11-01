@@ -21,7 +21,8 @@ public class doublemm
 
     public static void Init2DMatrix(out double[,] m, out double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -45,7 +46,13 @@ public class doublemm
         }
     }
 
-    public static void InnerProduct2D(out double res, ref double[,] a, ref double[,] b, int row, int col)
+    public static void InnerProduct2D(
+        out double res,
+        ref double[,] a,
+        ref double[,] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -57,7 +64,13 @@ public class doublemm
         }
     }
 
-    public static void InnerProduct2DRef(out double res, ref double[][] a, ref double[][] b, int row, int col)
+    public static void InnerProduct2DRef(
+        out double res,
+        ref double[][] a,
+        ref double[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -71,7 +84,8 @@ public class doublemm
 
     public static void Init3DMatrix(double[,,] m, double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -101,7 +115,13 @@ public class doublemm
         }
     }
 
-    public static void InnerProduct3DRef(out double res, double[][] a, double[][] b, int row, int col)
+    public static void InnerProduct3DRef(
+        out double res,
+        double[][] a,
+        double[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -164,7 +184,13 @@ public class doublemm
             for (int j = 0; j < size; j++)
                 if (imr2d[0][i, j] != refr2d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr2d[0][i,j] {2}!=refr2d[i][j] {3}", i, j, imr2d[0][i, j], refr2d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr2d[0][i,j] {2}!=refr2d[i][j] {3}",
+                        i,
+                        j,
+                        imr2d[0][i, j],
+                        refr2d[i][j]
+                    );
                     pass = false;
                 }
         }
@@ -220,7 +246,14 @@ public class doublemm
             for (int j = 0; j < size; j++)
                 if (imr3d[0][size, i, j] != refr3d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr3d[0][{4},i,j] {2}!=refr3d[i][j] {3}", i, j, imr3d[0][size, i, j], refr3d[i][j], size);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr3d[0][{4},i,j] {2}!=refr3d[i][j] {3}",
+                        i,
+                        j,
+                        imr3d[0][size, i, j],
+                        refr3d[i][j],
+                        size
+                    );
                     pass = false;
                 }
         }

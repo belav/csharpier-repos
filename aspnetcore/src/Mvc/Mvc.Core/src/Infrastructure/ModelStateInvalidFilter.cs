@@ -29,12 +29,19 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// <param name="logger">The logger.</param>
         public ModelStateInvalidFilter(ApiBehaviorOptions apiBehaviorOptions, ILogger logger)
         {
-            _apiBehaviorOptions = apiBehaviorOptions ?? throw new ArgumentNullException(nameof(apiBehaviorOptions));
-            if (!_apiBehaviorOptions.SuppressModelStateInvalidFilter && _apiBehaviorOptions.InvalidModelStateResponseFactory == null)
+            _apiBehaviorOptions =
+                apiBehaviorOptions ?? throw new ArgumentNullException(nameof(apiBehaviorOptions));
+            if (
+                !_apiBehaviorOptions.SuppressModelStateInvalidFilter
+                && _apiBehaviorOptions.InvalidModelStateResponseFactory == null
+            )
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    typeof(ApiBehaviorOptions),
-                    nameof(ApiBehaviorOptions.InvalidModelStateResponseFactory)));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        typeof(ApiBehaviorOptions),
+                        nameof(ApiBehaviorOptions.InvalidModelStateResponseFactory)
+                    )
+                );
             }
 
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -64,9 +71,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// Invoked when an action is executed.
         /// </summary>
         /// <param name="context">The <see cref="ActionExecutedContext"/>.</param>
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
 
         /// <summary>
         /// Invoked when an action is executing.

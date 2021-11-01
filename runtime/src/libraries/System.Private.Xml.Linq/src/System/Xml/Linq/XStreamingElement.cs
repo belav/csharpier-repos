@@ -23,7 +23,8 @@ namespace System.Xml.Linq
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
         public XStreamingElement(XName name)
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
             this.name = name;
         }
 
@@ -32,8 +33,7 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
         /// <param name="content">The content to assign to the new <see cref="XStreamingElement"/> node</param>
-        public XStreamingElement(XName name, object? content)
-            : this(name)
+        public XStreamingElement(XName name, object? content) : this(name)
         {
             this.content = content is List<object?> ? new object?[] { content } : content;
         }
@@ -43,8 +43,7 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
         /// <param name="content">An array containing content to assign to the new <see cref="XStreamingElement"/> node</param>
-        public XStreamingElement(XName name, params object?[] content)
-            : this(name)
+        public XStreamingElement(XName name, params object?[] content) : this(name)
         {
             this.content = content;
         }
@@ -54,13 +53,11 @@ namespace System.Xml.Linq
         /// </summary>
         public XName Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
                 name = value;
             }
         }
@@ -77,7 +74,8 @@ namespace System.Xml.Linq
                 if (list == null)
                 {
                     list = new List<object>();
-                    if (this.content != null) list.Add(this.content);
+                    if (this.content != null)
+                        list.Add(this.content);
                     this.content = list;
                 }
                 list.Add(content);
@@ -155,7 +153,8 @@ namespace System.Xml.Linq
         /// <param name="writer"><see cref="XmlWriter"/> to write to </param>
         public void Save(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             writer.WriteStartDocument();
             WriteTo(writer);
             writer.WriteEndDocument();
@@ -216,7 +215,8 @@ namespace System.Xml.Linq
         /// <param name="writer"></param>
         public void WriteTo(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             new StreamingElementWriter(writer).WriteStreamingElement(this);
         }
 
@@ -226,8 +226,10 @@ namespace System.Xml.Linq
             {
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
-                if ((o & SaveOptions.DisableFormatting) == 0) ws.Indent = true;
-                if ((o & SaveOptions.OmitDuplicateNamespaces) != 0) ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
+                if ((o & SaveOptions.DisableFormatting) == 0)
+                    ws.Indent = true;
+                if ((o & SaveOptions.OmitDuplicateNamespaces) != 0)
+                    ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
                 using (XmlWriter w = XmlWriter.Create(sw, ws))
                 {
                     WriteTo(w);

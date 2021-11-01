@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.ClaimsTransformer.Controllers
 {
-
     public class AccountController : Controller
     {
         [HttpGet]
@@ -24,7 +23,11 @@ namespace AuthSamples.ClaimsTransformer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password, string returnUrl = null)
+        public async Task<IActionResult> Login(
+            string userName,
+            string password,
+            string returnUrl = null
+        )
         {
             ViewData["ReturnUrl"] = returnUrl;
 
@@ -37,7 +40,16 @@ namespace AuthSamples.ClaimsTransformer.Controllers
                     new Claim("role", "Member")
                 };
 
-                await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme, "user", "role")));
+                await HttpContext.SignInAsync(
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            claims,
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            "user",
+                            "role"
+                        )
+                    )
+                );
 
                 if (Url.IsLocalUrl(returnUrl))
                 {

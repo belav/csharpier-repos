@@ -25,10 +25,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat
 
             // Skip all local things that cannot escape outside of a single file: downstream consumers simply treat this as meaning a references/definition result
             // doesn't need to be stitched together across files or multiple projects or repositories.
-            if (symbol.Kind == SymbolKind.Local ||
-                symbol.Kind == SymbolKind.RangeVariable ||
-                symbol.Kind == SymbolKind.Label ||
-                symbol.Kind == SymbolKind.Alias)
+            if (
+                symbol.Kind == SymbolKind.Local
+                || symbol.Kind == SymbolKind.RangeVariable
+                || symbol.Kind == SymbolKind.Label
+                || symbol.Kind == SymbolKind.Alias
+            )
             {
                 return null;
             }
@@ -50,14 +52,18 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat
             // Namespaces are special: they're just a name that exists in the ether between compilations
             if (symbol.Kind == SymbolKind.Namespace)
             {
-                return new SymbolMoniker(WellKnownSymbolMonikerSchemes.DotnetNamespace, symbol.ToDisplayString());
+                return new SymbolMoniker(
+                    WellKnownSymbolMonikerSchemes.DotnetNamespace,
+                    symbol.ToDisplayString()
+                );
             }
 
             var symbolMoniker = symbol.ContainingAssembly.Name + "#";
 
             if (symbol.Kind == SymbolKind.Parameter)
             {
-                symbolMoniker += GetRequiredDocumentationCommentId(symbol.ContainingSymbol) + "#" + symbol.Name;
+                symbolMoniker +=
+                    GetRequiredDocumentationCommentId(symbol.ContainingSymbol) + "#" + symbol.Name;
             }
             else
             {
@@ -73,7 +79,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat
 
                 if (documentationCommentId == null)
                 {
-                    throw new Exception($"Unable to get documentation comment ID for {symbol.ToDisplayString()}");
+                    throw new Exception(
+                        $"Unable to get documentation comment ID for {symbol.ToDisplayString()}"
+                    );
                 }
 
                 return documentationCommentId;

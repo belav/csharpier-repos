@@ -7,6 +7,5 @@ namespace IdentitySample.Models.ManageViewModels
     {
         [Required]
         public IEnumerable<string> Codes { get; set; }
-
     }
 }

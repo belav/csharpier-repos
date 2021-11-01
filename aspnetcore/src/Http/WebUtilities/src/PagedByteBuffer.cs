@@ -54,12 +54,7 @@ namespace Microsoft.AspNetCore.WebUtilities
                 var currentPage = CurrentPage;
                 var copyLength = Math.Min(count, currentPage.Length - _currentPageIndex);
 
-                Buffer.BlockCopy(
-                    buffer,
-                    offset,
-                    currentPage,
-                    _currentPageIndex,
-                    copyLength);
+                Buffer.BlockCopy(buffer, offset, currentPage, _currentPageIndex, copyLength);
 
                 Length += copyLength;
                 _currentPageIndex += copyLength;
@@ -75,9 +70,7 @@ namespace Microsoft.AspNetCore.WebUtilities
             for (var i = 0; i < Pages.Count; i++)
             {
                 var page = Pages[i];
-                var length = (i == Pages.Count - 1) ?
-                    _currentPageIndex :
-                    page.Length;
+                var length = (i == Pages.Count - 1) ? _currentPageIndex : page.Length;
 
                 stream.Write(page, 0, length);
             }
@@ -92,9 +85,7 @@ namespace Microsoft.AspNetCore.WebUtilities
             for (var i = 0; i < Pages.Count; i++)
             {
                 var page = Pages[i];
-                var length = (i == Pages.Count - 1) ?
-                    _currentPageIndex :
-                    page.Length;
+                var length = (i == Pages.Count - 1) ? _currentPageIndex : page.Length;
 
                 await writer.WriteAsync(page.AsMemory(0, length), cancellationToken);
             }
@@ -109,9 +100,7 @@ namespace Microsoft.AspNetCore.WebUtilities
             for (var i = 0; i < Pages.Count; i++)
             {
                 var page = Pages[i];
-                var length = (i == Pages.Count - 1) ?
-                    _currentPageIndex :
-                    page.Length;
+                var length = (i == Pages.Count - 1) ? _currentPageIndex : page.Length;
 
                 await stream.WriteAsync(page, 0, length, cancellationToken);
             }

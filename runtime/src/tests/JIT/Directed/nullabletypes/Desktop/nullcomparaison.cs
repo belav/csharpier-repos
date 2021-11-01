@@ -4,7 +4,6 @@
 using System.Runtime.InteropServices;
 using System;
 
-
 internal class NullableTest1
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -38,8 +37,6 @@ internal class NullableTest1
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest2
 {
@@ -75,8 +72,6 @@ internal class NullableTest2
     }
 }
 
-
-
 internal class NullableTest3
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -110,8 +105,6 @@ internal class NullableTest3
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest4
 {
@@ -147,8 +140,6 @@ internal class NullableTest4
     }
 }
 
-
-
 internal class NullableTest5
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -182,8 +173,6 @@ internal class NullableTest5
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest6
 {
@@ -219,8 +208,6 @@ internal class NullableTest6
     }
 }
 
-
-
 internal class NullableTest7
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -254,8 +241,6 @@ internal class NullableTest7
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest8
 {
@@ -291,8 +276,6 @@ internal class NullableTest8
     }
 }
 
-
-
 internal class NullableTest9
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -326,8 +309,6 @@ internal class NullableTest9
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest10
 {
@@ -363,8 +344,6 @@ internal class NullableTest10
     }
 }
 
-
-
 internal class NullableTest11
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -398,8 +377,6 @@ internal class NullableTest11
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest12
 {
@@ -435,8 +412,6 @@ internal class NullableTest12
     }
 }
 
-
-
 internal class NullableTest13
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -470,8 +445,6 @@ internal class NullableTest13
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest14
 {
@@ -507,8 +480,6 @@ internal class NullableTest14
     }
 }
 
-
-
 internal class NullableTest15
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -542,8 +513,6 @@ internal class NullableTest15
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest16
 {
@@ -579,8 +548,6 @@ internal class NullableTest16
     }
 }
 
-
-
 internal class NullableTest17
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -614,8 +581,6 @@ internal class NullableTest17
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest18
 {
@@ -651,8 +616,6 @@ internal class NullableTest18
     }
 }
 
-
-
 internal class NullableTest19
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -686,8 +649,6 @@ internal class NullableTest19
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest20
 {
@@ -723,8 +684,6 @@ internal class NullableTest20
     }
 }
 
-
-
 internal class NullableTest21
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -758,8 +717,6 @@ internal class NullableTest21
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest22
 {
@@ -795,8 +752,6 @@ internal class NullableTest22
     }
 }
 
-
-
 internal class NullableTest23
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -830,8 +785,6 @@ internal class NullableTest23
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest24
 {
@@ -867,8 +820,6 @@ internal class NullableTest24
     }
 }
 
-
-
 internal class NullableTest25
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -902,8 +853,6 @@ internal class NullableTest25
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest26
 {
@@ -939,8 +888,6 @@ internal class NullableTest26
     }
 }
 
-
-
 internal class NullableTest27
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -974,8 +921,6 @@ internal class NullableTest27
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest28
 {
@@ -1011,8 +956,6 @@ internal class NullableTest28
     }
 }
 
-
-
 internal class NullableTest29
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1046,8 +989,6 @@ internal class NullableTest29
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest30
 {
@@ -1083,8 +1024,6 @@ internal class NullableTest30
     }
 }
 
-
-
 internal class NullableTest31
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1118,8 +1057,6 @@ internal class NullableTest31
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest32
 {
@@ -1155,8 +1092,6 @@ internal class NullableTest32
     }
 }
 
-
-
 internal class NullableTest33
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1190,8 +1125,6 @@ internal class NullableTest33
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest34
 {
@@ -1227,8 +1160,6 @@ internal class NullableTest34
     }
 }
 
-
-
 internal class NullableTest37
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1262,8 +1193,6 @@ internal class NullableTest37
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest38
 {
@@ -1299,8 +1228,6 @@ internal class NullableTest38
     }
 }
 
-
-
 internal class NullableTest39
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1334,8 +1261,6 @@ internal class NullableTest39
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest40
 {
@@ -1371,8 +1296,6 @@ internal class NullableTest40
     }
 }
 
-
-
 internal class NullableTest41
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1406,8 +1329,6 @@ internal class NullableTest41
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest42
 {
@@ -1443,8 +1364,6 @@ internal class NullableTest42
     }
 }
 
-
-
 internal class NullableTest43
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1478,8 +1397,6 @@ internal class NullableTest43
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class NullableTest44
 {
@@ -1515,8 +1432,6 @@ internal class NullableTest44
     }
 }
 
-
-
 internal class NullableTest45
 {
     private static bool BoxUnboxToNQGen<T>(T o)
@@ -1550,8 +1465,6 @@ internal class NullableTest45
         Assert.IsTrue(BoxUnboxToQGen(s));
     }
 }
-
-
 
 internal class Test
 {

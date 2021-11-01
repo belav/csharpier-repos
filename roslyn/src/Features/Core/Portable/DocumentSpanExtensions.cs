@@ -12,32 +12,58 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class DocumentSpanExtensions
     {
-        public static bool CanNavigateTo(this DocumentSpan documentSpan, CancellationToken cancellationToken)
+        public static bool CanNavigateTo(
+            this DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = documentSpan.Document.Project.Solution.Workspace;
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return service.CanNavigateToSpan(workspace, documentSpan.Document.Id, documentSpan.SourceSpan, cancellationToken);
+            return service.CanNavigateToSpan(
+                workspace,
+                documentSpan.Document.Id,
+                documentSpan.SourceSpan,
+                cancellationToken
+            );
         }
 
-        public static bool TryNavigateTo(this DocumentSpan documentSpan, bool showInPreviewTab, bool activateTab, CancellationToken cancellationToken)
+        public static bool TryNavigateTo(
+            this DocumentSpan documentSpan,
+            bool showInPreviewTab,
+            bool activateTab,
+            CancellationToken cancellationToken
+        )
         {
             var solution = documentSpan.Document.Project.Solution;
             var workspace = solution.Workspace;
             var service = workspace.Services.GetService<IDocumentNavigationService>();
 
-            var options = solution.Options.WithChangedOption(NavigationOptions.PreferProvisionalTab, showInPreviewTab);
+            var options = solution.Options.WithChangedOption(
+                NavigationOptions.PreferProvisionalTab,
+                showInPreviewTab
+            );
             options = options.WithChangedOption(NavigationOptions.ActivateTab, activateTab);
 
-            return service.TryNavigateToSpan(workspace, documentSpan.Document.Id, documentSpan.SourceSpan, options, cancellationToken);
+            return service.TryNavigateToSpan(
+                workspace,
+                documentSpan.Document.Id,
+                documentSpan.SourceSpan,
+                options,
+                cancellationToken
+            );
         }
 
         public static async Task<bool> IsHiddenAsync(
-            this DocumentSpan documentSpan, CancellationToken cancellationToken)
+            this DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             var document = documentSpan.Document;
             if (document.SupportsSyntaxTree)
             {
-                var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document
+                    .GetSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return tree.IsHiddenPosition(documentSpan.SourceSpan.Start, cancellationToken);
             }
 

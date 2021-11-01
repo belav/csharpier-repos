@@ -27,20 +27,27 @@ namespace Microsoft.AspNetCore.Hosting
         [SupportedOSPlatform("windows")]
         public static IWebHostBuilder UseHttpSys(this IWebHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(services => {
-                services.AddSingleton<IServer, MessagePump>();
-                services.AddTransient<AuthenticationHandler>();
-                services.AddSingleton<IServerIntegratedAuth>(services =>
+            return hostBuilder.ConfigureServices(
+                services =>
                 {
-                    var options = services.GetRequiredService<IOptions<HttpSysOptions>>().Value;
-                    return new ServerIntegratedAuth()
-                    {
-                        IsEnabled = options.Authentication.Schemes != AuthenticationSchemes.None,
-                        AuthenticationScheme = HttpSysDefaults.AuthenticationScheme,
-                    };
-                });
-                services.AddAuthenticationCore();
-            });
+                    services.AddSingleton<IServer, MessagePump>();
+                    services.AddTransient<AuthenticationHandler>();
+                    services.AddSingleton<IServerIntegratedAuth>(
+                        services =>
+                        {
+                            var options =
+                                services.GetRequiredService<IOptions<HttpSysOptions>>().Value;
+                            return new ServerIntegratedAuth()
+                            {
+                                IsEnabled =
+                                    options.Authentication.Schemes != AuthenticationSchemes.None,
+                                AuthenticationScheme = HttpSysDefaults.AuthenticationScheme,
+                            };
+                        }
+                    );
+                    services.AddAuthenticationCore();
+                }
+            );
         }
 
         /// <summary>
@@ -56,12 +63,19 @@ namespace Microsoft.AspNetCore.Hosting
         /// A reference to the <see cref="IWebHostBuilder" /> parameter object.
         /// </returns>
         [SupportedOSPlatform("windows")]
-        public static IWebHostBuilder UseHttpSys(this IWebHostBuilder hostBuilder, Action<HttpSysOptions> options)
+        public static IWebHostBuilder UseHttpSys(
+            this IWebHostBuilder hostBuilder,
+            Action<HttpSysOptions> options
+        )
         {
-            return hostBuilder.UseHttpSys().ConfigureServices(services =>
-            {
-                services.Configure(options);
-            });
+            return hostBuilder
+                .UseHttpSys()
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.Configure(options);
+                    }
+                );
         }
     }
 }

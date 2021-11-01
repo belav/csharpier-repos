@@ -20,8 +20,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteRegexMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _regexIsMatchMethodInfo
-            = typeof(Regex).GetRequiredRuntimeMethod(nameof(Regex.IsMatch), new Type[] { typeof(string), typeof(string) });
+        private static readonly MethodInfo _regexIsMatchMethodInfo =
+            typeof(Regex).GetRequiredRuntimeMethod(
+                nameof(Regex.IsMatch),
+                new Type[] { typeof(string), typeof(string) }
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -48,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -69,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },
-                    typeof(bool));
+                    typeof(bool)
+                );
             }
 
             return null;

@@ -24,33 +24,66 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class ReferenceDirectiveCompletionProviderTests : AbstractInteractiveCSharpCompletionProviderTests
+    public class ReferenceDirectiveCompletionProviderTests
+        : AbstractInteractiveCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ReferenceDirectiveCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ReferenceDirectiveCompletionProvider);
 
-        protected override IEqualityComparer<string> GetStringComparer()
-            => StringComparer.OrdinalIgnoreCase;
+        protected override IEqualityComparer<string> GetStringComparer() =>
+            StringComparer.OrdinalIgnoreCase;
 
         private protected override Task VerifyWorkerAsync(
-            string code, int position, string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger, bool checkForAbsence,
-            int? glyph, int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription = null, bool? isComplexTextEdit = null,
-            List<CompletionFilter> matchingFilters = null, CompletionItemFlags? flags = null)
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription = null,
+            bool? isComplexTextEdit = null,
+            List<CompletionFilter> matchingFilters = null,
+            CompletionItemFlags? flags = null
+        )
         {
             return BaseVerifyWorkerAsync(
-                code, position, expectedItemOrNull, expectedDescriptionOrNull,
-                sourceCodeKind, usePreviousCharAsTrigger, checkForAbsence,
-                glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags);
+                code,
+                position,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                usePreviousCharAsTrigger,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags
+            );
         }
 
         [Fact]
         public async Task IsCommitCharacterTest()
         {
-            var commitCharacters = PathUtilities.IsUnixLikePlatform ? new[] { '"', '/' } : new[] { '"', '\\', '/', ',' };
-            await VerifyCommitCharactersAsync("#r \"$$", textTypedSoFar: "", validChars: commitCharacters, sourceCodeKind: SourceCodeKind.Script);
+            var commitCharacters = PathUtilities.IsUnixLikePlatform
+                ? new[] { '"', '/' }
+                : new[] { '"', '\\', '/', ',' };
+            await VerifyCommitCharactersAsync(
+                "#r \"$$",
+                textTypedSoFar: "",
+                validChars: commitCharacters,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Theory]
@@ -60,26 +93,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("#r \"$$A")]
         [InlineData("#r \"$$!")]
         [InlineData("#r \"$$(")]
-        public void IsTextualTriggerCharacterTest(string markup)
-            => VerifyTextualTriggerCharacter(markup, shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: true, SourceCodeKind.Script);
+        public void IsTextualTriggerCharacterTest(string markup) =>
+            VerifyTextualTriggerCharacter(
+                markup,
+                shouldTriggerWithTriggerOnLettersEnabled: true,
+                shouldTriggerWithTriggerOnLettersDisabled: true,
+                SourceCodeKind.Script
+            );
 
         [ConditionalTheory(typeof(WindowsOnly))]
         [InlineData(EnterKeyRule.Never)]
         [InlineData(EnterKeyRule.AfterFullyTypedWord)]
         [InlineData(EnterKeyRule.Always)] // note: GAC completion helper uses its own EnterKeyRule
-        public async Task SendEnterThroughToEditorTest(EnterKeyRule enterKeyRule)
-            => await VerifySendEnterThroughToEnterAsync("#r \"System$$", "System", enterKeyRule, expected: false);
+        public async Task SendEnterThroughToEditorTest(EnterKeyRule enterKeyRule) =>
+            await VerifySendEnterThroughToEnterAsync(
+                "#r \"System$$",
+                "System",
+                enterKeyRule,
+                expected: false
+            );
 
         [ConditionalFact(typeof(WindowsOnly))]
-        public async Task GacReference()
-            => await VerifyItemExistsAsync("#r \"$$", "System.Windows.Forms", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+        public async Task GacReference() =>
+            await VerifyItemExistsAsync(
+                "#r \"$$",
+                "System.Windows.Forms",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
 
         [ConditionalFact(typeof(WindowsOnly))]
         public async Task GacReferenceFullyQualified()
         {
             await VerifyItemExistsAsync(
                 "#r \"System.Windows.Forms,$$",
-                "System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+                "System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -90,11 +141,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var windowsRoot = Directory.GetDirectoryRoot(systemDir);
 
             // we need to get the exact casing from the file system:
-            var normalizedWindowsPath = Directory.GetDirectories(windowsRoot, windowsDir.Name).Single();
+            var normalizedWindowsPath = Directory
+                .GetDirectories(windowsRoot, windowsDir.Name)
+                .Single();
             var windowsFolderName = Path.GetFileName(normalizedWindowsPath);
 
             var code = "#r \"" + windowsRoot + "$$";
-            await VerifyItemExistsAsync(code, windowsFolderName, expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                code,
+                windowsFolderName,
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Theory]
@@ -113,10 +171,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var position = textWithPositionMarker.IndexOf("$$");
             var text = textWithPositionMarker.Replace("$$", "");
 
-            var services = (IMefHostExportProvider)FeaturesTestCompositions.Features.GetHostServices();
-            var provider = services.GetExports<CompletionProvider, CompletionProviderMetadata>().Single(p => p.Metadata.Language == LanguageNames.CSharp && p.Metadata.Name == nameof(ReferenceDirectiveCompletionProvider)).Value;
+            var services =
+                (IMefHostExportProvider)FeaturesTestCompositions.Features.GetHostServices();
+            var provider =
+                services
+                    .GetExports<CompletionProvider, CompletionProviderMetadata>()
+                    .Single(
+                        p =>
+                            p.Metadata.Language == LanguageNames.CSharp
+                            && p.Metadata.Name == nameof(ReferenceDirectiveCompletionProvider)
+                    ).Value;
 
-            Assert.Equal(expectedResult, provider.ShouldTriggerCompletion(SourceText.From(text), position, trigger: default, new TestOptionSet()));
+            Assert.Equal(
+                expectedResult,
+                provider.ShouldTriggerCompletion(
+                    SourceText.From(text),
+                    position,
+                    trigger: default,
+                    new TestOptionSet()
+                )
+            );
         }
     }
 }

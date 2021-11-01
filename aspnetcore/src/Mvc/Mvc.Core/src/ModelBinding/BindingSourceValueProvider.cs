@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 var message = Resources.FormatBindingSource_CannotBeGreedy(
                     bindingSource.DisplayName,
-                    nameof(BindingSourceValueProvider));
+                    nameof(BindingSourceValueProvider)
+                );
                 throw new ArgumentException(message, nameof(bindingSource));
             }
 
@@ -52,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 var message = Resources.FormatBindingSource_CannotBeComposite(
                     bindingSource.DisplayName,
-                    nameof(BindingSourceValueProvider));
+                    nameof(BindingSourceValueProvider)
+                );
                 throw new ArgumentException(message, nameof(bindingSource));
             }
 

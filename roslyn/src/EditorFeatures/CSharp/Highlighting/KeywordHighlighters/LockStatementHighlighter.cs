@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LockStatementHighlighter()
-        {
-        }
+        public LockStatementHighlighter() { }
 
-        protected override void AddHighlights(LockStatementSyntax lockStatement, List<TextSpan> highlights, CancellationToken cancellationToken)
-            => highlights.Add(lockStatement.LockKeyword.Span);
+        protected override void AddHighlights(
+            LockStatementSyntax lockStatement,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        ) => highlights.Add(lockStatement.LockKeyword.Span);
     }
 }

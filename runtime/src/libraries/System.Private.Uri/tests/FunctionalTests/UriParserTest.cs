@@ -34,7 +34,8 @@ namespace System.PrivateUri.Tests
     public sealed class TestUriParser : UriParser
     {
         public TestUriParser() : base() { }
-        public new string GetComponents(Uri uri, UriComponents components, UriFormat format) => base.GetComponents(uri, components, format);
+        public new string GetComponents(Uri uri, UriComponents components, UriFormat format) =>
+            base.GetComponents(uri, components, format);
         protected override void InitializeAndValidate(Uri uri, out UriFormatException parsingError)
         {
             parsingError = null;
@@ -43,9 +44,14 @@ namespace System.PrivateUri.Tests
                 base.InitializeAndValidate(uri, out parsingError);
             }
         }
-        public new bool IsBaseOf(Uri baseUri, Uri relativeUri) => base.IsBaseOf(baseUri, relativeUri);
+        public new bool IsBaseOf(Uri baseUri, Uri relativeUri) =>
+            base.IsBaseOf(baseUri, relativeUri);
         public new bool IsWellFormedOriginalString(Uri uri) => base.IsWellFormedOriginalString(uri);
-        public new string Resolve(Uri baseUri, Uri relativeUri, out UriFormatException parsingError) => base.Resolve(baseUri, relativeUri, out parsingError);
+        public new string Resolve(
+            Uri baseUri,
+            Uri relativeUri,
+            out UriFormatException parsingError
+        ) => base.Resolve(baseUri, relativeUri, out parsingError);
         public new UriParser OnNewUri()
         {
             OnNewUriCalled = true;
@@ -63,7 +69,10 @@ namespace System.PrivateUri.Tests
         public int DefaultPort { get; private set; }
 
         public int BaseInitializeAndValidateCallCount = 1;
-        public void DangerousExposed_InitializeAndValidate(Uri uri, out UriFormatException parsingError)
+        public void DangerousExposed_InitializeAndValidate(
+            Uri uri,
+            out UriFormatException parsingError
+        )
         {
             InitializeAndValidate(uri, out parsingError);
         }
@@ -82,26 +91,99 @@ namespace System.PrivateUri.Tests
         {
             Uri http = new Uri(FullHttpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Equal("http", parser.GetComponents(http, UriComponents.Scheme, UriFormat.SafeUnescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(http, UriComponents.UserInfo, UriFormat.SafeUnescaped));
-            Assert.Equal("www.mono-project.com", parser.GetComponents(http, UriComponents.Host, UriFormat.SafeUnescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(http, UriComponents.Port, UriFormat.SafeUnescaped));
-            Assert.Equal("Main_Page", parser.GetComponents(http, UriComponents.Path, UriFormat.SafeUnescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(http, UriComponents.Query, UriFormat.SafeUnescaped));
-            Assert.Equal("FAQ?Edit", parser.GetComponents(http, UriComponents.Fragment, UriFormat.SafeUnescaped));
-            Assert.Equal("80", parser.GetComponents(http, UriComponents.StrongPort, UriFormat.SafeUnescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(http, UriComponents.KeepDelimiter, UriFormat.SafeUnescaped));
-            Assert.Equal("www.mono-project.com:80", parser.GetComponents(http, UriComponents.HostAndPort, UriFormat.SafeUnescaped));
-            Assert.Equal("www.mono-project.com:80", parser.GetComponents(http, UriComponents.StrongAuthority, UriFormat.SafeUnescaped));
-            Assert.Equal(FullHttpUri, parser.GetComponents(http, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped));
-            Assert.Equal("/Main_Page", parser.GetComponents(http, UriComponents.PathAndQuery, UriFormat.SafeUnescaped));
-            Assert.Equal("http://www.mono-project.com/Main_Page", parser.GetComponents(http, UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped));
-            Assert.Equal("http://www.mono-project.com", parser.GetComponents(http, UriComponents.SchemeAndServer, UriFormat.SafeUnescaped));
-            Assert.Equal(FullHttpUri, parser.GetComponents(http, UriComponents.SerializationInfoString, UriFormat.SafeUnescaped));
+            Assert.Equal(
+                "http",
+                parser.GetComponents(http, UriComponents.Scheme, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(http, UriComponents.UserInfo, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "www.mono-project.com",
+                parser.GetComponents(http, UriComponents.Host, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(http, UriComponents.Port, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "Main_Page",
+                parser.GetComponents(http, UriComponents.Path, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(http, UriComponents.Query, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "FAQ?Edit",
+                parser.GetComponents(http, UriComponents.Fragment, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "80",
+                parser.GetComponents(http, UriComponents.StrongPort, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(http, UriComponents.KeepDelimiter, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "www.mono-project.com:80",
+                parser.GetComponents(http, UriComponents.HostAndPort, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "www.mono-project.com:80",
+                parser.GetComponents(http, UriComponents.StrongAuthority, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                FullHttpUri,
+                parser.GetComponents(http, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "/Main_Page",
+                parser.GetComponents(http, UriComponents.PathAndQuery, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "http://www.mono-project.com/Main_Page",
+                parser.GetComponents(http, UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                "http://www.mono-project.com",
+                parser.GetComponents(http, UriComponents.SchemeAndServer, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                FullHttpUri,
+                parser.GetComponents(
+                    http,
+                    UriComponents.SerializationInfoString,
+                    UriFormat.SafeUnescaped
+                )
+            );
             // strange mixup
-            Assert.Equal("http://", parser.GetComponents(http, UriComponents.Scheme | UriComponents.Port, UriFormat.SafeUnescaped));
-            Assert.Equal("www.mono-project.com#FAQ?Edit", parser.GetComponents(http, UriComponents.Host | UriComponents.Fragment, UriFormat.SafeUnescaped));
-            Assert.Equal("/Main_Page", parser.GetComponents(http, UriComponents.Port | UriComponents.Path, UriFormat.SafeUnescaped));
+            Assert.Equal(
+                "http://",
+                parser.GetComponents(
+                    http,
+                    UriComponents.Scheme | UriComponents.Port,
+                    UriFormat.SafeUnescaped
+                )
+            );
+            Assert.Equal(
+                "www.mono-project.com#FAQ?Edit",
+                parser.GetComponents(
+                    http,
+                    UriComponents.Host | UriComponents.Fragment,
+                    UriFormat.SafeUnescaped
+                )
+            );
+            Assert.Equal(
+                "/Main_Page",
+                parser.GetComponents(
+                    http,
+                    UriComponents.Port | UriComponents.Path,
+                    UriFormat.SafeUnescaped
+                )
+            );
             Assert.Equal(parser, parser.OnNewUri());
         }
 
@@ -111,74 +193,223 @@ namespace System.PrivateUri.Tests
             string ftpUri = "ftp://username:password@ftp.go-mono.com:21/with some spaces/mono.tgz";
             Uri ftp = new Uri(ftpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Equal("ftp", parser.GetComponents(ftp, UriComponents.Scheme, UriFormat.Unescaped));
-            Assert.Equal("username:password", parser.GetComponents(ftp, UriComponents.UserInfo, UriFormat.Unescaped));
-            Assert.Equal("ftp.go-mono.com", parser.GetComponents(ftp, UriComponents.Host, UriFormat.Unescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.Port, UriFormat.Unescaped));
-            Assert.Equal("with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path, UriFormat.Unescaped));
-            Assert.Equal("with%20some%20spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path, UriFormat.UriEscaped));
-            Assert.Equal("with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path, UriFormat.SafeUnescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.Query, UriFormat.Unescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.Fragment, UriFormat.Unescaped));
-            Assert.Equal("21", parser.GetComponents(ftp, UriComponents.StrongPort, UriFormat.Unescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.KeepDelimiter, UriFormat.Unescaped));
-            Assert.Equal("ftp.go-mono.com:21", parser.GetComponents(ftp, UriComponents.HostAndPort, UriFormat.Unescaped));
-            Assert.Equal("username:password@ftp.go-mono.com:21", parser.GetComponents(ftp, UriComponents.StrongAuthority, UriFormat.Unescaped));
-            Assert.Equal("ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.AbsoluteUri, UriFormat.Unescaped));
-            Assert.Equal("/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.PathAndQuery, UriFormat.Unescaped));
-            Assert.Equal("ftp://ftp.go-mono.com/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.HttpRequestUrl, UriFormat.Unescaped));
-            Assert.Equal("ftp://ftp.go-mono.com", parser.GetComponents(ftp, UriComponents.SchemeAndServer, UriFormat.Unescaped));
-            Assert.Equal("ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.SerializationInfoString, UriFormat.Unescaped));
+            Assert.Equal(
+                "ftp",
+                parser.GetComponents(ftp, UriComponents.Scheme, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "username:password",
+                parser.GetComponents(ftp, UriComponents.UserInfo, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp.go-mono.com",
+                parser.GetComponents(ftp, UriComponents.Host, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.Port, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.Path, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "with%20some%20spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.Path, UriFormat.UriEscaped)
+            );
+            Assert.Equal(
+                "with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.Path, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.Query, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.Fragment, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "21",
+                parser.GetComponents(ftp, UriComponents.StrongPort, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.KeepDelimiter, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp.go-mono.com:21",
+                parser.GetComponents(ftp, UriComponents.HostAndPort, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "username:password@ftp.go-mono.com:21",
+                parser.GetComponents(ftp, UriComponents.StrongAuthority, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.AbsoluteUri, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "/with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.PathAndQuery, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://ftp.go-mono.com/with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.HttpRequestUrl, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://ftp.go-mono.com",
+                parser.GetComponents(ftp, UriComponents.SchemeAndServer, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz",
+                parser.GetComponents(
+                    ftp,
+                    UriComponents.SerializationInfoString,
+                    UriFormat.Unescaped
+                )
+            );
             Assert.Equal(parser, parser.OnNewUri());
             // strange mixup
-            Assert.Equal("ftp://username:password@", parser.GetComponents(ftp, UriComponents.Scheme | UriComponents.UserInfo, UriFormat.Unescaped));
-            Assert.Equal(":21/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path | UriComponents.StrongPort, UriFormat.Unescaped));
+            Assert.Equal(
+                "ftp://username:password@",
+                parser.GetComponents(
+                    ftp,
+                    UriComponents.Scheme | UriComponents.UserInfo,
+                    UriFormat.Unescaped
+                )
+            );
+            Assert.Equal(
+                ":21/with some spaces/mono.tgz",
+                parser.GetComponents(
+                    ftp,
+                    UriComponents.Path | UriComponents.StrongPort,
+                    UriFormat.Unescaped
+                )
+            );
         }
 
         [Fact]
         public static void GetComponents_Ftp2()
         {
-            string ftpUri = "ftp://%75sername%3a%70assword@ftp.go-mono.com:21/with some spaces/mono.tgz";
+            string ftpUri =
+                "ftp://%75sername%3a%70assword@ftp.go-mono.com:21/with some spaces/mono.tgz";
             Uri ftp = new Uri(ftpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Equal("ftp", parser.GetComponents(ftp, UriComponents.Scheme, UriFormat.Unescaped));
-            Assert.Equal("username:password", parser.GetComponents(ftp, UriComponents.UserInfo, UriFormat.Unescaped));
-            Assert.Equal("ftp.go-mono.com", parser.GetComponents(ftp, UriComponents.Host, UriFormat.Unescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.Port, UriFormat.Unescaped));
-            Assert.Equal("with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path, UriFormat.Unescaped));
-            Assert.Equal("with%20some%20spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path, UriFormat.UriEscaped));
-            Assert.Equal("with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path, UriFormat.SafeUnescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.Query, UriFormat.Unescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.Fragment, UriFormat.Unescaped));
-            Assert.Equal("21", parser.GetComponents(ftp, UriComponents.StrongPort, UriFormat.Unescaped));
-            Assert.Equal(string.Empty, parser.GetComponents(ftp, UriComponents.KeepDelimiter, UriFormat.Unescaped));
-            Assert.Equal("ftp.go-mono.com:21", parser.GetComponents(ftp, UriComponents.HostAndPort, UriFormat.Unescaped));
-            Assert.Equal("username:password@ftp.go-mono.com:21", parser.GetComponents(ftp, UriComponents.StrongAuthority, UriFormat.Unescaped));
-            Assert.Equal("ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.AbsoluteUri, UriFormat.Unescaped));
-            Assert.Equal("/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.PathAndQuery, UriFormat.Unescaped));
-            Assert.Equal("ftp://ftp.go-mono.com/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.HttpRequestUrl, UriFormat.Unescaped));
-            Assert.Equal("ftp://ftp.go-mono.com", parser.GetComponents(ftp, UriComponents.SchemeAndServer, UriFormat.Unescaped));
-            Assert.Equal("ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.SerializationInfoString, UriFormat.Unescaped));
+            Assert.Equal(
+                "ftp",
+                parser.GetComponents(ftp, UriComponents.Scheme, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "username:password",
+                parser.GetComponents(ftp, UriComponents.UserInfo, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp.go-mono.com",
+                parser.GetComponents(ftp, UriComponents.Host, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.Port, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.Path, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "with%20some%20spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.Path, UriFormat.UriEscaped)
+            );
+            Assert.Equal(
+                "with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.Path, UriFormat.SafeUnescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.Query, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.Fragment, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "21",
+                parser.GetComponents(ftp, UriComponents.StrongPort, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                string.Empty,
+                parser.GetComponents(ftp, UriComponents.KeepDelimiter, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp.go-mono.com:21",
+                parser.GetComponents(ftp, UriComponents.HostAndPort, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "username:password@ftp.go-mono.com:21",
+                parser.GetComponents(ftp, UriComponents.StrongAuthority, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.AbsoluteUri, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "/with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.PathAndQuery, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://ftp.go-mono.com/with some spaces/mono.tgz",
+                parser.GetComponents(ftp, UriComponents.HttpRequestUrl, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://ftp.go-mono.com",
+                parser.GetComponents(ftp, UriComponents.SchemeAndServer, UriFormat.Unescaped)
+            );
+            Assert.Equal(
+                "ftp://username:password@ftp.go-mono.com/with some spaces/mono.tgz",
+                parser.GetComponents(
+                    ftp,
+                    UriComponents.SerializationInfoString,
+                    UriFormat.Unescaped
+                )
+            );
             Assert.Equal(parser, parser.OnNewUri());
             // strange mixup
-            Assert.Equal("ftp://username:password@", parser.GetComponents(ftp, UriComponents.Scheme | UriComponents.UserInfo, UriFormat.Unescaped));
-            Assert.Equal(":21/with some spaces/mono.tgz", parser.GetComponents(ftp, UriComponents.Path | UriComponents.StrongPort, UriFormat.Unescaped));
+            Assert.Equal(
+                "ftp://username:password@",
+                parser.GetComponents(
+                    ftp,
+                    UriComponents.Scheme | UriComponents.UserInfo,
+                    UriFormat.Unescaped
+                )
+            );
+            Assert.Equal(
+                ":21/with some spaces/mono.tgz",
+                parser.GetComponents(
+                    ftp,
+                    UriComponents.Path | UriComponents.StrongPort,
+                    UriFormat.Unescaped
+                )
+            );
         }
 
         [Fact]
         public static void TestParseUserPath()
         {
             var u = new Uri("https://a.net/1@1.msg");
-            string result = u.GetComponents(UriComponents.Scheme | UriComponents.Host | UriComponents.Port | UriComponents.Path, UriFormat.UriEscaped);
+            string result = u.GetComponents(
+                UriComponents.Scheme | UriComponents.Host | UriComponents.Port | UriComponents.Path,
+                UriFormat.UriEscaped
+            );
             Assert.Equal("https://a.net/1@1.msg", result);
         }
-
 
         [Fact]
         public static void GetComponents_Null()
         {
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<NullReferenceException>(() => parser.GetComponents(null, UriComponents.Host, UriFormat.SafeUnescaped));
+            Assert.Throws<NullReferenceException>(
+                () => parser.GetComponents(null, UriComponents.Host, UriFormat.SafeUnescaped)
+            );
         }
 
         [Fact]
@@ -186,7 +417,10 @@ namespace System.PrivateUri.Tests
         {
             Uri http = new Uri(FullHttpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Equal(FullHttpUri, parser.GetComponents(http, (UriComponents)int.MinValue, UriFormat.SafeUnescaped));
+            Assert.Equal(
+                FullHttpUri,
+                parser.GetComponents(http, (UriComponents)int.MinValue, UriFormat.SafeUnescaped)
+            );
         }
 
         [Fact]
@@ -194,7 +428,9 @@ namespace System.PrivateUri.Tests
         {
             Uri http = new Uri(FullHttpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<ArgumentOutOfRangeException>(() => parser.GetComponents(http, UriComponents.Host, (UriFormat)int.MinValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => parser.GetComponents(http, UriComponents.Host, (UriFormat)int.MinValue)
+            );
         }
 
         [Fact]
@@ -202,7 +438,9 @@ namespace System.PrivateUri.Tests
         {
             Uri uri = new Uri(FullHttpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<InvalidOperationException>(() => parser.DangerousExposed_InitializeAndValidate(uri, out _));
+            Assert.Throws<InvalidOperationException>(
+                () => parser.DangerousExposed_InitializeAndValidate(uri, out _)
+            );
         }
 
         [Fact]
@@ -210,7 +448,9 @@ namespace System.PrivateUri.Tests
         {
             Uri uri = new Uri("foo", UriKind.Relative);
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<InvalidOperationException>(() => parser.DangerousExposed_InitializeAndValidate(uri, out _));
+            Assert.Throws<InvalidOperationException>(
+                () => parser.DangerousExposed_InitializeAndValidate(uri, out _)
+            );
         }
 
         [Fact]
@@ -231,7 +471,9 @@ namespace System.PrivateUri.Tests
             parser.BaseInitializeAndValidateCallCount = 0;
             uri = new Uri("test-scheme://foo.bar");
             parser.BaseInitializeAndValidateCallCount = 1;
-            Assert.Throws<InvalidOperationException>(() => parser.DangerousExposed_InitializeAndValidate(uri, out _));
+            Assert.Throws<InvalidOperationException>(
+                () => parser.DangerousExposed_InitializeAndValidate(uri, out _)
+            );
         }
 
         [Fact]
@@ -434,7 +676,9 @@ namespace System.PrivateUri.Tests
         [Fact]
         public static void Register_NullParser()
         {
-            Assert.Throws<ArgumentNullException>(() => UriParser.Register(null, Prefix + "null.parser", 2006));
+            Assert.Throws<ArgumentNullException>(
+                () => UriParser.Register(null, Prefix + "null.parser", 2006)
+            );
         }
 
         [Fact]
@@ -448,7 +692,9 @@ namespace System.PrivateUri.Tests
         public static void Register_NegativePort()
         {
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<ArgumentOutOfRangeException>(() => UriParser.Register(parser, Prefix + "negative.port", -2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => UriParser.Register(parser, Prefix + "negative.port", -2)
+            );
         }
 
         [Fact]
@@ -469,7 +715,9 @@ namespace System.PrivateUri.Tests
         public static void Register_TooBigPort()
         {
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<ArgumentOutOfRangeException>(() => UriParser.Register(parser, Prefix + "too.big.port", ushort.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => UriParser.Register(parser, Prefix + "too.big.port", ushort.MaxValue)
+            );
         }
 
         [Fact]
@@ -480,7 +728,9 @@ namespace System.PrivateUri.Tests
             TestUriParser parser = new TestUriParser();
             UriParser.Register(parser, scheme, 2005);
             Assert.True(UriParser.IsKnownScheme(scheme), "IsKnownScheme-true");
-            Assert.Throws<InvalidOperationException>(() => UriParser.Register(parser, scheme, 2006));
+            Assert.Throws<InvalidOperationException>(
+                () => UriParser.Register(parser, scheme, 2006)
+            );
         }
 
         #endregion UriParser tests

@@ -39,22 +39,24 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.Ansi)]
         [InlineData(OutputMode.NonAnsi)]
         [InlineData(OutputMode.PlainText)]
-        public async Task Sets_output_mode_to_Ansi_when_specified_by_output_directive(OutputMode specifiedOutputMode)
+        public async Task Sets_output_mode_to_Ansi_when_specified_by_output_directive(
+            OutputMode specifiedOutputMode
+        )
         {
             var console = new TestConsole();
             OutputMode detectedOutputMode = OutputMode.Auto;
 
             var command = new Command("hello")
-                          {
-                              Handler = CommandHandler.Create((IConsole c) =>
-                              {
-                                  detectedOutputMode = c.DetectOutputMode();
-                              })
-                          };
+            {
+                Handler = CommandHandler.Create(
+                    (IConsole c) =>
+                    {
+                        detectedOutputMode = c.DetectOutputMode();
+                    }
+                )
+            };
 
-            var parser = new CommandLineBuilder(command)
-                         .UseAnsiTerminalWhenAvailable()
-                         .Build();
+            var parser = new CommandLineBuilder(command).UseAnsiTerminalWhenAvailable().Build();
 
             await parser.InvokeAsync($"[output:{specifiedOutputMode}]", console);
 

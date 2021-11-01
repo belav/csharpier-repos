@@ -34,7 +34,9 @@ namespace System.Xml.Tests
     {
         public override XmlReader Create(MyDict<string, object> options)
         {
-            XmlReaderSettings settings = (XmlReaderSettings)options[ReaderFactory.HT_READERSETTINGS];
+            XmlReaderSettings settings = (XmlReaderSettings)options[
+                ReaderFactory.HT_READERSETTINGS
+            ];
             if (settings == null)
                 settings = new XmlReaderSettings();
 
@@ -78,7 +80,13 @@ namespace System.Xml.Tests
         public int v1()
         {
             string readerType = (string)this.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader("<root>abc</root>"), false))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader("<root>abc</root>"),
+                    false
+                )
+            )
             {
                 CError.WriteLine(r.GetType().ToString());
                 CError.Compare((r.Settings != null), "Settings is null");
@@ -120,7 +128,13 @@ namespace System.Xml.Tests
         public int v1()
         {
             string readerType = (string)this.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader("<root>abc</root>"), false))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader("<root>abc</root>"),
+                    false
+                )
+            )
             {
                 CError.WriteLine(r.GetType().ToString());
                 CError.Compare((r.Settings != null), "Settings is null");
@@ -140,7 +154,15 @@ namespace System.Xml.Tests
             ReaderSettings.IgnoreComments = true;
             ReaderSettings.IgnoreWhitespace = true;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader("<root/>"), false, null, ReaderSettings))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader("<root/>"),
+                    false,
+                    null,
+                    ReaderSettings
+                )
+            )
             {
                 using (XmlReader r2 = ReaderHelper.Create(r, ReaderSettings)) { }
             }
@@ -152,7 +174,15 @@ namespace System.Xml.Tests
         {
             string readerType = (string)this.Param;
             XmlReaderSettings rs = new XmlReaderSettings();
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader("<a/>"), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader("<a/>"),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 bool cc = r.Settings.CheckCharacters;
                 bool closeinput = r.Settings.CloseInput;
@@ -192,11 +222,19 @@ namespace System.Xml.Tests
             CError.Compare(rs.CloseInput, crs.CloseInput, "CloseInput");
             CError.Compare(rs.DtdProcessing, crs.DtdProcessing, "ProhibitDtd");
             CError.Compare(rs.IgnoreComments, crs.IgnoreComments, "IgnoreComments");
-            CError.Compare(rs.IgnoreProcessingInstructions, crs.IgnoreProcessingInstructions, "IgnorePI");
+            CError.Compare(
+                rs.IgnoreProcessingInstructions,
+                crs.IgnoreProcessingInstructions,
+                "IgnorePI"
+            );
             CError.Compare(rs.IgnoreWhitespace, crs.IgnoreWhitespace, "IgnoreWhitespace");
             CError.Compare(rs.LineNumberOffset, crs.LineNumberOffset, "LineNumberOffset");
             CError.Compare(rs.LinePositionOffset, crs.LinePositionOffset, "LinePositionOffset");
-            CError.Compare(rs.MaxCharactersInDocument, crs.MaxCharactersInDocument, "maxcharsindoc");
+            CError.Compare(
+                rs.MaxCharactersInDocument,
+                crs.MaxCharactersInDocument,
+                "maxcharsindoc"
+            );
             CError.Compare(rs.NameTable, crs.NameTable, "NameTable");
             CError.Compare(rs.ConformanceLevel, crs.ConformanceLevel, "ConformanceLevel");
             CError.Compare(rs.GetType(), crs.GetType(), "GetType");
@@ -235,13 +273,25 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
                     }
-                    CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "error1"
+                    );
                 }
                 CError.Compare(strWriter.ToString(), strXml, "error");
             }
@@ -258,7 +308,15 @@ namespace System.Xml.Tests
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
@@ -273,7 +331,11 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error1"
+                        );
                         CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error2");
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
@@ -292,7 +354,15 @@ namespace System.Xml.Tests
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
@@ -307,8 +377,17 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, DtdProcessing.Ignore, "error2");
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error1"
+                        );
+                        CError.Compare(
+                            wr.Settings.DtdProcessing,
+                            DtdProcessing.Prohibit,
+                            DtdProcessing.Ignore,
+                            "error2"
+                        );
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
                 }
@@ -326,7 +405,15 @@ namespace System.Xml.Tests
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 u.DtdProcessing = DtdProcessing.Prohibit;
                 XmlWriterSettings ws = new XmlWriterSettings();
@@ -339,7 +426,11 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error1"
+                        );
                         CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error2");
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
@@ -358,7 +449,15 @@ namespace System.Xml.Tests
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 u.DtdProcessing = DtdProcessing.Ignore;
                 XmlWriterSettings ws = new XmlWriterSettings();
@@ -371,8 +470,17 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, DtdProcessing.Ignore, "error2");
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error1"
+                        );
+                        CError.Compare(
+                            wr.Settings.DtdProcessing,
+                            DtdProcessing.Prohibit,
+                            DtdProcessing.Ignore,
+                            "error2"
+                        );
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
                 }
@@ -386,12 +494,22 @@ namespace System.Xml.Tests
         public int v2a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
-            string strXml = "<!DOCTYPE root [<!ELEMENT root ANY>]><root><a xmlns:b=\"abc\"><b:c /></a></root>";
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<!DOCTYPE root [<!ELEMENT root ANY>]><root><a xmlns:b=\"abc\"><b:c /></a></root>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
@@ -399,14 +517,27 @@ namespace System.Xml.Tests
                 {
                     try
                     {
-                        while (wr.Read()) ;
-                        CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error0");
-                        CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error00");
+                        while (wr.Read())
+                            ;
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error0"
+                        );
+                        CError.Compare(
+                            wr.Settings.DtdProcessing,
+                            DtdProcessing.Prohibit,
+                            "error00"
+                        );
                         return TEST_PASS;
                     }
                     catch (XmlException)
                     {
-                        CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error1"
+                        );
                         return TEST_PASS;
                     }
                 }
@@ -419,12 +550,22 @@ namespace System.Xml.Tests
         public int v2b()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
-            string strXml = "<!DOCTYPE root [<!ELEMENT root ANY>]><root><a xmlns:b=\"abc\"><b:c /></a></root>";
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<!DOCTYPE root [<!ELEMENT root ANY>]><root><a xmlns:b=\"abc\"><b:c /></a></root>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
@@ -432,7 +573,8 @@ namespace System.Xml.Tests
                 {
                     try
                     {
-                        while (wr.Read()) ;
+                        while (wr.Read())
+                            ;
                     }
                     catch (XmlException e)
                     {
@@ -454,7 +596,15 @@ namespace System.Xml.Tests
             string readerType = (string)this.Param;
             string strXml = "<ROOT/>";
             XmlReaderSettings rs = new XmlReaderSettings();
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "DtdProcessing");
             }
@@ -467,16 +617,27 @@ namespace System.Xml.Tests
         public int V4()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a ANY>\n]> \n<ROOT/>";
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a ANY>\n]> \n<ROOT/>";
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
                 catch (XmlException e)
                 {
@@ -495,16 +656,27 @@ namespace System.Xml.Tests
         public int V4c()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
-            string strXml = @"<?xml version='1.0' encoding='utf-8'?><!DOCTYPE r [<!ATTLIST a b CDATA #FIXED - >]><r></r>";
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                @"<?xml version='1.0' encoding='utf-8'?><!DOCTYPE r [<!ATTLIST a b CDATA #FIXED - >]><r></r>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
                 catch (XmlException e)
                 {
@@ -526,17 +698,30 @@ namespace System.Xml.Tests
             string strXml = "<root>&#;</root>";
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                     CError.Compare(false, "error");
                 }
                 catch (XmlException e)
                 {
                     CError.WriteLine(e);
-                    CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error2");
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "error2"
+                    );
                     return TEST_PASS;
                 }
             }
@@ -549,7 +734,8 @@ namespace System.Xml.Tests
         public int V7a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE doc [ <!ELEMENT doc ANY >]><doc><![CDATA[< <<]]></doc>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
@@ -561,7 +747,15 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        rs
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
@@ -580,16 +774,26 @@ namespace System.Xml.Tests
         public int V8()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
             string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT SYSTEM 'some.dtd'>\n<ROOT/>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
                 catch (XmlException e)
                 {
@@ -608,16 +812,27 @@ namespace System.Xml.Tests
         public int V9()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a MANY>\n]> \n<ROOT/>"; //Wrong keyword MANY
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a MANY>\n]> \n<ROOT/>"; //Wrong keyword MANY
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
                 catch (XmlException e)
                 {
@@ -636,14 +851,28 @@ namespace System.Xml.Tests
         public int V11()
         {
             string readerType = (string)this.Param;
-            string strXml = "<?xml version='1.0'?>\n<root>&#xD;<a>&#xA;<b>&#xA;<c>&#xA;</c></b></a></root>";
+            string strXml =
+                "<?xml version='1.0'?>\n<root>&#xD;<a>&#xA;<b>&#xA;<c>&#xA;</c></b></a></root>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
-                while (r.Read()) ;
-                CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error");
+                while (r.Read())
+                    ;
+                CError.Compare(
+                    r.Settings.DtdProcessing,
+                    (DtdProcessing)this.CurVariation.Param,
+                    "error"
+                );
             }
             return TEST_PASS;
         }
@@ -654,9 +883,12 @@ namespace System.Xml.Tests
         public int V11a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
-            string strXml = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>&book;</doc>";
-            string exp = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>some</doc>";
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>&book;</doc>";
+            string exp =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>some</doc>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -665,7 +897,15 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
@@ -676,7 +916,12 @@ namespace System.Xml.Tests
                         catch (XmlException e)
                         {
                             CError.WriteLine(e);
-                            CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, DtdProcessing.Prohibit, "error2");
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                DtdProcessing.Ignore,
+                                DtdProcessing.Prohibit,
+                                "error2"
+                            );
                             return TEST_PASS;
                         }
                     }
@@ -692,7 +937,8 @@ namespace System.Xml.Tests
         public int V11b()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE ROOT [<!ENTITY a 'some'>]><ROOT att=\"&a;\"/>";
             string exp = "<!DOCTYPE ROOT [<!ENTITY a 'some'>]><ROOT att=\"some\" />";
 
@@ -703,7 +949,15 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
@@ -714,7 +968,12 @@ namespace System.Xml.Tests
                         catch (XmlException e)
                         {
                             CError.WriteLine(e);
-                            CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, DtdProcessing.Prohibit, "error2");
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                DtdProcessing.Ignore,
+                                DtdProcessing.Prohibit,
+                                "error2"
+                            );
                             return TEST_PASS;
                         }
                     }
@@ -730,7 +989,8 @@ namespace System.Xml.Tests
         public int V11c()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE ROOT [<!ENTITY a '&a;'>]><ROOT att=\"&a;\"/>";
 
             XmlReaderSettings u = new XmlReaderSettings();
@@ -740,7 +1000,15 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
@@ -752,7 +1020,11 @@ namespace System.Xml.Tests
                         catch (XmlException e)
                         {
                             CError.WriteLine(e);
-                            CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error2");
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error2"
+                            );
                             return TEST_PASS;
                         }
                     }
@@ -771,7 +1043,15 @@ namespace System.Xml.Tests
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 try
                 {
@@ -781,7 +1061,11 @@ namespace System.Xml.Tests
                 catch (XmlException e)
                 {
                     CError.WriteLine(e);
-                    CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error2");
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "error2"
+                    );
                     return TEST_PASS;
                 }
             }
@@ -834,7 +1118,11 @@ namespace System.Xml.Tests
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    CError.Equals(xrs.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "DtdProcessing");
+                    CError.Equals(
+                        xrs.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "DtdProcessing"
+                    );
                     return TEST_PASS;
                 }
             }
@@ -847,13 +1135,22 @@ namespace System.Xml.Tests
         public int V16()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE ROOT [<!ENTITY a 'some'>]><ROOT att=\"&a;\"/>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 try
                 {
@@ -866,7 +1163,12 @@ namespace System.Xml.Tests
                 catch (XmlException)
                 {
                     CError.Compare(r.NodeType, XmlNodeType.None, XmlNodeType.Element, "error3");
-                    CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, DtdProcessing.Ignore, "error4");
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        DtdProcessing.Prohibit,
+                        DtdProcessing.Ignore,
+                        "error4"
+                    );
                     return TEST_PASS;
                 }
             }
@@ -881,13 +1183,22 @@ namespace System.Xml.Tests
         public int V18()
         {
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE root SYSTEM 'a.dtd' PUBLIC 'some' []><root/>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 try
                 {
@@ -947,30 +1258,65 @@ namespace System.Xml.Tests
             string xml = "";
             switch ((int)CurVariation.Params[1])
             {
-                case 1: xml = "<!DOCTYPE <"; break;
-                case 2: xml = "<!DOCTYPE root SYSTEM"; break;
-                case 3: xml = "<!DOCTYPE []<root/>"; break;
-                case 4: xml = "<!DOCTYPE root PUBLIC >]>"; break;
-                case 5: xml = "<!DOCTYPE "; break;
-                case 6: xml = "<!DOCTYPE >"; break;
-                case 7: xml = "<!DOCTYPE ["; break;
-                case 8: xml = " <?xml version=\"1.0\"     ?>"; break;
-                case 9: xml = "<?xml version='1.0'                 ?><!DOCTYPE doc [ <!ELEMENT doc ANY >"; break;
-                case 10: xml = "< ?xml version=\"1.0\"     ?>"; break;
-                case 11: xml = "<? xml version=\"1.0\"     ?>"; break;
-                case 12: xml = "<?xml version      =     \"   1.0       \"     ?>"; break;
+                case 1:
+                    xml = "<!DOCTYPE <";
+                    break;
+                case 2:
+                    xml = "<!DOCTYPE root SYSTEM";
+                    break;
+                case 3:
+                    xml = "<!DOCTYPE []<root/>";
+                    break;
+                case 4:
+                    xml = "<!DOCTYPE root PUBLIC >]>";
+                    break;
+                case 5:
+                    xml = "<!DOCTYPE ";
+                    break;
+                case 6:
+                    xml = "<!DOCTYPE >";
+                    break;
+                case 7:
+                    xml = "<!DOCTYPE [";
+                    break;
+                case 8:
+                    xml = " <?xml version=\"1.0\"     ?>";
+                    break;
+                case 9:
+                    xml =
+                        "<?xml version='1.0'                 ?><!DOCTYPE doc [ <!ELEMENT doc ANY >";
+                    break;
+                case 10:
+                    xml = "< ?xml version=\"1.0\"     ?>";
+                    break;
+                case 11:
+                    xml = "<? xml version=\"1.0\"     ?>";
+                    break;
+                case 12:
+                    xml = "<?xml version      =     \"   1.0       \"     ?>";
+                    break;
             }
             string readerType = (string)this.Param;
-            if (readerType == "SubtreeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader")
+                return TEST_SKIPPED;
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Params[0];
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(xml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(xml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
                 catch (XmlException)
                 {
@@ -1002,13 +1348,26 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
                     }
-                    if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
+                    if (r.Settings != null)
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error1"
+                        );
                 }
                 CError.Compare(strWriter.ToString(), strXml, "error");
             }
@@ -1021,13 +1380,22 @@ namespace System.Xml.Tests
         public int v1a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader") return TEST_SKIPPED;
+            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader")
+                return TEST_SKIPPED;
 
             string strXml = "<root><a xmlns:b=\"abc\"><b:c /></a></root>";
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
@@ -1042,8 +1410,18 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error2");
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error1"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                "error2"
+                            );
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
                 }
@@ -1057,13 +1435,22 @@ namespace System.Xml.Tests
         public int v1b()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader") return TEST_SKIPPED;
+            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader")
+                return TEST_SKIPPED;
 
             string strXml = "<root><a xmlns:b=\"abc\"><b:c /></a></root>";
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
@@ -1078,8 +1465,19 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, DtdProcessing.Ignore, "error2");
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error1"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                DtdProcessing.Ignore,
+                                "error2"
+                            );
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
                 }
@@ -1093,13 +1491,22 @@ namespace System.Xml.Tests
         public int v1d()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader") return TEST_SKIPPED;
+            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader")
+                return TEST_SKIPPED;
 
             string strXml = "<root><a xmlns:b=\"abc\"><b:c /></a></root>";
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 u.DtdProcessing = DtdProcessing.Prohibit;
                 XmlWriterSettings ws = new XmlWriterSettings();
@@ -1112,8 +1519,18 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error2");
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error1"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                "error2"
+                            );
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
                 }
@@ -1127,13 +1544,22 @@ namespace System.Xml.Tests
         public int v1e()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader") return TEST_SKIPPED;
+            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader")
+                return TEST_SKIPPED;
 
             string strXml = "<root><a xmlns:b=\"abc\"><b:c /></a></root>";
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 u.DtdProcessing = DtdProcessing.Ignore;
                 XmlWriterSettings ws = new XmlWriterSettings();
@@ -1146,8 +1572,19 @@ namespace System.Xml.Tests
                         {
                             w.WriteNode(wr, false);
                         }
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, DtdProcessing.Ignore, "error2");
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error1"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                DtdProcessing.Ignore,
+                                "error2"
+                            );
                     }
                     CError.Compare(strWriter.ToString(), strXml, "error");
                 }
@@ -1161,12 +1598,22 @@ namespace System.Xml.Tests
         public int v2a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader") return TEST_SKIPPED;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT ROOT ANY>\n]> \n<ROOT>abc 123</ROOT>";
+            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT ROOT ANY>\n]> \n<ROOT>abc 123</ROOT>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Prohibit;
@@ -1174,15 +1621,36 @@ namespace System.Xml.Tests
                 {
                     try
                     {
-                        while (wr.Read()) ;
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error0");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error00");
+                        while (wr.Read())
+                            ;
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error0"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                "error00"
+                            );
                         return TEST_PASS;
                     }
                     catch (XmlException)
                     {
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error1");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error2");
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                (DtdProcessing)this.CurVariation.Param,
+                                "error1"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                "error2"
+                            );
                         return TEST_PASS;
                     }
                 }
@@ -1195,12 +1663,22 @@ namespace System.Xml.Tests
         public int v2b()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader") return TEST_SKIPPED;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT ROOT ANY>\n]> \n<ROOT>abc 123</ROOT>";
+            if (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT ROOT ANY>\n]> \n<ROOT>abc 123</ROOT>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 XmlReaderSettings s = new XmlReaderSettings();
                 s.DtdProcessing = DtdProcessing.Ignore;
@@ -1208,17 +1686,30 @@ namespace System.Xml.Tests
                 {
                     try
                     {
-                        while (wr.Read()) ;
+                        while (wr.Read())
+                            ;
                     }
                     catch (XmlException e)
                     {
                         CError.WriteLine(e);
-                        if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error1");
-                        if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Prohibit, "error2");
+                        if (r.Settings != null)
+                            CError.Compare(
+                                r.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                "error1"
+                            );
+                        if (wr.Settings != null)
+                            CError.Compare(
+                                wr.Settings.DtdProcessing,
+                                DtdProcessing.Prohibit,
+                                "error2"
+                            );
                         return TEST_PASS;
                     }
-                    if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error3");
-                    if (wr.Settings != null) CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Ignore, "error4");
+                    if (r.Settings != null)
+                        CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error3");
+                    if (wr.Settings != null)
+                        CError.Compare(wr.Settings.DtdProcessing, DtdProcessing.Ignore, "error4");
                 }
             }
             return TEST_PASS;
@@ -1228,11 +1719,25 @@ namespace System.Xml.Tests
         public int V3()
         {
             string readerType = (string)this.Param;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a ANY>\n]> \n<ROOT/>";
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a ANY>\n]> \n<ROOT/>";
             XmlReaderSettings rs = new XmlReaderSettings();
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
-                if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "DtdProcessing");
+                if (r.Settings != null)
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        DtdProcessing.Prohibit,
+                        "DtdProcessing"
+                    );
             }
             return TEST_PASS;
         }
@@ -1249,14 +1754,26 @@ namespace System.Xml.Tests
             XmlReader r = null;
             try
             {
-                r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs);
-                while (r.Read()) ;
+                r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                );
+                while (r.Read())
+                    ;
                 CError.Compare(false, "error");
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e);
-                if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error2");
+                if (r != null && r.Settings != null)
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "error2"
+                    );
                 return TEST_PASS;
             }
             return TEST_FAIL;
@@ -1268,23 +1785,36 @@ namespace System.Xml.Tests
         public int V5()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader") return TEST_SKIPPED;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT ROOT ANY>\n]> \n<ROOT/>";
+            if (readerType == "XsltReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT ROOT ANY>\n]> \n<ROOT/>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
             rs.DtdProcessing = DtdProcessing.Prohibit;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
                 try
                 {
-                    while (r.Read()) ;
-                    if (r.Settings != null) CError.Compare(false, "error2");
+                    while (r.Read())
+                        ;
+                    if (r.Settings != null)
+                        CError.Compare(false, "error2");
                 }
                 catch (XmlException e)
                 {
                     CError.WriteLine(e);
-                    if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
+                    if (r.Settings != null)
+                        CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
                     return TEST_PASS;
                 }
             }
@@ -1297,9 +1827,12 @@ namespace System.Xml.Tests
         public int V6()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader") return TEST_SKIPPED;
-            string strXml = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book ''>  <!ATTLIST doc    JSmith CDATA #FIXED ''     date CDATA #IMPLIED>]><doc JSmith=\"\" date=\"\"> &book; </doc>";
-            string exp = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book ''>  <!ATTLIST doc    JSmith CDATA #FIXED ''     date CDATA #IMPLIED>]><doc JSmith=\"\" date=\"\">  </doc>";
+            if (readerType == "XsltReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book ''>  <!ATTLIST doc    JSmith CDATA #FIXED ''     date CDATA #IMPLIED>]><doc JSmith=\"\" date=\"\"> &book; </doc>";
+            string exp =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book ''>  <!ATTLIST doc    JSmith CDATA #FIXED ''     date CDATA #IMPLIED>]><doc JSmith=\"\" date=\"\">  </doc>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -1309,14 +1842,26 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        rs
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
                     }
                 }
-                CError.Compare(strWriter.ToString(), (readerType == "XmlTextReader") ? strXml : exp, "error");
+                CError.Compare(
+                    strWriter.ToString(),
+                    (readerType == "XmlTextReader") ? strXml : exp,
+                    "error"
+                );
             }
             return TEST_PASS;
         }
@@ -1327,7 +1872,8 @@ namespace System.Xml.Tests
         public int V7()
         {
             string readerType = (string)this.Param;
-            string strXml = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book ''>  <!ATTLIST doc    JSmith CDATA #FIXED ''     date CDATA #IMPLIED>]><doc JSmith='' date=''> &book; </doc>  ";
+            string strXml =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book ''>  <!ATTLIST doc    JSmith CDATA #FIXED ''     date CDATA #IMPLIED>]><doc JSmith='' date=''> &book; </doc>  ";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -1337,19 +1883,33 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        rs
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         try
                         {
                             w.WriteNode(r, false);
-                            if (r.Settings != null) CError.Compare(false, "error");
+                            if (r.Settings != null)
+                                CError.Compare(false, "error");
                         }
                         catch (XmlException e)
                         {
                             CError.WriteLine(e);
-                            if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error1");
+                            if (r.Settings != null)
+                                CError.Compare(
+                                    r.Settings.DtdProcessing,
+                                    DtdProcessing.Ignore,
+                                    "error1"
+                                );
                             return TEST_PASS;
                         }
                     }
@@ -1364,11 +1924,17 @@ namespace System.Xml.Tests
         public int V7a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader") return TEST_SKIPPED;
+            if (readerType == "XsltReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE doc [ <!ELEMENT doc ANY >]><doc><![CDATA[< <<]]></doc>";
             string exp =
-                (readerType == "XmlNodeReader" || readerType == "XmlValidatingReader" || readerType == "XmlTextReader") ?
-                "<!DOCTYPE doc [ <!ELEMENT doc ANY >]><doc><![CDATA[< <<]]></doc>" : "<doc><![CDATA[< <<]]></doc>";
+                (
+                    readerType == "XmlNodeReader"
+                    || readerType == "XmlValidatingReader"
+                    || readerType == "XmlTextReader"
+                )
+                    ? "<!DOCTYPE doc [ <!ELEMENT doc ANY >]><doc><![CDATA[< <<]]></doc>"
+                    : "<doc><![CDATA[< <<]]></doc>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -1379,13 +1945,22 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        rs
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
                         w.WriteNode(r, false);
                     }
-                    if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error1");
+                    if (r.Settings != null)
+                        CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error1");
                 }
                 CError.Compare(strWriter.ToString(), exp, "error");
             }
@@ -1405,24 +1980,36 @@ namespace System.Xml.Tests
             XmlReader r = null;
             try
             {
-                using (r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+                using (
+                    r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        rs
+                    )
+                )
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e);
-                if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
+                if (r.Settings != null)
+                    CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
                 return TEST_PASS;
             }
             catch (FileNotFoundException e)
             {
                 CError.WriteLine(e);
-                if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
+                if (r != null && r.Settings != null)
+                    CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
                 return TEST_PASS;
             }
-            if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error2");
+            if (r.Settings != null)
+                CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error2");
             return TEST_PASS;
         }
 
@@ -1432,23 +2019,33 @@ namespace System.Xml.Tests
         public int V9()
         {
             string readerType = (string)this.Param;
-            string strXml = "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a MANY>\n]> \n<ROOT/>"; //Wrong keyword MANY
+            string strXml =
+                "<?xml version='1.0'?>\n<!DOCTYPE ROOT[\n  <!ELEMENT a MANY>\n]> \n<ROOT/>"; //Wrong keyword MANY
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
             XmlReader r = null;
             try
             {
-                r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs);
-                while (r.Read()) ;
+                r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                );
+                while (r.Read())
+                    ;
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e);
-                if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
+                if (r != null && r.Settings != null)
+                    CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, "error");
                 return TEST_PASS;
             }
-            if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error2");
+            if (r != null && r.Settings != null)
+                CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, "error2");
             return TEST_PASS;
         }
 
@@ -1458,14 +2055,29 @@ namespace System.Xml.Tests
         public int V11()
         {
             string readerType = (string)this.Param;
-            string strXml = "<?xml version='1.0'?>\n<root>&#xD;<a>&#xA;<b>&#xA;<c>&#xA;</c></b></a></root>";
+            string strXml =
+                "<?xml version='1.0'?>\n<root>&#xD;<a>&#xA;<b>&#xA;<c>&#xA;</c></b></a></root>";
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, rs))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    rs
+                )
+            )
             {
-                while (r.Read()) ;
-                if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error");
+                while (r.Read())
+                    ;
+                if (r.Settings != null)
+                    CError.Compare(
+                        r.Settings.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "error"
+                    );
             }
             return TEST_PASS;
         }
@@ -1476,9 +2088,12 @@ namespace System.Xml.Tests
         public int V11a()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader") return TEST_SKIPPED;
-            string strXml = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>&book;</doc>";
-            string exp = "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>some</doc>";
+            if (readerType == "XsltReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>&book;</doc>";
+            string exp =
+                "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book \"some\">]><doc>some</doc>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -1487,7 +2102,15 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
@@ -1498,12 +2121,22 @@ namespace System.Xml.Tests
                         catch (XmlException e)
                         {
                             CError.WriteLine(e);
-                            if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, DtdProcessing.Prohibit, "error2");
+                            if (r.Settings != null)
+                                CError.Compare(
+                                    r.Settings.DtdProcessing,
+                                    DtdProcessing.Ignore,
+                                    DtdProcessing.Prohibit,
+                                    "error2"
+                                );
                             return TEST_PASS;
                         }
                     }
                 }
-                CError.Compare(strWriter.ToString(), (readerType != "XmlTextReader") ? exp : strXml, "error");
+                CError.Compare(
+                    strWriter.ToString(),
+                    (readerType != "XmlTextReader") ? exp : strXml,
+                    "error"
+                );
             }
             return TEST_PASS;
         }
@@ -1514,9 +2147,12 @@ namespace System.Xml.Tests
         public int V11b()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader" || readerType == "XmlNodeReader") return TEST_SKIPPED;
-            string strXml = "<!DOCTYPE ROOT [<!ELEMENT ROOT ANY><!ATTRIBUTE att ANY><!ENTITY a 'some'>]><ROOT att=\"&a;\" />";
-            string exp = "<!DOCTYPE ROOT [<!ELEMENT ROOT ANY><!ATTRIBUTE att ANY><!ENTITY a 'some'>]><ROOT att=\"some\" />";
+            if (readerType == "XsltReader" || readerType == "XmlNodeReader")
+                return TEST_SKIPPED;
+            string strXml =
+                "<!DOCTYPE ROOT [<!ELEMENT ROOT ANY><!ATTRIBUTE att ANY><!ENTITY a 'some'>]><ROOT att=\"&a;\" />";
+            string exp =
+                "<!DOCTYPE ROOT [<!ELEMENT ROOT ANY><!ATTRIBUTE att ANY><!ENTITY a 'some'>]><ROOT att=\"some\" />";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
@@ -1525,7 +2161,15 @@ namespace System.Xml.Tests
             ws.OmitXmlDeclaration = true;
             using (StringWriter strWriter = new StringWriter())
             {
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(strXml),
+                        false,
+                        null,
+                        u
+                    )
+                )
                 {
                     using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                     {
@@ -1536,12 +2180,22 @@ namespace System.Xml.Tests
                         catch (XmlException e)
                         {
                             CError.WriteLine(e);
-                            if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Ignore, DtdProcessing.Prohibit, "error2");
+                            if (r.Settings != null)
+                                CError.Compare(
+                                    r.Settings.DtdProcessing,
+                                    DtdProcessing.Ignore,
+                                    DtdProcessing.Prohibit,
+                                    "error2"
+                                );
                             return TEST_PASS;
                         }
                     }
                 }
-                CError.Compare(strWriter.ToString(), (readerType != "XmlTextReader") ? exp : strXml, "error");
+                CError.Compare(
+                    strWriter.ToString(),
+                    (readerType != "XmlTextReader") ? exp : strXml,
+                    "error"
+                );
             }
             return TEST_PASS;
         }
@@ -1552,7 +2206,8 @@ namespace System.Xml.Tests
         public int V11c()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader") return TEST_SKIPPED;
+            if (readerType == "XsltReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE ROOT [<!ENTITY a '&a;'>]><ROOT att=\"&a;\"/>";
 
             XmlReaderSettings u = new XmlReaderSettings();
@@ -1565,19 +2220,33 @@ namespace System.Xml.Tests
             {
                 try
                 {
-                    using (r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+                    using (
+                        r = ReaderHelper.CreateReader(
+                            readerType,
+                            new StringReader(strXml),
+                            false,
+                            null,
+                            u
+                        )
+                    )
                     {
                         using (XmlWriter w = WriterHelper.Create(strWriter, ws))
                         {
                             w.WriteNode(r, false);
-                            if (readerType != "XmlTextReader") CError.Compare(false, "error");
+                            if (readerType != "XmlTextReader")
+                                CError.Compare(false, "error");
                         }
                     }
                 }
                 catch (XmlException e)
                 {
                     CError.WriteLine(e);
-                    if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error2");
+                    if (r != null && r.Settings != null)
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error2"
+                        );
                     return TEST_PASS;
                 }
             }
@@ -1594,17 +2263,32 @@ namespace System.Xml.Tests
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 try
                 {
-                    if (r.Settings != null) r.Settings.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
-                    if (r.Settings != null) CError.Compare(false, "error");
+                    if (r.Settings != null)
+                        r.Settings.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
+                    if (r.Settings != null)
+                        CError.Compare(false, "error");
                 }
                 catch (XmlException e)
                 {
                     CError.WriteLine(e);
-                    if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "error2");
+                    if (r.Settings != null)
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            (DtdProcessing)this.CurVariation.Param,
+                            "error2"
+                        );
                     return TEST_PASS;
                 }
             }
@@ -1657,7 +2341,11 @@ namespace System.Xml.Tests
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    CError.Equals(xrs.DtdProcessing, (DtdProcessing)this.CurVariation.Param, "DtdProcessing");
+                    CError.Equals(
+                        xrs.DtdProcessing,
+                        (DtdProcessing)this.CurVariation.Param,
+                        "DtdProcessing"
+                    );
                     return TEST_PASS;
                 }
             }
@@ -1670,26 +2358,46 @@ namespace System.Xml.Tests
         public int V16()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader") return TEST_SKIPPED;
+            if (readerType == "XsltReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE ROOT [<!ENTITY a 'some'>]><ROOT att=\"&a;\"/>";
 
             XmlReaderSettings u = new XmlReaderSettings();
             u.DtdProcessing = (DtdProcessing)this.CurVariation.Param;
 
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(strXml), false, null, u))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(strXml),
+                    false,
+                    null,
+                    u
+                )
+            )
             {
                 try
                 {
                     while (r.Read())
                     {
-                        CError.Compare(r.NodeType, XmlNodeType.DocumentType, XmlNodeType.Element, "error1");
+                        CError.Compare(
+                            r.NodeType,
+                            XmlNodeType.DocumentType,
+                            XmlNodeType.Element,
+                            "error1"
+                        );
                         return TEST_PASS;
                     }
                 }
                 catch (XmlException)
                 {
                     CError.Compare(r.NodeType, XmlNodeType.None, XmlNodeType.Element, "error3");
-                    if (r.Settings != null) CError.Compare(r.Settings.DtdProcessing, DtdProcessing.Prohibit, DtdProcessing.Ignore, "error4");
+                    if (r.Settings != null)
+                        CError.Compare(
+                            r.Settings.DtdProcessing,
+                            DtdProcessing.Prohibit,
+                            DtdProcessing.Ignore,
+                            "error4"
+                        );
                     return TEST_PASS;
                 }
             }
@@ -1704,7 +2412,8 @@ namespace System.Xml.Tests
         public int V18()
         {
             string readerType = (string)this.Param;
-            if (readerType == "XsltReader" || readerType == "XmlNodeReader") return TEST_SKIPPED;
+            if (readerType == "XsltReader" || readerType == "XmlNodeReader")
+                return TEST_SKIPPED;
             string strXml = "<!DOCTYPE root SYSTEM 'a.dtd' PUBLIC 'some' []><root/>";
 
             XmlReaderSettings u = new XmlReaderSettings();
@@ -1720,8 +2429,10 @@ namespace System.Xml.Tests
             }
             catch (XmlException)
             {
-                if (r != null) CError.Compare(r.NodeType, XmlNodeType.None, XmlNodeType.Element, "error3");
-                if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, u.DtdProcessing, "error4");
+                if (r != null)
+                    CError.Compare(r.NodeType, XmlNodeType.None, XmlNodeType.Element, "error3");
+                if (r != null && r.Settings != null)
+                    CError.Compare(r.Settings.DtdProcessing, u.DtdProcessing, "error4");
                 return TEST_PASS;
             }
             return TEST_FAIL;
@@ -1768,18 +2479,43 @@ namespace System.Xml.Tests
             string xml = "";
             switch ((int)CurVariation.Params[1])
             {
-                case 1: xml = "<!DOCTYPE <"; break;
-                case 2: xml = "<!DOCTYPE root SYSTEM"; break;
-                case 3: xml = "<!DOCTYPE []<root/>"; break;
-                case 4: xml = "<!DOCTYPE root PUBLIC >]>"; break;
-                case 5: xml = "<!DOCTYPE "; break;
-                case 6: xml = "<!DOCTYPE >"; break;
-                case 7: xml = "<!DOCTYPE ["; break;
-                case 8: xml = " <?xml version=\"1.0\"     ?>"; break;
-                case 9: xml = "<?xml version='1.0'                 ?><!DOCTYPE doc [ <!ELEMENT doc ANY >"; break;
-                case 10: xml = "< ?xml version=\"1.0\"     ?>"; break;
-                case 11: xml = "<? xml version=\"1.0\"     ?>"; break;
-                case 12: xml = "<?xml version      =     \"   1.0       \"     ?>"; break;
+                case 1:
+                    xml = "<!DOCTYPE <";
+                    break;
+                case 2:
+                    xml = "<!DOCTYPE root SYSTEM";
+                    break;
+                case 3:
+                    xml = "<!DOCTYPE []<root/>";
+                    break;
+                case 4:
+                    xml = "<!DOCTYPE root PUBLIC >]>";
+                    break;
+                case 5:
+                    xml = "<!DOCTYPE ";
+                    break;
+                case 6:
+                    xml = "<!DOCTYPE >";
+                    break;
+                case 7:
+                    xml = "<!DOCTYPE [";
+                    break;
+                case 8:
+                    xml = " <?xml version=\"1.0\"     ?>";
+                    break;
+                case 9:
+                    xml =
+                        "<?xml version='1.0'                 ?><!DOCTYPE doc [ <!ELEMENT doc ANY >";
+                    break;
+                case 10:
+                    xml = "< ?xml version=\"1.0\"     ?>";
+                    break;
+                case 11:
+                    xml = "<? xml version=\"1.0\"     ?>";
+                    break;
+                case 12:
+                    xml = "<?xml version      =     \"   1.0       \"     ?>";
+                    break;
             }
             string readerType = (string)this.Param;
 
@@ -1789,11 +2525,13 @@ namespace System.Xml.Tests
             try
             {
                 r = ReaderHelper.CreateReader(readerType, new StringReader(xml), false, null, u);
-                while (r.Read()) ;
+                while (r.Read())
+                    ;
             }
             catch (XmlException)
             {
-                if (r != null && r.Settings != null) CError.Compare(r.Settings.DtdProcessing, u.DtdProcessing, "error4");
+                if (r != null && r.Settings != null)
+                    CError.Compare(r.Settings.DtdProcessing, u.DtdProcessing, "error4");
                 return TEST_PASS;
             }
             return TEST_FAIL;
@@ -1825,16 +2563,52 @@ namespace System.Xml.Tests
                     return TEST_SKIPPED;
                 }
             }
-            if (readerType == "SubtreeReader" || readerType == "XmlNodeReader") return TEST_SKIPPED;
-            OneByteStream sim = new OneByteStream(new byte[] { 0xFE, 0xFF, 0, (byte)'s', 0, (byte)'o',
-            0, (byte)'s', 0, (byte)'o', 0, (byte)'s', 0, (byte)'o', 0, (byte)'s', 0, (byte)'o',
-            0, (byte)']'});
+            if (readerType == "SubtreeReader" || readerType == "XmlNodeReader")
+                return TEST_SKIPPED;
+            OneByteStream sim = new OneByteStream(
+                new byte[]
+                {
+                    0xFE,
+                    0xFF,
+                    0,
+                    (byte)'s',
+                    0,
+                    (byte)'o',
+                    0,
+                    (byte)'s',
+                    0,
+                    (byte)'o',
+                    0,
+                    (byte)'s',
+                    0,
+                    (byte)'o',
+                    0,
+                    (byte)'s',
+                    0,
+                    (byte)'o',
+                    0,
+                    (byte)']'
+                }
+            );
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.ConformanceLevel = ConformanceLevel.Fragment;
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, sim, null, false, null, rs, true))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    sim,
+                    null,
+                    false,
+                    null,
+                    rs,
+                    true
+                )
+            )
             {
-                while (r.Read()) { CError.WriteLine(r.Value); }
+                while (r.Read())
+                {
+                    CError.WriteLine(r.Value);
+                }
             }
             return TEST_PASS;
         }
@@ -1850,15 +2624,40 @@ namespace System.Xml.Tests
                     return TEST_SKIPPED;
                 }
             }
-            if (readerType == "SubtreeReader" || readerType == "XmlNodeReader") return TEST_SKIPPED;
+            if (readerType == "SubtreeReader" || readerType == "XmlNodeReader")
+                return TEST_SKIPPED;
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.ConformanceLevel = ConformanceLevel.Fragment;
 
-            string[] s = { "sosososo]", "sosososo]]", "sososos]o", "]", "[", "][", "[]", " ]]", "[[", "sosososo[", "sosososo[[", "Last char a square bracket. ]", ". ]" };
+            string[] s =
+            {
+                "sosososo]",
+                "sosososo]]",
+                "sososos]o",
+                "]",
+                "[",
+                "][",
+                "[]",
+                " ]]",
+                "[[",
+                "sosososo[",
+                "sosososo[[",
+                "Last char a square bracket. ]",
+                ". ]"
+            };
             for (int i = 0; i < s.Length; i++)
             {
                 CError.WriteLine(s[i]);
-                using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(s[i]), false, null, rs, true))
+                using (
+                    XmlReader r = ReaderHelper.CreateReader(
+                        readerType,
+                        new StringReader(s[i]),
+                        false,
+                        null,
+                        rs,
+                        true
+                    )
+                )
                 {
                     r.Read();
                     CError.WriteLine(r.Value);
@@ -1883,9 +2682,22 @@ namespace System.Xml.Tests
             XmlReaderSettings rs = new XmlReaderSettings();
 
             OneByteStream sim = new OneByteStream(bytes);
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, sim, null, false, null, rs, false))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    sim,
+                    null,
+                    false,
+                    null,
+                    rs,
+                    false
+                )
+            )
             {
-                while (r.Read()) { CError.WriteLine(r.Value); }
+                while (r.Read())
+                {
+                    CError.WriteLine(r.Value);
+                }
                 return TEST_PASS;
             }
         }
@@ -1903,9 +2715,21 @@ namespace System.Xml.Tests
             }
             string str = "<abc abc='\uD812\uDD12'>\uD812\uDD12</abc>";
             XmlReaderSettings rs = new XmlReaderSettings();
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, new StringReader(str), false, null, rs, false))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    new StringReader(str),
+                    false,
+                    null,
+                    rs,
+                    false
+                )
+            )
             {
-                while (r.Read()) { CError.WriteLine(r.Value); }
+                while (r.Read())
+                {
+                    CError.WriteLine(r.Value);
+                }
                 return TEST_PASS;
             }
         }
@@ -1922,13 +2746,27 @@ namespace System.Xml.Tests
                 }
             }
             string str = "<abc abc='\uD812\uDD12'>\uD812\uDD12</abc>";
-            string exp = "<?xml version=\"1.0\" encoding=\"utf-16\"?><abc abc=\"\U00014912\">\U00014912</abc>";
-            exp = (readerType == "XmlBinaryReader") ? "<?xml version=\"1.0\" encoding=\"utf-8\"?><abc abc=\"\U00014912\">\U00014912</abc>" : exp;
+            string exp =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><abc abc=\"\U00014912\">\U00014912</abc>";
+            exp =
+                (readerType == "XmlBinaryReader")
+                    ? "<?xml version=\"1.0\" encoding=\"utf-8\"?><abc abc=\"\U00014912\">\U00014912</abc>"
+                    : exp;
             byte[] bytes = Encoding.Unicode.GetBytes(str);
             XmlReaderSettings rs = new XmlReaderSettings();
 
             OneByteStream sim = new OneByteStream(bytes);
-            using (XmlReader r = ReaderHelper.CreateReader(readerType, sim, null, false, null, rs, false))
+            using (
+                XmlReader r = ReaderHelper.CreateReader(
+                    readerType,
+                    sim,
+                    null,
+                    false,
+                    null,
+                    rs,
+                    false
+                )
+            )
             {
                 using (StringWriter sw = new StringWriter())
                 {
@@ -1981,14 +2819,8 @@ namespace System.Xml.Tests
 
         public override long Position
         {
-            get
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
-            set
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
+            get { throw new Exception("The method or operation is not implemented."); }
+            set { throw new Exception("The method or operation is not implemented."); }
         }
 
         public override int Read(byte[] buffer, int offset, int count)

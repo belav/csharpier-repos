@@ -25,7 +25,9 @@ namespace Microsoft.AspNetCore.Identity.Test
         public IdentityUIScriptsTest(ITestOutputHelper output)
         {
             _output = output;
-            _httpClient = new HttpClient(new RetryHandler(new HttpClientHandler() { }, output, TimeSpan.FromSeconds(1), 5));
+            _httpClient = new HttpClient(
+                new RetryHandler(new HttpClientHandler() {  }, output, TimeSpan.FromSeconds(1), 5)
+            );
         }
 
         public static IEnumerable<object[]> ScriptWithIntegrityData
@@ -82,13 +84,19 @@ namespace Microsoft.AspNetCore.Identity.Test
         // Ubuntu 16 uses an old version of OpenSSL that doesn't work well when an intermediate CA is expired.
         // We've decided to not run these tests against that OS anymore and will run on newer versions of Ubuntu.
         [SkipOnHelix("Skip on Ubuntu 16", Queues = "Ubuntu.1604.Amd64.Open;Ubuntu.1604.Amd64")]
-        public async Task IdentityUI_ScriptTags_FallbackSourceContent_Matches_CDNContent(ScriptTag scriptTag)
+        public async Task IdentityUI_ScriptTags_FallbackSourceContent_Matches_CDNContent(
+            ScriptTag scriptTag
+        )
         {
             var wwwrootDir = Path.Combine(GetProjectBasePath(), "wwwroot", scriptTag.Version);
 
             var cdnContent = await _httpClient.GetStringAsync(scriptTag.Src);
             var fallbackSrcContent = File.ReadAllText(
-                Path.Combine(wwwrootDir, scriptTag.FallbackSrc.Replace("Identity", "").TrimStart('~').TrimStart('/')));
+                Path.Combine(
+                    wwwrootDir,
+                    scriptTag.FallbackSrc.Replace("Identity", "").TrimStart('~').TrimStart('/')
+                )
+            );
 
             Assert.Equal(RemoveLineEndings(cdnContent), RemoveLineEndings(fallbackSrcContent));
         }
@@ -123,7 +131,8 @@ namespace Microsoft.AspNetCore.Identity.Test
 
             return scriptTags;
 
-            IEnumerable<string> GetRazorFiles(string dir) => Directory.GetFiles(dir, "*.cshtml", SearchOption.AllDirectories);
+            IEnumerable<string> GetRazorFiles(string dir) =>
+                Directory.GetFiles(dir, "*.cshtml", SearchOption.AllDirectories);
         }
 
         private static List<ScriptTag> GetScriptTags(string cshtmlFile)
@@ -138,17 +147,25 @@ namespace Microsoft.AspNetCore.Identity.Test
             var scriptTags = new List<ScriptTag>();
             foreach (var scriptElement in htmlDocument.Scripts)
             {
-                var fallbackSrcAttribute = scriptElement.Attributes
-                    .FirstOrDefault(attr => string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase));
+                var fallbackSrcAttribute = scriptElement.Attributes.FirstOrDefault(
+                    attr =>
+                        string.Equals(
+                            "asp-fallback-src",
+                            attr.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                );
 
-                scriptTags.Add(new ScriptTag
-                {
-                    Version = "V4",
-                    Src = scriptElement.Source,
-                    Integrity = scriptElement.Integrity,
-                    FallbackSrc = fallbackSrcAttribute?.Value,
-                    File = cshtmlFile
-                });
+                scriptTags.Add(
+                    new ScriptTag
+                    {
+                        Version = "V4",
+                        Src = scriptElement.Source,
+                        Integrity = scriptElement.Integrity,
+                        FallbackSrc = fallbackSrcAttribute?.Value,
+                        File = cshtmlFile
+                    }
+                );
             }
             return scriptTags;
         }
@@ -165,28 +182,39 @@ namespace Microsoft.AspNetCore.Identity.Test
 
         private static string GetProjectBasePath()
         {
-            var projectPath = typeof(IdentityUIScriptsTest).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(a => a.Key == "Microsoft.AspNetCore.Testing.DefaultUIProjectPath").Value;
-            return Directory.Exists(projectPath) ? projectPath : Path.Combine(FindHelixSlnFileDirectory(), "UI");
+            var projectPath =
+                typeof(IdentityUIScriptsTest).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .Single(
+                        a => a.Key == "Microsoft.AspNetCore.Testing.DefaultUIProjectPath"
+                    ).Value;
+            return Directory.Exists(projectPath)
+              ? projectPath
+              : Path.Combine(FindHelixSlnFileDirectory(), "UI");
         }
 
         private static string FindHelixSlnFileDirectory()
         {
-            var applicationPath = Path.GetDirectoryName(typeof(IdentityUIScriptsTest).Assembly.Location);
+            var applicationPath = Path.GetDirectoryName(
+                typeof(IdentityUIScriptsTest).Assembly.Location
+            );
             var directoryInfo = new DirectoryInfo(applicationPath);
             do
             {
-                var solutionPath = Directory.EnumerateFiles(directoryInfo.FullName, "*.sln").FirstOrDefault();
+                var solutionPath = Directory
+                    .EnumerateFiles(directoryInfo.FullName, "*.sln")
+                    .FirstOrDefault();
                 if (solutionPath != null)
                 {
                     return directoryInfo.FullName;
                 }
 
                 directoryInfo = directoryInfo.Parent;
-            }
-            while (directoryInfo.Parent != null);
+            } while (directoryInfo.Parent != null);
 
-            throw new InvalidOperationException($"Solution root could not be located using application root {applicationPath}.");
+            throw new InvalidOperationException(
+                $"Solution root could not be located using application root {applicationPath}."
+            );
         }
     }
 }

@@ -20,11 +20,16 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             try
             {
-                var headers = connection.Features.Get<IHttpContextFeature>().HttpContext.Request.Headers;
+                var headers =
+                    connection.Features.Get<IHttpContextFeature>().HttpContext.Request.Headers;
 
                 var headerName = Encoding.UTF8.GetString(buffer.ToArray());
-                var headerValues = headers.FirstOrDefault(h => string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)).Value.ToArray();
-                
+                var headerValues = headers
+                    .FirstOrDefault(
+                        h => string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)
+                    )
+                    .Value.ToArray();
+
                 var data = Encoding.UTF8.GetBytes(string.Join(",", headerValues));
 
                 await connection.Transport.Output.WriteAsync(data);

@@ -23,10 +23,7 @@ namespace XmlFormattersWebSite
 
         public Type WrappingType
         {
-            get
-            {
-                return typeof(PersonWrapper);
-            }
+            get { return typeof(PersonWrapper); }
         }
     }
 }

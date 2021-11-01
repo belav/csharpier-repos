@@ -12,17 +12,31 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertPlaceholderToInterpolatedString), Shared]
-    internal partial class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider :
-        AbstractConvertPlaceholderToInterpolatedStringRefactoringProvider<InvocationExpressionSyntax, ExpressionSyntax, ArgumentSyntax, LiteralExpressionSyntax, ArgumentListSyntax>
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertPlaceholderToInterpolatedString
+        ),
+        Shared
+    ]
+    internal partial class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider
+        : AbstractConvertPlaceholderToInterpolatedStringRefactoringProvider<
+              InvocationExpressionSyntax,
+              ExpressionSyntax,
+              ArgumentSyntax,
+              LiteralExpressionSyntax,
+              ArgumentListSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider() { }
 
-        protected override SyntaxNode GetInterpolatedString(string text)
-            => SyntaxFactory.ParseExpression("$" + text) as InterpolatedStringExpressionSyntax;
+        protected override SyntaxNode GetInterpolatedString(string text) =>
+            SyntaxFactory.ParseExpression("$" + text) as InterpolatedStringExpressionSyntax;
     }
 }

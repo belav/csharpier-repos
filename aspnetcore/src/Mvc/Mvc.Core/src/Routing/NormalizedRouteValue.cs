@@ -41,14 +41,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var actionDescriptor = context.ActionDescriptor;
             string? normalizedValue = null;
 
-            if (actionDescriptor.RouteValues.TryGetValue(key, out var value) &&
-                !string.IsNullOrEmpty(value))
+            if (
+                actionDescriptor.RouteValues.TryGetValue(key, out var value)
+                && !string.IsNullOrEmpty(value)
+            )
             {
                 normalizedValue = value;
             }
 
             var stringRouteValue = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
-            if (string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return normalizedValue;
             }

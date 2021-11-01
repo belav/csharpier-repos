@@ -14,8 +14,9 @@ namespace System.Net.Http
         {
             // Arrange, Act & Assert
             Assert.ThrowsArgumentNull(
-                () => new RemoteStreamInfo(null,  "http://some/path/to", "Name"),
-                "remoteStream");
+                () => new RemoteStreamInfo(null, "http://some/path/to", "Name"),
+                "remoteStream"
+            );
         }
 
         [Fact]
@@ -25,7 +26,10 @@ namespace System.Net.Http
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => new RemoteStreamInfo(new MemoryStream(), null, "Name"), "location");
+            Assert.ThrowsArgumentNull(
+                () => new RemoteStreamInfo(new MemoryStream(), null, "Name"),
+                "location"
+            );
         }
 
         [Fact]
@@ -35,8 +39,10 @@ namespace System.Net.Http
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => new RemoteStreamInfo(new MemoryStream(), "http://some/path/to", null),
-                "fileName");
+            Assert.ThrowsArgumentNull(
+                () => new RemoteStreamInfo(new MemoryStream(), "http://some/path/to", null),
+                "fileName"
+            );
         }
 
         [Fact]

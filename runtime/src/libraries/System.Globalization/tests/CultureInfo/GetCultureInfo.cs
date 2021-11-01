@@ -10,8 +10,13 @@ namespace System.Globalization.Tests
 {
     public class GetCultureInfoTests
     {
-        public static bool PlatformSupportsFakeCulture => (!PlatformDetection.IsWindows || (PlatformDetection.WindowsVersion >= 10 && !PlatformDetection.IsNetFramework)) && PlatformDetection.IsNotBrowser;
-        public static bool PlatformSupportsFakeCultureAndRemoteExecutor => PlatformSupportsFakeCulture && RemoteExecutor.IsSupported;
+        public static bool PlatformSupportsFakeCulture =>
+            (
+                !PlatformDetection.IsWindows
+                || (PlatformDetection.WindowsVersion >= 10 && !PlatformDetection.IsNetFramework)
+            ) && PlatformDetection.IsNotBrowser;
+        public static bool PlatformSupportsFakeCultureAndRemoteExecutor =>
+            PlatformSupportsFakeCulture && RemoteExecutor.IsSupported;
 
         public static IEnumerable<object[]> GetCultureInfoTestData()
         {
@@ -61,7 +66,8 @@ namespace System.Globalization.Tests
         [MemberData(nameof(GetCultureInfoTestData))]
         public void GetCultureInfo(string name, string expected = null)
         {
-            if (expected == null) expected = name;
+            if (expected == null)
+                expected = name;
             Assert.Equal(expected, CultureInfo.GetCultureInfo(name).Name);
             Assert.Equal(expected, CultureInfo.GetCultureInfo(name, predefinedOnly: false).Name);
         }
@@ -83,12 +89,18 @@ namespace System.Globalization.Tests
         [InlineData("foo_-bar")]
         [InlineData("foo/bar")]
         [InlineData("/")]
-        [InlineData("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234")] // > 85 characters
+        [InlineData(
+            "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234"
+        )] // > 85 characters
         public void TestInvalidCultureNames(string name)
         {
             Assert.Throws<CultureNotFoundException>(() => CultureInfo.GetCultureInfo(name));
-            Assert.Throws<CultureNotFoundException>(() => CultureInfo.GetCultureInfo(name, predefinedOnly: false));
-            Assert.Throws<CultureNotFoundException>(() => CultureInfo.GetCultureInfo(name, predefinedOnly: true));
+            Assert.Throws<CultureNotFoundException>(
+                () => CultureInfo.GetCultureInfo(name, predefinedOnly: false)
+            );
+            Assert.Throws<CultureNotFoundException>(
+                () => CultureInfo.GetCultureInfo(name, predefinedOnly: true)
+            );
         }
 
         [ConditionalTheory(nameof(PlatformSupportsFakeCulture))]
@@ -111,7 +123,9 @@ namespace System.Globalization.Tests
         {
             Assert.Equal(name, CultureInfo.GetCultureInfo(name).Name);
             Assert.Equal(name, CultureInfo.GetCultureInfo(name, predefinedOnly: false).Name);
-            Assert.Throws<CultureNotFoundException>(() => CultureInfo.GetCultureInfo(name, predefinedOnly: true));
+            Assert.Throws<CultureNotFoundException>(
+                () => CultureInfo.GetCultureInfo(name, predefinedOnly: true)
+            );
         }
 
         [ConditionalTheory(nameof(PlatformSupportsFakeCultureAndRemoteExecutor))]
@@ -119,25 +133,40 @@ namespace System.Globalization.Tests
         [InlineData("1", "zx-ZY")]
         [InlineData("0", "xx-XY")]
         [InlineData("0", "zx-ZY")]
-        public void PredefinedCulturesOnlyEnvVarTest(string predefinedCulturesOnlyEnvVar, string cultureName)
+        public void PredefinedCulturesOnlyEnvVarTest(
+            string predefinedCulturesOnlyEnvVar,
+            string cultureName
+        )
         {
             var psi = new ProcessStartInfo();
             psi.Environment.Clear();
 
-            psi.Environment.Add("DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY", predefinedCulturesOnlyEnvVar);
+            psi.Environment.Add(
+                "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
+                predefinedCulturesOnlyEnvVar
+            );
 
-            RemoteExecutor.Invoke((culture, predefined) =>
-            {
-                if (predefined == "1")
-                {
-                    AssertExtensions.Throws<CultureNotFoundException>(() => new CultureInfo(culture));
-                }
-                else
-                {
-                    CultureInfo ci = new CultureInfo(culture);
-                    Assert.Equal(culture, ci.Name);
-                }
-            }, cultureName, predefinedCulturesOnlyEnvVar, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    (culture, predefined) =>
+                    {
+                        if (predefined == "1")
+                        {
+                            AssertExtensions.Throws<CultureNotFoundException>(
+                                () => new CultureInfo(culture)
+                            );
+                        }
+                        else
+                        {
+                            CultureInfo ci = new CultureInfo(culture);
+                            Assert.Equal(culture, ci.Name);
+                        }
+                    },
+                    cultureName,
+                    predefinedCulturesOnlyEnvVar,
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
         }
     }
 }

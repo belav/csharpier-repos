@@ -17,22 +17,33 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
         private ManualResetValueTaskSource<object?>? _currentConnectionLevelAwaitable;
         private int _currentConnectionLevelAwaitableVersion;
 
-        public StreamOutputFlowControl(OutputFlowControl connectionLevelFlowControl, uint initialWindowSize)
+        public StreamOutputFlowControl(
+            OutputFlowControl connectionLevelFlowControl,
+            uint initialWindowSize
+        )
         {
             _connectionLevelFlowControl = connectionLevelFlowControl;
-            _streamLevelFlowControl = new OutputFlowControl(new SingleAwaitableProvider(), initialWindowSize);
+            _streamLevelFlowControl = new OutputFlowControl(
+                new SingleAwaitableProvider(),
+                initialWindowSize
+            );
         }
 
-        public int Available => Math.Min(_connectionLevelFlowControl.Available, _streamLevelFlowControl.Available);
+        public int Available =>
+            Math.Min(_connectionLevelFlowControl.Available, _streamLevelFlowControl.Available);
 
-        public bool IsAborted => _connectionLevelFlowControl.IsAborted || _streamLevelFlowControl.IsAborted;
+        public bool IsAborted =>
+            _connectionLevelFlowControl.IsAborted || _streamLevelFlowControl.IsAborted;
 
         public void Reset(uint initialWindowSize)
         {
             _streamLevelFlowControl.Reset(initialWindowSize);
             if (_currentConnectionLevelAwaitable != null)
             {
-                Debug.Assert(_currentConnectionLevelAwaitable.GetStatus() == ValueTaskSourceStatus.Succeeded, "Should have been completed by the previous stream.");
+                Debug.Assert(
+                    _currentConnectionLevelAwaitable.GetStatus() == ValueTaskSourceStatus.Succeeded,
+                    "Should have been completed by the previous stream."
+                );
                 _currentConnectionLevelAwaitable = null;
                 _currentConnectionLevelAwaitableVersion = -1;
             }
@@ -46,9 +57,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
 
         public int AdvanceUpToAndWait(long bytes, out ValueTask<object?> availabilityTask)
         {
-            var leastAvailableFlow = _connectionLevelFlowControl.Available < _streamLevelFlowControl.Available
-                ? _connectionLevelFlowControl : _streamLevelFlowControl;
- 
+            var leastAvailableFlow =
+                _connectionLevelFlowControl.Available < _streamLevelFlowControl.Available
+                    ? _connectionLevelFlowControl
+                    : _streamLevelFlowControl;
+
             // Clamp ~= Math.Clamp from netcoreapp >= 2.0
             var actual = Clamp(leastAvailableFlow.Available, 0, bytes);
 
@@ -91,8 +104,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             // connection-level awaitable so the stream abort is observed immediately.
             // This could complete an awaitable still sitting in the connection-level awaitable queue,
             // but this is safe because completing it again will just no-op.
-            if (_currentConnectionLevelAwaitable != null &&
-                _currentConnectionLevelAwaitable.Version == _currentConnectionLevelAwaitableVersion)
+            if (
+                _currentConnectionLevelAwaitable != null
+                && _currentConnectionLevelAwaitable.Version
+                    == _currentConnectionLevelAwaitableVersion
+            )
             {
                 _currentConnectionLevelAwaitable.TrySetResult(null);
             }

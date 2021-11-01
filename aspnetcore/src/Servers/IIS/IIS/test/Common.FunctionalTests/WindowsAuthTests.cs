@@ -15,12 +15,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class WindowsAuthTests : IISFunctionalTestBase
     {
-        public WindowsAuthTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public WindowsAuthTests(PublishedSitesFixture fixture) : base(fixture) { }
 
-        public static TestMatrix TestVariants
-            => TestMatrix.ForServers(DeployerSelector.ServerType)
+        public static TestMatrix TestVariants =>
+            TestMatrix
+                .ForServers(DeployerSelector.ServerType)
                 .WithTfms(Tfm.Default)
                 .WithApplicationTypes(ApplicationType.Portable)
                 .WithAllHostingModels();
@@ -37,7 +36,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             // The default in hosting sets windows auth to true.
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var client = deploymentResult.CreateClient(new HttpClientHandler { UseDefaultCredentials = true });
+            var client = deploymentResult.CreateClient(
+                new HttpClientHandler { UseDefaultCredentials = true }
+            );
             var response = await client.GetAsync("/Auth");
             var responseText = await response.Content.ReadAsStringAsync();
 

@@ -14,13 +14,19 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     {
         public static readonly AutomaticCodeChangeMergePolicy Instance = new();
 
-        public bool CanMerge(ITextUndoTransaction newerTransaction, ITextUndoTransaction olderTransaction)
+        public bool CanMerge(
+            ITextUndoTransaction newerTransaction,
+            ITextUndoTransaction olderTransaction
+        )
         {
             // We want to merge with any other transaction of our policy type
             return true;
         }
 
-        public void PerformTransactionMerge(ITextUndoTransaction existingTransaction, ITextUndoTransaction newTransaction)
+        public void PerformTransactionMerge(
+            ITextUndoTransaction existingTransaction,
+            ITextUndoTransaction newTransaction
+        )
         {
             // Add all of our commit primitives into the existing transaction
             foreach (var primitive in newTransaction.UndoPrimitives)

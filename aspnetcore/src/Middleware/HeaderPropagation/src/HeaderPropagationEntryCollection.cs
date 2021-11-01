@@ -70,7 +70,9 @@ namespace Microsoft.AspNetCore.HeaderPropagation
                 throw new ArgumentNullException(nameof(outboundHeaderName));
             }
 
-            Add(new HeaderPropagationEntry(inboundHeaderName, outboundHeaderName, valueFilter: null));
+            Add(
+                new HeaderPropagationEntry(inboundHeaderName, outboundHeaderName, valueFilter: null)
+            );
         }
 
         /// <summary>
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         public void Add(
             string inboundHeaderName,
             string outboundHeaderName,
-            Func<HeaderPropagationContext, StringValues> valueFilter)
+            Func<HeaderPropagationContext, StringValues> valueFilter
+        )
         {
             if (inboundHeaderName == null)
             {

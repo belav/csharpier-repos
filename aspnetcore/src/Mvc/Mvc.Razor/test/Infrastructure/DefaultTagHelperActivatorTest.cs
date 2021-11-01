@@ -40,7 +40,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
 
         private static ViewContext MakeViewContext(HttpContext httpContext)
         {
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var metadataProvider = new EmptyModelMetadataProvider();
             var viewData = new ViewDataDictionary(metadataProvider, new ModelStateDictionary());
             var viewContext = new ViewContext(
@@ -49,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
                 viewData,
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             return viewContext;
         }

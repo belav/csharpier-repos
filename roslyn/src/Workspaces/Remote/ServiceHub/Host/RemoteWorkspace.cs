@@ -56,7 +56,9 @@ namespace Microsoft.CodeAnalysis.Remote
             : base(hostServices, workspaceKind)
         {
             var exportProvider = (IMefHostExportProvider)Services.HostServices;
-            RegisterDocumentOptionProviders(exportProvider.GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>());
+            RegisterDocumentOptionProviders(
+                exportProvider.GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>()
+            );
 
             SetOptions(Options.WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0));
 
@@ -71,25 +73,53 @@ namespace Microsoft.CodeAnalysis.Remote
             _registrationService?.Unregister(this);
         }
 
-        public AssetProvider CreateAssetProvider(PinnedSolutionInfo solutionInfo, SolutionAssetCache assetCache, IAssetSource assetSource)
+        public AssetProvider CreateAssetProvider(
+            PinnedSolutionInfo solutionInfo,
+            SolutionAssetCache assetCache,
+            IAssetSource assetSource
+        )
         {
             var serializerService = Services.GetRequiredService<ISerializerService>();
-            return new AssetProvider(solutionInfo.ScopeId, assetCache, assetSource, serializerService);
+            return new AssetProvider(
+                solutionInfo.ScopeId,
+                assetCache,
+                assetSource,
+                serializerService
+            );
         }
 
-        public async Task UpdatePrimaryBranchSolutionAsync(AssetProvider assetProvider, Checksum solutionChecksum, int workspaceVersion, CancellationToken cancellationToken)
+        public async Task UpdatePrimaryBranchSolutionAsync(
+            AssetProvider assetProvider,
+            Checksum solutionChecksum,
+            int workspaceVersion,
+            CancellationToken cancellationToken
+        )
         {
             var currentSolution = CurrentSolution;
 
-            var currentSolutionChecksum = await currentSolution.State.GetChecksumAsync(cancellationToken).ConfigureAwait(false);
+            var currentSolutionChecksum = await currentSolution.State
+                .GetChecksumAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (currentSolutionChecksum == solutionChecksum)
             {
                 return;
             }
 
-            using (await _availableSolutionsGate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
+            using (
+                await _availableSolutionsGate
+                    .DisposableWaitAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
-                var solution = await CreateSolution_NoLockAsync(assetProvider, solutionChecksum, fromPrimaryBranch: true, workspaceVersion, currentSolution, cancellationToken).ConfigureAwait(false);
+                var solution = await CreateSolution_NoLockAsync(
+                        assetProvider,
+                        solutionChecksum,
+                        fromPrimaryBranch: true,
+                        workspaceVersion,
+                        currentSolution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 _primaryBranchSolutionWithChecksum = Tuple.Create(solutionChecksum, solution);
             }
         }
@@ -122,17 +152,25 @@ namespace Microsoft.CodeAnalysis.Remote
             bool fromPrimaryBranch,
             int workspaceVersion,
             Solution baseSolution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var updater = new SolutionCreator(Services.HostServices, assetProvider, baseSolution, cancellationToken);
+                var updater = new SolutionCreator(
+                    Services.HostServices,
+                    assetProvider,
+                    baseSolution,
+                    cancellationToken
+                );
 
                 // check whether solution is update to the given base solution
                 if (await updater.IsIncrementalUpdateAsync(solutionChecksum).ConfigureAwait(false))
                 {
                     // create updated solution off the baseSolution
-                    var solution = await updater.CreateSolutionAsync(solutionChecksum).ConfigureAwait(false);
+                    var solution = await updater
+                        .CreateSolutionAsync(solutionChecksum)
+                        .ConfigureAwait(false);
 
                     if (fromPrimaryBranch)
                     {
@@ -145,25 +183,42 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
 
                 // we need new solution. bulk sync all asset for the solution first.
-                await assetProvider.SynchronizeSolutionAssetsAsync(solutionChecksum, cancellationToken).ConfigureAwait(false);
+                await assetProvider
+                    .SynchronizeSolutionAssetsAsync(solutionChecksum, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // get new solution info and options
-                var (solutionInfo, options) = await assetProvider.CreateSolutionInfoAndOptionsAsync(solutionChecksum, cancellationToken).ConfigureAwait(false);
+                var (solutionInfo, options) = await assetProvider
+                    .CreateSolutionInfoAndOptionsAsync(solutionChecksum, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (fromPrimaryBranch)
                 {
                     // if the solutionChecksum is for primary branch, update primary workspace cache with new solution
-                    if (TrySetCurrentSolution(solutionInfo, workspaceVersion, options, out var solution))
+                    if (
+                        TrySetCurrentSolution(
+                            solutionInfo,
+                            workspaceVersion,
+                            options,
+                            out var solution
+                        )
+                    )
                     {
                         return solution;
                     }
                 }
 
                 // otherwise, just return new solution
-                var workspace = new TemporaryWorkspace(Services.HostServices, WorkspaceKind.RemoteTemporaryWorkspace, solutionInfo, options);
+                var workspace = new TemporaryWorkspace(
+                    Services.HostServices,
+                    WorkspaceKind.RemoteTemporaryWorkspace,
+                    solutionInfo,
+                    options
+                );
                 return workspace.CurrentSolution;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
@@ -193,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum solutionChecksum,
             bool fromPrimaryBranch,
             int workspaceVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var availableSolution = TryGetAvailableSolution(solutionChecksum);
             if (availableSolution != null)
@@ -202,7 +258,11 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             // make sure there is always only one that creates a new solution
-            using (await _availableSolutionsGate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
+            using (
+                await _availableSolutionsGate
+                    .DisposableWaitAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 availableSolution = TryGetAvailableSolution(solutionChecksum);
                 if (availableSolution != null)
@@ -211,12 +271,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
 
                 var solution = await CreateSolution_NoLockAsync(
-                    assetProvider,
-                    solutionChecksum,
-                    fromPrimaryBranch,
-                    workspaceVersion,
-                    CurrentSolution,
-                    cancellationToken).ConfigureAwait(false);
+                        assetProvider,
+                        solutionChecksum,
+                        fromPrimaryBranch,
+                        workspaceVersion,
+                        CurrentSolution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 _lastRequestedSolutionWithChecksum = Tuple.Create(solutionChecksum, solution);
 
@@ -227,7 +289,12 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Adds an entire solution to the workspace, replacing any existing solution.
         /// </summary>
-        internal bool TrySetCurrentSolution(SolutionInfo solutionInfo, int workspaceVersion, SerializableOptionSet options, [NotNullWhen(true)] out Solution? solution)
+        internal bool TrySetCurrentSolution(
+            SolutionInfo solutionInfo,
+            int workspaceVersion,
+            SerializableOptionSet options,
+            [NotNullWhen(true)] out Solution? solution
+        )
         {
             lock (_currentSolutionGate)
             {
@@ -271,10 +338,16 @@ namespace Microsoft.CodeAnalysis.Remote
                 _currentRemoteWorkspaceVersion = workspaceVersion;
 
                 var oldSolution = CurrentSolution;
-                Contract.ThrowIfFalse(oldSolution.Id == solution.Id && oldSolution.FilePath == solution.FilePath);
+                Contract.ThrowIfFalse(
+                    oldSolution.Id == solution.Id && oldSolution.FilePath == solution.FilePath
+                );
 
                 var newSolution = SetCurrentSolution(solution);
-                this.RaiseWorkspaceChangedEventAsync(WorkspaceChangeKind.SolutionChanged, oldSolution, newSolution);
+                this.RaiseWorkspaceChangedEventAsync(
+                    WorkspaceChangeKind.SolutionChanged,
+                    oldSolution,
+                    newSolution
+                );
 
                 SetOptions(newSolution.Options);
 

@@ -6,7 +6,11 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for DES, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for DES, not consuming it."
+    )]
     internal sealed partial class DesImplementation : DES
     {
         private const int BitsPerByte = 8;
@@ -76,7 +80,16 @@ namespace Internal.Cryptography
                 ValidateCFBFeedbackSize(FeedbackSize);
             }
 
-            return CreateTransformCore(Mode, Padding, rgbKey, rgbIV, BlockSize / BitsPerByte, FeedbackSize / BitsPerByte, this.GetPaddingSize(), encrypting);
+            return CreateTransformCore(
+                Mode,
+                Padding,
+                rgbKey,
+                rgbIV,
+                BlockSize / BitsPerByte,
+                FeedbackSize / BitsPerByte,
+                this.GetPaddingSize(),
+                encrypting
+            );
         }
 
         private static void ValidateCFBFeedbackSize(int feedback)
@@ -84,7 +97,13 @@ namespace Internal.Cryptography
             // only 8bits feedback is available on all platforms
             if (feedback != 8)
             {
-                throw new CryptographicException(string.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB));
+                throw new CryptographicException(
+                    string.Format(
+                        SR.Cryptography_CipherModeFeedbackNotSupported,
+                        feedback,
+                        CipherMode.CFB
+                    )
+                );
             }
         }
     }

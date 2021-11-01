@@ -63,7 +63,9 @@ namespace System.Xml
         {
             if (_hash == 0)
             {
-                _hash = Name.GetHashCode() /*+ Namespace.GetHashCode()*/; // for perf reasons we are not taking ns's hashcode.
+                _hash =
+                    Name.GetHashCode() /*+ Namespace.GetHashCode()*/
+                ; // for perf reasons we are not taking ns's hashcode.
             }
             return _hash;
         }
@@ -162,7 +164,11 @@ namespace System.Xml
             _ns = nameTable.Add(_ns);
         }
 
-        internal static XmlQualifiedName Parse(string s, IXmlNamespaceResolver nsmgr, out string prefix)
+        internal static XmlQualifiedName Parse(
+            string s,
+            IXmlNamespaceResolver nsmgr,
+            out string prefix
+        )
         {
             string localName;
             ValidateNames.ParseQNameThrow(s, out prefix, out localName);

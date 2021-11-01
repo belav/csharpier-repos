@@ -6,10 +6,13 @@ using System.Runtime.Serialization;
 namespace System.Threading
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class WaitHandleCannotBeOpenedException : ApplicationException
     {
-        public WaitHandleCannotBeOpenedException() : base(SR.Threading_WaitHandleCannotBeOpenedException)
+        public WaitHandleCannotBeOpenedException()
+            : base(SR.Threading_WaitHandleCannotBeOpenedException)
         {
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
@@ -19,13 +22,15 @@ namespace System.Threading
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
 
-        public WaitHandleCannotBeOpenedException(string? message, Exception? innerException) : base(message, innerException)
+        public WaitHandleCannotBeOpenedException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
 
-        protected WaitHandleCannotBeOpenedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected WaitHandleCannotBeOpenedException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

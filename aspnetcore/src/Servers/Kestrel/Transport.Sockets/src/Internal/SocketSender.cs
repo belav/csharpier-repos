@@ -16,9 +16,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
     {
         private List<ArraySegment<byte>>? _bufferList;
 
-        public SocketSender(PipeScheduler scheduler) : base(scheduler)
-        {
-        }
+        public SocketSender(PipeScheduler scheduler) : base(scheduler) { }
 
         public ValueTask<int> SendAsync(Socket socket, in ReadOnlySequence<byte> buffers)
         {
@@ -37,9 +35,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             var bytesTransferred = BytesTransferred;
             var error = SocketError;
 
-            return error == SocketError.Success ?
-                new ValueTask<int>(bytesTransferred) :
-               ValueTask.FromException<int>(CreateException(error));
+            return error == SocketError.Success
+              ? new ValueTask<int>(bytesTransferred)
+              : ValueTask.FromException<int>(CreateException(error));
         }
 
         public void Reset()
@@ -71,9 +69,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             var bytesTransferred = BytesTransferred;
             var error = SocketError;
 
-            return error == SocketError.Success ?
-                new ValueTask<int>(bytesTransferred) :
-               ValueTask.FromException<int>(CreateException(error));
+            return error == SocketError.Success
+              ? new ValueTask<int>(bytesTransferred)
+              : ValueTask.FromException<int>(CreateException(error));
         }
 
         private void SetBufferList(in ReadOnlySequence<byte> buffer)

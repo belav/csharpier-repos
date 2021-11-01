@@ -5,15 +5,15 @@ using System;
 
 namespace Moq
 {
-	[Flags]
-	internal enum MockExceptionReasons
-	{
-		MoreThanOneCall = 1,
-		MoreThanNCalls = 2,
-		NoMatchingCalls = 4,
-		NoSetup = 8,
-		ReturnValueRequired = 16,
-		UnmatchedSetup = 32,
-		UnverifiedInvocations = 64,
-	}
+    [Flags]
+    internal enum MockExceptionReasons
+    {
+        MoreThanOneCall = 1,
+        MoreThanNCalls = 2,
+        NoMatchingCalls = 4,
+        NoSetup = 8,
+        ReturnValueRequired = 16,
+        UnmatchedSetup = 32,
+        UnverifiedInvocations = 64,
+    }
 }

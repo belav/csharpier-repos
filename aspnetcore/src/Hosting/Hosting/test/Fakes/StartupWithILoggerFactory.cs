@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Hosting.Fakes
 
         public StartupWithILoggerFactory(ILoggerFactory constructorLoggerFactory)
         {
-             ConstructorLoggerFactory = constructorLoggerFactory;
+            ConstructorLoggerFactory = constructorLoggerFactory;
         }
 
         public void ConfigureServices(IServiceCollection collection)

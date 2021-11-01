@@ -13,12 +13,10 @@ namespace System.Text
         /// Trim from the beginning of the string.
         /// </summary>
         Head = 1 << 0,
-
         /// <summary>
         /// Trim from the end of the string.
         /// </summary>
         Tail = 1 << 1,
-
         /// <summary>
         /// Trim from both the beginning and the end of the string.
         /// </summary>

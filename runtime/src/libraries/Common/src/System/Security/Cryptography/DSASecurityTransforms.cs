@@ -28,10 +28,7 @@ namespace System.Security.Cryptography
                 private SecKeyPair? _keys;
                 private bool _disposed;
 
-                public DSASecurityTransforms()
-                    : this(1024)
-                {
-                }
+                public DSASecurityTransforms() : this(1024) { }
 
                 public DSASecurityTransforms(int keySize)
                 {
@@ -43,7 +40,10 @@ namespace System.Security.Cryptography
                     SetKey(SecKeyPair.PublicOnly(publicKey));
                 }
 
-                internal DSASecurityTransforms(SafeSecKeyRefHandle publicKey, SafeSecKeyRefHandle privateKey)
+                internal DSASecurityTransforms(
+                    SafeSecKeyRefHandle publicKey,
+                    SafeSecKeyRefHandle privateKey
+                )
                 {
                     SetKey(SecKeyPair.PublicPrivatePair(publicKey, privateKey));
                 }
@@ -58,10 +58,7 @@ namespace System.Security.Cryptography
 
                 public override int KeySize
                 {
-                    get
-                    {
-                        return base.KeySize;
-                    }
+                    get { return base.KeySize; }
                     set
                     {
                         if (KeySize == value)
@@ -95,7 +92,8 @@ namespace System.Security.Cryptography
                     byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                         includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                         exportPrivate: includePrivateParameters,
-                        password: ExportPassword);
+                        password: ExportPassword
+                    );
 
                     try
                     {
@@ -104,7 +102,8 @@ namespace System.Security.Cryptography
                             DSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                                 keyBlob,
                                 out int localRead,
-                                out DSAParameters key);
+                                out DSAParameters key
+                            );
                             Debug.Assert(localRead == keyBlob.Length);
                             return key;
                         }
@@ -114,7 +113,8 @@ namespace System.Security.Cryptography
                                 keyBlob,
                                 ExportPassword,
                                 out int localRead,
-                                out DSAParameters key);
+                                out DSAParameters key
+                            );
                             Debug.Assert(localRead == keyBlob.Length);
                             return key;
                         }
@@ -127,30 +127,45 @@ namespace System.Security.Cryptography
 
                 public override void ImportParameters(DSAParameters parameters)
                 {
-                    if (parameters.P == null || parameters.Q == null || parameters.G == null || parameters.Y == null)
-                        throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MissingFields);
+                    if (
+                        parameters.P == null
+                        || parameters.Q == null
+                        || parameters.G == null
+                        || parameters.Y == null
+                    )
+                        throw new ArgumentException(
+                            SR.Cryptography_InvalidDsaParameters_MissingFields
+                        );
 
                     // J is not required and is not even used on CNG blobs.
                     // It should, however, be less than P (J == (P-1) / Q).
                     // This validation check is just to maintain parity with DSACng and DSACryptoServiceProvider,
                     // which also perform this check.
                     if (parameters.J != null && parameters.J.Length >= parameters.P.Length)
-                        throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MismatchedPJ);
+                        throw new ArgumentException(
+                            SR.Cryptography_InvalidDsaParameters_MismatchedPJ
+                        );
 
                     int keySize = parameters.P.Length;
                     bool hasPrivateKey = parameters.X != null;
 
                     if (parameters.G.Length != keySize || parameters.Y.Length != keySize)
-                        throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MismatchedPGY);
+                        throw new ArgumentException(
+                            SR.Cryptography_InvalidDsaParameters_MismatchedPGY
+                        );
 
                     if (hasPrivateKey && parameters.X!.Length != parameters.Q.Length)
-                        throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MismatchedQX);
+                        throw new ArgumentException(
+                            SR.Cryptography_InvalidDsaParameters_MismatchedQX
+                        );
 
                     if (!(8 * parameters.P.Length).IsLegalSize(LegalKeySizes))
                         throw new CryptographicException(SR.Cryptography_InvalidKeySize);
 
                     if (parameters.Q.Length != 20)
-                        throw new CryptographicException(SR.Cryptography_InvalidDsaParameters_QRestriction_ShortKey);
+                        throw new CryptographicException(
+                            SR.Cryptography_InvalidDsaParameters_QRestriction_ShortKey
+                        );
 
                     ThrowIfDisposed();
 
@@ -184,7 +199,8 @@ namespace System.Security.Cryptography
                 public override void ImportEncryptedPkcs8PrivateKey(
                     ReadOnlySpan<byte> passwordBytes,
                     ReadOnlySpan<byte> source,
-                    out int bytesRead)
+                    out int bytesRead
+                )
                 {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -193,7 +209,8 @@ namespace System.Security.Cryptography
                 public override void ImportEncryptedPkcs8PrivateKey(
                     ReadOnlySpan<char> password,
                     ReadOnlySpan<byte> source,
-                    out int bytesRead)
+                    out int bytesRead
+                )
                 {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
@@ -248,7 +265,10 @@ namespace System.Security.Cryptography
 
                     try
                     {
-                        return Interop.AppleCrypto.ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
+                        return Interop.AppleCrypto.ImportEphemeralKey(
+                            rented.AsSpan(0, written),
+                            hasPrivateKey
+                        );
                     }
                     finally
                     {
@@ -258,20 +278,30 @@ namespace System.Security.Cryptography
 
                 public override unsafe void ImportSubjectPublicKeyInfo(
                     ReadOnlySpan<byte> source,
-                    out int bytesRead)
+                    out int bytesRead
+                )
                 {
                     ThrowIfDisposed();
 
                     fixed (byte* ptr = &MemoryMarshal.GetReference(source))
                     {
-                        using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                        using (
+                            MemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                                ptr,
+                                source.Length
+                            )
+                        )
                         {
                             // Validate the DER value and get the number of bytes.
                             DSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                                 manager.Memory,
-                                out int localRead);
+                                out int localRead
+                            );
 
-                            SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(source.Slice(0, localRead), false);
+                            SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
+                                source.Slice(0, localRead),
+                                false
+                            );
                             SetKey(SecKeyPair.PublicOnly(publicKey));
 
                             bytesRead = localRead;
@@ -291,13 +321,17 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                     }
 
-                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(keys.PrivateKey, rgbHash);
+                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(
+                        keys.PrivateKey,
+                        rgbHash
+                    );
 
                     // Since the AppleCrypto implementation is limited to FIPS 186-2, signature field sizes
                     // are always 160 bits / 20 bytes (the size of SHA-1, and the only legal length for Q).
                     byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                         derFormatSignature.AsSpan(0, derFormatSignature.Length),
-                        fieldSizeBits: 160);
+                        fieldSizeBits: 160
+                    );
 
                     return ieeeFormatSignature;
                 }
@@ -312,22 +346,36 @@ namespace System.Security.Cryptography
                     return VerifySignature((ReadOnlySpan<byte>)hash, (ReadOnlySpan<byte>)signature);
                 }
 
-                public override bool VerifySignature(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature)
+                public override bool VerifySignature(
+                    ReadOnlySpan<byte> hash,
+                    ReadOnlySpan<byte> signature
+                )
                 {
-                    byte[] derFormatSignature = AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature);
+                    byte[] derFormatSignature = AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(
+                        signature
+                    );
 
                     return Interop.AppleCrypto.VerifySignature(
                         GetKeys().PublicKey,
                         hash,
-                        derFormatSignature);
+                        derFormatSignature
+                    );
                 }
 
-                protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+                protected override byte[] HashData(
+                    byte[] data,
+                    int offset,
+                    int count,
+                    HashAlgorithmName hashAlgorithm
+                )
                 {
                     if (hashAlgorithm != HashAlgorithmName.SHA1)
                     {
                         // Matching DSACryptoServiceProvider's "I only understand SHA-1/FIPS 186-2" exception
-                        throw new CryptographicException(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name);
+                        throw new CryptographicException(
+                            SR.Cryptography_UnknownHashAlgorithm,
+                            hashAlgorithm.Name
+                        );
                     }
 
                     return AsymmetricAlgorithmHelpers.HashData(data, offset, count, hashAlgorithm);
@@ -336,8 +384,18 @@ namespace System.Security.Cryptography
                 protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                     AsymmetricAlgorithmHelpers.HashData(data, hashAlgorithm);
 
-                protected override bool TryHashData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten) =>
-                    AsymmetricAlgorithmHelpers.TryHashData(data, destination, hashAlgorithm, out bytesWritten);
+                protected override bool TryHashData(
+                    ReadOnlySpan<byte> data,
+                    Span<byte> destination,
+                    HashAlgorithmName hashAlgorithm,
+                    out int bytesWritten
+                ) =>
+                    AsymmetricAlgorithmHelpers.TryHashData(
+                        data,
+                        destination,
+                        hashAlgorithm,
+                        out bytesWritten
+                    );
 
                 protected override void Dispose(bool disposing)
                 {

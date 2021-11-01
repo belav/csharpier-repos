@@ -17,7 +17,8 @@ namespace System.Transactions
         public EnlistmentTraceIdentifier(
             Guid resourceManagerIdentifier,
             TransactionTraceIdentifier transactionTraceId,
-            int enlistmentIdentifier)
+            int enlistmentIdentifier
+        )
         {
             _resourceManagerIdentifier = resourceManagerIdentifier;
             _transactionTraceIdentifier = transactionTraceId;
@@ -46,17 +47,24 @@ namespace System.Transactions
         /// </summary>
         public int EnlistmentIdentifier => _enlistmentIdentifier;
 
-        public override int GetHashCode() => base.GetHashCode();  // Don't have anything better to do.
+        public override int GetHashCode() => base.GetHashCode(); // Don't have anything better to do.
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is EnlistmentTraceIdentifier enlistmentTraceId && Equals(enlistmentTraceId);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is EnlistmentTraceIdentifier enlistmentTraceId && Equals(enlistmentTraceId);
 
         public bool Equals(EnlistmentTraceIdentifier other) =>
-            _enlistmentIdentifier == other._enlistmentIdentifier &&
-            _resourceManagerIdentifier == other._resourceManagerIdentifier &&
-            _transactionTraceIdentifier == other._transactionTraceIdentifier;
+            _enlistmentIdentifier == other._enlistmentIdentifier
+            && _resourceManagerIdentifier == other._resourceManagerIdentifier
+            && _transactionTraceIdentifier == other._transactionTraceIdentifier;
 
-        public static bool operator ==(EnlistmentTraceIdentifier left, EnlistmentTraceIdentifier right) => left.Equals(right);
+        public static bool operator ==(
+            EnlistmentTraceIdentifier left,
+            EnlistmentTraceIdentifier right
+        ) => left.Equals(right);
 
-        public static bool operator !=(EnlistmentTraceIdentifier left, EnlistmentTraceIdentifier right) => !left.Equals(right);
+        public static bool operator !=(
+            EnlistmentTraceIdentifier left,
+            EnlistmentTraceIdentifier right
+        ) => !left.Equals(right);
     }
 }

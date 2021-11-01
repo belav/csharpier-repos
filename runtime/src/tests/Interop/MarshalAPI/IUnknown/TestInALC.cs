@@ -10,8 +10,13 @@ namespace TestInALC
     {
         static int Main(string[] args)
         {
-            string currentAssemblyDirectory = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath);
-            string testAssemblyFullPath = Path.Combine(currentAssemblyDirectory, "IUnknownTest.dll");
+            string currentAssemblyDirectory = Path.GetDirectoryName(
+                new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath
+            );
+            string testAssemblyFullPath = Path.Combine(
+                currentAssemblyDirectory,
+                "IUnknownTest.dll"
+            );
             return TestLibrary.Utilities.ExecuteAndUnload(testAssemblyFullPath, args);
         }
     }

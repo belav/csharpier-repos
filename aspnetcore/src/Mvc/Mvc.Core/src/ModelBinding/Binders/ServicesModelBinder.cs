@@ -27,7 +27,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var requestServices = bindingContext.HttpContext.RequestServices;
             var model = requestServices.GetRequiredService(bindingContext.ModelType);
 
-            bindingContext.ValidationState.Add(model, new ValidationStateEntry() { SuppressValidation = true });
+            bindingContext.ValidationState.Add(
+                model,
+                new ValidationStateEntry() { SuppressValidation = true }
+            );
 
             bindingContext.Result = ModelBindingResult.Success(model);
             return Task.CompletedTask;

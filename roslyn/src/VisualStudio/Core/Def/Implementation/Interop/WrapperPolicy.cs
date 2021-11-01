@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         internal static IComWrapperFactory s_ComWrapperFactory =
             PackageUtilities.CreateInstance(typeof(IComWrapperFactory).GUID) as IComWrapperFactory;
 
-        internal static object CreateAggregatedObject(object managedObject) => s_ComWrapperFactory.CreateAggregatedObject(managedObject);
+        internal static object CreateAggregatedObject(object managedObject) =>
+            s_ComWrapperFactory.CreateAggregatedObject(managedObject);
 
         /// <summary>
         /// Return the RCW for the native IComWrapperFixed instance aggregating "managedObject"

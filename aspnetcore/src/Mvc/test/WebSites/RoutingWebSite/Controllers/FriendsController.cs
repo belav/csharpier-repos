@@ -17,7 +17,7 @@ namespace RoutingWebSite
 
         [HttpGet]
         [HttpGet("{id}")]
-        public IActionResult Get([FromRoute]string id)
+        public IActionResult Get([FromRoute] string id)
         {
             return _generator.Generate(id == null ? "/Friends" : $"/Friends/{id}");
         }

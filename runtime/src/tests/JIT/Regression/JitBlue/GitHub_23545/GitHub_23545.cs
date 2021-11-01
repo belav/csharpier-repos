@@ -24,9 +24,7 @@ namespace GitHub_23545
             {
                 return new Dictionary<TestStruct, TestStruct>()
                 {
-                    {
-                        new TestStruct(){value1 = 12}, new TestStruct(){value1 = 15}
-                    }
+                    { new TestStruct() { value1 = 12 }, new TestStruct() { value1 = 15 } }
                 };
             }
         }

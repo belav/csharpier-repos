@@ -11,14 +11,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NullKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public NullKeywordRecommender()
-            : base(SyntaxKind.NullKeyword)
-        {
-        }
+        public NullKeywordRecommender() : base(SyntaxKind.NullKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsAnyExpressionContext ||
-               context.IsStatementContext ||
-               context.IsGlobalStatementContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) =>
+            context.IsAnyExpressionContext
+            || context.IsStatementContext
+            || context.IsGlobalStatementContext;
     }
 }

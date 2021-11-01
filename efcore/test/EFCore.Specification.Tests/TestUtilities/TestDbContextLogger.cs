@@ -17,7 +17,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             LoggedEvent = eventData.EventId;
         }
 
-        public bool ShouldLog(EventId eventId, LogLevel logLevel)
-            => true;
+        public bool ShouldLog(EventId eventId, LogLevel logLevel) => true;
     }
 }

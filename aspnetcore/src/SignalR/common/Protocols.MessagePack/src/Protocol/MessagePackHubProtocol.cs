@@ -34,8 +34,7 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <summary>
         /// Initializes a new instance of the <see cref="MessagePackHubProtocol"/> class.
         /// </summary>
-        public MessagePackHubProtocol()
-            : this(Options.Create(new MessagePackHubProtocolOptions()))
+        public MessagePackHubProtocol() : this(Options.Create(new MessagePackHubProtocolOptions()))
         { }
 
         /// <summary>
@@ -59,21 +58,22 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         }
 
         /// <inheritdoc />
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, [NotNullWhen(true)] out HubMessage? message)
-            => _worker.TryParseMessage(ref input, binder, out message);
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            [NotNullWhen(true)] out HubMessage? message
+        ) => _worker.TryParseMessage(ref input, binder, out message);
 
         /// <inheritdoc />
-        public void WriteMessage(HubMessage message, IBufferWriter<byte> output)
-            => _worker.WriteMessage(message, output);
-
+        public void WriteMessage(HubMessage message, IBufferWriter<byte> output) =>
+            _worker.WriteMessage(message, output);
 
         /// <inheritdoc />
-        public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message)
-            => _worker.GetMessageBytes(message);
+        public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message) =>
+            _worker.GetMessageBytes(message);
 
         internal static MessagePackSerializerOptions CreateDefaultMessagePackSerializerOptions() =>
-            MessagePackSerializerOptions
-                .Standard
+            MessagePackSerializerOptions.Standard
                 .WithResolver(SignalRResolver.Instance)
                 .WithSecurity(MessagePackSecurity.UntrustedData);
 
@@ -81,11 +81,12 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         {
             public static readonly IFormatterResolver Instance = new SignalRResolver();
 
-            public static readonly IReadOnlyList<IFormatterResolver> Resolvers = new IFormatterResolver[]
-            {
-                DynamicEnumAsStringResolver.Instance,
-                ContractlessStandardResolver.Instance,
-            };
+            public static readonly IReadOnlyList<IFormatterResolver> Resolvers =
+                new IFormatterResolver[]
+                {
+                    DynamicEnumAsStringResolver.Instance,
+                    ContractlessStandardResolver.Instance,
+                };
 
             public IMessagePackFormatter<T>? GetFormatter<T>()
             {

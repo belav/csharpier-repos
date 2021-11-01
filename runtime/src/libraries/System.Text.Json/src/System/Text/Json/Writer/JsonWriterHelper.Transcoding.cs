@@ -25,7 +25,12 @@ namespace System.Text.Json
         /// <param name="bytesConsumed">On exit, contains the number of bytes that were consumed from the <paramref name="utf16Source"/>.</param>
         /// <param name="bytesWritten">On exit, contains the number of bytes written to <paramref name="utf8Destination"/></param>
         /// <returns>A <see cref="OperationStatus"/> value representing the state of the conversion.</returns>
-        public static unsafe OperationStatus ToUtf8(ReadOnlySpan<byte> utf16Source, Span<byte> utf8Destination, out int bytesConsumed, out int bytesWritten)
+        public static unsafe OperationStatus ToUtf8(
+            ReadOnlySpan<byte> utf16Source,
+            Span<byte> utf8Destination,
+            out int bytesConsumed,
+            out int bytesWritten
+        )
         {
             //
             //
@@ -53,7 +58,10 @@ namespace System.Text.Json
                 {
                     // we need at least 1 byte per character, but Convert might allow us to convert
                     // only part of the input, so try as much as we can.  Reduce charCount if necessary
-                    int available = Math.Min(PtrDiff(pEnd, pSrc), PtrDiff(pAllocatedBufferEnd, pTarget));
+                    int available = Math.Min(
+                        PtrDiff(pEnd, pSrc),
+                        PtrDiff(pAllocatedBufferEnd, pTarget)
+                    );
 
                     // FASTLOOP:
                     // - optimistic range checks
@@ -121,7 +129,7 @@ namespace System.Text.Json
                         }
                         continue;
 
-                    LongCodeWithMask:
+                        LongCodeWithMask:
 #if BIGENDIAN
                         // be careful about the sign extension
                         ch = (int)(((uint)ch) >> 16);
@@ -138,7 +146,7 @@ namespace System.Text.Json
                         pTarget++;
                         continue;
 
-                    LongCode:
+                        LongCode:
                         // use separate helper variables for slow and fast loop so that the jit optimizations
                         // won't get confused about the variable lifetimes
                         int chd;
@@ -150,7 +158,13 @@ namespace System.Text.Json
                         else
                         {
                             // if (!IsLowSurrogate(ch) && !IsHighSurrogate(ch))
-                            if (!JsonHelpers.IsInRangeInclusive(ch, JsonConstants.HighSurrogateStart, JsonConstants.LowSurrogateEnd))
+                            if (
+                                !JsonHelpers.IsInRangeInclusive(
+                                    ch,
+                                    JsonConstants.HighSurrogateStart,
+                                    JsonConstants.LowSurrogateEnd
+                                )
+                            )
                             {
                                 // 3 byte encoding
                                 chd = unchecked((sbyte)0xE0) | (ch >> 12);
@@ -168,7 +182,13 @@ namespace System.Text.Json
                                 chd = *pSrc;
 
                                 // if (!IsLowSurrogate(chd)) {
-                                if (!JsonHelpers.IsInRangeInclusive(chd, JsonConstants.LowSurrogateStart, JsonConstants.LowSurrogateEnd))
+                                if (
+                                    !JsonHelpers.IsInRangeInclusive(
+                                        chd,
+                                        JsonConstants.LowSurrogateStart,
+                                        JsonConstants.LowSurrogateEnd
+                                    )
+                                )
                                 {
                                     // high not followed by low -> bad
                                     goto InvalidData;
@@ -176,10 +196,14 @@ namespace System.Text.Json
 
                                 pSrc++;
 
-                                ch = chd + (ch << 10) +
-                                    (0x10000
-                                    - JsonConstants.LowSurrogateStart
-                                    - (JsonConstants.HighSurrogateStart << 10));
+                                ch =
+                                    chd
+                                    + (ch << 10)
+                                    + (
+                                        0x10000
+                                        - JsonConstants.LowSurrogateStart
+                                        - (JsonConstants.HighSurrogateStart << 10)
+                                    );
 
                                 *pTarget = (byte)(unchecked((sbyte)0xF0) | (ch >> 18));
                                 // pStop - this byte is compensated by the second surrogate character
@@ -190,22 +214,24 @@ namespace System.Text.Json
                                 chd = unchecked((sbyte)0x80) | (ch >> 12) & 0x3F;
                             }
                             *pTarget = (byte)chd;
-                            pStop--;                    // 3 byte sequence for 1 char, so need pStop-- and the one below too.
+                            pStop--; // 3 byte sequence for 1 char, so need pStop-- and the one below too.
                             pTarget++;
 
                             chd = unchecked((sbyte)0x80) | (ch >> 6) & 0x3F;
                         }
                         *pTarget = (byte)chd;
-                        pStop--;                        // 2 byte sequence for 1 char so need pStop--.
+                        pStop--; // 2 byte sequence for 1 char so need pStop--.
 
                         *(pTarget + 1) = (byte)(unchecked((sbyte)0x80) | ch & 0x3F);
                         // pStop - this byte is already included
 
                         pTarget += 2;
-                    }
-                    while (pSrc < pStop);
+                    } while (pSrc < pStop);
 
-                    Debug.Assert(pTarget <= pAllocatedBufferEnd, "[UTF8Encoding.GetBytes]pTarget <= pAllocatedBufferEnd");
+                    Debug.Assert(
+                        pTarget <= pAllocatedBufferEnd,
+                        "[UTF8Encoding.GetBytes]pTarget <= pAllocatedBufferEnd"
+                    );
                 }
 
                 while (pSrc < pEnd)
@@ -239,7 +265,13 @@ namespace System.Text.Json
                     else
                     {
                         // if (!IsLowSurrogate(ch) && !IsHighSurrogate(ch))
-                        if (!JsonHelpers.IsInRangeInclusive(ch, JsonConstants.HighSurrogateStart, JsonConstants.LowSurrogateEnd))
+                        if (
+                            !JsonHelpers.IsInRangeInclusive(
+                                ch,
+                                JsonConstants.HighSurrogateStart,
+                                JsonConstants.LowSurrogateEnd
+                            )
+                        )
                         {
                             if (pAllocatedBufferEnd - pTarget <= 2)
                                 goto DestinationFull;
@@ -266,7 +298,13 @@ namespace System.Text.Json
                             chd = *pSrc;
 
                             // if (!IsLowSurrogate(chd)) {
-                            if (!JsonHelpers.IsInRangeInclusive(chd, JsonConstants.LowSurrogateStart, JsonConstants.LowSurrogateEnd))
+                            if (
+                                !JsonHelpers.IsInRangeInclusive(
+                                    chd,
+                                    JsonConstants.LowSurrogateStart,
+                                    JsonConstants.LowSurrogateEnd
+                                )
+                            )
                             {
                                 // high not followed by low -> bad
                                 goto InvalidData;
@@ -274,10 +312,14 @@ namespace System.Text.Json
 
                             pSrc++;
 
-                            ch = chd + (ch << 10) +
-                                (0x10000
-                                - JsonConstants.LowSurrogateStart
-                                - (JsonConstants.HighSurrogateStart << 10));
+                            ch =
+                                chd
+                                + (ch << 10)
+                                + (
+                                    0x10000
+                                    - JsonConstants.LowSurrogateStart
+                                    - (JsonConstants.HighSurrogateStart << 10)
+                                );
 
                             *pTarget = (byte)(unchecked((sbyte)0xF0) | (ch >> 18));
                             pTarget++;
@@ -300,17 +342,17 @@ namespace System.Text.Json
                 bytesWritten = (int)(pTarget - bytes);
                 return OperationStatus.Done;
 
-            InvalidData:
+                InvalidData:
                 bytesConsumed = (int)((byte*)(pSrc - 1) - chars);
                 bytesWritten = (int)(pTarget - bytes);
                 return OperationStatus.InvalidData;
 
-            DestinationFull:
+                DestinationFull:
                 bytesConsumed = (int)((byte*)(pSrc - 1) - chars);
                 bytesWritten = (int)(pTarget - bytes);
                 return OperationStatus.DestinationTooSmall;
 
-            NeedMoreData:
+                NeedMoreData:
                 bytesConsumed = (int)((byte*)(pSrc - 1) - chars);
                 bytesWritten = (int)(pTarget - bytes);
                 return OperationStatus.NeedMoreData;

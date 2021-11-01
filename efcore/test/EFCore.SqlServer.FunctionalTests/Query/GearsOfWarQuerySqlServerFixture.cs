@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class GearsOfWarQuerySqlServerFixture : GearsOfWarQueryRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
@@ -18,10 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<City>().Property(g => g.Location).HasColumnType("varchar(100)");
 
             // Full-text binary search
-            modelBuilder.Entity<Mission>()
-                .Property<byte[]>("BriefingDocument");
+            modelBuilder.Entity<Mission>().Property<byte[]>("BriefingDocument");
 
-            modelBuilder.Entity<Mission>()
+            modelBuilder
+                .Entity<Mission>()
                 .Property<string>("BriefingDocumentFileExtension")
                 .HasColumnType("nvarchar(16)");
         }
@@ -56,7 +55,8 @@ BEGIN
     CREATE FULLTEXT INDEX ON Missions (BriefingDocument TYPE COLUMN BriefingDocumentFileExtension) KEY INDEX PK_Missions;
 
     WAITFOR DELAY '00:00:03';
-END");
+END"
+            );
         }
     }
 }

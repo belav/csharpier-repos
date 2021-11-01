@@ -11,8 +11,12 @@ namespace System.ComponentModel.DataAnnotations
     ///     or <see cref="System.ComponentModel.DataAnnotations.DataType.Url" />)
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class DataTypeAttribute : ValidationAttribute
     {
         private static readonly string[] _dataTypeStrings = Enum.GetNames(typeof(DataType));
@@ -41,7 +45,6 @@ namespace System.ComponentModel.DataAnnotations
                 case DataType.Currency:
                     DisplayFormat = new DisplayFormatAttribute();
                     DisplayFormat.DataFormatString = "{0:C}";
-
                     // Don't set ApplyFormatInEditMode for currencies because the currency
                     // symbol can't be parsed
                     break;
@@ -52,8 +55,7 @@ namespace System.ComponentModel.DataAnnotations
         ///     Constructor that accepts the string name of a custom data type
         /// </summary>
         /// <param name="customDataType">The string name of the custom data type.</param>
-        public DataTypeAttribute(string customDataType)
-            : this(DataType.Custom)
+        public DataTypeAttribute(string customDataType) : this(DataType.Custom)
         {
             CustomDataType = customDataType;
         }

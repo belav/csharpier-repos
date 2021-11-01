@@ -21,7 +21,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
     {
         protected override TextOutputFormatter GetOutputFormatter()
         {
-            return new NewtonsoftJsonOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared, new MvcOptions());
+            return new NewtonsoftJsonOutputFormatter(
+                new JsonSerializerSettings(),
+                ArrayPool<char>.Shared,
+                new MvcOptions()
+            );
         }
 
         [Fact]
@@ -59,7 +63,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 Formatting = Formatting.Indented,
             };
             var expectedOutput = JsonConvert.SerializeObject(person, settings);
-            var jsonFormatter = new NewtonsoftJsonOutputFormatter(settings, ArrayPool<char>.Shared, new MvcOptions());
+            var jsonFormatter = new NewtonsoftJsonOutputFormatter(
+                settings,
+                ArrayPool<char>.Shared,
+                new MvcOptions()
+            );
 
             // Act
             await jsonFormatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8);
@@ -88,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             await jsonFormatter.WriteResponseBodyAsync(outputFormatterContext1, Encoding.UTF8);
 
             // These changes should have no effect.
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormatter.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
             jsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
 
             var outputFormatterContext2 = GetOutputFormatterContext(person, typeof(User));
@@ -121,7 +130,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         [Theory]
         [MemberData(nameof(NamingStrategy_AffectsSerializationData))]
-        public async Task NamingStrategy_AffectsSerialization(NamingStrategy strategy, string expected)
+        public async Task NamingStrategy_AffectsSerialization(
+            NamingStrategy strategy,
+            string expected
+        )
         {
             // Arrange
             var user = new User { FullName = "John", age = 35 };
@@ -129,10 +141,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = strategy,
-                },
+                ContractResolver = new DefaultContractResolver { NamingStrategy = strategy, },
             };
             var formatter = new TestableJsonOutputFormatter(settings);
 
@@ -164,7 +173,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         [Theory]
         [MemberData(nameof(NamingStrategy_DoesNotAffectSerializationData))]
-        public async Task NamingStrategy_DoesNotAffectDictionarySerialization(NamingStrategy strategy)
+        public async Task NamingStrategy_DoesNotAffectDictionarySerialization(
+            NamingStrategy strategy
+        )
         {
             // Arrange
             var dictionary = new Dictionary<string, int>(StringComparer.Ordinal)
@@ -176,15 +187,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 { "FullName", 12 },
                 { "full_Name", 12 },
             };
-            var expected = "{\"id\":12,\"Id\":12,\"fullName\":12,\"full-name\":12,\"FullName\":12,\"full_Name\":12}";
+            var expected =
+                "{\"id\":12,\"Id\":12,\"fullName\":12,\"full-name\":12,\"FullName\":12,\"full_Name\":12}";
             var context = GetOutputFormatterContext(dictionary, typeof(Dictionary<string, int>));
 
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = strategy,
-                },
+                ContractResolver = new DefaultContractResolver { NamingStrategy = strategy, },
             };
             var formatter = new TestableJsonOutputFormatter(settings);
 
@@ -203,7 +212,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         [Theory]
         [MemberData(nameof(NamingStrategy_DoesNotAffectSerializationData))]
-        public async Task NamingStrategy_DoesNotAffectSerialization_WithJsonProperty(NamingStrategy strategy)
+        public async Task NamingStrategy_DoesNotAffectSerialization_WithJsonProperty(
+            NamingStrategy strategy
+        )
         {
             // Arrange
             var user = new UserWithJsonProperty
@@ -212,15 +223,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 AnotherName = "Joe",
                 ThirdName = "Joe",
             };
-            var expected = "{\"ThisIsTheFullName\":\"Joe\",\"another_name\":\"Joe\",\"ThisIsTheThirdName\":\"Joe\"}";
+            var expected =
+                "{\"ThisIsTheFullName\":\"Joe\",\"another_name\":\"Joe\",\"ThisIsTheThirdName\":\"Joe\"}";
             var context = GetOutputFormatterContext(user, typeof(UserWithJsonProperty));
 
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = strategy,
-                },
+                ContractResolver = new DefaultContractResolver { NamingStrategy = strategy, },
             };
             var formatter = new TestableJsonOutputFormatter(settings);
 
@@ -239,23 +248,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         [Theory]
         [MemberData(nameof(NamingStrategy_DoesNotAffectSerializationData))]
-        public async Task NamingStrategy_DoesNotAffectSerialization_WithJsonObject(NamingStrategy strategy)
+        public async Task NamingStrategy_DoesNotAffectSerialization_WithJsonObject(
+            NamingStrategy strategy
+        )
         {
             // Arrange
-            var user = new UserWithJsonObject
-            {
-                age = 35,
-                FullName = "John",
-            };
+            var user = new UserWithJsonObject { age = 35, FullName = "John", };
             var expected = "{\"age\":35,\"full_name\":\"John\"}";
             var context = GetOutputFormatterContext(user, typeof(UserWithJsonProperty));
 
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = strategy,
-                },
+                ContractResolver = new DefaultContractResolver { NamingStrategy = strategy, },
             };
             var formatter = new TestableJsonOutputFormatter(settings);
 
@@ -277,13 +281,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             // Arrange
             var beforeMessage = "Hello World";
-            var formatter = new NewtonsoftJsonOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared, new MvcOptions());
+            var formatter = new NewtonsoftJsonOutputFormatter(
+                new JsonSerializerSettings(),
+                ArrayPool<char>.Shared,
+                new MvcOptions()
+            );
             var memStream = new MemoryStream();
             var outputFormatterContext = GetOutputFormatterContext(
                 beforeMessage,
                 typeof(string),
                 "application/json; charset=utf-8",
-                memStream);
+                memStream
+            );
 
             // Act
             await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8);
@@ -300,28 +309,58 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async Task WriteToStreamAsync_LargePayload_DoesNotPerformSynchronousWrites()
         {
             // Arrange
-            var model = Enumerable.Range(0, 1000).Select(p => new User { FullName = new string('a', 5000) });
+            var model = Enumerable
+                .Range(0, 1000)
+                .Select(p => new User { FullName = new string('a', 5000) });
 
             var stream = new Mock<Stream> { CallBase = true };
-            stream.Setup(v => v.WriteAsync(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            stream
+                .Setup(
+                    v =>
+                        v.WriteAsync(
+                            It.IsAny<byte[]>(),
+                            It.IsAny<int>(),
+                            It.IsAny<int>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.CompletedTask);
-            stream.Setup(v => v.FlushAsync(It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            stream
+                .Setup(v => v.FlushAsync(It.IsAny<CancellationToken>()))
+                .Returns(Task.CompletedTask);
             stream.SetupGet(s => s.CanWrite).Returns(true);
 
-            var formatter = new NewtonsoftJsonOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared, new MvcOptions());
+            var formatter = new NewtonsoftJsonOutputFormatter(
+                new JsonSerializerSettings(),
+                ArrayPool<char>.Shared,
+                new MvcOptions()
+            );
             var outputFormatterContext = GetOutputFormatterContext(
                 model,
                 typeof(string),
                 "application/json; charset=utf-8",
-                stream.Object);
+                stream.Object
+            );
 
             // Act
             await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.UTF8);
 
             // Assert
-            stream.Verify(v => v.WriteAsync(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.AtLeastOnce());
+            stream.Verify(
+                v =>
+                    v.WriteAsync(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<CancellationToken>()
+                    ),
+                Times.AtLeastOnce()
+            );
 
-            stream.Verify(v => v.Write(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Never());
+            stream.Verify(
+                v => v.Write(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()),
+                Times.Never()
+            );
             stream.Verify(v => v.Flush(), Times.Never());
             Assert.NotNull(outputFormatterContext.HttpContext.Response.ContentLength);
         }
@@ -363,9 +402,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private class TestableJsonOutputFormatter : NewtonsoftJsonOutputFormatter
         {
             public TestableJsonOutputFormatter(JsonSerializerSettings serializerSettings)
-                : base(serializerSettings, ArrayPool<char>.Shared, new MvcOptions())
-            {
-            }
+                : base(serializerSettings, ArrayPool<char>.Shared, new MvcOptions()) { }
 
             public new JsonSerializerSettings SerializerSettings => base.SerializerSettings;
         }
@@ -386,7 +423,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             public string AnotherName { get; set; }
 
             // NamingStrategyType should be ignored with an explicit name.
-            [JsonProperty("ThisIsTheThirdName", NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+            [JsonProperty(
+                "ThisIsTheThirdName",
+                NamingStrategyType = typeof(SnakeCaseNamingStrategy)
+            )]
             public string ThirdName { get; set; }
         }
 

@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     public interface IModelExpressionProvider
     {
         ModelExpression CreateModelExpression<TModel, TValue>(
-               ViewDataDictionary<TModel> viewData,
-               Expression<Func<TModel, TValue>> expression);
+            ViewDataDictionary<TModel> viewData,
+            Expression<Func<TModel, TValue>> expression
+        );
     }
 }

@@ -11,13 +11,16 @@ namespace System.Text.Json
     public static partial class JsonSerializer
     {
         // Members accessed by the serializer when serializing.
-        private const DynamicallyAccessedMemberTypes MembersAccessedOnWrite = DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields;
+        private const DynamicallyAccessedMemberTypes MembersAccessedOnWrite =
+            DynamicallyAccessedMemberTypes.PublicProperties
+            | DynamicallyAccessedMemberTypes.PublicFields;
 
         private static void WriteCore<TValue>(
             Utf8JsonWriter writer,
             in TValue value,
             Type inputType,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(writer != null);
 
@@ -28,7 +31,11 @@ namespace System.Text.Json
             }
 
             WriteStack state = default;
-            JsonConverter jsonConverter = state.Initialize(inputType, options, supportContinuation: false);
+            JsonConverter jsonConverter = state.Initialize(
+                inputType,
+                options,
+                supportContinuation: false
+            );
 
             try
             {
@@ -47,7 +54,8 @@ namespace System.Text.Json
             Utf8JsonWriter writer,
             in TValue value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             Debug.Assert(writer != null);
 

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 {
     internal class InMemoryTransportFactory : IConnectionListenerFactory, IConnectionListener
     {
-        private Channel<ConnectionContext> _acceptQueue = Channel.CreateUnbounded<ConnectionContext>();
+        private Channel<ConnectionContext> _acceptQueue =
+            Channel.CreateUnbounded<ConnectionContext>();
 
         public EndPoint EndPoint { get; set; }
 
@@ -21,7 +22,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             _acceptQueue.Writer.TryWrite(connection);
         }
 
-        public async ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<ConnectionContext> AcceptAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             if (await _acceptQueue.Reader.WaitToReadAsync(cancellationToken))
             {
@@ -32,10 +35,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             }
 
             return null;
-
         }
 
-        public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+        public ValueTask<IConnectionListener> BindAsync(
+            EndPoint endpoint,
+            CancellationToken cancellationToken = default
+        )
         {
             EndPoint = endpoint;
 

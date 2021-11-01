@@ -22,9 +22,9 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
         /// </summary>
         /// <param name="jsRuntime">The <see cref="IJSRuntime"/>.</param>
         /// <param name="dataProtectionProvider">The <see cref="IDataProtectionProvider"/>.</param>
-        public ProtectedLocalStorage(IJSRuntime jsRuntime, IDataProtectionProvider dataProtectionProvider)
-            : base("localStorage", jsRuntime, dataProtectionProvider)
-        {
-        }
+        public ProtectedLocalStorage(
+            IJSRuntime jsRuntime,
+            IDataProtectionProvider dataProtectionProvider
+        ) : base("localStorage", jsRuntime, dataProtectionProvider) { }
     }
 }

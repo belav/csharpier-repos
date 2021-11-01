@@ -23,7 +23,10 @@ namespace Microsoft.XmlSerializer.Generator
         }
 
         private static string s_references = string.Empty;
-        private static readonly Dictionary<string, string> s_referencedic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, string> s_referencedic = new Dictionary<
+            string,
+            string
+        >(StringComparer.OrdinalIgnoreCase);
 
         private int Run(string[] args)
         {
@@ -138,7 +141,10 @@ namespace Microsoft.XmlSerializer.Generator
                     }
                     else
                     {
-                        if (arg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) || arg.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase))
+                        if (
+                            arg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase)
+                            || arg.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase)
+                        )
                         {
                             if (assembly != null)
                             {
@@ -163,7 +169,9 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     foreach (string err in errs)
                     {
-                        Console.Error.WriteLine(FormatMessage(parsableErrors, true, SR.Format(SR.Warning, err)));
+                        Console.Error.WriteLine(
+                            FormatMessage(parsableErrors, true, SR.Format(SR.Warning, err))
+                        );
                     }
                 }
 
@@ -171,7 +179,16 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (assembly == null)
                     {
-                        Console.Error.WriteLine(FormatMessage(parsableErrors, false, SR.Format(SR.ErrMissingRequiredArgument, SR.Format(SR.ErrAssembly, "assembly"))));
+                        Console.Error.WriteLine(
+                            FormatMessage(
+                                parsableErrors,
+                                false,
+                                SR.Format(
+                                    SR.ErrMissingRequiredArgument,
+                                    SR.Format(SR.ErrAssembly, "assembly")
+                                )
+                            )
+                        );
                     }
 
                     WriteHelp();
@@ -181,7 +198,9 @@ namespace Microsoft.XmlSerializer.Generator
                 if (disableRun)
                 {
                     Console.WriteLine("This tool is not intended to be used directly.");
-                    Console.WriteLine("Please refer to https://go.microsoft.com/fwlink/?linkid=858594 on how to use it.");
+                    Console.WriteLine(
+                        "Please refer to https://go.microsoft.com/fwlink/?linkid=858594 on how to use it."
+                    );
                     return 0;
                 }
 
@@ -190,11 +209,24 @@ namespace Microsoft.XmlSerializer.Generator
                     ParseReferences();
                 }
 
-                GenerateFile(types, assembly, proxyOnly, silent, warnings, force, codePath, parsableErrors);
+                GenerateFile(
+                    types,
+                    assembly,
+                    proxyOnly,
+                    silent,
+                    warnings,
+                    force,
+                    codePath,
+                    parsableErrors
+                );
             }
             catch (Exception e)
             {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException)
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
                 {
                     throw;
                 }
@@ -206,7 +238,16 @@ namespace Microsoft.XmlSerializer.Generator
             return 0;
         }
 
-        private void GenerateFile(List<string> typeNames, string assemblyName, bool proxyOnly, bool silent, bool warnings, bool force, string outputDirectory, bool parsableerrors)
+        private void GenerateFile(
+            List<string> typeNames,
+            string assemblyName,
+            bool proxyOnly,
+            bool silent,
+            bool warnings,
+            bool force,
+            string outputDirectory,
+            bool parsableerrors
+        )
         {
             Assembly assembly = LoadAssembly(assemblyName, true);
             Type[] types;
@@ -240,7 +281,16 @@ namespace Microsoft.XmlSerializer.Generator
                     Type type = assembly.GetType(typeName);
                     if (type == null)
                     {
-                        Console.Error.WriteLine(FormatMessage(parsableerrors, false, SR.Format(SR.ErrorDetails, SR.Format(SR.ErrLoadType, typeName, assemblyName))));
+                        Console.Error.WriteLine(
+                            FormatMessage(
+                                parsableerrors,
+                                false,
+                                SR.Format(
+                                    SR.ErrorDetails,
+                                    SR.Format(SR.ErrLoadType, typeName, assemblyName)
+                                )
+                            )
+                        );
                     }
 
                     types[typeIndex++] = type;
@@ -260,7 +310,10 @@ namespace Microsoft.XmlSerializer.Generator
                     if (type != null)
                     {
                         bool isObsolete = false;
-                        object[] obsoleteAttributes = type.GetCustomAttributes(typeof(ObsoleteAttribute), false);
+                        object[] obsoleteAttributes = type.GetCustomAttributes(
+                            typeof(ObsoleteAttribute),
+                            false
+                        );
                         foreach (object attribute in obsoleteAttributes)
                         {
                             if (((ObsoleteAttribute)attribute).IsError)
@@ -281,10 +334,15 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (warnings)
                     {
-                        Console.Out.WriteLine(FormatMessage(parsableerrors, true, SR.Format(SR.InfoIgnoreType, type.FullName)));
+                        Console.Out.WriteLine(
+                            FormatMessage(
+                                parsableerrors,
+                                true,
+                                SR.Format(SR.InfoIgnoreType, type.FullName)
+                            )
+                        );
                         WriteWarning(e, parsableerrors);
                     }
-
                     continue;
                 }
 
@@ -300,7 +358,14 @@ namespace Microsoft.XmlSerializer.Generator
                 var allMappings = (XmlMapping[])mappings.ToArray(typeof(XmlMapping));
 
                 bool gac = assembly.GlobalAssemblyCache;
-                outputDirectory = outputDirectory == null ? (gac ? Environment.CurrentDirectory : Path.GetDirectoryName(assembly.Location)) : outputDirectory;
+                outputDirectory =
+                    outputDirectory == null
+                        ? (
+                              gac
+                                  ? Environment.CurrentDirectory
+                                  : Path.GetDirectoryName(assembly.Location)
+                          )
+                        : outputDirectory;
 
                 if (!Directory.Exists(outputDirectory))
                 {
@@ -308,9 +373,16 @@ namespace Microsoft.XmlSerializer.Generator
                     //However when a path ending with backslash, if followed by double quote, it becomes an escapte sequence
                     //e.g. "obj\Debug\netcoreapp2.0\", it will be converted as obj\Debug\netcoreapp2.0", which is not valid and not exist
                     //We need remove the ending quote for this situation
-                    if (!outputDirectory.EndsWith("\"", StringComparison.Ordinal) || !Directory.Exists(outputDirectory = outputDirectory.Remove(outputDirectory.Length - 1)))
+                    if (
+                        !outputDirectory.EndsWith("\"", StringComparison.Ordinal)
+                        || !Directory.Exists(
+                            outputDirectory = outputDirectory.Remove(outputDirectory.Length - 1)
+                        )
+                    )
                     {
-                        throw new ArgumentException(SR.Format(SR.ErrDirectoryNotExists, outputDirectory));
+                        throw new ArgumentException(
+                            SR.Format(SR.ErrDirectoryNotExists, outputDirectory)
+                        );
                     }
                 }
 
@@ -320,7 +392,9 @@ namespace Microsoft.XmlSerializer.Generator
                 if (!force)
                 {
                     if (File.Exists(codePath))
-                        throw new InvalidOperationException(SR.Format(SR.ErrSerializerExists, codePath, nameof(force)));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.ErrSerializerExists, codePath, nameof(force))
+                        );
                 }
 
                 if (Directory.Exists(codePath))
@@ -340,21 +414,36 @@ namespace Microsoft.XmlSerializer.Generator
 
                     using (FileStream fs = File.Create(codePath))
                     {
-                        MethodInfo method = typeof(System.Xml.Serialization.XmlSerializer).GetMethod("GenerateSerializer", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                        MethodInfo method =
+                            typeof(System.Xml.Serialization.XmlSerializer).GetMethod(
+                                "GenerateSerializer",
+                                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                            );
                         if (method == null)
                         {
-                            Console.Error.WriteLine(FormatMessage(parsableerrors: false, warning: false, message: SR.GenerateSerializerNotFound));
+                            Console.Error.WriteLine(
+                                FormatMessage(
+                                    parsableerrors: false,
+                                    warning: false,
+                                    message: SR.GenerateSerializerNotFound
+                                )
+                            );
                         }
                         else
                         {
-                            success = (bool)method.Invoke(null, new object[] { serializableTypes, allMappings, fs });
+                            success = (bool)method.Invoke(
+                                null,
+                                new object[] { serializableTypes, allMappings, fs }
+                            );
                         }
                     }
                 }
                 catch (UnauthorizedAccessException)
                 {
                     toDeleteFile = false;
-                    throw new UnauthorizedAccessException(SR.Format(SR.DirectoryAccessDenied, outputDirectory));
+                    throw new UnauthorizedAccessException(
+                        SR.Format(SR.DirectoryAccessDenied, outputDirectory)
+                    );
                 }
                 finally
                 {
@@ -369,20 +458,33 @@ namespace Microsoft.XmlSerializer.Generator
                     if (!silent)
                     {
                         Console.Out.WriteLine(SR.Format(SR.InfoFileName, codePath));
-                        Console.Out.WriteLine(SR.Format(SR.InfoGeneratedFile, assembly.Location, codePath));
+                        Console.Out.WriteLine(
+                            SR.Format(SR.InfoGeneratedFile, assembly.Location, codePath)
+                        );
                     }
                 }
                 else
                 {
-                    Console.Out.WriteLine(FormatMessage(parsableerrors, false, SR.Format(SR.ErrGenerationFailed, assembly.Location)));
+                    Console.Out.WriteLine(
+                        FormatMessage(
+                            parsableerrors,
+                            false,
+                            SR.Format(SR.ErrGenerationFailed, assembly.Location)
+                        )
+                    );
                 }
             }
             else
             {
-                Console.Out.WriteLine(FormatMessage(parsableerrors, true, SR.Format(SR.InfoNoSerializableTypes, assembly.Location)));
+                Console.Out.WriteLine(
+                    FormatMessage(
+                        parsableerrors,
+                        true,
+                        SR.Format(SR.InfoNoSerializableTypes, assembly.Location)
+                    )
+                );
             }
         }
-
 
         private bool ArgumentMatch(string arg, string formal)
         {
@@ -406,7 +508,14 @@ namespace Microsoft.XmlSerializer.Generator
             return arg.Equals(shortName, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        private void ImportType(Type type, ArrayList mappings, ArrayList importedTypes, bool verbose, XmlReflectionImporter importer, bool parsableerrors)
+        private void ImportType(
+            Type type,
+            ArrayList mappings,
+            ArrayList importedTypes,
+            bool verbose,
+            XmlReflectionImporter importer,
+            bool parsableerrors
+        )
         {
             XmlTypeMapping xmlTypeMapping = null;
             var localImporter = new XmlReflectionImporter();
@@ -416,14 +525,24 @@ namespace Microsoft.XmlSerializer.Generator
             }
             catch (Exception e)
             {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException)
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
                 {
                     throw;
                 }
 
                 if (verbose)
                 {
-                    Console.Out.WriteLine(FormatMessage(parsableerrors, true, SR.Format(SR.InfoIgnoreType, type.FullName)));
+                    Console.Out.WriteLine(
+                        FormatMessage(
+                            parsableerrors,
+                            true,
+                            SR.Format(SR.InfoIgnoreType, type.FullName)
+                        )
+                    );
                     WriteWarning(e, parsableerrors);
                 }
 
@@ -440,7 +559,9 @@ namespace Microsoft.XmlSerializer.Generator
         private static Assembly LoadAssembly(string assemblyName, bool throwOnFail)
         {
             Assembly assembly = null;
-            string path = Path.IsPathRooted(assemblyName) ? assemblyName : Path.GetFullPath(assemblyName);
+            string path = Path.IsPathRooted(assemblyName)
+                ? assemblyName
+                : Path.GetFullPath(assemblyName);
             assembly = Assembly.LoadFile(path);
             if (assembly == null)
             {
@@ -453,13 +574,20 @@ namespace Microsoft.XmlSerializer.Generator
         private void WriteHeader()
         {
             // do not localize Copyright header
-            Console.WriteLine($".NET Xml Serialization Generation Utility, Version {ThisAssembly.InformationalVersion}]");
+            Console.WriteLine(
+                $".NET Xml Serialization Generation Utility, Version {ThisAssembly.InformationalVersion}]"
+            );
         }
 
         private void WriteHelp()
         {
             Console.Out.WriteLine(SR.HelpDescription);
-            Console.Out.WriteLine(SR.Format(SR.HelpUsage, this.GetType().Assembly.GetName().Name.Substring("dotnet-".Length)));
+            Console.Out.WriteLine(
+                SR.Format(
+                    SR.HelpUsage,
+                    this.GetType().Assembly.GetName().Name.Substring("dotnet-".Length)
+                )
+            );
             Console.Out.WriteLine(SR.HelpDevOptions);
             Console.Out.WriteLine(SR.Format(SR.HelpAssembly, "-a", "--assembly"));
             Console.Out.WriteLine(SR.Format(SR.HelpType, "--type"));
@@ -476,7 +604,12 @@ namespace Microsoft.XmlSerializer.Generator
             return FormatMessage(parsableerrors, warning, "SGEN1", message);
         }
 
-        private static string FormatMessage(bool parsableerrors, bool warning, string code, string message)
+        private static string FormatMessage(
+            bool parsableerrors,
+            bool warning,
+            string code,
+            string message
+        )
         {
             if (!parsableerrors)
             {
@@ -520,7 +653,9 @@ namespace Microsoft.XmlSerializer.Generator
 
         private static string GetTempAssemblyName(AssemblyName parent, string ns)
         {
-            return parent.Name + ".XmlSerializers" + (ns == null || ns.Length == 0 ? "" : "." + ns.GetHashCode());
+            return parent.Name
+                + ".XmlSerializers"
+                + (ns == null || ns.Length == 0 ? "" : "." + ns.GetHashCode());
         }
 
         private static void ParseReferences()
@@ -550,7 +685,6 @@ namespace Microsoft.XmlSerializer.Generator
                         }
                     }
                 }
-
             }
         }
 
@@ -578,7 +712,8 @@ namespace Microsoft.XmlSerializer.Generator
                     {
                         // Replace "ref" with "lib" in the assembly's path, the path looks like:
                         // dir\.nuget\packages\system.servicemodel.primitives\4.5.3\ref\netstandard2.0\System.ServiceModel.Primitives.dll;
-                        string pattern = @"\\ref\\netstandard\d*\.?\d*\.?\d*\\System.ServiceModel.Primitives.dll";
+                        string pattern =
+                            @"\\ref\\netstandard\d*\.?\d*\.?\d*\\System.ServiceModel.Primitives.dll";
                         Match match = null;
                         try
                         {
@@ -607,7 +742,11 @@ namespace Microsoft.XmlSerializer.Generator
             }
             catch (Exception exp)
             {
-                if (exp is ThreadAbortException || exp is StackOverflowException || exp is OutOfMemoryException)
+                if (
+                    exp is ThreadAbortException
+                    || exp is StackOverflowException
+                    || exp is OutOfMemoryException
+                )
                 {
                     throw;
                 }
@@ -646,9 +785,7 @@ namespace Microsoft.XmlSerializer.Generator
                         }
                     }
                     //If for any reasons the rsp file is not generated, this argument will be ignored and serializer will be generated with default settings
-                    catch (FileNotFoundException)
-                    { }
-
+                    catch (FileNotFoundException) { }
                 }
             }
             return parsedArgs.ToArray();

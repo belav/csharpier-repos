@@ -12,18 +12,45 @@ namespace System.Diagnostics.Tests
 {
     internal class Helpers
     {
-        public static bool IsElevatedAndCanWriteToPerfCounters { get => AdminHelpers.IsProcessElevated() && CanWriteToPerfCounters; }
-        public static bool IsElevatedAndCanWriteAndReadNetPerfCounters { get => AdminHelpers.IsProcessElevated() && CanWriteToPerfCounters && CanReadNetPerfCounters; }
-        public static bool CanWriteToPerfCounters { get => PlatformDetection.IsNotWindowsNanoServer; }
-        public static bool CanReadNetPerfCounters { get => File.Exists(Environment.SystemDirectory + Path.DirectorySeparatorChar + "netfxperf.dll"); }
+        public static bool IsElevatedAndCanWriteToPerfCounters
+        {
+            get => AdminHelpers.IsProcessElevated() && CanWriteToPerfCounters;
+        }
+        public static bool IsElevatedAndCanWriteAndReadNetPerfCounters
+        {
+            get =>
+                AdminHelpers.IsProcessElevated()
+                && CanWriteToPerfCounters
+                && CanReadNetPerfCounters;
+        }
+        public static bool CanWriteToPerfCounters
+        {
+            get => PlatformDetection.IsNotWindowsNanoServer;
+        }
+        public static bool CanReadNetPerfCounters
+        {
+            get =>
+                File.Exists(
+                    Environment.SystemDirectory + Path.DirectorySeparatorChar + "netfxperf.dll"
+                );
+        }
 
-        public static string CreateCategory(string name, PerformanceCounterCategoryType categoryType)
+        public static string CreateCategory(
+            string name,
+            PerformanceCounterCategoryType categoryType
+        )
         {
             var category = name + "_Category";
 
             // If the categry already exists, delete it, then create it.
             DeleteCategory(name);
-            PerformanceCounterCategory.Create(category, "description", categoryType, name, "counter description");
+            PerformanceCounterCategory.Create(
+                category,
+                "description",
+                categoryType,
+                name,
+                "counter description"
+            );
 
             Assert.True(PerformanceCounterCategoryCreated(category));
             return category;
@@ -54,10 +81,14 @@ namespace System.Diagnostics.Tests
         {
             // Harden the tests increasing the retry count and the timeout.
             T result = default;
-            RetryHelper.Execute(() =>
-            {
-                result = func();
-            }, maxAttempts: 10, (iteration) => iteration * 300);
+            RetryHelper.Execute(
+                () =>
+                {
+                    result = func();
+                },
+                maxAttempts: 10,
+                (iteration) => iteration * 300
+            );
 
             return result;
         }

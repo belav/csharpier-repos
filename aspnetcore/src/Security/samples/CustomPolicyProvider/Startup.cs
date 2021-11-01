@@ -23,12 +23,15 @@ namespace CustomPolicyProvider
 
             // Add cookie authentication so that it's possible to sign-in to test the
             // custom authorization policy behavior of the sample
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/signin";
-                });
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(
+                    options =>
+                    {
+                        options.AccessDeniedPath = "/account/denied";
+                        options.LoginPath = "/account/signin";
+                    }
+                );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,10 +41,12 @@ namespace CustomPolicyProvider
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
     }
 }

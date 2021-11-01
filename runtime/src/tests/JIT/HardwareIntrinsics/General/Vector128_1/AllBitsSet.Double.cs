@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -56,9 +57,9 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             object result = typeof(Vector128<Double>)
-                                .GetProperty(nameof(Vector128<Double>.AllBitsSet), new Type[] { })
-                                .GetGetMethod()
-                                .Invoke(null, new object[] { });
+                .GetProperty(nameof(Vector128<Double>.AllBitsSet), new Type[] {  })
+                .GetGetMethod()
+                .Invoke(null, new object[] {  });
 
             ValidateResult((Vector128<Double>)(result));
         }
@@ -70,7 +71,10 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, method);
         }
 
-        private unsafe void ValidateResult(Double[] resultElements, [CallerMemberName] string method = "")
+        private unsafe void ValidateResult(
+            Double[] resultElements,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
             for (var i = 0; i < ElementCount; i++)
@@ -84,8 +88,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.AllBitsSet(Double): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.AllBitsSet(Double): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

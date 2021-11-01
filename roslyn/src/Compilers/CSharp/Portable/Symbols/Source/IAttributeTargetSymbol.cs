@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Location of an attribute if an explicit location is not specified via attribute target specification syntax.
         /// </remarks>
         AttributeLocation DefaultAttributeLocation { get; }
-
-        // TODO (tomat): 
+        // TODO (tomat):
         // Add DecodeWellKnownAttribute, etc.
     }
 }

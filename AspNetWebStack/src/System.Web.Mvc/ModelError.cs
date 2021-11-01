@@ -7,12 +7,12 @@ namespace System.Web.Mvc
     public class ModelError
     {
         public ModelError(Exception exception)
-            : this(exception, null /* errorMessage */)
-        {
-        }
+            : this(
+                exception,
+                null /* errorMessage */
+            ) { }
 
-        public ModelError(Exception exception, string errorMessage)
-            : this(errorMessage)
+        public ModelError(Exception exception, string errorMessage) : this(errorMessage)
         {
             if (exception == null)
             {

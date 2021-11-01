@@ -9,20 +9,28 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class AccessorDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<AccessorDeclarationSyntax>
+    internal class AccessorDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<AccessorDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             AccessorDeclarationSyntax accessorDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(accessorDeclaration, ref spans, optionProvider);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                accessorDeclaration,
+                ref spans,
+                optionProvider
+            );
 
             // fault tolerance
-            if (accessorDeclaration.Body == null ||
-                accessorDeclaration.Body.OpenBraceToken.IsMissing ||
-                accessorDeclaration.Body.CloseBraceToken.IsMissing)
+            if (
+                accessorDeclaration.Body == null
+                || accessorDeclaration.Body.OpenBraceToken.IsMissing
+                || accessorDeclaration.Body.CloseBraceToken.IsMissing
+            )
             {
                 return;
             }
@@ -33,16 +41,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             // Check IsNode to compress blank lines after this node if it is the last child of the parent.
             //
             // All accessor kinds are grouped together in Metadata as Source.
-            var compressEmptyLines = optionProvider.IsMetadataAsSource
+            var compressEmptyLines =
+                optionProvider.IsMetadataAsSource
                 && (!nextSibling.IsNode || nextSibling.AsNode() is AccessorDeclarationSyntax);
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                accessorDeclaration,
-                accessorDeclaration.Keyword,
-                compressEmptyLines: compressEmptyLines,
-                autoCollapse: true,
-                type: BlockTypes.Member,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    accessorDeclaration,
+                    accessorDeclaration.Keyword,
+                    compressEmptyLines: compressEmptyLines,
+                    autoCollapse: true,
+                    type: BlockTypes.Member,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

@@ -102,10 +102,24 @@ namespace System.PrivateUri.Tests
             string punycodeHost = "xn--ahost-kva.xn--domin-mva.xn--net-hoa";
 
             // initial unicode host
-            ValidateUri(scheme, unicodeHost, UriHostNameType.Dns, unicodeHost, unicodeHost, punycodeHost);
+            ValidateUri(
+                scheme,
+                unicodeHost,
+                UriHostNameType.Dns,
+                unicodeHost,
+                unicodeHost,
+                punycodeHost
+            );
 
             // initial punycode host
-            ValidateUri(scheme, punycodeHost, UriHostNameType.Dns, punycodeHost, punycodeHost, punycodeHost);
+            ValidateUri(
+                scheme,
+                punycodeHost,
+                UriHostNameType.Dns,
+                punycodeHost,
+                punycodeHost,
+                punycodeHost
+            );
         }
 
         private static void ValidateUri(
@@ -114,7 +128,8 @@ namespace System.PrivateUri.Tests
             UriHostNameType expectedHostType,
             string expectedHost,
             string expectedDnsSafeHost,
-            string expectedIdnHost)
+            string expectedIdnHost
+        )
         {
             Assert.True(Uri.TryCreate(scheme + "://" + host, UriKind.Absolute, out Uri uri));
             Assert.Equal(expectedHost, uri.Host);
@@ -123,7 +138,6 @@ namespace System.PrivateUri.Tests
             Assert.Equal(expectedHostType, Uri.CheckHostName(host));
             Assert.Equal(expectedIdnHost, uri.IdnHost);
         }
-
         #endregion Helpers
     }
 }

@@ -9,11 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     internal class HtmlLanguageCharacteristics : LanguageCharacteristics<HtmlTokenizer>
     {
-        private static readonly HtmlLanguageCharacteristics _instance = new HtmlLanguageCharacteristics();
+        private static readonly HtmlLanguageCharacteristics _instance =
+            new HtmlLanguageCharacteristics();
 
-        protected HtmlLanguageCharacteristics()
-        {
-        }
+        protected HtmlLanguageCharacteristics() { }
 
         public static HtmlLanguageCharacteristics Instance
         {
@@ -120,7 +119,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             }
         }
 
-        protected override SyntaxToken CreateToken(string content, SyntaxKind kind, RazorDiagnostic [] errors)
+        protected override SyntaxToken CreateToken(
+            string content,
+            SyntaxKind kind,
+            RazorDiagnostic[] errors
+        )
         {
             return SyntaxFactory.Token(kind, content, errors);
         }

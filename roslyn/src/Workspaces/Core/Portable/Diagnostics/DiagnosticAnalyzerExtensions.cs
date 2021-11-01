@@ -8,16 +8,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static partial class DiagnosticAnalyzerExtensions
     {
-        public static DiagnosticAnalyzerCategory GetDiagnosticAnalyzerCategory(this DiagnosticAnalyzer analyzer)
-            => analyzer switch
+        public static DiagnosticAnalyzerCategory GetDiagnosticAnalyzerCategory(
+            this DiagnosticAnalyzer analyzer
+        ) =>
+            analyzer switch
             {
-                FileContentLoadAnalyzer _ => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis,
-                DocumentDiagnosticAnalyzer _ => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis,
+                FileContentLoadAnalyzer _
+                  => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis,
+                DocumentDiagnosticAnalyzer _
+                  => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                      | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis,
                 ProjectDiagnosticAnalyzer _ => DiagnosticAnalyzerCategory.ProjectAnalysis,
                 IBuiltInAnalyzer builtInAnalyzer => builtInAnalyzer.GetAnalyzerCategory(),
 
                 // It is not possible to know the categorization for a public analyzer, so return a worst-case categorization.
-                _ => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis | DiagnosticAnalyzerCategory.ProjectAnalysis
+                _
+                  => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                      | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis
+                      | DiagnosticAnalyzerCategory.ProjectAnalysis
             };
 
         public static bool SupportAnalysisKind(this DiagnosticAnalyzer analyzer, AnalysisKind kind)
@@ -45,10 +53,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public static bool SupportsSemanticDiagnosticAnalysis(this DiagnosticAnalyzer analyzer)
         {
             var category = analyzer.GetDiagnosticAnalyzerCategory();
-            return (category & (DiagnosticAnalyzerCategory.SemanticSpanAnalysis | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis)) != 0;
+            return (
+                    category
+                    & (
+                        DiagnosticAnalyzerCategory.SemanticSpanAnalysis
+                        | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis
+                    )
+                ) != 0;
         }
 
-        public static bool SupportsSpanBasedSemanticDiagnosticAnalysis(this DiagnosticAnalyzer analyzer)
+        public static bool SupportsSpanBasedSemanticDiagnosticAnalysis(
+            this DiagnosticAnalyzer analyzer
+        )
         {
             var category = analyzer.GetDiagnosticAnalyzerCategory();
             return (category & DiagnosticAnalyzerCategory.SemanticSpanAnalysis) != 0;

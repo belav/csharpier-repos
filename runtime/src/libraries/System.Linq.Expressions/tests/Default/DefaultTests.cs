@@ -28,10 +28,16 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression x = Expression.Variable(typeof(MyEnum), "x");
 
             Expression<Action> expression = Expression.Lambda<Action>(
-                            Expression.Block(
-                            new[] { x },
-                            Expression.Assign(x, Expression.Default(typeof(MyEnum))),
-                            Expression.Call(null, typeof(EnumOutLambdaClass).GetMethod(nameof(EnumOutLambdaClass.BarRef)), x)));
+                Expression.Block(
+                    new[] { x },
+                    Expression.Assign(x, Expression.Default(typeof(MyEnum))),
+                    Expression.Call(
+                        null,
+                        typeof(EnumOutLambdaClass).GetMethod(nameof(EnumOutLambdaClass.BarRef)),
+                        x
+                    )
+                )
+            );
 
             expression.Compile(useInterpreter)();
         }
@@ -53,32 +59,49 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Default(typeof(int).MakeByRefType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Default(typeof(int).MakeByRefType())
+            );
         }
 
         [Fact]
         public void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Default(typeof(int).MakePointerType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Default(typeof(int).MakePointerType())
+            );
         }
 
         [Fact]
         public void GenericType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Default(typeof(List<>)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Default(typeof(List<>))
+            );
         }
 
         [Fact]
         public void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Default(typeof(List<>.Enumerator)));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Default(typeof(List<>).MakeGenericType(typeof(List<>))));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Default(typeof(List<>.Enumerator))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Default(typeof(List<>).MakeGenericType(typeof(List<>)))
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public void DbNull(bool useInterpreter)
         {
-            Expression<Func<DBNull>> lambda = Expression.Lambda<Func<DBNull>>(Expression.Default(typeof(DBNull)));
+            Expression<Func<DBNull>> lambda = Expression.Lambda<Func<DBNull>>(
+                Expression.Default(typeof(DBNull))
+            );
             Func<DBNull> func = lambda.Compile(useInterpreter);
             Assert.Null(func());
         }
@@ -86,7 +109,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void StructType(bool useInterpreter)
         {
-            Expression<Func<Sp>> lambda = Expression.Lambda<Func<Sp>>(Expression.Default(typeof(Sp)));
+            Expression<Func<Sp>> lambda = Expression.Lambda<Func<Sp>>(
+                Expression.Default(typeof(Sp))
+            );
             Func<Sp> func = lambda.Compile(useInterpreter);
             Sp defaultValue = func();
             Assert.Equal(0, defaultValue.I);
@@ -96,7 +121,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void PrivateStructType(bool useInterpreter)
         {
-            Expression<Func<StPri>> lambda = Expression.Lambda<Func<StPri>>(Expression.Default(typeof(StPri)));
+            Expression<Func<StPri>> lambda = Expression.Lambda<Func<StPri>>(
+                Expression.Default(typeof(StPri))
+            );
             Func<StPri> func = lambda.Compile(useInterpreter);
             StPri defaultValue = func();
             Assert.Equal(0, defaultValue.IntProperty);

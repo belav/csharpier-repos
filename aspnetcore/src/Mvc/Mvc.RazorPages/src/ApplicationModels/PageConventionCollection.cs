@@ -21,20 +21,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <summary>
         /// Initializes a new instance of the <see cref="PageConventionCollection"/> class that is empty.
         /// </summary>
-        public PageConventionCollection()
-            : this((IServiceProvider)null)
-        {
-        }
+        public PageConventionCollection() : this((IServiceProvider)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PageConventionCollection"/> class
         /// as a wrapper for the specified list.
         /// </summary>
         /// <param name="conventions">The list that is wrapped by the new collection.</param>
-        public PageConventionCollection(IList<IPageConvention> conventions)
-            : base(conventions)
-        {
-        }
+        public PageConventionCollection(IList<IPageConvention> conventions) : base(conventions) { }
 
         internal PageConventionCollection(IServiceProvider serviceProvider)
         {
@@ -60,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <returns>The added <see cref="IPageApplicationModelConvention"/>.</returns>
         public IPageApplicationModelConvention AddPageApplicationModelConvention(
             string pageName,
-            Action<PageApplicationModel> action)
+            Action<PageApplicationModel> action
+        )
         {
             EnsureValidPageName(pageName);
 
@@ -89,11 +84,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public IPageApplicationModelConvention AddAreaPageApplicationModelConvention(
             string areaName,
             string pageName,
-            Action<PageApplicationModel> action)
+            Action<PageApplicationModel> action
+        )
         {
             if (string.IsNullOrEmpty(areaName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(areaName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(areaName)
+                );
             }
 
             EnsureValidPageName(pageName);
@@ -113,7 +112,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="folderPath">The path of the folder relative to the Razor Pages root. e.g. <c>/Users/</c></param>
         /// <param name="action">The <see cref="Action"/>.</param>
         /// <returns>The added <see cref="IPageApplicationModelConvention"/>.</returns>
-        public IPageApplicationModelConvention AddFolderApplicationModelConvention(string folderPath, Action<PageApplicationModel> action)
+        public IPageApplicationModelConvention AddFolderApplicationModelConvention(
+            string folderPath,
+            Action<PageApplicationModel> action
+        )
         {
             EnsureValidFolderPath(folderPath);
 
@@ -142,11 +144,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public IPageApplicationModelConvention AddAreaFolderApplicationModelConvention(
             string areaName,
             string folderPath,
-            Action<PageApplicationModel> action)
+            Action<PageApplicationModel> action
+        )
         {
             if (string.IsNullOrEmpty(areaName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(areaName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(areaName)
+                );
             }
 
             EnsureValidFolderPath(folderPath);
@@ -166,7 +172,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="pageName">The name of the page e.g. <c>/Users/List</c></param>
         /// <param name="action">The <see cref="Action"/>.</param>
         /// <returns>The added <see cref="IPageRouteModelConvention"/>.</returns>
-        public IPageRouteModelConvention AddPageRouteModelConvention(string pageName, Action<PageRouteModel> action)
+        public IPageRouteModelConvention AddPageRouteModelConvention(
+            string pageName,
+            Action<PageRouteModel> action
+        )
         {
             EnsureValidPageName(pageName);
 
@@ -192,11 +201,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </param>
         /// <param name="action">The <see cref="Action"/>.</param>
         /// <returns>The added <see cref="IPageRouteModelConvention"/>.</returns>
-        public IPageRouteModelConvention AddAreaPageRouteModelConvention(string areaName, string pageName, Action<PageRouteModel> action)
+        public IPageRouteModelConvention AddAreaPageRouteModelConvention(
+            string areaName,
+            string pageName,
+            Action<PageRouteModel> action
+        )
         {
             if (string.IsNullOrEmpty(areaName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(areaName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(areaName)
+                );
             }
 
             EnsureValidPageName(pageName);
@@ -216,7 +232,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="folderPath">The path of the folder relative to the Razor Pages root. e.g. <c>/Users/</c></param>
         /// <param name="action">The <see cref="Action"/>.</param>
         /// <returns>The added <see cref="IPageApplicationModelConvention"/>.</returns>
-        public IPageRouteModelConvention AddFolderRouteModelConvention(string folderPath, Action<PageRouteModel> action)
+        public IPageRouteModelConvention AddFolderRouteModelConvention(
+            string folderPath,
+            Action<PageRouteModel> action
+        )
         {
             EnsureValidFolderPath(folderPath);
 
@@ -242,11 +261,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </param>
         /// <param name="action">The <see cref="Action"/>.</param>
         /// <returns>The added <see cref="IPageApplicationModelConvention"/>.</returns>
-        public IPageRouteModelConvention AddAreaFolderRouteModelConvention(string areaName, string folderPath, Action<PageRouteModel> action)
+        public IPageRouteModelConvention AddAreaFolderRouteModelConvention(
+            string areaName,
+            string folderPath,
+            Action<PageRouteModel> action
+        )
         {
             if (string.IsNullOrEmpty(areaName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(areaName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(areaName)
+                );
             }
 
             EnsureValidFolderPath(folderPath);
@@ -289,12 +315,21 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             if (string.IsNullOrEmpty(pageName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(pageName)
+                );
             }
 
-            if (pageName[0] != '/' || pageName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase))
+            if (
+                pageName[0] != '/'
+                || pageName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                throw new ArgumentException(Resources.FormatInvalidValidPageName(pageName), nameof(pageName));
+                throw new ArgumentException(
+                    Resources.FormatInvalidValidPageName(pageName),
+                    nameof(pageName)
+                );
             }
         }
 
@@ -303,16 +338,23 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             if (string.IsNullOrEmpty(folderPath))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(folderPath)
+                );
             }
 
             if (folderPath[0] != '/')
             {
-                throw new ArgumentException(Resources.PathMustBeRootRelativePath, nameof(folderPath));
+                throw new ArgumentException(
+                    Resources.PathMustBeRootRelativePath,
+                    nameof(folderPath)
+                );
             }
         }
 
-        private TConvention Add<TConvention>(TConvention convention) where TConvention : IPageConvention
+        private TConvention Add<TConvention>(TConvention convention)
+            where TConvention : IPageConvention
         {
             base.Add(convention);
             return convention;
@@ -325,11 +367,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             private readonly Action<PageRouteModel> _action;
 
             public PageRouteModelConvention(string path, Action<PageRouteModel> action)
-                : this(null, path, action)
-            {
-            }
+                : this(null, path, action) { }
 
-            public PageRouteModelConvention(string areaName, string path, Action<PageRouteModel> action)
+            public PageRouteModelConvention(
+                string areaName,
+                string path,
+                Action<PageRouteModel> action
+            )
             {
                 _areaName = areaName;
                 _path = path;
@@ -338,8 +382,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             public void Apply(PageRouteModel model)
             {
-                if (string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase) &&
-                    string.Equals(model.ViewEnginePath, _path, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(
+                        model.ViewEnginePath,
+                        _path,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     _action(model);
                 }
@@ -353,11 +403,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             private readonly Action<PageRouteModel> _action;
 
             public FolderRouteModelConvention(string folderPath, Action<PageRouteModel> action)
-                : this(null, folderPath, action)
-            {
-            }
+                : this(null, folderPath, action) { }
 
-            public FolderRouteModelConvention(string areaName, string folderPath, Action<PageRouteModel> action)
+            public FolderRouteModelConvention(
+                string areaName,
+                string folderPath,
+                Action<PageRouteModel> action
+            )
             {
                 _areaName = areaName;
                 _folderPath = folderPath.TrimEnd('/');
@@ -366,8 +418,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             public void Apply(PageRouteModel model)
             {
-                if (string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase) &&
-                    PathBelongsToFolder(_folderPath, model.ViewEnginePath))
+                if (
+                    string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase)
+                    && PathBelongsToFolder(_folderPath, model.ViewEnginePath)
+                )
                 {
                     _action(model);
                 }
@@ -381,11 +435,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             private readonly Action<PageApplicationModel> _action;
 
             public PageApplicationModelConvention(string path, Action<PageApplicationModel> action)
-                : this(null, path, action)
-            {
-            }
+                : this(null, path, action) { }
 
-            public PageApplicationModelConvention(string areaName, string path, Action<PageApplicationModel> action)
+            public PageApplicationModelConvention(
+                string areaName,
+                string path,
+                Action<PageApplicationModel> action
+            )
             {
                 _areaName = areaName;
                 _path = path;
@@ -394,8 +450,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             public void Apply(PageApplicationModel model)
             {
-                if (string.Equals(model.ViewEnginePath, _path, StringComparison.OrdinalIgnoreCase) &&
-                    string.Equals(model.AreaName, _areaName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(model.ViewEnginePath, _path, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(model.AreaName, _areaName, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     _action(model);
                 }
@@ -408,12 +466,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             private readonly string _folderPath;
             private readonly Action<PageApplicationModel> _action;
 
-            public FolderApplicationModelConvention(string folderPath, Action<PageApplicationModel> action)
-                : this(null, folderPath, action)
-            {
-            }
+            public FolderApplicationModelConvention(
+                string folderPath,
+                Action<PageApplicationModel> action
+            ) : this(null, folderPath, action) { }
 
-            public FolderApplicationModelConvention(string areaName, string folderPath, Action<PageApplicationModel> action)
+            public FolderApplicationModelConvention(
+                string areaName,
+                string folderPath,
+                Action<PageApplicationModel> action
+            )
             {
                 _areaName = areaName;
                 _folderPath = folderPath.TrimEnd('/');
@@ -422,8 +484,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             public void Apply(PageApplicationModel model)
             {
-                if (string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase) &&
-                    PathBelongsToFolder(_folderPath, model.ViewEnginePath))
+                if (
+                    string.Equals(_areaName, model.AreaName, StringComparison.OrdinalIgnoreCase)
+                    && PathBelongsToFolder(_folderPath, model.ViewEnginePath)
+                )
                 {
                     _action(model);
                 }
@@ -439,9 +503,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 return true;
             }
 
-            return viewEnginePath.Length > folderPath.Length &&
-                viewEnginePath.StartsWith(folderPath, StringComparison.OrdinalIgnoreCase) &&
-                viewEnginePath[folderPath.Length] == '/';
+            return viewEnginePath.Length > folderPath.Length
+                && viewEnginePath.StartsWith(folderPath, StringComparison.OrdinalIgnoreCase)
+                && viewEnginePath[folderPath.Length] == '/';
         }
     }
 }

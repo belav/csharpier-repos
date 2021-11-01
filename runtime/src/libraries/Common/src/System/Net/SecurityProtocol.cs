@@ -9,9 +9,12 @@ namespace System.Net
     {
         public const SslProtocols DefaultSecurityProtocols =
 #if !NETSTANDARD2_0 && !NETSTANDARD2_1 && !NETFRAMEWORK
-            SslProtocols.Tls13 |
+            SslProtocols.Tls13
+            |
 #endif
-            SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
+            SslProtocols.Tls
+            | SslProtocols.Tls11
+            | SslProtocols.Tls12;
 
         public const SslProtocols SystemDefaultSecurityProtocols = SslProtocols.None;
     }

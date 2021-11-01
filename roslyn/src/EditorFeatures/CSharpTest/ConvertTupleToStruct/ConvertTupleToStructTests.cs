@@ -25,18 +25,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
 {
     public class ConvertTupleToStructTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertTupleToStructCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertTupleToStructCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         #region update containing member tests
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleType(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -45,7 +53,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -96,14 +105,24 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [WorkItem(45451, "https://github.com/dotnet/roslyn/issues/45451")]
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleType_ChangeArgumentNameCase(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -112,7 +131,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -163,14 +183,24 @@ internal struct NewStruct
         return new NewStruct(value.A, value.B);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [WorkItem(45451, "https://github.com/dotnet/roslyn/issues/45451")]
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleType_ChangeArgumentNameCase_Uppercase(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -179,7 +209,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -233,9 +264,12 @@ internal struct NewStruct
             var symbolSpecification = new SymbolSpecification(
                 null,
                 "Name2",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -243,7 +277,8 @@ internal struct NewStruct
                 name: "Name2",
                 prefix: "p_",
                 suffix: "_",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -255,7 +290,8 @@ internal struct NewStruct
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             var options = this.PreferImplicitTypeWithInfo();
             options.Add(NamingStyleOptions.NamingPreferences, info);
@@ -264,10 +300,15 @@ internal struct NewStruct
         }
 
         [WorkItem(39916, "https://github.com/dotnet/roslyn/issues/39916")]
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleType_Explicit(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -276,7 +317,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -330,10 +372,15 @@ internal struct NewStruct
             await TestInRegularAndScriptAsync(text, expected, testHost: host);
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleTypeNoNames(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -342,7 +389,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -393,13 +441,23 @@ internal struct NewStruct
         return new NewStruct(value.Item1, value.Item2);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleTypePartialNames(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -408,7 +466,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -459,13 +518,23 @@ internal struct NewStruct
         return new NewStruct(value.Item1, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertFromType(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -475,7 +544,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -527,13 +597,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertFromType2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     (int a, int b) Method()
@@ -543,7 +623,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     NewStruct Method()
@@ -595,13 +676,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertFromType3(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     (int a, int b) Method()
@@ -611,7 +702,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     NewStruct Method()
@@ -663,13 +755,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertFromType4(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -679,7 +781,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -731,13 +834,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleTypeInNamespace(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 namespace N
 {
     class Test
@@ -749,7 +862,8 @@ namespace N
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 namespace N
 {
     class Test
@@ -804,13 +918,23 @@ namespace N
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestNonLiteralNames(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -819,7 +943,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -870,13 +995,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertSingleTupleTypeWithInferredName(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -885,7 +1020,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -936,13 +1072,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertMultipleInstancesInSameMethod(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -952,7 +1098,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1004,13 +1151,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertMultipleInstancesAcrossMethods(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1026,7 +1183,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1084,13 +1242,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task OnlyConvertMatchingTypesInSameMethod(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -1102,7 +1270,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -1156,13 +1325,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestFixAllMatchesInSingleMethod(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -1174,7 +1353,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -1228,13 +1408,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestFixNotAcrossMethods(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1250,7 +1440,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1308,13 +1499,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestTrivia(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1323,7 +1524,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1374,13 +1576,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.Item2);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task NotIfReferencesAnonymousTypeInternally(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1393,10 +1605,15 @@ class Test
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(testHost: host));
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertMultipleNestedInstancesInSameMethod1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1405,7 +1622,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -1458,13 +1676,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertMultipleNestedInstancesInSameMethod2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1473,7 +1701,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -1526,13 +1755,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task RenameAnnotationOnStartingPoint(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1542,7 +1781,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1594,13 +1834,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task CapturedMethodTypeParameters(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test<X> where X : struct
 {
     void Method<Y>(List<X> x, Y[] y) where Y : class, new()
@@ -1609,7 +1859,8 @@ class Test<X> where X : struct
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test<X> where X : struct
 {
     void Method<Y>(List<X> x, Y[] y) where Y : class, new()
@@ -1663,19 +1914,29 @@ internal struct NewStruct<X, Y>
     }
 }";
 
-            await TestExactActionSetOfferedAsync(text, new[]
-                {
-                    FeaturesResources.updating_usages_in_containing_member
-                },
-                parameters: new TestParameters(testHost: host));
+            await TestExactActionSetOfferedAsync(
+                text,
+                new[] { FeaturesResources.updating_usages_in_containing_member },
+                parameters: new TestParameters(testHost: host)
+            );
 
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task NewTypeNameCollision(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1688,7 +1949,8 @@ class NewStruct
 {
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1743,13 +2005,23 @@ internal struct NewStruct1
         return new NewStruct1(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestDuplicatedName(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1758,7 +2030,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1809,13 +2082,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.a);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestInLambda1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -1830,7 +2113,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -1887,13 +2171,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestInLambda2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -1908,7 +2202,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -1965,13 +2260,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestInLocalFunction1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -1986,7 +2291,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2043,13 +2349,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestInLocalFunction2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -2064,7 +2380,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2121,13 +2438,23 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertWithDefaultNames1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -2140,7 +2467,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2195,20 +2523,33 @@ internal struct NewStruct
         return new NewStruct(value.Item1, value.Item2);
     }
 }";
-            await TestExactActionSetOfferedAsync(text, new[]
+            await TestExactActionSetOfferedAsync(
+                text,
+                new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
                 },
-                parameters: new TestParameters(testHost: host));
+                parameters: new TestParameters(testHost: host)
+            );
 
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task ConvertWithDefaultNames2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -2220,7 +2561,8 @@ class Test
         var t5 = (Item1: 1, Item2: 2);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2275,27 +2617,39 @@ internal struct NewStruct
         return new NewStruct(value.Item1, value.Item2);
     }
 }";
-            await TestExactActionSetOfferedAsync(text, new[]
+            await TestExactActionSetOfferedAsync(
+                text,
+                new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
                 },
-                parameters: new TestParameters(testHost: host));
+                parameters: new TestParameters(testHost: host)
+            );
 
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        protected override ParseOptions GetScriptOptions()
-            => null;
+        protected override ParseOptions GetScriptOptions() => null;
 
         #endregion
 
         #region update containing type tests
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task TestCapturedTypeParameter_UpdateType(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test<T>
@@ -2317,7 +2671,8 @@ class Test<T>
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2383,20 +2738,34 @@ internal struct NewStruct<T>
     }
 }";
 
-            await TestExactActionSetOfferedAsync(text, new[]
+            await TestExactActionSetOfferedAsync(
+                text,
+                new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type
                 },
-                parameters: new TestParameters(testHost: host));
+                parameters: new TestParameters(testHost: host)
+            );
 
-            await TestInRegularAndScriptAsync(text, expected, index: 1, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 1,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task UpdateAllInType_SinglePart_SingleFile(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -2420,7 +2789,8 @@ class Other
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2486,13 +2856,24 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, index: 1, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 1,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task UpdateAllInType_MultiplePart_SingleFile(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 partial class Test
@@ -2519,7 +2900,8 @@ class Other
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 partial class Test
@@ -2588,13 +2970,24 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestInRegularAndScriptAsync(text, expected, index: 1, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 1,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task UpdateAllInType_MultiplePart_MultipleFile(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -2638,7 +3031,8 @@ partial class Other
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -2723,17 +3117,28 @@ partial class Other
         </Document>
     </Project>
 </Workspace>";
-            await TestInRegularAndScriptAsync(text, expected, index: 1, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 1,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         #endregion update containing project tests
 
         #region update containing project tests
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task UpdateAllInProject_MultiplePart_MultipleFile_WithNamespace(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -2780,7 +3185,8 @@ partial class Other
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -2869,17 +3275,28 @@ partial class Other
         </Document>
     </Project>
 </Workspace>";
-            await TestInRegularAndScriptAsync(text, expected, index: 2, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 2,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         #endregion
 
         #region update dependent projects
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task UpdateDependentProjects_DirectDependency(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -2917,7 +3334,8 @@ partial class Other
         </Document>
     </Project>
 </Workspace>";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -2997,13 +3415,24 @@ partial class Other
         </Document>
     </Project>
 </Workspace>";
-            await TestInRegularAndScriptAsync(text, expected, index: 3, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 3,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)
+        ]
         public async Task UpdateDependentProjects_NoDependency(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -3040,7 +3469,8 @@ partial class Other
         </Document>
     </Project>
 </Workspace>";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -3119,9 +3549,14 @@ partial class Other
         </Document>
     </Project>
 </Workspace>";
-            await TestInRegularAndScriptAsync(text, expected, index: 3, options: this.PreferImplicitTypeWithInfo(), testHost: host);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                index: 3,
+                options: this.PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
-
         #endregion
     }
 }

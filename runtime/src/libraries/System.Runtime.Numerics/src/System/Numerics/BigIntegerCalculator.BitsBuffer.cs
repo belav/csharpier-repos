@@ -43,8 +43,7 @@ namespace System.Numerics
                 Array.Copy(value, _bits, _length);
             }
 
-            public unsafe void MultiplySelf(ref BitsBuffer value,
-                                            ref BitsBuffer temp)
+            public unsafe void MultiplySelf(ref BitsBuffer value, ref BitsBuffer temp)
             {
                 Debug.Assert(temp._length == 0);
                 Debug.Assert(_length + value._length <= temp._bits.Length);
@@ -52,19 +51,19 @@ namespace System.Numerics
                 // Executes a multiplication for this and value, writes the
                 // result to temp. Switches this and temp arrays afterwards.
 
-                fixed (uint* b = _bits, v = value._bits, t = temp._bits)
+                fixed (
+                    uint* b = _bits,
+                        v = value._bits,
+                        t = temp._bits
+                )
                 {
                     if (_length < value._length)
                     {
-                        Multiply(v, value._length,
-                                 b, _length,
-                                 t, _length + value._length);
+                        Multiply(v, value._length, b, _length, t, _length + value._length);
                     }
                     else
                     {
-                        Multiply(b, _length,
-                                 v, value._length,
-                                 t, _length + value._length);
+                        Multiply(b, _length, v, value._length, t, _length + value._length);
                     }
                 }
 
@@ -79,10 +78,12 @@ namespace System.Numerics
                 // Executes a square for this, writes the result to temp.
                 // Switches this and temp arrays afterwards.
 
-                fixed (uint* b = _bits, t = temp._bits)
+                fixed (
+                    uint* b = _bits,
+                        t = temp._bits
+                )
                 {
-                    Square(b, _length,
-                           t, _length + _length);
+                    Square(b, _length, t, _length + _length);
                 }
 
                 Apply(ref temp, _length + _length);
@@ -105,11 +106,12 @@ namespace System.Numerics
 
                 if (_length >= modulus.Length)
                 {
-                    fixed (uint* b = _bits, m = modulus)
+                    fixed (
+                        uint* b = _bits,
+                            m = modulus
+                    )
                     {
-                        Divide(b, _length,
-                               m, modulus.Length,
-                               null, 0);
+                        Divide(b, _length, m, modulus.Length, null, 0);
                     }
 
                     _length = ActualLength(_bits, modulus.Length);
@@ -123,11 +125,12 @@ namespace System.Numerics
 
                 if (_length >= modulus._length)
                 {
-                    fixed (uint* b = _bits, m = modulus._bits)
+                    fixed (
+                        uint* b = _bits,
+                            m = modulus._bits
+                    )
                     {
-                        Divide(b, _length,
-                               m, modulus._length,
-                               null, 0);
+                        Divide(b, _length, m, modulus._length, null, 0);
                     }
 
                     _length = ActualLength(_bits, modulus._length);

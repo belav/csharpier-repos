@@ -20,7 +20,11 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="predicate">Invoked with the request environment to determine if the branch should be taken</param>
         /// <param name="configuration">Configures a branch to take</param>
         /// <returns></returns>
-        public static IApplicationBuilder UseWhen(this IApplicationBuilder app, Predicate predicate, Action<IApplicationBuilder> configuration)
+        public static IApplicationBuilder UseWhen(
+            this IApplicationBuilder app,
+            Predicate predicate,
+            Action<IApplicationBuilder> configuration
+        )
         {
             if (app == null)
             {
@@ -43,25 +47,27 @@ namespace Microsoft.AspNetCore.Builder
             var branchBuilder = app.New();
             configuration(branchBuilder);
 
-            return app.Use(main =>
-            {
-                // This is called only when the main application builder 
-                // is built, not per request.
-                branchBuilder.Run(main);
-                var branch = branchBuilder.Build();
-
-                return context =>
+            return app.Use(
+                main =>
                 {
-                    if (predicate(context))
+                    // This is called only when the main application builder
+                    // is built, not per request.
+                    branchBuilder.Run(main);
+                    var branch = branchBuilder.Build();
+
+                    return context =>
                     {
-                        return branch(context);
-                    }
-                    else
-                    {
-                        return main(context);
-                    }
-                };
-            });
+                        if (predicate(context))
+                        {
+                            return branch(context);
+                        }
+                        else
+                        {
+                            return main(context);
+                        }
+                    };
+                }
+            );
         }
     }
 }

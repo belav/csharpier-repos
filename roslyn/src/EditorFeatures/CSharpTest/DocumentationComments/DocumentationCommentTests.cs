@@ -22,13 +22,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         public void TypingCharacter_Class()
         {
             var code =
-@"//$$
+                @"//$$
 class C
 {
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C
@@ -58,13 +58,13 @@ class C
         public void TypingCharacter_Class_AutoGenerateXmlDocCommentsOff()
         {
             var code =
-@"//$$
+                @"//$$
 class C
 {
 }";
 
             var expected =
-@"///$$
+                @"///$$
 class C
 {
 }";
@@ -76,14 +76,14 @@ class C
         public void TypingCharacter_Method()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     int M<T>(int goo) { return 0; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -101,14 +101,14 @@ class C
         public void TypingCharacter_Method_WithVerbatimParams()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     int M<@int>(int @goo) { return 0; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -126,14 +126,14 @@ class C
         public void TypingCharacter_AutoProperty()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     int P { get; set; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -148,7 +148,7 @@ class C
         public void TypingCharacter_Property()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     int P
@@ -159,7 +159,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -178,7 +178,7 @@ class C
         public void TypingCharacter_Indexer()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     int this[int index]
@@ -189,7 +189,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -210,14 +210,14 @@ class C
         public void TypingCharacter_VoidMethod1()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     void M<T>(int goo) {  }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -234,14 +234,14 @@ class C
         public void TypingCharacter_VoidMethod_WithVerbatimParams()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     void M<@T>(int @int) {  }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -259,13 +259,13 @@ class C
         public void TypingCharacter_VoidMethod2()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     void Method() { }
 }";
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -278,14 +278,16 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.DocumentationComments)]
         public void TypingCharacter_NotWhenDocCommentExists1()
         {
-            var code = @"
+            var code =
+                @"
 ///
 //$$
 class C
 {
 }";
 
-            var expected = @"
+            var expected =
+                @"
 ///
 ///$$
 class C
@@ -298,7 +300,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.DocumentationComments)]
         public void TypingCharacter_NotWhenDocCommentExists2()
         {
-            var code = @"
+            var code =
+                @"
 ///
 
 //$$
@@ -306,7 +309,8 @@ class C
 {
 }";
 
-            var expected = @"
+            var expected =
+                @"
 ///
 
 ///$$
@@ -320,7 +324,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.DocumentationComments)]
         public void TypingCharacter_NotWhenDocCommentExists3()
         {
-            var code = @"
+            var code =
+                @"
 class B { } ///
 
 //$$
@@ -328,7 +333,8 @@ class C
 {
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class B { } ///
 
 ///$$
@@ -343,14 +349,14 @@ class C
         public void TypingCharacter_NotWhenDocCommentExists4()
         {
             var code =
-@"//$$
+                @"//$$
 /// <summary></summary>
 class C
 {
 }";
 
             var expected =
-@"///$$
+                @"///$$
 /// <summary></summary>
 class C
 {
@@ -363,7 +369,7 @@ class C
         public void TypingCharacter_NotWhenDocCommentExists5()
         {
             var code =
-@"class C
+                @"class C
 {
     //$$
     /// <summary></summary>
@@ -371,7 +377,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     ///$$
     /// <summary></summary>
@@ -385,7 +391,7 @@ class C
         public void TypingCharacter_NotInsideMethodBody1()
         {
             var code =
-@"class C
+                @"class C
 {
     void M(int goo)
     {
@@ -394,7 +400,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     void M(int goo)
     {
@@ -409,7 +415,7 @@ class C
         public void TypingCharacter_NotInsideMethodBody2()
         {
             var code =
-@"class C
+                @"class C
 {
     /// <summary></summary>
     void M(int goo)
@@ -419,7 +425,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary></summary>
     void M(int goo)
@@ -435,12 +441,12 @@ class C
         public void TypingCharacter_NotAfterClassName()
         {
             var code =
-@"class C//$$
+                @"class C//$$
 {
 }";
 
             var expected =
-@"class C///$$
+                @"class C///$$
 {
 }";
 
@@ -451,12 +457,12 @@ class C
         public void TypingCharacter_NotAfterOpenBrace()
         {
             var code =
-@"class C
+                @"class C
 {//$$
 }";
 
             var expected =
-@"class C
+                @"class C
 {///$$
 }";
 
@@ -467,13 +473,13 @@ class C
         public void TypingCharacter_NotAfterCtorName()
         {
             var code =
-@"class C
+                @"class C
 {
 C() //$$
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 C() ///$$
 }";
@@ -485,7 +491,7 @@ C() ///$$
         public void TypingCharacter_NotInsideCtor()
         {
             var code =
-@"class C
+                @"class C
 {
 C()
 {
@@ -494,7 +500,7 @@ C()
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 C()
 {
@@ -509,13 +515,13 @@ C()
         public void PressingEnter_InsertComment_Class1()
         {
             var code =
-@"///$$
+                @"///$$
 class C
 {
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C
@@ -530,13 +536,13 @@ class C
         public void PressingEnter_InsertComment_Class1_AutoGenerateXmlDocCommentsOff()
         {
             var code =
-@"///$$
+                @"///$$
 class C
 {
 }";
 
             var expected =
-@"///
+                @"///
 $$
 class C
 {
@@ -549,12 +555,12 @@ class C
         public void PressingEnter_InsertComment_Class2()
         {
             var code =
-@"///$$class C
+                @"///$$class C
 {
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C
@@ -568,12 +574,12 @@ class C
         public void PressingEnter_InsertComment_Class3()
         {
             var code =
-@"///$$[Goo] class C
+                @"///$$[Goo] class C
 {
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 [Goo] class C
@@ -587,12 +593,12 @@ class C
         public void PressingEnter_InsertComment_NotAfterWhitespace()
         {
             var code =
-            @"///    $$class C
+                @"///    $$class C
 {
 }";
 
             var expected =
-@"///    
+                @"///    
 /// $$class C
 {
 }";
@@ -604,14 +610,14 @@ class C
         public void PressingEnter_InsertComment_Method1()
         {
             var code =
-@"class C
+                @"class C
 {
     ///$$
     int M<T>(int goo) { return 0; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -629,13 +635,13 @@ class C
         public void PressingEnter_InsertComment_Method2()
         {
             var code =
-@"class C
+                @"class C
 {
     ///$$int M<T>(int goo) { return 0; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -653,7 +659,7 @@ class C
         public void PressingEnter_NotInMethodBody1()
         {
             var code =
-@"class C
+                @"class C
 {
 void Goo()
 {
@@ -662,7 +668,7 @@ void Goo()
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 void Goo()
 {
@@ -679,12 +685,12 @@ $$
         public void PressingEnter_NotInterleavedInClassName1()
         {
             var code =
-@"class///$$ C
+                @"class///$$ C
 {
 }";
 
             var expected =
-@"class///
+                @"class///
 $$ C
 {
 }";
@@ -697,12 +703,12 @@ $$ C
         public void PressingEnter_NotInterleavedInClassName2()
         {
             var code =
-@"class ///$$C
+                @"class ///$$C
 {
 }";
 
             var expected =
-@"class ///
+                @"class ///
 $$C
 {
 }";
@@ -715,12 +721,12 @@ $$C
         public void PressingEnter_NotInterleavedInClassName3()
         {
             var code =
-@"class /// $$C
+                @"class /// $$C
 {
 }";
 
             var expected =
-@"class /// 
+                @"class /// 
 $$C
 {
 }";
@@ -734,12 +740,12 @@ $$C
         public void PressingEnter_NotAfterClassName1()
         {
             var code =
-@"class C ///$$
+                @"class C ///$$
 {
 }";
 
             var expected =
-@"class C ///
+                @"class C ///
 $$
 {
 }";
@@ -752,12 +758,12 @@ $$
         public void PressingEnter_NotAfterClassName2()
         {
             var code =
-@"class C /** $$
+                @"class C /** $$
 {
 }";
 
             var expected =
-@"class C /** 
+                @"class C /** 
 $$
 {
 }";
@@ -770,13 +776,13 @@ $$
         public void PressingEnter_NotAfterCtorName()
         {
             var code =
-@"class C
+                @"class C
 {
 C() ///$$
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 C() ///
 $$
@@ -790,7 +796,7 @@ $$
         public void PressingEnter_NotInsideCtor()
         {
             var code =
-@"class C
+                @"class C
 {
 C()
 {
@@ -799,7 +805,7 @@ C()
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 C()
 {
@@ -816,7 +822,7 @@ $$
         public void PressingEnter_NotBeforeDocComment()
         {
             var code =
-@"    class c1
+                @"    class c1
     {
 $$/// <summary>
         /// 
@@ -829,7 +835,7 @@ $$/// <summary>
     }";
 
             var expected =
-@"    class c1
+                @"    class c1
     {
 
 $$/// <summary>
@@ -849,14 +855,14 @@ $$/// <summary>
         public void PressingEnter_InsertSlashes1()
         {
             var code =
-@"///$$
+                @"///$$
 /// <summary></summary>
 class C
 {
 }";
 
             var expected =
-@"///
+                @"///
 /// $$
 /// <summary></summary>
 class C
@@ -870,7 +876,7 @@ class C
         public void PressingEnter_InsertSlashes2()
         {
             var code =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C
@@ -878,7 +884,7 @@ class C
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// $$
 /// </summary>
@@ -893,7 +899,7 @@ class C
         public void PressingEnter_InsertSlashes3()
         {
             var code =
-@"    /// <summary>
+                @"    /// <summary>
     /// $$
     /// </summary>
     class C
@@ -901,7 +907,7 @@ class C
     }";
 
             var expected =
-@"    /// <summary>
+                @"    /// <summary>
     /// 
     /// $$
     /// </summary>
@@ -916,13 +922,13 @@ class C
         public void PressingEnter_InsertSlashes4()
         {
             var code =
-@"/// <summary>$$</summary>
+                @"/// <summary>$$</summary>
 class C
 {
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$</summary>
 class C
 {
@@ -935,7 +941,7 @@ class C
         public void PressingEnter_InsertSlashes5()
         {
             var code =
-@"    /// <summary>
+                @"    /// <summary>
     /// $$
     /// </summary>
     class C
@@ -943,7 +949,7 @@ class C
     }";
 
             var expected =
-@"    /// <summary>
+                @"    /// <summary>
     /// 
     /// $$
     /// </summary>
@@ -958,13 +964,13 @@ class C
         public void PressingEnter_InsertSlashes6()
         {
             var code =
-@"/// <summary></summary>$$
+                @"/// <summary></summary>$$
 class C
 {
 }";
 
             var expected =
-@"/// <summary></summary>
+                @"/// <summary></summary>
 /// $$
 class C
 {
@@ -977,13 +983,13 @@ class C
         public void PressingEnter_InsertSlashes7()
         {
             var code =
-@"    /// <summary>$$</summary>
+                @"    /// <summary>$$</summary>
     class C
     {
     }";
 
             var expected =
-@"    /// <summary>
+                @"    /// <summary>
     /// $$</summary>
     class C
     {
@@ -997,12 +1003,12 @@ class C
         public void PressingEnter_InsertSlashes8()
         {
             var code =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 ///$$class C {}";
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 ///
@@ -1014,7 +1020,7 @@ class C
         public void PressingEnter_InsertSlashes9()
         {
             var code =
-@"class C
+                @"class C
 {
     ///$$
     /// <summary></summary>
@@ -1022,7 +1028,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     ///
     /// $$
@@ -1037,12 +1043,12 @@ class C
         public void PressingEnter_InsertSlashes10()
         {
             var code =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 ///$$Go ahead and add some slashes";
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 ///
@@ -1055,7 +1061,7 @@ class C
         public void PressingEnter_InsertSlashes11()
         {
             var code =
-@"class C
+                @"class C
 {
     /// <summary>
     /// 
@@ -1067,7 +1073,7 @@ class C
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// 
@@ -1087,14 +1093,14 @@ class C
         public void PressingEnter_InsertSlashes12_AutoGenerateXmlDocCommentsOff()
         {
             var code =
-@"///$$
+                @"///$$
 /// <summary></summary>
 class C
 {
 }";
 
             var expected =
-@"///
+                @"///
 /// $$
 /// <summary></summary>
 class C
@@ -1108,14 +1114,14 @@ class C
         public void PressingEnter_DontInsertSlashes1()
         {
             var code =
-@"/// <summary></summary>
+                @"/// <summary></summary>
 /// $$
 class C
 {
 }";
 
             var expected =
-@"/// <summary></summary>
+                @"/// <summary></summary>
 /// 
 $$
 class C
@@ -1130,12 +1136,12 @@ class C
         public void PressingEnter_DontInsertSlashes2()
         {
             var code =
-@"///<summary></summary>
+                @"///<summary></summary>
 
 ///$$
 class C{}";
             var expected =
-@"///<summary></summary>
+                @"///<summary></summary>
 
 ///
 $$
@@ -1148,7 +1154,7 @@ class C{}";
         public void PressingEnter_ExtraSlashesAfterExteriorTrivia()
         {
             var code =
-@"class C
+                @"class C
 {
 C()
 {
@@ -1157,7 +1163,7 @@ C()
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 C()
 {
@@ -1174,14 +1180,14 @@ C()
         public void PressingEnter_PreserveParams()
         {
             var code =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 /// <param name=""args"">$$</param>
 static void Main(string[] args)
 { }";
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 /// <param name=""args"">
@@ -1197,7 +1203,7 @@ static void Main(string[] args)
         public void PressingEnter_InTextBeforeSpace()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     /// hello$$ world
@@ -1208,7 +1214,7 @@ static void Main(string[] args)
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// hello
@@ -1227,7 +1233,7 @@ static void Main(string[] args)
         public void PressingEnter_Indentation1()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     hello world$$
@@ -1238,7 +1244,7 @@ static void Main(string[] args)
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     hello world
@@ -1257,7 +1263,7 @@ static void Main(string[] args)
         public void PressingEnter_Indentation2()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     hello $$world
@@ -1268,7 +1274,7 @@ static void Main(string[] args)
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     hello 
@@ -1287,7 +1293,7 @@ static void Main(string[] args)
         public void PressingEnter_Indentation3()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     hello$$ world
@@ -1298,7 +1304,7 @@ static void Main(string[] args)
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     hello
@@ -1317,7 +1323,7 @@ static void Main(string[] args)
         public void PressingEnter_Indentation4()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     $$hello world
@@ -1328,7 +1334,7 @@ static void Main(string[] args)
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     ///     
@@ -1347,7 +1353,7 @@ static void Main(string[] args)
         public void PressingEnter_Indentation5_UseTabs()
         {
             const string code =
-@"class C
+                @"class C
 {
 	/// <summary>
 	///     hello world$$
@@ -1358,7 +1364,7 @@ static void Main(string[] args)
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
 	/// <summary>
 	///     hello world
@@ -1377,14 +1383,14 @@ static void Main(string[] args)
         public void PressingEnter_Selection1()
         {
             var code =
-@"/// <summary>
+                @"/// <summary>
 /// Hello [|World|]$$!
 /// </summary>
 class C
 {
 }";
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// Hello 
 /// $$!
 /// </summary>
@@ -1400,14 +1406,14 @@ class C
         public void PressingEnter_Selection2()
         {
             var code =
-@"/// <summary>
+                @"/// <summary>
 /// Hello $$[|World|]!
 /// </summary>
 class C
 {
 }";
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// Hello 
 /// $$!
 /// </summary>
@@ -1423,7 +1429,7 @@ class C
         public void PressingEnter_XmldocInStringLiteral()
         {
             var code =
-@"class C
+                @"class C
 {
 C()
 {
@@ -1434,7 +1440,7 @@ void M() {}""
 }";
 
             var expected =
-@"class C
+                @"class C
 {
 C()
 {
@@ -1452,12 +1458,12 @@ void M() {}""
         public void Command_Class()
         {
             var code =
-@"class C
+                @"class C
 {$$
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C
@@ -1472,12 +1478,12 @@ class C
         public void Command_Class_AutoGenerateXmlDocCommentsOff()
         {
             var code =
-@"class C
+                @"class C
 {$$
 }";
 
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C
@@ -1492,10 +1498,10 @@ class C
         public void Command_BeforeClass1()
         {
             var code =
-@"$$
+                @"$$
 class C { }";
             var expected =
-@"
+                @"
 /// <summary>
 /// $$
 /// </summary>
@@ -1509,11 +1515,11 @@ class C { }";
         public void Command_BeforeClass2()
         {
             var code =
-@"class B { }
+                @"class B { }
 $$
 class C { }";
             var expected =
-@"class B { }
+                @"class B { }
 
 /// <summary>
 /// $$
@@ -1528,13 +1534,13 @@ class C { }";
         public void Command_BeforeClass3()
         {
             var code =
-@"class B
+                @"class B
 {
     $$
     class C { }
 }";
             var expected =
-@"class B
+                @"class B
 {
     
     /// <summary>
@@ -1551,12 +1557,12 @@ class C { }";
         public void Command_Class_NotIfMultilineDocCommentExists()
         {
             var code =
-@"/**
+                @"/**
 */
 class C { $$ }";
 
             var expected =
-@"/**
+                @"/**
 */
 class C { $$ }";
             VerifyInsertCommentCommand(code, expected);
@@ -1566,13 +1572,13 @@ class C { $$ }";
         public void Command_Method()
         {
             var code =
-@"class C
+                @"class C
 {
     int M<T>(int goo) { $$return 0; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -1590,13 +1596,13 @@ class C { $$ }";
         public void Command_Class_NotIfCommentExists()
         {
             var code =
-@"/// <summary></summary>
+                @"/// <summary></summary>
 class C
 {$$
 }";
 
             var expected =
-@"/// <summary></summary>
+                @"/// <summary></summary>
 class C
 {$$
 }";
@@ -1608,14 +1614,14 @@ class C
         public void Command_Method_NotIfCommentExists()
         {
             var code =
-@"class C
+                @"class C
 {
     /// <summary></summary>
     int M<T>(int goo) { $$return 0; }
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary></summary>
     int M<T>(int goo) { $$return 0; }
@@ -1631,7 +1637,7 @@ class C
             var code = @"$$class C { } class D { }";
 
             var expected =
- @"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C { } class D { }";
@@ -1655,13 +1661,13 @@ class C { } class D { }";
         public void Command_FirstMethodOnLine()
         {
             var code =
-@"class C
+                @"class C
 {
     protected abstract void $$Goo(); protected abstract void Bar();
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -1677,13 +1683,13 @@ class C { } class D { }";
         public void Command_NotOnSecondMethodOnLine()
         {
             var code =
-@"class C
+                @"class C
 {
     protected abstract void Goo(); protected abstract void $$Bar();
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     protected abstract void Goo(); protected abstract void $$Bar();
 }";
@@ -1696,7 +1702,7 @@ class C { } class D { }";
         public void TestUseTab()
         {
             var code =
-@"using System;
+                @"using System;
 
 public class Class1
 {
@@ -1707,7 +1713,7 @@ public class Class1
 }";
 
             var expected =
-@"using System;
+                @"using System;
 
 public class Class1
 {
@@ -1727,7 +1733,7 @@ public class Class1
         public void TestOpenLineAbove1()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     /// stuff$$
@@ -1738,7 +1744,7 @@ public class Class1
 }";
 
             var expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -1757,7 +1763,7 @@ public class Class1
         public void TestOpenLineAbove2()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$stuff
@@ -1768,7 +1774,7 @@ public class Class1
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$
@@ -1787,7 +1793,7 @@ public class Class1
         public void TestOpenLineAbove3()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// $$<summary>
     /// stuff
@@ -1800,7 +1806,7 @@ public class Class1
             // Note that the caret position specified below does not look correct because
             // it is in virtual space in this case.
             const string expected =
-@"class C
+                @"class C
 {
 $$
     /// <summary>
@@ -1819,7 +1825,7 @@ $$
         public void TestOpenLineAbove4_Tabs()
         {
             const string code =
-@"class C
+                @"class C
 {
 		  /// <summary>
 	/// $$stuff
@@ -1830,7 +1836,7 @@ $$
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
 		  /// <summary>
 		  /// $$
@@ -1849,7 +1855,7 @@ $$
         public void TestOpenLineBelow1()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     /// stuff$$
@@ -1860,7 +1866,7 @@ $$
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// stuff
@@ -1879,7 +1885,7 @@ $$
         public void TestOpenLineBelow2()
         {
             const string code =
-@"class C
+                @"class C
 {
     /// <summary>
     /// $$stuff
@@ -1890,7 +1896,7 @@ $$
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
     /// <summary>
     /// stuff
@@ -1909,13 +1915,13 @@ $$
         public void TestOpenLineBelow3()
         {
             const string code =
-@"/// <summary>
+                @"/// <summary>
 /// stuff
 /// $$</summary>
 ";
 
             const string expected =
-@"/// <summary>
+                @"/// <summary>
 /// stuff
 /// </summary>
 /// $$
@@ -1929,7 +1935,7 @@ $$
         public void TestOpenLineBelow4_Tabs()
         {
             const string code =
-@"class C
+                @"class C
 {
 	/// <summary>
 		  /// $$stuff
@@ -1940,7 +1946,7 @@ $$
 }";
 
             const string expected =
-@"class C
+                @"class C
 {
 	/// <summary>
 		  /// stuff
@@ -1954,18 +1960,21 @@ $$
             VerifyOpenLineBelow(code, expected, useTabs: true);
         }
 
-        [WorkItem(468638, @"https://devdiv.visualstudio.com/DevDiv/NET%20Developer%20Experience%20IDE/_workitems/edit/468638")]
+        [WorkItem(
+            468638,
+            @"https://devdiv.visualstudio.com/DevDiv/NET%20Developer%20Experience%20IDE/_workitems/edit/468638"
+        )]
         [WpfFact, Trait(Traits.Feature, Traits.Features.DocumentationComments)]
         public void VerifyEnterWithTrimNewLineEditorConfigOption()
         {
             const string code =
-@"/// <summary>
+                @"/// <summary>
 /// $$
 /// </summary>
 class C { }";
 
             const string expected =
-@"/// <summary>
+                @"/// <summary>
 ///
 /// $$
 /// </summary>
@@ -1973,17 +1982,30 @@ class C { }";
 
             try
             {
-                VerifyPressingEnter(code, expected, useTabs: true, setOptionsOpt:
-                workspace =>
-                {
-                    workspace.GetService<IEditorOptionsFactoryService>().GlobalOptions
-                        .SetOptionValue(DefaultOptions.TrimTrailingWhiteSpaceOptionName, true);
-                });
+                VerifyPressingEnter(
+                    code,
+                    expected,
+                    useTabs: true,
+                    setOptionsOpt: workspace =>
+                    {
+                        workspace
+                            .GetService<IEditorOptionsFactoryService>()
+                            .GlobalOptions.SetOptionValue(
+                                DefaultOptions.TrimTrailingWhiteSpaceOptionName,
+                                true
+                            );
+                    }
+                );
             }
             finally
             {
-                TestWorkspace.CreateCSharp("").GetService<IEditorOptionsFactoryService>().GlobalOptions
-                        .SetOptionValue(DefaultOptions.TrimTrailingWhiteSpaceOptionName, false);
+                TestWorkspace
+                    .CreateCSharp("")
+                    .GetService<IEditorOptionsFactoryService>()
+                    .GlobalOptions.SetOptionValue(
+                        DefaultOptions.TrimTrailingWhiteSpaceOptionName,
+                        false
+                    );
             }
         }
 
@@ -1994,10 +2016,13 @@ class C { }";
 
         internal override ICommandHandler CreateCommandHandler(TestWorkspace workspace)
         {
-            return workspace.ExportProvider.GetCommandHandler<DocumentationCommentCommandHandler>(PredefinedCommandHandlerNames.DocumentationComments, ContentTypeNames.CSharpContentType);
+            return workspace.ExportProvider.GetCommandHandler<DocumentationCommentCommandHandler>(
+                PredefinedCommandHandlerNames.DocumentationComments,
+                ContentTypeNames.CSharpContentType
+            );
         }
 
-        protected override TestWorkspace CreateTestWorkspace(string code)
-            => TestWorkspace.CreateCSharp(code);
+        protected override TestWorkspace CreateTestWorkspace(string code) =>
+            TestWorkspace.CreateCSharp(code);
     }
 }

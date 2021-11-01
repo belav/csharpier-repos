@@ -8,18 +8,13 @@ namespace System.Runtime.Caching.Configuration
 {
     internal sealed class CachingSectionGroup : ConfigurationSectionGroup
     {
-        public CachingSectionGroup()
-        {
-        }
+        public CachingSectionGroup() { }
 
         // public properties
         [ConfigurationProperty("memoryCache")]
         public MemoryCacheSection MemoryCaches
         {
-            get
-            {
-                return (MemoryCacheSection)Sections["memoryCache"];
-            }
+            get { return (MemoryCacheSection)Sections["memoryCache"]; }
         }
     }
 }

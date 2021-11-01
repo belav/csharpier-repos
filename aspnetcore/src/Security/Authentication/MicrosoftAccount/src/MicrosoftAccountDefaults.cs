@@ -24,16 +24,19 @@ namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
         /// <remarks>
         /// For more details about this endpoint, see https://developer.microsoft.com/en-us/graph/docs/concepts/auth_v2_user
         /// </remarks>
-        public static readonly string AuthorizationEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
+        public static readonly string AuthorizationEndpoint =
+            "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 
         /// <summary>
         /// The OAuth endpoint used to exchange access tokens.
         /// </summary>
-        public static readonly string TokenEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
+        public static readonly string TokenEndpoint =
+            "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 
         /// <summary>
         /// The Microsoft Graph API endpoint that is used to gather additional user information.
         /// </summary>
-        public static readonly string UserInformationEndpoint = "https://graph.microsoft.com/v1.0/me";
+        public static readonly string UserInformationEndpoint =
+            "https://graph.microsoft.com/v1.0/me";
     }
 }

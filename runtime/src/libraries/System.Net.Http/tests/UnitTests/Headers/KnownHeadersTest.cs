@@ -107,10 +107,15 @@ namespace System.Net.Http.Tests
         [InlineData("X-XSS-Protection")]
         public void TryGetKnownHeader_Known_Found(string name)
         {
-            foreach (string casedName in new[] { name, name.ToUpperInvariant(), name.ToLowerInvariant() })
+            foreach (
+                string casedName in new[] { name, name.ToUpperInvariant(), name.ToLowerInvariant() }
+            )
             {
                 Validate(casedName, KnownHeaders.TryGetKnownHeader(casedName));
-                Validate(casedName, KnownHeaders.TryGetKnownHeader(casedName.Select(c => (byte)c).ToArray()));
+                Validate(
+                    casedName,
+                    KnownHeaders.TryGetKnownHeader(casedName.Select(c => (byte)c).ToArray())
+                );
             }
 
             static void Validate(string name, KnownHeader h)
@@ -131,10 +136,14 @@ namespace System.Net.Http.Tests
         [InlineData("X-Unknown")]
         public void TryGetKnownHeader_Unknown_NotFound(string name)
         {
-            foreach (string casedName in new[] { name, name.ToUpperInvariant(), name.ToLowerInvariant() })
+            foreach (
+                string casedName in new[] { name, name.ToUpperInvariant(), name.ToLowerInvariant() }
+            )
             {
                 Assert.Null(KnownHeaders.TryGetKnownHeader(casedName));
-                Assert.Null(KnownHeaders.TryGetKnownHeader(casedName.Select(c => (byte)c).ToArray()));
+                Assert.Null(
+                    KnownHeaders.TryGetKnownHeader(casedName.Select(c => (byte)c).ToArray())
+                );
             }
         }
 
@@ -213,7 +222,14 @@ namespace System.Net.Http.Tests
         [InlineData("X-XSS-Protection", "1; mode=block")]
         public void GetKnownHeaderValue_Known_Found(string name, string value)
         {
-            foreach (string casedValue in new[] { value, value.ToUpperInvariant(), value.ToLowerInvariant() })
+            foreach (
+                string casedValue in new[]
+                {
+                    value,
+                    value.ToUpperInvariant(),
+                    value.ToLowerInvariant()
+                }
+            )
             {
                 Validate(KnownHeaders.TryGetKnownHeader(name), casedValue);
             }
@@ -222,11 +238,17 @@ namespace System.Net.Http.Tests
             {
                 Assert.NotNull(knownHeader);
 
-                string v1 = knownHeader.Descriptor.GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
+                string v1 = knownHeader.Descriptor.GetHeaderValue(
+                    value.Select(c => (byte)c).ToArray(),
+                    valueEncoding: null
+                );
                 Assert.NotNull(v1);
                 Assert.Equal(value, v1, StringComparer.OrdinalIgnoreCase);
 
-                string v2 = knownHeader.Descriptor.GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
+                string v2 = knownHeader.Descriptor.GetHeaderValue(
+                    value.Select(c => (byte)c).ToArray(),
+                    valueEncoding: null
+                );
                 Assert.Same(v1, v2);
             }
         }
@@ -239,8 +261,14 @@ namespace System.Net.Http.Tests
             KnownHeader knownHeader = KnownHeaders.TryGetKnownHeader(name);
             Assert.NotNull(knownHeader);
 
-            string v1 = knownHeader.Descriptor.GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
-            string v2 = knownHeader.Descriptor.GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
+            string v1 = knownHeader.Descriptor.GetHeaderValue(
+                value.Select(c => (byte)c).ToArray(),
+                valueEncoding: null
+            );
+            string v2 = knownHeader.Descriptor.GetHeaderValue(
+                value.Select(c => (byte)c).ToArray(),
+                valueEncoding: null
+            );
             Assert.Equal(value, v1);
             Assert.Equal(value, v2);
             Assert.NotSame(v1, v2);

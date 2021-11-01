@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         [Fact]
         public async Task TestNuGetCompletionProvider()
         {
-            var code = @"
+            var code =
+                @"
 using System.Diagnostics;
 class Test {
     void Method() {
@@ -40,15 +41,24 @@ class Test {
 
             var nugetCompletionProvider = new DebugAssertTestCompletionProvider();
             var reference = new MockAnalyzerReference(nugetCompletionProvider);
-            var project = workspace.CurrentSolution.Projects.Single().AddAnalyzerReference(reference);
-            var completionService = project.LanguageServices.GetRequiredService<CompletionService>();
+            var project = workspace.CurrentSolution.Projects
+                .Single()
+                .AddAnalyzerReference(reference);
+            var completionService =
+                project.LanguageServices.GetRequiredService<CompletionService>();
 
             var document = project.Documents.Single();
-            var caretPosition = workspace.DocumentWithCursor.CursorPosition ?? throw new InvalidOperationException();
+            var caretPosition =
+                workspace.DocumentWithCursor.CursorPosition
+                ?? throw new InvalidOperationException();
             var completions = await completionService.GetCompletionsAsync(document, caretPosition);
 
             Assert.NotNull(completions);
-            var item = Assert.Single(completions.Items.Where(item => item.ProviderName == typeof(DebugAssertTestCompletionProvider).FullName));
+            var item = Assert.Single(
+                completions.Items.Where(
+                    item => item.ProviderName == typeof(DebugAssertTestCompletionProvider).FullName
+                )
+            );
             Assert.Equal("Assertion failed", item.DisplayText);
         }
 
@@ -64,23 +74,26 @@ class Test {
             public override string FullPath => "";
             public override object Id => nameof(MockAnalyzerReference);
 
-            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language)
-                => ImmutableArray<DiagnosticAnalyzer>.Empty;
+            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
+                ImmutableArray<DiagnosticAnalyzer>.Empty;
 
-            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages()
-                => ImmutableArray<DiagnosticAnalyzer>.Empty;
+            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+                ImmutableArray<DiagnosticAnalyzer>.Empty;
 
-            public ImmutableArray<CompletionProvider> GetCompletionProviders()
-                => ImmutableArray.Create(_completionProvider);
+            public ImmutableArray<CompletionProvider> GetCompletionProviders() =>
+                ImmutableArray.Create(_completionProvider);
         }
 
         private sealed class DebugAssertTestCompletionProvider : CompletionProvider
         {
-            public DebugAssertTestCompletionProvider()
-            {
-            }
+            public DebugAssertTestCompletionProvider() { }
 
-            public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
+            public override bool ShouldTriggerCompletion(
+                SourceText text,
+                int caretPosition,
+                CompletionTrigger trigger,
+                OptionSet options
+            )
             {
                 return trigger.Kind switch
                 {
@@ -93,26 +106,49 @@ class Test {
 
             public override async Task ProvideCompletionsAsync(CompletionContext context)
             {
-                var completionItem = CompletionItem.Create(displayText: "Assertion failed", displayTextSuffix: "", rules: CompletionItemRules.Default);
+                var completionItem = CompletionItem.Create(
+                    displayText: "Assertion failed",
+                    displayTextSuffix: "",
+                    rules: CompletionItemRules.Default
+                );
                 context.AddItem(completionItem);
-                context.CompletionListSpan = await GetTextChangeSpanAsync(context.Document, context.CompletionListSpan, context.CancellationToken).ConfigureAwait(false);
+                context.CompletionListSpan = await GetTextChangeSpanAsync(
+                        context.Document,
+                        context.CompletionListSpan,
+                        context.CancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
-            private static async Task<TextSpan> GetTextChangeSpanAsync(Document document, TextSpan startSpan, CancellationToken cancellationToken)
+            private static async Task<TextSpan> GetTextChangeSpanAsync(
+                Document document,
+                TextSpan startSpan,
+                CancellationToken cancellationToken
+            )
             {
                 var result = startSpan;
                 var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var token = root.FindToken(result.Start);
-                if (syntaxFacts.IsStringLiteral(token) || syntaxFacts.IsVerbatimStringLiteral(token))
+                if (
+                    syntaxFacts.IsStringLiteral(token) || syntaxFacts.IsVerbatimStringLiteral(token)
+                )
                 {
                     var text = root.GetText();
 
                     // Expand selection in both directions until a double quote or any line break character is reached
-                    static bool IsWordCharacter(char ch) => !(ch == '"' || TextUtilities.IsAnyLineBreakCharacter(ch));
+                    static bool IsWordCharacter(char ch) =>
+                        !(ch == '"' || TextUtilities.IsAnyLineBreakCharacter(ch));
 
                     result = CommonCompletionUtilities.GetWordSpan(
-                        text, startSpan.Start, IsWordCharacter, IsWordCharacter, alwaysExtendEndSpan: true);
+                        text,
+                        startSpan.Start,
+                        IsWordCharacter,
+                        IsWordCharacter,
+                        alwaysExtendEndSpan: true
+                    );
                 }
 
                 return result;

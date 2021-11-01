@@ -13,40 +13,68 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, BestFitMapping = false, EntryPoint = "RegQueryValueExW", ExactSpelling = true)]
+        [DllImport(
+            Libraries.Advapi32,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            EntryPoint = "RegQueryValueExW",
+            ExactSpelling = true
+        )]
         internal static extern int RegQueryValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int[]? lpReserved,
             ref int lpType,
             [Out] byte[]? lpData,
-            ref int lpcbData);
+            ref int lpcbData
+        );
 
-        [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, BestFitMapping = false, EntryPoint = "RegQueryValueExW", ExactSpelling = true)]
+        [DllImport(
+            Libraries.Advapi32,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            EntryPoint = "RegQueryValueExW",
+            ExactSpelling = true
+        )]
         internal static extern int RegQueryValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int[]? lpReserved,
             ref int lpType,
             ref int lpData,
-            ref int lpcbData);
+            ref int lpcbData
+        );
 
-        [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, BestFitMapping = false, EntryPoint = "RegQueryValueExW", ExactSpelling = true)]
+        [DllImport(
+            Libraries.Advapi32,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            EntryPoint = "RegQueryValueExW",
+            ExactSpelling = true
+        )]
         internal static extern int RegQueryValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int[]? lpReserved,
             ref int lpType,
             ref long lpData,
-            ref int lpcbData);
+            ref int lpcbData
+        );
 
-        [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, BestFitMapping = false, EntryPoint = "RegQueryValueExW", ExactSpelling = true)]
+        [DllImport(
+            Libraries.Advapi32,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            EntryPoint = "RegQueryValueExW",
+            ExactSpelling = true
+        )]
         internal static extern int RegQueryValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int[]? lpReserved,
             ref int lpType,
             [Out] char[]? lpData,
-            ref int lpcbData);
+            ref int lpcbData
+        );
     }
 }

@@ -14,20 +14,18 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         {
             private readonly ITextView _textView;
 
-            public SelectionChangedEventSource(ITextView textView, TaggerDelay delay)
-                : base(delay)
+            public SelectionChangedEventSource(ITextView textView, TaggerDelay delay) : base(delay)
             {
                 _textView = textView;
             }
 
-            public override void Connect()
-                => _textView.Selection.SelectionChanged += OnSelectionChanged;
+            public override void Connect() =>
+                _textView.Selection.SelectionChanged += OnSelectionChanged;
 
-            public override void Disconnect()
-                => _textView.Selection.SelectionChanged -= OnSelectionChanged;
+            public override void Disconnect() =>
+                _textView.Selection.SelectionChanged -= OnSelectionChanged;
 
-            private void OnSelectionChanged(object? sender, EventArgs args)
-                => RaiseChanged();
+            private void OnSelectionChanged(object? sender, EventArgs args) => RaiseChanged();
         }
     }
 }

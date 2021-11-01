@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Components.Routing
         [Parameter]
         public NavLinkMatch Match { get; set; }
 
-        [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+        [Inject]
+        private NavigationManager NavigationManager { get; set; } = default!;
 
         /// <inheritdoc />
         protected override void OnInitialized()
@@ -66,7 +67,10 @@ namespace Microsoft.AspNetCore.Components.Routing
         {
             // Update computed state
             var href = (string?)null;
-            if (AdditionalAttributes != null && AdditionalAttributes.TryGetValue("href", out var obj))
+            if (
+                AdditionalAttributes != null
+                && AdditionalAttributes.TryGetValue("href", out var obj)
+            )
             {
                 href = Convert.ToString(obj, CultureInfo.InvariantCulture);
             }
@@ -92,7 +96,9 @@ namespace Microsoft.AspNetCore.Components.Routing
 
         private void UpdateCssClass()
         {
-            CssClass = _isActive ? CombineWithSpace(_class, ActiveClass ?? DefaultActiveClass) : _class;
+            CssClass = _isActive
+                ? CombineWithSpace(_class, ActiveClass ?? DefaultActiveClass)
+                : _class;
         }
 
         private void OnLocationChanged(object? sender, LocationChangedEventArgs args)
@@ -120,8 +126,10 @@ namespace Microsoft.AspNetCore.Components.Routing
                 return true;
             }
 
-            if (Match == NavLinkMatch.Prefix
-                && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute))
+            if (
+                Match == NavLinkMatch.Prefix
+                && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute)
+            )
             {
                 return true;
             }
@@ -133,7 +141,9 @@ namespace Microsoft.AspNetCore.Components.Routing
         {
             Debug.Assert(_hrefAbsolute != null);
 
-            if (string.Equals(currentUriAbsolute, _hrefAbsolute, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(currentUriAbsolute, _hrefAbsolute, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return true;
             }
@@ -148,8 +158,13 @@ namespace Microsoft.AspNetCore.Components.Routing
                 // which in turn is because it's common for servers to return the same page
                 // for http://host/vdir as they do for host://host/vdir/ as it's no
                 // good to display a blank page in that case.
-                if (_hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
-                    && _hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.OrdinalIgnoreCase))
+                if (
+                    _hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
+                    && _hrefAbsolute.StartsWith(
+                        currentUriAbsolute,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -170,8 +185,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             builder.CloseElement();
         }
 
-        private string? CombineWithSpace(string? str1, string str2)
-            => str1 == null ? str2 : $"{str1} {str2}";
+        private string? CombineWithSpace(string? str1, string str2) =>
+            str1 == null ? str2 : $"{str1} {str2}";
 
         private static bool IsStrictlyPrefixWithSeparator(string value, string prefix)
         {

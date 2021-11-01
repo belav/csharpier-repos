@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         public async Task TestGotoDefinitionAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
     string {|definition:aString|} = 'hello';
     void M()
@@ -40,14 +40,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         {
             var markups = new string[]
             {
-@"namespace One
+                @"namespace One
 {
     class A
     {
         public static int {|definition:aInt|} = 1;
     }
 }",
-@"namespace One
+                @"namespace One
 {
     class B
     {
@@ -66,7 +66,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         public async Task TestGotoDefinitionAsync_MappedFile()
         {
             var markup =
-@"class A
+                @"class A
 {
     string aString = 'hello';
     void M()
@@ -79,11 +79,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
             AddMappedDocument(testLspServer.TestWorkspace, markup);
 
             var position = new LSP.Position { Line = 5, Character = 18 };
-            var results = await RunGotoDefinitionAsync(testLspServer, new LSP.Location
-            {
-                Uri = new Uri($"C:\\{TestSpanMapper.GeneratedFileName}"),
-                Range = new LSP.Range { Start = position, End = position }
-            });
+            var results = await RunGotoDefinitionAsync(
+                testLspServer,
+                new LSP.Location
+                {
+                    Uri = new Uri($"C:\\{TestSpanMapper.GeneratedFileName}"),
+                    Range = new LSP.Range { Start = position, End = position }
+                }
+            );
             AssertLocationsEqual(ImmutableArray.Create(TestSpanMapper.MappedFileLocation), results);
         }
 
@@ -91,7 +94,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         public async Task TestGotoDefinitionAsync_InvalidLocation()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {{|caret:|}
@@ -108,7 +111,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         public async Task TestGotoDefinitionAsync_NoResultsOnNamespace()
         {
             var markup =
-@"namespace {|caret:M|}
+                @"namespace {|caret:M|}
 {
     class A
     {
@@ -120,10 +123,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
             Assert.Empty(results);
         }
 
-        private static async Task<LSP.Location[]> RunGotoDefinitionAsync(TestLspServer testLspServer, LSP.Location caret)
+        private static async Task<LSP.Location[]> RunGotoDefinitionAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.TextDocumentPositionParams, LSP.Location[]>(LSP.Methods.TextDocumentDefinitionName,
-                           CreateTextDocumentPositionParams(caret), new LSP.ClientCapabilities(), null, CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.TextDocumentPositionParams,
+                LSP.Location[]
+            >(
+                LSP.Methods.TextDocumentDefinitionName,
+                CreateTextDocumentPositionParams(caret),
+                new LSP.ClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
         }
     }
 }

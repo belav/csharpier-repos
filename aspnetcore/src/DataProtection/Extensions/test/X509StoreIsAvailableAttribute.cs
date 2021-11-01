@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.DataProtection
             }
         }
 
-        public string SkipReason => $"Skipping because the X509Store({Name}/{Location}) is not available on this machine.";
+        public string SkipReason =>
+            $"Skipping because the X509Store({Name}/{Location}) is not available on this machine.";
 
         public StoreName Name { get; }
         public StoreLocation Location { get; }

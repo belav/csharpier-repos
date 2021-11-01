@@ -76,14 +76,16 @@ namespace Microsoft.Net.Http.Headers
             {
                 return _from.GetValueOrDefault().ToString(NumberFormatInfo.InvariantInfo) + "-";
             }
-            return _from.GetValueOrDefault().ToString(NumberFormatInfo.InvariantInfo) + "-" +
-                _to.GetValueOrDefault().ToString(NumberFormatInfo.InvariantInfo);
+            return _from.GetValueOrDefault().ToString(NumberFormatInfo.InvariantInfo)
+                + "-"
+                + _to.GetValueOrDefault().ToString(NumberFormatInfo.InvariantInfo);
         }
 
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            return obj is RangeItemHeaderValue other && ((_from == other._from) && (_to == other._to));
+            return obj is RangeItemHeaderValue other
+                && ((_from == other._from) && (_to == other._to));
         }
 
         /// <inheritdoc />
@@ -105,11 +107,14 @@ namespace Microsoft.Net.Http.Headers
         internal static int GetRangeItemListLength(
             StringSegment input,
             int startIndex,
-            ICollection<RangeItemHeaderValue> rangeCollection)
+            ICollection<RangeItemHeaderValue> rangeCollection
+        )
         {
             Contract.Requires(startIndex >= 0);
-            Contract.Ensures((Contract.Result<int>() == 0) || (rangeCollection.Count > 0),
-                "If we can parse the string, then we expect to have at least one range item.");
+            Contract.Ensures(
+                (Contract.Result<int>() == 0) || (rangeCollection.Count > 0),
+                "If we can parse the string, then we expect to have at least one range item."
+            );
 
             if ((StringSegment.IsNullOrEmpty(input)) || (startIndex >= input.Length))
             {
@@ -117,7 +122,12 @@ namespace Microsoft.Net.Http.Headers
             }
 
             // Empty segments are allowed, so skip all delimiter-only segments (e.g. ", ,").
-            var current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(input, startIndex, true, out var separatorFound);
+            var current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                input,
+                startIndex,
+                true,
+                out var separatorFound
+            );
             // It's OK if we didn't find leading separator characters. Ignore 'separatorFound'.
 
             if (current == input.Length)
@@ -137,7 +147,12 @@ namespace Microsoft.Net.Http.Headers
                 rangeCollection!.Add(range!);
 
                 current = current + rangeLength;
-                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(input, current, true, out separatorFound);
+                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                    input,
+                    current,
+                    true,
+                    out separatorFound
+                );
 
                 // If the string is not consumed, we must have a delimiter, otherwise the string is not a valid
                 // range list.
@@ -153,7 +168,11 @@ namespace Microsoft.Net.Http.Headers
             }
         }
 
-        internal static int GetRangeItemLength(StringSegment input, int startIndex, out RangeItemHeaderValue? parsedValue)
+        internal static int GetRangeItemLength(
+            StringSegment input,
+            int startIndex,
+            out RangeItemHeaderValue? parsedValue
+        )
         {
             Contract.Requires(startIndex >= 0);
 
@@ -215,14 +234,26 @@ namespace Microsoft.Net.Http.Headers
 
             // Try convert first value to int64
             long from = 0;
-            if ((fromLength > 0) && !HeaderUtilities.TryParseNonNegativeInt64(input.Subsegment(fromStartIndex, fromLength), out from))
+            if (
+                (fromLength > 0)
+                && !HeaderUtilities.TryParseNonNegativeInt64(
+                    input.Subsegment(fromStartIndex, fromLength),
+                    out from
+                )
+            )
             {
                 return 0;
             }
 
             // Try convert second value to int64
             long to = 0;
-            if ((toLength > 0) && !HeaderUtilities.TryParseNonNegativeInt64(input.Subsegment(toStartIndex, toLength), out to))
+            if (
+                (toLength > 0)
+                && !HeaderUtilities.TryParseNonNegativeInt64(
+                    input.Subsegment(toStartIndex, toLength),
+                    out to
+                )
+            )
             {
                 return 0;
             }
@@ -233,8 +264,10 @@ namespace Microsoft.Net.Http.Headers
                 return 0;
             }
 
-            parsedValue = new RangeItemHeaderValue((fromLength == 0 ? (long?)null : (long?)from),
-                (toLength == 0 ? (long?)null : (long?)to));
+            parsedValue = new RangeItemHeaderValue(
+                (fromLength == 0 ? (long?)null : (long?)from),
+                (toLength == 0 ? (long?)null : (long?)to)
+            );
             return current - startIndex;
         }
     }

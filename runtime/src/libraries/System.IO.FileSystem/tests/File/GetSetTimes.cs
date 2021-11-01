@@ -13,7 +13,9 @@ namespace System.IO.Tests
     {
         // OSX has the limitation of setting upto 2262-04-11T23:47:16 (long.Max) date.
         // 32bit Unix has time_t up to ~ 2038.
-        private static bool SupportsLongMaxDateTime => PlatformDetection.IsWindows || (!PlatformDetection.Is32BitProcess && !PlatformDetection.IsOSXLike);
+        private static bool SupportsLongMaxDateTime =>
+            PlatformDetection.IsWindows
+            || (!PlatformDetection.Is32BitProcess && !PlatformDetection.IsOSXLike);
 
         protected override string GetExistingItem()
         {
@@ -36,7 +38,11 @@ namespace System.IO.Tests
             File.SetLastAccessTime(path, DateTime.Now.AddMinutes(2));
 
             // Assert.InRange is inclusive.
-            Assert.InRange(File.GetCreationTimeUtc(path), DateTime.MinValue, File.GetLastWriteTimeUtc(path));
+            Assert.InRange(
+                File.GetCreationTimeUtc(path),
+                DateTime.MinValue,
+                File.GetLastWriteTimeUtc(path)
+            );
         }
 
         [Fact]
@@ -52,7 +58,9 @@ namespace System.IO.Tests
 
             // Set the creation time to a value in the past that is between ctime and now.
             await Task.Delay(600);
-            DateTime newCreationTimeUTC = System.DateTime.UtcNow.Subtract(TimeSpan.FromMilliseconds(300));
+            DateTime newCreationTimeUTC = System.DateTime.UtcNow.Subtract(
+                TimeSpan.FromMilliseconds(300)
+            );
             File.SetCreationTimeUtc(path, newCreationTimeUTC);
 
             Assert.Equal(newCreationTimeUTC, File.GetLastWriteTimeUtc(path));
@@ -62,45 +70,57 @@ namespace System.IO.Tests
 
         public override IEnumerable<TimeFunction> TimeFunctions(bool requiresRoundtripping = false)
         {
-            if (IOInputs.SupportsGettingCreationTime && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime))
+            if (
+                IOInputs.SupportsGettingCreationTime
+                && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime)
+            )
             {
                 yield return TimeFunction.Create(
                     ((path, time) => File.SetCreationTime(path, time)),
                     ((path) => File.GetCreationTime(path)),
-                    DateTimeKind.Local);
+                    DateTimeKind.Local
+                );
                 yield return TimeFunction.Create(
                     ((path, time) => File.SetCreationTimeUtc(path, time)),
                     ((path) => File.GetCreationTimeUtc(path)),
-                    DateTimeKind.Unspecified);
+                    DateTimeKind.Unspecified
+                );
                 yield return TimeFunction.Create(
                     ((path, time) => File.SetCreationTimeUtc(path, time)),
                     ((path) => File.GetCreationTimeUtc(path)),
-                    DateTimeKind.Utc);
+                    DateTimeKind.Utc
+                );
             }
             yield return TimeFunction.Create(
                 ((path, time) => File.SetLastAccessTime(path, time)),
                 ((path) => File.GetLastAccessTime(path)),
-                DateTimeKind.Local);
+                DateTimeKind.Local
+            );
             yield return TimeFunction.Create(
                 ((path, time) => File.SetLastAccessTimeUtc(path, time)),
                 ((path) => File.GetLastAccessTimeUtc(path)),
-                DateTimeKind.Unspecified);
+                DateTimeKind.Unspecified
+            );
             yield return TimeFunction.Create(
                 ((path, time) => File.SetLastAccessTimeUtc(path, time)),
                 ((path) => File.GetLastAccessTimeUtc(path)),
-                DateTimeKind.Utc);
+                DateTimeKind.Utc
+            );
             yield return TimeFunction.Create(
                 ((path, time) => File.SetLastWriteTime(path, time)),
                 ((path) => File.GetLastWriteTime(path)),
-                DateTimeKind.Local);
+                DateTimeKind.Local
+            );
             yield return TimeFunction.Create(
                 ((path, time) => File.SetLastWriteTimeUtc(path, time)),
                 ((path) => File.GetLastWriteTimeUtc(path)),
-                DateTimeKind.Unspecified);
+                DateTimeKind.Unspecified
+            );
             yield return TimeFunction.Create(
                 ((path, time) => File.SetLastWriteTimeUtc(path, time)),
                 ((path) => File.GetLastWriteTimeUtc(path)),
-                DateTimeKind.Utc);
+                DateTimeKind.Utc
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInAppContainer))] // Can't read root in appcontainer
@@ -111,11 +131,14 @@ namespace System.IO.Tests
             string pageFilePath = Directory.EnumerateFiles(@"C:\", "pagefile.sys").FirstOrDefault();
             if (pageFilePath != null)
             {
-                Assert.All(TimeFunctions(), (item) =>
-                {
-                    var time = item.Getter(pageFilePath);
-                    Assert.NotEqual(DateTime.FromFileTime(0), time);
-                });
+                Assert.All(
+                    TimeFunctions(),
+                    (item) =>
+                    {
+                        var time = item.Getter(pageFilePath);
+                        Assert.NotEqual(DateTime.FromFileTime(0), time);
+                    }
+                );
             }
         }
 
@@ -131,7 +154,10 @@ namespace System.IO.Tests
             File.SetLastAccessTimeUtc(secondFile, DateTime.UtcNow);
             long firstFileTicks = File.GetLastWriteTimeUtc(firstFile).Ticks;
             long secondFileTicks = File.GetLastWriteTimeUtc(secondFile).Ticks;
-            Assert.True(firstFileTicks <= secondFileTicks, $"First File Ticks\t{firstFileTicks}\nSecond File Ticks\t{secondFileTicks}");
+            Assert.True(
+                firstFileTicks <= secondFileTicks,
+                $"First File Ticks\t{firstFileTicks}\nSecond File Ticks\t{secondFileTicks}"
+            );
         }
 
         [ConditionalFact(nameof(HighTemporalResolution))] // OSX HFS driver format/Browser Platform do not support nanosecond granularity.
@@ -175,7 +201,10 @@ namespace System.IO.Tests
             File.SetLastWriteTimeUtc(secondFile, DateTime.UtcNow);
             long firstFileTicks = File.GetLastAccessTimeUtc(firstFile).Ticks;
             long secondFileTicks = File.GetLastAccessTimeUtc(secondFile).Ticks;
-            Assert.True(firstFileTicks <= secondFileTicks, $"First File Ticks\t{firstFileTicks}\nSecond File Ticks\t{secondFileTicks}");
+            Assert.True(
+                firstFileTicks <= secondFileTicks,
+                $"First File Ticks\t{firstFileTicks}\nSecond File Ticks\t{secondFileTicks}"
+            );
         }
     }
 }

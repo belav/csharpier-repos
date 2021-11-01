@@ -1,7 +1,6 @@
 using System;
 using AutoMapper;
 
-
 namespace Benchmark.Flattening
 {
     using System.Collections.Generic;
@@ -14,30 +13,56 @@ namespace Benchmark.Flattening
         public string Name { get; } = "Deep Types";
         public void Initialize()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Address, Address>();
-                cfg.CreateMap<Address, AddressDTO>();
-                cfg.CreateMap<Customer, CustomerDTO>();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Address, Address>();
+                    cfg.CreateMap<Address, AddressDTO>();
+                    cfg.CreateMap<Customer, CustomerDTO>();
+                }
+            );
             config.AssertConfigurationIsValid();
             _mapper = config.CreateMapper();
             _customer = new Customer()
             {
-                Address = new Address() { City = "istanbul", Country = "turkey", Id = 1, Street = "istiklal cad." },
-                HomeAddress = new Address() { City = "istanbul", Country = "turkey", Id = 2, Street = "istiklal cad." },
+                Address = new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 1,
+                    Street = "istiklal cad."
+                },
+                HomeAddress = new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 2,
+                    Street = "istiklal cad."
+                },
                 Id = 1,
                 Name = "Eduardo Najera",
                 Credit = 234.7m,
                 WorkAddresses = new List<Address>()
                 {
-                    new Address() {City = "istanbul", Country = "turkey", Id = 5, Street = "istiklal cad."},
-                    new Address() {City = "izmir", Country = "turkey", Id = 6, Street = "konak"}
+                    new Address()
+                    {
+                        City = "istanbul",
+                        Country = "turkey",
+                        Id = 5,
+                        Street = "istiklal cad."
+                    },
+                    new Address() { City = "izmir", Country = "turkey", Id = 6, Street = "konak" }
                 },
                 Addresses = new List<Address>()
                 {
-                    new Address() {City = "istanbul", Country = "turkey", Id = 3, Street = "istiklal cad."},
-                    new Address() {City = "izmir", Country = "turkey", Id = 4, Street = "konak"}
+                    new Address()
+                    {
+                        City = "istanbul",
+                        Country = "turkey",
+                        Id = 3,
+                        Street = "istiklal cad."
+                    },
+                    new Address() { City = "izmir", Country = "turkey", Id = 4, Street = "konak" }
                 }.ToArray()
             };
         }
@@ -83,7 +108,6 @@ namespace Benchmark.Flattening
             public List<AddressDTO> WorkAddresses { get; set; }
             public string AddressCity { get; set; }
         }
-
     }
 
     public class ManualDeepTypeMapper : IObjectToObjectMapper
@@ -94,20 +118,44 @@ namespace Benchmark.Flattening
         {
             _customer = new Customer()
             {
-                Address = new Address() { City = "istanbul", Country = "turkey", Id = 1, Street = "istiklal cad." },
-                HomeAddress = new Address() { City = "istanbul", Country = "turkey", Id = 2, Street = "istiklal cad." },
+                Address = new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 1,
+                    Street = "istiklal cad."
+                },
+                HomeAddress = new Address()
+                {
+                    City = "istanbul",
+                    Country = "turkey",
+                    Id = 2,
+                    Street = "istiklal cad."
+                },
                 Id = 1,
                 Name = "Eduardo Najera",
                 Credit = 234.7m,
                 WorkAddresses = new List<Address>()
                 {
-                    new Address() {City = "istanbul", Country = "turkey", Id = 5, Street = "istiklal cad."},
-                    new Address() {City = "izmir", Country = "turkey", Id = 6, Street = "konak"}
+                    new Address()
+                    {
+                        City = "istanbul",
+                        Country = "turkey",
+                        Id = 5,
+                        Street = "istiklal cad."
+                    },
+                    new Address() { City = "izmir", Country = "turkey", Id = 6, Street = "konak" }
                 },
                 Addresses = new List<Address>()
                 {
-                    new Address() {City = "istanbul", Country = "turkey", Id = 3, Street = "istiklal cad."},
-                    new Address() {City = "izmir", Country = "turkey", Id = 4, Street = "konak"}
+                    new Address()
+                    {
+                        City = "istanbul",
+                        Country = "turkey",
+                        Id = 3,
+                        Street = "istiklal cad."
+                    },
+                    new Address() { City = "izmir", Country = "turkey", Id = 4, Street = "konak" }
                 }.ToArray()
             };
         }
@@ -120,20 +168,43 @@ namespace Benchmark.Flattening
             dto.Name = _customer.Name;
             dto.AddressCity = _customer.Address.City;
 
-            dto.Address = new Address() { Id = _customer.Address.Id, Street = _customer.Address.Street, Country = _customer.Address.Country, City = _customer.Address.City };
+            dto.Address = new Address()
+            {
+                Id = _customer.Address.Id,
+                Street = _customer.Address.Street,
+                Country = _customer.Address.Country,
+                City = _customer.Address.City
+            };
 
-            dto.HomeAddress = new AddressDTO() { Id = _customer.HomeAddress.Id, Country = _customer.HomeAddress.Country, City = _customer.HomeAddress.City };
+            dto.HomeAddress = new AddressDTO()
+            {
+                Id = _customer.HomeAddress.Id,
+                Country = _customer.HomeAddress.Country,
+                City = _customer.HomeAddress.City
+            };
 
             dto.Addresses = new AddressDTO[_customer.Addresses.Length];
             for (int i = 0; i < _customer.Addresses.Length; i++)
             {
-                dto.Addresses[i] = new AddressDTO() { Id = _customer.Addresses[i].Id, Country = _customer.Addresses[i].Country, City = _customer.Addresses[i].City };
+                dto.Addresses[i] = new AddressDTO()
+                {
+                    Id = _customer.Addresses[i].Id,
+                    Country = _customer.Addresses[i].Country,
+                    City = _customer.Addresses[i].City
+                };
             }
 
             dto.WorkAddresses = new List<AddressDTO>();
             foreach (var workAddress in _customer.WorkAddresses)
             {
-                dto.WorkAddresses.Add(new AddressDTO() { Id = workAddress.Id, Country = workAddress.Country, City = workAddress.City });
+                dto.WorkAddresses.Add(
+                    new AddressDTO()
+                    {
+                        Id = workAddress.Id,
+                        Country = workAddress.Country,
+                        City = workAddress.City
+                    }
+                );
             }
 
             return dto;
@@ -175,7 +246,6 @@ namespace Benchmark.Flattening
             public List<AddressDTO> WorkAddresses { get; set; }
             public string AddressCity { get; set; }
         }
-
     }
 
     public class ComplexTypeMapper : IObjectToObjectMapper
@@ -184,14 +254,15 @@ namespace Benchmark.Flattening
         public string Name { get; } = "Complex Types";
         private IMapper _mapper;
 
-
         public void Initialize()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Foo, FooDest>();
-                cfg.CreateMap<InnerFoo, InnerFooDest>();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Foo, FooDest>();
+                    cfg.CreateMap<InnerFoo, InnerFooDest>();
+                }
+            );
             config.AssertConfigurationIsValid();
             _mapper = config.CreateMapper();
             _foo = Foo.New();
@@ -206,30 +277,31 @@ namespace Benchmark.Flattening
 
     public class Foo
     {
-        public static Foo New() => new Foo
-        {
-            Name = "foo",
-            Int32 = 12,
-            Int64 = 123123,
-            NullInt = 16,
-            DateTime = DateTime.Now,
-            Doublen = 2312112,
-            Foo1 = new InnerFoo { Name = "foo one" },
-            Foos = new List<InnerFoo>
+        public static Foo New() =>
+            new Foo
+            {
+                Name = "foo",
+                Int32 = 12,
+                Int64 = 123123,
+                NullInt = 16,
+                DateTime = DateTime.Now,
+                Doublen = 2312112,
+                Foo1 = new InnerFoo { Name = "foo one" },
+                Foos = new List<InnerFoo>
                 {
-                    new InnerFoo {Name = "j1", Int64 = 123, NullInt = 321},
-                    new InnerFoo {Name = "j2", Int32 = 12345, NullInt = 54321},
-                    new InnerFoo {Name = "j3", Int32 = 12345, NullInt = 54321},
+                    new InnerFoo { Name = "j1", Int64 = 123, NullInt = 321 },
+                    new InnerFoo { Name = "j2", Int32 = 12345, NullInt = 54321 },
+                    new InnerFoo { Name = "j3", Int32 = 12345, NullInt = 54321 },
                 },
-            FooArr = new[]
+                FooArr = new[]
                 {
-                    new InnerFoo {Name = "a1"},
-                    new InnerFoo {Name = "a2"},
-                    new InnerFoo {Name = "a3"},
+                    new InnerFoo { Name = "a1" },
+                    new InnerFoo { Name = "a2" },
+                    new InnerFoo { Name = "a3" },
                 },
-            IntArr = new[] { 1, 2, 3, 4, 5 },
-            Ints = new[] { 7, 8, 9 },
-        };
+                IntArr = new[] { 1, 2, 3, 4, 5 },
+                Ints = new[] { 7, 8, 9 },
+            };
 
         public string Name { get; set; }
 
@@ -325,21 +397,27 @@ namespace Benchmark.Flattening
                 IntArr = new int[_foo.IntArr.Length],
                 Ints = _foo.Ints.ToArray(),
             };
-            foreach(var foo in _foo.Foos)
+            foreach (var foo in _foo.Foos)
             {
-                dest.Foos.Add(new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt });
+                dest.Foos.Add(
+                    new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt }
+                );
             }
             ;
-            for(int index = 0; index < _foo.Foos.Count; index++)
+            for (int index = 0; index < _foo.Foos.Count; index++)
             {
                 var foo = _foo.Foos[index];
-                dest.FooArr[index] = new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt };
+                dest.FooArr[index] = new InnerFooDest
+                {
+                    Name = foo.Name,
+                    Int64 = foo.Int64,
+                    NullInt = foo.NullInt
+                };
             }
             Array.Copy(_foo.IntArr, dest.IntArr, _foo.IntArr.Length);
             return dest;
         }
     }
-
 
     public class CtorMapper : IObjectToObjectMapper
     {
@@ -392,20 +470,22 @@ namespace Benchmark.Flattening
 
         public void Initialize()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Model1, Dto1>();
-                cfg.CreateMap<Model2, Dto2>();
-                cfg.CreateMap<Model3, Dto3>();
-                cfg.CreateMap<Model4, Dto4>();
-                cfg.CreateMap<Model5, Dto5>();
-                cfg.CreateMap<Model6, Dto6>();
-                cfg.CreateMap<Model7, Dto7>();
-                cfg.CreateMap<Model8, Dto8>();
-                cfg.CreateMap<Model9, Dto9>();
-                cfg.CreateMap<Model10, Dto10>();
-                cfg.CreateMap<ModelObject, ModelDto>();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Model1, Dto1>();
+                    cfg.CreateMap<Model2, Dto2>();
+                    cfg.CreateMap<Model3, Dto3>();
+                    cfg.CreateMap<Model4, Dto4>();
+                    cfg.CreateMap<Model5, Dto5>();
+                    cfg.CreateMap<Model6, Dto6>();
+                    cfg.CreateMap<Model7, Dto7>();
+                    cfg.CreateMap<Model8, Dto8>();
+                    cfg.CreateMap<Model9, Dto9>();
+                    cfg.CreateMap<Model10, Dto10>();
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                }
+            );
             config.AssertConfigurationIsValid();
             _mapper = config.CreateMapper();
             _source = new ModelObject
@@ -414,19 +494,10 @@ namespace Benchmark.Flattening
                 Sub = new ModelSubObject
                 {
                     ProperName = "Some name",
-                    SubSub = new ModelSubSubObject
-                    {
-                        IAmACoolProperty = "Cool daddy-o"
-                    }
+                    SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
                 },
-                Sub2 = new ModelSubObject
-                {
-                    ProperName = "Sub 2 name"
-                },
-                SubWithExtraName = new ModelSubObject
-                {
-                    ProperName = "Some other name"
-                },
+                Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
+                SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
             };
         }
 
@@ -453,19 +524,10 @@ namespace Benchmark.Flattening
                 Sub = new ModelSubObject
                 {
                     ProperName = "Some name",
-                    SubSub = new ModelSubSubObject
-                    {
-                        IAmACoolProperty = "Cool daddy-o"
-                    }
+                    SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
                 },
-                Sub2 = new ModelSubObject
-                {
-                    ProperName = "Sub 2 name"
-                },
-                SubWithExtraName = new ModelSubObject
-                {
-                    ProperName = "Some other name"
-                },
+                Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
+                SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
             };
         }
 
@@ -629,5 +691,4 @@ namespace Benchmark.Flattening
         public string SubWithExtraNameProperName { get; set; }
         public string SubSubSubIAmACoolProperty { get; set; }
     }
-
 }

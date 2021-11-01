@@ -13,12 +13,10 @@ namespace System.IO
         /// Match the default casing for the given platform
         /// </summary>
         PlatformDefault,
-
         /// <summary>
         /// Match respecting character casing
         /// </summary>
         CaseSensitive,
-
         /// <summary>
         /// Match ignoring character casing
         /// </summary>

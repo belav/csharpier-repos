@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         /// </summary>
         public Func<HttpContext, bool>? Predicate
         {
-            get
-            {
-                return _predicate;
-            }
+            get { return _predicate; }
             set
             {
                 if (value == null)

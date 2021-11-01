@@ -4,7 +4,11 @@
 namespace System.Security.Permissions
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class PermissionSetAttribute : CodeAccessSecurityAttribute
@@ -15,7 +19,13 @@ namespace System.Security.Permissions
         public string Name { get; set; }
         public bool UnicodeEncoded { get; set; }
         public string XML { get; set; }
-        public override IPermission CreatePermission() { return default(IPermission); }
-        public PermissionSet CreatePermissionSet() { return default(PermissionSet); }
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
+        public PermissionSet CreatePermissionSet()
+        {
+            return default(PermissionSet);
+        }
     }
 }

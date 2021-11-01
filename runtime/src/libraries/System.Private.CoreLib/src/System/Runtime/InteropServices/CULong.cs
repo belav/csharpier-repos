@@ -55,7 +55,8 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <param name="o">An object to compare with this instance.</param>
         /// <returns><c>true</c> if <paramref name="o"/> is an instance of <see cref="CULong"/> and equals the value of this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals([NotNullWhen(true)] object? o) => o is CULong other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is CULong other && Equals(other);
 
         /// <summary>
         /// Returns a value indicating whether this instance is equal to a specified <see cref="CLong"/> value.

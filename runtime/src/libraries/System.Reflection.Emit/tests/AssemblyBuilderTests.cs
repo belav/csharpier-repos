@@ -12,33 +12,64 @@ namespace System.Reflection.Emit.Tests
     public class BoolAllAttribute : Attribute
     {
         private bool _s;
-        public BoolAllAttribute(bool s) { _s = s; }
+        public BoolAllAttribute(bool s)
+        {
+            _s = s;
+        }
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class IntClassAttribute : Attribute
     {
         public int i;
-        public IntClassAttribute(int i) { this.i = i; }
+        public IntClassAttribute(int i)
+        {
+            this.i = i;
+        }
     }
 
     public class AssemblyTests
     {
         public static IEnumerable<object[]> DefineDynamicAssembly_TestData()
         {
-            foreach (AssemblyBuilderAccess access in new AssemblyBuilderAccess[] { AssemblyBuilderAccess.Run, AssemblyBuilderAccess.RunAndCollect })
+            foreach (
+                AssemblyBuilderAccess access in new AssemblyBuilderAccess[]
+                {
+                    AssemblyBuilderAccess.Run,
+                    AssemblyBuilderAccess.RunAndCollect
+                }
+            )
             {
-                yield return new object[] { new AssemblyName("TestName") { Version = new Version(0, 0, 0, 0) }, access };
-                yield return new object[] { new AssemblyName("testname") { Version = new Version(1, 2, 3, 4) }, access };
-                yield return new object[] { new AssemblyName("class") { Version = new Version(0, 0, 0, 0) }, access };
-                yield return new object[] { new AssemblyName("\uD800\uDC00") { Version = new Version(0, 0, 0, 0) }, access };
+                yield return new object[]
+                {
+                    new AssemblyName("TestName") { Version = new Version(0, 0, 0, 0) },
+                    access
+                };
+                yield return new object[]
+                {
+                    new AssemblyName("testname") { Version = new Version(1, 2, 3, 4) },
+                    access
+                };
+                yield return new object[]
+                {
+                    new AssemblyName("class") { Version = new Version(0, 0, 0, 0) },
+                    access
+                };
+                yield return new object[]
+                {
+                    new AssemblyName("\uD800\uDC00") { Version = new Version(0, 0, 0, 0) },
+                    access
+                };
             }
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(DefineDynamicAssembly_TestData))]
-        public void DefineDynamicAssembly_AssemblyName_AssemblyBuilderAccess(AssemblyName name, AssemblyBuilderAccess access)
+        public void DefineDynamicAssembly_AssemblyName_AssemblyBuilderAccess(
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(name, access);
             VerifyAssemblyBuilder(assembly, name, new CustomAttributeBuilder[0]);
@@ -51,33 +82,67 @@ namespace System.Reflection.Emit.Tests
                 yield return new object[] { data[0], data[1], null };
                 yield return new object[] { data[0], data[1], new CustomAttributeBuilder[0] };
 
-                ConstructorInfo constructor = typeof(IntClassAttribute).GetConstructor(new Type[] { typeof(int) });
-                yield return new object[] { data[0], data[1], new CustomAttributeBuilder[] { new CustomAttributeBuilder(constructor, new object[] { 10 }) } };
+                ConstructorInfo constructor = typeof(IntClassAttribute).GetConstructor(
+                    new Type[] { typeof(int) }
+                );
+                yield return new object[]
+                {
+                    data[0],
+                    data[1],
+                    new CustomAttributeBuilder[]
+                    {
+                        new CustomAttributeBuilder(constructor, new object[] { 10 })
+                    }
+                };
             }
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(DefineDynamicAssembly_CustomAttributes_TestData))]
-        public void DefineDynamicAssembly_AssemblyName_AssemblyBuilderAccess_CustomAttributeBuilder(AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder> attributes)
+        public void DefineDynamicAssembly_AssemblyName_AssemblyBuilderAccess_CustomAttributeBuilder(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> attributes
+        )
         {
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(name, access, attributes);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                name,
+                access,
+                attributes
+            );
             VerifyAssemblyBuilder(assembly, name, attributes);
         }
 
         [Fact]
         public void DefineDynamicAssembly_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => AssemblyBuilder.DefineDynamicAssembly(null, AssemblyBuilderAccess.Run));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => AssemblyBuilder.DefineDynamicAssembly(null, AssemblyBuilderAccess.Run, new CustomAttributeBuilder[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => AssemblyBuilder.DefineDynamicAssembly(null, AssemblyBuilderAccess.Run)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                    AssemblyBuilder.DefineDynamicAssembly(
+                        null,
+                        AssemblyBuilderAccess.Run,
+                        new CustomAttributeBuilder[0]
+                    )
+            );
         }
 
         [Theory]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "The coreclr doesn't support Save or ReflectionOnly AssemblyBuilders.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "The coreclr doesn't support Save or ReflectionOnly AssemblyBuilders."
+        )]
         [InlineData((AssemblyBuilderAccess)2)] // Save (not supported)
         [InlineData((AssemblyBuilderAccess)2 | AssemblyBuilderAccess.Run)] // RunAndSave (not supported)
         [InlineData((AssemblyBuilderAccess)6)] // ReflectionOnly (not supported)
-        public void DefineDynamicAssembly_CoreclrNotSupportedAccess_ThrowsArgumentException(AssemblyBuilderAccess access)
+        public void DefineDynamicAssembly_CoreclrNotSupportedAccess_ThrowsArgumentException(
+            AssemblyBuilderAccess access
+        )
         {
             DefineDynamicAssembly_InvalidAccess_ThrowsArgumentException(access);
         }
@@ -87,17 +152,33 @@ namespace System.Reflection.Emit.Tests
         [InlineData((AssemblyBuilderAccess)0)]
         [InlineData((AssemblyBuilderAccess)10)]
         [InlineData((AssemblyBuilderAccess)int.MaxValue)]
-        public void DefineDynamicAssembly_InvalidAccess_ThrowsArgumentException(AssemblyBuilderAccess access)
+        public void DefineDynamicAssembly_InvalidAccess_ThrowsArgumentException(
+            AssemblyBuilderAccess access
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("access", () => AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), access));
-            AssertExtensions.Throws<ArgumentException>("access", () => AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), access, new CustomAttributeBuilder[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                "access",
+                () => AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), access)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "access",
+                () =>
+                    AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        access,
+                        new CustomAttributeBuilder[0]
+                    )
+            );
         }
 
         [Fact]
         public void DefineDynamicAssembly_NameIsCopy()
         {
             AssemblyName name = new AssemblyName("Name") { Version = new Version(0, 0, 0, 0) };
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                name,
+                AssemblyBuilderAccess.Run
+            );
             Assert.StartsWith(name.ToString(), assembly.FullName);
 
             name.Name = "NewName";
@@ -143,7 +224,10 @@ namespace System.Reflection.Emit.Tests
         public void DefineDynamicModule_NullName_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => assembly.DefineDynamicModule(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => assembly.DefineDynamicModule(null)
+            );
         }
 
         [Theory]
@@ -152,21 +236,33 @@ namespace System.Reflection.Emit.Tests
         public void DefineDynamicModule_InvalidName_ThrowsArgumentException(string name)
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentException>("name", () => assembly.DefineDynamicModule(name));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => assembly.DefineDynamicModule(name)
+            );
         }
 
         [Fact]
-        [SkipOnTargetFramework(~TargetFrameworkMonikers.NetFramework, "The coreclr only supports AssemblyBuilders with one module.")]
+        [SkipOnTargetFramework(
+            ~TargetFrameworkMonikers.NetFramework,
+            "The coreclr only supports AssemblyBuilders with one module."
+        )]
         public void DefineDynamicModule_NetFxModuleAlreadyDefined_ThrowsInvalidOperationException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
             assembly.DefineDynamicModule("module1");
             assembly.DefineDynamicModule("module2");
-            AssertExtensions.Throws<ArgumentException>(null, () => assembly.DefineDynamicModule("module1"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => assembly.DefineDynamicModule("module1")
+            );
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "The coreclr only supports AssemblyBuilders with one module.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "The coreclr only supports AssemblyBuilders with one module."
+        )]
         public void DefineDynamicModule_CoreFxModuleAlreadyDefined_ThrowsInvalidOperationException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
@@ -219,7 +315,10 @@ namespace System.Reflection.Emit.Tests
         public void GetDynamicModule_InvalidName_ThrowsArgumentException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => assembly.GetDynamicModule(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => assembly.GetDynamicModule(null)
+            );
             AssertExtensions.Throws<ArgumentException>("name", () => assembly.GetDynamicModule(""));
         }
 
@@ -229,7 +328,9 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuidler_ByteArray(AssemblyBuilderAccess access)
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly(access: access);
-            ConstructorInfo constructor = typeof(BoolAllAttribute).GetConstructor(new Type[] { typeof(bool) });
+            ConstructorInfo constructor = typeof(BoolAllAttribute).GetConstructor(
+                new Type[] { typeof(bool) }
+            );
             assembly.SetCustomAttribute(constructor, new byte[] { 1, 0, 1 });
 
             IEnumerable<Attribute> attributes = assembly.GetCustomAttributes();
@@ -240,15 +341,23 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuidler_ByteArray_NullConstructorBuilder_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>("con", () => assembly.SetCustomAttribute(null, new byte[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "con",
+                () => assembly.SetCustomAttribute(null, new byte[0])
+            );
         }
 
         [Fact]
         public void SetCustomAttribute_ConstructorBuidler_ByteArray_NullByteArray_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            ConstructorInfo constructor = typeof(IntAllAttribute).GetConstructor(new Type[] { typeof(int) });
-            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () => assembly.SetCustomAttribute(constructor, null));
+            ConstructorInfo constructor = typeof(IntAllAttribute).GetConstructor(
+                new Type[] { typeof(int) }
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binaryAttribute",
+                () => assembly.SetCustomAttribute(constructor, null)
+            );
         }
 
         [Theory]
@@ -257,8 +366,13 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder(AssemblyBuilderAccess access)
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly(access: access);
-            ConstructorInfo constructor = typeof(IntClassAttribute).GetConstructor(new Type[] { typeof(int) });
-            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(constructor, new object[] { 5 });
+            ConstructorInfo constructor = typeof(IntClassAttribute).GetConstructor(
+                new Type[] { typeof(int) }
+            );
+            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
+                constructor,
+                new object[] { 5 }
+            );
             assembly.SetCustomAttribute(attributeBuilder);
 
             IEnumerable<Attribute> attributes = assembly.GetCustomAttributes();
@@ -269,7 +383,10 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder_NullAttributeBuilder_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () => assembly.SetCustomAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customBuilder",
+                () => assembly.SetCustomAttribute(null)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
@@ -278,7 +395,12 @@ namespace System.Reflection.Emit.Tests
             yield return new object[] { assembly, assembly, true };
             yield return new object[] { assembly, Helpers.DynamicAssembly("Name1"), false };
             yield return new object[] { assembly, Helpers.DynamicAssembly("Name2"), false };
-            yield return new object[] { assembly, Helpers.DynamicAssembly("Name1", access: AssemblyBuilderAccess.RunAndCollect), false };
+            yield return new object[]
+            {
+                assembly,
+                Helpers.DynamicAssembly("Name1", access: AssemblyBuilderAccess.RunAndCollect),
+                false
+            };
 
             yield return new object[] { assembly, new object(), false };
             yield return new object[] { assembly, null, false };
@@ -297,21 +419,23 @@ namespace System.Reflection.Emit.Tests
 
         public class CustomAttribute : Attribute
         {
-            public CustomAttribute()
-            {
-            }
+            public CustomAttribute() { }
         }
 
         [Fact]
         public void GetReferencedAssemblies()
         {
             // Create an assembly tagged with a custom attribute
-            var cattr_asm = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("custom_attr_assembly"), AssemblyBuilderAccess.Run);
+            var cattr_asm = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("custom_attr_assembly"),
+                AssemblyBuilderAccess.Run
+            );
 
-            ConstructorInfo classCtorInfo = typeof(CustomAttribute).GetConstructor(new Type[] { });
+            ConstructorInfo classCtorInfo = typeof(CustomAttribute).GetConstructor(new Type[] {  });
             CustomAttributeBuilder cattr = new CustomAttributeBuilder(
-                        classCtorInfo,
-                        new object[] { });
+                classCtorInfo,
+                new object[] {  }
+            );
 
             Assert.Equal(0, cattr_asm.GetReferencedAssemblies().Length);
 
@@ -319,11 +443,21 @@ namespace System.Reflection.Emit.Tests
 
             // Should now have a single reference, to this assembly
             Assert.Equal(1, cattr_asm.GetReferencedAssemblies().Length);
-            Assert.Equal(typeof(CustomAttribute).Assembly.GetName().Name, cattr_asm.GetReferencedAssemblies()[0].Name);
-            Assert.Equal(typeof(CustomAttribute).Assembly.GetName().GetPublicKeyToken(), cattr_asm.GetReferencedAssemblies()[0].GetPublicKeyToken());
+            Assert.Equal(
+                typeof(CustomAttribute).Assembly.GetName().Name,
+                cattr_asm.GetReferencedAssemblies()[0].Name
+            );
+            Assert.Equal(
+                typeof(CustomAttribute).Assembly.GetName().GetPublicKeyToken(),
+                cattr_asm.GetReferencedAssemblies()[0].GetPublicKeyToken()
+            );
         }
 
-        private static void VerifyAssemblyBuilder(AssemblyBuilder assembly, AssemblyName name, IEnumerable<CustomAttributeBuilder> attributes)
+        private static void VerifyAssemblyBuilder(
+            AssemblyBuilder assembly,
+            AssemblyName name,
+            IEnumerable<CustomAttributeBuilder> attributes
+        )
         {
             Assert.StartsWith(name.ToString(), assembly.FullName);
             Assert.StartsWith(name.ToString(), assembly.GetName().ToString());
@@ -341,90 +475,110 @@ namespace System.Reflection.Emit.Tests
             Assert.Empty(assembly.GetTypes());
         }
 
-	private static void SamplePrivateMethod ()
-	{
-	}
+        private static void SamplePrivateMethod() { }
 
-	internal static void SampleInternalMethod ()
-	{
-	}
+        internal static void SampleInternalMethod() { }
 
-	[Fact]
-	void Invoke_Private_CrossAssembly_ThrowsMethodAccessException()
-	{
-	    TypeBuilder tb = Helpers.DynamicType(TypeAttributes.Public);
-	    var mb = tb.DefineMethod ("MyMethod", MethodAttributes.Public | MethodAttributes.Static, typeof(void), new Type[] {  });
+        [Fact]
+        void Invoke_Private_CrossAssembly_ThrowsMethodAccessException()
+        {
+            TypeBuilder tb = Helpers.DynamicType(TypeAttributes.Public);
+            var mb = tb.DefineMethod(
+                "MyMethod",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(void),
+                new Type[] {  }
+            );
 
-	    var ilg = mb.GetILGenerator ();
+            var ilg = mb.GetILGenerator();
 
-	    var callee = typeof (AssemblyTests).GetMethod ("SamplePrivateMethod", BindingFlags.Static | BindingFlags.NonPublic);
+            var callee = typeof(AssemblyTests).GetMethod(
+                "SamplePrivateMethod",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
-	    ilg.Emit (OpCodes.Call, callee);
-	    ilg.Emit (OpCodes.Ret);
+            ilg.Emit(OpCodes.Call, callee);
+            ilg.Emit(OpCodes.Ret);
 
-	    var ty = tb.CreateType ();
+            var ty = tb.CreateType();
 
-	    var mi = ty.GetMethod ("MyMethod", BindingFlags.Static | BindingFlags.Public);
+            var mi = ty.GetMethod("MyMethod", BindingFlags.Static | BindingFlags.Public);
 
-	    var d = (Action) mi.CreateDelegate (typeof(Action));
+            var d = (Action)mi.CreateDelegate(typeof(Action));
 
-	    Assert.Throws<MethodAccessException>(() => d ());
-	}
+            Assert.Throws<MethodAccessException>(() => d());
+        }
 
-	[Fact]
-	void Invoke_Internal_CrossAssembly_ThrowsMethodAccessException()
-	{
-	    TypeBuilder tb = Helpers.DynamicType(TypeAttributes.Public);
-	    var mb = tb.DefineMethod ("MyMethod", MethodAttributes.Public | MethodAttributes.Static, typeof(void), new Type[] {  });
+        [Fact]
+        void Invoke_Internal_CrossAssembly_ThrowsMethodAccessException()
+        {
+            TypeBuilder tb = Helpers.DynamicType(TypeAttributes.Public);
+            var mb = tb.DefineMethod(
+                "MyMethod",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(void),
+                new Type[] {  }
+            );
 
-	    var ilg = mb.GetILGenerator ();
+            var ilg = mb.GetILGenerator();
 
-	    var callee = typeof (AssemblyTests).GetMethod ("SampleInternalMethod", BindingFlags.Static | BindingFlags.NonPublic);
+            var callee = typeof(AssemblyTests).GetMethod(
+                "SampleInternalMethod",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
-	    ilg.Emit (OpCodes.Call, callee);
-	    ilg.Emit (OpCodes.Ret);
+            ilg.Emit(OpCodes.Call, callee);
+            ilg.Emit(OpCodes.Ret);
 
-	    var ty = tb.CreateType ();
+            var ty = tb.CreateType();
 
-	    var mi = ty.GetMethod ("MyMethod", BindingFlags.Static | BindingFlags.Public);
+            var mi = ty.GetMethod("MyMethod", BindingFlags.Static | BindingFlags.Public);
 
-	    var d = (Action) mi.CreateDelegate (typeof(Action));
+            var d = (Action)mi.CreateDelegate(typeof(Action));
 
-	    Assert.Throws<MethodAccessException>(() => d ());
-	}
-	
-	[Fact]
-	void Invoke_Private_SameAssembly_ThrowsMethodAccessException()
-	{
-	    ModuleBuilder modb = Helpers.DynamicModule();
-	    
-	    string calleeName = "PrivateMethod";
+            Assert.Throws<MethodAccessException>(() => d());
+        }
 
-	    TypeBuilder tbCalled = modb.DefineType ("CalledClass", TypeAttributes.Public);
-	    var mbCalled = tbCalled.DefineMethod (calleeName, MethodAttributes.Private | MethodAttributes.Static);
-	    mbCalled.GetILGenerator().Emit (OpCodes.Ret);
+        [Fact]
+        void Invoke_Private_SameAssembly_ThrowsMethodAccessException()
+        {
+            ModuleBuilder modb = Helpers.DynamicModule();
 
-	    var tyCalled = tbCalled.CreateType();
-	    var callee = tyCalled.GetMethod (calleeName, BindingFlags.NonPublic | BindingFlags.Static);
+            string calleeName = "PrivateMethod";
 
-	    TypeBuilder tb = modb.DefineType("CallerClass", TypeAttributes.Public);
-	    var mb = tb.DefineMethod ("MyMethod", MethodAttributes.Public | MethodAttributes.Static, typeof(void), new Type[] {  });
+            TypeBuilder tbCalled = modb.DefineType("CalledClass", TypeAttributes.Public);
+            var mbCalled = tbCalled.DefineMethod(
+                calleeName,
+                MethodAttributes.Private | MethodAttributes.Static
+            );
+            mbCalled.GetILGenerator().Emit(OpCodes.Ret);
 
-	    var ilg = mb.GetILGenerator ();
+            var tyCalled = tbCalled.CreateType();
+            var callee = tyCalled.GetMethod(
+                calleeName,
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
-	    ilg.Emit (OpCodes.Call, callee);
-	    ilg.Emit (OpCodes.Ret);
+            TypeBuilder tb = modb.DefineType("CallerClass", TypeAttributes.Public);
+            var mb = tb.DefineMethod(
+                "MyMethod",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(void),
+                new Type[] {  }
+            );
 
-	    var ty = tb.CreateType ();
+            var ilg = mb.GetILGenerator();
 
-	    var mi = ty.GetMethod ("MyMethod", BindingFlags.Static | BindingFlags.Public);
+            ilg.Emit(OpCodes.Call, callee);
+            ilg.Emit(OpCodes.Ret);
 
-	    var d = (Action) mi.CreateDelegate (typeof(Action));
+            var ty = tb.CreateType();
 
-	    Assert.Throws<MethodAccessException>(() => d ());
-	}
+            var mi = ty.GetMethod("MyMethod", BindingFlags.Static | BindingFlags.Public);
 
+            var d = (Action)mi.CreateDelegate(typeof(Action));
 
-
+            Assert.Throws<MethodAccessException>(() => d());
+        }
     }
 }

@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             htmlLocalizer.Setup(h => h["Hello"]).Returns(localizedString);
 
             var htmlLocalizerFactory = new Mock<IHtmlLocalizerFactory>();
-            htmlLocalizerFactory.Setup(h => h.Create(typeof(TestClass)))
+            htmlLocalizerFactory
+                .Setup(h => h.Create(typeof(TestClass)))
                 .Returns(htmlLocalizer.Object);
 
             var htmlLocalizerOfT = new HtmlLocalizer<TestClass>(htmlLocalizerFactory.Object);
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             htmlLocalizer.Setup(h => h["Hello", "test"]).Returns(localizedString);
 
             var htmlLocalizerFactory = new Mock<IHtmlLocalizerFactory>();
-            htmlLocalizerFactory.Setup(h => h.Create(typeof(TestClass)))
+            htmlLocalizerFactory
+                .Setup(h => h.Create(typeof(TestClass)))
                 .Returns(htmlLocalizer.Object);
 
             var htmlLocalizerOfT = new HtmlLocalizer<TestClass>(htmlLocalizerFactory.Object);

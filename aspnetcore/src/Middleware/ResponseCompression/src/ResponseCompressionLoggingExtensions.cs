@@ -22,42 +22,50 @@ namespace Microsoft.AspNetCore.ResponseCompression
             _noAcceptEncoding = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(1, "NoAcceptEncoding"),
-                "No response compression available, the Accept-Encoding header is missing or invalid.");
+                "No response compression available, the Accept-Encoding header is missing or invalid."
+            );
 
             _noCompressionForHttps = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(2, "NoCompressionForHttps"),
-                "No response compression available for HTTPS requests. See ResponseCompressionOptions.EnableForHttps.");
+                "No response compression available for HTTPS requests. See ResponseCompressionOptions.EnableForHttps."
+            );
 
             _requestAcceptsCompression = LoggerMessage.Define(
                 LogLevel.Trace,
                 new EventId(3, "RequestAcceptsCompression"),
-                "This request accepts compression.");
+                "This request accepts compression."
+            );
 
             _noCompressionDueToHeader = LoggerMessage.Define<string>(
                 LogLevel.Debug,
                 new EventId(4, "NoCompressionDueToHeader"),
-                "Response compression disabled due to the {header} header.");
+                "Response compression disabled due to the {header} header."
+            );
 
             _noCompressionForContentType = LoggerMessage.Define<string>(
                 LogLevel.Debug,
                 new EventId(5, "NoCompressionForContentType"),
-                "Response compression is not enabled for the Content-Type '{header}'.");
+                "Response compression is not enabled for the Content-Type '{header}'."
+            );
 
             _shouldCompressResponse = LoggerMessage.Define(
                 LogLevel.Trace,
                 new EventId(6, "ShouldCompressResponse"),
-                "Response compression is available for this Content-Type.");
+                "Response compression is available for this Content-Type."
+            );
 
             _noCompressionProvider = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(7, "NoCompressionProvider"),
-                "No matching response compression provider found.");
+                "No matching response compression provider found."
+            );
 
             _compressWith = LoggerMessage.Define<string>(
                 LogLevel.Debug,
                 new EventId(8, "CompressWith"),
-                "The response will be compressed with '{provider}'.");
+                "The response will be compressed with '{provider}'."
+            );
         }
 
         public static void NoAcceptEncoding(this ILogger logger)

@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         public RegisterConfirmation(
             HttpClient client,
             IHtmlDocument register,
-            DefaultUIContext context)
-            : base(client, register, context)
+            DefaultUIContext context
+        ) : base(client, register, context)
         {
             if (Context.HasRealEmailSender)
             {

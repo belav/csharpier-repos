@@ -37,16 +37,27 @@ namespace System.Net.Security
             get { return _isDefault; }
         }
 
-        public SafeFreeNegoCredentials(bool isNtlmOnly, string username, string password, string domain)
-            : base(IntPtr.Zero, true)
+        public SafeFreeNegoCredentials(
+            bool isNtlmOnly,
+            string username,
+            string password,
+            string domain
+        ) : base(IntPtr.Zero, true)
         {
-            Debug.Assert(username != null && password != null, "Username and Password can not be null");
+            Debug.Assert(
+                username != null && password != null,
+                "Username and Password can not be null"
+            );
             const char At = '@';
             const char Backwhack = '\\';
 
             // any invalid user format will not be mnipulated and passed as it is.
             int index = username.IndexOf(Backwhack);
-            if (index > 0 && username.IndexOf(Backwhack, index + 1) < 0 && string.IsNullOrEmpty(domain))
+            if (
+                index > 0
+                && username.IndexOf(Backwhack, index + 1) < 0
+                && string.IsNullOrEmpty(domain)
+            )
             {
                 domain = username.Substring(0, index);
                 username = username.Substring(index + 1);

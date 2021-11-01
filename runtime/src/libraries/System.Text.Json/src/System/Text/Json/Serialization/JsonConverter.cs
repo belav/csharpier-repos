@@ -60,7 +60,11 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Loosely-typed ReadCore() that forwards to strongly-typed ReadCore().
         /// </summary>
-        internal abstract object? ReadCoreAsObject(ref Utf8JsonReader reader, JsonSerializerOptions options, ref ReadStack state);
+        internal abstract object? ReadCoreAsObject(
+            ref Utf8JsonReader reader,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        );
 
         // For polymorphic cases, the concrete type to create.
         internal virtual Type RuntimeType => TypeToConvert;
@@ -74,19 +78,39 @@ namespace System.Text.Json.Serialization
         // This is used internally to quickly determine the type being converted for JsonConverter<T>.
         internal abstract Type TypeToConvert { get; }
 
-        internal abstract bool TryReadAsObject(ref Utf8JsonReader reader, JsonSerializerOptions options, ref ReadStack state, out object? value);
+        internal abstract bool TryReadAsObject(
+            ref Utf8JsonReader reader,
+            JsonSerializerOptions options,
+            ref ReadStack state,
+            out object? value
+        );
 
-        internal abstract bool TryWriteAsObject(Utf8JsonWriter writer, object? value, JsonSerializerOptions options, ref WriteStack state);
+        internal abstract bool TryWriteAsObject(
+            Utf8JsonWriter writer,
+            object? value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        );
 
         /// <summary>
         /// Loosely-typed WriteCore() that forwards to strongly-typed WriteCore().
         /// </summary>
-        internal abstract bool WriteCoreAsObject(Utf8JsonWriter writer, object? value, JsonSerializerOptions options, ref WriteStack state);
+        internal abstract bool WriteCoreAsObject(
+            Utf8JsonWriter writer,
+            object? value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        );
 
         /// <summary>
         /// Loosely-typed WriteWithQuotes() that forwards to strongly-typed WriteWithQuotes().
         /// </summary>
-        internal abstract void WriteWithQuotesAsObject(Utf8JsonWriter writer, object value, JsonSerializerOptions options, ref WriteStack state);
+        internal abstract void WriteWithQuotesAsObject(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        );
 
         // Whether a type (ConverterStrategy.Object) is deserialized using a parameterized constructor.
         internal virtual bool ConstructorIsParameterized { get; }
@@ -98,6 +122,10 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Creates the instance and assigns it to state.Current.ReturnValue.
         /// </summary>
-        internal virtual void CreateInstanceForReferenceResolver(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options) { }
+        internal virtual void CreateInstanceForReferenceResolver(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        ) { }
     }
 }

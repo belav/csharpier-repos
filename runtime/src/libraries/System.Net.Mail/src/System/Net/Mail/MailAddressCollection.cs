@@ -12,9 +12,7 @@ namespace System.Net.Mail
 {
     public class MailAddressCollection : Collection<MailAddress>
     {
-        public MailAddressCollection()
-        {
-        }
+        public MailAddressCollection() { }
 
         public void Add(string addresses)
         {
@@ -24,7 +22,10 @@ namespace System.Net.Mail
             }
             if (addresses.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.net_emptystringcall, nameof(addresses)), nameof(addresses));
+                throw new ArgumentException(
+                    SR.Format(SR.net_emptystringcall, nameof(addresses)),
+                    nameof(addresses)
+                );
             }
 
             ParseValue(addresses);

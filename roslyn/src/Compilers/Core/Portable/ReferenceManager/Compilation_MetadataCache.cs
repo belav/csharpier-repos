@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         /// 
         /// Guarded by <see cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/>.
         /// </summary>
-        private readonly WeakList<IAssemblySymbolInternal> _retargetingAssemblySymbols = new WeakList<IAssemblySymbolInternal>();
+        private readonly WeakList<IAssemblySymbolInternal> _retargetingAssemblySymbols =
+            new WeakList<IAssemblySymbolInternal>();
 
         /// <summary>
         /// Adds given retargeting assembly for this compilation into the cache.
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis
         /// Adds cached retargeting symbols into the given list.
         /// <see cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/> must be locked while calling this method.
         /// </summary>
-        internal void AddRetargetingAssemblySymbolsNoLock<T>(List<T> result) where T : IAssemblySymbolInternal
+        internal void AddRetargetingAssemblySymbolsNoLock<T>(List<T> result)
+            where T : IAssemblySymbolInternal
         {
             foreach (var symbol in _retargetingAssemblySymbols)
             {

@@ -28,7 +28,10 @@ namespace Templates.Items.Test
             Project = await ProjectFactory.GetOrCreateProject("razorcomponentitem", Output);
 
             var createResult = await Project.RunDotNetNewAsync("razorcomponent --name Different");
-            Assert.True(0 == createResult.ExitCode, ErrorMessages.GetFailedProcessMessage("create", Project, createResult));
+            Assert.True(
+                0 == createResult.ExitCode,
+                ErrorMessages.GetFailedProcessMessage("create", Project, createResult)
+            );
 
             Project.AssertFileExists("Different.razor", shouldExist: true);
             Assert.Contains("<h3>Different</h3>", Project.ReadFile("Different.razor"));

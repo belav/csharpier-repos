@@ -24,20 +24,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
         private readonly IContentType _unknownContentType;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public EditorTextFactoryService(
             ITextBufferCloneService textBufferCloneService,
             ITextBufferFactoryService textBufferFactoryService,
-            IContentTypeRegistryService contentTypeRegistryService)
+            IContentTypeRegistryService contentTypeRegistryService
+        )
         {
             _textBufferCloneService = textBufferCloneService;
             _textBufferFactory = textBufferFactoryService;
             _unknownContentType = contentTypeRegistryService.UnknownContentType;
         }
 
-        private static readonly Encoding s_throwingUtf8Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly Encoding s_throwingUtf8Encoding = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
-        public SourceText CreateText(Stream stream, Encoding? defaultEncoding, CancellationToken cancellationToken = default)
+        public SourceText CreateText(
+            Stream stream,
+            Encoding? defaultEncoding,
+            CancellationToken cancellationToken = default
+        )
         {
             // this API is for a case where user wants us to figure out encoding from the given stream.
             // if defaultEncoding is given, we will use it if we couldn't figure out encoding used in the stream ourselves.
@@ -70,7 +82,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             }
         }
 
-        public SourceText CreateText(TextReader reader, Encoding? encoding, CancellationToken cancellationToken = default)
+        public SourceText CreateText(
+            TextReader reader,
+            Encoding? encoding,
+            CancellationToken cancellationToken = default
+        )
         {
             // this API is for a case where user just wants to create a source text with explicit encoding.
             var buffer = CreateTextBuffer(reader);
@@ -79,18 +95,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             return buffer.CurrentSnapshot.AsRoslynText(_textBufferCloneService, encoding);
         }
 
-        private ITextBuffer CreateTextBuffer(TextReader reader)
-            => _textBufferFactory.CreateTextBuffer(reader, _unknownContentType);
+        private ITextBuffer CreateTextBuffer(TextReader reader) =>
+            _textBufferFactory.CreateTextBuffer(reader, _unknownContentType);
 
-        private SourceText CreateTextInternal(Stream stream, Encoding encoding, CancellationToken cancellationToken)
+        private SourceText CreateTextInternal(
+            Stream stream,
+            Encoding encoding,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             stream.Seek(0, SeekOrigin.Begin);
 
-            using var reader = new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: 1024, leaveOpen: true);
+            using var reader = new StreamReader(
+                stream,
+                encoding,
+                detectEncodingFromByteOrderMarks: true,
+                bufferSize: 1024,
+                leaveOpen: true
+            );
 
             var buffer = CreateTextBuffer(reader);
-            return buffer.CurrentSnapshot.AsRoslynText(_textBufferCloneService, reader.CurrentEncoding ?? Encoding.UTF8);
+            return buffer.CurrentSnapshot.AsRoslynText(
+                _textBufferCloneService,
+                reader.CurrentEncoding ?? Encoding.UTF8
+            );
         }
     }
 }

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Authorization
         }
 
         /// <inheritdoc />
-        public Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(AuthorizationHandlerContext context)
-            => Task.FromResult(_handlers);
+        public Task<IEnumerable<IAuthorizationHandler>> GetHandlersAsync(
+            AuthorizationHandlerContext context
+        ) => Task.FromResult(_handlers);
     }
 }

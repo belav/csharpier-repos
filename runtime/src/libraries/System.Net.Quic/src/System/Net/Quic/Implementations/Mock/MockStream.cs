@@ -37,7 +37,8 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        private StreamBuffer? ReadStreamBuffer => _isInitiator ? _streamState._inboundStreamBuffer : _streamState._outboundStreamBuffer;
+        private StreamBuffer? ReadStreamBuffer =>
+            _isInitiator ? _streamState._inboundStreamBuffer : _streamState._outboundStreamBuffer;
 
         internal override bool CanRead => !_disposed && ReadStreamBuffer is not null;
 
@@ -54,7 +55,10 @@ namespace System.Net.Quic.Implementations.Mock
             return streamBuffer.Read(buffer);
         }
 
-        internal override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        internal override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
@@ -64,10 +68,14 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new NotSupportedException();
             }
 
-            int bytesRead = await streamBuffer.ReadAsync(buffer, cancellationToken).ConfigureAwait(false);
+            int bytesRead = await streamBuffer
+                .ReadAsync(buffer, cancellationToken)
+                .ConfigureAwait(false);
             if (bytesRead == 0)
             {
-                long errorCode = _isInitiator ? _streamState._inboundErrorCode : _streamState._outboundErrorCode;
+                long errorCode = _isInitiator
+                    ? _streamState._inboundErrorCode
+                    : _streamState._outboundErrorCode;
                 if (errorCode != 0)
                 {
                     throw new QuicStreamAbortedException(errorCode);
@@ -77,7 +85,8 @@ namespace System.Net.Quic.Implementations.Mock
             return bytesRead;
         }
 
-        private StreamBuffer? WriteStreamBuffer => _isInitiator ? _streamState._outboundStreamBuffer : _streamState._inboundStreamBuffer;
+        private StreamBuffer? WriteStreamBuffer =>
+            _isInitiator ? _streamState._outboundStreamBuffer : _streamState._inboundStreamBuffer;
 
         internal override bool CanWrite => !_disposed && WriteStreamBuffer is not null;
 
@@ -94,12 +103,19 @@ namespace System.Net.Quic.Implementations.Mock
             streamBuffer.Write(buffer);
         }
 
-        internal override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return WriteAsync(buffer, endStream: false, cancellationToken);
         }
 
-        internal override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, bool endStream, CancellationToken cancellationToken = default)
+        internal override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            bool endStream,
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
@@ -117,16 +133,26 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        internal override ValueTask WriteAsync(ReadOnlySequence<byte> buffers, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlySequence<byte> buffers,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
-        internal override ValueTask WriteAsync(ReadOnlySequence<byte> buffers, bool endStream, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlySequence<byte> buffers,
+            bool endStream,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
 
-        internal override async ValueTask WriteAsync(ReadOnlyMemory<ReadOnlyMemory<byte>> buffers, CancellationToken cancellationToken = default)
+        internal override async ValueTask WriteAsync(
+            ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
+            CancellationToken cancellationToken = default
+        )
         {
             for (int i = 0; i < buffers.Length; i++)
             {
@@ -134,7 +160,11 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        internal override ValueTask WriteAsync(ReadOnlyMemory<ReadOnlyMemory<byte>> buffers, bool endStream, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
+            bool endStream,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
@@ -170,8 +200,9 @@ namespace System.Net.Quic.Implementations.Mock
             WriteStreamBuffer?.EndWrite();
         }
 
-
-        internal override ValueTask ShutdownWriteCompleted(CancellationToken cancellationToken = default)
+        internal override ValueTask ShutdownWriteCompleted(
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
@@ -239,7 +270,10 @@ namespace System.Net.Quic.Implementations.Mock
             public StreamState(long streamId, bool bidirectional)
             {
                 _streamId = streamId;
-                _outboundStreamBuffer = new StreamBuffer(initialBufferSize: InitialBufferSize, maxBufferSize: MaxBufferSize);
+                _outboundStreamBuffer = new StreamBuffer(
+                    initialBufferSize: InitialBufferSize,
+                    maxBufferSize: MaxBufferSize
+                );
                 _inboundStreamBuffer = (bidirectional ? new StreamBuffer() : null);
             }
         }

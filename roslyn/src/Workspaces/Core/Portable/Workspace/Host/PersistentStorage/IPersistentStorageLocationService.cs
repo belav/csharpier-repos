@@ -25,20 +25,22 @@ namespace Microsoft.CodeAnalysis.Host
     }
 
     [ExportWorkspaceService(typeof(IPersistentStorageLocationService)), Shared]
-    internal class DefaultPersistentStorageLocationService : IPersistentStorageLocationService, IPersistentStorageLocationService2
+    internal class DefaultPersistentStorageLocationService
+        : IPersistentStorageLocationService,
+          IPersistentStorageLocationService2
     {
         /// <summary>
         /// Used to ensure that the path components we generate do not contain any characters that might be invalid in a
         /// path.  For example, Base64 encoding will use <c>/</c> which is something that we definitely do not want
         /// errantly added to a path.
         /// </summary>
-        private static readonly ImmutableArray<char> s_invalidPathChars = Path.GetInvalidPathChars().Concat('/').ToImmutableArray();
+        private static readonly ImmutableArray<char> s_invalidPathChars = Path.GetInvalidPathChars()
+            .Concat('/')
+            .ToImmutableArray();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultPersistentStorageLocationService()
-        {
-        }
+        public DefaultPersistentStorageLocationService() { }
 
         public virtual bool IsSupported(Workspace workspace) => false;
 
@@ -48,12 +50,15 @@ namespace Microsoft.CodeAnalysis.Host
             // ~/.local/share/... on unix).  This will place the folder in a location we can trust
             // to be able to get back to consistently as long as we're working with the same
             // solution and the same workspace kind.
-            var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create);
+            var appDataFolder = Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData,
+                Environment.SpecialFolderOption.Create
+            );
             return Path.Combine(appDataFolder, "Microsoft", "VisualStudio", "Roslyn", "Cache");
         }
 
-        public string? TryGetStorageLocation(Solution solution)
-            => TryGetStorageLocation(solution.Workspace, SolutionKey.ToSolutionKey(solution));
+        public string? TryGetStorageLocation(Solution solution) =>
+            TryGetStorageLocation(solution.Workspace, SolutionKey.ToSolutionKey(solution));
 
         public string? TryGetStorageLocation(Workspace workspace, SolutionKey solutionKey)
         {

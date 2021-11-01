@@ -13,17 +13,14 @@ namespace System.Web.Mvc
         private IFilterProvider[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public FilterProviderCollection()
-        {
-        }
+        public FilterProviderCollection() { }
 
-        public FilterProviderCollection(IList<IFilterProvider> providers)
-            : base(providers)
-        {
-        }
+        public FilterProviderCollection(IList<IFilterProvider> providers) : base(providers) { }
 
-        internal FilterProviderCollection(IList<IFilterProvider> list, IDependencyResolver dependencyResolver)
-            : base(list)
+        internal FilterProviderCollection(
+            IList<IFilterProvider> list,
+            IDependencyResolver dependencyResolver
+        ) : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }
@@ -35,7 +32,10 @@ namespace System.Web.Mvc
                 IFilterProvider[] combinedItems = _combinedItems;
                 if (combinedItems == null)
                 {
-                    combinedItems = MultiServiceResolver.GetCombined<IFilterProvider>(Items, _dependencyResolver);
+                    combinedItems = MultiServiceResolver.GetCombined<IFilterProvider>(
+                        Items,
+                        _dependencyResolver
+                    );
                     _combinedItems = combinedItems;
                 }
                 return combinedItems;
@@ -53,7 +53,10 @@ namespace System.Web.Mvc
             return mvcFilter.AllowMultiple;
         }
 
-        public IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+        public IEnumerable<Filter> GetFilters(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
             if (controllerContext == null)
             {
@@ -101,7 +104,7 @@ namespace System.Web.Mvc
                 }
                 else
                 {
-                    filters.RemoveAt(i);                        
+                    filters.RemoveAt(i);
                 }
             }
         }

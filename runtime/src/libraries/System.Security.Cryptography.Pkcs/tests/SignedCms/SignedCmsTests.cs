@@ -72,13 +72,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Decode_WrongContentType()
         {
             const string InputHex =
-                "3080" +
-                  "0609608648016503040201" +
-                  "A080" +
-                    "3002" +
-                      "0500" +
-                    "0000" +
-                  "0000";
+                "3080" + "0609608648016503040201" + "A080" + "3002" + "0500" + "0000" + "0000";
 
             byte[] inputData = InputHex.HexToByteArray();
 
@@ -89,7 +83,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void Decode_OverwritesAttachedContentInfo()
         {
-            ContentInfo original = new ContentInfo(new byte [] { 1, 2, 3, 4, 5 });
+            ContentInfo original = new ContentInfo(new byte[] { 1, 2, 3, 4, 5 });
             SignedCms cms = new SignedCms(original, false);
             Assert.False(cms.Detached);
 
@@ -165,11 +159,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "extraStore",
-                () => cms.CheckSignature(null, true));
+                () => cms.CheckSignature(null, true)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "extraStore",
-                () => cms.CheckSignature(null, false));
+                () => cms.CheckSignature(null, false)
+            );
         }
 
         [Fact]
@@ -180,11 +176,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<ArgumentNullException>(() => new SignedCms(null, true));
 
             Assert.Throws<ArgumentNullException>(
-                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null));
+                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null)
+            );
             Assert.Throws<ArgumentNullException>(
-                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, false));
+                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, false)
+            );
             Assert.Throws<ArgumentNullException>(
-                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, true));
+                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, true)
+            );
         }
 
         [Fact]
@@ -254,7 +253,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(cms.SignerInfos);
 
             SignerInfo signerInfo = cms.SignerInfos[0];
-            Assert.Equal(SubjectIdentifierType.IssuerAndSerialNumber, signerInfo.SignerIdentifier.Type);
+            Assert.Equal(
+                SubjectIdentifierType.IssuerAndSerialNumber,
+                signerInfo.SignerIdentifier.Type
+            );
 
             int certCount = cms.Certificates.Count;
             cms.RemoveSignature(signerInfo);
@@ -270,7 +272,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(cms.SignerInfos);
 
             SignerInfo signerInfo = cms.SignerInfos[0];
-            Assert.Equal(SubjectIdentifierType.SubjectKeyIdentifier, signerInfo.SignerIdentifier.Type);
+            Assert.Equal(
+                SubjectIdentifierType.SubjectKeyIdentifier,
+                signerInfo.SignerIdentifier.Type
+            );
 
             int certCount = cms.Certificates.Count;
             cms.RemoveSignature(signerInfo);
@@ -314,7 +319,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "signerInfo",
-                () => cms.RemoveSignature(null));
+                () => cms.RemoveSignature(null)
+            );
 
             Assert.Single(cms.SignerInfos);
             Assert.Single(cms.Certificates);
@@ -328,7 +334,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             ArgumentOutOfRangeException ex = AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "index",
-                () => cms.RemoveSignature(-1));
+                () => cms.RemoveSignature(-1)
+            );
 
             Assert.Null(ex.ActualValue);
             Assert.Single(cms.SignerInfos);
@@ -336,7 +343,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             ex = AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "index",
-                () => cms.RemoveSignature(1));
+                () => cms.RemoveSignature(1)
+            );
 
             Assert.Null(ex.ActualValue);
 
@@ -370,7 +378,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 // SHA1("Microsoft Corporation")
                 "A5F085E7F326F3D6CA3BFD6280A3DE8EBC2EA60E",
                 // SHA1("Microsoft CorporationMicrosoft Corporation")
-                "346804FD67B37C27A203CD514B267711CFB39118");
+                "346804FD67B37C27A203CD514B267711CFB39118"
+            );
 
             cms = new SignedCms(save, true);
             cms.Decode(inputHex.HexToByteArray());
@@ -423,13 +432,17 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [InlineData(SubjectIdentifierType.SubjectKeyIdentifier, false)]
         [InlineData(SubjectIdentifierType.SubjectKeyIdentifier, true)]
         // NoSignature is a different test, because it succeeds (CoreFX) or fails differently (NetFX)
-        public static void SignSilentWithNoCertificate(SubjectIdentifierType identifierType, bool detached)
+        public static void SignSilentWithNoCertificate(
+            SubjectIdentifierType identifierType,
+            bool detached
+        )
         {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             Assert.Throws<InvalidOperationException>(
-                () => cms.ComputeSignature(new CmsSigner(identifierType), silent: true));
+                () => cms.ComputeSignature(new CmsSigner(identifierType), silent: true)
+            );
         }
 
         [Theory]
@@ -441,13 +454,15 @@ namespace System.Security.Cryptography.Pkcs.Tests
         // NoSignature is a different test, because it succeeds (CoreFX) or fails differently (NetFX)
         public static void SignNoisyWithNoCertificate_NotSupported(
             SubjectIdentifierType identifierType,
-            bool detached)
+            bool detached
+        )
         {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
             Assert.Throws<PlatformNotSupportedException>(
-                () => cms.ComputeSignature(new CmsSigner(identifierType), silent: false));
+                () => cms.ComputeSignature(new CmsSigner(identifierType), silent: false)
+            );
         }
 
         [Theory]
@@ -460,7 +475,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            using (X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
                 cms.ComputeSignature(signer);
@@ -470,7 +488,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(cms.SignerInfos);
             Assert.Single(cms.Certificates);
 
-            int expectedVersion = identifierType == SubjectIdentifierType.SubjectKeyIdentifier ? 3 : 1;
+            int expectedVersion =
+                identifierType == SubjectIdentifierType.SubjectKeyIdentifier ? 3 : 1;
             Assert.Equal(expectedVersion, cms.Version);
 
             SignerInfo firstSigner = cms.SignerInfos[0];
@@ -508,7 +527,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, false);
 
-            using (X509Certificate2 cert = Certificates.NegativeSerialNumber.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.NegativeSerialNumber.TryGetCertificateWithPrivateKey()
+            )
             {
                 Assert.Equal(expectedSerial, cert.SerialNumber);
 
@@ -522,7 +544,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(1, signers.Count);
 
             SignerInfo signerInfo = signers[0];
-            Assert.Equal(SubjectIdentifierType.IssuerAndSerialNumber, signerInfo.SignerIdentifier.Type);
+            Assert.Equal(
+                SubjectIdentifierType.IssuerAndSerialNumber,
+                signerInfo.SignerIdentifier.Type
+            );
 
             X509IssuerSerial issuerSerial = (X509IssuerSerial)signerInfo.SignerIdentifier.Value;
             Assert.Equal(expectedSerial, issuerSerial.SerialNumber);
@@ -540,7 +565,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            using (X509Certificate2 signerCert = Certificates.Dsa1024.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert = Certificates.Dsa1024.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
                 signer.IncludeOption = X509IncludeOption.EndCertOnly;
@@ -552,7 +579,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(cms.SignerInfos);
             Assert.Single(cms.Certificates);
 
-            int expectedVersion = identifierType == SubjectIdentifierType.SubjectKeyIdentifier ? 3 : 1;
+            int expectedVersion =
+                identifierType == SubjectIdentifierType.SubjectKeyIdentifier ? 3 : 1;
             Assert.Equal(expectedVersion, cms.Version);
 
             SignerInfo firstSigner = cms.SignerInfos[0];
@@ -607,12 +635,19 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [InlineData(SubjectIdentifierType.SubjectKeyIdentifier, false, Oids.Sha384)]
         [InlineData(SubjectIdentifierType.IssuerAndSerialNumber, false, Oids.Sha512)]
         [InlineData(SubjectIdentifierType.SubjectKeyIdentifier, true, Oids.Sha512)]
-        public static void AddFirstSigner_ECDSA(SubjectIdentifierType identifierType, bool detached, string digestOid)
+        public static void AddFirstSigner_ECDSA(
+            SubjectIdentifierType identifierType,
+            bool detached,
+            string digestOid
+        )
         {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            using (X509Certificate2 signerCert = Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
                 signer.IncludeOption = X509IncludeOption.EndCertOnly;
@@ -623,7 +658,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(cms.SignerInfos);
             Assert.Single(cms.Certificates);
 
-            int expectedVersion = identifierType == SubjectIdentifierType.SubjectKeyIdentifier ? 3 : 1;
+            int expectedVersion =
+                identifierType == SubjectIdentifierType.SubjectKeyIdentifier ? 3 : 1;
             Assert.Equal(expectedVersion, cms.Version);
 
             SignerInfo firstSigner = cms.SignerInfos[0];
@@ -758,7 +794,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     new CmsSigner(SubjectIdentifierType.NoSignature)
                     {
                         IncludeOption = X509IncludeOption.None,
-                    });
+                    }
+                );
 
             if (PlatformDetection.IsNetFramework)
             {
@@ -781,13 +818,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(cert)
-                    {
-                        IncludeOption = X509IncludeOption.None,
-                    });
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                );
 
                 Assert.Throws<CryptographicException>(
                     () =>
@@ -795,7 +833,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new CmsSigner(SubjectIdentifierType.NoSignature)
                             {
                                 IncludeOption = X509IncludeOption.None,
-                            }));
+                            }
+                        )
+                );
             }
 
             Assert.Equal(1, cms.SignerInfos.Count);
@@ -811,13 +851,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(cert)
-                    {
-                        IncludeOption = X509IncludeOption.None,
-                    });
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                );
 
                 Assert.Throws<CryptographicException>(
                     () =>
@@ -825,7 +866,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new CmsSigner(SubjectIdentifierType.NoSignature)
                             {
                                 IncludeOption = X509IncludeOption.None,
-                            }));
+                            }
+                        )
+                );
 
                 cms.RemoveSignature(0);
 
@@ -838,7 +881,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new CmsSigner(SubjectIdentifierType.NoSignature)
                             {
                                 IncludeOption = X509IncludeOption.None,
-                            }));
+                            }
+                        )
+                );
             }
 
             Assert.Equal(0, cms.SignerInfos.Count);
@@ -852,13 +897,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(cert)
-                    {
-                        IncludeOption = X509IncludeOption.None,
-                    });
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                );
 
                 Assert.Throws<CryptographicException>(
                     () =>
@@ -866,7 +912,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new CmsSigner(SubjectIdentifierType.NoSignature)
                             {
                                 IncludeOption = X509IncludeOption.None,
-                            }));
+                            }
+                        )
+                );
 
                 cms.RemoveSignature(0);
 
@@ -893,7 +941,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new CmsSigner(SubjectIdentifierType.NoSignature)
                             {
                                 IncludeOption = X509IncludeOption.None,
-                            }));
+                            }
+                        )
+                );
             }
 
             Assert.Equal(0, cms.SignerInfos.Count);
@@ -928,7 +978,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             byte[] firstEncoding;
 
-            using (X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(first, signerCert);
                 cms.ComputeSignature(signer);
@@ -960,7 +1013,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             if (skidFirst)
             {
 #endif
-            Assert.Equal(3, cms.Version);
+                Assert.Equal(3, cms.Version);
 #if NETFRAMEWORK
             }
 #endif
@@ -980,7 +1033,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             SignedCms cms = new SignedCms();
 
-            using (X509Certificate2 cert = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert);
 
@@ -1045,7 +1101,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (X509Certificate2 unrelated1Copy = Certificates.DHKeyAgree1.GetCertificate())
             using (X509Certificate2 unrelated2 = Certificates.RSAKeyTransfer2.GetCertificate())
             using (X509Certificate2 unrelated3 = Certificates.RSAKeyTransfer3.GetCertificate())
-            using (X509Certificate2 signerCert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 var signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, signerCert);
                 signer.Certificates.Add(unrelated1);
@@ -1060,7 +1119,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
 #else
                     false
 #endif
-                    ;
+                ;
 
                 int expectedAddedCount = 4;
 
@@ -1146,7 +1205,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SubjectIdentifierType firstType = SubjectIdentifierType.IssuerAndSerialNumber;
             SubjectIdentifierType secondType = SubjectIdentifierType.SubjectKeyIdentifier;
 
-            using (X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(firstType, signerCert);
                 signer.SignedAttributes.Add(new Pkcs9SigningTime());
@@ -1160,7 +1222,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
 #endif
             cms.CheckSignature(true);
 
-            using (X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(secondType, signerCert);
                 signer.SignedAttributes.Add(new Pkcs9SigningTime());
@@ -1171,12 +1236,17 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // They should have the same content digests.
             AsnEncodedData firstDigest = cms.SignerInfos[0].SignedAttributes
-                .OfType<CryptographicAttributeObject>().First(cao => cao.Oid.Value == Oids.MessageDigest).Values[0];
+                .OfType<CryptographicAttributeObject>()
+                .First(cao => cao.Oid.Value == Oids.MessageDigest).Values[0];
 
             AsnEncodedData secondDigest = cms.SignerInfos[1].SignedAttributes
-                .OfType<CryptographicAttributeObject>().First(cao => cao.Oid.Value == Oids.MessageDigest).Values[0];
+                .OfType<CryptographicAttributeObject>()
+                .First(cao => cao.Oid.Value == Oids.MessageDigest).Values[0];
 
-            Assert.Equal(firstDigest.RawData.ByteArrayToHex(), secondDigest.RawData.ByteArrayToHex());
+            Assert.Equal(
+                firstDigest.RawData.ByteArrayToHex(),
+                secondDigest.RawData.ByteArrayToHex()
+            );
 
             byte[] encoded = cms.Encode();
 
@@ -1212,25 +1282,32 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(contentBytes);
             SignedCms cms = new SignedCms(contentInfo, false);
 
-            using (X509Certificate2 signerCert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 // This cert has no Subject Key Identifier extension.
                 Assert.Null(signerCert.Extensions[Oids.SubjectKeyIdentifier]);
 
-                CmsSigner signer = new CmsSigner(SubjectIdentifierType.SubjectKeyIdentifier, signerCert);
+                CmsSigner signer = new CmsSigner(
+                    SubjectIdentifierType.SubjectKeyIdentifier,
+                    signerCert
+                );
                 cms.ComputeSignature(signer);
             }
 
             Assert.Equal(
                 "6B4A6B92FDED07EE0119F3674A96D1A70D2A588D",
-                (string)cms.SignerInfos[0].SignerIdentifier.Value);
+                (string)cms.SignerInfos[0].SignerIdentifier.Value
+            );
 
             // Assert.NoThrow
             cms.CheckSignature(true);
         }
 
         [Fact]
-        public static void SignerInfoCollection_Indexer_MinusOne ()
+        public static void SignerInfoCollection_Indexer_MinusOne()
         {
             SignedCms cms = new SignedCms();
             cms.Decode(SignedDocuments.RsaPkcs1OneSignerIssuerAndSerialNumber);
@@ -1244,13 +1321,17 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [InlineData(SubjectIdentifierType.SubjectKeyIdentifier)]
         public static void SignEnveloped(SubjectIdentifierType signerType)
         {
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 EnvelopedCms envelopedCms = new EnvelopedCms(new ContentInfo(new byte[] { 3 }));
                 envelopedCms.Encrypt(new CmsRecipient(signerType, cert));
 
                 SignedCms signedCms = new SignedCms(
-                    new ContentInfo(new Oid(Oids.Pkcs7Enveloped), envelopedCms.Encode()));
+                    new ContentInfo(new Oid(Oids.Pkcs7Enveloped), envelopedCms.Encode())
+                );
 
                 signedCms.ComputeSignature(new CmsSigner(cert));
                 signedCms.CheckSignature(true);
@@ -1265,7 +1346,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 Assert.Equal(Oids.ContentType, firstAttrSet.Oid.Value);
                 Assert.Equal(1, firstAttrSet.Values.Count);
                 Assert.Equal(Oids.ContentType, firstAttrSet.Values[0].Oid.Value);
-                Assert.Equal("06092A864886F70D010703", firstAttrSet.Values[0].RawData.ByteArrayToHex());
+                Assert.Equal(
+                    "06092A864886F70D010703",
+                    firstAttrSet.Values[0].RawData.ByteArrayToHex()
+                );
 
                 CryptographicAttributeObject secondAttrSet = attrs[1];
                 Assert.Equal(Oids.MessageDigest, secondAttrSet.Oid.Value);
@@ -1284,12 +1368,23 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [InlineData("0.0", "010100", false)]
         [InlineData(Oids.Pkcs7Hashed, "010100", false)]
         [InlineData(Oids.Pkcs7Hashed, "3000", false)]
-        public static void SignIdentifiedContent(string oidValue, string contentHex, bool netfxProblem)
+        public static void SignIdentifiedContent(
+            string oidValue,
+            string contentHex,
+            bool netfxProblem
+        )
         {
             SignedCms signedCms = new SignedCms(
-                new ContentInfo(new Oid(oidValue, "Some Friendly Name"), contentHex.HexToByteArray()));
+                new ContentInfo(
+                    new Oid(oidValue, "Some Friendly Name"),
+                    contentHex.HexToByteArray()
+                )
+            );
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 try
                 {
@@ -1351,17 +1446,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
             // Assert.NoThrows
             cms.CheckSignature(true);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(
-                        SubjectIdentifierType.IssuerAndSerialNumber,
-                        cert));
+                    new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert)
+                );
 
                 cms.ComputeSignature(
-                    new CmsSigner(
-                        SubjectIdentifierType.SubjectKeyIdentifier,
-                        cert));
+                    new CmsSigner(SubjectIdentifierType.SubjectKeyIdentifier, cert)
+                );
             }
 
             // Assert.NoThrows
@@ -1391,9 +1487,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms signedCms = new SignedCms();
             signedCms.Decode(SignedDocuments.RsaPkcs1SignedSha1DeclaredSha256WithRsa);
 
-            Assert.Throws<CryptographicException>(() => {
-                signedCms.CheckSignature(true);
-            });
+            Assert.Throws<CryptographicException>(
+                () =>
+                {
+                    signedCms.CheckSignature(true);
+                }
+            );
         }
 
         [Theory]
@@ -1403,12 +1502,23 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [InlineData(" 1.1", "010100", null)]
         [InlineData("1.1 ", "010100", null)]
         [InlineData("1 1", "010100", null)]
-        public static void SignIdentifiedContent_BadOid(string oidValueIn, string contentHex, string oidValueOut)
+        public static void SignIdentifiedContent_BadOid(
+            string oidValueIn,
+            string contentHex,
+            string oidValueOut
+        )
         {
             SignedCms signedCms = new SignedCms(
-                new ContentInfo(new Oid(oidValueIn, "Some Friendly Name"), contentHex.HexToByteArray()));
+                new ContentInfo(
+                    new Oid(oidValueIn, "Some Friendly Name"),
+                    contentHex.HexToByteArray()
+                )
+            );
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 Action signAction = () => signedCms.ComputeSignature(new CmsSigner(cert));
 
@@ -1436,7 +1546,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CheckSignedEncrypted(
                 SignedDocuments.SignedCmsOverEnvelopedCms_IssuerSerial_NetFx,
-                SubjectIdentifierType.IssuerAndSerialNumber);
+                SubjectIdentifierType.IssuerAndSerialNumber
+            );
         }
 
         [Fact]
@@ -1444,7 +1555,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CheckSignedEncrypted(
                 SignedDocuments.SignedCmsOverEnvelopedCms_SKID_NetFx,
-                SubjectIdentifierType.SubjectKeyIdentifier);
+                SubjectIdentifierType.SubjectKeyIdentifier
+            );
         }
 
         [Fact]
@@ -1452,7 +1564,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CheckSignedEncrypted(
                 SignedDocuments.SignedCmsOverEnvelopedCms_IssuerSerial_CoreFx,
-                SubjectIdentifierType.IssuerAndSerialNumber);
+                SubjectIdentifierType.IssuerAndSerialNumber
+            );
         }
 
         [Fact]
@@ -1460,7 +1573,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CheckSignedEncrypted(
                 SignedDocuments.SignedCmsOverEnvelopedCms_SKID_CoreFx,
-                SubjectIdentifierType.SubjectKeyIdentifier);
+                SubjectIdentifierType.SubjectKeyIdentifier
+            );
         }
 
         [Theory]
@@ -1479,7 +1593,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.Encode();
         }
 
-        private static void CheckSignedEncrypted(byte[] docBytes, SubjectIdentifierType expectedType)
+        private static void CheckSignedEncrypted(
+            byte[] docBytes,
+            SubjectIdentifierType expectedType
+        )
         {
             SignedCms signedCms = new SignedCms();
             signedCms.Decode(docBytes);
@@ -1496,7 +1613,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             EnvelopedCms envelopedCms = new EnvelopedCms();
             envelopedCms.Decode(signedCms.ContentInfo.Content);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 envelopedCms.Decrypt(new X509Certificate2Collection(cert));
             }
@@ -1508,12 +1628,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void CheckNoSignature_FromNetFx()
         {
             byte[] encoded = (
-                "30819F06092A864886F70D010702A0819130818E020101310F300D0609608648" +
-                "0165030402010500301406092A864886F70D010701A007040509080706053162" +
-                "3060020101301C3017311530130603550403130C44756D6D79205369676E6572" +
-                "020100300D06096086480165030402010500300C06082B060105050706020500" +
-                "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02" +
-                "8674"
+                "30819F06092A864886F70D010702A0819130818E020101310F300D0609608648"
+                + "0165030402010500301406092A864886F70D010701A007040509080706053162"
+                + "3060020101301C3017311530130603550403130C44756D6D79205369676E6572"
+                + "020100300D06096086480165030402010500300C06082B060105050706020500"
+                + "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02"
+                + "8674"
             ).HexToByteArray();
 
             CheckNoSignature(encoded);
@@ -1525,12 +1645,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             // CheckNoSignature_FromNetFx with the algorithm identifier changed from
             // 1.3.6.1.5.5.7.6.2 to 10.3.6.1.5.5.7.6.10
             byte[] encoded = (
-                "30819F06092A864886F70D010702A0819130818E020101310F300D0609608648" +
-                "0165030402010500301406092A864886F70D010701A007040509080706053162" +
-                "3060020101301C3017311530130603550403130C44756D6D79205369676E6572" +
-                "020100300D06096086480165030402010500300C06082B0601050507060A0500" +
-                "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02" +
-                "8674"
+                "30819F06092A864886F70D010702A0819130818E020101310F300D0609608648"
+                + "0165030402010500301406092A864886F70D010701A007040509080706053162"
+                + "3060020101301C3017311530130603550403130C44756D6D79205369676E6572"
+                + "020100300D06096086480165030402010500300C06082B0601050507060A0500"
+                + "0420AF5F6F5C5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C02"
+                + "8674"
             ).HexToByteArray();
 
             CheckNoSignature(encoded, badOid: true);
@@ -1540,11 +1660,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void CheckNoSignature_FromCoreFx()
         {
             byte[] encoded = (
-                "30819906092A864886F70D010702A0818B308188020101310D300B0609608648" +
-                "016503040201301406092A864886F70D010701A00704050908070605315E305C" +
-                "020101301C3017311530130603550403130C44756D6D79205369676E65720201" +
-                "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C" +
-                "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
+                "30819906092A864886F70D010702A0818B308188020101310D300B0609608648"
+                + "016503040201301406092A864886F70D010701A00704050908070605315E305C"
+                + "020101301C3017311530130603550403130C44756D6D79205369676E65720201"
+                + "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C"
+                + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
             ).HexToByteArray();
 
             CheckNoSignature(encoded);
@@ -1556,11 +1676,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
             // CheckNoSignature_FromCoreFx with the algorithm identifier changed from
             // 1.3.6.1.5.5.7.6.2 to 10.3.6.1.5.5.7.6.10
             byte[] encoded = (
-                "30819906092A864886F70D010702A0818B308188020101310D300B0609608648" +
-                "016503040201301406092A864886F70D010701A00704050908070605315E305C" +
-                "020101301C3017311530130603550403130C44756D6D79205369676E65720201" +
-                "00300B0609608648016503040201300A06082B0601050507060A0420AF5F6F5C" +
-                "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
+                "30819906092A864886F70D010702A0818B308188020101310D300B0609608648"
+                + "016503040201301406092A864886F70D010701A00704050908070605315E305C"
+                + "020101301C3017311530130603550403130C44756D6D79205369676E65720201"
+                + "00300B0609608648016503040201300A06082B0601050507060A0420AF5F6F5C"
+                + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
             ).HexToByteArray();
 
             CheckNoSignature(encoded, badOid: true);
@@ -1572,18 +1692,21 @@ namespace System.Security.Cryptography.Pkcs.Tests
             // CheckNoSignature_FromCoreFx with the issuer name changed from "Dummy Cert"
             // to "Dumny Cert" (m => n / 0x6D => 0x6E)
             byte[] encoded = (
-                "30819906092A864886F70D010702A0818B308188020101310D300B0609608648" +
-                "016503040201301406092A864886F70D010701A00704050908070605315E305C" +
-                "020101301C3017311530130603550403130C44756D6E79205369676E65720201" +
-                "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C" +
-                "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
+                "30819906092A864886F70D010702A0818B308188020101310D300B0609608648"
+                + "016503040201301406092A864886F70D010701A00704050908070605315E305C"
+                + "020101301C3017311530130603550403130C44756D6E79205369676E65720201"
+                + "00300B0609608648016503040201300A06082B060105050706020420AF5F6F5C"
+                + "5967C377E49193ECA1EE0B98300A171CD3165C9A2410E8FB7C028674"
             ).HexToByteArray();
 
             SignedCms cms = new SignedCms();
             cms.Decode(encoded);
             SignerInfoCollection signers = cms.SignerInfos;
             Assert.Equal(1, signers.Count);
-            Assert.Equal(SubjectIdentifierType.IssuerAndSerialNumber, signers[0].SignerIdentifier.Type);
+            Assert.Equal(
+                SubjectIdentifierType.IssuerAndSerialNumber,
+                signers[0].SignerIdentifier.Type
+            );
             Assert.ThrowsAny<CryptographicException>(() => cms.CheckSignature(true));
             Assert.ThrowsAny<CryptographicException>(() => signers[0].CheckSignature(true));
 
@@ -1592,7 +1715,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             signers[0].CheckHash();
         }
 
-        private static void CheckNoSignature(byte[] encoded, bool badOid=false)
+        private static void CheckNoSignature(byte[] encoded, bool badOid = false)
         {
             SignedCms cms = new SignedCms();
             cms.Decode(encoded);

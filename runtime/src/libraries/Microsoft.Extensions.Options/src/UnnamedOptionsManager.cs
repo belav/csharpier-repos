@@ -6,9 +6,9 @@ using System.Threading;
 
 namespace Microsoft.Extensions.Options
 {
-    internal sealed class UnnamedOptionsManager<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions> :
-        IOptions<TOptions>
-        where TOptions : class
+    internal sealed class UnnamedOptionsManager<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > : IOptions<TOptions> where TOptions : class
     {
         private readonly IOptionsFactory<TOptions> _factory;
         private volatile object _syncObj;
@@ -25,7 +25,9 @@ namespace Microsoft.Extensions.Options
                     return value;
                 }
 
-                lock (_syncObj ?? Interlocked.CompareExchange(ref _syncObj, new object(), null) ?? _syncObj)
+                lock (_syncObj
+                    ?? Interlocked.CompareExchange(ref _syncObj, new object(), null)
+                    ?? _syncObj)
                 {
                     return _value ??= _factory.Create(Options.DefaultName);
                 }

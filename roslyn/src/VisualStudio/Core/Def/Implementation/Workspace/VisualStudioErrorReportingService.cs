@@ -17,8 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         private readonly IInfoBarService _infoBarService;
 
-        public VisualStudioErrorReportingService(IInfoBarService infoBarService)
-            => _infoBarService = infoBarService;
+        public VisualStudioErrorReportingService(IInfoBarService infoBarService) =>
+            _infoBarService = infoBarService;
 
         public string HostDisplayName => "Visual Studio";
 
@@ -27,10 +27,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _infoBarService.ShowInfoBar(message, items);
 
             // Have to use KeyValueLogMessage so it gets reported in telemetry
-            Logger.Log(FunctionId.VS_ErrorReportingService_ShowGlobalErrorInfo, KeyValueLogMessage.Create(m =>
-            {
-                m["errorMessage"] = message;
-            }));
+            Logger.Log(
+                FunctionId.VS_ErrorReportingService_ShowGlobalErrorInfo,
+                KeyValueLogMessage.Create(
+                    m =>
+                    {
+                        m["errorMessage"] = message;
+                    }
+                )
+            );
         }
 
         public void ShowDetailedErrorInfo(Exception exception)
@@ -53,24 +58,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // use info bar to show warning to users
             var infoBarUIs = new List<InfoBarUI>();
 
-            infoBarUIs.Add(new InfoBarUI(
-                ServicesVSResources.Learn_more,
-                InfoBarUI.UIKind.HyperLink,
-                () => VisualStudioNavigateToLinkService.StartBrowser(new Uri("https://go.microsoft.com/fwlink/?linkid=842308")),
-                closeAfterAction: false));
+            infoBarUIs.Add(
+                new InfoBarUI(
+                    ServicesVSResources.Learn_more,
+                    InfoBarUI.UIKind.HyperLink,
+                    () =>
+                        VisualStudioNavigateToLinkService.StartBrowser(
+                            new Uri("https://go.microsoft.com/fwlink/?linkid=842308")
+                        ),
+                    closeAfterAction: false
+                )
+            );
 
             if (exception != null)
             {
-                infoBarUIs.Add(new InfoBarUI(
-                    WorkspacesResources.Show_Stack_Trace,
-                    InfoBarUI.UIKind.HyperLink,
-                    () => ShowDetailedErrorInfo(exception),
-                    closeAfterAction: true));
+                infoBarUIs.Add(
+                    new InfoBarUI(
+                        WorkspacesResources.Show_Stack_Trace,
+                        InfoBarUI.UIKind.HyperLink,
+                        () => ShowDetailedErrorInfo(exception),
+                        closeAfterAction: true
+                    )
+                );
             }
 
             ShowGlobalErrorInfo(
                 ServicesVSResources.Unfortunately_a_process_used_by_Visual_Studio_has_encountered_an_unrecoverable_error_We_recommend_saving_your_work_and_then_closing_and_restarting_Visual_Studio,
-                infoBarUIs.ToArray());
+                infoBarUIs.ToArray()
+            );
         }
 
         public void ShowFeatureNotAvailableErrorInfo(string message, Exception? exception)
@@ -79,11 +94,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             if (exception != null)
             {
-                infoBarUIs.Add(new InfoBarUI(
-                    WorkspacesResources.Show_Stack_Trace,
-                    InfoBarUI.UIKind.HyperLink,
-                    () => ShowDetailedErrorInfo(exception),
-                    closeAfterAction: true));
+                infoBarUIs.Add(
+                    new InfoBarUI(
+                        WorkspacesResources.Show_Stack_Trace,
+                        InfoBarUI.UIKind.HyperLink,
+                        () => ShowDetailedErrorInfo(exception),
+                        closeAfterAction: true
+                    )
+                );
             }
 
             ShowGlobalErrorInfo(message, infoBarUIs.ToArray());

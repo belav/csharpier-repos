@@ -22,14 +22,26 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             var filter = new ControllerViewDataAttributeFilter(Array.Empty<LifecycleProperty>());
             var controller = new object();
             var httpContext = new DefaultHttpContext();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-            var context = new ActionExecutingContext(actionContext, new IFilterMetadata[0], new Dictionary<string, object>(), controller);
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
+            var context = new ActionExecutingContext(
+                actionContext,
+                new IFilterMetadata[0],
+                new Dictionary<string, object>(),
+                controller
+            );
 
             // Act
             filter.OnActionExecuting(context);
 
             // Assert
-            var feature = Assert.Single(httpContext.Features, f => f.Key == typeof(IViewDataValuesProviderFeature));
+            var feature = Assert.Single(
+                httpContext.Features,
+                f => f.Key == typeof(IViewDataValuesProviderFeature)
+            );
             Assert.Same(filter, feature.Value);
         }
 
@@ -40,8 +52,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             var filter = new ControllerViewDataAttributeFilter(Array.Empty<LifecycleProperty>());
             var controller = new object();
             var httpContext = new DefaultHttpContext();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-            var context = new ActionExecutingContext(actionContext, new IFilterMetadata[0], new Dictionary<string, object>(), controller);
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
+            var context = new ActionExecutingContext(
+                actionContext,
+                new IFilterMetadata[0],
+                new Dictionary<string, object>(),
+                controller
+            );
 
             // Act
             filter.OnActionExecuting(context);
@@ -67,7 +88,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             {
                 Subject = controller,
             };
-            var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+            var viewData = new ViewDataDictionary(
+                new EmptyModelMetadataProvider(),
+                new ModelStateDictionary()
+            );
 
             // Act
             controller.Prop1 = "New-Value";
@@ -85,7 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 {
                     Assert.Equal("Prop2", kvp.Key);
                     Assert.Equal("Test", kvp.Value);
-                });
+                }
+            );
         }
 
         public class TestController

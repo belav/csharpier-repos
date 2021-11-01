@@ -43,18 +43,27 @@ namespace Templates.Test.Helpers
             bool published,
             bool hasListeningUri = true,
             bool usePublishedAppHost = false,
-            ILogger logger = null)
+            ILogger logger = null
+        )
         {
             _developmentCertificate = cert;
             _output = output;
-            _httpClient = new HttpClient(new HttpClientHandler()
-            {
-                AllowAutoRedirect = true,
-                UseCookies = true,
-                CookieContainer = new CookieContainer(),
-                ServerCertificateCustomValidationCallback = (request, certificate, chain, errors) => (certificate.Subject != "CN=localhost" && errors == SslPolicyErrors.None) || certificate?.Thumbprint == _developmentCertificate.CertificateThumbprint,
-            })
-            {
+            _httpClient = new HttpClient(
+                new HttpClientHandler()
+                {
+                    AllowAutoRedirect = true,
+                    UseCookies = true,
+                    CookieContainer = new CookieContainer(),
+                    ServerCertificateCustomValidationCallback = (
+                        request,
+                        certificate,
+                        chain,
+                        errors
+                    ) =>
+                        (certificate.Subject != "CN=localhost" && errors == SslPolicyErrors.None)
+                        || certificate?.Thumbprint == _developmentCertificate.CertificateThumbprint,
+                }
+            ) {
                 Timeout = TimeSpan.FromMinutes(2)
             };
 
@@ -67,7 +76,10 @@ namespace Templates.Test.Helpers
                 if (usePublishedAppHost)
                 {
                     // When publishingu used the app host to run the app. This makes it easy to consistently run for regular and single-file publish
-                    process = Path.ChangeExtension(dllPath, OperatingSystem.IsWindows() ? ".exe" : null);
+                    process = Path.ChangeExtension(
+                        dllPath,
+                        OperatingSystem.IsWindows() ? ".exe" : null
+                    );
                     arguments = null;
                 }
                 else
@@ -86,11 +98,19 @@ namespace Templates.Test.Helpers
 
             var finalEnvironmentVariables = new Dictionary<string, string>(environmentVariables)
             {
-                ["ASPNETCORE_Kestrel__Certificates__Default__Path"] = _developmentCertificate.CertificatePath,
-                ["ASPNETCORE_Kestrel__Certificates__Default__Password"] = _developmentCertificate.CertificatePassword,
+                ["ASPNETCORE_Kestrel__Certificates__Default__Path"] =
+                    _developmentCertificate.CertificatePath,
+                ["ASPNETCORE_Kestrel__Certificates__Default__Password"] =
+                    _developmentCertificate.CertificatePassword,
             };
 
-            Process = ProcessEx.Run(output, workingDirectory, process, arguments, envVars: finalEnvironmentVariables);
+            Process = ProcessEx.Run(
+                output,
+                workingDirectory,
+                process,
+                arguments,
+                envVars: finalEnvironmentVariables
+            );
 
             logger?.LogInformation("AspNetProcess - process started");
 
@@ -108,7 +128,6 @@ namespace Templates.Test.Helpers
             await page.GoToAsync(ListeningUri.AbsoluteUri);
         }
 
-
         public async Task AssertPagesOk(IEnumerable<Page> pages)
         {
             foreach (var page in pages)
@@ -120,13 +139,17 @@ namespace Templates.Test.Helpers
 
         public async Task ContainsLinks(Page page)
         {
-            var response = await RetryHelper.RetryRequest(async () =>
-            {
-                var request = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri(ListeningUri, page.Url));
-                return await _httpClient.SendAsync(request);
-            }, logger: NullLogger.Instance);
+            var response = await RetryHelper.RetryRequest(
+                async () =>
+                {
+                    var request = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        new Uri(ListeningUri, page.Url)
+                    );
+                    return await _httpClient.SendAsync(request);
+                },
+                logger: NullLogger.Instance
+            );
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var parser = new HtmlParser();
@@ -145,22 +168,34 @@ namespace Templates.Test.Helpers
                 }
             }
 
-            Assert.True(html.Links.Length == page.Links.Count(), $"Expected {page.Url} to have {page.Links.Count()} links but it had {html.Links.Length}");
+            Assert.True(
+                html.Links.Length == page.Links.Count(),
+                $"Expected {page.Url} to have {page.Links.Count()} links but it had {html.Links.Length}"
+            );
             foreach ((var link, var expectedLink) in html.Links.Zip(page.Links, Tuple.Create))
             {
                 IHtmlAnchorElement anchor = (IHtmlAnchorElement)link;
                 if (string.Equals(anchor.Protocol, "about:"))
                 {
-                    Assert.True(anchor.PathName.EndsWith(expectedLink, StringComparison.Ordinal), $"Expected next link on {page.Url} to be {expectedLink} but it was {anchor.PathName}.");
+                    Assert.True(
+                        anchor.PathName.EndsWith(expectedLink, StringComparison.Ordinal),
+                        $"Expected next link on {page.Url} to be {expectedLink} but it was {anchor.PathName}."
+                    );
                     await AssertOk(anchor.PathName);
                 }
                 else
                 {
-                    Assert.True(string.Equals(anchor.Href, expectedLink), $"Expected next link to be {expectedLink} but it was {anchor.Href}.");
-                    var result = await RetryHelper.RetryRequest(async () =>
-                    {
-                        return await _httpClient.GetAsync(anchor.Href);
-                    }, logger: NullLogger.Instance);
+                    Assert.True(
+                        string.Equals(anchor.Href, expectedLink),
+                        $"Expected next link to be {expectedLink} but it was {anchor.Href}."
+                    );
+                    var result = await RetryHelper.RetryRequest(
+                        async () =>
+                        {
+                            return await _httpClient.GetAsync(anchor.Href);
+                        },
+                        logger: NullLogger.Instance
+                    );
 
                     Assert.True(IsSuccessStatusCode(result), $"{anchor.Href} is a broken link!");
                 }
@@ -177,13 +212,18 @@ namespace Templates.Test.Helpers
             {
                 listeningMessage = listeningMessage.Trim();
                 // Verify we have a valid URL to make requests to
-                var listeningUrlString = listeningMessage.Substring(listeningMessage.IndexOf(
-                    ListeningMessagePrefix, StringComparison.Ordinal) + ListeningMessagePrefix.Length);
+                var listeningUrlString = listeningMessage.Substring(
+                    listeningMessage.IndexOf(ListeningMessagePrefix, StringComparison.Ordinal)
+                        + ListeningMessagePrefix.Length
+                );
 
-                output.WriteLine($"Detected that ASP.NET application is accepting connections on: {listeningUrlString}");
-                listeningUrlString = listeningUrlString.Substring(0, listeningUrlString.IndexOf(':')) +
-                    "://localhost" +
-                    listeningUrlString.Substring(listeningUrlString.LastIndexOf(':'));
+                output.WriteLine(
+                    $"Detected that ASP.NET application is accepting connections on: {listeningUrlString}"
+                );
+                listeningUrlString =
+                    listeningUrlString.Substring(0, listeningUrlString.IndexOf(':'))
+                    + "://localhost"
+                    + listeningUrlString.Substring(listeningUrlString.LastIndexOf(':'));
 
                 output.WriteLine("Sending requests to " + listeningUrlString);
                 return new Uri(listeningUrlString, UriKind.Absolute);
@@ -211,12 +251,12 @@ namespace Templates.Test.Helpers
                     }
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
+            catch (OperationCanceledException) { }
 
-            throw new InvalidOperationException(@$"Couldn't find listening url:
-{string.Join(Environment.NewLine, buffer)}");
+            throw new InvalidOperationException(
+                @$"Couldn't find listening url:
+{string.Join(Environment.NewLine, buffer)}"
+            );
         }
 
         private bool IsSuccessStatusCode(HttpResponseMessage response)
@@ -224,35 +264,51 @@ namespace Templates.Test.Helpers
             return response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.Redirect;
         }
 
-        public Task AssertOk(string requestUrl)
-            => AssertStatusCode(requestUrl, HttpStatusCode.OK);
+        public Task AssertOk(string requestUrl) => AssertStatusCode(requestUrl, HttpStatusCode.OK);
 
-        public Task AssertNotFound(string requestUrl)
-            => AssertStatusCode(requestUrl, HttpStatusCode.NotFound);
+        public Task AssertNotFound(string requestUrl) =>
+            AssertStatusCode(requestUrl, HttpStatusCode.NotFound);
 
         internal Task<HttpResponseMessage> SendRequest(string path) =>
-            RetryHelper.RetryRequest(() => _httpClient.GetAsync(new Uri(ListeningUri, path)), logger: NullLogger.Instance);
+            RetryHelper.RetryRequest(
+                () => _httpClient.GetAsync(new Uri(ListeningUri, path)),
+                logger: NullLogger.Instance
+            );
 
-        internal Task<HttpResponseMessage> SendRequest(Func<HttpRequestMessage> requestFactory)
-            => RetryHelper.RetryRequest(() => _httpClient.SendAsync(requestFactory()), logger: NullLogger.Instance);
+        internal Task<HttpResponseMessage> SendRequest(Func<HttpRequestMessage> requestFactory) =>
+            RetryHelper.RetryRequest(
+                () => _httpClient.SendAsync(requestFactory()),
+                logger: NullLogger.Instance
+            );
 
-        public async Task AssertStatusCode(string requestUrl, HttpStatusCode statusCode, string acceptContentType = null)
+        public async Task AssertStatusCode(
+            string requestUrl,
+            HttpStatusCode statusCode,
+            string acceptContentType = null
+        )
         {
-            var response = await RetryHelper.RetryRequest(() =>
-            {
-                var request = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri(ListeningUri, requestUrl));
-
-                if (!string.IsNullOrEmpty(acceptContentType))
+            var response = await RetryHelper.RetryRequest(
+                () =>
                 {
-                    request.Headers.Add("Accept", acceptContentType);
-                }
+                    var request = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        new Uri(ListeningUri, requestUrl)
+                    );
 
-                return _httpClient.SendAsync(request);
-            }, logger: NullLogger.Instance);
+                    if (!string.IsNullOrEmpty(acceptContentType))
+                    {
+                        request.Headers.Add("Accept", acceptContentType);
+                    }
 
-            Assert.True(statusCode == response.StatusCode, $"Expected {requestUrl} to have status '{statusCode}' but it was '{response.StatusCode}'.");
+                    return _httpClient.SendAsync(request);
+                },
+                logger: NullLogger.Instance
+            );
+
+            Assert.True(
+                statusCode == response.StatusCode,
+                $"Expected {requestUrl} to have status '{statusCode}' but it was '{response.StatusCode}'."
+            );
         }
 
         public void Dispose()

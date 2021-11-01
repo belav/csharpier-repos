@@ -23,26 +23,14 @@ namespace SerializationTestTypes
 
         public virtual string Data
         {
-            get
-            {
-                return data;
-            }
-            set
-            {
-                data = value;
-            }
+            get { return data; }
+            set { data = value; }
         }
 
         public virtual string Data2
         {
-            get
-            {
-                return data2;
-            }
-            set
-            {
-                data2 = value;
-            }
+            get { return data2; }
+            set { data2 = value; }
         }
 
         public BaseDC(bool init)
@@ -67,26 +55,14 @@ namespace SerializationTestTypes
 
         public virtual string Data
         {
-            get
-            {
-                return data;
-            }
-            set
-            {
-                data = value;
-            }
+            get { return data; }
+            set { data = value; }
         }
 
         public virtual string Data2
         {
-            get
-            {
-                return data2;
-            }
-            set
-            {
-                data2 = value;
-            }
+            get { return data2; }
+            set { data2 = value; }
         }
 
         public BaseSerializable(bool init)
@@ -113,42 +89,23 @@ namespace SerializationTestTypes
 
         public override string Data
         {
-            get
-            {
-                return data0;
-            }
-            set
-            {
-                data0 = value;
-            }
+            get { return data0; }
+            set { data0 = value; }
         }
 
         public virtual string Data1
         {
-            get
-            {
-                return data1;
-            }
-            set
-            {
-                data1 = value;
-            }
+            get { return data1; }
+            set { data1 = value; }
         }
 
         public string Data3
         {
-            get
-            {
-                return data3;
-            }
-            set
-            {
-                data3 = value;
-            }
+            get { return data3; }
+            set { data3 = value; }
         }
 
-        public DerivedDC(bool init)
-            : base(init)
+        public DerivedDC(bool init) : base(init)
         {
             data0 = "TestString0";
             data1 = "TestString1";
@@ -167,42 +124,23 @@ namespace SerializationTestTypes
 
         public override string Data
         {
-            get
-            {
-                return data0;
-            }
-            set
-            {
-                data0 = value;
-            }
+            get { return data0; }
+            set { data0 = value; }
         }
 
         public virtual string Data1
         {
-            get
-            {
-                return data1;
-            }
-            set
-            {
-                data1 = value;
-            }
+            get { return data1; }
+            set { data1 = value; }
         }
 
         public string Data3
         {
-            get
-            {
-                return data3;
-            }
-            set
-            {
-                data3 = value;
-            }
+            get { return data3; }
+            set { data3 = value; }
         }
 
-        public DerivedSerializable(bool init)
-            : base(init)
+        public DerivedSerializable(bool init) : base(init)
         {
             data0 = "TestString0";
             data1 = "TestString1";
@@ -238,42 +176,23 @@ namespace SerializationTestTypes
 
         public override string Data
         {
-            get
-            {
-                return data11;
-            }
-            set
-            {
-                data11 = value;
-            }
+            get { return data11; }
+            set { data11 = value; }
         }
 
         public override string Data1
         {
-            get
-            {
-                return data12;
-            }
-            set
-            {
-                data12 = value;
-            }
+            get { return data12; }
+            set { data12 = value; }
         }
 
         public string Data4
         {
-            get
-            {
-                return data4;
-            }
-            set
-            {
-                data4 = value;
-            }
+            get { return data4; }
+            set { data4 = value; }
         }
 
-        public Derived2DC(bool init)
-            : base(init)
+        public Derived2DC(bool init) : base(init)
         {
             data11 = "TestString11";
             data12 = "TestString12";
@@ -298,14 +217,18 @@ namespace SerializationTestTypes
         public string Data22;
     }
 
-    public class DerivedIXmlSerializable_POCOBaseDCNOISRef : DerivedPOCOBaseDCNOISRef, IXmlSerializable
+    public class DerivedIXmlSerializable_POCOBaseDCNOISRef
+        : DerivedPOCOBaseDCNOISRef,
+          IXmlSerializable
     {
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             XmlSchema schema = new XmlSchema();
             XmlSchemaElement element1 = new XmlSchemaElement();
             element1.Name = "Data";
-            element1.SchemaType = XmlSchemaSimpleType.GetBuiltInComplexType(new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema"));
+            element1.SchemaType = XmlSchemaSimpleType.GetBuiltInComplexType(
+                new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema")
+            );
             schema.Items.Add(element1);
             schema.Id = "Schema1";
             return schema;
@@ -340,20 +263,12 @@ namespace SerializationTestTypes
             _internalData.Insert(index, item);
         }
 
-        public void RemoveAt(int index)
-        {
-        }
+        public void RemoveAt(int index) { }
 
         public string this[int index]
         {
-            get
-            {
-                return _internalData[index];
-            }
-            set
-            {
-                _internalData[index] = value;
-            }
+            get { return _internalData[index]; }
+            set { _internalData[index] = value; }
         }
 
         public void Add(string item)
@@ -361,18 +276,14 @@ namespace SerializationTestTypes
             _internalData.Add(item);
         }
 
-        public void Clear()
-        {
-        }
+        public void Clear() { }
 
         public bool Contains(string item)
         {
             return _internalData.Contains(item);
         }
 
-        public void CopyTo(string[] array, int arrayIndex)
-        {
-        }
+        public void CopyTo(string[] array, int arrayIndex) { }
 
         public int Count
         {
@@ -418,42 +329,23 @@ namespace SerializationTestTypes
 
         public override string Data
         {
-            get
-            {
-                return data00;
-            }
-            set
-            {
-                data00 = value;
-            }
+            get { return data00; }
+            set { data00 = value; }
         }
 
         public override string Data1
         {
-            get
-            {
-                return data122;
-            }
-            set
-            {
-                data122 = value;
-            }
+            get { return data122; }
+            set { data122 = value; }
         }
 
         public string Data4
         {
-            get
-            {
-                return data4;
-            }
-            set
-            {
-                data4 = value;
-            }
+            get { return data4; }
+            set { data4 = value; }
         }
 
-        public Derived2Serializable(bool init)
-            : base(init)
+        public Derived2Serializable(bool init) : base(init)
         {
             data00 = "TestString00";
             data122 = "TestString122";
@@ -475,42 +367,23 @@ namespace SerializationTestTypes
 
         public override string Data
         {
-            get
-            {
-                return data00;
-            }
-            set
-            {
-                data00 = value;
-            }
+            get { return data00; }
+            set { data00 = value; }
         }
 
         public override string Data1
         {
-            get
-            {
-                return data122;
-            }
-            set
-            {
-                data122 = value;
-            }
+            get { return data122; }
+            set { data122 = value; }
         }
 
         public string Data4
         {
-            get
-            {
-                return data4;
-            }
-            set
-            {
-                data4 = value;
-            }
+            get { return data4; }
+            set { data4 = value; }
         }
 
-        public Derived2SerializablePositive(bool init)
-            : base(init)
+        public Derived2SerializablePositive(bool init) : base(init)
         {
             data00 = "TestString00";
             data122 = "TestString122";
@@ -538,8 +411,7 @@ namespace SerializationTestTypes
         public SimpleDCWithRef RefData;
 
         public Derived31Derived2SerializablePOCO() { }
-        public Derived31Derived2SerializablePOCO(bool init)
-            : base(init)
+        public Derived31Derived2SerializablePOCO(bool init) : base(init)
         {
             SimpleDCWithRefData = new SimpleDCWithRef(true);
             RefData = SimpleDCWithRefData;
@@ -566,8 +438,7 @@ namespace SerializationTestTypes
         public SimpleDCWithRef RefData;
 
         public Derived6Derived2SerializablePOCO() { }
-        public Derived6Derived2SerializablePOCO(bool init)
-            : base(init)
+        public Derived6Derived2SerializablePOCO(bool init) : base(init)
         {
             SimpleDCWithRefData = new SimpleDCWithRef(true);
             RefData = SimpleDCWithRefData;

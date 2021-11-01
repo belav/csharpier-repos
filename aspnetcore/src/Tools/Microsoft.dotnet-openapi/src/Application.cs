@@ -22,7 +22,8 @@ namespace Microsoft.DotNet.OpenApi
             string workingDirectory,
             IHttpClientWrapper httpClient,
             TextWriter output = null,
-            TextWriter error = null)
+            TextWriter error = null
+        )
         {
             Out = output ?? Out;
             Error = error ?? Error;
@@ -66,7 +67,6 @@ namespace Microsoft.DotNet.OpenApi
                 }
                 return 1;
             }
-
             catch (ArgumentException ex)
             {
                 // Don't show a call stack when we have unneeded arguments, just print the error message.

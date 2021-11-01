@@ -36,7 +36,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     An <see cref="IConventionAnnotatableBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionAnnotatableBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+        IConventionAnnotatableBuilder? HasAnnotation(
+            string name,
+            object? value,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -53,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         IConventionAnnotatableBuilder? HasNonNullAnnotation(
             string name,
             object? value,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets or removes the annotation stored under the given name.
@@ -69,8 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         IConventionAnnotatableBuilder? SetOrRemoveAnnotation(
             string name,
             object? value,
-            bool fromDataAnnotation = false)
-            => HasNonNullAnnotation(name, value, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) => HasNonNullAnnotation(name, value, fromDataAnnotation);
 
         /// <summary>
         ///     Returns a value indicating whether an annotation with the given name and value can be set from this configuration source.
@@ -89,7 +94,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     An <see cref="IConventionAnnotatableBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionAnnotatableBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+        IConventionAnnotatableBuilder? HasNoAnnotation(
+            string name,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Removes the annotation with the given name from this object.
@@ -100,8 +108,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     An <see cref="IConventionAnnotatableBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
         /// </returns>
         [Obsolete("Use HasNoAnnotation")]
-        IConventionAnnotatableBuilder? RemoveAnnotation(string name, bool fromDataAnnotation = false)
-            => HasNoAnnotation(name, fromDataAnnotation);
+        IConventionAnnotatableBuilder? RemoveAnnotation(
+            string name,
+            bool fromDataAnnotation = false
+        ) => HasNoAnnotation(name, fromDataAnnotation);
 
         /// <summary>
         ///     Returns a value indicating whether an annotation with the given name can be removed using this configuration source.

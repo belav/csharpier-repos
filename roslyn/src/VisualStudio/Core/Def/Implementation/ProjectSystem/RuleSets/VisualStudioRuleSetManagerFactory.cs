@@ -29,14 +29,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public VisualStudioRuleSetManagerFactory(
             FileChangeWatcherProvider fileChangeWatcherProvider,
             IForegroundNotificationService foregroundNotificationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _fileChangeWatcherProvider = fileChangeWatcherProvider;
             _foregroundNotificationService = foregroundNotificationService;
             _listener = listenerProvider.GetListener(FeatureAttribute.RuleSetEditor);
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new VisualStudioRuleSetManager(_fileChangeWatcherProvider.Watcher, _foregroundNotificationService, _listener);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new VisualStudioRuleSetManager(
+                _fileChangeWatcherProvider.Watcher,
+                _foregroundNotificationService,
+                _listener
+            );
     }
 }

@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// </summary>
     public class DefaultOutputFormatterSelector : OutputFormatterSelector
     {
-        private static readonly Comparison<MediaTypeSegmentWithQuality> _sortFunction = (left, right) =>
+        private static readonly Comparison<MediaTypeSegmentWithQuality> _sortFunction = (
+            left,
+            right
+        ) =>
         {
             return left.Quality > right.Quality ? -1 : (left.Quality == right.Quality ? 0 : 1);
         };
@@ -36,7 +39,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </summary>
         /// <param name="options">Used to access <see cref="MvcOptions"/>.</param>
         /// <param name="loggerFactory">The logger factory.</param>
-        public DefaultOutputFormatterSelector(IOptions<MvcOptions> options, ILoggerFactory loggerFactory)
+        public DefaultOutputFormatterSelector(
+            IOptions<MvcOptions> options,
+            ILoggerFactory loggerFactory
+        )
         {
             if (options == null)
             {
@@ -56,7 +62,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc/>
-        public override IOutputFormatter? SelectFormatter(OutputFormatterCanWriteContext context, IList<IOutputFormatter> formatters, MediaTypeCollection contentTypes)
+        public override IOutputFormatter? SelectFormatter(
+            OutputFormatterCanWriteContext context,
+            IList<IOutputFormatter> formatters,
+            MediaTypeCollection contentTypes
+        )
         {
             if (context == null)
             {
@@ -80,10 +90,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 formatters = _formatters;
                 if (formatters.Count == 0)
                 {
-                    throw new InvalidOperationException(Resources.FormatOutputFormattersAreRequired(
-                        typeof(MvcOptions).FullName,
-                        nameof(MvcOptions.OutputFormatters),
-                        typeof(IOutputFormatter).FullName));
+                    throw new InvalidOperationException(
+                        Resources.FormatOutputFormattersAreRequired(
+                            typeof(MvcOptions).FullName,
+                            nameof(MvcOptions.OutputFormatters),
+                            typeof(IOutputFormatter).FullName
+                        )
+                    );
                 }
             }
 
@@ -112,18 +125,23 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     selectedFormatter = SelectFormatterUsingSortedAcceptHeaders(
                         context,
                         formatters,
-                        acceptableMediaTypes);
+                        acceptableMediaTypes
+                    );
                 }
                 else
                 {
-                    _logger.SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(acceptableMediaTypes, contentTypes);
+                    _logger.SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(
+                        acceptableMediaTypes,
+                        contentTypes
+                    );
 
                     // Verify that a content type from the context is compatible with the client's request
                     selectedFormatter = SelectFormatterUsingSortedAcceptHeadersAndContentTypes(
                         context,
                         formatters,
                         acceptableMediaTypes,
-                        contentTypes);
+                        contentTypes
+                    );
                 }
 
                 if (selectedFormatter == null)
@@ -143,9 +161,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     _logger.SelectingOutputFormatterWithoutUsingContentTypes();
 
-                    selectedFormatter = SelectFormatterNotUsingContentType(
-                        context,
-                        formatters);
+                    selectedFormatter = SelectFormatterNotUsingContentType(context, formatters);
                 }
                 else
                 {
@@ -154,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     selectedFormatter = SelectFormatterUsingAnyAcceptableContentType(
                         context,
                         formatters,
-                        contentTypes);
+                        contentTypes
+                    );
                 }
             }
 
@@ -173,7 +190,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             for (var i = 0; i < result.Count; i++)
             {
                 var mediaType = new MediaType(result[i].MediaType);
-                if (!_respectBrowserAcceptHeader && mediaType.MatchesAllSubTypes && mediaType.MatchesAllTypes)
+                if (
+                    !_respectBrowserAcceptHeader
+                    && mediaType.MatchesAllSubTypes
+                    && mediaType.MatchesAllTypes
+                )
                 {
                     result.Clear();
                     return result;
@@ -187,7 +208,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private IOutputFormatter? SelectFormatterNotUsingContentType(
             OutputFormatterCanWriteContext formatterContext,
-            IList<IOutputFormatter> formatters)
+            IList<IOutputFormatter> formatters
+        )
         {
             _logger.SelectFirstCanWriteFormatter();
 
@@ -208,7 +230,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private IOutputFormatter? SelectFormatterUsingSortedAcceptHeaders(
             OutputFormatterCanWriteContext formatterContext,
             IList<IOutputFormatter> formatters,
-            IList<MediaTypeSegmentWithQuality> sortedAcceptHeaders)
+            IList<MediaTypeSegmentWithQuality> sortedAcceptHeaders
+        )
         {
             for (var i = 0; i < sortedAcceptHeaders.Count; i++)
             {
@@ -233,7 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private IOutputFormatter? SelectFormatterUsingAnyAcceptableContentType(
             OutputFormatterCanWriteContext formatterContext,
             IList<IOutputFormatter> formatters,
-            MediaTypeCollection acceptableContentTypes)
+            MediaTypeCollection acceptableContentTypes
+        )
         {
             foreach (var formatter in formatters)
             {
@@ -256,11 +280,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             OutputFormatterCanWriteContext formatterContext,
             IList<IOutputFormatter> formatters,
             IList<MediaTypeSegmentWithQuality> sortedAcceptableContentTypes,
-            MediaTypeCollection possibleOutputContentTypes)
+            MediaTypeCollection possibleOutputContentTypes
+        )
         {
             for (var i = 0; i < sortedAcceptableContentTypes.Count; i++)
             {
-                var acceptableContentType = new MediaType(sortedAcceptableContentTypes[i].MediaType);
+                var acceptableContentType = new MediaType(
+                    sortedAcceptableContentTypes[i].MediaType
+                );
                 for (var j = 0; j < possibleOutputContentTypes.Count; j++)
                 {
                     var candidateContentType = new MediaType(possibleOutputContentTypes[j]);
@@ -269,7 +296,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         for (var k = 0; k < formatters.Count; k++)
                         {
                             var formatter = formatters[k];
-                            formatterContext.ContentType = new StringSegment(possibleOutputContentTypes[j]);
+                            formatterContext.ContentType = new StringSegment(
+                                possibleOutputContentTypes[j]
+                            );
                             formatterContext.ContentTypeIsServerDefined = true;
                             if (formatter.CanWriteResult(formatterContext))
                             {
@@ -294,7 +323,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     var message = Resources.FormatObjectResult_MatchAllContentType(
                         contentType,
-                        nameof(ObjectResult.ContentTypes));
+                        nameof(ObjectResult.ContentTypes)
+                    );
                     throw new InvalidOperationException(message);
                 }
             }

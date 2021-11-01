@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             string name,
             IEnumerable<SqlExpression> arguments,
             Type type,
-            CoreTypeMapping? typeMapping)
-            : base(type, typeMapping)
+            CoreTypeMapping? typeMapping
+        ) : base(type, typeMapping)
         {
             Name = name;
             Arguments = arguments.ToList();
@@ -70,13 +70,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 changed |= arguments[i] != Arguments[i];
             }
 
-            return changed
-                ? new SqlFunctionExpression(
-                    Name,
-                    arguments,
-                    Type,
-                    TypeMapping)
-                : this;
+            return changed ? new SqlFunctionExpression(Name, arguments, Type, TypeMapping) : this;
         }
 
         /// <summary>
@@ -85,8 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SqlFunctionExpression ApplyTypeMapping(CoreTypeMapping? typeMapping)
-            => new(Name, Arguments, Type, typeMapping ?? TypeMapping);
+        public virtual SqlFunctionExpression ApplyTypeMapping(CoreTypeMapping? typeMapping) =>
+            new(Name, Arguments, Type, typeMapping ?? TypeMapping);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -94,8 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SqlFunctionExpression Update(IReadOnlyList<SqlExpression> arguments)
-            => !arguments.SequenceEqual(Arguments)
+        public virtual SqlFunctionExpression Update(IReadOnlyList<SqlExpression> arguments) =>
+            !arguments.SequenceEqual(Arguments)
                 ? new SqlFunctionExpression(Name, arguments, Type, TypeMapping)
                 : this;
 
@@ -121,16 +115,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SqlFunctionExpression sqlFunctionExpression
-                    && Equals(sqlFunctionExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SqlFunctionExpression sqlFunctionExpression
+                    && Equals(sqlFunctionExpression)
+            );
 
-        private bool Equals(SqlFunctionExpression sqlFunctionExpression)
-            => base.Equals(sqlFunctionExpression)
-                && Name == sqlFunctionExpression.Name
-                && Arguments.SequenceEqual(sqlFunctionExpression.Arguments);
+        private bool Equals(SqlFunctionExpression sqlFunctionExpression) =>
+            base.Equals(sqlFunctionExpression)
+            && Name == sqlFunctionExpression.Name
+            && Arguments.SequenceEqual(sqlFunctionExpression.Arguments);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -27,7 +27,10 @@ namespace Microsoft.Extensions.Configuration
             }
             if (source.Configuration == null)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidNullArgument, "source.Configuration"), nameof(source));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidNullArgument, "source.Configuration"),
+                    nameof(source)
+                );
             }
 
             _config = source.Configuration;
@@ -72,9 +75,7 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="earlierKeys">The child keys returned by the preceding providers for the same parent path.</param>
         /// <param name="parentPath">The parent path.</param>
         /// <returns>The child keys.</returns>
-        public IEnumerable<string> GetChildKeys(
-            IEnumerable<string> earlierKeys,
-            string parentPath)
+        public IEnumerable<string> GetChildKeys(IEnumerable<string> earlierKeys, string parentPath)
         {
             IConfiguration section = parentPath == null ? _config : _config.GetSection(parentPath);
             var keys = new List<string>();

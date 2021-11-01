@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     /// for attributes which derive from <see cref="ValidationAttribute"/>. It also provides
     /// a validator for types which implement <see cref="IValidatableObject"/>.
     /// </summary>
-    internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedModelValidatorProvider
+    internal sealed class DataAnnotationsModelValidatorProvider
+        : IMetadataBasedModelValidatorProvider
     {
         private readonly IOptions<MvcDataAnnotationsLocalizationOptions> _options;
         private readonly IStringLocalizerFactory? _stringLocalizerFactory;
@@ -33,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public DataAnnotationsModelValidatorProvider(
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             IOptions<MvcDataAnnotationsLocalizationOptions> options,
-            IStringLocalizerFactory? stringLocalizerFactory)
+            IStringLocalizerFactory? stringLocalizerFactory
+        )
         {
             if (validationAttributeAdapterProvider == null)
             {
@@ -52,11 +54,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateValidators(ModelValidatorProviderContext context)
         {
             IStringLocalizer? stringLocalizer = null;
-            if (_stringLocalizerFactory != null && _options.Value.DataAnnotationLocalizerProvider != null)
+            if (
+                _stringLocalizerFactory != null
+                && _options.Value.DataAnnotationLocalizerProvider != null
+            )
             {
                 stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
                     context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                    _stringLocalizerFactory);
+                    _stringLocalizerFactory
+                );
             }
 
             var results = context.Results;
@@ -78,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 var validator = new DataAnnotationsModelValidator(
                     _validationAttributeAdapterProvider,
                     attribute,
-                    stringLocalizer);
+                    stringLocalizer
+                );
 
                 validatorItem.Validator = validator;
                 validatorItem.IsReusable = true;
@@ -94,11 +101,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Produce a validator if the type supports IValidatableObject
             if (typeof(IValidatableObject).IsAssignableFrom(context.ModelMetadata.ModelType))
             {
-                context.Results.Add(new ValidatorItem
-                {
-                    Validator = new ValidatableObjectAdapter(),
-                    IsReusable = true
-                });
+                context.Results.Add(
+                    new ValidatorItem
+                    {
+                        Validator = new ValidatableObjectAdapter(),
+                        IsReusable = true
+                    }
+                );
             }
         }
 

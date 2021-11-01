@@ -317,7 +317,10 @@ namespace System.Diagnostics.TraceSourceTests
         public void WriteFooterTest_Callstack()
         {
             var cache = new TraceEventCache();
-            var listener = new TestTextTraceListener() { TraceOutputOptions = TraceOptions.Callstack };
+            var listener = new TestTextTraceListener()
+            {
+                TraceOutputOptions = TraceOptions.Callstack
+            };
             listener.TraceEvent(cache, "Source", TraceEventType.Critical, 42);
             listener.Flush();
 
@@ -329,7 +332,10 @@ namespace System.Diagnostics.TraceSourceTests
         public void WriteFooterTest_DateTime()
         {
             var cache = new TraceEventCache();
-            var listener = new TestTextTraceListener() { TraceOutputOptions = TraceOptions.DateTime };
+            var listener = new TestTextTraceListener()
+            {
+                TraceOutputOptions = TraceOptions.DateTime
+            };
             listener.TraceEvent(cache, "Source", TraceEventType.Critical, 42);
             listener.Flush();
 
@@ -352,7 +358,10 @@ namespace System.Diagnostics.TraceSourceTests
                 try
                 {
                     var cache = new TraceEventCache();
-                    var listener = new TestTextTraceListener() { TraceOutputOptions = TraceOptions.LogicalOperationStack };
+                    var listener = new TestTextTraceListener()
+                    {
+                        TraceOutputOptions = TraceOptions.LogicalOperationStack
+                    };
                     listener.TraceEvent(cache, "Source", TraceEventType.Critical, 42);
                     listener.Flush();
 
@@ -373,7 +382,10 @@ namespace System.Diagnostics.TraceSourceTests
         public void WriteFooterTest_ProcessId()
         {
             var cache = new TraceEventCache();
-            var listener = new TestTextTraceListener() { TraceOutputOptions = TraceOptions.ProcessId };
+            var listener = new TestTextTraceListener()
+            {
+                TraceOutputOptions = TraceOptions.ProcessId
+            };
             listener.TraceOutputOptions = TraceOptions.ProcessId;
             listener.TraceEvent(cache, "Source", TraceEventType.Critical, 42);
             listener.Flush();
@@ -386,7 +398,10 @@ namespace System.Diagnostics.TraceSourceTests
         public void WriteFooterTest_ThreadId()
         {
             var cache = new TraceEventCache();
-            var listener = new TestTextTraceListener() { TraceOutputOptions = TraceOptions.ThreadId };
+            var listener = new TestTextTraceListener()
+            {
+                TraceOutputOptions = TraceOptions.ThreadId
+            };
             listener.TraceEvent(cache, "Source", TraceEventType.Critical, 42);
             listener.Flush();
 
@@ -398,7 +413,10 @@ namespace System.Diagnostics.TraceSourceTests
         public void WriteFooterTest_Timestamp()
         {
             var cache = new TraceEventCache();
-            var listener = new TestTextTraceListener() { TraceOutputOptions = TraceOptions.Timestamp };
+            var listener = new TestTextTraceListener()
+            {
+                TraceOutputOptions = TraceOptions.Timestamp
+            };
             listener.TraceEvent(cache, "Source", TraceEventType.Critical, 42);
             listener.Flush();
 

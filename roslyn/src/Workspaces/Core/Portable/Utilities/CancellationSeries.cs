@@ -38,7 +38,6 @@ namespace Roslyn.Utilities
         public CancellationSeries(CancellationToken token = default)
         {
             _superToken = token;
-
 #if DEBUG
             _ctorStack = new StackTrace();
 #endif
@@ -51,7 +50,8 @@ namespace Roslyn.Utilities
         {
             Contract.ThrowIfFalse(
                 Environment.HasShutdownStarted || _cts == null,
-                $"Instance of CancellationSeries not disposed before being finalized{Environment.NewLine}Stack at construction:{Environment.NewLine}{_ctorStack}");
+                $"Instance of CancellationSeries not disposed before being finalized{Environment.NewLine}Stack at construction:{Environment.NewLine}{_ctorStack}"
+            );
         }
 #endif
 

@@ -20,7 +20,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var connection = new Http3Connection(TestContextFactory.CreateHttp3ConnectionContext());
 
-            var streamContext = TestContextFactory.CreateHttp3StreamContext(transport: DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions()).Application);
+            var streamContext = TestContextFactory.CreateHttp3StreamContext(
+                transport: DuplexPipe.CreateConnectionPair(
+                    new PipeOptions(),
+                    new PipeOptions()
+                ).Application
+            );
 
             var http3Stream = new TestHttp3Stream(connection, streamContext);
             http3Stream.Reset();
@@ -50,7 +55,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.NotNull(minRateFeature);
 
             Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate);
-            Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2)));
+            Assert.Throws<NotSupportedException>(
+                () => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2))
+            );
 
             // You can set the MinDataRate to null though.
             minRateFeature.MinDataRate = null;
@@ -61,13 +68,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private class TestHttp3Stream : Http3Stream
         {
-            public TestHttp3Stream(Http3Connection connection, Http3StreamContext context) : base(connection, context)
-            {
-            }
+            public TestHttp3Stream(Http3Connection connection, Http3StreamContext context)
+                : base(connection, context) { }
 
-            public override void Execute()
-            {
-            }
+            public override void Execute() { }
         }
     }
 }

@@ -29,7 +29,10 @@ namespace Microsoft.EntityFrameworkCore
 
             var factorySource = new DbSetSource();
 
-            Assert.NotSame(factorySource.Create(context, typeof(Random)), factorySource.Create(context, typeof(Random)));
+            Assert.NotSame(
+                factorySource.Create(context, typeof(Random)),
+                factorySource.Create(context, typeof(Random))
+            );
         }
 
         [ConditionalFact]
@@ -53,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.NotSame(
                 factorySource.Create(context, nameof(Random), typeof(Random)),
-                factorySource.Create(context, nameof(Random), typeof(Random)));
+                factorySource.Create(context, nameof(Random), typeof(Random))
+            );
         }
     }
 }

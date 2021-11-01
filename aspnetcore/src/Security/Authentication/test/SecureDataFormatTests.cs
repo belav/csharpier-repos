@@ -26,7 +26,10 @@ namespace Microsoft.AspNetCore.Authentication.DataHandler
         {
             var provider = ServiceProvider.GetRequiredService<IDataProtectionProvider>();
             var prototector = provider.CreateProtector("test");
-            var secureDataFormat = new SecureDataFormat<string>(new StringSerializer(), prototector);
+            var secureDataFormat = new SecureDataFormat<string>(
+                new StringSerializer(),
+                prototector
+            );
 
             string input = "abcdefghijklmnopqrstuvwxyz0123456789";
             var protectedData = secureDataFormat.Protect(input);
@@ -39,7 +42,10 @@ namespace Microsoft.AspNetCore.Authentication.DataHandler
         {
             var provider = ServiceProvider.GetRequiredService<IDataProtectionProvider>();
             var prototector = provider.CreateProtector("test");
-            var secureDataFormat = new SecureDataFormat<string>(new StringSerializer(), prototector);
+            var secureDataFormat = new SecureDataFormat<string>(
+                new StringSerializer(),
+                prototector
+            );
 
             string input = "abcdefghijklmnopqrstuvwxyz0123456789";
             string purpose = "purpose1";
@@ -53,7 +59,10 @@ namespace Microsoft.AspNetCore.Authentication.DataHandler
         {
             var provider = ServiceProvider.GetRequiredService<IDataProtectionProvider>();
             var prototector = provider.CreateProtector("test");
-            var secureDataFormat = new SecureDataFormat<string>(new StringSerializer(), prototector);
+            var secureDataFormat = new SecureDataFormat<string>(
+                new StringSerializer(),
+                prototector
+            );
 
             string input = "abcdefghijklmnopqrstuvwxyz0123456789";
             string purpose = "purpose1";

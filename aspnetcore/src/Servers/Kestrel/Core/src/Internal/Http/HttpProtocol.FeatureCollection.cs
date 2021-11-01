@@ -47,10 +47,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 _methodText = HttpUtilities.MethodToString(Method) ?? string.Empty;
                 return _methodText;
             }
-            set
-            {
-                _methodText = value;
-            }
+            set { _methodText = value; }
         }
 
         string IHttpRequestFeature.PathBase
@@ -96,13 +93,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 if (!ReferenceEquals(_requestStreamInternal, RequestBody))
                 {
                     _requestStreamInternal = RequestBody;
-                    RequestBodyPipeReader = PipeReader.Create(RequestBody, new StreamPipeReaderOptions(_context.MemoryPool, _context.MemoryPool.GetMinimumSegmentSize(), _context.MemoryPool.GetMinimumAllocSize()));
+                    RequestBodyPipeReader = PipeReader.Create(
+                        RequestBody,
+                        new StreamPipeReaderOptions(
+                            _context.MemoryPool,
+                            _context.MemoryPool.GetMinimumSegmentSize(),
+                            _context.MemoryPool.GetMinimumAllocSize()
+                        )
+                    );
 
-                    OnCompleted((self) =>
-                    {
-                        ((PipeReader)self).Complete();
-                        return Task.CompletedTask;
-                    }, RequestBodyPipeReader);
+                    OnCompleted(
+                        (self) =>
+                        {
+                            ((PipeReader)self).Complete();
+                            return Task.CompletedTask;
+                        },
+                        RequestBodyPipeReader
+                    );
                 }
 
                 return RequestBodyPipeReader;
@@ -195,7 +202,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             set => AllowSynchronousIO = value;
         }
 
-        bool IHttpMaxRequestBodySizeFeature.IsReadOnly => HasStartedConsumingRequestBody || IsUpgraded;
+        bool IHttpMaxRequestBodySizeFeature.IsReadOnly =>
+            HasStartedConsumingRequestBody || IsUpgraded;
 
         long? IHttpMaxRequestBodySizeFeature.MaxRequestBodySize
         {
@@ -204,15 +212,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             {
                 if (HasStartedConsumingRequestBody)
                 {
-                    throw new InvalidOperationException(CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead);
+                    throw new InvalidOperationException(
+                        CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead
+                    );
                 }
                 if (IsUpgraded)
                 {
-                    throw new InvalidOperationException(CoreStrings.MaxRequestBodySizeCannotBeModifiedForUpgradedRequests);
+                    throw new InvalidOperationException(
+                        CoreStrings.MaxRequestBodySizeCannotBeModifiedForUpgradedRequests
+                    );
                 }
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.NonNegativeNumberOrNullRequired
+                    );
                 }
 
                 MaxRequestBodySize = value;
@@ -300,11 +315,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return InitializeResponseAsync(0);
         }
 
-        void IHttpResponseBodyFeature.DisableBuffering()
-        {
-        }
+        void IHttpResponseBodyFeature.DisableBuffering() { }
 
-        Task IHttpResponseBodyFeature.SendFileAsync(string path, long offset, long? count, CancellationToken cancellation)
+        Task IHttpResponseBodyFeature.SendFileAsync(
+            string path,
+            long offset,
+            long? count,
+            CancellationToken cancellation
+        )
         {
             return SendFileFallback.SendFileAsync(ResponseBody, path, offset, count, cancellation);
         }

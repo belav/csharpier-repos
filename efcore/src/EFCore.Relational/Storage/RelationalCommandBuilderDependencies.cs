@@ -51,8 +51,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalCommandBuilderDependencies(
-            IRelationalTypeMappingSource typeMappingSource)
+        public RelationalCommandBuilderDependencies(IRelationalTypeMappingSource typeMappingSource)
         {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
 

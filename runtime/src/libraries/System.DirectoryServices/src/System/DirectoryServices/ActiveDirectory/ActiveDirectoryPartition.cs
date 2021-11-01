@@ -11,9 +11,7 @@ namespace System.DirectoryServices.ActiveDirectory
         internal DirectoryEntryManager directoryEntryMgr = null!;
 
         #region constructors
-        protected ActiveDirectoryPartition()
-        {
-        }
+        protected ActiveDirectoryPartition() { }
 
         internal ActiveDirectoryPartition(DirectoryContext context, string name)
         {
@@ -77,7 +75,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ObjectDisposedException(GetType().Name);
             }
         }
-
         #endregion private methods
     }
 }

@@ -21,11 +21,13 @@ namespace Microsoft.Extensions.Configuration
             void RecurseChildren(
                 StringBuilder stringBuilder,
                 IEnumerable<IConfigurationSection> children,
-                string indent)
+                string indent
+            )
             {
                 foreach (IConfigurationSection child in children)
                 {
-                    (string Value, IConfigurationProvider Provider) valueAndProvider = GetValueAndProvider(root, child.Path);
+                    (string Value, IConfigurationProvider Provider) valueAndProvider =
+                        GetValueAndProvider(root, child.Path);
 
                     if (valueAndProvider.Provider != null)
                     {
@@ -40,10 +42,7 @@ namespace Microsoft.Extensions.Configuration
                     }
                     else
                     {
-                        stringBuilder
-                            .Append(indent)
-                            .Append(child.Key)
-                            .AppendLine(":");
+                        stringBuilder.Append(indent).Append(child.Key).AppendLine(":");
                     }
 
                     RecurseChildren(stringBuilder, child.GetChildren(), indent + "  ");
@@ -59,7 +58,8 @@ namespace Microsoft.Extensions.Configuration
 
         private static (string Value, IConfigurationProvider Provider) GetValueAndProvider(
             IConfigurationRoot root,
-            string key)
+            string key
+        )
         {
             foreach (IConfigurationProvider provider in root.Providers.Reverse())
             {

@@ -20,8 +20,14 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public static void DynamicCode()
         {
-            Assert.Equal(RuntimeFeature.IsDynamicCodeSupported, RuntimeFeature.IsSupported("IsDynamicCodeSupported"));
-            Assert.Equal(RuntimeFeature.IsDynamicCodeCompiled, RuntimeFeature.IsSupported("IsDynamicCodeCompiled"));
+            Assert.Equal(
+                RuntimeFeature.IsDynamicCodeSupported,
+                RuntimeFeature.IsSupported("IsDynamicCodeSupported")
+            );
+            Assert.Equal(
+                RuntimeFeature.IsDynamicCodeCompiled,
+                RuntimeFeature.IsSupported("IsDynamicCodeCompiled")
+            );
 
             if (RuntimeFeature.IsDynamicCodeCompiled)
             {
@@ -30,7 +36,9 @@ namespace System.Runtime.CompilerServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("IsDynamicCodeCompiled returns false in cases where mono doesn't support these features")]
+        [SkipOnMono(
+            "IsDynamicCodeCompiled returns false in cases where mono doesn't support these features"
+        )]
         public static void DynamicCode_Jit()
         {
             Assert.True(RuntimeFeature.IsDynamicCodeSupported);
@@ -44,10 +52,14 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.True(RuntimeFeature.IsDynamicCodeSupported);
             Assert.False(RuntimeFeature.IsDynamicCodeCompiled);
         }
-        
+
         public static IEnumerable<object[]> GetStaticFeatureNames()
         {
-            foreach (var field in typeof(RuntimeFeature).GetFields(BindingFlags.Public | BindingFlags.Static))
+            foreach (
+                var field in typeof(RuntimeFeature).GetFields(
+                    BindingFlags.Public | BindingFlags.Static
+                )
+            )
             {
                 if (!field.IsLiteral)
                     continue;
@@ -55,7 +67,7 @@ namespace System.Runtime.CompilerServices.Tests
                 yield return new object[] { field.Name };
             }
         }
-        
+
         [Theory]
         [MemberData(nameof(GetStaticFeatureNames))]
         public static void StaticDataMatchesDynamicProbing(string probedValue)

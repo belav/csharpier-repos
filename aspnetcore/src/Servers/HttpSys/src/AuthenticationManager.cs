@@ -28,9 +28,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private AuthenticationSchemes _authSchemes;
         private bool _allowAnonymous = true;
 
-        internal AuthenticationManager()
-        {
-        }
+        internal AuthenticationManager() { }
 
         /// <summary>
         /// When attaching to an existing queue this setting must match the one used to create the queue.
@@ -63,7 +61,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         /// <summary> 
         /// Sets the display name shown to users on login pages. The default is null.
-        /// </summary> 
+        /// </summary>
         public string? AuthenticationDisplayName { get; set; }
 
         internal void SetUrlGroupSecurity(UrlGroup urlGroup)
@@ -101,7 +99,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
                 _urlGroup.SetProperty(
                     HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerAuthenticationProperty,
-                    infoptr, (uint)AuthInfoSize);
+                    infoptr,
+                    (uint)AuthInfoSize
+                );
             }
         }
 
@@ -143,12 +143,17 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         internal void SetAuthenticationChallenge(RequestContext context)
         {
-            IList<string> challenges = GenerateChallenges(context.Response.AuthenticationChallenges);
+            IList<string> challenges = GenerateChallenges(
+                context.Response.AuthenticationChallenges
+            );
 
             if (challenges.Count > 0)
             {
-                context.Response.Headers[HttpKnownHeaderNames.WWWAuthenticate]
-                    = StringValues.Concat(context.Response.Headers[HttpKnownHeaderNames.WWWAuthenticate], challenges.ToArray());
+                context.Response.Headers[HttpKnownHeaderNames.WWWAuthenticate] =
+                    StringValues.Concat(
+                        context.Response.Headers[HttpKnownHeaderNames.WWWAuthenticate],
+                        challenges.ToArray()
+                    );
             }
         }
     }

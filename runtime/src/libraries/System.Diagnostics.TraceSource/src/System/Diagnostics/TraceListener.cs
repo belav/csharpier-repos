@@ -29,9 +29,7 @@ namespace System.Diagnostics
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceListener'/> class.</para>
         /// </devdoc>
-        protected TraceListener()
-        {
-        }
+        protected TraceListener() { }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceListener'/> class using the specified name as the
@@ -59,7 +57,6 @@ namespace System.Diagnostics
         public virtual string Name
         {
             get { return _listenerName ?? ""; }
-
             set { _listenerName = value; }
         }
 
@@ -96,15 +93,8 @@ namespace System.Diagnostics
         /// </devdoc>
         public int IndentLevel
         {
-            get
-            {
-                return _indentLevel;
-            }
-
-            set
-            {
-                _indentLevel = (value < 0) ? 0 : value;
-            }
+            get { return _indentLevel; }
+            set { _indentLevel = (value < 0) ? 0 : value; }
         }
 
         /// <devdoc>
@@ -112,46 +102,32 @@ namespace System.Diagnostics
         /// </devdoc>
         public int IndentSize
         {
-            get
-            {
-                return _indentSize;
-            }
-
+            get { return _indentSize; }
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException(nameof(IndentSize), value, SR.TraceListenerIndentSize);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(IndentSize),
+                        value,
+                        SR.TraceListenerIndentSize
+                    );
                 _indentSize = value;
             }
         }
 
         public TraceFilter? Filter
         {
-            get
-            {
-                return _filter;
-            }
-            set
-            {
-                _filter = value;
-            }
+            get { return _filter; }
+            set { _filter = value; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets a value indicating whether an indent is needed.</para>
         /// </devdoc>
         protected bool NeedIndent
         {
-            get
-            {
-                return _needIndent;
-            }
-
-            set
-            {
-                _needIndent = value;
-            }
+            get { return _needIndent; }
+            set { _needIndent = value; }
         }
 
         public TraceOptions TraceOutputOptions
@@ -182,9 +158,21 @@ namespace System.Diagnostics
             return null;
         }
 
-        public virtual void TraceTransfer(TraceEventCache? eventCache, string source, int id, string? message, Guid relatedActivityId)
+        public virtual void TraceTransfer(
+            TraceEventCache? eventCache,
+            string source,
+            int id,
+            string? message,
+            Guid relatedActivityId
+        )
         {
-            TraceEvent(eventCache, source, TraceEventType.Transfer, id, message + ", relatedActivityId=" + relatedActivityId.ToString());
+            TraceEvent(
+                eventCache,
+                source,
+                TraceEventType.Transfer,
+                id,
+                message + ", relatedActivityId=" + relatedActivityId.ToString()
+            );
         }
 
         /// <devdoc>
@@ -200,9 +188,11 @@ namespace System.Diagnostics
         /// </devdoc>
         public virtual void Fail(string? message, string? detailMessage)
         {
-            WriteLine(detailMessage is null ?
-                SR.TraceListenerFail + " " + message :
-                SR.TraceListenerFail + " " + message + " " + detailMessage);
+            WriteLine(
+                detailMessage is null
+                  ? SR.TraceListenerFail + " " + message
+                  : SR.TraceListenerFail + " " + message + " " + detailMessage
+            );
         }
 
         /// <devdoc>
@@ -217,10 +207,14 @@ namespace System.Diagnostics
         /// </devdoc>
         public virtual void Write(object? o)
         {
-            if (Filter != null && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, null, null, o))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, null, null, o)
+            )
                 return;
 
-            if (o == null) return;
+            if (o == null)
+                return;
             Write(o.ToString());
         }
 
@@ -247,7 +241,10 @@ namespace System.Diagnostics
         /// </devdoc>
         public virtual void Write(object? o, string? category)
         {
-            if (Filter != null && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, category, null, o))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, category, null, o)
+            )
                 return;
 
             if (category == null)
@@ -292,7 +289,10 @@ namespace System.Diagnostics
         /// </devdoc>
         public virtual void WriteLine(object? o)
         {
-            if (Filter != null && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, null, null, o))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, null, null, o)
+            )
                 return;
 
             WriteLine(o == null ? "" : o.ToString());
@@ -322,18 +322,29 @@ namespace System.Diagnostics
         /// </devdoc>
         public virtual void WriteLine(object? o, string? category)
         {
-            if (Filter != null && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, category, null, o))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(null, "", TraceEventType.Verbose, 0, category, null, o)
+            )
                 return;
 
             WriteLine(o == null ? "" : o.ToString(), category);
         }
 
-
         // new write methods used by TraceSource
 
-        public virtual void TraceData(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, object? data)
+        public virtual void TraceData(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object? data
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data)
+            )
                 return;
 
             WriteHeader(source, eventType, id);
@@ -345,9 +356,18 @@ namespace System.Diagnostics
             WriteFooter(eventCache);
         }
 
-        public virtual void TraceData(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, params object?[]? data)
+        public virtual void TraceData(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            params object?[]? data
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, null, data))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, null, data)
+            )
                 return;
 
             WriteHeader(source, eventType, id);
@@ -357,13 +377,24 @@ namespace System.Diagnostics
             WriteFooter(eventCache);
         }
 
-        public virtual void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id)
+        public virtual void TraceEvent(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id
+        )
         {
             TraceEvent(eventCache, source, eventType, id, string.Empty);
         }
 
         // All other TraceEvent methods come through this one.
-        public virtual void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? message)
+        public virtual void TraceEvent(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string? message
+        )
         {
             if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, message))
                 return;
@@ -374,9 +405,19 @@ namespace System.Diagnostics
             WriteFooter(eventCache);
         }
 
-        public virtual void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format, params object?[]? args)
+        public virtual void TraceEvent(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string? format,
+            params object?[]? args
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, format, args))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, format, args)
+            )
                 return;
 
             WriteHeader(source, eventType, id);
@@ -390,7 +431,9 @@ namespace System.Diagnostics
 
         private void WriteHeader(string source, TraceEventType eventType, int id)
         {
-            Write($"{source} {eventType.ToString()}: {id.ToString(CultureInfo.InvariantCulture)} : ");
+            Write(
+                $"{source} {eventType.ToString()}: {id.ToString(CultureInfo.InvariantCulture)} : "
+            );
         }
 
         private void WriteFooter(TraceEventCache? eventCache)
@@ -429,7 +472,9 @@ namespace System.Diagnostics
                 WriteLine("ThreadId=" + eventCache.ThreadId);
 
             if (IsEnabled(TraceOptions.DateTime))
-                WriteLine("DateTime=" + eventCache.DateTime.ToString("o", CultureInfo.InvariantCulture));
+                WriteLine(
+                    "DateTime=" + eventCache.DateTime.ToString("o", CultureInfo.InvariantCulture)
+                );
 
             if (IsEnabled(TraceOptions.Timestamp))
                 WriteLine("Timestamp=" + eventCache.Timestamp);

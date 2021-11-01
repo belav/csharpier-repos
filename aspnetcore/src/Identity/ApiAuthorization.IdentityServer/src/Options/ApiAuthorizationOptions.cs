@@ -16,33 +16,24 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public IdentityResourceCollection IdentityResources { get; set; } =
             new IdentityResourceCollection
             {
-                IdentityResourceBuilder.OpenId()
-                    .AllowAllClients()
-                    .FromDefault()
-                    .Build(),
-                IdentityResourceBuilder.Profile()
-                    .AllowAllClients()
-                    .FromDefault()
-                    .Build()
+                IdentityResourceBuilder.OpenId().AllowAllClients().FromDefault().Build(),
+                IdentityResourceBuilder.Profile().AllowAllClients().FromDefault().Build()
             };
 
         /// <summary>
         /// Gets or sets the <see cref="ApiResources"/>.
         /// </summary>
-        public ApiResourceCollection ApiResources { get; set; } =
-            new ApiResourceCollection();
+        public ApiResourceCollection ApiResources { get; set; } = new ApiResourceCollection();
 
         /// <summary>
         /// Gets or sets the <see cref="ApiScopes"/>.
         /// </summary>
-        public ApiScopeCollection ApiScopes { get; set; } =
-            new ApiScopeCollection();
+        public ApiScopeCollection ApiScopes { get; set; } = new ApiScopeCollection();
 
         /// <summary>
         /// Gets or sets the <see cref="Clients"/>.
         /// </summary>
-        public ClientCollection Clients { get; set; } =
-            new ClientCollection();
+        public ClientCollection Clients { get; set; } = new ClientCollection();
 
         /// <summary>
         /// Gets or sets the <see cref="SigningCredentials"/> to use for signing tokens.

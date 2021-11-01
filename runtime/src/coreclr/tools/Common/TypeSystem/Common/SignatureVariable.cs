@@ -22,38 +22,25 @@ namespace Internal.TypeSystem
 
         public int Index
         {
-            get
-            {
-                return _index;
-            }
+            get { return _index; }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _context;
-            }
+            get { return _context; }
         }
 
-        public abstract bool IsMethodSignatureVariable
-        {
-            get;
-        }
+        public abstract bool IsMethodSignatureVariable { get; }
     }
 
     public sealed partial class SignatureTypeVariable : SignatureVariable
     {
         internal SignatureTypeVariable(TypeSystemContext context, int index) : base(context, index)
-        {
-        }
+        { }
 
         public override bool IsMethodSignatureVariable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override int GetHashCode()
@@ -73,7 +60,10 @@ namespace Internal.TypeSystem
             return flags;
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             return typeInstantiation.IsNull ? this : typeInstantiation[Index];
         }
@@ -81,16 +71,12 @@ namespace Internal.TypeSystem
 
     public sealed partial class SignatureMethodVariable : SignatureVariable
     {
-        internal SignatureMethodVariable(TypeSystemContext context, int index) : base(context, index)
-        {
-        }
+        internal SignatureMethodVariable(TypeSystemContext context, int index)
+            : base(context, index) { }
 
         public override bool IsMethodSignatureVariable
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int GetHashCode()
@@ -110,7 +96,10 @@ namespace Internal.TypeSystem
             return flags;
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             return methodInstantiation.IsNull ? this : methodInstantiation[Index];
         }

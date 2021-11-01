@@ -53,12 +53,8 @@ namespace FormatterWebSite.Controllers
             };
 
         [HttpGet]
-        public ActionResult<SimpleModel> PolymorphicResult() => new DeriviedModel
-        {
-            Id = 10,
-            Name = "test",
-            Address = "Some address",
-        };
+        public ActionResult<SimpleModel> PolymorphicResult() =>
+            new DeriviedModel { Id = 10, Name = "test", Address = "Some address", };
 
         [HttpGet]
         public ActionResult<ProblemDetails> ProblemDetailsResult() => NotFound();

@@ -172,12 +172,11 @@ internal class MemoryAlloc
                 }
             }
         }
-
-        //        Console.WriteLine("there are {0} gen2 objects (total {1}), freed {2}", 
+        //        Console.WriteLine("there are {0} gen2 objects (total {1}), freed {2}",
         //            iGen2Objects, old.Length, iFreedObjects);
     }
 
-    // This pins every few objects (defined by pinRatio) in the old array. 
+    // This pins every few objects (defined by pinRatio) in the old array.
     // med is just created with non pinned.
     public void AllocTest()
     {
@@ -236,7 +235,6 @@ internal class MemoryAlloc
 
             byte[] temp = new byte[_mean_med_alloc_size * 3];
             _old[j] = new MyRequest(_mean_old_alloc_size, iPinnedMidSize, fIsPinned);
-
             //if ((j % (old.Length / 10)) == 0)
             //{
             //    Console.WriteLine("{0}: allocated {1} on old array, {2}ms elapsed, Heap size {3}, gen0: {4}, gen1: {5}, gen2: {6})",
@@ -270,15 +268,26 @@ internal class MemoryAlloc
         }
 
         stopwatch.Stop();
-        //        Console.WriteLine ("{0}: startup: {1:d} seconds({2:d} ms. Heap size {3})", 
+        //        Console.WriteLine ("{0}: startup: {1:d} seconds({2:d} ms. Heap size {3})",
         //            index, (int)stopwatch.Elapsed.TotalSeconds, (int)stopwatch.Elapsed.TotalMilliseconds,
         //            GC.GetTotalMemory(false));
     }
 
     public void SteadyState()
     {
-        Console.WriteLine(_index + ": replacing old every " + _old_time + "; med every " + _med_time + ";creating young " + _young_time + "times ("
-                          + "(size " + _mean_young_alloc_size + ")");
+        Console.WriteLine(
+            _index
+                + ": replacing old every "
+                + _old_time
+                + "; med every "
+                + _med_time
+                + ";creating young "
+                + _young_time
+                + "times ("
+                + "(size "
+                + _mean_young_alloc_size
+                + ")"
+        );
 
         Console.WriteLine("iterating {0} times", _iter_count);
 
@@ -311,7 +320,11 @@ internal class MemoryAlloc
         MiddlePin[] steadyPinningArray = new MiddlePin[100];
         GCHandle[] steadyPinningHandles = new GCHandle[100];
         int steadyPinningIndex = 0;
-        for (steadyPinningIndex = 0; steadyPinningIndex < steadyPinningArray.Length; steadyPinningIndex++)
+        for (
+            steadyPinningIndex = 0;
+            steadyPinningIndex < steadyPinningArray.Length;
+            steadyPinningIndex++
+        )
         {
             steadyPinningArray[steadyPinningIndex] = new MiddlePin();
             steadyPinningHandles[steadyPinningIndex] = new GCHandle();
@@ -322,7 +335,6 @@ internal class MemoryAlloc
             if (steadyPinningIndex >= steadyPinningArray.Length)
             {
                 steadyPinningIndex = 0;
-
                 //                Console.WriteLine("steady array wrapped, press enter to continue");
                 //                Console.ReadLine();
             }
@@ -331,7 +343,10 @@ internal class MemoryAlloc
             steadyPinningArray[steadyPinningIndex].smallNonePinned = new byte[8];
             steadyPinningArray[steadyPinningIndex].pinnedObj = new byte[8];
             steadyPinningArray[steadyPinningIndex].nonePinned = new byte[24];
-            steadyPinningHandles[steadyPinningIndex] = GCHandle.Alloc(steadyPinningArray[steadyPinningIndex].pinnedObj, GCHandleType.Pinned);
+            steadyPinningHandles[steadyPinningIndex] = GCHandle.Alloc(
+                steadyPinningArray[steadyPinningIndex].pinnedObj,
+                GCHandleType.Pinned
+            );
             steadyPinningArray[steadyPinningIndex].smallNonePinned[3] = 0x31;
             steadyPinningArray[steadyPinningIndex].smallNonePinned[5] = 0x51;
             steadyPinningArray[steadyPinningIndex].smallNonePinned[7] = 0x71;
@@ -359,9 +374,14 @@ internal class MemoryAlloc
             // after that, and so on.
             for (int iIter = 0; iIter < timeoutInterval; iIter++)
             {
-                for (int iCheckIndex = 0; iCheckIndex < ((iCheckedEnd - lastChecked) / timeoutInterval); iCheckIndex++)
+                for (
+                    int iCheckIndex = 0;
+                    iCheckIndex < ((iCheckedEnd - lastChecked) / timeoutInterval);
+                    iCheckIndex++
+                )
                 {
-                    int iItemIndex = (lastChecked + iCheckIndex * timeoutInterval + iIter) % _old.Length;
+                    int iItemIndex =
+                        (lastChecked + iCheckIndex * timeoutInterval + iIter) % _old.Length;
 
                     // Console.WriteLine("replacing item {0}", iItemIndex);
 
@@ -401,7 +421,11 @@ internal class MemoryAlloc
                     }
 
                     //Console.WriteLine("perm {0}, mid {1}, {2}", mean_old_alloc_size, iPinnedMidSize, (fIsPinned ? "pinned" : "not pinned"));
-                    _old[iItemIndex] = new MyRequest(_mean_old_alloc_size, iPinnedMidSize, fIsPinned);
+                    _old[iItemIndex] = new MyRequest(
+                        _mean_old_alloc_size,
+                        iPinnedMidSize,
+                        fIsPinned
+                    );
                 }
             }
 
@@ -447,22 +471,35 @@ internal class MemoryAlloc
             if ((currentGen1Count - lastGen1Count) > 30)
             {
                 GC.Collect(2, GCCollectionMode.Forced, false);
-                Console.WriteLine("{0}: iter {1}, heap size: {2}", _index, j, GC.GetTotalMemory(false));
+                Console.WriteLine(
+                    "{0}: iter {1}, heap size: {2}",
+                    _index,
+                    j,
+                    GC.GetTotalMemory(false)
+                );
 
                 lastGen1Count = currentGen1Count;
             }
         }
 
-        for (steadyPinningIndex = 0; steadyPinningIndex < steadyPinningArray.Length; steadyPinningIndex++)
+        for (
+            steadyPinningIndex = 0;
+            steadyPinningIndex < steadyPinningArray.Length;
+            steadyPinningIndex++
+        )
         {
             if (steadyPinningHandles[steadyPinningIndex].IsAllocated)
                 steadyPinningHandles[steadyPinningIndex].Free();
         }
 
         stopwatch.Stop();
-        Console.WriteLine("{0}: steady: {1:d} seconds({2:d} ms. Heap size {3})",
-            _index, (int)stopwatch.Elapsed.TotalSeconds, (int)stopwatch.Elapsed.TotalMilliseconds,
-            GC.GetTotalMemory(false));
+        Console.WriteLine(
+            "{0}: steady: {1:d} seconds({2:d} ms. Heap size {3})",
+            _index,
+            (int)stopwatch.Elapsed.TotalSeconds,
+            (int)stopwatch.Elapsed.TotalMilliseconds,
+            GC.GetTotalMemory(false)
+        );
     }
 }
 
@@ -513,7 +550,8 @@ internal class FreeListTest
         //            Console.WriteLine ("creating {0} threads", threadCount);
         //        }
 
-        long tStart, tEnd;
+        long tStart,
+            tEnd;
         tStart = Environment.TickCount;
         //        MyThread t;
         //        ThreadStart ts;

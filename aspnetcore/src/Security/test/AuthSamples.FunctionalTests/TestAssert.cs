@@ -33,12 +33,12 @@ namespace AuthSamples.FunctionalTests
             return Assert.IsAssignableFrom<IHtmlAnchorElement>(element);
         }
 
-        internal static IEnumerable<IHtmlElement> HasElements(string selector, IHtmlDocument document)
+        internal static IEnumerable<IHtmlElement> HasElements(
+            string selector,
+            IHtmlDocument document
+        )
         {
-            var elements = document
-                .QuerySelectorAll(selector)
-                .OfType<IHtmlElement>()
-                .ToArray();
+            var elements = document.QuerySelectorAll(selector).OfType<IHtmlElement>().ToArray();
 
             Assert.NotEmpty(elements);
 
@@ -60,7 +60,9 @@ namespace AuthSamples.FunctionalTests
         internal static IHtmlHtmlElement IsHtmlFragment(string htmlMessage)
         {
             var synteticNode = $"<div>{htmlMessage}</div>";
-            var fragment = Assert.Single(new HtmlParser().ParseFragment(htmlMessage, context: null));
+            var fragment = Assert.Single(
+                new HtmlParser().ParseFragment(htmlMessage, context: null)
+            );
             return Assert.IsAssignableFrom<IHtmlHtmlElement>(fragment);
         }
 
@@ -75,7 +77,8 @@ namespace AuthSamples.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal("text/html", response.Content.Headers.ContentType.MediaType);
             var content = await response.Content.ReadAsStringAsync();
-            var document = await BrowsingContext.New()
+            var document = await BrowsingContext
+                .New()
                 .OpenAsync(ResponseFactory, CancellationToken.None);
             return Assert.IsAssignableFrom<IHtmlDocument>(document);
 
@@ -103,7 +106,7 @@ namespace AuthSamples.FunctionalTests
             }
         }
 
-        internal static void IsOK(HttpResponseMessage download)
-            => Assert.Equal(HttpStatusCode.OK, download.StatusCode);
+        internal static void IsOK(HttpResponseMessage download) =>
+            Assert.Equal(HttpStatusCode.OK, download.StatusCode);
     }
 }

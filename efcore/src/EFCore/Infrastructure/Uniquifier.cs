@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public static string Uniquify<T>(
             string currentIdentifier,
             IReadOnlyDictionary<string, T> otherIdentifiers,
-            int maxLength)
+            int maxLength
+        )
         {
             var finalIdentifier = Truncate(currentIdentifier, maxLength);
             var suffix = 1;
@@ -49,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             string currentIdentifier,
             IReadOnlyDictionary<TKey, TValue> otherIdentifiers,
             Func<string, TKey> keySelector,
-            int maxLength)
+            int maxLength
+        )
         {
             var finalIdentifier = Truncate(currentIdentifier, maxLength);
             var suffix = 1;
@@ -104,8 +106,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             {
                 number /= 10;
                 length++;
-            }
-            while (number.Value >= 1);
+            } while (number.Value >= 1);
 
             return length;
         }

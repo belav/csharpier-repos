@@ -16,10 +16,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Null(property.IsFixedLength());
 
@@ -41,11 +38,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var index = modelBuilder
-                .Entity<Customer>()
-                .HasIndex(e => e.Id)
-                .HasFilter("[Id] % 2 = 0")
-                .Metadata;
+            var index =
+                modelBuilder
+                    .Entity<Customer>()
+                    .HasIndex(e => e.Id)
+                    .HasFilter("[Id] % 2 = 0").Metadata;
 
             Assert.Equal("[Id] % 2 = 0", index.GetFilter());
 
@@ -59,10 +56,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Equal("Name", property.GetColumnBaseName());
 
@@ -81,9 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             Assert.Equal("Customer", entityType.GetTableName());
 
@@ -102,9 +94,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             Assert.Null(entityType.GetSchema());
 
@@ -122,9 +112,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             Assert.Null(entityType.GetSchema());
 
@@ -142,9 +130,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             Assert.Null(entityType.GetViewSchema());
 
@@ -178,10 +164,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Null(property.GetColumnType());
 
@@ -199,10 +182,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Null(property.GetDefaultValueSql());
 
@@ -220,10 +200,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Null(property.GetComputedColumnSql());
 
@@ -241,10 +218,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.AlternateId)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.AlternateId).Metadata;
 
             Assert.Null(property.GetDefaultValue());
 
@@ -264,10 +238,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.EnumValue)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.EnumValue).Metadata;
 
             Assert.Null(property.GetDefaultValue());
 
@@ -286,10 +257,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var property = modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .Metadata;
+            var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
             Assert.Null(property.GetDefaultValue());
 
@@ -297,8 +265,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 RelationalStrings.IncorrectDefaultValueType(
-                    guid, typeof(Guid), property.Name, property.ClrType, property.DeclaringEntityType.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => property.SetDefaultValue(guid)).Message);
+                    guid,
+                    typeof(Guid),
+                    property.Name,
+                    property.ClrType,
+                    property.DeclaringEntityType.DisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetDefaultValue(guid)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -306,10 +282,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var key = modelBuilder
-                .Entity<Customer>()
-                .HasKey(e => e.Id)
-                .Metadata;
+            var key = modelBuilder.Entity<Customer>().HasKey(e => e.Id).Metadata;
 
             Assert.Equal("PK_Customer", key.GetName());
 
@@ -327,16 +300,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            modelBuilder
-                .Entity<Customer>()
-                .HasKey(e => e.Id);
+            modelBuilder.Entity<Customer>().HasKey(e => e.Id);
 
-            var foreignKey = modelBuilder
-                .Entity<Order>()
-                .HasOne<Customer>()
-                .WithOne()
-                .HasForeignKey<Order>(e => e.CustomerId)
-                .Metadata;
+            var foreignKey =
+                modelBuilder
+                    .Entity<Order>()
+                    .HasOne<Customer>()
+                    .WithOne()
+                    .HasForeignKey<Order>(e => e.CustomerId).Metadata;
 
             Assert.Equal("FK_Order_Customer_CustomerId", foreignKey.GetConstraintName());
 
@@ -354,10 +325,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var index = modelBuilder
-                .Entity<Customer>()
-                .HasIndex(e => e.Id)
-                .Metadata;
+            var index = modelBuilder.Entity<Customer>().HasIndex(e => e.Id).Metadata;
 
             Assert.Equal("IX_Customer_Id", index.GetDatabaseName());
 
@@ -375,9 +343,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             Assert.Null(entityType.FindDiscriminatorProperty());
 
@@ -412,7 +378,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [ConditionalFact]
         public void Can_get_and_set_dbfunction()
         {
-            var testMethod = typeof(TestDbFunctions).GetTypeInfo().GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
+            var testMethod = typeof(TestDbFunctions)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
 
             var modelBuilder = new ModelBuilder();
             var model = modelBuilder.Model;

@@ -17,21 +17,27 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         private readonly IHtmlFormElement _twoFactorForm;
         private readonly IHtmlAnchorElement _loginWithRecoveryCodeLink;
 
-        public LoginWith2fa(HttpClient client, IHtmlDocument loginWithTwoFactor, DefaultUIContext context)
-            : base(client, loginWithTwoFactor, context)
+        public LoginWith2fa(
+            HttpClient client,
+            IHtmlDocument loginWithTwoFactor,
+            DefaultUIContext context
+        ) : base(client, loginWithTwoFactor, context)
         {
             _twoFactorForm = HtmlAssert.HasForm(loginWithTwoFactor);
-            _loginWithRecoveryCodeLink = HtmlAssert.HasLink("#recovery-code-login", loginWithTwoFactor);
+            _loginWithRecoveryCodeLink = HtmlAssert.HasLink(
+                "#recovery-code-login",
+                loginWithTwoFactor
+            );
         }
 
         internal async Task<Index> Send2FACodeAsync(string twoFactorKey)
         {
             var code = EnableAuthenticator.ComputeCode(twoFactorKey);
 
-            var response = await Client.SendAsync(_twoFactorForm, new Dictionary<string, string>
-            {
-                ["Input_TwoFactorCode"] = code
-            });
+            var response = await Client.SendAsync(
+                _twoFactorForm,
+                new Dictionary<string, string> { ["Input_TwoFactorCode"] = code }
+            );
 
             var goToIndex = ResponseAssert.IsRedirect(response);
             Assert.Equal(Index.Path, goToIndex.ToString());
@@ -44,7 +50,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         internal async Task<LoginWithRecoveryCode> ClickRecoveryCodeLinkAsync()
         {
             var goToLoginWithRecoveryCode = await Client.GetAsync(_loginWithRecoveryCodeLink.Href);
-            var loginWithRecoveryCode = await ResponseAssert.IsHtmlDocumentAsync(goToLoginWithRecoveryCode);
+            var loginWithRecoveryCode = await ResponseAssert.IsHtmlDocumentAsync(
+                goToLoginWithRecoveryCode
+            );
 
             return new LoginWithRecoveryCode(Client, loginWithRecoveryCode, Context);
         }

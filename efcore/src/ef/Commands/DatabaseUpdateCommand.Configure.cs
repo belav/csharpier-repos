@@ -17,7 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
 
             _migration = command.Argument("<MIGRATION>", Resources.MigrationDescription);
 
-            _connection = command.Option("--connection <CONNECTION>", Resources.DbContextConnectionDescription);
+            _connection = command.Option(
+                "--connection <CONNECTION>",
+                Resources.DbContextConnectionDescription
+            );
 
             base.Configure(command);
         }

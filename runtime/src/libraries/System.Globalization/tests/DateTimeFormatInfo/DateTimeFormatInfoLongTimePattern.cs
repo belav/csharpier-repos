@@ -53,13 +53,18 @@ namespace System.Globalization.Tests
         public void LongTimePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.LongTimePattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.LongTimePattern = null
+            );
         }
 
         [Fact]
         public void LongTimePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.LongTimePattern = "HH:mm:ss");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.LongTimePattern = "HH:mm:ss"
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsIcuGlobalization))]
@@ -67,14 +72,21 @@ namespace System.Globalization.Tests
         {
             // Usually fr-CA long time format has a single quotes e.g. "HH 'h' mm 'min' ss 's'".
             // Ensuring when reading such formats from ICU we'll not eat the spaces after the single quotes.
-            string longTimeFormat = CultureInfo.GetCultureInfo("fr-CA").DateTimeFormat.LongTimePattern;
+            string longTimeFormat =
+                CultureInfo.GetCultureInfo("fr-CA").DateTimeFormat.LongTimePattern;
             int startIndex = 0;
 
-            while ((startIndex = longTimeFormat.IndexOf('\'', startIndex)) >= 0 && startIndex < longTimeFormat.Length - 1)
+            while (
+                (startIndex = longTimeFormat.IndexOf('\'', startIndex)) >= 0
+                && startIndex < longTimeFormat.Length - 1
+            )
             {
                 // We have the opening single quote, find the closing one.
                 startIndex++;
-                if ((startIndex = longTimeFormat.IndexOf('\'', startIndex)) > 0 && startIndex < longTimeFormat.Length - 1)
+                if (
+                    (startIndex = longTimeFormat.IndexOf('\'', startIndex)) > 0
+                    && startIndex < longTimeFormat.Length - 1
+                )
                 {
                     Assert.Equal(' ', longTimeFormat[++startIndex]);
                 }

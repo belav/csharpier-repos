@@ -34,37 +34,38 @@ namespace System.CommandLine.Invocation
 
             InvocationMiddleware invocationChain = BuildInvocationChain(context);
 
-            Task.Run(() => invocationChain(context, invocationContext => Task.CompletedTask)).GetAwaiter().GetResult();
+            Task.Run(() => invocationChain(context, invocationContext => Task.CompletedTask))
+                .GetAwaiter()
+                .GetResult();
 
             return GetExitCode(context);
         }
 
         private static InvocationMiddleware BuildInvocationChain(InvocationContext context)
         {
-            var invocations = new List<InvocationMiddleware>(context.Parser.Configuration.Middleware.Count + 1);
+            var invocations = new List<InvocationMiddleware>(
+                context.Parser.Configuration.Middleware.Count + 1
+            );
             invocations.AddRange(context.Parser.Configuration.Middleware);
 
-            invocations.Add(async (invocationContext, next) =>
-            {
-                if (invocationContext
-                    .ParseResult
-                    .CommandResult
-                    .Command is Command command)
+            invocations.Add(
+                async (invocationContext, next) =>
                 {
-                    var handler = command.Handler;
-
-                    if (handler != null)
+                    if (invocationContext.ParseResult.CommandResult.Command is Command command)
                     {
-                        context.ExitCode = await handler.InvokeAsync(invocationContext);
+                        var handler = command.Handler;
+
+                        if (handler != null)
+                        {
+                            context.ExitCode = await handler.InvokeAsync(invocationContext);
+                        }
                     }
                 }
-            });
+            );
 
             return invocations.Aggregate(
-                (first, second) =>
-                    (ctx, next) =>
-                        first(ctx,
-                            c => second(c, next)));
+                (first, second) => (ctx, next) => first(ctx, c => second(c, next))
+            );
         }
 
         private static int GetExitCode(InvocationContext context)

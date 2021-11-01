@@ -45,9 +45,15 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         {
             IWebHostEnvironment env = new HostingEnvironment();
 
-            env.Initialize(Path.GetFullPath(Path.Combine("testroot", "wwwroot")), CreateWebHostOptions());
+            env.Initialize(
+                Path.GetFullPath(Path.Combine("testroot", "wwwroot")),
+                CreateWebHostOptions()
+            );
 
-            Assert.Equal(Path.GetFullPath(Path.Combine("testroot", "wwwroot")), env.ContentRootPath);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("testroot", "wwwroot")),
+                env.ContentRootPath
+            );
             Assert.Null(env.WebRootPath);
             Assert.IsAssignableFrom<PhysicalFileProvider>(env.ContentRootFileProvider);
             Assert.IsAssignableFrom<NullFileProvider>(env.WebRootFileProvider);
@@ -67,11 +73,15 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             Assert.Equal("NewName", env.EnvironmentName);
         }
 
-        private WebHostOptions CreateWebHostOptions(IConfiguration configuration = null, string applicationNameFallback = null)
+        private WebHostOptions CreateWebHostOptions(
+            IConfiguration configuration = null,
+            string applicationNameFallback = null
+        )
         {
             return new WebHostOptions(
                 configuration ?? Mock.Of<IConfiguration>(),
-                applicationNameFallback: applicationNameFallback);
+                applicationNameFallback: applicationNameFallback
+            );
         }
     }
 }

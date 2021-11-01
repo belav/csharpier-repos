@@ -22,11 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosConventionSetBuilder(
-            ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public CosmosConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,7 +35,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelInitializedConventions.Add(new ContextContainerConvention(Dependencies));
+            conventionSet.ModelInitializedConventions.Add(
+                new ContextContainerConvention(Dependencies)
+            );
 
             conventionSet.ModelFinalizingConventions.Add(new ETagPropertyConvention());
 
@@ -47,39 +46,72 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
             var keyDiscoveryConvention = new CosmosKeyDiscoveryConvention(Dependencies);
             conventionSet.EntityTypeAddedConventions.Add(storeKeyConvention);
             conventionSet.EntityTypeAddedConventions.Add(discriminatorConvention);
-            ReplaceConvention(conventionSet.EntityTypeAddedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeAddedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.EntityTypeRemovedConventions, (DiscriminatorConvention)discriminatorConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeRemovedConventions,
+                (DiscriminatorConvention)discriminatorConvention
+            );
 
             conventionSet.EntityTypeBaseTypeChangedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, (DiscriminatorConvention)discriminatorConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                (DiscriminatorConvention)discriminatorConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
             conventionSet.EntityTypePrimaryKeyChangedConventions.Add(storeKeyConvention);
 
             conventionSet.KeyAddedConventions.Add(storeKeyConvention);
 
             conventionSet.KeyRemovedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.KeyRemovedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.KeyRemovedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.ForeignKeyAddedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyAddedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
             conventionSet.ForeignKeyRemovedConventions.Add(discriminatorConvention);
             conventionSet.ForeignKeyRemovedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.ForeignKeyRemovedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyRemovedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.ForeignKeyPropertiesChangedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyPropertiesChangedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.ForeignKeyUniquenessChangedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyUniquenessChangedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
             conventionSet.ForeignKeyOwnershipChangedConventions.Add(discriminatorConvention);
             conventionSet.ForeignKeyOwnershipChangedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.ForeignKeyOwnershipChangedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyOwnershipChangedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
             conventionSet.EntityTypeAnnotationChangedConventions.Add(storeKeyConvention);
             conventionSet.EntityTypeAnnotationChangedConventions.Add(keyDiscoveryConvention);
 
-            ReplaceConvention(conventionSet.PropertyAddedConventions, (KeyDiscoveryConvention)keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.PropertyAddedConventions,
+                (KeyDiscoveryConvention)keyDiscoveryConvention
+            );
 
             conventionSet.PropertyAnnotationChangedConventions.Add(storeKeyConvention);
 
@@ -100,7 +132,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         {
             using var serviceScope = CreateServiceScope();
             using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-            return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+            return new ModelBuilder(
+                ConventionSet.CreateConventionSet(context),
+                context.GetService<ModelDependencies>()
+            );
         }
 
         private static IServiceScope CreateServiceScope()
@@ -108,9 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkCosmos()
                 .AddDbContext<DbContext>(
-                    (p, o) =>
-                        o.UseCosmos("localhost", "_", "_")
-                            .UseInternalServiceProvider(p))
+                    (p, o) => o.UseCosmos("localhost", "_", "_").UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider();
 
             return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();

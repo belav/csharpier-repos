@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly TMember _leastOverriddenMember;
         private readonly MemberAnalysisResult _result;
 
-        internal MemberResolutionResult(TMember member, TMember leastOverriddenMember, MemberAnalysisResult result)
+        internal MemberResolutionResult(
+            TMember member,
+            TMember leastOverriddenMember,
+            MemberAnalysisResult result
+        )
         {
             _member = member;
             _leastOverriddenMember = leastOverriddenMember;
@@ -61,10 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public MemberResolutionKind Resolution
         {
-            get
-            {
-                return Result.Kind;
-            }
+            get { return Result.Kind; }
         }
 
         /// <summary>
@@ -72,36 +73,35 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsValid
         {
-            get
-            {
-                return Result.IsValid;
-            }
+            get { return Result.IsValid; }
         }
 
         public bool IsApplicable
         {
-            get
-            {
-                return Result.IsApplicable;
-            }
+            get { return Result.IsApplicable; }
         }
 
         internal MemberResolutionResult<TMember> Worse()
         {
-            return new MemberResolutionResult<TMember>(Member, LeastOverriddenMember, MemberAnalysisResult.Worse());
+            return new MemberResolutionResult<TMember>(
+                Member,
+                LeastOverriddenMember,
+                MemberAnalysisResult.Worse()
+            );
         }
 
         internal MemberResolutionResult<TMember> Worst()
         {
-            return new MemberResolutionResult<TMember>(Member, LeastOverriddenMember, MemberAnalysisResult.Worst());
+            return new MemberResolutionResult<TMember>(
+                Member,
+                LeastOverriddenMember,
+                MemberAnalysisResult.Worst()
+            );
         }
 
         internal bool HasUseSiteDiagnosticToReport
         {
-            get
-            {
-                return _result.HasUseSiteDiagnosticToReportFor(_member);
-            }
+            get { return _result.HasUseSiteDiagnosticToReportFor(_member); }
         }
 
         /// <summary>

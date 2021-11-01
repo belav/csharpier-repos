@@ -12,19 +12,37 @@ namespace System.Text.Json
     {
         private static readonly StandardFormat s_dateTimeStandardFormat = new StandardFormat('O');
 
-        public static void WriteDateTimeTrimmed(Span<byte> buffer, DateTime value, out int bytesWritten)
+        public static void WriteDateTimeTrimmed(
+            Span<byte> buffer,
+            DateTime value,
+            out int bytesWritten
+        )
         {
             Span<byte> tempSpan = stackalloc byte[JsonConstants.MaximumFormatDateTimeOffsetLength];
-            bool result = Utf8Formatter.TryFormat(value, tempSpan, out bytesWritten, s_dateTimeStandardFormat);
+            bool result = Utf8Formatter.TryFormat(
+                value,
+                tempSpan,
+                out bytesWritten,
+                s_dateTimeStandardFormat
+            );
             Debug.Assert(result);
             TrimDateTimeOffset(tempSpan.Slice(0, bytesWritten), out bytesWritten);
             tempSpan.Slice(0, bytesWritten).CopyTo(buffer);
         }
 
-        public static void WriteDateTimeOffsetTrimmed(Span<byte> buffer, DateTimeOffset value, out int bytesWritten)
+        public static void WriteDateTimeOffsetTrimmed(
+            Span<byte> buffer,
+            DateTimeOffset value,
+            out int bytesWritten
+        )
         {
             Span<byte> tempSpan = stackalloc byte[JsonConstants.MaximumFormatDateTimeOffsetLength];
-            bool result = Utf8Formatter.TryFormat(value, tempSpan, out bytesWritten, s_dateTimeStandardFormat);
+            bool result = Utf8Formatter.TryFormat(
+                value,
+                tempSpan,
+                out bytesWritten,
+                s_dateTimeStandardFormat
+            );
             Debug.Assert(result);
             TrimDateTimeOffset(tempSpan.Slice(0, bytesWritten), out bytesWritten);
             tempSpan.Slice(0, bytesWritten).CopyTo(buffer);
@@ -46,9 +64,11 @@ namespace System.Text.Json
             // YYYY-MM-DDThh:mm:ss.fffffff (JsonConstants.MaximumFormatDateTimeLength)
             // YYYY-MM-DDThh:mm:ss.fffffffZ (JsonConstants.MaximumFormatDateTimeLength + 1)
             // YYYY-MM-DDThh:mm:ss.fffffff(+|-)hh:mm (JsonConstants.MaximumFormatDateTimeOffsetLength)
-            Debug.Assert(buffer.Length == JsonConstants.MaximumFormatDateTimeLength ||
-                buffer.Length == (JsonConstants.MaximumFormatDateTimeLength + 1) ||
-                buffer.Length == JsonConstants.MaximumFormatDateTimeOffsetLength);
+            Debug.Assert(
+                buffer.Length == JsonConstants.MaximumFormatDateTimeLength
+                    || buffer.Length == (JsonConstants.MaximumFormatDateTimeLength + 1)
+                    || buffer.Length == JsonConstants.MaximumFormatDateTimeOffsetLength
+            );
 
             uint digit7 = buffer[26] - (uint)'0';
             uint digit6 = buffer[25] - (uint)'0';
@@ -57,7 +77,14 @@ namespace System.Text.Json
             uint digit3 = buffer[22] - (uint)'0';
             uint digit2 = buffer[21] - (uint)'0';
             uint digit1 = buffer[20] - (uint)'0';
-            uint fraction = (digit1 * 1_000_000) + (digit2 * 100_000) + (digit3 * 10_000) + (digit4 * 1_000) + (digit5 * 100) + (digit6 * 10) + digit7;
+            uint fraction =
+                (digit1 * 1_000_000)
+                + (digit2 * 100_000)
+                + (digit3 * 10_000)
+                + (digit4 * 1_000)
+                + (digit5 * 100)
+                + (digit6 * 10)
+                + digit7;
 
             // The period's index
             int curIndex = 19;

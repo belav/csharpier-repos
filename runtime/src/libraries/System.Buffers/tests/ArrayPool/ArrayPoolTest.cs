@@ -21,16 +21,28 @@ namespace System.Buffers.ArrayPool.Tests
             public const int BufferTrimPoll = 5;
         }
 
-        protected static int RunWithListener(Action body, EventLevel level, Action<EventWrittenEventArgs> callback)
+        protected static int RunWithListener(
+            Action body,
+            EventLevel level,
+            Action<EventWrittenEventArgs> callback
+        )
         {
-            using (TestEventListener listener = new TestEventListener("System.Buffers.ArrayPoolEventSource", level))
+            using (
+                TestEventListener listener = new TestEventListener(
+                    "System.Buffers.ArrayPoolEventSource",
+                    level
+                )
+            )
             {
                 int count = 0;
-                listener.RunWithCallback(e =>
-                {
-                    Interlocked.Increment(ref count);
-                    callback(e);
-                }, body);
+                listener.RunWithCallback(
+                    e =>
+                    {
+                        Interlocked.Increment(ref count);
+                        callback(e);
+                    },
+                    body
+                );
                 return count;
             }
         }
@@ -44,12 +56,13 @@ namespace System.Buffers.ArrayPool.Tests
             RemoteExecutor.Invoke(action).Dispose();
         }
 
-        protected static void RemoteInvokeWithTrimming(Action<string> method, bool trim = false, int timeout = RemoteExecutor.FailWaitTimeoutMilliseconds)
+        protected static void RemoteInvokeWithTrimming(
+            Action<string> method,
+            bool trim = false,
+            int timeout = RemoteExecutor.FailWaitTimeoutMilliseconds
+        )
         {
-            var options = new RemoteInvokeOptions
-            {
-                TimeOut = timeout
-            };
+            var options = new RemoteInvokeOptions { TimeOut = timeout };
 
             options.StartInfo.UseShellExecute = false;
             options.StartInfo.EnvironmentVariables.Add(TrimSwitchName, trim.ToString());

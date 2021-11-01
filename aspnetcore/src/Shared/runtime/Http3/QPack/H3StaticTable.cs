@@ -26,7 +26,10 @@ namespace System.Net.Http.QPack
             [500] = 71,
         };
 
-        private static readonly Dictionary<HttpMethod, int> s_methodIndex = new Dictionary<HttpMethod, int>
+        private static readonly Dictionary<HttpMethod, int> s_methodIndex = new Dictionary<
+            HttpMethod,
+            int
+        >
         {
             // TODO connect is internal to system.net.http
             [HttpMethod.Delete] = 16,
@@ -105,7 +108,10 @@ namespace System.Net.Http.QPack
             CreateHeaderField("range", "bytes=0-"),
             CreateHeaderField("strict-transport-security", "max-age=31536000"),
             CreateHeaderField("strict-transport-security", "max-age=31536000;includesubdomains"), // TODO confirm spaces here don't matter?
-            CreateHeaderField("strict-transport-security", "max-age=31536000;includesubdomains; preload"),
+            CreateHeaderField(
+                "strict-transport-security",
+                "max-age=31536000;includesubdomains; preload"
+            ),
             CreateHeaderField("vary", "accept-encoding"),
             CreateHeaderField("vary", "origin"), // 60
             CreateHeaderField("x-content-type-options", "nosniff"),
@@ -132,7 +138,10 @@ namespace System.Net.Http.QPack
             CreateHeaderField("access-control-request-method", "post"),
             CreateHeaderField("alt-svc", "clear"),
             CreateHeaderField("authorization", ""),
-            CreateHeaderField("content-security-policy", "script-src 'none'; object-src 'none'; base-uri 'none'"),
+            CreateHeaderField(
+                "content-security-policy",
+                "script-src 'none'; object-src 'none'; base-uri 'none'"
+            ),
             CreateHeaderField("early-data", "1"),
             CreateHeaderField("expect-ct", ""),
             CreateHeaderField("forwarded", ""),
@@ -148,8 +157,8 @@ namespace System.Net.Http.QPack
             CreateHeaderField("x-frame-options", "sameorigin"),
         };
 
-        private static HeaderField CreateHeaderField(string name, string value)
-            => new HeaderField(Encoding.ASCII.GetBytes(name), Encoding.ASCII.GetBytes(value));
+        private static HeaderField CreateHeaderField(string name, string value) =>
+            new HeaderField(Encoding.ASCII.GetBytes(name), Encoding.ASCII.GetBytes(value));
 
         public const int Authority = 0;
         public const int PathSlash = 1;

@@ -19,8 +19,11 @@ namespace Microsoft.NET.HostModel.AppHost
         /// <summary>
         /// hash value embedded in default apphost executable in a place where the path to the app binary should be stored.
         /// </summary>
-        private const string AppBinaryPathPlaceholder = "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2";
-        private static readonly byte[] AppBinaryPathPlaceholderSearchValue = Encoding.UTF8.GetBytes(AppBinaryPathPlaceholder);
+        private const string AppBinaryPathPlaceholder =
+            "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2";
+        private static readonly byte[] AppBinaryPathPlaceholderSearchValue = Encoding.UTF8.GetBytes(
+            AppBinaryPathPlaceholder
+        );
 
         /// <summary>
         /// Create an AppHost with embedded configuration of app binary location
@@ -35,7 +38,8 @@ namespace Microsoft.NET.HostModel.AppHost
             string appHostDestinationFilePath,
             string appBinaryFilePath,
             bool windowsGraphicalUserInterface = false,
-            string assemblyToCopyResorcesFrom = null)
+            string assemblyToCopyResorcesFrom = null
+        )
         {
             var bytesToWrite = Encoding.UTF8.GetBytes(appBinaryFilePath);
             if (bytesToWrite.Length > 1024)
@@ -48,7 +52,11 @@ namespace Microsoft.NET.HostModel.AppHost
             void RewriteAppHost(MemoryMappedViewAccessor accessor)
             {
                 // Re-write the destination apphost with the proper contents.
-                BinaryUtils.SearchAndReplace(accessor, AppBinaryPathPlaceholderSearchValue, bytesToWrite);
+                BinaryUtils.SearchAndReplace(
+                    accessor,
+                    AppBinaryPathPlaceholderSearchValue,
+                    bytesToWrite
+                );
 
                 appHostIsPEImage = PEUtils.IsPEImage(accessor);
 
@@ -83,44 +91,71 @@ namespace Microsoft.NET.HostModel.AppHost
 
             try
             {
-                RetryUtil.RetryOnIOError(() =>
-                {
-                    FileStream appHostSourceStream = null;
-                    MemoryMappedFile memoryMappedFile = null;
-                    MemoryMappedViewAccessor memoryMappedViewAccessor = null;
-                    try
+                RetryUtil.RetryOnIOError(
+                    () =>
                     {
-                        // Open the source host file.
-                        appHostSourceStream = new FileStream(appHostSourceFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        memoryMappedFile = MemoryMappedFile.CreateFromFile(appHostSourceStream, null, 0, MemoryMappedFileAccess.Read, HandleInheritability.None, true);
-                        memoryMappedViewAccessor = memoryMappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.CopyOnWrite);
-
-                        // Get the size of the source app host to ensure that we don't write extra data to the destination.
-                        // On Windows, the size of the view accessor is rounded up to the next page boundary.
-                        long sourceAppHostLength = appHostSourceStream.Length;
-
-                        // Transform the host file in-memory.
-                        RewriteAppHost(memoryMappedViewAccessor);
-
-                        // Save the transformed host.
-                        using (FileStream fileStream = new FileStream(appHostDestinationFilePath, FileMode.Create))
+                        FileStream appHostSourceStream = null;
+                        MemoryMappedFile memoryMappedFile = null;
+                        MemoryMappedViewAccessor memoryMappedViewAccessor = null;
+                        try
                         {
-                            BinaryUtils.WriteToStream(memoryMappedViewAccessor, fileStream, sourceAppHostLength);
+                            // Open the source host file.
+                            appHostSourceStream = new FileStream(
+                                appHostSourceFilePath,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.Read
+                            );
+                            memoryMappedFile = MemoryMappedFile.CreateFromFile(
+                                appHostSourceStream,
+                                null,
+                                0,
+                                MemoryMappedFileAccess.Read,
+                                HandleInheritability.None,
+                                true
+                            );
+                            memoryMappedViewAccessor = memoryMappedFile.CreateViewAccessor(
+                                0,
+                                0,
+                                MemoryMappedFileAccess.CopyOnWrite
+                            );
 
-                            // Remove the signature from MachO hosts.
-                            if (!appHostIsPEImage)
+                            // Get the size of the source app host to ensure that we don't write extra data to the destination.
+                            // On Windows, the size of the view accessor is rounded up to the next page boundary.
+                            long sourceAppHostLength = appHostSourceStream.Length;
+
+                            // Transform the host file in-memory.
+                            RewriteAppHost(memoryMappedViewAccessor);
+
+                            // Save the transformed host.
+                            using (
+                                FileStream fileStream = new FileStream(
+                                    appHostDestinationFilePath,
+                                    FileMode.Create
+                                )
+                            )
                             {
-                                MachOUtils.RemoveSignature(fileStream);
+                                BinaryUtils.WriteToStream(
+                                    memoryMappedViewAccessor,
+                                    fileStream,
+                                    sourceAppHostLength
+                                );
+
+                                // Remove the signature from MachO hosts.
+                                if (!appHostIsPEImage)
+                                {
+                                    MachOUtils.RemoveSignature(fileStream);
+                                }
                             }
                         }
+                        finally
+                        {
+                            memoryMappedViewAccessor?.Dispose();
+                            memoryMappedFile?.Dispose();
+                            appHostSourceStream?.Dispose();
+                        }
                     }
-                    finally
-                    {
-                        memoryMappedViewAccessor?.Dispose();
-                        memoryMappedFile?.Dispose();
-                        appHostSourceStream?.Dispose();
-                    }
-                });
+                );
 
                 RetryUtil.RetryOnWin32Error(UpdateResources);
 
@@ -133,12 +168,14 @@ namespace Microsoft.NET.HostModel.AppHost
                     do
                     {
                         chmodReturnCode = chmod(appHostDestinationFilePath, filePermissionOctal);
-                    }
-                    while (chmodReturnCode == -1 && Marshal.GetLastWin32Error() == EINTR);
+                    } while (chmodReturnCode == -1 && Marshal.GetLastWin32Error() == EINTR);
 
                     if (chmodReturnCode == -1)
                     {
-                        throw new Win32Exception(Marshal.GetLastWin32Error(), $"Could not set file permission {filePermissionOctal} for {appHostDestinationFilePath}.");
+                        throw new Win32Exception(
+                            Marshal.GetLastWin32Error(),
+                            $"Could not set file permission {filePermissionOctal} for {appHostDestinationFilePath}."
+                        );
                     }
                 }
             }
@@ -163,34 +200,70 @@ namespace Microsoft.NET.HostModel.AppHost
         /// </summary>
         /// <param name="appHostPath">The path of Apphost template, which has the place holder</param>
         /// <param name="bundleHeaderOffset">The offset to the location of bundle header</param>
-        public static void SetAsBundle(
-            string appHostPath,
-            long bundleHeaderOffset)
+        public static void SetAsBundle(string appHostPath, long bundleHeaderOffset)
         {
-            byte[] bundleHeaderPlaceholder = {
+            byte[] bundleHeaderPlaceholder =
+            {
                 // 8 bytes represent the bundle header-offset
                 // Zero for non-bundle apphosts (default).
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
                 // 32 bytes represent the bundle signature: SHA-256 for ".net core bundle"
-                0x8b, 0x12, 0x02, 0xb9, 0x6a, 0x61, 0x20, 0x38,
-                0x72, 0x7b, 0x93, 0x02, 0x14, 0xd7, 0xa0, 0x32,
-                0x13, 0xf5, 0xb9, 0xe6, 0xef, 0xae, 0x33, 0x18,
-                0xee, 0x3b, 0x2d, 0xce, 0x24, 0xb3, 0x6a, 0xae
+                0x8b,
+                0x12,
+                0x02,
+                0xb9,
+                0x6a,
+                0x61,
+                0x20,
+                0x38,
+                0x72,
+                0x7b,
+                0x93,
+                0x02,
+                0x14,
+                0xd7,
+                0xa0,
+                0x32,
+                0x13,
+                0xf5,
+                0xb9,
+                0xe6,
+                0xef,
+                0xae,
+                0x33,
+                0x18,
+                0xee,
+                0x3b,
+                0x2d,
+                0xce,
+                0x24,
+                0xb3,
+                0x6a,
+                0xae
             };
 
             // Re-write the destination apphost with the proper contents.
-            RetryUtil.RetryOnIOError(() =>
-                BinaryUtils.SearchAndReplace(appHostPath,
-                                             bundleHeaderPlaceholder,
-                                             BitConverter.GetBytes(bundleHeaderOffset),
-                                             pad0s: false));
+            RetryUtil.RetryOnIOError(
+                () =>
+                    BinaryUtils.SearchAndReplace(
+                        appHostPath,
+                        bundleHeaderPlaceholder,
+                        BitConverter.GetBytes(bundleHeaderOffset),
+                        pad0s: false
+                    )
+            );
 
-            RetryUtil.RetryOnIOError(() =>
-                MachOUtils.AdjustHeadersForBundle(appHostPath));
+            RetryUtil.RetryOnIOError(() => MachOUtils.AdjustHeadersForBundle(appHostPath));
 
             // Memory-mapped write does not updating last write time
-            RetryUtil.RetryOnIOError(() =>
-                File.SetLastWriteTimeUtc(appHostPath, DateTime.UtcNow));
+            RetryUtil.RetryOnIOError(() => File.SetLastWriteTimeUtc(appHostPath, DateTime.UtcNow));
         }
 
         /// <summary>
@@ -201,12 +274,41 @@ namespace Microsoft.NET.HostModel.AppHost
         /// <returns>True if the AppHost is a single-file bundle, false otherwise</returns>
         public static bool IsBundle(string appHostFilePath, out long bundleHeaderOffset)
         {
-            byte[] bundleSignature = {
+            byte[] bundleSignature =
+            {
                 // 32 bytes represent the bundle signature: SHA-256 for ".net core bundle"
-                0x8b, 0x12, 0x02, 0xb9, 0x6a, 0x61, 0x20, 0x38,
-                0x72, 0x7b, 0x93, 0x02, 0x14, 0xd7, 0xa0, 0x32,
-                0x13, 0xf5, 0xb9, 0xe6, 0xef, 0xae, 0x33, 0x18,
-                0xee, 0x3b, 0x2d, 0xce, 0x24, 0xb3, 0x6a, 0xae
+                0x8b,
+                0x12,
+                0x02,
+                0xb9,
+                0x6a,
+                0x61,
+                0x20,
+                0x38,
+                0x72,
+                0x7b,
+                0x93,
+                0x02,
+                0x14,
+                0xd7,
+                0xa0,
+                0x32,
+                0x13,
+                0xf5,
+                0xb9,
+                0xe6,
+                0xef,
+                0xae,
+                0x33,
+                0x18,
+                0xee,
+                0x3b,
+                0x2d,
+                0xce,
+                0x24,
+                0xb3,
+                0x6a,
+                0xae
             };
 
             long headerOffset = 0;
@@ -214,7 +316,9 @@ namespace Microsoft.NET.HostModel.AppHost
             {
                 using (var memoryMappedFile = MemoryMappedFile.CreateFromFile(appHostFilePath))
                 {
-                    using (MemoryMappedViewAccessor accessor = memoryMappedFile.CreateViewAccessor())
+                    using (
+                        MemoryMappedViewAccessor accessor = memoryMappedFile.CreateViewAccessor()
+                    )
                     {
                         int position = BinaryUtils.SearchInFile(accessor, bundleSignature);
                         if (position == -1)

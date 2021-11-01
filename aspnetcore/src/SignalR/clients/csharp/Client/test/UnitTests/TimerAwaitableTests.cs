@@ -50,9 +50,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         {
             using (_timer)
             {
-                while (await _timer)
-                {
-                }
+                while (await _timer) { }
             }
         }
 

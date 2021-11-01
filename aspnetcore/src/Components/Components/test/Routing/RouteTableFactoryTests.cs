@@ -29,10 +29,14 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void CanCacheRouteTableWithDifferentAssembliesAndOrder()
         {
             // Arrange
-            var routes1 = RouteTableFactory.Create(new[] { typeof(object).Assembly, GetType().Assembly, });
+            var routes1 = RouteTableFactory.Create(
+                new[] { typeof(object).Assembly, GetType().Assembly, }
+            );
 
             // Act
-            var routes2 = RouteTableFactory.Create(new[] { GetType().Assembly, typeof(object).Assembly, });
+            var routes2 = RouteTableFactory.Create(
+                new[] { GetType().Assembly, typeof(object).Assembly, }
+            );
 
             // Assert
             Assert.Same(routes1, routes2);
@@ -45,7 +49,9 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             var routes1 = RouteTableFactory.Create(new[] { GetType().Assembly, });
 
             // Act
-            var routes2 = RouteTableFactory.Create(new[] { GetType().Assembly, typeof(object).Assembly, });
+            var routes2 = RouteTableFactory.Create(
+                new[] { GetType().Assembly, typeof(object).Assembly, }
+            );
 
             // Assert
             Assert.NotSame(routes1, routes2);
@@ -70,13 +76,16 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void CanDiscoverRoutes_WithInheritance()
         {
             // Arrange & Act
-            var routes = RouteTableFactory.Create(new List<Type> { typeof(MyComponent), typeof(MyInheritedComponent), });
+            var routes = RouteTableFactory.Create(
+                new List<Type> { typeof(MyComponent), typeof(MyInheritedComponent), }
+            );
 
             // Assert
             Assert.Collection(
                 routes.Routes.OrderBy(r => r.Template.TemplateText),
                 r => Assert.Equal("Test1", r.Template.TemplateText),
-                r => Assert.Equal("Test2", r.Template.TemplateText));
+                r => Assert.Equal("Test2", r.Template.TemplateText)
+            );
         }
 
         [Route("Test2")]
@@ -223,7 +232,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
 
             // Assert
             Assert.NotNull(context.Handler);
-            Assert.Single(context.Parameters, p => p.Key == "parameter" && (string)p.Value == expectedValue);
+            Assert.Single(
+                context.Parameters,
+                p => p.Key == "parameter" && (string)p.Value == expectedValue
+            );
         }
 
         [Theory]
@@ -240,14 +252,19 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
 
             // Assert
             Assert.NotNull(context.Handler);
-            Assert.Single(context.Parameters, p => p.Key == "parameter" && (string)p.Value == expectedValue);
+            Assert.Single(
+                context.Parameters,
+                p => p.Key == "parameter" && (string)p.Value == expectedValue
+            );
         }
 
         [Fact]
         public void CanMatchTemplateWithMultipleParameters()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute("/{some}/awesome/{route}/").Build();
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/{some}/awesome/{route}/")
+                .Build();
             var context = new RouteContext("/an/awesome/path");
 
             var expectedParameters = new Dictionary<string, object>
@@ -264,12 +281,13 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             Assert.Equal(expectedParameters, context.Parameters);
         }
 
-
         [Fact]
         public void CanMatchTemplateWithMultipleParametersAndCatchAllParameter()
         {
             // Arrange
-            var routeTable = new TestRouteTableBuilder().AddRoute("/{some}/awesome/{route}/with/{*catchAll}").Build();
+            var routeTable = new TestRouteTableBuilder()
+                .AddRoute("/{some}/awesome/{route}/with/{*catchAll}")
+                .Build();
             var context = new RouteContext("/an/awesome/path/with/some/catch/all/stuff");
 
             var expectedParameters = new Dictionary<string, object>
@@ -287,24 +305,34 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             Assert.Equal(expectedParameters, context.Parameters);
         }
 
-        public static IEnumerable<object[]> CanMatchParameterWithConstraintCases() => new object[][]
-        {
-            new object[] { "/{value:bool}", "/true", true },
-            new object[] { "/{value:bool}", "/false", false },
-            new object[] { "/{value:datetime}", "/1955-01-30", new DateTime(1955, 1, 30) },
-            new object[] { "/{value:decimal}", "/5.3", 5.3m },
-            new object[] { "/{value:double}", "/0.1", 0.1d },
-            new object[] { "/{value:float}", "/0.1", 0.1f },
-            new object[] { "/{value:guid}", "/1FCEF085-884F-416E-B0A1-71B15F3E206B", Guid.Parse("1FCEF085-884F-416E-B0A1-71B15F3E206B") },
-            new object[] { "/{value:int}", "/123", 123 },
-            new object[] { "/{value:int}", "/-123", -123},
-            new object[] { "/{value:long}", "/9223372036854775807", long.MaxValue },
-            new object[] { "/{value:long}", $"/-9223372036854775808", long.MinValue },
-        };
+        public static IEnumerable<object[]> CanMatchParameterWithConstraintCases() =>
+            new object[][]
+            {
+                new object[] { "/{value:bool}", "/true", true },
+                new object[] { "/{value:bool}", "/false", false },
+                new object[] { "/{value:datetime}", "/1955-01-30", new DateTime(1955, 1, 30) },
+                new object[] { "/{value:decimal}", "/5.3", 5.3m },
+                new object[] { "/{value:double}", "/0.1", 0.1d },
+                new object[] { "/{value:float}", "/0.1", 0.1f },
+                new object[]
+                {
+                    "/{value:guid}",
+                    "/1FCEF085-884F-416E-B0A1-71B15F3E206B",
+                    Guid.Parse("1FCEF085-884F-416E-B0A1-71B15F3E206B")
+                },
+                new object[] { "/{value:int}", "/123", 123 },
+                new object[] { "/{value:int}", "/-123", -123 },
+                new object[] { "/{value:long}", "/9223372036854775807", long.MaxValue },
+                new object[] { "/{value:long}", $"/-9223372036854775808", long.MinValue },
+            };
 
         [Theory]
         [MemberData(nameof(CanMatchParameterWithConstraintCases))]
-        public void CanMatchParameterWithConstraint(string template, string contextUrl, object convertedValue)
+        public void CanMatchParameterWithConstraint(
+            string template,
+            string contextUrl,
+            object convertedValue
+        )
         {
             // Arrange
             var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
@@ -319,10 +347,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
                 // Make it easier to track down failing tests when using MemberData
                 throw new InvalidOperationException($"Failed to match template '{template}'.");
             }
-            Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+            Assert.Equal(
+                new Dictionary<string, object> { { "value", convertedValue } },
+                context.Parameters
+            );
         }
 
         [Fact]
@@ -367,11 +395,41 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
 
         [Theory]
         [InlineData("literal", null, "literal", "literal/{parameter?}", typeof(TestHandler1))]
-        [InlineData("literal/value", "value", "literal", "literal/{parameter?}", typeof(TestHandler2))]
-        [InlineData("literal", null, "literal/{parameter?}", "literal/{*parameter}", typeof(TestHandler1))]
-        [InlineData("literal/value", "value", "literal/{parameter?}", "literal/{*parameter}", typeof(TestHandler1))]
-        [InlineData("literal/value/other", "value/other", "literal /{parameter?}", "literal/{*parameter}", typeof(TestHandler2))]
-        public void CorrectlyMatchesVariableLengthSegments(string path, string expectedValue, string first, string second, Type handler)
+        [InlineData(
+            "literal/value",
+            "value",
+            "literal",
+            "literal/{parameter?}",
+            typeof(TestHandler2)
+        )]
+        [InlineData(
+            "literal",
+            null,
+            "literal/{parameter?}",
+            "literal/{*parameter}",
+            typeof(TestHandler1)
+        )]
+        [InlineData(
+            "literal/value",
+            "value",
+            "literal/{parameter?}",
+            "literal/{*parameter}",
+            typeof(TestHandler1)
+        )]
+        [InlineData(
+            "literal/value/other",
+            "value/other",
+            "literal /{parameter?}",
+            "literal/{*parameter}",
+            typeof(TestHandler2)
+        )]
+        public void CorrectlyMatchesVariableLengthSegments(
+            string path,
+            string expectedValue,
+            string first,
+            string second,
+            Type handler
+        )
         {
             // Arrange
 
@@ -388,7 +446,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
 
             // Assert
             Assert.Equal(handler, context.Handler);
-            var value = expectedValue != null ? Assert.Single(context.Parameters, p => p.Key == "parameter").Value : null;
+            var value =
+                expectedValue != null
+                    ? Assert.Single(context.Parameters, p => p.Key == "parameter").Value
+                    : null;
             Assert.Equal(expectedValue, value?.ToString());
         }
 
@@ -400,9 +461,7 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder()
-                .AddRoute(template)
-                .Build();
+            var table = new TestRouteTableBuilder().AddRoute(template).Build();
 
             var context = new RouteContext(path);
 
@@ -414,16 +473,13 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             Assert.Equal("1/2/3/4/5", values);
         }
 
-
         [Fact]
         public void CatchAllEmpty()
         {
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder()
-                .AddRoute("{*catchall}")
-                .Build();
+            var table = new TestRouteTableBuilder().AddRoute("{*catchall}").Build();
 
             var context = new RouteContext("/");
 
@@ -441,9 +497,7 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder()
-                .AddRoute("{parameter?}")
-                .Build();
+            var table = new TestRouteTableBuilder().AddRoute("{parameter?}").Build();
 
             var context = new RouteContext("/");
 
@@ -531,15 +585,23 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/", null, null)]
         [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/parameter", "parameter", null)]
         [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/value/1", "value", "1")]
-        [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/value/1/2/3/4/5", "value", "1/2/3/4/5")]
-        public void OptionalParameterPlusCatchAllRoute(string template, string path, string parameterValue, string catchAllValue)
+        [InlineData(
+            "prefix/{parameter?}/{*catchAll}",
+            "/prefix/value/1/2/3/4/5",
+            "value",
+            "1/2/3/4/5"
+        )]
+        public void OptionalParameterPlusCatchAllRoute(
+            string template,
+            string path,
+            string parameterValue,
+            string catchAllValue
+        )
         {
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder()
-                .AddRoute(template)
-                .Build();
+            var table = new TestRouteTableBuilder().AddRoute(template).Build();
 
             var context = new RouteContext(path);
 
@@ -559,9 +621,7 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
 
             // Routes are added in reverse precedence order
-            var table = new TestRouteTableBuilder()
-                .AddRoute("/values/{*values:int}")
-                .Build();
+            var table = new TestRouteTableBuilder().AddRoute("/values/{*values:int}").Build();
 
             var context = new RouteContext("values/1/2/3/4/5/A");
 
@@ -592,22 +652,27 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
                 // Make it easier to track down failing tests when using MemberData
                 throw new InvalidOperationException($"Failed to match template '{template}'.");
             }
-            Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+            Assert.Equal(
+                new Dictionary<string, object> { { "value", convertedValue } },
+                context.Parameters
+            );
         }
 
-        public static IEnumerable<object[]> CanMatchOptionalParameterWithConstraintCases() => new object[][]
-{
-            new object[] { "/optional/{value:bool?}", "/optional/", null },
-            new object[] { "/optional/{value:datetime?}", "/optional/", null },
-            new object[] { "/optional/{value:decimal?}", "/optional/", null },
-};
+        public static IEnumerable<object[]> CanMatchOptionalParameterWithConstraintCases() =>
+            new object[][]
+            {
+                new object[] { "/optional/{value:bool?}", "/optional/", null },
+                new object[] { "/optional/{value:datetime?}", "/optional/", null },
+                new object[] { "/optional/{value:decimal?}", "/optional/", null },
+            };
 
         [Theory]
         [MemberData(nameof(CanMatchOptionalParameterWithConstraintCases))]
-        public void CanMatchOptionalParameterWithConstraint(string template, string contextUrl, object convertedValue)
+        public void CanMatchOptionalParameterWithConstraint(
+            string template,
+            string contextUrl,
+            object convertedValue
+        )
         {
             // Arrange
             var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
@@ -622,10 +687,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
                 // Make it easier to track down failing tests when using MemberData
                 throw new InvalidOperationException($"Failed to match template '{template}'.");
             }
-            Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+            Assert.Equal(
+                new Dictionary<string, object> { { "value", convertedValue } },
+                context.Parameters
+            );
         }
 
         [Fact]
@@ -648,22 +713,30 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
                 // Make it easier to track down failing tests when using MemberData
                 throw new InvalidOperationException($"Failed to match template '{template}'.");
             }
-            Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue },
-                { "value2", convertedValue }
-            }, context.Parameters);
+            Assert.Equal(
+                new Dictionary<string, object>
+                {
+                    { "value", convertedValue },
+                    { "value2", convertedValue }
+                },
+                context.Parameters
+            );
         }
 
-        public static IEnumerable<object[]> CanMatchSegmentWithMultipleConstraintsCases() => new object[][]
-{
-            new object[] { "/{value:double:int}/", "/15", 15 },
-            new object[] { "/{value:double:int?}/", "/", null },
-};
+        public static IEnumerable<object[]> CanMatchSegmentWithMultipleConstraintsCases() =>
+            new object[][]
+            {
+                new object[] { "/{value:double:int}/", "/15", 15 },
+                new object[] { "/{value:double:int?}/", "/", null },
+            };
 
         [Theory]
         [MemberData(nameof(CanMatchSegmentWithMultipleConstraintsCases))]
-        public void CanMatchSegmentWithMultipleConstraints(string template, string contextUrl, object convertedValue)
+        public void CanMatchSegmentWithMultipleConstraints(
+            string template,
+            string contextUrl,
+            object convertedValue
+        )
         {
             // Arrange
             var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
@@ -673,10 +746,10 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             routeTable.Route(context);
 
             // Assert
-            Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+            Assert.Equal(
+                new Dictionary<string, object> { { "value", convertedValue } },
+                context.Parameters
+            );
         }
 
         [Fact]
@@ -719,10 +792,13 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void ThrowsForOptionalParametersAndNonOptionalParameters()
         {
             // Arrange, act & assert
-            Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-                .AddRoute("/users/{id}", typeof(TestHandler1))
-                .AddRoute("/users/{id?}", typeof(TestHandler2))
-                .Build());
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    new TestRouteTableBuilder()
+                        .AddRoute("/users/{id}", typeof(TestHandler1))
+                        .AddRoute("/users/{id?}", typeof(TestHandler2))
+                        .Build()
+            );
         }
 
         [Theory]
@@ -737,9 +813,9 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void ThrowsWhenCatchAllIsNotTheLastSegment(string template)
         {
             // Arrange, act & assert
-            Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-                .AddRoute(template)
-                .Build());
+            Assert.Throws<InvalidOperationException>(
+                () => new TestRouteTableBuilder().AddRoute(template).Build()
+            );
         }
 
         [Theory]
@@ -752,9 +828,9 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void ThrowsForOptionalParametersFollowedByNonOptionalParameters(string template)
         {
             // Arrange, act & assert
-            Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-                .AddRoute(template)
-                .Build());
+            Assert.Throws<InvalidOperationException>(
+                () => new TestRouteTableBuilder().AddRoute(template).Build()
+            );
         }
 
         [Theory]
@@ -763,10 +839,13 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void ThrowsForAmbiguousRoutes(string first, string second)
         {
             // Arrange, act & assert
-            var exception = Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-                .AddRoute(first, typeof(TestHandler1))
-                .AddRoute(second, typeof(TestHandler2))
-                .Build());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                    new TestRouteTableBuilder()
+                        .AddRoute(first, typeof(TestHandler1))
+                        .AddRoute(second, typeof(TestHandler2))
+                        .Build()
+            );
 
             exception.Message.Contains("The following routes are ambiguous");
         }
@@ -790,11 +869,23 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         [InlineData("{param}/{*catchAll:int}", "{param}/{optional?}")]
         [InlineData("{param}/{*catchAll}", "{param}/{optional?}")]
         [InlineData("{param1?}/{param2?}/{param3?}/{optional?}", "/")]
-        [InlineData("{param1?}/{param2?}/{param3?}/{optional?}", "{param1?}/{param2?}/{param3?}/{optional:int?}")]
-        [InlineData("{param1?}/{param2?}/{param3?}/{optional?}", "{param1?}/{param2?}/{param3:int?}/{optional?}")]
+        [InlineData(
+            "{param1?}/{param2?}/{param3?}/{optional?}",
+            "{param1?}/{param2?}/{param3?}/{optional:int?}"
+        )]
+        [InlineData(
+            "{param1?}/{param2?}/{param3?}/{optional?}",
+            "{param1?}/{param2?}/{param3:int?}/{optional?}"
+        )]
         [InlineData("{param1?}/{param2?}/{param3:int?}/{optional?}", "{param1?}/{param2?}")]
-        [InlineData("{param1?}/{param2?}/{param3?}/{*catchAll:int}", "{param1?}/{param2?}/{param3?}/{optional?}")]
-        [InlineData("{param1?}/{param2?}/{param3?}/{*catchAll}", "{param1?}/{param2?}/{param3?}/{optional?}")]
+        [InlineData(
+            "{param1?}/{param2?}/{param3?}/{*catchAll:int}",
+            "{param1?}/{param2?}/{param3?}/{optional?}"
+        )]
+        [InlineData(
+            "{param1?}/{param2?}/{param3?}/{*catchAll}",
+            "{param1?}/{param2?}/{param3?}/{optional?}"
+        )]
         public void DoesNotThrowForNonAmbiguousRoutes(string first, string second)
         {
             // Arrange
@@ -816,9 +907,9 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void ThrowsForLiteralWithQuestionMark()
         {
             // Arrange, act & assert
-            Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-                .AddRoute("literal?")
-                .Build());
+            Assert.Throws<InvalidOperationException>(
+                () => new TestRouteTableBuilder().AddRoute("literal?").Build()
+            );
         }
 
         [Fact]
@@ -848,7 +939,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             var handler = typeof(int);
             var routeTable = new TestRouteTableBuilder()
                 .AddRoute("/an/awesome/path")
-                .AddRoute("/an/awesome/", handler).Build();
+                .AddRoute("/an/awesome/", handler)
+                .Build();
 
             // Act
             Assert.Equal("an/awesome", routeTable.Routes[0].Template.TemplateText);
@@ -860,7 +952,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             // Arrange
             var routeTable = new TestRouteTableBuilder()
                 .AddRoute("/products/{id}")
-                .AddRoute("/products/{id:int}").Build();
+                .AddRoute("/products/{id:int}")
+                .Build();
             var context = new RouteContext("/products/456");
 
             // Act
@@ -868,10 +961,7 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
 
             // Assert
             Assert.NotNull(context.Handler);
-            Assert.Equal(context.Parameters, new Dictionary<string, object>
-            {
-                { "id", 456 }
-            });
+            Assert.Equal(context.Parameters, new Dictionary<string, object> { { "id", 456 } });
         }
 
         [Fact]
@@ -900,7 +990,8 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             var handler = typeof(int);
             var routeTable = new TestRouteTableBuilder()
                 .AddRoute("/an/awesome/", handler)
-                .AddRoute("/a/brilliant/").Build();
+                .AddRoute("/a/brilliant/")
+                .Build();
 
             // Act
             Assert.Equal("a/brilliant", routeTable.Routes[0].Template.TemplateText);
@@ -949,14 +1040,15 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
         public void DetectsAmbiguousRoutes(string left, string right)
         {
             // Arrange
-            var expectedMessage = $@"The following routes are ambiguous:
+            var expectedMessage =
+                $@"The following routes are ambiguous:
 '{left.Trim('/')}' in '{typeof(object).FullName}'
 '{right.Trim('/')}' in '{typeof(object).FullName}'
 ";
             // Act
-            var exception = Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-                .AddRoute(left)
-                .AddRoute(right).Build());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => new TestRouteTableBuilder().AddRoute(left).AddRoute(right).Build()
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -977,38 +1069,51 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
             routeTable.Route(context);
 
             // Assert
-            Assert.Collection(routeTable.Routes,
+            Assert.Collection(
+                routeTable.Routes,
                 route =>
                 {
                     Assert.Same(typeof(TestHandler1), route.Handler);
                     Assert.Equal("/", route.Template.TemplateText);
-                    Assert.Equal(new[] { "PaRam1", "param2" }, route.UnusedRouteParameterNames.OrderBy(id => id).ToArray());
+                    Assert.Equal(
+                        new[] { "PaRam1", "param2" },
+                        route.UnusedRouteParameterNames.OrderBy(id => id).ToArray()
+                    );
                 },
                 route =>
                 {
                     Assert.Same(typeof(TestHandler1), route.Handler);
                     Assert.Equal("products/{param1:int}", route.Template.TemplateText);
-                    Assert.Equal(new[] { "param2" }, route.UnusedRouteParameterNames.OrderBy(id => id).ToArray());
+                    Assert.Equal(
+                        new[] { "param2" },
+                        route.UnusedRouteParameterNames.OrderBy(id => id).ToArray()
+                    );
                 },
                 route =>
                 {
                     Assert.Same(typeof(TestHandler1), route.Handler);
                     Assert.Equal("products/{param2}/{PaRam1}", route.Template.TemplateText);
-                    Assert.Equal(Array.Empty<string>(), route.UnusedRouteParameterNames.OrderBy(id => id).ToArray());
+                    Assert.Equal(
+                        Array.Empty<string>(),
+                        route.UnusedRouteParameterNames.OrderBy(id => id).ToArray()
+                    );
                 },
                 route =>
                 {
                     Assert.Same(typeof(TestHandler2), route.Handler);
                     Assert.Equal("{unrelated}", route.Template.TemplateText);
-                    Assert.Equal(Array.Empty<string>(), route.UnusedRouteParameterNames.OrderBy(id => id).ToArray());
-                });
+                    Assert.Equal(
+                        Array.Empty<string>(),
+                        route.UnusedRouteParameterNames.OrderBy(id => id).ToArray()
+                    );
+                }
+            );
 
             Assert.Same(typeof(TestHandler1), context.Handler);
-            Assert.Equal(new Dictionary<string, object>
-            {
-                { "param1", 456 },
-                { "param2", null },
-            }, context.Parameters);
+            Assert.Equal(
+                new Dictionary<string, object> { { "param1", 456 }, { "param2", null }, },
+                context.Parameters
+            );
         }
 
         private class TestRouteTableBuilder
@@ -1028,10 +1133,14 @@ namespace Microsoft.AspNetCore.Components.Test.Routing
                 {
                     var templatesByHandler = _routeTemplates
                         .GroupBy(rt => rt.Handler)
-                        .ToDictionary(group => group.Key, group => group.Select(g => g.Template).ToArray());
+                        .ToDictionary(
+                            group => group.Key,
+                            group => group.Select(g => g.Template).ToArray()
+                        );
                     return RouteTableFactory.Create(templatesByHandler);
                 }
-                catch (InvalidOperationException ex) when (ex.InnerException is InvalidOperationException)
+                catch (InvalidOperationException ex)
+                    when (ex.InnerException is InvalidOperationException)
                 {
                     // ToArray() will wrap our exception in its own.
                     throw ex.InnerException;

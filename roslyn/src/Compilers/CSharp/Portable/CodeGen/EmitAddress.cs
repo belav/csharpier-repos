@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     return EmitLocalAddress((BoundLocal)expression, addressKind);
 
                 case BoundKind.Dup:
-                    Debug.Assert(((BoundDup)expression).RefKind != RefKind.None, "taking address of a stack value?");
+                    Debug.Assert(
+                        ((BoundDup)expression).RefKind != RefKind.None,
+                        "taking address of a stack value?"
+                    );
                     return EmitDupAddress((BoundDup)expression, addressKind);
 
                 case BoundKind.ConditionalReceiver:
@@ -45,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     break;
 
                 case BoundKind.ComplexConditionalReceiver:
-                    EmitComplexConditionalReceiverAddress((BoundComplexConditionalReceiver)expression);
+                    EmitComplexConditionalReceiverAddress(
+                        (BoundComplexConditionalReceiver)expression
+                    );
                     break;
 
                 case BoundKind.Parameter:
@@ -64,11 +69,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     break;
 
                 case BoundKind.ThisReference:
-                    Debug.Assert(expression.Type.IsValueType || IsAnyReadOnly(addressKind), "'this' is readonly in classes");
+                    Debug.Assert(
+                        expression.Type.IsValueType || IsAnyReadOnly(addressKind),
+                        "'this' is readonly in classes"
+                    );
 
                     if (expression.Type.IsValueType)
                     {
-
                         if (!HasHome(expression, addressKind))
                         {
                             // a readonly method is calling a non-readonly method, therefore we need to copy 'this'
@@ -81,7 +88,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     {
                         _builder.EmitLoadArgumentAddrOpcode(0);
                     }
-
                     break;
 
                 case BoundKind.PreviousSubmissionReference:
@@ -89,7 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     throw ExceptionUtilities.UnexpectedValue(expression.Kind);
 
                 case BoundKind.BaseReference:
-                    Debug.Assert(false, "base is always a reference type, why one may need a reference to it?");
+                    Debug.Assert(
+                        false,
+                        "base is always a reference type, why one may need a reference to it?"
+                    );
                     break;
 
                 case BoundKind.PassByCopy:
@@ -113,8 +122,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     var call = (BoundCall)expression;
                     var methodRefKind = call.Method.RefKind;
 
-                    if (methodRefKind == RefKind.Ref ||
-                        (IsAnyReadOnly(addressKind) && methodRefKind == RefKind.RefReadOnly))
+                    if (
+                        methodRefKind == RefKind.Ref
+                        || (IsAnyReadOnly(addressKind) && methodRefKind == RefKind.RefReadOnly)
+                    )
                     {
                         EmitCallExpression(call, UseKind.UsedAsAddress);
                         break;
@@ -125,8 +136,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 case BoundKind.FunctionPointerInvocation:
                     var funcPtrInvocation = (BoundFunctionPointerInvocation)expression;
                     var funcPtrRefKind = funcPtrInvocation.FunctionPointer.Signature.RefKind;
-                    if (funcPtrRefKind == RefKind.Ref ||
-                        (IsAnyReadOnly(addressKind) && funcPtrRefKind == RefKind.RefReadOnly))
+                    if (
+                        funcPtrRefKind == RefKind.Ref
+                        || (IsAnyReadOnly(addressKind) && funcPtrRefKind == RefKind.RefReadOnly)
+                    )
                     {
                         EmitCalli(funcPtrInvocation, UseKind.UsedAsAddress);
                         break;
@@ -138,9 +151,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     var type = expression.Type;
 
                     var temp = this.AllocateTemp(type, expression.Syntax);
-                    _builder.EmitLocalAddress(temp);                  //  ldloca temp
-                    _builder.EmitOpCode(ILOpCode.Dup);                //  dup
-                    _builder.EmitOpCode(ILOpCode.Initobj);            //  initobj  <type>
+                    _builder.EmitLocalAddress(temp); //  ldloca temp
+                    _builder.EmitOpCode(ILOpCode.Dup); //  dup
+                    _builder.EmitOpCode(ILOpCode.Initobj); //  initobj  <type>
                     EmitSymbolToken(type, expression.Syntax);
                     return temp;
 
@@ -150,7 +163,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         goto default;
                     }
 
-                    EmitConditionalOperatorAddress((BoundConditionalOperator)expression, addressKind);
+                    EmitConditionalOperatorAddress(
+                        (BoundConditionalOperator)expression,
+                        addressKind
+                    );
                     break;
 
                 case BoundKind.AssignmentOperator:
@@ -178,7 +194,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             return null;
         }
 
-        private LocalDefinition EmitPassByCopyAddress(BoundPassByCopy passByCopyExpr, AddressKind addressKind)
+        private LocalDefinition EmitPassByCopyAddress(
+            BoundPassByCopy passByCopyExpr,
+            AddressKind addressKind
+        )
         {
             // Normally we can just defer PassByCopy to the `default`,
             // but in some cases the value inside is already a temp that is local to that node.
@@ -207,9 +226,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///     push x
         ///   DONE:
         /// </remarks>
-        private void EmitConditionalOperatorAddress(BoundConditionalOperator expr, AddressKind addressKind)
+        private void EmitConditionalOperatorAddress(
+            BoundConditionalOperator expr,
+            AddressKind addressKind
+        )
         {
-            Debug.Assert(expr.ConstantValue == null, "Constant value should have been emitted directly");
+            Debug.Assert(
+                expr.ConstantValue == null,
+                "Constant value should have been emitted directly"
+            );
 
             object consequenceLabel = new object();
             object doneLabel = new object();
@@ -228,7 +253,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             _builder.MarkLabel(doneLabel);
         }
 
-        private void EmitComplexConditionalReceiverAddress(BoundComplexConditionalReceiver expression)
+        private void EmitComplexConditionalReceiverAddress(
+            BoundComplexConditionalReceiver expression
+        )
         {
             Debug.Assert(!expression.Type.IsReferenceType);
             Debug.Assert(!expression.Type.IsValueType);
@@ -274,7 +301,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 }
                 else
                 {
-                    // cannot get address of a stack value. 
+                    // cannot get address of a stack value.
                     // Something is wrong with optimizer
                     throw ExceptionUtilities.UnexpectedValue(local.RefKind);
                 }
@@ -405,8 +432,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
             else
             {
-                _builder.EmitArrayElementAddress(_module.Translate((ArrayTypeSymbol)arrayAccess.Expression.Type),
-                                                arrayAccess.Syntax, _diagnostics);
+                _builder.EmitArrayElementAddress(
+                    _module.Translate((ArrayTypeSymbol)arrayAccess.Expression.Type),
+                    arrayAccess.Syntax,
+                    _diagnostics
+                );
             }
         }
 
@@ -414,7 +444,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         {
             if (addressKind == AddressKind.Constrained)
             {
-                Debug.Assert(arrayAccess.Type.TypeKind == TypeKind.TypeParameter, "constrained call should only be used with type parameter types");
+                Debug.Assert(
+                    arrayAccess.Type.TypeKind == TypeKind.TypeParameter,
+                    "constrained call should only be used with type parameter types"
+                );
                 return true;
             }
 
@@ -430,7 +463,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// May introduce a temp which it will return. (otherwise returns null)
         /// </summary>
-        private LocalDefinition EmitFieldAddress(BoundFieldAccess fieldAccess, AddressKind addressKind)
+        private LocalDefinition EmitFieldAddress(
+            BoundFieldAccess fieldAccess,
+            AddressKind addressKind
+        )
         {
             FieldSymbol field = fieldAccess.FieldSymbol;
 
@@ -460,10 +496,19 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// Checks if expression directly or indirectly represents a value with its own home. In
         /// such cases it is possible to get a reference without loading into a temporary.
         /// </summary>
-        private bool HasHome(BoundExpression expression, AddressKind addressKind)
-            => Binder.HasHome(expression, addressKind, _method, IsPeVerifyCompatEnabled(), _stackLocals);
+        private bool HasHome(BoundExpression expression, AddressKind addressKind) =>
+            Binder.HasHome(
+                expression,
+                addressKind,
+                _method,
+                IsPeVerifyCompatEnabled(),
+                _stackLocals
+            );
 
-        private LocalDefinition EmitParameterAddress(BoundParameter parameter, AddressKind addressKind)
+        private LocalDefinition EmitParameterAddress(
+            BoundParameter parameter,
+            AddressKind addressKind
+        )
         {
             ParameterSymbol parameterSymbol = parameter.ParameterSymbol;
 
@@ -507,12 +552,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             if (receiverType.TypeKind == TypeKind.TypeParameter)
             {
-                //[Note: Constraints on a generic parameter only restrict the types that 
-                //the generic parameter may be instantiated with. Verification (see Partition III) 
-                //requires that a field, property or method that a generic parameter is known 
-                //to provide through meeting a constraint, cannot be directly accessed/called 
-                //via the generic parameter unless it is first boxed (see Partition III) or 
-                //the callvirt instruction is prefixed with the constrained. prefix instruction 
+                //[Note: Constraints on a generic parameter only restrict the types that
+                //the generic parameter may be instantiated with. Verification (see Partition III)
+                //requires that a field, property or method that a generic parameter is known
+                //to provide through meeting a constraint, cannot be directly accessed/called
+                //via the generic parameter unless it is first boxed (see Partition III) or
+                //the callvirt instruction is prefixed with the constrained. prefix instruction
                 //(see Partition III). end note]
                 if (addressKind == AddressKind.Constrained)
                 {
@@ -537,22 +582,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// May introduce a temp which it will return. (otherwise returns null)
         /// </summary>
-        private LocalDefinition EmitInstanceFieldAddress(BoundFieldAccess fieldAccess, AddressKind addressKind)
+        private LocalDefinition EmitInstanceFieldAddress(
+            BoundFieldAccess fieldAccess,
+            AddressKind addressKind
+        )
         {
             var field = fieldAccess.FieldSymbol;
 
             //NOTE: we are not propagating AddressKind.Constrained here.
-            //      the reason is that while Constrained permits calls, it does not permit 
+            //      the reason is that while Constrained permits calls, it does not permit
             //      taking field addresses, so we have to turn Constrained into writeable.
-            var tempOpt = EmitReceiverRef(fieldAccess.ReceiverOpt, addressKind == AddressKind.Constrained ? AddressKind.Writeable : addressKind);
+            var tempOpt = EmitReceiverRef(
+                fieldAccess.ReceiverOpt,
+                addressKind == AddressKind.Constrained ? AddressKind.Writeable : addressKind
+            );
 
             _builder.EmitOpCode(ILOpCode.Ldflda);
             EmitSymbolToken(field, fieldAccess.Syntax);
 
-            // when loading an address of a fixed field, we actually 
+            // when loading an address of a fixed field, we actually
             // want to load the address of its "FixedElementField" instead.
             // Both the buffer backing struct and its only field should be at the same location,
-            // so we could in theory just use address of the struct, but in some contexts that causes 
+            // so we could in theory just use address of the struct, but in some contexts that causes
             // PEVerify errors because the struct has unexpected type. (Ex: struct& when int& is expected)
             if (field.IsFixedSizeBuffer)
             {

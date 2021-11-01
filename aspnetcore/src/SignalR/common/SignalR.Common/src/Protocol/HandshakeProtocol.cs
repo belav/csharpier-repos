@@ -19,13 +19,21 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
     public static class HandshakeProtocol
     {
         private const string ProtocolPropertyName = "protocol";
-        private static JsonEncodedText ProtocolPropertyNameBytes = JsonEncodedText.Encode(ProtocolPropertyName);
+        private static JsonEncodedText ProtocolPropertyNameBytes = JsonEncodedText.Encode(
+            ProtocolPropertyName
+        );
         private const string ProtocolVersionPropertyName = "version";
-        private static JsonEncodedText ProtocolVersionPropertyNameBytes = JsonEncodedText.Encode(ProtocolVersionPropertyName);
+        private static JsonEncodedText ProtocolVersionPropertyNameBytes = JsonEncodedText.Encode(
+            ProtocolVersionPropertyName
+        );
         private const string ErrorPropertyName = "error";
-        private static JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(ErrorPropertyName);
+        private static JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(
+            ErrorPropertyName
+        );
         private const string TypePropertyName = "type";
-        private static JsonEncodedText TypePropertyNameBytes = JsonEncodedText.Encode(TypePropertyName);
+        private static JsonEncodedText TypePropertyNameBytes = JsonEncodedText.Encode(
+            TypePropertyName
+        );
 
         private static readonly ReadOnlyMemory<byte> _successHandshakeData;
 
@@ -48,14 +56,18 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// </summary>
         /// <param name="protocol">The protocol being used for the connection.</param>
         /// <returns>The bytes of a successful handshake message.</returns>
-        public static ReadOnlySpan<byte> GetSuccessfulHandshake(IHubProtocol protocol) => _successHandshakeData.Span;
+        public static ReadOnlySpan<byte> GetSuccessfulHandshake(IHubProtocol protocol) =>
+            _successHandshakeData.Span;
 
         /// <summary>
         /// Writes the serialized representation of a <see cref="HandshakeRequestMessage"/> to the specified writer.
         /// </summary>
         /// <param name="requestMessage">The message to write.</param>
         /// <param name="output">The output writer.</param>
-        public static void WriteRequestMessage(HandshakeRequestMessage requestMessage, IBufferWriter<byte> output)
+        public static void WriteRequestMessage(
+            HandshakeRequestMessage requestMessage,
+            IBufferWriter<byte> output
+        )
         {
             var reusableWriter = ReusableUtf8JsonWriter.Get(output);
 
@@ -83,7 +95,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// </summary>
         /// <param name="responseMessage">The message to write.</param>
         /// <param name="output">The output writer.</param>
-        public static void WriteResponseMessage(HandshakeResponseMessage responseMessage, IBufferWriter<byte> output)
+        public static void WriteResponseMessage(
+            HandshakeResponseMessage responseMessage,
+            IBufferWriter<byte> output
+        )
         {
             var reusableWriter = ReusableUtf8JsonWriter.Get(output);
 
@@ -115,7 +130,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <param name="buffer">The serialized representation of the message.</param>
         /// <param name="responseMessage">When this method returns, contains the parsed message.</param>
         /// <returns>A value that is <c>true</c> if the <see cref="HandshakeResponseMessage"/> was successfully parsed; otherwise, <c>false</c>.</returns>
-        public static bool TryParseResponseMessage(ref ReadOnlySequence<byte> buffer, [NotNullWhen(true)] out HandshakeResponseMessage? responseMessage)
+        public static bool TryParseResponseMessage(
+            ref ReadOnlySequence<byte> buffer,
+            [NotNullWhen(true)] out HandshakeResponseMessage? responseMessage
+        )
         {
             if (!TextMessageParser.TryParseMessage(ref buffer, out var payload))
             {
@@ -138,7 +156,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     {
                         // a handshake response does not have a type
                         // check the incoming message was not any other type of message
-                        throw new InvalidDataException("Expected a handshake response from the server.");
+                        throw new InvalidDataException(
+                            "Expected a handshake response from the server."
+                        );
                     }
                     else if (reader.ValueTextEquals(ErrorPropertyNameBytes.EncodedUtf8Bytes))
                     {
@@ -155,9 +175,12 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 }
                 else
                 {
-                    throw new InvalidDataException($"Unexpected token '{reader.TokenType}' when reading handshake response JSON.");
+                    throw new InvalidDataException(
+                        $"Unexpected token '{reader.TokenType}' when reading handshake response JSON."
+                    );
                 }
-            };
+            }
+            ;
 
             responseMessage = new HandshakeResponseMessage(error);
             return true;
@@ -169,7 +192,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <param name="buffer">The serialized representation of the message.</param>
         /// <param name="requestMessage">When this method returns, contains the parsed message.</param>
         /// <returns>A value that is <c>true</c> if the <see cref="HandshakeRequestMessage"/> was successfully parsed; otherwise, <c>false</c>.</returns>
-        public static bool TryParseRequestMessage(ref ReadOnlySequence<byte> buffer, [NotNullWhen(true)] out HandshakeRequestMessage? requestMessage)
+        public static bool TryParseRequestMessage(
+            ref ReadOnlySequence<byte> buffer,
+            [NotNullWhen(true)] out HandshakeRequestMessage? requestMessage
+        )
         {
             if (!TextMessageParser.TryParseMessage(ref buffer, out var payload))
             {
@@ -193,7 +219,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     {
                         protocol = reader.ReadAsString(ProtocolPropertyName);
                     }
-                    else if (reader.ValueTextEquals(ProtocolVersionPropertyNameBytes.EncodedUtf8Bytes))
+                    else if (
+                        reader.ValueTextEquals(ProtocolVersionPropertyNameBytes.EncodedUtf8Bytes)
+                    )
                     {
                         protocolVersion = reader.ReadAsInt32(ProtocolVersionPropertyName);
                     }
@@ -208,17 +236,23 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 }
                 else
                 {
-                    throw new InvalidDataException($"Unexpected token '{reader.TokenType}' when reading handshake request JSON. Message content: {GetPayloadAsString()}");
+                    throw new InvalidDataException(
+                        $"Unexpected token '{reader.TokenType}' when reading handshake request JSON. Message content: {GetPayloadAsString()}"
+                    );
                 }
             }
 
             if (protocol == null)
             {
-                throw new InvalidDataException($"Missing required property '{ProtocolPropertyName}'. Message content: {GetPayloadAsString()}");
+                throw new InvalidDataException(
+                    $"Missing required property '{ProtocolPropertyName}'. Message content: {GetPayloadAsString()}"
+                );
             }
             if (protocolVersion == null)
             {
-                throw new InvalidDataException($"Missing required property '{ProtocolVersionPropertyName}'. Message content: {GetPayloadAsString()}");
+                throw new InvalidDataException(
+                    $"Missing required property '{ProtocolVersionPropertyName}'. Message content: {GetPayloadAsString()}"
+                );
             }
 
             requestMessage = new HandshakeRequestMessage(protocol, protocolVersion.Value);

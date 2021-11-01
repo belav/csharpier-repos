@@ -9,15 +9,21 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class EnumMemberDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<EnumMemberDeclarationSyntax>
+    internal class EnumMemberDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<EnumMemberDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             EnumMemberDeclarationSyntax enumMemberDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(enumMemberDeclaration, ref spans, optionProvider);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                enumMemberDeclaration,
+                ref spans,
+                optionProvider
+            );
         }
     }
 }

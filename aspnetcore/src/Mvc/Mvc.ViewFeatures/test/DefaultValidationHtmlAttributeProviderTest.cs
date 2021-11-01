@@ -26,20 +26,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void AddValidationAttributes_AddsAttributes()
         {
             // Arrange
-            var expectedMessage = $"The field {nameof(Model.HasValidatorsProperty)} must be a number.";
+            var expectedMessage =
+                $"The field {nameof(Model.HasValidatorsProperty)} must be a number.";
             var metadataProvider = new EmptyModelMetadataProvider();
             var attributeProvider = GetAttributeProvider(metadataProvider);
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
             var modelExplorer = metadataProvider
                 .GetModelExplorerForType(typeof(Model), model: null)
                 .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
             // Act
-            attributeProvider.AddValidationAttributes(
-                viewContext,
-                modelExplorer,
-                attributes);
+            attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
             // Assert
             Assert.Collection(
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 {
                     Assert.Equal("data-val-number", kvp.Key);
                     Assert.Equal(expectedMessage, kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -61,10 +63,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void AddAndTrackValidationAttributes_AddsAttributes()
         {
             // Arrange
-            var expectedMessage = $"The field {nameof(Model.HasValidatorsProperty)} must be a number.";
+            var expectedMessage =
+                $"The field {nameof(Model.HasValidatorsProperty)} must be a number.";
             var metadataProvider = new EmptyModelMetadataProvider();
             var attributeProvider = GetAttributeProvider(metadataProvider);
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
             var modelExplorer = metadataProvider
                 .GetModelExplorerForType(typeof(Model), model: null)
@@ -75,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewContext,
                 modelExplorer,
                 nameof(Model.HasValidatorsProperty),
-                attributes);
+                attributes
+            );
 
             // Assert
             Assert.Collection(
@@ -89,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 {
                     Assert.Equal("data-val-number", kvp.Key);
                     Assert.Equal(expectedMessage, kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -98,7 +106,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var attributeProvider = GetAttributeProvider(metadataProvider);
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             viewContext.ClientValidationEnabled = false;
 
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -107,10 +118,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
             // Act
-            attributeProvider.AddValidationAttributes(
-                viewContext,
-                modelExplorer,
-                attributes);
+            attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
             // Assert
             Assert.Empty(attributes);
@@ -121,7 +129,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             viewContext.ClientValidationEnabled = false;
 
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -129,12 +140,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 .GetModelExplorerForType(typeof(Model), model: null)
                 .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
-            var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>() { CallBase = true };
+            var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>()
+            {
+                CallBase = true
+            };
             attributeProviderMock
-                .Setup(p => p.AddValidationAttributes(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<ModelExplorer>(),
-                    It.IsAny<IDictionary<string, string>>()))
+                .Setup(
+                    p =>
+                        p.AddValidationAttributes(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<ModelExplorer>(),
+                            It.IsAny<IDictionary<string, string>>()
+                        )
+                )
                 .Verifiable();
             var attributeProvider = attributeProviderMock.Object;
 
@@ -143,26 +161,34 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewContext,
                 modelExplorer,
                 nameof(Model.HasValidatorsProperty),
-                attributes);
+                attributes
+            );
 
             // Assert
             Assert.Empty(attributes);
             attributeProviderMock.Verify(
-                p => p.AddValidationAttributes(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<ModelExplorer>(),
-                    It.IsAny<IDictionary<string, string>>()),
-                Times.Never);
+                p =>
+                    p.AddValidationAttributes(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<IDictionary<string, string>>()
+                    ),
+                Times.Never
+            );
         }
 
         [Fact]
         public void AddValidationAttributes_AddsAttributes_EvenIfPropertyAlreadyRendered()
         {
             // Arrange
-            var expectedMessage = $"The field {nameof(Model.HasValidatorsProperty)} must be a number.";
+            var expectedMessage =
+                $"The field {nameof(Model.HasValidatorsProperty)} must be a number.";
             var metadataProvider = new EmptyModelMetadataProvider();
             var attributeProvider = GetAttributeProvider(metadataProvider);
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             viewContext.FormContext.RenderedField(nameof(Model.HasValidatorsProperty), value: true);
 
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -171,10 +197,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
             // Act
-            attributeProvider.AddValidationAttributes(
-                viewContext,
-                modelExplorer,
-                attributes);
+            attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
             // Assert
             Assert.Collection(
@@ -188,7 +211,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 {
                     Assert.Equal("data-val-number", kvp.Key);
                     Assert.Equal(expectedMessage, kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -196,7 +220,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             viewContext.FormContext.RenderedField(nameof(Model.HasValidatorsProperty), value: true);
 
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -204,12 +231,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 .GetModelExplorerForType(typeof(Model), model: null)
                 .GetExplorerForProperty(nameof(Model.HasValidatorsProperty));
 
-            var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>() { CallBase = true };
+            var attributeProviderMock = new Mock<ValidationHtmlAttributeProvider>()
+            {
+                CallBase = true
+            };
             attributeProviderMock
-                .Setup(p => p.AddValidationAttributes(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<ModelExplorer>(),
-                    It.IsAny<IDictionary<string, string>>()))
+                .Setup(
+                    p =>
+                        p.AddValidationAttributes(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<ModelExplorer>(),
+                            It.IsAny<IDictionary<string, string>>()
+                        )
+                )
                 .Verifiable();
             var attributeProvider = attributeProviderMock.Object;
 
@@ -218,16 +252,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewContext,
                 modelExplorer,
                 nameof(Model.HasValidatorsProperty),
-                attributes);
+                attributes
+            );
 
             // Assert
             Assert.Empty(attributes);
             attributeProviderMock.Verify(
-                p => p.AddValidationAttributes(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<ModelExplorer>(),
-                    It.IsAny<IDictionary<string, string>>()),
-                Times.Never);
+                p =>
+                    p.AddValidationAttributes(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<IDictionary<string, string>>()
+                    ),
+                Times.Never
+            );
         }
 
         [Fact]
@@ -236,27 +274,36 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var attributeProvider = GetAttributeProvider(metadataProvider);
-            var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
+            var viewContext = GetViewContext<Model>(
+                model: null,
+                metadataProvider: metadataProvider
+            );
             var attributes = new SortedDictionary<string, string>(StringComparer.Ordinal);
             var modelExplorer = metadataProvider
                 .GetModelExplorerForType(typeof(Model), model: null)
                 .GetExplorerForProperty(nameof(Model.Property));
 
             // Act
-            attributeProvider.AddValidationAttributes(
-                viewContext,
-                modelExplorer,
-                attributes);
+            attributeProvider.AddValidationAttributes(viewContext, modelExplorer, attributes);
 
             // Assert
             Assert.Empty(attributes);
         }
 
-        private static ViewContext GetViewContext<TModel>(TModel model, IModelMetadataProvider metadataProvider)
+        private static ViewContext GetViewContext<TModel>(
+            TModel model,
+            IModelMetadataProvider metadataProvider
+        )
         {
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
-            var viewData = new ViewDataDictionary<TModel>(metadataProvider, actionContext.ModelState)
-            {
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
+            var viewData = new ViewDataDictionary<TModel>(
+                metadataProvider,
+                actionContext.ModelState
+            ) {
                 Model = model,
             };
 
@@ -266,14 +313,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewData,
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
         }
 
-        private static ValidationHtmlAttributeProvider GetAttributeProvider(IModelMetadataProvider metadataProvider)
+        private static ValidationHtmlAttributeProvider GetAttributeProvider(
+            IModelMetadataProvider metadataProvider
+        )
         {
             // Add validation properties for float, double and decimal properties. Ignore everything else.
             var mvcViewOptions = new MvcViewOptions();
-            mvcViewOptions.ClientModelValidatorProviders.Add(new NumericClientModelValidatorProvider());
+            mvcViewOptions.ClientModelValidatorProviders.Add(
+                new NumericClientModelValidatorProvider()
+            );
 
             var mvcViewOptionsAccessor = new Mock<IOptions<MvcViewOptions>>();
             mvcViewOptionsAccessor.SetupGet(accessor => accessor.Value).Returns(mvcViewOptions);
@@ -281,7 +333,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return new DefaultValidationHtmlAttributeProvider(
                 mvcViewOptionsAccessor.Object,
                 metadataProvider,
-                new ClientValidatorCache());
+                new ClientValidatorCache()
+            );
         }
 
         private class Model

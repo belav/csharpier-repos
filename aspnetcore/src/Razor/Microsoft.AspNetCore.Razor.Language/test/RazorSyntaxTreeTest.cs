@@ -28,7 +28,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
         {
             // Arrange
             var filePath = "test.cshtml";
-            var source = TestRazorSourceDocument.Create("@if (true) { @if(false) { <div>@something.</div> } }", filePath: filePath);
+            var source = TestRazorSourceDocument.Create(
+                "@if (true) { @if(false) { <div>@something.</div> } }",
+                filePath: filePath
+            );
 
             // Act
             var syntaxTree = RazorSyntaxTree.Parse(source);
@@ -38,15 +41,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
             Assert.NotNull(syntaxTree);
 
             var children = syntaxTree.Root.DescendantNodes();
-            Assert.All(children, node => Assert.Equal(filePath, node.GetSourceLocation(source).FilePath));
+            Assert.All(
+                children,
+                node => Assert.Equal(filePath, node.GetSourceLocation(source).FilePath)
+            );
         }
 
         [Fact]
         public void Parse_UseDirectiveTokenizer_ParsesUntilFirstDirective()
         {
             // Arrange
-            var source = TestRazorSourceDocument.Create("\r\n  \r\n    @*SomeComment*@ \r\n  @tagHelperPrefix \"SomePrefix\"\r\n<html>\r\n@if (true) {\r\n @if(false) { <div>@something.</div> } \r\n}");
-            var options = RazorParserOptions.Create(builder => builder.ParseLeadingDirectives = true);
+            var source = TestRazorSourceDocument.Create(
+                "\r\n  \r\n    @*SomeComment*@ \r\n  @tagHelperPrefix \"SomePrefix\"\r\n<html>\r\n@if (true) {\r\n @if(false) { <div>@something.</div> } \r\n}"
+            );
+            var options = RazorParserOptions.Create(
+                builder => builder.ParseLeadingDirectives = true
+            );
 
             // Act
             var syntaxTree = RazorSyntaxTree.Parse(source, options);
@@ -55,7 +65,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
             var root = syntaxTree.Root;
             Assert.NotNull(syntaxTree);
             Assert.Equal(61, root.EndPosition);
-            Assert.Single(root.DescendantNodes().Where(n => n is RazorDirectiveBodySyntax body && body.Keyword.GetContent() == "tagHelperPrefix"));
+            Assert.Single(
+                root.DescendantNodes()
+                    .Where(
+                        n =>
+                            n is RazorDirectiveBodySyntax body
+                            && body.Keyword.GetContent() == "tagHelperPrefix"
+                    )
+            );
             Assert.Empty(root.DescendantNodes().Where(n => n is MarkupElementSyntax));
             Assert.Empty(syntaxTree.Diagnostics);
         }

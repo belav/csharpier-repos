@@ -7,9 +7,7 @@ namespace System.Speech.Synthesis
     public class PromptStyle
     {
         #region Constructors
-        public PromptStyle()
-        {
-        }
+        public PromptStyle() { }
         public PromptStyle(PromptRate rate)
         {
             Rate = rate;
@@ -30,36 +28,18 @@ namespace System.Speech.Synthesis
         // <prosody pitch, contour, range, rate, duration, volume>
         public PromptRate Rate
         {
-            get
-            {
-                return _rate;
-            }
-            set
-            {
-                _rate = value;
-            }
+            get { return _rate; }
+            set { _rate = value; }
         }
         public PromptVolume Volume
         {
-            get
-            {
-                return _volume;
-            }
-            set
-            {
-                _volume = value;
-            }
+            get { return _volume; }
+            set { _volume = value; }
         }
         public PromptEmphasis Emphasis
         {
-            get
-            {
-                return _emphasis;
-            }
-            set
-            {
-                _emphasis = value;
-            }
+            get { return _emphasis; }
+            set { _emphasis = value; }
         }
 
         #endregion
@@ -69,7 +49,6 @@ namespace System.Speech.Synthesis
         private PromptRate _rate;
         private PromptVolume _volume;
         private PromptEmphasis _emphasis;
-
         #endregion
     }
 
@@ -148,6 +127,5 @@ namespace System.Speech.Synthesis
         Large,
         ExtraLarge
     }
-
     #endregion
 }

@@ -24,11 +24,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
         private readonly QuicTransportContext _context;
         private readonly QuicListener _listener;
 
-        public QuicConnectionListener(QuicTransportOptions options, IQuicTrace log, EndPoint endpoint, SslServerAuthenticationOptions sslServerAuthenticationOptions)
+        public QuicConnectionListener(
+            QuicTransportOptions options,
+            IQuicTrace log,
+            EndPoint endpoint,
+            SslServerAuthenticationOptions sslServerAuthenticationOptions
+        )
         {
             if (options.Alpn == null)
             {
-                throw new InvalidOperationException("QuicTransportOptions.Alpn must be configured with a value.");
+                throw new InvalidOperationException(
+                    "QuicTransportOptions.Alpn must be configured with a value."
+                );
             }
 
             _log = log;
@@ -37,7 +44,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             var quicListenerOptions = new QuicListenerOptions();
 
             // TODO Should HTTP/3 specific ALPN still be global? Revisit whether it can be statically set once HTTP/3 is finalized.
-            sslServerAuthenticationOptions.ApplicationProtocols = new List<SslApplicationProtocol>() { new SslApplicationProtocol(options.Alpn) };
+            sslServerAuthenticationOptions.ApplicationProtocols =
+                new List<SslApplicationProtocol>() { new SslApplicationProtocol(options.Alpn) };
 
             quicListenerOptions.ServerAuthenticationOptions = sslServerAuthenticationOptions;
             quicListenerOptions.ListenEndPoint = endpoint as IPEndPoint;
@@ -49,7 +57,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
 
         public EndPoint EndPoint { get; set; }
 
-        public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+        public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(
+            IFeatureCollection? features = null,
+            CancellationToken cancellationToken = default
+        )
         {
             try
             {

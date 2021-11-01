@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ApplicationModel application,
             ControllerModel controller,
             ActionModel action,
-            SelectorModel selector)
+            SelectorModel selector
+        )
         {
             var actionDescriptor = new ControllerActionDescriptor
             {
@@ -45,7 +46,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             AddEndpointMetadata(actionDescriptor, selector);
             AddAttributeRoute(actionDescriptor, selector);
             AddParameterDescriptors(actionDescriptor, action);
-            AddActionFilters(actionDescriptor, action.Filters, controller.Filters, application.Filters);
+            AddActionFilters(
+                actionDescriptor,
+                action.Filters,
+                controller.Filters,
+                application.Filters
+            );
             AddApiExplorerInfo(actionDescriptor, application, controller, action);
             AddRouteValues(actionDescriptor, controller, action);
             AddProperties(actionDescriptor, action, controller, application);
@@ -53,7 +59,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             return actionDescriptor;
         }
 
-        private static void AddControllerPropertyDescriptors(ActionDescriptor actionDescriptor, ControllerModel controller)
+        private static void AddControllerPropertyDescriptors(
+            ActionDescriptor actionDescriptor,
+            ControllerModel controller
+        )
         {
             actionDescriptor.BoundProperties = controller.ControllerProperties
                 .Where(p => p.BindingInfo != null)
@@ -61,7 +70,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 .ToList();
         }
 
-        private static void AddParameterDescriptors(ActionDescriptor actionDescriptor, ActionModel action)
+        private static void AddParameterDescriptors(
+            ActionDescriptor actionDescriptor,
+            ActionModel action
+        )
         {
             var parameterDescriptors = new List<ParameterDescriptor>(action.Parameters.Count);
             foreach (var parameter in action.Parameters)
@@ -72,7 +84,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             actionDescriptor.Parameters = parameterDescriptors;
         }
-        
+
         private static ParameterDescriptor CreateParameterDescriptor(ParameterModel parameterModel)
         {
             var parameterDescriptor = new ControllerParameterDescriptor()
@@ -103,18 +115,17 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ControllerActionDescriptor actionDescriptor,
             ApplicationModel application,
             ControllerModel controller,
-            ActionModel action)
+            ActionModel action
+        )
         {
             var isVisible =
-                action.ApiExplorer?.IsVisible ??
-                controller.ApiExplorer?.IsVisible ??
-                application.ApiExplorer?.IsVisible ??
-                false;
+                action.ApiExplorer?.IsVisible
+                ?? controller.ApiExplorer?.IsVisible
+                ?? application.ApiExplorer?.IsVisible
+                ?? false;
 
             var isVisibleSetOnActionOrController =
-                action.ApiExplorer?.IsVisible ??
-                controller.ApiExplorer?.IsVisible ??
-                false;
+                action.ApiExplorer?.IsVisible ?? controller.ApiExplorer?.IsVisible ?? false;
 
             // ApiExplorer isn't supported on conventional-routed actions, but we still allow you to configure
             // it at the application level when you have a mix of controller types. We'll just skip over enabling
@@ -124,8 +135,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (isVisibleSetOnActionOrController && !IsAttributeRouted(actionDescriptor))
             {
                 // ApiExplorer is only supported on attribute routed actions.
-                throw new InvalidOperationException(Resources.FormatApiExplorer_UnsupportedAction(
-                    actionDescriptor.DisplayName));
+                throw new InvalidOperationException(
+                    Resources.FormatApiExplorer_UnsupportedAction(actionDescriptor.DisplayName)
+                );
             }
             else if (isVisibleSetOnApplication && !IsAttributeRouted(actionDescriptor))
             {
@@ -148,7 +160,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ControllerActionDescriptor actionDescriptor,
             ActionModel action,
             ControllerModel controller,
-            ApplicationModel application)
+            ApplicationModel application
+        )
         {
             foreach (var item in application.Properties)
             {
@@ -170,33 +183,49 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ControllerActionDescriptor actionDescriptor,
             IEnumerable<IFilterMetadata> actionFilters,
             IEnumerable<IFilterMetadata> controllerFilters,
-            IEnumerable<IFilterMetadata> globalFilters)
+            IEnumerable<IFilterMetadata> globalFilters
+        )
         {
-            actionDescriptor.FilterDescriptors =
-                actionFilters.Select(f => new FilterDescriptor(f, FilterScope.Action))
-                .Concat(controllerFilters.Select(f => new FilterDescriptor(f, FilterScope.Controller)))
+            actionDescriptor.FilterDescriptors = actionFilters
+                .Select(f => new FilterDescriptor(f, FilterScope.Action))
+                .Concat(
+                    controllerFilters.Select(f => new FilterDescriptor(f, FilterScope.Controller))
+                )
                 .Concat(globalFilters.Select(f => new FilterDescriptor(f, FilterScope.Global)))
                 .OrderBy(d => d, FilterDescriptorOrderComparer.Comparer)
                 .ToList();
         }
 
-        private static void AddActionConstraints(ControllerActionDescriptor actionDescriptor, SelectorModel selectorModel)
+        private static void AddActionConstraints(
+            ControllerActionDescriptor actionDescriptor,
+            SelectorModel selectorModel
+        )
         {
             if (selectorModel.ActionConstraints?.Count > 0)
             {
-                actionDescriptor.ActionConstraints = new List<IActionConstraintMetadata>(selectorModel.ActionConstraints);
+                actionDescriptor.ActionConstraints = new List<IActionConstraintMetadata>(
+                    selectorModel.ActionConstraints
+                );
             }
         }
 
-        private static void AddEndpointMetadata(ControllerActionDescriptor actionDescriptor, SelectorModel selectorModel)
+        private static void AddEndpointMetadata(
+            ControllerActionDescriptor actionDescriptor,
+            SelectorModel selectorModel
+        )
         {
             if (selectorModel.EndpointMetadata?.Count > 0)
             {
-                actionDescriptor.EndpointMetadata = new List<object>(selectorModel.EndpointMetadata);
+                actionDescriptor.EndpointMetadata = new List<object>(
+                    selectorModel.EndpointMetadata
+                );
             }
         }
 
-        private static void AddAttributeRoute(ControllerActionDescriptor actionDescriptor, SelectorModel selectorModel)
+        private static void AddAttributeRoute(
+            ControllerActionDescriptor actionDescriptor,
+            SelectorModel selectorModel
+        )
         {
             if (selectorModel.AttributeRouteModel != null)
             {
@@ -205,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Template = selectorModel.AttributeRouteModel.Template,
                     Order = selectorModel.AttributeRouteModel.Order ?? 0,
                     Name = selectorModel.AttributeRouteModel.Name,
-                    SuppressLinkGeneration = selectorModel.AttributeRouteModel.SuppressLinkGeneration,
+                    SuppressLinkGeneration =
+                        selectorModel.AttributeRouteModel.SuppressLinkGeneration,
                     SuppressPathMatching = selectorModel.AttributeRouteModel.SuppressPathMatching,
                 };
             }
@@ -214,7 +244,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public static void AddRouteValues(
             ControllerActionDescriptor actionDescriptor,
             ControllerModel controller,
-            ActionModel action)
+            ActionModel action
+        )
         {
             // Apply all the constraints defined on the action, then controller (for example, [Area])
             // to the actions. Also keep track of all the constraints that require preventing actions

@@ -39,7 +39,6 @@ namespace Internal.Cryptography.Pal
 
                 // Windows compatibility: Ignore trailing data.
                 ReadOnlySpan<byte> encodedData = reader.PeekEncodedValue();
-
                 unsafe
                 {
                     IntPtr tmpPtr = Marshal.AllocHGlobal(encodedData.Length);
@@ -182,8 +181,9 @@ namespace Internal.Cryptography.Pal
 
         public void Decrypt(SafePasswordHandle password)
         {
-            ReadOnlyMemory<byte> authSafeContents =
-                Helpers.DecodeOctetStringAsMemory(_pfxAsn.AuthSafe.Content);
+            ReadOnlyMemory<byte> authSafeContents = Helpers.DecodeOctetStringAsMemory(
+                _pfxAsn.AuthSafe.Content
+            );
 
             bool hasRef = false;
             password.DangerousAddRef(ref hasRef);
@@ -238,7 +238,10 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        private void VerifyAndDecrypt(ReadOnlySpan<char> password, ReadOnlyMemory<byte> authSafeContents)
+        private void VerifyAndDecrypt(
+            ReadOnlySpan<char> password,
+            ReadOnlyMemory<byte> authSafeContents
+        )
         {
             Debug.Assert(_pfxAsn.MacData.HasValue);
             ReadOnlySpan<byte> authSafeSpan = authSafeContents.Span;
@@ -300,7 +303,8 @@ namespace Internal.Cryptography.Pal
                     ref certBagAttrs,
                     ref certBagIdx,
                     ref keyBags,
-                    ref keyBagIdx);
+                    ref keyBagIdx
+                );
 
                 certs = ArrayPool<CertAndKey>.Shared.Rent(certBagIdx);
                 certs.AsSpan().Clear();
@@ -321,7 +325,8 @@ namespace Internal.Cryptography.Pal
                     keyBags,
                     publicKeyInfos,
                     keys,
-                    keyBagIdx);
+                    keyBagIdx
+                );
 
                 _certCount = certBagIdx;
                 _certs = certs;
@@ -358,7 +363,10 @@ namespace Internal.Cryptography.Pal
                         publicKeyInfos[i].Dispose();
                     }
 
-                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared.Return(publicKeyInfos, clearArray: true);
+                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared.Return(
+                        publicKeyInfos,
+                        clearArray: true
+                    );
                 }
 
                 ArrayPool<CertBagAsn>.Shared.Return(certBags, clearArray: true);
@@ -375,7 +383,10 @@ namespace Internal.Cryptography.Pal
 
             try
             {
-                AsnValueReader outer = new AsnValueReader(authSafeContents.Span, AsnEncodingRules.BER);
+                AsnValueReader outer = new AsnValueReader(
+                    authSafeContents.Span,
+                    AsnEncodingRules.BER
+                );
                 AsnValueReader reader = outer.ReadSequence();
                 outer.ThrowIfNotEmpty();
                 int i = 0;
@@ -402,7 +413,8 @@ namespace Internal.Cryptography.Pal
             ref AttributeAsn[]?[] certBagAttrs,
             ref int certBagIdx,
             ref SafeBagAsn[] keyBags,
-            ref int keyBagIdx)
+            ref int keyBagIdx
+        )
         {
             for (int i = 0; i < _safeContentsValues!.Length; i++)
             {
@@ -433,7 +445,8 @@ namespace Internal.Cryptography.Pal
                         ref certBagAttrs,
                         ref certBagIdx,
                         ref keyBags,
-                        ref keyBagIdx);
+                        ref keyBagIdx
+                    );
                 }
             }
         }
@@ -443,7 +456,8 @@ namespace Internal.Cryptography.Pal
             SafeBagAsn[] keyBags,
             int keyBagIdx,
             AsymmetricAlgorithm[] keys,
-            RentedSubjectPublicKeyInfo[] publicKeyInfos)
+            RentedSubjectPublicKeyInfo[] publicKeyInfos
+        )
         {
             byte[]? spkiBuf = null;
 
@@ -472,7 +486,8 @@ namespace Internal.Cryptography.Pal
 
                     cur.Value = SubjectPublicKeyInfoAsn.Decode(
                         spkiBuf.AsMemory(0, pubLength),
-                        AsnEncodingRules.DER);
+                        AsnEncodingRules.DER
+                    );
 
                     keys[i] = key;
                     cur.TrackArray(spkiBuf, clearSize: 0);
@@ -504,28 +519,32 @@ namespace Internal.Cryptography.Pal
             SafeBagAsn[] keyBags,
             RentedSubjectPublicKeyInfo[] publicKeyInfos,
             AsymmetricAlgorithm?[] keys,
-            int keyBagIdx)
+            int keyBagIdx
+        )
         {
             for (certBagIdx--; certBagIdx >= 0; certBagIdx--)
             {
                 int matchingKeyIdx = -1;
 
-                foreach (AttributeAsn attr in certBagAttrs[certBagIdx] ?? Array.Empty<AttributeAsn>())
+                foreach (
+                    AttributeAsn attr in certBagAttrs[certBagIdx] ?? Array.Empty<AttributeAsn>()
+                )
                 {
                     if (attr.AttrType == Oids.LocalKeyId && attr.AttrValues.Length > 0)
                     {
                         matchingKeyIdx = FindMatchingKey(
                             keyBags,
                             keyBagIdx,
-                            Helpers.DecodeOctetStringAsMemory(attr.AttrValues[0]).Span);
-
+                            Helpers.DecodeOctetStringAsMemory(attr.AttrValues[0]).Span
+                        );
                         // Only try the first one.
                         break;
                     }
                 }
 
-                ReadOnlyMemory<byte> x509Data =
-                    Helpers.DecodeOctetStringAsMemory(certBags[certBagIdx].CertValue);
+                ReadOnlyMemory<byte> x509Data = Helpers.DecodeOctetStringAsMemory(
+                    certBags[certBagIdx].CertValue
+                );
 
                 certs[certBagIdx].Cert = ReadX509Der(x509Data);
 
@@ -540,7 +559,14 @@ namespace Internal.Cryptography.Pal
 
                     for (int i = 0; i < keyBagIdx; i++)
                     {
-                        if (PublicKeyMatches(algorithm, keyParams, keyValue, ref publicKeyInfos[i].Value))
+                        if (
+                            PublicKeyMatches(
+                                algorithm,
+                                keyParams,
+                                keyValue,
+                                ref publicKeyInfos[i].Value
+                            )
+                        )
                         {
                             matchingKeyIdx = i;
                             break;
@@ -565,7 +591,8 @@ namespace Internal.Cryptography.Pal
             string algorithm,
             byte[] keyParams,
             byte[] keyValue,
-            ref SubjectPublicKeyInfoAsn publicKeyInfo)
+            ref SubjectPublicKeyInfoAsn publicKeyInfo
+        )
         {
             if (!publicKeyInfo.SubjectPublicKey.Span.SequenceEqual(keyValue))
             {
@@ -585,9 +612,8 @@ namespace Internal.Cryptography.Pal
                             return false;
                     }
 
-                    return
-                        publicKeyInfo.Algorithm.HasNullEquivalentParameters() &&
-                        AlgorithmIdentifierAsn.RepresentsNull(keyParams);
+                    return publicKeyInfo.Algorithm.HasNullEquivalentParameters()
+                        && AlgorithmIdentifierAsn.RepresentsNull(keyParams);
                 case Oids.EcPublicKey:
                 case Oids.EcDiffieHellman:
                     switch (publicKeyInfo.Algorithm.Algorithm)
@@ -599,9 +625,8 @@ namespace Internal.Cryptography.Pal
                             return false;
                     }
 
-                    return
-                        publicKeyInfo.Algorithm.Parameters.HasValue &&
-                        publicKeyInfo.Algorithm.Parameters.Value.Span.SequenceEqual(keyParams);
+                    return publicKeyInfo.Algorithm.Parameters.HasValue
+                        && publicKeyInfo.Algorithm.Parameters.Value.Span.SequenceEqual(keyParams);
             }
 
             if (algorithm != publicKeyInfo.Algorithm.Algorithm)
@@ -620,22 +645,25 @@ namespace Internal.Cryptography.Pal
         private static int FindMatchingKey(
             SafeBagAsn[] keyBags,
             int keyBagCount,
-            ReadOnlySpan<byte> localKeyId)
+            ReadOnlySpan<byte> localKeyId
+        )
         {
             for (int i = 0; i < keyBagCount; i++)
             {
-                foreach (AttributeAsn attr in keyBags[i].BagAttributes ?? Array.Empty<AttributeAsn>())
+                foreach (
+                    AttributeAsn attr in keyBags[i].BagAttributes ?? Array.Empty<AttributeAsn>()
+                )
                 {
                     if (attr.AttrType == Oids.LocalKeyId && attr.AttrValues.Length > 0)
                     {
-                        ReadOnlyMemory<byte> curKeyId =
-                            Helpers.DecodeOctetStringAsMemory(attr.AttrValues[0]);
+                        ReadOnlyMemory<byte> curKeyId = Helpers.DecodeOctetStringAsMemory(
+                            attr.AttrValues[0]
+                        );
 
                         if (curKeyId.Span.SequenceEqual(localKeyId))
                         {
                             return i;
                         }
-
                         break;
                     }
                 }
@@ -646,10 +674,13 @@ namespace Internal.Cryptography.Pal
 
         private static void DecryptSafeContents(
             ReadOnlySpan<char> password,
-            ref ContentInfoAsn safeContentsAsn)
+            ref ContentInfoAsn safeContentsAsn
+        )
         {
-            EncryptedDataAsn encryptedData =
-                EncryptedDataAsn.Decode(safeContentsAsn.Content, AsnEncodingRules.BER);
+            EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(
+                safeContentsAsn.Content,
+                AsnEncodingRules.BER
+            );
 
             // https://tools.ietf.org/html/rfc5652#section-8
             if (encryptedData.Version != 0 && encryptedData.Version != 2)
@@ -670,7 +701,8 @@ namespace Internal.Cryptography.Pal
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 
-            int encryptedValueLength = encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
+            int encryptedValueLength =
+                encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
             byte[] destination = CryptoPool.Rent(encryptedValueLength);
             int written;
 
@@ -681,7 +713,8 @@ namespace Internal.Cryptography.Pal
                     password,
                     default,
                     encryptedData.EncryptedContentInfo.EncryptedContent.Value.Span,
-                    destination);
+                    destination
+                );
             }
             catch
             {
@@ -702,7 +735,8 @@ namespace Internal.Cryptography.Pal
             ref AttributeAsn[]?[] certBagAttrs,
             ref int certBagIdx,
             ref SafeBagAsn[] keyBags,
-            ref int keyBagIdx)
+            ref int keyBagIdx
+        )
         {
             ReadOnlyMemory<byte> contentData = safeContentsAsn.Content;
 
@@ -734,7 +768,9 @@ namespace Internal.Cryptography.Pal
                             certBagIdx++;
                         }
                     }
-                    else if (bag.BagId == Oids.Pkcs12KeyBag || bag.BagId == Oids.Pkcs12ShroudedKeyBag)
+                    else if (
+                        bag.BagId == Oids.Pkcs12KeyBag || bag.BagId == Oids.Pkcs12ShroudedKeyBag
+                    )
                     {
                         GrowIfNeeded(ref keyBags, keyBagIdx);
                         keyBags[keyBagIdx] = bag;
@@ -755,7 +791,8 @@ namespace Internal.Cryptography.Pal
                 ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                     password,
                     safeBag.BagValue,
-                    out int localRead);
+                    out int localRead
+                );
 
                 try
                 {

@@ -17,7 +17,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor
     internal class RazorPagePropertyActivator
     {
         private readonly IModelMetadataProvider _metadataProvider;
-        private readonly Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary> _rootFactory;
+        private readonly Func<
+            IModelMetadataProvider,
+            ModelStateDictionary,
+            ViewDataDictionary
+        > _rootFactory;
         private readonly Func<ViewDataDictionary, ViewDataDictionary> _nestedFactory;
         private readonly Type _viewDataDictionaryType;
         private readonly PropertyActivator<ViewContext>[] _propertyActivators;
@@ -26,22 +30,28 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             Type pageType,
             Type? declaredModelType,
             IModelMetadataProvider metadataProvider,
-            PropertyValueAccessors propertyValueAccessors)
+            PropertyValueAccessors propertyValueAccessors
+        )
         {
             _metadataProvider = metadataProvider;
 
             // In the absence of a model on the current type, we'll attempt to use ViewDataDictionary<object> on the current type.
             var viewDataDictionaryModelType = declaredModelType ?? typeof(object);
 
-            _viewDataDictionaryType = typeof(ViewDataDictionary<>).MakeGenericType(viewDataDictionaryModelType);
+            _viewDataDictionaryType = typeof(ViewDataDictionary<>).MakeGenericType(
+                viewDataDictionaryModelType
+            );
             _rootFactory = ViewDataDictionaryFactory.CreateFactory(viewDataDictionaryModelType);
-            _nestedFactory = ViewDataDictionaryFactory.CreateNestedFactory(viewDataDictionaryModelType);
+            _nestedFactory = ViewDataDictionaryFactory.CreateNestedFactory(
+                viewDataDictionaryModelType
+            );
 
             _propertyActivators = PropertyActivator<ViewContext>.GetPropertiesToActivate(
                 pageType,
                 typeof(RazorInjectAttribute),
                 propertyInfo => CreateActivateInfo(propertyInfo, propertyValueAccessors),
-                includeNonPublic: true);
+                includeNonPublic: true
+            );
         }
 
         public void Activate(object page, ViewContext context)
@@ -80,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
         private static PropertyActivator<ViewContext> CreateActivateInfo(
             PropertyInfo property,
-            PropertyValueAccessors valueAccessors)
+            PropertyValueAccessors valueAccessors
+        )
         {
             Func<ViewContext, object> valueAccessor;
             if (typeof(ViewDataDictionary).IsAssignableFrom(property.PropertyType))
@@ -138,7 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             public Func<ViewContext, object> HtmlEncoderAccessor { get; init; } = default!;
 
-            public Func<ViewContext, object> ModelExpressionProviderAccessor { get; init; } = default!;
+            public Func<ViewContext, object> ModelExpressionProviderAccessor { get; init; } =
+                default!;
         }
     }
 }

@@ -24,15 +24,13 @@ namespace System.CommandLine.Tests.Binding
         public void Option_arguments_are_bound_by_name_to_constructor_parameters(
             Type type,
             string commandLine,
-            object expectedValue)
+            object expectedValue
+        )
         {
             var targetType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
-            var command = new Command("the-command")
-                          {
-                              new Option("--value", argumentType: type)
-                          };
+            var command = new Command("the-command") { new Option("--value", argumentType: type) };
 
             var bindingContext = new BindingContext(command.Parse(commandLine));
 
@@ -51,18 +49,15 @@ namespace System.CommandLine.Tests.Binding
         public void Command_arguments_are_bound_by_name_to_constructor_parameters(
             Type type,
             string commandLine,
-            object expectedValue)
+            object expectedValue
+        )
         {
             var targetType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
             var command = new Command("the-command")
             {
-                new Argument
-                {
-                    Name = "value",
-                    ArgumentType = type
-                }
+                new Argument { Name = "value", ArgumentType = type }
             };
 
             var bindingContext = new BindingContext(command.Parse(commandLine));
@@ -77,19 +72,16 @@ namespace System.CommandLine.Tests.Binding
         [Theory]
         [InlineData(typeof(FileInfo), "MyFile.cs")]
         public void Command_arguments_are_bound_by_name_to_complex_constructor_parameters(
-           Type type,
-           string commandLine)
+            Type type,
+            string commandLine
+        )
         {
             var targetType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
             var command = new Command("the-command")
             {
-                new Argument
-                {
-                    Name = "value",
-                    ArgumentType = type
-                }
+                new Argument { Name = "value", ArgumentType = type }
             };
 
             var bindingContext = new BindingContext(command.Parse(commandLine));
@@ -116,7 +108,9 @@ namespace System.CommandLine.Tests.Binding
             var parser = new Parser(command);
             var bindingContext = new BindingContext(parser.Parse(""));
 
-            var instance = (ClassWithMultiLetterCtorParameters)binder.CreateInstance(bindingContext);
+            var instance = (ClassWithMultiLetterCtorParameters)binder.CreateInstance(
+                bindingContext
+            );
 
             instance.StringOption.Should().Be("the default");
         }
@@ -129,15 +123,13 @@ namespace System.CommandLine.Tests.Binding
         public void Option_arguments_are_bound_by_name_to_property_setters(
             Type type,
             string commandLine,
-            object expectedValue)
+            object expectedValue
+        )
         {
             var targetType = typeof(ClassWithSetter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
-            var command = new Command("the-command")
-                          {
-                              new Option("--value", argumentType: type)
-                          };
+            var command = new Command("the-command") { new Option("--value", argumentType: type) };
             var parser = new Parser(command);
 
             var bindingContext = new BindingContext(parser.Parse(commandLine));
@@ -157,18 +149,15 @@ namespace System.CommandLine.Tests.Binding
         public void Command_arguments_are_bound_by_name_to_property_setters(
             Type type,
             string commandLine,
-            object expectedValue)
+            object expectedValue
+        )
         {
             var targetType = typeof(ClassWithSetter<>).MakeGenericType(type);
             var binder = new ModelBinder(targetType);
 
             var command = new Command("the-command")
             {
-                new Argument
-                {
-                    Name = "value",
-                    ArgumentType = type
-                }
+                new Argument { Name = "value", ArgumentType = type }
             };
             var parser = new Parser(command);
 
@@ -193,7 +182,8 @@ namespace System.CommandLine.Tests.Binding
             var binder = new ModelBinder(typeof(ClassWithCtorParameter<DirectoryInfo>));
             var bindingContext = new BindingContext(command.Parse($"--value \"{tempPath}\""));
 
-            var instance = (ClassWithCtorParameter<DirectoryInfo>)binder.CreateInstance(bindingContext);
+            var instance =
+                (ClassWithCtorParameter<DirectoryInfo>)binder.CreateInstance(bindingContext);
 
             instance.Value.FullName.Should().Be(tempPath);
         }
@@ -218,18 +208,19 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Property_setters_with_no_default_value_and_no_matching_option_are_not_called()
         {
-            var command = new Command("the-command")
-                          {
-                              new Option<string>("--string-option")
-                          };
+            var command = new Command("the-command") { new Option<string>("--string-option") };
 
-            var binder = new ModelBinder(typeof(ClassWithSettersAndCtorParametersWithDifferentNames));
+            var binder = new ModelBinder(
+                typeof(ClassWithSettersAndCtorParametersWithDifferentNames)
+            );
 
             var parser = new Parser(command);
-            var bindingContext = new BindingContext(
-                parser.Parse(""));
+            var bindingContext = new BindingContext(parser.Parse(""));
 
-            var instance = (ClassWithSettersAndCtorParametersWithDifferentNames)binder.CreateInstance(bindingContext);
+            var instance =
+                (ClassWithSettersAndCtorParametersWithDifferentNames)binder.CreateInstance(
+                    bindingContext
+                );
 
             instance.StringOption.Should().Be("the default");
         }
@@ -237,10 +228,7 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Parse_result_can_be_used_to_create_an_instance_without_doing_handler_invocation()
         {
-            var parser = new Parser(new Command("the-command")
-                                    {
-                                        new Option<int>("--int-option")
-                                    });
+            var parser = new Parser(new Command("the-command") { new Option<int>("--int-option") });
             var bindingContext = new BindingContext(parser.Parse("the-command --int-option 123"));
             var binder = new ModelBinder(typeof(ClassWithMultiLetterSetters));
 
@@ -252,10 +240,7 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Parse_result_can_be_used_to_modify_an_existing_instance_without_doing_handler_invocation()
         {
-            var parser = new Parser(new Command("the-command")
-                                    {
-                                        new Option<int>("--int-option")
-                                    });
+            var parser = new Parser(new Command("the-command") { new Option<int>("--int-option") });
             var instance = new ClassWithMultiLetterSetters();
             var bindingContext = new BindingContext(parser.Parse("the-command --int-option 123"));
             var binder = new ModelBinder(typeof(ClassWithMultiLetterSetters));
@@ -269,10 +254,10 @@ namespace System.CommandLine.Tests.Binding
         public void Values_from_options_on_parent_commands_are_bound_by_name_by_default()
         {
             var parentCommand = new Command("parent-command")
-                                {
-                                    new Option<int>("--int-option"),
-                                    new Command("child-command")
-                                };
+            {
+                new Option<int>("--int-option"),
+                new Command("child-command")
+            };
 
             var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
@@ -289,10 +274,10 @@ namespace System.CommandLine.Tests.Binding
         public void Default_values_from_options_on_parent_commands_are_bound_by_name_by_default()
         {
             var parentCommand = new Command("parent-command")
-                                {
-                                    new Option<int>("--int-option", () => 123),
-                                    new Command("child-command")
-                                };
+            {
+                new Option<int>("--int-option", () => 123),
+                new Command("child-command")
+            };
 
             var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
@@ -310,10 +295,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var parentCommand = new Command("parent-command")
             {
-                new Argument<int>
-                {
-                    Name = nameof(ClassWithMultiLetterSetters.IntOption)
-                },
+                new Argument<int> { Name = nameof(ClassWithMultiLetterSetters.IntOption) },
                 new Command("child-command")
             };
 
@@ -356,19 +338,15 @@ namespace System.CommandLine.Tests.Binding
         {
             var childCommand = new Command("child-command");
             var option = new Option<int>("-x");
-            var parentCommand = new Command("parent-command")
-                                {
-                                    option,
-                                    childCommand
-                                };
+            var parentCommand = new Command("parent-command") { option, childCommand };
 
             var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
-            binder.BindMemberFromValue(
-                c => c.IntOption,
-                option);
+            binder.BindMemberFromValue(c => c.IntOption, option);
 
-            var bindingContext = new BindingContext(parentCommand.Parse("parent-command -x 123 child-command"));
+            var bindingContext = new BindingContext(
+                parentCommand.Parse("parent-command -x 123 child-command")
+            );
 
             var instance = (ClassWithMultiLetterSetters)binder.CreateInstance(bindingContext);
 
@@ -382,9 +360,7 @@ namespace System.CommandLine.Tests.Binding
 
             var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
-            binder.BindMemberFromValue(
-                c => c.IntOption,
-                _ => 123);
+            binder.BindMemberFromValue(c => c.IntOption, _ => 123);
 
             var bindingContext = new BindingContext(command.Parse("the-command"));
 
@@ -404,9 +380,7 @@ namespace System.CommandLine.Tests.Binding
             var binder = new ModelBinder(type);
             var propertyInfo = type.GetProperties()[0];
 
-            binder.BindMemberFromValue(
-                propertyInfo,
-                option);
+            binder.BindMemberFromValue(propertyInfo, option);
 
             var bindingContext = new BindingContext(command.Parse("the-command --fred 42"));
 
@@ -444,9 +418,7 @@ namespace System.CommandLine.Tests.Binding
 
             var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
-            binder.BindMemberFromValue(
-                i => i.IntOption,
-                option);
+            binder.BindMemberFromValue(i => i.IntOption, option);
 
             var bindingContext = new BindingContext(command.Parse("the-command --fred 42"));
 
@@ -464,9 +436,7 @@ namespace System.CommandLine.Tests.Binding
 
             var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
-            binder.BindMemberFromValue(
-                i => i.IntOption,
-                argument);
+            binder.BindMemberFromValue(i => i.IntOption, argument);
 
             var bindingContext = new BindingContext(command.Parse("the-command 42"));
 
@@ -493,7 +463,9 @@ namespace System.CommandLine.Tests.Binding
         public void Command_argument_is_bound_to_longest_constructor()
         {
             var rootCommand = new RootCommand();
-            rootCommand.AddArgument(new Argument<int> { Name = nameof(ClassWithMultipleCtor.IntProperty) });
+            rootCommand.AddArgument(
+                new Argument<int> { Name = nameof(ClassWithMultipleCtor.IntProperty) }
+            );
             var parser = new Parser(rootCommand);
 
             var bindingContext = new BindingContext(parser.Parse("42"));
@@ -511,7 +483,9 @@ namespace System.CommandLine.Tests.Binding
             var stringOption = new Option<string>("--string-property");
             var parser = new Parser(intOption, stringOption);
 
-            var bindingContext = new BindingContext(parser.Parse("--int-property 42 --string-property Hello"));
+            var bindingContext = new BindingContext(
+                parser.Parse("--int-property 42 --string-property Hello")
+            );
             var binder = new ModelBinder<ClassWithMultiLetterSetters>
             {
                 EnforceExplicitBinding = true
@@ -530,8 +504,9 @@ namespace System.CommandLine.Tests.Binding
             var intOption = new Option<int>("-a");
             var stringOption = new Option<string>("-b");
             var parser = new Parser(intOption, stringOption);
-            var ctor = typeof(ClassWithMultiLetterCtorParameters)
-                .GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
+            var ctor = typeof(ClassWithMultiLetterCtorParameters).GetConstructors(
+                BindingFlags.Public | BindingFlags.Instance
+            )[0];
             var paramInfo = ctor.GetParameters()[0];
 
             var bindingContext = new BindingContext(parser.Parse("-a 42 -b Hello"));
@@ -540,7 +515,8 @@ namespace System.CommandLine.Tests.Binding
                 EnforceExplicitBinding = true
             };
             binder.BindConstructorArgumentFromValue(paramInfo, intOption);
-            var instance = binder.CreateInstance(bindingContext) as ClassWithMultiLetterCtorParameters;
+            var instance =
+                binder.CreateInstance(bindingContext) as ClassWithMultiLetterCtorParameters;
 
             instance.Should().NotBeNull();
             instance.IntOption.Should().Be(42);
@@ -550,10 +526,7 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public async Task Bound_array_command_arguments_default_to_an_empty_array_when_not_specified()
         {
-            var rootCommand = new RootCommand("Command")
-            {
-                new Argument<string[]>("names"),
-            };
+            var rootCommand = new RootCommand("Command") { new Argument<string[]>("names"), };
             rootCommand.Handler = CommandHandler.Create<string[]>(Handler);
             string[] passedNames = null;
             await rootCommand.InvokeAsync("");
@@ -590,10 +563,7 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public async Task Bound_array_options_default_to_an_empty_array_when_not_specified()
         {
-            var rootCommand = new RootCommand("Command")
-            {
-                new Option<string[]>("--names"),
-            };
+            var rootCommand = new RootCommand("Command") { new Option<string[]>("--names"), };
             rootCommand.Handler = CommandHandler.Create<string[]>(Handler);
             string[] passedNames = null;
             await rootCommand.InvokeAsync("");
@@ -632,23 +602,24 @@ namespace System.CommandLine.Tests.Binding
         {
             ClassWithSetter<int> boundInstance = null;
 
-            var rootCommand = new RootCommand
-            {
-                new Option<int>("--value")
-            };
+            var rootCommand = new RootCommand { new Option<int>("--value") };
 
-            rootCommand.Handler = CommandHandler.Create<ClassWithSetter<int>>(x => boundInstance = x);
+            rootCommand.Handler = CommandHandler.Create<ClassWithSetter<int>>(
+                x => boundInstance = x
+            );
 
             var parser = new CommandLineBuilder(rootCommand)
-                         .UseMiddleware(context =>
-                         {
-                             var binder = new ModelBinder<ClassWithSetter<int>>();
+                .UseMiddleware(
+                    context =>
+                    {
+                        var binder = new ModelBinder<ClassWithSetter<int>>();
 
-                             binder.BindMemberFromValue(instance => instance.Value, _ => 456);
+                        binder.BindMemberFromValue(instance => instance.Value, _ => 456);
 
-                             context.BindingContext.AddModelBinder(binder);
-                         })
-                         .Build();
+                        context.BindingContext.AddModelBinder(binder);
+                    }
+                )
+                .Build();
 
             parser.Invoke("--value 123");
 
@@ -660,23 +631,24 @@ namespace System.CommandLine.Tests.Binding
         {
             ClassWithSetter<int> boundInstance = null;
 
-            var rootCommand = new RootCommand
-            {
-                new Argument<int>()
-            };
+            var rootCommand = new RootCommand { new Argument<int>() };
 
-            rootCommand.Handler = CommandHandler.Create<ClassWithSetter<int>>(x => boundInstance = x);
+            rootCommand.Handler = CommandHandler.Create<ClassWithSetter<int>>(
+                x => boundInstance = x
+            );
 
             var parser = new CommandLineBuilder(rootCommand)
-                         .UseMiddleware(context =>
-                         {
-                             var binder = new ModelBinder<ClassWithSetter<int>>();
+                .UseMiddleware(
+                    context =>
+                    {
+                        var binder = new ModelBinder<ClassWithSetter<int>>();
 
-                             binder.BindMemberFromValue(instance => instance.Value, _ => 456);
+                        binder.BindMemberFromValue(instance => instance.Value, _ => 456);
 
-                             context.BindingContext.AddModelBinder(binder);
-                         })
-                         .Build();
+                        context.BindingContext.AddModelBinder(binder);
+                    }
+                )
+                .Build();
 
             parser.Invoke("123");
 
@@ -686,21 +658,23 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Default_values_from_options_with_the_same_type_are_bound_and_use_their_own_defaults()
         {
-            int first = 0, second = 0;
+            int first = 0,
+                second = 0;
 
             var rootCommand = new RootCommand
             {
                 new Option<int>("one", () => 1),
                 new Option<int>("two", () => 2)
             };
-            rootCommand.Handler = CommandHandler.Create<int, int>((one, two) =>
-            {
-                first = one;
-                second = two;
-            });
+            rootCommand.Handler = CommandHandler.Create<int, int>(
+                (one, two) =>
+                {
+                    first = one;
+                    second = two;
+                }
+            );
 
-            var parser = new CommandLineBuilder(rootCommand)
-                .Build();
+            var parser = new CommandLineBuilder(rootCommand).Build();
 
             parser.Invoke("");
 
@@ -711,10 +685,7 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Binder_does_not_match_on_partial_name()
         {
-            var command = new RootCommand
-            {
-                new Option<List<string>>("--abc")
-            };
+            var command = new RootCommand { new Option<List<string>>("--abc") };
 
             ClassWithOnePropertyNameThatIsSubstringOfAnother boundValue = default;
 
@@ -727,25 +698,22 @@ namespace System.CommandLine.Tests.Binding
 
             command.Invoke(new[] { "--abc", "1" });
 
-            boundValue.Abc
-                      .Should()
-                      .ContainSingle()
-                      .Which
-                      .Should()
-                      .Be("1");
+            boundValue.Abc.Should().ContainSingle().Which.Should().Be("1");
         }
 
-        [Fact] 
+        [Fact]
         public async Task Empty_input_is_bound_correctly_to_list_type_properties()
         {
             ClassWithListTypePropertiesAndDefaultCtor boundInstance = default;
-            
+
             var cmd = new RootCommand
             {
-                Handler = CommandHandler.Create((ClassWithListTypePropertiesAndDefaultCtor value) =>
-                {
-                    boundInstance = value;
-                })
+                Handler = CommandHandler.Create(
+                    (ClassWithListTypePropertiesAndDefaultCtor value) =>
+                    {
+                        boundInstance = value;
+                    }
+                )
             };
 
             var result = cmd.Parse();

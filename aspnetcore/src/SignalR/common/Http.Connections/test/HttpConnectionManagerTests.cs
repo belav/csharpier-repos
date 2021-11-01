@@ -36,15 +36,46 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         }
 
         [Theory]
-        [InlineData(ConnectionStates.ClosedUngracefully | ConnectionStates.ApplicationNotFaulted | ConnectionStates.TransportNotFaulted)]
-        [InlineData(ConnectionStates.ClosedUngracefully | ConnectionStates.ApplicationNotFaulted | ConnectionStates.TransportFaulted)]
-        [InlineData(ConnectionStates.ClosedUngracefully | ConnectionStates.ApplicationFaulted | ConnectionStates.TransportFaulted)]
-        [InlineData(ConnectionStates.ClosedUngracefully | ConnectionStates.ApplicationFaulted | ConnectionStates.TransportNotFaulted)]
-
-        [InlineData(ConnectionStates.CloseGracefully | ConnectionStates.ApplicationNotFaulted | ConnectionStates.TransportNotFaulted)]
-        [InlineData(ConnectionStates.CloseGracefully | ConnectionStates.ApplicationNotFaulted | ConnectionStates.TransportFaulted)]
-        [InlineData(ConnectionStates.CloseGracefully | ConnectionStates.ApplicationFaulted | ConnectionStates.TransportFaulted)]
-        [InlineData(ConnectionStates.CloseGracefully | ConnectionStates.ApplicationFaulted | ConnectionStates.TransportNotFaulted)]
+        [InlineData(
+            ConnectionStates.ClosedUngracefully
+                | ConnectionStates.ApplicationNotFaulted
+                | ConnectionStates.TransportNotFaulted
+        )]
+        [InlineData(
+            ConnectionStates.ClosedUngracefully
+                | ConnectionStates.ApplicationNotFaulted
+                | ConnectionStates.TransportFaulted
+        )]
+        [InlineData(
+            ConnectionStates.ClosedUngracefully
+                | ConnectionStates.ApplicationFaulted
+                | ConnectionStates.TransportFaulted
+        )]
+        [InlineData(
+            ConnectionStates.ClosedUngracefully
+                | ConnectionStates.ApplicationFaulted
+                | ConnectionStates.TransportNotFaulted
+        )]
+        [InlineData(
+            ConnectionStates.CloseGracefully
+                | ConnectionStates.ApplicationNotFaulted
+                | ConnectionStates.TransportNotFaulted
+        )]
+        [InlineData(
+            ConnectionStates.CloseGracefully
+                | ConnectionStates.ApplicationNotFaulted
+                | ConnectionStates.TransportFaulted
+        )]
+        [InlineData(
+            ConnectionStates.CloseGracefully
+                | ConnectionStates.ApplicationFaulted
+                | ConnectionStates.TransportFaulted
+        )]
+        [InlineData(
+            ConnectionStates.CloseGracefully
+                | ConnectionStates.ApplicationFaulted
+                | ConnectionStates.TransportNotFaulted
+        )]
         public async Task DisposingConnectionsClosesBothSidesOfThePipe(ConnectionStates states)
         {
             using (StartVerifiableLog())
@@ -60,31 +91,38 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 {
                     // If the application is faulted then we want to make sure the transport task only completes after
                     // the application completes
-                    connection.ApplicationTask = Task.FromException(new Exception("Application failed"));
-                    connection.TransportTask = Task.Run(async () =>
-                    {
-                        // Wait for the application to end
-                        var result = await connection.Application.Input.ReadAsync();
-                        connection.Application.Input.AdvanceTo(result.Buffer.End);
-
-                        if (transportFaulted)
+                    connection.ApplicationTask = Task.FromException(
+                        new Exception("Application failed")
+                    );
+                    connection.TransportTask = Task.Run(
+                        async () =>
                         {
-                            throw new Exception("Transport failed");
-                        }
-                    });
+                            // Wait for the application to end
+                            var result = await connection.Application.Input.ReadAsync();
+                            connection.Application.Input.AdvanceTo(result.Buffer.End);
 
+                            if (transportFaulted)
+                            {
+                                throw new Exception("Transport failed");
+                            }
+                        }
+                    );
                 }
                 else if (transportFaulted)
                 {
                     // If the transport is faulted then we want to make sure the transport task only completes after
                     // the application completes
-                    connection.TransportTask = Task.FromException(new Exception("Application failed"));
-                    connection.ApplicationTask = Task.Run(async () =>
-                    {
-                        // Wait for the application to end
-                        var result = await connection.Transport.Input.ReadAsync();
-                        connection.Transport.Input.AdvanceTo(result.Buffer.End);
-                    });
+                    connection.TransportTask = Task.FromException(
+                        new Exception("Application failed")
+                    );
+                    connection.ApplicationTask = Task.Run(
+                        async () =>
+                        {
+                            // Wait for the application to end
+                            var result = await connection.Transport.Input.ReadAsync();
+                            connection.Transport.Input.AdvanceTo(result.Buffer.End);
+                        }
+                    );
                 }
                 else
                 {
@@ -107,11 +145,21 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                 result = await connection.Application.Output.FlushAsync();
                 Assert.True(result.IsCompleted);
 
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await connection.Transport.Input.ReadAsync());
-                Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await connection.Transport.Input.ReadAsync()
+                );
+                Assert.Equal(
+                    "Reading is not allowed after reader was completed.",
+                    exception.Message
+                );
 
-                exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await connection.Application.Input.ReadAsync());
-                Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
+                exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await connection.Application.Input.ReadAsync()
+                );
+                Assert.Equal(
+                    "Reading is not allowed after reader was completed.",
+                    exception.Message
+                );
             }
         }
 
@@ -125,7 +173,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 Assert.NotNull(connection.ConnectionId);
 
-                Assert.True(connectionManager.TryGetConnection(connection.ConnectionToken, out var newConnection));
+                Assert.True(
+                    connectionManager.TryGetConnection(
+                        connection.ConnectionToken,
+                        out var newConnection
+                    )
+                );
                 Assert.Same(newConnection, connection);
             }
         }
@@ -136,14 +189,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
                 var transport = connection.Transport;
 
                 Assert.NotNull(connection.ConnectionId);
                 Assert.NotNull(connection.ConnectionToken);
                 Assert.NotNull(transport);
 
-                Assert.True(connectionManager.TryGetConnection(connection.ConnectionToken, out var newConnection));
+                Assert.True(
+                    connectionManager.TryGetConnection(
+                        connection.ConnectionToken,
+                        out var newConnection
+                    )
+                );
                 Assert.Same(newConnection, connection);
                 Assert.Same(transport, newConnection.Transport);
             }
@@ -155,19 +216,32 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
 
                 var transport = connection.Transport;
 
                 Assert.NotNull(connection.ConnectionId);
                 Assert.NotNull(transport);
 
-                Assert.True(connectionManager.TryGetConnection(connection.ConnectionToken, out var newConnection));
+                Assert.True(
+                    connectionManager.TryGetConnection(
+                        connection.ConnectionToken,
+                        out var newConnection
+                    )
+                );
                 Assert.Same(newConnection, connection);
                 Assert.Same(transport, newConnection.Transport);
 
                 connectionManager.RemoveConnection(connection.ConnectionToken);
-                Assert.False(connectionManager.TryGetConnection(connection.ConnectionToken, out newConnection));
+                Assert.False(
+                    connectionManager.TryGetConnection(
+                        connection.ConnectionToken,
+                        out newConnection
+                    )
+                );
             }
         }
 
@@ -177,18 +251,26 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default, negotiateVersion: 0);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default,
+                    negotiateVersion: 0
+                );
 
                 var transport = connection.Transport;
 
                 Assert.NotNull(connection.ConnectionId);
                 Assert.NotNull(transport);
 
-                Assert.True(connectionManager.TryGetConnection(connection.ConnectionToken, out var newConnection));
+                Assert.True(
+                    connectionManager.TryGetConnection(
+                        connection.ConnectionToken,
+                        out var newConnection
+                    )
+                );
                 Assert.Same(newConnection, connection);
                 Assert.Same(transport, newConnection.Transport);
                 Assert.Equal(connection.ConnectionId, connection.ConnectionToken);
-
             }
         }
 
@@ -198,19 +280,29 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default, negotiateVersion: 1);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default,
+                    negotiateVersion: 1
+                );
 
                 var transport = connection.Transport;
 
                 Assert.NotNull(connection.ConnectionId);
                 Assert.NotNull(transport);
 
-                Assert.True(connectionManager.TryGetConnection(connection.ConnectionToken, out var newConnection));
-                Assert.False(connectionManager.TryGetConnection(connection.ConnectionId, out var _));
+                Assert.True(
+                    connectionManager.TryGetConnection(
+                        connection.ConnectionToken,
+                        out var newConnection
+                    )
+                );
+                Assert.False(
+                    connectionManager.TryGetConnection(connection.ConnectionId, out var _)
+                );
                 Assert.Same(newConnection, connection);
                 Assert.Same(transport, newConnection.Transport);
                 Assert.NotEqual(connection.ConnectionId, connection.ConnectionToken);
-
             }
         }
 
@@ -220,34 +312,41 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
 
-                connection.ApplicationTask = Task.Run(async () =>
-                {
-                    var result = await connection.Transport.Input.ReadAsync();
+                connection.ApplicationTask = Task.Run(
+                    async () =>
+                    {
+                        var result = await connection.Transport.Input.ReadAsync();
 
-                    try
-                    {
-                        Assert.True(result.IsCompleted);
+                        try
+                        {
+                            Assert.True(result.IsCompleted);
+                        }
+                        finally
+                        {
+                            connection.Transport.Input.AdvanceTo(result.Buffer.End);
+                        }
                     }
-                    finally
-                    {
-                        connection.Transport.Input.AdvanceTo(result.Buffer.End);
-                    }
-                });
+                );
 
-                connection.TransportTask = Task.Run(async () =>
-                {
-                    var result = await connection.Application.Input.ReadAsync();
-                    try
+                connection.TransportTask = Task.Run(
+                    async () =>
                     {
-                        Assert.True(result.IsCanceled);
+                        var result = await connection.Application.Input.ReadAsync();
+                        try
+                        {
+                            Assert.True(result.IsCanceled);
+                        }
+                        finally
+                        {
+                            connection.Application.Input.AdvanceTo(result.Buffer.End);
+                        }
                     }
-                    finally
-                    {
-                        connection.Application.Input.AdvanceTo(result.Buffer.End);
-                    }
-                });
+                );
 
                 connectionManager.CloseConnections();
 
@@ -261,8 +360,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 connection.ApplicationTask = tcs.Task;
                 connection.TransportTask = tcs.Task;
@@ -284,8 +388,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 connection.ApplicationTask = tcs.Task;
                 connection.TransportTask = tcs.Task;
@@ -297,10 +406,14 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 tcs.TrySetException(new InvalidOperationException("Error"));
 
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await firstTask.DefaultTimeout());
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await firstTask.DefaultTimeout()
+                );
                 Assert.Equal("Error", exception.Message);
 
-                exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await secondTask.DefaultTimeout());
+                exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await secondTask.DefaultTimeout()
+                );
                 Assert.Equal("Error", exception.Message);
             }
         }
@@ -311,8 +424,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 connection.ApplicationTask = tcs.Task;
                 connection.TransportTask = tcs.Task;
@@ -324,8 +442,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 tcs.TrySetCanceled();
 
-                await Assert.ThrowsAsync<TaskCanceledException>(async () => await firstTask.DefaultTimeout());
-                await Assert.ThrowsAsync<TaskCanceledException>(async () => await secondTask.DefaultTimeout());
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    async () => await firstTask.DefaultTimeout()
+                );
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    async () => await secondTask.DefaultTimeout()
+                );
             }
         }
 
@@ -335,7 +457,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             using (StartVerifiableLog())
             {
                 var connectionManager = CreateConnectionManager(LoggerFactory);
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
 
                 Assert.NotNull(connection.ConnectionId);
                 Assert.NotNull(connection.Transport);
@@ -372,7 +497,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 appLifetime.Start();
 
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
 
                 appLifetime.StopApplication();
 
@@ -391,7 +519,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                 var connectionManager = CreateConnectionManager(LoggerFactory, appLifetime);
 
-                var connection = connectionManager.CreateConnection(PipeOptions.Default, PipeOptions.Default);
+                var connection = connectionManager.CreateConnection(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
 
                 appLifetime.StopApplication();
 
@@ -400,10 +531,17 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
             }
         }
 
-        private static HttpConnectionManager CreateConnectionManager(ILoggerFactory loggerFactory, IHostApplicationLifetime lifetime = null)
+        private static HttpConnectionManager CreateConnectionManager(
+            ILoggerFactory loggerFactory,
+            IHostApplicationLifetime lifetime = null
+        )
         {
             lifetime = lifetime ?? new EmptyApplicationLifetime();
-            return new HttpConnectionManager(loggerFactory, lifetime, Options.Create(new ConnectionOptions()));
+            return new HttpConnectionManager(
+                loggerFactory,
+                lifetime,
+                Options.Create(new ConnectionOptions())
+            );
         }
 
         [Flags]

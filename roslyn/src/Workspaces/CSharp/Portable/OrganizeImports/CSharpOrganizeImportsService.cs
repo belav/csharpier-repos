@@ -19,17 +19,22 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOrganizeImportsService()
-        {
-        }
+        public CSharpOrganizeImportsService() { }
 
-        public async Task<Document> OrganizeImportsAsync(Document document, CancellationToken cancellationToken)
+        public async Task<Document> OrganizeImportsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
-            var placeSystemNamespaceFirst = options.GetOption(GenerationOptions.PlaceSystemNamespaceFirst);
-            var blankLineBetweenGroups = options.GetOption(GenerationOptions.SeparateImportDirectiveGroups);
+            var placeSystemNamespaceFirst = options.GetOption(
+                GenerationOptions.PlaceSystemNamespaceFirst
+            );
+            var blankLineBetweenGroups = options.GetOption(
+                GenerationOptions.SeparateImportDirectiveGroups
+            );
 
             var rewriter = new Rewriter(placeSystemNamespaceFirst, blankLineBetweenGroups);
             var newRoot = rewriter.Visit(root);

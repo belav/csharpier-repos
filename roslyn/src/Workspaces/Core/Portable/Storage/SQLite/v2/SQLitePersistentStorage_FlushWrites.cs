@@ -58,13 +58,17 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     // has released their ref on us. In that case, it would be an error on their part to ever try to
                     // read/write after releasing us.
                     _shutdownTokenSource.Cancel();
-                }, CancellationToken.None);
+                },
+                CancellationToken.None
+            );
         }
 
         private void FlushInMemoryDataToDisk()
         {
             // We're writing.  This better always be under the exclusive scheduler.
-            Contract.ThrowIfFalse(TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler);
+            Contract.ThrowIfFalse(
+                TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler
+            );
 
             // Don't flush from a bg task if we've been asked to shutdown.  The shutdown logic in the storage service
             // will take care of the final writes to the main db.
@@ -75,12 +79,15 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
             // Dummy value for RunInTransaction signature.
             var unused = true;
-            connection.RunInTransaction(_ =>
-            {
-                _solutionAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(connection);
-                _projectAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(connection);
-                _documentAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(connection);
-            }, unused);
+            connection.RunInTransaction(
+                _ =>
+                {
+                    _solutionAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(connection);
+                    _projectAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(connection);
+                    _documentAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(connection);
+                },
+                unused
+            );
         }
     }
 }

@@ -27,7 +27,6 @@ namespace System.Net.WebSockets
         internal List<string>? _requestedSubProtocols;
 
         internal ClientWebSocketOptions() { } // prevent external instantiation
-
         #region HTTP Settings
 
         [UnsupportedOSPlatform("browser")]
@@ -40,9 +39,11 @@ namespace System.Net.WebSockets
             RequestHeaders.Set(headerName, headerValue);
         }
 
-        internal WebHeaderCollection RequestHeaders => _requestHeaders ??= new WebHeaderCollection();
+        internal WebHeaderCollection RequestHeaders =>
+            _requestHeaders ??= new WebHeaderCollection();
 
-        internal List<string> RequestedSubProtocols => _requestedSubProtocols ??= new List<string>();
+        internal List<string> RequestedSubProtocols =>
+            _requestedSubProtocols ??= new List<string>();
 
         [UnsupportedOSPlatform("browser")]
         public bool UseDefaultCredentials
@@ -125,7 +126,10 @@ namespace System.Net.WebSockets
             {
                 if (string.Equals(item, subProtocol, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new ArgumentException(SR.Format(SR.net_WebSockets_NoDuplicateProtocol, subProtocol), nameof(subProtocol));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_WebSockets_NoDuplicateProtocol, subProtocol),
+                        nameof(subProtocol)
+                    );
                 }
             }
             subprotocols.Add(subProtocol);
@@ -140,9 +144,14 @@ namespace System.Net.WebSockets
                 ThrowIfReadOnly();
                 if (value != Timeout.InfiniteTimeSpan && value < TimeSpan.Zero)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value,
-                        SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
-                        Timeout.InfiniteTimeSpan.ToString()));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(
+                            SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
+                            Timeout.InfiniteTimeSpan.ToString()
+                        )
+                    );
                 }
                 _keepAliveInterval = value;
             }
@@ -158,11 +167,19 @@ namespace System.Net.WebSockets
 
             if (receiveBufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(receiveBufferSize), receiveBufferSize, SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1));
+                throw new ArgumentOutOfRangeException(
+                    nameof(receiveBufferSize),
+                    receiveBufferSize,
+                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1)
+                );
             }
             if (sendBufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(sendBufferSize), sendBufferSize, SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1));
+                throw new ArgumentOutOfRangeException(
+                    nameof(sendBufferSize),
+                    sendBufferSize,
+                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1)
+                );
             }
 
             _receiveBufferSize = receiveBufferSize;
@@ -176,11 +193,19 @@ namespace System.Net.WebSockets
 
             if (receiveBufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(receiveBufferSize), receiveBufferSize, SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1));
+                throw new ArgumentOutOfRangeException(
+                    nameof(receiveBufferSize),
+                    receiveBufferSize,
+                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1)
+                );
             }
             if (sendBufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(sendBufferSize), sendBufferSize, SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1));
+                throw new ArgumentOutOfRangeException(
+                    nameof(sendBufferSize),
+                    sendBufferSize,
+                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 1)
+                );
             }
 
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
@@ -210,7 +235,6 @@ namespace System.Net.WebSockets
                 throw new InvalidOperationException(SR.net_WebSockets_AlreadyStarted);
             }
         }
-
         #endregion Helpers
     }
 }

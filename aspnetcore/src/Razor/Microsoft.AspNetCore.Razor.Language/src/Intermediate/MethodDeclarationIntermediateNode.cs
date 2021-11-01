@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class MethodDeclarationIntermediateNode : MemberDeclarationIntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public IList<string> Modifiers { get; } = new List<string>();
 
@@ -36,14 +37,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             formatter.WriteProperty(nameof(MethodName), MethodName);
             formatter.WriteProperty(nameof(Modifiers), string.Join(", ", Modifiers));
-            formatter.WriteProperty(nameof(Parameters), string.Join(", ", Parameters.Select(FormatMethodParameter)));
+            formatter.WriteProperty(
+                nameof(Parameters),
+                string.Join(", ", Parameters.Select(FormatMethodParameter))
+            );
             formatter.WriteProperty(nameof(ReturnType), ReturnType);
         }
 
         private static string FormatMethodParameter(MethodParameter parameter)
         {
             var builder = new StringBuilder();
-            for (var i = 0; i <parameter.Modifiers.Count; i++)
+            for (var i = 0; i < parameter.Modifiers.Count; i++)
             {
                 builder.Append(parameter.Modifiers[i]);
                 builder.Append(" ");

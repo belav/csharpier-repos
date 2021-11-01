@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             LocalizableString useExpressionBodyTitle,
             LocalizableString useBlockBodyTitle,
             Option2<CodeStyleOption2<ExpressionBodyPreference>> option,
-            ImmutableArray<SyntaxKind> syntaxKinds)
+            ImmutableArray<SyntaxKind> syntaxKinds
+        )
         {
             DiagnosticId = diagnosticId;
             EnforceOnBuild = enforceOnBuild;
@@ -50,12 +51,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             SyntaxKinds = syntaxKinds;
         }
 
-        protected static AccessorDeclarationSyntax GetSingleGetAccessor(AccessorListSyntax accessorList)
+        protected static AccessorDeclarationSyntax GetSingleGetAccessor(
+            AccessorListSyntax accessorList
+        )
         {
-            if (accessorList != null &&
-                accessorList.Accessors.Count == 1 &&
-                accessorList.Accessors[0].AttributeLists.Count == 0 &&
-                accessorList.Accessors[0].IsKind(SyntaxKind.GetAccessorDeclaration))
+            if (
+                accessorList != null
+                && accessorList.Accessors.Count == 1
+                && accessorList.Accessors[0].AttributeLists.Count == 0
+                && accessorList.Accessors[0].IsKind(SyntaxKind.GetAccessorDeclaration)
+            )
             {
                 return accessorList.Accessors[0];
             }
@@ -63,37 +68,51 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             return null;
         }
 
-        protected static BlockSyntax GetBodyFromSingleGetAccessor(AccessorListSyntax accessorList)
-            => GetSingleGetAccessor(accessorList)?.Body;
+        protected static BlockSyntax GetBodyFromSingleGetAccessor(
+            AccessorListSyntax accessorList
+        ) => GetSingleGetAccessor(accessorList)?.Body;
 
-        public override BlockSyntax GetBody(SyntaxNode declaration)
-            => GetBody((TDeclaration)declaration);
+        public override BlockSyntax GetBody(SyntaxNode declaration) =>
+            GetBody((TDeclaration)declaration);
 
-        public override ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode declaration)
-            => GetExpressionBody((TDeclaration)declaration);
+        public override ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode declaration) =>
+            GetExpressionBody((TDeclaration)declaration);
 
-        public override bool CanOfferUseExpressionBody(OptionSet optionSet, SyntaxNode declaration, bool forAnalyzer)
-            => CanOfferUseExpressionBody(optionSet, (TDeclaration)declaration, forAnalyzer);
+        public override bool CanOfferUseExpressionBody(
+            OptionSet optionSet,
+            SyntaxNode declaration,
+            bool forAnalyzer
+        ) => CanOfferUseExpressionBody(optionSet, (TDeclaration)declaration, forAnalyzer);
 
-        public override (bool canOffer, bool fixesError) CanOfferUseBlockBody(OptionSet optionSet, SyntaxNode declaration, bool forAnalyzer)
-            => CanOfferUseBlockBody(optionSet, (TDeclaration)declaration, forAnalyzer);
+        public override (bool canOffer, bool fixesError) CanOfferUseBlockBody(
+            OptionSet optionSet,
+            SyntaxNode declaration,
+            bool forAnalyzer
+        ) => CanOfferUseBlockBody(optionSet, (TDeclaration)declaration, forAnalyzer);
 
-        public sealed override SyntaxNode Update(SemanticModel semanticModel, SyntaxNode declaration, bool useExpressionBody)
-            => Update(semanticModel, (TDeclaration)declaration, useExpressionBody);
+        public sealed override SyntaxNode Update(
+            SemanticModel semanticModel,
+            SyntaxNode declaration,
+            bool useExpressionBody
+        ) => Update(semanticModel, (TDeclaration)declaration, useExpressionBody);
 
-        public override Location GetDiagnosticLocation(SyntaxNode declaration)
-            => GetDiagnosticLocation((TDeclaration)declaration);
+        public override Location GetDiagnosticLocation(SyntaxNode declaration) =>
+            GetDiagnosticLocation((TDeclaration)declaration);
 
-        protected virtual Location GetDiagnosticLocation(TDeclaration declaration)
-            => GetBody(declaration).Statements[0].GetLocation();
+        protected virtual Location GetDiagnosticLocation(TDeclaration declaration) =>
+            GetBody(declaration).Statements[0].GetLocation();
 
         public bool CanOfferUseExpressionBody(
-            OptionSet optionSet, TDeclaration declaration, bool forAnalyzer)
+            OptionSet optionSet,
+            TDeclaration declaration,
+            bool forAnalyzer
+        )
         {
             var currentOptionValue = optionSet.GetOption(Option);
             var preference = currentOptionValue.Value;
             var userPrefersExpressionBodies = preference != ExpressionBodyPreference.Never;
-            var analyzerDisabled = currentOptionValue.Notification.Severity == ReportDiagnostic.Suppress;
+            var analyzerDisabled =
+                currentOptionValue.Notification.Severity == ReportDiagnostic.Suppress;
 
             // If the user likes expression bodies, then we offer expression bodies from the diagnostic analyzer.
             // If the user does not like expression bodies then we offer expression bodies from the refactoring provider.
@@ -107,10 +126,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                     // have into one.
 
                     var options = declaration.SyntaxTree.Options;
-                    var conversionPreference = forAnalyzer ? preference : ExpressionBodyPreference.WhenPossible;
+                    var conversionPreference = forAnalyzer
+                        ? preference
+                        : ExpressionBodyPreference.WhenPossible;
 
-                    return TryConvertToExpressionBody(declaration, options, conversionPreference,
-                        expressionWhenOnSingleLine: out _, semicolonWhenOnSingleLine: out _);
+                    return TryConvertToExpressionBody(
+                        declaration,
+                        options,
+                        conversionPreference,
+                        expressionWhenOnSingleLine: out _,
+                        semicolonWhenOnSingleLine: out _
+                    );
                 }
             }
 
@@ -119,44 +145,73 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
         protected virtual bool TryConvertToExpressionBody(
             TDeclaration declaration,
-            ParseOptions options, ExpressionBodyPreference conversionPreference,
+            ParseOptions options,
+            ExpressionBodyPreference conversionPreference,
             out ArrowExpressionClauseSyntax expressionWhenOnSingleLine,
-            out SyntaxToken semicolonWhenOnSingleLine)
+            out SyntaxToken semicolonWhenOnSingleLine
+        )
         {
             return TryConvertToExpressionBodyWorker(
-                declaration, options, conversionPreference,
-                out expressionWhenOnSingleLine, out semicolonWhenOnSingleLine);
+                declaration,
+                options,
+                conversionPreference,
+                out expressionWhenOnSingleLine,
+                out semicolonWhenOnSingleLine
+            );
         }
 
         private bool TryConvertToExpressionBodyWorker(
-            SyntaxNode declaration, ParseOptions options, ExpressionBodyPreference conversionPreference,
-            out ArrowExpressionClauseSyntax expressionWhenOnSingleLine, out SyntaxToken semicolonWhenOnSingleLine)
+            SyntaxNode declaration,
+            ParseOptions options,
+            ExpressionBodyPreference conversionPreference,
+            out ArrowExpressionClauseSyntax expressionWhenOnSingleLine,
+            out SyntaxToken semicolonWhenOnSingleLine
+        )
         {
             var body = GetBody(declaration);
 
             return body.TryConvertToArrowExpressionBody(
-                declaration.Kind(), options, conversionPreference,
-                out expressionWhenOnSingleLine, out semicolonWhenOnSingleLine);
+                declaration.Kind(),
+                options,
+                conversionPreference,
+                out expressionWhenOnSingleLine,
+                out semicolonWhenOnSingleLine
+            );
         }
 
         protected bool TryConvertToExpressionBodyForBaseProperty(
-            BasePropertyDeclarationSyntax declaration, ParseOptions options,
+            BasePropertyDeclarationSyntax declaration,
+            ParseOptions options,
             ExpressionBodyPreference conversionPreference,
             out ArrowExpressionClauseSyntax arrowExpression,
-            out SyntaxToken semicolonToken)
+            out SyntaxToken semicolonToken
+        )
         {
-            if (TryConvertToExpressionBodyWorker(
-                    declaration, options, conversionPreference,
-                    out arrowExpression, out semicolonToken))
+            if (
+                TryConvertToExpressionBodyWorker(
+                    declaration,
+                    options,
+                    conversionPreference,
+                    out arrowExpression,
+                    out semicolonToken
+                )
+            )
             {
                 return true;
             }
 
             var getAccessor = GetSingleGetAccessor(declaration.AccessorList);
-            if (getAccessor?.ExpressionBody != null &&
-                BlockSyntaxExtensions.MatchesPreference(getAccessor.ExpressionBody.Expression, conversionPreference))
+            if (
+                getAccessor?.ExpressionBody != null
+                && BlockSyntaxExtensions.MatchesPreference(
+                    getAccessor.ExpressionBody.Expression,
+                    conversionPreference
+                )
+            )
             {
-                arrowExpression = SyntaxFactory.ArrowExpressionClause(getAccessor.ExpressionBody.Expression);
+                arrowExpression = SyntaxFactory.ArrowExpressionClause(
+                    getAccessor.ExpressionBody.Expression
+                );
                 semicolonToken = getAccessor.SemicolonToken;
                 return true;
             }
@@ -165,24 +220,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         }
 
         public (bool canOffer, bool fixesError) CanOfferUseBlockBody(
-            OptionSet optionSet, TDeclaration declaration, bool forAnalyzer)
+            OptionSet optionSet,
+            TDeclaration declaration,
+            bool forAnalyzer
+        )
         {
             var currentOptionValue = optionSet.GetOption(Option);
             var preference = currentOptionValue.Value;
             var userPrefersBlockBodies = preference == ExpressionBodyPreference.Never;
-            var analyzerDisabled = currentOptionValue.Notification.Severity == ReportDiagnostic.Suppress;
+            var analyzerDisabled =
+                currentOptionValue.Notification.Severity == ReportDiagnostic.Suppress;
 
             var expressionBodyOpt = GetExpressionBody(declaration);
-            var canOffer = expressionBodyOpt?.TryConvertToBlock(
-                SyntaxFactory.Token(SyntaxKind.SemicolonToken), false, block: out _) == true;
+            var canOffer =
+                expressionBodyOpt?.TryConvertToBlock(
+                    SyntaxFactory.Token(SyntaxKind.SemicolonToken),
+                    false,
+                    block: out _
+                ) == true;
             if (!canOffer)
             {
                 return (canOffer, fixesError: false);
             }
 
-            var languageVersion = ((CSharpParseOptions)declaration.SyntaxTree.Options).LanguageVersion;
-            if (expressionBodyOpt.Expression.IsKind(SyntaxKind.ThrowExpression) &&
-                languageVersion < LanguageVersion.CSharp7)
+            var languageVersion =
+                ((CSharpParseOptions)declaration.SyntaxTree.Options).LanguageVersion;
+            if (
+                expressionBodyOpt.Expression.IsKind(SyntaxKind.ThrowExpression)
+                && languageVersion < LanguageVersion.CSharp7
+            )
             {
                 // If they're using a throw expression in a declaration and it's prior to C# 7
                 // then always mark this as something that can be fixed by the analyzer.  This way
@@ -190,10 +256,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 return (canOffer, fixesError: true);
             }
 
-            var isAccessorOrConstructor = declaration is AccessorDeclarationSyntax ||
-                                          declaration is ConstructorDeclarationSyntax;
-            if (isAccessorOrConstructor &&
-                languageVersion < LanguageVersion.CSharp7)
+            var isAccessorOrConstructor =
+                declaration is AccessorDeclarationSyntax
+                || declaration is ConstructorDeclarationSyntax;
+            if (isAccessorOrConstructor && languageVersion < LanguageVersion.CSharp7)
             {
                 // If they're using expression bodies for accessors/constructors and it's prior to C# 7
                 // then always mark this as something that can be fixed by the analyzer.  This way
@@ -215,32 +281,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             return (canOffer, fixesError: false);
         }
 
-        public TDeclaration Update(SemanticModel semanticModel, TDeclaration declaration, bool useExpressionBody)
+        public TDeclaration Update(
+            SemanticModel semanticModel,
+            TDeclaration declaration,
+            bool useExpressionBody
+        )
         {
             if (useExpressionBody)
             {
                 TryConvertToExpressionBody(
-                    declaration, declaration.SyntaxTree.Options, ExpressionBodyPreference.WhenPossible,
-                    out var expressionBody, out var semicolonToken);
+                    declaration,
+                    declaration.SyntaxTree.Options,
+                    ExpressionBodyPreference.WhenPossible,
+                    out var expressionBody,
+                    out var semicolonToken
+                );
 
                 var trailingTrivia = semicolonToken.TrailingTrivia
-                                                   .Where(t => t.Kind() != SyntaxKind.EndOfLineTrivia)
-                                                   .Concat(declaration.GetTrailingTrivia());
+                    .Where(t => t.Kind() != SyntaxKind.EndOfLineTrivia)
+                    .Concat(declaration.GetTrailingTrivia());
                 semicolonToken = semicolonToken.WithTrailingTrivia(trailingTrivia);
 
                 return WithSemicolonToken(
-                           WithExpressionBody(
-                               WithBody(declaration, body: null),
-                               expressionBody),
-                           semicolonToken);
+                    WithExpressionBody(WithBody(declaration, body: null), expressionBody),
+                    semicolonToken
+                );
             }
             else
             {
                 return WithSemicolonToken(
-                           WithExpressionBody(
-                               WithGenerateBody(semanticModel, declaration),
-                               expressionBody: null),
-                           default);
+                    WithExpressionBody(
+                        WithGenerateBody(semanticModel, declaration),
+                        expressionBody: null
+                    ),
+                    default
+                );
             }
         }
 
@@ -248,22 +323,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
         protected abstract ArrowExpressionClauseSyntax GetExpressionBody(TDeclaration declaration);
 
-        protected abstract bool CreateReturnStatementForExpression(SemanticModel semanticModel, TDeclaration declaration);
+        protected abstract bool CreateReturnStatementForExpression(
+            SemanticModel semanticModel,
+            TDeclaration declaration
+        );
 
         protected abstract SyntaxToken GetSemicolonToken(TDeclaration declaration);
 
-        protected abstract TDeclaration WithSemicolonToken(TDeclaration declaration, SyntaxToken token);
-        protected abstract TDeclaration WithExpressionBody(TDeclaration declaration, ArrowExpressionClauseSyntax expressionBody);
+        protected abstract TDeclaration WithSemicolonToken(
+            TDeclaration declaration,
+            SyntaxToken token
+        );
+        protected abstract TDeclaration WithExpressionBody(
+            TDeclaration declaration,
+            ArrowExpressionClauseSyntax expressionBody
+        );
         protected abstract TDeclaration WithBody(TDeclaration declaration, BlockSyntax body);
 
-        protected virtual TDeclaration WithGenerateBody(SemanticModel semanticModel, TDeclaration declaration)
+        protected virtual TDeclaration WithGenerateBody(
+            SemanticModel semanticModel,
+            TDeclaration declaration
+        )
         {
             var expressionBody = GetExpressionBody(declaration);
 
-            if (expressionBody.TryConvertToBlock(
+            if (
+                expressionBody.TryConvertToBlock(
                     GetSemicolonToken(declaration),
                     CreateReturnStatementForExpression(semanticModel, declaration),
-                    out var block))
+                    out var block
+                )
+            )
             {
                 return WithBody(declaration, block);
             }
@@ -271,7 +361,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             return declaration;
         }
 
-        protected TDeclaration WithAccessorList(SemanticModel semanticModel, TDeclaration declaration)
+        protected TDeclaration WithAccessorList(
+            SemanticModel semanticModel,
+            TDeclaration declaration
+        )
         {
             var expressionBody = GetExpressionBody(declaration);
             var semicolonToken = GetSemicolonToken(declaration);
@@ -287,19 +380,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             expressionBody.TryConvertToBlock(
                 GetSemicolonToken(declaration),
                 CreateReturnStatementForExpression(semanticModel, declaration),
-                out var block);
+                out var block
+            );
 
             var accessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration);
-            accessor = block != null
-                ? accessor.WithBody(block)
-                : accessor.WithExpressionBody(expressionBody)
-                          .WithSemicolonToken(semicolonToken);
+            accessor =
+                block != null
+                    ? accessor.WithBody(block)
+                    : accessor
+                      .WithExpressionBody(expressionBody)
+                      .WithSemicolonToken(semicolonToken);
 
-            return WithAccessorList(declaration, SyntaxFactory.AccessorList(
-                SyntaxFactory.SingletonList(accessor)));
+            return WithAccessorList(
+                declaration,
+                SyntaxFactory.AccessorList(SyntaxFactory.SingletonList(accessor))
+            );
         }
 
-        protected virtual TDeclaration WithAccessorList(TDeclaration declaration, AccessorListSyntax accessorListSyntax)
-            => throw new NotImplementedException();
+        protected virtual TDeclaration WithAccessorList(
+            TDeclaration declaration,
+            AccessorListSyntax accessorListSyntax
+        ) => throw new NotImplementedException();
     }
 }

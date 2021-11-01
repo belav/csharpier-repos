@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public RelationalQueryContextDependencies(
             IRelationalConnection relationalConnection,
-            IRelationalQueryStringFactory relationalQueryStringFactory)
+            IRelationalQueryStringFactory relationalQueryStringFactory
+        )
         {
             Check.NotNull(relationalConnection, nameof(relationalConnection));
             Check.NotNull(relationalQueryStringFactory, nameof(relationalQueryStringFactory));

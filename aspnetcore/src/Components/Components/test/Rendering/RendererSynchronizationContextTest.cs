@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Components.Rendering
     {
         // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch
         // failures.
-        public TimeSpan Timeout = Debugger.IsAttached ? System.Threading.Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(10);
+        public TimeSpan Timeout = Debugger.IsAttached
+            ? System.Threading.Timeout.InfiniteTimeSpan
+            : TimeSpan.FromSeconds(10);
 
         [Fact]
         public void Post_RunsAsynchronously_WhenNotBusy()
@@ -28,12 +30,15 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e = new ManualResetEventSlim();
 
             // Act
-            context.Post((_) =>
-            {
-                capturedThread = Thread.CurrentThread;
+            context.Post(
+                (_) =>
+                {
+                    capturedThread = Thread.CurrentThread;
 
-                e.Set();
-            }, null);
+                    e.Set();
+                },
+                null
+            );
 
             // Assert
             Assert.True(e.Wait(Timeout), "timeout");
@@ -53,10 +58,13 @@ namespace Microsoft.AspNetCore.Components.Rendering
             };
 
             // Act
-            context.Post((_) =>
-            {
-                throw new InvalidTimeZoneException();
-            }, null);
+            context.Post(
+                (_) =>
+                {
+                    throw new InvalidTimeZoneException();
+                },
+                null
+            );
 
             // Assert
             //
@@ -77,24 +85,32 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e2 = new ManualResetEventSlim();
             var e3 = new ManualResetEventSlim();
 
-            var task = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
             // Act
-            context.Post((_) =>
-            {
-                capturedThread = Thread.CurrentThread;
+            context.Post(
+                (_) =>
+                {
+                    capturedThread = Thread.CurrentThread;
 
-                e3.Set();
-            }, null);
+                    e3.Set();
+                },
+                null
+            );
 
             // Assert
             Assert.False(e2.IsSet);
@@ -121,14 +137,19 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e2 = new ManualResetEventSlim();
             var e3 = new ManualResetEventSlim();
 
-            var task = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
@@ -138,12 +159,15 @@ namespace Microsoft.AspNetCore.Components.Rendering
             try
             {
                 SynchronizationContext.SetSynchronizationContext(context);
-                context.Post((_) =>
-                {
-                    capturedCulture = CultureInfo.CurrentCulture;
-                    capturedContext = SynchronizationContext.Current;
-                    e3.Set();
-                }, null);
+                context.Post(
+                    (_) =>
+                    {
+                        capturedCulture = CultureInfo.CurrentCulture;
+                        capturedContext = SynchronizationContext.Current;
+                        e3.Set();
+                    },
+                    null
+                );
             }
             finally
             {
@@ -175,22 +199,30 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e1 = new ManualResetEventSlim();
             var e2 = new ManualResetEventSlim();
 
-            var task = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
             // Act
-            context.Post((_) =>
-            {
-                throw new InvalidTimeZoneException();
-            }, null);
+            context.Post(
+                (_) =>
+                {
+                    throw new InvalidTimeZoneException();
+                },
+                null
+            );
 
             // Assert
             Assert.False(e2.IsSet);
@@ -217,23 +249,34 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e6 = new ManualResetEventSlim();
 
             // Force task2 to execute in the background
-            var task1 = Task.Run(() => context.Send((_) =>
-            {
-                e1.Set();
-                Assert.True(e2.Wait(Timeout), "timeout");
-            }, null));
+            var task1 = Task.Run(
+                () =>
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    )
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
-            var task2 = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task2 = Task.Run(
+                () =>
                 {
-                    e3.Set();
-                    Assert.True(e4.Wait(Timeout), "timeout");
-                    capturedThread = Thread.CurrentThread;
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e3.Set();
+                            Assert.True(e4.Wait(Timeout), "timeout");
+                            capturedThread = Thread.CurrentThread;
+                        },
+                        null
+                    );
+                }
+            );
 
             e2.Set();
             await task1;
@@ -244,17 +287,22 @@ namespace Microsoft.AspNetCore.Components.Rendering
             //
             // Now task2 is 'running' in the sync context. Schedule more work items - they will be
             // run immediately after the second item
-            context.Post((_) =>
-            {
-                e5.Set();
-                Assert.Same(Thread.CurrentThread, capturedThread);
-            }, null);
-            context.Post((_) =>
-            {
-                e6.Set();
-                Assert.Same(Thread.CurrentThread, capturedThread);
-            }, null);
-
+            context.Post(
+                (_) =>
+                {
+                    e5.Set();
+                    Assert.Same(Thread.CurrentThread, capturedThread);
+                },
+                null
+            );
+            context.Post(
+                (_) =>
+                {
+                    e6.Set();
+                    Assert.Same(Thread.CurrentThread, capturedThread);
+                },
+                null
+            );
 
             // Assert
             e4.Set();
@@ -279,14 +327,17 @@ namespace Microsoft.AspNetCore.Components.Rendering
             SynchronizationContext capturedContext = null;
 
             // Act
-            context.Post(async (_) =>
-            {
-                await Task.Yield();
+            context.Post(
+                async (_) =>
+                {
+                    await Task.Yield();
 
-                capturedCulture = CultureInfo.CurrentCulture;
-                capturedContext = SynchronizationContext.Current;
-                e1.Set();
-            }, null);
+                    capturedCulture = CultureInfo.CurrentCulture;
+                    capturedContext = SynchronizationContext.Current;
+                    e1.Set();
+                },
+                null
+            );
 
             // Assert
             Assert.True(e1.Wait(Timeout), "timeout");
@@ -303,10 +354,13 @@ namespace Microsoft.AspNetCore.Components.Rendering
             Thread capturedThread = null;
 
             // Act
-            context.Send((_) =>
-            {
-                capturedThread = Thread.CurrentThread;
-            }, null);
+            context.Send(
+                (_) =>
+                {
+                    capturedThread = Thread.CurrentThread;
+                },
+                null
+            );
 
             // Assert
             Assert.Same(thread, capturedThread);
@@ -319,10 +373,16 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act & Assert
-            Assert.Throws<InvalidTimeZoneException>(() => context.Send((_) =>
-            {
-                throw new InvalidTimeZoneException();
-            }, null));
+            Assert.Throws<InvalidTimeZoneException>(
+                () =>
+                    context.Send(
+                        (_) =>
+                        {
+                            throw new InvalidTimeZoneException();
+                        },
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -337,28 +397,38 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e4 = new ManualResetEventSlim();
 
             // Force task2 to execute in the background
-            var task1 = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task1 = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
             // Act
             //
             // Dispatch this on the background thread because otherwise it would block.
-            var task2 = Task.Run(() =>
-            {
-                e3.Set();
-                context.Send((_) =>
+            var task2 = Task.Run(
+                () =>
                 {
-                    e4.Set();
-                }, null);
-            });
+                    e3.Set();
+                    context.Send(
+                        (_) =>
+                        {
+                            e4.Set();
+                        },
+                        null
+                    );
+                }
+            );
 
             // Assert
             Assert.True(e3.Wait(Timeout), "timeout");
@@ -387,15 +457,18 @@ namespace Microsoft.AspNetCore.Components.Rendering
             SynchronizationContext capturedContext = null;
 
             // Act
-            context.Send(async (_) =>
-            {
-                await Task.Yield();
+            context.Send(
+                async (_) =>
+                {
+                    await Task.Yield();
 
-                capturedCulture = CultureInfo.CurrentCulture;
-                capturedContext = SynchronizationContext.Current;
+                    capturedCulture = CultureInfo.CurrentCulture;
+                    capturedContext = SynchronizationContext.Current;
 
-                e1.Set();
-            }, null);
+                    e1.Set();
+                },
+                null
+            );
 
             // Assert
             Assert.True(e1.Wait(Timeout), "timeout");
@@ -412,10 +485,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             Thread capturedThread = null;
 
             // Act
-            var task = context.InvokeAsync(() =>
-            {
-                capturedThread = Thread.CurrentThread;
-            });
+            var task = context.InvokeAsync(
+                () =>
+                {
+                    capturedThread = Thread.CurrentThread;
+                }
+            );
 
             // Assert
             await task;
@@ -434,23 +509,30 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e2 = new ManualResetEventSlim();
             var e3 = new ManualResetEventSlim();
 
-            var task1 = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task1 = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
-            var task2 = context.InvokeAsync(() =>
-            {
-                capturedThread = Thread.CurrentThread;
+            var task2 = context.InvokeAsync(
+                () =>
+                {
+                    capturedThread = Thread.CurrentThread;
 
-                e3.Set();
-            });
+                    e3.Set();
+                }
+            );
 
             // Assert
             Assert.False(e2.IsSet);
@@ -469,10 +551,14 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync((Action)(() =>
-            {
-                throw new InvalidTimeZoneException();
-            }));
+            var task = context.InvokeAsync(
+                (Action)(
+                    () =>
+                    {
+                        throw new InvalidTimeZoneException();
+                    }
+                )
+            );
 
             // Assert
             await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await task);
@@ -485,10 +571,14 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync((Action)(() =>
-            {
-                throw new OperationCanceledException();
-            }));
+            var task = context.InvokeAsync(
+                (Action)(
+                    () =>
+                    {
+                        throw new OperationCanceledException();
+                    }
+                )
+            );
 
             // Assert
             Assert.Equal(TaskStatus.Canceled, task.Status);
@@ -503,10 +593,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var thread = Thread.CurrentThread;
 
             // Act
-            var task = context.InvokeAsync(() =>
-            {
-                return Thread.CurrentThread;
-            });
+            var task = context.InvokeAsync(
+                () =>
+                {
+                    return Thread.CurrentThread;
+                }
+            );
 
             // Assert
             Assert.Same(thread, await task);
@@ -523,23 +615,30 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e2 = new ManualResetEventSlim();
             var e3 = new ManualResetEventSlim();
 
-            var task1 = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task1 = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
-            var task2 = context.InvokeAsync(() =>
-            {
-                e3.Set();
+            var task2 = context.InvokeAsync(
+                () =>
+                {
+                    e3.Set();
 
-                return Thread.CurrentThread;
-            });
+                    return Thread.CurrentThread;
+                }
+            );
 
             // Assert
             Assert.False(e2.IsSet);
@@ -557,10 +656,14 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync<string>((Func<string>)(() =>
-            {
-                throw new InvalidTimeZoneException();
-            }));
+            var task = context.InvokeAsync<string>(
+                (Func<string>)(
+                    () =>
+                    {
+                        throw new InvalidTimeZoneException();
+                    }
+                )
+            );
 
             // Assert
             await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await task);
@@ -573,10 +676,14 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync<string>((Func<string>)(() =>
-            {
-                throw new OperationCanceledException();
-            }));
+            var task = context.InvokeAsync<string>(
+                (Func<string>)(
+                    () =>
+                    {
+                        throw new OperationCanceledException();
+                    }
+                )
+            );
 
             // Assert
             Assert.Equal(TaskStatus.Canceled, task.Status);
@@ -592,11 +699,13 @@ namespace Microsoft.AspNetCore.Components.Rendering
             Thread capturedThread = null;
 
             // Act
-            var task = context.InvokeAsync(() =>
-            {
-                capturedThread = Thread.CurrentThread;
-                return Task.CompletedTask;
-            });
+            var task = context.InvokeAsync(
+                () =>
+                {
+                    capturedThread = Thread.CurrentThread;
+                    return Task.CompletedTask;
+                }
+            );
 
             // Assert
             await task;
@@ -615,24 +724,31 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e2 = new ManualResetEventSlim();
             var e3 = new ManualResetEventSlim();
 
-            var task1 = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task1 = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
-            var task2 = context.InvokeAsync(() =>
-            {
-                capturedThread = Thread.CurrentThread;
+            var task2 = context.InvokeAsync(
+                () =>
+                {
+                    capturedThread = Thread.CurrentThread;
 
-                e3.Set();
-                return Task.CompletedTask;
-            });
+                    e3.Set();
+                    return Task.CompletedTask;
+                }
+            );
 
             // Assert
             Assert.False(e2.IsSet);
@@ -651,10 +767,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync(() =>
-            {
-                throw new InvalidTimeZoneException();
-            });
+            var task = context.InvokeAsync(
+                () =>
+                {
+                    throw new InvalidTimeZoneException();
+                }
+            );
 
             // Assert
             await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await task);
@@ -667,10 +785,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync(() =>
-            {
-                throw new OperationCanceledException();
-            });
+            var task = context.InvokeAsync(
+                () =>
+                {
+                    throw new OperationCanceledException();
+                }
+            );
 
             // Assert
             Assert.Equal(TaskStatus.Canceled, task.Status);
@@ -685,10 +805,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var thread = Thread.CurrentThread;
 
             // Act
-            var task = context.InvokeAsync(() =>
-            {
-                return Task.FromResult(Thread.CurrentThread);
-            });
+            var task = context.InvokeAsync(
+                () =>
+                {
+                    return Task.FromResult(Thread.CurrentThread);
+                }
+            );
 
             // Assert
             Assert.Same(thread, await task);
@@ -705,23 +827,30 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var e2 = new ManualResetEventSlim();
             var e3 = new ManualResetEventSlim();
 
-            var task1 = Task.Run(() =>
-            {
-                context.Send((_) =>
+            var task1 = Task.Run(
+                () =>
                 {
-                    e1.Set();
-                    Assert.True(e2.Wait(Timeout), "timeout");
-                }, null);
-            });
+                    context.Send(
+                        (_) =>
+                        {
+                            e1.Set();
+                            Assert.True(e2.Wait(Timeout), "timeout");
+                        },
+                        null
+                    );
+                }
+            );
 
             Assert.True(e1.Wait(Timeout), "timeout");
 
-            var task2 = context.InvokeAsync(() =>
-            {
-                e3.Set();
+            var task2 = context.InvokeAsync(
+                () =>
+                {
+                    e3.Set();
 
-                return Task.FromResult(Thread.CurrentThread);
-            });
+                    return Task.FromResult(Thread.CurrentThread);
+                }
+            );
 
             // Assert
             Assert.False(e2.IsSet);
@@ -739,10 +868,14 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync<string>((Func<Task<string>>)(() =>
-            {
-                throw new InvalidTimeZoneException();
-            }));
+            var task = context.InvokeAsync<string>(
+                (Func<Task<string>>)(
+                    () =>
+                    {
+                        throw new InvalidTimeZoneException();
+                    }
+                )
+            );
 
             // Assert
             await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await task);
@@ -755,10 +888,14 @@ namespace Microsoft.AspNetCore.Components.Rendering
             var context = new RendererSynchronizationContext();
 
             // Act
-            var task = context.InvokeAsync<string>((Func<Task<string>>)(() =>
-            {
-                throw new OperationCanceledException();
-            }));
+            var task = context.InvokeAsync<string>(
+                (Func<Task<string>>)(
+                    () =>
+                    {
+                        throw new OperationCanceledException();
+                    }
+                )
+            );
 
             // Assert
             Assert.Equal(TaskStatus.Canceled, task.Status);
@@ -777,13 +914,15 @@ namespace Microsoft.AspNetCore.Components.Rendering
             await Task.Yield();
             actual = "First";
 
-            var invokeTask = context.InvokeAsync(async () =>
-            {
-                // When the sync context is idle, queued work items start synchronously
-                actual += " Second";
-                await Task.Delay(250);
-                actual += " Fourth";
-            });
+            var invokeTask = context.InvokeAsync(
+                async () =>
+                {
+                    // When the sync context is idle, queued work items start synchronously
+                    actual += " Second";
+                    await Task.Delay(250);
+                    actual += " Fourth";
+                }
+            );
 
             actual += " Third";
             await invokeTask;

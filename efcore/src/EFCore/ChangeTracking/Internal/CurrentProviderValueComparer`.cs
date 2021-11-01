@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public CurrentProviderValueComparer(
             IPropertyBase property,
-            ValueConverter<TModel, TProvider> converter)
+            ValueConverter<TModel, TProvider> converter
+        )
         {
             _property = property;
             _converter = converter.ConvertToProviderExpression.Compile();
@@ -61,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             return _underlyingComparer.Compare(
                 _converter(x.GetCurrentValue<TModel>(_property)),
-                _converter(y.GetCurrentValue<TModel>(_property)));
+                _converter(y.GetCurrentValue<TModel>(_property))
+            );
         }
     }
 }

@@ -27,7 +27,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public string MemberName { get; }
 
         public override IntermediateNodeCollection Children => IntermediateNodeCollection.ReadOnly;
-        
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {
@@ -54,7 +53,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             context.CodeWriter.WriteAutoPropertyDeclaration(
                 _injectedPropertyModifiers,
                 TypeName,
-                MemberName);
+                MemberName
+            );
         }
     }
 }

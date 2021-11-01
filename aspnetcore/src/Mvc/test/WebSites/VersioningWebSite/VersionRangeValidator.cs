@@ -34,8 +34,8 @@ namespace VersioningWebSite
             int version;
             if (int.TryParse(GetVersion(request), out version))
             {
-                return (_minVersion == null || _minVersion <= version) &&
-                    (_maxVersion == null || _maxVersion >= version);
+                return (_minVersion == null || _minVersion <= version)
+                    && (_maxVersion == null || _maxVersion >= version);
             }
             else
             {

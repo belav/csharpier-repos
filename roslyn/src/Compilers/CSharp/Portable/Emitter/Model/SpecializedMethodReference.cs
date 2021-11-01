@@ -18,10 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal class SpecializedMethodReference : MethodReference, Cci.ISpecializedMethodReference
     {
-        public SpecializedMethodReference(MethodSymbol underlyingMethod)
-            : base(underlyingMethod)
-        {
-        }
+        public SpecializedMethodReference(MethodSymbol underlyingMethod) : base(underlyingMethod)
+        { }
 
         public override void Dispatch(Cci.MetadataVisitor visitor)
         {
@@ -30,18 +28,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.IMethodReference Cci.ISpecializedMethodReference.UnspecializedVersion
         {
-            get
-            {
-                return UnderlyingMethod.OriginalDefinition.GetCciAdapter();
-            }
+            get { return UnderlyingMethod.OriginalDefinition.GetCciAdapter(); }
         }
 
         public override Cci.ISpecializedMethodReference AsSpecializedMethodReference
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
     }
 }

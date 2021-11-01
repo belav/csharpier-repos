@@ -20,57 +20,74 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private const int VS2019ShowStartWindow = 13;
         private const int VS2019ShowEmptyEnvironment = 10;
 
-        public static StartPage_InProc Create()
-            => new StartPage_InProc();
+        public static StartPage_InProc Create() => new StartPage_InProc();
 
         public bool IsEnabled()
         {
-            return InvokeOnUIThread(cancellationToken =>
-            {
-                var property = GetProperty();
-                if (new Version(property.DTE.Version).Major == 16)
+            return InvokeOnUIThread(
+                cancellationToken =>
                 {
-                    return (int)property.Value == VS2019ShowStartWindow;
+                    var property = GetProperty();
+                    if (new Version(property.DTE.Version).Major == 16)
+                    {
+                        return (int)property.Value == VS2019ShowStartWindow;
+                    }
+                    else
+                    {
+                        return (int)property.Value == ShowStartPage;
+                    }
                 }
-                else
-                {
-                    return (int)property.Value == ShowStartPage;
-                }
-            });
+            );
         }
 
         public void SetEnabled(bool enabled)
         {
-            InvokeOnUIThread(cancellationToken =>
-            {
-                var property = GetProperty();
-                if (new Version(property.DTE.Version).Major == 16)
+            InvokeOnUIThread(
+                cancellationToken =>
                 {
-                    property.Value = enabled ? VS2019ShowStartWindow : VS2019ShowEmptyEnvironment;
+                    var property = GetProperty();
+                    if (new Version(property.DTE.Version).Major == 16)
+                    {
+                        property.Value = enabled
+                            ? VS2019ShowStartWindow
+                            : VS2019ShowEmptyEnvironment;
+                    }
+                    else
+                    {
+                        property.Value = enabled ? ShowStartPage : ShowEmptyEnvironment;
+                    }
                 }
-                else
-                {
-                    property.Value = enabled ? ShowStartPage : ShowEmptyEnvironment;
-                }
-            });
+            );
         }
 
         public bool CloseWindow()
         {
-            return InvokeOnUIThread(cancellationToken =>
-            {
-                var uiShell = GetGlobalService<SVsUIShell, IVsUIShell>();
-                if (ErrorHandler.Failed(uiShell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fFrameOnly, new Guid(ToolWindowGuids80.StartPage), out var frame)))
+            return InvokeOnUIThread(
+                cancellationToken =>
                 {
-                    return false;
-                }
+                    var uiShell = GetGlobalService<SVsUIShell, IVsUIShell>();
+                    if (
+                        ErrorHandler.Failed(
+                            uiShell.FindToolWindow(
+                                (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
+                                new Guid(ToolWindowGuids80.StartPage),
+                                out var frame
+                            )
+                        )
+                    )
+                    {
+                        return false;
+                    }
 
-                ErrorHandler.ThrowOnFailure(frame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave));
-                return true;
-            });
+                    ErrorHandler.ThrowOnFailure(
+                        frame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave)
+                    );
+                    return true;
+                }
+            );
         }
 
-        private EnvDTE.Property GetProperty()
-            => GetDTE().Properties["Environment", "Startup"].Item("OnStartUp");
+        private EnvDTE.Property GetProperty() =>
+            GetDTE().Properties["Environment", "Startup"].Item("OnStartUp");
     }
 }

@@ -19,7 +19,10 @@ namespace Microsoft.Extensions.StackTrace.Sources
             StackFrames = stackFrames;
         }
 
-        public ExceptionDetails(string errorMessage, IEnumerable<StackFrameSourceCodeInfo> stackFrames)
+        public ExceptionDetails(
+            string errorMessage,
+            IEnumerable<StackFrameSourceCodeInfo> stackFrames
+        )
         {
             ErrorMessage = errorMessage;
             StackFrames = stackFrames;

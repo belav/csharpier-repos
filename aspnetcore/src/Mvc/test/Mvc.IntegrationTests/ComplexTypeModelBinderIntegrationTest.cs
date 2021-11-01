@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 {
-
     public class ComplexTypeModelBinderIntegrationTest : ComplexTypeIntegrationTestBase
     {
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -17,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         protected override ModelBindingTestContext GetTestContext(
             Action<HttpRequest> updateRequest = null,
             Action<MvcOptions> updateOptions = null,
-            IModelMetadataProvider metadataProvider = null)
+            IModelMetadataProvider metadataProvider = null
+        )
         {
             return ModelBindingTestHelper.GetTestContext(
                 updateRequest,
@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
                     updateOptions?.Invoke(options);
                 },
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
         }
 #pragma warning restore CS0618 // Type or member is obsolete
     }

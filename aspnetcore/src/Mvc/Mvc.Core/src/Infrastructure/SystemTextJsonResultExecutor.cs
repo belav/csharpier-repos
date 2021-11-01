@@ -17,8 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 {
     internal sealed class SystemTextJsonResultExecutor : IActionResultExecutor<JsonResult>
     {
-        private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
-        {
+        private static readonly string DefaultContentType = new MediaTypeHeaderValue(
+            "application/json"
+        ) {
             Encoding = Encoding.UTF8
         }.ToString();
 
@@ -29,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public SystemTextJsonResultExecutor(
             IOptions<JsonOptions> options,
             ILogger<SystemTextJsonResultExecutor> logger,
-            IOptions<MvcOptions> mvcOptions)
+            IOptions<MvcOptions> mvcOptions
+        )
         {
             _options = options.Value;
             _logger = logger;
@@ -57,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 response.ContentType,
                 DefaultContentType,
                 out var resolvedContentType,
-                out var resolvedContentTypeEncoding);
+                out var resolvedContentTypeEncoding
+            );
 
             response.ContentType = resolvedContentType;
 
@@ -69,7 +72,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Log.JsonResultExecuting(_logger, result.Value);
 
             var value = result.Value;
-            if (value != null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+            if (
+                value != null
+                && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+            )
             {
                 Log.BufferingAsyncEnumerable(_logger, value);
                 value = await reader(value);
@@ -81,19 +87,34 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var responseStream = response.Body;
             if (resolvedContentTypeEncoding.CodePage == Encoding.UTF8.CodePage)
             {
-                await JsonSerializer.SerializeAsync(responseStream, value, objectType, jsonSerializerOptions);
+                await JsonSerializer.SerializeAsync(
+                    responseStream,
+                    value,
+                    objectType,
+                    jsonSerializerOptions
+                );
                 await responseStream.FlushAsync();
             }
             else
             {
                 // JsonSerializer only emits UTF8 encoded output, but we need to write the response in the encoding specified by
                 // selectedEncoding
-                var transcodingStream = Encoding.CreateTranscodingStream(response.Body, resolvedContentTypeEncoding, Encoding.UTF8, leaveOpen: true);
+                var transcodingStream = Encoding.CreateTranscodingStream(
+                    response.Body,
+                    resolvedContentTypeEncoding,
+                    Encoding.UTF8,
+                    leaveOpen: true
+                );
 
                 ExceptionDispatchInfo? exceptionDispatchInfo = null;
                 try
                 {
-                    await JsonSerializer.SerializeAsync(transcodingStream, value, objectType, jsonSerializerOptions);
+                    await JsonSerializer.SerializeAsync(
+                        transcodingStream,
+                        value,
+                        objectType,
+                        jsonSerializerOptions
+                    );
                     await transcodingStream.FlushAsync();
                 }
                 catch (Exception ex)
@@ -109,9 +130,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     {
                         await transcodingStream.DisposeAsync();
                     }
-                    catch when (exceptionDispatchInfo != null)
-                    {
-                    }
+                    catch when (exceptionDispatchInfo != null) { }
 
                     exceptionDispatchInfo?.Throw();
                 }
@@ -129,10 +148,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 if (serializerSettings is not JsonSerializerOptions settingsFromResult)
                 {
-                    throw new InvalidOperationException(Resources.FormatProperty_MustBeInstanceOfType(
-                        nameof(JsonResult),
-                        nameof(JsonResult.SerializerSettings),
-                        typeof(JsonSerializerOptions)));
+                    throw new InvalidOperationException(
+                        Resources.FormatProperty_MustBeInstanceOfType(
+                            nameof(JsonResult),
+                            nameof(JsonResult.SerializerSettings),
+                            typeof(JsonSerializerOptions)
+                        )
+                    );
                 }
 
                 return settingsFromResult;
@@ -141,17 +163,21 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static class Log
         {
-            private static readonly Action<ILogger, string?, Exception?> _jsonResultExecuting = LoggerMessage.Define<string?>(
-                LogLevel.Information,
-                new EventId(1, "JsonResultExecuting"),
-                "Executing JsonResult, writing value of type '{Type}'.",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, string?, Exception?> _jsonResultExecuting =
+                LoggerMessage.Define<string?>(
+                    LogLevel.Information,
+                    new EventId(1, "JsonResultExecuting"),
+                    "Executing JsonResult, writing value of type '{Type}'.",
+                    skipEnabledCheck: true
+                );
 
-            private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable = LoggerMessage.Define<string?>(
-               LogLevel.Debug,
-               new EventId(2, "BufferingAsyncEnumerable"),
-               "Buffering IAsyncEnumerable instance of type '{Type}'.",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable =
+                LoggerMessage.Define<string?>(
+                    LogLevel.Debug,
+                    new EventId(2, "BufferingAsyncEnumerable"),
+                    "Buffering IAsyncEnumerable instance of type '{Type}'.",
+                    skipEnabledCheck: true
+                );
 
             public static void JsonResultExecuting(ILogger logger, object? value)
             {

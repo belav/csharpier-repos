@@ -16,19 +16,25 @@ namespace Microsoft.AspNetCore.Hosting
 
         public MethodInfo? MethodInfo { get; }
 
-        public Func<Action<object>, Action<object>> ConfigureContainerFilters { get; set; } = f => f;
+        public Func<Action<object>, Action<object>> ConfigureContainerFilters { get; set; } =
+            f => f;
 
         public Action<object> Build(object instance) => container => Invoke(instance, container);
 
         public Type GetContainerType()
         {
-            Debug.Assert(MethodInfo != null, "Shouldn't be called when there is no Configure method.");
+            Debug.Assert(
+                MethodInfo != null,
+                "Shouldn't be called when there is no Configure method."
+            );
 
             var parameters = MethodInfo.GetParameters();
             if (parameters.Length != 1)
             {
                 // REVIEW: This might be a breaking change
-                throw new InvalidOperationException($"The {MethodInfo.Name} method must take only one parameter.");
+                throw new InvalidOperationException(
+                    $"The {MethodInfo.Name} method must take only one parameter."
+                );
             }
             return parameters[0].ParameterType;
         }
@@ -37,7 +43,8 @@ namespace Microsoft.AspNetCore.Hosting
         {
             ConfigureContainerFilters(StartupConfigureContainer)(container);
 
-            void StartupConfigureContainer(object containerBuilder) => InvokeCore(instance, containerBuilder);
+            void StartupConfigureContainer(object containerBuilder) =>
+                InvokeCore(instance, containerBuilder);
         }
 
         private void InvokeCore(object instance, object container)

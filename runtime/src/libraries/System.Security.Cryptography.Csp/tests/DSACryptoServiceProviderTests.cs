@@ -98,7 +98,10 @@ namespace System.Security.Cryptography.Csp.Tests
                 Assert.Equal(PROV_DSS_DH, keyContainerInfo.ProviderType);
 
                 // This shouldn't be localized, so it should be safe to test on all cultures
-                Assert.Equal("Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider", keyContainerInfo.ProviderName);
+                Assert.Equal(
+                    "Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider",
+                    keyContainerInfo.ProviderName
+                );
 
                 Assert.Null(keyContainerInfo.KeyContainerName);
                 Assert.Equal(string.Empty, keyContainerInfo.UniqueKeyContainerName);
@@ -146,14 +149,20 @@ namespace System.Security.Cryptography.Csp.Tests
                 using (var dsa = new DSACryptoServiceProvider(KeySize, cspParameters))
                 {
                     Assert.True(dsa.PersistKeyInCsp, "dsa.PersistKeyInCsp");
-                    Assert.Equal(cspParameters.KeyContainerName, dsa.CspKeyContainerInfo.KeyContainerName);
+                    Assert.Equal(
+                        cspParameters.KeyContainerName,
+                        dsa.CspKeyContainerInfo.KeyContainerName
+                    );
 
                     uniqueKeyContainerName = dsa.CspKeyContainerInfo.UniqueKeyContainerName;
                     Assert.NotNull(uniqueKeyContainerName);
                     Assert.NotEqual(string.Empty, uniqueKeyContainerName);
 
                     privateBlob = dsa.ExportCspBlob(true);
-                    Assert.True(dsa.CspKeyContainerInfo.Exportable, "dsa.CspKeyContainerInfo.Exportable");
+                    Assert.True(
+                        dsa.CspKeyContainerInfo.Exportable,
+                        "dsa.CspKeyContainerInfo.Exportable"
+                    );
                 }
 
                 // Fail if the key didn't persist
@@ -164,7 +173,10 @@ namespace System.Security.Cryptography.Csp.Tests
                     Assert.True(dsa.PersistKeyInCsp);
                     Assert.Equal(KeySize, dsa.KeySize);
 
-                    Assert.Equal(uniqueKeyContainerName, dsa.CspKeyContainerInfo.UniqueKeyContainerName);
+                    Assert.Equal(
+                        uniqueKeyContainerName,
+                        dsa.CspKeyContainerInfo.UniqueKeyContainerName
+                    );
 
                     byte[] blob2 = dsa.ExportCspBlob(true);
                     Assert.Equal(privateBlob, blob2);
@@ -207,7 +219,10 @@ namespace System.Security.Cryptography.Csp.Tests
             {
                 using (var dsa = new DSACryptoServiceProvider(cspParameters))
                 {
-                    Assert.False(dsa.CspKeyContainerInfo.Exportable, "dsa.CspKeyContainerInfo.Exportable");
+                    Assert.False(
+                        dsa.CspKeyContainerInfo.Exportable,
+                        "dsa.CspKeyContainerInfo.Exportable"
+                    );
 
                     Assert.ThrowsAny<CryptographicException>(() => dsa.ExportCspBlob(true));
                     Assert.ThrowsAny<CryptographicException>(() => dsa.ExportParameters(true));
@@ -220,15 +235,18 @@ namespace System.Security.Cryptography.Csp.Tests
         public static void Ctor_UseCspParameter_Throws_Unix()
         {
             var cspParameters = new CspParameters();
-            Assert.Throws<PlatformNotSupportedException>(() => new DSACryptoServiceProvider(cspParameters));
-            Assert.Throws<PlatformNotSupportedException>(() => new DSACryptoServiceProvider(0, cspParameters));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new DSACryptoServiceProvider(cspParameters)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new DSACryptoServiceProvider(0, cspParameters)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public static void CspKeyContainerInfo_Throws_Unix()
         {
-
             using (var dsa = new DSACryptoServiceProvider())
             {
                 Assert.Throws<PlatformNotSupportedException>(() => (dsa.CspKeyContainerInfo));
@@ -241,7 +259,9 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var dsa = new DSACryptoServiceProvider())
             {
                 // Verify that the Unix shims throws the same exception as Windows when large keys imported
-                Assert.ThrowsAny<CryptographicException>(() => dsa.ImportParameters(DSATestData.GetDSA2048Params()));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => dsa.ImportParameters(DSATestData.GetDSA2048Params())
+                );
             }
         }
 
@@ -253,7 +273,9 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var dsa = new DSACryptoServiceProvider())
             {
                 byte[] signVal = dsa.SignData(DSATestData.HelloBytes);
-                Assert.ThrowsAny<CryptographicException>(() => dsa.VerifyHash(hashVal, "SHA256", signVal));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => dsa.VerifyHash(hashVal, "SHA256", signVal)
+                );
             }
         }
 
@@ -299,7 +321,10 @@ namespace System.Security.Cryptography.Csp.Tests
 
             using (var dsa = new DSACryptoServiceProvider())
             {
-                byte[] signVal = dsa.SignData(DSATestData.HelloBytes, new HashAlgorithmName("SHA1"));
+                byte[] signVal = dsa.SignData(
+                    DSATestData.HelloBytes,
+                    new HashAlgorithmName("SHA1")
+                );
                 Assert.True(dsa.VerifyHash(hashVal, "SHA1", signVal));
 
                 signVal = dsa.SignData(DSATestData.HelloBytes, new HashAlgorithmName("SHA1")); // lowercase would fail here
@@ -312,7 +337,9 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var dsa = new DSACryptoServiceProvider())
             {
-                Assert.ThrowsAny<CryptographicException>(() => dsa.SignData(DSATestData.HelloBytes, new HashAlgorithmName("sha1")));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => dsa.SignData(DSATestData.HelloBytes, new HashAlgorithmName("sha1"))
+                );
             }
         }
 
@@ -321,9 +348,21 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var dsa = new DSACryptoServiceProvider())
             {
-                Assert.ThrowsAny<CryptographicException>(() => dsa.SignData(DSATestData.HelloBytes, HashAlgorithmName.SHA256));
-                Assert.ThrowsAny<CryptographicException>(() => dsa.SignData(new System.IO.MemoryStream(), HashAlgorithmName.SHA256));
-                Assert.ThrowsAny<CryptographicException>(() => dsa.SignData(DSATestData.HelloBytes, 0, DSATestData.HelloBytes.Length, HashAlgorithmName.SHA256));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => dsa.SignData(DSATestData.HelloBytes, HashAlgorithmName.SHA256)
+                );
+                Assert.ThrowsAny<CryptographicException>(
+                    () => dsa.SignData(new System.IO.MemoryStream(), HashAlgorithmName.SHA256)
+                );
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        dsa.SignData(
+                            DSATestData.HelloBytes,
+                            0,
+                            DSATestData.HelloBytes.Length,
+                            HashAlgorithmName.SHA256
+                        )
+                );
             }
         }
 
@@ -334,8 +373,19 @@ namespace System.Security.Cryptography.Csp.Tests
             {
                 byte[] signVal = dsa.SignData(DSATestData.HelloBytes);
 
-                Assert.ThrowsAny<CryptographicException>(() => dsa.VerifyData(DSATestData.HelloBytes, signVal, HashAlgorithmName.SHA256));
-                Assert.ThrowsAny<CryptographicException>(() => dsa.VerifyData(DSATestData.HelloBytes, 0, DSATestData.HelloBytes.Length, signVal, HashAlgorithmName.SHA256));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => dsa.VerifyData(DSATestData.HelloBytes, signVal, HashAlgorithmName.SHA256)
+                );
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        dsa.VerifyData(
+                            DSATestData.HelloBytes,
+                            0,
+                            DSATestData.HelloBytes.Length,
+                            signVal,
+                            HashAlgorithmName.SHA256
+                        )
+                );
             }
         }
 
@@ -361,14 +411,13 @@ namespace System.Security.Cryptography.Csp.Tests
 
             internal DsaKeyLifetime(CspParameters cspParameters)
             {
-                const CspProviderFlags CopyableFlags =
-                    CspProviderFlags.UseMachineKeyStore;
+                const CspProviderFlags CopyableFlags = CspProviderFlags.UseMachineKeyStore;
 
                 _cspParameters = new CspParameters(
                     cspParameters.ProviderType,
                     cspParameters.ProviderName,
-                    cspParameters.KeyContainerName)
-                {
+                    cspParameters.KeyContainerName
+                ) {
                     // If the test failed before creating the key, don't bother recreating it.
                     Flags = (cspParameters.Flags & CopyableFlags) | CspProviderFlags.UseExistingKey,
                 };
@@ -384,9 +433,7 @@ namespace System.Security.Cryptography.Csp.Tests
                         dsa.PersistKeyInCsp = false;
                     }
                 }
-                catch (CryptographicException)
-                {
-                }
+                catch (CryptographicException) { }
             }
         }
     }

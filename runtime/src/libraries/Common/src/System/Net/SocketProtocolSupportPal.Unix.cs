@@ -19,7 +19,8 @@ namespace System.Net
             IntPtr socket = invalid;
             try
             {
-                return Interop.Sys.Socket(af, SocketType.Dgram, 0, &socket) != Interop.Error.EAFNOSUPPORT;
+                return Interop.Sys.Socket(af, SocketType.Dgram, 0, &socket)
+                    != Interop.Error.EAFNOSUPPORT;
             }
             finally
             {

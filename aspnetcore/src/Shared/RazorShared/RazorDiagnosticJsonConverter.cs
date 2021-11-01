@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
 {
     internal class RazorDiagnosticJsonConverter : JsonConverter
     {
-        public static readonly RazorDiagnosticJsonConverter Instance = new RazorDiagnosticJsonConverter();
+        public static readonly RazorDiagnosticJsonConverter Instance =
+            new RazorDiagnosticJsonConverter();
         private const string RazorDiagnosticMessageKey = "Message";
 
         public override bool CanConvert(Type objectType)
@@ -19,7 +20,12 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             return typeof(RazorDiagnostic).IsAssignableFrom(objectType);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             if (reader.TokenType != JsonToken.StartObject)
             {
@@ -38,8 +44,18 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             var characterIndex = span[nameof(SourceSpan.CharacterIndex)].Value<int>();
             var length = span[nameof(SourceSpan.Length)].Value<int>();
 
-            var descriptor = new RazorDiagnosticDescriptor(id, () => message, (RazorDiagnosticSeverity)severity);
-            var sourceSpan = new SourceSpan(filePath, absoluteIndex, lineIndex, characterIndex, length);
+            var descriptor = new RazorDiagnosticDescriptor(
+                id,
+                () => message,
+                (RazorDiagnosticSeverity)severity
+            );
+            var sourceSpan = new SourceSpan(
+                filePath,
+                absoluteIndex,
+                lineIndex,
+                characterIndex,
+                length
+            );
 
             return RazorDiagnostic.Create(descriptor, sourceSpan);
         }
@@ -51,14 +67,22 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization
             writer.WriteStartObject();
             WriteProperty(writer, nameof(RazorDiagnostic.Id), diagnostic.Id);
             WriteProperty(writer, nameof(RazorDiagnostic.Severity), (int)diagnostic.Severity);
-            WriteProperty(writer, RazorDiagnosticMessageKey, diagnostic.GetMessage(CultureInfo.CurrentCulture));
+            WriteProperty(
+                writer,
+                RazorDiagnosticMessageKey,
+                diagnostic.GetMessage(CultureInfo.CurrentCulture)
+            );
 
             writer.WritePropertyName(nameof(RazorDiagnostic.Span));
             writer.WriteStartObject();
             WriteProperty(writer, nameof(SourceSpan.FilePath), diagnostic.Span.FilePath);
             WriteProperty(writer, nameof(SourceSpan.AbsoluteIndex), diagnostic.Span.AbsoluteIndex);
             WriteProperty(writer, nameof(SourceSpan.LineIndex), diagnostic.Span.LineIndex);
-            WriteProperty(writer, nameof(SourceSpan.CharacterIndex), diagnostic.Span.CharacterIndex);
+            WriteProperty(
+                writer,
+                nameof(SourceSpan.CharacterIndex),
+                diagnostic.Span.CharacterIndex
+            );
             WriteProperty(writer, nameof(SourceSpan.Length), diagnostic.Span.Length);
             writer.WriteEndObject();
 

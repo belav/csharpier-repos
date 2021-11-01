@@ -100,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             routeContext.RouteData.Values.Add("action", "Index");
             routeContext.RouteData.Values.Add(
                 "date",
-                new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
+                new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7))
+            );
 
             // Act
             var candidates = selector.SelectCandidates(routeContext);
@@ -198,10 +199,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         { "controller", "Home" },
                         { "action", "Index" }
                     },
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/Home",
-                    }
+                    AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home", }
                 },
             };
 
@@ -507,12 +505,21 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var selector = CreateSelector(actions, loggerFactory);
 
             var routeContext = CreateRouteContext("POST");
-            var actionNames = string.Join(Environment.NewLine, actions.Select(action => action.DisplayName));
-            var expectedMessage = "Request matched multiple actions resulting in " +
-                $"ambiguity. Matching actions: {actionNames}";
+            var actionNames = string.Join(
+                Environment.NewLine,
+                actions.Select(action => action.DisplayName)
+            );
+            var expectedMessage =
+                "Request matched multiple actions resulting in "
+                + $"ambiguity. Matching actions: {actionNames}";
 
             // Act
-            Assert.Throws<AmbiguousActionException>(() => { selector.SelectBestCandidate(routeContext, actions); });
+            Assert.Throws<AmbiguousActionException>(
+                () =>
+                {
+                    selector.SelectBestCandidate(routeContext, actions);
+                }
+            );
 
             // Assert
             Assert.Empty(sink.Scopes);
@@ -538,7 +545,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Parameters = new List<ParameterDescriptor>(),
             };
 
-            var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints };
+            var actions = new ActionDescriptor[]
+            {
+                actionWithConstraints,
+                actionWithoutConstraints
+            };
 
             var selector = CreateSelector(actions);
             var context = CreateRouteContext("POST");
@@ -636,7 +647,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Parameters = new List<ParameterDescriptor>(),
             };
 
-            var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints };
+            var actions = new ActionDescriptor[]
+            {
+                actionWithConstraints,
+                actionWithoutConstraints
+            };
 
             var selector = CreateSelector(actions);
             var context = CreateRouteContext("POST");
@@ -656,9 +671,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new ConstraintFactory()
-                    {
-                    },
+                    new ConstraintFactory() {  },
                 }
             };
 
@@ -692,7 +705,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 Parameters = new List<ParameterDescriptor>(),
             };
 
-            var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints, };
+            var actions = new ActionDescriptor[]
+            {
+                actionWithConstraints,
+                actionWithoutConstraints,
+            };
 
             var selector = CreateSelector(actions);
             var context = CreateRouteContext("POST");
@@ -817,11 +834,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             // Arrange
             var expectedMessage =
-                "Multiple actions matched. " +
-                "The following actions matched route data and had all constraints satisfied:" + Environment.NewLine +
-                Environment.NewLine +
-                "Ambiguous1" + Environment.NewLine +
-                "Ambiguous2";
+                "Multiple actions matched. "
+                + "The following actions matched route data and had all constraints satisfied:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "Ambiguous1"
+                + Environment.NewLine
+                + "Ambiguous2";
 
             var actions = new ActionDescriptor[]
             {
@@ -839,10 +858,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             context.RouteData.Values.Add("action", "Buy");
 
             // Act
-            var ex = Assert.Throws<AmbiguousActionException>(() =>
-            {
-                selector.SelectBestCandidate(context, actions);
-            });
+            var ex = Assert.Throws<AmbiguousActionException>(
+                () =>
+                {
+                    selector.SelectBestCandidate(context, actions);
+                }
+            );
 
             // Assert
             Assert.Equal(expectedMessage, ex.Message);
@@ -854,7 +875,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("POST")]
         [InlineData("DELETE")]
         [InlineData("PATCH")]
-        public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributeViaAcceptVerbs_ORsMultipleHttpMethods(string verb)
+        public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributeViaAcceptVerbs_ORsMultipleHttpMethods(
+            string verb
+        )
         {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
@@ -875,7 +898,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("DELETE")]
         [InlineData("PATCH")]
         [InlineData("HEAD")]
-        public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributes_ORsMultipleHttpMethods(string verb)
+        public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributes_ORsMultipleHttpMethods(
+            string verb
+        )
         {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
@@ -892,7 +917,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [Theory]
         [InlineData("GET")]
         [InlineData("PUT")]
-        public void HttpMethodAttribute_ActionDecoratedWithHttpMethodAttribute_OverridesConvention(string verb)
+        public void HttpMethodAttribute_ActionDecoratedWithHttpMethodAttribute_OverridesConvention(
+            string verb
+        )
         {
             // Arrange
             // Note no action name is passed, hence should return a null action descriptor.
@@ -930,7 +957,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("POST")]
         [InlineData("DELETE")]
         [InlineData("PATCH")]
-        public void ActionNameAttribute_ActionGetsExposedViaActionName_UnreachableByConvention(string verb)
+        public void ActionNameAttribute_ActionGetsExposedViaActionName_UnreachableByConvention(
+            string verb
+        )
         {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
@@ -960,7 +989,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("POST", "CustomActionName_RpcMethod")]
         [InlineData("DELETE", "CustomActionName_RpcMethod")]
         [InlineData("PATCH", "CustomActionName_RpcMethod")]
-        public void ActionNameAttribute_DifferentActionName_UsesActionNameFromActionNameAttribute(string verb, string actionName)
+        public void ActionNameAttribute_DifferentActionName_UsesActionNameFromActionNameAttribute(
+            string verb,
+            string actionName
+        )
         {
             // Arrange
             var routeContext = new RouteContext(GetHttpContext(verb));
@@ -979,20 +1011,22 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var actionDescriptorProvider = GetActionDescriptorProvider();
             var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
                 new[] { actionDescriptorProvider },
-                Enumerable.Empty<IActionDescriptorChangeProvider>());
+                Enumerable.Empty<IActionDescriptorChangeProvider>()
+            );
 
-            var actionConstraintProviders = new[]
-            {
-                new DefaultActionConstraintProvider(),
-            };
+            var actionConstraintProviders = new[] { new DefaultActionConstraintProvider(), };
 
             var actionSelector = new ActionSelector(
                 actionDescriptorCollectionProvider,
                 GetActionConstraintCache(actionConstraintProviders),
-                NullLoggerFactory.Instance);
+                NullLoggerFactory.Instance
+            );
 
             var candidates = actionSelector.SelectCandidates(context);
-            return (ControllerActionDescriptor)actionSelector.SelectBestCandidate(context, candidates);
+            return (ControllerActionDescriptor)actionSelector.SelectBestCandidate(
+                context,
+                candidates
+            );
         }
 
         private ControllerActionDescriptorProvider GetActionDescriptorProvider()
@@ -1006,11 +1040,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var manager = GetApplicationManager(controllerTypes);
 
-            var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+            var modelProvider = new DefaultApplicationModelProvider(
+                options,
+                new EmptyModelMetadataProvider()
+            );
 
             var provider = new ControllerActionDescriptorProvider(
                 manager,
-                new ApplicationModelFactory(new[] { modelProvider }, options));
+                new ApplicationModelFactory(new[] { modelProvider }, options)
+            );
 
             return provider;
         }
@@ -1037,11 +1075,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 // Like a typical RPC controller
                 CreateAction(area: null, controller: "Home", action: "Index"),
                 CreateAction(area: null, controller: "Home", action: "Edit"),
-
                 // Like a typical REST controller
                 CreateAction(area: null, controller: "Product", action: null),
                 CreateAction(area: null, controller: "Product", action: null),
-
                 // RPC controller in an area with the same name as home
                 CreateAction(area: "Admin", controller: "Home", action: "Index"),
                 CreateAction(area: "Admin", controller: "Home", action: "Diagnostics"),
@@ -1052,18 +1088,36 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IEnumerable<ActionDescriptor> actions,
             string area,
             string controller,
-            string action)
+            string action
+        )
         {
             var comparer = new RouteValueEqualityComparer();
 
-            return
-                actions
-                .Where(a => a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area)))
-                .Where(a => a.RouteValues.Any(kvp => kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)))
-                .Where(a => a.RouteValues.Any(kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action)));
+            return actions
+                .Where(
+                    a =>
+                        a.RouteValues.Any(
+                            kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area)
+                        )
+                )
+                .Where(
+                    a =>
+                        a.RouteValues.Any(
+                            kvp => kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)
+                        )
+                )
+                .Where(
+                    a =>
+                        a.RouteValues.Any(
+                            kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action)
+                        )
+                );
         }
 
-        private static ActionSelector CreateSelector(IReadOnlyList<ActionDescriptor> actions, ILoggerFactory loggerFactory = null)
+        private static ActionSelector CreateSelector(
+            IReadOnlyList<ActionDescriptor> actions,
+            ILoggerFactory loggerFactory = null
+        )
         {
             loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
 
@@ -1073,15 +1127,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 .Setup(p => p.ActionDescriptors)
                 .Returns(new ActionDescriptorCollection(actions, 0));
 
-            var actionConstraintProviders = new IActionConstraintProvider[] {
-                    new DefaultActionConstraintProvider(),
-                    new BooleanConstraintProvider(),
-                };
+            var actionConstraintProviders = new IActionConstraintProvider[]
+            {
+                new DefaultActionConstraintProvider(),
+                new BooleanConstraintProvider(),
+            };
 
             return new ActionSelector(
                 actionProvider.Object,
                 GetActionConstraintCache(actionConstraintProviders),
-                loggerFactory);
+                loggerFactory
+            );
         }
 
         private static VirtualPathContext CreateContext(object routeValues)
@@ -1094,7 +1150,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return new VirtualPathContext(
                 new Mock<HttpContext>(MockBehavior.Strict).Object,
                 new RouteValueDictionary(ambientValues),
-                new RouteValueDictionary(routeValues));
+                new RouteValueDictionary(routeValues)
+            );
         }
 
         private static RouteContext CreateRouteContext(string httpMethod)
@@ -1113,17 +1170,20 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             httpContext.SetupGet(c => c.Request).Returns(request.Object);
             httpContext.SetupGet(c => c.RequestServices).Returns(serviceProvider);
 
-            return new RouteContext(httpContext.Object)
-            {
-                RouteData = routeData,
-            };
+            return new RouteContext(httpContext.Object) { RouteData = routeData, };
         }
 
         private static ActionDescriptor CreateAction(string area, string controller, string action)
         {
             var actionDescriptor = new ControllerActionDescriptor()
             {
-                ActionName = string.Format(CultureInfo.InvariantCulture, "Area: {0}, Controller: {1}, Action: {2}", area, controller, action),
+                ActionName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Area: {0}, Controller: {1}, Action: {2}",
+                    area,
+                    controller,
+                    action
+                ),
                 Parameters = new List<ParameterDescriptor>(),
             };
 
@@ -1134,12 +1194,18 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return actionDescriptor;
         }
 
-        private static ActionConstraintCache GetActionConstraintCache(IActionConstraintProvider[] actionConstraintProviders = null)
+        private static ActionConstraintCache GetActionConstraintCache(
+            IActionConstraintProvider[] actionConstraintProviders = null
+        )
         {
             var descriptorProvider = new DefaultActionDescriptorCollectionProvider(
                 Enumerable.Empty<IActionDescriptorProvider>(),
-                Enumerable.Empty<IActionDescriptorChangeProvider>());
-            return new ActionConstraintCache(descriptorProvider, actionConstraintProviders.AsEnumerable() ?? new List<IActionConstraintProvider>());
+                Enumerable.Empty<IActionDescriptorChangeProvider>()
+            );
+            return new ActionConstraintCache(
+                descriptorProvider,
+                actionConstraintProviders.AsEnumerable() ?? new List<IActionConstraintProvider>()
+            );
         }
 
         private class BooleanConstraint : IActionConstraint
@@ -1187,46 +1253,32 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 }
             }
 
-            public void OnProvidersExecuted(ActionConstraintProviderContext context)
-            {
-            }
+            public void OnProvidersExecuted(ActionConstraintProviderContext context) { }
         }
 
         private class NonActionController
         {
             [NonAction]
-            public void Put()
-            {
-            }
+            public void Put() { }
 
             [NonAction]
-            public void RPCMethod()
-            {
-            }
+            public void RPCMethod() { }
 
             [NonAction]
             [HttpGet]
-            public void RPCMethodWithHttpGet()
-            {
-            }
+            public void RPCMethodWithHttpGet() { }
         }
 
         private class ActionNameController
         {
             [ActionName("CustomActionName_Verb")]
-            public void Put()
-            {
-            }
+            public void Put() { }
 
             [ActionName("CustomActionName_DefaultMethod")]
-            public void Index()
-            {
-            }
+            public void Index() { }
 
             [ActionName("CustomActionName_RpcMethod")]
-            public void RPCMethodWithHttpGet()
-            {
-            }
+            public void RPCMethodWithHttpGet() { }
         }
 
         private class HttpMethodAttributeTests_RestOnlyController
@@ -1237,14 +1289,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             [HttpDelete]
             [HttpPatch]
             [HttpHead]
-            public void Put()
-            {
-            }
+            public void Put() { }
 
             [AcceptVerbs("PUT", "post", "GET", "delete", "pATcH")]
-            public void Patch()
-            {
-            }
+            public void Patch() { }
         }
     }
 }

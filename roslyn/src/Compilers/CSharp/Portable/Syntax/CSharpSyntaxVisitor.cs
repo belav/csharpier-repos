@@ -45,8 +45,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        public virtual void DefaultVisit(SyntaxNode node)
-        {
-        }
+        public virtual void DefaultVisit(SyntaxNode node) { }
     }
 }

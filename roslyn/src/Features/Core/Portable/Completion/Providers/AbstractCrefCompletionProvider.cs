@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected const string HideAdvancedMembers = nameof(HideAdvancedMembers);
 
         protected override async Task<CompletionDescription> GetDescriptionWorkerAsync(
-            Document document, CompletionItem item, CancellationToken cancellationToken)
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        )
         {
             var position = SymbolCompletionItem.GetContextPosition(item);
 
@@ -27,17 +30,31 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 bool.TryParse(hideAdvancedMembersString, out hideAdvancedMembers);
             }
 
-            var options = document.Project.Solution.Workspace.Options
-                .WithChangedOption(new OptionKey(CompletionOptions.HideAdvancedMembers, document.Project.Language), hideAdvancedMembers);
+            var options = document.Project.Solution.Workspace.Options.WithChangedOption(
+                new OptionKey(CompletionOptions.HideAdvancedMembers, document.Project.Language),
+                hideAdvancedMembers
+            );
 
-            var (token, semanticModel, symbols) = await GetSymbolsAsync(document, position, options, cancellationToken).ConfigureAwait(false);
+            var (token, semanticModel, symbols) = await GetSymbolsAsync(
+                    document,
+                    position,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var name = SymbolCompletionItem.GetSymbolName(item);
             var kind = SymbolCompletionItem.GetKind(item);
             var bestSymbols = symbols.WhereAsArray(s => s.Kind == kind && s.Name == name);
-            return await SymbolCompletionItem.GetDescriptionAsync(item, bestSymbols, document, semanticModel, cancellationToken).ConfigureAwait(false);
+            return await SymbolCompletionItem
+                .GetDescriptionAsync(item, bestSymbols, document, semanticModel, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         protected abstract Task<(SyntaxToken, SemanticModel, ImmutableArray<ISymbol>)> GetSymbolsAsync(
-            Document document, int position, OptionSet options, CancellationToken cancellationToken);
+            Document document,
+            int position,
+            OptionSet options,
+            CancellationToken cancellationToken
+        );
     }
 }

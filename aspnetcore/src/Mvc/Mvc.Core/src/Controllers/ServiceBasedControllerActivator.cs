@@ -26,8 +26,6 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         }
 
         /// <inheritdoc />
-        public virtual void Release(ControllerContext context, object controller)
-        {
-        }
+        public virtual void Release(ControllerContext context, object controller) { }
     }
 }

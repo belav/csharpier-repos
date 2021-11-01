@@ -43,7 +43,12 @@ namespace System.Net.Http.Tests
             Int32NumberHeaderParser parser = Int32NumberHeaderParser.Parser;
             int index = 0;
 
-            Assert.Throws<FormatException>(() => { parser.ParseValue("a", null, ref index); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    parser.ParseValue("a", null, ref index);
+                }
+            );
         }
 
         [Fact]
@@ -52,7 +57,12 @@ namespace System.Net.Http.Tests
             Int32NumberHeaderParser parser = Int32NumberHeaderParser.Parser;
             int index = 0;
 
-            Assert.Throws<FormatException>(() => { parser.ParseValue(null, null, ref index); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    parser.ParseValue(null, null, ref index);
+                }
+            );
         }
 
         [Fact]
@@ -102,12 +112,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, int expectedResult, int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            int expectedResult,
+            int expectedIndex
+        )
         {
             Int32NumberHeaderParser parser = Int32NumberHeaderParser.Parser;
             object result = 0;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false: {0}", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false: {0}", input)
+            );
             Assert.Equal(expectedResult, result);
             Assert.Equal(expectedIndex, startIndex);
         }
@@ -117,8 +134,10 @@ namespace System.Net.Http.Tests
             Int32NumberHeaderParser parser = Int32NumberHeaderParser.Parser;
             object result = 0;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true: {0}", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true: {0}", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

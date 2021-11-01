@@ -28,42 +28,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             bool isReadOnly,
             bool isStatic,
-            bool hasInitializer)
+            bool hasInitializer
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(name));
 
             _name = name;
 
-            Modifiers = DeclarationModifiers.Private |
-                (isReadOnly ? DeclarationModifiers.ReadOnly : DeclarationModifiers.None) |
-                (isStatic ? DeclarationModifiers.Static : DeclarationModifiers.None);
+            Modifiers =
+                DeclarationModifiers.Private
+                | (isReadOnly ? DeclarationModifiers.ReadOnly : DeclarationModifiers.None)
+                | (isStatic ? DeclarationModifiers.Static : DeclarationModifiers.None);
 
             _property = property;
             HasInitializer = hasInitializer;
         }
 
-        protected override IAttributeTargetSymbol AttributeOwner
-            => _property.AttributesOwner;
+        protected override IAttributeTargetSymbol AttributeOwner => _property.AttributesOwner;
 
-        internal override Location ErrorLocation
-            => _property.Location;
+        internal override Location ErrorLocation => _property.Location;
 
-        protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList
-            => _property.AttributeDeclarationSyntaxList;
+        protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>
+            _property.AttributeDeclarationSyntaxList;
 
-        public override Symbol AssociatedSymbol
-            => _property;
+        public override Symbol AssociatedSymbol => _property;
 
-        public override ImmutableArray<Location> Locations
-            => _property.Locations;
+        public override ImmutableArray<Location> Locations => _property.Locations;
 
-        internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
-            => _property.TypeWithAnnotations;
+        internal override TypeWithAnnotations GetFieldType(
+            ConsList<FieldSymbol> fieldsBeingBound
+        ) => _property.TypeWithAnnotations;
 
-        internal override bool HasPointerType
-            => _property.HasPointerType;
+        internal override bool HasPointerType => _property.HasPointerType;
 
-        internal sealed override void DecodeWellKnownAttribute(ref DecodeWellKnownAttributeArguments<AttributeSyntax, CSharpAttributeData, AttributeLocation> arguments)
+        internal sealed override void DecodeWellKnownAttribute(
+            ref DecodeWellKnownAttributeArguments<
+                AttributeSyntax,
+                CSharpAttributeData,
+                AttributeLocation
+            > arguments
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
             Debug.Assert(arguments.Diagnostics is BindingDiagnosticBag);
@@ -75,7 +79,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (attribute.IsTargetAttribute(this, AttributeDescription.FixedBufferAttribute))
             {
                 // error CS8362: Do not use 'System.Runtime.CompilerServices.FixedBuffer' attribute on property
-                ((BindingDiagnosticBag)arguments.Diagnostics).Add(ErrorCode.ERR_DoNotUseFixedBufferAttrOnProperty, arguments.AttributeSyntaxOpt.Name.Location);
+                ((BindingDiagnosticBag)arguments.Diagnostics).Add(
+                    ErrorCode.ERR_DoNotUseFixedBufferAttrOnProperty,
+                    arguments.AttributeSyntaxOpt.Name.Location
+                );
             }
             else
             {
@@ -83,7 +90,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
@@ -93,38 +103,55 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(!(this.ContainingType is SimpleProgramNamedTypeSymbol));
             if (!this.ContainingType.IsImplicitlyDeclared)
             {
-                AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                    )
+                );
             }
 
             // Dev11 doesn't synthesize this attribute, the debugger has a knowledge
             // of special name C# compiler uses for backing fields, which is not desirable.
-            AddSynthesizedAttribute(ref attributes, compilation.SynthesizeDebuggerBrowsableNeverAttribute());
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.SynthesizeDebuggerBrowsableNeverAttribute()
+            );
         }
 
-        public override string Name
-            => _name;
+        public override string Name => _name;
 
-        internal override ConstantValue GetConstantValue(ConstantFieldsInProgress inProgress, bool earlyDecodingWellKnownAttributes)
-            => null;
+        internal override ConstantValue GetConstantValue(
+            ConstantFieldsInProgress inProgress,
+            bool earlyDecodingWellKnownAttributes
+        ) => null;
 
-        public override Symbol ContainingSymbol
-            => _property.ContainingSymbol;
+        public override Symbol ContainingSymbol => _property.ContainingSymbol;
 
-        public override NamedTypeSymbol ContainingType
-            => _property.ContainingType;
+        public override NamedTypeSymbol ContainingType => _property.ContainingType;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
-            => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
 
-        internal override bool HasRuntimeSpecialName
-            => false;
+        internal override bool HasRuntimeSpecialName => false;
 
-        public override bool IsImplicitlyDeclared
-            => true;
+        public override bool IsImplicitlyDeclared => true;
 
-        internal override void PostDecodeWellKnownAttributes(ImmutableArray<CSharpAttributeData> boundAttributes, ImmutableArray<AttributeSyntax> allAttributeSyntaxNodes, BindingDiagnosticBag diagnostics, AttributeLocation symbolPart, WellKnownAttributeData decodedData)
+        internal override void PostDecodeWellKnownAttributes(
+            ImmutableArray<CSharpAttributeData> boundAttributes,
+            ImmutableArray<AttributeSyntax> allAttributeSyntaxNodes,
+            BindingDiagnosticBag diagnostics,
+            AttributeLocation symbolPart,
+            WellKnownAttributeData decodedData
+        )
         {
-            base.PostDecodeWellKnownAttributes(boundAttributes, allAttributeSyntaxNodes, diagnostics, symbolPart, decodedData);
+            base.PostDecodeWellKnownAttributes(
+                boundAttributes,
+                allAttributeSyntaxNodes,
+                diagnostics,
+                symbolPart,
+                decodedData
+            );
 
             if (!allAttributeSyntaxNodes.IsEmpty && _property.IsAutoPropertyWithGetAccessor)
             {
@@ -145,10 +172,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (attribute.Target?.GetAttributeLocation() == AttributeLocation.Field)
                 {
                     diagnostics.Add(
-                        new CSDiagnosticInfo(ErrorCode.WRN_AttributesOnBackingFieldsNotAvailable,
+                        new CSDiagnosticInfo(
+                            ErrorCode.WRN_AttributesOnBackingFieldsNotAvailable,
                             languageVersion.ToDisplayString(),
-                            new CSharpRequiredLanguageVersion(MessageID.IDS_FeatureAttributesOnBackingFields.RequiredVersion())),
-                        attribute.Target.Location);
+                            new CSharpRequiredLanguageVersion(
+                                MessageID.IDS_FeatureAttributesOnBackingFields.RequiredVersion()
+                            )
+                        ),
+                        attribute.Target.Location
+                    );
                 }
             }
         }

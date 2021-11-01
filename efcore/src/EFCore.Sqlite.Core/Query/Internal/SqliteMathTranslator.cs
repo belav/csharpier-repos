@@ -21,35 +21,165 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteMathTranslator : IMethodCallTranslator
     {
-        private static readonly Dictionary<MethodInfo, string> _supportedMethods = new()
-        {
-            { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(double) }), "abs" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(float) }), "abs" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(int) }), "abs" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(long) }), "abs" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(sbyte) }), "abs" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(short) }), "abs" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(byte), typeof(byte) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(double), typeof(double) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(float), typeof(float) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(int), typeof(int) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(long), typeof(long) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(sbyte), typeof(sbyte) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(short), typeof(short) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(uint), typeof(uint) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Max), new[] { typeof(ushort), typeof(ushort) }), "max" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(byte), typeof(byte) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(double), typeof(double) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(float), typeof(float) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(int), typeof(int) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(long), typeof(long) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(sbyte), typeof(sbyte) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(short), typeof(short) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(uint), typeof(uint) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Min), new[] { typeof(ushort), typeof(ushort) }), "min" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Round), new[] { typeof(double) }), "round" },
-            { typeof(Math).GetRequiredMethod(nameof(Math.Round), new[] { typeof(double), typeof(int) }), "round" }
-        };
+        private static readonly Dictionary<MethodInfo, string> _supportedMethods =
+            new()
+            {
+                {
+                    typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(double) }),
+                    "abs"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(float) }),
+                    "abs"
+                },
+                { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(int) }), "abs" },
+                { typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(long) }), "abs" },
+                {
+                    typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(sbyte) }),
+                    "abs"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(nameof(Math.Abs), new[] { typeof(short) }),
+                    "abs"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(byte), typeof(byte) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(double), typeof(double) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(float), typeof(float) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(int), typeof(int) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(long), typeof(long) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(sbyte), typeof(sbyte) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(short), typeof(short) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(uint), typeof(uint) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Max),
+                        new[] { typeof(ushort), typeof(ushort) }
+                    ),
+                    "max"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(byte), typeof(byte) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(double), typeof(double) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(float), typeof(float) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(int), typeof(int) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(long), typeof(long) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(sbyte), typeof(sbyte) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(short), typeof(short) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(uint), typeof(uint) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Min),
+                        new[] { typeof(ushort), typeof(ushort) }
+                    ),
+                    "min"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(nameof(Math.Round), new[] { typeof(double) }),
+                    "round"
+                },
+                {
+                    typeof(Math).GetRequiredMethod(
+                        nameof(Math.Round),
+                        new[] { typeof(double), typeof(int) }
+                    ),
+                    "round"
+                }
+            };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -74,7 +204,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -86,7 +217,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 List<SqlExpression>? newArguments = null;
                 if (sqlFunctionName == "max" || sqlFunctionName == "max")
                 {
-                    typeMapping = ExpressionExtensions.InferTypeMapping(arguments![0]!, arguments[1]!);
+                    typeMapping = ExpressionExtensions.InferTypeMapping(
+                        arguments![0]!,
+                        arguments[1]!
+                    );
                     newArguments = new List<SqlExpression>
                     {
                         _sqlExpressionFactory.ApplyTypeMapping(arguments[0], typeMapping),
@@ -106,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     nullable: true,
                     argumentsPropagateNullability: finalArguments.Select(a => true).ToList(),
                     method.ReturnType,
-                    typeMapping);
+                    typeMapping
+                );
             }
 
             return null;

@@ -23,7 +23,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
 {
-    public class HubProtocolVersionTestsCollection : ICollectionFixture<InProcessTestServer<VersionStartup>>
+    public class HubProtocolVersionTestsCollection
+        : ICollectionFixture<InProcessTestServer<VersionStartup>>
     {
         public const string Name = nameof(HubProtocolVersionTestsCollection);
     }
@@ -47,13 +48,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await connection.StartAsync().DefaultTimeout();
 
-                    var result = await connection.InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!").DefaultTimeout();
+                    var result = await connection
+                        .InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!")
+                        .DefaultTimeout();
 
                     Assert.Equal("Hello World!", result);
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                    LoggerFactory
+                        .CreateLogger<HubConnectionTests>()
+                        .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                     throw;
                 }
                 finally
@@ -72,7 +77,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 var connectionBuilder = new HubConnectionBuilder()
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + "/version", transportType);
-                connectionBuilder.Services.AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(1000));
+                connectionBuilder.Services.AddSingleton<IHubProtocol>(
+                    new VersionedJsonHubProtocol(1000)
+                );
 
                 var connection = connectionBuilder.Build();
 
@@ -80,13 +87,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 {
                     await connection.StartAsync().DefaultTimeout();
 
-                    var result = await connection.InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!").DefaultTimeout();
+                    var result = await connection
+                        .InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!")
+                        .DefaultTimeout();
 
                     Assert.Equal("Hello World!", result);
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                    LoggerFactory
+                        .CreateLogger<HubConnectionTests>()
+                        .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                     throw;
                 }
                 finally
@@ -103,12 +114,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             await using (var server = await StartServer<VersionStartup>())
             {
                 var httpConnectionFactory = new HttpConnectionFactory(
-                    Options.Create(new HttpConnectionOptions
-                    {
-                        Transports = transportType,
-                        DefaultTransferFormat = TransferFormat.Text
-                    }),
-                    LoggerFactory);
+                    Options.Create(
+                        new HttpConnectionOptions
+                        {
+                            Transports = transportType,
+                            DefaultTransferFormat = TransferFormat.Text
+                        }
+                    ),
+                    LoggerFactory
+                );
                 var tcs = new TaskCompletionSource();
 
                 var proxyConnectionFactory = new ProxyConnectionFactory(httpConnectionFactory);
@@ -116,29 +130,34 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 var connectionBuilder = new HubConnectionBuilder()
                     .WithUrl(new Uri(server.Url + "/version"))
                     .WithLoggerFactory(LoggerFactory);
-                connectionBuilder.Services.AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(1000));
+                connectionBuilder.Services.AddSingleton<IHubProtocol>(
+                    new VersionedJsonHubProtocol(1000)
+                );
                 connectionBuilder.Services.AddSingleton<IConnectionFactory>(proxyConnectionFactory);
 
                 var connection = connectionBuilder.Build();
-                connection.On("NewProtocolMethodClient", () =>
-                {
-                    tcs.SetResult();
-                });
+                connection.On(
+                    "NewProtocolMethodClient",
+                    () =>
+                    {
+                        tcs.SetResult();
+                    }
+                );
 
                 try
                 {
                     await connection.StartAsync().DefaultTimeout();
 
                     // Task should already have been awaited in StartAsync
-                    var connectionContext = await proxyConnectionFactory.ConnectTask.DefaultTimeout();
+                    var connectionContext =
+                        await proxyConnectionFactory.ConnectTask.DefaultTimeout();
 
                     // Simulate a new call from the client
-                    var messageToken = new JObject
-                    {
-                        ["type"] = int.MaxValue
-                    };
+                    var messageToken = new JObject { ["type"] = int.MaxValue };
 
-                    connectionContext.Transport.Output.Write(Encoding.UTF8.GetBytes(messageToken.ToString()));
+                    connectionContext.Transport.Output.Write(
+                        Encoding.UTF8.GetBytes(messageToken.ToString())
+                    );
                     connectionContext.Transport.Output.Write(new[] { (byte)0x1e });
                     await connectionContext.Transport.Output.FlushAsync().DefaultTimeout();
 
@@ -146,7 +165,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                    LoggerFactory
+                        .CreateLogger<HubConnectionTests>()
+                        .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                     throw;
                 }
                 finally
@@ -159,7 +180,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         [Theory]
         [MemberData(nameof(TransportTypes))]
         [LogLevel(LogLevel.Trace)]
-        public async Task ClientWithUnsupportedProtocolVersionDoesNotConnect(HttpTransportType transportType)
+        public async Task ClientWithUnsupportedProtocolVersionDoesNotConnect(
+            HttpTransportType transportType
+        )
         {
             bool ExpectedErrors(WriteContext writeContext)
             {
@@ -171,19 +194,26 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 var connectionBuilder = new HubConnectionBuilder()
                     .WithLoggerFactory(LoggerFactory)
                     .WithUrl(server.Url + "/version", transportType);
-                connectionBuilder.Services.AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(int.MaxValue));
+                connectionBuilder.Services.AddSingleton<IHubProtocol>(
+                    new VersionedJsonHubProtocol(int.MaxValue)
+                );
 
                 var connection = connectionBuilder.Build();
 
                 try
                 {
-                    await ExceptionAssert.ThrowsAsync<HubException>(
-                        () => connection.StartAsync(),
-                        "Unable to complete handshake with the server due to an error: The server does not support version 2147483647 of the 'json' protocol.").DefaultTimeout();
+                    await ExceptionAssert
+                        .ThrowsAsync<HubException>(
+                            () => connection.StartAsync(),
+                            "Unable to complete handshake with the server due to an error: The server does not support version 2147483647 of the 'json' protocol."
+                        )
+                        .DefaultTimeout();
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                    LoggerFactory
+                        .CreateLogger<HubConnectionTests>()
+                        .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                     throw;
                 }
                 finally
@@ -203,7 +233,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                 _innerFactory = innerFactory;
             }
 
-            public ValueTask<ConnectionContext> ConnectAsync(EndPoint endPoint, CancellationToken cancellationToken = default)
+            public ValueTask<ConnectionContext> ConnectAsync(
+                EndPoint endPoint,
+                CancellationToken cancellationToken = default
+            )
             {
                 ConnectTask = _innerFactory.ConnectAsync(endPoint, cancellationToken);
                 return ConnectTask;

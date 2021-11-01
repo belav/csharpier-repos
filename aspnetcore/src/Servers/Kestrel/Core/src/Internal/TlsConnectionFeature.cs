@@ -12,7 +12,10 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 {
-    internal class TlsConnectionFeature : ITlsConnectionFeature, ITlsApplicationProtocolFeature, ITlsHandshakeFeature
+    internal class TlsConnectionFeature
+        : ITlsConnectionFeature,
+          ITlsApplicationProtocolFeature,
+          ITlsHandshakeFeature
     {
         public X509Certificate2? ClientCertificate { get; set; }
 
@@ -34,7 +37,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
         public int KeyExchangeStrength { get; set; }
 
-        public Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken)
+        public Task<X509Certificate2?> GetClientCertificateAsync(
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult(ClientCertificate);
         }

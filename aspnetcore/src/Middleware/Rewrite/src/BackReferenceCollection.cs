@@ -37,7 +37,9 @@ namespace Microsoft.AspNetCore.Rewrite
                 }
                 else
                 {
-                    throw new IndexOutOfRangeException($"Cannot access back reference at index {index}. Only {_backReferences.Count} back references were captured.");
+                    throw new IndexOutOfRangeException(
+                        $"Cannot access back reference at index {index}. Only {_backReferences.Count} back references were captured."
+                    );
                 }
             }
         }

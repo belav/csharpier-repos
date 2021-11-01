@@ -18,7 +18,11 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo expectedMethod = typeof(object).GetMethod("GetHashCode");
 
             // Act
-            UnaryExpressionFingerprint fingerprint = new UnaryExpressionFingerprint(expectedNodeType, expectedType, expectedMethod);
+            UnaryExpressionFingerprint fingerprint = new UnaryExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedMethod
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -35,8 +39,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(object).GetMethod("GetHashCode");
 
             // Act
-            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(nodeType, type, method);
-            UnaryExpressionFingerprint fingerprint2 = new UnaryExpressionFingerprint(nodeType, type, method);
+            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            UnaryExpressionFingerprint fingerprint2 = new UnaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -52,8 +64,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(object).GetMethod("GetHashCode");
 
             // Act
-            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(nodeType, type, method);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -68,8 +87,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(object).GetMethod("GetHashCode");
 
             // Act
-            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(nodeType, type, method);
-            UnaryExpressionFingerprint fingerprint2 = new UnaryExpressionFingerprint(nodeType, type, null /* method */);
+            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            UnaryExpressionFingerprint fingerprint2 = new UnaryExpressionFingerprint(
+                nodeType,
+                type,
+                null /* method */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -84,8 +111,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MethodInfo method = typeof(object).GetMethod("GetHashCode");
 
             // Act
-            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(nodeType, type, method);
-            UnaryExpressionFingerprint fingerprint2 = new UnaryExpressionFingerprint(nodeType, typeof(object), method);
+            UnaryExpressionFingerprint fingerprint1 = new UnaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            UnaryExpressionFingerprint fingerprint2 = new UnaryExpressionFingerprint(
+                nodeType,
+                typeof(object),
+                method
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

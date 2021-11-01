@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         /// </summary>
         public Operation ResultOperation { get; }
 
-        public CommentSelectionResult(IEnumerable<TextChange> textChanges, IEnumerable<CommentTrackingSpan> trackingSpans, Operation resultOperation)
+        public CommentSelectionResult(
+            IEnumerable<TextChange> textChanges,
+            IEnumerable<CommentTrackingSpan> trackingSpans,
+            Operation resultOperation
+        )
         {
             TextChanges = textChanges.ToImmutableArray();
             TrackingSpans = trackingSpans.ToImmutableArray();

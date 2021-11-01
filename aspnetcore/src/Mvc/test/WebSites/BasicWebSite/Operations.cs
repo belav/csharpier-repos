@@ -7,6 +7,9 @@ namespace BasicWebSite
 {
     public static class Operations
     {
-        public static OperationAuthorizationRequirement Edit = new OperationAuthorizationRequirement { Name = "Edit" };
+        public static OperationAuthorizationRequirement Edit = new OperationAuthorizationRequirement
+        {
+            Name = "Edit"
+        };
     }
 }

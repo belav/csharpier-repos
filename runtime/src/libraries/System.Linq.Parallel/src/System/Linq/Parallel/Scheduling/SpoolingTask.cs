@@ -30,8 +30,11 @@ namespace System.Linq.Parallel
         //
 
         internal static void SpoolStopAndGo<TInputOutput, TIgnoreKey>(
-            QueryTaskGroupState groupState, PartitionedStream<TInputOutput, TIgnoreKey> partitions,
-            SynchronousChannel<TInputOutput>[] channels, TaskScheduler taskScheduler)
+            QueryTaskGroupState groupState,
+            PartitionedStream<TInputOutput, TIgnoreKey> partitions,
+            SynchronousChannel<TInputOutput>[] channels,
+            TaskScheduler taskScheduler
+        )
         {
             Debug.Assert(partitions.PartitionCount == channels.Length);
             Debug.Assert(groupState != null);
@@ -47,19 +50,35 @@ namespace System.Linq.Parallel
                     // running the last partition on the calling thread.
                     for (int i = 0; i < maxToRunInParallel; i++)
                     {
-                        TraceHelpers.TraceInfo("SpoolingTask::Spool: Running partition[{0}] asynchronously", i);
+                        TraceHelpers.TraceInfo(
+                            "SpoolingTask::Spool: Running partition[{0}] asynchronously",
+                            i
+                        );
 
-                        QueryTask asyncTask = new StopAndGoSpoolingTask<TInputOutput, TIgnoreKey>(i, groupState, partitions[i], channels[i]);
+                        QueryTask asyncTask = new StopAndGoSpoolingTask<TInputOutput, TIgnoreKey>(
+                            i,
+                            groupState,
+                            partitions[i],
+                            channels[i]
+                        );
                         asyncTask.RunAsynchronously(taskScheduler);
                     }
 
-                    TraceHelpers.TraceInfo("SpoolingTask::Spool: Running partition[{0}] synchronously", maxToRunInParallel);
+                    TraceHelpers.TraceInfo(
+                        "SpoolingTask::Spool: Running partition[{0}] synchronously",
+                        maxToRunInParallel
+                    );
 
                     // Run one task synchronously on the current thread.
                     QueryTask syncTask = new StopAndGoSpoolingTask<TInputOutput, TIgnoreKey>(
-                        maxToRunInParallel, groupState, partitions[maxToRunInParallel], channels[maxToRunInParallel]);
+                        maxToRunInParallel,
+                        groupState,
+                        partitions[maxToRunInParallel],
+                        channels[maxToRunInParallel]
+                    );
                     syncTask.RunSynchronously(taskScheduler);
-                });
+                }
+            );
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);
@@ -83,8 +102,11 @@ namespace System.Linq.Parallel
         //
 
         internal static void SpoolPipeline<TInputOutput, TIgnoreKey>(
-            QueryTaskGroupState groupState, PartitionedStream<TInputOutput, TIgnoreKey> partitions,
-            AsynchronousChannel<TInputOutput>[] channels, TaskScheduler taskScheduler)
+            QueryTaskGroupState groupState,
+            PartitionedStream<TInputOutput, TIgnoreKey> partitions,
+            AsynchronousChannel<TInputOutput>[] channels,
+            TaskScheduler taskScheduler
+        )
         {
             Debug.Assert(partitions.PartitionCount == channels.Length);
             Debug.Assert(groupState != null);
@@ -99,12 +121,21 @@ namespace System.Linq.Parallel
                     // we will begin running these tasks in parallel and then return.
                     for (int i = 0; i < partitions.PartitionCount; i++)
                     {
-                        TraceHelpers.TraceInfo("SpoolingTask::Spool: Running partition[{0}] asynchronously", i);
+                        TraceHelpers.TraceInfo(
+                            "SpoolingTask::Spool: Running partition[{0}] asynchronously",
+                            i
+                        );
 
-                        QueryTask asyncTask = new PipelineSpoolingTask<TInputOutput, TIgnoreKey>(i, groupState, partitions[i], channels[i]);
+                        QueryTask asyncTask = new PipelineSpoolingTask<TInputOutput, TIgnoreKey>(
+                            i,
+                            groupState,
+                            partitions[i],
+                            channels[i]
+                        );
                         asyncTask.RunAsynchronously(taskScheduler);
                     }
-                });
+                }
+            );
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);
@@ -128,7 +159,10 @@ namespace System.Linq.Parallel
         //
 
         internal static void SpoolForAll<TInputOutput, TIgnoreKey>(
-            QueryTaskGroupState groupState, PartitionedStream<TInputOutput, TIgnoreKey> partitions, TaskScheduler taskScheduler)
+            QueryTaskGroupState groupState,
+            PartitionedStream<TInputOutput, TIgnoreKey> partitions,
+            TaskScheduler taskScheduler
+        )
         {
             Debug.Assert(groupState != null);
 
@@ -142,18 +176,33 @@ namespace System.Linq.Parallel
                     // no data will be placed into any kind of producer-consumer channel.
                     for (int i = 0; i < maxToRunInParallel; i++)
                     {
-                        TraceHelpers.TraceInfo("SpoolingTask::Spool: Running partition[{0}] asynchronously", i);
+                        TraceHelpers.TraceInfo(
+                            "SpoolingTask::Spool: Running partition[{0}] asynchronously",
+                            i
+                        );
 
-                        QueryTask asyncTask = new ForAllSpoolingTask<TInputOutput, TIgnoreKey>(i, groupState, partitions[i]);
+                        QueryTask asyncTask = new ForAllSpoolingTask<TInputOutput, TIgnoreKey>(
+                            i,
+                            groupState,
+                            partitions[i]
+                        );
                         asyncTask.RunAsynchronously(taskScheduler);
                     }
 
-                    TraceHelpers.TraceInfo("SpoolingTask::Spool: Running partition[{0}] synchronously", maxToRunInParallel);
+                    TraceHelpers.TraceInfo(
+                        "SpoolingTask::Spool: Running partition[{0}] synchronously",
+                        maxToRunInParallel
+                    );
 
                     // Run one task synchronously on the current thread.
-                    QueryTask syncTask = new ForAllSpoolingTask<TInputOutput, TIgnoreKey>(maxToRunInParallel, groupState, partitions[maxToRunInParallel]);
+                    QueryTask syncTask = new ForAllSpoolingTask<TInputOutput, TIgnoreKey>(
+                        maxToRunInParallel,
+                        groupState,
+                        partitions[maxToRunInParallel]
+                    );
                     syncTask.RunSynchronously(taskScheduler);
-                });
+                }
+            );
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);
@@ -197,9 +246,11 @@ namespace System.Linq.Parallel
         //
 
         internal StopAndGoSpoolingTask(
-            int taskIndex, QueryTaskGroupState groupState,
-            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source, SynchronousChannel<TInputOutput> destination)
-            : base(taskIndex, groupState)
+            int taskIndex,
+            QueryTaskGroupState groupState,
+            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source,
+            SynchronousChannel<TInputOutput> destination
+        ) : base(taskIndex, groupState)
         {
             Debug.Assert(source != null);
             _source = source;
@@ -286,9 +337,11 @@ namespace System.Linq.Parallel
         //
 
         internal PipelineSpoolingTask(
-            int taskIndex, QueryTaskGroupState groupState,
-            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source, AsynchronousChannel<TInputOutput> destination)
-            : base(taskIndex, groupState)
+            int taskIndex,
+            QueryTaskGroupState groupState,
+            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source,
+            AsynchronousChannel<TInputOutput> destination
+        ) : base(taskIndex, groupState)
         {
             Debug.Assert(source != null);
             _source = source;
@@ -373,9 +426,10 @@ namespace System.Linq.Parallel
         //
 
         internal ForAllSpoolingTask(
-            int taskIndex, QueryTaskGroupState groupState,
-            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source)
-            : base(taskIndex, groupState)
+            int taskIndex,
+            QueryTaskGroupState groupState,
+            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source
+        ) : base(taskIndex, groupState)
         {
             Debug.Assert(source != null);
             _source = source;

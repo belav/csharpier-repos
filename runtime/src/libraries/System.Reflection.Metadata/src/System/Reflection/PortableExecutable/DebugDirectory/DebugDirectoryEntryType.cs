@@ -9,13 +9,11 @@ namespace System.Reflection.PortableExecutable
         /// An unknown value that is ignored by all tools.
         /// </summary>
         Unknown = 0,
-
         /// <summary>
         /// The COFF debug information (line numbers, symbol table, and string table).
         /// This type of debug information is also pointed to by fields in the file headers.
         /// </summary>
         Coff = 1,
-
         /// <summary>
         /// Associated PDB file description.
         /// </summary>
@@ -23,7 +21,6 @@ namespace System.Reflection.PortableExecutable
         /// See https://github.com/dotnet/runtime/blob/main/src/libraries/System.Reflection.Metadata/specs/PE-COFF.md#codeview-debug-directory-entry-type-2 for specification.
         /// </remarks>
         CodeView = 2,
-
         /// <summary>
         /// Presence of this entry indicates deterministic PE/COFF file.
         /// </summary>
@@ -48,7 +45,6 @@ namespace System.Reflection.PortableExecutable
         /// </para>
         /// </remarks>
         Reproducible = 16,
-
         /// <summary>
         /// The entry points to a blob containing Embedded Portable PDB.
         /// </summary>
@@ -62,7 +58,6 @@ namespace System.Reflection.PortableExecutable
         /// See https://github.com/dotnet/runtime/blob/main/src/libraries/System.Reflection.Metadata/specs/PE-COFF.md#embedded-portable-pdb-debug-directory-entry-type-17 for specification.
         /// </remarks>
         EmbeddedPortablePdb = 17,
-
         /// <summary>
         /// The entry stores crypto hash of the content of the symbol file the PE/COFF file was built with.
         /// </summary>

@@ -17,15 +17,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Always returns false, since the <see cref="NonRetryingExecutionStrategy" /> does not perform retries.
         /// </summary>
-        public bool RetriesOnFailure
-            => false;
+        public bool RetriesOnFailure => false;
 
         /// <summary>
         ///     Constructs a new <see cref="NonRetryingExecutionStrategy" /> with the given service dependencies.
         /// </summary>
         /// <param name="dependencies"> Dependencies for this execution strategy. </param>
-        public NonRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies)
-            => Dependencies = dependencies;
+        public NonRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies) =>
+            Dependencies = dependencies;
 
         /// <summary>
         ///     Executes the specified operation and returns the result.
@@ -44,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public TResult Execute<TState, TResult>(
             TState state,
             Func<DbContext, TState, TResult> operation,
-            Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded)
-            => operation(Dependencies.CurrentContext.Context, state);
+            Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
+        ) => operation(Dependencies.CurrentContext.Context, state);
 
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result.
@@ -73,9 +72,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public Task<TResult> ExecuteAsync<TState, TResult>(
             TState state,
             Func<DbContext, TState, CancellationToken, Task<TResult>> operation,
-            Func<DbContext, TState,
-                CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
-            CancellationToken cancellationToken = default)
-            => operation(Dependencies.CurrentContext.Context, state, cancellationToken);
+            Func<
+                DbContext,
+                TState,
+                CancellationToken,
+                Task<ExecutionResult<TResult>>
+            >? verifySucceeded,
+            CancellationToken cancellationToken = default
+        ) => operation(Dependencies.CurrentContext.Context, state, cancellationToken);
     }
 }

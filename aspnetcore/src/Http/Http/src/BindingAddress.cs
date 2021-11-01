@@ -25,10 +25,14 @@ namespace Microsoft.AspNetCore.Http
         /// <summary>
         /// Initializes a new instance of <see cref="BindingAddress"/>.
         /// </summary>
-        [Obsolete("This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance.")]
+        [Obsolete(
+            "This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance."
+        )]
         public BindingAddress()
         {
-            throw new InvalidOperationException("This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance.");
+            throw new InvalidOperationException(
+                "This constructor is obsolete and will be removed in a future version. Use BindingAddress.Parse(address) to create a BindingAddress instance."
+            );
         }
 
         /// <summary>
@@ -95,7 +99,12 @@ namespace Microsoft.AspNetCore.Http
             }
             else
             {
-                return Scheme.ToLowerInvariant() + Uri.SchemeDelimiter + Host.ToLowerInvariant() + ":" + Port.ToString(CultureInfo.InvariantCulture) + PathBase;
+                return Scheme.ToLowerInvariant()
+                    + Uri.SchemeDelimiter
+                    + Host.ToLowerInvariant()
+                    + ":"
+                    + Port.ToString(CultureInfo.InvariantCulture)
+                    + PathBase;
             }
         }
 
@@ -129,20 +138,29 @@ namespace Microsoft.AspNetCore.Http
             // A null/empty address will throw FormatException
             address = address ?? string.Empty;
 
-            int schemeDelimiterStart = address.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal);
+            int schemeDelimiterStart = address.IndexOf(
+                Uri.SchemeDelimiter,
+                StringComparison.Ordinal
+            );
             if (schemeDelimiterStart < 0)
             {
                 throw new FormatException($"Invalid url: '{address}'");
             }
             int schemeDelimiterEnd = schemeDelimiterStart + Uri.SchemeDelimiter.Length;
 
-            var isUnixPipe = address.IndexOf(UnixPipeHostPrefix, schemeDelimiterEnd, StringComparison.Ordinal) == schemeDelimiterEnd;
+            var isUnixPipe =
+                address.IndexOf(UnixPipeHostPrefix, schemeDelimiterEnd, StringComparison.Ordinal)
+                == schemeDelimiterEnd;
 
             int pathDelimiterStart;
             int pathDelimiterEnd;
             if (!isUnixPipe)
             {
-                pathDelimiterStart = address.IndexOf("/", schemeDelimiterEnd, StringComparison.Ordinal);
+                pathDelimiterStart = address.IndexOf(
+                    "/",
+                    schemeDelimiterEnd,
+                    StringComparison.Ordinal
+                );
                 pathDelimiterEnd = pathDelimiterStart;
             }
             else
@@ -158,7 +176,11 @@ namespace Microsoft.AspNetCore.Http
                     }
                 }
 
-                pathDelimiterStart = address.IndexOf(":", schemeDelimiterEnd + unixPipeHostPrefixLength, StringComparison.Ordinal);
+                pathDelimiterStart = address.IndexOf(
+                    ":",
+                    schemeDelimiterEnd + unixPipeHostPrefixLength,
+                    StringComparison.Ordinal
+                );
                 pathDelimiterEnd = pathDelimiterStart + ":".Length;
             }
 
@@ -174,17 +196,35 @@ namespace Microsoft.AspNetCore.Http
             var hasSpecifiedPort = false;
             if (!isUnixPipe)
             {
-                int portDelimiterStart = address.LastIndexOf(":", pathDelimiterStart - 1, pathDelimiterStart - schemeDelimiterEnd, StringComparison.Ordinal);
+                int portDelimiterStart = address.LastIndexOf(
+                    ":",
+                    pathDelimiterStart - 1,
+                    pathDelimiterStart - schemeDelimiterEnd,
+                    StringComparison.Ordinal
+                );
                 if (portDelimiterStart >= 0)
                 {
                     int portDelimiterEnd = portDelimiterStart + ":".Length;
 
-                    string portString = address.Substring(portDelimiterEnd, pathDelimiterStart - portDelimiterEnd);
+                    string portString = address.Substring(
+                        portDelimiterEnd,
+                        pathDelimiterStart - portDelimiterEnd
+                    );
                     int portNumber;
-                    if (int.TryParse(portString, NumberStyles.Integer, CultureInfo.InvariantCulture, out portNumber))
+                    if (
+                        int.TryParse(
+                            portString,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out portNumber
+                        )
+                    )
                     {
                         hasSpecifiedPort = true;
-                        host = address.Substring(schemeDelimiterEnd, portDelimiterStart - schemeDelimiterEnd);
+                        host = address.Substring(
+                            schemeDelimiterEnd,
+                            portDelimiterStart - schemeDelimiterEnd
+                        );
                         port = portNumber;
                     }
                 }
@@ -204,7 +244,10 @@ namespace Microsoft.AspNetCore.Http
 
             if (!hasSpecifiedPort)
             {
-                host = address.Substring(schemeDelimiterEnd, pathDelimiterStart - schemeDelimiterEnd);
+                host = address.Substring(
+                    schemeDelimiterEnd,
+                    pathDelimiterStart - schemeDelimiterEnd
+                );
             }
 
             if (string.IsNullOrEmpty(host))
@@ -214,13 +257,18 @@ namespace Microsoft.AspNetCore.Http
 
             if (isUnixPipe && !Path.IsPathRooted(GetUnixPipePath(host)))
             {
-                throw new FormatException($"Invalid url, unix socket path must be absolute: '{address}'");
+                throw new FormatException(
+                    $"Invalid url, unix socket path must be absolute: '{address}'"
+                );
             }
 
             string pathBase;
             if (address[address.Length - 1] == '/')
             {
-                pathBase = address.Substring(pathDelimiterEnd, address.Length - pathDelimiterEnd - 1);
+                pathBase = address.Substring(
+                    pathDelimiterEnd,
+                    address.Length - pathDelimiterEnd - 1
+                );
             }
             else
             {

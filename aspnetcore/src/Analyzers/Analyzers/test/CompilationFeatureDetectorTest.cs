@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Analyzers
             var compilation = await CreateCompilationAsync(nameof(StartupWithNoFeatures));
             var symbols = new StartupSymbols(compilation);
 
-            var type = (INamedTypeSymbol)compilation.GetSymbolsWithName(nameof(StartupWithNoFeatures)).Single();
+            var type = (INamedTypeSymbol)compilation
+                .GetSymbolsWithName(nameof(StartupWithNoFeatures))
+                .Single();
             Assert.True(StartupFacts.IsStartupClass(symbols, type));
 
             // Act

@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
         public IStreamingProgressTracker ProgressTracker { get; }
 
-        protected FindUsagesContext()
-            => this.ProgressTracker = new StreamingProgressTracker(this.ReportProgressAsync);
+        protected FindUsagesContext() =>
+            this.ProgressTracker = new StreamingProgressTracker(this.ReportProgressAsync);
 
         public virtual ValueTask ReportMessageAsync(string message) => default;
 
@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
         protected virtual ValueTask ReportProgressAsync(int current, int maximum) => default;
 
-        ValueTask IFindUsagesContext.ReportProgressAsync(int current, int maximum)
-            => ReportProgressAsync(current, maximum);
+        ValueTask IFindUsagesContext.ReportProgressAsync(int current, int maximum) =>
+            ReportProgressAsync(current, maximum);
     }
 }

@@ -12,15 +12,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagName,
             IReadOnlyList<KeyValuePair<string, string>> attributes,
             string parentTagName,
-            IReadOnlyDictionary<TagHelperDescriptor, IReadOnlyList<TagMatchingRuleDescriptor>> mappings,
-            string tagHelperPrefix)
+            IReadOnlyDictionary<
+                TagHelperDescriptor,
+                IReadOnlyList<TagMatchingRuleDescriptor>
+            > mappings,
+            string tagHelperPrefix
+        )
         {
             TagName = tagName;
             Attributes = attributes;
             ParentTagName = parentTagName;
             Mappings = mappings;
             TagHelperPrefix = tagHelperPrefix;
-
         }
 
         public IEnumerable<TagHelperDescriptor> Descriptors => Mappings.Keys;
@@ -39,8 +42,17 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 foreach (var descriptor in Mappings.Keys)
                 {
-                    if (!descriptor.Metadata.TryGetValue(TagHelperMetadata.Common.ClassifyAttributesOnly, out var value) ||
-                        !string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !descriptor.Metadata.TryGetValue(
+                            TagHelperMetadata.Common.ClassifyAttributesOnly,
+                            out var value
+                        )
+                        || !string.Equals(
+                            value,
+                            bool.TrueString,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return false;
                     }
@@ -61,11 +73,16 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public IReadOnlyList<KeyValuePair<string, string>> Attributes { get; }
 
-        public IReadOnlyDictionary<TagHelperDescriptor, IReadOnlyList<TagMatchingRuleDescriptor>> Mappings { get; }
+        public IReadOnlyDictionary<
+            TagHelperDescriptor,
+            IReadOnlyList<TagMatchingRuleDescriptor>
+        > Mappings { get; }
 
         public string TagHelperPrefix { get; }
 
-        public IReadOnlyList<TagMatchingRuleDescriptor> GetBoundRules(TagHelperDescriptor descriptor)
+        public IReadOnlyList<TagMatchingRuleDescriptor> GetBoundRules(
+            TagHelperDescriptor descriptor
+        )
         {
             if (descriptor == null)
             {

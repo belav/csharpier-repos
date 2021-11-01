@@ -31,14 +31,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XmlTagCompletionCommandHandler(ITextUndoHistoryRegistry undoHistory)
-            : base(undoHistory)
-        {
-        }
+            : base(undoHistory) { }
 
-        protected override void TryCompleteTag(ITextView textView, ITextBuffer subjectBuffer, Document document, SnapshotPoint position, CancellationToken cancellationToken)
+        protected override void TryCompleteTag(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            Document document,
+            SnapshotPoint position,
+            CancellationToken cancellationToken
+        )
         {
             var tree = document.GetSyntaxTreeSynchronously(cancellationToken);
-            var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken, includeDocumentationComments: true);
+            var token = tree.FindTokenOnLeftOfPosition(
+                position,
+                cancellationToken,
+                includeDocumentationComments: true
+            );
 
             if (token.IsKind(SyntaxKind.GreaterThanToken))
             {
@@ -48,21 +56,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                 }
 
                 // Slightly special case: <blah><blah$$</blah>
-                // If we already have a matching end tag and we're parented by 
-                // an xml element with the same start tag and a missing/non-matching end tag, 
+                // If we already have a matching end tag and we're parented by
+                // an xml element with the same start tag and a missing/non-matching end tag,
                 // do completion anyway. Generally, if this is the case, we have to walk
                 // up the parent elements until we find an unmatched start tag.
 
-                if (parentStartTag.Name.LocalName.ValueText.Length > 0 && HasMatchingEndTag(parentStartTag))
+                if (
+                    parentStartTag.Name.LocalName.ValueText.Length > 0
+                    && HasMatchingEndTag(parentStartTag)
+                )
                 {
                     if (HasUnmatchedIdenticalParent(parentStartTag))
                     {
-                        InsertTextAndMoveCaret(textView, subjectBuffer, position, "</" + parentStartTag.Name.LocalName.ValueText + ">", position);
+                        InsertTextAndMoveCaret(
+                            textView,
+                            subjectBuffer,
+                            position,
+                            "</" + parentStartTag.Name.LocalName.ValueText + ">",
+                            position
+                        );
                         return;
                     }
                 }
 
-                CheckNameAndInsertText(textView, subjectBuffer, position, parentStartTag, position.Position, "</{0}>");
+                CheckNameAndInsertText(
+                    textView,
+                    subjectBuffer,
+                    position,
+                    parentStartTag,
+                    position.Position,
+                    "</{0}>"
+                );
             }
             else if (token.IsKind(SyntaxKind.LessThanSlashToken))
             {
@@ -71,16 +95,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                 // /// </summary>
                 // We need to check for non-trivia XML text tokens after $$ that match the expected end tag text.
 
-                if (token.Parent.IsKind(SyntaxKind.XmlElementEndTag) &&
-                    token.Parent.IsParentKind(SyntaxKind.XmlElement, out XmlElementSyntax parentElement) &&
-                    !HasFollowingEndTagTrivia(parentElement, token))
+                if (
+                    token.Parent.IsKind(SyntaxKind.XmlElementEndTag)
+                    && token.Parent.IsParentKind(
+                        SyntaxKind.XmlElement,
+                        out XmlElementSyntax parentElement
+                    )
+                    && !HasFollowingEndTagTrivia(parentElement, token)
+                )
                 {
-                    CheckNameAndInsertText(textView, subjectBuffer, position, parentElement.StartTag, null, "{0}>");
+                    CheckNameAndInsertText(
+                        textView,
+                        subjectBuffer,
+                        position,
+                        parentElement.StartTag,
+                        null,
+                        "{0}>"
+                    );
                 }
             }
         }
 
-        private static bool HasFollowingEndTagTrivia(XmlElementSyntax parentElement, SyntaxToken lessThanSlashToken)
+        private static bool HasFollowingEndTagTrivia(
+            XmlElementSyntax parentElement,
+            SyntaxToken lessThanSlashToken
+        )
         {
             var expectedEndTagText = "</" + parentElement.StartTag.Name.LocalName.ValueText + ">";
 
@@ -102,7 +141,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
         {
             if (parentStartTag.Parent.Parent is XmlElementSyntax grandParentElement)
             {
-                if (grandParentElement.StartTag.Name.LocalName.ValueText == parentStartTag.Name.LocalName.ValueText)
+                if (
+                    grandParentElement.StartTag.Name.LocalName.ValueText
+                    == parentStartTag.Name.LocalName.ValueText
+                )
                 {
                     if (HasMatchingEndTag(grandParentElement.StartTag))
                     {
@@ -129,10 +171,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
             }
 
             var endTag = parentElement.EndTag;
-            return endTag != null && !endTag.IsMissing && endTag.Name.LocalName.ValueText == parentStartTag.Name.LocalName.ValueText;
+            return endTag != null
+                && !endTag.IsMissing
+                && endTag.Name.LocalName.ValueText == parentStartTag.Name.LocalName.ValueText;
         }
 
-        private void CheckNameAndInsertText(ITextView textView, ITextBuffer subjectBuffer, SnapshotPoint position, XmlElementStartTagSyntax startTag, int? finalCaretPosition, string formatString)
+        private void CheckNameAndInsertText(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            SnapshotPoint position,
+            XmlElementStartTagSyntax startTag,
+            int? finalCaretPosition,
+            string formatString
+        )
         {
             if (startTag == null)
             {
@@ -146,7 +197,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
                 var parentElement = startTag.Parent as XmlElementSyntax;
                 if (parentElement.EndTag.Name.LocalName.ValueText != elementName)
                 {
-                    InsertTextAndMoveCaret(textView, subjectBuffer, position, string.Format(formatString, elementName), finalCaretPosition);
+                    InsertTextAndMoveCaret(
+                        textView,
+                        subjectBuffer,
+                        position,
+                        string.Format(formatString, elementName),
+                        finalCaretPosition
+                    );
                 }
             }
         }

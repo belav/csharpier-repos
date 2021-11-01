@@ -21,23 +21,30 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportCompletionProvider(nameof(FunctionPointerUnmanagedCallingConventionCompletionProvider), LanguageNames.CSharp)]
+    [ExportCompletionProvider(
+        nameof(FunctionPointerUnmanagedCallingConventionCompletionProvider),
+        LanguageNames.CSharp
+    )]
     [ExtensionOrder(After = nameof(EmbeddedLanguageCompletionProvider))]
     [Shared]
-    internal partial class FunctionPointerUnmanagedCallingConventionCompletionProvider : LSPCompletionProvider
+    internal partial class FunctionPointerUnmanagedCallingConventionCompletionProvider
+        : LSPCompletionProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FunctionPointerUnmanagedCallingConventionCompletionProvider()
-        {
-        }
+        public FunctionPointerUnmanagedCallingConventionCompletionProvider() { }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.CommonTriggerCharacters;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.CommonTriggerCharacters;
 
-        private static readonly ImmutableArray<string> s_predefinedCallingConventions = ImmutableArray.Create("Cdecl", "Fastcall", "Thiscall", "Stdcall");
+        private static readonly ImmutableArray<string> s_predefinedCallingConventions =
+            ImmutableArray.Create("Cdecl", "Fastcall", "Thiscall", "Stdcall");
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
@@ -47,7 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var position = context.Position;
                 var cancellationToken = context.CancellationToken;
 
-                var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxTree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (syntaxTree.IsInNonUserCode(position, cancellationToken))
                 {
                     return;
@@ -62,13 +71,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     return;
                 }
 
-                if (token.Parent is not FunctionPointerUnmanagedCallingConventionListSyntax callingConventionList)
+                if (
+                    token.Parent
+                    is not FunctionPointerUnmanagedCallingConventionListSyntax callingConventionList
+                )
                 {
                     return;
                 }
 
                 var contextPosition = token.SpanStart;
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(callingConventionList, cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .ReuseExistingSpeculativeModelAsync(callingConventionList, cancellationToken)
+                    .ConfigureAwait(false);
 
                 var completionItems = new HashSet<CompletionItem>(CompletionItemComparer.Instance);
                 AddTypes(completionItems, contextPosition, semanticModel, cancellationToken);
@@ -77,7 +91,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // We add these after doing the type lookup so if we had types we can show that instead
                 foreach (var callingConvention in s_predefinedCallingConventions)
                 {
-                    completionItems.Add(CompletionItem.Create(callingConvention, tags: GlyphTags.GetTags(Glyph.Keyword)));
+                    completionItems.Add(
+                        CompletionItem.Create(
+                            callingConvention,
+                            tags: GlyphTags.GetTags(Glyph.Keyword)
+                        )
+                    );
                 }
 
                 context.AddItems(completionItems);
@@ -88,12 +107,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
         }
 
-        private static void AddTypes(HashSet<CompletionItem> completionItems, int contextPosition, SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static void AddTypes(
+            HashSet<CompletionItem> completionItems,
+            int contextPosition,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             // We have to find the set of types that meet the criteria listed in
             // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/function-pointers.md#mapping-the-calling_convention_specifier-to-a-callkind
             // We skip the check of an type being in the core assembly since that's not really necessary for our work.
-            var compilerServicesNamespace = semanticModel.Compilation.GlobalNamespace.GetQualifiedNamespace("System.Runtime.CompilerServices");
+            var compilerServicesNamespace =
+                semanticModel.Compilation.GlobalNamespace.GetQualifiedNamespace(
+                    "System.Runtime.CompilerServices"
+                );
             if (compilerServicesNamespace == null)
             {
                 return;
@@ -105,7 +132,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 const string CallConvPrefix = "CallConv";
 
-                if (type.DeclaredAccessibility == Accessibility.Public && type.Name.StartsWith(CallConvPrefix))
+                if (
+                    type.DeclaredAccessibility == Accessibility.Public
+                    && type.Name.StartsWith(CallConvPrefix)
+                )
                 {
                     var displayName = type.Name[CallConvPrefix.Length..];
                     completionItems.Add(
@@ -113,17 +143,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                             displayName,
                             ImmutableArray.Create(type),
                             rules: CompletionItemRules.Default,
-                            contextPosition));
+                            contextPosition
+                        )
+                    );
                 }
             }
         }
 
-        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
+        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
 
         private class CompletionItemComparer : IEqualityComparer<CompletionItem>
         {
-            public static readonly IEqualityComparer<CompletionItem> Instance = new CompletionItemComparer();
+            public static readonly IEqualityComparer<CompletionItem> Instance =
+                new CompletionItemComparer();
 
             public bool Equals(CompletionItem? x, CompletionItem? y)
             {

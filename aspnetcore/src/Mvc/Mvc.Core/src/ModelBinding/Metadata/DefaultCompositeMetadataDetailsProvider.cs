@@ -20,7 +20,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// Creates a new <see cref="DefaultCompositeMetadataDetailsProvider"/>.
         /// </summary>
         /// <param name="providers">The set of <see cref="IMetadataDetailsProvider"/> instances.</param>
-        public DefaultCompositeMetadataDetailsProvider(IEnumerable<IMetadataDetailsProvider> providers)
+        public DefaultCompositeMetadataDetailsProvider(
+            IEnumerable<IMetadataDetailsProvider> providers
+        )
         {
             _providers = providers;
         }

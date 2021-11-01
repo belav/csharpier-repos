@@ -42,7 +42,6 @@ namespace System.IO.Tests
             testDir.Refresh();
             Assert.True((testDir.Attributes & FileAttributes.ReadOnly) != FileAttributes.ReadOnly);
         }
-
         #endregion
     }
 }

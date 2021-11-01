@@ -24,7 +24,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"child::*[((((1 + 2) * 3) - 7) div 2)]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -33,10 +34,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Title",
                     HasNameTable = true,
                     Value = "XPath test"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -49,7 +56,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"child::*[(2 * (2 -  (3 div (1 + 2))))]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -58,10 +66,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Summary",
                     HasNameTable = true,
                     Value = "This shall test XPath test"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -74,7 +88,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"child::*[(4 - 1) div  (1 + 2)]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -83,10 +98,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Title",
                     HasNameTable = true,
                     Value = "XPath test"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -100,8 +121,11 @@ namespace XPathTests.FunctionalTests.Expressions
             var startingNodePath = "/Doc";
             var testExpression = @"child::$$Var";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

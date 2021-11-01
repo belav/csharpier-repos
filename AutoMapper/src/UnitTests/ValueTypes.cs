@@ -26,11 +26,14 @@ namespace AutoMapper.UnitTests.ValueTypes
             public Destination Parent { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.CreateMap<Source, Destination>().MaxDepth(2);
-            cfg.CreateMap<InnerSource, InnerDestination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().MaxDepth(2);
+                    cfg.CreateMap<InnerSource, InnerDestination>();
+                }
+            );
 
         [Fact]
         public void Should_work()
@@ -58,15 +61,19 @@ namespace AutoMapper.UnitTests.ValueTypes
             public string Value2;
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Source, Destination>(new Source {Value1 = 4, Value2 = "hello"});
+            _destination = Mapper.Map<Source, Destination>(
+                new Source { Value1 = 4, Value2 = "hello" }
+            );
         }
 
         [Fact]
@@ -97,19 +104,17 @@ namespace AutoMapper.UnitTests.ValueTypes
             public ushort Reg2 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(
-            cfg => cfg.CreateMap<matrixDigiInStruct1, DigiIn1>()
-                .ForMember(d => d.CncInfo, x => x.MapFrom(s => s.CNCinfo)));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<matrixDigiInStruct1, DigiIn1>()
+                        .ForMember(d => d.CncInfo, x => x.MapFrom(s => s.CNCinfo))
+            );
 
         [Fact]
         public void Should_map_correctly()
         {
-            var source = new matrixDigiInStruct1
-            {
-                CNCinfo = 5,
-                Reg1 = 6,
-                Reg2 = 7
-            };
+            var source = new matrixDigiInStruct1 { CNCinfo = 5, Reg1 = 6, Reg2 = 7 };
             var dest = Mapper.Map<matrixDigiInStruct1, DigiIn1>(source);
 
             dest.CncInfo.ShouldBe(source.CNCinfo);
@@ -117,7 +122,6 @@ namespace AutoMapper.UnitTests.ValueTypes
             dest.Reg2.ShouldBe(source.Reg2);
         }
     }
-
 
     public class When_destination_type_is_a_nullable_value_type : AutoMapperSpecBase
     {
@@ -135,16 +139,22 @@ namespace AutoMapper.UnitTests.ValueTypes
             public int? Value2 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<string, int>().ConvertUsing((string s) => Convert.ToInt32(s));
-            cfg.CreateMap<string, int?>().ConvertUsing((string s) => (int?) Convert.ToInt32(s));
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<string, int>().ConvertUsing((string s) => Convert.ToInt32(s));
+                    cfg.CreateMap<string, int?>()
+                        .ConvertUsing((string s) => (int?)Convert.ToInt32(s));
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Source, Destination>(new Source {Value1 = "10", Value2 = "20"});
+            _destination = Mapper.Map<Source, Destination>(
+                new Source { Value1 = "10", Value2 = "20" }
+            );
         }
 
         [Fact]

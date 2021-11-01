@@ -46,7 +46,10 @@ namespace Microsoft.Extensions.Http
             };
 
             // Act
-            var response = await handler.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            var response = await handler.SendAsync(
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             // Assert
             Assert.Equal(2, callCount);
@@ -64,11 +67,13 @@ namespace Microsoft.Extensions.Http
             var expectedRequest = new HttpRequestMessage();
 
             HttpRequestMessage policySelectorRequest = null;
-            var handler = new TestPolicyHttpMessageHandler((req) =>
-            {
-                policySelectorRequest = req;
-                return policy;
-            });
+            var handler = new TestPolicyHttpMessageHandler(
+                (req) =>
+                {
+                    policySelectorRequest = req;
+                    return policy;
+                }
+            );
 
             var callCount = 0;
             var expected = new HttpResponseMessage();
@@ -103,23 +108,28 @@ namespace Microsoft.Extensions.Http
         public async Task SendAsync_DynamicPolicy_PolicySelectorReturnsNull_ThrowsException()
         {
             // Arrange
-            var handler = new TestPolicyHttpMessageHandler((req) =>
-            {
-                return null;
-            });
-            
+            var handler = new TestPolicyHttpMessageHandler(
+                (req) =>
+                {
+                    return null;
+                }
+            );
+
             var expected = new HttpResponseMessage();
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            {
-                await handler.SendAsync(new HttpRequestMessage(), CancellationToken.None);
-            });
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                {
+                    await handler.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+                }
+            );
 
             // Assert
             Assert.Equal(
-                "The 'policySelector' function must return a non-null policy instance. To create a policy that takes no action, use 'Policy.NoOpAsync<HttpResponseMessage>()'.", 
-                exception.Message);
+                "The 'policySelector' function must return a non-null policy instance. To create a policy that takes no action, use 'Policy.NoOpAsync<HttpResponseMessage>()'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -129,9 +139,11 @@ namespace Microsoft.Extensions.Http
             var policy = Policy<HttpResponseMessage>
                 .Handle<TimeoutRejectedException>() // Handle timeouts by retrying
                 .RetryAsync(retryCount: 5)
-                .WrapAsync(Policy
-                    .TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(50)) // Apply a 50ms timeout
-                    .WrapAsync(Policy.NoOpAsync<HttpResponseMessage>()));
+                .WrapAsync(
+                    Policy
+                        .TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(50)) // Apply a 50ms timeout
+                        .WrapAsync(Policy.NoOpAsync<HttpResponseMessage>())
+                );
 
             var handler = new TestPolicyHttpMessageHandler(policy);
 
@@ -161,7 +173,10 @@ namespace Microsoft.Extensions.Http
             };
 
             // Act
-            var response = await handler.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            var response = await handler.SendAsync(
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             // Assert
             Assert.Equal(2, callCount);
@@ -231,18 +246,22 @@ namespace Microsoft.Extensions.Http
         public async Task SendAsync_NoContextSet_DynamicPolicySelectorThrows_CleansUpContext()
         {
             // Arrange
-            var handler = new TestPolicyHttpMessageHandler((req) =>
-            {
-                throw new InvalidOperationException();
-            });
+            var handler = new TestPolicyHttpMessageHandler(
+                (req) =>
+                {
+                    throw new InvalidOperationException();
+                }
+            );
 
             var request = new HttpRequestMessage();
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            {
-                await handler.SendAsync(request, CancellationToken.None);
-            });
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                {
+                    await handler.SendAsync(request, CancellationToken.None);
+                }
+            );
 
             // Assert
             Assert.Null(request.GetPolicyExecutionContext()); // We do clean up a context we generated, when the policy selector throws.
@@ -265,10 +284,12 @@ namespace Microsoft.Extensions.Http
             var request = new HttpRequestMessage();
 
             // Act
-            var exception = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await handler.SendAsync(request, CancellationToken.None);
-            });
+            var exception = await Assert.ThrowsAsync<OperationCanceledException>(
+                async () =>
+                {
+                    await handler.SendAsync(request, CancellationToken.None);
+                }
+            );
 
             // Assert
             Assert.NotNull(context); // The handler did generate a context for the execution.
@@ -296,13 +317,15 @@ namespace Microsoft.Extensions.Http
                 var token = cts.Token;
                 token.Register(() => throw new OperationCanceledException(token));
 
-                SingleThreadedSynchronizationContext.Run(() =>
-                {
-                    // Act
-                    var request = new HttpRequestMessage();
-                    handler.SendAsync(request, CancellationToken.None).GetAwaiter().GetResult();
-                    hangs = false;
-                });
+                SingleThreadedSynchronizationContext.Run(
+                    () =>
+                    {
+                        // Act
+                        var request = new HttpRequestMessage();
+                        handler.SendAsync(request, CancellationToken.None).GetAwaiter().GetResult();
+                        hangs = false;
+                    }
+                );
             }
 
             // Assert
@@ -311,24 +334,33 @@ namespace Microsoft.Extensions.Http
 
         private class TestPolicyHttpMessageHandler : PolicyHttpMessageHandler
         {
-            public Func<HttpRequestMessage, Context, CancellationToken, Task<HttpResponseMessage>> OnSendAsync { get; set; }
+            public Func<
+                HttpRequestMessage,
+                Context,
+                CancellationToken,
+                Task<HttpResponseMessage>
+            > OnSendAsync { get; set; }
 
             public TestPolicyHttpMessageHandler(IAsyncPolicy<HttpResponseMessage> policy)
-                : base(policy)
-            {
-            }
+                : base(policy) { }
 
-            public TestPolicyHttpMessageHandler(Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
-                : base(policySelector)
-            {
-            }
+            public TestPolicyHttpMessageHandler(
+                Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
+            ) : base(policySelector) { }
 
-            public new Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            public new Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return base.SendAsync(request, cancellationToken);
             }
 
-            protected override Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendCoreAsync(
+                HttpRequestMessage request,
+                Context context,
+                CancellationToken cancellationToken
+            )
             {
                 Assert.NotNull(OnSendAsync);
                 return OnSendAsync(request, context, cancellationToken);

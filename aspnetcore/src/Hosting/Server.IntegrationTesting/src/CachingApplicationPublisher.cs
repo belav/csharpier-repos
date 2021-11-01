@@ -10,15 +10,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting
 {
-    public class CachingApplicationPublisher: ApplicationPublisher, IDisposable
+    public class CachingApplicationPublisher : ApplicationPublisher, IDisposable
     {
-        private readonly Dictionary<DotnetPublishParameters, PublishedApplication> _publishCache = new Dictionary<DotnetPublishParameters, PublishedApplication>();
+        private readonly Dictionary<DotnetPublishParameters, PublishedApplication> _publishCache =
+            new Dictionary<DotnetPublishParameters, PublishedApplication>();
 
-        public CachingApplicationPublisher(string applicationPath) : base(applicationPath)
-        {
-        }
+        public CachingApplicationPublisher(string applicationPath) : base(applicationPath) { }
 
-        public override async Task<PublishedApplication> Publish(DeploymentParameters deploymentParameters, ILogger logger)
+        public override async Task<PublishedApplication> Publish(
+            DeploymentParameters deploymentParameters,
+            ILogger logger
+        )
         {
             if (ApplicationPath != deploymentParameters.ApplicationPath)
             {
@@ -27,12 +29,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
             if (deploymentParameters.PublishEnvironmentVariables.Any())
             {
-                throw new InvalidOperationException("DeploymentParameters.PublishEnvironmentVariables not supported");
+                throw new InvalidOperationException(
+                    "DeploymentParameters.PublishEnvironmentVariables not supported"
+                );
             }
 
             if (!string.IsNullOrEmpty(deploymentParameters.PublishedApplicationRootPath))
             {
-                throw new InvalidOperationException("DeploymentParameters.PublishedApplicationRootPath not supported");
+                throw new InvalidOperationException(
+                    "DeploymentParameters.PublishedApplicationRootPath not supported"
+                );
             }
 
             var dotnetPublishParameters = new DotnetPublishParameters
@@ -49,7 +55,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 _publishCache.Add(dotnetPublishParameters, publishedApplication);
             }
 
-            return new PublishedApplication(CopyPublishedOutput(publishedApplication, logger), logger);
+            return new PublishedApplication(
+                CopyPublishedOutput(publishedApplication, logger),
+                logger
+            );
         }
 
         private string CopyPublishedOutput(PublishedApplication application, ILogger logger)

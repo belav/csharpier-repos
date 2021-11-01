@@ -34,7 +34,11 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Successful binding.
             /// </summary>
-            public AssemblyReferenceBinding(AssemblyIdentity referenceIdentity, int definitionIndex, int versionDifference = 0)
+            public AssemblyReferenceBinding(
+                AssemblyIdentity referenceIdentity,
+                int definitionIndex,
+                int versionDifference = 0
+            )
             {
                 Debug.Assert(referenceIdentity != null);
                 Debug.Assert(definitionIndex >= 0);
@@ -58,10 +62,7 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             internal bool IsBound
             {
-                get
-                {
-                    return _definitionIndex >= 0;
-                }
+                get { return _definitionIndex >= 0; }
             }
 
             /// <summary>
@@ -95,16 +96,18 @@ namespace Microsoft.CodeAnalysis
 
             internal AssemblyIdentity? ReferenceIdentity
             {
-                get
-                {
-                    return _referenceIdentity;
-                }
+                get { return _referenceIdentity; }
             }
 
             private string GetDebuggerDisplay()
             {
                 var displayName = ReferenceIdentity?.GetDisplayName() ?? "";
-                return IsBound ? displayName + " -> #" + DefinitionIndex + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "") : "unbound";
+                return IsBound
+                  ? displayName
+                    + " -> #"
+                    + DefinitionIndex
+                    + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "")
+                  : "unbound";
             }
         }
     }

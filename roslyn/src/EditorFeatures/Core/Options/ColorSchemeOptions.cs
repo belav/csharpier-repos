@@ -18,15 +18,23 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         internal const string ColorSchemeSettingKey = "TextEditor.Roslyn.ColorScheme";
 
-        public static readonly Option2<SchemeName> ColorScheme = new(nameof(ColorSchemeOptions),
-            nameof(ColorScheme),
-            defaultValue: SchemeName.VisualStudio2019,
-            storageLocations: new RoamingProfileStorageLocation(ColorSchemeSettingKey));
+        public static readonly Option2<SchemeName> ColorScheme =
+            new(
+                nameof(ColorSchemeOptions),
+                nameof(ColorScheme),
+                defaultValue: SchemeName.VisualStudio2019,
+                storageLocations: new RoamingProfileStorageLocation(ColorSchemeSettingKey)
+            );
 
-        public static readonly Option2<UseEnhancedColors> LegacyUseEnhancedColors = new(nameof(ColorSchemeOptions),
-            nameof(LegacyUseEnhancedColors),
-            defaultValue: UseEnhancedColors.Default,
-            storageLocations: new RoamingProfileStorageLocation("WindowManagement.Options.UseEnhancedColorsForManagedLanguages"));
+        public static readonly Option2<UseEnhancedColors> LegacyUseEnhancedColors =
+            new(
+                nameof(ColorSchemeOptions),
+                nameof(LegacyUseEnhancedColors),
+                defaultValue: UseEnhancedColors.Default,
+                storageLocations: new RoamingProfileStorageLocation(
+                    "WindowManagement.Options.UseEnhancedColorsForManagedLanguages"
+                )
+            );
 
         public enum UseEnhancedColors
         {
@@ -42,12 +50,12 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ColorSchemeOptionsProvider()
-        {
-        }
+        public ColorSchemeOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options => ImmutableArray.Create<IOption>(
-            ColorSchemeOptions.ColorScheme,
-            ColorSchemeOptions.LegacyUseEnhancedColors);
+        public ImmutableArray<IOption> Options =>
+            ImmutableArray.Create<IOption>(
+                ColorSchemeOptions.ColorScheme,
+                ColorSchemeOptions.LegacyUseEnhancedColors
+            );
     }
 }

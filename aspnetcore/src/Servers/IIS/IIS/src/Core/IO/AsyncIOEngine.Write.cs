@@ -17,10 +17,19 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 _engine = engine;
             }
 
-            protected override unsafe int WriteChunks(NativeSafeHandle requestHandler, int chunkCount, HttpApiTypes.HTTP_DATA_CHUNK* dataChunks,
-                out bool completionExpected)
+            protected override unsafe int WriteChunks(
+                NativeSafeHandle requestHandler,
+                int chunkCount,
+                HttpApiTypes.HTTP_DATA_CHUNK* dataChunks,
+                out bool completionExpected
+            )
             {
-                return NativeMethods.HttpWriteResponseBytes(requestHandler, dataChunks, chunkCount, out completionExpected);
+                return NativeMethods.HttpWriteResponseBytes(
+                    requestHandler,
+                    dataChunks,
+                    chunkCount,
+                    out completionExpected
+                );
             }
 
             protected override void ResetOperation()

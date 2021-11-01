@@ -13,10 +13,10 @@ namespace Microsoft.AspNetCore.Testing
     {
         private string _skipReason;
 
-        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
-        public SkippedTestCase() : base()
-        {
-        }
+        [Obsolete(
+            "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
+        )]
+        public SkippedTestCase() : base() { }
 
         public SkippedTestCase(
             string skipReason,
@@ -24,14 +24,21 @@ namespace Microsoft.AspNetCore.Testing
             TestMethodDisplay defaultMethodDisplay,
             TestMethodDisplayOptions defaultMethodDisplayOptions,
             ITestMethod testMethod,
-            object[] testMethodArguments = null)
-            : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod, testMethodArguments)
+            object[] testMethodArguments = null
+        )
+            : base(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                defaultMethodDisplayOptions,
+                testMethod,
+                testMethodArguments
+            )
         {
             _skipReason = skipReason;
         }
 
-        protected override string GetSkipReason(IAttributeInfo factAttribute)
-            => _skipReason ?? base.GetSkipReason(factAttribute);
+        protected override string GetSkipReason(IAttributeInfo factAttribute) =>
+            _skipReason ?? base.GetSkipReason(factAttribute);
 
         public override void Deserialize(IXunitSerializationInfo data)
         {

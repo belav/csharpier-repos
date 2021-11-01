@@ -7,9 +7,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 {
     public class Test
     {
-        public void Method()
-        {
-        }
+        public void Method() { }
 
         protected void Method(int x, object o)
         {
@@ -28,7 +26,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
         private static int s_status = -1;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -46,15 +43,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility002.accessibility002
 {
     public class Test
     {
-        public void Method()
-        {
-        }
+        public void Method() { }
 
         protected void Method(int x, object o)
         {
@@ -90,8 +83,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.errorverifier.errorverifier
 {
@@ -275,20 +266,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility003.accessibility003
 {
     public class Test
     {
         private delegate void Del(long x, int y);
-        public void Method(long x, int y)
-        {
-        }
+        public void Method(long x, int y) { }
 
-        private void Method(int x, int y)
-        {
-        }
+        private void Method(int x, int y) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -317,8 +302,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility004.accessibility004
 {
     // <Title>Accessibility</Title>
@@ -329,9 +312,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // <Code>
     public struct Test
     {
-        public void Method()
-        {
-        }
+        public void Method() { }
 
         private void Method(int x, object o)
         {
@@ -367,19 +348,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility005.accessibility005
 {
     public class Test
     {
         private class Base
         {
-            public void Method(int x)
-            {
-            }
+            public void Method(int x) { }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -397,35 +373,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility006.accessibility006
 {
     public class Test
     {
         protected class Base
         {
-            public void Method()
-            {
-            }
+            public void Method() { }
 
-            protected void Method(int x, object o)
-            {
-            }
+            protected void Method(int x, object o) { }
 
-            protected internal void Method(long x, object o)
-            {
-            }
+            protected internal void Method(long x, object o) { }
 
-            internal void Method(short x, object o)
-            {
-            }
+            internal void Method(short x, object o) { }
 
-            public void Method(byte x, object o)
-            {
-            }
+            public void Method(byte x, object o) { }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -443,8 +406,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility007.accessibility007
 {
@@ -472,7 +433,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
         private static int s_status = -1;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -493,8 +453,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility011.accessibility011
 {
     public class Test
@@ -503,11 +461,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             private class Base
             {
-                public void Method(int x)
-                {
-                }
+                public void Method(int x) { }
             }
-
 
             public static void DynamicCSharpRunTest()
             {
@@ -526,8 +481,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility012.accessibility012
 {
     public class Test
@@ -541,7 +494,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         }
 
         public static int Status;
-
 
         public static void DynamicCSharpRunTest()
         {

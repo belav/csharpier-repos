@@ -29,10 +29,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// Initializes a new instance of <see cref="InferParameterBindingInfoConvention"/>.
         /// </summary>
         /// <param name="modelMetadataProvider">The model metadata provider.</param>
-        public InferParameterBindingInfoConvention(
-            IModelMetadataProvider modelMetadataProvider)
+        public InferParameterBindingInfoConvention(IModelMetadataProvider modelMetadataProvider)
         {
-            _modelMetadataProvider = modelMetadataProvider ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
+            _modelMetadataProvider =
+                modelMetadataProvider
+                ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
         }
 
         /// <summary>
@@ -76,15 +77,21 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 }
             }
 
-            var fromBodyParameters = action.Parameters.Where(p => p.BindingInfo!.BindingSource == BindingSource.Body).ToList();
+            var fromBodyParameters = action.Parameters
+                .Where(p => p.BindingInfo!.BindingSource == BindingSource.Body)
+                .ToList();
             if (fromBodyParameters.Count > 1)
             {
-                var parameters = string.Join(Environment.NewLine, fromBodyParameters.Select(p => p.DisplayName));
+                var parameters = string.Join(
+                    Environment.NewLine,
+                    fromBodyParameters.Select(p => p.DisplayName)
+                );
                 var message = Resources.FormatApiController_MultipleBodyParametersFound(
                     action.DisplayName,
                     nameof(FromQueryAttribute),
                     nameof(FromRouteAttribute),
-                    nameof(FromBodyAttribute));
+                    nameof(FromBodyAttribute)
+                );
 
                 message += Environment.NewLine + parameters;
                 throw new InvalidOperationException(message);
@@ -129,7 +136,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private bool IsComplexTypeParameter(ParameterModel parameter)
         {
             // No need for information from attributes on the parameter. Just use its type.
-            var metadata = _modelMetadataProvider.GetMetadataForType(parameter.ParameterInfo.ParameterType);
+            var metadata = _modelMetadataProvider.GetMetadataForType(
+                parameter.ParameterInfo.ParameterType
+            );
 
             return metadata.IsComplexType;
         }

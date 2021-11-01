@@ -59,7 +59,10 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Tests
         public void GetFileInfo_ReturnsNotFoundFileInfo_IfFileDoesNotExistUnderSpecifiedNamespace()
         {
             // Arrange
-            var provider = new EmbeddedFileProvider(GetType().Assembly, Namespace + ".SubNamespace");
+            var provider = new EmbeddedFileProvider(
+                GetType().Assembly,
+                Namespace + ".SubNamespace"
+            );
 
             // Act
             var fileInfo = provider.GetFileInfo("File.txt");
@@ -87,10 +90,7 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Tests
         {
             get
             {
-                var theoryData = new TheoryData<string>
-                {
-                    "ResourcesInSubdirectory/File3.txt"
-                };
+                var theoryData = new TheoryData<string> { "ResourcesInSubdirectory/File3.txt" };
 
                 if (TestPlatformHelper.IsWindows)
                 {
@@ -125,10 +125,7 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Tests
         {
             get
             {
-                var theoryData = new TheoryData<string>
-                {
-                    "Resources/File.txt"
-                };
+                var theoryData = new TheoryData<string> { "Resources/File.txt" };
 
                 if (TestPlatformHelper.IsWindows)
                 {
@@ -171,9 +168,11 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Tests
             var files = provider.GetDirectoryContents(path);
 
             // Assert
-            Assert.Collection(files.OrderBy(f => f.Name, StringComparer.Ordinal),
+            Assert.Collection(
+                files.OrderBy(f => f.Name, StringComparer.Ordinal),
                 file => Assert.Equal("File.txt", file.Name),
-                file => Assert.Equal("ResourcesInSubdirectory.File3.txt", file.Name));
+                file => Assert.Equal("ResourcesInSubdirectory.File3.txt", file.Name)
+            );
 
             Assert.False(provider.GetDirectoryContents("file").Exists);
             Assert.False(provider.GetDirectoryContents("file/").Exists);
@@ -199,7 +198,9 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Tests
         [Theory]
         [InlineData("Resources")]
         [InlineData("/Resources")]
-        public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_IfHierarchicalPathIsSpecified(string path)
+        public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_IfHierarchicalPathIsSpecified(
+            string path
+        )
         {
             // Arrange
             var provider = new EmbeddedFileProvider(GetType().Assembly);

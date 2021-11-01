@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddMvcOptions(
             this IMvcCoreBuilder builder,
-            Action<MvcOptions> setupAction)
+            Action<MvcOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -52,7 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcBuilder"/>.</returns>
         public static IMvcCoreBuilder AddJsonOptions(
             this IMvcCoreBuilder builder,
-            Action<JsonOptions> configure)
+            Action<JsonOptions> configure
+        )
         {
             if (builder == null)
             {
@@ -87,13 +89,16 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcBuilder"/>.</returns>
         public static IMvcCoreBuilder AddFormatterMappings(
             this IMvcCoreBuilder builder,
-            Action<FormatterMappings> setupAction)
+            Action<FormatterMappings> setupAction
+        )
         {
             AddFormatterMappingsServices(builder.Services);
 
             if (setupAction != null)
             {
-                builder.Services.Configure<MvcOptions>((options) => setupAction(options.FormatterMappings));
+                builder.Services.Configure<MvcOptions>(
+                    (options) => setupAction(options.FormatterMappings)
+                );
             }
 
             return builder;
@@ -124,7 +129,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddAuthorization(
             this IMvcCoreBuilder builder,
-            Action<AuthorizationOptions> setupAction)
+            Action<AuthorizationOptions> setupAction
+        )
         {
             AddAuthorizationServices(builder.Services);
 
@@ -143,7 +149,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddAuthorization();
 
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IApplicationModelProvider, AuthorizationApplicationModelProvider>());
+                ServiceDescriptor.Transient<
+                    IApplicationModelProvider,
+                    AuthorizationApplicationModelProvider
+                >()
+            );
         }
 
         /// <summary>
@@ -161,7 +171,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.Services.TryAddTransient(controller, controller);
             }
 
-            builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+            builder.Services.Replace(
+                ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>()
+            );
 
             return builder;
         }
@@ -173,7 +185,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
         /// <param name="assembly">The <see cref="Assembly"/> of the <see cref="ApplicationPart"/>.</param>
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-        public static IMvcCoreBuilder AddApplicationPart(this IMvcCoreBuilder builder, Assembly assembly)
+        public static IMvcCoreBuilder AddApplicationPart(
+            this IMvcCoreBuilder builder,
+            Assembly assembly
+        )
         {
             if (builder == null)
             {
@@ -185,14 +200,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(assembly));
             }
 
-            builder.ConfigureApplicationPartManager(manager =>
-            {
-                var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
-                foreach (var applicationPart in partFactory.GetApplicationParts(assembly))
+            builder.ConfigureApplicationPartManager(
+                manager =>
                 {
-                    manager.ApplicationParts.Add(applicationPart);
+                    var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
+                    foreach (var applicationPart in partFactory.GetApplicationParts(assembly))
+                    {
+                        manager.ApplicationParts.Add(applicationPart);
+                    }
                 }
-            });
+            );
 
             return builder;
         }
@@ -206,7 +223,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder ConfigureApplicationPartManager(
             this IMvcCoreBuilder builder,
-            Action<ApplicationPartManager> setupAction)
+            Action<ApplicationPartManager> setupAction
+        )
         {
             if (builder == null)
             {
@@ -231,7 +249,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder ConfigureApiBehaviorOptions(
             this IMvcCoreBuilder builder,
-            Action<ApiBehaviorOptions> setupAction)
+            Action<ApiBehaviorOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -254,17 +273,24 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
         /// <param name="version">The <see cref="CompatibilityVersion"/> value to configure.</param>
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-        [Obsolete("This API is obsolete and will be removed in a future version. Consider removing usages.",
+        [Obsolete(
+            "This API is obsolete and will be removed in a future version. Consider removing usages.",
             DiagnosticId = "ASP5001",
-            UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}")]
-        public static IMvcCoreBuilder SetCompatibilityVersion(this IMvcCoreBuilder builder, CompatibilityVersion version)
+            UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}"
+        )]
+        public static IMvcCoreBuilder SetCompatibilityVersion(
+            this IMvcCoreBuilder builder,
+            CompatibilityVersion version
+        )
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Services.Configure<MvcCompatibilityOptions>(o => o.CompatibilityVersion = version);
+            builder.Services.Configure<MvcCompatibilityOptions>(
+                o => o.CompatibilityVersion = version
+            );
             return builder;
         }
     }

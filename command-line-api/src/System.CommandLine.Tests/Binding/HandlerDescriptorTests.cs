@@ -20,14 +20,16 @@ namespace System.CommandLine.Tests.Binding
             [InlineData(typeof(DirectoryInfo))]
             public void It_provides_the_names_of_the_handler_parameters(Type parameterType)
             {
-                var method = typeof(HandlerDescriptorTests).GetMethod(nameof(Handler)).MakeGenericMethod(parameterType);
+                var method = typeof(HandlerDescriptorTests)
+                    .GetMethod(nameof(Handler))
+                    .MakeGenericMethod(parameterType);
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
                 descriptor.ParameterDescriptors
-                          .Select(p => p.ValueName)
-                          .Should()
-                          .BeEquivalentSequenceTo("value");
+                    .Select(p => p.ValueName)
+                    .Should()
+                    .BeEquivalentSequenceTo("value");
             }
 
             [Theory]
@@ -36,14 +38,16 @@ namespace System.CommandLine.Tests.Binding
             [InlineData(typeof(DirectoryInfo))]
             public void It_provides_the_types_of_the_handler_parameters(Type parameterType)
             {
-                var method = typeof(HandlerDescriptorTests).GetMethod(nameof(Handler)).MakeGenericMethod(parameterType);
+                var method = typeof(HandlerDescriptorTests)
+                    .GetMethod(nameof(Handler))
+                    .MakeGenericMethod(parameterType);
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
                 descriptor.ParameterDescriptors
-                          .Select(p => p.ValueType)
-                          .Should()
-                          .BeEquivalentSequenceTo(parameterType);
+                    .Select(p => p.ValueType)
+                    .Should()
+                    .BeEquivalentSequenceTo(parameterType);
             }
         }
 
@@ -55,14 +59,16 @@ namespace System.CommandLine.Tests.Binding
             [InlineData(typeof(DirectoryInfo))]
             public void It_provides_the_names_of_the_handler_parameters(Type parameterType)
             {
-                var method = typeof(HandlerDescriptorTests).GetMethod(nameof(Handler)).MakeGenericMethod(parameterType);
+                var method = typeof(HandlerDescriptorTests)
+                    .GetMethod(nameof(Handler))
+                    .MakeGenericMethod(parameterType);
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
                 descriptor.ParameterDescriptors
-                          .Select(p => p.ValueName)
-                          .Should()
-                          .BeEquivalentSequenceTo("value");
+                    .Select(p => p.ValueName)
+                    .Should()
+                    .BeEquivalentSequenceTo("value");
             }
 
             [Theory]
@@ -71,19 +77,19 @@ namespace System.CommandLine.Tests.Binding
             [InlineData(typeof(DirectoryInfo))]
             public void It_provides_the_types_of_the_handler_parameters(Type parameterType)
             {
-                var method = typeof(HandlerDescriptorTests).GetMethod(nameof(Handler)).MakeGenericMethod(parameterType);
+                var method = typeof(HandlerDescriptorTests)
+                    .GetMethod(nameof(Handler))
+                    .MakeGenericMethod(parameterType);
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
                 descriptor.ParameterDescriptors
-                          .Select(p => p.ValueType)
-                          .Should()
-                          .BeEquivalentSequenceTo(parameterType);
+                    .Select(p => p.ValueType)
+                    .Should()
+                    .BeEquivalentSequenceTo(parameterType);
             }
         }
 
-        public void Handler<T>(T value)
-        {
-        }
+        public void Handler<T>(T value) { }
     }
 }

@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         private readonly Debugger_InProc _debuggerInProc;
         private readonly VisualStudioInstance _instance;
 
-        public Debugger_OutOfProc(VisualStudioInstance visualStudioInstance) : base(visualStudioInstance)
+        public Debugger_OutOfProc(VisualStudioInstance visualStudioInstance)
+            : base(visualStudioInstance)
         {
             _instance = visualStudioInstance;
             _debuggerInProc = CreateInProcComponent<Debugger_InProc>(visualStudioInstance);
@@ -44,9 +45,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void SetNextStatement() => _debuggerInProc.SetNextStatement();
 
-        public void ExecuteStatement(string statement) => _debuggerInProc.ExecuteStatement(statement);
+        public void ExecuteStatement(string statement) =>
+            _debuggerInProc.ExecuteStatement(statement);
 
-        public void CheckExpression(string expressionText, string expectedType, string expectedValue)
+        public void CheckExpression(
+            string expressionText,
+            string expectedType,
+            string expectedValue
+        )
         {
             var entry = _debuggerInProc.GetExpression(expressionText);
             Assert.Equal(expectedType, entry.Type);

@@ -28,12 +28,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var services = new ServiceCollection();
             var builder = new MvcCoreBuilder(services, new ApplicationPartManager());
-            builder.InitializeTagHelper<TestTagHelper>((h, vc) =>
-            {
-                h.Name = name;
-                h.Number = number;
-                h.ViewDataValue = vc.ViewData["TestData"];
-            });
+            builder.InitializeTagHelper<TestTagHelper>(
+                (h, vc) =>
+                {
+                    h.Name = name;
+                    h.Number = number;
+                    h.ViewDataValue = vc.ViewData["TestData"];
+                }
+            );
             var httpContext = MakeHttpContext(services.BuildServiceProvider());
             var viewContext = MakeViewContext(httpContext);
             var viewDataValue = new object();
@@ -55,7 +57,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var services = new ServiceCollection();
             var builder = new MvcCoreBuilder(services, new ApplicationPartManager());
-            builder.InitializeTagHelper<TestTagHelper>((h, _) => h.ViewContext = MakeViewContext(MakeHttpContext()));
+            builder.InitializeTagHelper<TestTagHelper>(
+                (h, _) => h.ViewContext = MakeViewContext(MakeHttpContext())
+            );
             var httpContext = MakeHttpContext(services.BuildServiceProvider());
             var viewContext = MakeViewContext(httpContext);
             var factory = CreateFactory();
@@ -73,16 +77,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var services = new ServiceCollection();
             var builder = new MvcCoreBuilder(services, new ApplicationPartManager());
-            builder.InitializeTagHelper<TestTagHelper>((h, vc) =>
-            {
-                h.Name = "Test 1";
-                h.Number = 100;
-            });
-            builder.InitializeTagHelper<TestTagHelper>((h, vc) =>
-            {
-                h.Name += ", Test 2";
-                h.Number += 100;
-            });
+            builder.InitializeTagHelper<TestTagHelper>(
+                (h, vc) =>
+                {
+                    h.Name = "Test 1";
+                    h.Number = 100;
+                }
+            );
+            builder.InitializeTagHelper<TestTagHelper>(
+                (h, vc) =>
+                {
+                    h.Name += ", Test 2";
+                    h.Number += 100;
+                }
+            );
             var httpContext = MakeHttpContext(services.BuildServiceProvider());
             var viewContext = MakeViewContext(httpContext);
             var factory = CreateFactory();
@@ -101,16 +109,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var services = new ServiceCollection();
             var builder = new MvcCoreBuilder(services, new ApplicationPartManager());
-            builder.InitializeTagHelper<TestTagHelper>((h, vc) =>
-            {
-                h.Name = "Test 1";
-                h.Number = 100;
-            });
-            builder.InitializeTagHelper<AnotherTestTagHelper>((h, vc) =>
-            {
-                h.Name = "Test 2";
-                h.Number = 102;
-            });
+            builder.InitializeTagHelper<TestTagHelper>(
+                (h, vc) =>
+                {
+                    h.Name = "Test 1";
+                    h.Number = 100;
+                }
+            );
+            builder.InitializeTagHelper<AnotherTestTagHelper>(
+                (h, vc) =>
+                {
+                    h.Name = "Test 2";
+                    h.Number = 102;
+                }
+            );
             var httpContext = MakeHttpContext(services.BuildServiceProvider());
             var viewContext = MakeViewContext(httpContext);
 
@@ -149,13 +161,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private static DefaultTagHelperFactory CreateFactory()
         {
             var activator = new Mock<ITagHelperActivator>();
-            activator.Setup(a => a.Create<TestTagHelper>(It.IsAny<ViewContext>())).Returns(new TestTagHelper());
+            activator
+                .Setup(a => a.Create<TestTagHelper>(It.IsAny<ViewContext>()))
+                .Returns(new TestTagHelper());
             return new DefaultTagHelperFactory(activator.Object);
         }
 
         private static ViewContext MakeViewContext(HttpContext httpContext)
         {
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var metadataProvider = new EmptyModelMetadataProvider();
             var viewData = new ViewDataDictionary(metadataProvider, new ModelStateDictionary());
             var viewContext = new ViewContext(
@@ -164,7 +182,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 viewData,
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             return viewContext;
         }

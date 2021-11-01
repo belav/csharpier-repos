@@ -14,10 +14,11 @@ namespace Microsoft.Extensions.Caching.SqlServer
     internal class MonoDatabaseOperations : DatabaseOperations
     {
         public MonoDatabaseOperations(
-            string connectionString, string schemaName, string tableName, ISystemClock systemClock)
-            : base(connectionString, schemaName, tableName, systemClock)
-        {
-        }
+            string connectionString,
+            string schemaName,
+            string tableName,
+            ISystemClock systemClock
+        ) : base(connectionString, schemaName, tableName, systemClock) { }
 
         protected override byte[] GetCacheItem(string key, bool includeValue)
         {
@@ -43,7 +44,9 @@ namespace Microsoft.Extensions.Caching.SqlServer
 
                 connection.Open();
 
-                var reader = command.ExecuteReader(CommandBehavior.SingleRow | CommandBehavior.SingleResult);
+                var reader = command.ExecuteReader(
+                    CommandBehavior.SingleRow | CommandBehavior.SingleResult
+                );
 
                 if (reader.Read())
                 {
@@ -61,7 +64,11 @@ namespace Microsoft.Extensions.Caching.SqlServer
             return value;
         }
 
-        protected override async Task<byte[]> GetCacheItemAsync(string key, bool includeValue, CancellationToken token = default(CancellationToken))
+        protected override async Task<byte[]> GetCacheItemAsync(
+            string key,
+            bool includeValue,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             token.ThrowIfCancellationRequested();
 
@@ -87,9 +94,12 @@ namespace Microsoft.Extensions.Caching.SqlServer
 
                 await connection.OpenAsync(token).ConfigureAwait(false);
 
-                var reader = await command.ExecuteReaderAsync(
-                    CommandBehavior.SingleRow | CommandBehavior.SingleResult,
-                    token).ConfigureAwait(false);
+                var reader = await command
+                    .ExecuteReaderAsync(
+                        CommandBehavior.SingleRow | CommandBehavior.SingleResult,
+                        token
+                    )
+                    .ConfigureAwait(false);
 
                 if (await reader.ReadAsync(token).ConfigureAwait(false))
                 {
@@ -107,7 +117,11 @@ namespace Microsoft.Extensions.Caching.SqlServer
             return value;
         }
 
-        public override void SetCacheItem(string key, byte[] value, DistributedCacheEntryOptions options)
+        public override void SetCacheItem(
+            string key,
+            byte[] value,
+            DistributedCacheEntryOptions options
+        )
         {
             var utcNow = SystemClock.UtcNow;
 
@@ -145,7 +159,12 @@ namespace Microsoft.Extensions.Caching.SqlServer
             }
         }
 
-        public override async Task SetCacheItemAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
+        public override async Task SetCacheItemAsync(
+            string key,
+            byte[] value,
+            DistributedCacheEntryOptions options,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             token.ThrowIfCancellationRequested();
 

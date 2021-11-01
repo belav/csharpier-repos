@@ -17,6 +17,7 @@ internal static partial class Interop
             [In] IntPtr inBuffer,
             [In] IntPtr outBuffer,
             [In] IntPtr sQOS,
-            [In] IntPtr gQOS);
+            [In] IntPtr gQOS
+        );
     }
 }

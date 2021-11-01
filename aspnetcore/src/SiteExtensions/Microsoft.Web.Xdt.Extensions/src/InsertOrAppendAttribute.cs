@@ -16,9 +16,7 @@ namespace Microsoft.Web.Xdt.Extensions
         /// 
         /// </summary>
         public InsertOrAppendAttribute()
-            : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Error)
-        {
-        }
+            : base(TransformFlags.UseParentAsTargetNode, MissingTargetMessage.Error) { }
 
         private string _attributeName;
 
@@ -110,7 +108,13 @@ namespace Microsoft.Web.Xdt.Extensions
                     var foundAttribute = false;
                     foreach (XmlAttribute att in targetNode.Attributes)
                     {
-                        if (string.Equals(att.Name, AttributeName, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                att.Name,
+                                AttributeName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             foundAttribute = true;
                             if (string.IsNullOrEmpty(att.Value))

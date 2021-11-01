@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// cref="IStreamingProgressTracker.ItemCompletedAsync"/> on <paramref
         /// name="progressTracker"/> when it is disposed.
         /// </summary>
-        public static async Task<IAsyncDisposable> AddSingleItemAsync(this IStreamingProgressTracker progressTracker)
+        public static async Task<IAsyncDisposable> AddSingleItemAsync(
+            this IStreamingProgressTracker progressTracker
+        )
         {
             await progressTracker.AddItemsAsync(1).ConfigureAwait(false);
             return new StreamingProgressDisposer(progressTracker);
@@ -26,11 +28,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             private readonly IStreamingProgressTracker _progressTracker;
 
-            public StreamingProgressDisposer(IStreamingProgressTracker progressTracker)
-                => _progressTracker = progressTracker;
+            public StreamingProgressDisposer(IStreamingProgressTracker progressTracker) =>
+                _progressTracker = progressTracker;
 
-            public async ValueTask DisposeAsync()
-                => await _progressTracker.ItemCompletedAsync().ConfigureAwait(false);
+            public async ValueTask DisposeAsync() =>
+                await _progressTracker.ItemCompletedAsync().ConfigureAwait(false);
         }
     }
 }

@@ -19,15 +19,13 @@ namespace HtmlGenerationWebSite
                 new Product { ProductName = "Book1" },
                 new Product { ProductName = "Book2" }
             },
-            ["Electronics"] = new[]
-            {
-                new Product { ProductName = "Laptops" }
-            }
+            ["Electronics"] = new[] { new Product { ProductName = "Laptops" } }
         };
 
         public ProductsService(
             IMemoryCache memoryCache,
-            ISignalTokenProviderService<Product> tokenProviderService)
+            ISignalTokenProviderService<Product> tokenProviderService
+        )
         {
             _memoryCache = memoryCache;
             _tokenProviderService = tokenProviderService;
@@ -43,7 +41,8 @@ namespace HtmlGenerationWebSite
                 products = _memoryCache.Set<IEnumerable<Product>>(
                     key,
                     _products[category],
-                    new MemoryCacheEntryOptions().AddExpirationToken(changeToken));
+                    new MemoryCacheEntryOptions().AddExpirationToken(changeToken)
+                );
             }
 
             return products.Select(p => p.ProductName);

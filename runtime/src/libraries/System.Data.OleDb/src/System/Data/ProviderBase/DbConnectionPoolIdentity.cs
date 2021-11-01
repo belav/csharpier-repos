@@ -21,7 +21,11 @@ namespace System.Data.ProviderBase
         private const int Win32_CheckTokenMembership = 1;
         private const int Win32_CreateWellKnownSid = 5;
 
-        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(string.Empty, false, true);
+        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(
+            string.Empty,
+            false,
+            true
+        );
 
         private readonly string _sidString;
         private readonly bool _isRestricted;
@@ -51,7 +55,10 @@ namespace System.Data.ProviderBase
 
             // NOTE - We copied this code from System.Security.Principal.Win32.CreateWellKnownSid...
 
-            if (0 == UnsafeNativeMethods.CreateWellKnownSid((int)sidType, null, resultSid, ref length))
+            if (
+                0
+                == UnsafeNativeMethods.CreateWellKnownSid((int)sidType, null, resultSid, ref length)
+            )
             {
                 IntegratedSecurityError(Win32_CreateWellKnownSid);
             }
@@ -64,7 +71,11 @@ namespace System.Data.ProviderBase
             if (!result && (null != value))
             {
                 DbConnectionPoolIdentity that = ((DbConnectionPoolIdentity)value);
-                result = ((_sidString == that._sidString) && (_isRestricted == that._isRestricted) && (_isNetwork == that._isNetwork));
+                result = (
+                    (_sidString == that._sidString)
+                    && (_isRestricted == that._isRestricted)
+                    && (_isNetwork == that._isNetwork)
+                );
             }
             return result;
         }
@@ -89,6 +100,5 @@ namespace System.Data.ProviderBase
                 Marshal.ThrowExceptionForHR(lastError); // will only throw if (hresult < 0)
             }
         }
-
     }
 }

@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -68,20 +69,33 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<Double> upper = Vector128.Create(upperValue);
 
             object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.Create), new Type[] { typeof(Vector128<Double>), typeof(Vector128<Double>) })
-                                .Invoke(null, new object[] { lower, upper });
+                .GetMethod(
+                    nameof(Vector256.Create),
+                    new Type[] { typeof(Vector128<Double>), typeof(Vector128<Double>) }
+                )
+                .Invoke(null, new object[] { lower, upper });
 
             ValidateResult((Vector256<Double>)(result), lowerValue, upperValue);
         }
 
-        private void ValidateResult(Vector256<Double> result, Double expectedLowerValue, Double expectedUpperValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Double> result,
+            Double expectedLowerValue,
+            Double expectedUpperValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
         }
 
-        private void ValidateResult(Double[] resultElements, Double expectedLowerValue, Double expectedUpperValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Double[] resultElements,
+            Double expectedLowerValue,
+            Double expectedUpperValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -105,10 +119,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.Create(Double): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.Create(Double): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

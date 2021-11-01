@@ -22,11 +22,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             using var factory = new CustomizedFactory<BasicWebSite.StartupWithoutEndpointRouting>();
             using var customized = factory
                 .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("Customization"))
-                .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization"));
+                .WithWebHostBuilder(
+                    builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization")
+                );
             var client = customized.CreateClient();
 
             // Assert
-            Assert.Equal(new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" }, factory.ConfigureWebHostCalled.ToArray());
+            Assert.Equal(
+                new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" },
+                factory.ConfigureWebHostCalled.ToArray()
+            );
             Assert.True(factory.CreateServerCalled);
             Assert.True(factory.CreateWebHostBuilderCalled);
             // GetTestAssemblies is not called when reading content roots from MvcAppManifest
@@ -42,11 +47,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
             using var customized = factory
                 .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("Customization"))
-                .WithWebHostBuilder(builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization"));
+                .WithWebHostBuilder(
+                    builder => factory.ConfigureWebHostCalled.Add("FurtherCustomization")
+                );
             var client = customized.CreateClient();
 
             // Assert
-            Assert.Equal(new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" }, factory.ConfigureWebHostCalled.ToArray());
+            Assert.Equal(
+                new[] { "ConfigureWebHost", "Customization", "FurtherCustomization" },
+                factory.ConfigureWebHostCalled.ToArray()
+            );
             Assert.False(factory.GetTestAssembliesCalled);
             Assert.True(factory.CreateHostBuilderCalled);
             Assert.True(factory.CreateHostCalled);
@@ -72,15 +82,23 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
             var callbackCalled = false;
 
-            var lifetimeService = (IHostApplicationLifetime) factory.Services.GetService(typeof(IHostApplicationLifetime));
-            lifetimeService.ApplicationStopped.Register(() => { callbackCalled = true; });
+            var lifetimeService = (IHostApplicationLifetime)factory.Services.GetService(
+                typeof(IHostApplicationLifetime)
+            );
+            lifetimeService.ApplicationStopped.Register(
+                () =>
+                {
+                    callbackCalled = true;
+                }
+            );
             factory.Dispose();
 
             // Assert
             Assert.True(callbackCalled);
         }
 
-        private class CustomizedFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
+        private class CustomizedFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+            where TEntryPoint : class
         {
             public bool GetTestAssembliesCalled { get; private set; }
             public bool CreateWebHostBuilderCalled { get; private set; }

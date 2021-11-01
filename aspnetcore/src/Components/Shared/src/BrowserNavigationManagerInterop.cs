@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Components.Web
     {
         private static readonly string Prefix = "Blazor._internal.navigationManager.";
 
-        public static readonly string EnableNavigationInterception = Prefix + "enableNavigationInterception";
+        public static readonly string EnableNavigationInterception =
+            Prefix + "enableNavigationInterception";
 
         public static readonly string GetLocationHref = Prefix + "getUnmarshalledLocationHref";
 

@@ -21,7 +21,9 @@ namespace Microsoft.AspNetCore.Components
         public void AcceptsAndReturnsAuthStateFromHost()
         {
             // Arrange
-            using var provider = new TestRevalidatingServerAuthenticationStateProvider(TimeSpan.MaxValue);
+            using var provider = new TestRevalidatingServerAuthenticationStateProvider(
+                TimeSpan.MaxValue
+            );
 
             // Act/Assert: Host can supply a value
             var hostAuthStateTask = (new TaskCompletionSource<AuthenticationState>()).Task;
@@ -39,11 +41,15 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
             provider.NextValidationResult = Task.FromResult(true);
             var didNotifyAuthenticationStateChanged = false;
-            provider.AuthenticationStateChanged += _ => { didNotifyAuthenticationStateChanged = true; };
+            provider.AuthenticationStateChanged += _ =>
+            {
+                didNotifyAuthenticationStateChanged = true;
+            };
 
             // Act
             for (var i = 0; i < 10; i++)
@@ -54,7 +60,10 @@ namespace Microsoft.AspNetCore.Components
             // Assert
             Assert.Equal(10, provider.RevalidationCallLog.Count);
             Assert.False(didNotifyAuthenticationStateChanged);
-            Assert.Equal("test user", (await provider.GetAuthenticationStateAsync()).User.Identity.Name);
+            Assert.Equal(
+                "test user",
+                (await provider.GetAuthenticationStateAsync()).User.Identity.Name
+            );
         }
 
         [Fact]
@@ -62,12 +71,14 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
             provider.NextValidationResult = Task.FromResult(false);
 
             var newAuthStateNotificationTcs = new TaskCompletionSource<Task<AuthenticationState>>();
-            provider.AuthenticationStateChanged += newStateTask => newAuthStateNotificationTcs.SetResult(newStateTask);
+            provider.AuthenticationStateChanged += newStateTask =>
+                newAuthStateNotificationTcs.SetResult(newStateTask);
 
             // Act
             var newAuthStateTask = await newAuthStateNotificationTcs.Task;
@@ -86,12 +97,16 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
-            provider.NextValidationResult = Task.FromException<bool>(new InvalidTimeZoneException());
+            provider.NextValidationResult = Task.FromException<bool>(
+                new InvalidTimeZoneException()
+            );
 
             var newAuthStateNotificationTcs = new TaskCompletionSource<Task<AuthenticationState>>();
-            provider.AuthenticationStateChanged += newStateTask => newAuthStateNotificationTcs.SetResult(newStateTask);
+            provider.AuthenticationStateChanged += newStateTask =>
+                newAuthStateNotificationTcs.SetResult(newStateTask);
 
             // Act
             var newAuthStateTask = await newAuthStateNotificationTcs.Task;
@@ -110,12 +125,15 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
             provider.NextValidationResult = Task.FromResult(true);
             await provider.NextValidateAuthenticationStateAsyncCall;
-            Assert.Collection(provider.RevalidationCallLog,
-                call => Assert.Equal("test user", call.AuthenticationState.User.Identity.Name));
+            Assert.Collection(
+                provider.RevalidationCallLog,
+                call => Assert.Equal("test user", call.AuthenticationState.User.Identity.Name)
+            );
 
             // Act/Assert 1: Can become signed out
             // Doesn't revalidate unauthenticated states
@@ -126,8 +144,10 @@ namespace Microsoft.AspNetCore.Components
             // Act/Assert 2: Can become a different user; resumes revalidation
             provider.SetAuthenticationState(CreateAuthenticationStateTask("different user"));
             await provider.NextValidateAuthenticationStateAsyncCall;
-            Assert.Collection(provider.RevalidationCallLog.Skip(1),
-                call => Assert.Equal("different user", call.AuthenticationState.User.Identity.Name));
+            Assert.Collection(
+                provider.RevalidationCallLog.Skip(1),
+                call => Assert.Equal("different user", call.AuthenticationState.User.Identity.Name)
+            );
         }
 
         [Fact]
@@ -135,7 +155,8 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
             provider.NextValidationResult = Task.FromResult(true);
 
@@ -154,10 +175,14 @@ namespace Microsoft.AspNetCore.Components
             var validationTcs = new TaskCompletionSource<bool>();
             var authenticationStateChangedCount = 0;
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.NextValidationResult = validationTcs.Task;
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
-            provider.AuthenticationStateChanged += _ => { authenticationStateChangedCount++; };
+            provider.AuthenticationStateChanged += _ =>
+            {
+                authenticationStateChangedCount++;
+            };
 
             // Act/Assert 1: token isn't cancelled initially
             await provider.NextValidateAuthenticationStateAsyncCall;
@@ -166,7 +191,9 @@ namespace Microsoft.AspNetCore.Components
             Assert.Equal(0, authenticationStateChangedCount);
 
             // Have the task throw a TCE to show this doesn't get treated as a failure
-            firstRevalidationCall.CancellationToken.Register(() => validationTcs.TrySetCanceled(firstRevalidationCall.CancellationToken));
+            firstRevalidationCall.CancellationToken.Register(
+                () => validationTcs.TrySetCanceled(firstRevalidationCall.CancellationToken)
+            );
 
             // Act/Assert 2: token is cancelled when the loop is superseded
             provider.NextValidationResult = Task.FromResult(true);
@@ -176,12 +203,17 @@ namespace Microsoft.AspNetCore.Components
             // Since we asked for that operation to be cancelled, we don't treat it as a failure and
             // don't force a logout
             Assert.Equal(1, authenticationStateChangedCount);
-            Assert.Equal("different user", (await provider.GetAuthenticationStateAsync()).User.Identity.Name);
+            Assert.Equal(
+                "different user",
+                (await provider.GetAuthenticationStateAsync()).User.Identity.Name
+            );
 
             // Subsequent revalidation can complete successfully
             await provider.NextValidateAuthenticationStateAsyncCall;
-            Assert.Collection(provider.RevalidationCallLog.Skip(1),
-                 call => Assert.Equal("different user", call.AuthenticationState.User.Identity.Name));
+            Assert.Collection(
+                provider.RevalidationCallLog.Skip(1),
+                call => Assert.Equal("different user", call.AuthenticationState.User.Identity.Name)
+            );
         }
 
         [Fact]
@@ -192,7 +224,8 @@ namespace Microsoft.AspNetCore.Components
             var incrementExecuted = new TaskCompletionSource<bool>();
             var authenticationStateChangedCount = 0;
             using var provider = new TestRevalidatingServerAuthenticationStateProvider(
-                TimeSpan.FromMilliseconds(50));
+                TimeSpan.FromMilliseconds(50)
+            );
             provider.NextValidationResult = validationTcs.Task;
             provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
             provider.AuthenticationStateChanged += _ =>
@@ -228,11 +261,12 @@ namespace Microsoft.AspNetCore.Components
             return Task.FromResult(authenticationState);
         }
 
-        class TestRevalidatingServerAuthenticationStateProvider : RevalidatingServerAuthenticationStateProvider
+        class TestRevalidatingServerAuthenticationStateProvider
+            : RevalidatingServerAuthenticationStateProvider
         {
             private readonly TimeSpan _revalidationInterval;
-            private TaskCompletionSource<object> _nextValidateAuthenticationStateAsyncCallSource
-                = new TaskCompletionSource<object>();
+            private TaskCompletionSource<object> _nextValidateAuthenticationStateAsyncCallSource =
+                new TaskCompletionSource<object>();
 
             public TestRevalidatingServerAuthenticationStateProvider(TimeSpan revalidationInterval)
                 : base(NullLoggerFactory.Instance)
@@ -242,20 +276,24 @@ namespace Microsoft.AspNetCore.Components
 
             public Task<bool> NextValidationResult { get; set; }
 
-            public Task NextValidateAuthenticationStateAsyncCall
-                => _nextValidateAuthenticationStateAsyncCallSource.Task;
+            public Task NextValidateAuthenticationStateAsyncCall =>
+                _nextValidateAuthenticationStateAsyncCallSource.Task;
 
-            public List<(AuthenticationState AuthenticationState, CancellationToken CancellationToken)> RevalidationCallLog { get; }
-                = new List<(AuthenticationState, CancellationToken)>();
+            public List<(AuthenticationState AuthenticationState, CancellationToken CancellationToken)> RevalidationCallLog { get; } =
+                new List<(AuthenticationState, CancellationToken)>();
 
             protected override TimeSpan RevalidationInterval => _revalidationInterval;
 
-            protected override Task<bool> ValidateAuthenticationStateAsync(AuthenticationState authenticationState, CancellationToken cancellationToken)
+            protected override Task<bool> ValidateAuthenticationStateAsync(
+                AuthenticationState authenticationState,
+                CancellationToken cancellationToken
+            )
             {
                 RevalidationCallLog.Add((authenticationState, cancellationToken));
                 var result = NextValidationResult;
                 var prevCts = _nextValidateAuthenticationStateAsyncCallSource;
-                _nextValidateAuthenticationStateAsyncCallSource = new TaskCompletionSource<object>();
+                _nextValidateAuthenticationStateAsyncCallSource =
+                    new TaskCompletionSource<object>();
                 prevCts.SetResult(true);
                 return result;
             }

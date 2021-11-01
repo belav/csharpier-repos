@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Authorization.Test
         {
             return new NameAuthorizationRequirement(requiredName);
         }
-        
+
         [Fact]
         public void ToString_ShouldReturnFormatValue()
         {
@@ -26,7 +26,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var formattedValue = requirement.ToString();
 
             // Assert
-            Assert.Equal("NameAuthorizationRequirement:Requires a user identity with Name equal to Custom", formattedValue);
+            Assert.Equal(
+                "NameAuthorizationRequirement:Requires a user identity with Name equal to Custom",
+                formattedValue
+            );
         }
     }
 }

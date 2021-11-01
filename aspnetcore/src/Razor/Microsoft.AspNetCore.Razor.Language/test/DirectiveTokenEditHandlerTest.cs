@@ -15,21 +15,28 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
         [InlineData(0, 4, "")] // "Namespace"
         [InlineData(4, 0, "Other")] // "SomeOtherNamespace"
         [InlineData(0, 4, "Other")] // "OtherNamespace"
-        public void CanAcceptChange_ProvisionallyAcceptsNonWhitespaceChanges(int index, int length, string newText)
+        public void CanAcceptChange_ProvisionallyAcceptsNonWhitespaceChanges(
+            int index,
+            int length,
+            string newText
+        )
         {
             // Arrange
             var directiveTokenHandler = new TestDirectiveTokenEditHandler();
             directiveTokenHandler.AcceptedCharacters = AcceptedCharactersInternal.NonWhitespace;
 
             var target = GetSyntaxNode(directiveTokenHandler, "SomeNamespace");
-            
+
             var sourceChange = new SourceChange(index, length, newText);
 
             // Act
             var result = directiveTokenHandler.CanAcceptChange(target, sourceChange);
 
             // Assert
-            Assert.Equal(PartialParseResultInternal.Accepted | PartialParseResultInternal.Provisional, result);
+            Assert.Equal(
+                PartialParseResultInternal.Accepted | PartialParseResultInternal.Provisional,
+                result
+            );
         }
 
         [Theory]
@@ -53,7 +60,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
             Assert.Equal(PartialParseResultInternal.Rejected, result);
         }
 
-        private static CSharpStatementLiteralSyntax GetSyntaxNode(DirectiveTokenEditHandler editHandler, string content)
+        private static CSharpStatementLiteralSyntax GetSyntaxNode(
+            DirectiveTokenEditHandler editHandler,
+            string content
+        )
         {
             var builder = SyntaxListBuilder<SyntaxToken>.Create();
             var tokens = CSharpLanguageCharacteristics.Instance.TokenizeString(content).ToArray();
@@ -70,12 +80,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Test
 
         private class TestDirectiveTokenEditHandler : DirectiveTokenEditHandler
         {
-            public TestDirectiveTokenEditHandler() : base(content => TestTokenizer(content))
-            {
-            }
+            public TestDirectiveTokenEditHandler() : base(content => TestTokenizer(content)) { }
 
-            public new PartialParseResultInternal CanAcceptChange(SyntaxNode target, SourceChange change)
-                => base.CanAcceptChange(target, change);
+            public new PartialParseResultInternal CanAcceptChange(
+                SyntaxNode target,
+                SourceChange change
+            ) => base.CanAcceptChange(target, change);
 
             internal static IEnumerable<Syntax.InternalSyntax.SyntaxToken> TestTokenizer(string str)
             {

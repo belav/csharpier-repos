@@ -16,11 +16,7 @@ namespace Microsoft.AspNetCore.Testing
         {
             get
             {
-                var methods = new[]
-                {
-                    "GET",
-                    "CUSTOM",
-                };
+                var methods = new[] { "GET", "CUSTOM", };
                 var paths = new[]
                 {
                     Tuple.Create("/", "/"),
@@ -73,69 +69,120 @@ namespace Microsoft.AspNetCore.Testing
                     "?%00",
                     "?arg=%00"
                 };
-                var httpVersions = new[]
-                {
-                    "HTTP/1.0",
-                    "HTTP/1.1"
-                };
+                var httpVersions = new[] { "HTTP/1.0", "HTTP/1.1" };
 
                 return from method in methods
-                       from path in paths
-                       from queryString in queryStrings
-                       from httpVersion in httpVersions
-                       select new[]
-                       {
-                           $"{method} {path.Item1}{queryString} {httpVersion}\r\n",
-                           method,
-                           $"{path.Item1}{queryString}",
-                           $"{path.Item1}",
-                           $"{path.Item2}",
-                           queryString,
-                           httpVersion
-                       };
+                from path in paths
+                from queryString in queryStrings
+                from httpVersion in httpVersions
+                select new[]
+                {
+                    $"{method} {path.Item1}{queryString} {httpVersion}\r\n",
+                    method,
+                    $"{path.Item1}{queryString}",
+                    $"{path.Item1}",
+                    $"{path.Item2}",
+                    queryString,
+                    httpVersion
+                };
             }
         }
 
-        public static IEnumerable<string[]> RequestLineDotSegmentData => new[]
-        {
-            new[] { "GET /a/../b HTTP/1.1\r\n", "/a/../b", "/b", "" },
-            new[] { "GET /%61/../%62 HTTP/1.1\r\n", "/%61/../%62", "/b", "" },
-            new[] { "GET /a/%2E%2E/b HTTP/1.1\r\n", "/a/%2E%2E/b", "/b", "" },
-            new[] { "GET /%61/%2E%2E/%62 HTTP/1.1\r\n", "/%61/%2E%2E/%62", "/b", "" },
-            new[] { "GET /a?p=/a/../b HTTP/1.1\r\n", "/a?p=/a/../b", "/a", "?p=/a/../b" },
-            new[] { "GET /a?p=/a/%2E%2E/b HTTP/1.1\r\n", "/a?p=/a/%2E%2E/b", "/a", "?p=/a/%2E%2E/b" },
-            new[] { "GET http://example.com/a/../b HTTP/1.1\r\n", "http://example.com/a/../b", "/b", "" },
-            new[] { "GET http://example.com/%61/../%62 HTTP/1.1\r\n", "http://example.com/%61/../%62", "/b", "" },
-            new[] { "GET http://example.com/a/%2E%2E/b HTTP/1.1\r\n", "http://example.com/a/%2E%2E/b", "/b", "" },
-            new[] { "GET http://example.com/%61/%2E%2E/%62 HTTP/1.1\r\n", "http://example.com/%61/%2E%2E/%62", "/b", "" },
-            new[] { "GET http://example.com/a?p=/a/../b HTTP/1.1\r\n", "http://example.com/a?p=/a/../b", "/a", "?p=/a/../b" },
-            new[] { "GET http://example.com/a?p=/a/%2E%2E/b HTTP/1.1\r\n", "http://example.com/a?p=/a/%2E%2E/b", "/a", "?p=/a/%2E%2E/b" },
-            new[] { "GET http://example.com?p=/a/../b HTTP/1.1\r\n", "http://example.com?p=/a/../b", "/", "?p=/a/../b" },
-            new[] { "GET http://example.com?p=/a/%2E%2E/b HTTP/1.1\r\n", "http://example.com?p=/a/%2E%2E/b", "/", "?p=/a/%2E%2E/b" },
+        public static IEnumerable<string[]> RequestLineDotSegmentData =>
+            new[]
+            {
+                new[] { "GET /a/../b HTTP/1.1\r\n", "/a/../b", "/b", "" },
+                new[] { "GET /%61/../%62 HTTP/1.1\r\n", "/%61/../%62", "/b", "" },
+                new[] { "GET /a/%2E%2E/b HTTP/1.1\r\n", "/a/%2E%2E/b", "/b", "" },
+                new[] { "GET /%61/%2E%2E/%62 HTTP/1.1\r\n", "/%61/%2E%2E/%62", "/b", "" },
+                new[] { "GET /a?p=/a/../b HTTP/1.1\r\n", "/a?p=/a/../b", "/a", "?p=/a/../b" },
+                new[]
+                {
+                    "GET /a?p=/a/%2E%2E/b HTTP/1.1\r\n",
+                    "/a?p=/a/%2E%2E/b",
+                    "/a",
+                    "?p=/a/%2E%2E/b"
+                },
+                new[]
+                {
+                    "GET http://example.com/a/../b HTTP/1.1\r\n",
+                    "http://example.com/a/../b",
+                    "/b",
+                    ""
+                },
+                new[]
+                {
+                    "GET http://example.com/%61/../%62 HTTP/1.1\r\n",
+                    "http://example.com/%61/../%62",
+                    "/b",
+                    ""
+                },
+                new[]
+                {
+                    "GET http://example.com/a/%2E%2E/b HTTP/1.1\r\n",
+                    "http://example.com/a/%2E%2E/b",
+                    "/b",
+                    ""
+                },
+                new[]
+                {
+                    "GET http://example.com/%61/%2E%2E/%62 HTTP/1.1\r\n",
+                    "http://example.com/%61/%2E%2E/%62",
+                    "/b",
+                    ""
+                },
+                new[]
+                {
+                    "GET http://example.com/a?p=/a/../b HTTP/1.1\r\n",
+                    "http://example.com/a?p=/a/../b",
+                    "/a",
+                    "?p=/a/../b"
+                },
+                new[]
+                {
+                    "GET http://example.com/a?p=/a/%2E%2E/b HTTP/1.1\r\n",
+                    "http://example.com/a?p=/a/%2E%2E/b",
+                    "/a",
+                    "?p=/a/%2E%2E/b"
+                },
+                new[]
+                {
+                    "GET http://example.com?p=/a/../b HTTP/1.1\r\n",
+                    "http://example.com?p=/a/../b",
+                    "/",
+                    "?p=/a/../b"
+                },
+                new[]
+                {
+                    "GET http://example.com?p=/a/%2E%2E/b HTTP/1.1\r\n",
+                    "http://example.com?p=/a/%2E%2E/b",
+                    "/",
+                    "?p=/a/%2E%2E/b"
+                },
+                // Asterisk-form and authority-form should be unaffected and cause no issues
+                new[] { "OPTIONS * HTTP/1.1\r\n", "*", "", "" },
+                new[] { "CONNECT www.example.com HTTP/1.1\r\n", "www.example.com", "", "" },
+            };
 
-            // Asterisk-form and authority-form should be unaffected and cause no issues
-            new[] { "OPTIONS * HTTP/1.1\r\n", "*", "", "" },
-            new[] { "CONNECT www.example.com HTTP/1.1\r\n", "www.example.com", "", "" },
-        };
-
-        public static IEnumerable<string> RequestLineIncompleteData => new[]
-        {
-            "G",
-            "GE",
-            "GET",
-            "GET ",
-            "GET /",
-            "GET / ",
-            "GET / H",
-            "GET / HT",
-            "GET / HTT",
-            "GET / HTTP",
-            "GET / HTTP/",
-            "GET / HTTP/1",
-            "GET / HTTP/1.",
-            "GET / HTTP/1.1",
-            "GET / HTTP/1.1\r",
-        };
+        public static IEnumerable<string> RequestLineIncompleteData =>
+            new[]
+            {
+                "G",
+                "GE",
+                "GET",
+                "GET ",
+                "GET /",
+                "GET / ",
+                "GET / H",
+                "GET / HT",
+                "GET / HTT",
+                "GET / HTTP",
+                "GET / HTTP/",
+                "GET / HTTP/1",
+                "GET / HTTP/1.",
+                "GET / HTTP/1.1",
+                "GET / HTTP/1.1\r",
+            };
 
         public static IEnumerable<string> RequestLineInvalidData
         {
@@ -224,25 +271,27 @@ namespace Microsoft.AspNetCore.Testing
             }
         }
 
-        public static IEnumerable<string> MethodWithNullCharData => new[]
-        {
-            // Bad HTTP Methods (invalid according to RFC)
-            "\0",
-            "\0GET",
-            "G\0T",
-            "GET\0",
-        };
+        public static IEnumerable<string> MethodWithNullCharData =>
+            new[]
+            {
+                // Bad HTTP Methods (invalid according to RFC)
+                "\0",
+                "\0GET",
+                "G\0T",
+                "GET\0",
+            };
 
-        public static IEnumerable<string> TargetWithEncodedNullCharData => new[]
-        {
-            "/%00",
-            "/%00%00",
-            "/%E8%00%84",
-            "/%E8%85%00",
-            "/%F3%00%82%86",
-            "/%F3%85%00%82",
-            "/%F3%85%82%00",
-        };
+        public static IEnumerable<string> TargetWithEncodedNullCharData =>
+            new[]
+            {
+                "/%00",
+                "/%00%00",
+                "/%E8%00%84",
+                "/%E8%85%00",
+                "/%F3%00%82%86",
+                "/%F3%85%00%82",
+                "/%F3%85%82%00",
+            };
 
         public static TheoryData<string, string> TargetInvalidData
         {
@@ -315,146 +364,447 @@ namespace Microsoft.AspNetCore.Testing
         {
             get
             {
-                return new[]
-                {
-                    "\0",
-                    "/\0",
-                    "/\0\0",
-                    "/%C8\0",
-                }.Concat(QueryStringWithNullCharData);
+                return new[] { "\0", "/\0", "/\0\0", "/%C8\0", }.Concat(
+                    QueryStringWithNullCharData
+                );
             }
         }
 
-        public static IEnumerable<string> QueryStringWithNullCharData => new[]
-        {
-            "/?\0=a",
-            "/?a=\0",
-        };
+        public static IEnumerable<string> QueryStringWithNullCharData =>
+            new[] { "/?\0=a", "/?a=\0", };
 
-        public static TheoryData<string> UnrecognizedHttpVersionData => new TheoryData<string>
-        {
-            " ",
-            "/",
-            "H",
-            "HT",
-            "HTT",
-            "HTTP",
-            "HTTP/",
-            "HTTP/1",
-            "HTTP/1.",
-            "http/1.0",
-            "http/1.1",
-            "HTTP/1.1 ",
-            "HTTP/1.0a",
-            "HTTP/1.0ab",
-            "HTTP/1.1a",
-            "HTTP/1.1ab",
-            "HTTP/1.2",
-            "HTTP/3.0",
-            "hello",
-            "8charact",
-        };
+        public static TheoryData<string> UnrecognizedHttpVersionData =>
+            new TheoryData<string>
+            {
+                " ",
+                "/",
+                "H",
+                "HT",
+                "HTT",
+                "HTTP",
+                "HTTP/",
+                "HTTP/1",
+                "HTTP/1.",
+                "http/1.0",
+                "http/1.1",
+                "HTTP/1.1 ",
+                "HTTP/1.0a",
+                "HTTP/1.0ab",
+                "HTTP/1.1a",
+                "HTTP/1.1ab",
+                "HTTP/1.2",
+                "HTTP/3.0",
+                "hello",
+                "8charact",
+            };
 
-        public static IEnumerable<object[]> RequestHeaderInvalidData => new[]
-        {
-            // Missing CR
-            new[] { "Header: value\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header: value\x0A") },
-            new[] { "Header-1: value1\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: value1\x0A") },
-            new[] { "Header-1: value1\r\nHeader-2: value2\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2: value2\x0A") },
-
-            // Line folding
-            new[] { "Header: line1\r\n line2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" line2\x0D\x0A") },
-            new[] { "Header: line1\r\n\tline2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09line2\x0D\x0A") },
-            new[] { "Header: line1\r\n  line2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"  line2\x0D\x0A") },
-            new[] { "Header: line1\r\n \tline2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" \x09line2\x0D\x0A") },
-            new[] { "Header: line1\r\n\t line2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09 line2\x0D\x0A") },
-            new[] { "Header: line1\r\n\t\tline2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09\x09line2\x0D\x0A") },
-            new[] { "Header: line1\r\n \t\t line2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" \x09\x09 line2\x0D\x0A") },
-            new[] { "Header: line1\r\n \t \t line2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" \x09 \x09 line2\x0D\x0A") },
-            new[] { "Header-1: multi\r\n line\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" line\x0D\x0A") },
-            new[] { "Header-1: value1\r\nHeader-2: multi\r\n line\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" line\x0D\x0A") },
-            new[] { "Header-1: value1\r\n Header-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" Header-2: value2\x0D\x0A") },
-            new[] { "Header-1: value1\r\n\tHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09Header-2: value2\x0D\x0A") },
-
-            // CR in value
-            new[] { "Header-1: value1\r\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: value1\x0D\x0D") },
-            new[] { "Header-1: val\rue1\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: val\x0Du") },
-            new[] { "Header-1: value1\rHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: value1\x0DH") },
-            new[] { "Header-1: value1\r\nHeader-2: value2\r\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2: value2\x0D\x0D") },
-            new[] { "Header-1: value1\r\nHeader-2: v\ralue2\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2: v\x0Da") },
-            new[] { "Header-1: Value__\rVector16________Vector32\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value__\x0DV") },
-            new[] { "Header-1: Value___Vector16\r________Vector32\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16\x0D_") },
-            new[] { "Header-1: Value___Vector16_______\rVector32\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16_______\x0DV") },
-            new[] { "Header-1: Value___Vector16________Vector32\r\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16________Vector32\x0D\x0D") },
-            new[] { "Header-1: Value___Vector16________Vector32_\r\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16________Vector32_\x0D\x0D") },
-            new[] { "Header-1: Value___Vector16________Vector32Value___Vector16_______\rVector32\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16________Vector32Value___Vector16_______\x0DV") },
-            new[] { "Header-1: Value___Vector16________Vector32Value___Vector16________Vector32\r\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16________Vector32Value___Vector16________Vector32\x0D\x0D") },
-            new[] { "Header-1: Value___Vector16________Vector32Value___Vector16________Vector32_\r\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: Value___Vector16________Vector32Value___Vector16________Vector32_\x0D\x0D") },
-
-            // Missing colon
-            new[] { "Header-1 value1\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1 value1\x0D\x0A") },
-            new[] { "Header-1 value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1 value1\x0D\x0A") },
-            new[] { "Header-1: value1\r\nHeader-2 value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2 value2\x0D\x0A") },
-            new[] { "\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x0A") },
-
-            // Starting with whitespace
-            new[] { " Header: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" Header: value\x0D\x0A") },
-            new[] { "\tHeader: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09Header: value\x0D\x0A") },
-            new[] { " Header-1: value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" Header-1: value1\x0D\x0A") },
-            new[] { "\tHeader-1: value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09Header-1: value1\x0D\x0A") },
-
-            // Whitespace in header name
-            new[] { "Header : value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header : value\x0D\x0A") },
-            new[] { "Header\t: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header\x09: value\x0D\x0A") },
-            new[] { "Header\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header\x0D:") },
-            new[] { "Header_\rVector16: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header_\x0DV") },
-            new[] { "Header__Vector16\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16\x0D:") },
-            new[] { "Header__Vector16_\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16_\x0D:") },
-            new[] { "Header_\rVector16________Vector32: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header_\x0DV") },
-            new[] { "Header__Vector16________Vector32\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16________Vector32\x0D:") },
-            new[] { "Header__Vector16________Vector32_\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16________Vector32_\x0D:") },
-            new[] { "Header__Vector16________Vector32Header_\rVector16________Vector32: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16________Vector32Header_\x0DV") },
-            new[] { "Header__Vector16________Vector32Header__Vector16________Vector32\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16________Vector32Header__Vector16________Vector32\x0D:") },
-            new[] { "Header__Vector16________Vector32Header__Vector16________Vector32_\r: value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header__Vector16________Vector32Header__Vector16________Vector32_\x0D:") },
-            new[] { "Header 1: value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header 1: value1\x0D\x0A") },
-            new[] { "Header 1 : value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header 1 : value1\x0D\x0A") },
-            new[] { "Header 1\t: value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header 1\x09: value1\x0D\x0A") },
-            new[] { "Header 1\r: value1\r\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header 1\x0D:") },
-            new[] { "Header-1: value1\r\nHeader 2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header 2: value2\x0D\x0A") },
-            new[] { "Header-1: value1\r\nHeader-2 : value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2 : value2\x0D\x0A") },
-            new[] { "Header-1: value1\r\nHeader-2\t: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2\x09: value2\x0D\x0A") },
-
-            // Headers not ending in CRLF line
-            new[] { "Header-1: value1\r\nHeader-2: value2\r\n\r\r", CoreStrings.BadRequest_InvalidRequestHeadersNoCRLF },
-            new[] { "Header-1: value1\r\nHeader-2: value2\r\n\r ", CoreStrings.BadRequest_InvalidRequestHeadersNoCRLF  },
-            new[] { "Header-1: value1\r\nHeader-2: value2\r\n\r \n", CoreStrings.BadRequest_InvalidRequestHeadersNoCRLF },
-
-            // Empty header name
-            new[] { ": value\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@": value\x0D\x0A") },
-        };
-
-        public static TheoryData<string, string> HostHeaderData
-            => new TheoryData<string, string>
+        public static IEnumerable<object[]> RequestHeaderInvalidData =>
+            new[]
+            {
+                // Missing CR
+                new[]
                 {
-                    { "OPTIONS *", "" },
-                    { "GET /pub/WWW/", "" },
-                    { "GET /pub/WWW/", "   " },
-                    { "GET /pub/WWW/", "." },
-                    { "GET /pub/WWW/", "www.example.org" },
-                    { "GET http://localhost/", "localhost" },
-                    { "GET http://localhost:80/", "localhost:80" },
-                    { "GET https://localhost/", "localhost" },
-                    { "GET https://localhost:443/", "localhost:443" },
-                    { "CONNECT asp.net:80", "asp.net:80" },
-                    { "CONNECT asp.net:443", "asp.net:443" },
-                };
+                    "Header: value\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header: value\x0A")
+                },
+                new[]
+                {
+                    "Header-1: value1\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: value1\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: value2\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-2: value2\x0A"
+                    )
+                },
+                // Line folding
+                new[]
+                {
+                    "Header: line1\r\n line2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" line2\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header: line1\r\n\tline2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09line2\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header: line1\r\n  line2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"  line2\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header: line1\r\n \tline2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" \x09line2\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header: line1\r\n\t line2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x09 line2\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header: line1\r\n\t\tline2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"\x09\x09line2\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header: line1\r\n \t\t line2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @" \x09\x09 line2\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header: line1\r\n \t \t line2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @" \x09 \x09 line2\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: multi\r\n line\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" line\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: multi\r\n line\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@" line\x0D\x0A")
+                },
+                new[]
+                {
+                    "Header-1: value1\r\n Header-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @" Header-2: value2\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\n\tHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"\x09Header-2: value2\x0D\x0A"
+                    )
+                },
+                // CR in value
+                new[]
+                {
+                    "Header-1: value1\r\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: value1\x0D\x0D"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: val\rue1\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: val\x0Du")
+                },
+                new[]
+                {
+                    "Header-1: value1\rHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: value1\x0DH"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: value2\r\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-2: value2\x0D\x0D"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: v\ralue2\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2: v\x0Da")
+                },
+                new[]
+                {
+                    "Header-1: Value__\rVector16________Vector32\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value__\x0DV"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16\r________Vector32\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16\x0D_"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16_______\rVector32\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16_______\x0DV"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16________Vector32\r\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16________Vector32\x0D\x0D"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16________Vector32_\r\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16________Vector32_\x0D\x0D"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16________Vector32Value___Vector16_______\rVector32\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16________Vector32Value___Vector16_______\x0DV"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16________Vector32Value___Vector16________Vector32\r\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16________Vector32Value___Vector16________Vector32\x0D\x0D"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: Value___Vector16________Vector32Value___Vector16________Vector32_\r\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1: Value___Vector16________Vector32Value___Vector16________Vector32_\x0D\x0D"
+                    )
+                },
+                // Missing colon
+                new[]
+                {
+                    "Header-1 value1\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1 value1\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1 value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-1 value1\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2 value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-2 value2\x0D\x0A"
+                    )
+                },
+                new[] { "\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x0A") },
+                // Starting with whitespace
+                new[]
+                {
+                    " Header: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @" Header: value\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "\tHeader: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"\x09Header: value\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    " Header-1: value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @" Header-1: value1\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "\tHeader-1: value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"\x09Header-1: value1\x0D\x0A"
+                    )
+                },
+                // Whitespace in header name
+                new[]
+                {
+                    "Header : value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header : value\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header\t: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header\x09: value\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header\x0D:")
+                },
+                new[]
+                {
+                    "Header_\rVector16: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header_\x0DV")
+                },
+                new[]
+                {
+                    "Header__Vector16\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16\x0D:"
+                    )
+                },
+                new[]
+                {
+                    "Header__Vector16_\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16_\x0D:"
+                    )
+                },
+                new[]
+                {
+                    "Header_\rVector16________Vector32: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header_\x0DV")
+                },
+                new[]
+                {
+                    "Header__Vector16________Vector32\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16________Vector32\x0D:"
+                    )
+                },
+                new[]
+                {
+                    "Header__Vector16________Vector32_\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16________Vector32_\x0D:"
+                    )
+                },
+                new[]
+                {
+                    "Header__Vector16________Vector32Header_\rVector16________Vector32: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16________Vector32Header_\x0DV"
+                    )
+                },
+                new[]
+                {
+                    "Header__Vector16________Vector32Header__Vector16________Vector32\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16________Vector32Header__Vector16________Vector32\x0D:"
+                    )
+                },
+                new[]
+                {
+                    "Header__Vector16________Vector32Header__Vector16________Vector32_\r: value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header__Vector16________Vector32Header__Vector16________Vector32_\x0D:"
+                    )
+                },
+                new[]
+                {
+                    "Header 1: value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header 1: value1\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header 1 : value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header 1 : value1\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header 1\t: value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header 1\x09: value1\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header 1\r: value1\r\nHeader-2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header 1\x0D:")
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader 2: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header 2: value2\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2 : value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-2 : value2\x0D\x0A"
+                    )
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2\t: value2\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(
+                        @"Header-2\x09: value2\x0D\x0A"
+                    )
+                },
+                // Headers not ending in CRLF line
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: value2\r\n\r\r",
+                    CoreStrings.BadRequest_InvalidRequestHeadersNoCRLF
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: value2\r\n\r ",
+                    CoreStrings.BadRequest_InvalidRequestHeadersNoCRLF
+                },
+                new[]
+                {
+                    "Header-1: value1\r\nHeader-2: value2\r\n\r \n",
+                    CoreStrings.BadRequest_InvalidRequestHeadersNoCRLF
+                },
+                // Empty header name
+                new[]
+                {
+                    ": value\r\n\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@": value\x0D\x0A")
+                },
+            };
+
+        public static TheoryData<string, string> HostHeaderData =>
+            new TheoryData<string, string>
+            {
+                { "OPTIONS *", "" },
+                { "GET /pub/WWW/", "" },
+                { "GET /pub/WWW/", "   " },
+                { "GET /pub/WWW/", "." },
+                { "GET /pub/WWW/", "www.example.org" },
+                { "GET http://localhost/", "localhost" },
+                { "GET http://localhost:80/", "localhost:80" },
+                { "GET https://localhost/", "localhost" },
+                { "GET https://localhost:443/", "localhost:443" },
+                { "CONNECT asp.net:80", "asp.net:80" },
+                { "CONNECT asp.net:443", "asp.net:443" },
+            };
 
         public static TheoryData<string, string> HostHeaderInvalidData
         {
             get
             {
                 // see https://tools.ietf.org/html/rfc7230#section-5.4
-                var invalidHostValues = new[] {
+                var invalidHostValues = new[]
+                {
                     "",
                     "   ",
                     "contoso.com:4000",

@@ -17,7 +17,18 @@ namespace Microsoft.Extensions.ApiDescription.Client
     /// </remarks>
     public static class MetadataSerializer
     {
-        private static readonly char[] CharsToEscape = { '%', '*', '?', '@', '$', '(', ')', ';', '\'' };
+        private static readonly char[] CharsToEscape =
+        {
+            '%',
+            '*',
+            '?',
+            '@',
+            '$',
+            '(',
+            ')',
+            ';',
+            '\''
+        };
         private static readonly HashSet<char> CharsToEscapeHash = new HashSet<char>(CharsToEscape);
 
         /// <summary>

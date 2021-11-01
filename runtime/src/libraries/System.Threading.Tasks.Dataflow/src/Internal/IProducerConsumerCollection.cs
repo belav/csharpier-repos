@@ -77,7 +77,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         T[] ToArray();
     }
 
-
     /// <summary>
     /// A debugger view of the IProducerConsumerCollection that makes it simple to browse the
     /// collection's contents at a point in time.
@@ -91,7 +90,9 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         /// Constructs a new debugger view object for the provided collection object.
         /// </summary>
         /// <param name="collection">A collection to browse in the debugger.</param>
-        public SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(IProducerConsumerCollection<T> collection)
+        public SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(
+            IProducerConsumerCollection<T> collection
+        )
         {
             if (collection == null)
             {

@@ -20,7 +20,6 @@ namespace CseTest
 {
     using System;
 
-
     public class TestClass
     {
         static int Main()
@@ -44,26 +43,31 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 6; j++) {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
 #endif
-            v = (*c + (*a + *b));
-            if (v != 102)
-            {
-                Console.WriteLine("test2: for ( *c+( *a+ *b))  failed actual value {0} ", v);
-                ret = ret + 1;
-            }
+                    v = (*c + (*a + *b));
+                    if (v != 102)
+                    {
+                        Console.WriteLine(
+                            "test2: for ( *c+( *a+ *b))  failed actual value {0} ",
+                            v
+                        );
+                        ret = ret + 1;
+                    }
 
-            v = (*a + *b);
-            if (v != 67)
-            {
-                Console.WriteLine("test3: for ( *a+ *b)  failed actual value {0} ", v);
-                ret = ret + 1;
-            }
+                    v = (*a + *b);
+                    if (v != 67)
+                    {
+                        Console.WriteLine("test3: for ( *a+ *b)  failed actual value {0} ", v);
+                        ret = ret + 1;
+                    }
 #if LOOP
-				}
-				*a = returna(false);
-			}
+                }
+                *a = returna(false);
+            }
 #endif
 
             v = (*b + *a);

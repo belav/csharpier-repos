@@ -22,7 +22,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </para>
         /// </summary>
         Unvalidated,
-
         /// <summary>
         /// Validation was performed on the <see cref="ModelStateEntry"/> and was found to be invalid.
         /// <para>
@@ -31,7 +30,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </para>
         /// </summary>
         Invalid,
-
         /// <summary>
         /// Validation was performed on the <see cref="ModelStateEntry"/>
         /// <para>
@@ -40,7 +38,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </para>
         /// </summary>
         Valid,
-
         /// <summary>
         /// Validation was skipped for the <see cref="ModelStateEntry"/>.
         /// <para>

@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
 {
     public class InMemoryDatabaseFixture : IDisposable
     {
-        private readonly SqliteConnection _connection = new SqliteConnection($"DataSource=:memory:");
+        private readonly SqliteConnection _connection = new SqliteConnection(
+            $"DataSource=:memory:"
+        );
 
         public InMemoryDatabaseFixture()
         {

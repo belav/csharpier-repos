@@ -7,17 +7,47 @@ using System.Security.Permissions;
 namespace System.Net
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class WebPermissionAttribute : CodeAccessSecurityAttribute
     {
         public WebPermissionAttribute(SecurityAction action) : base(action) { }
-        public string Accept { get { return null; } set { } }
-        public string AcceptPattern { get { return null; } set { } }
-        public string Connect { get { return null; } set { } }
-        public string ConnectPattern { get { return null; } set { } }
-        public override IPermission CreatePermission() { return null; }
+        public string Accept
+        {
+            get { return null; }
+            set { }
+        }
+        public string AcceptPattern
+        {
+            get { return null; }
+            set { }
+        }
+        public string Connect
+        {
+            get { return null; }
+            set { }
+        }
+        public string ConnectPattern
+        {
+            get { return null; }
+            set { }
+        }
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

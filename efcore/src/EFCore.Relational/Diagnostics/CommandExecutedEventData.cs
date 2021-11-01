@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool logParameterValues,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
             : base(
                 eventDefinition,
                 messageGenerator,
@@ -54,8 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 async,
                 logParameterValues,
                 startTime,
-                duration)
-            => Result = result;
+                duration
+            ) => Result = result;
 
         /// <summary>
         ///     The result of executing the command.

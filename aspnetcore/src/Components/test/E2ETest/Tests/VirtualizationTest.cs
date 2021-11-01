@@ -20,14 +20,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public VirtualizationTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
         }
 
         [Fact]
@@ -44,14 +45,18 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Equal(expectedInitialSpacerStyle, () => topSpacer.GetAttribute("style"));
 
             // Scroll halfway.
-            Browser.ExecuteJavaScript("const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight * 0.5;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight * 0.5;"
+            );
 
             // Validate that we get the same item count after scrolling halfway.
             Browser.Equal(initialItemCount, GetItemCount);
             Browser.NotEqual(expectedInitialSpacerStyle, () => topSpacer.GetAttribute("style"));
 
             // Scroll to the bottom.
-            Browser.ExecuteJavaScript("const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight;"
+            );
 
             // Validate that we get the same item count after scrolling to the bottom.
             Browser.Equal(initialItemCount, GetItemCount);
@@ -81,7 +86,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Equal(0, GetPlaceholderCount);
 
             // Scroll halfway.
-            Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight * 0.5;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight * 0.5;"
+            );
 
             // Validate that items are replaced by the same number of placeholders.
             Browser.Equal(0, GetItemCount);
@@ -95,7 +102,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Equal(0, GetPlaceholderCount);
 
             // Scroll to the bottom.
-            Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight;"
+            );
 
             // Validate that items are replaced by the same number of placeholders.
             Browser.Equal(0, GetItemCount);
@@ -182,15 +191,21 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Equal("0", () => cancellationCount.Text);
 
             // Validate that there is no initial fetch to cancel.
-            Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = 1000;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('async-container');container.scrollTop = 1000;"
+            );
             Browser.Equal("0", () => cancellationCount.Text);
 
             // Validate that scrolling again cancels the first fetch.
-            Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = 2000;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('async-container');container.scrollTop = 2000;"
+            );
             Browser.Equal("1", () => cancellationCount.Text);
 
             // Validate that scrolling again cancels the second fetch.
-            Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = 3000;");
+            Browser.ExecuteJavaScript(
+                "const container = document.getElementById('async-container');container.scrollTop = 3000;"
+            );
             Browser.Equal("2", () => cancellationCount.Text);
         }
 
@@ -200,9 +215,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             Browser.MountTestComponent<VirtualizationComponent>();
             var expectedInitialSpacerStyle = "height: 0px;";
-            var topSpacer = Browser.Exists(By.Id("viewport-as-root")).FindElement(By.TagName("div"));
+            var topSpacer = Browser
+                .Exists(By.Id("viewport-as-root"))
+                .FindElement(By.TagName("div"));
 
-            Browser.ExecuteJavaScript("const element = document.getElementById('viewport-as-root'); element.scrollIntoView();");
+            Browser.ExecuteJavaScript(
+                "const element = document.getElementById('viewport-as-root'); element.scrollIntoView();"
+            );
 
             // Validate that the top spacer has a height of zero.
             Browser.Equal(expectedInitialSpacerStyle, () => topSpacer.GetAttribute("style"));
@@ -221,7 +240,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public async Task ToleratesIncorrectItemSize()
         {
             Browser.MountTestComponent<VirtualizationComponent>();
-            var topSpacer = Browser.Exists(By.Id("incorrect-size-container")).FindElement(By.TagName("div"));
+            var topSpacer = Browser
+                .Exists(By.Id("incorrect-size-container"))
+                .FindElement(By.TagName("div"));
             var expectedInitialSpacerStyle = "height: 0px;";
 
             // Wait until items have been rendered.
@@ -234,7 +255,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // we're already showing all the items we need to show.
             for (var pos = 0; pos < 1000; pos += 50)
             {
-                Browser.ExecuteJavaScript($"document.getElementById('incorrect-size-container').scrollTop = {pos};");
+                Browser.ExecuteJavaScript(
+                    $"document.getElementById('incorrect-size-container').scrollTop = {pos};"
+                );
                 await Task.Delay(200);
             }
 
@@ -251,20 +274,24 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Initial data
             var container = Browser.Exists(By.Id("using-items"));
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
 
             // Mutate one of them
             var itemToMutate = container.FindElements(By.ClassName("person"))[1];
             itemToMutate.FindElement(By.TagName("button")).Click();
 
             // See changes
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2 MUTATED", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
         }
 
         [Fact]
@@ -274,20 +301,24 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Initial data
             var container = Browser.Exists(By.Id("using-itemsprovider"));
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
 
             // Mutate one of them
             var itemToMutate = container.FindElements(By.ClassName("person"))[1];
             itemToMutate.FindElement(By.TagName("button")).Click();
 
             // See changes
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2 MUTATED", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
         }
 
         [Fact]
@@ -297,20 +328,24 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Initial data
             var container = Browser.Exists(By.Id("using-items"));
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
 
             // Add another item
             Browser.Exists(By.Id("add-person-to-fixed-list")).Click();
 
             // See changes
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
                 name => Assert.Equal("Person 3", name),
-                name => Assert.Equal("Person 4", name));
+                name => Assert.Equal("Person 4", name)
+            );
         }
 
         [Fact]
@@ -320,29 +355,35 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Initial data
             var container = Browser.Exists(By.Id("using-itemsprovider"));
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
 
             // Add another item
             Browser.Exists(By.Id("add-person-to-itemsprovider")).Click();
 
             // Initially this has no effect because we don't re-query the provider until told to do so
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
 
             // Request refresh
             Browser.Exists(By.Id("refresh-itemsprovider")).Click();
 
             // See changes
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
                 name => Assert.Equal("Person 3", name),
-                name => Assert.Equal("Person 4", name));
+                name => Assert.Equal("Person 4", name)
+            );
         }
 
         [Fact]
@@ -356,17 +397,21 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             itemToMutate.FindElement(By.TagName("button")).Click();
 
             // Verify the mutation was applied
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2 MUTATED", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
 
             // Refresh and verify the mutation was reverted
             Browser.Exists(By.Id("refresh-itemsprovider")).Click();
-            Browser.Collection(() => GetPeopleNames(container),
+            Browser.Collection(
+                () => GetPeopleNames(container),
                 name => Assert.Equal("Person 1", name),
                 name => Assert.Equal("Person 2", name),
-                name => Assert.Equal("Person 3", name));
+                name => Assert.Equal("Person 3", name)
+            );
         }
 
         private string[] GetPeopleNames(IWebElement container)

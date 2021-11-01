@@ -12,22 +12,18 @@ namespace Microsoft.AspNetCore.Mvc
     /// </summary>
     public class HttpGetAttribute : HttpMethodAttribute
     {
-        private static readonly IEnumerable<string> _supportedMethods = new [] { "GET" };
+        private static readonly IEnumerable<string> _supportedMethods = new[] { "GET" };
 
         /// <summary>
         /// Creates a new <see cref="HttpGetAttribute"/>.
         /// </summary>
-        public HttpGetAttribute()
-            : base(_supportedMethods)
-        {
-        }
+        public HttpGetAttribute() : base(_supportedMethods) { }
 
         /// <summary>
         /// Creates a new <see cref="HttpGetAttribute"/> with the given route template.
         /// </summary>
         /// <param name="template">The route template. May not be null.</param>
-        public HttpGetAttribute(string template)
-            : base(_supportedMethods, template)
+        public HttpGetAttribute(string template) : base(_supportedMethods, template)
         {
             if (template == null)
             {

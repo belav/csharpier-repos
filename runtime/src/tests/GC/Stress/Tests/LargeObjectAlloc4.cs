@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // This test should need to allocated a maximum of 20 MB and so, should pass without
-// OOM Exception. On RTM as the largeobjects were never committed, this test would 
+// OOM Exception. On RTM as the largeobjects were never committed, this test would
 // fail after a few loops.
 
 using System;

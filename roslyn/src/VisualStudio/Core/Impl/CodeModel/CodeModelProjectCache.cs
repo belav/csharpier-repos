@@ -27,15 +27,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private readonly ProjectId _projectId;
         private readonly ICodeModelInstanceFactory _codeModelInstanceFactory;
 
-        private readonly Dictionary<string, CacheEntry> _cache = new Dictionary<string, CacheEntry>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, CacheEntry> _cache = new Dictionary<string, CacheEntry>(
+            StringComparer.OrdinalIgnoreCase
+        );
         private readonly object _cacheGate = new object();
 
         private EnvDTE.CodeModel _rootCodeModel;
         private bool _zombied;
 
-        internal CodeModelProjectCache(IThreadingContext threadingContext, ProjectId projectId, ICodeModelInstanceFactory codeModelInstanceFactory, ProjectCodeModelFactory projectFactory, IServiceProvider serviceProvider, HostLanguageServices languageServices, VisualStudioWorkspace workspace)
+        internal CodeModelProjectCache(
+            IThreadingContext threadingContext,
+            ProjectId projectId,
+            ICodeModelInstanceFactory codeModelInstanceFactory,
+            ProjectCodeModelFactory projectFactory,
+            IServiceProvider serviceProvider,
+            HostLanguageServices languageServices,
+            VisualStudioWorkspace workspace
+        )
         {
-            _state = new CodeModelState(threadingContext, serviceProvider, languageServices, workspace, projectFactory);
+            _state = new CodeModelState(
+                threadingContext,
+                serviceProvider,
+                languageServices,
+                workspace,
+                projectFactory
+            );
             _projectId = projectId;
             _codeModelInstanceFactory = codeModelInstanceFactory;
         }
@@ -57,7 +73,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return null;
         }
 
-        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(string filePath)
+        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(
+            string filePath
+        )
         {
             // First try
             {
@@ -74,18 +92,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             // This ultimately ends up calling GetOrCreateFileCodeModel(fileName, parent) with the correct "parent" object
             // through the project system.
-            var newFileCodeModel = (EnvDTE80.FileCodeModel2)_codeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(filePath);
+            var newFileCodeModel =
+                (EnvDTE80.FileCodeModel2)_codeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(
+                    filePath
+                );
             return new ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>(newFileCodeModel);
         }
 
-        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>? GetComHandleForFileCodeModel(string filePath)
+        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>? GetComHandleForFileCodeModel(
+            string filePath
+        )
         {
             var cacheEntry = GetCacheEntry(filePath);
 
             return cacheEntry?.ComHandle;
         }
 
-        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(string filePath, object parent)
+        public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetOrCreateFileCodeModel(
+            string filePath,
+            object parent
+        )
         {
             // First try
             {
@@ -101,7 +127,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
 
             // Check that we know about this file!
-            var documentId = _state.Workspace.CurrentSolution.GetDocumentIdsWithFilePath(filePath).Where(id => id.ProjectId == _projectId).FirstOrDefault();
+            var documentId = _state.Workspace.CurrentSolution
+                .GetDocumentIdsWithFilePath(filePath)
+                .Where(id => id.ProjectId == _projectId)
+                .FirstOrDefault();
             if (documentId == null)
             {
                 // Matches behavior of native (C#) implementation
@@ -109,7 +138,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
 
             // Create object (outside of lock)
-            var newFileCodeModel = FileCodeModel.Create(_state, parent, documentId, new TextManagerAdapter());
+            var newFileCodeModel = FileCodeModel.Create(
+                _state,
+                parent,
+                documentId,
+                new TextManagerAdapter()
+            );
             var newCacheEntry = new CacheEntry(newFileCodeModel);
 
             // Second try (object might have been added by another thread at this point!)
@@ -149,7 +183,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return _rootCodeModel;
         }
 
-        public IEnumerable<ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>> GetFileCodeModelInstances()
+        public IEnumerable<
+            ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>
+        > GetFileCodeModelInstances()
         {
             var result = new List<ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>>();
 

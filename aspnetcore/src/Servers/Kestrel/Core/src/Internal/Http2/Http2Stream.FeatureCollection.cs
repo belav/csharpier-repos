@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 {
-    internal partial class Http2Stream : IHttp2StreamIdFeature,
-                                         IHttpMinRequestBodyDataRateFeature,
-                                         IHttpResetFeature,
-                                         IHttpResponseTrailersFeature
-
+    internal partial class Http2Stream
+        : IHttp2StreamIdFeature,
+          IHttpMinRequestBodyDataRateFeature,
+          IHttpResetFeature,
+          IHttpResponseTrailersFeature
     {
         private IHeaderDictionary? _userTrailers;
 
@@ -49,7 +49,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         MinDataRate? IHttpMinRequestBodyDataRateFeature.MinDataRate
         {
             get => throw new NotSupportedException(CoreStrings.HttpMinDataRateNotSupported);
-            set 
+            set
             {
                 if (value != null)
                 {
@@ -62,7 +62,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
         void IHttpResetFeature.Reset(int errorCode)
         {
-            var abortReason = new ConnectionAbortedException(CoreStrings.FormatHttp2StreamResetByApplication((Http2ErrorCode)errorCode));
+            var abortReason = new ConnectionAbortedException(
+                CoreStrings.FormatHttp2StreamResetByApplication((Http2ErrorCode)errorCode)
+            );
             ApplicationAbort(abortReason, (Http2ErrorCode)errorCode);
         }
     }

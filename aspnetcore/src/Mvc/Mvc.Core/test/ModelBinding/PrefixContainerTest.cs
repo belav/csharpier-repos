@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void ContainsPrefix_EmptyCollection_EmptyString_False()
         {
             // Arrange
-            var keys = new string[] { };
+            var keys = new string[] {  };
             var container = new PrefixContainer(keys);
 
             // Act
@@ -72,7 +72,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             // Assert
             Assert.False(result);
         }
-
 
         [Theory]
         [InlineData("a")]
@@ -167,7 +166,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData(3)]
         [InlineData(4)]
         [InlineData(5)]
-        public void ContainsPrefix_HasEntries_PartialAndPrefixMatch_WithSquareBrace(int partialMatches)
+        public void ContainsPrefix_HasEntries_PartialAndPrefixMatch_WithSquareBrace(
+            int partialMatches
+        )
         {
             // Arrange
             var keys = new string[partialMatches + 1];
@@ -205,14 +206,23 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void GetKeysFromPrefix_ReturnsUniqueTopLevelEntries_WhenPrefixIsEmpty()
         {
             // Arrange
-            var keys = new[] { "[0].name", "[0].address.street", "[item1].name", "[item1].age", "foo", "foo.bar" };
+            var keys = new[]
+            {
+                "[0].name",
+                "[0].address.street",
+                "[item1].name",
+                "[item1].age",
+                "foo",
+                "foo.bar"
+            };
             var container = new PrefixContainer(keys);
 
             // Act
             var result = container.GetKeysFromPrefix(prefix: string.Empty);
 
             // Assert
-            Assert.Collection(result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
+            Assert.Collection(
+                result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
                 item =>
                 {
                     Assert.Equal("0", item.Key);
@@ -227,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 {
                     Assert.Equal("item1", item.Key);
                     Assert.Equal("[item1]", item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -255,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var result = container.GetKeysFromPrefix("foo");
 
             // Assert
-            Assert.Collection(result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
+            Assert.Collection(
+                result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
                 item =>
                 {
                     Assert.Equal("0", item.Key);
@@ -270,21 +282,28 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 {
                     Assert.Equal("age", item.Key);
                     Assert.Equal("foo.age", item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
         public void GetKeysFromPrefix_ReturnsSubKeysThatStartWithPrefix_ForNestedSubKeys()
         {
             // Arrange
-            var keys = new[] { "person[0].address[0].street", "person[0].address[1].street", "person[0].address[1].zip" };
+            var keys = new[]
+            {
+                "person[0].address[0].street",
+                "person[0].address[1].street",
+                "person[0].address[1].zip"
+            };
             var container = new PrefixContainer(keys);
 
             // Act
             var result = container.GetKeysFromPrefix("person[0].address");
 
             // Assert
-            Assert.Collection(result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
+            Assert.Collection(
+                result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
                 item =>
                 {
                     Assert.Equal("0", item.Key);
@@ -294,7 +313,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 {
                     Assert.Equal("1", item.Key);
                     Assert.Equal("person[0].address[1]", item.Value);
-                });
+                }
+            );
         }
     }
 }

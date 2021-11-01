@@ -25,9 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public RawRelationalParameter(
-            string invariantName,
-            DbParameter parameter)
+        public RawRelationalParameter(string invariantName, DbParameter parameter)
             : base(invariantName)
         {
             Check.NotNull(parameter, nameof(parameter));
@@ -41,7 +39,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override void AddDbParameter(DbCommand command, IReadOnlyDictionary<string, object?> parameterValues)
+        public override void AddDbParameter(
+            DbCommand command,
+            IReadOnlyDictionary<string, object?> parameterValues
+        )
         {
             AddDbParameter(command, _parameter);
         }
@@ -54,12 +55,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public override void AddDbParameter(DbCommand command, object? value)
         {
-            Check.DebugAssert(value is DbParameter,
-                $"{nameof(value)} isn't a DbParameter in {nameof(RawRelationalParameter)}.{nameof(AddDbParameter)}");
+            Check.DebugAssert(
+                value is DbParameter,
+                $"{nameof(value)} isn't a DbParameter in {nameof(RawRelationalParameter)}.{nameof(AddDbParameter)}"
+            );
 
-            if (value is DbParameter dbParameter
+            if (
+                value is DbParameter dbParameter
                 && dbParameter.Direction == ParameterDirection.Input
-                && value is ICloneable cloneable)
+                && value is ICloneable cloneable
+            )
             {
                 value = cloneable.Clone();
             }

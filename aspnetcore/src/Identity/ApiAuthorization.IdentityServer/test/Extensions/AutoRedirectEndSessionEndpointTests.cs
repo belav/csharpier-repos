@@ -32,23 +32,38 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             session.Setup(s => s.GetUserAsync()).ReturnsAsync(new ClaimsPrincipal());
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
-            endSessionValidator.Setup(esv => esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>()))
-                .ReturnsAsync(new EndSessionValidationResult()
-                {
-                    IsError = false,
-                    ValidatedRequest = new ValidatedEndSessionRequest()
+            endSessionValidator
+                .Setup(
+                    esv =>
+                        esv.ValidateAsync(
+                            It.IsAny<NameValueCollection>(),
+                            It.IsAny<ClaimsPrincipal>()
+                        )
+                )
+                .ReturnsAsync(
+                    new EndSessionValidationResult()
                     {
-                        Client = ClientBuilder.IdentityServerSPA("MySPA").Build(),
-                        PostLogOutUri = "https://www.example.com/logout"
+                        IsError = false,
+                        ValidatedRequest = new ValidatedEndSessionRequest()
+                        {
+                            Client = ClientBuilder.IdentityServerSPA("MySPA").Build(),
+                            PostLogOutUri = "https://www.example.com/logout"
+                        }
                     }
-                });
+                );
 
             var identityServerOptions = Options.Create(new IdentityServerOptions());
-            identityServerOptions.Value.Authentication.CookieAuthenticationScheme = IdentityConstants.ApplicationScheme;
+            identityServerOptions.Value.Authentication.CookieAuthenticationScheme =
+                IdentityConstants.ApplicationScheme;
             identityServerOptions.Value.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
             identityServerOptions.Value.UserInteraction.ErrorUrl = "/Identity/Error";
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = HttpMethods.Post;
@@ -63,7 +78,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             Assert.Equal("https://www.example.com/logout", redirect.Url);
             await response.ExecuteAsync(ctx);
             Assert.Equal(StatusCodes.Status302Found, ctx.Response.StatusCode);
-            Assert.Equal("https://www.example.com/logout", ctx.Response.Headers[HeaderNames.Location]);
+            Assert.Equal(
+                "https://www.example.com/logout",
+                ctx.Response.Headers[HeaderNames.Location]
+            );
         }
 
         [Fact]
@@ -74,24 +92,39 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             session.Setup(s => s.GetUserAsync()).ReturnsAsync(new ClaimsPrincipal());
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
-            endSessionValidator.Setup(esv => esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>()))
-                .ReturnsAsync(new EndSessionValidationResult()
-                {
-                    IsError = false,
-                    ValidatedRequest = new ValidatedEndSessionRequest()
+            endSessionValidator
+                .Setup(
+                    esv =>
+                        esv.ValidateAsync(
+                            It.IsAny<NameValueCollection>(),
+                            It.IsAny<ClaimsPrincipal>()
+                        )
+                )
+                .ReturnsAsync(
+                    new EndSessionValidationResult()
                     {
-                        Client = ClientBuilder.IdentityServerSPA("MySPA").Build(),
-                        PostLogOutUri = "https://www.example.com/logout",
-                        State = "appState"
+                        IsError = false,
+                        ValidatedRequest = new ValidatedEndSessionRequest()
+                        {
+                            Client = ClientBuilder.IdentityServerSPA("MySPA").Build(),
+                            PostLogOutUri = "https://www.example.com/logout",
+                            State = "appState"
+                        }
                     }
-                });
+                );
 
             var identityServerOptions = Options.Create(new IdentityServerOptions());
-            identityServerOptions.Value.Authentication.CookieAuthenticationScheme = IdentityConstants.ApplicationScheme;
+            identityServerOptions.Value.Authentication.CookieAuthenticationScheme =
+                IdentityConstants.ApplicationScheme;
             identityServerOptions.Value.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
             identityServerOptions.Value.UserInteraction.ErrorUrl = "/Identity/Error";
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = HttpMethods.Get;
@@ -106,7 +139,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
             await response.ExecuteAsync(ctx);
             Assert.Equal(StatusCodes.Status302Found, ctx.Response.StatusCode);
-            Assert.Equal("https://www.example.com/logout?state=appState", ctx.Response.Headers[HeaderNames.Location]);
+            Assert.Equal(
+                "https://www.example.com/logout?state=appState",
+                ctx.Response.Headers[HeaderNames.Location]
+            );
         }
 
         [Fact]
@@ -117,19 +153,30 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             session.Setup(s => s.GetUserAsync()).ReturnsAsync(new ClaimsPrincipal());
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
-            endSessionValidator.Setup(esv => esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>()))
-                .ReturnsAsync(new EndSessionValidationResult()
-                {
-                    IsError = true,
-                    Error = "SomeError"
-                });
+            endSessionValidator
+                .Setup(
+                    esv =>
+                        esv.ValidateAsync(
+                            It.IsAny<NameValueCollection>(),
+                            It.IsAny<ClaimsPrincipal>()
+                        )
+                )
+                .ReturnsAsync(
+                    new EndSessionValidationResult() { IsError = true, Error = "SomeError" }
+                );
 
             var identityServerOptions = Options.Create(new IdentityServerOptions());
-            identityServerOptions.Value.Authentication.CookieAuthenticationScheme = IdentityConstants.ApplicationScheme;
+            identityServerOptions.Value.Authentication.CookieAuthenticationScheme =
+                IdentityConstants.ApplicationScheme;
             identityServerOptions.Value.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
             identityServerOptions.Value.UserInteraction.ErrorUrl = "/Identity/Error";
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = HttpMethods.Post;
@@ -155,22 +202,37 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             session.Setup(s => s.GetUserAsync()).ReturnsAsync(new ClaimsPrincipal());
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
-            endSessionValidator.Setup(esv => esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>()))
-                .ReturnsAsync(new EndSessionValidationResult()
-                {
-                    IsError = false,
-                    ValidatedRequest = new ValidatedEndSessionRequest()
+            endSessionValidator
+                .Setup(
+                    esv =>
+                        esv.ValidateAsync(
+                            It.IsAny<NameValueCollection>(),
+                            It.IsAny<ClaimsPrincipal>()
+                        )
+                )
+                .ReturnsAsync(
+                    new EndSessionValidationResult()
                     {
-                        Client = new Client()
+                        IsError = false,
+                        ValidatedRequest = new ValidatedEndSessionRequest()
+                        {
+                            Client = new Client()
+                        }
                     }
-                });
+                );
 
             var identityServerOptions = Options.Create(new IdentityServerOptions());
-            identityServerOptions.Value.Authentication.CookieAuthenticationScheme = IdentityConstants.ApplicationScheme;
+            identityServerOptions.Value.Authentication.CookieAuthenticationScheme =
+                IdentityConstants.ApplicationScheme;
             identityServerOptions.Value.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
             identityServerOptions.Value.UserInteraction.ErrorUrl = "/Identity/Error";
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = HttpMethods.Post;
@@ -196,19 +258,34 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             session.Setup(s => s.GetUserAsync()).ReturnsAsync(new ClaimsPrincipal());
 
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
-            endSessionValidator.Setup(esv => esv.ValidateAsync(It.IsAny<NameValueCollection>(), It.IsAny<ClaimsPrincipal>()))
-                .ReturnsAsync(new EndSessionValidationResult()
-                {
-                    IsError = false,
-                    ValidatedRequest = new ValidatedEndSessionRequest()
-                });
+            endSessionValidator
+                .Setup(
+                    esv =>
+                        esv.ValidateAsync(
+                            It.IsAny<NameValueCollection>(),
+                            It.IsAny<ClaimsPrincipal>()
+                        )
+                )
+                .ReturnsAsync(
+                    new EndSessionValidationResult()
+                    {
+                        IsError = false,
+                        ValidatedRequest = new ValidatedEndSessionRequest()
+                    }
+                );
 
             var identityServerOptions = Options.Create(new IdentityServerOptions());
-            identityServerOptions.Value.Authentication.CookieAuthenticationScheme = IdentityConstants.ApplicationScheme;
+            identityServerOptions.Value.Authentication.CookieAuthenticationScheme =
+                IdentityConstants.ApplicationScheme;
             identityServerOptions.Value.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
             identityServerOptions.Value.UserInteraction.ErrorUrl = "/Identity/Error";
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = HttpMethods.Post;
@@ -232,14 +309,21 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         [InlineData("PATCH")]
         [InlineData("OPTIONS")]
         [InlineData("HEAD")]
-        public async Task AutoRedirectSessionEndpoint_ReturnsBadRequest_WhenMethodIsNotPostOrGet(string method)
+        public async Task AutoRedirectSessionEndpoint_ReturnsBadRequest_WhenMethodIsNotPostOrGet(
+            string method
+        )
         {
             // Arrange
             var session = new Mock<IUserSession>();
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             var identityServerOptions = Options.Create(new IdentityServerOptions());
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = method;
@@ -261,7 +345,12 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var endSessionValidator = new Mock<IEndSessionRequestValidator>();
             var identityServerOptions = Options.Create(new IdentityServerOptions());
 
-            var endpoint = new AutoRedirectEndSessionEndpoint(new TestLogger<AutoRedirectEndSessionEndpoint>(), endSessionValidator.Object, identityServerOptions, session.Object);
+            var endpoint = new AutoRedirectEndSessionEndpoint(
+                new TestLogger<AutoRedirectEndSessionEndpoint>(),
+                endSessionValidator.Object,
+                identityServerOptions,
+                session.Object
+            );
             var ctx = new DefaultHttpContext();
             SetupRequestServices(ctx);
             ctx.Request.Method = HttpMethods.Post;
@@ -279,7 +368,15 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         {
             var collection = new ServiceCollection();
             var authService = new Mock<IAuthenticationService>();
-            authService.Setup(service => service.SignOutAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<AuthenticationProperties>()))
+            authService
+                .Setup(
+                    service =>
+                        service.SignOutAsync(
+                            It.IsAny<HttpContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<AuthenticationProperties>()
+                        )
+                )
                 .Returns(Task.CompletedTask);
 
             collection.AddSingleton(authService.Object);

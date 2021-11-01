@@ -52,7 +52,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public readonly ActiveStatementFlags Flags;
 
-        public ActiveStatement(int ordinal, int primaryDocumentOrdinal, ImmutableArray<DocumentId> documentIds, ActiveStatementFlags flags, LinePositionSpan span, ManagedInstructionId instructionId)
+        public ActiveStatement(
+            int ordinal,
+            int primaryDocumentOrdinal,
+            ImmutableArray<DocumentId> documentIds,
+            ActiveStatementFlags flags,
+            LinePositionSpan span,
+            ManagedInstructionId instructionId
+        )
         {
             Debug.Assert(ordinal >= 0);
             Debug.Assert(primaryDocumentOrdinal >= 0);
@@ -80,10 +87,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         public DocumentId PrimaryDocumentId => DocumentIds[0];
 
-        internal ActiveStatement WithSpan(LinePositionSpan span)
-            => new(Ordinal, PrimaryDocumentOrdinal, DocumentIds, Flags, span, InstructionId);
+        internal ActiveStatement WithSpan(LinePositionSpan span) =>
+            new(Ordinal, PrimaryDocumentOrdinal, DocumentIds, Flags, span, InstructionId);
 
-        internal ActiveStatement WithFlags(ActiveStatementFlags flags)
-            => new(Ordinal, PrimaryDocumentOrdinal, DocumentIds, flags, Span, InstructionId);
+        internal ActiveStatement WithFlags(ActiveStatementFlags flags) =>
+            new(Ordinal, PrimaryDocumentOrdinal, DocumentIds, flags, Span, InstructionId);
     }
 }

@@ -18,35 +18,75 @@ namespace System.Threading.Tasks
         public static Task WaitAsync(this Task task, CancellationToken cancellationToken) =>
             WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
 
-        public async static Task WaitAsync(this Task task, TimeSpan timeout, CancellationToken cancellationToken)
+        public async static Task WaitAsync(
+            this Task task,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             var tcs = new TaskCompletionSource<bool>();
-            using (new Timer(s => ((TaskCompletionSource<bool>)s).TrySetException(new TimeoutException()), tcs, timeout, Timeout.InfiniteTimeSpan))
-            using (cancellationToken.Register(s => ((TaskCompletionSource<bool>)s).TrySetCanceled(), tcs))
+            using (
+                new Timer(
+                    s => ((TaskCompletionSource<bool>)s).TrySetException(new TimeoutException()),
+                    tcs,
+                    timeout,
+                    Timeout.InfiniteTimeSpan
+                )
+            )
+            using (
+                cancellationToken.Register(
+                    s => ((TaskCompletionSource<bool>)s).TrySetCanceled(),
+                    tcs
+                )
+            )
             {
-                await(await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(false);
+                await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(
+                    false
+                );
             }
         }
 
         public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, TimeSpan timeout) =>
             WaitAsync(task, timeout, default);
 
-        public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, CancellationToken cancellationToken) =>
-            WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
+        public static Task<TResult> WaitAsync<TResult>(
+            this Task<TResult> task,
+            CancellationToken cancellationToken
+        ) => WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
 
-        public static async Task<TResult> WaitAsync<TResult>(this Task<TResult> task, TimeSpan timeout, CancellationToken cancellationToken)
+        public static async Task<TResult> WaitAsync<TResult>(
+            this Task<TResult> task,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             var tcs = new TaskCompletionSource<TResult>();
-            using (new Timer(s => ((TaskCompletionSource<TResult>)s).TrySetException(new TimeoutException()), tcs, timeout, Timeout.InfiniteTimeSpan))
-            using (cancellationToken.Register(s => ((TaskCompletionSource<TResult>)s).TrySetCanceled(), tcs))
+            using (
+                new Timer(
+                    s => ((TaskCompletionSource<TResult>)s).TrySetException(new TimeoutException()),
+                    tcs,
+                    timeout,
+                    Timeout.InfiniteTimeSpan
+                )
+            )
+            using (
+                cancellationToken.Register(
+                    s => ((TaskCompletionSource<TResult>)s).TrySetCanceled(),
+                    tcs
+                )
+            )
             {
-                return await (await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)).ConfigureAwait(false);
+                return await (
+                    await Task.WhenAny(task, tcs.Task).ConfigureAwait(false)
+                ).ConfigureAwait(false);
             }
         }
         #endregion
 
         public static async Task WhenAllOrAnyFailed(this Task[] tasks, int millisecondsTimeout) =>
-            await tasks.WhenAllOrAnyFailed().WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+            await tasks
+                .WhenAllOrAnyFailed()
+                .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
 
         public static async Task WhenAllOrAnyFailed(this Task[] tasks)
         {
@@ -69,8 +109,12 @@ namespace System.Threading.Tasks
                 {
                     switch (t.Status)
                     {
-                        case TaskStatus.Faulted: exceptions.Add(t.Exception); break;
-                        case TaskStatus.Canceled: exceptions.Add(new TaskCanceledException(t)); break;
+                        case TaskStatus.Faulted:
+                            exceptions.Add(t.Exception);
+                            break;
+                        case TaskStatus.Canceled:
+                            exceptions.Add(new TaskCanceledException(t));
+                            break;
                     }
                 }
 
@@ -89,23 +133,28 @@ namespace System.Threading.Tasks
             var tcs = new TaskCompletionSource<bool>();
             foreach (Task t in tasks)
             {
-                t.ContinueWith(a =>
-                {
-                    if (a.IsFaulted)
+                t.ContinueWith(
+                    a =>
                     {
-                        tcs.TrySetException(a.Exception.InnerExceptions);
-                        Interlocked.Decrement(ref remaining);
-                    }
-                    else if (a.IsCanceled)
-                    {
-                        tcs.TrySetCanceled();
-                        Interlocked.Decrement(ref remaining);
-                    }
-                    else if (Interlocked.Decrement(ref remaining) == 0)
-                    {
-                        tcs.TrySetResult(true);
-                    }
-                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                        if (a.IsFaulted)
+                        {
+                            tcs.TrySetException(a.Exception.InnerExceptions);
+                            Interlocked.Decrement(ref remaining);
+                        }
+                        else if (a.IsCanceled)
+                        {
+                            tcs.TrySetCanceled();
+                            Interlocked.Decrement(ref remaining);
+                        }
+                        else if (Interlocked.Decrement(ref remaining) == 0)
+                        {
+                            tcs.TrySetResult(true);
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
             }
             return tcs.Task;
         }

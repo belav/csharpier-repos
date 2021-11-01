@@ -17,10 +17,7 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
         /// <summary>
         /// Creates a new instance of <see cref="NullXmlEncryptor"/>.
         /// </summary>
-        public NullXmlEncryptor()
-            : this(services: null)
-        {
-        }
+        public NullXmlEncryptor() : this(services: null) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="NullXmlEncryptor"/>.
@@ -55,9 +52,11 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             //   <plaintextElement />
             // </unencryptedKey>
 
-            var newElement = new XElement("unencryptedKey",
+            var newElement = new XElement(
+                "unencryptedKey",
                 new XComment(" This key is not encrypted. "),
-                new XElement(plaintextElement) /* copy ctor */);
+                new XElement(plaintextElement) /* copy ctor */
+            );
 
             return new EncryptedXmlInfo(newElement, typeof(NullXmlDecryptor));
         }

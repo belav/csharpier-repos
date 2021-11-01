@@ -26,10 +26,13 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         /// </param>
         public ApiDescriptionGroupCollectionProvider(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
-            IEnumerable<IApiDescriptionProvider> apiDescriptionProviders)
+            IEnumerable<IApiDescriptionProvider> apiDescriptionProviders
+        )
         {
             _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
-            _apiDescriptionProviders = apiDescriptionProviders.OrderBy(item => item.Order).ToArray();
+            _apiDescriptionProviders = apiDescriptionProviders
+                .OrderBy(item => item.Order)
+                .ToArray();
         }
 
         /// <inheritdoc />
@@ -38,7 +41,10 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             get
             {
                 var actionDescriptors = _actionDescriptorCollectionProvider.ActionDescriptors;
-                if (_apiDescriptionGroups == null || _apiDescriptionGroups.Version != actionDescriptors.Version)
+                if (
+                    _apiDescriptionGroups == null
+                    || _apiDescriptionGroups.Version != actionDescriptors.Version
+                )
                 {
                     _apiDescriptionGroups = GetCollection(actionDescriptors);
                 }
@@ -47,7 +53,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             }
         }
 
-        private ApiDescriptionGroupCollection GetCollection(ActionDescriptorCollection actionDescriptors)
+        private ApiDescriptionGroupCollection GetCollection(
+            ActionDescriptorCollection actionDescriptors
+        )
         {
             var context = new ApiDescriptionProviderContext(actionDescriptors.Items);
 

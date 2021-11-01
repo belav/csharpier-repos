@@ -12,9 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void NonKeywordStatementInCodeBlockIsHandledCorrectly()
         {
             ParseDocumentTest(
-@"@{
+                @"@{
     List<dynamic> photos = gallery.Photo.ToList();
-}");
+}"
+            );
         }
 
         [Fact]
@@ -41,10 +42,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void ParseBlockTerminatesSingleLineCommentAtEndOfLine()
         {
             ParseDocumentTest(
-"@if(!false) {" + Environment.NewLine +
-"    // Foo" + Environment.NewLine +
-"\t<p>A real tag!</p>" + Environment.NewLine +
-"}");
+                "@if(!false) {"
+                    + Environment.NewLine
+                    + "    // Foo"
+                    + Environment.NewLine
+                    + "\t<p>A real tag!</p>"
+                    + Environment.NewLine
+                    + "}"
+            );
         }
     }
 }

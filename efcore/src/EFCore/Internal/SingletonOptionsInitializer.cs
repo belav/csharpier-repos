@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public virtual void EnsureInitialized(
             IServiceProvider serviceProvider,
-            IDbContextOptions options)
+            IDbContextOptions options
+        )
         {
             if (!_isInitialized)
             {
@@ -42,7 +43,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 {
                     if (!_isInitialized)
                     {
-                        foreach (var singletonOptions in serviceProvider.GetRequiredService<IEnumerable<ISingletonOptions>>())
+                        foreach (
+                            var singletonOptions in serviceProvider.GetRequiredService<
+                                IEnumerable<ISingletonOptions>
+                            >()
+                        )
                         {
                             singletonOptions.Initialize(options);
                         }
@@ -52,7 +57,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             }
 
-            foreach (var singletonOptions in serviceProvider.GetRequiredService<IEnumerable<ISingletonOptions>>())
+            foreach (
+                var singletonOptions in serviceProvider.GetRequiredService<
+                    IEnumerable<ISingletonOptions>
+                >()
+            )
             {
                 singletonOptions.Validate(options);
             }

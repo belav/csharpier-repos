@@ -11,9 +11,19 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     Defines metadata for an event with three parameters and a cached delegate to log the
     ///     event with reduced allocations.
     /// </summary>
-    public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6> : EventDefinitionBase
+    public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6>
+        : EventDefinitionBase
     {
-        private readonly Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, Exception?> _logAction;
+        private readonly Action<
+            ILogger,
+            TParam1,
+            TParam2,
+            TParam3,
+            TParam4,
+            TParam5,
+            TParam6,
+            Exception?
+        > _logAction;
 
         /// <summary>
         ///     Creates an event definition instance.
@@ -30,8 +40,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventId eventId,
             LogLevel level,
             string eventIdCode,
-            Func<LogLevel, Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, Exception?>> logActionFunc)
-            : base(loggingOptions, eventId, level, eventIdCode)
+            Func<
+                LogLevel,
+                Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, Exception?>
+            > logActionFunc
+        ) : base(loggingOptions, eventId, level, eventIdCode)
         {
             Check.NotNull(logActionFunc, nameof(logActionFunc));
 
@@ -55,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam3 arg3,
             TParam4 arg4,
             TParam5 arg5,
-            TParam6 arg6)
+            TParam6 arg6
+        )
         {
             var extractor = new MessageExtractingLogger();
             _logAction(extractor, arg1, arg2, arg3, arg4, arg5, arg6, null);
@@ -80,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam3 arg3,
             TParam4 arg4,
             TParam5 arg5,
-            TParam6 arg6)
-            where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+            TParam6 arg6
+        ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
         {
             switch (WarningBehavior)
             {

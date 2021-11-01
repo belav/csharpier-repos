@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     internal unsafe sealed partial class ClientCertLoader : IAsyncResult, IDisposable
     {
         private const uint CertBoblSize = 1500;
-        private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(WaitCallback);
+        private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
+            WaitCallback
+        );
         private static readonly int RequestChannelBindStatusSize =
             Marshal.SizeOf<HttpApiTypes.HTTP_REQUEST_CHANNEL_BIND_STATUS>();
 
@@ -38,7 +40,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private Exception? _clientCertException;
         private CancellationTokenRegistration _cancellationRegistration;
 
-        internal ClientCertLoader(RequestContext requestContext, CancellationToken cancellationToken)
+        internal ClientCertLoader(
+            RequestContext requestContext,
+            CancellationToken cancellationToken
+        )
         {
             _requestContext = requestContext;
             _tcs = new TaskCompletionSource<object?>();
@@ -48,7 +53,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             if (cancellationToken.CanBeCanceled)
             {
-                _cancellationRegistration = RequestContext.RegisterForCancellation(cancellationToken);
+                _cancellationRegistration = RequestContext.RegisterForCancellation(
+                    cancellationToken
+                );
             }
         }
 
@@ -83,34 +90,22 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         private RequestContext RequestContext
         {
-            get
-            {
-                return _requestContext;
-            }
+            get { return _requestContext; }
         }
 
         private Task Task
         {
-            get
-            {
-                return _tcs.Task;
-            }
+            get { return _tcs.Task; }
         }
 
         private SafeNativeOverlapped? NativeOverlapped
         {
-            get
-            {
-                return _overlapped;
-            }
+            get { return _overlapped; }
         }
 
         private HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO* RequestBlob
         {
-            get
-            {
-                return _memoryBlob;
-            }
+            get { return _memoryBlob; }
         }
 
         private void Reset(uint size)
@@ -133,9 +128,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             _backingBuffer = new byte[checked((int)size)];
             var boundHandle = RequestContext.Server.RequestQueue.BoundHandle;
-            _overlapped = new SafeNativeOverlapped(boundHandle,
-                boundHandle.AllocateNativeOverlapped(IOCallback, this, _backingBuffer));
-            _memoryBlob = (HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(_backingBuffer, 0);
+            _overlapped = new SafeNativeOverlapped(
+                boundHandle,
+                boundHandle.AllocateNativeOverlapped(IOCallback, this, _backingBuffer)
+            );
+            _memoryBlob =
+                (HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(
+                    _backingBuffer,
+                    0
+                );
         }
 
         // When you use netsh to configure HTTP.SYS with clientcertnegotiation = enable
@@ -165,15 +166,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 retry = false;
                 uint bytesReceived = 0;
 
-                uint statusCode =
-                    HttpApi.HttpReceiveClientCertificate(
-                        RequestQueueHandle,
-                        RequestContext.Request.UConnectionId,
-                        (uint)HttpApiTypes.HTTP_FLAGS.NONE,
-                        RequestBlob,
-                        size,
-                        &bytesReceived,
-                        NativeOverlapped!);
+                uint statusCode = HttpApi.HttpReceiveClientCertificate(
+                    RequestQueueHandle,
+                    RequestContext.Request.UConnectionId,
+                    (uint)HttpApiTypes.HTTP_FLAGS.NONE,
+                    RequestBlob,
+                    size,
+                    &bytesReceived,
+                    NativeOverlapped!
+                );
 
                 if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_MORE_DATA)
                 {
@@ -187,21 +188,24 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     // The client did not send a cert.
                     Complete(0, null);
                 }
-                else if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS &&
-                    HttpSysListener.SkipIOCPCallbackOnSuccess)
+                else if (
+                    statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                    && HttpSysListener.SkipIOCPCallbackOnSuccess
+                )
                 {
                     IOCompleted(statusCode, bytesReceived);
                 }
-                else if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS &&
-                    statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING)
+                else if (
+                    statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                    && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
+                )
                 {
                     // Some other bad error, possible(?) return values are:
                     // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                     // Also ERROR_BAD_DATA if we got it twice or it reported smaller size buffer required.
                     Fail(new HttpSysException((int)statusCode));
                 }
-            }
-            while (retry);
+            } while (retry);
 
             return Task;
         }
@@ -228,8 +232,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             IOCompleted(this, errorCode, numBytes);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Redirected to callback")]
-        private static unsafe void IOCompleted(ClientCertLoader asyncResult, uint errorCode, uint numBytes)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Redirected to callback"
+        )]
+        private static unsafe void IOCompleted(
+            ClientCertLoader asyncResult,
+            uint errorCode,
+            uint numBytes
+        )
         {
             RequestContext requestContext = asyncResult.RequestContext;
             try
@@ -240,22 +252,28 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     // return the size of the initial cert structure.  To get the full size,
                     // we need to add the certificate encoding size as well.
 
-                    HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO* pClientCertInfo = asyncResult.RequestBlob;
+                    HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO* pClientCertInfo =
+                        asyncResult.RequestBlob;
                     asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                     uint bytesReceived = 0;
-                    errorCode =
-                        HttpApi.HttpReceiveClientCertificate(
-                            requestContext.Server.RequestQueue.Handle,
-                            requestContext.Request.UConnectionId,
-                            (uint)HttpApiTypes.HTTP_FLAGS.NONE,
-                            asyncResult._memoryBlob,
-                            asyncResult._size,
-                            &bytesReceived,
-                            asyncResult._overlapped!);
+                    errorCode = HttpApi.HttpReceiveClientCertificate(
+                        requestContext.Server.RequestQueue.Handle,
+                        requestContext.Request.UConnectionId,
+                        (uint)HttpApiTypes.HTTP_FLAGS.NONE,
+                        asyncResult._memoryBlob,
+                        asyncResult._size,
+                        &bytesReceived,
+                        asyncResult._overlapped!
+                    );
 
-                    if (errorCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING ||
-                       (errorCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS && !HttpSysListener.SkipIOCPCallbackOnSuccess))
+                    if (
+                        errorCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
+                        || (
+                            errorCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                            && !HttpSysListener.SkipIOCPCallbackOnSuccess
+                        )
+                    )
                     {
                         return;
                     }
@@ -272,7 +290,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 }
                 else
                 {
-                    HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO* pClientCertInfo = asyncResult._memoryBlob;
+                    HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO* pClientCertInfo =
+                        asyncResult._memoryBlob;
                     if (pClientCertInfo == null)
                     {
                         asyncResult.Complete(0, null);
@@ -284,8 +303,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                             try
                             {
                                 byte[] certEncoded = new byte[pClientCertInfo->CertEncodedSize];
-                                Marshal.Copy((IntPtr)pClientCertInfo->pCertEncoded, certEncoded, 0, certEncoded.Length);
-                                asyncResult.Complete((int)pClientCertInfo->CertFlags, new X509Certificate2(certEncoded));
+                                Marshal.Copy(
+                                    (IntPtr)pClientCertInfo->pCertEncoded,
+                                    certEncoded,
+                                    0,
+                                    certEncoded.Length
+                                );
+                                asyncResult.Complete(
+                                    (int)pClientCertInfo->CertFlags,
+                                    new X509Certificate2(certEncoded)
+                                );
                             }
                             catch (CryptographicException exception)
                             {
@@ -307,9 +334,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
         }
 
-        private static unsafe void WaitCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+        private static unsafe void WaitCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        )
         {
-            var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
+            var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(
+                nativeOverlapped
+            )!;
             IOCompleted(asyncResult, errorCode, numBytes);
         }
 
@@ -351,7 +384,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             get { return _tcs.Task.IsCompleted; }
         }
 
-        internal static unsafe ChannelBinding? GetChannelBindingFromTls(RequestQueue requestQueue, ulong connectionId, ILogger logger)
+        internal static unsafe ChannelBinding? GetChannelBindingFromTls(
+            RequestQueue requestQueue,
+            ulong connectionId,
+            ILogger logger
+        )
         {
             // +128 since a CBT is usually <128 thus we need to call HRCC just once. If the CBT
             // is >128 we will get ERROR_MORE_DATA and call again
@@ -362,7 +399,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             byte[]? blob = null;
             SafeLocalFreeChannelBinding? token = null;
 
-            uint bytesReceived = 0; ;
+            uint bytesReceived = 0;
+            ;
             uint statusCode;
 
             do
@@ -379,7 +417,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         blobPtr,
                         (uint)size,
                         &bytesReceived,
-                        SafeNativeOverlapped.Zero);
+                        SafeNativeOverlapped.Zero
+                    );
 
                     if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
                     {
@@ -398,7 +437,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
                         size = RequestChannelBindStatusSize + tokenSize;
                     }
-                    else if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_INVALID_PARAMETER)
+                    else if (
+                        statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_INVALID_PARAMETER
+                    )
                     {
                         Log.ChannelBindingUnsupported(logger);
                         return null; // old schannel library which doesn't support CBT
@@ -410,8 +451,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         break;
                     }
                 }
-            }
-            while (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS);
+            } while (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS);
 
             return token;
         }
@@ -419,7 +459,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private static int GetTokenOffsetFromBlob(IntPtr blob)
         {
             Debug.Assert(blob != IntPtr.Zero);
-            IntPtr tokenPointer = Marshal.ReadIntPtr(blob, (int)Marshal.OffsetOf<HttpApiTypes.HTTP_REQUEST_CHANNEL_BIND_STATUS>("ChannelToken"));
+            IntPtr tokenPointer = Marshal.ReadIntPtr(
+                blob,
+                (int)Marshal.OffsetOf<HttpApiTypes.HTTP_REQUEST_CHANNEL_BIND_STATUS>("ChannelToken")
+            );
             Debug.Assert(tokenPointer != IntPtr.Zero);
             return (int)IntPtrHelper.Subtract(tokenPointer, blob);
         }
@@ -427,7 +470,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private static int GetTokenSizeFromBlob(IntPtr blob)
         {
             Debug.Assert(blob != IntPtr.Zero);
-            return Marshal.ReadInt32(blob, (int)Marshal.OffsetOf<HttpApiTypes.HTTP_REQUEST_CHANNEL_BIND_STATUS>("ChannelTokenSize"));
+            return Marshal.ReadInt32(
+                blob,
+                (int)Marshal.OffsetOf<HttpApiTypes.HTTP_REQUEST_CHANNEL_BIND_STATUS>(
+                    "ChannelTokenSize"
+                )
+            );
         }
     }
 }

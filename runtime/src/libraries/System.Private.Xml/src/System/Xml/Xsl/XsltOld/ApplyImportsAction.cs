@@ -30,7 +30,11 @@ namespace System.Xml.Xsl.XsltOld
             switch (frame.State)
             {
                 case Initialized:
-                    processor.PushTemplateLookup(frame.NodeSet, _mode, /*importsOf:*/_stylesheet);
+                    processor.PushTemplateLookup(
+                        frame.NodeSet,
+                        _mode, /*importsOf:*/
+                        _stylesheet
+                    );
                     frame.State = TemplateProcessed;
                     break;
                 case TemplateProcessed:

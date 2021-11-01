@@ -32,7 +32,10 @@ namespace System.Net.Test.Common
         public const long H3_VERSION_FALLBACK = 0x110;
 
         private readonly QuicConnection _connection;
-        private readonly Dictionary<int, Http3LoopbackStream> _openStreams = new Dictionary<int, Http3LoopbackStream>();
+        private readonly Dictionary<int, Http3LoopbackStream> _openStreams = new Dictionary<
+            int,
+            Http3LoopbackStream
+        >();
         private Http3LoopbackStream _currentStream;
         private bool _closed;
 
@@ -50,9 +53,8 @@ namespace System.Net.Test.Common
 
             if (!_closed)
             {
-            //    CloseAsync(H3_INTERNAL_ERROR).GetAwaiter().GetResult();
+                //    CloseAsync(H3_INTERNAL_ERROR).GetAwaiter().GetResult();
             }
-
             //_connection.Dispose();
         }
 
@@ -108,15 +110,15 @@ namespace System.Net.Test.Common
             do
             {
                 stream = await AcceptStreamAsync().ConfigureAwait(false);
-            }
-            while (!stream.CanWrite); // skip control stream.
+            } while (!stream.CanWrite); // skip control stream.
 
             return stream;
         }
 
         public async Task<(Http3LoopbackStream clientControlStream, Http3LoopbackStream requestStream)> AcceptControlAndRequestStreamAsync()
         {
-            Http3LoopbackStream streamA = null, streamB = null;
+            Http3LoopbackStream streamA = null,
+                streamB = null;
 
             try
             {
@@ -127,7 +129,10 @@ namespace System.Net.Test.Common
                 {
                     (false, true) => (streamA, streamB),
                     (true, false) => (streamB, streamA),
-                    _ => throw new Exception("Expected one unidirectional and one bidirectional stream; received something else.")
+                    _
+                      => throw new Exception(
+                          "Expected one unidirectional and one bidirectional stream; received something else."
+                      )
                 };
             }
             catch
@@ -149,22 +154,41 @@ namespace System.Net.Test.Common
             return await stream.ReadRequestDataAsync(readBody).ConfigureAwait(false);
         }
 
-        public override Task SendResponseAsync(HttpStatusCode? statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "", bool isFinal = true, int requestId = 0)
+        public override Task SendResponseAsync(
+            HttpStatusCode? statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = "",
+            bool isFinal = true,
+            int requestId = 0
+        )
         {
-            return GetOpenRequest(requestId).SendResponseAsync(statusCode, headers, content, isFinal);
+            return GetOpenRequest(requestId)
+                .SendResponseAsync(statusCode, headers, content, isFinal);
         }
 
-        public override Task SendResponseBodyAsync(byte[] content, bool isFinal = true, int requestId = 0)
+        public override Task SendResponseBodyAsync(
+            byte[] content,
+            bool isFinal = true,
+            int requestId = 0
+        )
         {
             return GetOpenRequest(requestId).SendResponseBodyAsync(content, isFinal);
         }
 
-        public override Task SendResponseHeadersAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, int requestId = 0)
+        public override Task SendResponseHeadersAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            int requestId = 0
+        )
         {
             return GetOpenRequest(requestId).SendResponseHeadersAsync(statusCode, headers);
         }
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
             Http3LoopbackStream stream = await AcceptRequestStreamAsync().ConfigureAwait(false);
             HttpRequestData request = await stream.HandleRequestAsync(statusCode, headers, content);
@@ -175,10 +199,14 @@ namespace System.Net.Test.Common
             return request;
         }
 
-        public override async Task WaitForCancellationAsync(bool ignoreIncomingData = true, int requestId = 0)
+        public override async Task WaitForCancellationAsync(
+            bool ignoreIncomingData = true,
+            int requestId = 0
+        )
         {
-            await GetOpenRequest(requestId).WaitForCancellationAsync(ignoreIncomingData).ConfigureAwait(false);
+            await GetOpenRequest(requestId)
+                .WaitForCancellationAsync(ignoreIncomingData)
+                .ConfigureAwait(false);
         }
     }
-
 }

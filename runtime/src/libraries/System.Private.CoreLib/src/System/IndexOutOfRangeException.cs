@@ -15,17 +15,17 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class IndexOutOfRangeException : SystemException
     {
-        public IndexOutOfRangeException()
-            : base(SR.Arg_IndexOutOfRangeException)
+        public IndexOutOfRangeException() : base(SR.Arg_IndexOutOfRangeException)
         {
             HResult = HResults.COR_E_INDEXOUTOFRANGE;
         }
 
-        public IndexOutOfRangeException(string? message)
-            : base(message)
+        public IndexOutOfRangeException(string? message) : base(message)
         {
             HResult = HResults.COR_E_INDEXOUTOFRANGE;
         }
@@ -36,8 +36,7 @@ namespace System
             HResult = HResults.COR_E_INDEXOUTOFRANGE;
         }
 
-        private IndexOutOfRangeException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private IndexOutOfRangeException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

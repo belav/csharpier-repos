@@ -7,9 +7,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Model
     {
         public const int WoodstockYear = 1969;
 
-        public static Model Model { get; } = new Model
-        {
-            Name = "Woodstock",
-        };
+        public static Model Model { get; } = new Model { Name = "Woodstock", };
     }
 }

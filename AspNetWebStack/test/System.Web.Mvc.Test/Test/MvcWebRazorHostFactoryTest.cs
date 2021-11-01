@@ -13,7 +13,6 @@ namespace System.Web.Mvc.Test
         public void Constructor()
         {
             new MvcWebRazorHostFactory();
-
             // All is cool
         }
 

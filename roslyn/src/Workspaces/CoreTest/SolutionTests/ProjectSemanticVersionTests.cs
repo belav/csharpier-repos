@@ -20,17 +20,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
             var project = AddEmptyProject(workspace.CurrentSolution);
 
-            await AssertSemanticVersionChangedAsync(project, project.AddDocument("Hello.cs", "class C { }").Project);
+            await AssertSemanticVersionChangedAsync(
+                project,
+                project.AddDocument("Hello.cs", "class C { }").Project
+            );
         }
 
         [Fact]
         public async Task RemovingDocumentWithNewClassChangesVersion()
         {
             using var workspace = CreateWorkspace();
-            var project = AddEmptyProject(workspace.CurrentSolution)
-                .AddDocument("Hello.cs", "class C { }").Project;
+            var project =
+                AddEmptyProject(workspace.CurrentSolution)
+                    .AddDocument("Hello.cs", "class C { }").Project;
 
-            await AssertSemanticVersionChangedAsync(project, project.RemoveDocument(project.DocumentIds.Single()));
+            await AssertSemanticVersionChangedAsync(
+                project,
+                project.RemoveDocument(project.DocumentIds.Single())
+            );
         }
 
         [Fact]
@@ -44,7 +51,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "public async Task M() { }")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "public async Task M() { }")
+                ).Project
+            );
         }
 
         [Fact]
@@ -58,7 +68,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionUnchangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "int x = 10;")).Project);
+                document.WithText(text.Replace(position, length: 0, "int x = 10;")).Project
+            );
         }
 
         [Fact]
@@ -72,7 +83,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "int x = 10")).Project);
+                document.WithText(text.Replace(position, length: 0, "int x = 10")).Project
+            );
         }
 
         [Fact]
@@ -86,7 +98,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionUnchangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "     \r\n")).Project);
+                document.WithText(text.Replace(position, length: 0, "     \r\n")).Project
+            );
         }
 
         [Fact]
@@ -100,7 +113,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "public int X = 20;")).Project);
+                document.WithText(text.Replace(position, length: 0, "public int X = 20;")).Project
+            );
         }
 
         [Fact]
@@ -114,7 +128,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionUnchangedAsync(
                 document.Project,
-                document.WithText(text.Replace(span, "100")).Project);
+                document.WithText(text.Replace(span, "100")).Project
+            );
         }
 
         [Fact]
@@ -128,7 +143,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "public const int X = 20;")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "public const int X = 20;")
+                ).Project
+            );
         }
 
         [Fact]
@@ -142,7 +160,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(span, "100")).Project);
+                document.WithText(text.Replace(span, "100")).Project
+            );
         }
 
         [Fact]
@@ -156,7 +175,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "Public Sub M()\r\nEnd Sub")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "Public Sub M()\r\nEnd Sub")
+                ).Project
+            );
         }
 
         [Fact]
@@ -170,7 +192,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionUnchangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "Dim x As Integer = 10")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "Dim x As Integer = 10")
+                ).Project
+            );
         }
 
         [Fact]
@@ -184,7 +209,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "Optional x As Integer = 10")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "Optional x As Integer = 10")
+                ).Project
+            );
         }
 
         [Fact]
@@ -198,7 +226,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionUnchangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "     \r\n")).Project);
+                document.WithText(text.Replace(position, length: 0, "     \r\n")).Project
+            );
         }
 
         [Fact]
@@ -212,7 +241,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "Public X As Integer = 20")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "Public X As Integer = 20")
+                ).Project
+            );
         }
 
         [Fact]
@@ -226,7 +258,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionUnchangedAsync(
                 document.Project,
-                document.WithText(text.Replace(span, "100")).Project);
+                document.WithText(text.Replace(span, "100")).Project
+            );
         }
 
         [Fact]
@@ -240,7 +273,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(position, length: 0, "Public Const X As Integer = 20")).Project);
+                document.WithText(
+                    text.Replace(position, length: 0, "Public Const X As Integer = 20")
+                ).Project
+            );
         }
 
         [Fact]
@@ -254,17 +290,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             await AssertSemanticVersionChangedAsync(
                 document.Project,
-                document.WithText(text.Replace(span, "100")).Project);
+                document.WithText(text.Replace(span, "100")).Project
+            );
         }
 
-        private static async Task AssertSemanticVersionChangedAsync(Project project1, Project project2)
+        private static async Task AssertSemanticVersionChangedAsync(
+            Project project1,
+            Project project2
+        )
         {
-            Assert.NotEqual(await project1.GetSemanticVersionAsync(), await project2.GetSemanticVersionAsync());
+            Assert.NotEqual(
+                await project1.GetSemanticVersionAsync(),
+                await project2.GetSemanticVersionAsync()
+            );
         }
 
-        private static async Task AssertSemanticVersionUnchangedAsync(Project project1, Project project2)
+        private static async Task AssertSemanticVersionUnchangedAsync(
+            Project project1,
+            Project project2
+        )
         {
-            Assert.Equal(await project1.GetSemanticVersionAsync(), await project2.GetSemanticVersionAsync());
+            Assert.Equal(
+                await project1.GetSemanticVersionAsync(),
+                await project2.GetSemanticVersionAsync()
+            );
         }
     }
 }

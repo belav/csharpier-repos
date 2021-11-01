@@ -21,9 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <summary>
         /// Initializes a new instance of <see cref="AttributeRoute"/>.
         /// </summary>
-        public AttributeRouteModel()
-        {
-        }
+        public AttributeRouteModel() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="AttributeRoute"/> using the specified <paramref name="templateProvider"/>.
@@ -107,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// parameters are <c>null</c>.</returns>
         public static AttributeRouteModel? CombineAttributeRouteModel(
             AttributeRouteModel? left,
-            AttributeRouteModel? right)
+            AttributeRouteModel? right
+        )
         {
             right = right ?? _default;
 
@@ -131,7 +130,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 Template = combinedTemplate,
                 Order = right.Order ?? left.Order,
                 Name = ChooseName(left, right),
-                SuppressLinkGeneration = left.SuppressLinkGeneration || right.SuppressLinkGeneration,
+                SuppressLinkGeneration =
+                    left.SuppressLinkGeneration || right.SuppressLinkGeneration,
                 SuppressPathMatching = left.SuppressPathMatching || right.SuppressPathMatching,
             };
         }
@@ -158,14 +158,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </remarks>
         public static bool IsOverridePattern(string? template)
         {
-            return template != null &&
-                (template.StartsWith("~/", StringComparison.Ordinal) ||
-                template.StartsWith("/", StringComparison.Ordinal));
+            return template != null
+                && (
+                    template.StartsWith("~/", StringComparison.Ordinal)
+                    || template.StartsWith("/", StringComparison.Ordinal)
+                );
         }
 
-        private static string? ChooseName(
-            AttributeRouteModel left,
-            AttributeRouteModel right)
+        private static string? ChooseName(AttributeRouteModel left, AttributeRouteModel right)
         {
             if (right.Name == null && string.IsNullOrEmpty(right.Template))
             {
@@ -203,10 +203,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private static bool IsEmptyLeftSegment(string? template)
         {
-            return template == null ||
-                template.Equals(string.Empty, StringComparison.Ordinal) ||
-                template.Equals("~/", StringComparison.Ordinal) ||
-                template.Equals("/", StringComparison.Ordinal);
+            return template == null
+                || template.Equals(string.Empty, StringComparison.Ordinal)
+                || template.Equals("~/", StringComparison.Ordinal)
+                || template.Equals("/", StringComparison.Ordinal);
         }
 
         private static string? CleanTemplate(string? result)
@@ -267,7 +267,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="values">The token values to use.</param>
         /// <param name="routeTokenTransformer">The route token transformer.</param>
         /// <returns>A new string with the replaced values.</returns>
-        public static string ReplaceTokens(string template, IDictionary<string, string?> values, IOutboundParameterTransformer? routeTokenTransformer)
+        public static string ReplaceTokens(
+            string template,
+            IDictionary<string, string?> values,
+            IOutboundParameterTransformer? routeTokenTransformer
+        )
         {
             var builder = new StringBuilder();
             var state = TemplateParserState.Plaintext;
@@ -314,17 +318,21 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         else if (c == ']')
                         {
                             // This is zero-width parameter - not allowed.
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
-                                template,
-                                Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed);
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
+                                    template,
+                                    Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed
+                                );
                             throw new InvalidOperationException(message);
                         }
                         else if (c == null)
                         {
                             // This is a left-bracket at the end of the string.
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
-                                template,
-                                Resources.AttributeRoute_TokenReplacement_UnclosedToken);
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
+                                    template,
+                                    Resources.AttributeRoute_TokenReplacement_UnclosedToken
+                                );
                             throw new InvalidOperationException(message);
                         }
                         else
@@ -344,17 +352,21 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         else if (c == null)
                         {
                             // This is an imbalanced right-bracket at the end of the string.
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
-                                template,
-                                Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets);
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
+                                    template,
+                                    Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets
+                                );
                             throw new InvalidOperationException(message);
                         }
                         else
                         {
                             // This is an imbalanced right-bracket.
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
-                                template,
-                                Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets);
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
+                                    template,
+                                    Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets
+                                );
                             throw new InvalidOperationException(message);
                         }
                     case TemplateParserState.InsideToken:
@@ -372,9 +384,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         else if (c == null)
                         {
                             // This is an unclosed replacement token
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
-                                template,
-                                Resources.AttributeRoute_TokenReplacement_UnclosedToken);
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
+                                    template,
+                                    Resources.AttributeRoute_TokenReplacement_UnclosedToken
+                                );
                             throw new InvalidOperationException(message);
                         }
                         else
@@ -392,9 +406,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         else
                         {
                             // Unescaped left-bracket is not allowed inside a token.
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
-                                template,
-                                Resources.AttributeRoute_TokenReplacement_UnescapedBraceInToken);
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
+                                    template,
+                                    Resources.AttributeRoute_TokenReplacement_UnescapedBraceInToken
+                                );
                             throw new InvalidOperationException(message);
                         }
                     case TemplateParserState.InsideToken | TemplateParserState.SeenRight:
@@ -415,10 +431,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                             if (!values.TryGetValue(token, out var value))
                             {
                                 // Value not found
-                                var message = Resources.FormatAttributeRoute_TokenReplacement_ReplacementValueNotFound(
-                                    template,
-                                    token,
-                                    string.Join(", ", values.Keys.OrderBy(k => k, StringComparer.OrdinalIgnoreCase)));
+                                var message =
+                                    Resources.FormatAttributeRoute_TokenReplacement_ReplacementValueNotFound(
+                                        template,
+                                        token,
+                                        string.Join(
+                                            ", ",
+                                            values.Keys.OrderBy(
+                                                k => k,
+                                                StringComparer.OrdinalIgnoreCase
+                                            )
+                                        )
+                                    );
                                 throw new InvalidOperationException(message);
                             }
 
@@ -463,15 +487,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // default state - allow non-special characters to pass through to the
             // buffer.
             Plaintext = 0,
-
             // We're inside a replacement token, may be combined with other states to detect
             // a possible escaped bracket inside the token.
             InsideToken = 1,
-
             // We've seen a left brace, need to see the next character to find out if it's escaped
             // or not.
             SeenLeft = 2,
-
             // We've seen a right brace, need to see the next character to find out if it's escaped
             // or not.
             SeenRight = 4,

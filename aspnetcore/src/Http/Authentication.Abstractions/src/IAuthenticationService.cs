@@ -28,7 +28,11 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="scheme">The name of the authentication scheme.</param>
         /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
         /// <returns>A task.</returns>
-        Task ChallengeAsync(HttpContext context, string? scheme, AuthenticationProperties? properties);
+        Task ChallengeAsync(
+            HttpContext context,
+            string? scheme,
+            AuthenticationProperties? properties
+        );
 
         /// <summary>
         /// Forbids the specified authentication scheme.
@@ -48,7 +52,12 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="principal">The <see cref="ClaimsPrincipal"/> to sign in.</param>
         /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
         /// <returns>A task.</returns>
-        Task SignInAsync(HttpContext context, string? scheme, ClaimsPrincipal principal, AuthenticationProperties? properties);
+        Task SignInAsync(
+            HttpContext context,
+            string? scheme,
+            ClaimsPrincipal principal,
+            AuthenticationProperties? properties
+        );
 
         /// <summary>
         /// Sign out the specified authentication scheme.
@@ -57,6 +66,10 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="scheme">The name of the authentication scheme.</param>
         /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
         /// <returns>A task.</returns>
-        Task SignOutAsync(HttpContext context, string? scheme, AuthenticationProperties? properties);
+        Task SignOutAsync(
+            HttpContext context,
+            string? scheme,
+            AuthenticationProperties? properties
+        );
     }
 }

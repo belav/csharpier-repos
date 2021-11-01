@@ -11,9 +11,9 @@ internal static partial class Interop
     {
         internal struct IPPacketInformation
         {
-            public IPAddress Address;  // Destination IP Address
+            public IPAddress Address; // Destination IP Address
             public int InterfaceIndex; // Interface index
-            private int _padding;       // Pad out to 8-byte alignment
+            private int _padding; // Pad out to 8-byte alignment
         }
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetControlMessageBufferSize")]
@@ -21,6 +21,10 @@ internal static partial class Interop
         internal static extern int GetControlMessageBufferSize(int isIPv4, int isIPv6);
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_TryGetIPPacketInformation")]
-        internal static extern unsafe bool TryGetIPPacketInformation(MessageHeader* messageHeader, bool isIPv4, IPPacketInformation* packetInfo);
+        internal static extern unsafe bool TryGetIPPacketInformation(
+            MessageHeader* messageHeader,
+            bool isIPv4,
+            IPPacketInformation* packetInfo
+        );
     }
 }

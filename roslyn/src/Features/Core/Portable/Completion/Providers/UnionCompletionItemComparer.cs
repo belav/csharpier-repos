@@ -11,19 +11,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal class UnionCompletionItemComparer : IEqualityComparer<CompletionItem>
     {
-        public static UnionCompletionItemComparer Instance { get; } = new UnionCompletionItemComparer();
+        public static UnionCompletionItemComparer Instance { get; } =
+            new UnionCompletionItemComparer();
 
-        private UnionCompletionItemComparer()
-        {
-        }
+        private UnionCompletionItemComparer() { }
 
         public bool Equals(CompletionItem x, CompletionItem y)
         {
-            return x.DisplayText == y.DisplayText &&
-                (x.Tags == y.Tags || System.Linq.Enumerable.SequenceEqual(x.Tags, y.Tags));
+            return x.DisplayText == y.DisplayText
+                && (x.Tags == y.Tags || System.Linq.Enumerable.SequenceEqual(x.Tags, y.Tags));
         }
 
-        public int GetHashCode(CompletionItem obj)
-            => Hash.Combine(obj.DisplayText.GetHashCode(), obj.Tags.Length);
+        public int GetHashCode(CompletionItem obj) =>
+            Hash.Combine(obj.DisplayText.GetHashCode(), obj.Tags.Length);
     }
 }

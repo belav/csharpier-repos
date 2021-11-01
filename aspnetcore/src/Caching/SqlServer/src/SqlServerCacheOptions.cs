@@ -45,10 +45,7 @@ namespace Microsoft.Extensions.Caching.SqlServer
 
         SqlServerCacheOptions IOptions<SqlServerCacheOptions>.Value
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
     }
 }

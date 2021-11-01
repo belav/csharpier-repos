@@ -35,7 +35,10 @@ namespace FilesWebSite.Controllers
             var files = new Dictionary<string, List<string>>();
             foreach (var keyValuePair in product.Specs)
             {
-                files.Add(keyValuePair.Key, keyValuePair.Value?.Select(formFile => formFile?.FileName).ToList());
+                files.Add(
+                    keyValuePair.Key,
+                    keyValuePair.Value?.Select(formFile => formFile?.FileName).ToList()
+                );
             }
 
             return new { Name = product.Name, Specs = files };

@@ -26,15 +26,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
 
-            var modelMetadata = new EmptyModelMetadataProvider()
-                .GetMetadataForType(typeof(int));
+            var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(int));
 
             context.ModelState.AddModelError(
                 "person.body",
                 new UnsupportedContentTypeException("error"),
-                modelMetadata);
+                modelMetadata
+            );
 
             var filter = new UnsupportedContentTypeFilter();
 
@@ -59,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
 
             context.ModelState.AddModelError("person.body", "Some error");
 
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
 
             var filter = new UnsupportedContentTypeFilter();
 
@@ -109,15 +112,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
 
-            var modelMetadata = new EmptyModelMetadataProvider()
-                .GetMetadataForType(typeof(int));
+            var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(int));
 
-            context.ModelState.AddModelError(
-                "person.body",
-                new Exception("error"),
-                modelMetadata);
+            context.ModelState.AddModelError("person.body", new Exception("error"), modelMetadata);
 
             var filter = new UnsupportedContentTypeFilter();
 

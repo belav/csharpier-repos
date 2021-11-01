@@ -5,14 +5,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     internal class FirstDirectiveHtmlLanguageCharacteristics : HtmlLanguageCharacteristics
     {
-        private static readonly FirstDirectiveHtmlLanguageCharacteristics _instance = new FirstDirectiveHtmlLanguageCharacteristics();
+        private static readonly FirstDirectiveHtmlLanguageCharacteristics _instance =
+            new FirstDirectiveHtmlLanguageCharacteristics();
 
-        private FirstDirectiveHtmlLanguageCharacteristics()
-        {
-        }
+        private FirstDirectiveHtmlLanguageCharacteristics() { }
 
         public new static FirstDirectiveHtmlLanguageCharacteristics Instance => _instance;
 
-        public override HtmlTokenizer CreateTokenizer(ITextDocument source) => new DirectiveHtmlTokenizer(source);
+        public override HtmlTokenizer CreateTokenizer(ITextDocument source) =>
+            new DirectiveHtmlTokenizer(source);
     }
 }

@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
 
         public INavigationBarItemService ItemService { get; }
 
-        public NavigationBarModel(ImmutableArray<NavigationBarItem> types, VersionStamp semanticVersionStamp, INavigationBarItemService itemService)
+        public NavigationBarModel(
+            ImmutableArray<NavigationBarItem> types,
+            VersionStamp semanticVersionStamp,
+            INavigationBarItemService itemService
+        )
         {
             Contract.ThrowIfNull(types);
 

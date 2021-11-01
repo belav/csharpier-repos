@@ -48,12 +48,23 @@ namespace IdeCoreBenchmarks
             if (_workspace == null)
                 throw new ArgumentException("Couldn't create workspace");
 
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(
+                        StorageOptions.Database,
+                        StorageDatabase.SQLite
+                    )
+                )
+            );
 
             Console.WriteLine("Opening roslyn");
             var start = DateTime.Now;
-            _ = _workspace.OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None).Result;
+            _ =
+                _workspace.OpenSolutionAsync(
+                    _solutionPath,
+                    progress: null,
+                    CancellationToken.None
+                ).Result;
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
 
             var storageService = _workspace.Services.GetService<IPersistentStorageService>();
@@ -62,7 +73,11 @@ namespace IdeCoreBenchmarks
 
             // Force a storage instance to be created.  This makes it simple to go examine it prior to any operations we
             // perform, including seeing how big the initial string table is.
-            using var storage = storageService.GetStorageAsync(_workspace.CurrentSolution, CancellationToken.None).AsTask().GetAwaiter().GetResult();
+            using var storage = storageService
+                .GetStorageAsync(_workspace.CurrentSolution, CancellationToken.None)
+                .AsTask()
+                .GetAwaiter()
+                .GetResult();
         }
 
         [GlobalCleanup]
@@ -79,8 +94,15 @@ namespace IdeCoreBenchmarks
             sw.Start();
             var solution = _workspace.CurrentSolution;
             // Search each project with an independent threadpool task.
-            var searchTasks = solution.Projects.Select(
-                p => Task.Run(() => SearchAsync(p, priorityDocuments: ImmutableArray<Document>.Empty), CancellationToken.None)).ToArray();
+            var searchTasks = solution.Projects
+                .Select(
+                    p =>
+                        Task.Run(
+                            () => SearchAsync(p, priorityDocuments: ImmutableArray<Document>.Empty),
+                            CancellationToken.None
+                        )
+                )
+                .ToArray();
 
             var result = await Task.WhenAll(searchTasks).ConfigureAwait(false);
             var sum = result.Sum();
@@ -89,17 +111,26 @@ namespace IdeCoreBenchmarks
             Console.WriteLine($"Time: {sw.ElapsedMilliseconds}");
         }
 
-        private async Task<int> SearchAsync(Project project, ImmutableArray<Document> priorityDocuments)
+        private async Task<int> SearchAsync(
+            Project project,
+            ImmutableArray<Document> priorityDocuments
+        )
         {
             var service = project.LanguageServices.GetService<INavigateToSearchService>();
             var count = 0;
             await service.SearchProjectAsync(
-                project, priorityDocuments, "Document", service.KindsProvided,
+                project,
+                priorityDocuments,
+                "Document",
+                service.KindsProvided,
                 r =>
                 {
                     Interlocked.Increment(ref count);
                     return Task.CompletedTask;
-                }, isFullyLoaded: true, CancellationToken.None);
+                },
+                isFullyLoaded: true,
+                CancellationToken.None
+            );
 
             return count;
         }

@@ -11,8 +11,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Build_DisplayNameIsName_NameComparisonFullMatch()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
+            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(
+                tagHelperBuilder
+            );
             var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
             builder
@@ -30,8 +36,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Build_DisplayNameIsNameWithDots_NameComparisonPrefixMatch()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
+            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(
+                tagHelperBuilder
+            );
             var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
             builder

@@ -8,7 +8,11 @@ namespace System.Reflection.Metadata
     public static class AssemblyExtensions
     {
         [CLSCompliant(false)]
-        public static unsafe bool TryGetRawMetadata(this Assembly assembly, out byte* blob, out int length) => throw new NotImplementedException();
+        public static unsafe bool TryGetRawMetadata(
+            this Assembly assembly,
+            out byte* blob,
+            out int length
+        ) => throw new NotImplementedException();
 
         /// <summary>
         /// Updates the specified assembly using the provided metadata, IL and PDB deltas.
@@ -25,43 +29,73 @@ namespace System.Reflection.Metadata
         /// <param name="pdbDelta">The PDB changes to be applied.</param>
         /// <exception cref="ArgumentNullException">The assembly argument is null.</exception>
         /// <exception cref="NotSupportedException">The update could not be applied.</exception>
-        public static void ApplyUpdate(Assembly assembly, ReadOnlySpan<byte> metadataDelta, ReadOnlySpan<byte> ilDelta, ReadOnlySpan<byte> pdbDelta)
+        public static void ApplyUpdate(
+            Assembly assembly,
+            ReadOnlySpan<byte> metadataDelta,
+            ReadOnlySpan<byte> ilDelta,
+            ReadOnlySpan<byte> pdbDelta
+        )
         {
             if (assembly is not RuntimeAssembly runtimeAssembly)
             {
-                if (assembly is null) throw new ArgumentNullException(nameof(assembly));
+                if (assembly is null)
+                    throw new ArgumentNullException(nameof(assembly));
                 throw new ArgumentException(SR.Argument_MustBeRuntimeAssembly);
             }
 
             // System.Private.CoreLib is not editable
             if (runtimeAssembly == typeof(AssemblyExtensions).Assembly)
-                throw new InvalidOperationException (SR.InvalidOperation_AssemblyNotEditable);
-
+                throw new InvalidOperationException(SR.InvalidOperation_AssemblyNotEditable);
 #if !FEATURE_METADATA_UPDATE
-            throw new NotSupportedException (SR.NotSupported_MethodBodyReplacement);
+            throw new NotSupportedException(SR.NotSupported_MethodBodyReplacement);
 #else
             unsafe
             {
-                IntPtr monoAssembly = runtimeAssembly.GetUnderlyingNativeHandle ();
-                fixed (byte* metadataDeltaPtr = metadataDelta, ilDeltaPtr = ilDelta, pdbDeltaPtr = pdbDelta)
+                IntPtr monoAssembly = runtimeAssembly.GetUnderlyingNativeHandle();
+                fixed (
+                    byte* metadataDeltaPtr = metadataDelta,
+                        ilDeltaPtr = ilDelta,
+                        pdbDeltaPtr = pdbDelta
+                )
                 {
-                    ApplyUpdate_internal(monoAssembly, metadataDeltaPtr, metadataDelta.Length, ilDeltaPtr, ilDelta.Length, pdbDeltaPtr, pdbDelta.Length);
+                    ApplyUpdate_internal(
+                        monoAssembly,
+                        metadataDeltaPtr,
+                        metadataDelta.Length,
+                        ilDeltaPtr,
+                        ilDelta.Length,
+                        pdbDeltaPtr,
+                        pdbDelta.Length
+                    );
                 }
             }
 #endif
         }
 
-        internal static void ApplyUpdateSdb(Assembly assembly, byte[] metadataDelta, byte[] ilDelta, byte[]? pdbDelta)
+        internal static void ApplyUpdateSdb(
+            Assembly assembly,
+            byte[] metadataDelta,
+            byte[] ilDelta,
+            byte[]? pdbDelta
+        )
         {
             ReadOnlySpan<byte> md = metadataDelta;
             ReadOnlySpan<byte> il = ilDelta;
             ReadOnlySpan<byte> dpdb = pdbDelta == null ? default : pdbDelta;
-            ApplyUpdate (assembly, md, il, dpdb);
+            ApplyUpdate(assembly, md, il, dpdb);
         }
 
 #if FEATURE_METADATA_UPDATE
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        private static unsafe extern void ApplyUpdate_internal (IntPtr base_assm, byte* dmeta_bytes, int dmeta_length, byte *dil_bytes, int dil_length, byte *dpdb_bytes, int dpdb_length);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private static unsafe extern void ApplyUpdate_internal(
+            IntPtr base_assm,
+            byte* dmeta_bytes,
+            int dmeta_length,
+            byte* dil_bytes,
+            int dil_length,
+            byte* dpdb_bytes,
+            int dpdb_length
+        );
 #endif
 
     }

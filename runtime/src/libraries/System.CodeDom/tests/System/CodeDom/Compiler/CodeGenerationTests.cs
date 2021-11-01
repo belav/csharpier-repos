@@ -19,7 +19,9 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeDomProvider provider = GetProvider();
             string ext = provider.FileExtension;
-            CodeDomProvider provider2 = CodeDomProvider.CreateProvider(CodeDomProvider.GetLanguageFromExtension(ext));
+            CodeDomProvider provider2 = CodeDomProvider.CreateProvider(
+                CodeDomProvider.GetLanguageFromExtension(ext)
+            );
             Assert.Equal(provider.GetType(), provider2.GetType());
         }
 
@@ -29,7 +31,7 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeDomProvider provider = GetProvider();
 
-            var options = new CompilerParameters(new string[] { }, "test.exe");
+            var options = new CompilerParameters(new string[] {  }, "test.exe");
 
             var cu = new CodeCompileUnit();
             var ns = new CodeNamespace("ns");
@@ -44,18 +46,40 @@ namespace System.CodeDom.Compiler.Tests
             {
                 File.WriteAllText(tempPath, GetEmptyProgramSource());
 
-                Assert.Throws<PlatformNotSupportedException>(() => provider.CompileAssemblyFromFile(options, tempPath));
-                Assert.Throws<PlatformNotSupportedException>(() => provider.CompileAssemblyFromDom(options, cu));
-                Assert.Throws<PlatformNotSupportedException>(() => provider.CompileAssemblyFromSource(options, GetEmptyProgramSource()));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => provider.CompileAssemblyFromFile(options, tempPath)
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => provider.CompileAssemblyFromDom(options, cu)
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => provider.CompileAssemblyFromSource(options, GetEmptyProgramSource())
+                );
 
 #pragma warning disable 0618 // obsolete
                 ICodeCompiler cc = provider.CreateCompiler();
-                Assert.Throws<PlatformNotSupportedException>(() => cc.CompileAssemblyFromDom(options, cu));
-                Assert.Throws<PlatformNotSupportedException>(() => cc.CompileAssemblyFromDomBatch(options, new[] { cu }));
-                Assert.Throws<PlatformNotSupportedException>(() => cc.CompileAssemblyFromFile(options, tempPath));
-                Assert.Throws<PlatformNotSupportedException>(() => cc.CompileAssemblyFromFileBatch(options, new[] { tempPath }));
-                Assert.Throws<PlatformNotSupportedException>(() => cc.CompileAssemblyFromSource(options, GetEmptyProgramSource()));
-                Assert.Throws<PlatformNotSupportedException>(() => cc.CompileAssemblyFromSourceBatch(options, new[] { GetEmptyProgramSource() }));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => cc.CompileAssemblyFromDom(options, cu)
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => cc.CompileAssemblyFromDomBatch(options, new[] { cu })
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => cc.CompileAssemblyFromFile(options, tempPath)
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => cc.CompileAssemblyFromFileBatch(options, new[] { tempPath })
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => cc.CompileAssemblyFromSource(options, GetEmptyProgramSource())
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        cc.CompileAssemblyFromSourceBatch(
+                            options,
+                            new[] { GetEmptyProgramSource() }
+                        )
+                );
 #pragma warning restore 0618
             }
             finally
@@ -96,10 +120,18 @@ namespace System.CodeDom.Compiler.Tests
         protected abstract CodeDomProvider GetProvider();
         protected abstract string GetEmptyProgramSource();
 
-        protected static CodeStatement CreateVariableIncrementExpression(string variableName, object primitive) =>
+        protected static CodeStatement CreateVariableIncrementExpression(
+            string variableName,
+            object primitive
+        ) =>
             new CodeAssignStatement(
                 new CodeVariableReferenceExpression(variableName),
-                new CodeBinaryOperatorExpression(new CodeVariableReferenceExpression(variableName), CodeBinaryOperatorType.Add, new CodePrimitiveExpression(primitive)));
+                new CodeBinaryOperatorExpression(
+                    new CodeVariableReferenceExpression(variableName),
+                    CodeBinaryOperatorType.Add,
+                    new CodePrimitiveExpression(primitive)
+                )
+            );
 
         protected void AssertEqual(CodeObject c, string expected)
         {
@@ -110,9 +142,7 @@ namespace System.CodeDom.Compiler.Tests
             CodeDomProvider provider = GetProvider();
             string code = GenerateCode(c, provider);
 
-            Assert.Equal(
-                CoalesceWhitespace(expected), 
-                CoalesceWhitespace(code));            
+            Assert.Equal(CoalesceWhitespace(expected), CoalesceWhitespace(code));
         }
 
         protected void AssertEqualPreserveLineBreaks(CodeObject c, string expected)
@@ -126,8 +156,9 @@ namespace System.CodeDom.Compiler.Tests
 
             // Make sure the code matches what we expected
             Assert.Equal(
-                CoalesceWhitespace(expected, preserveNewLines: true), 
-                CoalesceWhitespace(code, preserveNewLines: true));
+                CoalesceWhitespace(expected, preserveNewLines: true),
+                CoalesceWhitespace(code, preserveNewLines: true)
+            );
         }
 
         private static string GenerateCode(CodeObject c, CodeDomProvider provider)
@@ -181,7 +212,7 @@ namespace System.CodeDom.Compiler.Tests
                         lastWasWhitespace = true;
                         sb.Append(c);
                     }
-                    else if (lastWasWhitespace || sb.Length == 0) 
+                    else if (lastWasWhitespace || sb.Length == 0)
                     {
                         continue;
                     }

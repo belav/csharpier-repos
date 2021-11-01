@@ -23,7 +23,14 @@ namespace Microsoft.AspNetCore.WebUtilities
         public void FileBufferingReadStream_Properties_ExpectedValues()
         {
             var inner = MakeStream(1024 * 2);
-            using (var stream = new FileBufferingReadStream(inner, 1024, null, Directory.GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024,
+                    null,
+                    Directory.GetCurrentDirectory()
+                )
+            )
             {
                 Assert.True(stream.CanRead);
                 Assert.True(stream.CanSeek);
@@ -39,7 +46,14 @@ namespace Microsoft.AspNetCore.WebUtilities
         public void FileBufferingReadStream_SyncReadUnderThreshold_DoesntCreateFile()
         {
             var inner = MakeStream(1024 * 2);
-            using (var stream = new FileBufferingReadStream(inner, 1024 * 3, null, Directory.GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024 * 3,
+                    null,
+                    Directory.GetCurrentDirectory()
+                )
+            )
             {
                 var bytes = new byte[1000];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
@@ -73,7 +87,9 @@ namespace Microsoft.AspNetCore.WebUtilities
         {
             var inner = MakeStream(1024 * 2);
             string tempFileName;
-            using (var stream = new FileBufferingReadStream(inner, 1024, null, GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(inner, 1024, null, GetCurrentDirectory())
+            )
             {
                 var bytes = new byte[1000];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
@@ -111,7 +127,14 @@ namespace Microsoft.AspNetCore.WebUtilities
         public void FileBufferingReadStream_SyncReadWithInMemoryLimit_EnforcesLimit()
         {
             var inner = MakeStream(1024 * 2);
-            using (var stream = new FileBufferingReadStream(inner, 1024, 900, Directory.GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024,
+                    900,
+                    Directory.GetCurrentDirectory()
+                )
+            )
             {
                 var bytes = new byte[500];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
@@ -121,7 +144,9 @@ namespace Microsoft.AspNetCore.WebUtilities
                 Assert.True(stream.InMemory);
                 Assert.Null(stream.TempFileName);
 
-                var exception = Assert.Throws<IOException>(() => stream.Read(bytes, 0, bytes.Length));
+                var exception = Assert.Throws<IOException>(
+                    () => stream.Read(bytes, 0, bytes.Length)
+                );
                 Assert.Equal("Buffer limit exceeded.", exception.Message);
                 Assert.True(stream.InMemory);
                 Assert.Null(stream.TempFileName);
@@ -134,7 +159,9 @@ namespace Microsoft.AspNetCore.WebUtilities
         {
             var inner = MakeStream(1024 * 2);
             string tempFileName;
-            using (var stream = new FileBufferingReadStream(inner, 512, 1024, GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(inner, 512, 1024, GetCurrentDirectory())
+            )
             {
                 var bytes = new byte[500];
                 var read0 = stream.Read(bytes, 0, bytes.Length);
@@ -153,7 +180,9 @@ namespace Microsoft.AspNetCore.WebUtilities
                 tempFileName = stream.TempFileName!;
                 Assert.True(File.Exists(tempFileName));
 
-                var exception = Assert.Throws<IOException>(() => stream.Read(bytes, 0, bytes.Length));
+                var exception = Assert.Throws<IOException>(
+                    () => stream.Read(bytes, 0, bytes.Length)
+                );
                 Assert.Equal("Buffer limit exceeded.", exception.Message);
                 Assert.False(stream.InMemory);
                 Assert.NotNull(stream.TempFileName);
@@ -168,7 +197,14 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task FileBufferingReadStream_AsyncReadUnderThreshold_DoesntCreateFile()
         {
             var inner = MakeStream(1024 * 2);
-            using (var stream = new FileBufferingReadStream(inner, 1024 * 3, null, Directory.GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024 * 3,
+                    null,
+                    Directory.GetCurrentDirectory()
+                )
+            )
             {
                 var bytes = new byte[1000];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
@@ -202,7 +238,9 @@ namespace Microsoft.AspNetCore.WebUtilities
         {
             var inner = MakeStream(1024 * 2);
             string tempFileName;
-            using (var stream = new FileBufferingReadStream(inner, 1024, null, GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(inner, 1024, null, GetCurrentDirectory())
+            )
             {
                 var bytes = new byte[1000];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
@@ -240,7 +278,14 @@ namespace Microsoft.AspNetCore.WebUtilities
         public async Task FileBufferingReadStream_AsyncReadWithInMemoryLimit_EnforcesLimit()
         {
             var inner = MakeStream(1024 * 2);
-            using (var stream = new FileBufferingReadStream(inner, 1024, 900, Directory.GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024,
+                    900,
+                    Directory.GetCurrentDirectory()
+                )
+            )
             {
                 var bytes = new byte[500];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
@@ -250,7 +295,9 @@ namespace Microsoft.AspNetCore.WebUtilities
                 Assert.True(stream.InMemory);
                 Assert.Null(stream.TempFileName);
 
-                var exception = await Assert.ThrowsAsync<IOException>(() => stream.ReadAsync(bytes, 0, bytes.Length));
+                var exception = await Assert.ThrowsAsync<IOException>(
+                    () => stream.ReadAsync(bytes, 0, bytes.Length)
+                );
                 Assert.Equal("Buffer limit exceeded.", exception.Message);
                 Assert.True(stream.InMemory);
                 Assert.Null(stream.TempFileName);
@@ -263,7 +310,9 @@ namespace Microsoft.AspNetCore.WebUtilities
         {
             var inner = MakeStream(1024 * 2);
             string tempFileName;
-            using (var stream = new FileBufferingReadStream(inner, 512, 1024, GetCurrentDirectory()))
+            using (
+                var stream = new FileBufferingReadStream(inner, 512, 1024, GetCurrentDirectory())
+            )
             {
                 var bytes = new byte[500];
                 var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
@@ -282,7 +331,9 @@ namespace Microsoft.AspNetCore.WebUtilities
                 tempFileName = stream.TempFileName!;
                 Assert.True(File.Exists(tempFileName));
 
-                var exception = await Assert.ThrowsAsync<IOException>(() => stream.ReadAsync(bytes, 0, bytes.Length));
+                var exception = await Assert.ThrowsAsync<IOException>(
+                    () => stream.ReadAsync(bytes, 0, bytes.Length)
+                );
                 Assert.Equal("Buffer limit exceeded.", exception.Message);
                 Assert.False(stream.InMemory);
                 Assert.NotNull(stream.TempFileName);
@@ -297,17 +348,32 @@ namespace Microsoft.AspNetCore.WebUtilities
             var inner = MakeStream(1024 * 1024 + 25);
             string tempFileName;
             var arrayPool = new Mock<ArrayPool<byte>>();
-            arrayPool.Setup(p => p.Rent(It.IsAny<int>()))
+            arrayPool
+                .Setup(p => p.Rent(It.IsAny<int>()))
                 .Returns((int m) => ArrayPool<byte>.Shared.Rent(m));
-            arrayPool.Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
-                .Callback((byte[] bytes, bool clear) => ArrayPool<byte>.Shared.Return(bytes, clear));
+            arrayPool
+                .Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
+                .Callback(
+                    (byte[] bytes, bool clear) => ArrayPool<byte>.Shared.Return(bytes, clear)
+                );
 
-            using (var stream = new FileBufferingReadStream(inner, 1024 * 1024 + 1, 2 * 1024 * 1024, GetCurrentDirectory(), arrayPool.Object))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024 * 1024 + 1,
+                    2 * 1024 * 1024,
+                    GetCurrentDirectory(),
+                    arrayPool.Object
+                )
+            )
             {
                 arrayPool.Verify(v => v.Rent(It.IsAny<int>()), Times.Never());
 
                 stream.Read(new byte[1024 * 1024]);
-                Assert.False(File.Exists(stream.TempFileName), "tempFile should not be created as yet");
+                Assert.False(
+                    File.Exists(stream.TempFileName),
+                    "tempFile should not be created as yet"
+                );
 
                 stream.Read(new byte[4]);
                 Assert.True(File.Exists(stream.TempFileName), "tempFile should be created");
@@ -326,17 +392,32 @@ namespace Microsoft.AspNetCore.WebUtilities
             var inner = MakeStream(1024 * 1024 + 25);
             string tempFileName;
             var arrayPool = new Mock<ArrayPool<byte>>();
-            arrayPool.Setup(p => p.Rent(It.IsAny<int>()))
+            arrayPool
+                .Setup(p => p.Rent(It.IsAny<int>()))
                 .Returns((int m) => ArrayPool<byte>.Shared.Rent(m));
-            arrayPool.Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
-                .Callback((byte[] bytes, bool clear) => ArrayPool<byte>.Shared.Return(bytes, clear));
+            arrayPool
+                .Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
+                .Callback(
+                    (byte[] bytes, bool clear) => ArrayPool<byte>.Shared.Return(bytes, clear)
+                );
 
-            using (var stream = new FileBufferingReadStream(inner, 1024 * 1024 + 1, 2 * 1024 * 1024, GetCurrentDirectory(), arrayPool.Object))
+            using (
+                var stream = new FileBufferingReadStream(
+                    inner,
+                    1024 * 1024 + 1,
+                    2 * 1024 * 1024,
+                    GetCurrentDirectory(),
+                    arrayPool.Object
+                )
+            )
             {
                 arrayPool.Verify(v => v.Rent(It.IsAny<int>()), Times.Never());
 
                 await stream.ReadAsync(new byte[1024 * 1024]);
-                Assert.False(File.Exists(stream.TempFileName), "tempFile should not be created as yet");
+                Assert.False(
+                    File.Exists(stream.TempFileName),
+                    "tempFile should not be created as yet"
+                );
 
                 await stream.ReadAsync(new byte[4]);
                 Assert.True(File.Exists(stream.TempFileName), "tempFile should be created");
@@ -355,10 +436,18 @@ namespace Microsoft.AspNetCore.WebUtilities
             // 4K is the lower bound on buffer sizes
             var bufferSize = 4096;
             var mostExpectedWrites = 8;
-            var data = Enumerable.Range(0, bufferSize * mostExpectedWrites).Select(b => (byte)b).ToArray();
+            var data = Enumerable
+                .Range(0, bufferSize * mostExpectedWrites)
+                .Select(b => (byte)b)
+                .ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new NumberOfWritesMemoryStream();
             await stream.CopyToAsync(withoutBufferMs);
@@ -379,10 +468,19 @@ namespace Microsoft.AspNetCore.WebUtilities
             // 4K is the lower bound on buffer sizes
             var bufferSize = 4096;
             var mostExpectedWrites = 8;
-            var data = Enumerable.Range(0, bufferSize * mostExpectedWrites).Select(b => (byte)b).Reverse().ToArray();
+            var data = Enumerable
+                .Range(0, bufferSize * mostExpectedWrites)
+                .Select(b => (byte)b)
+                .Reverse()
+                .ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 100, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                100,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new NumberOfWritesMemoryStream();
             await stream.CopyToAsync(withoutBufferMs);
@@ -403,7 +501,12 @@ namespace Microsoft.AspNetCore.WebUtilities
             var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new MemoryStream();
             var buffer = new byte[100];
@@ -420,7 +523,12 @@ namespace Microsoft.AspNetCore.WebUtilities
             var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new MemoryStream();
             var buffer = new byte[100];
@@ -438,7 +546,12 @@ namespace Microsoft.AspNetCore.WebUtilities
             var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new MemoryStream();
             var buffer = new byte[100];
@@ -457,7 +570,12 @@ namespace Microsoft.AspNetCore.WebUtilities
             var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new MemoryStream();
             var buffer = new byte[100];
@@ -477,7 +595,12 @@ namespace Microsoft.AspNetCore.WebUtilities
             var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
             var inner = new MemoryStream(data);
 
-            using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024,
+                bufferLimit: null,
+                GetCurrentDirectory()
+            );
 
             var withoutBufferMs = new MemoryStream();
             var buffer = new byte[100];

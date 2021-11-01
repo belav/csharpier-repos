@@ -19,18 +19,26 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
     public sealed partial class RebuildCommandLineTests : CSharpTestBase
     {
-        private record CommandInfo(string CommandLine, string PeFileName, string? PdbFileName, string? CommandLineSuffix = null);
+        private record CommandInfo(
+            string CommandLine,
+            string PeFileName,
+            string? PdbFileName,
+            string? CommandLineSuffix = null
+        );
 
-        internal static string RootDirectory => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"q:\" : "/";
+        internal static string RootDirectory =>
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"q:\" : "/";
         internal static string ClientDirectory => Path.Combine(RootDirectory, "compiler");
         internal static string WorkingDirectory => Path.Combine(RootDirectory, "rebuild");
         internal static string SdkDirectory => Path.Combine(RootDirectory, "sdk");
         internal static string OutputDirectory => Path.Combine(RootDirectory, "output");
 
-        internal static BuildPaths StandardBuildPaths => new BuildPaths(ClientDirectory, WorkingDirectory, SdkDirectory, tempDir: null);
+        internal static BuildPaths StandardBuildPaths =>
+            new BuildPaths(ClientDirectory, WorkingDirectory, SdkDirectory, tempDir: null);
 
         public ITestOutputHelper TestOutputHelper { get; }
-        public Dictionary<string, TestableFile> FilePathToStreamMap { get; } = new Dictionary<string, TestableFile>(StringComparer.OrdinalIgnoreCase);
+        public Dictionary<string, TestableFile> FilePathToStreamMap { get; } =
+            new Dictionary<string, TestableFile>(StringComparer.OrdinalIgnoreCase);
 
         public RebuildCommandLineTests(ITestOutputHelper testOutputHelper)
         {
@@ -39,12 +47,18 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
         private void AddSourceFile(string filePath, string content)
         {
-            FilePathToStreamMap.Add(Path.Combine(WorkingDirectory, filePath), new TestableFile(content));
+            FilePathToStreamMap.Add(
+                Path.Combine(WorkingDirectory, filePath),
+                new TestableFile(content)
+            );
         }
 
         private void AddReference(string filePath, byte[] imageBytes)
         {
-            FilePathToStreamMap.Add(Path.Combine(SdkDirectory, filePath), new TestableFile(imageBytes));
+            FilePathToStreamMap.Add(
+                Path.Combine(SdkDirectory, filePath),
+                new TestableFile(imageBytes)
+            );
         }
 
         private void AddOutputFile(ref string? filePath)
@@ -94,7 +108,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             };
         }
 
-        private void VerifyRoundTrip(CommonCompiler commonCompiler, string peFilePath, string? pdbFilePath = null, CancellationToken cancellationToken = default)
+        private void VerifyRoundTrip(
+            CommonCompiler commonCompiler,
+            string peFilePath,
+            string? pdbFilePath = null,
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(commonCompiler.Arguments.CompilationOptions.Deterministic);
             using var writer = new StringWriter();
@@ -104,32 +123,43 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             Assert.Equal(0, result);
 
             var peStream = FilePathToStreamMap[peFilePath].GetStream();
-            var pdbStream = pdbFilePath is object ? FilePathToStreamMap[pdbFilePath].GetStream() : null;
+            var pdbStream =
+                pdbFilePath is object ? FilePathToStreamMap[pdbFilePath].GetStream() : null;
 
             var compilation = commonCompiler.CreateCompilation(
                 writer,
                 touchedFilesLogger: null,
                 errorLoggerOpt: null,
                 analyzerConfigOptions: default,
-                globalConfigOptions: default);
+                globalConfigOptions: default
+            );
             AssertEx.NotNull(compilation);
-            RoundTripUtil.VerifyCompilationOptions(commonCompiler.Arguments.CompilationOptions, compilation.Options);
+            RoundTripUtil.VerifyCompilationOptions(
+                commonCompiler.Arguments.CompilationOptions,
+                compilation.Options
+            );
 
             RoundTripUtil.VerifyRoundTrip(
                 peStream,
                 pdbStream,
                 Path.GetFileName(peFilePath),
-                new CompilationRebuildArtifactResolver(compilation));
+                new CompilationRebuildArtifactResolver(compilation)
+            );
         }
 
         private void AddCSharpSourceFiles()
         {
-            AddSourceFile("hw.cs", @"
+            AddSourceFile(
+                "hw.cs",
+                @"
 using System;
 Console.WriteLine(""Hello World"");
-");
+"
+            );
 
-            AddSourceFile("lib1.cs", @"
+            AddSourceFile(
+                "lib1.cs",
+                @"
 using System;
 
 class Library
@@ -140,9 +170,12 @@ class Library
         Console.WriteLine(lib);
     }
 }
-");
+"
+            );
 
-            AddSourceFile("lib2.cs", @"
+            AddSourceFile(
+                "lib2.cs",
+                @"
 extern alias SystemRuntime;
 using System;
 
@@ -156,9 +189,12 @@ class Library
         Console.WriteLine(a2);
     }
 }
-");
+"
+            );
 
-            AddSourceFile("lib3.cs", @"
+            AddSourceFile(
+                "lib3.cs",
+                @"
 extern alias SystemRuntime1;
 extern alias SystemRuntime2;
 using System;
@@ -175,7 +211,8 @@ class Library
         Console.WriteLine(a3);
     }
 }
-");
+"
+            );
         }
 
         public static IEnumerable<object?[]> GetCSharpData()
@@ -184,19 +221,44 @@ class Library
 
             Permutate(
                 new CommandInfo("hw.cs", "test.exe", null),
-                PermutateOptimizations, PermutateExeKinds, PermutatePdbFormat);
-            Permutate(new CommandInfo("lib1.cs", "test.dll", null),
-                PermutateOptimizations, PermutateDllKinds, PermutatePdbFormat, PermutatePathMap);
-            Permutate(new CommandInfo("lib2.cs /target:library /r:SystemRuntime=System.Runtime.dll /debug:embedded", "test.dll", null),
-                PermutateOptimizations);
-            Permutate(new CommandInfo("lib3.cs /target:library", "test.dll", null),
-                PermutateOptimizations, PermutateExternAlias, PermutatePdbFormat);
-            Permutate(new CommandInfo("lib3.cs /target:library", "test.dll", null),
-                PermutateOptimizations, PermutateExternAlias, PermutatePdbFormat);
+                PermutateOptimizations,
+                PermutateExeKinds,
+                PermutatePdbFormat
+            );
+            Permutate(
+                new CommandInfo("lib1.cs", "test.dll", null),
+                PermutateOptimizations,
+                PermutateDllKinds,
+                PermutatePdbFormat,
+                PermutatePathMap
+            );
+            Permutate(
+                new CommandInfo(
+                    "lib2.cs /target:library /r:SystemRuntime=System.Runtime.dll /debug:embedded",
+                    "test.dll",
+                    null
+                ),
+                PermutateOptimizations
+            );
+            Permutate(
+                new CommandInfo("lib3.cs /target:library", "test.dll", null),
+                PermutateOptimizations,
+                PermutateExternAlias,
+                PermutatePdbFormat
+            );
+            Permutate(
+                new CommandInfo("lib3.cs /target:library", "test.dll", null),
+                PermutateOptimizations,
+                PermutateExternAlias,
+                PermutatePdbFormat
+            );
 
             return list;
 
-            void Permutate(CommandInfo commandInfo, params Func<CommandInfo, IEnumerable<CommandInfo>>[] permutations)
+            void Permutate(
+                CommandInfo commandInfo,
+                params Func<CommandInfo, IEnumerable<CommandInfo>>[] permutations
+            )
             {
                 IEnumerable<CommandInfo> e = new[] { commandInfo };
                 foreach (var p in permutations)
@@ -216,11 +278,12 @@ class Library
                 };
             }
 
-            // Permutate the alias before and after the standard references so that we make sure the 
-            // rebuild is resistent to the ordering of aliases. 
+            // Permutate the alias before and after the standard references so that we make sure the
+            // rebuild is resistent to the ordering of aliases.
             static IEnumerable<CommandInfo> PermutateExternAlias(CommandInfo commandInfo)
             {
-                var alias = @" /r:SystemRuntime1=System.Runtime.dll /r:SystemRuntime2=System.Runtime.dll";
+                var alias =
+                    @" /r:SystemRuntime1=System.Runtime.dll /r:SystemRuntime2=System.Runtime.dll";
 
                 yield return commandInfo with
                 {
@@ -273,18 +336,33 @@ class Library
             {
                 foreach (var commandInfo in commandInfos)
                 {
-                    list.Add(new object?[] { commandInfo.CommandLine, commandInfo.PeFileName, commandInfo.PdbFileName, commandInfo.CommandLineSuffix });
+                    list.Add(
+                        new object?[]
+                        {
+                            commandInfo.CommandLine,
+                            commandInfo.PeFileName,
+                            commandInfo.PdbFileName,
+                            commandInfo.CommandLineSuffix
+                        }
+                    );
                 }
             }
         }
 
         [Theory]
         [MemberData(nameof(GetCSharpData))]
-        public void CSharp(string commandLine, string peFilePath, string? pdbFilePath, string? commandLineSuffix)
+        public void CSharp(
+            string commandLine,
+            string peFilePath,
+            string? pdbFilePath,
+            string? commandLineSuffix
+        )
         {
             TestOutputHelper.WriteLine($"Command Line: {commandLine}");
             AddCSharpSourceFiles();
-            var args = new List<string>(commandLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+            var args = new List<string>(
+                commandLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+            );
             args.Add("/nostdlib");
             args.Add("/deterministic");
             foreach (var referenceInfo in TestMetadata.ResourcesNetCoreApp.All)
@@ -303,7 +381,9 @@ class Library
 
             if (commandLineSuffix is object)
             {
-                args.AddRange(commandLineSuffix.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                args.AddRange(
+                    commandLineSuffix.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                );
             }
 
             TestOutputHelper.WriteLine($"Final Line: {string.Join(" ", args)}");
@@ -313,23 +393,29 @@ class Library
 
         private void AddVisualBasicSourceFiles()
         {
-            AddSourceFile("hw.vb", @"
+            AddSourceFile(
+                "hw.vb",
+                @"
 Imports System
 Public Module M
     Public Sub Main()
         Console.WriteLine(CStr(True))
     End Sub
 End Module
-");
+"
+            );
 
-            AddSourceFile("lib1.vb", @"
+            AddSourceFile(
+                "lib1.vb",
+                @"
 Imports System
 Public Module M
     Public Function Add(left As Integer, right As Integer) As Integer
         return left + right
     End Function
 End Module
-");
+"
+            );
         }
 
         public static IEnumerable<object?[]> GetVisualBasicData()
@@ -338,17 +424,31 @@ End Module
 
             Permutate(
                 new CommandInfo("hw.vb /debug:embedded", "test.exe", null),
-                PermutateOptimizations, PermutateRuntime, PermutateExeKinds);
+                PermutateOptimizations,
+                PermutateRuntime,
+                PermutateExeKinds
+            );
             Permutate(
                 new CommandInfo("lib1.vb /target:library /debug:embedded", "test.dll", null),
-                PermutateOptimizations, PermutateRuntime);
+                PermutateOptimizations,
+                PermutateRuntime
+            );
             Permutate(
-                new CommandInfo(@"lib1.vb /debug:embedded /d:_MYTYPE=""Empty"" /vbruntime:Microsoft.VisualBasic.dll", "test.dll", null),
-                PermutateOptimizations, PermutateDllKinds);
+                new CommandInfo(
+                    @"lib1.vb /debug:embedded /d:_MYTYPE=""Empty"" /vbruntime:Microsoft.VisualBasic.dll",
+                    "test.dll",
+                    null
+                ),
+                PermutateOptimizations,
+                PermutateDllKinds
+            );
 
             return list;
 
-            void Permutate(CommandInfo commandInfo, params Func<CommandInfo, IEnumerable<CommandInfo>>[] permutations)
+            void Permutate(
+                CommandInfo commandInfo,
+                params Func<CommandInfo, IEnumerable<CommandInfo>>[] permutations
+            )
             {
                 IEnumerable<CommandInfo> e = new[] { commandInfo };
                 foreach (var p in permutations)
@@ -390,7 +490,9 @@ End Module
 
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + @" /d:_MYTYPE=""Empty"" /vbruntime:Microsoft.VisualBasic.dll"
+                    CommandLine =
+                        commandInfo.CommandLine
+                        + @" /d:_MYTYPE=""Empty"" /vbruntime:Microsoft.VisualBasic.dll"
                 };
             }
 
@@ -398,7 +500,14 @@ End Module
             {
                 foreach (var commandInfo in commandInfos)
                 {
-                    list.Add(new object?[] { commandInfo.CommandLine, commandInfo.PeFileName, commandInfo.PdbFileName });
+                    list.Add(
+                        new object?[]
+                        {
+                            commandInfo.CommandLine,
+                            commandInfo.PeFileName,
+                            commandInfo.PdbFileName
+                        }
+                    );
                 }
             }
         }
@@ -409,7 +518,9 @@ End Module
         {
             TestOutputHelper.WriteLine($"Command Line: {commandLine}");
             AddVisualBasicSourceFiles();
-            var args = new List<string>(commandLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+            var args = new List<string>(
+                commandLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+            );
             args.Add("/nostdlib");
             args.Add("/deterministic");
             foreach (var referenceInfo in TestMetadata.ResourcesNetCoreApp.All)

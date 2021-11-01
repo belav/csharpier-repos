@@ -58,7 +58,14 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             response.Body = body;
 
             await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => response.SendFileAsync("testfile1kb.txt", 1, 3, new CancellationToken(canceled: true)));
+                () =>
+                    response.SendFileAsync(
+                        "testfile1kb.txt",
+                        1,
+                        3,
+                        new CancellationToken(canceled: true)
+                    )
+            );
 
             Assert.Equal(0, body.Length);
         }
@@ -72,7 +79,14 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             var response = context.Response;
 
             await Assert.ThrowsAsync<OperationCanceledException>(
-                () => response.SendFileAsync("testfile1kb.txt", 1, 3, new CancellationToken(canceled: true)));
+                () =>
+                    response.SendFileAsync(
+                        "testfile1kb.txt",
+                        1,
+                        3,
+                        new CancellationToken(canceled: true)
+                    )
+            );
         }
 
         [Fact]
@@ -125,7 +139,12 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
                 throw new System.NotImplementedException();
             }
 
-            public Task SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+            public Task SendFileAsync(
+                string path,
+                long offset,
+                long? length,
+                CancellationToken cancellation
+            )
             {
                 Name = path;
                 Offset = offset;

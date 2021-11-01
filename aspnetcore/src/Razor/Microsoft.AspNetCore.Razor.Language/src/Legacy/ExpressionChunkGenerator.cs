@@ -16,8 +16,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public override bool Equals(object obj)
         {
-            return obj != null &&
-                GetType() == obj.GetType();
+            return obj != null && GetType() == obj.GetType();
         }
 
         public override int GetHashCode()

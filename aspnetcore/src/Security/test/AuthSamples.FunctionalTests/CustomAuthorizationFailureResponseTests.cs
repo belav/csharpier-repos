@@ -9,11 +9,14 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests
 {
-    public class CustomAuthorizationFailureResponseTests : IClassFixture<WebApplicationFactory<CustomAuthorizationFailureResponse.Startup>>
+    public class CustomAuthorizationFailureResponseTests
+        : IClassFixture<WebApplicationFactory<CustomAuthorizationFailureResponse.Startup>>
     {
         private HttpClient Client { get; }
 
-        public CustomAuthorizationFailureResponseTests(WebApplicationFactory<CustomAuthorizationFailureResponse.Startup> fixture)
+        public CustomAuthorizationFailureResponseTests(
+            WebApplicationFactory<CustomAuthorizationFailureResponse.Startup> fixture
+        )
         {
             Client = fixture.CreateClient();
         }
@@ -21,11 +24,16 @@ namespace AuthSamples.FunctionalTests
         [Fact]
         public async Task SampleGetWithCustomPolicyWithCustomForbiddenMessage_Returns403WithCustomMessage()
         {
-            var response = await Client.GetAsync("api/Sample/customPolicyWithCustomForbiddenMessage");
+            var response = await Client.GetAsync(
+                "api/Sample/customPolicyWithCustomForbiddenMessage"
+            );
             var content = await response.Content.ReadAsStringAsync();
 
             Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
-            Assert.Equal(CustomAuthorizationFailureResponse.Startup.CustomForbiddenMessage, content);
+            Assert.Equal(
+                CustomAuthorizationFailureResponse.Startup.CustomForbiddenMessage,
+                content
+            );
         }
 
         [Fact]
@@ -35,7 +43,10 @@ namespace AuthSamples.FunctionalTests
             var content = await response.Content.ReadAsStringAsync();
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            Assert.Equal(CustomAuthorizationFailureResponse.Startup.CustomForbiddenMessage, content);
+            Assert.Equal(
+                CustomAuthorizationFailureResponse.Startup.CustomForbiddenMessage,
+                content
+            );
         }
     }
 }

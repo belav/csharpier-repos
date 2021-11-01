@@ -11,16 +11,16 @@ using Microsoft.CodeAnalysis.UseCoalesceExpression;
 namespace Microsoft.CodeAnalysis.CSharp.UseCoalesceExpression
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseCoalesceExpressionForNullableDiagnosticAnalyzer :
-        AbstractUseCoalesceExpressionForNullableDiagnosticAnalyzer<
-            SyntaxKind,
-            ExpressionSyntax,
-            ConditionalExpressionSyntax,
-            BinaryExpressionSyntax,
-            MemberAccessExpressionSyntax,
-            PrefixUnaryExpressionSyntax>
+    internal class CSharpUseCoalesceExpressionForNullableDiagnosticAnalyzer
+        : AbstractUseCoalesceExpressionForNullableDiagnosticAnalyzer<
+              SyntaxKind,
+              ExpressionSyntax,
+              ConditionalExpressionSyntax,
+              BinaryExpressionSyntax,
+              MemberAccessExpressionSyntax,
+              PrefixUnaryExpressionSyntax
+          >
     {
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
     }
 }

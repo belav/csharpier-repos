@@ -14,7 +14,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         RazorDirective,
         RazorDirectiveBody,
         UnclassifiedTextLiteral,
-
         // Markup
         MarkupBlock,
         MarkupTransition,
@@ -38,7 +37,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         MarkupTagHelperDirectiveAttribute,
         MarkupMinimizedTagHelperDirectiveAttribute,
         MarkupTagHelperAttributeValue,
-
         // CSharp
         CSharpStatement,
         CSharpStatementBody,
@@ -67,7 +65,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         LeftBracket,
         Equals,
         Transition,
-
         // HTML
         Text,
         OpenAngle,
@@ -77,7 +74,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         CloseAngle,
         DoubleQuote,
         SingleQuote,
-
         // CSharp literals
         Identifier,
         Keyword,
@@ -86,7 +82,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         RealLiteral,
         CharacterLiteral,
         StringLiteral,
-
         // CSharp operators
         Arrow,
         Minus,
@@ -131,7 +126,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         RightShift,
         RightShiftAssign,
         Hash,
-
         // Razor specific
         RazorCommentLiteral,
         RazorCommentStar,

@@ -51,8 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             ViewDataDictionary viewData,
             ITempDataDictionary tempData,
             TextWriter writer,
-            HtmlHelperOptions htmlHelperOptions)
-            : base(actionContext)
+            HtmlHelperOptions htmlHelperOptions
+        ) : base(actionContext)
         {
             if (actionContext == null)
             {
@@ -109,8 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             ViewContext viewContext,
             IView view,
             ViewDataDictionary viewData,
-            TextWriter writer)
-            : base(viewContext)
+            TextWriter writer
+        ) : base(viewContext)
         {
             if (viewContext == null)
             {
@@ -157,7 +157,6 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public virtual FormContext FormContext
         {
             get => _formContext;
-
             set
             {
                 if (value == null)

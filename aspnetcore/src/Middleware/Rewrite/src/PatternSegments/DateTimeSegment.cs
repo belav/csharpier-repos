@@ -43,7 +43,11 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             }
         }
 
-        public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReference)
+        public override string? Evaluate(
+            RewriteContext context,
+            BackReferenceCollection? ruleBackReferences,
+            BackReferenceCollection? conditionBackReference
+        )
         {
             switch (_portion)
             {
@@ -60,7 +64,9 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
                 case DateTimePortion.Second:
                     return DateTimeOffset.UtcNow.Second.ToString(CultureInfo.InvariantCulture);
                 case DateTimePortion.DayOfWeek:
-                    return ((int)DateTimeOffset.UtcNow.DayOfWeek).ToString(CultureInfo.InvariantCulture);
+                    return ((int)DateTimeOffset.UtcNow.DayOfWeek).ToString(
+                        CultureInfo.InvariantCulture
+                    );
                 case DateTimePortion.Time:
                     return DateTimeOffset.UtcNow.ToString(CultureInfo.InvariantCulture);
                 default:

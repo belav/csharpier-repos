@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
     {
         public static bool IsSubdomainOf(Uri subdomain, Uri domain)
         {
-            return subdomain.IsAbsoluteUri 
+            return subdomain.IsAbsoluteUri
                 && domain.IsAbsoluteUri
                 && subdomain.Scheme == domain.Scheme
                 && subdomain.Port == domain.Port

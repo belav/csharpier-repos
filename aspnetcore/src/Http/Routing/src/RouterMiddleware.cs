@@ -24,10 +24,7 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
         /// <param name="router">The <see cref="IRouter"/> to use for routing requests.</param>
-        public RouterMiddleware(
-            RequestDelegate next,
-            ILoggerFactory loggerFactory,
-            IRouter router)
+        public RouterMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IRouter router)
         {
             _next = next;
             _router = router;
@@ -54,10 +51,7 @@ namespace Microsoft.AspNetCore.Builder
             }
             else
             {
-                var routingFeature = new RoutingFeature()
-                {
-                    RouteData = context.RouteData
-                };
+                var routingFeature = new RoutingFeature() { RouteData = context.RouteData };
 
                 // Set the RouteValues on the current request, this is to keep the IRouteValuesFeature inline with the IRoutingFeature
                 httpContext.Request.RouteValues = context.RouteData.Values;

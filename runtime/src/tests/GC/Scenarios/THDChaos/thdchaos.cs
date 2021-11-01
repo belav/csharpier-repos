@@ -8,7 +8,8 @@
 //
 //======================================================
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System.Threading;
     using System;
     using System.IO;
@@ -16,14 +17,14 @@ namespace DefaultNamespace {
     public class ThdChaos
     {
         internal static int iThrd = 0;
-        public static int Main( System.String [] Args )
+        public static int Main(System.String[] Args)
         {
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             // console synchronization Console.SetOut(TextWriter.Synchronized(Console.Out));
-            Console.Out.WriteLine("Args.Length="+Args.Length );
-            if(Args.Length >=1 )
+            Console.Out.WriteLine("Args.Length=" + Args.Length);
+            if (Args.Length >= 1)
             {
-                if (!Int32.TryParse( Args[0], out iThrd ))
+                if (!Int32.TryParse(Args[0], out iThrd))
                 {
                     iThrd = 20;
                 }
@@ -34,10 +35,8 @@ namespace DefaultNamespace {
             }
 
             ThdChaos Mv_ThdChaos = new ThdChaos();
-            MasterThread Mv_Thread = new MasterThread( iThrd );
+            MasterThread Mv_Thread = new MasterThread(iThrd);
             return 100;
-
         }
-
     }
 }

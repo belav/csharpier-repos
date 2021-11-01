@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     /// <summary>
     ///     An <see cref="IDiagnosticsLogger{ConnectionCategory}" /> with some extra functionality suited for high-performance logging.
     /// </summary>
-    public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLoggerCategory.Database.Command>
+    public interface IRelationalCommandDiagnosticsLogger
+        : IDiagnosticsLogger<DbLoggerCategory.Database.Command>
     {
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandCreating" /> event.
@@ -30,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandCreated" /> event.
@@ -52,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -70,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -88,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -106,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -127,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -148,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -169,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -191,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             DbDataReader methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -213,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             object? methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -235,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             int methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -260,7 +272,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbDataReader methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -285,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             object? methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -310,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             int methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandError" /> event.
@@ -333,7 +348,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             Exception exception,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandError" /> event.
@@ -360,7 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.DataReaderDisposing" /> event.
@@ -382,7 +399,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             int recordsAffected,
             int readCount,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Whether <see cref="RelationalEventId.CommandCreating" /> or <see cref="RelationalEventId.CommandCreated" /> need
@@ -401,7 +419,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         bool ShouldLogDataReaderDispose(DateTimeOffset now);
 
-        private bool ShouldLogParameterValues(DbCommand command)
-            => command.Parameters.Count > 0 && ShouldLogSensitiveData();
+        private bool ShouldLogParameterValues(DbCommand command) =>
+            command.Parameters.Count > 0 && ShouldLogSensitiveData();
     }
 }

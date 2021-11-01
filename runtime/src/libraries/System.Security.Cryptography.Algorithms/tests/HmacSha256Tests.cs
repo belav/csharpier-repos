@@ -18,7 +18,10 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return SHA256.Create();
         }
 
-        protected override int BlockSize { get { return 64; } }
+        protected override int BlockSize
+        {
+            get { return 64; }
+        }
 
         [Fact]
         public void HmacSha256_Rfc4231_1()

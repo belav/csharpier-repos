@@ -11,11 +11,17 @@ namespace System.Globalization
 {
     internal static class TimeSpanFormat
     {
-        internal static readonly FormatLiterals PositiveInvariantFormatLiterals = TimeSpanFormat.FormatLiterals.InitInvariant(isNegative: false);
-        internal static readonly FormatLiterals NegativeInvariantFormatLiterals = TimeSpanFormat.FormatLiterals.InitInvariant(isNegative: true);
+        internal static readonly FormatLiterals PositiveInvariantFormatLiterals =
+            TimeSpanFormat.FormatLiterals.InitInvariant(isNegative: false);
+        internal static readonly FormatLiterals NegativeInvariantFormatLiterals =
+            TimeSpanFormat.FormatLiterals.InitInvariant(isNegative: true);
 
         /// <summary>Main method called from TimeSpan.ToString.</summary>
-        internal static string Format(TimeSpan value, string? format, IFormatProvider? formatProvider)
+        internal static string Format(
+            TimeSpan value,
+            string? format,
+            IFormatProvider? formatProvider
+        )
         {
             if (string.IsNullOrEmpty(format))
             {
@@ -33,21 +39,44 @@ namespace System.Globalization
 
                 if ((c | 0x20) == 'g') // special-case to optimize the remaining 'g'/'G' standard formats
                 {
-                    return FormatG(value, DateTimeFormatInfo.GetInstance(formatProvider), c == 'G' ? StandardFormat.G : StandardFormat.g);
+                    return FormatG(
+                        value,
+                        DateTimeFormatInfo.GetInstance(formatProvider),
+                        c == 'G' ? StandardFormat.G : StandardFormat.g
+                    );
                 }
 
                 throw new FormatException(SR.Format_InvalidString);
             }
 
-            return StringBuilderCache.GetStringAndRelease(FormatCustomized(value, format, DateTimeFormatInfo.GetInstance(formatProvider), result: null));
+            return StringBuilderCache.GetStringAndRelease(
+                FormatCustomized(
+                    value,
+                    format,
+                    DateTimeFormatInfo.GetInstance(formatProvider),
+                    result: null
+                )
+            );
         }
 
         /// <summary>Main method called from TimeSpan.TryFormat.</summary>
-        internal static bool TryFormat(TimeSpan value, Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? formatProvider)
+        internal static bool TryFormat(
+            TimeSpan value,
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? formatProvider
+        )
         {
             if (format.Length == 0)
             {
-                return TryFormatStandard(value, StandardFormat.C, null, destination, out charsWritten);
+                return TryFormatStandard(
+                    value,
+                    StandardFormat.C,
+                    null,
+                    destination,
+                    out charsWritten
+                );
             }
 
             if (format.Length == 1)
@@ -55,19 +84,38 @@ namespace System.Globalization
                 char c = format[0];
                 if (c == 'c' || ((c | 0x20) == 't'))
                 {
-                    return TryFormatStandard(value, StandardFormat.C, null, destination, out charsWritten);
+                    return TryFormatStandard(
+                        value,
+                        StandardFormat.C,
+                        null,
+                        destination,
+                        out charsWritten
+                    );
                 }
                 else
                 {
                     StandardFormat sf =
-                        c == 'g' ? StandardFormat.g :
-                        c == 'G' ? StandardFormat.G :
-                        throw new FormatException(SR.Format_InvalidString);
-                    return TryFormatStandard(value, sf, DateTimeFormatInfo.GetInstance(formatProvider).DecimalSeparator, destination, out charsWritten);
+                        c == 'g'
+                            ? StandardFormat.g
+                            : c == 'G'
+                                ? StandardFormat.G
+                                : throw new FormatException(SR.Format_InvalidString);
+                    return TryFormatStandard(
+                        value,
+                        sf,
+                        DateTimeFormatInfo.GetInstance(formatProvider).DecimalSeparator,
+                        destination,
+                        out charsWritten
+                    );
                 }
             }
 
-            StringBuilder sb = FormatCustomized(value, format, DateTimeFormatInfo.GetInstance(formatProvider), result: null);
+            StringBuilder sb = FormatCustomized(
+                value,
+                format,
+                DateTimeFormatInfo.GetInstance(formatProvider),
+                result: null
+            );
 
             if (sb.Length <= destination.Length)
             {
@@ -89,22 +137,40 @@ namespace System.Globalization
             return new string(destination.Slice(0, charsWritten));
         }
 
-        private static string FormatG(TimeSpan value, DateTimeFormatInfo dtfi, StandardFormat format)
+        private static string FormatG(
+            TimeSpan value,
+            DateTimeFormatInfo dtfi,
+            StandardFormat format
+        )
         {
             string decimalSeparator = dtfi.DecimalSeparator;
             int maxLength = 25 + decimalSeparator.Length; // large enough for any "g"/"G" TimeSpan
-            Span<char> destination = maxLength < 128 ?
-                stackalloc char[maxLength] :
-                new char[maxLength]; // the chances of needing this case are almost 0, as DecimalSeparator.Length will basically always == 1
+            Span<char> destination =
+                maxLength < 128 ? stackalloc char[maxLength] : new char[maxLength]; // the chances of needing this case are almost 0, as DecimalSeparator.Length will basically always == 1
             TryFormatStandard(value, format, decimalSeparator, destination, out int charsWritten);
             return new string(destination.Slice(0, charsWritten));
         }
 
-        private enum StandardFormat { C, G, g }
-
-        private static bool TryFormatStandard(TimeSpan value, StandardFormat format, string? decimalSeparator, Span<char> destination, out int charsWritten)
+        private enum StandardFormat
         {
-            Debug.Assert(format == StandardFormat.C || format == StandardFormat.G || format == StandardFormat.g);
+            C,
+            G,
+            g
+        }
+
+        private static bool TryFormatStandard(
+            TimeSpan value,
+            StandardFormat format,
+            string? decimalSeparator,
+            Span<char> destination,
+            out int charsWritten
+        )
+        {
+            Debug.Assert(
+                format == StandardFormat.C
+                    || format == StandardFormat.G
+                    || format == StandardFormat.g
+            );
 
             // First, calculate how large an output buffer is needed to hold the entire output.
             int requiredOutputLength = 8; // start with "hh:mm:ss" and adjust as necessary
@@ -120,7 +186,9 @@ namespace System.Globalization
                     ticks = -ticks;
                     if (ticks < 0)
                     {
-                        Debug.Assert(ticks == long.MinValue /* -9223372036854775808 */);
+                        Debug.Assert(
+                            ticks == long.MinValue /* -9223372036854775808 */
+                        );
 
                         // We computed these ahead of time; they're straight from the decimal representation of Int64.MinValue.
                         fraction = 4775808;
@@ -130,11 +198,14 @@ namespace System.Globalization
                 }
 
                 ulong fraction64;
-                (totalSecondsRemaining, fraction64) = Math.DivRem((ulong)ticks, TimeSpan.TicksPerSecond);
+                (totalSecondsRemaining, fraction64) = Math.DivRem(
+                    (ulong)ticks,
+                    TimeSpan.TicksPerSecond
+                );
                 fraction = (uint)fraction64;
             }
 
-        AfterComputeFraction:
+            AfterComputeFraction:
             // Only write out the fraction if it's non-zero, and in that
             // case write out the entire fraction (all digits).
             Debug.Assert(fraction < 10_000_000);
@@ -161,36 +232,50 @@ namespace System.Globalization
                     Debug.Assert(format == StandardFormat.g);
                     if (fraction != 0)
                     {
-                        fractionDigits = DateTimeFormat.MaxSecondsFractionDigits - FormattingHelpers.CountDecimalTrailingZeros(fraction, out fraction);
+                        fractionDigits =
+                            DateTimeFormat.MaxSecondsFractionDigits
+                            - FormattingHelpers.CountDecimalTrailingZeros(fraction, out fraction);
                         requiredOutputLength += fractionDigits + 1; // digits plus leading decimal separator
                     }
                     break;
             }
 
-            ulong totalMinutesRemaining = 0, seconds = 0;
+            ulong totalMinutesRemaining = 0,
+                seconds = 0;
             if (totalSecondsRemaining > 0)
             {
                 // Only compute minutes if the TimeSpan has an absolute value of >= 1 minute.
-                (totalMinutesRemaining, seconds) = Math.DivRem(totalSecondsRemaining, 60 /* seconds per minute */);
+                (totalMinutesRemaining, seconds) = Math.DivRem(
+                    totalSecondsRemaining,
+                    60 /* seconds per minute */
+                );
                 Debug.Assert(seconds < 60);
             }
 
-            ulong totalHoursRemaining = 0, minutes = 0;
+            ulong totalHoursRemaining = 0,
+                minutes = 0;
             if (totalMinutesRemaining > 0)
             {
                 // Only compute hours if the TimeSpan has an absolute value of >= 1 hour.
-                (totalHoursRemaining, minutes) = Math.DivRem(totalMinutesRemaining, 60 /* minutes per hour */);
+                (totalHoursRemaining, minutes) = Math.DivRem(
+                    totalMinutesRemaining,
+                    60 /* minutes per hour */
+                );
                 Debug.Assert(minutes < 60);
             }
 
             // At this point, we can switch over to 32-bit DivRem since the data has shrunk far enough.
             Debug.Assert(totalHoursRemaining <= uint.MaxValue);
 
-            uint days = 0, hours = 0;
+            uint days = 0,
+                hours = 0;
             if (totalHoursRemaining > 0)
             {
                 // Only compute days if the TimeSpan has an absolute value of >= 1 day.
-                (days, hours) = Math.DivRem((uint)totalHoursRemaining, 24 /* hours per day */);
+                (days, hours) = Math.DivRem(
+                    (uint)totalHoursRemaining,
+                    24 /* hours per day */
+                );
                 Debug.Assert(hours < 24);
             }
 
@@ -308,14 +393,21 @@ namespace System.Globalization
         }
 
         /// <summary>Format the TimeSpan instance using the specified format.</summary>
-        private static StringBuilder FormatCustomized(TimeSpan value, ReadOnlySpan<char> format, DateTimeFormatInfo dtfi, StringBuilder? result = null)
+        private static StringBuilder FormatCustomized(
+            TimeSpan value,
+            ReadOnlySpan<char> format,
+            DateTimeFormatInfo dtfi,
+            StringBuilder? result = null
+        )
         {
             Debug.Assert(dtfi != null);
 
             bool resultBuilderIsPooled = false;
             if (result == null)
             {
-                result = StringBuilderCache.Acquire(InternalGlobalizationHelper.StringBuilderDefaultCapacity);
+                result = StringBuilderCache.Acquire(
+                    InternalGlobalizationHelper.StringBuilderDefaultCapacity
+                );
                 resultBuilderIsPooled = true;
             }
 
@@ -377,8 +469,14 @@ namespace System.Globalization
                         }
 
                         tmp = fraction;
-                        tmp /= TimeSpanParse.Pow10(DateTimeFormat.MaxSecondsFractionDigits - tokenLen);
-                        result.AppendSpanFormattable(tmp, DateTimeFormat.fixedNumberFormats[tokenLen - 1], CultureInfo.InvariantCulture);
+                        tmp /= TimeSpanParse.Pow10(
+                            DateTimeFormat.MaxSecondsFractionDigits - tokenLen
+                        );
+                        result.AppendSpanFormattable(
+                            tmp,
+                            DateTimeFormat.fixedNumberFormats[tokenLen - 1],
+                            CultureInfo.InvariantCulture
+                        );
                         break;
                     case 'F':
                         //
@@ -391,7 +489,9 @@ namespace System.Globalization
                         }
 
                         tmp = fraction;
-                        tmp /= TimeSpanParse.Pow10(DateTimeFormat.MaxSecondsFractionDigits - tokenLen);
+                        tmp /= TimeSpanParse.Pow10(
+                            DateTimeFormat.MaxSecondsFractionDigits - tokenLen
+                        );
                         int effectiveDigits = tokenLen;
                         while (effectiveDigits > 0)
                         {
@@ -407,7 +507,11 @@ namespace System.Globalization
                         }
                         if (effectiveDigits > 0)
                         {
-                            result.AppendSpanFormattable(tmp, DateTimeFormat.fixedNumberFormats[effectiveDigits - 1], CultureInfo.InvariantCulture);
+                            result.AppendSpanFormattable(
+                                tmp,
+                                DateTimeFormat.fixedNumberFormats[effectiveDigits - 1],
+                                CultureInfo.InvariantCulture
+                            );
                         }
                         break;
                     case 'd':
@@ -437,7 +541,12 @@ namespace System.Globalization
                         if (nextChar >= 0 && nextChar != (int)'%')
                         {
                             char nextCharChar = (char)nextChar;
-                            StringBuilder origStringBuilder = FormatCustomized(value, MemoryMarshal.CreateReadOnlySpan<char>(ref nextCharChar, 1), dtfi, result);
+                            StringBuilder origStringBuilder = FormatCustomized(
+                                value,
+                                MemoryMarshal.CreateReadOnlySpan<char>(ref nextCharChar, 1),
+                                dtfi,
+                                result
+                            );
                             Debug.Assert(ReferenceEquals(origStringBuilder, result));
                             tokenLen = 2;
                         }
@@ -532,7 +641,9 @@ namespace System.Globalization
                     _literals[i] = string.Empty;
                 }
 
-                StringBuilder sb = StringBuilderCache.Acquire(InternalGlobalizationHelper.StringBuilderDefaultCapacity);
+                StringBuilder sb = StringBuilderCache.Acquire(
+                    InternalGlobalizationHelper.StringBuilderDefaultCapacity
+                );
                 bool inQuote = false;
                 char quote = '\'';
                 int field = 0;
@@ -570,7 +681,9 @@ namespace System.Globalization
                             }
                             break;
                         case '%':
-                            Debug.Fail("Unexpected special token '%', Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                            Debug.Fail(
+                                "Unexpected special token '%', Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                            );
                             goto default;
                         case '\\':
                             if (!inQuote)
@@ -582,7 +695,10 @@ namespace System.Globalization
                         case 'd':
                             if (!inQuote)
                             {
-                                Debug.Assert((field == 0 && sb.Length == 0) || field == 1, "field == 0 || field == 1, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                                Debug.Assert(
+                                    (field == 0 && sb.Length == 0) || field == 1,
+                                    "field == 0 || field == 1, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                                );
                                 field = 1; // DayHourSep
                                 dd++;
                             }
@@ -590,7 +706,10 @@ namespace System.Globalization
                         case 'h':
                             if (!inQuote)
                             {
-                                Debug.Assert((field == 1 && sb.Length == 0) || field == 2, "field == 1 || field == 2, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                                Debug.Assert(
+                                    (field == 1 && sb.Length == 0) || field == 2,
+                                    "field == 1 || field == 2, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                                );
                                 field = 2; // HourMinuteSep
                                 hh++;
                             }
@@ -598,7 +717,10 @@ namespace System.Globalization
                         case 'm':
                             if (!inQuote)
                             {
-                                Debug.Assert((field == 2 && sb.Length == 0) || field == 3, "field == 2 || field == 3, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                                Debug.Assert(
+                                    (field == 2 && sb.Length == 0) || field == 3,
+                                    "field == 2 || field == 3, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                                );
                                 field = 3; // MinuteSecondSep
                                 mm++;
                             }
@@ -606,7 +728,10 @@ namespace System.Globalization
                         case 's':
                             if (!inQuote)
                             {
-                                Debug.Assert((field == 3 && sb.Length == 0) || field == 4, "field == 3 || field == 4, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                                Debug.Assert(
+                                    (field == 3 && sb.Length == 0) || field == 4,
+                                    "field == 3 || field == 4, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                                );
                                 field = 4; // SecondFractionSep
                                 ss++;
                             }
@@ -615,7 +740,10 @@ namespace System.Globalization
                         case 'F':
                             if (!inQuote)
                             {
-                                Debug.Assert((field == 4 && sb.Length == 0) || field == 5, "field == 4 || field == 5, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                                Debug.Assert(
+                                    (field == 4 && sb.Length == 0) || field == 5,
+                                    "field == 4 || field == 5, Bug in DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                                );
                                 field = 5; // End
                                 ff++;
                             }
@@ -629,11 +757,26 @@ namespace System.Globalization
                 Debug.Assert(field == 5);
                 AppCompatLiteral = MinuteSecondSep + SecondFractionSep;
 
-                Debug.Assert(0 < dd && dd < 3, "0 < dd && dd < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
-                Debug.Assert(0 < hh && hh < 3, "0 < hh && hh < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
-                Debug.Assert(0 < mm && mm < 3, "0 < mm && mm < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
-                Debug.Assert(0 < ss && ss < 3, "0 < ss && ss < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
-                Debug.Assert(0 < ff && ff < 8, "0 < ff && ff < 8, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern");
+                Debug.Assert(
+                    0 < dd && dd < 3,
+                    "0 < dd && dd < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                );
+                Debug.Assert(
+                    0 < hh && hh < 3,
+                    "0 < hh && hh < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                );
+                Debug.Assert(
+                    0 < mm && mm < 3,
+                    "0 < mm && mm < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                );
+                Debug.Assert(
+                    0 < ss && ss < 3,
+                    "0 < ss && ss < 3, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                );
+                Debug.Assert(
+                    0 < ff && ff < 8,
+                    "0 < ff && ff < 8, Bug in System.Globalization.DateTimeFormatInfo.FullTimeSpan[Positive|Negative]Pattern"
+                );
 
                 if (useInvariantFieldLengths)
                 {
@@ -645,11 +788,16 @@ namespace System.Globalization
                 }
                 else
                 {
-                    if (dd < 1 || dd > 2) dd = 2;   // The DTFI property has a problem. let's try to make the best of the situation.
-                    if (hh < 1 || hh > 2) hh = 2;
-                    if (mm < 1 || mm > 2) mm = 2;
-                    if (ss < 1 || ss > 2) ss = 2;
-                    if (ff < 1 || ff > 7) ff = 7;
+                    if (dd < 1 || dd > 2)
+                        dd = 2; // The DTFI property has a problem. let's try to make the best of the situation.
+                    if (hh < 1 || hh > 2)
+                        hh = 2;
+                    if (mm < 1 || mm > 2)
+                        mm = 2;
+                    if (ss < 1 || ss > 2)
+                        ss = 2;
+                    if (ff < 1 || ff > 7)
+                        ff = 7;
                 }
                 StringBuilderCache.Release(sb);
             }
