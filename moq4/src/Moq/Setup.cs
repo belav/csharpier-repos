@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Text;
 
 using Moq.Async;
@@ -14,12 +14,12 @@ namespace Moq
 {
 	internal abstract class Setup : ISetup
 	{
-		private readonly InvocationShape expectation;
+		private readonly Expectation expectation;
 		private readonly Expression originalExpression;
 		private readonly Mock mock;
 		private Flags flags;
 
-		protected Setup(Expression originalExpression, Mock mock, InvocationShape expectation)
+		protected Setup(Expression originalExpression, Mock mock, Expectation expectation)
 		{
 			Debug.Assert(mock != null);
 			Debug.Assert(expectation != null);
@@ -31,20 +31,19 @@ namespace Moq
 
 		public virtual Condition Condition => null;
 
-		public InvocationShape Expectation => this.expectation;
+		public Expectation Expectation => this.expectation;
 
 		public LambdaExpression Expression => this.expectation.Expression;
 
-		public Mock InnerMock => this.TryGetReturnValue(out var returnValue)
-		                         && Awaitable.TryGetResultRecursive(returnValue) is IMocked mocked ? mocked.Mock : null;
+		Mock ISetup.InnerMock => this.InnerMocks.SingleOrDefault();
+
+		public virtual IEnumerable<Mock> InnerMocks => Enumerable.Empty<Mock>();
 
 		public bool IsConditional => this.Condition != null;
 
 		public bool IsOverridden => (this.flags & Flags.Overridden) != 0;
 
 		public bool IsVerifiable => (this.flags & Flags.Verifiable) != 0;
-
-		public MethodInfo Method => this.expectation.Method;
 
 		public Mock Mock => this.mock;
 
@@ -88,16 +87,6 @@ namespace Moq
 
 		protected abstract void ExecuteCore(Invocation invocation);
 
-		/// <summary>
-		///   Attempts to get this setup's return value without invoking user code
-		///   (which could have side effects beyond Moq's understanding and control).
-		/// </summary>
-		public virtual bool TryGetReturnValue(out object returnValue)
-		{
-			returnValue = default;
-			return false;
-		}
-
 		public void MarkAsOverridden()
 		{
 			Debug.Assert(!this.IsOverridden);
@@ -113,6 +102,11 @@ namespace Moq
 		public bool Matches(Invocation invocation)
 		{
 			return this.expectation.IsMatch(invocation) && (this.Condition == null || this.Condition.IsTrue);
+		}
+
+		public bool Matches(MethodExpectation expectation)
+		{
+			return this.expectation.Equals(expectation);
 		}
 
 		public virtual void SetOutParameters(Invocation invocation)
@@ -157,7 +151,10 @@ namespace Moq
 			{
 				try
 				{
-					this.InnerMock?.Verify(predicate, verifiedMocks);
+					foreach (var innerMock in this.InnerMocks)
+					{
+						innerMock.Verify(predicate, verifiedMocks);
+					}
 				}
 				catch (MockException error) when (error.IsVerificationError)
 				{
@@ -205,6 +202,11 @@ namespace Moq
 			}
 
 			this.Verify(recursive, predicate, verifiedMocks);
+		}
+
+		protected static Mock TryGetInnerMockFrom(object returnValue)
+		{
+			return (Awaitable.TryGetResultRecursive(returnValue) as IMocked)?.Mock;
 		}
 
 		[Flags]

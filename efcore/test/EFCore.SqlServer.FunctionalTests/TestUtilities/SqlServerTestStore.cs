@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -442,7 +442,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             var builder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection)
             {
-                MultipleActiveResultSets = multipleActiveResultSets ?? new Random().Next(0, 2) == 1, InitialCatalog = name
+                MultipleActiveResultSets = multipleActiveResultSets ?? Random.Shared.Next(0, 2) == 1, InitialCatalog = name
             };
             if (fileName != null)
             {

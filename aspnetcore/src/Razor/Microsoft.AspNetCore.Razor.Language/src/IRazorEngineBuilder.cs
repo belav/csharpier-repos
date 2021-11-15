@@ -1,20 +1,19 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+[Obsolete("This class is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngineBuilder) + ".")]
+public interface IRazorEngineBuilder
 {
-    [Obsolete("This class is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngineBuilder) + ".")]
-    public interface IRazorEngineBuilder
-    {
-        ICollection<IRazorEngineFeature> Features { get; }
+    ICollection<IRazorEngineFeature> Features { get; }
 
-        IList<IRazorEnginePhase> Phases { get; }
+    IList<IRazorEnginePhase> Phases { get; }
 
-        bool DesignTime { get; }
+    bool DesignTime { get; }
 
-        RazorEngine Build();
-    }
+    RazorEngine Build();
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.Data.SqlClient;
@@ -15,7 +15,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             -1, // Physical connection is not usable
             -2, // Timeout
-            1807, // Could not obtain exclusive lock on database 'model'
             42008, // Mirroring (Only when a database is deleted and another one is created in fast succession)
             42019 // CREATE DATABASE operation failed
         };

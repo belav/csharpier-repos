@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -14,6 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     may not also have and associated <see cref="IServiceProperty" />, to a parameter in
     ///     a constructor, factory method, or similar.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information.
+    /// </remarks>
     public abstract class ServiceParameterBinding : ParameterBinding
     {
         private Func<MaterializationContext, IEntityType, object, object>? _serviceDelegate;
@@ -22,13 +25,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates a new <see cref="ServiceParameterBinding" /> instance for the given service type
         ///     or metadata type.
         /// </summary>
-        /// <param name="parameterType"> The parameter CLR type. </param>
-        /// <param name="serviceType"> The service or metadata CLR type. </param>
-        /// <param name="serviceProperties"> The associated <see cref="IServiceProperty" /> instances, or null. </param>
+        /// <param name="parameterType">The parameter CLR type.</param>
+        /// <param name="serviceType">The service or metadata CLR type.</param>
+        /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> instances, or null.</param>
         protected ServiceParameterBinding(
             Type parameterType,
             Type serviceType,
-            IPropertyBase[]? serviceProperties = null)
+            params IPropertyBase[]? serviceProperties)
             : base(parameterType, serviceProperties)
         {
             Check.NotNull(serviceType, nameof(serviceType));
@@ -45,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates an expression tree representing the binding of the value of a property from a
         ///     materialization expression to a parameter of the constructor, factory method, etc.
         /// </summary>
-        /// <param name="bindingInfo"> The binding information. </param>
-        /// <returns> The expression tree. </returns>
+        /// <param name="bindingInfo">The binding information.</param>
+        /// <returns>The expression tree.</returns>
         public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
             => BindToParameter(
                 bindingInfo.MaterializationContextExpression,
@@ -56,9 +59,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates an expression tree representing the binding of the value of a property from a
         ///     materialization expression to a parameter of the constructor, factory method, etc.
         /// </summary>
-        /// <param name="materializationExpression"> The expression representing the materialization context. </param>
-        /// <param name="entityTypeExpression"> The expression representing the <see cref="IEntityType" /> constant. </param>
-        /// <returns> The expression tree. </returns>
+        /// <param name="materializationExpression">The expression representing the materialization context.</param>
+        /// <param name="entityTypeExpression">The expression representing the <see cref="IEntityType" /> constant.</param>
+        /// <returns>The expression tree.</returns>
         public abstract Expression BindToParameter(
             Expression materializationExpression,
             Expression entityTypeExpression);
@@ -69,16 +72,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual Func<MaterializationContext, IEntityType, object, object> ServiceDelegate
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _serviceDelegate, this, static b =>
-                {
-                    var materializationContextParam = Expression.Parameter(typeof(MaterializationContext));
-                    var entityTypeParam = Expression.Parameter(typeof(IEntityType));
-                    var entityParam = Expression.Parameter(typeof(object));
+                    {
+                        var materializationContextParam = Expression.Parameter(typeof(MaterializationContext));
+                        var entityTypeParam = Expression.Parameter(typeof(IEntityType));
+                        var entityParam = Expression.Parameter(typeof(object));
 
-                    return Expression.Lambda<Func<MaterializationContext, IEntityType, object, object>>(
-                        b.BindToParameter(materializationContextParam, entityTypeParam),
-                        materializationContextParam,
-                        entityTypeParam,
-                        entityParam).Compile();
-                });
+                        return Expression.Lambda<Func<MaterializationContext, IEntityType, object, object>>(
+                            b.BindToParameter(materializationContextParam, entityTypeParam),
+                            materializationContextParam,
+                            entityTypeParam,
+                            entityParam).Compile();
+                    });
     }
 }

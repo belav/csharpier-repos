@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -419,6 +420,69 @@ namespace Microsoft.EntityFrameworkCore
                 });
 
                 modelBuilder.Entity<SharedFkDependant>();
+
+                modelBuilder.Entity<Owner>();
+
+                modelBuilder.Entity<OwnerWithKeyedCollection>(
+                    b =>
+                    {
+                        b.Navigation(e => e.Owned).IsRequired();
+                        b.Navigation(e => e.OwnedWithKey).IsRequired();
+
+                        b.OwnsMany(
+                            e => e.OwnedCollectionPrivateKey,
+                            b => b.HasKey("OwnerWithKeyedCollectionId", "PrivateKey"));
+                    });
+
+                modelBuilder
+                    .Entity<OwnerWithNonCompositeOwnedCollection>()
+                    .OwnsMany(e => e.Owned, owned => owned.HasKey("Id"));
+
+                modelBuilder.Entity<OwnerNoKeyGeneration>(
+                    b =>
+                    {
+                        b.Property(e => e.Id).ValueGeneratedNever();
+
+                        b.OwnsOne(
+                            e => e.Owned,
+                            b => b.Property("OwnerNoKeyGenerationId").ValueGeneratedNever());
+                        b.OwnsMany(
+                            e => e.OwnedCollection,
+                            b =>
+                            {
+                                b.Property<int>("OwnedNoKeyGenerationId").ValueGeneratedNever();
+                                b.Property("OwnerNoKeyGenerationId").ValueGeneratedNever();
+                            });
+                    });
+
+                modelBuilder.Entity<Provider>().HasData(
+                    new Provider { Id = "prov1" },
+                    new Provider { Id = "prov2" });
+
+                modelBuilder.Entity<Partner>().HasData(
+                    new Partner { Id = "partner1" });
+
+                modelBuilder.Entity<ProviderContract>(
+                    b =>
+                    {
+                        b.HasOne(p => p.Partner).WithMany().IsRequired().HasForeignKey("PartnerId");
+                        b.HasOne<Provider>().WithMany().IsRequired().HasForeignKey("ProviderId");
+
+                        b.HasDiscriminator<string>("ProviderId")
+                            .HasValue<ProviderContract1>("prov1")
+                            .HasValue<ProviderContract2>("prov2");
+
+                        b.HasKey("PartnerId", "ProviderId");
+                    });
+
+                modelBuilder.Entity<EventDescriptorZ>(
+                    b =>
+                    {
+                        b.Property<long>("EntityZId");
+                        b.HasOne(e => e.EntityZ).WithMany().HasForeignKey("EntityZId").IsRequired();
+                    });
+
+                modelBuilder.Entity<City>();
             }
 
             protected virtual object CreateFullGraph()
@@ -3092,6 +3156,377 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
+        protected class Owner : NotifyingEntity
+        {
+            private int _id;
+            private Owned _owned;
+            private ICollection<Owned> _ownedCollection = new ObservableHashSet<Owned>();
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public Owned Owned
+            {
+                get => _owned;
+                set => SetWithNotify(value, ref _owned);
+            }
+
+            public ICollection<Owned> OwnedCollection
+            {
+                get => _ownedCollection;
+                set => SetWithNotify(value, ref _ownedCollection);
+            }
+        }
+
+        [Owned]
+        protected class Owned : NotifyingEntity
+        {
+            private int _foo;
+            private string _bar;
+
+            public int Foo
+            {
+                get => _foo;
+                set => SetWithNotify(value, ref _foo);
+            }
+
+            public string Bar
+            {
+                get => _bar;
+                set => SetWithNotify(value, ref _bar);
+            }
+        }
+
+        protected class OwnerWithKeyedCollection : NotifyingEntity
+        {
+            private int _id;
+            private Owned _owned;
+            private OwnedWithKey _ownedWithKey;
+            private ICollection<OwnedWithKey> _ownedCollection = new ObservableHashSet<OwnedWithKey>();
+            private ICollection<OwnedWithPrivateKey> _ownedCollectionPrivateKey = new ObservableHashSet<OwnedWithPrivateKey>();
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public Owned Owned
+            {
+                get => _owned;
+                set => SetWithNotify(value, ref _owned);
+            }
+
+            public OwnedWithKey OwnedWithKey
+            {
+                get => _ownedWithKey;
+                set => SetWithNotify(value, ref _ownedWithKey);
+            }
+
+            public ICollection<OwnedWithKey> OwnedCollection
+            {
+                get => _ownedCollection;
+                set => SetWithNotify(value, ref _ownedCollection);
+            }
+
+            public ICollection<OwnedWithPrivateKey> OwnedCollectionPrivateKey
+            {
+                get => _ownedCollectionPrivateKey;
+                set => SetWithNotify(value, ref _ownedCollectionPrivateKey);
+            }
+        }
+
+        [Owned]
+        protected class OwnedWithKey : NotifyingEntity
+        {
+            private int _foo;
+            private string _bar;
+            private int _ownedWithKeyId;
+
+            public int OwnedWithKeyId
+            {
+                get => _ownedWithKeyId;
+                set => SetWithNotify(value, ref _ownedWithKeyId);
+            }
+
+            public int Foo
+            {
+                get => _foo;
+                set => SetWithNotify(value, ref _foo);
+            }
+
+            public string Bar
+            {
+                get => _bar;
+                set => SetWithNotify(value, ref _bar);
+            }
+        }
+
+        [Owned]
+        protected class OwnedWithPrivateKey : NotifyingEntity
+        {
+            private int _foo;
+            private string _bar;
+            private int _privateKey;
+
+            private int PrivateKey
+            {
+                get => _privateKey;
+                set => SetWithNotify(value, ref _privateKey);
+            }
+
+            public int Foo
+            {
+                get => _foo;
+                set => SetWithNotify(value, ref _foo);
+            }
+
+            public string Bar
+            {
+                get => _bar;
+                set => SetWithNotify(value, ref _bar);
+            }
+        }
+
+        protected class OwnerWithNonCompositeOwnedCollection : NotifyingEntity
+        {
+            private int _id;
+            private ICollection<NonCompositeOwnedCollection> _owned = new ObservableHashSet<NonCompositeOwnedCollection>();
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public ICollection<NonCompositeOwnedCollection> Owned
+            {
+                get => _owned;
+                set => SetWithNotify(value, ref _owned);
+            }
+        }
+
+        protected class NonCompositeOwnedCollection : NotifyingEntity
+        {
+            private string _foo;
+
+            public string Foo
+            {
+                get => _foo;
+                set => SetWithNotify(value, ref _foo);
+            }
+        }
+
+        protected class OwnerNoKeyGeneration : NotifyingEntity
+        {
+            private int _id;
+            private OwnedNoKeyGeneration _owned;
+            private ICollection<OwnedNoKeyGeneration> _ownedCollection = new ObservableHashSet<OwnedNoKeyGeneration>();
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public OwnedNoKeyGeneration Owned
+            {
+                get => _owned;
+                set => SetWithNotify(value, ref _owned);
+            }
+
+            public ICollection<OwnedNoKeyGeneration> OwnedCollection
+            {
+                get => _ownedCollection;
+                set => SetWithNotify(value, ref _ownedCollection);
+            }
+        }
+
+        [Owned]
+        protected class OwnedNoKeyGeneration : NotifyingEntity
+        {
+            private int _foo;
+            private string _bar;
+
+            public int Foo
+            {
+                get => _foo;
+                set => SetWithNotify(value, ref _foo);
+            }
+
+            public string Bar
+            {
+                get => _bar;
+                set => SetWithNotify(value, ref _bar);
+            }
+        }
+
+        protected abstract class ProviderContract : NotifyingEntity
+        {
+            private Partner _partner;
+
+            public Partner Partner
+            {
+                get => _partner;
+                set => SetWithNotify(value, ref _partner);
+            }
+        }
+
+        protected class ProviderContract1 : ProviderContract
+        {
+            private string _details;
+
+            public string Details
+            {
+                get => _details;
+                set => SetWithNotify(value, ref _details);
+            }
+        }
+
+        protected class ProviderContract2 : ProviderContract
+        {
+            private string _details;
+
+            public string Details
+            {
+                get => _details;
+                set => SetWithNotify(value, ref _details);
+            }
+        }
+
+        protected class Partner : NotifyingEntity
+        {
+            private string _id;
+
+            public string Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+        }
+
+        protected class Provider : NotifyingEntity
+        {
+            private string _id;
+
+            public string Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+        }
+
+        protected class EventDescriptorZ : NotifyingEntity
+        {
+            private int _id;
+            private EntityZ _entityZ;
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public EntityZ EntityZ
+            {
+                get => _entityZ;
+                set => SetWithNotify(value, ref _entityZ);
+            }
+        }
+
+        protected class EntityZ : NotifyingEntity
+        {
+            private long _id;
+
+            public long Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+        }
+
+        protected class City : NotifyingEntity
+        {
+            private int _id;
+            private ICollection<College> _colleges = new ObservableHashSet<College>();
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public ICollection<College> Colleges
+            {
+                get => _colleges;
+                set => SetWithNotify(value, ref _colleges);
+            }
+        }
+
+        protected class College : NotifyingEntity
+        {
+            private int _id;
+            private int _cityId;
+
+            public int Id
+            {
+                get => _id;
+                set => SetWithNotify(value, ref _id);
+            }
+
+            public int CityId
+            {
+                get => _cityId;
+                set => SetWithNotify(value, ref _cityId);
+            }
+        }
+
+        protected class Cruiser : NotifyingEntity
+        {
+            private int _cruiserId;
+            private int _idUserState;
+            private AccessState _userState;
+
+            public int CruiserId
+            {
+                get => _cruiserId;
+                set => SetWithNotify(value, ref _cruiserId);
+            }
+
+            public int IdUserState
+            {
+                get => _idUserState;
+                set => SetWithNotify(value, ref _idUserState);
+            }
+
+            public virtual AccessState UserState
+            {
+                get => _userState;
+                set => SetWithNotify(value, ref _userState);
+            }
+        }
+
+        protected class AccessState : NotifyingEntity
+        {
+            private int _accessStateId;
+            private ICollection<Cruiser> _users = new ObservableHashSet<Cruiser>();
+
+            public int AccessStateId
+            {
+                get => _accessStateId;
+                set => SetWithNotify(value, ref _accessStateId);
+            }
+
+            public virtual ICollection<Cruiser> Users
+            {
+                get => _users;
+                set => SetWithNotify(value, ref _users);
+            }
+        }
+
         protected class NotifyingEntity : INotifyPropertyChanging, INotifyPropertyChanged
         {
             protected void SetWithNotify<T>(T value, ref T field, [CallerMemberName] string propertyName = "")
@@ -3120,6 +3555,15 @@ namespace Microsoft.EntityFrameworkCore
             Action<DbContext> nestedTestOperation2 = null,
             Action<DbContext> nestedTestOperation3 = null)
             => TestHelpers.ExecuteWithStrategyInTransaction(
+                CreateContext, UseTransaction,
+                testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+
+        protected virtual Task ExecuteWithStrategyInTransactionAsync(
+            Func<DbContext, Task> testOperation,
+            Func<DbContext, Task> nestedTestOperation1 = null,
+            Func<DbContext, Task> nestedTestOperation2 = null,
+            Func<DbContext, Task> nestedTestOperation3 = null)
+            => TestHelpers.ExecuteWithStrategyInTransactionAsync(
                 CreateContext, UseTransaction,
                 testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
 

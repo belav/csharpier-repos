@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -17,23 +17,29 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         This interface is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public interface IModelRuntimeInitializer
     {
         /// <summary>
         ///     Validates and initializes the given model with runtime dependencies.
         /// </summary>
-        /// <param name="model"> The model to initialize. </param>
-        /// <param name="designTime"> Whether the model should contain design-time configuration.</param>
+        /// <param name="model">The model to initialize.</param>
+        /// <param name="designTime">Whether the model should contain design-time configuration.</param>
         /// <param name="validationLogger">
-        ///     The validation logger. If <see langword="null"/> is provided validation will not be performed.
-        ///     </param>
-        /// <returns> The initialized model. </returns>
+        ///     The validation logger. If <see langword="null" /> is provided validation will not be performed.
+        /// </param>
+        /// <returns>The initialized model.</returns>
         IModel Initialize(
             IModel model,
             bool designTime = true,

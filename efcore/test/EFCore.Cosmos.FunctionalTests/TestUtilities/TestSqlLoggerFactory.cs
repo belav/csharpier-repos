@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public TestSqlLoggerFactory(Func<string, bool> shouldLogCategory)
             : base(c => shouldLogCategory(c) || c == DbLoggerCategory.Database.Command.Name)
         {
-            Logger = new TestSqlLogger(shouldLogCategory(DbLoggerCategory.Database.Command.Name));
+            Logger = new TestSqlLogger();
         }
 
         public IReadOnlyList<string> SqlStatements
@@ -66,7 +66,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             {
                 var methodCallLine = Environment.StackTrace.Split(
                     new[] { _eol },
-                    StringSplitOptions.RemoveEmptyEntries)[3].Substring(6);
+                    StringSplitOptions.RemoveEmptyEntries)[3][6..];
 
                 var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
                 var testName = methodCallLine.Substring(0, indexMethodEnding);
@@ -102,15 +102,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 throw;
             }
+
+            Clear();
         }
 
         protected class TestSqlLogger : ListLogger
         {
-            private readonly bool _shouldLogCommands;
-
-            public TestSqlLogger(bool shouldLogCommands)
-                => _shouldLogCommands = shouldLogCommands;
-
             public List<string> SqlStatements { get; } = new();
             public List<string> Parameters { get; } = new();
 
@@ -131,11 +128,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             {
                 if (eventId.Id == CosmosEventId.ExecutingSqlQuery)
                 {
-                    if (_shouldLogCommands)
-                    {
-                        base.UnsafeLog(logLevel, eventId, message, state, exception);
-                    }
-
                     if (message != null)
                     {
                         var structure = (IReadOnlyList<KeyValuePair<string, object>>)state;
@@ -155,11 +147,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 if (eventId.Id == CosmosEventId.ExecutingReadItem)
                 {
-                    if (_shouldLogCommands)
-                    {
-                        base.UnsafeLog(logLevel, eventId, message, state, exception);
-                    }
-
                     if (message != null)
                     {
                         var structure = (IReadOnlyList<KeyValuePair<string, object>>)state;
@@ -170,10 +157,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         SqlStatements.Add($"ReadItem({partitionKey}, {resourceId})");
                     }
                 }
-                else
-                {
-                    base.UnsafeLog(logLevel, eventId, message, state, exception);
-                }
+
+                base.UnsafeLog(logLevel, eventId, message, state, exception);
             }
         }
     }

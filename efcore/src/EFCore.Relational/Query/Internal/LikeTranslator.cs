@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -20,13 +19,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     {
         private static readonly MethodInfo _methodInfo
             = typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
-                nameof(DbFunctionsExtensions.Like),
-                new[] { typeof(DbFunctions), typeof(string), typeof(string) });
+                nameof(DbFunctionsExtensions.Like), typeof(DbFunctions), typeof(string), typeof(string));
 
         private static readonly MethodInfo _methodInfoWithEscape
             = typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
-                nameof(DbFunctionsExtensions.Like),
-                new[] { typeof(DbFunctions), typeof(string), typeof(string), typeof(string) });
+                nameof(DbFunctionsExtensions.Like), typeof(DbFunctions), typeof(string), typeof(string), typeof(string));
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -53,10 +50,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             if (Equals(method, _methodInfo))
             {
                 return _sqlExpressionFactory.Like(arguments[1], arguments[2]);

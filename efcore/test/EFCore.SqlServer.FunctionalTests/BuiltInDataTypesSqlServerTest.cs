@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -681,11 +681,11 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p17='2017-01-02T12:11:12.1234567'
 @p18='2018-01-02T13:11:12.0000000' (DbType = DateTime)
 @p19='2016-01-02T11:11:12.1234567+00:00'
-@p20='101.1'
-@p21='102.2'
-@p22='81.1'
-@p23='103.3'
-@p24='82.2'
+@p20='101.1' (Precision = 4) (Scale = 1)
+@p21='102.2' (Precision = 4) (Scale = 1)
+@p22='81.1' (Precision = 3) (Scale = 1)
+@p23='103.3' (Precision = 4) (Scale = 1)
+@p24='82.2' (Precision = 3) (Scale = 1)
 @p25='85.5'
 @p26='83.3'
 @p27='Value4' (Nullable = false) (Size = 20)
@@ -873,11 +873,11 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p12='2017-01-02T12:11:12.1234567'
 @p13='2018-01-02T13:11:12.0000000' (DbType = DateTime)
 @p14='2016-01-02T11:11:12.1234567+00:00'
-@p15='101.1'
-@p16='102.2'
-@p17='81.1'
-@p18='103.3'
-@p19='82.2'
+@p15='101.1' (Precision = 4) (Scale = 1)
+@p16='102.2' (Precision = 4) (Scale = 1)
+@p17='81.1' (Precision = 3) (Scale = 1)
+@p18='103.3' (Precision = 4) (Scale = 1)
+@p19='82.2' (Precision = 3) (Scale = 1)
 @p20='83.3'
 @p21='Value4' (Nullable = false) (Size = 20)
 @p22='Value2' (Nullable = false) (Size = 8000) (DbType = AnsiString)
@@ -1041,11 +1041,11 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p17='2017-01-02T12:11:12.9876543' (Nullable = true)
 @p18='2018-01-02T13:11:12.0000000' (Nullable = true) (DbType = DateTime)
 @p19='2016-01-02T11:11:12.9876543+00:00' (Nullable = true)
-@p20='101.1' (Nullable = true)
-@p21='102.2' (Nullable = true)
-@p22='81.1' (Nullable = true)
-@p23='103.3' (Nullable = true)
-@p24='82.2' (Nullable = true)
+@p20='101.1' (Nullable = true) (Precision = 4) (Scale = 1)
+@p21='102.2' (Nullable = true) (Precision = 4) (Scale = 1)
+@p22='81.1' (Nullable = true) (Precision = 3) (Scale = 1)
+@p23='103.3' (Nullable = true) (Precision = 4) (Scale = 1)
+@p24='82.2' (Nullable = true) (Precision = 3) (Scale = 1)
 @p25='85.5' (Nullable = true)
 @p26='83.3' (Nullable = true)
 @p27='Value4' (Size = 20)
@@ -1210,7 +1210,7 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             var parameters = DumpParameters();
             Assert.Equal(
                 @"@p0='78'
-@p1=NULL
+@p1=NULL (DbType = Boolean)
 @p2=NULL (DbType = Byte)
 @p3=NULL (Size = 8000) (DbType = Binary)
 @p4=NULL (Size = 8000) (DbType = Binary)
@@ -1229,16 +1229,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p17=NULL (DbType = DateTime2)
 @p18=NULL (DbType = DateTime)
 @p19=NULL (DbType = DateTimeOffset)
-@p20=NULL
-@p21=NULL
-@p22=NULL
-@p23=NULL
-@p24=NULL
-@p25=NULL
-@p26=NULL
+@p20=NULL (DbType = Decimal)
+@p21=NULL (DbType = Decimal)
+@p22=NULL (DbType = Decimal)
+@p23=NULL (DbType = Decimal)
+@p24=NULL (DbType = Decimal)
+@p25=NULL (DbType = Double)
+@p26=NULL (DbType = Double)
 @p27=NULL (Size = 20)
 @p28=NULL (Size = 8000) (DbType = AnsiString)
-@p29=NULL
+@p29=NULL (DbType = Single)
 @p30=NULL (DbType = Guid)
 @p31=NULL (DbType = Int64)
 @p32=NULL (DbType = Int16)
@@ -1254,13 +1254,13 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p42=NULL (Size = 4000)
 @p43=NULL (Size = 8000) (DbType = AnsiString)
 @p44=NULL (Size = 8000) (DbType = AnsiString)
-@p45=NULL
+@p45=NULL (DbType = Time)
 @p46=NULL (DbType = Int32)
 @p47=NULL (DbType = Int16)
 @p48=NULL (DbType = Int64)
 @p49=NULL (DbType = Int32)
 @p50=NULL (DbType = Int64)
-@p51=NULL (Precision = 20)",
+@p51=NULL (Precision = 20) (DbType = Decimal)",
                 parameters,
                 ignoreLineEndingDifferences: true);
 
@@ -1694,6 +1694,45 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             };
 
         [ConditionalFact]
+        public virtual void Can_insert_and_read_back_double_types_with_precision()
+        {
+            using (var context = CreateContext())
+            {
+                context.Set<DoubleDataTypes>().Add(CreateDoubleDataTypes(77));
+
+                Assert.Equal(1, context.SaveChanges());
+            }
+
+            var parameters = DumpParameters();
+            Assert.Equal(
+                @"@p0='77'
+@p1='83.33000183105469' (Size = 25)
+@p2='83.30000305175781' (Size = 3)",
+                parameters,
+                ignoreLineEndingDifferences: true);
+
+            using (var context = CreateContext())
+            {
+                AssertDoubleDataTypes(context.Set<DoubleDataTypes>().Single(e => e.Id == 77), 77);
+            }
+        }
+
+        private static void AssertDoubleDataTypes(DoubleDataTypes entity, int id)
+        {
+            Assert.Equal(id, entity.Id);
+            Assert.Equal(83.3f, entity.Double3);
+            Assert.Equal(83.33f, entity.Double25);
+        }
+
+        private static DoubleDataTypes CreateDoubleDataTypes(int id)
+            => new()
+            {
+                Id = id,
+                Double3 = 83.3f,
+                Double25 = 83.33f
+            };
+
+        [ConditionalFact]
         public virtual void Can_insert_and_read_back_all_mapped_data_types_with_precision_and_scale()
         {
             using (var context = CreateContext())
@@ -1809,11 +1848,11 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p16='2017-01-02T12:11:12.7654321'
 @p17='2018-01-02T13:11:12.0000000' (DbType = DateTime)
 @p18='2016-01-02T11:11:12.7654321+00:00'
-@p19='101.1'
-@p20='102.2'
-@p21='81.1'
-@p22='103.3'
-@p23='82.2'
+@p19='101.1' (Precision = 4) (Scale = 1)
+@p20='102.2' (Precision = 4) (Scale = 1)
+@p21='81.1' (Precision = 3) (Scale = 1)
+@p22='103.3' (Precision = 4) (Scale = 1)
+@p23='82.2' (Precision = 3) (Scale = 1)
 @p24='85.5'
 @p25='83.3'
 @p26='Value4' (Nullable = false) (Size = 20)
@@ -1997,11 +2036,11 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p16='2017-01-02T12:11:12.2345678' (Nullable = true)
 @p17='2018-01-02T13:11:12.0000000' (Nullable = true) (DbType = DateTime)
 @p18='2016-01-02T11:11:12.2345678+00:00' (Nullable = true)
-@p19='101.1' (Nullable = true)
-@p20='102.2' (Nullable = true)
-@p21='81.1' (Nullable = true)
-@p22='103.3' (Nullable = true)
-@p23='82.2' (Nullable = true)
+@p19='101.1' (Nullable = true) (Precision = 4) (Scale = 1)
+@p20='102.2' (Nullable = true) (Precision = 4) (Scale = 1)
+@p21='81.1' (Nullable = true) (Precision = 3) (Scale = 1)
+@p22='103.3' (Nullable = true) (Precision = 4) (Scale = 1)
+@p23='82.2' (Nullable = true) (Precision = 3) (Scale = 1)
 @p24='85.5' (Nullable = true)
 @p25='83.3' (Nullable = true)
 @p26='Value4' (Size = 20)
@@ -2166,7 +2205,7 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
             var parameters = DumpParameters();
             Assert.Equal(
-                @"@p0=NULL
+                @"@p0=NULL (DbType = Boolean)
 @p1=NULL (DbType = Byte)
 @p2=NULL (Size = 8000) (DbType = Binary)
 @p3=NULL (Size = 8000) (DbType = Binary)
@@ -2185,16 +2224,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p16=NULL (DbType = DateTime2)
 @p17=NULL (DbType = DateTime)
 @p18=NULL (DbType = DateTimeOffset)
-@p19=NULL
-@p20=NULL
-@p21=NULL
-@p22=NULL
-@p23=NULL
-@p24=NULL
-@p25=NULL
+@p19=NULL (DbType = Decimal)
+@p20=NULL (DbType = Decimal)
+@p21=NULL (DbType = Decimal)
+@p22=NULL (DbType = Decimal)
+@p23=NULL (DbType = Decimal)
+@p24=NULL (DbType = Double)
+@p25=NULL (DbType = Double)
 @p26=NULL (Size = 20)
 @p27=NULL (Size = 8000) (DbType = AnsiString)
-@p28=NULL
+@p28=NULL (DbType = Single)
 @p29=NULL (DbType = Guid)
 @p30='78' (Nullable = true)
 @p31=NULL (DbType = Int64)
@@ -2211,12 +2250,12 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p42=NULL (Size = 4000)
 @p43=NULL (Size = 8000) (DbType = AnsiString)
 @p44=NULL (Size = 8000) (DbType = AnsiString)
-@p45=NULL
+@p45=NULL (DbType = Time)
 @p46=NULL (DbType = Int32)
 @p47=NULL (DbType = Int64)
 @p48=NULL (DbType = Int32)
 @p49=NULL (DbType = Int64)
-@p50=NULL (Precision = 20)
+@p50=NULL (Precision = 20) (DbType = Decimal)
 @p51=NULL (DbType = Int16)",
                 parameters,
                 ignoreLineEndingDifferences: true);
@@ -2965,6 +3004,9 @@ BuiltInNullableDataTypesShadow.TestNullableUnsignedInt64 ---> [nullable decimal]
 BuiltInNullableDataTypesShadow.TestString ---> [nullable nvarchar] [MaxLength = -1]
 DateTimeEnclosure.DateTimeOffset ---> [nullable datetimeoffset] [Precision = 7]
 DateTimeEnclosure.Id ---> [int] [Precision = 10 Scale = 0]
+DoubleDataTypes.Double25 ---> [float] [Precision = 53]
+DoubleDataTypes.Double3 ---> [real] [Precision = 24]
+DoubleDataTypes.Id ---> [int] [Precision = 10 Scale = 0]
 EmailTemplate.Id ---> [uniqueidentifier]
 EmailTemplate.TemplateType ---> [int] [Precision = 10 Scale = 0]
 MappedDataTypes.BoolAsBit ---> [bit]
@@ -3599,6 +3641,14 @@ WHERE [b].[Id] = 13");
                         b.Property(e => e.DecimalAsNumeric3).HasPrecision(3);
                     });
 
+                modelBuilder.Entity<DoubleDataTypes>(
+                    b =>
+                    {
+                        b.Property(e => e.Id).ValueGeneratedNever();
+                        b.Property(e => e.Double3).HasPrecision(3);
+                        b.Property(e => e.Double25).HasPrecision(25);
+                    });
+
                 modelBuilder.Entity<MappedPrecisionAndScaledSeparatelyDataTypes>(
                     b =>
                     {
@@ -4116,6 +4166,14 @@ WHERE [b].[Id] = 13");
 
             [Column(TypeName = "numeric")]
             public decimal DecimalAsNumeric3 { get; set; }
+        }
+
+        protected class DoubleDataTypes
+        {
+            public int Id { get; set; }
+
+            public double Double3 { get; set; }
+            public double Double25 { get; set; }
         }
 
         protected class MappedPrecisionAndScaledDataTypes

@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
@@ -14,7 +13,10 @@ namespace Microsoft.EntityFrameworkCore
     ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> or use a <see cref="DbContextOptionsBuilder{TContext}" />
     ///     to create instances of this class and it is not designed to be directly constructed in your application code.
     /// </summary>
-    /// <typeparam name="TContext"> The type of the context these options apply to. </typeparam>
+    /// <typeparam name="TContext">The type of the context these options apply to.</typeparam>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see> for more information.
+    /// </remarks>
     public class DbContextOptions<TContext> : DbContextOptions
         where TContext : DbContext
     {
@@ -24,7 +26,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     to create instances of this class and it is not designed to be directly constructed in your application code.
         /// </summary>
         public DbContextOptions()
-            : base(new Dictionary<Type, IDbContextOptionsExtension>())
         {
         }
 
@@ -33,28 +34,30 @@ namespace Microsoft.EntityFrameworkCore
         ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> or use a <see cref="DbContextOptionsBuilder{TContext}" />
         ///     to create instances of this class and it is not designed to be directly constructed in your application code.
         /// </summary>
-        /// <param name="extensions"> The extensions that store the configured options. </param>
+        /// <param name="extensions">The extensions that store the configured options.</param>
         public DbContextOptions(
             IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
             : base(extensions)
         {
         }
 
-        /// <summary>
-        ///     Adds the given extension to the underlying options and creates a new
-        ///     <see cref="DbContextOptions" /> with the extension added.
-        /// </summary>
-        /// <typeparam name="TExtension"> The type of extension to be added. </typeparam>
-        /// <param name="extension"> The extension to be added. </param>
-        /// <returns> The new options instance with the given extension added. </returns>
+        private DbContextOptions(
+            ImmutableSortedDictionary<Type, (IDbContextOptionsExtension Extension, int Ordinal)> extensions)
+            : base(extensions)
+        {
+        }
+
+        /// <inheritdoc />
         public override DbContextOptions WithExtension<TExtension>(TExtension extension)
         {
-            Check.NotNull(extension, nameof(extension));
+            var type = extension.GetType();
+            var ordinal = ExtensionsMap.Count;
+            if (ExtensionsMap.TryGetValue(type, out var existingValue))
+            {
+                ordinal = existingValue.Ordinal;
+            }
 
-            var extensions = Extensions.ToDictionary(p => p.GetType(), p => p);
-            extensions[typeof(TExtension)] = extension;
-
-            return new DbContextOptions<TContext>(extensions);
+            return new DbContextOptions<TContext>(ExtensionsMap.SetItem(type, (extension, ordinal)));
         }
 
         /// <summary>

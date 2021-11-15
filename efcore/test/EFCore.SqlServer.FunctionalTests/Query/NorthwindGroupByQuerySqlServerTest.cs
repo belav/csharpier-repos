@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -203,9 +203,12 @@ GROUP BY [o].[CustomerID]");
             await base.GroupBy_Property_Select_Key_with_constant(async);
 
             AssertSql(
-                @"SELECT N'CustomerID' AS [Name], [o].[CustomerID] AS [Value], COUNT(*) AS [Count]
-FROM [Orders] AS [o]
-GROUP BY [o].[CustomerID]");
+                @"SELECT [t].[Name], [t].[CustomerID] AS [Value], COUNT(*) AS [Count]
+FROM (
+    SELECT [o].[CustomerID], N'CustomerID' AS [Name]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Name], [t].[CustomerID]");
         }
 
         public override async Task GroupBy_aggregate_projecting_conditional_expression(bool async)
@@ -522,8 +525,12 @@ GROUP BY [o].[CustomerID], [o].[EmployeeID]");
             await base.GroupBy_Constant_Select_Sum_Min_Key_Max_Avg(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum], MIN([o].[OrderID]) AS [Min], 2 AS [Key], MAX([o].[OrderID]) AS [Max], AVG(CAST([o].[OrderID] AS float)) AS [Avg]
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum], MIN([t].[OrderID]) AS [Min], [t].[Key], MAX([t].[OrderID]) AS [Max], AVG(CAST([t].[OrderID] AS float)) AS [Avg]
+FROM (
+    SELECT [o].[OrderID], 2 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_Constant_with_element_selector_Select_Sum(bool async)
@@ -531,8 +538,12 @@ FROM [Orders] AS [o]");
             await base.GroupBy_Constant_with_element_selector_Select_Sum(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], 2 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_Constant_with_element_selector_Select_Sum2(bool async)
@@ -540,8 +551,12 @@ FROM [Orders] AS [o]");
             await base.GroupBy_Constant_with_element_selector_Select_Sum2(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], 2 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_Constant_with_element_selector_Select_Sum3(bool async)
@@ -549,8 +564,12 @@ FROM [Orders] AS [o]");
             await base.GroupBy_Constant_with_element_selector_Select_Sum3(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], 2 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_after_predicate_Constant_Select_Sum_Min_Key_Max_Avg(bool async)
@@ -558,9 +577,13 @@ FROM [Orders] AS [o]");
             await base.GroupBy_after_predicate_Constant_Select_Sum_Min_Key_Max_Avg(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum], MIN([o].[OrderID]) AS [Min], 2 AS [Random], MAX([o].[OrderID]) AS [Max], AVG(CAST([o].[OrderID] AS float)) AS [Avg]
-FROM [Orders] AS [o]
-WHERE [o].[OrderID] > 10500");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum], MIN([t].[OrderID]) AS [Min], [t].[Key] AS [Random], MAX([t].[OrderID]) AS [Max], AVG(CAST([t].[OrderID] AS float)) AS [Avg]
+FROM (
+    SELECT [o].[OrderID], 2 AS [Key]
+    FROM [Orders] AS [o]
+    WHERE [o].[OrderID] > 10500
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_Constant_with_element_selector_Select_Sum_Min_Key_Max_Avg(bool async)
@@ -568,8 +591,12 @@ WHERE [o].[OrderID] > 10500");
             await base.GroupBy_Constant_with_element_selector_Select_Sum_Min_Key_Max_Avg(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum], 2 AS [Key]
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum], [t].[Key]
+FROM (
+    SELECT [o].[OrderID], 2 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_constant_with_where_on_grouping_with_aggregate_operators(bool async)
@@ -577,8 +604,21 @@ FROM [Orders] AS [o]");
             await base.GroupBy_constant_with_where_on_grouping_with_aggregate_operators(async);
 
             AssertSql(
-                @"SELECT MIN([o].[OrderDate]) AS [Min], MAX([o].[OrderDate]) AS [Max], COALESCE(SUM([o].[OrderID]), 0) AS [Sum], AVG(CAST([o].[OrderID] AS float)) AS [Average]
-FROM [Orders] AS [o]");
+                @"SELECT MIN(CASE
+    WHEN 1 = [t].[Key] THEN [t].[OrderDate]
+END) AS [Min], MAX(CASE
+    WHEN 1 = [t].[Key] THEN [t].[OrderDate]
+END) AS [Max], COALESCE(SUM(CASE
+    WHEN 1 = [t].[Key] THEN [t].[OrderID]
+END), 0) AS [Sum], AVG(CAST(CASE
+    WHEN 1 = [t].[Key] THEN [t].[OrderID]
+END AS float)) AS [Average]
+FROM (
+    SELECT [o].[OrderID], [o].[OrderDate], 1 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]
+ORDER BY [t].[Key]");
         }
 
         public override async Task GroupBy_param_Select_Sum_Min_Key_Max_Avg(bool async)
@@ -588,8 +628,12 @@ FROM [Orders] AS [o]");
             AssertSql(
                 @"@__a_0='2'
 
-SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum], MIN([o].[OrderID]) AS [Min], @__a_0 AS [Key], MAX([o].[OrderID]) AS [Max], AVG(CAST([o].[OrderID] AS float)) AS [Avg]
-FROM [Orders] AS [o]");
+SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum], MIN([t].[OrderID]) AS [Min], [t].[Key], MAX([t].[OrderID]) AS [Max], AVG(CAST([t].[OrderID] AS float)) AS [Avg]
+FROM (
+    SELECT [o].[OrderID], @__a_0 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_param_with_element_selector_Select_Sum(bool async)
@@ -597,8 +641,14 @@ FROM [Orders] AS [o]");
             await base.GroupBy_param_with_element_selector_Select_Sum(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"@__a_0='2'
+
+SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], @__a_0 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_param_with_element_selector_Select_Sum2(bool async)
@@ -606,8 +656,14 @@ FROM [Orders] AS [o]");
             await base.GroupBy_param_with_element_selector_Select_Sum2(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"@__a_0='2'
+
+SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], @__a_0 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_param_with_element_selector_Select_Sum3(bool async)
@@ -615,8 +671,14 @@ FROM [Orders] AS [o]");
             await base.GroupBy_param_with_element_selector_Select_Sum3(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"@__a_0='2'
+
+SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], @__a_0 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_param_with_element_selector_Select_Sum_Min_Key_Max_Avg(bool async)
@@ -626,8 +688,12 @@ FROM [Orders] AS [o]");
             AssertSql(
                 @"@__a_0='2'
 
-SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum], @__a_0 AS [Key]
-FROM [Orders] AS [o]");
+SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum], [t].[Key]
+FROM (
+    SELECT [o].[OrderID], @__a_0 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_anonymous_key_type_mismatch_with_aggregate(bool async)
@@ -656,7 +722,7 @@ GROUP BY [o].[CustomerID]");
             await base.GroupBy_Property_scalar_element_selector_Count(async);
 
             AssertSql(
-                @"SELECT COUNT([o].[OrderID])
+                @"SELECT COUNT(*)
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
         }
@@ -666,7 +732,7 @@ GROUP BY [o].[CustomerID]");
             await base.GroupBy_Property_scalar_element_selector_LongCount(async);
 
             AssertSql(
-                @"SELECT COUNT_BIG([o].[OrderID])
+                @"SELECT COUNT_BIG(*)
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
         }
@@ -845,8 +911,12 @@ GROUP BY [o].[OrderID]");
             await base.GroupBy_empty_key_Aggregate(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0)
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0)
+FROM (
+    SELECT [o].[OrderID], 1 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_empty_key_Aggregate_Key(bool async)
@@ -854,8 +924,12 @@ FROM [Orders] AS [o]");
             await base.GroupBy_empty_key_Aggregate_Key(async);
 
             AssertSql(
-                @"SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum]
-FROM [Orders] AS [o]");
+                @"SELECT COALESCE(SUM([t].[OrderID]), 0) AS [Sum]
+FROM (
+    SELECT [o].[OrderID], 1 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task OrderBy_GroupBy_Aggregate(bool async)
@@ -1304,6 +1378,20 @@ GROUP BY [o].[CustomerID]
 HAVING COUNT(*) > 4");
         }
 
+        public override async Task GroupBy_count_filter(bool async)
+        {
+            await base.GroupBy_count_filter(async);
+
+            AssertSql(
+                @"SELECT [t].[Key] AS [Name], COUNT(*) AS [Count]
+FROM (
+    SELECT N'Order' AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]
+HAVING COUNT(*) > 0");
+        }
+
         public override async Task GroupBy_filter_count_OrderBy_count_Select_sum(bool async)
         {
             await base.GroupBy_filter_count_OrderBy_count_Select_sum(async);
@@ -1330,6 +1418,36 @@ FROM (
 ) AS [t]
 INNER JOIN [Customers] AS [c] ON [t].[CustomerID] = [c].[CustomerID]
 INNER JOIN [Orders] AS [o0] ON [t].[LastOrderID] = [o0].[OrderID]");
+        }
+
+        public override async Task GroupBy_Aggregate_Join_converted_from_SelectMany(bool async)
+        {
+            await base.GroupBy_Aggregate_Join_converted_from_SelectMany(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+INNER JOIN (
+    SELECT [o].[CustomerID]
+    FROM [Orders] AS [o]
+    GROUP BY [o].[CustomerID]
+    HAVING COUNT(*) > 5
+) AS [t] ON [c].[CustomerID] = [t].[CustomerID]");
+        }
+
+        public override async Task GroupBy_Aggregate_LeftJoin_converted_from_SelectMany(bool async)
+        {
+            await base.GroupBy_Aggregate_LeftJoin_converted_from_SelectMany(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+LEFT JOIN (
+    SELECT [o].[CustomerID], MAX([o].[OrderID]) AS [LastOrderID]
+    FROM [Orders] AS [o]
+    GROUP BY [o].[CustomerID]
+    HAVING COUNT(*) > 5
+) AS [t] ON [c].[CustomerID] = [t].[CustomerID]");
         }
 
         public override async Task Join_GroupBy_Aggregate_multijoins(bool async)
@@ -1479,45 +1597,22 @@ ORDER BY [t].[CustomerID]");
             await base.Select_nested_collection_with_groupby(async);
 
             AssertSql(
-                @"SELECT (
-    SELECT CASE
-        WHEN EXISTS (
-            SELECT 1
-            FROM [Orders] AS [o0]
-            WHERE [c].[CustomerID] = [o0].[CustomerID])
-        THEN CAST(1 AS bit) ELSE CAST(0 AS bit)
-    END
-), [c].[CustomerID]
+                @"SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Orders] AS [o]
+        WHERE [c].[CustomerID] = [o].[CustomerID]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END, [c].[CustomerID], [t].[OrderID]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] LIKE N'A%'",
-                //
-                @"@_outer_CustomerID='ALFKI' (Size = 5)
-
-SELECT [o1].[OrderID]
-FROM [Orders] AS [o1]
-WHERE @_outer_CustomerID = [o1].[CustomerID]
-ORDER BY [o1].[OrderID]",
-                //
-                @"@_outer_CustomerID='ANATR' (Size = 5)
-
-SELECT [o1].[OrderID]
-FROM [Orders] AS [o1]
-WHERE @_outer_CustomerID = [o1].[CustomerID]
-ORDER BY [o1].[OrderID]",
-                //
-                @"@_outer_CustomerID='ANTON' (Size = 5)
-
-SELECT [o1].[OrderID]
-FROM [Orders] AS [o1]
-WHERE @_outer_CustomerID = [o1].[CustomerID]
-ORDER BY [o1].[OrderID]",
-                //
-                @"@_outer_CustomerID='AROUT' (Size = 5)
-
-SELECT [o1].[OrderID]
-FROM [Orders] AS [o1]
-WHERE @_outer_CustomerID = [o1].[CustomerID]
-ORDER BY [o1].[OrderID]");
+OUTER APPLY (
+    SELECT [o0].[OrderID]
+    FROM [Orders] AS [o0]
+    WHERE [c].[CustomerID] = [o0].[CustomerID]
+    GROUP BY [o0].[OrderID]
+) AS [t]
+WHERE [c].[CustomerID] LIKE N'F%'
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Select_uncorrelated_collection_with_groupby_works(bool async)
@@ -1533,7 +1628,7 @@ OUTER APPLY (
     GROUP BY [o].[OrderID]
 ) AS [t]
 WHERE [c].[CustomerID] LIKE N'A%'
-ORDER BY [c].[CustomerID], [t].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Select_uncorrelated_collection_with_groupby_multiple_collections_work(bool async)
@@ -1554,7 +1649,7 @@ OUTER APPLY (
     GROUP BY [p0].[ProductID]
 ) AS [t0]
 WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'A%')
-ORDER BY [o].[OrderID], [t].[ProductID], [t0].[ProductID]");
+ORDER BY [o].[OrderID], [t].[ProductID]");
         }
 
         public override async Task Select_GroupBy_All(bool async)
@@ -1650,7 +1745,7 @@ GROUP BY [o].[CustomerID]");
 
             AssertSql(
                 @"SELECT COUNT(CASE
-    WHEN ([o].[OrderID] < 10300) AND ([o].[OrderDate] IS NOT NULL AND (DATEPART(year, [o].[OrderDate]) = 1997)) THEN 1
+    WHEN (([o].[OrderID] < 10300) AND [o].[OrderDate] IS NOT NULL) AND (DATEPART(year, [o].[OrderDate]) = 1997) THEN 1
 END)
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
@@ -1662,7 +1757,7 @@ GROUP BY [o].[CustomerID]");
 
             AssertSql(
                 @"SELECT COUNT(CASE
-    WHEN ([o].[OrderID] < 10300) AND ([o].[OrderDate] IS NOT NULL AND (DATEPART(year, [o].[OrderDate]) = 1997)) THEN 1
+    WHEN (([o].[OrderID] < 10300) AND [o].[OrderDate] IS NOT NULL) AND (DATEPART(year, [o].[OrderDate]) = 1997) THEN 1
 END)
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
@@ -1674,7 +1769,7 @@ GROUP BY [o].[CustomerID]");
 
             AssertSql(
                 @"SELECT COUNT(CASE
-    WHEN ([o].[OrderID] < 10300) AND ([o].[OrderDate] IS NOT NULL AND (DATEPART(year, [o].[OrderDate]) = 1997)) THEN [o].[OrderDate]
+    WHEN (([o].[OrderID] < 10300) AND [o].[OrderDate] IS NOT NULL) AND (DATEPART(year, [o].[OrderDate]) = 1997) THEN 1
 END)
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
@@ -1686,7 +1781,7 @@ GROUP BY [o].[CustomerID]");
 
             AssertSql(
                 @"SELECT MIN(CASE
-    WHEN ([o].[OrderID] < 10300) AND ([o].[OrderDate] IS NOT NULL AND (DATEPART(year, [o].[OrderDate]) = 1997)) THEN [o].[OrderID]
+    WHEN (([o].[OrderID] < 10300) AND [o].[OrderDate] IS NOT NULL) AND (DATEPART(year, [o].[OrderDate]) = 1997) THEN [o].[OrderID]
 END)
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
@@ -1758,68 +1853,15 @@ FROM [Orders] AS [o]
 GROUP BY [o].[OrderID], [o].[CustomerID]");
         }
 
-        public override async Task GroupBy_SelectMany(bool async)
-        {
-            await base.GroupBy_SelectMany(async);
-
-            AssertSql(
-                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-ORDER BY [c].[City]");
-        }
-
-        public override async Task OrderBy_GroupBy_SelectMany(bool async)
-        {
-            await base.OrderBy_GroupBy_SelectMany(async);
-
-            AssertSql(
-                @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Orders] AS [o]
-ORDER BY [o].[CustomerID], [o].[OrderID]");
-        }
-
-        public override async Task OrderBy_GroupBy_SelectMany_shadow(bool async)
-        {
-            await base.OrderBy_GroupBy_SelectMany_shadow(async);
-
-            AssertSql(
-                @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]
-ORDER BY [e].[EmployeeID]");
-        }
-
-        public override async Task GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(bool async)
-        {
-            await base.GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(async);
-
-            AssertSql(
-                "");
-        }
-
-        public override async Task GroupBy_Distinct(bool async)
-        {
-            await base.GroupBy_Distinct(async);
-
-            AssertSql(
-                @"SELECT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate]
-FROM [Orders] AS [o0]
-ORDER BY [o0].[CustomerID]");
-        }
-
         public override async Task GroupBy_with_aggregate_through_navigation_property(bool async)
         {
             await base.GroupBy_with_aggregate_through_navigation_property(async);
 
             AssertSql(
-                @"SELECT [c].[OrderID], [c].[CustomerID], [c].[EmployeeID], [c].[OrderDate]
-FROM [Orders] AS [c]
-ORDER BY [c].[EmployeeID]",
-                //
-                @"SELECT [i.Customer0].[CustomerID], [i.Customer0].[Region]
-FROM [Customers] AS [i.Customer0]",
-                //
-                @"SELECT [i.Customer0].[CustomerID], [i.Customer0].[Region]
-FROM [Customers] AS [i.Customer0]");
+                @"SELECT MAX([c].[Region]) AS [max]
+FROM [Orders] AS [o]
+LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
+GROUP BY [o].[EmployeeID]");
         }
 
         public override async Task GroupBy_Shadow(bool async)
@@ -1827,10 +1869,13 @@ FROM [Customers] AS [i.Customer0]");
             await base.GroupBy_Shadow(async);
 
             AssertSql(
-                @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
+                @"SELECT (
+    SELECT TOP(1) [e0].[Title]
+    FROM [Employees] AS [e0]
+    WHERE (([e0].[Title] = N'Sales Representative') AND ([e0].[EmployeeID] = 1)) AND (([e].[Title] = [e0].[Title]) OR ([e].[Title] IS NULL AND [e0].[Title] IS NULL)))
 FROM [Employees] AS [e]
 WHERE ([e].[Title] = N'Sales Representative') AND ([e].[EmployeeID] = 1)
-ORDER BY [e].[Title]");
+GROUP BY [e].[Title]");
         }
 
         public override async Task GroupBy_Shadow2(bool async)
@@ -1838,10 +1883,22 @@ ORDER BY [e].[Title]");
             await base.GroupBy_Shadow2(async);
 
             AssertSql(
-                @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]
-WHERE ([e].[Title] = N'Sales Representative') AND ([e].[EmployeeID] = 1)
-ORDER BY [e].[Title]");
+                @"SELECT [t0].[EmployeeID], [t0].[City], [t0].[Country], [t0].[FirstName], [t0].[ReportsTo], [t0].[Title]
+FROM (
+    SELECT [e].[Title]
+    FROM [Employees] AS [e]
+    WHERE ([e].[Title] = N'Sales Representative') AND ([e].[EmployeeID] = 1)
+    GROUP BY [e].[Title]
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[EmployeeID], [t1].[City], [t1].[Country], [t1].[FirstName], [t1].[ReportsTo], [t1].[Title]
+    FROM (
+        SELECT [e0].[EmployeeID], [e0].[City], [e0].[Country], [e0].[FirstName], [e0].[ReportsTo], [e0].[Title], ROW_NUMBER() OVER(PARTITION BY [e0].[Title] ORDER BY [e0].[EmployeeID]) AS [row]
+        FROM [Employees] AS [e0]
+        WHERE ([e0].[Title] = N'Sales Representative') AND ([e0].[EmployeeID] = 1)
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[Title] = [t0].[Title]");
         }
 
         public override async Task GroupBy_Shadow3(bool async)
@@ -1849,11 +1906,79 @@ ORDER BY [e].[Title]");
             await base.GroupBy_Shadow3(async);
 
             AssertSql(
-                @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
+                @"SELECT (
+    SELECT TOP(1) [e0].[Title]
+    FROM [Employees] AS [e0]
+    WHERE ([e0].[EmployeeID] = 1) AND ([e].[EmployeeID] = [e0].[EmployeeID]))
 FROM [Employees] AS [e]
 WHERE [e].[EmployeeID] = 1
-ORDER BY [e].[EmployeeID]");
+GROUP BY [e].[EmployeeID]");
         }
+
+        public override async Task GroupBy_select_grouping_list(bool async)
+        {
+            await base.GroupBy_select_grouping_list(async);
+
+            AssertSql(
+                @"SELECT [t].[City], [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
+FROM (
+    SELECT [c].[City]
+    FROM [Customers] AS [c]
+    GROUP BY [c].[City]
+) AS [t]
+LEFT JOIN [Customers] AS [c0] ON [t].[City] = [c0].[City]
+ORDER BY [t].[City]");
+        }
+
+        public override async Task GroupBy_select_grouping_array(bool async)
+        {
+            await base.GroupBy_select_grouping_array(async);
+
+            AssertSql(
+                @"SELECT [t].[City], [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
+FROM (
+    SELECT [c].[City]
+    FROM [Customers] AS [c]
+    GROUP BY [c].[City]
+) AS [t]
+LEFT JOIN [Customers] AS [c0] ON [t].[City] = [c0].[City]
+ORDER BY [t].[City]");
+        }
+
+        public override async Task GroupBy_select_grouping_composed_list(bool async)
+        {
+            await base.GroupBy_select_grouping_composed_list(async);
+
+            AssertSql(
+                @"SELECT [t].[City], [t0].[CustomerID], [t0].[Address], [t0].[City], [t0].[CompanyName], [t0].[ContactName], [t0].[ContactTitle], [t0].[Country], [t0].[Fax], [t0].[Phone], [t0].[PostalCode], [t0].[Region]
+FROM (
+    SELECT [c].[City]
+    FROM [Customers] AS [c]
+    GROUP BY [c].[City]
+) AS [t]
+LEFT JOIN (
+    SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
+    FROM [Customers] AS [c0]
+    WHERE [c0].[CustomerID] LIKE N'A%'
+) AS [t0] ON ([t].[City] = [t0].[City]) OR ([t].[City] IS NULL AND [t0].[City] IS NULL)
+ORDER BY [t].[City]");
+        }
+
+        public override async Task GroupBy_select_grouping_composed_list_2(bool async)
+        {
+            await base.GroupBy_select_grouping_composed_list_2(async);
+
+            AssertSql(
+                @"SELECT [t].[City], [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
+FROM (
+    SELECT [c].[City]
+    FROM [Customers] AS [c]
+    GROUP BY [c].[City]
+) AS [t]
+LEFT JOIN [Customers] AS [c0] ON [t].[City] = [c0].[City]
+ORDER BY [t].[City], [c0].[CustomerID]");
+        }
+
 
         public override async Task Select_GroupBy_SelectMany(bool async)
         {
@@ -1906,7 +2031,13 @@ GROUP BY [o].[CustomerID]");
             await base.GroupBy_group_Distinct_Select_Distinct_aggregate(async);
 
             AssertSql(
-                @"SELECT [o].[CustomerID] AS [Key], MAX(DISTINCT ([o].[OrderDate])) AS [Max]
+                @"SELECT [o].[CustomerID] AS [Key], (
+    SELECT DISTINCT MAX(DISTINCT ([t].[OrderDate]))
+    FROM (
+        SELECT DISTINCT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate]
+        FROM [Orders] AS [o0]
+        WHERE ([o].[CustomerID] = [o0].[CustomerID]) OR ([o].[CustomerID] IS NULL AND [o0].[CustomerID] IS NULL)
+    ) AS [t]) AS [Max]
 FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
         }
@@ -1968,7 +2099,7 @@ END");
         SELECT 1
         FROM [Orders] AS [o]
         GROUP BY [o].[CustomerID]
-        HAVING NOT (COALESCE(SUM([o].[OrderID]), 0) >= 0)) THEN CAST(1 AS bit)
+        HAVING COALESCE(SUM([o].[OrderID]), 0) < 0) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END");
         }
@@ -2085,6 +2216,50 @@ END");
 END");
         }
 
+        public override async Task GroupBy_aggregate_followed_by_another_GroupBy_aggregate(bool async)
+        {
+            await base.GroupBy_aggregate_followed_by_another_GroupBy_aggregate(async);
+
+            AssertSql(
+                @"SELECT [t0].[Key0] AS [Key], COALESCE(SUM([t0].[Count]), 0) AS [Count]
+FROM (
+    SELECT [t].[Count], 1 AS [Key0]
+    FROM (
+        SELECT COUNT(*) AS [Count]
+        FROM [Orders] AS [o]
+        GROUP BY [o].[CustomerID]
+    ) AS [t]
+) AS [t0]
+GROUP BY [t0].[Key0]");
+        }
+
+        public override async Task GroupBy_Count_in_projection(bool async)
+        {
+            await base.GroupBy_Count_in_projection(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[OrderDate], CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Order Details] AS [o0]
+        WHERE ([o].[OrderID] = [o0].[OrderID]) AND ([o0].[ProductID] < 25)) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END AS [HasOrderDetails], CASE
+    WHEN (
+        SELECT COUNT(*)
+        FROM (
+            SELECT [p].[ProductName]
+            FROM [Order Details] AS [o1]
+            INNER JOIN [Products] AS [p] ON [o1].[ProductID] = [p].[ProductID]
+            WHERE ([o].[OrderID] = [o1].[OrderID]) AND ([o1].[ProductID] < 25)
+            GROUP BY [p].[ProductName]
+        ) AS [t]) > 1 THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END AS [HasMultipleProducts]
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] IS NOT NULL");
+        }
+
         public override async Task GroupBy_based_on_renamed_property_simple(bool async)
         {
             await base.GroupBy_based_on_renamed_property_simple(async);
@@ -2118,6 +2293,19 @@ FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 GROUP BY [c].[CustomerID], [o].[OrderDate]
 ORDER BY [o].[OrderDate]");
+        }
+
+        public override async Task Odata_groupby_empty_key(bool async)
+        {
+            await base.Odata_groupby_empty_key(async);
+
+            AssertSql(
+                @"SELECT N'TotalAmount' AS [Name], COALESCE(SUM(CAST([t].[OrderID] AS decimal(18,2))), 0.0) AS [Value]
+FROM (
+    SELECT [o].[OrderID], 1 AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
         }
 
         public override async Task GroupBy_with_group_key_access_thru_navigation(bool async)
@@ -2376,6 +2564,21 @@ FROM (
 GROUP BY [t].[CustomerID]");
         }
 
+        public override async Task GroupBy_aggregate_without_selectMany_selecting_first(bool async)
+        {
+            await base.GroupBy_aggregate_without_selectMany_selecting_first(async);
+
+            AssertSql(
+                @"SELECT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate]
+FROM (
+    SELECT MIN([o].[OrderID]) AS [c]
+    FROM [Orders] AS [o]
+    GROUP BY [o].[CustomerID]
+) AS [t]
+CROSS JOIN [Orders] AS [o0]
+WHERE [o0].[OrderID] = [t].[c]");
+        }
+
         public override async Task GroupBy_with_grouping_key_using_Like(bool async)
         {
             await base.GroupBy_with_grouping_key_using_Like(async);
@@ -2417,7 +2620,15 @@ GROUP BY [o].[CustomerID]");
             await base.Complex_query_with_groupBy_in_subquery1(async);
 
             AssertSql(
-                @"");
+                @"SELECT [c].[CustomerID], [t].[Sum], [t].[CustomerID]
+FROM [Customers] AS [c]
+OUTER APPLY (
+    SELECT COALESCE(SUM([o].[OrderID]), 0) AS [Sum], [o].[CustomerID]
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]
+    GROUP BY [o].[CustomerID]
+) AS [t]
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Complex_query_with_groupBy_in_subquery2(bool async)
@@ -2425,7 +2636,15 @@ GROUP BY [o].[CustomerID]");
             await base.Complex_query_with_groupBy_in_subquery2(async);
 
             AssertSql(
-                @"");
+                @"SELECT [c].[CustomerID], [t].[Max], [t].[Sum], [t].[CustomerID]
+FROM [Customers] AS [c]
+OUTER APPLY (
+    SELECT MAX(CAST(LEN([o].[CustomerID]) AS int)) AS [Max], COALESCE(SUM([o].[OrderID]), 0) AS [Sum], [o].[CustomerID]
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]
+    GROUP BY [o].[CustomerID]
+) AS [t]
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Complex_query_with_groupBy_in_subquery3(bool async)
@@ -2433,7 +2652,14 @@ GROUP BY [o].[CustomerID]");
             await base.Complex_query_with_groupBy_in_subquery3(async);
 
             AssertSql(
-                @"");
+                @"SELECT [c].[CustomerID], [t].[Max], [t].[Sum], [t].[CustomerID]
+FROM [Customers] AS [c]
+OUTER APPLY (
+    SELECT MAX(CAST(LEN([o].[CustomerID]) AS int)) AS [Max], COALESCE(SUM([o].[OrderID]), 0) AS [Sum], [o].[CustomerID]
+    FROM [Orders] AS [o]
+    GROUP BY [o].[CustomerID]
+) AS [t]
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Group_by_with_projection_into_DTO(bool async)
@@ -2495,12 +2721,49 @@ FROM [Orders] AS [o]
 GROUP BY [o].[CustomerID]");
         }
 
-        [ConditionalTheory(Skip = "Issue#19027")]
         public override async Task GroupBy_scalar_subquery(bool async)
         {
             await base.GroupBy_scalar_subquery(async);
 
-            AssertSql(" ");
+            AssertSql(
+                @"SELECT [t].[Key], COUNT(*) AS [Count]
+FROM (
+    SELECT (
+        SELECT TOP(1) [c].[ContactName]
+        FROM [Customers] AS [c]
+        WHERE [c].[CustomerID] = [o].[CustomerID]) AS [Key]
+    FROM [Orders] AS [o]
+) AS [t]
+GROUP BY [t].[Key]");
+        }
+
+        public override async Task AsEnumerable_in_subquery_for_GroupBy(bool async)
+        {
+            await base.AsEnumerable_in_subquery_for_GroupBy(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [t2].[OrderID], [t2].[CustomerID], [t2].[EmployeeID], [t2].[OrderDate], [t2].[CustomerID0]
+FROM [Customers] AS [c]
+OUTER APPLY (
+    SELECT [t0].[OrderID], [t0].[CustomerID], [t0].[EmployeeID], [t0].[OrderDate], [t].[CustomerID] AS [CustomerID0]
+    FROM (
+        SELECT [o].[CustomerID]
+        FROM [Orders] AS [o]
+        WHERE [o].[CustomerID] = [c].[CustomerID]
+        GROUP BY [o].[CustomerID]
+    ) AS [t]
+    LEFT JOIN (
+        SELECT [t1].[OrderID], [t1].[CustomerID], [t1].[EmployeeID], [t1].[OrderDate]
+        FROM (
+            SELECT [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate], ROW_NUMBER() OVER(PARTITION BY [o0].[CustomerID] ORDER BY [o0].[OrderDate] DESC) AS [row]
+            FROM [Orders] AS [o0]
+            WHERE [o0].[CustomerID] = [c].[CustomerID]
+        ) AS [t1]
+        WHERE [t1].[row] <= 1
+    ) AS [t0] ON [t].[CustomerID] = [t0].[CustomerID]
+) AS [t2]
+WHERE [c].[CustomerID] LIKE N'F%'
+ORDER BY [c].[CustomerID], [t2].[CustomerID0]");
         }
 
         public override async Task GroupBy_scalar_aggregate_in_set_operation(bool async)
@@ -2539,7 +2802,7 @@ OUTER APPLY (
     FROM [Products] AS [p0]
     GROUP BY [p0].[ProductID]
 ) AS [t1]
-ORDER BY [t].[City], [t0].[ProductID], [t1].[ProductID]");
+ORDER BY [t].[City], [t0].[ProductID]");
         }
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_does_not_change(bool async)
@@ -2555,7 +2818,7 @@ FROM (
     HAVING [c].[CustomerID] LIKE N'F%'
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID], [o].[OrderID]");
+ORDER BY [t].[CustomerID]");
         }
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes(bool async)
@@ -2571,7 +2834,7 @@ FROM (
     HAVING [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
 ) AS [t]
 LEFT JOIN [Orders] AS [o0] ON [t].[CustomerID] = [o0].[CustomerID]
-ORDER BY [t].[CustomerID], [o0].[OrderID]");
+ORDER BY [t].[CustomerID]");
         }
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(bool async)
@@ -2579,6 +2842,33 @@ ORDER BY [t].[CustomerID], [o0].[OrderID]");
             await base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(async);
 
             //AssertSql(" ");
+        }
+
+        public override async Task Complex_query_with_group_by_in_subquery5(bool async)
+        {
+            await base.Complex_query_with_group_by_in_subquery5(async);
+
+            AssertSql(
+                @"SELECT [t].[c], [t].[ProductID], [t0].[CustomerID], [t0].[City]
+FROM (
+    SELECT COALESCE(SUM([o].[ProductID] + ([o].[OrderID] * 1000)), 0) AS [c], [o].[ProductID]
+    FROM [Order Details] AS [o]
+    INNER JOIN [Orders] AS [o0] ON [o].[OrderID] = [o0].[OrderID]
+    LEFT JOIN [Customers] AS [c] ON [o0].[CustomerID] = [c].[CustomerID]
+    WHERE [c].[CustomerID] = N'ALFKI'
+    GROUP BY [o].[ProductID]
+) AS [t]
+OUTER APPLY (
+    SELECT [c0].[CustomerID], [c0].[City]
+    FROM [Customers] AS [c0]
+    WHERE CAST(LEN([c0].[CustomerID]) AS int) < (
+        SELECT MIN([o1].[OrderID] / 100)
+        FROM [Order Details] AS [o1]
+        INNER JOIN [Orders] AS [o2] ON [o1].[OrderID] = [o2].[OrderID]
+        LEFT JOIN [Customers] AS [c1] ON [o2].[CustomerID] = [c1].[CustomerID]
+        WHERE ([c1].[CustomerID] = N'ALFKI') AND ([t].[ProductID] = [o1].[ProductID]))
+) AS [t0]
+ORDER BY [t].[ProductID], [t0].[CustomerID]");
         }
 
         private void AssertSql(params string[] expected)

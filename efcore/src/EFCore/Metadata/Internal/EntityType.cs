@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -55,6 +55,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private List<object>? _data;
         private Key? _primaryKey;
         private bool? _isKeyless;
+        private bool _isOwned;
         private EntityType? _baseType;
         private ChangeTrackingStrategy? _changeTrackingStrategy;
         private InternalEntityTypeBuilder? _builder;
@@ -76,7 +77,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private Func<InternalEntityEntry, ISnapshot>? _relationshipSnapshotFactory;
         private Func<InternalEntityEntry, ISnapshot>? _originalValuesFactory;
         private Func<InternalEntityEntry, ISnapshot>? _temporaryValuesFactory;
-        private Func<InternalEntityEntry, ISnapshot>? _storeGeneratedValuesFactory;
+        private Func<ISnapshot>? _storeGeneratedValuesFactory;
         private Func<ValueBuffer, ISnapshot>? _shadowValuesFactory;
         private Func<ISnapshot>? _emptyShadowValuesFactory;
         private Func<MaterializationContext, object>? _instanceFactory;
@@ -89,11 +90,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public EntityType(string name, Model model, ConfigurationSource configurationSource)
+        public EntityType(string name, Model model, bool owned, ConfigurationSource configurationSource)
             : base(name, Model.DefaultPropertyBagType, model, configurationSource)
         {
             _properties = new SortedDictionary<string, Property>(new PropertyNameComparer(this));
             _builder = new InternalEntityTypeBuilder(this, model.Builder);
+            _isOwned = owned;
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public EntityType(Type type, Model model, ConfigurationSource configurationSource)
+        public EntityType(Type type, Model model, bool owned, ConfigurationSource configurationSource)
             : base(type, model, configurationSource)
         {
             if (!type.IsValidEntityType())
@@ -119,6 +121,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _properties = new SortedDictionary<string, Property>(new PropertyNameComparer(this));
             _builder = new InternalEntityTypeBuilder(this, model.Builder);
+            _isOwned = owned;
         }
 
         /// <summary>
@@ -127,7 +130,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public EntityType(string name, Type type, Model model, ConfigurationSource configurationSource)
+        public EntityType(string name, Type type, Model model, bool owned, ConfigurationSource configurationSource)
             : base(name, type, model, configurationSource)
         {
             if (!type.IsValidEntityType())
@@ -144,6 +147,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _properties = new SortedDictionary<string, Property>(new PropertyNameComparer(this));
             _builder = new InternalEntityTypeBuilder(this, model.Builder);
+            _isOwned = owned;
         }
 
         /// <summary>
@@ -154,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalEntityTypeBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -195,6 +200,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             get => RootType()._isKeyless ?? false;
             set => SetIsKeyless(value, ConfigurationSource.Explicit);
         }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual bool IsOwned()
+            => _isOwned;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual void SetIsOwned(bool value)
+            => _isOwned = value;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual EntityType? Owner
+            => FindOwnership()?.PrincipalEntityType;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -309,6 +341,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (IsKeyless)
                 {
                     throw new InvalidOperationException(CoreStrings.DerivedEntityCannotBeKeyless(DisplayName()));
+                }
+
+                if (IsOwned() != newBaseType.IsOwned())
+                {
+                    throw new InvalidOperationException(
+                        CoreStrings.DerivedEntityOwnershipMismatch(
+                            newBaseType.DisplayName(),
+                            DisplayName(),
+                            IsOwned() ? DisplayName() : newBaseType.DisplayName(),
+                            !IsOwned() ? DisplayName() : newBaseType.DisplayName()));
                 }
 
                 var conflictingMember = newBaseType.GetMembers()
@@ -492,10 +534,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
         /// </summary>
-        /// <param name="name"> The key of the set annotation. </param>
-        /// <param name="annotation"> The annotation set. </param>
-        /// <param name="oldAnnotation"> The old annotation. </param>
-        /// <returns> The annotation that was set. </returns>
+        /// <param name="name">The key of the set annotation.</param>
+        /// <param name="annotation">The annotation set.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <returns>The annotation that was set.</returns>
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
@@ -539,6 +581,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 .Concat(FindSkipNavigationsInHierarchy(name));
 
         #region Primary and Candidate Keys
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -909,9 +952,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IEnumerable<Key> GetKeys()
             => _baseType?.GetKeys().Concat(_keys.Values) ?? _keys.Values;
+
         #endregion
 
         #region Foreign Keys
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -1383,9 +1428,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => DeclaredReferencingForeignKeys ?? Enumerable.Empty<ForeignKey>();
 
         private SortedSet<ForeignKey>? DeclaredReferencingForeignKeys { get; set; }
+
         #endregion
 
         #region Navigations
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -1420,7 +1467,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return AddNavigation(new MemberIdentity(navigationMember), foreignKey, pointsToPrincipal);
         }
 
-        private Navigation AddNavigation(MemberIdentity navigationMember, ForeignKey foreignKey, bool pointsToPrincipal)
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual Navigation AddNavigation(MemberIdentity navigationMember, ForeignKey foreignKey, bool pointsToPrincipal)
         {
             EnsureMutable();
 
@@ -1464,7 +1517,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 ValidateClrMember(name, memberInfo);
             }
-            else
+            else if (!IsPropertyBag)
             {
                 memberInfo = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
             }
@@ -1478,6 +1531,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     pointsToPrincipal ? foreignKey.PrincipalEntityType : foreignKey.DeclaringEntityType,
                     !pointsToPrincipal && !foreignKey.IsUnique,
                     shouldThrow: true);
+            }
+            else if (IsPropertyBag)
+            {
+                memberInfo = FindIndexerPropertyInfo()!;
             }
 
             var navigation = new Navigation(name, memberInfo as PropertyInfo, memberInfo as FieldInfo, foreignKey);
@@ -1625,7 +1682,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 ValidateClrMember(name, memberInfo);
             }
-            else
+            else if (!IsPropertyBag)
             {
                 memberInfo = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
             }
@@ -1639,6 +1696,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     targetEntityType,
                     collection,
                     shouldThrow: true);
+            }
+            else if (IsPropertyBag)
+            {
+                memberInfo = FindIndexerPropertyInfo()!;
             }
 
             var skipNavigation = new SkipNavigation(
@@ -1685,7 +1746,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     return memberInfo.GetMemberType();
                 }
 
-                var clashingMemberInfo = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
+                var clashingMemberInfo = IsPropertyBag
+                    ? null
+                    : ClrType.GetMembersInHierarchy(name).FirstOrDefault();
                 if (clashingMemberInfo != null)
                 {
                     throw new InvalidOperationException(
@@ -1894,9 +1957,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredReferencingSkipNavigations());
 
         private SortedSet<SkipNavigation>? DeclaredReferencingSkipNavigations { get; set; }
+
         #endregion
 
         #region Indexes
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -2240,9 +2305,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? _baseType.GetIndexes()
                     : _baseType.GetIndexes().Concat(GetDeclaredIndexes())
                 : GetDeclaredIndexes();
+
         #endregion
 
         #region Properties
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -2261,7 +2328,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return AddProperty(
                 name,
                 propertyType,
-                ClrType.GetMembersInHierarchy(name).FirstOrDefault(),
+                null,
                 typeConfigurationSource,
                 configurationSource);
         }
@@ -2292,10 +2359,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             ConfigurationSource configurationSource)
         {
-            var clrMember = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
-            if (clrMember == null)
+            MemberInfo? clrMember;
+            if (IsPropertyBag)
             {
-                throw new InvalidOperationException(CoreStrings.NoPropertyType(name, DisplayName()));
+                clrMember = FindIndexerPropertyInfo()!;
+            }
+            else
+            {
+                clrMember = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
+                if (clrMember == null)
+                {
+                    throw new InvalidOperationException(CoreStrings.NoPropertyType(name, DisplayName()));
+                }
             }
 
             return AddProperty(clrMember, configurationSource);
@@ -2346,9 +2421,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
             else
             {
-                Check.DebugAssert(
-                    ClrType.GetMembersInHierarchy(name).FirstOrDefault() == null,
-                    "MemberInfo not supplied for non-shadow property");
+                memberInfo = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
             }
 
             if (memberInfo != null
@@ -2373,6 +2446,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 configurationSource, typeConfigurationSource);
 
             _properties.Add(property.Name, property);
+
+            if (Model.Configuration != null)
+            {
+                using (Model.ConventionDispatcher.DelayConventions())
+                {
+                    Model.ConventionDispatcher.OnPropertyAdded(property.Builder);
+                    Model.Configuration.ConfigureProperty(property);
+                    return property;
+                }
+            }
 
             return (Property?)Model.ConventionDispatcher.OnPropertyAdded(property.Builder)?.Metadata;
         }
@@ -2574,10 +2657,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual PropertyCounts Counts
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _counts, this, static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return entityType.CalculateCounts();
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return entityType.CalculateCounts();
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2589,10 +2672,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _relationshipSnapshotFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return new RelationshipSnapshotFactoryFactory().Create(entityType);
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return new RelationshipSnapshotFactoryFactory().Create(entityType);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2604,10 +2687,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _originalValuesFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return new OriginalValuesFactoryFactory().Create(entityType);
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return new OriginalValuesFactoryFactory().Create(entityType);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2615,14 +2698,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Func<InternalEntityEntry, ISnapshot> StoreGeneratedValuesFactory
+        public virtual Func<ISnapshot> StoreGeneratedValuesFactory
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _storeGeneratedValuesFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return new SidecarValuesFactoryFactory().Create(entityType);
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return new StoreGeneratedValuesFactoryFactory().CreateEmpty(entityType);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2634,10 +2717,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _temporaryValuesFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return new TemporaryValuesFactoryFactory().Create(entityType);
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return new TemporaryValuesFactoryFactory().Create(entityType);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2649,10 +2732,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _shadowValuesFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return new ShadowValuesFactoryFactory().Create(entityType);
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return new ShadowValuesFactoryFactory().Create(entityType);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2664,10 +2747,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _emptyShadowValuesFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-                    return new EmptyShadowValuesFactoryFactory().CreateEmpty(entityType);
-                });
+                    {
+                        entityType.EnsureReadOnly();
+                        return new EmptyShadowValuesFactoryFactory().CreateEmpty(entityType);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2679,28 +2762,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _instanceFactory, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
-
-                    var binding = entityType.ServiceOnlyConstructorBinding;
-                    if (binding == null)
                     {
-                        var _ = entityType.ConstructorBinding;
-                        binding = entityType.ServiceOnlyConstructorBinding;
+                        entityType.EnsureReadOnly();
+
+                        var binding = entityType.ServiceOnlyConstructorBinding;
                         if (binding == null)
                         {
-                            throw new InvalidOperationException(CoreStrings.NoParameterlessConstructor(entityType.DisplayName()));
+                            var _ = entityType.ConstructorBinding;
+                            binding = entityType.ServiceOnlyConstructorBinding;
+                            if (binding == null)
+                            {
+                                throw new InvalidOperationException(CoreStrings.NoParameterlessConstructor(entityType.DisplayName()));
+                            }
                         }
-                    }
 
-                    var contextParam = Expression.Parameter(typeof(MaterializationContext), "mc");
+                        var contextParam = Expression.Parameter(typeof(MaterializationContext), "mc");
 
-                    return Expression.Lambda<Func<MaterializationContext, object>>(
-                            binding.CreateConstructorExpression(
-                                new ParameterBindingInfo(entityType, contextParam)),
-                            contextParam)
-                        .Compile();
-                });
+                        return Expression.Lambda<Func<MaterializationContext, object>>(
+                                binding.CreateConstructorExpression(
+                                    new ParameterBindingInfo(entityType, contextParam)),
+                                contextParam)
+                            .Compile();
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2712,11 +2795,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _foreignKeyProperties, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
+                    {
+                        entityType.EnsureReadOnly();
 
-                    return entityType.GetProperties().Where(p => p.IsForeignKey()).ToArray();
-                });
+                        return entityType.GetProperties().Where(p => p.IsForeignKey()).ToArray();
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2728,14 +2811,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _valueGeneratingProperties, this,
                 static entityType =>
-                {
-                    entityType.EnsureReadOnly();
+                    {
+                        entityType.EnsureReadOnly();
 
-                    return entityType.GetProperties().Where(p => p.RequiresValueGenerator()).ToArray();
-                });
+                        return entityType.GetProperties().Where(p => p.RequiresValueGenerator()).ToArray();
+                    });
+
         #endregion
 
         #region Service properties
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -2919,9 +3004,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<ServiceProperty>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredServiceProperties());
+
         #endregion
 
         #region Ignore
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -2943,9 +3030,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public override string? OnTypeMemberIgnored(string name)
             => Model.ConventionDispatcher.OnEntityTypeMemberIgnored(Builder, name);
+
         #endregion
 
         #region Data
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -2963,7 +3052,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var data = new List<Dictionary<string, object?>>();
             var valueConverters = new Dictionary<string, ValueConverter?>(StringComparer.Ordinal);
             var properties = GetProperties()
-                .Concat<IReadOnlyPropertyBase>(GetNavigations())
+                .Concat<IPropertyBase>(GetNavigations())
                 .Concat(GetSkipNavigations())
                 .ToDictionary(p => p.Name);
             foreach (var rawSeed in _data)
@@ -2979,15 +3068,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     {
                         ValueConverter? valueConverter = null;
                         if (providerValues
-                            && propertyBase is IReadOnlyProperty property
+                            && propertyBase is IProperty property
                             && !valueConverters.TryGetValue(propertyBase.Name, out valueConverter))
                         {
                             valueConverter = property.GetTypeMapping().Converter;
                             valueConverters[propertyBase.Name] = valueConverter;
                         }
 
+                        propertyBase.TryGetMemberInfo(forConstruction: false, forSet: false, out var memberInfo, out _);
+
                         object? value = null;
-                        switch (propertyBase.GetIdentifyingMemberInfo())
+                        switch (memberInfo)
                         {
                             case PropertyInfo propertyInfo:
                                 if (propertyBase.IsIndexerProperty())
@@ -3079,9 +3170,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _data.Add(entity);
             }
         }
+
         #endregion
 
         #region Other
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -3107,7 +3200,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (changeTrackingStrategy != null)
             {
                 var requireFullNotifications =
-                    (string?)Model[CoreAnnotationNames.FullChangeTrackingNotificationsRequiredAnnotation] == "true";
+                    (bool?)Model[CoreAnnotationNames.FullChangeTrackingNotificationsRequired] == true;
                 var errorMessage = CheckChangeTrackingStrategy(this, changeTrackingStrategy.Value, requireFullNotifications);
                 if (errorMessage != null)
                 {
@@ -3118,7 +3211,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _changeTrackingStrategy = changeTrackingStrategy;
 
             _changeTrackingStrategyConfigurationSource = _changeTrackingStrategy == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_changeTrackingStrategyConfigurationSource);
 
             return changeTrackingStrategy;
@@ -3287,7 +3380,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Returns the name of the property that will be used for storing a discriminator value.
         /// </summary>
-        /// <returns> The name of the property that will be used for storing a discriminator value. </returns>
+        /// <returns>The name of the property that will be used for storing a discriminator value.</returns>
         public virtual string? GetDiscriminatorPropertyName()
         {
             if (BaseType != null)
@@ -3355,17 +3448,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InstantiationBinding? ConstructorBinding
         {
-            get
-                => IsReadOnly && !ClrType.IsAbstract
-                    ? NonCapturingLazyInitializer.EnsureInitialized(
-                        ref _constructorBinding, this, static entityType =>
+            get => IsReadOnly && !ClrType.IsAbstract
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _constructorBinding, this, static entityType =>
                         {
                             ((IModel)entityType.Model).GetModelDependencies().ConstructorBindingFactory.GetBindings(
                                 (IReadOnlyEntityType)entityType,
                                 out entityType._constructorBinding,
                                 out entityType._serviceOnlyConstructorBinding);
                         })
-                    : _constructorBinding;
+                : _constructorBinding;
 
             set => SetConstructorBinding(value, ConfigurationSource.Explicit);
         }
@@ -3458,9 +3550,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private void UpdateServiceOnlyConstructorBindingConfigurationSource(ConfigurationSource configurationSource)
             => _serviceOnlyConstructorBindingConfigurationSource =
                 configurationSource.Max(_serviceOnlyConstructorBindingConfigurationSource);
+
         #endregion
 
         #region Explicit interface implementations
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -3971,7 +4065,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (EntityType)principalEntityType,
                 setComponentConfigurationSource
                     ? fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
-                    : (ConfigurationSource?)null,
+                    : null,
                 fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
@@ -4778,7 +4872,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 propertyType,
                 setTypeConfigurationSource
                     ? fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
-                    : (ConfigurationSource?)null,
+                    : null,
                 fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
@@ -4790,7 +4884,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [DebuggerStepThrough]
         IMutableProperty IMutableEntityType.AddProperty(string name, Type propertyType, MemberInfo? memberInfo)
             => AddProperty(
-                name, propertyType, memberInfo ?? ClrType.GetMembersInHierarchy(name).FirstOrDefault(),
+                name, propertyType, memberInfo,
                 ConfigurationSource.Explicit, ConfigurationSource.Explicit)!;
 
         /// <summary>
@@ -4809,10 +4903,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             => AddProperty(
                 name,
                 propertyType,
-                memberInfo ?? ClrType.GetMembersInHierarchy(name).FirstOrDefault(),
+                memberInfo,
                 setTypeConfigurationSource
                     ? fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
-                    : (ConfigurationSource?)null,
+                    : null,
                 fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
@@ -5184,6 +5278,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [DebuggerStepThrough]
         IConventionServiceProperty? IConventionEntityType.RemoveServiceProperty(string name)
             => RemoveServiceProperty(name);
+
         #endregion
 
         private static IEnumerable<T> ToEnumerable<T>(T? element)
@@ -5256,11 +5351,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityTypeBuilder.Ignore(ignoredMember, EntityType.FindDeclaredIgnoredConfigurationSource(ignoredMember)!.Value);
                 }
 
+                if (EntityType._baseTypeConfigurationSource != null)
+                {
+                    var baseType = EntityType._baseType;
+                    if (baseType?.IsInModel == false)
+                    {
+                        baseType = EntityType.Model.FindActualEntityType(baseType);
+                    }
+
+                    entityTypeBuilder.Metadata.SetBaseType(baseType, EntityType._baseTypeConfigurationSource.Value);
+                }
+
+                if (EntityType._isKeylessConfigurationSource != null)
+                {
+                    entityTypeBuilder.Metadata.SetIsKeyless(EntityType.IsKeyless, EntityType._isKeylessConfigurationSource.Value);
+                }
+
+                if (EntityType._changeTrackingStrategyConfigurationSource != null)
+                {
+                    entityTypeBuilder.Metadata.SetChangeTrackingStrategy(
+                        EntityType.GetChangeTrackingStrategy(), EntityType._changeTrackingStrategyConfigurationSource.Value);
+                }
+
                 if (ServiceProperties != null)
                 {
                     foreach (var detachedServiceProperty in ServiceProperties)
                     {
-                        detachedServiceProperty.Attach(detachedServiceProperty.Metadata.DeclaringEntityType.Builder);
+                        detachedServiceProperty.Attach(entityTypeBuilder);
                     }
                 }
 
@@ -5274,12 +5391,39 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
                 }
 
+                if (EntityType._constructorBindingConfigurationSource != null)
+                {
+                    entityTypeBuilder.Metadata.SetConstructorBinding(
+                        Create(EntityType.ConstructorBinding, entityTypeBuilder.Metadata),
+                        EntityType._constructorBindingConfigurationSource.Value);
+                }
+
+                if (EntityType._serviceOnlyConstructorBindingConfigurationSource != null)
+                {
+                    entityTypeBuilder.Metadata.SetServiceOnlyConstructorBinding(
+                        Create(EntityType.ServiceOnlyConstructorBinding, entityTypeBuilder.Metadata),
+                        EntityType._serviceOnlyConstructorBindingConfigurationSource.Value);
+                }
+
                 var rawData = EntityType._data;
                 if (rawData != null)
                 {
                     entityTypeBuilder.Metadata.AddData(rawData);
                 }
             }
+
+            private InstantiationBinding? Create(InstantiationBinding? instantiationBinding, EntityType entityType)
+                => instantiationBinding?.With(
+                    instantiationBinding.ParameterBindings.Select(binding => Create(binding, entityType)).ToList());
+
+            private ParameterBinding Create(ParameterBinding parameterBinding, EntityType entityType)
+                => parameterBinding.With(
+                    parameterBinding.ConsumedProperties.Select(
+                        property =>
+                            (entityType.FindProperty(property.Name)
+                                ?? entityType.FindServiceProperty(property.Name)
+                                ?? entityType.FindNavigation(property.Name)
+                                ?? (IPropertyBase?)entityType.FindSkipNavigation(property.Name))!).ToArray());
         }
 
         /// <summary>
@@ -5290,7 +5434,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IReadOnlyEntityType)this).ToDebugString(),
                 () => ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
     }
 }

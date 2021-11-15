@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -25,7 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         private DateTimeOffset _suppressOpenExpiration;
         private DateTimeOffset _suppressCloseExpiration;
 
-        private readonly TimeSpan _loggingConfigCacheTime;
+        private readonly TimeSpan _loggingCacheTime;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,8 +43,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             IInterceptors? interceptors = null)
             : base(loggerFactory, loggingOptions, diagnosticSource, loggingDefinitions, contextLogger, interceptors)
         {
-            _loggingConfigCacheTime = contextOptions.FindExtension<CoreOptionsExtension>()?.LoggingConfigCacheTime ??
-                                      CoreOptionsExtension.DefaultLoggingConfigCacheTime;
+            var coreOptionsExtension =
+                contextOptions.FindExtension<CoreOptionsExtension>()
+                ?? new CoreOptionsExtension();
+
+            _loggingCacheTime = coreOptionsExtension.LoggingCacheTime;
         }
 
         #region ConnectionOpening
@@ -59,7 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             IRelationalConnection connection,
             DateTimeOffset startTime)
         {
-            _suppressOpenExpiration = startTime + _loggingConfigCacheTime;
+            _suppressOpenExpiration = startTime + _loggingCacheTime;
 
             var definition = RelationalResources.LogOpeningConnection(this);
 
@@ -71,7 +74,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressOpenExpiration = default;
 
@@ -103,7 +106,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DateTimeOffset startTime,
             CancellationToken cancellationToken)
         {
-            _suppressOpenExpiration = startTime + _loggingConfigCacheTime;
+            _suppressOpenExpiration = startTime + _loggingCacheTime;
 
             var definition = RelationalResources.LogOpeningConnection(this);
 
@@ -115,7 +118,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressOpenExpiration = default;
 
@@ -192,7 +195,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressOpenExpiration = default;
 
@@ -231,7 +234,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressOpenExpiration = default;
 
@@ -300,7 +303,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             IRelationalConnection connection,
             DateTimeOffset startTime)
         {
-            _suppressCloseExpiration = startTime + _loggingConfigCacheTime;
+            _suppressCloseExpiration = startTime + _loggingCacheTime;
 
             var definition = RelationalResources.LogClosingConnection(this);
 
@@ -312,7 +315,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressCloseExpiration = default;
 
@@ -343,7 +346,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             IRelationalConnection connection,
             DateTimeOffset startTime)
         {
-            _suppressCloseExpiration = startTime + _loggingConfigCacheTime;
+            _suppressCloseExpiration = startTime + _loggingCacheTime;
 
             var definition = RelationalResources.LogClosingConnection(this);
 
@@ -355,7 +358,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressCloseExpiration = default;
 
@@ -432,7 +435,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressCloseExpiration = default;
 
@@ -470,7 +473,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             }
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 _suppressCloseExpiration = default;
 
@@ -549,7 +552,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             LogConnectionError(connection, definition);
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 var eventData = BroadcastConnectionError(
                     connection,
@@ -586,7 +589,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             LogConnectionError(connection, definition);
 
             if (NeedsEventData<IDbConnectionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                    definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
             {
                 var eventData = BroadcastConnectionError(
                     connection,

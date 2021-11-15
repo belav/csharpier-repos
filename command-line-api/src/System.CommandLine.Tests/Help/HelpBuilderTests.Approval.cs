@@ -4,6 +4,7 @@
 using Xunit;
 using System.IO;
 using ApprovalTests;
+using System.CommandLine.Help;
 
 namespace System.CommandLine.Tests.Help
 {
@@ -28,8 +29,7 @@ namespace System.CommandLine.Tests.Help
                 },
                 new Argument<FileAccess>("the-root-arg-enum-default", () => FileAccess.Read)
                 {
-                    Description = "the-root-arg-enum-default-description",
-                    ArgumentType = typeof(FileAccess)
+                    Description = "the-root-arg-enum-default-description"
                 },
                 new Option(aliases: new string[] {"--the-root-option-no-arg", "-trna"}) {
                     Description = "the-root-option-no-arg-description",
@@ -53,12 +53,10 @@ namespace System.CommandLine.Tests.Help
                 new Option<FileAccess>(aliases: new string[] {"--the-root-option-enum-arg", "-troea"}, () => FileAccess.Read) 
                 {
                     Description = "the-root-option-description",
-                    ArgumentHelpName = "the-root-option-arg",
                 },
                 new Option<FileAccess>(aliases: new string[] {"--the-root-option-required-enum-arg", "-trorea"}, () => FileAccess.Read) 
                 {
                     Description = "the-root-option-description",
-                    ArgumentHelpName = "the-root-option-arg",
                     IsRequired = true
                 },
                 new Option(aliases: new string[] {"--the-root-option-multi-line-description", "-tromld"}) {
@@ -67,8 +65,9 @@ namespace System.CommandLine.Tests.Help
             };
             command.Name = "the-root-command";
 
-            GetHelpBuilder(LargeMaxWidth).Write(command);
-            Approvals.Verify(_console.Out.ToString());
+            StringWriter writer = new();
+            GetHelpBuilder(LargeMaxWidth).Write(command, writer);
+            Approvals.Verify(writer.ToString());
         }
     }
 }

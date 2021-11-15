@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.EntityFrameworkCore.TestModels.Northwind;
@@ -39,7 +39,6 @@ ORDER BY [c].[CustomerID]");
 
             AssertSql(
                 @"-- Yanni
-
 -- Enya
 
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -53,7 +52,6 @@ ORDER BY [c].[CustomerID]");
 
             AssertSql(
                 @"-- Yanni
-
 -- Laurel
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -92,7 +90,7 @@ FROM (
     ORDER BY [c].[CustomerID]
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID], [o].[OrderID]");
+ORDER BY [t].[CustomerID]");
         }
 
         [ConditionalFact]
@@ -112,13 +110,9 @@ ORDER BY [t].[CustomerID], [o].[OrderID]");
             AssertSql(
                 @"-- Yanni
 
-SELECT [t].[CustomerID], [t].[Address], [t].[City], [t].[CompanyName], [t].[ContactName], [t].[ContactTitle], [t].[Country], [t].[Fax], [t].[Phone], [t].[PostalCode], [t].[Region]
-FROM (
-    SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-    FROM [Customers] AS [c]
-    ORDER BY [c].[CustomerID]
-) AS [t]
-ORDER BY [t].[CustomerID]",
+SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+ORDER BY [c].[CustomerID]",
                 //
                 @"-- Yanni
 
@@ -166,7 +160,6 @@ ORDER BY [c].[CustomerID]");
                 @"-- Yanni
 -- AND
 -- Laurel
-
 -- Yet
 -- Another
 -- Multiline
@@ -183,9 +176,9 @@ ORDER BY [c].[CustomerID]");
 
             AssertSql(
                 @"-- Yanni
--- 
+-- " + @"
 -- AND
--- 
+-- " + @"
 -- Laurel
 
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]

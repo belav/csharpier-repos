@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -23,8 +23,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var converter = _ipAddressToString.ConvertToProviderExpression.Compile();
 
             Assert.Equal(ipv4, converter(IPAddress.Parse(ipv4)));
-
-            Assert.Null(converter(null));
         }
 
         [ConditionalTheory]
@@ -38,8 +36,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var converter = _ipAddressToString.ConvertToProviderExpression.Compile();
 
             Assert.Equal(ipv6, converter(IPAddress.Parse(ipv6)));
-
-            Assert.Null(converter(null));
         }
 
         [ConditionalTheory]
@@ -55,8 +51,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(
                 IPAddress.Parse(ipv4),
                 converter(ipv4));
-
-            Assert.Null(converter(null));
         }
 
         [ConditionalTheory]
@@ -72,8 +66,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(
                 IPAddress.Parse(ipv6),
                 converter(ipv6));
-
-            Assert.Null(converter(null));
         }
     }
 }

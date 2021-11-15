@@ -11,13 +11,13 @@ namespace System.Runtime.Serialization.Json
 {
     internal sealed class JsonXmlDataContract : JsonDataContract
     {
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+        [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonXmlDataContract(XmlDataContract traditionalXmlDataContract)
             : base(traditionalXmlDataContract)
         {
         }
 
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+        [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
         {
             string xmlContent = jsonReader.ReadElementContentAsString();
@@ -43,10 +43,10 @@ namespace System.Runtime.Serialization.Json
             return xmlValue;
         }
 
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+        [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
         {
-            DataContractSerializer dataContractSerializer = new DataContractSerializer(Type.GetTypeFromHandle(declaredTypeHandle),
+            DataContractSerializer dataContractSerializer = new DataContractSerializer(Type.GetTypeFromHandle(declaredTypeHandle)!,
                 GetKnownTypesFromContext(context, (context == null) ? null : context.SerializerKnownTypeList), 1, false, false); //  maxItemsInObjectGraph //  ignoreExtensionDataObject //  preserveObjectReferences
 
             MemoryStream memoryStream = new MemoryStream();

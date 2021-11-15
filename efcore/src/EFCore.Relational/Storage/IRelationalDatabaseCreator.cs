@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading;
@@ -16,13 +16,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         This type is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
     ///         <see cref="DbContext" /> instance will use its own instance of this service.
     ///         The implementation may depend on other services registered with any lifetime.
     ///         The implementation does not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public interface IRelationalDatabaseCreator : IDatabaseCreator
     {
         /// <summary>
@@ -38,31 +44,31 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Asynchronously determines whether the physical database exists. No attempt is made to determine if
         ///     the database contains the schema for the current model.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation. The task result contains
         ///     <see langword="true" /> if the database exists; otherwise <see langword="false" />.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task<bool> ExistsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Determines whether the database contains any tables. No attempt is made to determine if
         ///     tables belong to the current model or not.
         /// </summary>
-        /// <returns> A value indicating whether any tables are present in the database. </returns>
+        /// <returns>A value indicating whether any tables are present in the database.</returns>
         bool HasTables();
 
         /// <summary>
         ///     Asynchronously determines whether the database contains any tables. No attempt is made to determine if
         ///     tables belong to the current model or not.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation. The task result contains
         ///     a value indicating whether any tables are present in the database.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task<bool> HasTablesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -73,11 +79,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Asynchronously creates the physical database. Does not attempt to populate it with any schema.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task CreateAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -88,11 +94,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Asynchronously deletes the physical database.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task DeleteAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -105,11 +111,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Asynchronously creates all tables for the current model in the database. No attempt is made
         ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task CreateTablesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>

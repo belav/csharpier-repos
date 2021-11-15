@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -160,7 +160,7 @@ namespace Microsoft.Data.Sqlite
             var keys = (ICollection<string>)new SqliteConnectionStringBuilder().Keys;
 
             Assert.True(keys.IsReadOnly);
-            Assert.Equal(7, keys.Count);
+            Assert.Equal(8, keys.Count);
             Assert.Contains("Data Source", keys);
             Assert.Contains("Mode", keys);
             Assert.Contains("Cache", keys);
@@ -168,6 +168,7 @@ namespace Microsoft.Data.Sqlite
             Assert.Contains("Foreign Keys", keys);
             Assert.Contains("Recursive Triggers", keys);
             Assert.Contains("Default Timeout", keys);
+            Assert.Contains("Pooling", keys);
         }
 
         [Fact]
@@ -176,7 +177,7 @@ namespace Microsoft.Data.Sqlite
             var values = (ICollection<object>)new SqliteConnectionStringBuilder().Values;
 
             Assert.True(values.IsReadOnly);
-            Assert.Equal(7, values.Count);
+            Assert.Equal(8, values.Count);
         }
 
         [Fact]

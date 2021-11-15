@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -17,15 +17,18 @@ namespace Microsoft.EntityFrameworkCore
     public static class ProxiesExtensions
     {
         /// <summary>
-        ///     <para>
-        ///         Turns on the creation of change tracking proxies.
-        ///     </para>
+        ///     Turns on the creation of change tracking proxies.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note that this requires appropriate services to be available in the EF internal service provider. Normally this
         ///         will happen automatically, but if the application is controlling the service provider, then a call to
         ///         <see cref="ProxiesServiceCollectionExtensions.AddEntityFrameworkProxies" /> may be needed.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-notification-entities">Notification entities</see> for more information.
+        ///     </para>
+        /// </remarks>
         /// <param name="optionsBuilder">
         ///     The options builder, as passed to <see cref="DbContext.OnConfiguring" />
         ///     or exposed AddDbContext.
@@ -38,14 +41,12 @@ namespace Microsoft.EntityFrameworkCore
         ///     <see langword="true" /> if proxy change detection should check if the incoming value is equal to the current
         ///     value before notifying. Defaults to <see langword="true" />.
         /// </param>
-        /// <returns> The same builder to allow method calls to be chained. </returns>
+        /// <returns>The same builder to allow method calls to be chained.</returns>
         public static DbContextOptionsBuilder UseChangeTrackingProxies(
             this DbContextOptionsBuilder optionsBuilder,
             bool useChangeTrackingProxies = true,
             bool checkEquality = true)
         {
-            Check.NotNull(optionsBuilder, nameof(optionsBuilder));
-
             var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
                 ?? new ProxiesOptionsExtension();
 
@@ -57,16 +58,19 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Turns on the creation of change tracking proxies.
-        ///     </para>
+        ///     Turns on the creation of change tracking proxies.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note that this requires appropriate services to be available in the EF internal service provider. Normally this
         ///         will happen automatically, but if the application is controlling the service provider, then a call to
         ///         <see cref="ProxiesServiceCollectionExtensions.AddEntityFrameworkProxies" /> may be needed.
         ///     </para>
-        /// </summary>
-        /// <typeparam name="TContext"> The <see cref="DbContext" /> type. </typeparam>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-notification-entities">Notification entities</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <typeparam name="TContext">The <see cref="DbContext" /> type.</typeparam>
         /// <param name="optionsBuilder">
         ///     The options builder, as passed to <see cref="DbContext.OnConfiguring" />
         ///     or exposed AddDbContext.
@@ -79,7 +83,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     <see langword="true" /> if proxy change detection should check if the incoming value is equal to the current
         ///     value before notifying. Defaults to <see langword="true" />.
         /// </param>
-        /// <returns> The same builder to allow method calls to be chained. </returns>
+        /// <returns>The same builder to allow method calls to be chained.</returns>
         public static DbContextOptionsBuilder<TContext> UseChangeTrackingProxies<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             bool useChangeTrackingProxies = true,
@@ -89,27 +93,28 @@ namespace Microsoft.EntityFrameworkCore
                 (DbContextOptionsBuilder)optionsBuilder, useChangeTrackingProxies, checkEquality);
 
         /// <summary>
-        ///     <para>
-        ///         Turns on the creation of lazy-loading proxies.
-        ///     </para>
+        ///     Turns on the creation of lazy loading proxies.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note that this requires appropriate services to be available in the EF internal service provider. Normally this
         ///         will happen automatically, but if the application is controlling the service provider, then a call to
         ///         <see cref="ProxiesServiceCollectionExtensions.AddEntityFrameworkProxies" /> may be needed.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-lazy-loading">Lazy loading</see> for more information.
+        ///     </para>
+        /// </remarks>
         /// <param name="optionsBuilder">
         ///     The options builder, as passed to <see cref="DbContext.OnConfiguring" />
         ///     or exposed AddDbContext.
         /// </param>
-        /// <param name="useLazyLoadingProxies"> <see langword="true" /> to use lazy-loading proxies; <see langword="false" /> to prevent their use. </param>
-        /// <returns> The same builder to allow method calls to be chained. </returns>
+        /// <param name="useLazyLoadingProxies"><see langword="true" /> to use lazy loading proxies; <see langword="false" /> to prevent their use.</param>
+        /// <returns>The same builder to allow method calls to be chained.</returns>
         public static DbContextOptionsBuilder UseLazyLoadingProxies(
             this DbContextOptionsBuilder optionsBuilder,
             bool useLazyLoadingProxies = true)
         {
-            Check.NotNull(optionsBuilder, nameof(optionsBuilder));
-
             var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
                 ?? new ProxiesOptionsExtension();
 
@@ -121,22 +126,25 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Turns on the creation of lazy-loading proxies.
-        ///     </para>
+        ///     Turns on the creation of lazy loading proxies.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note that this requires appropriate services to be available in the EF internal service provider. Normally this
         ///         will happen automatically, but if the application is controlling the service provider, then a call to
         ///         <see cref="ProxiesServiceCollectionExtensions.AddEntityFrameworkProxies" /> may be needed.
         ///     </para>
-        /// </summary>
-        /// <typeparam name="TContext"> The <see cref="DbContext" /> type. </typeparam>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-lazy-loading">Lazy loading</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <typeparam name="TContext">The <see cref="DbContext" /> type.</typeparam>
         /// <param name="optionsBuilder">
         ///     The options builder, as passed to <see cref="DbContext.OnConfiguring" />
         ///     or exposed AddDbContext.
         /// </param>
-        /// <param name="useLazyLoadingProxies"> <see langword="true" /> to use lazy-loading proxies; <see langword="false" /> to prevent their use. </param>
-        /// <returns> The same builder to allow method calls to be chained. </returns>
+        /// <param name="useLazyLoadingProxies"><see langword="true" /> to use lazy loading proxies; <see langword="false" /> to prevent their use.</param>
+        /// <returns>The same builder to allow method calls to be chained.</returns>
         public static DbContextOptionsBuilder<TContext> UseLazyLoadingProxies<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             bool useLazyLoadingProxies = true)
@@ -146,10 +154,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
         /// </summary>
-        /// <param name="context"> The <see cref="DbContext" />. </param>
-        /// <param name="entityType"> The entity type for which a proxy is needed. </param>
-        /// <param name="constructorArguments"> Arguments to pass to the entity type constructor. </param>
-        /// <returns> The proxy instance. </returns>
+        /// <param name="context">The <see cref="DbContext" />.</param>
+        /// <param name="entityType">The entity type for which a proxy is needed.</param>
+        /// <param name="constructorArguments">Arguments to pass to the entity type constructor.</param>
+        /// <returns>The proxy instance.</returns>
         public static object CreateProxy(
             this DbContext context,
             Type entityType,
@@ -165,10 +173,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type for which a proxy is needed. </typeparam>
-        /// <param name="context"> The <see cref="DbContext" />. </param>
-        /// <param name="constructorArguments"> Arguments to pass to the entity type constructor. </param>
-        /// <returns> The proxy instance. </returns>
+        /// <typeparam name="TEntity">The entity type for which a proxy is needed.</typeparam>
+        /// <param name="context">The <see cref="DbContext" />.</param>
+        /// <param name="constructorArguments">Arguments to pass to the entity type constructor.</param>
+        /// <returns>The proxy instance.</returns>
         public static TEntity CreateProxy<TEntity>(
             this DbContext context,
             params object[] constructorArguments)
@@ -177,11 +185,11 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type for which a proxy is needed. </typeparam>
-        /// <param name="context"> The <see cref="DbContext" />. </param>
-        /// <param name="configureEntity"> Called after the entity is created to set property values, etc. </param>
-        /// <param name="constructorArguments"> Arguments to pass to the entity type constructor. </param>
-        /// <returns> The proxy instance. </returns>
+        /// <typeparam name="TEntity">The entity type for which a proxy is needed.</typeparam>
+        /// <param name="context">The <see cref="DbContext" />.</param>
+        /// <param name="configureEntity">Called after the entity is created to set property values, etc.</param>
+        /// <param name="constructorArguments">Arguments to pass to the entity type constructor.</param>
+        /// <returns>The proxy instance.</returns>
         public static TEntity CreateProxy<TEntity>(
             this DbContext context,
             Action<TEntity>? configureEntity,
@@ -197,10 +205,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type for which a proxy is needed. </typeparam>
-        /// <param name="set"> The <see cref="DbSet{TEntity}" />. </param>
-        /// <param name="constructorArguments"> Arguments to pass to the entity type constructor. </param>
-        /// <returns> The proxy instance. </returns>
+        /// <typeparam name="TEntity">The entity type for which a proxy is needed.</typeparam>
+        /// <param name="set">The <see cref="DbSet{TEntity}" />.</param>
+        /// <param name="constructorArguments">Arguments to pass to the entity type constructor.</param>
+        /// <returns>The proxy instance.</returns>
         public static TEntity CreateProxy<TEntity>(
             this DbSet<TEntity> set,
             params object[] constructorArguments)
@@ -210,11 +218,11 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type for which a proxy is needed. </typeparam>
-        /// <param name="set"> The <see cref="DbSet{TEntity}" />. </param>
-        /// <param name="configureEntity"> Called after the entity is created to set property values, etc. </param>
-        /// <param name="constructorArguments"> Arguments to pass to the entity type constructor. </param>
-        /// <returns> The proxy instance. </returns>
+        /// <typeparam name="TEntity">The entity type for which a proxy is needed.</typeparam>
+        /// <param name="set">The <see cref="DbSet{TEntity}" />.</param>
+        /// <param name="configureEntity">Called after the entity is created to set property values, etc.</param>
+        /// <param name="constructorArguments">Arguments to pass to the entity type constructor.</param>
+        /// <returns>The proxy instance.</returns>
         public static TEntity CreateProxy<TEntity>(
             this DbSet<TEntity> set,
             Action<TEntity>? configureEntity,

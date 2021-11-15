@@ -1,36 +1,35 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-namespace Microsoft.AspNetCore.Razor.Language.Intermediate
+namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
+
+public sealed class DocumentIntermediateNode : IntermediateNode
 {
-    public sealed class DocumentIntermediateNode : IntermediateNode
+    public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+
+    public string DocumentKind { get; set; }
+
+    public RazorCodeGenerationOptions Options { get; set; }
+
+    public CodeTarget Target { get; set; }
+
+    public override void Accept(IntermediateNodeVisitor visitor)
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
-
-        public string DocumentKind { get; set; }
-
-        public RazorCodeGenerationOptions Options { get; set; }
-
-        public CodeTarget Target { get; set; }
-
-        public override void Accept(IntermediateNodeVisitor visitor)
+        if (visitor == null)
         {
-            if (visitor == null)
-            {
-                throw new ArgumentNullException(nameof(visitor));
-            }
-
-            visitor.VisitDocument(this);
+            throw new ArgumentNullException(nameof(visitor));
         }
 
-        public override void FormatNode(IntermediateNodeFormatter formatter)
-        {
-            formatter.WriteContent(DocumentKind);
+        visitor.VisitDocument(this);
+    }
 
-            formatter.WriteProperty(nameof(DocumentKind), DocumentKind);
-        }
+    public override void FormatNode(IntermediateNodeFormatter formatter)
+    {
+        formatter.WriteContent(DocumentKind);
+
+        formatter.WriteProperty(nameof(DocumentKind), DocumentKind);
     }
 }

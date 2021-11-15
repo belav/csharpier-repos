@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -9,14 +9,17 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Provides a simple API for configuring a <see cref="IMutableKey" />.
-    ///     </para>
+    ///     Provides a simple API for configuring a <see cref="IMutableKey" />.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
     ///         and it is not designed to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class KeyBuilder : IInfrastructure<IConventionKeyBuilder>
     {
         /// <summary>
@@ -52,9 +55,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     <paramref name="annotation" />
         ///     already exists its value will be updated.
         /// </summary>
-        /// <param name="annotation"> The key of the annotation to be added or updated. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="annotation">The key of the annotation to be added or updated.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual KeyBuilder HasAnnotation(string annotation, object? value)
         {
             Check.NotEmpty(annotation, nameof(annotation));
@@ -69,7 +72,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -77,8 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
         public override bool Equals(object? obj)
@@ -87,7 +90,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
         public override int GetHashCode()

@@ -1,28 +1,23 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-    ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-    ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class MigrationCommandExecutor : IMigrationCommandExecutor
     {
@@ -36,8 +31,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             IEnumerable<MigrationCommand> migrationCommands,
             IRelationalConnection connection)
         {
-            Check.NotNull(migrationCommands, nameof(migrationCommands));
-            Check.NotNull(connection, nameof(connection));
+            var userTransaction = connection.CurrentTransaction;
+            if (userTransaction is not null && migrationCommands.Any(x => x.TransactionSuppressed))
+            {
+                throw new NotSupportedException(RelationalStrings.TransactionSuppressedMigrationInUserTransaction);
+            }
 
             using (new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -52,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         foreach (var command in migrationCommands)
                         {
                             if (transaction == null
-                                && !command.TransactionSuppressed)
+                                && !command.TransactionSuppressed
+                                && userTransaction is null)
                             {
                                 transaction = connection.BeginTransaction();
                             }
@@ -93,8 +92,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             IRelationalConnection connection,
             CancellationToken cancellationToken = default)
         {
-            Check.NotNull(migrationCommands, nameof(migrationCommands));
-            Check.NotNull(connection, nameof(connection));
+            var userTransaction = connection.CurrentTransaction;
+            if (userTransaction is not null && migrationCommands.Any(x => x.TransactionSuppressed))
+            {
+                throw new NotSupportedException(RelationalStrings.TransactionSuppressedMigrationInUserTransaction);
+            }
 
             var transactionScope = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
             try
@@ -110,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         foreach (var command in migrationCommands)
                         {
                             if (transaction == null
-                                && !command.TransactionSuppressed)
+                                && !command.TransactionSuppressed
+                                && userTransaction is null)
                             {
                                 transaction = await connection.BeginTransactionAsync(cancellationToken)
                                     .ConfigureAwait(false);

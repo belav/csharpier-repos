@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 
@@ -8,6 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
     /// <summary>
     ///     A <see cref="MigrationOperation" /> for dropping an existing check constraint.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    /// </remarks>
     [DebuggerDisplay("ALTER TABLE {Table} DROP CONSTRAINT {Name}")]
     public class DropCheckConstraintOperation : MigrationOperation, ITableMigrationOperation
     {

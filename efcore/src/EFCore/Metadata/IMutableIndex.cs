@@ -1,19 +1,22 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
-    ///     <para>
-    ///         Represents an index on a set of properties.
-    ///     </para>
+    ///     Represents an index on a set of properties.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This interface is used during model creation and allows the metadata to be modified.
     ///         Once the model is built, <see cref="IIndex" /> represents a read-only view of the same metadata.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IMutableIndex : IReadOnlyIndex, IMutableAnnotatable
     {
         /// <summary>

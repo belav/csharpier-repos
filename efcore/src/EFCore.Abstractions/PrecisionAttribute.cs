@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -11,14 +11,17 @@ namespace Microsoft.EntityFrameworkCore
     ///     For example, if the property is a <see cref="decimal" />
     ///     then this is the maximum number of digits.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class PrecisionAttribute : Attribute
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PrecisionAttribute" /> class.
         /// </summary>
-        /// <param name="precision"> The precision of the property. </param>
-        /// <param name="scale"> The scale of the property. </param>
+        /// <param name="precision">The precision of the property.</param>
+        /// <param name="scale">The scale of the property.</param>
         public PrecisionAttribute(int precision, int scale)
         {
             if (precision < 0)
@@ -38,7 +41,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Initializes a new instance of the <see cref="PrecisionAttribute" /> class.
         /// </summary>
-        /// <param name="precision"> The precision of the property. </param>
+        /// <param name="precision">The precision of the property.</param>
         public PrecisionAttribute(int precision)
         {
             if (precision < 0)

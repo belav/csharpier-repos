@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -13,6 +13,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///     Provides access to change tracking information and operations for a node in a
     ///     graph of entities that is being traversed.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-track-graph">Tracking entities in EF Core</see> for more information.
+    /// </remarks>
     public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
     {
         /// <summary>
@@ -41,12 +44,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Creates a new node for the entity that is being traversed next in the graph.
         /// </summary>
-        /// <param name="currentNode"> The node that the entity is being traversed from. </param>
+        /// <param name="currentNode">The node that the entity is being traversed from.</param>
         /// <param name="internalEntityEntry">
         ///     The internal entry tracking information about the entity being traversed to.
         /// </param>
-        /// <param name="reachedVia"> The navigation property that is being traversed to reach the new node. </param>
-        /// <returns> The newly created node. </returns>
+        /// <param name="reachedVia">The navigation property that is being traversed to reach the new node.</param>
+        /// <returns>The newly created node.</returns>
         public override EntityEntryGraphNode CreateNode(
             EntityEntryGraphNode currentNode,
             InternalEntityEntry internalEntityEntry,

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -11,15 +11,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     The <see cref="DiagnosticSource" /> event payload base class for events that
     ///     references two <see cref="SqlExpression" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    /// </remarks>
     public class TwoSqlExpressionsEventData : EventData
     {
         /// <summary>
         ///     Constructs the event payload.
         /// </summary>
-        /// <param name="eventDefinition"> The event definition. </param>
-        /// <param name="messageGenerator"> A delegate that generates a log message for this event. </param>
-        /// <param name="left"> The left SqlExpression. </param>
-        /// <param name="right"> The right SqlExpression. </param>
+        /// <param name="eventDefinition">The event definition.</param>
+        /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
+        /// <param name="left">The left SqlExpression.</param>
+        /// <param name="right">The right SqlExpression.</param>
         public TwoSqlExpressionsEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,

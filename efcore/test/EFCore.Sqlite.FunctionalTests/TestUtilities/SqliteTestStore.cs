@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public static SqliteTestStore GetOrCreateInitialized(string name)
             => new SqliteTestStore(name).InitializeSqlite(
-                new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider(),
+                new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider(validateScopes: true),
                 (Func<DbContext>)null,
                 null);
 
@@ -41,7 +41,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }.ToString();
 
             var connection = new SqliteConnection(ConnectionString);
-            SpatialiteLoader.TryLoad(connection);
             Connection = connection;
         }
 

@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.DotNet.Cli.CommandLine
 {
@@ -37,19 +36,19 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     }
                 }
                 else if (part.StartsWith("<", StringComparison.Ordinal)
-                         && part.EndsWith(">", StringComparison.Ordinal))
+                    && part.EndsWith(">", StringComparison.Ordinal))
                 {
                     ValueName = part.Substring(1, part.Length - 2);
                 }
                 else if (optionType == CommandOptionType.MultipleValue
-                         && part.StartsWith("<", StringComparison.Ordinal)
-                         && part.EndsWith(">...", StringComparison.Ordinal))
+                    && part.StartsWith("<", StringComparison.Ordinal)
+                    && part.EndsWith(">...", StringComparison.Ordinal))
                 {
                     ValueName = part.Substring(1, part.Length - 5);
                 }
                 else
                 {
-                    throw new ArgumentException(Resources.InvalidTemplatePattern(template), nameof(template));
+                    throw new ArgumentException($"Invalid template pattern '{template}'", nameof(template));
                 }
             }
 
@@ -57,7 +56,7 @@ namespace Microsoft.DotNet.Cli.CommandLine
                 && string.IsNullOrEmpty(ShortName)
                 && string.IsNullOrEmpty(SymbolName))
             {
-                throw new ArgumentException(Resources.InvalidTemplatePattern(template), nameof(template));
+                throw new ArgumentException($"Invalid template pattern '{template}'", nameof(template));
             }
         }
 
@@ -124,10 +123,13 @@ namespace Microsoft.DotNet.Cli.CommandLine
             return true;
         }
 
-        public bool HasValue() => Values.Count > 0;
+        public bool HasValue()
+            => Values.Count > 0;
 
-        public string? Value() => HasValue() ? Values[0] : null;
+        public string? Value()
+            => HasValue() ? Values[0] : null;
 
-        private static bool IsEnglishLetter(char c) => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+        private static bool IsEnglishLetter(char c)
+            => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
     }
 }

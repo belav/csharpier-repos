@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Globalization;
@@ -26,13 +26,16 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                context.Add(
+                var pegasus = context.Add(
                     new Pegasus
                     {
                         Id1 = ticks,
                         Id2 = ticks + 1,
                         Name = "Rainbow Dash"
                     });
+
+                Assert.Equal("Pegasus", pegasus.Entity.Discriminator);
+
                 await context.SaveChangesAsync();
             }
 
@@ -40,6 +43,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var pegasus = context.Pegasuses.Single(e => e.Id1 == ticks && e.Id2 == ticks + 1);
 
+                Assert.Equal("Pegasus", pegasus.Discriminator);
                 pegasus.Name = "Rainbow Crash";
 
                 await context.SaveChangesAsync();
@@ -212,12 +216,14 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Pegasus>(
+                modelBuilder.Entity<Flyer>(
                     b =>
                     {
                         b.HasKey(
-                            e => new { e.Id1, e.Id2 });
+                            e => new { e.Id1, e.Id2, e.Discriminator });
                     });
+
+                modelBuilder.Entity<Pegasus>();
 
                 modelBuilder.Entity<Unicorn>(
                     b =>
@@ -243,10 +249,15 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        protected class Pegasus
+        protected abstract class Flyer
         {
+            public string Discriminator { get; set; }
             public long Id1 { get; set; }
             public long Id2 { get; set; }
+        }
+
+        protected class Pegasus : Flyer
+        {
             public string Name { get; set; }
         }
 

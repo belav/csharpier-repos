@@ -2,10 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Binding;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.CommandLine.Parsing
 {
+    /// <summary>
+    /// A result produced when parsing an <see cref="IOption" />.
+    /// </summary>
     public class OptionResult : SymbolResult
     {
         private ArgumentConversionResult? _argumentConversionResult;
@@ -21,11 +24,36 @@ namespace System.CommandLine.Parsing
             Token = token;
         }
 
+        /// <summary>
+        /// The option to which the result applies.
+        /// </summary>
         public IOption Option { get; }
 
-        public bool IsImplicit => Token is ImplicitToken || Token is null;
+        /// <summary>
+        /// Indicates whether the result was created implicitly and not due to the option being specified on the command line.
+        /// </summary>
+        /// <remarks>Implicit results commonly result from options having a default value.</remarks>
+        public bool IsImplicit => Token is ImplicitToken or null;
 
+        /// <summary>
+        /// The token that was parsed to specify the option.
+        /// </summary>
         public Token? Token { get; }
+
+        /// <inheritdoc cref="GetValueOrDefault{T}"/>
+        public object? GetValueOrDefault() =>
+            Option.ValueType == typeof(bool)
+                ? GetValueOrDefault<bool>()
+                : GetValueOrDefault<object?>();
+
+        /// <summary>
+        /// Gets the parsed value or the default value for <see cref="Option"/>.
+        /// </summary>
+        /// <returns>The parsed value or the default value for <see cref="Option"/></returns>
+        [return: MaybeNull]
+        public T GetValueOrDefault<T>() =>
+            this.ConvertIfNeeded(typeof(T))
+                .GetValueOrDefault<T>();
 
         private protected override int RemainingArgumentCapacity
         {
@@ -48,17 +76,24 @@ namespace System.CommandLine.Parsing
             {
                 if (_argumentConversionResult is null)
                 {
-                    var results = Children
-                                  .OfType<ArgumentResult>()
-                                  .Select(r => r.GetArgumentConversionResult());
+                    for (var i = 0; i < Children.Count; i++)
+                    {
+                        var child = Children[i];
 
-                    _argumentConversionResult = results.SingleOrDefault() ??
-                                                ArgumentConversionResult.None(Option.Argument);
+                        if (child is ArgumentResult argumentResult)
+                        {
+                            return _argumentConversionResult = argumentResult.GetArgumentConversionResult();
+                        }
+                    }
+
+                    return _argumentConversionResult = ArgumentConversionResult.None(Option.Argument);
                 }
 
                 return _argumentConversionResult;
             }
         }
+
+        internal bool IsMinimumArgumentAritySatisfied => Tokens.Count >= Option.Argument.Arity.MinimumNumberOfValues;
 
         internal override bool UseDefaultValueFor(IArgument argument) => IsImplicit;
     }

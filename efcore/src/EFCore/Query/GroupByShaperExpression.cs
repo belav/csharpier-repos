@@ -1,10 +1,9 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -17,22 +16,23 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public class GroupByShaperExpression : Expression, IPrintableExpression
     {
         /// <summary>
         ///     Creates a new instance of the <see cref="GroupByShaperExpression" /> class.
         /// </summary>
-        /// <param name="keySelector"> An expression representing key selector for the grouping element. </param>
-        /// <param name="elementSelector"> An expression representing element selector for the grouping element. </param>
+        /// <param name="keySelector">An expression representing key selector for the grouping element.</param>
+        /// <param name="groupingEnumerable">An expression representing element selector for the grouping element.</param>
         public GroupByShaperExpression(
             Expression keySelector,
-            Expression elementSelector)
+            ShapedQueryExpression groupingEnumerable)
         {
-            Check.NotNull(keySelector, nameof(keySelector));
-            Check.NotNull(elementSelector, nameof(elementSelector));
-
             KeySelector = keySelector;
-            ElementSelector = elementSelector;
+            GroupingEnumerable = groupingEnumerable;
         }
 
         /// <summary>
@@ -43,11 +43,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     The expression representing the element selector for this grouping element.
         /// </summary>
-        public virtual Expression ElementSelector { get; }
+        public virtual ShapedQueryExpression GroupingEnumerable { get; }
 
         /// <inheritdoc />
         public override Type Type
-            => typeof(IGrouping<,>).MakeGenericType(KeySelector.Type, ElementSelector.Type);
+            => typeof(IGrouping<,>).MakeGenericType(KeySelector.Type, GroupingEnumerable.ShaperExpression.Type);
 
         /// <inheritdoc />
         public sealed override ExpressionType NodeType
@@ -56,42 +56,33 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var keySelector = visitor.Visit(KeySelector);
-            var elementSelector = visitor.Visit(ElementSelector);
+            var groupingEnumerable = (ShapedQueryExpression)visitor.Visit(GroupingEnumerable);
 
-            return Update(keySelector, elementSelector);
+            return Update(keySelector, groupingEnumerable);
         }
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="keySelector"> The <see cref="KeySelector" /> property of the result. </param>
-        /// <param name="elementSelector"> The <see cref="ElementSelector" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
-        public virtual GroupByShaperExpression Update(Expression keySelector, Expression elementSelector)
-        {
-            Check.NotNull(keySelector, nameof(keySelector));
-            Check.NotNull(elementSelector, nameof(elementSelector));
-
-            return keySelector != KeySelector || elementSelector != ElementSelector
-                ? new GroupByShaperExpression(keySelector, elementSelector)
+        /// <param name="keySelector">The <see cref="KeySelector" /> property of the result.</param>
+        /// <param name="groupingEnumerable">The <see cref="GroupingEnumerable" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        public virtual GroupByShaperExpression Update(Expression keySelector, ShapedQueryExpression groupingEnumerable)
+            => keySelector != KeySelector || groupingEnumerable != GroupingEnumerable
+                ? new GroupByShaperExpression(keySelector, groupingEnumerable)
                 : this;
-        }
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.AppendLine($"{nameof(GroupByShaperExpression)}:");
             expressionPrinter.Append("KeySelector: ");
             expressionPrinter.Visit(KeySelector);
             expressionPrinter.AppendLine(", ");
-            expressionPrinter.Append("ElementSelector:");
-            expressionPrinter.Visit(ElementSelector);
+            expressionPrinter.Append("GroupingEnumerable:");
+            expressionPrinter.Visit(GroupingEnumerable);
             expressionPrinter.AppendLine();
         }
     }

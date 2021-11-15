@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -16,65 +16,89 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     the database. A model is typically created by overriding the
     ///     <see cref="DbContext.OnModelCreating(ModelBuilder)" /> method on a derived <see cref="DbContext" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IReadOnlyModel : IReadOnlyAnnotatable
     {
         /// <summary>
         ///     Gets the default change tracking strategy being used for entities in the model. This strategy indicates how the
         ///     context detects changes to properties for an instance of an entity type.
         /// </summary>
-        /// <returns> The change tracking strategy. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <returns>The change tracking strategy.</returns>
         ChangeTrackingStrategy GetChangeTrackingStrategy();
 
         /// <summary>
-        ///     <para>
-        ///         Gets the <see cref="PropertyAccessMode" /> being used for properties of entity types in this model.
-        ///     </para>
+        ///     Gets the <see cref="PropertyAccessMode" /> being used for properties of entity types in this model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note that individual entity types can override this access mode, and individual properties of
         ///         entity types can override the access mode set on the entity type. The value returned here will
         ///         be used for any property for which no override has been specified.
         ///     </para>
-        /// </summary>
-        /// <returns> The access mode being used. </returns>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <returns>The access mode being used.</returns>
         [DebuggerStepThrough]
         PropertyAccessMode GetPropertyAccessMode();
 
         /// <summary>
         ///     Gets the EF Core assembly version used to build this model.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
         string? GetProductVersion()
             => this[CoreAnnotationNames.ProductVersion] as string;
 
         /// <summary>
         ///     Gets a value indicating whether the CLR type is used by shared type entities in the model.
         /// </summary>
-        /// <param name="type"> The CLR type. </param>
-        /// <returns> Whether the CLR type is used by shared type entities in the model. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="type">The CLR type.</param>
+        /// <returns>Whether the CLR type is used by shared type entities in the model.</returns>
         bool IsShared(Type type);
 
         /// <summary>
         ///     Gets all entity types defined in the model.
         /// </summary>
-        /// <returns> All entity types defined in the model. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <returns>All entity types defined in the model.</returns>
         IEnumerable<IReadOnlyEntityType> GetEntityTypes();
 
         /// <summary>
-        ///     Gets the entity type with the given name. Returns <see langword="null"/> if no entity type with the given name is found
+        ///     Gets the entity type with the given name. Returns <see langword="null" /> if no entity type with the given name is found
         ///     or the given CLR type is being used by shared type entity type
         ///     or the entity type has a defining navigation.
         /// </summary>
-        /// <param name="name"> The name of the entity type to find. </param>
-        /// <returns> The entity type, or <see langword="null"/> if none is found. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the entity type to find.</param>
+        /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
         IReadOnlyEntityType? FindEntityType(string name);
 
         /// <summary>
         ///     Gets the entity type for the given base name, defining navigation name
-        ///     and the defining entity type. Returns <see langword="null"/> if no matching entity type is found.
+        ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is found.
         /// </summary>
-        /// <param name="name"> The name of the entity type to find. </param>
-        /// <param name="definingNavigationName"> The defining navigation of the entity type to find. </param>
-        /// <param name="definingEntityType"> The defining entity type of the entity type to find. </param>
-        /// <returns> The entity type, or <see langword="null"/> if none is found. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the entity type to find.</param>
+        /// <param name="definingNavigationName">The defining navigation of the entity type to find.</param>
+        /// <param name="definingEntityType">The defining entity type of the entity type to find.</param>
+        /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
         IReadOnlyEntityType? FindEntityType(
             string name,
             string definingNavigationName,
@@ -85,18 +109,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     the given CLR type is found or the given CLR type is being used by shared type entity type
         ///     or the entity type has a defining navigation.
         /// </summary>
-        /// <param name="type"> The type to find the corresponding entity type for. </param>
-        /// <returns> The entity type, or <see langword="null" /> if none is found. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="type">The type to find the corresponding entity type for.</param>
+        /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
         IReadOnlyEntityType? FindEntityType(Type type);
 
         /// <summary>
         ///     Gets the entity type for the given type, defining navigation name
         ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is found.
         /// </summary>
-        /// <param name="type"> The type of the entity type to find. </param>
-        /// <param name="definingNavigationName"> The defining navigation of the entity type to find. </param>
-        /// <param name="definingEntityType"> The defining entity type of the entity type to find. </param>
-        /// <returns> The entity type, or <see langword="null" /> if none is found. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="type">The type of the entity type to find.</param>
+        /// <param name="definingNavigationName">The defining navigation of the entity type to find.</param>
+        /// <param name="definingEntityType">The defining entity type of the entity type to find.</param>
+        /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
         IReadOnlyEntityType? FindEntityType(
             Type type,
             string definingNavigationName,
@@ -105,16 +135,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the entity types matching the given type.
         /// </summary>
-        /// <param name="type"> The type of the entity type to find. </param>
-        /// <returns> The entity types found. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="type">The type of the entity type to find.</param>
+        /// <returns>The entity types found.</returns>
         IEnumerable<IReadOnlyEntityType> FindEntityTypes(Type type);
 
         /// <summary>
         ///     Returns the entity types corresponding to the least derived types from the given.
         /// </summary>
-        /// <param name="type"> The base type. </param>
-        /// <param name="condition"> An optional condition for filtering entity types. </param>
-        /// <returns> List of entity types corresponding to the least derived types from the given. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="type">The base type.</param>
+        /// <param name="condition">An optional condition for filtering entity types.</param>
+        /// <returns>List of entity types corresponding to the least derived types from the given.</returns>
         IEnumerable<IReadOnlyEntityType> FindLeastDerivedEntityTypes(
             Type type,
             Func<IReadOnlyEntityType, bool>? condition = null)
@@ -171,9 +207,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
+        ///     <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information.
+        /// </remarks>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -181,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             builder.Append(indentString).Append("Model: ");
 
-            if (GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot)
+            if (this is Model
+                && GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot)
             {
                 builder.Append(" ChangeTrackingStrategy.").Append(GetChangeTrackingStrategy());
             }
@@ -193,7 +234,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             if ((options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
             {
-                builder.Append(this.AnnotationsToDebugString(indent));
+                builder.Append(AnnotationsToDebugString(indent));
             }
 
             return builder.ToString();

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -7,11 +7,9 @@ using System.Globalization;
 using System.IO;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Design.Internal;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
@@ -135,7 +133,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     new TestOperationReporter(),
                     new string[0])
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
-                .BuildServiceProvider()
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope()
+                .ServiceProvider
                 .GetRequiredService<IReverseEngineerScaffolder>();
 
         [ConditionalFact]
@@ -149,9 +149,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     new TestOperationReporter(),
                     new string[0])
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
-                .AddSingleton<INamedConnectionStringResolver>(resolver)
-                .AddSingleton<IDatabaseModelFactory>(databaseModelFactory)
-                .BuildServiceProvider()
+                .AddSingleton<IDesignTimeConnectionStringResolver>(resolver)
+                .AddScoped<IDatabaseModelFactory>(p => databaseModelFactory)
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope()
+                .ServiceProvider
                 .GetRequiredService<IReverseEngineerScaffolder>();
 
             var result = scaffolder.ScaffoldModel(
@@ -179,9 +181,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     new TestOperationReporter(),
                     new string[0])
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
-                .AddSingleton<INamedConnectionStringResolver>(resolver)
-                .AddSingleton<IDatabaseModelFactory>(databaseModelFactory)
-                .BuildServiceProvider()
+                .AddSingleton<IDesignTimeConnectionStringResolver>(resolver)
+                .AddScoped<IDatabaseModelFactory>(p => databaseModelFactory)
+                .BuildServiceProvider(validateScopes: true)
+                .CreateScope()
+                .ServiceProvider
                 .GetRequiredService<IReverseEngineerScaffolder>();
 
             var result = scaffolder.ScaffoldModel(
@@ -195,7 +199,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Assert.DoesNotContain("Data Source=Test", result.ContextFile.Code);
         }
 
-        private class TestNamedConnectionStringResolver : INamedConnectionStringResolver
+        private class TestNamedConnectionStringResolver : IDesignTimeConnectionStringResolver
         {
             private readonly string _resolvedConnectionString;
 

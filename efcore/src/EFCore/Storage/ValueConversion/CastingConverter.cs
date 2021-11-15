@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -10,6 +10,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     ///     Converts <typeparamref name="TModel" /> to and from <typeparamref name="TProvider" /> using simple casts from one type
     ///     to the other.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+    /// </remarks>
     public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvider>
     {
         // ReSharper disable once StaticMemberInGenericType
@@ -40,7 +43,21 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <summary>
         ///     Creates a new instance of this converter.
         /// </summary>
-        public CastingConverter(ConverterMappingHints? mappingHints = null)
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+        /// </remarks>
+        public CastingConverter()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        ///     Creates a new instance of this converter.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+        /// </remarks>
+        public CastingConverter(ConverterMappingHints? mappingHints)
             : base(
                 Convert<TModel, TProvider>(),
                 Convert<TProvider, TModel>(),

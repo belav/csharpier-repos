@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -79,12 +79,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private static InternalEntityTypeBuilder CreateInternalEntityBuilder<T>()
-        {
-            var modelBuilder = new InternalModelBuilder(new Model());
-            var entityBuilder = modelBuilder.Entity(typeof(T), ConfigurationSource.DataAnnotation);
-
-            return entityBuilder;
-        }
+            => new InternalModelBuilder(new Model()).Entity(typeof(T), ConfigurationSource.Explicit);
 
         private class Base
         {

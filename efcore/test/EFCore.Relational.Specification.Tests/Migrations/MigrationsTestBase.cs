@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -89,7 +89,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
                         e.HasKey("CustomId");
                         e.HasAlternateKey("SSN");
-                        e.HasCheckConstraint("CK_EmployerId", $"{DelimitIdentifier("EmployerId")} > 0");
+                        e.HasCheckConstraint("EmployerId", $"{DelimitIdentifier("EmployerId")} > 0");
                         e.HasOne("Employers").WithMany("People").HasForeignKey("EmployerId");
 
                         e.HasComment("Table comment");
@@ -639,7 +639,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     "People", e =>
                     {
                         e.Property<int>("DriverLicense");
-                        e.HasCheckConstraint("CK_Foo", $"{DelimitIdentifier("DriverLicense")} > 0");
+                        e.HasCheckConstraint("Foo", $"{DelimitIdentifier("DriverLicense")} > 0");
                     }),
                 model =>
                 {
@@ -780,6 +780,38 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 });
 
         [ConditionalFact]
+        public virtual Task Alter_column_change_computed_recreates_indexes()
+            => Test(
+                builder => builder.Entity(
+                    "People", e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<int>("X");
+                        e.Property<int>("Y");
+                        e.Property<int>("Sum");
+
+                        e.HasIndex("Sum");
+                    }),
+                builder => builder.Entity("People").Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
+                builder => builder.Entity("People").Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} - {DelimitIdentifier("Y")}"),
+                model =>
+                {
+                    var table = Assert.Single(model.Tables);
+                    var sumColumn = Assert.Single(table.Columns, c => c.Name == "Sum");
+                    if (AssertComputedColumns)
+                    {
+                        Assert.Contains("X", sumColumn.ComputedColumnSql);
+                        Assert.Contains("Y", sumColumn.ComputedColumnSql);
+                        Assert.Contains("-", sumColumn.ComputedColumnSql);
+                    }
+
+                    var sumIndex = Assert.Single(table.Indexes);
+                    Assert.Collection(sumIndex.Columns, c => Assert.Equal("Sum", c.Name));
+                });
+
+        [ConditionalFact]
         public virtual Task Alter_column_change_computed_type()
             => Test(
                 builder => builder.Entity(
@@ -803,6 +835,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 });
 
         [ConditionalFact]
+        public virtual Task Alter_column_make_non_computed()
+            => Test(
+                builder => builder.Entity(
+                    "People", e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<int>("X");
+                        e.Property<int>("Y");
+                    }),
+                builder => builder.Entity("People").Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
+                builder => builder.Entity("People").Property<int>("Sum"),
+                model =>
+                {
+                    var table = Assert.Single(model.Tables);
+                    var sumColumn = Assert.Single(table.Columns, c => c.Name == "Sum");
+                    Assert.Null(sumColumn.ComputedColumnSql);
+                    Assert.NotEqual(true, sumColumn.IsStored);
+                });
+
+        [ConditionalFact]
         public virtual Task Alter_column_add_comment()
             => Test(
                 builder => builder.Entity("People").Property<int>("Id"),
@@ -811,6 +864,24 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 {
                     var table = Assert.Single(model.Tables);
                     var column = Assert.Single(table.Columns);
+                    if (AssertComments)
+                        Assert.Equal("Some comment", column.Comment);
+                });
+
+        [ConditionalFact]
+        public virtual Task Alter_computed_column_add_comment()
+            => Test(
+                builder => builder.Entity("People", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("SomeColumn").HasComputedColumnSql("42");
+                }),
+                builder => { },
+                builder => builder.Entity("People").Property<int>("SomeColumn").HasComment("Some comment"),
+                model =>
+                {
+                    var table = Assert.Single(model.Tables);
+                    var column = Assert.Single(table.Columns.Where(c => c.Name == "SomeColumn"));
                     if (AssertComments)
                         Assert.Equal("Some comment", column.Comment);
                 });
@@ -894,6 +965,22 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 {
                     var table = Assert.Single(model.Tables);
                     Assert.Equal("SomeColumn", Assert.Single(table.Columns).Name);
+                });
+
+        [ConditionalFact]
+        public virtual Task Drop_column_computed_and_non_computed_with_dependency()
+            => Test(
+                builder => builder.Entity("People").Property<int>("Id"),
+                builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("X");
+                    e.Property<int>("Y").HasComputedColumnSql($"{DelimitIdentifier("X")} + 1");
+                }),
+                builder => { },
+                model =>
+                {
+                    var table = Assert.Single(model.Tables);
+                    Assert.Equal("Id", Assert.Single(table.Columns).Name);
                 });
 
         [ConditionalFact]
@@ -1117,7 +1204,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var foreignKey = ordersTable.ForeignKeys.Single();
                     if (AssertConstraintNames)
                         Assert.Equal("FK_Orders_Customers_CustomerId", foreignKey.Name);
-                    Assert.Equal(Normalize(ReferentialAction.Restrict), foreignKey.OnDelete);
+                    Assert.Equal(ReferentialAction.NoAction, foreignKey.OnDelete);
                     Assert.Same(customersTable, foreignKey.PrincipalTable);
                     Assert.Same(customersTable.Columns.Single(), Assert.Single(foreignKey.PrincipalColumns));
                     Assert.Equal("CustomerId", Assert.Single(foreignKey.Columns).Name);
@@ -1250,7 +1337,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         e.Property<int>("DriverLicense");
                     }),
                 builder => { },
-                builder => builder.Entity("People").HasCheckConstraint("CK_Foo", $"{DelimitIdentifier("DriverLicense")} > 0"),
+                builder => builder.Entity("People").HasCheckConstraint("Foo", $"{DelimitIdentifier("DriverLicense")} > 0"),
                 model =>
                 {
                     // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
@@ -1265,8 +1352,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         e.Property<int>("Id");
                         e.Property<int>("DriverLicense");
                     }),
-                builder => builder.Entity("People").HasCheckConstraint("CK_Foo", $"{DelimitIdentifier("DriverLicense")} > 0"),
-                builder => builder.Entity("People").HasCheckConstraint("CK_Foo", $"{DelimitIdentifier("DriverLicense")} > 1"),
+                builder => builder.Entity("People").HasCheckConstraint("Foo", $"{DelimitIdentifier("DriverLicense")} > 0"),
+                builder => builder.Entity("People").HasCheckConstraint("Foo", $"{DelimitIdentifier("DriverLicense")} > 1"),
                 model =>
                 {
                     // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
@@ -1281,7 +1368,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         e.Property<int>("Id");
                         e.Property<int>("DriverLicense");
                     }),
-                builder => builder.Entity("People").HasCheckConstraint("CK_Foo", $"{DelimitIdentifier("DriverLicense")} > 0"),
+                builder => builder.Entity("People").HasCheckConstraint("Foo", $"{DelimitIdentifier("DriverLicense")} > 0"),
                 builder => { },
                 model =>
                 {
@@ -1298,6 +1385,30 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var sequence = Assert.Single(model.Sequences);
                     Assert.Equal("TestSequence", sequence.Name);
                 });
+
+
+        [ConditionalFact]
+        public virtual Task Create_sequence_long()
+            => Test(
+                builder => { },
+                builder => builder.HasSequence<long>("TestSequence"),
+                model =>
+                {
+                    var sequence = Assert.Single(model.Sequences);
+                    Assert.Equal("TestSequence", sequence.Name);
+                });
+
+        [ConditionalFact]
+        public virtual Task Create_sequence_short()
+            => Test(
+                builder => { },
+                builder => builder.HasSequence<short>("TestSequence"),
+                model =>
+                {
+                    var sequence = Assert.Single(model.Sequences);
+                    Assert.Equal("TestSequence", sequence.Name);
+                });
+
 
         [ConditionalFact]
         public virtual Task Create_sequence_all_settings()
@@ -1574,9 +1685,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
         protected abstract string NonDefaultCollation { get; }
 
-        protected virtual ReferentialAction Normalize(ReferentialAction value)
-            => value;
-
         protected virtual DbContext CreateContext()
             => Fixture.CreateContext();
 
@@ -1610,13 +1718,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sourceModelBuilder = CreateConventionlessModelBuilder();
             buildCommonAction(sourceModelBuilder);
             buildSourceAction(sourceModelBuilder);
-            var sourceModel = modelRuntimeInitializer.Initialize(sourceModelBuilder.FinalizeModel(), designTime: true, validationLogger: null);
+            var sourceModel = modelRuntimeInitializer.Initialize((IModel)sourceModelBuilder.Model, designTime: true, validationLogger: null);
 
             var targetModelBuilder = CreateConventionlessModelBuilder();
             buildCommonAction(targetModelBuilder);
             buildTargetAction(targetModelBuilder);
 
-            var targetModel = modelRuntimeInitializer.Initialize(targetModelBuilder.FinalizeModel(), designTime: true, validationLogger: null);
+            var targetModel = modelRuntimeInitializer.Initialize((IModel)targetModelBuilder.Model, designTime: true, validationLogger: null);
 
             var operations = modelDiffer.GetDifferences(sourceModel.GetRelationalModel(), targetModel.GetRelationalModel());
 
@@ -1655,7 +1763,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             var context = CreateContext();
             var modelRuntimeInitializer = context.GetService<IModelRuntimeInitializer>();
-            var sourceModel = modelRuntimeInitializer.Initialize(sourceModelBuilder.FinalizeModel(), designTime: true, validationLogger: null);
+            var sourceModel = modelRuntimeInitializer.Initialize((IModel)sourceModelBuilder.Model, designTime: true, validationLogger: null);
 
             return Test(sourceModel, targetModel: null, operations, asserter);
         }

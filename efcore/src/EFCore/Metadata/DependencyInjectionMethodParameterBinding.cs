@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -15,21 +15,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     also have and associated <see cref="IServiceProperty" />, to a parameter in a constructor,
     ///     factory method, or similar.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information.
+    /// </remarks>
     public class DependencyInjectionMethodParameterBinding : DependencyInjectionParameterBinding
     {
         /// <summary>
         ///     Creates a new <see cref="DependencyInjectionParameterBinding" /> instance for the given method
         ///     of the given service type.
         /// </summary>
-        /// <param name="parameterType"> The parameter CLR type. </param>
-        /// <param name="serviceType"> The service CLR types, as resolved from dependency injection </param>
-        /// <param name="method"> The method of the service to bind to. </param>
-        /// <param name="serviceProperties"> The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />. </param>
+        /// <param name="parameterType">The parameter CLR type.</param>
+        /// <param name="serviceType">The service CLR types, as resolved from dependency injection</param>
+        /// <param name="method">The method of the service to bind to.</param>
+        /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
         public DependencyInjectionMethodParameterBinding(
             Type parameterType,
             Type serviceType,
             MethodInfo method,
-            IPropertyBase[]? serviceProperties = null)
+            params IPropertyBase[]? serviceProperties)
             : base(parameterType, serviceType, serviceProperties)
         {
             Check.NotNull(method, nameof(method));
@@ -46,9 +49,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates an expression tree representing the binding of the value of a property from a
         ///     materialization expression to a parameter of the constructor, factory method, etc.
         /// </summary>
-        /// <param name="materializationExpression"> The expression representing the materialization context. </param>
-        /// <param name="entityTypeExpression"> The expression representing the <see cref="IEntityType" /> constant. </param>
-        /// <returns> The expression tree. </returns>
+        /// <param name="materializationExpression">The expression representing the materialization context.</param>
+        /// <param name="entityTypeExpression">The expression representing the <see cref="IEntityType" /> constant.</param>
+        /// <returns>The expression tree.</returns>
         public override Expression BindToParameter(
             Expression materializationExpression,
             Expression entityTypeExpression)
@@ -87,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Creates a copy that contains the given consumed properties.
         /// </summary>
-        /// <param name="consumedProperties"> The new consumed properties. </param>
-        /// <returns> A copy with replaced consumed properties. </returns>
+        /// <param name="consumedProperties">The new consumed properties.</param>
+        /// <returns>A copy with replaced consumed properties.</returns>
         public override ParameterBinding With(IPropertyBase[] consumedProperties)
             => new DependencyInjectionMethodParameterBinding(ParameterType, ServiceType, Method, consumedProperties);
     }

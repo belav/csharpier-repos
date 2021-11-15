@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -18,6 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public readonly struct ValueBuffer : IEquatable<ValueBuffer>
     {
         /// <summary>
@@ -30,7 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValueBuffer" /> class.
         /// </summary>
-        /// <param name="values"> The list of values for this buffer. </param>
+        /// <param name="values">The list of values for this buffer.</param>
         public ValueBuffer(object?[] values)
         {
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -42,8 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Gets the value at a requested index.
         /// </summary>
-        /// <param name="index"> The index of the value to get. </param>
-        /// <returns> The value at the requested index. </returns>
+        /// <param name="index">The index of the value to get.</param>
+        /// <returns>The value at the requested index.</returns>
         public object? this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

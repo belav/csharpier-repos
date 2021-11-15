@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics
 {
@@ -13,17 +12,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     A <see cref="DiagnosticSource" /> event payload class for events that indicate
     ///     a changed property value.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    /// </remarks>
     public class ReferenceChangedEventData : NavigationEventData
     {
         /// <summary>
         ///     Constructs the event payload.
         /// </summary>
-        /// <param name="eventDefinition"> The event definition. </param>
-        /// <param name="messageGenerator"> A delegate that generates a log message for this event. </param>
-        /// <param name="entityEntry"> The entry for the entity instance on which the property value has changed. </param>
-        /// <param name="navigation"> The navigation property. </param>
-        /// <param name="oldReferencedEntity"> The old referenced entity. </param>
-        /// <param name="newReferencedEntity"> The new referenced entity. </param>
+        /// <param name="eventDefinition">The event definition.</param>
+        /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
+        /// <param name="entityEntry">The entry for the entity instance on which the property value has changed.</param>
+        /// <param name="navigation">The navigation property.</param>
+        /// <param name="oldReferencedEntity">The old referenced entity.</param>
+        /// <param name="newReferencedEntity">The new referenced entity.</param>
         public ReferenceChangedEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
@@ -33,8 +35,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             object? newReferencedEntity)
             : base(eventDefinition, messageGenerator, navigation)
         {
-            Check.NotNull(entityEntry, nameof(entityEntry));
-
             EntityEntry = entityEntry;
             OldReferencedEntity = oldReferencedEntity;
             NewReferencedEntity = newReferencedEntity;
@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The navigation.
         /// </summary>
-        public new virtual INavigation Navigation => (INavigation)base.Navigation;
+        public new virtual INavigation Navigation
+            => (INavigation)base.Navigation;
 
         /// <summary>
         ///     The old referenced entity.

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -11,24 +11,14 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class Migrator : IMigrator
     {
@@ -67,20 +57,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             IRelationalCommandDiagnosticsLogger commandLogger,
             IDatabaseProvider databaseProvider)
         {
-            Check.NotNull(migrationsAssembly, nameof(migrationsAssembly));
-            Check.NotNull(historyRepository, nameof(historyRepository));
-            Check.NotNull(databaseCreator, nameof(databaseCreator));
-            Check.NotNull(migrationsSqlGenerator, nameof(migrationsSqlGenerator));
-            Check.NotNull(rawSqlCommandBuilder, nameof(rawSqlCommandBuilder));
-            Check.NotNull(migrationCommandExecutor, nameof(migrationCommandExecutor));
-            Check.NotNull(connection, nameof(connection));
-            Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
-            Check.NotNull(currentContext, nameof(currentContext));
-            Check.NotNull(modelRuntimeInitializer, nameof(modelRuntimeInitializer));
-            Check.NotNull(logger, nameof(logger));
-            Check.NotNull(commandLogger, nameof(commandLogger));
-            Check.NotNull(databaseProvider, nameof(databaseProvider));
-
             _migrationsAssembly = migrationsAssembly;
             _historyRepository = historyRepository;
             _databaseCreator = (IRelationalDatabaseCreator)databaseCreator;
@@ -122,7 +98,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         null,
                         null,
                         _currentContext.Context,
-                        _commandLogger));
+                        _commandLogger, CommandSource.Migrations));
             }
 
             var commandLists = GetMigrationCommandLists(_historyRepository.GetAppliedMigrations(), targetMigration);
@@ -160,7 +136,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             null,
                             null,
                             _currentContext.Context,
-                            _commandLogger),
+                            _commandLogger, CommandSource.Migrations),
                         cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -462,8 +438,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Migration migration,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
         {
-            Check.NotNull(migration, nameof(migration));
-
             var insertCommand = _rawSqlCommandBuilder.Build(
                 _historyRepository.GetInsertScript(new HistoryRow(migration.GetId(), ProductInfo.GetVersion())));
 
@@ -484,25 +458,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Migration? previousMigration,
             MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
         {
-            Check.NotNull(migration, nameof(migration));
-
             var deleteCommand = _rawSqlCommandBuilder.Build(
                 _historyRepository.GetDeleteScript(migration.GetId()));
 
             return _migrationsSqlGenerator
-                .Generate(migration.DownOperations, previousMigration == null ? null : FinalizeModel(previousMigration.TargetModel), options)
+                .Generate(
+                    migration.DownOperations, previousMigration == null ? null : FinalizeModel(previousMigration.TargetModel), options)
                 .Concat(new[] { new MigrationCommand(deleteCommand, _currentContext.Context, _commandLogger) })
                 .ToList();
         }
 
         private IModel FinalizeModel(IModel model)
-        {
-            if (model is IMutableModel mutableModel)
-            {
-                model = mutableModel.FinalizeModel();
-            }
-
-            return _modelRuntimeInitializer.Initialize(model, designTime: true, validationLogger: null);
-        }
+            => _modelRuntimeInitializer.Initialize(model, designTime: true, validationLogger: null);
     }
 }

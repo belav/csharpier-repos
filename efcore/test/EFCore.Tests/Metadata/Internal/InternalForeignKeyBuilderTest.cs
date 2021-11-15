@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -42,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Null(fk.GetIsUniqueConfigurationSource());
             Assert.Null(fk.GetDeleteBehaviorConfigurationSource());
 
-            relationshipBuilder = relationshipBuilder.PrincipalEntityType(principalEntityBuilder, ConfigurationSource.Explicit)
+            relationshipBuilder = relationshipBuilder.PrincipalEntityType(principalEntityBuilder.Metadata, ConfigurationSource.Explicit)
                 .HasPrincipalKey(key.Metadata.Properties, ConfigurationSource.Explicit).HasNavigation(
                     Order.CustomerProperty.Name,
                     pointsToPrincipal: true,
@@ -586,9 +586,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var modelBuilder = CreateInternalModelBuilder();
             var customerEntityBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit);
-            var orderEntityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit);
+            var orderEntityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit, shouldBeOwned: true);
 
-            var relationshipBuilder = orderEntityBuilder.HasRelationship(customerEntityBuilder.Metadata, ConfigurationSource.Convention);
+            var relationshipBuilder = orderEntityBuilder.HasRelationship(
+                customerEntityBuilder.Metadata, null, nameof(Customer.Orders), ConfigurationSource.Convention);
             Assert.False(relationshipBuilder.Metadata.IsOwnership);
 
             relationshipBuilder = relationshipBuilder.IsOwnership(true, ConfigurationSource.Convention);
@@ -599,6 +600,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Null(relationshipBuilder.IsOwnership(true, ConfigurationSource.Convention));
             Assert.False(relationshipBuilder.Metadata.IsOwnership);
+        }
+
+        [ConditionalFact]
+        public void HasRelationship_throws_when_incompatible_navigations()
+        {
+            var modelBuilder = CreateInternalModelBuilder();
+            var customerEntityBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit);
+            var orderEntityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit);
+
+            Assert.Equal(
+                CoreStrings.PrincipalEndIncompatibleNavigations(
+                    "Customer.Orders",
+                    "Order.Customer",
+                    nameof(Order)),
+                Assert.Throws<InvalidOperationException>(() =>
+                    customerEntityBuilder.HasRelationship(
+                        orderEntityBuilder.Metadata, nameof(Customer.Orders), nameof(Order.Customer), ConfigurationSource.Convention,
+                        setTargetAsPrincipal: true)).Message);
         }
 
         [ConditionalFact]

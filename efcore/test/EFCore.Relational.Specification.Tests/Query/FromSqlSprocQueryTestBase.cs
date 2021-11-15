@@ -1,7 +1,8 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -63,6 +64,75 @@ namespace Microsoft.EntityFrameworkCore.Query
                 actual, mep =>
                     mep.TenMostExpensiveProducts == "Côte de Blaye"
                     && mep.UnitPrice == 263.50m);
+        }
+
+        [ConditionalTheory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public virtual async Task From_sql_queryable_stored_procedure_with_tags(bool async)
+        {
+            using var context = CreateContext();
+            var query = context
+                .Set<MostExpensiveProduct>()
+                .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters())
+                .TagWith("One")
+                .TagWith("Two")
+                .TagWith("Three");
+
+            var actual = async
+                ? await query.ToArrayAsync()
+                : query.ToArray();
+
+            Assert.Equal(10, actual.Length);
+
+            Assert.Contains(
+                actual, mep =>
+                    mep.TenMostExpensiveProducts == "Côte de Blaye"
+                    && mep.UnitPrice == 263.50m);
+        }
+
+        [ConditionalTheory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public virtual async Task From_sql_queryable_stored_procedure_with_caller_info_tag(bool async)
+        {
+            using var context = CreateContext();
+            var query = context
+                .Set<MostExpensiveProduct>()
+                .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters())
+                .TagWithCallSite("SampleFileName", 13);
+
+            var queryResult = async
+                ? await query.ToArrayAsync()
+                : query.ToArray();
+
+            var actual = query.ToQueryString().Split(Environment.NewLine).First();
+
+            Assert.Equal("-- File: SampleFileName:13", actual);
+        }
+
+        [ConditionalTheory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public virtual async Task From_sql_queryable_stored_procedure_with_caller_info_tag_and_other_tags(bool async)
+        {
+            using var context = CreateContext();
+            var query = context
+                .Set<MostExpensiveProduct>()
+                .FromSqlRaw(TenMostExpensiveProductsSproc, GetTenMostExpensiveProductsParameters())
+                .TagWith("Before")
+                .TagWithCallSite("SampleFileName", 13)
+                .TagWith("After");
+
+            var queryResult = async
+                ? await query.ToArrayAsync()
+                : query.ToArray();
+
+            var tags = query.ToQueryString().Split(Environment.NewLine).ToList();
+
+            Assert.Equal("-- Before", tags[0]);
+            Assert.Equal("-- File: SampleFileName:13", tags[1]);
+            Assert.Equal("-- After", tags[2]);
         }
 
         [ConditionalTheory]

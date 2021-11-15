@@ -1,16 +1,15 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-namespace Microsoft.AspNetCore.Razor.Language.Extensions
+namespace Microsoft.AspNetCore.Razor.Language.Extensions;
+
+internal interface IMetadataAttributeTargetExtension : ICodeTargetExtension
 {
-    internal interface IMetadataAttributeTargetExtension : ICodeTargetExtension
-    {
-        void WriteRazorCompiledItemAttribute(CodeRenderingContext context, RazorCompiledItemAttributeIntermediateNode node);
+    void WriteRazorCompiledItemAttribute(CodeRenderingContext context, RazorCompiledItemAttributeIntermediateNode node);
 
-        void WriteRazorSourceChecksumAttribute(CodeRenderingContext context, RazorSourceChecksumAttributeIntermediateNode node);
+    void WriteRazorSourceChecksumAttribute(CodeRenderingContext context, RazorSourceChecksumAttributeIntermediateNode node);
 
-        void WriteRazorCompiledItemMetadataAttribute(CodeRenderingContext context, RazorCompiledItemMetadataAttributeIntermediateNode node);
-    }
+    void WriteRazorCompiledItemMetadataAttribute(CodeRenderingContext context, RazorCompiledItemMetadataAttributeIntermediateNode node);
 }

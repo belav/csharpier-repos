@@ -1,19 +1,18 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     /// <summary>
-    ///     <para>
-    ///         Provides access to change tracking information and operations for a given property
-    ///         or navigation property.
-    ///     </para>
+    ///     Provides access to change tracking information and operations for a given property
+    ///     or navigation property.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Scalar properties use the derived class <see cref="PropertyEntry" />, reference navigation
     ///         properties use the derived class <see cref="ReferenceEntry" />, and collection navigation
@@ -23,7 +22,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///         Instances of this class are returned from methods when using the <see cref="ChangeTracker" /> API and it is
     ///         not designed to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public abstract class MemberEntry : IInfrastructure<InternalEntityEntry>
     {
         /// <summary>
@@ -35,9 +37,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [EntityFrameworkInternal]
         protected MemberEntry(InternalEntityEntry internalEntry, IPropertyBase metadata)
         {
-            Check.NotNull(internalEntry, nameof(internalEntry));
-            Check.NotNull(metadata, nameof(metadata));
-
             InternalEntry = internalEntry;
             Metadata = metadata;
         }
@@ -52,18 +51,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         protected virtual InternalEntityEntry InternalEntry { get; }
 
         /// <summary>
-        ///     <para>
-        ///         For non-navigation properties, gets or sets a value indicating whether the value of this
-        ///         property has been modified and should be updated in the database when
-        ///         <see cref="DbContext.SaveChanges()" />
-        ///         is called.
-        ///     </para>
+        ///     For non-navigation properties, gets or sets a value indicating whether the value of this
+        ///     property has been modified and should be updated in the database when
+        ///     <see cref="DbContext.SaveChanges()" />
+        ///     is called.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         For navigation properties, gets or sets a value indicating whether any of foreign key
         ///         property values associated with this navigation property have been modified and should
         ///         be updated in the database  when <see cref="DbContext.SaveChanges()" /> is called.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
         public abstract bool IsModified { get; set; }
 
         /// <summary>
@@ -76,6 +78,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     the change tracker is aware of the change and <see cref="ChangeTracker.DetectChanges" /> is not required
         ///     for the context to detect the change.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
         public virtual object? CurrentValue
         {
             get => InternalEntry[Metadata];
@@ -85,6 +90,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     The <see cref="EntityEntry" /> to which this member belongs.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
         /// <value> An entry for the entity that owns this member. </value>
         public virtual EntityEntry EntityEntry
             => new(InternalEntry);
@@ -104,7 +112,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -112,8 +120,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj)
             => base.Equals(obj);
@@ -121,7 +129,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
             => base.GetHashCode();

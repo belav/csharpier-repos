@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -295,7 +295,7 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: DeviceFlowCodes.Data (string) Required MaxLength(50000)",
                         "Property: DeviceFlowCodes.Description (string) MaxLength(200)",
                         "Property: DeviceFlowCodes.DeviceCode (string) Required Index MaxLength(200)",
-                        "Property: DeviceFlowCodes.Expiration (Nullable<DateTime>) Required Index",
+                        "Property: DeviceFlowCodes.Expiration (DateTime?) Required Index",
                         "Property: DeviceFlowCodes.SessionId (string) MaxLength(100)",
                         "Property: DeviceFlowCodes.SubjectId (string) MaxLength(200)",
                     },
@@ -313,11 +313,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         "Property: PersistedGrant.Key (string) Required PK AfterSave:Throw MaxLength(200)",
                         "Property: PersistedGrant.ClientId (string) Required Index MaxLength(200)",
-                        "Property: PersistedGrant.ConsumedTime (Nullable<DateTime>)",
+                        "Property: PersistedGrant.ConsumedTime (DateTime?)",
                         "Property: PersistedGrant.CreationTime (DateTime) Required",
                         "Property: PersistedGrant.Data (string) Required MaxLength(50000)",
                         "Property: PersistedGrant.Description (string) MaxLength(200)",
-                        "Property: PersistedGrant.Expiration (Nullable<DateTime>) Index",
+                        "Property: PersistedGrant.Expiration (DateTime?) Index",
                         "Property: PersistedGrant.SessionId (string) Index MaxLength(100)",
                         "Property: PersistedGrant.SubjectId (string) Index MaxLength(200)",
                         "Property: PersistedGrant.Type (string) Required Index MaxLength(50)",

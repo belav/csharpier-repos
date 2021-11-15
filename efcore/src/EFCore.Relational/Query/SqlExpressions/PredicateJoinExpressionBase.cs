@@ -1,8 +1,7 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -20,13 +19,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="PredicateJoinExpressionBase" /> class.
         /// </summary>
-        /// <param name="table"> A table source to join with. </param>
-        /// <param name="joinPredicate"> A predicate to use for the join. </param>
+        /// <param name="table">A table source to join with.</param>
+        /// <param name="joinPredicate">A predicate to use for the join.</param>
         protected PredicateJoinExpressionBase(TableExpressionBase table, SqlExpression joinPredicate)
             : base(table)
         {
-            Check.NotNull(joinPredicate, nameof(joinPredicate));
-
             JoinPredicate = joinPredicate;
         }
 

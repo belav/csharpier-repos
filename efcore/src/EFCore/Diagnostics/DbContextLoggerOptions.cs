@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     Formatting options for use with <see cref="FormattingDbContextLogger" />
     ///     and <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-simple-logging">EF Core simple logging</see> for more information.
+    /// </remarks>
     [Flags]
     public enum DbContextLoggerOptions
     {
@@ -51,24 +54,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         LocalTime = 1 << 5,
 
         /// <summary>
-        ///     <para>
-        ///         The default used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
-        ///     </para>
-        ///     <para>
-        ///         Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="LocalTime" />.
-        ///     </para>
+        ///     The default used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
         /// </summary>
+        /// <remarks>
+        ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="LocalTime" />.
+        /// </remarks>
         DefaultWithLocalTime = Level | Category | Id | LocalTime,
 
         /// <summary>
-        ///     <para>
-        ///         The same defaults as used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />,
-        ///         but with UTC timestamps.
-        ///     </para>
-        ///     <para>
-        ///         Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="UtcTime" />.
-        ///     </para>
+        ///     The same defaults as used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />,
+        ///     but with UTC timestamps.
         /// </summary>
+        /// <remarks>
+        ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="UtcTime" />.
+        /// </remarks>
         DefaultWithUtcTime = Level | Category | Id | UtcTime
     }
 }

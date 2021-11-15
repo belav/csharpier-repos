@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +15,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures the filter for unique non-clustered indexes with nullable columns
     ///     to filter out null values.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+    ///     for more information.
+    /// </remarks>
     public class SqlServerIndexConvention :
         IEntityTypeBaseTypeChangedConvention,
         IIndexAddedConvention,
@@ -28,30 +33,37 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerIndexConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
-        /// <param name="sqlGenerationHelper"> SQL command generation helper service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
+        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+        /// <param name="sqlGenerationHelper">SQL command generation helper service.</param>
         public SqlServerIndexConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies,
             ISqlGenerationHelper sqlGenerationHelper)
         {
             _sqlGenerationHelper = sqlGenerationHelper;
+
             Dependencies = dependencies;
+            RelationalDependencies = relationalDependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
         /// <summary>
+        ///     Relational provider-specific dependencies for this service.
+        /// </summary>
+        protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
+
+        /// <summary>
         ///     Called after the base type of an entity type changes.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="newBaseType"> The new base entity type. </param>
-        /// <param name="oldBaseType"> The old base entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="newBaseType">The new base entity type.</param>
+        /// <param name="oldBaseType">The old base entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeBaseTypeChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
@@ -71,8 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after an index is added to the entity type.
         /// </summary>
-        /// <param name="indexBuilder"> The builder for the index. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="indexBuilder">The builder for the index.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessIndexAdded(
             IConventionIndexBuilder indexBuilder,
             IConventionContext<IConventionIndexBuilder> context)
@@ -81,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after the uniqueness for an index is changed.
         /// </summary>
-        /// <param name="indexBuilder"> The builder for the index. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="indexBuilder">The builder for the index.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessIndexUniquenessChanged(
             IConventionIndexBuilder indexBuilder,
             IConventionContext<bool?> context)
@@ -91,8 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after the nullability for a property is changed.
         /// </summary>
-        /// <param name="propertyBuilder"> The builder for the property. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="propertyBuilder">The builder for the property.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessPropertyNullabilityChanged(
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<bool?> context)
@@ -106,11 +118,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after an annotation is changed on an index.
         /// </summary>
-        /// <param name="indexBuilder"> The builder for the index. </param>
-        /// <param name="name"> The annotation name. </param>
-        /// <param name="annotation"> The new annotation. </param>
-        /// <param name="oldAnnotation"> The old annotation.  </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="indexBuilder">The builder for the index.</param>
+        /// <param name="name">The annotation name.</param>
+        /// <param name="annotation">The new annotation.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessIndexAnnotationChanged(
             IConventionIndexBuilder indexBuilder,
             string name,
@@ -127,11 +139,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after an annotation is changed on a property.
         /// </summary>
-        /// <param name="propertyBuilder"> The builder for the property. </param>
-        /// <param name="name"> The annotation name. </param>
-        /// <param name="annotation"> The new annotation. </param>
-        /// <param name="oldAnnotation"> The old annotation.  </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="propertyBuilder">The builder for the property.</param>
+        /// <param name="name">The annotation name.</param>
+        /// <param name="annotation">The new annotation.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessPropertyAnnotationChanged(
             IConventionPropertyBuilder propertyBuilder,
             string name,

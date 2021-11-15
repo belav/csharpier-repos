@@ -1,91 +1,138 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public abstract class TagHelperDescriptor : IEquatable<TagHelperDescriptor>
 {
-    public abstract class TagHelperDescriptor : IEquatable<TagHelperDescriptor>
+    private IEnumerable<RazorDiagnostic> _allDiagnostics;
+    private BoundAttributeDescriptor[] _editorRequiredAttributes;
+
+    protected TagHelperDescriptor(string kind)
     {
-        private IEnumerable<RazorDiagnostic> _allDiagnostics;
+        Kind = kind;
+    }
 
-        protected TagHelperDescriptor(string kind)
+    public string Kind { get; }
+
+    public string Name { get; protected set; }
+
+    public IReadOnlyList<TagMatchingRuleDescriptor> TagMatchingRules { get; protected set; }
+
+    public string AssemblyName { get; protected set; }
+
+    public IReadOnlyList<BoundAttributeDescriptor> BoundAttributes { get; protected set; }
+
+    public IReadOnlyList<AllowedChildTagDescriptor> AllowedChildTags { get; protected set; }
+
+    public string Documentation { get; protected set; }
+
+    public string DisplayName { get; protected set; }
+
+    public string TagOutputHint { get; protected set; }
+
+    public bool CaseSensitive { get; protected set; }
+
+    public IReadOnlyList<RazorDiagnostic> Diagnostics { get; protected set; }
+
+    public IReadOnlyDictionary<string, string> Metadata { get; protected set; }
+
+    // Hoisted / cached metadata
+    private int? _hashCode;
+    internal bool? IsComponentFullyQualifiedNameMatchCache { get; set; }
+    internal bool? IsChildContentTagHelperCache { get; set; }
+    internal ParsedTypeInformation? ParsedTypeInfo { get; set; }
+    internal BoundAttributeDescriptor[] EditorRequiredAttributes
+    {
+        get
         {
-            Kind = kind;
+            _editorRequiredAttributes ??= GetEditorRequiredAttributes(BoundAttributes);
+            return _editorRequiredAttributes;
+        }
+    }
+
+    public bool HasErrors
+    {
+        get
+        {
+            var allDiagnostics = GetAllDiagnostics();
+            var errors = allDiagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+
+            return errors;
+        }
+    }
+
+    public virtual IEnumerable<RazorDiagnostic> GetAllDiagnostics()
+    {
+        if (_allDiagnostics == null)
+        {
+            var allowedChildTagDiagnostics = AllowedChildTags.SelectMany(childTag => childTag.Diagnostics);
+            var attributeDiagnostics = BoundAttributes.SelectMany(attribute => attribute.Diagnostics);
+            var ruleDiagnostics = TagMatchingRules.SelectMany(rule => rule.GetAllDiagnostics());
+            var combinedDiagnostics = allowedChildTagDiagnostics
+                .Concat(attributeDiagnostics)
+                .Concat(ruleDiagnostics)
+                .Concat(Diagnostics);
+            _allDiagnostics = combinedDiagnostics.ToArray();
         }
 
-        public string Kind { get; }
+        return _allDiagnostics;
+    }
 
-        public string Name { get; protected set; }
+    public override string ToString()
+    {
+        return DisplayName ?? base.ToString();
+    }
 
-        public IReadOnlyList<TagMatchingRuleDescriptor> TagMatchingRules { get; protected set; }
+    public bool Equals(TagHelperDescriptor other)
+    {
+        return TagHelperDescriptorComparer.Default.Equals(this, other);
+    }
 
-        public string AssemblyName { get; protected set; }
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as TagHelperDescriptor);
+    }
 
-        public IReadOnlyList<BoundAttributeDescriptor> BoundAttributes { get; protected set; }
+    public override int GetHashCode()
+    {
+        // TagHelperDescriptors are immutable instances and it should be safe to cache it's hashes once.
+        _hashCode ??= TagHelperDescriptorComparer.Default.GetHashCode(this);
+        return _hashCode.Value;
+    }
 
-        public IReadOnlyList<AllowedChildTagDescriptor> AllowedChildTags { get; protected set; }
-
-        public string Documentation { get; protected set; }
-
-        public string DisplayName { get; protected set; }
-
-        public string TagOutputHint { get; protected set; }
-
-        public bool CaseSensitive { get; protected set; }
-
-        public IReadOnlyList<RazorDiagnostic> Diagnostics { get; protected set; }
-
-        public IReadOnlyDictionary<string, string> Metadata { get; protected set; }
-
-        public bool HasErrors
+    private static BoundAttributeDescriptor[] GetEditorRequiredAttributes(IReadOnlyList<BoundAttributeDescriptor> boundAttributeDescriptors)
+    {
+        List<BoundAttributeDescriptor> editorRequiredAttributes = null;
+        var count = boundAttributeDescriptors.Count;
+        for (var i = 0; i < count; i++)
         {
-            get
+            var attribute = boundAttributeDescriptors[i];
+            if (attribute.IsEditorRequired)
             {
-                var allDiagnostics = GetAllDiagnostics();
-                var errors = allDiagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
-
-                return errors;
+                editorRequiredAttributes ??= new();
+                editorRequiredAttributes.Add(attribute);
             }
         }
 
-        public virtual IEnumerable<RazorDiagnostic> GetAllDiagnostics()
-        {
-            if (_allDiagnostics == null)
-            {
-                var allowedChildTagDiagnostics = AllowedChildTags.SelectMany(childTag => childTag.Diagnostics);
-                var attributeDiagnostics = BoundAttributes.SelectMany(attribute => attribute.Diagnostics);
-                var ruleDiagnostics = TagMatchingRules.SelectMany(rule => rule.GetAllDiagnostics());
-                var combinedDiagnostics = allowedChildTagDiagnostics
-                    .Concat(attributeDiagnostics)
-                    .Concat(ruleDiagnostics)
-                    .Concat(Diagnostics);
-                _allDiagnostics = combinedDiagnostics.ToArray();
-            }
+        return editorRequiredAttributes?.ToArray() ?? Array.Empty<BoundAttributeDescriptor>();
+    }
 
-            return _allDiagnostics;
+    internal readonly struct ParsedTypeInformation
+    {
+        public ParsedTypeInformation(bool success, StringSegment @namespace, StringSegment typeName)
+        {
+            Success = success;
+            Namespace = @namespace;
+            TypeName = typeName;
         }
 
-        public override string ToString()
-        {
-            return DisplayName ?? base.ToString();
-        }
-
-        public bool Equals(TagHelperDescriptor other)
-        {
-            return TagHelperDescriptorComparer.Default.Equals(this, other);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as TagHelperDescriptor);
-        }
-
-        public override int GetHashCode()
-        {
-            return TagHelperDescriptorComparer.Default.GetHashCode(this);
-        }
+        public bool Success { get; }
+        public StringSegment Namespace { get; }
+        public StringSegment TypeName { get; }
     }
 }

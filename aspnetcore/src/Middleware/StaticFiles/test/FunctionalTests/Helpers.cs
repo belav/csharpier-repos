@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
@@ -8,13 +8,12 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Microsoft.AspNetCore.StaticFiles
+namespace Microsoft.AspNetCore.StaticFiles;
+
+public static class Helpers
 {
-    public static class Helpers
+    public static string GetAddress(IHost server)
     {
-        public static string GetAddress(IHost server)
-        {
-            return server.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.First();
-        }
+        return server.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.First();
     }
 }

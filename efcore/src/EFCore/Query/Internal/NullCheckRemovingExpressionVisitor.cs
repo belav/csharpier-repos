@@ -1,10 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -40,8 +40,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         protected override Expression VisitConditional(ConditionalExpression conditionalExpression)
         {
-            Check.NotNull(conditionalExpression, nameof(conditionalExpression));
-
             var test = Visit(conditionalExpression.Test);
 
             if (test is BinaryExpression binaryTest
@@ -64,6 +62,20 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 var accessOperation = binaryTest.NodeType == ExpressionType.Equal
                     ? conditionalExpression.IfFalse
                     : conditionalExpression.IfTrue;
+
+                if (accessOperation is UnaryExpression outerUnary
+                    && (outerUnary.NodeType == ExpressionType.Convert
+                        || outerUnary.NodeType == ExpressionType.ConvertChecked)
+                    && accessOperation.Type.IsNullableType()
+                    && accessOperation.Type.UnwrapNullableType() == outerUnary.Operand.Type
+                    && outerUnary.Operand is UnaryExpression innerUnary
+                    && (innerUnary.NodeType == ExpressionType.Convert
+                        || innerUnary.NodeType == ExpressionType.ConvertChecked))
+                {
+                    // If expression is of type Convert(Convert(a, type), type?)
+                    // then we convert it to Convert(a, type?) since a can be nullable after removing check
+                    accessOperation = outerUnary.Update(innerUnary.Operand);
+                }
 
                 if (_nullSafeAccessVerifyingExpressionVisitor.Verify(caller, accessOperation))
                 {
@@ -135,8 +147,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitMember(MemberExpression memberExpression)
             {
-                Check.NotNull(memberExpression, nameof(memberExpression));
-
                 var innerExpression = Visit(memberExpression.Expression);
                 if (innerExpression != null
                     && _nullSafeAccesses.Contains(innerExpression))
@@ -149,8 +159,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitUnary(UnaryExpression unaryExpression)
             {
-                Check.NotNull(unaryExpression, nameof(unaryExpression));
-
                 var operand = Visit(unaryExpression.Operand);
                 if ((unaryExpression.NodeType == ExpressionType.Convert
                         || unaryExpression.NodeType == ExpressionType.ConvertChecked)

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public OwnedQuerySqlServerTest(OwnedQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
             : base(fixture)
         {
-            Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
+            //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
         protected override bool CanExecuteQueryString
@@ -23,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             await base.Query_with_owned_entity_equality_operator(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 CROSS JOIN (
     SELECT [o0].[Id]
@@ -36,7 +36,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o2] ON ([o1].[ClientId] = [o2].[OrderClientId]) AND ([o1].[Id] = [o2].[OrderId])
 ) AS [t0] ON [o].[Id] = [t0].[ClientId]
 WHERE 0 = 1
-ORDER BY [o].[Id], [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [o].[Id], [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Query_for_base_type_loads_all_owned_navs(bool async)
@@ -45,14 +45,14 @@ ORDER BY [o].[Id], [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [
 
             // See issue #10067
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task No_ignored_include_warning_when_implicit_load(bool async)
@@ -69,7 +69,7 @@ FROM [OwnedPerson] AS [o]");
             await base.Query_for_branch_type_loads_all_owned_navs(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -77,7 +77,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[Discriminator] IN (N'Branch', N'LeafA')
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Query_for_branch_type_loads_all_owned_navs_tracking(bool async)
@@ -85,7 +85,7 @@ ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId],
             await base.Query_for_branch_type_loads_all_owned_navs_tracking(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -93,7 +93,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[Discriminator] IN (N'Branch', N'LeafA')
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Query_for_leaf_type_loads_all_owned_navs(bool async)
@@ -101,7 +101,7 @@ ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId],
             await base.Query_for_leaf_type_loads_all_owned_navs(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -109,7 +109,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[Discriminator] = N'LeafA'
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Query_when_subquery(bool async)
@@ -119,7 +119,7 @@ ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId],
             AssertSql(
                 @"@__p_0='5'
 
-SELECT [t0].[Id], [t0].[Discriminator], [t0].[Name], [t0].[PersonAddress_AddressLine], [t0].[PersonAddress_PlaceType], [t0].[PersonAddress_ZipCode], [t0].[PersonAddress_Country_Name], [t0].[PersonAddress_Country_PlanetId], [t0].[BranchAddress_BranchName], [t0].[BranchAddress_PlaceType], [t0].[BranchAddress_Country_Name], [t0].[BranchAddress_Country_PlanetId], [t0].[LeafBAddress_LeafBType], [t0].[LeafBAddress_PlaceType], [t0].[LeafBAddress_Country_Name], [t0].[LeafBAddress_Country_PlanetId], [t0].[LeafAAddress_LeafType], [t0].[LeafAAddress_PlaceType], [t0].[LeafAAddress_Country_Name], [t0].[LeafAAddress_Country_PlanetId], [t1].[ClientId], [t1].[Id], [t1].[OrderDate], [t1].[OrderClientId], [t1].[OrderId], [t1].[Id0], [t1].[Detail]
+SELECT [t0].[Id], [t0].[Discriminator], [t0].[Name], [t1].[ClientId], [t1].[Id], [t1].[OrderDate], [t1].[OrderClientId], [t1].[OrderId], [t1].[Id0], [t1].[Detail], [t0].[PersonAddress_AddressLine], [t0].[PersonAddress_PlaceType], [t0].[PersonAddress_ZipCode], [t0].[PersonAddress_Country_Name], [t0].[PersonAddress_Country_PlanetId], [t0].[BranchAddress_BranchName], [t0].[BranchAddress_PlaceType], [t0].[BranchAddress_Country_Name], [t0].[BranchAddress_Country_PlanetId], [t0].[LeafBAddress_LeafBType], [t0].[LeafBAddress_PlaceType], [t0].[LeafBAddress_Country_Name], [t0].[LeafBAddress_Country_PlanetId], [t0].[LeafAAddress_LeafType], [t0].[LeafAAddress_PlaceType], [t0].[LeafAAddress_Country_Name], [t0].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT TOP(@__p_0) [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
     FROM (
@@ -133,7 +133,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t1] ON [t0].[Id] = [t1].[ClientId]
-ORDER BY [t0].[Id], [t1].[ClientId], [t1].[Id], [t1].[OrderClientId], [t1].[OrderId], [t1].[Id0]");
+ORDER BY [t0].[Id], [t1].[ClientId], [t1].[Id], [t1].[OrderClientId], [t1].[OrderId]");
         }
 
         public override async Task Navigation_rewrite_on_owned_reference_projecting_scalar(bool async)
@@ -151,7 +151,7 @@ WHERE [o].[PersonAddress_Country_Name] = N'USA'");
             await base.Navigation_rewrite_on_owned_reference_projecting_entity(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -159,7 +159,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[PersonAddress_Country_Name] = N'USA'
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Navigation_rewrite_on_owned_collection(bool async)
@@ -178,7 +178,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Order] AS [o0]
     WHERE [o].[Id] = [o0].[ClientId]) > 0
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Navigation_rewrite_on_owned_collection_with_composition(bool async)
@@ -221,7 +221,7 @@ FROM [OwnedPerson] AS [o]");
 FROM [OwnedPerson] AS [o]
 INNER JOIN [Order] AS [o0] ON [o].[Id] = [o0].[ClientId]
 LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
-ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id]");
+ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o1].[OrderClientId], [o1].[OrderId]");
         }
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity(bool async)
@@ -248,7 +248,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE ([p].[Id] <> 42) OR [p].[Id] IS NULL
-ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Project_multiple_owned_navigations(bool async)
@@ -256,7 +256,7 @@ ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].
             await base.Project_multiple_owned_navigations(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [p].[Id], [p].[StarId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [p].[StarId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
 LEFT JOIN (
@@ -264,7 +264,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
-ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Project_multiple_owned_navigations_with_expansion_on_owned_collections(bool async)
@@ -289,7 +289,7 @@ ORDER BY [o].[Id]");
             await base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
 LEFT JOIN (
@@ -298,7 +298,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE ([p].[Id] <> 7) OR [p].[Id] IS NULL
-ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [p].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(bool async)
@@ -320,7 +320,7 @@ LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]");
 FROM [OwnedPerson] AS [o]
 LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
 LEFT JOIN [Moon] AS [m] ON [p].[Id] = [m].[PlanetId]
-ORDER BY [o].[Id], [p].[Id], [m].[Id]");
+ORDER BY [o].[Id], [p].[Id]");
         }
 
         public override async Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(bool async)
@@ -356,7 +356,7 @@ FROM [OwnedPerson] AS [o]
 LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
 LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]
 LEFT JOIN [Element] AS [e] ON [s].[Id] = [e].[StarId]
-ORDER BY [o].[Id], [p].[Id], [s].[Id], [e].[Id]");
+ORDER BY [o].[Id], [p].[Id], [s].[Id]");
         }
 
         public override async Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
@@ -384,7 +384,7 @@ LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
 LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]
 LEFT JOIN [Element] AS [e] ON [s].[Id] = [e].[StarId]
 WHERE [s].[Name] = N'Sol'
-ORDER BY [o].[Id], [p].[Id], [s].[Id], [e].[Id]");
+ORDER BY [o].[Id], [p].[Id], [s].[Id]");
         }
 
         public override async Task Query_with_OfType_eagerly_loads_correct_owned_navigations(bool async)
@@ -392,7 +392,7 @@ ORDER BY [o].[Id], [p].[Id], [s].[Id], [e].[Id]");
             await base.Query_with_OfType_eagerly_loads_correct_owned_navigations(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -400,7 +400,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[Discriminator] = N'LeafA'
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Preserve_includes_when_applying_skip_take_after_anonymous_type_select(bool async)
@@ -414,7 +414,7 @@ FROM [OwnedPerson] AS [o]",
                 @"@__p_1='0'
 @__p_2='100'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -426,7 +426,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Unmapped_property_projection_loads_owned_navigations(bool async)
@@ -434,7 +434,7 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
             await base.Unmapped_property_projection_loads_owned_navigations(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -442,7 +442,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[Id] = 1
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Client_method_skip_loads_owned_navigations(bool async)
@@ -452,7 +452,7 @@ ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId],
             AssertSql(
                 @"@__p_0='1'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -464,7 +464,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Client_method_take_loads_owned_navigations(bool async)
@@ -474,7 +474,7 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
             AssertSql(
                 @"@__p_0='2'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT TOP(@__p_0) [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -485,7 +485,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Client_method_skip_take_loads_owned_navigations(bool async)
@@ -496,7 +496,7 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
                 @"@__p_0='1'
 @__p_1='2'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -508,7 +508,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Client_method_skip_loads_owned_navigations_variation_2(bool async)
@@ -518,7 +518,7 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
             AssertSql(
                 @"@__p_0='1'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -530,7 +530,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Client_method_take_loads_owned_navigations_variation_2(bool async)
@@ -540,7 +540,7 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
             AssertSql(
                 @"@__p_0='2'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT TOP(@__p_0) [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -551,7 +551,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Client_method_skip_take_loads_owned_navigations_variation_2(bool async)
@@ -562,7 +562,7 @@ ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[Order
                 @"@__p_0='1'
 @__p_1='2'
 
-SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail]
+SELECT [t].[Id], [t].[Discriminator], [t].[Name], [t0].[ClientId], [t0].[Id], [t0].[OrderDate], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0], [t0].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
     FROM [OwnedPerson] AS [o]
@@ -574,7 +574,7 @@ LEFT JOIN (
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t0] ON [t].[Id] = [t0].[ClientId]
-ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId], [t0].[Id0]");
+ORDER BY [t].[Id], [t0].[ClientId], [t0].[Id], [t0].[OrderClientId], [t0].[OrderId]");
         }
 
         public override async Task Where_owned_collection_navigation_ToList_Count(bool async)
@@ -590,7 +590,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [OrderDetail] AS [o1]
     WHERE ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])) = 0
-ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id]");
+ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId]");
         }
 
         public override async Task Where_collection_navigation_ToArray_Count(bool async)
@@ -601,12 +601,12 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[Order
                 @"SELECT [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id], [o2].[Detail]
 FROM [OwnedPerson] AS [o]
 INNER JOIN [Order] AS [o0] ON [o].[Id] = [o0].[ClientId]
-LEFT JOIN [OrderDetail] AS [o2] ON (([o0].[ClientId] = [o2].[OrderClientId]) AND ([o0].[Id] = [o2].[OrderId])) AND (([o0].[ClientId] = [o2].[OrderClientId]) AND ([o0].[Id] = [o2].[OrderId]))
+LEFT JOIN [OrderDetail] AS [o2] ON ([o0].[ClientId] = [o2].[OrderClientId]) AND ([o0].[Id] = [o2].[OrderId])
 WHERE (
     SELECT COUNT(*)
     FROM [OrderDetail] AS [o1]
     WHERE ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])) = 0
-ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id]");
+ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId]");
         }
 
         public override async Task Where_collection_navigation_AsEnumerable_Count(bool async)
@@ -622,7 +622,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [OrderDetail] AS [o1]
     WHERE ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])) = 0
-ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id]");
+ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId]");
         }
 
         public override async Task Where_collection_navigation_ToList_Count_member(bool async)
@@ -638,7 +638,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [OrderDetail] AS [o1]
     WHERE ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])) = 0
-ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id]");
+ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId]");
         }
 
         public override async Task Where_collection_navigation_ToArray_Length_member(bool async)
@@ -649,12 +649,12 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[Order
                 @"SELECT [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id], [o2].[Detail]
 FROM [OwnedPerson] AS [o]
 INNER JOIN [Order] AS [o0] ON [o].[Id] = [o0].[ClientId]
-LEFT JOIN [OrderDetail] AS [o2] ON (([o0].[ClientId] = [o2].[OrderClientId]) AND ([o0].[Id] = [o2].[OrderId])) AND (([o0].[ClientId] = [o2].[OrderClientId]) AND ([o0].[Id] = [o2].[OrderId]))
+LEFT JOIN [OrderDetail] AS [o2] ON ([o0].[ClientId] = [o2].[OrderClientId]) AND ([o0].[Id] = [o2].[OrderId])
 WHERE (
     SELECT COUNT(*)
     FROM [OrderDetail] AS [o1]
     WHERE ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])) = 0
-ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId], [o2].[Id]");
+ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[OrderId]");
         }
 
         public override async Task Can_query_on_indexer_properties(bool async)
@@ -662,7 +662,7 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id], [o2].[OrderClientId], [o2].[Order
             await base.Can_query_on_indexer_properties(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
@@ -670,7 +670,7 @@ LEFT JOIN (
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
 WHERE [o].[Name] = N'Mona Cy'
-ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Can_query_on_owned_indexer_properties(bool async)
@@ -734,14 +734,14 @@ FROM [OwnedPerson] AS [o]");
             await base.Can_OrderBy_indexer_properties(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
-ORDER BY [o].[Name], [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[Name], [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Can_OrderBy_indexer_properties_converted(bool async)
@@ -920,16 +920,12 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id]");
             AssertSql(
                 @"@__p_0='5'
 
-SELECT [t0].[Id], [t0].[Discriminator], [t0].[Name], [t0].[PersonAddress_AddressLine], [t0].[PersonAddress_PlaceType], [t0].[PersonAddress_ZipCode], [t0].[PersonAddress_Country_Name], [t0].[PersonAddress_Country_PlanetId], [t0].[BranchAddress_BranchName], [t0].[BranchAddress_PlaceType], [t0].[BranchAddress_Country_Name], [t0].[BranchAddress_Country_PlanetId], [t0].[LeafBAddress_LeafBType], [t0].[LeafBAddress_PlaceType], [t0].[LeafBAddress_Country_Name], [t0].[LeafBAddress_Country_PlanetId], [t0].[LeafAAddress_LeafType], [t0].[LeafAAddress_PlaceType], [t0].[LeafAAddress_Country_Name], [t0].[LeafAAddress_Country_PlanetId]
+SELECT TOP(@__p_0) [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
 FROM (
-    SELECT TOP(@__p_0) [t].[Id], [t].[Discriminator], [t].[Name], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t].[BranchAddress_BranchName], [t].[BranchAddress_PlaceType], [t].[BranchAddress_Country_Name], [t].[BranchAddress_Country_PlanetId], [t].[LeafBAddress_LeafBType], [t].[LeafBAddress_PlaceType], [t].[LeafBAddress_Country_Name], [t].[LeafBAddress_Country_PlanetId], [t].[LeafAAddress_LeafType], [t].[LeafAAddress_PlaceType], [t].[LeafAAddress_Country_Name], [t].[LeafAAddress_Country_PlanetId]
-    FROM (
-        SELECT DISTINCT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
-        FROM [OwnedPerson] AS [o]
-    ) AS [t]
-    ORDER BY [t].[Id]
-) AS [t0]
-ORDER BY [t0].[Id]",
+    SELECT DISTINCT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
+    FROM [OwnedPerson] AS [o]
+) AS [t]
+ORDER BY [t].[Id]",
                 //
                 @"@__p_0='5'
 
@@ -937,7 +933,7 @@ SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [t0].[Id]
 FROM (
     SELECT TOP(@__p_0) [t].[Id]
     FROM (
-        SELECT DISTINCT [o].[Id], [o].[Discriminator], [o].[Name]
+        SELECT DISTINCT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
         FROM [OwnedPerson] AS [o]
     ) AS [t]
     ORDER BY [t].[Id]
@@ -951,7 +947,7 @@ SELECT [o1].[OrderClientId], [o1].[OrderId], [o1].[Id], [o1].[Detail], [t0].[Id]
 FROM (
     SELECT TOP(@__p_0) [t].[Id]
     FROM (
-        SELECT DISTINCT [o].[Id], [o].[Discriminator], [o].[Name]
+        SELECT DISTINCT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
         FROM [OwnedPerson] AS [o]
     ) AS [t]
     ORDER BY [t].[Id]
@@ -966,7 +962,7 @@ ORDER BY [t0].[Id], [o0].[ClientId], [o0].[Id]");
             await base.Project_multiple_owned_navigations_split(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [p].[Id], [p].[StarId]
+                @"SELECT [o].[Id], [p].[Id], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [p].[StarId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
 ORDER BY [o].[Id], [p].[Id]",
@@ -1080,9 +1076,13 @@ ORDER BY [o].[Id], [o0].[ClientId], [o0].[Id]");
 
             AssertSql(
                 @"SELECT AVG(CAST([s].[Id] AS float)) AS [p1], COALESCE(SUM([s].[Id]), 0) AS [p2], MAX(CAST(LEN([s].[Name]) AS int)) AS [p3]
-FROM [OwnedPerson] AS [o]
-LEFT JOIN [Planet] AS [p] ON [o].[PersonAddress_Country_PlanetId] = [p].[Id]
-LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]");
+FROM (
+    SELECT 1 AS [Key], [o].[PersonAddress_Country_PlanetId]
+    FROM [OwnedPerson] AS [o]
+) AS [t]
+LEFT JOIN [Planet] AS [p] ON [t].[PersonAddress_Country_PlanetId] = [p].[Id]
+LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]
+GROUP BY [t].[Key]");
         }
 
         public override async Task Ordering_by_identifying_projection(bool async)
@@ -1090,14 +1090,14 @@ LEFT JOIN [Star] AS [s] ON [p].[StarId] = [s].[Id]");
             await base.Ordering_by_identifying_projection(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail]
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
 FROM [OwnedPerson] AS [o]
 LEFT JOIN (
     SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
     FROM [Order] AS [o0]
     LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
 ) AS [t] ON [o].[Id] = [t].[ClientId]
-ORDER BY [o].[PersonAddress_PlaceType], [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId], [t].[Id0]");
+ORDER BY [o].[PersonAddress_PlaceType], [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         public override async Task Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(bool async)
@@ -1105,52 +1105,60 @@ ORDER BY [o].[PersonAddress_PlaceType], [o].[Id], [t].[ClientId], [t].[Id], [t].
             await base.Using_from_sql_on_owner_generates_join_with_table_for_owned_shared_dependents(async);
 
             AssertSql(
-                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[Id], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[Id1], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t0].[Id], [t0].[BranchAddress_BranchName], [t0].[BranchAddress_PlaceType], [t0].[Id1], [t0].[BranchAddress_Country_Name], [t0].[BranchAddress_Country_PlanetId], [t2].[Id], [t2].[LeafBAddress_LeafBType], [t2].[LeafBAddress_PlaceType], [t2].[Id1], [t2].[LeafBAddress_Country_Name], [t2].[LeafBAddress_Country_PlanetId], [t4].[Id], [t4].[LeafAAddress_LeafType], [t4].[LeafAAddress_PlaceType], [t4].[Id1], [t4].[LeafAAddress_Country_Name], [t4].[LeafAAddress_Country_PlanetId], [t].[Id0], [t0].[Id0], [t2].[Id0], [t4].[Id0], [t6].[ClientId], [t6].[Id], [t6].[OrderDate], [t6].[OrderClientId], [t6].[OrderId], [t6].[Id0], [t6].[Detail]
+                @"SELECT [m].[Id], [m].[Discriminator], [m].[Name], [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t2].[Id], [t2].[Id0], [t4].[Id], [t4].[Id0], [t6].[ClientId], [t6].[Id], [t6].[OrderDate], [t6].[OrderClientId], [t6].[OrderId], [t6].[Id0], [t6].[Detail], [t].[PersonAddress_AddressLine], [t].[PersonAddress_PlaceType], [t].[PersonAddress_ZipCode], [t].[Id1], [t].[PersonAddress_Country_Name], [t].[PersonAddress_Country_PlanetId], [t0].[BranchAddress_BranchName], [t0].[BranchAddress_PlaceType], [t0].[Id1], [t0].[BranchAddress_Country_Name], [t0].[BranchAddress_Country_PlanetId], [t2].[LeafBAddress_LeafBType], [t2].[LeafBAddress_PlaceType], [t2].[Id1], [t2].[LeafBAddress_Country_Name], [t2].[LeafBAddress_Country_PlanetId], [t4].[LeafAAddress_LeafType], [t4].[LeafAAddress_PlaceType], [t4].[Id1], [t4].[LeafAAddress_Country_Name], [t4].[LeafAAddress_Country_PlanetId]
 FROM (
     SELECT * FROM ""OwnedPerson""
-) AS [o]
+) AS [m]
 LEFT JOIN (
-    SELECT [o0].[Id], [o0].[PersonAddress_AddressLine], [o0].[PersonAddress_PlaceType], [o0].[PersonAddress_ZipCode], [o1].[Id] AS [Id0], [o0].[Id] AS [Id1], [o0].[PersonAddress_Country_Name], [o0].[PersonAddress_Country_PlanetId]
-    FROM [OwnedPerson] AS [o0]
-    INNER JOIN [OwnedPerson] AS [o1] ON [o0].[Id] = [o1].[Id]
-    WHERE [o0].[PersonAddress_ZipCode] IS NOT NULL
-) AS [t] ON [o].[Id] = [t].[Id]
+    SELECT [o].[Id], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o0].[Id] AS [Id0], [o].[Id] AS [Id1], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId]
+    FROM [OwnedPerson] AS [o]
+    INNER JOIN [OwnedPerson] AS [o0] ON [o].[Id] = [o0].[Id]
+    WHERE [o].[PersonAddress_ZipCode] IS NOT NULL
+) AS [t] ON [m].[Id] = CASE
+    WHEN [t].[PersonAddress_ZipCode] IS NOT NULL THEN [t].[Id]
+END
 LEFT JOIN (
-    SELECT [o2].[Id], [o2].[BranchAddress_BranchName], [o2].[BranchAddress_PlaceType], [t1].[Id] AS [Id0], [o2].[Id] AS [Id1], [o2].[BranchAddress_Country_Name], [o2].[BranchAddress_Country_PlanetId]
-    FROM [OwnedPerson] AS [o2]
+    SELECT [o1].[Id], [o1].[BranchAddress_BranchName], [o1].[BranchAddress_PlaceType], [t1].[Id] AS [Id0], [o1].[Id] AS [Id1], [o1].[BranchAddress_Country_Name], [o1].[BranchAddress_Country_PlanetId]
+    FROM [OwnedPerson] AS [o1]
     INNER JOIN (
-        SELECT [o3].[Id]
-        FROM [OwnedPerson] AS [o3]
-        WHERE [o3].[Discriminator] IN (N'Branch', N'LeafA')
-    ) AS [t1] ON [o2].[Id] = [t1].[Id]
-    WHERE [o2].[BranchAddress_BranchName] IS NOT NULL
-) AS [t0] ON [o].[Id] = [t0].[Id]
+        SELECT [o2].[Id]
+        FROM [OwnedPerson] AS [o2]
+        WHERE [o2].[Discriminator] IN (N'Branch', N'LeafA')
+    ) AS [t1] ON [o1].[Id] = [t1].[Id]
+    WHERE [o1].[BranchAddress_BranchName] IS NOT NULL
+) AS [t0] ON [m].[Id] = CASE
+    WHEN [t0].[BranchAddress_BranchName] IS NOT NULL THEN [t0].[Id]
+END
 LEFT JOIN (
-    SELECT [o4].[Id], [o4].[LeafBAddress_LeafBType], [o4].[LeafBAddress_PlaceType], [t3].[Id] AS [Id0], [o4].[Id] AS [Id1], [o4].[LeafBAddress_Country_Name], [o4].[LeafBAddress_Country_PlanetId]
-    FROM [OwnedPerson] AS [o4]
+    SELECT [o3].[Id], [o3].[LeafBAddress_LeafBType], [o3].[LeafBAddress_PlaceType], [t3].[Id] AS [Id0], [o3].[Id] AS [Id1], [o3].[LeafBAddress_Country_Name], [o3].[LeafBAddress_Country_PlanetId]
+    FROM [OwnedPerson] AS [o3]
     INNER JOIN (
-        SELECT [o5].[Id]
-        FROM [OwnedPerson] AS [o5]
-        WHERE [o5].[Discriminator] = N'LeafB'
-    ) AS [t3] ON [o4].[Id] = [t3].[Id]
-    WHERE [o4].[LeafBAddress_LeafBType] IS NOT NULL
-) AS [t2] ON [o].[Id] = [t2].[Id]
+        SELECT [o4].[Id]
+        FROM [OwnedPerson] AS [o4]
+        WHERE [o4].[Discriminator] = N'LeafB'
+    ) AS [t3] ON [o3].[Id] = [t3].[Id]
+    WHERE [o3].[LeafBAddress_LeafBType] IS NOT NULL
+) AS [t2] ON [m].[Id] = CASE
+    WHEN [t2].[LeafBAddress_LeafBType] IS NOT NULL THEN [t2].[Id]
+END
 LEFT JOIN (
-    SELECT [o6].[Id], [o6].[LeafAAddress_LeafType], [o6].[LeafAAddress_PlaceType], [t5].[Id] AS [Id0], [o6].[Id] AS [Id1], [o6].[LeafAAddress_Country_Name], [o6].[LeafAAddress_Country_PlanetId]
-    FROM [OwnedPerson] AS [o6]
+    SELECT [o5].[Id], [o5].[LeafAAddress_LeafType], [o5].[LeafAAddress_PlaceType], [t5].[Id] AS [Id0], [o5].[Id] AS [Id1], [o5].[LeafAAddress_Country_Name], [o5].[LeafAAddress_Country_PlanetId]
+    FROM [OwnedPerson] AS [o5]
     INNER JOIN (
-        SELECT [o7].[Id]
-        FROM [OwnedPerson] AS [o7]
-        WHERE [o7].[Discriminator] = N'LeafA'
-    ) AS [t5] ON [o6].[Id] = [t5].[Id]
-    WHERE [o6].[LeafAAddress_LeafType] IS NOT NULL
-) AS [t4] ON [o].[Id] = [t4].[Id]
+        SELECT [o6].[Id]
+        FROM [OwnedPerson] AS [o6]
+        WHERE [o6].[Discriminator] = N'LeafA'
+    ) AS [t5] ON [o5].[Id] = [t5].[Id]
+    WHERE [o5].[LeafAAddress_LeafType] IS NOT NULL
+) AS [t4] ON [m].[Id] = CASE
+    WHEN [t4].[LeafAAddress_LeafType] IS NOT NULL THEN [t4].[Id]
+END
 LEFT JOIN (
-    SELECT [o8].[ClientId], [o8].[Id], [o8].[OrderDate], [o9].[OrderClientId], [o9].[OrderId], [o9].[Id] AS [Id0], [o9].[Detail]
-    FROM [Order] AS [o8]
-    LEFT JOIN [OrderDetail] AS [o9] ON ([o8].[ClientId] = [o9].[OrderClientId]) AND ([o8].[Id] = [o9].[OrderId])
-) AS [t6] ON [o].[Id] = [t6].[ClientId]
-ORDER BY [o].[Id], [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t2].[Id], [t2].[Id0], [t4].[Id], [t4].[Id0], [t6].[ClientId], [t6].[Id], [t6].[OrderClientId], [t6].[OrderId], [t6].[Id0]");
+    SELECT [o7].[ClientId], [o7].[Id], [o7].[OrderDate], [o8].[OrderClientId], [o8].[OrderId], [o8].[Id] AS [Id0], [o8].[Detail]
+    FROM [Order] AS [o7]
+    LEFT JOIN [OrderDetail] AS [o8] ON ([o7].[ClientId] = [o8].[OrderClientId]) AND ([o7].[Id] = [o8].[OrderId])
+) AS [t6] ON [m].[Id] = [t6].[ClientId]
+ORDER BY [m].[Id], [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t2].[Id], [t2].[Id0], [t4].[Id], [t4].[Id0], [t6].[ClientId], [t6].[Id], [t6].[OrderClientId], [t6].[OrderId]");
         }
 
         public override async Task Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(bool async)
@@ -1162,7 +1170,39 @@ ORDER BY [o].[Id], [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t2].[Id], [t2].[
 FROM [Fink] AS [f]
 LEFT JOIN [Barton] AS [b] ON [f].[BartonId] = [b].[Id]
 LEFT JOIN [Planet] AS [p] ON ([b].[Throned_Value] <> [p].[Id]) OR [b].[Throned_Value] IS NULL
-ORDER BY [f].[Id], [b].[Id], [p].[Id]");
+ORDER BY [f].[Id], [b].[Id]");
+        }
+
+        public override async Task Filter_on_indexer_using_closure(bool async)
+        {
+            await base.Filter_on_indexer_using_closure(async);
+
+            AssertSql(
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
+FROM [OwnedPerson] AS [o]
+LEFT JOIN (
+    SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
+    FROM [Order] AS [o0]
+    LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
+) AS [t] ON [o].[Id] = [t].[ClientId]
+WHERE [o].[PersonAddress_ZipCode] = 38654
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
+        }
+
+        public override async Task Filter_on_indexer_using_function_argument(bool async)
+        {
+            await base.Filter_on_indexer_using_function_argument(async);
+
+            AssertSql(
+                @"SELECT [o].[Id], [o].[Discriminator], [o].[Name], [t].[ClientId], [t].[Id], [t].[OrderDate], [t].[OrderClientId], [t].[OrderId], [t].[Id0], [t].[Detail], [o].[PersonAddress_AddressLine], [o].[PersonAddress_PlaceType], [o].[PersonAddress_ZipCode], [o].[PersonAddress_Country_Name], [o].[PersonAddress_Country_PlanetId], [o].[BranchAddress_BranchName], [o].[BranchAddress_PlaceType], [o].[BranchAddress_Country_Name], [o].[BranchAddress_Country_PlanetId], [o].[LeafBAddress_LeafBType], [o].[LeafBAddress_PlaceType], [o].[LeafBAddress_Country_Name], [o].[LeafBAddress_Country_PlanetId], [o].[LeafAAddress_LeafType], [o].[LeafAAddress_PlaceType], [o].[LeafAAddress_Country_Name], [o].[LeafAAddress_Country_PlanetId]
+FROM [OwnedPerson] AS [o]
+LEFT JOIN (
+    SELECT [o0].[ClientId], [o0].[Id], [o0].[OrderDate], [o1].[OrderClientId], [o1].[OrderId], [o1].[Id] AS [Id0], [o1].[Detail]
+    FROM [Order] AS [o0]
+    LEFT JOIN [OrderDetail] AS [o1] ON ([o0].[ClientId] = [o1].[OrderClientId]) AND ([o0].[Id] = [o1].[OrderId])
+) AS [t] ON [o].[Id] = [t].[ClientId]
+WHERE [o].[PersonAddress_ZipCode] = 38654
+ORDER BY [o].[Id], [t].[ClientId], [t].[Id], [t].[OrderClientId], [t].[OrderId]");
         }
 
         private void AssertSql(params string[] expected)

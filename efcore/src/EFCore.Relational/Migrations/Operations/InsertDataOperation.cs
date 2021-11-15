@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using Microsoft.EntityFrameworkCore.Update;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations
@@ -14,6 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
     /// <summary>
     ///     A <see cref="MigrationOperation" /> for inserting seed data into a table.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    /// </remarks>
     [DebuggerDisplay("INSERT INTO {Table}")]
     public class InsertDataOperation : MigrationOperation, ITableMigrationOperation
     {
@@ -46,7 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         /// <summary>
         ///     Generates the commands that correspond to this operation.
         /// </summary>
-        /// <returns> The commands that correspond to this operation. </returns>
+        /// <returns>The commands that correspond to this operation.</returns>
         [Obsolete]
         public virtual IEnumerable<ModificationCommand> GenerateModificationCommands(IModel? model)
         {
@@ -59,18 +63,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
                 ? MigrationsModelDiffer.GetMappedProperties(table, Columns)
                 : null;
 
+            var modificationCommandFactory = new ModificationCommandFactory();
+
             for (var i = 0; i < Values.GetLength(0); i++)
             {
-                var modifications = new ColumnModification[Columns.Length];
+                var modificationCommand = modificationCommandFactory.CreateModificationCommand(
+                    new ModificationCommandParameters(
+                        Table, Schema, sensitiveLoggingEnabled: false));
+
                 for (var j = 0; j < Columns.Length; j++)
                 {
-                    modifications[j] = new ColumnModification(
+                    var columnModificationParameters = new ColumnModificationParameters(
                         Columns[j], originalValue: null, value: Values[i, j], property: properties?[j],
-                        columnType: ColumnTypes?[j], isRead: false, isWrite: true, isKey: true, isCondition: false,
+                        columnType: ColumnTypes?[j], typeMapping: null, read: false, write: true, key: true, condition: false,
                         sensitiveLoggingEnabled: false);
+
+                    modificationCommand.AddColumnModification(columnModificationParameters);
                 }
 
-                yield return new ModificationCommand(Table, Schema, modifications, sensitiveLoggingEnabled: false);
+                yield return (ModificationCommand)modificationCommand;
             }
         }
     }

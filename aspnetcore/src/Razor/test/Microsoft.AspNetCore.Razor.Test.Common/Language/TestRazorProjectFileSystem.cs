@@ -1,47 +1,46 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+internal class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
 {
-    internal class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
+    public static new RazorProjectFileSystem Empty = new TestRazorProjectFileSystem();
+
+    private readonly Dictionary<string, RazorProjectItem> _lookup;
+
+    public TestRazorProjectFileSystem()
+        : this(new RazorProjectItem[0])
     {
-        public new static RazorProjectFileSystem Empty = new TestRazorProjectFileSystem();
+    }
 
-        private readonly Dictionary<string, RazorProjectItem> _lookup;
+    public TestRazorProjectFileSystem(IList<RazorProjectItem> items) : base("/")
+    {
+        _lookup = items.ToDictionary(item => item.FilePath);
+    }
 
-        public TestRazorProjectFileSystem()
-            : this(new RazorProjectItem[0])
+    public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)
+    {
+        throw new NotImplementedException();
+    }
+
+
+    public override RazorProjectItem GetItem(string path)
+    {
+        return GetItem(path, fileKind: null);
+    }
+
+    public override RazorProjectItem GetItem(string path, string fileKind)
+    {
+        if (!_lookup.TryGetValue(path, out var value))
         {
+            value = new NotFoundProjectItem("", path, fileKind);
         }
 
-        public TestRazorProjectFileSystem(IList<RazorProjectItem> items) : base("/")
-        {
-            _lookup = items.ToDictionary(item => item.FilePath);
-        }
-
-        public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public override RazorProjectItem GetItem(string path)
-        {
-            return GetItem(path, fileKind: null);
-        }
-
-        public override RazorProjectItem GetItem(string path, string fileKind)
-        {
-            if (!_lookup.TryGetValue(path, out var value))
-            {
-                value = new NotFoundProjectItem("", path, fileKind);
-            }
-
-            return value;
-        }
+        return value;
     }
 }

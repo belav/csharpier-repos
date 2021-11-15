@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -21,12 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlFragmentExpression" /> class.
         /// </summary>
-        /// <param name="sql"> A string token to print in SQL tree. </param>
+        /// <param name="sql">A string token to print in SQL tree.</param>
         public SqlFragmentExpression(string sql)
             : base(typeof(string), null)
         {
-            Check.NotEmpty(sql, nameof(sql));
-
             Sql = sql;
         }
 
@@ -37,19 +34,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
-        {
-            Check.NotNull(visitor, nameof(visitor));
-
-            return this;
-        }
+            => this;
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
-        {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
-            expressionPrinter.Append(Sql);
-        }
+            => expressionPrinter.Append(Sql);
 
         /// <inheritdoc />
         public override bool Equals(object? obj)

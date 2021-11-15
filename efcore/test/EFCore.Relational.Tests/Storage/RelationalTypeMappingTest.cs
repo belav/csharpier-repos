@@ -1,11 +1,12 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -272,7 +273,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
             Assert.Equal(17, parameter.Value);
-            Assert.Equal(DefaultParameterType, parameter.DbType);
+            Assert.Equal(DbType.Int32, parameter.DbType);
             Assert.False(parameter.IsNullable);
         }
 
@@ -286,7 +287,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
             Assert.Equal(17, parameter.Value);
-            Assert.Equal(DefaultParameterType, parameter.DbType);
+            Assert.Equal(DbType.Int32, parameter.DbType);
             Assert.True(parameter.IsNullable);
         }
 
@@ -406,6 +407,33 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         [ConditionalFact]
+        public virtual void DateOnly_literal_generated_correctly()
+        {
+            Test_GenerateSqlLiteral_helper(
+                new DateOnlyTypeMapping("DateOnly"),
+                new DateOnly(2015, 3, 12),
+                "DATE '2015-03-12'");
+        }
+
+        [ConditionalFact]
+        public virtual void TimeOnly_literal_generated_correctly()
+        {
+            Test_GenerateSqlLiteral_helper(
+                new TimeOnlyTypeMapping("TimeOnly"),
+                new TimeOnly(13, 10, 15),
+                "TIME '13:10:15'");
+        }
+
+        [ConditionalFact]
+        public virtual void TimeOnly_literal_generated_correctly_with_milliseconds()
+        {
+            Test_GenerateSqlLiteral_helper(
+                new TimeOnlyTypeMapping("TimeOnly"),
+                new TimeOnly(13, 10, 15, 500),
+                "TIME '13:10:15.5'");
+        }
+
+        [ConditionalFact]
         public virtual void Decimal_literal_generated_correctly()
         {
             var typeMapping = new DecimalTypeMapping("decimal", DbType.Decimal);
@@ -495,7 +523,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public virtual void String_literal_generated_correctly()
         {
-            Test_GenerateSqlLiteral_helper(new StringTypeMapping("string"), "Text", "'Text'");
+            Test_GenerateSqlLiteral_helper(new StringTypeMapping("string", DbType.String), "Text", "'Text'");
         }
 
         [ConditionalFact]
@@ -552,13 +580,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         [ConditionalFact]
-        public virtual void DateTimeOffset_value_comparer_handles_different_offsets()
+        public virtual void DateTimeOffset_value_comparer_behaves_correctly()
         {
             var typeMapping = new DateTimeOffsetTypeMapping("datetimeoffset", DbType.DateTimeOffset);
 
-            Assert.False(typeMapping.Comparer.Equals(
-                new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)),
-                new DateTimeOffset(2000, 1, 1, 13, 0, 0, TimeSpan.FromHours(1))));
+            var same1 = new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0));
+            var same2 = new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0));
+            var different = new DateTimeOffset(2000, 1, 1, 13, 0, 0, TimeSpan.FromHours(1));
+
+            // Note that a difference in offset results in inequality, unlike the .NET default comparison behavior
+            Assert.False(typeMapping.Comparer.Equals(same1, different));
+            Assert.True(typeMapping.Comparer.Equals(same1, same2));
+
+            var parameters = new[] { Expression.Parameter(typeof(DateTimeOffset)), Expression.Parameter(typeof(DateTimeOffset)) };
+            var equalsBody = typeMapping.Comparer.ExtractEqualsBody(parameters[0], parameters[1]);
+            var equalsComparer = Expression.Lambda<Func<DateTimeOffset, DateTimeOffset, bool>>(equalsBody, parameters).Compile();
+
+            Assert.False(equalsComparer(same1, different));
+            Assert.True(equalsComparer(same1, same2));
         }
 
         [ConditionalFact]
@@ -626,7 +665,5 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected abstract DbContextOptions ContextOptions { get; }
 
         protected abstract DbCommand CreateTestCommand();
-
-        protected abstract DbType DefaultParameterType { get; }
     }
 }

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool IsReadOnly => _isReadOnly;
+        public override bool IsReadOnly
+            => _isReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,9 +121,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static IModel Add(
             IModel model,
-            IRelationalAnnotationProvider? relationalAnnotationProvider)
+            IRelationalAnnotationProvider? relationalAnnotationProvider,
+            bool designTime)
         {
-            model.AddRuntimeAnnotation(RelationalAnnotationNames.RelationalModel, Create(model, relationalAnnotationProvider));
+            model.AddRuntimeAnnotation(RelationalAnnotationNames.RelationalModel, Create(model, relationalAnnotationProvider, designTime));
             return model;
         }
 
@@ -134,7 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static IRelationalModel Create(
             IModel model,
-            IRelationalAnnotationProvider? relationalAnnotationProvider)
+            IRelationalAnnotationProvider? relationalAnnotationProvider,
+            bool designTime)
         {
             var databaseModel = new RelationalModel(model);
 
@@ -162,30 +165,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     foreach (Column column in table.Columns.Values)
                     {
-                        column.AddAnnotations(relationalAnnotationProvider.For(column));
+                        column.AddAnnotations(relationalAnnotationProvider.For(column, designTime));
                     }
 
                     foreach (var constraint in table.UniqueConstraints.Values)
                     {
-                        constraint.AddAnnotations(relationalAnnotationProvider.For(constraint));
+                        constraint.AddAnnotations(relationalAnnotationProvider.For(constraint, designTime));
                     }
 
                     foreach (var index in table.Indexes.Values)
                     {
-                        index.AddAnnotations(relationalAnnotationProvider.For(index));
+                        index.AddAnnotations(relationalAnnotationProvider.For(index, designTime));
                     }
 
                     foreach (var constraint in table.ForeignKeyConstraints.Values)
                     {
-                        constraint.AddAnnotations(relationalAnnotationProvider.For(constraint));
+                        constraint.AddAnnotations(relationalAnnotationProvider.For(constraint, designTime));
                     }
 
-                    foreach (var checkConstraint in ((ITable)table).CheckConstraints)
+                    if (designTime)
                     {
-                        ((AnnotatableBase)checkConstraint).AddAnnotations(relationalAnnotationProvider.For(checkConstraint));
+                        foreach (var checkConstraint in ((ITable)table).CheckConstraints)
+                        {
+                            ((AnnotatableBase)checkConstraint).AddAnnotations(
+                                relationalAnnotationProvider.For(checkConstraint, designTime));
+                        }
                     }
 
-                    table.AddAnnotations(relationalAnnotationProvider.For(table));
+                    table.AddAnnotations(relationalAnnotationProvider.For(table, designTime));
                 }
             }
 
@@ -197,10 +204,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     foreach (ViewColumn viewColumn in view.Columns.Values)
                     {
-                        viewColumn.AddAnnotations(relationalAnnotationProvider.For(viewColumn));
+                        viewColumn.AddAnnotations(relationalAnnotationProvider.For(viewColumn, designTime));
                     }
 
-                    view.AddAnnotations(relationalAnnotationProvider.For(view));
+                    view.AddAnnotations(relationalAnnotationProvider.For(view, designTime));
                 }
             }
 
@@ -210,10 +217,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     foreach (SqlQueryColumn queryColumn in query.Columns.Values)
                     {
-                        queryColumn.AddAnnotations(relationalAnnotationProvider.For(queryColumn));
+                        queryColumn.AddAnnotations(relationalAnnotationProvider.For(queryColumn, designTime));
                     }
 
-                    query.AddAnnotations(relationalAnnotationProvider.For(query));
+                    query.AddAnnotations(relationalAnnotationProvider.For(query, designTime));
                 }
             }
 
@@ -223,10 +230,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     foreach (FunctionColumn functionColumn in function.Columns.Values)
                     {
-                        functionColumn.AddAnnotations(relationalAnnotationProvider.For(functionColumn));
+                        functionColumn.AddAnnotations(relationalAnnotationProvider.For(functionColumn, designTime));
                     }
 
-                    function.AddAnnotations(relationalAnnotationProvider.For(function));
+                    function.AddAnnotations(relationalAnnotationProvider.For(function, designTime));
                 }
             }
 
@@ -234,10 +241,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 foreach (var sequence in ((IRelationalModel)databaseModel).Sequences)
                 {
-                    ((AnnotatableBase)sequence).AddAnnotations(relationalAnnotationProvider.For(sequence));
+                    ((AnnotatableBase)sequence).AddAnnotations(relationalAnnotationProvider.For(sequence, designTime));
                 }
 
-                databaseModel.AddAnnotations(relationalAnnotationProvider.For(databaseModel));
+                databaseModel.AddAnnotations(relationalAnnotationProvider.For(databaseModel, designTime));
             }
 
             databaseModel._isReadOnly = true;
@@ -247,7 +254,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static void AddDefaultMappings(RelationalModel databaseModel, IEntityType entityType)
         {
             var rootType = entityType.GetRootType();
-            var name = rootType.HasSharedClrType ? rootType.Name : rootType.ShortName();
+            var name = rootType.Name;
             if (!databaseModel.DefaultTables.TryGetValue(name, out var defaultTable))
             {
                 defaultTable = new TableBase(name, null, databaseModel);
@@ -337,16 +344,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     {
                         table = new Table(mappedTableName, mappedSchema, databaseModel);
                         databaseModel.Tables.Add((mappedTableName, mappedSchema), table);
-                    }
-
-                    if (mappedType == entityType)
-                    {
-                        Check.DebugAssert(
-                            table.EntityTypeMappings.Count == 0
-                            || table.IsExcludedFromMigrations == entityType.IsTableExcludedFromMigrations(),
-                            "Table should be excluded on all entity types");
-
-                        table.IsExcludedFromMigrations = entityType.IsTableExcludedFromMigrations();
                     }
 
                     var tableMapping = new TableMapping(entityType, table, includesDerivedTypes: mappedType == entityType)
@@ -629,7 +626,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 mappedType = mappedType.BaseType;
 
-                functionMappings = entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings) as List<FunctionMapping>;
+                functionMappings =
+                    entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings) as List<FunctionMapping>;
                 if (functionMappings == null)
                 {
                     functionMappings = new List<FunctionMapping>();
@@ -773,7 +771,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     continue;
                 }
 
-                var entityType = (IEntityType)entityTypeMapping.EntityType;
+                var entityType = entityTypeMapping.EntityType;
                 foreach (var foreignKey in entityType.GetForeignKeys())
                 {
                     var firstPrincipalMapping = true;
@@ -963,7 +961,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             continue;
                         }
 
-                        tableIndex = new TableIndex(name, table, columns, index.GetFilter(storeObject), index.IsUnique);
+                        tableIndex = new TableIndex(name, table, columns, index.IsUnique);
 
                         table.Indexes.Add(name, tableIndex);
                     }
@@ -1073,7 +1071,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ((View)mainMapping.Table).EntityTypeMappings.Add(mainViewMapping);
             }
 
-            Check.DebugAssert(mainMapping is not null,
+            Check.DebugAssert(
+                mainMapping is not null,
                 $"{nameof(mainMapping)} is neither a {nameof(TableMapping)} nor a {nameof(ViewMapping)}");
 
             if (referencingInternalForeignKeyMap != null)
@@ -1132,8 +1131,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 DeleteBehavior.SetNull => ReferentialAction.SetNull,
                 DeleteBehavior.Cascade => ReferentialAction.Cascade,
-                DeleteBehavior.NoAction or DeleteBehavior.ClientNoAction => ReferentialAction.NoAction,
-                DeleteBehavior.Restrict or DeleteBehavior.ClientSetNull or DeleteBehavior.ClientCascade => ReferentialAction.Restrict,
+                DeleteBehavior.NoAction or DeleteBehavior.ClientSetNull or DeleteBehavior.ClientCascade or DeleteBehavior.ClientNoAction =>
+                    ReferentialAction.NoAction,
+                DeleteBehavior.Restrict => ReferentialAction.Restrict,
                 _ => throw new NotSupportedException(deleteBehavior.ToString()),
             };
 
@@ -1145,7 +1145,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IRelationalModel)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IRelationalModel)this).ToDebugString(),
                 () => ((IRelationalModel)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         IEnumerable<ITable> IRelationalModel.Tables

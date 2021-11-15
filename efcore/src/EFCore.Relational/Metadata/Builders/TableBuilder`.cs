@@ -1,17 +1,15 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
-    ///         and it is not designed to be directly constructed in your application code.
-    ///     </para>
+    ///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+    ///     and it is not designed to be directly constructed in your application code.
     /// </summary>
-    /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
+    /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     public class TableBuilder<TEntity> : TableBuilder
         where TEntity : class
     {
@@ -22,7 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public TableBuilder(string name, string? schema, IMutableEntityType entityType)
+        public TableBuilder(string? name, string? schema, IMutableEntityType entityType)
             : base(name, schema, entityType)
         {
         }
@@ -30,8 +28,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Configures the table to be ignored by migrations.
         /// </summary>
-        /// <param name="excluded"> A value indicating whether the table should be managed by migrations. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
+        /// <param name="excluded">A value indicating whether the table should be managed by migrations.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public new virtual TableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
             => (TableBuilder<TEntity>)base.ExcludeFromMigrations(excluded);
     }

@@ -1,44 +1,49 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+internal class DefaultRazorCodeGenerationOptions : RazorCodeGenerationOptions
 {
-    internal class DefaultRazorCodeGenerationOptions : RazorCodeGenerationOptions
+    public DefaultRazorCodeGenerationOptions(
+        bool indentWithTabs,
+        int indentSize,
+        bool designTime,
+        string rootNamespace,
+        bool suppressChecksum,
+        bool suppressMetadataAttributes,
+        bool suppressPrimaryMethodBody,
+        bool suppressNullabilityEnforcement,
+        bool omitMinimizedComponentAttributeValues,
+        bool supportLocalizedComponentNames,
+        bool useEnhancedLinePragma)
     {
-        public DefaultRazorCodeGenerationOptions(
-            bool indentWithTabs,
-            int indentSize, 
-            bool designTime,
-            string rootNamespace,
-            bool suppressChecksum,
-            bool suppressMetadataAttributes,
-            bool suppressPrimaryMethodBody,
-            bool suppressNullabilityEnforcement,
-            bool omitMinimizedComponentAttributeValues)
-        {
-            IndentWithTabs = indentWithTabs;
-            IndentSize = indentSize;
-            DesignTime = designTime;
-            RootNamespace = rootNamespace;
-            SuppressChecksum = suppressChecksum;
-            SuppressMetadataAttributes = suppressMetadataAttributes;
-            SuppressPrimaryMethodBody = suppressPrimaryMethodBody;
-            SuppressNullabilityEnforcement = suppressNullabilityEnforcement;
-            OmitMinimizedComponentAttributeValues = omitMinimizedComponentAttributeValues;
-        }
-
-        public override bool DesignTime { get; }
-
-        public override bool IndentWithTabs { get; }
-
-        public override int IndentSize { get; }
-
-        public override string RootNamespace { get; }
-
-        public override bool SuppressChecksum { get; }
-
-        public override bool SuppressNullabilityEnforcement { get; }
-
-        public override bool OmitMinimizedComponentAttributeValues { get; }
+        IndentWithTabs = indentWithTabs;
+        IndentSize = indentSize;
+        DesignTime = designTime;
+        RootNamespace = rootNamespace;
+        SuppressChecksum = suppressChecksum;
+        SuppressMetadataAttributes = suppressMetadataAttributes;
+        SuppressPrimaryMethodBody = suppressPrimaryMethodBody;
+        SuppressNullabilityEnforcement = suppressNullabilityEnforcement;
+        OmitMinimizedComponentAttributeValues = omitMinimizedComponentAttributeValues;
+        SupportLocalizedComponentNames = supportLocalizedComponentNames;
+        UseEnhancedLinePragma = useEnhancedLinePragma;
     }
+
+    public override bool DesignTime { get; }
+
+    public override bool IndentWithTabs { get; }
+
+    public override int IndentSize { get; }
+
+    public override string RootNamespace { get; }
+
+    public override bool SuppressChecksum { get; }
+
+    public override bool SuppressNullabilityEnforcement { get; }
+
+    public override bool OmitMinimizedComponentAttributeValues { get; }
+
+    public override bool UseEnhancedLinePragma { get; }
 }

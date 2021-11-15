@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Design
 {
@@ -17,25 +17,25 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <summary>
         ///     Invoked when an error is reported.
         /// </summary>
-        /// <param name="message"> The message. </param>
+        /// <param name="message">The message.</param>
         void OnError(string message);
 
         /// <summary>
         ///     Invoked when a warning is reported.
         /// </summary>
-        /// <param name="message"> The message. </param>
+        /// <param name="message">The message.</param>
         void OnWarning(string message);
 
         /// <summary>
         ///     Invoked when information is reported.
         /// </summary>
-        /// <param name="message"> The message. </param>
+        /// <param name="message">The message.</param>
         void OnInformation(string message);
 
         /// <summary>
         ///     Invoked when verbose information is reported.
         /// </summary>
-        /// <param name="message"> The message. </param>
+        /// <param name="message">The message.</param>
         void OnVerbose(string message);
     }
 }

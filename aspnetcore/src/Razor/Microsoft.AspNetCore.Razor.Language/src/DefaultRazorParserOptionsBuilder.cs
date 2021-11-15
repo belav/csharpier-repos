@@ -1,55 +1,54 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+internal class DefaultRazorParserOptionsBuilder : RazorParserOptionsBuilder
 {
-    internal class DefaultRazorParserOptionsBuilder : RazorParserOptionsBuilder
+    private bool _designTime;
+
+    public DefaultRazorParserOptionsBuilder(RazorConfiguration configuration, string fileKind)
     {
-        private bool _designTime;
-
-        public DefaultRazorParserOptionsBuilder(RazorConfiguration configuration, string fileKind)
+        if (configuration == null)
         {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            Configuration = configuration;
-            LanguageVersion = configuration.LanguageVersion;
-            FileKind = fileKind;
+            throw new ArgumentNullException(nameof(configuration));
         }
 
-        public DefaultRazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, string fileKind)
-        {
-            _designTime = designTime;
-            LanguageVersion = version;
-            FileKind = fileKind;
-        }
+        Configuration = configuration;
+        LanguageVersion = configuration.LanguageVersion;
+        FileKind = fileKind;
+    }
 
-        public override RazorConfiguration Configuration { get; }
+    public DefaultRazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, string fileKind)
+    {
+        _designTime = designTime;
+        LanguageVersion = version;
+        FileKind = fileKind;
+    }
 
-        public override bool DesignTime => _designTime;
+    public override RazorConfiguration Configuration { get; }
 
-        public override ICollection<DirectiveDescriptor> Directives { get; } = new List<DirectiveDescriptor>();
+    public override bool DesignTime => _designTime;
 
-        public override string FileKind { get; }
+    public override ICollection<DirectiveDescriptor> Directives { get; } = new List<DirectiveDescriptor>();
 
-        public override bool ParseLeadingDirectives { get; set; }
+    public override string FileKind { get; }
 
-        public override RazorLanguageVersion LanguageVersion { get; }
+    public override bool ParseLeadingDirectives { get; set; }
 
-        public override RazorParserOptions Build()
-        {
-            return new DefaultRazorParserOptions(Directives.ToArray(), DesignTime, ParseLeadingDirectives, LanguageVersion, FileKind ?? FileKinds.Legacy);
-        }
+    public override RazorLanguageVersion LanguageVersion { get; }
 
-        public override void SetDesignTime(bool designTime)
-        {
-            _designTime = designTime;
-        }
+    public override RazorParserOptions Build()
+    {
+        return new DefaultRazorParserOptions(Directives.ToArray(), DesignTime, ParseLeadingDirectives, LanguageVersion, FileKind ?? FileKinds.Legacy);
+    }
+
+    public override void SetDesignTime(bool designTime)
+    {
+        _designTime = designTime;
     }
 }

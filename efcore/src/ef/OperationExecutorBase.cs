@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -23,6 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
         protected string ProjectDirectory { get; }
         protected string RootNamespace { get; }
         protected string? Language { get; }
+        protected bool Nullable { get; }
         protected string[] RemainingArguments { get; }
 
         protected OperationExecutorBase(
@@ -31,6 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? projectDir,
             string? rootNamespace,
             string? language,
+            bool nullable,
             string[] remainingArguments)
         {
             AssemblyFileName = Path.GetFileNameWithoutExtension(assembly);
@@ -44,6 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
             RootNamespace = rootNamespace ?? AssemblyFileName;
             ProjectDirectory = projectDir ?? Directory.GetCurrentDirectory();
             Language = language;
+            Nullable = nullable;
             RemainingArguments = remainingArguments ?? Array.Empty<string>();
 
             Reporter.WriteVerbose(Resources.UsingAssembly(AssemblyFileName));
@@ -136,6 +139,16 @@ namespace Microsoft.EntityFrameworkCore.Tools
 
         public IEnumerable<IDictionary> GetContextTypes()
             => InvokeOperation<IEnumerable<IDictionary>>("GetContextTypes");
+
+        public void OptimizeContext(string? outputDir, string? modelNamespace, string? contextType)
+            => InvokeOperation(
+                "OptimizeContext",
+                new Dictionary<string, object?>
+                {
+                    ["outputDir"] = outputDir,
+                    ["modelNamespace"] = modelNamespace,
+                    ["contextType"] = contextType
+                });
 
         public IDictionary ScaffoldContext(
             string provider,

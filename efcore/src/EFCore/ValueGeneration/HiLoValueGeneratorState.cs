@@ -1,18 +1,20 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration
 {
     /// <summary>
     ///     The thread safe state used by <see cref="HiLoValueGenerator{TValue}" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information.
+    /// </remarks>
     public class HiLoValueGeneratorState : IDisposable
     {
         private readonly SemaphoreSlim _semaphoreSlim = new(1);
@@ -40,15 +42,13 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     Gets a value to be assigned to a property.
         /// </summary>
-        /// <typeparam name="TValue"> The type of values being generated. </typeparam>
+        /// <typeparam name="TValue">The type of values being generated.</typeparam>
         /// <param name="getNewLowValue">
         ///     A function to get the next low value if needed.
         /// </param>
-        /// <returns> The value to be assigned to a property. </returns>
+        /// <returns>The value to be assigned to a property.</returns>
         public virtual TValue Next<TValue>(Func<long> getNewLowValue)
         {
-            Check.NotNull(getNewLowValue, nameof(getNewLowValue));
-
             var newValue = GetNextValue();
 
             // If the chosen value is outside of the current block then we need a new block.
@@ -84,19 +84,17 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     Gets a value to be assigned to a property.
         /// </summary>
-        /// <typeparam name="TValue"> The type of values being generated. </typeparam>
+        /// <typeparam name="TValue">The type of values being generated.</typeparam>
         /// <param name="getNewLowValue">
         ///     A function to get the next low value if needed.
         /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-        /// <returns> The value to be assigned to a property. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <returns>The value to be assigned to a property.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual async ValueTask<TValue> NextAsync<TValue>(
             Func<CancellationToken, Task<long>> getNewLowValue,
             CancellationToken cancellationToken = default)
         {
-            Check.NotNull(getNewLowValue, nameof(getNewLowValue));
-
             var newValue = GetNextValue();
 
             // If the chosen value is outside of the current block then we need a new block.
@@ -165,6 +163,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     Releases the allocated resources for this instance.
         /// </summary>
-        public virtual void Dispose() => _semaphoreSlim.Dispose();
+        public virtual void Dispose()
+            => _semaphoreSlim.Dispose();
     }
 }

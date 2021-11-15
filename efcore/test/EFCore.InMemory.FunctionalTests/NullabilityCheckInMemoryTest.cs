@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.InMemory.Internal;
@@ -28,7 +31,7 @@ namespace Microsoft.EntityFrameworkCore
 
                         var optionsBuilder = new DbContextOptionsBuilder()
                             .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck())
+                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks())
                             .UseInternalServiceProvider(Fixture.ServiceProvider);
 
                         using var context = new DbContext(optionsBuilder.Options);
@@ -50,7 +53,7 @@ namespace Microsoft.EntityFrameworkCore
 
                         var optionsBuilder = new DbContextOptionsBuilder()
                             .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck())
+                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks())
                             .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilitySensitiveCheckProvider)
                             .EnableSensitiveDataLogging();
 
@@ -77,7 +80,7 @@ namespace Microsoft.EntityFrameworkCore
 
                         var optionsBuilder = new DbContextOptionsBuilder()
                             .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck())
+                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks())
                             .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilitySensitiveCheckProvider)
                             .EnableSensitiveDataLogging();
 
@@ -100,7 +103,7 @@ namespace Microsoft.EntityFrameworkCore
 
                         var optionsBuilder = new DbContextOptionsBuilder()
                             .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck())
+                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks())
                             .UseInternalServiceProvider(Fixture.ServiceProvider);
 
                         using var context = new DbContext(optionsBuilder.Options);
@@ -124,7 +127,7 @@ namespace Microsoft.EntityFrameworkCore
 
                         var optionsBuilder = new DbContextOptionsBuilder()
                             .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck())
+                            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks())
                             .UseInternalServiceProvider(Fixture.ServiceProvider);
 
                         using var context = new DbContext(optionsBuilder.Options);
@@ -141,7 +144,7 @@ namespace Microsoft.EntityFrameworkCore
 
             var optionsBuilder = new DbContextOptionsBuilder()
                 .UseModel(modelBuilder.FinalizeModel())
-                .UseInMemoryDatabase(Guid.NewGuid().ToString(), b => b.EnableNullabilityCheck(false))
+                .UseInMemoryDatabase(Guid.NewGuid().ToString(), b => b.EnableNullChecks(false))
                 .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider);
 
             using var context = new DbContext(optionsBuilder.Options);
@@ -159,7 +162,7 @@ namespace Microsoft.EntityFrameworkCore
 
             var optionsBuilder = new DbContextOptionsBuilder()
                 .UseModel(modelBuilder.FinalizeModel())
-                .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck(false))
+                .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks(false))
                 .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider);
 
             using var context = new DbContext(optionsBuilder.Options);
@@ -177,7 +180,7 @@ namespace Microsoft.EntityFrameworkCore
 
             var optionsBuilder = new DbContextOptionsBuilder()
                 .UseModel(modelBuilder.FinalizeModel())
-                .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullabilityCheck(false))
+                .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b => b.EnableNullChecks(false))
                 .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider);
 
             using var context = new DbContext(optionsBuilder.Options);

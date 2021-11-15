@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -52,11 +51,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlBinaryExpression" /> class.
         /// </summary>
-        /// <param name="operatorType"> The operator to apply. </param>
-        /// <param name="left"> An expression which is left operand. </param>
-        /// <param name="right"> An expression which is right operand. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="operatorType">The operator to apply.</param>
+        /// <param name="left">An expression which is left operand.</param>
+        /// <param name="right">An expression which is right operand.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlBinaryExpression(
             ExpressionType operatorType,
             SqlExpression left,
@@ -65,9 +64,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             RelationalTypeMapping? typeMapping)
             : base(type, typeMapping)
         {
-            Check.NotNull(left, nameof(left));
-            Check.NotNull(right, nameof(right));
-
             if (!IsValidOperator(operatorType))
             {
                 throw new InvalidOperationException(
@@ -98,8 +94,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var left = (SqlExpression)visitor.Visit(Left);
             var right = (SqlExpression)visitor.Visit(Right);
 
@@ -110,24 +104,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="left"> The <see cref="Left" /> property of the result. </param>
-        /// <param name="right"> The <see cref="Right" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="left">The <see cref="Left" /> property of the result.</param>
+        /// <param name="right">The <see cref="Right" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual SqlBinaryExpression Update(SqlExpression left, SqlExpression right)
-        {
-            Check.NotNull(left, nameof(left));
-            Check.NotNull(right, nameof(right));
-
-            return left != Left || right != Right
+            => left != Left || right != Right
                 ? new SqlBinaryExpression(OperatorType, left, right, Type, TypeMapping)
                 : this;
-        }
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             var requiresBrackets = RequiresBrackets(Left);
 
             if (requiresBrackets)

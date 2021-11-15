@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Microsoft.EntityFrameworkCore
     {
         private readonly IServiceProvider _serviceProvider = new ServiceCollection()
             .AddEntityFrameworkSqlServer()
-            .BuildServiceProvider();
+            .BuildServiceProvider(validateScopes: true);
 
         [ConditionalFact]
         public void Can_use_SQL_Server_default_values()

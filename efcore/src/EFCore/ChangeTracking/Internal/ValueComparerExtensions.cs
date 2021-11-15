@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -51,16 +51,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private sealed class NonNullNullableValueComparer<T> : ValueComparer<T>
         {
-#pragma warning disable CA1061 // Do not hide base class methods
             public NonNullNullableValueComparer(
-#pragma warning restore CA1061 // Do not hide base class methods
                 LambdaExpression equalsExpression,
                 LambdaExpression hashCodeExpression,
                 LambdaExpression snapshotExpression)
                 : base(
                     (Expression<Func<T?, T?, bool>>)equalsExpression,
                     (Expression<Func<T, int>>)hashCodeExpression,
-                    (Expression<Func<T?, T?>>)snapshotExpression)
+                    (Expression<Func<T, T>>)snapshotExpression)
             {
             }
         }

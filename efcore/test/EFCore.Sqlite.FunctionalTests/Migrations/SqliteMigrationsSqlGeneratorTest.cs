@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -1025,6 +1025,44 @@ DROP TABLE ""Blog"";
 GO
 
 ALTER TABLE ""ef_temp_Blog"" RENAME TO ""Blog"";
+GO
+
+PRAGMA foreign_keys = 1;
+");
+        }
+
+        [ConditionalFact]
+        public virtual void Rebuild_preserves_column_order()
+        {
+            Generate(
+                modelBuilder => modelBuilder.Entity(
+                    "Ordinal",
+                    e =>
+                    {
+                        e.Property<string>("B").HasColumnOrder(0);
+                        e.Property<string>("A").HasColumnOrder(1);
+                    }),
+                migrationBuilder => migrationBuilder.DropColumn(name: "C", table: "Ordinal"));
+
+            AssertSql(
+                @"CREATE TABLE ""ef_temp_Ordinal"" (
+    ""B"" TEXT NULL,
+    ""A"" TEXT NULL
+);
+GO
+
+INSERT INTO ""ef_temp_Ordinal"" (""A"", ""B"")
+SELECT ""A"", ""B""
+FROM ""Ordinal"";
+GO
+
+PRAGMA foreign_keys = 0;
+GO
+
+DROP TABLE ""Ordinal"";
+GO
+
+ALTER TABLE ""ef_temp_Ordinal"" RENAME TO ""Ordinal"";
 GO
 
 PRAGMA foreign_keys = 1;

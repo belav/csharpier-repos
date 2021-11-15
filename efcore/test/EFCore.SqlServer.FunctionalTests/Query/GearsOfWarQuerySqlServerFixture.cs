@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -17,13 +17,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             modelBuilder.Entity<City>().Property(g => g.Location).HasColumnType("varchar(100)");
 
-            // Full-text binary search
-            modelBuilder.Entity<Mission>()
-                .Property<byte[]>("BriefingDocument");
+            modelBuilder.Entity<Mission>(
+                b =>
+                {
+                    // Full-text binary search
+                    b.Property<byte[]>("BriefingDocument");
+                    b.Property<string>("BriefingDocumentFileExtension").HasColumnType("nvarchar(16)");
+                });
 
-            modelBuilder.Entity<Mission>()
-                .Property<string>("BriefingDocumentFileExtension")
-                .HasColumnType("nvarchar(16)");
+            // No support yet for DateOnly/TimeOnly (#24507)
+            modelBuilder.Entity<Mission>(
+                b =>
+                {
+                    b.Ignore(m => m.Date);
+                    b.Ignore(m => m.Time);
+                });
         }
 
         protected override void Seed(GearsOfWarContext context)

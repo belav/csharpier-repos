@@ -1,31 +1,30 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.AspNetCore.Razor.Language;
 
-namespace Microsoft.CodeAnalysis.Razor
+namespace Microsoft.CodeAnalysis.Razor;
+
+public static class TagHelperDescriptorProviderContextExtensions
 {
-    public static class TagHelperDescriptorProviderContextExtensions
+    public static Compilation GetCompilation(this TagHelperDescriptorProviderContext context)
     {
-        public static Compilation GetCompilation(this TagHelperDescriptorProviderContext context)
+        if (context == null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            return (Compilation)context.Items[typeof(Compilation)];
+            throw new ArgumentNullException(nameof(context));
         }
 
-        public static void SetCompilation(this TagHelperDescriptorProviderContext context, Compilation compilation)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+        return (Compilation)context.Items[typeof(Compilation)];
+    }
 
-            context.Items[typeof(Compilation)] = compilation;
+    public static void SetCompilation(this TagHelperDescriptorProviderContext context, Compilation compilation)
+    {
+        if (context == null)
+        {
+            throw new ArgumentNullException(nameof(context));
         }
+
+        context.Items[typeof(Compilation)] = compilation;
     }
 }

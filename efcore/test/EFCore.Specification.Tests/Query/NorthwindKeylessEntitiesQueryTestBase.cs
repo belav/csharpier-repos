@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -82,7 +82,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss => ss.Set<OrderQuery>().Where(ov => ov.CustomerID == "ALFKI"));
         }
 
-        [ConditionalTheory(Skip = "Issue#21828")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task KeylessEntity_with_defining_query_and_correlated_collection(bool async)
         {
@@ -122,7 +122,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 1);
         }
 
-        [ConditionalTheory(Skip = "Issue#21828")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task KeylessEntity_with_included_navs_multi_level(bool async)
         {

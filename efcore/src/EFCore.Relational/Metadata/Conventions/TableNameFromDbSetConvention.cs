@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the table name based on the <see cref="DbSet{TEntity}" /> property name.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class TableNameFromDbSetConvention : IEntityTypeAddedConvention, IEntityTypeBaseTypeChangedConvention, IModelFinalizingConvention
     {
         private readonly IDictionary<Type, string> _sets;
@@ -18,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="TableNameFromDbSetConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
+        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public TableNameFromDbSetConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies)
@@ -52,20 +55,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             Dependencies = dependencies;
+            RelationalDependencies = relationalDependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
         /// <summary>
+        ///     Relational provider-specific dependencies for this service.
+        /// </summary>
+        protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
+
+        /// <summary>
         ///     Called after the base type of an entity type changes.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="newBaseType"> The new base entity type. </param>
-        /// <param name="oldBaseType"> The old base entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="newBaseType">The new base entity type.</param>
+        /// <param name="oldBaseType">The old base entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeBaseTypeChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
@@ -91,8 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after an entity type is added to the model.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context)

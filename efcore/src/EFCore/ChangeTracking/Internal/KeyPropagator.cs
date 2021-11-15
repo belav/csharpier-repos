@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,23 +8,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class KeyPropagator : IKeyPropagator
     {
@@ -59,7 +50,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 && property.IsKey()
                 && !property.IsForeignKeyToSelf())
             {
-                var valueGenerator = TryGetValueGenerator(generationProperty);
+                var valueGenerator = TryGetValueGenerator(
+                    generationProperty,
+                    generationProperty == property
+                        ? entry.EntityType
+                        : generationProperty?.DeclaringEntityType);
+
                 if (valueGenerator != null)
                 {
                     var value = valueGenerator.Next(new EntityEntry(entry));
@@ -73,7 +69,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         entry[property] = value;
                     }
 
-                    entry.MarkUnknown(property);
+                    if (!valueGenerator.GeneratesStableValues)
+                    {
+                        entry.MarkUnknown(property);
+                    }
                 }
             }
 
@@ -99,7 +98,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (principalEntry == null
                 && property.IsKey())
             {
-                var valueGenerator = TryGetValueGenerator(generationProperty);
+                var valueGenerator = TryGetValueGenerator(
+                    generationProperty,
+                    generationProperty == property
+                        ? entry.EntityType
+                        : generationProperty?.DeclaringEntityType);
+
                 if (valueGenerator != null)
                 {
                     var value = await valueGenerator.NextAsync(new EntityEntry(entry), cancellationToken)
@@ -114,7 +118,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         entry[property] = value;
                     }
 
-                    entry.MarkUnknown(property);
+                    if (!valueGenerator.GeneratesStableValues)
+                    {
+                        entry.MarkUnknown(property);
+                    }
                 }
             }
 
@@ -162,14 +169,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 if (generationProperty == null
                                     || !principalProperty.ClrType.IsDefaultValue(principalValue))
                                 {
-                                    if (principalEntry.HasTemporaryValue(principalProperty))
-                                    {
-                                        entry.SetTemporaryValue(property, principalValue);
-                                    }
-                                    else
-                                    {
-                                        entry[property] = principalValue;
-                                    }
+                                    entry.PropagateValue(principalEntry, principalProperty, property);
 
                                     return principalEntry;
                                 }
@@ -184,9 +184,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return null;
         }
 
-        private ValueGenerator? TryGetValueGenerator(IProperty? generationProperty)
+        private ValueGenerator? TryGetValueGenerator(IProperty? generationProperty, IEntityType? entityType)
             => generationProperty != null
-                ? _valueGeneratorSelector.Select(generationProperty, generationProperty.DeclaringEntityType)
+                ? _valueGeneratorSelector.Select(generationProperty, entityType!)
                 : null;
     }
 }

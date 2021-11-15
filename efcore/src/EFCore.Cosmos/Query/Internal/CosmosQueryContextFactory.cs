@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 {
@@ -15,7 +14,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     /// </summary>
     public class CosmosQueryContextFactory : IQueryContextFactory
     {
-        private readonly QueryContextDependencies _dependencies;
         private readonly ICosmosClientWrapper _cosmosClient;
 
         /// <summary>
@@ -28,12 +26,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             QueryContextDependencies dependencies,
             ICosmosClientWrapper cosmosClient)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-            Check.NotNull(cosmosClient, nameof(cosmosClient));
-
-            _dependencies = dependencies;
+            Dependencies = dependencies;
             _cosmosClient = cosmosClient;
         }
+
+        /// <summary>
+        ///     Dependencies for this service.
+        /// </summary>
+        protected virtual QueryContextDependencies Dependencies { get; }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,6 +42,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual QueryContext Create()
-            => new CosmosQueryContext(_dependencies, _cosmosClient);
+            => new CosmosQueryContext(Dependencies, _cosmosClient);
     }
 }

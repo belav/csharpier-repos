@@ -1,30 +1,29 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+internal class DefaultRazorOptimizationPhase : RazorEnginePhaseBase, IRazorOptimizationPhase
 {
-    internal class DefaultRazorOptimizationPhase : RazorEnginePhaseBase, IRazorOptimizationPhase
+    public IRazorOptimizationPass[] Passes { get; private set; }
+
+    protected override void OnIntialized()
     {
-        public IRazorOptimizationPass[] Passes { get; private set; }
+        Passes = Engine.Features.OfType<IRazorOptimizationPass>().OrderBy(p => p.Order).ToArray();
+    }
 
-        protected override void OnIntialized()
+    protected override void ExecuteCore(RazorCodeDocument codeDocument)
+    {
+        var documentNode = codeDocument.GetDocumentIntermediateNode();
+        ThrowForMissingDocumentDependency(documentNode);
+
+        foreach (var pass in Passes)
         {
-            Passes = Engine.Features.OfType<IRazorOptimizationPass>().OrderBy(p => p.Order).ToArray();
+            pass.Execute(codeDocument, documentNode);
         }
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument)
-        {
-            var documentNode = codeDocument.GetDocumentIntermediateNode();
-            ThrowForMissingDocumentDependency(documentNode);
-
-            foreach (var pass in Passes)
-            {
-                pass.Execute(codeDocument, documentNode);
-            }
-
-            codeDocument.SetDocumentIntermediateNode(documentNode);
-        }
+        codeDocument.SetDocumentIntermediateNode(documentNode);
     }
 }

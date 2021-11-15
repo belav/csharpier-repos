@@ -1,8 +1,7 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data.Common;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage.Internal
 {
@@ -27,9 +26,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             bool? nullable)
             : base(invariantName)
         {
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(relationalTypeMapping, nameof(relationalTypeMapping));
-
             Name = name;
             RelationalTypeMapping = relationalTypeMapping;
             IsNullable = nullable;
@@ -56,13 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override void AddDbParameter(DbCommand command, object? value)
-        {
-            Check.NotNull(command, nameof(command));
-
-            command.Parameters
+            => command.Parameters
                 .Add(
                     RelationalTypeMapping
                         .CreateParameter(command, Name, value, IsNullable));
-        }
     }
 }

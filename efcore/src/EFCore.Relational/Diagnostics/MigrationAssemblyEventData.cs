@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -11,15 +11,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     The <see cref="DiagnosticSource" /> event payload for
     ///     <see cref="RelationalEventId" /> migrations assembly events.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    /// </remarks>
     public class MigrationAssemblyEventData : MigratorEventData
     {
         /// <summary>
         ///     Constructs the event payload.
         /// </summary>
-        /// <param name="eventDefinition"> The event definition. </param>
-        /// <param name="messageGenerator"> A delegate that generates a log message for this event. </param>
-        /// <param name="migrator"> The <see cref="IMigrator" /> in use. </param>
-        /// <param name="migrationsAssembly"> The <see cref="IMigrationsAssembly" /> in use. </param>
+        /// <param name="eventDefinition">The event definition.</param>
+        /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
+        /// <param name="migrator">The <see cref="IMigrator" /> in use.</param>
+        /// <param name="migrationsAssembly">The <see cref="IMigrationsAssembly" /> in use.</param>
         public MigrationAssemblyEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,

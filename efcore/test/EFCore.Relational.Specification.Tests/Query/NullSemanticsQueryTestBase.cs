@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -929,11 +929,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Projecting_nullable_bool_with_coalesce_nested(bool async)
+        public virtual async Task Projecting_nullable_bool_with_coalesce_nested(bool async)
         {
-            return AssertQuery(
+            await AssertQuery(
                 async,
                 ss => ss.Set<NullSemanticsEntity1>().Select(e => new { e.Id, Coalesce = e.NullableBoolA ?? (e.NullableBoolB ?? false) }),
+                elementSorter: e => e.Id,
+                elementAsserter: (e, a) =>
+                {
+                    Assert.Equal(e.Id, a.Id);
+                    Assert.Equal(e.Coalesce, a.Coalesce);
+                });
+
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Select(e => new { e.Id, Coalesce = (e.NullableBoolA ?? e.NullableBoolB) ?? false }),
                 elementSorter: e => e.Id,
                 elementAsserter: (e, a) =>
                 {
@@ -1548,6 +1558,101 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Bool_equal_nullable_bool_HasValue(bool async)
+        {
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => true == e.NullableBoolA.HasValue));
+
+            var prm = false;
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => prm == e.NullableBoolA.HasValue));
+
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => e.BoolB == e.NullableBoolA.HasValue));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Bool_equal_nullable_bool_compared_to_null(bool async)
+        {
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => true == (e.NullableBoolA == null)));
+
+            var prm = false;
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => prm == (e.NullableBoolA != null)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Bool_not_equal_nullable_bool_HasValue(bool async)
+        {
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => true != e.NullableBoolA.HasValue));
+
+            var prm = false;
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => prm != e.NullableBoolA.HasValue));
+
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => e.BoolB != e.NullableBoolA.HasValue));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Bool_not_equal_nullable_bool_compared_to_null(bool async)
+        {
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => true != (e.NullableBoolA == null)));
+
+            var prm = false;
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => prm != (e.NullableBoolA != null)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Bool_logical_operation_with_nullable_bool_HasValue(bool async)
+        {
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => true || e.NullableBoolA.HasValue));
+
+            var prm = false;
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => prm && e.NullableBoolA.HasValue));
+
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => e.BoolB | e.NullableBoolA.HasValue));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Comparison_compared_to_null_check_on_bool(bool async)
+        {
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => (e.IntA == e.IntB) != e.NullableBoolA.HasValue));
+
+            await AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => (e.IntA != e.IntB) == (e.NullableBoolA != null)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
         public virtual async Task Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(bool async)
         {
             var ctx = CreateContext(useRelationalNulls: true);
@@ -1659,6 +1764,155 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var result = async ? await query.ToListAsync() : query.ToList();
             Assert.Equal(expected.Count, result.Count);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_simple(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => !(x.NullableStringA == null || x.NullableStringA != "Foo")));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_negative(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => !(x.NullableStringA == null && x.NullableStringA != "Foo")));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_nested(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => x.NullableStringA == null
+                    || x.NullableStringB == null
+                    || x.NullableStringA != x.NullableStringB));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_intersection(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => (x.NullableStringA == null
+                    && (x.StringA == "Foo" || x.NullableStringA == null || x.NullableStringB == null))
+                    || x.NullableStringA != x.NullableStringB));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_conditional(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => x.NullableStringA == null
+                    ? x.NullableStringA != x.NullableStringB
+                    : x.NullableStringA != x.NullableStringC));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_conditional_multiple(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => x.NullableStringA == null || x.NullableStringB == null
+                    ? x.NullableStringA == x.NullableStringB
+                    : x.NullableStringA != x.NullableStringB));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_conditional_negative(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => (x.NullableStringA == null || x.NullableStringB == null) && x.NullableBoolC == null
+                    ? x.NullableStringA == x.NullableStringB
+                    : x.NullableStringA != x.NullableStringB));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_conditional_with_setup(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => x.NullableBoolA == null
+                    || (x.NullableBoolB == null
+                        ? x.NullableBoolB != x.NullableBoolA
+                        : x.NullableBoolA != x.NullableBoolB)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Is_null_on_column_followed_by_OrElse_optimizes_nullability_conditional_nested(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(x => x.NullableBoolA == null
+                    ? x.BoolA == x.BoolB
+                    : (x.NullableBoolC == null
+                        ? x.NullableBoolA != x.NullableBoolC
+                        : x.NullableBoolC != x.NullableBoolA)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Sum_function_is_always_considered_non_nullable(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().GroupBy(e => e.NullableIntA).Select(g => new { g.Key, Sum = g.Sum(x => x.IntA) != g.Key }));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Nullability_is_computed_correctly_for_chained_coalesce(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => (e.NullableIntA ?? e.NullableIntB ?? e.IntC) != e.NullableIntC));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Nullability_check_is_computed_correctly_for_chained_coalesce(bool async)
+        {
+            await AssertQueryScalar(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => (e.NullableIntA ?? e.NullableIntB ?? e.NullableIntC) == null).Select(e => e.Id));
+
+            await AssertQueryScalar(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Where(e => (e.NullableIntA ?? e.NullableIntB ?? e.NullableIntC) != null).Select(e => e.Id));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Coalesce_on_self_gets_simplified(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<NullSemanticsEntity1>().Select(e => e.NullableStringA ?? e.NullableStringA));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Coalesce_deeply_nested(bool async)
+        {
+            return AssertQueryScalar(
+                async,
+                ss => from e1 in ss.Set<NullSemanticsEntity1>()
+                      join e2 in ss.Set<NullSemanticsEntity2>() on e1.Id equals e2.Id
+                      select (e1.NullableIntA ?? (e1.NullableIntB ?? (e2.NullableIntC ?? e2.NullableIntB))) ?? e1.NullableIntC ?? (e2.NullableIntA ?? e2.NullableIntC ?? e1.NullableIntA));
         }
 
         private string NormalizeDelimitersInRawString(string sql)

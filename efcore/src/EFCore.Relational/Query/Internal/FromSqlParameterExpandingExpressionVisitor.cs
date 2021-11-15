@@ -1,11 +1,13 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -32,6 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         private IReadOnlyDictionary<string, object?> _parametersValues;
         private ParameterNameGenerator _parameterNameGenerator;
         private bool _canCache;
+        private SelectExpression _selectExpression;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,14 +45,20 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public FromSqlParameterExpandingExpressionVisitor(
             RelationalParameterBasedSqlProcessorDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
+            Dependencies = dependencies;
 
             _sqlExpressionFactory = dependencies.SqlExpressionFactory;
             _typeMappingSource = dependencies.TypeMappingSource;
             _parameterNameGeneratorFactory = dependencies.ParameterNameGeneratorFactory;
             _parametersValues = default!;
             _parameterNameGenerator = default!;
+            _selectExpression = default!;
         }
+
+        /// <summary>
+        ///     Relational provider-specific dependencies for this service.
+        /// </summary>
+        protected virtual RelationalParameterBasedSqlProcessorDependencies Dependencies { get; }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,13 +71,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IReadOnlyDictionary<string, object?> parameterValues,
             out bool canCache)
         {
-            Check.NotNull(selectExpression, nameof(selectExpression));
-            Check.NotNull(parameterValues, nameof(parameterValues));
-
             _visitedFromSqlExpressions.Clear();
             _parameterNameGenerator = _parameterNameGeneratorFactory.Create();
             _parametersValues = parameterValues;
             _canCache = true;
+            _selectExpression = selectExpression;
 
             var result = (SelectExpression)Visit(selectExpression);
             canCache = _canCache;
@@ -85,94 +92,134 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         [return: NotNullIfNotNull("expression")]
         public override Expression? Visit(Expression? expression)
         {
-            if (expression is FromSqlExpression fromSql)
+            if (expression is not FromSqlExpression fromSql)
             {
-                if (!_visitedFromSqlExpressions.TryGetValue(fromSql, out var updatedFromSql))
-                {
-                    switch (fromSql.Arguments)
-                    {
-                        case ParameterExpression parameterExpression:
-                            // parameter value will never be null. It could be empty object[]
-                            var parameterValues = (object[])_parametersValues[parameterExpression.Name!]!;
-                            _canCache = false;
-
-                            var subParameters = new List<IRelationalParameter>(parameterValues.Length);
-                            // ReSharper disable once ForCanBeConvertedToForeach
-                            for (var i = 0; i < parameterValues.Length; i++)
-                            {
-                                var parameterName = _parameterNameGenerator.GenerateNext();
-                                if (parameterValues[i] is DbParameter dbParameter)
-                                {
-                                    if (string.IsNullOrEmpty(dbParameter.ParameterName))
-                                    {
-                                        dbParameter.ParameterName = parameterName;
-                                    }
-                                    else
-                                    {
-                                        parameterName = dbParameter.ParameterName;
-                                    }
-
-                                    subParameters.Add(new RawRelationalParameter(parameterName, dbParameter));
-                                }
-                                else
-                                {
-                                    subParameters.Add(
-                                        new TypeMappedRelationalParameter(
-                                            parameterName,
-                                            parameterName,
-                                            _typeMappingSource.GetMappingForValue(parameterValues[i]),
-                                            parameterValues[i]?.GetType().IsNullableType()));
-                                }
-                            }
-
-                            updatedFromSql = fromSql.Update(
-                                Expression.Constant(new CompositeRelationalParameter(parameterExpression.Name!, subParameters)));
-
-                            _visitedFromSqlExpressions[fromSql] = updatedFromSql;
-                            break;
-
-                        case ConstantExpression constantExpression:
-                            var existingValues = constantExpression.GetConstantValue<object?[]>();
-                            var constantValues = new object?[existingValues.Length];
-                            for (var i = 0; i < existingValues.Length; i++)
-                            {
-                                var value = existingValues[i];
-                                if (value is DbParameter dbParameter)
-                                {
-                                    var parameterName = _parameterNameGenerator.GenerateNext();
-                                    if (string.IsNullOrEmpty(dbParameter.ParameterName))
-                                    {
-                                        dbParameter.ParameterName = parameterName;
-                                    }
-                                    else
-                                    {
-                                        parameterName = dbParameter.ParameterName;
-                                    }
-
-                                    constantValues[i] = new RawRelationalParameter(parameterName, dbParameter);
-                                }
-                                else
-                                {
-                                    constantValues[i] = _sqlExpressionFactory.Constant(
-                                        value, _typeMappingSource.GetMappingForValue(value));
-                                }
-                            }
-
-                            updatedFromSql = fromSql.Update(Expression.Constant(constantValues, typeof(object?[])));
-
-                            _visitedFromSqlExpressions[fromSql] = updatedFromSql;
-                            break;
-
-                        default:
-                            Check.DebugAssert(false, "FromSql.Arguments must be Constant/ParameterExpression");
-                            break;
-                    }
-                }
-
-                return updatedFromSql;
+                return base.Visit(expression);
             }
 
-            return base.Visit(expression);
+            if (_visitedFromSqlExpressions.TryGetValue(fromSql, out var visitedFromSql))
+            {
+                return visitedFromSql;
+            }
+
+            switch (fromSql.Arguments)
+            {
+                case ParameterExpression parameterExpression:
+                    // parameter value will never be null. It could be empty object[]
+                    var parameterValues = (object[])_parametersValues[parameterExpression.Name!]!;
+                    _canCache = false;
+
+                    var subParameters = new List<IRelationalParameter>(parameterValues.Length);
+                    // ReSharper disable once ForCanBeConvertedToForeach
+                    for (var i = 0; i < parameterValues.Length; i++)
+                    {
+                        var parameterName = _parameterNameGenerator.GenerateNext();
+                        if (parameterValues[i] is DbParameter dbParameter)
+                        {
+                            if (string.IsNullOrEmpty(dbParameter.ParameterName))
+                            {
+                                dbParameter.ParameterName = parameterName;
+                            }
+                            else
+                            {
+                                parameterName = dbParameter.ParameterName;
+                            }
+
+                            subParameters.Add(new RawRelationalParameter(parameterName, dbParameter));
+                        }
+                        else
+                        {
+                            subParameters.Add(
+                                new TypeMappedRelationalParameter(
+                                    parameterName,
+                                    parameterName,
+                                    _typeMappingSource.GetMappingForValue(parameterValues[i]),
+                                    parameterValues[i]?.GetType().IsNullableType()));
+                        }
+                    }
+
+                    return _visitedFromSqlExpressions[fromSql] = fromSql.Update(
+                        Expression.Constant(new CompositeRelationalParameter(parameterExpression.Name!, subParameters)));
+
+                case ConstantExpression constantExpression:
+                    if (constantExpression.Value is not object?[]
+                        && new FromSqlInExistVerifyingExpressionVisitor(fromSql).Verify(_selectExpression))
+                    {
+                        throw new InvalidOperationException(RelationalStrings.QueryFromSqlInsideExists);
+                    }
+
+                    var existingValues = constantExpression.GetConstantValue<object?[]>();
+                    var constantValues = new object?[existingValues.Length];
+                    for (var i = 0; i < existingValues.Length; i++)
+                    {
+                        var value = existingValues[i];
+                        if (value is DbParameter dbParameter)
+                        {
+                            var parameterName = _parameterNameGenerator.GenerateNext();
+                            if (string.IsNullOrEmpty(dbParameter.ParameterName))
+                            {
+                                dbParameter.ParameterName = parameterName;
+                            }
+                            else
+                            {
+                                parameterName = dbParameter.ParameterName;
+                            }
+
+                            constantValues[i] = new RawRelationalParameter(parameterName, dbParameter);
+                        }
+                        else
+                        {
+                            constantValues[i] = _sqlExpressionFactory.Constant(
+                                value, _typeMappingSource.GetMappingForValue(value));
+                        }
+                    }
+
+                    return _visitedFromSqlExpressions[fromSql] = fromSql.Update(Expression.Constant(constantValues, typeof(object[])));
+
+
+                default:
+                    Check.DebugAssert(false, "FromSql.Arguments must be Constant/ParameterExpression");
+                    return null;
+            }
+        }
+
+        private sealed class FromSqlInExistVerifyingExpressionVisitor : ExpressionVisitor
+        {
+            private readonly FromSqlExpression _mutatedExpression;
+            private bool _faulty;
+
+            public FromSqlInExistVerifyingExpressionVisitor(FromSqlExpression mutatedExpression)
+            {
+                _mutatedExpression = mutatedExpression;
+            }
+
+            public bool Verify(SelectExpression selectExpression)
+            {
+                _faulty = false;
+
+                Visit(selectExpression);
+
+                return _faulty;
+            }
+
+            [return: NotNullIfNotNull("expression")]
+            public override Expression? Visit(Expression? expression)
+            {
+                if (_faulty)
+                {
+                    return expression;
+                }
+
+                if (expression is ExistsExpression existsExpression
+                    && existsExpression.Subquery.Tables.Contains(_mutatedExpression, ReferenceEqualityComparer.Instance))
+                {
+                    _faulty = true;
+
+                    return expression;
+                }
+
+                return base.Visit(expression);
+            }
         }
     }
 }

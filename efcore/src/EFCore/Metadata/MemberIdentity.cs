@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// <summary>
     ///     Represents the identity of an entity type member, can be based on <see cref="MemberInfo" /> or just the name.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay(),nq}")]
     public readonly struct MemberIdentity : IEquatable<MemberIdentity>
     {
@@ -20,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Constructs a new <see cref="MemberIdentity" /> from the given member name.
         /// </summary>
-        /// <param name="name"> The member name. </param>
+        /// <param name="name">The member name.</param>
         [DebuggerStepThrough]
         public MemberIdentity(string name)
             : this((object)name)
@@ -30,7 +33,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Constructs a new <see cref="MemberIdentity" /> from the given <see cref="MemberInfo" />.
         /// </summary>
-        /// <param name="memberInfo"> The member. </param>
+        /// <param name="memberInfo">The member.</param>
         [DebuggerStepThrough]
         public MemberIdentity(MemberInfo memberInfo)
             : this((object)memberInfo)
@@ -46,7 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Checks if the identity is empty, as opposed to representing a member.
         /// </summary>
-        /// <returns> <see langword="true" /> if the identity is empty; <see langword="false" /> otherwise. </returns>
+        /// <returns><see langword="true" /> if the identity is empty; <see langword="false" /> otherwise.</returns>
         [Obsolete("Compare Name to null")]
         [MemberNotNullWhen(false, nameof(Name))]
         public bool IsNone()
@@ -60,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Creates a new <see cref="MemberIdentity" /> from the given member name.
         /// </summary>
-        /// <param name="name"> The member name. </param>
-        /// <returns> The newly created identity, or <see cref="None" /> if the given name is <see langword="null" />. </returns>
+        /// <param name="name">The member name.</param>
+        /// <returns>The newly created identity, or <see cref="None" /> if the given name is <see langword="null" />.</returns>
         [DebuggerStepThrough]
         public static MemberIdentity Create(string? name)
             => name == null ? None : new MemberIdentity(name);
@@ -69,8 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Creates a new <see cref="MemberIdentity" /> from the given <see cref="MemberInfo" />.
         /// </summary>
-        /// <param name="memberInfo"> The member. </param>
-        /// <returns> The newly created identity, or <see cref="None" /> if the given name is <see langword="null" />. </returns>
+        /// <param name="memberInfo">The member.</param>
+        /// <returns>The newly created identity, or <see cref="None" /> if the given name is <see langword="null" />.</returns>
         [DebuggerStepThrough]
         public static MemberIdentity Create(MemberInfo? memberInfo)
             => memberInfo == null ? None : new MemberIdentity(memberInfo);
@@ -80,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         public string? Name
         {
-            [DebuggerStepThrough] get => MemberInfo?.GetSimpleMemberName() ?? (string?)_nameOrMember;
+            [DebuggerStepThrough]
+            get => MemberInfo?.GetSimpleMemberName() ?? (string?)_nameOrMember;
         }
 
         /// <summary>
@@ -88,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         public MemberInfo? MemberInfo
         {
-            [DebuggerStepThrough] get => _nameOrMember as MemberInfo;
+            [DebuggerStepThrough]
+            get => _nameOrMember as MemberInfo;
         }
 
         private string DebuggerDisplay()
@@ -109,18 +114,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Compares one id to another id to see if they represent the same member.
         /// </summary>
-        /// <param name="left"> The first id. </param>
-        /// <param name="right"> The second id. </param>
-        /// <returns> <see langword="true" /> if they represent the same member; <see langword="false" /> otherwise. </returns>
+        /// <param name="left">The first id.</param>
+        /// <param name="right">The second id.</param>
+        /// <returns><see langword="true" /> if they represent the same member; <see langword="false" /> otherwise.</returns>
         public static bool operator ==(MemberIdentity left, MemberIdentity right)
             => left.Equals(right);
 
         /// <summary>
         ///     Compares one id to another id to see if they represent different members.
         /// </summary>
-        /// <param name="left"> The first id. </param>
-        /// <param name="right"> The second id. </param>
-        /// <returns> <see langword="true" /> if they represent different members; <see langword="false" /> otherwise. </returns>
+        /// <param name="left">The first id.</param>
+        /// <param name="right">The second id.</param>
+        /// <returns><see langword="true" /> if they represent different members; <see langword="false" /> otherwise.</returns>
         public static bool operator !=(MemberIdentity left, MemberIdentity right)
             => !(left == right);
     }

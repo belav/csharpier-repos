@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Reflection;
@@ -18,10 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     mechanisms. When available, this will use any <see cref="IDesignTimeDbContextFactory{TContext}" />
         ///     implementations or the application's service provider.
         /// </summary>
-        /// <param name="contextType"> The <see cref="DbContext" /> type to instantiate. </param>
-        /// <param name="startupAssembly"> The application's startup assembly. </param>
-        /// <param name="reportHandler"> The design-time report handler. </param>
-        /// <returns> The newly created object. </returns>
+        /// <param name="contextType">The <see cref="DbContext" /> type to instantiate.</param>
+        /// <param name="startupAssembly">The application's startup assembly.</param>
+        /// <param name="reportHandler">The design-time report handler.</param>
+        /// <returns>The newly created object.</returns>
         public static DbContext CreateInstance(
             Type contextType,
             Assembly? startupAssembly = null,
@@ -33,11 +33,11 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     mechanisms. When available, this will use any <see cref="IDesignTimeDbContextFactory{TContext}" />
         ///     implementations or the application's service provider.
         /// </summary>
-        /// <param name="contextType"> The <see cref="DbContext" /> type to instantiate. </param>
-        /// <param name="startupAssembly"> The application's startup assembly. </param>
-        /// <param name="reportHandler"> The design-time report handler. </param>
-        /// <param name="args"> Arguments passed to the application. </param>
-        /// <returns> The newly created object. </returns>
+        /// <param name="contextType">The <see cref="DbContext" /> type to instantiate.</param>
+        /// <param name="startupAssembly">The application's startup assembly.</param>
+        /// <param name="reportHandler">The design-time report handler.</param>
+        /// <param name="args">Arguments passed to the application.</param>
+        /// <returns>The newly created object.</returns>
         public static DbContext CreateInstance(
             Type contextType,
             Assembly? startupAssembly,
@@ -50,6 +50,10 @@ namespace Microsoft.EntityFrameworkCore.Design
                     new OperationReporter(reportHandler),
                     contextType.Assembly,
                     startupAssembly ?? contextType.Assembly,
+                    projectDir: "",
+                    rootNamespace: null,
+                    language: "C#",
+                    nullable: false,
                     args: args ?? Array.Empty<string>())
                 .CreateContext(contextType.FullName!);
         }

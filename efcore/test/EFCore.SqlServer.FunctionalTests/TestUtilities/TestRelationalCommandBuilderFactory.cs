@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -125,7 +125,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public Task<int> ExecuteNonQueryAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = new())
+                CancellationToken cancellationToken = default)
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
@@ -157,7 +157,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public async Task<object> ExecuteScalarAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = new())
+                CancellationToken cancellationToken = default)
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
@@ -190,12 +190,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public async Task<RelationalDataReader> ExecuteReaderAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = new())
+                CancellationToken cancellationToken = default)
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
-                var result = await _realRelationalCommand.ExecuteReaderAsync(parameterObject, cancellationToken);
+                var result = await _realRelationalCommand.ExecuteReaderAsync(parameterObject);
                 if (errorNumber.HasValue)
                 {
                     connection.DbConnection.Close();
@@ -206,11 +206,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return result;
             }
 
-            public DbCommand CreateDbCommand(RelationalCommandParameterObject parameterObject, Guid commandId, DbCommandMethod commandMethod)
+            public DbCommand CreateDbCommand(
+                RelationalCommandParameterObject parameterObject,
+                Guid commandId,
+                DbCommandMethod commandMethod)
                 => throw new NotSupportedException();
 
-            public void PopulateFromTemplate(IRelationalCommand templateCommand)
-                => _realRelationalCommand.PopulateFromTemplate(templateCommand);
+            public void PopulateFrom(IRelationalCommandTemplate commandTemplate)
+                => _realRelationalCommand.PopulateFrom(commandTemplate);
 
             private int? PreExecution(IRelationalConnection connection)
             {

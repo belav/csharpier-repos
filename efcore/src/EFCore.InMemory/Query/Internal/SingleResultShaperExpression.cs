@@ -1,10 +1,9 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 {
@@ -24,12 +23,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public SingleResultShaperExpression(
             Expression projection,
-            Expression innerShaper,
-            Type type)
+            Expression innerShaper)
         {
             Projection = projection;
             InnerShaper = innerShaper;
-            Type = type;
+            Type = innerShaper.Type;
         }
 
         /// <summary>
@@ -40,8 +38,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var projection = visitor.Visit(Projection);
             var innerShaper = visitor.Visit(InnerShaper);
 
@@ -56,7 +52,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual SingleResultShaperExpression Update(Expression projection, Expression innerShaper)
             => projection != Projection || innerShaper != InnerShaper
-                ? new SingleResultShaperExpression(projection, innerShaper, Type)
+                ? new SingleResultShaperExpression(projection, innerShaper)
                 : this;
 
         /// <summary>
@@ -100,8 +96,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.AppendLine($"{nameof(SingleResultShaperExpression)}:");
             using (expressionPrinter.Indent())
             {

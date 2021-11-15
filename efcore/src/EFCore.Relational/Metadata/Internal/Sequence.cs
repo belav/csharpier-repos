@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,6 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Builders.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -100,9 +98,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyModel model,
             ConfigurationSource configurationSource)
         {
-            Check.NotEmpty(name, nameof(name));
-            Check.NullButNotEmpty(schema, nameof(schema));
-
             Model = model;
             Name = name;
             _schema = schema;
@@ -119,9 +114,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [Obsolete("Use the other constructor")]
         public Sequence(IReadOnlyModel model, string annotationName)
         {
-            Check.NotNull(model, nameof(model));
-            Check.NotEmpty(annotationName, nameof(annotationName));
-
             Model = model;
             _configurationSource = ConfigurationSource.Explicit;
 
@@ -201,10 +193,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Sequence sequence,
             string name)
         {
-            Check.NotNull(model, nameof(model));
-            Check.NotNull(sequence, nameof(sequence));
-            Check.NotEmpty(name, nameof(name));
-
             sequence.EnsureMutable();
 
             var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
@@ -254,7 +242,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalSequenceBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -286,7 +275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Indicates whether the sequence is read-only.
         /// </summary>
-        public override bool IsReadOnly => ((Annotatable)Model).IsReadOnly;
+        public override bool IsReadOnly
+            => ((Annotatable)Model).IsReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -348,7 +338,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _startValue = startValue;
 
             _startValueConfigurationSource = startValue == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_startValueConfigurationSource);
 
             return startValue;
@@ -388,7 +378,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _incrementBy = incrementBy;
 
             _incrementByConfigurationSource = incrementBy == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_incrementByConfigurationSource);
 
             return incrementBy;
@@ -428,7 +418,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _minValue = minValue;
 
             _minValueConfigurationSource = minValue == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_minValueConfigurationSource);
 
             return minValue;
@@ -468,7 +458,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _maxValue = maxValue;
 
             _maxValueConfigurationSource = maxValue == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_maxValueConfigurationSource);
 
             return maxValue;
@@ -523,7 +513,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _type = type;
 
             _typeConfigurationSource = type == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_typeConfigurationSource);
 
             return type;
@@ -596,7 +586,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _isCyclic = cyclic;
 
             _isCyclicConfigurationSource = cyclic == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_isCyclicConfigurationSource);
 
             return cyclic;
@@ -759,8 +749,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             public static SequenceData Deserialize(string value)
             {
-                Check.NotEmpty(value, nameof(value));
-
                 try
                 {
                     var data = new SequenceData();
@@ -804,7 +792,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             private static long? AsLong(string? value)
-                => value == null ? null : (long?)long.Parse(value, CultureInfo.InvariantCulture);
+                => value == null ? null : long.Parse(value, CultureInfo.InvariantCulture);
 
             private static Type AsType(string value)
                 => value == typeof(long).Name
@@ -822,14 +810,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             private static void EscapeAndQuote(StringBuilder builder, object? value)
             {
-                builder.Append("'");
+                builder.Append('\'');
 
                 if (value != null)
                 {
                     builder.Append(value.ToString()!.Replace("'", "''"));
                 }
 
-                builder.Append("'");
+                builder.Append('\'');
             }
         }
     }

@@ -1,6 +1,7 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -43,8 +43,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         protected override Expression VisitExtension(Expression extensionExpression)
         {
-            Check.NotNull(extensionExpression, nameof(extensionExpression));
-
             if (extensionExpression is ShapedQueryExpression shapedQueryExpression)
             {
                 return shapedQueryExpression.Update(Visit(shapedQueryExpression.QueryExpression), shapedQueryExpression.ShaperExpression);
@@ -67,7 +65,44 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return SimplifySqlBinary(sqlBinaryExpression);
             }
 
+            if (extensionExpression is SqlFunctionExpression sqlFunctionExpression
+                && IsCoalesce(sqlFunctionExpression))
+            {
+                var arguments = new List<SqlExpression>();
+                foreach (var argument in sqlFunctionExpression.Arguments!)
+                {
+                    var newArgument = (SqlExpression)Visit(argument);
+                    if (IsCoalesce(newArgument))
+                    {
+                        arguments.AddRange(((SqlFunctionExpression)newArgument).Arguments!);
+                    }
+                    else
+                    {
+                        arguments.Add(newArgument);
+                    }
+                }
+
+                var distinctArguments = arguments.Distinct().ToList();
+
+                return distinctArguments.Count > 1
+                    ? new SqlFunctionExpression(
+                        sqlFunctionExpression.Name,
+                        distinctArguments,
+                        sqlFunctionExpression.IsNullable,
+                        argumentsPropagateNullability: distinctArguments.Select(a => false).ToArray(),
+                        sqlFunctionExpression.Type,
+                        sqlFunctionExpression.TypeMapping)
+                    : distinctArguments[0];
+            }
+
             return base.VisitExtension(extensionExpression);
+
+            static bool IsCoalesce(SqlExpression sqlExpression)
+                => sqlExpression is SqlFunctionExpression sqlFunctionExpression
+                    && sqlFunctionExpression.IsBuiltIn
+                    && sqlFunctionExpression.Instance == null
+                    && string.Equals(sqlFunctionExpression.Name, "COALESCE", StringComparison.OrdinalIgnoreCase)
+                    && sqlFunctionExpression.Arguments?.Count > 1;
         }
 
         private bool IsCompareTo([NotNullWhen(true)] CaseExpression? caseExpression)
@@ -390,7 +425,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
         private bool TryGetInExressionCandidateInfo(
             SqlExpression sqlExpression,
-            [MaybeNullWhen(false)] out (ColumnExpression ColumnExpression, object ConstantValue, RelationalTypeMapping TypeMapping, ExpressionType OperationType) candidateInfo)
+            [MaybeNullWhen(false)]
+            out (ColumnExpression ColumnExpression, object ConstantValue, RelationalTypeMapping TypeMapping, ExpressionType OperationType)
+                candidateInfo)
         {
             if (sqlExpression is SqlUnaryExpression sqlUnaryExpression
                 && sqlUnaryExpression.OperatorType == ExpressionType.Not)

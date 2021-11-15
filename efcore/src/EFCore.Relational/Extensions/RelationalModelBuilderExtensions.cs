@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -16,22 +16,28 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     Relational database specific extension methods for <see cref="ModelBuilder" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public static class RelationalModelBuilderExtensions
     {
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <returns> A builder to further configure the sequence. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <returns>A builder to further configure the sequence.</returns>
         public static SequenceBuilder HasSequence(
             this ModelBuilder modelBuilder,
             string name,
             string? schema = null)
             => new(
                 HasSequence(
-                    Check.NotNull(modelBuilder, nameof(modelBuilder)).Model,
+                    modelBuilder.Model,
                     name,
                     schema,
                     ConfigurationSource.Explicit));
@@ -39,10 +45,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasSequence(
             this ModelBuilder modelBuilder,
             string name,
@@ -52,11 +61,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasSequence(
             this ModelBuilder modelBuilder,
             string name,
@@ -73,18 +85,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="type"> The type of values the sequence will generate. </param>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <returns> A builder to further configure the sequence. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="type">The type of values the sequence will generate.</param>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <returns>A builder to further configure the sequence.</returns>
         public static SequenceBuilder HasSequence(
             this ModelBuilder modelBuilder,
             Type type,
             string name,
             string? schema = null)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(type, nameof(type));
 
             var sequence = HasSequence(modelBuilder.Model, name, schema, ConfigurationSource.Explicit);
@@ -96,11 +110,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="type"> The type of values the sequence will generate. </param>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="type">The type of values the sequence will generate.</param>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasSequence(
             this ModelBuilder modelBuilder,
             Type type,
@@ -111,12 +128,15 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="type"> The type of values the sequence will generate. </param>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="type">The type of values the sequence will generate.</param>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasSequence(
             this ModelBuilder modelBuilder,
             Type type,
@@ -134,18 +154,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <typeparam name="T"> The type of values the sequence will generate. </typeparam>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <returns> A builder to further configure the sequence. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <typeparam name="T">The type of values the sequence will generate.</typeparam>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <returns>A builder to further configure the sequence.</returns>
         public static SequenceBuilder HasSequence<T>(
             this ModelBuilder modelBuilder,
             string name,
             string? schema = null)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
-
             var sequence = HasSequence(modelBuilder.Model, name, schema, ConfigurationSource.Explicit);
             sequence.Type = typeof(T);
 
@@ -155,11 +176,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <typeparam name="T"> The type of values the sequence will generate. </typeparam>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <typeparam name="T">The type of values the sequence will generate.</typeparam>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasSequence<T>(
             this ModelBuilder modelBuilder,
             string name,
@@ -169,12 +193,15 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <typeparam name="T"> The type of values the sequence will generate. </typeparam>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <typeparam name="T">The type of values the sequence will generate.</typeparam>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasSequence<T>(
             this ModelBuilder modelBuilder,
             string name,
@@ -191,18 +218,21 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database sequence when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema">The schema of the sequence. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> A builder to further configure the sequence. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema of the sequence.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>A builder to further configure the sequence.</returns>
         public static IConventionSequenceBuilder HasSequence(
             this IConventionModelBuilder modelBuilder,
             string name,
             string? schema = null,
             bool fromDataAnnotation = false)
             => HasSequence(
-                (IMutableModel)Check.NotNull(modelBuilder, nameof(modelBuilder)).Metadata,
+                (IMutableModel)modelBuilder.Metadata,
                 name,
                 schema,
                 fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention).Builder;
@@ -229,14 +259,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database function when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="methodInfo"> The methodInfo this dbFunction uses. </param>
-        /// <returns> A builder to further configure the function. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="methodInfo">The methodInfo this dbFunction uses.</param>
+        /// <returns>A builder to further configure the function.</returns>
         public static DbFunctionBuilder HasDbFunction(
             this ModelBuilder modelBuilder,
             MethodInfo methodInfo)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(methodInfo, nameof(methodInfo));
 
             var dbFunction = modelBuilder.Model.FindDbFunction(methodInfo);
@@ -255,14 +287,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database function when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="expression"> The method this dbFunction uses. </param>
-        /// <returns> A builder to further configure the function. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="expression">The method this dbFunction uses.</param>
+        /// <returns>A builder to further configure the function.</returns>
         public static DbFunctionBuilder HasDbFunction<TResult>(
             this ModelBuilder modelBuilder,
             Expression<Func<TResult>> expression)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(expression, nameof(expression));
 
             var methodInfo = (expression.Body as MethodCallExpression)?.Method;
@@ -278,10 +312,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database function when targeting a relational database.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="methodInfo"> The methodInfo this dbFunction uses. </param>
-        /// <param name="builderAction"> An action that performs configuration of the sequence. </param>
-        /// <returns> A builder to further configure the function. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="methodInfo">The methodInfo this dbFunction uses.</param>
+        /// <param name="builderAction">An action that performs configuration of the sequence.</param>
+        /// <returns>A builder to further configure the function.</returns>
         public static ModelBuilder HasDbFunction(
             this ModelBuilder modelBuilder,
             MethodInfo methodInfo,
@@ -297,16 +334,18 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a relational database function.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="methodInfo"> The method this function uses. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> A builder to further configure the function. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="methodInfo">The method this function uses.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>A builder to further configure the function.</returns>
         public static IConventionDbFunctionBuilder HasDbFunction(
             this IConventionModelBuilder modelBuilder,
             MethodInfo methodInfo,
             bool fromDataAnnotation = false)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(methodInfo, nameof(methodInfo));
 
             var dbFunction = modelBuilder.Metadata.FindDbFunction(methodInfo);
@@ -326,18 +365,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a relational database function.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="returnType"> The function's return type. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> A builder to further configure the function. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="returnType">The function's return type.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>A builder to further configure the function.</returns>
         public static IConventionDbFunctionBuilder HasDbFunction(
             this IConventionModelBuilder modelBuilder,
-            string? name,
+            string name,
             Type returnType,
             bool fromDataAnnotation = false)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotEmpty(name, nameof(name));
 
             var dbFunction = modelBuilder.Metadata.FindDbFunction(name);
@@ -358,14 +399,16 @@ namespace Microsoft.EntityFrameworkCore
         ///     Configures the default schema that database objects should be created in, if no schema
         ///     is explicitly configured.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="schema"> The default schema. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="schema">The default schema.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder HasDefaultSchema(
             this ModelBuilder modelBuilder,
             string? schema)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(schema, nameof(schema));
 
             modelBuilder.Model.SetDefaultSchema(schema);
@@ -377,9 +420,12 @@ namespace Microsoft.EntityFrameworkCore
         ///     Configures the default schema that database objects should be created in, if no schema
         ///     is explicitly configured.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="schema"> The default schema. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="schema">The default schema.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -402,16 +448,18 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns a value indicating whether the given schema can be set as default.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="schema"> The default schema. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the given schema can be set as default. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="schema">The default schema.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the given schema can be set as default.</returns>
         public static bool CanSetDefaultSchema(
             this IConventionModelBuilder modelBuilder,
             string? schema,
             bool fromDataAnnotation = false)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(schema, nameof(schema));
 
             return modelBuilder.CanSetAnnotation(RelationalAnnotationNames.DefaultSchema, schema, fromDataAnnotation);
@@ -420,9 +468,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the maximum length allowed for store identifiers.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="length"> The value to set. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="length">The value to set.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -445,31 +496,32 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns a value indicating whether the maximum length allowed for store identifiers can be set.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="length"> The value to set. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the maximum length allowed for store identifiers can be set. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="length">The value to set.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the maximum length allowed for store identifiers can be set.</returns>
         public static bool CanSetMaxIdentifierLength(
             this IConventionModelBuilder modelBuilder,
             int? length,
             bool fromDataAnnotation = false)
-        {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
-
-            return modelBuilder.CanSetAnnotation(RelationalAnnotationNames.MaxIdentifierLength, length, fromDataAnnotation);
-        }
+            => modelBuilder.CanSetAnnotation(RelationalAnnotationNames.MaxIdentifierLength, length, fromDataAnnotation);
 
         /// <summary>
         ///     Configures the database collation, which will be used by all columns without an explicit collation.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="collation"> The collation. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-collations">Database collations</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="collation">The collation.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ModelBuilder UseCollation(
             this ModelBuilder modelBuilder,
             string? collation)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(collation, nameof(collation));
 
             modelBuilder.Model.SetCollation(collation);
@@ -480,9 +532,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the database collation, which will be used by all columns without an explicit collation.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="collation"> The collation. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-collations">Database collations</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="collation">The collation.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -505,16 +560,18 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns a value indicating whether the given collation can be set as default.
         /// </summary>
-        /// <param name="modelBuilder"> The model builder. </param>
-        /// <param name="collation"> The collation. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the given collation can be set as default. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-collations">Database collations</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The model builder.</param>
+        /// <param name="collation">The collation.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the given collation can be set as default.</returns>
         public static bool CanSetCollation(
             this IConventionModelBuilder modelBuilder,
             string? collation,
             bool fromDataAnnotation = false)
         {
-            Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(collation, nameof(collation));
 
             return modelBuilder.CanSetAnnotation(RelationalAnnotationNames.Collation, collation, fromDataAnnotation);

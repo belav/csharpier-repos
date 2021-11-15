@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public void Every_eventId_has_a_logger_method_and_logs_when_level_enabled()
         {
             var propertyInfo = typeof(DateTime).GetTypeInfo().GetDeclaredProperty(nameof(DateTime.Now));
-            var entityType = new Model().AddEntityType(typeof(object), ConfigurationSource.Convention);
+            var model = new Model();
+            var entityType = model.AddEntityType(typeof(object), owned: false, ConfigurationSource.Convention);
             var property = entityType.AddProperty("A", typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
-            var otherEntityType = new EntityType(typeof(object), entityType.Model, ConfigurationSource.Convention);
+            var otherEntityType = new EntityType(typeof(object), entityType.Model, owned: false, ConfigurationSource.Convention);
             var otherProperty = otherEntityType.AddProperty(
                 "A", typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
             var otherKey = otherEntityType.AddKey(otherProperty, ConfigurationSource.Convention);
@@ -71,7 +72,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 { typeof(INavigationBase), () => navigationBase },
                 { typeof(IForeignKey), () => foreignKey },
                 { typeof(IReadOnlyForeignKey), () => foreignKey },
-                { typeof(InternalEntityEntry), () => new FakeInternalEntityEntry(entityType) },
+                { typeof(InternalEntityEntry), () => new InternalEntityEntry(new FakeStateManager(), entityType, null!) },
                 { typeof(ISet<object>), () => new HashSet<object>() },
                 {
                     typeof(IList<IDictionary<string, string>>),
@@ -91,16 +92,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             public object GetService(Type serviceType)
                 => null;
-        }
-
-        private class FakeInternalEntityEntry : InternalEntityEntry
-        {
-            public FakeInternalEntityEntry(IEntityType entityType)
-                : base(new FakeStateManager(), entityType)
-            {
-            }
-
-            public override object Entity { get; }
         }
 
         private class FakeNavigationBase : PropertyBase, INavigationBase

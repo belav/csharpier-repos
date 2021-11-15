@@ -1,7 +1,6 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Storage
@@ -14,12 +13,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         This type is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public class RelationalCommandBuilderFactory : IRelationalCommandBuilderFactory
     {
         /// <summary>
@@ -31,24 +36,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public RelationalCommandBuilderFactory(
             RelationalCommandBuilderDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Dependencies for this service.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
-        public virtual RelationalCommandBuilderDependencies Dependencies { get; }
+        protected virtual RelationalCommandBuilderDependencies Dependencies { get; }
 
         /// <summary>
         ///     Creates a new <see cref="IRelationalCommandBuilder" />.
         /// </summary>
-        /// <returns> The newly created builder. </returns>
+        /// <returns>The newly created builder.</returns>
         public virtual IRelationalCommandBuilder Create()
             => new RelationalCommandBuilder(Dependencies);
     }

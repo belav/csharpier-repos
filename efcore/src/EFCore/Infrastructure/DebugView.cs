@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -10,6 +10,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///     A placeholder for lazily-generated debug strings that can be expanded in the debugger to
     ///     to generate and display them.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information.
+    /// </remarks>
     public class DebugView
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -21,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Constructs a new <see cref="DebugView" /> with delegates for short and long debug strings.
         /// </summary>
-        /// <param name="toShortDebugString"> Delegate to create the short debug string. </param>
-        /// <param name="toLongDebugString"> Delegate to create the long debug string. </param>
+        /// <param name="toShortDebugString">Delegate to create the short debug string.</param>
+        /// <param name="toLongDebugString">Delegate to create the long debug string.</param>
         public DebugView(
             Func<string> toShortDebugString,
             Func<string> toLongDebugString)
@@ -34,12 +37,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     The long-form, detailed debug string.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information.
+        /// </remarks>
         public virtual string LongView
             => _toLongDebugString();
 
         /// <summary>
         ///     The short-form, less-detailed debug string.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information.
+        /// </remarks>
         public virtual string ShortView
             => _toShortDebugString();
     }

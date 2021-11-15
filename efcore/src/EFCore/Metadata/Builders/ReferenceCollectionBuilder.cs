@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Reflection;
@@ -11,14 +11,17 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Provides a simple API for configuring a one-to-many relationship.
-    ///     </para>
+    ///     Provides a simple API for configuring a one-to-many relationship.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
     ///         and it is not designed to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class ReferenceCollectionBuilder : RelationshipBuilderBase
     {
         /// <summary>
@@ -58,9 +61,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     <paramref name="annotation" />
         ///     already exists its value will be updated.
         /// </summary>
-        /// <param name="annotation"> The key of the annotation to be added or updated. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="annotation">The key of the annotation to be added or updated.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual ReferenceCollectionBuilder HasAnnotation(string annotation, object? value)
         {
             Check.NotEmpty(annotation, nameof(annotation));
@@ -71,9 +74,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         }
 
         /// <summary>
-        ///     <para>
-        ///         Configures the property(s) to use as the foreign key for this relationship.
-        ///     </para>
+        ///     Configures the property(s) to use as the foreign key for this relationship.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If the specified property name(s) do not exist on the entity type then a new shadow state
         ///         property(s) will be added to serve as the foreign key. A shadow state property is one
@@ -87,11 +90,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///         entity type. If they do not match, new shadow state properties that form a unique index will be
         ///         added to the principal entity type to serve as the reference key.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         /// <param name="foreignKeyPropertyNames">
         ///     The name(s) of the foreign key property(s).
         /// </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual ReferenceCollectionBuilder HasForeignKey(params string[] foreignKeyPropertyNames)
             => new(
                 HasForeignKeyBuilder(Check.NotEmpty(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))),
@@ -124,8 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     the specified property(s) is not already a unique constraint (or the primary key) then a new unique
         ///     constraint will be introduced.
         /// </summary>
-        /// <param name="keyPropertyNames"> The name(s) of the referenced key property(s). </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="keyPropertyNames">The name(s) of the referenced key property(s).</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual ReferenceCollectionBuilder HasPrincipalKey(params string[] keyPropertyNames)
             => new(
                 HasPrincipalKeyBuilder(Check.NotEmpty(keyPropertyNames, nameof(keyPropertyNames))),
@@ -156,8 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     Configures whether this is a required relationship (i.e. whether the foreign key property(s) can
         ///     be assigned <see langword="null" />).
         /// </summary>
-        /// <param name="required"> A value indicating whether this is a required relationship. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="required">A value indicating whether this is a required relationship.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual ReferenceCollectionBuilder IsRequired(bool required = true)
             => new(Builder.IsRequired(required, ConfigurationSource.Explicit)!, this, requiredSet: true);
 
@@ -165,8 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     Configures the operation applied to dependent entities in the relationship when the
         ///     principal is deleted or the relationship is severed.
         /// </summary>
-        /// <param name="deleteBehavior"> The action to perform. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="deleteBehavior">The action to perform.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual ReferenceCollectionBuilder OnDelete(DeleteBehavior deleteBehavior)
             => new(Builder.OnDelete(deleteBehavior, ConfigurationSource.Explicit)!, this);
     }

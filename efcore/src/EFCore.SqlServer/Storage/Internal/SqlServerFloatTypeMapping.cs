@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data;
 using System.Data.Common;
@@ -23,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// </summary>
         public SqlServerFloatTypeMapping(
             string storeType,
-            DbType? dbType = null,
+            DbType? dbType = System.Data.DbType.Single,
             StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
             : base(
                 new RelationalTypeMappingParameters(
@@ -48,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
-        /// <returns> The newly created mapping. </returns>
+        /// <param name="parameters">The parameters for this mapping.</param>
+        /// <returns>The newly created mapping.</returns>
         protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
             => new SqlServerFloatTypeMapping(parameters);
 

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     /// <summary>
     ///     A comparer which implements <see cref="IEqualityComparer{T}" /> for <see cref="Expression" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public sealed class ExpressionEqualityComparer : IEqualityComparer<Expression?>
     {
         /// <summary>
@@ -33,8 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Returns the hash code for given expression.
         /// </summary>
-        /// <param name="obj"> The <see cref="Expression" /> obj to compute hash code for. </param>
-        /// <returns> The hash code value for <paramref name="obj" />. </returns>
+        /// <param name="obj">The <see cref="Expression" /> obj to compute hash code for.</param>
+        /// <returns>The hash code value for <paramref name="obj" />.</returns>
         public int GetHashCode(Expression obj)
         {
             if (obj == null)
@@ -281,9 +285,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Returns a value indicating whether the given expressions are equal.
         /// </summary>
-        /// <param name="x"> The left expression. </param>
-        /// <param name="y"> The right expression. </param>
-        /// <returns> <see langword="true" /> if the expressions are equal, <see langword="false" /> otherwise. </returns>
+        /// <param name="x">The left expression.</param>
+        /// <param name="y">The right expression.</param>
+        /// <returns><see langword="true" /> if the expressions are equal, <see langword="false" /> otherwise.</returns>
         public bool Equals(Expression? x, Expression? y)
             => new ExpressionComparer().Compare(x, y);
 

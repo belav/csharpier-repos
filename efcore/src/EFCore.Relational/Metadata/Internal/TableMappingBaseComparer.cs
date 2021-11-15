@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -95,10 +95,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return x.ColumnMappings.Zip(
                     y.ColumnMappings, (xc, yc) =>
-                    {
-                        var columnResult = StringComparer.Ordinal.Compare(xc.Property.Name, yc.Property.Name);
-                        return columnResult != 0 ? columnResult : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
-                    })
+                        {
+                            var columnResult = StringComparer.Ordinal.Compare(xc.Property.Name, yc.Property.Name);
+                            return columnResult != 0 ? columnResult : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
+                        })
                 .FirstOrDefault(r => r != 0);
         }
 
@@ -109,10 +109,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public bool Equals(ITableMappingBase? x, ITableMappingBase? y)
-            => ReferenceEquals(x, y) || x is not null && y is not null && (x.EntityType == y.EntityType
-                && x.Table == y.Table
-                && x.IncludesDerivedTypes == y.IncludesDerivedTypes
-                && x.ColumnMappings.SequenceEqual(y.ColumnMappings));
+            => ReferenceEquals(x, y)
+                || x is not null
+                && y is not null
+                && (x.EntityType == y.EntityType
+                    && x.Table == y.Table
+                    && x.IncludesDerivedTypes == y.IncludesDerivedTypes
+                    && x.ColumnMappings.SequenceEqual(y.ColumnMappings));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

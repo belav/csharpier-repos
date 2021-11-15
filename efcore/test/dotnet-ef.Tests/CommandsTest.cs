@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +21,23 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     Assert.True(
                         group.Key == null || group.Count() == 1,
                         "Duplicate short names on command '"
+                        + GetFullName(command)
+                        + "': "
+                        + string.Join("; ", group.Select(o => o.Template)));
+                }
+            }
+        }
+
+        [Fact]
+        public void Long_names_are_unique()
+        {
+            foreach (var command in GetCommands())
+            {
+                foreach (var group in command.Options.GroupBy(o => o.LongName))
+                {
+                    Assert.True(
+                        group.Key == null || group.Count() == 1,
+                        "Duplicate option names on command '"
                         + GetFullName(command)
                         + "': "
                         + string.Join("; ", group.Select(o => o.Template)));

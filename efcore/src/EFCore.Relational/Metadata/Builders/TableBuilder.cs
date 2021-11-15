@@ -1,17 +1,14 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
-    ///         and it is not designed to be directly constructed in your application code.
-    ///     </para>
+    ///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+    ///     and it is not designed to be directly constructed in your application code.
     /// </summary>
     public class TableBuilder
     {
@@ -22,21 +19,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public TableBuilder(string name, string? schema, IMutableEntityType entityType)
+        public TableBuilder(string? name, string? schema, IMutableEntityType entityType)
         {
-            EntityType = entityType;
+            Metadata = entityType;
         }
 
-        private IMutableEntityType EntityType { [DebuggerStepThrough] get; }
+        /// <summary>
+        ///     The entity type being configured.
+        /// </summary>
+        public virtual IMutableEntityType Metadata { get; }
 
         /// <summary>
         ///     Configures the table to be ignored by migrations.
         /// </summary>
-        /// <param name="excluded"> A value indicating whether the table should be managed by migrations. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
+        /// <param name="excluded">A value indicating whether the table should be managed by migrations.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public virtual TableBuilder ExcludeFromMigrations(bool excluded = true)
         {
-            EntityType.SetIsTableExcludedFromMigrations(excluded);
+            Metadata.SetIsTableExcludedFromMigrations(excluded);
+
             return this;
         }
 
@@ -45,7 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -53,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj)
             => base.Equals(obj);
@@ -62,7 +66,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
             => base.GetHashCode();

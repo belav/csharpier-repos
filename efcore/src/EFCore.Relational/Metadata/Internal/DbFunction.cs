@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Builders.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -79,7 +77,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             MethodInfo = methodInfo;
 
-            ModelName = GetFunctionName(methodInfo, methodInfo.GetParameters());
+            ModelName = GetFunctionName(methodInfo);
         }
 
         /// <summary>
@@ -95,8 +93,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IMutableModel model,
             ConfigurationSource configurationSource)
         {
-            Check.NotEmpty(name, nameof(name));
-
             if (returnType == null
                 || returnType == typeof(void))
             {
@@ -125,21 +121,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
         }
 
-        private static string GetFunctionName(MethodInfo methodInfo, ParameterInfo[] parameters)
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public static string GetFunctionName(MethodInfo methodInfo)
         {
+            var parameters = methodInfo.GetParameters();
             var builder = new StringBuilder();
 
             if (methodInfo.DeclaringType != null)
             {
                 builder
-                    .Append(methodInfo.DeclaringType.FullName)
-                    .Append(".");
+                    .Append(methodInfo.DeclaringType.DisplayName())
+                    .Append('.');
             }
 
             builder
                 .Append(methodInfo.Name)
                 .Append('(')
-                .AppendJoin(',', parameters.Select(p => p.ParameterType.FullName))
+                .AppendJoin(',', parameters.Select(p => p.ParameterType.DisplayName()))
                 .Append(')');
 
             return builder.ToString();
@@ -156,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalDbFunctionBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -180,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Indicates whether the function is read-only.
         /// </summary>
-        public override bool IsReadOnly => ((Annotatable)Model).IsReadOnly;
+        public override bool IsReadOnly
+            => ((Annotatable)Model).IsReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -201,7 +206,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static IReadOnlyDbFunction? FindDbFunction(IReadOnlyModel model, MethodInfo methodInfo)
             => model[RelationalAnnotationNames.DbFunctions] is SortedDictionary<string, IDbFunction> functions
-                && functions.TryGetValue(GetFunctionName(methodInfo, methodInfo.GetParameters()), out var dbFunction)
+                && functions.TryGetValue(GetFunctionName(methodInfo), out var dbFunction)
                     ? dbFunction
                     : null;
 
@@ -254,7 +259,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private static SortedDictionary<string, IDbFunction> GetOrCreateFunctions(IMutableModel model)
             => (SortedDictionary<string, IDbFunction>)(
-                model[RelationalAnnotationNames.DbFunctions] ??= new SortedDictionary<string, IDbFunction>());
+                model[RelationalAnnotationNames.DbFunctions] ??= new SortedDictionary<string, IDbFunction>(StringComparer.Ordinal));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -268,7 +273,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             if (model[RelationalAnnotationNames.DbFunctions] is SortedDictionary<string, IDbFunction> functions)
             {
-                var name = GetFunctionName(methodInfo, methodInfo.GetParameters());
+                var name = GetFunctionName(methodInfo);
                 if (functions.TryGetValue(name, out var function))
                 {
                     var dbFunction = (DbFunction)function;
@@ -356,9 +361,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _schema = schema;
 
-            _schemaConfigurationSource = schema == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_schemaConfigurationSource);
+            _schemaConfigurationSource = configurationSource.Max(_schemaConfigurationSource);
 
             return schema;
         }
@@ -392,15 +395,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual string? SetName(string? name, ConfigurationSource configurationSource)
         {
-            Check.NullButNotEmpty(name, nameof(name));
-
             EnsureMutable();
 
             _name = name;
 
-            _nameConfigurationSource = name == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_nameConfigurationSource);
+            _nameConfigurationSource = configurationSource.Max(_nameConfigurationSource);
 
             return name;
         }
@@ -518,7 +517,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _storeType = storeType;
 
             _storeTypeConfigurationSource = storeType == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_storeTypeConfigurationSource);
 
             return storeType;
@@ -542,15 +541,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual RelationalTypeMapping? TypeMapping
         {
             get => IsReadOnly && IsScalar
-                    ? NonCapturingLazyInitializer.EnsureInitialized(ref _typeMapping, this, static dbFunction =>
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _typeMapping, this, static dbFunction =>
                         {
                             var relationalTypeMappingSource =
                                 (IRelationalTypeMappingSource)((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
                             return !string.IsNullOrEmpty(dbFunction._storeType)
-                                        ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
-                                        : relationalTypeMappingSource.FindMapping(dbFunction.ReturnType)!;
+                                ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
+                                : relationalTypeMappingSource.FindMapping(dbFunction.ReturnType, (IModel)dbFunction.Model)!;
                         })
-                    : _typeMapping;
+                : _typeMapping;
             set => SetTypeMapping(value, ConfigurationSource.Explicit);
         }
 
@@ -567,7 +567,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _typeMapping = typeMapping;
 
             _typeMappingConfigurationSource = typeMapping == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_typeMappingConfigurationSource);
 
             return typeMapping;
@@ -615,7 +615,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _translation = translation;
 
             _translationConfigurationSource = translation == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_translationConfigurationSource);
 
             return translation;

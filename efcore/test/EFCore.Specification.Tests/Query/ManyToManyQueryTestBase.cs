@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -836,6 +836,19 @@ namespace Microsoft.EntityFrameworkCore.Query
                       from t in r.TwoSkip.Where(x => x.Id != r.Id).DefaultIfEmpty()
                       select t,
                 entryCount: 20);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Contains_on_skip_collection_navigation(bool async)
+        {
+            var two = new EntityTwo { Id = 1 };
+
+            return AssertQuery(
+                async,
+                ss => ss.Set<EntityOne>().Where(e => e.TwoSkip.Contains(two)),
+                ss => ss.Set<EntityOne>().Where(e => e.TwoSkip.Select(i => i.Id).Contains(two.Id)),
+                entryCount: 11);
         }
 
         // When adding include test here always add a tracking version and a split version in relational layer.

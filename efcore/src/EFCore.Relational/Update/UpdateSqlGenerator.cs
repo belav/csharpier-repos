@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Update
@@ -20,27 +19,31 @@ namespace Microsoft.EntityFrameworkCore.Update
     ///     <para>
     ///         This type is typically used by database providers; it is generally not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     {
         /// <summary>
         ///     Initializes a new instance of the this class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         protected UpdateSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual UpdateSqlGeneratorDependencies Dependencies { get; }
 
@@ -53,18 +56,15 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for inserting a row to the commands being built.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="command"> The command that represents the delete operation. </param>
-        /// <param name="commandPosition"> The ordinal of this command in the batch. </param>
-        /// <returns> The <see cref="ResultSetMapping" /> for the command. </returns>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="command">The command that represents the delete operation.</param>
+        /// <param name="commandPosition">The ordinal of this command in the batch.</param>
+        /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
         public virtual ResultSetMapping AppendInsertOperation(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
+            IReadOnlyModificationCommand command,
             int commandPosition)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(command, nameof(command));
-
             var name = command.TableName;
             var schema = command.Schema;
             var operations = command.ColumnModifications;
@@ -87,18 +87,15 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for updating a row to the commands being built.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="command"> The command that represents the delete operation. </param>
-        /// <param name="commandPosition"> The ordinal of this command in the batch. </param>
-        /// <returns> The <see cref="ResultSetMapping" /> for the command. </returns>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="command">The command that represents the delete operation.</param>
+        /// <param name="commandPosition">The ordinal of this command in the batch.</param>
+        /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
         public virtual ResultSetMapping AppendUpdateOperation(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
+            IReadOnlyModificationCommand command,
             int commandPosition)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(command, nameof(command));
-
             var name = command.TableName;
             var schema = command.Schema;
             var operations = command.ColumnModifications;
@@ -122,18 +119,15 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for deleting a row to the commands being built.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="command"> The command that represents the delete operation. </param>
-        /// <param name="commandPosition"> The ordinal of this command in the batch. </param>
-        /// <returns> The <see cref="ResultSetMapping" /> for the command. </returns>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="command">The command that represents the delete operation.</param>
+        /// <param name="commandPosition">The ordinal of this command in the batch.</param>
+        /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
         public virtual ResultSetMapping AppendDeleteOperation(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
+            IReadOnlyModificationCommand command,
             int commandPosition)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(command, nameof(command));
-
             var name = command.TableName;
             var schema = command.Schema;
             var conditionOperations = command.ColumnModifications.Where(o => o.IsCondition).ToList();
@@ -146,20 +140,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for inserting a row to the commands being built.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="writeOperations"> The operations for each column. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="writeOperations">The operations for each column.</param>
         protected virtual void AppendInsertCommand(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> writeOperations)
+            IReadOnlyList<IColumnModification> writeOperations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(writeOperations, nameof(writeOperations));
-
             AppendInsertCommandHeader(commandStringBuilder, name, schema, writeOperations);
             AppendValuesHeader(commandStringBuilder, writeOperations);
             AppendValues(commandStringBuilder, name, schema, writeOperations);
@@ -169,23 +159,18 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for updating a row to the commands being built.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="writeOperations"> The operations for each column. </param>
-        /// <param name="conditionOperations"> The operations used to generate the <c>WHERE</c> clause for the update. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="writeOperations">The operations for each column.</param>
+        /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for the update.</param>
         protected virtual void AppendUpdateCommand(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> writeOperations,
-            IReadOnlyList<ColumnModification> conditionOperations)
+            IReadOnlyList<IColumnModification> writeOperations,
+            IReadOnlyList<IColumnModification> conditionOperations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotEmpty(writeOperations, nameof(writeOperations));
-            Check.NotNull(conditionOperations, nameof(conditionOperations));
-
             AppendUpdateCommandHeader(commandStringBuilder, name, schema, writeOperations);
             AppendWhereClause(commandStringBuilder, conditionOperations);
             commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator);
@@ -194,20 +179,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for deleting a row to the commands being built.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="conditionOperations"> The operations used to generate the <c>WHERE</c> clause for the delete. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for the delete.</param>
         protected virtual void AppendDeleteCommand(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> conditionOperations)
+            IReadOnlyList<IColumnModification> conditionOperations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(conditionOperations, nameof(conditionOperations));
-
             AppendDeleteCommandHeader(commandStringBuilder, name, schema);
             AppendWhereClause(commandStringBuilder, conditionOperations);
             commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator);
@@ -216,11 +197,11 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for selecting the number of rows affected.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="commandPosition"> The ordinal of the command for which rows affected it being returned. </param>
-        /// <returns> The <see cref="ResultSetMapping" /> for this command.</returns>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="commandPosition">The ordinal of the command for which rows affected it being returned.</param>
+        /// <returns>The <see cref="ResultSetMapping" /> for this command.</returns>
         protected virtual ResultSetMapping AppendSelectAffectedCountCommand(
             StringBuilder commandStringBuilder,
             string name,
@@ -231,29 +212,23 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL command for selecting affected data.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="readOperations"> The operations representing the data to be read. </param>
-        /// <param name="conditionOperations"> The operations used to generate the <c>WHERE</c> clause for the select. </param>
-        /// <param name="commandPosition"> The ordinal of the command for which rows affected it being returned. </param>
-        /// <returns> The <see cref="ResultSetMapping" /> for this command.</returns>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="readOperations">The operations representing the data to be read.</param>
+        /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for the select.</param>
+        /// <param name="commandPosition">The ordinal of the command for which rows affected it being returned.</param>
+        /// <returns>The <see cref="ResultSetMapping" /> for this command.</returns>
         protected virtual ResultSetMapping AppendSelectAffectedCommand(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> readOperations,
-            IReadOnlyList<ColumnModification> conditionOperations,
+            IReadOnlyList<IColumnModification> readOperations,
+            IReadOnlyList<IColumnModification> conditionOperations,
             int commandPosition)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(readOperations, nameof(readOperations));
-            Check.NotNull(conditionOperations, nameof(conditionOperations));
-
             AppendSelectCommandHeader(commandStringBuilder, readOperations);
             AppendFromClause(commandStringBuilder, name, schema);
-            // TODO: there is no notion of operator - currently all the where conditions check equality
             AppendWhereAffectedClause(commandStringBuilder, conditionOperations);
             commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator)
                 .AppendLine();
@@ -264,20 +239,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL fragment for starting an <c>INSERT</c>.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="operations"> The operations representing the data to be inserted. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="operations">The operations representing the data to be inserted.</param>
         protected virtual void AppendInsertCommandHeader(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> operations)
+            IReadOnlyList<IColumnModification> operations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(operations, nameof(operations));
-
             commandStringBuilder.Append("INSERT INTO ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
 
@@ -294,19 +265,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         }
 
         /// <summary>
-        ///     Appends a SQL fragment for starting an <c>DELETE</c>.
+        ///     Appends a SQL fragment for starting a <c>DELETE</c>.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
         protected virtual void AppendDeleteCommandHeader(
             StringBuilder commandStringBuilder,
             string name,
             string? schema)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-
             commandStringBuilder.Append("DELETE FROM ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
         }
@@ -314,20 +282,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL fragment for starting an <c>UPDATE</c>.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="operations"> The operations representing the data to be updated. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="operations">The operations representing the data to be updated.</param>
         protected virtual void AppendUpdateCommandHeader(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> operations)
+            IReadOnlyList<IColumnModification> operations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(operations, nameof(operations));
-
             commandStringBuilder.Append("UPDATE ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
             commandStringBuilder.Append(" SET ")
@@ -351,39 +315,31 @@ namespace Microsoft.EntityFrameworkCore.Update
         }
 
         /// <summary>
-        ///     Appends a SQL fragment for starting an <c>SELECT</c>.
+        ///     Appends a SQL fragment for starting a <c>SELECT</c>.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="operations"> The operations representing the data to be read. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="operations">The operations representing the data to be read.</param>
         protected virtual void AppendSelectCommandHeader(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
-        {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(operations, nameof(operations));
-
-            commandStringBuilder
+            IReadOnlyList<IColumnModification> operations)
+            => commandStringBuilder
                 .Append("SELECT ")
                 .AppendJoin(
                     operations,
                     SqlGenerationHelper,
                     (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName));
-        }
 
         /// <summary>
-        ///     Appends a SQL fragment for starting an <c>FROM</c> clause.
+        ///     Appends a SQL fragment for starting a <c>FROM</c> clause.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
         protected virtual void AppendFromClause(
             StringBuilder commandStringBuilder,
             string name,
             string? schema)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotEmpty(name, nameof(name));
-
             commandStringBuilder
                 .AppendLine()
                 .Append("FROM ");
@@ -393,15 +349,12 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a SQL fragment for a <c>VALUES</c>.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="operations"> The operations for which there are values. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="operations">The operations for which there are values.</param>
         protected virtual void AppendValuesHeader(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
+            IReadOnlyList<IColumnModification> operations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(operations, nameof(operations));
-
             commandStringBuilder.AppendLine();
             commandStringBuilder.Append(operations.Count > 0 ? "VALUES " : "DEFAULT VALUES");
         }
@@ -409,23 +362,20 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends values after a <see cref="AppendValuesHeader" /> call.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The table schema, or <see langword="null" /> to use the default schema. </param>
-        /// <param name="operations"> The operations for which there are values. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+        /// <param name="operations">The operations for which there are values.</param>
         protected virtual void AppendValues(
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> operations)
+            IReadOnlyList<IColumnModification> operations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(operations, nameof(operations));
-
             if (operations.Count > 0)
             {
                 commandStringBuilder
-                    .Append("(")
+                    .Append('(')
                     .AppendJoin(
                         operations,
                         (this, name, schema),
@@ -448,22 +398,19 @@ namespace Microsoft.EntityFrameworkCore.Update
                                 sb.Append("DEFAULT");
                             }
                         })
-                    .Append(")");
+                    .Append(')');
             }
         }
 
         /// <summary>
         ///     Appends a <c>WHERE</c> clause.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="operations"> The operations from which to build the conditions. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="operations">The operations from which to build the conditions.</param>
         protected virtual void AppendWhereClause(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
+            IReadOnlyList<IColumnModification> operations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(operations, nameof(operations));
-
             if (operations.Count > 0)
             {
                 commandStringBuilder
@@ -476,15 +423,12 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a <c>WHERE</c> clause involving rows affected.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="operations"> The operations from which to build the conditions. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="operations">The operations from which to build the conditions.</param>
         protected virtual void AppendWhereAffectedClause(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
+            IReadOnlyList<IColumnModification> operations)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(operations, nameof(operations));
-
             commandStringBuilder
                 .AppendLine()
                 .Append("WHERE ");
@@ -500,24 +444,37 @@ namespace Microsoft.EntityFrameworkCore.Update
                         {
                             if (v.IsKey)
                             {
-                                if (v.IsRead)
-                                {
-                                    AppendIdentityWhereCondition(sb, v);
-                                }
-                                else
+                                if (!v.IsRead)
                                 {
                                     AppendWhereCondition(sb, v, v.UseOriginalValueParameter);
+                                    return true;
                                 }
                             }
+
+                            if (IsIdentityOperation(v))
+                            {
+                                AppendIdentityWhereCondition(sb, v);
+                                return true;
+                            }
+
+                            return false;
                         }, " AND ");
             }
         }
 
         /// <summary>
+        ///     Returns a value indicating whether the given modification represents an auto-incrementing column.
+        /// </summary>
+        /// <param name="modification">The column modification.</param>
+        /// <returns><see langword="true" /> if the given modification represents an auto-incrementing column.</returns>
+        protected virtual bool IsIdentityOperation(IColumnModification modification)
+            => modification.IsKey && modification.IsRead;
+
+        /// <summary>
         ///     Appends a <c>WHERE</c> condition checking rows affected.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="expectedRowsAffected"> The expected number of rows affected. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="expectedRowsAffected">The expected number of rows affected.</param>
         protected abstract void AppendRowsAffectedWhereCondition(
             StringBuilder commandStringBuilder,
             int expectedRowsAffected);
@@ -525,19 +482,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a <c>WHERE</c> condition for the given column.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="columnModification"> The column for which the condition is being generated. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="columnModification">The column for which the condition is being generated.</param>
         /// <param name="useOriginalValue">
         ///     If <see langword="true" />, then the original value will be used in the condition, otherwise the current value will be used.
         /// </param>
         protected virtual void AppendWhereCondition(
             StringBuilder commandStringBuilder,
-            ColumnModification columnModification,
+            IColumnModification columnModification,
             bool useOriginalValue)
         {
-            Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
-            Check.NotNull(columnModification, nameof(columnModification));
-
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, columnModification.ColumnName);
 
             var parameterValue = useOriginalValue
@@ -551,8 +505,7 @@ namespace Microsoft.EntityFrameworkCore.Update
             else
             {
                 commandStringBuilder.Append(" = ");
-                if (!columnModification.UseCurrentValueParameter
-                    && !columnModification.UseOriginalValueParameter)
+                if (!columnModification.UseParameter)
                 {
                     AppendSqlLiteral(commandStringBuilder, columnModification, null, null);
                 }
@@ -569,16 +522,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Appends a <c>WHERE</c> condition for the identity (i.e. key value) of the given column.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        /// <param name="columnModification"> The column for which the condition is being generated. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
+        /// <param name="columnModification">The column for which the condition is being generated.</param>
         protected abstract void AppendIdentityWhereCondition(
             StringBuilder commandStringBuilder,
-            ColumnModification columnModification);
+            IColumnModification columnModification);
 
         /// <summary>
         ///     Appends SQL text that defines the start of a batch.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
         public virtual void AppendBatchHeader(StringBuilder commandStringBuilder)
         {
         }
@@ -586,9 +539,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Generates SQL that will obtain the next value in the given sequence.
         /// </summary>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema"> The schema that contains the sequence, or <see langword="null" /> to use the default schema. </param>
-        /// <returns> The SQL. </returns>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
+        /// <returns>The SQL.</returns>
         public virtual string GenerateNextSequenceValueOperation(string name, string? schema)
         {
             var commandStringBuilder = new StringBuilder();
@@ -600,16 +553,20 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Generates a SQL fragment that will get the next value from the given sequence and appends it to
         ///     the full command being built by the given <see cref="StringBuilder" />.
         /// </summary>
-        /// <param name="commandStringBuilder"> The builder to which the SQL fragment should be appended. </param>
-        /// <param name="name"> The name of the sequence. </param>
-        /// <param name="schema"> The schema that contains the sequence, or <see langword="null" /> to use the default schema. </param>
+        /// <param name="commandStringBuilder">The builder to which the SQL fragment should be appended.</param>
+        /// <param name="name">The name of the sequence.</param>
+        /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
         public virtual void AppendNextSequenceValueOperation(StringBuilder commandStringBuilder, string name, string? schema)
         {
             commandStringBuilder.Append("SELECT NEXT VALUE FOR ");
-            SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, Check.NotNull(name, nameof(name)), schema);
+            SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
         }
 
-        private void AppendSqlLiteral(StringBuilder commandStringBuilder, ColumnModification modification, string? tableName, string? schema)
+        private void AppendSqlLiteral(
+            StringBuilder commandStringBuilder,
+            IColumnModification modification,
+            string? tableName,
+            string? schema)
         {
             if (modification.TypeMapping == null)
             {

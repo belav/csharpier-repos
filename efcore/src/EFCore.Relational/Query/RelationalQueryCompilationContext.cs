@@ -1,8 +1,7 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -20,23 +19,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalQueryCompilationContext" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this class. </param>
-        /// <param name="async"> A bool value indicating whether it is for async query. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
+        /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
+        /// <param name="async">A bool value indicating whether it is for async query.</param>
         public RelationalQueryCompilationContext(
             QueryCompilationContextDependencies dependencies,
             RelationalQueryCompilationContextDependencies relationalDependencies,
             bool async)
             : base(dependencies, async)
         {
-            Check.NotNull(relationalDependencies, nameof(relationalDependencies));
-
             RelationalDependencies = relationalDependencies;
             QuerySplittingBehavior = RelationalOptionsExtension.Extract(ContextOptions).QuerySplittingBehavior;
         }
 
         /// <summary>
-        ///     Parameter object containing relational service dependencies.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalQueryCompilationContextDependencies RelationalDependencies { get; }
 

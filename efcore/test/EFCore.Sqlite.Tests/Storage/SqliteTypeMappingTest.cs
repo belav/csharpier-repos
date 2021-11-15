@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -74,9 +74,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected override DbCommand CreateTestCommand()
             => new SqliteCommand();
 
-        protected override DbType DefaultParameterType
-            => DbType.String;
-
         [ConditionalTheory]
         [InlineData(typeof(SqliteDateTimeOffsetTypeMapping), typeof(DateTimeOffset))]
         [InlineData(typeof(SqliteDateTimeTypeMapping), typeof(DateTime))]
@@ -133,6 +130,33 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 "'2015-03-12 13:36:37.371'");
         }
 
+        [ConditionalFact]
+        public override void DateOnly_literal_generated_correctly()
+        {
+            Test_GenerateSqlLiteral_helper(
+                GetMapping(typeof(DateOnly)),
+                new DateOnly(2015, 3, 12),
+                "'2015-03-12'");
+        }
+
+        [ConditionalFact]
+        public override void TimeOnly_literal_generated_correctly()
+        {
+            Test_GenerateSqlLiteral_helper(
+                GetMapping(typeof(TimeOnly)),
+                new TimeOnly(13, 10, 15),
+                "'13:10:15'");
+        }
+
+        [ConditionalFact]
+        public override void TimeOnly_literal_generated_correctly_with_milliseconds()
+        {
+            Test_GenerateSqlLiteral_helper(
+                GetMapping(typeof(TimeOnly)),
+                new TimeOnly(13, 10, 15, 500),
+                "'13:10:15.5000000'");
+        }
+
         public override void Decimal_literal_generated_correctly()
         {
             var typeMapping = new SqliteDecimalTypeMapping("TEXT");
@@ -160,7 +184,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         protected override DbContextOptions ContextOptions { get; }
             = new DbContextOptionsBuilder()
-                .UseInternalServiceProvider(new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider())
+                .UseInternalServiceProvider(new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider(validateScopes: true))
                 .UseSqlite("Filename=dummy.db").Options;
     }
 }

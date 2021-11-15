@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             : base(fixture)
         {
             ClearLog();
-            Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
+            //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
         protected override bool CanExecuteQueryString
@@ -710,8 +710,19 @@ WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (FLOOR([o].[UnitPrice]) > 10.0)
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
+WHERE POWER(CAST([o].[Discount] AS float), 3.0E0) > 0.004999999888241291E0");
+        }
+
+        public override async Task Where_math_square(bool async)
+        {
+            await base.Where_math_square(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
 WHERE POWER(CAST([o].[Discount] AS float), 2.0E0) > 0.05000000074505806E0");
         }
+
 
         public override async Task Where_math_round(bool async)
         {
@@ -900,6 +911,236 @@ WHERE ([o].[OrderID] = 11077) AND (SIGN([o].[Discount]) > 0)");
         [ConditionalTheory(Skip = "Issue#17328")]
         public override Task Where_math_max(bool async)
             => base.Where_math_max(async);
+
+        public override async Task Where_mathf_abs1(bool async)
+        {
+            await base.Where_mathf_abs1(async);
+
+            AssertSql(
+                @"SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[SupplierID], [p].[UnitPrice], [p].[UnitsInStock]
+FROM [Products] AS [p]
+WHERE ABS(CAST([p].[ProductID] AS real)) > CAST(10 AS real)");
+        }
+        
+        public override async Task Where_mathf_ceiling1(bool async)
+        {
+            await base.Where_mathf_ceiling1(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[UnitPrice] < 7.0) AND (CEILING([o].[Discount]) > CAST(0 AS real))");
+        }
+        
+        public override async Task Where_mathf_floor(bool async)
+        {
+            await base.Where_mathf_floor(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (FLOOR(CAST([o].[UnitPrice] AS real)) > CAST(10 AS real))");
+        }
+
+        public override async Task Where_mathf_power(bool async)
+        {
+            await base.Where_mathf_power(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE POWER([o].[Discount], CAST(3 AS real)) > CAST(0.005 AS real)");
+        }
+
+        public override async Task Where_mathf_square(bool async)
+        {
+            await base.Where_mathf_square(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE POWER([o].[Discount], CAST(2 AS real)) > CAST(0.05 AS real)");
+        }
+
+        public override async Task Where_mathf_round2(bool async)
+        {
+            await base.Where_mathf_round2(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE CAST(ROUND(CAST([o].[UnitPrice] AS real), 2) AS real) > CAST(100 AS real)");
+        }
+
+        public override async Task Select_mathf_round(bool async)
+        {
+            await base.Select_mathf_round(async);
+
+            AssertSql(
+                @"SELECT CAST(ROUND(CAST([o].[OrderID] AS real), 0) AS real)
+FROM [Orders] AS [o]
+WHERE [o].[OrderID] < 10250");
+        }
+
+        public override async Task Select_mathf_round2(bool async)
+        {
+            await base.Select_mathf_round2(async);
+
+            AssertSql(
+                @"SELECT CAST(ROUND(CAST([o].[UnitPrice] AS real), 2) AS real)
+FROM [Order Details] AS [o]
+WHERE [o].[Quantity] < CAST(5 AS smallint)");
+        }
+
+        public override async Task Where_mathf_truncate(bool async)
+        {
+            await base.Where_mathf_truncate(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[Quantity] < CAST(5 AS smallint)) AND (CAST(ROUND(CAST([o].[UnitPrice] AS real), 0, 1) AS real) > CAST(10 AS real))");
+        }
+
+        public override async Task Select_mathf_truncate(bool async)
+        {
+            await base.Select_mathf_truncate(async);
+
+            AssertSql(
+                @"SELECT CAST(ROUND(CAST([o].[UnitPrice] AS real), 0, 1) AS real)
+FROM [Order Details] AS [o]
+WHERE [o].[Quantity] < CAST(5 AS smallint)");
+        }
+
+        public override async Task Where_mathf_exp(bool async)
+        {
+            await base.Where_mathf_exp(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (EXP([o].[Discount]) > CAST(1 AS real))");
+        }
+
+        public override async Task Where_mathf_log10(bool async)
+        {
+            await base.Where_mathf_log10(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG10([o].[Discount]) < CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_log(bool async)
+        {
+            await base.Where_mathf_log(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG([o].[Discount]) < CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_log_new_base(bool async)
+        {
+            await base.Where_mathf_log_new_base(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE (([o].[OrderID] = 11077) AND ([o].[Discount] > CAST(0 AS real))) AND (LOG([o].[Discount], CAST(7 AS real)) < CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_sqrt(bool async)
+        {
+            await base.Where_mathf_sqrt(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (SQRT([o].[Discount]) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_acos(bool async)
+        {
+            await base.Where_mathf_acos(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (ACOS([o].[Discount]) > CAST(1 AS real))");
+        }
+
+        public override async Task Where_mathf_asin(bool async)
+        {
+            await base.Where_mathf_asin(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (ASIN([o].[Discount]) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_atan(bool async)
+        {
+            await base.Where_mathf_atan(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (ATAN([o].[Discount]) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_atan2(bool async)
+        {
+            await base.Where_mathf_atan2(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (ATN2([o].[Discount], CAST(1 AS real)) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_cos(bool async)
+        {
+            await base.Where_mathf_cos(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (COS([o].[Discount]) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_sin(bool async)
+        {
+            await base.Where_mathf_sin(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (SIN([o].[Discount]) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_tan(bool async)
+        {
+            await base.Where_mathf_tan(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (TAN([o].[Discount]) > CAST(0 AS real))");
+        }
+
+        public override async Task Where_mathf_sign(bool async)
+        {
+            await base.Where_mathf_sign(async);
+
+            AssertSql(
+                @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
+FROM [Order Details] AS [o]
+WHERE ([o].[OrderID] = 11077) AND (SIGN([o].[Discount]) > 0)");
+        }
 
         public override async Task Where_guid_newguid(bool async)
         {
@@ -1287,6 +1528,32 @@ FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
         }
 
+        public override async Task Indexof_with_one_arg(bool async)
+        {
+            await base.Indexof_with_one_arg(async);
+
+            AssertSql(
+                @"SELECT CASE
+    WHEN N'a' = N'' THEN 0
+    ELSE CAST(CHARINDEX(N'a', [c].[ContactName]) AS int) - 1
+END
+FROM [Customers] AS [c]
+WHERE [c].[CustomerID] = N'ALFKI'");
+        }
+
+        public override async Task Indexof_with_starting_position(bool async)
+        {
+            await base.Indexof_with_starting_position(async);
+
+            AssertSql(
+                @"SELECT CASE
+    WHEN N'a' = N'' THEN 0
+    ELSE CAST(CHARINDEX(N'a', [c].[ContactName], 3 + 1) AS int) - 1
+END
+FROM [Customers] AS [c]
+WHERE [c].[CustomerID] = N'ALFKI'");
+        }
+
         public override async Task Replace_with_emptystring(bool async)
         {
             await base.Replace_with_emptystring(async);
@@ -1297,9 +1564,51 @@ FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
         }
 
-        public override async Task Substring_with_zero_startindex(bool async)
+        public override async Task Replace_using_property_arguments(bool async)
         {
-            await base.Substring_with_zero_startindex(async);
+            await base.Replace_using_property_arguments(async);
+
+            AssertSql(
+                @"SELECT REPLACE([c].[ContactName], [c].[ContactName], [c].[CustomerID])
+FROM [Customers] AS [c]
+WHERE [c].[CustomerID] = N'ALFKI'");
+        }
+
+        public override async Task Substring_with_one_arg_with_zero_startindex(bool async)
+        {
+            await base.Substring_with_one_arg_with_zero_startindex(async);
+
+            AssertSql(
+                @"SELECT [c].[ContactName]
+FROM [Customers] AS [c]
+WHERE SUBSTRING([c].[CustomerID], 0 + 1, LEN([c].[CustomerID])) = N'ALFKI'");
+        }
+
+        public override async Task Substring_with_one_arg_with_constant(bool async)
+        {
+            await base.Substring_with_one_arg_with_constant(async);
+
+            AssertSql(
+                @"SELECT [c].[ContactName]
+FROM [Customers] AS [c]
+WHERE SUBSTRING([c].[CustomerID], 1 + 1, LEN([c].[CustomerID])) = N'LFKI'");
+        }
+
+        public override async Task Substring_with_one_arg_with_closure(bool async)
+        {
+            await base.Substring_with_one_arg_with_closure(async);
+
+            AssertSql(
+                @"@__start_0='2'
+
+SELECT [c].[ContactName]
+FROM [Customers] AS [c]
+WHERE SUBSTRING([c].[CustomerID], @__start_0 + 1, LEN([c].[CustomerID])) = N'FKI'");
+        }
+
+        public override async Task Substring_with_two_args_with_zero_startindex(bool async)
+        {
+            await base.Substring_with_two_args_with_zero_startindex(async);
 
             AssertSql(
                 @"SELECT SUBSTRING([c].[ContactName], 0 + 1, 3)
@@ -1307,9 +1616,9 @@ FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
         }
 
-        public override async Task Substring_with_zero_length(bool async)
+        public override async Task Substring_with_two_args_with_zero_length(bool async)
         {
-            await base.Substring_with_zero_length(async);
+            await base.Substring_with_two_args_with_zero_length(async);
 
             AssertSql(
                 @"SELECT SUBSTRING([c].[ContactName], 2 + 1, 0)
@@ -1317,9 +1626,9 @@ FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
         }
 
-        public override async Task Substring_with_constant(bool async)
+        public override async Task Substring_with_two_args_with_constant(bool async)
         {
-            await base.Substring_with_constant(async);
+            await base.Substring_with_two_args_with_constant(async);
 
             AssertSql(
                 @"SELECT SUBSTRING([c].[ContactName], 1 + 1, 3)
@@ -1327,9 +1636,9 @@ FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
         }
 
-        public override async Task Substring_with_closure(bool async)
+        public override async Task Substring_with_two_args_with_closure(bool async)
         {
-            await base.Substring_with_closure(async);
+            await base.Substring_with_two_args_with_closure(async);
 
             AssertSql(
                 @"@__start_0='2'
@@ -1339,9 +1648,9 @@ FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
         }
 
-        public override async Task Substring_with_Index_of(bool async)
+        public override async Task Substring_with_two_args_with_Index_of(bool async)
         {
-            await base.Substring_with_Index_of(async);
+            await base.Substring_with_two_args_with_Index_of(async);
 
             AssertSql(
                 @"SELECT SUBSTRING([c].[ContactName], CASE
@@ -1362,9 +1671,9 @@ FROM [Customers] AS [c]
 WHERE [c].[Region] IS NULL OR ([c].[Region] LIKE N'')");
         }
 
-        public override void IsNullOrEmpty_in_projection()
+        public override async Task IsNullOrEmpty_in_projection(bool async)
         {
-            base.IsNullOrEmpty_in_projection();
+            await base.IsNullOrEmpty_in_projection(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID] AS [Id], CASE
@@ -1374,13 +1683,23 @@ END AS [Value]
 FROM [Customers] AS [c]");
         }
 
-        public override void IsNullOrEmpty_negated_in_projection()
+        public override async Task IsNullOrEmpty_negated_in_predicate(bool async)
         {
-            base.IsNullOrEmpty_negated_in_projection();
+            await base.IsNullOrEmpty_negated_in_predicate(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE [c].[Region] IS NOT NULL AND NOT ([c].[Region] LIKE N'')");
+        }
+
+        public override async Task IsNullOrEmpty_negated_in_projection(bool async)
+        {
+            await base.IsNullOrEmpty_negated_in_projection(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID] AS [Id], CASE
-    WHEN NOT ([c].[Region] IS NULL OR ([c].[Region] LIKE N'')) THEN CAST(1 AS bit)
+    WHEN [c].[Region] IS NOT NULL AND NOT ([c].[Region] LIKE N'') THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [Value]
 FROM [Customers] AS [c]");
@@ -1478,7 +1797,7 @@ ORDER BY CAST(LEN([c].[CustomerID]) AS int), [c].[CustomerID]");
                 @"SELECT [c].[CustomerID], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-ORDER BY CAST(LEN([c].[CustomerID]) AS int), [c].[CustomerID], [o].[OrderID]");
+ORDER BY CAST(LEN([c].[CustomerID]) AS int), [c].[CustomerID]");
         }
 
         public override async Task Static_string_equals_in_predicate(bool async)
@@ -1557,6 +1876,11 @@ WHERE 0 = 1");
         public override Task Regex_IsMatch_MethodCall_constant_input(bool async)
         {
             return AssertTranslationFailed(() => base.Regex_IsMatch_MethodCall_constant_input(async));
+        }
+
+        public override Task Datetime_subtraction_TotalDays(bool async)
+        {
+            return AssertTranslationFailed(() =>  base.Datetime_subtraction_TotalDays(async));
         }
 
         private void AssertSql(params string[] expected)

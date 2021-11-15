@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -132,6 +132,14 @@ WHERE (c[""Discriminator""] = ""Customer"")");
                 ss => from ov in ss.Set<OrderQuery>().Where(o => o.CustomerID == "ALFKI")
                       where ov.Customer.Orders.Any()
                       select ov);
+
+            AssertSql(@"");
+        }
+
+        [ConditionalTheory(Skip = "issue#17314")] // left join translation
+        public override async Task KeylessEntity_with_included_navs_multi_level(bool async)
+        {
+            await base.KeylessEntity_with_included_navs_multi_level(async);
 
             AssertSql(@"");
         }

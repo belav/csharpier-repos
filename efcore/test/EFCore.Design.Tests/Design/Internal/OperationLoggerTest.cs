@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -27,7 +27,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             Assert.Collection(
                 reporter.Messages,
-                x => Assert.Equal("verbose: -- Can't stop the SQL", x));
+                x =>
+                {
+                    Assert.Equal("-- Can't stop the SQL", x.Message);
+                    Assert.Equal(LogLevel.Debug, x.Level);
+                });
         }
     }
 }

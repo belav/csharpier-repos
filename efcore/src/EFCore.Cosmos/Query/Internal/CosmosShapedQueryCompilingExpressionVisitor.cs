@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Newtonsoft.Json.Linq;
 
 #nullable disable
@@ -23,7 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
         private readonly IQuerySqlGeneratorFactory _querySqlGeneratorFactory;
         private readonly Type _contextType;
-        private readonly bool _concurrencyDetectionEnabled;
+        private readonly bool _threadSafetyChecksEnabled;
         private readonly string _partitionKeyFromExtension;
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             _sqlExpressionFactory = sqlExpressionFactory;
             _querySqlGeneratorFactory = querySqlGeneratorFactory;
             _contextType = cosmosQueryCompilationContext.ContextType;
-            _concurrencyDetectionEnabled = dependencies.CoreSingletonOptions.IsConcurrencyDetectionEnabled;
+            _threadSafetyChecksEnabled = dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
             _partitionKeyFromExtension = cosmosQueryCompilationContext.PartitionKeyFromExtension;
         }
 
@@ -54,8 +53,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitShapedQuery(ShapedQueryExpression shapedQueryExpression)
         {
-            Check.NotNull(shapedQueryExpression, nameof(shapedQueryExpression));
-
             var jObjectParameter = Expression.Parameter(typeof(JObject), "jObject");
 
             var shaperBody = shapedQueryExpression.ShaperExpression;
@@ -65,7 +62,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             switch (shapedQueryExpression.QueryExpression)
             {
                 case SelectExpression selectExpression:
-
                     shaperBody = new CosmosProjectionBindingRemovingExpressionVisitor(
                             selectExpression, jObjectParameter,
                             QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll)
@@ -89,10 +85,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         Expression.Constant(_partitionKeyFromExtension, typeof(string)),
                         Expression.Constant(
                             QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
-                        Expression.Constant(_concurrencyDetectionEnabled));
+                        Expression.Constant(_threadSafetyChecksEnabled));
 
                 case ReadItemExpression readItemExpression:
-
                     shaperBody = new CosmosProjectionBindingRemovingReadItemExpressionVisitor(
                             readItemExpression, jObjectParameter,
                             QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll)
@@ -113,7 +108,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         Expression.Constant(_contextType),
                         Expression.Constant(
                             QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
-                        Expression.Constant(_concurrencyDetectionEnabled));
+                        Expression.Constant(_threadSafetyChecksEnabled));
 
                 default:
                     throw new NotSupportedException(CoreStrings.UnhandledExpressionNode(shapedQueryExpression.QueryExpression));

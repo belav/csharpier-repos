@@ -1,14 +1,20 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
+namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
     /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Provides a simple API for configuring a <see cref="DbFunctionParameter" />.
     ///     </para>
@@ -16,7 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
     ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
     ///         and it is not designed to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    /// </remarks>
     public class InternalDbFunctionParameterBuilder : AnnotatableBuilder<DbFunctionParameter, IConventionModelBuilder>,
         IConventionDbFunctionParameterBuilder
     {
@@ -128,7 +134,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders.Internal
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionDbFunctionParameterBuilder? IConventionDbFunctionParameterBuilder.HasStoreType(string? storeType, bool fromDataAnnotation)
+        IConventionDbFunctionParameterBuilder? IConventionDbFunctionParameterBuilder.HasStoreType(
+            string? storeType,
+            bool fromDataAnnotation)
             => HasStoreType(storeType, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <inheritdoc />

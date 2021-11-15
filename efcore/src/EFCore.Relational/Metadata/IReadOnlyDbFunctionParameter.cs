@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Text;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// <summary>
     ///     Represents a function parameter.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+    /// </remarks>
     public interface IReadOnlyDbFunctionParameter : IReadOnlyAnnotatable
     {
         /// <summary>
@@ -35,12 +38,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <summary>
         ///     Gets the value which indicates whether the parameter propagates nullability,
-        ///     meaning if it's value is <see langword="null"/> the database function itself returns <see langword="null"/>.
+        ///     meaning if it's value is <see langword="null" /> the database function itself returns <see langword="null" />.
         /// </summary>
         bool PropagatesNullability { get; }
 
         /// <summary>
-        ///     Gets the <see cref="RelationalTypeMapping" /> for this parameter.
+        ///     Gets the type mapping for this parameter.
         /// </summary>
         RelationalTypeMapping? TypeMapping { get; }
 
@@ -53,9 +56,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -66,7 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .Append("DbFunctionParameter: ");
 
             builder.Append(Name)
-                .Append(" ")
+                .Append(' ')
                 .Append(StoreType);
 
             if ((options & MetadataDebugStringOptions.SingleLine) == 0)

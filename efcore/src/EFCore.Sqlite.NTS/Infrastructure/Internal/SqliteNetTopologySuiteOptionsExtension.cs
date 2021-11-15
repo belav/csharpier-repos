@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -76,8 +76,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
             public override string LogFragment
                 => "using NetTopologySuite ";
 
-            public override long GetServiceProviderHashCode()
+            public override int GetServiceProviderHashCode()
                 => 0;
+
+            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+                => other is ExtensionInfo;
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
                 => debugInfo["NetTopologySuite"] = "1";

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
@@ -64,7 +64,7 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: IdentityUser.Email (string) MaxLength(256)",
                         "Property: IdentityUser.EmailConfirmed (bool) Required",
                         "Property: IdentityUser.LockoutEnabled (bool) Required",
-                        "Property: IdentityUser.LockoutEnd (Nullable<DateTimeOffset>)",
+                        "Property: IdentityUser.LockoutEnd (DateTimeOffset?)",
                         "Property: IdentityUser.NormalizedEmail (string) Index MaxLength(256)",
                         "Property: IdentityUser.NormalizedUserName (string) Index MaxLength(256)",
                         "Property: IdentityUser.PasswordHash (string)",

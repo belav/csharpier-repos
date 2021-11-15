@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime,
+            CommandSource commandSource)
             => default;
 
         public DbCommand CommandCreated(
@@ -32,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration,
+            CommandSource commandSource)
             => command;
 
         public InterceptionResult<DbDataReader> CommandReaderExecuting(
@@ -41,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime,
+            CommandSource commandSource)
             => default;
 
         public InterceptionResult<object> CommandScalarExecuting(
@@ -50,26 +53,29 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime,
+            CommandSource commandSource)
             => default;
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="command"> The database command object. </param>
-        /// <param name="context"> The <see cref="DbContext" /> currently being used, to null if not known. </param>
-        /// <param name="commandId"> The correlation ID associated with the given <see cref="System.Data.Common.DbCommand" />. </param>
-        /// <param name="connectionId"> The correlation ID associated with the <see cref="System.Data.Common.DbConnection" /> being used. </param>
-        /// <param name="startTime"> The time that execution began. </param>
-        /// <returns> An intercepted result. </returns>
+        /// <param name="connection">The connection.</param>
+        /// <param name="command">The database command object.</param>
+        /// <param name="context">The <see cref="DbContext" /> currently being used, to null if not known.</param>
+        /// <param name="commandId">The correlation ID associated with the given <see cref="System.Data.Common.DbCommand" />.</param>
+        /// <param name="connectionId">The correlation ID associated with the <see cref="System.Data.Common.DbConnection" /> being used.</param>
+        /// <param name="startTime">The time that execution began.</param>
+        /// <param name="commandSource">Source of the command.</param>
+        /// <returns>An intercepted result.</returns>
         public InterceptionResult<int> CommandNonQueryExecuting(
             IRelationalConnection connection,
             DbCommand command,
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime,
+            CommandSource commandSource)
             => default;
 
         public ValueTask<InterceptionResult<DbDataReader>> CommandReaderExecutingAsync(
@@ -79,6 +85,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => default;
 
@@ -89,6 +96,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => default;
 
@@ -99,6 +107,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => default;
 
@@ -110,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             DbDataReader methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration,
+            CommandSource commandSource)
             => methodResult;
 
         public object? CommandScalarExecuted(
@@ -121,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             object? methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration,
+            CommandSource commandSource)
             => methodResult;
 
         public int CommandNonQueryExecuted(
@@ -132,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             int methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration,
+            CommandSource commandSource)
             => methodResult;
 
         public ValueTask<DbDataReader> CommandReaderExecutedAsync(
@@ -144,6 +156,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbDataReader methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => new(methodResult);
 
@@ -156,6 +169,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             object? methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => new(methodResult);
 
@@ -168,6 +182,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => new(methodResult);
 
@@ -180,7 +195,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             Exception exception,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration,
+            CommandSource commandSource)
         {
         }
 
@@ -194,6 +210,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration,
+            CommandSource commandSource,
             CancellationToken cancellationToken = default)
             => Task.CompletedTask;
 

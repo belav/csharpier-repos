@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Design
 {
@@ -17,15 +17,15 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <summary>
         ///     Invoked when a result is available.
         /// </summary>
-        /// <param name="value"> The result. </param>
+        /// <param name="value">The result.</param>
         void OnResult(object? value);
 
         /// <summary>
         ///     Invoked when an error occurs.
         /// </summary>
-        /// <param name="type"> The exception type. </param>
-        /// <param name="message"> The error message. </param>
-        /// <param name="stackTrace"> The stack trace. </param>
+        /// <param name="type">The exception type.</param>
+        /// <param name="message">The error message.</param>
+        /// <param name="stackTrace">The stack trace.</param>
         /// <remarks>
         ///     When an <see cref="OperationException" /> is received, the stack trace should not be shown by default.
         /// </remarks>

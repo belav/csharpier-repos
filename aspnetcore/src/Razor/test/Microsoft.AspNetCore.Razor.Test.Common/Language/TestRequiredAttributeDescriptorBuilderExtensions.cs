@@ -1,69 +1,68 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public static class TestRequiredAttributeDescriptorBuilderExtensions
 {
-    public static class TestRequiredAttributeDescriptorBuilderExtensions
+    public static RequiredAttributeDescriptorBuilder Name(this RequiredAttributeDescriptorBuilder builder, string name)
     {
-        public static RequiredAttributeDescriptorBuilder Name(this RequiredAttributeDescriptorBuilder builder, string name)
+        if (builder == null)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            builder.Name = name;
-
-            return builder;
+            throw new ArgumentNullException(nameof(builder));
         }
 
-        public static RequiredAttributeDescriptorBuilder NameComparisonMode(
-            this RequiredAttributeDescriptorBuilder builder,
-            RequiredAttributeDescriptor.NameComparisonMode nameComparison)
+        builder.Name = name;
+
+        return builder;
+    }
+
+    public static RequiredAttributeDescriptorBuilder NameComparisonMode(
+        this RequiredAttributeDescriptorBuilder builder,
+        RequiredAttributeDescriptor.NameComparisonMode nameComparison)
+    {
+        if (builder == null)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            builder.NameComparisonMode = nameComparison;
-
-            return builder;
+            throw new ArgumentNullException(nameof(builder));
         }
 
-        public static RequiredAttributeDescriptorBuilder Value(this RequiredAttributeDescriptorBuilder builder, string value)
+        builder.NameComparisonMode = nameComparison;
+
+        return builder;
+    }
+
+    public static RequiredAttributeDescriptorBuilder Value(this RequiredAttributeDescriptorBuilder builder, string value)
+    {
+        if (builder == null)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            builder.Value = value;
-
-            return builder;
+            throw new ArgumentNullException(nameof(builder));
         }
 
-        public static RequiredAttributeDescriptorBuilder ValueComparisonMode(
-            this RequiredAttributeDescriptorBuilder builder,
-            RequiredAttributeDescriptor.ValueComparisonMode valueComparison)
+        builder.Value = value;
+
+        return builder;
+    }
+
+    public static RequiredAttributeDescriptorBuilder ValueComparisonMode(
+        this RequiredAttributeDescriptorBuilder builder,
+        RequiredAttributeDescriptor.ValueComparisonMode valueComparison)
+    {
+        if (builder == null)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            builder.ValueComparisonMode = valueComparison;
-
-            return builder;
+            throw new ArgumentNullException(nameof(builder));
         }
 
-        public static RequiredAttributeDescriptorBuilder AddDiagnostic(this RequiredAttributeDescriptorBuilder builder, RazorDiagnostic diagnostic)
-        {
-            builder.Diagnostics.Add(diagnostic);
+        builder.ValueComparisonMode = valueComparison;
 
-            return builder;
-        }
+        return builder;
+    }
+
+    public static RequiredAttributeDescriptorBuilder AddDiagnostic(this RequiredAttributeDescriptorBuilder builder, RazorDiagnostic diagnostic)
+    {
+        builder.Diagnostics.Add(diagnostic);
+
+        return builder;
     }
 }

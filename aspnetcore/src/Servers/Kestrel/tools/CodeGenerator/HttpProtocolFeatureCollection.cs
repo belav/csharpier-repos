@@ -1,26 +1,27 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 
-namespace CodeGenerator
+namespace CodeGenerator;
+
+public class HttpProtocolFeatureCollection
 {
-    public class HttpProtocolFeatureCollection
+    public static string GenerateFile()
     {
-        public static string GenerateFile()
+        var alwaysFeatures = new[]
         {
-            var alwaysFeatures = new[]
-            {
                 "IHttpRequestFeature",
                 "IHttpResponseFeature",
                 "IHttpResponseBodyFeature",
                 "IRouteValuesFeature",
                 "IEndpointFeature",
-                "IServiceProvidersFeature"
+                "IServiceProvidersFeature",
+                "IHttpActivityFeature"
             };
 
-            var commonFeatures = new[]
-            {
+        var commonFeatures = new[]
+        {
                 "IItemsFeature",
                 "IQueryFeature",
                 "IRequestBodyPipeFeature",
@@ -29,8 +30,8 @@ namespace CodeGenerator
                 "IHttpRequestIdentifierFeature",
             };
 
-            var sometimesFeatures = new[]
-            {
+        var sometimesFeatures = new[]
+        {
                 "IHttpConnectionFeature",
                 "ISessionFeature",
                 "IResponseCookiesFeature",
@@ -38,10 +39,11 @@ namespace CodeGenerator
                 "IHttpResponseTrailersFeature",
                 "ITlsConnectionFeature",
                 "IHttpUpgradeFeature",
-                "IHttpWebSocketFeature"
+                "IHttpWebSocketFeature",
+                "IBadRequestExceptionFeature"
             };
-            var maybeFeatures = new[]
-            {
+        var maybeFeatures = new[]
+        {
                 "IHttp2StreamIdFeature",
                 "IHttpRequestLifetimeFeature",
                 "IHttpMaxRequestBodySizeFeature",
@@ -49,19 +51,20 @@ namespace CodeGenerator
                 "IHttpMinResponseDataRateFeature",
                 "IHttpBodyControlFeature",
                 "IHttpRequestBodyDetectionFeature",
-                "IHttpResetFeature"
+                "IHttpResetFeature",
+                "IPersistentStateFeature"
             };
 
-            var allFeatures = alwaysFeatures
-                .Concat(commonFeatures)
-                .Concat(sometimesFeatures)
-                .Concat(maybeFeatures)
-                .ToArray();
+        var allFeatures = alwaysFeatures
+            .Concat(commonFeatures)
+            .Concat(sometimesFeatures)
+            .Concat(maybeFeatures)
+            .ToArray();
 
-            // NOTE: This list MUST always match the set of feature interfaces implemented by HttpProtocol.
-            // See also: src/Kestrel.Core/Internal/Http/HttpProtocol.FeatureCollection.cs
-            var implementedFeatures = new[]
-            {
+        // NOTE: This list MUST always match the set of feature interfaces implemented by HttpProtocol.
+        // See also: src/Kestrel.Core/Internal/Http/HttpProtocol.FeatureCollection.cs
+        var implementedFeatures = new[]
+        {
                 "IHttpRequestFeature",
                 "IHttpResponseFeature",
                 "IHttpResponseBodyFeature",
@@ -76,20 +79,21 @@ namespace CodeGenerator
                 "IHttpBodyControlFeature",
                 "IHttpMaxRequestBodySizeFeature",
                 "IHttpRequestBodyDetectionFeature",
+                "IBadRequestExceptionFeature"
             };
 
-            var usings = $@"
+        var usings = $@"
+using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;";
 
-            return FeatureCollectionGenerator.GenerateFile(
-                namespaceName: "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http",
-                className: "HttpProtocol",
-                allFeatures: allFeatures,
-                implementedFeatures: implementedFeatures,
-                extraUsings: usings,
-                fallbackFeatures: "ConnectionFeatures");
-        }
+        return FeatureCollectionGenerator.GenerateFile(
+            namespaceName: "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http",
+            className: "HttpProtocol",
+            allFeatures: allFeatures,
+            implementedFeatures: implementedFeatures,
+            extraUsings: usings,
+            fallbackFeatures: "ConnectionFeatures");
     }
 }

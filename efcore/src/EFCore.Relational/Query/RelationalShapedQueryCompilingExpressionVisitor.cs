@@ -1,16 +1,16 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -19,51 +19,53 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         private readonly Type _contextType;
         private readonly ISet<string> _tags;
-        private readonly bool _concurrencyDetectionEnabled;
+        private readonly bool _threadSafetyChecksEnabled;
         private readonly bool _detailedErrorsEnabled;
         private readonly bool _useRelationalNulls;
 
         /// <summary>
         ///     Creates a new instance of the <see cref="ShapedQueryCompilingExpressionVisitor" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this class. </param>
-        /// <param name="queryCompilationContext"> The query compilation context object to use. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
+        /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
+        /// <param name="queryCompilationContext">The query compilation context object to use.</param>
         public RelationalShapedQueryCompilingExpressionVisitor(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
             RelationalShapedQueryCompilingExpressionVisitorDependencies relationalDependencies,
             QueryCompilationContext queryCompilationContext)
             : base(dependencies, queryCompilationContext)
         {
-            Check.NotNull(relationalDependencies, nameof(relationalDependencies));
-
             RelationalDependencies = relationalDependencies;
 
             _contextType = queryCompilationContext.ContextType;
             _tags = queryCompilationContext.Tags;
-            _concurrencyDetectionEnabled = dependencies.CoreSingletonOptions.IsConcurrencyDetectionEnabled;
+            _threadSafetyChecksEnabled = dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
             _detailedErrorsEnabled = dependencies.CoreSingletonOptions.AreDetailedErrorsEnabled;
             _useRelationalNulls = RelationalOptionsExtension.Extract(queryCompilationContext.ContextOptions).UseRelationalNulls;
         }
 
         /// <summary>
-        ///     Parameter object containing relational service dependencies.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalShapedQueryCompilingExpressionVisitorDependencies RelationalDependencies { get; }
 
         /// <inheritdoc />
         protected override Expression VisitShapedQuery(ShapedQueryExpression shapedQueryExpression)
         {
-            Check.NotNull(shapedQueryExpression, nameof(shapedQueryExpression));
-
             var selectExpression = (SelectExpression)shapedQueryExpression.QueryExpression;
 
             VerifyNoClientConstant(shapedQueryExpression.ShaperExpression);
             var nonComposedFromSql = selectExpression.IsNonComposedFromSql();
-            var splitQuery = ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior
-                == QuerySplittingBehavior.SplitQuery;
+            var querySplittingBehavior = ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior;
+            var splitQuery = querySplittingBehavior == QuerySplittingBehavior.SplitQuery;
+            var collectionCount = 0;
             var shaper = new ShaperProcessingExpressionVisitor(this, selectExpression, _tags, splitQuery, nonComposedFromSql).ProcessShaper(
-                shapedQueryExpression.ShaperExpression, out var relationalCommandCache, out var relatedDataLoaders);
+                shapedQueryExpression.ShaperExpression, out var relationalCommandCache, out var relatedDataLoaders, ref collectionCount);
+            if (querySplittingBehavior == null
+                && collectionCount > 1)
+            {
+                QueryCompilationContext.Logger.MultipleCollectionIncludeWarning();
+            }
 
             if (nonComposedFromSql)
             {
@@ -79,7 +81,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Expression.Constant(
                         QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
                     Expression.Constant(_detailedErrorsEnabled),
-                    Expression.Constant(_concurrencyDetectionEnabled));
+                    Expression.Constant(_threadSafetyChecksEnabled));
             }
 
             if (splitQuery)
@@ -103,7 +105,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Expression.Constant(
                         QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
                     Expression.Constant(_detailedErrorsEnabled),
-                    Expression.Constant(_concurrencyDetectionEnabled));
+                    Expression.Constant(_threadSafetyChecksEnabled));
             }
 
             return Expression.New(
@@ -115,7 +117,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression.Constant(
                     QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
                 Expression.Constant(_detailedErrorsEnabled),
-                Expression.Constant(_concurrencyDetectionEnabled));
+                Expression.Constant(_threadSafetyChecksEnabled));
         }
     }
 }

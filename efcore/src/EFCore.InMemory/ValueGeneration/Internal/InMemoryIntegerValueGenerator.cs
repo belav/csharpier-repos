@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Globalization;
 using System.Threading;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
@@ -40,8 +39,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
         /// </summary>
         public virtual void Bump(object?[] row)
         {
-            Check.NotNull(row, nameof(row));
-
             var newValue = (long)Convert.ChangeType(row[_propertyIndex]!, typeof(long));
 
             if (_current < newValue)

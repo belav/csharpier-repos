@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -18,15 +17,19 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public class IncludeExpression : Expression, IPrintableExpression
     {
         /// <summary>
         ///     Creates a new instance of the <see cref="IncludeExpression" /> class. The navigation will be set
         ///     as loaded after completing the Include.
         /// </summary>
-        /// <param name="entityExpression"> An expression to get entity which is performing include. </param>
-        /// <param name="navigationExpression"> An expression to get included navigation element. </param>
-        /// <param name="navigation"> The navigation for this include operation. </param>
+        /// <param name="entityExpression">An expression to get entity which is performing include.</param>
+        /// <param name="navigationExpression">An expression to get included navigation element.</param>
+        /// <param name="navigation">The navigation for this include operation.</param>
         public IncludeExpression(
             Expression entityExpression,
             Expression navigationExpression,
@@ -48,10 +51,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             INavigationBase navigation,
             bool setLoaded)
         {
-            Check.NotNull(entityExpression, nameof(entityExpression));
-            Check.NotNull(navigationExpression, nameof(navigationExpression));
-            Check.NotNull(navigation, nameof(navigation));
-
             EntityExpression = entityExpression;
             NavigationExpression = navigationExpression;
             Navigation = navigation;
@@ -93,8 +92,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var newEntityExpression = visitor.Visit(EntityExpression);
             var newNavigationExpression = visitor.Visit(NavigationExpression);
 
@@ -105,24 +102,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="entityExpression"> The <see cref="EntityExpression" /> property of the result. </param>
-        /// <param name="navigationExpression"> The <see cref="NavigationExpression" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="entityExpression">The <see cref="EntityExpression" /> property of the result.</param>
+        /// <param name="navigationExpression">The <see cref="NavigationExpression" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual IncludeExpression Update(Expression entityExpression, Expression navigationExpression)
-        {
-            Check.NotNull(entityExpression, nameof(entityExpression));
-            Check.NotNull(navigationExpression, nameof(navigationExpression));
-
-            return entityExpression != EntityExpression || navigationExpression != NavigationExpression
+            => entityExpression != EntityExpression || navigationExpression != NavigationExpression
                 ? new IncludeExpression(entityExpression, navigationExpression, Navigation, SetLoaded)
                 : this;
-        }
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.AppendLine("IncludeExpression(");
             using (expressionPrinter.Indent())
             {

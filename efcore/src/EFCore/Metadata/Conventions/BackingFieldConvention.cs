@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -14,20 +14,23 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 {
     /// <summary>
-    ///     <para>
-    ///         A convention that finds backing fields for properties based on their names:
-    ///         * &lt;[property name]&gt;k__BackingField
-    ///         * _[camel-cased property name]
-    ///         * _[property name]
-    ///         * m_[camel-cased property name]
-    ///         * m_[property name]
-    ///         * [property name]_
-    ///     </para>
+    ///     A convention that finds backing fields for properties based on their names:
+    ///     * &lt;[property name]&gt;k__BackingField
+    ///     * _[camel-cased property name]
+    ///     * _[property name]
+    ///     * m_[camel-cased property name]
+    ///     * m_[property name]
+    ///     * [property name]_
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The field type must be of a type that's assignable to or from the property type.
     ///         If more than one matching field is found an exception is thrown.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class BackingFieldConvention :
         IPropertyAddedConvention,
         INavigationAddedConvention,
@@ -37,22 +40,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="BackingFieldConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public BackingFieldConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
         /// <summary>
         ///     Called after a property is added to the entity type.
         /// </summary>
-        /// <param name="propertyBuilder"> The builder for the property. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="propertyBuilder">The builder for the property.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
             IConventionContext<IConventionPropertyBuilder> context)

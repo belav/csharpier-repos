@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             : base(fixture)
         {
             ClearLog();
-            Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
+            //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
         protected override bool CanExecuteQueryString
@@ -728,6 +728,18 @@ WHERE GETDATE() <> @__myDatetime_0");
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE GETUTCDATE() <> @__myDatetime_0");
+        }
+
+        public override async Task Where_datetimeoffset_utcnow(bool async)
+        {
+            await base.Where_datetimeoffset_utcnow(async);
+
+            AssertSql(
+                @"@__myDatetimeOffset_0='2015-04-10T00:00:00.0000000-08:00'
+
+SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE CAST(SYSUTCDATETIME() AS datetimeoffset) <> @__myDatetimeOffset_0");
         }
 
         public override async Task Where_datetime_today(bool async)
@@ -1589,7 +1601,7 @@ FROM (
     WHERE [c].[CustomerID] = N'ALFKI'
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID], [o].[OrderID]",
+ORDER BY [t].[CustomerID]",
                 //
                 @"SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [o].[UnitPrice]
 FROM [Order Details] AS [o]
@@ -1680,11 +1692,10 @@ WHERE EXISTS (
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE (
-    SELECT TOP(1) [o].[OrderID]
+WHERE NOT (EXISTS (
+    SELECT 1
     FROM [Orders] AS [o]
-    WHERE [c].[CustomerID] = [o].[CustomerID]
-    ORDER BY [o].[OrderID]) IS NULL");
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
         }
 
         public override async Task Where_subquery_FirstOrDefault_compared_to_entity(bool async)
@@ -1839,7 +1850,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = [c].[CustomerID]) = 0
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_ToList_Contains(bool async)
@@ -1854,7 +1865,7 @@ WHERE EXISTS (
     SELECT 1
     FROM [Orders] AS [o]
     WHERE ([o].[CustomerID] = [c].[CustomerID]) AND ([o].[CustomerID] = N'ALFKI'))
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_ToArray_Count(bool async)
@@ -1869,7 +1880,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = [c].[CustomerID]) = 0
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_ToArray_Contains(bool async)
@@ -1884,7 +1895,7 @@ WHERE EXISTS (
     SELECT 1
     FROM [Orders] AS [o]
     WHERE ([o].[CustomerID] = [c].[CustomerID]) AND ([o].[CustomerID] = N'ALFKI'))
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_AsEnumerable_Count(bool async)
@@ -1899,7 +1910,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = [c].[CustomerID]) = 0
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_AsEnumerable_Contains(bool async)
@@ -1914,7 +1925,7 @@ WHERE EXISTS (
     SELECT 1
     FROM [Orders] AS [o]
     WHERE ([o].[CustomerID] = [c].[CustomerID]) AND ([o].[CustomerID] = N'ALFKI'))
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_AsEnumerable_Contains_negated(bool async)
@@ -1929,7 +1940,7 @@ WHERE NOT (EXISTS (
     SELECT 1
     FROM [Orders] AS [o]
     WHERE ([o].[CustomerID] = [c].[CustomerID]) AND ([o].[CustomerID] = N'ALFKI')))
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_ToList_Count_member(bool async)
@@ -1944,7 +1955,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = [c].[CustomerID]) = 0
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_Queryable_ToArray_Length_member(bool async)
@@ -1959,7 +1970,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Orders] AS [o]
     WHERE [o].[CustomerID] = [c].[CustomerID]) = 0
-ORDER BY [c].[CustomerID], [o0].[OrderID]");
+ORDER BY [c].[CustomerID]");
         }
 
         public override async Task Where_collection_navigation_ToList_Count(bool async)
@@ -1974,7 +1985,7 @@ WHERE ([o].[OrderID] < 10300) AND ((
     SELECT COUNT(*)
     FROM [Order Details] AS [o0]
     WHERE [o].[OrderID] = [o0].[OrderID]) = 0)
-ORDER BY [o].[OrderID], [o1].[OrderID], [o1].[ProductID]");
+ORDER BY [o].[OrderID], [o1].[OrderID]");
         }
 
         public override async Task Where_collection_navigation_ToList_Contains(bool async)
@@ -2006,7 +2017,7 @@ WHERE ([o].[OrderID] < 10300) AND ((
     SELECT COUNT(*)
     FROM [Order Details] AS [o0]
     WHERE [o].[OrderID] = [o0].[OrderID]) = 0)
-ORDER BY [o].[OrderID], [o1].[OrderID], [o1].[ProductID]");
+ORDER BY [o].[OrderID], [o1].[OrderID]");
         }
 
         public override async Task Where_collection_navigation_ToArray_Contains(bool async)
@@ -2038,7 +2049,7 @@ WHERE ([o].[OrderID] < 10300) AND ((
     SELECT COUNT(*)
     FROM [Order Details] AS [o0]
     WHERE [o].[OrderID] = [o0].[OrderID]) = 0)
-ORDER BY [o].[OrderID], [o1].[OrderID], [o1].[ProductID]");
+ORDER BY [o].[OrderID], [o1].[OrderID]");
         }
 
         public override async Task Where_collection_navigation_AsEnumerable_Contains(bool async)
@@ -2070,7 +2081,7 @@ WHERE ([o].[OrderID] < 10300) AND ((
     SELECT COUNT(*)
     FROM [Order Details] AS [o0]
     WHERE [o].[OrderID] = [o0].[OrderID]) = 0)
-ORDER BY [o].[OrderID], [o1].[OrderID], [o1].[ProductID]");
+ORDER BY [o].[OrderID], [o1].[OrderID]");
         }
 
         public override async Task Where_collection_navigation_ToArray_Length_member(bool async)
@@ -2085,7 +2096,7 @@ WHERE ([o].[OrderID] < 10300) AND ((
     SELECT COUNT(*)
     FROM [Order Details] AS [o0]
     WHERE [o].[OrderID] = [o0].[OrderID]) = 0)
-ORDER BY [o].[OrderID], [o1].[OrderID], [o1].[ProductID]");
+ORDER BY [o].[OrderID], [o1].[OrderID]");
         }
 
         public override async Task Where_list_object_contains_over_value_type(bool async)
@@ -2246,6 +2257,208 @@ WHERE [c].[CustomerID] = N'ANATR'");
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE ([c].[Region] <> N'WA') AND [c].[Region] IS NOT NULL");
+        }
+
+        public override async Task Filter_with_EF_Property_using_closure_for_property_name(bool async)
+        {
+            await base.Filter_with_EF_Property_using_closure_for_property_name(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE [c].[CustomerID] = N'ALFKI'");
+        }
+
+        public override async Task Filter_with_EF_Property_using_function_for_property_name(bool async)
+        {
+            await base.Filter_with_EF_Property_using_function_for_property_name(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE [c].[CustomerID] = N'ALFKI'");
+        }
+
+        public override async Task FirstOrDefault_over_scalar_projection_compared_to_null(bool async)
+        {
+            await base.FirstOrDefault_over_scalar_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task FirstOrDefault_over_scalar_projection_compared_to_not_null(bool async)
+        {
+            await base.FirstOrDefault_over_scalar_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
+        }
+
+        public override async Task FirstOrDefault_over_custom_projection_compared_to_null(bool async)
+        {
+            await base.FirstOrDefault_over_custom_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task FirstOrDefault_over_custom_projection_compared_to_not_null(bool async)
+        {
+            await base.FirstOrDefault_over_custom_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
+        }
+
+        public override async Task SingleOrDefault_over_custom_projection_compared_to_null(bool async)
+        {
+            await base.SingleOrDefault_over_custom_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task SingleOrDefault_over_custom_projection_compared_to_not_null(bool async)
+        {
+            await base.SingleOrDefault_over_custom_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
+        }
+
+        public override async Task LastOrDefault_over_custom_projection_compared_to_null(bool async)
+        {
+            await base.LastOrDefault_over_custom_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task LastOrDefault_over_custom_projection_compared_to_not_null(bool async)
+        {
+            await base.LastOrDefault_over_custom_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
+        }
+
+        public override async Task First_over_custom_projection_compared_to_null(bool async)
+        {
+            await base.First_over_custom_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task First_over_custom_projection_compared_to_not_null(bool async)
+        {
+            await base.First_over_custom_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
+        }
+
+        public override async Task Single_over_custom_projection_compared_to_null(bool async)
+        {
+            await base.Single_over_custom_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task Single_over_custom_projection_compared_to_not_null(bool async)
+        {
+            await base.Single_over_custom_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
+        }
+
+        public override async Task Last_over_custom_projection_compared_to_null(bool async)
+        {
+            await base.Last_over_custom_projection_compared_to_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE NOT (EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID]))");
+        }
+
+        public override async Task Last_over_custom_projection_compared_to_not_null(bool async)
+        {
+            await base.Last_over_custom_projection_compared_to_not_null(async);
+
+            AssertSql(
+                @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+FROM [Customers] AS [c]
+WHERE EXISTS (
+    SELECT 1
+    FROM [Orders] AS [o]
+    WHERE [c].[CustomerID] = [o].[CustomerID])");
         }
 
         private void AssertSql(params string[] expected)

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,12 +12,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     Describes the binding from an <see cref="IProperty" /> to a parameter in a constructor, factory method,
     ///     or similar.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information.
+    /// </remarks>
     public class PropertyParameterBinding : ParameterBinding
     {
         /// <summary>
         ///     Creates a new <see cref="PropertyParameterBinding" /> instance for the given <see cref="IProperty" />.
         /// </summary>
-        /// <param name="property"> The property to bind. </param>
+        /// <param name="property">The property to bind.</param>
         public PropertyParameterBinding(IProperty property)
             : base(property.ClrType, property)
         {
@@ -27,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates an expression tree representing the binding of the value of a property from a
         ///     materialization expression to a parameter of the constructor, factory method, etc.
         /// </summary>
-        /// <param name="bindingInfo"> The binding information. </param>
-        /// <returns> The expression tree. </returns>
+        /// <param name="bindingInfo">The binding information.</param>
+        /// <returns>The expression tree.</returns>
         public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
         {
             var property = ConsumedProperties[0];
@@ -40,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Creates a copy that contains the given consumed properties.
         /// </summary>
-        /// <param name="consumedProperties"> The new consumed properties. </param>
-        /// <returns> A copy with replaced consumed properties. </returns>
+        /// <param name="consumedProperties">The new consumed properties.</param>
+        /// <returns>A copy with replaced consumed properties.</returns>
         public override ParameterBinding With(IPropertyBase[] consumedProperties)
             => new PropertyParameterBinding((IProperty)consumedProperties.Single());
     }

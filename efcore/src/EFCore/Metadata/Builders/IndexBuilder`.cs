@@ -1,19 +1,22 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Provides a simple API for configuring an <see cref="IMutableIndex" />.
-    ///     </para>
+    ///     Provides a simple API for configuring an <see cref="IMutableIndex" />.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
     ///         and it is not designed to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     // ReSharper disable once UnusedTypeParameter
     public class IndexBuilder<T> : IndexBuilder
     {
@@ -34,17 +37,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     <paramref name="annotation" />
         ///     already exists its value will be updated.
         /// </summary>
-        /// <param name="annotation"> The key of the annotation to be added or updated. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="annotation">The key of the annotation to be added or updated.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual IndexBuilder<T> HasAnnotation(string annotation, object? value)
             => (IndexBuilder<T>)base.HasAnnotation(annotation, value);
 
         /// <summary>
         ///     Configures whether this index is unique (i.e. the value(s) for each instance must be unique).
         /// </summary>
-        /// <param name="unique"> A value indicating whether this index is unique. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="unique">A value indicating whether this index is unique.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual IndexBuilder<T> IsUnique(bool unique = true)
             => (IndexBuilder<T>)base.IsUnique(unique);
     }

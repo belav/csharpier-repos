@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,9 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     Extension methods for <see cref="ChangeTracker" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information.
+    /// </remarks>
     public static class ChangeTrackerExtensions
     {
         /// <summary>
@@ -27,10 +30,13 @@ namespace Microsoft.EntityFrameworkCore
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="changeTracker"> The metadata item. </param>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information.
+        /// </remarks>
+        /// <param name="changeTracker">The metadata item.</param>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         public static string ToDebugString(
             this ChangeTracker changeTracker,
             ChangeTrackerDebugStringOptions options = ChangeTrackerDebugStringOptions.LongDefault,

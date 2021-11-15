@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
 {
@@ -44,14 +43,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         /// <summary>
         ///     Validates the configuration of defining queries in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateDefiningQuery(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
         {
-            Check.NotNull(model, nameof(model));
-
             foreach (var entityType in model.GetEntityTypes())
             {
                 if (entityType.GetInMemoryQuery() != null)

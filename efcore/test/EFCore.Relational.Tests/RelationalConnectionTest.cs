@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_with_new_when_no_EF_services_use_Database()
         {
             var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
-                .UseInternalServiceProvider(new ServiceCollection().BuildServiceProvider())
+                .UseInternalServiceProvider(new ServiceCollection().BuildServiceProvider(validateScopes: true))
                 .Options;
 
             Assert.Equal(
@@ -34,7 +35,7 @@ namespace Microsoft.EntityFrameworkCore
             var appServiceProvider = new ServiceCollection()
                 .AddDbContext<ConstructorTestContext1A>(
                     (p, b) => b.UseInternalServiceProvider(p))
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using var serviceScope = appServiceProvider
                 .GetRequiredService<IServiceScopeFactory>()
@@ -50,7 +51,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceCollection = new ServiceCollection();
             new EntityFrameworkServicesBuilder(serviceCollection).TryAddCoreServices();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
                 .UseInternalServiceProvider(serviceProvider)
@@ -71,7 +72,7 @@ namespace Microsoft.EntityFrameworkCore
             var appServiceProvider = serviceCollection
                 .AddDbContext<ConstructorTestContext1A>(
                     (p, b) => b.UseInternalServiceProvider(p))
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using var serviceScope = appServiceProvider
                 .GetRequiredService<IServiceScopeFactory>()
@@ -97,7 +98,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = new ServiceCollection()
                 .AddDbContext<ConstructorTestContextNoConfiguration>()
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using var serviceScope = appServiceProvider
                 .GetRequiredService<IServiceScopeFactory>()
@@ -121,7 +122,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                 => optionsBuilder.UseInternalServiceProvider(
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider());
+                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true));
         }
 
         [ConditionalFact]
@@ -876,7 +877,51 @@ namespace Microsoft.EntityFrameworkCore
                     () => new FakeRelationalConnection(
                         CreateOptions(
                             new FakeRelationalOptionsExtension(),
-                            new FakeRelationalOptionsExtension()))).Message);
+                            new AnotherFakeRelationalOptionsExtension()))).Message);
+        }
+
+        private class AnotherFakeRelationalOptionsExtension : RelationalOptionsExtension
+        {
+            private DbContextOptionsExtensionInfo _info;
+
+            public AnotherFakeRelationalOptionsExtension()
+            {
+            }
+
+            protected AnotherFakeRelationalOptionsExtension(AnotherFakeRelationalOptionsExtension copyFrom)
+                : base(copyFrom)
+            {
+            }
+
+            public override DbContextOptionsExtensionInfo Info
+                => _info ??= new ExtensionInfo(this);
+
+            protected override RelationalOptionsExtension Clone()
+                => new AnotherFakeRelationalOptionsExtension(this);
+
+            public override void ApplyServices(IServiceCollection services)
+                => AddEntityFrameworkRelationalDatabase(services);
+
+            public static IServiceCollection AddEntityFrameworkRelationalDatabase(IServiceCollection serviceCollection)
+            {
+                var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection);
+
+                builder.TryAddCoreServices();
+
+                return serviceCollection;
+            }
+
+            private sealed class ExtensionInfo : RelationalExtensionInfo
+            {
+                public ExtensionInfo(IDbContextOptionsExtension extension)
+                    : base(extension)
+                {
+                }
+
+                public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
+                {
+                }
+            }
         }
 
         [ConditionalFact]

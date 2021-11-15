@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -47,8 +47,6 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public InternalDbSet(DbContext context, string? entityTypeName)
         {
-            Check.NotNull(context, nameof(context));
-
             // Just storing context/service locator here so that the context will be initialized by the time the
             // set is used and services will be obtained from the correctly scoped container when this happens.
             _context = context;
@@ -85,12 +83,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     //if the same name exists in your entity types we will show you the full namespace of the type
                     if (!string.IsNullOrEmpty(findSameTypeName))
                     {
-                        throw new InvalidOperationException(CoreStrings.InvalidSetSameTypeWithDifferentNamespace(typeof(TEntity).DisplayName(), findSameTypeName));
+                        throw new InvalidOperationException(
+                            CoreStrings.InvalidSetSameTypeWithDifferentNamespace(typeof(TEntity).DisplayName(), findSameTypeName));
                     }
-                    else
-                    {
-                        throw new InvalidOperationException(CoreStrings.InvalidSetType(typeof(TEntity).ShortDisplayName()));
-                    }
+
+                    throw new InvalidOperationException(CoreStrings.InvalidSetType(typeof(TEntity).ShortDisplayName()));
                 }
 
                 if (_entityType.IsOwned())
@@ -523,8 +520,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task IResettableService.ResetStateAsync(CancellationToken cancellationToken)
         {
             ((IResettableService)this).ResetState();

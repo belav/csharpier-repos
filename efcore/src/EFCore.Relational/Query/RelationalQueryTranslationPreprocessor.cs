@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -15,23 +14,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="QueryTranslationPreprocessor" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this class. </param>
-        /// <param name="queryCompilationContext"> The query compilation context object to use. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
+        /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
+        /// <param name="queryCompilationContext">The query compilation context object to use.</param>
         public RelationalQueryTranslationPreprocessor(
             QueryTranslationPreprocessorDependencies dependencies,
             RelationalQueryTranslationPreprocessorDependencies relationalDependencies,
             QueryCompilationContext queryCompilationContext)
             : base(dependencies, queryCompilationContext)
         {
-            Check.NotNull(relationalDependencies, nameof(relationalDependencies));
-
             RelationalDependencies = relationalDependencies;
             _relationalQueryCompilationContext = (RelationalQueryCompilationContext)queryCompilationContext;
         }
 
         /// <summary>
-        ///     Parameter object containing relational service dependencies.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalQueryTranslationPreprocessorDependencies RelationalDependencies { get; }
 
@@ -43,16 +40,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             expression = new TableValuedFunctionToQueryRootConvertingExpressionVisitor(QueryCompilationContext.Model).Visit(expression);
 
             return expression;
-        }
-
-        /// <inheritdoc />
-        public override Expression Process(Expression query)
-        {
-            query = base.Process(query);
-
-            return _relationalQueryCompilationContext.QuerySplittingBehavior == QuerySplittingBehavior.SplitQuery
-                ? new SplitIncludeRewritingExpressionVisitor().Visit(query)
-                : query;
         }
     }
 }

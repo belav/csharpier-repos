@@ -1,11 +1,15 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Storage
 {
     /// <summary>
     ///     Represents the execution state of an operation.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+    ///     for more information.
+    /// </remarks>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public class ExecutionResult<TResult>
     {

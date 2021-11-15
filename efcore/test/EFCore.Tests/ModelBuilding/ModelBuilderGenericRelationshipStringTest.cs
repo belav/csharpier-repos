@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -18,32 +18,38 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
     {
         public class GenericOneToManyString : OneToManyTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericStringTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericManyToOneString : ManyToOneTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericStringTestModelBuilder(testHelpers, configure);
+        }
+
+        public class GenericManyToManyString : ManyToManyTestBase
+        {
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericStringTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericOneToOneString : OneToOneTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericStringTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericOwnedTypesString : OwnedTypesTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericStringTestModelBuilder(testHelpers, configure);
         }
 
         private class GenericStringTestModelBuilder : TestModelBuilder
         {
-            public GenericStringTestModelBuilder(TestHelpers testHelpers)
-                : base(testHelpers)
+            public GenericStringTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                : base(testHelpers, configure)
             {
             }
 

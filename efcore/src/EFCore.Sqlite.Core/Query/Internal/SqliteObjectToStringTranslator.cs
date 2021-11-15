@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -21,24 +21,24 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     {
         private static readonly HashSet<Type> _typeMapping = new()
         {
-                typeof(bool),
-                typeof(byte),
-                typeof(byte[]),
-                typeof(char),
-                typeof(DateTime),
-                typeof(DateTimeOffset),
-                typeof(decimal),
-                typeof(double),
-                typeof(float),
-                typeof(Guid),
-                typeof(int),
-                typeof(long),
-                typeof(sbyte),
-                typeof(short),
-                typeof(TimeSpan),
-                typeof(uint),
-                typeof(ushort),
-            };
+            typeof(bool),
+            typeof(byte),
+            typeof(byte[]),
+            typeof(char),
+            typeof(DateTime),
+            typeof(DateTimeOffset),
+            typeof(decimal),
+            typeof(double),
+            typeof(float),
+            typeof(Guid),
+            typeof(int),
+            typeof(long),
+            typeof(sbyte),
+            typeof(short),
+            typeof(TimeSpan),
+            typeof(uint),
+            typeof(ushort),
+        };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -66,12 +66,41 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
 
-            return method.Name == nameof(ToString)
-                && arguments.Count == 0
-                && instance != null
-                && _typeMapping.Contains(instance.Type)
-                    ? _sqlExpressionFactory.Convert(instance, typeof(string))
-                    : null;
+            if (instance == null || method.Name != nameof(ToString) || arguments.Count != 0)
+            {
+                return null;
+            }
+
+            if (instance.Type == typeof(bool))
+            {
+                if (instance is ColumnExpression columnExpression && columnExpression.IsNullable)
+                {
+                    return _sqlExpressionFactory.Case(
+                        new[]
+                        {
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
+                                _sqlExpressionFactory.Constant(false.ToString())),
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(true)),
+                                _sqlExpressionFactory.Constant(true.ToString()))
+                        },
+                        _sqlExpressionFactory.Constant(null));
+                }
+
+                return _sqlExpressionFactory.Case(
+                    new[]
+                    {
+                        new CaseWhenClause(
+                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
+                            _sqlExpressionFactory.Constant(false.ToString()))
+                    },
+                    _sqlExpressionFactory.Constant(true.ToString()));
+            }
+
+            return _typeMapping.Contains(instance.Type)
+                ? _sqlExpressionFactory.Convert(instance, typeof(string))
+                : null;
         }
     }
 }

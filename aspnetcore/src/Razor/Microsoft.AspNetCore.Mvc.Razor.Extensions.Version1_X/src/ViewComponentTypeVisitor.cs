@@ -1,86 +1,83 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
+namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
+
+internal class ViewComponentTypeVisitor : SymbolVisitor
 {
-    internal class ViewComponentTypeVisitor : SymbolVisitor
+    private readonly INamedTypeSymbol _viewComponentAttribute;
+    private readonly INamedTypeSymbol _nonViewComponentAttribute;
+    private readonly List<INamedTypeSymbol> _results;
+
+    public ViewComponentTypeVisitor(
+        INamedTypeSymbol viewComponentAttribute,
+        INamedTypeSymbol nonViewComponentAttribute,
+        List<INamedTypeSymbol> results)
     {
-        private static readonly Version SupportedVCTHMvcVersion = new Version(1, 1);
+        _viewComponentAttribute = viewComponentAttribute;
+        _nonViewComponentAttribute = nonViewComponentAttribute;
+        _results = results;
+    }
 
-        private readonly INamedTypeSymbol _viewComponentAttribute;
-        private readonly INamedTypeSymbol _nonViewComponentAttribute;
-        private readonly List<INamedTypeSymbol> _results;
-
-        public ViewComponentTypeVisitor(
-            INamedTypeSymbol viewComponentAttribute,
-            INamedTypeSymbol nonViewComponentAttribute,
-            List<INamedTypeSymbol> results)
+    public override void VisitNamedType(INamedTypeSymbol symbol)
+    {
+        if (IsViewComponent(symbol))
         {
-            _viewComponentAttribute = viewComponentAttribute;
-            _nonViewComponentAttribute = nonViewComponentAttribute;
-            _results = results;
+            _results.Add(symbol);
         }
 
-        public override void VisitNamedType(INamedTypeSymbol symbol)
+        if (symbol.DeclaredAccessibility != Accessibility.Public)
         {
-            if (IsViewComponent(symbol))
-            {
-                _results.Add(symbol);
-            }
-
-            if (symbol.DeclaredAccessibility != Accessibility.Public)
-            {
-                return;
-            }
-
-            foreach (var member in symbol.GetTypeMembers())
-            {
-                Visit(member);
-            }
+            return;
         }
 
-        public override void VisitNamespace(INamespaceSymbol symbol)
+        foreach (var member in symbol.GetTypeMembers())
         {
-            foreach (var member in symbol.GetMembers())
-            {
-                Visit(member);
-            }
+            Visit(member);
+        }
+    }
+
+    public override void VisitNamespace(INamespaceSymbol symbol)
+    {
+        foreach (var member in symbol.GetMembers())
+        {
+            Visit(member);
+        }
+    }
+
+    internal bool IsViewComponent(INamedTypeSymbol symbol)
+    {
+        if (symbol.DeclaredAccessibility != Accessibility.Public ||
+            symbol.IsAbstract ||
+            symbol.IsGenericType ||
+            AttributeIsDefined(symbol, _nonViewComponentAttribute))
+        {
+            return false;
         }
 
-        internal bool IsViewComponent(INamedTypeSymbol symbol)
-        {
-            if (symbol.DeclaredAccessibility != Accessibility.Public ||
-                symbol.IsAbstract ||
-                symbol.IsGenericType ||
-                AttributeIsDefined(symbol, _nonViewComponentAttribute))
-            {
-                return false;
-            }
+        return symbol.Name.EndsWith(ViewComponentTypes.ViewComponentSuffix, StringComparison.Ordinal) ||
+            AttributeIsDefined(symbol, _viewComponentAttribute);
+    }
 
-            return symbol.Name.EndsWith(ViewComponentTypes.ViewComponentSuffix, StringComparison.Ordinal) ||
-                AttributeIsDefined(symbol, _viewComponentAttribute);
+    private static bool AttributeIsDefined(INamedTypeSymbol type, INamedTypeSymbol queryAttribute)
+    {
+        if (type == null || queryAttribute == null)
+        {
+            return false;
         }
 
-        private static bool AttributeIsDefined(INamedTypeSymbol type, INamedTypeSymbol queryAttribute)
+        foreach (var attribute in type.GetAttributes())
         {
-            if (type == null || queryAttribute == null)
-            {
-                return false;
-            }
-
-            var attribute = type.GetAttributes().Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, queryAttribute)).FirstOrDefault();
-
-            if (attribute != null)
+            if (SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, queryAttribute))
             {
                 return true;
             }
-
-            return AttributeIsDefined(type.BaseType, queryAttribute);
         }
+
+        return AttributeIsDefined(type.BaseType, queryAttribute);
     }
 }

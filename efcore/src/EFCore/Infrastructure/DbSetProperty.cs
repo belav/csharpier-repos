@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -14,9 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Initializes new <see cref="DbSetProperty" /> with given values.
         /// </summary>
-        /// <param name="name"> The name of DbSet. </param>
-        /// <param name="type"> The entity clr type of DbSet. </param>
-        /// <param name="setter"> The setter for DbSet property. </param>
+        /// <param name="name">The name of DbSet.</param>
+        /// <param name="type">The entity clr type of DbSet.</param>
+        /// <param name="setter">The setter for DbSet property.</param>
         public DbSetProperty(
             string name,
             Type type,

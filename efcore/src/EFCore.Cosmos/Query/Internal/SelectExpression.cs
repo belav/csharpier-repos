@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 #nullable disable warnings
 
@@ -43,6 +42,20 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Container = entityType.GetContainer();
             FromExpression = new RootReferenceExpression(entityType, RootAlias);
             _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(entityType, FromExpression);
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public SelectExpression(IEntityType entityType, string sql, Expression argument)
+        {
+            Container = entityType.GetContainer();
+            FromExpression = new FromSqlExpression(entityType, RootAlias, sql, argument);
+            _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(
+                entityType, new RootReferenceExpression(entityType, RootAlias));
         }
 
         /// <summary>
@@ -166,18 +179,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual string GetPartitionKey(IReadOnlyDictionary<string, object> parameterValues)
         {
-            switch (_partitionKeyValue)
+            return _partitionKeyValue switch
             {
-                case ConstantExpression constantExpression:
-                    return GetString(_partitionKeyValueConverter, constantExpression.Value);
-
-                case ParameterExpression parameterExpression
-                    when parameterValues.TryGetValue(parameterExpression.Name, out var value):
-                    return GetString(_partitionKeyValueConverter, value);
-
-                default:
-                    return null;
-            }
+                ConstantExpression constantExpression
+                    => GetString(_partitionKeyValueConverter, constantExpression.Value),
+                ParameterExpression parameterExpression when parameterValues.TryGetValue(parameterExpression.Name, out var value)
+                    => GetString(_partitionKeyValueConverter, value),
+                _ => null
+            };
 
             static string GetString(ValueConverter converter, object value)
                 => converter is null
@@ -442,8 +451,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var changed = false;
 
             var projections = new List<ProjectionExpression>();
@@ -522,9 +529,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? limit,
             SqlExpression? offset)
         {
-            Check.NotNull(projections, nameof(projections));
-            Check.NotNull(fromExpression, nameof(fromExpression));
-
             var projectionMapping = new Dictionary<ProjectionMember, Expression>();
             foreach (var kvp in _projectionMapping)
             {

@@ -1,11 +1,16 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Net;
+using System.Net.Http;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal;
+using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 // ReSharper disable once CheckNamespace
@@ -13,6 +18,44 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class CosmosDbContextOptionsExtensionsTests
     {
+        [ConditionalFact]
+        public void Service_collection_extension_method_can_configure_Cosmos_options()
+        {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddCosmos<ApplicationDbContext>(
+                "Database=Crunchie",
+                "Crunchie",
+                cosmosOptions =>
+                {
+                    cosmosOptions.IdleTcpConnectionTimeout(new TimeSpan(0, 5, 50));
+                    cosmosOptions.OpenTcpConnectionTimeout(new TimeSpan(0, 2, 45));
+                },
+                dbContextOption =>
+                {
+                    dbContextOption.EnableDetailedErrors();
+                });
+
+            var services = serviceCollection.BuildServiceProvider(validateScopes: true);
+
+            using (var serviceScope = services
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                var coreOptions = serviceScope.ServiceProvider
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+
+                Assert.True(coreOptions.DetailedErrorsEnabled);
+
+                var cosmosOptions = serviceScope.ServiceProvider
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CosmosOptionsExtension>();
+
+                Assert.Equal(new TimeSpan(0, 5, 50), cosmosOptions.IdleTcpConnectionTimeout);
+                Assert.Equal(new TimeSpan(0, 2, 45), cosmosOptions.OpenTcpConnectionTimeout);
+                Assert.Equal("Database=Crunchie", cosmosOptions.ConnectionString);
+                Assert.Equal("Crunchie", cosmosOptions.DatabaseName);
+            }
+        }
+
         [ConditionalFact]
         public void Throws_with_multiple_providers_new_when_no_provider()
         {
@@ -29,199 +72,78 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalFact]
-        public void Can_create_options_with_specified_region()
+        public void Can_create_options_with_valid_values()
         {
-            var regionName = Regions.EastAsia;
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.Region(regionName); });
-
-            var extension = options
-                .Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(regionName, extension.Region);
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_with_wrong_region()
-        {
-            var regionName = "FakeRegion";
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.Region(regionName); });
-
-            var extension = options
-                .Options.FindExtension<CosmosOptionsExtension>();
-
+            Test(o => o.Region(Regions.EastAsia), o => Assert.Equal(Regions.EastAsia, o.Region));
             // The region will be validated by the Cosmos SDK, because the region list is not constant
-            Assert.Equal(regionName, extension.Region);
-        }
+            Test(o => o.Region("FakeRegion"), o => Assert.Equal("FakeRegion", o.Region));
+            Test(o => o.ConnectionMode(ConnectionMode.Direct), o => Assert.Equal(ConnectionMode.Direct, o.ConnectionMode));
+            Test(o => o.GatewayModeMaxConnectionLimit(3), o => Assert.Equal(3, o.GatewayModeMaxConnectionLimit));
+            Test(o => o.MaxRequestsPerTcpConnection(3), o => Assert.Equal(3, o.MaxRequestsPerTcpConnection));
+            Test(o => o.MaxTcpConnectionsPerEndpoint(3), o => Assert.Equal(3, o.MaxTcpConnectionsPerEndpoint));
+            Test(o => o.LimitToEndpoint(), o => Assert.True(o.LimitToEndpoint));
+            Test(o => o.ContentResponseOnWriteEnabled(), o => Assert.True(o.EnableContentResponseOnWrite));
 
-        [ConditionalFact]
-        public void Can_create_options_with_correct_connection_mode()
-        {
-            var connectionMode = ConnectionMode.Direct;
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.ConnectionMode(connectionMode); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(connectionMode, extension.ConnectionMode);
-        }
-
-        [ConditionalFact]
-        public void Throws_if_wrong_connection_mode()
-        {
-            var connectionMode = (ConnectionMode)958410610;
-            var options = Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new DbContextOptionsBuilder().UseCosmos(
-                        "serviceEndPoint",
-                        "authKeyOrResourceToken",
-                        "databaseName",
-                        o => { o.ConnectionMode(connectionMode); }));
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_and_limit_to_endpoint()
-        {
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.LimitToEndpoint(); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.True(extension.LimitToEndpoint);
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_with_web_proxy()
-        {
             var webProxy = new WebProxy();
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.WebProxy(webProxy); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Same(webProxy, extension.WebProxy);
+            Test(o => o.WebProxy(webProxy), o => Assert.Same(webProxy, o.WebProxy));
+            Test(
+                o => o.ExecutionStrategy(d => new CosmosExecutionStrategy(d)),
+                o => Assert.IsType<CosmosExecutionStrategy>(o.ExecutionStrategyFactory(null)));
+            Test(o => o.RequestTimeout(TimeSpan.FromMinutes(3)), o => Assert.Equal(TimeSpan.FromMinutes(3), o.RequestTimeout));
+            Test(
+                o => o.OpenTcpConnectionTimeout(TimeSpan.FromMinutes(3)),
+                o => Assert.Equal(TimeSpan.FromMinutes(3), o.OpenTcpConnectionTimeout));
+            Test(
+                o => o.IdleTcpConnectionTimeout(TimeSpan.FromMinutes(3)),
+                o => Assert.Equal(TimeSpan.FromMinutes(3), o.IdleTcpConnectionTimeout));
+            Func<HttpClient> httpClientFactory = () => new HttpClient();
+            Test(
+                o => o.HttpClientFactory(httpClientFactory),
+                o => Assert.Same(httpClientFactory, o.HttpClientFactory)
+            );
         }
 
         [ConditionalFact]
-        public void Can_create_options_with_request_timeout()
+        public void Throws_for_invalid_values()
         {
-            var requestTimeout = TimeSpan.FromMinutes(3);
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.RequestTimeout(requestTimeout); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(requestTimeout, extension.RequestTimeout);
+            Throws<ArgumentOutOfRangeException>(o => o.ConnectionMode((ConnectionMode)958410610));
         }
 
-        [ConditionalFact]
-        public void Can_create_options_with_open_tcp_connection_timeout()
+        private void Test(
+            Action<CosmosDbContextOptionsBuilder> cosmosOptionsAction,
+            Action<CosmosOptionsExtension> extensionAssert)
         {
-            var timeout = TimeSpan.FromMinutes(3);
             var options = new DbContextOptionsBuilder().UseCosmos(
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.OpenTcpConnectionTimeout(timeout); });
+                cosmosOptionsAction);
 
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
+            var extension = options
+                .Options.FindExtension<CosmosOptionsExtension>();
 
-            Assert.Equal(timeout, extension.OpenTcpConnectionTimeout);
+            extensionAssert(extension);
+
+            var clone = new DbContextOptionsBuilder().UseCosmos(
+                    "serviceEndPoint",
+                    "authKeyOrResourceToken",
+                    "databaseName",
+                    cosmosOptionsAction)
+                .Options.FindExtension<CosmosOptionsExtension>();
+
+            Assert.Equal(extension.Info.GetServiceProviderHashCode(), clone.Info.GetServiceProviderHashCode());
+            Assert.True(extension.Info.ShouldUseSameServiceProvider(clone.Info));
         }
 
-        [ConditionalFact]
-        public void Can_create_options_with_idle_tcp_connection_timeout()
+        private void Throws<T>(Action<CosmosDbContextOptionsBuilder> cosmosOptionsAction)
+            where T : Exception
         {
-            var timeout = TimeSpan.FromMinutes(3);
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.IdleTcpConnectionTimeout(timeout); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(timeout, extension.IdleTcpConnectionTimeout);
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_with_gateway_mode_max_connection_limit()
-        {
-            var connectionLimit = 3;
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.GatewayModeMaxConnectionLimit(connectionLimit); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(connectionLimit, extension.GatewayModeMaxConnectionLimit);
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_with_max_tcp_connections_per_endpoint()
-        {
-            var connectionLimit = 3;
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.MaxTcpConnectionsPerEndpoint(connectionLimit); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(connectionLimit, extension.MaxTcpConnectionsPerEndpoint);
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_with_max_requests_per_tcp_connection()
-        {
-            var requestLimit = 3;
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.MaxRequestsPerTcpConnection(requestLimit); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(requestLimit, extension.MaxRequestsPerTcpConnection);
-        }
-
-        [ConditionalFact]
-        public void Can_create_options_with_content_response_on_write_enabled()
-        {
-            var enabled = true;
-            var options = new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                o => { o.ContentResponseOnWriteEnabled(enabled); });
-
-            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
-
-            Assert.Equal(enabled, extension.EnableContentResponseOnWrite);
+            Assert.Throws<T>(
+                () => new DbContextOptionsBuilder().UseCosmos(
+                    "serviceEndPoint",
+                    "authKeyOrResourceToken",
+                    "databaseName",
+                    cosmosOptionsAction));
         }
     }
 }
-

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -443,7 +443,7 @@ CROSS JOIN [FunkyCustomers] AS [f0]
 WHERE (CASE
     WHEN (([f0].[LastName] = N'') AND [f0].[LastName] IS NOT NULL) OR ([f].[FirstName] IS NOT NULL AND ([f0].[LastName] IS NOT NULL AND (RIGHT([f].[FirstName], LEN([f0].[LastName])) = [f0].[LastName]))) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END <> [f].[NullableBool]) OR [f].[NullableBool] IS NULL");
+END <> [f].[NullableBool]) OR ([f].[NullableBool] IS NULL)");
         }
 
         public override async Task String_FirstOrDefault_and_LastOrDefault(bool async)

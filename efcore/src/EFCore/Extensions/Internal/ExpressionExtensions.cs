@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -162,12 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public static bool IsLogicalOperation(this Expression expression)
-        {
-            Check.NotNull(expression, nameof(expression));
-
-            return expression.NodeType == ExpressionType.AndAlso
+            => expression.NodeType == ExpressionType.AndAlso
                 || expression.NodeType == ExpressionType.OrElse;
-        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -207,7 +203,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         }
 
         private static readonly MethodInfo _objectEqualsMethodInfo
-            = typeof(object).GetRequiredRuntimeMethod(nameof(object.Equals), new[] { typeof(object), typeof(object) });
+            = typeof(object).GetRequiredRuntimeMethod(nameof(object.Equals), typeof(object), typeof(object));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -251,7 +247,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
                                     ValueBuffer.GetValueMethod,
                                     Expression.Constant(i)),
                                 typeof(object)))
-                        : (Expression)Expression.Equal(
+                        : Expression.Equal(
                             Expression.Call(
                                 EF.PropertyMethod.MakeGenericMethod(property.ClrType),
                                 entityParameterExpression,

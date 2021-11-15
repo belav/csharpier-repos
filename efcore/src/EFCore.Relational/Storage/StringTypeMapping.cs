@@ -1,8 +1,7 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage
 {
@@ -15,18 +14,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class StringTypeMapping : RelationalTypeMapping
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="StringTypeMapping" /> class.
         /// </summary>
-        /// <param name="storeType"> The name of the database type. </param>
-        /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
-        /// <param name="unicode"> A value indicating whether the type should handle Unicode data or not. </param>
-        /// <param name="size"> The size of data the property is configured to store, or null if no size is configured. </param>
+        /// <param name="storeType">The name of the database type.</param>
+        /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
+        /// <param name="unicode">A value indicating whether the type should handle Unicode data or not.</param>
+        /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
         public StringTypeMapping(
             string storeType,
-            DbType? dbType = null,
+            DbType? dbType,
             bool unicode = false,
             int? size = null)
             : base(
@@ -39,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="StringTypeMapping" /> class.
         /// </summary>
-        /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
+        /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
         protected StringTypeMapping(RelationalTypeMappingParameters parameters)
             : base(parameters)
         {
@@ -48,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
-        /// <returns> The newly created mapping. </returns>
+        /// <param name="parameters">The parameters for this mapping.</param>
+        /// <returns>The newly created mapping.</returns>
         protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
             => new StringTypeMapping(parameters);
 
@@ -61,7 +64,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     The generated string.
         /// </returns>
         protected virtual string EscapeSqlLiteral(string literal)
-            => Check.NotNull(literal, nameof(literal)).Replace("'", "''");
+            => literal.Replace("'", "''");
 
         /// <summary>
         ///     Generates the SQL representation of a literal value.

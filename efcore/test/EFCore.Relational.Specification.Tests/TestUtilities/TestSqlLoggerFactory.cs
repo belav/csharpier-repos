@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 ";
 
         private static readonly string _eol = Environment.NewLine;
+
+        private static readonly object _queryBaselineFileLock = new();
 
         public TestSqlLoggerFactory()
             : this(_ => true)
@@ -74,7 +76,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             {
                 var methodCallLine = Environment.StackTrace.Split(
                     new[] { _eol },
-                    StringSplitOptions.RemoveEmptyEntries)[3].Substring(6);
+                    StringSplitOptions.RemoveEmptyEntries)[3][6..];
 
                 var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
                 var testName = methodCallLine.Substring(0, indexMethodEnding);
@@ -85,18 +87,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 var currentDirectory = Directory.GetCurrentDirectory();
                 var logFile = currentDirectory.Substring(
                         0,
-                        currentDirectory.LastIndexOf("\\artifacts\\", StringComparison.Ordinal) + 1)
+                        currentDirectory.LastIndexOf(
+                            $"{Path.DirectorySeparatorChar}artifacts{Path.DirectorySeparatorChar}",
+                            StringComparison.Ordinal) + 1)
                     + "QueryBaseline.txt";
 
                 var testInfo = testName + " : " + lineNumber + FileNewLine;
                 const string indent = FileNewLine + "                ";
 
                 var newBaseLine = $@"            AssertSql(
-                {string.Join("," + indent + "//" + indent, SqlStatements.Take(9).Select(sql => "@\"" + sql.Replace("\"", "\"\"") + "\""))});
+                {string.Join("," + indent + "//" + indent, SqlStatements.Take(20).Select(sql => "@\"" + sql.Replace("\"", "\"\"") + "\""))});
 
 ";
 
-                if (SqlStatements.Count > 9)
+                if (SqlStatements.Count > 20)
                 {
                     newBaseLine += "Output truncated.";
                 }
@@ -106,7 +110,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 var contents = testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
 
-                File.AppendAllText(logFile, contents);
+                lock (_queryBaselineFileLock)
+                {
+                    File.AppendAllText(logFile, contents);
+                }
 
                 throw;
             }
@@ -122,7 +129,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             public List<string> SqlStatements { get; } = new();
             public List<string> Parameters { get; } = new();
 
-            private StringBuilder _stringBuilder = new();
+            private readonly StringBuilder _stringBuilder = new();
 
             protected override void UnsafeClear()
             {

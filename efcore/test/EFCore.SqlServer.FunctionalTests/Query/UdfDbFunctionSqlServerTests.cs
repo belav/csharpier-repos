@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit.Abstractions;
@@ -272,6 +272,29 @@ FROM [Customers] AS [c]
 WHERE [c].[LastName] = 'Two'");
         }
 
+        public override void Scalar_Function_with_InExpression_translation()
+        {
+            base.Scalar_Function_with_InExpression_translation();
+
+            AssertSql(
+                @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
+FROM [Customers] AS [c]
+WHERE SUBSTRING([c].[FirstName], 0 + 1, 1) IN (N'A', N'B', N'C')");
+        }
+
+        public override void Scalar_Function_with_nested_InExpression_translation()
+        {
+            base.Scalar_Function_with_nested_InExpression_translation();
+
+            AssertSql(
+                @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
+FROM [Customers] AS [c]
+WHERE CASE
+    WHEN SUBSTRING([c].[FirstName], 0 + 1, 1) IN (N'A', N'B', N'C') AND SUBSTRING([c].[FirstName], 0 + 1, 1) IS NOT NULL THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END IN (CAST(1 AS bit), CAST(0 AS bit))");
+        }
+
         #endregion
 
         #region Instance
@@ -533,6 +556,14 @@ CROSS APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
 ORDER BY [g].[Year]");
         }
 
+        public override void QF_Select_Direct_In_Anonymous_distinct()
+        {
+            base.QF_Select_Direct_In_Anonymous_distinct();
+
+            AssertSql(
+                @"");
+        }
+
         public override void QF_Select_Correlated_Direct_With_Function_Query_Parameter_Correlated_In_Anonymous()
         {
             base.QF_Select_Correlated_Direct_With_Function_Query_Parameter_Correlated_In_Anonymous();
@@ -542,7 +573,7 @@ ORDER BY [g].[Year]");
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetOrdersWithMultipleProducts]([dbo].[AddValues]([c].[Id], 1)) AS [g]
 WHERE [c].[Id] = 1
-ORDER BY [c].[Id], [g].[OrderId]");
+ORDER BY [c].[Id]");
         }
 
         public override void QF_Select_Correlated_Subquery_In_Anonymous()
@@ -557,7 +588,7 @@ OUTER APPLY (
     FROM [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
     WHERE DATEPART(day, [g].[OrderDate]) = 21
 ) AS [t]
-ORDER BY [c].[Id], [t].[OrderId]");
+ORDER BY [c].[Id]");
         }
 
         public override void QF_Select_Correlated_Subquery_In_Anonymous_Nested_With_QF()
@@ -582,7 +613,7 @@ INNER JOIN (
                 @"SELECT [c].[Id], [c].[LastName], [g].[OrderId], [g].[CustomerId], [g].[OrderDate]
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
-ORDER BY [c].[Id], [g].[OrderId]");
+ORDER BY [c].[Id]");
         }
 
         public override void QF_CrossApply_Correlated_Select_Result()
@@ -728,7 +759,7 @@ OUTER APPLY (
     FROM [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
     INNER JOIN [Customers] AS [c0] ON [g].[CustomerId] = [c0].[Id]
 ) AS [t]
-ORDER BY [c].[Id], [t].[OrderId], [t].[Id]");
+ORDER BY [c].[Id], [t].[OrderId]");
         }
 
         public override void DbSet_mapped_to_function()

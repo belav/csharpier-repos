@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     Represents a relationship where a foreign key composed of properties on the dependent entity type
     ///     references a corresponding primary or alternate key on the principal entity type.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IForeignKey : IReadOnlyForeignKey, IAnnotatable
     {
         /// <summary>
@@ -51,15 +54,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets all skip navigations using this foreign key.
         /// </summary>
-        /// <returns> The skip navigations using this foreign key. </returns>
+        /// <returns>The skip navigations using this foreign key.</returns>
         new IEnumerable<ISkipNavigation> GetReferencingSkipNavigations()
             => ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<ISkipNavigation>();
 
         /// <summary>
         ///     Gets the entity type related to the given one.
         /// </summary>
-        /// <param name="entityType"> One of the entity types related by the foreign key. </param>
-        /// <returns> The entity type related to the given one. </returns>
+        /// <param name="entityType">One of the entity types related by the foreign key.</param>
+        /// <returns>The entity type related to the given one.</returns>
         new IEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
             => (IEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 
@@ -85,8 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <typeparam name="TKey"> The type of key instances. </typeparam>
-        /// <returns> A new factory. </returns>
+        /// <typeparam name="TKey">The type of key instances.</typeparam>
+        /// <returns>A new factory.</returns>
         IDependentKeyValueFactory<TKey>? GetDependentKeyValueFactory<TKey>();
     }
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
     {
         [ContractAnnotation("value:null => halt")]
         [return: NotNull]
-        public static T NotNull<T>([NoEnumeration, AllowNull, NotNull] T value, [InvokerParameterName] string parameterName)
+        public static T NotNull<T>([NoEnumeration] [AllowNull] [NotNull] T value, [InvokerParameterName] string parameterName)
         {
             if (value is null)
             {
@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         [ContractAnnotation("value:null => halt")]
         public static IReadOnlyList<T> NotEmpty<T>(
-            [NotNull] IReadOnlyList<T>? value, [InvokerParameterName] string parameterName)
+            [NotNull] IReadOnlyList<T>? value,
+            [InvokerParameterName] string parameterName)
         {
             NotNull(value, parameterName);
 
@@ -79,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         }
 
         public static IReadOnlyList<T> HasNoNulls<T>(
-            [NotNull] IReadOnlyList<T>? value, [InvokerParameterName] string parameterName)
+            [NotNull] IReadOnlyList<T>? value,
+            [InvokerParameterName] string parameterName)
             where T : class
         {
             NotNull(value, parameterName);

@@ -14,21 +14,16 @@ namespace System.Runtime.Serialization.Json
     {
         private readonly JsonCollectionDataContractCriticalHelper _helper;
 
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+        [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonCollectionDataContract(CollectionDataContract traditionalDataContract)
             : base(new JsonCollectionDataContractCriticalHelper(traditionalDataContract))
         {
             _helper = (base.Helper as JsonCollectionDataContractCriticalHelper)!;
         }
 
-        private JsonFormatCollectionReaderDelegate CreateJsonFormatReaderDelegate()
-        {
-            return new ReflectionJsonCollectionReader().ReflectionReadCollection;
-        }
-
         internal JsonFormatCollectionReaderDelegate JsonFormatReaderDelegate
         {
-            [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+            [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             get
             {
                 if (_helper.JsonFormatReaderDelegate == null)
@@ -40,7 +35,7 @@ namespace System.Runtime.Serialization.Json
                             JsonFormatCollectionReaderDelegate tempDelegate;
                             if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                             {
-                                tempDelegate = CreateJsonFormatReaderDelegate();
+                                tempDelegate = new ReflectionJsonCollectionReader().ReflectionReadCollection;
                             }
                             else
                             {
@@ -56,14 +51,9 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        private JsonFormatGetOnlyCollectionReaderDelegate CreateJsonFormatGetOnlyReaderDelegate()
-        {
-            return new ReflectionJsonCollectionReader().ReflectionReadGetOnlyCollection;
-        }
-
         internal JsonFormatGetOnlyCollectionReaderDelegate JsonFormatGetOnlyReaderDelegate
         {
-            [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+            [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             get
             {
                 if (_helper.JsonFormatGetOnlyReaderDelegate == null)
@@ -81,7 +71,7 @@ namespace System.Runtime.Serialization.Json
                             JsonFormatGetOnlyCollectionReaderDelegate tempDelegate;
                             if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                             {
-                                tempDelegate = CreateJsonFormatGetOnlyReaderDelegate();
+                                tempDelegate = new ReflectionJsonCollectionReader().ReflectionReadGetOnlyCollection;
                             }
                             else
                             {
@@ -97,16 +87,9 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        private JsonFormatCollectionWriterDelegate CreateJsonFormatWriterDelegate()
-        {
-            return new ReflectionJsonFormatWriter().ReflectionWriteCollection;
-        }
-
-
         internal JsonFormatCollectionWriterDelegate JsonFormatWriterDelegate
         {
-            [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+            [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             get
             {
                 if (_helper.JsonFormatWriterDelegate == null)
@@ -118,7 +101,7 @@ namespace System.Runtime.Serialization.Json
                             JsonFormatCollectionWriterDelegate tempDelegate;
                             if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                             {
-                                tempDelegate = CreateJsonFormatWriterDelegate();
+                                tempDelegate = new ReflectionJsonFormatWriter().ReflectionWriteCollection;
                             }
                             else
                             {
@@ -136,7 +119,7 @@ namespace System.Runtime.Serialization.Json
 
         private CollectionDataContract TraditionalCollectionDataContract => _helper.TraditionalCollectionDataContract;
 
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+        [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
         {
             Debug.Assert(context != null);
@@ -157,7 +140,7 @@ namespace System.Runtime.Serialization.Json
             return o;
         }
 
-        [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+        [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
         {
             Debug.Assert(context != null);
@@ -173,7 +156,7 @@ namespace System.Runtime.Serialization.Json
             private JsonFormatCollectionWriterDelegate? _jsonFormatWriterDelegate;
             private readonly CollectionDataContract _traditionalCollectionDataContract;
 
-            [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
+            [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             public JsonCollectionDataContractCriticalHelper(CollectionDataContract traditionalDataContract)
                 : base(traditionalDataContract)
             {

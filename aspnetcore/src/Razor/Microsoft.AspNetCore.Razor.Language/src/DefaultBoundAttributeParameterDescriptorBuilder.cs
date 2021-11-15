@@ -1,108 +1,114 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeParameterDescriptorBuilder
 {
-    internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeParameterDescriptorBuilder
+    private readonly DefaultBoundAttributeDescriptorBuilder _parent;
+    private readonly string _kind;
+    private readonly Dictionary<string, string> _metadata;
+
+    private RazorDiagnosticCollection _diagnostics;
+
+    public DefaultBoundAttributeParameterDescriptorBuilder(DefaultBoundAttributeDescriptorBuilder parent, string kind)
     {
-        private readonly DefaultBoundAttributeDescriptorBuilder _parent;
-        private readonly string _kind;
-        private readonly Dictionary<string, string> _metadata;
+        _parent = parent;
+        _kind = kind;
 
-        private RazorDiagnosticCollection _diagnostics;
+        _metadata = new Dictionary<string, string>();
+    }
 
-        public DefaultBoundAttributeParameterDescriptorBuilder(DefaultBoundAttributeDescriptorBuilder parent, string kind)
+    public override string Name { get; set; }
+
+    public override string TypeName { get; set; }
+
+    public override bool IsEnum { get; set; }
+
+    public override string Documentation { get; set; }
+
+    public override string DisplayName { get; set; }
+
+    public override IDictionary<string, string> Metadata => _metadata;
+
+    public override RazorDiagnosticCollection Diagnostics
+    {
+        get
         {
-            _parent = parent;
-            _kind = kind;
+            if (_diagnostics == null)
+            {
+                _diagnostics = new RazorDiagnosticCollection();
+            }
 
-            _metadata = new Dictionary<string, string>();
+            return _diagnostics;
+        }
+    }
+
+    internal bool CaseSensitive => _parent.CaseSensitive;
+
+    public BoundAttributeParameterDescriptor Build()
+    {
+        var diagnostics = Validate();
+        if (_diagnostics != null)
+        {
+            diagnostics ??= new();
+            diagnostics.UnionWith(_diagnostics);
+        }
+        var descriptor = new DefaultBoundAttributeParameterDescriptor(
+            _kind,
+            Name,
+            TypeName,
+            IsEnum,
+            Documentation,
+            GetDisplayName(),
+            CaseSensitive,
+            new Dictionary<string, string>(Metadata),
+            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>());
+
+        return descriptor;
+    }
+
+    private string GetDisplayName()
+    {
+        if (DisplayName != null)
+        {
+            return DisplayName;
         }
 
-        public override string Name { get; set; }
+        return $":{Name}";
+    }
 
-        public override string TypeName { get; set; }
-
-        public override bool IsEnum { get; set; }
-
-        public override string Documentation { get; set; }
-
-        public override string DisplayName { get; set; }
-
-        public override IDictionary<string, string> Metadata => _metadata;
-
-        public override RazorDiagnosticCollection Diagnostics
+    private HashSet<RazorDiagnostic> Validate()
+    {
+        HashSet<RazorDiagnostic> diagnostics = null;
+        if (string.IsNullOrWhiteSpace(Name))
         {
-            get
+
+            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(_parent.Name);
+            diagnostics ??= new();
+            diagnostics.Add(diagnostic);
+        }
+        else
+        {
+            foreach (var character in Name)
             {
-                if (_diagnostics == null)
+                if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
                 {
-                    _diagnostics = new RazorDiagnosticCollection();
-                }
+                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
+                        _parent.Name,
+                        Name,
+                        character);
 
-                return _diagnostics;
-            }
-        }
-
-        internal bool CaseSensitive => _parent.CaseSensitive;
-
-        public BoundAttributeParameterDescriptor Build()
-        {
-            var validationDiagnostics = Validate();
-            var diagnostics = new HashSet<RazorDiagnostic>(validationDiagnostics);
-            if (_diagnostics != null)
-            {
-                diagnostics.UnionWith(_diagnostics);
-            }
-            var descriptor = new DefaultBoundAttributeParameterDescriptor(
-                _kind,
-                Name,
-                TypeName,
-                IsEnum,
-                Documentation,
-                GetDisplayName(),
-                CaseSensitive,
-                new Dictionary<string, string>(Metadata),
-                diagnostics.ToArray());
-
-            return descriptor;
-        }
-
-        private string GetDisplayName()
-        {
-            if (DisplayName != null)
-            {
-                return DisplayName;
-            }
-
-            return $":{Name}";
-        }
-
-        private IEnumerable<RazorDiagnostic> Validate()
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(_parent.Name);
-                yield return diagnostic;
-            }
-            else
-            {
-                foreach (var character in Name)
-                {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
-                    {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
-                            _parent.Name,
-                            Name,
-                            character);
-
-                        yield return diagnostic;
-                    }
+                    diagnostics ??= new();
+                    diagnostics.Add(diagnostic);
                 }
             }
         }
+
+        return diagnostics;
     }
 }

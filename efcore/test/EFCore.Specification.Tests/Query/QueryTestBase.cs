@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -1131,13 +1131,13 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected static async Task AssertTranslationFailed(Func<Task> query)
             => Assert.Contains(
-                CoreStrings.TranslationFailed("").Substring(48),
+                CoreStrings.TranslationFailed("")[48..],
                 (await Assert.ThrowsAsync<InvalidOperationException>(query))
                 .Message);
 
         protected static async Task AssertTranslationFailedWithDetails(Func<Task> query, string details)
             => Assert.Contains(
-                CoreStrings.TranslationFailedWithDetails("", details).Substring(21),
+                CoreStrings.TranslationFailedWithDetails("", details)[21..],
                 (await Assert.ThrowsAsync<InvalidOperationException>(query))
                 .Message);
 

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading;
@@ -9,23 +9,29 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.EntityFrameworkCore.Migrations
 {
     /// <summary>
-    ///     <para>
-    ///         The main service used to generated an EF Core Migrations script or
-    ///         migrate a database directly.
-    ///     </para>
+    ///     The main service used to generated an EF Core Migrations script or
+    ///     migrate a database directly.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
     ///         <see cref="DbContext" /> instance will use its own instance of this service.
     ///         The implementation may depend on other services registered with any lifetime.
     ///         The implementation does not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IMigrator
     {
         /// <summary>
         ///     Migrates the database to either a specified target migration or up to the latest
         ///     migration that exists in the <see cref="IMigrationsAssembly" />.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
         /// <param name="targetMigration">
         ///     The target migration to migrate the database to, or <see langword="null" /> to migrate to the latest.
         /// </param>
@@ -35,12 +41,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     Migrates the database to either a specified target migration or up to the latest
         ///     migration that exists in the <see cref="IMigrationsAssembly" />.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
         /// <param name="targetMigration">
         ///     The target migration to migrate the database to, or <see langword="null" /> to migrate to the latest.
         /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-        /// <returns> A task that represents the asynchronous operation </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task MigrateAsync(
             string? targetMigration = null,
             CancellationToken cancellationToken = default);
@@ -49,6 +58,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     Generates a SQL script to migrate a database either in its entirety, or starting and
         ///     ending at specified migrations.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
         /// <param name="fromMigration">
         ///     The migration to start from, or <see langword="null" /> to start from the empty database.
         /// </param>
@@ -58,7 +70,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <param name="options">
         ///     The options to use when generating SQL for migrations.
         /// </param>
-        /// <returns> The generated script. </returns>
+        /// <returns>The generated script.</returns>
         string GenerateScript(
             string? fromMigration = null,
             string? toMigration = null,

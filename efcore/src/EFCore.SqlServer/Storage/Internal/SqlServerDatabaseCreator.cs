@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,29 +7,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     {
@@ -115,19 +107,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override bool HasTables()
-            => Dependencies.ExecutionStrategyFactory
-                .Create()
-                .Execute(
-                    _connection,
-                    connection => (int)CreateHasTablesCommand()
-                            .ExecuteScalar(
-                                new RelationalCommandParameterObject(
-                                    connection,
-                                    null,
-                                    null,
-                                    Dependencies.CurrentContext.Context,
-                                    Dependencies.CommandLogger))!
-                        != 0);
+            => Dependencies.ExecutionStrategy.Execute(
+                _connection,
+                connection => (int)CreateHasTablesCommand()
+                        .ExecuteScalar(
+                            new RelationalCommandParameterObject(
+                                connection,
+                                null,
+                                null,
+                                Dependencies.CurrentContext.Context,
+                                Dependencies.CommandLogger, CommandSource.Migrations))!
+                    != 0,
+                null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -135,20 +126,21 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Task<bool> HasTablesAsync(CancellationToken cancellationToken = default)
-            => Dependencies.ExecutionStrategyFactory.Create().ExecuteAsync(
-                _connection,
-                async (connection, ct) => (int)(await CreateHasTablesCommand()
+        public override async Task<bool> HasTablesAsync(CancellationToken cancellationToken = default)
+            => (int)(await Dependencies.ExecutionStrategy.ExecuteAsync(
+                    _connection,
+                    (connection, ct) => CreateHasTablesCommand()
                         .ExecuteScalarAsync(
                             new RelationalCommandParameterObject(
                                 connection,
                                 null,
                                 null,
                                 Dependencies.CurrentContext.Context,
-                                Dependencies.CommandLogger),
-                            cancellationToken: ct)
-                        .ConfigureAwait(false))!
-                    != 0, cancellationToken);
+                                Dependencies.CommandLogger, CommandSource.Migrations),
+                            cancellationToken: ct),
+                    null,
+                    cancellationToken).ConfigureAwait(false))!
+                != 0;
 
         private IRelationalCommand CreateHasTablesCommand()
             => _rawSqlCommandBuilder
@@ -179,10 +171,10 @@ SELECT 1 ELSE SELECT 0");
                     {
                         Name = builder.InitialCatalog,
                         FileName = builder.AttachDBFilename,
-                        Collation = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>().Model.GetCollation()
+                        Collation = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>()
+                            .Model.GetRelationalModel().Collation
                     }
-                },
-                null);
+                });
         }
 
         /// <summary>
@@ -195,7 +187,7 @@ SELECT 1 ELSE SELECT 0");
             => Exists(retryOnNotExists: false);
 
         private bool Exists(bool retryOnNotExists)
-            => Dependencies.ExecutionStrategyFactory.Create().Execute(
+            => Dependencies.ExecutionStrategy.Execute(
                 DateTime.UtcNow + RetryTimeout, giveUp =>
                 {
                     while (true)
@@ -215,7 +207,7 @@ SELECT 1 ELSE SELECT 0");
                                         null,
                                         null,
                                         Dependencies.CurrentContext.Context,
-                                        Dependencies.CommandLogger));
+                                        Dependencies.CommandLogger, CommandSource.Migrations));
 
                             return true;
                         }
@@ -243,7 +235,8 @@ SELECT 1 ELSE SELECT 0");
                             }
                         }
                     }
-                });
+                },
+                null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -255,7 +248,7 @@ SELECT 1 ELSE SELECT 0");
             => ExistsAsync(retryOnNotExists: false, cancellationToken: cancellationToken);
 
         private Task<bool> ExistsAsync(bool retryOnNotExists, CancellationToken cancellationToken)
-            => Dependencies.ExecutionStrategyFactory.Create().ExecuteAsync(
+            => Dependencies.ExecutionStrategy.ExecuteAsync(
                 DateTime.UtcNow + RetryTimeout, async (giveUp, ct) =>
                 {
                     while (true)
@@ -264,7 +257,8 @@ SELECT 1 ELSE SELECT 0");
 
                         try
                         {
-                            using var _ = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+                            using var _ = new TransactionScope(
+                                TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
                             await _connection.OpenAsync(ct, errorsExpected: true).ConfigureAwait(false);
                             opened = true;
 
@@ -276,7 +270,7 @@ SELECT 1 ELSE SELECT 0");
                                         null,
                                         null,
                                         Dependencies.CurrentContext.Context,
-                                        Dependencies.CommandLogger),
+                                        Dependencies.CommandLogger, CommandSource.Migrations),
                                     ct)
                                 .ConfigureAwait(false);
 
@@ -306,7 +300,7 @@ SELECT 1 ELSE SELECT 0");
                             }
                         }
                     }
-                }, cancellationToken);
+                }, null, cancellationToken);
 
         // Login failed is thrown when database does not exist (See Issue #776)
         // Unable to attach database file is thrown when file does not exist (See Issue #2810)
@@ -335,11 +329,14 @@ SELECT 1 ELSE SELECT 0");
             //   Microsoft.Data.SqlClient.SqlException: Unable to Attach database file as database xxxxxxx.
             // And (Number 5120)
             //   Microsoft.Data.SqlClient.SqlException: Unable to open the physical file xxxxxxx.
+            // And (Number 18456)
+            //   Microsoft.Data.SqlClient.SqlException: Login failed for user 'xxxxxxx'.
             if (exception.Number == 233
                 || exception.Number == -2
                 || exception.Number == 4060
                 || exception.Number == 1832
-                || exception.Number == 5120)
+                || exception.Number == 5120
+                || exception.Number == 18456)
             {
                 ClearPool();
                 return true;
@@ -389,7 +386,7 @@ SELECT 1 ELSE SELECT 0");
 
             var operations = new MigrationOperation[] { new SqlServerDropDatabaseOperation { Name = databaseName } };
 
-            return Dependencies.MigrationsSqlGenerator.Generate(operations, null);
+            return Dependencies.MigrationsSqlGenerator.Generate(operations);
         }
 
         // Clear connection pools in case there are active connections that are pooled

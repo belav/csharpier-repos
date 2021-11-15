@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
     /// <summary>
     ///     A <see cref="MigrationOperation" /> to add a new foreign key.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    /// </remarks>
     [DebuggerDisplay("ALTER TABLE {Table} ADD CONSTRAINT {Name} PRIMARY KEY")]
     public class AddPrimaryKeyOperation : MigrationOperation, ITableMigrationOperation
     {
@@ -37,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         /// <summary>
         ///     Creates a new <see cref="AddPrimaryKeyOperation" /> from the specified primary key.
         /// </summary>
-        /// <param name="primaryKey"> The primary key. </param>
-        /// <returns> The operation. </returns>
+        /// <param name="primaryKey">The primary key.</param>
+        /// <returns>The operation.</returns>
         public static AddPrimaryKeyOperation CreateFrom(IPrimaryKeyConstraint primaryKey)
         {
             Check.NotNull(primaryKey, nameof(primaryKey));
@@ -50,6 +53,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
                 Name = primaryKey.Name,
                 Columns = primaryKey.Columns.Select(c => c.Name).ToArray()
             };
+
             operation.AddAnnotations(primaryKey.GetAnnotations());
 
             return operation;

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -34,18 +34,16 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         }
 
         /// <summary>
-        ///     <para>
         ///         Gets or sets a value indicating when a dependent/child entity will have its state
         ///         set to <see cref="EntityState.Deleted" /> once severed from a parent/principal entity
         ///         through either a navigation or foreign key property being set to null. The default
         ///         value is <see cref="CascadeTiming.Immediate" />.
-        ///     </para>
-        ///     <para>
+        /// </summary>
+        /// <remarks>
         ///         Dependent/child entities are only deleted automatically when the relationship
         ///         is configured with <see cref="DeleteBehavior.Cascade" />. This is set by default
         ///         for required relationships.
-        ///     </para>
-        /// </summary>
+        /// </remarks>
         public virtual CascadeTiming DeleteOrphansTiming
         {
             get => _stateManager.DeleteOrphansTiming;
@@ -53,17 +51,15 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         }
 
         /// <summary>
-        ///     <para>
         ///         Gets or sets a value indicating when a dependent/child entity will have its state
         ///         set to <see cref="EntityState.Deleted" /> once its parent/principal entity has been marked
         ///         as <see cref="EntityState.Deleted" />. The default value is<see cref="CascadeTiming.Immediate" />.
-        ///     </para>
-        ///     <para>
+        /// </summary>
+        /// <remarks>
         ///         Dependent/child entities are only deleted automatically when the relationship
         ///         is configured with <see cref="DeleteBehavior.Cascade" />. This is set by default
         ///         for required relationships.
-        ///     </para>
-        /// </summary>
+        /// </remarks>
         public virtual CascadeTiming CascadeDeleteTiming
         {
             get => _stateManager.CascadeDeleteTiming;
@@ -134,8 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     severed from a required parent/principal entity, or the required parent/principal entity
         ///     is itself deleted. See <see cref="DeleteBehavior" />.
         /// </summary>
-        /// <param name="entry"> The entry. </param>
-        /// <param name="foreignKeys"> The foreign keys to consider when cascading. </param>
+        /// <param name="entry">The entry.</param>
+        /// <param name="foreignKeys">The foreign keys to consider when cascading.</param>
         public virtual void CascadeDelete(IUpdateEntry entry, IEnumerable<IForeignKey>? foreignKeys = null)
             => _stateManager.CascadeDelete((InternalEntityEntry)entry, force: true, foreignKeys);
 
@@ -165,6 +161,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IModel Model => _stateManager.Model;
+        public virtual IModel Model
+            => _stateManager.Model;
     }
 }

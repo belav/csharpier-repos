@@ -1,12 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -18,9 +16,9 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.Logging;
@@ -39,17 +37,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public static class RelationalLoggerExtensions
     {
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionStarting" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="isolationLevel"> The transaction isolation level. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="isolationLevel">The transaction isolation level.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static InterceptionResult<DbTransaction> TransactionStarting(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -87,14 +89,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionStarting" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="isolationLevel"> The transaction isolation level. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="isolationLevel">The transaction isolation level.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<InterceptionResult<DbTransaction>> TransactionStartingAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -178,13 +180,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionStarted" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The amount of time before the connection was opened. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The amount of time before the connection was opened.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static DbTransaction TransactionStarted(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -224,15 +226,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionStarted" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The amount of time before the connection was opened. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The amount of time before the connection was opened.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<DbTransaction> TransactionStartedAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -319,12 +321,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionUsed" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static DbTransaction TransactionUsed(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -362,14 +364,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionUsed" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<DbTransaction> TransactionUsedAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -461,12 +463,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionCommitting" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static InterceptionResult TransactionCommitting(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -504,14 +506,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionCommitting" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<InterceptionResult> TransactionCommittingAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -586,12 +588,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionCommitted" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The elapsed time from when the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The elapsed time from when the operation was started.</param>
         public static void TransactionCommitted(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -626,15 +628,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionCommitted" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The elapsed time from when the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The elapsed time from when the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task TransactionCommittedAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -713,12 +715,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionRolledBack" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The elapsed time from when the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The elapsed time from when the operation was started.</param>
         public static void TransactionRolledBack(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -753,15 +755,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionRolledBack" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The elapsed time from when the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The elapsed time from when the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task TransactionRolledBackAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -840,12 +842,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionRollingBack" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static InterceptionResult TransactionRollingBack(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -883,14 +885,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionRollingBack" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<InterceptionResult> TransactionRollingBackAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -965,12 +967,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CreatingTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static InterceptionResult CreatingTransactionSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1008,14 +1010,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CreatingTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<InterceptionResult> CreatingTransactionSavepointAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1090,11 +1092,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CreatedTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
         public static void CreatedTransactionSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1127,14 +1129,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CreatedTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task CreatedTransactionSavepointAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1209,12 +1211,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.RollingBackToTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static InterceptionResult RollingBackToTransactionSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1252,14 +1254,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.RollingBackToTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<InterceptionResult> RollingBackToTransactionSavepointAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1334,11 +1336,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.RolledBackToTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
         public static void RolledBackToTransactionSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1371,14 +1373,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CreatedTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task RolledBackToTransactionSavepointAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1453,12 +1455,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.RollingBackToTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <returns> The result of execution, which may have been modified by an interceptor. </returns>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         public static InterceptionResult ReleasingTransactionSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1496,14 +1498,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ReleasingTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static ValueTask<InterceptionResult> ReleasingTransactionSavepointAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1578,11 +1580,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ReleasedTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
         public static void ReleasedTransactionSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1615,14 +1617,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ReleasedTransactionSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task ReleasedTransactionSavepointAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1697,11 +1699,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionDisposed" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
         public static void TransactionDisposed(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1735,14 +1737,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionError" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="action"> The action being taken. </param>
-        /// <param name="exception"> The exception that represents the error. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The elapsed time from when the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="action">The action being taken.</param>
+        /// <param name="exception">The exception that represents the error.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The elapsed time from when the operation was started.</param>
         public static void TransactionError(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1781,17 +1783,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.TransactionError" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
-        /// <param name="transactionId"> The correlation ID associated with the <see cref="DbTransaction" />. </param>
-        /// <param name="action"> The action being taken. </param>
-        /// <param name="exception"> The exception that represents the error. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
-        /// <param name="duration"> The elapsed time from when the operation was started. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the async operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
+        /// <param name="transactionId">The correlation ID associated with the <see cref="DbTransaction" />.</param>
+        /// <param name="action">The action being taken.</param>
+        /// <param name="exception">The exception that represents the error.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
+        /// <param name="duration">The elapsed time from when the operation was started.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the async operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task TransactionErrorAsync(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1879,9 +1881,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.AmbientTransactionWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="startTime"> The time that the operation was started. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="startTime">The time that the operation was started.</param>
         public static void AmbientTransactionWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1912,9 +1914,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.AmbientTransactionEnlisted" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
         public static void AmbientTransactionEnlisted(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1950,9 +1952,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ExplicitTransactionEnlisted" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="transaction"> The transaction. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="transaction">The transaction.</param>
         public static void ExplicitTransactionEnlisted(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
             IRelationalConnection connection,
@@ -1988,9 +1990,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrateUsingConnection" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
-        /// <param name="connection"> The connection. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
+        /// <param name="connection">The connection.</param>
         public static void MigrateUsingConnection(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
@@ -2030,9 +2032,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationReverting" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
-        /// <param name="migration"> The migration. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
+        /// <param name="migration">The migration.</param>
         public static void MigrationReverting(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
@@ -2067,9 +2069,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationApplying" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
-        /// <param name="migration"> The migration. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
+        /// <param name="migration">The migration.</param>
         public static void MigrationApplying(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
@@ -2104,12 +2106,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationGeneratingDownScript" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
-        /// <param name="migration"> The migration. </param>
-        /// <param name="fromMigration"> The starting migration name. </param>
-        /// <param name="toMigration"> The ending migration name. </param>
-        /// <param name="idempotent"> Indicates whether or not an idempotent script is being generated. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
+        /// <param name="migration">The migration.</param>
+        /// <param name="fromMigration">The starting migration name.</param>
+        /// <param name="toMigration">The ending migration name.</param>
+        /// <param name="idempotent">Indicates whether or not an idempotent script is being generated.</param>
         public static void MigrationGeneratingDownScript(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
@@ -2150,12 +2152,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationGeneratingUpScript" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
-        /// <param name="migration"> The migration. </param>
-        /// <param name="fromMigration"> The starting migration name. </param>
-        /// <param name="toMigration"> The ending migration name. </param>
-        /// <param name="idempotent"> Indicates whether or not an idempotent script is being generated. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
+        /// <param name="migration">The migration.</param>
+        /// <param name="fromMigration">The starting migration name.</param>
+        /// <param name="toMigration">The ending migration name.</param>
+        /// <param name="idempotent">Indicates whether or not an idempotent script is being generated.</param>
         public static void MigrationGeneratingUpScript(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
@@ -2196,8 +2198,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationsNotApplied" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
         public static void MigrationsNotApplied(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator)
@@ -2223,9 +2225,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationsNotFound" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrator"> The migrator. </param>
-        /// <param name="migrationsAssembly"> The assembly in which migrations are stored. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrator">The migrator.</param>
+        /// <param name="migrationsAssembly">The assembly in which migrations are stored.</param>
         public static void MigrationsNotFound(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             IMigrator migrator,
@@ -2260,8 +2262,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MigrationAttributeMissingWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="migrationType"> Info for the migration type. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="migrationType">Info for the migration type.</param>
         public static void MigrationAttributeMissingWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             TypeInfo migrationType)
@@ -2294,9 +2296,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.QueryPossibleUnintendedUseOfEqualsWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="left"> The left SQL expression of the Equals. </param>
-        /// <param name="right"> The right SQL expression of the Equals. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="left">The left SQL expression of the Equals.</param>
+        /// <param name="right">The right SQL expression of the Equals.</param>
         public static void QueryPossibleUnintendedUseOfEqualsWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
             SqlExpression left,
@@ -2331,7 +2333,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.QueryPossibleExceptionWithAggregateOperatorWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
         [Obsolete]
         public static void QueryPossibleExceptionWithAggregateOperatorWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics)
@@ -2356,7 +2358,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MultipleCollectionIncludeWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
         public static void MultipleCollectionIncludeWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics)
         {
@@ -2380,8 +2382,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ModelValidationKeyDefaultValueWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="property"> The property. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="property">The property.</param>
         public static void ModelValidationKeyDefaultValueWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property)
@@ -2416,8 +2418,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.BoolWithDefaultWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="property"> The property. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="property">The property.</param>
         public static void BoolWithDefaultWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IProperty property)
@@ -2450,9 +2452,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.BatchReadyForExecution" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="entries"> The entries for entities in the batch. </param>
-        /// <param name="commandCount"> The number of commands. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entries">The entries for entities in the batch.</param>
+        /// <param name="commandCount">The number of commands.</param>
         public static void BatchReadyForExecution(
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             IEnumerable<IUpdateEntry> entries,
@@ -2487,10 +2489,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.BatchSmallerThanMinBatchSize" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="entries"> The entries for entities in the batch. </param>
-        /// <param name="commandCount"> The number of commands. </param>
-        /// <param name="minBatchSize"> The minimum batch size. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entries">The entries for entities in the batch.</param>
+        /// <param name="commandCount">The number of commands.</param>
+        /// <param name="minBatchSize">The minimum batch size.</param>
         public static void BatchSmallerThanMinBatchSize(
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             IEnumerable<IUpdateEntry> entries,
@@ -2527,9 +2529,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs the <see cref="RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="entityType"> The entity type on which the index is defined. </param>
-        /// <param name="index"> The index on the entity type. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entityType">The entity type on which the index is defined.</param>
+        /// <param name="index">The index on the entity type.</param>
         public static void AllIndexPropertiesNotToMappedToAnyTable(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType,
@@ -2608,10 +2610,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs the <see cref="RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="entityType"> The entity type on which the index is defined. </param>
-        /// <param name="index"> The index on the entity type. </param>
-        /// <param name="unmappedPropertyName"> The name of the property which is not mapped. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entityType">The entity type on which the index is defined.</param>
+        /// <param name="index">The index on the entity type.</param>
+        /// <param name="unmappedPropertyName">The name of the property which is not mapped.</param>
         public static void IndexPropertiesBothMappedAndNotMappedToTable(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType,
@@ -2697,13 +2699,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs the <see cref="RelationalEventId.IndexPropertiesMappedToNonOverlappingTables" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="entityType"> The entity type on which the index is defined. </param>
-        /// <param name="index"> The index on the entity type. </param>
-        /// <param name="property1Name"> The first property name which is invalid. </param>
-        /// <param name="tablesMappedToProperty1"> The tables mapped to the first property. </param>
-        /// <param name="property2Name"> The second property name which is invalid. </param>
-        /// <param name="tablesMappedToProperty2"> The tables mapped to the second property. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entityType">The entity type on which the index is defined.</param>
+        /// <param name="index">The index on the entity type.</param>
+        /// <param name="property1Name">The first property name which is invalid.</param>
+        /// <param name="tablesMappedToProperty1">The tables mapped to the first property.</param>
+        /// <param name="property2Name">The second property name which is invalid.</param>
+        /// <param name="tablesMappedToProperty2">The tables mapped to the second property.</param>
         public static void IndexPropertiesMappedToNonOverlappingTables(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType,
@@ -2818,8 +2820,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs the <see cref="RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="foreignKey"> The foreign key. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="foreignKey">The foreign key.</param>
         public static void ForeignKeyPropertiesMappedToUnrelatedTables(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IForeignKey foreignKey)
@@ -2828,7 +2830,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
 
             if (diagnostics.ShouldLog(definition))
             {
-                definition.Log(diagnostics,
+                definition.Log(
+                    diagnostics,
                     l => l.Log(
                         definition.Level,
                         definition.EventId,
@@ -2858,24 +2861,24 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             var d = (FallbackEventDefinition)definition;
             var p = (ForeignKeyEventData)payload;
             return d.GenerateMessage(
-                    l => l.Log(
-                        d.Level,
-                        d.EventId,
-                        d.MessageFormat,
-                        p.ForeignKey.Properties.Format(),
-                        p.ForeignKey.DeclaringEntityType.DisplayName(),
-                        p.ForeignKey.PrincipalEntityType.DisplayName(),
-                        p.ForeignKey.Properties.Format(),
-                        p.ForeignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        p.ForeignKey.PrincipalKey.Properties.Format(),
-                        p.ForeignKey.PrincipalEntityType.GetSchemaQualifiedTableName()));
+                l => l.Log(
+                    d.Level,
+                    d.EventId,
+                    d.MessageFormat,
+                    p.ForeignKey.Properties.Format(),
+                    p.ForeignKey.DeclaringEntityType.DisplayName(),
+                    p.ForeignKey.PrincipalEntityType.DisplayName(),
+                    p.ForeignKey.Properties.Format(),
+                    p.ForeignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
+                    p.ForeignKey.PrincipalKey.Properties.Format(),
+                    p.ForeignKey.PrincipalEntityType.GetSchemaQualifiedTableName()));
         }
 
         /// <summary>
         ///     Logs the <see cref="RelationalEventId.OptionalDependentWithoutIdentifyingPropertyWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="entityType"> The entity type. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entityType">The entity type.</param>
         public static void OptionalDependentWithoutIdentifyingPropertyWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType)
@@ -2908,9 +2911,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.BatchExecutorFailedToRollbackToSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="contextType"> The <see cref="DbContext" /> type being used. </param>
-        /// <param name="exception"> The exception that caused this failure. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="contextType">The <see cref="DbContext" /> type being used.</param>
+        /// <param name="exception">The exception that caused this failure.</param>
         public static void BatchExecutorFailedToRollbackToSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             Type contextType,
@@ -2938,9 +2941,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.BatchExecutorFailedToReleaseSavepoint" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
-        /// <param name="contextType"> The <see cref="DbContext" /> type being used. </param>
-        /// <param name="exception"> The exception that caused this failure. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="contextType">The <see cref="DbContext" /> type being used.</param>
+        /// <param name="exception">The exception that caused this failure.</param>
         public static void BatchExecutorFailedToReleaseSavepoint(
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             Type contextType,
@@ -2963,6 +2966,152 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
 
                 diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
             }
+        }
+
+        /// <summary>
+        ///     Logs the <see cref="RelationalEventId.OptionalDependentWithAllNullPropertiesWarning" /> event.
+        /// </summary>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entry">The entry.</param>
+        public static void OptionalDependentWithAllNullPropertiesWarning(
+            this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
+            IUpdateEntry entry)
+        {
+            var definition = RelationalResources.LogOptionalDependentWithAllNullProperties(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(diagnostics, entry.EntityType.DisplayName());
+            }
+
+            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            {
+                var eventData = new UpdateEntryEventData(
+                    definition,
+                    OptionalDependentWithAllNullPropertiesWarning,
+                    entry);
+
+                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            }
+        }
+
+        private static string OptionalDependentWithAllNullPropertiesWarning(EventDefinitionBase definition, EventData payload)
+        {
+            var d = (EventDefinition<string>)definition;
+            var p = (UpdateEntryEventData)payload;
+            return d.GenerateMessage(p.EntityEntry.EntityType.DisplayName());
+        }
+
+        /// <summary>
+        ///     Logs the <see cref="RelationalEventId.OptionalDependentWithAllNullPropertiesWarning" /> event.
+        /// </summary>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="entry">The entry.</param>
+        public static void OptionalDependentWithAllNullPropertiesWarningSensitive(
+            this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
+            IUpdateEntry entry)
+        {
+            var definition = RelationalResources.LogOptionalDependentWithAllNullPropertiesSensitive(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(
+                    diagnostics, entry.EntityType.DisplayName(),
+                    entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties));
+            }
+
+            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            {
+                var eventData = new UpdateEntryEventData(
+                    definition,
+                    OptionalDependentWithAllNullPropertiesWarningSensitive,
+                    entry
+                );
+
+                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            }
+        }
+
+        private static string OptionalDependentWithAllNullPropertiesWarningSensitive(EventDefinitionBase definition, EventData payload)
+        {
+            var d = (EventDefinition<string, string>)definition;
+            var p = (UpdateEntryEventData)payload;
+            return d.GenerateMessage(
+                p.EntityEntry.EntityType.DisplayName(),
+                p.EntityEntry.BuildCurrentValuesString(p.EntityEntry.EntityType.FindPrimaryKey()!.Properties));
+        }
+
+        /// <summary>
+        ///     Logs the <see cref="RelationalEventId.DuplicateColumnOrders" /> event.
+        /// </summary>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
+        /// <param name="storeObject">The table.</param>
+        /// <param name="columns">The columns.</param>
+        public static void DuplicateColumnOrders(
+            this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
+            StoreObjectIdentifier storeObject,
+            IReadOnlyList<string> columns)
+        {
+            var definition = RelationalResources.LogDuplicateColumnOrders(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(diagnostics, storeObject.DisplayName(), string.Join(", ", columns.Select(c => "'" + c + "'")));
+            }
+
+            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            {
+                var eventData = new ColumnsEventData(
+                    definition,
+                    DuplicateColumnOrders,
+                    storeObject,
+                    columns);
+
+                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            }
+        }
+
+        private static string DuplicateColumnOrders(EventDefinitionBase definition, EventData payload)
+        {
+            var d = (EventDefinition<string, string>)definition;
+            var p = (ColumnsEventData)payload;
+
+            return d.GenerateMessage(p.StoreObject.DisplayName(), string.Join(", ", p.Columns.Select(c => "'" + c + "'")));
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public static void ColumnOrderIgnoredWarning(
+            this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
+            ColumnOperation operation)
+        {
+            var definition = RelationalResources.LogColumnOrderIgnoredWarning(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(diagnostics, (operation.Table, operation.Schema).FormatTable(), operation.Name);
+            }
+
+            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            {
+                var eventData = new MigrationColumnOperationEventData(
+                    definition,
+                    ColumnOrderIgnoredWarning,
+                    operation);
+
+                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            }
+        }
+
+        private static string ColumnOrderIgnoredWarning(EventDefinitionBase definition, EventData payload)
+        {
+            var d = (EventDefinition<string, string>)definition;
+            var p = (MigrationColumnOperationEventData)payload;
+            return d.GenerateMessage((p.ColumnOperation.Table, p.ColumnOperation.Schema).FormatTable(), p.ColumnOperation.Name);
         }
     }
 }

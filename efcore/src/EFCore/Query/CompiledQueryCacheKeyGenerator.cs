@@ -1,10 +1,9 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Query
@@ -18,49 +17,53 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         This type is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
     ///         <see cref="DbContext" /> instance will use its own instance of this service.
     ///         The implementation may depend on other services registered with any lifetime.
     ///         The implementation does not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class CompiledQueryCacheKeyGenerator : ICompiledQueryCacheKeyGenerator
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompiledQueryCacheKeyGenerator" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public CompiledQueryCacheKeyGenerator(CompiledQueryCacheKeyGeneratorDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Dependencies used to create a <see cref="CompiledQueryCacheKeyGenerator" />
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual CompiledQueryCacheKeyGeneratorDependencies Dependencies { get; }
 
         /// <summary>
         ///     Generates the cache key for the given query.
         /// </summary>
-        /// <param name="query"> The query to get the cache key for. </param>
-        /// <param name="async"> A value indicating whether the query will be executed asynchronously. </param>
-        /// <returns> The cache key. </returns>
+        /// <param name="query">The query to get the cache key for.</param>
+        /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
+        /// <returns>The cache key.</returns>
         public virtual object GenerateCacheKey(Expression query, bool async)
             => GenerateCacheKeyCore(query, async);
 
         /// <summary>
         ///     Generates the cache key for the given query.
         /// </summary>
-        /// <param name="query"> The query to get the cache key for. </param>
-        /// <param name="async"> A value indicating whether the query will be executed asynchronously. </param>
-        /// <returns> The cache key. </returns>
+        /// <param name="query">The query to get the cache key for.</param>
+        /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
+        /// <returns>The cache key.</returns>
         protected CompiledQueryCacheKey GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
             => new(
-                Check.NotNull(query, nameof(query)),
+                query,
                 Dependencies.Model,
                 Dependencies.CurrentContext.Context.ChangeTracker.QueryTrackingBehavior,
                 async);
@@ -85,10 +88,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             /// <summary>
             ///     Initializes a new instance of the <see cref="CompiledQueryCacheKey" /> class.
             /// </summary>
-            /// <param name="query"> The query to generate the key for. </param>
-            /// <param name="model"> The model that queries is written against. </param>
-            /// <param name="queryTrackingBehavior"> The tracking behavior for results of the query. </param>
-            /// <param name="async"> A value indicating whether the query will be executed asynchronously. </param>
+            /// <param name="query">The query to generate the key for.</param>
+            /// <param name="model">The model that queries is written against.</param>
+            /// <param name="queryTrackingBehavior">The tracking behavior for results of the query.</param>
+            /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
             public CompiledQueryCacheKey(
                 Expression query,
                 IModel model,

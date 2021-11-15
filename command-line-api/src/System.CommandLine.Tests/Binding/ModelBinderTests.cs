@@ -9,7 +9,6 @@ using System.CommandLine.Parsing;
 using System.IO;
 using FluentAssertions;
 using Xunit;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace System.CommandLine.Tests.Binding
@@ -61,7 +60,7 @@ namespace System.CommandLine.Tests.Binding
                 new Argument
                 {
                     Name = "value",
-                    ArgumentType = type
+                    ValueType = type
                 }
             };
 
@@ -88,7 +87,7 @@ namespace System.CommandLine.Tests.Binding
                 new Argument
                 {
                     Name = "value",
-                    ArgumentType = type
+                    ValueType = type
                 }
             };
 
@@ -167,7 +166,7 @@ namespace System.CommandLine.Tests.Binding
                 new Argument
                 {
                     Name = "value",
-                    ArgumentType = type
+                    ValueType = type
                 }
             };
             var parser = new Parser(command);
@@ -263,6 +262,20 @@ namespace System.CommandLine.Tests.Binding
             binder.UpdateInstance(instance, bindingContext);
 
             instance.IntOption.Should().Be(123);
+        }
+
+        [Fact]
+        public void Modify_an_existing_instance_should_keep_all_default_values_if_no_argument_matches_option()
+        {
+            var parser = new Parser(new Command("the-command"));
+
+            var instance = new ClassWithComplexTypes();
+            var bindingContext = new BindingContext(parser.Parse("the-command"));
+            var binder = new ModelBinder(typeof(ClassWithComplexTypes));
+
+            binder.UpdateInstance(instance, bindingContext);
+
+            instance.Should().BeEquivalentTo(new ClassWithComplexTypes());
         }
 
         [Fact]
@@ -475,13 +488,13 @@ namespace System.CommandLine.Tests.Binding
             instance.IntOption.Should().Be(42);
         }
 
+
         [Fact]
         public void Option_argument_is_bound_to_longest_constructor()
         {
             var option = new Option<int>("--int-property");
-            var parser = new Parser(option);
 
-            var bindingContext = new BindingContext(parser.Parse("--int-property 42"));
+            var bindingContext = new BindingContext(option.Parse("--int-property 42"));
             var binder = new ModelBinder<ClassWithMultipleCtor>();
             var instance = binder.CreateInstance(bindingContext) as ClassWithMultipleCtor;
 
@@ -509,7 +522,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var intOption = new Option<int>("--int-property");
             var stringOption = new Option<string>("--string-property");
-            var parser = new Parser(intOption, stringOption);
+            var parser = new Parser(new RootCommand { intOption, stringOption });
 
             var bindingContext = new BindingContext(parser.Parse("--int-property 42 --string-property Hello"));
             var binder = new ModelBinder<ClassWithMultiLetterSetters>
@@ -522,29 +535,6 @@ namespace System.CommandLine.Tests.Binding
             instance.Should().NotBeNull();
             instance.IntOption.Should().Be(42);
             instance.StringOption.Should().BeNull();
-        }
-
-        [Fact]
-        public void Explicit_model_binder_binds_only_to_configured_ctor_parameters()
-        {
-            var intOption = new Option<int>("-a");
-            var stringOption = new Option<string>("-b");
-            var parser = new Parser(intOption, stringOption);
-            var ctor = typeof(ClassWithMultiLetterCtorParameters)
-                .GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
-            var paramInfo = ctor.GetParameters()[0];
-
-            var bindingContext = new BindingContext(parser.Parse("-a 42 -b Hello"));
-            var binder = new ModelBinder<ClassWithMultiLetterCtorParameters>
-            {
-                EnforceExplicitBinding = true
-            };
-            binder.BindConstructorArgumentFromValue(paramInfo, intOption);
-            var instance = binder.CreateInstance(bindingContext) as ClassWithMultiLetterCtorParameters;
-
-            instance.Should().NotBeNull();
-            instance.IntOption.Should().Be(42);
-            instance.StringOption.Should().Be("the default");
         }
 
         [Fact]
@@ -640,7 +630,7 @@ namespace System.CommandLine.Tests.Binding
             rootCommand.Handler = CommandHandler.Create<ClassWithSetter<int>>(x => boundInstance = x);
 
             var parser = new CommandLineBuilder(rootCommand)
-                         .UseMiddleware(context =>
+                         .AddMiddleware(context =>
                          {
                              var binder = new ModelBinder<ClassWithSetter<int>>();
 
@@ -668,7 +658,7 @@ namespace System.CommandLine.Tests.Binding
             rootCommand.Handler = CommandHandler.Create<ClassWithSetter<int>>(x => boundInstance = x);
 
             var parser = new CommandLineBuilder(rootCommand)
-                         .UseMiddleware(context =>
+                         .AddMiddleware(context =>
                          {
                              var binder = new ModelBinder<ClassWithSetter<int>>();
 
@@ -754,5 +744,101 @@ namespace System.CommandLine.Tests.Binding
 
             boundInstance.Should().NotBeNull();
         }
+
+        [Fact]
+        public async Task Decimals_are_bound_correctly_when_no_token_is_matched()
+        {
+            decimal? receivedValue = null;
+
+            var rootCommand = new RootCommand
+            {
+                new Option<decimal>("--opt-decimal")
+            };
+            rootCommand.Handler = CommandHandler.Create((ComplexType options) =>
+            {
+                receivedValue = options.OptDecimal;
+            });
+
+            await rootCommand.InvokeAsync("");
+
+            receivedValue.Should().Be(0);
+        }
+
+        public class ComplexType
+        {
+            public decimal OptDecimal { get; set; }
+        }
+
+        [Fact] // issue: https://github.com/dotnet/command-line-api/issues/1365
+        public void Binder_does_not_match_by_substring()
+        {
+            var rootCommand = new RootCommand
+            {
+                new Option<string>(
+                    new[] { "-b", "--bundle" },
+                    "the path to the app bundle to be installed"),
+                new Option<string>(
+                    new[] { "-1", "--bundle_id", "--bundle-id" },
+                    "specify bundle id for list and upload")
+            };
+
+            DeployOptions boundOptions = null;
+
+            rootCommand.Handler = CommandHandler.Create<DeployOptions>(options =>
+            {
+                boundOptions = options;
+                return 0;
+            });
+            
+            rootCommand.Invoke("-1 value");
+
+            boundOptions.Bundle.Should().Be(null);
+            boundOptions.BundleId.Should().Be("value");
+        }
+
+        class DeployOptions
+        {
+            public string Bundle { get; set; }
+            public string BundleId { get; set; }
+        }
+
+
+#if NETCOREAPP2_1_OR_GREATER
+        [Theory]
+        [InlineData("--class-with-span-ctor a51ca309-84fa-452f-96be-51e47702ffb4 --int-value 1234")]
+        [InlineData("--class-with-span-ctor a51ca309-84fa-452f-96be-51e47702ffb4")]
+        [InlineData("--int-value 1234")]
+        public void When_only_available_constructor_is_span_then_null_is_passed(string commandLine)
+        {
+            var root = new RootCommand
+            {
+                new Option<ClassWithSpanConstructor>("--class-with-span-ctor"),
+                new Option<int>("--int-value"),
+            };
+
+            var handlerWasCalled = false;
+
+            root.Handler = CommandHandler.Create<ClassWithSpanConstructor, int>((spanCtor, intValue) =>
+            {
+                handlerWasCalled = true;
+            });
+
+            root.Invoke(commandLine);
+
+            handlerWasCalled.Should().BeTrue();
+        }
+
+        public class ClassWithSpanConstructor
+        {
+            private Guid value;
+
+            public ClassWithSpanConstructor(ReadOnlySpan<byte> guid)
+            {
+                value = new Guid(guid);
+            }
+
+            public override string ToString() => value.ToString();
+        }
+#endif
     }
 }

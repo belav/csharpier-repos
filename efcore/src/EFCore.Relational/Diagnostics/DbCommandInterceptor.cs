@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 namespace Microsoft.EntityFrameworkCore.Diagnostics
 {
     /// <summary>
-    ///     <para>
-    ///         Abstract base class for <see cref="IDbCommandInterceptor" /> for use when implementing a subset
-    ///         of the interface methods.
-    ///     </para>
+    ///     Abstract base class for <see cref="IDbCommandInterceptor" /> for use when implementing a subset
+    ///     of the interface methods.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more information.
+    /// </remarks>
     public abstract class DbCommandInterceptor : IDbCommandInterceptor
     {
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.CreateCommand" />.
         /// </summary>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{DbCommand}.HasResult" /> set to <see langword="true" /> if some previous
@@ -39,16 +40,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => result;
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbConnection.CreateCommand" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed creation of a command in
-        ///         <see cref="IDbCommandInterceptor.CommandCreating" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="IDbCommandInterceptor.CommandCreating" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbConnection.CreateCommand" />.
         /// </summary>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed creation of a command in
+        ///     <see cref="IDbCommandInterceptor.CommandCreating" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="IDbCommandInterceptor.CommandCreating" />.
+        /// </remarks>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbConnection.CreateCommand" />.
         ///     This value is typically used as the return value for the implementation of this method.
@@ -64,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteReader()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{DbDataReader}.HasResult" /> set to <see langword="true" /> if some previous
@@ -88,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteScalar()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{Object}.HasResult" /> set to <see langword="true" /> if some previous
@@ -112,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteNonQuery()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{Int32}.HasResult" /> set to <see langword="true" /> if some previous
@@ -136,15 +135,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteReaderAsync()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{DbDataReader}.HasResult" /> set to <see langword="true" /> if some previous
         ///     interceptor suppressed execution by calling <see cref="InterceptionResult{DbDataReader}.SuppressWithResult" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     If <see cref="InterceptionResult{DbDataReader}.HasResult" /> is false, the EF will continue as normal.
         ///     If <see cref="InterceptionResult{DbDataReader}.HasResult" /> is true, then EF will suppress the operation it
@@ -152,7 +151,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in, often using <see cref="Task.FromResult{TResult}" />
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(
             DbCommand command,
             CommandEventData eventData,
@@ -163,15 +162,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteScalarAsync()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{Object}.HasResult" /> set to <see langword="true" /> if some previous
         ///     interceptor suppressed execution by calling <see cref="InterceptionResult{Object}.SuppressWithResult" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     If <see cref="InterceptionResult{Object}.HasResult" /> is false, the EF will continue as normal.
         ///     If <see cref="InterceptionResult{Object}.HasResult" /> is true, then EF will suppress the operation it
@@ -179,7 +178,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in, often using <see cref="Task.FromResult{TResult}" />
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<InterceptionResult<object>> ScalarExecutingAsync(
             DbCommand command,
             CommandEventData eventData,
@@ -190,15 +189,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteNonQueryAsync()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult{Int32}.HasResult" /> set to <see langword="true" /> if some previous
         ///     interceptor suppressed execution by calling <see cref="InterceptionResult{Int32}.SuppressWithResult" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     If <see cref="InterceptionResult{Int32}.HasResult" /> is false, the EF will continue as normal.
         ///     If <see cref="InterceptionResult{Int32}.HasResult" /> is true, then EF will suppress the operation it
@@ -206,7 +205,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in, often using <see cref="Task.FromResult{TResult}" />
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<InterceptionResult<int>> NonQueryExecutingAsync(
             DbCommand command,
             CommandEventData eventData,
@@ -215,16 +214,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => new(result);
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbCommand.ExecuteReader()" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed execution of a command in <see cref="ReaderExecuting" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="ReaderExecuting" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbCommand.ExecuteReader()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed execution of a command in <see cref="ReaderExecuting" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="ReaderExecuting" />.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbCommand.ExecuteReader()" />.
         ///     This value is typically used as the return value for the implementation of this method.
@@ -241,16 +238,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => result;
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbCommand.ExecuteScalar()" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed execution of a command in <see cref="ScalarExecuting" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="ScalarExecuting" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbCommand.ExecuteScalar()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed execution of a command in <see cref="ScalarExecuting" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="ScalarExecuting" />.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbCommand.ExecuteScalar()" />.
         ///     This value is typically used as the return value for the implementation of this method.
@@ -267,16 +262,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => result;
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbCommand.ExecuteNonQuery()" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed execution of a command in <see cref="NonQueryExecuting" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="NonQueryExecuting" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbCommand.ExecuteNonQuery()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed execution of a command in <see cref="NonQueryExecuting" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="NonQueryExecuting" />.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbCommand.ExecuteNonQuery()" />.
         ///     This value is typically used as the return value for the implementation of this method.
@@ -293,27 +286,25 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => result;
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbCommand.ExecuteReaderAsync()" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed execution of a command in <see cref="ReaderExecutingAsync" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="ReaderExecutingAsync" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbCommand.ExecuteReaderAsync()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed execution of a command in <see cref="ReaderExecutingAsync" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="ReaderExecutingAsync" />.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbCommand.ExecuteReaderAsync()" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A <see cref="Task" /> providing the result that EF will use.
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in, often using <see cref="Task.FromResult{TResult}" />
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<DbDataReader> ReaderExecutedAsync(
             DbCommand command,
             CommandExecutedEventData eventData,
@@ -322,27 +313,25 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => new(result);
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbCommand.ExecuteScalarAsync()" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed execution of a command in <see cref="ScalarExecutingAsync" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="ScalarExecutingAsync" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbCommand.ExecuteScalarAsync()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed execution of a command in <see cref="ScalarExecutingAsync" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="ScalarExecutingAsync" />.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbCommand.ExecuteScalarAsync()" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A <see cref="Task" /> providing the result that EF will use.
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in, often using <see cref="Task.FromResult{TResult}" />
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<object?> ScalarExecutedAsync(
             DbCommand command,
             CommandExecutedEventData eventData,
@@ -351,27 +340,25 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => new(result);
 
         /// <summary>
-        ///     <para>
-        ///         Called immediately after EF calls <see cref="DbCommand.ExecuteNonQueryAsync()" />.
-        ///     </para>
-        ///     <para>
-        ///         This method is still called if an interceptor suppressed execution of a command in <see cref="NonQueryExecutingAsync" />.
-        ///         In this case, <paramref name="result" /> is the result returned by <see cref="NonQueryExecutingAsync" />.
-        ///     </para>
+        ///     Called immediately after EF calls <see cref="DbCommand.ExecuteNonQueryAsync()" />.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <remarks>
+        ///     This method is still called if an interceptor suppressed execution of a command in <see cref="NonQueryExecutingAsync" />.
+        ///     In this case, <paramref name="result" /> is the result returned by <see cref="NonQueryExecutingAsync" />.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         /// <param name="result">
         ///     The result of the call to <see cref="DbCommand.ExecuteNonQueryAsync()" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A <see cref="Task" /> providing the result that EF will use.
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in, often using <see cref="Task.FromResult{TResult}" />
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<int> NonQueryExecutedAsync(
             DbCommand command,
             CommandExecutedEventData eventData,
@@ -382,8 +369,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called when execution of a command has failed with an exception.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
         public virtual void CommandFailed(
             DbCommand command,
             CommandErrorEventData eventData)
@@ -393,11 +380,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called when execution of a command has failed with an exception.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and execution. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and execution.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual Task CommandFailedAsync(
             DbCommand command,
             CommandErrorEventData eventData,
@@ -407,8 +394,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called when execution of a <see cref="DbDataReader" /> is about to be disposed.
         /// </summary>
-        /// <param name="command"> The command. </param>
-        /// <param name="eventData"> Contextual information about the command and reader. </param>
+        /// <param name="command">The command.</param>
+        /// <param name="eventData">Contextual information about the command and reader.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult.IsSuppressed" /> set to <see langword="true" /> if some previous

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -929,6 +929,191 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_after_multiple_orderbys(bool async)
+        {
+            return AssertQueryScalar(
+                async,
+                ss => ss.Set<Employee>()
+                    .OrderBy(e => e.City)
+                    .OrderByDescending(e => e.EmployeeID)
+                    .Reverse()
+                    .Select(e => e.EmployeeID),
+                assertOrder: true);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_after_orderby_thenby(bool async)
+        {
+            return AssertQueryScalar(
+                async,
+                ss => ss.Set<Employee>()
+                    .OrderBy(e => e.EmployeeID)
+                    .ThenByDescending(e => e.City)
+                    .Select(e => e.EmployeeID)
+                    .Reverse(),
+                assertOrder: true);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_subquery_via_pushdown(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Employee>()
+                    .OrderBy(e => e.EmployeeID)
+                    .Reverse()
+                    .Take(5)
+                    .Distinct()
+                    .Select(e => new { e.EmployeeID, e.City }),
+                assertOrder: true);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_after_orderBy_and_take(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Employee>()
+                    .OrderBy(e => e.EmployeeID)
+                    .Take(5)
+                    .Reverse()
+                    .Select(e => new { e.EmployeeID, e.City }),
+                assertOrder: true);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_join_outer(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderByDescending(c => c.City)
+                    .ThenBy(c => c.CustomerID)
+                    .Reverse()
+                    .Join(
+                        ss.Set<Order>().OrderBy(o => o.OrderID),
+                        o => o.CustomerID,
+                        i => i.CustomerID,
+                        (o, i) => new { o.CustomerID, i.OrderID }),
+                elementSorter: e => (e.CustomerID, e.OrderID));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_join_outer_with_take(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderByDescending(c => c.CustomerID)
+                    .Reverse()
+                    .Take(20)
+                    .Join(
+                        ss.Set<Order>().OrderBy(o => o.OrderID),
+                        o => o.CustomerID,
+                        i => i.CustomerID,
+                        (o, i) => new { o.CustomerID, i.OrderID }),
+                elementSorter: e => (e.CustomerID, e.OrderID));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_join_inner(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => from c in ss.Set<Customer>().OrderBy(x => x.CustomerID)
+                      join o in ss.Set<Order>().OrderByDescending(x => x.OrderDate).Reverse() on c.CustomerID equals o.CustomerID into grouping
+                      from o in grouping.DefaultIfEmpty()
+                      select new { c.CustomerID, OrderID = (int?)o.OrderID },
+                elementSorter: e => (e.CustomerID, e.OrderID));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_join_inner_with_skip(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => from c in ss.Set<Customer>().OrderBy(x => x.CustomerID)
+                      join o in ss.Set<Order>().OrderByDescending(x => x.OrderID).Skip(2).Reverse() on c.CustomerID equals o.CustomerID into grouping
+                      from o in grouping.DefaultIfEmpty()
+                      select new { c.CustomerID, OrderID = (int?)o.OrderID },
+                elementSorter: e => (e.CustomerID, e.OrderID));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_SelectMany(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderBy(c => c.CustomerID)
+                    .Reverse()
+                    .SelectMany(c => c.Orders.OrderByDescending(o => o.OrderID).Reverse()),
+                entryCount: 830);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_SelectMany_with_Take(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderBy(c => c.CustomerID)
+                    .Reverse()
+                    .Take(20)
+                    .SelectMany(c => c.Orders.OrderByDescending(o => o.OrderID).Take(30).Reverse()),
+                entryCount: 161);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_projection_subquery(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderBy(c => c.CustomerID)
+                    .Select(c => ss.Set<Order>().OrderBy(o => o.OrderDate).ThenByDescending(o => o.OrderID).Reverse().ToList()),
+                assertOrder: true,
+                elementAsserter: (e, a) => AssertCollection(e, a, ordered: true),
+                entryCount: 830);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_projection_subquery_single_result(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderBy(c => c.CustomerID)
+                    .Select(c => ss.Set<Order>().OrderBy(o => o.OrderDate).ThenByDescending(o => o.OrderID).Reverse().FirstOrDefault()),
+                assertOrder: true,
+                entryCount: 1);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Reverse_in_projection_scalar_subquery(bool async)
+        {
+            return AssertQueryScalar(
+                async,
+                ss => ss.Set<Customer>()
+                    .OrderBy(c => c.CustomerID)
+                    .Select(c => ss.Set<Order>().OrderBy(o => o.OrderDate).ThenByDescending(o => o.OrderID).Reverse().Select(o => o.OrderID).FirstOrDefault()),
+                assertOrder: true);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
         public virtual Task Projection_containing_DateTime_subtraction(bool async)
         {
             return AssertQueryScalar(
@@ -1778,6 +1963,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .Where(e => e.Where(o => o.OrderID < 11000).Count() > 0)
                     .Select(e => e.Where(o => o.OrderID < 10750)),
                 assertOrder: true,
+                elementAsserter: (e, a) => AssertCollection(e, a, elementSorter: ee => ee.OrderID),
                 entryCount: 18);
         }
 
@@ -2038,7 +2224,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 assertOrder: true);
         }
 
-        [ConditionalTheory(Skip = "issue #22701")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Projecting_count_of_navigation_which_is_generic_collection_using_convert(bool async)
         {
@@ -2240,7 +2426,7 @@ namespace Microsoft.EntityFrameworkCore.Query
               elementSorter: e => e.c.CustomerID,
               elementAsserter: (e, a) =>
               {
-                  AssertInclude(e, a,
+                  AssertInclude(e.c, a.c,
                       new ExpectedInclude<Customer>(c => c.Orders),
                       new ExpectedInclude<Order>(o => o.OrderDetails, "Orders"));
                   AssertInclude(e.SingleOrder, a.SingleOrder, new ExpectedInclude<Order>(o => o.OrderDetails));
@@ -2316,6 +2502,135 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }),
               asserter: (e, a) => AssertCollection(e.Orders, a.Orders, ordered: true,
                 elementAsserter: (ee, aa) => AssertEqual(ee.Title, aa.Title)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Client_projection_via_ctor_arguments(bool async)
+        {
+            return AssertSingle(
+              async,
+              ss =>
+               ss.Set<Customer>()
+                    .Where(c => c.CustomerID == "ALFKI")
+                    .Include(c => c.Orders)
+                    .Select(c => new CustomerDetailsWithCount(c.CustomerID, c.City,
+                        c.Orders.Select(o => new OrderInfo(o.OrderID, o.OrderDate)).ToList(), c.Orders.Count)),
+              asserter: (e, a) =>
+              {
+                  Assert.Equal(e.CustomerID, a.CustomerID);
+                  Assert.Equal(e.City, a.City);
+                  AssertCollection(e.OrderInfos, a.OrderInfos,
+                      elementSorter: i => i.OrderID,
+                      elementAsserter: (ie, ia) =>
+                      {
+                          Assert.Equal(ie.OrderID, ia.OrderID);
+                          Assert.Equal(ie.OrderDate, ia.OrderDate);
+                      });
+                  Assert.Equal(e.OrderCount, a.OrderCount);
+              });
+        }
+
+        private class CustomerDetailsWithCount
+        {
+            public CustomerDetailsWithCount(string customerID, string city, List<OrderInfo> orderInfos, int orderCount)
+            {
+                CustomerID = customerID;
+                City = city;
+                OrderInfos = orderInfos;
+                OrderCount = orderCount;
+            }
+
+            public string CustomerID { get; }
+            public string City { get; }
+            public List<OrderInfo> OrderInfos { get; }
+            public int OrderCount { get; }
+        }
+
+        private class OrderInfo
+        {
+            public OrderInfo(int orderID, DateTime? orderDate)
+            {
+                OrderID = orderID;
+                OrderDate = orderDate;
+            }
+
+            public int OrderID { get; }
+            public DateTime? OrderDate { get; }
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Client_projection_with_string_initialization_with_scalar_subquery(bool async)
+        {
+            return AssertQuery(
+              async,
+              ss => ss.Set<Customer>()
+                    .Where(c => c.CustomerID.StartsWith("F"))
+                    .Select(c => new
+                    {
+                        c.CustomerID,
+                        Order = c.Orders.FirstOrDefault(o => o.OrderID < 11000).OrderDate,
+                        InterpolatedString = $"test{c.City}",
+                        NonInterpolatedString = "test" + c.City,
+                        Collection = new List<string>
+                        {
+                            $"{c.CustomerID}@test1.com",
+                            $"{c.CustomerID}@test2.com",
+                            $"{c.CustomerID}@test3.com",
+                            $"{c.CustomerID}@test4.com"
+                        }
+                    }),
+              ss => ss.Set<Customer>()
+                    .Where(c => c.CustomerID.StartsWith("F"))
+                    .Select(c => new
+                    {
+                        c.CustomerID,
+                        Order = c.Orders.FirstOrDefault(o => o.OrderID < 11000).MaybeScalar(e => e.OrderDate),
+                        InterpolatedString = $"test{c.City}",
+                        NonInterpolatedString = "test" + c.City,
+                        Collection = new List<string>
+                        {
+                            $"{c.CustomerID}@test1.com",
+                            $"{c.CustomerID}@test2.com",
+                            $"{c.CustomerID}@test3.com",
+                            $"{c.CustomerID}@test4.com"
+                        }
+                    }),
+              elementSorter: e => e.CustomerID,
+              elementAsserter: (e, a) =>
+              {
+                  AssertEqual(e.CustomerID, a.CustomerID);
+                  AssertEqual(e.Order, a.Order);
+                  AssertEqual(e.InterpolatedString, a.InterpolatedString);
+                  AssertEqual(e.NonInterpolatedString, a.NonInterpolatedString);
+                  AssertCollection(e.Collection, a.Collection, ordered: true);
+              });
+        }
+
+        private class OrderDto
+        {
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task MemberInit_in_projection_without_arguments(bool async)
+        {
+            return AssertQuery(
+              async,
+              ss => ss.Set<Customer>()
+                    .Where(c => c.CustomerID.StartsWith("F"))
+                    .Select(c => new
+                    {
+                        c.CustomerID,
+                        Orders = c.Orders.Select(o => new OrderDto())
+                    }),
+              elementSorter: e => e.CustomerID,
+              elementAsserter: (e, a) =>
+              {
+                  AssertEqual(e.CustomerID, a.CustomerID);
+                  AssertEqual(e.Orders.Count(), a.Orders.Count());
+              });
         }
     }
 }

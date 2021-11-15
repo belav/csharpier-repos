@@ -2,14 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.CommandLine.Binding;
+using System.CommandLine.Parsing;
 using System.Linq;
 
 namespace System.CommandLine.Suggestions
 {
-    public static class SuggestionSource
+    /// <summary>
+    /// Provides extension methods supporting <see cref="ISuggestionSource"/> and command line tab completion.
+    /// </summary>
+    internal static class SuggestionSource
     {
-        private static readonly ConcurrentDictionary<Type, ISuggestionSource> _suggestionSourcesByType = new ConcurrentDictionary<Type, ISuggestionSource>();
+        private static readonly ConcurrentDictionary<Type, ISuggestionSource> _suggestionSourcesByType = new();
 
         private static readonly string[] _trueAndFalse =
         {
@@ -17,11 +22,37 @@ namespace System.CommandLine.Suggestions
             bool.TrueString
         };
 
-        public static ISuggestionSource ForType(Type type)
+        /// <summary>
+        /// Gets a suggestion source that provides completions for a type (e.g. enum) with well-known values.
+        /// </summary>
+        internal static ISuggestionSource ForType(Type type)
         {
-            return _suggestionSourcesByType.GetOrAdd(type ?? typeof(object), CreateForType);
+            return _suggestionSourcesByType.GetOrAdd(type, t => new SuggestionSourceForType(t));
+        }
 
-            ISuggestionSource CreateForType(Type t)
+        internal static ISuggestionSource Empty { get; } = new AnonymousSuggestionSource((_, _) => Array.Empty<string>());
+
+        private class SuggestionSourceForType : ISuggestionSource
+        {
+            private readonly Type _type;
+            private ISuggestionSource? _innerSuggestionSource;
+
+            public SuggestionSourceForType(Type type)
+            {
+                _type = type;
+            }
+
+            public IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+            {
+                if (_innerSuggestionSource is null)
+                {
+                    _innerSuggestionSource = CreateForType(_type);
+                }
+
+                return _innerSuggestionSource.GetSuggestions(parseResult, textToMatch);
+            }
+
+            private static ISuggestionSource CreateForType(Type t)
             {
                 if (t.IsNullable())
                 {
@@ -30,19 +61,18 @@ namespace System.CommandLine.Suggestions
 
                 if (t.IsEnum)
                 {
-                    var names = Enum.GetNames(t);
-                    return new AnonymousSuggestionSource((_,__) => names);
+                    return new AnonymousSuggestionSource((_, _) => GetEnumNames());
+
+                    IEnumerable<string> GetEnumNames() => Enum.GetNames(t);
                 }
 
                 if (t == typeof(bool))
                 {
-                    return new AnonymousSuggestionSource((_, __) => _trueAndFalse);
+                    return new AnonymousSuggestionSource((_, _) => _trueAndFalse);
                 }
 
                 return Empty;
             }
         }
-
-        public static ISuggestionSource Empty { get; } = new AnonymousSuggestionSource((_, __) => Array.Empty<string>());
     }
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -18,8 +18,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns the defining navigation if one exists or <see langword="null" /> otherwise.
         /// </summary>
-        /// <param name="entityType"> The entity type. </param>
-        /// <returns> The defining navigation if one exists or <see langword="null" /> otherwise. </returns>
+        /// <param name="entityType">The entity type.</param>
+        /// <returns>The defining navigation if one exists or <see langword="null" /> otherwise.</returns>
         [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
         public static IConventionNavigation? FindDefiningNavigation(this IConventionEntityType entityType)
             => (IConventionNavigation?)((IEntityType)entityType).FindDefiningNavigation();
@@ -27,23 +27,23 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Sets the LINQ query used as the default source for queries of this type.
         /// </summary>
-        /// <param name="entityType"> The entity type. </param>
-        /// <param name="definingQuery"> The LINQ query used as the default source. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <param name="entityType">The entity type.</param>
+        /// <param name="definingQuery">The LINQ query used as the default source.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         [Obsolete("Use InMemoryEntityTypeExtensions.SetInMemoryQuery")]
         public static void SetDefiningQuery(
             this IConventionEntityType entityType,
             LambdaExpression? definingQuery,
             bool fromDataAnnotation = false)
             => ((EntityType)entityType).SetDefiningQuery(
-                    definingQuery,
-                    fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                definingQuery,
+                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
         ///     Returns the configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />.
         /// </summary>
-        /// <param name="entityType"> The entity type. </param>
-        /// <returns> The configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />. </returns>
+        /// <param name="entityType">The entity type.</param>
+        /// <returns>The configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />.</returns>
         [Obsolete("Use InMemoryEntityTypeExtensions.GetInMemoryQueryConfigurationSource")]
         public static ConfigurationSource? GetDefiningQueryConfigurationSource(this IConventionEntityType entityType)
             => entityType.FindAnnotation(CoreAnnotationNames.DefiningQuery)?.GetConfigurationSource();

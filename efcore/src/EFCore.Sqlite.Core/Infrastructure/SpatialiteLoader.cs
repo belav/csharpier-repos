@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     /// <summary>
     ///     Finds and loads SpatiaLite.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-spatial">Spatial data</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information.
+    /// </remarks>
     public static class SpatialiteLoader
     {
         private static readonly string? _sharedLibraryExtension;
@@ -44,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Tries to load the mod_spatialite extension into the specified connection.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <returns> <see langword="true" /> if the extension was loaded; otherwise, <see langword="false" />. </returns>
+        /// <param name="connection">The connection.</param>
+        /// <returns><see langword="true" /> if the extension was loaded; otherwise, <see langword="false" />.</returns>
         public static bool TryLoad(DbConnection connection)
         {
             Check.NotNull(connection, nameof(connection));
@@ -78,14 +82,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         }
 
         /// <summary>
-        ///     <para>
-        ///         Loads the mod_spatialite extension into the specified connection.
-        ///     </para>
-        ///     <para>
-        ///         The extension will be loaded from native NuGet assets when available.
-        ///     </para>
+        ///     Loads the mod_spatialite extension into the specified connection.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
+        /// <remarks>
+        ///     The extension will be loaded from native NuGet assets when available.
+        /// </remarks>
+        /// <param name="connection">The connection.</param>
         public static void Load(DbConnection connection)
         {
             Check.NotNull(connection, nameof(connection));
@@ -127,7 +129,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 var candidateAssets = new Dictionary<(string, string), int>();
                 var rid = RuntimeInformation.RuntimeIdentifier;
                 var rids = DependencyContext.Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)?.Fallbacks.ToList()
-                    ?? new List<string>();
+                    ?? new List<string?>();
                 rids.Insert(0, rid);
 
                 foreach (var library in DependencyContext.Default.RuntimeLibraries)
@@ -142,7 +144,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                 StringComparison.OrdinalIgnoreCase))
                             {
                                 var fallbacks = rids.IndexOf(group.Runtime);
-                                if (fallbacks != -1)
+                                if (fallbacks != -1 && library.Path is not null)
                                 {
                                     candidateAssets.Add((library.Path, file.Path), fallbacks);
                                 }

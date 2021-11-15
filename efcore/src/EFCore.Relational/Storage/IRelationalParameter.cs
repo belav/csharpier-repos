@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Data.Common;
@@ -17,6 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public interface IRelationalParameter
     {
         /// <summary>
@@ -27,15 +31,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Adds the parameter as a <see cref="DbParameter" /> to a <see cref="DbCommand" />.
         /// </summary>
-        /// <param name="command"> The command to add the parameter to. </param>
-        /// <param name="value"> The value to be assigned to the parameter. </param>
+        /// <param name="command">The command to add the parameter to.</param>
+        /// <param name="value">The value to be assigned to the parameter.</param>
         void AddDbParameter(DbCommand command, object? value);
 
         /// <summary>
         ///     Adds the parameter as a <see cref="DbParameter" /> to a <see cref="DbCommand" />.
         /// </summary>
-        /// <param name="command"> The command to add the parameter to. </param>
-        /// <param name="parameterValues"> The map of parameter values </param>
+        /// <param name="command">The command to add the parameter to.</param>
+        /// <param name="parameterValues">The map of parameter values</param>
         void AddDbParameter(DbCommand command, IReadOnlyDictionary<string, object?> parameterValues);
     }
 }

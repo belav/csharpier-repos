@@ -1,10 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal;
+using Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
@@ -14,13 +14,17 @@ using Newtonsoft.Json.Linq;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 {
     /// <summary>
-    ///     <para>
-    ///         A convention that adds the 'id' property - a key required by Azure Cosmos.
-    ///     </para>
+    ///     A convention that adds the 'id' property - a key required by Azure Cosmos.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This convention also adds the '__jObject' containing the JSON object returned by the store.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///         <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class StoreKeyConvention :
         IEntityTypeAddedConvention,
         IPropertyAnnotationChangedConvention,
@@ -62,14 +66,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="StoreKeyConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public StoreKeyConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
@@ -97,7 +101,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         }
                         else
                         {
-                            idProperty.Builder.HasValueGenerator((_, _) => new IdValueGenerator());
+                            idProperty.Builder.HasValueGeneratorFactory(typeof(IdValueGeneratorFactory));
                         }
                     }
 
@@ -105,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     if (partitionKey != null)
                     {
                         var partitionKeyProperty = entityType.FindProperty(partitionKey);
-                        if (partitionKeyProperty == null)
+                        if (partitionKeyProperty == null
+                            || partitionKeyProperty == idProperty)
                         {
                             newKey = entityTypeBuilder.HasKey(new[] { idProperty })?.Metadata;
                         }

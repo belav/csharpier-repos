@@ -1,13 +1,17 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.EntityFrameworkCore.Utilities;
+using System.Collections.Generic;
 
 namespace Microsoft.EntityFrameworkCore.Design
 {
     /// <summary>
     ///     Represents a nested closure code fragment.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class NestedClosureCodeFragment
     {
         /// <summary>
@@ -17,11 +21,19 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="methodCall">The method call used as the body of the nested closure.</param>
         public NestedClosureCodeFragment(string parameter, MethodCallCodeFragment methodCall)
         {
-            Check.NotEmpty(parameter, nameof(parameter));
-            Check.NotNull(methodCall, nameof(methodCall));
-
             Parameter = parameter;
-            MethodCall = methodCall;
+            MethodCalls = new List<MethodCallCodeFragment> { methodCall };
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="NestedClosureCodeFragment" /> class.
+        /// </summary>
+        /// <param name="parameter">The nested closure parameter's name.</param>
+        /// <param name="methodCalls">The list of method calls used as the body of the nested closure.</param>
+        public NestedClosureCodeFragment(string parameter, IReadOnlyList<MethodCallCodeFragment> methodCalls)
+        {
+            Parameter = parameter;
+            MethodCalls = methodCalls;
         }
 
         /// <summary>
@@ -31,9 +43,9 @@ namespace Microsoft.EntityFrameworkCore.Design
         public virtual string Parameter { get; }
 
         /// <summary>
-        ///     Gets the method call used as the body of the nested closure.
+        ///     Gets the method calls used as the body of the nested closure.
         /// </summary>
         /// <value>The method call.</value>
-        public virtual MethodCallCodeFragment MethodCall { get; }
+        public virtual IReadOnlyList<MethodCallCodeFragment> MethodCalls { get; }
     }
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -22,20 +21,20 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     {
         private readonly Dictionary<MethodInfo, string> _methodInfoDatePartMapping = new()
         {
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddYears), new[] { typeof(int) }), "year" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMonths), new[] { typeof(int) }), "month" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddDays), new[] { typeof(double) }), "day" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddHours), new[] { typeof(double) }), "hour" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMinutes), new[] { typeof(double) }), "minute" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddSeconds), new[] { typeof(double) }), "second" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMilliseconds), new[] { typeof(double) }), "millisecond" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddYears), new[] { typeof(int) }), "year" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddMonths), new[] { typeof(int) }), "month" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddDays), new[] { typeof(double) }), "day" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddHours), new[] { typeof(double) }), "hour" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddMinutes), new[] { typeof(double) }), "minute" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddSeconds), new[] { typeof(double) }), "second" },
-            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddMilliseconds), new[] { typeof(double) }), "millisecond" }
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddYears), typeof(int)), "year" },
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMonths), typeof(int)), "month" },
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddDays), typeof(double)), "day" },
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddHours), typeof(double)), "hour" },
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMinutes), typeof(double)), "minute" },
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddSeconds), typeof(double)), "second" },
+            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMilliseconds), typeof(double)), "millisecond" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddYears), typeof(int)), "year" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddMonths), typeof(int)), "month" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddDays), typeof(double)), "day" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddHours), typeof(double)), "hour" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddMinutes), typeof(double)), "minute" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddSeconds), typeof(double)), "second" },
+            { typeof(DateTimeOffset).GetRequiredRuntimeMethod(nameof(DateTimeOffset.AddMilliseconds), typeof(double)), "millisecond" }
         };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -67,10 +66,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             if (_methodInfoDatePartMapping.TryGetValue(method, out var datePart)
                 && instance != null)
             {

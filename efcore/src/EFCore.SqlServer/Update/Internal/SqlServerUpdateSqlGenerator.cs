@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,22 +9,14 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-    ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-    ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class SqlServerUpdateSqlGenerator : UpdateSqlGenerator, ISqlServerUpdateSqlGenerator
     {
@@ -48,18 +40,24 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public virtual ResultSetMapping AppendBulkInsertOperation(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ModificationCommand> modificationCommands,
+            IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
             int commandPosition)
         {
             var table = StoreObjectIdentifier.Table(modificationCommands[0].TableName, modificationCommands[0].Schema);
-            if (modificationCommands.Count == 1
-                && modificationCommands[0].ColumnModifications.All(
+            if (modificationCommands.Count == 1)
+            {
+                return modificationCommands[0].ColumnModifications.All(
                     o =>
                         !o.IsKey
                         || !o.IsRead
-                        || o.Property?.GetValueGenerationStrategy(table) == SqlServerValueGenerationStrategy.IdentityColumn))
-            {
-                return AppendInsertOperation(commandStringBuilder, modificationCommands[0], commandPosition);
+                        || o.Property?.GetValueGenerationStrategy(table) == SqlServerValueGenerationStrategy.IdentityColumn)
+                    ? AppendInsertOperation(commandStringBuilder, modificationCommands[0], commandPosition)
+                    : AppendInsertOperationWithServerKeys(
+                        commandStringBuilder,
+                        modificationCommands[0],
+                        modificationCommands[0].ColumnModifications.Where(o => o.IsKey).ToList(),
+                        modificationCommands[0].ColumnModifications.Where(o => o.IsRead).ToList(),
+                        0);
             }
 
             var readOperations = modificationCommands[0].ColumnModifications.Where(o => o.IsRead).ToList();
@@ -131,8 +129,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
         private ResultSetMapping AppendBulkInsertWithoutServerValues(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ModificationCommand> modificationCommands,
-            List<ColumnModification> writeOperations)
+            IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
+            List<IColumnModification> writeOperations)
         {
             Check.DebugAssert(writeOperations.Count > 0, $"writeOperations.Count is {writeOperations.Count}");
 
@@ -162,11 +160,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
         private ResultSetMapping AppendBulkInsertWithServerValues(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ModificationCommand> modificationCommands,
+            IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
             int commandPosition,
-            List<ColumnModification> writeOperations,
-            List<ColumnModification> keyOperations,
-            List<ColumnModification> readOperations)
+            List<IColumnModification> writeOperations,
+            List<IColumnModification> keyOperations,
+            List<IColumnModification> readOperations)
         {
             AppendDeclareTable(
                 commandStringBuilder,
@@ -203,11 +201,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
         private ResultSetMapping AppendBulkInsertWithServerValuesOnly(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ModificationCommand> modificationCommands,
+            IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
             int commandPosition,
-            List<ColumnModification> nonIdentityOperations,
-            List<ColumnModification> keyOperations,
-            List<ColumnModification> readOperations)
+            List<IColumnModification> nonIdentityOperations,
+            List<IColumnModification> keyOperations,
+            List<IColumnModification> readOperations)
         {
             AppendDeclareTable(commandStringBuilder, InsertedTableBaseName, commandPosition, keyOperations);
 
@@ -235,8 +233,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             string name,
             string? schema,
             string toInsertTableAlias,
-            IReadOnlyList<ModificationCommand> modificationCommands,
-            IReadOnlyList<ColumnModification> writeOperations,
+            IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
+            IReadOnlyList<IColumnModification> writeOperations,
             string? additionalColumns = null)
         {
             commandStringBuilder.Append("MERGE ");
@@ -286,28 +284,28 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
             AppendValuesHeader(commandStringBuilder, writeOperations);
             commandStringBuilder
-                .Append("(")
+                .Append('(')
                 .AppendJoin(
                     writeOperations,
-                    toInsertTableAlias,
-                    SqlGenerationHelper,
-                    (sb, o, alias, helper) =>
+                    (toInsertTableAlias, SqlGenerationHelper),
+                    static (sb, o, state) =>
                     {
-                        sb.Append(alias).Append(".");
+                        var (alias, helper) = state;
+                        sb.Append(alias).Append('.');
                         helper.DelimitIdentifier(sb, o.ColumnName);
                     })
-                .Append(")");
+                .Append(')');
         }
 
         private void AppendValues(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations,
+            IReadOnlyList<IColumnModification> operations,
             string additionalLiteral)
         {
             if (operations.Count > 0)
             {
                 commandStringBuilder
-                    .Append("(")
+                    .Append('(')
                     .AppendJoin(
                         operations,
                         SqlGenerationHelper,
@@ -324,7 +322,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                         })
                     .Append(", ")
                     .Append(additionalLiteral)
-                    .Append(")");
+                    .Append(')');
             }
         }
 
@@ -332,7 +330,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             StringBuilder commandStringBuilder,
             string name,
             int index,
-            IReadOnlyList<ColumnModification> operations,
+            IReadOnlyList<IColumnModification> operations,
             string? additionalColumns = null)
         {
             commandStringBuilder
@@ -346,7 +344,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                     (sb, o, generator) =>
                     {
                         generator.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
-                        sb.Append(" ").Append(generator.GetTypeNameForCopy(o.Property!));
+                        sb.Append(' ').Append(generator.GetTypeNameForCopy(o.Property!));
                     });
 
             if (additionalColumns != null)
@@ -357,7 +355,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             }
 
             commandStringBuilder
-                .Append(")")
+                .Append(')')
                 .AppendLine(SqlGenerationHelper.StatementTerminator);
         }
 
@@ -375,7 +373,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         // ReSharper disable once ParameterTypeCanBeEnumerable.Local
         private void AppendOutputClause(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations,
+            IReadOnlyList<IColumnModification> operations,
             string tableName,
             int tableIndex,
             string? additionalColumns = null)
@@ -404,9 +402,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
         private ResultSetMapping AppendInsertOperationWithServerKeys(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
-            IReadOnlyList<ColumnModification> keyOperations,
-            IReadOnlyList<ColumnModification> readOperations,
+            IReadOnlyModificationCommand command,
+            IReadOnlyList<IColumnModification> keyOperations,
+            IReadOnlyList<IColumnModification> readOperations,
             int commandPosition)
         {
             var name = command.TableName;
@@ -429,38 +427,53 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
         private ResultSetMapping AppendSelectCommand(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> readOperations,
-            IReadOnlyList<ColumnModification> keyOperations,
+            IReadOnlyList<IColumnModification> readOperations,
+            IReadOnlyList<IColumnModification> keyOperations,
             string insertedTableName,
             int insertedTableIndex,
             string tableName,
             string? schema,
             string? orderColumn = null)
         {
-            commandStringBuilder
-                .AppendLine()
-                .Append("SELECT ")
-                .AppendJoin(
-                    readOperations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName, "t"))
-                .Append(" FROM ");
-            SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, tableName, schema);
-            commandStringBuilder
-                .AppendLine(" t")
-                .Append("INNER JOIN ")
-                .Append(insertedTableName).Append(insertedTableIndex)
-                .Append(" i")
-                .Append(" ON ")
-                .AppendJoin(
-                    keyOperations, (sb, c) =>
-                    {
-                        sb.Append("(");
-                        SqlGenerationHelper.DelimitIdentifier(sb, c.ColumnName, "t");
-                        sb.Append(" = ");
-                        SqlGenerationHelper.DelimitIdentifier(sb, c.ColumnName, "i");
-                        sb.Append(")");
-                    }, " AND ");
+            if (readOperations.SequenceEqual(keyOperations))
+            {
+                commandStringBuilder
+                    .AppendLine()
+                    .Append("SELECT ")
+                    .AppendJoin(
+                        readOperations,
+                        SqlGenerationHelper,
+                        (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName, "i"))
+                    .Append(" FROM ")
+                    .Append(insertedTableName).Append(insertedTableIndex).Append(" i");
+            }
+            else
+            {
+                commandStringBuilder
+                    .AppendLine()
+                    .Append("SELECT ")
+                    .AppendJoin(
+                        readOperations,
+                        SqlGenerationHelper,
+                        (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName, "t"))
+                    .Append(" FROM ");
+                SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, tableName, schema);
+                commandStringBuilder
+                    .AppendLine(" t")
+                    .Append("INNER JOIN ")
+                    .Append(insertedTableName).Append(insertedTableIndex)
+                    .Append(" i")
+                    .Append(" ON ")
+                    .AppendJoin(
+                        keyOperations, (sb, c) =>
+                        {
+                            sb.Append('(');
+                            SqlGenerationHelper.DelimitIdentifier(sb, c.ColumnName, "t");
+                            sb.Append(" = ");
+                            SqlGenerationHelper.DelimitIdentifier(sb, c.ColumnName, "i");
+                            sb.Append(')');
+                        }, " AND ");
+            }
 
             if (orderColumn != null)
             {
@@ -514,7 +527,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, ColumnModification columnModification)
+        protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, IColumnModification columnModification)
         {
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, columnModification.ColumnName);
             commandStringBuilder.Append(" = ");

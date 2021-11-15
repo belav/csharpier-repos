@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -25,6 +25,254 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     public class ChangeTrackerTest
     {
+        [ConditionalTheory]
+        [InlineData(0, 0)]
+        [InlineData(1, 0)]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        public void Can_Add_with_identifying_relationships_dependent_first(int principalKeyValue, int dependentKeyValue)
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Add(new DependentGG { Id = dependentKeyValue, PrincipalGG = new PrincipalGG { Id = principalKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added1).State);
+            Assert.Equal(EntityState.Added, context.Entry(added1.PrincipalGG).State);
+
+            var added2 = context.Add(new DependentNG { Id = dependentKeyValue, PrincipalNG = new PrincipalNG { Id = principalKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added2).State);
+            Assert.Equal(EntityState.Added, context.Entry(added2.PrincipalNG).State);
+
+            var added3 = context.Add(new DependentNN { Id = dependentKeyValue, PrincipalNN = new PrincipalNN { Id = principalKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added3).State);
+            Assert.Equal(EntityState.Added, context.Entry(added3.PrincipalNN).State);
+
+            var added4 = context.Add(new DependentGN { Id = dependentKeyValue, PrincipalGN = new PrincipalGN { Id = principalKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added4).State);
+            Assert.Equal(EntityState.Added, context.Entry(added4.PrincipalGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalTheory]
+        [InlineData(0, 0)]
+        [InlineData(1, 0)]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        public void Can_Add_with_identifying_relationships_principal_first(int principalKeyValue, int dependentKeyValue)
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Add(new PrincipalGG { Id = principalKeyValue, DependentGG = new DependentGG { Id = dependentKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added1).State);
+            Assert.Equal(EntityState.Added, context.Entry(added1.DependentGG).State);
+
+            var added2 = context.Add(new PrincipalNG { Id = principalKeyValue, DependentNG = new DependentNG { Id = dependentKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added2).State);
+            Assert.Equal(EntityState.Added, context.Entry(added2.DependentNG).State);
+
+            var added3 = context.Add(new PrincipalNN { Id = principalKeyValue, DependentNN = new DependentNN { Id = dependentKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added3).State);
+            Assert.Equal(EntityState.Added, context.Entry(added3.DependentNN).State);
+
+            var added4 = context.Add(new PrincipalGN { Id = principalKeyValue, DependentGN = new DependentGN { Id = dependentKeyValue} }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added4).State);
+            Assert.Equal(EntityState.Added, context.Entry(added4.DependentGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_dependent_first()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new DependentGG { PrincipalGG = new PrincipalGG() }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added1).State);
+            Assert.Equal(EntityState.Added, context.Entry(added1.PrincipalGG).State);
+
+            var added2 = context.Attach(new DependentNG { PrincipalNG = new PrincipalNG() }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added2).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2.PrincipalNG).State);
+
+            var added3 = context.Attach(new DependentNN { PrincipalNN = new PrincipalNN() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.PrincipalNN).State);
+
+            var added4 = context.Attach(new DependentGN { PrincipalGN = new PrincipalGN() }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added4).State);
+            Assert.Equal(EntityState.Added, context.Entry(added4.PrincipalGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_dependent_first_with_principal_keys_set()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new DependentGG { PrincipalGG = new PrincipalGG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added1).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1.PrincipalGG).State);
+
+            var added2 = context.Attach(new DependentNG { PrincipalNG = new PrincipalNG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added2).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2.PrincipalNG).State);
+
+            var added3 = context.Attach(new DependentNN { PrincipalNN = new PrincipalNN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.PrincipalNN).State);
+
+            var added4 = context.Attach(new DependentGN { PrincipalGN = new PrincipalGN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added4).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4.PrincipalGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_dependent_first_with_dependent_keys_set()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new DependentGG { Id = 1, PrincipalGG = new PrincipalGG() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1).State);
+            Assert.Equal(EntityState.Added, context.Entry(added1.PrincipalGG).State);
+
+            var added2 = context.Attach(new DependentNG { Id = 1, PrincipalNG = new PrincipalNG() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2.PrincipalNG).State);
+
+            var added3 = context.Attach(new DependentNN { Id = 1, PrincipalNN = new PrincipalNN() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.PrincipalNN).State);
+
+            var added4 = context.Attach(new DependentGN { Id = 1, PrincipalGN = new PrincipalGN() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4).State);
+            Assert.Equal(EntityState.Added, context.Entry(added4.PrincipalGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_dependent_first_with_all_keys_set()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new DependentGG { Id = 1, PrincipalGG = new PrincipalGG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1.PrincipalGG).State);
+
+            var added2 = context.Attach(new DependentNG { Id = 1, PrincipalNG = new PrincipalNG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2.PrincipalNG).State);
+
+            var added3 = context.Attach(new DependentNN { Id = 1, PrincipalNN = new PrincipalNN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.PrincipalNN).State);
+
+            var added4 = context.Attach(new DependentGN { Id = 1, PrincipalGN = new PrincipalGN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4.PrincipalGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_principal_first()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new PrincipalGG { DependentGG = new DependentGG() }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added1).State);
+            Assert.Equal(EntityState.Added, context.Entry(added1.DependentGG).State);
+
+            var added2 = context.Attach(new PrincipalNG { DependentNG = new DependentNG() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
+            Assert.Equal(EntityState.Added, context.Entry(added2.DependentNG).State);
+
+            var added3 = context.Attach(new PrincipalNN { DependentNN = new DependentNN() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.DependentNN).State);
+
+            var added4 = context.Attach(new PrincipalGN { DependentGN = new DependentGN() }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added4).State);
+            Assert.Equal(EntityState.Added, context.Entry(added4.DependentGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_principal_first_with_principal_keys_set()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new PrincipalGG { Id = 1, DependentGG = new DependentGG() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1).State);
+            Assert.Equal(EntityState.Added, context.Entry(added1.DependentGG).State);
+
+            var added2 = context.Attach(new PrincipalNG { Id = 1, DependentNG = new DependentNG() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
+            Assert.Equal(EntityState.Added, context.Entry(added2.DependentNG).State);
+
+            var added3 = context.Attach(new PrincipalNN { Id = 1, DependentNN = new DependentNN() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.DependentNN).State);
+
+            var added4 = context.Attach(new PrincipalGN { Id = 1, DependentGN = new DependentGN() }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4).State);
+            Assert.Equal(EntityState.Added, context.Entry(added4.DependentGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_principal_first_with_dependent_keys_set()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new PrincipalGG { DependentGG = new DependentGG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added1).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1.DependentGG).State);
+
+            var added2 = context.Attach(new PrincipalNG { DependentNG = new DependentNG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2.DependentNG).State);
+
+            var added3 = context.Attach(new PrincipalNN { DependentNN = new DependentNN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.DependentNN).State);
+
+            var added4 = context.Attach(new PrincipalGN { DependentGN = new DependentGN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Added, context.Entry(added4).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4.DependentGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
+        [ConditionalFact]
+        public void Can_Attach_with_identifying_relationships_principal_first_with_all_keys_set()
+        {
+            using var context = new EarlyLearningCenter();
+
+            var added1 = context.Attach(new PrincipalGG { Id = 1, DependentGG = new DependentGG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added1.DependentGG).State);
+
+            var added2 = context.Attach(new PrincipalNG { Id = 1, DependentNG = new DependentNG { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added2.DependentNG).State);
+
+            var added3 = context.Attach(new PrincipalNN { Id = 1, DependentNN = new DependentNN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added3.DependentNN).State);
+
+            var added4 = context.Attach(new PrincipalGN { Id = 1, DependentGN = new DependentGN { Id = 1 } }).Entity;
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(added4.DependentGN).State);
+
+            Assert.Equal(8, context.ChangeTracker.Entries().Count());
+        }
+
         [ConditionalFact]
         public void Change_tracker_can_be_cleared()
         {
@@ -78,7 +326,59 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 CoreStrings.UnknownKeyValue(nameof(Weak), nameof(Weak.HeroId)),
-                Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => _ = async ? await context.SaveChangesAsync() : context.SaveChanges()))
+                .Message);
+        }
+
+        [ConditionalTheory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public async Task Attached_owned_entity_without_owner_not_saved(bool async)
+        {
+            using var context = new WeakHerosContext();
+
+            if (async)
+            {
+                await context.AddAsync(new Skinner());
+            }
+            else
+            {
+                context.Add(new Skinner());
+            }
+
+            Assert.True(context.ChangeTracker.HasChanges());
+
+            Assert.Equal(
+                CoreStrings.SaveOwnedWithoutOwner(nameof(Skinner)),
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => _ = async ? await context.SaveChangesAsync() : context.SaveChanges()))
+                .Message);
+        }
+
+        [ConditionalTheory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public async Task Attached_owned_collection_entity_without_owner_not_saved(bool async)
+        {
+            using var context = new WeakHerosContext();
+
+            if (async)
+            {
+                await context.AddAsync(new TheStreets());
+            }
+            else
+            {
+                context.Add(new TheStreets());
+            }
+
+            Assert.True(context.ChangeTracker.HasChanges());
+
+            Assert.Equal(
+                CoreStrings.SaveOwnedWithoutOwner(nameof(TheStreets)),
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => _ = async ? await context.SaveChangesAsync() : context.SaveChanges()))
+                .Message);
         }
 
         public class Hero
@@ -95,15 +395,39 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             public Hero Hero { get; set; }
         }
 
+        public class Mike
+        {
+            public Guid Id { get; set; }
+            public ICollection<TheStreets> TheStreets { get; set; }
+            public Skinner TheHero { get; set; }
+        }
+
+        public class Skinner
+        {
+        }
+
+        public class TheStreets
+        {
+        }
+
         public class WeakHerosContext : DbContext
         {
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Weak>(
+            {
+                modelBuilder.Entity<Weak>(
                     b =>
                     {
                         b.HasKey(e => new { e.Id, e.HeroId });
                         b.HasOne(e => e.Hero).WithMany(e => e.Weaks).HasForeignKey(e => e.HeroId);
                     });
+
+                modelBuilder.Entity<Mike>(
+                    b =>
+                    {
+                        b.OwnsOne(e => e.TheHero);
+                        b.OwnsMany(e => e.TheStreets);
+                    });
+            }
 
             protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                 => optionsBuilder.UseInMemoryDatabase(nameof(WeakHerosContext));
@@ -1340,7 +1664,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 .AddDbContextPool<LikeAZooContextPooled>(
                     p => p.UseInMemoryDatabase(nameof(LikeAZooContextPooled))
                         .UseInternalServiceProvider(InMemoryFixture.BuildServiceProvider(_loggerFactory)))
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
         private class LikeAZooContextPooled : LikeAZooContext
         {
@@ -1695,15 +2019,34 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             }
         }
 
-        [ConditionalTheory] // Issue #16546
-        [InlineData(false)]
-        [InlineData(true)]
-        public void Optional_relationship_with_cascade_still_cascades(bool delayCascade)
+        [ConditionalTheory] // Issues #16546 #25360
+        [InlineData(false, false, false, true, false)]
+        [InlineData(true, false, false, true, false)]
+        [InlineData(false, true, false, true, false)]
+        [InlineData(true, true, false, true, false)]
+        [InlineData(false, false, true, true, false)]
+        [InlineData(true, false, true, true, false)]
+        [InlineData(false, true, false, false, true)]
+        [InlineData(true, true, false, false, true)]
+        [InlineData(false, false, true, false, true)]
+        [InlineData(true, false, true, false, true)]
+        [InlineData(false, true, false, true, true)]
+        [InlineData(true, true, false, true, true)]
+        [InlineData(false, false, true, true, true)]
+        [InlineData(true, false, true, true, true)]
+        public void Optional_relationship_with_cascade_still_cascades(
+            bool delayCascade,
+            bool setProperty,
+            bool setCurrentValue,
+            bool useForeignKey,
+            bool useNavigation)
         {
             Kontainer detachedContainer;
-            var databaseName = "K" + delayCascade;
-            using (var context = new KontainerContext(databaseName))
+            using (var context = new KontainerContext())
             {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
                 context.Add(
                     new Kontainer
                     {
@@ -1721,51 +2064,77 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     .Single();
             }
 
-            using (var context = new KontainerContext(databaseName))
+            using (var context = new KontainerContext())
             {
                 var attachedContainer = context.Set<Kontainer>()
                     .Include(container => container.Rooms)
                     .ThenInclude(room => room.Troduct)
                     .Single();
 
+                var attachedRoom = attachedContainer.Rooms.Single();
+                var attachedTroduct = attachedRoom.Troduct;
+
                 Assert.Equal(3, context.ChangeTracker.Entries().Count());
                 Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer.Rooms.Single()).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer.Rooms.Single().Troduct).State);
-
-                var detachedRoom = detachedContainer.Rooms.Single();
-                detachedRoom.Troduct = null;
-                detachedRoom.TroductId = null;
-
-                var attachedRoom = attachedContainer.Rooms.Single();
+                Assert.Equal(EntityState.Unchanged, context.Entry(attachedRoom).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(attachedTroduct).State);
 
                 if (delayCascade)
                 {
                     context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
                 }
 
-                context.Entry(attachedRoom).CurrentValues.SetValues(detachedRoom);
+                if (setProperty)
+                {
+                    if (useForeignKey)
+                    {
+                        attachedRoom.TroductId = null;
+                    }
+
+                    if (useNavigation)
+                    {
+                        attachedRoom.Troduct = null;
+                    }
+                }
+                else if (setCurrentValue)
+                {
+                    if (useForeignKey)
+                    {
+                        context.Entry(attachedRoom).Property(e => e.TroductId).CurrentValue = null;
+                    }
+
+                    if (useNavigation)
+                    {
+                        context.Entry(attachedRoom).Reference(e => e.Troduct).CurrentValue = null;
+                    }
+                }
+                else
+                {
+                    var detachedRoom = detachedContainer.Rooms.Single();
+                    detachedRoom.TroductId = null;
+                    context.Entry(attachedRoom).CurrentValues.SetValues(detachedRoom);
+                }
 
                 Assert.Equal(3, context.ChangeTracker.Entries().Count());
                 Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer.Rooms.Single().Troduct).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(attachedTroduct).State);
 
                 if (delayCascade)
                 {
-                    Assert.Equal(EntityState.Modified, context.Entry(attachedContainer.Rooms.Single()).State);
+                    Assert.Equal(EntityState.Modified, context.Entry(attachedRoom).State);
                 }
                 else
                 {
                     // Deleted because FK with cascade has been set to null
-                    Assert.Equal(EntityState.Deleted, context.Entry(attachedContainer.Rooms.Single()).State);
+                    Assert.Equal(EntityState.Deleted, context.Entry(attachedRoom).State);
                 }
 
                 context.ChangeTracker.CascadeChanges();
 
                 Assert.Equal(3, context.ChangeTracker.Entries().Count());
                 Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(attachedContainer.Rooms.Single().Troduct).State);
-                Assert.Equal(EntityState.Deleted, context.Entry(attachedContainer.Rooms.Single()).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(attachedTroduct).State);
+                Assert.Equal(EntityState.Deleted, context.Entry(attachedRoom).State);
 
                 context.SaveChanges();
             }
@@ -1797,13 +2166,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class KontainerContext : DbContext
         {
-            private readonly string _databaseName;
-
-            public KontainerContext(string databaseName)
-            {
-                _databaseName = databaseName;
-            }
-
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<KontainerRoom>()
@@ -1817,7 +2179,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                 => optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase(_databaseName);
+                    .UseInMemoryDatabase(nameof(KontainerContext));
         }
 
         [ConditionalTheory]
@@ -2529,6 +2891,54 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             public string ToDisagree { get; set; }
         }
 
+        private class PrincipalGG
+        {
+            public int Id { get; set; }
+            public DependentGG DependentGG { get; set; }
+        }
+
+        private class DependentGG
+        {
+            public int Id { get; set; }
+            public PrincipalGG PrincipalGG { get; set; }
+        }
+
+        private class PrincipalNN
+        {
+            public int Id { get; set; }
+            public DependentNN DependentNN { get; set; }
+        }
+
+        private class DependentNN
+        {
+            public int Id { get; set; }
+            public PrincipalNN PrincipalNN { get; set; }
+        }
+
+        private class PrincipalNG
+        {
+            public int Id { get; set; }
+            public DependentNG DependentNG { get; set; }
+        }
+
+        private class DependentNG
+        {
+            public int Id { get; set; }
+            public PrincipalNG PrincipalNG { get; set; }
+        }
+
+        private class PrincipalGN
+        {
+            public int Id { get; set; }
+            public DependentGN DependentGN { get; set; }
+        }
+
+        private class DependentGN
+        {
+            public int Id { get; set; }
+            public PrincipalGN PrincipalGN { get; set; }
+        }
+
         private class EarlyLearningCenter : DbContext
         {
             private readonly IServiceProvider _serviceProvider;
@@ -2576,6 +2986,65 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     });
 
                 modelBuilder.Entity<OptionalProduct>();
+
+                modelBuilder.Entity<PrincipalNN>(
+                    b =>
+                    {
+                        b.HasOne(e => e.DependentNN)
+                            .WithOne(e => e.PrincipalNN)
+                            .HasForeignKey<DependentNN>(e => e.Id);
+
+                        b.Property(e => e.Id).ValueGeneratedNever();
+                    });
+
+                modelBuilder.Entity<DependentNN>().Property(e => e.Id).ValueGeneratedNever();
+
+                modelBuilder.Entity<PrincipalGG>(
+                    b =>
+                    {
+                        b.HasOne(e => e.DependentGG)
+                            .WithOne(e => e.PrincipalGG)
+                            .HasForeignKey<DependentGG>(e => e.Id);
+
+                        b.Property(e => e.Id).ValueGeneratedOnAdd();
+                    });
+
+                modelBuilder.Entity<DependentGG>().Property(e => e.Id).ValueGeneratedOnAdd();
+
+                modelBuilder.Entity<PrincipalNG>(
+                    b =>
+                    {
+                        b.HasOne(e => e.DependentNG)
+                            .WithOne(e => e.PrincipalNG)
+                            .HasForeignKey<DependentNG>(e => e.Id);
+
+                        b.Property(e => e.Id).ValueGeneratedNever();
+                    });
+
+                modelBuilder.Entity<DependentNG>().Property(e => e.Id).HasValueGenerator<DummyValueGenerator>();
+
+                modelBuilder.Entity<PrincipalGN>(
+                    b =>
+                    {
+                        b.HasOne(e => e.DependentGN)
+                            .WithOne(e => e.PrincipalGN)
+                            .HasForeignKey<DependentGN>(e => e.Id);
+
+                        b.Property(e => e.Id).ValueGeneratedOnAdd();
+                    });
+
+                modelBuilder.Entity<DependentGN>().Property(e => e.Id).ValueGeneratedNever();
+            }
+
+            private class DummyValueGenerator : ValueGenerator<int>
+            {
+                private static int _value;
+
+                public override int Next(EntityEntry entry)
+                    => _value++;
+
+                public override bool GeneratesTemporaryValues
+                    => false;
             }
 
             protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 #nullable disable warnings
 
@@ -108,8 +107,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var accessExpression = visitor.Visit(AccessExpression);
             var innerProjection = visitor.Visit(InnerProjection);
 
@@ -136,11 +133,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
-            expressionPrinter.Append(ToString());
-        }
+            => expressionPrinter.Append(ToString());
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

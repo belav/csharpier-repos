@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -19,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     public class EnumHasFlagTranslator : IMethodCallTranslator
     {
         private static readonly MethodInfo _methodInfo
-            = typeof(Enum).GetRequiredRuntimeMethod(nameof(Enum.HasFlag), new[] { typeof(Enum) });
+            = typeof(Enum).GetRequiredRuntimeMethod(nameof(Enum.HasFlag), typeof(Enum));
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -46,10 +45,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             if (Equals(method, _methodInfo)
                 && instance != null)
             {
@@ -57,7 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return instance.Type != argument.Type
                     ? null
                     // TODO: If argument is SelectExpression, we need to clone it.
-                    // See issue#24460
+                    // See issue#26532
                     : (SqlExpression)_sqlExpressionFactory.Equal(_sqlExpressionFactory.And(instance, argument), argument);
             }
 

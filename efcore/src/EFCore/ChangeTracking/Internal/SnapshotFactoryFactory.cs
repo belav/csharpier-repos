@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return GetPropertyCount(entityType) == 0
                 ? (() => Snapshot.Empty)
                 : Expression.Lambda<Func<ISnapshot>>(
-                    // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
-                    // as if always exists.
+                        // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
+                        // as if always exists.
                         CreateConstructorExpression(entityType, null!))
                     .Compile();
         }
@@ -192,6 +192,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         expression,
                         comparer.SnapshotExpression.Body);
 
+                    if (snapshotExpression.Type != propertyBase.ClrType)
+                    {
+                        snapshotExpression = Expression.Convert(snapshotExpression, propertyBase.ClrType);
+                    }
+
                     expression = propertyBase.ClrType.IsNullableType()
                         ? Expression.Condition(
                             Expression.Equal(expression, Expression.Constant(null, propertyBase.ClrType)),
@@ -223,7 +228,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IPropertyBase property)
             => Expression.Call(
                 parameter,
-                InternalEntityEntry.ReadShadowValueMethod.MakeGenericMethod(property.ClrType),
+                InternalEntityEntry.ReadShadowValueMethod.MakeGenericMethod((property as IProperty)?.ClrType ?? typeof(object)),
                 Expression.Constant(property.GetShadowIndex()));
 
         /// <summary>

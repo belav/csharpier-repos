@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -140,7 +139,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.False(
                 nonGenericMethods.Count > 0,
-                "\r\n-- Non-generic fluent returns --\r\n"
+                "\r\n-- Non-generic fluent returns that aren't hidden --\r\n"
                 + string.Join(
                     Environment.NewLine, nonGenericMethods.Select(
                         m =>
@@ -481,7 +480,10 @@ namespace Microsoft.EntityFrameworkCore
                             ? method.Name[3..]
                             : method.Name.StartsWith("To", StringComparison.Ordinal)
                                 ? method.Name[2..]
-                                : method.Name);
+                                : method.Name.StartsWith("With", StringComparison.Ordinal)
+                                    ? method.Name[4..]
+                                    : method.Name);
+
                 if (!methodLookup.TryGetValue(expectedName, out var canSetMethod))
                 {
                     return $"{declaringType.Name} expected to have a {expectedName} method";
@@ -739,13 +741,15 @@ namespace Microsoft.EntityFrameworkCore
                        && !it.Name.EndsWith("Dependencies", StringComparison.Ordinal)
                        && (it.GetConstructors().Length != 1
                            || it.GetConstructors()[0].GetParameters().Length == 0
-                           || it.GetConstructors()[0].GetParameters()[0].Name != "dependencies"
+                           || (it.GetConstructors()[0].GetParameters()[0].Name != "dependencies"
+                               && it.GetConstructors()[0].GetParameters()[0].Name != "relationalDependencies")
                            // Check that the parameter has a non-public copy constructor, identifying C# 9 records
                            || !it.GetConstructors()[0].GetParameters()[0].ParameterType
                                .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
-                               .Any(c => c.GetParameters() is var parameters
-                                   && parameters.Length == 1
-                                   && parameters[0].Name == "original"))
+                               .Any(
+                                   c => c.GetParameters() is var parameters
+                                       && parameters.Length == 1
+                                       && parameters[0].Name == "original"))
                    select it)
                 .ToList();
 
@@ -770,6 +774,7 @@ namespace Microsoft.EntityFrameworkCore
                        && !type.IsSealed
                        && !type.IsAbstract
                        && !type.DeclaringType.GetNestedTypes(BindingFlags.NonPublic).Any(t => t.BaseType == type)
+                       && !Fixture.NonSealedPrivateNestedTypes.Contains(type)
                    select type.FullName)
                 .ToList();
 
@@ -941,9 +946,6 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(QueryCompilationContextDependencies).GetProperty(
                         nameof(QueryCompilationContextDependencies.QueryTrackingBehavior)),
                     typeof(QueryContextDependencies).GetProperty(nameof(QueryContextDependencies.StateManager)),
-#pragma warning disable CS0618 // Type or member is obsolete
-                    typeof(QueryContextDependencies).GetProperty(nameof(QueryContextDependencies.QueryProvider))
-#pragma warning restore CS0618 // Type or member is obsolete
                 };
 
             public Dictionary<Type, (Type Mutable, Type Convention, Type ConventionBuilder, Type Runtime)> MetadataTypes { get; }
@@ -1051,6 +1053,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public Dictionary<Type, Type> MutableMetadataTypes { get; } = new();
             public Dictionary<Type, Type> ConventionMetadataTypes { get; } = new();
+
+            public virtual HashSet<Type> NonSealedPrivateNestedTypes { get; } = new();
 
             public virtual
                 List<(Type Type,

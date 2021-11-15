@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data;
 
@@ -14,16 +14,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class ShortTypeMapping : RelationalTypeMapping
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ShortTypeMapping" /> class.
         /// </summary>
-        /// <param name="storeType"> The name of the database type. </param>
-        /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
+        /// <param name="storeType">The name of the database type.</param>
+        /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
         public ShortTypeMapping(
             string storeType,
-            DbType? dbType = null)
+            DbType? dbType = System.Data.DbType.Int16)
             : base(storeType, typeof(short), dbType)
         {
         }
@@ -31,7 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="ShortTypeMapping" /> class.
         /// </summary>
-        /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
+        /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
         protected ShortTypeMapping(RelationalTypeMappingParameters parameters)
             : base(parameters)
         {
@@ -40,8 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
-        /// <returns> The newly created mapping. </returns>
+        /// <param name="parameters">The parameters for this mapping.</param>
+        /// <returns>The newly created mapping.</returns>
         protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
             => new ShortTypeMapping(parameters);
     }

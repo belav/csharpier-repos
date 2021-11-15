@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -12,7 +12,6 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal
 {
@@ -24,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
     /// </summary>
     public class CSharpHelper : ICSharpHelper
     {
-        private readonly IRelationalTypeMappingSource _relationalTypeMappingSource;
+        private readonly ITypeMappingSource _typeMappingSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,29 +31,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CSharpHelper(IRelationalTypeMappingSource relationalTypeMappingSource)
+        public CSharpHelper(ITypeMappingSource typeMappingSource)
         {
-            _relationalTypeMappingSource = relationalTypeMappingSource;
+            _typeMappingSource = typeMappingSource;
         }
-
-        private static readonly IReadOnlyDictionary<Type, string> _builtInTypes = new Dictionary<Type, string>
-        {
-            { typeof(bool), "bool" },
-            { typeof(byte), "byte" },
-            { typeof(sbyte), "sbyte" },
-            { typeof(char), "char" },
-            { typeof(short), "short" },
-            { typeof(int), "int" },
-            { typeof(long), "long" },
-            { typeof(ushort), "ushort" },
-            { typeof(uint), "uint" },
-            { typeof(ulong), "ulong" },
-            { typeof(decimal), "decimal" },
-            { typeof(float), "float" },
-            { typeof(double), "double" },
-            { typeof(string), "string" },
-            { typeof(object), "object" }
-        };
 
         private static readonly IReadOnlyCollection<string> _keywords = new[]
         {
@@ -148,6 +128,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 { typeof(byte), (c, v) => c.Literal((byte)v) },
                 { typeof(byte[]), (c, v) => c.Literal((byte[])v) },
                 { typeof(char), (c, v) => c.Literal((char)v) },
+                { typeof(DateOnly), (c, v) => c.Literal((DateOnly)v) },
                 { typeof(DateTime), (c, v) => c.Literal((DateTime)v) },
                 { typeof(DateTimeOffset), (c, v) => c.Literal((DateTimeOffset)v) },
                 { typeof(decimal), (c, v) => c.Literal((decimal)v) },
@@ -156,17 +137,19 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 { typeof(Guid), (c, v) => c.Literal((Guid)v) },
                 { typeof(int), (c, v) => c.Literal((int)v) },
                 { typeof(long), (c, v) => c.Literal((long)v) },
-                { typeof(NestedClosureCodeFragment), (c, v) => c.Fragment((NestedClosureCodeFragment)v) },
+                { typeof(NestedClosureCodeFragment), (c, v) => c.Fragment((NestedClosureCodeFragment)v, 0) },
                 { typeof(object[]), (c, v) => c.Literal((object[])v) },
                 { typeof(object[,]), (c, v) => c.Literal((object[,])v) },
                 { typeof(sbyte), (c, v) => c.Literal((sbyte)v) },
                 { typeof(short), (c, v) => c.Literal((short)v) },
                 { typeof(string), (c, v) => c.Literal((string)v) },
+                { typeof(TimeOnly), (c, v) => c.Literal((TimeOnly)v) },
                 { typeof(TimeSpan), (c, v) => c.Literal((TimeSpan)v) },
                 { typeof(uint), (c, v) => c.Literal((uint)v) },
                 { typeof(ulong), (c, v) => c.Literal((ulong)v) },
                 { typeof(ushort), (c, v) => c.Literal((ushort)v) },
-                { typeof(BigInteger), (c, v) => c.Literal((BigInteger)v) }
+                { typeof(BigInteger), (c, v) => c.Literal((BigInteger)v) },
+                { typeof(Type), (c, v) => c.Literal((Type)v) }
             };
 
         /// <summary>
@@ -177,9 +160,6 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual string Lambda(IReadOnlyList<string> properties, string? lambdaIdentifier)
         {
-            Check.NotNull(properties, nameof(properties));
-            Check.NullButNotEmpty(lambdaIdentifier, nameof(lambdaIdentifier));
-
             lambdaIdentifier ??= "x";
             var builder = new StringBuilder();
             builder.Append(lambdaIdentifier);
@@ -189,7 +169,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             {
                 builder
                     .Append(lambdaIdentifier)
-                    .Append(".")
+                    .Append('.')
                     .Append(properties[0]);
             }
             else
@@ -208,57 +188,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string Reference(Type type)
-            => Reference(type, useFullName: false);
-
-        private string Reference(Type type, bool useFullName)
+        public virtual string Reference(Type type, bool? fullName = null)
         {
-            Check.NotNull(type, nameof(type));
+            fullName ??= type.IsNested ? ShouldUseFullName(type.DeclaringType!) : ShouldUseFullName(type);
 
-            if (_builtInTypes.TryGetValue(type, out var builtInType))
-            {
-                return builtInType;
-            }
-
-            if (type.IsConstructedGenericType
-                && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                return Reference(type.UnwrapNullableType()) + "?";
-            }
-
-            var builder = new StringBuilder();
-
-            if (type.IsArray)
-            {
-                builder
-                    .Append(Reference(type.GetElementType()!))
-                    .Append("[");
-
-                var rank = type.GetArrayRank();
-                for (var i = 1; i < rank; i++)
-                {
-                    builder.Append(",");
-                }
-
-                builder.Append("]");
-
-                return builder.ToString();
-            }
-
-            if (type.IsNested)
-            {
-                Check.DebugAssert(type.DeclaringType != null, "DeclaringType is null");
-                builder
-                    .Append(Reference(type.DeclaringType))
-                    .Append(".");
-            }
-
-            builder.Append(
-                useFullName
-                    ? type.DisplayName()
-                    : type.ShortDisplayName());
-
-            return builder.ToString();
+            return type.DisplayName(fullName.Value, compilable: true);
         }
 
         /// <summary>
@@ -267,10 +201,26 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string Identifier(string name, ICollection<string>? scope = null)
-        {
-            Check.NotEmpty(name, nameof(name));
+        public virtual bool ShouldUseFullName(Type type)
+            => ShouldUseFullName(type.Name);
 
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual bool ShouldUseFullName(string shortTypeName)
+            => false;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual string Identifier(string name, ICollection<string>? scope = null, bool? capitalize = null)
+        {
             var builder = new StringBuilder();
             var partStart = 0;
 
@@ -295,7 +245,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (builder.Length == 0
                 || !IsIdentifierStartCharacter(builder[0]))
             {
-                builder.Insert(0, "_");
+                builder.Insert(0, '_');
+            }
+
+            if (capitalize != null)
+            {
+                ChangeFirstLetterCase(builder, capitalize.Value);
             }
 
             var identifier = builder.ToString();
@@ -315,6 +270,25 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             return _keywords.Contains(identifier) ? "@" + identifier : identifier;
         }
 
+        private static StringBuilder ChangeFirstLetterCase(StringBuilder builder, bool capitalize)
+        {
+            if (builder.Length == 0)
+            {
+                return builder;
+            }
+
+            var first = builder[index: 0];
+            if (char.IsUpper(first) == capitalize)
+            {
+                return builder;
+            }
+
+            builder.Remove(startIndex: 0, length: 1)
+                .Insert(index: 0, value: capitalize ? char.ToUpperInvariant(first) : char.ToLowerInvariant(first));
+
+            return builder;
+        }
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -323,8 +297,6 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual string Namespace(params string[] name)
         {
-            Check.NotNull(name, nameof(name));
-
             var @namespace = new StringBuilder();
             foreach (var piece in name.Where(p => !string.IsNullOrEmpty(p))
                 .SelectMany(p => p.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)))
@@ -376,6 +348,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual string Literal(char value)
             => "\'" + (value == '\'' ? "\\'" : value.ToString()) + "\'";
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual string Literal(DateOnly value)
+            => string.Format(
+                CultureInfo.InvariantCulture,
+                "new DateOnly({0}, {1}, {2})",
+                value.Year,
+                value.Month,
+                value.Day);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -515,6 +501,32 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public virtual string Literal(TimeOnly value)
+        {
+            var result = value.Millisecond == 0
+                ? string.Format(
+                    CultureInfo.InvariantCulture, "new TimeOnly({0}, {1}, {2})", value.Hour, value.Minute, value.Second)
+                : string.Format(
+                    CultureInfo.InvariantCulture, "new TimeOnly({0}, {1}, {2}, {3})", value.Hour, value.Minute, value.Second,
+                    value.Millisecond);
+
+            if (value.Ticks % 10000 > 0)
+            {
+                result += string.Format(
+                    CultureInfo.InvariantCulture,
+                    ".Add(TimeSpan.FromTicks({0}))",
+                    value.Ticks % 10000);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         public virtual string Literal(TimeSpan value)
             => value.Ticks % 10000 == 0
                 ? string.Format(
@@ -565,6 +577,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual string Literal(BigInteger value)
             => $"BigInteger.Parse(\"{value.ToString(NumberFormatInfo.InvariantInfo)}\", NumberFormatInfo.InvariantInfo)";
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual string Literal(Type value, bool? useFullName = null)
+            => $"typeof({Reference(value, useFullName)})";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -804,7 +825,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         /// </summary>
         public virtual string UnknownLiteral(object? value)
         {
-            if (value == null)
+            if (value is null)
             {
                 return "null";
             }
@@ -821,12 +842,17 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 return Literal(enumValue);
             }
 
+            if (value is Type type)
+            {
+                return Literal(type);
+            }
+
             if (value is Array array)
             {
                 return Array(literalType.GetElementType()!, array);
             }
 
-            var mapping = _relationalTypeMappingSource.FindMapping(literalType);
+            var mapping = _typeMappingSource.FindMapping(literalType);
             if (mapping != null)
             {
                 var builder = new StringBuilder();
@@ -867,14 +893,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 case ExpressionType.Convert:
                     builder
                         .Append('(')
-                        .Append(Reference(expression.Type, useFullName: true))
+                        .Append(Reference(expression.Type, fullName: true))
                         .Append(')');
 
                     return HandleExpression(((UnaryExpression)expression).Operand, builder);
                 case ExpressionType.New:
                     builder
                         .Append("new ")
-                        .Append(Reference(expression.Type, useFullName: true));
+                        .Append(Reference(expression.Type, fullName: true));
 
                     return HandleArguments(((NewExpression)expression).Arguments, builder);
                 case ExpressionType.Call:
@@ -883,7 +909,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     if (callExpression.Method.IsStatic)
                     {
                         builder
-                            .Append(Reference(callExpression.Method.DeclaringType!, useFullName: true));
+                            .Append(Reference(callExpression.Method.DeclaringType!, fullName: true));
                     }
                     else
                     {
@@ -917,7 +943,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     if (memberExpression.Expression == null)
                     {
                         builder
-                            .Append(Reference(memberExpression.Member.DeclaringType!, useFullName: true));
+                            .Append(Reference(memberExpression.Member.DeclaringType!, fullName: true));
                     }
                     else
                     {
@@ -993,17 +1019,59 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string Fragment(MethodCallCodeFragment fragment)
-        {
-            var builder = new StringBuilder();
+        public virtual string Fragment(MethodCallCodeFragment fragment, string? instanceIdentifier = null, bool typeQualified = false)
+            => Fragment(fragment, typeQualified, instanceIdentifier, indent: 0);
 
+        private string Fragment(MethodCallCodeFragment fragment, bool typeQualified, string? instanceIdentifier, int indent)
+        {
+            var builder = new IndentedStringBuilder();
             var current = fragment;
-            while (current != null)
+
+            if (typeQualified)
+            {
+                if (instanceIdentifier is null || fragment.MethodInfo is null || fragment.ChainedCall is not null)
+                {
+                    throw new ArgumentException(DesignStrings.CannotGenerateTypeQualifiedMethodCall);
+                }
+
+                builder
+                    .Append(fragment.DeclaringType!)
+                    .Append('.')
+                    .Append(fragment.Method)
+                    .Append('(')
+                    .Append(instanceIdentifier);
+
+                for (var i = 0; i < fragment.Arguments.Count; i++)
+                {
+                    builder.Append(", ");
+                    Argument(fragment.Arguments[i]);
+                }
+
+                builder.Append(')');
+
+                return builder.ToString();
+            }
+
+            // Non-type-qualified fragment
+
+            if (instanceIdentifier is not null)
+            {
+                builder.Append(instanceIdentifier);
+
+                if (current.ChainedCall is not null)
+                {
+                    builder
+                        .AppendLine()
+                        .IncrementIndent();
+                }
+            }
+
+            while (true)
             {
                 builder
-                    .Append(".")
+                    .Append('.')
                     .Append(current.Method)
-                    .Append("(");
+                    .Append('(');
 
                 for (var i = 0; i < current.Arguments.Count; i++)
                 {
@@ -1012,19 +1080,63 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                         builder.Append(", ");
                     }
 
-                    builder.Append(UnknownLiteral(current.Arguments[i]));
+                    Argument(current.Arguments[i]);
                 }
 
-                builder.Append(")");
+                builder.Append(')');
 
+                if (current.ChainedCall is null)
+                {
+                    break;
+                }
+
+                builder.AppendLine();
                 current = current.ChainedCall;
             }
 
             return builder.ToString();
+
+            void Argument(object? argument)
+            {
+                if (argument is NestedClosureCodeFragment nestedFragment)
+                {
+                    builder.Append(Fragment(nestedFragment, indent));
+                }
+                else
+                {
+                    builder.Append(UnknownLiteral(argument));
+                }
+            }
         }
 
-        private string Fragment(NestedClosureCodeFragment fragment)
-            => fragment.Parameter + " => " + fragment.Parameter + Fragment(fragment.MethodCall);
+        private string Fragment(NestedClosureCodeFragment fragment, int indent)
+        {
+            if (fragment.MethodCalls.Count == 1)
+            {
+                return fragment.Parameter + " => " + Fragment(fragment.MethodCalls[0], typeQualified: false, fragment.Parameter, indent);
+            }
+
+            var builder = new IndentedStringBuilder();
+            builder.AppendLine(fragment.Parameter + " =>");
+            for (var i = -1; i < indent; i++)
+            {
+                builder.IncrementIndent();
+            }
+
+            builder.AppendLine("{");
+            using (builder.Indent())
+            {
+                foreach (var methodCall in fragment.MethodCalls)
+                {
+                    builder.AppendLines(Fragment(methodCall, typeQualified: false, fragment.Parameter, indent + 1), skipFinalNewline: true);
+                    builder.AppendLine(";");
+                }
+            }
+
+            builder.AppendLine("}");
+
+            return builder.ToString();
+        }
 
         private static bool IsIdentifierStartCharacter(char ch)
         {

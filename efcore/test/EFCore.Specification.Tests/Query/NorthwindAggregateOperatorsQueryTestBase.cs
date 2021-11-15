@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -31,17 +31,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
         }
 
-        [ConditionalFact]
-        public virtual void Select_All()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Select_All(bool async)
         {
-            using var context = CreateContext();
-            Assert.False(
-                context
-                    .Set<Order>()
-                    .Select(
-                        o => new ProjectedType { Order = o.OrderID, Customer = o.CustomerID })
-                    .All(p => p.Customer == "ALFKI")
-            );
+            return AssertAll(
+                async,
+                ss => ss.Set<Order>()
+                    .Select(o => new ProjectedType { Order = o.OrderID, Customer = o.CustomerID }),
+                predicate: p => p.Customer == "ALFKI");
         }
 
         private class ProjectedType
@@ -167,7 +165,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: p => p.UnitPrice ?? 0);
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Sum_over_subquery_is_client_eval(bool async)
         {
@@ -177,7 +175,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Sum(o => o.OrderID));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Sum_over_nested_subquery_is_client_eval(bool async)
         {
@@ -187,7 +185,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Sum(o => 5 + o.OrderDetails.Sum(od => od.ProductID)));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Sum_over_min_subquery_is_client_eval(bool async)
         {
@@ -289,7 +287,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 asserter: (e, a) => Assert.InRange(e - a, -0.1m, 0.1m));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Average_over_subquery_is_client_eval(bool async)
         {
@@ -299,7 +297,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Sum(o => o.OrderID));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Average_over_nested_subquery_is_client_eval(bool async)
         {
@@ -309,7 +307,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => (decimal)c.Orders.Average(o => 5 + o.OrderDetails.Average(od => od.ProductID)));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Average_over_max_subquery_is_client_eval(bool async)
         {
@@ -370,100 +368,124 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: o => o.OrderID);
         }
 
-        [ConditionalFact]
-        public virtual void Min_no_data()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Min_no_data(bool async)
         {
-            using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(() => context.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID));
+            return Assert.ThrowsAsync<InvalidOperationException>(
+                () => AssertMin(
+                async,
+                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                selector: o => o.OrderID));
         }
 
-        [ConditionalFact]
-        public virtual void Min_no_data_nullable()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Min_no_data_nullable(bool async)
         {
-            using var context = CreateContext();
-            Assert.Null(context.Products.Where(o => o.SupplierID == -1).Min(o => o.SupplierID));
+            return AssertMin(
+                async,
+                ss => ss.Set<Product>().Where(o => o.SupplierID == -1),
+                selector: o => o.SupplierID);
         }
 
-        [ConditionalFact]
-        public virtual void Min_no_data_cast_to_nullable()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Min_no_data_cast_to_nullable(bool async)
         {
-            using var context = CreateContext();
-            Assert.Null(context.Orders.Where(o => o.OrderID == -1).Min(o => (int?)o.OrderID));
+            return AssertMin(
+                async,
+                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                selector: o => (int?)o.OrderID);
         }
 
-        [ConditionalFact]
-        public virtual void Min_no_data_subquery()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Min_no_data_subquery(bool async)
         {
-            using var context = CreateContext();
-
-            Assert.Equal(
-                "Nullable object must have a value.",
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Customers.Select(c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID)).ToList()).Message);
+            return AssertQueryScalar(
+                async,
+                ss => ss.Set<Customer>().Select(c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID)));
         }
 
-        [ConditionalFact]
-        public virtual void Max_no_data()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Max_no_data(bool async)
         {
-            using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(() => context.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID));
+            return Assert.ThrowsAsync<InvalidOperationException>(
+                () => AssertMax(
+                async,
+                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                selector: o => o.OrderID));
         }
 
-        [ConditionalFact]
-        public virtual void Max_no_data_nullable()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Max_no_data_nullable(bool async)
         {
-            using var context = CreateContext();
-            Assert.Null(context.Products.Where(o => o.SupplierID == -1).Max(o => o.SupplierID));
+            return AssertMax(
+                async,
+                ss => ss.Set<Product>().Where(o => o.SupplierID == -1),
+                selector: o => o.SupplierID);
         }
 
-        [ConditionalFact]
-        public virtual void Max_no_data_cast_to_nullable()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Max_no_data_cast_to_nullable(bool async)
         {
-            using var context = CreateContext();
-            Assert.Null(context.Orders.Where(o => o.OrderID == -1).Max(o => (int?)o.OrderID));
+            return AssertMax(
+                async,
+                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                selector: o => (int?)o.OrderID);
         }
 
-        [ConditionalFact]
-        public virtual void Max_no_data_subquery()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Max_no_data_subquery(bool async)
         {
-            using var context = CreateContext();
-
-            Assert.Equal(
-                "Nullable object must have a value.",
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Customers.Select(c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID)).ToList()).Message);
+            return AssertQueryScalar(
+                async,
+                ss => ss.Set<Customer>().Select(c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID)));
         }
 
-        [ConditionalFact]
-        public virtual void Average_no_data()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Average_no_data(bool async)
         {
-            using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(() => context.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID));
+            return Assert.ThrowsAsync<InvalidOperationException>(
+                () => AssertAverage(
+                async,
+                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                selector: o => o.OrderID));
         }
 
-        [ConditionalFact]
-        public virtual void Average_no_data_nullable()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Average_no_data_nullable(bool async)
         {
-            using var context = CreateContext();
-            Assert.Null(context.Products.Where(o => o.SupplierID == -1).Average(o => o.SupplierID));
+            return AssertAverage(
+                async,
+                ss => ss.Set<Product>().Where(o => o.SupplierID == -1),
+                selector: o => o.SupplierID);
         }
 
-        [ConditionalFact]
-        public virtual void Average_no_data_cast_to_nullable()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Average_no_data_cast_to_nullable(bool async)
         {
-            using var context = CreateContext();
-            Assert.Null(context.Orders.Where(o => o.OrderID == -1).Average(o => (int?)o.OrderID));
+            return AssertAverage(
+                async,
+                ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                selector: o => (int?)o.OrderID);
         }
 
-        [ConditionalFact]
-        public virtual void Average_no_data_subquery()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Average_no_data_subquery(bool async)
         {
-            using var context = CreateContext();
-
-            Assert.Equal(
-                "Nullable object must have a value.",
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Customers.Select(c => c.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID)).ToList()).Message);
+            return AssertQueryScalar(
+                async,
+                ss => ss.Set<Customer>().Select(c => c.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID)));
         }
 
         [ConditionalTheory]
@@ -476,7 +498,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: p => p.UnitPrice ?? 0);
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Min_over_subquery_is_client_eval(bool async)
         {
@@ -486,7 +508,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Sum(o => o.OrderID));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Min_over_nested_subquery_is_client_eval(bool async)
         {
@@ -496,7 +518,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Min(o => 5 + o.OrderDetails.Min(od => od.ProductID)));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Min_over_max_subquery_is_client_eval(bool async)
         {
@@ -535,7 +557,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: p => p.UnitPrice ?? 0);
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Max_over_subquery_is_client_eval(bool async)
         {
@@ -545,7 +567,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Sum(o => o.OrderID));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Max_over_nested_subquery_is_client_eval(bool async)
         {
@@ -555,7 +577,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 selector: c => c.Orders.Max(o => 5 + o.OrderDetails.Max(od => od.ProductID)));
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Max_over_sum_subquery_is_client_eval(bool async)
         {
@@ -1349,48 +1371,42 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 1);
         }
 
-        [ConditionalTheory(Skip = "Issue #15937")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_with_local_anonymous_type_array_closure(bool async)
         {
             var ids = new[] { new { Id1 = 1, Id2 = 2 }, new { Id1 = 10248, Id2 = 11 } };
 
-            return AssertTranslationFailed(
-                () => AssertQuery(
-                    async,
-                    ss => ss.Set<OrderDetail>().Where(o => ids.Contains(new { Id1 = o.OrderID, Id2 = o.ProductID })),
-                    entryCount: 1));
+            return AssertQuery(
+                async,
+                ss => ss.Set<OrderDetail>().Where(o => ids.Contains(new { Id1 = o.OrderID, Id2 = o.ProductID })),
+                entryCount: 1);
         }
 
-        //protected string RemoveNewLines(string message)
-        //    => message.Replace("\n", "").Replace("\r", "");
-
-        [ConditionalFact]
-        public virtual void OfType_Select()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task OfType_Select(bool async)
         {
-            using var context = CreateContext();
-            Assert.Equal(
-                "Reims",
-                context.Set<Order>()
+            return AssertFirst(
+                async,
+                ss => ss.Set<Order>()
                     .OfType<Order>()
                     .OrderBy(o => o.OrderID)
-                    .Select(o => o.Customer.City)
-                    .First());
+                    .Select(o => o.Customer.City));
         }
 
-        [ConditionalFact]
-        public virtual void OfType_Select_OfType_Select()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task OfType_Select_OfType_Select(bool async)
         {
-            using var context = CreateContext();
-            Assert.Equal(
-                "Reims",
-                context.Set<Order>()
+            return AssertFirst(
+                async,
+                ss => ss.Set<Order>()
                     .OfType<Order>()
                     .Select(o => o)
                     .OfType<Order>()
                     .OrderBy(o => o.OrderID)
-                    .Select(o => o.Customer.City)
-                    .First());
+                    .Select(o => o.Customer.City));
         }
 
         [ConditionalTheory]
@@ -1448,15 +1464,19 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 1);
         }
 
-        [ConditionalFact]
-        public virtual void Contains_over_entityType_should_rewrite_to_identity_equality()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Contains_over_entityType_should_rewrite_to_identity_equality(bool async)
         {
-            using var context = CreateContext();
-            var query
-                = context.Orders.Where(o => o.CustomerID == "VINET")
-                    .Contains(context.Orders.Single(o => o.OrderID == 10248));
-
-            Assert.True(query);
+            return AssertSingleResult(
+                async,
+                ss => ss.Set<Order>()
+                    .Where(o => o.CustomerID == "VINET")
+                    .Contains(ss.Set<Order>().Single(o => o.OrderID == 10248)),
+                ss => ss.Set<Order>()
+                    .Where(o => o.CustomerID == "VINET")
+                    .ContainsAsync(ss.Set<Order>().Single(o => o.OrderID == 10248), default),
+                entryCount: 1);
         }
 
         [ConditionalTheory]
@@ -1519,6 +1539,30 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
+        public virtual Task IImmutableSet_Contains_with_parameter(bool async)
+        {
+            IImmutableSet<string> ids = ImmutableHashSet<string>.Empty.Add("ALFKI");
+
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>().Where(c => ids.Contains(c.CustomerID)),
+                entryCount: 1);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task IReadOnlySet_Contains_with_parameter(bool async)
+        {
+            IReadOnlySet<string> ids = new HashSet<string> { "ALFKI" };
+
+            return AssertQuery(
+                async,
+                ss => ss.Set<Customer>().Where(c => ids.Contains(c.CustomerID)),
+                entryCount: 1);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
         public virtual Task HashSet_Contains_with_parameter(bool async)
         {
             var ids = new HashSet<string> { "ALFKI" };
@@ -1543,7 +1587,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static readonly IEnumerable<string> _customers = new[] { "ALFKI", "WRONG" };
 
-        [ConditionalTheory(Skip = "Issue#18658")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Array_cast_to_IEnumerable_Contains_with_constant(bool async)
         {
@@ -1553,11 +1597,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 1);
         }
 
-        [ConditionalFact]
-        public virtual void Contains_over_keyless_entity_throws()
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Contains_over_keyless_entity_throws(bool async)
         {
-            using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(() => context.CustomerQueries.Contains(new CustomerQuery()));
+            return AssertSingleResult(
+                async,
+                ss => ss.Set<CustomerQuery>().Contains(ss.Set<CustomerQuery>().First()),
+                ss => ss.Set<CustomerQuery>().ContainsAsync(ss.Set<CustomerQuery>().First(), default));
         }
 
         [ConditionalTheory]
@@ -1577,6 +1624,17 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<Order>().Where(o => ss.Set<Order>().Where(o => o.CustomerID == "VINET").Contains(null)));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Contains_over_entityType_with_null_in_projection(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => ss.Set<Order>().Where(
+                    o => ss.Set<Order>().Where(o => o.CustomerID == "VINET")
+                        .Contains(null)));
         }
 
         [ConditionalTheory]
@@ -1921,77 +1979,77 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Sum_over_empty_returns_zero(bool isAsync)
+        public virtual Task Sum_over_empty_returns_zero(bool async)
         {
             return AssertSum(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 42),
                 o => o.OrderID);
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Average_over_default_returns_default(bool isAsync)
+        public virtual Task Average_over_default_returns_default(bool async)
         {
             return AssertAverage(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 10248),
                 o => o.OrderID - 10248);
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Max_over_default_returns_default(bool isAsync)
+        public virtual Task Max_over_default_returns_default(bool async)
         {
             return AssertMax(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 10248),
                 o => o.OrderID - 10248);
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Min_over_default_returns_default(bool isAsync)
+        public virtual Task Min_over_default_returns_default(bool async)
         {
             return AssertMin(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 10248),
                 o => o.OrderID - 10248);
         }
 
-        [ConditionalTheory(Skip = "Issue#20637")]
+        [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Average_after_default_if_empty_does_not_throw(bool isAsync)
+        public virtual Task Average_after_default_if_empty_does_not_throw(bool async)
         {
             return AssertAverage(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 10243).Select(o => o.OrderID).DefaultIfEmpty());
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Max_after_default_if_empty_does_not_throw(bool isAsync)
+        public virtual Task Max_after_default_if_empty_does_not_throw(bool async)
         {
             return AssertMax(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 10243).Select(o => o.OrderID).DefaultIfEmpty());
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Min_after_default_if_empty_does_not_throw(bool isAsync)
+        public virtual Task Min_after_default_if_empty_does_not_throw(bool async)
         {
             return AssertMin(
-                isAsync,
+                async,
                 ss => ss.Set<Order>().Where(o => o.OrderID == 10243).Select(o => o.OrderID).DefaultIfEmpty());
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Average_on_nav_subquery_in_projection(bool isAsync)
+        public virtual Task Average_on_nav_subquery_in_projection(bool async)
         {
             return AssertQuery(
-                isAsync,
+                async,
                 ss => ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
                     .Select(c => new { Ave = (double?)c.Orders.Average(o => o.OrderID) }),
@@ -2019,10 +2077,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Count_after_client_projection(bool isAsync)
+        public virtual Task Count_after_client_projection(bool async)
         {
             return AssertCount(
-                isAsync,
+                async,
                 ss => ss.Set<Order>()
                     .Select(o => new
                     {

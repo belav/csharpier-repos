@@ -1,31 +1,30 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+public class ProvideRazorExtensionInitializerAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
-    public class ProvideRazorExtensionInitializerAttribute : Attribute
+    public ProvideRazorExtensionInitializerAttribute(string extensionName, Type initializerType)
     {
-        public ProvideRazorExtensionInitializerAttribute(string extensionName, Type initializerType)
+        if (extensionName == null)
         {
-            if (extensionName == null)
-            {
-                throw new ArgumentNullException(nameof(extensionName));
-            }
-
-            if (initializerType == null)
-            {
-                throw new ArgumentNullException(nameof(initializerType));
-            }
-
-            ExtensionName = extensionName;
-            InitializerType = initializerType;
+            throw new ArgumentNullException(nameof(extensionName));
         }
 
-        public string ExtensionName { get; }
+        if (initializerType == null)
+        {
+            throw new ArgumentNullException(nameof(initializerType));
+        }
 
-        public Type InitializerType { get; }
+        ExtensionName = extensionName;
+        InitializerType = initializerType;
     }
+
+    public string ExtensionName { get; }
+
+    public Type InitializerType { get; }
 }

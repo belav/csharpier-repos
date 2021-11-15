@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Microsoft.EntityFrameworkCore.Diagnostics
 {
     /// <summary>
-    ///     <para>
-    ///         Allows interception of operations on <see cref="DbConnection" />.
-    ///     </para>
+    ///     Allows interception of operations on <see cref="DbConnection" />.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Connection interceptors can be used to view, change, or suppress the operation on <see cref="DbConnection" />, and
     ///         to modify the result before it is returned to EF.
@@ -28,14 +28,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///         If both injected and application interceptors are found, then the injected interceptors are run in the
     ///         order that they are resolved from the service provider, and then the application interceptors are run last.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IDbConnectionInterceptor : IInterceptor
     {
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.Open()" />.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult.IsSuppressed" /> set to <see langword="true" /> if some previous
@@ -57,15 +60,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.OpenAsync()" />.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult.IsSuppressed" /> set to <see langword="true" /> if some previous
         ///     interceptor suppressed execution by calling <see cref="InterceptionResult.Suppress" />.
         ///     This value is typically used as the return value for the implementation of this method.
         /// </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     If <see cref="InterceptionResult.IsSuppressed" /> is false, the EF will continue as normal.
         ///     If <see cref="InterceptionResult.IsSuppressed" /> is true, then EF will suppress the operation
@@ -73,7 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to suppress
         ///     the operation is to return the <paramref name="result" /> value passed in.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         ValueTask<InterceptionResult> ConnectionOpeningAsync(
             DbConnection connection,
             ConnectionEventData eventData,
@@ -83,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.Open()" />.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         void ConnectionOpened(
             DbConnection connection,
             ConnectionEndEventData eventData);
@@ -92,11 +95,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.OpenAsync()" />.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task ConnectionOpenedAsync(
             DbConnection connection,
             ConnectionEndEventData eventData,
@@ -105,8 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.CloseAsync()" />.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult.IsSuppressed" /> set to <see langword="true" /> if some previous
@@ -128,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.Close()" /> in an async context.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         /// <param name="result">
         ///     Represents the current result if one exists.
         ///     This value will have <see cref="InterceptionResult.IsSuppressed" /> set to <see langword="true" /> if some previous
@@ -151,8 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.Close()" /> in an async context.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         void ConnectionClosed(
             DbConnection connection,
             ConnectionEndEventData eventData);
@@ -160,9 +163,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.CloseAsync()" />.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
         Task ConnectionClosedAsync(
             DbConnection connection,
             ConnectionEndEventData eventData);
@@ -170,8 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called when closing of a connection has failed with an exception.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
         void ConnectionFailed(
             DbConnection connection,
             ConnectionErrorEventData eventData);
@@ -179,11 +182,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Called when closing of a connection has failed with an exception.
         /// </summary>
-        /// <param name="connection"> The connection. </param>
-        /// <param name="eventData"> Contextual information about the connection. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="connection">The connection.</param>
+        /// <param name="eventData">Contextual information about the connection.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task ConnectionFailedAsync(
             DbConnection connection,
             ConnectionErrorEventData eventData,

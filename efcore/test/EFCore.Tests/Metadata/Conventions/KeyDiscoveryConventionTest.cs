@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
@@ -133,6 +132,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(
                 CoreResources.LogMultiplePrimaryKeyCandidates(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
                     nameof(EntityWithMultipleIds.ID), nameof(EntityWithMultipleIds.Id), nameof(EntityWithMultipleIds)), logEntry.Message);
+
+            var context = new ConventionContext<string>(
+                entityBuilder.Metadata.Model.ConventionDispatcher);
+
+            entityBuilder.Ignore("ID", ConfigurationSource.DataAnnotation);
+
+            CreateKeyDiscoveryConvention().ProcessEntityTypeMemberIgnored(entityBuilder, "ID", context);
+
+            Assert.Equal("Id", entityBuilder.Metadata.FindPrimaryKey().Properties.Single().Name);
         }
 
         public ListLoggerFactory ListLoggerFactory { get; }

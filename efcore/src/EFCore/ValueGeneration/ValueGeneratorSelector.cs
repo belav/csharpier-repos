@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration
@@ -18,13 +17,19 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
     ///         This type is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
     ///         <see cref="DbContext" /> instance will use its own instance of this service.
     ///         The implementation may depend on other services registered with any lifetime.
     ///         The implementation does not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public class ValueGeneratorSelector : IValueGeneratorSelector
     {
         /// <summary>
@@ -36,35 +41,28 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValueGeneratorSelector" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public ValueGeneratorSelector(ValueGeneratorSelectorDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ValueGeneratorSelectorDependencies Dependencies { get; }
 
         /// <summary>
         ///     Selects the appropriate value generator for a given property.
         /// </summary>
-        /// <param name="property"> The property to get the value generator for. </param>
+        /// <param name="property">The property to get the value generator for.</param>
         /// <param name="entityType">
         ///     The entity type that the value generator will be used for. When called on inherited properties on derived entity types,
         ///     this entity type may be different from the declared entity type on <paramref name="property" />
         /// </param>
-        /// <returns> The value generator to be used. </returns>
+        /// <returns>The value generator to be used.</returns>
         public virtual ValueGenerator Select(IProperty property, IEntityType entityType)
-        {
-            Check.NotNull(property, nameof(property));
-            Check.NotNull(entityType, nameof(entityType));
-
-            return Cache.GetOrAdd(property, entityType, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
-        }
+            => Cache.GetOrAdd(property, entityType, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
 
         private static ValueGenerator? CreateFromFactory(IProperty property, IEntityType entityType)
         {
@@ -81,11 +79,17 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
 
                     if (converter != null)
                     {
-                        throw new NotSupportedException(
-                            CoreStrings.ValueGenWithConversion(
-                                property.DeclaringEntityType.DisplayName(),
-                                property.Name,
-                                converter.GetType().ShortDisplayName()));
+                        var type = converter.ProviderClrType.UnwrapNullableType();
+                        if (!type.IsInteger()
+                            && !type.IsEnum
+                            && type != typeof(decimal))
+                        {
+                            throw new NotSupportedException(
+                                CoreStrings.ValueGenWithConversion(
+                                    property.DeclaringEntityType.DisplayName(),
+                                    property.Name,
+                                    converter.GetType().ShortDisplayName()));
+                        }
                     }
                 }
             }
@@ -96,17 +100,14 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     Creates a new value generator for the given property.
         /// </summary>
-        /// <param name="property"> The property to get the value generator for. </param>
+        /// <param name="property">The property to get the value generator for.</param>
         /// <param name="entityType">
         ///     The entity type that the value generator will be used for. When called on inherited properties on derived entity types,
         ///     this entity type may be different from the declared entity type on <paramref name="property" />
         /// </param>
-        /// <returns> The newly created value generator. </returns>
+        /// <returns>The newly created value generator.</returns>
         public virtual ValueGenerator Create(IProperty property, IEntityType entityType)
         {
-            Check.NotNull(property, nameof(property));
-            Check.NotNull(entityType, nameof(entityType));
-
             var propertyType = property.ClrType.UnwrapNullableType().UnwrapEnumType();
 
             if (propertyType == typeof(Guid))

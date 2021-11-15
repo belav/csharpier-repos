@@ -1,6 +1,8 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 
@@ -17,9 +19,19 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string connectionString,
             MethodCallCodeFragment providerOptions)
             => new(
-                "UseTestProvider",
+                _useTestProviderMethodInfo,
                 providerOptions == null
                     ? new object[] { connectionString }
                     : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+
+        private static readonly MethodInfo _useTestProviderMethodInfo
+            = typeof(TestProviderCodeGenerator).GetRequiredRuntimeMethod(
+                nameof(UseTestProvider), typeof(DbContextOptionsBuilder), typeof(string), typeof(Action<object>));
+
+        public static void UseTestProvider(
+            DbContextOptionsBuilder optionsBuilder,
+            string connectionString,
+            Action<object> optionsAction = null)
+            => throw new NotSupportedException();
     }
 }

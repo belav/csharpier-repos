@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Threading;
 using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 using Xunit;
 
@@ -26,6 +27,15 @@ namespace Microsoft.EntityFrameworkCore
 
                 context.Database.SetCommandTimeout(TimeSpan.FromSeconds(66));
                 Assert.Equal(66, context.Database.GetCommandTimeout());
+            }
+
+            [ConditionalFact]
+            public void Setting_CommandTimeout_to_infinite_sets_to_zero()
+            {
+                using var context = new TimeoutContext();
+
+                context.Database.SetCommandTimeout(Timeout.InfiniteTimeSpan);
+                Assert.Equal(0, context.Database.GetCommandTimeout());
             }
 
             [ConditionalFact]

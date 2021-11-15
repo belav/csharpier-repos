@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -16,6 +16,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public readonly struct MaterializationContext
     {
         /// <summary>
@@ -30,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Creates a new <see cref="MaterializationContext" /> instance.
         /// </summary>
-        /// <param name="valueBuffer"> The <see cref="ValueBuffer" /> to use to materialize an entity. </param>
-        /// <param name="context"> The current <see cref="DbContext" /> instance being used. </param>
+        /// <param name="valueBuffer">The <see cref="ValueBuffer" /> to use to materialize an entity.</param>
+        /// <param name="context">The current <see cref="DbContext" /> instance being used.</param>
         public MaterializationContext(
             in ValueBuffer valueBuffer,
             DbContext context)

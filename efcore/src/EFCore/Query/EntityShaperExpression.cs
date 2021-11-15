@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -25,6 +24,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public class EntityShaperExpression : Expression, IPrintableExpression
     {
         private static readonly MethodInfo _createUnableToDiscriminateException
@@ -37,9 +40,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="EntityShaperExpression" /> class.
         /// </summary>
-        /// <param name="entityType"> The entity type to shape. </param>
-        /// <param name="valueBufferExpression"> An expression of ValueBuffer to get values for properties of the entity. </param>
-        /// <param name="nullable"> A bool value indicating whether this entity instance can be null. </param>
+        /// <param name="entityType">The entity type to shape.</param>
+        /// <param name="valueBufferExpression">An expression of ValueBuffer to get values for properties of the entity.</param>
+        /// <param name="nullable">A bool value indicating whether this entity instance can be null.</param>
         public EntityShaperExpression(
             IEntityType entityType,
             Expression valueBufferExpression,
@@ -51,9 +54,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="EntityShaperExpression" /> class.
         /// </summary>
-        /// <param name="entityType"> The entity type to shape. </param>
-        /// <param name="valueBufferExpression"> An expression of ValueBuffer to get values for properties of the entity. </param>
-        /// <param name="nullable"> Whether this entity instance can be null. </param>
+        /// <param name="entityType">The entity type to shape.</param>
+        /// <param name="valueBufferExpression">An expression of ValueBuffer to get values for properties of the entity.</param>
+        /// <param name="nullable">Whether this entity instance can be null.</param>
         /// <param name="materializationCondition">
         ///     An expression of <see cref="Func{ValueBuffer, IEntityType}" /> to determine which entity type to
         ///     materialize.
@@ -64,9 +67,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             LambdaExpression? materializationCondition)
         {
-            Check.NotNull(entityType, nameof(entityType));
-            Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
-
             if (materializationCondition == null)
             {
                 materializationCondition = GenerateMaterializationCondition(entityType, nullable);
@@ -88,26 +88,26 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates an expression to throw an exception when unable to determine entity type
         ///     to materialize based on discriminator value.
         /// </summary>
-        /// <param name="entityType"> The entity type for which materialization was requested. </param>
-        /// <param name="discriminatorValue"> The expression containing value of discriminator. </param>
-        /// <returns> An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type. </returns>
+        /// <param name="entityType">The entity type for which materialization was requested.</param>
+        /// <param name="discriminatorValue">The expression containing value of discriminator.</param>
+        /// <returns>An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type.</returns>
         protected static Expression CreateUnableToDiscriminateExceptionExpression(IEntityType entityType, Expression discriminatorValue)
             => Block(
-                Throw(Call(_createUnableToDiscriminateException,
-                    Constant(Check.NotNull(entityType, nameof(entityType))),
-                    Convert(Check.NotNull(discriminatorValue, nameof(discriminatorValue)), typeof(object)))),
+                Throw(
+                    Call(
+                        _createUnableToDiscriminateException,
+                        Constant(entityType),
+                        Convert(discriminatorValue, typeof(object)))),
                 Constant(null, typeof(IEntityType)));
 
         /// <summary>
         ///     Creates an expression of <see cref="Func{ValueBuffer, IEntityType}" /> to determine which entity type to materialize.
         /// </summary>
-        /// <param name="entityType"> The entity type to create materialization condition for. </param>
-        /// <param name="nullable"> Whether this entity instance can be null. </param>
-        /// <returns> An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type. </returns>
+        /// <param name="entityType">The entity type to create materialization condition for.</param>
+        /// <param name="nullable">Whether this entity instance can be null.</param>
+        /// <returns>An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type.</returns>
         protected virtual LambdaExpression GenerateMaterializationCondition(IEntityType entityType, bool nullable)
         {
-            Check.NotNull(entityType, nameof(EntityType));
-
             var valueBufferParameter = Parameter(typeof(ValueBuffer));
             Expression body;
             var concreteEntityTypes = entityType.GetConcreteDerivedTypesInclusive().ToArray();
@@ -154,6 +154,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     expressions.Add(conditions);
                 }
+
                 body = Block(new[] { discriminatorValueVariable }, expressions);
             }
             else
@@ -201,8 +202,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var valueBufferExpression = visitor.Visit(ValueBufferExpression);
 
             return Update(valueBufferExpression);
@@ -211,30 +210,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Changes the entity type being shaped by this entity shaper.
         /// </summary>
-        /// <param name="entityType"> The new entity type to use. </param>
-        /// <returns> This expression if entity type not changed, or an expression with updated entity type. </returns>
+        /// <param name="entityType">The new entity type to use.</param>
+        /// <returns>This expression if entity type not changed, or an expression with updated entity type.</returns>
         public virtual EntityShaperExpression WithEntityType(IEntityType entityType)
-        {
-            Check.NotNull(entityType, nameof(entityType));
-
-            return entityType != EntityType
+            => entityType != EntityType
                 ? new EntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
                 : this;
-        }
-
-        /// <summary>
-        ///     Marks this shaper as nullable, indicating that it can shape null entity instances.
-        /// </summary>
-        /// <returns> This expression if nullability not changed, or an expression with updated nullability. </returns>
-        [Obsolete("Use MakeNullable() instead.")]
-        public virtual EntityShaperExpression MarkAsNullable()
-            => MakeNullable();
 
         /// <summary>
         ///     Assigns nullability for this shaper, indicating whether it can shape null entity instances or not.
         /// </summary>
-        /// <param name="nullable"> A value indicating if the shaper is nullable. </param>
-        /// <returns> This expression if nullability not changed, or an expression with updated nullability. </returns>
+        /// <param name="nullable">A value indicating if the shaper is nullable.</param>
+        /// <returns>This expression if nullability not changed, or an expression with updated nullability.</returns>
         public virtual EntityShaperExpression MakeNullable(bool nullable = true)
             => IsNullable != nullable
                 // Marking nullable requires recomputation of materialization condition
@@ -245,16 +232,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="valueBufferExpression"> The <see cref="ValueBufferExpression" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="valueBufferExpression">The <see cref="ValueBufferExpression" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual EntityShaperExpression Update(Expression valueBufferExpression)
-        {
-            Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
-
-            return valueBufferExpression != ValueBufferExpression
+            => valueBufferExpression != ValueBufferExpression
                 ? new EntityShaperExpression(EntityType, valueBufferExpression, IsNullable, MaterializationCondition)
                 : this;
-        }
 
         /// <inheritdoc />
         public override Type Type
@@ -267,8 +250,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.AppendLine(nameof(EntityShaperExpression) + ": ");
             using (expressionPrinter.Indent())
             {

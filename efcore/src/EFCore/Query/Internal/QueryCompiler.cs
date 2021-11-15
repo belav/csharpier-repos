@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -8,24 +8,14 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class QueryCompiler : IQueryCompiler
     {
@@ -55,15 +45,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IEvaluatableExpressionFilter evaluatableExpressionFilter,
             IModel model)
         {
-            Check.NotNull(queryContextFactory, nameof(queryContextFactory));
-            Check.NotNull(compiledQueryCache, nameof(compiledQueryCache));
-            Check.NotNull(compiledQueryCacheKeyGenerator, nameof(compiledQueryCacheKeyGenerator));
-            Check.NotNull(database, nameof(database));
-            Check.NotNull(logger, nameof(logger));
-            Check.NotNull(currentContext, nameof(currentContext));
-            Check.NotNull(evaluatableExpressionFilter, nameof(evaluatableExpressionFilter));
-            Check.NotNull(model, nameof(model));
-
             _queryContextFactory = queryContextFactory;
             _compiledQueryCache = compiledQueryCache;
             _compiledQueryCacheKeyGenerator = compiledQueryCacheKeyGenerator;
@@ -82,8 +63,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual TResult Execute<TResult>(Expression query)
         {
-            Check.NotNull(query, nameof(query));
-
             var queryContext = _queryContextFactory.Create();
 
             query = ExtractParameters(query, queryContext, _logger);
@@ -118,8 +97,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual Func<QueryContext, TResult> CreateCompiledQuery<TResult>(Expression query)
         {
-            Check.NotNull(query, nameof(query));
-
             query = ExtractParameters(query, _queryContextFactory.Create(), _logger, parameterize: false);
 
             return CompileQueryCore<TResult>(_database, query, _model, false);
@@ -133,8 +110,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual TResult ExecuteAsync<TResult>(Expression query, CancellationToken cancellationToken = default)
         {
-            Check.NotNull(query, nameof(query));
-
             var queryContext = _queryContextFactory.Create();
 
             queryContext.CancellationToken = cancellationToken;
@@ -158,8 +133,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual Func<QueryContext, TResult> CreateCompiledAsyncQuery<TResult>(Expression query)
         {
-            Check.NotNull(query, nameof(query));
-
             query = ExtractParameters(query, _queryContextFactory.Create(), _logger, parameterize: false);
 
             return CompileQueryCore<TResult>(_database, query, _model, true);

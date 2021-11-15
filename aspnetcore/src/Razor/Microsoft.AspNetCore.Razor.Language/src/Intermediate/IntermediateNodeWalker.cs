@@ -1,40 +1,39 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Razor.Language.Intermediate
+namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
+
+public abstract class IntermediateNodeWalker : IntermediateNodeVisitor
 {
-    public abstract class IntermediateNodeWalker : IntermediateNodeVisitor
+    private readonly List<IntermediateNode> _ancestors = new List<IntermediateNode>();
+
+    protected IReadOnlyList<IntermediateNode> Ancestors => _ancestors;
+
+    protected IntermediateNode Parent => _ancestors.Count > 0 ? _ancestors[0] : null;
+
+    public override void VisitDefault(IntermediateNode node)
     {
-        private readonly List<IntermediateNode> _ancestors = new List<IntermediateNode>();
-
-        protected IReadOnlyList<IntermediateNode> Ancestors => _ancestors;
-
-        protected IntermediateNode Parent => _ancestors.Count > 0 ? _ancestors[0] : null;
-
-        public override void VisitDefault(IntermediateNode node)
+        var children = node.Children;
+        if (node.Children.Count == 0)
         {
-            var children = node.Children;
-            if (node.Children.Count == 0)
-            {
-                return;
-            }
+            return;
+        }
 
-            _ancestors.Insert(0, node);
+        _ancestors.Insert(0, node);
 
-            try
+        try
+        {
+            for (var i = 0; i < node.Children.Count; i++)
             {
-                for (var i = 0; i < node.Children.Count; i++)
-                {
-                    var child = children[i];
-                    Visit(child);
-                }
+                var child = children[i];
+                Visit(child);
             }
-            finally
-            {
-                _ancestors.RemoveAt(0);
-            }
+        }
+        finally
+        {
+            _ancestors.RemoveAt(0);
         }
     }
 }

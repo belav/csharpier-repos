@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -14,28 +14,36 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     SQL Server specific extension methods for <see cref="DbContextOptionsBuilder" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+    ///     for more information.
+    /// </remarks>
     public static class SqlServerDbContextOptionsExtensions
     {
         /// <summary>
-        ///     <para>
-        ///         Configures the context to connect to a Microsoft SQL Server database, but without initially setting any
-        ///         <see cref="DbConnection" /> or connection string.
-        ///     </para>
+        ///     Configures the context to connect to a Microsoft SQL Server database, but without initially setting any
+        ///     <see cref="DbConnection" /> or connection string.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         The connection or connection string must be set before the <see cref="DbContext" /> is used to connect
         ///         to a database. Set a connection using <see cref="RelationalDatabaseFacadeExtensions.SetDbConnection" />.
         ///         Set a connection string using <see cref="RelationalDatabaseFacadeExtensions.SetConnectionString" />.
         ///     </para>
-        /// </summary>
-        /// <param name="optionsBuilder"> The builder being used to configure the context. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+        ///         <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+        ///         for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="optionsBuilder">The builder being used to configure the context.</param>
         /// <param name="sqlServerOptionsAction">An optional action to allow additional SQL Server specific configuration.</param>
-        /// <returns> The options builder so that further configuration can be chained. </returns>
+        /// <returns>The options builder so that further configuration can be chained.</returns>
         public static DbContextOptionsBuilder UseSqlServer(
             this DbContextOptionsBuilder optionsBuilder,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
         {
-            Check.NotNull(optionsBuilder, nameof(optionsBuilder));
-
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(GetOrCreateExtension(optionsBuilder));
 
             ConfigureWarnings(optionsBuilder);
@@ -48,16 +56,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the context to connect to a Microsoft SQL Server database.
         /// </summary>
-        /// <param name="optionsBuilder"> The builder being used to configure the context. </param>
-        /// <param name="connectionString"> The connection string of the database to connect to. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+        ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="optionsBuilder">The builder being used to configure the context.</param>
+        /// <param name="connectionString">The connection string of the database to connect to.</param>
         /// <param name="sqlServerOptionsAction">An optional action to allow additional SQL Server specific configuration.</param>
-        /// <returns> The options builder so that further configuration can be chained. </returns>
+        /// <returns>The options builder so that further configuration can be chained.</returns>
         public static DbContextOptionsBuilder UseSqlServer(
             this DbContextOptionsBuilder optionsBuilder,
             string connectionString,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
         {
-            Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(connectionString, nameof(connectionString));
 
             var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
@@ -74,20 +86,24 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the context to connect to a Microsoft SQL Server database.
         /// </summary>
-        /// <param name="optionsBuilder"> The builder being used to configure the context. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+        ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="optionsBuilder">The builder being used to configure the context.</param>
         /// <param name="connection">
         ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the connection is
         ///     in the open state then EF will not open or close the connection. If the connection is in the closed
         ///     state then EF will open and close the connection as needed.
         /// </param>
         /// <param name="sqlServerOptionsAction">An optional action to allow additional SQL Server specific configuration.</param>
-        /// <returns> The options builder so that further configuration can be chained. </returns>
+        /// <returns>The options builder so that further configuration can be chained.</returns>
         public static DbContextOptionsBuilder UseSqlServer(
             this DbContextOptionsBuilder optionsBuilder,
             DbConnection connection,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
         {
-            Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connection, nameof(connection));
 
             var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnection(connection);
@@ -101,19 +117,24 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Configures the context to connect to a Microsoft SQL Server database, but without initially setting any
-        ///         <see cref="DbConnection" /> or connection string.
-        ///     </para>
+        ///     Configures the context to connect to a Microsoft SQL Server database, but without initially setting any
+        ///     <see cref="DbConnection" /> or connection string.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         The connection or connection string must be set before the <see cref="DbContext" /> is used to connect
         ///         to a database. Set a connection using <see cref="RelationalDatabaseFacadeExtensions.SetDbConnection" />.
         ///         Set a connection string using <see cref="RelationalDatabaseFacadeExtensions.SetConnectionString" />.
         ///     </para>
-        /// </summary>
-        /// <param name="optionsBuilder"> The builder being used to configure the context. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+        ///         <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+        ///         for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="optionsBuilder">The builder being used to configure the context.</param>
         /// <param name="sqlServerOptionsAction">An optional action to allow additional SQL Server specific configuration.</param>
-        /// <returns> The options builder so that further configuration can be chained. </returns>
+        /// <returns>The options builder so that further configuration can be chained.</returns>
         public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null)
@@ -124,11 +145,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the context to connect to a Microsoft SQL Server database.
         /// </summary>
-        /// <typeparam name="TContext"> The type of context to be configured. </typeparam>
-        /// <param name="optionsBuilder"> The builder being used to configure the context. </param>
-        /// <param name="connectionString"> The connection string of the database to connect to. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+        ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+        ///     for more information.
+        /// </remarks>
+        /// <typeparam name="TContext">The type of context to be configured.</typeparam>
+        /// <param name="optionsBuilder">The builder being used to configure the context.</param>
+        /// <param name="connectionString">The connection string of the database to connect to.</param>
         /// <param name="sqlServerOptionsAction">An optional action to allow additional SQL Server specific configuration.</param>
-        /// <returns> The options builder so that further configuration can be chained. </returns>
+        /// <returns>The options builder so that further configuration can be chained.</returns>
         public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             string connectionString,
@@ -141,15 +167,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the context to connect to a Microsoft SQL Server database.
         /// </summary>
-        /// <typeparam name="TContext"> The type of context to be configured. </typeparam>
-        /// <param name="optionsBuilder"> The builder being used to configure the context. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
+        ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+        ///     for more information.
+        /// </remarks>
+        /// <typeparam name="TContext">The type of context to be configured.</typeparam>
+        /// <param name="optionsBuilder">The builder being used to configure the context.</param>
         /// <param name="connection">
         ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the connection is
         ///     in the open state then EF will not open or close the connection. If the connection is in the closed
         ///     state then EF will open and close the connection as needed.
         /// </param>
         /// <param name="sqlServerOptionsAction">An optional action to allow additional SQL Server specific configuration.</param>
-        /// <returns> The options builder so that further configuration can be chained. </returns>
+        /// <returns>The options builder so that further configuration can be chained.</returns>
         public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             DbConnection connection,
@@ -169,8 +200,9 @@ namespace Microsoft.EntityFrameworkCore
                 ?? new CoreOptionsExtension();
 
             coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(coreOptionsExtension)
-                .WithWarningsConfiguration(coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
-                    SqlServerEventId.ConflictingValueGenerationStrategiesWarning, WarningBehavior.Throw));
+                .WithWarningsConfiguration(
+                    coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
+                        SqlServerEventId.ConflictingValueGenerationStrategiesWarning, WarningBehavior.Throw));
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(coreOptionsExtension);
         }

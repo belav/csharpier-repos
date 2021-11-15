@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
@@ -70,11 +70,11 @@ WHERE [d].[Discriminator] = N'Tea'");
             base.FromSql_on_derived();
 
             AssertSql(
-                @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group]
+                @"SELECT [m].[Species], [m].[CountryId], [m].[Discriminator], [m].[Name], [m].[EagleId], [m].[IsFlightless], [m].[Group]
 FROM (
     select * from ""Animals""
-) AS [a]
-WHERE [a].[Discriminator] = N'Eagle'");
+) AS [m]
+WHERE [m].[Discriminator] = N'Eagle'");
         }
 
         public override async Task Can_query_all_types_when_shared_column(bool async)
@@ -215,11 +215,11 @@ ORDER BY [a].[Species]");
             await base.Can_query_all_animal_views(async);
 
             AssertSql(
-                @"SELECT [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
+                @"SELECT [m].[CountryId], [m].[Discriminator], [m].[Name], [m].[EagleId], [m].[IsFlightless], [m].[Group], [m].[FoundOn]
 FROM (
     SELECT * FROM Animals
-) AS [a]
-ORDER BY [a].[CountryId]");
+) AS [m]
+ORDER BY [m].[CountryId]");
         }
 
         public override async Task Can_query_all_plants(bool async)
@@ -286,7 +286,7 @@ FROM (
     WHERE [a].[Discriminator] = N'Eagle'
 ) AS [t]
 LEFT JOIN [Animals] AS [a0] ON [t].[Species] = [a0].[EagleId]
-ORDER BY [t].[Species], [a0].[Species]");
+ORDER BY [t].[Species]");
         }
 
         public override async Task Can_include_animals(bool async)
@@ -297,7 +297,7 @@ ORDER BY [t].[Species], [a0].[Species]");
                 @"SELECT [c].[Id], [c].[Name], [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Countries] AS [c]
 LEFT JOIN [Animals] AS [a] ON [c].[Id] = [a].[CountryId]
-ORDER BY [c].[Name], [c].[Id], [a].[Species]");
+ORDER BY [c].[Name], [c].[Id]");
         }
 
         public override async Task Can_use_of_type_kiwi_where_north_on_derived_property(bool async)
@@ -504,11 +504,11 @@ ORDER BY [a].[Name]");
             base.Casting_to_base_type_joining_with_query_type_works();
 
             AssertSql(
-                @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a0].[CountryId], [a0].[Discriminator], [a0].[Name], [a0].[EagleId], [a0].[IsFlightless], [a0].[Group], [a0].[FoundOn]
+                @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [m].[CountryId], [m].[Discriminator], [m].[Name], [m].[EagleId], [m].[IsFlightless], [m].[Group], [m].[FoundOn]
 FROM [Animals] AS [a]
 INNER JOIN (
     Select * from ""Animals""
-) AS [a0] ON [a].[Name] = [a0].[Name]
+) AS [m] ON [a].[Name] = [m].[Name]
 WHERE [a].[Discriminator] = N'Eagle'");
         }
 
@@ -542,6 +542,26 @@ FROM [Animals] AS [a]");
             AssertSql(
                 @"SELECT [a].[Name]
 FROM [Animals] AS [a]");
+        }
+
+        public override async Task Can_use_backwards_of_type_animal(bool async)
+        {
+            await base.Can_use_backwards_of_type_animal(async);
+
+            AssertSql(
+                @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[FoundOn]
+FROM [Animals] AS [a]
+WHERE [a].[Discriminator] = N'Kiwi'");
+        }
+
+        public override async Task Can_use_backwards_is_animal(bool async)
+        {
+            await base.Can_use_backwards_is_animal(async);
+
+            AssertSql(
+                @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[FoundOn]
+FROM [Animals] AS [a]
+WHERE [a].[Discriminator] = N'Kiwi'");
         }
 
         private void AssertSql(params string[] expected)

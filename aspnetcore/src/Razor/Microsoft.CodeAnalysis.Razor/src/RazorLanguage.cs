@@ -1,14 +1,13 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-namespace Microsoft.CodeAnalysis.Razor
+namespace Microsoft.CodeAnalysis.Razor;
+
+public static class RazorLanguage
 {
-    public static class RazorLanguage
-    {
-        public const string Name = "Razor";
+    public const string Name = "Razor";
 
-        public const string ContentType = "RazorCSharp";
+    public const string ContentType = "RazorCSharp";
 
-        public const string CoreContentType = "RazorCoreCSharp";
-    }
+    public const string CoreContentType = "RazorCoreCSharp";
 }

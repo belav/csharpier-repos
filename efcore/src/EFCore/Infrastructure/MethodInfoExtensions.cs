@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
 
@@ -14,6 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public static class MethodInfoExtensions
     {
         private static readonly string _efTypeName = typeof(EF).FullName!;
@@ -21,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Returns <see langword="true" /> if the given method is <see cref="EF.Property{TProperty}" />.
         /// </summary>
-        /// <param name="methodInfo"> The method. </param>
-        /// <returns> <see langword="true" /> if the method is <see cref="EF.Property{TProperty}" />; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodInfo">The method.</param>
+        /// <returns><see langword="true" /> if the method is <see cref="EF.Property{TProperty}" />; <see langword="false" /> otherwise.</returns>
         public static bool IsEFPropertyMethod(this MethodInfo? methodInfo)
             => Equals(methodInfo, EF.PropertyMethod)
                 // fallback to string comparison because MethodInfo.Equals is not

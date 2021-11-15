@@ -1,7 +1,9 @@
-﻿namespace Microsoft.AspNetCore.Mvc.ViewFeatures
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+public class ViewDataDictionary<TModel> : ViewDataDictionary
 {
-    public class ViewDataDictionary<TModel> : ViewDataDictionary
-    {
-        public TModel Model { get; set; }
-    }
+    public TModel Model { get; set; }
 }

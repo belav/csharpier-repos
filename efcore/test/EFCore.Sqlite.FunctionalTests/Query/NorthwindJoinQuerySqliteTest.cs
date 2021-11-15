@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
@@ -54,5 +54,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 SqliteStrings.ApplyNotSupported,
                 (await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async))).Message);
+
+        public override async Task Take_in_collection_projection_with_FirstOrDefault_on_top_level(bool async)
+            => Assert.Equal(
+                SqliteStrings.ApplyNotSupported,
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(async))).Message);
     }
 }

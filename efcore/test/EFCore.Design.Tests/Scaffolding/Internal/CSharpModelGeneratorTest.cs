@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
 using Microsoft.EntityFrameworkCore.Design;
@@ -29,10 +29,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var generator = CreateGenerator();
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
-            modelBuilder.Entity("TestEntity").Property<int>("Id").HasAnnotation(ScaffoldingAnnotationNames.ColumnOrdinal, 0);
+            modelBuilder.Entity("TestEntity").Property<int>("Id");
 
             var result = generator.GenerateModel(
-                modelBuilder.FinalizeModel(),
+                modelBuilder.FinalizeModel(designTime: true),
                 new ModelCodeGenerationOptions
                 {
                     ModelNamespace = "TestNamespace",
@@ -58,7 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<IAnnotationCodeGenerator, AnnotationCodeGenerator>()
                 .AddSingleton<IProviderConfigurationCodeGenerator, TestProviderCodeGenerator>()
-                .BuildServiceProvider()
+                .BuildServiceProvider(validateScopes: true)
                 .GetRequiredService<IModelCodeGenerator>();
         }
     }

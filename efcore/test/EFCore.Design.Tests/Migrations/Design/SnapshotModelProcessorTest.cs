@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Ownership;
 using Xunit;
 
@@ -74,6 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var assembly = typeof(SnapshotModelProcessorTest).Assembly;
             var snapshotModelProcessor = new DesignTimeServicesBuilder(assembly, assembly, new TestOperationReporter(), new string[0])
                 .Build(SqlServerTestHelpers.Instance.CreateContext())
+                .CreateScope()
+                .ServiceProvider
                 .GetRequiredService<ISnapshotModelProcessor>();
 
             Assert.NotNull(snapshotModelProcessor);
@@ -93,7 +96,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(model);
 
-            Assert.Equal("warn: " + DesignStrings.MultipleAnnotationConflict("DefaultSchema"), reporter.Messages.Single());
+            var (level, message) = reporter.Messages.Single();
+            Assert.Equal(LogLevel.Warning, level);
+            Assert.Equal(DesignStrings.MultipleAnnotationConflict("DefaultSchema"), message);
             Assert.Equal(2, model.GetAnnotations().Count());
 
             var actual = (string)model["Relational:DefaultSchema"];
@@ -114,7 +119,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(model);
 
-            Assert.Equal("warn: " + DesignStrings.MultipleAnnotationConflict("DefaultSchema"), reporter.Messages.Single());
+            var (level, message) = reporter.Messages.Single();
+            Assert.Equal(LogLevel.Warning, level);
+            Assert.Equal(DesignStrings.MultipleAnnotationConflict("DefaultSchema"), message);
             Assert.Equal(2, model.GetAnnotations().Count());
 
             var actual = (string)model["Relational:DefaultSchema"];
@@ -223,7 +230,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var processor = new SnapshotModelProcessor(reporter, setBuilder);
             var model = processor.Process(snapshot.Model);
 
-            var differences = differ.GetDifferences(model.GetRelationalModel(), context.Model.GetRelationalModel());
+            var differences = differ.GetDifferences(model.GetRelationalModel(), context.GetService<IDesignTimeModel>().Model.GetRelationalModel());
 
             Assert.Empty(differences);
         }
@@ -1082,7 +1089,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 modelBuilder
                     .HasAnnotation("ProductVersion", "3.0.0")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                    .HasAnnotation("SqlServer:IdentitySeed", 1);
 
                 modelBuilder.Entity(
                     "Ownership.OwningType1", b =>
@@ -1090,7 +1098,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
                             .HasColumnType("int")
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                            .HasAnnotation("SqlServer:IdentitySeed", 1);
 
                         b.HasKey("Id");
 
@@ -1397,7 +1406,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         private class SequenceContext : DbContext
         {
             protected override void OnConfiguring(DbContextOptionsBuilder options)
-                => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Ownership");
+                => options.UseSqlServer();
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1445,7 +1454,7 @@ namespace Ownership
     internal class OwnershipContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Ownership");
+            => options.UseSqlServer();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -43,12 +43,12 @@ FROM ""Engines"" AS ""e""
 ORDER BY ""e"".""Id""
 LIMIT 1",
                 //
-                @"@p1='1' (DbType = String)
+                @"@p1='1'
 @p2='Mercedes' (Size = 8)
 @p0='FO 108X' (Size = 7)
 @p3='ChangedEngine' (Size = 13)
-@p4='47.64491' (Nullable = true) (DbType = String)
-@p5='-122.128101' (Nullable = true) (DbType = String)
+@p4='47.64491' (Nullable = true)
+@p5='-122.128101' (Nullable = true)
 
 UPDATE ""Engines"" SET ""Name"" = @p0
 WHERE ""Id"" = @p1 AND ""EngineSupplierId"" = @p2 AND ""Name"" = @p3 AND ""StorageLocation_Latitude"" = @p4 AND ""StorageLocation_Longitude"" = @p5;

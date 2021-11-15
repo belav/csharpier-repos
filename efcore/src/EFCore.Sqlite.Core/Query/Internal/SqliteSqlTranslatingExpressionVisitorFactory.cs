@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -13,8 +13,6 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteSqlTranslatingExpressionVisitorFactory : IRelationalSqlTranslatingExpressionVisitorFactory
     {
-        private readonly RelationalSqlTranslatingExpressionVisitorDependencies _dependencies;
-
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -24,8 +22,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         public SqliteSqlTranslatingExpressionVisitorFactory(
             RelationalSqlTranslatingExpressionVisitorDependencies dependencies)
         {
-            _dependencies = dependencies;
+            Dependencies = dependencies;
         }
+
+        /// <summary>
+        ///     Relational provider-specific dependencies for this service.
+        /// </summary>
+        protected virtual RelationalSqlTranslatingExpressionVisitorDependencies Dependencies { get; }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,7 +40,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             QueryCompilationContext queryCompilationContext,
             QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
             => new SqliteSqlTranslatingExpressionVisitor(
-                _dependencies,
+                Dependencies,
                 queryCompilationContext,
                 queryableMethodTranslatingExpressionVisitor);
     }

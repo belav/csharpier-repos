@@ -1,25 +1,28 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Reflection;
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Components.HotReload;
 
-[assembly: AssemblyMetadata("ReceiveHotReloadDeltaNotification", "Microsoft.AspNetCore.Components.HotReload.HotReloadManager")]
 [assembly: MetadataUpdateHandler(typeof(HotReloadManager))]
 
-namespace Microsoft.AspNetCore.Components.HotReload
+namespace Microsoft.AspNetCore.Components.HotReload;
+
+internal sealed class HotReloadManager
 {
-    internal static class HotReloadManager
-    {
-       internal static event Action? OnDeltaApplied;
+    public static readonly HotReloadManager Default = new();
 
-        public static void DeltaApplied()
-        {
-            OnDeltaApplied?.Invoke();
-        }
+    public bool MetadataUpdateSupported { get; set; } = MetadataUpdater.IsSupported;
 
-        public static void OnAfterUpdate(Type[]? _) => OnDeltaApplied?.Invoke();
-    }
+    /// <summary>
+    /// Gets a value that determines if OnDeltaApplied is subscribed to.
+    /// </summary>
+    public bool IsSubscribedTo => OnDeltaApplied is not null;
+
+    public event Action? OnDeltaApplied;
+
+    /// <summary>
+    /// MetadataUpdateHandler event. This is invoked by the hot reload host via reflection.
+    /// </summary>
+    public static void UpdateApplication(Type[]? _) => Default.OnDeltaApplied?.Invoke();
 }

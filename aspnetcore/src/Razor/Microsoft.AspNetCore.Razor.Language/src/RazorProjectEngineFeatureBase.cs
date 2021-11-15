@@ -1,31 +1,30 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
 {
-    public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
+    private RazorProjectEngine _projectEngine;
+
+    public virtual RazorProjectEngine ProjectEngine
     {
-        private RazorProjectEngine _projectEngine;
-
-        public virtual RazorProjectEngine ProjectEngine
+        get => _projectEngine;
+        set
         {
-            get => _projectEngine;
-            set
+            if (value == null)
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                _projectEngine = value;
-                OnInitialized();
+                throw new ArgumentNullException(nameof(value));
             }
-        }
 
-        protected virtual void OnInitialized()
-        {
+            _projectEngine = value;
+            OnInitialized();
         }
+    }
+
+    protected virtual void OnInitialized()
+    {
     }
 }

@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 {
@@ -25,8 +24,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         public ScaffoldingTypeMapper(IRelationalTypeMappingSource typeMappingSource)
         {
-            Check.NotNull(typeMappingSource, nameof(typeMappingSource));
-
             _typeMappingSource = typeMappingSource;
         }
 
@@ -41,9 +38,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             bool keyOrIndex,
             bool rowVersion)
         {
-            // This is because certain providers can have no type specified as a default type e.g. SQLite
-            Check.NotNull(storeType, nameof(storeType));
-
             var mapping = _typeMappingSource.FindMapping(storeType);
             if (mapping == null)
             {
@@ -88,7 +82,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     precision: mapping.Precision,
                     scale: mapping.Scale)!;
 
-                scaffoldUnicode = unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode ? (bool?)defaultTypeMapping.IsUnicode : null;
+                scaffoldUnicode = unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode ? defaultTypeMapping.IsUnicode : null;
 
                 // Check for fixed-length
                 var fixedLengthMapping = _typeMappingSource.FindMapping(
@@ -102,7 +96,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     scale: mapping.Scale)!;
 
                 scaffoldFixedLength = fixedLengthMapping.IsFixedLength != defaultTypeMapping.IsFixedLength
-                    ? (bool?)defaultTypeMapping.IsFixedLength
+                    ? defaultTypeMapping.IsFixedLength
                     : null;
 
                 // Check for size (= max-length)

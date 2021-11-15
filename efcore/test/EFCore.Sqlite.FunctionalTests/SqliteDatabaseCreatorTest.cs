@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -100,6 +100,55 @@ namespace Microsoft.EntityFrameworkCore
             testStore.OpenConnection();
             var journalMode = testStore.ExecuteScalar<string>("PRAGMA journal_mode;");
             Assert.Equal("wal", journalMode);
+        }
+
+        [ConditionalTheory (Skip = "Issues #25797 and #26016")]
+        [InlineData(false)]
+        [InlineData(true)]
+        public async Task Delete_works_even_when_different_connection_exists_to_same_file(bool async)
+        {
+            using (var context = new BathtubContext("DataSource=bathtub.db"))
+            {
+                if (async)
+                {
+                    await context.Database.EnsureDeletedAsync();
+                    await context.Database.EnsureCreatedAsync();
+                }
+                else
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
+            }
+
+            using (var context = new BathtubContext("Command Timeout=60;DataSource=bathtub.db"))
+            {
+                var creator = context.GetService<IRelationalDatabaseCreator>();
+
+                if (async)
+                {
+                    await context.Database.EnsureDeletedAsync();
+                    Assert.False(await creator.ExistsAsync());
+                }
+                else
+                {
+                    context.Database.EnsureDeleted();
+                    Assert.False(creator.Exists());
+                }
+            }
+        }
+
+        private class BathtubContext : DbContext
+        {
+            private readonly string _connectionString;
+
+            public BathtubContext(string connectionString)
+            {
+                _connectionString = connectionString;
+            }
+
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+                => optionsBuilder.UseSqlite(_connectionString);
         }
 
         [ConditionalTheory]

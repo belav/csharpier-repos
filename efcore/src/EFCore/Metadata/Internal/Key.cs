@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -39,9 +38,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public Key(IReadOnlyList<Property> properties, ConfigurationSource configurationSource)
         {
-            Check.NotEmpty(properties, nameof(properties));
-            Check.HasNoNulls(properties, nameof(properties));
-
             Properties = properties;
             _configurationSource = configurationSource;
 
@@ -64,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual EntityType DeclaringEntityType
         {
-            [DebuggerStepThrough] get => Properties[0].DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => Properties[0].DeclaringEntityType;
         }
 
         /// <summary>
@@ -75,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalKeyBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -102,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool IsReadOnly => DeclaringEntityType.Model.IsReadOnly;
+        public override bool IsReadOnly
+            => DeclaringEntityType.Model.IsReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -132,10 +131,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
         /// </summary>
-        /// <param name="name"> The key of the set annotation. </param>
-        /// <param name="annotation"> The annotation set. </param>
-        /// <param name="oldAnnotation"> The old annotation. </param>
-        /// <returns> The annotation that was set. </returns>
+        /// <param name="name">The key of the set annotation.</param>
+        /// <param name="annotation">The annotation set.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <returns>The annotation that was set.</returns>
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
@@ -160,10 +159,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual Func<bool, IIdentityMap> IdentityMapFactory
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _identityMapFactory, this, static key =>
-                {
-                    key.EnsureReadOnly();
-                    return new IdentityMapFactoryFactory().Create(key);
-                });
+                    {
+                        key.EnsureReadOnly();
+                        return new IdentityMapFactoryFactory().Create(key);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -175,10 +174,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             where TKey : notnull
             => (IPrincipalKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
                 ref _principalKeyValueFactory, this, static key =>
-                {
-                    key.EnsureReadOnly();
-                    return new KeyValueFactoryFactory().Create<TKey>(key);
-                });
+                    {
+                        key.EnsureReadOnly();
+                        return new KeyValueFactoryFactory().Create<TKey>(key);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -205,7 +204,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IReadOnlyKey)this).ToDebugString(),
                 () => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         /// <summary>
@@ -216,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IReadOnlyProperty> IReadOnlyKey.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -227,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyEntityType IReadOnlyKey.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -238,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IMutableProperty> IMutableKey.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -273,7 +275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IMutableEntityType IMutableKey.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -308,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionKeyBuilder IConventionKey.Builder
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>

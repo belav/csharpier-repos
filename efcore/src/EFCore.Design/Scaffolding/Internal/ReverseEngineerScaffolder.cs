@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,8 +12,6 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 {
@@ -29,7 +27,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private readonly IScaffoldingModelFactory _factory;
         private readonly ICSharpUtilities _cSharpUtilities;
         private readonly ICSharpHelper _code;
-        private readonly INamedConnectionStringResolver _connectionStringResolver;
+        private readonly IDesignTimeConnectionStringResolver _connectionStringResolver;
         private readonly IOperationReporter _reporter;
         private const string DbContextSuffix = "Context";
         private const string DefaultDbContextName = "Model" + DbContextSuffix;
@@ -46,17 +44,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             IModelCodeGeneratorSelector modelCodeGeneratorSelector,
             ICSharpUtilities cSharpUtilities,
             ICSharpHelper cSharpHelper,
-            INamedConnectionStringResolver connectionStringResolver,
+            IDesignTimeConnectionStringResolver connectionStringResolver,
             IOperationReporter reporter)
         {
-            Check.NotNull(databaseModelFactory, nameof(databaseModelFactory));
-            Check.NotNull(scaffoldingModelFactory, nameof(scaffoldingModelFactory));
-            Check.NotNull(modelCodeGeneratorSelector, nameof(modelCodeGeneratorSelector));
-            Check.NotNull(cSharpUtilities, nameof(cSharpUtilities));
-            Check.NotNull(cSharpHelper, nameof(cSharpHelper));
-            Check.NotNull(connectionStringResolver, nameof(connectionStringResolver));
-            Check.NotNull(reporter, nameof(reporter));
-
             _databaseModelFactory = databaseModelFactory;
             _factory = scaffoldingModelFactory;
             ModelCodeGeneratorSelector = modelCodeGeneratorSelector;
@@ -86,11 +76,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ModelReverseEngineerOptions modelOptions,
             ModelCodeGenerationOptions codeOptions)
         {
-            Check.NotEmpty(connectionString, nameof(connectionString));
-            Check.NotNull(databaseOptions, nameof(databaseOptions));
-            Check.NotNull(modelOptions, nameof(modelOptions));
-            Check.NotNull(codeOptions, nameof(codeOptions));
-
             if (!string.IsNullOrWhiteSpace(codeOptions.ContextName)
                 && (!_cSharpUtilities.IsValidIdentifier(codeOptions.ContextName)
                     || _cSharpUtilities.IsCSharpKeyword(codeOptions.ContextName)))

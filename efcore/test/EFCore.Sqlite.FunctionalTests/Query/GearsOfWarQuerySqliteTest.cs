@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
@@ -244,7 +244,7 @@ WHERE instr(""s"".""Banner"", X'01') > 0");
             await base.Byte_array_contains_parameter(async);
 
             AssertSql(
-                @"@__someByte_0='1' (DbType = String)
+                @"@__someByte_0='1'
 
 SELECT ""s"".""Id"", ""s"".""Banner"", ""s"".""Banner5"", ""s"".""InternalNumber"", ""s"".""Name""
 FROM ""Squads"" AS ""s""
@@ -266,7 +266,7 @@ WHERE length(""s"".""Banner"") = 1");
             await base.Byte_array_filter_by_length_parameter(async);
 
             AssertSql(
-                @"@__p_0='1' (DbType = String)
+                @"@__p_0='1'
 
 SELECT ""s"".""Id"", ""s"".""Banner"", ""s"".""Banner5"", ""s"".""InternalNumber"", ""s"".""Name""
 FROM ""Squads"" AS ""s""
@@ -278,7 +278,7 @@ WHERE length(""s"".""Banner"") = @__p_0");
             base.Byte_array_filter_by_length_parameter_compiled();
 
             AssertSql(
-                @"@__byteArrayParam='0x2A80' (Size = 2) (DbType = String)
+                @"@__byteArrayParam='0x2A80' (Size = 2)
 
 SELECT COUNT(*)
 FROM ""Squads"" AS ""s""
@@ -290,7 +290,7 @@ WHERE length(""s"".""Banner"") = length(@__byteArrayParam)");
             await base.Byte_array_filter_by_SequenceEqual(async);
 
             AssertSql(
-                @"@__byteArrayParam_0='0x0405060708' (Size = 5) (DbType = String)
+                @"@__byteArrayParam_0='0x0405060708' (Size = 5)
 
 SELECT ""s"".""Id"", ""s"".""Banner"", ""s"".""Banner5"", ""s"".""InternalNumber"", ""s"".""Name""
 FROM ""Squads"" AS ""s""
@@ -339,6 +339,183 @@ WHERE ""s"".""Banner5"" = @__byteArrayParam_0");
         public override Task Array_access_on_byte_array(bool async)
         {
             return base.Array_access_on_byte_array(async);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_Year(bool async)
+        {
+            await base.Where_DateOnly_Year(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE CAST(strftime('%Y', ""m"".""Date"") AS INTEGER) = 1990");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_Month(bool async)
+        {
+            await base.Where_DateOnly_Month(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE CAST(strftime('%m', ""m"".""Date"") AS INTEGER) = 11");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_Day(bool async)
+        {
+            await base.Where_DateOnly_Day(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE CAST(strftime('%d', ""m"".""Date"") AS INTEGER) = 10");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_DayOfYear(bool async)
+        {
+            await base.Where_DateOnly_DayOfYear(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE CAST(strftime('%j', ""m"".""Date"") AS INTEGER) = 314");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_DayOfWeek(bool async)
+        {
+            await base.Where_DateOnly_DayOfWeek(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE CAST(strftime('%w', ""m"".""Date"") AS INTEGER) = 6");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_AddYears(bool async)
+        {
+            await base.Where_DateOnly_AddYears(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE date(""m"".""Date"", CAST(3 AS TEXT) || ' years') = '1993-11-10'");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_AddMonths(bool async)
+        {
+            await base.Where_DateOnly_AddMonths(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE date(""m"".""Date"", CAST(3 AS TEXT) || ' months') = '1991-02-10'");
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_DateOnly_AddDays(bool async)
+        {
+            await base.Where_DateOnly_AddDays(async);
+
+            AssertSql(
+                @"SELECT ""m"".""Id"", ""m"".""CodeName"", ""m"".""Date"", ""m"".""Duration"", ""m"".""Rating"", ""m"".""Time"", ""m"".""Timeline""
+FROM ""Missions"" AS ""m""
+WHERE date(""m"".""Date"", CAST(3 AS TEXT) || ' days') = '1990-11-13'");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_Hour(bool async)
+        {
+            await base.Where_TimeOnly_Hour(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_Minute(bool async)
+        {
+            await base.Where_TimeOnly_Minute(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_Second(bool async)
+        {
+            await base.Where_TimeOnly_Second(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_Millisecond(bool async)
+        {
+            await base.Where_TimeOnly_Millisecond(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_AddHours(bool async)
+        {
+            await base.Where_TimeOnly_AddHours(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_AddMinutes(bool async)
+        {
+            await base.Where_TimeOnly_AddMinutes(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_Add_TimeSpan(bool async)
+        {
+            await base.Where_TimeOnly_Add_TimeSpan(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_IsBetween(bool async)
+        {
+            await base.Where_TimeOnly_IsBetween(async);
+
+            AssertSql("");
+        }
+
+        [ConditionalTheory(Skip = "#18844")]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task Where_TimeOnly_subtract_TimeOnly(bool async)
+        {
+            await base.Where_TimeOnly_subtract_TimeOnly(async);
+
+            AssertSql("");
         }
 
         private void AssertSql(params string[] expected)

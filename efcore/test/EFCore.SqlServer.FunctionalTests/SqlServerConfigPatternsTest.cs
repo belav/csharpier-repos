@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -86,7 +86,7 @@ namespace Microsoft.EntityFrameworkCore
                         new DbContextOptionsBuilder().UseInternalServiceProvider(
                             new ServiceCollection()
                                 .AddEntityFrameworkSqlServer()
-                                .BuildServiceProvider()).Options);
+                                .BuildServiceProvider(validateScopes: true)).Options);
                     Assert.Equal(91, await context.Customers.CountAsync());
                 }
             }
@@ -122,7 +122,7 @@ namespace Microsoft.EntityFrameworkCore
                             .UseInternalServiceProvider(
                                 new ServiceCollection()
                                     .AddEntityFrameworkSqlServer()
-                                    .BuildServiceProvider()).Options);
+                                    .BuildServiceProvider(validateScopes: true)).Options);
                     Assert.Equal(91, await context.Customers.CountAsync());
                 }
             }
@@ -157,7 +157,7 @@ namespace Microsoft.EntityFrameworkCore
                                     new DbContextOptionsBuilder().UseInternalServiceProvider(
                                         new ServiceCollection()
                                             .AddEntityFrameworkSqlServer()
-                                            .BuildServiceProvider()).Options);
+                                            .BuildServiceProvider(validateScopes: true)).Options);
                                 Assert.Equal(91, context.Customers.Count());
                             }).Message);
                 }
@@ -214,7 +214,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var serviceCollection = new ServiceCollection();
                 new EntityFrameworkServicesBuilder(serviceCollection).TryAddCoreServices();
-                var serviceProvider = serviceCollection.BuildServiceProvider();
+                var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
@@ -259,7 +259,7 @@ namespace Microsoft.EntityFrameworkCore
                     .AddTransient<NorthwindContext>()
                     .AddTransient<MyController>()
                     .AddSingleton(p => new DbContextOptionsBuilder().UseInternalServiceProvider(p).Options)
-                    .BuildServiceProvider();
+                    .BuildServiceProvider(validateScopes: true);
 
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
@@ -313,7 +313,7 @@ namespace Microsoft.EntityFrameworkCore
                         new DbContextOptionsBuilder()
                             .EnableServiceProviderCaching(false)
                             .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration())
-                            .Options).BuildServiceProvider();
+                            .Options).BuildServiceProvider(validateScopes: true);
 
                 using (SqlServerTestStore.GetNorthwindStore())
                 {
@@ -423,7 +423,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var serviceProvider = new ServiceCollection()
                         .AddEntityFrameworkSqlServer()
-                        .BuildServiceProvider();
+                        .BuildServiceProvider(validateScopes: true);
 
                     using var context1 = new NorthwindContext(serviceProvider);
                     var customers1 = await context1.Customers.ToListAsync();

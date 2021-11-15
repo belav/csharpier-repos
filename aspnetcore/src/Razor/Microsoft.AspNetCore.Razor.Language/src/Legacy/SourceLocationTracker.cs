@@ -1,113 +1,46 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language.Legacy
+namespace Microsoft.AspNetCore.Razor.Language.Legacy;
+
+internal static class SourceLocationTracker
 {
-    internal class SourceLocationTracker
+    public static SourceLocation Advance(SourceLocation location, string text) =>
+        Advance(location, new StringSegment(text));
+
+    public static SourceLocation Advance(SourceLocation location, StringSegment text)
     {
-        private int _absoluteIndex = 0;
-        private int _characterIndex = 0;
-        private int _lineIndex = 0;
-        private SourceLocation _currentLocation;
-
-        public SourceLocationTracker()
-            : this(SourceLocation.Zero)
+        var absoluteIndex = location.AbsoluteIndex;
+        var lineIndex = location.LineIndex;
+        var characterIndex = location.CharacterIndex;
+        for (var i = 0; i < text.Length; i++)
         {
-        }
-
-        public SourceLocationTracker(SourceLocation currentLocation)
-        {
-            CurrentLocation = currentLocation;
-
-            UpdateInternalState();
-        }
-
-        public SourceLocation CurrentLocation
-        {
-            get
+            var nextCharacter = '\0';
+            if (i < text.Length - 1)
             {
-                return _currentLocation;
+                nextCharacter = text[i + 1];
             }
-            set
-            {
-                if (!_currentLocation.Equals(value))
-                {
-                    _currentLocation = value;
-                    UpdateInternalState();
-                }
-            }
+            UpdateCharacterCore(text[i], nextCharacter, ref absoluteIndex, ref lineIndex, ref characterIndex);
         }
 
-        public static SourceLocation Advance(SourceLocation location, string text)
-        {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
+        return new SourceLocation(location.FilePath, absoluteIndex, lineIndex, characterIndex);
+    }
 
-            var tracker = new SourceLocationTracker(location);
-            tracker.UpdateLocation(text);
-            return tracker.CurrentLocation;
+    internal static void UpdateCharacterCore(char characterRead, char nextCharacter, ref int absoluteIndex, ref int lineIndex, ref int characterIndex)
+    {
+        absoluteIndex++;
+
+        if (Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0] ||
+            ParserHelpers.IsNewLine(characterRead) && (characterRead != '\r' || nextCharacter != '\n'))
+        {
+            lineIndex++;
+            characterIndex = 0;
         }
-
-        public void UpdateLocation(char characterRead, char nextCharacter)
+        else
         {
-            UpdateCharacterCore(characterRead, nextCharacter);
-            RecalculateSourceLocation();
-        }
-
-        public SourceLocationTracker UpdateLocation(string content)
-        {
-            for (int i = 0; i < content.Length; i++)
-            {
-                var nextCharacter = '\0';
-                if (i < content.Length - 1)
-                {
-                    nextCharacter = content[i + 1];
-                }
-                UpdateCharacterCore(content[i], nextCharacter);
-            }
-            RecalculateSourceLocation();
-            return this;
-        }
-
-        private void UpdateCharacterCore(char characterRead, char nextCharacter)
-        {
-            _absoluteIndex++;
-
-            if (Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0] ||
-                ParserHelpers.IsNewLine(characterRead) && (characterRead != '\r' || nextCharacter != '\n'))
-            {
-                _lineIndex++;
-                _characterIndex = 0;
-            }
-            else
-            {
-                _characterIndex++;
-            }
-        }
-
-        private void UpdateInternalState()
-        {
-            _absoluteIndex = CurrentLocation.AbsoluteIndex;
-            _characterIndex = CurrentLocation.CharacterIndex;
-            _lineIndex = CurrentLocation.LineIndex;
-        }
-
-        private void RecalculateSourceLocation()
-        {
-            _currentLocation = new SourceLocation(
-                _currentLocation.FilePath,
-                _absoluteIndex,
-                _lineIndex,
-                _characterIndex);
-        }
-
-        public static SourceLocation CalculateNewLocation(SourceLocation lastPosition, string newContent)
-        {
-            return new SourceLocationTracker(lastPosition).UpdateLocation(newContent).CurrentLocation;
+            characterIndex++;
         }
     }
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading;
@@ -10,45 +10,63 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 namespace Microsoft.EntityFrameworkCore.Storage
 {
     /// <summary>
-    ///     <para>
-    ///         A transaction against the database.
-    ///     </para>
+    ///     A transaction against the database.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Instances of this class are typically obtained from <see cref="DatabaseFacade.BeginTransaction" /> and it is not designed
     ///         to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IDbContextTransaction : IDisposable, IAsyncDisposable
     {
         /// <summary>
         ///     Gets the transaction identifier.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
         Guid TransactionId { get; }
 
         /// <summary>
         ///     Commits all changes made to the database in the current transaction.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
         void Commit();
 
         /// <summary>
         ///     Commits all changes made to the database in the current transaction asynchronously.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task CommitAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Discards all changes made to the database in the current transaction.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
         void Rollback();
 
         /// <summary>
         ///     Discards all changes made to the database in the current transaction asynchronously.
         /// </summary>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task RollbackAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -56,7 +74,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     was established to be rolled back, restoring the transaction state to what it was at the time of the
         ///     savepoint.
         /// </summary>
-        /// <param name="name"> The name of the savepoint to be created. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the savepoint to be created.</param>
         void CreateSavepoint(string name)
             => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
@@ -65,57 +86,74 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     was established to be rolled back, restoring the transaction state to what it was at the time of the
         ///     savepoint.
         /// </summary>
-        /// <param name="name"> The name of the savepoint to be created. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the savepoint to be created.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task CreateSavepointAsync(string name, CancellationToken cancellationToken = default)
             => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
         ///     Rolls back all commands that were executed after the specified savepoint was established.
         /// </summary>
-        /// <param name="name"> The name of the savepoint to roll back to. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the savepoint to roll back to.</param>
         void RollbackToSavepoint(string name)
             => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
         ///     Rolls back all commands that were executed after the specified savepoint was established.
         /// </summary>
-        /// <param name="name"> The name of the savepoint to roll back to. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the savepoint to roll back to.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task RollbackToSavepointAsync(string name, CancellationToken cancellationToken = default)
             => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
-        ///     <para>
-        ///         Destroys a savepoint previously defined in the current transaction. This allows the system to
-        ///         reclaim some resources before the transaction ends.
-        ///     </para>
+        ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
+        ///     reclaim some resources before the transaction ends.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If savepoint release isn't supported, <see cref="ReleaseSavepoint " /> and <see cref="ReleaseSavepointAsync " /> should
         ///         do nothing rather than throw. This is the default behavior.
         ///     </para>
-        /// </summary>
-        /// <param name="name"> The name of the savepoint to release. </param>
-        void ReleaseSavepoint(string name) { }
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="name">The name of the savepoint to release.</param>
+        void ReleaseSavepoint(string name)
+        {
+        }
 
         /// <summary>
-        ///     <para>
-        ///         Destroys a savepoint previously defined in the current transaction. This allows the system to
-        ///         reclaim some resources before the transaction ends.
-        ///     </para>
+        ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
+        ///     reclaim some resources before the transaction ends.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If savepoint release isn't supported, <see cref="ReleaseSavepoint " /> and <see cref="ReleaseSavepointAsync " /> should
         ///         do nothing rather than throw. This is the default behavior.
         ///     </para>
-        /// </summary>
-        /// <param name="name"> The name of the savepoint to release. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="name">The name of the savepoint to release.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
             => Task.CompletedTask;
 
@@ -126,6 +164,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     and <see cref="ReleaseSavepointAsync" /> as well as their synchronous counterparts are expected to throw
         ///     <see cref="NotSupportedException" />.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+        /// </remarks>
         /// <returns>
         ///     <see langword="true" /> if this <see cref="IDbContextTransaction" /> instance supports database savepoints;
         ///     otherwise, <see langword="false" />.

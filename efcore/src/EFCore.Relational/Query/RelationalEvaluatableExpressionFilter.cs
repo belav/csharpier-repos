@@ -1,23 +1,20 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
     /// <summary>
-    ///     <para>
-    ///         Represents a filter for evaluatable expressions.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-    ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-    ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
-    ///     </para>
+    ///     Represents a filter for evaluatable expressions.
     /// </summary>
+    /// <remarks>
+    ///     The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
+    ///     is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
+    ///     This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+    /// </remarks>
     public class RelationalEvaluatableExpressionFilter : EvaluatableExpressionFilter
     {
         /// <summary>
@@ -29,34 +26,29 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="dependencies"> The dependencies to use. </param>
-        /// <param name="relationalDependencies"> The relational-specific dependencies to use. </param>
+        /// <param name="dependencies">The dependencies to use.</param>
+        /// <param name="relationalDependencies">The relational-specific dependencies to use.</param>
         public RelationalEvaluatableExpressionFilter(
             EvaluatableExpressionFilterDependencies dependencies,
             RelationalEvaluatableExpressionFilterDependencies relationalDependencies)
             : base(dependencies)
         {
-            Check.NotNull(relationalDependencies, nameof(relationalDependencies));
-
             RelationalDependencies = relationalDependencies;
         }
 
         /// <summary>
-        ///     Dependencies used to create a <see cref="RelationalEvaluatableExpressionFilter" />
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalEvaluatableExpressionFilterDependencies RelationalDependencies { get; }
 
         /// <summary>
         ///     Checks whether the given expression can be evaluated.
         /// </summary>
-        /// <param name="expression"> The expression. </param>
-        /// <param name="model"> The model. </param>
-        /// <returns> <see langword="true" /> if the expression can be evaluated; <see langword="false" /> otherwise. </returns>
+        /// <param name="expression">The expression.</param>
+        /// <param name="model">The model.</param>
+        /// <returns><see langword="true" /> if the expression can be evaluated; <see langword="false" /> otherwise.</returns>
         public override bool IsEvaluatableExpression(Expression expression, IModel model)
         {
-            Check.NotNull(expression, nameof(expression));
-            Check.NotNull(model, nameof(model));
-
             if (expression is MethodCallExpression methodCallExpression)
             {
                 var method = methodCallExpression.Method;

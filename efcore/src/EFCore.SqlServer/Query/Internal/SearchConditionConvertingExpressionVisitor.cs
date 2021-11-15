@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,6 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.SqlServer.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -71,7 +69,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         sqlExpression,
                         _sqlExpressionFactory.Constant(true));
 
-
         private SqlExpression SimplifyNegatedBinary(SqlExpression sqlExpression)
         {
             if (sqlExpression is SqlUnaryExpression sqlUnaryExpression
@@ -94,23 +91,21 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             sqlBinaryOperand.Right,
                             sqlBinaryOperand.TypeMapping)!;
                     }
-                    else
-                    {
-                        return _sqlExpressionFactory.MakeBinary(
-                            ExpressionType.Equal,
-                            sqlBinaryOperand.Left,
-                            _sqlExpressionFactory.Constant(!(bool)constant.Value!, constant.TypeMapping),
-                            sqlBinaryOperand.TypeMapping)!;
-                    }
+
+                    return _sqlExpressionFactory.MakeBinary(
+                        ExpressionType.Equal,
+                        sqlBinaryOperand.Left,
+                        _sqlExpressionFactory.Constant(!(bool)constant.Value!, constant.TypeMapping),
+                        sqlBinaryOperand.TypeMapping)!;
                 }
 
                 return _sqlExpressionFactory.MakeBinary(
-                        sqlBinaryOperand.OperatorType == ExpressionType.Equal
-                            ? ExpressionType.NotEqual
-                            : ExpressionType.Equal,
-                        sqlBinaryOperand.Left,
-                        sqlBinaryOperand.Right,
-                        sqlBinaryOperand.TypeMapping)!;
+                    sqlBinaryOperand.OperatorType == ExpressionType.Equal
+                        ? ExpressionType.NotEqual
+                        : ExpressionType.Equal,
+                    sqlBinaryOperand.Left,
+                    sqlBinaryOperand.Right,
+                    sqlBinaryOperand.TypeMapping)!;
             }
 
             return sqlExpression;
@@ -124,8 +119,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitCase(CaseExpression caseExpression)
         {
-            Check.NotNull(caseExpression, nameof(caseExpression));
-
             var parentSearchCondition = _isSearchCondition;
 
             var testIsCondition = caseExpression.Operand == null;
@@ -157,8 +150,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitCollate(CollateExpression collateExpression)
         {
-            Check.NotNull(collateExpression, nameof(collateExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var operand = (SqlExpression)Visit(collateExpression.Operand);
@@ -174,11 +165,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitColumn(ColumnExpression columnExpression)
-        {
-            Check.NotNull(columnExpression, nameof(columnExpression));
-
-            return ApplyConversion(columnExpression, condition: false);
-        }
+            => ApplyConversion(columnExpression, condition: false);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -188,8 +175,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitDistinct(DistinctExpression distinctExpression)
         {
-            Check.NotNull(distinctExpression, nameof(distinctExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var operand = (SqlExpression)Visit(distinctExpression.Operand);
@@ -206,8 +191,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitExists(ExistsExpression existsExpression)
         {
-            Check.NotNull(existsExpression, nameof(existsExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var subquery = (SelectExpression)Visit(existsExpression.Subquery);
@@ -223,11 +206,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitFromSql(FromSqlExpression fromSqlExpression)
-        {
-            Check.NotNull(fromSqlExpression, nameof(fromSqlExpression));
-
-            return fromSqlExpression;
-        }
+            => fromSqlExpression;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -237,8 +216,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitIn(InExpression inExpression)
         {
-            Check.NotNull(inExpression, nameof(inExpression));
-
             var parentSearchCondition = _isSearchCondition;
 
             _isSearchCondition = false;
@@ -258,8 +235,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitLike(LikeExpression likeExpression)
         {
-            Check.NotNull(likeExpression, nameof(likeExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var match = (SqlExpression)Visit(likeExpression.Match);
@@ -278,8 +253,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitSelect(SelectExpression selectExpression)
         {
-            Check.NotNull(selectExpression, nameof(selectExpression));
-
             var changed = false;
             var parentSearchCondition = _isSearchCondition;
 
@@ -348,8 +321,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitSqlBinary(SqlBinaryExpression sqlBinaryExpression)
         {
-            Check.NotNull(sqlBinaryExpression, nameof(sqlBinaryExpression));
-
             var parentIsSearchCondition = _isSearchCondition;
 
             switch (sqlBinaryExpression.OperatorType)
@@ -390,8 +361,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitSqlUnary(SqlUnaryExpression sqlUnaryExpression)
         {
-            Check.NotNull(sqlUnaryExpression, nameof(sqlUnaryExpression));
-
             var parentSearchCondition = _isSearchCondition;
             bool resultCondition;
             switch (sqlUnaryExpression.OperatorType)
@@ -422,8 +391,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     break;
 
                 default:
-                    throw new InvalidOperationException(RelationalStrings.UnsupportedOperatorForSqlExpression(
-                        sqlUnaryExpression.OperatorType, typeof(SqlUnaryExpression)));
+                    throw new InvalidOperationException(
+                        RelationalStrings.UnsupportedOperatorForSqlExpression(
+                            sqlUnaryExpression.OperatorType, typeof(SqlUnaryExpression)));
             }
 
             var operand = (SqlExpression)Visit(sqlUnaryExpression.Operand);
@@ -443,11 +413,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitSqlConstant(SqlConstantExpression sqlConstantExpression)
-        {
-            Check.NotNull(sqlConstantExpression, nameof(sqlConstantExpression));
-
-            return ApplyConversion(sqlConstantExpression, condition: false);
-        }
+            => ApplyConversion(sqlConstantExpression, condition: false);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -456,11 +422,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitSqlFragment(SqlFragmentExpression sqlFragmentExpression)
-        {
-            Check.NotNull(sqlFragmentExpression, nameof(sqlFragmentExpression));
-
-            return sqlFragmentExpression;
-        }
+            => sqlFragmentExpression;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -470,8 +432,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitSqlFunction(SqlFunctionExpression sqlFunctionExpression)
         {
-            Check.NotNull(sqlFunctionExpression, nameof(sqlFunctionExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var instance = (SqlExpression?)Visit(sqlFunctionExpression.Instance);
@@ -501,8 +461,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression)
         {
-            Check.NotNull(tableValuedFunctionExpression, nameof(tableValuedFunctionExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
 
@@ -523,11 +481,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitSqlParameter(SqlParameterExpression sqlParameterExpression)
-        {
-            Check.NotNull(sqlParameterExpression, nameof(sqlParameterExpression));
-
-            return ApplyConversion(sqlParameterExpression, condition: false);
-        }
+            => ApplyConversion(sqlParameterExpression, condition: false);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -536,11 +490,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitTable(TableExpression tableExpression)
-        {
-            Check.NotNull(tableExpression, nameof(tableExpression));
-
-            return tableExpression;
-        }
+            => tableExpression;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -550,8 +500,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitProjection(ProjectionExpression projectionExpression)
         {
-            Check.NotNull(projectionExpression, nameof(projectionExpression));
-
             var expression = (SqlExpression)Visit(projectionExpression.Expression);
 
             return projectionExpression.Update(expression);
@@ -565,8 +513,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitOrdering(OrderingExpression orderingExpression)
         {
-            Check.NotNull(orderingExpression, nameof(orderingExpression));
-
             var expression = (SqlExpression)Visit(orderingExpression.Expression);
 
             return orderingExpression.Update(expression);
@@ -580,8 +526,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitCrossJoin(CrossJoinExpression crossJoinExpression)
         {
-            Check.NotNull(crossJoinExpression, nameof(crossJoinExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var table = (TableExpressionBase)Visit(crossJoinExpression.Table);
@@ -598,8 +542,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitCrossApply(CrossApplyExpression crossApplyExpression)
         {
-            Check.NotNull(crossApplyExpression, nameof(crossApplyExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var table = (TableExpressionBase)Visit(crossApplyExpression.Table);
@@ -616,8 +558,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitOuterApply(OuterApplyExpression outerApplyExpression)
         {
-            Check.NotNull(outerApplyExpression, nameof(outerApplyExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var table = (TableExpressionBase)Visit(outerApplyExpression.Table);
@@ -634,8 +574,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitInnerJoin(InnerJoinExpression innerJoinExpression)
         {
-            Check.NotNull(innerJoinExpression, nameof(innerJoinExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var table = (TableExpressionBase)Visit(innerJoinExpression.Table);
@@ -654,8 +592,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitLeftJoin(LeftJoinExpression leftJoinExpression)
         {
-            Check.NotNull(leftJoinExpression, nameof(leftJoinExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var table = (TableExpressionBase)Visit(leftJoinExpression.Table);
@@ -674,8 +610,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression)
         {
-            Check.NotNull(scalarSubqueryExpression, nameof(scalarSubqueryExpression));
-
             var parentSearchCondition = _isSearchCondition;
             var subquery = (SelectExpression)Visit(scalarSubqueryExpression.Subquery);
             _isSearchCondition = parentSearchCondition;
@@ -691,8 +625,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitRowNumber(RowNumberExpression rowNumberExpression)
         {
-            Check.NotNull(rowNumberExpression, nameof(rowNumberExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var changed = false;
@@ -725,8 +657,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitExcept(ExceptExpression exceptExpression)
         {
-            Check.NotNull(exceptExpression, nameof(exceptExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var source1 = (SelectExpression)Visit(exceptExpression.Source1);
@@ -744,8 +674,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitIntersect(IntersectExpression intersectExpression)
         {
-            Check.NotNull(intersectExpression, nameof(intersectExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var source1 = (SelectExpression)Visit(intersectExpression.Source1);
@@ -763,8 +691,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitUnion(UnionExpression unionExpression)
         {
-            Check.NotNull(unionExpression, nameof(unionExpression));
-
             var parentSearchCondition = _isSearchCondition;
             _isSearchCondition = false;
             var source1 = (SelectExpression)Visit(unionExpression.Source1);

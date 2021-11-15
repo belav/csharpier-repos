@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -26,10 +26,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(model);
             var stateManager = contextServices.GetRequiredService<IStateManager>();
-            var factory = contextServices.GetRequiredService<IInternalEntityEntryFactory>();
 
             var entity = new IndexedClass();
-            var entry = factory.Create(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
 
             var propertyAccessors = new PropertyAccessorsFactory().Create((IProperty)propertyA);
             Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.CurrentValueGetter)(entry));
@@ -53,10 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(model);
             var stateManager = contextServices.GetRequiredService<IStateManager>();
-            var factory = contextServices.GetRequiredService<IInternalEntityEntryFactory>();
 
             var entity = new NonIndexedClass();
-            var entry = factory.Create(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
 
             var propertyAccessors = new PropertyAccessorsFactory().Create((IProperty)propA);
             Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.CurrentValueGetter)(entry));
@@ -74,8 +72,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             internal int Id { get; set; }
 
-            public object this[string name]
-                => _internalValues[name];
+            internal object this[string name]
+            {
+                get => _internalValues[name];
+                set => _internalValues[name] = value;
+            }
         }
 
         private class NonIndexedClass

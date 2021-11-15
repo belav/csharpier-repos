@@ -1,31 +1,30 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Microsoft.AspNetCore.Mvc.Razor
+namespace Microsoft.AspNetCore.Mvc.Razor;
+
+public interface IRazorPage
 {
-    public interface IRazorPage
-    {
-        ViewContext ViewContext { get; set; }
+    ViewContext ViewContext { get; set; }
 
-        IHtmlContent BodyContent { get; set; }
+    IHtmlContent BodyContent { get; set; }
 
-        bool IsLayoutBeingRendered { get; set; }
+    bool IsLayoutBeingRendered { get; set; }
 
-        string Path { get; set; }
+    string Path { get; set; }
 
-        string Layout { get; set; }
+    string Layout { get; set; }
 
-        IDictionary<string, RenderAsyncDelegate> PreviousSectionWriters { get; set; }
+    IDictionary<string, RenderAsyncDelegate> PreviousSectionWriters { get; set; }
 
-        IDictionary<string, RenderAsyncDelegate> SectionWriters { get; }
+    IDictionary<string, RenderAsyncDelegate> SectionWriters { get; }
 
-        Task ExecuteAsync();
+    Task ExecuteAsync();
 
-        void EnsureRenderedBodyOrSections();
-    }
+    void EnsureRenderedBodyOrSections();
 }

@@ -1,24 +1,20 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Builders.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Provides a simple API for configuring a <see cref="DbFunctionParameter" />.
-    ///     </para>
-    ///     <para>
-    ///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
-    ///         and it is not designed to be directly constructed in your application code.
-    ///     </para>
+    ///     Provides a simple API for configuring a <see cref="DbFunctionParameter" />.
     /// </summary>
+    /// <remarks>
+    ///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+    ///     and it is not designed to be directly constructed in your application code.
+    /// </remarks>
     public class DbFunctionParameterBuilder : IInfrastructure<IConventionDbFunctionParameterBuilder>
     {
         /// <summary>
@@ -30,8 +26,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         [EntityFrameworkInternal]
         public DbFunctionParameterBuilder(IMutableDbFunctionParameter parameter)
         {
-            Check.NotNull(parameter, nameof(parameter));
-
             Builder = ((DbFunctionParameter)parameter).Builder!;
         }
 
@@ -53,8 +47,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Sets the store type of the function parameter in the database.
         /// </summary>
-        /// <param name="storeType"> The store type of the function parameter in the database. </param>
-        /// <returns> The same builder instance so that further configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="storeType">The store type of the function parameter in the database.</param>
+        /// <returns>The same builder instance so that further configuration calls can be chained.</returns>
         public virtual DbFunctionParameterBuilder HasStoreType(string? storeType)
         {
             Builder.HasStoreType(storeType, ConfigurationSource.Explicit);
@@ -65,8 +62,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Indicates whether parameter propagates nullability, meaning if it's value is null the database function itself returns null.
         /// </summary>
-        /// <param name="propagatesNullability"> Value which indicates whether parameter propagates nullability. </param>
-        /// <returns> The same builder instance so that further configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="propagatesNullability">Value which indicates whether parameter propagates nullability.</param>
+        /// <returns>The same builder instance so that further configuration calls can be chained.</returns>
         public virtual DbFunctionParameterBuilder PropagatesNullability(bool propagatesNullability = true)
         {
             Builder.PropagatesNullability(propagatesNullability, ConfigurationSource.Explicit);
@@ -79,7 +79,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -87,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
         public override bool Equals(object? obj)
@@ -97,7 +97,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
         public override int GetHashCode()

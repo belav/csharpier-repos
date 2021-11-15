@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -1258,6 +1258,86 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
+        public virtual async Task FromSql_used_twice_without_parameters(bool async)
+        {
+            using var context = CreateContext();
+
+            var query = context.Set<OrderQuery>()
+                .FromSqlRaw(NormalizeDelimitersInRawString("SELECT 'ALFKI' AS [CustomerID]"))
+                .IgnoreQueryFilters();
+
+            var result1 = async
+                ? await query.AnyAsync()
+                : query.Any();
+
+            Assert.Equal(
+                RelationalStrings.QueryFromSqlInsideExists,
+                async
+                ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.AnyAsync())).Message
+                : Assert.Throws<InvalidOperationException>(() => query.Any()).Message);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task FromSql_used_twice_with_parameters(bool async)
+        {
+            using var context = CreateContext();
+
+            var query = context.Set<OrderQuery>()
+                .FromSqlRaw(NormalizeDelimitersInRawString("SELECT {0} AS [CustomerID]"), "ALFKI")
+                .IgnoreQueryFilters();
+
+            var result1 = async
+                ? await query.AnyAsync()
+                : query.Any();
+
+            Assert.Equal(
+                RelationalStrings.QueryFromSqlInsideExists,
+                async
+                ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.AnyAsync())).Message
+                : Assert.Throws<InvalidOperationException>(() => query.Any()).Message);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task FromSql_Count_used_twice_without_parameters(bool async)
+        {
+            using var context = CreateContext();
+
+            var query = context.Set<OrderQuery>()
+                .FromSqlRaw(NormalizeDelimitersInRawString("SELECT 'ALFKI' AS [CustomerID]"))
+                .IgnoreQueryFilters();
+
+            var result1 = async
+                ? await query.CountAsync() > 0
+                : query.Count() > 0;
+
+            var result2 = async
+                ? await query.CountAsync() > 0
+                : query.Count() > 0;
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task FromSql_Count_used_twice_with_parameters(bool async)
+        {
+            using var context = CreateContext();
+
+            var query = context.Set<OrderQuery>()
+                .FromSqlRaw(NormalizeDelimitersInRawString("SELECT {0} AS [CustomerID]"), "ALFKI")
+                .IgnoreQueryFilters();
+
+            var result1 = async
+                ? await query.CountAsync() > 0
+                : query.Count() > 0;
+
+            var result2 = async
+                ? await query.CountAsync() > 0
+                : query.Count() > 0;
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
         public virtual async Task Line_endings_after_Select(bool async)
         {
             using var context = CreateContext();
@@ -1322,7 +1402,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
                     o =>
                         context.Customers
                             .FromSqlRaw(
-                                @"SELECT * FROM ""Customers"" WHERE ""City"" = @city",
+                                NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = @city"),
                                 // ReSharper disable once FormatStringProblem
                                 CreateDbParameter("@city", "London"))
                             .Select(c => c.CustomerID)
@@ -1344,7 +1424,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
                     o =>
                         context.Customers
                             .FromSqlRaw(
-                                @"SELECT * FROM ""Customers"" WHERE ""City"" = {0}",
+                                NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
                                 // ReSharper disable once FormatStringProblem
                                 CreateDbParameter(null, "London"))
                             .Select(c => c.CustomerID)
@@ -1366,7 +1446,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
                     o =>
                         context.Customers
                             .FromSqlRaw(
-                                @"SELECT * FROM ""Customers"" WHERE ""City"" = {0}",
+                                NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
                                 // ReSharper disable once FormatStringProblem
                                 CreateDbParameter("@city", "London"))
                             .Select(c => c.CustomerID)
@@ -1391,7 +1471,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
                     o =>
                         context.Customers
                             .FromSqlRaw(
-                                @"SELECT * FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = @title",
+                                NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = @title"),
                                 city,
                                 // ReSharper disable once FormatStringProblem
                                 CreateDbParameter("@title", title))
@@ -1408,7 +1488,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
                     o =>
                         context.Customers
                             .FromSqlRaw(
-                                @"SELECT * FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = {1}",
+                                NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = @city AND [ContactTitle] = {1}"),
                                 // ReSharper disable once FormatStringProblem
                                 CreateDbParameter("@city", city),
                                 title)
@@ -1420,6 +1500,28 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
                 : query.ToArray();
 
             Assert.Equal(26, actual.Length);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task FromSqlRaw_composed_with_common_table_expression(bool async)
+        {
+            using var context = CreateContext();
+            var query = context.Set<Customer>()
+                .FromSqlRaw(
+                    NormalizeDelimitersInRawString(
+                        @"WITH [Customers2] AS (
+    SELECT * FROM [Customers]
+)
+SELECT * FROM [Customers2]"))
+                .Where(c => c.ContactName.Contains("z"));
+
+            var actual = async
+                ? await query.ToArrayAsync()
+                : query.ToArray();
+
+            Assert.Equal(14, actual.Length);
+            Assert.Equal(14, context.ChangeTracker.Entries().Count());
         }
 
         protected string NormalizeDelimitersInRawString(string sql)

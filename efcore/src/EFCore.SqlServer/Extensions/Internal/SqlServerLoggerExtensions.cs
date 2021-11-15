@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -354,6 +354,27 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public static void ForeignKeyReferencesUnknownPrincipalTableWarning(
+            this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
+            string? foreignKeyName,
+            string? tableName)
+        {
+            var definition = SqlServerResources.LogPrincipalTableInformationNotFound(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(diagnostics, foreignKeyName, tableName);
+            }
+
+            // No DiagnosticsSource events because these are purely design-time messages
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         public static void ForeignKeyReferencesMissingPrincipalTableWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? foreignKeyName,
@@ -439,6 +460,27 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public static void ColumnWithoutTypeWarning(
+            this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
+            string tableName,
+            string columnName)
+        {
+            var definition = SqlServerResources.LogColumnWithoutType(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(diagnostics, tableName, columnName);
+            }
+
+            // No DiagnosticsSource events because these are purely design-time messages
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         public static void SequenceFound(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string sequenceName,
@@ -512,9 +554,31 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
         }
 
         /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public static void DuplicateForeignKeyConstraintIgnored(
+            this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
+            string foreignKeyName,
+            string tableName,
+            string duplicateForeignKeyName)
+        {
+            var definition = SqlServerResources.LogDuplicateForeignKeyConstraintIgnored(diagnostics);
+
+            if (diagnostics.ShouldLog(definition))
+            {
+                definition.Log(diagnostics, foreignKeyName, tableName, duplicateForeignKeyName);
+            }
+
+            // No DiagnosticsSource events because these are purely design-time messages
+        }
+
+        /// <summary>
         ///     Logs for the <see cref="RelationalEventId.MultipleCollectionIncludeWarning" /> event.
         /// </summary>
-        /// <param name="diagnostics"> The diagnostics logger to use. </param>
+        /// <param name="diagnostics">The diagnostics logger to use.</param>
         public static void SavepointsDisabledBecauseOfMARS(
             this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics)
         {

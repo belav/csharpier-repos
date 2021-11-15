@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
@@ -8,6 +8,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     /// <summary>
     ///     Options to print debug string differently for metadata objects.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
+    ///     <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information.
+    /// </remarks>
     [Flags]
     public enum MetadataDebugStringOptions
     {

@@ -1,45 +1,44 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Razor.Language.Legacy
+namespace Microsoft.AspNetCore.Razor.Language.Legacy;
+
+public class TagHelperRewritingTestBase : ParserTestBase
 {
-    public class TagHelperRewritingTestBase : ParserTestBase
+    internal void RunParseTreeRewriterTest(string documentContent, params string[] tagNames)
     {
-        internal void RunParseTreeRewriterTest(string documentContent, params string[] tagNames)
-        {
-            var descriptors = BuildDescriptors(tagNames);
+        var descriptors = BuildDescriptors(tagNames);
 
-            EvaluateData(descriptors, documentContent);
+        EvaluateData(descriptors, documentContent);
+    }
+
+    internal IEnumerable<TagHelperDescriptor> BuildDescriptors(params string[] tagNames)
+    {
+        var descriptors = new List<TagHelperDescriptor>();
+
+        foreach (var tagName in tagNames)
+        {
+            var descriptor = TagHelperDescriptorBuilder.Create(tagName + "taghelper", "SomeAssembly")
+                .TagMatchingRuleDescriptor(rule => rule.RequireTagName(tagName))
+                .Build();
+            descriptors.Add(descriptor);
         }
 
-        internal IEnumerable<TagHelperDescriptor> BuildDescriptors(params string[] tagNames)
-        {
-            var descriptors = new List<TagHelperDescriptor>();
+        return descriptors;
+    }
 
-            foreach (var tagName in tagNames)
-            {
-                var descriptor = TagHelperDescriptorBuilder.Create(tagName + "taghelper", "SomeAssembly")
-                    .TagMatchingRuleDescriptor(rule => rule.RequireTagName(tagName))
-                    .Build();
-                descriptors.Add(descriptor);
-            }
+    internal void EvaluateData(
+        IEnumerable<TagHelperDescriptor> descriptors,
+        string documentContent,
+        string tagHelperPrefix = null,
+        RazorParserFeatureFlags featureFlags = null)
+    {
+        var syntaxTree = ParseDocument(documentContent, featureFlags: featureFlags);
 
-            return descriptors;
-        }
+        var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(syntaxTree, tagHelperPrefix, descriptors);
 
-        internal void EvaluateData(
-            IEnumerable<TagHelperDescriptor> descriptors,
-            string documentContent,
-            string tagHelperPrefix = null,
-            RazorParserFeatureFlags featureFlags = null)
-        {
-            var syntaxTree = ParseDocument(documentContent, featureFlags: featureFlags);
-
-            var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(syntaxTree, tagHelperPrefix, descriptors);
-
-            BaselineTest(rewrittenTree);
-        }
+        BaselineTest(rewrittenTree);
     }
 }

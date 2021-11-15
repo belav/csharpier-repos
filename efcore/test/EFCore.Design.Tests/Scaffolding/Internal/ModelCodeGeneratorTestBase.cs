@@ -1,14 +1,12 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Design.Internal;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.SqlServer.Design.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -21,16 +19,22 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Action<ModelBuilder> buildModel,
             ModelCodeGenerationOptions options,
             Action<ScaffoldedModel> assertScaffold,
-            Action<IModel> assertModel)
+            Action<IModel> assertModel,
+            bool skipBuild = false)
         {
-            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
+            var designServices = new ServiceCollection();
+            AddModelServices(designServices);
+
+            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(customServices: designServices);
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
             buildModel(modelBuilder);
 
-            var model = SqlServerTestHelpers.Instance.Finalize(modelBuilder, designTime: true, skipValidation: true);
+            var model = modelBuilder.FinalizeModel(designTime: true, skipValidation: true);
 
-            var generator = CreateServices()
-                .BuildServiceProvider()
+            var services = CreateServices();
+            AddScaffoldingServices(services);
+
+            var generator = services.BuildServiceProvider(validateScopes: true)
                 .GetRequiredService<IModelCodeGenerator>();
 
             options.ModelNamespace ??= "TestNamespace";
@@ -51,22 +55,26 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"),
                     BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer")
                 },
-                Sources = new List<string>(
-                    new[] { scaffoldedModel.ContextFile.Code }.Concat(
-                        scaffoldedModel.AdditionalFiles.Select(f => f.Code)))
+                Sources = new[] { scaffoldedModel.ContextFile }.Concat(scaffoldedModel.AdditionalFiles)
+                    .ToDictionary(f => f.Path, f => f.Code),
+                NullableReferenceTypes = options.UseNullableReferenceTypes
             };
 
-            var assembly = build.BuildInMemory();
-            var contextNamespace = options.ContextNamespace ?? options.ModelNamespace;
-            var context = (DbContext)assembly.CreateInstance(
-                !string.IsNullOrEmpty(contextNamespace)
-                    ? contextNamespace + "." + options.ContextName
-                    : options.ContextName);
-
-            if (assertModel != null)
+            if (!skipBuild)
             {
-                var compiledModel = context.Model;
-                assertModel(compiledModel);
+                var assembly = build.BuildInMemory();
+
+                if (assertModel != null)
+                {
+                    var contextNamespace = options.ContextNamespace ?? options.ModelNamespace;
+                    var context = (DbContext)assembly.CreateInstance(
+                        !string.IsNullOrEmpty(contextNamespace)
+                            ? contextNamespace + "." + options.ContextName
+                            : options.ContextName);
+
+                    var compiledModel = context.GetService<IDesignTimeModel>().Model;
+                    assertModel(compiledModel);
+                }
             }
         }
 
@@ -77,6 +85,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var services = new DesignTimeServicesBuilder(testAssembly, testAssembly, reporter, new string[0])
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
             return services;
+        }
+
+        protected virtual void AddModelServices(IServiceCollection services)
+        {
+        }
+
+        protected virtual void AddScaffoldingServices(IServiceCollection services)
+        {
         }
 
         protected static void AssertFileContents(

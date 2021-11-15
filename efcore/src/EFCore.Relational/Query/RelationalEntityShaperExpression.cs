@@ -1,17 +1,14 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -30,9 +27,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalEntityShaperExpression" /> class.
         /// </summary>
-        /// <param name="entityType"> The entity type to shape. </param>
-        /// <param name="valueBufferExpression"> An expression of ValueBuffer to get values for properties of the entity. </param>
-        /// <param name="nullable"> A bool value indicating whether this entity instance can be null. </param>
+        /// <param name="entityType">The entity type to shape.</param>
+        /// <param name="valueBufferExpression">An expression of ValueBuffer to get values for properties of the entity.</param>
+        /// <param name="nullable">A bool value indicating whether this entity instance can be null.</param>
         public RelationalEntityShaperExpression(IEntityType entityType, Expression valueBufferExpression, bool nullable)
             : base(entityType, valueBufferExpression, nullable, null)
         {
@@ -41,11 +38,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalEntityShaperExpression" /> class.
         /// </summary>
-        /// <param name="entityType"> The entity type to shape. </param>
-        /// <param name="valueBufferExpression"> An expression of ValueBuffer to get values for properties of the entity. </param>
-        /// <param name="nullable"> Whether this entity instance can be null. </param>
+        /// <param name="entityType">The entity type to shape.</param>
+        /// <param name="valueBufferExpression">An expression of ValueBuffer to get values for properties of the entity.</param>
+        /// <param name="nullable">Whether this entity instance can be null.</param>
         /// <param name="materializationCondition">
-        ///     An expression of <see cref="Func{ValueBuffer, IEntityType}" /> to determine which entity type to
+        ///     An expression of <see cref="Func{T,TResult}" /> to determine which entity type to
         ///     materialize.
         /// </param>
         protected RelationalEntityShaperExpression(
@@ -60,8 +57,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override LambdaExpression GenerateMaterializationCondition(IEntityType entityType, bool nullable)
         {
-            Check.NotNull(entityType, nameof(EntityType));
-
             LambdaExpression baseCondition;
             if (entityType.FindDiscriminatorProperty() == null
                 && entityType.GetDirectlyDerivedTypes().Any())
@@ -148,36 +143,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         /// <inheritdoc />
         public override EntityShaperExpression WithEntityType(IEntityType entityType)
-        {
-            Check.NotNull(entityType, nameof(entityType));
-
-            return entityType != EntityType
+            => entityType != EntityType
                 ? new RelationalEntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
                 : this;
-        }
-
-        /// <inheritdoc />
-        [Obsolete("Use MakeNullable() instead.")]
-        public override EntityShaperExpression MarkAsNullable()
-            => MakeNullable();
 
         /// <inheritdoc />
         public override EntityShaperExpression MakeNullable(bool nullable = true)
-        {
-            return IsNullable != nullable
+            => IsNullable != nullable
                 // Marking nullable requires recomputation of Discriminator condition
                 ? new RelationalEntityShaperExpression(EntityType, ValueBufferExpression, true)
                 : this;
-        }
 
         /// <inheritdoc />
         public override EntityShaperExpression Update(Expression valueBufferExpression)
-        {
-            Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
-
-            return valueBufferExpression != ValueBufferExpression
+            => valueBufferExpression != ValueBufferExpression
                 ? new RelationalEntityShaperExpression(EntityType, valueBufferExpression, IsNullable, MaterializationCondition)
                 : this;
-        }
     }
 }

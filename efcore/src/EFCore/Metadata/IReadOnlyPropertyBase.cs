@@ -1,17 +1,19 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
     ///     Base type for navigations and properties.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IReadOnlyPropertyBase : IReadOnlyAnnotatable
     {
         /// <summary>
@@ -45,7 +47,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets the name of the backing field for this property, or <see langword="null" /> if the backing field
         ///     is not known.
         /// </summary>
-        /// <returns> The name of the backing field, or <see langword="null" />. </returns>
+        /// <returns>The name of the backing field, or <see langword="null" />.</returns>
         string? GetFieldName()
             => FieldInfo?.GetSimpleMemberName();
 
@@ -57,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     <see langword="true" /> if the property is a shadow property, otherwise <see langword="false" />.
         /// </returns>
-        bool IsShadowProperty() => this.GetIdentifyingMemberInfo() == null;
+        bool IsShadowProperty()
+            => PropertyInfo == null && FieldInfo == null;
 
         /// <summary>
         ///     Gets a value indicating whether this is an indexer property. An indexer property is one that is accessed through
@@ -67,13 +70,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     <see langword="true" /> if the property is an indexer property, otherwise <see langword="false" />.
         /// </returns>
         bool IsIndexerProperty()
-            => this.GetIdentifyingMemberInfo() is PropertyInfo propertyInfo
+            => PropertyInfo is PropertyInfo propertyInfo
                 && propertyInfo == DeclaringType.FindIndexerPropertyInfo();
 
         /// <summary>
         ///     Gets the <see cref="PropertyAccessMode" /> being used for this property-like object.
         /// </summary>
-        /// <returns> The access mode being used. </returns>
+        /// <returns>The access mode being used.</returns>
         PropertyAccessMode GetPropertyAccessMode();
     }
 }

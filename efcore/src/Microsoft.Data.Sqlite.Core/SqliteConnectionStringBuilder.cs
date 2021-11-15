@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -30,6 +30,7 @@ namespace Microsoft.Data.Sqlite
         private const string RecursiveTriggersKeyword = "Recursive Triggers";
         private const string DefaultTimeoutKeyword = "Default Timeout";
         private const string CommandTimeoutKeyword = "Command Timeout";
+        private const string PoolingKeyword = "Pooling";
 
         private enum Keywords
         {
@@ -39,7 +40,8 @@ namespace Microsoft.Data.Sqlite
             Password,
             ForeignKeys,
             RecursiveTriggers,
-            DefaultTimeout
+            DefaultTimeout,
+            Pooling
         }
 
         private static readonly IReadOnlyList<string> _validKeywords;
@@ -52,10 +54,11 @@ namespace Microsoft.Data.Sqlite
         private bool? _foreignKeys;
         private bool _recursiveTriggers;
         private int _defaultTimeout = 30;
+        private bool _pooling = true;
 
         static SqliteConnectionStringBuilder()
         {
-            var validKeywords = new string[7];
+            var validKeywords = new string[8];
             validKeywords[(int)Keywords.DataSource] = DataSourceKeyword;
             validKeywords[(int)Keywords.Mode] = ModeKeyword;
             validKeywords[(int)Keywords.Cache] = CacheKeyword;
@@ -63,9 +66,10 @@ namespace Microsoft.Data.Sqlite
             validKeywords[(int)Keywords.ForeignKeys] = ForeignKeysKeyword;
             validKeywords[(int)Keywords.RecursiveTriggers] = RecursiveTriggersKeyword;
             validKeywords[(int)Keywords.DefaultTimeout] = DefaultTimeoutKeyword;
+            validKeywords[(int)Keywords.Pooling] = PoolingKeyword;
             _validKeywords = validKeywords;
 
-            _keywords = new Dictionary<string, Keywords>(10, StringComparer.OrdinalIgnoreCase)
+            _keywords = new Dictionary<string, Keywords>(11, StringComparer.OrdinalIgnoreCase)
             {
                 [DataSourceKeyword] = Keywords.DataSource,
                 [ModeKeyword] = Keywords.Mode,
@@ -74,6 +78,7 @@ namespace Microsoft.Data.Sqlite
                 [ForeignKeysKeyword] = Keywords.ForeignKeys,
                 [RecursiveTriggersKeyword] = Keywords.RecursiveTriggers,
                 [DefaultTimeoutKeyword] = Keywords.DefaultTimeout,
+                [PoolingKeyword] = Keywords.Pooling,
 
                 // aliases
                 [FilenameKeyword] = Keywords.DataSource,
@@ -203,6 +208,16 @@ namespace Microsoft.Data.Sqlite
         }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether the connection will be pooled.
+        /// </summary>
+        /// <value>A value indicating whether the connection will be pooled.</value>
+        public bool Pooling
+        {
+            get => _pooling;
+            set => base[PoolingKeyword] = _pooling = value;
+        }
+
+        /// <summary>
         ///     Gets or sets the value associated with the specified key.
         /// </summary>
         /// <param name="keyword">The key.</param>
@@ -251,8 +266,12 @@ namespace Microsoft.Data.Sqlite
                         DefaultTimeout = Convert.ToInt32(value);
                         return;
 
+                    case Keywords.Pooling:
+                        Pooling = Convert.ToBoolean(value, CultureInfo.InvariantCulture);
+                        return;
+
                     default:
-                        Debug.Assert(false, "Unexpected keyword: " + keyword);
+                        Debug.Fail("Unexpected keyword: " + keyword);
                         return;
                 }
             }
@@ -319,7 +338,7 @@ namespace Microsoft.Data.Sqlite
         ///     Determines whether the specified key is used by the connection string.
         /// </summary>
         /// <param name="keyword">The key to look for.</param>
-        /// <returns> <see langword="true" /> if it is used; otherwise, <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if it is used; otherwise, <see langword="false" />.</returns>
         public override bool ContainsKey(string keyword)
             => _keywords.ContainsKey(keyword);
 
@@ -327,7 +346,7 @@ namespace Microsoft.Data.Sqlite
         ///     Removes the specified key and its value from the connection string.
         /// </summary>
         /// <param name="keyword">The key to remove.</param>
-        /// <returns> <see langword="true" /> if the key was used; otherwise, <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the key was used; otherwise, <see langword="false" />.</returns>
         public override bool Remove(string keyword)
         {
             if (!_keywords.TryGetValue(keyword, out var index)
@@ -345,7 +364,7 @@ namespace Microsoft.Data.Sqlite
         ///     Determines whether the specified key should be serialized into the connection string.
         /// </summary>
         /// <param name="keyword">The key to check.</param>
-        /// <returns><see langword="true" /> if it should be serialized; otherwise, <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if it should be serialized; otherwise, <see langword="false" />.</returns>
         public override bool ShouldSerialize(string keyword)
             => _keywords.TryGetValue(keyword, out var index) && base.ShouldSerialize(_validKeywords[(int)index]);
 
@@ -354,7 +373,7 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="keyword">The key.</param>
         /// <param name="value">The value.</param>
-        /// <returns><see langword="true" /> if the key was used; otherwise, <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the key was used; otherwise, <see langword="false" />.</returns>
 #pragma warning disable CS8765 // NB: TryGetValue("Foreign Keys", out value) returns true, but value may be null
         public override bool TryGetValue(string keyword, out object? value)
 #pragma warning restore CS8765
@@ -396,8 +415,11 @@ namespace Microsoft.Data.Sqlite
                 case Keywords.DefaultTimeout:
                     return DefaultTimeout;
 
+                case Keywords.Pooling:
+                    return Pooling;
+
                 default:
-                    Debug.Assert(false, "Unexpected keyword: " + index);
+                    Debug.Fail("Unexpected keyword: " + index);
                     return null;
             }
         }
@@ -439,8 +461,12 @@ namespace Microsoft.Data.Sqlite
                     _defaultTimeout = 30;
                     return;
 
+                case Keywords.Pooling:
+                    _pooling = true;
+                    return;
+
                 default:
-                    Debug.Assert(false, "Unexpected keyword: " + index);
+                    Debug.Fail("Unexpected keyword: " + index);
                     return;
             }
         }

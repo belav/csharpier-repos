@@ -6,22 +6,12 @@ using System.CommandLine.Collections;
 
 namespace System.CommandLine.Parsing
 {
+    /// <summary>
+    /// An <see cref="AliasedSet{T}"/> containing symbol results.
+    /// </summary>
     public class SymbolResultSet : AliasedSet<SymbolResult>
     {
-        internal SymbolResult? ResultFor(ISymbol symbol)
-        {
-            for (var i = 0; i < Items.Count; i++)
-            {
-                var item = Items[i];
-                if (Equals(item.Symbol, symbol))
-                {
-                    return item;
-                }
-            }
-
-            return default;
-        }
-
+        /// <inheritdoc/>
         protected override IReadOnlyCollection<string> GetAliases(SymbolResult result) =>
             result.Symbol switch
             {

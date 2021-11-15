@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
@@ -13,19 +12,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that removes any state that is only used during model building.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class ModelCleanupConvention : IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ModelCleanupConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public ModelCleanupConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
@@ -36,7 +38,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             RemoveEntityTypesUnreachableByNavigations(modelBuilder, context);
             RemoveNavigationlessForeignKeys(modelBuilder);
-            RemoveModelBuildingAnnotations(modelBuilder);
         }
 
         private void RemoveEntityTypesUnreachableByNavigations(
@@ -45,12 +46,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var model = modelBuilder.Metadata;
             var rootEntityTypes = GetRoots(model, ConfigurationSource.DataAnnotation);
-            using (context.DelayConventions())
+
+            foreach (var orphan in new GraphAdapter(model).GetUnreachableVertices(rootEntityTypes))
             {
-                foreach (var orphan in new GraphAdapter(model).GetUnreachableVertices(rootEntityTypes))
-                {
-                    modelBuilder.HasNoEntityType(orphan, fromDataAnnotation: true);
-                }
+                modelBuilder.HasNoEntityType(orphan, fromDataAnnotation: true);
             }
         }
 
@@ -83,16 +82,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         entityType.Builder.HasNoRelationship(foreignKey, fromDataAnnotation: true);
                     }
                 }
-            }
-        }
-
-        private void RemoveModelBuildingAnnotations(IConventionModelBuilder modelBuilder)
-        {
-            modelBuilder.Metadata.RemoveAnnotation(CoreAnnotationNames.DerivedTypes);
-            foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
-            {
-                entityType.RemoveAnnotation(CoreAnnotationNames.AmbiguousNavigations);
-                entityType.RemoveAnnotation(CoreAnnotationNames.NavigationCandidates);
             }
         }
 

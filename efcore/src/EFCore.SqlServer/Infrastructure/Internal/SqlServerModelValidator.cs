@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,22 +12,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-    ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-    ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class SqlServerModelValidator : RelationalModelValidator
     {
@@ -59,6 +51,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             ValidateDecimalColumns(model, logger);
             ValidateByteIdentityMapping(model, logger);
             ValidateNonKeyValueGeneration(model, logger);
+            ValidateTemporalTables(model, logger);
         }
 
         /// <summary>
@@ -73,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
         {
             foreach (IConventionProperty property in model.GetEntityTypes()
                 .SelectMany(t => t.GetDeclaredProperties())
-                .Where(p => p.ClrType.UnwrapNullableType() == typeof(decimal)
+                .Where(
+                    p => p.ClrType.UnwrapNullableType() == typeof(decimal)
                         && !p.IsForeignKey()))
             {
                 var valueConverterConfigurationSource = property.GetValueConverterConfigurationSource();
@@ -215,6 +209,115 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        protected virtual void ValidateTemporalTables(
+            IModel model,
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        {
+            var temporalEntityTypes = model.GetEntityTypes().Where(t => t.IsTemporal()).ToList();
+            foreach (var temporalEntityType in temporalEntityTypes)
+            {
+                if (temporalEntityType.BaseType != null)
+                {
+                    throw new InvalidOperationException(SqlServerStrings.TemporalOnlyOnRoot(temporalEntityType.DisplayName()));
+                }
+
+                ValidateTemporalPeriodProperty(temporalEntityType, periodStart: true);
+                ValidateTemporalPeriodProperty(temporalEntityType, periodStart: false);
+
+                var derivedTableMappings = temporalEntityType.GetDerivedTypes().Select(t => t.GetTableName()).Distinct().ToList();
+                if (derivedTableMappings.Count > 0
+                    && (derivedTableMappings.Count != 1 || derivedTableMappings.First() != temporalEntityType.GetTableName()))
+                {
+                    throw new InvalidOperationException(SqlServerStrings.TemporalOnlySupportedForTPH(temporalEntityType.DisplayName()));
+                }
+            }
+        }
+
+        private void ValidateTemporalPeriodProperty(IEntityType temporalEntityType, bool periodStart)
+        {
+            var annotationPropertyName = periodStart
+                ? temporalEntityType.GetPeriodStartPropertyName()
+                : temporalEntityType.GetPeriodEndPropertyName();
+
+            if (annotationPropertyName == null)
+            {
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalMustDefinePeriodProperties(
+                        temporalEntityType.DisplayName()));
+            }
+
+            var periodProperty = temporalEntityType.FindProperty(annotationPropertyName);
+            if (periodProperty == null)
+            {
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalExpectedPeriodPropertyNotFound(
+                        temporalEntityType.DisplayName(), annotationPropertyName));
+            }
+
+            if (!periodProperty.IsShadowProperty() && !temporalEntityType.IsPropertyBag)
+            {
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalPeriodPropertyMustBeInShadowState(
+                        temporalEntityType.DisplayName(), periodProperty.Name));
+            }
+
+            if (periodProperty.IsNullable
+                || periodProperty.ClrType != typeof(DateTime))
+            {
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalPeriodPropertyMustBeNonNullableDateTime(
+                        temporalEntityType.DisplayName(), periodProperty.Name, nameof(DateTime)));
+            }
+
+            var expectedPeriodColumnName = "datetime2";
+            if (periodProperty.GetColumnType() != expectedPeriodColumnName)
+            {
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalPeriodPropertyMustBeMappedToDatetime2(
+                        temporalEntityType.DisplayName(), periodProperty.Name, expectedPeriodColumnName));
+            }
+
+            if (periodProperty.TryGetDefaultValue(out var _))
+            {
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalPeriodPropertyCantHaveDefaultValue(
+                        temporalEntityType.DisplayName(), periodProperty.Name));
+            }
+
+            if (temporalEntityType.GetTableName() is string tableName)
+            {
+                var storeObjectIdentifier = StoreObjectIdentifier.Table(tableName, temporalEntityType.GetSchema());
+                var periodColumnName = periodProperty.GetColumnName(storeObjectIdentifier);
+
+                var propertiesMappedToPeriodColumn = temporalEntityType.GetProperties().Where(
+                    p => p.Name != periodProperty.Name && p.GetColumnName(storeObjectIdentifier) == periodColumnName).ToList();
+                foreach (var propertyMappedToPeriodColumn in propertiesMappedToPeriodColumn)
+                {
+                    if (propertyMappedToPeriodColumn.ValueGenerated != ValueGenerated.OnAddOrUpdate)
+                    {
+                        throw new InvalidOperationException(
+                            SqlServerStrings.TemporalPropertyMappedToPeriodColumnMustBeValueGeneratedOnAddOrUpdate(
+                                temporalEntityType.DisplayName(), propertyMappedToPeriodColumn.Name, nameof(ValueGenerated.OnAddOrUpdate)));
+                    }
+
+                    if (propertyMappedToPeriodColumn.TryGetDefaultValue(out var _))
+                    {
+                        throw new InvalidOperationException(
+                            SqlServerStrings.TemporalPropertyMappedToPeriodColumnCantHaveDefaultValue(
+                                temporalEntityType.DisplayName(), propertyMappedToPeriodColumn.Name));
+                    }
+                }
+            }
+
+            // TODO: check that period property is excluded from query (once the annotation is added)
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         protected override void ValidateSharedTableCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             string tableName,
@@ -223,7 +326,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
         {
             var firstMappedType = mappedTypes[0];
             var isMemoryOptimized = firstMappedType.IsMemoryOptimized();
-
             foreach (var otherMappedType in mappedTypes.Skip(1))
             {
                 if (isMemoryOptimized != otherMappedType.IsMemoryOptimized())
@@ -234,6 +336,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                             isMemoryOptimized ? firstMappedType.DisplayName() : otherMappedType.DisplayName(),
                             !isMemoryOptimized ? firstMappedType.DisplayName() : otherMappedType.DisplayName()));
                 }
+            }
+
+            if (mappedTypes.Any(t => t.IsTemporal())
+                && mappedTypes.Select(t => t.GetRootType()).Distinct().Count() > 1)
+            {
+                throw new InvalidOperationException(SqlServerStrings.TemporalNotSupportedForTableSplitting(tableName));
             }
 
             base.ValidateSharedTableCompatibility(mappedTypes, tableName, schema, logger);
@@ -292,11 +400,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             {
                 var isConflicting = ((IConventionProperty)property)
                     .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-                    ?.GetConfigurationSource() == ConfigurationSource.Explicit
+                    ?.GetConfigurationSource()
+                    == ConfigurationSource.Explicit
                     || propertyStrategy != SqlServerValueGenerationStrategy.None;
                 var isDuplicateConflicting = ((IConventionProperty)duplicateProperty)
                     .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-                    ?.GetConfigurationSource() == ConfigurationSource.Explicit
+                    ?.GetConfigurationSource()
+                    == ConfigurationSource.Explicit
                     || duplicatePropertyStrategy != SqlServerValueGenerationStrategy.None;
 
                 if (isConflicting && isDuplicateConflicting)
@@ -363,7 +473,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                 }
             }
 
-            if (property.IsSparse() != duplicateProperty.IsSparse())
+            if (property.IsSparse(storeObject) != duplicateProperty.IsSparse(storeObject))
             {
                 throw new InvalidOperationException(
                     SqlServerStrings.DuplicateColumnSparsenessMismatch(

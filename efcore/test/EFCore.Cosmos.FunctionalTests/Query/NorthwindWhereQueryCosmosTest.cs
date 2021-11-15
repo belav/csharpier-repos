@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -875,6 +875,16 @@ FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
         }
 
+        public override async Task Where_equals_method_string_with_ignore_case(bool async)
+        {
+            await base.Where_equals_method_string_with_ignore_case(async);
+
+            AssertSql(
+                @"SELECT c
+FROM root c
+WHERE ((c[""Discriminator""] = ""Customer"") AND STRINGEQUALS(c[""City""], ""London"", true))");
+        }
+
         public override async Task Where_equals_method_int(bool async)
         {
             await base.Where_equals_method_int(async);
@@ -983,7 +993,7 @@ FROM root c
 WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""ReportsTo""] = null))");
         }
 
-        [ConditionalTheory(Skip = "Issue #17246")]
+        [ConditionalTheory]
         public override async Task Where_string_length(bool async)
         {
             await base.Where_string_length(async);
@@ -991,7 +1001,7 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""ReportsTo""] = null))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (LENGTH(c[""City""]) = 6))");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1037,15 +1047,28 @@ FROM root c
 WHERE (c[""Discriminator""] = ""Customer"")");
         }
 
-        [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Where_datetime_utcnow(bool async)
         {
             await base.Where_datetime_utcnow(async);
 
             AssertSql(
-                @"SELECT c
+                @"@__myDatetime_0='2015-04-10T00:00:00'
+
+SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (GetCurrentDateTime() != @__myDatetime_0))");
+        }
+
+        public override async Task Where_datetimeoffset_utcnow(bool async)
+        {
+            await base.Where_datetimeoffset_utcnow(async);
+
+            AssertSql(
+                @"@__myDatetimeOffset_0='2015-04-10T00:00:00-08:00'
+
+SELECT c
+FROM root c
+WHERE ((c[""Discriminator""] = ""Customer"") AND (GetCurrentDateTime() != @__myDatetimeOffset_0))");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -2173,9 +2196,108 @@ FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND c[""OrderID""] IN (10248, 10249))");
         }
 
-        public override Task Where_equals_method_string_with_ignore_case(bool async)
+        public override async Task Filter_with_EF_Property_using_closure_for_property_name(bool async)
         {
-            return AssertTranslationFailed(() => base.Where_equals_method_string_with_ignore_case(async));
+            await base.Filter_with_EF_Property_using_closure_for_property_name(async);
+
+            AssertSql(
+                @"SELECT c
+FROM root c
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+        }
+
+        public override async Task Filter_with_EF_Property_using_function_for_property_name(bool async)
+        {
+            await base.Filter_with_EF_Property_using_function_for_property_name(async);
+
+            AssertSql(
+                @"SELECT c
+FROM root c
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task FirstOrDefault_over_scalar_projection_compared_to_null(bool async)
+        {
+            return base.FirstOrDefault_over_scalar_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task FirstOrDefault_over_scalar_projection_compared_to_not_null(bool async)
+        {
+            return base.FirstOrDefault_over_scalar_projection_compared_to_not_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task FirstOrDefault_over_custom_projection_compared_to_null(bool async)
+        {
+            return base.FirstOrDefault_over_custom_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task FirstOrDefault_over_custom_projection_compared_to_not_null(bool async)
+        {
+            return base.FirstOrDefault_over_custom_projection_compared_to_not_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task SingleOrDefault_over_custom_projection_compared_to_null(bool async)
+        {
+            return base.SingleOrDefault_over_custom_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task SingleOrDefault_over_custom_projection_compared_to_not_null(bool async)
+        {
+            return base.SingleOrDefault_over_custom_projection_compared_to_not_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task LastOrDefault_over_custom_projection_compared_to_null(bool async)
+        {
+            return base.LastOrDefault_over_custom_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task LastOrDefault_over_custom_projection_compared_to_not_null(bool async)
+        {
+            return base.LastOrDefault_over_custom_projection_compared_to_not_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task First_over_custom_projection_compared_to_null(bool async)
+        {
+            return base.First_over_custom_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task First_over_custom_projection_compared_to_not_null(bool async)
+        {
+            return base.First_over_custom_projection_compared_to_not_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task Single_over_custom_projection_compared_to_null(bool async)
+        {
+            return base.Single_over_custom_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task Single_over_custom_projection_compared_to_not_null(bool async)
+        {
+            return base.Single_over_custom_projection_compared_to_not_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task Last_over_custom_projection_compared_to_null(bool async)
+        {
+            return base.Last_over_custom_projection_compared_to_null(async);
+        }
+
+        [ConditionalTheory(Skip = "Issue#17246 (Cross-collection join is not supported)")]
+        public override Task Last_over_custom_projection_compared_to_not_null(bool async)
+        {
+            return base.Last_over_custom_projection_compared_to_not_null(async);
         }
 
         private void AssertSql(params string[] expected)

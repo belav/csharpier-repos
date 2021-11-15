@@ -1,13 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -44,10 +42,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             if (method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
                 && arguments[0].Type == typeof(byte[]))
@@ -76,7 +70,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 return _sqlExpressionFactory.Convert(
                     _sqlExpressionFactory.Function(
                         "SUBSTRING",
-                        new SqlExpression[]
+                        new[]
                         {
                             arguments[0],
                             _sqlExpressionFactory.Constant(1),

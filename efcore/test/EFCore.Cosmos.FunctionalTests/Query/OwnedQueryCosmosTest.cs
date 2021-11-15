@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
@@ -461,9 +461,9 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
         }
 
         [ConditionalTheory(Skip = "No SelectMany, No Ability to Include navigation back to owner #17246")]
-        public override Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(bool async)
+        public override Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(bool async, bool useAsTracking)
         {
-            return base.NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(async);
+            return base.NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(async, useAsTracking);
         }
 
         [ConditionalTheory(Skip = "No Composite index to process custom ordering #17246")]
@@ -488,6 +488,26 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(isAsync);
 
             AssertSql(" ");
+        }
+
+        public override async Task Filter_on_indexer_using_closure(bool async)
+        {
+            await base.Filter_on_indexer_using_closure(async);
+
+            AssertSql(
+                @"SELECT c
+FROM root c
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))");
+        }
+
+        public override async Task Filter_on_indexer_using_function_argument(bool async)
+        {
+            await base.Filter_on_indexer_using_function_argument(async);
+
+            AssertSql(
+                @"SELECT c
+FROM root c
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))");
         }
 
         private void AssertSql(params string[] expected)

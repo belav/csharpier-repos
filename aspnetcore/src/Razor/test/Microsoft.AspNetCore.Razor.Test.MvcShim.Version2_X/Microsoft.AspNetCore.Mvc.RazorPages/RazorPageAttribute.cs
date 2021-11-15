@@ -1,19 +1,18 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
-namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
-{
-    public class RazorPageAttribute : RazorViewAttribute
-    {
-        public RazorPageAttribute(string path, Type viewType, string routeTemplate)
-            : base(path, viewType)
-        {
-            RouteTemplate = routeTemplate;
-        }
+namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-        public string RouteTemplate { get; }
+public class RazorPageAttribute : RazorViewAttribute
+{
+    public RazorPageAttribute(string path, Type viewType, string routeTemplate)
+        : base(path, viewType)
+    {
+        RouteTemplate = routeTemplate;
     }
+
+    public string RouteTemplate { get; }
 }

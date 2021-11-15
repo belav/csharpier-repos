@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -17,11 +17,11 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     /// <summary>
-    ///     <para>
-    ///         A collection that stays in sync with entities of a given type being tracked by
-    ///         a <see cref="DbContext" />. Call <see cref="DbSet{TEntity}.Local" /> to obtain a
-    ///         local view.
-    ///     </para>
+    ///     A collection that stays in sync with entities of a given type being tracked by
+    ///     a <see cref="DbContext" />. Call <see cref="DbSet{TEntity}.Local" /> to obtain a
+    ///     local view.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This local view will stay in sync as entities are added or removed from the context. Likewise, entities
     ///         added to or removed from the local view will automatically be added to or removed
@@ -45,7 +45,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///         Do not use this type directly for data binding. Instead call <see cref="ToObservableCollection" />
     ///         for WPF binding, or <see cref="ToBindingList" /> for WinForms.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     /// <typeparam name="TEntity">The type of the entity in the local view.</typeparam>
     public class LocalView<TEntity> :
         ICollection<TEntity>,
@@ -82,7 +85,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Returns an <see cref="ObservableCollection{T}" /> implementation that stays in sync with this collection.
         ///     Use this for WPF data binding.
         /// </summary>
-        /// <returns> The collection. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <returns>The collection.</returns>
         public virtual ObservableCollection<TEntity> ToObservableCollection()
         {
             if (_observable == null)
@@ -173,7 +179,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Returns an <see cref="IEnumerator{T}" /> for all tracked entities of type TEntity
         ///     that are not marked as deleted.
         /// </summary>
-        /// <returns> An enumerator for the collection. </returns>
+        /// <returns>An enumerator for the collection.</returns>
         public virtual IEnumerator<TEntity> GetEnumerator()
             => _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>().GetEnumerator();
 
@@ -181,21 +187,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Returns an <see cref="IEnumerator{T}" /> for all tracked entities of type TEntity
         ///     that are not marked as deleted.
         /// </summary>
-        /// <returns> An enumerator for the collection. </returns>
+        /// <returns>An enumerator for the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
 
         /// <summary>
-        ///     <para>
-        ///         Adds a new entity to the <see cref="DbContext" />. If the entity is not being tracked or is currently
-        ///         marked as deleted, then it becomes tracked as <see cref="EntityState.Added" />.
-        ///     </para>
+        ///     Adds a new entity to the <see cref="DbContext" />. If the entity is not being tracked or is currently
+        ///     marked as deleted, then it becomes tracked as <see cref="EntityState.Added" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note that only the given entity is tracked. Any related entities discoverable from
         ///         the given entity are not automatically tracked.
         ///     </para>
-        /// </summary>
-        /// <param name="item">The item to start tracking. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="item">The item to start tracking.</param>
         public virtual void Add(TEntity item)
         {
             // For something that is already in the state manager as Unchanged or Modified we don't try
@@ -228,17 +237,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Marks all entities of type TEntity being tracked by the <see cref="DbContext" />
-        ///         as <see cref="EntityState.Deleted" />.
-        ///     </para>
+        ///     Marks all entities of type TEntity being tracked by the <see cref="DbContext" />
+        ///     as <see cref="EntityState.Deleted" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Entities that are currently marked as <see cref="EntityState.Added" /> will be marked
         ///         as <see cref="EntityState.Detached" /> since the Added state indicates that the entity
         ///         has not been saved to the database and hence it does not make sense to attempt to
         ///         delete it from the database.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
         public virtual void Clear()
         {
             foreach (var entity in _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>().ToList())
@@ -251,8 +263,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Returns <see langword="true" /> if the entity is being tracked by the context and has not been
         ///     marked as Deleted.
         /// </summary>
-        /// <param name="item"> The entity to check. </param>
-        /// <returns> <see langword="true" /> if the entity is being tracked by the context and has not been marked as Deleted. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="item">The entity to check.</param>
+        /// <returns><see langword="true" /> if the entity is being tracked by the context and has not been marked as Deleted.</returns>
         public virtual bool Contains(TEntity item)
         {
             var entry = _context.GetDependencies().StateManager.TryGetEntry(item);
@@ -264,8 +279,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Copies to an array all entities of type TEntity that are being tracked and are
         ///     not marked as Deleted.
         /// </summary>
-        /// <param name="array"> The array into which to copy entities. </param>
-        /// <param name="arrayIndex"> The index into the array to start copying. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="array">The array into which to copy entities.</param>
+        /// <param name="arrayIndex">The index into the array to start copying.</param>
         public virtual void CopyTo(TEntity[] array, int arrayIndex)
         {
             foreach (var entity in _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>())
@@ -275,18 +293,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Marks the given entity as <see cref="EntityState.Deleted" />.
-        ///     </para>
+        ///     Marks the given entity as <see cref="EntityState.Deleted" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Entities that are currently marked as <see cref="EntityState.Added" /> will be marked
         ///         as <see cref="EntityState.Detached" /> since the Added state indicates that the entity
         ///         has not been saved to the database and hence it does not make sense to attempt to
         ///         delete it from the database.
         ///     </para>
-        /// </summary>
-        /// <param name="item"> The entity to delete. </param>
-        /// <returns><see langword="true" /> if the entity was being tracked and was not already Deleted. </returns>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="item">The entity to delete.</param>
+        /// <returns><see langword="true" /> if the entity was being tracked and was not already Deleted.</returns>
         public virtual bool Remove(TEntity item)
         {
             var entry = _context.GetDependencies().StateManager.TryGetEntry(item);
@@ -359,6 +380,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     The number of entities of type TEntity that are being tracked and are not marked
         ///     as Deleted.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        /// </remarks>
         public virtual int Count
         {
             get
@@ -407,21 +431,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Raises the <see cref="PropertyChanged" /> event.
         /// </summary>
-        /// <param name="e"> Details of the property that changed. </param>
+        /// <param name="e">Details of the property that changed.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
             => PropertyChanged?.Invoke(this, e);
 
         /// <summary>
         ///     Raises the <see cref="PropertyChanging" /> event.
         /// </summary>
-        /// <param name="e"> Details of the property that is changing. </param>
+        /// <param name="e">Details of the property that is changing.</param>
         protected virtual void OnPropertyChanging(PropertyChangingEventArgs e)
             => PropertyChanging?.Invoke(this, e);
 
         /// <summary>
         ///     Raises the <see cref="CollectionChanged" /> event.
         /// </summary>
-        /// <param name="e"> Details of the change. </param>
+        /// <param name="e">Details of the change.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
             => CollectionChanged?.Invoke(this, e);
 
@@ -435,26 +459,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             => OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item));
 
         /// <summary>
-        ///     Returns an <see cref="BindingList{T}" /> implementation that stays in sync with this collection.
+        ///     Returns a <see cref="BindingList{T}" /> implementation that stays in sync with this collection.
         ///     Use this for WinForms data binding.
         /// </summary>
-        /// <returns> The binding list. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <returns>The binding list.</returns>
         public virtual BindingList<TEntity> ToBindingList()
             => _bindingList ??= new ObservableBackedBindingList<TEntity>(ToObservableCollection());
 
         /// <summary>
-        ///     <para>
-        ///         This method is called by data binding frameworks when attempting to data bind
-        ///         directly to a <see cref="LocalView{TEntity}" />.
-        ///     </para>
-        ///     <para>
-        ///         This implementation always throws an exception as <see cref="LocalView{TEntity}" />
-        ///         does not maintain an ordered list with indexes. Instead call <see cref="ToObservableCollection" />
-        ///         for WPF binding, or <see cref="ToBindingList" /> for WinForms.
-        ///     </para>
+        ///     This method is called by data binding frameworks when attempting to data bind
+        ///     directly to a <see cref="LocalView{TEntity}" />.
         /// </summary>
-        /// <exception cref="NotSupportedException"> Always thrown. </exception>
-        /// <returns> Never returns, always throws an exception. </returns>
+        /// <remarks>
+        ///     This implementation always throws an exception as <see cref="LocalView{TEntity}" />
+        ///     does not maintain an ordered list with indexes. Instead call <see cref="ToObservableCollection" />
+        ///     for WPF binding, or <see cref="ToBindingList" /> for WinForms.
+        /// </remarks>
+        /// <exception cref="NotSupportedException">Always thrown.</exception>
+        /// <returns>Never returns, always throws an exception.</returns>
         IList IListSource.GetList()
             => throw new NotSupportedException(CoreStrings.DataBindingToLocalWithIListSource);
 

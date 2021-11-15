@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
@@ -11,13 +11,17 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     Property extension methods for Cosmos metadata.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information.
+    /// </remarks>
     public static class CosmosPropertyExtensions
     {
         /// <summary>
         ///     Returns the property name that the property is mapped to when targeting Cosmos.
         /// </summary>
-        /// <param name="property"> The property. </param>
-        /// <returns> Returns the property name that the property is mapped to when targeting Cosmos. </returns>
+        /// <param name="property">The property.</param>
+        /// <returns>Returns the property name that the property is mapped to when targeting Cosmos.</returns>
         public static string GetJsonPropertyName(this IReadOnlyProperty property)
             => (string?)property[CosmosAnnotationNames.PropertyName]
                 ?? GetDefaultJsonPropertyName(property);
@@ -46,8 +50,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Sets the property name that the property is mapped to when targeting Cosmos.
         /// </summary>
-        /// <param name="property"> The property. </param>
-        /// <param name="name"> The name to set. </param>
+        /// <param name="property">The property.</param>
+        /// <param name="name">The name to set.</param>
         public static void SetJsonPropertyName(this IMutableProperty property, string? name)
             => property.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.PropertyName,
@@ -56,10 +60,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Sets the property name that the property is mapped to when targeting Cosmos.
         /// </summary>
-        /// <param name="property"> The property. </param>
-        /// <param name="name"> The name to set. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> The configured value. </returns>
+        /// <param name="property">The property.</param>
+        /// <param name="name">The name to set.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>The configured value.</returns>
         public static string? SetJsonPropertyName(
             this IConventionProperty property,
             string? name,
@@ -76,7 +80,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> the property name that the property is mapped to when targeting Cosmos.
         /// </summary>
-        /// <param name="property"> The property. </param>
+        /// <param name="property">The property.</param>
         /// <returns>
         ///     The <see cref="ConfigurationSource" /> the property name that the property is mapped to when targeting Cosmos.
         /// </returns>

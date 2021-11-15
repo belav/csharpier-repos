@@ -1,10 +1,11 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
 
@@ -34,9 +35,36 @@ namespace Microsoft.EntityFrameworkCore.Query
                     () => base.LastOrDefault_when_no_order_by(async))).Message);
         }
 
-        public override Task Contains_with_local_tuple_array_closure(bool async)
+        public override async Task Contains_over_keyless_entity_throws(bool async)
         {
-            return AssertTranslationFailed(() => base.Contains_with_local_tuple_array_closure(async));
+            Assert.Equal(
+                CoreStrings.EntityEqualityOnKeylessEntityNotSupported("==", nameof(CustomerQuery)),
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Contains_over_keyless_entity_throws(async))).Message);
+        }
+
+        public override async Task Min_no_data_subquery(bool async)
+        {
+            Assert.Equal(
+                "Nullable object must have a value.",
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Min_no_data_subquery(async))).Message);
+        }
+
+        public override async Task Max_no_data_subquery(bool async)
+        {
+            Assert.Equal(
+                "Nullable object must have a value.",
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Max_no_data_subquery(async))).Message);
+        }
+
+        public override async Task Average_no_data_subquery(bool async)
+        {
+            Assert.Equal(
+                "Nullable object must have a value.",
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Average_no_data_subquery(async))).Message);
         }
 
         protected virtual bool CanExecuteQueryString

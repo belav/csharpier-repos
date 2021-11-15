@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -144,6 +144,20 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreResources.LogDistinctAfterOrderByWithoutRowLimitingOperatorWarning(new TestLogger<SqlServerLoggingDefinitions>()).GenerateMessage(),
                 Fixture.TestSqlLoggerFactory.Log[1].Message);
+        }
+
+        [ConditionalFact]
+        public virtual void Include_collection_does_not_generate_warning()
+        {
+            using var context = CreateContext();
+            var customer = context.Set<Customer>().Include(e => e.Orders).AsSplitQuery().Single(e => e.CustomerID == "ALFKI");
+
+            Assert.NotNull(customer);
+            Assert.Equal(6, customer.Orders.Count);
+
+            Assert.DoesNotContain(
+                CoreResources.LogRowLimitingOperationWithoutOrderBy(new TestLogger<SqlServerLoggingDefinitions>()).GenerateMessage(),
+                Fixture.TestSqlLoggerFactory.Log.Select(e => e.Message));
         }
 
         [ConditionalFact]

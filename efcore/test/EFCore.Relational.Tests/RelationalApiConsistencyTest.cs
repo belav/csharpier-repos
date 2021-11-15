@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -194,7 +194,31 @@ namespace Microsoft.EntityFrameworkCore
             {
                 typeof(IMutableSequence).GetMethod("set_ClrType"),
                 typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
-                    nameof(RelationalEntityTypeBuilderExtensions.ExcludeTableFromMigrations))
+                    nameof(RelationalEntityTypeBuilderExtensions.ExcludeTableFromMigrations)),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.CanSetFunction),
+                    new Type[] { typeof(IConventionEntityTypeBuilder), typeof(MethodInfo), typeof(bool) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToFunction),
+                    new Type[] { typeof(IConventionEntityTypeBuilder), typeof(string), typeof(bool) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToTable),
+                    new Type[] { typeof(EntityTypeBuilder), typeof(Action<TableBuilder>) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToTable),
+                    new Type[] { typeof(EntityTypeBuilder), typeof(string), typeof(Action<TableBuilder>) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToTable),
+                    new Type[] { typeof(EntityTypeBuilder), typeof(string), typeof(string), typeof(Action<TableBuilder>) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToTable),
+                    new Type[] { typeof(OwnedNavigationBuilder), typeof(Action<TableBuilder>) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToTable),
+                    new Type[] { typeof(OwnedNavigationBuilder), typeof(string), typeof(Action<TableBuilder>) }),
+                typeof(RelationalEntityTypeBuilderExtensions).GetMethod(
+                    nameof(RelationalEntityTypeBuilderExtensions.ToTable),
+                    new Type[] { typeof(OwnedNavigationBuilder), typeof(string), typeof(string), typeof(Action<TableBuilder>) })
             };
 
             public override HashSet<MethodInfo> AsyncMethodExceptions { get; } = new()

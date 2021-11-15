@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage.Internal
 {
@@ -28,8 +27,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             IReadOnlyList<IRelationalParameter> relationalParameters)
             : base(invariantName)
         {
-            Check.NotNull(relationalParameters, nameof(relationalParameters));
-
             RelationalParameters = relationalParameters;
         }
 
@@ -49,9 +46,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public override void AddDbParameter(DbCommand command, object? value)
         {
-            Check.NotNull(command, nameof(command));
-            Check.NotNull(value, nameof(value));
-
             if (value is object[] innerValues)
             {
                 if (innerValues.Length < RelationalParameters.Count)

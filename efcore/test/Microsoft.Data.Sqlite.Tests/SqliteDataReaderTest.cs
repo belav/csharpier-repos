@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -688,6 +688,30 @@ namespace Microsoft.Data.Sqlite
         public void GetDateTimeOffset_throws_when_null()
             => GetX_throws_when_null(r => ((SqliteDataReader)r).GetDateTimeOffset(0));
 
+        [Fact]
+        public void GetFieldValue_of_DateOnly_works()
+            => GetFieldValue_works(
+                "SELECT '2014-04-15';",
+                new DateOnly(2014, 4, 15));
+
+        [Fact]
+        public void GetFieldValue_of_DateOnly_works_with_real()
+            => GetFieldValue_works(
+                "SELECT julianday('2014-04-15');",
+                new DateOnly(2014, 4, 15));
+
+        [Fact]
+        public void GetFieldValue_of_TimeOnly_works()
+            => GetFieldValue_works(
+                "SELECT '13:10:15';",
+                new TimeOnly(13, 10, 15));
+
+        [Fact]
+        public void GetFieldValue_of_TimeOnly_works_with_milliseconds()
+            => GetFieldValue_works(
+                "SELECT '13:10:15.5';",
+                new TimeOnly(13, 10, 15, 500));
+
         [Theory]
         [InlineData("SELECT 1;", "INTEGER")]
         [InlineData("SELECT 3.14;", "REAL")]
@@ -1294,6 +1318,18 @@ namespace Microsoft.Data.Sqlite
         }
 
         [Fact]
+        public void GetOrdinal_throws_when_ambiguous()
+        {
+            using var connection = new SqliteConnection("Data Source=:memory:");
+            connection.Open();
+
+            using var reader = connection.ExecuteReader("SELECT 1 AS Id, 2 AS ID");
+            var ex = Assert.Throws<InvalidOperationException>(() => reader.GetOrdinal("id"));
+
+            Assert.Contains(Resources.AmbiguousColumnName("id", "Id", "ID"), ex.Message);
+        }
+
+        [Fact]
         public void GetOrdinal_throws_when_closed()
         {
             X_throws_when_closed(r => r.GetOrdinal(null!), nameof(SqliteDataReader.GetOrdinal));
@@ -1583,19 +1619,22 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        [Fact]
-        public void Item_by_name_works()
+        [Theory]
+        [InlineData("SELECT 1 AS Id;", "Id", 1L)]
+        [InlineData("SELECT 1 AS Id;", "id", 1L)]
+        [InlineData("SELECT 1 AS Id, 2 AS id;", "id", 2L)]
+        public void Item_by_name_works(string query, string column, long expected)
         {
             using (var connection = new SqliteConnection("Data Source=:memory:"))
             {
                 connection.Open();
 
-                using (var reader = connection.ExecuteReader("SELECT 1 AS Id;"))
+                using (var reader = connection.ExecuteReader(query))
                 {
                     var hasData = reader.Read();
                     Assert.True(hasData);
 
-                    Assert.Equal(1L, reader["Id"]);
+                    Assert.Equal(expected, reader[column]);
                 }
             }
         }

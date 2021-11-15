@@ -1,11 +1,10 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 #nullable disable
 
@@ -19,7 +18,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     /// </summary>
     public class RandomTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo = typeof(DbFunctionsExtensions).GetRuntimeMethod(nameof(DbFunctionsExtensions.Random), new[] { typeof(DbFunctions) });
+        private static readonly MethodInfo _methodInfo = typeof(DbFunctionsExtensions).GetRuntimeMethod(
+            nameof(DbFunctionsExtensions.Random), new[] { typeof(DbFunctions) });
+
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>
@@ -44,17 +45,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
-            return _methodInfo.Equals(method)
+            => _methodInfo.Equals(method)
                 ? _sqlExpressionFactory.Function(
                     "RAND",
                     Array.Empty<SqlExpression>(),
                     method.ReturnType)
                 : null;
-        }
     }
 }

@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -25,10 +24,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlConstantExpression" /> class.
         /// </summary>
-        /// <param name="constantExpression"> A <see cref="ConstantExpression" />. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="constantExpression">A <see cref="ConstantExpression" />.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlConstantExpression(ConstantExpression constantExpression, RelationalTypeMapping? typeMapping)
-            : base(Check.NotNull(constantExpression, nameof(constantExpression)).Type.UnwrapNullableType(), typeMapping)
+            : base(constantExpression.Type.UnwrapNullableType(), typeMapping)
         {
             _constantExpression = constantExpression;
         }
@@ -42,26 +41,18 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Applies supplied type mapping to this expression.
         /// </summary>
-        /// <param name="typeMapping"> A relational type mapping to apply. </param>
-        /// <returns> A new expression which has supplied type mapping. </returns>
+        /// <param name="typeMapping">A relational type mapping to apply.</param>
+        /// <returns>A new expression which has supplied type mapping.</returns>
         public virtual SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
             => new SqlConstantExpression(_constantExpression, typeMapping);
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
-        {
-            Check.NotNull(visitor, nameof(visitor));
-
-            return this;
-        }
+            => this;
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
-        {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
-            Print(Value, expressionPrinter);
-        }
+            => Print(Value, expressionPrinter);
 
         private void Print(object? value, ExpressionPrinter expressionPrinter)
             => expressionPrinter.Append(TypeMapping?.GenerateSqlLiteral(value) ?? Value?.ToString() ?? "NULL");

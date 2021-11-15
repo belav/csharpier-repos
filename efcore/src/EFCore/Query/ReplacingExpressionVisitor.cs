@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -20,6 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public class ReplacingExpressionVisitor : ExpressionVisitor
     {
         private readonly IReadOnlyList<Expression> _originals;
@@ -28,29 +32,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Replaces one expression with another in given expression tree.
         /// </summary>
-        /// <param name="original"> The expression to replace. </param>
-        /// <param name="replacement"> The expression to be used as replacement. </param>
-        /// <param name="tree"> The expression tree in which replacement is going to be performed. </param>
-        /// <returns> An expression tree with replacements made. </returns>
+        /// <param name="original">The expression to replace.</param>
+        /// <param name="replacement">The expression to be used as replacement.</param>
+        /// <param name="tree">The expression tree in which replacement is going to be performed.</param>
+        /// <returns>An expression tree with replacements made.</returns>
         public static Expression Replace(Expression original, Expression replacement, Expression tree)
-        {
-            Check.NotNull(original, nameof(original));
-            Check.NotNull(replacement, nameof(replacement));
-            Check.NotNull(tree, nameof(tree));
-
-            return new ReplacingExpressionVisitor(new[] { original }, new[] { replacement }).Visit(tree);
-        }
+            => new ReplacingExpressionVisitor(new[] { original }, new[] { replacement }).Visit(tree);
 
         /// <summary>
         ///     Creates a new instance of the <see cref="ReplacingExpressionVisitor" /> class.
         /// </summary>
-        /// <param name="originals"> A list of original expressions to replace. </param>
-        /// <param name="replacements"> A list of expressions to be used as replacements. </param>
+        /// <param name="originals">A list of original expressions to replace.</param>
+        /// <param name="replacements">A list of expressions to be used as replacements.</param>
         public ReplacingExpressionVisitor(IReadOnlyList<Expression> originals, IReadOnlyList<Expression> replacements)
         {
-            Check.NotNull(originals, nameof(originals));
-            Check.NotNull(replacements, nameof(replacements));
-
             _originals = originals;
             _replacements = replacements;
         }
@@ -82,8 +77,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitMember(MemberExpression memberExpression)
         {
-            Check.NotNull(memberExpression, nameof(memberExpression));
-
             var innerExpression = Visit(memberExpression.Expression);
 
             if (innerExpression is GroupByShaperExpression groupByShaperExpression
@@ -115,8 +108,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
         {
-            Check.NotNull(methodCallExpression, nameof(methodCallExpression));
-
             if (methodCallExpression.TryGetEFPropertyArguments(out var entityExpression, out var propertyName))
             {
                 var newEntityExpression = Visit(entityExpression);
@@ -137,8 +128,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return memberAssignment.Expression;
                 }
 
-                // TODO-Nullable bug
-                return methodCallExpression.Update(null!, new[] { newEntityExpression, methodCallExpression.Arguments[1] });
+                return methodCallExpression.Update(null, new[] { newEntityExpression, methodCallExpression.Arguments[1] });
             }
 
             return base.VisitMethodCall(methodCallExpression);

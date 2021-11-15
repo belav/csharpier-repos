@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,19 +11,24 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     Relational database specific extension methods for relationship builders.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public static class RelationalForeignKeyBuilderExtensions
     {
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="referenceCollectionBuilder"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceCollectionBuilder">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ReferenceCollectionBuilder HasConstraintName(
             this ReferenceCollectionBuilder referenceCollectionBuilder,
             string? name)
         {
-            Check.NotNull(referenceCollectionBuilder, nameof(referenceCollectionBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
             referenceCollectionBuilder.Metadata.SetConstraintName(name);
@@ -34,11 +39,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="referenceCollectionBuilder"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        /// <typeparam name="TEntity"> The principal entity type in this relationship. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The dependent entity type in this relationship. </typeparam>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceCollectionBuilder">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        /// <typeparam name="TEntity">The principal entity type in this relationship.</typeparam>
+        /// <typeparam name="TRelatedEntity">The dependent entity type in this relationship.</typeparam>
         public static ReferenceCollectionBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
             this ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder,
             string? name)
@@ -50,14 +58,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="referenceReferenceBuilder"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceReferenceBuilder">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ReferenceReferenceBuilder HasConstraintName(
             this ReferenceReferenceBuilder referenceReferenceBuilder,
             string? name)
         {
-            Check.NotNull(referenceReferenceBuilder, nameof(referenceReferenceBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
             referenceReferenceBuilder.Metadata.SetConstraintName(name);
@@ -68,11 +78,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="referenceReferenceBuilder"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        /// <typeparam name="TEntity"> The entity type on one end of the relationship. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type on the other end of the relationship. </typeparam>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceReferenceBuilder">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        /// <typeparam name="TEntity">The entity type on one end of the relationship.</typeparam>
+        /// <typeparam name="TRelatedEntity">The entity type on the other end of the relationship.</typeparam>
         public static ReferenceReferenceBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
             this ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder,
             string? name)
@@ -84,9 +97,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="ownershipBuilder"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="ownershipBuilder">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static OwnershipBuilder HasConstraintName(
             this OwnershipBuilder ownershipBuilder,
             string? name)
@@ -101,11 +117,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="ownershipBuilder"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        /// <typeparam name="TEntity"> The entity type on one end of the relationship. </typeparam>
-        /// <typeparam name="TDependentEntity"> The entity type on the other end of the relationship. </typeparam>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="ownershipBuilder">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        /// <typeparam name="TEntity">The entity type on one end of the relationship.</typeparam>
+        /// <typeparam name="TDependentEntity">The entity type on the other end of the relationship.</typeparam>
         public static OwnershipBuilder<TEntity, TDependentEntity> HasConstraintName<TEntity, TDependentEntity>(
             this OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder,
             string? name)
@@ -117,9 +136,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
         /// </summary>
-        /// <param name="relationship"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="relationship">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -142,15 +164,17 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the foreign key constraint name can be set for this relationship
         ///     from the current configuration source
         /// </summary>
-        /// <param name="relationship"> The builder being used to configure the relationship. </param>
-        /// <param name="name"> The name of the foreign key constraint. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="relationship">The builder being used to configure the relationship.</param>
+        /// <param name="name">The name of the foreign key constraint.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetConstraintName(
             this IConventionForeignKeyBuilder relationship,
             string? name,
             bool fromDataAnnotation = false)
-            => Check.NotNull(relationship, nameof(relationship))
-                .CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
+            => relationship.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
     }
 }

@@ -2,14 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace System.CommandLine.Invocation
 {
     internal class FeatureRegistration
     {
-        private static readonly string _assemblyName = (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).FullName;
+        private static readonly string _assemblyName = RootCommand.GetAssembly().FullName;
+
         private readonly FileInfo _sentinelFile;
 
         public FeatureRegistration(string featureName)

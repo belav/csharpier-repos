@@ -110,6 +110,7 @@ namespace System.CommandLine.Hosting.Tests
                 {
                     Handler = CommandHandler.Create<IHost>(Execute),
                 })
+                .EnableLegacyDoubleDashBehavior()
                 .UseHost(host =>
                 {
                     var invocation = (InvocationContext)host.Properties[typeof(InvocationContext)];
@@ -147,6 +148,7 @@ namespace System.CommandLine.Hosting.Tests
                 {
                     Handler = CommandHandler.Create<IHost>(Execute),
                 })
+                .EnableLegacyDoubleDashBehavior()
                 .UseHost(args =>
                 {
                     var host = new HostBuilder();
@@ -300,7 +302,7 @@ namespace System.CommandLine.Hosting.Tests
             InvocationContext ctxHosting = null;
 
             var parser = new CommandLineBuilder()
-                .UseMiddleware((context, next) =>
+                .AddMiddleware((context, next) =>
                 {
                     ctxCustom = context;
                     return next(context);
@@ -323,7 +325,7 @@ namespace System.CommandLine.Hosting.Tests
             InvocationContext ctxConfigureServices = null;
 
             var parser = new CommandLineBuilder()
-                .UseMiddleware((context, next) =>
+                .AddMiddleware((context, next) =>
                 {
                     ctxCustom = context;
                     return next(context);
@@ -373,7 +375,7 @@ namespace System.CommandLine.Hosting.Tests
             bool hostAsserted = false;
             var parser = new CommandLineBuilder()
                 .UseHost()
-                .UseMiddleware((invCtx, next) =>
+                .AddMiddleware((invCtx, next) =>
                 {
                     IHost host = invCtx.GetHost();
                     host.Should().NotBeNull();
@@ -393,7 +395,7 @@ namespace System.CommandLine.Hosting.Tests
         {
             bool hostAsserted = false;
             var parser = new CommandLineBuilder()
-                .UseMiddleware((invCtx, next) =>
+                .AddMiddleware((invCtx, next) =>
                 {
                     IHost host = invCtx.GetHost();
                     host.Should().BeNull();

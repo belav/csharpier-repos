@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -15,7 +15,14 @@ namespace Microsoft.EntityFrameworkCore.Internal
     public struct DbContextLease
     {
         private IDbContextPool? _contextPool;
-        private readonly bool _standalone;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public bool IsStandalone { get; }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,12 +41,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public DbContextLease(IDbContextPool contextPool, bool standalone)
         {
             _contextPool = contextPool;
-            _standalone = standalone;
+            IsStandalone = standalone;
 
             var context = _contextPool.Rent();
             Context = context;
-
-            context.SetLease(this);
         }
 
         /// <summary>
@@ -65,17 +70,22 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public bool ContextDisposed()
+        public void ContextDisposed()
         {
-            if (_standalone)
+            if (IsStandalone)
             {
                 Release();
-
-                return true;
             }
-
-            return false;
         }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public ValueTask ContextDisposedAsync()
+            => IsStandalone ? ReleaseAsync() : default;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,7 +108,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public ValueTask ReleaseAsync()
-            => Release(out var pool, out var context) ? pool.ReturnAsync(context) : default;
+            => Release(out var pool, out var context)
+                ? pool.ReturnAsync(context)
+                : default;
 
         private bool Release([NotNullWhen(true)] out IDbContextPool? pool, [NotNullWhen(true)] out IDbContextPoolable? context)
         {

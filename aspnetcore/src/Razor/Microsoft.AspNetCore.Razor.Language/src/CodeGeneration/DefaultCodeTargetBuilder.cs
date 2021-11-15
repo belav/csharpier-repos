@@ -1,30 +1,29 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
+namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
+
+internal class DefaultCodeTargetBuilder : CodeTargetBuilder
 {
-    internal class DefaultCodeTargetBuilder : CodeTargetBuilder
+    public DefaultCodeTargetBuilder(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
     {
-        public DefaultCodeTargetBuilder(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
-        {
-            CodeDocument = codeDocument;
-            Options = options;
+        CodeDocument = codeDocument;
+        Options = options;
 
-            TargetExtensions = new List<ICodeTargetExtension>();
-        }
+        TargetExtensions = new List<ICodeTargetExtension>();
+    }
 
-        public override RazorCodeDocument CodeDocument { get; }
+    public override RazorCodeDocument CodeDocument { get; }
 
-        public override RazorCodeGenerationOptions Options { get; }
+    public override RazorCodeGenerationOptions Options { get; }
 
-        public override ICollection<ICodeTargetExtension> TargetExtensions { get; }
+    public override ICollection<ICodeTargetExtension> TargetExtensions { get; }
 
-        public override CodeTarget Build()
-        {
-            return new DefaultCodeTarget(Options, TargetExtensions);
-        }
+    public override CodeTarget Build()
+    {
+        return new DefaultCodeTarget(Options, TargetExtensions);
     }
 }

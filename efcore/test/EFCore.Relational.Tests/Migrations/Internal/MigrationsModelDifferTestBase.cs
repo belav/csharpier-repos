@@ -1,12 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -57,16 +55,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var sourceModelBuilder = CreateModelBuilder(skipSourceConventions);
             buildCommonAction(sourceModelBuilder);
             buildSourceAction(sourceModelBuilder);
-            var sourceModel = sourceModelBuilder.FinalizeModel();
-            var sourceOptionsBuilder = TestHelpers
-                .AddProviderOptions(new DbContextOptionsBuilder())
-                .UseModel(sourceModel)
-                .EnableSensitiveDataLogging();
 
             var targetModelBuilder = CreateModelBuilder(skipConventions: false);
             buildCommonAction(targetModelBuilder);
             buildTargetAction(targetModelBuilder);
-            var targetModel = targetModelBuilder.FinalizeModel();
+
+            var sourceModel = sourceModelBuilder.FinalizeModel(designTime: true, skipValidation: true);
+            var targetModel = targetModelBuilder.FinalizeModel(designTime: true, skipValidation: true);
+
             var targetOptionsBuilder = TestHelpers
                 .AddProviderOptions(new DbContextOptionsBuilder())
                 .UseModel(targetModel)
@@ -74,14 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             if (builderOptionsAction != null)
             {
-                builderOptionsAction(sourceOptionsBuilder);
                 builderOptionsAction(targetOptionsBuilder);
             }
-
-            var modelRuntimeInitializer = TestHelpers.CreateContextServices().GetService<IModelRuntimeInitializer>();
-            sourceModel = modelRuntimeInitializer.Initialize(sourceModel, designTime: true, validationLogger: null);
-            targetModel = modelRuntimeInitializer.Initialize(targetModel, designTime: true, validationLogger: null);
-
             var modelDiffer = CreateModelDiffer(targetOptionsBuilder.Options);
 
             var operationsUp = modelDiffer.GetDifferences(sourceModel.GetRelationalModel(), targetModel.GetRelationalModel());
@@ -89,8 +79,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             if (assertActionDown != null)
             {
-                modelDiffer = CreateModelDiffer(sourceOptionsBuilder.Options);
-
                 var operationsDown = modelDiffer.GetDifferences(targetModel.GetRelationalModel(), sourceModel.GetRelationalModel());
                 assertActionDown(operationsDown);
             }
@@ -148,10 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
         protected abstract TestHelpers TestHelpers { get; }
 
-        protected virtual ModelBuilder CreateModelBuilder(bool skipConventions)
-            => skipConventions
-                ? new ModelBuilder(new ConventionSet())
-                : TestHelpers.CreateConventionBuilder();
+        protected virtual TestHelpers.TestModelBuilder CreateModelBuilder(bool skipConventions)
+            => TestHelpers.CreateConventionBuilder(configure: skipConventions ? c => c.RemoveAllConventions() : null);
 
         protected virtual MigrationsModelDiffer CreateModelDiffer(DbContextOptions options)
         {

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -119,6 +119,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             {
                 Add(new OnForeignKeyRemovedNode(entityTypeBuilder, foreignKey));
                 return foreignKey;
+            }
+
+            public override IConventionNavigation? OnForeignKeyNullNavigationSet(
+                IConventionForeignKeyBuilder relationshipBuilder,
+                bool pointsToPrincipal)
+            {
+                Add(new OnForeignKeyNullNavigationSetNode(relationshipBuilder, pointsToPrincipal));
+                return null;
             }
 
             public override IConventionAnnotation? OnForeignKeyAnnotationChanged(
@@ -600,6 +608,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
 
             public override void Run(ConventionDispatcher dispatcher)
                 => dispatcher._immediateConventionScope.OnForeignKeyOwnershipChanged(RelationshipBuilder);
+        }
+
+        private sealed class OnForeignKeyNullNavigationSetNode : ConventionNode
+        {
+            public OnForeignKeyNullNavigationSetNode(IConventionForeignKeyBuilder relationshipBuilder, bool pointsToPrincipal)
+            {
+                RelationshipBuilder = relationshipBuilder;
+                PointsToPrincipal = pointsToPrincipal;
+            }
+
+            public IConventionForeignKeyBuilder RelationshipBuilder { get; }
+            public bool PointsToPrincipal { get; }
+
+            public override void Run(ConventionDispatcher dispatcher)
+                => dispatcher._immediateConventionScope.OnForeignKeyNullNavigationSet(RelationshipBuilder, PointsToPrincipal);
         }
 
         private sealed class OnForeignKeyPrincipalEndChangedNode : ConventionNode

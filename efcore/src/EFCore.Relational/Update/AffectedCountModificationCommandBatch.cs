@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -21,12 +21,16 @@ namespace Microsoft.EntityFrameworkCore.Update
     ///         This type is typically used by database providers; it is generally not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public abstract class AffectedCountModificationCommandBatch : ReaderModificationCommandBatch
     {
         /// <summary>
         ///     Creates a new <see cref="AffectedCountModificationCommandBatch" /> instance.
         /// </summary>
-        /// <param name="dependencies"> Service dependencies. </param>
+        /// <param name="dependencies">Service dependencies.</param>
         protected AffectedCountModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
             : base(dependencies)
         {
@@ -35,7 +39,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.Execute" />.
         /// </summary>
-        /// <param name="reader"> The data reader. </param>
+        /// <param name="reader">The data reader.</param>
         protected override void Consume(RelationalDataReader reader)
         {
             Check.DebugAssert(
@@ -84,7 +88,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                     "Expected " + expectedResultSetCount + " result sets, got " + actualResultSetCount);
 #endif
             }
-            catch (Exception ex) when (!(ex is DbUpdateException))
+            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
@@ -96,10 +100,10 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.ExecuteAsync" />.
         /// </summary>
-        /// <param name="reader"> The data reader. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A task that represents the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="reader">The data reader.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         protected override async Task ConsumeAsync(
             RelationalDataReader reader,
             CancellationToken cancellationToken = default)
@@ -150,7 +154,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                     "Expected " + expectedResultSetCount + " result sets, got " + actualResultSetCount);
 #endif
             }
-            catch (Exception ex) when (!(ex is DbUpdateException))
+            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
@@ -163,9 +167,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.Execute" />,
         ///     propagating values back into the <see cref="ModificationCommand" />.
         /// </summary>
-        /// <param name="commandIndex"> The ordinal of the command being consumed. </param>
-        /// <param name="reader"> The data reader. </param>
-        /// <returns> The ordinal of the next command that must be consumed. </returns>
+        /// <param name="commandIndex">The ordinal of the command being consumed.</param>
+        /// <param name="reader">The data reader.</param>
+        /// <returns>The ordinal of the next command that must be consumed.</returns>
         protected virtual int ConsumeResultSetWithPropagation(int commandIndex, RelationalDataReader reader)
         {
             var rowsAffected = 0;
@@ -201,14 +205,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.ExecuteAsync" />,
         ///     propagating values back into the <see cref="ModificationCommand" />.
         /// </summary>
-        /// <param name="commandIndex"> The ordinal of the command being consumed. </param>
-        /// <param name="reader"> The data reader. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="commandIndex">The ordinal of the command being consumed.</param>
+        /// <param name="reader">The data reader.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation.
         ///     The task contains the ordinal of the next command that must be consumed.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         protected virtual async Task<int> ConsumeResultSetWithPropagationAsync(
             int commandIndex,
             RelationalDataReader reader,
@@ -247,9 +251,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.Execute" />
         ///     without propagating values back into the <see cref="ModificationCommand" />.
         /// </summary>
-        /// <param name="commandIndex"> The ordinal of the command being consumed. </param>
-        /// <param name="reader"> The data reader. </param>
-        /// <returns> The ordinal of the next command that must be consumed. </returns>
+        /// <param name="commandIndex">The ordinal of the command being consumed.</param>
+        /// <param name="reader">The data reader.</param>
+        /// <returns>The ordinal of the next command that must be consumed.</returns>
         protected virtual int ConsumeResultSetWithoutPropagation(int commandIndex, RelationalDataReader reader)
         {
             var expectedRowsAffected = 1;
@@ -281,14 +285,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.ExecuteAsync" />
         ///     without propagating values back into the <see cref="ModificationCommand" />.
         /// </summary>
-        /// <param name="commandIndex"> The ordinal of the command being consumed. </param>
-        /// <param name="reader"> The data reader. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="commandIndex">The ordinal of the command being consumed.</param>
+        /// <param name="reader">The data reader.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous operation.
         ///     The task contains the ordinal of the next command that must be consumed.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         protected virtual async Task<int> ConsumeResultSetWithoutPropagationAsync(
             int commandIndex,
             RelationalDataReader reader,
@@ -333,9 +337,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Throws an exception indicating the command affected an unexpected number of rows.
         /// </summary>
-        /// <param name="commandIndex"> The ordinal of the command. </param>
-        /// <param name="expectedRowsAffected"> The expected number of rows affected. </param>
-        /// <param name="rowsAffected"> The actual number of rows affected. </param>
+        /// <param name="commandIndex">The ordinal of the command.</param>
+        /// <param name="expectedRowsAffected">The expected number of rows affected.</param>
+        /// <param name="rowsAffected">The actual number of rows affected.</param>
         protected virtual void ThrowAggregateUpdateConcurrencyException(
             int commandIndex,
             int expectedRowsAffected,

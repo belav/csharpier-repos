@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,32 +9,33 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design
 {
     /// <summary>
     ///     Used to generate C# code for migrations.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time services</see> for more information.
+    /// </remarks>
     public class CSharpMigrationsGenerator : MigrationsCodeGenerator
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="CSharpMigrationsGenerator" /> class.
         /// </summary>
-        /// <param name="dependencies"> The base dependencies. </param>
-        /// <param name="csharpDependencies"> The dependencies. </param>
+        /// <param name="dependencies">The base dependencies.</param>
+        /// <param name="csharpDependencies">The dependencies.</param>
         public CSharpMigrationsGenerator(
             MigrationsCodeGeneratorDependencies dependencies,
             CSharpMigrationsGeneratorDependencies csharpDependencies)
             : base(dependencies)
         {
-            Check.NotNull(csharpDependencies, nameof(csharpDependencies));
-
             CSharpDependencies = csharpDependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual CSharpMigrationsGeneratorDependencies CSharpDependencies { get; }
 
@@ -58,21 +59,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates the migration code.
         /// </summary>
-        /// <param name="migrationNamespace"> The migration's namespace. </param>
-        /// <param name="migrationName"> The migration's name. </param>
-        /// <param name="upOperations"> The migration's up operations. </param>
-        /// <param name="downOperations"> The migration's down operations. </param>
-        /// <returns> The migration code. </returns>
+        /// <param name="migrationNamespace">The migration's namespace.</param>
+        /// <param name="migrationName">The migration's name.</param>
+        /// <param name="upOperations">The migration's up operations.</param>
+        /// <param name="downOperations">The migration's down operations.</param>
+        /// <returns>The migration code.</returns>
         public override string GenerateMigration(
             string? migrationNamespace,
             string migrationName,
             IReadOnlyList<MigrationOperation> upOperations,
             IReadOnlyList<MigrationOperation> downOperations)
         {
-            Check.NotEmpty(migrationName, nameof(migrationName));
-            Check.NotNull(upOperations, nameof(upOperations));
-            Check.NotNull(downOperations, nameof(downOperations));
-
             var builder = new IndentedStringBuilder();
             var namespaces = new List<string> { "Microsoft.EntityFrameworkCore.Migrations" };
             namespaces.AddRange(GetNamespaces(upOperations.Concat(downOperations)));
@@ -83,6 +80,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .Append(n)
                     .AppendLine(";");
             }
+
+            builder
+                .AppendLine()
+                .AppendLine("#nullable disable");
 
             if (!string.IsNullOrEmpty(migrationNamespace))
             {
@@ -131,7 +132,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .AppendLine("}");
             }
 
-
             return builder.ToString();
         }
 
@@ -143,12 +143,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates the migration metadata code.
         /// </summary>
-        /// <param name="migrationNamespace"> The migration's namespace. </param>
-        /// <param name="contextType"> The migration's <see cref="DbContext" /> type. </param>
-        /// <param name="migrationName"> The migration's name. </param>
-        /// <param name="migrationId"> The migration's ID. </param>
-        /// <param name="targetModel"> The migration's target model. </param>
-        /// <returns> The migration metadata code. </returns>
+        /// <param name="migrationNamespace">The migration's namespace.</param>
+        /// <param name="contextType">The migration's <see cref="DbContext" /> type.</param>
+        /// <param name="migrationName">The migration's name.</param>
+        /// <param name="migrationId">The migration's ID.</param>
+        /// <param name="targetModel">The migration's target model.</param>
+        /// <returns>The migration metadata code.</returns>
         public override string GenerateMetadata(
             string? migrationNamespace,
             Type contextType,
@@ -156,11 +156,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string migrationId,
             IModel targetModel)
         {
-            Check.NotNull(contextType, nameof(contextType));
-            Check.NotEmpty(migrationName, nameof(migrationName));
-            Check.NotEmpty(migrationId, nameof(migrationId));
-            Check.NotNull(targetModel, nameof(targetModel));
-
             var builder = new IndentedStringBuilder();
             AppendAutoGeneratedTag(builder);
             var namespaces = new List<string>
@@ -183,6 +178,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .Append(n)
                     .AppendLine(";");
             }
+
+            builder
+                .AppendLine()
+                .AppendLine("#nullable disable");
 
             if (!string.IsNullOrEmpty(migrationNamespace))
             {
@@ -238,22 +237,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates the model snapshot code.
         /// </summary>
-        /// <param name="modelSnapshotNamespace"> The model snapshot's namespace. </param>
-        /// <param name="contextType"> The model snapshot's <see cref="DbContext" /> type. </param>
-        /// <param name="modelSnapshotName"> The model snapshot's name. </param>
-        /// <param name="model"> The model. </param>
-        /// <returns> The model snapshot code. </returns>
+        /// <param name="modelSnapshotNamespace">The model snapshot's namespace.</param>
+        /// <param name="contextType">The model snapshot's <see cref="DbContext" /> type.</param>
+        /// <param name="modelSnapshotName">The model snapshot's name.</param>
+        /// <param name="model">The model.</param>
+        /// <returns>The model snapshot code.</returns>
         public override string GenerateSnapshot(
             string? modelSnapshotNamespace,
             Type contextType,
             string modelSnapshotName,
             IModel model)
         {
-            Check.NotEmpty(modelSnapshotNamespace, nameof(modelSnapshotNamespace));
-            Check.NotNull(contextType, nameof(contextType));
-            Check.NotEmpty(modelSnapshotName, nameof(modelSnapshotName));
-            Check.NotNull(model, nameof(model));
-
             var builder = new IndentedStringBuilder();
             AppendAutoGeneratedTag(builder);
             var namespaces = new List<string>
@@ -275,6 +269,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .Append(n)
                     .AppendLine(";");
             }
+
+            builder
+                .AppendLine()
+                .AppendLine("#nullable disable");
 
             if (!string.IsNullOrEmpty(modelSnapshotNamespace))
             {

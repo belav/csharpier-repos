@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -799,26 +799,35 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .OrderBy(c => c.CustomerID)
                     .Select(
                         c => new CustomerViewModel(
-                            c.CustomerID, c.City,
+                            c.CustomerID,
+                            c.City,
                             c.Orders.SelectMany(
                                     o => o.OrderDetails
                                         .Where(od => od.OrderID < 11000)
                                         .Select(od => new OrderDetailViewModel(od.OrderID, od.ProductID)))
                                 .ToArray())),
-                assertOrder: true);
+                assertOrder: true,
+                elementAsserter: (e, a) =>
+                {
+                    Assert.Equal(e.CustomerID, a.CustomerID);
+                    Assert.Equal(e.City, a.City);
+                    Assert.Equal(
+                        e.Views.OrderBy(od => od.OrderID).ThenBy(od => od.ProductID),
+                        a.Views.OrderBy(od => od.OrderID).ThenBy(od => od.ProductID));
+                });
         }
 
         private class CustomerViewModel
         {
-            private readonly string _customerID;
-            private readonly string _city;
-            private readonly OrderDetailViewModel[] _views;
+            public string CustomerID { get; }
+            public string City { get; }
+            public OrderDetailViewModel[] Views { get; }
 
             public CustomerViewModel(string customerID, string city, OrderDetailViewModel[] views)
             {
-                _customerID = customerID;
-                _city = city;
-                _views = views;
+                CustomerID = customerID;
+                City = city;
+                Views = views;
             }
 
             public override bool Equals(object obj)
@@ -834,23 +843,23 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             private bool Equals(CustomerViewModel customerViewModel)
-                => _customerID == customerViewModel._customerID
-                    && _city == customerViewModel._city
-                    && _views.SequenceEqual(customerViewModel._views);
+                => CustomerID == customerViewModel.CustomerID
+                    && City == customerViewModel.City
+                    && Views.SequenceEqual(customerViewModel.Views);
 
             public override int GetHashCode()
-                => HashCode.Combine(_customerID, _city);
+                => HashCode.Combine(CustomerID, City);
         }
 
         private class OrderDetailViewModel
         {
-            private readonly int _orderID;
-            private readonly int _productID;
+            public int OrderID { get; }
+            public int ProductID { get; }
 
             public OrderDetailViewModel(int orderID, int productID)
             {
-                _orderID = orderID;
-                _productID = productID;
+                OrderID = orderID;
+                ProductID = productID;
             }
 
             public override bool Equals(object obj)
@@ -866,11 +875,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             private bool Equals(OrderDetailViewModel orderDetailViewModel)
-                => _orderID == orderDetailViewModel._orderID
-                    && _productID == orderDetailViewModel._productID;
+                => OrderID == orderDetailViewModel.OrderID
+                    && ProductID == orderDetailViewModel.ProductID;
 
             public override int GetHashCode()
-                => HashCode.Combine(_orderID, _productID);
+                => HashCode.Combine(OrderID, ProductID);
         }
 
         [ConditionalTheory]
@@ -968,6 +977,40 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(i => i.CustomerID + i.City)
                         .Take(2)),
                 entryCount: 2);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Take_in_collection_projection_with_FirstOrDefault_on_top_level(bool async)
+        {
+            return AssertFirstOrDefault(
+                async,
+                ss => ss.Set<Customer>()
+                    .Select(c => new
+                    {
+                        Orders = c.Orders.OrderBy(e => e.OrderDate).Take(1)
+                            .Select(o => new
+                            {
+                                Title = o.CustomerID == o.Customer.City ? "A" : "B"
+                            }).ToList()
+                    }),
+                asserter: (e, a) => AssertCollection(e.Orders, a.Orders, ordered: true));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Condition_on_entity_with_include(bool async)
+        {
+            return AssertQuery(
+                async,
+                ss => from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("F"))
+                      join o in ss.Set<Order>().Include(o => o.OrderDetails)
+                        on c.CustomerID equals o.CustomerID into g
+                      from o in g.DefaultIfEmpty()
+                      select new
+                      {
+                          a = o != null ? o.OrderID : -1
+                      });
         }
     }
 }

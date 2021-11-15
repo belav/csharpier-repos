@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -156,6 +156,9 @@ CollectionEnum.Id ---> [int] [Precision = 10 Scale = 0]
 CollectionEnum.Roles ---> [nullable nvarchar] [MaxLength = -1]
 CollectionScalar.Id ---> [int] [Precision = 10 Scale = 0]
 CollectionScalar.Tags ---> [nullable nvarchar] [MaxLength = -1]
+Dashboard.Id ---> [int] [Precision = 10 Scale = 0]
+Dashboard.Layouts ---> [nullable nvarchar] [MaxLength = -1]
+Dashboard.Name ---> [nullable nvarchar] [MaxLength = -1]
 DateTimeEnclosure.DateTimeOffset ---> [nullable datetimeoffset] [Precision = 7]
 DateTimeEnclosure.Id ---> [int] [Precision = 10 Scale = 0]
 EmailTemplate.Id ---> [uniqueidentifier]
@@ -199,6 +202,9 @@ UnicodeDataTypes.StringDefault ---> [nullable nvarchar] [MaxLength = -1]
 UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
 User.Email ---> [nullable nvarchar] [MaxLength = -1]
 User.Id ---> [uniqueidentifier]
+User23059.Id ---> [int] [Precision = 10 Scale = 0]
+User23059.IsSoftDeleted ---> [bit]
+User23059.MessageGroups ---> [nullable nvarchar] [MaxLength = -1]
 ";
 
             Assert.Equal(expected, actual, ignoreLineEndingDifferences: true);
@@ -287,6 +293,13 @@ WHERE [b].[IndexerVisible] = N'Nay'");
                 @"SELECT [b].[Id], [b].[Value]
 FROM [Book] AS [b]
 WHERE [b].[Id] = 1");
+        }
+
+        public override void Value_conversion_on_enum_collection_contains()
+        {
+            Assert.Contains(
+                CoreStrings.TranslationFailed("")[47..],
+                Assert.Throws<InvalidOperationException>(() => base.Value_conversion_on_enum_collection_contains()).Message);
         }
 
         private void AssertSql(params string[] expected)

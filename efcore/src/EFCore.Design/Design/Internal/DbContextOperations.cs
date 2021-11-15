@@ -1,14 +1,17 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,8 +30,13 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private readonly IOperationReporter _reporter;
         private readonly Assembly _assembly;
         private readonly Assembly _startupAssembly;
+        private readonly string _projectDir;
+        private readonly string? _rootNamespace;
+        private readonly string? _language;
+        private readonly bool _nullable;
         private readonly string[] _args;
         private readonly AppServiceProviderFactory _appServicesFactory;
+        private readonly DesignTimeServicesBuilder _servicesBuilder;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +48,21 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             IOperationReporter reporter,
             Assembly assembly,
             Assembly startupAssembly,
+            string projectDir,
+            string? rootNamespace,
+            string? language,
+            bool nullable,
             string[]? args)
-            : this(reporter, assembly, startupAssembly, args, new AppServiceProviderFactory(startupAssembly, reporter))
+            : this(
+                reporter,
+                assembly,
+                startupAssembly,
+                projectDir,
+                rootNamespace,
+                language,
+                nullable,
+                args,
+                new AppServiceProviderFactory(startupAssembly, reporter))
         {
         }
 
@@ -55,18 +76,23 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             IOperationReporter reporter,
             Assembly assembly,
             Assembly startupAssembly,
+            string projectDir,
+            string? rootNamespace,
+            string? language,
+            bool nullable,
             string[]? args,
             AppServiceProviderFactory appServicesFactory)
         {
-            Check.NotNull(reporter, nameof(reporter));
-            Check.NotNull(assembly, nameof(assembly));
-            Check.NotNull(startupAssembly, nameof(startupAssembly));
-
             _reporter = reporter;
             _assembly = assembly;
             _startupAssembly = startupAssembly;
+            _projectDir = projectDir;
+            _rootNamespace = rootNamespace;
+            _language = language;
+            _nullable = nullable;
             _args = args ?? Array.Empty<string>();
             _appServicesFactory = appServicesFactory;
+            _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
         }
 
         /// <summary>
@@ -100,6 +126,92 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             using var context = CreateContext(contextType);
             return context.Database.GenerateCreateScript();
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual void Optimize(string? outputDir, string? modelNamespace, string? contextTypeName)
+        {
+            using var context = CreateContext(contextTypeName);
+            var contextType = context.GetType();
+
+            var services = _servicesBuilder.Build(context);
+            var scaffolder = services.GetRequiredService<ICompiledModelScaffolder>();
+
+            if (outputDir == null)
+            {
+                var contextSubNamespace = contextType.Namespace ?? "";
+                if (!string.IsNullOrEmpty(_rootNamespace)
+                    && contextSubNamespace.StartsWith(_rootNamespace, StringComparison.Ordinal))
+                {
+                    contextSubNamespace = contextSubNamespace[_rootNamespace.Length..];
+                }
+
+                outputDir = Path.Combine(contextSubNamespace.Replace('.', Path.DirectorySeparatorChar), "CompiledModels");
+            }
+
+            outputDir = Path.GetFullPath(Path.Combine(_projectDir, outputDir));
+
+            var finalModelNamespace = modelNamespace ?? GetNamespaceFromOutputPath(outputDir) ?? "";
+
+            scaffolder.ScaffoldModel(
+                context.GetService<IDesignTimeModel>().Model,
+                outputDir,
+                new CompiledModelCodeGenerationOptions
+                {
+                    ContextType = contextType,
+                    ModelNamespace = finalModelNamespace,
+                    Language = _language,
+                    UseNullableReferenceTypes = _nullable
+                });
+
+            var fullName = contextType.ShortDisplayName() + "Model";
+            if (!string.IsNullOrEmpty(modelNamespace))
+            {
+                fullName = modelNamespace + "." + fullName;
+            }
+
+            _reporter.WriteInformation(DesignStrings.CompiledModelGenerated($"options.UseModel({fullName}.Instance)"));
+
+            var cacheKeyFactory = context.GetService<IModelCacheKeyFactory>();
+            if (!(cacheKeyFactory is ModelCacheKeyFactory))
+            {
+                _reporter.WriteWarning(DesignStrings.CompiledModelCustomCacheKeyFactory(cacheKeyFactory.GetType().ShortDisplayName()));
+            }
+        }
+
+        private string? GetNamespaceFromOutputPath(string directoryPath)
+        {
+            var subNamespace = SubnamespaceFromOutputPath(_projectDir, directoryPath);
+            return string.IsNullOrEmpty(subNamespace)
+                ? _rootNamespace
+                : string.IsNullOrEmpty(_rootNamespace)
+                    ? subNamespace
+                    : _rootNamespace + "." + subNamespace;
+        }
+
+        // if outputDir is a subfolder of projectDir, then use each subfolder as a subnamespace
+        // --output-dir $(projectFolder)/A/B/C
+        // => "namespace $(rootnamespace).A.B.C"
+        private static string? SubnamespaceFromOutputPath(string projectDir, string outputDir)
+        {
+            if (!outputDir.StartsWith(projectDir, StringComparison.Ordinal))
+            {
+                return null;
+            }
+
+            var subPath = outputDir.Substring(projectDir.Length);
+
+            return !string.IsNullOrWhiteSpace(subPath)
+                ? string.Join(
+                    ".",
+                    subPath.Split(
+                        new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries))
+                : null;
         }
 
         /// <summary>
@@ -203,16 +315,16 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     context,
                     FindContextFactory(context)
                     ?? (() =>
-                    {
-                        try
                         {
-                            return (DbContext)ActivatorUtilities.GetServiceOrCreateInstance(appServices, context);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new OperationException(DesignStrings.NoParameterlessConstructor(context.Name), ex);
-                        }
-                    }));
+                            try
+                            {
+                                return (DbContext)ActivatorUtilities.GetServiceOrCreateInstance(appServices, context);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new OperationException(DesignStrings.NoParameterlessConstructor(context.Name), ex);
+                            }
+                        }));
             }
 
             return contexts;
@@ -227,7 +339,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         public virtual ContextInfo GetContextInfo(string? contextType)
         {
             using var context = CreateContext(contextType);
-            var info = new ContextInfo();
+            var info = new ContextInfo
+            {
+                Type = context.GetType().FullName!
+            };
 
             var provider = context.GetService<IDatabaseProvider>();
             info.ProviderName = provider.Name;
@@ -261,7 +376,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var factoryInterface = typeof(IDbContextFactory<>).MakeGenericType(contextType);
             var service = appServices.GetService(factoryInterface);
             return service == null
-                ? (Func<DbContext>?)null
+                ? null
                 : () => (DbContext)factoryInterface
                     .GetMethod(nameof(IDbContextFactory<DbContext>.CreateDbContext))
                     !.Invoke(service, null)!;
@@ -272,7 +387,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType);
             var factory = contextType.Assembly.GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
-            return factory == null ? (Func<DbContext>?)null : (() => CreateContextFromFactory(factory.AsType(), contextType));
+            return factory == null ? null : (() => CreateContextFromFactory(factory.AsType(), contextType));
         }
 
         private DbContext CreateContextFromFactory(Type factory, Type contextType)

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,13 +10,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that manipulates names of database objects for entity types that share a table to avoid clashes.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+    ///     for more information.
+    /// </remarks>
     public class SqlServerSharedTableConvention : SharedTableConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerSharedTableConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
+        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public SqlServerSharedTableConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies)

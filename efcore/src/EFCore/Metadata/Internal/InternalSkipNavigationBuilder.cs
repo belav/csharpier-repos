@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.Linq;
@@ -295,7 +295,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (propertyAccessModeConfigurationSource.HasValue)
             {
                 newSkipNavigationBuilder.UsePropertyAccessMode(
-                    ((IReadOnlySkipNavigation)Metadata).GetPropertyAccessMode(), propertyAccessModeConfigurationSource.Value);
+                    Metadata.GetPropertyAccessMode(), propertyAccessModeConfigurationSource.Value);
             }
 
             var oldFieldInfoConfigurationSource = Metadata.GetFieldInfoConfigurationSource();
@@ -350,7 +350,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         IConventionPropertyBase IConventionPropertyBaseBuilder.Metadata
         {
-            [DebuggerStepThrough] get => Metadata;
+            [DebuggerStepThrough]
+            get => Metadata;
         }
 
         IConventionSkipNavigation IConventionSkipNavigationBuilder.Metadata

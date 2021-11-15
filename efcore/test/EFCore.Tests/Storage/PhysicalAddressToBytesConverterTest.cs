@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -10,7 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     public class PhysicalAddressToBytesConverterTest
     {
-        private static readonly PhysicalAddressToBytesConverter _physicalAddressToBytes            = new();
+        private static readonly PhysicalAddressToBytesConverter _physicalAddressToBytes = new();
 
         [ConditionalTheory]
         [MemberData(nameof(Data))]
@@ -21,7 +21,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var bytes = physicalAddress.GetAddressBytes();
 
             Assert.Equal(bytes, converter(physicalAddress));
-            Assert.Null(converter(null));
         }
 
         [ConditionalTheory]
@@ -34,6 +33,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(bytes, converter(physicalAddress));
             Assert.Null(converter(null));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(Data))]
+        public void Can_convert_bytes_to_physical_address(string address)
+        {
+            var converter = _physicalAddressToBytes.ConvertFromProviderExpression.Compile();
+
+            var physicalAddress = PhysicalAddress.Parse(address);
+            var bytes = physicalAddress.GetAddressBytes();
+
+            Assert.Equal(physicalAddress, converter(bytes));
         }
 
         [ConditionalTheory]

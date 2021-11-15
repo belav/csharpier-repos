@@ -8,22 +8,44 @@ using System.Linq;
 
 namespace System.CommandLine
 {
+    /// <summary>
+    /// A symbol defining a named parameter and a value for that parameter. 
+    /// </summary>
+    /// <seealso cref="System.CommandLine.IdentifierSymbol" />
+    /// <seealso cref="System.CommandLine.IOption" />
     public class Option :
         IdentifierSymbol,
         IOption
     {
-        private string? _implicitName;
-        private protected readonly HashSet<string> _unprefixedAliases = new HashSet<string>();
+        private string? _name;
+        private protected readonly HashSet<string> _unprefixedAliases = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Option"/> class.
+        /// </summary>
+        /// <param name="name">The name of the option, which can be used to specify it on the command line.</param>
+        /// <param name="description">The description of the option shown in help.</param>
+        /// <param name="argumentType">The type that the option's argument(s) can be parsed to.</param>
+        /// <param name="getDefaultValue">A delegate used to get a default value for the option when it is not specified on the command line.</param>
+        /// <param name="arity">The arity of the option.</param>
         public Option(
-            string alias,
+            string name,
             string? description = null,
             Type? argumentType = null,
             Func<object?>? getDefaultValue = null,
             IArgumentArity? arity = null)
-            : this(new[] { alias }, description, argumentType, getDefaultValue, arity)
-        { }
+            : this(name, description, CreateArgument(argumentType, getDefaultValue, arity))
+        {
+        }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Option"/> class.
+        /// </summary>
+        /// <param name="aliases">The set of strings that can be used on the command line to specify the option.</param>
+        /// <param name="description">The description of the option shown in help.</param>
+        /// <param name="argumentType">The type that the option's argument(s) can be parsed to.</param>
+        /// <param name="getDefaultValue">A delegate used to get a default value for the option when it is not specified on the command line.</param>
+        /// <param name="arity">The arity of the option.</param>
         public Option(
             string[] aliases,
             string? description = null,
@@ -32,6 +54,27 @@ namespace System.CommandLine
             IArgumentArity? arity = null)
             : this(aliases, description, CreateArgument(argumentType, getDefaultValue, arity))
         { }
+
+        internal Option(
+            string name,
+            string? description,
+            Argument? argument)
+            : base(description)
+        {
+            if (name is null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            _name = name.RemovePrefix();
+
+            AddAlias(name);
+
+            if (argument is not null)
+            {
+                AddArgumentInner(argument);
+            }
+        }
 
         internal Option(
             string[] aliases,
@@ -55,7 +98,7 @@ namespace System.CommandLine
                 AddAlias(alias);
             }
 
-            if (argument != null)
+            if (argument is not null)
             {
                 AddArgumentInner(argument);
             }
@@ -71,15 +114,15 @@ namespace System.CommandLine
             }
 
             var rv = new Argument();
-            if (argumentType != null)
+            if (argumentType is not null)
             {
-                rv.ArgumentType = argumentType;
+                rv.ValueType = argumentType;
             }
-            if (getDefaultValue != null)
+            if (getDefaultValue is not null)
             {
                 rv.SetDefaultValueFactory(getDefaultValue);
             }
-            if (arity != null)
+            if (arity is not null)
             {
                 rv.Arity = arity;
             }
@@ -93,8 +136,8 @@ namespace System.CommandLine
                 switch (Children.Arguments.Count)
                 {
                     case 0:
-                        var none = Argument.None;
-                        Children.Add(none);
+                        var none = Argument.None();
+                        AddSymbol(none);
                         return none;
 
                     default:
@@ -104,23 +147,45 @@ namespace System.CommandLine
             }
         }
 
-        //TODO: Guard against Argument.None?
-        public string ArgumentHelpName
+        /// <summary>
+        /// Gets or sets the name of the argument when displayed in help.
+        /// </summary>
+        /// <value>
+        /// The name of the argument when displayed in help.
+        /// </value>
+        public string? ArgumentHelpName
         {
-            get => Argument.Name;
-            set => Argument.Name = value;
+            get => Argument.HelpName;
+            set => Argument.HelpName = value;
         }
 
-        internal bool DisallowBinding { get; set; } 
+        /// <summary>
+        /// Gets or sets the arity of the option.
+        /// </summary>
+        public virtual IArgumentArity Arity
+        {
+            get => Argument.Arity;
+            init
+            {
+                if (value.MaximumNumberOfValues > 0)
+                {
+                    Argument.ValueType = typeof(string);
+                }
+                
+                Argument.Arity = value;
+            }
+        }
 
+        internal bool DisallowBinding { get; init; }
+
+        /// <inheritdoc />
         public override string Name
         {
-            get => base.Name;
             set
             {
                 if (!HasAlias(value))
                 {
-                    _implicitName = null;
+                    _name = null;
                     RemoveAlias(DefaultName);
                 }
 
@@ -128,8 +193,12 @@ namespace System.CommandLine
             }
         }
 
-        internal List<ValidateSymbol<OptionResult>> Validators { get; } = new List<ValidateSymbol<OptionResult>>();
+        internal List<ValidateSymbolResult<OptionResult>> Validators { get; } = new();
 
+        /// <summary>
+        /// Adds an alias for the option, which can be used to specify the option on the command line.
+        /// </summary>
+        /// <param name="alias">The alias to add.</param>
         public void AddAlias(string alias) => AddAliasInner(alias);
 
         private protected override void AddAliasInner(string alias)
@@ -143,9 +212,18 @@ namespace System.CommandLine
             _unprefixedAliases.Add(unprefixedAlias!);
         }
 
-        public void AddValidator(ValidateSymbol<OptionResult> validate) => Validators.Add(validate);
+        /// <summary>
+        /// Adds a validator that will be called when the option is matched by the parser.
+        /// </summary>
+        /// <param name="validate">A <see cref="ValidateSymbolResult{OptionResult}"/> delegate used to validate the <see cref="OptionResult"/> produced during parsing.</param>
+        public void AddValidator(ValidateSymbolResult<OptionResult> validate) => Validators.Add(validate);
 
-        public bool HasAliasIgnorePrefix(string alias) => _unprefixedAliases.Contains(alias.RemovePrefix());
+        /// <summary>
+        /// Indicates whether a given alias exists on the option, regardless of its prefix.
+        /// </summary>
+        /// <param name="alias">The alias, which can include a prefix.</param>
+        /// <returns><see langword="true"/> if the alias exists; otherwise, <see langword="false"/>.</returns>
+        public bool HasAliasIgnoringPrefix(string alias) => _unprefixedAliases.Contains(alias.RemovePrefix());
 
         private protected override void RemoveAlias(string alias)
         {
@@ -154,24 +232,60 @@ namespace System.CommandLine
             base.RemoveAlias(alias);
         }
 
+        /// <summary>
+        /// Sets the default value for the option.
+        /// </summary>
+        /// <param name="value">The default value for the option.</param>
+        public void SetDefaultValue(object? value) =>
+            Argument.SetDefaultValue(value);
+
+        /// <summary>
+        /// Sets a delegate to invoke when the default value for the option is required.
+        /// </summary>
+        /// <param name="getDefaultValue">The delegate to invoke to return the default value.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="getDefaultValue"/> is null.</exception>
+        public void SetDefaultValueFactory(Func<object?> getDefaultValue) =>
+            Argument.SetDefaultValueFactory(getDefaultValue);
+
         IArgument IOption.Argument => Argument;
 
-        public bool AllowMultipleArgumentsPerToken { get; set; } = true;
+        /// <inheritdoc/>
+        public bool AllowMultipleArgumentsPerToken { get; set; }
 
+        internal bool IsGreedy => Arity.MinimumNumberOfValues > 0 &&
+                                  ValueType != typeof(bool);
+
+        /// <summary>
+        /// Indicates whether the option is required when its parent command is invoked.
+        /// </summary>
+        /// <remarks>When an option is required and its parent command is invoked without it, an error results.</remarks>
         public bool IsRequired { get; set; }
 
         string IValueDescriptor.ValueName => Name;
 
-        public Type ValueType => Argument.ArgumentType;
+        /// <summary>
+        /// The <see cref="System.Type"/> that the option's arguments are expected to be parsed as.
+        /// </summary>
+        public Type ValueType => Argument.ValueType;
 
         bool IValueDescriptor.HasDefaultValue => Argument.HasDefaultValue;
 
         object? IValueDescriptor.GetDefaultValue() => Argument.GetDefaultValue();
 
-        private protected override string DefaultName =>
-            _implicitName ??= Aliases
-                              .OrderBy(a => a.Length)
-                              .Last()
-                              .RemovePrefix();
+        private protected override string DefaultName
+        {
+            get
+            {
+                if (_name is null)
+                {
+                    _name = Aliases
+                            .OrderBy(a => a.Length)
+                            .Last()
+                            .RemovePrefix();
+                }
+
+                return _name;
+            }
+        }
     }
 }

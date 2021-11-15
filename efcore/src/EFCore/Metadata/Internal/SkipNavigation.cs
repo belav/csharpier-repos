@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -47,9 +46,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource)
             : base(name, propertyInfo, fieldInfo, configurationSource)
         {
-            Check.NotNull(declaringEntityType, nameof(declaringEntityType));
-            Check.NotNull(targetEntityType, nameof(targetEntityType));
-
             DeclaringEntityType = declaringEntityType;
             TargetEntityType = targetEntityType;
             IsCollection = collection;
@@ -78,7 +74,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override Type ClrType
-            => this.GetIdentifyingMemberInfo()!.GetMemberType();
+            => this.GetIdentifyingMemberInfo()?.GetMemberType()
+                ?? (IsCollection
+                    ? typeof(IEnumerable<>).MakeGenericType(TargetEntityType.ClrType)
+                    : TargetEntityType.ClrType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -332,10 +331,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
         /// </summary>
-        /// <param name="name"> The key of the set annotation. </param>
-        /// <param name="annotation"> The annotation set. </param>
-        /// <param name="oldAnnotation"> The old annotation. </param>
-        /// <returns> The annotation that was set. </returns>
+        /// <param name="name">The key of the set annotation.</param>
+        /// <param name="annotation">The annotation set.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <returns>The annotation that was set.</returns>
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
@@ -355,10 +354,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ref _collectionAccessorInitialized,
                 this,
                 static navigation =>
-                {
-                    navigation.EnsureReadOnly();
-                    return new ClrCollectionAccessorFactory().Create(navigation);
-                });
+                    {
+                        navigation.EnsureReadOnly();
+                        return new ClrCollectionAccessorFactory().Create(navigation);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -369,10 +368,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ICollectionLoader ManyToManyLoader
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _manyToManyLoader, this, static navigation =>
-                {
-                    navigation.EnsureReadOnly();
-                    return new ManyToManyLoaderFactory().Create(navigation);
-                });
+                    {
+                        navigation.EnsureReadOnly();
+                        return new ManyToManyLoaderFactory().Create(navigation);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -392,7 +391,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IReadOnlySkipNavigation)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IReadOnlySkipNavigation)this).ToDebugString(),
                 () => ((IReadOnlySkipNavigation)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         /// <inheritdoc />

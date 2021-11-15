@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
@@ -22,73 +23,73 @@ namespace Microsoft.EntityFrameworkCore
         protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
             => facade.UseTransaction(transaction.GetDbTransaction());
 
-        public override ModelBuilder Non_public_annotations_are_enabled()
+        public override IModel Non_public_annotations_are_enabled()
         {
-            var modelBuilder = base.Non_public_annotations_are_enabled();
+            var model = base.Non_public_annotations_are_enabled();
 
-            var relational = GetProperty<PrivateMemberAnnotationClass>(modelBuilder, "PersonFirstName");
+            var relational = GetProperty<PrivateMemberAnnotationClass>(model, "PersonFirstName");
             Assert.Equal("dsdsd", relational.GetColumnBaseName());
             Assert.Equal("nvarchar(128)", relational.GetColumnType());
 
-            return modelBuilder;
+            return model;
         }
 
-        public override ModelBuilder Field_annotations_are_enabled()
+        public override IModel Field_annotations_are_enabled()
         {
-            var modelBuilder = base.Field_annotations_are_enabled();
+            var model = base.Field_annotations_are_enabled();
 
-            var relational = GetProperty<FieldAnnotationClass>(modelBuilder, "_personFirstName");
+            var relational = GetProperty<FieldAnnotationClass>(model, "_personFirstName");
             Assert.Equal("dsdsd", relational.GetColumnBaseName());
             Assert.Equal("nvarchar(128)", relational.GetColumnType());
 
-            return modelBuilder;
+            return model;
         }
 
-        public override ModelBuilder Key_and_column_work_together()
+        public override IModel Key_and_column_work_together()
         {
-            var modelBuilder = base.Key_and_column_work_together();
+            var model = base.Key_and_column_work_together();
 
-            var relational = GetProperty<ColumnKeyAnnotationClass1>(modelBuilder, "PersonFirstName");
+            var relational = GetProperty<ColumnKeyAnnotationClass1>(model, "PersonFirstName");
             Assert.Equal("dsdsd", relational.GetColumnBaseName());
             Assert.Equal("nvarchar(128)", relational.GetColumnType());
 
-            return modelBuilder;
+            return model;
         }
 
-        public override ModelBuilder Key_and_MaxLength_64_produce_nvarchar_64()
+        public override IModel Key_and_MaxLength_64_produce_nvarchar_64()
         {
-            var modelBuilder = base.Key_and_MaxLength_64_produce_nvarchar_64();
+            var model = base.Key_and_MaxLength_64_produce_nvarchar_64();
 
-            var property = GetProperty<ColumnKeyAnnotationClass2>(modelBuilder, "PersonFirstName");
+            var property = GetProperty<ColumnKeyAnnotationClass2>(model, "PersonFirstName");
 
             var storeType = property.GetRelationalTypeMapping().StoreType;
 
             Assert.Equal("TEXT", storeType);
 
-            return modelBuilder;
+            return model;
         }
 
-        public override ModelBuilder Timestamp_takes_precedence_over_MaxLength()
+        public override IModel Timestamp_takes_precedence_over_MaxLength()
         {
-            var modelBuilder = base.Timestamp_takes_precedence_over_MaxLength();
+            var model = base.Timestamp_takes_precedence_over_MaxLength();
 
-            var property = GetProperty<TimestampAndMaxlen>(modelBuilder, "MaxTimestamp");
+            var property = GetProperty<TimestampAndMaxlen>(model, "MaxTimestamp");
 
             var storeType = property.GetRelationalTypeMapping().StoreType;
 
             Assert.Equal("BLOB", storeType);
 
-            return modelBuilder;
+            return model;
         }
 
-        public override ModelBuilder TableNameAttribute_affects_table_name_in_TPH()
+        public override IModel TableNameAttribute_affects_table_name_in_TPH()
         {
-            var modelBuilder = base.TableNameAttribute_affects_table_name_in_TPH();
+            var model = base.TableNameAttribute_affects_table_name_in_TPH();
 
-            var relational = modelBuilder.Model.FindEntityType(typeof(TNAttrBase));
+            var relational = model.FindEntityType(typeof(TNAttrBase));
             Assert.Equal("A", relational.GetTableName());
 
-            return modelBuilder;
+            return model;
         }
 
         public override void ConcurrencyCheckAttribute_throws_if_value_in_database_changed()
@@ -106,19 +107,19 @@ FROM ""Sample"" AS ""s""
 WHERE ""s"".""Unique_No"" = 1
 LIMIT 1",
                 //
-                @"@p2='1' (DbType = String)
+                @"@p2='1'
 @p0='ModifiedData' (Nullable = false) (Size = 12)
-@p1='00000000-0000-0000-0003-000000000001' (DbType = String)
-@p3='00000001-0000-0000-0000-000000000001' (DbType = String)
+@p1='00000000-0000-0000-0003-000000000001'
+@p3='00000001-0000-0000-0000-000000000001'
 
 UPDATE ""Sample"" SET ""Name"" = @p0, ""RowVersion"" = @p1
 WHERE ""Unique_No"" = @p2 AND ""RowVersion"" = @p3;
 SELECT changes();",
                 //
-                @"@p2='1' (DbType = String)
+                @"@p2='1'
 @p0='ChangedData' (Nullable = false) (Size = 11)
-@p1='00000000-0000-0000-0002-000000000001' (DbType = String)
-@p3='00000001-0000-0000-0000-000000000001' (DbType = String)
+@p1='00000000-0000-0000-0002-000000000001'
+@p3='00000001-0000-0000-0000-000000000001'
 
 UPDATE ""Sample"" SET ""Name"" = @p0, ""RowVersion"" = @p1
 WHERE ""Unique_No"" = @p2 AND ""RowVersion"" = @p3;
@@ -132,11 +133,11 @@ SELECT changes();");
             AssertSql(
                 @"@p0=NULL
 @p1='Third' (Nullable = false) (Size = 5)
-@p2='00000000-0000-0000-0000-000000000003' (DbType = String)
+@p2='00000000-0000-0000-0000-000000000003'
 @p3='Third Additional Name' (Size = 21)
-@p4='0' (Nullable = true) (DbType = String)
+@p4='0' (Nullable = true)
 @p5='Third Name' (Size = 10)
-@p6='0' (Nullable = true) (DbType = String)
+@p6='0' (Nullable = true)
 
 INSERT INTO ""Sample"" (""MaxLengthProperty"", ""Name"", ""RowVersion"", ""AdditionalDetails_Name"", ""AdditionalDetails_Value"", ""Details_Name"", ""Details_Value"")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);

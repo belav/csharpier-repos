@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,6 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             = typeof(IProxyFactory).GetTypeInfo().GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
 
         private readonly ConstructorBindingConvention _directBindingConvention;
-        private readonly LazyLoaderParameterBindingFactoryDependencies _lazyLoaderParameterBindingFactoryDependencies;
         private readonly IProxyFactory _proxyFactory;
         private readonly ProxiesOptionsExtension? _options;
 
@@ -51,9 +50,26 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         {
             _proxyFactory = proxyFactory;
             _options = options;
-            _lazyLoaderParameterBindingFactoryDependencies = lazyLoaderParameterBindingFactoryDependencies;
+            LazyLoaderParameterBindingFactoryDependencies = lazyLoaderParameterBindingFactoryDependencies;
+            ConventionSetBuilderDependencies = conventionSetBuilderDependencies;
             _directBindingConvention = new ConstructorBindingConvention(conventionSetBuilderDependencies);
         }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        protected virtual ProviderConventionSetBuilderDependencies ConventionSetBuilderDependencies { get; }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        protected virtual LazyLoaderParameterBindingFactoryDependencies LazyLoaderParameterBindingFactoryDependencies { get; }
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
@@ -206,7 +222,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                     serviceProperty = entityType.AddServiceProperty(_lazyLoaderProperty);
                     serviceProperty.SetParameterBinding(
                         (ServiceParameterBinding)new LazyLoaderParameterBindingFactory(
-                                _lazyLoaderParameterBindingFactoryDependencies)
+                                LazyLoaderParameterBindingFactoryDependencies)
                             .Bind(
                                 entityType,
                                 typeof(ILazyLoader),
@@ -221,7 +237,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         new ContextParameterBinding(typeof(DbContext)),
                         new EntityTypeParameterBinding(),
                         new DependencyInjectionParameterBinding(
-                            typeof(ILazyLoader), typeof(ILazyLoader), new[] { (IPropertyBase)serviceProperty }),
+                            typeof(ILazyLoader), typeof(ILazyLoader), (IPropertyBase)serviceProperty),
                         new ObjectArrayParameterBinding(binding.ParameterBindings)
                     },
                     proxyType);

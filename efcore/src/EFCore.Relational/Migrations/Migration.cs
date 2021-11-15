@@ -1,18 +1,21 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using DisallowNullAttribute = System.Diagnostics.CodeAnalysis.DisallowNullAttribute;
 
 namespace Microsoft.EntityFrameworkCore.Migrations
 {
     /// <summary>
     ///     A base class inherited by each EF Core migration.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    /// </remarks>
     public abstract class Migration
     {
         /// <summary>
@@ -27,6 +30,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <summary>
         ///     The <see cref="IModel" /> that the database will map to after the migration has been applied.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
         public virtual IModel TargetModel
         {
             get
@@ -44,55 +50,67 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         }
 
         /// <summary>
-        ///     <para>
-        ///         The <see cref="MigrationOperation" />s that will migrate the database 'up'.
-        ///     </para>
+        ///     The <see cref="MigrationOperation" />s that will migrate the database 'up'.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         That is, those operations that need to be applied to the database
         ///         to take it from the state left in by the previous migration so that it is up-to-date
         ///         with regard to this migration.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        ///     </para>
+        /// </remarks>
         public virtual IReadOnlyList<MigrationOperation> UpOperations
             => _upOperations ??= BuildOperations(Up);
 
         /// <summary>
-        ///     <para>
-        ///         The <see cref="MigrationOperation" />s that will migrate the database 'down'.
-        ///     </para>
+        ///     The <see cref="MigrationOperation" />s that will migrate the database 'down'.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         That is, those operations that need to be applied to the database
         ///         to take it from the state left in by this migration so that it returns to the
         ///         state that it was in before this migration was applied.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        ///     </para>
+        /// </remarks>
         public virtual IReadOnlyList<MigrationOperation> DownOperations
             => _downOperations ??= BuildOperations(Down);
 
         /// <summary>
-        ///     <para>
-        ///         The name of the current database provider.
-        ///     </para>
+        ///     The name of the current database provider.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This can be used to write conditional code in the migration such that different changes
         ///         can be made to the database depending on the type of database being used.
         ///     </para>
-        /// </summary>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        ///     </para>
+        /// </remarks>
         [DisallowNull]
         public virtual string? ActiveProvider { get; set; }
 
         /// <summary>
         ///     Implemented to build the <see cref="TargetModel" />.
         /// </summary>
-        /// <param name="modelBuilder"> The <see cref="ModelBuilder" /> to use to build the model. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
+        /// <param name="modelBuilder">The <see cref="ModelBuilder" /> to use to build the model.</param>
         protected virtual void BuildTargetModel(ModelBuilder modelBuilder)
         {
         }
 
         /// <summary>
-        ///     <para>
-        ///         Builds the operations that will migrate the database 'up'.
-        ///     </para>
+        ///     Builds the operations that will migrate the database 'up'.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         That is, builds the operations that will take the database from the state left in by the
         ///         previous migration so that it is up-to-date with regard to this migration.
@@ -100,14 +118,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     <para>
         ///         This method must be overridden in each class that inherits from <see cref="Migration" />.
         ///     </para>
-        /// </summary>
-        /// <param name="migrationBuilder"> The <see cref="MigrationBuilder" /> that will build the operations. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the operations.</param>
         protected abstract void Up(MigrationBuilder migrationBuilder);
 
         /// <summary>
-        ///     <para>
-        ///         Builds the operations that will migrate the database 'down'.
-        ///     </para>
+        ///     Builds the operations that will migrate the database 'down'.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         That is, builds the operations that will take the database from the state left in by
         ///         this migration so that it returns to the state that it was in before this migration was applied.
@@ -117,8 +138,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///         both 'up' and 'down' migrations are to be supported. If it is not overridden, then calling it
         ///         will throw and it will not be possible to migrate in the 'down' direction.
         ///     </para>
-        /// </summary>
-        /// <param name="migrationBuilder"> The <see cref="MigrationBuilder" /> that will build the operations. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the operations.</param>
         protected virtual void Down(MigrationBuilder migrationBuilder)
             => throw new NotSupportedException(RelationalStrings.MigrationDownMissing);
 

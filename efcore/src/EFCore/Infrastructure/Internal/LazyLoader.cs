@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -9,23 +9,14 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Transient" />. This means that each
-    ///         entity instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class LazyLoader : ILazyLoader
     {
@@ -42,9 +33,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             ICurrentDbContext currentContext,
             IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
         {
-            Check.NotNull(currentContext, nameof(currentContext));
-            Check.NotNull(logger, nameof(logger));
-
             Context = currentContext.Context;
             Logger = logger;
         }
@@ -98,7 +86,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
 
             if (ShouldLoad(entity, navigationName, out var entry))
             {
-                entry.Load();
+                try
+                {
+                    entry.Load();
+                }
+                catch
+                {
+                    SetLoaded(entity, navigationName, false);
+                    throw;
+                }
             }
         }
 
@@ -108,7 +104,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Task LoadAsync(
+        public virtual async Task LoadAsync(
             object entity,
             CancellationToken cancellationToken = default,
             [CallerMemberName] string navigationName = "")
@@ -116,9 +112,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             Check.NotNull(entity, nameof(entity));
             Check.NotEmpty(navigationName, nameof(navigationName));
 
-            return ShouldLoad(entity, navigationName, out var entry)
-                ? entry.LoadAsync(cancellationToken)
-                : Task.CompletedTask;
+            if (ShouldLoad(entity, navigationName, out var entry))
+            {
+                try
+                {
+                    await entry.LoadAsync(cancellationToken);
+                }
+                catch
+                {
+                    SetLoaded(entity, navigationName, false);
+                    throw;
+                }
+            }
         }
 
         private bool ShouldLoad(object entity, string navigationName, [NotNullWhen(true)] out NavigationEntry? navigationEntry)

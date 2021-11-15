@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -10,22 +10,25 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     /// <summary>
     ///     <see cref="DiagnosticSource" /> event payload for <see cref="RelationalEventId.DataReaderDisposing" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    /// </remarks>
     public class DataReaderDisposingEventData : DbContextEventData
     {
         /// <summary>
         ///     Constructs a <see cref="DiagnosticSource" /> event payload for <see cref="RelationalEventId.DataReaderDisposing" />.
         /// </summary>
-        /// <param name="eventDefinition"> The event definition. </param>
-        /// <param name="messageGenerator"> A delegate that generates a log message for this event. </param>
-        /// <param name="command"> The <see cref="DbCommand" /> that created the reader. </param>
-        /// <param name="dataReader"> The <see cref="DbDataReader" /> that is being disposed. </param>
-        /// <param name="context"> The <see cref="DbContext" /> currently being used, to null if not known. </param>
-        /// <param name="commandId">A correlation ID that identifies the <see cref="DbCommand" /> instance being used. </param>
-        /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" /> instance being used. </param>
-        /// <param name="recordsAffected">Gets the number of rows changed, inserted, or deleted by execution of the SQL statement. </param>
-        /// <param name="readCount">Gets the number of read operations performed by this reader. </param>
-        /// <param name="startTime">The start time of this event. </param>
-        /// <param name="duration">The duration this event. </param>
+        /// <param name="eventDefinition">The event definition.</param>
+        /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
+        /// <param name="command">The <see cref="DbCommand" /> that created the reader.</param>
+        /// <param name="dataReader">The <see cref="DbDataReader" /> that is being disposed.</param>
+        /// <param name="context">The <see cref="DbContext" /> currently being used, to null if not known.</param>
+        /// <param name="commandId">A correlation ID that identifies the <see cref="DbCommand" /> instance being used.</param>
+        /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" /> instance being used.</param>
+        /// <param name="recordsAffected">Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.</param>
+        /// <param name="readCount">Gets the number of read operations performed by this reader.</param>
+        /// <param name="startTime">The start time of this event.</param>
+        /// <param name="duration">The duration this event.</param>
         public DataReaderDisposingEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,

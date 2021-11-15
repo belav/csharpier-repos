@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -67,6 +67,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             public ChangeTracking(ProxyGraphUpdatesWithChangeTrackingSqlServerFixture fixture)
                 : base(fixture)
+            {
+            }
+
+            // Needs lazy loading
+            public override void Save_two_entity_cycle_with_lazy_loading()
             {
             }
 

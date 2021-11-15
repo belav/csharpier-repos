@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,15 +9,18 @@ using System.Reflection;
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
-    ///     <para>
-    ///         Represents a relationship where a foreign key property(s) in a dependent entity type
-    ///         reference a corresponding primary or alternate key in a principal entity type.
-    ///     </para>
+    ///     Represents a relationship where a foreign key property(s) in a dependent entity type
+    ///     reference a corresponding primary or alternate key in a principal entity type.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This interface is used during model creation and allows the metadata to be modified.
     ///         Once the model is built, <see cref="IForeignKey" /> represents a read-only view of the same metadata.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IMutableForeignKey : IReadOnlyForeignKey, IMutableAnnotatable
     {
         /// <summary>
@@ -86,8 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Sets the foreign key properties and that target principal key.
         /// </summary>
-        /// <param name="properties"> Foreign key properties in the dependent entity. </param>
-        /// <param name="principalKey"> The primary or alternate key to target. </param>
+        /// <param name="properties">Foreign key properties in the dependent entity.</param>
+        /// <param name="principalKey">The primary or alternate key to target.</param>
         void SetProperties(IReadOnlyList<IMutableProperty> properties, IMutableKey principalKey);
 
         /// <summary>
@@ -97,7 +100,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The name of the navigation property on the dependent type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly set navigation property. </returns>
+        /// <returns>The newly set navigation property.</returns>
         IMutableNavigation? SetDependentToPrincipal(string? name);
 
         /// <summary>
@@ -107,7 +110,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The navigation property on the dependent type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly set navigation property. </returns>
+        /// <returns>The newly set navigation property.</returns>
         IMutableNavigation? SetDependentToPrincipal(MemberInfo? property);
 
         /// <summary>
@@ -117,7 +120,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The name of the navigation property on the dependent type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly created navigation property. </returns>
+        /// <returns>The newly created navigation property.</returns>
         [Obsolete("Use SetDependentToPrincipal")]
         IMutableNavigation? HasDependentToPrincipal(string? name)
             => SetDependentToPrincipal(name);
@@ -129,7 +132,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The navigation property on the dependent type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly created navigation property. </returns>
+        /// <returns>The newly created navigation property.</returns>
         [Obsolete("Use SetDependentToPrincipal")]
         IMutableNavigation? HasDependentToPrincipal(MemberInfo? property)
             => SetDependentToPrincipal(property);
@@ -141,7 +144,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The name of the navigation property on the principal type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly set navigation property. </returns>
+        /// <returns>The newly set navigation property.</returns>
         IMutableNavigation? SetPrincipalToDependent(string? name);
 
         /// <summary>
@@ -151,7 +154,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The name of the navigation property on the principal type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly set navigation property. </returns>
+        /// <returns>The newly set navigation property.</returns>
         IMutableNavigation? SetPrincipalToDependent(MemberInfo? property);
 
         /// <summary>
@@ -161,7 +164,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The name of the navigation property on the principal type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly created navigation property. </returns>
+        /// <returns>The newly created navigation property.</returns>
         [Obsolete("Use SetPrincipalToDependent")]
         IMutableNavigation? HasPrincipalToDependent(string? name)
             => SetPrincipalToDependent(name);
@@ -173,7 +176,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The name of the navigation property on the principal type. Passing <see langword="null" /> will result in there being
         ///     no navigation property defined.
         /// </param>
-        /// <returns> The newly created navigation property. </returns>
+        /// <returns>The newly created navigation property.</returns>
         [Obsolete("Use SetPrincipalToDependent")]
         IMutableNavigation? HasPrincipalToDependent(MemberInfo? property)
             => SetPrincipalToDependent(property);
@@ -181,15 +184,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets all skip navigations using this foreign key.
         /// </summary>
-        /// <returns> The skip navigations using this foreign key. </returns>
+        /// <returns>The skip navigations using this foreign key.</returns>
         new IEnumerable<IMutableSkipNavigation> GetReferencingSkipNavigations()
             => ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<IMutableSkipNavigation>();
 
         /// <summary>
         ///     Gets the entity type related to the given one.
         /// </summary>
-        /// <param name="entityType"> One of the entity types related by the foreign key. </param>
-        /// <returns> The entity type related to the given one. </returns>
+        /// <param name="entityType">One of the entity types related by the foreign key.</param>
+        /// <returns>The entity type related to the given one.</returns>
         new IMutableEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
             => (IMutableEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 

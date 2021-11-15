@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -60,18 +60,24 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
 
         private static void ReportResults(IEnumerable<IDictionary> migrations)
         {
+            var anyUnknown = false;
             var any = false;
             foreach (var migration in migrations)
             {
                 var id = migration["Id"] as string;
                 var applied = migration["Applied"] as bool?;
                 Reporter.WriteData($"{id}{(applied != false ? null : Resources.Pending)}");
+                anyUnknown |= !applied.HasValue;
                 any = true;
             }
 
             if (!any)
             {
                 Reporter.WriteInformation(Resources.NoMigrations);
+            }
+            else if (anyUnknown)
+            {
+                Reporter.WriteWarning(Resources.PendingUnknown);
             }
         }
     }

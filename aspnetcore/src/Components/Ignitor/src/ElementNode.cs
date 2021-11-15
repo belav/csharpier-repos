@@ -1,134 +1,140 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.SignalR.Client;
 
 #nullable enable
-namespace Ignitor
+namespace Ignitor;
+
+public class ElementNode : ContainerNode
 {
-    public class ElementNode : ContainerNode
+    private readonly Dictionary<string, object> _attributes;
+    private readonly Dictionary<string, object> _properties;
+    private readonly Dictionary<string, ElementEventDescriptor> _events;
+
+    public ElementNode(string tagName)
     {
-        private readonly Dictionary<string, object> _attributes;
-        private readonly Dictionary<string, object> _properties;
-        private readonly Dictionary<string, ElementEventDescriptor> _events;
+        TagName = tagName ?? throw new ArgumentNullException(nameof(tagName));
+        _attributes = new Dictionary<string, object>(StringComparer.Ordinal);
+        _properties = new Dictionary<string, object>(StringComparer.Ordinal);
+        _events = new Dictionary<string, ElementEventDescriptor>(StringComparer.Ordinal);
+    }
+    public string TagName { get; }
 
-        public ElementNode(string tagName)
+    public IReadOnlyDictionary<string, object> Attributes => _attributes;
+
+    public IReadOnlyDictionary<string, object> Properties => _properties;
+
+    public IReadOnlyDictionary<string, ElementEventDescriptor> Events => _events;
+
+    public void SetAttribute(string key, object value)
+    {
+        _attributes[key] = value;
+    }
+
+    public void RemoveAttribute(string key)
+    {
+        _attributes.Remove(key);
+    }
+
+    public void SetProperty(string key, object value)
+    {
+        _properties[key] = value;
+    }
+
+    public void SetEvent(string eventName, ElementEventDescriptor descriptor)
+    {
+        if (eventName is null)
         {
-            TagName = tagName ?? throw new ArgumentNullException(nameof(tagName));
-            _attributes = new Dictionary<string, object>(StringComparer.Ordinal);
-            _properties = new Dictionary<string, object>(StringComparer.Ordinal);
-            _events = new Dictionary<string, ElementEventDescriptor>(StringComparer.Ordinal);
+            throw new ArgumentNullException(nameof(eventName));
         }
-        public string TagName { get; }
 
-        public IReadOnlyDictionary<string, object> Attributes => _attributes;
-
-        public IReadOnlyDictionary<string, object> Properties => _properties;
-
-        public IReadOnlyDictionary<string, ElementEventDescriptor> Events => _events;
-
-        public void SetAttribute(string key, object value)
+        if (descriptor is null)
         {
-            _attributes[key] = value;
+            throw new ArgumentNullException(nameof(descriptor));
         }
 
-        public void RemoveAttribute(string key)
+        _events[eventName] = descriptor;
+    }
+
+    class TestChangeEventArgs : EventArgs
+    {
+        public object? Value { get; set; }
+    }
+
+    class TestMouseEventArgs : EventArgs
+    {
+        public string? Type { get; set; }
+        public int Detail { get; set; }
+    }
+
+    internal Task SelectAsync(BlazorClient client, string value)
+    {
+        if (!Events.TryGetValue("change", out var changeEventDescriptor))
         {
-            _attributes.Remove(key);
+            throw new InvalidOperationException("Element does not have a change event.");
         }
 
-        public void SetProperty(string key, object value)
+        var args = new TestChangeEventArgs
         {
-            _properties[key] = value;
-        }
+            Value = value
+        };
 
-        public void SetEvent(string eventName, ElementEventDescriptor descriptor)
+        var webEventDescriptor = new WebEventDescriptor
         {
-            if (eventName is null)
+            EventHandlerId = changeEventDescriptor.EventId,
+            EventName = "change",
+            EventFieldInfo = new EventFieldInfo
             {
-                throw new ArgumentNullException(nameof(eventName));
+                ComponentId = 0,
+                FieldValue = value
             }
+        };
 
-            if (descriptor is null)
-            {
-                throw new ArgumentNullException(nameof(descriptor));
-            }
+        return DispatchEventCore(client, webEventDescriptor, args);
+    }
 
-            _events[eventName] = descriptor;
-        }
-
-        internal Task SelectAsync(HubConnection connection, string value)
+    public Task ClickAsync(BlazorClient client)
+    {
+        if (!Events.TryGetValue("click", out var clickEventDescriptor))
         {
-            if (!Events.TryGetValue("change", out var changeEventDescriptor))
-            {
-                throw new InvalidOperationException("Element does not have a change event.");
-            }
-
-            var args = new
-            {
-                Value = value
-            };
-
-            var webEventDescriptor = new WebEventDescriptor
-            {
-                BrowserRendererId = 0,
-                EventHandlerId = changeEventDescriptor.EventId,
-                EventName = "change",
-                EventFieldInfo = new EventFieldInfo
-                {
-                    ComponentId = 0,
-                    FieldValue = value
-                }
-            };
-
-            return DispatchEventCore(connection, Serialize(webEventDescriptor), Serialize(args));
+            throw new InvalidOperationException("Element does not have a click event.");
         }
 
-        public Task ClickAsync(HubConnection connection)
+        var mouseEventArgs = new TestMouseEventArgs
         {
-            if (!Events.TryGetValue("click", out var clickEventDescriptor))
-            {
-                throw new InvalidOperationException("Element does not have a click event.");
-            }
-
-            var mouseEventArgs = new
-            {
-                Type = clickEventDescriptor.EventName,
-                Detail = 1
-            };
-            var webEventDescriptor = new WebEventDescriptor
-            {
-                BrowserRendererId = 0,
-                EventHandlerId = clickEventDescriptor.EventId,
-                EventName = "click",
-            };
-
-            return DispatchEventCore(connection, Serialize(webEventDescriptor), Serialize(mouseEventArgs));
-        }
-
-        private static string Serialize<T>(T payload) =>
-             JsonSerializer.Serialize(payload, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-        private static Task DispatchEventCore(HubConnection connection, string descriptor, string eventArgs) =>
-            connection.InvokeAsync("DispatchBrowserEvent", descriptor, eventArgs);
-
-        public class ElementEventDescriptor
+            Type = clickEventDescriptor.EventName,
+            Detail = 1
+        };
+        var webEventDescriptor = new WebEventDescriptor
         {
-            public ElementEventDescriptor(string eventName, ulong eventId)
-            {
-                EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
-                EventId = eventId;
-            }
+            EventHandlerId = clickEventDescriptor.EventId,
+            EventName = "click",
+        };
 
-            public string EventName { get; }
+        return DispatchEventCore(client, webEventDescriptor, mouseEventArgs);
+    }
 
-            public ulong EventId { get; }
+    private static Task DispatchEventCore(BlazorClient client, WebEventDescriptor descriptor, EventArgs eventArgs) =>
+        client.DispatchEventAsync(descriptor, eventArgs);
+
+    public class ElementEventDescriptor
+    {
+        public ElementEventDescriptor(string eventName, ulong eventId)
+        {
+            EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
+            EventId = eventId;
         }
+
+        public string EventName { get; }
+
+        public ulong EventId { get; }
     }
 }
 #nullable restore

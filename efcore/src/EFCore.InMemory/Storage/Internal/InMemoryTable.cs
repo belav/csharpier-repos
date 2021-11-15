@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.EntityFrameworkCore.Update;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 {
@@ -384,9 +383,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IUpdateEntry entry,
             IList<IProperty> nullabilityErrors)
         {
-            Check.NotNull(entry, nameof(entry));
-            Check.NotNull(nullabilityErrors, nameof(nullabilityErrors));
-
             if (_sensitiveLoggingEnabled)
             {
                 throw new DbUpdateException(
@@ -407,15 +403,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// <summary>
         ///     Throws an exception indicating that concurrency conflicts were detected.
         /// </summary>
-        /// <param name="entry"> The update entry which resulted in the conflict(s). </param>
-        /// <param name="concurrencyConflicts"> The conflicting properties with their associated database values. </param>
+        /// <param name="entry">The update entry which resulted in the conflict(s).</param>
+        /// <param name="concurrencyConflicts">The conflicting properties with their associated database values.</param>
         protected virtual void ThrowUpdateConcurrencyException(
             IUpdateEntry entry,
             Dictionary<IProperty, object?> concurrencyConflicts)
         {
-            Check.NotNull(entry, nameof(entry));
-            Check.NotNull(concurrencyConflicts, nameof(concurrencyConflicts));
-
             if (_sensitiveLoggingEnabled)
             {
                 throw new DbUpdateConcurrencyException(

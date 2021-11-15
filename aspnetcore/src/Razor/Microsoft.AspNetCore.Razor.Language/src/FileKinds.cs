@@ -1,68 +1,67 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.IO;
 using Microsoft.AspNetCore.Razor.Language.Components;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public static class FileKinds
 {
-    public static class FileKinds
+    public static readonly string Component = "component";
+
+    public static readonly string ComponentImport = "componentImport";
+
+    public static readonly string Legacy = "mvc";
+
+    public static bool IsComponent(string fileKind)
     {
-        public static readonly string Component = "component";
+        // fileKind might be null.
+        return string.Equals(fileKind, FileKinds.Component, StringComparison.OrdinalIgnoreCase) || IsComponentImport(fileKind);
+    }
 
-        public static readonly string ComponentImport = "componentImport";
+    public static bool IsComponentImport(string fileKind)
+    {
+        // fileKind might be null.
+        return string.Equals(fileKind, FileKinds.ComponentImport, StringComparison.OrdinalIgnoreCase);
+    }
 
-        public static readonly string Legacy = "mvc";
-
-        public static bool IsComponent(string fileKind)
+    public static string GetComponentFileKindFromFilePath(string filePath)
+    {
+        if (filePath == null)
         {
-            // fileKind might be null.
-            return string.Equals(fileKind, FileKinds.Component, StringComparison.OrdinalIgnoreCase) || IsComponentImport(fileKind);
+            throw new ArgumentNullException(nameof(filePath));
         }
 
-        public static bool IsComponentImport(string fileKind)
+        if (string.Equals(ComponentMetadata.ImportsFileName, Path.GetFileName(filePath), StringComparison.Ordinal))
         {
-            // fileKind might be null.
-            return string.Equals(fileKind, FileKinds.ComponentImport, StringComparison.OrdinalIgnoreCase);
+            return FileKinds.ComponentImport;
+        }
+        else
+        {
+            return FileKinds.Component;
+        }
+    }
+
+    public static string GetFileKindFromFilePath(string filePath)
+    {
+        if (filePath == null)
+        {
+            throw new ArgumentNullException(nameof(filePath));
         }
 
-        public static string GetComponentFileKindFromFilePath(string filePath)
+        if (string.Equals(ComponentMetadata.ImportsFileName, Path.GetFileName(filePath), StringComparison.Ordinal))
         {
-            if (filePath == null)
-            {
-                throw new ArgumentNullException(nameof(filePath));
-            }
-
-            if (string.Equals(ComponentMetadata.ImportsFileName, Path.GetFileName(filePath), StringComparison.Ordinal))
-            {
-                return FileKinds.ComponentImport;
-            }
-            else
-            {
-                return FileKinds.Component;
-            }
+            return FileKinds.ComponentImport;
         }
-
-        public static string GetFileKindFromFilePath(string filePath)
+        else if (string.Equals(".razor", Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
         {
-            if (filePath == null)
-            {
-                throw new ArgumentNullException(nameof(filePath));
-            }
-
-            if (string.Equals(ComponentMetadata.ImportsFileName, Path.GetFileName(filePath), StringComparison.Ordinal))
-            {
-                return FileKinds.ComponentImport;
-            }
-            else if (string.Equals(".razor", Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-            {
-                return FileKinds.Component;
-            }
-            else
-            {
-                return FileKinds.Legacy;
-            }
+            return FileKinds.Component;
+        }
+        else
+        {
+            return FileKinds.Legacy;
         }
     }
 }

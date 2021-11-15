@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics
 {
@@ -13,16 +12,19 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     A <see cref="DiagnosticSource" /> event payload class for events that indicate
     ///     a property value.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    /// </remarks>
     public class PropertyValueEventData : PropertyEventData
     {
         /// <summary>
         ///     Constructs the event payload.
         /// </summary>
-        /// <param name="eventDefinition"> The event definition. </param>
-        /// <param name="messageGenerator"> A delegate that generates a log message for this event. </param>
-        /// <param name="entityEntry"> The entry for the entity instance on which the property value has changed. </param>
-        /// <param name="property"> The property. </param>
-        /// <param name="value"> The old value. </param>
+        /// <param name="eventDefinition">The event definition.</param>
+        /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
+        /// <param name="entityEntry">The entry for the entity instance on which the property value has changed.</param>
+        /// <param name="property">The property.</param>
+        /// <param name="value">The old value.</param>
         public PropertyValueEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
@@ -31,8 +33,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             object? value)
             : base(eventDefinition, messageGenerator, property)
         {
-            Check.NotNull(entityEntry, nameof(entityEntry));
-
             EntityEntry = entityEntry;
             Value = value;
         }
@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The property.
         /// </summary>
-        public new virtual IProperty Property => (IProperty)base.Property;
+        public new virtual IProperty Property
+            => (IProperty)base.Property;
 
         /// <summary>
         ///     The value.

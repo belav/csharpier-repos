@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         }
 
         [ConditionalFact(Skip = "Issue #17246")]
-        public override void Fixup_does_not_ignore_eagerly_initialized_reference_navs()
+        public override void Fixup_ignores_eagerly_initialized_reference_navs()
         {
         }
 

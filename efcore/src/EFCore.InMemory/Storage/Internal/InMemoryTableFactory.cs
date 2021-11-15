@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Concurrent;
@@ -8,7 +8,6 @@ using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 {
@@ -35,9 +34,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             ILoggingOptions loggingOptions,
             IInMemorySingletonOptions options)
         {
-            Check.NotNull(loggingOptions, nameof(loggingOptions));
-            Check.NotNull(options, nameof(options));
-
             _sensitiveLoggingEnabled = loggingOptions.IsSensitiveDataLoggingEnabled;
             _nullabilityCheckEnabled = options.IsNullabilityCheckEnabled;
         }

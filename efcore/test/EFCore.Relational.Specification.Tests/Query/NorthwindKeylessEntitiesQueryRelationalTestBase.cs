@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -37,7 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             OrderDetailIds = ss.Set<Customer>().Where(c => c.City == cq.City).ToList()
                         }).OrderBy(x => x.City).Take(2)))).Message;
 
-            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyOuterElementOfCollectionJoin, message);
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
         }
 
         [ConditionalTheory]
@@ -53,7 +53,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Collection = ss.Set<CustomerQuery>().Where(cq => cq.City == c.City).ToList(),
                     })))).Message;
 
-            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyOuterElementOfCollectionJoin, message);
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task KeylessEntity_with_included_navs_multi_level(bool async)
+        {
+            var message = (await Assert.ThrowsAsync<InvalidOperationException>(
+                () => base.KeylessEntity_with_included_navs_multi_level(async))).Message;
+
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public override async Task KeylessEntity_with_defining_query_and_correlated_collection(bool async)
+        {
+            var message = (await Assert.ThrowsAsync<InvalidOperationException>(
+                () => base.KeylessEntity_with_defining_query_and_correlated_collection(async))).Message;
+
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
         }
 
         protected override QueryAsserter CreateQueryAsserter(TFixture fixture)

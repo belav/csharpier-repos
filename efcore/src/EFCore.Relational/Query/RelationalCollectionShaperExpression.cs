@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -25,43 +24,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalCollectionShaperExpression" /> class.
         /// </summary>
-        /// <param name="collectionId"> A unique id for the collection being shaped. </param>
-        /// <param name="parentIdentifier"> An identifier for the parent element. </param>
-        /// <param name="outerIdentifier"> An identifier for the outer element. </param>
-        /// <param name="selfIdentifier"> An identifier for the element in the collection. </param>
-        /// <param name="innerShaper"> An expression used to create individual elements of the collection. </param>
-        /// <param name="navigation"> A navigation associated with this collection, if any. </param>
-        /// <param name="elementType"> The clr type of individual elements in the collection. </param>
-        [Obsolete("Use ctor which takes value comaprers.")]
+        /// <param name="parentIdentifier">An identifier for the parent element.</param>
+        /// <param name="outerIdentifier">An identifier for the outer element.</param>
+        /// <param name="selfIdentifier">An identifier for the element in the collection.</param>
+        /// <param name="parentIdentifierValueComparers">A list of value comparers to compare parent identifier.</param>
+        /// <param name="outerIdentifierValueComparers">A list of value comparers to compare outer identifier.</param>
+        /// <param name="selfIdentifierValueComparers">A list of value comparers to compare self identifier.</param>
+        /// <param name="innerShaper">An expression used to create individual elements of the collection.</param>
+        /// <param name="navigation">A navigation associated with this collection, if any.</param>
+        /// <param name="elementType">The clr type of individual elements in the collection.</param>
         public RelationalCollectionShaperExpression(
-            int collectionId,
-            Expression parentIdentifier,
-            Expression outerIdentifier,
-            Expression selfIdentifier,
-            Expression innerShaper,
-            INavigation? navigation,
-            Type elementType)
-            : this(
-                collectionId, parentIdentifier, outerIdentifier, selfIdentifier,
-                null, null, null, innerShaper, navigation, elementType)
-        {
-        }
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="RelationalCollectionShaperExpression" /> class.
-        /// </summary>
-        /// <param name="collectionId"> A unique id for the collection being shaped. </param>
-        /// <param name="parentIdentifier"> An identifier for the parent element. </param>
-        /// <param name="outerIdentifier"> An identifier for the outer element. </param>
-        /// <param name="selfIdentifier"> An identifier for the element in the collection. </param>
-        /// <param name="parentIdentifierValueComparers"> A list of value comparers to compare parent identifier. </param>
-        /// <param name="outerIdentifierValueComparers"> A list of value comparers to compare outer identifier. </param>
-        /// <param name="selfIdentifierValueComparers"> A list of value comparers to compare self identifier. </param>
-        /// <param name="innerShaper"> An expression used to create individual elements of the collection. </param>
-        /// <param name="navigation"> A navigation associated with this collection, if any. </param>
-        /// <param name="elementType"> The clr type of individual elements in the collection. </param>
-        public RelationalCollectionShaperExpression(
-            int collectionId,
             Expression parentIdentifier,
             Expression outerIdentifier,
             Expression selfIdentifier,
@@ -72,13 +44,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             INavigationBase? navigation,
             Type elementType)
         {
-            Check.NotNull(parentIdentifier, nameof(parentIdentifier));
-            Check.NotNull(outerIdentifier, nameof(outerIdentifier));
-            Check.NotNull(selfIdentifier, nameof(selfIdentifier));
-            Check.NotNull(innerShaper, nameof(innerShaper));
-            Check.NotNull(elementType, nameof(elementType));
-
-            CollectionId = collectionId;
             ParentIdentifier = parentIdentifier;
             OuterIdentifier = outerIdentifier;
             SelfIdentifier = selfIdentifier;
@@ -89,11 +54,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             Navigation = navigation;
             ElementType = elementType;
         }
-
-        /// <summary>
-        ///     A unique id for this collection shaper.
-        /// </summary>
-        public virtual int CollectionId { get; }
 
         /// <summary>
         ///     The identifier for the parent element.
@@ -151,8 +111,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var parentIdentifier = visitor.Visit(ParentIdentifier);
             var outerIdentifier = visitor.Visit(OuterIdentifier);
             var selfIdentifier = visitor.Visit(SelfIdentifier);
@@ -165,42 +123,32 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="parentIdentifier"> The <see cref="ParentIdentifier" /> property of the result. </param>
-        /// <param name="outerIdentifier"> The <see cref="OuterIdentifier" /> property of the result. </param>
-        /// <param name="selfIdentifier"> The <see cref="SelfIdentifier" /> property of the result. </param>
-        /// <param name="innerShaper"> The <see cref="InnerShaper" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="parentIdentifier">The <see cref="ParentIdentifier" /> property of the result.</param>
+        /// <param name="outerIdentifier">The <see cref="OuterIdentifier" /> property of the result.</param>
+        /// <param name="selfIdentifier">The <see cref="SelfIdentifier" /> property of the result.</param>
+        /// <param name="innerShaper">The <see cref="InnerShaper" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual RelationalCollectionShaperExpression Update(
             Expression parentIdentifier,
             Expression outerIdentifier,
             Expression selfIdentifier,
             Expression innerShaper)
-        {
-            Check.NotNull(parentIdentifier, nameof(parentIdentifier));
-            Check.NotNull(outerIdentifier, nameof(outerIdentifier));
-            Check.NotNull(selfIdentifier, nameof(selfIdentifier));
-            Check.NotNull(innerShaper, nameof(innerShaper));
-
-            return parentIdentifier != ParentIdentifier
+            => parentIdentifier != ParentIdentifier
                 || outerIdentifier != OuterIdentifier
                 || selfIdentifier != SelfIdentifier
                 || innerShaper != InnerShaper
                     ? new RelationalCollectionShaperExpression(
-                        CollectionId, parentIdentifier, outerIdentifier, selfIdentifier,
+                        parentIdentifier, outerIdentifier, selfIdentifier,
                         ParentIdentifierValueComparers, OuterIdentifierValueComparers, SelfIdentifierValueComparers,
                         innerShaper, Navigation, ElementType)
                     : this;
-        }
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.AppendLine("RelationalCollectionShaper:");
             using (expressionPrinter.Indent())
             {
-                expressionPrinter.AppendLine($"CollectionId: {CollectionId}");
                 expressionPrinter.Append("ParentIdentifier:");
                 expressionPrinter.Visit(ParentIdentifier);
                 expressionPrinter.AppendLine();

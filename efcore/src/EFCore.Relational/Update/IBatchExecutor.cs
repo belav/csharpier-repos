@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -17,21 +17,27 @@ namespace Microsoft.EntityFrameworkCore.Update
     ///     <para>
     ///         This type is typically used by database providers; it is generally not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
     ///         <see cref="DbContext" /> instance will use its own instance of this service.
     ///         The implementation may depend on other services registered with any lifetime.
     ///         The implementation does not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public interface IBatchExecutor
     {
         /// <summary>
         ///     Executes the commands in the batches against the given database connection.
         /// </summary>
-        /// <param name="commandBatches"> The batches to execute. </param>
-        /// <param name="connection"> The database connection to use. </param>
-        /// <returns> The total number of rows affected. </returns>
+        /// <param name="commandBatches">The batches to execute.</param>
+        /// <param name="connection">The database connection to use.</param>
+        /// <returns>The total number of rows affected.</returns>
         int Execute(
             IEnumerable<ModificationCommandBatch> commandBatches,
             IRelationalConnection connection);
@@ -39,14 +45,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Executes the commands in the batches against the given database connection.
         /// </summary>
-        /// <param name="commandBatches"> The batches to execute. </param>
-        /// <param name="connection"> The database connection to use. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
+        /// <param name="commandBatches">The batches to execute.</param>
+        /// <param name="connection">The database connection to use.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>
         ///     A task that represents the asynchronous save operation. The task result contains the
         ///     total number of rows affected.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task<int> ExecuteAsync(
             IEnumerable<ModificationCommandBatch> commandBatches,
             IRelationalConnection connection,

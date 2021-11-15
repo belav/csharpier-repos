@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -42,10 +41,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             SqlExpression? left = null;
             SqlExpression? right = null;
 
@@ -68,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && right != null)
             {
                 if (left.Type == right.Type
-                    || (right.Type == typeof(object) && right is SqlParameterExpression)
-                    || (left.Type == typeof(object) && left is SqlParameterExpression))
+                    || (right.Type == typeof(object) && (right is SqlParameterExpression || right is SqlConstantExpression))
+                    || (left.Type == typeof(object) && (left is SqlParameterExpression || left is SqlConstantExpression)))
                 {
                     return _sqlExpressionFactory.Equal(left, right);
                 }

@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 {
@@ -50,14 +50,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
         private Expression VisitShapedQueryExpression(ShapedQueryExpression shapedQueryExpression)
         {
-            return shapedQueryExpression.Update(
-                Visit(shapedQueryExpression.QueryExpression), shapedQueryExpression.ShaperExpression);
+            var selectExpression = shapedQueryExpression.QueryExpression;
+            var updatedSelectExpression = Visit(selectExpression);
+            return updatedSelectExpression != selectExpression
+                ? shapedQueryExpression.Update(updatedSelectExpression,
+                    ReplacingExpressionVisitor.Replace(
+                        selectExpression, updatedSelectExpression, shapedQueryExpression.ShaperExpression))
+                : shapedQueryExpression;
         }
 
         private Expression VisitSelect(SelectExpression selectExpression)
         {
-            Check.NotNull(selectExpression, nameof(selectExpression));
-
             var changed = false;
 
             var projections = new List<ProjectionExpression>();
@@ -92,8 +95,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
         private Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression)
         {
-            Check.NotNull(sqlConditionalExpression, nameof(sqlConditionalExpression));
-
             var test = TryCompensateForBoolWithValueConverter((SqlExpression)Visit(sqlConditionalExpression.Test));
             var ifTrue = (SqlExpression)Visit(sqlConditionalExpression.IfTrue);
             var ifFalse = (SqlExpression)Visit(sqlConditionalExpression.IfFalse);

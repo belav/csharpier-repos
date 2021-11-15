@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,12 +14,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures the principal side of the relationship as required if the
     ///     <see cref="RequiredAttribute" /> is applied on the navigation property to the principal entity type.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class RequiredNavigationAttributeConvention : NavigationAttributeConventionBase<RequiredAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RequiredNavigationAttributeConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public RequiredNavigationAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
             : base(dependencies)
         {
@@ -68,16 +71,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            if (foreignKey.GetPrincipalEndConfigurationSource() != null)
+            if (navigation.IsOnDependent)
             {
-                if (navigation.IsOnDependent)
-                {
-                    foreignKey.Builder.IsRequired(true, fromDataAnnotation: true);
-                }
-                else
-                {
-                    foreignKey.Builder.IsRequiredDependent(true, fromDataAnnotation: true);
-                }
+                foreignKey.Builder.IsRequired(true, fromDataAnnotation: true);
+            }
+            else
+            {
+                foreignKey.Builder.IsRequiredDependent(true, fromDataAnnotation: true);
             }
         }
 

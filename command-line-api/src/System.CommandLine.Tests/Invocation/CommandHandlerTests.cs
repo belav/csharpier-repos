@@ -14,7 +14,7 @@ namespace System.CommandLine.Tests.Invocation
 {
     public class CommandHandlerTests
     {
-        private readonly TestConsole _console = new TestConsole();
+        private readonly TestConsole _console = new();
 
         [Fact]
         public async Task Specific_invocation_behavior_can_be_specified_in_the_command()
@@ -67,8 +67,8 @@ namespace System.CommandLine.Tests.Invocation
             }
 
             var command = new Command("command");
-            command.AddOption(new Option<string>("--name"));
-            command.AddOption(new Option<string>("--age"));
+            command.AddOption(new Option<string>(new[] { "-n", "--name" }));
+            command.AddOption(new Option<string>(new[] { "-a", "--age" }));
             command.Handler = CommandHandler.Create<string, int>(Execute);
 
             await command.InvokeAsync("command --age 425 --name Gandalf", _console);
@@ -142,7 +142,7 @@ namespace System.CommandLine.Tests.Invocation
 
             await command.InvokeAsync("command", _console);
 
-            boundName.Should().Be("");
+            boundName.Should().BeNull();
             boundAge.Should().Be(0);
         }
 
@@ -260,15 +260,17 @@ namespace System.CommandLine.Tests.Invocation
         {
             ParseResult boundParseResult = default;
 
+            var option = new Option<int>("-x");
+
             var command = new Command("command")
             {
-                new Option<int>("-x")
+                option
             };
             command.Handler = CommandHandler.Create<ParseResult>(result => { boundParseResult = result; });
 
             await command.InvokeAsync("command -x 123", _console);
 
-            boundParseResult.ValueForOption("-x").Should().Be(123);
+            boundParseResult.GetValueForOption(option).Should().Be(123);
         }
 
         [Fact]
@@ -285,7 +287,7 @@ namespace System.CommandLine.Tests.Invocation
 
             await command.InvokeAsync("command -x 123", _console);
 
-            boundContext.ParseResult.ValueForOption(option).Should().Be(123);
+            boundContext.ParseResult.GetValueForOption(option).Should().Be(123);
         }
 
         [Fact]
@@ -307,17 +309,18 @@ namespace System.CommandLine.Tests.Invocation
         {
             InvocationContext boundContext = default;
 
+            var option = new Option<int>("-x");
+
             var command = new Command("command")
             {
-                new Option<int>("-x")
+                option
             };
             command.Handler = CommandHandler.Create<InvocationContext>(context => { boundContext = context; });
 
             await command.InvokeAsync("command -x 123", _console);
 
-            boundContext.ParseResult.ValueForOption("-x").Should().Be(123);
+            boundContext.ParseResult.GetValueForOption(option).Should().Be(123);
         }
-
 
         private class ExecuteTestClass
         {
@@ -393,7 +396,6 @@ namespace System.CommandLine.Tests.Invocation
             boundName.Should().Be("Gandalf");
             boundAge.Should().Be(425);
         }
-
 
         [Fact]
         public async Task Method_parameters_on_the_invoked_method_can_be_bound_to_hyphenated_argument_names()

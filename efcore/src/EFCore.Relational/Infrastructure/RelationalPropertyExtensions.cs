@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Creates a comma-separated list of column names.
         /// </summary>
-        /// <param name="properties"> The properties to format. </param>
-        /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
-        /// <returns> A comma-separated list of column names. </returns>
+        /// <param name="properties">The properties to format.</param>
+        /// <param name="storeObject">The identifier of the table-like store object containing the column.</param>
+        /// <returns>A comma-separated list of column names.</returns>
         public static string FormatColumns(
             this IEnumerable<IReadOnlyProperty> properties,
             StoreObjectIdentifier storeObject)
@@ -26,9 +26,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Creates a list of column names.
         /// </summary>
-        /// <param name="properties"> The properties to format. </param>
-        /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
-        /// <returns> A list of column names. </returns>
+        /// <param name="properties">The properties to format.</param>
+        /// <param name="storeObject">The identifier of the table-like store object containing the column.</param>
+        /// <returns>A list of column names.</returns>
         public static IReadOnlyList<string>? GetColumnNames(
             this IEnumerable<IReadOnlyProperty> properties,
             in StoreObjectIdentifier storeObject)

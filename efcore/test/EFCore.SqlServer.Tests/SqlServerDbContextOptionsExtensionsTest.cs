@@ -1,9 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 // ReSharper disable InconsistentNaming
@@ -83,6 +85,50 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Same(connection, extension.Connection);
             Assert.Null(extension.ConnectionString);
+        }
+
+        [ConditionalFact]
+        public void Service_collection_extension_method_can_configure_sqlserver_options()
+        {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSqlServer<ApplicationDbContext>(
+                "Database=Crunchie",
+                sqlServerOption =>
+                {
+                    sqlServerOption.MaxBatchSize(123);
+                    sqlServerOption.CommandTimeout(30);
+                },
+                dbContextOption =>
+                {
+                    dbContextOption.EnableDetailedErrors();
+                });
+
+            var services = serviceCollection.BuildServiceProvider(validateScopes: true);
+
+            using (var serviceScope = services
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                var coreOptions = serviceScope.ServiceProvider
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+
+                Assert.True(coreOptions.DetailedErrorsEnabled);
+
+                var sqlServerOptions = serviceScope.ServiceProvider
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<SqlServerOptionsExtension>();
+
+                Assert.Equal(123, sqlServerOptions.MaxBatchSize);
+                Assert.Equal(30, sqlServerOptions.CommandTimeout);
+                Assert.Equal("Database=Crunchie", sqlServerOptions.ConnectionString);
+            }
+        }
+
+        private class ApplicationDbContext : DbContext
+        {
+            public ApplicationDbContext(DbContextOptions options)
+                   : base(options)
+            {
+            }
         }
     }
 }

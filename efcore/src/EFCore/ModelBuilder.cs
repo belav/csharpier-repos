@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.ComponentModel;
@@ -15,16 +15,19 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore
 {
     /// <summary>
-    ///     <para>
-    ///         Provides a simple API surface for configuring a <see cref="IMutableModel" /> that defines the shape of your
-    ///         entities, the relationships between them, and how they map to the database.
-    ///     </para>
+    ///     Provides a simple API surface for configuring a <see cref="IMutableModel" /> that defines the shape of your
+    ///     entities, the relationships between them, and how they map to the database.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         You can use <see cref="ModelBuilder" /> to construct a model for a context by overriding
     ///         <see cref="DbContext.OnModelCreating(ModelBuilder)" /> on your derived context. Alternatively you can create the
     ///         model externally and set it on a <see cref="DbContextOptions" /> instance that is passed to the context constructor.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     {
         private readonly InternalModelBuilder _builder;
@@ -33,9 +36,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Initializes a new instance of the <see cref="ModelBuilder" /> class that will
         ///     apply a set of conventions.
         /// </summary>
-        /// <param name="conventions"> The conventions to be applied to the model. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
+        ///     <see href="https://aka.ms/efcore-docs-coventions">EF Core model-building conventions</see> for more information.
+        /// </remarks>
+        /// <param name="conventions">The conventions to be applied to the model.</param>
         public ModelBuilder(ConventionSet conventions)
-            : this(conventions, null, true)
+            : this(conventions, null, null)
         {
         }
 
@@ -43,19 +50,30 @@ namespace Microsoft.EntityFrameworkCore
         ///     Initializes a new instance of the <see cref="ModelBuilder" /> class that will
         ///     apply a set of conventions.
         /// </summary>
-        /// <param name="conventions"> The conventions to be applied to the model. </param>
-        /// <param name="modelDependencies"> The dependencies object for the model. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
+        ///     <see href="https://aka.ms/efcore-docs-coventions">EF Core model-building conventions</see> for more information.
+        /// </remarks>
+        /// <param name="conventions">The conventions to be applied to the model.</param>
+        /// <param name="modelDependencies">The dependencies object for the model.</param>
         public ModelBuilder(ConventionSet conventions, ModelDependencies modelDependencies)
-            : this(conventions, modelDependencies, true)
+            : this(conventions, modelDependencies, null)
         {
             Check.NotNull(modelDependencies, nameof(modelDependencies));
         }
 
-        private ModelBuilder(ConventionSet conventions, ModelDependencies? modelDependencies, bool _)
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [EntityFrameworkInternal]
+        public ModelBuilder(ConventionSet conventions, ModelDependencies? modelDependencies, ModelConfiguration? modelConfiguration)
         {
             Check.NotNull(conventions, nameof(conventions));
 
-            _builder = new Model(conventions, modelDependencies).Builder;
+            _builder = new Model(conventions, modelDependencies, modelConfiguration).Builder;
 
             _builder.Metadata.SetProductVersion(ProductInfo.GetVersion());
         }
@@ -65,9 +83,13 @@ namespace Microsoft.EntityFrameworkCore
         ///         Initializes a new instance of the <see cref="ModelBuilder" /> class with no conventions.
         ///     </para>
         ///     <para>
-        ///         Warning: conventions are typically needed to build a correct model.
+        ///         Warning: conventions are needed to build a correct model.
         ///     </para>
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
+        ///     <see href="https://aka.ms/efcore-docs-coventions">EF Core model-building conventions</see> for more information.
+        /// </remarks>
         public ModelBuilder()
         {
             _builder = new Model().Builder;
@@ -91,6 +113,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     The model being configured.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships in EF Core</see> for more information.
+        /// </remarks>
         public virtual IMutableModel Model
             => Builder.Metadata;
 
@@ -98,9 +123,9 @@ namespace Microsoft.EntityFrameworkCore
         ///     Adds or updates an annotation on the model. If an annotation with the key specified in
         ///     <paramref name="annotation" /> already exists its value will be updated.
         /// </summary>
-        /// <param name="annotation"> The key of the annotation to be added or updated. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <returns> The same <see cref="ModelBuilder" /> instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="annotation">The key of the annotation to be added or updated.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <returns>The same <see cref="ModelBuilder" /> instance so that multiple configuration calls can be chained.</returns>
         public virtual ModelBuilder HasAnnotation(string annotation, object? value)
         {
             Check.NotEmpty(annotation, nameof(annotation));
@@ -111,14 +136,12 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         The internal <see cref="ModelBuilder" /> being used to configure this model.
-        ///     </para>
-        ///     <para>
-        ///         This property is intended for use by extension methods to configure the model. It is not intended to be used in
-        ///         application code.
-        ///     </para>
+        ///     The internal <see cref="ModelBuilder" /> being used to configure this model.
         /// </summary>
+        /// <remarks>
+        ///     This property is intended for use by extension methods to configure the model. It is not intended to be used in
+        ///     application code.
+        /// </remarks>
         IConventionModelBuilder IInfrastructure<IConventionModelBuilder>.Instance
             => _builder;
 
@@ -126,16 +149,19 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns an object that can be used to configure a given entity type in the model.
         ///     If the entity type is not already part of the model, it will be added to the model.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type to be configured. </typeparam>
-        /// <returns> An object that can be used to configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
+        /// <returns>An object that can be used to configure the entity type.</returns>
         public virtual EntityTypeBuilder<TEntity> Entity<TEntity>()
             where TEntity : class
-            => new(Builder.Entity(typeof(TEntity), ConfigurationSource.Explicit)!.Metadata);
+            => new(Builder.Entity(typeof(TEntity), ConfigurationSource.Explicit, shouldBeOwned: false)!.Metadata);
 
         /// <summary>
-        ///     <para>
-        ///         Returns an object that can be used to configure a given shared type entity type in the model.
-        ///     </para>
+        ///     Returns an object that can be used to configure a given shared type entity type in the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If an entity type with the provided name is not already part of the model, a new entity type with provided CLR
         ///         type will be added to the model as shared type entity type.
@@ -144,10 +170,14 @@ namespace Microsoft.EntityFrameworkCore
         ///         Shared type entity type is an entity type which can share CLR type with other types in the model but has
         ///         a unique name and always identified by the name.
         ///     </para>
-        /// </summary>
-        /// <typeparam name="TEntity"> The CLR type of the entity type to be configured. </typeparam>
-        /// <param name="name"> The name of the entity type to be configured. </param>
-        /// <returns> An object that can be used to configure the entity type. </returns>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> and
+        ///         <see href="https://aka.ms/efcore-docs-shared-types">Shared entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <typeparam name="TEntity">The CLR type of the entity type to be configured.</typeparam>
+        /// <param name="name">The name of the entity type to be configured.</param>
+        /// <returns>An object that can be used to configure the entity type.</returns>
         public virtual EntityTypeBuilder<TEntity> SharedTypeEntity<TEntity>(string name)
             where TEntity : class
         {
@@ -160,13 +190,16 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns an object that can be used to configure a given entity type in the model.
         ///     If the entity type is not already part of the model, it will be added to the model.
         /// </summary>
-        /// <param name="type"> The entity type to be configured. </param>
-        /// <returns> An object that can be used to configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        /// </remarks>
+        /// <param name="type">The entity type to be configured.</param>
+        /// <returns>An object that can be used to configure the entity type.</returns>
         public virtual EntityTypeBuilder Entity(Type type)
         {
             Check.NotNull(type, nameof(type));
 
-            return new EntityTypeBuilder(Builder.Entity(type, ConfigurationSource.Explicit)!.Metadata);
+            return new EntityTypeBuilder(Builder.Entity(type, ConfigurationSource.Explicit, shouldBeOwned: false)!.Metadata);
         }
 
         /// <summary>
@@ -174,19 +207,22 @@ namespace Microsoft.EntityFrameworkCore
         ///     If an entity type with the provided name is not already part of the model,
         ///     a new entity type that does not have a corresponding CLR type will be added to the model.
         /// </summary>
-        /// <param name="name"> The name of the entity type to be configured. </param>
-        /// <returns> An object that can be used to configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the entity type to be configured.</param>
+        /// <returns>An object that can be used to configure the entity type.</returns>
         public virtual EntityTypeBuilder Entity(string name)
         {
             Check.NotEmpty(name, nameof(name));
 
-            return new EntityTypeBuilder(Builder.Entity(name, ConfigurationSource.Explicit)!.Metadata);
+            return new EntityTypeBuilder(Builder.Entity(name, ConfigurationSource.Explicit, shouldBeOwned: false)!.Metadata);
         }
 
         /// <summary>
-        ///     <para>
-        ///         Returns an object that can be used to configure a given shared type entity type in the model.
-        ///     </para>
+        ///     Returns an object that can be used to configure a given shared type entity type in the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If an entity type with the provided name is not already part of the model, a new entity type with provided CLR
         ///         type will be added to the model as shared type entity type.
@@ -195,31 +231,39 @@ namespace Microsoft.EntityFrameworkCore
         ///         Shared type entity type is an entity type which can share CLR type with other types in the model but has
         ///         a unique name and always identified by the name.
         ///     </para>
-        /// </summary>
-        /// <param name="name"> The name of the entity type to be configured. </param>
-        /// <param name="type"> The CLR type of the entity type to be configured. </param>
-        /// <returns> An object that can be used to configure the entity type. </returns>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> and
+        ///         <see href="https://aka.ms/efcore-docs-shared-types">Shared entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="name">The name of the entity type to be configured.</param>
+        /// <param name="type">The CLR type of the entity type to be configured.</param>
+        /// <returns>An object that can be used to configure the entity type.</returns>
         public virtual EntityTypeBuilder SharedTypeEntity(string name, Type type)
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(type, nameof(type));
 
-            return new EntityTypeBuilder(Builder.SharedTypeEntity(name, type, ConfigurationSource.Explicit)!.Metadata);
+            return new EntityTypeBuilder(
+                Builder.SharedTypeEntity(name, type, ConfigurationSource.Explicit, shouldBeOwned: false)!.Metadata);
         }
 
         /// <summary>
-        ///     <para>
-        ///         Performs configuration of a given entity type in the model. If the entity type is not already part
-        ///         of the model, it will be added to the model.
-        ///     </para>
+        ///     Performs configuration of a given entity type in the model. If the entity type is not already part
+        ///     of the model, it will be added to the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This overload allows configuration of the entity type to be done in line in the method call rather
         ///         than being chained after a call to <see cref="Entity{TEntity}()" />. This allows additional
         ///         configuration at the model level to be chained after configuration for the entity type.
         ///     </para>
-        /// </summary>
-        /// <typeparam name="TEntity"> The entity type to be configured. </typeparam>
-        /// <param name="buildAction"> An action that performs configuration of the entity type. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
+        /// <param name="buildAction">An action that performs configuration of the entity type.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -234,9 +278,9 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Returns an object that can be used to configure a given shared type entity type in the model.
-        ///     </para>
+        ///     Returns an object that can be used to configure a given shared type entity type in the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If an entity type with the provided name is not already part of the model, a new entity type with provided CLR
         ///         type will be added to the model as shared type entity type.
@@ -250,10 +294,14 @@ namespace Microsoft.EntityFrameworkCore
         ///         than being chained after a call to <see cref="Entity{TEntity}()" />. This allows additional
         ///         configuration at the model level to be chained after configuration for the entity type.
         ///     </para>
-        /// </summary>
-        /// <typeparam name="TEntity"> The CLR type of the entity type to be configured. </typeparam>
-        /// <param name="name"> The name of the entity type to be configured. </param>
-        /// <param name="buildAction"> An action that performs configuration of the entity type. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> and
+        ///         <see href="https://aka.ms/efcore-docs-shared-types">Shared entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <typeparam name="TEntity">The CLR type of the entity type to be configured.</typeparam>
+        /// <param name="name">The name of the entity type to be configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the entity type.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -262,7 +310,6 @@ namespace Microsoft.EntityFrameworkCore
             Action<EntityTypeBuilder<TEntity>> buildAction)
             where TEntity : class
         {
-            Check.NotEmpty(name, nameof(name));
             Check.NotNull(buildAction, nameof(buildAction));
 
             buildAction(SharedTypeEntity<TEntity>(name));
@@ -271,24 +318,26 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Performs configuration of a given entity type in the model. If the entity type is not already part
-        ///         of the model, it will be added to the model.
-        ///     </para>
+        ///     Performs configuration of a given entity type in the model. If the entity type is not already part
+        ///     of the model, it will be added to the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This overload allows configuration of the entity type to be done in line in the method call rather
         ///         than being chained after a call to <see cref="Entity{TEntity}()" />. This allows additional
         ///         configuration at the model level to be chained after configuration for the entity type.
         ///     </para>
-        /// </summary>
-        /// <param name="type"> The entity type to be configured. </param>
-        /// <param name="buildAction"> An action that performs configuration of the entity type. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="type">The entity type to be configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the entity type.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
         public virtual ModelBuilder Entity(Type type, Action<EntityTypeBuilder> buildAction)
         {
-            Check.NotNull(type, nameof(type));
             Check.NotNull(buildAction, nameof(buildAction));
 
             buildAction(Entity(type));
@@ -297,25 +346,27 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Performs configuration of a given entity type in the model.
-        ///         If an entity type with the provided name is not already part of the model,
-        ///         a new entity type that does not have a corresponding CLR type will be added to the model.
-        ///     </para>
+        ///     Performs configuration of a given entity type in the model.
+        ///     If an entity type with the provided name is not already part of the model,
+        ///     a new entity type that does not have a corresponding CLR type will be added to the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This overload allows configuration of the entity type to be done in line in the method call rather
         ///         than being chained after a call to <see cref="Entity(string)" />. This allows additional
         ///         configuration at the model level to be chained after configuration for the entity type.
         ///     </para>
-        /// </summary>
-        /// <param name="name"> The name of the entity type to be configured. </param>
-        /// <param name="buildAction"> An action that performs configuration of the entity type. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="name">The name of the entity type to be configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the entity type.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
         public virtual ModelBuilder Entity(string name, Action<EntityTypeBuilder> buildAction)
         {
-            Check.NotEmpty(name, nameof(name));
             Check.NotNull(buildAction, nameof(buildAction));
 
             buildAction(Entity(name));
@@ -324,9 +375,9 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Returns an object that can be used to configure a given shared type entity type in the model.
-        ///     </para>
+        ///     Returns an object that can be used to configure a given shared type entity type in the model.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If an entity type with the provided name is not already part of the model, a new entity type with provided CLR
         ///         type will be added to the model as shared type entity type.
@@ -340,10 +391,14 @@ namespace Microsoft.EntityFrameworkCore
         ///         than being chained after a call to <see cref="Entity(string)" />. This allows additional
         ///         configuration at the model level to be chained after configuration for the entity type.
         ///     </para>
-        /// </summary>
-        /// <param name="name"> The name of the entity type to be configured. </param>
-        /// <param name="type"> The CLR type of the entity type to be configured. </param>
-        /// <param name="buildAction"> An action that performs configuration of the entity type. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> and
+        ///         <see href="https://aka.ms/efcore-docs-shared-types">Shared entity types</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="name">The name of the entity type to be configured.</param>
+        /// <param name="type">The CLR type of the entity type to be configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the entity type.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -352,7 +407,6 @@ namespace Microsoft.EntityFrameworkCore
             Type type,
             Action<EntityTypeBuilder> buildAction)
         {
-            Check.NotEmpty(name, nameof(name));
             Check.NotNull(type, nameof(type));
             Check.NotNull(buildAction, nameof(buildAction));
 
@@ -365,7 +419,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Excludes the given entity type from the model. This method is typically used to remove types from
         ///     the model that were added by convention.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type to be removed from the model. </typeparam>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type to be removed from the model.</typeparam>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -377,7 +434,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Excludes an entity type with given CLR type from the model. This method is typically used to remove types from
         ///     the model that were added by convention.
         /// </summary>
-        /// <param name="type"> The entity type to be removed from the model. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        /// </remarks>
+        /// <param name="type">The entity type to be removed from the model.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -394,7 +454,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Excludes an entity type with the given name from the model. This method is typically used to remove types from
         ///     the model that were added by convention.
         /// </summary>
-        /// <param name="typeName"> The name of the entity type to be removed from the model. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types</see> for more information.
+        /// </remarks>
+        /// <param name="typeName">The name of the entity type to be removed from the model.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -410,8 +473,11 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Applies configuration that is defined in an <see cref="IEntityTypeConfiguration{TEntity}" /> instance.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type to be configured. </typeparam>
-        /// <param name="configuration"> The configuration to be applied. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
+        /// <param name="configuration">The configuration to be applied.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -429,8 +495,11 @@ namespace Microsoft.EntityFrameworkCore
         ///     Applies configuration from all <see cref="IEntityTypeConfiguration{TEntity}" /> />
         ///     instances that are defined in provided assembly.
         /// </summary>
-        /// <param name="assembly"> The assembly to scan. </param>
-        /// <param name="predicate"> Optional predicate to filter types within the assembly. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="assembly">The assembly to scan.</param>
+        /// <param name="predicate">Optional predicate to filter types within the assembly.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -446,7 +515,7 @@ namespace Microsoft.EntityFrameworkCore
                         && e.GetParameters().SingleOrDefault()?.ParameterType.GetGenericTypeDefinition()
                         == typeof(IEntityTypeConfiguration<>));
 
-            foreach (var type in assembly.GetConstructibleTypes())
+            foreach (var type in assembly.GetConstructibleTypes().OrderBy(t => t.FullName))
             {
                 // Only accept types that contain a parameterless constructor, are not abstract and satisfy a predicate if it was used.
                 if (type.GetConstructor(Type.EmptyTypes) == null
@@ -477,7 +546,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Marks an entity type as owned. All references to this type will be configured as
         ///     separate owned type instances.
         /// </summary>
-        /// <typeparam name="T"> The entity type to be configured. </typeparam>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-owned">Owned types in EF Core</see> for more information.
+        /// </remarks>
+        /// <typeparam name="T">The entity type to be configured.</typeparam>
         public virtual OwnedEntityTypeBuilder<T> Owned<T>()
             where T : class
         {
@@ -490,7 +562,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Marks an entity type as owned. All references to this type will be configured as
         ///     separate owned type instances.
         /// </summary>
-        /// <param name="type"> The entity type to be configured. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-owned">Owned types in EF Core</see> for more information.
+        /// </remarks>
+        /// <param name="type">The entity type to be configured.</param>
         public virtual OwnedEntityTypeBuilder Owned(Type type)
         {
             Check.NotNull(type, nameof(type));
@@ -504,7 +579,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Configures the default <see cref="ChangeTrackingStrategy" /> to be used for this model.
         ///     This strategy indicates how the context detects changes to properties for an instance of an entity type.
         /// </summary>
-        /// <param name="changeTrackingStrategy"> The change tracking strategy to be used. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-change-detection">Change detection and notifications</see> for more information.
+        /// </remarks>
+        /// <param name="changeTrackingStrategy">The change tracking strategy to be used.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -516,17 +594,20 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     <para>
-        ///         Sets the <see cref="PropertyAccessMode" /> to use for all properties of this entity type.
-        ///     </para>
+        ///     Sets the <see cref="PropertyAccessMode" /> to use for all properties of this entity type.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         By default, the backing field, if one is found by convention or has been specified, is used when
         ///         new objects are constructed, typically when entities are queried from the database.
         ///         Properties are used for all other accesses. Calling this method will change that behavior
         ///         for all properties in the model as described in the <see cref="PropertyAccessMode" /> enum.
         ///     </para>
-        /// </summary>
-        /// <param name="propertyAccessMode"> The <see cref="PropertyAccessMode" /> to use for properties of this model. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-property-acess">Property versus field access in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for properties of this model.</param>
         /// <returns>
         ///     The same <see cref="ModelBuilder" /> instance so that additional configuration calls can be chained.
         /// </returns>
@@ -542,7 +623,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     processing happens automatically when using <see cref="DbContext.OnModelCreating" />; this method allows it to be run
         ///     explicitly in cases where the automatic execution is not possible.
         /// </summary>
-        /// <returns> The finalized model. </returns>
+        /// <returns>The finalized model.</returns>
         public virtual IModel FinalizeModel()
             => Builder.Metadata.FinalizeModel();
 
@@ -554,7 +635,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -562,8 +643,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj)
             => base.Equals(obj);
@@ -571,7 +652,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
             => base.GetHashCode();

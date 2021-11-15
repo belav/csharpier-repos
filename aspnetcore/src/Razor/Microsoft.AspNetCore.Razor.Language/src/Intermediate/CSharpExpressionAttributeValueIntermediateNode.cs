@@ -1,31 +1,30 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language.Intermediate
+namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
+
+public sealed class CSharpExpressionAttributeValueIntermediateNode : IntermediateNode
 {
-    public sealed class CSharpExpressionAttributeValueIntermediateNode : IntermediateNode
+    public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+
+    public string Prefix { get; set; }
+
+    public override void Accept(IntermediateNodeVisitor visitor)
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
-
-        public string Prefix { get; set; }
-
-        public override void Accept(IntermediateNodeVisitor visitor)
+        if (visitor == null)
         {
-            if (visitor == null)
-            {
-                throw new ArgumentNullException(nameof(visitor));
-            }
-
-            visitor.VisitCSharpExpressionAttributeValue(this);
+            throw new ArgumentNullException(nameof(visitor));
         }
 
-        public override void FormatNode(IntermediateNodeFormatter formatter)
-        {
-            formatter.WriteChildren(Children);
+        visitor.VisitCSharpExpressionAttributeValue(this);
+    }
 
-            formatter.WriteProperty(nameof(Prefix), Prefix);
-        }
+    public override void FormatNode(IntermediateNodeFormatter formatter)
+    {
+        formatter.WriteChildren(Children);
+
+        formatter.WriteProperty(nameof(Prefix), Prefix);
     }
 }

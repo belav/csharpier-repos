@@ -1,26 +1,17 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class DiagnosticsLogger<TLoggerCategory> : IDiagnosticsLogger<TLoggerCategory>
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
@@ -120,10 +111,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     Dispatches the given <see cref="EventData" /> to a <see cref="DiagnosticSource" />, if enabled, and
         ///     a <see cref="IDbContextLogger" />, if enabled.
         /// </summary>
-        /// <param name="definition"> The definition of the event to log. </param>
-        /// <param name="eventData"> The event data. </param>
-        /// <param name="diagnosticSourceEnabled"> True to dispatch to a <see cref="DiagnosticSource" />; <see langword="false" /> otherwise. </param>
-        /// <param name="simpleLogEnabled"> True to dispatch to a <see cref="IDbContextLogger" />; <see langword="false" /> otherwise. </param>
+        /// <param name="definition">The definition of the event to log.</param>
+        /// <param name="eventData">The event data.</param>
+        /// <param name="diagnosticSourceEnabled">True to dispatch to a <see cref="DiagnosticSource" />; <see langword="false" /> otherwise.</param>
+        /// <param name="simpleLogEnabled">True to dispatch to a <see cref="IDbContextLogger" />; <see langword="false" /> otherwise.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // Because hot path for logging
         protected void DispatchEventData(
             EventDefinitionBase definition,
@@ -135,7 +126,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         /// <summary>
         ///     Checks whether or not the message should be sent to the <see cref="ILogger" />.
         /// </summary>
-        /// <param name="definition"> The definition of the event to log. </param>
+        /// <param name="definition">The definition of the event to log.</param>
         /// <returns>
         ///     <see langword="true" /> if <see cref="ILogger" /> logging is enabled and the event should not be ignored;
         ///     <see langword="false" /> otherwise.
@@ -149,8 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     not there is a <see cref="DiagnosticSource" />, an <see cref="IDbContextLogger" />, or an <see cref="IInterceptor" /> enabled for
         ///     the given event.
         /// </summary>
-        /// <param name="definition"> The definition of the event. </param>
-        /// <param name="interceptor"> The <see cref="IInterceptor" /> to use if enabled; otherwise null. </param>
+        /// <param name="definition">The definition of the event.</param>
+        /// <param name="interceptor">The <see cref="IInterceptor" /> to use if enabled; otherwise null.</param>
         /// <param name="diagnosticSourceEnabled">
         ///     Set to <see langword="true" /> if a <see cref="DiagnosticSource" /> is enabled;
         ///     <see langword="false" /> otherwise.

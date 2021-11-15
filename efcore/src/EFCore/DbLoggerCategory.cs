@@ -1,14 +1,14 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore
 {
     /// <summary>
-    ///     <para>
-    ///         An API for getting logger categories in an Intellisense/tab-completion friendly manner.
-    ///     </para>
+    ///     An API for getting logger categories in an Intellisense/tab-completion friendly manner.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Get an Entity Framework Core logger category using its Name property. For example,
     ///         <c>LoggerCategory.Database.Sql.Name</c>.
@@ -17,7 +17,10 @@ namespace Microsoft.EntityFrameworkCore
     ///         Use these types with <see cref="IDiagnosticsLogger{TLoggerCategory}" /> or
     ///         <see cref="IDiagnosticsLogger{TLoggerCategory}" /> to create a logger.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    ///     </para>
+    /// </remarks>
     public static class DbLoggerCategory
     {
         /// <summary>

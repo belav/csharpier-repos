@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Utilities;
 
@@ -14,13 +14,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class Annotation : IAnnotation
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Annotation" /> class.
         /// </summary>
-        /// <param name="name"> The key of this annotation. </param>
-        /// <param name="value"> The value assigned to this annotation. </param>
+        /// <param name="name">The key of this annotation.</param>
+        /// <param name="value">The value assigned to this annotation.</param>
         public Annotation(string name, object? value)
         {
             Check.NotEmpty(name, nameof(name));

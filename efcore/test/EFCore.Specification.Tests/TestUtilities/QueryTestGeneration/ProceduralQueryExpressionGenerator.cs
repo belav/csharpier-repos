@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -173,10 +173,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 "Collection_select_nav_prop_first_or_default_then_nav_prop_nested_using_property_method",
                 "Unable to cast object of type 'System.String' to type"); // 12601
 
-            AddExpectedFailure("GroupBy_Shadow", "Value does not fall within the expected range."); // 12088
-            AddExpectedFailure("GroupBy_Shadow3", "Value does not fall within the expected range."); // 12088
-            AddExpectedFailure("GroupBy_SelectMany", "Value does not fall within the expected range."); // 12088
-
             AddExpectedFailure("GroupJoin_GroupBy_Aggregate_5", "Incorrect syntax near '+'."); // 12656
             AddExpectedFailure("GroupBy_Key_as_part_of_element_selector", "Incorrect syntax near '+'."); // 12656
             AddExpectedFailure("GroupBy_Property_Select_Key_Min", "Incorrect syntax near '+'."); // 12656
@@ -308,7 +304,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
         public void Execute<TElement>(IQueryable<TElement> query, DbContext context, string testMethodName)
         {
-            var seed = ProceduralQueryExpressionGenerator.Seed ?? new Random().Next();
+            var seed = ProceduralQueryExpressionGenerator.Seed ?? Random.Shared.Next();
             var random = new Random(seed);
             var depth = 2;
 

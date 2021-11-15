@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
@@ -10,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 {
     /// <summary>
-    ///     <para>
-    ///         A builder for building conventions for SQL Server.
-    ///     </para>
+    ///     A builder for building conventions for SQL Server.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" /> and multiple registrations
     ///         are allowed. This means that each <see cref="DbContext" /> instance will use its own
@@ -20,7 +20,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///         The implementations may depend on other services registered with any lifetime.
     ///         The implementations do not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///         <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public class SqlServerConventionSetBuilder : RelationalConventionSetBuilder
     {
         private readonly ISqlGenerationHelper _sqlGenerationHelper;
@@ -28,9 +33,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new <see cref="SqlServerConventionSetBuilder" /> instance.
         /// </summary>
-        /// <param name="dependencies"> The core dependencies for this service. </param>
-        /// <param name="relationalDependencies"> The relational dependencies for this service. </param>
-        /// <param name="sqlGenerationHelper"> The SQL generation helper to use. </param>
+        /// <param name="dependencies">The core dependencies for this service.</param>
+        /// <param name="relationalDependencies">The relational dependencies for this service.</param>
+        /// <param name="sqlGenerationHelper">The SQL generation helper to use.</param>
         public SqlServerConventionSetBuilder(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies,
@@ -43,7 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Builds and returns the convention set for the current database provider.
         /// </summary>
-        /// <returns> The convention set for the current database provider. </returns>
+        /// <returns>The convention set for the current database provider.</returns>
         public override ConventionSet CreateConventionSet()
         {
             var conventionSet = base.CreateConventionSet();
@@ -63,6 +68,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             conventionSet.EntityTypeAnnotationChangedConventions.Add(sqlServerInMemoryTablesConvention);
             ReplaceConvention(
                 conventionSet.EntityTypeAnnotationChangedConventions, (RelationalValueGenerationConvention)valueGenerationConvention);
+
+            var sqlServerTemporalConvention = new SqlServerTemporalConvention(Dependencies, RelationalDependencies);
+            ConventionSet.AddBefore(
+                conventionSet.EntityTypeAnnotationChangedConventions,
+                sqlServerTemporalConvention,
+                typeof(SqlServerValueGenerationConvention));
 
             ReplaceConvention(conventionSet.EntityTypePrimaryKeyChangedConventions, valueGenerationConvention);
 
@@ -101,20 +112,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 (SharedTableConvention)new SqlServerSharedTableConvention(Dependencies, RelationalDependencies));
             conventionSet.ModelFinalizingConventions.Add(new SqlServerDbFunctionConvention(Dependencies, RelationalDependencies));
 
+            ReplaceConvention(
+                conventionSet.ModelFinalizedConventions,
+                (RuntimeModelConvention)new SqlServerRuntimeModelConvention(Dependencies, RelationalDependencies));
+
+            conventionSet.SkipNavigationForeignKeyChangedConventions.Add(sqlServerTemporalConvention);
+
             return conventionSet;
         }
 
         /// <summary>
-        ///     <para>
-        ///         Call this method to build a <see cref="ConventionSet" /> for SQL Server when using
-        ///         the <see cref="ModelBuilder" /> outside of <see cref="DbContext.OnModelCreating" />.
-        ///     </para>
-        ///     <para>
-        ///         Note that it is unusual to use this method.
-        ///         Consider using <see cref="DbContext" /> in the normal way instead.
-        ///     </para>
+        ///     Call this method to build a <see cref="ConventionSet" /> for SQL Server when using
+        ///     the <see cref="ModelBuilder" /> outside of <see cref="DbContext.OnModelCreating" />.
         /// </summary>
-        /// <returns> The convention set. </returns>
+        /// <remarks>
+        ///     Note that it is unusual to use this method. Consider using <see cref="DbContext" /> in the normal way instead.
+        /// </remarks>
+        /// <returns>The convention set.</returns>
         public static ConventionSet Build()
         {
             using var serviceScope = CreateServiceScope();
@@ -123,15 +137,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         /// <summary>
-        ///     <para>
-        ///         Call this method to build a <see cref="ModelBuilder" /> for SQL Server outside of <see cref="DbContext.OnModelCreating" />.
-        ///     </para>
-        ///     <para>
-        ///         Note that it is unusual to use this method.
-        ///         Consider using <see cref="DbContext" /> in the normal way instead.
-        ///     </para>
+        ///     Call this method to build a <see cref="ModelBuilder" /> for SQL Server outside of <see cref="DbContext.OnModelCreating" />.
         /// </summary>
-        /// <returns> The convention set. </returns>
+        /// <remarks>
+        ///     Note that it is unusual to use this method. Consider using <see cref="DbContext" /> in the normal way instead.
+        /// </remarks>
+        /// <returns>The convention set.</returns>
         public static ModelBuilder CreateModelBuilder()
         {
             using var serviceScope = CreateServiceScope();

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.ComponentModel;
@@ -21,6 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     ///         and it is not designed to be directly constructed in your application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKeyBuilder?>
     {
         /// <summary>
@@ -105,20 +108,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             => Builder;
 
         /// <summary>
-        ///     <para>
-        ///         Configures this as a one-to-many relationship.
-        ///     </para>
-        ///     <para>
-        ///         Note that calling this method with no parameters will explicitly configure this side
-        ///         of the relationship to use no navigation property, even if such a property exists on the
-        ///         entity type. If the navigation property is to be used, then it must be specified.
-        ///     </para>
+        ///     Configures this as a one-to-many relationship.
         /// </summary>
+        /// <remarks>
+        ///     Note that calling this method with no parameters will explicitly configure this side
+        ///     of the relationship to use no navigation property, even if such a property exists on the
+        ///     entity type. If the navigation property is to be used, then it must be specified.
+        /// </remarks>
         /// <param name="navigationName">
         ///     The name of the reference navigation property on the other end of this relationship.
         ///     If null or not specified, then there is no navigation property on the other end of the relationship.
         /// </param>
-        /// <returns> An object to further configure the relationship. </returns>
+        /// <returns>An object to further configure the relationship.</returns>
         public virtual ReferenceCollectionBuilder WithOne(string? navigationName = null)
             => new(
                 DeclaringEntityType,
@@ -212,14 +213,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         }
 
         /// <summary>
-        ///     <para>
-        ///         Configures this as a many-to-many relationship.
-        ///     </para>
+        ///     Configures this as a many-to-many relationship.
         /// </summary>
         /// <param name="navigationName">
         ///     The name of the collection navigation property on the other end of this relationship.
         /// </param>
-        /// <returns> An object to further configure the relationship. </returns>
+        /// <returns>An object to further configure the relationship.</returns>
         public virtual CollectionCollectionBuilder WithMany(string navigationName)
         {
             if (Builder != null
@@ -239,32 +238,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     WithLeftManyNavigation(navigationName),
                     WithRightManyNavigation(navigationName, leftName!));
 
-            Configure(collectionCollectionBuilder);
-
             return collectionCollectionBuilder;
-        }
-
-        /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-        /// </summary>
-        [EntityFrameworkInternal]
-        protected virtual void Configure(CollectionCollectionBuilder collectionCollectionBuilder)
-        {
-            Check.NotNull(collectionCollectionBuilder, nameof(collectionCollectionBuilder));
-
-            var leftSkipNavigation = (SkipNavigation)collectionCollectionBuilder.LeftNavigation;
-            var rightSkipNavigation = (SkipNavigation)collectionCollectionBuilder.RightNavigation;
-
-            leftSkipNavigation.Builder.HasInverse(rightSkipNavigation, ConfigurationSource.Explicit);
-
-            // Note: we delayed setting the ConfigurationSource of SkipNavigation
-            // in HasMany(). But now we know that both skip navigations should
-            // have ConfigurationSource.Explicit.
-            leftSkipNavigation.UpdateConfigurationSource(ConfigurationSource.Explicit);
-            rightSkipNavigation.UpdateConfigurationSource(ConfigurationSource.Explicit);
         }
 
         /// <summary>
@@ -375,7 +349,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -383,8 +357,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
         public override bool Equals(object? obj)
@@ -393,7 +367,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
         public override int GetHashCode()

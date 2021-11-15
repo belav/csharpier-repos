@@ -3,10 +3,14 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Binding;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace System.CommandLine.Parsing
 {
+    /// <summary>
+    /// A result produced when parsing an <see cref="IArgument"/>.
+    /// </summary>
     public class ArgumentResult : SymbolResult
     {
         private ArgumentConversionResult? _conversionResult;
@@ -18,13 +22,38 @@ namespace System.CommandLine.Parsing
             Argument = argument;
         }
 
+        /// <summary>
+        /// The argument to which the result applies.
+        /// </summary>
         public IArgument Argument { get; }
+
+        internal bool IsImplicit => Argument.HasDefaultValue && Tokens.Count == 0;
 
         internal IReadOnlyList<Token>? PassedOnTokens { get; private set; }
 
-        internal ArgumentConversionResult GetArgumentConversionResult() => 
+        internal ArgumentConversionResult GetArgumentConversionResult() =>
             _conversionResult ??= Convert(Argument);
 
+        /// <inheritdoc cref="GetValueOrDefault{T}"/>
+        public object? GetValueOrDefault() =>
+            GetValueOrDefault<object?>();
+
+        /// <summary>
+        /// Gets the parsed value or the default value for <see cref="Argument"/>.
+        /// </summary>
+        /// <returns>The parsed value or the default value for <see cref="Argument"/></returns>
+        [return: MaybeNull]
+        public T GetValueOrDefault<T>() =>
+            GetArgumentConversionResult()
+                .ConvertIfNeeded(this, typeof(T))
+                .GetValueOrDefault<T>();
+
+        /// <summary>
+        /// Specifies the maximum number of tokens to consume for the argument. Remaining tokens are passed on and can be consumed by later arguments, or will otherwise be added to <see cref="ParseResult.UnmatchedTokens"/>
+        /// </summary>
+        /// <param name="numberOfTokens">The number of tokens to take. The rest are passed on.</param>
+        /// <exception cref="ArgumentOutOfRangeException">numberOfTokens - Value must be at least 1.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if this method is called more than once.</exception>
         public void OnlyTake(int numberOfTokens)
         {
             if (numberOfTokens < 0)
@@ -32,7 +61,7 @@ namespace System.CommandLine.Parsing
                 throw new ArgumentOutOfRangeException(nameof(numberOfTokens), numberOfTokens, "Value must be at least 1.");
             }
 
-            if (PassedOnTokens is {})
+            if (PassedOnTokens is { })
             {
                 throw new InvalidOperationException($"{nameof(OnlyTake)} can only be called once.");
             }
@@ -49,6 +78,7 @@ namespace System.CommandLine.Parsing
             _tokens.RemoveRange(numberOfTokens, passedOnTokensCount);
         }
 
+        /// <inheritdoc/>
         public override string ToString() => $"{GetType().Name} {Argument.Name}: {string.Join(" ", Tokens.Select(t => $"<{t.Value}>"))}";
 
         internal ParseError? CustomError(Argument argument)
@@ -72,8 +102,7 @@ namespace System.CommandLine.Parsing
             return null;
         }
 
-        private ArgumentConversionResult Convert(
-            IArgument argument)
+        private ArgumentConversionResult Convert(IArgument argument)
         {
             if (ShouldCheckArity() &&
                 Parent is { } &&
@@ -107,49 +136,65 @@ namespace System.CommandLine.Parsing
                     }
                 }
 
-                if (arg.ConvertArguments != null)
+                if (arg.ConvertArguments is null)
                 {
-                    if (_conversionResult != null)
+                    return argument.Arity.MaximumNumberOfValues switch
                     {
-                        return _conversionResult;
-                    }
+                        1 => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).SingleOrDefault()),
+                        _ => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).ToArray())
+                    };
+                }
 
-                    var success = arg.ConvertArguments(this, out var value);
+                if (_conversionResult is not null)
+                {
+                    return _conversionResult;
+                }
 
-                    if (value is ArgumentConversionResult conversionResult)
-                    {
-                        return conversionResult;
-                    }
+                var success = arg.ConvertArguments(this, out var value);
 
-                    if (success)
-                    {
-                        return ArgumentConversionResult.Success(
-                            arg, 
-                            value);
-                    }
+                if (value is ArgumentConversionResult conversionResult)
+                {
+                    return conversionResult;
+                }
 
-                    return ArgumentConversionResult.Failure(
+                if (success)
+                {
+                    return ArgumentConversionResult.Success(
+                        arg,
+                        value);
+                }
+
+                if (ErrorMessage is not null)
+                {
+                    return new FailedArgumentConversionResult(arg, ErrorMessage);
+                }
+
+                if (Binder.GetItemTypeIfEnumerable(argument.ValueType) is { } itemType)
+                {
+                    return new FailedArgumentTypeConversionResult(
                         argument,
-                        ErrorMessage ?? $"Invalid: {Parent.Token()} {string.Join(" ", Tokens.Select(t => t.Value))}");
+                        itemType,
+                        Tokens[0].Value,
+                        LocalizationResources);
+                }
+                else
+                {
+                    return new FailedArgumentTypeConversionResult(
+                        argument,
+                        argument.ValueType,
+                        Tokens[0].Value,
+                        LocalizationResources);
                 }
             }
 
-            switch (argument.Arity.MaximumNumberOfValues)
+            return argument.Arity.MaximumNumberOfValues switch
             {
-                case 1:
-                    return ArgumentConversionResult.Success(
-                        argument,
-                        Tokens.Select(t => t.Value).SingleOrDefault());
+                1 => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).SingleOrDefault()),
+                _ => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).ToArray())
+            };
 
-                default:
-                    return ArgumentConversionResult.Success(
-                        argument,
-                        Tokens.Select(t => t.Value).ToArray());
-            }
-
-            bool ShouldCheckArity() =>
-                !(Parent is OptionResult optionResult &&
-                  optionResult.IsImplicit);
+            bool ShouldCheckArity() => 
+                Parent is not OptionResult { IsImplicit: true };
         }
     }
 }

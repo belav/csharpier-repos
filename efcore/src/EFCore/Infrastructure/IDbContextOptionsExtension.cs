@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public interface IDbContextOptionsExtension
     {
         /// <summary>
@@ -28,7 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     provider internally. This allows database providers (and other extensions) to register their
         ///     required services when EF is creating an service provider.
         /// </summary>
-        /// <param name="services"> The collection to add services to. </param>
+        /// <param name="services">The collection to add services to.</param>
         void ApplyServices(IServiceCollection services);
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Most extensions do not have invalid combinations and so this will be a no-op.
         ///     If options are invalid, then an exception should be thrown.
         /// </summary>
-        /// <param name="options"> The options being validated. </param>
+        /// <param name="options">The options being validated.</param>
         void Validate(IDbContextOptions options);
     }
 }

@@ -125,7 +125,7 @@ namespace Moq.Protected
 			ThrowIfPublicSetter(property, typeof(T).Name);
 			Guard.CanWrite(property);
 
-			var expression = GetSetterExpression(property, ItExpr.IsAny<TProperty>());
+			var expression = GetSetterExpression(property, ToExpressionArg(property.PropertyType, value));
 
 			var setup = Mock.SetupSet(mock, expression, condition: null);
 			return new SetterSetupPhrase<T, TProperty>(setup);
@@ -300,7 +300,7 @@ namespace Moq.Protected
 			ThrowIfPublicSetter(property, typeof(T).Name);
 			Guard.CanWrite(property);
 
-			var expression = GetSetterExpression(property, ItExpr.IsAny<TProperty>());
+			var expression = GetSetterExpression(property, ToExpressionArg(property.PropertyType, value));
 			// TODO should consider property indexers
 			// TODO should receive the parameter here
 			Mock.VerifySet(mock, expression, times, null);
@@ -467,26 +467,15 @@ namespace Moq.Protected
 				{
 					types[index] = ((MethodCallExpression)expr).Method.ReturnType;
 				}
+				else if (ItRefAnyField(expr) is FieldInfo itRefAnyField)
+				{
+					types[index] = itRefAnyField.FieldType.MakeByRefType();
+				}
 				else if (expr.NodeType == ExpressionType.MemberAccess)
 				{
 					var member = (MemberExpression)expr;
 					if (member.Member is FieldInfo field)
 					{
-						// Test for special case: `It.Ref<TValue>.IsAny`
-						if (field.Name == nameof(It.Ref<object>.IsAny))
-						{
-							var fieldDeclaringType = field.DeclaringType;
-							if (fieldDeclaringType.IsGenericType)
-							{
-								var fieldDeclaringTypeDefinition = fieldDeclaringType.GetGenericTypeDefinition();
-								if (fieldDeclaringTypeDefinition == typeof(It.Ref<>))
-								{
-									types[index] = field.FieldType.MakeByRefType();
-									continue;
-								}
-							}
-						}
-
 						types[index] = field.FieldType;
 					}
 					else if (member.Member is PropertyInfo property)
@@ -510,19 +499,64 @@ namespace Moq.Protected
 			return types;
 		}
 
-		private static Expression ToExpressionArg(ParameterInfo paramInfo, object arg)
+		private static bool IsItRefAny(Expression expression)
 		{
-			if (arg is LambdaExpression lambda)
+			return ItRefAnyField(expression) != null;
+		}
+
+		private static FieldInfo ItRefAnyField(Expression expr)
+		{
+			FieldInfo itRefAnyField = null;
+
+			if (expr.NodeType == ExpressionType.MemberAccess)
 			{
-				return lambda.Body;
+				var member = (MemberExpression)expr;
+				if (member.Member is FieldInfo field)
+				{
+					if (field.Name == nameof(It.Ref<object>.IsAny))
+					{
+						var fieldDeclaringType = field.DeclaringType;
+						if (fieldDeclaringType.IsGenericType)
+						{
+							var fieldDeclaringTypeDefinition = fieldDeclaringType.GetGenericTypeDefinition();
+							if (fieldDeclaringTypeDefinition == typeof(It.Ref<>))
+							{
+								itRefAnyField = field;
+							}
+						}
+					}
+				}
 			}
 
+			return itRefAnyField;
+		}
+
+		private static Expression ToExpressionArg(Type type, object arg)
+		{
 			if (arg is Expression expression)
 			{
-				return expression;
+				if (!type.IsAssignableFrom(expression.GetType()))
+				{
+					if(arg is LambdaExpression lambda)
+					{
+						expression = lambda.Body;
+					}
+					return expression;
+				}
+				
+				if (IsItRefAny(expression))
+				{
+					return expression;
+				}
+
+				if (expression.IsMatch(out _))
+				{
+					return expression;
+				}
+
 			}
 
-			return Expression.Constant(arg, paramInfo.ParameterType);
+			return Expression.Constant(arg, type);
 		}
 
 		private static IEnumerable<Expression> ToExpressionArgs(MethodInfo method, object[] args)
@@ -530,7 +564,7 @@ namespace Moq.Protected
 			ParameterInfo[] methodParams = method.GetParameters();
 			for (int i = 0; i < args.Length; i++)
 			{
-				yield return ToExpressionArg(methodParams[i], args[i]);
+				yield return ToExpressionArg(methodParams[i].ParameterType, args[i]);
 			}
 		}
 	}

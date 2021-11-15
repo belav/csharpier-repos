@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.IO;
@@ -1018,8 +1018,9 @@ SELECT @@ROWCOUNT;
 
             var storeType = isUnicode ? "nvarchar(max)" : "varchar(max)";
             var unicodePrefix = isUnicode ? "N" : string.Empty;
+            var unicodePrefixForType = isUnicode ? "n" : string.Empty;
             var expectedSql = @$"CREATE TABLE [dbo].[TestLineBreaks] (
-    [TestDefaultValue] {storeType} NOT NULL DEFAULT CONCAT({unicodePrefix}CHAR(13), {unicodePrefix}CHAR(10), {unicodePrefix}'Various Line', {unicodePrefix}CHAR(13), {unicodePrefix}'Breaks', {unicodePrefix}CHAR(10))
+    [TestDefaultValue] {storeType} NOT NULL DEFAULT CONCAT(CAST({unicodePrefixForType}char(13) AS {storeType}), {unicodePrefixForType}char(10), {unicodePrefix}'Various Line', {unicodePrefixForType}char(13), {unicodePrefix}'Breaks', {unicodePrefixForType}char(10))
 );
 ";
             AssertSql(expectedSql);
@@ -1162,6 +1163,43 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id') AND [o
                 @$"EXEC(N'UPDATE [Table1] SET [Column1] = 2
 WHERE [Id] = 1;
 SELECT @@ROWCOUNT');
+");
+        }
+
+        [ConditionalFact]
+        public virtual void Converting_table_to_temporal_idempotent()
+        {
+            Generate(
+                builder => builder.Entity(
+                    "Customer", e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                    }).HasAnnotation(RelationalAnnotationNames.Schema, "dbo"),
+            migrationBuilder => migrationBuilder
+                    .AlterTable("Customer")
+                    .Annotation(SqlServerAnnotationNames.IsTemporal, true)
+                    .Annotation(SqlServerAnnotationNames.TemporalHistoryTableName, "CustomerHistory")
+                    .Annotation(SqlServerAnnotationNames.TemporalPeriodStartColumnName, "PeriodStart")
+                    .Annotation(SqlServerAnnotationNames.TemporalPeriodEndColumnName, "PeriodEnd"),
+                MigrationsSqlGenerationOptions.Idempotent);
+
+            AssertSql(
+                @"EXEC(N'ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])')
+GO
+
+ALTER TABLE [Customer] ALTER COLUMN [PeriodStart] ADD HIDDEN
+GO
+
+ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
+GO
+
+DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
+
 ");
         }
 

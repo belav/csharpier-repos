@@ -1,21 +1,20 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.CodeAnalysis;
 
-namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
+namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
+
+public class CompiledCSharpCode
 {
-    public class CompiledCSharpCode
+    public CompiledCSharpCode(Compilation baseCompilation, RazorCodeDocument codeDocument)
     {
-        public CompiledCSharpCode(Compilation baseCompilation, RazorCodeDocument codeDocument)
-        {
-            BaseCompilation = baseCompilation;
-            CodeDocument = codeDocument;
-        }
-
-        // A compilation that can be used *with* this code to compile an assembly
-        public Compilation BaseCompilation { get; set; }
-
-        public RazorCodeDocument CodeDocument { get; set; }
+        BaseCompilation = baseCompilation;
+        CodeDocument = codeDocument;
     }
+
+    // A compilation that can be used *with* this code to compile an assembly
+    public Compilation BaseCompilation { get; set; }
+
+    public RazorCodeDocument CodeDocument { get; set; }
 }

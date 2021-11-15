@@ -1,10 +1,9 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -625,7 +624,7 @@ namespace Microsoft.EntityFrameworkCore
                         context.Set<EntityRoot>().CreateInstance(
                             (e, p) =>
                             {
-                                Debug.Assert(e != null, nameof(e) + " != null");
+                                Assert.True(e != null, nameof(e) + " != null");
                                 e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
                                 e.Name = "Z7723";
                             }),
@@ -808,10 +807,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.All(
                         context.ChangeTracker.Entries<Dictionary<string, object>>(), e => Assert.Equal(
-                            ((int)e.Entity["CompositeId1"] == key1
-                                && (string)e.Entity["CompositeId2"] == key2
-                                && (DateTime)e.Entity["CompositeId3"] == key3)
-                            || (int)e.Entity["RootId"] == id
+                            ((int)e.Entity["CompositeKeySkipSharedKey1"] == key1
+                                && (string)e.Entity["CompositeKeySkipSharedKey2"] == key2
+                                && (DateTime)e.Entity["CompositeKeySkipSharedKey3"] == key3)
+                            || (int)e.Entity["RootSkipSharedId"] == id
                                 ? EntityState.Deleted
                                 : EntityState.Unchanged, e.State));
 
@@ -828,10 +827,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.DoesNotContain(
                         context.ChangeTracker.Entries<Dictionary<string, object>>(),
-                        e => ((int)e.Entity["CompositeId1"] == key1
-                                && (string)e.Entity["CompositeId2"] == key2
-                                && (DateTime)e.Entity["CompositeId3"] == key3)
-                            || (int)e.Entity["RootId"] == id);
+                        e => ((int)e.Entity["CompositeKeySkipSharedKey1"] == key1
+                                && (string)e.Entity["CompositeKeySkipSharedKey2"] == key2
+                                && (DateTime)e.Entity["CompositeKeySkipSharedKey3"] == key3)
+                            || (int)e.Entity["RootSkipSharedId"] == id);
                 },
                 context =>
                 {
@@ -842,10 +841,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.DoesNotContain(
                         context.ChangeTracker.Entries<Dictionary<string, object>>(),
-                        e => ((int)e.Entity["CompositeId1"] == key1
-                                && (string)e.Entity["CompositeId2"] == key2
-                                && (DateTime)e.Entity["CompositeId3"] == key3)
-                            || (int)e.Entity["RootId"] == id);
+                        e => ((int)e.Entity["CompositeKeySkipSharedKey1"] == key1
+                                && (string)e.Entity["CompositeKeySkipSharedKey2"] == key2
+                                && (DateTime)e.Entity["CompositeKeySkipSharedKey3"] == key3)
+                            || (int)e.Entity["RootSkipSharedId"] == id);
                 });
 
             void ValidateNavigations(
@@ -3708,7 +3707,7 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityOne>().Count());
                 Assert.Equal(3, context.ChangeTracker.Entries<EntityTwo>().Count());
                 Assert.Equal(5, context.ChangeTracker.Entries<JoinOneToTwo>().Count());
-                Assert.Equal(1, context.ChangeTracker.Entries<JoinOneToTwoExtra>().Count());
+                Assert.Single(context.ChangeTracker.Entries<JoinOneToTwoExtra>());
 
                 Assert.Equal(3, leftEntities[0].TwoSkip.Count);
                 Assert.Single(leftEntities[1].TwoSkip);
@@ -4869,7 +4868,7 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        protected void VerifyRelationshipSnapshots(DbContext context, IEnumerable<object> entities)
+        protected static void VerifyRelationshipSnapshots(DbContext context, IEnumerable<object> entities)
         {
             var detectChanges = context.ChangeTracker.AutoDetectChangesEnabled;
             try

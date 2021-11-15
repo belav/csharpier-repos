@@ -24,7 +24,7 @@ namespace System.CommandLine
         /// Gets the default instance of <see cref="StringBuilderPool"/>.
         /// </summary>
         /// <value>The default instance of <see cref="StringBuilderPool"/>.</value>
-        public static StringBuilderPool Default { get; } = new StringBuilderPool();
+        public static StringBuilderPool Default { get; } = new();
 
         /// <summary>
         /// The pool of <see cref="WeakReference{T}"/> of reusable instances of <see cref="StringBuilder"/>.
@@ -69,7 +69,7 @@ namespace System.CommandLine
 
             for (var i = _pool.Length; --i >= 0;)
             {
-                if (Interlocked.CompareExchange(ref _pool[i], reference, null) == null)
+                if (Interlocked.CompareExchange(ref _pool[i], reference, null) is null)
                 {
                     return;
                 }

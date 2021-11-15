@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -16,7 +17,6 @@ namespace Moq
 		private static Dictionary<string, Func<Invocation, Mock, bool>> specialMethods = new Dictionary<string, Func<Invocation, Mock, bool>>()
 		{
 			["Equals"] = HandleEquals,
-			["Finalize"] = HandleFinalize,
 			["GetHashCode"] = HandleGetHashCode,
 			["get_" + nameof(IMocked.Mock)] = HandleMockGetter,
 			["ToString"] = HandleToString,
@@ -30,7 +30,7 @@ namespace Moq
 
 		private static bool HandleEquals(Invocation invocation, Mock mock)
 		{
-			if (IsObjectMethod(invocation.Method) && !mock.MutableSetups.Any(c => IsObjectMethod(c.Method, "Equals")))
+			if (IsObjectMethodWithoutSetup(invocation, mock))
 			{
 				invocation.ReturnValue = ReferenceEquals(invocation.Arguments.First(), mock.Object);
 				return true;
@@ -41,15 +41,9 @@ namespace Moq
 			}
 		}
 
-		private static bool HandleFinalize(Invocation invocation, Mock mock)
-		{
-			return IsFinalizer(invocation.Method);
-		}
-
 		private static bool HandleGetHashCode(Invocation invocation, Mock mock)
 		{
-			// Only if there is no corresponding setup for `GetHashCode()`
-			if (IsObjectMethod(invocation.Method) && !mock.MutableSetups.Any(c => IsObjectMethod(c.Method, "GetHashCode")))
+			if (IsObjectMethodWithoutSetup(invocation, mock))
 			{
 				invocation.ReturnValue = mock.GetHashCode();
 				return true;
@@ -62,8 +56,7 @@ namespace Moq
 
 		private static bool HandleToString(Invocation invocation, Mock mock)
 		{
-			// Only if there is no corresponding setup for `ToString()`
-			if (IsObjectMethod(invocation.Method) && !mock.MutableSetups.Any(c => IsObjectMethod(c.Method, "ToString")))
+			if (IsObjectMethodWithoutSetup(invocation, mock))
 			{
 				invocation.ReturnValue = mock.ToString() + ".Object";
 				return true;
@@ -87,21 +80,18 @@ namespace Moq
 			}
 		}
 
-		private static bool IsFinalizer(MethodInfo method)
+		private static bool IsObjectMethodWithoutSetup(Invocation invocation, Mock mock)
 		{
-			return method.GetBaseDefinition() == typeof(object).GetMethod("Finalize", BindingFlags.NonPublic | BindingFlags.Instance);
+			return invocation.Method.DeclaringType == typeof(object)
+			    && mock.MutableSetups.FindLast(setup => setup.Matches(invocation)) == null;
 		}
-
-		private static bool IsObjectMethod(MethodInfo method) => method.DeclaringType == typeof(object);
-
-		private static bool IsObjectMethod(MethodInfo method, string name) => IsObjectMethod(method) && method.Name == name;
 	}
 
 	internal static class FindAndExecuteMatchingSetup
 	{
 		public static bool Handle(Invocation invocation, Mock mock)
 		{
-			var matchingSetup = mock.MutableSetups.FindMatchFor(invocation);
+			var matchingSetup = mock.MutableSetups.FindLast(setup => setup.Matches(invocation));
 			if (matchingSetup != null)
 			{
 				matchingSetup.Execute(invocation);
@@ -197,63 +187,25 @@ namespace Moq
 			}
 			
 			MethodInfo invocationMethod = invocation.Method;
-			if (invocationMethod.IsPropertyAccessor())
-			{
-				string propertyNameToSearch = invocationMethod.Name.Substring(AccessorPrefixLength);
-				PropertyInfo property = invocationMethod.DeclaringType.GetProperty(propertyNameToSearch, Type.EmptyTypes);
-
-				if (property == null)
-				{
-					return false;
-				}
-
-				var expression = GetPropertyExpression(invocationMethod.DeclaringType, property);
-
-				object propertyValue;
-
-				Setup getterSetup = null;
-				if (property.CanRead(out var getter))
-				{
-					if (ProxyFactory.Instance.IsMethodVisible(getter, out _))
-					{
-						propertyValue = CreateInitialPropertyValue(mock, getter);
-						getterSetup = new StubbedPropertyGetterSetup(mock, expression, getter, () => propertyValue);
-						mock.MutableSetups.Add(getterSetup);
-					}
-
-					// If we wanted to optimise for speed, we'd probably be forgiven
-					// for removing the above `IsMethodVisible` guard, as it's rather
-					// unlikely to encounter non-public getters such as the following
-					// in real-world code:
-					//
-					//     public T Property { internal get; set; }
-					//
-					// Usually, it's only the setters that are made non-public. For
-					// now however, we prefer correctness.
-				}
-
-				Setup setterSetup = null;
-				if (property.CanWrite(out var setter))
-				{
-					if (ProxyFactory.Instance.IsMethodVisible(setter, out _))
-					{
-						setterSetup = new StubbedPropertySetterSetup(mock, expression, setter, (newValue) =>
-						{
-							propertyValue = newValue;
-						});
-						mock.MutableSetups.Add(setterSetup);
-					}
-				}
-
-				Setup setupToExecute = invocationMethod.IsGetAccessor() ? getterSetup : setterSetup;
-				setupToExecute.Execute(invocation);
-
-				return true;
-			}
-			else
+			if (!invocationMethod.IsPropertyAccessor())
 			{
 				return false;
 			}
+
+			string propertyName = invocationMethod.Name.Substring(AccessorPrefixLength);
+			PropertyInfo property = invocationMethod.DeclaringType.GetProperty(propertyName, Type.EmptyTypes);
+			Debug.Assert(property != null);
+
+			bool accessorFound = property.CanRead(out var getter) | property.CanWrite(out var setter);
+			Debug.Assert(accessorFound);
+
+			var expression = GetPropertyExpression(invocationMethod.DeclaringType, property);
+			var initialValue = getter != null ? CreateInitialPropertyValue(mock, getter) : null;
+			var setup = new StubbedPropertySetup(mock, expression, getter, setter, initialValue);
+			mock.MutableSetups.Add(setup);
+			setup.Execute(invocation);
+
+			return true;
 		}
 
 		private static object CreateInitialPropertyValue(Mock mock, MethodInfo getter)

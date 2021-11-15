@@ -1,55 +1,54 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Microsoft.AspNetCore.Razor.Language.Intermediate
+namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
+
+public sealed class MarkupElementIntermediateNode : IntermediateNode
 {
-    public sealed class MarkupElementIntermediateNode : IntermediateNode
+    public IEnumerable<HtmlAttributeIntermediateNode> Attributes => Children.OfType<HtmlAttributeIntermediateNode>();
+
+    public IEnumerable<ReferenceCaptureIntermediateNode> Captures => Children.OfType<ReferenceCaptureIntermediateNode>();
+
+    public IEnumerable<SetKeyIntermediateNode> SetKeys => Children.OfType<SetKeyIntermediateNode>();
+
+    public IEnumerable<IntermediateNode> Body => Children.Where(c =>
     {
-        public IEnumerable<HtmlAttributeIntermediateNode> Attributes => Children.OfType<HtmlAttributeIntermediateNode>();
+        return
+            c as ComponentAttributeIntermediateNode == null &&
+            c as HtmlAttributeIntermediateNode == null &&
+            c as SplatIntermediateNode == null &&
+            c as SetKeyIntermediateNode == null &&
+            c as ReferenceCaptureIntermediateNode == null;
+    });
 
-        public IEnumerable<ReferenceCaptureIntermediateNode> Captures => Children.OfType<ReferenceCaptureIntermediateNode>();
+    public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
 
-        public IEnumerable<SetKeyIntermediateNode> SetKeys => Children.OfType<SetKeyIntermediateNode>();
+    public string TagName { get; set; }
 
-        public IEnumerable<IntermediateNode> Body => Children.Where(c =>
+    public override void Accept(IntermediateNodeVisitor visitor)
+    {
+        if (visitor == null)
         {
-            return
-                c as ComponentAttributeIntermediateNode == null &&
-                c as HtmlAttributeIntermediateNode == null &&
-                c as SplatIntermediateNode == null &&
-                c as SetKeyIntermediateNode == null &&
-                c as ReferenceCaptureIntermediateNode == null;
-        });
-
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
-
-        public string TagName { get; set; }
-
-        public override void Accept(IntermediateNodeVisitor visitor)
-        {
-            if (visitor == null)
-            {
-                throw new ArgumentNullException(nameof(visitor));
-            }
-
-            visitor.VisitMarkupElement(this);
+            throw new ArgumentNullException(nameof(visitor));
         }
 
-        public override void FormatNode(IntermediateNodeFormatter formatter)
+        visitor.VisitMarkupElement(this);
+    }
+
+    public override void FormatNode(IntermediateNodeFormatter formatter)
+    {
+        if (formatter == null)
         {
-            if (formatter == null)
-            {
-                throw new ArgumentNullException(nameof(formatter));
-            }
-
-            formatter.WriteContent(TagName);
-
-            formatter.WriteProperty(nameof(TagName), TagName);
+            throw new ArgumentNullException(nameof(formatter));
         }
+
+        formatter.WriteContent(TagName);
+
+        formatter.WriteProperty(nameof(TagName), TagName);
     }
 }

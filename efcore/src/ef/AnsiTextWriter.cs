@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -13,15 +13,20 @@ namespace Microsoft.EntityFrameworkCore.Tools
     {
         private readonly TextWriter _writer;
 
-        public AnsiTextWriter(TextWriter writer) => _writer = writer;
+        public AnsiTextWriter(TextWriter writer)
+            => _writer = writer;
 
         public void WriteLine(string? text)
         {
-            Interpret(text);
+            if (text != null)
+            {
+                Interpret(text);
+            }
+
             _writer.Write(Environment.NewLine);
         }
 
-        private void Interpret(string? value)
+        private void Interpret(string value)
         {
             var matches = Regex.Matches(value, "\x1b\\[([0-9]+)?m");
 
@@ -31,7 +36,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 var length = match.Index - start;
                 if (length != 0)
                 {
-                    _writer.Write(value!.Substring(start, length));
+                    _writer.Write(value.Substring(start, length));
                 }
 
                 Apply(match.Groups[1].Value);
@@ -39,9 +44,9 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 start = match.Index + match.Length;
             }
 
-            if (start != value?.Length)
+            if (start != value.Length)
             {
-                _writer.Write(value?.Substring(start));
+                _writer.Write(value.Substring(start));
             }
         }
 

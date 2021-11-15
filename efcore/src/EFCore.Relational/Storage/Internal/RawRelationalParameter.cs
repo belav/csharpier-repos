@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -30,8 +30,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             DbParameter parameter)
             : base(invariantName)
         {
-            Check.NotNull(parameter, nameof(parameter));
-
             _parameter = parameter;
         }
 
@@ -54,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public override void AddDbParameter(DbCommand command, object? value)
         {
-            Check.DebugAssert(value is DbParameter,
+            Check.DebugAssert(
+                value is DbParameter,
                 $"{nameof(value)} isn't a DbParameter in {nameof(RawRelationalParameter)}.{nameof(AddDbParameter)}");
 
             if (value is DbParameter dbParameter

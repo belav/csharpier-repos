@@ -1,9 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Microsoft.EntityFrameworkCore
@@ -95,6 +97,50 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Same(connection, extension.Connection);
             Assert.Null(extension.ConnectionString);
+        }
+
+        [ConditionalFact]
+        public void Service_collection_extension_method_can_configure_sqlite_options()
+        {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSqlite<ApplicationDbContext>(
+                "Database=Crunchie",
+                sqliteOptions =>
+                {
+                    sqliteOptions.MaxBatchSize(123);
+                    sqliteOptions.CommandTimeout(30);
+                },
+                dbContextOption =>
+                {
+                    dbContextOption.EnableDetailedErrors();
+                });
+
+            var services = serviceCollection.BuildServiceProvider(validateScopes: true);
+
+            using (var serviceScope = services
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                var coreOptions = serviceScope.ServiceProvider
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+
+                Assert.True(coreOptions.DetailedErrorsEnabled);
+
+                var sqliteOptions = serviceScope.ServiceProvider
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<SqliteOptionsExtension>();
+
+                Assert.Equal(123, sqliteOptions.MaxBatchSize);
+                Assert.Equal(30, sqliteOptions.CommandTimeout);
+                Assert.Equal("Database=Crunchie", sqliteOptions.ConnectionString);
+            }
+        }
+
+        private class ApplicationDbContext : DbContext
+        {
+            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+                   : base(options)
+            {
+            }
         }
     }
 }

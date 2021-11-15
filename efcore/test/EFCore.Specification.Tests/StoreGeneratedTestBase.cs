@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
@@ -1467,6 +1468,19 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             public string Name { get; set; }
+
+            public ICollection<Species> MixedMetaphors { get; set; }
+            public Species Species { get; set; }
+        }
+
+        protected class Species
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+
+            public int? DarwinId { get; set; }
+            public int? MetaphoricId { get; set; }
+
         }
 
         protected class Gumball
@@ -1915,7 +1929,12 @@ namespace Microsoft.EntityFrameworkCore
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
                     });
 
-                modelBuilder.Entity<Darwin>();
+                modelBuilder.Entity<Darwin>(
+                    b =>
+                    {
+                        b.HasOne(e => e.Species).WithOne().HasForeignKey<Species>(e => e.DarwinId);
+                        b.HasMany(e => e.MixedMetaphors).WithOne().HasForeignKey(e => e.MetaphoricId);
+                    });
 
                 modelBuilder.Entity<WithBackingFields>(
                     b =>

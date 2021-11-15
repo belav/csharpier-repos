@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading;
@@ -13,11 +13,19 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     Extension methods for <see cref="IExecutionStrategy" />
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+    ///     for more information.
+    /// </remarks>
     public static class ExecutionStrategyExtensions
     {
         /// <summary>
         ///     Executes the specified operation.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">A delegate representing an executable operation that doesn't return any results.</param>
         public static void Execute(
@@ -28,15 +36,19 @@ namespace Microsoft.EntityFrameworkCore
 
             strategy.Execute(
                 operation, operationScoped =>
-                {
-                    operationScoped();
-                    return true;
-                });
+                    {
+                        operationScoped();
+                        return true;
+                    });
         }
 
         /// <summary>
         ///     Executes the specified operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation that returns the result of type <typeparamref name="TResult" />.
@@ -55,6 +67,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Executes the specified operation.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">A delegate representing an executable operation that doesn't return any results.</param>
@@ -68,15 +84,19 @@ namespace Microsoft.EntityFrameworkCore
 
             strategy.Execute(
                 new { operation, state }, s =>
-                {
-                    s.operation(s.state);
-                    return true;
-                });
+                    {
+                        s.operation(s.state);
+                        return true;
+                    });
         }
 
         /// <summary>
         ///     Executes the specified asynchronous operation.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">A function that returns a started task.</param>
         /// <returns>
@@ -92,15 +112,19 @@ namespace Microsoft.EntityFrameworkCore
 
             return strategy.ExecuteAsync(
                 operation, async (operationScoped, ct) =>
-                {
-                    await operationScoped().ConfigureAwait(false);
-                    return true;
-                }, default);
+                    {
+                        await operationScoped().ConfigureAwait(false);
+                        return true;
+                    }, default);
         }
 
         /// <summary>
         ///     Executes the specified asynchronous operation.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">A function that returns a started task.</param>
         /// <param name="cancellationToken">
@@ -112,7 +136,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
         ///     the retry limit is reached, the returned task will become faulted and the exception must be observed.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task ExecuteAsync(
             this IExecutionStrategy strategy,
             Func<CancellationToken, Task> operation,
@@ -122,15 +146,19 @@ namespace Microsoft.EntityFrameworkCore
 
             return strategy.ExecuteAsync(
                 operation, async (operationScoped, ct) =>
-                {
-                    await operationScoped(ct).ConfigureAwait(false);
-                    return true;
-                }, cancellationToken);
+                    {
+                        await operationScoped(ct).ConfigureAwait(false);
+                        return true;
+                    }, cancellationToken);
         }
 
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A function that returns a started task of type <typeparamref name="TResult" />.
@@ -155,6 +183,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A function that returns a started task of type <typeparamref name="TResult" />.
@@ -171,7 +203,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
         ///     the retry limit is reached, the returned task will become faulted and the exception must be observed.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task<TResult> ExecuteAsync<TResult>(
             this IExecutionStrategy strategy,
             Func<CancellationToken, Task<TResult>> operation,
@@ -185,6 +217,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Executes the specified asynchronous operation.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">A function that returns a started task.</param>
@@ -203,15 +239,19 @@ namespace Microsoft.EntityFrameworkCore
 
             return strategy.ExecuteAsync(
                 new { operation, state }, async (t, ct) =>
-                {
-                    await t.operation(t.state).ConfigureAwait(false);
-                    return true;
-                }, default);
+                    {
+                        await t.operation(t.state).ConfigureAwait(false);
+                        return true;
+                    }, default);
         }
 
         /// <summary>
         ///     Executes the specified asynchronous operation.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">A function that returns a started task.</param>
@@ -225,7 +265,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
         ///     the retry limit is reached, the returned task will become faulted and the exception must be observed.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task ExecuteAsync<TState>(
             this IExecutionStrategy strategy,
             TState state,
@@ -236,15 +276,19 @@ namespace Microsoft.EntityFrameworkCore
 
             return strategy.ExecuteAsync(
                 new { operation, state }, async (t, ct) =>
-                {
-                    await t.operation(t.state, ct).ConfigureAwait(false);
-                    return true;
-                }, cancellationToken);
+                    {
+                        await t.operation(t.state, ct).ConfigureAwait(false);
+                        return true;
+                    }, cancellationToken);
         }
 
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
@@ -273,6 +317,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Executes the specified operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
@@ -290,6 +338,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
@@ -308,7 +360,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
         ///     the retry limit is reached, the returned task will become faulted and the exception must be observed.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task<TResult> ExecuteAsync<TState, TResult>(
             this IExecutionStrategy strategy,
             TState state,
@@ -319,15 +371,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Executes the specified operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation that returns the result of type <typeparamref name="TResult" />.
         /// </param>
-        /// <param name="verifySucceeded"> A delegate that tests whether the operation succeeded even though an exception was thrown. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
-        /// <typeparam name="TResult"> The return type of <paramref name="operation" />. </typeparam>
-        /// <returns> The result from the operation. </returns>
+        /// <param name="verifySucceeded">A delegate that tests whether the operation succeeded even though an exception was thrown.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
+        /// <typeparam name="TState">The type of the state.</typeparam>
+        /// <typeparam name="TResult">The return type of <paramref name="operation" />.</typeparam>
+        /// <returns>The result from the operation.</returns>
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
@@ -336,26 +392,30 @@ namespace Microsoft.EntityFrameworkCore
             TState state,
             Func<TState, TResult> operation,
             Func<TState, ExecutionResult<TResult>>? verifySucceeded)
-            => Check.NotNull(strategy, nameof(strategy)).Execute(
+            => strategy.Execute(
                 state,
                 (c, s) => operation(s),
-                verifySucceeded == null ? (Func<DbContext, TState, ExecutionResult<TResult>>?)null : (c, s) => verifySucceeded(s));
+                verifySucceeded == null ? null : (c, s) => verifySucceeded(s));
 
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
         /// <param name="strategy">The strategy that will be used for the execution.</param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A function that returns a started task of type <typeparamref name="TResult" />.
         /// </param>
-        /// <param name="verifySucceeded"> A delegate that tests whether the operation succeeded even though an exception was thrown. </param>
+        /// <param name="verifySucceeded">A delegate that tests whether the operation succeeded even though an exception was thrown.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token used to cancel the retry operation, but not operations that are already in flight
         ///     or that already completed successfully.
         /// </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
-        /// <typeparam name="TResult"> The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />. </typeparam>
+        /// <typeparam name="TState">The type of the state.</typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />.</typeparam>
         /// <returns>
         ///     A task that will run to completion if the original task completes successfully (either the
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
@@ -364,25 +424,29 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task<TResult> ExecuteAsync<TState, TResult>(
             this IExecutionStrategy strategy,
             TState state,
             Func<TState, CancellationToken, Task<TResult>> operation,
             Func<TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
             CancellationToken cancellationToken = default)
-            => Check.NotNull(strategy, nameof(strategy)).ExecuteAsync(
+            => strategy.ExecuteAsync(
                 state,
                 (c, s, ct) => operation(s, ct),
                 verifySucceeded == null
-                    ? (Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>?)null
+                    ? null
                     : (c, s, ct) => verifySucceeded(s, ct), cancellationToken);
 
         /// <summary>
         ///     Executes the specified operation in a transaction. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation.
         /// </param>
@@ -403,7 +467,11 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified asynchronous operation in a transaction. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A function that returns a started task.
         /// </param>
@@ -429,7 +497,11 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified asynchronous operation in a transaction. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A function that returns a started task.
         /// </param>
@@ -449,7 +521,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task ExecuteInTransactionAsync(
             this IExecutionStrategy strategy,
             Func<CancellationToken, Task> operation,
@@ -462,7 +534,11 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified operation in a transaction and returns the result. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation that returns the result of type <typeparamref name="TResult" />.
         /// </param>
@@ -470,8 +546,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     A delegate that tests whether the operation succeeded even though an exception was thrown when the
         ///     transaction was being committed.
         /// </param>
-        /// <typeparam name="TResult"> The return type of <paramref name="operation" />. </typeparam>
-        /// <returns> The result from the operation. </returns>
+        /// <typeparam name="TResult">The return type of <paramref name="operation" />.</typeparam>
+        /// <returns>The result from the operation.</returns>
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
@@ -485,7 +561,11 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified asynchronous operation in a transaction and returns the result. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
         /// <param name="operation">
         ///     A function that returns a started task of type <typeparamref name="TResult" />.
         /// </param>
@@ -497,7 +577,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     A cancellation token used to cancel the retry operation, but not operations that are already in flight
         ///     or that already completed successfully.
         /// </param>
-        /// <typeparam name="TResult"> The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />. </typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />.</typeparam>
         /// <returns>
         ///     A task that will run to completion if the original task completes successfully (either the
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
@@ -506,7 +586,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task<TResult> ExecuteInTransactionAsync<TResult>(
             this IExecutionStrategy strategy,
             Func<CancellationToken, Task<TResult>> operation,
@@ -519,8 +599,12 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified operation in a transaction. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation.
         /// </param>
@@ -528,7 +612,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     A delegate that tests whether the operation succeeded even though an exception was thrown when the
         ///     transaction was being committed.
         /// </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
+        /// <typeparam name="TState">The type of the state.</typeparam>
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
@@ -539,17 +623,21 @@ namespace Microsoft.EntityFrameworkCore
             Func<TState, bool> verifySucceeded)
             => strategy.ExecuteInTransaction(
                 state, s =>
-                {
-                    operation(s);
-                    return true;
-                }, verifySucceeded);
+                    {
+                        operation(s);
+                        return true;
+                    }, verifySucceeded);
 
         /// <summary>
         ///     Executes the specified asynchronous operation in a transaction. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A function that returns a started task.
         /// </param>
@@ -561,7 +649,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     A cancellation token used to cancel the retry operation, but not operations that are already in flight
         ///     or that already completed successfully.
         /// </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
+        /// <typeparam name="TState">The type of the state.</typeparam>
         /// <returns>
         ///     A task that will run to completion if the original task completes successfully (either the
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
@@ -570,7 +658,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task ExecuteInTransactionAsync<TState>(
             this IExecutionStrategy strategy,
             TState state,
@@ -579,17 +667,21 @@ namespace Microsoft.EntityFrameworkCore
             CancellationToken cancellationToken = default)
             => strategy.ExecuteInTransactionAsync(
                 state, async (s, ct) =>
-                {
-                    await operation(s, ct).ConfigureAwait(false);
-                    return true;
-                }, verifySucceeded, cancellationToken);
+                    {
+                        await operation(s, ct).ConfigureAwait(false);
+                        return true;
+                    }, verifySucceeded, cancellationToken);
 
         /// <summary>
         ///     Executes the specified operation in a transaction and returns the result. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation that returns the result of type <typeparamref name="TResult" />.
         /// </param>
@@ -597,9 +689,9 @@ namespace Microsoft.EntityFrameworkCore
         ///     A delegate that tests whether the operation succeeded even though an exception was thrown when the
         ///     transaction was being committed.
         /// </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
-        /// <typeparam name="TResult"> The return type of <paramref name="operation" />. </typeparam>
-        /// <returns> The result from the operation. </returns>
+        /// <typeparam name="TState">The type of the state.</typeparam>
+        /// <typeparam name="TResult">The return type of <paramref name="operation" />.</typeparam>
+        /// <returns>The result from the operation.</returns>
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
@@ -617,8 +709,12 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified asynchronous operation in a transaction and returns the result. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A function that returns a started task of type <typeparamref name="TResult" />.
         /// </param>
@@ -630,8 +726,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     A cancellation token used to cancel the retry operation, but not operations that are already in flight
         ///     or that already completed successfully.
         /// </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
-        /// <typeparam name="TResult"> The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />. </typeparam>
+        /// <typeparam name="TState">The type of the state.</typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />.</typeparam>
         /// <returns>
         ///     A task that will run to completion if the original task completes successfully (either the
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
@@ -640,7 +736,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task<TResult> ExecuteInTransactionAsync<TState, TResult>(
             this IExecutionStrategy strategy,
             TState state,
@@ -657,8 +753,12 @@ namespace Microsoft.EntityFrameworkCore
         ///     Executes the specified operation in a transaction and returns the result. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A delegate representing an executable operation that returns the result of type <typeparamref name="TResult" />.
         /// </param>
@@ -666,10 +766,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     A delegate that tests whether the operation succeeded even though an exception was thrown when the
         ///     transaction was being committed.
         /// </param>
-        /// <param name="beginTransaction"> A delegate that begins a transaction using the given context. </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
-        /// <typeparam name="TResult"> The return type of <paramref name="operation" />. </typeparam>
-        /// <returns> The result from the operation. </returns>
+        /// <param name="beginTransaction">A delegate that begins a transaction using the given context.</param>
+        /// <typeparam name="TState">The type of the state.</typeparam>
+        /// <typeparam name="TResult">The return type of <paramref name="operation" />.</typeparam>
+        /// <returns>The result from the operation.</returns>
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
@@ -683,25 +783,29 @@ namespace Microsoft.EntityFrameworkCore
                 new ExecutionState<TState, TResult>(
                     Check.NotNull(operation, nameof(operation)), Check.NotNull(verifySucceeded, nameof(verifySucceeded)), state),
                 (c, s) =>
-                {
-                    Check.NotNull(beginTransaction, nameof(beginTransaction));
-                    using (var transaction = beginTransaction(c))
                     {
-                        s.CommitFailed = false;
-                        s.Result = s.Operation(s.State);
-                        s.CommitFailed = true;
-                        transaction.Commit();
-                    }
+                        Check.NotNull(beginTransaction, nameof(beginTransaction));
+                        using (var transaction = beginTransaction(c))
+                        {
+                            s.CommitFailed = false;
+                            s.Result = s.Operation(s.State);
+                            s.CommitFailed = true;
+                            transaction.Commit();
+                        }
 
-                    return s.Result;
-                }, (c, s) => new ExecutionResult<TResult>(s.CommitFailed && s.VerifySucceeded(s.State), s.Result));
+                        return s.Result;
+                    }, (c, s) => new ExecutionResult<TResult>(s.CommitFailed && s.VerifySucceeded(s.State), s.Result));
 
         /// <summary>
         ///     Executes the specified asynchronous operation in a transaction and returns the result. Allows to check whether
         ///     the transaction has been rolled back if an error occurs during commit.
         /// </summary>
-        /// <param name="strategy"> The strategy that will be used for the execution. </param>
-        /// <param name="state"> The state that will be passed to the operation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="strategy">The strategy that will be used for the execution.</param>
+        /// <param name="state">The state that will be passed to the operation.</param>
         /// <param name="operation">
         ///     A function that returns a started task of type <typeparamref name="TResult" />.
         /// </param>
@@ -709,13 +813,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     A delegate that tests whether the operation succeeded even though an exception was thrown when the
         ///     transaction was being committed.
         /// </param>
-        /// <param name="beginTransaction"> A delegate that begins a transaction using the given context. </param>
+        /// <param name="beginTransaction">A delegate that begins a transaction using the given context.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token used to cancel the retry operation, but not operations that are already in flight
         ///     or that already completed successfully.
         /// </param>
-        /// <typeparam name="TState"> The type of the state. </typeparam>
-        /// <typeparam name="TResult"> The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />. </typeparam>
+        /// <typeparam name="TState">The type of the state.</typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Task{T}" /> returned by <paramref name="operation" />.</typeparam>
         /// <returns>
         ///     A task that will run to completion if the original task completes successfully (either the
         ///     first time or after retrying transient failures). If the task fails with a non-transient error or
@@ -724,7 +828,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="RetryLimitExceededException">
         ///     The operation has not succeeded after the configured number of retries.
         /// </exception>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public static Task<TResult> ExecuteInTransactionAsync<TState, TResult>(
             IExecutionStrategy strategy,
             TState state,
@@ -736,18 +840,18 @@ namespace Microsoft.EntityFrameworkCore
                 new ExecutionStateAsync<TState, TResult>(
                     Check.NotNull(operation, nameof(operation)), Check.NotNull(verifySucceeded, nameof(verifySucceeded)), state),
                 async (c, s, ct) =>
-                {
-                    Check.NotNull(beginTransaction, nameof(beginTransaction));
-                    await using (var transaction = await beginTransaction(c, cancellationToken).ConfigureAwait(false))
                     {
-                        s.CommitFailed = false;
-                        s.Result = await s.Operation(s.State, ct).ConfigureAwait(false);
-                        s.CommitFailed = true;
-                        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-                    }
+                        Check.NotNull(beginTransaction, nameof(beginTransaction));
+                        await using (var transaction = await beginTransaction(c, cancellationToken).ConfigureAwait(false))
+                        {
+                            s.CommitFailed = false;
+                            s.Result = await s.Operation(s.State, ct).ConfigureAwait(false);
+                            s.CommitFailed = true;
+                            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+                        }
 
-                    return s.Result;
-                }, async (c, s, ct) => new ExecutionResult<TResult>(
+                        return s.Result;
+                    }, async (c, s, ct) => new ExecutionResult<TResult>(
                     s.CommitFailed && await s.VerifySucceeded(s.State, ct).ConfigureAwait(false),
                     s.Result), cancellationToken);
 

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -194,6 +194,54 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 Assert.True(executed);
                 executed = false;
             }
+        }
+
+        [ConditionalFact]
+        public void Execute_Action_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled()
+        {
+            Execute_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled((e, f) => e.Execute(() => f()));
+        }
+
+        [ConditionalFact]
+        public void Execute_Func_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled()
+        {
+            Execute_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled((e, f) => e.Execute(f));
+        }
+
+        private void Execute_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled(
+            Action<ExecutionStrategy, Func<int>> execute)
+        {
+            using var context1 = CreateContext();
+            using var context2 = CreateContext();
+
+            var mockExecutionStrategy1 = new TestExecutionStrategy(context1, retryCount: 0);
+            var mockExecutionStrategy2 = new TestExecutionStrategy(context2, retryCount: 0);
+
+            using var tran1 = context1.Database.BeginTransaction();
+            using var tran2 = context2.Database.BeginTransaction();
+
+            var executed1 = false;
+            var executed2 = false;
+
+            execute(
+                mockExecutionStrategy1, () =>
+                {
+                    executed1 = true;
+                    return 0;
+                });
+
+            execute(
+                mockExecutionStrategy2, () =>
+                {
+                    executed2 = true;
+                    return 0;
+                });
+
+            tran1.Commit();
+            tran2.Commit();
+
+            Assert.True(executed1);
+            Assert.True(executed2);
         }
 
         [ConditionalFact]
@@ -476,6 +524,54 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         [ConditionalFact]
+        public async Task ExecuteAsync_Action_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled()
+        {
+            await ExecuteAsync_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled((e, f) => e.ExecuteAsync(() => (Task)f(CancellationToken.None)));
+        }
+
+        [ConditionalFact]
+        public async Task ExecuteAsync_Func_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled()
+        {
+            await ExecuteAsync_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled((e, f) => e.ExecuteAsync(f, CancellationToken.None));
+        }
+
+        private async Task ExecuteAsync_does_not_throw_for_an_existing_transaction_if_RetryOnFailure_disabled(
+            Func<ExecutionStrategy, Func<CancellationToken, Task<int>>, Task> executeAsync)
+        {
+            await using var context1 = CreateContext();
+            await using var context2 = CreateContext();
+
+            var mockExecutionStrategy1 = new TestExecutionStrategy(context1, retryCount: 0);
+            var mockExecutionStrategy2 = new TestExecutionStrategy(context2, retryCount: 0);
+
+            await using var tran1 = context1.Database.BeginTransaction();
+            await using var tran2 = context2.Database.BeginTransaction();
+
+            var executed1 = false;
+            var executed2 = false;
+
+            await executeAsync(
+                mockExecutionStrategy1, ct =>
+                {
+                    executed1 = true;
+                    return Task.FromResult(0);
+                });
+
+            await executeAsync(
+                mockExecutionStrategy2, ct =>
+                {
+                    executed2 = true;
+                    return Task.FromResult(0);
+                });
+
+            await tran1.CommitAsync();
+            await tran2.CommitAsync();
+
+            Assert.True(executed1);
+            Assert.True(executed2);
+        }
+
+        [ConditionalFact]
         public Task ExecuteAsync_Action_doesnt_retry_if_successful()
         {
             return ExecuteAsync_doesnt_retry_if_successful((e, f) => e.ExecuteAsync(ct => (Task)f(ct), CancellationToken.None));
@@ -642,6 +738,31 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(3, executionCount);
         }
 
+        [ConditionalFact]
+        public void ShouldRetryOn_does_not_get_null_on_DbUpdateConcurrencyException()
+        {
+            var executionStrategyMock = new TestExecutionStrategy(
+                Context,
+                shouldRetryOn: e =>
+                {
+                    Assert.IsType<DbUpdateConcurrencyException>(e);
+                    return true;
+                },
+                getNextDelay: e => TimeSpan.FromTicks(0));
+
+            var executionCount = 0;
+
+            executionStrategyMock.Execute(() =>
+                {
+                    if (executionCount++ < 1)
+                    {
+                        throw new DbUpdateConcurrencyException("");
+                    }
+                });
+
+            Assert.Equal(2, executionCount);
+        }
+
         protected DbContext CreateContext()
             => InMemoryTestHelpers.Instance.CreateContext(
                 InMemoryTestHelpers.Instance.CreateServiceProvider(
@@ -668,6 +789,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 _getNextDelay = getNextDelay;
             }
 
+            protected TestExecutionStrategy()
+                : base(
+                    (ExecutionStrategyDependencies)null,
+                    DefaultMaxRetryCount,
+                    DefaultMaxDelay)
+            {
+            }
+
             protected internal override bool ShouldRetryOn(Exception exception)
                 => _shouldRetryOn?.Invoke(exception) == true;
 
@@ -685,7 +814,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             public static new bool Suspended
             {
-                set => ExecutionStrategy.Suspended = value;
+                set => ExecutionStrategy.Current = value ? new TestExecutionStrategy() : null;
             }
         }
     }

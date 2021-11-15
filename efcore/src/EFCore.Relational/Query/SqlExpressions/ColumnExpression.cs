@@ -1,10 +1,9 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -23,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="ColumnExpression" /> class.
         /// </summary>
-        /// <param name="type"> The <see cref="System.Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="type">The <see cref="System.Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         protected ColumnExpression(Type type, RelationalTypeMapping? typeMapping)
             : base(type, typeMapping)
         {
@@ -53,14 +52,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Makes this column nullable.
         /// </summary>
-        /// <returns> A new expression which has <see cref="IsNullable" /> property set to true. </returns>
+        /// <returns>A new expression which has <see cref="IsNullable" /> property set to true.</returns>
         public abstract ColumnExpression MakeNullable();
 
-       /// <inheritdoc />
+        /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.Append(TableAlias).Append(".");
             expressionPrinter.Append(Name);
         }

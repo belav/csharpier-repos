@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -21,10 +21,17 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         [InlineData("")]
         [InlineData("--SELECT")]
         public void CheckComposableSql_throws(string sql)
-            => Assert.Equal(
+        {
+            Assert.Equal(
                 RelationalStrings.FromSqlNonComposable,
                 Assert.Throws<InvalidOperationException>(
                     () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql)).Message);
+
+            Assert.Equal(
+                RelationalStrings.FromSqlNonComposable,
+                Assert.Throws<InvalidOperationException>(
+                    () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql.Replace("SELECT", "WITH"))).Message);
+        }
 
         [Theory]
         [InlineData("SELECT something")]
@@ -36,7 +43,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         [InlineData("  /* multi\n*line\r\n * comment */ \nSELECT--\n1")]
         [InlineData("SELECT/* comment */1")]
         public void CheckComposableSql_does_not_throw(string sql)
-            => CreateDummyQuerySqlGenerator().CheckComposableSql(sql);
+        {
+            CreateDummyQuerySqlGenerator().CheckComposableSql(sql);
+
+            CreateDummyQuerySqlGenerator().CheckComposableSql(sql.Replace("SELECT", "WITH"));
+        }
 
         private DummyQuerySqlGenerator CreateDummyQuerySqlGenerator()
             => new(

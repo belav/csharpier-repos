@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -86,7 +86,10 @@ namespace Microsoft.EntityFrameworkCore
                 typeof(InternalEntityEntry).GetMethod(nameof(InternalEntityEntry.HasDefaultValue)),
                 typeof(DiagnosticsLogger<>).GetMethod("DispatchEventData", AnyInstance),
                 typeof(DiagnosticsLogger<>).GetMethod("ShouldLog", AnyInstance),
-                typeof(DiagnosticsLogger<>).GetMethod("NeedsEventData", AnyInstance)
+                typeof(DiagnosticsLogger<>).GetMethod("NeedsEventData", AnyInstance),
+                typeof(ChangeDetector).GetMethod("DetectValueChange"),
+                typeof(ChangeDetector).GetMethod("DetectNavigationChange"),
+                typeof(StateManager).GetMethod("get_ChangeDetector")
             };
 
             public override HashSet<MethodInfo> NotAnnotatedMethods { get; } = new()
@@ -119,8 +122,6 @@ namespace Microsoft.EntityFrameworkCore
                 typeof(IConventionAnnotatable).GetMethod(nameof(IConventionAnnotatable.SetOrRemoveAnnotation)),
                 typeof(IConventionModelBuilder).GetMethod(nameof(IConventionModelBuilder.HasNoEntityType)),
                 typeof(IReadOnlyEntityType).GetMethod(nameof(IReadOnlyEntityType.GetConcreteDerivedTypesInclusive)),
-                typeof(IReadOnlyEntityType).GetMethod(nameof(IReadOnlyEntityType.FindClosestCommonParent)),
-                typeof(IReadOnlyEntityType).GetMethod(nameof(IReadOnlyEntityType.LeastDerivedType)),
                 typeof(IMutableEntityType).GetMethod(nameof(IMutableEntityType.AddData)),
                 typeof(IReadOnlyNavigationBase).GetMethod("get_DeclaringEntityType"),
                 typeof(IReadOnlyNavigationBase).GetMethod("get_TargetEntityType"),
@@ -162,6 +163,7 @@ namespace Microsoft.EntityFrameworkCore
                 typeof(IConventionAnnotatable).GetMethod(nameof(IConventionAnnotatable.SetOrRemoveAnnotation)),
                 typeof(IConventionAnnotatable).GetMethod(nameof(IConventionAnnotatable.AddAnnotations)),
                 typeof(IMutableAnnotatable).GetMethod(nameof(IMutableAnnotatable.AddAnnotations)),
+                typeof(IConventionModel).GetMethod(nameof(IConventionModel.IsIgnoredType)),
                 typeof(IConventionModel).GetMethod(nameof(IConventionModel.IsShared)),
                 typeof(IConventionModel).GetMethod(nameof(IConventionModel.AddOwned)),
                 typeof(IConventionModel).GetMethod(nameof(IConventionModel.AddShared)),

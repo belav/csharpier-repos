@@ -1,17 +1,17 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
 
-namespace Microsoft.AspNetCore.Routing.Constraints
+namespace Microsoft.AspNetCore.Routing.Constraints;
+
+public class FileNameRouteConstraintTest
 {
-    public class FileNameRouteConstraintTest
+    public static TheoryData<object> FileNameData
     {
-        public static TheoryData<object> FileNameData
+        get
         {
-            get
-            {
-                return new TheoryData<object>()
+            return new TheoryData<object>()
                 {
                     "hello.txt",
                     "hello.txt.jpg",
@@ -23,32 +23,32 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                     ".a",
                     "/.......a"
                 };
-            }
         }
+    }
 
 
-        [Theory]
-        [MemberData(nameof(FileNameData))]
-        public void Match_RouteValue_IsFileName(object value)
+    [Theory]
+    [MemberData(nameof(FileNameData))]
+    public void Match_RouteValue_IsFileName(object value)
+    {
+        // Arrange
+        var constraint = new FileNameRouteConstraint();
+
+        var values = new RouteValueDictionary();
+        values.Add("path", value);
+
+        // Act
+        var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+
+        // Assert
+        Assert.True(result);
+    }
+
+    public static TheoryData<object> NonFileNameData
+    {
+        get
         {
-            // Arrange
-            var constraint = new FileNameRouteConstraint();
-
-            var values = new RouteValueDictionary();
-            values.Add("path", value);
-
-            // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        public static TheoryData<object> NonFileNameData
-        {
-            get
-            {
-                return new TheoryData<object>()
+            return new TheoryData<object>()
                 {
                     null,
                     string.Empty,
@@ -62,39 +62,38 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                     "/////hello.",
                     "a/b./.c/d.",
                 };
-            }
         }
+    }
 
-        [Theory]
-        [MemberData(nameof(NonFileNameData))]
-        public void Match_RouteValue_IsNotFileName(object value)
-        {
-            // Arrange
-            var constraint = new FileNameRouteConstraint();
+    [Theory]
+    [MemberData(nameof(NonFileNameData))]
+    public void Match_RouteValue_IsNotFileName(object value)
+    {
+        // Arrange
+        var constraint = new FileNameRouteConstraint();
 
-            var values = new RouteValueDictionary();
-            values.Add("path", value);
+        var values = new RouteValueDictionary();
+        values.Add("path", value);
 
-            // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+        // Act
+        var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
 
-            // Assert
-            Assert.False(result);
-        }
+        // Assert
+        Assert.False(result);
+    }
 
-        [Fact]
-        public void Match_MissingValue_IsNotFileName()
-        {
-            // Arrange
-            var constraint = new FileNameRouteConstraint();
+    [Fact]
+    public void Match_MissingValue_IsNotFileName()
+    {
+        // Arrange
+        var constraint = new FileNameRouteConstraint();
 
-            var values = new RouteValueDictionary();
+        var values = new RouteValueDictionary();
 
-            // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+        // Act
+        var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
 
-            // Assert
-            Assert.False(result);
-        }
+        // Assert
+        Assert.False(result);
     }
 }

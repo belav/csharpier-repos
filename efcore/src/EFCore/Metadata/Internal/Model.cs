@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Concurrent;
@@ -15,28 +15,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRuntimeModel
     {
         /// <summary>
-        ///     The CLR type that is used for property bag entity types when no other type is specified.
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public static readonly Type DefaultPropertyBagType = typeof(Dictionary<string, object>);
 
@@ -44,16 +38,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private readonly ConcurrentDictionary<Type, PropertyInfo?> _indexerPropertyInfoMap = new();
         private readonly ConcurrentDictionary<Type, string> _clrTypeNameMap = new();
         private readonly Dictionary<string, ConfigurationSource> _ignoredTypeNames = new(StringComparer.Ordinal);
+        private Dictionary<string, ConfigurationSource>? _ownedTypes;
+
         private readonly Dictionary<Type, (ConfigurationSource ConfigurationSource, SortedSet<EntityType> Types)> _sharedTypes =
-            new() { { DefaultPropertyBagType, (ConfigurationSource.Convention, new SortedSet<EntityType>(EntityTypeFullNameComparer.Instance)) } };
+            new()
+            {
+                {
+                    DefaultPropertyBagType, (ConfigurationSource.Explicit, new SortedSet<EntityType>(EntityTypeFullNameComparer.Instance))
+                }
+            };
 
         private ConventionDispatcher? _conventionDispatcher;
         private IList<IModelFinalizedConvention>? _modelFinalizedConventions;
+        private ModelDependencies? _scopedModelDependencies;
         private bool? _skipDetectChanges;
         private ChangeTrackingStrategy? _changeTrackingStrategy;
 
         private ConfigurationSource? _changeTrackingStrategyConfigurationSource;
-        private ModelDependencies? _scopedModelDependencies;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,17 +73,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public Model(ConventionSet conventions, ModelDependencies? modelDependencies = null)
+        public Model(ConventionSet conventions, ModelDependencies? modelDependencies = null, ModelConfiguration? modelConfiguration = null)
         {
             if (modelDependencies != null)
             {
                 ScopedModelDependencies = modelDependencies;
             }
+
             var dispatcher = new ConventionDispatcher(conventions);
             var builder = new InternalModelBuilder(this);
             _conventionDispatcher = dispatcher;
             _modelFinalizedConventions = conventions.ModelFinalizedConventions;
             Builder = builder;
+            Configuration = modelConfiguration;
             dispatcher.OnModelInitialized(builder);
         }
 
@@ -114,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Indicates whether the model is read-only.
         /// </summary>
-        public override bool IsReadOnly => _conventionDispatcher == null;
+        public override bool IsReadOnly
+            => _conventionDispatcher == null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -123,6 +127,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual InternalModelBuilder Builder { [DebuggerStepThrough] get; }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual ModelConfiguration? Configuration { get; }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -141,11 +153,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual EntityType? AddEntityType(
             string name,
+            bool owned,
             ConfigurationSource configurationSource)
         {
             Check.NotEmpty(name, nameof(name));
 
-            var entityType = new EntityType(name, this, configurationSource);
+            var entityType = new EntityType(name, this, owned, configurationSource);
 
             return AddEntityType(entityType);
         }
@@ -158,11 +171,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual EntityType? AddEntityType(
             Type type,
+            bool owned,
             ConfigurationSource configurationSource)
         {
             Check.NotNull(type, nameof(type));
 
-            var entityType = new EntityType(type, this, configurationSource);
+            var entityType = new EntityType(type, this, owned, configurationSource);
 
             return AddEntityType(entityType);
         }
@@ -176,6 +190,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual EntityType? AddEntityType(
             string name,
             Type type,
+            bool owned,
             ConfigurationSource configurationSource)
         {
             Check.NotEmpty(name, nameof(name));
@@ -186,7 +201,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new InvalidOperationException(CoreStrings.AmbiguousSharedTypeEntityTypeName(name));
             }
 
-            var entityType = new EntityType(name, type, this, configurationSource);
+            var entityType = new EntityType(name, type, this, owned, configurationSource);
 
             return AddEntityType(entityType);
         }
@@ -247,12 +262,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual EntityType? FindEntityType(string name)
-        {
-            Check.DebugAssert(!string.IsNullOrEmpty(name), "name is null or empty");
-            return _entityTypes.TryGetValue(name, out var entityType)
+            => !string.IsNullOrEmpty(name) && _entityTypes.TryGetValue(name, out var entityType)
                 ? entityType
                 : null;
-        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -348,7 +360,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(name, nameof(name));
 
             name = definingEntityType.GetOwnedName(name, definingNavigationName);
-            var entityType = new EntityType(name, DefaultPropertyBagType, this, configurationSource);
+            var entityType = new EntityType(name, DefaultPropertyBagType, this, owned: true, configurationSource);
 
             return AddEntityType(entityType);
         }
@@ -368,7 +380,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotNull(type, nameof(type));
 
             var name = definingEntityType.GetOwnedName(type.ShortDisplayName(), definingNavigationName);
-            var entityType = new EntityType(name, type, this, configurationSource);
+            var entityType = new EntityType(name, type, this, owned: true, configurationSource);
 
             return AddEntityType(entityType);
         }
@@ -413,16 +425,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        // TODO: Use layering to get the updated type #15898
         public virtual EntityType? FindActualEntityType(EntityType entityType)
             => entityType.IsInModel
                 ? entityType
                 : FindEntityType(entityType.Name)
-                    ?? (entityType.HasSharedClrType
-                        ? entityType.FindOwnership() is ForeignKey ownership
-                            ? FindActualEntityType(ownership.PrincipalEntityType)
-                                ?.FindNavigation(ownership.PrincipalToDependent!.Name)?.TargetEntityType
-                            : null
-                        : null);
+                ?? (entityType.HasSharedClrType
+                    ? entityType.FindOwnership() is ForeignKey ownership
+                        ? FindActualEntityType(ownership.PrincipalEntityType)
+                            ?.FindNavigation(ownership.PrincipalToDependent!.Name)?.TargetEntityType
+                        : null
+                    : null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -496,7 +509,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual bool IsShared(Type type)
-            => _sharedTypes.ContainsKey(type);
+            => FindIsSharedConfigurationSource(type) != null
+                || Configuration?.GetConfigurationType(type) == TypeConfigurationType.SharedTypeEntityType;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -575,7 +589,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual ConfigurationSource? FindIgnoredConfigurationSource(string name)
             => _ignoredTypeNames.TryGetValue(Check.NotEmpty(name, nameof(name)), out var ignoredConfigurationSource)
-                ? (ConfigurationSource?)ignoredConfigurationSource
+                ? ignoredConfigurationSource
                 : null;
 
         /// <summary>
@@ -595,6 +609,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual bool IsIgnored(Type type)
             => FindIgnoredConfigurationSource(GetDisplayName(type)) != null;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual bool IsIgnoredType(Type type)
+            => Configuration?.GetConfigurationType(type) == TypeConfigurationType.Ignored;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -628,8 +651,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public virtual IEnumerable<ITypeMappingConfiguration> GetTypeMappingConfigurations()
+            => Configuration?.GetTypeMappingConfigurations() ?? Enumerable.Empty<ITypeMappingConfiguration>();
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual ITypeMappingConfiguration? FindTypeMappingConfiguration(Type propertyType)
+            => Configuration?.FindTypeMappingConfiguration(propertyType);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         public virtual bool IsOwned(Type type)
-            => FindIsOwnedConfigurationSource(type) != null;
+            => FindIsOwnedConfigurationSource(type) != null
+                || Configuration?.GetConfigurationType(type) == TypeConfigurationType.OwnedEntityType;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -639,7 +681,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual ConfigurationSource? FindIsOwnedConfigurationSource(Type type)
         {
-            if (this[CoreAnnotationNames.OwnedTypes] is not Dictionary<string, ConfigurationSource> ownedTypes)
+            if (_ownedTypes == null)
             {
                 return null;
             }
@@ -648,7 +690,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             while (currentType != null)
             {
-                if (ownedTypes.TryGetValue(GetDisplayName(currentType), out var configurationSource))
+                if (_ownedTypes.TryGetValue(GetDisplayName(currentType), out var configurationSource))
                 {
                     return configurationSource;
                 }
@@ -669,19 +711,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             EnsureMutable();
             var name = GetDisplayName(type);
-            if (!(this[CoreAnnotationNames.OwnedTypes] is Dictionary<string, ConfigurationSource> ownedTypes))
-            {
-                ownedTypes = new Dictionary<string, ConfigurationSource>(StringComparer.Ordinal);
-                this[CoreAnnotationNames.OwnedTypes] = ownedTypes;
-            }
+            _ownedTypes ??= new(StringComparer.Ordinal);
 
-            if (ownedTypes.TryGetValue(name, out var oldConfigurationSource))
+            if (_ownedTypes.TryGetValue(name, out var oldConfigurationSource))
             {
-                ownedTypes[name] = configurationSource.Max(oldConfigurationSource);
+                _ownedTypes[name] = configurationSource.Max(oldConfigurationSource);
                 return;
             }
 
-            ownedTypes.Add(name, configurationSource);
+            _ownedTypes.Add(name, configurationSource);
         }
 
         /// <summary>
@@ -694,14 +732,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             EnsureMutable();
 
-            if (this[CoreAnnotationNames.OwnedTypes] is not Dictionary<string, ConfigurationSource> ownedTypes)
+            if (_ownedTypes == null)
             {
                 return null;
             }
 
-            var name = GetDisplayName(type);
-            return ownedTypes.Remove(name) ? name : null;
+            var currentType = type;
+            while (currentType != null)
+            {
+                var name = GetDisplayName(type);
+                if (_ownedTypes.Remove(name))
+                {
+                    return name;
+                }
+
+                currentType = currentType.BaseType;
+            }
+
+            return null;
         }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual ConfigurationSource? FindIsSharedConfigurationSource(Type type)
+            => _sharedTypes.TryGetValue(type, out var existingTypes) ? existingTypes.ConfigurationSource : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -713,7 +771,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             EnsureMutable();
 
-            if (_entityTypes.Any(et => !et.Value.HasSharedClrType && et.Value.ClrType == type))
+            if (FindEntityType(type) != null)
             {
                 throw new InvalidOperationException(CoreStrings.CannotMarkShared(type.ShortDisplayName()));
             }
@@ -734,9 +792,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public virtual Type? RemoveShared(Type type)
+        {
+            EnsureMutable();
+
+            if (_sharedTypes.TryGetValue(type, out var existingTypes)
+                && existingTypes.Types.Count != 0)
+            {
+                throw new InvalidOperationException(CoreStrings.CannotMarkNonShared(type.ShortDisplayName()));
+            }
+
+            return _sharedTypes.Remove(type) ? type : null;
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         public virtual PropertyAccessMode GetPropertyAccessMode()
             => (PropertyAccessMode?)this[CoreAnnotationNames.PropertyAccessMode]
-                ?? PropertyAccessMode.PreferField;
+                ?? DefaultPropertyAccessMode;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -792,7 +869,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _changeTrackingStrategy = changeTrackingStrategy;
 
             _changeTrackingStrategyConfigurationSource = _changeTrackingStrategy == null
-                ? (ConfigurationSource?)null
+                ? null
                 : configurationSource.Max(_changeTrackingStrategyConfigurationSource);
 
             return changeTrackingStrategy;
@@ -810,10 +887,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
         /// </summary>
-        /// <param name="name"> The key of the set annotation. </param>
-        /// <param name="annotation"> The annotation set. </param>
-        /// <param name="oldAnnotation"> The old annotation. </param>
-        /// <returns> The annotation that was set. </returns>
+        /// <param name="name">The key of the set annotation.</param>
+        /// <param name="annotation">The annotation set.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <returns>The annotation that was set.</returns>
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
@@ -910,7 +987,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Gets a value indicating whether the given MethodInfo reprensents an indexer access.
         /// </summary>
-        /// <param name="methodInfo"> The MethodInfo to check for. </param>
+        /// <param name="methodInfo">The MethodInfo to check for.</param>
         public virtual bool IsIndexerMethod(MethodInfo methodInfo)
             => !methodInfo.IsStatic
                 && methodInfo.IsSpecialName
@@ -962,7 +1039,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IReadOnlyModel)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IReadOnlyModel)this).ToDebugString(),
                 () => ((IReadOnlyModel)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         /// <summary>
@@ -1104,7 +1181,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        IReadOnlyEntityType? IReadOnlyModel.FindEntityType(string name, string definingNavigationName, IReadOnlyEntityType definingEntityType)
+        IReadOnlyEntityType? IReadOnlyModel.FindEntityType(
+            string name,
+            string definingNavigationName,
+            IReadOnlyEntityType definingEntityType)
             => FindEntityType(name, definingNavigationName, (EntityType)definingEntityType);
 
         /// <summary>
@@ -1227,7 +1307,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IMutableEntityType IMutableModel.AddEntityType(string name)
-            => AddEntityType(name, ConfigurationSource.Explicit)!;
+            => AddEntityType(name, owned: false, ConfigurationSource.Explicit)!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1237,7 +1317,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IConventionEntityType? IConventionModel.AddEntityType(string name, bool fromDataAnnotation)
-            => AddEntityType(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            => AddEntityType(name, owned: false, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1247,7 +1327,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IMutableEntityType IMutableModel.AddEntityType(Type type)
-            => AddEntityType(type, ConfigurationSource.Explicit)!;
+            => AddEntityType(type, owned: false, ConfigurationSource.Explicit)!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1257,7 +1337,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IConventionEntityType? IConventionModel.AddEntityType(Type type, bool fromDataAnnotation)
-            => AddEntityType(type, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            => AddEntityType(type, owned: false, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1267,7 +1347,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IMutableEntityType IMutableModel.AddEntityType(string name, Type type)
-            => AddEntityType(name, type, ConfigurationSource.Explicit)!;
+            => AddEntityType(name, type, owned: false, ConfigurationSource.Explicit)!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1277,7 +1357,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IConventionEntityType? IConventionModel.AddEntityType(string name, Type type, bool fromDataAnnotation)
-            => AddEntityType(name, type, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            => AddEntityType(
+                name, type, owned: false, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1346,6 +1427,68 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
+        IMutableEntityType IMutableModel.AddOwnedEntityType(string name)
+            => AddEntityType(name, owned: true, ConfigurationSource.Explicit)!;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [DebuggerStepThrough]
+        IConventionEntityType? IConventionModel.AddOwnedEntityType(string name, bool fromDataAnnotation)
+            => AddEntityType(name, owned: true, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [DebuggerStepThrough]
+        IMutableEntityType IMutableModel.AddOwnedEntityType(Type type)
+            => AddEntityType(type, owned: true, ConfigurationSource.Explicit)!;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [DebuggerStepThrough]
+        IConventionEntityType? IConventionModel.AddOwnedEntityType(Type type, bool fromDataAnnotation)
+            => AddEntityType(type, owned: true, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [DebuggerStepThrough]
+        IMutableEntityType IMutableModel.AddOwnedEntityType(string name, Type type)
+            => AddEntityType(name, type, owned: true, ConfigurationSource.Explicit)!;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [DebuggerStepThrough]
+        IConventionEntityType? IConventionModel.AddOwnedEntityType(string name, Type type, bool fromDataAnnotation)
+            => AddEntityType(
+                name, type, owned: true,
+                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        [DebuggerStepThrough]
         IMutableEntityType? IMutableModel.RemoveEntityType(IMutableEntityType entityType)
             => RemoveEntityType((EntityType)entityType);
 
@@ -1387,7 +1530,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IMutableEntityType? IMutableModel.RemoveEntityType(
-            Type type, string definingNavigationName, IMutableEntityType definingEntityType)
+            Type type,
+            string definingNavigationName,
+            IMutableEntityType definingEntityType)
             => RemoveEntityType(type, definingNavigationName, (EntityType)definingEntityType);
 
         /// <summary>
@@ -1398,7 +1543,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IConventionEntityType? IConventionModel.RemoveEntityType(
-            Type type, string definingNavigationName, IConventionEntityType definingEntityType)
+            Type type,
+            string definingNavigationName,
+            IConventionEntityType definingEntityType)
             => RemoveEntityType(type, definingNavigationName, (EntityType)definingEntityType);
 
         /// <summary>
@@ -1429,7 +1576,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IMutableEntityType? IMutableModel.RemoveEntityType(
-            string name, string definingNavigationName, IMutableEntityType definingEntityType)
+            string name,
+            string definingNavigationName,
+            IMutableEntityType definingEntityType)
             => RemoveEntityType(name, definingNavigationName, (EntityType)definingEntityType);
 
         /// <summary>
@@ -1440,7 +1589,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         [DebuggerStepThrough]
         IConventionEntityType? IConventionModel.RemoveEntityType(
-            string name, string definingNavigationName, IConventionEntityType definingEntityType)
+            string name,
+            string definingNavigationName,
+            IConventionEntityType definingEntityType)
             => RemoveEntityType(name, definingNavigationName, (EntityType)definingEntityType);
 
         /// <summary>

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -124,6 +124,13 @@ namespace Microsoft.EntityFrameworkCore.Tools
                         Resources.NETCoreApp1StartupProject(startupProject.ProjectName, targetFramework.Version));
                 }
 
+                var targetPlatformIdentifier = startupProject.TargetPlatformIdentifier!;
+                if (targetPlatformIdentifier.Length != 0
+                    && !string.Equals(targetPlatformIdentifier, "Windows", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new CommandException(Resources.UnsupportedPlatform(startupProject.ProjectName, targetPlatformIdentifier));
+                }
+
                 executable = "dotnet";
                 args.Add("exec");
                 args.Add("--depsfile");
@@ -169,14 +176,33 @@ namespace Microsoft.EntityFrameworkCore.Tools
             args.AddRange(_args!);
             args.Add("--assembly");
             args.Add(targetPath);
+            args.Add("--project");
+            args.Add(projectFile);
             args.Add("--startup-assembly");
             args.Add(startupTargetPath);
+            args.Add("--startup-project");
+            args.Add(startupProjectFile);
             args.Add("--project-dir");
             args.Add(project.ProjectDir!);
             args.Add("--root-namespace");
             args.Add(project.RootNamespace!);
             args.Add("--language");
             args.Add(project.Language!);
+            args.Add("--framework");
+            args.Add(startupProject.TargetFramework!);
+
+            if (_configuration.HasValue())
+            {
+                args.Add("--configuration");
+                args.Add(_configuration.Value()!);
+            }
+
+            if (string.Equals(project.Nullable, "enable", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(project.Nullable, "annotations", StringComparison.OrdinalIgnoreCase))
+            {
+                args.Add("--nullable");
+            }
+
             args.Add("--working-dir");
             args.Add(Directory.GetCurrentDirectory());
 
@@ -266,9 +292,14 @@ namespace Microsoft.EntityFrameworkCore.Tools
             {
                 path = Directory.GetCurrentDirectory();
             }
-            else if (!Directory.Exists(path)) // It's not a directory
+            else
             {
-                return new List<string> { path };
+                path = Path.GetFullPath(path);
+
+                if (!Directory.Exists(path)) // It's not a directory
+                {
+                    return new List<string> { path };
+                }
             }
 
             var projectFiles = Directory.EnumerateFiles(path, "*.*proj", SearchOption.TopDirectoryOnly)

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -60,11 +60,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override Expression VisitChildren(ExpressionVisitor visitor)
-        {
-            Check.NotNull(visitor, nameof(visitor));
-
-            return this;
-        }
+            => this;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -73,11 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override void Print(ExpressionPrinter expressionPrinter)
-        {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
-            expressionPrinter.Append("@" + _parameterExpression.Name);
-        }
+            => expressionPrinter.Append("@" + _parameterExpression.Name);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

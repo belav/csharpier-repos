@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -39,8 +38,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource)
             : base(name, propertyInfo, fieldInfo, configurationSource)
         {
-            Check.NotNull(declaringEntityType, nameof(declaringEntityType));
-
             DeclaringEntityType = declaringEntityType;
             ClrType = (propertyInfo?.PropertyType ?? fieldInfo?.FieldType)!;
 
@@ -63,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public override TypeBase DeclaringType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -114,13 +112,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
 #pragma warning disable CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
             get => IsReadOnly
-                    ? NonCapturingLazyInitializer.EnsureInitialized(ref _parameterBinding, (IServiceProperty)this, static property =>
-                    {
-                        var entityType = property.DeclaringEntityType;
-                        var factory = entityType.Model.GetModelDependencies().ParameterBindingFactories.FindFactory(property.ClrType, property.Name)!;
-                        return (ServiceParameterBinding)factory.Bind(entityType, property.ClrType, property.Name);
-                    })
-                    : _parameterBinding;
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _parameterBinding, (IServiceProperty)this, static property =>
+                        {
+                            var entityType = property.DeclaringEntityType;
+                            var factory = entityType.Model.GetModelDependencies().ParameterBindingFactories
+                                .FindFactory(property.ClrType, property.Name)!;
+                            return (ServiceParameterBinding)factory.Bind(entityType, property.ClrType, property.Name);
+                        })
+                : _parameterBinding;
 #pragma warning restore CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
             set => SetParameterBinding(value, ConfigurationSource.Explicit);
         }
@@ -185,7 +185,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IServiceProperty)this).ToDebugString(),
                 () => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         /// <summary>
@@ -196,7 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyEntityType IReadOnlyServiceProperty.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -207,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IMutableEntityType IMutableServiceProperty.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -218,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionServicePropertyBuilder IConventionServiceProperty.Builder
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>

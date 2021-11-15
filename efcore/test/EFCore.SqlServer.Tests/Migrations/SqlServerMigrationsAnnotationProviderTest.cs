@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -24,10 +24,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
             var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Entity<Entity>().Property<int>("Id").UseIdentityColumn(2, 3);
 
-            var model = SqlServerTestHelpers.Instance.Finalize(modelBuilder);
+            var model = modelBuilder.FinalizeModel(designTime: true);
             var property = model.FindEntityType(typeof(Entity)).FindProperty("Id");
 
-            var migrationAnnotations = _annotations.For(property.GetTableColumnMappings().Single().Column).ToList();
+            var migrationAnnotations = _annotations.For(property.GetTableColumnMappings().Single().Column, true).ToList();
 
             var identity = Assert.Single(migrationAnnotations, a => a.Name == SqlServerAnnotationNames.Identity);
             Assert.Equal("2, 3", identity.Value);
@@ -39,10 +39,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
             var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Entity<Entity>().Property(e => e.IncludedProp).HasColumnName("IncludedColumn");
             modelBuilder.Entity<Entity>().HasIndex(e => e.IndexedProp).IncludeProperties(e => e.IncludedProp);
-            var model = SqlServerTestHelpers.Instance.Finalize(modelBuilder);
+            var model = modelBuilder.FinalizeModel(designTime: true);
 
             Assert.Contains(
-                _annotations.For(model.FindEntityType(typeof(Entity)).GetIndexes().Single().GetMappedTableIndexes().Single()),
+                _annotations.For(model.FindEntityType(typeof(Entity)).GetIndexes().Single().GetMappedTableIndexes().Single(), true),
                 a => a.Name == SqlServerAnnotationNames.Include && ((string[])a.Value).Contains("IncludedColumn"));
         }
 

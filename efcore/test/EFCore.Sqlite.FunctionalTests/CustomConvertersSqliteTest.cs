@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace Microsoft.EntityFrameworkCore
             base.Value_conversion_is_appropriately_used_for_join_condition();
 
             AssertSql(
-                @"@__blogId_0='1' (DbType = String)
+                @"@__blogId_0='1'
 
 SELECT ""b"".""Url""
 FROM ""Blog"" AS ""b""
@@ -40,7 +41,7 @@ WHERE ""b"".""IsVisible"" = 'Y'");
             base.Value_conversion_is_appropriately_used_for_left_join_condition();
 
             AssertSql(
-                @"@__blogId_0='1' (DbType = String)
+                @"@__blogId_0='1'
 
 SELECT ""b"".""Url""
 FROM ""Blog"" AS ""b""
@@ -113,6 +114,13 @@ WHERE ""b"".""IsVisible"" = 'Y'");
                 @"SELECT ""b"".""BlogId"", ""b"".""Discriminator"", ""b"".""IndexerVisible"", ""b"".""IsVisible"", ""b"".""Url"", ""b"".""RssUrl""
 FROM ""Blog"" AS ""b""
 WHERE ""b"".""IndexerVisible"" = 'Nay'");
+        }
+
+        public override void Value_conversion_on_enum_collection_contains()
+        {
+            Assert.Contains(
+                CoreStrings.TranslationFailed("")[47..],
+                Assert.Throws<InvalidOperationException>(() => base.Value_conversion_on_enum_collection_contains()).Message);
         }
 
         private void AssertSql(params string[] expected)

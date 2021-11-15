@@ -298,7 +298,7 @@ namespace Moq
 
 			var errors = new List<MockException>();
 
-			foreach (var setup in this.MutableSetups.ToArray(setup => !setup.IsOverridden && !setup.IsConditional && predicate(setup)))
+			foreach (var setup in this.MutableSetups.FindAll(setup => !setup.IsConditional && predicate(setup)))
 			{
 				try
 				{
@@ -386,7 +386,7 @@ namespace Moq
 
 			var unverifiedInvocations = mock.MutableInvocations.ToArray(invocation => !invocation.IsVerified);
 
-			var innerMockSetups = mock.MutableSetups.GetInnerMockSetups();
+			var innerMocks = mock.MutableSetups.FindAllInnerMocks();
 
 			if (unverifiedInvocations.Any())
 			{
@@ -395,15 +395,15 @@ namespace Moq
 				// to verify `X`. If that succeeds, it's reasonable to expect that `m.A`, `m.A.B`, and
 				// `m.A.B.C` have implicitly been verified as well. Below, invocations such as those to
 				// the left of `X` are referred to as "transitive" (for lack of a better word).
-				if (innerMockSetups.Any())
+				if (innerMocks.Any())
 				{
 					for (int i = 0, n = unverifiedInvocations.Length; i < n; ++i)
 					{
 						// In order for an invocation to be "transitive", its return value has to be a
 						// sub-object (inner mock); and that sub-object has to have received at least
 						// one call:
-						var wasTransitiveInvocation = innerMockSetups.TryFind(unverifiedInvocations[i]) is Setup inner
-						                              && inner.InnerMock.MutableInvocations.Any();
+						var wasTransitiveInvocation = mock.MutableSetups.FindLastInnerMock(setup => setup.Matches(unverifiedInvocations[i])) is Mock innerMock
+						                              && innerMock.MutableInvocations.Any();
 						if (wasTransitiveInvocation)
 						{
 							unverifiedInvocations[i] = null;
@@ -421,33 +421,33 @@ namespace Moq
 
 			// Perform verification for all automatically created sub-objects (that is, those
 			// created by "transitive" invocations):
-			foreach (var inner in innerMockSetups)
+			foreach (var innerMock in innerMocks)
 			{
-				VerifyNoOtherCalls(inner.InnerMock, verifiedMocks);
+				VerifyNoOtherCalls(innerMock, verifiedMocks);
 			}
 		}
 
 		private static int GetMatchingInvocationCount(
 			Mock mock,
 			LambdaExpression expression,
-			out List<Pair<Invocation, InvocationShape>> invocationsToBeMarkedAsVerified)
+			out List<Pair<Invocation, MethodExpectation>> invocationsToBeMarkedAsVerified)
 		{
 			Debug.Assert(mock != null);
 			Debug.Assert(expression != null);
 
-			invocationsToBeMarkedAsVerified = new List<Pair<Invocation, InvocationShape>>();
+			invocationsToBeMarkedAsVerified = new List<Pair<Invocation, MethodExpectation>>();
 			return Mock.GetMatchingInvocationCount(
 				mock,
-				new ImmutablePopOnlyStack<InvocationShape>(expression.Split()),
+				new ImmutablePopOnlyStack<MethodExpectation>(expression.Split()),
 				new HashSet<Mock>(),
 				invocationsToBeMarkedAsVerified);
 		}
 
 		private static int GetMatchingInvocationCount(
 			Mock mock,
-			in ImmutablePopOnlyStack<InvocationShape> parts,
+			in ImmutablePopOnlyStack<MethodExpectation> parts,
 			HashSet<Mock> visitedInnerMocks,
-			List<Pair<Invocation, InvocationShape>> invocationsToBeMarkedAsVerified)
+			List<Pair<Invocation, MethodExpectation>> invocationsToBeMarkedAsVerified)
 		{
 			Debug.Assert(mock != null);
 			Debug.Assert(!parts.Empty);
@@ -466,7 +466,7 @@ namespace Moq
 			var count = 0;
 			foreach (var matchingInvocation in mock.MutableInvocations.ToArray().Where(part.IsMatch))
 			{
-				invocationsToBeMarkedAsVerified.Add(new Pair<Invocation, InvocationShape>(matchingInvocation, part));
+				invocationsToBeMarkedAsVerified.Add(new Pair<Invocation, MethodExpectation>(matchingInvocation, part));
 
 				if (remainingParts.Empty)
 				{
@@ -591,7 +591,7 @@ namespace Moq
 			});
 		}
 
-		private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, InvocationShape, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+		private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
 			where TSetup : ISetup
 		{
 			Debug.Assert(mock != null);
@@ -602,7 +602,7 @@ namespace Moq
 			return Mock.SetupRecursive(mock, originalExpression: expression, parts, setupLast);
 		}
 
-		private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<InvocationShape> parts, Func<Mock, Expression, InvocationShape, TSetup> setupLast)
+		private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
 			where TSetup : ISetup
 		{
 			var part = parts.Pop();
@@ -614,12 +614,8 @@ namespace Moq
 			}
 			else
 			{
-				Mock innerMock;
-				if (mock.MutableSetups.GetInnerMockSetups().TryFind(part) is Setup setup)
-				{
-					innerMock = setup.InnerMock;
-				}
-				else
+				Mock innerMock = mock.MutableSetups.FindLastInnerMock(setup => setup.Matches(part));
+				if (innerMock == null)
 				{
 					var returnValue = mock.GetDefaultValue(method, out innerMock, useAlternateProvider: DefaultValueProvider.Mock);
 					if (innerMock == null)
@@ -630,8 +626,8 @@ namespace Moq
 								Resources.UnsupportedExpression,
 								expr.ToStringFixed() + " in " + originalExpression.ToStringFixed() + ":\n" + Resources.TypeNotMockable));
 					}
-					setup = new InnerMockSetup(originalExpression, mock, expectation: part, returnValue);
-					mock.MutableSetups.Add((Setup)setup);
+					var innerMockSetup = new InnerMockSetup(originalExpression, mock, expectation: part, returnValue);
+					mock.MutableSetups.Add(innerMockSetup);
 				}
 				Debug.Assert(innerMock != null);
 
@@ -671,7 +667,7 @@ namespace Moq
 			Mock.RaiseEvent(mock, expression, parts, arguments);
 		}
 
-		internal static void RaiseEvent(Mock mock, LambdaExpression expression, Stack<InvocationShape> parts, object[] arguments)
+		internal static void RaiseEvent(Mock mock, LambdaExpression expression, Stack<MethodExpectation> parts, object[] arguments)
 		{
 			const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
 
@@ -721,9 +717,13 @@ namespace Moq
 					handlers.InvokePreserveStack(arguments);
 				}
 			}
-			else if (mock.MutableSetups.GetInnerMockSetups().TryFind(part) is Setup innerMockSetup)
+			else
 			{
-				Mock.RaiseEvent(innerMockSetup.InnerMock, expression, parts, arguments);
+				var innerMock = mock.MutableSetups.FindLastInnerMock(setup => setup.Matches(part));
+				if (innerMock != null)
+				{
+					Mock.RaiseEvent(innerMock, expression, parts, arguments);
+				}
 			}
 		}
 

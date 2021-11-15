@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -26,7 +26,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Xunit;
 using Index = Microsoft.EntityFrameworkCore.Metadata.Internal.Index;
 using IsolationLevel = System.Data.IsolationLevel;
@@ -41,21 +40,24 @@ namespace Microsoft.EntityFrameworkCore
         {
             var constantExpression = Expression.Constant("A");
             var model = new Model();
-            var entityType = new EntityType(typeof(object), model, ConfigurationSource.Convention);
+            var entityType = new EntityType(typeof(object), model, owned: false, ConfigurationSource.Convention);
             var property = entityType.AddProperty("A", typeof(int), ConfigurationSource.Convention, ConfigurationSource.Convention);
             var key = entityType.AddKey(property, ConfigurationSource.Convention);
             var foreignKey = new ForeignKey(new List<Property> { property }, key, entityType, entityType, ConfigurationSource.Convention);
             var index = new Index(new List<Property> { property }, "IndexName", entityType, ConfigurationSource.Convention);
             var contextServices = RelationalTestHelpers.Instance.CreateContextServices(model.FinalizeModel());
+            var updateEntry = new InternalEntityEntry(contextServices.GetRequiredService<IStateManager>(), entityType, new object());
+            var columnOperation = new AddColumnOperation { Name = "Column1", Table = "Table1", ClrType = typeof(int) };
 
             var fakeFactories = new Dictionary<Type, Func<object>>
             {
                 { typeof(string), () => "Fake" },
                 { typeof(IList<string>), () => new List<string> { "Fake1", "Fake2" } },
+                { typeof(IReadOnlyList<string>), () => new List<string> { "Fake1", "Fake2" } },
                 {
                     typeof(IEnumerable<IUpdateEntry>), () => new List<IUpdateEntry>
                     {
-                        new InternalClrEntityEntry(
+                        new InternalEntityEntry(
                             contextServices.GetRequiredService<IStateManager>(),
                             entityType,
                             new object())
@@ -81,7 +83,9 @@ namespace Microsoft.EntityFrameworkCore
                 { typeof(Type), () => typeof(object) },
                 { typeof(ValueConverter), () => new BoolToZeroOneConverter<int>() },
                 { typeof(DbContext), () => new FakeDbContext() },
-                { typeof(SqlExpression), () => new FakeSqlExpression() }
+                { typeof(SqlExpression), () => new FakeSqlExpression() },
+                { typeof(IUpdateEntry), () =>  updateEntry },
+                { typeof(ColumnOperation), () => columnOperation }
             };
 
             TestEventLogging(

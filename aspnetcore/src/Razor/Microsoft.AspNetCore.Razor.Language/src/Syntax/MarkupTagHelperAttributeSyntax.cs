@@ -1,33 +1,32 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Razor.Language.Syntax
+namespace Microsoft.AspNetCore.Razor.Language.Syntax;
+
+internal sealed partial class MarkupTagHelperAttributeSyntax
 {
-    internal sealed partial class MarkupTagHelperAttributeSyntax
+    private static readonly string TagHelperAttributeInfoKey = typeof(TagHelperAttributeInfo).Name;
+
+    public TagHelperAttributeInfo TagHelperAttributeInfo
     {
-        private static readonly string TagHelperAttributeInfoKey = typeof(TagHelperAttributeInfo).Name;
-
-        public TagHelperAttributeInfo TagHelperAttributeInfo
+        get
         {
-            get
-            {
-                var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
-                return tagHelperAttributeInfo;
-            }
+            var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
+            return tagHelperAttributeInfo;
         }
+    }
 
-        public MarkupTagHelperAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
-        {
-            var annotations = new List<SyntaxAnnotation>(GetAnnotations())
+    public MarkupTagHelperAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
+    {
+        var annotations = new List<SyntaxAnnotation>(GetAnnotations())
             {
                 new SyntaxAnnotation(TagHelperAttributeInfoKey, info)
             };
 
-            var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
+        var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
 
-            return (MarkupTagHelperAttributeSyntax)newGreen.CreateRed(Parent, Position);
-        }
+        return (MarkupTagHelperAttributeSyntax)newGreen.CreateRed(Parent, Position);
     }
 }

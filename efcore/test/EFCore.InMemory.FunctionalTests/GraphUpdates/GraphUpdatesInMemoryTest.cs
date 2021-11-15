@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -14,6 +15,10 @@ namespace Microsoft.EntityFrameworkCore
             : base(fixture)
         {
         }
+
+        // In-memory database does not have database default values
+        public override Task Can_insert_when_FK_has_default_value(bool async)
+            => Task.CompletedTask;
 
         public override void Required_many_to_one_dependents_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
@@ -158,6 +163,18 @@ namespace Microsoft.EntityFrameworkCore
             Action<DbContext> nestedTestOperation3 = null)
         {
             base.ExecuteWithStrategyInTransaction(testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+            Fixture.Reseed();
+        }
+
+        protected override async Task ExecuteWithStrategyInTransactionAsync(
+            Func<DbContext, Task> testOperation,
+            Func<DbContext, Task> nestedTestOperation1 = null,
+            Func<DbContext, Task> nestedTestOperation2 = null,
+            Func<DbContext, Task> nestedTestOperation3 = null)
+        {
+            await base.ExecuteWithStrategyInTransactionAsync(
+                testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+
             Fixture.Reseed();
         }
 

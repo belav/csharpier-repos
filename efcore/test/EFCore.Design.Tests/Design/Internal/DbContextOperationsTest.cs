@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.Data.SqlClient;
@@ -40,6 +40,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 new TestOperationReporter(),
                 assembly,
                 assembly,
+                projectDir: "",
+                rootNamespace: null,
+                language: "C#",
+                nullable: false,
                 args: null,
                 new TestAppServiceProviderFactory(assembly));
         }
@@ -52,6 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 new TestOperationReporter(),
                 assembly,
                 assembly,
+                projectDir: "",
+                rootNamespace: null,
+                language: "C#",
+                nullable: false,
                 args: Array.Empty<string>(),
                 new TestAppServiceProviderFactory(assembly));
 
@@ -122,7 +130,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                                     .UseInMemoryDatabase("In-memory test database")
                                     .EnableServiceProviderCaching(false)
                                     .Options))
-                        .BuildServiceProvider());
+                        .BuildServiceProvider(validateScopes: true));
         }
 
         private static class TestProgramWithContextFactory
@@ -131,7 +139,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 => new(
                     new ServiceCollection()
                         .AddDbContextFactory<TestContextFromFactory>(b => b.UseInMemoryDatabase("In-memory test database"))
-                        .BuildServiceProvider());
+                        .BuildServiceProvider(validateScopes: true));
         }
 
         private static class TestProgramRelational
@@ -153,6 +161,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 new TestOperationReporter(),
                 assembly,
                 assembly,
+                projectDir: "",
+                rootNamespace: null,
+                language: "C#",
+                nullable: false,
                 /* args: */ Array.Empty<string>(),
                 new TestAppServiceProviderFactory(assembly));
         }
@@ -163,7 +175,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     .AddDbContext<TestContext>(
                         b =>
                             configureProvider(b.EnableServiceProviderCaching(false)))
-                    .BuildServiceProvider());
+                    .BuildServiceProvider(validateScopes: true));
 
         private class TestContext : DbContext
         {

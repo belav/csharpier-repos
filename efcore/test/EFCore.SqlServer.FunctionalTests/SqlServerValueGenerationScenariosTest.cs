@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.TestUtilities;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using Xunit;
@@ -279,6 +280,211 @@ namespace Microsoft.EntityFrameworkCore
                     .Property(e => e.Id)
                     .HasDefaultValueSql("next value for MySequence")
                     .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+            }
+        }
+
+        [ConditionalFact]
+        public void Insert_uint_to_Identity_column_using_value_converter()
+        {
+            using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
+            using (var context = new BlogContextUIntToIdentityUsingValueConverter(testStore.Name))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                context.AddRange(
+                    new BlogWithUIntKey { Name = "One Unicorn" }, new BlogWithUIntKey { Name = "Two Unicorns" });
+
+                context.SaveChanges();
+            }
+
+            using (var context = new BlogContextUIntToIdentityUsingValueConverter(testStore.Name))
+            {
+                var blogs = context.UnsignedBlogs.OrderBy(e => e.Id).ToList();
+
+                Assert.Equal((uint)1, blogs[0].Id);
+                Assert.Equal((uint)2, blogs[1].Id);
+            }
+        }
+
+        public class BlogContextUIntToIdentityUsingValueConverter : ContextBase
+        {
+            public BlogContextUIntToIdentityUsingValueConverter(string databaseName)
+                : base(databaseName)
+            {
+            }
+
+            public DbSet<BlogWithUIntKey> UnsignedBlogs { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                base.OnModelCreating(modelBuilder);
+
+                modelBuilder
+                    .Entity<BlogWithUIntKey>()
+                    .Property(e => e.Id)
+                    .HasConversion<int>();
+            }
+        }
+
+        public class BlogWithUIntKey
+        {
+            public uint Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        [ConditionalFact]
+        public void Insert_int_enum_to_Identity_column()
+        {
+            using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
+            using (var context = new BlogContextIntEnumToIdentity(testStore.Name))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                context.AddRange(
+                    new BlogWithIntEnumKey { Name = "One Unicorn" }, new BlogWithIntEnumKey { Name = "Two Unicorns" });
+
+                context.SaveChanges();
+            }
+
+            using (var context = new BlogContextIntEnumToIdentity(testStore.Name))
+            {
+                var blogs = context.EnumBlogs.OrderBy(e => e.Id).ToList();
+
+                Assert.Equal(1, (int)blogs[0].Id);
+                Assert.Equal(2, (int)blogs[1].Id);
+            }
+        }
+
+        public class BlogContextIntEnumToIdentity : ContextBase
+        {
+            public BlogContextIntEnumToIdentity(string databaseName)
+                : base(databaseName)
+            {
+            }
+
+            public DbSet<BlogWithIntEnumKey> EnumBlogs { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                base.OnModelCreating(modelBuilder);
+
+                modelBuilder
+                    .Entity<BlogWithIntEnumKey>()
+                    .Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+            }
+        }
+
+        public class BlogWithIntEnumKey
+        {
+            public IntKey Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        public enum IntKey
+        {
+        }
+
+        [ConditionalFact]
+        public void Insert_ulong_enum_to_Identity_column()
+        {
+            using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
+            using (var context = new BlogContextULongEnumToIdentity(testStore.Name))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                context.AddRange(
+                    new BlogWithULongEnumKey { Name = "One Unicorn" }, new BlogWithULongEnumKey { Name = "Two Unicorns" });
+
+                context.SaveChanges();
+            }
+
+            using (var context = new BlogContextULongEnumToIdentity(testStore.Name))
+            {
+                var blogs = context.EnumBlogs.OrderBy(e => e.Id).ToList();
+
+                Assert.Equal(1, (int)blogs[0].Id);
+                Assert.Equal(2, (int)blogs[1].Id);
+            }
+        }
+
+        public class BlogContextULongEnumToIdentity : ContextBase
+        {
+            public BlogContextULongEnumToIdentity(string databaseName)
+                : base(databaseName)
+            {
+            }
+
+            public DbSet<BlogWithULongEnumKey> EnumBlogs { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                base.OnModelCreating(modelBuilder);
+
+                modelBuilder
+                    .Entity<BlogWithULongEnumKey>()
+                    .Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+            }
+        }
+
+        public class BlogWithULongEnumKey
+        {
+            public ULongKey Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        public enum ULongKey : ulong
+        {
+        }
+
+        [ConditionalFact]
+        public void Insert_string_to_Identity_column_using_value_converter()
+        {
+            using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
+            using (var context = new BlogContextStringToIdentityUsingValueConverter(testStore.Name))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                context.AddRange(
+                    new BlogWithStringKey { Name = "One Unicorn" }, new BlogWithStringKey { Name = "Two Unicorns" });
+
+                context.SaveChanges();
+            }
+
+            using (var context = new BlogContextStringToIdentityUsingValueConverter(testStore.Name))
+            {
+                var blogs = context.StringyBlogs.OrderBy(e => e.Id).ToList();
+
+                Assert.Equal("1", blogs[0].Id);
+                Assert.Equal("2", blogs[1].Id);
+            }
+        }
+
+        public class BlogContextStringToIdentityUsingValueConverter : ContextBase
+        {
+            public BlogContextStringToIdentityUsingValueConverter(string databaseName)
+                : base(databaseName)
+            {
+            }
+
+            public DbSet<BlogWithStringKey> StringyBlogs { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                base.OnModelCreating(modelBuilder);
+
+                Guid guid;
+                modelBuilder
+                    .Entity<BlogWithStringKey>()
+                    .Property(e => e.Id)
+                    .HasValueGenerator<TemporaryStringValueGenerator>()
+                    .HasConversion(
+                        v => Guid.TryParse(v, out guid)
+                            ? default
+                            : int.Parse(v),
+                        v => v.ToString())
+                    .ValueGeneratedOnAdd();
             }
         }
 

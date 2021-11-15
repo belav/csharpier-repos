@@ -1,15 +1,15 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics
 {
     /// <summary>
-    ///     <para>
-    ///         Represents a result from an <see cref="IInterceptor" /> such as an <see cref="ISaveChangesInterceptor" /> to allow
-    ///         suppression of the normal operation being intercepted.
-    ///     </para>
+    ///     Represents a result from an <see cref="IInterceptor" /> such as an <see cref="ISaveChangesInterceptor" /> to allow
+    ///     suppression of the normal operation being intercepted.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         A value of this type is passed to all interceptor methods that are called before the operation
     ///         being intercepted is executed.
@@ -18,8 +18,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///         intercepted to be suppressed; that is, the operation is not executed.
     ///         The value in the result is then used as a substitute return value for the operation that was suppressed.
     ///     </para>
-    /// </summary>
-    /// <typeparam name="TResult"> The new result to use. </typeparam>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more information.
+    ///     </para>
+    /// </remarks>
+    /// <typeparam name="TResult">The new result to use.</typeparam>
     public readonly struct InterceptionResult<TResult>
     {
         private readonly TResult _result;
@@ -28,7 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     Creates a new <see cref="InterceptionResult{TResult}" /> instance indicating that
         ///     execution should be suppressed and the given result should be used instead.
         /// </summary>
-        /// <param name="result"> The result to use. </param>
+        /// <param name="result">The result to use.</param>
         public static InterceptionResult<TResult> SuppressWithResult(TResult result)
             => new(result);
 
@@ -39,15 +42,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         }
 
         /// <summary>
-        ///     <para>
-        ///         The result to use.
-        ///     </para>
-        ///     <para>
-        ///         The property can only be accessed if <see cref="HasResult" /> is true. The concept here
-        ///         is the same as <see cref="Nullable{T}.Value" /> and <see cref="Nullable{T}.HasValue" />
-        ///     </para>
+        ///     The result to use.
         /// </summary>
-        /// <exception cref="InvalidOperationException"> when <see cref="Result" /> is <see langword="false" />.</exception>
+        /// <remarks>
+        ///     The property can only be accessed if <see cref="HasResult" /> is true. The concept here
+        ///     is the same as <see cref="Nullable{T}.Value" /> and <see cref="Nullable{T}.HasValue" />
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">when <see cref="Result" /> is <see langword="false" />.</exception>
         public TResult Result
         {
             get

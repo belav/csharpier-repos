@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 {
@@ -17,15 +16,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalQueryFilterRewritingConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
+        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public RelationalQueryFilterRewritingConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies)
             : base(dependencies)
         {
+            RelationalDependencies = relationalDependencies;
             DbSetAccessRewriter = new RelationalDbSetAccessRewritingExpressionVisitor(Dependencies.ContextType);
         }
+
+        /// <summary>
+        ///     Relational provider-specific dependencies for this service.
+        /// </summary>
+        protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
 
         /// <inheritdoc />
         public override void ProcessModelFinalizing(
@@ -56,7 +61,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             /// <summary>
             ///     Creates a new instance of <see cref="RelationalDbSetAccessRewritingExpressionVisitor" />.
             /// </summary>
-            /// <param name="contextType"> The clr type of derived DbContext. </param>
+            /// <param name="contextType">The clr type of derived DbContext.</param>
             public RelationalDbSetAccessRewritingExpressionVisitor(Type contextType)
                 : base(contextType)
             {
@@ -65,8 +70,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             /// <inheritdoc />
             protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
             {
-                Check.NotNull(methodCallExpression, nameof(methodCallExpression));
-
                 var methodName = methodCallExpression.Method.Name;
                 if (methodCallExpression.Method.DeclaringType == typeof(RelationalQueryableExtensions)
                     && (methodName == nameof(RelationalQueryableExtensions.FromSqlRaw)

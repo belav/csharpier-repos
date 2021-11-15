@@ -1,9 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
+using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
 
@@ -127,10 +128,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 });
         }
 
-        private DbContextOptions CreateOptions(CosmosTestStore testDatabase)
-            => Fixture.AddOptions(testDatabase.AddProviderOptions(new DbContextOptionsBuilder()))
-                .EnableDetailedErrors()
-                .Options;
+        private DbContextOptions CreateOptions(CosmosTestStore testDatabase, Action<DbContextOptionsBuilder> configure = null)
+        {
+            var builder = Fixture.AddOptions(testDatabase.AddProviderOptions(new DbContextOptionsBuilder()))
+                           .EnableDetailedErrors();
+            configure?.Invoke(builder);
+            return builder.Options;
+        }
 
         private class Customer
         {

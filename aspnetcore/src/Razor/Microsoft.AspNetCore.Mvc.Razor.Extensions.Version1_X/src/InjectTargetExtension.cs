@@ -1,44 +1,43 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
+namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
+
+public class InjectTargetExtension : IInjectTargetExtension
 {
-    public class InjectTargetExtension : IInjectTargetExtension
+    private const string RazorInjectAttribute = "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]";
+
+    public void WriteInjectProperty(CodeRenderingContext context, InjectIntermediateNode node)
     {
-        private const string RazorInjectAttribute = "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]";
-
-        public void WriteInjectProperty(CodeRenderingContext context, InjectIntermediateNode node)
+        if (context == null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            throw new ArgumentNullException(nameof(context));
+        }
 
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node));
-            }
+        if (node == null)
+        {
+            throw new ArgumentNullException(nameof(node));
+        }
 
-            var property = $"public {node.TypeName} {node.MemberName} {{ get; private set; }}";
+        var property = $"public {node.TypeName} {node.MemberName} {{ get; private set; }}";
 
-            if (node.Source.HasValue)
-            {
-                using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
-                {
-                    context.CodeWriter
-                        .WriteLine(RazorInjectAttribute)
-                        .WriteLine(property);
-                }
-            }
-            else
+        if (node.Source.HasValue)
+        {
+            using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
             {
                 context.CodeWriter
                     .WriteLine(RazorInjectAttribute)
                     .WriteLine(property);
             }
+        }
+        else
+        {
+            context.CodeWriter
+                .WriteLine(RazorInjectAttribute)
+                .WriteLine(property);
         }
     }
 }

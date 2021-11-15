@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -9,6 +9,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions
     /// <summary>
     ///     A convention that adds etag metadata on the concurrency token, if present.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information.
+    /// </remarks>
     public class ETagPropertyConvention : IModelFinalizingConvention
     {
         /// <inheritdoc />

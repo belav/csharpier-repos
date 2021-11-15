@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -17,6 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     [DebuggerDisplay("Builder {" + nameof(Metadata) + ",nq}")]
     public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConventionAnnotatableBuilder
         where TMetadata : ConventionAnnotatable
@@ -45,10 +49,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Sets the annotation with given key and value on this object using given configuration source.
         ///     Overwrites the existing annotation if an annotation with the specified name already exists.
         /// </summary>
-        /// <param name="name"> The key of the annotation to be set. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
-        /// <returns> The same builder so that multiple calls can be chained. </returns>
+        /// <param name="name">The key of the annotation to be set.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <param name="configurationSource">The configuration source of the annotation to be set.</param>
+        /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? HasAnnotation(
             string name,
             object? value,
@@ -90,10 +94,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Overwrites the existing annotation if an annotation with the specified name already exists.
         ///     Removes the annotation if <see langword="null" /> value is specified.
         /// </summary>
-        /// <param name="name"> The key of the annotation to be set. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
-        /// <returns> The same builder so that multiple calls can be chained. </returns>
+        /// <param name="name">The key of the annotation to be set.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <param name="configurationSource">The configuration source of the annotation to be set.</param>
+        /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? HasNonNullAnnotation(
             string name,
             object? value,
@@ -105,10 +109,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Returns a value indicating whether an annotation with the given name and value can be set from this configuration source.
         /// </summary>
-        /// <param name="name"> The name of the annotation to be added. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
-        /// <returns> <see langword="true" /> if the annotation can be set, <see langword="false" /> otherwise. </returns>
+        /// <param name="name">The name of the annotation to be added.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <param name="configurationSource">The configuration source of the annotation to be set.</param>
+        /// <returns><see langword="true" /> if the annotation can be set, <see langword="false" /> otherwise.</returns>
         public virtual bool CanSetAnnotation(string name, object? value, ConfigurationSource configurationSource)
         {
             var existingAnnotation = Metadata.FindAnnotation(name);
@@ -136,9 +140,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Removes any annotation with the given name.
         /// </summary>
-        /// <param name="name"> The name of the annotation to remove. </param>
-        /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
-        /// <returns> The same builder so that multiple calls can be chained. </returns>
+        /// <param name="name">The name of the annotation to remove.</param>
+        /// <param name="configurationSource">The configuration source of the annotation to be set.</param>
+        /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? RemoveAnnotation(
             string name,
             ConfigurationSource configurationSource)
@@ -155,9 +159,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Returns a value indicating whether an annotation with the given name can be removed using this configuration source.
         /// </summary>
-        /// <param name="name"> The name of the annotation to remove. </param>
-        /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
-        /// <returns> <see langword="true" /> if the annotation can be removed, <see langword="false" /> otherwise. </returns>
+        /// <param name="name">The name of the annotation to remove.</param>
+        /// <param name="configurationSource">The configuration source of the annotation to be set.</param>
+        /// <returns><see langword="true" /> if the annotation can be removed, <see langword="false" /> otherwise.</returns>
         public virtual bool CanRemoveAnnotation(string name, ConfigurationSource configurationSource)
         {
             var existingAnnotation = Metadata.FindAnnotation(name);
@@ -168,15 +172,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Copies all the explicitly configured annotations from the given object ovewriting any existing ones.
         /// </summary>
-        /// <param name="annotatable"> The object to copy annotations from. </param>
+        /// <param name="annotatable">The object to copy annotations from.</param>
         public virtual void MergeAnnotationsFrom(TMetadata annotatable)
             => MergeAnnotationsFrom(annotatable, ConfigurationSource.Explicit);
 
         /// <summary>
         ///     Copies all the configured annotations from the given object ovewriting any existing ones.
         /// </summary>
-        /// <param name="annotatable"> The object to copy annotations from. </param>
-        /// <param name="minimalConfigurationSource"> The minimum configuration source for an annoptation to be copied. </param>
+        /// <param name="annotatable">The object to copy annotations from.</param>
+        /// <param name="minimalConfigurationSource">The minimum configuration source for an annoptation to be copied.</param>
         public virtual void MergeAnnotationsFrom(TMetadata annotatable, ConfigurationSource minimalConfigurationSource)
         {
             foreach (var annotation in annotatable.GetAnnotations())
@@ -196,13 +200,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <inheritdoc />
         IConventionModelBuilder IConventionAnnotatableBuilder.ModelBuilder
         {
-            [DebuggerStepThrough] get => ModelBuilder;
+            [DebuggerStepThrough]
+            get => ModelBuilder;
         }
 
         /// <inheritdoc />
         IConventionAnnotatable IConventionAnnotatableBuilder.Metadata
         {
-            [DebuggerStepThrough] get => Metadata;
+            [DebuggerStepThrough]
+            get => Metadata;
         }
 
         /// <inheritdoc />

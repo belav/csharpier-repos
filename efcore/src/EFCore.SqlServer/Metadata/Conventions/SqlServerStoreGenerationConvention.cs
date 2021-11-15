@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
@@ -13,13 +13,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that ensures that properties aren't configured to have a default value, as computed column
     ///     or using a <see cref="SqlServerValueGenerationStrategy" /> at the same time.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
+    ///     for more information.
+    /// </remarks>
     public class SqlServerStoreGenerationConvention : StoreGenerationConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerStoreGenerationConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
+        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public SqlServerStoreGenerationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies)
@@ -30,11 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after an annotation is changed on a property.
         /// </summary>
-        /// <param name="propertyBuilder"> The builder for the property. </param>
-        /// <param name="name"> The annotation name. </param>
-        /// <param name="annotation"> The new annotation. </param>
-        /// <param name="oldAnnotation"> The old annotation.  </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="propertyBuilder">The builder for the property.</param>
+        /// <param name="name">The annotation name.</param>
+        /// <param name="annotation">The new annotation.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public override void ProcessPropertyAnnotationChanged(
             IConventionPropertyBuilder propertyBuilder,
             string name,
@@ -107,7 +112,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     return;
                 }
 
-                if (property.GetDefaultValue(storeObject) != null)
+                if (property.TryGetDefaultValue(storeObject, out _))
                 {
                     Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
                         generationStrategy, "DefaultValue", property);

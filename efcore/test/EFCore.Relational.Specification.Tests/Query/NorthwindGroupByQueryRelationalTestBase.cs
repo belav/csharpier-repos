@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
@@ -24,7 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             var message = (await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.Complex_query_with_groupBy_in_subquery4(async))).Message;
 
-            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyOuterElementOfCollectionJoin, message);
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
         }
 
         public override async Task Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(bool async)
@@ -32,7 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             var message = (await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.Select_correlated_collection_after_GroupBy_aggregate_when_identifier_changes_to_complex(async))).Message;
 
-            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyOuterElementOfCollectionJoin, message);
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
         }
 
         protected virtual bool CanExecuteQueryString

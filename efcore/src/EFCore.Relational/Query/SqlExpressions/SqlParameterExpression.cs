@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -9,15 +9,13 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
     /// <summary>
-    ///     <para>
-    ///         An expression that represents a parameter in a SQL tree.
-    ///     </para>
-    ///     <para>
-    ///         This is a simple wrapper around a <see cref="ParameterExpression" /> in the SQL tree.
-    ///         Instances of this type cannot be constructed by application or database provider code. If this is a problem for your
-    ///         application or provider, then please file an issue at https://github.com/dotnet/efcore.
-    ///     </para>
+    ///     An expression that represents a parameter in a SQL tree.
     /// </summary>
+    /// <remarks>
+    ///     This is a simple wrapper around a <see cref="ParameterExpression" /> in the SQL tree.
+    ///     Instances of this type cannot be constructed by application or database provider code. If this is a problem for your
+    ///     application or provider, then please file an issue at https://github.com/dotnet/efcore.
+    /// </remarks>
     public sealed class SqlParameterExpression : SqlExpression
     {
         private readonly ParameterExpression _parameterExpression;
@@ -47,26 +45,18 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Applies supplied type mapping to this expression.
         /// </summary>
-        /// <param name="typeMapping"> A relational type mapping to apply. </param>
-        /// <returns> A new expression which has supplied type mapping. </returns>
+        /// <param name="typeMapping">A relational type mapping to apply.</param>
+        /// <returns>A new expression which has supplied type mapping.</returns>
         public SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
             => new SqlParameterExpression(_parameterExpression, typeMapping);
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
-        {
-            Check.NotNull(visitor, nameof(visitor));
-
-            return this;
-        }
+            => this;
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
-        {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
-            expressionPrinter.Append("@" + _parameterExpression.Name);
-        }
+            => expressionPrinter.Append("@" + _parameterExpression.Name);
 
         /// <inheritdoc />
         public override bool Equals(object? obj)

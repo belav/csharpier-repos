@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +7,17 @@ using System.Linq;
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
-    ///     <para>
-    ///         Represents a primary or alternate key on an entity.
-    ///     </para>
+    ///     Represents a primary or alternate key on an entity.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This interface is used during model creation and allows the metadata to be modified.
     ///         Once the model is built, <see cref="IKey" /> represents a read-only view of the same metadata.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IMutableKey : IReadOnlyKey, IMutableAnnotatable
     {
         /// <summary>
@@ -32,7 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets all foreign keys that target a given primary or alternate key.
         /// </summary>
-        /// <returns> The foreign keys that reference the given key. </returns>
+        /// <returns>The foreign keys that reference the given key.</returns>
         new IEnumerable<IMutableForeignKey> GetReferencingForeignKeys()
             => ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IMutableForeignKey>();
     }

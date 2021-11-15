@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,13 +41,14 @@ namespace System
             => Nullable.GetUnderlyingType(type) ?? type;
 
         public static bool IsNullableValueType(this Type type)
-            => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+            => type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 
         public static bool IsNullableType(this Type type)
             => !type.IsValueType || type.IsNullableValueType();
 
         public static bool IsValidEntityType(this Type type)
-            => type.IsClass;
+            => type.IsClass
+                && !type.IsArray;
 
         public static bool IsPropertyBagType(this Type type)
         {
@@ -162,70 +163,31 @@ namespace System
         }
 
         public static PropertyInfo GetRequiredProperty(this Type type, string name)
-        {
-            var property = type.GetTypeInfo().GetProperty(name);
-            if (property == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return property;
-        }
+            => type.GetTypeInfo().GetProperty(name)
+                ?? throw new InvalidOperationException($"Could not find property '{name}' on type '{type}'");
 
         public static FieldInfo GetRequiredDeclaredField(this Type type, string name)
-        {
-            var field = type.GetTypeInfo().GetDeclaredField(name);
-            if (field == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return field;
-        }
+            => type.GetTypeInfo().GetDeclaredField(name)
+                ?? throw new InvalidOperationException($"Could not find field '{name}' on type '{type}'");
 
         public static MethodInfo GetRequiredDeclaredMethod(this Type type, string name)
-        {
-            var method = type.GetTypeInfo().GetDeclaredMethod(name);
-            if (method == null)
-            {
-                throw new InvalidOperationException();
-            }
+            => type.GetTypeInfo().GetDeclaredMethod(name)
+                ?? throw new InvalidOperationException($"Could not find method '{name}' on type '{type}'");
 
-            return method;
-        }
+        public static MethodInfo GetRequiredDeclaredMethod(this Type type, string name, Func<MethodInfo, bool> methodSelector)
+            => type.GetTypeInfo().GetDeclaredMethods(name).Single(methodSelector);
 
         public static PropertyInfo GetRequiredDeclaredProperty(this Type type, string name)
-        {
-            var property = type.GetTypeInfo().GetDeclaredProperty(name);
-            if (property == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return property;
-        }
+            => type.GetTypeInfo().GetDeclaredProperty(name)
+                ?? throw new InvalidOperationException($"Could not find property '{name}' on type '{type}'");
 
         public static MethodInfo GetRequiredRuntimeMethod(this Type type, string name, params Type[] parameters)
-        {
-            var method = type.GetTypeInfo().GetRuntimeMethod(name, parameters);
-            if (method == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return method;
-        }
+            => type.GetTypeInfo().GetRuntimeMethod(name, parameters)
+                ?? throw new InvalidOperationException($"Could not find method '{name}' on type '{type}'");
 
         public static PropertyInfo GetRequiredRuntimeProperty(this Type type, string name)
-        {
-            var property = type.GetTypeInfo().GetRuntimeProperty(name);
-            if (property == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return property;
-        }
+            => type.GetTypeInfo().GetRuntimeProperty(name)
+                ?? throw new InvalidOperationException($"Could not find property '{name}' on type '{type}'");
 
         public static bool IsInstantiable(this Type type)
             => !type.IsAbstract
@@ -250,8 +212,7 @@ namespace System
             var sequenceType = TryGetSequenceType(type);
             if (sequenceType == null)
             {
-                // TODO: Add exception message
-                throw new ArgumentException();
+                throw new ArgumentException($"The type {type.Name} does not represent a sequence");
             }
 
             return sequenceType;
@@ -340,6 +301,45 @@ namespace System
             }
         }
 
+        public static List<Type> GetBaseTypesAndInterfacesInclusive(this Type type)
+        {
+            var baseTypes = new List<Type>();
+            var typesToProcess = new Queue<Type>();
+            typesToProcess.Enqueue(type);
+
+            while (typesToProcess.Count > 0)
+            {
+                type = typesToProcess.Dequeue();
+                baseTypes.Add(type);
+
+                if (type.IsNullableValueType())
+                {
+                    typesToProcess.Enqueue(Nullable.GetUnderlyingType(type)!);
+                }
+
+                if (type.IsConstructedGenericType)
+                {
+                    typesToProcess.Enqueue(type.GetGenericTypeDefinition());
+                }
+
+                if (!type.IsGenericTypeDefinition
+                    && !type.IsInterface)
+                {
+                    if (type.BaseType != null)
+                    {
+                        typesToProcess.Enqueue(type.BaseType);
+                    }
+
+                    foreach (var @interface in GetDeclaredInterfaces(type))
+                    {
+                        typesToProcess.Enqueue(@interface);
+                    }
+                }
+            }
+
+            return baseTypes;
+        }
+
         public static IEnumerable<Type> GetTypesInHierarchy(this Type type)
         {
             var currentType = type;
@@ -350,6 +350,18 @@ namespace System
 
                 currentType = currentType.BaseType;
             }
+        }
+
+        public static IEnumerable<Type> GetDeclaredInterfaces(this Type type)
+        {
+            var interfaces = type.GetInterfaces();
+            if (type.BaseType == typeof(object)
+                || type.BaseType == null)
+            {
+                return interfaces;
+            }
+
+            return interfaces.Except(type.BaseType.GetInterfaces());
         }
 
         public static ConstructorInfo GetDeclaredConstructor(this Type type, Type[]? types)
@@ -413,8 +425,10 @@ namespace System
 #pragma warning disable IDE0034 // Simplify 'default' expression - default causes default(object)
             { typeof(int), default(int) },
             { typeof(Guid), default(Guid) },
+            { typeof(DateOnly), default(DateOnly) },
             { typeof(DateTime), default(DateTime) },
             { typeof(DateTimeOffset), default(DateTimeOffset) },
+            { typeof(TimeOnly), default(TimeOnly) },
             { typeof(long), default(long) },
             { typeof(bool), default(bool) },
             { typeof(double), default(double) },
@@ -478,23 +492,23 @@ namespace System
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static string DisplayName(this Type type, bool fullName = true)
+        public static string DisplayName(this Type type, bool fullName = true, bool compilable = false)
         {
             var stringBuilder = new StringBuilder();
-            ProcessType(stringBuilder, type, fullName);
+            ProcessType(stringBuilder, type, fullName, compilable);
             return stringBuilder.ToString();
         }
 
-        private static void ProcessType(StringBuilder builder, Type type, bool fullName)
+        private static void ProcessType(StringBuilder builder, Type type, bool fullName, bool compilable)
         {
             if (type.IsGenericType)
             {
                 var genericArguments = type.GetGenericArguments();
-                ProcessGenericType(builder, type, genericArguments, genericArguments.Length, fullName);
+                ProcessGenericType(builder, type, genericArguments, genericArguments.Length, fullName, compilable);
             }
             else if (type.IsArray)
             {
-                ProcessArrayType(builder, type, fullName);
+                ProcessArrayType(builder, type, fullName, compilable);
             }
             else if (_builtInTypeNames.TryGetValue(type, out var builtInName))
             {
@@ -502,11 +516,28 @@ namespace System
             }
             else if (!type.IsGenericParameter)
             {
-                builder.Append(fullName ? type.FullName : type.Name);
+                if (compilable)
+                {
+                    if (type.IsNested)
+                    {
+                        ProcessType(builder, type.DeclaringType!, fullName, compilable);
+                        builder.Append('.');
+                    }
+                    else if (fullName)
+                    {
+                        builder.Append(type.Namespace).Append('.');
+                    }
+
+                    builder.Append(type.Name);
+                }
+                else
+                {
+                    builder.Append(fullName ? type.FullName : type.Name);
+                }
             }
         }
 
-        private static void ProcessArrayType(StringBuilder builder, Type type, bool fullName)
+        private static void ProcessArrayType(StringBuilder builder, Type type, bool fullName, bool compilable)
         {
             var innerType = type;
             while (innerType.IsArray)
@@ -514,7 +545,7 @@ namespace System
                 innerType = innerType.GetElementType()!;
             }
 
-            ProcessType(builder, innerType, fullName);
+            ProcessType(builder, innerType, fullName, compilable);
 
             while (type.IsArray)
             {
@@ -525,21 +556,51 @@ namespace System
             }
         }
 
-        private static void ProcessGenericType(StringBuilder builder, Type type, Type[] genericArguments, int length, bool fullName)
+        private static void ProcessGenericType(
+            StringBuilder builder,
+            Type type,
+            Type[] genericArguments,
+            int length,
+            bool fullName,
+            bool compilable)
         {
+            if (type.IsConstructedGenericType
+                && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                ProcessType(builder, type.UnwrapNullableType(), fullName, compilable);
+                builder.Append('?');
+                return;
+            }
+
             var offset = type.IsNested ? type.DeclaringType!.GetGenericArguments().Length : 0;
 
-            if (fullName)
+            if (compilable)
             {
                 if (type.IsNested)
                 {
-                    ProcessGenericType(builder, type.DeclaringType!, genericArguments, offset, fullName);
-                    builder.Append('+');
+                    ProcessType(builder, type.DeclaringType!, fullName, compilable);
+                    builder.Append('.');
                 }
-                else
+                else if (fullName)
                 {
                     builder.Append(type.Namespace);
                     builder.Append('.');
+                }
+            }
+            else
+            {
+                if (fullName)
+                {
+                    if (type.IsNested)
+                    {
+                        ProcessGenericType(builder, type.DeclaringType!, genericArguments, offset, fullName, compilable);
+                        builder.Append('+');
+                    }
+                    else
+                    {
+                        builder.Append(type.Namespace);
+                        builder.Append('.');
+                    }
                 }
             }
 
@@ -555,7 +616,7 @@ namespace System
 
             for (var i = offset; i < length; i++)
             {
-                ProcessType(builder, genericArguments[i], fullName);
+                ProcessType(builder, genericArguments[i], fullName, compilable);
                 if (i + 1 == length)
                 {
                     continue;

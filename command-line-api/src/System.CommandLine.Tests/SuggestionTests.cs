@@ -144,7 +144,7 @@ namespace System.CommandLine.Tests
                 new Command("andmyothersubcommand"),
             };
 
-            var suggestions = command.GetSuggestions("my");
+            var suggestions = command.Parse("my").GetSuggestions();
 
             suggestions.Should().BeEquivalentSequenceTo("mysubcommand", "andmyothersubcommand", "andmythirdsubcommand");
         }
@@ -152,10 +152,12 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_an_option_has_a_default_value_it_will_still_be_suggested()
         {
-            var parser = new Parser(
+            var parser = new RootCommand
+            {
                 new Option<string>("--apple", getDefaultValue: () => "cortland"),
                 new Option<string>("--banana"),
-                new Option<string>("--cherry"));
+                new Option<string>("--cherry")
+            };
 
             var result = parser.Parse("");
 
@@ -171,14 +173,19 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Command_Getsuggestions_can_access_ParseResult()
         {
+            var originOption = new Option<string>("--origin");
+
             var parser = new Parser(
-                new Option<string>("--origin"),
-                new Option<string>("--clone")
-                .AddSuggestions((parseResult, match) =>
+                new RootCommand
                 {
-                    var opt1Value = parseResult?.ValueForOption<string>("--origin");
-                    return opt1Value != null ? new[] { opt1Value } : Array.Empty<string>();
-                }));
+                    originOption,
+                    new Option<string>("--clone")
+                        .AddSuggestions((parseResult, match) =>
+                        {
+                            var opt1Value = parseResult?.GetValueForOption(originOption);
+                            return !string.IsNullOrWhiteSpace(opt1Value) ? new[] { opt1Value } : Array.Empty<string>();
+                        })
+                });
 
             var result = parser.Parse("--origin test --clone ");
 
@@ -188,28 +195,7 @@ namespace System.CommandLine.Tests
                   .Should()
                   .BeEquivalentTo("test");
         }
-
-        [Fact]
-        public void Command_Getsuggestions_can_access_ParseResult_reverse_order()
-        {
-            var parser = new Parser(
-                new Option<string>("--origin"),
-                new Option<string>("--clone")
-                .AddSuggestions((parseResult, match) =>
-                {
-                    var opt1Value = parseResult?.ValueForOption<string>("--origin");
-                    return opt1Value != null ? new[] { opt1Value } : Array.Empty<string>();
-                }));
-
-            var result = parser.Parse("--clone  --origin test");
-
-            _output.WriteLine(result.ToString());
-
-            result.GetSuggestions(8)
-                  .Should()
-                  .BeEquivalentTo("test");
-        }
-
+        
         [Fact]
         public void When_one_option_has_been_specified_then_it_and_its_siblings_will_still_be_suggested()
         {
@@ -408,11 +394,13 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Parser_options_can_supply_context_sensitive_matches()
         {
-            var parser = new Parser(
+            var parser = new RootCommand
+            {
                 new Option("--bread", arity: ArgumentArity.ExactlyOne)
                     .FromAmong("wheat", "sourdough", "rye"),
                 new Option("--cheese", arity: ArgumentArity.ExactlyOne)
-                    .FromAmong("provolone", "cheddar", "cream cheese"));
+                    .FromAmong("provolone", "cheddar", "cream cheese")
+            };
 
             var commandLine = "--bread";
             var result = parser.Parse(commandLine);
@@ -608,8 +596,10 @@ namespace System.CommandLine.Tests
                     .FromAmong("three-a", "three-b", "three-c")
             };
 
-            var parser = new CommandLineBuilder()
-                         .AddCommand(command)
+            var parser = new CommandLineBuilder(new RootCommand
+                         {
+                             command
+                         })
                          .Build();
 
             var result = parser.Parse("outer two b" );
@@ -741,9 +731,11 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_current_symbol_is_an_option_that_requires_arguments_then_parent_symbol_suggestions_are_omitted()
         {
-            var parser = new CommandLineBuilder()
-                         .AddOption(new Option<string>("--allows-one"))
-                         .AddOption(new Option<string[]>("--allows-many"))
+            var parser = new CommandLineBuilder(new RootCommand
+                         {
+                             new Option<string>("--allows-one"),
+                             new Option<string[]>("--allows-many")
+                         })
                          .UseSuggestDirective()
                          .Build();
 
@@ -957,12 +949,6 @@ namespace System.CommandLine.Tests
                                          .TextToMatch(position);
 
                 textToMatch.Should().Be(expected);
-            }
-
-            [Fact(Skip = "#310")]
-            public void When_there_are_multiple_arguments_then_suggestions_are_only_offered_for_the_current_argument()
-            {
-                Assert.True(false, "Test testname is not written yet.");
             }
 
             [Fact]

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,6 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -22,10 +21,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     public class SqlServerStringMethodTranslator : IMethodCallTranslator
     {
         private static readonly MethodInfo _indexOfMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IndexOf), new[] { typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IndexOf), typeof(string));
+
+        private static readonly MethodInfo _indexOfMethodInfoWithStartingPosition
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IndexOf), new[] { typeof(string), typeof(int) });
 
         private static readonly MethodInfo _replaceMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Replace), new[] { typeof(string), typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Replace), typeof(string), typeof(string));
 
         private static readonly MethodInfo _toLowerMethodInfo
             = typeof(string).GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
@@ -33,14 +35,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private static readonly MethodInfo _toUpperMethodInfo
             = typeof(string).GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
 
-        private static readonly MethodInfo _substringMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Substring), new[] { typeof(int), typeof(int) });
+        private static readonly MethodInfo _substringMethodInfoWithOneArg
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Substring), typeof(int));
+
+        private static readonly MethodInfo _substringMethodInfoWithTwoArgs
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Substring), typeof(int), typeof(int));
 
         private static readonly MethodInfo _isNullOrEmptyMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrEmpty), new[] { typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrEmpty), typeof(string));
 
         private static readonly MethodInfo _isNullOrWhiteSpaceMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrWhiteSpace), new[] { typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrWhiteSpace), typeof(string));
 
         // Method defined in netcoreapp2.0 only
         private static readonly MethodInfo _trimStartMethodInfoWithoutArgs
@@ -54,22 +59,22 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
         // Method defined in netstandard2.0
         private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), new[] { typeof(char[]) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), typeof(char[]));
 
         private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), new[] { typeof(char[]) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), typeof(char[]));
 
         private static readonly MethodInfo _trimMethodInfoWithCharArrayArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), new[] { typeof(char[]) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), typeof(char[]));
 
         private static readonly MethodInfo _startsWithMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.StartsWith), new[] { typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.StartsWith), typeof(string));
 
         private static readonly MethodInfo _containsMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Contains), new[] { typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Contains), typeof(string));
 
         private static readonly MethodInfo _endsWithMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.EndsWith), new[] { typeof(string) });
+            = typeof(string).GetRequiredRuntimeMethod(nameof(string.EndsWith), typeof(string));
 
         private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs
             = typeof(Enumerable).GetRuntimeMethods().Single(
@@ -109,54 +114,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             if (instance != null)
             {
                 if (_indexOfMethodInfo.Equals(method))
                 {
-                    var argument = arguments[0];
-                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, argument)!;
-                    argument = _sqlExpressionFactory.ApplyTypeMapping(argument, stringTypeMapping);
+                    return TranslateIndexOf(instance, method, arguments[0], null);
+                }
 
-                    SqlExpression charIndexExpression;
-                    var storeType = stringTypeMapping.StoreType;
-                    if (string.Equals(storeType, "nvarchar(max)", StringComparison.OrdinalIgnoreCase)
-                        || string.Equals(storeType, "varchar(max)", StringComparison.OrdinalIgnoreCase))
-                    {
-                        charIndexExpression = _sqlExpressionFactory.Function(
-                            "CHARINDEX",
-                            new[] { argument, _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping) },
-                            nullable: true,
-                            argumentsPropagateNullability: new[] { true, true },
-                            typeof(long));
-
-                        charIndexExpression = _sqlExpressionFactory.Convert(charIndexExpression, typeof(int));
-                    }
-                    else
-                    {
-                        charIndexExpression = _sqlExpressionFactory.Function(
-                            "CHARINDEX",
-                            new[] { argument, _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping) },
-                            nullable: true,
-                            argumentsPropagateNullability: new[] { true, true },
-                            method.ReturnType);
-                    }
-
-                    charIndexExpression = _sqlExpressionFactory.Subtract(charIndexExpression, _sqlExpressionFactory.Constant(1));
-
-                    return _sqlExpressionFactory.Case(
-                        new[]
-                        {
-                            new CaseWhenClause(
-                                _sqlExpressionFactory.Equal(
-                                    argument,
-                                    _sqlExpressionFactory.Constant(string.Empty, stringTypeMapping)),
-                                _sqlExpressionFactory.Constant(0))
-                        },
-                        charIndexExpression);
+                if (_indexOfMethodInfoWithStartingPosition.Equals(method))
+                {
+                    return TranslateIndexOf(instance, method, arguments[0], arguments[1]);
                 }
 
                 if (_replaceMethodInfo.Equals(method))
@@ -190,17 +157,40 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         instance.TypeMapping);
                 }
 
-                if (_substringMethodInfo.Equals(method))
+                if (_substringMethodInfoWithOneArg.Equals(method))
                 {
                     return _sqlExpressionFactory.Function(
                         "SUBSTRING",
                         new[]
                         {
-                        instance,
-                        _sqlExpressionFactory.Add(
-                            arguments[0],
-                            _sqlExpressionFactory.Constant(1)),
-                        arguments[1]
+                            instance,
+                            _sqlExpressionFactory.Add(
+                                arguments[0],
+                                _sqlExpressionFactory.Constant(1)),
+                            _sqlExpressionFactory.Function(
+                                "LEN",
+                                new[] { instance },
+                                nullable: true,
+                                argumentsPropagateNullability: new[] { true },
+                                typeof(int))
+                        },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true, true, true },
+                        method.ReturnType,
+                        instance.TypeMapping);
+                }
+
+                if (_substringMethodInfoWithTwoArgs.Equals(method))
+                {
+                    return _sqlExpressionFactory.Function(
+                        "SUBSTRING",
+                        new[]
+                        {
+                            instance,
+                            _sqlExpressionFactory.Add(
+                                arguments[0],
+                                _sqlExpressionFactory.Constant(1)),
+                            arguments[1]
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true, true },
@@ -245,13 +235,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         "LTRIM",
                         new[]
                         {
-                        _sqlExpressionFactory.Function(
-                            "RTRIM",
-                            new[] { instance },
-                            nullable: true,
-                            argumentsPropagateNullability: new[] { true },
-                            instance.Type,
-                            instance.TypeMapping)
+                            _sqlExpressionFactory.Function(
+                                "RTRIM",
+                                new[] { instance },
+                                nullable: true,
+                                argumentsPropagateNullability: new[] { true },
+                                instance.Type,
+                                instance.TypeMapping)
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true },
@@ -443,6 +433,60 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     stringTypeMapping),
                 pattern);
         }
+
+        private SqlExpression TranslateIndexOf(SqlExpression instance, MethodInfo method, SqlExpression searchExpression, SqlExpression? startIndex)
+        {
+            var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, searchExpression)!;
+            searchExpression = _sqlExpressionFactory.ApplyTypeMapping(searchExpression, stringTypeMapping);
+            instance = _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping);
+
+            var charIndexArguments = new List<SqlExpression> { searchExpression, instance };
+
+            if (startIndex is not null)
+            {
+                charIndexArguments.Add(_sqlExpressionFactory.Add(startIndex, _sqlExpressionFactory.Constant(1)));
+            }
+
+            var argumentsPropagateNullability = Enumerable.Repeat(true, charIndexArguments.Count);
+
+            SqlExpression charIndexExpression;
+            var storeType = stringTypeMapping.StoreType;
+            if (string.Equals(storeType, "nvarchar(max)", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(storeType, "varchar(max)", StringComparison.OrdinalIgnoreCase))
+            {
+                charIndexExpression = _sqlExpressionFactory.Function(
+                    "CHARINDEX",
+                    charIndexArguments,
+                    nullable: true,
+                    argumentsPropagateNullability,
+                    typeof(long));
+
+                charIndexExpression = _sqlExpressionFactory.Convert(charIndexExpression, typeof(int));
+            }
+            else
+            {
+                charIndexExpression = _sqlExpressionFactory.Function(
+                    "CHARINDEX",
+                    charIndexArguments,
+                    nullable: true,
+                    argumentsPropagateNullability,
+                    method.ReturnType);
+            }
+
+            charIndexExpression = _sqlExpressionFactory.Subtract(charIndexExpression, _sqlExpressionFactory.Constant(1));
+
+            return _sqlExpressionFactory.Case(
+                new[]
+                {
+                    new CaseWhenClause(
+                        _sqlExpressionFactory.Equal(
+                            searchExpression,
+                            _sqlExpressionFactory.Constant(string.Empty, stringTypeMapping)),
+                        _sqlExpressionFactory.Constant(0))
+                },
+                charIndexExpression);
+        }
+
 
         // See https://docs.microsoft.com/en-us/sql/t-sql/language-elements/like-transact-sql
         private bool IsLikeWildChar(char c)

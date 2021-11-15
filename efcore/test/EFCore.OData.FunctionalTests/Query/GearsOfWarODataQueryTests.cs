@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net;
 using System.Net.Http;
@@ -20,7 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_gears()
         {
-            var requestUri = string.Format("{0}/odata/Gears", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Gears";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -36,7 +36,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_inheritance()
         {
-            var requestUri = string.Format("{0}/odata/Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -52,7 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_single_element_from_set_composite_key()
         {
-            var requestUri = string.Format("{0}/odata/Gears(Nickname='Marcus', SquadId=1)", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Gears(Nickname='Marcus',SquadId=1)";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -78,6 +78,22 @@ namespace Microsoft.EntityFrameworkCore.Query
             var officers = result["value"] as JArray;
 
             Assert.Equal(3, officers.Count);
+        }
+
+        [ConditionalFact]
+        public async Task Query_with_expand_and_key_projection()
+        {
+            var requestUri = string.Format(@"{0}/odata/Gears?$select=SquadId&$expand=Tag($select=Id)", BaseAddress);
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            var response = await Client.SendAsync(request);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var result = await response.Content.ReadAsObject<JObject>();
+
+            Assert.Contains("$metadata#Gears(SquadId,Tag(Id))", result["@odata.context"].ToString());
+            var projections = result["value"] as JArray;
+
+            Assert.Equal(5, projections.Count);
         }
     }
 }

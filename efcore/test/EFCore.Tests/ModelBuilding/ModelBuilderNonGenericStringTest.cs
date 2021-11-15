@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
+using Xunit.Sdk;
 
 #nullable enable
 
@@ -23,60 +24,52 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
     {
         public class NonGenericStringOwnedTypes : OwnedTypesTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new NonGenericStringTestModelBuilder(testHelpers);
-
-            public override void Reconfiguring_owned_type_as_non_owned_throws()
-            {
-                var modelBuilder = CreateModelBuilder();
-
-                modelBuilder.Ignore<Customer>();
-                modelBuilder.Entity<SpecialCustomer>().OwnsOne(c => c.Details);
-
-                Assert.Equal(
-                    CoreStrings.ClashingOwnedEntityType(typeof(CustomerDetails).FullName),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder.Entity<SpecialCustomer>().HasOne(c => c.Details)).Message);
-            }
-
-            // Shadow navigations not supported #3864
-            public override void Can_configure_owned_type_collection_with_one_call()
-            {
-            }
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new NonGenericStringTestModelBuilder(testHelpers, configure);
 
             public override void OwnedType_can_derive_from_Collection()
             {
-            }
-
-            // Owned type configuration doesn't apply to "derived" types when using shadow entity types
-            public override void Can_configure_owned_type_collection_with_one_call_afterwards()
-            {
+                // Shadow navigations. Issue #3864.
+                Assert.Equal(
+                    CoreStrings.AmbiguousSharedTypeEntityTypeName(
+                        "Microsoft.EntityFrameworkCore.ModelBuilding.ModelBuilderTest+DependentEntity"),
+                    Assert.Throws<InvalidOperationException>(
+                        () => base.OwnedType_can_derive_from_Collection()).Message);
             }
         }
 
         public class NonGenericStringOneToManyType : OneToManyTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new NonGenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new NonGenericStringTestModelBuilder(testHelpers, configure);
+
+            public override void WithMany_pointing_to_keyless_entity_throws()
+            {
+                // Test throws exception before reaching the first exception due to entity type being property bag entity
+                Assert.Equal(
+                    CoreStrings.NavigationSingleWrongClrType(
+                        "Reference", "KeylessCollectionNavigation", "KeylessReferenceNavigation", "Dictionary<string, object>"),
+                    Assert.Throws<EqualException>(
+                        () => base.WithMany_pointing_to_keyless_entity_throws()).Actual);
+            }
         }
 
         public class NonGenericStringManyToOneType : ManyToOneTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new NonGenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new NonGenericStringTestModelBuilder(testHelpers, configure);
         }
 
         public class NonGenericStringOneToOneType : OneToOneTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new NonGenericStringTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new NonGenericStringTestModelBuilder(testHelpers, configure);
         }
 
         private class NonGenericStringTestModelBuilder : TestModelBuilder
         {
-            public NonGenericStringTestModelBuilder(TestHelpers testHelpers)
-                : base(testHelpers)
+            public NonGenericStringTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                : base(testHelpers, configure)
             {
             }
 

@@ -1,19 +1,21 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.CommandLine.Binding;
 using System.CommandLine.Parsing;
 
 namespace System.CommandLine
 {
-    ///<inheritdoc/>
-    public class Argument<T> : Argument
+    /// <inheritdoc cref="Argument" />
+    public class Argument<T> : Argument, IValueDescriptor<T>
     {
+        private readonly bool _hasCustomParser;
+
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
         public Argument()
         {
-            ArgumentType = typeof(T);
         }
 
         /// <summary>
@@ -25,7 +27,6 @@ namespace System.CommandLine
             string name, 
             string? description = null) : base(name)
         {
-            ArgumentType = typeof(T);
             Description = description;
         }
 
@@ -71,7 +72,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the argument.</param>
         /// <param name="parse">A custom argument parser.</param>
-        /// <param name="isDefault"><c>true</c> to use the <paramref name="parse"/> result as default value.</param>
+        /// <param name="isDefault"><see langword="true"/> to use the <paramref name="parse"/> result as default value.</param>
         /// <param name="description">The description of the argument, shown in help.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="parse"/> is null.</exception>
         public Argument(
@@ -111,6 +112,8 @@ namespace System.CommandLine
                 }
             };
 
+            _hasCustomParser = true;
+
             Description = description;
         }
 
@@ -118,9 +121,18 @@ namespace System.CommandLine
         /// Initializes a new instance of the Argument class.
         /// </summary>
         /// <param name="parse">A custom argument parser.</param>
-        /// <param name="isDefault"><c>true</c> to use the <paramref name="parse"/> result as default value.</param>
+        /// <param name="isDefault"><see langword="true"/> to use the <paramref name="parse"/> result as default value.</param>
         public Argument(ParseArgument<T> parse, bool isDefault = false) : this(null, parse, isDefault)
         {
+        }
+
+        internal override bool HasCustomParser => _hasCustomParser;
+
+        /// <inheritdoc />
+        public override Type ValueType
+        {
+            get => typeof(T);
+            set => throw new NotImplementedException();
         }
     }
 }

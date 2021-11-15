@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding
 {
@@ -51,6 +51,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         public virtual string? Language { get; set; }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether nullable reference types are enabled.
+        /// </summary>
+        /// <value> A value indicating whether nullable reference types are enabled. </value>
+        public virtual bool UseNullableReferenceTypes { get; set; }
+
+        /// <summary>
         ///     Gets or sets the DbContext output directory.
         /// </summary>
         /// <value> The DbContext output directory. </value>
@@ -65,7 +71,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <summary>
         ///     Gets or sets the connection string.
         /// </summary>
-        /// <value name="connectionString"> The connection string. </value>
+        /// <value name="connectionString">The connection string. </value>
         public virtual string? ConnectionString { get; set; }
     }
 }

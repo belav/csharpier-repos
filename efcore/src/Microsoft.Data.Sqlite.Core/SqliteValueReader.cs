@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -67,6 +67,25 @@ namespace Microsoft.Data.Sqlite
                     return DateTimeOffset.Parse(GetString(ordinal), CultureInfo.InvariantCulture);
             }
         }
+
+#if NET6_0_OR_GREATER
+        public virtual DateOnly GetDateOnly(int ordinal)
+        {
+            var sqliteType = GetSqliteType(ordinal);
+            switch (sqliteType)
+            {
+                case SQLITE_FLOAT:
+                case SQLITE_INTEGER:
+                    return DateOnly.FromDateTime(FromJulianDate(GetDouble(ordinal)));
+
+                default:
+                    return DateOnly.Parse(GetString(ordinal), CultureInfo.InvariantCulture);
+            }
+        }
+
+        public virtual TimeOnly GetTimeOnly(int ordinal)
+            => TimeOnly.Parse(GetString(ordinal), CultureInfo.InvariantCulture);
+#endif
 
         public virtual decimal GetDecimal(int ordinal)
             => decimal.Parse(GetString(ordinal), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture);
@@ -168,6 +187,18 @@ namespace Microsoft.Data.Sqlite
             {
                 return (T)(object)GetDateTimeOffset(ordinal);
             }
+
+#if NET6_0_OR_GREATER
+            if (type == typeof(DateOnly))
+            {
+                return (T)(object)GetDateOnly(ordinal);
+            }
+
+            if (type == typeof(TimeOnly))
+            {
+                return (T)(object)GetTimeOnly(ordinal);
+            }
+#endif
 
             if (type == typeof(DBNull))
             {

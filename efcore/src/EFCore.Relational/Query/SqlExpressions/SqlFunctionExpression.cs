@@ -1,14 +1,12 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -26,10 +24,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a built-in niladic function.
         /// </summary>
-        /// <param name="functionName"> The name of the function. </param>
-        /// <param name="nullable"> A bool value indicating whether this function can return null. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="functionName">The name of the function.</param>
+        /// <param name="nullable">A bool value indicating whether this function can return null.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlFunctionExpression(
             string functionName,
             bool nullable,
@@ -43,11 +41,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a niladic function.
         /// </summary>
-        /// <param name="schema"> The schema in which the function is defined. </param>
-        /// <param name="functionName"> The name of the function. </param>
-        /// <param name="nullable"> A bool value indicating whether this function can return null. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="schema">The schema in which the function is defined.</param>
+        /// <param name="functionName">The name of the function.</param>
+        /// <param name="nullable">A bool value indicating whether this function can return null.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlFunctionExpression(
             string schema,
             string functionName,
@@ -55,7 +53,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Type type,
             RelationalTypeMapping? typeMapping)
             : this(
-                instance: null, Check.NotEmpty(schema, nameof(schema)), functionName, nullable, instancePropagatesNullability: null,
+                instance: null, schema, functionName, nullable, instancePropagatesNullability: null,
                 builtIn: false, type, typeMapping)
         {
         }
@@ -64,12 +62,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a niladic function which is invoked on an
         ///     instance.
         /// </summary>
-        /// <param name="instance"> An expression on which the function is defined. </param>
-        /// <param name="functionName"> The name of the function. </param>
-        /// <param name="nullable"> A bool value indicating whether this function can return null. </param>
-        /// <param name="instancePropagatesNullability"> A value indicating if instance propagates null to result. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="instance">An expression on which the function is defined.</param>
+        /// <param name="functionName">The name of the function.</param>
+        /// <param name="nullable">A bool value indicating whether this function can return null.</param>
+        /// <param name="instancePropagatesNullability">A value indicating if instance propagates null to result.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlFunctionExpression(
             SqlExpression instance,
             string functionName,
@@ -78,7 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Type type,
             RelationalTypeMapping? typeMapping)
             : this(
-                Check.NotNull(instance, nameof(instance)), schema: null, functionName, nullable, instancePropagatesNullability,
+                instance, schema: null, functionName, nullable, instancePropagatesNullability,
                 builtIn: true, type, typeMapping)
         {
         }
@@ -101,12 +99,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a built-in function.
         /// </summary>
-        /// <param name="functionName"> The name of the function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
-        /// <param name="nullable"> A bool value indicating whether this function can return null. </param>
-        /// <param name="argumentsPropagateNullability"> A list of bool values indicating whether individual arguments propagate null to result. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="functionName">The name of the function.</param>
+        /// <param name="arguments">The arguments of the function.</param>
+        /// <param name="nullable">A bool value indicating whether this function can return null.</param>
+        /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual arguments propagate null to result.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlFunctionExpression(
             string functionName,
             IEnumerable<SqlExpression> arguments,
@@ -123,13 +121,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a function.
         /// </summary>
-        /// <param name="schema"> The schema in which the function is defined. </param>
-        /// <param name="functionName"> The name of the function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
-        /// <param name="nullable"> A bool value indicating whether this function can return null. </param>
-        /// <param name="argumentsPropagateNullability"> A list of bool values indicating whether individual arguments propagate null to result. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="schema">The schema in which the function is defined.</param>
+        /// <param name="functionName">The name of the function.</param>
+        /// <param name="arguments">The arguments of the function.</param>
+        /// <param name="nullable">A bool value indicating whether this function can return null.</param>
+        /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual arguments propagate null to result.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlFunctionExpression(
             string? schema,
             string functionName,
@@ -139,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Type type,
             RelationalTypeMapping? typeMapping)
             : this(
-                instance: null, Check.NullButNotEmpty(schema, nameof(schema)), functionName, arguments, nullable,
+                instance: null, schema, functionName, arguments, nullable,
                 instancePropagatesNullability: null, argumentsPropagateNullability, builtIn: false, type, typeMapping)
         {
         }
@@ -147,14 +145,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a function which is invoked on an instance.
         /// </summary>
-        /// <param name="instance"> An expression on which the function is applied. </param>
-        /// <param name="functionName"> The name of the function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
-        /// <param name="nullable"> A bool value indicating whether this function can return null. </param>
-        /// <param name="instancePropagatesNullability"> A value indicating if instance propagates null to result. </param>
-        /// <param name="argumentsPropagateNullability"> A list of bool values indicating whether individual arguments propagate null to result. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="instance">An expression on which the function is applied.</param>
+        /// <param name="functionName">The name of the function.</param>
+        /// <param name="arguments">The arguments of the function.</param>
+        /// <param name="nullable">A bool value indicating whether this function can return null.</param>
+        /// <param name="instancePropagatesNullability">A value indicating if instance propagates null to result.</param>
+        /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual arguments propagate null to result.</param>
+        /// <param name="type">The <see cref="Type" /> of the expression.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public SqlFunctionExpression(
             SqlExpression instance,
             string functionName,
@@ -165,7 +163,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Type type,
             RelationalTypeMapping? typeMapping)
             : this(
-                Check.NotNull(instance, nameof(instance)), schema: null, functionName, arguments, nullable, instancePropagatesNullability,
+                instance, schema: null, functionName, arguments, nullable, instancePropagatesNullability,
                 argumentsPropagateNullability, builtIn: true, type, typeMapping)
         {
         }
@@ -182,8 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Type type,
             RelationalTypeMapping? typeMapping)
             : this(
-                instance, schema, name, niladic: false, Check.NotNull(arguments, nameof(arguments)), nullable,
-                instancePropagatesNullability, Check.NotNull(argumentsPropagateNullability, nameof(argumentsPropagateNullability)), builtIn,
+                instance, schema, name, niladic: false, arguments, nullable,
+                instancePropagatesNullability, argumentsPropagateNullability, builtIn,
                 type, typeMapping)
         {
         }
@@ -202,9 +200,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             RelationalTypeMapping? typeMapping)
             : base(type, typeMapping)
         {
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(type, nameof(type));
-
             Instance = instance;
             Name = name;
             Schema = schema;
@@ -266,8 +261,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var changed = false;
             var instance = (SqlExpression?)visitor.Visit(Instance);
             changed |= instance != Instance;
@@ -302,8 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Applies supplied type mapping to this expression.
         /// </summary>
-        /// <param name="typeMapping"> A relational type mapping to apply. </param>
-        /// <returns> A new expression which has supplied type mapping. </returns>
+        /// <param name="typeMapping">A relational type mapping to apply.</param>
+        /// <returns>A new expression which has supplied type mapping.</returns>
         public virtual SqlFunctionExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
             => new(
                 Instance,
@@ -322,9 +315,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="instance"> The <see cref="Instance" /> property of the result. </param>
-        /// <param name="arguments"> The <see cref="Arguments" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="instance">The <see cref="Instance" /> property of the result.</param>
+        /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual SqlFunctionExpression Update(SqlExpression? instance, IReadOnlyList<SqlExpression>? arguments)
         {
             return instance != Instance || (arguments != null && Arguments != null && !arguments.SequenceEqual(Arguments))
@@ -346,8 +339,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             if (!string.IsNullOrEmpty(Schema))
             {
                 expressionPrinter.Append(Schema).Append(".").Append(Name);
@@ -386,7 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 && ((Instance == null && sqlFunctionExpression.Instance == null)
                     || (Instance != null && Instance.Equals(sqlFunctionExpression.Instance)))
                 && ((Arguments == null && sqlFunctionExpression.Arguments == null)
-                    || (Arguments != null && sqlFunctionExpression.Arguments != null
+                    || (Arguments != null
+                        && sqlFunctionExpression.Arguments != null
                         && Arguments.SequenceEqual(sqlFunctionExpression.Arguments)));
 
         /// <inheritdoc />
@@ -409,115 +401,5 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
             return hash.ToHashCode();
         }
-
-        #region ObsoleteMethods
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class.
-        /// </summary>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use new SqlFunctionExpression(...) with appropriate arguments.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SqlFunctionExpression CreateNiladic(
-            string name,
-            Type type,
-            RelationalTypeMapping? typeMapping)
-            => new(name, nullable: true, type, typeMapping);
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class.
-        /// </summary>
-        /// <param name="schema"> The schema in which the function is defined. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use new SqlFunctionExpression(...) with appropriate arguments.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SqlFunctionExpression CreateNiladic(
-            string schema,
-            string name,
-            Type type,
-            RelationalTypeMapping? typeMapping)
-            => new(schema, name, nullable: true, type, typeMapping);
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class.
-        /// </summary>
-        /// <param name="instance"> An expression on which the function is defined. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use new SqlFunctionExpression(...) with appropriate arguments.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SqlFunctionExpression CreateNiladic(
-            SqlExpression instance,
-            string name,
-            Type type,
-            RelationalTypeMapping? typeMapping)
-            => new(instance, name, nullable: true, instancePropagatesNullability: false, type, typeMapping);
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class.
-        /// </summary>
-        /// <param name="instance"> An expression on which the function is applied. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use new SqlFunctionExpression(...) with appropriate arguments.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SqlFunctionExpression Create(
-            SqlExpression instance,
-            string name,
-            IEnumerable<SqlExpression> arguments,
-            Type type,
-            RelationalTypeMapping? typeMapping)
-            => new(
-                instance,
-                name,
-                arguments,
-                nullable: true,
-                instancePropagatesNullability: false,
-                argumentsPropagateNullability: arguments.Select(a => false),
-                type,
-                typeMapping);
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class.
-        /// </summary>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use new SqlFunctionExpression(...) with appropriate arguments.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SqlFunctionExpression Create(
-            string name,
-            IEnumerable<SqlExpression> arguments,
-            Type type,
-            RelationalTypeMapping? typeMapping)
-            => new(name, arguments, nullable: true, argumentsPropagateNullability: arguments.Select(a => false), type, typeMapping);
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class.
-        /// </summary>
-        /// <param name="schema"> The schema in which the function is defined. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
-        /// <param name="type"> The <see cref="Type" /> of the expression. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use new SqlFunctionExpression(...) with appropriate arguments.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SqlFunctionExpression Create(
-            string? schema,
-            string name,
-            IEnumerable<SqlExpression> arguments,
-            Type type,
-            RelationalTypeMapping? typeMapping)
-            => new(schema, name, arguments, nullable: true, argumentsPropagateNullability: arguments.Select(a => false), type, typeMapping);
-
-        #endregion
     }
 }

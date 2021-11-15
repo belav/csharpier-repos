@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Text;
@@ -16,7 +16,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 
         public override ResultSetMapping AppendInsertOperation(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
+            IReadOnlyModificationCommand command,
             int commandPosition)
         {
             AppendInsertOperationCalls++;
@@ -25,7 +25,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 
         public override ResultSetMapping AppendUpdateOperation(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
+            IReadOnlyModificationCommand command,
             int commandPosition)
         {
             AppendUpdateOperationCalls++;
@@ -34,7 +34,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 
         public override ResultSetMapping AppendDeleteOperation(
             StringBuilder commandStringBuilder,
-            ModificationCommand command,
+            IReadOnlyModificationCommand command,
             int commandPosition)
         {
             AppendDeleteOperationCalls++;
@@ -52,7 +52,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             base.AppendBatchHeader(commandStringBuilder);
         }
 
-        protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, ColumnModification columnModification)
+        protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, IColumnModification columnModification)
             => commandStringBuilder
                 .Append(SqlGenerationHelper.DelimitIdentifier(columnModification.ColumnName))
                 .Append(" = ")

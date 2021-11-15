@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -12,25 +12,28 @@ using Microsoft.EntityFrameworkCore.Internal;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     /// <summary>
-    ///     <para>
-    ///         Specifies custom value snapshotting and comparison for
-    ///         CLR types that cannot be compared with <see cref="object.Equals(object?, object?)" />
-    ///         and/or need a deep copy when taking a snapshot. For example, arrays of primitive types
-    ///         will require both if mutation is to be detected.
-    ///     </para>
+    ///     Specifies custom value snapshotting and comparison for
+    ///     CLR types that cannot be compared with <see cref="object.Equals(object?, object?)" />
+    ///     and/or need a deep copy when taking a snapshot. For example, arrays of primitive types
+    ///     will require both if mutation is to be detected.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Snapshotting is the process of creating a copy of the value into a snapshot so it can
     ///         later be compared to determine if it has changed. For some types, such as collections,
     ///         this needs to be a deep copy of the collection rather than just a shallow copy of the
     ///         reference.
     ///     </para>
-    /// </summary>
-    /// <typeparam name="T"> The type. </typeparam>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see> for more information.
+    ///     </para>
+    /// </remarks>
+    /// <typeparam name="T">The type.</typeparam>
     public class ValueComparer<T> : ValueComparer, IEqualityComparer<T>
     {
         private Func<T?, T?, bool>? _equals;
         private Func<T, int>? _hashCode;
-        private Func<T?, T?>? _snapshot;
+        private Func<T, T>? _snapshot;
 
         /// <summary>
         ///     Creates a new <see cref="ValueComparer{T}" /> with a default comparison
@@ -52,8 +55,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Creates a new <see cref="ValueComparer{T}" /> with the given comparison expression.
         ///     A shallow copy will be used for the snapshot.
         /// </summary>
-        /// <param name="equalsExpression"> The comparison expression. </param>
-        /// <param name="hashCodeExpression"> The associated hash code generator. </param>
+        /// <param name="equalsExpression">The comparison expression.</param>
+        /// <param name="hashCodeExpression">The associated hash code generator.</param>
         public ValueComparer(
             Expression<Func<T?, T?, bool>> equalsExpression,
             Expression<Func<T, int>> hashCodeExpression)
@@ -62,24 +65,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Creates a new <see cref="ValueComparer{T}" /> with the given comparison and
-        ///         snapshotting expressions.
-        ///     </para>
-        ///     <para>
-        ///         Snapshotting is the process of creating a copy of the value into a snapshot so it can
-        ///         later be compared to determine if it has changed. For some types, such as collections,
-        ///         this needs to be a deep copy of the collection rather than just a shallow copy of the
-        ///         reference.
-        ///     </para>
+        ///     Creates a new <see cref="ValueComparer{T}" /> with the given comparison and
+        ///     snapshotting expressions.
         /// </summary>
-        /// <param name="equalsExpression"> The comparison expression. </param>
-        /// <param name="hashCodeExpression"> The associated hash code generator. </param>
-        /// <param name="snapshotExpression"> The snapshot expression. </param>
+        /// <remarks>
+        ///     Snapshotting is the process of creating a copy of the value into a snapshot so it can
+        ///     later be compared to determine if it has changed. For some types, such as collections,
+        ///     this needs to be a deep copy of the collection rather than just a shallow copy of the
+        ///     reference.
+        /// </remarks>
+        /// <param name="equalsExpression">The comparison expression.</param>
+        /// <param name="hashCodeExpression">The associated hash code generator.</param>
+        /// <param name="snapshotExpression">The snapshot expression.</param>
         public ValueComparer(
             Expression<Func<T?, T?, bool>> equalsExpression,
             Expression<Func<T, int>> hashCodeExpression,
-            Expression<Func<T?, T?>> snapshotExpression)
+            Expression<Func<T, T>> snapshotExpression)
             : base(equalsExpression, hashCodeExpression, snapshotExpression)
         {
         }
@@ -87,7 +88,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Creates an expression for equality.
         /// </summary>
-        /// <returns> The equality expression. </returns>
+        /// <returns>The equality expression.</returns>
         protected static Expression<Func<T?, T?, bool>> CreateDefaultEqualsExpression()
         {
             var type = typeof(T);
@@ -127,6 +128,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     && m.GetParameters().Length == 1
                     && m.GetParameters()[0].ParameterType == typeof(T));
 
+            if (typedEquals != null)
+            {
+                return Expression.Lambda<Func<T?, T?, bool>>(
+                    type.IsClass
+                        ? Expression.OrElse(
+                            Expression.AndAlso(
+                                Expression.Equal(param1, Expression.Constant(null, type)),
+                                Expression.Equal(param2, Expression.Constant(null, type))),
+                            Expression.AndAlso(
+                                Expression.AndAlso(
+                                    Expression.NotEqual(param1, Expression.Constant(null, type)),
+                                    Expression.NotEqual(param2, Expression.Constant(null, type))),
+                                Expression.Call(param1, typedEquals, param2)))
+                        : Expression.Call(param1, typedEquals, param2),
+                    param1, param2);
+            }
+
             while (typedEquals == null
                 && type != null)
             {
@@ -148,17 +166,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         ObjectEqualsMethod,
                         Expression.Convert(param1, typeof(object)),
                         Expression.Convert(param2, typeof(object)))
-                    : typedEquals.IsStatic
-                        ? Expression.Call(typedEquals, param1, param2)
-                        : Expression.Call(param1, typedEquals, param2),
+                    : Expression.Call(typedEquals, param1, param2),
                 param1, param2);
         }
 
         /// <summary>
         ///     Creates an expression for creating a snapshot of a value.
         /// </summary>
-        /// <returns> The snapshot expression. </returns>
-        protected static Expression<Func<T?, T?>> CreateDefaultSnapshotExpression(bool favorStructuralComparisons)
+        /// <returns>The snapshot expression.</returns>
+        protected static Expression<Func<T, T>> CreateDefaultSnapshotExpression(bool favorStructuralComparisons)
         {
             if (!favorStructuralComparisons
                 || !typeof(T).IsArray)
@@ -175,7 +191,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             // var destination = new T[length];
             // Array.Copy(source, destination, length);
             // return destination;
-            return Expression.Lambda<Func<T?, T?>>(
+            return Expression.Lambda<Func<T, T>>(
                 Expression.Block(
                     new[] { lengthVariable, destinationVariable },
                     Expression.Assign(
@@ -199,7 +215,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <param name="favorStructuralComparisons">
         ///     If <see langword="true" />, then <see cref="IStructuralEquatable" /> is used if the type implements it.
         /// </param>
-        /// <returns> The hash code expression. </returns>
+        /// <returns>The hash code expression.</returns>
         protected static Expression<Func<T, int>> CreateDefaultHashCodeExpression(bool favorStructuralComparisons)
         {
             var type = typeof(T);
@@ -238,9 +254,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Compares the two instances to determine if they are equal.
         /// </summary>
-        /// <param name="left"> The first instance. </param>
-        /// <param name="right"> The second instance. </param>
-        /// <returns> <see langword="true" /> if they are equal; <see langword="false" /> otherwise. </returns>
+        /// <param name="left">The first instance.</param>
+        /// <param name="right">The second instance.</param>
+        /// <returns><see langword="true" /> if they are equal; <see langword="false" /> otherwise.</returns>
         public override bool Equals(object? left, object? right)
         {
             var v1Null = left == null;
@@ -252,17 +268,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Returns the hash code for the given instance.
         /// </summary>
-        /// <param name="instance"> The instance. </param>
-        /// <returns> The hash code. </returns>
-        public override int GetHashCode(object? instance)
-            => instance == null ? 0 : GetHashCode((T)instance);
+        /// <param name="instance">The instance.</param>
+        /// <returns>The hash code.</returns>
+        public override int GetHashCode(object instance)
+            => instance is null ? 0 : GetHashCode((T)instance);
 
         /// <summary>
         ///     Compares the two instances to determine if they are equal.
         /// </summary>
-        /// <param name="left"> The first instance. </param>
-        /// <param name="right"> The second instance. </param>
-        /// <returns> <see langword="true" /> if they are equal; <see langword="false" /> otherwise. </returns>
+        /// <param name="left">The first instance.</param>
+        /// <param name="right">The second instance.</param>
+        /// <returns><see langword="true" /> if they are equal; <see langword="false" /> otherwise.</returns>
         public virtual bool Equals(T? left, T? right)
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _equals, this, static c => c.EqualsExpression.Compile())(left, right);
@@ -270,42 +286,38 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Returns the hash code for the given instance.
         /// </summary>
-        /// <param name="instance"> The instance. </param>
-        /// <returns> The hash code. </returns>
+        /// <param name="instance">The instance.</param>
+        /// <returns>The hash code.</returns>
         public virtual int GetHashCode(T instance)
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _hashCode, this, static c => c.HashCodeExpression.Compile())(instance);
 
         /// <summary>
-        ///     <para>
-        ///         Creates a snapshot of the given instance.
-        ///     </para>
-        ///     <para>
-        ///         Snapshotting is the process of creating a copy of the value into a snapshot so it can
-        ///         later be compared to determine if it has changed. For some types, such as collections,
-        ///         this needs to be a deep copy of the collection rather than just a shallow copy of the
-        ///         reference.
-        ///     </para>
+        ///     Creates a snapshot of the given instance.
         /// </summary>
-        /// <param name="instance"> The instance. </param>
-        /// <returns> The snapshot. </returns>
+        /// <remarks>
+        ///     Snapshotting is the process of creating a copy of the value into a snapshot so it can
+        ///     later be compared to determine if it has changed. For some types, such as collections,
+        ///     this needs to be a deep copy of the collection rather than just a shallow copy of the
+        ///     reference.
+        /// </remarks>
+        /// <param name="instance">The instance.</param>
+        /// <returns>The snapshot.</returns>
         public override object? Snapshot(object? instance)
-            => instance == null ? null : (object?)Snapshot((T?)instance);
+            => instance == null ? null : Snapshot((T)instance);
 
         /// <summary>
-        ///     <para>
-        ///         Creates a snapshot of the given instance.
-        ///     </para>
-        ///     <para>
-        ///         Snapshotting is the process of creating a copy of the value into a snapshot so it can
-        ///         later be compared to determine if it has changed. For some types, such as collections,
-        ///         this needs to be a deep copy of the collection rather than just a shallow copy of the
-        ///         reference.
-        ///     </para>
+        ///     Creates a snapshot of the given instance.
         /// </summary>
-        /// <param name="instance"> The instance. </param>
-        /// <returns> The snapshot. </returns>
-        public virtual T? Snapshot(T? instance)
+        /// <remarks>
+        ///     Snapshotting is the process of creating a copy of the value into a snapshot so it can
+        ///     later be compared to determine if it has changed. For some types, such as collections,
+        ///     this needs to be a deep copy of the collection rather than just a shallow copy of the
+        ///     reference.
+        /// </remarks>
+        /// <param name="instance">The instance.</param>
+        /// <returns>The snapshot.</returns>
+        public virtual T Snapshot(T instance)
             => NonCapturingLazyInitializer.EnsureInitialized(
                 ref _snapshot, this, static c => c.SnapshotExpression.Compile())(instance);
 
@@ -328,17 +340,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             => (Expression<Func<T, int>>)base.HashCodeExpression;
 
         /// <summary>
-        ///     <para>
-        ///         The snapshot expression.
-        ///     </para>
-        ///     <para>
-        ///         Snapshotting is the process of creating a copy of the value into a snapshot so it can
-        ///         later be compared to determine if it has changed. For some types, such as collections,
-        ///         this needs to be a deep copy of the collection rather than just a shallow copy of the
-        ///         reference.
-        ///     </para>
+        ///     The snapshot expression.
         /// </summary>
-        public new virtual Expression<Func<T?, T?>> SnapshotExpression
-            => (Expression<Func<T?, T?>>)base.SnapshotExpression;
+        /// <remarks>
+        ///     Snapshotting is the process of creating a copy of the value into a snapshot so it can
+        ///     later be compared to determine if it has changed. For some types, such as collections,
+        ///     this needs to be a deep copy of the collection rather than just a shallow copy of the
+        ///     reference.
+        /// </remarks>
+        public new virtual Expression<Func<T, T>> SnapshotExpression
+            => (Expression<Func<T, T>>)base.SnapshotExpression;
     }
 }

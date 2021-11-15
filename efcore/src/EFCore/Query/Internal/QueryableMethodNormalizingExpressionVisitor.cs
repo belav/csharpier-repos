@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -10,7 +10,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -34,8 +33,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public QueryableMethodNormalizingExpressionVisitor(QueryCompilationContext queryCompilationContext)
         {
-            Check.NotNull(queryCompilationContext, nameof(Query));
-
             _queryCompilationContext = queryCompilationContext;
         }
 
@@ -47,8 +44,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
         {
-            Check.NotNull(methodCallExpression, nameof(methodCallExpression));
-
             var method = methodCallExpression.Method;
 
             // Extract information from query metadata method and prune them
@@ -109,8 +104,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         return Expression.Call(newIncludeMethod, source, lambda);
                     }
 
-                    // TODO-Nullable bug
-                    return methodCallExpression.Update(null!, new[] { source, lambda });
+                    return methodCallExpression.Update(null, new[] { source, lambda });
                 }
             }
 
@@ -207,6 +201,17 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 var visitedExpression = Visit(methodCallExpression.Arguments[0]);
                 _queryCompilationContext.AddTag(methodCallExpression.Arguments[1].GetConstantValue<string>());
+
+                return visitedExpression;
+            }
+
+            if (genericMethodDefinition == EntityFrameworkQueryableExtensions.TagWithCallSiteMethodInfo)
+            {
+                var visitedExpression = Visit(methodCallExpression.Arguments[0]);
+
+                var filePath = methodCallExpression.Arguments[1].GetConstantValue<string>();
+                var lineNumber = methodCallExpression.Arguments[2].GetConstantValue<int>();
+                _queryCompilationContext.AddTag($"File: {filePath}:{lineNumber}");
 
                 return visitedExpression;
             }
@@ -334,6 +339,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         if (innerQueryableElementType == null
                             || innerQueryableElementType != genericType)
                         {
+                            while (innerArgument is UnaryExpression
+                                {
+                                    NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked or ExpressionType.TypeAs
+                                } unaryExpression
+                                && unaryExpression.Type.TryGetElementType(typeof(IEnumerable<>)) != null)
+                            {
+                                innerArgument = unaryExpression.Operand;
+                            }
+
                             arguments[i] = Expression.Call(
                                 QueryableMethods.AsQueryable.MakeGenericMethod(genericType),
                                 innerArgument);
@@ -362,8 +376,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
             }
 
-            // TODO-Nullable bug
-            return methodCallExpression.Update(Visit(methodCallExpression.Object)!, arguments);
+            return methodCallExpression.Update(Visit(methodCallExpression.Object), arguments);
         }
 
         private Expression TryConvertListContainsToQueryableContains(MethodCallExpression methodCallExpression)
@@ -685,8 +698,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitLambda<T>(Expression<T> lambdaExpression)
             {
-                Check.NotNull(lambdaExpression, nameof(lambdaExpression));
-
                 try
                 {
                     _allowedParameters.AddRange(lambdaExpression.Parameters);
@@ -704,8 +715,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
             {
-                Check.NotNull(methodCallExpression, nameof(methodCallExpression));
-
                 if (_correlated)
                 {
                     return methodCallExpression;
@@ -735,8 +744,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitParameter(ParameterExpression parameterExpression)
             {
-                Check.NotNull(parameterExpression, nameof(parameterExpression));
-
                 if (_allowedParameters.Contains(parameterExpression))
                 {
                     return parameterExpression;

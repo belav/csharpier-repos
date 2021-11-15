@@ -21,7 +21,7 @@ namespace System
             }
         }
 
-        [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
+        [DllImport(RuntimeHelpers.QCall, EntryPoint = "Buffer_Clear")]
         private static extern unsafe void __ZeroMemory(void* b, nuint byteLength);
 
         // The maximum block size to for __BulkMoveWithWriteBarrier FCall. This is required to avoid GC starvation.
@@ -77,14 +77,14 @@ namespace System
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void __BulkMoveWithWriteBarrier(ref byte destination, ref byte source, nuint byteCount);
 
-        [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
+        [DllImport(RuntimeHelpers.QCall, EntryPoint = "Buffer_MemMove")]
         private static extern unsafe void __Memmove(byte* dest, byte* src, nuint len);
 
         // Used by ilmarshalers.cpp
         internal static unsafe void Memcpy(byte* dest, byte* src, int len)
         {
             Debug.Assert(len >= 0, "Negative length in memcpy!");
-            Memmove(ref *dest, ref *src, (nuint)len);
+            Memmove(ref *dest, ref *src, (nuint)(uint)len /* force zero-extension */);
         }
 
         // Used by ilmarshalers.cpp
@@ -93,7 +93,7 @@ namespace System
             Debug.Assert((srcIndex >= 0) && (destIndex >= 0) && (len >= 0), "Index and length must be non-negative!");
             Debug.Assert(src.Length - srcIndex >= len, "not enough bytes in src");
 
-            Memmove(ref *(pDest + destIndex), ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(src), srcIndex), (nuint)len);
+            Memmove(ref *(pDest + (uint)destIndex), ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(src), (nint)(uint)srcIndex /* force zero-extension */), (uint)len);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

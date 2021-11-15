@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 {
@@ -32,12 +31,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IEnumerable<IMemberTranslatorPlugin> plugins)
         {
             _plugins.AddRange(plugins.SelectMany(p => p.Translators));
-            //_translators
-            //    .AddRange(
-            //    new[]
-            //    {
-            //        new NullableMemberTranslator(sqlExpressionFactory),
-            //    });
+            _translators
+                .AddRange(
+                    new IMemberTranslator[]
+                    {
+                        new CosmosStringMemberTranslator(sqlExpressionFactory),
+                        new CosmosDateTimeMemberTranslator(sqlExpressionFactory),
+                    });
         }
 
         /// <summary>
@@ -51,14 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MemberInfo member,
             Type returnType,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
-            Check.NotNull(member, nameof(member));
-            Check.NotNull(returnType, nameof(returnType));
-            Check.NotNull(logger, nameof(logger));
-
-            return _plugins.Concat(_translators)
+            => _plugins.Concat(_translators)
                 .Select(t => t.Translate(instance, member, returnType, logger)).FirstOrDefault(t => t != null);
-        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

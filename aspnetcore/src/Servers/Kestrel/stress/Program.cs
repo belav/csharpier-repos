@@ -1,7 +1,22 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
 
+using System;
+using System.CommandLine;
+using System.Diagnostics.Tracing;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,22 +24,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
-using System;
-using System.CommandLine;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Security;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Diagnostics.Tracing;
-using System.Text;
-using System.Net;
-using System.Net.Sockets;
 
 /// <summary>
 /// Simple HttpClient stress app that launches Kestrel in-proc and runs many concurrent requests of varying types against it.
@@ -64,7 +63,7 @@ public class Program
             logPath             : cmdline.HasOption("-trace") ? cmdline.ValueForOption<string>("-trace") : null,
             aspnetLog           : cmdline.ValueForOption<bool>("-aspnetlog"),
             listOps             : cmdline.ValueForOption<bool>("-listOps"),
-            seed                : cmdline.ValueForOption<int?>("-seed") ?? new Random().Next());
+            seed                : cmdline.ValueForOption<int?>("-seed") ?? Random.Shared.Next());
     }
 
     private static void Run(int concurrentRequests, int maxContentLength, Version[] httpVersions, int? connectionLifetime, int[] opIndices, string logPath, bool aspnetLog, bool listOps, int seed)
@@ -722,7 +721,7 @@ public class Program
             {
                 if (_writer != null)
                 {
-                    var sb = new StringBuilder().Append($"[{eventData.EventName}] ");
+                    var sb = new StringBuilder().Append(FormattableString.Invariant($"[{eventData.EventName}] "));
                     for (int i = 0; i < eventData.Payload.Count; i++)
                     {
                         if (i > 0) sb.Append(", ");

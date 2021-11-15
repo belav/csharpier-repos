@@ -10,36 +10,34 @@ namespace System.CommandLine.Binding
         internal FailedArgumentTypeConversionResult(
             IArgument argument,
             Type expectedType,
-            string value) :
-            base(argument, FormatErrorMessage(argument, expectedType, value))
+            string value,
+            LocalizationResources localizationResources) :
+            base(argument, FormatErrorMessage(argument, expectedType, value, localizationResources))
         {
         }
 
         private static string FormatErrorMessage(
             IArgument argument,
             Type expectedType,
-            string value)
+            string value,
+            LocalizationResources localizationResources)
         {
             if (argument is Argument a &&
                 a.Parents.Count == 1)
             {
-                // TODO: (FailedArgumentTypeConversionResult) localize
-
                 var firstParent = (IIdentifierSymbol) a.Parents[0];
-
-                var symbolType =
-                    firstParent switch {
-                        ICommand _ => "command",
-                        IOption _ => "option",
-                        _ => null
-                        };
-
                 var alias = firstParent.Aliases.First();
-
-                return $"Cannot parse argument '{value}' for {symbolType} '{alias}' as expected type {expectedType}.";
+                
+                switch(firstParent)
+                {
+                    case ICommand _:
+                        return localizationResources.ArgumentConversionCannotParseForCommand(value, alias, expectedType);
+                    case IOption _:
+                        return localizationResources.ArgumentConversionCannotParseForOption(value, alias, expectedType);
+                }
             }
 
-            return $"Cannot parse argument '{value}' as expected type {expectedType}.";
+            return localizationResources.ArgumentConversionCannotParse(value, expectedType);
         }
     }
 }

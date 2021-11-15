@@ -1,45 +1,44 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
+namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
+
+internal static class MvcShim
 {
-    internal static class MvcShim
+    public static readonly string AssemblyName = "Microsoft.AspNetCore.Razor.Test.MvcShim.Version1_X";
+
+    private static Assembly _assembly;
+    private static CSharpCompilation _baseCompilation;
+
+    public static Assembly Assembly
     {
-        public static readonly string AssemblyName = "Microsoft.AspNetCore.Razor.Test.MvcShim.Version1_X";
-
-        private static Assembly _assembly;
-        private static CSharpCompilation _baseCompilation;
-
-        public static Assembly Assembly
+        get
         {
-            get
+            if (_assembly == null)
             {
-                if (_assembly == null)
-                {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), AssemblyName + ".dll");
-                    _assembly = Assembly.LoadFrom(filePath);
-                }
-
-                return _assembly;
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), AssemblyName + ".dll");
+                _assembly = Assembly.LoadFrom(filePath);
             }
+
+            return _assembly;
         }
+    }
 
-        public static CSharpCompilation BaseCompilation
+    public static CSharpCompilation BaseCompilation
+    {
+        get
         {
-            get
+            if (_baseCompilation == null)
             {
-                if (_baseCompilation == null)
-                {
-                    _baseCompilation = TestCompilation.Create(Assembly);
-                }
-
-                return _baseCompilation;
+                _baseCompilation = TestCompilation.Create(Assembly);
             }
+
+            return _baseCompilation;
         }
     }
 }

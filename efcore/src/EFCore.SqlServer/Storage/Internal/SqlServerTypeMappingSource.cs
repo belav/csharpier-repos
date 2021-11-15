@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -8,22 +8,14 @@ using System.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-    ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-    ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class SqlServerTypeMappingSource : RelationalTypeMappingSource
     {
@@ -37,13 +29,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             = new SqlServerFloatTypeMapping("placeholder", storeTypePostfix: StoreTypePostfix.None);
 
         private readonly ByteTypeMapping _byte
-            = new SqlServerByteTypeMapping("tinyint", DbType.Byte);
+            = new SqlServerByteTypeMapping("tinyint");
 
         private readonly ShortTypeMapping _short
-            = new SqlServerShortTypeMapping("smallint", DbType.Int16);
+            = new SqlServerShortTypeMapping("smallint");
 
         private readonly LongTypeMapping _long
-            = new SqlServerLongTypeMapping("bigint", DbType.Int64);
+            = new SqlServerLongTypeMapping("bigint");
 
         private readonly SqlServerByteArrayTypeMapping _rowversion
             = new(
@@ -52,12 +44,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 comparer: new ValueComparer<byte[]>(
                     (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
                     v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
-                    // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-                    v => v == null ? null! : v.ToArray()),
+                    v => v.ToArray()),
                 storeTypePostfix: StoreTypePostfix.None);
 
         private readonly IntTypeMapping _int
-            = new("int", DbType.Int32);
+            = new("int");
 
         private readonly BoolTypeMapping _bool
             = new SqlServerBoolTypeMapping("bit");
@@ -117,13 +108,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             = new SqlServerDoubleTypeMapping("placeholder", storeTypePostfix: StoreTypePostfix.None);
 
         private readonly SqlServerDateTimeOffsetTypeMapping _datetimeoffset
-            = new("datetimeoffset", DbType.DateTimeOffset);
+            = new("datetimeoffset");
 
         private readonly SqlServerDateTimeOffsetTypeMapping _datetimeoffsetAlias
             = new("placeholder", DbType.DateTimeOffset, StoreTypePostfix.None);
 
         private readonly GuidTypeMapping _uniqueidentifier
-            = new("uniqueidentifier", DbType.Guid);
+            = new("uniqueidentifier");
 
         private readonly DecimalTypeMapping _decimal
             = new SqlServerDecimalTypeMapping("decimal");
@@ -301,10 +292,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                     var isFixedLength = mappingInfo.IsFixedLength == true;
                     var maxSize = isAnsi ? 8000 : 4000;
 
-                    var size = mappingInfo.Size ?? (mappingInfo.IsKeyOrIndex ? (int?)(isAnsi ? 900 : 450) : null);
+                    var size = mappingInfo.Size ?? (mappingInfo.IsKeyOrIndex ? isAnsi ? 900 : 450 : null);
                     if (size > maxSize)
                     {
-                        size = isFixedLength ? maxSize : (int?)null;
+                        size = isFixedLength ? maxSize : null;
                     }
 
                     if (size == null
@@ -335,10 +326,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
                     var isFixedLength = mappingInfo.IsFixedLength == true;
 
-                    var size = mappingInfo.Size ?? (mappingInfo.IsKeyOrIndex ? (int?)900 : null);
+                    var size = mappingInfo.Size ?? (mappingInfo.IsKeyOrIndex ? 900 : null);
                     if (size > 8000)
                     {
-                        size = isFixedLength ? 8000 : (int?)null;
+                        size = isFixedLength ? 8000 : null;
                     }
 
                     return size == null

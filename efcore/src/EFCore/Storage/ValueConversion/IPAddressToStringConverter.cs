@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -10,7 +10,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     /// <summary>
     ///     Converts a <see cref="IPAddress" /> to and from a <see cref="string" />.
     /// </summary>
-    public class IPAddressToStringConverter : ValueConverter<IPAddress, string>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+    /// </remarks>
+    public class IPAddressToStringConverter : ValueConverter<IPAddress?, string?>
     {
         // IPv4-mapped IPv6 addresses can go up to 45 bytes, e.g. 0000:0000:0000:0000:0000:ffff:192.168.1.1
         private static readonly ConverterMappingHints _defaultHints = new(size: 45);
@@ -18,11 +21,22 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <summary>
         ///     Creates a new instance of this converter.
         /// </summary>
+        public IPAddressToStringConverter()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        ///     Creates a new instance of this converter.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+        /// </remarks>
         /// <param name="mappingHints">
         ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
         ///     facets for the converted data.
         /// </param>
-        public IPAddressToStringConverter(ConverterMappingHints? mappingHints = null)
+        public IPAddressToStringConverter(ConverterMappingHints? mappingHints)
             : base(
                 ToString(),
                 ToIPAddress(),
@@ -36,12 +50,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         public static ValueConverterInfo DefaultInfo { get; }
             = new(typeof(IPAddress), typeof(string), i => new IPAddressToStringConverter(i.MappingHints), _defaultHints);
 
-        private static new Expression<Func<IPAddress, string>> ToString()
-            // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-            => v => v == null ? default! : v.ToString();
+        private new static Expression<Func<IPAddress?, string?>> ToString()
+            => v => v!.ToString();
 
-        private static Expression<Func<string, IPAddress>> ToIPAddress()
-            // TODO-NULLABLE: Null is already sanitized externally, clean up as part of #13850
-            => v => v == null ? default! : IPAddress.Parse(v);
+        private static Expression<Func<string?, IPAddress?>> ToIPAddress()
+            => v => IPAddress.Parse(v!);
     }
 }

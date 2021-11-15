@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
@@ -84,19 +83,37 @@ SELECT @SQL = @SQL + 'DROP SCHEMA ' + QUOTENAME(name) + ';' FROM sys.schemas WHE
 EXEC (@SQL);";
 
         protected override MigrationOperation Drop(DatabaseTable table)
-            => AddMemoryOptimizedAnnotation(base.Drop(table), table);
+            => AddSqlServerSpecificAnnotations(base.Drop(table), table);
 
         protected override MigrationOperation Drop(DatabaseForeignKey foreignKey)
-            => AddMemoryOptimizedAnnotation(base.Drop(foreignKey), foreignKey.Table);
+            => AddSqlServerSpecificAnnotations(base.Drop(foreignKey), foreignKey.Table);
 
         protected override MigrationOperation Drop(DatabaseIndex index)
-            => AddMemoryOptimizedAnnotation(base.Drop(index), index.Table);
+            => AddSqlServerSpecificAnnotations(base.Drop(index), index.Table);
 
-        private static TOperation AddMemoryOptimizedAnnotation<TOperation>(TOperation operation, DatabaseTable table)
+        private static TOperation AddSqlServerSpecificAnnotations<TOperation>(TOperation operation, DatabaseTable table)
             where TOperation : MigrationOperation
         {
             operation[SqlServerAnnotationNames.MemoryOptimized]
                 = table[SqlServerAnnotationNames.MemoryOptimized] as bool?;
+
+            if (table[SqlServerAnnotationNames.IsTemporal] != null)
+            {
+                operation[SqlServerAnnotationNames.IsTemporal]
+                    = table[SqlServerAnnotationNames.IsTemporal];
+
+                operation[SqlServerAnnotationNames.TemporalHistoryTableName]
+                    = table[SqlServerAnnotationNames.TemporalHistoryTableName];
+
+                operation[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                    = table[SqlServerAnnotationNames.TemporalHistoryTableSchema];
+
+                operation[SqlServerAnnotationNames.TemporalPeriodStartColumnName]
+                    = table[SqlServerAnnotationNames.TemporalPeriodStartColumnName];
+
+                operation[SqlServerAnnotationNames.TemporalPeriodEndColumnName]
+                    = table[SqlServerAnnotationNames.TemporalPeriodEndColumnName];
+            }
 
             return operation;
         }

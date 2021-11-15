@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -25,13 +24,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="TableValuedFunctionExpression" /> class.
         /// </summary>
-        /// <param name="storeFunction"> The <see cref="IStoreFunction" /> associated this function. </param>
-        /// <param name="arguments"> The arguments of the function. </param>
+        /// <param name="storeFunction">The <see cref="IStoreFunction" /> associated this function.</param>
+        /// <param name="arguments">The arguments of the function.</param>
         public TableValuedFunctionExpression(IStoreFunction storeFunction, IReadOnlyList<SqlExpression> arguments)
             : this(
                 storeFunction.Name.Substring(0, 1).ToLowerInvariant(),
-                Check.NotNull(storeFunction, nameof(storeFunction)),
-                Check.NotNull(arguments, nameof(arguments)))
+                storeFunction,
+                arguments)
         {
         }
 
@@ -65,8 +64,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var changed = false;
             var arguments = new SqlExpression[Arguments.Count];
             for (var i = 0; i < arguments.Length; i++)
@@ -84,16 +81,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="arguments"> The <see cref="Arguments" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual TableValuedFunctionExpression Update(IReadOnlyList<SqlExpression> arguments)
-        {
-            Check.NotNull(arguments, nameof(arguments));
-
-            return !arguments.SequenceEqual(Arguments)
+            => !arguments.SequenceEqual(Arguments)
                 ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
                 : this;
-        }
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)

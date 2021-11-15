@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -109,7 +109,7 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: CustomUserInt.Email (string) MaxLength(256)",
                         "Property: CustomUserInt.EmailConfirmed (bool) Required",
                         "Property: CustomUserInt.LockoutEnabled (bool) Required",
-                        "Property: CustomUserInt.LockoutEnd (Nullable<DateTimeOffset>)",
+                        "Property: CustomUserInt.LockoutEnd (DateTimeOffset?)",
                         "Property: CustomUserInt.NormalizedEmail (string) Index MaxLength(256)",
                         "Property: CustomUserInt.NormalizedUserName (string) Index MaxLength(256)",
                         "Property: CustomUserInt.PasswordHash (string)",

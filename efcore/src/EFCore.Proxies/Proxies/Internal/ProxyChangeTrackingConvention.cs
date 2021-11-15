@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         /// <summary>
         ///     Called after a model is finalized.
         /// </summary>
-        /// <param name="modelBuilder"> The builder for the model. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="modelBuilder">The builder for the model.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
             IConventionContext<IConventionModelBuilder> context)
@@ -42,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             {
                 modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                modelBuilder.HasAnnotation(CoreAnnotationNames.FullChangeTrackingNotificationsRequiredAnnotation, "true");
+                modelBuilder.HasAnnotation(CoreAnnotationNames.FullChangeTrackingNotificationsRequired, true);
 #pragma warning restore EF1001 // Internal EF Core API usage.
             }
         }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Concurrent;
@@ -10,7 +10,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 #pragma warning disable 1574, CS0419 // Ambiguous reference in cref attribute
@@ -18,19 +17,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     /// <summary>
     ///     <para>
-    ///         The base class for relational type mapping starting with version 2.1. Relational providers
+    ///         The base class for relational type mapping source. Relational providers
     ///         should derive from this class and override <see cref="RelationalTypeMappingSource.FindMapping" />
     ///     </para>
     ///     <para>
     ///         This type is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public abstract class RelationalTypeMappingSource : TypeMappingSourceBase, IRelationalTypeMappingSource
     {
         private readonly ConcurrentDictionary<(RelationalTypeMappingInfo, Type?, ValueConverter?), RelationalTypeMapping?> _explicitMappings
@@ -39,30 +44,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the this class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
-        /// <param name="relationalDependencies"> Parameter object containing relational-specific dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
+        /// <param name="relationalDependencies">Parameter object containing relational-specific dependencies for this service.</param>
         protected RelationalTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
             RelationalTypeMappingSourceDependencies relationalDependencies)
             : base(dependencies)
         {
-            Check.NotNull(relationalDependencies, nameof(relationalDependencies));
-
             RelationalDependencies = relationalDependencies;
         }
 
         /// <summary>
-        ///     <para>
-        ///         Overridden by relational database providers to find a type mapping for the given info.
-        ///     </para>
-        ///     <para>
-        ///         The mapping info is populated with as much information about the required type mapping as
-        ///         is available. Use all the information necessary to create the best mapping. Return <see langword="null" />
-        ///         if no mapping is available.
-        ///     </para>
+        ///     Overridden by relational database providers to find a type mapping for the given info.
         /// </summary>
-        /// <param name="mappingInfo"> The mapping info to use to create the mapping. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none could be found. </returns>
+        /// <remarks>
+        ///     The mapping info is populated with as much information about the required type mapping as
+        ///     is available. Use all the information necessary to create the best mapping. Return <see langword="null" />
+        ///     if no mapping is available.
+        /// </remarks>
+        /// <param name="mappingInfo">The mapping info to use to create the mapping.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none could be found.</returns>
         protected virtual RelationalTypeMapping? FindMapping(in RelationalTypeMappingInfo mappingInfo)
         {
             foreach (var plugin in RelationalDependencies.Plugins)
@@ -78,15 +79,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         /// <summary>
-        ///     Dependencies used to create this <see cref="RelationalTypeMappingSource" />
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalTypeMappingSourceDependencies RelationalDependencies { get; }
 
         /// <summary>
         ///     Call <see cref="RelationalTypeMappingSource.FindMapping" /> instead
         /// </summary>
-        /// <param name="mappingInfo"> The mapping info to use to create the mapping. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none could be found. </returns>
+        /// <param name="mappingInfo">The mapping info to use to create the mapping.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none could be found.</returns>
         protected override CoreTypeMapping FindMapping(in TypeMappingInfo mappingInfo)
             => throw new InvalidOperationException(
                 RelationalStrings.NoneRelationalTypeMappingOnARelationalTypeMappingSource);
@@ -122,7 +123,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
             }
 
-            var resolvedMapping = _explicitMappings.GetOrAdd(
+            var resolvedMapping = FindMappingWithConversion(mappingInfo, providerClrType, customConverter);
+
+            ValidateMapping(resolvedMapping, principals?[0]);
+
+            return resolvedMapping;
+        }
+
+        private RelationalTypeMapping? FindMappingWithConversion(
+            RelationalTypeMappingInfo mappingInfo,
+            Type? providerClrType,
+            ValueConverter? customConverter)
+            => _explicitMappings.GetOrAdd(
                 (mappingInfo, providerClrType, customConverter),
                 k =>
                 {
@@ -180,21 +192,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     return mapping;
                 });
 
-            ValidateMapping(resolvedMapping, principals?[0]);
-
-            return resolvedMapping;
-        }
-
         /// <summary>
-        ///     <para>
-        ///         Finds the type mapping for a given <see cref="IProperty" />.
-        ///     </para>
-        ///     <para>
-        ///         Note: providers should typically not need to override this method.
-        ///     </para>
+        ///     Finds the type mapping for a given <see cref="IProperty" />.
         /// </summary>
-        /// <param name="property"> The property. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
+        /// <remarks>
+        ///     Note: providers should typically not need to override this method.
+        /// </remarks>
+        /// <param name="property">The property.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
         public override CoreTypeMapping? FindMapping(IProperty property)
         {
             var principals = property.GetPrincipals();
@@ -228,28 +233,104 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         /// <summary>
-        ///     <para>
-        ///         Finds the type mapping for a given <see cref="Type" />.
-        ///     </para>
+        ///     Finds the type mapping for a given <see cref="Type" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note: Only call this method if there is no <see cref="IProperty" />
-        ///         or <see cref="MemberInfo" /> available, otherwise call <see cref="FindMapping(IProperty)" />
-        ///         or <see cref="FindMapping(MemberInfo)" />
+        ///         or <see cref="IModel" /> available, otherwise call <see cref="FindMapping(IProperty)" />
+        ///         or <see cref="FindMapping(Type, IModel)" />
         ///     </para>
         ///     <para>
         ///         Note: providers should typically not need to override this method.
         ///     </para>
-        /// </summary>
-        /// <param name="type"> The CLR type. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
-        public override CoreTypeMapping? FindMapping(Type type)
+        /// </remarks>
+        /// <param name="type">The CLR type.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
+        public override RelationalTypeMapping? FindMapping(Type type)
             => FindMappingWithConversion(new RelationalTypeMappingInfo(type), null);
 
         /// <summary>
-        ///     <para>
-        ///         Finds the type mapping for a given <see cref="MemberInfo" /> representing
-        ///         a field or a property of a CLR type.
-        ///     </para>
+        ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration into the account.
+        /// </summary>
+        /// <remarks>
+        ///     Note: Only call this method if there is no <see cref="IProperty" />,
+        ///     otherwise call <see cref="FindMapping(IProperty)" />.
+        /// </remarks>
+        /// <param name="type">The CLR type.</param>
+        /// <param name="model">The model.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
+        public override RelationalTypeMapping? FindMapping(Type type, IModel model)
+        {
+            type = type.UnwrapNullableType();
+            var typeConfiguration = model.FindTypeMappingConfiguration(type);
+            RelationalTypeMappingInfo mappingInfo;
+            Type? providerClrType = null;
+            ValueConverter? customConverter = null;
+            if (typeConfiguration == null)
+            {
+                mappingInfo = new RelationalTypeMappingInfo(type);
+            }
+            else
+            {
+                providerClrType = typeConfiguration.GetProviderClrType()?.UnwrapNullableType();
+                customConverter = typeConfiguration.GetValueConverter();
+
+                var isUnicode = typeConfiguration.IsUnicode();
+                var scale = typeConfiguration.GetScale();
+                var precision = typeConfiguration.GetPrecision();
+                var size = typeConfiguration.GetMaxLength();
+
+                var storeTypeName = (string?)typeConfiguration[RelationalAnnotationNames.ColumnType];
+                string? storeTypeBaseName = null;
+                if (storeTypeName != null)
+                {
+                    storeTypeBaseName = ParseStoreTypeName(
+                        storeTypeName, out var parsedUnicode, out var parsedSize, out var parsedPrecision, out var parsedScale);
+
+                    if (size == null)
+                    {
+                        size = parsedSize;
+                    }
+
+                    if (precision == null)
+                    {
+                        precision = parsedPrecision;
+                    }
+
+                    if (scale == null)
+                    {
+                        scale = parsedScale;
+                    }
+
+                    if (isUnicode == null)
+                    {
+                        isUnicode = parsedUnicode;
+                    }
+                }
+
+                var isFixedLength = (bool?)typeConfiguration[RelationalAnnotationNames.IsFixedLength];
+                mappingInfo = new RelationalTypeMappingInfo(
+                    customConverter?.ProviderClrType ?? type,
+                    storeTypeName,
+                    storeTypeBaseName,
+                    keyOrIndex: false,
+                    unicode: isUnicode,
+                    size: size,
+                    rowVersion: false,
+                    fixedLength: isFixedLength,
+                    precision: precision,
+                    scale: scale);
+            }
+
+            return FindMappingWithConversion(mappingInfo, providerClrType, customConverter);
+        }
+
+        /// <summary>
+        ///     Finds the type mapping for a given <see cref="MemberInfo" /> representing
+        ///     a field or a property of a CLR type.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note: Only call this method if there is no <see cref="IProperty" /> available, otherwise
         ///         call <see cref="FindMapping(IProperty)" />
@@ -257,11 +338,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     <para>
         ///         Note: providers should typically not need to override this method.
         ///     </para>
-        /// </summary>
-        /// <param name="member"> The field or property. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
-        public override CoreTypeMapping? FindMapping(MemberInfo member)
+        /// </remarks>
+        /// <param name="member">The field or property.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
+        public override RelationalTypeMapping? FindMapping(MemberInfo member)
         {
+            // TODO: Remove this, see #11124
             if (member.GetCustomAttribute<ColumnAttribute>(true) is ColumnAttribute attribute)
             {
                 var storeTypeName = attribute.TypeName;
@@ -276,9 +358,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         /// <summary>
-        ///     <para>
-        ///         Finds the type mapping for a given database type name.
-        ///     </para>
+        ///     Finds the type mapping for a given database type name.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note: Only call this method if there is no <see cref="IProperty" /> available, otherwise
         ///         call <see cref="FindMapping(IProperty)" />
@@ -286,9 +368,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     <para>
         ///         Note: providers should typically not need to override this method.
         ///     </para>
-        /// </summary>
-        /// <param name="storeTypeName"> The database type name. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
+        /// </remarks>
+        /// <param name="storeTypeName">The database type name.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
         public virtual RelationalTypeMapping? FindMapping(string storeTypeName)
         {
             var storeTypeBaseName = ParseStoreTypeName(storeTypeName, out var unicode, out var size, out var precision, out var scale);
@@ -298,9 +380,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         /// <summary>
-        ///     <para>
-        ///         Finds the type mapping for a given <see cref="Type" /> and additional facets.
-        ///     </para>
+        ///     Finds the type mapping for a given <see cref="Type" /> and additional facets.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Note: Only call this method if there is no <see cref="IProperty" /> available, otherwise
         ///         call <see cref="FindMapping(IProperty)" />
@@ -308,17 +390,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     <para>
         ///         Note: providers should typically not need to override this method.
         ///     </para>
-        /// </summary>
-        /// <param name="type"> The CLR type. </param>
-        /// <param name="storeTypeName"> The database type name. </param>
-        /// <param name="keyOrIndex"> If <see langword="true" />, then a special mapping for a key or index may be returned. </param>
-        /// <param name="unicode"> Specifies Unicode or ANSI mapping, or <see langword="null" /> for default. </param>
-        /// <param name="size"> Specifies a size for the mapping, or <see langword="null" /> for default. </param>
-        /// <param name="rowVersion"> Specifies a row-version, or <see langword="null" /> for default. </param>
-        /// <param name="fixedLength"> Specifies a fixed length mapping, or <see langword="null" /> for default. </param>
-        /// <param name="precision"> Specifies a precision for the mapping, or <see langword="null" /> for default. </param>
-        /// <param name="scale"> Specifies a scale for the mapping, or <see langword="null" /> for default. </param>
-        /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
+        /// </remarks>
+        /// <param name="type">The CLR type.</param>
+        /// <param name="storeTypeName">The database type name.</param>
+        /// <param name="keyOrIndex">If <see langword="true" />, then a special mapping for a key or index may be returned.</param>
+        /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for default.</param>
+        /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for default.</param>
+        /// <param name="rowVersion">Specifies a row-version, or <see langword="null" /> for default.</param>
+        /// <param name="fixedLength">Specifies a fixed length mapping, or <see langword="null" /> for default.</param>
+        /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for default.</param>
+        /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for default.</param>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
         public virtual RelationalTypeMapping? FindMapping(
             Type type,
             string? storeTypeName,
@@ -366,31 +448,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
         RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(IProperty property)
             => (RelationalTypeMapping?)FindMapping(property);
 
-        /// <inheritdoc />
-        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(Type type)
-            => (RelationalTypeMapping?)FindMapping(type);
-
-        /// <inheritdoc />
-        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(MemberInfo member)
-            => (RelationalTypeMapping?)FindMapping(member);
-
         /// <summary>
-        ///     <para>
-        ///         Parses a provider-specific store type name, extracting the standard facets
-        ///         (e.g. size, precision) and returns the base store type name (without any facets).
-        ///     </para>
-        ///     <para>
-        ///         The default implementation supports sometype(size), sometype(precision) and
-        ///         sometype(precision, scale). Providers can override this to provide their own
-        ///         logic.
-        ///     </para>
+        ///     Parses a provider-specific store type name, extracting the standard facets
+        ///     (e.g. size, precision) and returns the base store type name (without any facets).
         /// </summary>
-        /// <param name="storeTypeName"> A provider-specific relational type name, including facets. </param>
-        /// <param name="unicode"> The Unicode or ANSI setting parsed from the type name, or <see langword="null" /> if none was specified. </param>
-        /// <param name="size"> The size parsed from the type name, or <see langword="null" /> if none was specified. </param>
-        /// <param name="precision"> The precision parsed from the type name, or <see langword="null" /> if none was specified. </param>
-        /// <param name="scale"> The scale parsed from the type name, or <see langword="null" /> if none was specified. </param>
-        /// <returns> The provider-specific relational type name, with any facets removed. </returns>
+        /// <remarks>
+        ///     The default implementation supports sometype(size), sometype(precision) and
+        ///     sometype(precision, scale). Providers can override this to provide their own
+        ///     logic.
+        /// </remarks>
+        /// <param name="storeTypeName">A provider-specific relational type name, including facets.</param>
+        /// <param name="unicode">The Unicode or ANSI setting parsed from the type name, or <see langword="null" /> if none was specified.</param>
+        /// <param name="size">The size parsed from the type name, or <see langword="null" /> if none was specified.</param>
+        /// <param name="precision">The precision parsed from the type name, or <see langword="null" /> if none was specified.</param>
+        /// <param name="scale">The scale parsed from the type name, or <see langword="null" /> if none was specified.</param>
+        /// <returns>The provider-specific relational type name, with any facets removed.</returns>
         [return: NotNullIfNotNull("storeTypeName")]
         protected virtual string? ParseStoreTypeName(
             string? storeTypeName,

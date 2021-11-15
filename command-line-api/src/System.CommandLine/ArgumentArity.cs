@@ -5,11 +5,12 @@ using System.Collections;
 using System.CommandLine.Binding;
 using System.CommandLine.Collections;
 using System.CommandLine.Parsing;
-using System.Linq;
+using System.Diagnostics;
 
 namespace System.CommandLine
 {
     /// <inheritdoc />
+    [DebuggerDisplay("\\{{" + nameof(MinimumNumberOfValues) + "},{" + nameof(MaximumNumberOfValues) + "}\\}")]
     public class ArgumentArity : IArgumentArity
     {
         private const int MaximumArity = 100_000;
@@ -64,21 +65,27 @@ namespace System.CommandLine
 
             if (tokenCount < minimumNumberOfValues)
             {
-                if (symbolResult!.UseDefaultValueFor(argument))
+                if (symbolResult.UseDefaultValueFor(argument))
                 {
                     return null;
                 }
 
                 return new MissingArgumentConversionResult(
                     argument,
-                    symbolResult.ValidationMessages.RequiredArgumentMissing(symbolResult));
+                    symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult));
             }
 
             if (tokenCount > maximumNumberOfValues)
             {
-                return new TooManyArgumentsConversionResult(
-                    argument,
-                    symbolResult!.ValidationMessages.ExpectsOneArgument(symbolResult));
+                if (symbolResult is OptionResult optionResult)
+                {
+                    if (!optionResult.Option.AllowMultipleArgumentsPerToken)
+                    {
+                        return new TooManyArgumentsConversionResult(
+                            argument,
+                            symbolResult!.LocalizationResources.ExpectsOneArgument(symbolResult));
+                    }
+                }
             }
 
             return null;
@@ -114,11 +121,6 @@ namespace System.CommandLine
             if (type == typeof(bool))
             {
                 return ZeroOrOne;
-            }
-
-            if (type == typeof(void))
-            {
-                return Zero;
             }
 
             var parent = parents.Count > 0 ? parents[0] : default;

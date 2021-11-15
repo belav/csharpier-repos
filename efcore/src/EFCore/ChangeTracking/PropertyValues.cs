@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +13,9 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     /// <summary>
-    ///     <para>
-    ///         A collection of all property values for an entity.
-    ///     </para>
+    ///     A collection of all property values for an entity.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Objects of this type can be obtained from <see cref="EntityEntry.CurrentValues" />,
     ///         <see cref="EntityEntry.OriginalValues" />,  <see cref="EntityEntry.GetDatabaseValues" />,
@@ -23,7 +23,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///         Once obtained, the objects are usually used in various combinations to resolve optimistic
     ///         concurrency exceptions signaled by the throwing of a <see cref="DbUpdateConcurrencyException" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public abstract class PropertyValues
     {
         /// <summary>
@@ -51,54 +54,69 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Creates an instance of the entity type and sets all its properties using the
         ///     values from this object.
         /// </summary>
-        /// <returns> The values of this object copied into a new entity instance. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <returns>The values of this object copied into a new entity instance.</returns>
         public abstract object ToObject();
 
         /// <summary>
-        ///     <para>
-        ///         Sets the values of this object by copying values from the given object.
-        ///     </para>
+        ///     Sets the values of this object by copying values from the given object.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         The given object can be of any type.  Any property on the object with a name that
         ///         matches a property name in the entity type and can be read will be copied.  Other
         ///         properties will be ignored.  This allows, for example, copying of properties from
         ///         simple Data Transfer Objects (DTOs).
         ///     </para>
-        /// </summary>
-        /// <param name="obj"> The object to read values from. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="obj">The object to read values from.</param>
         public abstract void SetValues(object obj);
 
         /// <summary>
         ///     Creates a clone of the values in this object. Changes made to the new object will not be
         ///     reflected in this object and vice versa.
         /// </summary>
-        /// <returns> A clone of this object. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <returns>A clone of this object.</returns>
         public abstract PropertyValues Clone();
 
         /// <summary>
-        ///     <para>
-        ///         Sets the values of this object by reading values from another <see cref="PropertyValues" />
-        ///         object.
-        ///     </para>
+        ///     Sets the values of this object by reading values from another <see cref="PropertyValues" />
+        ///     object.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         The other object must be based on the same type as this object, or a type derived
         ///         from the type for this object.
         ///     </para>
-        /// </summary>
-        /// <param name="propertyValues"> The object from which values should be copied. </param>
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="propertyValues">The object from which values should be copied.</param>
         public abstract void SetValues(PropertyValues propertyValues);
 
         /// <summary>
-        ///     <para>
-        ///         Sets the values of this object by copying values from the given dictionary.
-        ///     </para>
+        ///     Sets the values of this object by copying values from the given dictionary.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         The keys of the dictionary must match property names. Any key in the dictionary
         ///         that does not match the name of a property in the entity type will be ignored.
         ///     </para>
-        /// </summary>
-        /// <param name="values"> The dictionary to read values from. </param>
-        public virtual void SetValues(IDictionary<string, object?> values)
+        ///     <para>
+        ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        ///     </para>
+        /// </remarks>
+        /// <param name="values">The dictionary to read values from.</param>
+        public virtual void SetValues<TProperty>(IDictionary<string, TProperty> values)
         {
             Check.NotNull(values, nameof(values));
 
@@ -114,6 +132,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Gets the properties for which this object is storing values.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
         /// <value> The properties. </value>
         public abstract IReadOnlyList<IProperty> Properties { get; }
 
@@ -122,30 +143,34 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         public virtual IEntityType EntityType
         {
-            [DebuggerStepThrough] get => InternalEntry.EntityType;
+            [DebuggerStepThrough]
+            get => InternalEntry.EntityType;
         }
 
         /// <summary>
         ///     Gets or sets the value of the property with the specified property name.
         /// </summary>
-        /// <param name="propertyName"> The property name. </param>
-        /// <returns> The value of the property. </returns>
+        /// <param name="propertyName">The property name.</param>
+        /// <returns>The value of the property.</returns>
         public abstract object? this[string propertyName] { get; set; }
 
         /// <summary>
         ///     Gets or sets the value of the property.
         /// </summary>
-        /// <param name="property"> The property. </param>
-        /// <returns> The value of the property. </returns>
+        /// <param name="property">The property.</param>
+        /// <returns>The value of the property.</returns>
         public abstract object? this[IProperty property] { get; set; }
 
         /// <summary>
         ///     Gets the value of the property just like using the indexed property getter but
         ///     typed to the type of the generic parameter.
         /// </summary>
-        /// <typeparam name="TValue"> The type of the property. </typeparam>
-        /// <param name="propertyName"> The property name. </param>
-        /// <returns> The value of the property. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TValue">The type of the property.</typeparam>
+        /// <param name="propertyName">The property name.</param>
+        /// <returns>The value of the property.</returns>
         public abstract TValue GetValue<TValue>(string propertyName);
 
         /// <summary>
@@ -153,10 +178,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     typed to the type of the generic parameter.
         ///     If property exists it return the value into the out parameter, otherwise the default value of TValue
         /// </summary>
-        /// <typeparam name="TValue"> The type of the property. </typeparam>
-        /// <param name="propertyName"> The property name. </param>
-        /// <param name="value"> The property value if any. </param>
-        /// <returns> True if the property exists, otherwise false. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TValue">The type of the property.</typeparam>
+        /// <param name="propertyName">The property name.</param>
+        /// <param name="value">The property value if any.</param>
+        /// <returns>True if the property exists, otherwise false.</returns>
         public virtual bool TryGetValue<TValue>(string propertyName, out TValue value)
         {
             var property = Properties.FirstOrDefault(p => p.Name == propertyName);
@@ -174,9 +202,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Gets the value of the property just like using the indexed property getter but
         ///     typed to the type of the generic parameter.
         /// </summary>
-        /// <typeparam name="TValue"> The type of the property. </typeparam>
-        /// <param name="property"> The property. </param>
-        /// <returns> The value of the property. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TValue">The type of the property.</typeparam>
+        /// <param name="property">The property.</param>
+        /// <returns>The value of the property.</returns>
         public abstract TValue GetValue<TValue>(IProperty property);
 
         #region Hidden System.Object members
@@ -184,7 +215,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -192,8 +223,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj)
             => base.Equals(obj);
@@ -201,7 +232,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
             => base.GetHashCode();

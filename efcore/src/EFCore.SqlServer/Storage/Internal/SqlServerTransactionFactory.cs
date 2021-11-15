@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 {
@@ -20,16 +19,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// <summary>
         ///     Initializes a new instance of the <see cref="RelationalTransactionFactory" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public SqlServerTransactionFactory(RelationalTransactionFactoryDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalTransactionFactoryDependencies Dependencies { get; }
 

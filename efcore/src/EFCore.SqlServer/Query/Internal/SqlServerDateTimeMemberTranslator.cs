@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -46,9 +45,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             ISqlExpressionFactory sqlExpressionFactory,
             IRelationalTypeMappingSource typeMappingSource)
         {
-            Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
-            Check.NotNull(typeMappingSource, nameof(typeMappingSource));
-
             _sqlExpressionFactory = sqlExpressionFactory;
             _typeMappingSource = typeMappingSource;
         }
@@ -65,10 +61,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Type returnType,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(member, nameof(member));
-            Check.NotNull(returnType, nameof(returnType));
-            Check.NotNull(logger, nameof(logger));
-
             var declaringType = member.DeclaringType;
 
             if (declaringType == typeof(DateTime)
@@ -124,7 +116,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             returnType);
 
                         return declaringType == typeof(DateTime)
-                            ? (SqlExpression)serverTranslation
+                            ? serverTranslation
                             : _sqlExpressionFactory.Convert(serverTranslation, returnType);
 
                     case nameof(DateTime.Today):

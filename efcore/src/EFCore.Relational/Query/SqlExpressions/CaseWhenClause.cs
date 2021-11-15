@@ -1,8 +1,7 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -20,13 +19,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="CaseWhenClause" /> class.
         /// </summary>
-        /// <param name="test"> A value to compare with <see cref="CaseExpression.Operand" /> or condition to evaluate. </param>
-        /// <param name="result"> A value to return if test succeeds. </param>
+        /// <param name="test">A value to compare with <see cref="CaseExpression.Operand" /> or condition to evaluate.</param>
+        /// <param name="result">A value to return if test succeeds.</param>
         public CaseWhenClause(SqlExpression test, SqlExpression result)
         {
-            Check.NotNull(test, nameof(test));
-            Check.NotNull(result, nameof(result));
-
             Test = test;
             Result = result;
         }

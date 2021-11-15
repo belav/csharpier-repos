@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -64,7 +64,7 @@ LEFT JOIN (
     LEFT JOIN [Eagle] AS [e] ON [a].[Species] = [e].[Species]
     LEFT JOIN [Kiwi] AS [k] ON [a].[Species] = [k].[Species]
 ) AS [t] ON [c].[Id] = [t].[CountryId]
-ORDER BY [c].[Name], [c].[Id], [t].[Species]");
+ORDER BY [c].[Name], [c].[Id]");
         }
 
         public override async Task Can_include_prey(bool async)
@@ -89,7 +89,7 @@ LEFT JOIN (
     LEFT JOIN [Eagle] AS [e0] ON [a0].[Species] = [e0].[Species]
     LEFT JOIN [Kiwi] AS [k] ON [a0].[Species] = [k].[Species]
 ) AS [t0] ON [t].[Species] = [t0].[EagleId]
-ORDER BY [t].[Species], [t0].[Species]");
+ORDER BY [t].[Species]");
         }
 
         public override void Can_insert_update_delete()
@@ -290,7 +290,11 @@ INNER JOIN [Kiwi] AS [k] ON [a].[Species] = [k].[Species]");
         {
             await base.Can_use_backwards_of_type_animal(async);
 
-            AssertSql(" ");
+            AssertSql(
+                @"SELECT [a].[Species], [a].[CountryId], [a].[Name], [b].[EagleId], [b].[IsFlightless], [k].[FoundOn]
+FROM [Animals] AS [a]
+INNER JOIN [Birds] AS [b] ON [a].[Species] = [b].[Species]
+INNER JOIN [Kiwi] AS [k] ON [a].[Species] = [k].[Species]");
         }
 
         public override async Task Can_use_is_kiwi(bool async)

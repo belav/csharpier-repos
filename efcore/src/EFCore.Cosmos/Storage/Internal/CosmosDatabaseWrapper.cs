@@ -1,10 +1,9 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
@@ -17,26 +16,18 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
+using Database = Microsoft.EntityFrameworkCore.Storage.Database;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class CosmosDatabaseWrapper : EntityFrameworkCore.Storage.Database
+    public class CosmosDatabaseWrapper : Database
     {
         private readonly Dictionary<IEntityType, DocumentSource> _documentCollections = new();
 
@@ -111,9 +102,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         rowsAffected++;
                     }
                 }
-                catch (CosmosException ex)
+                catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
                 {
-                    throw ThrowUpdateException(ex, entry);
+                    throw WrapUpdateException(ex, entry);
                 }
             }
 
@@ -175,9 +166,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         rowsAffected++;
                     }
                 }
-                catch (CosmosException ex)
+                catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
                 {
-                    throw ThrowUpdateException(ex, entry);
+                    throw WrapUpdateException(ex, entry);
                 }
             }
 
@@ -378,25 +369,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         }
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-        private Exception ThrowUpdateException(CosmosException exception, IUpdateEntry entry)
+        private Exception WrapUpdateException(Exception exception, IUpdateEntry entry)
         {
             var documentSource = GetDocumentSource(entry.EntityType);
             var id = documentSource.GetId(entry.SharedIdentityEntry ?? entry);
-            throw exception.StatusCode switch
-            {
-                HttpStatusCode.PreconditionFailed =>
-                    new DbUpdateConcurrencyException(CosmosStrings.UpdateConflict(id), exception, new[] { entry }),
-                HttpStatusCode.Conflict =>
-                    new DbUpdateException(CosmosStrings.UpdateConflict(id), exception, new[] { entry }),
-                _ => Rethrow(exception),
-            };
-        }
 
-        private static Exception Rethrow(Exception ex)
-        {
-            // Re-throw an exception, preserving the original stack and details, without being in the original "catch" block.
-            ExceptionDispatchInfo.Capture(ex).Throw();
-            return ex;
+            return exception switch
+            {
+                CosmosException { StatusCode: HttpStatusCode.PreconditionFailed }
+                    => new DbUpdateConcurrencyException(CosmosStrings.UpdateConflict(id), exception, new[] { entry }),
+                CosmosException { StatusCode: HttpStatusCode.Conflict }
+                    => new DbUpdateException(CosmosStrings.UpdateConflict(id), exception, new[] { entry }),
+                _ => new DbUpdateException(CosmosStrings.UpdateStoreException(id), exception, new[] { entry })
+            };
         }
     }
 }

@@ -1,7 +1,6 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// <summary>
     ///     Represents a primary or alternate key on an entity type.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IReadOnlyKey : IReadOnlyAnnotatable
     {
         /// <summary>
@@ -27,22 +29,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IReadOnlyEntityType DeclaringEntityType { get; }
 
         /// <summary>
-        ///     Returns the type of the key property for simple keys, or an object array for composite keys.
-        /// </summary>
-        /// <returns> The key type. </returns>
-        Type GetKeyType()
-            => Properties.Count > 1 ? typeof(object[]) : Properties.First().ClrType;
-
-        /// <summary>
         ///     Gets all foreign keys that target a given primary or alternate key.
         /// </summary>
-        /// <returns> The foreign keys that reference the given key. </returns>
+        /// <returns>The foreign keys that reference the given key.</returns>
         IEnumerable<IReadOnlyForeignKey> GetReferencingForeignKeys();
 
         /// <summary>
         ///     Returns a value indicating whether the key is the primary key.
         /// </summary>
-        /// <returns> <see langword="true" /> if the key is the primary key. </returns>
+        /// <returns><see langword="true" /> if the key is the primary key.</returns>
         bool IsPrimaryKey()
             => this == DeclaringEntityType.FindPrimaryKey();
 
@@ -55,9 +50,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -74,7 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             builder.AppendJoin(
                 ", ", Properties.Select(
                     p => singleLine
-                        ? p.DeclaringEntityType.DisplayName() + "." + p.Name
+                        ? p.DeclaringEntityType.DisplayName(omitSharedType: true) + "." + p.Name
                         : p.Name));
 
             if (IsPrimaryKey())

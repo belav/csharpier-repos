@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.DotNet.Cli.CommandLine
 {
@@ -35,7 +34,7 @@ namespace Microsoft.DotNet.Cli.CommandLine
             Commands = new List<CommandLineApplication>();
             RemainingArguments = new List<string>();
             ApplicationArguments = new List<string>();
-            Invoke = (args) => 0;
+            Invoke = args => 0;
         }
 
         public CommandLineApplication? Parent { get; set; }
@@ -63,7 +62,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
             => Command(name, _ => { }, throwOnUnexpectedArg);
 
         public CommandLineApplication Command(
-            string name, Action<CommandLineApplication> configuration,
+            string name,
+            Action<CommandLineApplication> configuration,
             bool throwOnUnexpectedArg = true)
         {
             var command = new CommandLineApplication(throwOnUnexpectedArg) { Name = name, Parent = this };
@@ -91,7 +91,10 @@ namespace Microsoft.DotNet.Cli.CommandLine
             var lastArg = Arguments.LastOrDefault();
             if (lastArg?.MultipleValues == true)
             {
-                throw new InvalidOperationException(Resources.LastArgumentHasMultipleValues(lastArg.Name));
+                var message = string.Format(
+                    "The last argument '{0}' accepts multiple values. No more argument can be added.",
+                    lastArg.Name);
+                throw new InvalidOperationException(message);
             }
 
             var argument = new CommandArgument { Name = name, Description = description, MultipleValues = multipleValues };
@@ -100,9 +103,11 @@ namespace Microsoft.DotNet.Cli.CommandLine
             return argument;
         }
 
-        public void OnExecute(Func<string[], int> invoke) => Invoke = invoke;
+        public void OnExecute(Func<string[], int> invoke)
+            => Invoke = invoke;
 
-        public void OnExecute(Func<string[], Task<int>> invoke) => Invoke = (args) => invoke(args).Result;
+        public void OnExecute(Func<string[], Task<int>> invoke)
+            => Invoke = args => invoke(args).Result;
 
         public int Execute(params string[] args)
         {
@@ -234,7 +239,9 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     if (!option.TryParse(optionComponents[1]))
                     {
                         command.ShowHint();
-                        throw new CommandParsingException(command, Resources.UnexpectedOptionValue(optionComponents[1], optionName));
+                        throw new CommandParsingException(
+                            command,
+                            $"Unexpected value '{optionComponents[1]}' for option '{optionName}'");
                     }
                 }
                 else
@@ -252,7 +259,7 @@ namespace Microsoft.DotNet.Cli.CommandLine
                         if (!option.TryParse(arg))
                         {
                             command.ShowHint();
-                            throw new CommandParsingException(command, Resources.UnexpectedOptionValue(arg, optionName));
+                            throw new CommandParsingException(command, $"Unexpected value '{arg}' for option '{optionName}'");
                         }
                     }
                 }
@@ -333,11 +340,11 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     && cmd.Arguments.Count > 0)
                 {
                     var args = string.Join(" ", cmd.Arguments.Select(arg => arg.Name));
-                    headerBuilder.Insert(usagePrefixLength, string.Format(" {0} {1}", cmd.Name, args));
+                    headerBuilder.Insert(usagePrefixLength, $" {cmd.Name} {args}");
                 }
                 else
                 {
-                    headerBuilder.Insert(usagePrefixLength, string.Format(" {0}", cmd.Name));
+                    headerBuilder.Insert(usagePrefixLength, $" {cmd.Name}");
                 }
             }
 
@@ -485,7 +492,7 @@ namespace Microsoft.DotNet.Cli.CommandLine
         }
 
         public string? GetFullNameAndVersion()
-            => ShortVersionGetter == null ? FullName : string.Format("{0} {1}", FullName, ShortVersionGetter());
+            => ShortVersionGetter == null ? FullName : $"{FullName} {ShortVersionGetter()}";
 
         public void ShowRootCommandFullNameAndVersion()
         {
@@ -537,7 +544,7 @@ namespace Microsoft.DotNet.Cli.CommandLine
             if (command._throwOnUnexpectedArg)
             {
                 command.ShowHint();
-                throw new CommandParsingException(command, Resources.UnexpectedArgument(argTypeName, args[index]));
+                throw new CommandParsingException(command, $"Unrecognized {argTypeName} '{args[index]}'");
             }
 
             command.RemainingArguments.Add(args[index]);
@@ -585,7 +592,7 @@ namespace Microsoft.DotNet.Cli.CommandLine
 
             if (!File.Exists(fileName))
             {
-                throw new InvalidOperationException(Resources.ResponseFileMissing(fileName));
+                throw new InvalidOperationException($"Response file '{fileName}' doesn't exist.");
             }
 
             return File.ReadLines(fileName);
@@ -595,13 +602,17 @@ namespace Microsoft.DotNet.Cli.CommandLine
         {
             private readonly IEnumerator<CommandArgument> _enumerator;
 
-            public CommandArgumentEnumerator(IEnumerator<CommandArgument> enumerator) => _enumerator = enumerator;
+            public CommandArgumentEnumerator(IEnumerator<CommandArgument> enumerator)
+                => _enumerator = enumerator;
 
-            public CommandArgument Current => _enumerator.Current;
+            public CommandArgument Current
+                => _enumerator.Current;
 
-            object IEnumerator.Current => Current;
+            object IEnumerator.Current
+                => Current;
 
-            public void Dispose() => _enumerator.Dispose();
+            public void Dispose()
+                => _enumerator.Dispose();
 
             public bool MoveNext()
             {
@@ -615,7 +626,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
                 return true;
             }
 
-            public void Reset() => _enumerator.Reset();
+            public void Reset()
+                => _enumerator.Reset();
         }
     }
 }

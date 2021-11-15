@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage.Internal
 {
@@ -25,8 +24,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         protected RelationalParameterBase(string invariantName)
         {
-            Check.NotEmpty(invariantName, nameof(invariantName));
-
             InvariantName = invariantName;
         }
 
@@ -54,9 +51,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public virtual void AddDbParameter(DbCommand command, IReadOnlyDictionary<string, object?> parameterValues)
         {
-            Check.NotNull(command, nameof(command));
-            Check.NotNull(parameterValues, nameof(parameterValues));
-
             if (parameterValues.TryGetValue(InvariantName, out var parameterValue))
             {
                 AddDbParameter(command, parameterValue);

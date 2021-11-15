@@ -1,10 +1,9 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Builders.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
 
@@ -13,6 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     /// <summary>
     ///     Provides a simple API for configuring a <see cref="IMutableDbFunction" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+    /// </remarks>
     public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunctionBuilder>
     {
         /// <summary>
@@ -24,8 +26,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         [EntityFrameworkInternal]
         protected DbFunctionBuilderBase(IMutableDbFunction function)
         {
-            Check.NotNull(function, nameof(function));
-
             Builder = ((DbFunction)function).Builder;
         }
 
@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <inheritdoc />
         IConventionDbFunctionBuilder IInfrastructure<IConventionDbFunctionBuilder>.Instance
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>
@@ -53,10 +54,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Sets the name of the database function.
         /// </summary>
-        /// <param name="name"> The name of the function in the database. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the function in the database.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual DbFunctionBuilderBase HasName(string name)
         {
+            Check.NullButNotEmpty(name, nameof(name));
+
             Builder.HasName(name, ConfigurationSource.Explicit);
 
             return this;
@@ -65,8 +71,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Sets the schema of the database function.
         /// </summary>
-        /// <param name="schema"> The schema of the function in the database. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="schema">The schema of the function in the database.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual DbFunctionBuilderBase HasSchema(string? schema)
         {
             Builder.HasSchema(schema, ConfigurationSource.Explicit);
@@ -77,8 +86,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Marks whether the database function is built-in.
         /// </summary>
-        /// <param name="builtIn"> The value indicating whether the database function is built-in. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="builtIn">The value indicating whether the database function is built-in.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual DbFunctionBuilderBase IsBuiltIn(bool builtIn = true)
         {
             Builder.IsBuiltIn(builtIn, ConfigurationSource.Explicit);
@@ -90,8 +102,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     Returns an object that can be used to configure a parameter with the given name.
         ///     If no parameter with the given name exists, then a new parameter will be added.
         /// </summary>
-        /// <param name="name"> The parameter name. </param>
-        /// <returns> The builder to use for further parameter configuration. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="name">The parameter name.</param>
+        /// <returns>The builder to use for further parameter configuration.</returns>
         public virtual DbFunctionParameterBuilder HasParameter(string name)
             => new(Builder.HasParameter(name, ConfigurationSource.Explicit).Metadata);
 
@@ -100,7 +115,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -108,8 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
         public override bool Equals(object? obj)
@@ -118,7 +133,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
         public override int GetHashCode()

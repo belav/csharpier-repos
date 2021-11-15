@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -19,18 +19,19 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public class QueryRootExpression : Expression, IPrintableExpression
     {
         /// <summary>
         ///     Creates a new instance of the <see cref="QueryRootExpression" /> class with associated query provider.
         /// </summary>
-        /// <param name="asyncQueryProvider"> The query provider associated with this query root. </param>
-        /// <param name="entityType"> The entity type this query root represents. </param>
+        /// <param name="asyncQueryProvider">The query provider associated with this query root.</param>
+        /// <param name="entityType">The entity type this query root represents.</param>
         public QueryRootExpression(IAsyncQueryProvider asyncQueryProvider, IEntityType entityType)
         {
-            Check.NotNull(asyncQueryProvider, nameof(asyncQueryProvider));
-            Check.NotNull(entityType, nameof(entityType));
-
             QueryProvider = asyncQueryProvider;
             EntityType = entityType;
             Type = typeof(IQueryable<>).MakeGenericType(entityType.ClrType);
@@ -39,11 +40,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="QueryRootExpression" /> class without any query provider.
         /// </summary>
-        /// <param name="entityType"> The entity type this query root represents. </param>
+        /// <param name="entityType">The entity type this query root represents.</param>
         public QueryRootExpression(IEntityType entityType)
         {
-            Check.NotNull(entityType, nameof(entityType));
-
             EntityType = entityType;
             QueryProvider = null;
             Type = typeof(IQueryable<>).MakeGenericType(entityType.ClrType);
@@ -62,9 +61,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Detaches the associated query provider from this query root expression.
         /// </summary>
-        /// <returns> A new query root expression without query provider. </returns>
+        /// <returns>A new query root expression without query provider.</returns>
         public virtual Expression DetachQueryProvider()
             => new QueryRootExpression(EntityType);
+
+        /// <summary>
+        ///     Updates entity type associated with this query root with equivalent optimized version.
+        /// </summary>
+        /// <param name="entityType">The entity type to replace with.</param>
+        /// <returns>New query root containing given entity type.</returns>
+        public virtual QueryRootExpression UpdateEntityType(IEntityType entityType)
+            => entityType.ClrType != EntityType.ClrType
+                || entityType.Name != EntityType.Name
+                    ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
+                    : new QueryRootExpression(entityType);
 
         /// <inheritdoc />
         public override ExpressionType NodeType
@@ -84,11 +94,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
         /// </summary>
-        /// <param name="expressionPrinter"> The expression printer to use. </param>
+        /// <param name="expressionPrinter">The expression printer to use.</param>
         protected virtual void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             if (EntityType.HasSharedClrType)
             {
                 expressionPrinter.Append($"DbSet<{EntityType.ClrType.ShortDisplayName()}>(\"{EntityType.Name}\")");

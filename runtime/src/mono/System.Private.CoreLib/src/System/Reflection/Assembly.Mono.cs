@@ -6,14 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Loader;
 using System.Threading;
+using System.Diagnostics.Tracing;
 
 namespace System.Reflection
 {
     [StructLayout(LayoutKind.Sequential)]
     public partial class Assembly
     {
-        internal bool IsRuntimeImplemented() => this is RuntimeAssembly;
-
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
         public static Assembly? LoadWithPartialName(string partialName)
         {
@@ -85,6 +84,11 @@ namespace System.Reflection
             if (assembly == null)
                 throw new FileNotFoundException(null, assemblyRef.Name);
             return assembly;
+        }
+
+        internal static uint GetAssemblyCount()
+        {
+            return (uint)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.ASSEMBLY_COUNT);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

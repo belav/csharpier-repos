@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -63,7 +63,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             => unicode
                 ? (fixedLength
                     ? System.Data.DbType.StringFixedLength
-                    : (DbType?)null)
+                    : System.Data.DbType.String)
                 : (fixedLength
                     ? System.Data.DbType.AnsiStringFixedLength
                     : System.Data.DbType.AnsiString);
@@ -94,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
-        /// <returns> The newly created mapping. </returns>
+        /// <param name="parameters">The parameters for this mapping.</param>
+        /// <returns>The newly created mapping.</returns>
         protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
             => new SqlServerStringTypeMapping(parameters, _sqlDbType);
 
@@ -173,6 +173,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var lastConcatStartPoint = 0;
             var concatCount = 1;
             var concatStartList = new List<int>();
+            var castApplied = false;
             for (i = 0; i < stringValue.Length; i++)
             {
                 var lineFeed = stringValue[i] == '\n';
@@ -211,11 +212,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
                         if (IsUnicode)
                         {
-                            builder.Append('N');
+                            builder.Append('n');
                         }
 
                         builder
-                            .Append("CHAR(")
+                            .Append("char(")
                             .Append(lineFeed ? "10" : "13")
                             .Append(')');
                     }
@@ -230,14 +231,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                                 builder.Append('N');
                             }
 
-                            builder.Append("'");
+                            builder.Append('\'');
                             openApostrophe = true;
                         }
+
                         builder.Append("''");
                     }
+
                     start = i + 1;
                 }
             }
+
             length = i - start;
             if (length != 0)
             {
@@ -264,8 +268,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
             for (var j = concatStartList.Count - 1; j >= 0; j--)
             {
-                builder.Insert(concatStartList[j], "CONCAT(")
-                    .Append(')');
+                if (castApplied && j == 0)
+                {
+                    builder.Insert(concatStartList[j], "CAST(");
+                }
+
+                builder.Insert(concatStartList[j], "CONCAT(");
+                builder.Append(')');
             }
 
             if (builder.Length == 0)
@@ -284,6 +293,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             {
                 if (builder.Length != 0)
                 {
+                    if (!castApplied)
+                    {
+                        builder.Append(" AS ");
+                        if (IsUnicode)
+                        {
+                            builder.Append("n");
+                        }
+
+                        builder.Append("varchar(max))");
+                        castApplied = true;
+                    }
+
                     builder.Append(", ");
                     concatCount++;
 

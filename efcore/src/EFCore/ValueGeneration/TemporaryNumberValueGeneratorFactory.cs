@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -9,24 +9,26 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 namespace Microsoft.EntityFrameworkCore.ValueGeneration
 {
     /// <summary>
-    ///     <para>
-    ///         Factory for creation of temporary integer value generators appropriate
-    ///         for the numeric type of the property.
-    ///     </para>
-    ///     <para>
-    ///         Types supported are: <see cref="int" />, <see cref="long" />, <see cref="short" />, <see cref="byte" />,
-    ///         <see cref="char" />, <see cref="ulong" />, <see cref="uint" />, <see cref="ushort" />, <see cref="sbyte" />,
-    ///         <see cref="decimal" />, <see cref="float" />, <see cref="double" />
-    ///     </para>
+    ///     Factory for creation of temporary integer value generators appropriate
+    ///     for the numeric type of the property.
     /// </summary>
+    /// <remarks>
+    ///     Types supported are: <see cref="int" />, <see cref="long" />, <see cref="short" />, <see cref="byte" />,
+    ///     <see cref="char" />, <see cref="ulong" />, <see cref="uint" />, <see cref="ushort" />, <see cref="sbyte" />,
+    ///     <see cref="decimal" />, <see cref="float" />, <see cref="double" />
+    /// </remarks>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information.
+    /// </remarks>
     public class TemporaryNumberValueGeneratorFactory : ValueGeneratorFactory
     {
         /// <summary>
         ///     Creates a new value generator.
         /// </summary>
-        /// <param name="property"> The property to create the value generator for. </param>
-        /// <returns> The newly created value generator. </returns>
-        public override ValueGenerator Create(IProperty property)
+        /// <param name="property">The property to create the value generator for.</param>
+        /// <param name="entityType">The entity type for which the value generator will be used.</param>
+        /// <returns>The newly created value generator.</returns>
+        public override ValueGenerator Create(IProperty property, IEntityType entityType)
         {
             var type = property.ClrType.UnwrapNullableType().UnwrapEnumType();
 

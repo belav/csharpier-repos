@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -381,11 +381,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Owned_entity_without_owner_does_not_throw_for_identity_resolution(bool async)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public virtual async Task Owned_entity_without_owner_does_not_throw_for_identity_resolution(bool async, bool useAsTracking)
         {
             using var context = CreateContext();
-            var query = context.Set<OwnedPerson>().Select(e => e.PersonAddress).AsNoTrackingWithIdentityResolution();
+            var query = context.Set<OwnedPerson>().Select(e => e.PersonAddress);
+            
+            query = useAsTracking
+                ? query.AsTracking(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                : query.AsNoTrackingWithIdentityResolution();
 
             var result = async
                 ? await query.ToListAsync()
@@ -774,11 +781,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(IsAsyncData))]
-        public virtual async Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(bool async)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public virtual async Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
+            bool async, bool useAsTracking)
         {
             using var context = CreateContext();
-            var query = context.Set<OwnedPerson>().SelectMany(op => op.Orders).Include(o => o.Client).AsNoTrackingWithIdentityResolution();
+            var includableQuery = context.Set<OwnedPerson>().SelectMany(op => op.Orders).Include(o => o.Client);
+            
+            var query = useAsTracking
+                ? includableQuery.AsTracking(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                : includableQuery.AsNoTrackingWithIdentityResolution();
 
             var result = async
                 ? await query.ToListAsync()
@@ -880,6 +895,37 @@ namespace Microsoft.EntityFrameworkCore.Query
                     AssertEqual(e.t, a.t);
                     AssertCollection(e.Planets, a.Planets);
                 });
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual Task Filter_on_indexer_using_closure(bool async)
+        {
+            var zipCode = "ZipCode";
+
+            return AssertQuery(
+                async,
+                ss => ss.Set<OwnedPerson>().Where(p => (int)p.PersonAddress[zipCode] == 38654));
+        }
+
+        [ConditionalTheory]
+        [MemberData(nameof(IsAsyncData))]
+        public virtual async Task Filter_on_indexer_using_function_argument(bool async)
+        {
+            var zipCode = "ZipCode";
+
+            Func<bool, string, Task> myFunc = async (b, n) =>
+            {
+                using var ctx = CreateContext();
+
+                var query = async
+                    ? await ctx.Set<OwnedPerson>().Where(p => (int)p.PersonAddress[n] == 38654).ToListAsync()
+                    : ctx.Set<OwnedPerson>().Where(p => (int)p.PersonAddress[n] == 38654).ToList();
+
+                Assert.Single(query);
+            };
+
+            await myFunc(async, zipCode);
         }
 
         protected virtual DbContext CreateContext()
@@ -1064,11 +1110,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 Assert.Equal(ee.Id, aa.Id);
                                 Assert.Equal(ee.Name, aa.Name);
                                 Assert.Equal(ee.Composition.Count, aa.Composition.Count);
-                                for (var i = 0; i < ee.Composition.Count; i++)
+                                foreach (var (eec, aac) in Enumerable.Zip(
+                                    ee.Composition.OrderBy(eec => eec.Id),
+                                    aa.Composition.OrderBy(aac => aac.Id)))
                                 {
-                                    Assert.Equal(ee.Composition[i].Id, aa.Composition[i].Id);
-                                    Assert.Equal(ee.Composition[i].Name, aa.Composition[i].Name);
-                                    Assert.Equal(ee.Composition[i].StarId, aa.Composition[i].StarId);
+                                    Assert.Equal(eec.Id, aac.Id);
+                                    Assert.Equal(eec.Name, aac.Name);
+                                    Assert.Equal(eec.StarId, aac.StarId);
                                 }
                             }
                         }

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -19,9 +19,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the entity types matching the given type.
         /// </summary>
-        /// <param name="model"> The model to find the entity type in. </param>
-        /// <param name="type"> The type of the entity type to find. </param>
-        /// <returns> The entity types found. </returns>
+        /// <param name="model">The model to find the entity type in.</param>
+        /// <param name="type">The type of the entity type to find.</param>
+        /// <returns>The entity types found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use IConventionEntityType.FindEntityTypes")]
         public static IEnumerable<IConventionEntityType> GetEntityTypes(this IConventionModel model, Type type)
@@ -30,9 +30,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the entity types matching the given name.
         /// </summary>
-        /// <param name="model"> The model to find the entity type in. </param>
-        /// <param name="name"> The name of the entity type to find. </param>
-        /// <returns> The entity types found. </returns>
+        /// <param name="model">The model to find the entity type in.</param>
+        /// <param name="name">The name of the entity type to find.</param>
+        /// <returns>The entity types found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use FindEntityTypes(Type) or FindEntityType(string)")]
         public static IReadOnlyCollection<IConventionEntityType> GetEntityTypes(

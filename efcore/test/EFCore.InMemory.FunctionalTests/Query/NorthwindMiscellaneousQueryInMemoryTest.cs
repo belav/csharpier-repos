@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -64,10 +64,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact(Skip = "Issue#17050")]
         public override void Client_code_using_instance_method_throws()
             => base.Client_code_using_instance_method_throws();
-
-        [ConditionalTheory(Skip = "Issue#24291")]
-        public override Task Select_nested_collection_with_distinct(bool async)
-            => base.Select_nested_collection_with_distinct(async);
 
         public override async Task Max_on_empty_sequence_throws(bool async)
         {

@@ -1,9 +1,10 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -121,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore
                 var principal = context.Add(
                         new NullablePrincipal
                         {
-                            Id = 1, Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
+                            Id = 1,
+                            Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
                         })
                     .Entity;
 
@@ -572,6 +574,31 @@ namespace Microsoft.EntityFrameworkCore
                 () => context.Set<EntityWithValueWrapper>().SingleOrDefault(e => e.Wrapper.Value == "foo"));
         }
 
+        [ConditionalFact]
+        public virtual void Value_conversion_on_enum_collection_contains()
+        {
+            using var context = CreateContext();
+            var group = MessageGroup.SomeGroup;
+            var query = context.Set<User23059>()
+                .Where(x => !x.IsSoftDeleted && (x.MessageGroups.Contains(group) || x.MessageGroups.Contains(MessageGroup.All)))
+                .ToList();
+
+            Assert.Single(query);
+        }
+
+        protected class User23059
+        {
+            public int Id { get; set; }
+            public bool IsSoftDeleted { get; set; }
+            public List<MessageGroup> MessageGroups { get; set; }
+        }
+
+        protected enum MessageGroup
+        {
+            All,
+            SomeGroup
+        }
+
         protected class Blog
         {
             private bool _indexerVisible;
@@ -739,6 +766,41 @@ namespace Microsoft.EntityFrameworkCore
 
             public override int GetHashCode()
                 => Id.GetHashCode();
+        }
+
+        [ConditionalFact]
+        public virtual void Composition_over_collection_of_complex_mapped_as_scalar()
+        {
+            using var context = CreateContext();
+            Assert.Equal(
+                CoreStrings.TranslationFailed(
+                    @"l => new {     H = l.Height,     W = l.Width }"),
+                Assert.Throws<InvalidOperationException>(
+                        () => context.Set<Dashboard>().AsNoTracking().Select(d => new
+                        {
+                            Id = d.Id,
+                            Name = d.Name,
+                            Layouts = d.Layouts.Select(l => new { H = l.Height, W = l.Width }).ToList()
+                        }).ToList())
+                    .Message.Replace("\r", "").Replace("\n", ""));
+        }
+
+        public class Dashboard
+        {
+            public Dashboard()
+            {
+                Layouts = new List<Layout>();
+            }
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public List<Layout> Layouts { get; set; }
+        }
+
+        public class Layout
+        {
+            public int Width { get; set; }
+            public int Height { get; set; }
         }
 
         public abstract class CustomConvertersFixtureBase : BuiltInDataTypesFixtureBase
@@ -1121,7 +1183,7 @@ namespace Microsoft.EntityFrameworkCore
                             new ValueComparer<IDictionary<string, string>>(
                                 (v1, v2) => v1.SequenceEqual(v2),
                                 v => v.GetHashCode(),
-                                v => (IDictionary<string, string>)new Dictionary<string, string>(v)));
+                                v => new Dictionary<string, string>(v)));
                     });
 
                 var urlConverter = new UrlSchemeRemover();
@@ -1230,6 +1292,28 @@ namespace Microsoft.EntityFrameworkCore
 
                         b.HasData(new Book(new BookId(1)) { Value = "Book1" });
                     });
+
+                modelBuilder.Entity<User23059>(
+                    b =>
+                    {
+                        b.Property(e => e.MessageGroups).HasConversion(
+                            v => string.Join(',', v),
+                            v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => Enum.Parse<MessageGroup>(x)).ToList(),
+                            new ValueComparer<List<MessageGroup>>(favorStructuralComparisons: true));
+
+                        b.HasData(
+                            new User23059 { Id = 1, IsSoftDeleted = true, MessageGroups = new List<MessageGroup> { MessageGroup.SomeGroup } },
+                            new User23059 { Id = 2, IsSoftDeleted = false, MessageGroups = new List<MessageGroup> { MessageGroup.SomeGroup } });
+                    });
+
+                modelBuilder.Entity<Dashboard>()
+                    .Property(e => e.Layouts).HasConversion(
+                        v => LayoutsToStringSerializer.Serialize(v),
+                        v => LayoutsToStringSerializer.Deserialize(v),
+                        new ValueComparer<List<Layout>>(
+                            (v1, v2) => v1.SequenceEqual(v2),
+                            v => v.GetHashCode(),
+                            v => new List<Layout>(v)));
             }
 
             private static class StringToDictionarySerializer
@@ -1250,6 +1334,30 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     return dictionary;
+                }
+            }
+            private static class LayoutsToStringSerializer
+            {
+                public static string Serialize(List<Layout> layouts)
+                {
+                    return string.Join(Environment.NewLine, layouts.Select(layout => $"({layout.Height},{layout.Width})"));
+                }
+
+                public static List<Layout> Deserialize(string s)
+                {
+                    var list = new List<Layout>();
+                    var keyValuePairs = s.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var keyValuePair in keyValuePairs)
+                    {
+                        var parts = keyValuePair[1..^1].Split(",");
+                        list.Add(new Layout
+                        {
+                            Height = int.Parse(parts[0]),
+                            Width = int.Parse(parts[1]),
+                        });
+                    }
+
+                    return list;
                 }
             }
 

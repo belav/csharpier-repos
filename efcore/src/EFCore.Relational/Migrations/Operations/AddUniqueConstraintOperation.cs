@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
     /// <summary>
     ///     A <see cref="MigrationOperation" /> to add a new unique constraint.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    /// </remarks>
     [DebuggerDisplay("ALTER TABLE {Table} ADD CONSTRAINT {Name} UNIQUE")]
     public class AddUniqueConstraintOperation : MigrationOperation, ITableMigrationOperation
     {
@@ -37,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         /// <summary>
         ///     Creates a new <see cref="AddUniqueConstraintOperation" /> from the specified unique constraint.
         /// </summary>
-        /// <param name="uniqueConstraint"> The unique constraint. </param>
-        /// <returns> The operation. </returns>
+        /// <param name="uniqueConstraint">The unique constraint.</param>
+        /// <returns>The operation.</returns>
         public static AddUniqueConstraintOperation CreateFrom(IUniqueConstraint uniqueConstraint)
         {
             Check.NotNull(uniqueConstraint, nameof(uniqueConstraint));

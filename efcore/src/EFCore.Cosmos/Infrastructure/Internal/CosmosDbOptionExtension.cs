@@ -1,16 +1,16 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
@@ -40,6 +40,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         private int? _maxRequestsPerTcpConnection;
         private bool? _enableContentResponseOnWrite;
         private DbContextOptionsExtensionInfo? _info;
+        private Func<HttpClient>? _httpClientFactory;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -74,6 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
             _gatewayModeMaxConnectionLimit = copyFrom._gatewayModeMaxConnectionLimit;
             _maxTcpConnectionsPerEndpoint = copyFrom._maxTcpConnectionsPerEndpoint;
             _maxRequestsPerTcpConnection = copyFrom._maxRequestsPerTcpConnection;
+            _httpClientFactory = copyFrom._httpClientFactory;
         }
 
         /// <summary>
@@ -476,14 +478,38 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
         ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
         /// </summary>
-        /// <param name="executionStrategyFactory"> The option to change. </param>
-        /// <returns> A new instance with the option changed. </returns>
+        /// <param name="executionStrategyFactory">The option to change.</param>
+        /// <returns>A new instance with the option changed.</returns>
         public virtual CosmosOptionsExtension WithExecutionStrategyFactory(
             Func<ExecutionStrategyDependencies, IExecutionStrategy>? executionStrategyFactory)
         {
             var clone = Clone();
 
             clone._executionStrategyFactory = executionStrategyFactory;
+
+            return clone;
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual Func<HttpClient>? HttpClientFactory
+            => _httpClientFactory;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public virtual CosmosOptionsExtension WithHttpClientFactory(Func<HttpClient>? httpClientFactory)
+        {
+            var clone = Clone();
+
+            clone._httpClientFactory = httpClientFactory;
 
             return clone;
         }
@@ -519,7 +545,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
             private string? _logFragment;
-            private long? _serviceProviderHash;
+            private int? _serviceProviderHash;
 
             public ExtensionInfo(IDbContextOptionsExtension extension)
                 : base(extension)
@@ -532,41 +558,61 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
             public override bool IsDatabaseProvider
                 => true;
 
-            public override long GetServiceProviderHashCode()
+            public override int GetServiceProviderHashCode()
             {
                 if (_serviceProviderHash == null)
                 {
-                    long hashCode;
+                    var hashCode = new HashCode();
+
                     if (!string.IsNullOrEmpty(Extension._connectionString))
                     {
-                        hashCode = Extension._connectionString.GetHashCode();
+                        hashCode.Add(Extension._connectionString);
                     }
                     else
                     {
-                        hashCode = (Extension._accountEndpoint?.GetHashCode() ?? 0);
-                        hashCode = (hashCode * 397) ^ (Extension._accountKey?.GetHashCode() ?? 0);
+                        hashCode.Add(Extension._accountEndpoint);
+                        hashCode.Add(Extension._accountKey);
                     }
 
-                    hashCode = (hashCode * 397) ^ (Extension._region?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 3) ^ (Extension._connectionMode?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 3) ^ (Extension._limitToEndpoint?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 397) ^ (Extension._webProxy?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 397) ^ (Extension._requestTimeout?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 397) ^ (Extension._openTcpConnectionTimeout?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 397) ^ (Extension._idleTcpConnectionTimeout?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 131) ^ (Extension._gatewayModeMaxConnectionLimit?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 397) ^ (Extension._maxTcpConnectionsPerEndpoint?.GetHashCode() ?? 0);
-                    hashCode = (hashCode * 131) ^ (Extension._maxRequestsPerTcpConnection?.GetHashCode() ?? 0);
-                    _serviceProviderHash = hashCode;
+                    hashCode.Add(Extension._region);
+                    hashCode.Add(Extension._connectionMode);
+                    hashCode.Add(Extension._limitToEndpoint);
+                    hashCode.Add(Extension._enableContentResponseOnWrite);
+                    hashCode.Add(Extension._webProxy);
+                    hashCode.Add(Extension._requestTimeout);
+                    hashCode.Add(Extension._openTcpConnectionTimeout);
+                    hashCode.Add(Extension._idleTcpConnectionTimeout);
+                    hashCode.Add(Extension._gatewayModeMaxConnectionLimit);
+                    hashCode.Add(Extension._maxTcpConnectionsPerEndpoint);
+                    hashCode.Add(Extension._maxRequestsPerTcpConnection);
+                    hashCode.Add(Extension._httpClientFactory);
+
+                    _serviceProviderHash = hashCode.ToHashCode();
                 }
 
                 return _serviceProviderHash.Value;
             }
 
+            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+                => other is ExtensionInfo otherInfo
+                    && Extension._connectionString == otherInfo.Extension._connectionString
+                    && Extension._accountEndpoint == otherInfo.Extension._accountEndpoint
+                    && Extension._accountKey == otherInfo.Extension._accountKey
+                    && Extension._region == otherInfo.Extension._region
+                    && Extension._connectionMode == otherInfo.Extension._connectionMode
+                    && Extension._limitToEndpoint == otherInfo.Extension._limitToEndpoint
+                    && Extension._enableContentResponseOnWrite == otherInfo.Extension._enableContentResponseOnWrite
+                    && Extension._webProxy == otherInfo.Extension._webProxy
+                    && Extension._requestTimeout == otherInfo.Extension._requestTimeout
+                    && Extension._openTcpConnectionTimeout == otherInfo.Extension._openTcpConnectionTimeout
+                    && Extension._idleTcpConnectionTimeout == otherInfo.Extension._idleTcpConnectionTimeout
+                    && Extension._gatewayModeMaxConnectionLimit == otherInfo.Extension._gatewayModeMaxConnectionLimit
+                    && Extension._maxTcpConnectionsPerEndpoint == otherInfo.Extension._maxTcpConnectionsPerEndpoint
+                    && Extension._maxRequestsPerTcpConnection == otherInfo.Extension._maxRequestsPerTcpConnection
+                    && Extension._httpClientFactory == otherInfo.Extension._httpClientFactory;
+
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
             {
-                Check.NotNull(debugInfo, nameof(debugInfo));
-
                 if (!string.IsNullOrEmpty(Extension._connectionString))
                 {
                     debugInfo["Cosmos:" + nameof(ConnectionString)] =
@@ -576,7 +622,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                 {
                     debugInfo["Cosmos:" + nameof(AccountEndpoint)] =
                         (Extension._accountEndpoint?.GetHashCode() ?? 0L).ToString(CultureInfo.InvariantCulture);
-                    debugInfo["Cosmos:" + nameof(AccountKey)] = (Extension._accountKey?.GetHashCode() ?? 0L).ToString(CultureInfo.InvariantCulture);
+                    debugInfo["Cosmos:" + nameof(AccountKey)] =
+                        (Extension._accountKey?.GetHashCode() ?? 0L).ToString(CultureInfo.InvariantCulture);
                 }
 
                 debugInfo["Cosmos:" + nameof(CosmosDbContextOptionsBuilder.Region)] =

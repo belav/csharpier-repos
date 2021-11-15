@@ -1,12 +1,15 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.SqlServer.Diagnostics.Internal;
+using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
+using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
@@ -20,6 +23,7 @@ namespace Microsoft.EntityFrameworkCore
         public BatchingTest(BatchingTestFixture fixture)
         {
             Fixture = fixture;
+            Fixture.TestSqlLoggerFactory.Clear();
         }
 
         protected BatchingTestFixture Fixture { get; }
@@ -124,6 +128,160 @@ namespace Microsoft.EntityFrameworkCore
                 context => AssertDatabaseState(context, true, expectedBlogs));
         }
 
+        [ConditionalTheory]
+        [InlineData(1)]
+        [InlineData(3)]
+        [InlineData(4)]
+        [InlineData(100)]
+        public void Insertion_order_is_preserved(int maxBatchSize)
+        {
+            var blogId = new Guid();
+
+            TestHelpers.ExecuteWithStrategyInTransaction(
+                () => (BloggingContext)Fixture.CreateContext(maxBatchSize: maxBatchSize),
+                UseTransaction,
+                context =>
+                {
+                    var owner = new Owner();
+                    var blog = new Blog
+                    {
+                        Owner = owner
+                    };
+
+                    for (var i = 0; i < 20; i++)
+                    {
+                        context.Add(new Post { Order = i, Blog = blog });
+                    }
+
+                    context.SaveChanges();
+
+                    blogId = blog.Id;
+                },
+                context =>
+                {
+                    var posts = context.Set<Post>().Where(p => p.BlogId == blogId).OrderBy(p => p.Order);
+                    var lastId = 0;
+                    foreach (var post in posts)
+                    {
+                        Assert.True(post.PostId > lastId, $"Last ID: {lastId}, current ID: {post.PostId}");
+                        lastId = post.PostId;
+                    }
+                });
+        }
+
+        [ConditionalFact]
+        public void Deadlock_on_inserts_and_deletes_with_dependents_is_handled_correctly()
+        {
+            var blogs = new List<Blog>();
+
+            using (var context = CreateContext())
+            {
+                var owner1 = new Owner { Name = "0" };
+                var owner2 = new Owner { Name = "1" };
+                context.Owners.Add(owner1);
+                context.Owners.Add(owner2);
+
+                blogs.Add(new Blog
+                {
+                    Id = Guid.NewGuid(),
+                    Owner = owner1,
+                    Order = 1
+                });
+                blogs.Add(new Blog
+                {
+                    Id = Guid.NewGuid(),
+                    Owner = owner2,
+                    Order = 2
+                });
+                blogs.Add(new Blog
+                {
+                    Id = Guid.NewGuid(),
+                    Owner = owner1,
+                    Order = 3
+                });
+                blogs.Add(new Blog
+                {
+                    Id = Guid.NewGuid(),
+                    Owner = owner2,
+                    Order = 4
+                });
+
+                context.AddRange(blogs);
+
+                context.SaveChanges();
+            }
+
+            for (var i = 0; i < 10; i++)
+            {
+                Parallel.ForEach(blogs, blog =>
+                {
+                    RemoveAndAddPosts(blog);
+                });
+            }
+
+            void RemoveAndAddPosts(Blog blog)
+            {
+                using var context = (BloggingContext)Fixture.CreateContext(useConnectionString: true);
+
+                context.Attach(blog);
+                blog.Posts.Clear();
+
+                blog.Posts.Add(new Post { Comments = { new Comment() } });
+                blog.Posts.Add(new Post { Comments = { new Comment() } });
+                blog.Posts.Add(new Post { Comments = { new Comment() } });
+
+                context.SaveChanges();
+            }
+
+            Fixture.Reseed();
+        }
+
+        [ConditionalFact]
+        public void Deadlock_on_deletes_with_dependents_is_handled_correctly()
+        {
+            var owners = new[] { new Owner { Name = "0" }, new Owner { Name = "1" } };
+            using (var context = CreateContext())
+            {
+                context.Owners.AddRange(owners);
+
+                for (var h = 0; h <= 40; h++)
+                {
+                    var owner = owners[h % 2];
+                    var blog = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner,
+                        Order = h
+                    };
+
+                    for (var i = 0; i <= 40; i++)
+                    {
+                        blog.Posts.Add(new Post { Comments = { new Comment() } });
+                    }
+
+                    context.Add(blog);
+                }
+
+                context.SaveChanges();
+            }
+
+            Parallel.ForEach(owners, owner =>
+            {
+                using var context = (BloggingContext)Fixture.CreateContext(useConnectionString: true);
+
+                context.RemoveRange(context.Blogs.Where(b => b.OwnerId == owner.Id));
+
+                context.SaveChanges();
+            });
+
+            using (var context = CreateContext())
+            {
+                Assert.Empty(context.Blogs);
+            }
+
+            Fixture.Reseed();
+        }
+
         [ConditionalFact]
         public void Inserts_when_database_type_is_different()
         {
@@ -211,6 +369,9 @@ namespace Microsoft.EntityFrameworkCore
         protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
             => facade.UseTransaction(transaction.GetDbTransaction());
 
+        private void AssertSql(params string[] expected)
+            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+
         private class BloggingContext : PoolableDbContext
         {
             public BloggingContext(DbContextOptions options)
@@ -247,6 +408,7 @@ namespace Microsoft.EntityFrameworkCore
             public string OwnerId { get; set; }
             public Owner Owner { get; set; }
             public byte[] Version { get; set; }
+            public ICollection<Post> Posts { get; } = new HashSet<Post>();
         }
 
         private class Owner
@@ -254,6 +416,22 @@ namespace Microsoft.EntityFrameworkCore
             public string Id { get; set; }
             public string Name { get; set; }
             public byte[] Version { get; set; }
+        }
+
+        private class Post
+        {
+            public int PostId { get; set; }
+            public int? Order { get; set; }
+            public Guid BlogId { get; set; }
+            public Blog Blog { get; set; }
+            public ICollection<Comment> Comments { get; } = new HashSet<Comment>();
+        }
+
+        private class Comment
+        {
+            public int CommentId { get; set; }
+            public int PostId { get; set; }
+            public Post Post { get; set; }
         }
 
         public class BatchingTestFixture : SharedStoreFixtureBase<PoolableDbContext>
@@ -280,10 +458,37 @@ ALTER TABLE dbo.Owners
     ALTER COLUMN Name nvarchar(MAX);");
             }
 
-            public DbContext CreateContext(int minBatchSize)
+            public DbContext CreateContext(
+                int? minBatchSize = null,
+                int? maxBatchSize = null,
+                bool useConnectionString = false,
+                bool disableConnectionResiliency = false)
             {
-                var optionsBuilder = new DbContextOptionsBuilder(CreateOptions());
-                new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(minBatchSize);
+                var options = CreateOptions();
+                var optionsBuilder = new DbContextOptionsBuilder(options);
+                if (useConnectionString)
+                {
+                    RelationalOptionsExtension extension = options.FindExtension<SqlServerOptionsExtension>()
+                        ?? new SqlServerOptionsExtension();
+
+                    extension = extension.WithConnection(null).WithConnectionString(((SqlServerTestStore)TestStore).ConnectionString);
+                    ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+                }
+
+                if (minBatchSize.HasValue)
+                {
+                    new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(minBatchSize.Value);
+                }
+
+                if (maxBatchSize.HasValue)
+                {
+                    new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(maxBatchSize.Value);
+                }
+
+                if (disableConnectionResiliency)
+                {
+                    new SqlServerDbContextOptionsBuilder(optionsBuilder).ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+                }
                 return new BloggingContext(optionsBuilder.Options);
             }
         }

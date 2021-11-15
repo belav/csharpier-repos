@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
@@ -32,14 +32,6 @@ namespace Microsoft.EntityFrameworkCore
             modelBuilder.Entity<PointEntity>().Property(e => e.PointZ).HasColumnType("POINTZ");
             modelBuilder.Entity<PointEntity>().Property(e => e.PointM).HasColumnType("POINTM");
             modelBuilder.Entity<PointEntity>().Property(e => e.PointZM).HasColumnType("POINTZM");
-        }
-
-        protected override void Clean(DbContext context)
-        {
-            context.Database.ExecuteSqlRaw("DROP VIEW IF EXISTS vector_layers");
-            context.Database.ExecuteSqlRaw("DROP VIEW IF EXISTS vector_layers_auth");
-            context.Database.ExecuteSqlRaw("DROP VIEW IF EXISTS vector_layers_statistics");
-            context.Database.ExecuteSqlRaw("DROP VIEW IF EXISTS vector_layers_field_infos");
         }
     }
 }

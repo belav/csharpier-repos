@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -169,11 +169,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                         _values = values;
                     }
 
-                    public override RelationalDataReader ExecuteReader(RelationalCommandParameterObject parameterObject)
+                    public override RelationalDataReader ExecuteReader(
+                        RelationalCommandParameterObject parameterObject)
                     {
                         var command = parameterObject.Connection.DbConnection.CreateCommand();
                         command.CommandText = CommandText;
-                        var reader = new BadDataRelationalDataReader(this);
+                        var reader = new BadDataRelationalDataReader();
                         reader.Initialize(
                             new FakeConnection(),
                             command,
@@ -183,16 +184,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return reader;
                     }
 
-                    public override void PopulateFromTemplate(IRelationalCommand templateCommand)
+                    public override void PopulateFrom(IRelationalCommandTemplate commandTemplate)
                     {
-                        base.PopulateFromTemplate(templateCommand);
-                        _values = ((BadDataRelationalCommand)templateCommand)._values;
+                        base.PopulateFrom(commandTemplate);
+                        _values = ((BadDataRelationalCommand)commandTemplate)._values;
                     }
 
                     private class BadDataRelationalDataReader : RelationalDataReader
                     {
-                        public BadDataRelationalDataReader(BadDataRelationalCommand relationalCommand)
-                            : base(relationalCommand)
+                        public BadDataRelationalDataReader()
+                            : base()
                         {
                         }
                     }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -304,7 +304,7 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: CustomUserString.Email (string) MaxLength(128)",
                         "Property: CustomUserString.EmailConfirmed (bool) Required",
                         "Property: CustomUserString.LockoutEnabled (bool) Required",
-                        "Property: CustomUserString.LockoutEnd (Nullable<DateTimeOffset>)",
+                        "Property: CustomUserString.LockoutEnd (DateTimeOffset?)",
                         "Property: CustomUserString.NormalizedEmail (string) Index MaxLength(128)",
                         "Property: CustomUserString.NormalizedUserName (string) Index MaxLength(128)",
                         "Property: CustomUserString.PasswordHash (string)",

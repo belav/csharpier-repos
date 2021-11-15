@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -200,12 +200,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private void AssertTranslationFailed(Action testCode)
             => Assert.Contains(
-                CoreStrings.TranslationFailed("").Substring(21),
+                CoreStrings.TranslationFailed("")[21..],
                 Assert.Throws<InvalidOperationException>(testCode).Message);
 
         private void AssertTranslationFailedWithDetails(Action testCode, string details)
             => Assert.Contains(
-                CoreStrings.TranslationFailedWithDetails("", details).Substring(21),
+                CoreStrings.TranslationFailedWithDetails("", details)[21..],
                 Assert.Throws<InvalidOperationException>(testCode).Message);
 
         protected NorthwindContext CreateContext()

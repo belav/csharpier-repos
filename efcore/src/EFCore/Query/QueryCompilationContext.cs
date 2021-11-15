@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -22,6 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public class QueryCompilationContext
     {
         /// <summary>
@@ -69,18 +73,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="QueryCompilationContext" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        /// <param name="async"> A bool value indicating whether it is for async query. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
+        /// <param name="async">A bool value indicating whether it is for async query.</param>
         public QueryCompilationContext(
             QueryCompilationContextDependencies dependencies,
             bool async)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
             IsAsync = async;
             QueryTrackingBehavior = dependencies.QueryTrackingBehavior;
-            IsBuffering = dependencies.IsRetryingExecutionStrategy;
+            IsBuffering = ExecutionStrategy.Current?.RetriesOnFailure ?? dependencies.IsRetryingExecutionStrategy;
             Model = dependencies.Model;
             ContextOptions = dependencies.ContextOptions;
             ContextType = dependencies.ContextType;
@@ -95,7 +97,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual QueryCompilationContextDependencies Dependencies { get; }
 
@@ -118,13 +120,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     A value indicating <see cref="EntityFrameworkCore.QueryTrackingBehavior" /> of the query.
         /// </summary>
         public virtual QueryTrackingBehavior QueryTrackingBehavior { get; internal set; }
-
-        /// <summary>
-        ///     A value indicating whether it is tracking query.
-        /// </summary>
-        [Obsolete("Use " + nameof(QueryTrackingBehavior) + " instead.")]
-        public virtual bool IsTracking
-            => QueryTrackingBehavior == QueryTrackingBehavior.TrackAll;
 
         /// <summary>
         ///     A value indicating whether the underlying server query needs to pre-buffer all data.
@@ -159,24 +154,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Adds a tag to <see cref="Tags" />.
         /// </summary>
-        /// <param name="tag"> The tag to add. </param>
+        /// <param name="tag">The tag to add.</param>
         public virtual void AddTag(string tag)
-        {
-            Check.NotEmpty(tag, nameof(tag));
-
-            Tags.Add(tag);
-        }
+            => Tags.Add(tag);
 
         /// <summary>
         ///     Creates the query executor func which gives results for this query.
         /// </summary>
-        /// <typeparam name="TResult"> The result type of this query. </typeparam>
-        /// <param name="query"> The query to generate executor for. </param>
-        /// <returns> Returns <see cref="Func{QueryContext, TResult}" /> which can be invoked to get results of this query. </returns>
+        /// <typeparam name="TResult">The result type of this query.</typeparam>
+        /// <param name="query">The query to generate executor for.</param>
+        /// <returns>Returns <see cref="Func{QueryContext, TResult}" /> which can be invoked to get results of this query.</returns>
         public virtual Func<QueryContext, TResult> CreateQueryExecutor<TResult>(Expression query)
         {
-            Check.NotNull(query, nameof(query));
-
             Logger.QueryCompilationStarting(_expressionPrinter, query);
 
             query = _queryTranslationPreprocessorFactory.Create(this).Process(query);
@@ -213,9 +202,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         public virtual ParameterExpression RegisterRuntimeParameter(string name, LambdaExpression valueExtractor)
         {
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(valueExtractor, nameof(valueExtractor));
-
             if (valueExtractor.Parameters.Count != 1
                 || valueExtractor.Parameters[0] != QueryContextParameter)
             {
@@ -250,8 +236,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private sealed class NotTranslatedExpressionType : Expression
         {
-            public override Type Type => typeof(object);
-            public override ExpressionType NodeType => ExpressionType.Extension;
+            public override Type Type
+                => typeof(object);
+
+            public override ExpressionType NodeType
+                => ExpressionType.Extension;
         }
     }
 }

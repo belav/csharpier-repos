@@ -1,40 +1,39 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public static class TagHelperDescriptorBuilderExtensions
 {
-    public static class TagHelperDescriptorBuilderExtensions
+    public static void SetTypeName(this TagHelperDescriptorBuilder builder, string typeName)
     {
-        public static void SetTypeName(this TagHelperDescriptorBuilder builder, string typeName)
+        if (builder == null)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            if (typeName == null)
-            {
-                throw new ArgumentNullException(nameof(typeName));
-            }
-
-            builder.Metadata[TagHelperMetadata.Common.TypeName] = typeName;
+            throw new ArgumentNullException(nameof(builder));
         }
 
-        public static string GetTypeName(this TagHelperDescriptorBuilder builder)
+        if (typeName == null)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            if (builder.Metadata.ContainsKey(TagHelperMetadata.Common.TypeName))
-            {
-                return builder.Metadata[TagHelperMetadata.Common.TypeName];
-            }
-
-            return null;
+            throw new ArgumentNullException(nameof(typeName));
         }
+
+        builder.Metadata[TagHelperMetadata.Common.TypeName] = typeName;
+    }
+
+    public static string GetTypeName(this TagHelperDescriptorBuilder builder)
+    {
+        if (builder == null)
+        {
+            throw new ArgumentNullException(nameof(builder));
+        }
+
+        if (builder.Metadata.ContainsKey(TagHelperMetadata.Common.TypeName))
+        {
+            return builder.Metadata[TagHelperMetadata.Common.TypeName];
+        }
+
+        return null;
     }
 }

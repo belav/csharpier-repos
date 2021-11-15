@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,14 +12,17 @@ using Microsoft.EntityFrameworkCore.ValueGeneration;
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
-    ///     <para>
-    ///         Represents a scalar property of an entity type.
-    ///     </para>
+    ///     Represents a scalar property of an entity type.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This interface is used during model creation and allows the metadata to be modified.
     ///         Once the model is built, <see cref="IProperty" /> represents a read-only view of the same metadata.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     {
         /// <summary>
@@ -54,7 +57,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Finds the first principal property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
-        /// <returns> The first associated principal property, or <see langword="null" /> if none exists. </returns>
+        /// <returns>The first associated principal property, or <see langword="null" /> if none exists.</returns>
         new IMutableProperty? FindFirstPrincipal()
             => (IMutableProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
@@ -62,7 +65,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Finds the list of principal properties including the given property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
-        /// <returns> The list of all associated principal properties including the given property. </returns>
+        /// <returns>The list of all associated principal properties including the given property.</returns>
         new IReadOnlyList<IMutableProperty> GetPrincipals()
             => ((IReadOnlyProperty)this).GetPrincipals().Cast<IMutableProperty>().ToList();
 
@@ -107,7 +110,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Sets the maximum length of data that is allowed in this property. For example, if the property is a <see cref="string" />
         ///     then this is the maximum number of characters.
         /// </summary>
-        /// <param name="maxLength"> The maximum length of data that is allowed in this property. </param>
+        /// <param name="maxLength">The maximum length of data that is allowed in this property.</param>
         void SetMaxLength(int? maxLength);
 
         /// <summary>
@@ -115,7 +118,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     For example, if the property is a <see cref="decimal" />
         ///     then this is the maximum number of digits.
         /// </summary>
-        /// <param name="precision"> The maximum number of digits that is allowed in this property. </param>
+        /// <param name="precision">The maximum number of digits that is allowed in this property.</param>
         void SetPrecision(int? precision);
 
         /// <summary>
@@ -123,23 +126,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     For example, if the property is a <see cref="decimal" />
         ///     then this is the maximum number of decimal places.
         /// </summary>
-        /// <param name="scale"> The maximum number of decimal places that is allowed in this property. </param>
+        /// <param name="scale">The maximum number of decimal places that is allowed in this property.</param>
         void SetScale(int? scale);
 
         /// <summary>
         ///     Sets a value indicating whether this property can persist Unicode characters.
         /// </summary>
         /// <param name="unicode">
-        ///     <see langword="true" /> if the property accepts Unicode characters, <see langword="false" /> if it does not, <see langword="null" /> to
-        ///     clear the setting.
+        ///     <see langword="true" /> if the property accepts Unicode characters, <see langword="false" /> if it does not,
+        ///     <see langword="null" /> to clear the setting.
         /// </param>
         void SetIsUnicode(bool? unicode);
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets a value indicating whether this property can be modified before the entity is
-        ///         saved to the database.
-        ///     </para>
+        ///     Gets or sets a value indicating whether this property can be modified before the entity is
+        ///     saved to the database.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If <see cref="PropertySaveBehavior.Throw" />, then an exception
         ///         will be thrown if a value is assigned to this property when it is in
@@ -149,17 +152,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         If <see cref="PropertySaveBehavior.Ignore" />, then any value
         ///         set will be ignored when it is in the <see cref="EntityState.Added" /> state.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         /// <param name="beforeSaveBehavior">
         ///     A value indicating whether this property can be modified before the entity is saved to the database.
         /// </param>
         void SetBeforeSaveBehavior(PropertySaveBehavior? beforeSaveBehavior);
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets a value indicating whether this property can be modified after the entity is
-        ///         saved to the database.
-        ///     </para>
+        ///     Gets or sets a value indicating whether this property can be modified after the entity is
+        ///     saved to the database.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If <see cref="PropertySaveBehavior.Throw" />, then an exception
         ///         will be thrown if a new value is assigned to this property after the entity exists in the database.
@@ -168,49 +171,76 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         If <see cref="PropertySaveBehavior.Ignore" />, then any modification to the
         ///         property value of an entity that already exists in the database will be ignored.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         /// <param name="afterSaveBehavior">
         ///     A value indicating whether this property can be modified after the entity is saved to the database.
         /// </param>
         void SetAfterSaveBehavior(PropertySaveBehavior? afterSaveBehavior);
 
         /// <summary>
-        ///     <para>
-        ///         Sets the factory to use for generating values for this property, or <see langword="null" /> to clear any previously set factory.
-        ///     </para>
-        ///     <para>
-        ///         Setting <see langword="null" /> does not disable value generation for this property, it just clears any generator explicitly
-        ///         configured for this property. The database provider may still have a value generator for the property type.
-        ///     </para>
+        ///     Sets the factory to use for generating values for this property, or <see langword="null" /> to clear any previously set factory.
         /// </summary>
+        /// <remarks>
+        ///     Setting <see langword="null" /> does not disable value generation for this property, it just clears any generator explicitly
+        ///     configured for this property. The database provider may still have a value generator for the property type.
+        /// </remarks>
         /// <param name="valueGeneratorFactory">
         ///     A factory that will be used to create the value generator, or <see langword="null" /> to
         ///     clear any previously set factory.
         /// </param>
-        void SetValueGeneratorFactory(Func<IProperty, IEntityType, ValueGenerator> valueGeneratorFactory);
+        void SetValueGeneratorFactory(Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory);
+
+        /// <summary>
+        ///     Sets the factory to use for generating values for this property, or <see langword="null" /> to clear any previously set factory.
+        /// </summary>
+        /// <remarks>
+        ///     Setting <see langword="null" /> does not disable value generation for this property, it just clears any generator explicitly
+        ///     configured for this property. The database provider may still have a value generator for the property type.
+        /// </remarks>
+        /// <param name="valueGeneratorFactory">
+        ///     A factory that will be used to create the value generator, or <see langword="null" /> to
+        ///     clear any previously set factory.
+        /// </param>
+        void SetValueGeneratorFactory(Type? valueGeneratorFactory);
 
         /// <summary>
         ///     Sets the custom <see cref="ValueConverter" /> for this property.
         /// </summary>
-        /// <param name="converter"> The converter, or <see langword="null" /> to remove any previously set converter. </param>
+        /// <param name="converter">The converter, or <see langword="null" /> to remove any previously set converter.</param>
         void SetValueConverter(ValueConverter? converter);
+
+        /// <summary>
+        ///     Sets the custom <see cref="ValueConverter" /> for this property.
+        /// </summary>
+        /// <param name="converterType">
+        ///     A type that derives from <see cref="ValueConverter" />, or <see langword="null" /> to remove any previously set converter.
+        /// </param>
+        void SetValueConverter(Type? converterType);
 
         /// <summary>
         ///     Sets the type that the property value will be converted to before being sent to the database provider.
         /// </summary>
-        /// <param name="providerClrType"> The type to use, or <see langword="null" /> to remove any previously set type. </param>
+        /// <param name="providerClrType">The type to use, or <see langword="null" /> to remove any previously set type.</param>
         void SetProviderClrType(Type? providerClrType);
 
         /// <summary>
         ///     Sets the <see cref="CoreTypeMapping" /> for the given property
         /// </summary>
-        /// <param name="typeMapping"> The <see cref="CoreTypeMapping" /> for this property. </param>
+        /// <param name="typeMapping">The <see cref="CoreTypeMapping" /> for this property.</param>
         void SetTypeMapping(CoreTypeMapping typeMapping);
 
         /// <summary>
         ///     Sets the custom <see cref="ValueComparer" /> for this property.
         /// </summary>
-        /// <param name="comparer"> The comparer, or <see langword="null" /> to remove any previously set comparer. </param>
+        /// <param name="comparer">The comparer, or <see langword="null" /> to remove any previously set comparer.</param>
         void SetValueComparer(ValueComparer? comparer);
+
+        /// <summary>
+        ///     Sets the custom <see cref="ValueComparer" /> for this property.
+        /// </summary>
+        /// <param name="comparerType">
+        ///     A type that derives from <see cref="ValueComparer" />, or <see langword="null" /> to remove any previously set comparer.
+        /// </param>
+        void SetValueComparer(Type? comparerType);
     }
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         private const int MaxRowCount = 1000;
         private int _parameterCount = 1; // Implicit parameter for the command text
         private readonly int _maxBatchSize;
-        private readonly List<ModificationCommand> _bulkInsertCommands = new();
+        private readonly List<IReadOnlyModificationCommand> _bulkInsertCommands = new();
         private int _commandsLeftToLengthCheck = 50;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override bool CanAddCommand(ModificationCommand modificationCommand)
+        protected override bool CanAddCommand(IReadOnlyModificationCommand modificationCommand)
         {
             if (ModificationCommands.Count >= _maxBatchSize)
             {
@@ -113,7 +113,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         protected override int GetParameterCount()
             => _parameterCount;
 
-        private static int CountParameters(ModificationCommand modificationCommand)
+        private static int CountParameters(IReadOnlyModificationCommand modificationCommand)
         {
             var parameterCount = 0;
             // ReSharper disable once ForCanBeConvertedToForeach
@@ -210,7 +210,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             }
         }
 
-        private static bool CanBeInsertedInSameStatement(ModificationCommand firstCommand, ModificationCommand secondCommand)
+        private static bool CanBeInsertedInSameStatement(
+            IReadOnlyModificationCommand firstCommand,
+            IReadOnlyModificationCommand secondCommand)
             => string.Equals(firstCommand.TableName, secondCommand.TableName, StringComparison.Ordinal)
                 && string.Equals(firstCommand.Schema, secondCommand.Schema, StringComparison.Ordinal)
                 && firstCommand.ColumnModifications.Where(o => o.IsWrite).Select(o => o.ColumnName).SequenceEqual(

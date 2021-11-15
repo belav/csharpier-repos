@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteStringTypeMapping" /> class.
         /// </summary>
-        /// <param name="storeType"> The name of the database type. </param>
-        /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
-        /// <param name="unicode"> A value indicating whether the type should handle Unicode data or not. </param>
-        /// <param name="size"> The size of data the property is configured to store, or null if no size is configured. </param>
+        /// <param name="storeType">The name of the database type.</param>
+        /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
+        /// <param name="unicode">A value indicating whether the type should handle Unicode data or not.</param>
+        /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
         public SqliteStringTypeMapping(
             string storeType,
             DbType? dbType = null,
@@ -36,7 +36,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteStringTypeMapping" /> class.
         /// </summary>
-        /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
+        /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
         protected SqliteStringTypeMapping(RelationalTypeMappingParameters parameters)
             : base(parameters)
         {
@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
-        /// <returns> The newly created mapping. </returns>
+        /// <param name="parameters">The parameters for this mapping.</param>
+        /// <returns>The newly created mapping.</returns>
         protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
             => new SqliteStringTypeMapping(parameters);
 
@@ -110,7 +110,6 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                             .Append("CHAR(")
                             .Append(lineFeed ? "10" : "13")
                             .Append(')');
-
                     }
                     else if (apostrophe)
                     {
@@ -122,7 +121,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                                 startIndexes.Add(builder.Length);
                             }
 
-                            builder.Append("'");
+                            builder.Append('\'');
                             openApostrophe = true;
                         }
 
@@ -187,11 +186,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                 }
 
                 var mid = start + count / 2;
-                newBuilder.Append("(");
+                newBuilder.Append('(');
                 GenerateBalancedTree(start, mid);
                 newBuilder.Append(" || ");
                 GenerateBalancedTree(mid, end);
-                newBuilder.Append(")");
+                newBuilder.Append(')');
             }
         }
     }

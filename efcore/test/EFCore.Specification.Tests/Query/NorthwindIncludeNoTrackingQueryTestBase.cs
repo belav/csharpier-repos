@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -148,7 +148,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var orders = context.Set<Order>().Where(o => o.CustomerID == "ALFKI").ToList();
             Assert.Equal(6, context.ChangeTracker.Entries().Count());
-            Assert.True(orders.All(o => o.Customer == null));
+            Assert.True(orders.All(o => o.Customer.CustomerID == null));
 
             var customer
                 = async
@@ -166,7 +166,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.True(customer.Orders.All(e => ReferenceEquals(e.Customer, customer)));
 
             Assert.Equal(6, context.ChangeTracker.Entries().Count());
-            Assert.True(orders.All(o => o.Customer == null));
+            Assert.True(orders.All(o => o.Customer.CustomerID == null));
         }
 
         public override async Task Include_collection_principal_already_tracked(bool async)
@@ -212,6 +212,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         public override Task Include_with_cycle_does_not_throw_when_AsNoTrackingWithIdentityResolution(bool async)
+            => Task.CompletedTask;
+
+        public override Task Include_with_cycle_does_not_throw_when_AsTracking_NoTrackingWithIdentityResolution(bool async)
             => Task.CompletedTask;
 
         protected override bool IgnoreEntryCount

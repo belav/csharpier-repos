@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     creates a shadow concurrency property mapped to that column
     ///     on the base-most entity type(s).
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class TableSharingConcurrencyTokenConvention : IModelFinalizingConvention
     {
         private const string ConcurrencyPropertyPrefix = "_TableSharingConcurrencyTokenConvention_";
@@ -23,19 +26,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="TableSharingConcurrencyTokenConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
+        /// <param name="relationalDependencies">Parameter object containing relational dependencies for this convention.</param>
         public TableSharingConcurrencyTokenConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies)
         {
             Dependencies = dependencies;
+            RelationalDependencies = relationalDependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
+
+        /// <summary>
+        ///     Relational provider-specific dependencies for this service.
+        /// </summary>
+        protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
@@ -193,21 +202,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IReadOnlyEntityType entityType,
             IReadOnlyList<IReadOnlyEntityType> mappedTypes)
         {
-            if (entityType.FindPrimaryKey() == null)
+            if (entityType.FindPrimaryKey() == null
+                || propertiesMappedToConcurrencyColumn.Count == 0)
             {
                 return false;
             }
 
-            var propertyMissing = false;
+            var propertyMissing = true;
             foreach (var mappedProperty in propertiesMappedToConcurrencyColumn)
             {
                 var declaringEntityType = mappedProperty.DeclaringEntityType;
                 if (declaringEntityType.IsAssignableFrom(entityType)
-                    || entityType.IsAssignableFrom(declaringEntityType)
                     || declaringEntityType.IsInOwnershipPath(entityType)
                     || entityType.IsInOwnershipPath(declaringEntityType))
                 {
-                    // The concurrency token is in the same hierarchy or in the same aggregate
+                    // The concurrency token is on the base type or in the same aggregate
+                    propertyMissing = false;
                     continue;
                 }
 
@@ -222,11 +232,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             || entityType.IsAssignableFrom(fk.PrincipalEntityType)))
                 {
                     // The concurrency token is on a type that shares the row with a base or derived type
-                    continue;
+                    propertyMissing = false;
                 }
-
-                propertyMissing = true;
-                break;
             }
 
             return propertyMissing;
@@ -234,30 +241,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static void RemoveDerivedEntityTypes<T>(Dictionary<IConventionEntityType, T> entityTypeDictionary)
         {
-            var toRemove = new HashSet<KeyValuePair<IConventionEntityType, T>>();
-            var entityTypesWithDerivedTypes =
-                entityTypeDictionary.Where(e => e.Key.GetDirectlyDerivedTypes().Any()).ToList();
-            foreach (var entityType in entityTypeDictionary.Where(e => e.Key.BaseType != null))
+            foreach (var entityType in entityTypeDictionary.Keys)
             {
-                foreach (var otherEntityType in entityTypesWithDerivedTypes)
+                var baseType = entityType.BaseType;
+                while (baseType != null)
                 {
-                    if (toRemove.Contains(otherEntityType)
-                        || otherEntityType.Equals(entityType))
+                    if (entityTypeDictionary.ContainsKey(baseType))
                     {
-                        continue;
-                    }
-
-                    if (otherEntityType.Key.IsAssignableFrom(entityType.Key))
-                    {
-                        toRemove.Add(entityType);
+                        entityTypeDictionary.Remove(entityType);
                         break;
                     }
-                }
-            }
 
-            foreach (var entityType in toRemove)
-            {
-                entityTypeDictionary.Remove(entityType.Key);
+                    baseType = baseType.BaseType;
+                }
             }
         }
     }

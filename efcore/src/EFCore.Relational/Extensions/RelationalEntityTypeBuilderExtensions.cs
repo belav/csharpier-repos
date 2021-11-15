@@ -1,10 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -16,87 +16,160 @@ namespace Microsoft.EntityFrameworkCore
     /// <summary>
     ///     Relational database specific extension methods for <see cref="EntityTypeBuilder" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public static class RelationalEntityTypeBuilderExtensions
     {
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToTable(
             this EntityTypeBuilder entityTypeBuilder,
             string? name)
-            => entityTypeBuilder.ToTable(name, (string?)null);
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+
+            entityTypeBuilder.Metadata.SetTableName(name);
+            entityTypeBuilder.Metadata.SetSchema(null);
+
+            return entityTypeBuilder;
+        }
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="buildAction"> An action that performs configuration of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToTable(
             this EntityTypeBuilder entityTypeBuilder,
-            string name,
             Action<TableBuilder> buildAction)
-            => entityTypeBuilder.ToTable(name, null, buildAction);
+        {
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            buildAction(new TableBuilder(null, null, entityTypeBuilder.Metadata));
+
+            return entityTypeBuilder;
+        }
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
-            this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            string? name)
-            where TEntity : class
-            => entityTypeBuilder.ToTable(name, (string?)null);
-
-        /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
-        /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="buildAction"> An action that performs configuration of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
-            this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            string name,
-            Action<TableBuilder> buildAction)
-            where TEntity : class
-            => entityTypeBuilder.ToTable(name, null, buildAction);
-
-        /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
-        /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="buildAction"> An action that performs configuration of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
-            this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            string name,
-            Action<TableBuilder<TEntity>> buildAction)
-            where TEntity : class
-            => entityTypeBuilder.ToTable(name, null, buildAction);
-
-        /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
-        /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToTable(
             this EntityTypeBuilder entityTypeBuilder,
             string? name,
+            Action<TableBuilder> buildAction)
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            entityTypeBuilder.Metadata.SetTableName(name);
+            entityTypeBuilder.Metadata.SetSchema(null);
+            buildAction(new TableBuilder(name, null, entityTypeBuilder.Metadata));
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            string? name)
+            where TEntity : class
+            => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name);
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            Action<TableBuilder<TEntity>> buildAction)
+            where TEntity : class
+        {
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            buildAction(new TableBuilder<TEntity>(null, null, entityTypeBuilder.Metadata));
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            string? name,
+            Action<TableBuilder<TEntity>> buildAction)
+            where TEntity : class
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            entityTypeBuilder.Metadata.SetTableName(name);
+            entityTypeBuilder.Metadata.SetSchema(null);
+            buildAction(new TableBuilder<TEntity>(name, null, entityTypeBuilder.Metadata));
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder ToTable(
+            this EntityTypeBuilder entityTypeBuilder,
+            string name,
             string? schema)
         {
+            Check.NotNull(name, nameof(name));
+            Check.NullButNotEmpty(schema, nameof(schema));
+
             entityTypeBuilder.Metadata.SetTableName(name);
             entityTypeBuilder.Metadata.SetSchema(schema);
             return entityTypeBuilder;
@@ -105,11 +178,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="buildAction"> An action that performs configuration of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToTable(
             this EntityTypeBuilder entityTypeBuilder,
             string name,
@@ -118,10 +194,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
+            Check.NotNull(buildAction, nameof(buildAction));
 
+            entityTypeBuilder.Metadata.SetTableName(name);
+            entityTypeBuilder.Metadata.SetSchema(schema);
             buildAction(new TableBuilder(name, schema, entityTypeBuilder.Metadata));
-            entityTypeBuilder.Metadata.SetTableName(name);
-            entityTypeBuilder.Metadata.SetSchema(schema);
 
             return entityTypeBuilder;
         }
@@ -129,48 +206,33 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="buildAction"> An action that performs configuration of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string name,
-            string? schema,
-            Action<TableBuilder> buildAction)
-            where TEntity : class
-            => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name, schema, buildAction);
-
-        /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
-        /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
-            this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            string? name,
             string? schema)
             where TEntity : class
-        {
-            entityTypeBuilder.Metadata.SetTableName(name);
-            entityTypeBuilder.Metadata.SetSchema(schema);
-            return entityTypeBuilder;
-        }
+            => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name, schema);
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="buildAction"> An action that performs configuration of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string name,
@@ -180,10 +242,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
+            Check.NotNull(buildAction, nameof(buildAction));
 
-            buildAction(new TableBuilder<TEntity>(name, schema, entityTypeBuilder.Metadata));
             entityTypeBuilder.Metadata.SetTableName(name);
             entityTypeBuilder.Metadata.SetSchema(schema);
+            buildAction(new TableBuilder<TEntity>(name, schema, entityTypeBuilder.Metadata));
 
             return entityTypeBuilder;
         }
@@ -191,21 +254,77 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static OwnedNavigationBuilder ToTable(
             this OwnedNavigationBuilder referenceOwnershipBuilder,
             string? name)
-            => ToTable(referenceOwnershipBuilder, name, schema: null, excludedFromMigrations: null);
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetSchema(null);
+
+            return referenceOwnershipBuilder;
+        }
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="excludedFromMigrations"> A value indicating whether the table should be managed by migrations. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToTable(
+            this OwnedNavigationBuilder referenceOwnershipBuilder,
+            Action<TableBuilder> buildAction)
+        {
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            buildAction(new TableBuilder(null, null, referenceOwnershipBuilder.OwnedEntityType));
+
+            return referenceOwnershipBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            Action<TableBuilder<TRelatedEntity>> buildAction)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+        {
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            buildAction(new TableBuilder<TRelatedEntity>(null, null, referenceOwnershipBuilder.OwnedEntityType));
+
+            return referenceOwnershipBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        [Obsolete("Use the overload with an Action parameter")]
         public static OwnedNavigationBuilder ToTable(
             this OwnedNavigationBuilder referenceOwnershipBuilder,
             string? name,
@@ -215,71 +334,239 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type that this relationship targets. </typeparam>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
-            this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name)
-            where TEntity : class
+            where TOwnerEntity : class
             where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
-                referenceOwnershipBuilder, name, schema: null, excludedFromMigrations: null);
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)((OwnedNavigationBuilder)referenceOwnershipBuilder).ToTable(name);
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type that this relationship targets. </typeparam>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="excludedFromMigrations"> A value indicating whether the table should be managed by migrations. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
-            this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToTable(
+            this OwnedNavigationBuilder referenceOwnershipBuilder,
+            string? name,
+            Action<TableBuilder> buildAction)
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetSchema(null);
+            buildAction(new TableBuilder(name, null, referenceOwnershipBuilder.OwnedEntityType));
+
+            return referenceOwnershipBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        [Obsolete("Use the overload with an Action parameter")]
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name,
             bool excludedFromMigrations)
-            where TEntity : class
+            where TOwnerEntity : class
             where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToTable(
                 (OwnedNavigationBuilder)referenceOwnershipBuilder, name, excludedFromMigrations);
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder ToTable(
-            this OwnedNavigationBuilder referenceOwnershipBuilder,
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
             string? name,
-            string? schema)
-            => ToTable(referenceOwnershipBuilder, name, schema, excludedFromMigrations: null);
+            Action<TableBuilder<TRelatedEntity>> buildAction)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetSchema(null);
+            buildAction(new TableBuilder<TRelatedEntity>(name, null, referenceOwnershipBuilder.OwnedEntityType));
+
+            return referenceOwnershipBuilder;
+        }
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="excludedFromMigrations"> A value indicating whether the table should be managed by migrations. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToTable(
+            this OwnedNavigationBuilder referenceOwnershipBuilder,
+            string name,
+            string? schema)
+        {
+            Check.NotNull(name, nameof(name));
+            Check.NullButNotEmpty(schema, nameof(schema));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetSchema(schema);
+
+            return referenceOwnershipBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        [Obsolete("Use the overload with an Action parameter")]
         public static OwnedNavigationBuilder ToTable(
             this OwnedNavigationBuilder referenceOwnershipBuilder,
             string? name,
             string? schema,
             bool excludedFromMigrations)
         {
-            Check.NotNull(referenceOwnershipBuilder, nameof(referenceOwnershipBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
 
             return ToTable(referenceOwnershipBuilder, name, schema, (bool?)excludedFromMigrations);
         }
 
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToTable(
+            this OwnedNavigationBuilder referenceOwnershipBuilder,
+            string name,
+            string? schema,
+            Action<TableBuilder> buildAction)
+        {
+            Check.NotNull(name, nameof(name));
+            Check.NullButNotEmpty(schema, nameof(schema));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetSchema(schema);
+            buildAction(new TableBuilder(name, schema, referenceOwnershipBuilder.OwnedEntityType));
+
+            return referenceOwnershipBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            string name,
+            string? schema)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)((OwnedNavigationBuilder)referenceOwnershipBuilder).ToTable(
+                name, schema);
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        [Obsolete("Use the overload with an Action parameter")]
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            string? name,
+            string? schema,
+            bool excludedFromMigrations)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToTable(
+                (OwnedNavigationBuilder)referenceOwnershipBuilder, name, schema, excludedFromMigrations);
+
+        /// <summary>
+        ///     Configures the table that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="buildAction">An action that performs configuration of the table.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToTable<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            string name,
+            string? schema,
+            Action<TableBuilder<TRelatedEntity>> buildAction)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+        {
+            Check.NotNull(name, nameof(name));
+            Check.NullButNotEmpty(schema, nameof(schema));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetTableName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetSchema(schema);
+            buildAction(new TableBuilder<TRelatedEntity>(name, schema, referenceOwnershipBuilder.OwnedEntityType));
+
+            return referenceOwnershipBuilder;
+        }
+
+        [Obsolete]
         private static OwnedNavigationBuilder ToTable(
             OwnedNavigationBuilder referenceOwnershipBuilder,
             string? name,
@@ -300,47 +587,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type that this relationship targets. </typeparam>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
-            this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
-            string? name,
-            string? schema)
-            where TEntity : class
-            where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
-                referenceOwnershipBuilder, name, schema, excludedFromMigrations: null);
-
-        /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
-        /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type that this relationship targets. </typeparam>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="excludedFromMigrations"> A value indicating whether the table should be managed by migrations. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
-            this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
-            string? name,
-            string? schema,
-            bool excludedFromMigrations)
-            where TEntity : class
-            where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToTable(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder, name, schema, excludedFromMigrations);
-
-        /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
-        /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -361,10 +613,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -389,10 +644,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the table name can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetTable(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
@@ -406,9 +664,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the schema of the table that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -430,10 +691,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the schema of the table name can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="schema"> The schema of the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="schema">The schema of the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetSchema(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? schema,
@@ -447,9 +711,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Mark the table that this entity type is mapped to as excluded from migrations.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="excludedFromMigrations"> A value indicating whether the table should be managed by migrations. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -472,10 +739,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the table that this entity type is mapped to can be excluded from migrations
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="excludedFromMigrations"> A value indicating whether the table should be managed by migrations. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanExcludeTableFromMigrations(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             bool? excludedFromMigrations,
@@ -486,9 +756,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToView(
             this EntityTypeBuilder entityTypeBuilder,
             string? name)
@@ -497,29 +770,34 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder<TEntity> ToView<TEntity>(
-            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            this EntityTypeBuilder<TEntity> referenceOwnershipBuilder,
             string? name)
             where TEntity : class
-            => (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name);
+            => (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)referenceOwnershipBuilder, name);
 
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <param name="schema"> The schema of the view. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToView(
             this EntityTypeBuilder entityTypeBuilder,
             string? name,
             string? schema)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
 
@@ -533,11 +811,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <param name="schema"> The schema of the view. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder<TEntity> ToView<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string? name,
@@ -548,9 +829,86 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToView(
+            this OwnedNavigationBuilder referenceOwnershipBuilder,
+            string? name)
+            => referenceOwnershipBuilder.ToView(name, null);
+
+        /// <summary>
+        ///     Configures the view that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToView<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            string? name)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToView((OwnedNavigationBuilder)referenceOwnershipBuilder, name);
+
+        /// <summary>
+        ///     Configures the view that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToView(
+            this OwnedNavigationBuilder referenceOwnershipBuilder,
+            string? name,
+            string? schema)
+        {
+            Check.NullButNotEmpty(name, nameof(name));
+            Check.NullButNotEmpty(schema, nameof(schema));
+
+            referenceOwnershipBuilder.OwnedEntityType.SetViewName(name);
+            referenceOwnershipBuilder.OwnedEntityType.SetViewSchema(schema);
+            referenceOwnershipBuilder.OwnedEntityType.SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
+
+            return referenceOwnershipBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the view that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToView<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            string? name,
+            string? schema)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToView(
+                (OwnedNavigationBuilder)referenceOwnershipBuilder, name, schema);
+
+        /// <summary>
+        ///     Configures the view that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -571,10 +929,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <param name="schema"> The schema of the view. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -599,10 +960,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the view name can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the view.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetView(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
@@ -616,9 +980,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the schema of the view that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="schema"> The schema of the view. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -640,10 +1007,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the schema of the view can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="schema"> The schema of the view. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="schema">The schema of the view.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetViewSchema(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? schema,
@@ -657,13 +1027,15 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a SQL string used to provide data for the entity type.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="query"> The SQL query that will provide the underlying data for the entity type. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static EntityTypeBuilder<TEntity> ToSqlQuery<TEntity>(
-            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="query">The SQL query that will provide the underlying data for the entity type.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder ToSqlQuery(
+            this EntityTypeBuilder entityTypeBuilder,
             string query)
-            where TEntity : class
         {
             Check.NotNull(query, nameof(query));
 
@@ -675,9 +1047,27 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a SQL string used to provide data for the entity type.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The SQL query that will provide the underlying data for the entity type. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="query">The SQL query that will provide the underlying data for the entity type.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder<TEntity> ToSqlQuery<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            string query)
+            where TEntity : class
+            => (EntityTypeBuilder<TEntity>)ToSqlQuery((EntityTypeBuilder)entityTypeBuilder, query);
+
+        /// <summary>
+        ///     Configures a SQL string used to provide data for the entity type.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The SQL query that will provide the underlying data for the entity type.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
@@ -701,10 +1091,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether the query SQL string can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The SQL query that will provide the underlying data for the entity type. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The SQL query that will provide the underlying data for the entity type.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetSqlQuery(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
@@ -718,17 +1111,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <returns> The function configuration builder. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <returns>The function configuration builder.</returns>
         public static EntityTypeBuilder ToFunction(
             this EntityTypeBuilder entityTypeBuilder,
             string? name)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
-            SetFunction(name, entityTypeBuilder.Metadata);
+            ToFunction(name, entityTypeBuilder.Metadata);
 
             return entityTypeBuilder;
         }
@@ -736,20 +1131,40 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="configureFunction"> The function configuration action. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <returns>The function configuration builder.</returns>
+        public static EntityTypeBuilder ToFunction(
+            this EntityTypeBuilder entityTypeBuilder,
+            MethodInfo? function)
+        {
+            ToFunction(function, entityTypeBuilder.Metadata);
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder ToFunction(
             this EntityTypeBuilder entityTypeBuilder,
             string name,
             Action<TableValuedFunctionBuilder> configureFunction)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-            Check.NullButNotEmpty(name, nameof(name));
+            Check.NotNull(name, nameof(name));
             Check.NotNull(configureFunction, nameof(configureFunction));
 
-            configureFunction(new TableValuedFunctionBuilder(SetFunction(name, entityTypeBuilder.Metadata)));
+            configureFunction(new TableValuedFunctionBuilder(ToFunction(name, entityTypeBuilder.Metadata)));
 
             return entityTypeBuilder;
         }
@@ -757,10 +1172,36 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <returns> The function configuration builder. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder ToFunction(
+            this EntityTypeBuilder entityTypeBuilder,
+            MethodInfo function,
+            Action<TableValuedFunctionBuilder> configureFunction)
+        {
+            Check.NotNull(function, nameof(function));
+            Check.NotNull(configureFunction, nameof(configureFunction));
+
+            configureFunction(new TableValuedFunctionBuilder(ToFunction(function, entityTypeBuilder.Metadata)));
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <returns>The function configuration builder.</returns>
         public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string? name)
@@ -770,11 +1211,30 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="configureFunction"> The function configuration action. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <returns>The function configuration builder.</returns>
+        public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            MethodInfo? function)
+            where TEntity : class
+            => (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, function);
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string name,
@@ -785,17 +1245,37 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="ownedNavigationBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <returns> The function configuration builder. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            MethodInfo function,
+            Action<TableValuedFunctionBuilder> configureFunction)
+            where TEntity : class
+            => (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, function, configureFunction);
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <returns>The function configuration builder.</returns>
         public static OwnedNavigationBuilder ToFunction(
             this OwnedNavigationBuilder ownedNavigationBuilder,
             string? name)
         {
-            Check.NotNull(ownedNavigationBuilder, nameof(ownedNavigationBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
-            SetFunction(name, ownedNavigationBuilder.OwnedEntityType);
+            ToFunction(name, ownedNavigationBuilder.OwnedEntityType);
 
             return ownedNavigationBuilder;
         }
@@ -803,20 +1283,40 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="ownedNavigationBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="configureFunction"> The function configuration action. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <returns>The function configuration builder.</returns>
+        public static OwnedNavigationBuilder ToFunction(
+            this OwnedNavigationBuilder ownedNavigationBuilder,
+            MethodInfo? function)
+        {
+            ToFunction(function, ownedNavigationBuilder.OwnedEntityType);
+
+            return ownedNavigationBuilder;
+        }
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static OwnedNavigationBuilder ToFunction(
             this OwnedNavigationBuilder ownedNavigationBuilder,
             string name,
             Action<TableValuedFunctionBuilder> configureFunction)
         {
-            Check.NotNull(ownedNavigationBuilder, nameof(ownedNavigationBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NotNull(configureFunction, nameof(configureFunction));
 
-            configureFunction(new TableValuedFunctionBuilder(SetFunction(name, ownedNavigationBuilder.OwnedEntityType)));
+            configureFunction(new TableValuedFunctionBuilder(ToFunction(name, ownedNavigationBuilder.OwnedEntityType)));
 
             return ownedNavigationBuilder;
         }
@@ -824,56 +1324,155 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type that this relationship targets. </typeparam>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <returns> The function configuration builder. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> ToFunction<TEntity, TRelatedEntity>(
-            this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
-            string? name)
-            where TEntity : class
-            where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToFunction((OwnedNavigationBuilder)referenceOwnershipBuilder, name);
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder ToFunction(
+            this OwnedNavigationBuilder ownedNavigationBuilder,
+            MethodInfo function,
+            Action<TableValuedFunctionBuilder> configureFunction)
+        {
+            Check.NotNull(function, nameof(function));
+            Check.NotNull(configureFunction, nameof(configureFunction));
+
+            configureFunction(new TableValuedFunctionBuilder(ToFunction(function, ownedNavigationBuilder.OwnedEntityType)));
+
+            return ownedNavigationBuilder;
+        }
 
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <typeparam name="TRelatedEntity"> The entity type that this relationship targets. </typeparam>
-        /// <param name="referenceOwnershipBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the function. </param>
-        /// <param name="configureFunction"> The function configuration action. </param>
-        /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> ToFunction<TEntity, TRelatedEntity>(
-            this OwnedNavigationBuilder<TEntity, TRelatedEntity> referenceOwnershipBuilder,
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <returns>The function configuration builder.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToFunction<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            string? name)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction((OwnedNavigationBuilder)referenceOwnershipBuilder, name);
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <returns>The function configuration builder.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToFunction<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            MethodInfo? function)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
+                (OwnedNavigationBuilder)referenceOwnershipBuilder, function);
+
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToFunction<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
             string name,
             Action<TableValuedFunctionBuilder> configureFunction)
-            where TEntity : class
+            where TOwnerEntity : class
             where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)ToFunction(
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
                 (OwnedNavigationBuilder)referenceOwnershipBuilder, name, configureFunction);
 
+        /// <summary>
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="referenceOwnershipBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <param name="configureFunction">The function configuration action.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> ToFunction<TOwnerEntity, TRelatedEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity> referenceOwnershipBuilder,
+            MethodInfo function,
+            Action<TableValuedFunctionBuilder> configureFunction)
+            where TOwnerEntity : class
+            where TRelatedEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
+                (OwnedNavigationBuilder)referenceOwnershipBuilder, function, configureFunction);
+
         [return: NotNullIfNotNull("name")]
-        private static IMutableDbFunction? SetFunction(string? name, IMutableEntityType entityType)
+        private static IMutableDbFunction? ToFunction(string? name, IMutableEntityType entityType)
         {
             entityType.SetFunctionName(name);
 
+            if (name is null)
+            {
+                return null;
+            }
+
             var model = entityType.Model;
-            var function = name is not null
-                ? model.FindDbFunction(name) ?? model.AddDbFunction(
-                    name, typeof(IQueryable<>).MakeGenericType(entityType.ClrType ?? typeof(Dictionary<string, object>)))
-                : null;
+            var function = model.FindDbFunction(name);
+            if (function != null)
+            {
+                ((DbFunction)function).UpdateConfigurationSource(ConfigurationSource.Explicit);
+            }
+            else
+            {
+                function = model.AddDbFunction(name, typeof(IQueryable<>).MakeGenericType(entityType.ClrType));
+            }
+
+            return function;
+        }
+
+        [return: NotNullIfNotNull("method")]
+        private static IMutableDbFunction? ToFunction(MethodInfo? method, IMutableEntityType entityType)
+        {
+            var name = method == null ? null : DbFunction.GetFunctionName(method);
+            entityType.SetFunctionName(name);
+
+            if (name is null)
+            {
+                return null;
+            }
+
+            var model = entityType.Model;
+            var function = model.FindDbFunction(name);
+            if (function != null)
+            {
+                ((DbFunction)function).UpdateConfigurationSource(ConfigurationSource.Explicit);
+            }
+            else
+            {
+                function = model.AddDbFunction(method!);
+            }
 
             return function;
         }
 
         /// <summary>
-        ///     Configures the table that the entity type maps to when targeting a relational database.
+        ///     Configures the function that the entity type maps to when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -891,7 +1490,7 @@ namespace Microsoft.EntityFrameworkCore
             var entityType = entityTypeBuilder.Metadata;
             entityType.SetFunctionName(name, fromDataAnnotation);
 
-            if (name is null)
+            if (name is not null)
             {
                 entityType.Model.Builder.HasDbFunction(name, typeof(IQueryable<>).MakeGenericType(entityType.ClrType), fromDataAnnotation);
             }
@@ -900,13 +1499,51 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
-        ///     Returns a value indicating whether the view or table name can be set for this entity type
+        ///     Configures the function that the entity type maps to when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>
+        ///     The same builder instance if the configuration was applied,
+        ///     <see langword="null" /> otherwise.
+        /// </returns>
+        public static IConventionEntityTypeBuilder? ToFunction(
+            this IConventionEntityTypeBuilder entityTypeBuilder,
+            MethodInfo? function,
+            bool fromDataAnnotation = false)
+        {
+            var name = function == null ? null : DbFunction.GetFunctionName(function);
+            if (!entityTypeBuilder.CanSetFunction(name, fromDataAnnotation))
+            {
+                return null;
+            }
+
+            var entityType = entityTypeBuilder.Metadata;
+            entityType.SetFunctionName(name, fromDataAnnotation);
+
+            if (function is not null)
+            {
+                entityType.Model.Builder.HasDbFunction(function, fromDataAnnotation);
+            }
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Returns a value indicating whether the function name can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the view or table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the function.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetFunction(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
@@ -918,39 +1555,42 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         /// <summary>
+        ///     Returns a value indicating whether the function name can be set for this entity type
+        ///     using the specified configuration source.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="function">The method representing the function.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
+        public static bool CanSetFunction(
+            this IConventionEntityTypeBuilder entityTypeBuilder,
+            MethodInfo? function,
+            bool fromDataAnnotation = false)
+            => entityTypeBuilder.CanSetFunction(function == null ? null : DbFunction.GetFunctionName(function), fromDataAnnotation);
+
+        /// <summary>
         ///     Configures a database check constraint when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The entity type builder. </param>
-        /// <param name="name"> The name of the check constraint. </param>
-        /// <param name="sql"> The logical constraint sql used in the check constraint. </param>
-        /// <returns> A builder to further configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The entity type builder.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <returns>A builder to further configure the entity type.</returns>
         public static EntityTypeBuilder HasCheckConstraint(
             this EntityTypeBuilder entityTypeBuilder,
             string name,
             string? sql)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NullButNotEmpty(sql, nameof(sql));
-
-            var entityType = entityTypeBuilder.Metadata;
-
-            var constraint = entityType.FindCheckConstraint(name);
-            if (constraint != null)
-            {
-                if (constraint.Sql == sql)
-                {
-                    ((CheckConstraint)constraint).UpdateConfigurationSource(ConfigurationSource.Explicit);
-                    return entityTypeBuilder;
-                }
-
-                entityType.RemoveCheckConstraint(name);
-            }
-
-            if (sql != null)
-            {
-                entityType.AddCheckConstraint(name, sql);
-            }
+            InternalCheckConstraintBuilder.HasCheckConstraint(
+                (IConventionEntityType)entityTypeBuilder.Metadata,
+                name,
+                sql,
+                ConfigurationSource.Explicit);
 
             return entityTypeBuilder;
         }
@@ -958,11 +1598,41 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database check constraint when targeting a relational database.
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The entity type builder. </param>
-        /// <param name="name"> The name of the check constraint. </param>
-        /// <param name="sql"> The logical constraint sql used in the check constraint. </param>
-        /// <returns> A builder to further configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The entity type builder.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="buildAction">An action that performs configuration of the check constraint.</param>
+        /// <returns>A builder to further configure the entity type.</returns>
+        public static EntityTypeBuilder HasCheckConstraint(
+            this EntityTypeBuilder entityTypeBuilder,
+            string name,
+            string sql,
+            Action<CheckConstraintBuilder> buildAction)
+        {
+            Check.NotEmpty(sql, nameof(sql));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            entityTypeBuilder.HasCheckConstraint(name, sql);
+
+            buildAction(new CheckConstraintBuilder(entityTypeBuilder.Metadata.FindCheckConstraint(name)!));
+
+            return entityTypeBuilder;
+        }
+
+        /// <summary>
+        ///     Configures a database check constraint when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The entity type builder.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <returns>A builder to further configure the entity type.</returns>
         public static EntityTypeBuilder<TEntity> HasCheckConstraint<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string name,
@@ -973,91 +1643,196 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a database check constraint when targeting a relational database.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The entity type builder. </param>
-        /// <param name="name"> The name of the check constraint. </param>
-        /// <param name="sql"> The logical constraint sql used in the check constraint. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The entity type builder.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="buildAction">An action that performs configuration of the check constraint.</param>
+        /// <returns>A builder to further configure the entity type.</returns>
+        public static EntityTypeBuilder<TEntity> HasCheckConstraint<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder,
+            string name,
+            string sql,
+            Action<CheckConstraintBuilder> buildAction)
+            where TEntity : class
+            => (EntityTypeBuilder<TEntity>)HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql, buildAction);
+
+        /// <summary>
+        ///     Configures a database check constraint when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The navigation builder for the owned type.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <returns>A builder to further configure the navigation.</returns>
+        public static OwnedNavigationBuilder HasCheckConstraint(
+            this OwnedNavigationBuilder ownedNavigationBuilder,
+            string name,
+            string? sql)
+        {
+            InternalCheckConstraintBuilder.HasCheckConstraint(
+                (IConventionEntityType)ownedNavigationBuilder.OwnedEntityType,
+                name,
+                sql,
+                ConfigurationSource.Explicit);
+
+            return ownedNavigationBuilder;
+        }
+
+        /// <summary>
+        ///     Configures a database check constraint when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The navigation builder for the owned type.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <returns>A builder to further configure the navigation.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> HasCheckConstraint<TOwnerEntity, TDependentEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
+            string name,
+            string? sql)
+            where TOwnerEntity : class
+            where TDependentEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql);
+
+        /// <summary>
+        ///     Configures a database check constraint when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="ownedNavigationBuilder">The navigation builder for the owned type.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="buildAction">An action that performs configuration of the check constraint.</param>
+        /// <returns>A builder to further configure the navigation.</returns>
+        public static OwnedNavigationBuilder HasCheckConstraint(
+            this OwnedNavigationBuilder ownedNavigationBuilder,
+            string name,
+            string sql,
+            Action<CheckConstraintBuilder> buildAction)
+        {
+            Check.NotEmpty(sql, nameof(sql));
+            Check.NotNull(buildAction, nameof(buildAction));
+
+            ownedNavigationBuilder.HasCheckConstraint(name, sql);
+
+            buildAction(new CheckConstraintBuilder(ownedNavigationBuilder.OwnedEntityType.FindCheckConstraint(name)!));
+
+            return ownedNavigationBuilder;
+        }
+
+        /// <summary>
+        ///     Configures a database check constraint when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
+        /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
+        /// <param name="ownedNavigationBuilder">The navigation builder for the owned type.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="buildAction">An action that performs configuration of the check constraint.</param>
+        /// <returns>A builder to further configure the navigation.</returns>
+        public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> HasCheckConstraint<TOwnerEntity, TDependentEntity>(
+            this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
+            string name,
+            string sql,
+            Action<CheckConstraintBuilder> buildAction)
+            where TOwnerEntity : class
+            where TDependentEntity : class
+            => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql, buildAction);
+
+        /// <summary>
+        ///     Configures a database check constraint when targeting a relational database.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The entity type builder.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the check constraint was configured,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        public static IConventionEntityTypeBuilder? HasCheckConstraint(
+        public static IConventionCheckConstraintBuilder? HasCheckConstraint(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
             string? sql,
             bool fromDataAnnotation = false)
-        {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NullButNotEmpty(sql, nameof(sql));
-
-            var entityType = entityTypeBuilder.Metadata;
-
-            var constraint = entityType.FindCheckConstraint(name);
-            if (constraint != null)
-            {
-                if (constraint.Sql == sql)
-                {
-                    ((CheckConstraint)constraint).UpdateConfigurationSource(
-                        fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
-                    return entityTypeBuilder;
-                }
-
-                if (!(fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
-                    .Overrides(constraint.GetConfigurationSource()))
-                {
-                    return null;
-                }
-
-                entityType.RemoveCheckConstraint(name);
-            }
-
-            if (sql != null)
-            {
-                entityType.AddCheckConstraint(name, sql, fromDataAnnotation);
-            }
-
-            return entityTypeBuilder;
-        }
+            => InternalCheckConstraintBuilder.HasCheckConstraint(
+                    entityTypeBuilder.Metadata,
+                    name,
+                    sql,
+                    fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
+                ?.Builder;
 
         /// <summary>
         ///     Returns a value indicating whether the check constraint can be configured.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="name"> The name of the check constraint. </param>
-        /// <param name="sql"> The logical constraint sql used in the check constraint. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
+        [Obsolete("Use CanHaveCheckConstraint")]
         public static bool CanSetCheckConstraint(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
             string? sql,
             bool fromDataAnnotation = false)
-        {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NullButNotEmpty(sql, nameof(sql));
+            => entityTypeBuilder.CanHaveCheckConstraint(name, sql, fromDataAnnotation);
 
-            var constraint = entityTypeBuilder.Metadata.FindCheckConstraint(name);
-
-            return constraint == null
-                || constraint.Sql == sql
-                || (fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
-                .Overrides(constraint.GetConfigurationSource());
-        }
+        /// <summary>
+        ///     Returns a value indicating whether the check constraint can be configured.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="name">The name of the check constraint.</param>
+        /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
+        public static bool CanHaveCheckConstraint(
+            this IConventionEntityTypeBuilder entityTypeBuilder,
+            string name,
+            string? sql,
+            bool fromDataAnnotation = false)
+            => InternalCheckConstraintBuilder.CanHaveCheckConstraint(
+                entityTypeBuilder.Metadata,
+                name,
+                sql,
+                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
 
         /// <summary>
         ///     Configures a comment to be applied to the table
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="comment"> The comment for the table. </param>
-        /// <returns> A builder to further configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="comment">The comment for the table.</param>
+        /// <returns>A builder to further configure the entity type.</returns>
         public static EntityTypeBuilder HasComment(
             this EntityTypeBuilder entityTypeBuilder,
             string? comment)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-
             entityTypeBuilder.Metadata.SetComment(comment);
             return entityTypeBuilder;
         }
@@ -1065,10 +1840,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a comment to be applied to the table
         /// </summary>
-        /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-        /// <param name="entityTypeBuilder"> The entity type builder. </param>
-        /// <param name="comment"> The comment for the table. </param>
-        /// <returns> A builder to further configure the entity type. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+        /// <param name="entityTypeBuilder">The entity type builder.</param>
+        /// <param name="comment">The comment for the table.</param>
+        /// <returns>A builder to further configure the entity type.</returns>
         public static EntityTypeBuilder<TEntity> HasComment<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             string? comment)
@@ -1078,9 +1856,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Configures a comment to be applied to the table
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="comment"> The comment for the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="comment">The comment for the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
@@ -1090,8 +1871,6 @@ namespace Microsoft.EntityFrameworkCore
             string? comment,
             bool fromDataAnnotation = false)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-
             if (!entityTypeBuilder.CanSetComment(comment, fromDataAnnotation))
             {
                 return null;
@@ -1105,10 +1884,13 @@ namespace Microsoft.EntityFrameworkCore
         ///     Returns a value indicating whether a comment can be set for this entity type
         ///     using the specified configuration source.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
-        /// <param name="comment"> The comment for the table. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> <see langword="true" /> if the configuration can be applied. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+        /// </remarks>
+        /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
+        /// <param name="comment">The comment for the table.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns><see langword="true" /> if the configuration can be applied.</returns>
         public static bool CanSetComment(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? comment,

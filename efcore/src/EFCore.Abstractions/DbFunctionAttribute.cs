@@ -1,9 +1,9 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Utilities;
-using CA = System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore
 {
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore
     ///     Maps a static CLR method to a database function so that the CLR method may be used in LINQ queries.
     ///     By convention uses the .NET method name as name of the database function and the default schema.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Method)]
 #pragma warning disable CA1813 // Avoid unsealed attributes
     // Already shipped unsealed
@@ -45,7 +48,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     The name of the function in the database.
         /// </summary>
-        [CA.DisallowNull]
+        [DisallowNull]
         public virtual string? Name
         {
             get => _name;

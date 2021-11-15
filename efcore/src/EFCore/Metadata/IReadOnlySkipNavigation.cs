@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -13,6 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     Represents a navigation property that is part of a relationship
     ///     that is forwarded through a third entity type.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IReadOnlySkipNavigation : IReadOnlyNavigationBase
     {
         /// <summary>
@@ -54,9 +57,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -86,7 +89,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append(" (");
             }
 
-            builder.Append(ClrType?.ShortDisplayName()).Append(")");
+            builder.Append(ClrType.ShortDisplayName()).Append(")");
 
             if (IsCollection)
             {
@@ -109,11 +112,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 && ((AnnotatableBase)this).IsReadOnly)
             {
                 var indexes = ((ISkipNavigation)this).GetPropertyIndexes();
-                builder.Append(" ").Append(indexes.Index);
-                builder.Append(" ").Append(indexes.OriginalValueIndex);
-                builder.Append(" ").Append(indexes.RelationshipIndex);
-                builder.Append(" ").Append(indexes.ShadowIndex);
-                builder.Append(" ").Append(indexes.StoreGenerationIndex);
+                builder.Append(' ').Append(indexes.Index);
+                builder.Append(' ').Append(indexes.OriginalValueIndex);
+                builder.Append(' ').Append(indexes.RelationshipIndex);
+                builder.Append(' ').Append(indexes.ShadowIndex);
+                builder.Append(' ').Append(indexes.StoreGenerationIndex);
             }
 
             if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)

@@ -1,20 +1,22 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
-    ///     <para>
-    ///         Base type for navigation and scalar properties.
-    ///     </para>
+    ///     Base type for navigation and scalar properties.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This interface is used during model creation and allows the metadata to be modified.
     ///         Once the model is built, <see cref="IReadOnlyPropertyBase" /> represents a read-only view of the same metadata.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IMutablePropertyBase : IReadOnlyPropertyBase, IMutableAnnotatable
     {
         /// <summary>
@@ -29,9 +31,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new FieldInfo? FieldInfo { get; set; }
 
         /// <summary>
-        ///     <para>
-        ///         Sets the underlying CLR field that this property should use.
-        ///     </para>
+        ///     Sets the underlying CLR field that this property should use.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Backing fields are normally found by convention as described
         ///         here: http://go.microsoft.com/fwlink/?LinkId=723277.
@@ -44,8 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         Properties are used for all other accesses. This can be changed by calling
         ///         <see cref="SetPropertyAccessMode" />.
         ///     </para>
-        /// </summary>
-        /// <param name="fieldName"> The name of the field to use. </param>
+        /// </remarks>
+        /// <param name="fieldName">The name of the field to use.</param>
         void SetField(string? fieldName);
 
         /// <summary>

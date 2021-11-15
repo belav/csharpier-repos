@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     /// <summary>
-    ///     <para>
-    ///         Provides access to change tracking information and operations for a given property.
-    ///     </para>
+    ///     Provides access to change tracking information and operations for a given property.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Instances of this class are returned from methods when using the <see cref="ChangeTracker" /> API and it is
     ///         not designed to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
-    /// <typeparam name="TEntity"> The type of the entity the property belongs to. </typeparam>
-    /// <typeparam name="TProperty"> The type of the property. </typeparam>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
+    /// <typeparam name="TEntity">The type of the entity the property belongs to.</typeparam>
+    /// <typeparam name="TProperty">The type of the property.</typeparam>
     public class PropertyEntry<TEntity, TProperty> : PropertyEntry
         where TEntity : class
     {
@@ -49,6 +52,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
         /// </summary>
         /// <value> An entry for the entity that owns this member. </value>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
         public new virtual EntityEntry<TEntity> EntityEntry
             => new(InternalEntry);
 
@@ -57,6 +63,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     the change tracker is aware of the change and <see cref="ChangeTracker.DetectChanges" /> is not required
         ///     for the context to detect the change.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
         public new virtual TProperty CurrentValue
         {
             get => InternalEntry.GetCurrentValue<TProperty>(Metadata);
@@ -69,6 +78,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     useful in disconnected scenarios where entities are retrieved with one context instance and
         ///     saved with a different context instance.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
+        /// </remarks>
         public new virtual TProperty OriginalValue
         {
             get => InternalEntry.GetOriginalValue<TProperty>(Metadata);

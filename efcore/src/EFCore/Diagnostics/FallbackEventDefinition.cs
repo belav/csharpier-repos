@@ -1,8 +1,7 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics
@@ -11,18 +10,22 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     Defines metadata for an event with more than six parameters such that it has to have
     ///     special handling.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class FallbackEventDefinition : EventDefinitionBase
     {
         /// <summary>
         ///     Creates an event definition instance.
         /// </summary>
-        /// <param name="loggingOptions"> Logging options. </param>
-        /// <param name="eventId"> The <see cref="EventId" />. </param>
-        /// <param name="level"> The <see cref="LogLevel" /> at which the event will be logged. </param>
+        /// <param name="loggingOptions">Logging options.</param>
+        /// <param name="eventId">The <see cref="EventId" />.</param>
+        /// <param name="level">The <see cref="LogLevel" /> at which the event will be logged.</param>
         /// <param name="eventIdCode">
         ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" />.
         /// </param>
-        /// <param name="messageFormat"> The parameterized message definition. </param>
+        /// <param name="messageFormat">The parameterized message definition.</param>
         public FallbackEventDefinition(
             ILoggingOptions loggingOptions,
             EventId eventId,
@@ -31,8 +34,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             string messageFormat)
             : base(loggingOptions, eventId, level, eventIdCode)
         {
-            Check.NotEmpty(messageFormat, nameof(messageFormat));
-
             MessageFormat = messageFormat;
         }
 
@@ -40,12 +41,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     Generates the message that would be logged without logging it.
         ///     Typically used for throwing an exception in warning-as-error cases.
         /// </summary>
-        /// <param name="logAction"> A delegate that will log the message to an <see cref="ILogger" />. </param>
-        /// <returns> The message string. </returns>
+        /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger" />.</param>
+        /// <returns>The message string.</returns>
         public virtual string GenerateMessage(Action<ILogger> logAction)
         {
-            Check.NotNull(logAction, nameof(logAction));
-
             var extractor = new MessageExtractingLogger();
             logAction(extractor);
             return extractor.Message;
@@ -54,9 +53,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Logs the event, or throws if the event has been configured to be treated as an error.
         /// </summary>
-        /// <typeparam name="TLoggerCategory"> The <see cref="DbLoggerCategory" />. </typeparam>
-        /// <param name="logger"> The logger to which the event should be logged. </param>
-        /// <param name="logAction"> A delegate that will log the message to an <see cref="ILogger" />. </param>
+        /// <typeparam name="TLoggerCategory">The <see cref="DbLoggerCategory" />.</typeparam>
+        /// <param name="logger">The logger to which the event should be logged.</param>
+        /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger" />.</param>
         public virtual void Log<TLoggerCategory>(
             IDiagnosticsLogger<TLoggerCategory> logger,
             Action<ILogger> logAction)

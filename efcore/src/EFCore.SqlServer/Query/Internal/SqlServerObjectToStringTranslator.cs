@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -68,21 +67,46 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
+            if (instance == null || method.Name != nameof(ToString) || arguments.Count != 0)
+            {
+                return null;
+            }
 
-            return method.Name == nameof(ToString)
-                && arguments.Count == 0
-                && instance != null
-                && _typeMapping.TryGetValue(instance.Type, out var storeType)
-                    ? _sqlExpressionFactory.Function(
-                        "CONVERT",
-                        new[] { _sqlExpressionFactory.Fragment(storeType), instance },
-                        nullable: true,
-                        argumentsPropagateNullability: new[] { false, true },
-                        typeof(string))
-                    : null;
+            if (instance.Type == typeof(bool))
+            {
+                if (instance is ColumnExpression columnExpression && columnExpression.IsNullable)
+                {
+                    return _sqlExpressionFactory.Case(
+                        new[]
+                        {
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
+                                _sqlExpressionFactory.Constant(false.ToString())),
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(true)),
+                                _sqlExpressionFactory.Constant(true.ToString()))
+                        },
+                        _sqlExpressionFactory.Constant(null));
+                }
+
+                return _sqlExpressionFactory.Case(
+                    new[]
+                    {
+                        new CaseWhenClause(
+                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
+                            _sqlExpressionFactory.Constant(false.ToString()))
+                    },
+                    _sqlExpressionFactory.Constant(true.ToString()));
+            }
+
+            return _typeMapping.TryGetValue(instance.Type, out var storeType)
+                ? _sqlExpressionFactory.Function(
+                    "CONVERT",
+                    new[] { _sqlExpressionFactory.Fragment(storeType), instance },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false, true },
+                    typeof(string))
+                : null;
         }
     }
 }

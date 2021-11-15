@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +37,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 new IMethodCallTranslator[]
                 {
                     new EqualsTranslator(sqlExpressionFactory),
-                    new StringMethodTranslator(sqlExpressionFactory),
+                    new CosmosStringMethodTranslator(sqlExpressionFactory),
                     new ContainsTranslator(sqlExpressionFactory),
-                    new RandomTranslator(sqlExpressionFactory)
+                    new RandomTranslator(sqlExpressionFactory),
+                    new MathTranslator(sqlExpressionFactory)
                     //new LikeTranslator(sqlExpressionFactory),
                     //new EnumHasFlagTranslator(sqlExpressionFactory),
                     //new GetValueOrDefaultTranslator(sqlExpressionFactory),
@@ -59,16 +60,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
-            Check.NotNull(model, nameof(model));
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
-            return _plugins.Concat(_translators)
+            => _plugins.Concat(_translators)
                 .Select(t => t.Translate(instance, method, arguments, logger))
                 .FirstOrDefault(t => t != null);
-        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

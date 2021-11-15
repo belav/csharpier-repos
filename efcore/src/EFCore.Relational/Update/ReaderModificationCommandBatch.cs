@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Update
 {
@@ -22,26 +21,28 @@ namespace Microsoft.EntityFrameworkCore.Update
     ///         This type is typically used by database providers; it is generally not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     {
-        private readonly List<ModificationCommand> _modificationCommands = new();
+        private readonly List<IReadOnlyModificationCommand> _modificationCommands = new();
 
         /// <summary>
         ///     Creates a new <see cref="ReaderModificationCommandBatch" /> instance.
         /// </summary>
-        /// <param name="dependencies"> Service dependencies. </param>
+        /// <param name="dependencies">Service dependencies.</param>
         protected ReaderModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
             CachedCommandText = new StringBuilder();
         }
 
         /// <summary>
-        ///     Service dependencies.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
-        public virtual ModificationCommandBatchFactoryDependencies Dependencies { get; }
+        protected virtual ModificationCommandBatchFactoryDependencies Dependencies { get; }
 
         /// <summary>
         ///     The update SQL generator.
@@ -62,7 +63,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     The list of conceptual insert/update/delete <see cref="ModificationCommands" />s in the batch.
         /// </summary>
-        public override IReadOnlyList<ModificationCommand> ModificationCommands
+        public override IReadOnlyList<IReadOnlyModificationCommand> ModificationCommands
             => _modificationCommands;
 
         /// <summary>
@@ -73,15 +74,13 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Adds the given insert/update/delete <see cref="ModificationCommands" /> to the batch.
         /// </summary>
-        /// <param name="modificationCommand"> The command to add. </param>
+        /// <param name="modificationCommand">The command to add.</param>
         /// <returns>
         ///     <see langword="true" /> if the command was successfully added; <see langword="false" /> if there was no
         ///     room in the current batch to add the command and it must instead be added to a new batch.
         /// </returns>
-        public override bool AddCommand(ModificationCommand modificationCommand)
+        public override bool AddCommand(IReadOnlyModificationCommand modificationCommand)
         {
-            Check.NotNull(modificationCommand, nameof(modificationCommand));
-
             if (ModificationCommands.Count == 0)
             {
                 ResetCommandText();
@@ -121,23 +120,23 @@ namespace Microsoft.EntityFrameworkCore.Update
         }
 
         /// <summary>
-        ///     Checks whether or not a new command can be added to the batch.
+        ///     Checks whether a new command can be added to the batch.
         /// </summary>
-        /// <param name="modificationCommand"> The command to potentially add. </param>
-        /// <returns> <see langword="true" /> if the command can be added; <see langword="false" /> otherwise. </returns>
-        protected abstract bool CanAddCommand(ModificationCommand modificationCommand);
+        /// <param name="modificationCommand">The command to potentially add.</param>
+        /// <returns><see langword="true" /> if the command can be added; <see langword="false" /> otherwise.</returns>
+        protected abstract bool CanAddCommand(IReadOnlyModificationCommand modificationCommand);
 
         /// <summary>
-        ///     Checks whether or not the command text is valid.
+        ///     Checks whether the command text is valid.
         /// </summary>
-        /// <returns> <see langword="true" /> if the command text is valid; <see langword="false" /> otherwise. </returns>
+        /// <returns><see langword="true" /> if the command text is valid; <see langword="false" /> otherwise.</returns>
         protected abstract bool IsCommandTextValid();
 
         /// <summary>
         ///     Gets the command text for all the commands in the current batch and also caches it
         ///     on <see cref="CachedCommandText" />.
         /// </summary>
-        /// <returns> The command text. </returns>
+        /// <returns>The command text.</returns>
         protected virtual string GetCommandText()
         {
             for (var i = LastCachedCommandIndex + 1; i < ModificationCommands.Count; i++)
@@ -152,7 +151,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Updates the command text for the command at the given position in the
         ///     <see cref="ModificationCommands" /> list.
         /// </summary>
-        /// <param name="commandPosition"> The position of the command to generate command text for. </param>
+        /// <param name="commandPosition">The position of the command to generate command text for.</param>
         protected virtual void UpdateCachedCommandText(int commandPosition)
         {
             var newModificationCommand = ModificationCommands[commandPosition];
@@ -179,14 +178,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Gets the total number of parameters needed for the batch.
         /// </summary>
-        /// <returns> The total parameter count. </returns>
+        /// <returns>The total parameter count.</returns>
         protected virtual int GetParameterCount()
             => ModificationCommands.Sum(c => c.ColumnModifications.Count);
 
         /// <summary>
         ///     Generates a <see cref="RawSqlCommand" /> for the batch.
         /// </summary>
-        /// <returns> The command. </returns>
+        /// <returns>The command.</returns>
         protected virtual RawSqlCommand CreateStoreCommand()
         {
             var commandBuilder = Dependencies.CommandBuilderFactory
@@ -234,11 +233,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Executes the command generated by <see cref="CreateStoreCommand" /> against a
         ///     database using the given connection.
         /// </summary>
-        /// <param name="connection"> The connection to the database to update. </param>
+        /// <param name="connection">The connection to the database to update.</param>
         public override void Execute(IRelationalConnection connection)
         {
-            Check.NotNull(connection, nameof(connection));
-
             var storeCommand = CreateStoreCommand();
 
             try
@@ -249,14 +246,10 @@ namespace Microsoft.EntityFrameworkCore.Update
                         storeCommand.ParameterValues,
                         null,
                         Dependencies.CurrentContext.Context,
-                        Dependencies.Logger));
+                        Dependencies.Logger, CommandSource.SaveChanges));
                 Consume(dataReader);
             }
-            catch (DbUpdateException)
-            {
-                throw;
-            }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
@@ -269,16 +262,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Executes the command generated by <see cref="CreateStoreCommand" /> against a
         ///     database using the given connection.
         /// </summary>
-        /// <param name="connection"> The connection to the database to update. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A task that represents the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="connection">The connection to the database to update.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public override async Task ExecuteAsync(
             IRelationalConnection connection,
             CancellationToken cancellationToken = default)
         {
-            Check.NotNull(connection, nameof(connection));
-
             var storeCommand = CreateStoreCommand();
 
             try
@@ -289,15 +280,11 @@ namespace Microsoft.EntityFrameworkCore.Update
                         storeCommand.ParameterValues,
                         null,
                         Dependencies.CurrentContext.Context,
-                        Dependencies.Logger),
+                        Dependencies.Logger, CommandSource.SaveChanges),
                     cancellationToken).ConfigureAwait(false);
                 await ConsumeAsync(dataReader, cancellationToken).ConfigureAwait(false);
             }
-            catch (DbUpdateException)
-            {
-                throw;
-            }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
@@ -309,16 +296,16 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Consumes the data reader created by <see cref="Execute" />.
         /// </summary>
-        /// <param name="reader"> The data reader. </param>
+        /// <param name="reader">The data reader.</param>
         protected abstract void Consume(RelationalDataReader reader);
 
         /// <summary>
         ///     Consumes the data reader created by <see cref="ExecuteAsync" />.
         /// </summary>
-        /// <param name="reader"> The data reader. </param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
-        /// <returns> A task that represents the asynchronous operation. </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <param name="reader">The data reader.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         protected abstract Task ConsumeAsync(
             RelationalDataReader reader,
             CancellationToken cancellationToken = default);
@@ -328,15 +315,15 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     <see cref="ValueBuffer" /> to consume the data reader.
         /// </summary>
         /// <param name="columnModifications">
-        ///     The list of <see cref="ColumnModification" />s for all the columns
+        ///     The list of <see cref="IColumnModification" />s for all the columns
         ///     being modified such that a ValueBuffer with appropriate slots can be created.
         /// </param>
-        /// <returns> The factory. </returns>
+        /// <returns>The factory.</returns>
         protected virtual IRelationalValueBufferFactory CreateValueBufferFactory(
-            IReadOnlyList<ColumnModification> columnModifications)
+            IReadOnlyList<IColumnModification> columnModifications)
             => Dependencies.ValueBufferFactoryFactory
                 .Create(
-                    Check.NotNull(columnModifications, nameof(columnModifications))
+                    columnModifications
                         .Where(c => c.IsRead)
                         .Select(c => new TypeMaterializationInfo(c.Property!.ClrType, c.Property, c.TypeMapping!))
                         .ToArray());

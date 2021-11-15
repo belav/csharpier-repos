@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -223,6 +223,24 @@ FROM ""Orders"" AS ""o""");
                 SqliteStrings.ApplyNotSupported,
                 (await Assert.ThrowsAsync<InvalidOperationException>(
                     () => base.Select_nested_collection_deep_distinct_no_identifiers(async))).Message);
+
+        public override async Task Reverse_in_projection_subquery(bool async)
+            => Assert.Equal(
+                SqliteStrings.ApplyNotSupported,
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Reverse_in_projection_subquery(async))).Message);
+
+        public override async Task Reverse_in_projection_subquery_single_result(bool async)
+            => Assert.Equal(
+                SqliteStrings.ApplyNotSupported,
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Reverse_in_projection_subquery_single_result(async))).Message);
+
+        public override async Task Reverse_in_SelectMany_with_Take(bool async)
+            => Assert.Equal(
+                SqliteStrings.ApplyNotSupported,
+                (await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Reverse_in_SelectMany_with_Take(async))).Message);
 
         [ConditionalTheory(Skip = "Issue#17324")]
         public override Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(bool async)

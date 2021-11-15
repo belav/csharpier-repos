@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -50,7 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual IServiceProvider Build(DbContext context)
-            => CreateServiceCollection(Check.NotNull(context, nameof(context))).BuildServiceProvider();
+            => CreateServiceCollection(context).BuildServiceProvider();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -78,7 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual IServiceProvider Build(string provider)
-            => CreateServiceCollection(Check.NotEmpty(provider, nameof(provider))).BuildServiceProvider();
+            => CreateServiceCollection(provider).BuildServiceProvider();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

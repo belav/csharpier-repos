@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -26,23 +26,27 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public static class ExpressionExtensions
     {
         /// <summary>
         ///     Creates a printable string representation of the given expression.
         /// </summary>
-        /// <param name="expression"> The expression. </param>
-        /// <param name="characterLimit"> An optional limit to the number of characters included. Additional output will be truncated. </param>
-        /// <returns> The printable representation. </returns>
+        /// <param name="expression">The expression.</param>
+        /// <param name="characterLimit">An optional limit to the number of characters included. Additional output will be truncated.</param>
+        /// <returns>The printable representation.</returns>
         public static string Print(this Expression expression, int? characterLimit = null)
-            => new ExpressionPrinter().Print(Check.NotNull(expression, nameof(expression)), characterLimit);
+            => new ExpressionPrinter().Print(expression, characterLimit);
 
         /// <summary>
         ///     Creates a <see cref="MemberExpression"></see> that represents accessing either a field or a property.
         /// </summary>
-        /// <param name="expression"> An <see cref="Expression"></see> that represents the object that the member belongs to. </param>
-        /// <param name="member"> The <see cref="MemberInfo"></see> that describes the field or property to be accessed. </param>
-        /// <returns> The <see cref="MemberExpression"></see> that results from calling the appropriate factory method. </returns>
+        /// <param name="expression">An <see cref="Expression"></see> that represents the object that the member belongs to.</param>
+        /// <param name="member">The <see cref="MemberInfo"></see> that describes the field or property to be accessed.</param>
+        /// <returns>The <see cref="MemberExpression"></see> that results from calling the appropriate factory method.</returns>
         public static MemberExpression MakeMemberAccess(
             this Expression? expression,
             MemberInfo member)
@@ -61,9 +65,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Creates a <see cref="BinaryExpression"></see> that represents an assignment operation.
         /// </summary>
-        /// <param name="memberExpression"> The member to which assignment will be made. </param>
-        /// <param name="valueExpression"> The value that will be assigned. </param>
-        /// <returns> The <see cref="BinaryExpression" /> representing the assignment binding. </returns>
+        /// <param name="memberExpression">The member to which assignment will be made.</param>
+        /// <param name="valueExpression">The value that will be assigned.</param>
+        /// <returns>The <see cref="BinaryExpression" /> representing the assignment binding.</returns>
         public static Expression Assign(
             this MemberExpression memberExpression,
             Expression valueExpression)
@@ -89,10 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     If the given a method-call expression represents a call to <see cref="EF.Property{TProperty}" />, then this
         ///     method extracts the entity expression and property name.
         /// </summary>
-        /// <param name="methodCallExpression"> The method-call expression for <see cref="EF.Property{TProperty}" /> </param>
-        /// <param name="entityExpression"> The extracted entity access expression. </param>
-        /// <param name="propertyName"> The accessed property name. </param>
-        /// <returns> <see langword="true" /> if the method-call was for <see cref="EF.Property{TProperty}" />; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodCallExpression">The method-call expression for <see cref="EF.Property{TProperty}" /></param>
+        /// <param name="entityExpression">The extracted entity access expression.</param>
+        /// <param name="propertyName">The accessed property name.</param>
+        /// <returns><see langword="true" /> if the method-call was for <see cref="EF.Property{TProperty}" />; <see langword="false" /> otherwise.</returns>
         public static bool TryGetEFPropertyArguments(
             this MethodCallExpression methodCallExpression,
             [NotNullWhen(true)] out Expression? entityExpression,
@@ -114,11 +118,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     If the given a method-call expression represents a call to indexer on the entity, then this
         ///     method extracts the entity expression and property name.
         /// </summary>
-        /// <param name="methodCallExpression"> The method-call expression for indexer. </param>
-        /// <param name="model"> The model to use. </param>
-        /// <param name="entityExpression"> The extracted entity access expression. </param>
-        /// <param name="propertyName"> The accessed property name. </param>
-        /// <returns> <see langword="true" /> if the method-call was for indexer; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodCallExpression">The method-call expression for indexer.</param>
+        /// <param name="model">The model to use.</param>
+        /// <param name="entityExpression">The extracted entity access expression.</param>
+        /// <param name="propertyName">The accessed property name.</param>
+        /// <returns><see langword="true" /> if the method-call was for indexer; <see langword="false" /> otherwise.</returns>
         public static bool TryGetIndexerArguments(
             this MethodCallExpression methodCallExpression,
             IModel model,
@@ -139,28 +143,24 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         }
 
         /// <summary>
-        ///     <para>
-        ///         Gets the <see cref="PropertyInfo" /> represented by a simple property-access expression.
-        ///     </para>
-        ///     <para>
-        ///         This method is typically used to parse property access lambdas from fluent APIs.
-        ///     </para>
+        ///     Gets the <see cref="PropertyInfo" /> represented by a simple property-access expression.
         /// </summary>
-        /// <param name="propertyAccessExpression"> The expression. </param>
-        /// <returns> The <see cref="PropertyInfo" />. </returns>
+        /// <remarks>
+        ///     This method is typically used to parse property access lambdas from fluent APIs.
+        /// </remarks>
+        /// <param name="propertyAccessExpression">The expression.</param>
+        /// <returns>The <see cref="PropertyInfo" />.</returns>
         public static PropertyInfo GetPropertyAccess(this LambdaExpression propertyAccessExpression)
             => GetInternalMemberAccess<PropertyInfo>(propertyAccessExpression);
 
         /// <summary>
-        ///     <para>
-        ///         Gets the <see cref="MemberInfo" /> represented by a simple member-access expression.
-        ///     </para>
-        ///     <para>
-        ///         This method is typically used to parse member access lambdas from fluent APIs.
-        ///     </para>
+        ///     Gets the <see cref="MemberInfo" /> represented by a simple member-access expression.
         /// </summary>
-        /// <param name="memberAccessExpression"> The expression. </param>
-        /// <returns> The <see cref="MemberInfo" />. </returns>
+        /// <remarks>
+        ///     This method is typically used to parse member access lambdas from fluent APIs.
+        /// </remarks>
+        /// <param name="memberAccessExpression">The expression.</param>
+        /// <returns>The <see cref="MemberInfo" />.</returns>
         public static MemberInfo GetMemberAccess(this LambdaExpression memberAccessExpression)
             => GetInternalMemberAccess<MemberInfo>(memberAccessExpression);
 
@@ -207,10 +207,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         }
 
         /// <summary>
-        ///     <para>
-        ///         Returns a list of <see cref="PropertyInfo" /> extracted from the given simple
-        ///         <see cref="LambdaExpression" />.
-        ///     </para>
+        ///     Returns a list of <see cref="PropertyInfo" /> extracted from the given simple
+        ///     <see cref="LambdaExpression" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Only simple expressions are supported, such as those used to reference a property.
         ///     </para>
@@ -218,13 +218,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         This method is typically used by database providers (and other extensions). It is generally
         ///         not used in application code.
         ///     </para>
-        /// </summary>
-        /// <param name="propertyAccessExpression"> The expression. </param>
-        /// <returns> The list of referenced properties. </returns>
+        /// </remarks>
+        /// <param name="propertyAccessExpression">The expression.</param>
+        /// <returns>The list of referenced properties.</returns>
         public static IReadOnlyList<PropertyInfo> GetPropertyAccessList(this LambdaExpression propertyAccessExpression)
         {
-            Check.NotNull(propertyAccessExpression, nameof(propertyAccessExpression));
-
             if (propertyAccessExpression.Parameters.Count != 1)
             {
                 throw new ArgumentException(
@@ -246,10 +244,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         }
 
         /// <summary>
-        ///     <para>
-        ///         Returns a list of <see cref="MemberInfo" /> extracted from the given simple
-        ///         <see cref="LambdaExpression" />.
-        ///     </para>
+        ///     Returns a list of <see cref="MemberInfo" /> extracted from the given simple
+        ///     <see cref="LambdaExpression" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Only simple expressions are supported, such as those used to reference a member.
         ///     </para>
@@ -257,13 +255,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         This method is typically used by database providers (and other extensions). It is generally
         ///         not used in application code.
         ///     </para>
-        /// </summary>
-        /// <param name="memberAccessExpression"> The expression. </param>
-        /// <returns> The list of referenced members. </returns>
+        /// </remarks>
+        /// <param name="memberAccessExpression">The expression.</param>
+        /// <returns>The list of referenced members.</returns>
         public static IReadOnlyList<MemberInfo> GetMemberAccessList(this LambdaExpression memberAccessExpression)
         {
-            Check.NotNull(memberAccessExpression, nameof(memberAccessExpression));
-
             var memberPaths = memberAccessExpression
                 .MatchMemberAccessList((p, e) => e.MatchSimpleMemberAccess<MemberInfo>(p));
 
@@ -286,11 +282,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="valueBuffer"> The expression that exposes the <see cref="ValueBuffer" />. </param>
-        /// <param name="type"> The type to read. </param>
-        /// <param name="index"> The index in the buffer to read from. </param>
-        /// <param name="property"> The IPropertyBase being read if any. </param>
-        /// <returns> An expression to read the value. </returns>
+        /// <param name="valueBuffer">The expression that exposes the <see cref="ValueBuffer" />.</param>
+        /// <param name="type">The type to read.</param>
+        /// <param name="index">The index in the buffer to read from.</param>
+        /// <param name="property">The IPropertyBase being read if any.</param>
+        /// <returns>An expression to read the value.</returns>
         public static Expression CreateValueBufferReadValueExpression(
             this Expression valueBuffer,
             Type type,
@@ -333,10 +329,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="target"> The expression that will be root for generated read operation. </param>
-        /// <param name="properties"> The list of properties to use to generate key values. </param>
-        /// <param name="makeNullable"> A value indicating if the key values should be read nullable. </param>
-        /// <returns> An expression to read the key values. </returns>
+        /// <param name="target">The expression that will be root for generated read operation.</param>
+        /// <param name="properties">The list of properties to use to generate key values.</param>
+        /// <param name="makeNullable">A value indicating if the key values should be read nullable.</param>
+        /// <returns>An expression to read the key values.</returns>
         public static Expression CreateKeyValuesExpression(
             this Expression target,
             IReadOnlyList<IProperty> properties,
@@ -357,15 +353,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="target"> The expression that will be root for generated read operation. </param>
-        /// <param name="property"> The property to access. </param>
-        /// <param name="makeNullable"> A value indicating if the value can be nullable. </param>
-        /// <returns> An expression to access EF property on given expression. </returns>
+        /// <param name="target">The expression that will be root for generated read operation.</param>
+        /// <param name="property">The property to access.</param>
+        /// <param name="makeNullable">A value indicating if the value can be nullable.</param>
+        /// <returns>An expression to access EF property on given expression.</returns>
         public static Expression CreateEFPropertyExpression(
             this Expression target,
             IPropertyBase property,
-            bool makeNullable = true)
-            // No shadow entities in runtime
+            bool makeNullable = true) // No shadow entities in runtime
             => CreateEFPropertyExpression(target, property.DeclaringType.ClrType, property.ClrType, property.Name, makeNullable);
 
         private static Expression CreateEFPropertyExpression(

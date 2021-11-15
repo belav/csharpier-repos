@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -23,6 +23,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public abstract class CoreTypeMapping
     {
         /// <summary>
@@ -33,11 +37,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// <summary>
             ///     Creates a new <see cref="CoreTypeMappingParameters" /> parameter object.
             /// </summary>
-            /// <param name="clrType"> The .NET type used in the EF model. </param>
-            /// <param name="converter"> Converts types to and from the store whenever this mapping is used. </param>
-            /// <param name="comparer"> Supports custom value snapshotting and comparisons. </param>
-            /// <param name="keyComparer"> Supports custom comparisons between keys--e.g. PK to FK comparison. </param>
-            /// <param name="valueGeneratorFactory"> An optional factory for creating a specific <see cref="ValueGenerator" />. </param>
+            /// <param name="clrType">The .NET type used in the EF model.</param>
+            /// <param name="converter">Converts types to and from the store whenever this mapping is used.</param>
+            /// <param name="comparer">Supports custom value snapshotting and comparisons.</param>
+            /// <param name="keyComparer">Supports custom comparisons between keys--e.g. PK to FK comparison.</param>
+            /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see cref="ValueGenerator" />.</param>
             public CoreTypeMappingParameters(
                 Type clrType,
                 ValueConverter? converter = null,
@@ -45,8 +49,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 ValueComparer? keyComparer = null,
                 Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null)
             {
-                Check.NotNull(clrType, nameof(clrType));
-
                 ClrType = clrType;
                 Converter = converter;
                 Comparer = comparer;
@@ -57,12 +59,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// <summary>
             ///     Creates a new <see cref="CoreTypeMappingParameters" /> parameter object.
             /// </summary>
-            /// <param name="clrType"> The .NET type used in the EF model. </param>
-            /// <param name="converter"> Converts types to and from the store whenever this mapping is used. </param>
-            /// <param name="comparer"> Supports custom value snapshotting and comparisons. </param>
-            /// <param name="keyComparer"> Supports custom comparisons between keys--e.g. PK to FK comparison. </param>
-            /// <param name="structuralComparer"> Supports structural snapshotting needed for mutable reference types. </param>
-            /// <param name="valueGeneratorFactory"> An optional factory for creating a specific <see cref="ValueGenerator" />. </param>
+            /// <param name="clrType">The .NET type used in the EF model.</param>
+            /// <param name="converter">Converts types to and from the store whenever this mapping is used.</param>
+            /// <param name="comparer">Supports custom value snapshotting and comparisons.</param>
+            /// <param name="keyComparer">Supports custom comparisons between keys--e.g. PK to FK comparison.</param>
+            /// <param name="structuralComparer">Supports structural snapshotting needed for mutable reference types.</param>
+            /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see cref="ValueGenerator" />.</param>
             [Obsolete(
                 "Use overload without 'structuralComparer'. Starting with EF Core 5.0, key comparers must implement structural comparisons and deep copies.")]
             public CoreTypeMappingParameters(
@@ -73,8 +75,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 ValueComparer? structuralComparer,
                 Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory)
             {
-                Check.NotNull(clrType, nameof(clrType));
-
                 ClrType = clrType;
                 Converter = converter;
                 Comparer = comparer;
@@ -119,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             ///     Creates a new <see cref="CoreTypeMappingParameters" /> parameter object with the given
             ///     converter composed with any existing converter and set on the new parameter object.
             /// </summary>
-            /// <param name="converter"> The converter. </param>
-            /// <returns> The new parameter object. </returns>
+            /// <param name="converter">The converter.</param>
+            /// <returns>The new parameter object.</returns>
             public CoreTypeMappingParameters WithComposedConverter(ValueConverter? converter)
                 => new(
                     ClrType,
@@ -136,7 +136,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="CoreTypeMapping" /> class.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
+        /// <param name="parameters">The parameters for this mapping.</param>
         protected CoreTypeMapping(CoreTypeMappingParameters parameters)
         {
             Parameters = parameters;
@@ -146,11 +146,23 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var clrType = converter?.ModelClrType ?? parameters.ClrType;
             ClrType = clrType;
 
+            Check.DebugAssert(
+                parameters.Comparer == null
+                || parameters.ClrType == null
+                || converter != null
+                || parameters.Comparer.Type == parameters.ClrType,
+                $"Expected {parameters.ClrType}, got {parameters.Comparer?.Type}");
             if (parameters.Comparer?.Type == clrType)
             {
                 _comparer = parameters.Comparer;
             }
 
+            Check.DebugAssert(
+                parameters.KeyComparer == null
+                || parameters.ClrType == null
+                || converter != null
+                || parameters.KeyComparer.Type == parameters.ClrType,
+                $"Expected {parameters.ClrType}, got {parameters.KeyComparer?.Type}");
             if (parameters.KeyComparer?.Type == clrType)
             {
                 _keyComparer = parameters.KeyComparer;
@@ -216,8 +228,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Returns a new copy of this type mapping with the given <see cref="ValueConverter" />
         ///     added.
         /// </summary>
-        /// <param name="converter"> The converter to use. </param>
-        /// <returns> A new type mapping </returns>
+        /// <param name="converter">The converter to use.</param>
+        /// <returns>A new type mapping</returns>
         public abstract CoreTypeMapping Clone(ValueConverter? converter);
 
         /// <summary>
@@ -225,8 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Currently, only very basic expressions such as constructor calls and factory methods taking
         ///     simple constants are supported.
         /// </summary>
-        /// <param name="value"> The value for which a literal is needed. </param>
-        /// <returns> An expression tree that can be used to generate code for the literal value. </returns>
+        /// <param name="value">The value for which a literal is needed.</param>
+        /// <returns>An expression tree that can be used to generate code for the literal value.</returns>
         public virtual Expression GenerateCodeLiteral(object value)
             => throw new NotSupportedException(CoreStrings.LiteralGenerationNotSupported(ClrType.ShortDisplayName()));
     }

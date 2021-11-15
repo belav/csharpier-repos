@@ -1,19 +1,20 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using Xunit;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public class TagHelperMatchingConventionsTest
 {
-    public class TagHelperMatchingConventionsTest
+    public static TheoryData RequiredAttributeDescriptorData
     {
-        public static TheoryData RequiredAttributeDescriptorData
+        get
         {
-            get
-            {
-                // requiredAttributeDescriptor, attributeName, attributeValue, expectedResult
-                return new TheoryData<Action<RequiredAttributeDescriptorBuilder>, string, string, bool>
+            // requiredAttributeDescriptor, attributeName, attributeValue, expectedResult
+            return new TheoryData<Action<RequiredAttributeDescriptorBuilder>, string, string, bool>
                 {
                     {
                         builder => builder.Name("key"),
@@ -128,31 +129,64 @@ namespace Microsoft.AspNetCore.Razor.Language
                         false
                     },
                 };
-            }
         }
+    }
 
-        [Theory]
-        [MemberData(nameof(RequiredAttributeDescriptorData))]
-        public void Matches_ReturnsExpectedResult(
-            Action<RequiredAttributeDescriptorBuilder> configure,
-            string attributeName,
-            string attributeValue,
-            bool expectedResult)
-        {
-            // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
-            var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
+    [Theory]
+    [MemberData(nameof(RequiredAttributeDescriptorData))]
+    public void Matches_ReturnsExpectedResult(
+        Action<RequiredAttributeDescriptorBuilder> configure,
+        string attributeName,
+        string attributeValue,
+        bool expectedResult)
+    {
+        // Arrange
+        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
+        var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
-            configure(builder);
+        configure(builder);
 
-            var requiredAttibute = builder.Build();
+        var requiredAttibute = builder.Build();
 
-            // Act
-            var result = TagHelperMatchingConventions.SatisfiesRequiredAttribute(attributeName, attributeValue, requiredAttibute);
+        // Act
+        var result = TagHelperMatchingConventions.SatisfiesRequiredAttribute(attributeName, attributeValue, requiredAttibute);
 
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
+        // Assert
+        Assert.Equal(expectedResult, result);
+    }
+
+    [Fact]
+    public void CanSatisfyBoundAttribute_IndexerAttribute_ReturnsFalseIsNotMatching()
+    {
+        // Arrange
+        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        builder.AsDictionary("asp-", typeof(Dictionary<string, string>).FullName);
+
+        var boundAttribute = builder.Build();
+
+        // Act
+        var result = TagHelperMatchingConventions.CanSatisfyBoundAttribute("style", boundAttribute);
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void CanSatisfyBoundAttribute_IndexerAttribute_ReturnsTrueIfMatching()
+    {
+        // Arrange
+        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        builder.AsDictionary("asp-", typeof(Dictionary<string, string>).FullName);
+
+        var boundAttribute = builder.Build();
+
+        // Act
+        var result = TagHelperMatchingConventions.CanSatisfyBoundAttribute("asp-route-controller", boundAttribute);
+
+        // Assert
+        Assert.True(result);
     }
 }

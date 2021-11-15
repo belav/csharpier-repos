@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -91,12 +90,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 context,
                 _queryExpression,
                 static (t, c, q) =>
-                {
-                    var queryCompiler = c.GetService<IQueryCompiler>();
-                    var expression = new QueryExpressionRewriter(c, q.Parameters).Visit(q.Body);
+                    {
+                        var queryCompiler = c.GetService<IQueryCompiler>();
+                        var expression = new QueryExpressionRewriter(c, q.Parameters).Visit(q.Body);
 
-                    return t.CreateCompiledQuery(queryCompiler, expression);
-                });
+                        return t.CreateCompiledQuery(queryCompiler, expression);
+                    });
 
         private sealed class QueryExpressionRewriter : ExpressionVisitor
         {
@@ -113,8 +112,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitParameter(ParameterExpression parameterExpression)
             {
-                Check.NotNull(parameterExpression, nameof(parameterExpression));
-
                 if (typeof(TContext).IsAssignableFrom(parameterExpression.Type))
                 {
                     return Expression.Constant(_context);

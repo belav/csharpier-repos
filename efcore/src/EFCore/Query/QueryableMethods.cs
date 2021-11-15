@@ -1,18 +1,21 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
     /// <summary>
     ///     A class that provides reflection metadata for translatable LINQ methods.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public static class QueryableMethods
     {
         //public static MethodInfo AggregateWithoutSeed { get; }
@@ -90,12 +93,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         //public static MethodInfo DistinctWithComparer { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.ElementAt{TSource}" />
+        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.ElementAt{TSource}(IQueryable{TSource}, int)" />
         /// </summary>
         public static MethodInfo ElementAt { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.ElementAtOrDefault{TSource}" />
+        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.ElementAtOrDefault{TSource}(IQueryable{TSource}, int)" />
         /// </summary>
         public static MethodInfo ElementAtOrDefault { get; }
 
@@ -112,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public static MethodInfo FirstWithoutPredicate { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.First{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
+        ///     The <see cref="MethodInfo" /> for
+        ///     <see cref="Queryable.First{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
         /// </summary>
         public static MethodInfo FirstWithPredicate { get; }
 
@@ -221,7 +225,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public static MethodInfo MaxWithoutSelector { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.Max{TSource}" />
+        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.Max{TSource}(IQueryable{TSource})" />
         /// </summary>
         public static MethodInfo MaxWithSelector { get; }
 
@@ -231,7 +235,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public static MethodInfo MinWithoutSelector { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.Min{TSource}" />
+        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.Min{TSource}(IQueryable{TSource})" />
         /// </summary>
         public static MethodInfo MinWithSelector { get; }
 
@@ -322,7 +326,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         //public static MethodInfo SkipWhileOrdinal { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.Take{TSource}" />
+        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.Take{TSource}(IQueryable{TSource}, int)" />
         /// </summary>
         public static MethodInfo Take { get; }
 
@@ -366,102 +370,70 @@ namespace Microsoft.EntityFrameworkCore.Query
         //public static MethodInfo Zip { get; }
 
         /// <summary>
-        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="M:Queryable.Average" /> without a selector.
+        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="O:Queryable.Average" /> without a selector.
         /// </summary>
-        /// <param name="methodInfo"> The method to check. </param>
-        /// <returns> <see langword="true" /> if the method matches; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodInfo">The method to check.</param>
+        /// <returns><see langword="true" /> if the method matches; <see langword="false" /> otherwise.</returns>
         public static bool IsAverageWithoutSelector(MethodInfo methodInfo)
-        {
-            Check.NotNull(methodInfo, nameof(methodInfo));
-
-            return AverageWithoutSelectorMethods.Values.Contains(methodInfo);
-        }
+            => AverageWithoutSelectorMethods.Values.Contains(methodInfo);
 
         /// <summary>
-        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="M:Queryable.Average" /> with a selector.
+        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="O:Queryable.Average" /> with a selector.
         /// </summary>
-        /// <param name="methodInfo"> The method to check. </param>
-        /// <returns> <see langword="true" /> if the method matches; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodInfo">The method to check.</param>
+        /// <returns><see langword="true" /> if the method matches; <see langword="false" /> otherwise.</returns>
         public static bool IsAverageWithSelector(MethodInfo methodInfo)
-        {
-            Check.NotNull(methodInfo, nameof(methodInfo));
-
-            return methodInfo.IsGenericMethod
+            => methodInfo.IsGenericMethod
                 && AverageWithSelectorMethods.Values.Contains(methodInfo.GetGenericMethodDefinition());
-        }
 
         /// <summary>
-        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="M:Queryable.Sum" /> without a selector.
+        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="O:Queryable.Sum" /> without a selector.
         /// </summary>
-        /// <param name="methodInfo"> The method to check. </param>
-        /// <returns> <see langword="true" /> if the method matches; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodInfo">The method to check.</param>
+        /// <returns><see langword="true" /> if the method matches; <see langword="false" /> otherwise.</returns>
         public static bool IsSumWithoutSelector(MethodInfo methodInfo)
-        {
-            Check.NotNull(methodInfo, nameof(methodInfo));
-
-            return SumWithoutSelectorMethods.Values.Contains(methodInfo);
-        }
+            => SumWithoutSelectorMethods.Values.Contains(methodInfo);
 
         /// <summary>
-        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="M:Queryable.Sum" /> with a selector.
+        ///     Checks whether or not the given <see cref="MethodInfo" /> is one of the <see cref="O:Queryable.Sum" /> with a selector.
         /// </summary>
-        /// <param name="methodInfo"> The method to check. </param>
-        /// <returns> <see langword="true" /> if the method matches; <see langword="false" /> otherwise. </returns>
+        /// <param name="methodInfo">The method to check.</param>
+        /// <returns><see langword="true" /> if the method matches; <see langword="false" /> otherwise.</returns>
         public static bool IsSumWithSelector(MethodInfo methodInfo)
-        {
-            Check.NotNull(methodInfo, nameof(methodInfo));
-
-            return methodInfo.IsGenericMethod
+            => methodInfo.IsGenericMethod
                 && SumWithSelectorMethods.Values.Contains(methodInfo.GetGenericMethodDefinition());
-        }
 
         /// <summary>
-        ///     Returns the <see cref="MethodInfo" /> for the <see cref="M:Queryable.Average" /> method without a selector for the given type.
+        ///     Returns the <see cref="MethodInfo" /> for the <see cref="O:Queryable.Average" /> method without a selector for the given type.
         /// </summary>
-        /// <param name="type"> The generic type of the method to create. </param>
-        /// <returns> The <see cref="MethodInfo" />. </returns>
+        /// <param name="type">The generic type of the method to create.</param>
+        /// <returns>The <see cref="MethodInfo" />.</returns>
         public static MethodInfo GetAverageWithoutSelector(Type type)
-        {
-            Check.NotNull(type, nameof(type));
-
-            return AverageWithoutSelectorMethods[type];
-        }
+            => AverageWithoutSelectorMethods[type];
 
         /// <summary>
-        ///     Returns the <see cref="MethodInfo" /> for the <see cref="M:Queryable.Average" /> method with a selector for the given type.
+        ///     Returns the <see cref="MethodInfo" /> for the <see cref="O:Queryable.Average" /> method with a selector for the given type.
         /// </summary>
-        /// <param name="type"> The generic type of the method to create. </param>
-        /// <returns> The <see cref="MethodInfo" />. </returns>
+        /// <param name="type">The generic type of the method to create.</param>
+        /// <returns>The <see cref="MethodInfo" />.</returns>
         public static MethodInfo GetAverageWithSelector(Type type)
-        {
-            Check.NotNull(type, nameof(type));
-
-            return AverageWithSelectorMethods[type];
-        }
+            => AverageWithSelectorMethods[type];
 
         /// <summary>
-        ///     Returns the <see cref="MethodInfo" /> for the <see cref="M:Queryable.Sum" /> method without a selector for the given type.
+        ///     Returns the <see cref="MethodInfo" /> for the <see cref="O:Queryable.Sum" /> method without a selector for the given type.
         /// </summary>
-        /// <param name="type"> The generic type of the method to create. </param>
-        /// <returns> The <see cref="MethodInfo" />. </returns>
+        /// <param name="type">The generic type of the method to create.</param>
+        /// <returns>The <see cref="MethodInfo" />.</returns>
         public static MethodInfo GetSumWithoutSelector(Type type)
-        {
-            Check.NotNull(type, nameof(type));
-
-            return SumWithoutSelectorMethods[type];
-        }
+            => SumWithoutSelectorMethods[type];
 
         /// <summary>
-        ///     Returns the <see cref="MethodInfo" /> for the <see cref="M:Queryable.Sum" /> method with a selector for the given type.
+        ///     Returns the <see cref="MethodInfo" /> for the <see cref="O:Queryable.Sum" /> method with a selector for the given type.
         /// </summary>
-        /// <param name="type"> The generic type of the method to create. </param>
-        /// <returns> The <see cref="MethodInfo" />. </returns>
+        /// <param name="type">The generic type of the method to create.</param>
+        /// <returns>The <see cref="MethodInfo" />.</returns>
         public static MethodInfo GetSumWithSelector(Type type)
-        {
-            Check.NotNull(type, nameof(type));
-
-            return SumWithSelectorMethods[type];
-        }
+            => SumWithSelectorMethods[type];
 
         private static Dictionary<Type, MethodInfo> AverageWithoutSelectorMethods { get; }
         private static Dictionary<Type, MethodInfo> AverageWithSelectorMethods { get; }
@@ -475,56 +447,66 @@ namespace Microsoft.EntityFrameworkCore.Query
                 .GroupBy(mi => mi.Name)
                 .ToDictionary(e => e.Key, l => l.ToList());
 
-            All = GetMethod(nameof(Queryable.All), 1,
+            All = GetMethod(
+                nameof(Queryable.All), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            AnyWithoutPredicate = GetMethod(nameof(Queryable.Any), 1,
+            AnyWithoutPredicate = GetMethod(
+                nameof(Queryable.Any), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            AnyWithPredicate = GetMethod(nameof(Queryable.Any), 1,
+            AnyWithPredicate = GetMethod(
+                nameof(Queryable.Any), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            AsQueryable = GetMethod(nameof(Queryable.AsQueryable), 1,
+            AsQueryable = GetMethod(
+                nameof(Queryable.AsQueryable), 1,
                 types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
 
             Cast = GetMethod(nameof(Queryable.Cast), 1, types => new[] { typeof(IQueryable) });
 
-            Concat = GetMethod(nameof(Queryable.Concat), 1,
+            Concat = GetMethod(
+                nameof(Queryable.Concat), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(IEnumerable<>).MakeGenericType(types[0])
                 });
 
-            Contains = GetMethod(nameof(Queryable.Contains), 1,
+            Contains = GetMethod(
+                nameof(Queryable.Contains), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     types[0]
                 });
 
-            CountWithoutPredicate = GetMethod(nameof(Queryable.Count), 1,
+            CountWithoutPredicate = GetMethod(
+                nameof(Queryable.Count), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            CountWithPredicate = GetMethod(nameof(Queryable.Count), 1,
+            CountWithPredicate = GetMethod(
+                nameof(Queryable.Count), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            DefaultIfEmptyWithoutArgument = GetMethod(nameof(Queryable.DefaultIfEmpty), 1,
+            DefaultIfEmptyWithoutArgument = GetMethod(
+                nameof(Queryable.DefaultIfEmpty), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            DefaultIfEmptyWithArgument = GetMethod(nameof(Queryable.DefaultIfEmpty), 1,
+            DefaultIfEmptyWithArgument = GetMethod(
+                nameof(Queryable.DefaultIfEmpty), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -533,54 +515,63 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Distinct = GetMethod(nameof(Queryable.Distinct), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            ElementAt = GetMethod(nameof(Queryable.ElementAt), 1,
+            ElementAt = GetMethod(
+                nameof(Queryable.ElementAt), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(int)
                 });
 
-            ElementAtOrDefault = GetMethod(nameof(Queryable.ElementAtOrDefault), 1,
+            ElementAtOrDefault = GetMethod(
+                nameof(Queryable.ElementAtOrDefault), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(int)
                 });
 
-            Except = GetMethod(nameof(Queryable.Except), 1,
+            Except = GetMethod(
+                nameof(Queryable.Except), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(IEnumerable<>).MakeGenericType(types[0])
                 });
 
-            FirstWithoutPredicate = GetMethod(nameof(Queryable.First), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
+            FirstWithoutPredicate = GetMethod(
+                nameof(Queryable.First), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            FirstWithPredicate = GetMethod(nameof(Queryable.First), 1,
+            FirstWithPredicate = GetMethod(
+                nameof(Queryable.First), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            FirstOrDefaultWithoutPredicate = GetMethod(nameof(Queryable.FirstOrDefault), 1,
+            FirstOrDefaultWithoutPredicate = GetMethod(
+                nameof(Queryable.FirstOrDefault), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            FirstOrDefaultWithPredicate = GetMethod(nameof(Queryable.FirstOrDefault), 1,
+            FirstOrDefaultWithPredicate = GetMethod(
+                nameof(Queryable.FirstOrDefault), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            GroupByWithKeySelector = GetMethod(nameof(Queryable.GroupBy), 2,
+            GroupByWithKeySelector = GetMethod(
+                nameof(Queryable.GroupBy), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1]))
                 });
 
-            GroupByWithKeyElementSelector = GetMethod(nameof(Queryable.GroupBy), 3,
+            GroupByWithKeyElementSelector = GetMethod(
+                nameof(Queryable.GroupBy), 3,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -588,44 +579,52 @@ namespace Microsoft.EntityFrameworkCore.Query
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[2]))
                 });
 
-            GroupByWithKeyElementResultSelector = GetMethod(nameof(Queryable.GroupBy), 4,
+            GroupByWithKeyElementResultSelector = GetMethod(
+                nameof(Queryable.GroupBy), 4,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1])),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[2])),
-                    typeof(Expression<>).MakeGenericType(typeof(Func<,,>).MakeGenericType(
-                        types[1], typeof(IEnumerable<>).MakeGenericType(types[2]), types[3]))
+                    typeof(Expression<>).MakeGenericType(
+                        typeof(Func<,,>).MakeGenericType(
+                            types[1], typeof(IEnumerable<>).MakeGenericType(types[2]), types[3]))
                 });
 
-            GroupByWithKeyResultSelector = GetMethod(nameof(Queryable.GroupBy), 3,
+            GroupByWithKeyResultSelector = GetMethod(
+                nameof(Queryable.GroupBy), 3,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1])),
-                    typeof(Expression<>).MakeGenericType(typeof(Func<,,>).MakeGenericType(
-                        types[1], typeof(IEnumerable<>).MakeGenericType(types[0]), types[2]))
+                    typeof(Expression<>).MakeGenericType(
+                        typeof(Func<,,>).MakeGenericType(
+                            types[1], typeof(IEnumerable<>).MakeGenericType(types[0]), types[2]))
                 });
 
-            GroupJoin = GetMethod(nameof(Queryable.GroupJoin), 4,
+            GroupJoin = GetMethod(
+                nameof(Queryable.GroupJoin), 4,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(IEnumerable<>).MakeGenericType(types[1]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[2])),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[1], types[2])),
-                    typeof(Expression<>).MakeGenericType(typeof(Func<,,>).MakeGenericType(
-                        types[0], typeof(IEnumerable<>).MakeGenericType(types[1]), types[3]))
+                    typeof(Expression<>).MakeGenericType(
+                        typeof(Func<,,>).MakeGenericType(
+                            types[0], typeof(IEnumerable<>).MakeGenericType(types[1]), types[3]))
                 });
 
-            Intersect = GetMethod(nameof(Queryable.Intersect), 1,
+            Intersect = GetMethod(
+                nameof(Queryable.Intersect), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(IEnumerable<>).MakeGenericType(types[0])
                 });
 
-            Join = GetMethod(nameof(Queryable.Join), 4,
+            Join = GetMethod(
+                nameof(Queryable.Join), 4,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -637,27 +636,32 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             LastWithoutPredicate = GetMethod(nameof(Queryable.Last), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            LastWithPredicate = GetMethod(nameof(Queryable.Last), 1,
+            LastWithPredicate = GetMethod(
+                nameof(Queryable.Last), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            LastOrDefaultWithoutPredicate = GetMethod(nameof(Queryable.LastOrDefault), 1,
+            LastOrDefaultWithoutPredicate = GetMethod(
+                nameof(Queryable.LastOrDefault), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            LastOrDefaultWithPredicate = GetMethod(nameof(Queryable.LastOrDefault), 1,
+            LastOrDefaultWithPredicate = GetMethod(
+                nameof(Queryable.LastOrDefault), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            LongCountWithoutPredicate = GetMethod(nameof(Queryable.LongCount), 1,
+            LongCountWithoutPredicate = GetMethod(
+                nameof(Queryable.LongCount), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            LongCountWithPredicate = GetMethod(nameof(Queryable.LongCount), 1,
+            LongCountWithPredicate = GetMethod(
+                nameof(Queryable.LongCount), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -666,7 +670,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             MaxWithoutSelector = GetMethod(nameof(Queryable.Max), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            MaxWithSelector = GetMethod(nameof(Queryable.Max), 2,
+            MaxWithSelector = GetMethod(
+                nameof(Queryable.Max), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -675,7 +680,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             MinWithoutSelector = GetMethod(nameof(Queryable.Min), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            MinWithSelector = GetMethod(nameof(Queryable.Min), 2,
+            MinWithSelector = GetMethod(
+                nameof(Queryable.Min), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -684,14 +690,16 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             OfType = GetMethod(nameof(Queryable.OfType), 1, types => new[] { typeof(IQueryable) });
 
-            OrderBy = GetMethod(nameof(Queryable.OrderBy), 2,
+            OrderBy = GetMethod(
+                nameof(Queryable.OrderBy), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1]))
                 });
 
-            OrderByDescending = GetMethod(nameof(Queryable.OrderByDescending), 2,
+            OrderByDescending = GetMethod(
+                nameof(Queryable.OrderByDescending), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -700,99 +708,116 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Reverse = GetMethod(nameof(Queryable.Reverse), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            Select = GetMethod(nameof(Queryable.Select), 2,
+            Select = GetMethod(
+                nameof(Queryable.Select), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1]))
                 });
 
-            SelectManyWithoutCollectionSelector = GetMethod(nameof(Queryable.SelectMany), 2,
+            SelectManyWithoutCollectionSelector = GetMethod(
+                nameof(Queryable.SelectMany), 2,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
-                    typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(
-                        types[0], typeof(IEnumerable<>).MakeGenericType(types[1])))
+                    typeof(Expression<>).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(
+                            types[0], typeof(IEnumerable<>).MakeGenericType(types[1])))
                 });
 
-            SelectManyWithCollectionSelector = GetMethod(nameof(Queryable.SelectMany), 3,
+            SelectManyWithCollectionSelector = GetMethod(
+                nameof(Queryable.SelectMany), 3,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
-                    typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(
-                        types[0], typeof(IEnumerable<>).MakeGenericType(types[1]))),
+                    typeof(Expression<>).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(
+                            types[0], typeof(IEnumerable<>).MakeGenericType(types[1]))),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2]))
                 });
 
-            SingleWithoutPredicate = GetMethod(nameof(Queryable.Single), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
+            SingleWithoutPredicate = GetMethod(
+                nameof(Queryable.Single), 1, types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            SingleWithPredicate = GetMethod(nameof(Queryable.Single), 1,
+            SingleWithPredicate = GetMethod(
+                nameof(Queryable.Single), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            SingleOrDefaultWithoutPredicate = GetMethod(nameof(Queryable.SingleOrDefault), 1,
+            SingleOrDefaultWithoutPredicate = GetMethod(
+                nameof(Queryable.SingleOrDefault), 1,
                 types => new[] { typeof(IQueryable<>).MakeGenericType(types[0]) });
 
-            SingleOrDefaultWithPredicate = GetMethod(nameof(Queryable.SingleOrDefault), 1,
+            SingleOrDefaultWithPredicate = GetMethod(
+                nameof(Queryable.SingleOrDefault), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            Skip = GetMethod(nameof(Queryable.Skip), 1,
+            Skip = GetMethod(
+                nameof(Queryable.Skip), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(int)
                 });
 
-            SkipWhile = GetMethod(nameof(Queryable.SkipWhile), 1,
+            SkipWhile = GetMethod(
+                nameof(Queryable.SkipWhile), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            Take = GetMethod(nameof(Queryable.Take), 1,
+            Take = GetMethod(
+                nameof(Queryable.Take), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(int)
                 });
 
-            TakeWhile = GetMethod(nameof(Queryable.TakeWhile), 1,
+            TakeWhile = GetMethod(
+                nameof(Queryable.TakeWhile), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], typeof(bool)))
                 });
 
-            ThenBy = GetMethod(nameof(Queryable.ThenBy), 2,
+            ThenBy = GetMethod(
+                nameof(Queryable.ThenBy), 2,
                 types => new[]
                 {
                     typeof(IOrderedQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1]))
                 });
 
-            ThenByDescending = GetMethod(nameof(Queryable.ThenByDescending), 2,
+            ThenByDescending = GetMethod(
+                nameof(Queryable.ThenByDescending), 2,
                 types => new[]
                 {
                     typeof(IOrderedQueryable<>).MakeGenericType(types[0]),
                     typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], types[1]))
                 });
 
-            Union = GetMethod(nameof(Queryable.Union), 1,
+            Union = GetMethod(
+                nameof(Queryable.Union), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
                     typeof(IEnumerable<>).MakeGenericType(types[0])
                 });
 
-            Where = GetMethod(nameof(Queryable.Where), 1,
+            Where = GetMethod(
+                nameof(Queryable.Where), 1,
                 types => new[]
                 {
                     typeof(IQueryable<>).MakeGenericType(types[0]),
@@ -823,14 +848,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                 AverageWithoutSelectorMethods[type] = GetMethod(
                     nameof(Queryable.Average), 0, types => new[] { typeof(IQueryable<>).MakeGenericType(type) });
                 AverageWithSelectorMethods[type] = GetMethod(
-                    nameof(Queryable.Average), 1, types => new[] {
+                    nameof(Queryable.Average), 1, types => new[]
+                    {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], type))
                     });
                 SumWithoutSelectorMethods[type] = GetMethod(
                     nameof(Queryable.Sum), 0, types => new[] { typeof(IQueryable<>).MakeGenericType(type) });
                 SumWithSelectorMethods[type] = GetMethod(
-                    nameof(Queryable.Sum), 1, types => new[] {
+                    nameof(Queryable.Sum), 1, types => new[]
+                    {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(types[0], type))
                     });

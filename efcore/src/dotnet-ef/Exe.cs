@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -51,7 +51,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
             {
                 if (i != 0)
                 {
-                    builder.Append(" ");
+                    builder.Append(' ');
                 }
 
                 if (args[i].Length == 0)
@@ -67,7 +67,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     continue;
                 }
 
-                builder.Append("\"");
+                builder.Append('"');
 
                 var pendingBackslashes = 0;
                 for (var j = 0; j < args[i].Length; j++)
@@ -113,7 +113,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     builder.Append('\\', pendingBackslashes * 2);
                 }
 
-                builder.Append("\"");
+                builder.Append('"');
             }
 
             return builder.ToString();

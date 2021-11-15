@@ -52,6 +52,30 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => GetString("ClientGroupByNotSupported");
 
         /// <summary>
+        ///     The function parameter '{function}({parameter})' has a custom type mapping configured. Configure it in '{customize}' in a partial '{className}' class instead.
+        /// </summary>
+        public static string CompiledModelFunctionParameterTypeMapping(object? function, object? parameter, object? customize, object? className)
+            => string.Format(
+                GetString("CompiledModelFunctionParameterTypeMapping", nameof(function), nameof(parameter), nameof(customize), nameof(className)),
+                function, parameter, customize, className);
+
+        /// <summary>
+        ///     The function '{function}' has a custom translation. Compiled model can't be generated, because custom function translations are not supported.
+        /// </summary>
+        public static string CompiledModelFunctionTranslation(object? function)
+            => string.Format(
+                GetString("CompiledModelFunctionTranslation", nameof(function)),
+                function);
+
+        /// <summary>
+        ///     The function '{function}' has a custom type mapping configured. Configure it in '{customize}' in a partial '{className}' class instead.
+        /// </summary>
+        public static string CompiledModelFunctionTypeMapping(object? function, object? customize, object? className)
+            => string.Format(
+                GetString("CompiledModelFunctionTypeMapping", nameof(function), nameof(customize), nameof(className)),
+                function, customize, className);
+
+        /// <summary>
         ///     The computed column SQL has not been specified for the column '{table}.{column}'. Specify the SQL before using Entity Framework to create the database schema.
         /// </summary>
         public static string ComputedColumnSqlUnspecified(object? table, object? column)
@@ -286,12 +310,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => GetString("DistinctOnCollectionNotSupported");
 
         /// <summary>
-        ///     The check constraint '{checkConstraint}' cannot be added to the entity type '{entityType}' because another check constraint with the same name already exists.
+        ///     The check constraint '{checkConstraint}' cannot be added to the entity type '{entityType}' because another check constraint with the same name already exists on entity type '{conflictingEntityType}'.
         /// </summary>
-        public static string DuplicateCheckConstraint(object? checkConstraint, object? entityType)
+        public static string DuplicateCheckConstraint(object? checkConstraint, object? entityType, object? conflictingEntityType)
             => string.Format(
-                GetString("DuplicateCheckConstraint", nameof(checkConstraint), nameof(entityType)),
-                checkConstraint, entityType);
+                GetString("DuplicateCheckConstraint", nameof(checkConstraint), nameof(entityType), nameof(conflictingEntityType)),
+                checkConstraint, entityType, conflictingEntityType);
+
+        /// <summary>
+        ///     The check constraints '{checkConstraint1}' on '{entityType1}' and '{checkConstraint2}' on '{entityType2}' are both mapped to '{checkConstraintName}', but with different defining SQL.
+        /// </summary>
+        public static string DuplicateCheckConstraintSqlMismatch(object? checkConstraint1, object? entityType1, object? checkConstraint2, object? entityType2, object? checkConstraintName)
+            => string.Format(
+                GetString("DuplicateCheckConstraintSqlMismatch", nameof(checkConstraint1), nameof(entityType1), nameof(checkConstraint2), nameof(entityType2), nameof(checkConstraintName)),
+                checkConstraint1, entityType1, checkConstraint2, entityType2, checkConstraintName);
 
         /// <summary>
         ///     '{entityType1}.{property1}' and '{entityType2}.{property2}' are both mapped to column '{columnName}' in '{table}', but are configured to use different collations ('{collation1}' and '{collation2}').
@@ -374,6 +406,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 entityType1, property1, entityType2, property2, columnName, table);
 
         /// <summary>
+        ///     '{entityType1}.{property1}' and '{entityType2}.{property2}' are both mapped to column '{columnName}' in '{table}', but are configured to use different column orders ('{columnOrder1}' and '{columnOrder2}').
+        /// </summary>
+        public static string DuplicateColumnNameOrderMismatch(object? entityType1, object? property1, object? entityType2, object? property2, object? columnName, object? table, object? columnOrder1, object? columnOrder2)
+            => string.Format(
+                GetString("DuplicateColumnNameOrderMismatch", nameof(entityType1), nameof(property1), nameof(entityType2), nameof(property2), nameof(columnName), nameof(table), nameof(columnOrder1), nameof(columnOrder2)),
+                entityType1, property1, entityType2, property2, columnName, table, columnOrder1, columnOrder2);
+
+        /// <summary>
         ///     '{entityType1}.{property1}' and '{entityType2}.{property2}' are both mapped to column '{columnName}' in '{table}', but are configured with different precisions ('{precision1}' and '{precision2}').
         /// </summary>
         public static string DuplicateColumnNamePrecisionMismatch(object? entityType1, object? property1, object? entityType2, object? property2, object? columnName, object? table, object? precision1, object? precision2)
@@ -452,6 +492,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => string.Format(
                 GetString("DuplicateIndexColumnMismatch", nameof(indexProperties1), nameof(entityType1), nameof(indexProperties2), nameof(entityType2), nameof(table), nameof(indexName), nameof(columnNames1), nameof(columnNames2)),
                 indexProperties1, entityType1, indexProperties2, entityType2, table, indexName, columnNames1, columnNames2);
+
+        /// <summary>
+        ///     The indexes {indexProperties1} on '{entityType1}' and {indexProperties2} on '{entityType2}' are both mapped to '{table}.{indexName}', but with different filters ('{filter1}' and '{filter2}').
+        /// </summary>
+        public static string DuplicateIndexFiltersMismatch(object? indexProperties1, object? entityType1, object? indexProperties2, object? entityType2, object? table, object? indexName, object? filter1, object? filter2)
+            => string.Format(
+                GetString("DuplicateIndexFiltersMismatch", nameof(indexProperties1), nameof(entityType1), nameof(indexProperties2), nameof(entityType2), nameof(table), nameof(indexName), nameof(filter1), nameof(filter2)),
+                indexProperties1, entityType1, indexProperties2, entityType2, table, indexName, filter1, filter2);
 
         /// <summary>
         ///     The indexes {indexProperties1} on '{entityType1}' and {indexProperties2} on '{entityType2}' are both mapped to '{indexName}', but are declared on different tables ('{table1}' and '{table2}').
@@ -642,10 +690,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 valuesCount, columnsCount, table);
 
         /// <summary>
-        ///     Unable to translate a collection subquery in a projection since the parent query doesn't project the key columns of all tables required to generate results on the client side. This can happen when trying to correlate on keyless entity or when using 'Distinct' or 'GroupBy' operations without projecting all of the key columns.
+        ///     Unable to translate a collection subquery in a projection since either parent or the subquery doesn't project necessary information required to uniquely identify it and correctly generate results on the client side. This can happen when trying to correlate on keyless entity type. This can also happen for some cases of projection before 'Distinct' or some shapes of grouping key in case of 'GroupBy'. These should either contain all key properties of the entity that the operation is applied on, or only contain simple property access expressions.
         /// </summary>
-        public static string InsufficientInformationToIdentifyOuterElementOfCollectionJoin
-            => GetString("InsufficientInformationToIdentifyOuterElementOfCollectionJoin");
+        public static string InsufficientInformationToIdentifyElementOfCollectionJoin
+            => GetString("InsufficientInformationToIdentifyElementOfCollectionJoin");
 
         /// <summary>
         ///     The specified 'CommandTimeout' value '{value}' is not valid. It must be a positive number.
@@ -662,6 +710,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => string.Format(
                 GetString("InvalidDerivedTypeInEntityProjection", nameof(derivedType), nameof(entityType)),
                 derivedType, entityType);
+
+        /// <summary>
+        ///     A FromSqlExpression has an invalid arguments expression type '{expressionType}' or value type '{valueType}'.
+        /// </summary>
+        public static string InvalidFromSqlArguments(object? expressionType, object? valueType)
+            => string.Format(
+                GetString("InvalidFromSqlArguments", nameof(expressionType), nameof(valueType)),
+                expressionType, valueType);
 
         /// <summary>
         ///     The grouping key '{keySelector}' is of type '{keyType}' which is not valid key.
@@ -922,12 +978,26 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => GetString("ProjectionMappingCountMismatch");
 
         /// <summary>
+        ///     The '{propertyType}' property '{entityType}.{property}' could not be mapped to the database type '{storeType}' because the database provider does not support mapping '{propertyType}' properties to '{storeType}' columns. Consider mapping to a different database type or converting the property value to a type supported by the database using a value converter. See https://aka.ms/efcore-docs-value-converters for more information. Alternately, exclude the property from the model using the '[NotMapped]' attribute or by using 'EntityTypeBuilder.Ignore' in 'OnModelCreating'.
+        /// </summary>
+        public static string PropertyNotMapped(object? propertyType, object? entityType, object? property, object? storeType)
+            => string.Format(
+                GetString("PropertyNotMapped", nameof(propertyType), nameof(entityType), nameof(property), nameof(storeType)),
+                propertyType, entityType, property, storeType);
+
+        /// <summary>
         ///     The property '{property}' on entity type '{entityType}' is not mapped to '{table}'.
         /// </summary>
         public static string PropertyNotMappedToTable(object? property, object? entityType, object? table)
             => string.Format(
                 GetString("PropertyNotMappedToTable", nameof(property), nameof(entityType), nameof(table)),
                 property, entityType, table);
+
+        /// <summary>
+        ///     The query contains usage of 'Any' or 'AnyAsync' operation after 'FromSqlRaw' or 'FromSqlInterpolated' method. Using this raw SQL query more than once isn't currently supported. Replace the use of 'Any' or 'AnyAsync' with 'Count' or 'CountAsync'. See https://go.microsoft.com/fwlink/?linkid=2174053 for more information.
+        /// </summary>
+        public static string QueryFromSqlInsideExists
+            => GetString("QueryFromSqlInsideExists");
 
         /// <summary>
         ///     The entity type '{entityType}' is not mapped to a table, therefore the entities cannot be persisted to the database. Call 'ToTable' in 'OnModelCreating' to map it to a table.
@@ -1054,6 +1124,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => GetString("TransactionAssociatedWithDifferentConnection");
 
         /// <summary>
+        ///     User transaction is not supported with a TransactionSuppressed migrations.
+        /// </summary>
+        public static string TransactionSuppressedMigrationInUserTransaction
+            => GetString("TransactionSuppressedMigrationInUserTransaction");
+
+        /// <summary>
         ///     Unable to bind '{memberType}.{member}' to an entity projection of '{entityType}'.
         /// </summary>
         public static string UnableToBindMemberToEntityProjection(object? memberType, object? member, object? entityType)
@@ -1062,12 +1138,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 memberType, member, entityType);
 
         /// <summary>
-        ///     The query has been configured to use '{splitQueryEnumValue}', but contains a collection in the 'Select' call which could not be split into a separate query. Remove '{splitQueryMethodName}' if applied, or add '{singleQueryMethodName}' to the query.
+        ///     Unhandled annotatable type '{annotatableType}'.
         /// </summary>
-        public static string UnableToSplitCollectionProjectionInSplitQuery(object? splitQueryEnumValue, object? splitQueryMethodName, object? singleQueryMethodName)
+        public static string UnhandledAnnotatableType(object? annotatableType)
             => string.Format(
-                GetString("UnableToSplitCollectionProjectionInSplitQuery", nameof(splitQueryEnumValue), nameof(splitQueryMethodName), nameof(singleQueryMethodName)),
-                splitQueryEnumValue, splitQueryMethodName, singleQueryMethodName);
+                GetString("UnhandledAnnotatableType", nameof(annotatableType)),
+                annotatableType);
 
         /// <summary>
         ///     Unhandled expression '{expression}' of type '{expressionType}' encountered in '{visitor}'.
@@ -1528,6 +1604,31 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         }
 
         /// <summary>
+        ///     The order of column '{table}.{column}' was ignored. Column orders are only used when the table is first created.
+        /// </summary>
+        public static EventDefinition<string, string> LogColumnOrderIgnoredWarning(IDiagnosticsLogger logger)
+        {
+            var definition = ((RelationalLoggingDefinitions)logger.Definitions).LogColumnOrderIgnoredWarning;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((RelationalLoggingDefinitions)logger.Definitions).LogColumnOrderIgnoredWarning,
+                    logger,
+                    static logger => new EventDefinition<string, string>(
+                        logger.Options,
+                        RelationalEventId.ColumnOrderIgnoredWarning,
+                        LogLevel.Warning,
+                        "RelationalEventId.ColumnOrderIgnoredWarning",
+                        level => LoggerMessage.Define<string, string>(
+                            level,
+                            RelationalEventId.ColumnOrderIgnoredWarning,
+                            _resourceManager.GetString("LogColumnOrderIgnoredWarning")!)));
+            }
+
+            return (EventDefinition<string, string>)definition;
+        }
+
+        /// <summary>
         ///     Created DbCommand for '{executionType}' ({elapsed}ms).
         /// </summary>
         public static EventDefinition<string, int> LogCommandCreated(IDiagnosticsLogger logger)
@@ -1803,6 +1904,31 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         }
 
         /// <summary>
+        ///     The configured column orders for the table '{table}' contains duplicates. Ensure the specified column order values are distinct. Conflicting columns: {columns}
+        /// </summary>
+        public static EventDefinition<string, string> LogDuplicateColumnOrders(IDiagnosticsLogger logger)
+        {
+            var definition = ((RelationalLoggingDefinitions)logger.Definitions).LogDuplicateColumnOrders;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((RelationalLoggingDefinitions)logger.Definitions).LogDuplicateColumnOrders,
+                    logger,
+                    static logger => new EventDefinition<string, string>(
+                        logger.Options,
+                        RelationalEventId.DuplicateColumnOrders,
+                        LogLevel.Error,
+                        "RelationalEventId.DuplicateColumnOrders",
+                        level => LoggerMessage.Define<string, string>(
+                            level,
+                            RelationalEventId.DuplicateColumnOrders,
+                            _resourceManager.GetString("LogDuplicateColumnOrders")!)));
+            }
+
+            return (EventDefinition<string, string>)definition;
+        }
+
+        /// <summary>
         ///     Executed DbCommand ({elapsed}ms) [Parameters=[{parameters}], CommandType='{commandType}', CommandTimeout='{commandTimeout}']{newLine}{commandText}
         /// </summary>
         public static EventDefinition<string, string, System.Data.CommandType, int, string, string> LogExecutedCommand(IDiagnosticsLogger logger)
@@ -2063,7 +2189,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     static logger => new EventDefinition<string?, string, string>(
                         logger.Options,
                         RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable,
-                        LogLevel.Information,
+                        LogLevel.Warning,
                         "RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable",
                         level => LoggerMessage.Define<string?, string, string>(
                             level,
@@ -2216,6 +2342,56 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                             level,
                             RelationalEventId.ConnectionOpening,
                             _resourceManager.GetString("LogOpeningConnection")!)));
+            }
+
+            return (EventDefinition<string, string>)definition;
+        }
+
+        /// <summary>
+        ///     The entity of type '{entityType}' is an optional dependent using table sharing. The entity does not have any property with a non-default value to identify whether the entity exists. This means that when it is queried no object instance will be created instead of an instance with all properties set to default values. Any nested dependents will also be lost. Either don't save any instance with only default values or mark the incoming navigation as required in the model. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values of the entity.
+        /// </summary>
+        public static EventDefinition<string> LogOptionalDependentWithAllNullProperties(IDiagnosticsLogger logger)
+        {
+            var definition = ((RelationalLoggingDefinitions)logger.Definitions).LogOptionalDependentWithAllNullProperties;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((RelationalLoggingDefinitions)logger.Definitions).LogOptionalDependentWithAllNullProperties,
+                    logger,
+                    static logger => new EventDefinition<string>(
+                        logger.Options,
+                        RelationalEventId.OptionalDependentWithAllNullPropertiesWarning,
+                        LogLevel.Warning,
+                        "RelationalEventId.OptionalDependentWithAllNullPropertiesWarning",
+                        level => LoggerMessage.Define<string>(
+                            level,
+                            RelationalEventId.OptionalDependentWithAllNullPropertiesWarning,
+                            _resourceManager.GetString("LogOptionalDependentWithAllNullProperties")!)));
+            }
+
+            return (EventDefinition<string>)definition;
+        }
+
+        /// <summary>
+        ///     The entity of type '{entityType}' with primary key values {keyValues} is an optional dependent using table sharing. The entity does not have any property with a non-default value to identify whether the entity exists. This means that when it is queried no object instance will be created instead of an instance with all properties set to default values. Any nested dependents will also be lost. Either don't save any instance with only default values or mark the incoming navigation as required in the model.
+        /// </summary>
+        public static EventDefinition<string, string> LogOptionalDependentWithAllNullPropertiesSensitive(IDiagnosticsLogger logger)
+        {
+            var definition = ((RelationalLoggingDefinitions)logger.Definitions).LogOptionalDependentWithAllNullPropertiesSensitive;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((RelationalLoggingDefinitions)logger.Definitions).LogOptionalDependentWithAllNullPropertiesSensitive,
+                    logger,
+                    static logger => new EventDefinition<string, string>(
+                        logger.Options,
+                        RelationalEventId.OptionalDependentWithAllNullPropertiesWarning,
+                        LogLevel.Warning,
+                        "RelationalEventId.OptionalDependentWithAllNullPropertiesWarning",
+                        level => LoggerMessage.Define<string, string>(
+                            level,
+                            RelationalEventId.OptionalDependentWithAllNullPropertiesWarning,
+                            _resourceManager.GetString("LogOptionalDependentWithAllNullPropertiesSensitive")!)));
             }
 
             return (EventDefinition<string, string>)definition;
@@ -2511,7 +2687,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     static logger => new EventDefinition<string, string>(
                         logger.Options,
                         RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable,
-                        LogLevel.Information,
+                        LogLevel.Warning,
                         "RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable",
                         level => LoggerMessage.Define<string, string>(
                             level,

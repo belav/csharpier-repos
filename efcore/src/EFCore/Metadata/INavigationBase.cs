@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// <summary>
     ///     Represents a navigation property which can be used to navigate a relationship.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface INavigationBase : IReadOnlyNavigationBase, IPropertyBase
     {
         /// <summary>
@@ -44,14 +47,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets the <see cref="IClrCollectionAccessor" /> for this navigation property, if it's a collection
         ///     navigation.
         /// </summary>
-        /// <returns> The accessor. </returns>
+        /// <returns>The accessor.</returns>
         IClrCollectionAccessor? GetCollectionAccessor();
 
         /// <summary>
         ///     Calls <see cref="ILazyLoader.SetLoaded" /> for a <see cref="INavigationBase" /> to mark it as loaded
         ///     when a no-tracking query has eagerly loaded this relationship.
         /// </summary>
-        /// <param name="entity"> The entity for which the navigation has been loaded. </param>
+        /// <param name="entity">The entity for which the navigation has been loaded.</param>
         void SetIsLoadedWhenNoTracking(object entity)
         {
             Check.NotNull(entity, nameof(entity));

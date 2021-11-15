@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -59,8 +59,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             _generateContextAccessors = generateContextAccessors;
             // The entry method will take care of populating this field always. So accesses should be safe.
             _evaluatableExpressions = null!;
-            // TODO: Use MemberNotNullWhen
-            // Value won't be accessed when condition is not met.
             _contextParameterReplacingExpressionVisitor = _generateContextAccessors
                 ? new ContextParameterReplacingExpressionVisitor(contextType)
                 : null!;
@@ -342,7 +340,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             if (compilerPrefixIndex != -1)
             {
-                parameterName = parameterName.Substring(compilerPrefixIndex + 1);
+                parameterName = parameterName[(compilerPrefixIndex + 1)..];
             }
 
             parameterName

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -25,16 +25,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     Sets the name of the database function.
         /// </summary>
-        /// <param name="name"> The name of the function in the database. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="name">The name of the function in the database.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual TableValuedFunctionBuilder HasName(string name)
             => (TableValuedFunctionBuilder)base.HasName(name);
 
         /// <summary>
         ///     Sets the schema of the database function.
         /// </summary>
-        /// <param name="schema"> The schema of the function in the database. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+        /// </remarks>
+        /// <param name="schema">The schema of the function in the database.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual TableValuedFunctionBuilder HasSchema(string? schema)
             => (TableValuedFunctionBuilder)base.HasSchema(schema);
     }

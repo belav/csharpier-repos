@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -14,12 +14,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public interface IConventionAnnotation : IAnnotation
     {
         /// <summary>
         ///     Returns the configuration source for this annotation.
         /// </summary>
-        /// <returns> The configuration source. </returns>
+        /// <returns>The configuration source.</returns>
         ConfigurationSource GetConfigurationSource();
     }
 }

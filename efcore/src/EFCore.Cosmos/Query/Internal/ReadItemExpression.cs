@@ -1,11 +1,10 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 #nullable disable
 
@@ -81,9 +80,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IEntityType entityType,
             IDictionary<IProperty, string> propertyParameters)
         {
-            Check.NotNull(entityType, nameof(entityType));
-            Check.NotNull(propertyParameters, nameof(propertyParameters));
-
             Container = entityType.GetContainer();
 
             ProjectionExpression = new ProjectionExpression(

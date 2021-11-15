@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +12,18 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore
 {
     /// <summary>
-    ///     Foregn key extension methods for relational database metadata.
+    ///     Foreign key extension methods for relational database metadata.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public static class RelationalForeignKeyExtensions
     {
         /// <summary>
         ///     Returns the foreign key constraint name.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <returns> The foreign key constraint name. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <returns>The foreign key constraint name.</returns>
         public static string? GetConstraintName(this IReadOnlyForeignKey foreignKey)
         {
             var annotation = foreignKey.FindAnnotation(RelationalAnnotationNames.Name);
@@ -32,10 +35,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns the foreign key constraint name.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="storeObject"> The identifier of the containing store object. </param>
-        /// <param name="principalStoreObject"> The identifier of the principal store object. </param>
-        /// <returns> The foreign key constraint name. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="storeObject">The identifier of the containing store object.</param>
+        /// <param name="principalStoreObject">The identifier of the principal store object.</param>
+        /// <returns>The foreign key constraint name.</returns>
         public static string? GetConstraintName(
             this IReadOnlyForeignKey foreignKey,
             in StoreObjectIdentifier storeObject,
@@ -50,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns the default constraint name that would be used for this foreign key.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <returns> The default constraint name that would be used for this foreign key. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <returns>The default constraint name that would be used for this foreign key.</returns>
         public static string GetDefaultName(this IReadOnlyForeignKey foreignKey)
         {
             var tableName = foreignKey.DeclaringEntityType.GetTableName();
@@ -61,9 +64,9 @@ namespace Microsoft.EntityFrameworkCore
             var name = new StringBuilder()
                 .Append("FK_")
                 .Append(tableName)
-                .Append("_")
+                .Append('_')
                 .Append(principalTableName)
-                .Append("_")
+                .Append('_')
                 .AppendJoin(foreignKey.Properties.Select(p => p.GetColumnBaseName()), "_")
                 .ToString();
 
@@ -73,10 +76,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns the default constraint name that would be used for this foreign key.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="storeObject"> The identifier of the containing store object. </param>
-        /// <param name="principalStoreObject"> The identifier of the principal store object. </param>
-        /// <returns> The default constraint name that would be used for this foreign key. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="storeObject">The identifier of the containing store object.</param>
+        /// <param name="principalStoreObject">The identifier of the principal store object.</param>
+        /// <returns>The default constraint name that would be used for this foreign key.</returns>
         public static string? GetDefaultName(
             this IReadOnlyForeignKey foreignKey,
             in StoreObjectIdentifier storeObject,
@@ -133,9 +136,9 @@ namespace Microsoft.EntityFrameworkCore
             var baseName = new StringBuilder()
                 .Append("FK_")
                 .Append(storeObject.Name)
-                .Append("_")
+                .Append('_')
                 .Append(principalStoreObject.Name)
-                .Append("_")
+                .Append('_')
                 .AppendJoin(propertyNames, "_")
                 .ToString();
 
@@ -145,8 +148,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Sets the foreign key constraint name.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="value"> The value to set. </param>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="value">The value to set.</param>
         public static void SetConstraintName(this IMutableForeignKey foreignKey, string? value)
             => foreignKey.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.Name,
@@ -155,10 +158,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Sets the foreign key constraint name.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="value"> The value to set. </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> The configured name. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="value">The value to set.</param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>The configured name.</returns>
         public static string? SetConstraintName(
             this IConventionForeignKey foreignKey,
             string? value,
@@ -175,8 +178,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the constraint name.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <returns> The <see cref="ConfigurationSource" /> for the constraint name. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <returns>The <see cref="ConfigurationSource" /> for the constraint name.</returns>
         public static ConfigurationSource? GetConstraintNameConfigurationSource(this IConventionForeignKey foreignKey)
             => foreignKey.FindAnnotation(RelationalAnnotationNames.Name)
                 ?.GetConfigurationSource();
@@ -184,11 +187,11 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the foreign key constraints to which the foreign key is mapped.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <returns> The foreign key constraints to which the foreign key is mapped. </returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <returns>The foreign key constraints to which the foreign key is mapped.</returns>
         public static IEnumerable<IForeignKeyConstraint> GetMappedConstraints(this IForeignKey foreignKey)
             => (IEnumerable<IForeignKeyConstraint>?)foreignKey.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ForeignKeyMappings)
+                    RelationalAnnotationNames.ForeignKeyMappings)
                 ?? Enumerable.Empty<IForeignKeyConstraint>();
 
         /// <summary>
@@ -200,15 +203,13 @@ namespace Microsoft.EntityFrameworkCore
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="storeObject"> The identifier of the containing store object. </param>
-        /// <returns> The foreign key if found, or <see langword="null" /> if none was found.</returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="storeObject">The identifier of the containing store object.</param>
+        /// <returns>The foreign key if found, or <see langword="null" /> if none was found.</returns>
         public static IReadOnlyForeignKey? FindSharedObjectRootForeignKey(
             this IReadOnlyForeignKey foreignKey,
             in StoreObjectIdentifier storeObject)
         {
-            Check.NotNull(foreignKey, nameof(foreignKey));
-
             var foreignKeyName = foreignKey.GetConstraintName(
                 storeObject,
                 StoreObjectIdentifier.Table(foreignKey.PrincipalEntityType.GetTableName()!, foreignKey.PrincipalEntityType.GetSchema()));
@@ -255,9 +256,9 @@ namespace Microsoft.EntityFrameworkCore
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="storeObject"> The identifier of the containing store object. </param>
-        /// <returns> The foreign key if found, or <see langword="null" /> if none was found.</returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="storeObject">The identifier of the containing store object.</param>
+        /// <returns>The foreign key if found, or <see langword="null" /> if none was found.</returns>
         public static IMutableForeignKey? FindSharedObjectRootForeignKey(
             this IMutableForeignKey foreignKey,
             in StoreObjectIdentifier storeObject)
@@ -272,9 +273,9 @@ namespace Microsoft.EntityFrameworkCore
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="storeObject"> The identifier of the containing store object. </param>
-        /// <returns> The foreign key if found, or <see langword="null" /> if none was found.</returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="storeObject">The identifier of the containing store object.</param>
+        /// <returns>The foreign key if found, or <see langword="null" /> if none was found.</returns>
         public static IConventionForeignKey? FindSharedObjectRootForeignKey(
             this IConventionForeignKey foreignKey,
             in StoreObjectIdentifier storeObject)
@@ -289,9 +290,9 @@ namespace Microsoft.EntityFrameworkCore
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
-        /// <param name="storeObject"> The identifier of the containing store object. </param>
-        /// <returns> The foreign key if found, or <see langword="null" /> if none was found.</returns>
+        /// <param name="foreignKey">The foreign key.</param>
+        /// <param name="storeObject">The identifier of the containing store object.</param>
+        /// <returns>The foreign key if found, or <see langword="null" /> if none was found.</returns>
         public static IForeignKey? FindSharedObjectRootForeignKey(
             this IForeignKey foreignKey,
             in StoreObjectIdentifier storeObject)

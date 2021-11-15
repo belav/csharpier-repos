@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -14,23 +14,15 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.EntityFrameworkCore.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class DbContextServices : IDbContextServices
     {
         private IServiceProvider? _scopedProvider;
-        private IDbContextOptions? _contextOptions;
+        private DbContextOptions? _contextOptions;
         private ICurrentDbContext? _currentContext;
         private IModel? _model;
         private IModel? _designTimeModel;
@@ -44,7 +36,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public virtual IDbContextServices Initialize(
             IServiceProvider scopedProvider,
-            IDbContextOptions contextOptions,
+            DbContextOptions contextOptions,
             DbContext context)
         {
             _scopedProvider = scopedProvider;
@@ -84,10 +76,25 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
                 var dependencies = _scopedProvider!.GetRequiredService<ModelCreationDependencies>();
                 var modelFromOptions = CoreOptions?.Model;
+
+                var modelVersion = modelFromOptions?.GetProductVersion();
+                if (modelVersion != null)
+                {
+                    var modelMinorVersion = modelVersion[..modelVersion.LastIndexOf('.')];
+                    var productVersion = ProductInfo.GetVersion();
+                    var productMinorVersion = productVersion[..productVersion.LastIndexOf('.')];
+
+                    if (modelMinorVersion != productMinorVersion)
+                    {
+                        var logger = _scopedProvider!.GetRequiredService<IDiagnosticsLogger<DbLoggerCategory.Infrastructure>>();
+                        logger.OldModelVersionWarning(_currentContext!.Context, _contextOptions!);
+                    }
+                }
+
                 return modelFromOptions == null
                     || (designTime && modelFromOptions is not Metadata.Internal.Model)
-                    ? dependencies.ModelSource.GetModel(_currentContext!.Context, dependencies, designTime)
-                    : dependencies.ModelRuntimeInitializer.Initialize(modelFromOptions, designTime, dependencies.ValidationLogger);
+                        ? dependencies.ModelSource.GetModel(_currentContext!.Context, dependencies, designTime)
+                        : dependencies.ModelRuntimeInitializer.Initialize(modelFromOptions, designTime, dependencies.ValidationLogger);
             }
             finally
             {
@@ -131,7 +138,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IDbContextOptions ContextOptions
+        public virtual DbContextOptions ContextOptions
             => _contextOptions!;
 
         /// <summary>

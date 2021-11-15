@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -24,6 +24,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     public abstract class QueryContext : IParameterValues
     {
         private readonly IDictionary<string, object?> _parameterValues = new Dictionary<string, object?>();
@@ -38,52 +42,39 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        /// <param name="dependencies"> The dependencies to use. </param>
-        protected QueryContext(
-            QueryContextDependencies dependencies)
+        /// <param name="dependencies">The dependencies to use.</param>
+        protected QueryContext(QueryContextDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
+            Context = dependencies.CurrentContext.Context;
         }
 
         /// <summary>
         ///     The current DbContext in using while executing the query.
         /// </summary>
-        public virtual DbContext Context
-            => Dependencies.CurrentContext.Context;
+        public virtual DbContext Context { get; }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual QueryContextDependencies Dependencies { get; }
 
         /// <summary>
         ///     Sets the navigation for given entity as loaded.
         /// </summary>
-        /// <param name="entity"> The entity instance. </param>
-        /// <param name="navigation"> The navigation property. </param>
+        /// <param name="entity">The entity instance.</param>
+        /// <param name="navigation">The navigation property.</param>
         public virtual void SetNavigationIsLoaded(object entity, INavigationBase navigation)
         {
-            Check.NotNull(entity, nameof(entity));
-            Check.NotNull(navigation, nameof(navigation));
-
             // InitializeStateManager will populate the field before calling here
             _stateManager!.TryGetEntry(entity)!.SetIsLoaded(navigation);
         }
 
         /// <summary>
-        ///     The query provider.
+        ///     The execution strategy to use while executing the query.
         /// </summary>
-        [Obsolete("The service requiring IQueryProvider should inject it directly.")]
-        public virtual IQueryProvider QueryProvider
-            => Dependencies.QueryProvider;
-
-        /// <summary>
-        ///     The execution strategy factory to use while executing the query.
-        /// </summary>
-        public virtual IExecutionStrategyFactory ExecutionStrategyFactory
-            => Dependencies.ExecutionStrategyFactory;
+        public virtual IExecutionStrategy ExecutionStrategy
+            => Dependencies.ExecutionStrategy;
 
         /// <summary>
         ///     The concurrency detector to use while executing the query.
@@ -117,19 +108,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Adds a parameter to <see cref="ParameterValues" /> for this query.
         /// </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="value"> The value. </param>
+        /// <param name="name">The name.</param>
+        /// <param name="value">The value.</param>
         public virtual void AddParameter(string name, object? value)
-        {
-            Check.NotEmpty(name, nameof(name));
-
-            _parameterValues.Add(name, value);
-        }
+            => _parameterValues.Add(name, value);
 
         /// <summary>
         ///     Initializes the <see cref="IStateManager" /> to be used with this QueryContext.
         /// </summary>
-        /// <param name="standAlone"> Whether a stand-alone <see cref="IStateManager" /> should be created to perform identity resolution. </param>
+        /// <param name="standAlone">Whether a stand-alone <see cref="IStateManager" /> should be created to perform identity resolution.</param>
         public virtual void InitializeStateManager(bool standAlone = false)
         {
             Check.DebugAssert(
@@ -149,10 +136,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         [EntityFrameworkInternal]
         public virtual InternalEntityEntry? TryGetEntry(
-            IKey key,
-            object[] keyValues,
-            bool throwOnNullKey,
-            out bool hasNullKey)
+                IKey key,
+                object[] keyValues,
+                bool throwOnNullKey,
+                out bool hasNullKey)
             // InitializeStateManager will populate the field before calling here
             => _stateManager!.TryGetEntry(key, keyValues, throwOnNullKey, out hasNullKey);
 
@@ -164,9 +151,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         [EntityFrameworkInternal]
         public virtual InternalEntityEntry StartTracking(
-            IEntityType entityType,
-            object entity,
-            ValueBuffer valueBuffer)
+                IEntityType entityType,
+                object entity,
+                ValueBuffer valueBuffer)
             // InitializeStateManager will populate the field before calling here
             => _stateManager!.StartTrackingFromQuery(entityType, entity, valueBuffer);
     }

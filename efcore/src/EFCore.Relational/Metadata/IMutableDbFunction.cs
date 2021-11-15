@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     Represents a relational database function in an model in
     ///     the form that can be mutated while the model is being built.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information.
+    /// </remarks>
     public interface IMutableDbFunction : IReadOnlyDbFunction, IMutableAnnotatable
     {
         /// <summary>

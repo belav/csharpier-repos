@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Utilities;
@@ -10,6 +10,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     ///     Contains information on an available <see cref="ValueConverter" /> including a factory to
     ///     create an instance.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+    /// </remarks>
     public readonly struct ValueConverterInfo
     {
         private readonly Func<ValueConverterInfo, ValueConverter> _factory;
@@ -17,9 +20,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <summary>
         ///     Creates a new <see cref="ValueConverterInfo" /> instance.
         /// </summary>
-        /// <param name="modelClrType"> The CLR type used in the EF model. </param>
-        /// <param name="providerClrType"> The CLR type used when reading and writing from the database provider. </param>
-        /// <param name="factory"> A factory to create the converter, if needed. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+        /// </remarks>
+        /// <param name="modelClrType">The CLR type used in the EF model.</param>
+        /// <param name="providerClrType">The CLR type used when reading and writing from the database provider.</param>
+        /// <param name="factory">A factory to create the converter, if needed.</param>
         /// <param name="mappingHints">
         ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
         ///     facets for the converted data.

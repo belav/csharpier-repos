@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace System.CommandLine.Collections
 {
+    /// <summary>
+    /// A set of symbols, unique and indexed by their aliases.
+    /// </summary>
     public class SymbolSet : AliasedSet<ISymbol>, ISymbolSet
     {
         private List<Argument>? _arguments;
@@ -15,27 +18,7 @@ namespace System.CommandLine.Collections
         internal override void Add(ISymbol item)
         {
             ThrowIfAnyAliasIsInUse(item);
-
-            base.Add(item);
-
-            ResetIndex(item);
-
-            if (item is Symbol symbol)
-            {   
-                symbol.OnNameOrAliasChanged += Resync;
-            }
-        }
-
-        internal override void Remove(ISymbol item)
-        {
-            base.Remove(item);
-
-            ResetIndex(item);
-
-            if (item is Symbol symbol)
-            {
-                symbol.OnNameOrAliasChanged -= Resync;
-            }
+            AddWithoutAliasCollisionCheck(item);
         }
 
         private void ResetIndex(ISymbol item)
@@ -56,7 +39,15 @@ namespace System.CommandLine.Collections
             DirtyItems.Add(symbol);
         }
 
-        internal void AddWithoutAliasCollisionCheck(ISymbol item) => base.Add(item);
+        internal void AddWithoutAliasCollisionCheck(ISymbol item)
+        {
+            base.Add(item);
+            ResetIndex(item);
+            if (item is Symbol symbol)
+            {
+                symbol.OnNameOrAliasChanged += Resync;
+            }
+        }
 
         internal bool IsAnyAliasInUse(
             ISymbol item,
@@ -105,6 +96,7 @@ namespace System.CommandLine.Collections
             }
         }
 
+        /// <inheritdoc/>
         protected override IReadOnlyCollection<string> GetAliases(ISymbol item) =>
             item switch
             {

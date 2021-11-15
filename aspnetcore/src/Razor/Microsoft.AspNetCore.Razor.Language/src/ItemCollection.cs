@@ -1,129 +1,128 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public sealed class ItemCollection : ICollection<KeyValuePair<object, object>>, ICollection
 {
-    public sealed class ItemCollection : ICollection<KeyValuePair<object, object>>, ICollection
+    private readonly Dictionary<object, object> _inner;
+
+    public ItemCollection()
     {
-        private readonly Dictionary<object, object> _inner;
+        _inner = new Dictionary<object, object>();
+    }
 
-        public ItemCollection()
-        {
-            _inner = new Dictionary<object, object>();
-        }
-
-        public object this[object key]
-        {
-            get
-            {
-                if (key == null)
-                {
-                    throw new ArgumentNullException(nameof(key));
-                }
-                
-                _inner.TryGetValue(key, out var value);
-                return value;
-            }
-            set
-            {
-                if (key == null)
-                {
-                    throw new ArgumentNullException(nameof(key));
-                }
-
-                _inner[key] = value;
-            }
-        }
-
-        public int Count => _inner.Count;
-
-        public bool IsReadOnly => _inner != null;
-
-        bool ICollection.IsSynchronized => ((ICollection)_inner).IsSynchronized;
-
-        object ICollection.SyncRoot => ((ICollection)_inner).SyncRoot;
-
-        public void Add(KeyValuePair<object, object> item)
-        {
-            if (item.Key == null)
-            {
-                throw new ArgumentException(Resources.KeyMustNotBeNull, nameof(item));
-            }
-
-            ((ICollection<KeyValuePair<object, object>>)_inner).Add(item);
-        }
-
-        public void Add(object key, object value)
+    public object this[object key]
+    {
+        get
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            _inner.Add(key, value);
+            _inner.TryGetValue(key, out var value);
+            return value;
         }
-
-        public void Clear()
+        set
         {
-            _inner.Clear();
-        }
-
-        public bool Contains(KeyValuePair<object, object> item)
-        {
-            if (item.Key == null)
+            if (key == null)
             {
-                throw new ArgumentException(Resources.KeyMustNotBeNull, nameof(item));
+                throw new ArgumentNullException(nameof(key));
             }
 
-            return ((ICollection<KeyValuePair<object, object>>)_inner).Contains(item);
+            _inner[key] = value;
         }
+    }
 
-        public void CopyTo(KeyValuePair<object, object>[] array, int arrayIndex)
+    public int Count => _inner.Count;
+
+    public bool IsReadOnly => _inner != null;
+
+    bool ICollection.IsSynchronized => ((ICollection)_inner).IsSynchronized;
+
+    object ICollection.SyncRoot => ((ICollection)_inner).SyncRoot;
+
+    public void Add(KeyValuePair<object, object> item)
+    {
+        if (item.Key == null)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
-
-            if (arrayIndex < 0 || arrayIndex > array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-            }
-            else if (array.Length - arrayIndex < Count)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-            }
-
-            ((ICollection<KeyValuePair<object, object>>)_inner).CopyTo(array, arrayIndex);
+            throw new ArgumentException(Resources.KeyMustNotBeNull, nameof(item));
         }
 
-        public IEnumerator<KeyValuePair<object, object>> GetEnumerator()
+        ((ICollection<KeyValuePair<object, object>>)_inner).Add(item);
+    }
+
+    public void Add(object key, object value)
+    {
+        if (key == null)
         {
-            return _inner.GetEnumerator();
+            throw new ArgumentNullException(nameof(key));
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        _inner.Add(key, value);
+    }
+
+    public void Clear()
+    {
+        _inner.Clear();
+    }
+
+    public bool Contains(KeyValuePair<object, object> item)
+    {
+        if (item.Key == null)
         {
-            return GetEnumerator();
+            throw new ArgumentException(Resources.KeyMustNotBeNull, nameof(item));
         }
 
-        public bool Remove(KeyValuePair<object, object> item)
+        return ((ICollection<KeyValuePair<object, object>>)_inner).Contains(item);
+    }
+
+    public void CopyTo(KeyValuePair<object, object>[] array, int arrayIndex)
+    {
+        if (array == null)
         {
-            if (item.Key == null)
-            {
-                throw new ArgumentException(Resources.KeyMustNotBeNull, nameof(item));
-            }
-
-            return ((ICollection<KeyValuePair<object, object>>)_inner).Remove(item);
+            throw new ArgumentNullException(nameof(array));
         }
 
-        void ICollection.CopyTo(Array array, int index)
+        if (arrayIndex < 0 || arrayIndex > array.Length)
         {
-            ((ICollection)_inner).CopyTo(array, index);
+            throw new ArgumentOutOfRangeException(nameof(arrayIndex));
         }
+        else if (array.Length - arrayIndex < Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+        }
+
+        ((ICollection<KeyValuePair<object, object>>)_inner).CopyTo(array, arrayIndex);
+    }
+
+    public IEnumerator<KeyValuePair<object, object>> GetEnumerator()
+    {
+        return _inner.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public bool Remove(KeyValuePair<object, object> item)
+    {
+        if (item.Key == null)
+        {
+            throw new ArgumentException(Resources.KeyMustNotBeNull, nameof(item));
+        }
+
+        return ((ICollection<KeyValuePair<object, object>>)_inner).Remove(item);
+    }
+
+    void ICollection.CopyTo(Array array, int index)
+    {
+        ((ICollection)_inner).CopyTo(array, index);
     }
 }

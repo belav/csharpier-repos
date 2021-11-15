@@ -480,7 +480,7 @@ namespace Moq
 		///   Specifies a setup on the mocked type for a call to a property setter.
 		/// </summary>
 		/// <param name="setterExpression">The Lambda expression that sets a property to a value.</param>
-		/// <typeparam name="TProperty">Type of the property. Typically omitted as it can be inferred from the expression.</typeparam>
+		/// <typeparam name="TProperty">Type of the property.</typeparam>
 		/// <remarks>
 		///   If more than one setup is set for the same property setter,
 		///   the latest one wins and is the one that will be executed.
@@ -633,12 +633,19 @@ namespace Moq
 			Guard.NotNull(property, nameof(property));
 
 			var pi = property.ToPropertyInfo();
-			Guard.CanRead(pi);
-			Guard.CanWrite(pi);
 
-			TProperty value = initialValue;
-			this.SetupGet(property).Returns(() => value);
-			Mock.SetupSet(this, property.AssignItIsAny(), condition: null).SetCallbackBehavior(new Action<TProperty>(p => value = p));
+			if (!pi.CanRead(out var getter))
+			{
+				Guard.CanRead(pi);
+			}
+
+			if (!pi.CanWrite(out var setter))
+			{
+				Guard.CanWrite(pi);
+			}
+
+			var setup = new StubbedPropertySetup(this, property, getter, setter, initialValue);
+			this.MutableSetups.Add(setup);
 			return this;
 		}
 

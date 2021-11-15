@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Net.Cache;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
@@ -183,12 +184,10 @@ namespace System.Net
             throw new PlatformNotSupportedException();
         }
 
-#pragma warning disable SYSLIB0014
         internal HttpWebRequest(Uri uri)
         {
             _requestUri = uri;
         }
-#pragma warning restore SYSLIB0014
 
         private void SetSpecialHeaders(string HeaderName, string? value)
         {
@@ -691,7 +690,21 @@ namespace System.Net
             get; set;
         }
 
-        public static new RequestCachePolicy? DefaultCachePolicy { get; set; } = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+        private static RequestCachePolicy? _defaultCachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+        private static bool _isDefaultCachePolicySet;
+
+        public static new RequestCachePolicy? DefaultCachePolicy
+        {
+            get
+            {
+                return _defaultCachePolicy;
+            }
+            set
+            {
+                _isDefaultCachePolicySet = true;
+                _defaultCachePolicy = value;
+            }
+        }
 
         public DateTime IfModifiedSince
         {
@@ -758,9 +771,7 @@ namespace System.Net
             }
         }
 
-#pragma warning disable SYSLIB0014
         public ServicePoint ServicePoint => _servicePoint ??= ServicePointManager.FindServicePoint(Address, Proxy);
-#pragma warning restore SYSLIB0014
 
         public RemoteCertificateValidationCallback? ServerCertificateValidationCallback { get; set; }
 
@@ -1141,6 +1152,8 @@ namespace System.Net
                     request.Headers.Host = Host;
                 }
 
+                AddCacheControlHeaders(request);
+
                 // Copy the HttpWebRequest request headers from the WebHeaderCollection into HttpRequestMessage.Headers and
                 // HttpRequestMessage.Content.Headers.
                 foreach (string headerName in _webHeaderCollection)
@@ -1203,6 +1216,118 @@ namespace System.Net
                 {
                     client?.Dispose();
                 }
+            }
+        }
+
+        private void AddCacheControlHeaders(HttpRequestMessage request)
+        {
+            RequestCachePolicy? policy = GetApplicableCachePolicy();
+
+            if (policy != null && policy.Level != RequestCacheLevel.BypassCache)
+            {
+                CacheControlHeaderValue? cacheControl = null;
+                HttpHeaderValueCollection<NameValueHeaderValue> pragmaHeaders = request.Headers.Pragma;
+
+                if (policy is HttpRequestCachePolicy httpRequestCachePolicy)
+                {
+                    switch (httpRequestCachePolicy.Level)
+                    {
+                        case HttpRequestCacheLevel.NoCacheNoStore:
+                            cacheControl = new CacheControlHeaderValue
+                            {
+                                NoCache = true,
+                                NoStore = true
+                            };
+                            pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
+                            break;
+                        case HttpRequestCacheLevel.Reload:
+                            cacheControl = new CacheControlHeaderValue
+                            {
+                                NoCache = true
+                            };
+                            pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
+                            break;
+                        case HttpRequestCacheLevel.CacheOnly:
+                            throw new WebException(SR.CacheEntryNotFound, WebExceptionStatus.CacheEntryNotFound);
+                        case HttpRequestCacheLevel.CacheOrNextCacheOnly:
+                            cacheControl = new CacheControlHeaderValue
+                            {
+                                OnlyIfCached = true
+                            };
+                            break;
+                        case HttpRequestCacheLevel.Default:
+                            cacheControl = new CacheControlHeaderValue();
+
+                            if (httpRequestCachePolicy.MinFresh > TimeSpan.Zero)
+                            {
+                                cacheControl.MinFresh = httpRequestCachePolicy.MinFresh;
+                            }
+
+                            if (httpRequestCachePolicy.MaxAge != TimeSpan.MaxValue)
+                            {
+                                cacheControl.MaxAge = httpRequestCachePolicy.MaxAge;
+                            }
+
+                            if (httpRequestCachePolicy.MaxStale > TimeSpan.Zero)
+                            {
+                                cacheControl.MaxStale = true;
+                                cacheControl.MaxStaleLimit = httpRequestCachePolicy.MaxStale;
+                            }
+
+                            break;
+                        case HttpRequestCacheLevel.Refresh:
+                            cacheControl = new CacheControlHeaderValue
+                            {
+                                MaxAge = TimeSpan.Zero
+                            };
+                            pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (policy.Level)
+                    {
+                        case RequestCacheLevel.NoCacheNoStore:
+                            cacheControl = new CacheControlHeaderValue
+                            {
+                                NoCache = true,
+                                NoStore = true
+                            };
+                            pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
+                            break;
+                        case RequestCacheLevel.Reload:
+                            cacheControl = new CacheControlHeaderValue
+                            {
+                                NoCache = true
+                            };
+                            pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
+                            break;
+                        case RequestCacheLevel.CacheOnly:
+                            throw new WebException(SR.CacheEntryNotFound, WebExceptionStatus.CacheEntryNotFound);
+                    }
+                }
+
+                if (cacheControl != null)
+                {
+                    request.Headers.CacheControl = cacheControl;
+                }
+            }
+        }
+
+        private RequestCachePolicy? GetApplicableCachePolicy()
+        {
+            if (CachePolicy != null)
+            {
+                return CachePolicy;
+            }
+            else if (_isDefaultCachePolicySet && DefaultCachePolicy != null)
+            {
+                return DefaultCachePolicy;
+            }
+            else
+            {
+                return WebRequest.DefaultCachePolicy;
             }
         }
 
@@ -1555,10 +1680,6 @@ namespace System.Net
                     try
                     {
                         socket.NoDelay = true;
-                        if (parameters.ReadWriteTimeout > 0) // default is 5 minutes, so this is generally going to be true
-                        {
-                            socket.SendTimeout = socket.ReceiveTimeout = parameters.ReadWriteTimeout;
-                        }
 
                         if (parameters.Async)
                         {
@@ -1573,6 +1694,11 @@ namespace System.Net
 
                             // Throw in case cancellation caused the socket to be disposed after the Connect completed
                             cancellationToken.ThrowIfCancellationRequested();
+                        }
+
+                        if (parameters.ReadWriteTimeout > 0) // default is 5 minutes, so this is generally going to be true
+                        {
+                            socket.SendTimeout = socket.ReceiveTimeout = parameters.ReadWriteTimeout;
                         }
                     }
                     catch

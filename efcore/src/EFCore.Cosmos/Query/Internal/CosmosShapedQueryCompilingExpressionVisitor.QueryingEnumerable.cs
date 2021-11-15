@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -37,7 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             private readonly string _partitionKey;
             private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
             private readonly bool _standAloneStateManager;
-            private readonly bool _concurrencyDetectionEnabled;
+            private readonly bool _threadSafetyChecksEnabled;
 
             public QueryingEnumerable(
                 CosmosQueryContext cosmosQueryContext,
@@ -48,7 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Type contextType,
                 string partitionKeyFromExtension,
                 bool standAloneStateManager,
-                bool concurrencyDetectionEnabled)
+                bool threadSafetyChecksEnabled)
             {
                 _cosmosQueryContext = cosmosQueryContext;
                 _sqlExpressionFactory = sqlExpressionFactory;
@@ -58,7 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 _contextType = contextType;
                 _queryLogger = cosmosQueryContext.QueryLogger;
                 _standAloneStateManager = standAloneStateManager;
-                _concurrencyDetectionEnabled = concurrencyDetectionEnabled;
+                _threadSafetyChecksEnabled = threadSafetyChecksEnabled;
 
                 var partitionKey = selectExpression.GetPartitionKey(cosmosQueryContext.ParameterValues);
                 if (partitionKey != null && partitionKeyFromExtension != null && partitionKeyFromExtension != partitionKey)
@@ -133,7 +133,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     _queryLogger = queryingEnumerable._queryLogger;
                     _standAloneStateManager = queryingEnumerable._standAloneStateManager;
 
-                    _concurrencyDetector = queryingEnumerable._concurrencyDetectionEnabled
+                    _concurrencyDetector = queryingEnumerable._threadSafetyChecksEnabled
                         ? _cosmosQueryContext.ConcurrencyDetector
                         : null;
                 }
@@ -225,7 +225,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     _standAloneStateManager = queryingEnumerable._standAloneStateManager;
                     _cancellationToken = cancellationToken;
 
-                    _concurrencyDetector = queryingEnumerable._concurrencyDetectionEnabled
+                    _concurrencyDetector = queryingEnumerable._threadSafetyChecksEnabled
                         ? _cosmosQueryContext.ConcurrencyDetector
                         : null;
                 }
@@ -285,6 +285,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         _enumerator = null;
                         return enumerator.DisposeAsync();
                     }
+
                     return default;
                 }
             }

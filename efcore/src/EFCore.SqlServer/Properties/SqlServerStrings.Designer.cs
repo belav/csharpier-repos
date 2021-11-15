@@ -220,6 +220,118 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Internal
                 property, entityType, propertyType);
 
         /// <summary>
+        ///     Entity type '{entityType}' mapped to temporal table does not contain the expected period property: '{propertyName}'.
+        /// </summary>
+        public static string TemporalExpectedPeriodPropertyNotFound(object? entityType, object? propertyName)
+            => string.Format(
+                GetString("TemporalExpectedPeriodPropertyNotFound", nameof(entityType), nameof(propertyName)),
+                entityType, propertyName);
+
+        /// <summary>
+        ///     Entity type '{entityType}' mapped to temporal table must have a period start and a period end property.
+        /// </summary>
+        public static string TemporalMustDefinePeriodProperties(object? entityType)
+            => string.Format(
+                GetString("TemporalMustDefinePeriodProperties", nameof(entityType)),
+                entityType);
+
+        /// <summary>
+        ///     Temporal query is trying to use navigation to an entity '{entityType}' which itself doesn't map to temporal table. Either map the entity to temporal table or use join manually to access it.
+        /// </summary>
+        public static string TemporalNavigationExpansionBetweenTemporalAndNonTemporal(object? entityType)
+            => string.Format(
+                GetString("TemporalNavigationExpansionBetweenTemporalAndNonTemporal", nameof(entityType)),
+                entityType);
+
+        /// <summary>
+        ///     Navigation expansion is only supported for '{operationName}' temporal operation. For other operations use join manually.
+        /// </summary>
+        public static string TemporalNavigationExpansionOnlySupportedForAsOf(object? operationName)
+            => string.Format(
+                GetString("TemporalNavigationExpansionOnlySupportedForAsOf", nameof(operationName)),
+                operationName);
+
+        /// <summary>
+        ///     Temporal tables are not supported for table splitting scenario. Table: '{table}'.
+        /// </summary>
+        public static string TemporalNotSupportedForTableSplitting(object? table)
+            => string.Format(
+                GetString("TemporalNotSupportedForTableSplitting", nameof(table)),
+                table);
+
+        /// <summary>
+        ///     Only root entity type should be marked as temporal. Entity type: '{entityType}'.
+        /// </summary>
+        public static string TemporalOnlyOnRoot(object? entityType)
+            => string.Format(
+                GetString("TemporalOnlyOnRoot", nameof(entityType)),
+                entityType);
+
+        /// <summary>
+        ///     Temporal tables are only supported for entities using Table-Per-Hierarchy inheritance mapping. Entity type: '{entityType}'.
+        /// </summary>
+        public static string TemporalOnlySupportedForTPH(object? entityType)
+            => string.Format(
+                GetString("TemporalOnlySupportedForTPH", nameof(entityType)),
+                entityType);
+
+        /// <summary>
+        ///     Period property '{entityType}.{propertyName}' can't have a default value specified.
+        /// </summary>
+        public static string TemporalPeriodPropertyCantHaveDefaultValue(object? entityType, object? propertyName)
+            => string.Format(
+                GetString("TemporalPeriodPropertyCantHaveDefaultValue", nameof(entityType), nameof(propertyName)),
+                entityType, propertyName);
+
+        /// <summary>
+        ///     Period property '{entityType}.{propertyName}' must be a shadow property.
+        /// </summary>
+        public static string TemporalPeriodPropertyMustBeInShadowState(object? entityType, object? propertyName)
+            => string.Format(
+                GetString("TemporalPeriodPropertyMustBeInShadowState", nameof(entityType), nameof(propertyName)),
+                entityType, propertyName);
+
+        /// <summary>
+        ///     Period property '{entityType}.{propertyName}' must be mapped to a column of type '{columnType}'.
+        /// </summary>
+        public static string TemporalPeriodPropertyMustBeMappedToDatetime2(object? entityType, object? propertyName, object? columnType)
+            => string.Format(
+                GetString("TemporalPeriodPropertyMustBeMappedToDatetime2", nameof(entityType), nameof(propertyName), nameof(columnType)),
+                entityType, propertyName, columnType);
+
+        /// <summary>
+        ///     Period property '{entityType}.{propertyName}' must be non-nullable and of type '{dateTimeType}'.
+        /// </summary>
+        public static string TemporalPeriodPropertyMustBeNonNullableDateTime(object? entityType, object? propertyName, object? dateTimeType)
+            => string.Format(
+                GetString("TemporalPeriodPropertyMustBeNonNullableDateTime", nameof(entityType), nameof(propertyName), nameof(dateTimeType)),
+                entityType, propertyName, dateTimeType);
+
+        /// <summary>
+        ///     Property '{entityType}.{propertyName}' is mapped to the period column and can't have default value specified.
+        /// </summary>
+        public static string TemporalPropertyMappedToPeriodColumnCantHaveDefaultValue(object? entityType, object? propertyName)
+            => string.Format(
+                GetString("TemporalPropertyMappedToPeriodColumnCantHaveDefaultValue", nameof(entityType), nameof(propertyName)),
+                entityType, propertyName);
+
+        /// <summary>
+        ///     Property '{entityType}.{propertyName}' is mapped to the period column and must have ValueGenerated set to '{valueGeneratedValue}'.
+        /// </summary>
+        public static string TemporalPropertyMappedToPeriodColumnMustBeValueGeneratedOnAddOrUpdate(object? entityType, object? propertyName, object? valueGeneratedValue)
+            => string.Format(
+                GetString("TemporalPropertyMappedToPeriodColumnMustBeValueGeneratedOnAddOrUpdate", nameof(entityType), nameof(propertyName), nameof(valueGeneratedValue)),
+                entityType, propertyName, valueGeneratedValue);
+
+        /// <summary>
+        ///     Set operation can't be applied on entity '{entityType}' because temporal operations on both arguments don't match.
+        /// </summary>
+        public static string TemporalSetOperationOnMismatchedSources(object? entityType)
+            => string.Format(
+                GetString("TemporalSetOperationOnMismatchedSources", nameof(entityType)),
+                entityType);
+
+        /// <summary>
         ///     An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
         /// </summary>
         public static string TransientExceptionDetected
@@ -271,6 +383,31 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Internal
                             level,
                             SqlServerEventId.ByteIdentityColumnWarning,
                             _resourceManager.GetString("LogByteIdentityColumn")!)));
+            }
+
+            return (EventDefinition<string, string>)definition;
+        }
+
+        /// <summary>
+        ///     A database type for column '{columnName}' on table '{tableName}' could not be found, the column will be skipped.
+        /// </summary>
+        public static EventDefinition<string, string> LogColumnWithoutType(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.SqlServerLoggingDefinitions)logger.Definitions).LogColumnWithoutType;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.SqlServerLoggingDefinitions)logger.Definitions).LogColumnWithoutType,
+                    logger,
+                    static logger => new EventDefinition<string, string>(
+                        logger.Options,
+                        SqlServerEventId.ColumnWithoutTypeWarning,
+                        LogLevel.Warning,
+                        "SqlServerEventId.ColumnWithoutTypeWarning",
+                        level => LoggerMessage.Define<string, string>(
+                            level,
+                            SqlServerEventId.ColumnWithoutTypeWarning,
+                            _resourceManager.GetString("LogColumnWithoutType")!)));
             }
 
             return (EventDefinition<string, string>)definition;
@@ -349,6 +486,31 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Internal
             }
 
             return (EventDefinition<string, string>)definition;
+        }
+
+        /// <summary>
+        ///     Skipping foreign key '{foreignKeyName}' on table '{tableName}' since it is a duplicate of '{duplicateForeignKeyName}'.
+        /// </summary>
+        public static EventDefinition<string, string, string> LogDuplicateForeignKeyConstraintIgnored(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.SqlServerLoggingDefinitions)logger.Definitions).LogDuplicateForeignKeyConstraintIgnored;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.SqlServerLoggingDefinitions)logger.Definitions).LogDuplicateForeignKeyConstraintIgnored,
+                    logger,
+                    static logger => new EventDefinition<string, string, string>(
+                        logger.Options,
+                        SqlServerEventId.DuplicateForeignKeyConstraintIgnored,
+                        LogLevel.Warning,
+                        "SqlServerEventId.DuplicateForeignKeyConstraintIgnored",
+                        level => LoggerMessage.Define<string, string, string>(
+                            level,
+                            SqlServerEventId.DuplicateForeignKeyConstraintIgnored,
+                            _resourceManager.GetString("LogDuplicateForeignKeyConstraintIgnored")!)));
+            }
+
+            return (EventDefinition<string, string, string>)definition;
         }
 
         /// <summary>
@@ -643,6 +805,31 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Internal
             }
 
             return (EventDefinition<string, string, string, string>)definition;
+        }
+
+        /// <summary>
+        ///     Skipping foreign key '{foreignKeyName}' on table '{tableName}' since principal table information is not available. This usually happens when the user doesn't have permission to read data about principal table.
+        /// </summary>
+        public static EventDefinition<string?, string?> LogPrincipalTableInformationNotFound(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.SqlServerLoggingDefinitions)logger.Definitions).LogPrincipalTableInformationNotFound;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.SqlServerLoggingDefinitions)logger.Definitions).LogPrincipalTableInformationNotFound,
+                    logger,
+                    static logger => new EventDefinition<string?, string?>(
+                        logger.Options,
+                        SqlServerEventId.ForeignKeyReferencesUnknownPrincipalTableWarning,
+                        LogLevel.Warning,
+                        "SqlServerEventId.ForeignKeyReferencesUnknownPrincipalTableWarning",
+                        level => LoggerMessage.Define<string?, string?>(
+                            level,
+                            SqlServerEventId.ForeignKeyReferencesUnknownPrincipalTableWarning,
+                            _resourceManager.GetString("LogPrincipalTableInformationNotFound")!)));
+            }
+
+            return (EventDefinition<string?, string?>)definition;
         }
 
         /// <summary>

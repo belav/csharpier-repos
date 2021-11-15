@@ -1,17 +1,16 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Hosting.Fakes
-{
-    public class FakeService : IFakeEveryService, IDisposable
-    {
-        public bool Disposed { get; private set; }
+namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-        public void Dispose()
-        {
-            Disposed = true;
-        }
+public class FakeService : IFakeEveryService, IDisposable
+{
+    public bool Disposed { get; private set; }
+
+    public void Dispose()
+    {
+        Disposed = true;
     }
 }

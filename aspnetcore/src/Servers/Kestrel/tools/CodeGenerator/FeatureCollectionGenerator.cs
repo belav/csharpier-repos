@@ -1,26 +1,26 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodeGenerator
-{
-    public static class FeatureCollectionGenerator
-    {
-        public static string GenerateFile(string namespaceName, string className, string[] allFeatures, string[] implementedFeatures, string extraUsings, string fallbackFeatures)
-        {
-            // NOTE: This list MUST always match the set of feature interfaces implemented by TransportConnection.
-            // See also: src/Kestrel/Http/TransportConnection.FeatureCollection.cs
-            var features = allFeatures.Select((type, index) => new KnownFeature
-            {
-                Name = type,
-                Index = index
-            });
+namespace CodeGenerator;
 
-            return $@"// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+public static class FeatureCollectionGenerator
+{
+    public static string GenerateFile(string namespaceName, string className, string[] allFeatures, string[] implementedFeatures, string extraUsings, string fallbackFeatures)
+    {
+        // NOTE: This list MUST always match the set of feature interfaces implemented by TransportConnection.
+        // See also: src/Kestrel/Http/TransportConnection.FeatureCollection.cs
+        var features = allFeatures.Select((type, index) => new KnownFeature
+        {
+            Name = type,
+            Index = index
+        });
+
+        var s = $@"// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -130,7 +130,7 @@ namespace {namespaceName}
                     feature = ExtraFeatureGet(key);
                 }}
 
-                return feature{(string.IsNullOrEmpty(fallbackFeatures) ? "" : $" ?? {fallbackFeatures}[key]")};
+                return feature{(string.IsNullOrEmpty(fallbackFeatures) ? "" : $" ?? {fallbackFeatures}?[key]")};
             }}
 
             set
@@ -164,7 +164,7 @@ namespace {namespaceName}
                 feature = (TFeature?)(ExtraFeatureGet(typeof(TFeature)));
             }}{(string.IsNullOrEmpty(fallbackFeatures) ? "" : $@"
 
-            if (feature == null)
+            if (feature == null && {fallbackFeatures} != null)
             {{
                 feature = {fallbackFeatures}.Get<TFeature>();
             }}")}
@@ -211,17 +211,18 @@ namespace {namespaceName}
     }}
 }}
 ";
-        }
 
-        static string Each<T>(IEnumerable<T> values, Func<T, string> formatter)
-        {
-            return values.Any() ? values.Select(formatter).Aggregate((a, b) => a + b) : "";
-        }
+        return s;
+    }
 
-        private class KnownFeature
-        {
-            public string Name;
-            public int Index;
-        }
+    static string Each<T>(IEnumerable<T> values, Func<T, string> formatter)
+    {
+        return values.Any() ? values.Select(formatter).Aggregate((a, b) => a + b) : "";
+    }
+
+    private class KnownFeature
+    {
+        public string Name;
+        public int Index;
     }
 }

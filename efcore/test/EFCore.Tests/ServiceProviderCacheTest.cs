@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -63,6 +63,39 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.ServiceProviderConfigRemoved("Fake1"),
                         CoreStrings.ServiceProviderConfigAdded("Fake2"))),
                 loggerFactory.Log[1].Message);
+        }
+
+        [ConditionalFact]
+        public void Returns_different_provider_for_extensions_configured_in_different_order()
+        {
+            var loggerFactory = new ListLoggerFactory();
+
+            var config1Log = new List<string>();
+            var config1Builder = new DbContextOptionsBuilder();
+            ((IDbContextOptionsBuilderInfrastructure)config1Builder)
+                .AddOrUpdateExtension(new FakeDbContextOptionsExtension1(config1Log));
+            ((IDbContextOptionsBuilderInfrastructure)config1Builder)
+                .AddOrUpdateExtension(new FakeDbContextOptionsExtension2(config1Log));
+            config1Builder.UseLoggerFactory(loggerFactory);
+            config1Builder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+
+            var config2Log = new List<string>();
+            var config2Builder = new DbContextOptionsBuilder();
+            ((IDbContextOptionsBuilderInfrastructure)config2Builder)
+                .AddOrUpdateExtension(new FakeDbContextOptionsExtension2(config2Log));
+            ((IDbContextOptionsBuilderInfrastructure)config2Builder)
+                .AddOrUpdateExtension(new FakeDbContextOptionsExtension1(config2Log));
+            config2Builder.UseLoggerFactory(loggerFactory);
+            config2Builder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+
+            var cache = new ServiceProviderCache();
+
+            Assert.NotSame(cache.GetOrAdd(config1Builder.Options, true), cache.GetOrAdd(config2Builder.Options, true));
+
+            Assert.Equal(2, loggerFactory.Log.Count);
+
+            Assert.Equal(new[] { nameof(FakeDbContextOptionsExtension1), nameof(FakeDbContextOptionsExtension2) }, config1Log);
+            Assert.Equal(new[] { nameof(FakeDbContextOptionsExtension2), nameof(FakeDbContextOptionsExtension1) }, config2Log);
         }
 
         [ConditionalFact]
@@ -226,14 +259,26 @@ namespace Microsoft.EntityFrameworkCore
         private class FakeDbContextOptionsExtension1 : IDbContextOptionsExtension
         {
             private DbContextOptionsExtensionInfo _info;
+            private readonly List<string> _log;
 
             public string Something { get; set; }
 
             public DbContextOptionsExtensionInfo Info
                 => _info ??= new ExtensionInfo(this);
 
+            public FakeDbContextOptionsExtension1()
+                : this(new List<string>())
+            {
+            }
+
+            public FakeDbContextOptionsExtension1(List<string> log)
+            {
+                _log = log;
+            }
+
             public virtual void ApplyServices(IServiceCollection services)
             {
+                _log.Add(GetType().ShortDisplayName());
             }
 
             public virtual void Validate(IDbContextOptions options)
@@ -250,8 +295,11 @@ namespace Microsoft.EntityFrameworkCore
                 public override bool IsDatabaseProvider
                     => false;
 
-                public override long GetServiceProviderHashCode()
+                public override int GetServiceProviderHashCode()
                     => 0;
+
+                public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+                    => true;
 
                 public override string LogFragment
                     => "";
@@ -266,12 +314,24 @@ namespace Microsoft.EntityFrameworkCore
         private class FakeDbContextOptionsExtension2 : IDbContextOptionsExtension
         {
             private DbContextOptionsExtensionInfo _info;
+            private readonly List<string> _log;
 
             public DbContextOptionsExtensionInfo Info
                 => _info ??= new ExtensionInfo(this);
 
+            public FakeDbContextOptionsExtension2()
+                : this(new List<string>())
+            {
+            }
+
+            public FakeDbContextOptionsExtension2(List<string> log)
+            {
+                _log = log;
+            }
+
             public virtual void ApplyServices(IServiceCollection services)
             {
+                _log.Add(GetType().ShortDisplayName());
             }
 
             public virtual void Validate(IDbContextOptions options)
@@ -288,8 +348,11 @@ namespace Microsoft.EntityFrameworkCore
                 public override bool IsDatabaseProvider
                     => false;
 
-                public override long GetServiceProviderHashCode()
+                public override int GetServiceProviderHashCode()
                     => 0;
+
+                public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+                    => true;
 
                 public override string LogFragment
                     => "";

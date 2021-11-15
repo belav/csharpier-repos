@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -109,13 +109,10 @@ INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]");
             await base.Join_customers_orders_with_subquery(async);
 
             AssertSql(
-                @"SELECT [c].[ContactName], [t].[OrderID]
+                @"SELECT [c].[ContactName], [o].[OrderID]
 FROM [Customers] AS [c]
-INNER JOIN (
-    SELECT [o].[OrderID], [o].[CustomerID]
-    FROM [Orders] AS [o]
-) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
-WHERE [t].[CustomerID] = N'ALFKI'");
+INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+WHERE [o].[CustomerID] = N'ALFKI'");
         }
 
         public override async Task Join_customers_orders_with_subquery_with_take(bool async)
@@ -140,13 +137,10 @@ WHERE [t].[CustomerID] = N'ALFKI'");
             await base.Join_customers_orders_with_subquery_anonymous_property_method(async);
 
             AssertSql(
-                @"SELECT [t].[OrderID], [t].[CustomerID], [t].[EmployeeID], [t].[OrderDate]
+                @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
-INNER JOIN (
-    SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-    FROM [Orders] AS [o]
-) AS [t] ON [c].[CustomerID] = [t].[CustomerID]
-WHERE [t].[CustomerID] = N'ALFKI'");
+INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+WHERE [o].[CustomerID] = N'ALFKI'");
         }
 
         public override async Task Join_customers_orders_with_subquery_anonymous_property_method_with_take(bool async)
@@ -549,7 +543,7 @@ WHERE [c].[CustomerID] LIKE N'F%'");
             await base.SelectMany_with_client_eval_with_collection_shaper(async);
 
             AssertSql(
-                @"SELECT [t].[OrderID], [t].[CustomerID], [t].[EmployeeID], [t].[OrderDate], [t].[ContactName], [c].[CustomerID], [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice]
+                @"SELECT [t].[OrderID], [t].[CustomerID], [t].[EmployeeID], [t].[OrderDate], [c].[CustomerID], [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice], [t].[ContactName]
 FROM [Customers] AS [c]
 CROSS APPLY (
     SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c].[ContactName]
@@ -558,7 +552,7 @@ CROSS APPLY (
 ) AS [t]
 LEFT JOIN [Order Details] AS [o0] ON [t].[OrderID] = [o0].[OrderID]
 WHERE [c].[CustomerID] LIKE N'F%'
-ORDER BY [c].[CustomerID], [t].[OrderID], [o0].[OrderID], [o0].[ProductID]");
+ORDER BY [c].[CustomerID], [t].[OrderID], [o0].[OrderID]");
         }
 
         public override async Task SelectMany_with_client_eval_with_collection_shaper_ignored(bool async)
@@ -593,7 +587,7 @@ LEFT JOIN (
     ) AS [t] ON [o].[OrderID] = [t].[OrderID]
 ) AS [t0] ON [c].[CustomerID] = [t0].[CustomerID]
 WHERE [c].[CustomerID] LIKE N'A%'
-ORDER BY [c].[CustomerID], [t0].[OrderID0], [t0].[OrderID], [t0].[ProductID]");
+ORDER BY [c].[CustomerID], [t0].[OrderID0], [t0].[OrderID]");
         }
 
         public override async Task SelectMany_with_selecting_outer_entity(bool async)
@@ -720,6 +714,46 @@ INNER JOIN (
     WHERE [t1].[row] <= 2
 ) AS [t0] ON [t].[CustomerID] = [t0].[CustomerID]
 ORDER BY [t].[CustomerID]");
+        }
+
+        public override async Task Take_in_collection_projection_with_FirstOrDefault_on_top_level(bool async)
+        {
+            await base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(async);
+
+            AssertSql(
+                @"SELECT [t].[CustomerID], [t0].[Title], [t0].[OrderID], [t0].[CustomerID]
+FROM (
+    SELECT TOP(1) [c].[CustomerID]
+    FROM [Customers] AS [c]
+) AS [t]
+OUTER APPLY (
+    SELECT CASE
+        WHEN ([t1].[CustomerID] = [c0].[City]) OR ([t1].[CustomerID] IS NULL AND [c0].[City] IS NULL) THEN N'A'
+        ELSE N'B'
+    END AS [Title], [t1].[OrderID], [c0].[CustomerID], [t1].[OrderDate]
+    FROM (
+        SELECT TOP(1) [o].[OrderID], [o].[CustomerID], [o].[OrderDate]
+        FROM [Orders] AS [o]
+        WHERE [t].[CustomerID] = [o].[CustomerID]
+        ORDER BY [o].[OrderDate]
+    ) AS [t1]
+    LEFT JOIN [Customers] AS [c0] ON [t1].[CustomerID] = [c0].[CustomerID]
+) AS [t0]
+ORDER BY [t].[CustomerID], [t0].[OrderDate], [t0].[OrderID]");
+        }
+
+        public override async Task Condition_on_entity_with_include(bool async)
+        {
+            await base.Condition_on_entity_with_include(async);
+
+            AssertSql(
+                @"SELECT CASE
+    WHEN [o].[OrderID] IS NOT NULL THEN [o].[OrderID]
+    ELSE -1
+END AS [a]
+FROM [Customers] AS [c]
+LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+WHERE [c].[CustomerID] LIKE N'F%'");
         }
 
         private void AssertSql(params string[] expected)

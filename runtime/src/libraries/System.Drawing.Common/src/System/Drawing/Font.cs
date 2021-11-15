@@ -183,7 +183,7 @@ namespace System.Drawing
 #endif
                     Gdip.GdipDeleteFont(new HandleRef(this, _nativeFont));
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, "GDI+ returned an error status: " + status.ToString(CultureInfo.InvariantCulture));
+                    Debug.Assert(status == Gdip.Ok, $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}");
 #endif
                 }
                 catch (Exception ex) when (!ClientUtils.IsCriticalException(ex))
@@ -254,9 +254,7 @@ namespace System.Drawing
         /// </summary>
         public override int GetHashCode()
         {
-            return unchecked((int)((((uint)_fontStyle << 13) | ((uint)_fontStyle >> 19)) ^
-                         (((uint)_fontUnit << 26) | ((uint)_fontUnit >> 6)) ^
-                         (((uint)_fontSize << 7) | ((uint)_fontSize >> 25))));
+            return HashCode.Combine(Name, Style, Size, Unit);
         }
 
         /// <summary>

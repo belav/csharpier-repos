@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net;
 using System.Net.Http;
@@ -20,7 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_customers()
         {
-            var requestUri = string.Format("{0}/odata/Customers", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Customers";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -69,7 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_orders()
         {
-            var requestUri = string.Format("{0}/odata/Orders", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Orders";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -85,7 +85,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Query_orders_select_single_property()
         {
-            var requestUri = string.Format("{0}/odata/Orders?$select=OrderDate", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Orders?$select=OrderDate";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -101,7 +101,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_order_details()
         {
-            var requestUri = string.Format("{0}/odata/Order Details", BaseAddress);
+            var requestUri = $"{BaseAddress}/odata/Order Details";
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            var response = await Client.SendAsync(request);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var result = await response.Content.ReadAsObject<JObject>();
+
+            Assert.Contains("$metadata#Order%20Details", result["@odata.context"].ToString());
+        }
+
+        [ConditionalFact]
+        public async Task Basic_query_order_details_single_element_composite_key()
+        {
+            var requestUri = $"{BaseAddress}/odata/Order Details(OrderID=10248,ProductID=11)";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 

@@ -3,7 +3,6 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using JetBrains.Annotations;
 
 #nullable enable
 
@@ -135,6 +134,12 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
             => GetString("DbContextListDescription");
 
         /// <summary>
+        ///     Generates a compiled version of the model used by the DbContext.
+        /// </summary>
+        public static string DbContextOptimizeDescription
+            => GetString("DbContextOptimizeDescription");
+
+        /// <summary>
         ///     Scaffolds a DbContext and entity types for a database.
         /// </summary>
         public static string DbContextScaffoldDescription
@@ -183,26 +188,10 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
             => GetString("IdempotentDescription");
 
         /// <summary>
-        ///     Invalid template pattern '{template}'.
-        /// </summary>
-        public static string InvalidTemplatePattern(object? template)
-            => string.Format(
-                GetString("InvalidTemplatePattern", nameof(template)),
-                template);
-
-        /// <summary>
         ///     Show JSON output. Use with --prefix-output to parse programatically.
         /// </summary>
         public static string JsonDescription
             => GetString("JsonDescription");
-
-        /// <summary>
-        ///     The last argument '{argumentName}' accepts multiple values. No more argument can be added.
-        /// </summary>
-        public static string LastArgumentHasMultipleValues(object? argumentName)
-            => string.Format(
-                GetString("LastArgumentHasMultipleValues", nameof(argumentName)),
-                argumentName);
 
         /// <summary>
         ///     The target migration. If '0', all migrations will be reverted. Defaults to the last migration.
@@ -227,6 +216,24 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
         /// </summary>
         public static string MigrationsAddDescription
             => GetString("MigrationsAddDescription");
+
+        /// <summary>
+        ///     Creates an executable to update the database.
+        /// </summary>
+        public static string MigrationsBundleDescription
+            => GetString("MigrationsBundleDescription");
+
+        /// <summary>
+        ///     The path of executable file to create.
+        /// </summary>
+        public static string MigrationsBundleOutputDescription
+            => GetString("MigrationsBundleOutputDescription");
+
+        /// <summary>
+        ///     The target runtime to bundle for.
+        /// </summary>
+        public static string MigrationsBundleRuntimeDescription
+            => GetString("MigrationsBundleRuntimeDescription");
 
         /// <summary>
         ///     Commands to manage migrations.
@@ -399,14 +406,6 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
             => GetString("ProviderDescription");
 
         /// <summary>
-        ///     Response file '{fileName}' doesn't exist.
-        /// </summary>
-        public static string ResponseFileMissing(object? fileName)
-            => string.Format(
-                GetString("ResponseFileMissing", nameof(fileName)),
-                fileName);
-
-        /// <summary>
         ///     The runtime to use.
         /// </summary>
         public static string RuntimeDescription
@@ -417,6 +416,12 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
         /// </summary>
         public static string SchemasDescription
             => GetString("SchemasDescription");
+
+        /// <summary>
+        ///     Also bundle the .NET runtime so it doesn't need to be installed on the machine.
+        /// </summary>
+        public static string SelfContainedDescription
+            => GetString("SelfContainedDescription");
 
         /// <summary>
         ///     The startup project to use. Defaults to the current working directory.
@@ -437,28 +442,20 @@ namespace Microsoft.EntityFrameworkCore.Tools.Properties
             => GetString("TablesDescription");
 
         /// <summary>
-        ///     Unrecognized {argumentName} '{argumentValue}'.
-        /// </summary>
-        public static string UnexpectedArgument(object? argumentName, object? argumentValue)
-            => string.Format(
-                GetString("UnexpectedArgument", nameof(argumentName), nameof(argumentValue)),
-                argumentName, argumentValue);
-
-        /// <summary>
-        ///     Unexpected value '{optionValue}' for option '{optionName}'.
-        /// </summary>
-        public static string UnexpectedOptionValue(object? optionValue, object? optionName)
-            => string.Format(
-                GetString("UnexpectedOptionValue", nameof(optionValue), nameof(optionName)),
-                optionValue, optionName);
-
-        /// <summary>
-        ///     Startup project '{startupProject}' targets framework '{targetFramework}'. The Entity Framework Core .NET Command-line Tools don't support this framework.
+        ///     Startup project '{startupProject}' targets framework '{targetFramework}'. The Entity Framework Core .NET Command-line Tools don't support this framework. See https://aka.ms/efcore-docs-cli-tfms for more information.
         /// </summary>
         public static string UnsupportedFramework(object? startupProject, object? targetFramework)
             => string.Format(
                 GetString("UnsupportedFramework", nameof(startupProject), nameof(targetFramework)),
                 startupProject, targetFramework);
+
+        /// <summary>
+        ///     Startup project '{startupProject}' targets platform '{targetPlatform}'. The Entity Framework Core .NET Command-line Tools don't support this platform. See https://aka.ms/efcore-docs-cli-tfms for more information.
+        /// </summary>
+        public static string UnsupportedPlatform(object? startupProject, object? targetPlatform)
+            => string.Format(
+                GetString("UnsupportedPlatform", nameof(startupProject), nameof(targetPlatform)),
+                startupProject, targetPlatform);
 
         /// <summary>
         ///     Use table and column names directly from the database.

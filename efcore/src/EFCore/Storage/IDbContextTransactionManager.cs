@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading;
@@ -17,19 +17,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         This interface is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
     ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
     ///         <see cref="DbContext" /> instance will use its own instance of this service.
     ///         The implementation may depend on other services registered with any lifetime.
     ///         The implementation does not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         and <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IDbContextTransactionManager : IResettableService
     {
         /// <summary>
         ///     Begins a new transaction.
         /// </summary>
-        /// <returns> The newly created transaction. </returns>
+        /// <returns>The newly created transaction.</returns>
         IDbContextTransaction BeginTransaction();
 
         /// <summary>
@@ -39,7 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     A task that represents the asynchronous operation. The task result contains the newly created transaction.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -54,7 +60,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     A task that represents the asynchronous operation.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task CommitTransactionAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -69,7 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     A task that represents the asynchronous operation.
         /// </returns>
-        /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
+        /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
 
         /// <summary>

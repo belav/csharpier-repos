@@ -1,53 +1,30 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
-namespace Microsoft.AspNetCore.Razor.Language.Components
+namespace Microsoft.AspNetCore.Razor.Language.Components;
+
+internal static class ComponentTypeParamDirective
 {
-    internal class ComponentTypeParamDirective
-    {
-        public static DirectiveDescriptor Directive = null;
-
-        public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder, bool supportConstraints)
+    public static DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(
+        "typeparam",
+        DirectiveKind.SingleLine,
+        builder =>
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
+            builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
+            builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
+            builder.Description = ComponentResources.TypeParamDirective_Description;
+        });
 
-            if (Directive == null)
-            {
-                // Do nothing and assume the first registration wins. In real life this directive is only ever registered once.
-                if (supportConstraints)
-                {
-                    Directive = DirectiveDescriptor.CreateDirective(
-                        "typeparam",
-                        DirectiveKind.SingleLine,
-                        builder =>
-                        {
-                            builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
-                            builder.AddOptionalGenericTypeConstraintToken(ComponentResources.TypeParamDirective_Constraint_Name, ComponentResources.TypeParamDirective_Constraint_Description);
-                            builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
-                            builder.Description = ComponentResources.TypeParamDirective_Description;
-                        });
-                }
-                else
-                {
-                    Directive = DirectiveDescriptor.CreateDirective(
-                        "typeparam",
-                        DirectiveKind.SingleLine,
-                        builder =>
-                        {
-                            builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
-                            builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
-                            builder.Description = ComponentResources.TypeParamDirective_Description;
-                        });
-                }
-            }
-
-            builder.AddDirective(Directive, FileKinds.Component, FileKinds.ComponentImport);
-            return builder;
+    public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
+    {
+        if (builder == null)
+        {
+            throw new ArgumentNullException(nameof(builder));
         }
+
+        builder.AddDirective(Directive, FileKinds.Component, FileKinds.ComponentImport);
+        return builder;
     }
 }

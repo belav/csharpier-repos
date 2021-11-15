@@ -1,16 +1,15 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 #nullable disable
 
 using System.Collections.Generic;
 
-namespace Microsoft.AspNetCore.Routing.DecisionTree
-{
-    internal class DecisionCriterion<TItem>
-    {
-        public string Key { get; set; }
+namespace Microsoft.AspNetCore.Routing.DecisionTree;
 
-        public Dictionary<object, DecisionTreeNode<TItem>> Branches { get; set; }
-    }
+internal class DecisionCriterion<TItem>
+{
+    public string Key { get; set; }
+
+    public Dictionary<object, DecisionTreeNode<TItem>> Branches { get; set; }
 }

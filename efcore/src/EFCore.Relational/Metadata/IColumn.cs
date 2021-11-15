@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// <summary>
     ///     Represents a column in a table.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IColumn : IColumnBase
     {
         /// <summary>
@@ -51,7 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             => PropertyMappings.First().Property.IsUnicode(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
-        ///     Returns a flag indicating if the property as capable of storing only fixed-length data, such as strings.
+        ///     Returns a flag indicating whether the property is capable of storing only fixed-length data, such as strings.
         /// </summary>
         bool? IsFixedLength
             => PropertyMappings.First().Property.IsFixedLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
@@ -65,20 +68,51 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 && PropertyMappings.First().Property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
 
         /// <summary>
+        ///     Gets the column order.
+        /// </summary>
+        /// <value> The column order. </value>
+        public virtual int? Order
+            => PropertyMappings.First().Property.GetColumnOrder(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+
+        /// <summary>
         ///     Returns the object that is used as the default value for this column.
         /// </summary>
         public virtual object? DefaultValue
         {
             get
             {
-                var property = PropertyMappings.First().Property;
-                var value = property.GetDefaultValue(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
-                var converter = property.GetValueConverter() ?? PropertyMappings.First().TypeMapping?.Converter;
-
-                return converter != null
-                    ? converter.ConvertToProvider(value)
-                    : value;
+                TryGetDefaultValue(out var defaultValue);
+                return defaultValue;
             }
+        }
+
+        /// <summary>
+        ///     Gets the object that is used as the default value for this column.
+        /// </summary>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>True if the default value was explicitly set; false otherwise.</returns>
+        public virtual bool TryGetDefaultValue(out object? defaultValue)
+        {
+            foreach (var mapping in PropertyMappings)
+            {
+                var property = mapping.Property;
+                if (!property.TryGetDefaultValue(StoreObjectIdentifier.Table(Table.Name, Table.Schema), out defaultValue))
+                {
+                    continue;
+                }
+
+                var converter = property.GetValueConverter() ?? PropertyMappings.First().TypeMapping.Converter;
+
+                if (converter != null)
+                {
+                    defaultValue = converter.ConvertToProvider(defaultValue);
+                }
+
+                return true;
+            }
+
+            defaultValue = null;
+            return false;
         }
 
         /// <summary>
@@ -126,9 +160,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -144,7 +178,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             builder.Append(Name).Append(" (");
 
-            builder.Append(StoreType).Append(")");
+            builder.Append(StoreType).Append(')');
 
             if (IsNullable)
             {
@@ -155,7 +189,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append(" NonNullable");
             }
 
-            builder.Append(")");
+            builder.Append(')');
 
             if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
             {

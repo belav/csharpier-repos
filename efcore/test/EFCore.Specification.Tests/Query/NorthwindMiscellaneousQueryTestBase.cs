@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -3644,7 +3644,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<Order>().Where(o => o.OrderID < (new Random().Next() - 2147483647)));
+                ss => ss.Set<Order>().Where(o => o.OrderID < (Random.Shared.Next() - 2147483647)));
         }
 
         [ConditionalTheory]
@@ -3653,7 +3653,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<Order>().Where(o => o.OrderID > new Random().Next(5)),
+                ss => ss.Set<Order>().Where(o => o.OrderID > Random.Shared.Next(5)),
                 entryCount: 830);
         }
 
@@ -3663,7 +3663,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<Order>().Where(o => o.OrderID > new Random().Next(0, 10)),
+                ss => ss.Set<Order>().Where(o => o.OrderID > Random.Shared.Next(0, 10)),
                 entryCount: 830);
         }
 
@@ -4133,7 +4133,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<Order>().Where(o => o.OrderDate != null)
+                ss => ss.Set<Order>()
+                    .Where(o => o.OrderDate != null)
                     .Select(o => new Order { OrderDate = o.OrderDate.Value.AddMonths(1) }),
                 e => e.OrderDate);
         }
@@ -6071,16 +6072,22 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Perform_identity_resolution_reuses_same_instances(bool async)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public virtual async Task Perform_identity_resolution_reuses_same_instances(bool async, bool useAsTracking)
         {
             using var context = CreateContext();
             var orderIds = context.Customers.Where(c => c.CustomerID == "ALFKI")
                 .SelectMany(c => c.Orders).Select(o => o.OrderID).ToList();
 
             var query = context.Orders.Where(o => orderIds.Contains(o.OrderID))
-                .Select(o => o.Customer)
-                .AsNoTrackingWithIdentityResolution();
+                .Select(o => o.Customer);
+
+            query = useAsTracking
+                ? query.AsTracking(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                : query.AsNoTrackingWithIdentityResolution();
 
             var result = async
                 ? await query.ToListAsync()
@@ -6093,16 +6100,22 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Perform_identity_resolution_reuses_same_instances_across_joins(bool async)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public virtual async Task Perform_identity_resolution_reuses_same_instances_across_joins(bool async, bool useAsTracking)
         {
             using var context = CreateContext();
 
             var query = (from c in context.Customers.Where(c => c.CustomerID.StartsWith("A"))
                          join o in context.Orders.Where(o => o.OrderID < 10500).Include(o => o.Customer)
                              on c.CustomerID equals o.CustomerID
-                         select new { c, o })
-                .AsNoTrackingWithIdentityResolution();
+                         select new { c, o });
+                
+            query = useAsTracking
+                    ? query.AsTracking(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                    : query.AsNoTrackingWithIdentityResolution();
 
             var result = async
                 ? await query.ToListAsync()
@@ -6288,7 +6301,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         c.CustomerID,
                         Order = (c.Orders.Any() ? c.Orders.FirstOrDefault() : null) == null
                             ? null
-                            : new { c.Orders.FirstOrDefault().OrderDate }
+                            : new { c.Orders.OrderBy(o => o.OrderID).FirstOrDefault().OrderDate }
                     }),
                 elementSorter: c => c.CustomerID,
                 elementAsserter: (e, a) => AssertEqual(e.Order, a.Order));

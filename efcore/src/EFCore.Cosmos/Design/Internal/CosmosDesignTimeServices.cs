@@ -1,7 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.Cosmos.Design.Internal.CosmosDesignTimeServices")]
@@ -25,7 +26,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Design.Internal
         public virtual void ConfigureDesignTimeServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddEntityFrameworkCosmos();
+#pragma warning disable EF1001 // Internal EF Core API usage.
             new EntityFrameworkDesignServicesBuilder(serviceCollection)
+                .TryAdd<ICSharpRuntimeAnnotationCodeGenerator, CosmosCSharpRuntimeAnnotationCodeGenerator>()
+#pragma warning restore EF1001 // Internal EF Core API usage.
                 .TryAddCoreServices();
         }
     }

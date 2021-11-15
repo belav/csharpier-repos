@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///     Instances of this class are typically obtained from <see cref="DbContext.ChangeTracker" /> and it is not designed
     ///     to be directly constructed in your application code.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information.
+    /// </remarks>
     public class ChangeTracker : IResettableService
     {
         private readonly IRuntimeModel _model;
@@ -40,10 +43,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             IModel model,
             IEntityEntryGraphIterator graphIterator)
         {
-            Check.NotNull(context, nameof(context));
-            Check.NotNull(stateManager, nameof(stateManager));
-            Check.NotNull(changeDetector, nameof(changeDetector));
-
             Context = context;
 
             _defaultQueryTrackingBehavior
@@ -64,40 +63,36 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets a value indicating whether the <see cref="DetectChanges()" /> method is called
-        ///         automatically by methods of <see cref="DbContext" /> and related classes.
-        ///     </para>
-        ///     <para>
-        ///         The default value is true. This ensures the context is aware of any changes to tracked entity instances
-        ///         before performing operations such as <see cref="DbContext.SaveChanges()" /> or returning change tracking
-        ///         information. If you disable automatic detect changes then you must ensure that
-        ///         <see cref="DetectChanges()" /> is called when entity instances have been modified.
-        ///         Failure to do so may result in some changes not being persisted during
-        ///         <see cref="DbContext.SaveChanges()" /> or out-of-date change tracking information being returned.
-        ///     </para>
+        ///     Gets or sets a value indicating whether the <see cref="DetectChanges()" /> method is called
+        ///     automatically by methods of <see cref="DbContext" /> and related classes.
         /// </summary>
+        /// <remarks>
+        ///     The default value is true. This ensures the context is aware of any changes to tracked entity instances
+        ///     before performing operations such as <see cref="DbContext.SaveChanges()" /> or returning change tracking
+        ///     information. If you disable automatic detect changes then you must ensure that
+        ///     <see cref="DetectChanges()" /> is called when entity instances have been modified.
+        ///     Failure to do so may result in some changes not being persisted during
+        ///     <see cref="DbContext.SaveChanges()" /> or out-of-date change tracking information being returned.
+        /// </remarks>
         public virtual bool AutoDetectChangesEnabled { get; set; } = true;
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets a value indicating whether navigation properties for tracked entities
-        ///         will be loaded on first access.
-        ///     </para>
-        ///     <para>
-        ///         The default value is true. However, lazy loading will only occur for navigation properties
-        ///         of entities that have also been configured in the model for lazy loading.
-        ///     </para>
+        ///     Gets or sets a value indicating whether navigation properties for tracked entities
+        ///     will be loaded on first access.
         /// </summary>
+        /// <remarks>
+        ///     The default value is true. However, lazy loading will only occur for navigation properties
+        ///     of entities that have also been configured in the model for lazy loading.
+        /// </remarks>
         public virtual bool LazyLoadingEnabled { get; set; } = true;
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets the tracking behavior for LINQ queries run against the context. Disabling change tracking
-        ///         is useful for read-only scenarios because it avoids the overhead of setting up change tracking for each
-        ///         entity instance. You should not disable change tracking if you want to manipulate entity instances and
-        ///         persist those changes to the database using <see cref="DbContext.SaveChanges()" />.
-        ///     </para>
+        ///     Gets or sets the tracking behavior for LINQ queries run against the context. Disabling change tracking
+        ///     is useful for read-only scenarios because it avoids the overhead of setting up change tracking for each
+        ///     entity instance. You should not disable change tracking if you want to manipulate entity instances and
+        ///     persist those changes to the database using <see cref="DbContext.SaveChanges()" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This method sets the default behavior for the context, but you can override this behavior for individual
         ///         queries using the <see cref="EntityFrameworkQueryableExtensions.AsNoTracking{TEntity}(IQueryable{TEntity})" />
@@ -107,7 +102,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         The default value is <see cref="QueryTrackingBehavior.TrackAll" />. This means the change tracker will
         ///         keep track of changes for all entities that are returned from a LINQ query.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         public virtual QueryTrackingBehavior QueryTrackingBehavior
         {
             get => _queryTrackingBehavior;
@@ -115,18 +110,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets a value indicating when a dependent/child entity will have its state
-        ///         set to <see cref="EntityState.Deleted" /> once severed from a parent/principal entity
-        ///         through either a navigation or foreign key property being set to null. The default
-        ///         value is <see cref="CascadeTiming.Immediate" />.
-        ///     </para>
-        ///     <para>
-        ///         Dependent/child entities are only deleted automatically when the relationship
-        ///         is configured with <see cref="DeleteBehavior.Cascade" />. This is set by default
-        ///         for required relationships.
-        ///     </para>
+        ///     Gets or sets a value indicating when a dependent/child entity will have its state
+        ///     set to <see cref="EntityState.Deleted" /> once severed from a parent/principal entity
+        ///     through either a navigation or foreign key property being set to null. The default
+        ///     value is <see cref="CascadeTiming.Immediate" />.
         /// </summary>
+        /// <remarks>
+        ///     Dependent/child entities are only deleted automatically when the relationship
+        ///     is configured with <see cref="DeleteBehavior.Cascade" />. This is set by default
+        ///     for required relationships.
+        /// </remarks>
         public virtual CascadeTiming DeleteOrphansTiming
         {
             get => StateManager.DeleteOrphansTiming;
@@ -134,17 +127,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Gets or sets a value indicating when a dependent/child entity will have its state
-        ///         set to <see cref="EntityState.Deleted" /> once its parent/principal entity has been marked
-        ///         as <see cref="EntityState.Deleted" />. The default value is<see cref="CascadeTiming.Immediate" />.
-        ///     </para>
-        ///     <para>
-        ///         Dependent/child entities are only deleted automatically when the relationship
-        ///         is configured with <see cref="DeleteBehavior.Cascade" />. This is set by default
-        ///         for required relationships.
-        ///     </para>
+        ///     Gets or sets a value indicating when a dependent/child entity will have its state
+        ///     set to <see cref="EntityState.Deleted" /> once its parent/principal entity has been marked
+        ///     as <see cref="EntityState.Deleted" />. The default value is<see cref="CascadeTiming.Immediate" />.
         /// </summary>
+        /// <remarks>
+        ///     Dependent/child entities are only deleted automatically when the relationship
+        ///     is configured with <see cref="DeleteBehavior.Cascade" />. This is set by default
+        ///     for required relationships.
+        /// </remarks>
         public virtual CascadeTiming CascadeDeleteTiming
         {
             get => StateManager.CascadeDeleteTiming;
@@ -152,10 +143,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Returns an <see cref="EntityEntry" /> for each entity being tracked by the context.
-        ///         The entries provide access to change tracking information and operations for each entity.
-        ///     </para>
+        ///     Returns an <see cref="EntityEntry" /> for each entity being tracked by the context.
+        ///     The entries provide access to change tracking information and operations for each entity.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This method calls <see cref="DetectChanges" /> to ensure all entries returned reflect up-to-date state.
         ///         Use <see cref="AutoDetectChangesEnabled" /> to prevent DetectChanges from being called automatically.
@@ -165,8 +156,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         an <see cref="InvalidOperationException" /> indicating that the collection was modified while enumerating.
         ///         To avoid this, create a defensive copy using <see cref="Enumerable.ToList{TSource}" /> or similar before iterating.
         ///     </para>
-        /// </summary>
-        /// <returns> An entry for each entity being tracked. </returns>
+        /// </remarks>
+        /// <returns>An entry for each entity being tracked.</returns>
         public virtual IEnumerable<EntityEntry> Entries()
         {
             TryDetectChanges();
@@ -178,8 +169,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     Gets an <see cref="EntityEntry" /> for all entities of a given type being tracked by the context.
         ///     The entries provide access to change tracking information and operations for each entity.
         /// </summary>
-        /// <typeparam name="TEntity"> The type of entities to get entries for. </typeparam>
-        /// <returns> An entry for each entity of the given type that is being tracked. </returns>
+        /// <typeparam name="TEntity">The type of entities to get entries for.</typeparam>
+        /// <returns>An entry for each entity of the given type that is being tracked.</returns>
         public virtual IEnumerable<EntityEntry<TEntity>> Entries<TEntity>()
             where TEntity : class
         {
@@ -199,17 +190,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Checks if any new, deleted, or changed entities are being tracked
-        ///         such that these changes will be sent to the database if <see cref="DbContext.SaveChanges()" />
-        ///         or <see cref="DbContext.SaveChangesAsync(CancellationToken)" /> is called.
-        ///     </para>
-        ///     <para>
-        ///         Note that this method calls <see cref="DetectChanges" /> unless
-        ///         <see cref="AutoDetectChangesEnabled" /> has been set to <see langword="false" />.
-        ///     </para>
+        ///     Checks if any new, deleted, or changed entities are being tracked
+        ///     such that these changes will be sent to the database if <see cref="DbContext.SaveChanges()" />
+        ///     or <see cref="DbContext.SaveChangesAsync(CancellationToken)" /> is called.
         /// </summary>
-        /// <returns> <see langword="true" /> if there are changes to save, otherwise <see langword="false" />. </returns>
+        /// <remarks>
+        ///     Note that this method calls <see cref="DetectChanges" /> unless
+        ///     <see cref="AutoDetectChangesEnabled" /> has been set to <see langword="false" />.
+        /// </remarks>
+        /// <returns><see langword="true" /> if there are changes to save, otherwise <see langword="false" />.</returns>
         public virtual bool HasChanges()
         {
             TryDetectChanges();
@@ -245,13 +234,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             => StateManager.AcceptAllChanges();
 
         /// <summary>
-        ///     <para>
-        ///         Begins tracking an entity and any entities that are reachable by traversing it's navigation properties.
-        ///         Traversal is recursive so the navigation properties of any discovered entities will also be scanned.
-        ///         The specified <paramref name="callback" /> is called for each discovered entity and must set the
-        ///         <see cref="EntityEntry.State" /> that each entity should be tracked in. If no state is set, the entity
-        ///         remains untracked.
-        ///     </para>
+        ///     Begins tracking an entity and any entities that are reachable by traversing its navigation properties.
+        ///     Traversal is recursive so the navigation properties of any discovered entities will also be scanned.
+        ///     The specified <paramref name="callback" /> is called for each discovered entity and must set the
+        ///     <see cref="EntityEntry.State" /> that each entity should be tracked in. If no state is set, the entity
+        ///     remains untracked.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This method is designed for use in disconnected scenarios where entities are retrieved using one instance of
         ///         the context and then changes are saved using a different instance of the context. An example of this is a
@@ -260,11 +249,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         call is complete.
         ///     </para>
         ///     <para>
-        ///         If an entity is discovered that is already tracked by the context, that entity is not processed (and it's
+        ///         If an entity is discovered that is already tracked by the context, that entity is not processed (and its
         ///         navigation properties are not traversed).
         ///     </para>
-        /// </summary>
-        /// <param name="rootEntity"> The entity to begin traversal from. </param>
+        /// </remarks>
+        /// <param name="rootEntity">The entity to begin traversal from.</param>
         /// <param name="callback">
         ///     An action to configure the change tracking information for each entity. For the entity to begin being tracked,
         ///     the <see cref="EntityEntry.State" /> must be set.
@@ -288,13 +277,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 });
 
         /// <summary>
-        ///     <para>
-        ///         Begins tracking an entity and any entities that are reachable by traversing it's navigation properties.
-        ///         Traversal is recursive so the navigation properties of any discovered entities will also be scanned.
-        ///         The specified <paramref name="callback" /> is called for each discovered entity and must set the
-        ///         <see cref="EntityEntry.State" /> that each entity should be tracked in. If no state is set, the entity
-        ///         remains untracked.
-        ///     </para>
+        ///     Begins tracking an entity and any entities that are reachable by traversing its navigation properties.
+        ///     Traversal is recursive so the navigation properties of any discovered entities will also be scanned.
+        ///     The specified <paramref name="callback" /> is called for each discovered entity and must set the
+        ///     <see cref="EntityEntry.State" /> that each entity should be tracked in. If no state is set, the entity
+        ///     remains untracked.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This method is designed for use in disconnected scenarios where entities are retrieved using one instance of
         ///         the context and then changes are saved using a different instance of the context. An example of this is a
@@ -309,15 +298,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         allows the callback to decide when traversal will end, but the onus is then on the caller to ensure that
         ///         traversal will not enter an infinite loop.
         ///     </para>
-        /// </summary>
-        /// <param name="rootEntity"> The entity to begin traversal from. </param>
-        /// <param name="state"> An arbitrary state object passed to the callback. </param>
+        /// </remarks>
+        /// <param name="rootEntity">The entity to begin traversal from.</param>
+        /// <param name="state">An arbitrary state object passed to the callback.</param>
         /// <param name="callback">
         ///     An delegate to configure the change tracking information for each entity. The second parameter to the
         ///     callback is the arbitrary state object passed above. Iteration of the graph will not continue down the graph
         ///     if the callback returns <see langword="false" />.
         /// </param>
-        /// <typeparam name="TState"> The type of the state object. </typeparam>
+        /// <typeparam name="TState">The type of the state object.</typeparam>
         public virtual void TrackGraph<TState>(
             object rootEntity,
             TState? state,
@@ -362,15 +351,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         An event fired when an entity that is tracked by the associated <see cref="DbContext" /> has moved
-        ///         from one <see cref="EntityState" /> to another.
-        ///     </para>
-        ///     <para>
-        ///         Note that this event does not fire for entities when they are first tracked by the context.
-        ///         Use the <see cref="Tracked" /> event to get notified when the context begins tracking an entity.
-        ///     </para>
+        ///     An event fired when an entity that is tracked by the associated <see cref="DbContext" /> has moved
+        ///     from one <see cref="EntityState" /> to another.
         /// </summary>
+        /// <remarks>
+        ///     Note that this event does not fire for entities when they are first tracked by the context.
+        ///     Use the <see cref="Tracked" /> event to get notified when the context begins tracking an entity.
+        /// </remarks>
         public event EventHandler<EntityStateChangedEventArgs> StateChanged
         {
             add => StateManager.StateChanged += value;
@@ -378,11 +365,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Forces immediate cascading deletion of child/dependent entities when they are either
-        ///         severed from a required parent/principal entity, or the required parent/principal entity
-        ///         is itself deleted. See <see cref="DeleteBehavior" />.
-        ///     </para>
+        ///     Forces immediate cascading deletion of child/dependent entities when they are either
+        ///     severed from a required parent/principal entity, or the required parent/principal entity
+        ///     is itself deleted. See <see cref="DeleteBehavior" />.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         This method is usually used when <see cref="CascadeDeleteTiming" /> and/or
         ///         <see cref="DeleteOrphansTiming" /> have been set to <see cref="CascadeTiming.Never" />
@@ -392,7 +379,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         If <see cref="AutoDetectChangesEnabled" /> is <see langword="true" /> then this method
         ///         will call <see cref="DetectChanges" />.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         public virtual void CascadeChanges()
         {
             if (AutoDetectChangesEnabled)
@@ -421,9 +408,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         /// <summary>
-        ///     <para>
-        ///         Stops tracking all currently tracked entities.
-        ///     </para>
+        ///     Stops tracking all currently tracked entities.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         <see cref="DbContext" /> is designed to have a short lifetime where a new instance is created for each unit-of-work.
         ///         This manner means all tracked entities are discarded when the context is disposed at the end of each unit-of-work.
@@ -438,7 +425,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     <para>
         ///         Note that this method does not generate <see cref="StateChanged" /> events since entities are not individually detached.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         public virtual void Clear()
             => StateManager.Clear();
 
@@ -454,14 +441,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public virtual DebugView DebugView
             => new(
                 () => this.ToDebugString(ChangeTrackerDebugStringOptions.ShortDefault),
-                () => this.ToDebugString(ChangeTrackerDebugStringOptions.LongDefault));
+                () => this.ToDebugString());
 
         #region Hidden System.Object members
 
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
-        /// <returns> A string that represents the current object. </returns>
+        /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string? ToString()
             => base.ToString();
@@ -469,8 +456,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
-        /// <param name="obj"> The object to compare with the current object. </param>
-        /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj)
             => base.Equals(obj);
@@ -478,7 +465,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
-        /// <returns> A hash code for the current object. </returns>
+        /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
             => base.GetHashCode();

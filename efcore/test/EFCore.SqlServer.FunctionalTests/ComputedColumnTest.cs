@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkSqlServer()
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using var context = new Context(serviceProvider, TestStore.Name);
             context.Database.EnsureCreatedResiliently();
@@ -39,7 +39,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkSqlServer()
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using var context = new Context(serviceProvider, TestStore.Name);
             context.Database.EnsureCreatedResiliently();
@@ -137,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkSqlServer()
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using var context = new NullableContext(serviceProvider, TestStore.Name);
             context.Database.EnsureCreatedResiliently();

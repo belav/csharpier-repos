@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -57,18 +57,12 @@ VALUES (@p0, @p1, @p2);",
 @p2=NULL (Size = 4000)
 
 SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] uniqueidentifier, [_Position] [int]);
-MERGE [ProductBase] USING (
-VALUES (@p0, @p1, @p2, 0)) AS i ([Bytes], [Discriminator], [ProductWithBytes_Name], _Position) ON 1=0
-WHEN NOT MATCHED THEN
-INSERT ([Bytes], [Discriminator], [ProductWithBytes_Name])
-VALUES (i.[Bytes], i.[Discriminator], i.[ProductWithBytes_Name])
-OUTPUT INSERTED.[Id], i._Position
-INTO @inserted0;
-
-SELECT [t].[Id] FROM [ProductBase] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
-ORDER BY [i].[_Position];");
+DECLARE @inserted0 TABLE ([Id] uniqueidentifier);
+INSERT INTO [ProductBase] ([Bytes], [Discriminator], [ProductWithBytes_Name])
+OUTPUT INSERTED.[Id]
+INTO @inserted0
+VALUES (@p0, @p1, @p2);
+SELECT [i].[Id] FROM @inserted0 i;");
         }
 
         public override void Save_replaced_principal()

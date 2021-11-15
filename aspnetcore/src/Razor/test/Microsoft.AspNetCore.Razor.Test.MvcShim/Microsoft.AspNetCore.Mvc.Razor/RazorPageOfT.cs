@@ -1,14 +1,13 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace Microsoft.AspNetCore.Mvc.Razor
-{
-    public abstract class RazorPage<TModel> : RazorPage
-    {
-        public TModel Model { get; }
+namespace Microsoft.AspNetCore.Mvc.Razor;
 
-        public ViewDataDictionary<TModel> ViewData { get; set; }
-    }
+public abstract class RazorPage<TModel> : RazorPage
+{
+    public TModel Model { get; }
+
+    public ViewDataDictionary<TModel> ViewData { get; set; }
 }

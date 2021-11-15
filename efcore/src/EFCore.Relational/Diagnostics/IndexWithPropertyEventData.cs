@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -12,17 +12,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     A <see cref="DiagnosticSource" /> event payload class for
     ///     the events involving an invalid property name on an index.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information.
+    /// </remarks>
     public class IndexWithPropertyEventData : EventData
     {
         /// <summary>
         ///     Constructs the event payload for indexes with a invalid property.
         /// </summary>
-        /// <param name="eventDefinition"> The event definition. </param>
-        /// <param name="messageGenerator"> A delegate that generates a log message for this event. </param>
-        /// <param name="entityType"> The entity type on which the index is defined. </param>
-        /// <param name="indexName"> The name of the index. </param>
-        /// <param name="indexPropertyNames"> The names of the properties which define the index. </param>
-        /// <param name="invalidPropertyName"> The property name which is invalid. </param>
+        /// <param name="eventDefinition">The event definition.</param>
+        /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
+        /// <param name="entityType">The entity type on which the index is defined.</param>
+        /// <param name="indexName">The name of the index.</param>
+        /// <param name="indexPropertyNames">The names of the properties which define the index.</param>
+        /// <param name="invalidPropertyName">The property name which is invalid.</param>
         public IndexWithPropertyEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,

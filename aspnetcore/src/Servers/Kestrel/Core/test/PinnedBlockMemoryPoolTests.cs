@@ -1,29 +1,28 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Buffers;
 using Xunit;
 
-namespace Microsoft.Extensions.Internal.Test
+namespace Microsoft.Extensions.Internal.Test;
+
+public class PinnedBlockMemoryPoolTests : MemoryPoolTests
 {
-    public  class PinnedBlockMemoryPoolTests: MemoryPoolTests
+    protected override MemoryPool<byte> CreatePool() => new PinnedBlockMemoryPool();
+
+    [Fact]
+    public void DoubleDisposeWorks()
     {
-        protected override MemoryPool<byte> CreatePool() => new PinnedBlockMemoryPool();
+        var memoryPool = CreatePool();
+        memoryPool.Dispose();
+        memoryPool.Dispose();
+    }
 
-        [Fact]
-        public void DoubleDisposeWorks()
-        {
-            var memoryPool = CreatePool();
-            memoryPool.Dispose();
-            memoryPool.Dispose();
-        }
-
-        [Fact]
-        public void DisposeWithActiveBlocksWorks()
-        {
-            var memoryPool = CreatePool();
-            var block = memoryPool.Rent();
-            memoryPool.Dispose();
-        }
+    [Fact]
+    public void DisposeWithActiveBlocksWorks()
+    {
+        var memoryPool = CreatePool();
+        var block = memoryPool.Rent();
+        memoryPool.Dispose();
     }
 }

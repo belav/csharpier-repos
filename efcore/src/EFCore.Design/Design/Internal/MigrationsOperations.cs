@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Design;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal
@@ -29,6 +28,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private readonly string _projectDir;
         private readonly string? _rootNamespace;
         private readonly string? _language;
+        private readonly bool _nullable;
         private readonly DesignTimeServicesBuilder _servicesBuilder;
         private readonly DbContextOperations _contextOperations;
         private readonly string[] _args;
@@ -46,23 +46,24 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string projectDir,
             string? rootNamespace,
             string? language,
+            bool nullable,
             string[]? args)
         {
-            Check.NotNull(reporter, nameof(reporter));
-            Check.NotNull(assembly, nameof(assembly));
-            Check.NotNull(startupAssembly, nameof(startupAssembly));
-            Check.NotNull(projectDir, nameof(projectDir));
-
             _reporter = reporter;
             _assembly = assembly;
             _projectDir = projectDir;
             _rootNamespace = rootNamespace;
             _language = language;
+            _nullable = nullable;
             _args = args ?? Array.Empty<string>();
             _contextOperations = new DbContextOperations(
                 reporter,
                 assembly,
                 startupAssembly,
+                projectDir,
+                rootNamespace,
+                language,
+                nullable,
                 _args);
 
             _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
@@ -80,8 +81,6 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? contextType,
             string? @namespace)
         {
-            Check.NotEmpty(name, nameof(name));
-
             if (outputDir != null)
             {
                 outputDir = Path.GetFullPath(Path.Combine(_projectDir, outputDir));
@@ -105,6 +104,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var scaffolder = scope.ServiceProvider.GetRequiredService<IMigrationsScaffolder>();
             var migration =
                 string.IsNullOrEmpty(@namespace)
+                    // TODO: Honor _nullable (issue #18950)
                     ? scaffolder.ScaffoldMigration(name, _rootNamespace ?? string.Empty, subNamespace, _language)
                     : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
             return scaffolder.Save(_projectDir, migration, outputDir);

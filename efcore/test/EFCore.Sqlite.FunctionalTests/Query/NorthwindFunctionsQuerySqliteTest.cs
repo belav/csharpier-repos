@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -100,6 +100,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override Task Where_math_power(bool async)
             => AssertTranslationFailed(() => base.Where_math_power(async));
 
+        public override Task Where_math_square(bool async)
+            => AssertTranslationFailed(() => base.Where_math_square(async));
+
         public override Task Where_math_round(bool async)
             => AssertTranslationFailed(() => base.Where_math_round(async));
 
@@ -120,6 +123,59 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Where_math_truncate(bool async)
             => AssertTranslationFailed(() => base.Where_math_truncate(async));
+
+        public override Task Where_mathf_acos(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_acos(async));
+
+        public override Task Where_mathf_asin(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_asin(async));
+
+        public override Task Where_mathf_atan(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_atan(async));
+
+        public override Task Where_mathf_atan2(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_atan2(async));
+
+        public override Task Where_mathf_ceiling1(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_ceiling1(async));
+
+        public override Task Where_mathf_cos(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_cos(async));
+
+        public override Task Where_mathf_exp(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_exp(async));
+
+        public override Task Where_mathf_floor(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_floor(async));
+
+        public override Task Where_mathf_log(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_log(async));
+
+        public override Task Where_mathf_log_new_base(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_log_new_base(async));
+
+        public override Task Where_mathf_log10(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_log10(async));
+
+        public override Task Where_mathf_power(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_power(async));
+
+        public override Task Where_mathf_square(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_square(async));
+        public override Task Where_mathf_sign(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_sign(async));
+
+        public override Task Where_mathf_sin(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_sin(async));
+
+        public override Task Where_mathf_sqrt(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_sqrt(async));
+
+        public override Task Where_mathf_tan(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_tan(async));
+
+        public override Task Where_mathf_truncate(bool async)
+            => AssertTranslationFailed(() => base.Where_mathf_truncate(async));
 
         public override async Task String_StartsWith_Literal(bool async)
         {
@@ -289,9 +345,41 @@ FROM ""Customers"" AS ""c""
 WHERE ""c"".""CustomerID"" = 'ALFKI'");
         }
 
-        public override async Task Substring_with_zero_startindex(bool async)
+        public override async Task Substring_with_one_arg_with_zero_startindex(bool async)
         {
-            await base.Substring_with_zero_startindex(async);
+            await base.Substring_with_one_arg_with_zero_startindex(async);
+
+            AssertSql(
+                @"SELECT ""c"".""ContactName""
+FROM ""Customers"" AS ""c""
+WHERE substr(""c"".""CustomerID"", 0 + 1) = 'ALFKI'");
+        }
+
+        public override async Task Substring_with_one_arg_with_constant(bool async)
+        {
+            await base.Substring_with_one_arg_with_constant(async);
+
+            AssertSql(
+                @"SELECT ""c"".""ContactName""
+FROM ""Customers"" AS ""c""
+WHERE substr(""c"".""CustomerID"", 1 + 1) = 'LFKI'");
+        }
+
+        public override async Task Substring_with_one_arg_with_closure(bool async)
+        {
+            await base.Substring_with_one_arg_with_closure(async);
+
+            AssertSql(
+                @"@__start_0='2'
+
+SELECT ""c"".""ContactName""
+FROM ""Customers"" AS ""c""
+WHERE substr(""c"".""CustomerID"", @__start_0 + 1) = 'FKI'");
+        }
+
+        public override async Task Substring_with_two_args_with_zero_startindex(bool async)
+        {
+            await base.Substring_with_two_args_with_zero_startindex(async);
 
             AssertSql(
                 @"SELECT substr(""c"".""ContactName"", 0 + 1, 3)
@@ -299,9 +387,9 @@ FROM ""Customers"" AS ""c""
 WHERE ""c"".""CustomerID"" = 'ALFKI'");
         }
 
-        public override async Task Substring_with_constant(bool async)
+        public override async Task Substring_with_two_args_with_constant(bool async)
         {
-            await base.Substring_with_constant(async);
+            await base.Substring_with_two_args_with_constant(async);
 
             AssertSql(
                 @"SELECT substr(""c"".""ContactName"", 1 + 1, 3)
@@ -309,21 +397,21 @@ FROM ""Customers"" AS ""c""
 WHERE ""c"".""CustomerID"" = 'ALFKI'");
         }
 
-        public override async Task Substring_with_closure(bool async)
+        public override async Task Substring_with_two_args_with_closure(bool async)
         {
-            await base.Substring_with_closure(async);
+            await base.Substring_with_two_args_with_closure(async);
 
             AssertSql(
-                @"@__start_0='2' (DbType = String)
+                @"@__start_0='2'
 
 SELECT substr(""c"".""ContactName"", @__start_0 + 1, 3)
 FROM ""Customers"" AS ""c""
 WHERE ""c"".""CustomerID"" = 'ALFKI'");
         }
 
-        public override async Task Substring_with_Index_of(bool async)
+        public override async Task Substring_with_two_args_with_Index_of(bool async)
         {
-            await base.Substring_with_Index_of(async);
+            await base.Substring_with_two_args_with_Index_of(async);
 
             AssertSql(
                 @"SELECT substr(""c"".""ContactName"", (instr(""c"".""ContactName"", 'a') - 1) + 1, 3)
@@ -331,9 +419,9 @@ FROM ""Customers"" AS ""c""
 WHERE ""c"".""CustomerID"" = 'ALFKI'");
         }
 
-        public override async Task Substring_with_zero_length(bool async)
+        public override async Task Substring_with_two_args_with_zero_length(bool async)
         {
-            await base.Substring_with_zero_length(async);
+            await base.Substring_with_two_args_with_zero_length(async);
 
             AssertSql(
                 @"SELECT substr(""c"".""ContactName"", 2 + 1, 0)
@@ -527,6 +615,40 @@ WHERE regexp('^T', ""c"".""CustomerID"")");
             AssertSql(@"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
 WHERE regexp(""c"".""CustomerID"", 'ALFKI')");
+        }
+
+        public override async Task IsNullOrEmpty_in_predicate(bool async)
+        {
+            await base.IsNullOrEmpty_in_predicate(async);
+
+            AssertSql(
+                @"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
+FROM ""Customers"" AS ""c""
+WHERE ""c"".""Region"" IS NULL OR (""c"".""Region"" = '')");
+        }
+
+        public override async Task IsNullOrEmpty_in_projection(bool async)
+        {
+            await base.IsNullOrEmpty_in_projection(async);
+
+            AssertSql(
+                @"SELECT ""c"".""CustomerID"" AS ""Id"", ""c"".""Region"" IS NULL OR (""c"".""Region"" = '') AS ""Value""
+FROM ""Customers"" AS ""c""");
+        }
+
+        public override async Task IsNullOrEmpty_negated_in_predicate(bool async)
+        {
+            await base.IsNullOrEmpty_negated_in_predicate(async);
+
+            AssertSql(
+                @"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
+FROM ""Customers"" AS ""c""
+WHERE ""c"".""Region"" IS NOT NULL AND (""c"".""Region"" <> '')");
+        }
+
+        public override Task Datetime_subtraction_TotalDays(bool async)
+        {
+            return AssertTranslationFailed(() => base.Datetime_subtraction_TotalDays(async));
         }
 
         private void AssertSql(params string[] expected)

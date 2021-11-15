@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     Gets the navigation property on the other end of the relationship. Returns null if
         ///     there is no navigation property defined on the other end of the relationship.
         /// </summary>
-        /// <param name="navigation"> The navigation property to find the inverse of. </param>
+        /// <param name="navigation">The navigation property to find the inverse of.</param>
         /// <returns>
         ///     The inverse navigation, or <see langword="null" /> if none is defined.
         /// </returns>
@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     Gets the entity type that a given navigation property will hold an instance of
         ///     (or hold instances of if it is a collection navigation).
         /// </summary>
-        /// <param name="navigation"> The navigation property to find the target entity type of. </param>
-        /// <returns> The target entity type. </returns>
+        /// <param name="navigation">The navigation property to find the target entity type of.</param>
+        /// <returns>The target entity type.</returns>
         [Obsolete("Use IConventionNavigation.TargetEntityType")]
         public static IConventionEntityType GetTargetType(this IConventionNavigation navigation)
             => navigation.TargetEntityType;

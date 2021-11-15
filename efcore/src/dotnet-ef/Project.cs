@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,6 +39,9 @@ namespace Microsoft.EntityFrameworkCore.Tools
         public string? RuntimeFrameworkVersion { get; set; }
         public string? TargetFileName { get; set; }
         public string? TargetFrameworkMoniker { get; set; }
+        public string? Nullable { get; set; }
+        public string? TargetFramework { get; set; }
+        public string? TargetPlatformIdentifier { get; set; }
 
         public static Project FromFile(
             string file,
@@ -133,7 +136,10 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 RootNamespace = metadata["RootNamespace"],
                 RuntimeFrameworkVersion = metadata["RuntimeFrameworkVersion"],
                 TargetFileName = metadata["TargetFileName"],
-                TargetFrameworkMoniker = metadata["TargetFrameworkMoniker"]
+                TargetFrameworkMoniker = metadata["TargetFrameworkMoniker"],
+                Nullable = metadata["Nullable"],
+                TargetFramework = metadata["TargetFramework"],
+                TargetPlatformIdentifier = metadata["TargetPlatformIdentifier"]
             };
         }
 

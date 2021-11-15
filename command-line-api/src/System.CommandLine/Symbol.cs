@@ -13,7 +13,7 @@ namespace System.CommandLine
     public abstract class Symbol : ISymbol
     {
         private string? _name;
-        private readonly SymbolSet _parents = new SymbolSet();
+        private readonly SymbolSet _parents = new();
 
         private protected Symbol()
         {
@@ -22,7 +22,7 @@ namespace System.CommandLine
         /// <summary>
         /// Gets or sets the description of the symbol.
         /// </summary>
-        public string? Description { get; set; }
+        public virtual string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the symbol.
@@ -48,19 +48,19 @@ namespace System.CommandLine
         private protected virtual void AddSymbol(Symbol symbol)
         {
             Children.Add(symbol);
+            symbol.AddParent(this);
         }
 
         private protected void AddArgumentInner(Argument argument)
         {
             argument.AddParent(this);
-
             Children.Add(argument);
         }
 
         /// <summary>
         /// Gets the child symbols.
         /// </summary>
-        public SymbolSet Children { get; } = new SymbolSet();
+        public SymbolSet Children { get; } = new();
 
         /// <summary>
         /// Gets or sets a value indicating whether the symbol is hidden.
@@ -68,7 +68,7 @@ namespace System.CommandLine
         public bool IsHidden { get; set; }
 
         /// <inheritdoc />
-        public virtual IEnumerable<string?> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+        public virtual IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
         {
             var suggestions = new HashSet<string>();
 
@@ -110,6 +110,7 @@ namespace System.CommandLine
                    .ThenBy(symbol => symbol, StringComparer.OrdinalIgnoreCase);
         }
 
+        /// <inheritdoc/>
         public override string ToString() => $"{GetType().Name}: {Name}";
 
         /// <inheritdoc />

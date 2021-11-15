@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
@@ -14,12 +14,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     <see cref="DatabaseGeneratedOption.Computed" /> is specified or <see cref="ValueGenerated.Never" /> if
     ///     <see cref="DatabaseGeneratedOption.None" /> is specified using a <see cref="DatabaseGeneratedAttribute" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class DatabaseGeneratedAttributeConvention : PropertyAttributeConventionBase<DatabaseGeneratedAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="DatabaseGeneratedAttributeConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public DatabaseGeneratedAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
             : base(dependencies)
         {
@@ -28,10 +31,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
         /// </summary>
-        /// <param name="propertyBuilder"> The builder for the property. </param>
-        /// <param name="attribute"> The attribute. </param>
-        /// <param name="clrMember"> The member that has the attribute. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="propertyBuilder">The builder for the property.</param>
+        /// <param name="attribute">The attribute.</param>
+        /// <param name="clrMember">The member that has the attribute.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         protected override void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
             DatabaseGeneratedAttribute attribute,

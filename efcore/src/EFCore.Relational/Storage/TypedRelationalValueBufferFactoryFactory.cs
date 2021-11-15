@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Concurrent;
@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Storage
@@ -25,19 +24,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         <see cref="IRelationalValueBufferFactory" /> for a given result shape.
     ///     </para>
     ///     <para>
-    ///         This factory results in value buffers that use they strongly typed APIs to read back individual values from the
-    ///         underlying <see cref="DbDataReader" />.
-    ///     </para>
-    ///     <para>
     ///         This type is typically used by database providers (and other extensions). It is generally
     ///         not used in application code.
+    ///     </para>
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         This factory results in value buffers that use they strongly typed APIs to read back individual values from the
+    ///         underlying <see cref="DbDataReader" />.
     ///     </para>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public class TypedRelationalValueBufferFactoryFactory : IRelationalValueBufferFactoryFactory
     {
         /// <summary>
@@ -58,16 +63,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="TypedRelationalValueBufferFactoryFactory" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public TypedRelationalValueBufferFactoryFactory(RelationalValueBufferFactoryDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalValueBufferFactoryDependencies Dependencies { get; }
 
@@ -102,27 +105,23 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Creates a new <see cref="IRelationalValueBufferFactory" />.
         /// </summary>
-        /// <param name="types"> Types and mapping for the values to be read. </param>
-        /// <returns> The newly created <see cref="IRelationalValueBufferFactoryFactory" />. </returns>
+        /// <param name="types">Types and mapping for the values to be read.</param>
+        /// <returns>The newly created <see cref="IRelationalValueBufferFactoryFactory" />.</returns>
         public virtual IRelationalValueBufferFactory Create(IReadOnlyList<TypeMaterializationInfo> types)
-        {
-            Check.NotNull(types, nameof(types));
-
-            return _cache.GetOrAdd(
+            => _cache.GetOrAdd(
                 new CacheKey(types),
                 k => new TypedRelationalValueBufferFactory(
                     Dependencies,
                     CreateArrayInitializer(k, Dependencies.CoreOptions.AreDetailedErrorsEnabled)));
-        }
 
         /// <summary>
         ///     Creates value buffer assignment expressions for the given type information.
         /// </summary>
-        /// <param name="types"> Types and mapping for the values to be read. </param>
-        /// <returns> The value buffer assignment expressions. </returns>
+        /// <param name="types">Types and mapping for the values to be read.</param>
+        /// <returns>The value buffer assignment expressions.</returns>
         [Obsolete]
         public virtual IReadOnlyList<Expression> CreateAssignmentExpressions(IReadOnlyList<TypeMaterializationInfo> types)
-            => Check.NotNull(types, nameof(types))
+            => types
                 .Select(
                     (mi, i) =>
                         CreateGetValueExpression(
@@ -263,10 +262,29 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 || materializationInfo.IsFromLeftOuterJoin != false)
             {
 #pragma warning restore CS0612 // Type or member is obsolete
+
+                Expression replaceExpression;
+                if (converter?.ConvertsNulls == true)
+                {
+                    replaceExpression = ReplacingExpressionVisitor.Replace(
+                        converter.ConvertFromProviderExpression.Parameters.Single(),
+                        Expression.Default(converter.ProviderClrType),
+                        converter.ConvertFromProviderExpression.Body);
+
+                    if (replaceExpression.Type != valueExpression.Type)
+                    {
+                        replaceExpression = Expression.Convert(replaceExpression, valueExpression.Type);
+                    }
+                }
+                else
+                {
+                    replaceExpression = Expression.Default(valueExpression.Type);
+                }
+
                 valueExpression
                     = Expression.Condition(
                         Expression.Call(dataReaderExpression, _isDbNullMethod, indexExpression),
-                        Expression.Default(valueExpression.Type),
+                        replaceExpression,
                         valueExpression);
             }
 

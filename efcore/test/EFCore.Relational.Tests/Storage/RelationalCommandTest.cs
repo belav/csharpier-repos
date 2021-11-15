@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -867,7 +867,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
 
             protected override RelationalDataReader CreateRelationalDataReader()
-                => new ThrowingRelationalReader(this);
+                => new ThrowingRelationalReader();
 
             public static IRelationalCommand Create(string commandText = "Command Text")
                 => new ReaderThrowingRelationalCommand(
@@ -880,8 +880,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             private class ThrowingRelationalReader : RelationalDataReader
             {
-                public ThrowingRelationalReader(IRelationalCommand relationalCommand)
-                    : base(relationalCommand)
+                public ThrowingRelationalReader()
+                    : base()
                 {
                 }
 

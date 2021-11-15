@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     /// <summary>
     ///     Converts enum values to and from their underlying numeric representation.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+    /// </remarks>
     public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumber>
         where TEnum : struct
         where TNumber : struct
@@ -31,11 +34,25 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <summary>
         ///     Creates a new instance of this converter. This converter preserves order.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+        /// </remarks>
+        public EnumToNumberConverter()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        ///     Creates a new instance of this converter. This converter preserves order.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+        /// </remarks>
         /// <param name="mappingHints">
         ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
         ///     facets for the converted data.
         /// </param>
-        public EnumToNumberConverter(ConverterMappingHints? mappingHints = null)
+        public EnumToNumberConverter(ConverterMappingHints? mappingHints)
             : base(
                 ToNumber(),
                 ToEnum(),

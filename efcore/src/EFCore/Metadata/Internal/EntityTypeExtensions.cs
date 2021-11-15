@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -51,16 +51,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             this IReadOnlyEntityType entityType,
             string navigationName)
         {
-            var memberInfo = entityType.ClrType.GetMembersInHierarchy(navigationName).FirstOrDefault();
-
-            if (memberInfo == null)
+            MemberInfo? memberInfo;
+            if (entityType.IsPropertyBag)
             {
-                throw new InvalidOperationException(
-                    CoreStrings.NoClrNavigation(navigationName, entityType.DisplayName()));
+                memberInfo = entityType.FindIndexerPropertyInfo()!;
+            }
+            else
+            {
+                memberInfo = entityType.ClrType.GetMembersInHierarchy(navigationName).FirstOrDefault();
+
+                if (memberInfo == null)
+                {
+                    throw new InvalidOperationException(
+                        CoreStrings.NoClrNavigation(navigationName, entityType.DisplayName()));
+                }
             }
 
             return memberInfo;
         }
+
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
         ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
@@ -77,6 +86,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public static IReadOnlyForeignKey? FindDeclaredOwnership(this IReadOnlyEntityType entityType)
+            => entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public static IConventionForeignKey? FindDeclaredOwnership(this IConventionEntityType entityType)
             => entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership);
 
         /// <summary>
@@ -117,6 +135,36 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static bool IsInOwnershipPath(this IReadOnlyEntityType entityType, Type targetType)
             => entityType.FindInOwnershipPath(targetType) != null;
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public static bool IsInOwnershipPath(this IReadOnlyEntityType entityType, IReadOnlyEntityType targetType)
+        {
+            if (entityType == targetType)
+            {
+                return true;
+            }
+
+            var owner = entityType;
+            while (true)
+            {
+                var ownership = owner.FindOwnership();
+                if (ownership == null)
+                {
+                    return false;
+                }
+
+                owner = ownership.PrincipalEntityType;
+                if (owner.IsAssignableFrom(targetType))
+                {
+                    return true;
+                }
+            }
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -370,7 +418,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public static IProperty CheckPropertyBelongsToType(
-            this IEntityType entityType, IProperty property)
+            this IEntityType entityType,
+            IProperty property)
         {
             Check.NotNull(property, nameof(property));
 

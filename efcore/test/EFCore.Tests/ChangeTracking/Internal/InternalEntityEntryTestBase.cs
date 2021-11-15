@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -594,7 +594,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             entry[nameProperty] = "Beans";
 
-            Assert.Null(entry.GetOriginalValue(nameProperty));
+            Assert.Equal(nameProperty.IsShadowProperty() ? "Beans" : null, entry.GetOriginalValue(nameProperty));
             Assert.Equal("Beans", entry[nameProperty]);
 
             entry.SetOriginalValue(nameProperty, "Franks");
@@ -627,7 +627,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             entry[nameProperty] = "Beans";
 
-            Assert.Null(entry.GetOriginalValue<string>(nameProperty));
+            Assert.Equal(nameProperty.IsShadowProperty() ? "Beans" : null, entry.GetOriginalValue<string>(nameProperty));
             Assert.Equal("Beans", entry.GetCurrentValue<string>(nameProperty));
 
             entry.SetOriginalValue(nameProperty, "Franks");

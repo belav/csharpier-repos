@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -19,6 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
+    /// </remarks>
     [DebuggerDisplay("{ToString(), nq}")]
     public sealed class ProjectionMember
     {
@@ -34,20 +37,16 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private ProjectionMember(IList<MemberInfo> memberChain)
         {
-            Check.NotNull(memberChain, nameof(memberChain));
-
             _memberChain = memberChain;
         }
 
         /// <summary>
         ///     Append given MemberInfo to existing chain at the end.
         /// </summary>
-        /// <param name="member"> The MemberInfo to append. </param>
-        /// <returns> A new projection member with given member info appended to existing chain. </returns>
+        /// <param name="member">The MemberInfo to append.</param>
+        /// <returns>A new projection member with given member info appended to existing chain.</returns>
         public ProjectionMember Append(MemberInfo member)
         {
-            Check.NotNull(member, nameof(member));
-
             var existingChain = _memberChain.ToList();
             existingChain.Add(member);
 
@@ -57,12 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Prepend given MemberInfo to existing chain at the start.
         /// </summary>
-        /// <param name="member"> The MemberInfo to prepend. </param>
-        /// <returns> A new projection member with given member info prepended to existing chain. </returns>
+        /// <param name="member">The MemberInfo to prepend.</param>
+        /// <returns>A new projection member with given member info prepended to existing chain.</returns>
         public ProjectionMember Prepend(MemberInfo member)
         {
-            Check.NotNull(member, nameof(member));
-
             var existingChain = _memberChain.ToList();
             existingChain.Insert(0, member);
 
@@ -70,17 +67,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <summary>
-        ///     <para>
-        ///         The last MemberInfo in the chain of MemberInfo represented by this projection member.
-        ///     </para>
-        ///     <para>
-        ///         This method is generally used to get last memberInfo to generate an alias for projection.
-        ///     </para>
+        ///     The last MemberInfo in the chain of MemberInfo represented by this projection member.
         /// </summary>
+        /// <remarks>
+        ///     This method is generally used to get last memberInfo to generate an alias for projection.
+        /// </remarks>
         public MemberInfo? Last
             => _memberChain.LastOrDefault();
 
         /// <inheritdoc />
+        [DebuggerStepThrough]
         public override int GetHashCode()
         {
             var hash = new HashCode();
@@ -94,6 +90,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
+        [DebuggerStepThrough]
         public override bool Equals(object? obj)
             => obj != null
                 && (obj is ProjectionMember projectionMember

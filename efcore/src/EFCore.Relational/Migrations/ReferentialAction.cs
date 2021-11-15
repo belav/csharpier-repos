@@ -1,17 +1,18 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Migrations
 {
     /// <summary>
-    ///     <para>
-    ///         The action that a database may take when handling a foreign key constraint as
-    ///         part of an update or delete.
-    ///     </para>
-    ///     <para>
-    ///         Note that some database engines do not support or correctly honor every action.
-    ///     </para>
+    ///     The action that a database may take when handling a foreign key constraint as
+    ///     part of an update or delete.
     /// </summary>
+    /// <remarks>
+    ///     Note that some database engines do not support or correctly honor every action.
+    /// </remarks>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    /// </remarks>
     public enum ReferentialAction
     {
         /// <summary>

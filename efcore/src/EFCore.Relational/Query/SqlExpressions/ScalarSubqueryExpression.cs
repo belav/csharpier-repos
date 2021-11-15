@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -23,12 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="ScalarSubqueryExpression" /> class.
         /// </summary>
-        /// <param name="subquery"> A subquery projecting single row with a single scalar projection. </param>
+        /// <param name="subquery">A subquery projecting single row with a single scalar projection.</param>
         public ScalarSubqueryExpression(SelectExpression subquery)
             : base(Verify(subquery).Projection[0].Type, subquery.Projection[0].Expression.TypeMapping)
         {
-            Check.NotNull(subquery, nameof(subquery));
-
             Subquery = subquery;
         }
 
@@ -49,32 +46,22 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
-        {
-            Check.NotNull(visitor, nameof(visitor));
-
-            return Update((SelectExpression)visitor.Visit(Subquery));
-        }
+            => Update((SelectExpression)visitor.Visit(Subquery));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="subquery"> The <see cref="Subquery" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual ScalarSubqueryExpression Update(SelectExpression subquery)
-        {
-            Check.NotNull(subquery, nameof(subquery));
-
-            return subquery != Subquery
+            => subquery != Subquery
                 ? new ScalarSubqueryExpression(subquery)
                 : this;
-        }
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.Append("(");
             using (expressionPrinter.Indent())
             {

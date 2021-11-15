@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Scaffolding;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal
@@ -23,6 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private readonly string _projectDir;
         private readonly string? _rootNamespace;
         private readonly string? _language;
+        private readonly bool _nullable;
         private readonly DesignTimeServicesBuilder _servicesBuilder;
         private readonly string[] _args;
 
@@ -39,16 +39,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string projectDir,
             string? rootNamespace,
             string? language,
+            bool nullable,
             string[]? args)
         {
-            Check.NotNull(reporter, nameof(reporter));
-            Check.NotNull(startupAssembly, nameof(startupAssembly));
-            Check.NotNull(projectDir, nameof(projectDir));
-
             _reporter = reporter;
             _projectDir = projectDir;
             _rootNamespace = rootNamespace;
             _language = language;
+            _nullable = nullable;
             _args = args ?? Array.Empty<string>();
 
             _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
@@ -76,11 +74,6 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             bool suppressOnConfiguring,
             bool noPluralize)
         {
-            Check.NotEmpty(provider, nameof(provider));
-            Check.NotEmpty(connectionString, nameof(connectionString));
-            Check.NotNull(schemas, nameof(schemas));
-            Check.NotNull(tables, nameof(tables));
-
             outputDir = outputDir != null
                 ? Path.GetFullPath(Path.Combine(_projectDir, outputDir))
                 : _projectDir;
@@ -90,8 +83,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 : outputDir;
 
             var services = _servicesBuilder.Build(provider);
+            using var scope = services.CreateScope();
 
-            var scaffolder = services.GetRequiredService<IReverseEngineerScaffolder>();
+            var scaffolder = scope.ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
             var finalModelNamespace = modelNamespace ?? GetNamespaceFromOutputPath(outputDir);
             var finalContextNamespace =
@@ -108,6 +102,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     ModelNamespace = finalModelNamespace,
                     ContextNamespace = finalContextNamespace,
                     Language = _language,
+                    UseNullableReferenceTypes = _nullable,
                     ContextDir = MakeDirRelative(outputDir, outputContextDir),
                     ContextName = dbContextClassName,
                     SuppressOnConfiguring = suppressOnConfiguring

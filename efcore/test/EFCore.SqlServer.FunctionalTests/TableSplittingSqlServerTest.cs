@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
@@ -40,7 +40,9 @@ LEFT JOIN (
         INNER JOIN [Vehicles] AS [v4] ON [v3].[Name] = [v4].[Name]
     ) AS [t1] ON [v2].[Name] = [t1].[Name]
     WHERE [v2].[Active] IS NOT NULL
-) AS [t0] ON [t].[Name] = [t0].[Name]
+) AS [t0] ON [t].[Name] = CASE
+    WHEN [t0].[Active] IS NOT NULL THEN [t0].[Name]
+END
 LEFT JOIN (
     SELECT [v5].[Name], [v5].[Computed], [v5].[Description], [v5].[Engine_Discriminator]
     FROM [Vehicles] AS [v5]
@@ -50,7 +52,9 @@ LEFT JOIN (
         WHERE [v6].[Discriminator] IN (N'PoweredVehicle', N'CompositeVehicle')
     ) AS [t3] ON [v5].[Name] = [t3].[Name]
     WHERE [v5].[Computed] IS NOT NULL AND [v5].[Engine_Discriminator] IS NOT NULL
-) AS [t2] ON [v].[Name] = [t2].[Name]
+) AS [t2] ON [v].[Name] = CASE
+    WHEN [t2].[Computed] IS NOT NULL AND [t2].[Engine_Discriminator] IS NOT NULL THEN [t2].[Name]
+END
 LEFT JOIN (
     SELECT [v7].[Name], [v7].[Capacity], [v7].[FuelTank_Discriminator], [v7].[FuelType], [v7].[GrainGeometry]
     FROM [Vehicles] AS [v7]
@@ -74,7 +78,11 @@ LEFT JOIN (
         WHERE [v10].[Engine_Discriminator] IN (N'ContinuousCombustionEngine', N'IntermittentCombustionEngine', N'SolidRocket')
     ) AS [t6] ON [v9].[Name] = [t6].[Name]
     WHERE [v9].[Capacity] IS NOT NULL AND [v9].[FuelTank_Discriminator] IS NOT NULL
-) AS [t4] ON [t2].[Name] = [t4].[Name]
+) AS [t4] ON CASE
+    WHEN [t2].[Computed] IS NOT NULL AND [t2].[Engine_Discriminator] IS NOT NULL THEN [t2].[Name]
+END = CASE
+    WHEN [t4].[Capacity] IS NOT NULL AND [t4].[FuelTank_Discriminator] IS NOT NULL THEN [t4].[Name]
+END
 ORDER BY [v].[Name]");
         }
 
@@ -125,15 +133,15 @@ UNION
 SELECT [v1].[Name], [v1].[Capacity], [v1].[FuelTank_Discriminator], [v1].[FuelType], [v1].[GrainGeometry]
 FROM [Vehicles] AS [v1]
 INNER JOIN (
-    SELECT [v2].[Name], [v2].[Computed], [v2].[Description], [v2].[Engine_Discriminator], [t1].[Name] AS [Name0]
+    SELECT [v2].[Name], [v2].[Computed], [v2].[Description], [v2].[Engine_Discriminator], [t2].[Name] AS [Name0]
     FROM [Vehicles] AS [v2]
     INNER JOIN (
         SELECT [v3].[Name], [v3].[Discriminator], [v3].[SeatingCapacity], [v3].[AttachedVehicleName]
         FROM [Vehicles] AS [v3]
         WHERE [v3].[Discriminator] IN (N'PoweredVehicle', N'CompositeVehicle')
-    ) AS [t1] ON [v2].[Name] = [t1].[Name]
+    ) AS [t2] ON [v2].[Name] = [t2].[Name]
     WHERE [v2].[Engine_Discriminator] IN (N'ContinuousCombustionEngine', N'IntermittentCombustionEngine', N'SolidRocket')
-) AS [t0] ON [v1].[Name] = [t0].[Name]
+) AS [t1] ON [v1].[Name] = [t1].[Name]
 WHERE [v1].[Capacity] IS NOT NULL AND [v1].[FuelTank_Discriminator] IS NOT NULL");
         }
 
@@ -154,15 +162,15 @@ UNION
 SELECT [v1].[Name], [v1].[Capacity], [v1].[FuelType]
 FROM [Vehicles] AS [v1]
 INNER JOIN (
-    SELECT [v2].[Name], [v2].[Computed], [v2].[Description], [v2].[Engine_Discriminator], [t1].[Name] AS [Name0]
+    SELECT [v2].[Name], [v2].[Computed], [v2].[Description], [v2].[Engine_Discriminator], [t2].[Name] AS [Name0]
     FROM [Vehicles] AS [v2]
     INNER JOIN (
         SELECT [v3].[Name], [v3].[Discriminator], [v3].[SeatingCapacity], [v3].[AttachedVehicleName]
         FROM [Vehicles] AS [v3]
         WHERE [v3].[Discriminator] IN (N'PoweredVehicle', N'CompositeVehicle')
-    ) AS [t1] ON [v2].[Name] = [t1].[Name]
+    ) AS [t2] ON [v2].[Name] = [t2].[Name]
     WHERE [v2].[Engine_Discriminator] IN (N'ContinuousCombustionEngine', N'IntermittentCombustionEngine', N'SolidRocket')
-) AS [t0] ON [v1].[Name] = [t0].[Name]
+) AS [t1] ON [v1].[Name] = [t1].[Name]
 WHERE [v1].[Capacity] IS NOT NULL");
         }
 
@@ -183,15 +191,15 @@ UNION
 SELECT [v1].[Name], [v1].[Capacity], [v1].[FuelType]
 FROM [Vehicles] AS [v1]
 INNER JOIN (
-    SELECT [v2].[Name], [v2].[Computed], [v2].[Description], [v2].[Engine_Discriminator], [t1].[Name] AS [Name0]
+    SELECT [v2].[Name], [v2].[Computed], [v2].[Description], [v2].[Engine_Discriminator], [t2].[Name] AS [Name0]
     FROM [Vehicles] AS [v2]
     INNER JOIN (
         SELECT [v3].[Name], [v3].[Discriminator], [v3].[SeatingCapacity], [v3].[AttachedVehicleName]
         FROM [Vehicles] AS [v3]
         WHERE [v3].[Discriminator] IN (N'PoweredVehicle', N'CompositeVehicle')
-    ) AS [t1] ON [v2].[Name] = [t1].[Name]
+    ) AS [t2] ON [v2].[Name] = [t2].[Name]
     WHERE [v2].[Engine_Discriminator] IN (N'ContinuousCombustionEngine', N'IntermittentCombustionEngine', N'SolidRocket')
-) AS [t0] ON [v1].[Name] = [t0].[Name]
+) AS [t1] ON [v1].[Name] = [t1].[Name]
 WHERE [v1].[Capacity] IS NOT NULL AND [v1].[FuelType] IS NOT NULL");
         }
 
@@ -264,7 +272,9 @@ LEFT JOIN (
         INNER JOIN [Vehicles] AS [v4] ON [v3].[Name] = [v4].[Name]
     ) AS [t1] ON [v2].[Name] = [t1].[Name]
     WHERE [v2].[Active] IS NOT NULL
-) AS [t0] ON [t].[Name] = [t0].[Name]
+) AS [t0] ON [t].[Name] = CASE
+    WHEN [t0].[Active] IS NOT NULL THEN [t0].[Name]
+END
 WHERE [v].[Name] = N'AIM-9M Sidewinder'
 ORDER BY [v].[Name]");
         }

@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             var message = (await Assert.ThrowsAsync<InvalidOperationException>(
               () => base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(async))).Message;
 
-            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyOuterElementOfCollectionJoin, message);
+            Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
         }
 
         public override Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(bool async)

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -15,21 +15,23 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
     /// <summary>
     ///     Used to generate C# for creating <see cref="MigrationOperation" /> objects.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time services</see> for more information.
+    /// </remarks>
     public class CSharpMigrationOperationGenerator : ICSharpMigrationOperationGenerator
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="CSharpMigrationOperationGenerator" /> class.
         /// </summary>
-        /// <param name="dependencies"> The dependencies. </param>
+        /// <param name="dependencies">The dependencies.</param>
         public CSharpMigrationOperationGenerator(CSharpMigrationOperationGeneratorDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing dependencies for this service.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual CSharpMigrationOperationGeneratorDependencies Dependencies { get; }
 
@@ -39,18 +41,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for creating <see cref="MigrationOperation" /> objects.
         /// </summary>
-        /// <param name="builderName"> The <see cref="MigrationOperation" /> variable name. </param>
-        /// <param name="operations"> The operations. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="builderName">The <see cref="MigrationOperation" /> variable name.</param>
+        /// <param name="operations">The operations.</param>
+        /// <param name="builder">The builder code is added to.</param>
         public virtual void Generate(
             string builderName,
             IReadOnlyList<MigrationOperation> operations,
             IndentedStringBuilder builder)
         {
-            Check.NotEmpty(builderName, nameof(builderName));
-            Check.NotNull(operations, nameof(operations));
-            Check.NotNull(builder, nameof(builder));
-
             var first = true;
             foreach (var operation in operations)
             {
@@ -74,26 +72,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an unknown <see cref="MigrationOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(MigrationOperation operation, IndentedStringBuilder builder)
-        {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
-            throw new InvalidOperationException(DesignStrings.UnknownOperation(operation.GetType()));
-        }
+            => throw new InvalidOperationException(DesignStrings.UnknownOperation(operation.GetType()));
 
         /// <summary>
         ///     Generates code for an <see cref="AddColumnOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AddColumnOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder
                 .Append(".AddColumn<")
                 .Append(Code.Reference(operation.ClrType))
@@ -228,13 +218,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AddForeignKeyOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AddForeignKeyOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".AddForeignKey(");
 
             using (builder.Indent())
@@ -326,13 +313,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AddPrimaryKeyOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AddPrimaryKeyOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".AddPrimaryKey(");
 
             using (builder.Indent())
@@ -377,13 +361,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AddUniqueConstraintOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AddUniqueConstraintOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".AddUniqueConstraint(");
 
             using (builder.Indent())
@@ -428,13 +409,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AddCheckConstraintOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AddCheckConstraintOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".AddCheckConstraint(");
 
             using (builder.Indent())
@@ -467,13 +445,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AlterColumnOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AlterColumnOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder
                 .Append(".AlterColumn<")
                 .Append(Code.Reference(operation.ClrType))
@@ -716,13 +691,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AlterDatabaseOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AlterDatabaseOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.Append(".AlterDatabase(");
 
             using (builder.Indent())
@@ -764,13 +736,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AlterSequenceOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AlterSequenceOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".AlterSequence(");
 
             using (builder.Indent())
@@ -859,13 +828,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="AlterTableOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(AlterTableOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".AlterTable(");
 
             using (builder.Indent())
@@ -908,13 +874,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="CreateIndexOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(CreateIndexOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".CreateIndex(");
 
             using (builder.Indent())
@@ -974,13 +937,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="EnsureSchemaOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(EnsureSchemaOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".EnsureSchema(");
 
             using (builder.Indent())
@@ -997,13 +957,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="CreateSequenceOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(CreateSequenceOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.Append(".CreateSequence");
 
             if (operation.ClrType != typeof(long))
@@ -1078,13 +1035,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="CreateTableOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(CreateTableOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".CreateTable(");
 
             using (builder.Indent())
@@ -1385,13 +1339,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropColumnOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropColumnOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropColumn(");
 
             using (builder.Indent())
@@ -1421,13 +1372,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropForeignKeyOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropForeignKeyOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropForeignKey(");
 
             using (builder.Indent())
@@ -1457,13 +1405,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropIndexOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropIndexOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropIndex(");
 
             using (builder.Indent())
@@ -1497,13 +1442,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropPrimaryKeyOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropPrimaryKeyOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropPrimaryKey(");
 
             using (builder.Indent())
@@ -1533,13 +1475,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropSchemaOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropSchemaOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropSchema(");
 
             using (builder.Indent())
@@ -1556,13 +1495,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropSequenceOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropSequenceOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropSequence(");
 
             using (builder.Indent())
@@ -1588,13 +1524,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropTableOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropTableOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropTable(");
 
             using (builder.Indent())
@@ -1620,13 +1553,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropUniqueConstraintOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropUniqueConstraintOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropUniqueConstraint(");
 
             using (builder.Indent())
@@ -1656,13 +1586,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DropCheckConstraintOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(DropCheckConstraintOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DropCheckConstraint(");
 
             using (builder.Indent())
@@ -1692,13 +1619,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="RenameColumnOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(RenameColumnOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".RenameColumn(");
 
             using (builder.Indent())
@@ -1731,13 +1655,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="RenameIndexOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(RenameIndexOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".RenameIndex(");
 
             using (builder.Indent())
@@ -1775,13 +1696,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="RenameSequenceOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(RenameSequenceOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".RenameSequence(");
 
             using (builder.Indent())
@@ -1823,13 +1741,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="RenameTableOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(RenameTableOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".RenameTable(");
 
             using (builder.Indent())
@@ -1871,13 +1786,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="RestartSequenceOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(RestartSequenceOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".RestartSequence(");
 
             using (builder.Indent())
@@ -1907,13 +1819,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="SqlOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(SqlOperation operation, IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder
                 .Append(".Sql(")
                 .Append(Code.Literal(operation.Sql))
@@ -1928,15 +1837,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="InsertDataOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(
             InsertDataOperation operation,
             IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".InsertData(");
 
             using (builder.Indent())
@@ -2006,15 +1912,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for a <see cref="DeleteDataOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(
             DeleteDataOperation operation,
             IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".DeleteData(");
 
             using (builder.Indent())
@@ -2102,15 +2005,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for an <see cref="UpdateDataOperation" />.
         /// </summary>
-        /// <param name="operation"> The operation. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Generate(
             UpdateDataOperation operation,
             IndentedStringBuilder builder)
         {
-            Check.NotNull(operation, nameof(operation));
-            Check.NotNull(builder, nameof(builder));
-
             builder.AppendLine(".UpdateData(");
 
             using (builder.Indent())
@@ -2227,22 +2127,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for <see cref="Annotation" /> objects.
         /// </summary>
-        /// <param name="annotations"> The annotations. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="annotations">The annotations.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void Annotations(
             IEnumerable<Annotation> annotations,
             IndentedStringBuilder builder)
         {
-            Check.NotNull(annotations, nameof(annotations));
-            Check.NotNull(builder, nameof(builder));
-
             foreach (var annotation in annotations)
             {
-                if (annotation.Value == null)
-                {
-                    continue;
-                }
-
                 // TODO: Give providers an opportunity to render these as provider-specific extension methods
                 builder
                     .AppendLine()
@@ -2257,15 +2149,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Generates code for removed <see cref="Annotation" /> objects.
         /// </summary>
-        /// <param name="annotations"> The annotations. </param>
-        /// <param name="builder"> The builder code is added to. </param>
+        /// <param name="annotations">The annotations.</param>
+        /// <param name="builder">The builder code is added to.</param>
         protected virtual void OldAnnotations(
             IEnumerable<Annotation> annotations,
             IndentedStringBuilder builder)
         {
-            Check.NotNull(annotations, nameof(annotations));
-            Check.NotNull(builder, nameof(builder));
-
             foreach (var annotation in annotations)
             {
                 // TODO: Give providers an opportunity to render these as provider-specific extension methods

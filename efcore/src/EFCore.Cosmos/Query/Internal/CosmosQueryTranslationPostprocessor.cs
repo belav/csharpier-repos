@@ -1,9 +1,8 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 {
@@ -29,8 +28,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             QueryCompilationContext queryCompilationContext)
             : base(dependencies, queryCompilationContext)
         {
-            Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
-
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -44,8 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             query = base.Process(query);
 
-            if (query is ShapedQueryExpression shapedQueryExpression
-                && shapedQueryExpression.QueryExpression is SelectExpression selectExpression)
+            if (query is ShapedQueryExpression { QueryExpression: SelectExpression selectExpression })
             {
                 // Cosmos does not have nested select expression so this should be safe.
                 selectExpression.ApplyProjection();

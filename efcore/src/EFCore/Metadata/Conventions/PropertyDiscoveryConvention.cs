@@ -1,7 +1,6 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -11,27 +10,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that adds properties to entity types corresponding to scalar public properties on the CLR type.
     /// </summary>
-    public class PropertyDiscoveryConvention : IEntityTypeAddedConvention, IEntityTypeBaseTypeChangedConvention
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
+    public class PropertyDiscoveryConvention :
+        IEntityTypeAddedConvention,
+        IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public PropertyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
         /// <summary>
         ///     Called after an entity type is added to the model.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context)
@@ -42,10 +46,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after the base type of an entity type changes.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="newBaseType"> The new base entity type. </param>
-        /// <param name="oldBaseType"> The old base entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="newBaseType">The new base entity type.</param>
+        /// <param name="oldBaseType">The old base entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeBaseTypeChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
@@ -62,22 +66,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private void Process(IConventionEntityTypeBuilder entityTypeBuilder)
         {
-            foreach (var propertyInfo in entityTypeBuilder.Metadata.GetRuntimeProperties().Values)
+            var entityType = entityTypeBuilder.Metadata;
+            var model = entityType.Model;
+            foreach (var propertyInfo in entityType.GetRuntimeProperties().Values)
             {
-                if (IsCandidatePrimitiveProperty(propertyInfo))
+                if (!Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(propertyInfo, model))
                 {
-                    entityTypeBuilder.Property(propertyInfo);
+                    continue;
                 }
+
+                entityTypeBuilder.Property(propertyInfo);
             }
         }
-
-        /// <summary>
-        ///     Returns a value indicating whether the given CLR property should be mapped as an entity type property.
-        /// </summary>
-        /// <param name="propertyInfo"> The property. </param>
-        /// <returns> <see langword="true"/> if the property should be mapped. </returns>
-        protected virtual bool IsCandidatePrimitiveProperty(PropertyInfo propertyInfo)
-            => propertyInfo.IsCandidateProperty()
-                && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null;
     }
 }

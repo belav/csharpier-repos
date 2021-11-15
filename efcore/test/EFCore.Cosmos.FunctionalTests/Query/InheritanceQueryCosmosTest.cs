@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Xunit;
@@ -166,7 +166,10 @@ WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (c[""Discriminator""] =
         {
             await base.Can_use_backwards_of_type_animal(async);
 
-            AssertSql(" ");
+            AssertSql(
+                @"SELECT c
+FROM root c
+WHERE (c[""Discriminator""] = ""Kiwi"")");
         }
 
         public override async Task Can_use_of_type_rose(bool async)

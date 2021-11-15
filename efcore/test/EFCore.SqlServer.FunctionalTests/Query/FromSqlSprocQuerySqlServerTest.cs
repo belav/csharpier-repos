@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestUtilities;
@@ -27,6 +27,40 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             AssertSql(
                 @"-- Stored Procedure
+
+[dbo].[Ten Most Expensive Products]");
+        }
+
+        public override async Task From_sql_queryable_stored_procedure_with_tags(bool async)
+        {
+            await base.From_sql_queryable_stored_procedure_with_tags(async);
+
+            AssertSql(
+                @"-- One
+-- Two
+-- Three
+
+[dbo].[Ten Most Expensive Products]");
+        }
+
+        public override async Task From_sql_queryable_stored_procedure_with_caller_info_tag(bool async)
+        {
+            await base.From_sql_queryable_stored_procedure_with_caller_info_tag(async);
+
+            AssertSql(
+                @"-- File: SampleFileName:13
+
+[dbo].[Ten Most Expensive Products]");
+        }
+
+        public override async Task From_sql_queryable_stored_procedure_with_caller_info_tag_and_other_tags(bool async)
+        {
+            await base.From_sql_queryable_stored_procedure_with_caller_info_tag_and_other_tags(async);
+
+            AssertSql(
+                @"-- Before
+-- File: SampleFileName:13
+-- After
 
 [dbo].[Ten Most Expensive Products]");
         }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
@@ -10,27 +10,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that sets the delete behavior to <see cref="DeleteBehavior.Cascade" /> for required foreign keys
     ///     and <see cref="DeleteBehavior.ClientSetNull" /> for optional ones.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class CascadeDeleteConvention : IForeignKeyAddedConvention, IForeignKeyRequirednessChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CascadeDeleteConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public CascadeDeleteConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
         /// <summary>
         ///     Called after a foreign key is added to the entity type.
         /// </summary>
-        /// <param name="relationshipBuilder"> The builder for the foreign key. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="relationshipBuilder">The builder for the foreign key.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<IConventionForeignKeyBuilder> context)
@@ -45,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after the requiredness for a foreign key is changed.
         /// </summary>
-        /// <param name="relationshipBuilder"> The builder for the foreign key. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="relationshipBuilder">The builder for the foreign key.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessForeignKeyRequirednessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
             IConventionContext<bool?> context)
@@ -61,7 +64,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Returns the delete behavior to set for the given foreign key.
         /// </summary>
-        /// <param name="foreignKey"> The foreign key. </param>
+        /// <param name="foreignKey">The foreign key.</param>
         protected virtual DeleteBehavior GetTargetDeleteBehavior(IConventionForeignKey foreignKey)
             => foreignKey.IsRequired ? DeleteBehavior.Cascade : DeleteBehavior.ClientSetNull;
     }

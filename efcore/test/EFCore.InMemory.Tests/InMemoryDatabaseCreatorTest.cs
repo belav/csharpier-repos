@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading.Tasks;
@@ -122,28 +122,6 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private class Fraggle
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-        }
-
-        private static IModel CreateModel()
-        {
-            var modelBuilder = new ModelBuilder();
-
-            modelBuilder.Entity<Test>(
-                b =>
-                {
-                    b.HasKey(c => c.Id);
-                    b.Property(c => c.Name);
-
-                    b.HasData(new Test { Id = 1 });
-                });
-
-            return modelBuilder.FinalizeModel();
-        }
-
-        private class Test
         {
             public int Id { get; set; }
             public string Name { get; set; }

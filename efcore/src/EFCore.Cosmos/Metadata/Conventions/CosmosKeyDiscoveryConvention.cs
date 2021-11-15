@@ -1,11 +1,10 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 {
@@ -13,14 +12,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that finds primary key property for the entity type based on the names
     ///     and adds the partition key to it if present.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information.
+    /// </remarks>
     public class CosmosKeyDiscoveryConvention :
         KeyDiscoveryConvention,
         IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
-        ///     Creates a new instance of <see cref="KeyDiscoveryConvention" />.
+        ///     Creates a new instance of <see cref="CosmosKeyDiscoveryConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public CosmosKeyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
             : base(dependencies)
         {
@@ -29,11 +32,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after an annotation is changed on an entity type.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="name"> The annotation name. </param>
-        /// <param name="annotation"> The new annotation. </param>
-        /// <param name="oldAnnotation"> The old annotation.  </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="name">The annotation name.</param>
+        /// <param name="annotation">The new annotation.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAnnotationChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
@@ -41,10 +44,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionAnnotation? oldAnnotation,
             IConventionContext<IConventionAnnotation> context)
         {
-            Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(context, nameof(context));
-
             if (name == CosmosAnnotationNames.PartitionKeyName)
             {
                 TryConfigurePrimaryKey(entityTypeBuilder);

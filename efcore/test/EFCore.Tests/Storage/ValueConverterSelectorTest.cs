@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -384,8 +384,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(Guid)).ToList(),
-                (typeof(GuidToBytesConverter), new ConverterMappingHints(size: 16)),
-                (typeof(GuidToStringConverter), new ConverterMappingHints(size: 36)));
+                (typeof(GuidToStringConverter), new ConverterMappingHints(size: 36)),
+                (typeof(GuidToBytesConverter), new ConverterMappingHints(size: 16)));
         }
 
         [ConditionalFact]
@@ -704,6 +704,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             AssertConverters(
                 _selector.Select(typeof(IPAddress), typeof(string)).ToList(),
                 (typeof(IPAddressToStringConverter), new ConverterMappingHints(size: 45)));
+
+            AssertConverters(
+                _selector.Select(IPAddress.Loopback.GetType(), typeof(string)).ToList(),
+                (typeof(IPAddressToStringConverter), new ConverterMappingHints(size: 45)));
         }
 
         [ConditionalFact]
@@ -711,6 +715,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             AssertConverters(
                 _selector.Select(typeof(IPAddress), typeof(byte[])).ToList(),
+                (typeof(IPAddressToBytesConverter), new ConverterMappingHints(size: 16)));
+
+            AssertConverters(
+                _selector.Select(IPAddress.Loopback.GetType(), typeof(byte[])).ToList(),
                 (typeof(IPAddressToBytesConverter), new ConverterMappingHints(size: 16)));
         }
 

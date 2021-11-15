@@ -1,12 +1,11 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+// Razor.Language doesn't reference Microsoft.CodeAnalysis.CSharp so we
+// need some indirection.
+internal abstract class TypeNameRewriter
 {
-    // Razor.Language doesn't reference Microsoft.CodeAnalysis.CSharp so we
-    // need some indirection.
-    internal abstract class TypeNameRewriter
-    {
-        public abstract string Rewrite(string typeName);
-    }
+    public abstract string Rewrite(string typeName);
 }

@@ -25,11 +25,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_an_option_accepts_only_specific_arguments_but_a_wrong_one_is_supplied_then_an_informative_error_is_returned()
         {
-            var parser = new Parser(
-                new Option("-x", arity: ArgumentArity.ExactlyOne)
-                    .FromAmong("this", "that", "the-other-thing"));
-
-            var result = parser.Parse("-x none-of-those");
+            var option = new Option("-x", arity: ArgumentArity.ExactlyOne)
+                .FromAmong("this", "that", "the-other-thing");
+            
+            var result = option.Parse("-x none-of-those");
 
             result.Errors
                   .Select(e => e.Message)
@@ -44,9 +43,7 @@ namespace System.CommandLine.Tests
             var option = new Option("-x", arity: ArgumentArity.ExactlyOne)
                 .FromAmong("this", "that");
 
-            var parser = new Parser(option);
-
-            var result = parser.Parse("-x something_else");
+            var result = option.Parse("-x something_else");
 
             result.Errors
                   .Where(e => e.SymbolResult != null)
@@ -57,9 +54,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_a_required_argument_is_not_supplied_then_an_error_is_returned()
         {
-            var parser = new Parser(new Option("-x", arity: ArgumentArity.ExactlyOne));
+            var option = new Option("-x", arity: ArgumentArity.ExactlyOne);
 
-            var result = parser.Parse("-x");
+            var result = option.Parse("-x");
 
             result.Errors
                   .Should()
@@ -159,8 +156,8 @@ namespace System.CommandLine.Tests
 
             command.AddValidator(commandResult =>
             {
-                if (commandResult.Children.Contains("--one") &&
-                    commandResult.Children.Contains("--two"))
+                if (commandResult.Children.ContainsAlias("--one") &&
+                    commandResult.Children.ContainsAlias("--two"))
                 {
                     return "Options '--one' and '--two' cannot be used together.";
                 }
@@ -225,6 +222,47 @@ namespace System.CommandLine.Tests
                   .Message
                   .Should()
                   .Be("Argument x cannot be set to 123");
+        }
+
+        [Theory]
+        [InlineData("-o=optionValue argValue")]
+        [InlineData("argValue -o=optionValue")]
+        public void All_custom_validators_are_called(string commandLine)
+        {
+            var commandValidatorWasCalled = false;
+            var optionValidatorWasCalled = false;
+            var argumentValidatorWasCalled = false;
+
+            var option = new Option<string>("-o");
+            option.AddValidator(_ =>
+            {
+                optionValidatorWasCalled = true;
+                return null;
+            });
+
+            var argument = new Argument<string>("the-arg");
+            argument.AddValidator(_ =>
+            {
+                argumentValidatorWasCalled = true;
+                return null;
+            });
+
+            var rootCommand = new RootCommand
+            {
+                option,
+                argument
+            };
+            rootCommand.AddValidator(_ =>
+            {
+                commandValidatorWasCalled = true;
+                return null;
+            });
+
+            rootCommand.Invoke(commandLine);
+
+            commandValidatorWasCalled.Should().BeTrue();
+            optionValidatorWasCalled.Should().BeTrue();
+            argumentValidatorWasCalled.Should().BeTrue();
         }
 
         [Theory]
@@ -377,7 +415,7 @@ namespace System.CommandLine.Tests
                 var validPathName = Directory.GetCurrentDirectory();
                 var validNonExistingFileName = Path.Combine(validPathName, Guid.NewGuid().ToString());
 
-                var result = command.Parse($"the-command -x {validPathName} {validNonExistingFileName}");
+                var result = command.Parse($"the-command -x {validPathName} -x {validNonExistingFileName}");
 
                 result.Errors.Should().BeEmpty();
             }
@@ -448,7 +486,7 @@ namespace System.CommandLine.Tests
                 var validFileName = Path.GetFileName(Directory.GetCurrentDirectory());
                 var validNonExistingFileName = Guid.NewGuid().ToString();
 
-                var result = command.Parse($"the-command -x {validFileName} {validNonExistingFileName}");
+                var result = command.Parse($"the-command -x {validFileName} -x {validNonExistingFileName}");
 
                 result.Errors.Should().BeEmpty();
             }
@@ -810,7 +848,7 @@ namespace System.CommandLine.Tests
             result.Errors
                   .Should()
                   .ContainSingle(
-                      e => e.Message.Equals(Resources.Instance.RequiredCommandWasNotProvided()) &&
+                      e => e.Message.Equals(LocalizationResources.Instance.RequiredCommandWasNotProvided()) &&
                            e.SymbolResult.Symbol.Name.Equals("inner"));
         }
 
@@ -826,7 +864,7 @@ namespace System.CommandLine.Tests
             result.Errors
                   .Should()
                   .ContainSingle(
-                      e => e.Message.Equals(Resources.Instance.RequiredCommandWasNotProvided()) &&
+                      e => e.Message.Equals(LocalizationResources.Instance.RequiredCommandWasNotProvided()) &&
                            e.SymbolResult.Symbol == rootCommand);
         }
 
@@ -851,40 +889,11 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
-        public void When_an_option_is_specified_more_than_once_but_only_allowed_once_then_an_informative_error_is_returned()
-        {
-            var parser = new Parser(
-                new Option("-x", arity: ArgumentArity.ExactlyOne));
-
-            var result = parser.Parse("-x 1 -x 2");
-
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain("Option '-x' expects a single argument but 2 were provided.");
-        }
-
-        [Fact]
-        public void When_arity_is_ExactlyOne_it_validates_against_extra_arguments()
-        {
-            var parser = new Parser(
-                new Option<int>("-x"));
-
-            var result = parser.Parse("-x 1 -x 2");
-
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain("Option '-x' expects a single argument but 2 were provided.");
-        }
-
-        [Fact]
         public void When_an_option_has_a_default_value_it_is_not_valid_to_specify_the_option_without_an_argument()
         {
-            var parser = new Parser(
-                new Option<int>("-x", () => 123));
+            var option = new Option<int>("-x", () => 123);
 
-            var result = parser.Parse("-x");
+            var result = option.Parse("-x");
 
             result.Errors
                   .Select(e => e.Message)
@@ -895,15 +904,20 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_an_option_has_a_default_value_then_the_default_should_apply_if_not_specified()
         {
-            var parser = new Parser(
-                new Option<int>("-x", () => 123),
-                new Option<int>("-y", () => 456));
+            var optionX = new Option<int>("-x", () => 123);
+            var optionY = new Option<int>("-y", () => 456);
+
+            var parser = new RootCommand
+            {
+                optionX,
+                optionY
+            };
 
             var result = parser.Parse("");
 
             result.Errors.Should().BeEmpty();
-            result.ValueForOption("-x").Should().Be(123);
-            result.ValueForOption("-y").Should().Be(456);
+            result.GetValueForOption(optionX).Should().Be(123);
+            result.GetValueForOption(optionY).Should().Be(456);
         }
     }
 }

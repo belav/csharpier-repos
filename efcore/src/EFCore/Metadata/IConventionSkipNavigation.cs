@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -8,21 +8,24 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Microsoft.EntityFrameworkCore.Metadata
 {
     /// <summary>
-    ///     <para>
-    ///         Represents a navigation property that is part of a relationship
-    ///         that is forwarded through a third entity type.
-    ///     </para>
+    ///     Represents a navigation property that is part of a relationship
+    ///     that is forwarded through a third entity type.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         This interface is used during model creation and allows the metadata to be modified.
     ///         Once the model is built, <see cref="ISkipNavigation" /> represents a read-only view of the same metadata.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    ///     </para>
+    /// </remarks>
     public interface IConventionSkipNavigation : IReadOnlySkipNavigation, IConventionNavigationBase
     {
         /// <summary>
         ///     Gets the builder that can be used to configure this property.
         /// </summary>
-        /// <exception cref="InvalidOperationException"> If the skip navigation has been removed from the model. </exception>
+        /// <exception cref="InvalidOperationException">If the skip navigation has been removed from the model.</exception>
         new IConventionSkipNavigationBuilder Builder { get; }
 
         /// <summary>
@@ -67,14 +70,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="foreignKey">
         ///     The foreign key. Passing <see langword="null" /> will result in there being no foreign key associated.
         /// </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        /// <returns> The new foreign key. </returns>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+        /// <returns>The new foreign key.</returns>
         IConventionForeignKey? SetForeignKey(IConventionForeignKey? foreignKey, bool fromDataAnnotation = false);
 
         /// <summary>
         ///     Returns the configuration source for <see cref="ForeignKey" />.
         /// </summary>
-        /// <returns> The configuration source for <see cref="ForeignKey" />. </returns>
+        /// <returns>The configuration source for <see cref="ForeignKey" />.</returns>
         ConfigurationSource? GetForeignKeyConfigurationSource();
 
         /// <summary>
@@ -92,14 +95,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="inverse">
         ///     The inverse skip navigation. Passing <see langword="null" /> will result in there being no inverse navigation property defined.
         /// </param>
-        /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
+        /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         [DebuggerStepThrough]
         IConventionSkipNavigation? SetInverse(IConventionSkipNavigation? inverse, bool fromDataAnnotation = false);
 
         /// <summary>
         ///     Returns the configuration source for <see cref="Inverse" />.
         /// </summary>
-        /// <returns> The configuration source for <see cref="Inverse" />. </returns>
+        /// <returns>The configuration source for <see cref="Inverse" />.</returns>
         ConfigurationSource? GetInverseConfigurationSource();
     }
 }

@@ -43,7 +43,6 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.NotNull(workspace.Services.Workspace);
             Assert.Equal(workspace, workspace.Services.Workspace);
             Assert.NotNull(workspace.Services.HostServices);
-            Assert.NotNull(workspace.Services.PersistentStorage);
             Assert.NotNull(workspace.Services.TemporaryStorage);
             Assert.NotNull(workspace.Services.TextFactory);
         }
@@ -318,7 +317,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.NotNull(pref);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/54818"), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
         public async Task TestInternalsVisibleToSigned()
         {
             var solution = await SolutionAsync(
@@ -340,7 +339,7 @@ class C1
             var project2 = solution.GetProjectsByName("Project2").First();
             var compilation = await project2.GetCompilationAsync();
             var diagnostics = compilation.GetDiagnostics()
-                .Where(d => d.Severity == DiagnosticSeverity.Error || d.Severity == DiagnosticSeverity.Warning)
+                .Where(d => d.Severity is DiagnosticSeverity.Error or DiagnosticSeverity.Warning)
                 .ToArray();
 
             Assert.Empty(diagnostics);
@@ -2100,6 +2099,33 @@ class C1
             // check workspace current solution
             var solution2 = workspace.CurrentSolution;
             var document2 = solution2.GetDocument(document.Id);
+            var text2 = await document2.GetTextAsync();
+            Assert.Equal(newText.ToString(), text2.ToString());
+
+            // check actual file on disk...
+            var textOnDisk = File.ReadAllText(document.FilePath);
+            Assert.Equal(newText.ToString(), textOnDisk);
+        }
+
+        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        public async Task TestApplyChanges_UpdateAdditionalDocumentText()
+        {
+            CreateFiles(GetSimpleCSharpSolutionWithAdditionaFile());
+            var solutionFilePath = GetSolutionFileName("TestSolution.sln");
+            using var workspace = CreateMSBuildWorkspace();
+            var solution = await workspace.OpenSolutionAsync(solutionFilePath);
+
+            var documents = solution.GetProjectsByName("CSharpProject").FirstOrDefault().AdditionalDocuments.ToList();
+            var document = documents.Single(d => d.Name.Contains("ValidAdditionalFile"));
+            var text = await document.GetTextAsync();
+            var newText = SourceText.From("New Text In Additional File.\r\n" + text.ToString());
+            var newSolution = solution.WithAdditionalDocumentText(document.Id, newText);
+
+            workspace.TryApplyChanges(newSolution);
+
+            // check workspace current solution
+            var solution2 = workspace.CurrentSolution;
+            var document2 = solution2.GetAdditionalDocument(document.Id);
             var text2 = await document2.GetTextAsync();
             Assert.Equal(newText.ToString(), text2.ToString());
 

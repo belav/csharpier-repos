@@ -1,10 +1,9 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data;
 using System.Globalization;
 using System.Text;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage
 {
@@ -17,17 +16,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class ByteArrayTypeMapping : RelationalTypeMapping
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ByteArrayTypeMapping" /> class.
         /// </summary>
-        /// <param name="storeType"> The name of the database type. </param>
-        /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
-        /// <param name="size"> The size of data the property is configured to store, or null if no size is configured. </param>
+        /// <param name="storeType">The name of the database type.</param>
+        /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
+        /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
         public ByteArrayTypeMapping(
             string storeType,
-            DbType? dbType = null,
+            DbType? dbType = System.Data.DbType.Binary,
             int? size = null)
             : base(
                 new RelationalTypeMappingParameters(
@@ -39,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="ByteArrayTypeMapping" /> class.
         /// </summary>
-        /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
+        /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
         protected ByteArrayTypeMapping(RelationalTypeMappingParameters parameters)
             : base(parameters)
         {
@@ -48,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
-        /// <param name="parameters"> The parameters for this mapping. </param>
-        /// <returns> The newly created mapping. </returns>
+        /// <param name="parameters">The parameters for this mapping.</param>
+        /// <returns>The newly created mapping.</returns>
         protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
             => new ByteArrayTypeMapping(parameters);
 
@@ -62,8 +65,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </returns>
         protected override string GenerateNonNullSqlLiteral(object value)
         {
-            Check.NotNull(value, nameof(value));
-
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("X'");
 
@@ -72,7 +73,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 stringBuilder.Append(@byte.ToString("X2", CultureInfo.InvariantCulture));
             }
 
-            stringBuilder.Append("'");
+            stringBuilder.Append('\'');
             return stringBuilder.ToString();
         }
     }

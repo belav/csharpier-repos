@@ -1,27 +1,26 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-namespace Microsoft.AspNetCore.Components.WebView.Services
+namespace Microsoft.AspNetCore.Components.WebView.Services;
+
+internal class WebViewNavigationManager : NavigationManager
 {
-    internal class WebViewNavigationManager : NavigationManager
+    private IpcSender _ipcSender;
+
+    public void AttachToWebView(IpcSender ipcSender, string baseUrl, string initialUrl)
     {
-        private IpcSender _ipcSender;
+        _ipcSender = ipcSender;
+        Initialize(baseUrl, initialUrl);
+    }
 
-        public void AttachToWebView(IpcSender ipcSender, string baseUrl, string initialUrl)
-        {
-            _ipcSender = ipcSender;
-            Initialize(baseUrl, initialUrl);
-        }
+    public void LocationUpdated(string newUrl, bool intercepted)
+    {
+        Uri = newUrl;
+        NotifyLocationChanged(intercepted);
+    }
 
-        public void LocationUpdated(string newUrl, bool intercepted)
-        {
-            Uri = newUrl;
-            NotifyLocationChanged(intercepted);
-        }
-
-        protected override void NavigateToCore(string uri, bool forceLoad)
-        {
-            _ipcSender.Navigate(uri, forceLoad);
-        }
+    protected override void NavigateToCore(string uri, NavigationOptions options)
+    {
+        _ipcSender.Navigate(uri, options);
     }
 }

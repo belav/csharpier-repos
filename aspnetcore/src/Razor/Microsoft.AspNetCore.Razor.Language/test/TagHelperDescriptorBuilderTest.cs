@@ -1,38 +1,37 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public class TagHelperDescriptorBuilderTest
 {
-    public class TagHelperDescriptorBuilderTest
+    [Fact]
+    public void DisplayName_SetsDescriptorsDisplayName()
     {
-        [Fact]
-        public void DisplayName_SetsDescriptorsDisplayName()
-        {
-            // Arrange
-            var expectedDisplayName = "ExpectedDisplayName";
-            var builder = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+        // Arrange
+        var expectedDisplayName = "ExpectedDisplayName";
+        var builder = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
 
-            // Act
-            var descriptor = builder.DisplayName(expectedDisplayName).Build();
+        // Act
+        var descriptor = builder.DisplayName(expectedDisplayName).Build();
 
-            // Assert
-            Assert.Equal(expectedDisplayName, descriptor.DisplayName);
-        }
+        // Assert
+        Assert.Equal(expectedDisplayName, descriptor.DisplayName);
+    }
 
-        [Fact]
-        public void DisplayName_DefaultsToTypeName()
-        {
-            // Arrange
-            var expectedDisplayName = "TestTagHelper";
-            var builder = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
+    [Fact]
+    public void DisplayName_DefaultsToTypeName()
+    {
+        // Arrange
+        var expectedDisplayName = "TestTagHelper";
+        var builder = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly");
 
-            // Act
-            var descriptor = builder.Build();
+        // Act
+        var descriptor = builder.Build();
 
-            // Assert
-            Assert.Equal(expectedDisplayName, descriptor.DisplayName);
-        }
+        // Assert
+        Assert.Equal(expectedDisplayName, descriptor.DisplayName);
     }
 }

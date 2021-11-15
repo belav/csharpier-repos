@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -42,10 +41,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EntityType declaringEntityType,
             ConfigurationSource configurationSource)
         {
-            Check.NotEmpty(properties, nameof(properties));
-            Check.HasNoNulls(properties, nameof(properties));
-            Check.NotNull(declaringEntityType, nameof(declaringEntityType));
-
             Properties = properties;
             DeclaringEntityType = declaringEntityType;
             _configurationSource = configurationSource;
@@ -66,8 +61,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource)
             : this(properties, declaringEntityType, configurationSource)
         {
-            Check.NotEmpty(name, nameof(name));
-
             Name = name;
         }
 
@@ -103,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalIndexBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -130,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool IsReadOnly => DeclaringEntityType.Model.IsReadOnly;
+        public override bool IsReadOnly
+            => DeclaringEntityType.Model.IsReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -208,10 +203,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
         /// </summary>
-        /// <param name="name"> The key of the set annotation. </param>
-        /// <param name="annotation"> The annotation set. </param>
-        /// <param name="oldAnnotation"> The old annotation. </param>
-        /// <returns> The annotation that was set. </returns>
+        /// <param name="name">The key of the set annotation.</param>
+        /// <param name="annotation">The annotation set.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <returns>The annotation that was set.</returns>
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
@@ -227,10 +222,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual IDependentKeyValueFactory<TKey> GetNullableValueFactory<TKey>()
             => (IDependentKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
                 ref _nullableValueFactory, this, static index =>
-                {
-                    index.EnsureReadOnly();
-                    return new CompositeValueFactory(index.Properties);
-                });
+                    {
+                        index.EnsureReadOnly();
+                        return new CompositeValueFactory(index.Properties);
+                    });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -249,7 +244,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IIndex)this).ToDebugString(),
                 () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         /// <summary>
@@ -260,7 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IReadOnlyProperty> IReadOnlyIndex.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -271,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyEntityType IReadOnlyIndex.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -282,7 +279,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IMutableProperty> IMutableIndex.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -293,7 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IMutableEntityType IMutableIndex.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -304,7 +303,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionIndexBuilder IConventionIndex.Builder
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>
@@ -315,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionAnnotatableBuilder IConventionAnnotatable.Builder
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>
@@ -326,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IConventionProperty> IConventionIndex.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -349,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionEntityType IConventionIndex.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>

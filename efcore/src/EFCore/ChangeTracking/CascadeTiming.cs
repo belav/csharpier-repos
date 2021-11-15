@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
@@ -7,6 +7,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///     Defines different strategies for when cascading actions will be performed.
     ///     See <see cref="ChangeTracker.CascadeDeleteTiming" /> and <see cref="ChangeTracker.DeleteOrphansTiming" />.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-cascading">EF Core cascade deletes and deleting orphans</see> for more information.
+    /// </remarks>
     public enum CascadeTiming
     {
         /// <summary>

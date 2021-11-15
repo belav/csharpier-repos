@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -320,6 +320,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var model = modelBuilder.Model;
                 modelBuilder.Ignore<Customer>();
                 modelBuilder.Ignore<CustomerDetails>();
+                modelBuilder.Ignore<Product>();
                 modelBuilder.Entity<OrderDetails>().Ignore(d => d.Id);
                 modelBuilder.Entity<Order>().Ignore(o => o.Details);
 
@@ -1164,6 +1165,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var model = (Model)modelBuilder.Model;
                 modelBuilder.Entity<Order>();
                 modelBuilder.Entity<OrderDetails>();
+                modelBuilder.Ignore<Product>();
                 modelBuilder.Ignore<Customer>();
 
                 var dependentType = model.FindEntityType(typeof(OrderDetails));
@@ -1209,6 +1211,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var model = (Model)modelBuilder.Model;
                 modelBuilder.Entity<Order>();
                 modelBuilder.Entity<OrderDetails>();
+                modelBuilder.Ignore<Product>();
                 modelBuilder.Ignore<Customer>();
 
                 var dependentType = model.FindEntityType(typeof(OrderDetails));
@@ -1643,6 +1646,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<OrderDetails>()
                     .HasOne(e => e.Order).WithOne(e => e.Details)
                     .HasPrincipalKey<OrderDetails>(e => e.Id);
+                modelBuilder.Ignore<Product>();
                 modelBuilder.Ignore<Customer>();
                 modelBuilder.Ignore<CustomerDetails>();
 
@@ -1739,6 +1743,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 modelBuilder.Ignore<Customer>();
                 modelBuilder.Ignore<CustomerDetails>();
+                modelBuilder.Entity<OrderDetails>();
                 modelBuilder.Entity<Order>().Property<int>("OrderDetailsId");
 
                 Assert.Equal(
@@ -2567,6 +2572,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(navigationToPrincipal.Name, fk.PrincipalToDependent.Name);
                 Assert.Equal(navigationToDependent?.Name, fk.DependentToPrincipal?.Name);
                 Assert.True(fk.IsRequired);
+                Assert.False(fk.IsRequiredDependent);
 
                 Assert.Equal(fk.DeclaringEntityType.GetForeignKeys().Count(), fk.DeclaringEntityType.GetIndexes().Count());
                 Assert.True(fk.DeclaringEntityType.FindIndex(fk.Properties).IsUnique);
@@ -2629,6 +2635,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var entityType = modelBuilder.Model.FindEntityType(typeof(SelfRef));
                 var fk = entityType.GetForeignKeys().Single();
                 Assert.Equal("SelfRef1Id", fk.Properties.Single().Name);
+                Assert.True(fk.IsRequired);
+                Assert.False(fk.IsRequiredDependent);
                 Assert.Equal(fk.PrincipalKey, entityType.FindPrimaryKey());
                 Assert.Equal(nameof(SelfRef.SelfRef2), fk.PrincipalToDependent?.Name);
                 Assert.Equal(nameof(SelfRef.SelfRef1), fk.DependentToPrincipal?.Name);
@@ -4100,6 +4108,21 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.NonConfiguredNavigationToSharedType("Navigation", nameof(ReferenceNavigationToSharedType)),
                     Assert.Throws<InvalidOperationException>(() => modelBuilder.FinalizeModel()).Message);
+            }
+
+            [ConditionalFact]
+            public virtual void Inverse_discovered_after_entity_unignored()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Ignore<Value>();
+                modelBuilder.Entity<QueryResult>();
+                modelBuilder.Entity<Value>();
+
+                var model = modelBuilder.FinalizeModel();
+
+                var queryResult = model.FindEntityType(typeof(QueryResult));
+                Assert.NotNull(queryResult.FindNavigation(nameof(QueryResult.Value)));
             }
         }
     }

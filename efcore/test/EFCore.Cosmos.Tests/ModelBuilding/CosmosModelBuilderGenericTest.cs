@@ -1,11 +1,16 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Cosmos.Internal;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
+using Xunit.Sdk;
 
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding
@@ -16,17 +21,82 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             public override void Properties_can_set_row_version()
             {
-                // Fails due to ETags
+                Assert.Equal(
+                    CosmosStrings.NonETagConcurrencyToken(nameof(Quarks), "Charm"),
+                    Assert.Throws<InvalidOperationException>(
+                        () => base.Properties_can_set_row_version()).Message);
             }
 
             public override void Properties_can_be_made_concurrency_tokens()
             {
-                // Fails due to ETags
+                Assert.Equal(
+                    CosmosStrings.NonETagConcurrencyToken(nameof(Quarks), "Charm"),
+                    Assert.Throws<InvalidOperationException>(
+                        () => base.Properties_can_be_made_concurrency_tokens()).Message);
             }
 
-            public override void Properties_specified_by_string_are_shadow_properties_unless_already_known_to_be_CLR_properties()
+            protected override void Mapping_throws_for_non_ignored_array()
             {
-                // Fails due to extra shadow properties
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<OneDee>();
+
+                var model = modelBuilder.FinalizeModel();
+                var entityType = model.FindEntityType(typeof(OneDee));
+
+                var property = entityType.FindProperty(nameof(OneDee.One));
+                Assert.Null(property.GetProviderClrType());
+                Assert.NotNull(property.FindTypeMapping());
+            }
+
+            public override void Properties_can_have_provider_type_set_for_type()
+            {
+                var modelBuilder = CreateModelBuilder(c => c.Properties<string>().HaveConversion<byte[]>());
+
+                modelBuilder.Entity<Quarks>(
+                    b =>
+                    {
+                        b.Property(e => e.Up);
+                        b.Property(e => e.Down);
+                        b.Property<int>("Charm");
+                        b.Property<string>("Strange");
+                        b.Property<string>("__id").HasConversion((Type)null);
+                    });
+
+                var model = modelBuilder.FinalizeModel();
+                var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
+
+                Assert.Null(entityType.FindProperty("Up").GetProviderClrType());
+                Assert.Same(typeof(byte[]), entityType.FindProperty("Down").GetProviderClrType());
+                Assert.Null(entityType.FindProperty("Charm").GetProviderClrType());
+                Assert.Same(typeof(byte[]), entityType.FindProperty("Strange").GetProviderClrType());
+            }
+
+            public override void Properties_can_be_set_to_generate_values_on_Add()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<Quarks>(
+                    b =>
+                    {
+                        b.HasKey(e => e.Id);
+                        b.Property(e => e.Up).ValueGeneratedOnAddOrUpdate();
+                        b.Property(e => e.Down).ValueGeneratedNever();
+                        b.Property<int>("Charm").Metadata.ValueGenerated = ValueGenerated.OnUpdateSometimes;
+                        b.Property<string>("Strange").ValueGeneratedNever();
+                        b.Property<int>("Top").ValueGeneratedOnAddOrUpdate();
+                        b.Property<string>("Bottom").ValueGeneratedOnUpdate();
+                    });
+
+                var model = modelBuilder.FinalizeModel();
+                var entityType = model.FindEntityType(typeof(Quarks));
+                Assert.Equal(ValueGenerated.Never, entityType.FindProperty(Customer.IdProperty.Name).ValueGenerated);
+                Assert.Equal(ValueGenerated.OnAddOrUpdate, entityType.FindProperty("Up").ValueGenerated);
+                Assert.Equal(ValueGenerated.Never, entityType.FindProperty("Down").ValueGenerated);
+                Assert.Equal(ValueGenerated.OnUpdateSometimes, entityType.FindProperty("Charm").ValueGenerated);
+                Assert.Equal(ValueGenerated.Never, entityType.FindProperty("Strange").ValueGenerated);
+                Assert.Equal(ValueGenerated.OnAddOrUpdate, entityType.FindProperty("Top").ValueGenerated);
+                Assert.Equal(ValueGenerated.OnUpdate, entityType.FindProperty("Bottom").ValueGenerated);
             }
 
             [ConditionalFact]
@@ -177,37 +247,125 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Empty(entity.GetKeys().Where(k => k != entity.FindPrimaryKey()));
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            [ConditionalFact]
+            public virtual void No_alternate_key_is_created_if_id_is_partition_key()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<Customer>().HasKey(nameof(Customer.AlternateKey));
+                modelBuilder.Entity<Customer>()
+                    .Ignore(b => b.Details)
+                    .Ignore(b => b.Orders)
+                    .HasPartitionKey(b => b.AlternateKey)
+                    .Property(b => b.AlternateKey).HasConversion<string>().ToJsonProperty("id");
+
+                var model = modelBuilder.FinalizeModel();
+
+                var entity = model.FindEntityType(typeof(Customer));
+
+                Assert.Equal(
+                    new[] { nameof(Customer.AlternateKey) },
+                    entity.FindPrimaryKey().Properties.Select(p => p.Name));
+                Assert.Empty(entity.GetKeys().Where(k => k != entity.FindPrimaryKey()));
+            }
+
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
 
         public class CosmosGenericInheritance : GenericInheritance
         {
-            public override void Can_set_and_remove_base_type()
+            public override void Base_type_can_be_discovered_after_creating_foreign_keys_on_derived()
             {
-                // Fails due to presence of __jObject
+                var mb = CreateModelBuilder();
+                mb.Entity<AL>();
+                mb.Entity<L>();
+
+                var mutableEntityTypes = mb.Model.GetEntityTypes().Where(e => e.ClrType == typeof(Q)).ToList();
+
+                Assert.Equal(2, mutableEntityTypes.Count);
+
+                foreach (var mutableEntityType in mutableEntityTypes)
+                {
+                    var mutableProperty = mutableEntityType.FindProperty(nameof(Q.ID));
+
+                    Assert.Equal(ValueGenerated.Never, mutableProperty.ValueGenerated);
+                }
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            public override void Relationships_on_derived_types_are_discovered_first_if_base_is_one_sided()
+            {
+                // Base discovered as owned
+                Assert.Throws<NullReferenceException>(
+                    () => base.Relationships_on_derived_types_are_discovered_first_if_base_is_one_sided());
+            }
+
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
 
         public class CosmosGenericOneToMany : GenericOneToMany
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            public override void Navigation_to_shared_type_is_not_discovered_by_convention()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<CollectionNavigationToSharedType>();
+
+                var model = modelBuilder.FinalizeModel();
+
+                var principal = model.FindEntityType(typeof(CollectionNavigationToSharedType));
+                var owned = principal.FindNavigation(nameof(CollectionNavigationToSharedType.Navigation)).TargetEntityType;
+                Assert.True(owned.IsOwned());
+                Assert.True(owned.HasSharedClrType);
+                Assert.Equal("CollectionNavigationToSharedType.Navigation#Dictionary<string, object>",
+                    owned.DisplayName());
+            }
+
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
 
         public class CosmosGenericManyToOne : GenericManyToOne
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
 
         public class CosmosGenericOneToOne : GenericOneToOne
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            public override void Navigation_to_shared_type_is_not_discovered_by_convention()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<ReferenceNavigationToSharedType>();
+
+                var model = modelBuilder.FinalizeModel();
+
+                var principal = model.FindEntityType(typeof(ReferenceNavigationToSharedType));
+                var owned = principal.FindNavigation(nameof(ReferenceNavigationToSharedType.Navigation)).TargetEntityType;
+                Assert.True(owned.IsOwned());
+                Assert.True(owned.HasSharedClrType);
+                Assert.Equal("ReferenceNavigationToSharedType.Navigation#Dictionary<string, object>",
+                    owned.DisplayName());
+            }
+
+            [ConditionalFact]
+            public virtual void Inverse_discovered_after_entity_becomes_non_owned()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<QueryResult>();
+                modelBuilder.Entity<Value>();
+
+                var model = modelBuilder.FinalizeModel();
+
+                var queryResult = model.FindEntityType(typeof(QueryResult));
+                Assert.NotNull(queryResult.FindNavigation(nameof(QueryResult.Value)));
+            }
+
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
 
         public class CosmosGenericManyToMany : GenericManyToMany
@@ -251,18 +409,167 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(2, joinType.GetForeignKeys().Count());
                 Assert.Equal(3, joinType.FindPrimaryKey().Properties.Count);
                 Assert.Equal(6, joinType.GetProperties().Count());
+                Assert.Equal("DbContext", joinType.GetContainer());
                 Assert.Equal("PartitionId", joinType.GetPartitionKeyPropertyName());
                 Assert.Equal("PartitionId", joinType.FindPrimaryKey().Properties.Last().Name);
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            [ConditionalFact]
+            public virtual void Can_use_implicit_join_entity_with_partition_keys()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Ignore<OneToManyNavPrincipal>();
+                modelBuilder.Ignore<OneToOneNavPrincipal>();
+
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Ignore(e => e.Dependents);
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
+
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
+
+                modelBuilder.Entity<ManyToManyNavPrincipal>()
+                    .HasMany(e => e.Dependents)
+                    .WithMany(e => e.ManyToManyPrincipals);
+
+                var model = modelBuilder.FinalizeModel();
+
+                var joinType = model.FindEntityType("ManyToManyNavPrincipalNavDependent");
+                Assert.NotNull(joinType);
+                Assert.Equal(2, joinType.GetForeignKeys().Count());
+                Assert.Equal(3, joinType.FindPrimaryKey().Properties.Count);
+                Assert.Equal(6, joinType.GetProperties().Count());
+                Assert.Equal("DbContext", joinType.GetContainer());
+                Assert.Equal("PartitionId", joinType.GetPartitionKeyPropertyName());
+                Assert.Equal("PartitionId", joinType.FindPrimaryKey().Properties.Last().Name);
+            }
+
+            [ConditionalFact]
+            public virtual void Can_use_implicit_join_entity_with_partition_keys_changed()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Ignore<OneToManyNavPrincipal>();
+                modelBuilder.Ignore<OneToOneNavPrincipal>();
+
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
+
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
+
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Property<string>("Partition2Id");
+                    mb.HasPartitionKey("Partition2Id");
+                });
+
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("Partition2Id");
+                    mb.HasPartitionKey("Partition2Id");
+                });
+
+                var model = modelBuilder.FinalizeModel();
+
+                var joinType = model.FindEntityType("ManyToManyNavPrincipalNavDependent");
+                Assert.NotNull(joinType);
+                Assert.Equal(2, joinType.GetForeignKeys().Count());
+                Assert.Equal(3, joinType.FindPrimaryKey().Properties.Count);
+                Assert.Equal(6, joinType.GetProperties().Count());
+                Assert.Equal("DbContext", joinType.GetContainer());
+                Assert.Equal("Partition2Id", joinType.GetPartitionKeyPropertyName());
+                Assert.Equal("Partition2Id", joinType.FindPrimaryKey().Properties.Last().Name);
+            }
+
+            public override void Join_type_is_automatically_configured_by_convention()
+            {
+                // Cosmos many-to-many. Issue #23523.
+                Assert.Equal(
+                    CoreStrings.NavigationNotAdded(
+                        nameof(ImplicitManyToManyA), nameof(ImplicitManyToManyA.Bs), "List<ImplicitManyToManyB>"),
+                    Assert.Throws<InvalidOperationException>(
+                        () => base.Join_type_is_automatically_configured_by_convention()).Message);
+            }
+
+            public override void ForeignKeyAttribute_configures_the_properties()
+            {
+                // Cosmos many-to-many. Issue #23523.
+                Assert.Equal(
+                    CoreStrings.NavigationNotAdded(
+                        nameof(CategoryWithAttribute), nameof(CategoryWithAttribute.Products), "ICollection<ProductWithAttribute>"),
+                    Assert.Throws<InvalidOperationException>(
+                        () => base.ForeignKeyAttribute_configures_the_properties()).Message);
+            }
+
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
 
         public class CosmosGenericOwnedTypes : GenericOwnedTypes
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            public override void Deriving_from_owned_type_throws()
+            {
+                // On Cosmos the base type starts as owned
+                Assert.Contains(
+                    "(No exception was thrown)",
+                    Assert.Throws<ThrowsException>(
+                        () => base.Deriving_from_owned_type_throws()).Message);
+            }
+
+            public override void Configuring_base_type_as_owned_throws()
+            {
+                // On Cosmos the base type starts as owned
+                Assert.Contains(
+                    "(No exception was thrown)",
+                    Assert.Throws<ThrowsException>(
+                        () => base.Deriving_from_owned_type_throws()).Message);
+            }
+
+            [ConditionalFact]
+            public virtual void Reference_type_is_discovered_as_owned()
+            {
+                var modelBuilder = CreateModelBuilder();
+
+                modelBuilder.Entity<OneToOneOwnerWithField>(
+                    e =>
+                    {
+                        e.Property(p => p.Id);
+                        e.Property(p => p.AlternateKey);
+                        e.Property(p => p.Description);
+                        e.HasKey(p => p.Id);
+                    });
+
+                var model = modelBuilder.FinalizeModel();
+
+                var owner = model.FindEntityType(typeof(OneToOneOwnerWithField));
+                Assert.Equal(typeof(OneToOneOwnerWithField).FullName, owner.Name);
+                var ownership = owner.FindNavigation(nameof(OneToOneOwnerWithField.OwnedDependent)).ForeignKey;
+                Assert.True(ownership.IsOwnership);
+                Assert.Equal(nameof(OneToOneOwnerWithField.OwnedDependent), ownership.PrincipalToDependent.Name);
+                Assert.Equal(nameof(OneToOneOwnedWithField.OneToOneOwner), ownership.DependentToPrincipal.Name);
+                Assert.Equal(nameof(OneToOneOwnerWithField.Id), ownership.PrincipalKey.Properties.Single().Name);
+                var owned = ownership.DeclaringEntityType;
+                Assert.Single(owned.GetForeignKeys());
+                Assert.NotNull(model.FindEntityType(typeof(OneToOneOwnedWithField)));
+                Assert.Equal(1, model.GetEntityTypes().Count(e => e.ClrType == typeof(OneToOneOwnedWithField)));
+            }
+
+            protected override TestModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
+                => CreateTestModelBuilder(CosmosTestHelpers.Instance, configure);
         }
     }
 }

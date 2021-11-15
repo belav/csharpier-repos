@@ -1,7 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
-
-using Microsoft.EntityFrameworkCore.Utilities;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design
 {
@@ -13,15 +11,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <summary>
         ///     Initializes a new instance of the <see cref="ScaffoldedMigration" /> class.
         /// </summary>
-        /// <param name="fileExtension"> The file extension code files should use. </param>
-        /// <param name="previousMigrationId"> The previous migration's ID. </param>
-        /// <param name="migrationCode"> The contents of the migration file. </param>
-        /// <param name="migrationId"> The migration's ID. </param>
-        /// <param name="metadataCode"> The contents of the migration metadata file. </param>
-        /// <param name="migrationSubNamespace"> The migration's sub-namespace. </param>
-        /// <param name="snapshotCode"> The contents of the model snapshot file. </param>
-        /// <param name="snapshotName"> The model snapshot's name. </param>
-        /// <param name="snapshotSubNamespace"> The model snapshot's sub-namespace. </param>
+        /// <param name="fileExtension">The file extension code files should use.</param>
+        /// <param name="previousMigrationId">The previous migration's ID.</param>
+        /// <param name="migrationCode">The contents of the migration file.</param>
+        /// <param name="migrationId">The migration's ID.</param>
+        /// <param name="metadataCode">The contents of the migration metadata file.</param>
+        /// <param name="migrationSubNamespace">The migration's sub-namespace.</param>
+        /// <param name="snapshotCode">The contents of the model snapshot file.</param>
+        /// <param name="snapshotName">The model snapshot's name.</param>
+        /// <param name="snapshotSubNamespace">The model snapshot's sub-namespace.</param>
         public ScaffoldedMigration(
             string fileExtension,
             string? previousMigrationId,
@@ -33,15 +31,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string snapshotName,
             string snapshotSubNamespace)
         {
-            Check.NotEmpty(fileExtension, nameof(fileExtension));
-            Check.NotEmpty(migrationCode, nameof(migrationCode));
-            Check.NotEmpty(migrationId, nameof(migrationId));
-            Check.NotEmpty(metadataCode, nameof(metadataCode));
-            Check.NotNull(migrationSubNamespace, nameof(migrationSubNamespace));
-            Check.NotEmpty(snapshotCode, nameof(snapshotCode));
-            Check.NotEmpty(snapshotName, nameof(snapshotName));
-            Check.NotNull(snapshotSubNamespace, nameof(snapshotSubNamespace));
-
             FileExtension = fileExtension;
             PreviousMigrationId = previousMigrationId;
             MigrationCode = migrationCode;

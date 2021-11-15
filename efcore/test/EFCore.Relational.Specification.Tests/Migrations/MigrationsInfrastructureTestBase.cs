@@ -1,13 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
@@ -307,7 +304,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void DiffSnapshot(ModelSnapshot snapshot, DbContext context)
         {
             var sourceModel = context.GetService<IModelRuntimeInitializer>().Initialize(
-                ((IMutableModel)snapshot.Model).FinalizeModel(), designTime: true, validationLogger: null);
+                snapshot.Model, designTime: true, validationLogger: null);
 
             var modelDiffer = context.GetService<IMigrationsModelDiffer>();
             var operations = modelDiffer.GetDifferences(
@@ -338,7 +335,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     .UseInternalServiceProvider(
                         TestStoreFactory.AddProviderServices(
                                 new ServiceCollection())
-                            .BuildServiceProvider())
+                            .BuildServiceProvider(validateScopes: true))
                     .Options);
 
         public new virtual MigrationsContext CreateContext()

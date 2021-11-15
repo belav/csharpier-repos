@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,78 +7,84 @@ using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
-{
-    public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationPass
-    {
-        private const string ModelExpressionTypeName = "Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression";
+namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationPass
+{
+    private const string ModelExpressionTypeName = "Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression";
+
+    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    {
+        if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
+            documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
         {
-            var visitor = new Visitor();
-            visitor.Visit(documentNode);
+            // Not a MVC file. Skip.
+            return;
         }
 
-        private class Visitor : IntermediateNodeWalker
-        {
-            public List<TagHelperIntermediateNode> TagHelpers { get; } = new List<TagHelperIntermediateNode>();
+        var visitor = new Visitor();
+        visitor.Visit(documentNode);
+    }
 
-            public override void VisitTagHelperProperty(TagHelperPropertyIntermediateNode node)
+    private class Visitor : IntermediateNodeWalker
+    {
+        public List<TagHelperIntermediateNode> TagHelpers { get; } = new List<TagHelperIntermediateNode>();
+
+        public override void VisitTagHelperProperty(TagHelperPropertyIntermediateNode node)
+        {
+            if (string.Equals(node.BoundAttribute.TypeName, ModelExpressionTypeName, StringComparison.Ordinal) ||
+                (node.IsIndexerNameMatch &&
+                 string.Equals(node.BoundAttribute.IndexerTypeName, ModelExpressionTypeName, StringComparison.Ordinal)))
             {
-                if (string.Equals(node.BoundAttribute.TypeName, ModelExpressionTypeName, StringComparison.Ordinal) ||
-                    (node.IsIndexerNameMatch &&
-                     string.Equals(node.BoundAttribute.IndexerTypeName, ModelExpressionTypeName, StringComparison.Ordinal)))
+                var expression = new CSharpExpressionIntermediateNode();
+
+                expression.Children.Add(new IntermediateToken()
                 {
-                    var expression = new CSharpExpressionIntermediateNode();
+                    Kind = TokenKind.CSharp,
+                    Content = "ModelExpressionProvider.CreateModelExpression(ViewData, __model => ",
+                });
+
+                if (node.Children.Count == 1 && node.Children[0] is IntermediateToken token && token.IsCSharp)
+                {
+                    // A 'simple' expression will look like __model => __model.Foo
 
                     expression.Children.Add(new IntermediateToken()
                     {
                         Kind = TokenKind.CSharp,
-                        Content = "ModelExpressionProvider.CreateModelExpression(ViewData, __model => ",
+                        Content = "__model."
                     });
 
-                    if (node.Children.Count == 1 && node.Children[0] is IntermediateToken token && token.IsCSharp)
+                    expression.Children.Add(token);
+                }
+                else
+                {
+                    for (var i = 0; i < node.Children.Count; i++)
                     {
-                        // A 'simple' expression will look like __model => __model.Foo
-
-                        expression.Children.Add(new IntermediateToken()
+                        if (node.Children[i] is CSharpExpressionIntermediateNode nestedExpression)
                         {
-                            Kind = TokenKind.CSharp,
-                            Content = "__model."
-                        });
-
-                        expression.Children.Add(token);
-                    }
-                    else
-                    {
-                        for (var i = 0; i < node.Children.Count; i++)
-                        {
-                            if (node.Children[i] is CSharpExpressionIntermediateNode nestedExpression)
+                            for (var j = 0; j < nestedExpression.Children.Count; j++)
                             {
-                                for (var j = 0; j < nestedExpression.Children.Count; j++)
+                                if (nestedExpression.Children[j] is IntermediateToken cSharpToken &&
+                                    cSharpToken.IsCSharp)
                                 {
-                                    if (nestedExpression.Children[j] is IntermediateToken cSharpToken &&
-                                        cSharpToken.IsCSharp)
-                                    {
-                                        expression.Children.Add(cSharpToken);
-                                    }
+                                    expression.Children.Add(cSharpToken);
                                 }
-
-                                continue;
                             }
+
+                            continue;
                         }
                     }
-
-                    expression.Children.Add(new IntermediateToken()
-                    {
-                        Kind = TokenKind.CSharp,
-                        Content = ")",
-                    });
-
-                    node.Children.Clear();
-
-                    node.Children.Add(expression);
                 }
+
+                expression.Children.Add(new IntermediateToken()
+                {
+                    Kind = TokenKind.CSharp,
+                    Content = ")",
+                });
+
+                node.Children.Clear();
+
+                node.Children.Add(expression);
             }
         }
     }

@@ -8,7 +8,6 @@ using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
-using System.Linq;
 
 namespace System.CommandLine
 {
@@ -17,94 +16,55 @@ namespace System.CommandLine
     /// </summary>
     public class CommandLineConfiguration
     {
-        private readonly SymbolSet _symbols = new SymbolSet();
+        private readonly SymbolSet _symbols = new();
+        private Func<BindingContext, IHelpBuilder>? _helpBuilderFactory;
 
         /// <summary>
         /// Initializes a new instance of the CommandLineConfiguration class.
         /// </summary>
-        /// <param name="symbols">The symbols to parse.</param>
-        /// <param name="enablePosixBundling"><c>true</c> to enable POSIX bundling; otherwise, <c>false</c>.</param>
-        /// <param name="enableDirectives"><c>true</c> to enable directive parsing; otherwise, <c>false</c>.</param>
-        /// <param name="validationMessages">Provide custom validation messages.</param>
+        /// <param name="command">The root command for the parser.</param>
+        /// <param name="enablePosixBundling"><see langword="true"/> to enable POSIX bundling; otherwise, <see langword="false"/>.</param>
+        /// <param name="enableDirectives"><see langword="true"/> to enable directive parsing; otherwise, <see langword="false"/>.</param>
+        /// <param name="enableLegacyDoubleDashBehavior">Enables the legacy behavior of the <c>--</c> token, which is to ignore parsing of subsequent tokens and place them in the <see cref="ParseResult.UnparsedTokens"/> list.</param>
+        /// <param name="resources">Provide custom validation messages.</param>
         /// <param name="responseFileHandling">One of the enumeration values that specifies how response files (.rsp) are handled.</param>
         /// <param name="middlewarePipeline">Provide a custom middleware pipeline.</param>
         /// <param name="helpBuilderFactory">Provide a custom help builder.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="symbols"/> is null.</exception>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="symbols"/> does not contain at least one option or command.</exception>
         public CommandLineConfiguration(
-            IReadOnlyList<Symbol> symbols,
+            Command command,
             bool enablePosixBundling = true,
             bool enableDirectives = true,
-            Resources? validationMessages = null,
+            bool enableLegacyDoubleDashBehavior = false,
+            LocalizationResources? resources = null,
             ResponseFileHandling responseFileHandling = ResponseFileHandling.ParseArgsAsLineSeparated,
-            IReadOnlyCollection<InvocationMiddleware>? middlewarePipeline = null,
-            Func<BindingContext, IHelpBuilder>? helpBuilderFactory = null,
-            Action<IHelpBuilder>? configureHelp = null)
+            IReadOnlyList<InvocationMiddleware>? middlewarePipeline = null,
+            Func<BindingContext, IHelpBuilder>? helpBuilderFactory = null)
         {
-            if (symbols is null)
-            {
-                throw new ArgumentNullException(nameof(symbols));
-            }
-
-            if (symbols.Count == 0)
-            {
-                throw new ArgumentException("You must specify at least one option or command.");
-            }
-          
-            if (symbols.Count == 1 &&
-                symbols[0] is Command rootCommand)
-            {
-                RootCommand = rootCommand;
-            }
-            else
-            {
-                // Reuse existing auto-generated root command, if one is present, to prevent repeated mutations
-                RootCommand? parentRootCommand = 
-                    symbols.SelectMany(s => s.Parents)
-                           .OfType<RootCommand>()
-                           .FirstOrDefault();
-
-                if (parentRootCommand is null)
-                {
-                    parentRootCommand = new RootCommand();
-
-                    foreach (var symbol in symbols)
-                    {
-                        parentRootCommand.Add(symbol);
-                    }
-                }
-
-                RootCommand = rootCommand = parentRootCommand;
-            }
+            RootCommand = command ?? throw new ArgumentNullException(nameof(command));
 
             _symbols.Add(RootCommand);
 
-            AddGlobalOptionsToChildren(rootCommand);
+            AddGlobalOptionsToChildren(command);
 
+            EnableLegacyDoubleDashBehavior = enableLegacyDoubleDashBehavior;
             EnablePosixBundling = enablePosixBundling;
             EnableDirectives = enableDirectives;
-            ValidationMessages = validationMessages ?? Resources.Instance;
+            LocalizationResources = resources ?? LocalizationResources.Instance;
             ResponseFileHandling = responseFileHandling;
-            Middleware = middlewarePipeline ?? new List<InvocationMiddleware>();
-            HelpBuilderFactory = helpBuilderFactory ?? (context => 
+            Middleware = middlewarePipeline ?? Array.Empty<InvocationMiddleware>();
+
+            _helpBuilderFactory = helpBuilderFactory;
+        }
+
+        private static IHelpBuilder DefaultHelpBuilderFactory(BindingContext context)
+        {
+            int maxWidth = int.MaxValue;
+            if (context.Console is SystemConsole systemConsole)
             {
-                int maxWidth = int.MaxValue;
-                if (context.Console is SystemConsole systemConsole)
-                {
-                    maxWidth = systemConsole.GetWindowWidth();
-                }
-                return new HelpBuilder(context.Console, maxWidth);
-            });
-            if (configureHelp != null)
-            {
-                var factory = HelpBuilderFactory;
-                HelpBuilderFactory = context =>
-                {
-                    IHelpBuilder helpBuilder = factory(context);
-                    configureHelp(helpBuilder);
-                    return helpBuilder;
-                };
+                maxWidth = systemConsole.GetWindowWidth();
             }
+
+            return new HelpBuilder(context.ParseResult.CommandResult.LocalizationResources, maxWidth);
         }
 
         private void AddGlobalOptionsToChildren(Command parentCommand)
@@ -117,9 +77,9 @@ namespace System.CommandLine
                 {
                     var globalOptions = parentCommand.GlobalOptions;
 
-                    for (var globalOptionIndex = 0; globalOptionIndex < globalOptions.Count; globalOptionIndex++)
+                    for (var i = 0; i < globalOptions.Count; i++)
                     {
-                        childCommand.TryAddGlobalOption(globalOptions[globalOptionIndex]);
+                        childCommand.TryAddGlobalOption(globalOptions[i]);
                     }
 
                     AddGlobalOptionsToChildren(childCommand);
@@ -138,6 +98,11 @@ namespace System.CommandLine
         public bool EnableDirectives { get; }
 
         /// <summary>
+        /// Enables the legacy behavior of the <c>--</c> token, which is to ignore parsing of subsequent tokens and place them in the <see cref="ParseResult.UnparsedTokens"/> list.
+        /// </summary>
+        public bool EnableLegacyDoubleDashBehavior { get; }
+
+        /// <summary>
         /// Gets whether POSIX bundling is enabled.
         /// </summary>
         /// <remarks>
@@ -146,13 +111,13 @@ namespace System.CommandLine
         public bool EnablePosixBundling { get; }
 
         /// <summary>
-        /// Gets the validation messages.
+        /// Gets the localizable resources.
         /// </summary>
-        public Resources ValidationMessages { get; }
+        public LocalizationResources LocalizationResources { get; }
 
-        internal Func<BindingContext, IHelpBuilder> HelpBuilderFactory { get; }
+        internal Func<BindingContext, IHelpBuilder> HelpBuilderFactory => _helpBuilderFactory ??= DefaultHelpBuilderFactory;
 
-        internal IReadOnlyCollection<InvocationMiddleware> Middleware { get; }
+        internal IReadOnlyList<InvocationMiddleware> Middleware { get; }
 
         /// <summary>
         /// Gets the root command.

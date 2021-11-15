@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -22,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         private static readonly MethodInfo _methodInfo = typeof(SqlServerDbFunctionsExtensions)
-            .GetRequiredRuntimeMethod(nameof(SqlServerDbFunctionsExtensions.IsNumeric), new[] { typeof(DbFunctions), typeof(string) });
+            .GetRequiredRuntimeMethod(nameof(SqlServerDbFunctionsExtensions.IsNumeric), typeof(DbFunctions), typeof(string));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,21 +43,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
-            return _methodInfo.Equals(method)
+            => _methodInfo.Equals(method)
                 ? _sqlExpressionFactory.Equal(
-                     _sqlExpressionFactory.Function(
+                    _sqlExpressionFactory.Function(
                         "ISNUMERIC",
                         new[] { arguments[1] },
                         nullable: false,
                         argumentsPropagateNullability: new[] { false },
                         typeof(int)),
-                     _sqlExpressionFactory.Constant(1))
+                    _sqlExpressionFactory.Constant(1))
                 : null;
-        }
     }
 }

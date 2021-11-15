@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +13,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void GetRequiredService_throws_useful_exception_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
             Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService<IPilkington>());
@@ -22,7 +22,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Non_generic_GetRequiredService_throws_useful_exception_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
             Assert.Throws<InvalidOperationException>(
                 () => serviceProvider.GetRequiredService(typeof(IPilkington)));
@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
@@ -47,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
@@ -58,7 +60,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void GetService_returns_null_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
             Assert.Null(serviceProvider.GetService<IPilkington>());
         }
@@ -66,7 +68,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Non_generic_GetService_returns_null_if_service_not_registered()
         {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
             Assert.Null(serviceProvider.GetService(typeof(IPilkington)));
         }
@@ -76,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,
@@ -90,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IPilkington, Karl>();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+            var serviceProvider = scope.ServiceProvider;
 
             Assert.Equal(
                 KarlQuote,

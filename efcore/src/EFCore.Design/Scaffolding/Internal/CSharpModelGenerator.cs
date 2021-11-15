@@ -1,11 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 {
@@ -45,9 +44,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ICSharpEntityTypeGenerator cSharpEntityTypeGenerator)
             : base(dependencies)
         {
-            Check.NotNull(cSharpDbContextGenerator, nameof(cSharpDbContextGenerator));
-            Check.NotNull(cSharpEntityTypeGenerator, nameof(cSharpEntityTypeGenerator));
-
             CSharpDbContextGenerator = cSharpDbContextGenerator;
             CSharpEntityTypeGenerator = cSharpEntityTypeGenerator;
         }
@@ -73,9 +69,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             IModel model,
             ModelCodeGenerationOptions options)
         {
-            Check.NotNull(model, nameof(model));
-            Check.NotNull(options, nameof(options));
-
             if (options.ContextName == null)
             {
                 throw new ArgumentException(
@@ -95,6 +88,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 options.ContextNamespace,
                 options.ModelNamespace,
                 options.UseDataAnnotations,
+                options.UseNullableReferenceTypes,
                 options.SuppressConnectionStringWarning,
                 options.SuppressOnConfiguring);
 
@@ -113,7 +107,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             foreach (var entityType in model.GetEntityTypes())
             {
-                generatedCode = CSharpEntityTypeGenerator.WriteCode(entityType, options.ModelNamespace, options.UseDataAnnotations);
+                if (Internal.CSharpDbContextGenerator.IsManyToManyJoinEntityType(entityType))
+                {
+                    continue;
+                }
+
+                generatedCode = CSharpEntityTypeGenerator.WriteCode(
+                    entityType,
+                    options.ModelNamespace,
+                    options.UseDataAnnotations,
+                    options.UseNullableReferenceTypes);
 
                 // output EntityType poco .cs file
                 var entityTypeFileName = entityType.Name + FileExtension;

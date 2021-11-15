@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -13,14 +13,17 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.Storage
 {
     /// <summary>
-    ///     <para>
-    ///         A transaction against the database.
-    ///     </para>
+    ///     A transaction against the database.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Instances of this class are typically obtained from <see cref="DatabaseFacade.BeginTransaction" /> and it is not designed
     ///         to be directly constructed in your application code.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTransaction>
     {
         private readonly DbTransaction _dbTransaction;
@@ -33,14 +36,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="RelationalTransaction" /> class.
         /// </summary>
-        /// <param name="connection"> The connection to the database. </param>
-        /// <param name="transaction"> The underlying <see cref="DbTransaction" />. </param>
-        /// <param name="transactionId"> The correlation ID for the transaction. </param>
-        /// <param name="logger"> The logger to write to. </param>
+        /// <param name="connection">The connection to the database.</param>
+        /// <param name="transaction">The underlying <see cref="DbTransaction" />.</param>
+        /// <param name="transactionId">The correlation ID for the transaction.</param>
+        /// <param name="logger">The logger to write to.</param>
         /// <param name="transactionOwned">
         ///     A value indicating whether the transaction is owned by this class (i.e. if it can be disposed when this class is disposed).
         /// </param>
-        /// <param name="sqlGenerationHelper"> The SQL generation helper to use. </param>
+        /// <param name="sqlGenerationHelper">The SQL generation helper to use.</param>
         public RelationalTransaction(
             IRelationalConnection connection,
             DbTransaction transaction,
@@ -49,11 +52,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool transactionOwned,
             ISqlGenerationHelper sqlGenerationHelper)
         {
-            Check.NotNull(connection, nameof(connection));
-            Check.NotNull(transaction, nameof(transaction));
-            Check.NotNull(logger, nameof(logger));
-            Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
-
             if (connection.DbConnection != transaction.Connection)
             {
                 throw new InvalidOperationException(RelationalStrings.TransactionAssociatedWithDifferentConnection);

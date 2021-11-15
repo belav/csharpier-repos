@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -174,7 +174,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var withoutProxies = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
-                .BuildServiceProvider();
+                .BuildServiceProvider(validateScopes: true);
 
             using (var context = new NeweyContext(withoutProxies, nameof(Proxy_services_must_be_available), false))
             {
@@ -269,7 +269,7 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
                 Assert.Throws<ArgumentException>(
-                    () => new EntityType(proxy.GetType(), model, ConfigurationSource.Explicit)).Message);
+                    () => new EntityType(proxy.GetType(), model, owned: false, ConfigurationSource.Explicit)).Message);
         }
 
         // tests scenario in https://github.com/dotnet/efcore/issues/15958
@@ -359,7 +359,7 @@ namespace Microsoft.EntityFrameworkCore
                     = new ServiceCollection()
                         .AddEntityFrameworkInMemoryDatabase()
                         .AddEntityFrameworkProxies()
-                        .BuildServiceProvider();
+                        .BuildServiceProvider(validateScopes: true);
 
                 _dbName = dbName;
                 _useLazyLoadingProxies = useLazyLoading;
@@ -430,7 +430,7 @@ namespace Microsoft.EntityFrameworkCore
                         new ServiceCollection()
                             .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
-                            .BuildServiceProvider())
+                            .BuildServiceProvider(validateScopes: true))
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
         }
 
@@ -468,7 +468,7 @@ namespace Microsoft.EntityFrameworkCore
                         new ServiceCollection()
                             .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
-                            .BuildServiceProvider())
+                            .BuildServiceProvider(validateScopes: true))
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -484,7 +484,7 @@ namespace Microsoft.EntityFrameworkCore
                         new ServiceCollection()
                             .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
-                            .BuildServiceProvider())
+                            .BuildServiceProvider(validateScopes: true))
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -508,7 +508,7 @@ namespace Microsoft.EntityFrameworkCore
                         new ServiceCollection()
                             .AddEntityFrameworkInMemoryDatabase()
                             .AddEntityFrameworkProxies()
-                            .BuildServiceProvider())
+                            .BuildServiceProvider(validateScopes: true))
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
                     ;
             }

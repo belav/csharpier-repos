@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
@@ -22,6 +22,12 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///     <para>
     ///         A class that compiles the shaper expression for given shaped query expression.
     ///     </para>
+    ///     <para>
+    ///         This type is typically used by database providers (and other extensions). It is generally
+    ///         not used in application code.
+    ///     </para>
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Materializer is a code which creates entity instance from the given property values.
     ///         It takes into account constructor bindings, fields, property access mode configured in the model when creating the instance.
@@ -31,10 +37,10 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         A shaper can contain zero or more materializers inside it.
     ///     </para>
     ///     <para>
-    ///         This type is typically used by database providers (and other extensions). It is generally
-    ///         not used in application code.
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         and <see href="https://aka.ms/efcore-how-queries-work">How EF Core queries work</see> for more information.
     ///     </para>
-    /// </summary>
+    /// </remarks>
     public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
     {
         private static readonly PropertyInfo _cancellationTokenMemberInfo
@@ -47,15 +53,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="ShapedQueryCompilingExpressionVisitor" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        /// <param name="queryCompilationContext"> The query compilation context object to use. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
+        /// <param name="queryCompilationContext">The query compilation context object to use.</param>
         protected ShapedQueryCompilingExpressionVisitor(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
             QueryCompilationContext queryCompilationContext)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-            Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
-
             Dependencies = dependencies;
             QueryCompilationContext = queryCompilationContext;
 
@@ -79,7 +82,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ShapedQueryCompilingExpressionVisitorDependencies Dependencies { get; }
 
@@ -91,8 +94,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitExtension(Expression extensionExpression)
         {
-            Check.NotNull(extensionExpression, nameof(extensionExpression));
-
             if (extensionExpression is ShapedQueryExpression shapedQueryExpression)
             {
                 var serverEnumerable = VisitShapedQuery(shapedQueryExpression);
@@ -157,16 +158,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result;
         }
 
-        private static async Task<TSource> SingleOrDefaultAsync<TSource>(
+        private static async Task<TSource?> SingleOrDefaultAsync<TSource>(
             IAsyncEnumerable<TSource> asyncEnumerable,
             CancellationToken cancellationToken = default)
         {
             await using var enumerator = asyncEnumerable.GetAsyncEnumerator(cancellationToken);
             if (!(await enumerator.MoveNextAsync().ConfigureAwait(false)))
             {
-                // TODO: Convert return to Task<TSource?> when changing to C# 9
-                // There is currently no way to specify that this method can return Task<TSource?> where TSource is not constrainted.
-                return default!;
+                return default;
             }
 
             var result = enumerator.Current;
@@ -182,20 +181,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Visits given shaped query expression to create an expression of enumerable.
         /// </summary>
-        /// <param name="shapedQueryExpression"> The shaped query expression to compile. </param>
-        /// <returns> An expression of enumerable. </returns>
+        /// <param name="shapedQueryExpression">The shaped query expression to compile.</param>
+        /// <returns>An expression of enumerable.</returns>
         protected abstract Expression VisitShapedQuery(ShapedQueryExpression shapedQueryExpression);
 
         /// <summary>
         ///     Inject entity materializers in given shaper expression. <see cref="EntityShaperExpression" /> is replaced with materializer
         ///     expression for given entity.
         /// </summary>
-        /// <param name="expression"> The expression to inject entity materializers. </param>
-        /// <returns> A expression with entity materializers injected. </returns>
+        /// <param name="expression">The expression to inject entity materializers.</param>
+        /// <returns>A expression with entity materializers injected.</returns>
         protected virtual Expression InjectEntityMaterializers(Expression expression)
         {
-            Check.NotNull(expression, nameof(expression));
-
             VerifyNoClientConstant(expression);
 
             return _entityMaterializerInjectingExpressionVisitor.Inject(expression);
@@ -204,13 +201,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Verifies that the given shaper expression does not contain client side constant which could cause memory leak.
         /// </summary>
-        /// <param name="expression"> An expression to verify. </param>
+        /// <param name="expression">An expression to verify.</param>
         protected virtual void VerifyNoClientConstant(Expression expression)
-        {
-            Check.NotNull(expression, nameof(expression));
-
-            _constantVerifyingExpressionVisitor.Visit(expression);
-        }
+            => _constantVerifyingExpressionVisitor.Visit(expression);
 
         private sealed class ConstantVerifyingExpressionVisitor : ExpressionVisitor
         {
@@ -231,8 +224,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override Expression VisitConstant(ConstantExpression constantExpression)
             {
-                Check.NotNull(constantExpression, nameof(constantExpression));
-
                 if (!ValidConstant(constantExpression))
                 {
                     throw new InvalidOperationException(
@@ -244,8 +235,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
             {
-                Check.NotNull(methodCallExpression, nameof(methodCallExpression));
-
                 if (RemoveConvert(methodCallExpression.Object) is ConstantExpression constantInstance
                     && !ValidConstant(constantInstance))
                 {
@@ -271,14 +260,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             protected override Expression VisitExtension(Expression extensionExpression)
-            {
-                Check.NotNull(extensionExpression, nameof(extensionExpression));
-
-                return extensionExpression is EntityShaperExpression
+                => extensionExpression is EntityShaperExpression
                     || extensionExpression is ProjectionBindingExpression
                         ? extensionExpression
                         : base.VisitExtension(extensionExpression);
-            }
 
             private static Expression? RemoveConvert(Expression? expression)
             {
@@ -316,7 +301,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             private static readonly MethodInfo _startTrackingMethodInfo
                 = typeof(QueryContext).GetRequiredMethod(
-                    nameof(QueryContext.StartTracking), new[] { typeof(IEntityType), typeof(object), typeof(ValueBuffer) });
+                    nameof(QueryContext.StartTracking), typeof(IEntityType), typeof(object), typeof(ValueBuffer));
+
+            private static readonly MethodInfo _createNullKeyValueInNoTrackingQuery
+                = typeof(EntityMaterializerInjectingExpressionVisitor).GetRequiredDeclaredMethod(nameof(CreateNullKeyValueInNoTrackingQuery));
 
             private readonly IEntityMaterializerSource _entityMaterializerSource;
             private readonly QueryTrackingBehavior _queryTrackingBehavior;
@@ -356,13 +344,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             protected override Expression VisitExtension(Expression extensionExpression)
-            {
-                Check.NotNull(extensionExpression, nameof(extensionExpression));
-
-                return extensionExpression is EntityShaperExpression entityShaperExpression
+                => extensionExpression is EntityShaperExpression entityShaperExpression
                     ? ProcessEntityShaper(entityShaperExpression)
                     : base.VisitExtension(extensionExpression);
-            }
 
             private Expression ProcessEntityShaper(EntityShaperExpression entityShaperExpression)
             {
@@ -452,9 +436,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     if (primaryKey != null)
                     {
-                        expressions.Add(
-                            Expression.IfThen(
-                                primaryKey.Properties.Select(
+                        if (entityShaperExpression.IsNullable)
+                        {
+                            expressions.Add(
+                                Expression.IfThen(
+                                    primaryKey.Properties.Select(
                                         p => Expression.NotEqual(
                                             valueBufferExpression.CreateValueBufferReadValueExpression(typeof(object), p.GetIndex(), p),
                                             Expression.Constant(null)))
@@ -462,6 +448,35 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 MaterializeEntity(
                                     entityShaperExpression, materializationContextVariable, concreteEntityTypeVariable, instanceVariable,
                                     null)));
+                        }
+                        else
+                        {
+                            var keyValuesVariable = Expression.Variable(typeof(object[]), "keyValues" + _currentEntityIndex);
+                            expressions.Add(
+                                Expression.IfThenElse(
+                                    primaryKey.Properties.Select(
+                                        p => Expression.NotEqual(
+                                            valueBufferExpression.CreateValueBufferReadValueExpression(typeof(object), p.GetIndex(), p),
+                                            Expression.Constant(null)))
+                                    .Aggregate((a, b) => Expression.AndAlso(a, b)),
+                                MaterializeEntity(
+                                    entityShaperExpression, materializationContextVariable, concreteEntityTypeVariable, instanceVariable,
+                                    null),
+                                Expression.Block(
+                                    new[] { keyValuesVariable },
+                                    Expression.Assign(
+                                        keyValuesVariable,
+                                        Expression.NewArrayInit(
+                                            typeof(object),
+                                            primaryKey.Properties.Select(
+                                                p => valueBufferExpression.CreateValueBufferReadValueExpression(typeof(object), p.GetIndex(), p)))),
+                                    Expression.Call(
+                                        _createNullKeyValueInNoTrackingQuery,
+                                        Expression.Constant(entityType),
+                                        Expression.Constant(primaryKey.Properties),
+                                        keyValuesVariable))));
+
+                        }
                     }
                     else
                     {
@@ -558,7 +573,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             private BlockExpression CreateFullMaterializeExpression(
                 IEntityType concreteEntityType,
-                in (Type ReturnType,
+                (Type ReturnType,
                     ParameterExpression MaterializationContextVariable,
                     ParameterExpression ConcreteEntityTypeVariable,
                     ParameterExpression ShadowValuesVariable) materializeExpressionContext)
@@ -579,6 +594,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     var valueBufferExpression = Expression.Call(
                         materializationContextVariable, MaterializationContext.GetValueBufferMethod);
                     var shadowProperties = concreteEntityType.GetProperties().Where(p => p.IsShadowProperty());
+
                     blockExpressions.Add(
                         Expression.Assign(
                             shadowValuesVariable,
@@ -597,6 +613,26 @@ namespace Microsoft.EntityFrameworkCore.Query
                 blockExpressions.Add(materializer);
 
                 return Expression.Block(blockExpressions);
+            }
+
+            [UsedImplicitly]
+            private static Exception CreateNullKeyValueInNoTrackingQuery(
+                IEntityType entityType, IReadOnlyList<IProperty> properties, object?[] keyValues)
+            {
+                var index = -1;
+                for (var i = 0; i < keyValues.Length; i++)
+                {
+                    if (keyValues[i] == null)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                var property = properties[index];
+
+                throw new InvalidOperationException(
+                    CoreStrings.InvalidKeyValue(entityType.DisplayName(), property.Name));
             }
         }
     }

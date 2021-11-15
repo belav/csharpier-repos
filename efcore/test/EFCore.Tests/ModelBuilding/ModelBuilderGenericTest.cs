@@ -1,10 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -61,8 +62,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class GenericNonRelationship : NonRelationshipTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
 
             [ConditionalFact]
             public virtual void Changing_propertyInfo_updates_Property()
@@ -80,44 +81,44 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class GenericInheritance : InheritanceTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericOwnedTypes : OwnedTypesTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericOneToMany : OneToManyTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericManyToOne : ManyToOneTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericManyToMany : ManyToManyTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
         }
 
         public class GenericOneToOne : OneToOneTestBase
         {
-            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers)
-                => new GenericTestModelBuilder(testHelpers);
+            protected override TestModelBuilder CreateTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                => new GenericTestModelBuilder(testHelpers, configure);
         }
 
         protected class GenericTestModelBuilder : TestModelBuilder
         {
-            public GenericTestModelBuilder(TestHelpers testHelpers)
-                : base(testHelpers)
+            public GenericTestModelBuilder(TestHelpers testHelpers, Action<ModelConfigurationBuilder>? configure)
+                : base(testHelpers, configure)
             {
             }
 
@@ -465,6 +466,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestPropertyBuilder<TProperty> HasMaxLength(int maxLength)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasMaxLength(maxLength));
 
+            public override TestPropertyBuilder<TProperty> HasPrecision(int precision, int scale)
+                => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasPrecision(precision, scale));
+
             public override TestPropertyBuilder<TProperty> IsUnicode(bool unicode = true)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.IsUnicode(unicode));
 
@@ -495,6 +499,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestPropertyBuilder<TProperty> HasValueGenerator(Func<IReadOnlyProperty, IReadOnlyEntityType, ValueGenerator> factory)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasValueGenerator(factory));
 
+            public override TestPropertyBuilder<TProperty> HasValueGeneratorFactory<TFactory>()
+                => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasValueGeneratorFactory<TFactory>());
+
+            public override TestPropertyBuilder<TProperty> HasValueGeneratorFactory(Type valueGeneratorFactoryType)
+                => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasValueGeneratorFactory(valueGeneratorFactoryType));
+
             public override TestPropertyBuilder<TProperty> HasField(string fieldName)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasField(fieldName));
 
@@ -504,7 +514,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestPropertyBuilder<TProperty> HasConversion<TProvider>()
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion<TProvider>());
 
-            public override TestPropertyBuilder<TProperty> HasConversion(Type providerClrType)
+            public override TestPropertyBuilder<TProperty> HasConversion(Type? providerClrType)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion(providerClrType));
 
             public override TestPropertyBuilder<TProperty> HasConversion<TProvider>(
@@ -518,8 +528,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override TestPropertyBuilder<TProperty> HasConversion<TProvider>(ValueConverter<TProperty, TProvider> converter)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion(converter));
 
-            public override TestPropertyBuilder<TProperty> HasConversion(ValueConverter converter)
+            public override TestPropertyBuilder<TProperty> HasConversion(ValueConverter? converter)
                 => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion(converter));
+
+            public override TestPropertyBuilder<TProperty> HasConversion(ValueConverter? converter, ValueComparer? valueComparer)
+                => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion(converter, valueComparer));
+
+            public override TestPropertyBuilder<TProperty> HasConversion<TConverter, TComparer>()
+                => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion<TConverter, TComparer>());
+
+            public override TestPropertyBuilder<TProperty> HasConversion(Type converterType, Type? comparerType)
+                => new GenericTestPropertyBuilder<TProperty>(PropertyBuilder.HasConversion(converterType, comparerType));
 
             PropertyBuilder<TProperty> IInfrastructure<PropertyBuilder<TProperty>>.Instance
                 => PropertyBuilder;
@@ -757,6 +776,76 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             protected CollectionCollectionBuilder<TLeftEntity, TRightEntity> CollectionCollectionBuilder { get; }
 
+            public override TestEntityTypeBuilder<Dictionary<string, object>> UsingEntity(string joinEntityName)
+                => new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                    new(CollectionCollectionBuilder.UsingEntity(joinEntityName)
+                        .Metadata));
+
+            public override TestEntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>()
+                => new GenericTestEntityTypeBuilder<TJoinEntity>(
+                    CollectionCollectionBuilder.UsingEntity<TJoinEntity>());
+
+            public override TestEntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>(
+                string joinEntityName)
+                => new GenericTestEntityTypeBuilder<TJoinEntity>(
+                    CollectionCollectionBuilder.UsingEntity<TJoinEntity>(joinEntityName));
+
+            public override TestEntityTypeBuilder<TRightEntity> UsingEntity(
+                Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType)
+                => new GenericTestEntityTypeBuilder<TRightEntity>(
+                    CollectionCollectionBuilder.UsingEntity(
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(e.Metadata)))));
+
+            public override TestEntityTypeBuilder<TRightEntity> UsingEntity(
+                string joinEntityName,
+                Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType)
+                => new GenericTestEntityTypeBuilder<TRightEntity>(
+                    CollectionCollectionBuilder.UsingEntity(
+                        joinEntityName,
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(e.Metadata)))));
+
+            public override TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
+                Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+                => new GenericTestEntityTypeBuilder<TRightEntity>(
+                    CollectionCollectionBuilder.UsingEntity<TJoinEntity>(
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<TJoinEntity>(e))));
+
+            public override TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
+                string joinEntityName,
+                Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+                => new GenericTestEntityTypeBuilder<TRightEntity>(
+                    CollectionCollectionBuilder.UsingEntity<TJoinEntity>(
+                        joinEntityName,
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<TJoinEntity>(e))));
+
+            public override TestEntityTypeBuilder<Dictionary<string, object>> UsingEntity(
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>> configureRight,
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>> configureLeft)
+                => new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                    new(CollectionCollectionBuilder.UsingEntity(
+                            l => ((GenericTestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>)configureRight(
+                                new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(l.Metadata)))).ReferenceCollectionBuilder,
+                            r => ((GenericTestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>)configureLeft(
+                                new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(r.Metadata)))).ReferenceCollectionBuilder)
+                        .Metadata));
+
+            public override TestEntityTypeBuilder<Dictionary<string, object>> UsingEntity(
+                string joinEntityName,
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>> configureRight,
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>> configureLeft)
+                => new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                    new(CollectionCollectionBuilder.UsingEntity(
+                            joinEntityName,
+                            l => ((GenericTestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>)configureRight(
+                                new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(l.Metadata)))).ReferenceCollectionBuilder,
+                            r => ((GenericTestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>)configureLeft(
+                                new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(r.Metadata)))).ReferenceCollectionBuilder)
+                        .Metadata));
+
             public override TestEntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>(
                 Func<TestEntityTypeBuilder<TJoinEntity>,
                     TestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
@@ -783,12 +872,42 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         r => ((GenericTestReferenceCollectionBuilder<TRightEntity, TJoinEntity>)configureLeft(
                             new GenericTestEntityTypeBuilder<TJoinEntity>(r))).ReferenceCollectionBuilder));
 
+            public override TestEntityTypeBuilder<TRightEntity> UsingEntity(
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>> configureRight,
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>> configureLeft,
+                Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType)
+                => new GenericTestEntityTypeBuilder<TRightEntity>(
+                    CollectionCollectionBuilder.UsingEntity(
+                        l => ((GenericTestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>)configureRight(
+                            new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(l.Metadata)))).ReferenceCollectionBuilder,
+                        r => ((GenericTestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>)configureLeft(
+                            new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(r.Metadata)))).ReferenceCollectionBuilder,
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(e.Metadata)))));
+
+            public override TestEntityTypeBuilder<TRightEntity> UsingEntity(
+                string joinEntityName,
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>> configureRight,
+                Func<TestEntityTypeBuilder<Dictionary<string, object>>,
+                    TestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>> configureLeft,
+                Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType)
+                => new GenericTestEntityTypeBuilder<TRightEntity>(
+                    CollectionCollectionBuilder.UsingEntity(
+                        joinEntityName,
+                        l => ((GenericTestReferenceCollectionBuilder<TLeftEntity, Dictionary<string, object>>)configureRight(
+                            new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(l.Metadata)))).ReferenceCollectionBuilder,
+                        r => ((GenericTestReferenceCollectionBuilder<TRightEntity, Dictionary<string, object>>)configureLeft(
+                            new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(r.Metadata)))).ReferenceCollectionBuilder,
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<Dictionary<string, object>>(new(e.Metadata)))));
+
             public override TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
                 Func<TestEntityTypeBuilder<TJoinEntity>,
                     TestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
                 Func<TestEntityTypeBuilder<TJoinEntity>,
                     TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft,
-                Action<TestEntityTypeBuilder<TJoinEntity>> configureJoin)
+                Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
                 where TJoinEntity : class
                 => new GenericTestEntityTypeBuilder<TRightEntity>(
                     CollectionCollectionBuilder.UsingEntity<TJoinEntity>(
@@ -796,7 +915,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                             new GenericTestEntityTypeBuilder<TJoinEntity>(l))).ReferenceCollectionBuilder,
                         r => ((GenericTestReferenceCollectionBuilder<TRightEntity, TJoinEntity>)configureLeft(
                             new GenericTestEntityTypeBuilder<TJoinEntity>(r))).ReferenceCollectionBuilder,
-                        e => configureJoin(new GenericTestEntityTypeBuilder<TJoinEntity>(e))));
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<TJoinEntity>(e))));
 
             public override TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
                 string joinEntityName,
@@ -804,7 +923,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     TestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
                 Func<TestEntityTypeBuilder<TJoinEntity>,
                     TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft,
-                Action<TestEntityTypeBuilder<TJoinEntity>> configureJoin)
+                Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
                 where TJoinEntity : class
                 => new GenericTestEntityTypeBuilder<TRightEntity>(
                     CollectionCollectionBuilder.UsingEntity<TJoinEntity>(
@@ -813,7 +932,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                             new GenericTestEntityTypeBuilder<TJoinEntity>(l))).ReferenceCollectionBuilder,
                         r => ((GenericTestReferenceCollectionBuilder<TRightEntity, TJoinEntity>)configureLeft(
                             new GenericTestEntityTypeBuilder<TJoinEntity>(r))).ReferenceCollectionBuilder,
-                        e => configureJoin(new GenericTestEntityTypeBuilder<TJoinEntity>(e))));
+                        e => configureJoinEntityType(new GenericTestEntityTypeBuilder<TJoinEntity>(e))));
         }
 
         protected class GenericTestOwnershipBuilder<TEntity, TDependentEntity>
@@ -923,11 +1042,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Expression<Func<TDependentEntity, object?>> propertyExpression)
                 => Wrap(OwnedNavigationBuilder.Ignore(propertyExpression));
 
-            public override TestIndexBuilder<TEntity> HasIndex(params string[] propertyNames)
-                => new GenericTestIndexBuilder<TEntity>(OwnedNavigationBuilder.HasIndex(propertyNames));
+            public override TestIndexBuilder<TDependentEntity> HasIndex(params string[] propertyNames)
+                => new GenericTestIndexBuilder<TDependentEntity>(OwnedNavigationBuilder.HasIndex(propertyNames));
 
-            public override TestIndexBuilder<TEntity> HasIndex(Expression<Func<TDependentEntity, object?>> indexExpression)
-                => new GenericTestIndexBuilder<TEntity>(OwnedNavigationBuilder.HasIndex(indexExpression));
+            public override TestIndexBuilder<TDependentEntity> HasIndex(Expression<Func<TDependentEntity, object?>> indexExpression)
+                => new GenericTestIndexBuilder<TDependentEntity>(OwnedNavigationBuilder.HasIndex(indexExpression));
 
             public override TestOwnershipBuilder<TEntity, TDependentEntity> WithOwner(string? ownerReference)
                 => new GenericTestOwnershipBuilder<TEntity, TDependentEntity>(

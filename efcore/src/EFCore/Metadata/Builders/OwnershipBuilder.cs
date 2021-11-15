@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -9,10 +9,11 @@ using Microsoft.EntityFrameworkCore.Utilities;
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 {
     /// <summary>
-    ///     <para>
-    ///         Provides a simple API for configuring an ownership.
-    ///     </para>
+    ///     Provides a simple API for configuring an ownership.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public class OwnershipBuilder : RelationshipBuilderBase
     {
         /// <summary>
@@ -51,9 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     Adds or updates an annotation on the foreign key. If an annotation with the key specified in
         ///     <paramref name="annotation" /> already exists its value will be updated.
         /// </summary>
-        /// <param name="annotation"> The key of the annotation to be added or updated. </param>
-        /// <param name="value"> The value to be stored in the annotation. </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="annotation">The key of the annotation to be added or updated.</param>
+        /// <param name="value">The value to be stored in the annotation.</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder HasAnnotation(string annotation, object? value)
         {
             Check.NotEmpty(annotation, nameof(annotation));
@@ -64,9 +65,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         }
 
         /// <summary>
-        ///     <para>
-        ///         Configures the property(s) to use as the foreign key for this relationship.
-        ///     </para>
+        ///     Configures the property(s) to use as the foreign key for this relationship.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If the specified property name(s) do not exist on the entity type then a new shadow state
         ///         property(s) will be added to serve as the foreign key. A shadow state property is one
@@ -80,11 +81,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///         entity type. If they do not match, new shadow state properties that form a unique index will be
         ///         added to the principal entity type to serve as the reference key.
         ///     </para>
-        /// </summary>
+        /// </remarks>
         /// <param name="foreignKeyPropertyNames">
         ///     The name(s) of the foreign key property(s).
         /// </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder HasForeignKey(
             params string[] foreignKeyPropertyNames)
         {
@@ -104,8 +105,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     the specified property(s) is not already a unique constraint (or the primary key) then a new unique
         ///     constraint will be introduced.
         /// </summary>
-        /// <param name="keyPropertyNames"> The name(s) of the reference key property(s). </param>
-        /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
+        /// <param name="keyPropertyNames">The name(s) of the reference key property(s).</param>
+        /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder HasPrincipalKey(
             params string[] keyPropertyNames)
         {

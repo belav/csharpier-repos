@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace Microsoft.EntityFrameworkCore.Metadata
@@ -19,6 +18,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// <summary>
     ///     Represents a scalar property of an entity type.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IReadOnlyProperty : IReadOnlyPropertyBase
     {
         /// <summary>
@@ -52,7 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Returns the <see cref="CoreTypeMapping" /> for the given property from a finalized model.
         /// </summary>
-        /// <returns> The type mapping. </returns>
+        /// <returns>The type mapping.</returns>
         CoreTypeMapping GetTypeMapping()
         {
             var mapping = FindTypeMapping();
@@ -65,43 +67,43 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         }
 
         /// <summary>
-        ///     Returns the <see cref="CoreTypeMapping" /> for the given property.
+        ///     Returns the type mapping for this property.
         /// </summary>
-        /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
+        /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
         CoreTypeMapping? FindTypeMapping();
 
         /// <summary>
         ///     Gets the maximum length of data that is allowed in this property. For example, if the property is a <see cref="string" />
         ///     then this is the maximum number of characters.
         /// </summary>
-        /// <returns> The maximum length, or <see langword="null" /> if none if defined. </returns>
+        /// <returns>The maximum length, or <see langword="null" /> if none is defined.</returns>
         int? GetMaxLength();
 
         /// <summary>
         ///     Gets the precision of data that is allowed in this property.
         ///     For example, if the property is a <see cref="decimal" /> then this is the maximum number of digits.
         /// </summary>
-        /// <returns> The precision, or <see langword="null" /> if none is defined. </returns>
+        /// <returns>The precision, or <see langword="null" /> if none is defined.</returns>
         int? GetPrecision();
 
         /// <summary>
         ///     Gets the scale of data that is allowed in this property.
         ///     For example, if the property is a <see cref="decimal" /> then this is the maximum number of decimal places.
         /// </summary>
-        /// <returns> The scale, or <see langword="null" /> if none is defined. </returns>
+        /// <returns>The scale, or <see langword="null" /> if none is defined.</returns>
         int? GetScale();
 
         /// <summary>
         ///     Gets a value indicating whether or not the property can persist Unicode characters.
         /// </summary>
-        /// <returns> The Unicode setting, or <see langword="null" /> if none is defined. </returns>
+        /// <returns>The Unicode setting, or <see langword="null" /> if none is defined.</returns>
         bool? IsUnicode();
 
         /// <summary>
-        ///     <para>
-        ///         Gets a value indicating whether or not this property can be modified before the entity is
-        ///         saved to the database.
-        ///     </para>
+        ///     Gets a value indicating whether or not this property can be modified before the entity is
+        ///     saved to the database.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If <see cref="PropertySaveBehavior.Throw" />, then an exception
         ///         will be thrown if a value is assigned to this property when it is in
@@ -111,15 +113,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         If <see cref="PropertySaveBehavior.Ignore" />, then any value
         ///         set will be ignored when it is in the <see cref="EntityState.Added" /> state.
         ///     </para>
-        /// </summary>
-        /// <returns> The before save behavior for this property. </returns>
+        /// </remarks>
+        /// <returns>The before save behavior for this property.</returns>
         PropertySaveBehavior GetBeforeSaveBehavior();
 
         /// <summary>
-        ///     <para>
-        ///         Gets a value indicating whether or not this property can be modified after the entity is
-        ///         saved to the database.
-        ///     </para>
+        ///     Gets a value indicating whether or not this property can be modified after the entity is
+        ///     saved to the database.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         If <see cref="PropertySaveBehavior.Throw" />, then an exception
         ///         will be thrown if a new value is assigned to this property after the entity exists in the database.
@@ -128,45 +130,45 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         If <see cref="PropertySaveBehavior.Ignore" />, then any modification to the
         ///         property value of an entity that already exists in the database will be ignored.
         ///     </para>
-        /// </summary>
-        /// <returns> The after save behavior for this property. </returns>
+        /// </remarks>
+        /// <returns>The after save behavior for this property.</returns>
         PropertySaveBehavior GetAfterSaveBehavior();
 
         /// <summary>
         ///     Gets the factory that has been set to generate values for this property, if any.
         /// </summary>
-        /// <returns> The factory, or <see langword="null" /> if no factory has been set. </returns>
+        /// <returns>The factory, or <see langword="null" /> if no factory has been set.</returns>
         Func<IProperty, IEntityType, ValueGenerator>? GetValueGeneratorFactory();
 
         /// <summary>
         ///     Gets the custom <see cref="ValueConverter" /> set for this property.
         /// </summary>
-        /// <returns> The converter, or <see langword="null" /> if none has been set. </returns>
+        /// <returns>The converter, or <see langword="null" /> if none has been set.</returns>
         ValueConverter? GetValueConverter();
 
         /// <summary>
         ///     Gets the type that the property value will be converted to before being sent to the database provider.
         /// </summary>
-        /// <returns> The provider type, or <see langword="null" /> if none has been set. </returns>
+        /// <returns>The provider type, or <see langword="null" /> if none has been set.</returns>
         Type? GetProviderClrType();
 
         /// <summary>
         ///     Gets the <see cref="ValueComparer" /> for this property, or <see langword="null" /> if none is set.
         /// </summary>
-        /// <returns> The comparer, or <see langword="null" /> if none has been set. </returns>
+        /// <returns>The comparer, or <see langword="null" /> if none has been set.</returns>
         ValueComparer? GetValueComparer();
 
         /// <summary>
         ///     Gets the <see cref="ValueComparer" /> to use with keys for this property, or <see langword="null" /> if none is set.
         /// </summary>
-        /// <returns> The comparer, or <see langword="null" /> if none has been set. </returns>
+        /// <returns>The comparer, or <see langword="null" /> if none has been set.</returns>
         ValueComparer? GetKeyValueComparer();
 
         /// <summary>
         ///     Finds the first principal property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
-        /// <returns> The first associated principal property, or <see langword="null" /> if none exists. </returns>
+        /// <returns>The first associated principal property, or <see langword="null" /> if none exists.</returns>
         IReadOnlyProperty? FindFirstPrincipal()
         {
             foreach (var foreignKey in GetContainingForeignKeys())
@@ -187,7 +189,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Finds the list of principal properties including the given property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
-        /// <returns> The list of all associated principal properties including the given property. </returns>
+        /// <returns>The list of all associated principal properties including the given property.</returns>
         IReadOnlyList<IReadOnlyProperty> GetPrincipals()
         {
             var principals = new List<IReadOnlyProperty> { this };
@@ -218,26 +220,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets a value indicating whether this property is used as a foreign key (or part of a composite foreign key).
         /// </summary>
-        /// <returns> <see langword="true" /> if the property is used as a foreign key, otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the property is used as a foreign key, otherwise <see langword="false" />.</returns>
         bool IsForeignKey();
 
         /// <summary>
         ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
         ///     is included).
         /// </summary>
-        /// <returns> The foreign keys that use this property. </returns>
+        /// <returns>The foreign keys that use this property.</returns>
         IEnumerable<IReadOnlyForeignKey> GetContainingForeignKeys();
 
         /// <summary>
         ///     Gets a value indicating whether this property is used as an index (or part of a composite index).
         /// </summary>
-        /// <returns> <see langword="true" /> if the property is used as an index, otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the property is used as an index, otherwise <see langword="false" />.</returns>
         bool IsIndex();
 
         /// <summary>
         ///     Gets a value indicating whether this property is used as a unique index (or part of a unique composite index).
         /// </summary>
-        /// <returns> <see langword="true" /> if the property is used as an unique index, otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the property is used as an unique index, otherwise <see langword="false" />.</returns>
         bool IsUniqueIndex()
             => GetContainingIndexes().Any(e => e.IsUnique);
 
@@ -245,13 +247,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets all indexes that use this property (including composite indexes in which this property
         ///     is included).
         /// </summary>
-        /// <returns> The indexes that use this property. </returns>
+        /// <returns>The indexes that use this property.</returns>
         IEnumerable<IReadOnlyIndex> GetContainingIndexes();
 
         /// <summary>
         ///     Gets a value indicating whether this property is used as the primary key (or part of a composite primary key).
         /// </summary>
-        /// <returns> <see langword="true" /> if the property is used as the primary key, otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the property is used as the primary key, otherwise <see langword="false" />.</returns>
         bool IsPrimaryKey()
             => FindContainingPrimaryKey() != null;
 
@@ -259,21 +261,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets the primary key that uses this property (including a composite primary key in which this property
         ///     is included).
         /// </summary>
-        /// <returns> The primary that use this property, or <see langword="null" /> if it is not part of the primary key. </returns>
+        /// <returns>The primary that use this property, or <see langword="null" /> if it is not part of the primary key.</returns>
         IReadOnlyKey? FindContainingPrimaryKey();
 
         /// <summary>
         ///     Gets a value indicating whether this property is used as the primary key or alternate key
         ///     (or part of a composite primary or alternate key).
         /// </summary>
-        /// <returns> <see langword="true" /> if the property is used as a key, otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if the property is used as a key, otherwise <see langword="false" />.</returns>
         bool IsKey();
 
         /// <summary>
         ///     Gets all primary or alternate keys that use this property (including composite keys in which this property
         ///     is included).
         /// </summary>
-        /// <returns> The primary and alternate keys that use this property. </returns>
+        /// <returns>The primary and alternate keys that use this property.</returns>
         IEnumerable<IReadOnlyKey> GetContainingKeys();
 
         /// <summary>
@@ -285,9 +287,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -390,11 +392,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 && ((AnnotatableBase)this).IsReadOnly)
             {
                 var indexes = ((IProperty)this).GetPropertyIndexes();
-                builder.Append(" ").Append(indexes.Index);
-                builder.Append(" ").Append(indexes.OriginalValueIndex);
-                builder.Append(" ").Append(indexes.RelationshipIndex);
-                builder.Append(" ").Append(indexes.ShadowIndex);
-                builder.Append(" ").Append(indexes.StoreGenerationIndex);
+                builder.Append(' ').Append(indexes.Index);
+                builder.Append(' ').Append(indexes.OriginalValueIndex);
+                builder.Append(' ').Append(indexes.RelationshipIndex);
+                builder.Append(' ').Append(indexes.ShadowIndex);
+                builder.Append(' ').Append(indexes.StoreGenerationIndex);
             }
 
             if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)

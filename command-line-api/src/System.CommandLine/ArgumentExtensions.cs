@@ -9,8 +9,18 @@ using System.IO;
 
 namespace System.CommandLine
 {
+    /// <summary>
+    /// Provides extension methods for <see cref="Argument" />.
+    /// </summary>
     public static class ArgumentExtensions
     {
+        /// <summary>
+        /// Adds suggestions for an argument.
+        /// </summary>
+        /// <typeparam name="TArgument">The type of the argument.</typeparam>
+        /// <param name="argument">The argument for which to add suggestions.</param>
+        /// <param name="values">The suggestions to add.</param>
+        /// <returns>The configured argument.</returns>
         public static TArgument AddSuggestions<TArgument>(
             this TArgument argument,
             params string[] values)
@@ -21,6 +31,13 @@ namespace System.CommandLine
             return argument;
         }
 
+        /// <summary>
+        /// Adds suggestions for an argument.
+        /// </summary>
+        /// <typeparam name="TArgument">The type of the argument.</typeparam>
+        /// <param name="argument">The argument for which to add suggestions.</param>
+        /// <param name="suggest">A <see cref="SuggestDelegate"/> that will be called to provide suggestions.</param>
+        /// <returns>The configured argument.</returns>
         public static TArgument AddSuggestions<TArgument>(
             this TArgument argument,
             SuggestDelegate suggest)
@@ -31,6 +48,13 @@ namespace System.CommandLine
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only the specified values, and to suggest them as command line completions.
+        /// </summary>
+        /// <param name="argument">The argument to configure.</param>
+        /// <param name="values">The values that are allowed for the argument.</param>
+        /// <typeparam name="TArgument">The type of the argument.</typeparam>
+        /// <returns>The configured argument.</returns>
         public static TArgument FromAmong<TArgument>(
             this TArgument argument,
             params string[] values)
@@ -42,39 +66,59 @@ namespace System.CommandLine
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only values corresponding to an existing file.
+        /// </summary>
+        /// <param name="argument">The argument to configure.</param>
+        /// <returns>The configured argument.</returns>
         public static Argument<FileInfo> ExistingOnly(this Argument<FileInfo> argument)
         {
             argument.AddValidator(symbol =>
                                       symbol.Tokens
                                             .Select(t => t.Value)
                                             .Where(filePath => !File.Exists(filePath))
-                                            .Select(symbol.ValidationMessages.FileDoesNotExist)
+                                            .Select(symbol.LocalizationResources.FileDoesNotExist)
                                             .FirstOrDefault());
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only values corresponding to an existing directory.
+        /// </summary>
+        /// <param name="argument">The argument to configure.</param>
+        /// <returns>The configured argument.</returns>
         public static Argument<DirectoryInfo> ExistingOnly(this Argument<DirectoryInfo> argument)
         {
             argument.AddValidator(symbol =>
                                       symbol.Tokens
                                             .Select(t => t.Value)
                                             .Where(filePath => !Directory.Exists(filePath))
-                                            .Select(symbol.ValidationMessages.DirectoryDoesNotExist)
+                                            .Select(symbol.LocalizationResources.DirectoryDoesNotExist)
                                             .FirstOrDefault());
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only values corresponding to an existing file or directory.
+        /// </summary>
+        /// <param name="argument">The argument to configure.</param>
+        /// <returns>The configured argument.</returns>
         public static Argument<FileSystemInfo> ExistingOnly(this Argument<FileSystemInfo> argument)
         {
             argument.AddValidator(symbol =>
                                       symbol.Tokens
                                             .Select(t => t.Value)
                                             .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                                            .Select(symbol.ValidationMessages.FileOrDirectoryDoesNotExist)
+                                            .Select(symbol.LocalizationResources.FileOrDirectoryDoesNotExist)
                                             .FirstOrDefault());
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only values corresponding to a existing files or directories.
+        /// </summary>
+        /// <param name="argument">The argument to configure.</param>
+        /// <returns>The configured argument.</returns>
         public static Argument<T> ExistingOnly<T>(this Argument<T> argument)
             where T : IEnumerable<FileSystemInfo>
         {
@@ -84,7 +128,7 @@ namespace System.CommandLine
                     a => a.Tokens
                           .Select(t => t.Value)
                           .Where(filePath => !File.Exists(filePath))
-                          .Select(a.ValidationMessages.FileDoesNotExist)
+                          .Select(a.LocalizationResources.FileDoesNotExist)
                           .FirstOrDefault());
             }
             else if (typeof(IEnumerable<DirectoryInfo>).IsAssignableFrom(typeof(T)))
@@ -93,7 +137,7 @@ namespace System.CommandLine
                     a => a.Tokens
                           .Select(t => t.Value)
                           .Where(filePath => !Directory.Exists(filePath))
-                          .Select(a.ValidationMessages.DirectoryDoesNotExist)
+                          .Select(a.LocalizationResources.DirectoryDoesNotExist)
                           .FirstOrDefault());
             }
             else
@@ -102,13 +146,18 @@ namespace System.CommandLine
                     a => a.Tokens
                           .Select(t => t.Value)
                           .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                          .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
+                          .Select(a.LocalizationResources.FileOrDirectoryDoesNotExist)
                           .FirstOrDefault());
             }
 
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only values representing legal file paths.
+        /// </summary>
+        /// <param name="argument">The argument to configure.</param>
+        /// <returns>The configured argument.</returns>
         public static TArgument LegalFilePathsOnly<TArgument>(
             this TArgument argument)
             where TArgument : Argument
@@ -127,7 +176,7 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        return symbol.ValidationMessages.InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
+                        return symbol.LocalizationResources.InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
                     }
                 }
 
@@ -137,6 +186,12 @@ namespace System.CommandLine
             return argument;
         }
 
+        /// <summary>
+        /// Configures an argument to accept only values representing legal file names.
+        /// </summary>
+        /// <remarks>A parse error will result, for example, if file path separators are found in the parsed value.</remarks>
+        /// <param name="argument">The argument to configure.</param>
+        /// <returns>The configured argument.</returns>
         public static TArgument LegalFileNamesOnly<TArgument>(
             this TArgument argument)
             where TArgument : Argument
@@ -152,7 +207,7 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        return symbol.ValidationMessages.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
+                        return symbol.LocalizationResources.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
                     }
                 }
 
@@ -161,18 +216,28 @@ namespace System.CommandLine
 
             return argument;
         }
-
+        
+        /// <summary>
+        /// Parses a command line string value using an argument.
+        /// </summary>
+        /// <remarks>The command line string input will be split into tokens as if it had been passed on the command line.</remarks>
+        /// <param name="argument">The argument to use to parse the command line input.</param>
+        /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
+        /// <returns>A parse result describing the outcome of the parse operation.</returns>
         public static ParseResult Parse(
             this Argument argument,
             string commandLine) =>
-            new Parser(
-                new CommandLineConfiguration(
-                    new[]
-                    {
-                        new RootCommand
-                        {
-                            argument
-                        },
-                    })).Parse(commandLine);
+            argument.GetOrCreateDefaultParser().Parse(commandLine);
+
+        /// <summary>
+        /// Parses a command line string value using an argument.
+        /// </summary>
+        /// <param name="argument">The argument to use to parse the command line input.</param>
+        /// <param name="args">The string arguments to parse.</param>
+        /// <returns>A parse result describing the outcome of the parse operation.</returns>
+        public static ParseResult Parse(
+            this Argument argument,
+            string[] args) =>
+            argument.GetOrCreateDefaultParser().Parse(args);
     }
 }

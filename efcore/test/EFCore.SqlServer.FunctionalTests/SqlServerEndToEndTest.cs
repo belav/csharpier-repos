@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -296,6 +296,115 @@ namespace Microsoft.EntityFrameworkCore
             public DbSet<SNum> SNums { get; set; }
             public DbSet<EnNum> EnNums { get; set; }
             public DbSet<BNum> BNums { get; set; }
+        }
+
+        [ConditionalFact]
+        public void Can_add_table_splitting_dependent_after_principal()
+        {
+            using var testDatabase = SqlServerTestStore.CreateInitialized(DatabaseName);
+
+            var options = Fixture.CreateOptions(testDatabase);
+            EvaluationAction evaluationAction = null;
+            using (var context = new ProjectContext(options))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                evaluationAction = new EvaluationAction()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateId = "1",
+                    UpdateId = "1"
+                };
+                context.EvaluationActions.Add(evaluationAction);
+                context.SaveChanges();
+            }
+
+            using (var context = new ProjectContext(options))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                var projectAction = new ProjectAction()
+                {
+                    Id = evaluationAction.Id,
+                    CreateId = "1",
+                    UpdateId = "1",
+                    Name = "123123123123"
+                };
+                context.ProjectActions.Add(projectAction);
+                context.SaveChanges();
+            }
+
+            using (var context = new ProjectContext(options))
+            {
+                Assert.NotNull(context.ProjectActions.Single());
+                Assert.NotNull(context.EvaluationActions.Single());
+            }
+        }
+
+        [ConditionalFact]
+        public void Throws_when_adding_table_splitting_dependent_without_principal()
+        {
+            using var testDatabase = SqlServerTestStore.CreateInitialized(DatabaseName);
+
+            var options = Fixture.CreateOptions(testDatabase);
+            using (var context = new ProjectContext(options))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                var projectAction = new ProjectAction()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateId = "1",
+                    UpdateId = "1",
+                    Name = "123123123123"
+                };
+                context.ProjectActions.Add(projectAction);
+
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
+            }
+        }
+
+        private class ProjectContext : DbContext
+        {
+            public ProjectContext(DbContextOptions options)
+                : base(options)
+            {
+            }
+
+            public DbSet<EvaluationAction> EvaluationActions { get; set; }
+            public DbSet<ProjectAction> ProjectActions { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder.Entity<ProjectAction>()
+                   .ToTable("projectaction")
+                   .HasOne(o => o.EvaluationAction).WithOne(o => o.ProjectAction)
+                   .HasForeignKey<ProjectAction>(o => o.Id);
+
+                modelBuilder.Entity<ProjectAction>().Property(p => p.Name).IsRequired();
+
+                modelBuilder.Entity<EvaluationAction>()
+                   .ToTable("projectaction");
+            }
+        }
+
+        private class ProjectAction
+        {
+            public string Id { get; set; }
+            public string CreateId { get; set; }
+            public string UpdateId { get; set; }
+            public string Name { get; set; }
+
+            public EvaluationAction EvaluationAction { get; set; }
+        }
+
+        private class EvaluationAction
+        {
+            public string Id { get; set; }
+            public string CreateId { get; set; }
+            public string UpdateId { get; set; }
+
+            public ProjectAction ProjectAction { get; set; }
         }
 
         private class SNum
@@ -717,6 +826,90 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.NotNull(character.Game);
                 Assert.NotNull(character.Level);
                 Assert.NotNull(character.Level.Game);
+            }
+        }
+
+        [ConditionalFact]
+        public void Can_replace_identifying_FK_entity_with_many_to_many()
+        {
+            using var testDatabase = SqlServerTestStore.CreateInitialized(DatabaseName);
+            var options = Fixture.CreateOptions(testDatabase);
+
+            using (var context = new SomeDbContext(options))
+            {
+                context.Database.EnsureCreatedResiliently();
+
+                context.Add(new EntityA()
+                {
+                    EntityB = new EntityB()
+                    {
+                        EntitiesC = { new EntityC() },
+                    }
+                });
+
+                context.SaveChanges();
+            }
+
+            var expectedCId = 0;
+            using (var context = new SomeDbContext(options))
+            {
+                var entityA = context.EntitiesA.Include(x => x.EntityB).ThenInclude(x => x.EntitiesC).OrderBy(x => x.Id).First();
+
+                entityA.EntityB = new EntityB()
+                {
+                    EntitiesC = { new EntityC() }
+                };
+
+                context.SaveChanges();
+
+                expectedCId = entityA.EntityB.EntitiesC.Single().Id;
+            }
+
+            using (var context = new SomeDbContext(options))
+            {
+                var entityA = context.EntitiesA.Include(x => x.EntityB).ThenInclude(x => x.EntitiesC).OrderBy(x => x.Id).First();
+
+                Assert.Equal(expectedCId, entityA.EntityB.EntitiesC.Single().Id);
+            }
+        }
+
+        private class EntityA
+        {
+            public int Id { get; set; }
+            public virtual EntityB EntityB { get; set; }
+        }
+
+        private class EntityB
+        {
+            public int Id { get; set; }
+            public virtual EntityA EntityA { get; set; }
+            public virtual ICollection<EntityC> EntitiesC { get; } = new List<EntityC>();
+        }
+
+        private class EntityC
+        {
+            public int Id { get; set; }
+            public virtual ICollection<EntityB> EntitiesB { get; } = new List<EntityB>();
+        }
+
+        private class SomeDbContext : DbContext
+        {
+            public SomeDbContext(DbContextOptions options)
+                : base(options)
+            {
+            }
+
+            public DbSet<EntityA> EntitiesA { get; set; }
+            public DbSet<EntityB> EntitiesB { get; set; }
+            public DbSet<EntityC> EntitiesC { get; set; }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder
+                    .Entity<EntityA>()
+                    .HasOne(e => e.EntityB)
+                    .WithOne(e => e.EntityA)
+                    .HasForeignKey<EntityB>(e => e.Id);
             }
         }
 

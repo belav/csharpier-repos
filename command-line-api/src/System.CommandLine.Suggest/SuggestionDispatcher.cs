@@ -63,6 +63,7 @@ namespace System.CommandLine.Suggest
             };
 
             Parser = new CommandLineBuilder(root)
+                     .EnableLegacyDoubleDashBehavior()
                      .UseVersionOption()
                      .UseHelp()
                      .UseParseDirective()
@@ -118,7 +119,7 @@ namespace System.CommandLine.Suggest
 
         private void Get(ParseResult parseResult, IConsole console)
         {
-            var commandPath = parseResult.ValueForOption(ExecutableOption);
+            var commandPath = parseResult.GetValueForOption(ExecutableOption);
 
             Registration suggestionRegistration;
             if (commandPath.FullName == DotnetMuxer.Path.FullName)
@@ -130,7 +131,7 @@ namespace System.CommandLine.Suggest
                 suggestionRegistration = _suggestionRegistration.FindRegistration(commandPath);
             }
 
-            var position = parseResult.ValueForOption(PositionOption);
+            var position = parseResult.GetValueForOption(PositionOption);
 
             if (suggestionRegistration == null)
             {

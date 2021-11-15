@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -31,7 +31,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             private readonly Type _contextType;
             private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
             private readonly bool _standAloneStateManager;
-            private readonly bool _concurrencyDetectionEnabled;
+            private readonly bool _threadSafetyChecksEnabled;
 
             public QueryingEnumerable(
                 QueryContext queryContext,
@@ -39,7 +39,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 Func<QueryContext, ValueBuffer, T> shaper,
                 Type contextType,
                 bool standAloneStateManager,
-                bool concurrencyDetectionEnabled)
+                bool threadSafetyChecksEnabled)
             {
                 _queryContext = queryContext;
                 _innerEnumerable = innerEnumerable;
@@ -47,7 +47,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 _contextType = contextType;
                 _queryLogger = queryContext.QueryLogger;
                 _standAloneStateManager = standAloneStateManager;
-                _concurrencyDetectionEnabled = concurrencyDetectionEnabled;
+                _threadSafetyChecksEnabled = threadSafetyChecksEnabled;
             }
 
             public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
@@ -86,7 +86,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     _cancellationToken = cancellationToken;
                     Current = default!;
 
-                    _concurrencyDetector = queryingEnumerable._concurrencyDetectionEnabled
+                    _concurrencyDetector = queryingEnumerable._threadSafetyChecksEnabled
                         ? _queryContext.ConcurrencyDetector
                         : null;
                 }

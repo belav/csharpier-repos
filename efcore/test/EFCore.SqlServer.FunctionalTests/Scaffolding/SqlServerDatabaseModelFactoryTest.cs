@@ -1,14 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -16,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using Microsoft.EntityFrameworkCore.SqlServer.Diagnostics.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
@@ -32,7 +28,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         public SqlServerDatabaseModelFactoryTest(SqlServerDatabaseModelFixture fixture)
         {
             Fixture = fixture;
-            Fixture.ListLoggerFactory.Clear();
+            Fixture.OperationReporter.Clear();
         }
 
         #region Sequences
@@ -303,6 +299,17 @@ DROP TABLE [dbo].[Everest];
 DROP TABLE [dbo].[Denali];");
         }
 
+        [ConditionalFact]
+        public void Default_database_collation_is_not_scaffolded()
+        {
+            Test(
+                @"",
+                Enumerable.Empty<string>(),
+                Enumerable.Empty<string>(),
+                dbModel => Assert.Null(dbModel.Collation),
+                @"");
+        }
+
         #endregion
 
         #region FilteringSchemaTable
@@ -355,6 +362,31 @@ CREATE TABLE [dbo].[Kilimanjaro] ( Id int, B varchar, UNIQUE (B), FOREIGN KEY (B
 DROP TABLE [dbo].[Kilimanjaro];
 
 DROP TABLE [dbo].[K2];");
+        }
+
+        [ConditionalFact]
+        public void Filter_tables_with_quote_in_name()
+        {
+            Test(
+                @"
+CREATE TABLE [dbo].[K2'] ( Id int, A varchar, UNIQUE (A ) );
+
+CREATE TABLE [dbo].[Kilimanjaro] ( Id int, B varchar, UNIQUE (B), FOREIGN KEY (B) REFERENCES [K2'] (A) );",
+                new[] { "K2'" },
+                Enumerable.Empty<string>(),
+                dbModel =>
+                {
+                    var table = Assert.Single(dbModel.Tables);
+                    // ReSharper disable once PossibleNullReferenceException
+                    Assert.Equal("K2'", table.Name);
+                    Assert.Equal(2, table.Columns.Count);
+                    Assert.Equal(1, table.UniqueConstraints.Count);
+                    Assert.Empty(table.ForeignKeys);
+                },
+                @"
+DROP TABLE [dbo].[Kilimanjaro];
+
+DROP TABLE [dbo].[K2'];");
         }
 
         [ConditionalFact]
@@ -812,6 +844,48 @@ CREATE INDEX IX_INDEX on IndexTable ( IndexProperty );",
 
                     Assert.Single(table.Indexes.Where(c => c.Name == "IX_NAME"));
                     Assert.Single(table.Indexes.Where(c => c.Name == "IX_INDEX"));
+                },
+                "DROP TABLE IndexTable;");
+        }
+
+        [ConditionalFact]
+        public void Create_multiple_indexes_on_same_column()
+        {
+            Test(
+                @"
+CREATE TABLE IndexTable (
+    Id int,
+    IndexProperty int
+);
+
+CREATE INDEX IX_One on IndexTable ( IndexProperty ) WITH (FILLFACTOR = 100);
+CREATE INDEX IX_Two on IndexTable ( IndexProperty ) WITH (FILLFACTOR = 50);",
+                Enumerable.Empty<string>(),
+                Enumerable.Empty<string>(),
+                dbModel =>
+                {
+                    var table = dbModel.Tables.Single();
+
+                    Assert.Equal(2, table.Indexes.Count);
+                    Assert.All(
+                        table.Indexes, c =>
+                        {
+                            Assert.Equal("dbo", c.Table.Schema);
+                            Assert.Equal("IndexTable", c.Table.Name);
+                        });
+
+                    Assert.Collection(
+                        table.Indexes.OrderBy(i => i.Name),
+                        index =>
+                        {
+                            Assert.Equal("IX_One", index.Name);
+                            Assert.Equal(100, index[SqlServerAnnotationNames.FillFactor]);
+                        },
+                        index =>
+                        {
+                            Assert.Equal("IX_Two", index.Name);
+                            Assert.Equal(50, index[SqlServerAnnotationNames.FillFactor]);
+                        });
                 },
                 "DROP TABLE IndexTable;");
         }
@@ -1579,7 +1653,7 @@ CREATE TABLE ColumnsWithSparseness (
 
         [ConditionalFact]
         [SqlServerCondition(SqlServerCondition.SupportsHiddenColumns)]
-        public void Hidden_columns_are_not_created()
+        public void Hidden_period_columns_are_not_created()
         {
             Test(
                 @"
@@ -1589,6 +1663,43 @@ CREATE TABLE dbo.HiddenColumnsTable
      Name varchar(50) NOT NULL,
      SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
      SysEndTime datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+     PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime)
+)
+WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.HiddenColumnsTableHistory));
+CREATE INDEX IX_HiddenColumnsTable_1 ON dbo.HiddenColumnsTable ( Name, SysStartTime);
+CREATE INDEX IX_HiddenColumnsTable_2 ON dbo.HiddenColumnsTable ( SysStartTime);
+CREATE INDEX IX_HiddenColumnsTable_3 ON dbo.HiddenColumnsTable ( Name );
+",
+                Enumerable.Empty<string>(),
+                Enumerable.Empty<string>(),
+                dbModel =>
+                {
+                    var columns = dbModel.Tables.Single().Columns;
+
+                    Assert.Equal(2, columns.Count);
+                    Assert.DoesNotContain(columns, c => c.Name == "SysStartTime");
+                    Assert.DoesNotContain(columns, c => c.Name == "SysEndTime");
+                    Assert.Equal("IX_HiddenColumnsTable_3", dbModel.Tables.Single().Indexes.Single().Name);
+                },
+                @"
+ALTER TABLE dbo.HiddenColumnsTable SET (SYSTEM_VERSIONING = OFF);
+DROP TABLE dbo.HiddenColumnsTableHistory;
+DROP TABLE dbo.HiddenColumnsTable;
+");
+        }
+
+        [ConditionalFact]
+        [SqlServerCondition(SqlServerCondition.SupportsHiddenColumns)]
+        public void Period_columns_are_not_created()
+        {
+            Test(
+                @"
+CREATE TABLE dbo.HiddenColumnsTable
+(
+     Id int NOT NULL PRIMARY KEY CLUSTERED,
+     Name varchar(50) NOT NULL,
+     SysStartTime datetime2 GENERATED ALWAYS AS ROW START NOT NULL,
+     SysEndTime datetime2 GENERATED ALWAYS AS ROW END NOT NULL,
      PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime)
 )
 WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.HiddenColumnsTableHistory));
@@ -2008,6 +2119,33 @@ CREATE INDEX IX_INCLUDE ON IncludeIndexTable(IndexProperty) INCLUDE (IncludeProp
                 "DROP TABLE IncludeIndexTable;");
         }
 
+        [ConditionalFact]
+        public void Index_fill_factor()
+        {
+            Test(
+                @"
+CREATE TABLE IndexFillFactor
+(
+    Id INT IDENTITY,
+    Name NVARCHAR(100)
+);
+
+CREATE NONCLUSTERED INDEX [IX_Name] ON [dbo].[IndexFillFactor]
+(
+     [Name] ASC
+)
+WITH (FILLFACTOR = 80) ON [PRIMARY]",
+                Enumerable.Empty<string>(),
+                Enumerable.Empty<string>(),
+                dbModel =>
+                {
+                    var index = Assert.Single(dbModel.Tables.Single().Indexes);
+                    Assert.Equal(new[] { "Name" }, index.Columns.Select(ic => ic.Name).ToList());
+                    Assert.Equal(80, index[SqlServerAnnotationNames.FillFactor]);
+                },
+                "DROP TABLE IndexFillFactor;");
+        }
+
         #endregion
 
         #region ForeignKeyFacets
@@ -2239,12 +2377,11 @@ CREATE TABLE Blank (
                 {
                     Assert.Empty(dbModel.Tables);
 
-                    var (_, Id, Message, _, _) = Assert.Single(Fixture.ListLoggerFactory.Log.Where(t => t.Level == LogLevel.Warning));
+                    var message = Fixture.OperationReporter.Messages.Single(m => m.Level == LogLevel.Warning).Message;
 
-                    Assert.Equal(SqlServerResources.LogMissingSchema(new TestLogger<SqlServerLoggingDefinitions>()).EventId, Id);
                     Assert.Equal(
                         SqlServerResources.LogMissingSchema(new TestLogger<SqlServerLoggingDefinitions>()).GenerateMessage("MySchema"),
-                        Message);
+                        message);  
                 },
                 "DROP TABLE Blank;");
         }
@@ -2263,12 +2400,11 @@ CREATE TABLE Blank (
                 {
                     Assert.Empty(dbModel.Tables);
 
-                    var (_, Id, Message, _, _) = Assert.Single(Fixture.ListLoggerFactory.Log.Where(t => t.Level == LogLevel.Warning));
+                    var message = Fixture.OperationReporter.Messages.Single(m => m.Level == LogLevel.Warning).Message;
 
-                    Assert.Equal(SqlServerResources.LogMissingTable(new TestLogger<SqlServerLoggingDefinitions>()).EventId, Id);
                     Assert.Equal(
                         SqlServerResources.LogMissingTable(new TestLogger<SqlServerLoggingDefinitions>()).GenerateMessage("MyTable"),
-                        Message);
+                        message);
                 },
                 "DROP TABLE Blank;");
         }
@@ -2291,14 +2427,12 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var (_, Id, Message, _, _) = Assert.Single(Fixture.ListLoggerFactory.Log.Where(t => t.Level == LogLevel.Warning));
+                    var message = Fixture.OperationReporter.Messages.Single(m => m.Level == LogLevel.Warning).Message;
 
-                    Assert.Equal(
-                        SqlServerResources.LogPrincipalTableNotInSelectionSet(new TestLogger<SqlServerLoggingDefinitions>()).EventId, Id);
                     Assert.Equal(
                         SqlServerResources.LogPrincipalTableNotInSelectionSet(new TestLogger<SqlServerLoggingDefinitions>())
                             .GenerateMessage(
-                                "MYFK", "dbo.DependentTable", "dbo.PrincipalTable"), Message);
+                                "MYFK", "dbo.DependentTable", "dbo.PrincipalTable"), message);
                 },
                 @"
 DROP TABLE DependentTable;
@@ -2318,18 +2452,55 @@ CREATE TABLE PrincipalTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var (level, _, message, _, _) = Assert.Single(
-                        Fixture.ListLoggerFactory.Log, t => t.Id == SqlServerEventId.ReflexiveConstraintIgnored);
+                    var level = Fixture.OperationReporter.Messages
+                        .Single(m => m.Message == SqlServerResources.LogReflexiveConstraintIgnored(new TestLogger<SqlServerLoggingDefinitions>())
+                            .GenerateMessage("MYFK", "dbo.PrincipalTable")).Level;
+
                     Assert.Equal(LogLevel.Debug, level);
-                    Assert.Equal(
-                        SqlServerResources.LogReflexiveConstraintIgnored(new TestLogger<SqlServerLoggingDefinitions>())
-                            .GenerateMessage("MYFK", "dbo.PrincipalTable"), message);
 
                     var table = Assert.Single(dbModel.Tables);
                     Assert.Empty(table.ForeignKeys);
                 },
                 @"
 DROP TABLE PrincipalTable;");
+        }
+
+        [ConditionalFact]
+        public void Skip_duplicate_foreign_key()
+        {
+            Test(
+                @"CREATE TABLE PrincipalTable (
+    Id int PRIMARY KEY,
+);
+
+CREATE TABLE OtherPrincipalTable (
+    Id int PRIMARY KEY,
+);
+
+CREATE TABLE DependentTable (
+    Id int PRIMARY KEY,
+    ForeignKeyId int,
+    CONSTRAINT MYFK1 FOREIGN KEY (ForeignKeyId) REFERENCES PrincipalTable(Id),
+    CONSTRAINT MYFK2 FOREIGN KEY (ForeignKeyId) REFERENCES PrincipalTable(Id),
+    CONSTRAINT MYFK3 FOREIGN KEY (ForeignKeyId) REFERENCES OtherPrincipalTable(Id),
+);",
+                Enumerable.Empty<string>(),
+                Enumerable.Empty<string>(),
+                dbModel =>
+                {
+                    var level = Fixture.OperationReporter.Messages
+                        .Single(m => m.Message == SqlServerResources.LogDuplicateForeignKeyConstraintIgnored(new TestLogger<SqlServerLoggingDefinitions>())
+                            .GenerateMessage("MYFK2", "dbo.DependentTable", "MYFK1")).Level;
+
+                    Assert.Equal(LogLevel.Warning, level);
+
+                    var table = dbModel.Tables.Single(t => t.Name == "DependentTable");
+                    Assert.Equal(2, table.ForeignKeys.Count);
+                },
+                @"
+DROP TABLE DependentTable;
+DROP TABLE PrincipalTable;
+DROP TABLE OtherPrincipalTable;");
         }
 
         #endregion
@@ -2341,17 +2512,16 @@ DROP TABLE PrincipalTable;");
             Action<DatabaseModel> asserter,
             string cleanupSql)
         {
-            Fixture.TestStore.ExecuteNonQuery(createSql);
+            if (!string.IsNullOrEmpty(createSql))
+            {
+                Fixture.TestStore.ExecuteNonQuery(createSql);
+            }
 
             try
             {
-                var databaseModelFactory = new SqlServerDatabaseModelFactory(
-                    new DiagnosticsLogger<DbLoggerCategory.Scaffolding>(
-                        Fixture.ListLoggerFactory,
-                        new LoggingOptions(),
-                        new DiagnosticListener("Fake"),
-                        new SqlServerLoggingDefinitions(),
-                        new NullDbContextLogger()));
+                var databaseModelFactory = SqlServerTestHelpers.Instance.CreateDesignServiceProvider(
+                        reporter: Fixture.OperationReporter)
+                    .CreateScope().ServiceProvider.GetRequiredService<IDatabaseModelFactory>();
 
                 var databaseModel = databaseModelFactory.Create(
                     Fixture.TestStore.ConnectionString,
@@ -2377,6 +2547,8 @@ DROP TABLE PrincipalTable;");
 
             public new SqlServerTestStore TestStore
                 => (SqlServerTestStore)base.TestStore;
+
+            public TestOperationReporter OperationReporter { get; } = new TestOperationReporter();
 
             public override async Task InitializeAsync()
             {

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Concurrent;
@@ -8,23 +8,25 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 {
     /// <summary>
-    ///     <para>
-    ///         A registry of <see cref="ValueConverter" /> instances that can be used to find
-    ///         the preferred converter to use to convert to and from a given model type
-    ///         to a type that the database provider supports.
-    ///     </para>
+    ///     A registry of <see cref="ValueConverter" /> instances that can be used to find
+    ///     the preferred converter to use to convert to and from a given model type
+    ///     to a type that the database provider supports.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class ValueConverterSelector : IValueConverterSelector
     {
         private readonly ConcurrentDictionary<(Type ModelClrType, Type ProviderClrType), ValueConverterInfo> _converters = new();
@@ -58,19 +60,19 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             typeof(float)
         };
 
+        private static readonly Type? _readOnlyIPAddressType = IPAddress.Loopback.GetType();
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValueConverterSelector" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public ValueConverterSelector(ValueConverterSelectorDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
-
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Dependencies used to create a <see cref="ValueConverterSelector" />
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ValueConverterSelectorDependencies Dependencies { get; }
 
@@ -79,15 +81,13 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     used to convert the given model type. Converters nearer the front of
         ///     the list should be used in preference to converters nearer the end.
         /// </summary>
-        /// <param name="modelClrType"> The type for which a converter is needed. </param>
-        /// <param name="providerClrType"> The database provider type to target, or null for any. </param>
-        /// <returns> The converters available. </returns>
+        /// <param name="modelClrType">The type for which a converter is needed.</param>
+        /// <param name="providerClrType">The database provider type to target, or null for any.</param>
+        /// <returns>The converters available.</returns>
         public virtual IEnumerable<ValueConverterInfo> Select(
             Type modelClrType,
             Type? providerClrType = null)
         {
-            Check.NotNull(modelClrType, nameof(modelClrType));
-
             if (modelClrType.IsEnum)
             {
                 foreach (var converterInfo in FindNumericConventions(
@@ -139,19 +139,19 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             else if (modelClrType == typeof(Guid))
             {
                 if (providerClrType == null
-                    || providerClrType == typeof(byte[]))
-                {
-                    yield return _converters.GetOrAdd(
-                        (modelClrType, typeof(byte[])),
-                        k => GuidToBytesConverter.DefaultInfo);
-                }
-
-                if (providerClrType == null
                     || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
                         k => GuidToStringConverter.DefaultInfo);
+                }
+
+                if (providerClrType == null
+                    || providerClrType == typeof(byte[]))
+                {
+                    yield return _converters.GetOrAdd(
+                        (modelClrType, typeof(byte[])),
+                        k => GuidToBytesConverter.DefaultInfo);
                 }
             }
             else if (modelClrType == typeof(byte[]))
@@ -291,7 +291,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                                 NumberToBytesConverter<long>.DefaultInfo.MappingHints));
                 }
             }
-            else if (modelClrType == typeof(IPAddress))
+            else if (modelClrType == typeof(IPAddress) || modelClrType == _readOnlyIPAddressType)
             {
                 if (providerClrType == null
                     || providerClrType == typeof(string))

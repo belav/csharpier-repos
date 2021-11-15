@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     ///     Represents a relationship where a foreign key composed of properties on the dependent entity type
     ///     references a corresponding primary or alternate key on the principal entity type.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
+    /// </remarks>
     public interface IReadOnlyForeignKey : IReadOnlyAnnotatable
     {
         /// <summary>
@@ -82,7 +85,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the skip navigations using this foreign key.
         /// </summary>
-        /// <returns> The skip navigations using this foreign key. </returns>
+        /// <returns>The skip navigations using this foreign key.</returns>
         IEnumerable<IReadOnlySkipNavigation> GetReferencingSkipNavigations()
             => PrincipalEntityType.GetSkipNavigations().Where(n => !n.IsOnDependent && n.ForeignKey == this)
                 .Concat(DeclaringEntityType.GetSkipNavigations().Where(n => n.IsOnDependent && n.ForeignKey == this));
@@ -90,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the entity type related to the given one.
         /// </summary>
-        /// <param name="entityType"> One of the entity types related by the foreign key. </param>
-        /// <returns> The entity type related to the given one. </returns>
+        /// <param name="entityType">One of the entity types related by the foreign key.</param>
+        /// <returns>The entity type related to the given one.</returns>
         IReadOnlyEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
         {
             if (DeclaringEntityType != entityType
@@ -124,7 +127,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Returns a value indicating whether the foreign key is defined on the primary key and pointing to the same primary key.
         /// </summary>
-        /// <returns> A value indicating whether the foreign key is defined on the primary key and pointing to the same primary key. </returns>
+        /// <returns>A value indicating whether the foreign key is defined on the primary key and pointing to the same primary key.</returns>
         bool IsBaseLinking()
         {
             var primaryKey = DeclaringEntityType.FindPrimaryKey();
@@ -141,9 +144,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///         It is designed for debugging only and may change arbitrarily between releases.
         ///     </para>
         /// </summary>
-        /// <param name="options"> Options for generating the string. </param>
-        /// <param name="indent"> The number of indent spaces to use before each new line. </param>
-        /// <returns> A human-readable representation. </returns>
+        /// <param name="options">Options for generating the string.</param>
+        /// <param name="indent">The number of indent spaces to use before each new line.</param>
+        /// <returns>A human-readable representation.</returns>
         string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
         {
             var builder = new StringBuilder();
@@ -159,11 +162,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             builder
                 .Append(DeclaringEntityType.DisplayName())
-                .Append(" ")
+                .Append(' ')
                 .Append(Properties.Format())
                 .Append(" -> ")
                 .Append(PrincipalEntityType.DisplayName())
-                .Append(" ")
+                .Append(' ')
                 .Append(PrincipalKey.Properties.Format());
 
             if (IsUnique)
@@ -189,7 +192,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             if (DeleteBehavior != DeleteBehavior.NoAction)
             {
                 builder
-                    .Append(" ")
+                    .Append(' ')
                     .Append(DeleteBehavior);
             }
 

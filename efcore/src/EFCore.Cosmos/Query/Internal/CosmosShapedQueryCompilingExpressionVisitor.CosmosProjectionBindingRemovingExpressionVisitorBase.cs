@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -79,8 +79,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             protected override Expression VisitBinary(BinaryExpression binaryExpression)
             {
-                Check.NotNull(binaryExpression, nameof(binaryExpression));
-
                 if (binaryExpression.NodeType == ExpressionType.Assign)
                 {
                     if (binaryExpression.Left is ParameterExpression parameterExpression)
@@ -180,8 +178,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
             {
-                Check.NotNull(methodCallExpression, nameof(methodCallExpression));
-
                 var method = methodCallExpression.Method;
                 var genericMethod = method.IsGenericMethod ? method.GetGenericMethodDefinition() : null;
                 if (genericMethod == EntityFrameworkCore.Infrastructure.ExpressionExtensions.ValueBufferTryReadValueMethod)
@@ -234,8 +230,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             protected override Expression VisitExtension(Expression extensionExpression)
             {
-                Check.NotNull(extensionExpression, nameof(extensionExpression));
-
                 switch (extensionExpression)
                 {
                     case ProjectionBindingExpression projectionBindingExpression:
@@ -248,7 +242,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             projectionBindingExpression.Type, (projection.Expression as SqlExpression)?.TypeMapping);
                     }
 
+#pragma warning disable CS0618 // Type or member is obsolete
                     case CollectionShaperExpression collectionShaperExpression:
+#pragma warning restore CS0618 // Type or member is obsolete
                     {
                         ObjectArrayProjectionExpression objectArrayProjection;
                         switch (collectionShaperExpression.Projection)
@@ -712,13 +708,31 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         body = Expression.Convert(body, type);
                     }
 
+                    Expression replaceExpression;
+                    if (converter?.ConvertsNulls == true)
+                    {
+                        replaceExpression = ReplacingExpressionVisitor.Replace(
+                            converter.ConvertFromProviderExpression.Parameters.Single(),
+                            Expression.Default(converter.ProviderClrType),
+                            converter.ConvertFromProviderExpression.Body);
+
+                        if (replaceExpression.Type != type)
+                        {
+                            replaceExpression = Expression.Convert(replaceExpression, type);
+                        }
+                    }
+                    else
+                    {
+                        replaceExpression = Expression.Default(type);
+                    }
+
                     body = Expression.Condition(
                         Expression.OrElse(
                             Expression.Equal(jTokenParameter, Expression.Default(typeof(JToken))),
                             Expression.Equal(
                                 Expression.MakeMemberAccess(jTokenParameter, _jTokenTypePropertyInfo),
                                 Expression.Constant(JTokenType.Null))),
-                        Expression.Default(type),
+                        replaceExpression,
                         body);
 
                     valueExpression = Expression.Invoke(Expression.Lambda(body, jTokenParameter), jTokenExpression);

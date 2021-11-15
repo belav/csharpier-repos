@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -116,12 +116,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         }
 
         /// <summary>
-        ///     <para>
-        ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///         any release. You should only use it directly in your code with extreme caution and knowing that
-        ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-        ///     </para>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        /// <remarks>
         ///     <para>
         ///         Re-writes the registration for the given service such that if the implementation type
         ///         implements <see cref="IPatchServiceInjectionSite" />, then
@@ -133,9 +133,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         ///         This mechanism should only be used to allow new services to be injected in a patch or
         ///         point release without making binary breaking changes.
         ///     </para>
-        /// </summary>
-        /// <typeparam name="TService"> The service contract. </typeparam>
-        /// <returns> The map, such that further calls can be chained. </returns>
+        /// </remarks>
+        /// <typeparam name="TService">The service contract.</typeparam>
+        /// <returns>The map, such that further calls can be chained.</returns>
         public virtual InternalServiceCollectionMap DoPatchInjection<TService>()
             where TService : class
         {

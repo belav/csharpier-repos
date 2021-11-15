@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -24,17 +23,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="RowNumberExpression" /> class.
         /// </summary>
-        /// <param name="partitions"> A list expressions to partition by. </param>
-        /// <param name="orderings"> A list of ordering expressions to order by. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="partitions">A list expressions to partition by.</param>
+        /// <param name="orderings">A list of ordering expressions to order by.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public RowNumberExpression(
             IReadOnlyList<SqlExpression>? partitions,
             IReadOnlyList<OrderingExpression> orderings,
             RelationalTypeMapping? typeMapping)
             : base(typeof(long), typeMapping)
         {
-            Check.NotEmpty(orderings, nameof(orderings));
-
             Partitions = partitions ?? Array.Empty<SqlExpression>();
             Orderings = orderings;
         }
@@ -52,8 +49,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var changed = false;
             var partitions = new List<SqlExpression>();
             foreach (var partition in Partitions)
@@ -80,27 +75,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="partitions"> The <see cref="Partitions" /> property of the result. </param>
-        /// <param name="orderings"> The <see cref="Orderings" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="partitions">The <see cref="Partitions" /> property of the result.</param>
+        /// <param name="orderings">The <see cref="Orderings" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual RowNumberExpression Update(
             IReadOnlyList<SqlExpression>? partitions,
             IReadOnlyList<OrderingExpression> orderings)
-        {
-            Check.NotNull(orderings, nameof(orderings));
-
-            return ((Partitions == null && partitions == null)
+            => ((Partitions == null && partitions == null)
                     || (Partitions != null && partitions != null && Partitions.SequenceEqual(partitions)))
                 && Orderings.SequenceEqual(orderings)
                     ? this
                     : new RowNumberExpression(partitions, orderings, TypeMapping);
-        }
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.Append("ROW_NUMBER() OVER(");
             if (Partitions.Any())
             {

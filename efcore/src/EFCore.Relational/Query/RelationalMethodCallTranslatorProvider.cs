@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -10,22 +10,20 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
     /// <summary>
-    ///     <para>
-    ///         Provides translations for LINQ <see cref="MethodCallExpression" /> expressions by dispatching to multiple specialized
-    ///         method call translators.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-    ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-    ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
-    ///     </para>
+    ///     Provides translations for LINQ <see cref="MethodCallExpression" /> expressions by dispatching to multiple specialized
+    ///     method call translators.
     /// </summary>
+    /// <remarks>
+    ///     The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
+    ///     <see cref="DbContext" /> instance will use its own instance of this service.
+    ///     The implementation may depend on other services registered with any lifetime.
+    ///     The implementation does not need to be thread-safe.
+    /// </remarks>
     public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvider
     {
         private readonly List<IMethodCallTranslator> _plugins = new();
@@ -35,10 +33,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalMethodCallTranslatorProvider" /> class.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
         public RelationalMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
         {
-            Check.NotNull(dependencies, nameof(dependencies));
+            Dependencies = dependencies;
 
             _plugins.AddRange(dependencies.Plugins.SelectMany(p => p.Translators));
 
@@ -61,6 +59,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
+        /// <summary>
+        ///     Dependencies for this service.
+        /// </summary>
+        protected virtual RelationalMethodCallTranslatorProviderDependencies Dependencies { get; }
+
         /// <inheritdoc />
         public virtual SqlExpression? Translate(
             IModel model,
@@ -69,11 +72,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             IReadOnlyList<SqlExpression> arguments,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger)
         {
-            Check.NotNull(model, nameof(model));
-            Check.NotNull(method, nameof(method));
-            Check.NotNull(arguments, nameof(arguments));
-            Check.NotNull(logger, nameof(logger));
-
             var dbFunction = model.FindDbFunction(method);
             if (dbFunction != null)
             {
@@ -109,12 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     Adds additional translators which will take priority over existing registered translators.
         /// </summary>
-        /// <param name="translators"> Translators to add. </param>
+        /// <param name="translators">Translators to add.</param>
         protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators)
-        {
-            Check.NotNull(translators, nameof(translators));
-
-            _translators.InsertRange(0, translators);
-        }
+            => _translators.InsertRange(0, translators);
     }
 }

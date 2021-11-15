@@ -1,9 +1,8 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -21,12 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="OrderingExpression" /> class.
         /// </summary>
-        /// <param name="expression"> An expression used for ordering. </param>
-        /// <param name="ascending"> A value indicating if the ordering is ascending. </param>
+        /// <param name="expression">An expression used for ordering.</param>
+        /// <param name="ascending">A value indicating if the ordering is ascending.</param>
         public OrderingExpression(SqlExpression expression, bool ascending)
         {
-            Check.NotNull(expression, nameof(expression));
-
             Expression = expression;
             IsAscending = ascending;
         }
@@ -51,32 +48,22 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
-        {
-            Check.NotNull(visitor, nameof(visitor));
-
-            return Update((SqlExpression)visitor.Visit(Expression));
-        }
+            => Update((SqlExpression)visitor.Visit(Expression));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="expression"> The <see cref="Expression" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="expression">The <see cref="Expression" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual OrderingExpression Update(SqlExpression expression)
-        {
-            Check.NotNull(expression, nameof(expression));
-
-            return expression != Expression
+            => expression != Expression
                 ? new OrderingExpression(expression, IsAscending)
                 : this;
-        }
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.Visit(Expression);
 
             expressionPrinter.Append(IsAscending ? " ASC" : " DESC");

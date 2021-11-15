@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -186,12 +186,16 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
                 }
             }
 
-            public override long GetServiceProviderHashCode()
-                => Extension._databaseRoot?.GetHashCode() ?? 0L;
+            public override int GetServiceProviderHashCode()
+                => Extension._databaseRoot?.GetHashCode() ?? 0;
+
+            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+                => other is ExtensionInfo otherInfo
+                    && Extension._databaseRoot == otherInfo.Extension._databaseRoot;
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
                 => debugInfo["InMemoryDatabase:DatabaseRoot"]
-                    = (Extension._databaseRoot?.GetHashCode() ?? 0L).ToString(CultureInfo.InvariantCulture);
+                    = (Extension._databaseRoot?.GetHashCode() ?? 0).ToString(CultureInfo.InvariantCulture);
         }
     }
 }

@@ -1,9 +1,10 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 #nullable enable
 
@@ -30,6 +31,23 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             this IReadOnlyDictionary<TKey, TValue> source,
             TKey key)
             => !source.TryGetValue(key, out var value) ? default : value;
+
+        public static bool TryGetAndRemove<TKey, TValue, TReturn>(
+            this IDictionary<TKey, TValue> source,
+            TKey key,
+            [NotNullWhen(true)] out TReturn annotationValue)
+        {
+            if (source.TryGetValue(key, out var value)
+                && value != null)
+            {
+                source.Remove(key);
+                annotationValue = (TReturn)(object)value;
+                return true;
+            }
+
+            annotationValue = default!;
+            return false;
+        }
 
         public static void Remove<TKey, TValue>(
             this IDictionary<TKey, TValue> source,

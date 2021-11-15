@@ -1,11 +1,10 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 {
@@ -30,8 +29,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SkipTakeCollapsingExpressionVisitor(ISqlExpressionFactory sqlExpressionFactory)
         {
-            Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
-
             _sqlExpressionFactory = sqlExpressionFactory;
             _parameterValues = null!;
         }
@@ -47,9 +44,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IReadOnlyDictionary<string, object?> parametersValues,
             out bool canCache)
         {
-            Check.NotNull(selectExpression, nameof(selectExpression));
-            Check.NotNull(parametersValues, nameof(parametersValues));
-
             _parameterValues = parametersValues;
             _canCache = true;
 
@@ -89,7 +83,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     switch (sqlExpression)
                     {
                         case SqlConstantExpression constant
-                        when constant.Value is int intValue:
+                            when constant.Value is int intValue:
                             return intValue == 0;
                         case SqlParameterExpression parameter:
                             _canCache = false;

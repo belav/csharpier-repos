@@ -1,54 +1,53 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+public class ItemCollectionTest
 {
-    public class ItemCollectionTest
+    [Fact]
+    public void Get_MissingValueReturnsNull()
     {
-        [Fact]
-        public void Get_MissingValueReturnsNull()
-        {
-            // Arrange
-            var items = new ItemCollection();
+        // Arrange
+        var items = new ItemCollection();
 
-            // Act
-            var value = items["foo"];
+        // Act
+        var value = items["foo"];
 
-            // Assert
-            Assert.Null(value);
-        }
+        // Assert
+        Assert.Null(value);
+    }
 
-        [Fact]
-        public void GetAndSet_ReturnsValue()
-        {
-            // Arrange
-            var items = new ItemCollection();
+    [Fact]
+    public void GetAndSet_ReturnsValue()
+    {
+        // Arrange
+        var items = new ItemCollection();
 
-            var expected = "bar";
-            items["foo"] = expected;
+        var expected = "bar";
+        items["foo"] = expected;
 
-            // Act
-            var value = items["foo"];
+        // Act
+        var value = items["foo"];
 
-            // Assert
-            Assert.Same(expected, value);
-        }
+        // Assert
+        Assert.Same(expected, value);
+    }
 
-        [Fact]
-        public void Set_CanSetValueToNull()
-        {
-            // Arrange
-            var items = new ItemCollection();
-            
-            items["foo"] = "bar";
+    [Fact]
+    public void Set_CanSetValueToNull()
+    {
+        // Arrange
+        var items = new ItemCollection();
 
-            // Act
-            items["foo"] = null;
+        items["foo"] = "bar";
 
-            // Assert
-            Assert.Null(items["foo"]);
-        }
+        // Act
+        items["foo"] = null;
+
+        // Assert
+        Assert.Null(items["foo"]);
     }
 }

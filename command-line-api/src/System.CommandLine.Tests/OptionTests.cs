@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.CommandLine.Tests
 {
-    public class OptionTests : SymbolTests
+    public partial class OptionTests : SymbolTests
     {
         [Fact]
         public void When_an_option_has_only_one_alias_then_that_alias_is_its_name()
@@ -64,7 +64,7 @@ namespace System.CommandLine.Tests
 
             option.AddAlias("-a");
 
-            option.HasAliasIgnorePrefix("a").Should().BeTrue();
+            option.HasAliasIgnoringPrefix("a").Should().BeTrue();
             option.HasAlias("-a").Should().BeTrue();
         }
 
@@ -89,7 +89,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option(new[] { "-o", "--option" });
 
-            option.HasAliasIgnorePrefix("o").Should().BeTrue();
+            option.HasAliasIgnoringPrefix("o").Should().BeTrue();
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option(new[] { "-o", "--option" });
 
-            option.HasAliasIgnorePrefix("option").Should().BeTrue();
+            option.HasAliasIgnoringPrefix("option").Should().BeTrue();
         }
 
         [Fact]
@@ -207,17 +207,22 @@ namespace System.CommandLine.Tests
         [InlineData("/")]
         public void When_options_use_different_prefixes_they_still_work(string prefix)
         {
+            var optionA = new Option<string>(prefix + "a");
+            var optionB = new Option(prefix + "b");
+            var optionC = new Option<string>(prefix + "c");
+
             var rootCommand = new RootCommand
                               {
-                                  new Option<string>(prefix + "a"),
-                                  new Option(prefix + "b"),
-                                  new Option<string>(prefix + "c")
+                                  optionA,
+                                  optionB,
+                                  optionC
                               };
+
             var result = rootCommand.Parse(prefix + "c value-for-c " + prefix + "a value-for-a");
 
-            result.ValueForOption(prefix + "a").Should().Be("value-for-a");
-            result.ValueForOption(prefix + "c").Should().Be("value-for-c");
-            result.HasOption(prefix + "b").Should().BeFalse();
+            result.GetValueForOption(optionA).Should().Be("value-for-a");
+            result.HasOption(optionB).Should().BeFalse();
+            result.GetValueForOption(optionC).Should().Be("value-for-c");
         }
 
         [Fact]
@@ -235,7 +240,7 @@ namespace System.CommandLine.Tests
         {
             var command = new Option("--alias", arity: ArgumentArity.ZeroOrOne);
 
-            command.ArgumentHelpName.Should().Be("alias");
+            command.Name.Should().Be("alias");
         }
 
         [Fact]
@@ -250,19 +255,49 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
-        public void Option_T_default_value_can_be_set()
+        public void Option_T_default_value_can_be_set_via_the_constructor()
         {
             var option = new Option<int>(
                 "-x",
                 parseArgument: parsed => 123,
                 isDefault: true);
 
-            var result = option
-                         .Parse("")
-                         .FindResultFor(option)
-                         .GetValueOrDefault()
-                         .Should()
-                         .Be(123);
+            option
+                .Parse("")
+                .FindResultFor(option)
+                .GetValueOrDefault()
+                .Should()
+                .Be(123);
+        }
+
+        [Fact]
+        public void Option_T_default_value_can_be_set_after_instantiation()
+        {
+            var option = new Option<int>("-x");
+
+            option.SetDefaultValue(123);
+
+            option
+                .Parse("")
+                .FindResultFor(option)
+                .GetValueOrDefault()
+                .Should()
+                .Be(123);
+        }
+        
+        [Fact]
+        public void Option_T_default_value_factory_can_be_set_after_instantiation()
+        {
+            var option = new Option<int>("-x");
+
+            option.SetDefaultValueFactory(() => 123);
+
+            option
+                .Parse("")
+                .FindResultFor(option)
+                .GetValueOrDefault()
+                .Should()
+                .Be(123);
         }
 
         [Fact]
@@ -286,7 +321,7 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
-        public void Option_of_string_defaults_to_empty_when_not_specified()
+        public void Option_of_string_defaults_to_null_when_not_specified()
         {
             var option = new Option<string>("-x");
 
@@ -294,9 +329,9 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
-                .BeEmpty();
+                .BeNull();
         }
 
         [Fact]
@@ -308,7 +343,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse(); 
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -322,7 +357,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -336,7 +371,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -350,7 +385,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -363,7 +398,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -376,7 +411,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -389,7 +424,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
         }
@@ -403,36 +438,9 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.ValueForOption(option)
+            result.GetValueForOption(option)
                 .Should()
                 .BeEmpty();
-        }
-
-        [Fact]
-        public void Single_option_arg_is_matched_when_disallowing_multiple_args_per_option_token()
-        {
-            var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
-            var command = new Command("the-command") { option };
-
-            var result = command.Parse("--option 1 2");
-
-            var optionResult = result.ValueForOption(option);
-
-            optionResult.Should().BeEquivalentTo(new[] { "1" });
-            result.UnmatchedTokens.Should().BeEquivalentTo(new[] { "2" });
-        }
-
-        [Fact]
-        public void Multiple_option_args_are_matched_with_multiple_option_tokens_when_disallowing_multiple_args_per_option_token()
-        {
-            var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
-            var command = new Command("the-command") { option };
-
-            var result = command.Parse("--option 1 --option 2");
-
-            var optionResult = result.ValueForOption(option);
-
-            optionResult.Should().BeEquivalentTo(new[] { "1", "2" });
         }
 
         [Fact]
@@ -457,7 +465,7 @@ namespace System.CommandLine.Tests
 
             var parseResult = option.Parse(parseInput);
 
-            parseResult.ValueForOption(option).Should().Be("value");
+            parseResult.GetValueForOption(option).Should().Be("value");
         }
 
         [Fact]
@@ -468,11 +476,27 @@ namespace System.CommandLine.Tests
             var result = option.Parse("");
 
             result.HasOption(option)
-                  .Should()
-                  .BeFalse();
-            result.ValueForOption(option)
-                  .Should()
-                  .BeFalse();
+                .Should()
+                .BeFalse();
+            result.GetValueForOption(option)
+                .Should()
+                .BeFalse();
+        }
+
+        [Fact]
+        public void Arity_of_non_generic_option_defaults_to_zero()
+        {
+            var option = new Option("-x");
+
+            option.Arity.Should().BeEquivalentTo(ArgumentArity.Zero);
+        }
+
+        [Fact]
+        public void ArgumentType_of_non_generic_option_defaults_to_bool()
+        {
+            var option = new Option("-x");
+
+            option.ValueType.Should().Be(typeof(bool));
         }
 
         protected override Symbol CreateSymbol(string name) => new Option(name);

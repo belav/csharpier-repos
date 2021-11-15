@@ -1,31 +1,30 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
-namespace Microsoft.AspNetCore.Razor.Language
+namespace Microsoft.AspNetCore.Razor.Language;
+
+internal class TagHelperSpanVisitor : SyntaxWalker
 {
-    internal class TagHelperSpanVisitor : SyntaxWalker
+    private readonly RazorSourceDocument _source;
+    private readonly List<TagHelperSpanInternal> _spans;
+
+    public TagHelperSpanVisitor(RazorSourceDocument source)
     {
-        private RazorSourceDocument _source;
-        private List<TagHelperSpanInternal> _spans;
+        _source = source;
+        _spans = new List<TagHelperSpanInternal>();
+    }
 
-        public TagHelperSpanVisitor(RazorSourceDocument source)
-        {
-            _source = source;
-            _spans = new List<TagHelperSpanInternal>();
-        }
+    public IReadOnlyList<TagHelperSpanInternal> TagHelperSpans => _spans;
 
-        public IReadOnlyList<TagHelperSpanInternal> TagHelperSpans => _spans;
+    public override void VisitMarkupTagHelperElement(MarkupTagHelperElementSyntax node)
+    {
+        var span = new TagHelperSpanInternal(node.GetSourceSpan(_source), node.TagHelperInfo.BindingResult);
+        _spans.Add(span);
 
-        public override void VisitMarkupTagHelperElement(MarkupTagHelperElementSyntax node)
-        {
-            var span = new TagHelperSpanInternal(node.GetSourceSpan(_source), node.TagHelperInfo.BindingResult);
-            _spans.Add(span);
-
-            base.VisitMarkupTagHelperElement(node);
-        }
+        base.VisitMarkupTagHelperElement(node);
     }
 }

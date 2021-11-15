@@ -1,5 +1,5 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -7,12 +7,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.TestUtilities;
+using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -44,6 +43,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         protected class MyBaseContext : DbContext
         {
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            {
+                optionsBuilder.UseFakeRelational();
+            }
+
             public static readonly string[] FunctionNames =
             {
                 nameof(StaticPublicBase),
@@ -117,6 +121,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         protected class MyDerivedContext : MyBaseContext
         {
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder.Entity<Foo>().HasNoKey();
+            }
+
             public static new readonly string[] FunctionNames =
             {
                 nameof(StaticPublicDerived),
@@ -325,8 +334,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [ConditionalFact]
         public virtual void Finds_DbFunctions_on_DbContext()
         {
-            var model = RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<IModelRuntimeInitializer>()
-                .Initialize(GetModelBuilder(new MyDerivedContext()).FinalizeModel(), designTime: false, validationLogger: null);
+            var model = new MyDerivedContext().Model;
 
             foreach (var function in MyBaseContext.FunctionNames)
             {
@@ -498,15 +506,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var modelBuilder = GetModelBuilder();
 
             var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi)
-                .HasName("foo")
-                .HasSchema("bar");
+                .HasName(null)
+                .HasSchema(null);
 
             var dbFunc = dbFuncBuilder.Metadata;
+
+            Assert.Equal(MethodBmi.Name, dbFunc.Name);
+            Assert.Null(dbFunc.Schema);
+
+            dbFuncBuilder.HasName("foo");
+            dbFuncBuilder.HasSchema("BAR");
 
             modelBuilder.FinalizeModel();
 
             Assert.Equal("foo", dbFunc.Name);
-            Assert.Equal("bar", dbFunc.Schema);
+            Assert.Equal("BAR", dbFunc.Schema);
             Assert.Equal(typeof(int), dbFunc.MethodInfo.ReturnType);
         }
 
@@ -515,14 +529,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            modelBuilder.HasDbFunction(MethodBmi, funcBuilder => funcBuilder.HasName("foo").HasSchema("bar"));
+            modelBuilder.HasDbFunction(MethodBmi, funcBuilder => funcBuilder.HasName(null).HasSchema(null));
 
-            var dbFunc = modelBuilder.HasDbFunction(MethodBmi).Metadata;
+            var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi);
+            var dbFunc = dbFuncBuilder.Metadata;
+
+            Assert.Equal(MethodBmi.Name, dbFunc.Name);
+            Assert.Null(dbFunc.Schema);
+
+            dbFuncBuilder.HasName("foo");
+            dbFuncBuilder.HasSchema("BAR");
 
             modelBuilder.FinalizeModel();
 
             Assert.Equal("foo", dbFunc.Name);
-            Assert.Equal("bar", dbFunc.Schema);
+            Assert.Equal("BAR", dbFunc.Schema);
             Assert.Equal(typeof(int), dbFunc.MethodInfo.ReturnType);
         }
 
@@ -547,7 +568,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             var dbFuncBuilder = modelBuilder.HasDbFunction(MethodAmi).HasStoreType("int(8)");
 
-            modelBuilder.FinalizeModel();
+            modelBuilder.FinalizeModel(skipValidation: true);
 
             Assert.Equal("int(8)", dbFuncBuilder.Metadata.StoreType);
         }
@@ -679,8 +700,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             var functionName = modelBuilder.HasDbFunction(queryableNoParams).Metadata.ModelName;
 
-            var model = RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<IModelRuntimeInitializer>()
-                .Initialize(modelBuilder.FinalizeModel(), designTime: false, validationLogger: null);
+            var model = modelBuilder.FinalizeModel(skipValidation: true);
 
             var function = model.FindDbFunction(functionName);
             var entityType = model.FindEntityType(typeof(Foo));
@@ -805,7 +825,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             dbFuncBuilder.HasParameter("c").HasStoreType("varchar(max)");
 
-            modelBuilder.FinalizeModel();
+            modelBuilder.FinalizeModel(skipValidation: true);
 
             Assert.Equal(2, dbFunc.Parameters.Count);
 
@@ -860,29 +880,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     () => dbFunction.Translation = args => new SqlFragmentExpression("Empty")).Message);
         }
 
-        private ModelBuilder GetModelBuilder(DbContext dbContext = null)
-        {
-            if (dbContext == null)
-            {
-                return RelationalTestHelpers.Instance.CreateConventionBuilder();
-            }
-
-            var conventionSet = new ConventionSet();
-
-            var dependencies = CreateDependencies().With(new CurrentDbContext(dbContext));
-            var relationalDependencies = CreateRelationalDependencies();
-            var dbFunctionAttributeConvention = new RelationalDbFunctionAttributeConvention(dependencies, relationalDependencies);
-            conventionSet.ModelInitializedConventions.Add(dbFunctionAttributeConvention);
-            conventionSet.ModelFinalizingConventions.Add(dbFunctionAttributeConvention);
-            conventionSet.ModelFinalizingConventions.Add(new TableValuedDbFunctionConvention(dependencies, relationalDependencies));
-
-            return new ModelBuilder(conventionSet);
-        }
-
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
-
-        private RelationalConventionSetBuilderDependencies CreateRelationalDependencies()
-            => RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<RelationalConventionSetBuilderDependencies>();
+        private TestHelpers.TestModelBuilder GetModelBuilder()
+            => RelationalTestHelpers.Instance.CreateConventionBuilder();
     }
 }

@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -102,18 +102,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Compares one id to another id to see if they represent the same type.
         /// </summary>
-        /// <param name="left"> The first id. </param>
-        /// <param name="right"> The second id. </param>
-        /// <returns> <see langword="true" /> if they represent the same type; <see langword="false" /> otherwise. </returns>
+        /// <param name="left">The first id.</param>
+        /// <param name="right">The second id.</param>
+        /// <returns><see langword="true" /> if they represent the same type; <see langword="false" /> otherwise.</returns>
         public static bool operator ==(TypeIdentity left, TypeIdentity right)
             => left.Equals(right);
 
         /// <summary>
         ///     Compares one id to another id to see if they represent different types.
         /// </summary>
-        /// <param name="left"> The first id. </param>
-        /// <param name="right"> The second id. </param>
-        /// <returns> <see langword="true" /> if they represent different types; <see langword="false" /> otherwise. </returns>
+        /// <param name="left">The first id.</param>
+        /// <param name="right">The second id.</param>
+        /// <returns><see langword="true" /> if they represent different types; <see langword="false" /> otherwise.</returns>
         public static bool operator !=(TypeIdentity left, TypeIdentity right)
             => !(left == right);
     }

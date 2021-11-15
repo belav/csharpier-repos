@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.EntityFrameworkCore.Update.Internal;
-using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,9 +30,9 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.EntityFrameworkCore.Infrastructure
 {
     /// <summary>
-    ///     <para>
-    ///         A builder API designed for database providers to use when registering services.
-    ///     </para>
+    ///     A builder API designed for database providers to use when registering services.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         Providers should create an instance of this class, use its methods to register
     ///         services, and then call <see cref="TryAddCoreServices" /> to fill out the remaining Entity
@@ -47,21 +46,23 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         may register a service with a different scope, but great care must be taken that all its dependencies
     ///         can handle the new scope, and that it does not cause issue for services that depend on it.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public class EntityFrameworkServicesBuilder
     {
         /// <summary>
-        ///     <para>
-        ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///         any release. You should only use it directly in your code with extreme caution and knowing that
-        ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-        ///     </para>
-        ///     <para>
-        ///         This dictionary is exposed for testing and provider-validation only.
-        ///         It should not be used from application code.
-        ///     </para>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        /// <remarks>
+        ///     This dictionary is exposed for testing and provider-validation only.
+        ///     It should not be used from application code.
+        /// </remarks>
         [EntityFrameworkInternal]
         public static readonly IDictionary<Type, ServiceCharacteristics> CoreServices
             = new Dictionary<Type, ServiceCharacteristics>
@@ -78,7 +79,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 { typeof(IModelCacheKeyFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IModelSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IModelRuntimeInitializer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IInternalEntityEntryFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IInternalEntityEntrySubscriber), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IEntityEntryGraphIterator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IValueGeneratorCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
@@ -95,10 +95,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 { typeof(IMemberClassifier), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IMemoryCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IEvaluatableExpressionFilter), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IQueryTranslationPreprocessorFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IQueryableMethodTranslatingExpressionVisitorFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IQueryTranslationPostprocessorFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-                { typeof(IShapedQueryCompilingExpressionVisitorFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+                { typeof(INavigationExpansionExtensibilityHelper), new ServiceCharacteristics(ServiceLifetime.Singleton) },
                 { typeof(IProviderConventionSetBuilder), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IConventionSetBuilder), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IDiagnosticsLogger<>), new ServiceCharacteristics(ServiceLifetime.Scoped) },
@@ -117,6 +114,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 { typeof(IDbContextServices), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IValueGeneratorSelector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IExecutionStrategyFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+                { typeof(IExecutionStrategy), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IAsyncQueryProvider), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IQueryCompiler), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(ICompiledQueryCacheKeyGenerator), new ServiceCharacteristics(ServiceLifetime.Scoped) },
@@ -132,6 +130,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 { typeof(IDbContextTransactionManager), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IQueryContextFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IQueryCompilationContextFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+                { typeof(IQueryableMethodTranslatingExpressionVisitorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+                { typeof(IQueryTranslationPreprocessorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+                { typeof(IQueryTranslationPostprocessorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+                { typeof(IShapedQueryCompilingExpressionVisitorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(IDbContextLogger), new ServiceCharacteristics(ServiceLifetime.Scoped) },
                 { typeof(ILazyLoader), new ServiceCharacteristics(ServiceLifetime.Transient) },
                 {
@@ -147,6 +149,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 { typeof(ISingletonOptions), new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true) },
                 { typeof(IConventionSetPlugin), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) },
                 { typeof(IResettableService), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) },
+                { typeof(IInterceptor), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) },
                 { typeof(IInterceptorAggregator), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) }
             };
 
@@ -155,34 +158,56 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     registration of provider services. Relational providers should use
         ///     'EntityFrameworkRelationalServicesBuilder'.
         /// </summary>
-        /// <param name="serviceCollection"> The collection to which services will be registered. </param>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceCollection">The collection to which services will be registered.</param>
         public EntityFrameworkServicesBuilder(IServiceCollection serviceCollection)
         {
-            Check.NotNull(serviceCollection, nameof(serviceCollection));
-
             ServiceCollectionMap = new ServiceCollectionMap(serviceCollection);
         }
 
         /// <summary>
         ///     Access to the underlying <see cref="ServiceCollectionMap" />.
         /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
         protected virtual ServiceCollectionMap ServiceCollectionMap { get; }
 
         /// <summary>
         ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
         /// </summary>
-        /// <param name="serviceType"> The type that defines the service API. </param>
-        /// <returns> The <see cref="ServiceCharacteristics" /> for the type. </returns>
-        /// <exception cref="InvalidOperationException"> when the type is not an EF service. </exception>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceType">The type that defines the service API.</param>
+        /// <returns>The <see cref="ServiceCharacteristics" /> for the type.</returns>
+        /// <exception cref="InvalidOperationException">when the type is not an EF service.</exception>
         protected virtual ServiceCharacteristics GetServiceCharacteristics(Type serviceType)
         {
-            if (!CoreServices.TryGetValue(serviceType, out var characteristics))
-            {
-                throw new InvalidOperationException(CoreStrings.NotAnEFService(serviceType.Name));
-            }
-
-            return characteristics;
+            var characteristics = TryGetServiceCharacteristics(serviceType);
+            return characteristics == null
+                ? throw new InvalidOperationException(CoreStrings.NotAnEFService(serviceType.Name))
+                : characteristics.Value;
         }
+
+        /// <summary>
+        ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
+        /// </summary>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceType">The type that defines the service API.</param>
+        /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if it's not an EF service.</returns>
+        protected virtual ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType)
+            => !CoreServices.TryGetValue(serviceType, out var characteristics)
+                ? null
+                : characteristics;
 
         /// <summary>
         ///     Database providers should call this method for access to the underlying
@@ -190,13 +215,25 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Note that implementations of Entity Framework services should be registered directly on the
         ///     <see cref="EntityFrameworkServicesBuilder" /> and not through this method.
         /// </summary>
-        /// <param name="serviceMap"> The underlying map to which provider services should be added.</param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceMap">The underlying map to which provider services should be added.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAddProviderSpecificServices(Action<ServiceCollectionMap> serviceMap)
         {
-            Check.NotNull(serviceMap, nameof(serviceMap));
+            ServiceCollectionMap.Validate = serviceType =>
+            {
+                if (TryGetServiceCharacteristics(serviceType) != null)
+                {
+                    throw new InvalidOperationException(CoreStrings.NotAProviderService(serviceType.Name));
+                }
+            };
 
             serviceMap(ServiceCollectionMap);
+
+            ServiceCollectionMap.Validate = null;
 
             return this;
         }
@@ -206,7 +243,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Database providers must call this method as the last step of service registration--that is,
         ///     after all provider services have been registered.
         /// </summary>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAddCoreServices()
         {
             TryAdd<IDbSetFinder, DbSetFinder>();
@@ -221,7 +262,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             TryAdd<ILoggerFactory>(p => ScopedLoggerFactory.Create(p, null));
             TryAdd<IModelSource, ModelSource>();
             TryAdd<IModelRuntimeInitializer, ModelRuntimeInitializer>();
-            TryAdd<IInternalEntityEntryFactory, InternalEntityEntryFactory>();
             TryAdd<IInternalEntityEntrySubscriber, InternalEntityEntrySubscriber>();
             TryAdd<IEntityEntryGraphIterator, EntityEntryGraphIterator>();
             TryAdd<IEntityGraphAttacher, EntityGraphAttacher>();
@@ -241,6 +281,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             TryAdd<IValueGeneratorSelector, ValueGeneratorSelector>();
             TryAdd<IModelValidator, ModelValidator>();
             TryAdd<IExecutionStrategyFactory, ExecutionStrategyFactory>();
+            TryAdd(p => p.GetRequiredService<IExecutionStrategyFactory>().Create());
             TryAdd<ICompiledQueryCache, CompiledQueryCache>();
             TryAdd<IAsyncQueryProvider, EntityQueryProvider>();
             TryAdd<IQueryCompiler, QueryCompiler>();
@@ -256,7 +297,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             TryAdd(p => GetContextServices(p).Model);
             TryAdd<IDesignTimeModel>(p => new DesignTimeModel(GetContextServices(p)));
             TryAdd(p => GetContextServices(p).CurrentContext);
-            TryAdd(p => GetContextServices(p).ContextOptions);
+            TryAdd<IDbContextOptions>(p => GetContextServices(p).ContextOptions);
             TryAdd<IResettableService, IStateManager>(p => p.GetRequiredService<IStateManager>());
             TryAdd<IResettableService, IDbContextTransactionManager>(p => p.GetRequiredService<IDbContextTransactionManager>());
             TryAdd<IEvaluatableExpressionFilter, EvaluatableExpressionFilter>();
@@ -274,6 +315,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             TryAdd<IQueryCompilationContextFactory, QueryCompilationContextFactory>();
             TryAdd<IQueryTranslationPreprocessorFactory, QueryTranslationPreprocessorFactory>();
             TryAdd<IQueryTranslationPostprocessorFactory, QueryTranslationPostprocessorFactory>();
+            TryAdd<INavigationExpansionExtensibilityHelper, NavigationExpansionExtensibilityHelper>();
 
             TryAdd(
                 p => p.GetService<IDbContextOptions>()?.FindExtension<CoreOptionsExtension>()?.DbContextLogger
@@ -295,18 +337,19 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 .AddDependencySingleton<ValueConverterSelectorDependencies>()
                 .AddDependencySingleton<EntityMaterializerSourceDependencies>()
                 .AddDependencySingleton<ShapedQueryCompilingExpressionVisitorDependencies>()
-                .AddDependencySingleton<QueryableMethodTranslatingExpressionVisitorDependencies>()
-                .AddDependencySingleton<QueryTranslationPreprocessorDependencies>()
-                .AddDependencySingleton<QueryTranslationPostprocessorDependencies>()
                 .AddDependencySingleton<EvaluatableExpressionFilterDependencies>()
                 .AddDependencySingleton<RuntimeModelDependencies>()
                 .AddDependencySingleton<ModelRuntimeInitializerDependencies>()
+                .AddDependencySingleton<NavigationExpansionExtensibilityHelperDependencies>()
                 .AddDependencyScoped<ProviderConventionSetBuilderDependencies>()
                 .AddDependencyScoped<QueryCompilationContextDependencies>()
                 .AddDependencyScoped<StateManagerDependencies>()
                 .AddDependencyScoped<ExecutionStrategyDependencies>()
                 .AddDependencyScoped<CompiledQueryCacheKeyGeneratorDependencies>()
                 .AddDependencyScoped<QueryContextDependencies>()
+                .AddDependencyScoped<QueryableMethodTranslatingExpressionVisitorDependencies>()
+                .AddDependencyScoped<QueryTranslationPreprocessorDependencies>()
+                .AddDependencyScoped<QueryTranslationPostprocessorDependencies>()
                 .AddDependencyScoped<ValueGeneratorSelectorDependencies>()
                 .AddDependencyScoped<DatabaseDependencies>()
                 .AddDependencyScoped<ModelDependencies>()
@@ -325,9 +368,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
         ///     The scope of the service is automatically defined by Entity Framework.
         /// </summary>
-        /// <typeparam name="TService"> The contract for the service. </typeparam>
-        /// <typeparam name="TImplementation"> The concrete type that implements the service. </typeparam>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <typeparam name="TService">The contract for the service.</typeparam>
+        /// <typeparam name="TImplementation">The concrete type that implements the service.</typeparam>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
@@ -337,14 +384,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
         ///     The scope of the service is automatically defined by Entity Framework.
         /// </summary>
-        /// <param name="serviceType"> The contract for the service. </param>
-        /// <param name="implementationType"> The concrete type that implements the service. </param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceType">The contract for the service.</param>
+        /// <param name="implementationType">The concrete type that implements the service.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd(Type serviceType, Type implementationType)
         {
-            Check.NotNull(serviceType, nameof(serviceType));
-            Check.NotNull(implementationType, nameof(implementationType));
-
             var characteristics = GetServiceCharacteristics(serviceType);
 
             if (characteristics.MultipleRegistrations)
@@ -363,9 +411,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds a factory for an Entity Framework service only if one has not already been registered.
         ///     The scope of the service is automatically defined by Entity Framework.
         /// </summary>
-        /// <typeparam name="TService"> The contract for the service. </typeparam>
-        /// <param name="factory"> The factory that will create the service instance. </param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <typeparam name="TService">The contract for the service.</typeparam>
+        /// <param name="factory">The factory that will create the service instance.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd<TService>(Func<IServiceProvider, TService> factory)
             where TService : class
             => TryAdd(typeof(TService), typeof(TService), factory);
@@ -374,10 +426,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds a factory for an Entity Framework service only if one has not already been registered.
         ///     The scope of the service is automatically defined by Entity Framework.
         /// </summary>
-        /// <typeparam name="TService"> The contract for the service. </typeparam>
-        /// <typeparam name="TImplementation"> The concrete type that implements the service. </typeparam>
-        /// <param name="factory"> The factory that will create the service instance. </param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <typeparam name="TService">The contract for the service.</typeparam>
+        /// <typeparam name="TImplementation">The concrete type that implements the service.</typeparam>
+        /// <param name="factory">The factory that will create the service instance.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd<TService, TImplementation>(
             Func<IServiceProvider, TImplementation> factory)
             where TService : class
@@ -388,19 +444,19 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds a factory for an Entity Framework service only if one has not already been registered.
         ///     The scope of the service is automatically defined by Entity Framework.
         /// </summary>
-        /// <param name="serviceType"> The contract for the service. </param>
-        /// <param name="implementationType"> The concrete type that implements the service. </param>
-        /// <param name="factory"> The factory that will create the service instance. </param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceType">The contract for the service.</param>
+        /// <param name="implementationType">The concrete type that implements the service.</param>
+        /// <param name="factory">The factory that will create the service instance.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd(
             Type serviceType,
             Type implementationType,
             Func<IServiceProvider, object> factory)
         {
-            Check.NotNull(serviceType, nameof(serviceType));
-            Check.NotNull(implementationType, nameof(implementationType));
-            Check.NotNull(factory, nameof(factory));
-
             var characteristics = GetServiceCharacteristics(serviceType);
 
             if (characteristics.MultipleRegistrations)
@@ -425,9 +481,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
         ///     This method can only be used for singleton services.
         /// </summary>
-        /// <typeparam name="TService"> The contract for the service. </typeparam>
-        /// <param name="implementation"> The implementation of the service. </param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <typeparam name="TService">The contract for the service.</typeparam>
+        /// <param name="implementation">The implementation of the service.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd<TService>(TService implementation)
             where TService : class
             => TryAdd(typeof(TService), implementation);
@@ -436,16 +496,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
         ///     This method can only be used for singleton services.
         /// </summary>
-        /// <param name="serviceType"> The contract for the service. </param>
-        /// <param name="implementation"> The implementation of the service. </param>
-        /// <returns> This builder, such that further calls can be chained. </returns>
+        /// <remarks>
+        ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+        ///     for more information.
+        /// </remarks>
+        /// <param name="serviceType">The contract for the service.</param>
+        /// <param name="implementation">The implementation of the service.</param>
+        /// <returns>This builder, such that further calls can be chained.</returns>
         public virtual EntityFrameworkServicesBuilder TryAdd(
             Type serviceType,
             object implementation)
         {
-            Check.NotNull(serviceType, nameof(serviceType));
-            Check.NotNull(implementation, nameof(implementation));
-
             var characteristics = GetServiceCharacteristics(serviceType);
 
             if (characteristics.Lifetime != ServiceLifetime.Singleton)

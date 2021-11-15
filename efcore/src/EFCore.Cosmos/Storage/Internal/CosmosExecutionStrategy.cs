@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Globalization;
@@ -96,7 +96,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override bool ShouldRetryOn(Exception? exception)
+        protected override bool ShouldRetryOn(Exception exception)
         {
             return exception switch
             {
@@ -122,11 +122,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var baseDelay = base.GetNextDelay(lastException);
             return baseDelay == null
                 ? null
-                : CallOnWrappedException(lastException, GetDelayFromException)
-                    ?? baseDelay;
+                : (CallOnWrappedException(lastException, GetDelayFromException)
+                    ?? baseDelay);
         }
 
-        private static TimeSpan? GetDelayFromException(Exception? exception)
+        private static TimeSpan? GetDelayFromException(Exception exception)
         {
             switch (exception)
             {

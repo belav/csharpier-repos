@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -551,7 +551,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public override int GetOrdinal(string name)
         {
-            Check.NotNull(name, "name");
             AssertReaderIsOpen();
             return _currentResultSet.GetOrdinal(name);
         }
@@ -1551,7 +1550,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     _bytes[_currentRowNumber * _byteCount + _ordinalToIndexMap[ordinal]] =
                         ((ReaderColumn<byte>)column).GetFieldValue(reader, _indexMap);
                 }
-
             }
 
             private void ReadChar(DbDataReader reader, int ordinal, ReaderColumn column)

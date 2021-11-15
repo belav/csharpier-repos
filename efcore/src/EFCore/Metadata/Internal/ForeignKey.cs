@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -57,11 +57,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EntityType principalEntityType,
             ConfigurationSource configurationSource)
         {
-            Check.NotEmpty(dependentProperties, nameof(dependentProperties));
-            Check.HasNoNulls(dependentProperties, nameof(dependentProperties));
-            Check.NotNull(principalKey, nameof(principalKey));
-            Check.NotNull(principalEntityType, nameof(principalEntityType));
-
             Validate(dependentProperties, principalKey, dependentEntityType, principalEntityType);
 
             Properties = dependentProperties;
@@ -122,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalForeignKeyBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -149,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool IsReadOnly => DeclaringEntityType.Model.IsReadOnly;
+        public override bool IsReadOnly
+            => DeclaringEntityType.Model.IsReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -157,7 +154,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SortedSet<SkipNavigation>? ReferencingSkipNavigations { get; set; }
+        public virtual ISet<SkipNavigation>? ReferencingSkipNavigations { get; set; }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -195,10 +192,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
         /// </summary>
-        /// <param name="name"> The key of the set annotation. </param>
-        /// <param name="annotation"> The annotation set. </param>
-        /// <param name="oldAnnotation"> The old annotation. </param>
-        /// <returns> The annotation that was set. </returns>
+        /// <param name="name">The key of the set annotation.</param>
+        /// <param name="annotation">The annotation set.</param>
+        /// <param name="oldAnnotation">The old annotation.</param>
+        /// <returns>The annotation that was set.</returns>
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
@@ -218,10 +215,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             EnsureMutable();
 
-            Validate(properties, principalKey, DeclaringEntityType, PrincipalEntityType);
-
             var oldProperties = Properties;
             var oldPrincipalKey = PrincipalKey;
+
+            if (oldProperties.SequenceEqual(properties)
+                && oldPrincipalKey == principalKey)
+            {
+                if (configurationSource != null)
+                {
+                    UpdatePropertiesConfigurationSource(configurationSource.Value);
+                    UpdatePrincipalKeyConfigurationSource(configurationSource.Value);
+                }
+
+                return oldProperties;
+            }
+
+            Validate(properties, principalKey, DeclaringEntityType, PrincipalEntityType);
 
             DeclaringEntityType.OnForeignKeyUpdating(this);
 
@@ -351,6 +360,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public virtual Navigation? SetDependentToPrincipal(
+            MemberIdentity? property,
+            ConfigurationSource configurationSource)
+            => Navigation(property, configurationSource, pointsToPrincipal: true);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         [DebuggerStepThrough]
         public virtual ConfigurationSource? GetDependentToPrincipalConfigurationSource()
             => _dependentToPrincipalConfigurationSource;
@@ -396,6 +416,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public virtual Navigation? SetPrincipalToDependent(MemberIdentity? property, ConfigurationSource configurationSource)
+            => Navigation(property, configurationSource, pointsToPrincipal: false);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         [DebuggerStepThrough]
         public virtual ConfigurationSource? GetPrincipalToDependentConfigurationSource()
             => _principalToDependentConfigurationSource;
@@ -423,23 +452,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EnsureMutable();
 
             var name = propertyIdentity?.Name;
-            if (pointsToPrincipal
-                && PrincipalEntityType.IsKeyless)
+            if (name != null)
             {
-                throw new InvalidOperationException(
-                    CoreStrings.NavigationToKeylessType(name, PrincipalEntityType.DisplayName()));
-            }
+                if (pointsToPrincipal
+                    && PrincipalEntityType.IsKeyless)
+                {
+                    throw new InvalidOperationException(
+                        CoreStrings.NavigationToKeylessType(name, PrincipalEntityType.DisplayName()));
+                }
 
-            if (!pointsToPrincipal
-                && DeclaringEntityType.IsKeyless)
-            {
-                throw new InvalidOperationException(
-                    CoreStrings.NavigationToKeylessType(name, DeclaringEntityType.DisplayName()));
+                if (!pointsToPrincipal
+                    && DeclaringEntityType.IsKeyless)
+                {
+                    throw new InvalidOperationException(
+                        CoreStrings.NavigationToKeylessType(name, DeclaringEntityType.DisplayName()));
+                }
             }
 
             var oldNavigation = pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
             if (name == oldNavigation?.Name)
             {
+                var oldConfigurationSource = pointsToPrincipal
+                    ? _dependentToPrincipalConfigurationSource
+                    : _principalToDependentConfigurationSource;
+
                 if (pointsToPrincipal)
                 {
                     UpdateDependentToPrincipalConfigurationSource(configurationSource);
@@ -449,7 +485,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     UpdatePrincipalToDependentConfigurationSource(configurationSource);
                 }
 
+                if (name == null
+                    && configurationSource.OverridesStrictly(oldConfigurationSource))
+                {
+                    DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+                }
+
                 return oldNavigation!;
+            }
+
+            if (name == null
+                && IsOwnership
+                && !pointsToPrincipal)
+            {
+                throw new InvalidOperationException(
+                    CoreStrings.OwnershipToDependent(
+                        oldNavigation?.Name, PrincipalEntityType.DisplayName(), DeclaringEntityType.DisplayName()));
             }
 
             if (oldNavigation != null)
@@ -467,18 +518,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             Navigation? navigation = null;
-            var property = propertyIdentity?.MemberInfo;
-            if (property != null)
+            if (propertyIdentity?.Name != null)
             {
                 navigation = pointsToPrincipal
-                    ? DeclaringEntityType.AddNavigation(property, this, pointsToPrincipal: true)
-                    : PrincipalEntityType.AddNavigation(property, this, pointsToPrincipal: false);
-            }
-            else if (name != null)
-            {
-                navigation = pointsToPrincipal
-                    ? DeclaringEntityType.AddNavigation(name, this, pointsToPrincipal: true)
-                    : PrincipalEntityType.AddNavigation(name, this, pointsToPrincipal: false);
+                    ? DeclaringEntityType.AddNavigation(propertyIdentity.Value, this, pointsToPrincipal: true)
+                    : PrincipalEntityType.AddNavigation(propertyIdentity.Value, this, pointsToPrincipal: false);
             }
 
             if (pointsToPrincipal)
@@ -496,7 +540,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 Check.DebugAssert(oldNavigation.Name != null, "oldNavigation.Name is null");
 
-                string? removedNavigationName = null;
+                string? removedNavigationName;
                 if (pointsToPrincipal)
                 {
                     removedNavigationName = DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
@@ -516,6 +560,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 if (navigation == null)
                 {
+                    DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
                     return oldNavigation.Name == removedNavigationName ? oldNavigation : null;
                 }
             }
@@ -523,6 +568,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (navigation != null)
             {
                 navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher.OnNavigationAdded(navigation.Builder)?.Metadata;
+            }
+            else
+            {
+                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
             }
 
             return navigation;
@@ -560,14 +609,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     CoreStrings.NonUniqueRequiredDependentForeignKey(Properties.Format(), DeclaringEntityType.DisplayName()));
             }
 
+            var navigationMember = PrincipalToDependent?.GetIdentifyingMemberInfo();
             if (unique.HasValue
-                && PrincipalEntityType.ClrType != Model.DefaultPropertyBagType
-                && DeclaringEntityType.ClrType != Model.DefaultPropertyBagType
-                && PrincipalToDependent != null)
+                && navigationMember != null)
             {
                 if (!Internal.Navigation.IsCompatible(
-                    PrincipalToDependent.Name,
-                    PrincipalToDependent.GetIdentifyingMemberInfo()!,
+                    PrincipalToDependent!.Name,
+                    navigationMember,
                     PrincipalEntityType,
                     DeclaringEntityType,
                     !unique,
@@ -583,7 +631,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _isUniqueConfigurationSource = unique == null
                 ? null
-                : (ConfigurationSource?)configurationSource.Max(_isUniqueConfigurationSource);
+                : configurationSource.Max(_isUniqueConfigurationSource);
 
             return IsUnique != oldUnique
                 ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(Builder)
@@ -629,7 +677,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _isRequiredConfigurationSource = required == null
                 ? null
-                : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
+                : configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequired != oldRequired
                 ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(Builder)
@@ -692,7 +740,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _isRequiredDependentConfigurationSource = required == null
                 ? null
-                : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
+                : configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequiredDependent != oldRequired
                 ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(Builder)
@@ -805,6 +853,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual bool? SetIsOwnership(bool? ownership, ConfigurationSource configurationSource)
         {
             EnsureMutable();
+
+            if (ownership == true)
+            {
+                if (!DeclaringEntityType.IsOwned())
+                {
+                    throw new InvalidOperationException(CoreStrings.ClashingNonOwnedEntityType(DeclaringEntityType.DisplayName()));
+                }
+
+                if (PrincipalToDependent == null)
+                {
+                    throw new InvalidOperationException(
+                        CoreStrings.NavigationlessOwnership(
+                            PrincipalEntityType.DisplayName(), DeclaringEntityType.DisplayName()));
+                }
+            }
 
             var oldIsOwnership = IsOwnership;
             _isOwnership = ownership;
@@ -933,7 +996,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual DebugView DebugView
             => new(
-                () => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((IReadOnlyForeignKey)this).ToDebugString(),
                 () => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
         /// <summary>

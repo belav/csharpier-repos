@@ -1,9 +1,8 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -15,42 +14,44 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.EntityFrameworkCore.Infrastructure
 {
     /// <summary>
-    ///     <para>
-    ///         The validator that enforces rules common for all relational providers.
-    ///     </para>
+    ///     The validator that enforces rules common for all relational providers.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
     ///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///         for more information.
+    ///     </para>
+    /// </remarks>
     public class RelationalModelValidator : ModelValidator
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalModelValidator" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
-        /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this service. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
+        /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
         public RelationalModelValidator(
             ModelValidatorDependencies dependencies,
             RelationalModelValidatorDependencies relationalDependencies)
             : base(dependencies)
         {
-            Check.NotNull(relationalDependencies, nameof(relationalDependencies));
-
             RelationalDependencies = relationalDependencies;
         }
 
         /// <summary>
-        ///     Dependencies used to create a <see cref="ModelValidator" />
+        ///     Relational provider-specific dependencies for this service.
         /// </summary>
         protected virtual RelationalModelValidatorDependencies RelationalDependencies { get; }
 
         /// <summary>
         ///     Validates a model, throwing an exception if any errors are found.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         public override void Validate(IModel model, IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
         {
             base.Validate(model, logger);
@@ -68,8 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the mapping/configuration of SQL queries in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSqlQueries(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -96,8 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the mapping/configuration of functions in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateDbFunctions(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -206,14 +207,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the mapping/configuration of <see cref="bool" /> properties in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateBoolsWithDefaults(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
         {
-            Check.NotNull(model, nameof(model));
-
             foreach (var entityType in model.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
@@ -241,8 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the mapping/configuration of default values in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateDefaultValuesOnKeys(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -267,8 +266,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the mapping/configuration of shared tables in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedTableCompatibility(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -301,6 +300,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 ValidateSharedKeysCompatibility(mappedTypes, table, logger);
                 ValidateSharedForeignKeysCompatibility(mappedTypes, table, logger);
                 ValidateSharedIndexesCompatibility(mappedTypes, table, logger);
+                ValidateSharedCheckConstraintCompatibility(mappedTypes, table, logger);
 
                 // Validate optional dependents
                 if (mappedTypes.Count == 1)
@@ -346,6 +346,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             }
                         }
                     }
+
                     if (!requiredNonSharedColumnFound)
                     {
                         if (entityType.GetReferencingForeignKeys().Select(e => e.DeclaringEntityType).Any(t => mappedTypes.Contains(t)))
@@ -371,6 +372,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                             {
                                 continue;
                             }
+
                             list.Add(principalEntityType);
                             var (entityTypes, innerOptional) = GetPrincipalEntityTypes(principalEntityType.GetRootType());
                             list.AddRange(entityTypes);
@@ -390,10 +392,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of entity types sharing a given table.
         /// </summary>
-        /// <param name="mappedTypes"> The mapped entity types. </param>
-        /// <param name="tableName"> The table name. </param>
-        /// <param name="schema"> The schema. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="tableName">The table name.</param>
+        /// <param name="schema">The schema.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedTableCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             string tableName,
@@ -418,7 +420,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 var primaryKey = mappedType.FindPrimaryKey();
                 if (primaryKey != null
                     && (mappedType.FindForeignKeys(primaryKey.Properties)
-                        .FirstOrDefault(fk => fk.PrincipalKey.IsPrimaryKey()
+                        .FirstOrDefault(
+                            fk => fk.PrincipalKey.IsPrimaryKey()
                                 && unvalidatedTypes.Contains(fk.PrincipalEntityType)) is IForeignKey linkingFK))
                 {
                     if (mappedType.BaseType != null)
@@ -538,8 +541,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the mapping/configuration of shared views in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedViewCompatibility(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -575,10 +578,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of entity types sharing a given view.
         /// </summary>
-        /// <param name="mappedTypes"> The mapped entity types. </param>
-        /// <param name="viewName"> The view name. </param>
-        /// <param name="schema"> The schema. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="viewName">The view name.</param>
+        /// <param name="schema">The schema.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedViewCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             string viewName,
@@ -678,15 +681,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         private static bool IsIdentifyingPrincipal(IEntityType dependentEntityType, IEntityType principalEntityType)
             => dependentEntityType.FindForeignKeys(dependentEntityType.FindPrimaryKey()!.Properties)
-                .Any(fk => fk.PrincipalKey.IsPrimaryKey()
+                .Any(
+                    fk => fk.PrincipalKey.IsPrimaryKey()
                         && fk.PrincipalEntityType == principalEntityType);
 
         /// <summary>
         ///     Validates the compatibility of properties sharing columns in a given table-like object.
         /// </summary>
-        /// <param name="mappedTypes"> The mapped entity types. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedColumnsCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
@@ -732,35 +736,42 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     foreach (var missingColumn in missingConcurrencyTokens)
                     {
-                        var columnFound = false;
-                        foreach (var property in entityType.GetAllBaseTypesAscending().SelectMany(t => t.GetDeclaredProperties()))
-                        {
-                            if (property.GetColumnName(storeObject) == missingColumn)
-                            {
-                                columnFound = true;
-                                break;
-                            }
-                        }
-
-                        if (!columnFound)
-                        {
-                            throw new InvalidOperationException(
-                                RelationalStrings.MissingConcurrencyColumn(
-                                    entityType.DisplayName(), missingColumn, storeObject.DisplayName()));
-                        }
+                        throw new InvalidOperationException(
+                            RelationalStrings.MissingConcurrencyColumn(
+                                entityType.DisplayName(), missingColumn, storeObject.DisplayName()));
                     }
                 }
+            }
+
+            var columnOrders = new Dictionary<int, List<string>>();
+            foreach (var property in propertyMappings.Values)
+            {
+                var columnOrder = property.GetColumnOrder(storeObject);
+                if (!columnOrder.HasValue)
+                {
+                    continue;
+                }
+
+                var columns = columnOrders.GetOrAddNew(columnOrder.Value);
+                columns.Add(property.GetColumnName(storeObject)!);
+            }
+
+            if (columnOrders.Any(g => g.Value.Count > 1))
+            {
+                logger.DuplicateColumnOrders(
+                    storeObject,
+                    columnOrders.Where(g => g.Value.Count > 1).SelectMany(g => g.Value).ToList());
             }
         }
 
         /// <summary>
         ///     Validates the compatibility of two properties mapped to the same column.
         /// </summary>
-        /// <param name="property"> A property. </param>
-        /// <param name="duplicateProperty"> Another property. </param>
-        /// <param name="columnName"> The column name. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="property">A property.</param>
+        /// <param name="duplicateProperty">Another property.</param>
+        /// <param name="columnName">The column name.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateCompatible(
             IProperty property,
             IProperty duplicateProperty,
@@ -914,9 +925,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         currentStored));
             }
 
-            var currentDefaultValue = property.GetDefaultValue(storeObject);
-            var previousDefaultValue = duplicateProperty.GetDefaultValue(storeObject);
-            if (!Equals(currentDefaultValue, previousDefaultValue))
+            var hasDefaultValue = property.TryGetDefaultValue(storeObject, out var currentDefaultValue);
+            var duplicateHasDefaultValue = duplicateProperty.TryGetDefaultValue(storeObject, out var previousDefaultValue);
+            if ((hasDefaultValue
+                    || duplicateHasDefaultValue)
+                && !Equals(currentDefaultValue, previousDefaultValue))
             {
                 currentDefaultValue = GetDefaultColumnValue(property, storeObject);
                 previousDefaultValue = GetDefaultColumnValue(duplicateProperty, storeObject);
@@ -983,14 +996,30 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         previousCollation,
                         currentCollation));
             }
+
+            var currentColumnOrder = property.GetColumnOrder(storeObject);
+            var previousColumnOrder = duplicateProperty.GetColumnOrder(storeObject);
+            if (currentColumnOrder != previousColumnOrder)
+            {
+                throw new InvalidOperationException(
+                    RelationalStrings.DuplicateColumnNameOrderMismatch(
+                        duplicateProperty.DeclaringEntityType.DisplayName(),
+                        duplicateProperty.Name,
+                        property.DeclaringEntityType.DisplayName(),
+                        property.Name,
+                        columnName,
+                        storeObject.DisplayName(),
+                        previousColumnOrder,
+                        currentColumnOrder));
+            }
         }
 
         /// <summary>
         ///     Returns the object that is used as the default value for the column the property is mapped to.
         /// </summary>
-        /// <param name="property"> The property to get the default value for. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <returns> The object that is used as the default value for the column the property is mapped to. </returns>
+        /// <param name="property">The property to get the default value for.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <returns>The object that is used as the default value for the column the property is mapped to.</returns>
         protected virtual object? GetDefaultColumnValue(
             IProperty property,
             in StoreObjectIdentifier storeObject)
@@ -1006,9 +1035,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of foreign keys in a given shared table.
         /// </summary>
-        /// <param name="mappedTypes"> The mapped entity types. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedForeignKeysCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
@@ -1038,9 +1067,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         .Select(t => StoreObjectIdentifier.Create(t, StoreObjectType.Table))
                         .Where(t => t != null);
                     if (foreignKey.GetConstraintName() != null
-                        && derivedTables.All(t => foreignKey.GetConstraintName(
-                            t!.Value,
-                            principalTable.Value) == null))
+                        && derivedTables.All(
+                            t => foreignKey.GetConstraintName(
+                                    t!.Value,
+                                    principalTable.Value)
+                                == null))
                     {
                         logger.ForeignKeyPropertiesMappedToUnrelatedTables(foreignKey);
                     }
@@ -1061,11 +1092,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of two foreign keys mapped to the same foreign key constraint.
         /// </summary>
-        /// <param name="foreignKey"> A foreign key. </param>
-        /// <param name="duplicateForeignKey"> Another foreign key. </param>
-        /// <param name="foreignKeyName"> The foreign key constraint name. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="foreignKey">A foreign key.</param>
+        /// <param name="duplicateForeignKey">Another foreign key.</param>
+        /// <param name="foreignKeyName">The foreign key constraint name.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateCompatible(
             IForeignKey foreignKey,
             IForeignKey duplicateForeignKey,
@@ -1077,9 +1108,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of indexes in a given shared table.
         /// </summary>
-        /// <param name="mappedTypes"> The mapped entity types. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedIndexesCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
@@ -1107,11 +1138,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of two indexes mapped to the same table index.
         /// </summary>
-        /// <param name="index"> An index. </param>
-        /// <param name="duplicateIndex"> Another index. </param>
-        /// <param name="indexName"> The name of the index. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="index">An index.</param>
+        /// <param name="duplicateIndex">Another index.</param>
+        /// <param name="indexName">The name of the index.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateCompatible(
             IIndex index,
             IIndex duplicateIndex,
@@ -1123,9 +1154,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of primary and alternate keys in a given shared table.
         /// </summary>
-        /// <param name="mappedTypes"> The mapped entity types. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateSharedKeysCompatibility(
             IReadOnlyList<IEntityType> mappedTypes,
             in StoreObjectIdentifier storeObject,
@@ -1153,26 +1184,70 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the compatibility of two keys mapped to the same unique constraint.
         /// </summary>
-        /// <param name="key"> A key. </param>
-        /// <param name="duplicateKey"> Another key. </param>
-        /// <param name="keyName"> The name of the unique constraint. </param>
-        /// <param name="storeObject"> The identifier of the store object. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="key">A key.</param>
+        /// <param name="duplicateKey">Another key.</param>
+        /// <param name="keyName">The name of the unique constraint.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateCompatible(
             IKey key,
             IKey duplicateKey,
             string keyName,
             in StoreObjectIdentifier storeObject,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+            => key.AreCompatible(duplicateKey, storeObject, shouldThrow: true);
+
+        /// <summary>
+        ///     Validates the compatibility of check constraint in a given shared table.
+        /// </summary>
+        /// <param name="mappedTypes">The mapped entity types.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
+        protected virtual void ValidateSharedCheckConstraintCompatibility(
+            IReadOnlyList<IEntityType> mappedTypes,
+            in StoreObjectIdentifier storeObject,
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
         {
-            key.AreCompatible(duplicateKey, storeObject, shouldThrow: true);
+            var checkConstraintMappings = new Dictionary<string, ICheckConstraint>();
+            foreach (var checkConstraint in mappedTypes.SelectMany(et => et.GetDeclaredCheckConstraints()))
+            {
+                var checkConstraintName = checkConstraint.GetName(storeObject);
+                if (checkConstraintName == null)
+                {
+                    continue;
+                }
+
+                if (!checkConstraintMappings.TryGetValue(checkConstraintName, out var duplicateCheckConstraint))
+                {
+                    checkConstraintMappings[checkConstraintName] = checkConstraint;
+                    continue;
+                }
+
+                ValidateCompatible(checkConstraint, duplicateCheckConstraint, checkConstraintName, storeObject, logger);
+            }
         }
+
+        /// <summary>
+        ///     Validates the compatibility of two check constraints with the same name.
+        /// </summary>
+        /// <param name="checkConstraint">An check constraints.</param>
+        /// <param name="duplicateCheckConstraint">Another check constraints.</param>
+        /// <param name="indexName">The name of the check constraint.</param>
+        /// <param name="storeObject">The identifier of the store object.</param>
+        /// <param name="logger">The logger to use.</param>
+        protected virtual void ValidateCompatible(
+            ICheckConstraint checkConstraint,
+            ICheckConstraint duplicateCheckConstraint,
+            string indexName,
+            in StoreObjectIdentifier storeObject,
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+            => CheckConstraint.AreCompatible(checkConstraint, duplicateCheckConstraint, storeObject, shouldThrow: true);
 
         /// <summary>
         ///     Validates the mapping/configuration of inheritance in the model.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected override void ValidateInheritanceMapping(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -1266,8 +1341,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     Validates the table-specific property overrides.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidatePropertyOverrides(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
@@ -1276,7 +1351,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             {
                 foreach (var property in entityType.GetDeclaredProperties())
                 {
-                    var tableOverrides = (SortedDictionary<StoreObjectIdentifier, IRelationalPropertyOverrides>?)
+                    var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)
                         property[RelationalAnnotationNames.RelationalOverrides];
                     if (tableOverrides == null)
                     {
@@ -1345,14 +1420,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Validates that the properties of any one index are
         ///     all mapped to columns on at least one common table.
         /// </summary>
-        /// <param name="model"> The model to validate. </param>
-        /// <param name="logger"> The logger to use. </param>
+        /// <param name="model">The model to validate.</param>
+        /// <param name="logger">The logger to use.</param>
         protected virtual void ValidateIndexProperties(
             IModel model,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
         {
-            Check.NotNull(model, nameof(model));
-
             foreach (var entityType in model.GetEntityTypes())
             {
                 foreach (var index in entityType.GetDeclaredIndexes()
@@ -1432,8 +1505,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     }
                     else if (overlappingTables.Count == 0)
                     {
-                        Debug.Assert(firstPropertyTables != null, nameof(firstPropertyTables));
-                        Debug.Assert(lastPropertyTables != null, nameof(lastPropertyTables));
+                        Check.DebugAssert(firstPropertyTables != null, nameof(firstPropertyTables));
+                        Check.DebugAssert(lastPropertyTables != null, nameof(lastPropertyTables));
 
                         logger.IndexPropertiesMappedToNonOverlappingTables(
                             entityType,
@@ -1445,6 +1518,32 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     }
                 }
             }
+        }
+
+        /// <summary>
+        ///     Throws an <see cref="InvalidOperationException" /> with a message containing provider-specific information, when
+        ///     available, indicating possible reasons why the property cannot be mapped.
+        /// </summary>
+        /// <param name="propertyType">The property CLR type.</param>
+        /// <param name="entityType">The entity type.</param>
+        /// <param name="unmappedProperty">The property.</param>
+        protected override void ThrowPropertyNotMappedException(
+            string propertyType,
+            IConventionEntityType entityType,
+            IConventionProperty unmappedProperty)
+        {
+            var storeType = unmappedProperty.GetColumnType();
+            if (storeType != null)
+            {
+                throw new InvalidOperationException(
+                    RelationalStrings.PropertyNotMapped(
+                        propertyType,
+                        entityType.DisplayName(),
+                        unmappedProperty.Name,
+                        storeType));
+            }
+
+            base.ThrowPropertyNotMappedException(propertyType, entityType, unmappedProperty);
         }
     }
 }

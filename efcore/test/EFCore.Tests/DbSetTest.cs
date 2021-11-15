@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
@@ -758,6 +758,36 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.DataBindingToLocalWithIListSource,
                 Assert.Throws<NotSupportedException>(() => ((IListSource)context.Gus.Local).GetList()).Message);
+        }
+
+        [ConditionalFact]
+        public void Can_enumerate_with_foreach()
+        {
+            using var context = new EarlyLearningCenter();
+            foreach (var _ in context.Categories)
+            {
+                throw new Exception("DbSet should be empty");
+            }
+        }
+
+        [ConditionalFact]
+        public async Task Can_enumerate_with_await_foreach()
+        {
+            using var context = new EarlyLearningCenter();
+            await foreach (var _ in context.Categories)
+            {
+                throw new Exception("DbSet should be empty");
+            }
+        }
+
+        [ConditionalFact]
+        public async Task Can_enumerate_with_await_foreach_with_cancellation()
+        {
+            using var context = new EarlyLearningCenter();
+            await foreach (var _ in context.Categories.AsAsyncEnumerable().WithCancellation(default))
+            {
+                throw new Exception("DbSet should be empty");
+            }
         }
 
         private class Curious

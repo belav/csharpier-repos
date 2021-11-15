@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq;
@@ -48,7 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             var level1 = level1Builder.Metadata;
 
             ForeignKey level2Fk;
-            var level2 = level1.Model.AddEntityType(typeof(Level2), nameof(Level1.OneToOne_Required_PK1), level1);
+            var level2 = level1.Model.AddEntityType("Level1.OneToOne_Required_PK1#Level2", typeof(Level2));
             using (var batch = ((Model)modelBuilder.Model).ConventionDispatcher.DelayConventions())
             {
                 level2Fk = (ForeignKey)level2.AddForeignKey(level2.FindProperty(nameof(Level2.Id)), level1.FindPrimaryKey(), level1);
@@ -67,9 +67,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<InheritanceLeaf2>().Property(e => e.Id).ValueGeneratedNever();
 
             // FK name needs to be explicitly provided because issue #9310
-            modelBuilder.Entity<InheritanceBase2>().HasOne(e => e.Reference).WithOne().HasForeignKey<InheritanceBase1>("InheritanceBase2Id")
+            modelBuilder.Entity<InheritanceBase2>().HasOne(e => e.Reference).WithOne()
+                .HasForeignKey<InheritanceBase1>("InheritanceBase2Id1")
                 .IsRequired(false);
-            modelBuilder.Entity<InheritanceBase2>().HasMany(e => e.Collection).WithOne();
+            modelBuilder.Entity<InheritanceBase2>().HasMany(e => e.Collection).WithOne()
+                .HasForeignKey("InheritanceBase2Id");
 
             modelBuilder.Entity<InheritanceDerived1>().HasBaseType<InheritanceBase1>();
             modelBuilder.Entity<InheritanceDerived1>().HasOne(e => e.ReferenceSameType).WithOne()
@@ -141,7 +143,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 .IsRequired(false);
 
             ForeignKey level3Fk;
-            var level3 = level2.Model.AddEntityType(typeof(Level3), nameof(Level2.OneToOne_Required_PK2), level2);
+            var level3 = level2.Model.AddEntityType("Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3", typeof(Level3));
             using (var batch = ((Model)level2.Model).ConventionDispatcher.DelayConventions())
             {
                 level3Fk = (ForeignKey)level3.AddForeignKey(level3.FindProperty(nameof(Level3.Id)), level2.FindPrimaryKey(), level2);
@@ -192,7 +194,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 .IsRequired(false);
 
             ForeignKey level4Fk;
-            var level4 = level3.Model.AddEntityType(typeof(Level4), nameof(Level3.OneToOne_Required_PK3), level3);
+            var level4 = level3.Model.AddEntityType(
+                "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3.OneToOne_Required_PK3#Level4",
+                typeof(Level4));
             using (var batch = ((Model)level3.Model).ConventionDispatcher.DelayConventions())
             {
                 level4Fk = (ForeignKey)level4.AddForeignKey(level4.FindProperty(nameof(Level4.Id)), level3.FindPrimaryKey(), level3);

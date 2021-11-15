@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Diagnostics;
@@ -7,9 +7,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Builders.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 {
@@ -45,10 +43,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             Type clrType)
         {
-            Check.NotNull(function, nameof(function));
-            Check.NotEmpty(name, nameof(name));
-            Check.NotNull(clrType, nameof(clrType));
-
             Name = name;
             Function = function;
             ClrType = clrType;
@@ -88,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// <summary>
         ///     Indicates whether the function parameter is read-only.
         /// </summary>
-        public override bool IsReadOnly => ((Annotatable)Function.Model).IsReadOnly;
+        public override bool IsReadOnly
+            => ((Annotatable)Function.Model).IsReadOnly;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -157,15 +152,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual RelationalTypeMapping? TypeMapping
         {
             get => IsReadOnly
-                    ? NonCapturingLazyInitializer.EnsureInitialized(ref _typeMapping, this, static parameter =>
-                    {
-                        var relationalTypeMappingSource =
-                            (IRelationalTypeMappingSource)((IModel)parameter.Function.Model).GetModelDependencies().TypeMappingSource;
-                        return !string.IsNullOrEmpty(parameter._storeType)
-                                    ? relationalTypeMappingSource.FindMapping(parameter._storeType)!
-                                    : relationalTypeMappingSource.FindMapping(parameter.ClrType)!;
-                    })
-                    : _typeMapping;
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _typeMapping, this, static parameter =>
+                        {
+                            var relationalTypeMappingSource =
+                                (IRelationalTypeMappingSource)((IModel)parameter.Function.Model).GetModelDependencies().TypeMappingSource;
+                            return !string.IsNullOrEmpty(parameter._storeType)
+                                ? relationalTypeMappingSource.FindMapping(parameter._storeType)!
+                                : relationalTypeMappingSource.FindMapping(parameter.ClrType, (IModel)parameter.Function.Model)!;
+                        })
+                : _typeMapping;
             set => SetTypeMapping(value, ConfigurationSource.Explicit);
         }
 

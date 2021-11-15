@@ -1,21 +1,20 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
-namespace Microsoft.AspNetCore.Mvc
-{
-    public class ConflictResultTest
-    {
-        [Fact]
-        public void ConflictResult_InitializesStatusCode()
-        {
-            // Arrange & act
-            var conflictResult = new ConflictResult();
+namespace Microsoft.AspNetCore.Mvc;
 
-            // Assert
-            Assert.Equal(StatusCodes.Status409Conflict, conflictResult.StatusCode);
-        }
+public class ConflictResultTest
+{
+    [Fact]
+    public void ConflictResult_InitializesStatusCode()
+    {
+        // Arrange & act
+        var conflictResult = new ConflictResult();
+
+        // Assert
+        Assert.Equal(StatusCodes.Status409Conflict, conflictResult.StatusCode);
     }
 }

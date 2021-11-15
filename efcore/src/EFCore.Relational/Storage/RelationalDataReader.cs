@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Data.Common;
@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage
 {
@@ -20,10 +19,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         not used in application code.
     ///     </para>
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     for more information.
+    /// </remarks>
     public class RelationalDataReader : IDisposable, IAsyncDisposable
     {
-        private readonly IRelationalCommand _relationalCommand;
-
         private IRelationalConnection _relationalConnection = default!;
         private DbCommand _command = default!;
         private DbDataReader _reader = default!;
@@ -36,27 +37,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private bool _disposed;
 
-        private static readonly TimeSpan _oneSecond = TimeSpan.FromSeconds(1);
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="RelationalDataReader" /> class.
         /// </summary>
-        /// <param name="relationalCommand"> The relational command which owns this relational reader. </param>
-        public RelationalDataReader(IRelationalCommand relationalCommand)
-        {
-            Check.NotNull(relationalCommand, nameof(relationalCommand));
-
-            _relationalCommand = relationalCommand;
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="RelationalDataReader" /> class.
-        /// </summary>
-        /// <param name="relationalConnection"> The relational connection. </param>
-        /// <param name="command"> The command that was executed. </param>
-        /// <param name="reader"> The underlying reader for the result set. </param>
-        /// <param name="commandId"> A correlation ID that identifies the <see cref="DbCommand" /> instance being used. </param>
-        /// <param name="logger"> The diagnostic source. </param>
+        /// <param name="relationalConnection">The relational connection.</param>
+        /// <param name="command">The command that was executed.</param>
+        /// <param name="reader">The underlying reader for the result set.</param>
+        /// <param name="commandId">A correlation ID that identifies the <see cref="DbCommand" /> instance being used.</param>
+        /// <param name="logger">The diagnostic source.</param>
         public virtual void Initialize(
             IRelationalConnection relationalConnection,
             DbCommand command,
@@ -64,9 +52,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Guid commandId,
             IRelationalCommandDiagnosticsLogger? logger)
         {
-            Check.NotNull(command, nameof(command));
-            Check.NotNull(reader, nameof(reader));
-
             _relationalConnection = relationalConnection;
             _command = command;
             _reader = reader;
@@ -92,7 +77,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Calls <see cref="DbDataReader.Read()" /> on the underlying <see cref="System.Data.Common.DbDataReader" />.
         /// </summary>
-        /// <returns> <see langword="true" /> if there are more rows; otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if there are more rows; otherwise <see langword="false" />.</returns>
         public virtual bool Read()
         {
             _readCount++;
@@ -104,7 +89,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Calls <see cref="DbDataReader.ReadAsync(CancellationToken)" /> on the underlying
         ///     <see cref="System.Data.Common.DbDataReader" />.
         /// </summary>
-        /// <returns> <see langword="true" /> if there are more rows; otherwise <see langword="false" />. </returns>
+        /// <returns><see langword="true" /> if there are more rows; otherwise <see langword="false" />.</returns>
         public virtual Task<bool> ReadAsync(CancellationToken cancellationToken = default)
         {
             _readCount++;

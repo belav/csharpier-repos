@@ -187,19 +187,30 @@ namespace Newtonsoft.Json.Utilities
             // loop through the type name and filter out qualified assembly details from nested type names
             bool writingAssemblyName = false;
             bool skippingAssemblyDetails = false;
+            bool followBrackets = false;
             for (int i = 0; i < fullyQualifiedTypeName.Length; i++)
             {
                 char current = fullyQualifiedTypeName[i];
                 switch (current)
                 {
                     case '[':
+                        writingAssemblyName = false;
+                        skippingAssemblyDetails = false;
+                        followBrackets = true;
+                        builder.Append(current);
+                        break;
                     case ']':
                         writingAssemblyName = false;
                         skippingAssemblyDetails = false;
+                        followBrackets = false;
                         builder.Append(current);
                         break;
                     case ',':
-                        if (!writingAssemblyName)
+                        if (followBrackets)
+                        {
+                            builder.Append(current);
+                        }
+                        else if (!writingAssemblyName)
                         {
                             writingAssemblyName = true;
                             builder.Append(current);
@@ -210,6 +221,7 @@ namespace Newtonsoft.Json.Utilities
                         }
                         break;
                     default:
+                        followBrackets = false;
                         if (!skippingAssemblyDetails)
                         {
                             builder.Append(current);

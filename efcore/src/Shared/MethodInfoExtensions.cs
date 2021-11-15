@@ -1,8 +1,9 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 #nullable enable
@@ -16,6 +17,10 @@ namespace System.Reflection
                 && method.DeclaringType != null
                 && method.DeclaringType.GetInterfaces().Append(method.DeclaringType).Any(
                     t => t == typeof(IList)
-                        || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(ICollection<>)));
+                        || (t.IsGenericType
+                            && t.GetGenericTypeDefinition() is Type genericType
+                            && (genericType == typeof(ICollection<>)
+                                || genericType == typeof(IReadOnlySet<>)
+                                || genericType == typeof(IImmutableSet<>))));
     }
 }

@@ -1,12 +1,12 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal
 {
@@ -31,9 +31,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IReadOnlyCollection<Expression> arguments)
             : base(entityType)
         {
-            Check.NotNull(function, nameof(function));
-            Check.NotNull(arguments, nameof(arguments));
-
             Function = function;
             Arguments = arguments;
         }
@@ -82,10 +79,20 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
+        public override QueryRootExpression UpdateEntityType(IEntityType entityType)
+            => entityType.ClrType != EntityType.ClrType
+                || entityType.Name != EntityType.Name
+                    ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
+                    : new TableValuedFunctionQueryRootExpression(entityType, Function, Arguments);
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.Append(Function.Name);
             expressionPrinter.Append("(");
             expressionPrinter.VisitCollection(Arguments);

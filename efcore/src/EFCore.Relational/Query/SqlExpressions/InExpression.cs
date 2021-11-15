@@ -1,12 +1,11 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 {
@@ -24,66 +23,32 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN subquery expression.
         /// </summary>
-        /// <param name="item"> An item to look into values. </param>
-        /// <param name="negated"> A value indicating if the item should be present in the values or absent. </param>
-        /// <param name="subquery"> A subquery in which item is searched. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use overload which passes negated argument after subquery argument.")]
+        /// <param name="item">An item to look into values.</param>
+        /// <param name="subquery">A subquery in which item is searched.</param>
+        /// <param name="negated">A value indicating if the item should be present in the values or absent.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public InExpression(
             SqlExpression item,
-            bool negated,
             SelectExpression subquery,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), null, Check.NotNull(subquery, nameof(subquery)), negated, typeMapping)
+            bool negated,
+            RelationalTypeMapping typeMapping)
+            : this(item, null, subquery, negated, typeMapping)
         {
         }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
         /// </summary>
-        /// <param name="item"> An item to look into values. </param>
-        /// <param name="negated"> A value indicating if the item should be present in the values or absent. </param>
-        /// <param name="values"> A list of values in which item is searched. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        [Obsolete("Use overload which passes negated argument after values argument.")]
-        public InExpression(
-            SqlExpression item,
-            bool negated,
-            SqlExpression values,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), Check.NotNull(values, nameof(values)), null, negated, typeMapping)
-        {
-        }
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN subquery expression.
-        /// </summary>
-        /// <param name="item"> An item to look into values. </param>
-        /// <param name="subquery"> A subquery in which item is searched. </param>
-        /// <param name="negated"> A value indicating if the item should be present in the values or absent. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
-        public InExpression(
-            SqlExpression item,
-            SelectExpression subquery,
-            bool negated,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), null, Check.NotNull(subquery, nameof(subquery)), negated, typeMapping)
-        {
-        }
-
-        /// <summary>
-        ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
-        /// </summary>
-        /// <param name="item"> An item to look into values. </param>
-        /// <param name="values"> A list of values in which item is searched. </param>
-        /// <param name="negated"> A value indicating if the item should be present in the values or absent. </param>
-        /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
+        /// <param name="item">An item to look into values.</param>
+        /// <param name="values">A list of values in which item is searched.</param>
+        /// <param name="negated">A value indicating if the item should be present in the values or absent.</param>
+        /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
         public InExpression(
             SqlExpression item,
             SqlExpression values,
             bool negated,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), Check.NotNull(values, nameof(values)), null, negated, typeMapping)
+            RelationalTypeMapping typeMapping)
+            : this(item, values, null, negated, typeMapping)
         {
         }
 
@@ -124,8 +89,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            Check.NotNull(visitor, nameof(visitor));
-
             var item = (SqlExpression)visitor.Visit(Item);
             var subquery = (SelectExpression?)visitor.Visit(Subquery);
             var values = (SqlExpression?)visitor.Visit(Values);
@@ -136,7 +99,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     Negates this expression by changing presence/absence state indicated by <see cref="IsNegated" />.
         /// </summary>
-        /// <returns> An expression which is negated form of this expression. </returns>
+        /// <returns>An expression which is negated form of this expression.</returns>
         public virtual InExpression Negate()
             => new(Item, Values, Subquery, !IsNegated, TypeMapping);
 
@@ -144,17 +107,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
         ///     return this expression.
         /// </summary>
-        /// <param name="item"> The <see cref="Item" /> property of the result. </param>
-        /// <param name="values"> The <see cref="Values" /> property of the result. </param>
-        /// <param name="subquery"> The <see cref="Subquery" /> property of the result. </param>
-        /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
+        /// <param name="item">The <see cref="Item" /> property of the result.</param>
+        /// <param name="values">The <see cref="Values" /> property of the result.</param>
+        /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
+        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual InExpression Update(
             SqlExpression item,
             SqlExpression? values,
             SelectExpression? subquery)
         {
-            Check.NotNull(item, nameof(item));
-
             if (values != null
                 && subquery != null)
             {
@@ -169,8 +130,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            Check.NotNull(expressionPrinter, nameof(expressionPrinter));
-
             expressionPrinter.Visit(Item);
             expressionPrinter.Append(IsNegated ? " NOT IN " : " IN ");
             expressionPrinter.Append("(");

@@ -1,36 +1,35 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Microsoft.AspNetCore.Razor.Language.Legacy
-{
-    public class IntializeTestFileAttribute : BeforeAfterTestAttribute
-    {
-        public override void Before(MethodInfo methodUnderTest)
-        {
-            if (typeof(ParserTestBase).GetTypeInfo().IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo()))
-            {
-                var typeName = methodUnderTest.DeclaringType.Name;
-                ParserTestBase.FileName = $"TestFiles/ParserTests/{typeName}/{methodUnderTest.Name}";
-                ParserTestBase.IsTheory = false;
+namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-                if (methodUnderTest.GetCustomAttributes(typeof(TheoryAttribute), inherit: false).Length > 0)
-                {
-                    ParserTestBase.IsTheory = true;
-                }
+public class IntializeTestFileAttribute : BeforeAfterTestAttribute
+{
+    public override void Before(MethodInfo methodUnderTest)
+    {
+        if (typeof(ParserTestBase).GetTypeInfo().IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo()))
+        {
+            var typeName = methodUnderTest.DeclaringType.Name;
+            ParserTestBase.FileName = $"TestFiles/ParserTests/{typeName}/{methodUnderTest.Name}";
+            ParserTestBase.IsTheory = false;
+
+            if (methodUnderTest.GetCustomAttributes(typeof(TheoryAttribute), inherit: false).Length > 0)
+            {
+                ParserTestBase.IsTheory = true;
             }
         }
+    }
 
-        public override void After(MethodInfo methodUnderTest)
+    public override void After(MethodInfo methodUnderTest)
+    {
+        if (typeof(ParserTestBase).GetTypeInfo().IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo()))
         {
-            if (typeof(ParserTestBase).GetTypeInfo().IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo()))
-            {
-                ParserTestBase.FileName = null;
-                ParserTestBase.IsTheory = false;
-            }
+            ParserTestBase.FileName = null;
+            ParserTestBase.IsTheory = false;
         }
     }
 }

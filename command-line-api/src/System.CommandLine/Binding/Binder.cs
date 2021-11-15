@@ -3,8 +3,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
@@ -12,51 +10,11 @@ namespace System.CommandLine.Binding
 {
     internal static class Binder
     {
-        internal static bool CanBeBoundFromScalarValue(this Type type)
-        {
-            while (true)
-            {
-                if (type.IsPrimitive || type.IsEnum)
-                {
-                    return true;
-                }
-
-                if (type == typeof(string))
-                {
-                    return true;
-                }
-
-                if (TypeDescriptor.GetConverter(type) is { } typeConverter && 
-                    typeConverter.CanConvertFrom(typeof(string)))
-                {
-                    return true;
-                }
-
-                if (TryFindConstructorWithSingleParameterOfType(type, typeof(string), out _))
-                {
-                    return true;
-                }
-
-                if (GetItemTypeIfEnumerable(type) is { } itemType)
-                {
-                    type = itemType;
-                    continue;
-                }
-
-                return false;
-            }
-        }
-
         private static MethodInfo EnumerableEmptyMethod { get; }
-            = typeof(Enumerable).GetMethod(nameof(Enumerable.Empty));
+            = typeof(Enumerable).GetMethod(nameof(Array.Empty));
 
         internal static object? GetDefaultValue(Type type)
         {
-            if (type == typeof(string))
-            {
-                return "";
-            }
-
             if (GetItemTypeIfEnumerable(type) is { } itemType)
             {
                 if (type.IsArray)
@@ -68,10 +26,10 @@ namespace System.CommandLine.Binding
                 {
                     return type.GetGenericTypeDefinition() switch
                     {
-                        Type enumerable when enumerable == typeof(IEnumerable<>) => GetEmptyEnumerable(itemType),
-                        Type list when list == typeof(List<>) => GetEmptyList(itemType),
-                        Type array when array == typeof(IList<>) || 
-                                        array == typeof(ICollection<>) => CreateEmptyArray(itemType),
+                        { } enumerable when enumerable == typeof(IEnumerable<>) => GetEmptyEnumerable(itemType),
+                        { } list when list == typeof(List<>) => GetEmptyList(itemType),
+                        { } array when array == typeof(IList<>) || 
+                                       array == typeof(ICollection<>) => CreateEmptyArray(itemType),
                         _ => null
                     };
                 }
@@ -79,7 +37,7 @@ namespace System.CommandLine.Binding
 
             return type switch
             {
-                Type nonGeneric 
+                { } nonGeneric 
                 when nonGeneric == typeof(IList) ||
                      nonGeneric == typeof(ICollection) ||
                      nonGeneric == typeof(IEnumerable)
@@ -109,14 +67,25 @@ namespace System.CommandLine.Binding
                 return type.GetElementType();
             }
 
-            var enumerableInterface =
-                type.IsEnumerable()
-                    ? type
-                    : type
-                      .GetInterfaces()
-                      .FirstOrDefault(IsEnumerable);
+            Type enumerableInterface;
 
-            return enumerableInterface?.GenericTypeArguments switch
+            if (type.IsEnumerable())
+            {
+                enumerableInterface = type;
+            }
+            else
+            {
+                enumerableInterface = type
+                    .GetInterfaces()
+                    .FirstOrDefault(IsEnumerable);
+            }
+
+            if (enumerableInterface is null)
+            {
+                return null;
+            }
+
+            return enumerableInterface.GenericTypeArguments switch
             {
                 { Length: 1 } genericTypeArguments => genericTypeArguments[0],
                 _ => null
@@ -140,7 +109,10 @@ namespace System.CommandLine.Binding
         {
             var parameterNameIndex = 0;
 
-            for (var aliasIndex = IndexAfterPrefix(alias); 
+            var indexAfterPrefix = IndexAfterPrefix(alias);
+            var parameterCandidateLength = alias.Length - indexAfterPrefix;
+
+            for (var aliasIndex = indexAfterPrefix; 
                 aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
                 aliasIndex++)
             {
@@ -148,6 +120,7 @@ namespace System.CommandLine.Binding
 
                 if (aliasChar == '-')
                 {
+                    parameterCandidateLength--;
                     continue;
                 }
 
@@ -155,10 +128,12 @@ namespace System.CommandLine.Binding
 
                 if (aliasChar == '|')
                 {
+                    // replacing "|" with "or"
                     parameterNameIndex += 2;
+                    parameterCandidateLength++; 
                     continue;
                 }
-
+                
                 if (char.ToUpperInvariant(parameterNameChar) != char.ToUpperInvariant(aliasChar))
                 {
                     return false;
@@ -167,7 +142,12 @@ namespace System.CommandLine.Binding
                 parameterNameIndex++;
             }
 
-            return parameterName.Length <= parameterNameIndex;
+            if (parameterCandidateLength == parameterName.Length)
+            {
+                return true;
+            }
+
+            return false;
 
             static int IndexAfterPrefix(string alias)
             {
@@ -187,37 +167,10 @@ namespace System.CommandLine.Binding
             }
         }
 
-        internal static bool IsMatch(this string parameterName, IOption symbol) =>
-            parameterName.IsMatch(symbol.Name) ||
-            symbol.HasAlias(parameterName);
-
         internal static bool IsNullable(this Type t)
         {
             return t.IsGenericType &&
                    t.GetGenericTypeDefinition() == typeof(Nullable<>);
-        }
-
-        internal static bool TryFindConstructorWithSingleParameterOfType(
-            this Type type,
-            Type parameterType,
-            [NotNullWhen(true)] out ConstructorInfo? ctor)
-        {
-            var (x, _) = type.GetConstructors()
-                             .Select(c => (ctor: c, parameters: c.GetParameters()))
-                             .SingleOrDefault(tuple => tuple.ctor.IsPublic &&
-                                                       tuple.parameters.Length == 1 &&
-                                                       tuple.parameters[0].ParameterType == parameterType);
-
-            if (x != null)
-            {
-                ctor = x;
-                return true;
-            }
-            else
-            {
-                ctor = null;
-                return false;
-            }
         }
     }
 }

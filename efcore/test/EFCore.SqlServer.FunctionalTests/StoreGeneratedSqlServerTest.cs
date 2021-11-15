@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +29,32 @@ namespace Microsoft.EntityFrameworkCore
             var entities = new List<Darwin>();
             for (var i = 0; i < 100; i++)
             {
-                entities.Add(new Darwin());
+                entities.Add(new()
+                {
+                    Species = new() { Name = "Goldfish (with legs)" },
+                    MixedMetaphors = new List<Species>
+                    {
+                        new() { Name = "Large ground finch" },
+                        new() { Name = "Medium ground finch" },
+                        new() { Name = "Small tree finch" },
+                        new() { Name = "Green warbler-finch" }
+                    }
+                });
             }
 
             entities.Add(
-                new Darwin { Id = 1777 });
+                new()
+                {
+                    Id = 1777,
+                    Species = new() { Name = "Goldfish (with legs)" },
+                    MixedMetaphors = new List<Species>
+                    {
+                        new() { Name = "Large ground finch" },
+                        new() { Name = "Medium ground finch" },
+                        new() { Name = "Small tree finch" },
+                        new() { Name = "Green warbler-finch" }
+                    }
+                });
 
             for (var i = 0; i < 2; i++)
             {
@@ -77,9 +98,19 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.Equal(0, entity.Id);
                             Assert.Null(entity._id);
+                            Assert.Null(entity.Species.DarwinId);
+                            foreach (var species in entity.MixedMetaphors)
+                            {
+                                Assert.Null(species.MetaphoricId);
+                            }
                         }
 
                         Assert.Equal(1777, entities[100].Id);
+                        Assert.Equal(1777, entities[100].Species.DarwinId);
+                        foreach (var species in entities[100].MixedMetaphors)
+                        {
+                            Assert.Equal(1777, species.MetaphoricId);
+                        }
 
                         foreach (var entity in entities)
                         {

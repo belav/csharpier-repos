@@ -1,21 +1,18 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure
 {
     /// <summary>
-    ///     <para>
-    ///         A key that uniquely identifies the model for a given context. This is used to store and lookup
-    ///         a cached model for a given context. This default implementation uses the context type as they key, thus
-    ///         assuming that all contexts of a given type have the same model.
-    ///     </para>
-    ///     <para>
-    ///         This type is typically used by database providers (and other extensions). It is generally
-    ///         not used in application code.
-    ///     </para>
+    ///     A key that uniquely identifies the model for a given context. This is used to store and lookup
+    ///     a cached model for a given context. This default implementation uses the context type as they key, thus
+    ///     assuming that all contexts of a given type have the same model.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-model-caching">EF Core model caching</see> for more information.
+    /// </remarks>
     public class ModelCacheKey
     {
         private readonly Type _dbContextType;
@@ -38,7 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="context">
         ///     The context instance that this key is for.
         /// </param>
-        /// <param name="designTime"> Whether the model should contain design-time configuration.</param>
+        /// <param name="designTime">Whether the model should contain design-time configuration.</param>
         public ModelCacheKey(DbContext context, bool designTime)
         {
             _dbContextType = context.GetType();

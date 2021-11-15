@@ -1,32 +1,31 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace RazorSyntaxGenerator
+namespace RazorSyntaxGenerator;
+
+public class Field
 {
-    public class Field
-    {
-        [XmlAttribute]
-        public string Name;
+    [XmlAttribute]
+    public string Name;
 
-        [XmlAttribute]
-        public string Type;
+    [XmlAttribute]
+    public string Type;
 
-        [XmlAttribute]
-        public string Optional;
+    [XmlAttribute]
+    public string Optional;
 
-        [XmlAttribute]
-        public string Override;
+    [XmlAttribute]
+    public string Override;
 
-        [XmlAttribute]
-        public string New;
+    [XmlAttribute]
+    public string New;
 
-        [XmlElement(ElementName = "Kind", Type = typeof(Kind))]
-        public List<Kind> Kinds;
+    [XmlElement(ElementName = "Kind", Type = typeof(Kind))]
+    public List<Kind> Kinds;
 
-        [XmlElement]
-        public Comment PropertyComment;
-    }
+    [XmlElement]
+    public Comment PropertyComment;
 }

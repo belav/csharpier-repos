@@ -24,6 +24,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Internal
             = new ResourceManager("Microsoft.EntityFrameworkCore.Cosmos.Properties.CosmosStrings", typeof(CosmosStrings).Assembly);
 
         /// <summary>
+        ///     The time to live for analytical store was configured to '{ttl1}' on '{entityType1}', but on '{entityType2}' it was configured to '{ttl2}'. All entity types mapped to the same container '{container}' must be configured with the same time to live for analytical store.
+        /// </summary>
+        public static string AnalyticalTTLMismatch(object? ttl1, object? entityType1, object? entityType2, object? ttl2, object? container)
+            => string.Format(
+                GetString("AnalyticalTTLMismatch", nameof(ttl1), nameof(entityType1), nameof(entityType2), nameof(ttl2), nameof(container)),
+                ttl1, entityType1, entityType2, ttl2, container);
+
+        /// <summary>
         ///     The Cosmos database does not support 'CanConnect' or 'CanConnectAsync'.
         /// </summary>
         public static string CanConnectNotSupported
@@ -40,6 +48,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Internal
         /// </summary>
         public static string CosmosNotInUse
             => GetString("CosmosNotInUse");
+
+        /// <summary>
+        ///     The default time to live was configured to '{ttl1}' on '{entityType1}', but on '{entityType2}' it was configured to '{ttl2}'. All entity types mapped to the same container '{container}' must be configured with the same default time to live.
+        /// </summary>
+        public static string DefaultTTLMismatch(object? ttl1, object? entityType1, object? entityType2, object? ttl2, object? container)
+            => string.Format(
+                GetString("DefaultTTLMismatch", nameof(ttl1), nameof(entityType1), nameof(entityType2), nameof(ttl2), nameof(container)),
+                ttl1, entityType1, entityType2, ttl2, container);
 
         /// <summary>
         ///     The discriminator value for '{entityType1}' is '{discriminatorValue}' which is the same for '{entityType2}'. Every concrete entity type mapped to the container '{container}' must have a unique discriminator value.
@@ -72,6 +88,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Internal
             => string.Format(
                 GetString("InvalidDerivedTypeInEntityProjection", nameof(derivedType), nameof(entityType)),
                 derivedType, entityType);
+
+        /// <summary>
+        ///     A FromSqlExpression has an invalid arguments expression type '{expressionType}' or value type '{valueType}'.
+        /// </summary>
+        public static string InvalidFromSqlArguments(object? expressionType, object? valueType)
+            => string.Format(
+                GetString("InvalidFromSqlArguments", nameof(expressionType), nameof(valueType)),
+                expressionType, valueType);
 
         /// <summary>
         ///     Unable to generate a valid 'id' value to execute a 'ReadItem' query. This usually happens when the value provided for one of the properties is 'null' or an empty string. Please supply a value that's not 'null' or an empty string.
@@ -254,6 +278,22 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Internal
             => GetString("ReverseAfterSkipTakeNotSupported");
 
         /// <summary>
+        ///     The provisioned throughput was configured to '{throughput1}' on '{entityType1}', but on '{entityType2}' it was configured to '{throughput2}'. All entity types mapped to the same container '{container}' must be configured with the same provisioned throughput.
+        /// </summary>
+        public static string ThroughputMismatch(object? throughput1, object? entityType1, object? entityType2, object? throughput2, object? container)
+            => string.Format(
+                GetString("ThroughputMismatch", nameof(throughput1), nameof(entityType1), nameof(entityType2), nameof(throughput2), nameof(container)),
+                throughput1, entityType1, entityType2, throughput2, container);
+
+        /// <summary>
+        ///     The provisioned throughput was configured as manual on '{manualEntityType}', but on '{autoscaleEntityType}' it was configured as autoscale. All entity types mapped to the same container '{container}' must be configured with the same provisioned throughput type.
+        /// </summary>
+        public static string ThroughputTypeMismatch(object? manualEntityType, object? autoscaleEntityType, object? container)
+            => string.Format(
+                GetString("ThroughputTypeMismatch", nameof(manualEntityType), nameof(autoscaleEntityType), nameof(container)),
+                manualEntityType, autoscaleEntityType, container);
+
+        /// <summary>
         ///     The Cosmos database provider does not support transactions.
         /// </summary>
         public static string TransactionsNotSupported
@@ -281,6 +321,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Internal
         public static string UpdateConflict(object? itemId)
             => string.Format(
                 GetString("UpdateConflict", nameof(itemId)),
+                itemId);
+
+        /// <summary>
+        ///     An error occurred while saving the the item with id '{itemId}'. See the inner exception for details.
+        /// </summary>
+        public static string UpdateStoreException(object? itemId)
+            => string.Format(
+                GetString("UpdateStoreException", nameof(itemId)),
                 itemId);
 
         /// <summary>
@@ -314,6 +362,128 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Internal
     {
         private static readonly ResourceManager _resourceManager
             = new ResourceManager("Microsoft.EntityFrameworkCore.Cosmos.Properties.CosmosStrings", typeof(CosmosResources).Assembly);
+
+        /// <summary>
+        ///     Executed CreateItem ({elapsed} ms, {charge} RU) ActivityId='{activityId}', Container='{container}', Id='{id}', Partition='{partitionKey}'
+        /// </summary>
+        public static EventDefinition<string, string, string, string, string, string?> LogExecutedCreateItem(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedCreateItem;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedCreateItem,
+                    logger,
+                    static logger => new EventDefinition<string, string, string, string, string, string?>(
+                        logger.Options,
+                        CosmosEventId.ExecutedCreateItem,
+                        LogLevel.Information,
+                        "CosmosEventId.ExecutedCreateItem",
+                        level => LoggerMessage.Define<string, string, string, string, string, string?>(
+                            level,
+                            CosmosEventId.ExecutedCreateItem,
+                            _resourceManager.GetString("LogExecutedCreateItem")!)));
+            }
+
+            return (EventDefinition<string, string, string, string, string, string?>)definition;
+        }
+
+        /// <summary>
+        ///     Executed DeleteItem ({elapsed} ms, {charge} RU) ActivityId='{activityId}', Container='{container}', Id='{id}', Partition='{partitionKey}'
+        /// </summary>
+        public static EventDefinition<string, string, string, string, string, string?> LogExecutedDeleteItem(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedDeleteItem;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedDeleteItem,
+                    logger,
+                    static logger => new EventDefinition<string, string, string, string, string, string?>(
+                        logger.Options,
+                        CosmosEventId.ExecutedDeleteItem,
+                        LogLevel.Information,
+                        "CosmosEventId.ExecutedDeleteItem",
+                        level => LoggerMessage.Define<string, string, string, string, string, string?>(
+                            level,
+                            CosmosEventId.ExecutedDeleteItem,
+                            _resourceManager.GetString("LogExecutedDeleteItem")!)));
+            }
+
+            return (EventDefinition<string, string, string, string, string, string?>)definition;
+        }
+
+        /// <summary>
+        ///     Executed ReadItem ({elapsed} ms, {charge} RU) ActivityId='{activityId}', Container='{container}', Id='{id}', Partition='{partitionKey}'
+        /// </summary>
+        public static EventDefinition<string, string, string, string, string, string?> LogExecutedReadItem(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedReadItem;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedReadItem,
+                    logger,
+                    static logger => new EventDefinition<string, string, string, string, string, string?>(
+                        logger.Options,
+                        CosmosEventId.ExecutedReadItem,
+                        LogLevel.Information,
+                        "CosmosEventId.ExecutedReadItem",
+                        level => LoggerMessage.Define<string, string, string, string, string, string?>(
+                            level,
+                            CosmosEventId.ExecutedReadItem,
+                            _resourceManager.GetString("LogExecutedReadItem")!)));
+            }
+
+            return (EventDefinition<string, string, string, string, string, string?>)definition;
+        }
+
+        /// <summary>
+        ///     Executed ReadNext ({elapsed} ms, {charge} RU) ActivityId='{activityId}', Container='{container}', Partition='{partitionKey}', Parameters=[{parameters}]{newLine}{sql}
+        /// </summary>
+        public static FallbackEventDefinition LogExecutedReadNext(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedReadNext;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedReadNext,
+                    logger,
+                    static logger => new FallbackEventDefinition(
+                        logger.Options,
+                        CosmosEventId.ExecutedReadNext,
+                        LogLevel.Information,
+                        "CosmosEventId.ExecutedReadNext",
+                        _resourceManager.GetString("LogExecutedReadNext")!));
+            }
+
+            return (FallbackEventDefinition)definition;
+        }
+
+        /// <summary>
+        ///     Executed ReplaceItem ({elapsed} ms, {charge} RU) ActivityId='{activityId}', Container='{container}', Id='{id}', Partition='{partitionKey}'
+        /// </summary>
+        public static EventDefinition<string, string, string, string, string, string?> LogExecutedReplaceItem(IDiagnosticsLogger logger)
+        {
+            var definition = ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedReplaceItem;
+            if (definition == null)
+            {
+                definition = NonCapturingLazyInitializer.EnsureInitialized(
+                    ref ((Diagnostics.Internal.CosmosLoggingDefinitions)logger.Definitions).LogExecutedReplaceItem,
+                    logger,
+                    static logger => new EventDefinition<string, string, string, string, string, string?>(
+                        logger.Options,
+                        CosmosEventId.ExecutedReplaceItem,
+                        LogLevel.Information,
+                        "CosmosEventId.ExecutedReplaceItem",
+                        level => LoggerMessage.Define<string, string, string, string, string, string?>(
+                            level,
+                            CosmosEventId.ExecutedReplaceItem,
+                            _resourceManager.GetString("LogExecutedReplaceItem")!)));
+            }
+
+            return (EventDefinition<string, string, string, string, string, string?>)definition;
+        }
 
         /// <summary>
         ///     Reading resource '{resourceId}' item from container '{containerId}' in partition '{partitionKey}'.

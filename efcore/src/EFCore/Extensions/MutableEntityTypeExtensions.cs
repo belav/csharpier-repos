@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Linq.Expressions;
@@ -18,8 +18,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Returns the defining navigation if one exists or <see langword="null" /> otherwise.
         /// </summary>
-        /// <param name="entityType"> The entity type. </param>
-        /// <returns> The defining navigation if one exists or <see langword="null" /> otherwise. </returns>
+        /// <param name="entityType">The entity type.</param>
+        /// <returns>The defining navigation if one exists or <see langword="null" /> otherwise.</returns>
         [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
         public static IMutableNavigation? FindDefiningNavigation(this IMutableEntityType entityType)
             => (IMutableNavigation?)((IEntityType)entityType).FindDefiningNavigation();
@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Sets the LINQ query used as the default source for queries of this type.
         /// </summary>
-        /// <param name="entityType"> The entity type. </param>
-        /// <param name="definingQuery"> The LINQ query used as the default source. </param>
+        /// <param name="entityType">The entity type.</param>
+        /// <param name="definingQuery">The LINQ query used as the default source.</param>
         [Obsolete("Use InMemoryEntityTypeExtensions.SetInMemoryQuery")]
         public static void SetDefiningQuery(
             this IMutableEntityType entityType,

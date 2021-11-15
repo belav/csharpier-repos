@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,6 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that adds service properties to entity types.
     /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
+    /// </remarks>
     public class ServicePropertyDiscoveryConvention :
         IEntityTypeAddedConvention,
         IEntityTypeBaseTypeChangedConvention
@@ -18,22 +21,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Creates a new instance of <see cref="ServicePropertyDiscoveryConvention" />.
         /// </summary>
-        /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
+        /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public ServicePropertyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
 
         /// <summary>
-        ///     Parameter object containing service dependencies.
+        ///     Dependencies for this service.
         /// </summary>
         protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
         /// <summary>
         ///     Called after an entity type is added to the model.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionContext<IConventionEntityTypeBuilder> context)
@@ -42,10 +45,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <summary>
         ///     Called after the base type of an entity type changes.
         /// </summary>
-        /// <param name="entityTypeBuilder"> The builder for the entity type. </param>
-        /// <param name="newBaseType"> The new base entity type. </param>
-        /// <param name="oldBaseType"> The old base entity type. </param>
-        /// <param name="context"> Additional information associated with convention execution. </param>
+        /// <param name="entityTypeBuilder">The builder for the entity type.</param>
+        /// <param name="newBaseType">The new base entity type.</param>
+        /// <param name="oldBaseType">The old base entity type.</param>
+        /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeBaseTypeChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
@@ -61,29 +64,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void Process(IConventionEntityTypeBuilder entityTypeBuilder)
         {
             var entityType = entityTypeBuilder.Metadata;
-            var candidates = entityType.GetRuntimeProperties().Values;
-
-            foreach (var propertyInfo in candidates)
+            var model = entityType.Model;
+            foreach (var propertyInfo in entityType.GetRuntimeProperties().Values)
             {
-                var name = propertyInfo.GetSimpleMemberName();
-                if (entityTypeBuilder.IsIgnored(name)
-                    || entityType.FindProperty(propertyInfo) != null
-                    || entityType.FindNavigation(propertyInfo) != null
-                    || !propertyInfo.IsCandidateProperty(publicOnly: false)
-                    || (propertyInfo.IsCandidateProperty()
-                        && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null))
+                if (!entityTypeBuilder.CanHaveServiceProperty(propertyInfo))
                 {
                     continue;
                 }
 
-                var factory = Dependencies.ParameterBindingFactories.FindFactory(propertyInfo.PropertyType, name);
+                var factory = Dependencies.MemberClassifier.FindServicePropertyCandidateBindingFactory(propertyInfo, model);
                 if (factory == null)
                 {
                     continue;
                 }
 
                 entityTypeBuilder.ServiceProperty(propertyInfo)?.HasParameterBinding(
-                    (ServiceParameterBinding)factory.Bind(entityType, propertyInfo.PropertyType, name));
+                    (ServiceParameterBinding)factory.Bind(entityType, propertyInfo.PropertyType, propertyInfo.GetSimpleMemberName()));
             }
         }
     }

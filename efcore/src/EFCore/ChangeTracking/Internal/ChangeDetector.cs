@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Collections;
@@ -10,23 +10,14 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 {
     /// <summary>
-    ///     <para>
-    ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///         the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///         any release. You should only use it directly in your code with extreme caution and knowing that
-    ///         doing so can result in application failures when updating to a new Entity Framework Core release.
-    ///     </para>
-    ///     <para>
-    ///         The service lifetime is <see cref="ServiceLifetime.Scoped" />. This means that each
-    ///         <see cref="DbContext" /> instance will use its own instance of this service.
-    ///         The implementation may depend on other services registered with any lifetime.
-    ///         The implementation does not need to be thread-safe.
-    ///     </para>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class ChangeDetector : IChangeDetector
     {
@@ -152,9 +143,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             foreach (var entry in stateManager.ToList()) // Might be too big, but usually _all_ entities are using Snapshot tracking
             {
-                if (entry.EntityState != EntityState.Detached)
+                switch (entry.EntityState)
                 {
-                    LocalDetectChanges(entry);
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Deleted:
+                        if (entry.SharedIdentityEntry != null)
+                        {
+                            continue;
+                        }
+
+                        LocalDetectChanges(entry);
+                        break;
+                    default:
+                        LocalDetectChanges(entry);
+                        break;
                 }
             }
 
@@ -205,40 +208,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     && !entry.IsModified(property)
                     && !entry.IsConceptualNull(property))
                 {
-                    var current = entry[property];
-                    var original = entry.GetOriginalValue(property);
-
-                    var comparer = property.GetValueComparer();
-
-                    if (comparer == null)
-                    {
-                        if (!Equals(current, original))
-                        {
-                            SetPropertyModified();
-                        }
-                    }
-                    else if (!comparer.Equals(current, original))
-                    {
-                        SetPropertyModified();
-                    }
-
-                    void SetPropertyModified()
-                    {
-                        if (entry.EntityState == EntityState.Deleted)
-                        {
-                            ThrowIfKeyChanged(entry, property);
-                        }
-                        else
-                        {
-                            LogChangeDetected(entry, property, original, current);
-                            entry.SetPropertyModified(property);
-                        }
-                    }
+                    DetectValueChange(entry, property);
                 }
-            }
 
-            foreach (var property in entityType.GetProperties())
-            {
                 DetectKeyChange(entry, property);
             }
 
@@ -252,6 +224,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 foreach (var navigation in entityType.GetSkipNavigations())
                 {
                     DetectNavigationChange(entry, navigation);
+                }
+            }
+        }
+
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public void DetectValueChange(InternalEntityEntry entry, IProperty property)
+        {
+            var current = entry[property];
+            var original = entry.GetOriginalValue(property);
+
+            if (!property.GetValueComparer().Equals(current, original))
+            {
+                if (entry.EntityState == EntityState.Deleted)
+                {
+                    ThrowIfKeyChanged(entry, property);
+                }
+                else
+                {
+                    LogChangeDetected(entry, property, original, current);
+                    entry.SetPropertyModified(property);
                 }
             }
         }
@@ -303,7 +300,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
         }
 
-        private void DetectNavigationChange(InternalEntityEntry entry, INavigationBase navigationBase)
+        /// <summary>
+        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+        ///     any release. You should only use it directly in your code with extreme caution and knowing that
+        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// </summary>
+        public void DetectNavigationChange(InternalEntityEntry entry, INavigationBase navigationBase)
         {
             var snapshotValue = entry.GetRelationshipSnapshotValue(navigationBase);
             var currentValue = entry[navigationBase];

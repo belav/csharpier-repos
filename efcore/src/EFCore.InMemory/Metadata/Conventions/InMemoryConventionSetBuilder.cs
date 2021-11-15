@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -10,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
 {
     /// <summary>
-    ///     <para>
-    ///         A builder for building conventions for th in-memory provider.
-    ///     </para>
+    ///     A builder for building conventions for th in-memory provider.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         The service lifetime is <see cref="ServiceLifetime.Scoped" /> and multiple registrations
     ///         are allowed. This means that each <see cref="DbContext" /> instance will use its own
@@ -20,13 +20,17 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
     ///         The implementations may depend on other services registered with any lifetime.
     ///         The implementations do not need to be thread-safe.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
+    ///         <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database provider</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
     {
         /// <summary>
         ///     Creates a new <see cref="InMemoryConventionSetBuilder" /> instance.
         /// </summary>
-        /// <param name="dependencies"> The core dependencies for this service. </param>
+        /// <param name="dependencies">The core dependencies for this service.</param>
         public InMemoryConventionSetBuilder(
             ProviderConventionSetBuilderDependencies dependencies)
             : base(dependencies)
@@ -44,16 +48,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         }
 
         /// <summary>
-        ///     <para>
-        ///         Call this method to build a <see cref="ConventionSet" /> for the in-memory provider when using
-        ///         the <see cref="ModelBuilder" /> outside of <see cref="DbContext.OnModelCreating" />.
-        ///     </para>
-        ///     <para>
-        ///         Note that it is unusual to use this method.
-        ///         Consider using <see cref="DbContext" /> in the normal way instead.
-        ///     </para>
+        ///     Call this method to build a <see cref="ConventionSet" /> for the in-memory provider when using
+        ///     the <see cref="ModelBuilder" /> outside of <see cref="DbContext.OnModelCreating" />.
         /// </summary>
-        /// <returns> The convention set. </returns>
+        /// <remarks>
+        ///     Note that it is unusual to use this method.
+        ///     Consider using <see cref="DbContext" /> in the normal way instead.
+        /// </remarks>
+        /// <returns>The convention set.</returns>
         public static ConventionSet Build()
         {
             using var serviceScope = CreateServiceScope();
@@ -62,15 +64,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         }
 
         /// <summary>
-        ///     <para>
-        ///         Call this method to build a <see cref="ModelBuilder" /> for SQLite outside of <see cref="DbContext.OnModelCreating" />.
-        ///     </para>
-        ///     <para>
-        ///         Note that it is unusual to use this method.
-        ///         Consider using <see cref="DbContext" /> in the normal way instead.
-        ///     </para>
+        ///     Call this method to build a <see cref="ModelBuilder" /> for SQLite outside of <see cref="DbContext.OnModelCreating" />.
         /// </summary>
-        /// <returns> The convention set. </returns>
+        /// <remarks>
+        ///     Note that it is unusual to use this method. Consider using <see cref="DbContext" /> in the normal way instead.
+        /// </remarks>
+        /// <returns>The convention set.</returns>
         public static ModelBuilder CreateModelBuilder()
         {
             using var serviceScope = CreateServiceScope();

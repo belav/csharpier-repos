@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 // NOTE: This file is copied from src/Middleware/StaticFiles/src/FileExtensionContentTypeProvider.cs
 // and made internal with a namespace change.
@@ -9,19 +9,18 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace Microsoft.AspNetCore.Components.WebView
+namespace Microsoft.AspNetCore.Components.WebView;
+
+/// <summary>
+/// Used to look up MIME types given a file path
+/// </summary>
+internal interface IContentTypeProvider
 {
     /// <summary>
-    /// Used to look up MIME types given a file path
+    /// Given a file path, determine the MIME type
     /// </summary>
-    internal interface IContentTypeProvider
-    {
-        /// <summary>
-        /// Given a file path, determine the MIME type
-        /// </summary>
-        /// <param name="subpath">A file path</param>
-        /// <param name="contentType">The resulting MIME type</param>
-        /// <returns>True if MIME type could be determined</returns>
-        bool TryGetContentType(string subpath, [MaybeNullWhen(false)] out string contentType);
-    }
+    /// <param name="subpath">A file path</param>
+    /// <param name="contentType">The resulting MIME type</param>
+    /// <returns>True if MIME type could be determined</returns>
+    bool TryGetContentType(string subpath, [MaybeNullWhen(false)] out string contentType);
 }

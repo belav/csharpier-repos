@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
 using System.Threading;
@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace Microsoft.EntityFrameworkCore.ValueGeneration
 {
     /// <summary>
-    ///     <para>
-    ///         Generates sequential <see cref="Guid" /> values optimized for use in Microsoft SQL server clustered
-    ///         keys or indexes, yielding better performance than random values. This is the default generator for
-    ///         SQL Server <see cref="Guid" /> columns which are set to be generated on add.
-    ///     </para>
+    ///     Generates sequential <see cref="Guid" /> values optimized for use in Microsoft SQL server clustered
+    ///     keys or indexes, yielding better performance than random values. This is the default generator for
+    ///     SQL Server <see cref="Guid" /> columns which are set to be generated on add.
+    /// </summary>
+    /// <remarks>
     ///     <para>
     ///         See https://docs.microsoft.com/sql/t-sql/functions/newsequentialid-transact-sql.
     ///         Although this generator achieves the same goals as SQL Server's NEWSEQUENTIALID, the algorithm used
@@ -21,7 +21,10 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
     ///     <para>
     ///         The generated values are non-temporary, meaning they will be saved to the database.
     ///     </para>
-    /// </summary>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information.
+    ///     </para>
+    /// </remarks>
     public class SequentialGuidValueGenerator : ValueGenerator<Guid>
     {
         private long _counter = DateTime.UtcNow.Ticks;
@@ -29,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     Gets a value to be assigned to a property.
         /// </summary>
-        /// <param name="entry"> The change tracking entry of the entity for which the value is being generated. </param>
-        /// <returns> The value to be assigned to a property. </returns>
+        /// <param name="entry">The change tracking entry of the entity for which the value is being generated.</param>
+        /// <returns>The value to be assigned to a property.</returns>
         public override Guid Next(EntityEntry entry)
         {
             var guidBytes = Guid.NewGuid().ToByteArray();
