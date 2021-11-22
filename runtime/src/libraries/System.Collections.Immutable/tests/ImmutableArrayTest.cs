@@ -3045,7 +3045,12 @@ namespace System.Collections.Immutable.Tests
                                 ImmutableArray.Create(1, 2, 3, 4),
                                 comparer
                             },
-                            new object[] { new[] { 1, 2, 3 }, new List<int> { 1, 2, 3 }, comparer }
+                            new object[]
+                            {
+                                new[] { 1, 2, 3 },
+                                new List<int> { 1, 2, 3 },
+                                comparer
+                            }
                         }
                 );
         }

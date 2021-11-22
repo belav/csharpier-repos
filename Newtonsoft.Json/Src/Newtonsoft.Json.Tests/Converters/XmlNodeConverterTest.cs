@@ -2553,7 +2553,10 @@ namespace Newtonsoft.Json.Tests.Converters
             TestComplexArrayClass o = new TestComplexArrayClass
             {
                 Name = "Hi",
-                Products = new List<Product> { new Product { Name = "First" } }
+                Products = new List<Product>
+                {
+                    new Product { Name = "First" }
+                }
             };
 
             string output = JsonConvert.SerializeObject(o, new IsoDateTimeConverter());
@@ -2728,7 +2731,10 @@ namespace Newtonsoft.Json.Tests.Converters
             var serializer = JsonSerializer.Create(
                 new JsonSerializerSettings
                 {
-                    Converters = { new XmlNodeConverter() { DeserializeRootElementName = "root" } }
+                    Converters =
+                    {
+                        new XmlNodeConverter() { DeserializeRootElementName = "root" }
+                    }
                 }
             );
             using (var reader = obj.CreateReader())

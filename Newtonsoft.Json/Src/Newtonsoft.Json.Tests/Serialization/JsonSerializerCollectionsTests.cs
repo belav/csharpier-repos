@@ -481,7 +481,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 ((IDictionary)this).Add(
                     "key2",
-                    new List<SomeObject> { new SomeObject { Text1 = "value2" } }
+                    new List<SomeObject>
+                    {
+                        new SomeObject { Text1 = "value2" }
+                    }
                 );
             }
         }
@@ -490,7 +493,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeCustomConcurrentDictionary()
         {
             IDictionary d = new CustomConcurrentDictionary();
-            d.Add("key", new List<SomeObject> { new SomeObject { Text1 = "value1" } });
+            d.Add(
+                "key",
+                new List<SomeObject>
+                {
+                    new SomeObject { Text1 = "value1" }
+                }
+            );
 
             string json = JsonConvert.SerializeObject(d, Formatting.Indented);
 
@@ -2049,7 +2058,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 const string propertyValue = "value";
 
-                var list = new List<ITestInterface> { new TestClass { Property = propertyValue } };
+                var list = new List<ITestInterface>
+                {
+                    new TestClass { Property = propertyValue }
+                };
 
                 var json = JsonConvert.SerializeObject(list);
 

@@ -32,7 +32,11 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
             ReferenceHandler.Preserve;
         var expectedContent =
             "{\"$id\":\"1\",\"name\":\"Person\",\"child\":{\"$id\":\"2\",\"name\":\"Child\",\"child\":null,\"parent\":{\"$ref\":\"1\"}},\"parent\":null}";
-        var person = new Person { Name = "Person", Child = new Person { Name = "Child", }, };
+        var person = new Person
+        {
+            Name = "Person",
+            Child = new Person { Name = "Child", },
+        };
         person.Child.Parent = person;
 
         var mediaType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");

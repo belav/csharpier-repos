@@ -21,17 +21,29 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyClass[] operator /(MyClass p1, float? p2)
         {
-            return new MyClass[] { new MyClass() { Field = 1 }, new MyClass() { Field = 4 } };
+            return new MyClass[]
+            {
+                new MyClass() { Field = 1 },
+                new MyClass() { Field = 4 }
+            };
         }
 
         public static MyStruct?[] operator <=(MyClass p1, int p2)
         {
-            return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } };
+            return new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = int.MinValue }
+            };
         }
 
         public static MyStruct?[] operator >=(MyClass p1, int p2)
         {
-            return new MyStruct?[] { null, new MyStruct() { Number = int.MaxValue } };
+            return new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = int.MaxValue }
+            };
         }
 
         public static MyClass operator >>(MyClass p1, int p2)
@@ -96,7 +108,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyStruct[] operator |(MyClass p1, short[] p2)
         {
-            return new MyStruct[] { new MyStruct() { Number = 3 } };
+            return new MyStruct[]
+            {
+                new MyStruct() { Number = 3 }
+            };
         }
 
         public static dynamic[] operator &(MyClass p1, string p2)
@@ -188,7 +203,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         // public static implicit operator dynamic(MyClass p1) { return p1; }
         public static implicit operator MyStruct[](MyClass p1)
         {
-            return new MyStruct[] { new MyStruct() { Number = 4 } };
+            return new MyStruct[]
+            {
+                new MyStruct() { Number = 4 }
+            };
         }
 
         public static implicit operator int?(MyClass p1)
@@ -384,7 +402,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static explicit operator MyClass[](MyStruct p1)
         {
-            return new MyClass[] { new MyClass() { Field = 3 } };
+            return new MyClass[]
+            {
+                new MyClass() { Field = 3 }
+            };
         }
 
         public static implicit operator ulong[](MyStruct p1)
@@ -2042,7 +2063,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyStruct mc = new MyStruct();
             dynamic dy = mc;
-            MyStruct?[] p1 = new MyStruct?[] { new MyStruct() { Number = 10 } };
+            MyStruct?[] p1 = new MyStruct?[]
+            {
+                new MyStruct() { Number = 10 }
+            };
             double[] result;
 #if c1
             result = p1 < dy;
@@ -3030,17 +3054,29 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyClass[] operator /(MyClass p1, float? p2)
         {
-            return new MyClass[] { new MyClass() { Field = 1 }, new MyClass() { Field = 4 } };
+            return new MyClass[]
+            {
+                new MyClass() { Field = 1 },
+                new MyClass() { Field = 4 }
+            };
         }
 
         public static MyStruct?[] operator <=(MyClass p1, int p2)
         {
-            return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } };
+            return new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = int.MinValue }
+            };
         }
 
         public static MyStruct?[] operator >=(MyClass p1, int p2)
         {
-            return new MyStruct?[] { null, new MyStruct() { Number = int.MaxValue } };
+            return new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = int.MaxValue }
+            };
         }
 
         public static MyClass operator >>(MyClass p1, int p2)
@@ -3095,7 +3131,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyStruct[] operator |(MyClass p1, short[] p2)
         {
-            return new MyStruct[] { new MyStruct() { Number = 3 } };
+            return new MyStruct[]
+            {
+                new MyStruct() { Number = 3 }
+            };
         }
 
         public static dynamic[] operator &(MyClass p1, string p2)
@@ -3196,7 +3235,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         // public static implicit operator dynamic(MyClass p1) { return p1; }
         public static implicit operator MyStruct[](MyClass p1)
         {
-            return new MyStruct[] { new MyStruct() { Number = 4 } };
+            return new MyStruct[]
+            {
+                new MyStruct() { Number = 4 }
+            };
         }
 
         public static implicit operator int?(MyClass p1)
@@ -3392,7 +3434,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static explicit operator MyClass[](MyStruct p1)
         {
-            return new MyClass[] { new MyClass() { Field = 3 } };
+            return new MyClass[]
+            {
+                new MyClass() { Field = 3 }
+            };
         }
 
         public static implicit operator ulong[](MyStruct p1)

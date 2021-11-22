@@ -237,7 +237,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelStateDictionary msd = new ModelStateDictionary()
             {
-                { "foo", new ModelState() { Value = new ValueProviderResult(null, null, null) } }
+                {
+                    "foo",
+                    new ModelState() { Value = new ValueProviderResult(null, null, null) }
+                }
             };
 
             // Act

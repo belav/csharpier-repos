@@ -326,7 +326,11 @@ public class FormActionTagHelperTest
             {
                 { "Area", null, "Area" },
                 // Explicit Area overrides value in the dictionary.
-                { "Area", new Dictionary<string, string> { { "area", "Home" } }, "Area" },
+                {
+                    "Area",
+                    new Dictionary<string, string> { { "area", "Home" } },
+                    "Area"
+                },
                 // Empty string is also passed through to the helper.
                 { string.Empty, null, string.Empty },
                 {
@@ -335,7 +339,11 @@ public class FormActionTagHelperTest
                     string.Empty
                 },
                 // Fall back "area" entry in the provided route values if Area is null.
-                { null, new Dictionary<string, string> { { "area", "Admin" } }, "Admin" },
+                {
+                    null,
+                    new Dictionary<string, string> { { "area", "Admin" } },
+                    "Admin"
+                },
             };
         }
     }

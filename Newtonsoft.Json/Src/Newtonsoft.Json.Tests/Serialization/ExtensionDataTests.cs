@@ -877,7 +877,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Name = "Name!",
                 ExtensionData = new Dictionary<object, object>
                 {
-                    { "Test", new WagePerson { HourlyWage = 2.1m } }
+                    {
+                        "Test",
+                        new WagePerson { HourlyWage = 2.1m }
+                    }
                 }
             };
 

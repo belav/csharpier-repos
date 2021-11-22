@@ -192,8 +192,14 @@ public class ModelMetadataProviderTest
                     new DisplayAttribute { Description = "value" },
                     metadata => metadata.Description
                 },
-                { new DisplayAttribute { Name = "value" }, metadata => metadata.DisplayName },
-                { new DisplayAttribute { Prompt = "value" }, metadata => metadata.Placeholder },
+                {
+                    new DisplayAttribute { Name = "value" },
+                    metadata => metadata.DisplayName
+                },
+                {
+                    new DisplayAttribute { Prompt = "value" },
+                    metadata => metadata.Placeholder
+                },
                 {
                     new DisplayFormatAttribute { DataFormatString = "value" },
                     metadata => metadata.DisplayFormatString
@@ -375,13 +381,34 @@ public class ModelMetadataProviderTest
             return new TheoryData<DisplayAttribute, int>
             {
                 { new DisplayAttribute(), ModelMetadata.DefaultOrder },
-                { new DisplayAttribute { Order = int.MinValue }, int.MinValue },
-                { new DisplayAttribute { Order = -100 }, -100 },
-                { new DisplayAttribute { Order = -1 }, -1 },
-                { new DisplayAttribute { Order = 0 }, 0 },
-                { new DisplayAttribute { Order = 1 }, 1 },
-                { new DisplayAttribute { Order = 200 }, 200 },
-                { new DisplayAttribute { Order = int.MaxValue }, int.MaxValue },
+                {
+                    new DisplayAttribute { Order = int.MinValue },
+                    int.MinValue
+                },
+                {
+                    new DisplayAttribute { Order = -100 },
+                    -100
+                },
+                {
+                    new DisplayAttribute { Order = -1 },
+                    -1
+                },
+                {
+                    new DisplayAttribute { Order = 0 },
+                    0
+                },
+                {
+                    new DisplayAttribute { Order = 1 },
+                    1
+                },
+                {
+                    new DisplayAttribute { Order = 200 },
+                    200
+                },
+                {
+                    new DisplayAttribute { Order = int.MaxValue },
+                    int.MaxValue
+                },
             };
         }
     }

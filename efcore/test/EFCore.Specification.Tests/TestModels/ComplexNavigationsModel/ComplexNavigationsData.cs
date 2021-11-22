@@ -244,7 +244,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
 
         public static IReadOnlyList<InheritanceBase2> CreateInheritanceBaseTwos()
         {
-            var result = new List<InheritanceBase2> { new() { Id = 1, Name = "IB2 01" } };
+            var result = new List<InheritanceBase2>
+            {
+                new() { Id = 1, Name = "IB2 01" }
+            };
 
             return result;
         }
@@ -263,7 +266,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
 
         public static IReadOnlyList<InheritanceLeaf2> CreateInheritanceLeafTwos()
         {
-            var result = new List<InheritanceLeaf2> { new() { Id = 1, Name = "IL2 01" } };
+            var result = new List<InheritanceLeaf2>
+            {
+                new() { Id = 1, Name = "IL2 01" }
+            };
 
             return result;
         }

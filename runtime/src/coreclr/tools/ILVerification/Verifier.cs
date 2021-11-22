@@ -75,7 +75,10 @@ namespace ILVerify
             }
             catch (VerifierException e)
             {
-                results = new[] { new VerificationResult() { Message = e.Message } };
+                results = new[]
+                {
+                    new VerificationResult() { Message = e.Message }
+                };
             }
 
             foreach (var result in results)
@@ -121,7 +124,10 @@ namespace ILVerify
             }
             catch (VerifierException e)
             {
-                results = new[] { new VerificationResult() { Message = e.Message } };
+                results = new[]
+                {
+                    new VerificationResult() { Message = e.Message }
+                };
             }
 
             foreach (var result in results)
@@ -158,7 +164,10 @@ namespace ILVerify
             }
             catch (VerifierException e)
             {
-                results = new[] { new VerificationResult() { Message = e.Message } };
+                results = new[]
+                {
+                    new VerificationResult() { Message = e.Message }
+                };
             }
 
             foreach (var result in results)

@@ -350,7 +350,10 @@ public class Tests
 
     public static int test_0_stsfld()
     {
-        Foo[] farr = new Foo[] { new Foo() { i = 1, j = 2 } };
+        Foo[] farr = new Foo[]
+        {
+            new Foo() { i = 1, j = 2 }
+        };
         stsfld<Foo>(farr);
 
         if (GFoo<Foo>.static_t.i != 1 || GFoo<Foo>.static_t.j != 2)

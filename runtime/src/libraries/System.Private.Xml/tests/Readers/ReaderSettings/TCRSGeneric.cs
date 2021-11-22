@@ -34,21 +34,30 @@ namespace System.Xml.Tests
             // for function v3
             {
                 this.AddChild(
-                    new CVariation(v3) { Attribute = new Variation("Reset") { Priority = 0 } }
+                    new CVariation(v3)
+                    {
+                        Attribute = new Variation("Reset") { Priority = 0 }
+                    }
                 );
             }
 
             // for function v4
             {
                 this.AddChild(
-                    new CVariation(v4) { Attribute = new Variation("Clone") { Priority = 0 } }
+                    new CVariation(v4)
+                    {
+                        Attribute = new Variation("Clone") { Priority = 0 }
+                    }
                 );
             }
 
             // for function v5
             {
                 this.AddChild(
-                    new CVariation(v5) { Attribute = new Variation("NameTable") { Priority = 0 } }
+                    new CVariation(v5)
+                    {
+                        Attribute = new Variation("NameTable") { Priority = 0 }
+                    }
                 );
             }
         }

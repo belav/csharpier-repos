@@ -521,7 +521,16 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 10 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -541,7 +550,10 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, Person>
         {
-            { "key0", new Person { Id = 10 } }
+            {
+                "key0",
+                new Person { Id = 10 }
+            }
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -587,7 +599,10 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, Person>
         {
-            { "key0", new Person { Id = 10 } }
+            {
+                "key0",
+                new Person { Id = 10 }
+            }
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -633,7 +648,10 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, Person>
         {
-            { "42", new Person { Id = 10 } }
+            {
+                "42",
+                new Person { Id = 10 }
+            }
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -676,7 +694,10 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, Person>
         {
-            { "42", new Person { Id = 10 } }
+            {
+                "42",
+                new Person { Id = 10 }
+            }
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -757,7 +778,16 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 10 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -798,7 +828,16 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 10 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -842,7 +881,13 @@ public class DictionaryModelBinderIntegrationTest
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
         Assert.Equal(
-            new Dictionary<string, Person> { { "key0", new Person { Id = 100 } }, },
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 100 }
+                },
+            },
             model
         );
 

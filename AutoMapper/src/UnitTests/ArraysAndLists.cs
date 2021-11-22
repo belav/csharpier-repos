@@ -95,7 +95,13 @@ namespace AutoMapper.UnitTests.ArraysAndLists
             var source = new Source { Items = _sourceItems };
             _destination = Mapper.Map(
                 source,
-                new Destination { Items = new[] { new DestinationItem { Value = "4" } } }
+                new Destination
+                {
+                    Items = new[]
+                    {
+                        new DestinationItem { Value = "4" }
+                    }
+                }
             );
         }
 
@@ -443,7 +449,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         }
 
@@ -495,7 +505,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         }
 
@@ -542,7 +556,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
             );
         protected override void Because_of() =>
             _destination = Mapper.Map<Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         [Fact]
         public void Should_map_the_list_of_source_items()
@@ -616,7 +634,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         }
 
@@ -790,7 +812,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
 
         protected override void Because_of()
         {
-            _source = new Source { Values = new ValueCollection { 1, 2, 3, 4 } };
+            _source = new Source
+            {
+                Values = new ValueCollection { 1, 2, 3, 4 }
+            };
             _destination = Mapper.Map<Source, Destination>(_source);
         }
 
@@ -992,14 +1017,35 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         [Fact]
         public void Should_clear_the_list_before_mapping()
         {
-            var destination = new Destination { Values = { new DestItem { } } };
-            Mapper.Map(new Source { Values = { new SourceItem { Value = 42 } } }, destination);
+            var destination = new Destination
+            {
+                Values =
+                {
+                    new DestItem { }
+                }
+            };
+            Mapper.Map(
+                new Source
+                {
+                    Values =
+                    {
+                        new SourceItem { Value = 42 }
+                    }
+                },
+                destination
+            );
             destination.Values.Single().Value.ShouldBe(42);
         }
         [Fact]
         public void Should_clear_the_list_before_mapping_when_the_source_is_null()
         {
-            var destination = new Destination { Values = { new DestItem { } } };
+            var destination = new Destination
+            {
+                Values =
+                {
+                    new DestItem { }
+                }
+            };
             Mapper.Map(new Source { Values = null }, destination);
             destination.Values.ShouldBeEmpty();
         }

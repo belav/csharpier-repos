@@ -41,7 +41,11 @@ namespace AutoMapper.IntegrationTests.Parameterization
             protected override void Seed(ClientContext context)
             {
                 context.Entities.AddRange(
-                    new[] { new Entity { Value = "Value1" }, new Entity { Value = "Value2" } }
+                    new[]
+                    {
+                        new Entity { Value = "Value1" },
+                        new Entity { Value = "Value2" }
+                    }
                 );
                 base.Seed(context);
             }

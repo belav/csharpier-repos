@@ -1169,7 +1169,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_CustomType()
     {
-        MyTypeA x = new MyTypeA { PropX = new MyTypeC { PropC = 'a', PropB = true }, PropY = 45, };
+        MyTypeA x = new MyTypeA
+        {
+            PropX = new MyTypeC { PropC = 'a', PropB = true },
+            PropY = 45,
+        };
         MyTypeA y = SerializeAndDeserialize<MyTypeA>(
             x,
             @"{""P_Col_Array"":null,""PropX"":{""__type"":""MyTypeC:#SerializationTypes"",""PropA"":null,""PropC"":""a"",""PropB"":true},""PropY"":45}"
@@ -1961,7 +1965,10 @@ public static partial class DataContractJsonSerializerTests
     {
         TypeWithKnownTypeAttributeAndListOfInterfaceMember value =
             new TypeWithKnownTypeAttributeAndListOfInterfaceMember();
-        value.Articles = new List<IArticle>() { new SummaryArticle() { Title = "Bar Summary" } };
+        value.Articles = new List<IArticle>()
+        {
+            new SummaryArticle() { Title = "Bar Summary" }
+        };
         var deserializedValue =
             SerializeAndDeserialize<TypeWithKnownTypeAttributeAndListOfInterfaceMember>(
                 value,
@@ -3179,8 +3186,18 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_ExtensionDataObjectTest2()
     {
-        SerializeThenDeserialize(new ContractExtended { Item = new Item { Id = 1, Code = 2 } });
-        SerializeThenDeserialize(new ContractExtended { Item = new Item { Id = 1 } });
+        SerializeThenDeserialize(
+            new ContractExtended
+            {
+                Item = new Item { Id = 1, Code = 2 }
+            }
+        );
+        SerializeThenDeserialize(
+            new ContractExtended
+            {
+                Item = new Item { Id = 1 }
+            }
+        );
     }
 
     private static void SerializeThenDeserialize(ContractExtended extendedData)
@@ -3751,7 +3768,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_VerifyIndentation()
     {
-        var testClass = new TestClass() { floatNum = 2.3f, intList = new List<int>() { 2, 3, 4 } };
+        var testClass = new TestClass()
+        {
+            floatNum = 2.3f,
+            intList = new List<int>() { 2, 3, 4 }
+        };
 
         string spaceChars = "    ";
         var dcjsSettings = new DataContractJsonSerializerSettings()

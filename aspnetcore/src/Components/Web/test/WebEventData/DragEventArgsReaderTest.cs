@@ -21,19 +21,18 @@ public class DragEventArgsReaderTest
             ClientX = 3.1,
             ClientY = 4.2,
             CtrlKey = false,
-            DataTransfer =
-                new()
+            DataTransfer = new()
+            {
+                DropEffect = "effect1",
+                EffectAllowed = "allowed1",
+                Files = new[] { "File1", "File2" },
+                Items = new[]
                 {
-                    DropEffect = "effect1",
-                    EffectAllowed = "allowed1",
-                    Files = new[] { "File1", "File2" },
-                    Items = new[]
-                    {
-                        new DataTransferItem { Kind = "kind1", Type = "type1," },
-                        new DataTransferItem { Kind = "kind7", Type = "type6," },
-                    },
-                    Types = new[] { "type1", "type2", "type3" },
+                    new DataTransferItem { Kind = "kind1", Type = "type1," },
+                    new DataTransferItem { Kind = "kind7", Type = "type6," },
                 },
+                Types = new[] { "type1", "type2", "type3" },
+            },
             Detail = 7,
             MetaKey = false,
             OffsetX = 8.2,

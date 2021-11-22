@@ -47,8 +47,14 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Command("inner-one") { new Argument { Arity = ArgumentArity.Zero } },
-                new Command("inner-two") { new Argument { Arity = ArgumentArity.Zero } }
+                new Command("inner-one")
+                {
+                    new Argument { Arity = ArgumentArity.Zero }
+                },
+                new Command("inner-two")
+                {
+                    new Argument { Arity = ArgumentArity.Zero }
+                }
             };
 
             var result = new Parser(command).Parse("outer inner-one inner-two");

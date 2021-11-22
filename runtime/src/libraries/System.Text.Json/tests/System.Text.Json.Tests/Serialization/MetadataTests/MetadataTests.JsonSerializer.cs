@@ -52,8 +52,14 @@ namespace System.Text.Json.Serialization.Tests
                 },
                 TemperatureRanges = new Dictionary<string, HighLowTemps>
                 {
-                    { "Cold", new HighLowTemps { High = 20, Low = -10, } },
-                    { "Hot", new HighLowTemps { High = 60, Low = 20, } },
+                    {
+                        "Cold",
+                        new HighLowTemps { High = 20, Low = -10, }
+                    },
+                    {
+                        "Hot",
+                        new HighLowTemps { High = 60, Low = 20, }
+                    },
                 },
                 SummaryWords = new string[] { "Cool", "Windy", "Humid" },
             };

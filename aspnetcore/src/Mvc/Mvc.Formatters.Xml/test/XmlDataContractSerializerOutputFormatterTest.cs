@@ -519,7 +519,11 @@ public class XmlDataContractSerializerOutputFormatterTest
     {
         // Arrange
         var child = new Child { Id = 1 };
-        var parent = new Parent { Name = "Parent", Children = new List<Child> { child } };
+        var parent = new Parent
+        {
+            Name = "Parent",
+            Children = new List<Child> { child }
+        };
         child.Parent = parent;
 
         var formatter = new XmlDataContractSerializerOutputFormatter();
@@ -644,7 +648,11 @@ public class XmlDataContractSerializerOutputFormatterTest
         );
 
         var child = new Child { Id = sampleId };
-        var parent = new Parent { Name = sampleName, Children = new List<Child> { child } };
+        var parent = new Parent
+        {
+            Name = sampleName,
+            Children = new List<Child> { child }
+        };
         child.Parent = parent;
 
         var settings = new DataContractSerializerSettings { PreserveObjectReferences = true };

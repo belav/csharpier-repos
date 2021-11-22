@@ -310,13 +310,29 @@ namespace System.Text.Json.Nodes.Tests
             {
                 new JsonArray
                 {
-                    new JsonArray { new JsonArray { 0, 0, 0 }, new JsonArray { 0, 0, 1 } },
-                    new JsonArray { new JsonArray { 0, 1, 0 }, new JsonArray { 0, 1, 1 } }
+                    new JsonArray
+                    {
+                        new JsonArray { 0, 0, 0 },
+                        new JsonArray { 0, 0, 1 }
+                    },
+                    new JsonArray
+                    {
+                        new JsonArray { 0, 1, 0 },
+                        new JsonArray { 0, 1, 1 }
+                    }
                 },
                 new JsonArray
                 {
-                    new JsonArray { new JsonArray { 1, 0, 0 }, new JsonArray { 1, 0, 1 } },
-                    new JsonArray { new JsonArray { 1, 1, 0 }, new JsonArray { 1, 1, 1 } }
+                    new JsonArray
+                    {
+                        new JsonArray { 1, 0, 0 },
+                        new JsonArray { 1, 0, 1 }
+                    },
+                    new JsonArray
+                    {
+                        new JsonArray { 1, 1, 0 },
+                        new JsonArray { 1, 1, 1 }
+                    }
                 },
             };
 
@@ -369,9 +385,18 @@ namespace System.Text.Json.Nodes.Tests
         {
             var issues = new JsonObject
             {
-                { "features", new JsonArray { "new functionality 1", "new functionality 2" } },
-                { "bugs", new JsonArray { "bug 123", "bug 4566", "bug 821" } },
-                { "tests", new JsonArray { "code coverage" } },
+                {
+                    "features",
+                    new JsonArray { "new functionality 1", "new functionality 2" }
+                },
+                {
+                    "bugs",
+                    new JsonArray { "bug 123", "bug 4566", "bug 821" }
+                },
+                {
+                    "tests",
+                    new JsonArray { "code coverage" }
+                },
             };
 
             issues["bugs"].AsArray().Add("bug 12356");

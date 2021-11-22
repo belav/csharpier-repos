@@ -171,7 +171,11 @@ public partial class ThreadPoolBoundHandleTests
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
     public unsafe void AllocateNativeOverlapped_ObjectArrayAsPinData_DoesNotThrow()
     {
-        var array = new object[] { new BlittableType() { i = 1 }, new byte[5], };
+        var array = new object[]
+        {
+            new BlittableType() { i = 1 },
+            new byte[5],
+        };
 
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
@@ -197,7 +201,11 @@ public partial class ThreadPoolBoundHandleTests
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
     public unsafe void AllocateNativeOverlapped_ObjectArrayWithNonBlittableTypeAsPinData_Throws()
     {
-        var array = new object[] { new NonBlittableType() { s = "foo" }, new byte[5], };
+        var array = new object[]
+        {
+            new NonBlittableType() { s = "foo" },
+            new byte[5],
+        };
 
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {

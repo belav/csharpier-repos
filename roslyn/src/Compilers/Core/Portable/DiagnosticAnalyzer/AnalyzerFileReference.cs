@@ -60,21 +60,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _assemblyLoader =
                 assemblyLoader ?? throw new ArgumentNullException(nameof(assemblyLoader));
 
-            _diagnosticAnalyzers =
-                new(
-                    this,
-                    typeof(DiagnosticAnalyzerAttribute),
-                    GetDiagnosticsAnalyzerSupportedLanguages,
-                    allowNetFramework: true
-                );
-            _generators =
-                new(
-                    this,
-                    typeof(GeneratorAttribute),
-                    GetGeneratorSupportedLanguages,
-                    allowNetFramework: false,
-                    coerceFunction: CoerceGeneratorType
-                );
+            _diagnosticAnalyzers = new(
+                this,
+                typeof(DiagnosticAnalyzerAttribute),
+                GetDiagnosticsAnalyzerSupportedLanguages,
+                allowNetFramework: true
+            );
+            _generators = new(
+                this,
+                typeof(GeneratorAttribute),
+                GetGeneratorSupportedLanguages,
+                allowNetFramework: false,
+                coerceFunction: CoerceGeneratorType
+            );
 
             // Note this analyzer full path as a dependency location, so that the analyzer loader
             // can correctly load analyzer dependencies.

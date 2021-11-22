@@ -1723,7 +1723,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 e =>
                 {
                     e.HasMany(o => o.Products).WithMany(p => p.Orders);
-                    e.HasData(new Order { Id = 1, Products = new List<Product> { new() } });
+                    e.HasData(
+                        new Order
+                        {
+                            Id = 1,
+                            Products = new List<Product> { new() }
+                        }
+                    );
                 }
             );
 
@@ -1765,7 +1771,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         {
                             Id = 1,
                             OtherSamples = new HashSet<SampleEntity>(
-                                new[] { new SampleEntity { Id = 2 } }
+                                new[]
+                                {
+                                    new SampleEntity { Id = 2 }
+                                }
                             )
                         }
                     );

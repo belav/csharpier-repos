@@ -1474,7 +1474,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         {
             MemberClass mc = new MemberClass();
             dynamic dy = mc;
-            mc.myStructNullArr = new MyStruct?[] { null, new MyStruct() { Number = -1 } };
+            mc.myStructNullArr = new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = -1 }
+            };
             if (((MyStruct?[])dy.Property_MyStructNullArr)[0] == null)
                 return 0;
             return 1;

@@ -229,7 +229,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             {
                 new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.Never }
             };
-            yield return new object[] { new JsonSerializerOptions { IgnoreReadOnlyFields = true } };
+            yield return new object[]
+            {
+                new JsonSerializerOptions { IgnoreReadOnlyFields = true }
+            };
             yield return new object[]
             {
                 new JsonSerializerOptions

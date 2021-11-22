@@ -39,7 +39,11 @@ namespace Microsoft.EntityFrameworkCore
 
             var fakeFactories = new Dictionary<Type, Func<object>>
             {
-                { typeof(IList<string>), () => new List<string> { "Fake1", "Fake2" } },
+                {
+                    typeof(IList<string>),
+                    () =>
+                        new List<string> { "Fake1", "Fake2" }
+                },
                 { typeof(IProperty), () => property },
                 { typeof(IReadOnlyProperty), () => property },
                 { typeof(string), () => "Fake" }

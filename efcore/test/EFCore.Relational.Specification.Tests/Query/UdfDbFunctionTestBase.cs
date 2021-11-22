@@ -516,7 +516,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     Name = "Order13",
                     OrderDate = new DateTime(2001, 3, 20),
-                    Items = new List<LineItem> { new() { Quantity = 50, Product = product4 }, }
+                    Items = new List<LineItem>
+                    {
+                        new() { Quantity = 50, Product = product4 },
+                    }
                 };
 
                 var order21 = new Order
@@ -546,7 +549,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     Name = "Order31",
                     OrderDate = new DateTime(2001, 6, 21),
-                    Items = new List<LineItem> { new() { Quantity = 5, Product = product5 } }
+                    Items = new List<LineItem>
+                    {
+                        new() { Quantity = 5, Product = product5 }
+                    }
                 };
 
                 var address11 = new Address

@@ -119,7 +119,11 @@ public class HeaderModelBinderTests
             {
                 { "10", typeof(int), 10 },
                 { "10.50", typeof(double), 10.50 },
-                { "10.50", typeof(IEnumerable<double>), new List<double>() { 10.50 } },
+                {
+                    "10.50",
+                    typeof(IEnumerable<double>),
+                    new List<double>() { 10.50 }
+                },
                 { "Sedan", typeof(CarType), CarType.Sedan },
                 { "", typeof(CarType?), null },
                 { "", typeof(string[]), Array.Empty<string>() },

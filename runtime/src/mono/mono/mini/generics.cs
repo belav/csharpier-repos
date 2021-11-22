@@ -653,7 +653,10 @@ class Tests
 
     public static int test_0_fullaot_linq()
     {
-        var allWords = new XElement[] { new XElement { Value = "one" } };
+        var allWords = new XElement[]
+        {
+            new XElement { Value = "one" }
+        };
         var filteredWords = allWords.Where(kw => kw.Value.StartsWith("T"));
         return filteredWords.Count();
     }

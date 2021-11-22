@@ -62,7 +62,11 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
                 new ServiceNameCollection(Array.Empty<string>())
             },
             new object[] { new[] { "first", "second" }, new[] { "first", "second" } },
-            new object[] { new[] { "first", "second" }, new List<string> { "first", "second" } },
+            new object[]
+            {
+                new[] { "first", "second" },
+                new List<string> { "first", "second" }
+            },
             new object[]
             {
                 new[] { "first", "second" },

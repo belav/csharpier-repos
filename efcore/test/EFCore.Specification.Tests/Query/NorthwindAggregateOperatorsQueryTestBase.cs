@@ -1449,16 +1449,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     ss.Set<Customer>()
-                        .Where(
-                            c =>
-                                new List<Customer>
+                        .Where(c => new List<Customer>
                                 {
                                     new() { CustomerID = "ABCDE" },
                                     new() { CustomerID = id }
-                                }
-                                    .Select(i => i.CustomerID)
-                                    .Contains(c.CustomerID)
-                        ),
+                                }.Select(i => i.CustomerID).Contains(c.CustomerID)),
                 entryCount: 1
             );
 
@@ -1468,16 +1463,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     ss.Set<Customer>()
-                        .Where(
-                            c =>
-                                new List<Customer>
+                        .Where(c => new List<Customer>
                                 {
                                     new() { CustomerID = "ABCDE" },
                                     new() { CustomerID = id }
-                                }
-                                    .Select(i => i.CustomerID)
-                                    .Contains(c.CustomerID)
-                        ),
+                                }.Select(i => i.CustomerID).Contains(c.CustomerID)),
                 entryCount: 1
             );
         }
@@ -1850,7 +1840,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Contains_with_parameter_list_value_type_id(bool async)
         {
-            var orders = new List<Order> { new() { OrderID = 10248 }, new() { OrderID = 10249 } };
+            var orders = new List<Order>
+            {
+                new() { OrderID = 10248 },
+                new() { OrderID = 10249 }
+            };
 
             return AssertQuery(
                 async,

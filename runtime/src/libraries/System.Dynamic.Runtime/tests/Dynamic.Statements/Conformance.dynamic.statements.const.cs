@@ -1394,7 +1394,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
     public class Test
     {
-        public static readonly dynamic d1 = new MyStruct() { MS = new MyStruct2() { Field = 9 } };
+        public static readonly dynamic d1 = new MyStruct()
+        {
+            MS = new MyStruct2() { Field = 9 }
+        };
         [Fact]
         public static void DynamicCSharpRunTest()
         {

@@ -70,9 +70,15 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Commands_at_multiple_levels_can_have_their_own_arguments()
         {
-            var outer = new Command("outer") { new Argument { Arity = ArgumentArity.ExactlyOne } };
+            var outer = new Command("outer")
+            {
+                new Argument { Arity = ArgumentArity.ExactlyOne }
+            };
             outer.AddCommand(
-                new Command("inner") { new Argument { Arity = ArgumentArity.ZeroOrMore } }
+                new Command("inner")
+                {
+                    new Argument { Arity = ArgumentArity.ZeroOrMore }
+                }
             );
 
             var parser = new Parser(outer);
@@ -217,7 +223,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_multiple_arguments_are_configured_then_they_must_differ_by_name()
         {
-            var command = new Command("the-command") { new Argument<string> { Name = "same" } };
+            var command = new Command("the-command")
+            {
+                new Argument<string> { Name = "same" }
+            };
 
             command
                 .Invoking(c => c.Add(new Argument<string> { Name = "same" }))

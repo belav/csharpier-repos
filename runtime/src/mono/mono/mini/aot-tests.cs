@@ -752,7 +752,10 @@ class Tests
     {
         Dictionary<long, IList<int>> data = new Dictionary<long, IList<int>>
         {
-            { 123L, new List<int> { 2 } }
+            {
+                123L,
+                new List<int> { 2 }
+            }
         };
         Dictionary<long, int> newDict = ConvertDictionary(data);
         if (newDict.Count != 1)

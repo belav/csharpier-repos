@@ -470,7 +470,10 @@ namespace CoreXml.Test.XLinq
                     }
                 );
                 this.AddChild(
-                    new TCIndent() { Attribute = new TestCaseAttribute() { Name = "Indent" } }
+                    new TCIndent()
+                    {
+                        Attribute = new TestCaseAttribute() { Name = "Indent" }
+                    }
                 );
                 this.AddChild(
                     new TCNewLineOnAttributes()

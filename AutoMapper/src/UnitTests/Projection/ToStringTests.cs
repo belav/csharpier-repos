@@ -29,7 +29,10 @@
 
         protected override void Because_of()
         {
-            var sources = new[] { new Source { Value = 5 } }.AsQueryable();
+            var sources = new[]
+            {
+                new Source { Value = 5 }
+            }.AsQueryable();
 
             _dests = sources.ProjectTo<Dest>(Configuration).ToArray();
         }
@@ -65,7 +68,10 @@
 
         protected override void Because_of()
         {
-            var sources = new[] { new Source { Value = 5 } }.AsQueryable();
+            var sources = new[]
+            {
+                new Source { Value = 5 }
+            }.AsQueryable();
 
             _dests = sources.ProjectTo<Dest>(Configuration).ToArray();
         }

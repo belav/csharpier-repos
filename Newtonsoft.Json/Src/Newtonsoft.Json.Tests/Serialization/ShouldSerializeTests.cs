@@ -86,17 +86,26 @@ namespace Newtonsoft.Json.Tests.Serialization
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } }
+                            myFrob = new Frob1[]
+                            {
+                                new Frob1 { name = Guid.NewGuid().ToString() }
+                            }
                         },
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } }
+                            myFrob = new Frob1[]
+                            {
+                                new Frob1 { name = Guid.NewGuid().ToString() }
+                            }
                         },
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } }
+                            myFrob = new Frob1[]
+                            {
+                                new Frob1 { name = Guid.NewGuid().ToString() }
+                            }
                         },
                     }
                 }

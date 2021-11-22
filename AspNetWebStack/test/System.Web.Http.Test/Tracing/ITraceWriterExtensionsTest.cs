@@ -2528,8 +2528,14 @@ namespace System.Web.Http.Tracing
                 HttpError httpError = new HttpError(
                     new ModelStateDictionary()
                     {
-                        { "key", new ModelState() { Errors = { new ModelError("error") } } },
-                        { "username", new ModelState() { Errors = { new ModelError("invalid") } } },
+                        {
+                            "key",
+                            new ModelState() { Errors = { new ModelError("error") } }
+                        },
+                        {
+                            "username",
+                            new ModelState() { Errors = { new ModelError("invalid") } }
+                        },
                     },
                     true
                 );

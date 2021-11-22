@@ -194,7 +194,8 @@ public partial class Math
         var fn_del_arr = new Math.DelegateForSignatureTest[]
         {
             GenericStruct<int>.DelegateTargetForSignatureTest,
-            (m, gs) => new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" }
+            (m, gs) =>
+                new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" }
         };
         var m_obj = new Math();
         Math.DelegateForSignatureTest fn_del_null = null;

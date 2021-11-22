@@ -54,7 +54,12 @@ namespace AutoMapper.IntegrationTests
                         FirstName = "Bob",
                         LastName = "Smith",
                         Items = new List<Item>(
-                            new[] { new Item { Id = 1 }, new Item { Id = 3 }, new Item { Id = 3 } }
+                            new[]
+                            {
+                                new Item { Id = 1 },
+                                new Item { Id = 3 },
+                                new Item { Id = 3 }
+                            }
                         )
                     }
                 );

@@ -2175,7 +2175,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     new DatabaseTable
                     {
                         Name = userTableName,
-                        Columns = { new DatabaseColumn { Name = "id", StoreType = "int" } },
+                        Columns =
+                        {
+                            new DatabaseColumn { Name = "id", StoreType = "int" }
+                        },
                         PrimaryKey = new DatabasePrimaryKey
                         {
                             Columns = { new DatabaseColumnRef("id") }
@@ -2280,7 +2283,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     new DatabaseTable
                     {
                         Name = "Blogs",
-                        Columns = { new DatabaseColumn { Name = "Id", StoreType = "int" } },
+                        Columns =
+                        {
+                            new DatabaseColumn { Name = "Id", StoreType = "int" }
+                        },
                         PrimaryKey = new DatabasePrimaryKey
                         {
                             Columns = { new DatabaseColumnRef("Id") }
@@ -2289,7 +2295,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     new DatabaseTable
                     {
                         Name = "Posts",
-                        Columns = { new DatabaseColumn { Name = "Id", StoreType = "int" } },
+                        Columns =
+                        {
+                            new DatabaseColumn { Name = "Id", StoreType = "int" }
+                        },
                         PrimaryKey = new DatabasePrimaryKey
                         {
                             Columns = { new DatabaseColumnRef("Id") }
@@ -2366,7 +2375,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     new DatabaseTable
                     {
                         Name = "Products",
-                        Columns = { new DatabaseColumn { Name = "Id", StoreType = "int" } },
+                        Columns =
+                        {
+                            new DatabaseColumn { Name = "Id", StoreType = "int" }
+                        },
                         PrimaryKey = new DatabasePrimaryKey
                         {
                             Columns = { new DatabaseColumnRef("Id") }

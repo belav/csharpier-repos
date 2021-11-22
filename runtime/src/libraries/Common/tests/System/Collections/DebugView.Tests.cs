@@ -34,13 +34,19 @@ namespace System.Collections.Tests
             {
                 new Dictionary<int, string> { { 1, "One" }, { 2, "Two" } }
             };
-            yield return new object[] { new HashSet<string> { "One", "Two" } };
+            yield return new object[]
+            {
+                new HashSet<string> { "One", "Two" }
+            };
 
             LinkedList<object> linkedList = new LinkedList<object>();
             linkedList.AddFirst(1);
             linkedList.AddLast(2);
             yield return new object[] { linkedList };
-            yield return new object[] { new List<int> { 1, 2 } };
+            yield return new object[]
+            {
+                new List<int> { 1, 2 }
+            };
 
             Queue<double> queue = new Queue<double>();
             queue.Enqueue(1);
@@ -54,7 +60,10 @@ namespace System.Collections.Tests
             {
                 new SortedList<int, string> { { 1, "One" }, { 2, "Two" } }
             };
-            yield return new object[] { new SortedSet<int> { 1, 2 } };
+            yield return new object[]
+            {
+                new SortedSet<int> { 1, 2 }
+            };
 
             var stack = new Stack<object>();
             stack.Push(1);

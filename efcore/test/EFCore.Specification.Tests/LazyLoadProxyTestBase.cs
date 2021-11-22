@@ -3106,10 +3106,18 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Id = 707,
                         AlternateId = "Root",
-                        Children = new List<Child> { new() { Id = 11 }, new() { Id = 12 } },
+                        Children = new List<Child>
+                        {
+                            new() { Id = 11 },
+                            new() { Id = 12 }
+                        },
                         SinglePkToPk = new SinglePkToPk { Id = 707 },
                         Single = new Single { Id = 21 },
-                        ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
+                        ChildrenAk = new List<ChildAk>
+                        {
+                            new() { Id = 31 },
+                            new() { Id = 32 }
+                        },
                         SingleAk = new SingleAk { Id = 42 },
                         ChildrenShadowFk = new List<ChildShadowFk>
                         {
@@ -3124,7 +3132,10 @@ namespace Microsoft.EntityFrameworkCore
                         },
                         SingleCompositeKey = new SingleCompositeKey { Id = 62 },
                         WithRecursiveProperty = new WithRecursiveProperty { Id = 8086 },
-                        ManyChildren = new List<Child> { new() { Id = 999 } }
+                        ManyChildren = new List<Child>
+                        {
+                            new() { Id = 999 }
+                        }
                     }
                 );
 
@@ -3185,11 +3196,26 @@ namespace Microsoft.EntityFrameworkCore
 
                 var nose3 = new Nose { Size = "Large" };
 
-                context.Add(new Entity { BaseNoses = new List<Nose> { nose1, nose2, nose3 } });
+                context.Add(
+                    new Entity
+                    {
+                        BaseNoses = new List<Nose> { nose1, nose2, nose3 }
+                    }
+                );
 
-                context.Add(new Parson { ParsonNoses = new List<Nose> { nose2, nose3 } });
+                context.Add(
+                    new Parson
+                    {
+                        ParsonNoses = new List<Nose> { nose2, nose3 }
+                    }
+                );
 
-                context.Add(new Company { CompanyNoses = new List<Nose> { nose1, nose3 } });
+                context.Add(
+                    new Company
+                    {
+                        CompanyNoses = new List<Nose> { nose1, nose3 }
+                    }
+                );
 
                 context.Add(
                     new Applicant(

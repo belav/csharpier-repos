@@ -75,7 +75,10 @@ namespace System.Text.Json.Serialization.Tests
                 StringToGenericDictionaryWrapper<string>
             >()
             {
-                { "key", new StringToGenericDictionaryWrapper<string>() { { "key", "value" } } }
+                {
+                    "key",
+                    new StringToGenericDictionaryWrapper<string>() { { "key", "value" } }
+                }
             };
         }
 

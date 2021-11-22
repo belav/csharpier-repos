@@ -144,7 +144,10 @@ namespace AutoMapper.UnitTests.CustomMapping
         protected override void Because_of()
         {
             _destination = Mapper.Map<Destination>(
-                new Source { TheId = new Id { Prefix = "p", Value = "v" } }
+                new Source
+                {
+                    TheId = new Id { Prefix = "p", Value = "v" }
+                }
             );
         }
 
@@ -326,7 +329,10 @@ namespace AutoMapper.UnitTests.CustomMapping
 
         protected override void Because_of()
         {
-            var source = new ParentSource { Value = new Source { Foo = "5", } };
+            var source = new ParentSource
+            {
+                Value = new Source { Foo = "5", }
+            };
 
             _result = Mapper.Map<ParentSource, ParentDestination>(source);
         }

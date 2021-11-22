@@ -309,7 +309,10 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> GetStandardValues_IReferenceServiceInvalid_TestData()
         {
-            yield return new object[] { new MockReferenceService { References = null } };
+            yield return new object[]
+            {
+                new MockReferenceService { References = null }
+            };
             yield return new object[] { new object() };
             yield return new object[] { null };
         }

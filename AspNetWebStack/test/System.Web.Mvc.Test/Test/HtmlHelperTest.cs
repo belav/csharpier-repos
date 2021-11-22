@@ -888,7 +888,10 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
             htmlHelper.ClientValidationRuleFactory = delegate
             {
-                return new[] { new ModelClientValidationRule { ValidationType = "type" } };
+                return new[]
+                {
+                    new ModelClientValidationRule { ValidationType = "type" }
+                };
             };
 
             // Act
@@ -913,7 +916,10 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
             htmlHelper.ClientValidationRuleFactory = delegate
             {
-                return new[] { new ModelClientValidationRule { ValidationType = "type" } };
+                return new[]
+                {
+                    new ModelClientValidationRule { ValidationType = "type" }
+                };
             };
 
             // Act

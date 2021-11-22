@@ -324,7 +324,10 @@ namespace Microsoft.CodeAnalysis
             if (newGreen.IsToken)
             {
                 newGreen = Syntax.InternalSyntax.SyntaxList.List(
-                    new[] { new ArrayElement<GreenNode> { Value = newGreen } }
+                    new[]
+                    {
+                        new ArrayElement<GreenNode> { Value = newGreen }
+                    }
                 );
             }
 

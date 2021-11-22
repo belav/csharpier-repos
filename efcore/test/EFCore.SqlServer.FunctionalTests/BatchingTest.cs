@@ -215,7 +215,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Deadlock_on_deletes_with_dependents_is_handled_correctly()
         {
-            var owners = new[] { new Owner { Name = "0" }, new Owner { Name = "1" } };
+            var owners = new[]
+            {
+                new Owner { Name = "0" },
+                new Owner { Name = "1" }
+            };
             using (var context = CreateContext())
             {
                 context.Owners.AddRange(owners);

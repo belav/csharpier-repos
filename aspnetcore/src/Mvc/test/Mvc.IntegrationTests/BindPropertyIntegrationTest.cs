@@ -62,7 +62,10 @@ public class BindPropertyIntegrationTest
             Name = "parameter",
             ParameterType = typeof(Person),
             BindingInfo = BindingInfo.GetBindingInfo(
-                new[] { new BindPropertyAttribute() { SupportsGet = true } }
+                new[]
+                {
+                    new BindPropertyAttribute() { SupportsGet = true }
+                }
             ),
         };
 
@@ -211,7 +214,10 @@ public class BindPropertyIntegrationTest
         var propertyDescriptor = new PageBoundPropertyDescriptor
         {
             BindingInfo = BindingInfo.GetBindingInfo(
-                new[] { new FromQueryAttribute { Name = propertyInfo.Name }, }
+                new[]
+                {
+                    new FromQueryAttribute { Name = propertyInfo.Name },
+                }
             ),
             Name = propertyInfo.Name,
             ParameterType = propertyInfo.PropertyType,

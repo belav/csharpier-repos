@@ -122,8 +122,14 @@ public class ListAdapterTest
         {
             return new TheoryData<List<int>, List<int>>()
             {
-                { new List<int>() { }, new List<int>() { 20 } },
-                { new List<int>() { 5, 10 }, new List<int>() { 5, 10, 20 } }
+                {
+                    new List<int>() { },
+                    new List<int>() { 20 }
+                },
+                {
+                    new List<int>() { 5, 10 },
+                    new List<int>() { 5, 10, 20 }
+                }
             };
         }
     }
@@ -212,10 +218,30 @@ public class ListAdapterTest
         {
             return new TheoryData<IList, object, string, IList>()
             {
-                { new List<string>() { }, "a", "-", new List<string>() { "a" } },
-                { new List<string>() { "a", "b" }, "c", "-", new List<string>() { "a", "b", "c" } },
-                { new List<string>() { "a", "b" }, "c", "0", new List<string>() { "c", "a", "b" } },
-                { new List<string>() { "a", "b" }, "c", "1", new List<string>() { "a", "c", "b" } }
+                {
+                    new List<string>() { },
+                    "a",
+                    "-",
+                    new List<string>() { "a" }
+                },
+                {
+                    new List<string>() { "a", "b" },
+                    "c",
+                    "-",
+                    new List<string>() { "a", "b", "c" }
+                },
+                {
+                    new List<string>() { "a", "b" },
+                    "c",
+                    "0",
+                    new List<string>() { "c", "a", "b" }
+                },
+                {
+                    new List<string>() { "a", "b" },
+                    "c",
+                    "1",
+                    new List<string>() { "a", "c", "b" }
+                }
             };
         }
     }
@@ -258,7 +284,12 @@ public class ListAdapterTest
             var sDto3 = new SimpleObject();
             return new TheoryData<IList, object, string, IList>()
             {
-                { new List<SimpleObject>() { }, sDto1, "-", new List<SimpleObject>() { sDto1 } },
+                {
+                    new List<SimpleObject>() { },
+                    sDto1,
+                    "-",
+                    new List<SimpleObject>() { sDto1 }
+                },
                 {
                     new List<SimpleObject>() { sDto1, sDto2 },
                     sDto3,
@@ -456,8 +487,14 @@ public class ListAdapterTest
         {
             return new TheoryData<string, List<int>>()
             {
-                { "0", new List<int>() { 30, 20 } },
-                { "1", new List<int>() { 10, 30 } }
+                {
+                    "0",
+                    new List<int>() { 30, 20 }
+                },
+                {
+                    "1",
+                    new List<int>() { 10, 30 }
+                }
             };
         }
     }

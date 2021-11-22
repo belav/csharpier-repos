@@ -122,7 +122,10 @@ namespace Microsoft.EntityFrameworkCore
                         new NullablePrincipal
                         {
                             Id = 1,
-                            Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
+                            Dependents = new List<NonNullableDependent>
+                            {
+                                new() { Id = 1 }
+                            }
                         }
                     ).Entity;
 
@@ -1568,7 +1571,11 @@ namespace Microsoft.EntityFrameworkCore
                             );
 
                         b.HasData(
-                            new CollectionEnum { Id = 1, Roles = new List<Roles> { Roles.Seller } }
+                            new CollectionEnum
+                            {
+                                Id = 1,
+                                Roles = new List<Roles> { Roles.Seller }
+                            }
                         );
                     }
                 );

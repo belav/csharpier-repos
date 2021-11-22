@@ -31,7 +31,11 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
                     Version = new RuntimeVersion("10")
                 }
             };
-            yield return new object[] { "linux", new RID() { BaseRID = "linux" } };
+            yield return new object[]
+            {
+                "linux",
+                new RID() { BaseRID = "linux" }
+            };
             yield return new object[]
             {
                 "linux-x64",

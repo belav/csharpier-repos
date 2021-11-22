@@ -998,7 +998,10 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Required_options_are_indicated()
         {
-            var command = new RootCommand { new Option("--required") { IsRequired = true } };
+            var command = new RootCommand
+            {
+                new Option("--required") { IsRequired = true }
+            };
 
             _helpBuilder.Write(command, _console);
 

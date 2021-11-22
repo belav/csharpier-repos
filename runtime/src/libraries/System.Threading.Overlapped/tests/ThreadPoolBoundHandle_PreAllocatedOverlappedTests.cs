@@ -101,7 +101,11 @@ public partial class ThreadPoolBoundHandleTests
     [Fact]
     public unsafe void PreAllocatedOverlapped_ObjectArrayAsPinData_DoesNotThrow()
     {
-        var array = new object[] { new BlittableType() { i = 1 }, new byte[5], };
+        var array = new object[]
+        {
+            new BlittableType() { i = 1 },
+            new byte[5],
+        };
 
         using (new PreAllocatedOverlapped((_, __, ___) => { }, new object(), array)) { }
         using (PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)) { }
@@ -111,7 +115,11 @@ public partial class ThreadPoolBoundHandleTests
     [ActiveIssue("https://github.com/mono/mono/issues/15313", TestRuntimes.Mono)]
     public unsafe void PreAllocatedOverlapped_ObjectArrayWithNonBlittableTypeAsPinData_Throws()
     {
-        var array = new object[] { new NonBlittableType() { s = "foo" }, new byte[5], };
+        var array = new object[]
+        {
+            new NonBlittableType() { s = "foo" },
+            new byte[5],
+        };
 
         AssertExtensions.Throws<ArgumentException>(
             null,

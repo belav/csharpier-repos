@@ -225,7 +225,10 @@ public class DynamicObjectIntegrationTest
     {
         // Arrange
         dynamic dynamicTestObject = new DynamicTestObject();
-        dynamicTestObject.Nested = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } };
+        dynamicTestObject.Nested = new SimpleObject()
+        {
+            IntegerList = new List<int>() { 1, 2, 3 }
+        };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Test("Nested/IntegerList/0", 2);

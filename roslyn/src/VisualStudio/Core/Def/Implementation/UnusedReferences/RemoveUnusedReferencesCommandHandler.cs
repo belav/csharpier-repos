@@ -52,8 +52,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             _workspace = workspace;
             _globalOptions = globalOptions;
 
-            _lazyReferenceCleanupService =
-                new(() => workspace.Services.GetRequiredService<IReferenceCleanupService>());
+            _lazyReferenceCleanupService = new(
+                () => workspace.Services.GetRequiredService<IReferenceCleanupService>()
+            );
         }
 
         public void Initialize(IServiceProvider serviceProvider)

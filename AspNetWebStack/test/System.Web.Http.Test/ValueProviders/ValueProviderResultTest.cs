@@ -98,9 +98,15 @@ namespace System.Web.Http.ValueProviders
             {
                 return new TheoryDataSet<IList, object>
                 {
-                    { new List<string> { "Foo", "Bar" }, "Foo" },
+                    {
+                        new List<string> { "Foo", "Bar" },
+                        "Foo"
+                    },
                     { new string[] { "baz", "qux" }, "baz" },
-                    { new List<int> { -17, 34 }, -17 },
+                    {
+                        new List<int> { -17, 34 },
+                        -17
+                    },
                     { new string[] { "30", "15" }, 30 }
                 };
             }

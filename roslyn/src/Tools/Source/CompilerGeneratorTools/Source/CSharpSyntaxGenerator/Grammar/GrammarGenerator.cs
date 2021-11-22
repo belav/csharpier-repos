@@ -31,7 +31,10 @@ namespace CSharpSyntaxGenerator.Grammar
                 new Node
                 {
                     Name = "Modifier",
-                    Children = { new Field { Type = "SyntaxToken", Kinds = modifiers } }
+                    Children =
+                    {
+                        new Field { Type = "SyntaxToken", Kinds = modifiers }
+                    }
                 }
             );
 

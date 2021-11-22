@@ -925,7 +925,13 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JObject o1 = new JObject { { "Name", 1 } };
             JObject o2 = new JObject { { "Name", 2 } };
-            JObject o3 = new JObject { { "Name", new JObject { { "Name", new JArray(3) } } } };
+            JObject o3 = new JObject
+            {
+                {
+                    "Name",
+                    new JObject { { "Name", new JArray(3) } }
+                }
+            };
             JArray a = new JArray(o1, o2, o3);
 
             IList<JToken> t = a.SelectTokens("$..Name").ToList();
@@ -942,7 +948,13 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
         {
             JObject o1 = new JObject { { "Name", 1 } };
             JObject o2 = new JObject { { "Name", 2 } };
-            JObject o3 = new JObject { { "Name", new JObject { { "Name", new JArray(3) } } } };
+            JObject o3 = new JObject
+            {
+                {
+                    "Name",
+                    new JObject { { "Name", new JArray(3) } }
+                }
+            };
             JArray a = new JArray(o1, o2, o3);
 
             IList<JToken> t = a.SelectTokens("$..*").ToList();

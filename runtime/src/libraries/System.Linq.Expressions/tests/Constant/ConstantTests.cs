@@ -602,7 +602,11 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void BoundConstantCaching4(bool useInterpreter)
         {
-            Bar[] bs = new[] { new Bar() { Foo = 1 }, new Bar() { Foo = 1 }, };
+            Bar[] bs = new[]
+            {
+                new Bar() { Foo = 1 },
+                new Bar() { Foo = 1 },
+            };
 
             for (var i = 1; i <= 10; i++)
             {

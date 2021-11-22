@@ -394,7 +394,13 @@ undefined
         [Test]
         public void JPropertyPath()
         {
-            JObject o = new JObject { { "person", new JObject { { "$id", 1 } } } };
+            JObject o = new JObject
+            {
+                {
+                    "person",
+                    new JObject { { "$id", 1 } }
+                }
+            };
 
             JContainer idProperty = o["person"]["$id"].Parent;
             Assert.AreEqual("person.$id", idProperty.Path);

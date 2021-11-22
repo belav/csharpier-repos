@@ -23,7 +23,10 @@ namespace AutoMapper.UnitTests.Bug
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Target>());
 
-            var source = new List<Source> { new Source { X = 42 } };
+            var source = new List<Source>
+            {
+                new Source { X = 42 }
+            };
             var target = config.CreateMapper().Map<ReadOnlyCollection<Target>>(source);
 
             target.Count.ShouldBe(source.Count);

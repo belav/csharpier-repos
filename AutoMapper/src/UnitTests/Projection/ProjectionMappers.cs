@@ -37,10 +37,10 @@ namespace AutoMapper.UnitTests.Projection
         [Fact]
         public void Should_work_with_projections()
         {
-            var destination = new[] { new Source { Color = ConsoleColor.Cyan } }
-                .AsQueryable()
-                .ProjectTo<Destination>(Configuration)
-                .First();
+            var destination = new[]
+            {
+                new Source { Color = ConsoleColor.Cyan }
+            }.AsQueryable().ProjectTo<Destination>(Configuration).First();
             destination.Color.ShouldBe(11);
         }
         private class EnumToUnderlyingTypeProjectionMapper : IProjectionMapper

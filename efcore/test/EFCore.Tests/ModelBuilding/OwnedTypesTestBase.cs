@@ -753,7 +753,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                             {
                                 case HasDataOverload.Array:
                                     ownedNavigationBuilder.HasData(
-                                        new object[] { new OrderDetails { OrderId = -1 } }
+                                        new object[]
+                                        {
+                                            new OrderDetails { OrderId = -1 }
+                                        }
                                     );
                                     break;
                                 case HasDataOverload.Array | HasDataOverload.Params:
@@ -764,7 +767,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 case HasDataOverload.Array | HasDataOverload.Generic:
                                     // ReSharper disable once RedundantExplicitParamsArrayCreation
                                     ownedNavigationBuilder.HasData(
-                                        new[] { new OrderDetails { OrderId = -1 } }
+                                        new[]
+                                        {
+                                            new OrderDetails { OrderId = -1 }
+                                        }
                                     );
                                     break;
                                 case HasDataOverload.Array
@@ -776,12 +782,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                     break;
                                 case HasDataOverload.Enumerable:
                                     ownedNavigationBuilder.HasData(
-                                        new List<object> { new OrderDetails { OrderId = -1 } }
+                                        new List<object>
+                                        {
+                                            new OrderDetails { OrderId = -1 }
+                                        }
                                     );
                                     break;
                                 case HasDataOverload.Enumerable | HasDataOverload.Generic:
                                     ownedNavigationBuilder.HasData(
-                                        new List<OrderDetails> { new() { OrderId = -1 } }
+                                        new List<OrderDetails>
+                                        {
+                                            new() { OrderId = -1 }
+                                        }
                                     );
                                     break;
                                 default:

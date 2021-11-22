@@ -51,7 +51,10 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             Activities activities = new Activities();
-            activities.List = new List<Activity> { new Activity { Name = "An activity" } };
+            activities.List = new List<Activity>
+            {
+                new Activity { Name = "An activity" }
+            };
 
             string json = JsonConvert.SerializeObject(activities, Formatting.Indented);
             // note that this has been reverted back in 11.0.2 because it is causing compat issues
@@ -70,7 +73,10 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_SubClass()
         {
             ActivitiesSubClass activities = new ActivitiesSubClass();
-            activities.List = new List<Activity> { new Activity { Name = "An activity" } };
+            activities.List = new List<Activity>
+            {
+                new Activity { Name = "An activity" }
+            };
 
             string json = JsonConvert.SerializeObject(activities, Formatting.Indented);
             StringAssert.AreEqual(

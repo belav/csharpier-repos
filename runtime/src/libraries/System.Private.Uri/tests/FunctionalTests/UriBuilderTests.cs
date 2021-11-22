@@ -621,7 +621,11 @@ namespace System.PrivateUri.Tests
         public static IEnumerable<object[]> ToString_TestData()
         {
             yield return new object[] { new UriBuilder(), "http://localhost/" };
-            yield return new object[] { new UriBuilder() { Scheme = "" }, "localhost/" };
+            yield return new object[]
+            {
+                new UriBuilder() { Scheme = "" },
+                "localhost/"
+            };
             yield return new object[]
             {
                 new UriBuilder() { Scheme = "unknown" },
@@ -647,9 +651,21 @@ namespace System.PrivateUri.Tests
                 new UriBuilder() { UserName = "username", Password = "password" },
                 "http://username:password@localhost/"
             };
-            yield return new object[] { new UriBuilder() { Port = 80 }, "http://localhost:80/" };
-            yield return new object[] { new UriBuilder() { Port = 0 }, "http://localhost:0/" };
-            yield return new object[] { new UriBuilder() { Host = "", Port = 80 }, "http:///" };
+            yield return new object[]
+            {
+                new UriBuilder() { Port = 80 },
+                "http://localhost:80/"
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Port = 0 },
+                "http://localhost:0/"
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "", Port = 80 },
+                "http:///"
+            };
             yield return new object[]
             {
                 new UriBuilder() { Host = "host", Path = "" },

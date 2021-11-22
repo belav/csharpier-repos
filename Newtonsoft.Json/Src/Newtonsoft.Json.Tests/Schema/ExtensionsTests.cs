@@ -418,7 +418,10 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchema schema = new JsonSchema();
             schema.UniqueItems = true;
-            schema.Items = new List<JsonSchema> { new JsonSchema { UniqueItems = true } };
+            schema.Items = new List<JsonSchema>
+            {
+                new JsonSchema { UniqueItems = true }
+            };
             schema.PositionalItemsValidation = false;
 
             JArray a = new JArray(
@@ -445,7 +448,10 @@ namespace Newtonsoft.Json.Tests.Schema
             {
                 {
                     "bar",
-                    new JsonSchema { Enum = new List<JToken> { new JValue(1), new JValue(2) } }
+                    new JsonSchema
+                    {
+                        Enum = new List<JToken> { new JValue(1), new JValue(2) }
+                    }
                 }
             };
 
@@ -465,7 +471,10 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchema schema = new JsonSchema();
             schema.Properties = new Dictionary<string, JsonSchema>
             {
-                { "bar", new JsonSchema { UniqueItems = true } }
+                {
+                    "bar",
+                    new JsonSchema { UniqueItems = true }
+                }
             };
 
             JObject o = new JObject(new JProperty("bar", new JArray(1, 2, 3, 3)));

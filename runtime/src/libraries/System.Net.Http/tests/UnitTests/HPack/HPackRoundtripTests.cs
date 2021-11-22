@@ -16,7 +16,11 @@ namespace System.Net.Http.Unit.Tests.HPack
     {
         public static IEnumerable<object[]> TestHeaders()
         {
-            yield return new object[] { new HttpRequestHeaders() { { "header", "value" } }, null };
+            yield return new object[]
+            {
+                new HttpRequestHeaders() { { "header", "value" } },
+                null
+            };
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", "value" } },

@@ -1695,7 +1695,10 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                         {
                             Posts = new List<Post5456>
                             {
-                                new() { Comments = new List<Comment5456> { new(), new() } },
+                                new()
+                                {
+                                    Comments = new List<Comment5456> { new(), new() }
+                                },
                                 new()
                             },
                             Author = new Author5456()
@@ -2758,7 +2761,10 @@ LEFT JOIN [Configuration9468] AS [c0] ON [c].[ConfigurationId] = [c0].[Id]"
             {
                 AddRange(
                     new Cart9468(),
-                    new Cart9468 { Configuration = new Configuration9468 { Processed = true } },
+                    new Cart9468
+                    {
+                        Configuration = new Configuration9468 { Processed = true }
+                    },
                     new Cart9468 { Configuration = new Configuration9468() }
                 );
 
@@ -5979,7 +5985,10 @@ CROSS JOIN (
                     {
                         Posts = new List<Post10447> { new Post10447(), new Post10447() }
                     },
-                    new Blog10447 { Posts = new List<Post10447> { new Post10447() } }
+                    new Blog10447
+                    {
+                        Posts = new List<Post10447> { new Post10447() }
+                    }
                 );
 
                 SaveChanges();
@@ -6223,7 +6232,10 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]"
                             {
                                 Season = new DbSeason
                                 {
-                                    Games = new List<DbGame> { new DbGame { GameNumber = 1 } }
+                                    Games = new List<DbGame>
+                                    {
+                                        new DbGame { GameNumber = 1 }
+                                    }
                                 }
                             }
                         }
@@ -8139,7 +8151,10 @@ FROM [Entity21807] AS [e]"
                     new Entity21807
                     {
                         Id = "1",
-                        Contact = new Contact21807 { Address = new Address21807 { Zip = 12345 } }
+                        Contact = new Contact21807
+                        {
+                            Address = new Address21807 { Zip = 12345 }
+                        }
                     }
                 );
 

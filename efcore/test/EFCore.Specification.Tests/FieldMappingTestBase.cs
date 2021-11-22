@@ -2381,7 +2381,11 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     context.Add(
-                        new LoginSession { User = new User2(), Users = new List<User2> { new() } }
+                        new LoginSession
+                        {
+                            User = new User2(),
+                            Users = new List<User2> { new() }
+                        }
                     );
 
                     context.Add(

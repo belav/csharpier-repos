@@ -10200,7 +10200,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             // Just a few objects to verify we can roundtrip out of process memory
             yield return new object[] { "test" };
-            yield return new object[] { new List<int> { 1, 2, 3, 4, 5 } };
+            yield return new object[]
+            {
+                new List<int> { 1, 2, 3, 4, 5 }
+            };
             yield return new object[]
             {
                 new Tree<int>(

@@ -201,7 +201,10 @@ namespace System.Web.Http.ModelBinding.Binders
                 }
             };
 
-            Customer[] model = new[] { new Customer { Age = 99999 } };
+            Customer[] model = new[]
+            {
+                new Customer { Age = 99999 }
+            };
             ModelBindingContext bindingContext = GetBindingContext(typeof(Customer[]));
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {

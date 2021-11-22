@@ -49,7 +49,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             {
                 { "Cpu", "Intel" },
                 { "Memory", 32 },
-                { "Drives", new JArray { "DVD", "SSD" } }
+                {
+                    "Drives",
+                    new JArray { "DVD", "SSD" }
+                }
             };
 
             Console.WriteLine(o.ToString());

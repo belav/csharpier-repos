@@ -573,7 +573,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void NullableCustomStructRoundtrip()
         {
             string serialized = JsonSerializer.Serialize(
-                new ClassWithNullablePerson { Person = new Person { FirstName = "John", Age = 24 } }
+                new ClassWithNullablePerson
+                {
+                    Person = new Person { FirstName = "John", Age = 24 }
+                }
             );
             Assert.Contains(@"{""Person"":{", serialized);
             Assert.Contains(@"""FirstName"":""John""", serialized);

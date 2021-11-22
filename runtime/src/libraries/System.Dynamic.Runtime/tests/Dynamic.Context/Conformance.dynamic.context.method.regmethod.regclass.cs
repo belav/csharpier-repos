@@ -992,7 +992,10 @@ namespace System.Dynamic.Runtime.Tests
             dynamic mc = new MemberClass();
             IsEqual<Test>(
                 (byte?[])mc.Method_ReturnByteArrNullable(
-                    new MyStruct?[] { new MyStruct() { Number = 10 } }
+                    new MyStruct?[]
+                    {
+                        new MyStruct() { Number = 10 }
+                    }
                 )
             );
         }
@@ -3087,7 +3090,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass();
-            mc.Method_ReturnVoid(new MyStruct[] { new MyStruct(), new MyStruct() { Number = -1 } });
+            mc.Method_ReturnVoid(
+                new MyStruct[]
+                {
+                    new MyStruct(),
+                    new MyStruct() { Number = -1 }
+                }
+            );
             return 0;
         }
     }

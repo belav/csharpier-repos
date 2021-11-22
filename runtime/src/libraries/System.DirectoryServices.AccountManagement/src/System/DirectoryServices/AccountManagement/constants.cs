@@ -151,7 +151,10 @@ namespace System.DirectoryServices.AccountManagement
         // (expressed as strings from the PropertyNames class)
         internal static readonly Hashtable Properties = new Hashtable()
         {
-            { typeof(GroupPrincipal), new ArrayList(1) { PropertyNames.GroupMembers } }
+            {
+                typeof(GroupPrincipal),
+                new ArrayList(1) { PropertyNames.GroupMembers }
+            }
         };
     }
 }

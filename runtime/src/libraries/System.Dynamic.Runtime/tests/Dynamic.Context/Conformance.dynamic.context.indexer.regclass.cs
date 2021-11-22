@@ -195,7 +195,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             get
             {
                 MemberClass.t_status = 1;
-                return new MyClass[] { null, new MyClass() { Field = 3 } };
+                return new MyClass[]
+                {
+                    null,
+                    new MyClass() { Field = 3 }
+                };
             }
             set { MemberClass.t_status = 2; }
         }
@@ -265,7 +269,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             get
             {
                 MemberClass.t_status = 1;
-                return new MyStruct?[] { null, new MyStruct() { Number = 4 } };
+                return new MyStruct?[]
+                {
+                    null,
+                    new MyStruct() { Number = 4 }
+                };
             }
             set { MemberClass.t_status = 2; }
         }
@@ -486,7 +494,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             get
             {
                 MemberClass.t_status = 1;
-                return new MyClass[] { null, new MyClass() { Field = 3 } };
+                return new MyClass[]
+                {
+                    null,
+                    new MyClass() { Field = 3 }
+                };
             }
             set { MemberClass.t_status = 2; }
         }
@@ -547,7 +559,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             get
             {
                 MemberClass.t_status = 1;
-                return new MyStruct?[] { null, new MyStruct() { Number = 4 } };
+                return new MyStruct?[]
+                {
+                    null,
+                    new MyStruct() { Number = 4 }
+                };
             }
             set { MemberClass.t_status = 2; }
         }

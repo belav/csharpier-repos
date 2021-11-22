@@ -666,7 +666,11 @@ public class DotNetDispatcherTest
 
         // Arrange: all args
         var argsJson = JsonSerializer.Serialize(
-            new object[] { new TestDTO { IntVal = 1000, StringVal = "String via JSON" }, arg2Ref, },
+            new object[]
+            {
+                new TestDTO { IntVal = 1000, StringVal = "String via JSON" },
+                arg2Ref,
+            },
             jsRuntime.JsonSerializerOptions
         );
 

@@ -7486,7 +7486,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Entity_equality_contains_with_list_of_null(bool async)
         {
-            var customers = new List<Customer> { null, new Customer { CustomerID = "ALFKI" } };
+            var customers = new List<Customer>
+            {
+                null,
+                new Customer { CustomerID = "ALFKI" }
+            };
 
             return AssertQuery(
                 async,

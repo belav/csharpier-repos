@@ -33,7 +33,10 @@ namespace AutoMapper.IntegrationTests
                 context.SourceTypes.Add(
                     new SourceType
                     {
-                        Parameters = { new Parameter { Name = "Index", Value = 101 } }
+                        Parameters =
+                        {
+                            new Parameter { Name = "Index", Value = 101 }
+                        }
                     }
                 );
         }

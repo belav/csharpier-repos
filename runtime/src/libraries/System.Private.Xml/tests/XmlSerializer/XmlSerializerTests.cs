@@ -98,7 +98,10 @@ public static partial class XmlSerializerTests
                 new SerializationTypes.TypeNameClashA.TypeNameClash { Name = "N1" },
                 new SerializationTypes.TypeNameClashA.TypeNameClash { Name = "N2" }
             },
-            B = new[] { new SerializationTypes.TypeNameClashB.TypeNameClash { Name = "N3" } }
+            B = new[]
+            {
+                new SerializationTypes.TypeNameClashB.TypeNameClash { Name = "N3" }
+            }
         };
 
         var xml =
@@ -582,7 +585,10 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Struct()
     {
-        var value = new WithStruct { Some = new SomeStruct { A = 1, B = 2 } };
+        var value = new WithStruct
+        {
+            Some = new SomeStruct { A = 1, B = 2 }
+        };
         var result = SerializeAndDeserialize(
             value,
             @"<?xml version=""1.0""?>
@@ -2069,7 +2075,10 @@ public static partial class XmlSerializerTests
         }
 
         band = new Orchestra();
-        band.Instruments = new Instrument[1] { new Instrument { Name = "Instrument1" } };
+        band.Instruments = new Instrument[1]
+        {
+            new Instrument { Name = "Instrument1" }
+        };
         attrs = new XmlAttributes();
         var xArray = new XmlArrayAttribute("CommonInstruments");
         xArray.Namespace = "http://www.contoso.com";

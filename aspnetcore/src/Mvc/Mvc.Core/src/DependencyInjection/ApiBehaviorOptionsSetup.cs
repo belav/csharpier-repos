@@ -62,8 +62,11 @@ internal class ApiBehaviorOptionsSetup : IConfigureOptions<ApiBehaviorOptions>
     {
         foreach (var (statusCode, value) in ProblemDetailsDefaults.Defaults)
         {
-            options.ClientErrorMapping[statusCode] =
-                new() { Link = value.Type, Title = value.Title, };
+            options.ClientErrorMapping[statusCode] = new()
+            {
+                Link = value.Type,
+                Title = value.Title,
+            };
         }
     }
 }

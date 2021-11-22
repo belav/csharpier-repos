@@ -468,7 +468,10 @@ public class TryUpdateModelIntegrationTest
         var modelState = testContext.ModelState;
         var model = new Person4
         {
-            Address = new Address[] { new Address { Street = "Old street", City = "Toronto", }, },
+            Address = new Address[]
+            {
+                new Address { Street = "Old street", City = "Toronto", },
+            },
         };
         var collection = model.Address;
 
@@ -536,7 +539,10 @@ public class TryUpdateModelIntegrationTest
     private class Person7
     {
         public IEnumerable<Address> Address { get; } =
-            new Address[] { new Address() { City = "Redmond", Street = "One Microsoft Way" } };
+            new Address[]
+            {
+                new Address() { City = "Redmond", Street = "One Microsoft Way" }
+            };
     }
 
     [Fact]
@@ -580,7 +586,10 @@ public class TryUpdateModelIntegrationTest
     private class Person8
     {
         public ICollection<Address> Address { get; } =
-            new Address[] { new Address() { City = "Redmond", Street = "One Microsoft Way" } };
+            new Address[]
+            {
+                new Address() { City = "Redmond", Street = "One Microsoft Way" }
+            };
     }
 
     [Fact]
@@ -972,7 +981,10 @@ public class TryUpdateModelIntegrationTest
         var modelState = testContext.ModelState;
         var model = new Person4
         {
-            Address = new Address[] { new Address { Street = "Old street", City = "Toronto", }, },
+            Address = new Address[]
+            {
+                new Address { Street = "Old street", City = "Toronto", },
+            },
         };
         var collection = model.Address;
 

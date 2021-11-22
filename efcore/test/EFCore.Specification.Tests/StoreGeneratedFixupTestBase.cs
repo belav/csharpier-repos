@@ -4666,8 +4666,14 @@ namespace Microsoft.EntityFrameworkCore
         {
             first.SecondLevels = new List<SecondLevel>
             {
-                new() { ThirdLevels = new List<ThirdLevel> { new(), new() } },
-                new() { ThirdLevels = new List<ThirdLevel> { new(), new() } }
+                new()
+                {
+                    ThirdLevels = new List<ThirdLevel> { new(), new() }
+                },
+                new()
+                {
+                    ThirdLevels = new List<ThirdLevel> { new(), new() }
+                }
             };
         }
 

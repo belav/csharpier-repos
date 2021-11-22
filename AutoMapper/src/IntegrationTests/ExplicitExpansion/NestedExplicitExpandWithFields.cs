@@ -132,17 +132,26 @@ namespace AutoMapper.IntegrationTests.Net4
                     {
                         new Class1
                         {
-                            Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
+                            Class2 = new Class2
+                            {
+                                Class3 = new Class3 { Name = "SomeValue" }
+                            },
                             Name = "Alain Brito"
                         },
                         new Class1
                         {
-                            Class2 = new Class2 { Class3 = new Class3 { Name = "OtherValue" } },
+                            Class2 = new Class2
+                            {
+                                Class3 = new Class3 { Name = "OtherValue" }
+                            },
                             Name = "Jimmy Bogard"
                         },
                         new Class1
                         {
-                            Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
+                            Class2 = new Class2
+                            {
+                                Class3 = new Class3 { Name = "SomeValue" }
+                            },
                             Name = "Bill Gates"
                         }
                     }

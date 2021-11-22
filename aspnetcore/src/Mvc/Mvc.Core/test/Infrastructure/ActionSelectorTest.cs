@@ -631,7 +631,10 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new ConstraintFactory() { Constraint = new BooleanConstraint() { Pass = true }, },
+                new ConstraintFactory()
+                {
+                    Constraint = new BooleanConstraint() { Pass = true },
+                },
             }
         };
 

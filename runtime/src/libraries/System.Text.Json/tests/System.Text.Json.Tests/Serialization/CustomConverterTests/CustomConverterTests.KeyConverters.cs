@@ -99,7 +99,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new InvalidCustomKeyConverter { Type = invalidOperationType } }
+                Converters =
+                {
+                    new InvalidCustomKeyConverter { Type = invalidOperationType }
+                }
             };
             var value = new Dictionary<string, int> { ["key"] = 42 };
 
@@ -126,7 +129,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new InvalidCustomKeyConverter { Type = invalidOperationType } }
+                Converters =
+                {
+                    new InvalidCustomKeyConverter { Type = invalidOperationType }
+                }
             };
             string json = @"{""key1"" : 1, ""key2"" : 2 }";
 

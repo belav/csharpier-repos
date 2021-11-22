@@ -145,7 +145,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     Notes = new List<Note> { note1, note2 }
                 };
                 context.Add(
-                    new Person { Id = 2, Addresses = new List<Address> { existingAddress1Person2 } }
+                    new Person
+                    {
+                        Id = 2,
+                        Addresses = new List<Address> { existingAddress1Person2 }
+                    }
                 );
                 existingAddress1Person3 = new Address
                 {
@@ -215,7 +219,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     Street = "Another",
                     City = "City",
                     AddressTitle = new AddressTitle { Title = "P3 Alternative" },
-                    Notes = new List<Note> { new() { Content = "Another note" } }
+                    Notes = new List<Note>
+                    {
+                        new() { Content = "Another note" }
+                    }
                 };
 
                 var existingFirstAddressEntry = context.Entry(people[2].Addresses.First());
@@ -308,7 +315,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     AddressTitle = new AddressTitle()
                 };
 
-                context.Add(new Person { Id = 1, Addresses = new List<Address> { address } });
+                context.Add(
+                    new Person
+                    {
+                        Id = 1,
+                        Addresses = new List<Address> { address }
+                    }
+                );
                 Assert.Equal("DefaultTitle", address.AddressTitle.Title);
 
                 await context.SaveChangesAsync();

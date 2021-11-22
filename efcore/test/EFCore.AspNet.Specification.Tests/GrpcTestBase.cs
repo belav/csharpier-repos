@@ -181,7 +181,11 @@ namespace Microsoft.EntityFrameworkCore
                         Name = "Arthur"
                     },
                     PostStat = PostStatus.Published,
-                    TagsInPostData = { new Tag { Name = "Kittens" }, new Tag { Name = "Puppies" } }
+                    TagsInPostData =
+                    {
+                        new Tag { Name = "Kittens" },
+                        new Tag { Name = "Puppies" }
+                    }
                 };
 
                 context.Add(post);

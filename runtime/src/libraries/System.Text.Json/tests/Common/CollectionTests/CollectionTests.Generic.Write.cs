@@ -13,7 +13,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task WriteListOfList()
         {
-            var input = new List<List<int>> { new List<int>() { 1, 2 }, new List<int>() { 3, 4 } };
+            var input = new List<List<int>>
+            {
+                new List<int>() { 1, 2 },
+                new List<int>() { 3, 4 }
+            };
 
             string json = await JsonSerializerWrapperForString.SerializeWrapper(input);
             Assert.Equal("[[1,2],[3,4]]", json);

@@ -551,9 +551,18 @@ public class ContentDispositionHeaderValueTest
                 Parameters = { new NameValueHeaderValue("name", "") }
             }
         }, // TODO: passing in a null value causes a strange assert on CoreCLR before the test even starts. Not reproducible in the body of a test.
-        { "inline;name=value", new ContentDispositionHeaderValue("inline") { Name = "value" } },
-        { "inline;name=value;", new ContentDispositionHeaderValue("inline") { Name = "value" } },
-        { "inline;name=value;", new ContentDispositionHeaderValue("inline") { Name = "value" } },
+        {
+            "inline;name=value",
+            new ContentDispositionHeaderValue("inline") { Name = "value" }
+        },
+        {
+            "inline;name=value;",
+            new ContentDispositionHeaderValue("inline") { Name = "value" }
+        },
+        {
+            "inline;name=value;",
+            new ContentDispositionHeaderValue("inline") { Name = "value" }
+        },
         {
             @"inline; filename=""foo.html""",
             new ContentDispositionHeaderValue("inline") { FileName = @"""foo.html""" }

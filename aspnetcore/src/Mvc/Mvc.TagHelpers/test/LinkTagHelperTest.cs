@@ -92,7 +92,9 @@ public class LinkTagHelperTest
             // outputAttributes
             return new TheoryData<TagHelperAttributeList>
             {
-                { new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } } },
+                {
+                    new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } }
+                },
                 {
                     new TagHelperAttributeList
                     {
@@ -101,7 +103,9 @@ public class LinkTagHelperTest
                         { "hello", "world3" }
                     }
                 },
-                { new TagHelperAttributeList { { "HelLO", "world" }, { "HELLO", "world2" } } },
+                {
+                    new TagHelperAttributeList { { "HelLO", "world" }, { "HELLO", "world2" } }
+                },
                 {
                     new TagHelperAttributeList
                     {
@@ -110,7 +114,9 @@ public class LinkTagHelperTest
                         { "hello", "world3" }
                     }
                 },
-                { new TagHelperAttributeList { { "HeLlO", "world" }, { "hello", "world2" } } },
+                {
+                    new TagHelperAttributeList { { "HeLlO", "world" }, { "hello", "world2" } }
+                },
             };
         }
     }

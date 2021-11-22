@@ -1371,7 +1371,10 @@ namespace AutoMapper.IntegrationTests
                 var source = new Source
                 {
                     Id = 1,
-                    FieldLevel1 = new Level1 { FieldLevel2 = new Level2 { TheField = 2 } }
+                    FieldLevel1 = new Level1
+                    {
+                        FieldLevel2 = new Level2 { TheField = 2 }
+                    }
                 };
                 context.Sources.Add(source);
                 base.Seed(context);

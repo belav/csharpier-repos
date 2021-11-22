@@ -326,7 +326,10 @@ public class ResponseCacheAttributeTest
                     },
                     "max-age=100, private"
                 },
-                { new ResponseCacheAttribute() { NoStore = true, Duration = 0 }, "no-store" },
+                {
+                    new ResponseCacheAttribute() { NoStore = true, Duration = 0 },
+                    "no-store"
+                },
                 {
                     new ResponseCacheAttribute()
                     {

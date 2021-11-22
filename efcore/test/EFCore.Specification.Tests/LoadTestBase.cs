@@ -137,9 +137,21 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Id = 707,
                 AlternateId = "Root",
-                Children = new List<Child> { new() { Id = 11 }, new() { Id = 12 } },
-                ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
-                ChildrenShadowFk = new List<ChildShadowFk> { new() { Id = 51 }, new() { Id = 52 } },
+                Children = new List<Child>
+                {
+                    new() { Id = 11 },
+                    new() { Id = 12 }
+                },
+                ChildrenAk = new List<ChildAk>
+                {
+                    new() { Id = 31 },
+                    new() { Id = 32 }
+                },
+                ChildrenShadowFk = new List<ChildShadowFk>
+                {
+                    new() { Id = 51 },
+                    new() { Id = 52 }
+                },
                 ChildrenCompositeKey = new List<ChildCompositeKey>
                 {
                     new() { Id = 51 },
@@ -6747,7 +6759,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Id = 707,
                         AlternateId = "Root",
-                        Children = new List<Child> { new Child { Id = 11 }, new Child { Id = 12 } },
+                        Children = new List<Child>
+                        {
+                            new Child { Id = 11 },
+                            new Child { Id = 12 }
+                        },
                         SinglePkToPk = new SinglePkToPk { Id = 707 },
                         Single = new Single { Id = 21 },
                         ChildrenAk = new List<ChildAk>

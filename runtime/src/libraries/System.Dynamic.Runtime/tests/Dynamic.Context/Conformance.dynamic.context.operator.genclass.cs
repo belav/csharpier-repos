@@ -27,17 +27,29 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static MyClass<T>[] operator /(MyClass<T> p1, float? p2)
         {
-            return new MyClass<T>[] { null, new MyClass<T>() { Field = 4 } };
+            return new MyClass<T>[]
+            {
+                null,
+                new MyClass<T>() { Field = 4 }
+            };
         }
 
         public static MyStruct?[] operator <=(MyClass<T> p1, int p2)
         {
-            return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } };
+            return new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = int.MinValue }
+            };
         }
 
         public static MyStruct?[] operator >=(MyClass<T> p1, int p2)
         {
-            return new MyStruct?[] { null, new MyStruct() { Number = int.MaxValue } };
+            return new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = int.MaxValue }
+            };
         }
 
         public static decimal[] operator -(dynamic p1, MyClass<T> p2)
@@ -70,7 +82,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         // public static implicit operator dynamic(MyClass<T> p1) { return p1; }
         public static implicit operator MyStruct[](MyClass<T> p1)
         {
-            return new MyStruct[] { new MyStruct() { Number = 4 } };
+            return new MyStruct[]
+            {
+                new MyStruct() { Number = 4 }
+            };
         }
 
         public static explicit operator MyClass<T>(MyStruct?[] p1)
@@ -160,7 +175,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     {
         public static implicit operator MyStruct[](MemberClassWithAnotherTypeConstraint<T, U> p1)
         {
-            return new MyStruct[] { new MyStruct() { Number = 4 } };
+            return new MyStruct[]
+            {
+                new MyStruct() { Number = 4 }
+            };
         }
 
         public static implicit operator int?(MemberClassWithAnotherTypeConstraint<T, U> p1)

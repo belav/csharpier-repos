@@ -236,24 +236,36 @@ namespace System.ComponentModel.Tests
             yield return new object[] { new Component(), "System.ComponentModel.Component" };
             yield return new object[]
             {
-                new Component { Site = new MockSite { Name = "name" } },
+                new Component
+                {
+                    Site = new MockSite { Name = "name" }
+                },
                 "name [System.ComponentModel.Component]"
             };
             yield return new object[]
             {
-                new Component { Site = new MockSite { Name = string.Empty } },
+                new Component
+                {
+                    Site = new MockSite { Name = string.Empty }
+                },
                 " [System.ComponentModel.Component]"
             };
             yield return new object[]
             {
-                new Component { Site = new MockSite { Name = null } },
+                new Component
+                {
+                    Site = new MockSite { Name = null }
+                },
                 " [System.ComponentModel.Component]"
             };
 
             // ToString uses the private _site field instead of the Site property.
             yield return new object[]
             {
-                new DifferentSiteComponent { Site = new MockSite { Name = "Name2" } },
+                new DifferentSiteComponent
+                {
+                    Site = new MockSite { Name = "Name2" }
+                },
                 "System.ComponentModel.Tests.ComponentTests+DifferentSiteComponent"
             };
         }

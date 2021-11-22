@@ -21,7 +21,11 @@ namespace System.CommandLine.Tests
             {
                 var argument = new Argument<string> { Name = "the-argument" };
 
-                var command = new Command("outer") { new Command("inner") { argument }, argument };
+                var command = new Command("outer")
+                {
+                    new Command("inner") { argument },
+                    argument
+                };
 
                 var parseResult = command.Parse(commandLine);
 
@@ -41,7 +45,11 @@ namespace System.CommandLine.Tests
             {
                 var argument = new Argument<string> { Name = "the-argument" };
 
-                var command = new Command("outer") { new Command("inner") { argument }, argument };
+                var command = new Command("outer")
+                {
+                    new Command("inner") { argument },
+                    argument
+                };
 
                 var parseResult = command.Parse(commandLine);
 
@@ -55,7 +63,11 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string>("--the-option");
 
-                var command = new Command("outer") { new Command("inner") { option }, option };
+                var command = new Command("outer")
+                {
+                    new Command("inner") { option },
+                    option
+                };
 
                 var parseResult = command.Parse(commandLine);
 
@@ -75,7 +87,11 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string>("--the-option");
 
-                var command = new Command("outer") { new Command("inner") { option }, option };
+                var command = new Command("outer")
+                {
+                    new Command("inner") { option },
+                    option
+                };
 
                 var parseResult = command.Parse(commandLine);
 
@@ -113,9 +129,15 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string>("--the-option");
 
-                var sprocket = new Command("sprocket") { new Command("add") { option } };
+                var sprocket = new Command("sprocket")
+                {
+                    new Command("add") { option }
+                };
 
-                var widget = new Command("widget") { new Command("add") { option } };
+                var widget = new Command("widget")
+                {
+                    new Command("add") { option }
+                };
 
                 var root = new RootCommand { sprocket, widget };
 

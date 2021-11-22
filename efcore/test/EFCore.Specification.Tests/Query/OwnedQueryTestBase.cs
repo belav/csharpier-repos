@@ -1887,7 +1887,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             private static IReadOnlyList<Planet> CreatePlanets() =>
-                new List<Planet> { new() { Id = 1, StarId = 1 } };
+                new List<Planet>
+                {
+                    new() { Id = 1, StarId = 1 }
+                };
 
             private static IReadOnlyList<Star> CreateStars() =>
                 new List<Star>
@@ -1905,7 +1908,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 };
 
             private static IReadOnlyList<Moon> CreateMoons() =>
-                new List<Moon> { new() { Id = 1, PlanetId = 1, Diameter = 3474 } };
+                new List<Moon>
+                {
+                    new() { Id = 1, PlanetId = 1, Diameter = 3474 }
+                };
 
             private static IReadOnlyList<OwnedPerson> CreateOwnedPeople()
             {
@@ -2005,12 +2011,18 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 var order3 = new Order { Id = -20, Client = ownedPerson2 };
                 order3["OrderDate"] = Convert.ToDateTime("2015-05-25 20:35:48");
-                order3.Details = new List<OrderDetail> { new() { Detail = "Internal Order" } };
+                order3.Details = new List<OrderDetail>
+                {
+                    new() { Detail = "Internal Order" }
+                };
                 ownedPerson2.Orders = new List<Order> { order3 };
 
                 var order4 = new Order { Id = -30, Client = ownedPerson3 };
                 order4["OrderDate"] = Convert.ToDateTime("2014-11-10 04:32:42");
-                order4.Details = new List<OrderDetail> { new() { Detail = "Bulk Order" } };
+                order4.Details = new List<OrderDetail>
+                {
+                    new() { Detail = "Bulk Order" }
+                };
                 ownedPerson3.Orders = new List<Order> { order4 };
 
                 var order5 = new Order { Id = -40, Client = ownedPerson4 };
@@ -2027,7 +2039,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 };
             }
 
-            private static IReadOnlyList<Fink> CreateFinks() => new List<Fink> { new() { Id = 1 } };
+            private static IReadOnlyList<Fink> CreateFinks() =>
+                new List<Fink>
+                {
+                    new() { Id = 1 }
+                };
 
             private static IReadOnlyList<Barton> CreateBartons() =>
                 new List<Barton>

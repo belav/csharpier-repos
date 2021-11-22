@@ -12,8 +12,14 @@ namespace System.Collections.ObjectModel.Tests
         public static IEnumerable<object[]> SerializeDeserialize_Roundtrips_MemberData()
         {
             yield return new object[] { new TestCollection() };
-            yield return new object[] { new TestCollection() { "hello" } };
-            yield return new object[] { new TestCollection() { "hello", "world" } };
+            yield return new object[]
+            {
+                new TestCollection() { "hello" }
+            };
+            yield return new object[]
+            {
+                new TestCollection() { "hello", "world" }
+            };
         }
 
         [ConditionalTheory(

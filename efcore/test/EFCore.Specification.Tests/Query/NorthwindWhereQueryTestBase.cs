@@ -306,7 +306,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_nested_field_access_closure_via_query_cache(bool async)
         {
-            var city = new City { Nested = new City { InstanceFieldValue = "London" } };
+            var city = new City
+            {
+                Nested = new City { InstanceFieldValue = "London" }
+            };
 
             await AssertQuery(
                 async,
@@ -327,7 +330,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Where_nested_property_access_closure_via_query_cache(bool async)
         {
-            var city = new City { Nested = new City { InstancePropertyValue = "London" } };
+            var city = new City
+            {
+                Nested = new City { InstancePropertyValue = "London" }
+            };
 
             await AssertQuery(
                 async,

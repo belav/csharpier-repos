@@ -70,7 +70,10 @@ namespace System.Net.Http.Formatting
                         "\"4ed1cd44-11d7-4b27-b623-0b8b553c8906\""
                     },
                     // Structs
-                    { new Point() { x = 45, Y = -5 }, "{\"x\":45,\"Y\":-5}" },
+                    {
+                        new Point() { x = 45, Y = -5 },
+                        "{\"x\":45,\"Y\":-5}"
+                    },
                     // Arrays
                     { new object[] { }, "[]" },
                     { new int[] { 1, 2, 3 }, "[1,2,3]" },
@@ -84,8 +87,14 @@ namespace System.Net.Http.Formatting
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
                     // Collections
-                    { new List<int> { 1, 2, 3 }, "[1,2,3]" },
-                    { new List<string> { "a", "b" }, "[\"a\",\"b\"]" },
+                    {
+                        new List<int> { 1, 2, 3 },
+                        "[1,2,3]"
+                    },
+                    {
+                        new List<string> { "a", "b" },
+                        "[\"a\",\"b\"]"
+                    },
                     {
                         new List<Point>
                         {
@@ -94,8 +103,14 @@ namespace System.Net.Http.Formatting
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
-                    { new MyList<int> { 1, 2, 3 }, "[1,2,3]" },
-                    { new MyList<string> { "a", "b" }, "[\"a\",\"b\"]" },
+                    {
+                        new MyList<int> { 1, 2, 3 },
+                        "[1,2,3]"
+                    },
+                    {
+                        new MyList<string> { "a", "b" },
+                        "[\"a\",\"b\"]"
+                    },
                     {
                         new MyList<Point>
                         {
@@ -121,7 +136,10 @@ namespace System.Net.Http.Formatting
                         new DataContractType() { s = "foo", i = 49, NotAMember = "Error" },
                         "{\"s\":\"foo\",\"i\":49}"
                     },
-                    { new POCOType() { s = "foo", t = "Error" }, "{\"s\":\"foo\"}" },
+                    {
+                        new POCOType() { s = "foo", t = "Error" },
+                        "{\"s\":\"foo\"}"
+                    },
 #if !NETFX_CORE // Only publics are serialized in portable library
                     {
                         new SerializableType("protected")
@@ -165,7 +183,10 @@ namespace System.Net.Http.Formatting
                     { new JValue(false), "false" },
                     { new JValue(54), "54" },
                     { new JValue("s"), "\"s\"" },
-                    { new JArray() { new JValue(1), new JValue(2) }, "[1,2]" },
+                    {
+                        new JArray() { new JValue(1), new JValue(2) },
+                        "[1,2]"
+                    },
                     {
                         new JObject() { { "k1", new JValue("v1") }, { "k2", new JValue("v2") } },
                         "{\"k1\":\"v1\",\"k2\":\"v2\"}"

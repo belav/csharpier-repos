@@ -344,9 +344,24 @@ namespace System.Linq.Tests
 
             var expected = new[]
             {
-                new RoleMetadata { Role = new Role { Id = 1 }, CountA = 17, CountrB = 0 },
-                new RoleMetadata { Role = new Role { Id = 2 }, CountA = 0, CountrB = 17 },
-                new RoleMetadata { Role = new Role { Id = 3 }, CountA = 0, CountrB = 16 }
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 1 },
+                    CountA = 17,
+                    CountrB = 0
+                },
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 2 },
+                    CountA = 0,
+                    CountrB = 17
+                },
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 3 },
+                    CountA = 0,
+                    CountrB = 16
+                }
             };
 
             Assert.Equal(expected, result);

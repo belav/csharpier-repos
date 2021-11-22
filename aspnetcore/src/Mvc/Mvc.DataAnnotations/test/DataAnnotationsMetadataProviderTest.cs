@@ -38,9 +38,21 @@ public class DataAnnotationsMetadataProviderTest
                     d => d.DataTypeName,
                     DataType.Duration.ToString()
                 },
-                { new DisplayAttribute() { Description = "d" }, d => d.Description(), "d" },
-                { new DisplayAttribute() { Name = "DN" }, d => d.DisplayName(), "DN" },
-                { new DisplayAttribute() { Order = 3 }, d => d.Order, 3 },
+                {
+                    new DisplayAttribute() { Description = "d" },
+                    d => d.Description(),
+                    "d"
+                },
+                {
+                    new DisplayAttribute() { Name = "DN" },
+                    d => d.DisplayName(),
+                    "DN"
+                },
+                {
+                    new DisplayAttribute() { Order = 3 },
+                    d => d.Order,
+                    3
+                },
                 {
                     new DisplayAttribute() { Prompt = "Enter Value" },
                     d => d.Placeholder(),
@@ -93,7 +105,11 @@ public class DataAnnotationsMetadataProviderTest
                     d => d.HasNonDefaultEditFormat,
                     true
                 },
-                { new DisplayFormatAttribute() { HtmlEncode = false }, d => d.HtmlEncode, false },
+                {
+                    new DisplayFormatAttribute() { HtmlEncode = false },
+                    d => d.HtmlEncode,
+                    false
+                },
                 {
                     new DisplayFormatAttribute() { NullDisplayText = "(null)" },
                     d => d.NullDisplayText,

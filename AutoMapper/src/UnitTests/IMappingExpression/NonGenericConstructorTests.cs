@@ -41,7 +41,10 @@
 
         protected override void Because_of()
         {
-            var values = new[] { new Source() { Value = 5 } }.AsQueryable();
+            var values = new[]
+            {
+                new Source() { Value = 5 }
+            }.AsQueryable();
 
             _dest = values.ProjectTo<Dest>(Configuration).ToArray();
         }

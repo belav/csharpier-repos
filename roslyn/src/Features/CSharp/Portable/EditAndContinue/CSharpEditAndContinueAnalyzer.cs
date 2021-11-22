@@ -114,10 +114,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     case SyntaxKind.EventFieldDeclaration:
                         // Active statements encompassing modifiers or type correspond to the first initialized field.
                         // [|public static int F = 1|], G = 2;
-                        declarations =
-                            new(
-                                ((BaseFieldDeclarationSyntax)current).Declaration.Variables.First()
-                            );
+                        declarations = new(
+                            ((BaseFieldDeclarationSyntax)current).Declaration.Variables.First()
+                        );
                         return true;
 
                     case SyntaxKind.VariableDeclarator:

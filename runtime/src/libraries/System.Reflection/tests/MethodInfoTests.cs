@@ -734,7 +734,10 @@ namespace System.Reflection.Tests
                 typeof(MethodInfoDefaultParameters),
                 "ValueType",
                 new MethodInfoDefaultParameters(),
-                new object[] { new MethodInfoDefaultParameters.CustomValueType() { Id = 1 } },
+                new object[]
+                {
+                    new MethodInfoDefaultParameters.CustomValueType() { Id = 1 }
+                },
                 new MethodInfoDefaultParameters.CustomValueType() { Id = 1 }
             }; // Default value type parameter, present
 

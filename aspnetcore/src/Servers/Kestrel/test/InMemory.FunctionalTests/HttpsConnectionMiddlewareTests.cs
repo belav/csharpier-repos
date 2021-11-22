@@ -1107,8 +1107,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 // Use a random host name to avoid the TLS session resumption cache.
                 TargetHost = Guid.NewGuid().ToString(),
-                ApplicationProtocols =
-                    new() { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11, },
+                ApplicationProtocols = new()
+                {
+                    SslApplicationProtocol.Http2,
+                    SslApplicationProtocol.Http11,
+                },
             }
         );
         Assert.Equal(SslApplicationProtocol.Http2, stream.NegotiatedApplicationProtocol);
@@ -1150,8 +1153,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 // Use a random host name to avoid the TLS session resumption cache.
                 TargetHost = Guid.NewGuid().ToString(),
-                ApplicationProtocols =
-                    new() { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11, },
+                ApplicationProtocols = new()
+                {
+                    SslApplicationProtocol.Http2,
+                    SslApplicationProtocol.Http11,
+                },
             }
         );
         Assert.Equal(SslApplicationProtocol.Http2, stream.NegotiatedApplicationProtocol);
@@ -1193,8 +1199,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 // Use a random host name to avoid the TLS session resumption cache.
                 TargetHost = Guid.NewGuid().ToString(),
-                ApplicationProtocols =
-                    new() { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11, },
+                ApplicationProtocols = new()
+                {
+                    SslApplicationProtocol.Http2,
+                    SslApplicationProtocol.Http11,
+                },
             }
         );
         Assert.Equal(default, stream.NegotiatedApplicationProtocol);

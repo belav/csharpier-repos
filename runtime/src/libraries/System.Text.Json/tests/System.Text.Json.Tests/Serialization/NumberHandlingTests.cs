@@ -1897,7 +1897,10 @@ namespace System.Text.Json.Serialization.Tests
                 () => JsonSerializer.Deserialize<MyCustomListWrapper>(json)
             );
 
-            var obj = new MyCustomListWrapper { List = new MyCustomList { 1 } };
+            var obj = new MyCustomListWrapper
+            {
+                List = new MyCustomList { 1 }
+            };
             Assert.Equal(@"{""List"":[1]}", JsonSerializer.Serialize(obj));
         }
 
@@ -2297,7 +2300,11 @@ namespace System.Text.Json.Serialization.Tests
         public static void AdaptableCustomConverter()
         {
             // Baseline without custom converter
-            PlainClassWithList obj = new() { Prop = new List<int>() { 1 } };
+            PlainClassWithList obj =
+                new()
+                {
+                    Prop = new List<int>() { 1 }
+                };
             string json = JsonSerializer.Serialize(obj, s_optionReadAndWriteFromStr);
             Assert.Equal("{\"Prop\":[\"1\"]}", json);
 
@@ -2308,7 +2315,10 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options =
                 new() { Converters = { new AdaptableInt32Converter() } };
 
-            obj = new() { Prop = new List<int>() { 1 } };
+            obj = new()
+            {
+                Prop = new List<int>() { 1 }
+            };
             json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("{\"Prop\":[101]}", json);
 
@@ -2316,16 +2326,17 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj.Prop[0]);
 
             // Then with strings
-            options =
-                new()
-                {
-                    NumberHandling =
-                        JsonNumberHandling.AllowReadingFromString
-                        | JsonNumberHandling.WriteAsString,
-                    Converters = { new AdaptableInt32Converter() }
-                };
+            options = new()
+            {
+                NumberHandling =
+                    JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString,
+                Converters = { new AdaptableInt32Converter() }
+            };
 
-            obj = new() { Prop = new List<int>() { 1 } };
+            obj = new()
+            {
+                Prop = new List<int>() { 1 }
+            };
             json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("{\"Prop\":[\"101\"]}", json);
 

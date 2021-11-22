@@ -32,13 +32,25 @@ public class SniOptionsSelectorTests
         {
             {
                 "www.example.org",
-                new SniConfig { Certificate = new CertificateConfig { Path = "Exact" } }
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "Exact" }
+                }
             },
             {
                 "*.example.org",
-                new SniConfig { Certificate = new CertificateConfig { Path = "WildcardPrefix" } }
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "WildcardPrefix" }
+                }
             },
-            { "*", new SniConfig { Certificate = new CertificateConfig { Path = "WildcardOnly" } } }
+            {
+                "*",
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "WildcardOnly" }
+                }
+            }
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -94,11 +106,17 @@ public class SniOptionsSelectorTests
         {
             {
                 "*.a.example.org",
-                new SniConfig { Certificate = new CertificateConfig { Path = "Long" } }
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "Long" }
+                }
             },
             {
                 "*.example.org",
-                new SniConfig { Certificate = new CertificateConfig { Path = "Short" } }
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "Short" }
+                }
             }
         };
 
@@ -135,11 +153,17 @@ public class SniOptionsSelectorTests
         {
             {
                 "Www.Example.Org",
-                new SniConfig { Certificate = new CertificateConfig { Path = "Exact" } }
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "Exact" }
+                }
             },
             {
                 "*.Example.Org",
-                new SniConfig { Certificate = new CertificateConfig { Path = "WildcardPrefix" } }
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "WildcardPrefix" }
+                }
             }
         };
 
@@ -208,7 +232,13 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "*", new SniConfig { Certificate = new CertificateConfig { Path = "WildcardOnly" } } }
+            {
+                "*",
+                new SniConfig
+                {
+                    Certificate = new CertificateConfig { Path = "WildcardOnly" }
+                }
+            }
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -232,7 +262,10 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig { Certificate = new CertificateConfig() } }
+            {
+                "www.example.org",
+                new SniConfig { Certificate = new CertificateConfig() }
+            }
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -260,7 +293,10 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig { Certificate = new CertificateConfig() } }
+            {
+                "www.example.org",
+                new SniConfig { Certificate = new CertificateConfig() }
+            }
         };
 
         SslServerAuthenticationOptions lastSeenSslOptions = null;
@@ -303,7 +339,10 @@ public class SniOptionsSelectorTests
         var sniDictionary = new Dictionary<string, SniConfig>
         {
             { "selector.example.org", new SniConfig() },
-            { "config.example.org", new SniConfig { Certificate = new CertificateConfig() } }
+            {
+                "config.example.org",
+                new SniConfig { Certificate = new CertificateConfig() }
+            }
         };
 
         var selectorCertificate = _x509Certificate2;
@@ -514,7 +553,10 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig { Certificate = new CertificateConfig() } }
+            {
+                "www.example.org",
+                new SniConfig { Certificate = new CertificateConfig() }
+            }
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -570,7 +612,10 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig { Certificate = new CertificateConfig() } }
+            {
+                "www.example.org",
+                new SniConfig { Certificate = new CertificateConfig() }
+            }
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -641,7 +686,10 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig { Certificate = new CertificateConfig() } }
+            {
+                "www.example.org",
+                new SniConfig { Certificate = new CertificateConfig() }
+            }
         };
 
         var sniOptionsSelector = new SniOptionsSelector(

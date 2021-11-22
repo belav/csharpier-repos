@@ -20,7 +20,10 @@ namespace System.Text.Json.Serialization.Tests
                 MyIntList = null,
                 MyNullableIntList = null,
                 MyObjectList = new List<object> { null },
-                MyListList = new List<List<object>> { new List<object> { null } },
+                MyListList = new List<List<object>>
+                {
+                    new List<object> { null }
+                },
                 MyDictionaryList = new List<Dictionary<string, string>>
                 {
                     new Dictionary<string, string>() { ["key"] = null }
@@ -75,7 +78,10 @@ namespace System.Text.Json.Serialization.Tests
                 MyIntList = null,
                 MyNullableIntList = null,
                 MyObjectList = new List<object> { null },
-                MyListList = new List<List<object>> { new List<object> { null } },
+                MyListList = new List<List<object>>
+                {
+                    new List<object> { null }
+                },
                 MyDictionaryList = new List<Dictionary<string, string>>
                 {
                     new Dictionary<string, string>() { ["key"] = null }
@@ -258,7 +264,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WritePocoArray()
         {
-            var input = new MyPoco[] { null, new MyPoco { Foo = "foo" } };
+            var input = new MyPoco[]
+            {
+                null,
+                new MyPoco { Foo = "foo" }
+            };
 
             string json = JsonSerializer.Serialize(
                 input,

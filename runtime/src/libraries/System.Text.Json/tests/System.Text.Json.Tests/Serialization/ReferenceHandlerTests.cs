@@ -93,7 +93,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ObjectPreserveDuplicateObjects()
         {
-            Employee angela = new Employee { Manager = new Employee { Name = "Bob" } };
+            Employee angela = new Employee
+            {
+                Manager = new Employee { Name = "Bob" }
+            };
             angela.Manager2 = angela.Manager;
 
             string expected = JsonConvert.SerializeObject(
@@ -118,7 +121,10 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Contacts = new Dictionary<string, Employee>
                 {
-                    { "444-4444", new Employee { Name = "Bob" } }
+                    {
+                        "444-4444",
+                        new Employee { Name = "Bob" }
+                    }
                 }
             };
             angela.Contacts2 = angela.Contacts;
@@ -143,7 +149,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             Employee angela = new Employee
             {
-                Subordinates = new List<Employee> { new Employee { Name = "Bob" } }
+                Subordinates = new List<Employee>
+                {
+                    new Employee { Name = "Bob" }
+                }
             };
             angela.Subordinates2 = angela.Subordinates;
 
@@ -658,7 +667,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ArrayPreserveDuplicateObjects()
         {
-            List<Employee> root = new List<Employee> { new Employee { Name = "Angela" } };
+            List<Employee> root = new List<Employee>
+            {
+                new Employee { Name = "Angela" }
+            };
             root.Add(root[0]);
 
             string expected = JsonConvert.SerializeObject(

@@ -60,7 +60,10 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
             string assemblyVersion = "1.0.0.0";
             JObject clsidMap = new JObject
             {
-                { guid, new JObject() { { "assembly", assemblyName }, { "type", typeName } } }
+                {
+                    guid,
+                    new JObject() { { "assembly", assemblyName }, { "type", typeName } }
+                }
             };
 
             string clsidmapPath = Path.Combine(directory.Path, "test.clsidmap");

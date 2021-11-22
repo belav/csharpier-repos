@@ -662,7 +662,10 @@ namespace System.Linq.Tests
         public void SingleNonNullElement()
         {
             string[] key = { "Tim" };
-            Record[] source = { new Record { Name = key[0], Score = 60 } };
+            Record[] source =
+            {
+                new Record { Name = key[0], Score = 60 }
+            };
 
             AssertGroupingCorrect(key, source, source.GroupBy(e => e.Name));
         }

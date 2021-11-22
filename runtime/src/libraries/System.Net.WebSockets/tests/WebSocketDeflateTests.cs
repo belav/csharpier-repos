@@ -561,28 +561,26 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions
                 {
                     IsServer = true,
-                    DangerousDeflateOptions =
-                        new()
-                        {
-                            ClientContextTakeover = false,
-                            ClientMaxWindowBits = clientWindowBits,
-                            ServerContextTakeover = false,
-                            ServerMaxWindowBits = serverWindowBits
-                        }
+                    DangerousDeflateOptions = new()
+                    {
+                        ClientContextTakeover = false,
+                        ClientMaxWindowBits = clientWindowBits,
+                        ServerContextTakeover = false,
+                        ServerMaxWindowBits = serverWindowBits
+                    }
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
                 stream.Remote,
                 new WebSocketCreationOptions
                 {
-                    DangerousDeflateOptions =
-                        new()
-                        {
-                            ClientContextTakeover = false,
-                            ClientMaxWindowBits = clientWindowBits,
-                            ServerContextTakeover = false,
-                            ServerMaxWindowBits = serverWindowBits
-                        }
+                    DangerousDeflateOptions = new()
+                    {
+                        ClientContextTakeover = false,
+                        ClientMaxWindowBits = clientWindowBits,
+                        ServerContextTakeover = false,
+                        ServerMaxWindowBits = serverWindowBits
+                    }
                 }
             );
 
@@ -1520,8 +1518,11 @@ namespace System.Net.WebSockets.Tests
                 {
                     IsServer = true,
                     KeepAliveInterval = TimeSpan.Zero,
-                    DangerousDeflateOptions =
-                        new() { ClientMaxWindowBits = 9, ServerMaxWindowBits = 9 }
+                    DangerousDeflateOptions = new()
+                    {
+                        ClientMaxWindowBits = 9,
+                        ServerMaxWindowBits = 9
+                    }
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
@@ -1529,8 +1530,11 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions
                 {
                     KeepAliveInterval = TimeSpan.Zero,
-                    DangerousDeflateOptions =
-                        new() { ClientMaxWindowBits = 9, ServerMaxWindowBits = 9 }
+                    DangerousDeflateOptions = new()
+                    {
+                        ClientMaxWindowBits = 9,
+                        ServerMaxWindowBits = 9
+                    }
                 }
             );
 

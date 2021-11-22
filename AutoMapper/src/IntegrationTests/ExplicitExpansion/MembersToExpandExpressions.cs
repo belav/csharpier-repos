@@ -62,7 +62,11 @@ namespace AutoMapper.UnitTests.Projection
         {
             Name = "Name1",
             Desc = -12,
-            Inner = new SourceInner { Desc = -25, Deep = new SourceDeepInner() { Desc = 28 } }
+            Inner = new SourceInner
+            {
+                Desc = -25,
+                Deep = new SourceDeepInner() { Desc = 28 }
+            }
         };
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {

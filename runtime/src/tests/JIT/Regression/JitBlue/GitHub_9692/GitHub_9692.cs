@@ -441,14 +441,26 @@ namespace N
             Node faultHead = new Node
             {
                 value = 6,
-                next = new Node { value = 13, next = new Node { value = 5, next = null } }
+                next = new Node
+                {
+                    value = 13,
+                    next = new Node { value = 5, next = null }
+                }
             };
             Node trueHead = new Node
             {
                 value = 23,
-                next = new Node { value = 5, next = new Node { value = 7, next = null } }
+                next = new Node
+                {
+                    value = 5,
+                    next = new Node { value = 7, next = null }
+                }
             };
-            Node falseHead = new Node { value = 5, next = new Node { value = 8, next = null } };
+            Node falseHead = new Node
+            {
+                value = 5,
+                next = new Node { value = 8, next = null }
+            };
 
             int result = 100; // 100 indicates success; increment for errors.
 

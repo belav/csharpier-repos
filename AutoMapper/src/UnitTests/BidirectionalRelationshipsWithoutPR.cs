@@ -269,7 +269,10 @@ namespace AutoMapper.UnitTests
             var article = new Article { Supplier = new Supplier() };
             article.Supplier.Contacts = new List<Contact>
             {
-                new Contact { Suppliers = new List<Supplier> { article.Supplier } }
+                new Contact
+                {
+                    Suppliers = new List<Supplier> { article.Supplier }
+                }
             };
             var supplier = Mapper.Map<ArticleViewModel>(article).Supplier;
             supplier.ShouldBe(supplier.Contacts[0].Suppliers[0]);
@@ -337,7 +340,10 @@ namespace AutoMapper.UnitTests
             var article = new Article { Supplier = new Supplier() };
             article.Supplier.Contacts = new List<Contact>
             {
-                new Contact { Suppliers = new List<Supplier> { article.Supplier } }
+                new Contact
+                {
+                    Suppliers = new List<Supplier> { article.Supplier }
+                }
             };
             var supplier = Mapper.Map<ArticleViewModel>(article).Supplier;
             supplier.ShouldBe(supplier.Contacts[0].Suppliers1[0]);
@@ -587,7 +593,10 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            var foo = new Foo { Bar = new Bar { Value = "something" } };
+            var foo = new Foo
+            {
+                Bar = new Bar { Value = "something" }
+            };
             foo.Bar.Foo = foo;
             _dto = Mapper.Map<Foo, FooDto>(foo);
         }

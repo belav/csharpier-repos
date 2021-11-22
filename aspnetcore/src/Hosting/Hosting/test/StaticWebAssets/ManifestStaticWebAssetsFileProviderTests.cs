@@ -28,33 +28,26 @@ public class ManifestStaticWebAssetsFileProviderTest
         {
             Path.GetDirectoryName(typeof(ManifestStaticWebAssetsFileProviderTest).Assembly.Location)
         };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new(comparer)
             {
-                Children =
-                    new(comparer)
+                ["_content"] = new()
+                {
+                    Children = new(comparer)
                     {
-                        ["_content"] =
-                            new()
+                        ["Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"] = new()
+                        {
+                            Match = new()
                             {
-                                Children =
-                                    new(comparer)
-                                    {
-                                        ["Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"] =
-                                            new()
-                                            {
-                                                Match =
-                                                    new()
-                                                    {
-                                                        ContentRoot = 0,
-                                                        Path =
-                                                            "Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"
-                                                    }
-                                            }
-                                    }
+                                ContentRoot = 0,
+                                Path = "Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"
                             }
+                        }
                     }
-            };
+                }
+            }
+        };
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
@@ -421,32 +414,22 @@ public class ManifestStaticWebAssetsFileProviderTest
         {
             Path.Combine(AppContext.BaseDirectory, "testroot", "wwwroot")
         };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new(comparer)
             {
-                Children =
-                    new(comparer)
+                ["_content"] = new()
+                {
+                    Children = new(comparer)
                     {
-                        ["_content"] =
-                            new()
-                            {
-                                Children =
-                                    new(comparer)
-                                    {
-                                        ["Static Web Assets.txt"] =
-                                            new()
-                                            {
-                                                Match =
-                                                    new()
-                                                    {
-                                                        ContentRoot = 0,
-                                                        Path = "Static Web Assets.txt"
-                                                    }
-                                            }
-                                    }
-                            }
+                        ["Static Web Assets.txt"] = new()
+                        {
+                            Match = new() { ContentRoot = 0, Path = "Static Web Assets.txt" }
+                        }
                     }
-            };
+                }
+            }
+        };
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
@@ -574,44 +557,32 @@ public class ManifestStaticWebAssetsFileProviderTest
         var expectedResult = OperatingSystem.IsWindows();
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
         manifest.ContentRoots = new[] { AppContext.BaseDirectory };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new(comparer)
             {
-                Children =
-                    new(comparer)
+                ["_content"] = new()
+                {
+                    Children = new(comparer)
                     {
-                        ["_content"] =
-                            new()
+                        ["RazorClassLib"] = new()
+                        {
+                            Children = new(comparer)
                             {
-                                Children =
-                                    new(comparer)
-                                    {
-                                        ["RazorClassLib"] =
-                                            new()
-                                            {
-                                                Children =
-                                                    new(comparer)
-                                                    {
-                                                        ["Dir"] =
-                                                            new()
-                                                            {
-                                                                Patterns =
-                                                                    new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
-                                                                    {
-                                                                        new()
-                                                                        {
-                                                                            Pattern = "**",
-                                                                            ContentRoot = 0,
-                                                                            Depth = 3,
-                                                                        }
-                                                                    }
-                                                            }
-                                                    }
-                                            }
-                                    }
+                                ["Dir"] = new()
+                                {
+                                    Patterns =
+                                        new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
+                                        {
+                                            new() { Pattern = "**", ContentRoot = 0, Depth = 3, }
+                                        }
+                                }
                             }
+                        }
                     }
-            };
+                }
+            }
+        };
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
@@ -635,27 +606,25 @@ public class ManifestStaticWebAssetsFileProviderTest
         var expectedResult = OperatingSystem.IsWindows();
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
         manifest.ContentRoots = new[] { AppContext.BaseDirectory };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new(comparer)
             {
-                Children =
-                    new(comparer)
+                ["_content"] = new()
+                {
+                    Children = new(comparer)
                     {
-                        ["_content"] =
-                            new()
+                        ["RazorClassLib"] = new()
+                        {
+                            Children = new(comparer)
                             {
-                                Children =
-                                    new(comparer)
-                                    {
-                                        ["RazorClassLib"] =
-                                            new()
-                                            {
-                                                Children = new(comparer) { ["Dir"] = new() { } }
-                                            }
-                                    }
+                                ["Dir"] = new() { }
                             }
+                        }
                     }
-            };
+                }
+            }
+        };
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
@@ -698,33 +667,26 @@ public class ManifestStaticWebAssetsFileProviderTest
         {
             Path.GetDirectoryName(typeof(ManifestStaticWebAssetsFileProviderTest).Assembly.Location)
         };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new(comparer)
             {
-                Children =
-                    new(comparer)
+                ["_content"] = new()
+                {
+                    Children = new(comparer)
                     {
-                        ["_content"] =
-                            new()
+                        ["Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"] = new()
+                        {
+                            Match = new()
                             {
-                                Children =
-                                    new(comparer)
-                                    {
-                                        ["Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"] =
-                                            new()
-                                            {
-                                                Match =
-                                                    new()
-                                                    {
-                                                        ContentRoot = 0,
-                                                        Path =
-                                                            "Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"
-                                                    }
-                                            }
-                                    }
+                                ContentRoot = 0,
+                                Path = "Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"
                             }
+                        }
                     }
-            };
+                }
+            }
+        };
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
@@ -836,64 +798,41 @@ public class ManifestStaticWebAssetsFileProviderTest
 
             throw new InvalidOperationException("Invalid content root");
         };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new()
             {
-                Children =
-                    new()
+                ["_content"] = new()
+                {
+                    Children = new()
                     {
-                        ["_content"] =
-                            new()
+                        ["RazorClassLibrary"] = new()
+                        {
+                            Children = new()
                             {
-                                Children =
-                                    new()
-                                    {
-                                        ["RazorClassLibrary"] =
-                                            new()
-                                            {
-                                                Children =
-                                                    new()
-                                                    {
-                                                        ["file.version.js"] =
-                                                            new()
-                                                            {
-                                                                Match =
-                                                                    new()
-                                                                    {
-                                                                        ContentRoot = 0,
-                                                                        Path = "file.js"
-                                                                    }
-                                                            }
-                                                    },
-                                                Patterns =
-                                                    new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
-                                                    {
-                                                        new()
-                                                        {
-                                                            ContentRoot = 0,
-                                                            Depth = 2,
-                                                            Pattern = "**/*.js"
-                                                        }
-                                                    },
-                                            },
-                                        ["AnotherClassLibrary"] =
-                                            new()
-                                            {
-                                                Patterns =
-                                                    new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
-                                                    {
-                                                        new()
-                                                        {
-                                                            ContentRoot = 1,
-                                                            Depth = 2,
-                                                            Pattern = "**"
-                                                        }
-                                                    }
-                                            }
-                                    }
-                            }
+                                ["file.version.js"] = new()
+                                {
+                                    Match = new() { ContentRoot = 0, Path = "file.js" }
+                                }
+                            },
+                            Patterns =
+                                new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
+                                {
+                                    new() { ContentRoot = 0, Depth = 2, Pattern = "**/*.js" }
+                                },
+                        },
+                        ["AnotherClassLibrary"] = new()
+                        {
+                            Patterns =
+                                new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
+                                {
+                                    new() { ContentRoot = 1, Depth = 2, Pattern = "**" }
+                                }
+                        }
                     }
-            };
+                }
+            }
+        };
 
         return (manifest, factory);
     }
@@ -928,23 +867,22 @@ public class ManifestStaticWebAssetsFileProviderTest
 
             throw new InvalidOperationException("Invalid content root");
         };
-        manifest.Root =
-            new()
+        manifest.Root = new()
+        {
+            Children = new Dictionary<
+                string,
+                ManifestStaticWebAssetFileProvider.StaticWebAssetNode
+            >(),
+            Patterns = new[]
             {
-                Children = new Dictionary<
-                    string,
-                    ManifestStaticWebAssetFileProvider.StaticWebAssetNode
-                >(),
-                Patterns = new[]
+                new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern
                 {
-                    new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern
-                    {
-                        ContentRoot = 0,
-                        Depth = 0,
-                        Pattern = "**"
-                    }
+                    ContentRoot = 0,
+                    Depth = 0,
+                    Pattern = "**"
                 }
-            };
+            }
+        };
 
         return (manifest, factory);
     }

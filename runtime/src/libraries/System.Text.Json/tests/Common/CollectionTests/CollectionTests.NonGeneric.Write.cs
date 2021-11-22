@@ -23,7 +23,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("[[1,2],[3,4]]", json);
 
             WrapperForIEnumerable input2 = new WrapperForIEnumerable(
-                new List<object> { new List<object>() { 1, 2 }, new List<object>() { 3, 4 }, }
+                new List<object>
+                {
+                    new List<object>() { 1, 2 },
+                    new List<object>() { 3, 4 },
+                }
             );
 
             json = await JsonSerializerWrapperForString.SerializeWrapper(input2);
@@ -83,7 +87,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task WriteIListOfIList()
         {
-            IList input = new List<IList> { new List<int>() { 1, 2 }, new List<int>() { 3, 4 } };
+            IList input = new List<IList>
+            {
+                new List<int>() { 1, 2 },
+                new List<int>() { 3, 4 }
+            };
 
             string json = await JsonSerializerWrapperForString.SerializeWrapper(input);
             Assert.Equal("[[1,2],[3,4]]", json);

@@ -142,7 +142,10 @@ namespace System.ComponentModel.Tests
                 IgnoreCase = true
             };
 
-            var value = new TestComponent { Site = new TestSite { DesignMode = false } };
+            var value = new TestComponent
+            {
+                Site = new TestSite { DesignMode = false }
+            };
             resourceManager.ApplyResources(value, "Object");
             Assert.Equal("ObjectGetSetProperty", value.GetSetProperty);
 
@@ -158,7 +161,10 @@ namespace System.ComponentModel.Tests
                 IgnoreCase = true
             };
 
-            var value = new TestComponent { Site = new TestSite { DesignMode = true } };
+            var value = new TestComponent
+            {
+                Site = new TestSite { DesignMode = true }
+            };
             resourceManager.ApplyResources(value, "Object");
             Assert.Equal("ObjectGetSetProperty", value.GetSetProperty);
 

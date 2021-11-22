@@ -74,7 +74,11 @@ namespace System.Reflection.Tests
         {
             get
             {
-                yield return new object[] { "F1", new MarshalAsAttribute(UnmanagedType.BStr) { }, };
+                yield return new object[]
+                {
+                    "F1",
+                    new MarshalAsAttribute(UnmanagedType.BStr) { },
+                };
                 yield return new object[]
                 {
                     "F2",

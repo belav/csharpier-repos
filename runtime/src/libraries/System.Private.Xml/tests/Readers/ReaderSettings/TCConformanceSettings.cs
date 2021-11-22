@@ -140,7 +140,10 @@ namespace System.Xml.Tests
             // for function v1
             {
                 this.AddChild(
-                    new CVariation(v1) { Attribute = new Variation("Default Values") { Pri = 0 } }
+                    new CVariation(v1)
+                    {
+                        Attribute = new Variation("Default Values") { Pri = 0 }
+                    }
                 );
             }
 

@@ -145,8 +145,14 @@ public class HtmlHelperDisplayExtensionsTest
         {
             return new TheoryData<FormatModel, string>
             {
-                { new FormatModel { FormatProperty = Status.Created }, "Value: Created" },
-                { new FormatModel { FormatProperty = Status.Done }, "Value: Done" }
+                {
+                    new FormatModel { FormatProperty = Status.Created },
+                    "Value: Created"
+                },
+                {
+                    new FormatModel { FormatProperty = Status.Done },
+                    "Value: Done"
+                }
             };
         }
     }
@@ -157,8 +163,14 @@ public class HtmlHelperDisplayExtensionsTest
         {
             return new TheoryData<FormatModel, string>
             {
-                { new FormatModel { NonFormatProperty = Status.Created }, "CreatedKey" },
-                { new FormatModel { NonFormatProperty = Status.Done }, "Done" }
+                {
+                    new FormatModel { NonFormatProperty = Status.Created },
+                    "CreatedKey"
+                },
+                {
+                    new FormatModel { NonFormatProperty = Status.Done },
+                    "Done"
+                }
             };
         }
     }

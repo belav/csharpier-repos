@@ -1029,8 +1029,14 @@ public class ControllerBinderDelegateProviderTest
         var inputPropertyValues = new Dictionary<string, object>
         {
             { nameof(TestController.ArrayProperty), new string[] { "hello", "world" } },
-            { nameof(TestController.CollectionProperty), new List<string> { "hello", "world" } },
-            { nameof(TestController.NonCollectionProperty), new Person { Name = "Fred" } },
+            {
+                nameof(TestController.CollectionProperty),
+                new List<string> { "hello", "world" }
+            },
+            {
+                nameof(TestController.NonCollectionProperty),
+                new Person { Name = "Fred" }
+            },
             {
                 nameof(TestController.NullCollectionProperty),
                 new List<string> { "hello", "world" }

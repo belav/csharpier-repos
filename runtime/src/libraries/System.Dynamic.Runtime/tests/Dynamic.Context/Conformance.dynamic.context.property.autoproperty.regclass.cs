@@ -533,7 +533,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static int MainMethod()
         {
             MemberClass mc = new MemberClass();
-            mc.Property_MyClassArr = new MyClass[] { null, new MyClass() { Field = -1 } };
+            mc.Property_MyClassArr = new MyClass[]
+            {
+                null,
+                new MyClass() { Field = -1 }
+            };
             dynamic dy = mc;
             List<MyClass> list = new List<MyClass>();
             foreach (MyClass myclass in dy.Property_MyClassArr)
@@ -951,7 +955,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public int TestGet()
         {
             MemberClass mc = new MemberClass();
-            mc.Property_MyStructNullArr = new MyStruct?[] { null, new MyStruct() { Number = 10 } };
+            mc.Property_MyStructNullArr = new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = 10 }
+            };
             dynamic dy = mc;
             return (int)dy.Property_MyStructNullArr.Length == 2 ? 0 : 1;
         }
@@ -960,7 +968,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         {
             MemberClass mc = new MemberClass();
             dynamic dy = mc;
-            dy.Property_MyStructNullArr = new MyStruct?[] { null, new MyStruct() { Number = 10 } };
+            dy.Property_MyStructNullArr = new MyStruct?[]
+            {
+                null,
+                new MyStruct() { Number = 10 }
+            };
             mc = dy;
             return (int)dy.Property_MyStructNullArr.Length == 2 ? 0 : 1;
         }

@@ -38,7 +38,12 @@ namespace System.Web.Mvc.Test
             var controllerDescriptorMock = new Mock<ControllerDescriptor>();
             controllerDescriptorMock
                 .Setup(cd => cd.GetFilterAttributes(It.IsAny<bool>()))
-                .Returns(new FilterAttribute[] { new MyFilterAttribute { Order = 2112 } });
+                .Returns(
+                    new FilterAttribute[]
+                    {
+                        new MyFilterAttribute { Order = 2112 }
+                    }
+                );
             var actionDescriptorMock = new Mock<ActionDescriptor>();
             actionDescriptorMock
                 .Setup(ad => ad.ControllerDescriptor)

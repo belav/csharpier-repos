@@ -33,7 +33,13 @@ namespace System.Net.Tests
 
         public static IEnumerable<object[]> Cookies_TestData()
         {
-            yield return new object[] { new CookieCollection() { new Cookie() }, 120, null, null };
+            yield return new object[]
+            {
+                new CookieCollection() { new Cookie() },
+                120,
+                null,
+                null
+            };
 
             yield return new object[]
             {

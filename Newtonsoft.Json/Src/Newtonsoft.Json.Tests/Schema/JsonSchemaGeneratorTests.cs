@@ -86,7 +86,10 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Dictionary<string, List<string>> value = new Dictionary<string, List<string>>
             {
-                { "HasValue", new List<string>() { "first", "second", null } },
+                {
+                    "HasValue",
+                    new List<string>() { "first", "second", null }
+                },
                 { "NoValue", null }
             };
 

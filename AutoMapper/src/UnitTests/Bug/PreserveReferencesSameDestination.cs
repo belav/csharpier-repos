@@ -87,7 +87,10 @@ namespace AutoMapper.UnitTests.Bug
                 {
                     Ones = new List<EntityOne>
                     {
-                        new EntityOne { Two = new EntityTwo { Ones = new List<EntityOne>() } }
+                        new EntityOne
+                        {
+                            Two = new EntityTwo { Ones = new List<EntityOne>() }
+                        }
                     }
                 }
             };

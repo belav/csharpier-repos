@@ -55,7 +55,10 @@ namespace AutoMapper.UnitTests
         public void Should_map_ok()
         {
             var destination = ProjectTo<Destination>(
-                    new[] { new Source { Value1 = "Core" } }.AsQueryable()
+                    new[]
+                    {
+                        new Source { Value1 = "Core" }
+                    }.AsQueryable()
                 )
                 .Single();
             destination.Value.ShouldBe("Core");

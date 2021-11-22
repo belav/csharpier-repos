@@ -126,7 +126,10 @@ namespace System.DirectoryServices.Protocols.Tests
 
         public static IEnumerable<object[]> InvalidAssertion_TestData()
         {
-            yield return new object[] { new DirectoryAttribute { "value1", "value2" } };
+            yield return new object[]
+            {
+                new DirectoryAttribute { "value1", "value2" }
+            };
             yield return new object[] { new DirectoryAttribute() };
         }
 

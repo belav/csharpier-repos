@@ -97,7 +97,9 @@ public class BsonTempDataSerializerTest : TempDataSerializerTestBase
                 { "FooValue" },
                 { new Uri("http://Foo") },
                 { Guid.NewGuid() },
-                { new List<string> { "foo", "bar" } },
+                {
+                    new List<string> { "foo", "bar" }
+                },
                 { new DateTimeOffset() },
                 { 100.1m },
                 { new Dictionary<string, int>() },

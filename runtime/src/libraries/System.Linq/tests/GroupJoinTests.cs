@@ -435,7 +435,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SingleElementEachAndMatches()
         {
-            CustomerRec[] outer = new[] { new CustomerRec { name = "Tim", custID = 43434 } };
+            CustomerRec[] outer = new[]
+            {
+                new CustomerRec { name = "Tim", custID = 43434 }
+            };
             OrderRec[] inner = new[]
             {
                 new OrderRec { orderID = 97865, custID = 43434, total = 25 }
@@ -459,7 +462,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SingleElementEachAndDoesntMatch()
         {
-            CustomerRec[] outer = new[] { new CustomerRec { name = "Tim", custID = 43434 } };
+            CustomerRec[] outer = new[]
+            {
+                new CustomerRec { name = "Tim", custID = 43434 }
+            };
             OrderRec[] inner = new[]
             {
                 new OrderRec { orderID = 97865, custID = 49434, total = 25 }

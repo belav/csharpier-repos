@@ -766,13 +766,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         public async Task Can_add_update_delete_with_nested_collections()
         {
             await Can_add_update_delete_with_collection(
-                new List<List<short>> { new() { 1, 2 } },
+                new List<List<short>>
+                {
+                    new() { 1, 2 }
+                },
                 c =>
                 {
                     c.Collection.Clear();
                     c.Collection.Add(new List<short> { 3 });
                 },
-                new List<List<short>> { new() { 3 } }
+                new List<List<short>>
+                {
+                    new() { 3 }
+                }
             );
             await Can_add_update_delete_with_collection<IList<byte?[]>>(
                 new List<byte?[]>(),
@@ -784,21 +790,35 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 new List<byte?[]> { new byte?[] { 3, null }, null }
             );
             await Can_add_update_delete_with_collection<IReadOnlyList<Dictionary<string, string>>>(
-                new Dictionary<string, string>[] { new() { { "1", null } } },
+                new Dictionary<string, string>[]
+                {
+                    new() { { "1", null } }
+                },
                 c =>
                 {
                     var dictionary = c.Collection[0]["3"] = "2";
                 },
-                new List<Dictionary<string, string>> { new() { { "1", null }, { "3", "2" } } }
+                new List<Dictionary<string, string>>
+                {
+                    new() { { "1", null }, { "3", "2" } }
+                }
             );
 
             await Can_add_update_delete_with_collection(
-                new List<float>[] { new() { 1f }, new() { 2 } },
+                new List<float>[]
+                {
+                    new() { 1f },
+                    new() { 2 }
+                },
                 c =>
                 {
                     c.Collection[1][0] = 3f;
                 },
-                new List<float>[] { new() { 1f }, new() { 3f } }
+                new List<float>[]
+                {
+                    new() { 1f },
+                    new() { 3f }
+                }
             );
 
             await Can_add_update_delete_with_collection(
@@ -811,15 +831,27 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             );
 
             await Can_add_update_delete_with_collection(
-                new Dictionary<string, List<int>> { { "1", new List<int> { 1 } } },
+                new Dictionary<string, List<int>>
+                {
+                    {
+                        "1",
+                        new List<int> { 1 }
+                    }
+                },
                 c =>
                 {
                     c.Collection["2"] = new List<int> { 3 };
                 },
                 new Dictionary<string, List<int>>
                 {
-                    { "1", new List<int> { 1 } },
-                    { "2", new List<int> { 3 } }
+                    {
+                        "1",
+                        new List<int> { 1 }
+                    },
+                    {
+                        "2",
+                        new List<int> { 3 }
+                    }
                 }
             );
 
@@ -851,7 +883,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 },
                 new Dictionary<string, Dictionary<string, short?>>
                 {
-                    { "1", new Dictionary<string, short?> { { "value", 1 } } },
+                    {
+                        "1",
+                        new Dictionary<string, short?> { { "value", 1 } }
+                    },
                     { "2", null }
                 }
             );

@@ -779,7 +779,10 @@ namespace System.Text.Json.Serialization.Tests
 }
 ";
             ClassWithNonStringDictKeys obj =
-                new() { PrimitiveKey = new Dictionary<int, string> { [1] = "1" }, };
+                new()
+                {
+                    PrimitiveKey = new Dictionary<int, string> { [1] = "1" },
+                };
             RunTest(obj, json, typeof(int).ToString(), typeof(ConverterForInt32).ToString());
 
             // Complex key
@@ -790,14 +793,13 @@ namespace System.Text.Json.Serialization.Tests
     }
 }
 ";
-            obj =
-                new()
+            obj = new()
+            {
+                ComplexKey = new Dictionary<ClassWithIDictionary, string>
                 {
-                    ComplexKey = new Dictionary<ClassWithIDictionary, string>
-                    {
-                        [new ClassWithIDictionary()] = "1"
-                    },
-                };
+                    [new ClassWithIDictionary()] = "1"
+                },
+            };
             RunTest(
                 obj,
                 json,

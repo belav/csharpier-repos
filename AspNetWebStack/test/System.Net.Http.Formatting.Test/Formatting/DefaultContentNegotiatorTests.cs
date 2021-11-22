@@ -387,7 +387,10 @@ namespace System.Net.Http.Formatting
                 >
                 {
                     { new List<MediaTypeFormatterMatch>(), null },
-                    { new List<MediaTypeFormatterMatch>() { matchType10 }, matchType10 },
+                    {
+                        new List<MediaTypeFormatterMatch>() { matchType10 },
+                        matchType10
+                    },
                     {
                         new List<MediaTypeFormatterMatch>() { matchType10, matchRequest10 },
                         matchRequest10

@@ -520,7 +520,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             AssertFastPathLogicCorrect(json, myType, DefaultContext.MyType);
 
-            MyType2 myType2 = new() { Type = new MyIntermediateType() { Type = myType } };
+            MyType2 myType2 =
+                new()
+                {
+                    Type = new MyIntermediateType() { Type = myType }
+                };
             json = JsonSerializer.Serialize(myType2, DefaultContext.MyType2);
             myType2 = JsonSerializer.Deserialize(
                 json,

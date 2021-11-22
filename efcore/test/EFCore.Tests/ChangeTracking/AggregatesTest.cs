@@ -137,7 +137,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 new Comment { Id = 33, PostId = 55 },
                 new Comment { Id = 34, PostId = 55 }
             };
-            var comments1 = new[] { new Comment { PostId = 56 }, new Comment { PostId = 56 } };
+            var comments1 = new[]
+            {
+                new Comment { PostId = 56 },
+                new Comment { PostId = 56 }
+            };
             var posts = new[]
             {
                 new Post { Id = 55, BlogId = 66, Comments = comments0.ToList() },
@@ -173,7 +177,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_add_aggregate_with_linked_aggregate_also_added()
         {
             using var context = new AggregateContext();
-            var reminders = new[] { new Reminder { Id = 11 }, new Reminder { Id = 12 } };
+            var reminders = new[]
+            {
+                new Reminder { Id = 11 },
+                new Reminder { Id = 12 }
+            };
             var author = new Author { Id = 22, Reminders = reminders.ToList() };
 
             var comments0 = new[]
@@ -211,7 +219,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_add_aggregate_with_other_linked_aggregate_also_attached()
         {
             using var context = new AggregateContext();
-            var reminders = new[] { new Reminder { Id = 11 }, new Reminder { Id = 12 } };
+            var reminders = new[]
+            {
+                new Reminder { Id = 11 },
+                new Reminder { Id = 12 }
+            };
             var author = new Author { Id = 22, Reminders = reminders.ToList() };
 
             var comments0 = new[]
@@ -312,7 +324,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_add_two_aggregates_linked_down_the_tree()
         {
             using var context = new AggregateContext();
-            var reminders = new[] { new Reminder { Id = 11 }, new Reminder { Id = 12 } };
+            var reminders = new[]
+            {
+                new Reminder { Id = 11 },
+                new Reminder { Id = 12 }
+            };
             var author = new Author { Id = 22, Reminders = reminders.ToList() };
 
             var comments0 = new[]

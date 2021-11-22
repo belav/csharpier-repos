@@ -16,7 +16,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -32,7 +35,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -57,7 +63,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerIList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerIList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -99,7 +108,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -116,7 +128,10 @@ public class ListIntegrationTest
     public void RemoveFromList()
     {
         // Arrange
-        var targetObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } };
+        var targetObject = new SimpleObject()
+        {
+            IntegerList = new List<int>() { 1, 2, 3 }
+        };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Remove("IntegerList/2");
@@ -134,7 +149,10 @@ public class ListIntegrationTest
     public void RemoveFromList_InvalidPosition(string position)
     {
         // Arrange
-        var targetObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } };
+        var targetObject = new SimpleObject()
+        {
+            IntegerList = new List<int>() { 1, 2, 3 }
+        };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Remove("IntegerList/" + position);
@@ -160,7 +178,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -177,7 +198,10 @@ public class ListIntegrationTest
     public void ReplaceFullList_WithCollection()
     {
         // Arrange
-        var targetObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } };
+        var targetObject = new SimpleObject()
+        {
+            IntegerList = new List<int>() { 1, 2, 3 }
+        };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Replace("IntegerList", new Collection<int>() { 4, 5, 6 });
@@ -195,7 +219,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -214,7 +241,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -239,7 +269,10 @@ public class ListIntegrationTest
     public void CopyFromListToEndOfList()
     {
         // Arrange
-        var targetObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } };
+        var targetObject = new SimpleObject()
+        {
+            IntegerList = new List<int>() { 1, 2, 3 }
+        };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Copy("IntegerList/0", "IntegerList/-");
@@ -255,7 +288,10 @@ public class ListIntegrationTest
     public void CopyFromListToNonList()
     {
         // Arrange
-        var targetObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } };
+        var targetObject = new SimpleObject()
+        {
+            IntegerList = new List<int>() { 1, 2, 3 }
+        };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Copy("IntegerList/0", "IntegerValue");
@@ -328,7 +364,10 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject() { IntegerList = new List<int>() { 1, 2, 3 } }
+            SimpleObject = new SimpleObject()
+            {
+                IntegerList = new List<int>() { 1, 2, 3 }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();

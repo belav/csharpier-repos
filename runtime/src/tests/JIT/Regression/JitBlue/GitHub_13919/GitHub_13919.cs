@@ -45,7 +45,11 @@ namespace N
             Node head = new Node
             {
                 value = 6,
-                next = new Node { value = 13, next = new Node { value = 5, next = null } }
+                next = new Node
+                {
+                    value = 13,
+                    next = new Node { value = 5, next = null }
+                }
             };
 
             int expected = 6 + 5 * 26 + 5 * 27 + 5 * 28;

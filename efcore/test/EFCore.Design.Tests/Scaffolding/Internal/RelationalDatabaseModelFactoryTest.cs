@@ -2178,7 +2178,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     new DatabaseTable
                     {
                         Name = userTableName,
-                        Columns = { new DatabaseColumn { Name = "id", StoreType = "int" } },
+                        Columns =
+                        {
+                            new DatabaseColumn { Name = "id", StoreType = "int" }
+                        },
                         PrimaryKey = new DatabasePrimaryKey
                         {
                             Columns = { new DatabaseColumnRef("id") }

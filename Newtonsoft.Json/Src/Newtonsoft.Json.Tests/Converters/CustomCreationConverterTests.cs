@@ -148,7 +148,11 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void AssertShouldSerializeTest()
         {
-            MyClass myClass = new MyClass { Value = "Foo", Thing = new MyThing { Number = 456, } };
+            MyClass myClass = new MyClass
+            {
+                Value = "Foo",
+                Thing = new MyThing { Number = 456, }
+            };
             string json = JsonConvert.SerializeObject(myClass); // <-- Exception here
 
             const string expected = @"{""Value"":""Foo"",""Thing"":{""Number"":456}}";

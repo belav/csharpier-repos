@@ -33,10 +33,11 @@ namespace System.CommandLine.Tests
             var messages = new FakeLocalizationResources("the-message");
 
             var parser = new CommandLineBuilder(
-                new Command("the-command") { new Argument { Arity = ArgumentArity.ExactlyOne } }
-            )
-                .UseLocalizationResources(messages)
-                .Build();
+                new Command("the-command")
+                {
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                }
+            ).UseLocalizationResources(messages).Build();
 
             var result = parser.Parse("the-command");
 

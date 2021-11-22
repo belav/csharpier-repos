@@ -953,13 +953,22 @@ public class MediaTypeHeaderValueTest
     public static TheoryData<string, List<StringSegment>> MediaTypesWithFacets =>
         new TheoryData<string, List<StringSegment>>
         {
-            { "application/vdn.github", new List<StringSegment>() { "vdn", "github" } },
-            { "application/vdn.github+json", new List<StringSegment>() { "vdn", "github" } },
+            {
+                "application/vdn.github",
+                new List<StringSegment>() { "vdn", "github" }
+            },
+            {
+                "application/vdn.github+json",
+                new List<StringSegment>() { "vdn", "github" }
+            },
             {
                 "application/vdn.github.v3+json",
                 new List<StringSegment>() { "vdn", "github", "v3" }
             },
-            { "application/vdn.github.+json", new List<StringSegment>() { "vdn", "github", "" } },
+            {
+                "application/vdn.github.+json",
+                new List<StringSegment>() { "vdn", "github", "" }
+            },
         };
 
     [Theory]

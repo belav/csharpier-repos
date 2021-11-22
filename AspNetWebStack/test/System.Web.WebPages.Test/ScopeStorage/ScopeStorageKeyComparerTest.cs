@@ -30,7 +30,10 @@ namespace System.Web.WebPages.Test
             var stateStorage = new Dictionary<object, object>
             {
                 { 4, "4-value" },
-                { new Person { ID = 10 }, "person-value" }
+                {
+                    new Person { ID = 10 },
+                    "person-value"
+                }
             };
 
             // Act and Assert

@@ -33,7 +33,10 @@ namespace AutoMapper.UnitTests.Mappers
             [Fact]
             public void Should_map_readonly_values()
             {
-                var source = new Source { Values = new List<int> { 1, 2, 3, 4, } };
+                var source = new Source
+                {
+                    Values = new List<int> { 1, 2, 3, 4, }
+                };
 
                 var dest = Mapper.Map<Destination>(source);
 
@@ -98,7 +101,10 @@ namespace AutoMapper.UnitTests.Mappers
             [Fact]
             public void Should_map_readonly_values()
             {
-                var source = new Source { Values = new List<int> { 1, 2, 3, 4, } };
+                var source = new Source
+                {
+                    Values = new List<int> { 1, 2, 3, 4, }
+                };
 
                 var dest = Mapper.Map<Destination>(source);
 

@@ -79,7 +79,10 @@ public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<Test
 
             await manager1.SendAllAsync(
                 "Hello",
-                new object[] { new TestObject { TestProperty = "Foo" } }
+                new object[]
+                {
+                    new TestObject { TestProperty = "Foo" }
+                }
             );
 
             var message = Assert.IsType<InvocationMessage>(

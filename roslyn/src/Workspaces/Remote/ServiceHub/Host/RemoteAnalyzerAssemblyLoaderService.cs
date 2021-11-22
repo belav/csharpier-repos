@@ -39,8 +39,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             Debug.Assert(baseDirectory != null);
 
             _loader = new(baseDirectory);
-            _shadowCopyLoader =
-                new(Path.Combine(Path.GetTempPath(), "VS", "AnalyzerAssemblyLoader"));
+            _shadowCopyLoader = new(
+                Path.Combine(Path.GetTempPath(), "VS", "AnalyzerAssemblyLoader")
+            );
         }
 
         public IAnalyzerAssemblyLoader GetLoader(in AnalyzerAssemblyLoaderOptions options) =>

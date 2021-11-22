@@ -80,16 +80,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                             )
                     )
             );
-            _lazyRefactoringToMetadataMap =
-                new(
-                    () =>
-                        providers
-                            .Where(provider => provider.IsValueCreated)
-                            .ToImmutableDictionary(
-                                provider => provider.Value,
-                                provider => provider.Metadata
-                            )
-                );
+            _lazyRefactoringToMetadataMap = new(
+                () =>
+                    providers
+                        .Where(provider => provider.IsValueCreated)
+                        .ToImmutableDictionary(
+                            provider => provider.Value,
+                            provider => provider.Metadata
+                        )
+            );
         }
 
         private static IEnumerable<

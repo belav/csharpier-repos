@@ -270,7 +270,13 @@ namespace System.Web.Mvc.Test
             ViewDataDictionary vdd = new ViewDataDictionary();
             vdd.Add(
                 "Foo",
-                new Dictionary<string, object> { { "Bar", new Hashtable { { "Baz", "Quux" } } } }
+                new Dictionary<string, object>
+                {
+                    {
+                        "Bar",
+                        new Hashtable { { "Baz", "Quux" } }
+                    }
+                }
             );
 
             Assert.Equal("Quux", vdd.Eval("Foo.Bar.Baz"));

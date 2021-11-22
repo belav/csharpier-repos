@@ -56,7 +56,10 @@ namespace System.Web.Http.Dispatcher
                     new HttpError(
                         new ModelStateDictionary()
                         {
-                            { "key", new ModelState() { Errors = { new ModelError("error") } } }
+                            {
+                                "key",
+                                new ModelState() { Errors = { new ModelError("error") } }
+                            }
                         },
                         true
                     ),

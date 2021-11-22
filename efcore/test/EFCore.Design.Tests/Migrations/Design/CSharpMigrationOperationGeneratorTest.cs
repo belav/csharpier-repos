@@ -1481,7 +1481,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 new CreateTableOperation
                 {
                     Name = "Post",
-                    Columns = { new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) }
+                    },
                     ForeignKeys =
                     {
                         new AddForeignKeyOperation
@@ -1539,7 +1542,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 {
                     Schema = "dbo",
                     Name = "Post",
-                    Columns = { new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) }
+                    },
                     ForeignKeys =
                     {
                         new AddForeignKeyOperation
@@ -1744,7 +1750,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 new CreateTableOperation
                 {
                     Name = "Post",
-                    Columns = { new AddColumnOperation { Name = "Id", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "Id", ClrType = typeof(int) }
+                    },
                     PrimaryKey = new AddPrimaryKeyOperation
                     {
                         Name = "PK_Post",
@@ -1790,7 +1799,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 {
                     Name = "Post",
                     Schema = "dbo",
-                    Columns = { new AddColumnOperation { Name = "Id", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "Id", ClrType = typeof(int) }
+                    },
                     PrimaryKey = new AddPrimaryKeyOperation
                     {
                         Name = "PK_Post",
@@ -1890,7 +1902,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 new CreateTableOperation
                 {
                     Name = "Post",
-                    Columns = { new AddColumnOperation { Name = "AltId", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "AltId", ClrType = typeof(int) }
+                    },
                     UniqueConstraints =
                     {
                         new AddUniqueConstraintOperation
@@ -1939,7 +1954,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 {
                     Name = "Post",
                     Schema = "dbo",
-                    Columns = { new AddColumnOperation { Name = "AltId", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "AltId", ClrType = typeof(int) }
+                    },
                     UniqueConstraints =
                     {
                         new AddUniqueConstraintOperation
@@ -2159,7 +2177,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 {
                     Name = "Post",
                     Schema = "dbo",
-                    Columns = { new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) } },
+                    Columns =
+                    {
+                        new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) }
+                    },
                     Comment = "My Comment"
                 },
                 "mb.CreateTable("

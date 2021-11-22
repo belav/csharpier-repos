@@ -35,7 +35,10 @@ namespace AutoMapper.UnitTests
             protected override void Because_of()
             {
                 _result = Mapper.Map<Order, OrderDto>(
-                    new Order { Customer = new Customer { Aoa = "Bob" } }
+                    new Order
+                    {
+                        Customer = new Customer { Aoa = "Bob" }
+                    }
                 );
             }
 

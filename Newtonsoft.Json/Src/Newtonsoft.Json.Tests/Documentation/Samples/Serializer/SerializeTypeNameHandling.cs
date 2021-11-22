@@ -65,7 +65,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Stockholder stockholder = new Stockholder
             {
                 FullName = "Steve Stockholder",
-                Businesses = new List<Business> { new Hotel { Name = "Hudson Hotel", Stars = 4 } }
+                Businesses = new List<Business>
+                {
+                    new Hotel { Name = "Hudson Hotel", Stars = 4 }
+                }
             };
 
             string jsonTypeNameAll = JsonConvert.SerializeObject(

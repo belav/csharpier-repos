@@ -55,7 +55,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PopulateArray()
         {
-            IList<Person> people = new List<Person> { new Person { Name = "Initial" } };
+            IList<Person> people = new List<Person>
+            {
+                new Person { Name = "Initial" }
+            };
 
             JsonConvert.PopulateObject(@"[{""Name"":""James""}, null]", people);
 

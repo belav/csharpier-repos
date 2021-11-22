@@ -261,7 +261,10 @@ public class HtmlHelperDropDownListExtensionsTest
             new ViewDataDictionary<TestModel>(metadataProvider)
         );
         helper.ViewContext.ClientValidationEnabled = false;
-        helper.ViewData.Model = new TestModel { Property3 = new List<string> { "0", "2", "4" } };
+        helper.ViewData.Model = new TestModel
+        {
+            Property3 = new List<string> { "0", "2", "4" }
+        };
 
         // Act
         var dropDownListForResult = helper.DropDownListFor(

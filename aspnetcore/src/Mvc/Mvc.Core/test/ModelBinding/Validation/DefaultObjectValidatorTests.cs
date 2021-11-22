@@ -147,7 +147,10 @@ public class DefaultObjectValidatorTests
         var model = "test";
         var validationState = new ValidationStateDictionary
         {
-            { model, new ValidationStateEntry { SuppressValidation = true } }
+            {
+                model,
+                new ValidationStateEntry { SuppressValidation = true }
+            }
         };
 
         // Act
@@ -469,7 +472,10 @@ public class DefaultObjectValidatorTests
         var model = new InvalidProperties();
         var validationState = new ValidationStateDictionary
         {
-            { model, new ValidationStateEntry { Key = "invalidProperties" } },
+            {
+                model,
+                new ValidationStateEntry { Key = "invalidProperties" }
+            },
         };
 
         var validator = CreateValidator();
@@ -699,7 +705,10 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
 
         var person = new Person() { Name = "Billy" };
-        person.Family = new Family { Members = new List<Person> { person } };
+        person.Family = new Family
+        {
+            Members = new List<Person> { person }
+        };
 
         var model = (object)person;
 
@@ -936,8 +945,14 @@ public class DefaultObjectValidatorTests
             {
                 { new int[] { 1, 2, 3 }, typeof(int[]) },
                 { new string[] { "Foo", "Bar", "Baz" }, typeof(string[]) },
-                { new List<string> { "Foo", "Bar", "Baz" }, typeof(IList<string>) },
-                { new HashSet<string> { "Foo", "Bar", "Baz" }, typeof(string[]) },
+                {
+                    new List<string> { "Foo", "Bar", "Baz" },
+                    typeof(IList<string>)
+                },
+                {
+                    new HashSet<string> { "Foo", "Bar", "Baz" },
+                    typeof(string[])
+                },
                 {
                     new List<DateTime>
                     {
@@ -1244,7 +1259,10 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator(typeof(List<ValidatedModel>));
 
-        var model = new List<ValidatedModel>() { new ValidatedModel { Value = "15" }, };
+        var model = new List<ValidatedModel>()
+        {
+            new ValidatedModel { Value = "15" },
+        };
 
         modelState.SetModelValue("userIds[0]", "15", "15");
         validationState.Add(model, new ValidationStateEntry() { Key = "userIds", });
@@ -1281,7 +1299,10 @@ public class DefaultObjectValidatorTests
         modelState.SetModelValue("parameter", rawValue: null, attemptedValue: null);
         var validationState = new ValidationStateDictionary
         {
-            { model, new ValidationStateEntry() { Key = "parameter" } }
+            {
+                model,
+                new ValidationStateEntry() { Key = "parameter" }
+            }
         };
 
         // Act
@@ -1309,7 +1330,10 @@ public class DefaultObjectValidatorTests
         var model = (object)23; // Box ASAP
         var validationState = new ValidationStateDictionary
         {
-            { model, new ValidationStateEntry { SuppressValidation = true } }
+            {
+                model,
+                new ValidationStateEntry { SuppressValidation = true }
+            }
         };
 
         // Act

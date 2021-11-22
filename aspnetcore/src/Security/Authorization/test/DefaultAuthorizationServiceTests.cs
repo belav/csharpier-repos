@@ -40,7 +40,10 @@ public class DefaultAuthorizationServiceTests
             () =>
                 AuthorizationPolicy.CombineAsync(
                     provider,
-                    new AuthorizeAttribute[] { new AuthorizeAttribute { Policy = "Wut" } }
+                    new AuthorizeAttribute[]
+                    {
+                        new AuthorizeAttribute { Policy = "Wut" }
+                    }
                 )
         );
     }

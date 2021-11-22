@@ -35,10 +35,11 @@ namespace System.CommandLine.Tests
             var messages = new FakeValidationMessages("the-message");
 
             var parser = new CommandLineBuilder(
-                new Command("the-command") { new Argument { Arity = ArgumentArity.ExactlyOne } }
-            )
-                .UseValidationMessages(messages)
-                .Build();
+                new Command("the-command")
+                {
+                    new Argument { Arity = ArgumentArity.ExactlyOne }
+                }
+            ).UseValidationMessages(messages).Build();
 
             var result = parser.Parse("the-command");
 

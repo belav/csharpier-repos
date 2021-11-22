@@ -822,7 +822,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = new MasterWithCollection(new List<Detail>());
@@ -849,7 +853,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = new MasterWithCollection(new HashSet<Detail>());
@@ -879,7 +887,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = new MasterWithCollection(new HashSet<Detail>());
@@ -908,7 +920,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = new MasterWithList();
@@ -935,7 +951,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = new MasterWithCollection(new List<Detail>());
@@ -960,7 +980,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = config.CreateMapper().Map<MasterDto, MasterWithNoExistingCollection>(dto);
@@ -983,7 +1007,11 @@ namespace AutoMapper.UnitTests
             var dto = new MasterDto
             {
                 Id = 1,
-                Details = new[] { new DetailDto { Id = 2 }, new DetailDto { Id = 3 }, }
+                Details = new[]
+                {
+                    new DetailDto { Id = 2 },
+                    new DetailDto { Id = 3 },
+                }
             };
 
             var master = new MasterWithList();
@@ -1043,7 +1071,10 @@ namespace AutoMapper.UnitTests
         {
             var source = new Source
             {
-                Items = new List<Source.Item> { new Source.Item { Value = 5 } }
+                Items = new List<Source.Item>
+                {
+                    new Source.Item { Value = 5 }
+                }
             };
             var dest = new Dest();
 

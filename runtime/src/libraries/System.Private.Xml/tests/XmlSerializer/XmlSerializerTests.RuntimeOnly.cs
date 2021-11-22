@@ -2887,7 +2887,11 @@ public static partial class XmlSerializerTests
     {
         var member1 = GetReflectionMember<GetDataRequestBody>("value");
         var member2 = GetReflectionMember<bool>("valueSpecified");
-        var value = new object[] { new GetDataRequestBody() { value = 3 }, false };
+        var value = new object[]
+        {
+            new GetDataRequestBody() { value = 3 },
+            false
+        };
         var actual = RoundTripWithXmlMembersMapping(
             value,
             "<?xml version=\"1.0\"?>\r\n<valueSpecified xmlns=\"http://tempuri.org/\">false</valueSpecified>",

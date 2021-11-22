@@ -42,7 +42,12 @@ public class TokenExtensionTests
 
         props.StoreTokens(tokens);
 
-        props.StoreTokens(new[] { new AuthenticationToken { Name = "Zero", Value = "0" } });
+        props.StoreTokens(
+            new[]
+            {
+                new AuthenticationToken { Name = "Zero", Value = "0" }
+            }
+        );
 
         Assert.Equal("0", props.GetTokenValue("Zero"));
         Assert.Null(props.GetTokenValue("One"));

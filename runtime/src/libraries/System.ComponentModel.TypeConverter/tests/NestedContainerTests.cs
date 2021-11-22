@@ -77,7 +77,10 @@ namespace System.ComponentModel.Tests
         {
             var component = new Component();
 
-            var owner = new Component() { Site = new Site() { DesignMode = true } };
+            var owner = new Component()
+            {
+                Site = new Site() { DesignMode = true }
+            };
             var container = new SubNestedContainer(owner);
             container.Add(component, name);
 

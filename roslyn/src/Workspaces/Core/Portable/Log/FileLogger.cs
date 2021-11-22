@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             _logFilePath = logFilePath;
             _gate = new();
             _buffer = new();
-            _taskQueue =
-                new(AsynchronousOperationListenerProvider.NullListener, TaskScheduler.Default);
+            _taskQueue = new(
+                AsynchronousOperationListenerProvider.NullListener,
+                TaskScheduler.Default
+            );
             _enabled = optionService.GetOption(
                 InternalDiagnosticsOptions.EnableFileLoggingForDiagnostics
             );

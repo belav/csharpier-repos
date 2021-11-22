@@ -388,7 +388,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Dictionary<string, object> dic = new Dictionary<string, object>
             {
-                { "movie", new Movie { Name = "Die Hard" } }
+                {
+                    "movie",
+                    new Movie { Name = "Die Hard" }
+                }
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1501,8 +1504,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Dictionary<string, object> collection = new Dictionary<string, object>()
             {
-                { "First", new UrlStatus { Status = 404, Url = @"http://www.bing.com" } },
-                { "Second", new UrlStatus { Status = 400, Url = @"http://www.google.com" } },
+                {
+                    "First",
+                    new UrlStatus { Status = 404, Url = @"http://www.bing.com" }
+                },
+                {
+                    "Second",
+                    new UrlStatus { Status = 400, Url = @"http://www.google.com" }
+                },
                 {
                     "List",
                     new List<UrlStatus>
@@ -2010,7 +2019,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void PropertyItemTypeNameHandling()
         {
             PropertyItemTypeNameHandling c1 = new PropertyItemTypeNameHandling();
-            c1.Data = new List<object> { 1, "two", new TestComponentSimple { MyProperty = 1 } };
+            c1.Data = new List<object>
+            {
+                1,
+                "two",
+                new TestComponentSimple { MyProperty = 1 }
+            };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
             StringAssert.AreEqual(
@@ -2046,7 +2060,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Data = new List<object>
                 {
                     new TestComponentSimple { MyProperty = 1 },
-                    new List<object> { new List<object> { new List<object>() } }
+                    new List<object>
+                    {
+                        new List<object> { new List<object>() }
+                    }
                 }
             };
 
@@ -2128,12 +2145,18 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Data = new Dictionary<string, object>
                 {
-                    { "one", new TestComponentSimple { MyProperty = 1 } },
+                    {
+                        "one",
+                        new TestComponentSimple { MyProperty = 1 }
+                    },
                     {
                         "two",
                         new Dictionary<string, object>
                         {
-                            { "one", new Dictionary<string, object> { { "one", 1 } } }
+                            {
+                                "one",
+                                new Dictionary<string, object> { { "one", 1 } }
+                            }
                         }
                     }
                 }
@@ -2214,7 +2237,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Data = new TypeNameHandlingTestObject
                 {
-                    Prop1 = new List<object> { new TestComponentSimple { MyProperty = 1 } },
+                    Prop1 = new List<object>
+                    {
+                        new TestComponentSimple { MyProperty = 1 }
+                    },
                     Prop2 = new TestComponentSimple { MyProperty = 1 },
                     Prop3 = 3,
                     Prop4 = new JObject()
@@ -2389,7 +2415,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void TypeNameHandlingWithISerializableValues()
         {
-            MyParent p = new MyParent { Child = new MyChild { MyProperty = "string!" } };
+            MyParent p = new MyParent
+            {
+                Child = new MyChild { MyProperty = "string!" }
+            };
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -2421,7 +2450,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void TypeNameHandlingWithISerializableValuesAndArray()
         {
-            MyParent p = new MyParent { Child = new MyChildList { "string!" } };
+            MyParent p = new MyParent
+            {
+                Child = new MyChildList { "string!" }
+            };
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -2458,7 +2490,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             ParentParent pp = new ParentParent();
 
-            pp.ParentProp = new MyParent { Child = new MyChild { MyProperty = "string!" } };
+            pp.ParentProp = new MyParent
+            {
+                Child = new MyChild { MyProperty = "string!" }
+            };
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {

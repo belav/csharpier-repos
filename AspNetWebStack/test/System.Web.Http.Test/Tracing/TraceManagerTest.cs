@@ -40,8 +40,12 @@ namespace System.Web.Http.Tracing
                 return new TheoryDataSet<List<DelegatingHandler>>
                 {
                     { new List<DelegatingHandler>() },
-                    { new List<DelegatingHandler>() { messageHandler } },
-                    { new List<DelegatingHandler>() { messageHandler, messageHandler } },
+                    {
+                        new List<DelegatingHandler>() { messageHandler }
+                    },
+                    {
+                        new List<DelegatingHandler>() { messageHandler, messageHandler }
+                    },
                     {
                         new List<DelegatingHandler>()
                         {
@@ -50,8 +54,12 @@ namespace System.Web.Http.Tracing
                             messageHandler
                         }
                     },
-                    { new List<DelegatingHandler>() { msgHandlerTracer } },
-                    { new List<DelegatingHandler>() { msgHandlerTracer, msgHandlerTracer } },
+                    {
+                        new List<DelegatingHandler>() { msgHandlerTracer }
+                    },
+                    {
+                        new List<DelegatingHandler>() { msgHandlerTracer, msgHandlerTracer }
+                    },
                     {
                         new List<DelegatingHandler>()
                         {
@@ -60,8 +68,12 @@ namespace System.Web.Http.Tracing
                             msgHandlerTracer
                         }
                     },
-                    { new List<DelegatingHandler>() { requestMsgtracer } },
-                    { new List<DelegatingHandler>() { requestMsgtracer, requestMsgtracer } },
+                    {
+                        new List<DelegatingHandler>() { requestMsgtracer }
+                    },
+                    {
+                        new List<DelegatingHandler>() { requestMsgtracer, requestMsgtracer }
+                    },
                     {
                         new List<DelegatingHandler>()
                         {
@@ -70,8 +82,12 @@ namespace System.Web.Http.Tracing
                             requestMsgtracer
                         }
                     },
-                    { new List<DelegatingHandler>() { messageHandler, msgHandlerTracer } },
-                    { new List<DelegatingHandler>() { msgHandlerTracer, messageHandler } },
+                    {
+                        new List<DelegatingHandler>() { messageHandler, msgHandlerTracer }
+                    },
+                    {
+                        new List<DelegatingHandler>() { msgHandlerTracer, messageHandler }
+                    },
                     {
                         new List<DelegatingHandler>()
                         {

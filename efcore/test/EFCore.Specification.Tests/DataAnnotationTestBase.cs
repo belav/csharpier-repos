@@ -3316,7 +3316,11 @@ namespace Microsoft.EntityFrameworkCore
                 context
                     .Set<Book>()
                     .Add(
-                        new Book { Id = 1, AdditionalDetails = new Details { Name = "Book Name" } }
+                        new Book
+                        {
+                            Id = 1,
+                            AdditionalDetails = new Details { Name = "Book Name" }
+                        }
                     );
 
                 context.SaveChanges();

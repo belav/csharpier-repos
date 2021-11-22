@@ -94,8 +94,14 @@ namespace AutoMapper.UnitTests
                 {
                     Values = new Dictionary<string, SourceValue>
                     {
-                        { "Key1", new SourceValue { Value = 5 } },
-                        { "Key2", new SourceValue { Value = 10 } },
+                        {
+                            "Key1",
+                            new SourceValue { Value = 5 }
+                        },
+                        {
+                            "Key2",
+                            new SourceValue { Value = 10 }
+                        },
                     }
                 };
 
@@ -155,8 +161,14 @@ namespace AutoMapper.UnitTests
                 {
                     Values = new Dictionary<string, SourceValue>
                     {
-                        { "Key1", new SourceValue { Value = 5 } },
-                        { "Key2", new SourceValue { Value = 10 } },
+                        {
+                            "Key1",
+                            new SourceValue { Value = 5 }
+                        },
+                        {
+                            "Key2",
+                            new SourceValue { Value = 10 }
+                        },
                     }
                 };
 
@@ -199,7 +211,10 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                var foo1 = new Foo { Bar = new Dictionary<string, Foo> { { "lol", new Foo() } } };
+                var foo1 = new Foo
+                {
+                    Bar = new Dictionary<string, Foo> { { "lol", new Foo() } }
+                };
 
                 _result = Mapper.Map<Foo, FooDto>(foo1);
             }

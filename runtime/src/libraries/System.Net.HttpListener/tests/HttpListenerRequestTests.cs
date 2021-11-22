@@ -558,7 +558,11 @@ namespace System.Net.Tests
 
         public static IEnumerable<object[]> QueryString_TestData()
         {
-            yield return new object[] { "?query", new NameValueCollection { { null, "query" } } };
+            yield return new object[]
+            {
+                "?query",
+                new NameValueCollection { { null, "query" } }
+            };
 
             yield return new object[]
             {
@@ -600,7 +604,11 @@ namespace System.Net.Tests
             yield return new object[] { "", new NameValueCollection() };
             yield return new object[] { "?", new NameValueCollection() };
 
-            yield return new object[] { "?name=", new NameValueCollection() { { "name", "" } } };
+            yield return new object[]
+            {
+                "?name=",
+                new NameValueCollection() { { "name", "" } }
+            };
 
             yield return new object[]
             {
@@ -732,14 +740,20 @@ namespace System.Net.Tests
             yield return new object[]
             {
                 "cookie: name=value,name=value;$port=\"200\"",
-                new CookieCollection { new Cookie("name", "value") { Port = "\"200\"" } }
+                new CookieCollection
+                {
+                    new Cookie("name", "value") { Port = "\"200\"" }
+                }
             };
 
             // Cookie with a greater variant (e.g. Rfc2109) is preferred over a lower variant (e.g. Plain).
             yield return new object[]
             {
                 "cookie: name=value;$port=\"200\",name=value",
-                new CookieCollection { new Cookie("name", "value") { Port = "\"200\"" } }
+                new CookieCollection
+                {
+                    new Cookie("name", "value") { Port = "\"200\"" }
+                }
             };
 
             yield return new object[]

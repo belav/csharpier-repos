@@ -41,7 +41,10 @@ public class HtmlHelperHiddenTest
             {
                 { htmlAttributes1, expected1 },
                 { htmlAttributes2, expected1 },
-                { new Dictionary<string, object> { { "foo-baz", "BazValue" } }, expected2 },
+                {
+                    new Dictionary<string, object> { { "foo-baz", "BazValue" } },
+                    expected2
+                },
                 { new { foo_baz = "BazValue" }, expected2 }
             };
 

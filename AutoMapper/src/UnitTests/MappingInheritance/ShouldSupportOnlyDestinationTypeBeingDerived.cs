@@ -112,7 +112,10 @@ namespace AutoMapper.UnitTests.MappingInheritance
         [Fact]
         public void Mapper_Should_Allow_Overriding_Of_Destination_Type()
         {
-            var order = new Order() { Customer = new Customer() { Id = 1, Name = "A" } };
+            var order = new Order()
+            {
+                Customer = new Customer() { Id = 1, Name = "A" }
+            };
 
             var config = new MapperConfiguration(
                 cfg =>
@@ -160,7 +163,10 @@ namespace AutoMapper.UnitTests.MappingInheritance
         [Fact]
         public void Mapper_Should_Allow_Overriding_Of_Destination_Type()
         {
-            var order = new Order() { Customer = new Customer() { Id = 1, Name = "A" } };
+            var order = new Order()
+            {
+                Customer = new Customer() { Id = 1, Name = "A" }
+            };
             var config = new MapperConfiguration(
                 cfg =>
                 {
