@@ -5694,12 +5694,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Contains("Smalltalk", roles);
                 Assert.Contains("COBOL", roles);
 
-                user.SetRoles(
-                    new List<Role>
-                    {
-                        new Role { Value = "BASIC" }
-                    }
-                );
+                user.SetRoles(new List<Role> { new Role { Value = "BASIC" } });
 
                 Assert.Equal(5, context.ChangeTracker.Entries().Count());
                 Assert.Equal(EntityState.Unchanged, GetEntryState<User>(context));
@@ -5733,10 +5728,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using (var context = new OneRowContext(async))
             {
-                var blog = new Blog
-                {
-                    Type = new OwnedType { Value = "A" }
-                };
+                var blog = new Blog { Type = new OwnedType { Value = "A" } };
 
                 _ = async ? await context.AddAsync(blog) : context.Add(blog);
 
@@ -5757,12 +5749,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 // Trying to do the same thing again will throw since only one row can have ID zero.
 
-                context.Add(
-                    new Blog
-                    {
-                        Type = new OwnedType { Value = "A" }
-                    }
-                );
+                context.Add(new Blog { Type = new OwnedType { Value = "A" } });
                 Assert.Throws<ArgumentException>(() => context.SaveChanges());
             }
         }

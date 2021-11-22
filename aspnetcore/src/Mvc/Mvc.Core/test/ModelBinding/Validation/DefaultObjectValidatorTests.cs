@@ -705,10 +705,7 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
 
         var person = new Person() { Name = "Billy" };
-        person.Family = new Family
-        {
-            Members = new List<Person> { person }
-        };
+        person.Family = new Family { Members = new List<Person> { person } };
 
         var model = (object)person;
 
@@ -1259,10 +1256,7 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator(typeof(List<ValidatedModel>));
 
-        var model = new List<ValidatedModel>()
-        {
-            new ValidatedModel { Value = "15" },
-        };
+        var model = new List<ValidatedModel>() { new ValidatedModel { Value = "15" }, };
 
         modelState.SetModelValue("userIds[0]", "15", "15");
         validationState.Add(model, new ValidationStateEntry() { Key = "userIds", });

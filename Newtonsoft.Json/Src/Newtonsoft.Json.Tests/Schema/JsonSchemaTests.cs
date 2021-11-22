@@ -582,10 +582,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchema schema = new JsonSchema();
             schema.PositionalItemsValidation = true;
-            schema.Items = new List<JsonSchema>
-            {
-                new JsonSchema { Type = JsonSchemaType.String }
-            };
+            schema.Items = new List<JsonSchema> { new JsonSchema { Type = JsonSchemaType.String } };
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);
@@ -611,10 +608,7 @@ namespace Newtonsoft.Json.Tests.Schema
         public void WriteTo_PositionalItemsValidation_FalseWithItemsSchema()
         {
             JsonSchema schema = new JsonSchema();
-            schema.Items = new List<JsonSchema>
-            {
-                new JsonSchema { Type = JsonSchemaType.String }
-            };
+            schema.Items = new List<JsonSchema> { new JsonSchema { Type = JsonSchemaType.String } };
 
             StringWriter writer = new StringWriter();
             JsonTextWriter jsonWriter = new JsonTextWriter(writer);

@@ -95,13 +95,7 @@ namespace AutoMapper.UnitTests.ArraysAndLists
             var source = new Source { Items = _sourceItems };
             _destination = Mapper.Map(
                 source,
-                new Destination
-                {
-                    Items = new[]
-                    {
-                        new DestinationItem { Value = "4" }
-                    }
-                }
+                new Destination { Items = new[] { new DestinationItem { Value = "4" } } }
             );
         }
 
@@ -1017,35 +1011,14 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         [Fact]
         public void Should_clear_the_list_before_mapping()
         {
-            var destination = new Destination
-            {
-                Values =
-                {
-                    new DestItem { }
-                }
-            };
-            Mapper.Map(
-                new Source
-                {
-                    Values =
-                    {
-                        new SourceItem { Value = 42 }
-                    }
-                },
-                destination
-            );
+            var destination = new Destination { Values = { new DestItem { } } };
+            Mapper.Map(new Source { Values = { new SourceItem { Value = 42 } } }, destination);
             destination.Values.Single().Value.ShouldBe(42);
         }
         [Fact]
         public void Should_clear_the_list_before_mapping_when_the_source_is_null()
         {
-            var destination = new Destination
-            {
-                Values =
-                {
-                    new DestItem { }
-                }
-            };
+            var destination = new Destination { Values = { new DestItem { } } };
             Mapper.Map(new Source { Values = null }, destination);
             destination.Values.ShouldBeEmpty();
         }

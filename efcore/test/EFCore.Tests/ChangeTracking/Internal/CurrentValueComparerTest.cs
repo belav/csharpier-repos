@@ -159,11 +159,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Can_sort_IntStructs() =>
             CanSort(
                 nameof(Godzilla.IntStruct),
-                i =>
-                    new Godzilla
-                    {
-                        IntStruct = new IntStruct { Value = i }
-                    },
+                i => new Godzilla { IntStruct = new IntStruct { Value = i } },
                 g => g.IntStruct.Value
             );
 
@@ -171,11 +167,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Can_sort_ComparableIntStructs() =>
             CanSort(
                 nameof(Godzilla.ComparableIntStruct),
-                i =>
-                    new Godzilla
-                    {
-                        ComparableIntStruct = new ComparableIntStruct { Value = i }
-                    },
+                i => new Godzilla { ComparableIntStruct = new ComparableIntStruct { Value = i } },
                 g => g.ComparableIntStruct.Value
             );
 
@@ -228,11 +220,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Can_sort_BytesStructs() =>
             CanSort(
                 nameof(Godzilla.BytesStruct),
-                i =>
-                    new Godzilla
-                    {
-                        BytesStruct = new BytesStruct { Value = i }
-                    },
+                i => new Godzilla { BytesStruct = new BytesStruct { Value = i } },
                 g => g.BytesStruct.Value
             );
 

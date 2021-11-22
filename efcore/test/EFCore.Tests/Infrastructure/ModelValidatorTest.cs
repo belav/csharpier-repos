@@ -1771,10 +1771,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         {
                             Id = 1,
                             OtherSamples = new HashSet<SampleEntity>(
-                                new[]
-                                {
-                                    new SampleEntity { Id = 2 }
-                                }
+                                new[] { new SampleEntity { Id = 2 } }
                             )
                         }
                     );

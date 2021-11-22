@@ -355,10 +355,7 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
 
         protected override void Because_of()
         {
-            var foo = new Foo
-            {
-                Bar = new Bar { Value = "something" }
-            };
+            var foo = new Foo { Bar = new Bar { Value = "something" } };
             foo.Bar.Foo = foo;
             _dto = Mapper.Map<Foo, FooDto>(foo);
         }

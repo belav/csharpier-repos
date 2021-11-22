@@ -372,10 +372,7 @@ namespace System.Tests
                 1,
                 (
                     (CustomValueType)(new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
-                        new object[]
-                        {
-                            new CustomValueType { Id = 1 }
-                        }
+                        new object[] { new CustomValueType { Id = 1 } }
                     )
                 ).Id
             );

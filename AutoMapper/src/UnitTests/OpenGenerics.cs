@@ -492,10 +492,7 @@ namespace AutoMapper.UnitTests
                 cfg => cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
             );
 
-            var source = new Source<Source<int>>
-            {
-                Value = new Source<int> { Value = 5, }
-            };
+            var source = new Source<Source<int>> { Value = new Source<int> { Value = 5, } };
 
             var dest = config.CreateMapper().Map<Source<Source<int>>, Dest<Dest<double>>>(source);
 

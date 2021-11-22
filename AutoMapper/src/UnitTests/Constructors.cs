@@ -385,10 +385,7 @@ namespace AutoMapper.UnitTests.Constructors
         [Fact]
         public void Should_map_ok()
         {
-            var source = new Source
-            {
-                Property = new Dto { Value = 5.0 }
-            };
+            var source = new Source { Property = new Dto { Value = 5.0 } };
             var destination = Mapper.Map<Destination>(source);
             destination.Property.Value.ShouldBe(5.0);
             Mapper.Map<Source>(destination).Property.Value.ShouldBe(5.0);
@@ -505,10 +502,7 @@ namespace AutoMapper.UnitTests.Constructors
         protected override void Because_of()
         {
             _destination = Mapper.Map<Destination>(
-                new Source
-                {
-                    InnerSource = new InnerSource { Name = "Core" }
-                }
+                new Source { InnerSource = new InnerSource { Name = "Core" } }
             );
         }
 
@@ -979,10 +973,7 @@ namespace AutoMapper.UnitTests.Constructors
         protected override void Because_of()
         {
             _destination = Mapper.Map<Destination>(
-                new Source
-                {
-                    Nested = new NestedSource { Foo = 5 }
-                }
+                new Source { Nested = new NestedSource { Foo = 5 } }
             );
         }
 

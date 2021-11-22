@@ -727,9 +727,6 @@ public class AuthorizeViewTest
     public class AuthorizeViewCoreWithScheme : AuthorizeViewCore
     {
         protected override IAuthorizeData[] GetAuthorizeData() =>
-            new[]
-            {
-                new AuthorizeAttribute { AuthenticationSchemes = "test scheme" }
-            };
+            new[] { new AuthorizeAttribute { AuthenticationSchemes = "test scheme" } };
     }
 }

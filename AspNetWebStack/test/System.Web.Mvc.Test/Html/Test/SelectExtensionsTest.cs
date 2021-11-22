@@ -1124,10 +1124,7 @@ namespace System.Web.Mvc.Html.Test
         )
         {
             // Arrange
-            var selectList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "text", },
-            };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
@@ -1155,10 +1152,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_AttributeEncodes_Name(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "text", },
-            };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
@@ -1220,10 +1214,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_HtmlEncodes_OptionLabel(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "text", },
-            };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
@@ -1249,10 +1240,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_AttributeEncodes_Prefix(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "text", },
-            };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.TemplateInfo.HtmlFieldPrefix = text;
             var helper = MvcHelper.GetHtmlHelper(viewData);
@@ -1283,10 +1271,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_HtmlEncodes_Text(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = text, },
-            };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = text, }, };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act

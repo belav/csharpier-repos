@@ -173,42 +173,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
 
             var added1 =
-                context.Attach(
-                    new DependentGG
-                    {
-                        PrincipalGG = new PrincipalGG { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new DependentGG { PrincipalGG = new PrincipalGG { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Added, context.Entry(added1).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added1.PrincipalGG).State);
 
             var added2 =
-                context.Attach(
-                    new DependentNG
-                    {
-                        PrincipalNG = new PrincipalNG { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new DependentNG { PrincipalNG = new PrincipalNG { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Added, context.Entry(added2).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added2.PrincipalNG).State);
 
             var added3 =
-                context.Attach(
-                    new DependentNN
-                    {
-                        PrincipalNN = new PrincipalNN { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new DependentNN { PrincipalNN = new PrincipalNN { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added3.PrincipalNN).State);
 
             var added4 =
-                context.Attach(
-                    new DependentGN
-                    {
-                        PrincipalGN = new PrincipalGN { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new DependentGN { PrincipalGN = new PrincipalGN { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Added, context.Entry(added4).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added4.PrincipalGN).State);
 
@@ -353,42 +333,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
 
             var added1 =
-                context.Attach(
-                    new PrincipalGG
-                    {
-                        DependentGG = new DependentGG { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new PrincipalGG { DependentGG = new DependentGG { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Added, context.Entry(added1).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added1.DependentGG).State);
 
             var added2 =
-                context.Attach(
-                    new PrincipalNG
-                    {
-                        DependentNG = new DependentNG { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new PrincipalNG { DependentNG = new DependentNG { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added2.DependentNG).State);
 
             var added3 =
-                context.Attach(
-                    new PrincipalNN
-                    {
-                        DependentNN = new DependentNN { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new PrincipalNN { DependentNN = new DependentNN { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added3.DependentNN).State);
 
             var added4 =
-                context.Attach(
-                    new PrincipalGN
-                    {
-                        DependentGN = new DependentGN { Id = 1 }
-                    }
-                ).Entity;
+                context.Attach(new PrincipalGN { DependentGN = new DependentGN { Id = 1 } }).Entity;
             Assert.Equal(EntityState.Added, context.Entry(added4).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added4.DependentGN).State);
 

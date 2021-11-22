@@ -561,10 +561,7 @@ namespace AutoMapper.UnitTests
         protected override void Because_of()
         {
             _destination = Mapper.Map<Destination>(
-                new Source
-                {
-                    ObjectValue = new InnerSource { IntValue = 15 }
-                }
+                new Source { ObjectValue = new InnerSource { IntValue = 15 } }
             );
         }
 
@@ -781,10 +778,7 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_use_the_specified_model_member_to_resolve_from()
         {
-            var model = new ModelObject
-            {
-                Sub = new ModelSubObject { SomeValue = 46 }
-            };
+            var model = new ModelObject { Sub = new ModelSubObject { SomeValue = 46 } };
 
             _result = Mapper.Map<ModelObject, ModelDto>(model);
             _result.SomeValue.ShouldBe(47);

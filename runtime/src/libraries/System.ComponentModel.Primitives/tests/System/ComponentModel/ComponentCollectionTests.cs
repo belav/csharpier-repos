@@ -29,20 +29,14 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Indexer_Name_TestData()
         {
-            var namedComponent = new Component
-            {
-                Site = new MockSite { Name = "Name" }
-            };
+            var namedComponent = new Component { Site = new MockSite { Name = "Name" } };
 
             yield return new object[] { new IComponent[0], null, null };
             yield return new object[] { new IComponent[0], "name", null };
             yield return new object[] { new IComponent[] { new Component() }, "name", null };
             yield return new object[]
             {
-                new IComponent[]
-                {
-                    new Component { Site = new MockSite() }
-                },
+                new IComponent[] { new Component { Site = new MockSite() } },
                 "name",
                 null
             };

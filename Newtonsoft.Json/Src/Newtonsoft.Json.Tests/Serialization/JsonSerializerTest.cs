@@ -1674,10 +1674,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DerivedClassHidingBasePropertySerializesAsExpected()
         {
-            var original = new FooBar1
-            {
-                foo = new Bar1 { bar = "value" }
-            };
+            var original = new FooBar1 { foo = new Bar1 { bar = "value" } };
             var json = JsonConvert.SerializeObject(original);
             var expectedJson = @"{""foo"":{""bar"":""value""}}";
             Assert.AreEqual(expectedJson, json); // passes
@@ -6872,10 +6869,7 @@ Path '', line 1, position 1."
         [Test]
         public void SerializeNullableWidgetStruct()
         {
-            Widget widget = new Widget
-            {
-                Id = new WidgetId { Value = "id" }
-            };
+            Widget widget = new Widget { Id = new WidgetId { Value = "id" } };
 
             string json = JsonConvert.SerializeObject(widget);
 
@@ -7044,10 +7038,7 @@ Path '', line 1, position 1."
         public void NullableStructWithConverter()
         {
             string json = JsonConvert.SerializeObject(
-                new Widget1
-                {
-                    Id = new WidgetId1 { Value = 1234 }
-                }
+                new Widget1 { Id = new WidgetId1 { Value = 1234 } }
             );
 
             Assert.AreEqual(@"{""Id"":""1234""}", json);

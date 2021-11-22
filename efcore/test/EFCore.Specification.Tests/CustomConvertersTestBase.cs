@@ -122,10 +122,7 @@ namespace Microsoft.EntityFrameworkCore
                         new NullablePrincipal
                         {
                             Id = 1,
-                            Dependents = new List<NonNullableDependent>
-                            {
-                                new() { Id = 1 }
-                            }
+                            Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
                         }
                     ).Entity;
 

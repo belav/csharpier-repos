@@ -1071,10 +1071,7 @@ namespace AutoMapper.UnitTests
         {
             var source = new Source
             {
-                Items = new List<Source.Item>
-                {
-                    new Source.Item { Value = 5 }
-                }
+                Items = new List<Source.Item> { new Source.Item { Value = 5 } }
             };
             var dest = new Dest();
 

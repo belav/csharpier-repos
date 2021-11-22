@@ -69,10 +69,7 @@ namespace System.Configuration.Tests
         {
             var Element = new SettingElement("Test", SettingsSerializeAs.Xml)
             {
-                Value = new SettingValueElement
-                {
-                    ValueXml = new ConfigXmlDocument { }
-                }
+                Value = new SettingValueElement { ValueXml = new ConfigXmlDocument { } }
             };
 
             // Validate the getting the hash code doesn't throw

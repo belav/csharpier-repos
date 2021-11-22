@@ -640,10 +640,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ListWrapper
         {
             public List<List<int>> NestedList { get; set; } =
-                new List<List<int>>
-                {
-                    new List<int> { 1 }
-                };
+                new List<List<int>> { new List<int> { 1 } };
         }
 
         [Fact]

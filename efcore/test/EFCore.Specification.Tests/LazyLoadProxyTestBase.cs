@@ -3132,10 +3132,7 @@ namespace Microsoft.EntityFrameworkCore
                         },
                         SingleCompositeKey = new SingleCompositeKey { Id = 62 },
                         WithRecursiveProperty = new WithRecursiveProperty { Id = 8086 },
-                        ManyChildren = new List<Child>
-                        {
-                            new() { Id = 999 }
-                        }
+                        ManyChildren = new List<Child> { new() { Id = 999 } }
                     }
                 );
 

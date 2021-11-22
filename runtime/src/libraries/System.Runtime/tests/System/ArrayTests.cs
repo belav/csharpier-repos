@@ -4858,10 +4858,7 @@ namespace System.Tests
             // Object
             yield return new object[]
             {
-                new object[]
-                {
-                    new EqualsOverrider { Value = 1 }
-                },
+                new object[] { new EqualsOverrider { Value = 1 } },
                 null,
                 0,
                 1,
@@ -4869,10 +4866,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                new object[]
-                {
-                    new EqualsOverrider { Value = 1 }
-                },
+                new object[] { new EqualsOverrider { Value = 1 } },
                 new EqualsOverrider { Value = 1 },
                 0,
                 1,
@@ -4880,10 +4874,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                new object[]
-                {
-                    new EqualsOverrider { Value = 1 }
-                },
+                new object[] { new EqualsOverrider { Value = 1 } },
                 new EqualsOverrider { Value = 2 },
                 0,
                 1,
@@ -5520,10 +5511,7 @@ namespace System.Tests
             // Object
             yield return new object[]
             {
-                new object[]
-                {
-                    new EqualsOverrider { Value = 1 }
-                },
+                new object[] { new EqualsOverrider { Value = 1 } },
                 null,
                 0,
                 1,
@@ -5531,10 +5519,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                new object[]
-                {
-                    new EqualsOverrider { Value = 1 }
-                },
+                new object[] { new EqualsOverrider { Value = 1 } },
                 new EqualsOverrider { Value = 1 },
                 0,
                 1,
@@ -5542,10 +5527,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                new object[]
-                {
-                    new EqualsOverrider { Value = 1 }
-                },
+                new object[] { new EqualsOverrider { Value = 1 } },
                 new EqualsOverrider { Value = 2 },
                 0,
                 1,

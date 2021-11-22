@@ -71,10 +71,7 @@ public class HtmlHelperListBoxExtensionsTest
             new ViewDataDictionary<TestModel>(metadataProvider)
         );
         helper.ViewContext.ClientValidationEnabled = false;
-        helper.ViewData.Model = new TestModel
-        {
-            Property3 = new List<string> { "4" }
-        };
+        helper.ViewData.Model = new TestModel { Property3 = new List<string> { "4" } };
 
         // Act
         var listBoxResult = helper.ListBox("Property3", selectList);

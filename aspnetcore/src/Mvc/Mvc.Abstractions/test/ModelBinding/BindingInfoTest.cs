@@ -14,10 +14,7 @@ public class BindingInfoTest
     public void GetBindingInfo_WithAttributes_ConstructsBindingInfo()
     {
         // Arrange
-        var attributes = new object[]
-        {
-            new FromQueryAttribute { Name = "Test" },
-        };
+        var attributes = new object[] { new FromQueryAttribute { Name = "Test" }, };
 
         // Act
         var bindingInfo = BindingInfo.GetBindingInfo(attributes);

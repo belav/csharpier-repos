@@ -1965,10 +1965,7 @@ public static partial class DataContractJsonSerializerTests
     {
         TypeWithKnownTypeAttributeAndListOfInterfaceMember value =
             new TypeWithKnownTypeAttributeAndListOfInterfaceMember();
-        value.Articles = new List<IArticle>()
-        {
-            new SummaryArticle() { Title = "Bar Summary" }
-        };
+        value.Articles = new List<IArticle>() { new SummaryArticle() { Title = "Bar Summary" } };
         var deserializedValue =
             SerializeAndDeserialize<TypeWithKnownTypeAttributeAndListOfInterfaceMember>(
                 value,
@@ -3192,12 +3189,7 @@ public static partial class DataContractJsonSerializerTests
                 Item = new Item { Id = 1, Code = 2 }
             }
         );
-        SerializeThenDeserialize(
-            new ContractExtended
-            {
-                Item = new Item { Id = 1 }
-            }
-        );
+        SerializeThenDeserialize(new ContractExtended { Item = new Item { Id = 1 } });
     }
 
     private static void SerializeThenDeserialize(ContractExtended extendedData)

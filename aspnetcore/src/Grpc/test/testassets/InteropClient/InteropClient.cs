@@ -386,10 +386,7 @@ public class InteropClient : IDisposable
             await call.RequestStream.WriteAsync(
                 new StreamingOutputCallRequest
                 {
-                    ResponseParameters =
-                    {
-                        new ResponseParameters { Size = 31415 }
-                    },
+                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
                     Payload = CreateZerosPayload(27182)
                 }
             );
@@ -400,10 +397,7 @@ public class InteropClient : IDisposable
             await call.RequestStream.WriteAsync(
                 new StreamingOutputCallRequest
                 {
-                    ResponseParameters =
-                    {
-                        new ResponseParameters { Size = 9 }
-                    },
+                    ResponseParameters = { new ResponseParameters { Size = 9 } },
                     Payload = CreateZerosPayload(8)
                 }
             );
@@ -414,10 +408,7 @@ public class InteropClient : IDisposable
             await call.RequestStream.WriteAsync(
                 new StreamingOutputCallRequest
                 {
-                    ResponseParameters =
-                    {
-                        new ResponseParameters { Size = 2653 }
-                    },
+                    ResponseParameters = { new ResponseParameters { Size = 2653 } },
                     Payload = CreateZerosPayload(1828)
                 }
             );
@@ -428,10 +419,7 @@ public class InteropClient : IDisposable
             await call.RequestStream.WriteAsync(
                 new StreamingOutputCallRequest
                 {
-                    ResponseParameters =
-                    {
-                        new ResponseParameters { Size = 58979 }
-                    },
+                    ResponseParameters = { new ResponseParameters { Size = 58979 } },
                     Payload = CreateZerosPayload(45904)
                 }
             );
@@ -570,10 +558,7 @@ public class InteropClient : IDisposable
             await call.RequestStream.WriteAsync(
                 new StreamingOutputCallRequest
                 {
-                    ResponseParameters =
-                    {
-                        new ResponseParameters { Size = 31415 }
-                    },
+                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
                     Payload = CreateZerosPayload(27182)
                 }
             );
@@ -665,10 +650,7 @@ public class InteropClient : IDisposable
             // step 2: test full duplex call
             var request = new StreamingOutputCallRequest
             {
-                ResponseParameters =
-                {
-                    new ResponseParameters { Size = 31415 }
-                },
+                ResponseParameters = { new ResponseParameters { Size = 31415 } },
                 Payload = CreateZerosPayload(27182)
             };
 

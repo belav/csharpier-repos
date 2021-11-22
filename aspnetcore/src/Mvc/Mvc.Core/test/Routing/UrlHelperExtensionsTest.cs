@@ -53,12 +53,8 @@ public class UrlHelperExtensionsTest
             new TheoryData<object>
             {
                 { new { id = 10 } },
-                {
-                    new Dictionary<string, object> { ["id"] = 10, }
-                },
-                {
-                    new RouteValueDictionary { ["id"] = 10, }
-                },
+                { new Dictionary<string, object> { ["id"] = 10, } },
+                { new RouteValueDictionary { ["id"] = 10, } },
             };
     }
 

@@ -1311,10 +1311,7 @@ namespace AutoMapper.UnitTests
             protected override void Because_of()
             {
                 _destination = Mapper.Map<Source, Destination>(
-                    new Source
-                    {
-                        some_source = new SubSource { value = 8 }
-                    }
+                    new Source { some_source = new SubSource { value = 8 } }
                 );
             }
 

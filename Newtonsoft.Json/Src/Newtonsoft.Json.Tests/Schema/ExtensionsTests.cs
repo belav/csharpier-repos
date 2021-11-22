@@ -418,10 +418,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             JsonSchema schema = new JsonSchema();
             schema.UniqueItems = true;
-            schema.Items = new List<JsonSchema>
-            {
-                new JsonSchema { UniqueItems = true }
-            };
+            schema.Items = new List<JsonSchema> { new JsonSchema { UniqueItems = true } };
             schema.PositionalItemsValidation = false;
 
             JArray a = new JArray(

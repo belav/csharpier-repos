@@ -775,10 +775,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     c.Collection.Clear();
                     c.Collection.Add(new List<short> { 3 });
                 },
-                new List<List<short>>
-                {
-                    new() { 3 }
-                }
+                new List<List<short>> { new() { 3 } }
             );
             await Can_add_update_delete_with_collection<IList<byte?[]>>(
                 new List<byte?[]>(),
@@ -790,10 +787,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 new List<byte?[]> { new byte?[] { 3, null }, null }
             );
             await Can_add_update_delete_with_collection<IReadOnlyList<Dictionary<string, string>>>(
-                new Dictionary<string, string>[]
-                {
-                    new() { { "1", null } }
-                },
+                new Dictionary<string, string>[] { new() { { "1", null } } },
                 c =>
                 {
                     var dictionary = c.Collection[0]["3"] = "2";

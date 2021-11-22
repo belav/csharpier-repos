@@ -49,10 +49,7 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeMemberEvent.
             yield return new object[] { new CodeMemberEvent() };
-            yield return new object[]
-            {
-                new CodeMemberEvent { Name = "0" }
-            };
+            yield return new object[] { new CodeMemberEvent { Name = "0" } };
             yield return new object[]
             {
                 new CodeMemberEvent
@@ -258,10 +255,7 @@ namespace System.CodeDom.Compiler.Tests
             );
 
             // CodeMemberMethod.
-            yield return new object[]
-            {
-                new CodeMemberMethod { Name = "name" }
-            };
+            yield return new object[] { new CodeMemberMethod { Name = "name" } };
 
             var abstractMethod = new CodeMemberMethod
             {
@@ -343,22 +337,10 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeEntryPointMethod.
             yield return new object[] { new CodeEntryPointMethod() };
-            yield return new object[]
-            {
-                new CodeEntryPointMethod { Name = null }
-            };
-            yield return new object[]
-            {
-                new CodeEntryPointMethod { Name = string.Empty }
-            };
-            yield return new object[]
-            {
-                new CodeEntryPointMethod { Name = "name" }
-            };
-            yield return new object[]
-            {
-                new CodeEntryPointMethod { Name = "0" }
-            };
+            yield return new object[] { new CodeEntryPointMethod { Name = null } };
+            yield return new object[] { new CodeEntryPointMethod { Name = string.Empty } };
+            yield return new object[] { new CodeEntryPointMethod { Name = "name" } };
+            yield return new object[] { new CodeEntryPointMethod { Name = "0" } };
             yield return new object[]
             {
                 new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference() }
@@ -524,18 +506,9 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeConstructor.
             yield return new object[] { new CodeConstructor() };
-            yield return new object[]
-            {
-                new CodeConstructor { Name = null }
-            };
-            yield return new object[]
-            {
-                new CodeConstructor { Name = string.Empty }
-            };
-            yield return new object[]
-            {
-                new CodeConstructor { Name = "0" }
-            };
+            yield return new object[] { new CodeConstructor { Name = null } };
+            yield return new object[] { new CodeConstructor { Name = string.Empty } };
+            yield return new object[] { new CodeConstructor { Name = "0" } };
             yield return new object[]
             {
                 new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
@@ -657,22 +630,10 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeTypeConstructor.
             yield return new object[] { new CodeTypeConstructor() };
-            yield return new object[]
-            {
-                new CodeTypeConstructor { Name = null }
-            };
-            yield return new object[]
-            {
-                new CodeTypeConstructor { Name = string.Empty }
-            };
-            yield return new object[]
-            {
-                new CodeTypeConstructor { Name = "name" }
-            };
-            yield return new object[]
-            {
-                new CodeTypeConstructor { Name = "0" }
-            };
+            yield return new object[] { new CodeTypeConstructor { Name = null } };
+            yield return new object[] { new CodeTypeConstructor { Name = string.Empty } };
+            yield return new object[] { new CodeTypeConstructor { Name = "name" } };
+            yield return new object[] { new CodeTypeConstructor { Name = "0" } };
             yield return new object[]
             {
                 new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
@@ -837,18 +798,9 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { fullTypeConstructor };
 
             // CodeMemberProperty.
-            yield return new object[]
-            {
-                new CodeMemberProperty { Name = "name" }
-            };
-            yield return new object[]
-            {
-                new CodeMemberProperty { Name = "item" }
-            };
-            yield return new object[]
-            {
-                new CodeMemberProperty { Name = "Item" }
-            };
+            yield return new object[] { new CodeMemberProperty { Name = "name" } };
+            yield return new object[] { new CodeMemberProperty { Name = "item" } };
+            yield return new object[] { new CodeMemberProperty { Name = "Item" } };
 
             var abstractProperty = new CodeMemberProperty
             {
@@ -2439,18 +2391,9 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeMemberMethod.
             yield return new object[] { new CodeMemberMethod() };
-            yield return new object[]
-            {
-                new CodeMemberMethod { Name = null }
-            };
-            yield return new object[]
-            {
-                new CodeMemberMethod { Name = string.Empty }
-            };
-            yield return new object[]
-            {
-                new CodeMemberMethod { Name = "0" }
-            };
+            yield return new object[] { new CodeMemberMethod { Name = null } };
+            yield return new object[] { new CodeMemberMethod { Name = string.Empty } };
+            yield return new object[] { new CodeMemberMethod { Name = "0" } };
             yield return new object[]
             {
                 new CodeMemberMethod { Name = "name", ReturnType = new CodeTypeReference() }
@@ -3376,18 +3319,9 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeMemberProperty.
             yield return new object[] { new CodeMemberProperty() };
-            yield return new object[]
-            {
-                new CodeMemberProperty { Name = null }
-            };
-            yield return new object[]
-            {
-                new CodeMemberProperty { Name = string.Empty }
-            };
-            yield return new object[]
-            {
-                new CodeMemberProperty { Name = "0" }
-            };
+            yield return new object[] { new CodeMemberProperty { Name = null } };
+            yield return new object[] { new CodeMemberProperty { Name = string.Empty } };
+            yield return new object[] { new CodeMemberProperty { Name = "0" } };
             yield return new object[]
             {
                 new CodeMemberProperty

@@ -1844,10 +1844,7 @@ public class PageTest
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()
         );
-        var page = new TestPage
-        {
-            ViewContext = new ViewContext { ViewData = viewData, },
-        };
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData, }, };
 
         // Act
         var result = page.ViewComponent("TagCloud");
@@ -1866,10 +1863,7 @@ public class PageTest
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()
         );
-        var page = new TestPage
-        {
-            ViewContext = new ViewContext { ViewData = viewData, },
-        };
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData, }, };
 
         // Act
         var result = page.ViewComponent(typeof(Guid));
@@ -1888,10 +1882,7 @@ public class PageTest
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()
         );
-        var page = new TestPage
-        {
-            ViewContext = new ViewContext { ViewData = viewData, },
-        };
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData, }, };
 
         var arguments = new { Arg1 = "Hi", Arg2 = "There" };
 

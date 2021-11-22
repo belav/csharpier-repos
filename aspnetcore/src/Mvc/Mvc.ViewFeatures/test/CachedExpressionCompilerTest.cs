@@ -515,10 +515,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = "Test1";
-        var model = new TestModel
-        {
-            DifferentModel = new DifferentModel { Name = expected }
-        };
+        var model = new TestModel { DifferentModel = new DifferentModel { Name = expected } };
         var expression = GetTestModelExpression(m => m.DifferentModel.Name);
 
         // Act
@@ -600,10 +597,7 @@ public class CachedExpressionCompilerTest
         // Arrange
         var model = new Chain0Model
         {
-            Chain1 = new Chain1Model
-            {
-                ValueTypeModel = new ValueType1 { TestModel = null },
-            }
+            Chain1 = new Chain1Model { ValueTypeModel = new ValueType1 { TestModel = null }, }
         };
 
         var expression = GetExpression<Chain0Model, string>(
@@ -675,10 +669,7 @@ public class CachedExpressionCompilerTest
     public void Process_ChainedMemberAccess_LongChain_WithNullValuedNullableValueType()
     {
         // Arrange
-        var model = new Chain0Model
-        {
-            Chain1 = new Chain1Model { NullableValueTypeModel = null }
-        };
+        var model = new Chain0Model { Chain1 = new Chain1Model { NullableValueTypeModel = null } };
 
         var expression = GetExpression<Chain0Model, string>(
             m => m.Chain1.NullableValueTypeModel.Value.TestModel.DifferentModel.Name
@@ -730,10 +721,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = "TestName";
-        var model = new ValueType1
-        {
-            ValueType2 = new ValueType2 { Name = expected },
-        };
+        var model = new ValueType1 { ValueType2 = new ValueType2 { Name = expected }, };
         var expression = GetExpression<ValueType1, string>(m => m.ValueType2.Name);
 
         // Act
@@ -750,10 +738,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = new DateTime(2001, 1, 1);
-        var model = new ValueType1
-        {
-            ValueType2 = new ValueType2 { Date = expected },
-        };
+        var model = new ValueType1 { ValueType2 = new ValueType2 { Date = expected }, };
         var expression = GetExpression<ValueType1, DateTime>(m => m.ValueType2.Date);
 
         // Act
@@ -770,10 +755,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = "TestName";
-        var model = new ValueType1
-        {
-            NullableValueType2 = new ValueType2 { Name = expected },
-        };
+        var model = new ValueType1 { NullableValueType2 = new ValueType2 { Name = expected }, };
         var expression = GetExpression<ValueType1, string>(m => m.NullableValueType2.Value.Name);
 
         // Act
@@ -886,10 +868,7 @@ public class CachedExpressionCompilerTest
         var expected = "SomeName";
         var model = new TestModel
         {
-            DifferentModels = new[]
-            {
-                new DifferentModel { Name = expected }
-            }
+            DifferentModels = new[] { new DifferentModel { Name = expected } }
         };
         var expression = GetTestModelExpression(m => m.DifferentModels[0].Name);
 

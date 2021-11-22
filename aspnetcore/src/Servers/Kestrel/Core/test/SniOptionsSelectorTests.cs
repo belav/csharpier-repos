@@ -32,24 +32,15 @@ public class SniOptionsSelectorTests
         {
             {
                 "www.example.org",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "Exact" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "Exact" } }
             },
             {
                 "*.example.org",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "WildcardPrefix" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "WildcardPrefix" } }
             },
             {
                 "*",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "WildcardOnly" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "WildcardOnly" } }
             }
         };
 
@@ -106,17 +97,11 @@ public class SniOptionsSelectorTests
         {
             {
                 "*.a.example.org",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "Long" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "Long" } }
             },
             {
                 "*.example.org",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "Short" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "Short" } }
             }
         };
 
@@ -153,17 +138,11 @@ public class SniOptionsSelectorTests
         {
             {
                 "Www.Example.Org",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "Exact" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "Exact" } }
             },
             {
                 "*.Example.Org",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "WildcardPrefix" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "WildcardPrefix" } }
             }
         };
 
@@ -234,10 +213,7 @@ public class SniOptionsSelectorTests
         {
             {
                 "*",
-                new SniConfig
-                {
-                    Certificate = new CertificateConfig { Path = "WildcardOnly" }
-                }
+                new SniConfig { Certificate = new CertificateConfig { Path = "WildcardOnly" } }
             }
         };
 

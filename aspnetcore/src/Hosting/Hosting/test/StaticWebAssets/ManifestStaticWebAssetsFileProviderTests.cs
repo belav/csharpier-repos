@@ -616,10 +616,7 @@ public class ManifestStaticWebAssetsFileProviderTest
                     {
                         ["RazorClassLib"] = new()
                         {
-                            Children = new(comparer)
-                            {
-                                ["Dir"] = new() { }
-                            }
+                            Children = new(comparer) { ["Dir"] = new() { } }
                         }
                     }
                 }

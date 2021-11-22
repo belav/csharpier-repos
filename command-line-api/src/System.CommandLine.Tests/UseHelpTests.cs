@@ -121,10 +121,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void There_are_no_parse_errors_when_help_is_invoked_on_a_command_with_required_options()
         {
-            var command = new RootCommand
-            {
-                new Option<string>("-x") { IsRequired = true },
-            };
+            var command = new RootCommand { new Option<string>("-x") { IsRequired = true }, };
 
             var result = new CommandLineBuilder(command).UseHelp().Build().Parse("-h");
 

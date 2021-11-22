@@ -201,18 +201,12 @@ namespace System.Text.Json.Serialization.Tests
 
             obj = new ClassWithDictionaries
             {
-                BoolKey = new Dictionary<bool, Entity>
-                {
-                    [true] = new Entity { Value = "test" }
-                },
+                BoolKey = new Dictionary<bool, Entity> { [true] = new Entity { Value = "test" } },
                 EnumKey = new Dictionary<MyEnum, Entity>
                 {
                     [MyEnum.One] = new Entity { Value = "test" }
                 },
-                GuidKey = new Dictionary<Guid, Entity>
-                {
-                    [guid] = new Entity { Value = "test" }
-                },
+                GuidKey = new Dictionary<Guid, Entity> { [guid] = new Entity { Value = "test" } },
                 DoubleKey = new Dictionary<double, Entity>
                 {
                     [1.35] = new Entity { Value = "test" }
@@ -221,10 +215,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     [1.34f] = new Entity { Value = "test" }
                 },
-                IntKey = new Dictionary<int, Entity>
-                {
-                    [1] = new Entity { Value = "test" }
-                },
+                IntKey = new Dictionary<int, Entity> { [1] = new Entity { Value = "test" } },
                 // String is actually handled by built-in converter, not the custom converter.
                 StringKey = new Dictionary<string, Entity>
                 {

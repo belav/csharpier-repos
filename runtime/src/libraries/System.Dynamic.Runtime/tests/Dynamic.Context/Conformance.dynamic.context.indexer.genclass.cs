@@ -744,10 +744,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
             // ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclass.genclass016.genclass016
             dynamic dy = new MemberClassWithClassConstraint<string>();
             decimal dec = 123M;
-            List<Test> list = new List<Test>()
-            {
-                new Test() { _field = dy[dec, dy] }
-            };
+            List<Test> list = new List<Test>() { new Test() { _field = dy[dec, dy] } };
 
             Assert.Equal(1, list.Count);
             Assert.Null(list[0]._field);

@@ -320,18 +320,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public void Seed()
             {
-                Add(
-                    new Author
-                    {
-                        Blog = new DevBlog { Title = "Dev Blog", }
-                    }
-                );
-                Add(
-                    new Author
-                    {
-                        Blog = new PhotoBlog { Title = "Photo Blog", }
-                    }
-                );
+                Add(new Author { Blog = new DevBlog { Title = "Dev Blog", } });
+                Add(new Author { Blog = new PhotoBlog { Title = "Photo Blog", } });
 
                 SaveChanges();
             }

@@ -309,10 +309,7 @@ namespace System.ComponentModel.Tests
             var mockSite = new Mock<ISite>(MockBehavior.Strict);
             mockSite.Setup(s => s.Container).Returns<IContainer>(null);
             mockSite.Setup(s => s.Name).Returns("name");
-            yield return new object[]
-            {
-                new Component { Site = mockSite.Object }
-            };
+            yield return new object[] { new Component { Site = mockSite.Object } };
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads

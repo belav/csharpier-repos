@@ -129,15 +129,9 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string>("--the-option");
 
-                var sprocket = new Command("sprocket")
-                {
-                    new Command("add") { option }
-                };
+                var sprocket = new Command("sprocket") { new Command("add") { option } };
 
-                var widget = new Command("widget")
-                {
-                    new Command("add") { option }
-                };
+                var widget = new Command("widget") { new Command("add") { option } };
 
                 var root = new RootCommand { sprocket, widget };
 

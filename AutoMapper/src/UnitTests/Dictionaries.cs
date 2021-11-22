@@ -211,10 +211,7 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                var foo1 = new Foo
-                {
-                    Bar = new Dictionary<string, Foo> { { "lol", new Foo() } }
-                };
+                var foo1 = new Foo { Bar = new Dictionary<string, Foo> { { "lol", new Foo() } } };
 
                 _result = Mapper.Map<Foo, FooDto>(foo1);
             }

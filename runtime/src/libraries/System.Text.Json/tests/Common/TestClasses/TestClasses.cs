@@ -150,10 +150,7 @@ namespace System.Text.Json.Serialization.Tests
         public List<int?> MyNullableIntList { get; set; } = new List<int?> { 1 };
         public List<object> MyObjectList { get; set; } = new List<object> { 1 };
         public List<List<object>> MyListList { get; set; } =
-            new List<List<object>>
-            {
-                new List<object> { 1 }
-            };
+            new List<List<object>> { new List<object> { 1 } };
         public List<Dictionary<string, string>> MyDictionaryList { get; set; } =
             new List<Dictionary<string, string>>
             {
@@ -174,10 +171,7 @@ namespace System.Text.Json.Serialization.Tests
                 ["key"] = new Dictionary<string, string> { ["key"] = "value" }
             };
         public Dictionary<string, List<object>> MyListDictionary { get; set; } =
-            new Dictionary<string, List<object>>
-            {
-                ["key"] = new List<object> { "value" }
-            };
+            new Dictionary<string, List<object>> { ["key"] = new List<object> { "value" } };
         public Dictionary<
             string,
             Dictionary<string, object>

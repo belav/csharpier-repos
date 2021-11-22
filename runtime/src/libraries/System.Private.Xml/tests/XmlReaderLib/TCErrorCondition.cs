@@ -653,16 +653,10 @@ namespace System.Xml.Tests
                     }
                 );
                 this.AddChild(
-                    new CVariation(v3)
-                    {
-                        Attribute = new Variation("XmlReader[0]") { Param = 2 }
-                    }
+                    new CVariation(v3) { Attribute = new Variation("XmlReader[0]") { Param = 2 } }
                 );
                 this.AddChild(
-                    new CVariation(v3)
-                    {
-                        Attribute = new Variation("XmlReader[-1]") { Param = 1 }
-                    }
+                    new CVariation(v3) { Attribute = new Variation("XmlReader[-1]") { Param = 1 } }
                 );
             }
 
@@ -1564,10 +1558,7 @@ namespace System.Xml.Tests
                     }
                 );
                 this.AddChild(
-                    new CVariation(V16)
-                    {
-                        Attribute = new Variation("XmlReader[a])") { Param = 6 }
-                    }
+                    new CVariation(V16) { Attribute = new Variation("XmlReader[a])") { Param = 6 } }
                 );
                 this.AddChild(
                     new CVariation(V16)

@@ -82,10 +82,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         // public static implicit operator dynamic(MyClass<T> p1) { return p1; }
         public static implicit operator MyStruct[](MyClass<T> p1)
         {
-            return new MyStruct[]
-            {
-                new MyStruct() { Number = 4 }
-            };
+            return new MyStruct[] { new MyStruct() { Number = 4 } };
         }
 
         public static explicit operator MyClass<T>(MyStruct?[] p1)
@@ -175,10 +172,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     {
         public static implicit operator MyStruct[](MemberClassWithAnotherTypeConstraint<T, U> p1)
         {
-            return new MyStruct[]
-            {
-                new MyStruct() { Number = 4 }
-            };
+            return new MyStruct[] { new MyStruct() { Number = 4 } };
         }
 
         public static implicit operator int?(MemberClassWithAnotherTypeConstraint<T, U> p1)

@@ -290,10 +290,7 @@ namespace DebuggerTests
 
         public static void MethodUpdatingVTArrayMembers()
         {
-            var ssta = new[]
-            {
-                new StructForToStringTests { DT = new DateTime(1, 2, 3, 4, 5, 6) }
-            };
+            var ssta = new[] { new StructForToStringTests { DT = new DateTime(1, 2, 3, 4, 5, 6) } };
             Console.WriteLine($"#1");
             ssta[0].DT = new DateTime(9, 8, 7, 6, 5, 4);
             Console.WriteLine($"#2");

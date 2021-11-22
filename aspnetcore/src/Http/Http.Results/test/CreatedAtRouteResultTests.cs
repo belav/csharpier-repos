@@ -21,10 +21,7 @@ public partial class CreatedAtRouteResultTests
         get
         {
             yield return new object[] { null };
-            yield return new object[]
-            {
-                new Dictionary<string, string>() { { "hello", "world" } }
-            };
+            yield return new object[] { new Dictionary<string, string>() { { "hello", "world" } } };
             yield return new object[]
             {
                 new RouteValueDictionary(

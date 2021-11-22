@@ -220,10 +220,7 @@ namespace Microsoft.EntityFrameworkCore
                     new()
                     {
                         Author = context.Users.First(),
-                        Answers = new List<Answer>
-                        {
-                            new() { Author = context.Users.Last() }
-                        }
+                        Answers = new List<Answer> { new() { Author = context.Users.Last() } }
                     }
                 };
 

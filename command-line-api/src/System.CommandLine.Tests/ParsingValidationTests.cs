@@ -73,10 +73,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_a_required_option_is_not_supplied_then_an_error_is_returned()
         {
-            var command = new Command("command")
-            {
-                new Option("-x") { IsRequired = true }
-            };
+            var command = new Command("command") { new Option("-x") { IsRequired = true } };
 
             var result = command.Parse("");
 

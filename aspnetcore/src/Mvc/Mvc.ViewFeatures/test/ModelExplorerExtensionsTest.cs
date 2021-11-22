@@ -16,10 +16,7 @@ public class ModelExplorerExtensionsTest
             return new TheoryData<object, Type, string>
             {
                 {
-                    new ComplexClass()
-                    {
-                        Prop1 = new Class1 { Prop1 = "Hello" }
-                    },
+                    new ComplexClass() { Prop1 = new Class1 { Prop1 = "Hello" } },
                     typeof(ComplexClass),
                     "Class1"
                 },

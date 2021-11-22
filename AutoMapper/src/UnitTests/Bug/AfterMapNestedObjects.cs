@@ -38,10 +38,7 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override void Because_of()
         {
-            var outer = new Outer
-            {
-                Inner = new Inner() { Prop1 = "Prop1" }
-            };
+            var outer = new Outer { Inner = new Inner() { Prop1 = "Prop1" } };
             Mapper.Map<Outer, OuterDTO>(outer, o => o.AfterMap((s, d) => _afterMapCalled = true));
         }
 

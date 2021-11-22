@@ -740,20 +740,14 @@ namespace System.Net.Tests
             yield return new object[]
             {
                 "cookie: name=value,name=value;$port=\"200\"",
-                new CookieCollection
-                {
-                    new Cookie("name", "value") { Port = "\"200\"" }
-                }
+                new CookieCollection { new Cookie("name", "value") { Port = "\"200\"" } }
             };
 
             // Cookie with a greater variant (e.g. Rfc2109) is preferred over a lower variant (e.g. Plain).
             yield return new object[]
             {
                 "cookie: name=value;$port=\"200\",name=value",
-                new CookieCollection
-                {
-                    new Cookie("name", "value") { Port = "\"200\"" }
-                }
+                new CookieCollection { new Cookie("name", "value") { Port = "\"200\"" } }
             };
 
             yield return new object[]

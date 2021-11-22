@@ -38,10 +38,7 @@ namespace AutoMapper.UnitTests.Bug
 
             config.AssertConfigurationIsValid();
 
-            var src = new DummySource[]
-            {
-                new DummySource { Dummy = "Foo" }
-            };
+            var src = new DummySource[] { new DummySource { Dummy = "Foo" } };
 
             var destination = src.AsQueryable().ProjectTo<DummyDestination>(config).First();
 

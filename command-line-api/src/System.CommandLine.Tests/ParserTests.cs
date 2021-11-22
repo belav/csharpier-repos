@@ -197,10 +197,7 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer");
             outer.AddOption(new Option("-a"));
-            var inner = new Command("inner")
-            {
-                new Argument { Arity = ArgumentArity.ZeroOrMore }
-            };
+            var inner = new Command("inner") { new Argument { Arity = ArgumentArity.ZeroOrMore } };
             inner.AddOption(new Option("-b"));
             inner.AddOption(new Option("-c"));
             outer.AddCommand(inner);
@@ -507,10 +504,7 @@ namespace System.CommandLine.Tests
             var command = new Command("outer")
             {
                 new Argument { Arity = ArgumentArity.ZeroOrMore },
-                new Command("inner")
-                {
-                    new Argument { Arity = ArgumentArity.ZeroOrMore }
-                }
+                new Command("inner") { new Argument { Arity = ArgumentArity.ZeroOrMore } }
             };
 
             var result = command.Parse("outer arg1 inner arg2");
@@ -689,10 +683,7 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Command("inner")
-                {
-                    new Option("-x") { Arity = ArgumentArity.ExactlyOne }
-                }
+                new Command("inner") { new Option("-x") { Arity = ArgumentArity.ExactlyOne } }
             };
 
             var result1 = command.Parse("inner -x hello");
@@ -706,10 +697,7 @@ namespace System.CommandLine.Tests
         {
             var command = new RootCommand
             {
-                new Command("inner")
-                {
-                    new Option("-x") { Arity = ArgumentArity.ExactlyOne }
-                }
+                new Command("inner") { new Option("-x") { Arity = ArgumentArity.ExactlyOne } }
             };
 
             ParseResult result1 = command.Parse("inner -x hello");
@@ -724,10 +712,7 @@ namespace System.CommandLine.Tests
         {
             var rootCommand = new RootCommand
             {
-                new Command("inner")
-                {
-                    new Option("-x") { Arity = ArgumentArity.ExactlyOne }
-                }
+                new Command("inner") { new Option("-x") { Arity = ArgumentArity.ExactlyOne } }
             };
             rootCommand.Name = "outer";
 
@@ -745,10 +730,7 @@ namespace System.CommandLine.Tests
             var command = @"rm ""/temp/the file.txt""";
 
             var parser = new Parser(
-                new Command("rm")
-                {
-                    new Argument { Arity = ArgumentArity.ZeroOrMore }
-                }
+                new Command("rm") { new Argument { Arity = ArgumentArity.ZeroOrMore } }
             );
 
             var result = parser.Parse(command);
@@ -765,10 +747,7 @@ namespace System.CommandLine.Tests
             var command = @"rm ""c:\temp\the file.txt\""";
 
             var parser = new Parser(
-                new Command("rm")
-                {
-                    new Argument { Arity = ArgumentArity.ZeroOrMore }
-                }
+                new Command("rm") { new Argument { Arity = ArgumentArity.ZeroOrMore } }
             );
 
             ParseResult result = parser.Parse(command);
@@ -861,10 +840,7 @@ namespace System.CommandLine.Tests
             var outer = new Command("outer")
             {
                 new Option("-p"),
-                new Command("inner")
-                {
-                    new Argument { Arity = ArgumentArity.OneOrMore }
-                }
+                new Command("inner") { new Argument { Arity = ArgumentArity.OneOrMore } }
             };
 
             ParseResult result = outer.Parse("outer inner -p:RandomThing=random");

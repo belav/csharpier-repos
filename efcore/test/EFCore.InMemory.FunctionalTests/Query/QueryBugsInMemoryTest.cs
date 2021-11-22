@@ -1608,18 +1608,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed23926(MyContext23926 context)
         {
-            context.Add(
-                new History23926
-                {
-                    User = new User23926 { Name = "UserA" }
-                }
-            );
-            context.Add(
-                new History23926
-                {
-                    User = new DerivedUser23926 { Name = "DerivedUserB" }
-                }
-            );
+            context.Add(new History23926 { User = new User23926 { Name = "UserA" } });
+            context.Add(new History23926 { User = new DerivedUser23926 { Name = "DerivedUserB" } });
             context.Add(new History23926 { User = null });
 
             context.SaveChanges();
@@ -1904,10 +1894,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var root = new Root20359()
             {
-                A = new A20359()
-                {
-                    Sub = new ASubClass20359() { AValue = "A Value" }
-                },
+                A = new A20359() { Sub = new ASubClass20359() { AValue = "A Value" } },
                 B = new B20359() { BValue = "B Value" }
             };
 
@@ -2105,10 +2092,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 PropertyB = new B18394
                 {
-                    PropertyCList = new List<C18394>
-                    {
-                        new C18394 { SomeText = "TestText" }
-                    }
+                    PropertyCList = new List<C18394> { new C18394 { SomeText = "TestText" } }
                 }
             };
             context.As.Add(a);

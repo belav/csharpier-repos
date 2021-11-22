@@ -18,10 +18,7 @@ public class DataMemberRequiredBindingMetadataProviderTest
         // Arrange
         var provider = new DataMemberRequiredBindingMetadataProvider();
 
-        var attributes = new object[]
-        {
-            new DataMemberAttribute() { IsRequired = true, }
-        };
+        var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
         var key = ModelMetadataIdentity.ForProperty(
             typeof(ClassWithDataMemberIsRequiredTrue).GetProperty(
@@ -50,10 +47,7 @@ public class DataMemberRequiredBindingMetadataProviderTest
         // Arrange
         var provider = new DataMemberRequiredBindingMetadataProvider();
 
-        var attributes = new object[]
-        {
-            new DataMemberAttribute() { IsRequired = false, }
-        };
+        var attributes = new object[] { new DataMemberAttribute() { IsRequired = false, } };
 
         var key = ModelMetadataIdentity.ForProperty(
             typeof(ClassWithDataMemberIsRequiredFalse).GetProperty(
@@ -84,10 +78,7 @@ public class DataMemberRequiredBindingMetadataProviderTest
         // Arrange
         var provider = new DataMemberRequiredBindingMetadataProvider();
 
-        var attributes = new object[]
-        {
-            new DataMemberAttribute() { IsRequired = true, }
-        };
+        var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
         var key = ModelMetadataIdentity.ForType(typeof(ClassWithDataMemberIsRequiredTrue));
         var context = new BindingMetadataProviderContext(
@@ -141,10 +132,7 @@ public class DataMemberRequiredBindingMetadataProviderTest
         // Arrange
         var provider = new DataMemberRequiredBindingMetadataProvider();
 
-        var attributes = new object[]
-        {
-            new DataMemberAttribute() { IsRequired = true, }
-        };
+        var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
         var key = ModelMetadataIdentity.ForProperty(
             typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract).GetProperty(

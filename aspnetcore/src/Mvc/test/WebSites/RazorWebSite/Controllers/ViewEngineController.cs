@@ -36,10 +36,7 @@ public class ViewEngineController : Controller
     public IActionResult ViewWithPartial()
     {
         ViewData["TestKey"] = "test-value";
-        var model = new Person
-        {
-            Address = new Address { ZipCode = "98052" }
-        };
+        var model = new Person { Address = new Address { ZipCode = "98052" } };
 
         return View(model);
     }

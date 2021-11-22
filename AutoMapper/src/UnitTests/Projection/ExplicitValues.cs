@@ -31,10 +31,7 @@
 
         protected override void Because_of()
         {
-            var source = new[]
-            {
-                new Source { Value = 10 }
-            }.AsQueryable();
+            var source = new[] { new Source { Value = 10 } }.AsQueryable();
 
             _dests = source.ProjectTo<Dest>(Configuration).ToList();
         }

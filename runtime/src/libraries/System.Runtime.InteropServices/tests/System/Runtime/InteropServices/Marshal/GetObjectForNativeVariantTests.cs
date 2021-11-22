@@ -302,10 +302,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             Variant variant = CreateVariant(
                 VT_RECORD,
-                new UnionTypes
-                {
-                    _record = new Record { _recordInfo = IntPtr.Zero }
-                }
+                new UnionTypes { _record = new Record { _recordInfo = IntPtr.Zero } }
             );
             AssertExtensions.Throws<ArgumentException>(
                 null,

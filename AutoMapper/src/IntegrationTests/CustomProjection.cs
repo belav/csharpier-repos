@@ -134,12 +134,7 @@ namespace AutoMapper.UnitTests.Projection
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext.Sources.Add(
-                    new Source
-                    {
-                        Child = new SourceChild { }
-                    }
-                );
+                testContext.Sources.Add(new Source { Child = new SourceChild { } });
                 base.Seed(testContext);
             }
         }

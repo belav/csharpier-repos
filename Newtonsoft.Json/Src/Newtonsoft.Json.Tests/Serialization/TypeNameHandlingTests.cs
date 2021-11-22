@@ -2060,10 +2060,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Data = new List<object>
                 {
                     new TestComponentSimple { MyProperty = 1 },
-                    new List<object>
-                    {
-                        new List<object> { new List<object>() }
-                    }
+                    new List<object> { new List<object> { new List<object>() } }
                 }
             };
 
@@ -2237,10 +2234,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Data = new TypeNameHandlingTestObject
                 {
-                    Prop1 = new List<object>
-                    {
-                        new TestComponentSimple { MyProperty = 1 }
-                    },
+                    Prop1 = new List<object> { new TestComponentSimple { MyProperty = 1 } },
                     Prop2 = new TestComponentSimple { MyProperty = 1 },
                     Prop3 = 3,
                     Prop4 = new JObject()
@@ -2415,10 +2409,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void TypeNameHandlingWithISerializableValues()
         {
-            MyParent p = new MyParent
-            {
-                Child = new MyChild { MyProperty = "string!" }
-            };
+            MyParent p = new MyParent { Child = new MyChild { MyProperty = "string!" } };
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -2450,10 +2441,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void TypeNameHandlingWithISerializableValuesAndArray()
         {
-            MyParent p = new MyParent
-            {
-                Child = new MyChildList { "string!" }
-            };
+            MyParent p = new MyParent { Child = new MyChildList { "string!" } };
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -2490,10 +2478,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             ParentParent pp = new ParentParent();
 
-            pp.ParentProp = new MyParent
-            {
-                Child = new MyChild { MyProperty = "string!" }
-            };
+            pp.ParentProp = new MyParent { Child = new MyChild { MyProperty = "string!" } };
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {

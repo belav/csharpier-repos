@@ -19,10 +19,7 @@ public class TestAuthorizationPolicyProvider : IAuthorizationPolicyProvider
     public Task<AuthorizationPolicy> GetPolicyAsync(string policyName) =>
         Task.FromResult(
             new AuthorizationPolicy(
-                new[]
-                {
-                    new TestPolicyRequirement { PolicyName = policyName }
-                },
+                new[] { new TestPolicyRequirement { PolicyName = policyName } },
                 new[] { $"TestScheme:{policyName}" }
             )
         );

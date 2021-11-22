@@ -164,34 +164,13 @@ namespace Microsoft.EntityFrameworkCore
             var left = new EntityOne
             {
                 Id = 7776,
-                TwoSkip = new List<EntityTwo>
-                {
-                    new() { Id = 7777 }
-                },
-                TwoSkipShared = new List<EntityTwo>
-                {
-                    new() { Id = 7778 }
-                },
-                SelfSkipPayloadLeft = new List<EntityOne>
-                {
-                    new() { Id = 7779 }
-                },
-                SelfSkipPayloadRight = new List<EntityOne>
-                {
-                    new() { Id = 7780 }
-                },
-                BranchSkip = new List<EntityBranch>
-                {
-                    new() { Id = 7781 }
-                },
-                ThreeSkipPayloadFull = new List<EntityThree>
-                {
-                    new() { Id = 7782 }
-                },
-                ThreeSkipPayloadFullShared = new List<EntityThree>
-                {
-                    new() { Id = 7783 }
-                }
+                TwoSkip = new List<EntityTwo> { new() { Id = 7777 } },
+                TwoSkipShared = new List<EntityTwo> { new() { Id = 7778 } },
+                SelfSkipPayloadLeft = new List<EntityOne> { new() { Id = 7779 } },
+                SelfSkipPayloadRight = new List<EntityOne> { new() { Id = 7780 } },
+                BranchSkip = new List<EntityBranch> { new() { Id = 7781 } },
+                ThreeSkipPayloadFull = new List<EntityThree> { new() { Id = 7782 } },
+                ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } }
             };
 
             context.Attach(left);

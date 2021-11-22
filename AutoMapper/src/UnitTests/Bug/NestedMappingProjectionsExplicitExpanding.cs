@@ -57,10 +57,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             var fuEntity = new FuEntity
             {
-                Man = new ManEntity
-                {
-                    Chu = new ChuEntity { Prop = _propValue }
-                }
+                Man = new ManEntity { Chu = new ChuEntity { Prop = _propValue } }
             };
             _destination = new[] { fuEntity }
                 .AsQueryable()

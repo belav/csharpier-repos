@@ -1696,10 +1696,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 Binder = binder
             };
 
-            Zoo zoo = new Zoo
-            {
-                Animals = new List<Animal> { new Dog("Dog!") }
-            };
+            Zoo zoo = new Zoo { Animals = new List<Animal> { new Dog("Dog!") } };
 
             JsonSerializer serializer = JsonSerializer.Create(settings);
 

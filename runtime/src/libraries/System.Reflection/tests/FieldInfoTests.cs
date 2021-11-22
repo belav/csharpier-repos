@@ -1006,10 +1006,7 @@ namespace System.Reflection.Tests
         [InlineData(null)]
         public static void SetValueDirect_GetValueDirectRoundDataTest(object value)
         {
-            FieldData testField = new FieldData
-            {
-                inner = new Inner() { field = -1 }
-            };
+            FieldData testField = new FieldData { inner = new Inner() { field = -1 } };
             FieldInfo innerFieldInfo = typeof(FieldData).GetField(nameof(FieldData.inner));
             FieldInfo[] fields = { innerFieldInfo };
             FieldInfo fieldFieldInfo = typeof(Inner).GetField(nameof(Inner.field));

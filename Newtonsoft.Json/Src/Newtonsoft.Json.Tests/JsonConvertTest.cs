@@ -332,10 +332,7 @@ namespace Newtonsoft.Json.Tests
                     new JsonSerializerSettings
                     {
                         Formatting = Formatting.Indented,
-                        Converters =
-                        {
-                            new IsoDateTimeConverter { DateTimeFormat = "yyyy" }
-                        }
+                        Converters = { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } }
                     };
 
                 string json = JsonConvert.SerializeObject(

@@ -178,10 +178,7 @@ public class HealthCheckPublisherHostedServiceTest
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        var publishers = new TestPublisher[]
-        {
-            new TestPublisher() { Wait = unblock.Task, }
-        };
+        var publishers = new TestPublisher[] { new TestPublisher() { Wait = unblock.Task, } };
 
         var service = CreateService(publishers);
 
@@ -226,10 +223,7 @@ public class HealthCheckPublisherHostedServiceTest
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        var publishers = new TestPublisher[]
-        {
-            new TestPublisher() { Wait = unblock.Task, },
-        };
+        var publishers = new TestPublisher[] { new TestPublisher() { Wait = unblock.Task, }, };
 
         var service = CreateService(publishers, sink: sink);
 
@@ -396,10 +390,7 @@ public class HealthCheckPublisherHostedServiceTest
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        var publishers = new TestPublisher[]
-        {
-            new TestPublisher() { Wait = unblock.Task, },
-        };
+        var publishers = new TestPublisher[] { new TestPublisher() { Wait = unblock.Task, }, };
 
         var service = CreateService(publishers, sink: sink);
 

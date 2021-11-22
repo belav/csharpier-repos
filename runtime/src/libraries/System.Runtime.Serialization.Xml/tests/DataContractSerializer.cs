@@ -1905,10 +1905,7 @@ public static partial class DataContractSerializerTests
             DataContractResolver = myresolver,
             KnownTypes = new Type[] { typeof(MyOtherType) }
         };
-        var input = new MyType()
-        {
-            Value = new MyOtherType() { Str = "Hello World" }
-        };
+        var input = new MyType() { Value = new MyOtherType() { Str = "Hello World" } };
         var output = DataContractSerializerHelper.SerializeAndDeserialize<MyType>(
             input,
             @"<MyType xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value i:type=""MyOtherType""><Str>Hello World</Str></Value></MyType>",
@@ -1940,10 +1937,7 @@ public static partial class DataContractSerializerTests
         };
         var dcs = new DataContractSerializer(typeof(MyType), settings);
 
-        var value = new MyType()
-        {
-            Value = new MyOtherType() { Str = "Hello World" }
-        };
+        var value = new MyType() { Value = new MyOtherType() { Str = "Hello World" } };
         using (var ms = new MemoryStream())
         {
             var myresolver = new MyResolver();
@@ -2917,10 +2911,7 @@ public static partial class DataContractSerializerTests
     {
         TypeWithKnownTypeAttributeAndListOfInterfaceMember value =
             new TypeWithKnownTypeAttributeAndListOfInterfaceMember();
-        value.Articles = new List<IArticle>()
-        {
-            new SummaryArticle() { Title = "Bar Summary" }
-        };
+        value.Articles = new List<IArticle>() { new SummaryArticle() { Title = "Bar Summary" } };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithKnownTypeAttributeAndListOfInterfaceMember>(
                 value,

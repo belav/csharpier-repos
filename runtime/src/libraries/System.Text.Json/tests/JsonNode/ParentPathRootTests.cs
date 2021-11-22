@@ -41,10 +41,7 @@ namespace System.Text.Json.Node.Tests
             Assert.Equal("$.Child[2]", node["Child"][2].GetPath());
             Assert.Same(node, node["Child"][2].Root);
 
-            node = new JsonArray
-            {
-                new JsonObject { ["Child"] = 42 }
-            };
+            node = new JsonArray { new JsonObject { ["Child"] = 42 } };
             Assert.Equal("$[0].Child", node[0]["Child"].GetPath());
             Assert.Same(node, node[0]["Child"].Root);
         }

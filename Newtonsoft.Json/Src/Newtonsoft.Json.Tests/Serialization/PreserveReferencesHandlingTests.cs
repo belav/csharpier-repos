@@ -324,12 +324,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             CircularList circularList = new CircularList();
             circularList.Add(null);
             circularList.Add(new CircularList { null });
-            circularList.Add(
-                new CircularList
-                {
-                    new CircularList { circularList }
-                }
-            );
+            circularList.Add(new CircularList { new CircularList { circularList } });
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
@@ -346,12 +341,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             CircularList circularList = new CircularList();
             circularList.Add(null);
             circularList.Add(new CircularList { null });
-            circularList.Add(
-                new CircularList
-                {
-                    new CircularList { circularList }
-                }
-            );
+            circularList.Add(new CircularList { new CircularList { circularList } });
 
             string json = JsonConvert.SerializeObject(
                 circularList,
@@ -379,12 +369,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             CircularList circularList = new CircularList();
             circularList.Add(null);
             circularList.Add(new CircularList { null });
-            circularList.Add(
-                new CircularList
-                {
-                    new CircularList { circularList }
-                }
-            );
+            circularList.Add(new CircularList { new CircularList { circularList } });
 
             string json = JsonConvert.SerializeObject(
                 circularList,

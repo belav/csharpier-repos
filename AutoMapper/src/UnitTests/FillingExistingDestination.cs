@@ -194,10 +194,7 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            _source = new Source
-            {
-                Child = new ChildSource { Value = 20 }
-            };
+            _source = new Source { Child = new ChildSource { Value = 20 } };
             _originalDestChild = new ChildDestination { Value = 10 };
             _originalDest = new Destination { Child = _originalDestChild };
             _dest = Mapper.Map(_source, _originalDest);

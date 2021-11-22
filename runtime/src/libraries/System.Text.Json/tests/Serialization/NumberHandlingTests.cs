@@ -1897,10 +1897,7 @@ namespace System.Text.Json.Serialization.Tests
                 () => JsonSerializer.Deserialize<MyCustomListWrapper>(json)
             );
 
-            var obj = new MyCustomListWrapper
-            {
-                List = new MyCustomList { 1 }
-            };
+            var obj = new MyCustomListWrapper { List = new MyCustomList { 1 } };
             Assert.Equal(@"{""List"":[1]}", JsonSerializer.Serialize(obj));
         }
 

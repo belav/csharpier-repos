@@ -8852,10 +8852,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var prm = new ComplexParameter
             {
-                Inner = new ComplexParameterInner
-                {
-                    Squad = new Squad { Id = 1 }
-                }
+                Inner = new ComplexParameterInner { Squad = new Squad { Id = 1 } }
             };
 
             return AssertQuery(

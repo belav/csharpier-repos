@@ -21,10 +21,7 @@ namespace AutoMapper.UnitTests.Bug
             );
 
             IQueryable<Person> collection = (
-                new List<Person>
-                {
-                    new Person { Name = "Person1" }
-                }
+                new List<Person> { new Person { Name = "Person1" } }
             ).AsQueryable();
 
             List<Person> result = collection.ProjectTo<Person>(config).ToList();

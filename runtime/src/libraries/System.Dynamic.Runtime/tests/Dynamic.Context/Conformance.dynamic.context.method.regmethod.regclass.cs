@@ -992,10 +992,7 @@ namespace System.Dynamic.Runtime.Tests
             dynamic mc = new MemberClass();
             IsEqual<Test>(
                 (byte?[])mc.Method_ReturnByteArrNullable(
-                    new MyStruct?[]
-                    {
-                        new MyStruct() { Number = 10 }
-                    }
+                    new MyStruct?[] { new MyStruct() { Number = 10 } }
                 )
             );
         }

@@ -56,10 +56,7 @@ public class ApiBehaviorApplicationModelProviderTest
             new[] { new ApiControllerAttribute() }
         )
         {
-            Selectors =
-            {
-                new SelectorModel { AttributeRouteModel = new AttributeRouteModel() }
-            },
+            Selectors = { new SelectorModel { AttributeRouteModel = new AttributeRouteModel() } },
         };
 
         var method = typeof(TestApiController).GetMethod(nameof(TestApiController.TestAction));

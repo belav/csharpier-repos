@@ -863,10 +863,7 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.EnsureCreatedResiliently();
 
                 context.Add(
-                    new EntityA()
-                    {
-                        EntityB = new EntityB() { EntitiesC = { new EntityC() }, }
-                    }
+                    new EntityA() { EntityB = new EntityB() { EntitiesC = { new EntityC() }, } }
                 );
 
                 context.SaveChanges();

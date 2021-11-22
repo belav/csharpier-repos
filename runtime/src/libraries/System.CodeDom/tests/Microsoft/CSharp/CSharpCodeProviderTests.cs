@@ -34,10 +34,7 @@ namespace System.CodeDom.Compiler.Tests
                     { "option2", "value2" }
                 }
             };
-            yield return new object[]
-            {
-                new Dictionary<string, string>() { { "option", null } }
-            };
+            yield return new object[] { new Dictionary<string, string>() { { "option", null } } };
         }
 
         [Theory]

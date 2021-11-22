@@ -1812,10 +1812,7 @@ namespace AutoMapper.UnitTests
         public void Should_inherit_IncludeMembers() =>
             Mapper
                 .Map<CreateCustomerDto>(
-                    new Customer
-                    {
-                        Address = new Address { Postcode = "Postcode" }
-                    }
+                    new Customer { Address = new Address { Postcode = "Postcode" } }
                 )
                 .Postcode.ShouldBe("Postcode");
     }
@@ -1865,10 +1862,7 @@ namespace AutoMapper.UnitTests
         public void Should_override_IncludeMembers() =>
             Mapper
                 .Map<CreateCustomerDto>(
-                    new Customer
-                    {
-                        NewAddress = new Address { Postcode = "Postcode" }
-                    }
+                    new Customer { NewAddress = new Address { Postcode = "Postcode" } }
                 )
                 .Postcode.ShouldBe("Postcode");
     }
@@ -2135,12 +2129,7 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_inherit_IncludeMembers() =>
             Mapper
-                .Map<SignedResponse>(
-                    new ExpiredItem
-                    {
-                        MetaData = new MetaData { Hash = "hash" }
-                    }
-                )
+                .Map<SignedResponse>(new ExpiredItem { MetaData = new MetaData { Hash = "hash" } })
                 .Hash.ShouldBe("hash");
     }
 }

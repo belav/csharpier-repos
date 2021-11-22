@@ -219,10 +219,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             const string ExpectedJson = "{\"Property\":42}";
 
             ClassWithCustomConverterProperty obj =
-                new()
-                {
-                    Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 }
-                };
+                new() { Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 } };
 
             // Types with properties in custom converters do not support fast path serialization.
             Assert.True(DefaultContext.ClassWithCustomConverterProperty.SerializeHandler is null);
@@ -256,10 +253,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             const string ExpectedJson = "{\"Property\":42}";
 
             StructWithCustomConverterProperty obj =
-                new()
-                {
-                    Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 }
-                };
+                new() { Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 } };
 
             // Types with properties in custom converters do not support fast path serialization.
             Assert.True(DefaultContext.StructWithCustomConverterProperty.SerializeHandler is null);
@@ -699,11 +693,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             myType = JsonSerializer.Deserialize(json, DefaultContext.MyType);
             Assert.Equal(json, JsonSerializer.Serialize(myType, DefaultContext.MyType));
 
-            MyType2 myType2 =
-                new()
-                {
-                    Type = new MyIntermediateType() { Type = myType }
-                };
+            MyType2 myType2 = new() { Type = new MyIntermediateType() { Type = myType } };
             json = JsonSerializer.Serialize(myType2, DefaultContext.MyType2);
             myType2 = JsonSerializer.Deserialize(json, DefaultContext.MyType2);
             Assert.Equal(json, JsonSerializer.Serialize(myType2, DefaultContext.MyType2));
