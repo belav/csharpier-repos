@@ -13,12 +13,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Implicit conversion in C#.
         /// </summary>
         ImplicitConversion,
-
         /// <summary>
         /// Explicit conversion in C#.
         /// </summary>
         ExplicitConversion,
-
         /// <summary>
         /// Array creation conversion in C#.
         /// </summary>

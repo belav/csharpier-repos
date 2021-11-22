@@ -27,7 +27,10 @@ namespace System.Net.Connections
         /// <param name="options">Options used to create the connection, if any.</param>
         /// <param name="cancellationToken">A token used to cancel the asynchronous operation.</param>
         /// <returns>A <see cref="ValueTask{TResult}"/> for the <see cref="Connection"/>.</returns>
-        public abstract ValueTask<Connection?> AcceptAsync(IConnectionProperties? options = null, CancellationToken cancellationToken = default);
+        public abstract ValueTask<Connection?> AcceptAsync(
+            IConnectionProperties? options = null,
+            CancellationToken cancellationToken = default
+        );
 
         public void Dispose()
         {
@@ -45,9 +48,7 @@ namespace System.Net.Connections
         /// Disposes the <see cref="ConnectionFactory"/>.
         /// </summary>
         /// <param name="disposing">If true, the <see cref="ConnectionFactory"/> is being disposed. If false, the <see cref="ConnectionFactory"/> is being finalized.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         /// <summary>
         /// Asynchronously disposes the <see cref="ConnectionFactory"/>.

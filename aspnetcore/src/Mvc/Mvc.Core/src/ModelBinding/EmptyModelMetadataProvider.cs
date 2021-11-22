@@ -19,10 +19,9 @@ public class EmptyModelMetadataProvider : DefaultModelMetadataProvider
     /// </summary>
     public EmptyModelMetadataProvider()
         : base(
-              new DefaultCompositeMetadataDetailsProvider(new List<IMetadataDetailsProvider>()),
-              new OptionsAccessor())
-    {
-    }
+            new DefaultCompositeMetadataDetailsProvider(new List<IMetadataDetailsProvider>()),
+            new OptionsAccessor()
+        ) { }
 
     private class OptionsAccessor : IOptions<MvcOptions>
     {

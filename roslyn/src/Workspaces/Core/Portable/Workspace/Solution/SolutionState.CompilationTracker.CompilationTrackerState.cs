@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis
                     TextDocumentStates<SourceGeneratedDocumentState> documents,
                     GeneratorDriver? driver,
                     bool documentsAreFinal,
-                    bool documentsAreFinalAndFrozen = false)
+                    bool documentsAreFinalAndFrozen = false
+                )
                 {
                     Documents = documents;
                     Driver = driver;
@@ -85,11 +86,20 @@ namespace Microsoft.CodeAnalysis
 
                 public CompilationTrackerGeneratorInfo WithDocumentsAreFinalAndFrozen()
                 {
-                    return DocumentsAreFinalAndFrozen ? this : new(Documents, Driver, documentsAreFinal: true, documentsAreFinalAndFrozen: true);
+                    return DocumentsAreFinalAndFrozen
+                      ? this
+                      : new(
+                            Documents,
+                            Driver,
+                            documentsAreFinal: true,
+                            documentsAreFinalAndFrozen: true
+                        );
                 }
 
-                public CompilationTrackerGeneratorInfo WithDriver(GeneratorDriver? driver)
-                    => Driver == driver ? this : new(Documents, driver, DocumentsAreFinal, DocumentsAreFinalAndFrozen);
+                public CompilationTrackerGeneratorInfo WithDriver(GeneratorDriver? driver) =>
+                    Driver == driver
+                        ? this
+                        : new(Documents, driver, DocumentsAreFinal, DocumentsAreFinalAndFrozen);
             }
 
             /// <summary>
@@ -106,7 +116,9 @@ namespace Microsoft.CodeAnalysis
                     new CompilationTrackerGeneratorInfo(
                         documents: TextDocumentStates<SourceGeneratedDocumentState>.Empty,
                         driver: null,
-                        documentsAreFinal: false));
+                        documentsAreFinal: false
+                    )
+                );
 
                 /// <summary>
                 /// The best compilation that is available that source generators have not ran on. May be an in-progress,
@@ -114,7 +126,9 @@ namespace Microsoft.CodeAnalysis
                 /// The value is an <see cref="Optional{Compilation}"/> to represent the
                 /// possibility of the compilation already having been garabage collected.
                 /// </summary>
-                public ValueSource<Optional<Compilation>>? CompilationWithoutGeneratedDocuments { get; }
+                public ValueSource<
+                    Optional<Compilation>
+                >? CompilationWithoutGeneratedDocuments { get; }
 
                 public CompilationTrackerGeneratorInfo GeneratorInfo { get; }
 
@@ -129,15 +143,17 @@ namespace Microsoft.CodeAnalysis
                 /// The value is an <see cref="Optional{Compilation}"/> to represent the
                 /// possibility of the compilation already having been garabage collected.
                 /// </summary>
-                public virtual ValueSource<Optional<Compilation>>? FinalCompilationWithGeneratedDocuments => null;
+                public virtual ValueSource<
+                    Optional<Compilation>
+                >? FinalCompilationWithGeneratedDocuments => null;
 
                 protected CompilationTrackerState(
                     ValueSource<Optional<Compilation>>? compilationWithoutGeneratedDocuments,
-                    CompilationTrackerGeneratorInfo generatorInfo)
+                    CompilationTrackerGeneratorInfo generatorInfo
+                )
                 {
                     CompilationWithoutGeneratedDocuments = compilationWithoutGeneratedDocuments;
                     GeneratorInfo = generatorInfo;
-
 #if DEBUG
 
                     // As a sanity check, we should never see the generated trees inside of the compilation that should not
@@ -148,7 +164,11 @@ namespace Microsoft.CodeAnalysis
                     {
                         foreach (var generatedDocument in generatorInfo.Documents.States.Values)
                         {
-                            Contract.ThrowIfTrue(compilation.SyntaxTrees.Contains(generatedDocument.GetSyntaxTree(CancellationToken.None)));
+                            Contract.ThrowIfTrue(
+                                compilation.SyntaxTrees.Contains(
+                                    generatedDocument.GetSyntaxTree(CancellationToken.None)
+                                )
+                            );
                         }
                     }
 #endif
@@ -159,7 +179,10 @@ namespace Microsoft.CodeAnalysis
                     Compilation compilation,
                     CompilationTrackerGeneratorInfo generatorInfo,
                     Compilation? compilationWithGeneratedDocuments,
-                    ImmutableArray<ValueTuple<ProjectState, CompilationAndGeneratorDriverTranslationAction>> intermediateProjects)
+                    ImmutableArray<
+                        ValueTuple<ProjectState, CompilationAndGeneratorDriverTranslationAction>
+                    > intermediateProjects
+                )
                 {
                     Contract.ThrowIfTrue(intermediateProjects.IsDefault);
 
@@ -167,17 +190,31 @@ namespace Microsoft.CodeAnalysis
                     // DeclarationState now. We'll pass false for generatedDocumentsAreFinal because this is being called
                     // if our referenced projects are changing, so we'll have to rerun to consume changes.
                     return intermediateProjects.Length == 0
-                        ? new AllSyntaxTreesParsedState(solutionServices, compilation, generatorInfo.WithDocumentsAreFinal(false))
-                        : new InProgressState(compilation, generatorInfo, compilationWithGeneratedDocuments, intermediateProjects);
+                      ? new AllSyntaxTreesParsedState(
+                            solutionServices,
+                            compilation,
+                            generatorInfo.WithDocumentsAreFinal(false)
+                        )
+                      : new InProgressState(
+                            compilation,
+                            generatorInfo,
+                            compilationWithGeneratedDocuments,
+                            intermediateProjects
+                        );
                 }
 
                 public static ValueSource<Optional<Compilation>> CreateValueSource(
                     Compilation compilation,
-                    SolutionServices services)
+                    SolutionServices services
+                )
                 {
-                    return services.SupportsCachingRecoverableObjects && !services.Workspace.Options.GetOption(WorkspaceConfigurationOptions.DisableCompilationTrackerWeakCompilationReferences)
-                        ? new WeakValueSource<Compilation>(compilation)
-                        : new ConstantValueSource<Optional<Compilation>>(compilation);
+                    return
+                        services.SupportsCachingRecoverableObjects
+                        && !services.Workspace.Options.GetOption(
+                            WorkspaceConfigurationOptions.DisableCompilationTrackerWeakCompilationReferences
+                        )
+                      ? new WeakValueSource<Compilation>(compilation)
+                      : new ConstantValueSource<Optional<Compilation>>(compilation);
                 }
             }
 
@@ -188,9 +225,7 @@ namespace Microsoft.CodeAnalysis
             private sealed class NoCompilationState : CompilationTrackerState
             {
                 public NoCompilationState(CompilationTrackerGeneratorInfo generatorInfo)
-                    : base(compilationWithoutGeneratedDocuments: null, generatorInfo)
-                {
-                }
+                    : base(compilationWithoutGeneratedDocuments: null, generatorInfo) { }
             }
 
             /// <summary>
@@ -217,9 +252,14 @@ namespace Microsoft.CodeAnalysis
                     Compilation inProgressCompilation,
                     CompilationTrackerGeneratorInfo generatorInfo,
                     Compilation? compilationWithGeneratedDocuments,
-                    ImmutableArray<(ProjectState state, CompilationAndGeneratorDriverTranslationAction action)> intermediateProjects)
-                    : base(compilationWithoutGeneratedDocuments: new ConstantValueSource<Optional<Compilation>>(inProgressCompilation),
-                           generatorInfo.WithDocumentsAreFinal(false)) // since we have a set of transformations to make, we'll always have to run generators again
+                    ImmutableArray<(ProjectState state, CompilationAndGeneratorDriverTranslationAction action)> intermediateProjects
+                )
+                    : base(
+                        compilationWithoutGeneratedDocuments: new ConstantValueSource<
+                            Optional<Compilation>
+                        >(inProgressCompilation),
+                        generatorInfo.WithDocumentsAreFinal(false)
+                    ) // since we have a set of transformations to make, we'll always have to run generators again
                 {
                     Contract.ThrowIfTrue(intermediateProjects.IsDefault);
                     Contract.ThrowIfFalse(intermediateProjects.Length > 0);
@@ -238,11 +278,9 @@ namespace Microsoft.CodeAnalysis
                 public AllSyntaxTreesParsedState(
                     SolutionServices solutionServices,
                     Compilation declarationCompilation,
-                    CompilationTrackerGeneratorInfo generatorInfo)
-                    : base(CreateValueSource(declarationCompilation, solutionServices),
-                           generatorInfo)
-                {
-                }
+                    CompilationTrackerGeneratorInfo generatorInfo
+                ) : base(CreateValueSource(declarationCompilation, solutionServices), generatorInfo)
+                { }
             }
 
             /// <summary>
@@ -274,7 +312,9 @@ namespace Microsoft.CodeAnalysis
                 /// consumes <see cref="Compilation"/> which will avoid generators being ran a second time on a compilation that
                 /// already contains the output of other generators. If source generators are not active, this is equal to <see cref="Compilation"/>.
                 /// </summary>
-                public override ValueSource<Optional<Compilation>> FinalCompilationWithGeneratedDocuments { get; }
+                public override ValueSource<
+                    Optional<Compilation>
+                > FinalCompilationWithGeneratedDocuments { get; }
 
                 private FinalState(
                     ValueSource<Optional<Compilation>> finalCompilationSource,
@@ -282,9 +322,12 @@ namespace Microsoft.CodeAnalysis
                     Compilation compilationWithoutGeneratedFiles,
                     bool hasSuccessfullyLoaded,
                     CompilationTrackerGeneratorInfo generatorInfo,
-                    UnrootedSymbolSet unrootedSymbolSet)
-                    : base(compilationWithoutGeneratedFilesSource,
-                          generatorInfo.WithDocumentsAreFinal(true)) // when we're in a final state, we've ran generators and should not run again
+                    UnrootedSymbolSet unrootedSymbolSet
+                )
+                    : base(
+                        compilationWithoutGeneratedFilesSource,
+                        generatorInfo.WithDocumentsAreFinal(true)
+                    ) // when we're in a final state, we've ran generators and should not run again
                 {
                     HasSuccessfullyLoaded = hasSuccessfullyLoaded;
                     FinalCompilationWithGeneratedDocuments = finalCompilationSource;
@@ -294,8 +337,15 @@ namespace Microsoft.CodeAnalysis
                     {
                         // In this case, the finalCompilationSource and compilationWithoutGeneratedFilesSource should point to the
                         // same Compilation, which should be compilationWithoutGeneratedFiles itself
-                        Debug.Assert(finalCompilationSource.TryGetValue(out var finalCompilationVal));
-                        Debug.Assert(object.ReferenceEquals(finalCompilationVal.Value, compilationWithoutGeneratedFiles));
+                        Debug.Assert(
+                            finalCompilationSource.TryGetValue(out var finalCompilationVal)
+                        );
+                        Debug.Assert(
+                            object.ReferenceEquals(
+                                finalCompilationVal.Value,
+                                compilationWithoutGeneratedFiles
+                            )
+                        );
                     }
                 }
 
@@ -310,13 +360,18 @@ namespace Microsoft.CodeAnalysis
                     CompilationTrackerGeneratorInfo generatorInfo,
                     Compilation finalCompilation,
                     ProjectId projectId,
-                    Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId)
+                    Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId
+                )
                 {
                     // Keep track of information about symbols from this Compilation.  This will help support other APIs
                     // the solution exposes that allows the user to map back from symbols to project information.
 
                     var unrootedSymbolSet = UnrootedSymbolSet.Create(finalCompilation);
-                    RecordAssemblySymbols(projectId, finalCompilation, metadataReferenceToProjectId);
+                    RecordAssemblySymbols(
+                        projectId,
+                        finalCompilation,
+                        metadataReferenceToProjectId
+                    );
 
                     return new FinalState(
                         finalCompilationSource,
@@ -324,10 +379,15 @@ namespace Microsoft.CodeAnalysis
                         compilationWithoutGeneratedFiles,
                         hasSuccessfullyLoaded,
                         generatorInfo,
-                        unrootedSymbolSet);
+                        unrootedSymbolSet
+                    );
                 }
 
-                private static void RecordAssemblySymbols(ProjectId projectId, Compilation compilation, Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId)
+                private static void RecordAssemblySymbols(
+                    ProjectId projectId,
+                    Compilation compilation,
+                    Dictionary<MetadataReference, ProjectId>? metadataReferenceToProjectId
+                )
                 {
                     RecordSourceOfAssemblySymbol(compilation.Assembly, projectId);
 
@@ -341,7 +401,10 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                private static void RecordSourceOfAssemblySymbol(ISymbol? assemblyOrModuleSymbol, ProjectId projectId)
+                private static void RecordSourceOfAssemblySymbol(
+                    ISymbol? assemblyOrModuleSymbol,
+                    ProjectId projectId
+                )
                 {
                     // TODO: how would we ever get a null here?
                     if (assemblyOrModuleSymbol == null)
@@ -351,11 +414,19 @@ namespace Microsoft.CodeAnalysis
 
                     Contract.ThrowIfNull(projectId);
                     // remember which project is associated with this assembly
-                    if (!s_assemblyOrModuleSymbolToProjectMap.TryGetValue(assemblyOrModuleSymbol, out var tmp))
+                    if (
+                        !s_assemblyOrModuleSymbolToProjectMap.TryGetValue(
+                            assemblyOrModuleSymbol,
+                            out var tmp
+                        )
+                    )
                     {
                         // use GetValue to avoid race condition exceptions from Add.
                         // the first one to set the value wins.
-                        s_assemblyOrModuleSymbolToProjectMap.GetValue(assemblyOrModuleSymbol, _ => projectId);
+                        s_assemblyOrModuleSymbolToProjectMap.GetValue(
+                            assemblyOrModuleSymbol,
+                            _ => projectId
+                        );
                     }
                     else
                     {

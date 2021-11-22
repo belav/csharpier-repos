@@ -15,49 +15,106 @@ namespace System.Xml.Schema
     /// </summary>
     public sealed class XmlSchemaInference
     {
-        internal static XmlQualifiedName ST_boolean = new XmlQualifiedName("boolean", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_byte = new XmlQualifiedName("byte", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_unsignedByte = new XmlQualifiedName("unsignedByte", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_short = new XmlQualifiedName("short", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_unsignedShort = new XmlQualifiedName("unsignedShort", XmlSchema.Namespace);
+        internal static XmlQualifiedName ST_boolean = new XmlQualifiedName(
+            "boolean",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_byte = new XmlQualifiedName(
+            "byte",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_unsignedByte = new XmlQualifiedName(
+            "unsignedByte",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_short = new XmlQualifiedName(
+            "short",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_unsignedShort = new XmlQualifiedName(
+            "unsignedShort",
+            XmlSchema.Namespace
+        );
         internal static XmlQualifiedName ST_int = new XmlQualifiedName("int", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_unsignedInt = new XmlQualifiedName("unsignedInt", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_long = new XmlQualifiedName("long", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_unsignedLong = new XmlQualifiedName("unsignedLong", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_integer = new XmlQualifiedName("integer", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_decimal = new XmlQualifiedName("decimal", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_float = new XmlQualifiedName("float", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_double = new XmlQualifiedName("double", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_duration = new XmlQualifiedName("duration", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_dateTime = new XmlQualifiedName("dateTime", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_time = new XmlQualifiedName("time", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_date = new XmlQualifiedName("date", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_gYearMonth = new XmlQualifiedName("gYearMonth", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_string = new XmlQualifiedName("string", XmlSchema.Namespace);
-        internal static XmlQualifiedName ST_anySimpleType = new XmlQualifiedName("anySimpleType", XmlSchema.Namespace);
+        internal static XmlQualifiedName ST_unsignedInt = new XmlQualifiedName(
+            "unsignedInt",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_long = new XmlQualifiedName(
+            "long",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_unsignedLong = new XmlQualifiedName(
+            "unsignedLong",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_integer = new XmlQualifiedName(
+            "integer",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_decimal = new XmlQualifiedName(
+            "decimal",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_float = new XmlQualifiedName(
+            "float",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_double = new XmlQualifiedName(
+            "double",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_duration = new XmlQualifiedName(
+            "duration",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_dateTime = new XmlQualifiedName(
+            "dateTime",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_time = new XmlQualifiedName(
+            "time",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_date = new XmlQualifiedName(
+            "date",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_gYearMonth = new XmlQualifiedName(
+            "gYearMonth",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_string = new XmlQualifiedName(
+            "string",
+            XmlSchema.Namespace
+        );
+        internal static XmlQualifiedName ST_anySimpleType = new XmlQualifiedName(
+            "anySimpleType",
+            XmlSchema.Namespace
+        );
 
         internal static XmlQualifiedName[] SimpleTypes =
         {
-                ST_boolean,
-                ST_byte,
-                ST_unsignedByte,
-                ST_short,
-                ST_unsignedShort,
-                ST_int,
-                ST_unsignedInt,
-                ST_long,
-                ST_unsignedLong,
-                ST_integer,
-                ST_decimal,
-                ST_float,
-                ST_double,
-                ST_duration,
-                ST_dateTime,
-                ST_time,
-                ST_date,
-                ST_gYearMonth,
-                ST_string
-            };
+            ST_boolean,
+            ST_byte,
+            ST_unsignedByte,
+            ST_short,
+            ST_unsignedShort,
+            ST_int,
+            ST_unsignedInt,
+            ST_long,
+            ST_unsignedLong,
+            ST_integer,
+            ST_decimal,
+            ST_float,
+            ST_double,
+            ST_duration,
+            ST_dateTime,
+            ST_time,
+            ST_date,
+            ST_gYearMonth,
+            ST_string
+        };
 
         internal const short HC_ST_boolean = 0;
         internal const short HC_ST_byte = 1;
@@ -79,7 +136,6 @@ namespace System.Xml.Schema
         internal const short HC_ST_gYearMonth = 17;
         internal const short HC_ST_string = 18;
         internal const short HC_ST_Count = HC_ST_string + 1;
-
 
         internal const int TF_boolean = 1 << HC_ST_boolean;
         internal const int TF_byte = 1 << HC_ST_byte;
@@ -133,26 +189,14 @@ namespace System.Xml.Schema
 
         public InferenceOption Occurrence
         {
-            get
-            {
-                return _occurrence;
-            }
-            set
-            {
-                _occurrence = value;
-            }
+            get { return _occurrence; }
+            set { _occurrence = value; }
         }
 
         public InferenceOption TypeInference
         {
-            get
-            {
-                return _typeInference;
-            }
-            set
-            {
-                _typeInference = value;
-            }
+            get { return _typeInference; }
+            set { _typeInference = value; }
         }
 
         public XmlSchemaInference()
@@ -190,8 +234,8 @@ namespace System.Xml.Schema
             //schemas = new Hashtable();
             //while(xtr.Read())
 
-            while (_xtr.NodeType != XmlNodeType.Element && _xtr.Read()) ;
-
+            while (_xtr.NodeType != XmlNodeType.Element && _xtr.Read())
+                ;
 
             if (_xtr.NodeType == XmlNodeType.Element)
             {
@@ -204,7 +248,10 @@ namespace System.Xml.Schema
                 XmlSchemaElement? xse = null;
                 foreach (XmlSchemaElement? elem in schemas.GlobalElements.Values)
                 {
-                    if (elem!.Name == _xtr.LocalName && elem.QualifiedName.Namespace == _xtr.NamespaceURI)
+                    if (
+                        elem!.Name == _xtr.LocalName
+                        && elem.QualifiedName.Namespace == _xtr.NamespaceURI
+                    )
                     {
                         _rootSchema = elem.Parent as XmlSchema;
                         xse = elem;
@@ -215,7 +262,14 @@ namespace System.Xml.Schema
                 if (_rootSchema == null)
                 {
                     //rootSchema = CreateXmlSchema(xtr.NamespaceURI);
-                    xse = AddElement(_xtr.LocalName, _xtr.Prefix, _xtr.NamespaceURI, null, null, -1);
+                    xse = AddElement(
+                        _xtr.LocalName,
+                        _xtr.Prefix,
+                        _xtr.NamespaceURI,
+                        null,
+                        null,
+                        -1
+                    );
                 }
                 else
                 {
@@ -269,7 +323,16 @@ namespace System.Xml.Schema
             return schemas;
         }
 
-        private XmlSchemaAttribute AddAttribute(string localName, string prefix, string childURI, string attrValue, bool bCreatingNewType, XmlSchema parentSchema, XmlSchemaObjectCollection addLocation, XmlSchemaObjectTable compiledAttributes)
+        private XmlSchemaAttribute AddAttribute(
+            string localName,
+            string prefix,
+            string childURI,
+            string attrValue,
+            bool bCreatingNewType,
+            XmlSchema parentSchema,
+            XmlSchemaObjectCollection addLocation,
+            XmlSchemaObjectTable compiledAttributes
+        )
         {
             if (childURI == XmlSchema.Namespace)
             {
@@ -278,16 +341,16 @@ namespace System.Xml.Schema
 
             XmlSchemaAttribute? xsa = null;
             int AttributeType = -1;
-            XmlSchemaAttribute? returnedAttribute = null;    //this value will change to attributeReference if childURI!= parentURI
+            XmlSchemaAttribute? returnedAttribute = null; //this value will change to attributeReference if childURI!= parentURI
             XmlSchema? xs = null;
             bool add = true;
 
             Debug.Assert(compiledAttributes != null); //AttributeUses is never null
-                                                      // First we need to look into the already compiled attributes
-                                                      //   (they come from the schemaset which we got on input)
-                                                      // If there are none or we don't find it there, then we must search the list of attributes
-                                                      //   where we are going to add a new one (if it doesn't exist).
-                                                      //   This is necessary to avoid adding duplicate attribute declarations.
+            // First we need to look into the already compiled attributes
+            //   (they come from the schemaset which we got on input)
+            // If there are none or we don't find it there, then we must search the list of attributes
+            //   where we are going to add a new one (if it doesn't exist).
+            //   This is necessary to avoid adding duplicate attribute declarations.
             ICollection searchCollectionPrimary;
             ICollection? searchCollectionSecondary;
             if (compiledAttributes.Count > 0)
@@ -307,7 +370,11 @@ namespace System.Xml.Schema
                 attributeReference = FindAttributeRef(searchCollectionPrimary, localName, childURI);
                 if (attributeReference == null && searchCollectionSecondary != null)
                 {
-                    attributeReference = FindAttributeRef(searchCollectionSecondary, localName, childURI);
+                    attributeReference = FindAttributeRef(
+                        searchCollectionSecondary,
+                        localName,
+                        childURI
+                    );
                 }
                 if (attributeReference == null)
                 {
@@ -348,7 +415,10 @@ namespace System.Xml.Schema
                         xs.TargetNamespace = childURI;
                     //schemas.Add(childURI, xs);
                     _schemaSet.Add(xs);
-                    if (prefix.Length != 0 && !string.Equals(prefix, "xml", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        prefix.Length != 0
+                        && !string.Equals(prefix, "xml", StringComparison.OrdinalIgnoreCase)
+                    )
                         _namespaceManager.AddNamespace(prefix, childURI);
                 }
                 else
@@ -364,10 +434,18 @@ namespace System.Xml.Schema
                 {
                     XmlSchemaAttribute? attributeReference = null;
                     //see if the reference exists
-                    attributeReference = FindAttributeRef(searchCollectionPrimary, localName, childURI);
+                    attributeReference = FindAttributeRef(
+                        searchCollectionPrimary,
+                        localName,
+                        childURI
+                    );
                     if (attributeReference == null & searchCollectionSecondary != null)
                     {
-                        attributeReference = FindAttributeRef(searchCollectionSecondary!, localName, childURI);
+                        attributeReference = FindAttributeRef(
+                            searchCollectionSecondary!,
+                            localName,
+                            childURI
+                        );
                     }
                     if (attributeReference == null)
                     {
@@ -481,7 +559,6 @@ namespace System.Xml.Schema
                 }
             }
 
-
             return returnedAttribute;
         }
 
@@ -496,7 +573,14 @@ namespace System.Xml.Schema
             return xs;
         }
 
-        private XmlSchemaElement AddElement(string localName, string prefix, string? childURI, XmlSchema? parentSchema, XmlSchemaObjectCollection? addLocation, int positionWithinCollection)
+        private XmlSchemaElement AddElement(
+            string localName,
+            string prefix,
+            string? childURI,
+            XmlSchema? parentSchema,
+            XmlSchemaObjectCollection? addLocation,
+            int positionWithinCollection
+        )
         {
             if (childURI == XmlSchema.Namespace)
             {
@@ -547,7 +631,7 @@ namespace System.Xml.Schema
                     _namespaceManager.AddNamespace(prefix, childURI!);
                 xse = new XmlSchemaElement();
                 xse.Name = localName;
-                xs.Items.Add(xse);  //add global element declaration only when creating new schema
+                xs.Items.Add(xse); //add global element declaration only when creating new schema
             }
             if (parentSchema == null)
             {
@@ -586,7 +670,9 @@ namespace System.Xml.Schema
             {
                 if (childURI == parentSchema.TargetNamespace)
                 {
-                    if (this.Occurrence == InferenceOption.Relaxed /*&& parentSchema.Items != addLocation*/)
+                    if (
+                        this.Occurrence == InferenceOption.Relaxed /*&& parentSchema.Items != addLocation*/
+                    )
                     {
                         xse.MinOccurs = 0;
                     }
@@ -623,7 +709,6 @@ namespace System.Xml.Schema
                 }
             }
 
-
             InferElement(xse, bCreatingNewType, xs!);
 
             return returnedElement;
@@ -636,7 +721,11 @@ namespace System.Xml.Schema
         /// <param name="xse">XmlSchemaElement corresponding to the element just read by the xtr XmlTextReader</param>
         /// <param name="bCreatingNewType">true if the type is newly created, false if the type already existed and matches the current element name</param>
         /// <param name="parentSchema">namespaceURI of the parent element. Used to distinguish if ref= should be used when parent is in different ns than child.</param>
-        internal void InferElement(XmlSchemaElement xse, bool bCreatingNewType, XmlSchema parentSchema)
+        internal void InferElement(
+            XmlSchemaElement xse,
+            bool bCreatingNewType,
+            XmlSchema parentSchema
+        )
         {
             bool bEmptyElement = _xtr!.IsEmptyElement;
             int lastUsedSeqItem = -1;
@@ -653,7 +742,7 @@ namespace System.Xml.Schema
             else
             {
                 if (!bCreatingNewType && ct != null)
-                {   //if type already exists and can potentially have attributes
+                { //if type already exists and can potentially have attributes
                     MakeExistingAttributesOptional(ct, null);
                 }
             }
@@ -662,14 +751,13 @@ namespace System.Xml.Schema
                 ct = xse.SchemaType as XmlSchemaComplexType;
             }
             //xse's type is set either to complex type if attributes exist or null
-            if (bEmptyElement)  //<element attr="3232" />
+            if (bEmptyElement) //<element attr="3232" />
             {
                 if (!bCreatingNewType)
                 {
                     if (null != ct)
                     {
                         if (null != ct.Particle)
-
                         {
                             ct.Particle.MinOccurs = 0;
                         }
@@ -705,7 +793,13 @@ namespace System.Xml.Schema
                 {
                     throw new XmlSchemaInferenceException(SR.SchInf_entity, 0, 0);
                 }
-            } while ((!_xtr.EOF) && (_xtr.NodeType != XmlNodeType.EndElement) && (_xtr.NodeType != XmlNodeType.CDATA) && (_xtr.NodeType != XmlNodeType.Element) && (_xtr.NodeType != XmlNodeType.Text));
+            } while (
+                (!_xtr.EOF)
+                && (_xtr.NodeType != XmlNodeType.EndElement)
+                && (_xtr.NodeType != XmlNodeType.CDATA)
+                && (_xtr.NodeType != XmlNodeType.Element)
+                && (_xtr.NodeType != XmlNodeType.Text)
+            );
 
             if (_xtr.NodeType == XmlNodeType.EndElement)
             {
@@ -724,7 +818,8 @@ namespace System.Xml.Schema
                             //attributes exist, but both Particle and ContentModel == null - this must be complex type with simpleContent extension
                             XmlSchemaSimpleContent sc = new XmlSchemaSimpleContent();
                             ct.ContentModel = sc;
-                            XmlSchemaSimpleContentExtension sce = new XmlSchemaSimpleContentExtension();
+                            XmlSchemaSimpleContentExtension sce =
+                                new XmlSchemaSimpleContentExtension();
                             sc.Content = sce;
 
                             MoveAttributes(ct, sce, bCreatingNewType);
@@ -774,7 +869,7 @@ namespace System.Xml.Schema
             bool bCreatingNewSequence = false;
             while (!_xtr.EOF && (_xtr.NodeType != XmlNodeType.EndElement))
             {
-                bool bNextNodeAlreadyRead = false;  //In some cases we have to look ahead one node. If true means that we did look ahead.
+                bool bNextNodeAlreadyRead = false; //In some cases we have to look ahead one node. If true means that we did look ahead.
                 iChildNumber++;
                 if ((_xtr.NodeType == XmlNodeType.Text) || (_xtr.NodeType == XmlNodeType.CDATA)) //node can be simple type, complex with simple content or complex with mixed content
                 {
@@ -786,14 +881,28 @@ namespace System.Xml.Schema
                             if (iChildNumber == 1)
                             {
                                 //if this is the only child and other elements do not follow, we must set particle minOccurs="0"
-                                do { _xtr.Read(); } while ((!_xtr.EOF) && ((_xtr.NodeType == XmlNodeType.CDATA) || (_xtr.NodeType == XmlNodeType.Text) || (_xtr.NodeType == XmlNodeType.Comment) || (_xtr.NodeType == XmlNodeType.ProcessingInstruction) || (_xtr.NodeType == XmlNodeType.Whitespace) || (_xtr.NodeType == XmlNodeType.SignificantWhitespace) || (_xtr.NodeType == XmlNodeType.XmlDeclaration)));
+                                do
+                                {
+                                    _xtr.Read();
+                                } while (
+                                    (!_xtr.EOF)
+                                    && (
+                                        (_xtr.NodeType == XmlNodeType.CDATA)
+                                        || (_xtr.NodeType == XmlNodeType.Text)
+                                        || (_xtr.NodeType == XmlNodeType.Comment)
+                                        || (_xtr.NodeType == XmlNodeType.ProcessingInstruction)
+                                        || (_xtr.NodeType == XmlNodeType.Whitespace)
+                                        || (_xtr.NodeType == XmlNodeType.SignificantWhitespace)
+                                        || (_xtr.NodeType == XmlNodeType.XmlDeclaration)
+                                    )
+                                );
                                 bNextNodeAlreadyRead = true;
                                 if (_xtr.NodeType == XmlNodeType.EndElement)
                                     ct.Particle.MinOccurs = decimal.Zero;
                             }
                         }
                         else if (null != ct.ContentModel)
-                        {   //complexType with simpleContent
+                        { //complexType with simpleContent
                             XmlSchemaSimpleContentExtension sce = CheckSimpleContentExtension(ct);
                             if ((_xtr.NodeType == XmlNodeType.Text) && (iChildNumber == 1))
                             {
@@ -821,7 +930,8 @@ namespace System.Xml.Schema
                             //attributes exist, but both Particle and ContentModel == null - this must be complex type with simpleContent extension
                             XmlSchemaSimpleContent sc = new XmlSchemaSimpleContent();
                             ct.ContentModel = sc;
-                            XmlSchemaSimpleContentExtension sce = new XmlSchemaSimpleContentExtension();
+                            XmlSchemaSimpleContentExtension sce =
+                                new XmlSchemaSimpleContentExtension();
                             sc.Content = sce;
 
                             MoveAttributes(ct, sce, bCreatingNewType);
@@ -845,7 +955,7 @@ namespace System.Xml.Schema
                         }
                     }
                     else
-                    {   //node is currently empty or with SimpleType
+                    { //node is currently empty or with SimpleType
                         //node will become simple type
                         if (iChildNumber > 1)
                         {
@@ -859,7 +969,10 @@ namespace System.Xml.Schema
                             if (bCreatingNewType)
                                 if (_xtr.NodeType == XmlNodeType.Text)
                                 {
-                                    xse.SchemaTypeName = RefineSimpleType(_xtr.Value, ref TypeFlags);
+                                    xse.SchemaTypeName = RefineSimpleType(
+                                        _xtr.Value,
+                                        ref TypeFlags
+                                    );
                                     xse.LineNumber = TypeFlags; // we use LineNumber to store flags of valid types
                                 }
                                 else
@@ -882,7 +995,7 @@ namespace System.Xml.Schema
                                     }
                                     xse.Parent = null;
                                 }
-                                xse.SchemaTypeName = RefineSimpleType(_xtr.Value, ref TypeFlags);    //simple type
+                                xse.SchemaTypeName = RefineSimpleType(_xtr.Value, ref TypeFlags); //simple type
                                 xse.LineNumber = TypeFlags; // we use LineNumber to store flags of valid types
                             }
                             else
@@ -895,7 +1008,10 @@ namespace System.Xml.Schema
                 }
                 else if (_xtr.NodeType == XmlNodeType.Element)
                 {
-                    XmlQualifiedName qname = new XmlQualifiedName(_xtr.LocalName, _xtr.NamespaceURI);
+                    XmlQualifiedName qname = new XmlQualifiedName(
+                        _xtr.LocalName,
+                        _xtr.NamespaceURI
+                    );
                     bool Maxoccursflag = false;
                     if (table.Contains(qname))
                     {
@@ -916,7 +1032,7 @@ namespace System.Xml.Schema
                         }
                     }
                     if (ct.ContentModel != null)
-                    {   //type was previously identified as simple content extension - we need to convert it to sequence
+                    { //type was previously identified as simple content extension - we need to convert it to sequence
                         XmlSchemaSimpleContentExtension sce = CheckSimpleContentExtension(ct);
                         MoveAttributes(sce, ct);
                         ct.ContentModel = null;
@@ -925,16 +1041,30 @@ namespace System.Xml.Schema
                             throw new XmlSchemaInferenceException(SR.SchInf_particle, 0, 0);
                         ct.Particle = new XmlSchemaSequence();
                         bCreatingNewSequence = true;
-                        AddElement(_xtr.LocalName, _xtr.Prefix, _xtr.NamespaceURI, parentSchema, ((XmlSchemaSequence)ct.Particle).Items, -1);
+                        AddElement(
+                            _xtr.LocalName,
+                            _xtr.Prefix,
+                            _xtr.NamespaceURI,
+                            parentSchema,
+                            ((XmlSchemaSequence)ct.Particle).Items,
+                            -1
+                        );
                         lastUsedSeqItem = 0;
                         if (!bCreatingNewType)
-                            ct.Particle.MinOccurs = 0;    //previously this was simple type so subelements did not exist
+                            ct.Particle.MinOccurs = 0; //previously this was simple type so subelements did not exist
                     }
                     else if (ct.Particle == null)
                     {
                         ct.Particle = new XmlSchemaSequence();
                         bCreatingNewSequence = true;
-                        AddElement(_xtr.LocalName, _xtr.Prefix, _xtr.NamespaceURI, parentSchema, ((XmlSchemaSequence)ct.Particle).Items, -1);
+                        AddElement(
+                            _xtr.LocalName,
+                            _xtr.Prefix,
+                            _xtr.NamespaceURI,
+                            parentSchema,
+                            ((XmlSchemaSequence)ct.Particle).Items,
+                            -1
+                        );
                         if (!bCreatingNewType)
                         {
                             ((XmlSchemaSequence)ct.Particle).MinOccurs = decimal.Zero;
@@ -946,7 +1076,15 @@ namespace System.Xml.Schema
                     else
                     {
                         bool bParticleChanged = false;
-                        FindMatchingElement(bCreatingNewType || bCreatingNewSequence, _xtr, ct, ref lastUsedSeqItem, ref bParticleChanged, parentSchema, Maxoccursflag);
+                        FindMatchingElement(
+                            bCreatingNewType || bCreatingNewSequence,
+                            _xtr,
+                            ct,
+                            ref lastUsedSeqItem,
+                            ref bParticleChanged,
+                            parentSchema,
+                            Maxoccursflag
+                        );
                     }
                 }
                 else if (_xtr.NodeType == XmlNodeType.Text)
@@ -969,16 +1107,27 @@ namespace System.Xml.Schema
                     {
                         bNextNodeAlreadyRead = false;
                     }
-                } while ((!_xtr.EOF) && (_xtr.NodeType != XmlNodeType.EndElement) && (_xtr.NodeType != XmlNodeType.CDATA) && (_xtr.NodeType != XmlNodeType.Element) && (_xtr.NodeType != XmlNodeType.Text));
+                } while (
+                    (!_xtr.EOF)
+                    && (_xtr.NodeType != XmlNodeType.EndElement)
+                    && (_xtr.NodeType != XmlNodeType.CDATA)
+                    && (_xtr.NodeType != XmlNodeType.Element)
+                    && (_xtr.NodeType != XmlNodeType.Text)
+                );
             }
             if (lastUsedSeqItem != -1)
             {
                 //Verify if all elements in a sequence exist, if not set MinOccurs=0
                 while (++lastUsedSeqItem < ((XmlSchemaSequence)ct!.Particle!).Items.Count)
                 {
-                    if (((XmlSchemaSequence)ct.Particle).Items[lastUsedSeqItem].GetType() != typeof(XmlSchemaElement))
+                    if (
+                        ((XmlSchemaSequence)ct.Particle).Items[lastUsedSeqItem].GetType()
+                        != typeof(XmlSchemaElement)
+                    )
                         throw new XmlSchemaInferenceException(SR.SchInf_seq, 0, 0);
-                    XmlSchemaElement subElement = (XmlSchemaElement)((XmlSchemaSequence)ct.Particle).Items[lastUsedSeqItem];
+                    XmlSchemaElement subElement = (XmlSchemaElement)(
+                        (XmlSchemaSequence)ct.Particle
+                    ).Items[lastUsedSeqItem];
                     subElement.MinOccurs = 0;
                 }
             }
@@ -1015,14 +1164,19 @@ namespace System.Xml.Schema
                 }
                 else if (elem.SchemaTypeName != XmlQualifiedName.Empty)
                 {
-                    effectiveSchemaType = _schemaSet!.GlobalTypes[elem.SchemaTypeName] as XmlSchemaType;
+                    effectiveSchemaType =
+                        _schemaSet!.GlobalTypes[elem.SchemaTypeName] as XmlSchemaType;
                     if (effectiveSchemaType == null)
                     {
-                        effectiveSchemaType = XmlSchemaType.GetBuiltInSimpleType(elem.SchemaTypeName);
+                        effectiveSchemaType = XmlSchemaType.GetBuiltInSimpleType(
+                            elem.SchemaTypeName
+                        );
                     }
                     if (effectiveSchemaType == null)
                     {
-                        effectiveSchemaType = XmlSchemaType.GetBuiltInComplexType(elem.SchemaTypeName);
+                        effectiveSchemaType = XmlSchemaType.GetBuiltInComplexType(
+                            elem.SchemaTypeName
+                        );
                     }
                 }
             }
@@ -1040,7 +1194,15 @@ namespace System.Xml.Schema
         /// <param name="bParticleChanged">This indicates to the caller if Sequence was changed to Choice</param>
         /// <param name="parentSchema">The parent schema.</param>
         /// <param name="setMaxoccurs">Whether set max occurs.</param>
-        internal XmlSchemaElement FindMatchingElement(bool bCreatingNewType, XmlReader xtr, XmlSchemaComplexType ct, ref int lastUsedSeqItem, ref bool bParticleChanged, XmlSchema? parentSchema, bool setMaxoccurs)
+        internal XmlSchemaElement FindMatchingElement(
+            bool bCreatingNewType,
+            XmlReader xtr,
+            XmlSchemaComplexType ct,
+            ref int lastUsedSeqItem,
+            ref bool bParticleChanged,
+            XmlSchema? parentSchema,
+            bool setMaxoccurs
+        )
         {
             if (xtr.NamespaceURI == XmlSchema.Namespace)
             {
@@ -1061,12 +1223,19 @@ namespace System.Xml.Schema
                 if (xss.Items.Count < 1 && !bCreatingNewType)
                 {
                     lastUsedSeqItem = 0;
-                    XmlSchemaElement e = AddElement(xtr.LocalName, xtr.Prefix, xtr.NamespaceURI, parentSchema, xss.Items, -1);
+                    XmlSchemaElement e = AddElement(
+                        xtr.LocalName,
+                        xtr.Prefix,
+                        xtr.NamespaceURI,
+                        parentSchema,
+                        xss.Items,
+                        -1
+                    );
                     e.MinOccurs = 0;
                     return e;
                 }
                 if (xss.Items[0].GetType() == typeof(XmlSchemaChoice))
-                {   // <sequence minOccurs="0" maxOccurs="unbounded"><choice><element>...</choice></sequence>
+                { // <sequence minOccurs="0" maxOccurs="unbounded"><choice><element>...</choice></sequence>
                     XmlSchemaChoice xsch = (XmlSchemaChoice)xss.Items[0];
                     for (int i = 0; i < xsch.Items.Count; ++i)
                     {
@@ -1075,26 +1244,43 @@ namespace System.Xml.Schema
                         {
                             throw new XmlSchemaInferenceException(SR.SchInf_UnknownParticle, 0, 0);
                         }
-                        if ((el.Name == xtr.LocalName) && (parentSchema!.TargetNamespace == childURI))
-                        {   // element is in the same namespace
+                        if (
+                            (el.Name == xtr.LocalName)
+                            && (parentSchema!.TargetNamespace == childURI)
+                        )
+                        { // element is in the same namespace
                             InferElement(el, false, parentSchema);
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return el;
                         }
-                        else if ((el.RefName.Name == xtr.LocalName) && (el.RefName.Namespace == xtr.NamespaceURI))
+                        else if (
+                            (el.RefName.Name == xtr.LocalName)
+                            && (el.RefName.Namespace == xtr.NamespaceURI)
+                        )
                         {
-                            XmlSchemaElement referencedElement = FindGlobalElement(childURI, xtr.LocalName, out parentSchema)!;
+                            XmlSchemaElement referencedElement = FindGlobalElement(
+                                childURI,
+                                xtr.LocalName,
+                                out parentSchema
+                            )!;
                             InferElement(referencedElement, false, parentSchema!);
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return referencedElement;
                         }
                     }
-                    XmlSchemaElement subElement = AddElement(xtr.LocalName, xtr.Prefix, xtr.NamespaceURI, parentSchema, xsch.Items, -1);
+                    XmlSchemaElement subElement = AddElement(
+                        xtr.LocalName,
+                        xtr.Prefix,
+                        xtr.NamespaceURI,
+                        parentSchema,
+                        xsch.Items,
+                        -1
+                    );
                     return subElement;
                 }
                 else
-                {   //this should be sequence of elements
-                    int iSeqItem = 0;   //iterator through schema sequence items
+                { //this should be sequence of elements
+                    int iSeqItem = 0; //iterator through schema sequence items
                     if (lastUsedSeqItem >= 0)
                         iSeqItem = lastUsedSeqItem;
                     XmlSchemaParticle? particle = xss.Items[iSeqItem] as XmlSchemaParticle;
@@ -1105,19 +1291,25 @@ namespace System.Xml.Schema
                     }
                     if (el.Name == xtr.LocalName && parentSchema!.TargetNamespace == childURI)
                     {
-                        if (!bItemNotUsedYet)   //read: if item was already used one or more times
-                            el.MaxOccurs = decimal.MaxValue;    //set it to unbounded
+                        if (!bItemNotUsedYet) //read: if item was already used one or more times
+                            el.MaxOccurs = decimal.MaxValue; //set it to unbounded
                         lastUsedSeqItem = iSeqItem;
                         InferElement(el, false, parentSchema);
                         SetMinMaxOccurs(el, false);
                         return el;
                     }
-                    else if (el.RefName.Name == xtr.LocalName && el.RefName.Namespace == xtr.NamespaceURI)
+                    else if (
+                        el.RefName.Name == xtr.LocalName && el.RefName.Namespace == xtr.NamespaceURI
+                    )
                     {
-                        if (!bItemNotUsedYet)   //read: if item was already used one or more times
-                            el.MaxOccurs = decimal.MaxValue;    //set it to unbounded
+                        if (!bItemNotUsedYet) //read: if item was already used one or more times
+                            el.MaxOccurs = decimal.MaxValue; //set it to unbounded
                         lastUsedSeqItem = iSeqItem;
-                        XmlSchemaElement referencedElement = FindGlobalElement(childURI, xtr.LocalName, out parentSchema)!;
+                        XmlSchemaElement referencedElement = FindGlobalElement(
+                            childURI,
+                            xtr.LocalName,
+                            out parentSchema
+                        )!;
                         InferElement(referencedElement, false, parentSchema!);
                         SetMinMaxOccurs(el, false);
                         return el;
@@ -1144,19 +1336,25 @@ namespace System.Xml.Schema
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return el;
                         }
-                        else if (el.RefName.Name == xtr.LocalName && el.RefName.Namespace == xtr.NamespaceURI)
+                        else if (
+                            el.RefName.Name == xtr.LocalName
+                            && el.RefName.Namespace == xtr.NamespaceURI
+                        )
                         {
                             lastUsedSeqItem = iSeqItem;
                             for (int i = 0; i < minOccursCandidates.Count; ++i)
                             {
                                 ((XmlSchemaElement)minOccursCandidates[i]).MinOccurs = decimal.Zero;
                             }
-                            XmlSchemaElement referencedElement = FindGlobalElement(childURI, xtr.LocalName, out parentSchema)!;
+                            XmlSchemaElement referencedElement = FindGlobalElement(
+                                childURI,
+                                xtr.LocalName,
+                                out parentSchema
+                            )!;
                             InferElement(referencedElement!, false, parentSchema!);
                             SetMinMaxOccurs(el, setMaxoccurs);
                             return referencedElement;
                         }
-
 
                         minOccursCandidates.Add(el);
                         iSeqItem++;
@@ -1177,7 +1375,11 @@ namespace System.Xml.Schema
                         subElement = FindElementRef(xss.Items, xtr.LocalName, xtr.NamespaceURI);
                         if (subElement != null)
                         {
-                            actualElement = FindGlobalElement(childURI, xtr.LocalName, out parentSchema);
+                            actualElement = FindGlobalElement(
+                                childURI,
+                                xtr.LocalName,
+                                out parentSchema
+                            );
                         }
                     }
                     if (null != subElement)
@@ -1188,7 +1390,9 @@ namespace System.Xml.Schema
                         InferElement(actualElement!, false, parentSchema!);
                         for (int i = 0; i < xss.Items.Count; ++i)
                         {
-                            xsc.Items.Add(CreateNewElementforChoice((XmlSchemaElement)xss.Items[i]));
+                            xsc.Items.Add(
+                                CreateNewElementforChoice((XmlSchemaElement)xss.Items[i])
+                            );
                         }
                         xss.Items.Clear();
                         xss.Items.Add(xsc);
@@ -1196,7 +1400,14 @@ namespace System.Xml.Schema
                     }
                     else
                     {
-                        subElement = AddElement(xtr.LocalName, xtr.Prefix, xtr.NamespaceURI, parentSchema, xss.Items, ++lastUsedSeqItem);
+                        subElement = AddElement(
+                            xtr.LocalName,
+                            xtr.Prefix,
+                            xtr.NamespaceURI,
+                            parentSchema,
+                            xss.Items,
+                            ++lastUsedSeqItem
+                        );
                         if (!bCreatingNewType)
                             subElement.MinOccurs = decimal.Zero;
                         return subElement;
@@ -1208,7 +1419,12 @@ namespace System.Xml.Schema
                 throw new XmlSchemaInferenceException(SR.SchInf_noseq, 0, 0);
             }
         }
-        internal void ProcessAttributes(ref XmlSchemaElement xse, XmlSchemaType? effectiveSchemaType, bool bCreatingNewType, XmlSchema parentSchema)
+        internal void ProcessAttributes(
+            ref XmlSchemaElement xse,
+            XmlSchemaType? effectiveSchemaType,
+            bool bCreatingNewType,
+            XmlSchema parentSchema
+        )
         {
             XmlSchemaObjectCollection attributesSeen = new XmlSchemaObjectCollection();
             XmlSchemaComplexType? ct = effectiveSchemaType as XmlSchemaComplexType;
@@ -1233,7 +1449,11 @@ namespace System.Xml.Schema
                     {
                         xse.IsNillable = true;
                     }
-                    else if (localName != "type" && localName != "schemaLocation" && localName != "noNamespaceSchemaLocation")
+                    else if (
+                        localName != "type"
+                        && localName != "schemaLocation"
+                        && localName != "noNamespaceSchemaLocation"
+                    )
                     {
                         throw new XmlSchemaInferenceException(SR.Sch_NotXsiAttribute, localName);
                     }
@@ -1250,7 +1470,11 @@ namespace System.Xml.Schema
                     //The earlier assumption of checking just schemaTypeName !Empty is not correct for schemas that are not generated by us, schemaTypeName can point to any complex type as well
                     //Check that it is a simple type by checking typeCode
                     //Switch to complex type simple content extension
-                    if (effectiveSchemaType != null && effectiveSchemaType.Datatype != null && !xse.SchemaTypeName.IsEmpty)
+                    if (
+                        effectiveSchemaType != null
+                        && effectiveSchemaType.Datatype != null
+                        && !xse.SchemaTypeName.IsEmpty
+                    )
                     {
                         //type was previously simple type, now it will become complex with simple type extension
                         Debug.Assert(ct != null);
@@ -1269,11 +1493,29 @@ namespace System.Xml.Schema
                     {
                         XmlSchemaSimpleContentExtension sce = CheckSimpleContentExtension(ct);
                         Debug.Assert(sce != null);
-                        xsa = AddAttribute(_xtr.LocalName, _xtr.Prefix, _xtr.NamespaceURI, _xtr.Value, bCreatingNewType, parentSchema, sce.Attributes, ct.AttributeUses);
+                        xsa = AddAttribute(
+                            _xtr.LocalName,
+                            _xtr.Prefix,
+                            _xtr.NamespaceURI,
+                            _xtr.Value,
+                            bCreatingNewType,
+                            parentSchema,
+                            sce.Attributes,
+                            ct.AttributeUses
+                        );
                     }
                     else //add attributes directly to complex type
                     {
-                        xsa = AddAttribute(_xtr.LocalName, _xtr.Prefix, _xtr.NamespaceURI, _xtr.Value, bCreatingNewType, parentSchema, ct.Attributes, ct.AttributeUses);
+                        xsa = AddAttribute(
+                            _xtr.LocalName,
+                            _xtr.Prefix,
+                            _xtr.NamespaceURI,
+                            _xtr.Value,
+                            bCreatingNewType,
+                            parentSchema,
+                            ct.Attributes,
+                            ct.AttributeUses
+                        );
                     }
                     if (xsa != null)
                     {
@@ -1291,17 +1533,24 @@ namespace System.Xml.Schema
             }
         }
 
-        private void MoveAttributes(XmlSchemaSimpleContentExtension scExtension, XmlSchemaComplexType ct)
+        private void MoveAttributes(
+            XmlSchemaSimpleContentExtension scExtension,
+            XmlSchemaComplexType ct
+        )
         {
             //copy all attributes from the simple content to the complex type
             //This is ok since when we move from complex type to simple content extension we copy from AttributeUses property
-            for (int i = 0; i < scExtension.Attributes.Count; ++i)  //since simpleContent is being cleared
+            for (int i = 0; i < scExtension.Attributes.Count; ++i) //since simpleContent is being cleared
             {
                 ct.Attributes.Add(scExtension.Attributes[i]);
             }
         }
 
-        private void MoveAttributes(XmlSchemaComplexType ct, XmlSchemaSimpleContentExtension simpleContentExtension, bool bCreatingNewType)
+        private void MoveAttributes(
+            XmlSchemaComplexType ct,
+            XmlSchemaSimpleContentExtension simpleContentExtension,
+            bool bCreatingNewType
+        )
         {
             //copy all attributes from the complex type to the simple content
 
@@ -1339,7 +1588,11 @@ namespace System.Xml.Schema
             return null;
         }
 
-        internal XmlSchemaElement? FindGlobalElement(string? namespaceURI, string localName, out XmlSchema? parentSchema)
+        internal XmlSchemaElement? FindGlobalElement(
+            string? namespaceURI,
+            string localName,
+            out XmlSchema? parentSchema
+        )
         {
             ICollection col = _schemaSet!.Schemas(namespaceURI);
             XmlSchemaElement? xse = null;
@@ -1356,8 +1609,10 @@ namespace System.Xml.Schema
             return null;
         }
 
-
-        internal XmlSchemaElement? FindElement(XmlSchemaObjectCollection elements, string elementName)
+        internal XmlSchemaElement? FindElement(
+            XmlSchemaObjectCollection elements,
+            string elementName
+        )
         {
             for (int i = 0; i < elements.Count; ++i)
             {
@@ -1374,14 +1629,21 @@ namespace System.Xml.Schema
             return null;
         }
 
-        internal XmlSchemaAttribute? FindAttributeRef(ICollection attributes, string attributeName, string nsURI)
+        internal XmlSchemaAttribute? FindAttributeRef(
+            ICollection attributes,
+            string attributeName,
+            string nsURI
+        )
         {
             foreach (XmlSchemaObject? xsa in attributes)
             {
                 XmlSchemaAttribute? schemaAttribute = xsa as XmlSchemaAttribute;
                 if (schemaAttribute != null)
                 {
-                    if (schemaAttribute.RefName.Name == attributeName && schemaAttribute.RefName.Namespace == nsURI)
+                    if (
+                        schemaAttribute.RefName.Name == attributeName
+                        && schemaAttribute.RefName.Namespace == nsURI
+                    )
                     {
                         return schemaAttribute;
                     }
@@ -1391,7 +1653,11 @@ namespace System.Xml.Schema
             return null;
         }
 
-        internal XmlSchemaElement? FindElementRef(XmlSchemaObjectCollection elements, string elementName, string nsURI)
+        internal XmlSchemaElement? FindElementRef(
+            XmlSchemaObjectCollection elements,
+            string elementName,
+            string nsURI
+        )
         {
             for (int i = 0; i < elements.Count; ++i)
             {
@@ -1408,7 +1674,10 @@ namespace System.Xml.Schema
             return null;
         }
 
-        internal void MakeExistingAttributesOptional(XmlSchemaComplexType ct, XmlSchemaObjectCollection? attributesInInstance)
+        internal void MakeExistingAttributesOptional(
+            XmlSchemaComplexType ct,
+            XmlSchemaObjectCollection? attributesInInstance
+        )
         {
             if (ct == null)
             {
@@ -1425,7 +1694,10 @@ namespace System.Xml.Schema
             }
         }
 
-        private void SwitchUseToOptional(XmlSchemaObjectCollection attributes, XmlSchemaObjectCollection? attributesInInstance)
+        private void SwitchUseToOptional(
+            XmlSchemaObjectCollection attributes,
+            XmlSchemaObjectCollection? attributesInInstance
+        )
         {
             for (int i = 0; i < attributes.Count; ++i)
             {
@@ -1443,7 +1715,14 @@ namespace System.Xml.Schema
                         }
                         else
                         {
-                            if (null == FindAttributeRef(attributesInInstance, attr.RefName.Name, attr.RefName.Namespace))
+                            if (
+                                null
+                                == FindAttributeRef(
+                                    attributesInInstance,
+                                    attr.RefName.Name,
+                                    attr.RefName.Namespace
+                                )
+                            )
                             {
                                 attr.Use = XmlSchemaUse.Optional;
                             }
@@ -1479,10 +1758,8 @@ namespace System.Xml.Schema
                         else
                             return ST_byte;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_byte);
                 }
                 if ((iTypeFlags & TF_unsignedByte) != 0)
@@ -1493,10 +1770,8 @@ namespace System.Xml.Schema
                         //byte.Parse(s);
                         return ST_unsignedByte;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_unsignedByte);
                 }
                 if ((iTypeFlags & TF_short) != 0)
@@ -1506,14 +1781,12 @@ namespace System.Xml.Schema
                         XmlConvert.ToInt16(s);
                         //short.Parse(s);
                         if ((iTypeFlags & TF_unsignedShort) != 0)
-                            return ST_unsignedShort;    //number is positive and fits short -> it also fits unsignedShort
+                            return ST_unsignedShort; //number is positive and fits short -> it also fits unsignedShort
                         else
                             return ST_short;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_short);
                 }
                 if ((iTypeFlags & TF_unsignedShort) != 0)
@@ -1524,10 +1797,8 @@ namespace System.Xml.Schema
                         //ushort.Parse(s);
                         return ST_unsignedShort;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_unsignedShort);
                 }
                 if ((iTypeFlags & TF_int) != 0)
@@ -1537,14 +1808,12 @@ namespace System.Xml.Schema
                         XmlConvert.ToInt32(s);
                         //int.Parse(s);
                         if ((iTypeFlags & TF_unsignedInt) != 0)
-                            return ST_unsignedInt;  //number is positive and fits int -> it also fits unsignedInt
+                            return ST_unsignedInt; //number is positive and fits int -> it also fits unsignedInt
                         else
                             return ST_int;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_int);
                 }
                 if ((iTypeFlags & TF_unsignedInt) != 0)
@@ -1555,10 +1824,8 @@ namespace System.Xml.Schema
                         //uint.Parse(s);
                         return ST_unsignedInt;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_unsignedInt);
                 }
                 if ((iTypeFlags & TF_long) != 0)
@@ -1572,10 +1839,8 @@ namespace System.Xml.Schema
                         else
                             return ST_long;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_long);
                 }
                 if ((iTypeFlags & TF_unsignedLong) != 0)
@@ -1586,10 +1851,8 @@ namespace System.Xml.Schema
                         //ulong.Parse(s);
                         return ST_unsignedLong;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_unsignedLong);
                 }
                 if ((iTypeFlags & TF_double) != 0)
@@ -1613,26 +1876,28 @@ namespace System.Xml.Schema
                                     // Compare the float and double values. We can't do simple value comparison
                                     //   as conversion from float to double introduces imprecissions which cause problems.
                                     // Instead we will convert both back to string and compare the strings.
-                                    if (string.Equals(XmlConvert.ToString(flValue), XmlConvert.ToString(dbValue), StringComparison.OrdinalIgnoreCase))
+                                    if (
+                                        string.Equals(
+                                            XmlConvert.ToString(flValue),
+                                            XmlConvert.ToString(dbValue),
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                    )
                                     {
                                         // If we can convert the original string to the exact same value
                                         //   and it still fits into float then we treat it as float
                                         return ST_float;
                                     }
                                 }
-                                catch (FormatException)
-                                { }
-                                catch (OverflowException)
-                                { }
+                                catch (FormatException) { }
+                                catch (OverflowException) { }
                             }
                             iTypeFlags &= (~TF_float);
                             return ST_double;
                         }
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags &= (~TF_double);
                 }
                 if ((iTypeFlags & TF_float) != 0)
@@ -1662,10 +1927,8 @@ namespace System.Xml.Schema
                         XmlConvert.ToDateTime(s, XmlDateTimeSerializationMode.RoundtripKind);
                         return ST_gYearMonth;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags = TF_string;
                     return ST_string;
                 }
@@ -1676,10 +1939,8 @@ namespace System.Xml.Schema
                         XmlConvert.ToTimeSpan(s);
                         return ST_duration;
                     }
-                    catch (FormatException)
-                    { }
-                    catch (OverflowException)
-                    { }
+                    catch (FormatException) { }
+                    catch (OverflowException) { }
                     iTypeFlags = TF_string;
                     return ST_string;
                 }
@@ -1762,7 +2023,8 @@ namespace System.Xml.Schema
             bool bTime = false;
             bool bMissingDay = false;
 
-            if (s.Length == 0) return TF_string;
+            if (s.Length == 0)
+                return TF_string;
             int i = 0;
             switch (s[i])
             {
@@ -1774,24 +2036,25 @@ namespace System.Xml.Schema
                         return TF_boolean | TF_string;
                     else
                         return TF_string;
-                case 'N':       //try to match "NaN"
+                case 'N': //try to match "NaN"
                     if (s == "NaN")
                         return TF_float | TF_double | TF_string;
                     else
                         return TF_string;
                 //else
-                case 'I':       //try to match "INF"
-                INF:
+                case 'I': //try to match "INF"
+                    INF:
                     if (s.AsSpan(i).SequenceEqual("INF"))
                         return TF_float | TF_double | TF_string;
-                    else return TF_string;
-                case '.':       //try to match ".9999"  decimal/float/double
-                FRACTION:
+                    else
+                        return TF_string;
+                case '.': //try to match ".9999"  decimal/float/double
+                    FRACTION:
                     bNeedsRangeCheck = true;
                     i++;
                     if (i == s.Length)
                     {
-                        if ((i == 1) || (i == 2 && (bPositive || bNegative)))   //"." "-." "+."
+                        if ((i == 1) || (i == 2 && (bPositive || bNegative))) //"." "-." "+."
                             return TF_string;
                         else
                             return TF_decimal | TF_float | TF_double | TF_string;
@@ -1807,8 +2070,10 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                DEC_PART:
-                    i++; if (i == s.Length) return TF_decimal | TF_float | TF_double | TF_string; //"9999.9" was matched
+                    DEC_PART:
+                    i++;
+                    if (i == s.Length)
+                        return TF_decimal | TF_float | TF_double | TF_string; //"9999.9" was matched
                     switch (s[i])
                     {
                         case 'e':
@@ -1820,8 +2085,10 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                EXPONENT:
-                    i++; if (i == s.Length) return TF_string;
+                    EXPONENT:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     switch (s[i])
                     {
                         case '+':
@@ -1833,51 +2100,63 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                E1:
-                    i++; if (i == s.Length) return TF_string; //".9999e+" was matched
+                    E1:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //".9999e+" was matched
                     if (s[i] >= '0' && s[i] <= '9')
                         goto EXP_PART;
                     else
-                        return TF_string;   //".999e+X was matched
+                        return TF_string; //".999e+X was matched
                     EXP_PART:
-                    i++; if (i == s.Length) return TF_float | TF_double | TF_string;  //".9999e+99" was matched
+                    i++;
+                    if (i == s.Length)
+                        return TF_float | TF_double | TF_string; //".9999e+99" was matched
                     if (s[i] >= '0' && s[i] <= '9') //".9999e+9
                         goto EXP_PART;
                     else
-                        return TF_string;   //".9999e+999X" was matched
+                        return TF_string; //".9999e+999X" was matched
                 case '-':
                     bNegative = true;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     switch (s[i])
                     {
-                        case 'I':   //try to match "-INF"
+                        case 'I': //try to match "-INF"
                             goto INF;
-                        case '.':   //try to match "-.9999"
+                        case '.': //try to match "-.9999"
                             goto FRACTION;
                         case 'P':
                             goto DURATION;
                         default:
                             if (s[i] >= '0' && s[i] <= '9') //-9
                                 goto NUMBER;
-                            else return TF_string;
+                            else
+                                return TF_string;
                     }
                 case '+':
                     bPositive = true;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     switch (s[i])
                     {
-                        case '.':   //try to match "+.9999"
+                        case '.': //try to match "+.9999"
                             goto FRACTION;
                         case 'P':
                             goto DURATION;
                         default:
                             if (s[i] >= '0' && s[i] <= '9') //"+9
                                 goto NUMBER;
-                            else return TF_string;
+                            else
+                                return TF_string;
                     }
-                case 'P':       //try to match duration
-                DURATION:
-                    i++; if (i == s.Length) return TF_string;
+                case 'P': //try to match duration
+                    DURATION:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     switch (s[i])
                     {
                         case 'T':
@@ -1885,10 +2164,13 @@ namespace System.Xml.Schema
                         default:
                             if (s[i] >= '0' && s[i] <= '9') //"P9"
                                 goto D1;
-                            else return TF_string;
+                            else
+                                return TF_string;
                     }
-                D1:
-                    i++; if (i == s.Length) return TF_string; //"P999" was matched
+                    D1:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"P999" was matched
                     switch (s[i])
                     {
                         case 'Y':
@@ -1903,7 +2185,7 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D2:
+                    D2:
                     i++;
                     if (i == s.Length)
                     {
@@ -1920,8 +2202,10 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D3:
-                    i++; if (i == s.Length) return TF_string; //"P999Y9" was matched
+                    D3:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"P999Y9" was matched
                     switch (s[i])
                     {
                         case 'M':
@@ -1934,7 +2218,7 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D4:
+                    D4:
                     i++;
                     if (i == s.Length)
                     {
@@ -1951,8 +2235,10 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D5:
-                    i++; if (i == s.Length) return TF_string; //"P999Y999M9" was matched
+                    D5:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"P999Y999M9" was matched
                     switch (s[i])
                     {
                         case 'D':
@@ -1963,7 +2249,7 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D6:
+                    D6:
                     i++;
                     if (i == s.Length)
                     {
@@ -1977,14 +2263,18 @@ namespace System.Xml.Schema
                         default:
                             return TF_string;
                     }
-                D7:
-                    i++; if (i == s.Length) return TF_string; //"P999Y999M9999DT" was matched
+                    D7:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"P999Y999M9999DT" was matched
                     if (s[i] >= '0' && s[i] <= '9')
                         goto D8;
                     else
                         return TF_string;
                     D8:
-                    i++; if (i == s.Length) return TF_string; //"___T9" was matched
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"___T9" was matched
                     switch (s[i])
                     {
                         case 'H':
@@ -2001,7 +2291,7 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D9:
+                    D9:
                     i++;
                     if (i == s.Length)
                     {
@@ -2013,7 +2303,9 @@ namespace System.Xml.Schema
                     else
                         return TF_string;
                     D10:
-                    i++; if (i == s.Length) return TF_string; //"___T999H9" was matched
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"___T999H9" was matched
                     switch (s[i])
                     {
                         case 'M':
@@ -2028,7 +2320,7 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D11:
+                    D11:
                     i++;
                     if (i == s.Length)
                     {
@@ -2040,7 +2332,9 @@ namespace System.Xml.Schema
                     else
                         return TF_string;
                     D12:
-                    i++; if (i == s.Length) return TF_string; //"___T999H999M9" was matched
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"___T999H999M9" was matched
                     switch (s[i])
                     {
                         case '.':
@@ -2053,7 +2347,7 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D13:
+                    D13:
                     i++;
                     if (i == s.Length)
                     {
@@ -2065,7 +2359,9 @@ namespace System.Xml.Schema
                     else
                         return TF_string;
                     D14:
-                    i++; if (i == s.Length) return TF_string; //"___T999H999M999.9" was matched
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"___T999H999M999.9" was matched
                     switch (s[i])
                     {
                         case 'S':
@@ -2076,14 +2372,15 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                D15:
+                    D15:
                     i++;
                     if (i == s.Length)
                     {
                         bNeedsRangeCheck = true;
                         return TF_duration | TF_string; //"___T999H999M999.999S" was matched
                     }
-                    else return TF_string;
+                    else
+                        return TF_string;
                 case '0':
                 case '1':
                 case '2':
@@ -2094,21 +2391,52 @@ namespace System.Xml.Schema
                 case '7':
                 case '8':
                 case '9':
-                NUMBER:
+                    NUMBER:
                     i++;
                     if (i == s.Length)
                     {
                         bNeedsRangeCheck = true;
                         if (bNegative || bPositive)
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;  //"-9"
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_string; //"-9"
                         else
                         {
                             if (s == "0" || s == "1")
-                                return TF_boolean | TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                    TF_unsignedByte | TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                                return TF_boolean
+                                    | TF_byte
+                                    | TF_short
+                                    | TF_int
+                                    | TF_long
+                                    | TF_integer
+                                    | TF_decimal
+                                    | TF_float
+                                    | TF_double
+                                    | TF_unsignedByte
+                                    | TF_unsignedShort
+                                    | TF_unsignedInt
+                                    | TF_unsignedLong
+                                    | TF_string;
                             else
-                                return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                    TF_unsignedByte | TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                                return TF_byte
+                                    | TF_short
+                                    | TF_int
+                                    | TF_long
+                                    | TF_integer
+                                    | TF_decimal
+                                    | TF_float
+                                    | TF_double
+                                    | TF_unsignedByte
+                                    | TF_unsignedShort
+                                    | TF_unsignedInt
+                                    | TF_unsignedLong
+                                    | TF_string;
                         }
                     }
                     switch (s[i])
@@ -2125,16 +2453,35 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                N2:
+                    N2:
                     i++;
                     if (i == s.Length)
                     {
                         bNeedsRangeCheck = true;
                         if (bNegative || bPositive)
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;  //"-9"
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_string; //"-9"
                         else
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                TF_unsignedByte | TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_unsignedByte
+                                | TF_unsignedShort
+                                | TF_unsignedInt
+                                | TF_unsignedLong
+                                | TF_string;
                     }
                     switch (s[i])
                     {
@@ -2154,16 +2501,35 @@ namespace System.Xml.Schema
                                 return TF_string;
                     }
 
-                N3:
+                    N3:
                     i++;
                     if (i == s.Length)
                     {
                         bNeedsRangeCheck = true; //three digits may not fit byte and unsignedByte
                         if (bNegative || bPositive)
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;  //"-9"
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_string; //"-9"
                         else
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                TF_unsignedByte | TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_unsignedByte
+                                | TF_unsignedShort
+                                | TF_unsignedInt
+                                | TF_unsignedLong
+                                | TF_string;
                     }
                     switch (s[i])
                     {
@@ -2179,16 +2545,35 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                N4:
+                    N4:
                     i++;
                     if (i == s.Length)
                     {
                         bNeedsRangeCheck = true;
                         if (bNegative || bPositive)
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;  //"-9"
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_string; //"-9"
                         else
-                            return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                TF_unsignedByte | TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                            return TF_byte
+                                | TF_short
+                                | TF_int
+                                | TF_long
+                                | TF_integer
+                                | TF_decimal
+                                | TF_float
+                                | TF_double
+                                | TF_unsignedByte
+                                | TF_unsignedShort
+                                | TF_unsignedInt
+                                | TF_unsignedLong
+                                | TF_string;
                     }
 
                     switch (s[i])
@@ -2208,18 +2593,22 @@ namespace System.Xml.Schema
                             else
                                 return TF_string;
                     }
-                DATE:
-                    i++; if (i == s.Length) return TF_string; //"9999-"
+                    DATE:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"9999-"
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string; //"9999-9"
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"9999-9"
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
                     i++;
                     if (i == s.Length)
                     {
                         bNeedsRangeCheck = true;
-                        return TF_gYearMonth | TF_string;   //"9999-99"
+                        return TF_gYearMonth | TF_string; //"9999-99"
                     }
                     switch (s[i])
                     {
@@ -2235,14 +2624,20 @@ namespace System.Xml.Schema
                         default:
                             return TF_string;
                     }
-                DAY:
-                    i++; if (i == s.Length) return TF_string; //"9999-99-"
+                    DAY:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"9999-99-"
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string; //"9999-99-9"
+                    i++;
+                    if (i == s.Length)
+                        return TF_string; //"9999-99-9"
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return DateTime(s, bDate, bTime); //"9999-99-99"
+                    i++;
+                    if (i == s.Length)
+                        return DateTime(s, bDate, bTime); //"9999-99-99"
                     switch (s[i])
                     {
                         case 'Z':
@@ -2260,7 +2655,7 @@ namespace System.Xml.Schema
                         default:
                             return TF_string;
                     }
-                ZULU:
+                    ZULU:
                     i++;
                     if (i == s.Length)
                     {
@@ -2277,20 +2672,30 @@ namespace System.Xml.Schema
                     else
                         return TF_string;
                     ZONE_SHIFT:
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] != ':')
                         return TF_string;
                     ZONE_SHIFT_MINUTE:
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
                     i++;
@@ -2306,34 +2711,53 @@ namespace System.Xml.Schema
                             return DateTime(s, bDate, bTime);
                         }
                     }
-                    else return TF_string;
+                    else
+                        return TF_string;
                     TIME:
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] != ':')
                         return TF_string;
                     MINUTE:
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] != ':')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return TF_string;
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
-                    i++; if (i == s.Length) return DateTime(s, bDate, bTime);
+                    i++;
+                    if (i == s.Length)
+                        return DateTime(s, bDate, bTime);
                     switch (s[i])
                     {
                         case 'Z':
@@ -2347,12 +2771,16 @@ namespace System.Xml.Schema
                         default:
                             return TF_string;
                     }
-                SECOND_FRACTION:
-                    i++; if (i == s.Length) return TF_string;
+                    SECOND_FRACTION:
+                    i++;
+                    if (i == s.Length)
+                        return TF_string;
                     if (s[i] < '0' || s[i] > '9')
                         return TF_string;
                     FRACT_DIGITS:
-                    i++; if (i == s.Length) return DateTime(s, bDate, bTime);
+                    i++;
+                    if (i == s.Length)
+                        return DateTime(s, bDate, bTime);
                     switch (s[i])
                     {
                         case 'Z':
@@ -2438,30 +2866,78 @@ namespace System.Xml.Schema
             }
             if (qname == SimpleTypes[HC_ST_byte])
             {
-                return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;
+                return TF_byte
+                    | TF_short
+                    | TF_int
+                    | TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_unsignedByte])
             {
-                return TF_byte | TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                    TF_unsignedByte | TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                return TF_byte
+                    | TF_short
+                    | TF_int
+                    | TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_unsignedByte
+                    | TF_unsignedShort
+                    | TF_unsignedInt
+                    | TF_unsignedLong
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_short])
             {
-                return TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;
+                return TF_short
+                    | TF_int
+                    | TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_unsignedShort])
             {
-                return TF_short | TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                     TF_unsignedShort | TF_unsignedInt | TF_unsignedLong | TF_string;
+                return TF_short
+                    | TF_int
+                    | TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_unsignedShort
+                    | TF_unsignedInt
+                    | TF_unsignedLong
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_int])
             {
-                return TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double | TF_string;
+                return TF_int
+                    | TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_unsignedInt])
             {
-                return TF_int | TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                      TF_unsignedInt | TF_unsignedLong | TF_string;
+                return TF_int
+                    | TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_unsignedInt
+                    | TF_unsignedLong
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_long])
             {
@@ -2469,8 +2945,13 @@ namespace System.Xml.Schema
             }
             if (qname == SimpleTypes[HC_ST_unsignedLong])
             {
-                return TF_long | TF_integer | TF_decimal | TF_float | TF_double |
-                                      TF_unsignedLong | TF_string;
+                return TF_long
+                    | TF_integer
+                    | TF_decimal
+                    | TF_float
+                    | TF_double
+                    | TF_unsignedLong
+                    | TF_string;
             }
             if (qname == SimpleTypes[HC_ST_integer])
             {
@@ -2525,7 +3006,7 @@ namespace System.Xml.Schema
             {
                 if (setMaxOccurs || el.MaxOccurs > 1)
                 {
-                    el.MaxOccurs = decimal.MaxValue;    //set it to unbounded
+                    el.MaxOccurs = decimal.MaxValue; //set it to unbounded
                 }
                 el.MinOccurs = 0;
             }

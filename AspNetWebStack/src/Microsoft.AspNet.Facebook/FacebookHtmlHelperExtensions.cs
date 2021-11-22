@@ -20,7 +20,9 @@ namespace Microsoft.AspNet.Facebook
         /// <returns>The signed_request in a hidden input element.</returns>
         public static IHtmlString FacebookSignedRequest(this HtmlHelper htmlHelper)
         {
-            string signedRequest = htmlHelper.ViewContext.HttpContext.Request.Params["signed_request"];
+            string signedRequest = htmlHelper.ViewContext.HttpContext.Request.Params[
+                "signed_request"
+            ];
             if (!String.IsNullOrEmpty(signedRequest))
             {
                 return htmlHelper.Hidden("signed_request", signedRequest);

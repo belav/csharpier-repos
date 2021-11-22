@@ -26,8 +26,12 @@ namespace Microsoft.Interop
         // maximum number of bytes per 'char' is 3.
         private const int MaxByteCountPerChar = 3;
 
-        private static readonly TypeSyntax s_nativeType = PointerType(PredefinedType(Token(SyntaxKind.ByteKeyword)));
-        private static readonly TypeSyntax s_utf8EncodingType = ParseTypeName("System.Text.Encoding.UTF8");
+        private static readonly TypeSyntax s_nativeType = PointerType(
+            PredefinedType(Token(SyntaxKind.ByteKeyword))
+        );
+        private static readonly TypeSyntax s_utf8EncodingType = ParseTypeName(
+            "System.Text.Encoding.UTF8"
+        );
 
         public override ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context)
         {
@@ -37,7 +41,9 @@ namespace Microsoft.Interop
                 return Argument(
                     PrefixUnaryExpression(
                         SyntaxKind.AddressOfExpression,
-                        IdentifierName(identifier)));
+                        IdentifierName(identifier)
+                    )
+                );
             }
 
             return Argument(IdentifierName(identifier));
@@ -47,37 +53,47 @@ namespace Microsoft.Interop
 
         public override ParameterSyntax AsParameter(TypePositionInfo info)
         {
-            TypeSyntax type = info.IsByRef
-                ? PointerType(AsNativeType(info))
-                : AsNativeType(info);
-            return Parameter(Identifier(info.InstanceIdentifier))
-                .WithType(type);
+            TypeSyntax type = info.IsByRef ? PointerType(AsNativeType(info)) : AsNativeType(info);
+            return Parameter(Identifier(info.InstanceIdentifier)).WithType(type);
         }
 
-        public override IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+        public override IEnumerable<StatementSyntax> Generate(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
             switch (context.CurrentStage)
             {
                 case StubCodeContext.Stage.Setup:
-                    if (TryGenerateSetupSyntax(info, context, out StatementSyntax conditionalAllocSetup))
+                    if (
+                        TryGenerateSetupSyntax(
+                            info,
+                            context,
+                            out StatementSyntax conditionalAllocSetup
+                        )
+                    )
                         yield return conditionalAllocSetup;
-
                     break;
                 case StubCodeContext.Stage.Marshal:
                     if (info.RefKind != RefKind.Out)
                     {
-                        foreach (StatementSyntax statement in GenerateConditionalAllocationSyntax(
-                            info,
-                            context,
-                            StackAllocBytesThreshold))
+                        foreach (
+                            StatementSyntax statement in GenerateConditionalAllocationSyntax(
+                                info,
+                                context,
+                                StackAllocBytesThreshold
+                            )
+                        )
                         {
                             yield return statement;
                         }
                     }
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In))
+                    if (
+                        info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In)
+                    )
                     {
                         // <managedIdentifier> = Marshal.PtrToStringUTF8((IntPtr)<nativeIdentifier>);
                         yield return ExpressionStatement(
@@ -88,12 +104,21 @@ namespace Microsoft.Interop
                                     MemberAccessExpression(
                                         SyntaxKind.SimpleMemberAccessExpression,
                                         InteropServicesMarshalType,
-                                        IdentifierName("PtrToStringUTF8")),
-                                    ArgumentList(SingletonSeparatedList<ArgumentSyntax>(
-                                        Argument(
-                                            CastExpression(
-                                                SystemIntPtrType,
-                                                IdentifierName(nativeIdentifier))))))));
+                                        IdentifierName("PtrToStringUTF8")
+                                    ),
+                                    ArgumentList(
+                                        SingletonSeparatedList<ArgumentSyntax>(
+                                            Argument(
+                                                CastExpression(
+                                                    SystemIntPtrType,
+                                                    IdentifierName(nativeIdentifier)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        );
                     }
                     break;
                 case StubCodeContext.Stage.Cleanup:
@@ -102,23 +127,35 @@ namespace Microsoft.Interop
             }
         }
 
-        public override bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
+        public override bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
+            true;
 
-        public override bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public override bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
 
         protected override ExpressionSyntax GenerateAllocationExpression(
             TypePositionInfo info,
             StubCodeContext context,
             SyntaxToken byteLengthIdentifier,
-            out bool allocationRequiresByteLength)
+            out bool allocationRequiresByteLength
+        )
         {
             allocationRequiresByteLength = false;
             return CastExpression(
                 AsNativeType(info),
-                StringMarshaller.AllocationExpression(CharEncoding.Utf8, context.GetIdentifiers(info).managed));
+                StringMarshaller.AllocationExpression(
+                    CharEncoding.Utf8,
+                    context.GetIdentifiers(info).managed
+                )
+            );
         }
 
-        protected override ExpressionSyntax GenerateByteLengthCalculationExpression(TypePositionInfo info, StubCodeContext context)
+        protected override ExpressionSyntax GenerateByteLengthCalculationExpression(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             // + 1 for number of characters in case left over high surrogate is ?
             // * <MaxByteCountPerChar> (3 for UTF-8)
@@ -134,17 +171,26 @@ namespace Microsoft.Interop
                             MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 IdentifierName(context.GetIdentifiers(info).managed),
-                                IdentifierName("Length")),
-                            LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(1)))),
-                    LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(MaxByteCountPerChar))),
-                LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(1)));
+                                IdentifierName("Length")
+                            ),
+                            LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(1))
+                        )
+                    ),
+                    LiteralExpression(
+                        SyntaxKind.NumericLiteralExpression,
+                        Literal(MaxByteCountPerChar)
+                    )
+                ),
+                LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(1))
+            );
         }
 
         protected override StatementSyntax GenerateStackallocOnlyValueMarshalling(
             TypePositionInfo info,
             StubCodeContext context,
             SyntaxToken byteLengthIdentifier,
-            SyntaxToken stackAllocPtrIdentifier)
+            SyntaxToken stackAllocPtrIdentifier
+        )
         {
             return Block(
                 // <byteLen> = Encoding.UTF8.GetBytes(<managed>, new Span<byte>(<stackAllocPtr>, <byteLen>));
@@ -156,20 +202,51 @@ namespace Microsoft.Interop
                             MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 s_utf8EncodingType,
-                                IdentifierName("GetBytes")),
+                                IdentifierName("GetBytes")
+                            ),
                             ArgumentList(
-                                SeparatedList(new ArgumentSyntax[] {
-                                    Argument(IdentifierName(context.GetIdentifiers(info).managed)),
-                                    Argument(
-                                        ObjectCreationExpression(
-                                            GenericName(Identifier(TypeNames.System_Span),
-                                                TypeArgumentList(SingletonSeparatedList<TypeSyntax>(
-                                                    PredefinedType(Token(SyntaxKind.ByteKeyword))))),
-                                            ArgumentList(
-                                                SeparatedList(new ArgumentSyntax[]{
-                                                    Argument(IdentifierName(stackAllocPtrIdentifier)),
-                                                    Argument(IdentifierName(byteLengthIdentifier))})),
-                                            initializer: null))}))))),
+                                SeparatedList(
+                                    new ArgumentSyntax[]
+                                    {
+                                        Argument(
+                                            IdentifierName(context.GetIdentifiers(info).managed)
+                                        ),
+                                        Argument(
+                                            ObjectCreationExpression(
+                                                GenericName(
+                                                    Identifier(TypeNames.System_Span),
+                                                    TypeArgumentList(
+                                                        SingletonSeparatedList<TypeSyntax>(
+                                                            PredefinedType(
+                                                                Token(SyntaxKind.ByteKeyword)
+                                                            )
+                                                        )
+                                                    )
+                                                ),
+                                                ArgumentList(
+                                                    SeparatedList(
+                                                        new ArgumentSyntax[]
+                                                        {
+                                                            Argument(
+                                                                IdentifierName(
+                                                                    stackAllocPtrIdentifier
+                                                                )
+                                                            ),
+                                                            Argument(
+                                                                IdentifierName(byteLengthIdentifier)
+                                                            )
+                                                        }
+                                                    )
+                                                ),
+                                                initializer: null
+                                            )
+                                        )
+                                    }
+                                )
+                            )
+                        )
+                    )
+                ),
                 // <stackAllocPtr>[<byteLen>] = 0;
                 ExpressionStatement(
                     AssignmentExpression(
@@ -178,13 +255,20 @@ namespace Microsoft.Interop
                             IdentifierName(stackAllocPtrIdentifier),
                             BracketedArgumentList(
                                 SingletonSeparatedList<ArgumentSyntax>(
-                                    Argument(IdentifierName(byteLengthIdentifier))))),
-                        LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(0)))));
+                                    Argument(IdentifierName(byteLengthIdentifier))
+                                )
+                            )
+                        ),
+                        LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(0))
+                    )
+                )
+            );
         }
 
         protected override ExpressionSyntax GenerateFreeExpression(
             TypePositionInfo info,
-            StubCodeContext context)
+            StubCodeContext context
+        )
         {
             return StringMarshaller.FreeExpression(context.GetIdentifiers(info).native);
         }

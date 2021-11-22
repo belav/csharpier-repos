@@ -15,7 +15,6 @@ namespace Microsoft.CodeAnalysis
         /// The value is guaranteed to have the same contents across multiple accesses.
         /// </summary>
         PreserveValue = 0,
-
         /// <summary>
         /// The value is guaranteed to the same instance across multiple accesses.
         /// </summary>
@@ -24,7 +23,7 @@ namespace Microsoft.CodeAnalysis
 
     internal static class PreservationModeExtensions
     {
-        public static bool IsValid(this PreservationMode mode)
-            => mode is >= PreservationMode.PreserveValue and <= PreservationMode.PreserveIdentity;
+        public static bool IsValid(this PreservationMode mode) =>
+            mode is >= PreservationMode.PreserveValue and <= PreservationMode.PreserveIdentity;
     }
 }

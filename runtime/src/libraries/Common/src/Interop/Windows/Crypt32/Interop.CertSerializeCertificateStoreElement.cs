@@ -9,6 +9,11 @@ internal static partial class Interop
     internal static partial class Crypt32
     {
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool CertSerializeCertificateStoreElement(SafeCertContextHandle pCertContext, int dwFlags, byte[]? pbElement, ref int pcbElement);
+        internal static partial bool CertSerializeCertificateStoreElement(
+            SafeCertContextHandle pCertContext,
+            int dwFlags,
+            byte[]? pbElement,
+            ref int pcbElement
+        );
     }
 }

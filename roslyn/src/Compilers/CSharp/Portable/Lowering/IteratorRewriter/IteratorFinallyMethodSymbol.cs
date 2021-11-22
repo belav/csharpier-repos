@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// NOTE: Finally is a private void nonvirtual instance method with no parameters. 
     ///       It is a valid JIT inlining target as long as JIT may consider inlining profitable.
     /// </summary>
-    internal sealed class IteratorFinallyMethodSymbol : SynthesizedInstanceMethodSymbol, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class IteratorFinallyMethodSymbol
+        : SynthesizedInstanceMethodSymbol,
+          ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly IteratorStateMachine _stateMachineType;
         private readonly string _name;
@@ -43,10 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
@@ -61,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MethodKind MethodKind
@@ -144,12 +140,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override TypeWithAnnotations ReturnTypeWithAnnotations
         {
-            get { return TypeWithAnnotations.Create(ContainingAssembly.GetSpecialType(SpecialType.System_Void)); }
+            get
+            {
+                return TypeWithAnnotations.Create(
+                    ContainingAssembly.GetSpecialType(SpecialType.System_Void)
+                );
+            }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
@@ -253,7 +256,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
-            return _stateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(localPosition, localTree);
+            return _stateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(
+                localPosition,
+                localTree
+            );
         }
     }
 }

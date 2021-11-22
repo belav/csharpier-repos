@@ -11,7 +11,8 @@ public static class TestCodeRenderingContext
         string newLineString = null,
         string suppressUniqueIds = "test",
         RazorSourceDocument source = null,
-        IntermediateNodeWriter nodeWriter = null)
+        IntermediateNodeWriter nodeWriter = null
+    )
     {
         var codeWriter = new CodeWriter();
         var documentNode = new DocumentIntermediateNode();
@@ -38,7 +39,13 @@ public static class TestCodeRenderingContext
             nodeWriter = new DesignTimeNodeWriter();
         }
 
-        var context = new DefaultCodeRenderingContext(codeWriter, nodeWriter, codeDocument, documentNode, options);
+        var context = new DefaultCodeRenderingContext(
+            codeWriter,
+            nodeWriter,
+            codeDocument,
+            documentNode,
+            options
+        );
         context.Visitor = new RenderChildrenVisitor(context);
 
         return context;
@@ -48,7 +55,8 @@ public static class TestCodeRenderingContext
         string newLineString = null,
         string suppressUniqueIds = "test",
         RazorSourceDocument source = null,
-        IntermediateNodeWriter nodeWriter = null)
+        IntermediateNodeWriter nodeWriter = null
+    )
     {
         var codeWriter = new CodeWriter();
         var documentNode = new DocumentIntermediateNode();
@@ -75,7 +83,13 @@ public static class TestCodeRenderingContext
             nodeWriter = new RuntimeNodeWriter();
         }
 
-        var context = new DefaultCodeRenderingContext(codeWriter, nodeWriter, codeDocument, documentNode, options);
+        var context = new DefaultCodeRenderingContext(
+            codeWriter,
+            nodeWriter,
+            codeDocument,
+            documentNode,
+            options
+        );
         context.Visitor = new RenderChildrenVisitor(context);
 
         return context;
@@ -94,5 +108,4 @@ public static class TestCodeRenderingContext
             _context.CodeWriter.WriteLine("Render Children");
         }
     }
-
 }

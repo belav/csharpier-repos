@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         [Fact]
         public void SpeculationAnalyzerDifferentOverloads()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     void Vain(int arg = 3) { }
@@ -33,13 +34,17 @@ class Program
     {
         [|Vain(5)|];
     }
-}           ", "Vain(string.Empty)", true);
+}           ",
+                "Vain(string.Empty)",
+                true
+            );
         }
 
         [Fact, WorkItem(672396, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/672396")]
         public void SpeculationAnalyzerExtensionMethodExplicitInvocation()
         {
-            Test(@"
+            Test(
+                @"
 static class Program
 {
     public static void Vain(this int arg) { }
@@ -47,13 +52,17 @@ static class Program
     {
         [|5.Vain()|];
     }
-}           ", "Vain(5)", false);
+}           ",
+                "Vain(5)",
+                false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerImplicitBaseClassConversion()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 class Program
 {
@@ -61,26 +70,34 @@ class Program
     {
         Exception ex = [|(Exception)new InvalidOperationException()|];
     }
-}           ", "new InvalidOperationException()", false);
+}           ",
+                "new InvalidOperationException()",
+                false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerImplicitNumericConversion()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     void Main()
     {
         long i = [|(long)5|];
     }
-}           ", "5", false);
+}           ",
+                "5",
+                false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerImplicitUserConversion()
         {
-            Test(@"
+            Test(
+                @"
 class From
 {
     public static implicit operator To(From from) { return new To(); }
@@ -92,13 +109,17 @@ class Program
     {
         To to = [|(To)new From()|];
     }
-}           ", "new From()", true);
+}           ",
+                "new From()",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerExplicitConversion()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 class Program
 {
@@ -107,13 +128,17 @@ class Program
         Exception ex1 = new InvalidOperationException();
         var ex2 = [|(InvalidOperationException)ex1|];
     }
-}           ", "ex1", true);
+}           ",
+                "ex1",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerArrayImplementingNonGenericInterface()
         {
-            Test(@"
+            Test(
+                @"
 using System.Collections;
 class Program
 {
@@ -122,13 +147,17 @@ class Program
         var a = new[] { 1, 2, 3 };
         [|((IEnumerable)a).GetEnumerator()|];
     }
-}           ", "a.GetEnumerator()", false);
+}           ",
+                "a.GetEnumerator()",
+                false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerVirtualMethodWithBaseConversion()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 using System.IO;
 class Program
@@ -138,13 +167,17 @@ class Program
         var s = new MemoryStream();
         [|((Stream)s).Flush()|];
     }
-}            ", "s.Flush()", false);
+}            ",
+                "s.Flush()",
+                false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerNonVirtualMethodImplementingInterface()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 class Class : IComparable
 {
@@ -158,13 +191,17 @@ class Program
         var d = new Class();
         [|((IComparable)c).CompareTo(d)|];
     }
-}           ", "c.CompareTo(d)", true);
+}           ",
+                "c.CompareTo(d)",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerSealedClassImplementingInterface()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 sealed class Class : IComparable
 {
@@ -178,13 +215,17 @@ class Program
         var d = new Class();
         [|((IComparable)c).CompareTo(d)|];
     }
-}           ", "((IComparable)c).CompareTo(d)", semanticChanges: false);
+}           ",
+                "((IComparable)c).CompareTo(d)",
+                semanticChanges: false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerValueTypeImplementingInterface()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 class Program
 {
@@ -193,26 +234,34 @@ class Program
         decimal d = 5;
         [|((IComparable<decimal>)d).CompareTo(6)|];
     }
-}           ", "d.CompareTo(6)", false);
+}           ",
+                "d.CompareTo(6)",
+                false
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerBinaryExpressionIntVsLong()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     void Main()
     {
         var r = [|1+1L|];
     }
-}           ", "1+1", true);
+}           ",
+                "1+1",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerQueryExpressionSelectType()
         {
-            Test(@"
+            Test(
+                @"
 using System.Linq;
 class Program
 {
@@ -220,13 +269,17 @@ class Program
     {
         var items = [|from i in Enumerable.Range(0, 3) select (long)i|];
     }
-}           ", "from i in Enumerable.Range(0, 3) select i", true);
+}           ",
+                "from i in Enumerable.Range(0, 3) select i",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerQueryExpressionFromType()
         {
-            Test(@"
+            Test(
+                @"
 using System.Linq;
 class Program
 {
@@ -234,13 +287,17 @@ class Program
     {
         var items = [|from i in new long[0] select i|];
     }
-}           ", "from i in new int[0] select i", true);
+}           ",
+                "from i in new int[0] select i",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerQueryExpressionGroupByType()
         {
-            Test(@"
+            Test(
+                @"
 using System.Linq;
 class Program
 {
@@ -248,13 +305,17 @@ class Program
     {
         var items = [|from i in Enumerable.Range(0, 3) group (long)i by i|];
     }
-}           ", "from i in Enumerable.Range(0, 3) group i by i", true);
+}           ",
+                "from i in Enumerable.Range(0, 3) group i by i",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerQueryExpressionOrderByType()
         {
-            Test(@"
+            Test(
+                @"
 using System.Linq;
 class Program
 {
@@ -262,13 +323,17 @@ class Program
     {
         var items = from i in Enumerable.Range(0, 3) orderby [|(long)i|] select i;
     }
-}           ", "i", true);
+}           ",
+                "i",
+                true
+            );
         }
 
         [Fact]
         public void SpeculationAnalyzerDifferentAttributeConstructors()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 class AnAttribute : Attribute
 {
@@ -279,8 +344,11 @@ class Program
 {
     [An([|""5""|], 6)]
     static void Main() { }
-}           ", "5", false, "6");
-
+}           ",
+                "5",
+                false,
+                "6"
+            );
             // Note: the answer should have been that the replacement does change semantics (true),
             // however to have enough context one must analyze AttributeSyntax instead of separate ExpressionSyntaxes it contains,
             // which is not supported in SpeculationAnalyzer, but possible with GetSpeculativeSemanticModel API
@@ -289,7 +357,8 @@ class Program
         [Fact]
         public void SpeculationAnalyzerCollectionInitializers()
         {
-            Test(@"
+            Test(
+                @"
 using System.Collections;
 class Collection : IEnumerable
 {
@@ -300,13 +369,17 @@ class Collection : IEnumerable
     {
         var c = new Collection { [|""5""|] };
     }
-}           ", "5", true);
+}           ",
+                "5",
+                true
+            );
         }
 
         [Fact, WorkItem(1088815, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1088815")]
         public void SpeculationAnalyzerBrokenCode()
         {
-            Test(@"
+            Test(
+                @"
 public interface IRogueAction
 {
     public string Name { get; private set; }
@@ -315,13 +388,18 @@ public interface IRogueAction
     {
         [|this.Name|] = name;
     }
-}           ", "Name", semanticChanges: false, isBrokenCode: true);
+}           ",
+                "Name",
+                semanticChanges: false,
+                isBrokenCode: true
+            );
         }
 
         [Fact, WorkItem(8111, "https://github.com/dotnet/roslyn/issues/8111")]
         public void SpeculationAnalyzerAnonymousObjectMemberDeclaredWithNeededCast()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -329,13 +407,17 @@ class Program
         object thing = new { shouldBeAnInt = [|(int)Directions.South|] };
     }
     public enum Directions { North, East, South, West }
-}           ", "Directions.South", semanticChanges: true);
+}           ",
+                "Directions.South",
+                semanticChanges: true
+            );
         }
 
         [Fact, WorkItem(8111, "https://github.com/dotnet/roslyn/issues/8111")]
         public void SpeculationAnalyzerAnonymousObjectMemberDeclaredWithUnneededCast()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -343,13 +425,17 @@ class Program
         object thing = new { shouldBeAnInt = [|(Directions)Directions.South|] };
     }
     public enum Directions { North, East, South, West }
-}           ", "Directions.South", semanticChanges: false);
+}           ",
+                "Directions.South",
+                semanticChanges: false
+            );
         }
 
         [Fact, WorkItem(19987, "https://github.com/dotnet/roslyn/issues/19987")]
         public void SpeculationAnalyzerSwitchCaseWithRedundantCast()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     static void Main(string[] arts)
@@ -367,13 +453,17 @@ class Program
         }
     }
 }
-            ", "1", semanticChanges: false);
+            ",
+                "1",
+                semanticChanges: false
+            );
         }
 
         [Fact, WorkItem(19987, "https://github.com/dotnet/roslyn/issues/19987")]
         public void SpeculationAnalyzerSwitchCaseWithRequiredCast()
         {
-            Test(@"
+            Test(
+                @"
 class Program
 {
     static void Main(string[] arts)
@@ -391,13 +481,17 @@ class Program
         }
     }
 }
-            ", "1", semanticChanges: true);
+            ",
+                "1",
+                semanticChanges: true
+            );
         }
 
         [Fact, WorkItem(28412, "https://github.com/dotnet/roslyn/issues/28412")]
         public void SpeculationAnalyzerIndexerPropertyWithRedundantCast()
         {
-            Test(code: @"
+            Test(
+                code: @"
 class Indexer
 {
     public int this[int x] { get { return x; } }
@@ -417,13 +511,17 @@ class Program
         var y = ([|(A)b|]).Foo[1];
     }
 }
-", replacementExpression: "b", semanticChanges: false);
+",
+                replacementExpression: "b",
+                semanticChanges: false
+            );
         }
 
         [Fact, WorkItem(28412, "https://github.com/dotnet/roslyn/issues/28412")]
         public void SpeculationAnalyzerIndexerPropertyWithRequiredCast()
         {
-            Test(code: @"
+            Test(
+                code: @"
 class Indexer
 {
     public int this[int x] { get { return x; } }
@@ -444,13 +542,17 @@ class Program
         var y = ([|(A)b|]).Foo[1];
     }
 }
-", replacementExpression: "b", semanticChanges: true);
+",
+                replacementExpression: "b",
+                semanticChanges: true
+            );
         }
 
         [Fact, WorkItem(28412, "https://github.com/dotnet/roslyn/issues/28412")]
         public void SpeculationAnalyzerDelegatePropertyWithRedundantCast()
         {
-            Test(code: @"
+            Test(
+                code: @"
 public delegate void MyDelegate();
 class A
 {
@@ -467,13 +569,17 @@ class Program
         ([|(A)b|]).Foo();
     }
 }
-", replacementExpression: "b", semanticChanges: false);
+",
+                replacementExpression: "b",
+                semanticChanges: false
+            );
         }
 
         [Fact, WorkItem(28412, "https://github.com/dotnet/roslyn/issues/28412")]
         public void SpeculationAnalyzerDelegatePropertyWithRequiredCast()
         {
-            Test(code: @"
+            Test(
+                code: @"
 public delegate void MyDelegate();
 class A
 {
@@ -491,14 +597,15 @@ class Program
         ([|(A)b|]).Foo();
     }
 }
-", replacementExpression: "b", semanticChanges: true);
+",
+                replacementExpression: "b",
+                semanticChanges: true
+            );
         }
 
-        protected override SyntaxTree Parse(string text)
-            => SyntaxFactory.ParseSyntaxTree(text);
+        protected override SyntaxTree Parse(string text) => SyntaxFactory.ParseSyntaxTree(text);
 
-        protected override bool IsExpressionNode(SyntaxNode node)
-            => node is ExpressionSyntax;
+        protected override bool IsExpressionNode(SyntaxNode node) => node is ExpressionSyntax;
 
         protected override Compilation CreateCompilation(SyntaxTree tree)
         {
@@ -506,18 +613,33 @@ class Program
                 CompilationName,
                 new[] { tree },
                 References,
-                TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(new[] { KeyValuePairUtil.Create("CS0219", ReportDiagnostic.Suppress) }));
+                TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
+                    new[] { KeyValuePairUtil.Create("CS0219", ReportDiagnostic.Suppress) }
+                )
+            );
         }
 
-        protected override bool CompilationSucceeded(Compilation compilation, Stream temporaryStream)
+        protected override bool CompilationSucceeded(
+            Compilation compilation,
+            Stream temporaryStream
+        )
         {
             var langCompilation = compilation;
             static bool isProblem(Diagnostic d) => d.Severity >= DiagnosticSeverity.Warning;
-            return !langCompilation.GetDiagnostics().Any(isProblem) &&
-                !langCompilation.Emit(temporaryStream).Diagnostics.Any(isProblem);
+            return !langCompilation.GetDiagnostics().Any(isProblem)
+                && !langCompilation.Emit(temporaryStream).Diagnostics.Any(isProblem);
         }
 
-        protected override bool ReplacementChangesSemantics(SyntaxNode initialNode, SyntaxNode replacementNode, SemanticModel initialModel)
-            => new SpeculationAnalyzer((ExpressionSyntax)initialNode, (ExpressionSyntax)replacementNode, initialModel, CancellationToken.None).ReplacementChangesSemantics();
+        protected override bool ReplacementChangesSemantics(
+            SyntaxNode initialNode,
+            SyntaxNode replacementNode,
+            SemanticModel initialModel
+        ) =>
+            new SpeculationAnalyzer(
+                (ExpressionSyntax)initialNode,
+                (ExpressionSyntax)replacementNode,
+                initialModel,
+                CancellationToken.None
+            ).ReplacementChangesSemantics();
     }
 }

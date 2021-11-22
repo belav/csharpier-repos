@@ -23,20 +23,34 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.ExtractInterf
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OmniSharpExtractInterfaceOptionsService(IOmniSharpExtractInterfaceOptionsService omniSharpExtractInterfaceOptionsService)
+        public OmniSharpExtractInterfaceOptionsService(
+            IOmniSharpExtractInterfaceOptionsService omniSharpExtractInterfaceOptionsService
+        )
         {
             _omniSharpExtractInterfaceOptionsService = omniSharpExtractInterfaceOptionsService;
         }
 
-        public async Task<ExtractInterfaceOptionsResult> GetExtractInterfaceOptionsAsync(ISyntaxFactsService syntaxFactsService, INotificationService notificationService, List<ISymbol> extractableMembers, string defaultInterfaceName, List<string> conflictingTypeNames, string defaultNamespace, string generatedNameTypeParameterSuffix, string languageName)
+        public async Task<ExtractInterfaceOptionsResult> GetExtractInterfaceOptionsAsync(
+            ISyntaxFactsService syntaxFactsService,
+            INotificationService notificationService,
+            List<ISymbol> extractableMembers,
+            string defaultInterfaceName,
+            List<string> conflictingTypeNames,
+            string defaultNamespace,
+            string generatedNameTypeParameterSuffix,
+            string languageName
+        )
         {
-            var result = await _omniSharpExtractInterfaceOptionsService.GetExtractInterfaceOptionsAsync(extractableMembers, defaultInterfaceName).ConfigureAwait(false);
+            var result = await _omniSharpExtractInterfaceOptionsService
+                .GetExtractInterfaceOptionsAsync(extractableMembers, defaultInterfaceName)
+                .ConfigureAwait(false);
             return new(
                 result.IsCancelled,
                 result.IncludedMembers,
                 result.InterfaceName,
                 result.FileName,
-                (ExtractInterfaceOptionsResult.ExtractLocation)result.Location);
+                (ExtractInterfaceOptionsResult.ExtractLocation)result.Location
+            );
         }
     }
 }

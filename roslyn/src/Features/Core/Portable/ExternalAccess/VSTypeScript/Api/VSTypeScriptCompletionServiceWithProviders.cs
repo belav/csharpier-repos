@@ -6,15 +6,14 @@ using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
-    internal abstract class VSTypeScriptCompletionServiceWithProviders : CompletionServiceWithProviders
+    internal abstract class VSTypeScriptCompletionServiceWithProviders
+        : CompletionServiceWithProviders
     {
-        internal VSTypeScriptCompletionServiceWithProviders(Workspace workspace)
-            : base(workspace)
-        {
-        }
+        internal VSTypeScriptCompletionServiceWithProviders(Workspace workspace) : base(workspace)
+        { }
 
-        internal sealed override CompletionRules GetRules(CompletionOptions options)
-            => GetRulesImpl();
+        internal sealed override CompletionRules GetRules(CompletionOptions options) =>
+            GetRulesImpl();
 
         internal abstract CompletionRules GetRulesImpl();
     }

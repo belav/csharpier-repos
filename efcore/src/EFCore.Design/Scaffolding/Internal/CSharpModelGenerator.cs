@@ -41,8 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public CSharpModelGenerator(
             ModelCodeGeneratorDependencies dependencies,
             ICSharpDbContextGenerator cSharpDbContextGenerator,
-            ICSharpEntityTypeGenerator cSharpEntityTypeGenerator)
-            : base(dependencies)
+            ICSharpEntityTypeGenerator cSharpEntityTypeGenerator
+        ) : base(dependencies)
         {
             CSharpDbContextGenerator = cSharpDbContextGenerator;
             CSharpEntityTypeGenerator = cSharpEntityTypeGenerator;
@@ -56,8 +56,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string Language
-            => "C#";
+        public override string Language => "C#";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,18 +66,26 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         public override ScaffoldedModel GenerateModel(
             IModel model,
-            ModelCodeGenerationOptions options)
+            ModelCodeGenerationOptions options
+        )
         {
             if (options.ContextName == null)
             {
                 throw new ArgumentException(
-                    CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)), nameof(options));
+                    CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)),
+                    nameof(options)
+                );
             }
 
             if (options.ConnectionString == null)
             {
                 throw new ArgumentException(
-                    CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)), nameof(options));
+                    CoreStrings.ArgumentPropertyNull(
+                        nameof(options.ConnectionString),
+                        nameof(options)
+                    ),
+                    nameof(options)
+                );
             }
 
             var generatedCode = CSharpDbContextGenerator.WriteCode(
@@ -90,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 options.UseDataAnnotations,
                 options.UseNullableReferenceTypes,
                 options.SuppressConnectionStringWarning,
-                options.SuppressOnConfiguring);
+                options.SuppressOnConfiguring
+            );
 
             // output DbContext .cs file
             var dbContextFileName = options.ContextName + FileExtension;
@@ -98,9 +106,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 ContextFile = new ScaffoldedFile
                 {
-                    Path = options.ContextDir != null
-                        ? Path.Combine(options.ContextDir, dbContextFileName)
-                        : dbContextFileName,
+                    Path =
+                        options.ContextDir != null
+                            ? Path.Combine(options.ContextDir, dbContextFileName)
+                            : dbContextFileName,
                     Code = generatedCode
                 }
             };
@@ -116,12 +125,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     entityType,
                     options.ModelNamespace,
                     options.UseDataAnnotations,
-                    options.UseNullableReferenceTypes);
+                    options.UseNullableReferenceTypes
+                );
 
                 // output EntityType poco .cs file
                 var entityTypeFileName = entityType.Name + FileExtension;
                 resultingFiles.AdditionalFiles.Add(
-                    new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
+                    new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
+                );
             }
 
             return resultingFiles;

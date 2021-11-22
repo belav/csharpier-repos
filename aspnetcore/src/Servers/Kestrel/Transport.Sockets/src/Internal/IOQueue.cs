@@ -59,7 +59,6 @@ internal class IOQueue : PipeScheduler, IThreadPoolWorkItem
                 // Execute has been rescheduled already, exit.
                 break;
             }
-
             // Is work, wasn't already scheduled so continue loop.
         }
     }

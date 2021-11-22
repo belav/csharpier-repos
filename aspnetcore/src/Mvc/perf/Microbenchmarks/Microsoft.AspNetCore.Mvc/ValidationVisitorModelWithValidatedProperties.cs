@@ -37,28 +37,23 @@ public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBe
         public string Zip { get; set; }
     }
 
-    public override object Model { get; } = new Person
-    {
-        Id = 10,
-        Name = "Test",
-        Address = new List<Address>
+    public override object Model { get; } =
+        new Person
+        {
+            Id = 10,
+            Name = "Test",
+            Address = new List<Address>
             {
-                new Address
-                {
-                    Street = "1 Microsoft Way",
-                    Type = "Work",
-                    Zip = "98056",
-                },
-                new Address
-                {
-                    Street = "15701 NE 39th St",
-                    Type = "Home",
-                    Zip = "98052",
-                }
+                new Address { Street = "1 Microsoft Way", Type = "Work", Zip = "98056", },
+                new Address { Street = "15701 NE 39th St", Type = "Home", Zip = "98052", }
             },
-    };
+        };
 
-    [Benchmark(Baseline = true, Description = "validation for a model with some validated properties - baseline", OperationsPerInvoke = Iterations)]
+    [Benchmark(
+        Baseline = true,
+        Description = "validation for a model with some validated properties - baseline",
+        OperationsPerInvoke = Iterations
+    )]
     public void Visit_TypeWithSomeValidatedProperties_Baseline()
     {
         // Baseline for validating a typical model with some properties that require validation.
@@ -69,12 +64,16 @@ public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBe
             CompositeModelValidatorProvider,
             ValidatorCache,
             BaselineModelMetadataProvider,
-            new ValidationStateDictionary());
+            new ValidationStateDictionary()
+        );
 
         validationVisitor.Validate(BaselineModelMetadata, "key", Model);
     }
 
-    [Benchmark(Description = "validation for a model with some validated properties", OperationsPerInvoke = Iterations)]
+    [Benchmark(
+        Description = "validation for a model with some validated properties",
+        OperationsPerInvoke = Iterations
+    )]
     public void Visit_TypeWithSomeValidatedProperties()
     {
         // Validating a typical model with some properties that require validation.
@@ -84,7 +83,8 @@ public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBe
             CompositeModelValidatorProvider,
             ValidatorCache,
             ModelMetadataProvider,
-            new ValidationStateDictionary());
+            new ValidationStateDictionary()
+        );
 
         validationVisitor.Validate(ModelMetadata, "key", Model);
     }

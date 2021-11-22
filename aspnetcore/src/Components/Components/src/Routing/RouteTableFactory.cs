@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Components;
 internal static class RouteTableFactory
 {
     private static readonly ConcurrentDictionary<RouteKey, RouteTable> Cache = new();
-    public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(RouteComparison);
+    public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(
+        RouteComparison
+    );
 
     public static RouteTable Create(RouteKey routeKey)
     {
@@ -54,7 +56,10 @@ internal static class RouteTableFactory
         {
             foreach (var type in assembly.ExportedTypes)
             {
-                if (typeof(IComponent).IsAssignableFrom(type) && type.IsDefined(typeof(RouteAttribute)))
+                if (
+                    typeof(IComponent).IsAssignableFrom(type)
+                    && type.IsDefined(typeof(RouteAttribute))
+                )
                 {
                     routeableComponents.Add(type);
                 }
@@ -71,7 +76,10 @@ internal static class RouteTableFactory
             //
             // RouteAttribute is defined as non-inherited, because inheriting a route attribute always causes an
             // ambiguity. You end up with two components (base class and derived class) with the same route.
-            var routeAttributes = componentType.GetCustomAttributes(typeof(RouteAttribute), inherit: false);
+            var routeAttributes = componentType.GetCustomAttributes(
+                typeof(RouteAttribute),
+                inherit: false
+            );
             var templates = new string[routeAttributes.Length];
             for (var i = 0; i < routeAttributes.Length; i++)
             {
@@ -105,7 +113,10 @@ internal static class RouteTableFactory
 
             foreach (var (parsedTemplate, routeParameterNames) in parsedTemplates)
             {
-                var unusedRouteParameterNames = GetUnusedParameterNames(allRouteParameterNames, routeParameterNames);
+                var unusedRouteParameterNames = GetUnusedParameterNames(
+                    allRouteParameterNames,
+                    routeParameterNames
+                );
                 var entry = new RouteEntry(parsedTemplate, type, unusedRouteParameterNames);
                 routes.Add(entry);
             }
@@ -129,7 +140,10 @@ internal static class RouteTableFactory
         return parameterNames;
     }
 
-    private static List<string>? GetUnusedParameterNames(HashSet<string> allRouteParameterNames, HashSet<string> routeParameterNames)
+    private static List<string>? GetUnusedParameterNames(
+        HashSet<string> allRouteParameterNames,
+        HashSet<string> routeParameterNames
+    )
     {
         List<string>? unusedParameters = null;
         foreach (var item in allRouteParameterNames)
@@ -197,7 +211,10 @@ internal static class RouteTableFactory
             // If they are both literals we can disambiguate
             if ((xRank, yRank) == (0, 0))
             {
-                currentResult = StringComparer.OrdinalIgnoreCase.Compare(xSegment.Value, ySegment.Value);
+                currentResult = StringComparer.OrdinalIgnoreCase.Compare(
+                    xSegment.Value,
+                    ySegment.Value
+                );
             }
 
             if (currentResult != 0)
@@ -213,10 +230,12 @@ internal static class RouteTableFactory
 
         if (currentResult == 0)
         {
-            throw new InvalidOperationException($@"The following routes are ambiguous:
+            throw new InvalidOperationException(
+                $@"The following routes are ambiguous:
 '{x.Template.TemplateText}' in '{x.Handler.FullName}'
 '{y.Template.TemplateText}' in '{y.Handler.FullName}'
-");
+"
+            );
         }
 
         return currentResult;

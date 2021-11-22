@@ -20,16 +20,29 @@ namespace Internal.TypeSystem
         /// Resolves interface method '<paramref name="interfaceMethod"/>' to a method on '<paramref name="currentType"/>'
         /// that implements the the method.
         /// </summary>
-        public abstract MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(MethodDesc interfaceMethod, TypeDesc currentType);
+        public abstract MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(
+            MethodDesc interfaceMethod,
+            TypeDesc currentType
+        );
 
-        public abstract MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(MethodDesc interfaceMethod, TypeDesc currentType);
+        public abstract MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(
+            MethodDesc interfaceMethod,
+            TypeDesc currentType
+        );
 
-        public abstract DefaultInterfaceMethodResolution ResolveInterfaceMethodToDefaultImplementationOnType(MethodDesc interfaceMethod, TypeDesc currentType, out MethodDesc impl);
+        public abstract DefaultInterfaceMethodResolution ResolveInterfaceMethodToDefaultImplementationOnType(
+            MethodDesc interfaceMethod,
+            TypeDesc currentType,
+            out MethodDesc impl
+        );
 
         /// <summary>
         /// Resolves a virtual method call.
         /// </summary>
-        public abstract MethodDesc FindVirtualFunctionTargetMethodOnObjectType(MethodDesc targetMethod, TypeDesc objectType);
+        public abstract MethodDesc FindVirtualFunctionTargetMethodOnObjectType(
+            MethodDesc targetMethod,
+            TypeDesc objectType
+        );
 
         /// <summary>
         /// Enumerates all virtual slots on '<paramref name="type"/>'.
@@ -43,17 +56,14 @@ namespace Internal.TypeSystem
         /// No default implementation was found.
         /// </summary>
         None,
-
         /// <summary>
         /// A default implementation was found.
         /// </summary>
         DefaultImplementation,
-
         /// <summary>
         /// The implementation was reabstracted.
         /// </summary>
         Reabstraction,
-
         /// <summary>
         /// The default implementation conflicts.
         /// </summary>

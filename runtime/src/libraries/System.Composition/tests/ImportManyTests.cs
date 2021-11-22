@@ -36,9 +36,7 @@ namespace System.Composition.UnitTests
         {
             [ImportMany]
             public IEnumerable<IA> AllA { get; set; }
-            public ImportManyPropsOfA()
-            {
-            }
+            public ImportManyPropsOfA() { }
         }
         [Fact]
         public void ImportsMany()

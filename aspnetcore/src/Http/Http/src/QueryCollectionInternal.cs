@@ -29,7 +29,8 @@ internal class QueryCollectionInternal : IQueryCollection
     /// </summary>
     /// <param name="key">The key name.</param>
     /// <returns>the associated value from the collection as a StringValues or StringValues.Empty if the key is not present.</returns>
-    public StringValues this[string key] => TryGetValue(key, out var value) ? value : StringValues.Empty;
+    public StringValues this[string key] =>
+        TryGetValue(key, out var value) ? value : StringValues.Empty;
 
     /// <summary>
     /// Gets the number of elements contained in the <see cref="QueryCollection" />;.
@@ -55,7 +56,8 @@ internal class QueryCollectionInternal : IQueryCollection
     /// <param name="key">The key.</param>
     /// <param name="value">The value.</param>
     /// <returns>true if the <see cref="QueryCollection" /> contains the key; otherwise, false.</returns>
-    public bool TryGetValue(string key, out StringValues value) => Store.TryGetValue(key, out value);
+    public bool TryGetValue(string key, out StringValues value) =>
+        Store.TryGetValue(key, out value);
 
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
@@ -67,8 +69,9 @@ internal class QueryCollectionInternal : IQueryCollection
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
     /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
-        => Store.GetEnumerator();
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator() => Store.GetEnumerator();
 
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
@@ -85,7 +88,9 @@ internal class QueryCollectionInternal : IQueryCollection
         private AdaptiveCapacityDictionary<string, StringValues>.Enumerator _dictionaryEnumerator;
         private readonly bool _notEmpty;
 
-        internal Enumerator(AdaptiveCapacityDictionary<string, StringValues>.Enumerator dictionaryEnumerator)
+        internal Enumerator(
+            AdaptiveCapacityDictionary<string, StringValues>.Enumerator dictionaryEnumerator
+        )
         {
             _dictionaryEnumerator = dictionaryEnumerator;
             _notEmpty = true;
@@ -108,12 +113,11 @@ internal class QueryCollectionInternal : IQueryCollection
         /// <summary>
         /// Gets the element at the current position of the enumerator.
         /// </summary>
-        public KeyValuePair<string, StringValues> Current => _notEmpty ? _dictionaryEnumerator.Current : default;
+        public KeyValuePair<string, StringValues> Current =>
+            _notEmpty ? _dictionaryEnumerator.Current : default;
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         object IEnumerator.Current => Current;
 

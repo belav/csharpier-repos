@@ -16,7 +16,8 @@ namespace XPathTests.XPathExpressionTests
         }
         private static void NavigatorCompileTest(string toCompile)
         {
-            var xml = @"<DocumentElement>
+            var xml =
+                @"<DocumentElement>
     <Level1 Data='0'>
         <Name>first</Name>
         <Level2 Data='1'></Level2>

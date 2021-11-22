@@ -11,10 +11,18 @@ internal partial class ClientCertLoader
     private static class Log
     {
         private static readonly Action<ILogger, Exception?> _channelBindingMissing =
-            LoggerMessage.Define(LogLevel.Error, LoggerEventIds.ChannelBindingMissing, "GetChannelBindingFromTls");
+            LoggerMessage.Define(
+                LogLevel.Error,
+                LoggerEventIds.ChannelBindingMissing,
+                "GetChannelBindingFromTls"
+            );
 
         private static readonly Action<ILogger, Exception?> _channelBindingUnsupported =
-            LoggerMessage.Define(LogLevel.Error, LoggerEventIds.ChannelBindingUnsupported, "GetChannelBindingFromTls; Channel binding is not supported.");
+            LoggerMessage.Define(
+                LogLevel.Error,
+                LoggerEventIds.ChannelBindingUnsupported,
+                "GetChannelBindingFromTls; Channel binding is not supported."
+            );
 
         public static void ChannelBindingMissing(ILogger logger, Exception exception)
         {

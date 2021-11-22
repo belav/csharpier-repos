@@ -20,21 +20,28 @@ namespace System.Net.Http.Functional.Tests
         public async Task SendAsync_HostHeader_First()
         {
             // RFC 7230  3.2.2.  Field Order
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url) { Version = HttpVersion.Version11 };
-                    request.Headers.Add("X-foo", "bar");
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url)
+                        {
+                            Version = HttpVersion.Version11
+                        };
+                        request.Headers.Add("X-foo", "bar");
 
-                    Task sendTask = client.SendAsync(request);
+                        Task sendTask = client.SendAsync(request);
 
-                    string[] headers = (await server.AcceptConnectionSendResponseAndCloseAsync()).ToArray();
-                    await sendTask;
+                        string[] headers = (
+                            await server.AcceptConnectionSendResponseAndCloseAsync()
+                        ).ToArray();
+                        await sendTask;
 
-                    Assert.StartsWith("Host", headers[1]);
+                        Assert.StartsWith("Host", headers[1]);
+                    }
                 }
-            });
+            );
         }
     }
 }

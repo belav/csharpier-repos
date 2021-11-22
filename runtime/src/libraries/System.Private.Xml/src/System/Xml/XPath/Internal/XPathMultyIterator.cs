@@ -61,7 +61,6 @@ namespace MS.Internal.Xml.XPath
             return true;
         }
 
-
         // Invariant: a[i] < a[i+1] for i > item
         // returns flase is head of the list was moved & as a result consistancy of list depends on head consistancy.
         private bool SiftItem(int item)
@@ -130,7 +129,10 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override int CurrentPosition { get { return position; } }
+        public override int CurrentPosition
+        {
+            get { return position; }
+        }
 
         public override bool MoveNext()
         {

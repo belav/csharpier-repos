@@ -68,11 +68,15 @@ namespace RunTests
             }
 
             builder.Append($@" --framework {assemblyInfo.TargetFramework}");
-            builder.Append($@" --logger {sep}xunit;LogFilePath={GetResultsFilePath(assemblyInfo, "xml")}{sep}");
+            builder.Append(
+                $@" --logger {sep}xunit;LogFilePath={GetResultsFilePath(assemblyInfo, "xml")}{sep}"
+            );
 
             if (Options.IncludeHtml)
             {
-                builder.AppendFormat($@" --logger {sep}html;LogFileName={GetResultsFilePath(assemblyInfo, "html")}{sep}");
+                builder.AppendFormat(
+                    $@" --logger {sep}html;LogFileName={GetResultsFilePath(assemblyInfo, "html")}{sep}"
+                );
             }
 
             return builder.ToString();
@@ -80,11 +84,15 @@ namespace RunTests
 
         private string GetResultsFilePath(AssemblyInfo assemblyInfo, string suffix = "xml")
         {
-            var fileName = $"{assemblyInfo.DisplayName}_{assemblyInfo.TargetFramework}_{assemblyInfo.Platform}_test_results.{suffix}";
+            var fileName =
+                $"{assemblyInfo.DisplayName}_{assemblyInfo.TargetFramework}_{assemblyInfo.Platform}_test_results.{suffix}";
             return Path.Combine(Options.TestResultsDirectory, fileName);
         }
 
-        public async Task<TestResult> RunTestAsync(AssemblyInfo assemblyInfo, CancellationToken cancellationToken)
+        public async Task<TestResult> RunTestAsync(
+            AssemblyInfo assemblyInfo,
+            CancellationToken cancellationToken
+        )
         {
             var result = await RunTestAsyncInternal(assemblyInfo, retry: false, cancellationToken);
 
@@ -97,14 +105,23 @@ namespace RunTests
             return result;
         }
 
-        private async Task<TestResult> RunTestAsyncInternal(AssemblyInfo assemblyInfo, bool retry, CancellationToken cancellationToken)
+        private async Task<TestResult> RunTestAsyncInternal(
+            AssemblyInfo assemblyInfo,
+            bool retry,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var commandLineArguments = GetCommandLineArguments(assemblyInfo, useSingleQuotes: false);
+                var commandLineArguments = GetCommandLineArguments(
+                    assemblyInfo,
+                    useSingleQuotes: false
+                );
                 var resultsFilePath = GetResultsFilePath(assemblyInfo);
                 var resultsDir = Path.GetDirectoryName(resultsFilePath);
-                var htmlResultsFilePath = Options.IncludeHtml ? GetResultsFilePath(assemblyInfo, "html") : null;
+                var htmlResultsFilePath = Options.IncludeHtml
+                    ? GetResultsFilePath(assemblyInfo, "html")
+                    : null;
                 var processResultList = new List<ProcessResult>();
                 ProcessInfo? procDumpProcessInfo = null;
 
@@ -117,25 +134,35 @@ namespace RunTests
 
                 if (retry && File.Exists(resultsFilePath))
                 {
-                    ConsoleUtil.WriteLine("Starting a retry. Tests which failed will run a second time to reduce flakiness.");
+                    ConsoleUtil.WriteLine(
+                        "Starting a retry. Tests which failed will run a second time to reduce flakiness."
+                    );
                     try
                     {
                         var doc = XDocument.Load(resultsFilePath);
-                        foreach (var test in doc.XPathSelectElements("/assemblies/assembly/collection/test[@result='Fail']"))
+                        foreach (
+                            var test in doc.XPathSelectElements(
+                                "/assemblies/assembly/collection/test[@result='Fail']"
+                            )
+                        )
                         {
-                            ConsoleUtil.WriteLine($"  {test.Attribute("name")!.Value}: {test.Attribute("result")!.Value}");
+                            ConsoleUtil.WriteLine(
+                                $"  {test.Attribute("name")!.Value}: {test.Attribute("result")!.Value}"
+                            );
                         }
                     }
                     catch
                     {
-                        ConsoleUtil.WriteLine("  ...Failed to identify the list of specific failures.");
+                        ConsoleUtil.WriteLine(
+                            "  ...Failed to identify the list of specific failures."
+                        );
                     }
 
                     // Copy the results file path, since the new xunit run will overwrite it
                     var backupResultsFilePath = Path.ChangeExtension(resultsFilePath, ".old");
                     File.Copy(resultsFilePath, backupResultsFilePath, overwrite: true);
 
-                    // If running the process with this varialbe added, we assume that this file contains 
+                    // If running the process with this varialbe added, we assume that this file contains
                     // xml logs from the first attempt.
                     environmentVariables.Add("OutputXmlFilePath", backupResultsFilePath);
                 }
@@ -152,20 +179,28 @@ namespace RunTests
                         workingDirectory: Path.GetDirectoryName(assemblyInfo.AssemblyPath),
                         displayWindow: false,
                         captureOutput: true,
-                        environmentVariables: environmentVariables),
+                        environmentVariables: environmentVariables
+                    ),
                     lowPriority: false,
-                    cancellationToken: cancellationToken);
-                Logger.Log($"Create xunit process with id {dotnetProcessInfo.Id} for test {assemblyInfo.DisplayName}");
+                    cancellationToken: cancellationToken
+                );
+                Logger.Log(
+                    $"Create xunit process with id {dotnetProcessInfo.Id} for test {assemblyInfo.DisplayName}"
+                );
 
                 var xunitProcessResult = await dotnetProcessInfo.Result;
                 var span = DateTime.UtcNow - start;
 
-                Logger.Log($"Exit xunit process with id {dotnetProcessInfo.Id} for test {assemblyInfo.DisplayName} with code {xunitProcessResult.ExitCode}");
+                Logger.Log(
+                    $"Exit xunit process with id {dotnetProcessInfo.Id} for test {assemblyInfo.DisplayName} with code {xunitProcessResult.ExitCode}"
+                );
                 processResultList.Add(xunitProcessResult);
                 if (procDumpProcessInfo != null)
                 {
                     var procDumpProcessResult = await procDumpProcessInfo.Value.Result;
-                    Logger.Log($"Exit procdump process with id {procDumpProcessInfo.Value.Id} for {dotnetProcessInfo.Id} for test {assemblyInfo.DisplayName} with code {procDumpProcessResult.ExitCode}");
+                    Logger.Log(
+                        $"Exit procdump process with id {procDumpProcessInfo.Value.Id} for {dotnetProcessInfo.Id} for test {assemblyInfo.DisplayName} with code {procDumpProcessResult.ExitCode}"
+                    );
                     processResultList.Add(procDumpProcessResult);
                 }
 
@@ -194,9 +229,13 @@ namespace RunTests
                     }
                 }
 
-                Logger.Log($"Command line {assemblyInfo.DisplayName}: {Options.DotnetFilePath} {commandLineArguments}");
-                var standardOutput = string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
-                var errorOutput = string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
+                Logger.Log(
+                    $"Command line {assemblyInfo.DisplayName}: {Options.DotnetFilePath} {commandLineArguments}"
+                );
+                var standardOutput =
+                    string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
+                var errorOutput =
+                    string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
 
                 var testResultInfo = new TestResultInfo(
                     exitCode: xunitProcessResult.ExitCode,
@@ -204,17 +243,21 @@ namespace RunTests
                     htmlResultsFilePath: htmlResultsFilePath,
                     elapsed: span,
                     standardOutput: standardOutput,
-                    errorOutput: errorOutput);
+                    errorOutput: errorOutput
+                );
 
                 return new TestResult(
                     assemblyInfo,
                     testResultInfo,
                     commandLineArguments,
-                    processResults: ImmutableArray.CreateRange(processResultList));
+                    processResults: ImmutableArray.CreateRange(processResultList)
+                );
             }
             catch (Exception ex)
             {
-                throw new Exception($"Unable to run {assemblyInfo.AssemblyPath} with {Options.DotnetFilePath}. {ex}");
+                throw new Exception(
+                    $"Unable to run {assemblyInfo.AssemblyPath} with {Options.DotnetFilePath}. {ex}"
+                );
             }
         }
     }

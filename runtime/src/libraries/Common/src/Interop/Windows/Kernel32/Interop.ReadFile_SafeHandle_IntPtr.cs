@@ -14,6 +14,7 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToRead,
             out int numBytesRead,
-            IntPtr mustBeZero);
+            IntPtr mustBeZero
+        );
     }
 }

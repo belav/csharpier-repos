@@ -16,21 +16,22 @@ namespace Sample
     {
         private static readonly string DefaultAzureServer = "corefx-net-http11.azurewebsites.net";
         private const string EchoHandler = "WebSocket/EchoWebSocket.ashx";
-        private static readonly Uri EchoServer = new Uri("ws://" + DefaultAzureServer + "/" + EchoHandler);
+        private static readonly Uri EchoServer = new Uri(
+            "ws://" + DefaultAzureServer + "/" + EchoHandler
+        );
 
         public override string Name => "WebSocket";
         public override Measurement[] Measurements => measurements;
         public override bool BrowserOnly => true;
 
-
         Measurement[] measurements;
         public WebSocketTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new PartialSend_1BMeasurement(),
                 new PartialSend_64KBMeasurement(),
                 new PartialSend_1MBMeasurement(),
-
                 new PartialReceive_1BMeasurement(),
                 new PartialReceive_10KBMeasurement(),
                 new PartialReceive_100KBMeasurement(),
@@ -75,7 +76,12 @@ namespace Sample
 
                 for (int i = 0; i < MaxMessages; i++)
                 {
-                    await client.SendAsync(buffer, WebSocketMessageType.Binary, true, CancellationToken.None);
+                    await client.SendAsync(
+                        buffer,
+                        WebSocketMessageType.Binary,
+                        true,
+                        CancellationToken.None
+                    );
                 }
 
                 // make sure that message arrived to receive buffer
@@ -95,7 +101,12 @@ namespace Sample
             public override void RunStep()
             {
                 buffer[0] = (byte)(step & 0xff);
-                client.SendAsync(buffer, WebSocketMessageType.Binary, false, CancellationToken.None);
+                client.SendAsync(
+                    buffer,
+                    WebSocketMessageType.Binary,
+                    false,
+                    CancellationToken.None
+                );
                 step++;
             }
         }
@@ -120,7 +131,12 @@ namespace Sample
             public override void RunStep()
             {
                 buffer[0] = (byte)(step & 0xff);
-                client.SendAsync(buffer, WebSocketMessageType.Binary, false, CancellationToken.None);
+                client.SendAsync(
+                    buffer,
+                    WebSocketMessageType.Binary,
+                    false,
+                    CancellationToken.None
+                );
                 step++;
             }
         }
@@ -145,7 +161,12 @@ namespace Sample
             public override void RunStep()
             {
                 buffer[0] = (byte)(step & 0xff);
-                client.SendAsync(buffer, WebSocketMessageType.Binary, false, CancellationToken.None);
+                client.SendAsync(
+                    buffer,
+                    WebSocketMessageType.Binary,
+                    false,
+                    CancellationToken.None
+                );
                 step++;
             }
         }
@@ -163,9 +184,12 @@ namespace Sample
             {
                 var task = client.ReceiveAsync(buffer, CancellationToken.None);
 #if DEBUG
-                if (!task.IsCompleted) throw new InvalidOperationException(Name + ": Expected Completed" + step);
-                if (task.Result.Count != 1) throw new InvalidOperationException(Name + ": Expected full buffer" + step);
-                if (buffer[0] != (byte)(step & 0xff)) throw new InvalidOperationException(Name + ": Expected data" + step);
+                if (!task.IsCompleted)
+                    throw new InvalidOperationException(Name + ": Expected Completed" + step);
+                if (task.Result.Count != 1)
+                    throw new InvalidOperationException(Name + ": Expected full buffer" + step);
+                if (buffer[0] != (byte)(step & 0xff))
+                    throw new InvalidOperationException(Name + ": Expected data" + step);
 #endif
                 step++;
             }
@@ -186,13 +210,18 @@ namespace Sample
             {
                 var task = client.ReceiveAsync(buffer, CancellationToken.None);
 #if DEBUG
-                if (!task.IsCompleted) throw new InvalidOperationException(Name + ": Expected Completed " + step);
+                if (!task.IsCompleted)
+                    throw new InvalidOperationException(Name + ": Expected Completed " + step);
                 if (step == 0)
                 {
-                    if (task.Result.Count != buffer.Count) throw new InvalidOperationException(Name + ": Expected full buffer" + step);
+                    if (task.Result.Count != buffer.Count)
+                        throw new InvalidOperationException(Name + ": Expected full buffer" + step);
                     for (int i = 0; i < bufferSize; i++)
                     {
-                        if (buffer[i] != (byte)(i & 0xff)) throw new InvalidOperationException(Name + ": Expected data at " + i + " " + step);
+                        if (buffer[i] != (byte)(i & 0xff))
+                            throw new InvalidOperationException(
+                                Name + ": Expected data at " + i + " " + step
+                            );
                     }
                 }
 #endif
@@ -216,20 +245,29 @@ namespace Sample
                 if (step == 0)
                 {
                     // this is GC step
-                    client.ReceiveAsync(new ArraySegment<byte>(new byte[1]), CancellationToken.None);
+                    client.ReceiveAsync(
+                        new ArraySegment<byte>(new byte[1]),
+                        CancellationToken.None
+                    );
                     return;
                 }
                 var task = client.ReceiveAsync(buffer, CancellationToken.None);
 #if DEBUG
-                if (!task.IsCompleted) throw new InvalidOperationException(Name + ": Expected Completed " + step);
+                if (!task.IsCompleted)
+                    throw new InvalidOperationException(Name + ": Expected Completed " + step);
                 if (step == 0)
                 {
-                    if (task.Result.Count != buffer.Count) throw new InvalidOperationException(Name + ": Expected full buffer" + step + " " + task.Result.Count + "!");
+                    if (task.Result.Count != buffer.Count)
+                        throw new InvalidOperationException(
+                            Name + ": Expected full buffer" + step + " " + task.Result.Count + "!"
+                        );
                     for (int i = 0; i < bufferSize; i++)
                     {
-                        if (buffer[i] != (byte)(i & 0xff)) throw new InvalidOperationException(Name + ": Expected data at " + i + " " + step);
+                        if (buffer[i] != (byte)(i & 0xff))
+                            throw new InvalidOperationException(
+                                Name + ": Expected data at " + i + " " + step
+                            );
                     }
-
                 }
 #endif
                 step++;

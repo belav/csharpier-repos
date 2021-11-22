@@ -14,30 +14,34 @@ using System.Globalization;
 
 public class MapSymbolProvider : SymbolProvider
 {
-    public MapSymbolProvider(String symbolFilename) {
+    public MapSymbolProvider(String symbolFilename)
+    {
         mf = new MapFile(symbolFilename);
     }
 
-    public override UInt32 GetGlobalRVA(String symbolName,
-                                        SymType symType) {
+    public override UInt32 GetGlobalRVA(String symbolName, SymType symType)
+    {
         return GetRVA(symbolName);
-
     }
 
-    public override UInt32 GetVTableRVA(String symbolName,
-                                        String keyBaseName) {
-        if (keyBaseName != null) {
+    public override UInt32 GetVTableRVA(String symbolName, String keyBaseName)
+    {
+        if (keyBaseName != null)
+        {
             return GetRVA(symbolName + "__" + keyBaseName);
-        } else {
+        }
+        else
+        {
             return GetRVA(symbolName);
         }
     }
 
-    UInt32 GetRVA(String symbolName) {
-
+    UInt32 GetRVA(String symbolName)
+    {
         SymbolInfo si = mf.FindSymbol(symbolName);
 
-        if (si == null) {
+        if (si == null)
+        {
             // Ideally this would throw an exception and
             // cause the whole process to fail but
             // currently it's too complicated to get
@@ -53,7 +57,6 @@ public class MapSymbolProvider : SymbolProvider
     MapFile mf = null;
 }
 
-
 public class SymbolInfo
 {
     public SymbolInfo(int Segment, UInt32 Address)
@@ -65,30 +68,25 @@ public class SymbolInfo
 
     public int Segment
     {
-        get
-        { return m_Segment; }
+        get { return m_Segment; }
     }
 
     public UInt32 Address
     {
-        get
-        { return m_Address; }
+        get { return m_Address; }
     }
 
     public bool dupFound
     {
-        get
-        { return m_dupFound; }
-        set
-        { m_dupFound = value; }
+        get { return m_dupFound; }
+        set { m_dupFound = value; }
     }
 
-    int    m_Segment;  // The segment index. (Used only in Windows MAP file.)
+    int m_Segment; // The segment index. (Used only in Windows MAP file.)
     UInt32 m_Address;
 
-    bool m_dupFound;   // Have we found a duplicated entry for this key?
+    bool m_dupFound; // Have we found a duplicated entry for this key?
 }
-
 
 public class MapFile
 {
@@ -99,7 +97,8 @@ public class MapFile
     //
     const String Reg_MapAddress = @"^ (?<addrPart1>[0-9a-f]{4}):(?<addrPart2>[0-9a-f]{8})";
 
-    enum WindowsSymbolTypes {
+    enum WindowsSymbolTypes
+    {
         ModuleNameClassNameFieldName,
         ClassNameFieldName,
         GlobalVarName,
@@ -109,55 +108,41 @@ public class MapFile
         MultiVtAddr,
     };
 
-    readonly String[] RegExps_WindowsMapfile = {
-
+    readonly String[] RegExps_WindowsMapfile =
+    {
         // ModuleNameClassNameFieldName
         //   Example: ?ephemeral_heap_segment@gc_heap@WKS@@
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"\?(?<fieldName>[^\?@]+)@(?<className>[^\?@]+)@(?<moduleName>[^\?@]+)@@",
-
+        Reg_MapAddress
+            + Reg_ExWhiteSpaces
+            + @"\?(?<fieldName>[^\?@]+)@(?<className>[^\?@]+)@(?<moduleName>[^\?@]+)@@",
         // ClassNameFieldName
         //   Example: ?m_RangeTree@ExecutionManager@@
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"\?(?<fieldName>[^\?@]+)@(?<className>[^\?@]+)@@",
-
+        Reg_MapAddress + Reg_ExWhiteSpaces + @"\?(?<fieldName>[^\?@]+)@(?<className>[^\?@]+)@@",
         // GlobalVarName
         //   Example: ?g_pNotificationTable@@
         //       (or) ?JIT_LMul@@
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"\?(?<globalVarName>[^\?@]+)@@",
-
+        Reg_MapAddress + Reg_ExWhiteSpaces + @"\?(?<globalVarName>[^\?@]+)@@",
         // GlobalVarName2
         //   Example: @JIT_WriteBarrier@
         //       (or) _JIT_FltRem@
         //       (or) _JIT_Dbl2Lng@
         //       (or) _JIT_LLsh@
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"[@_](?<globalVarName>[^\?@]+)@",
-
+        Reg_MapAddress + Reg_ExWhiteSpaces + @"[@_](?<globalVarName>[^\?@]+)@",
         // GlobalVarName3
         //   Example:  _g_card_table    795e53a4
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"_(?<globalVarName>[^\s@]+)" +
-        Reg_ExWhiteSpaces +
-        @"[0-9a-f]{8}",
-
+        Reg_MapAddress
+            + Reg_ExWhiteSpaces
+            + @"_(?<globalVarName>[^\s@]+)"
+            + Reg_ExWhiteSpaces
+            + @"[0-9a-f]{8}",
         // Single-inheritance VtAddr
         //   Example: ??_7Thread@@6B@
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"\?\?_7(?<FunctionName>[^\?@]+)@@6B@",
-
+        Reg_MapAddress + Reg_ExWhiteSpaces + @"\?\?_7(?<FunctionName>[^\?@]+)@@6B@",
         // Multiple-inheritance VtAddr
         //   Example: ??_7CompilationDomain@@6BAppDomain@@@
-        Reg_MapAddress +
-        Reg_ExWhiteSpaces +
-        @"\?\?_7(?<FunctionName>[^\?@]+)@@6B(?<BaseName>[^@]+)@@@"
+        Reg_MapAddress
+            + Reg_ExWhiteSpaces
+            + @"\?\?_7(?<FunctionName>[^\?@]+)@@6B(?<BaseName>[^@]+)@@@"
     };
     const String Reg_Length = @"(?<length>[0-9a-f]{8})H";
     const String Reg_SegmentInfo = Reg_MapAddress + " " + Reg_Length;
@@ -168,7 +153,8 @@ public class MapFile
     const String Reg_NmAddress = @"^(?<address>[0-9a-f]{8})";
     const String Reg_TypeChar = @"[a-zA-Z]";
 
-    enum UnixSymbolTypes {
+    enum UnixSymbolTypes
+    {
         CxxFieldName,
         CxxFunctionName,
         CGlobal,
@@ -177,20 +163,15 @@ public class MapFile
 
     // Rather than try and encode a particular C++ mangling format here, we rely on the nm output
     // having been unmanagled through the c++filt tool.
-    readonly String[] RegExps_UnixNmfile = {
-
+    readonly String[] RegExps_UnixNmfile =
+    {
         // C++ field name
         //  Examples:
         //       d WKS::gc_heap::ephemeral_heap_segment
         //       d WKS::GCHeap::hEventFinalizer
         //       s ExecutionManager::m_CodeRangeList
         //       d ExecutionManager::m_dwReaderCount
-        Reg_NmAddress +
-        " " +
-        Reg_TypeChar +
-        " " +
-        @"(?<symName>\w+(::\w+)+)$",
-
+        Reg_NmAddress + " " + Reg_TypeChar + " " + @"(?<symName>\w+(::\w+)+)$",
         // C++ function/method name
         //  Note: may have duplicates due to overloading by argument types
         //  Examples:
@@ -200,22 +181,12 @@ public class MapFile
         //  Counter-examples we don't want to include:
         //       b JIT_NewFast(int, int, CORINFO_CLASS_STRUCT_*)::__haveCheckedRestoreState
         //
-        Reg_NmAddress +
-        " " +
-        Reg_TypeChar +
-        " " +
-        @"(?<symName>\w+(::\w+)*)\(.*\)$",
-
+        Reg_NmAddress + " " + Reg_TypeChar + " " + @"(?<symName>\w+(::\w+)*)\(.*\)$",
         // C global variable / function name
         //  Examples:
         //   s _g_pNotificationTable
         //   t _JIT_LLsh
-        Reg_NmAddress +
-        " " +
-        Reg_TypeChar +
-        " " +
-        @"_(?<symName>\w+)$",
-
+        Reg_NmAddress + " " + Reg_TypeChar + " " + @"_(?<symName>\w+)$",
         // VtAddr
         //   Examples:
         //    s vtable for Thread
@@ -227,11 +198,7 @@ public class MapFile
         // We also don't support nested classes here because there is currently no syntax for them
         // for daccess.i.
         //
-        Reg_NmAddress +
-        " " +
-        Reg_TypeChar +
-        " " +
-        @"vtable for (?<symName>\w+)$",
+        Reg_NmAddress + " " + Reg_TypeChar + " " + @"vtable for (?<symName>\w+)$",
     };
 
     public UInt32 GetRVA(SymbolInfo si)
@@ -254,8 +221,14 @@ public class MapFile
     {
         Regex regExNmFile = new Regex("^[0-9a-f]{8} ");
         Regex regEx = new Regex(Reg_SegmentInfo);
-        Regex regHeaderSection = new Regex(@"\s*Address\s*Publics by Value\s*Rva\+Base\s*Lib:Object", RegexOptions.IgnoreCase);
-        Regex regnonNMHeader = new Regex(@"\s*Start\s*Length\s*Name\s*Class", RegexOptions.IgnoreCase);
+        Regex regHeaderSection = new Regex(
+            @"\s*Address\s*Publics by Value\s*Rva\+Base\s*Lib:Object",
+            RegexOptions.IgnoreCase
+        );
+        Regex regnonNMHeader = new Regex(
+            @"\s*Start\s*Length\s*Name\s*Class",
+            RegexOptions.IgnoreCase
+        );
         Match match = null;
 
         UInt32 lastSegmentIndex = 0;
@@ -273,9 +246,10 @@ public class MapFile
         {
             line = strm.ReadLine();
 
-            if (bInSegmentDecl) {
-
-                if (regHeaderSection.IsMatch(line)) {
+            if (bInSegmentDecl)
+            {
+                if (regHeaderSection.IsMatch(line))
+                {
                     // Header section ends.
                     break;
                 }
@@ -284,16 +258,31 @@ public class MapFile
 #endif
 
                 match = regEx.Match(line);
-                if (match.Success) {
-                    segmentIndex = UInt32.Parse(match.Groups["addrPart1"].ToString(), NumberStyles.AllowHexSpecifier);
-                    if (segmentIndex != lastSegmentIndex) {
+                if (match.Success)
+                {
+                    segmentIndex = UInt32.Parse(
+                        match.Groups["addrPart1"].ToString(),
+                        NumberStyles.AllowHexSpecifier
+                    );
+                    if (segmentIndex != lastSegmentIndex)
+                    {
                         // Enter the new segment. Record what we have.
                         // Note, SegmentBase[i] is built upon SegmentBase[i-1]
-                        SegmentBase.Add((UInt32)SegmentBase[SegmentBase.Count-1] + (sectionStart + sectionLength + (UInt32)0xFFF) & (~((UInt32)0xFFF)));
+                        SegmentBase.Add(
+                            (UInt32)SegmentBase[SegmentBase.Count - 1]
+                                + (sectionStart + sectionLength + (UInt32)0xFFF)
+                                & (~((UInt32)0xFFF))
+                        );
                         lastSegmentIndex = segmentIndex;
                     }
-                    sectionStart = UInt32.Parse(match.Groups["addrPart2"].ToString(), NumberStyles.AllowHexSpecifier);
-                    sectionLength = UInt32.Parse(match.Groups["length"].ToString(), NumberStyles.AllowHexSpecifier);
+                    sectionStart = UInt32.Parse(
+                        match.Groups["addrPart2"].ToString(),
+                        NumberStyles.AllowHexSpecifier
+                    );
+                    sectionLength = UInt32.Parse(
+                        match.Groups["length"].ToString(),
+                        NumberStyles.AllowHexSpecifier
+                    );
                 }
 
                 if (line == null)
@@ -301,10 +290,13 @@ public class MapFile
                     throw new InvalidOperationException("Invalid MAP header format.");
                 }
             }
-            else {
-                if (!regnonNMHeader.IsMatch(line)) {
+            else
+            {
+                if (!regnonNMHeader.IsMatch(line))
+                {
                     match = regExNmFile.Match(line);
-                    if (match.Success) {
+                    if (match.Success)
+                    {
                         // It's a nm file format. There is no header for it.
                         break;
                     }
@@ -312,28 +304,26 @@ public class MapFile
                 }
                 bInSegmentDecl = true;
                 bIsWindowsMapfile = true;
-
             }
         }
 
-        if (bIsWindowsMapfile) {
+        if (bIsWindowsMapfile)
+        {
             //
             // Only Windows map file has SegmentBase
             //
-            for (int i=1 ; i<= lastSegmentIndex; i++) {
+            for (int i = 1; i <= lastSegmentIndex; i++)
+            {
 #if DACTABLEGEN_DEBUG
                 Console.WriteLine("SegmentBase[{0}] = {1:x8}", i, SegmentBase[i]);
 #endif
             }
         }
-
     }
 
     public void loadDataFromMapFile()
     {
-
-        StreamReader strm =
-            new StreamReader(m_symdumpFile, System.Text.Encoding.ASCII);
+        StreamReader strm = new StreamReader(m_symdumpFile, System.Text.Encoding.ASCII);
         String line;
         int i;
         String[] RegExps;
@@ -346,17 +336,20 @@ public class MapFile
         // Scan through the symbol dump file looking
         // for the globals structure.
         //
-        if (bIsWindowsMapfile) {
+        if (bIsWindowsMapfile)
+        {
             RegExps = RegExps_WindowsMapfile;
         }
-        else {
+        else
+        {
             RegExps = RegExps_UnixNmfile;
         }
 
-        Console.WriteLine("It is a {0} file.", (bIsWindowsMapfile)?"Windows MAP":"Unix NM");
+        Console.WriteLine("It is a {0} file.", (bIsWindowsMapfile) ? "Windows MAP" : "Unix NM");
 
         Regex[] RegExs = new Regex[RegExps.Length];
-        for (i = 0; i < RegExps.Length; i++) {
+        for (i = 0; i < RegExps.Length; i++)
+        {
 #if DACTABLEGEN_DEBUG
             Console.WriteLine("RegEx[{0}]: {1}", i, RegExps[i]);
 #endif
@@ -380,49 +373,90 @@ public class MapFile
             }
 
             // Console.WriteLine(">{0}", line);
-            for (i = 0; i < RegExps.Length; i++) {
-
+            for (i = 0; i < RegExps.Length; i++)
+            {
                 match = RegExs[i].Match(line);
-                if (match.Success) {
+                if (match.Success)
+                {
                     // Console.WriteLine(line);
 
                     segment = 0;
                     address = 0;
-                    if (bIsWindowsMapfile) {
-                        switch ((WindowsSymbolTypes)i) {
-
+                    if (bIsWindowsMapfile)
+                    {
+                        switch ((WindowsSymbolTypes)i)
+                        {
                             case WindowsSymbolTypes.ModuleNameClassNameFieldName:
-                                key = match.Groups["moduleName"].ToString() + "::" + match.Groups["className"].ToString() + "::" + match.Groups["fieldName"];
-                                segment = Int32.Parse(match.Groups["addrPart1"].ToString(), NumberStyles.AllowHexSpecifier);
-                                address = UInt32.Parse(match.Groups["addrPart2"].ToString(), NumberStyles.AllowHexSpecifier);
+                                key =
+                                    match.Groups["moduleName"].ToString()
+                                    + "::"
+                                    + match.Groups["className"].ToString()
+                                    + "::"
+                                    + match.Groups["fieldName"];
+                                segment = Int32.Parse(
+                                    match.Groups["addrPart1"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
+                                address = UInt32.Parse(
+                                    match.Groups["addrPart2"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
                                 break;
 
                             case WindowsSymbolTypes.ClassNameFieldName:
-                                key = match.Groups["className"].ToString() + "::" + match.Groups["fieldName"];
-                                segment = Int32.Parse(match.Groups["addrPart1"].ToString(), NumberStyles.AllowHexSpecifier);
-                                address = UInt32.Parse(match.Groups["addrPart2"].ToString(), NumberStyles.AllowHexSpecifier);
+                                key =
+                                    match.Groups["className"].ToString()
+                                    + "::"
+                                    + match.Groups["fieldName"];
+                                segment = Int32.Parse(
+                                    match.Groups["addrPart1"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
+                                address = UInt32.Parse(
+                                    match.Groups["addrPart2"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
                                 break;
 
                             case WindowsSymbolTypes.GlobalVarName:
                             case WindowsSymbolTypes.GlobalVarName2:
                             case WindowsSymbolTypes.GlobalVarName3:
                                 key = match.Groups["globalVarName"].ToString();
-                                segment = Int32.Parse(match.Groups["addrPart1"].ToString(), NumberStyles.AllowHexSpecifier);
-                                address = UInt32.Parse(match.Groups["addrPart2"].ToString(), NumberStyles.AllowHexSpecifier);
+                                segment = Int32.Parse(
+                                    match.Groups["addrPart1"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
+                                address = UInt32.Parse(
+                                    match.Groups["addrPart2"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
                                 break;
 
                             case WindowsSymbolTypes.SingleVtAddr:
                                 key = match.Groups["FunctionName"].ToString();
-                                segment = Int32.Parse(match.Groups["addrPart1"].ToString(), NumberStyles.AllowHexSpecifier);
-                                address = UInt32.Parse(match.Groups["addrPart2"].ToString(), NumberStyles.AllowHexSpecifier);
+                                segment = Int32.Parse(
+                                    match.Groups["addrPart1"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
+                                address = UInt32.Parse(
+                                    match.Groups["addrPart2"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
                                 break;
 
                             case WindowsSymbolTypes.MultiVtAddr:
-                                key = match.Groups["FunctionName"].ToString() +
-                                    "__" +
-                                    match.Groups["BaseName"].ToString();
-                                segment = Int32.Parse(match.Groups["addrPart1"].ToString(), NumberStyles.AllowHexSpecifier);
-                                address = UInt32.Parse(match.Groups["addrPart2"].ToString(), NumberStyles.AllowHexSpecifier);
+                                key =
+                                    match.Groups["FunctionName"].ToString()
+                                    + "__"
+                                    + match.Groups["BaseName"].ToString();
+                                segment = Int32.Parse(
+                                    match.Groups["addrPart1"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
+                                address = UInt32.Parse(
+                                    match.Groups["addrPart2"].ToString(),
+                                    NumberStyles.AllowHexSpecifier
+                                );
                                 break;
 
                             default:
@@ -437,7 +471,10 @@ public class MapFile
                         // hash), but we want to be consistent with the windows map case here.
 
                         key = match.Groups["symName"].ToString();
-                        address = UInt32.Parse(match.Groups["address"].ToString(), NumberStyles.AllowHexSpecifier);
+                        address = UInt32.Parse(
+                            match.Groups["address"].ToString(),
+                            NumberStyles.AllowHexSpecifier
+                        );
 
                         if (i == (int)UnixSymbolTypes.VtAddr)
                         {
@@ -452,7 +489,7 @@ public class MapFile
                             // running on), so it might be better to do this adjustment in DAC itself.  But
                             // for now doing it here is simpler and more reliable (only one place to update
                             // to make it consistent).
-                            address += 2 * 4;   // assumes 32-bit
+                            address += 2 * 4; // assumes 32-bit
                         }
                     }
 
@@ -464,21 +501,18 @@ public class MapFile
                         // so that we can warn/fail if we try to use it.
                         si.dupFound = true;
                     }
-                    else {
+                    else
+                    {
                         si = new SymbolInfo(segment, address);
                         // Console.WriteLine("{0:x8} {1}", si.Segment, si.Address, key);
                         SymbolHash.Add(key, si);
                     }
-
                 }
-
             }
-
         }
 
         strm.Close();
     }
-
 
     public SymbolInfo FindSymbol(String key)
     {
@@ -487,7 +521,9 @@ public class MapFile
         {
             if (si.dupFound)
             {
-                Console.WriteLine("Warning: Symbol " + key + " has duplicated entry in the symbol dump file.");
+                Console.WriteLine(
+                    "Warning: Symbol " + key + " has duplicated entry in the symbol dump file."
+                );
             }
         }
 

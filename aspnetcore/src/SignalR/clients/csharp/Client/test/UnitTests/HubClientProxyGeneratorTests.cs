@@ -12,7 +12,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 [AttributeUsage(AttributeTargets.Method)]
 internal class HubClientProxyAttribute : Attribute
 {
-
 }
 
 internal static partial class RegisterCallbackProviderExtensions
@@ -72,35 +71,57 @@ public class HubClientProxyGeneratorTests
         var mockConn = MockHubConnection.Get();
         var noArgReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "NoArg",
-                Array.Empty<Type>(),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "NoArg",
+                        Array.Empty<Type>(),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(noArgReg);
         var singleArgReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "SingleArg",
-                It.Is<Type[]>(t => t.Length == 1 && t[0] == typeof(int)),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "SingleArg",
+                        It.Is<Type[]>(t => t.Length == 1 && t[0] == typeof(int)),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(singleArgReg);
         var manyArgsReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "ManyArgs",
-                It.Is<Type[]>(t => t.Length == 3 && t[0] == typeof(int) && t[1] == typeof(float) && t[2] == typeof(int?)),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "ManyArgs",
+                        It.Is<Type[]>(
+                            t =>
+                                t.Length == 3
+                                && t[0] == typeof(int)
+                                && t[1] == typeof(float)
+                                && t[2] == typeof(int?)
+                        ),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(manyArgsReg);
         var returnTaskReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "ReturnTask",
-                Array.Empty<Type>(),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "ReturnTask",
+                        Array.Empty<Type>(),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(returnTaskReg);
         var conn = mockConn.Object;
         var myClient = new MyClient();
@@ -123,35 +144,57 @@ public class HubClientProxyGeneratorTests
         var mockConn = MockHubConnection.Get();
         var noArgReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "NoArg",
-                Array.Empty<Type>(),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "NoArg",
+                        Array.Empty<Type>(),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(noArgReg);
         var singleArgReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "SingleArg",
-                It.Is<Type[]>(t => t.Length == 1 && t[0] == typeof(int)),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "SingleArg",
+                        It.Is<Type[]>(t => t.Length == 1 && t[0] == typeof(int)),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(singleArgReg);
         var manyArgsReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "ManyArgs",
-                It.Is<Type[]>(t => t.Length == 3 && t[0] == typeof(int) && t[1] == typeof(float) && t[2] == typeof(int?)),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "ManyArgs",
+                        It.Is<Type[]>(
+                            t =>
+                                t.Length == 3
+                                && t[0] == typeof(int)
+                                && t[1] == typeof(float)
+                                && t[2] == typeof(int?)
+                        ),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(manyArgsReg);
         var returnTaskReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "ReturnTask",
-                Array.Empty<Type>(),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "ReturnTask",
+                        Array.Empty<Type>(),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Returns(returnTaskReg);
         var conn = mockConn.Object;
         var myClient = new MyClient();
@@ -176,65 +219,111 @@ public class HubClientProxyGeneratorTests
         Func<object[], object, Task> noArgFunc = null;
         object noArgState = null;
         mockConn
-            .Setup(x => x.On(
-                "NoArg",
-                Array.Empty<Type>(),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "NoArg",
+                        Array.Empty<Type>(),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Callback(
-                (string methodName, Type[] parameterTypes, Func<object[], object, Task> handler, object state) =>
+                (
+                    string methodName,
+                    Type[] parameterTypes,
+                    Func<object[], object, Task> handler,
+                    object state
+                ) =>
                 {
                     noArgFunc = handler;
                     noArgState = state;
-                })
+                }
+            )
             .Returns(noArgReg);
         Func<object[], object, Task> singleArgFunc = null;
         object singleArgState = null;
         var singleArgReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "SingleArg",
-                It.Is<Type[]>(t => t.Length == 1 && t[0] == typeof(int)),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "SingleArg",
+                        It.Is<Type[]>(t => t.Length == 1 && t[0] == typeof(int)),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Callback(
-                (string methodName, Type[] parameterTypes, Func<object[], object, Task> handler, object state) =>
+                (
+                    string methodName,
+                    Type[] parameterTypes,
+                    Func<object[], object, Task> handler,
+                    object state
+                ) =>
                 {
                     singleArgFunc = handler;
                     singleArgState = state;
-                })
+                }
+            )
             .Returns(singleArgReg);
         Func<object[], object, Task> manyArgsFunc = null;
         object manyArgsState = null;
         var manyArgsReg = new Disposable();
         mockConn
-            .Setup(x => x.On(
-                "ManyArgs",
-                It.Is<Type[]>(t => t.Length == 3 && t[0] == typeof(int) && t[1] == typeof(float) && t[2] == typeof(int?)),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "ManyArgs",
+                        It.Is<Type[]>(
+                            t =>
+                                t.Length == 3
+                                && t[0] == typeof(int)
+                                && t[1] == typeof(float)
+                                && t[2] == typeof(int?)
+                        ),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Callback(
-                (string methodName, Type[] parameterTypes, Func<object[], object, Task> handler, object state) =>
+                (
+                    string methodName,
+                    Type[] parameterTypes,
+                    Func<object[], object, Task> handler,
+                    object state
+                ) =>
                 {
                     manyArgsFunc = handler;
                     manyArgsState = state;
-                })
+                }
+            )
             .Returns(manyArgsReg);
         var returnTaskReg = new Disposable();
         Func<object[], object, Task> returnTaskFunc = null;
         object returnTaskState = null;
         mockConn
-            .Setup(x => x.On(
-                "ReturnTask",
-                Array.Empty<Type>(),
-                It.IsAny<Func<object[], object, Task>>(),
-                It.IsAny<object>()))
+            .Setup(
+                x =>
+                    x.On(
+                        "ReturnTask",
+                        Array.Empty<Type>(),
+                        It.IsAny<Func<object[], object, Task>>(),
+                        It.IsAny<object>()
+                    )
+            )
             .Callback(
-                (string methodName, Type[] parameterTypes, Func<object[], object, Task> handler, object state) =>
+                (
+                    string methodName,
+                    Type[] parameterTypes,
+                    Func<object[], object, Task> handler,
+                    object state
+                ) =>
                 {
                     returnTaskFunc = handler;
                     returnTaskState = state;
-                })
+                }
+            )
             .Returns(returnTaskReg);
         var conn = mockConn.Object;
         var myClient = new MyClient();

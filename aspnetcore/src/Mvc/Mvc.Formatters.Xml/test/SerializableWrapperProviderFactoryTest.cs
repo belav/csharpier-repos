@@ -17,7 +17,8 @@ public class SerializableWrapperProviderFactoryTest
 
         // Act
         var wrapperProvider = serializableErrorWrapperProviderFactory.GetProvider(
-                                    new WrapperProviderContext(typeof(SerializableError), isSerialization));
+            new WrapperProviderContext(typeof(SerializableError), isSerialization)
+        );
 
         // Assert
         Assert.NotNull(wrapperProvider);
@@ -32,7 +33,8 @@ public class SerializableWrapperProviderFactoryTest
 
         // Act
         var wrapperProvider = serializableErrorWrapperProviderFactory.GetProvider(
-                                    new WrapperProviderContext(typeof(Person), isSerialization: true));
+            new WrapperProviderContext(typeof(Person), isSerialization: true)
+        );
 
         // Assert
         Assert.Null(wrapperProvider);

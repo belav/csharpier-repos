@@ -49,7 +49,10 @@ namespace System.Collections.Immutable.Tests
                         break;
                     case Operation.Union:
                         int inputLength = random.Next(100);
-                        int[] values = Enumerable.Range(0, inputLength).Select(i => random.Next()).ToArray();
+                        int[] values = Enumerable
+                            .Range(0, inputLength)
+                            .Select(i => random.Next())
+                            .ToArray();
                         Debug.WriteLine("Adding {0} elements to the set.", inputLength);
                         expected.UnionWith(values);
                         actual = actual.Union(values);
@@ -63,7 +66,6 @@ namespace System.Collections.Immutable.Tests
                             Assert.True(expected.Remove(element));
                             actual = actual.Remove(element);
                         }
-
                         break;
                     case Operation.Except:
                         var elements = expected.Where(el => random.Next(2) == 0).ToArray();
@@ -84,12 +86,14 @@ namespace System.Collections.Immutable.Tests
                 ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.Ordinal),
                 true,
                 new[] { "apple", "APPLE" },
-                new[] { "APPLE", "apple" });
+                new[] { "APPLE", "apple" }
+            );
             this.CustomSortTestHelper(
                 ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase),
                 true,
                 new[] { "apple", "APPLE" },
-                new[] { "apple" });
+                new[] { "apple" }
+            );
         }
 
         [Fact]
@@ -189,8 +193,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void IndexGetTest()
         {
-            var set = ImmutableSortedSet<int>.Empty
-                .Union(Enumerable.Range(1, 10).Select(n => n * 10)); // 10, 20, 30, ... 100
+            var set = ImmutableSortedSet<int>.Empty.Union(
+                Enumerable.Range(1, 10).Select(n => n * 10)
+            ); // 10, 20, 30, ... 100
 
             int i = 0;
             foreach (var item in set)
@@ -361,11 +366,20 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSortedSet.Create<int>());
             ImmutableSortedSet<string> set = ImmutableSortedSet.Create("1", "2", "3");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                set
+            );
 
-            object rootNode = DebuggerAttributes.GetFieldValue(ImmutableSortedSet.Create<object>(), "_root");
+            object rootNode = DebuggerAttributes.GetFieldValue(
+                ImmutableSortedSet.Create<object>(),
+                "_root"
+            );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            PropertyInfo itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(set, items);
         }
@@ -373,16 +387,22 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSortedSet.Create("1", "2", "3"));
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSortedSet.Create("1", "2", "3")
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void SymmetricExceptWithComparerTests()
         {
-            var set = ImmutableSortedSet.Create<string>("a").WithComparer(StringComparer.OrdinalIgnoreCase);
-            var otherCollection = new[] {"A"};
+            var set = ImmutableSortedSet
+                .Create<string>("a")
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
+            var otherCollection = new[] { "A" };
 
             var expectedSet = new SortedSet<string>(set, set.KeyComparer);
             expectedSet.SymmetricExceptWith(otherCollection);

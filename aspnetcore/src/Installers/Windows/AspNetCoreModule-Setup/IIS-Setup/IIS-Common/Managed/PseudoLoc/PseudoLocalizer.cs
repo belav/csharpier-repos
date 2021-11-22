@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
 using System;
@@ -42,7 +42,6 @@ namespace Microsoft.Web.Utility
             {
                 DebugTrace("ploc should be at least 10% padded");
             }
-
 #if PSEUDOLOCALIZER_ENABLED
             _shouldPseudoLocalize = true;
 #endif // PSEUDOLOCALIZER_ENABLED
@@ -50,10 +49,7 @@ namespace Microsoft.Web.Utility
 
         public static bool ShouldPseudoLocalize
         {
-            get
-            {
-                return _shouldPseudoLocalize;
-            }
+            get { return _shouldPseudoLocalize; }
         }
 
         // Need to use this method instead of tracing/debugging directly otherwise
@@ -97,9 +93,11 @@ namespace Microsoft.Web.Utility
                     }
                     else
                     {
-                        DebugTrace("PLOC: no type {0} found in the assembly {1}",
+                        DebugTrace(
+                            "PLOC: no type {0} found in the assembly {1}",
                             resourceTypeName,
-                            assembly.FullName);
+                            assembly.FullName
+                        );
                     }
                 }
                 catch (Exception ex)
@@ -119,8 +117,18 @@ namespace Microsoft.Web.Utility
         /// Enables pseudo-localization for the specified RESX managed wrapper class.
         /// </summary>
         /// <param name="resourcesType">Type of the RESX managed wrapper class.</param>
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ResourceManager", Justification = "Name of property.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "resourceMan", Justification = "Name of field.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "ResourceManager",
+            Justification = "Name of property."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "resourceMan",
+            Justification = "Name of field."
+        )]
         public static void Enable(Type resourcesType)
         {
             if (null == resourcesType)
@@ -129,31 +137,45 @@ namespace Microsoft.Web.Utility
             }
 
             // Get the ResourceManager property
-            var resourceManagerProperty = resourcesType.GetProperty("ResourceManager", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            var resourceManagerProperty = resourcesType.GetProperty(
+                "ResourceManager",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
             if (null == resourceManagerProperty)
             {
-                throw new NotSupportedException("RESX managed wrapper class does not contain the expected internal/public static ResourceManager property.");
+                throw new NotSupportedException(
+                    "RESX managed wrapper class does not contain the expected internal/public static ResourceManager property."
+                );
             }
 
             // Get the ResourceManager value (ensures the resourceMan field gets initialized)
-            var resourceManagerValue = resourceManagerProperty.GetValue(null, null) as ResourceManager;
+            var resourceManagerValue =
+                resourceManagerProperty.GetValue(null, null) as ResourceManager;
             if (null == resourceManagerValue)
             {
-                throw new NotSupportedException("RESX managed wrapper class returned null for the ResourceManager property getter.");
+                throw new NotSupportedException(
+                    "RESX managed wrapper class returned null for the ResourceManager property getter."
+                );
             }
 
             // Get the resourceMan field
-            var resourceManField = resourcesType.GetField("resourceMan", BindingFlags.Static | BindingFlags.NonPublic);
+            var resourceManField = resourcesType.GetField(
+                "resourceMan",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             if (null == resourceManField)
             {
-                throw new NotSupportedException("RESX managed wrapper class does not contain the expected private static resourceMan field.");
+                throw new NotSupportedException(
+                    "RESX managed wrapper class does not contain the expected private static resourceMan field."
+                );
             }
 
             // Create a substitute ResourceManager to do the pseudo-localization
             var resourceManSubstitute = new PseudoLocalizerResourceManager(
                 _plocPaddingLengthRatio,
                 resourceManagerValue.BaseName,
-                resourcesType.Assembly);
+                resourcesType.Assembly
+            );
 
             // Replace the resourceMan field value
             resourceManField.SetValue(null, resourceManSubstitute);
@@ -172,20 +194,21 @@ namespace Microsoft.Web.Utility
                 TryEnableAssembly(Assembly.GetExecutingAssembly());
 
                 //set up pseudo-localization for anything that gets loaded later
-                AppDomain.CurrentDomain.AssemblyLoad +=
-                    new AssemblyLoadEventHandler(OnCurrentDomainAssemblyLoad);
+                AppDomain.CurrentDomain.AssemblyLoad += new AssemblyLoadEventHandler(
+                    OnCurrentDomainAssemblyLoad
+                );
             }
         }
 
         public static string PseudoLocalizeString(string str)
         {
             return PseudoLocalizerResourceManager.PseudoLocalizeString(
-                _plocPaddingLengthRatio, 
-                str);
+                _plocPaddingLengthRatio,
+                str
+            );
         }
 
-        private static void OnCurrentDomainAssemblyLoad(object sender,
-            AssemblyLoadEventArgs args)
+        private static void OnCurrentDomainAssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
             Assembly assembly = args.LoadedAssembly;
             bool isThisMyAssembly;
@@ -193,8 +216,9 @@ namespace Microsoft.Web.Utility
             {
                 isThisMyAssembly = true;
             }
-            else if (assembly.FullName.StartsWith("Microsoft.Web",
-                StringComparison.OrdinalIgnoreCase))
+            else if (
+                assembly.FullName.StartsWith("Microsoft.Web", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 isThisMyAssembly = true;
             }
@@ -288,10 +312,11 @@ namespace Microsoft.Web.Utility
             /// </summary>
             /// <param name="baseName">The root name of the resource file without its extension but including any fully qualified namespace name.</param>
             /// <param name="assembly">The main assembly for the resources.</param>
-            public PseudoLocalizerResourceManager(double paddingLengthRatio,
+            public PseudoLocalizerResourceManager(
+                double paddingLengthRatio,
                 string baseName,
-                Assembly assembly)
-                : base(baseName, assembly)
+                Assembly assembly
+            ) : base(baseName, assembly)
             {
                 _paddingLengthRatio = paddingLengthRatio;
             }
@@ -348,15 +373,26 @@ namespace Microsoft.Web.Utility
                 int padLengthPerSide = GetPaddingLengthPerSide(
                     str.Length,
                     paddingLengthRatio,
-                    minprefix.Length + minsuffix.Length);
+                    minprefix.Length + minsuffix.Length
+                );
 
                 string extraPadding = new string('=', padLengthPerSide);
-                string finalString = string.Concat(minprefix, extraPadding, mungedString, extraPadding, minsuffix);
+                string finalString = string.Concat(
+                    minprefix,
+                    extraPadding,
+                    mungedString,
+                    extraPadding,
+                    minsuffix
+                );
 
                 return finalString;
             }
 
-            private static int GetPaddingLengthPerSide(int originalStringLength, double paddingRatio, int minPadLength)
+            private static int GetPaddingLengthPerSide(
+                int originalStringLength,
+                double paddingRatio,
+                int minPadLength
+            )
             {
                 int padLengthPerSide;
                 double exactTotalPadding = (originalStringLength * paddingRatio);
@@ -386,7 +422,8 @@ namespace Microsoft.Web.Utility
                     }
                     else
                     {
-                        translatedChars[i] = (i % 2) == 0 ? char.ToUpperInvariant(c) : char.ToLowerInvariant(c);
+                        translatedChars[i] =
+                            (i % 2) == 0 ? char.ToUpperInvariant(c) : char.ToLowerInvariant(c);
                         if (c == '<' && str.IndexOf('>', i) > -1)
                         {
                             inXamlTag = true;
@@ -428,10 +465,7 @@ namespace Microsoft.Web.Utility
     {
         public static bool ShouldPseudoLocalize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public static bool TryEnableAssembly(Assembly assembly)
@@ -439,13 +473,9 @@ namespace Microsoft.Web.Utility
             return true;
         }
 
-        public static void Enable(Type resourcesType)
-        {
-        }
+        public static void Enable(Type resourcesType) { }
 
-        public static void EnableAutoPseudoLocalizationFromHostExecutable()
-        {
-        }
+        public static void EnableAutoPseudoLocalizationFromHostExecutable() { }
 
         public static string PseudoLocalizeString(string str)
         {

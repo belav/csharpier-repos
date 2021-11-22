@@ -88,7 +88,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 FileAccess fileAccess,
                 FileShare fileShare,
                 int bufferSize,
-                FileOptions fileOptions)
+                FileOptions fileOptions
+            )
             {
                 throw new NotImplementedException();
             }
@@ -114,5 +115,4 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             }
         }
     }
-
 }

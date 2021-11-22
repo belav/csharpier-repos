@@ -42,7 +42,8 @@ public class MaxRequestLineSizeTests : LoggedTest
                     "hello, world",
                     "0",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -65,23 +66,24 @@ public class MaxRequestLineSizeTests : LoggedTest
                     "Connection: close",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
 
     private TestServer CreateServer(int maxRequestLineSize)
     {
-        return new TestServer(async httpContext => await httpContext.Response.WriteAsync("hello, world"), new TestServiceContext(LoggerFactory)
-        {
-            ServerOptions = new KestrelServerOptions
+        return new TestServer(
+            async httpContext => await httpContext.Response.WriteAsync("hello, world"),
+            new TestServiceContext(LoggerFactory)
             {
-                AddServerHeader = false,
-                Limits =
-                    {
-                        MaxRequestLineSize = maxRequestLineSize
-                    }
+                ServerOptions = new KestrelServerOptions
+                {
+                    AddServerHeader = false,
+                    Limits = { MaxRequestLineSize = maxRequestLineSize }
+                }
             }
-        });
+        );
     }
 }

@@ -16,7 +16,6 @@ namespace Microsoft.Extensions.Hosting
         /// If a <see cref="BackgroundService"/> throws an exception, the <see cref="IHost"/> instance stops, and the process continues.
         /// </remarks>
         StopHost = 0,
-
         /// <summary>
         /// Ignore exceptions thrown in <see cref="BackgroundService"/>.
         /// </summary>

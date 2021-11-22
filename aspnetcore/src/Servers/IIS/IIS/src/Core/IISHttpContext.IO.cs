@@ -22,7 +22,10 @@ internal partial class IISHttpContext
     /// <param name="memory"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal async ValueTask<int> ReadAsync(Memory<byte> memory, CancellationToken cancellationToken)
+    internal async ValueTask<int> ReadAsync(
+        Memory<byte> memory,
+        CancellationToken cancellationToken
+    )
     {
         if (!HasStartedConsumingRequestBody)
         {
@@ -70,7 +73,10 @@ internal partial class IISHttpContext
     /// <param name="memory"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal Task WriteAsync(ReadOnlyMemory<byte> memory, CancellationToken cancellationToken = default(CancellationToken))
+    internal Task WriteAsync(
+        ReadOnlyMemory<byte> memory,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         async Task WriteFirstAsync()
         {
@@ -78,7 +84,9 @@ internal partial class IISHttpContext
             await _bodyOutput.WriteAsync(memory, cancellationToken);
         }
 
-        return !HasResponseStarted ? WriteFirstAsync() : _bodyOutput.WriteAsync(memory, cancellationToken);
+        return !HasResponseStarted
+          ? WriteFirstAsync()
+          : _bodyOutput.WriteAsync(memory, cancellationToken);
     }
 
     /// <summary>
@@ -178,7 +186,6 @@ internal partial class IISHttpContext
 
                         // Done with response, say there is no more data after writing trailers.
                         await AsyncIO!.FlushAsync(moreData: false);
-
                         break;
                     }
 
@@ -248,7 +255,8 @@ internal partial class IISHttpContext
 
     private void CancelRequestAbortedToken()
     {
-        ThreadPool.UnsafeQueueUserWorkItem(ctx =>
+        ThreadPool.UnsafeQueueUserWorkItem(
+            ctx =>
             {
                 try
                 {
@@ -263,15 +271,23 @@ internal partial class IISHttpContext
                         }
                     }
 
-                        // If we cancel the cts, we don't dispose as people may still be using
-                        // the cts. It also isn't necessary to dispose a canceled cts.
-                        localAbortCts?.Cancel();
+                    // If we cancel the cts, we don't dispose as people may still be using
+                    // the cts. It also isn't necessary to dispose a canceled cts.
+                    localAbortCts?.Cancel();
                 }
                 catch (Exception ex)
                 {
-                    Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, TraceIdentifier!, ex); // TODO: Can TraceIdentifier be null?
-                    }
-            }, this, preferLocal: false);
+                    Log.ApplicationError(
+                        _logger,
+                        ((IHttpConnectionFeature)this).ConnectionId,
+                        TraceIdentifier!,
+                        ex
+                    ); // TODO: Can TraceIdentifier be null?
+                }
+            },
+            this,
+            preferLocal: false
+        );
     }
 
     public void Abort(Exception reason)

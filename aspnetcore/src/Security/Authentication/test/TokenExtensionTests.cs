@@ -117,9 +117,7 @@ public class TokenExtensionTests
         Assert.Null(props.GetTokenValue("ONE"));
         Assert.Null(props.GetTokenValue("Jigglypuff"));
         Assert.Equal(3, props.GetTokens().Count());
-
     }
-
     //public class TestAuthHandler : IAuthenticationHandler
     //{
     //    private readonly AuthenticationProperties _props;

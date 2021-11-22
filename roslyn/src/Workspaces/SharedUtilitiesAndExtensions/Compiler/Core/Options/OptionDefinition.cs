@@ -41,7 +41,14 @@ namespace Microsoft.CodeAnalysis.Options
         /// </summary>
         public bool IsPerLanguage { get; }
 
-        public OptionDefinition(string feature, OptionGroup group, string name, object? defaultValue, Type type, bool isPerLanguage)
+        public OptionDefinition(
+            string feature,
+            OptionGroup group,
+            string name,
+            object? defaultValue,
+            Type type,
+            bool isPerLanguage
+        )
         {
             if (string.IsNullOrWhiteSpace(feature))
             {
@@ -63,16 +70,16 @@ namespace Microsoft.CodeAnalysis.Options
 
         public override bool Equals(object? obj)
         {
-            return obj is OptionDefinition key &&
-                   Equals(key);
+            return obj is OptionDefinition key && Equals(key);
         }
 
         public bool Equals(OptionDefinition other)
         {
-            var equals = this.Name == other.Name &&
-                this.Feature == other.Feature &&
-                this.Group == other.Group &&
-                this.IsPerLanguage == other.IsPerLanguage;
+            var equals =
+                this.Name == other.Name
+                && this.Feature == other.Feature
+                && this.Group == other.Group
+                && this.IsPerLanguage == other.IsPerLanguage;
 
             // DefaultValue and Type can differ between different but equivalent implementations of "ICodeStyleOption".
             // So, we skip these fields for equality checks of code style options.
@@ -102,13 +109,12 @@ namespace Microsoft.CodeAnalysis.Options
             return hash;
         }
 
-        public override string ToString()
-            => string.Format("{0} - {1}", this.Feature, this.Name);
+        public override string ToString() => string.Format("{0} - {1}", this.Feature, this.Name);
 
-        public static bool operator ==(OptionDefinition left, OptionDefinition right)
-            => left.Equals(right);
+        public static bool operator ==(OptionDefinition left, OptionDefinition right) =>
+            left.Equals(right);
 
-        public static bool operator !=(OptionDefinition left, OptionDefinition right)
-            => !left.Equals(right);
+        public static bool operator !=(OptionDefinition left, OptionDefinition right) =>
+            !left.Equals(right);
     }
 }

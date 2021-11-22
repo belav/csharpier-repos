@@ -38,9 +38,7 @@ namespace System.Xml.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="XDocument"/> class.
         /// </summary>
-        public XDocument()
-        {
-        }
+        public XDocument() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XDocument"/> class with the specified content.
@@ -59,8 +57,7 @@ namespace System.Xml.Linq
         /// See <see cref="XContainer.Add(object)"/> for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XDocument(params object?[] content)
-            : this()
+        public XDocument(params object?[] content) : this()
         {
             AddContentSkipNotify(content);
         }
@@ -87,8 +84,7 @@ namespace System.Xml.Linq
         /// See <see cref="XContainer.Add(object)"/> for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XDocument(XDeclaration? declaration, params object?[] content)
-            : this(content)
+        public XDocument(XDeclaration? declaration, params object?[] content) : this(content)
         {
             _declaration = declaration;
         }
@@ -100,8 +96,7 @@ namespace System.Xml.Linq
         /// <param name="other">
         /// The <see cref="XDocument"/> object that will be copied.
         /// </param>
-        public XDocument(XDocument other)
-            : base(other)
+        public XDocument(XDocument other) : base(other)
         {
             if (other._declaration != null)
             {
@@ -123,10 +118,7 @@ namespace System.Xml.Linq
         /// </summary>
         public XDocumentType? DocumentType
         {
-            get
-            {
-                return GetFirstNode<XDocumentType>();
-            }
+            get { return GetFirstNode<XDocumentType>(); }
         }
 
         /// <summary>
@@ -137,10 +129,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Document;
-            }
+            get { return XmlNodeType.Document; }
         }
 
         /// <summary>
@@ -148,10 +137,7 @@ namespace System.Xml.Linq
         /// </summary>
         public XElement? Root
         {
-            get
-            {
-                return GetFirstNode<XElement>();
-            }
+            get { return GetFirstNode<XElement>(); }
         }
 
         /// <overloads>
@@ -291,7 +277,11 @@ namespace System.Xml.Linq
         /// A new <see cref="XDocument"/> containing the contents of the passed in
         /// <see cref="Stream"/>.
         /// </returns>
-        public static async Task<XDocument> LoadAsync(Stream stream, LoadOptions options, CancellationToken cancellationToken)
+        public static async Task<XDocument> LoadAsync(
+            Stream stream,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
@@ -374,7 +364,11 @@ namespace System.Xml.Linq
         /// A new <see cref="XDocument"/> containing the contents of the passed in
         /// <see cref="TextReader"/>.
         /// </returns>
-        public static async Task<XDocument> LoadAsync(TextReader textReader, LoadOptions options, CancellationToken cancellationToken)
+        public static async Task<XDocument> LoadAsync(
+            TextReader textReader,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
@@ -420,14 +414,18 @@ namespace System.Xml.Linq
         /// </returns>
         public static XDocument Load(XmlReader reader, LoadOptions options)
         {
-            if (reader == null) throw new ArgumentNullException(nameof(reader));
-            if (reader.ReadState == ReadState.Initial) reader.Read();
+            if (reader == null)
+                throw new ArgumentNullException(nameof(reader));
+            if (reader.ReadState == ReadState.Initial)
+                reader.Read();
 
             XDocument d = InitLoad(reader, options);
             d.ReadContentFrom(reader, options);
 
-            if (!reader.EOF) throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
-            if (d.Root == null) throw new InvalidOperationException(SR.InvalidOperation_MissingRoot);
+            if (!reader.EOF)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
+            if (d.Root == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingRoot);
             return d;
         }
 
@@ -449,7 +447,11 @@ namespace System.Xml.Linq
         /// A new <see cref="XDocument"/> containing the contents of the passed
         /// in <see cref="XmlReader"/>.
         /// </returns>
-        public static Task<XDocument> LoadAsync(XmlReader reader, LoadOptions options, CancellationToken cancellationToken)
+        public static Task<XDocument> LoadAsync(
+            XmlReader reader,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (reader == null)
                 throw new ArgumentNullException(nameof(reader));
@@ -458,7 +460,11 @@ namespace System.Xml.Linq
             return LoadAsyncInternal(reader, options, cancellationToken);
         }
 
-        private static async Task<XDocument> LoadAsyncInternal(XmlReader reader, LoadOptions options, CancellationToken cancellationToken)
+        private static async Task<XDocument> LoadAsyncInternal(
+            XmlReader reader,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (reader.ReadState == ReadState.Initial)
             {
@@ -468,8 +474,10 @@ namespace System.Xml.Linq
             XDocument d = InitLoad(reader, options);
             await d.ReadContentFromAsync(reader, options, cancellationToken).ConfigureAwait(false);
 
-            if (!reader.EOF) throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
-            if (d.Root == null) throw new InvalidOperationException(SR.InvalidOperation_MissingRoot);
+            if (!reader.EOF)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
+            if (d.Root == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingRoot);
             return d;
         }
 
@@ -594,9 +602,7 @@ namespace System.Xml.Linq
                 {
                     ws.Encoding = Encoding.GetEncoding(_declaration.Encoding);
                 }
-                catch (ArgumentException)
-                {
-                }
+                catch (ArgumentException) { }
             }
             using (XmlWriter w = XmlWriter.Create(stream, ws))
             {
@@ -615,7 +621,11 @@ namespace System.Xml.Linq
         /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
         /// </param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        public async Task SaveAsync(Stream stream, SaveOptions options, CancellationToken cancellationToken)
+        public async Task SaveAsync(
+            Stream stream,
+            SaveOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
@@ -627,9 +637,7 @@ namespace System.Xml.Linq
                 {
                     ws.Encoding = Encoding.GetEncoding(_declaration.Encoding);
                 }
-                catch (ArgumentException)
-                {
-                }
+                catch (ArgumentException) { }
             }
 
             XmlWriter w = XmlWriter.Create(stream, ws);
@@ -700,7 +708,11 @@ namespace System.Xml.Linq
         /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
         /// </param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        public async Task SaveAsync(TextWriter textWriter, SaveOptions options, CancellationToken cancellationToken)
+        public async Task SaveAsync(
+            TextWriter textWriter,
+            SaveOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
@@ -771,9 +783,7 @@ namespace System.Xml.Linq
                 {
                     ws.Encoding = Encoding.GetEncoding(_declaration.Encoding);
                 }
-                catch (ArgumentException)
-                {
-                }
+                catch (ArgumentException) { }
             }
 
             using (XmlWriter w = XmlWriter.Create(fileName, ws))
@@ -793,7 +803,8 @@ namespace System.Xml.Linq
         /// </param>
         public override void WriteTo(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             if (_declaration != null && _declaration.Standalone == "yes")
             {
                 writer.WriteStartDocument(true);
@@ -829,7 +840,10 @@ namespace System.Xml.Linq
             return WriteToAsyncInternal(writer, cancellationToken);
         }
 
-        private async Task WriteToAsyncInternal(XmlWriter writer, CancellationToken cancellationToken)
+        private async Task WriteToAsyncInternal(
+            XmlWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             Task tStart;
             if (_declaration != null && _declaration.Standalone == "yes")
@@ -885,7 +899,8 @@ namespace System.Xml.Linq
                 {
                     n = n.next!;
                     T? e = n as T;
-                    if (e != null) return e;
+                    if (e != null)
+                        return e;
                 } while (n != content);
             }
             return null;
@@ -895,7 +910,8 @@ namespace System.Xml.Linq
         {
             foreach (char ch in s)
             {
-                if (ch != ' ' && ch != '\t' && ch != '\r' && ch != '\n') return false;
+                if (ch != ' ' && ch != '\t' && ch != '\r' && ch != '\n')
+                    return false;
             }
             return true;
         }
@@ -916,33 +932,45 @@ namespace System.Xml.Linq
                 case XmlNodeType.CDATA:
                     throw new ArgumentException(SR.Format(SR.Argument_AddNode, XmlNodeType.CDATA));
                 case XmlNodeType.Document:
-                    throw new ArgumentException(SR.Format(SR.Argument_AddNode, XmlNodeType.Document));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_AddNode, XmlNodeType.Document)
+                    );
             }
         }
 
-        private void ValidateDocument(XNode? previous, XmlNodeType allowBefore, XmlNodeType allowAfter)
+        private void ValidateDocument(
+            XNode? previous,
+            XmlNodeType allowBefore,
+            XmlNodeType allowAfter
+        )
         {
             XNode? n = content as XNode;
             if (n != null)
             {
-                if (previous == null) allowBefore = allowAfter;
+                if (previous == null)
+                    allowBefore = allowAfter;
                 do
                 {
                     n = n.next!;
                     XmlNodeType nt = n.NodeType;
                     if (nt == XmlNodeType.Element || nt == XmlNodeType.DocumentType)
                     {
-                        if (nt != allowBefore) throw new InvalidOperationException(SR.InvalidOperation_DocumentStructure);
+                        if (nt != allowBefore)
+                            throw new InvalidOperationException(
+                                SR.InvalidOperation_DocumentStructure
+                            );
                         allowBefore = XmlNodeType.None;
                     }
-                    if (n == previous) allowBefore = allowAfter;
+                    if (n == previous)
+                        allowBefore = allowAfter;
                 } while (n != content);
             }
         }
 
         internal override void ValidateString(string s)
         {
-            if (!IsWhitespace(s)) throw new ArgumentException(SR.Argument_AddNonWhitespace);
+            if (!IsWhitespace(s))
+                throw new ArgumentException(SR.Argument_AddNonWhitespace);
         }
     }
 }

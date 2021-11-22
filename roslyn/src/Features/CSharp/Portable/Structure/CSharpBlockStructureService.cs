@@ -18,24 +18,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpBlockStructureServiceFactory()
-        {
-        }
+        public CSharpBlockStructureServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new CSharpBlockStructureService(languageServices.WorkspaceServices.Workspace);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new CSharpBlockStructureService(languageServices.WorkspaceServices.Workspace);
     }
 
     internal class CSharpBlockStructureService : BlockStructureServiceWithProviders
     {
-        public CSharpBlockStructureService(Workspace workspace) : base(workspace)
-        {
-        }
+        public CSharpBlockStructureService(Workspace workspace) : base(workspace) { }
 
         protected override ImmutableArray<BlockStructureProvider> GetBuiltInProviders()
         {
             return ImmutableArray.Create<BlockStructureProvider>(
-                new CSharpBlockStructureProvider());
+                new CSharpBlockStructureProvider()
+            );
         }
 
         public override string Language => LanguageNames.CSharp;

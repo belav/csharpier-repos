@@ -15,22 +15,16 @@ namespace System.Xml
     {
         // Nothing has been written yet.
         Start,
-
         // Writing the prolog.
         Prolog,
-
         // Writing a the start tag for an element.
         Element,
-
         // Writing an attribute value.
         Attribute,
-
         // Writing element content.
         Content,
-
         // XmlWriter is closed; Close has been called.
         Closed,
-
         // Writer is in error state.
         Error
     };
@@ -63,7 +57,12 @@ namespace System.Xml
 
         // Writes out the DOCTYPE declaration with the specified name and optional attributes.
 
-        public abstract void WriteDocType(string name, string? pubid, string? sysid, string? subset);
+        public abstract void WriteDocType(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        );
 
         // Writes out the specified start tag and associates it with the given namespace.
         public void WriteStartElement(string localName, string? ns)
@@ -106,7 +105,12 @@ namespace System.Xml
         }
 
         // Writes out the attribute with the specified prefix, LocalName, NamespaceURI and value.
-        public void WriteAttributeString(string? prefix, string localName, string? ns, string? value)
+        public void WriteAttributeString(
+            string? prefix,
+            string localName,
+            string? ns,
+            string? value
+        )
         {
             WriteStartAttribute(prefix, localName, ns);
             WriteString(value);
@@ -356,8 +360,7 @@ namespace System.Xml
                         }
                         WriteEndAttribute();
                     }
-                }
-                while (reader.MoveToNextAttribute());
+                } while (reader.MoveToNextAttribute());
             }
         }
 
@@ -389,7 +392,15 @@ namespace System.Xml
                         {
                             _writeNodeBuffer ??= new char[WriteNodeBufferSize];
                             int read;
-                            while ((read = reader.ReadValueChunk(_writeNodeBuffer, 0, WriteNodeBufferSize)) > 0)
+                            while (
+                                (
+                                    read = reader.ReadValueChunk(
+                                        _writeNodeBuffer,
+                                        0,
+                                        WriteNodeBufferSize
+                                    )
+                                ) > 0
+                            )
                             {
                                 WriteChars(_writeNodeBuffer, 0, read);
                             }
@@ -403,7 +414,6 @@ namespace System.Xml
                     case XmlNodeType.SignificantWhitespace:
 
                         WriteWhitespace(reader.Value);
-
                         break;
                     case XmlNodeType.CDATA:
                         WriteCData(reader.Value);
@@ -416,7 +426,12 @@ namespace System.Xml
                         WriteProcessingInstruction(reader.Name, reader.Value);
                         break;
                     case XmlNodeType.DocumentType:
-                        WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value);
+                        WriteDocType(
+                            reader.Name,
+                            reader.GetAttribute("PUBLIC"),
+                            reader.GetAttribute("SYSTEM"),
+                            reader.Value
+                        );
                         break;
 
                     case XmlNodeType.Comment:
@@ -426,7 +441,13 @@ namespace System.Xml
                         WriteFullEndElement();
                         break;
                 }
-            } while (reader.Read() && (d < reader.Depth || (d == reader.Depth && reader.NodeType == XmlNodeType.EndElement)));
+            } while (
+                reader.Read()
+                && (
+                    d < reader.Depth
+                    || (d == reader.Depth && reader.NodeType == XmlNodeType.EndElement)
+                )
+            );
         }
 
         // Copies the current node from the given XPathNavigator to the writer (including child nodes).
@@ -448,7 +469,11 @@ namespace System.Xml
                 switch (nodeType)
                 {
                     case XPathNodeType.Element:
-                        WriteStartElement(navigator.Prefix, navigator.LocalName, navigator.NamespaceURI);
+                        WriteStartElement(
+                            navigator.Prefix,
+                            navigator.LocalName,
+                            navigator.NamespaceURI
+                        );
 
                         // Copy attributes
                         if (navigator.MoveToFirstAttribute())
@@ -458,7 +483,11 @@ namespace System.Xml
                                 IXmlSchemaInfo? schemaInfo = navigator.SchemaInfo;
                                 if (defattr || (schemaInfo == null || !schemaInfo.IsDefault))
                                 {
-                                    WriteStartAttribute(navigator.Prefix, navigator.LocalName, navigator.NamespaceURI);
+                                    WriteStartAttribute(
+                                        navigator.Prefix,
+                                        navigator.LocalName,
+                                        navigator.NamespaceURI
+                                    );
                                     // copy string value to writer
                                     WriteString(navigator.Value);
                                     WriteEndAttribute();
@@ -632,7 +661,12 @@ namespace System.Xml
 
             // Avoid using XmlWriter.Create(string, XmlReaderSettings), as it references a lot of types
             // that then can't be trimmed away.
-            var fs = new FileStream(outputFileName, FileMode.Create, FileAccess.Write, FileShare.Read);
+            var fs = new FileStream(
+                outputFileName,
+                FileMode.Create,
+                FileAccess.Write,
+                FileShare.Read
+            );
             try
             {
                 var settings = new XmlWriterSettings { CloseOutput = true };

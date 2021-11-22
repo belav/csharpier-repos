@@ -23,11 +23,12 @@ namespace System
             return 0;
         }
 
-        public virtual string ToString() { return null; }
-
-        ~Object()
+        public virtual string ToString()
         {
+            return null;
         }
+
+        ~Object() { }
     }
 
     public struct Void { }
@@ -48,7 +49,7 @@ namespace System
     public abstract class ValueType { }
     public abstract class Enum : ValueType { }
     public struct Nullable<T> where T : struct { }
-    
+
     public sealed class String { }
     public abstract class Array : System.Collections.IList { }
     public abstract class Delegate { }
@@ -111,7 +112,10 @@ namespace System.Runtime.InteropServices
             _val = layoutKind;
         }
 
-        public LayoutKind Value { get { return _val; } }
+        public LayoutKind Value
+        {
+            get { return _val; }
+        }
         public int Pack;
         public int Size;
     }
@@ -123,7 +127,10 @@ namespace System.Runtime.InteropServices
         {
             _val = offset;
         }
-        public int Value { get { return _val; } }
+        public int Value
+        {
+            get { return _val; }
+        }
     }
 }
 

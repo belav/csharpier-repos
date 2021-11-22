@@ -22,7 +22,8 @@ namespace System.Net.Http
             Debug.Assert(owner != null);
             Debug.Assert(!string.IsNullOrWhiteSpace(name));
 
-            if (NetEventSource.Log.IsEnabled()) owner.Trace($"{name}. {nameof(initialCredit)}={initialCredit}");
+            if (NetEventSource.Log.IsEnabled())
+                owner.Trace($"{name}. {nameof(initialCredit)}={initialCredit}");
             _owner = owner;
             _name = name;
             _current = initialCredit;
@@ -57,7 +58,8 @@ namespace System.Net.Http
                     return new ValueTask<int>(granted);
                 }
 
-                if (NetEventSource.Log.IsEnabled()) _owner.Trace($"{_name}. requested={amount}, no credit available.");
+                if (NetEventSource.Log.IsEnabled())
+                    _owner.Trace($"{_name}. requested={amount}, no credit available.");
 
                 // Otherwise, create a new waiter.
                 var waiter = new CreditWaiter(cancellationToken);
@@ -87,14 +89,18 @@ namespace System.Net.Http
 
             lock (SyncObject)
             {
-                if (NetEventSource.Log.IsEnabled()) _owner.Trace($"{_name}. {nameof(amount)}={amount}, current={_current}");
+                if (NetEventSource.Log.IsEnabled())
+                    _owner.Trace($"{_name}. {nameof(amount)}={amount}, current={_current}");
 
                 if (_disposed)
                 {
                     return;
                 }
 
-                Debug.Assert(_current <= 0 || _waitersTail is null, "Shouldn't have waiters when credit is available");
+                Debug.Assert(
+                    _current <= 0 || _waitersTail is null,
+                    "Shouldn't have waiters when credit is available"
+                );
 
                 _current = checked(_current + amount);
 
@@ -148,8 +154,7 @@ namespace System.Net.Http
                         waiter.Next = null;
                         waiter.Dispose();
                         waiter = next;
-                    }
-                    while (waiter != _waitersTail);
+                    } while (waiter != _waitersTail);
 
                     _waitersTail = null;
                 }
@@ -162,15 +167,23 @@ namespace System.Net.Http
 
             if (_disposed)
             {
-                throw new ObjectDisposedException($"{nameof(CreditManager)}:{_owner.GetType().Name}:{_name}");
+                throw new ObjectDisposedException(
+                    $"{nameof(CreditManager)}:{_owner.GetType().Name}:{_name}"
+                );
             }
 
             if (_current > 0)
             {
-                Debug.Assert(_waitersTail is null, "Shouldn't have waiters when credit is available");
+                Debug.Assert(
+                    _waitersTail is null,
+                    "Shouldn't have waiters when credit is available"
+                );
 
                 int granted = Math.Min(amount, _current);
-                if (NetEventSource.Log.IsEnabled()) _owner.Trace($"{_name}. requested={amount}, current={_current}, granted={granted}");
+                if (NetEventSource.Log.IsEnabled())
+                    _owner.Trace(
+                        $"{_name}. requested={amount}, current={_current}, granted={granted}"
+                    );
                 _current -= granted;
                 return granted;
             }

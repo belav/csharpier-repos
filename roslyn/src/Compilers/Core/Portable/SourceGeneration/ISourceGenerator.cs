@@ -45,5 +45,3 @@ namespace Microsoft.CodeAnalysis
         void Execute(GeneratorExecutionContext context);
     }
 }
-
-

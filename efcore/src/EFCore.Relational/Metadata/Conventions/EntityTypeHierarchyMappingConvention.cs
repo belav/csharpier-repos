@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public EntityTypeHierarchyMappingConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        )
         {
             Dependencies = dependencies;
             RelationalDependencies = relationalDependencies;
@@ -43,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             var nonTphRoots = new HashSet<IConventionEntityType>();
 
@@ -56,17 +58,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 var tableName = entityType.GetTableName();
                 var schema = entityType.GetSchema();
-                if (tableName != null
-                    && (tableName != entityType.BaseType.GetTableName()
-                        || schema != entityType.BaseType.GetSchema()))
+                if (
+                    tableName != null
+                    && (
+                        tableName != entityType.BaseType.GetTableName()
+                        || schema != entityType.BaseType.GetSchema()
+                    )
+                )
                 {
                     var pk = entityType.FindPrimaryKey();
-                    if (pk != null
-                        && !entityType.FindDeclaredForeignKeys(pk.Properties)
-                            .Any(fk => fk.PrincipalKey.IsPrimaryKey() && fk.PrincipalEntityType.IsAssignableFrom(entityType)))
+                    if (
+                        pk != null
+                        && !entityType
+                            .FindDeclaredForeignKeys(pk.Properties)
+                            .Any(
+                                fk =>
+                                    fk.PrincipalKey.IsPrimaryKey()
+                                    && fk.PrincipalEntityType.IsAssignableFrom(entityType)
+                            )
+                    )
                     {
-                        entityType.Builder.HasRelationship(entityType.BaseType, pk.Properties, pk)?
-                            .IsUnique(true);
+                        entityType.Builder.HasRelationship(
+                            entityType.BaseType,
+                            pk.Properties,
+                            pk
+                        )?.IsUnique(true);
                     }
 
                     nonTphRoots.Add(entityType.GetRootType());
@@ -74,9 +90,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 var viewName = entityType.GetViewName();
                 var viewSchema = entityType.GetViewSchema();
-                if (viewName != null
-                    && (viewName != entityType.BaseType.GetViewName()
-                        || viewSchema != entityType.BaseType.GetViewSchema()))
+                if (
+                    viewName != null
+                    && (
+                        viewName != entityType.BaseType.GetViewName()
+                        || viewSchema != entityType.BaseType.GetViewSchema()
+                    )
+                )
                 {
                     nonTphRoots.Add(entityType.GetRootType());
                 }

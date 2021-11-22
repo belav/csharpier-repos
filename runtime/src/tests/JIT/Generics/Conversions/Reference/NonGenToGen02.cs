@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public interface GenBase<T>
 {
     Type MyVirtType();
@@ -121,7 +120,6 @@ public class Test_NonGenToGen02
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -143,5 +141,4 @@ public class Test_NonGenToGen02
             return 1;
         }
     }
-
 }

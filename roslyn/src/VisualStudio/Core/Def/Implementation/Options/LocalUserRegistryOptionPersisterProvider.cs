@@ -22,12 +22,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public LocalUserRegistryOptionPersisterProvider(
-            [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider)
+            [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider
+        )
         {
-            _lazyPersister = new(_ => LocalUserRegistryOptionPersister.CreateAsync(serviceProvider), cacheResult: true);
+            _lazyPersister =
+                new(
+                    _ => LocalUserRegistryOptionPersister.CreateAsync(serviceProvider),
+                    cacheResult: true
+                );
         }
 
-        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
-            => await _lazyPersister.GetValueAsync(cancellationToken).ConfigureAwait(false);
+        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        ) => await _lazyPersister.GetValueAsync(cancellationToken).ConfigureAwait(false);
     }
 }

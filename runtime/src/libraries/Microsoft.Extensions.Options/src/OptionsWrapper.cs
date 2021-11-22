@@ -9,9 +9,9 @@ namespace Microsoft.Extensions.Options
     /// <see cref="IOptions{TOptions}"/> wrapper that returns the options instance.
     /// </summary>
     /// <typeparam name="TOptions">Options type.</typeparam>
-    public class OptionsWrapper<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions> :
-        IOptions<TOptions>
-        where TOptions : class
+    public class OptionsWrapper<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > : IOptions<TOptions> where TOptions : class
     {
         /// <summary>
         /// Intializes the wrapper with the options instance to return.

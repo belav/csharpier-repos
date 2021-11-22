@@ -15,15 +15,21 @@ public struct SourceLocation : IEquatable<SourceLocation>
     /// <summary>
     /// An undefined <see cref="SourceLocation"/>.
     /// </summary>
-    public static readonly SourceLocation Undefined =
-        new SourceLocation(absoluteIndex: -1, lineIndex: -1, characterIndex: -1);
+    public static readonly SourceLocation Undefined = new SourceLocation(
+        absoluteIndex: -1,
+        lineIndex: -1,
+        characterIndex: -1
+    );
 
     /// <summary>
     /// A <see cref="SourceLocation"/> with <see cref="AbsoluteIndex"/>, <see cref="LineIndex"/>, and
     /// <see cref="CharacterIndex"/> initialized to 0.
     /// </summary>
-    public static readonly SourceLocation Zero =
-        new SourceLocation(absoluteIndex: 0, lineIndex: 0, characterIndex: 0);
+    public static readonly SourceLocation Zero = new SourceLocation(
+        absoluteIndex: 0,
+        lineIndex: 0,
+        characterIndex: 0
+    );
 
     /// <summary>
     /// Initializes a new instance of <see cref="SourceLocation"/>.
@@ -32,9 +38,12 @@ public struct SourceLocation : IEquatable<SourceLocation>
     /// <param name="lineIndex">The line index.</param>
     /// <param name="characterIndex">The character index.</param>
     public SourceLocation(int absoluteIndex, int lineIndex, int characterIndex)
-        : this(filePath: null, absoluteIndex: absoluteIndex, lineIndex: lineIndex, characterIndex: characterIndex)
-    {
-    }
+        : this(
+            filePath: null,
+            absoluteIndex: absoluteIndex,
+            lineIndex: lineIndex,
+            characterIndex: characterIndex
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SourceLocation"/>.
@@ -80,9 +89,14 @@ public struct SourceLocation : IEquatable<SourceLocation>
     /// <remarks>A <see cref="SourceLocation"/> that corresponds to the beginning of the span.</remarks>
     public static SourceLocation FromSpan(SourceSpan? span)
     {
-        return span == null ?
-            SourceLocation.Undefined :
-            new SourceLocation(span.Value.FilePath, span.Value.AbsoluteIndex, span.Value.LineIndex, span.Value.CharacterIndex);
+        return span == null
+          ? SourceLocation.Undefined
+          : new SourceLocation(
+                span.Value.FilePath,
+                span.Value.AbsoluteIndex,
+                span.Value.LineIndex,
+                span.Value.CharacterIndex
+            );
     }
 
     /// <inheritdoc />
@@ -93,14 +107,14 @@ public struct SourceLocation : IEquatable<SourceLocation>
             "({0}:{1},{2})",
             AbsoluteIndex,
             LineIndex,
-            CharacterIndex);
+            CharacterIndex
+        );
     }
 
     /// <inheritdoc />
     public override bool Equals(object obj)
     {
-        return obj is SourceLocation &&
-            Equals((SourceLocation)obj);
+        return obj is SourceLocation && Equals((SourceLocation)obj);
     }
 
     /// <inheritdoc />
@@ -116,10 +130,10 @@ public struct SourceLocation : IEquatable<SourceLocation>
     /// <inheritdoc />
     public bool Equals(SourceLocation other)
     {
-        return string.Equals(FilePath, other.FilePath, StringComparison.Ordinal) &&
-            AbsoluteIndex == other.AbsoluteIndex &&
-            LineIndex == other.LineIndex &&
-            CharacterIndex == other.CharacterIndex;
+        return string.Equals(FilePath, other.FilePath, StringComparison.Ordinal)
+            && AbsoluteIndex == other.AbsoluteIndex
+            && LineIndex == other.LineIndex
+            && CharacterIndex == other.CharacterIndex;
     }
 
     public static bool operator ==(SourceLocation left, SourceLocation right)

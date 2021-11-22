@@ -28,10 +28,13 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         bool SupportsMappingImportDirectives { get; }
 
-        Task<ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>> GetMappedTextChangesAsync(
+        Task<
+            ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>
+        > GetMappedTextChangesAsync(
             Document oldDocument,
             Document newDocument,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Map spans in the document to more appropriate locations
@@ -46,7 +49,11 @@ namespace Microsoft.CodeAnalysis.Host
         /// <param name="spans">Spans in the document</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Return mapped span. order of result should be same as the given span</returns>
-        Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(Document document, IEnumerable<TextSpan> spans, CancellationToken cancellationToken);
+        Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
+            Document document,
+            IEnumerable<TextSpan> spans,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>

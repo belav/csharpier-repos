@@ -13,7 +13,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             public LongArrayConverter() { }
 
-            public override long[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override long[] Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 string json = reader.GetString();
 
@@ -32,7 +36,11 @@ namespace System.Text.Json.Serialization.Tests
                 return list.ToArray();
             }
 
-            public override void Write(Utf8JsonWriter writer, long[] value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                long[] value,
+                JsonSerializerOptions options
+            )
             {
                 var builder = new StringBuilder();
 

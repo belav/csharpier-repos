@@ -11,7 +11,7 @@ using Moq.Properties;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Utility factory class to use to construct multiple 
 	/// mocks when consistent verification is 
 	/// desired for all of them.
@@ -96,88 +96,92 @@ namespace Moq
 	/// </code>
 	/// </example>
 	/// <seealso cref="MockBehavior"/>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	[Obsolete("This class has been renamed to MockRepository. MockFactory will be retired in v5.", false)]
-	public partial class MockFactory
-	{
-		List<Mock> mocks = new List<Mock>();
-		MockBehavior defaultBehavior;
-		DefaultValueProvider defaultValueProvider;
-		private Switches switches;
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Obsolete(
+        "This class has been renamed to MockRepository. MockFactory will be retired in v5.",
+        false
+    )]
+    public partial class MockFactory
+    {
+        List<Mock> mocks = new List<Mock>();
+        MockBehavior defaultBehavior;
+        DefaultValueProvider defaultValueProvider;
+        private Switches switches;
 
-		/// <summary>
+        /// <summary>
 		/// Initializes the factory with the given <paramref name="defaultBehavior"/> 
 		/// for newly created mocks from the factory.
 		/// </summary>
 		/// <param name="defaultBehavior">The behavior to use for mocks created 
 		/// using the <see cref="Create{T}()"/> factory method if not overridden
 		/// by using the <see cref="Create{T}(MockBehavior)"/> overload.</param>
-		public MockFactory(MockBehavior defaultBehavior)
-		{
-			this.defaultBehavior = defaultBehavior;
-			this.defaultValueProvider = DefaultValueProvider.Empty;
-			this.switches = Switches.Default;
-		}
+        public MockFactory(MockBehavior defaultBehavior)
+        {
+            this.defaultBehavior = defaultBehavior;
+            this.defaultValueProvider = DefaultValueProvider.Empty;
+            this.switches = Switches.Default;
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the default <see cref="MockBehavior"/> of mocks created by this repository.
 		/// </summary>
-		internal MockBehavior Behavior => this.defaultBehavior;
+        internal MockBehavior Behavior => this.defaultBehavior;
 
-		/// <summary>
+        /// <summary>
 		/// Whether the base member virtual implementation will be called 
 		/// for mocked classes if no setup is matched. Defaults to <see langword="false"/>.
 		/// </summary>
-		public bool CallBase { get; set; }
+        public bool CallBase { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Specifies the behavior to use when returning default values for 
 		/// unexpected invocations on loose mocks.
 		/// </summary>
-		public DefaultValue DefaultValue
-		{
-			get
-			{
-				return this.DefaultValueProvider.Kind;
-			}
-			set
-			{
-				this.DefaultValueProvider = value switch
-				{
-					DefaultValue.Empty => DefaultValueProvider.Empty,
-					DefaultValue.Mock  => DefaultValueProvider.Mock,
-					_                  => throw new ArgumentOutOfRangeException(nameof(value)),
-				};
-			}
-		}
+        public DefaultValue DefaultValue
+        {
+            get { return this.DefaultValueProvider.Kind; }
+            set
+            {
+                this.DefaultValueProvider = value switch
+                {
+                    DefaultValue.Empty => DefaultValueProvider.Empty,
+                    DefaultValue.Mock => DefaultValueProvider.Mock,
+                    _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                };
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Gets or sets the <see cref="Moq.DefaultValueProvider"/> instance that will be used
 		/// e. g. to produce default return values for unexpected invocations.
 		/// </summary>
-		public DefaultValueProvider DefaultValueProvider
-		{
-			get => this.defaultValueProvider;
-			set => this.defaultValueProvider = value ?? throw new ArgumentNullException(nameof(value));
-		}
+        public DefaultValueProvider DefaultValueProvider
+        {
+            get => this.defaultValueProvider;
+            set =>
+                this.defaultValueProvider = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Gets the mocks that have been created by this factory and 
 		/// that will get verified together.
 		/// </summary>
-		protected internal IEnumerable<Mock> Mocks { get { return mocks; } }
+        protected internal IEnumerable<Mock> Mocks
+        {
+            get { return mocks; }
+        }
 
-		/// <summary>
+        /// <summary>
 		/// A set of switches that influence how mocks created by this factory will operate.
 		/// You can opt in or out of certain features via this property.
 		/// </summary>
-		public Switches Switches
-		{
-			get => this.switches;
-			set => this.switches = value;
-		}
+        public Switches Switches
+        {
+            get => this.switches;
+            set => this.switches = value;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates a new mock with the default <see cref="MockBehavior"/> 
 		/// specified at factory construction time.
 		/// </summary>
@@ -193,13 +197,12 @@ namespace Moq
 		/// factory.VerifyAll();
 		/// </code>
 		/// </example>
-		public Mock<T> Create<T>()
-			where T : class
-		{
-			return CreateMock<T>(defaultBehavior, new object[0]);
-		}
+        public Mock<T> Create<T>() where T : class
+        {
+            return CreateMock<T>(defaultBehavior, new object[0]);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates a new mock with the default <see cref="MockBehavior"/> 
 		/// specified at factory construction time and with the 
 		/// the given constructor arguments for the class.
@@ -222,20 +225,19 @@ namespace Moq
 		/// factory.Verify();
 		/// </code>
 		/// </example>
-		public Mock<T> Create<T>(params object[] args)
-			where T : class
-		{
-			// "fix" compiler picking this overload instead of 
-			// the one receiving the mock behavior.
-			if (args != null && args.Length > 0 && args[0] is MockBehavior)
-			{
-				return CreateMock<T>((MockBehavior)args[0], args.Skip(1).ToArray());
-			}
+        public Mock<T> Create<T>(params object[] args) where T : class
+        {
+            // "fix" compiler picking this overload instead of
+            // the one receiving the mock behavior.
+            if (args != null && args.Length > 0 && args[0] is MockBehavior)
+            {
+                return CreateMock<T>((MockBehavior)args[0], args.Skip(1).ToArray());
+            }
 
-			return CreateMock<T>(defaultBehavior, args);
-		}
+            return CreateMock<T>(defaultBehavior, args);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates a new mock with the given <paramref name="behavior"/>.
 		/// </summary>
 		/// <typeparam name="T">Type to mock.</typeparam>
@@ -251,13 +253,12 @@ namespace Moq
 		/// var foo = factory.Create&lt;IFoo&gt;(MockBehavior.Loose);
 		/// </code>
 		/// </example>
-		public Mock<T> Create<T>(MockBehavior behavior)
-			where T : class
-		{
-			return CreateMock<T>(behavior, new object[0]);
-		}
+        public Mock<T> Create<T>(MockBehavior behavior) where T : class
+        {
+            return CreateMock<T>(behavior, new object[0]);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates a new mock with the given <paramref name="behavior"/> 
 		/// and with the given constructor arguments for the class.
 		/// </summary>
@@ -281,13 +282,12 @@ namespace Moq
 		/// var mock = factory.Create&lt;MyBase&gt;(MockBehavior.Strict, "Foo", 25, true);
 		/// </code>
 		/// </example>
-		public Mock<T> Create<T>(MockBehavior behavior, params object[] args)
-			where T : class
-		{
-			return CreateMock<T>(behavior, args);
-		}
+        public Mock<T> Create<T>(MockBehavior behavior, params object[] args) where T : class
+        {
+            return CreateMock<T>(behavior, args);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates an instance of the mock using the given constructor call including its
 		/// argument values and with a specific <see cref="MockBehavior"/> behavior.
 		/// </summary>
@@ -305,62 +305,67 @@ namespace Moq
 		/// factory.Verify();
 		/// </code>
 		/// </example>
-		public Mock<T> Create<T>(Expression<Func<T>> newExpression, MockBehavior behavior = MockBehavior.Default)
-			where T : class
-		{
-			return Create<T>(behavior, Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression));
-		}
+        public Mock<T> Create<T>(
+            Expression<Func<T>> newExpression,
+            MockBehavior behavior = MockBehavior.Default
+        ) where T : class
+        {
+            return Create<T>(
+                behavior,
+                Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Implements creation of a new mock within the factory.
 		/// </summary>
 		/// <typeparam name="T">Type to mock.</typeparam>
 		/// <param name="behavior">The behavior for the new mock.</param>
 		/// <param name="args">Optional arguments for the construction of the mock.</param>
-		protected virtual Mock<T> CreateMock<T>(MockBehavior behavior, object[] args)
-			where T : class
-		{
-			var mock = new Mock<T>(behavior, args);
-			mocks.Add(mock);
+        protected virtual Mock<T> CreateMock<T>(MockBehavior behavior, object[] args)
+            where T : class
+        {
+            var mock = new Mock<T>(behavior, args);
+            mocks.Add(mock);
 
-			mock.CallBase = this.CallBase;
-			mock.DefaultValueProvider = this.DefaultValueProvider;
-			mock.Switches = this.switches;
+            mock.CallBase = this.CallBase;
+            mock.DefaultValueProvider = this.DefaultValueProvider;
+            mock.Switches = this.switches;
 
-			return mock;
-		}
+            return mock;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies all verifiable setups on all mocks created by this factory.
 		/// </summary>
 		/// <seealso cref="Mock.Verify()"/>
 		/// <exception cref="MockException">One or more mocks had setups that were not satisfied.</exception>
-		public virtual void Verify()
-		{
-			VerifyMocks(verifiable => verifiable.Verify());
-		}
+        public virtual void Verify()
+        {
+            VerifyMocks(verifiable => verifiable.Verify());
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies all setups on all mocks created by this factory.
 		/// </summary>
 		/// <seealso cref="Mock.Verify()"/>
 		/// <exception cref="MockException">One or more mocks had setups that were not satisfied.</exception>
-		public virtual void VerifyAll()
-		{
-			VerifyMocks(verifiable => verifiable.VerifyAll());
-		}
+        public virtual void VerifyAll()
+        {
+            VerifyMocks(verifiable => verifiable.VerifyAll());
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Calls <see cref="Mock{T}.VerifyNoOtherCalls()"/> on all mocks created by this factory.
 		/// </summary>
 		/// <seealso cref="Mock{T}.VerifyNoOtherCalls()"/>
 		/// <exception cref="MockException">One or more mocks had invocations that were not verified.</exception>
-		public void VerifyNoOtherCalls()
-		{
-			VerifyMocks(mock => Mock.VerifyNoOtherCalls(mock));
-		}
+        public void VerifyNoOtherCalls()
+        {
+            VerifyMocks(mock => Mock.VerifyNoOtherCalls(mock));
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Invokes <paramref name="verifyAction"/> for each mock
 		/// in <see cref="Mocks"/>, and accumulates the resulting
 		/// verification exceptions that might be
@@ -368,28 +373,31 @@ namespace Moq
 		/// </summary>
 		/// <param name="verifyAction">The action to execute against 
 		/// each mock.</param>
-		protected virtual void VerifyMocks(Action<Mock> verifyAction)
-		{
-			Guard.NotNull(verifyAction, nameof(verifyAction));
+        protected virtual void VerifyMocks(Action<Mock> verifyAction)
+        {
+            Guard.NotNull(verifyAction, nameof(verifyAction));
 
-			var errors = new List<MockException>();
+            var errors = new List<MockException>();
 
-			foreach (var mock in mocks)
-			{
-				try
-				{
-					verifyAction(mock);
-				}
-				catch (MockException error) when (error.IsVerificationError)
-				{
-					errors.Add(error);
-				}
-			}
+            foreach (var mock in mocks)
+            {
+                try
+                {
+                    verifyAction(mock);
+                }
+                catch (MockException error) when (error.IsVerificationError)
+                {
+                    errors.Add(error);
+                }
+            }
 
-			if (errors.Count > 0)
-			{
-				throw MockException.Combined(errors, preamble: Resources.VerificationErrorsOfMockRepository);
-			}
-		}
-	}
+            if (errors.Count > 0)
+            {
+                throw MockException.Combined(
+                    errors,
+                    preamble: Resources.VerificationErrorsOfMockRepository
+                );
+            }
+        }
+    }
 }

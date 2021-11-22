@@ -15,9 +15,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         public IReadOnlyList<CompositeThree> CompositeThrees { get; }
         public IReadOnlyList<CompositeFour> CompositeFours { get; }
 
-
-        public abstract IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class;
+        public abstract IQueryable<TEntity> Set<TEntity>() where TEntity : class;
 
         protected CompositeKeysData()
         {
@@ -37,97 +35,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         {
             var result = new List<CompositeOne>
             {
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 1,
-                    Name = "L1 01",
-                    Date = new DateTime(2001, 1, 1)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 2,
-                    Name = "L1 02",
-                    Date = new DateTime(2002, 2, 2)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 3,
-                    Name = "L1 03",
-                    Date = new DateTime(2003, 3, 3)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 4,
-                    Name = "L1 04",
-                    Date = new DateTime(2004, 4, 4)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 5,
-                    Name = "L1 05",
-                    Date = new DateTime(2005, 5, 5)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 1,
-                    Name = "L1 06",
-                    Date = new DateTime(2006, 6, 6)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 2,
-                    Name = "L1 07",
-                    Date = new DateTime(2007, 7, 7)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 3,
-                    Name = "L1 08",
-                    Date = new DateTime(2008, 8, 8)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 4,
-                    Name = "L1 09",
-                    Date = new DateTime(2009, 9, 9)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 5,
-                    Name = "L1 10",
-                    Date = new DateTime(2010, 10, 10)
-                },
-                new()
-                {
-                    Id1 = "L2",
-                    Id2 = 1,
-                    Name = "L1 11",
-                    Date = new DateTime(2009, 11, 11)
-                },
-                new()
-                {
-                    Id1 = "L2",
-                    Id2 = 2,
-                    Name = "L1 12",
-                    Date = new DateTime(2008, 12, 12)
-                },
-                new()
-                {
-                    Id1 = "L2",
-                    Id2 = 3,
-                    Name = "L1 13",
-                    Date = new DateTime(2007, 1, 1)
-                }
+                new() { Id1 = "L0", Id2 = 1, Name = "L1 01", Date = new DateTime(2001, 1, 1) },
+                new() { Id1 = "L0", Id2 = 2, Name = "L1 02", Date = new DateTime(2002, 2, 2) },
+                new() { Id1 = "L0", Id2 = 3, Name = "L1 03", Date = new DateTime(2003, 3, 3) },
+                new() { Id1 = "L0", Id2 = 4, Name = "L1 04", Date = new DateTime(2004, 4, 4) },
+                new() { Id1 = "L0", Id2 = 5, Name = "L1 05", Date = new DateTime(2005, 5, 5) },
+                new() { Id1 = "L1", Id2 = 1, Name = "L1 06", Date = new DateTime(2006, 6, 6) },
+                new() { Id1 = "L1", Id2 = 2, Name = "L1 07", Date = new DateTime(2007, 7, 7) },
+                new() { Id1 = "L1", Id2 = 3, Name = "L1 08", Date = new DateTime(2008, 8, 8) },
+                new() { Id1 = "L1", Id2 = 4, Name = "L1 09", Date = new DateTime(2009, 9, 9) },
+                new() { Id1 = "L1", Id2 = 5, Name = "L1 10", Date = new DateTime(2010, 10, 10) },
+                new() { Id1 = "L2", Id2 = 1, Name = "L1 11", Date = new DateTime(2009, 11, 11) },
+                new() { Id1 = "L2", Id2 = 2, Name = "L1 12", Date = new DateTime(2008, 12, 12) },
+                new() { Id1 = "L2", Id2 = 3, Name = "L1 13", Date = new DateTime(2007, 1, 1) }
             };
 
             foreach (var l1 in result)
@@ -145,83 +65,17 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         {
             var result = new List<CompositeTwo>
             {
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 1,
-                    Name = "L2 01",
-                    Date = new DateTime(2010, 10, 10)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 2,
-                    Name = "L2 02",
-                    Date = new DateTime(2002, 2, 2)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 3,
-                    Name = "L2 03",
-                    Date = new DateTime(2008, 8, 8)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 4,
-                    Name = "L2 04",
-                    Date = new DateTime(2004, 4, 4)
-                },
-                new()
-                {
-                    Id1 = "L0",
-                    Id2 = 5,
-                    Name = "L2 05",
-                    Date = new DateTime(2006, 6, 6)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 1,
-                    Name = "L2 06",
-                    Date = new DateTime(2005, 5, 5)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 2,
-                    Name = "L2 07",
-                    Date = new DateTime(2007, 7, 7)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 3,
-                    Name = "L2 08",
-                    Date = new DateTime(2003, 3, 3)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 4,
-                    Name = "L2 09",
-                    Date = new DateTime(2009, 9, 9)
-                },
-                new()
-                {
-                    Id1 = "L1",
-                    Id2 = 5,
-                    Name = "L2 10",
-                    Date = new DateTime(2001, 1, 1)
-                },
-                new()
-                {
-                    Id1 = "L2",
-                    Id2 = 1,
-                    Name = "L2 11",
-                    Date = new DateTime(2000, 1, 1)
-                }
+                new() { Id1 = "L0", Id2 = 1, Name = "L2 01", Date = new DateTime(2010, 10, 10) },
+                new() { Id1 = "L0", Id2 = 2, Name = "L2 02", Date = new DateTime(2002, 2, 2) },
+                new() { Id1 = "L0", Id2 = 3, Name = "L2 03", Date = new DateTime(2008, 8, 8) },
+                new() { Id1 = "L0", Id2 = 4, Name = "L2 04", Date = new DateTime(2004, 4, 4) },
+                new() { Id1 = "L0", Id2 = 5, Name = "L2 05", Date = new DateTime(2006, 6, 6) },
+                new() { Id1 = "L1", Id2 = 1, Name = "L2 06", Date = new DateTime(2005, 5, 5) },
+                new() { Id1 = "L1", Id2 = 2, Name = "L2 07", Date = new DateTime(2007, 7, 7) },
+                new() { Id1 = "L1", Id2 = 3, Name = "L2 08", Date = new DateTime(2003, 3, 3) },
+                new() { Id1 = "L1", Id2 = 4, Name = "L2 09", Date = new DateTime(2009, 9, 9) },
+                new() { Id1 = "L1", Id2 = 5, Name = "L2 10", Date = new DateTime(2001, 1, 1) },
+                new() { Id1 = "L2", Id2 = 1, Name = "L2 11", Date = new DateTime(2000, 1, 1) }
             };
 
             foreach (var l2 in result)
@@ -291,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             IReadOnlyList<CompositeOne> l1s,
             IReadOnlyList<CompositeTwo> l2s,
             IReadOnlyList<CompositeThree> l3s,
-            IReadOnlyList<CompositeFour> l4s)
+            IReadOnlyList<CompositeFour> l4s
+        )
         {
             l1s[0].OneToOne_Required_PK1 = l2s[0];
             l1s[1].OneToOne_Required_PK1 = l2s[1];
@@ -457,7 +312,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             IReadOnlyList<CompositeOne> l1s,
             IReadOnlyList<CompositeTwo> l2s,
             IReadOnlyList<CompositeThree> l3s,
-            IReadOnlyList<CompositeFour> l4s)
+            IReadOnlyList<CompositeFour> l4s
+        )
         {
             l2s[0].OneToOne_Required_PK_Inverse2 = l1s[0];
             l2s[1].OneToOne_Required_PK_Inverse2 = l1s[1];
@@ -470,7 +326,6 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             l2s[8].OneToOne_Required_PK_Inverse2 = l1s[8];
             l2s[9].OneToOne_Required_PK_Inverse2 = l1s[9];
             l2s[10].OneToOne_Required_PK_Inverse2 = l1s[10];
-
 
             l2s[9].OneToOne_Required_FK_Inverse2 = l1s[0];
             l2s[8].OneToOne_Required_FK_Inverse2 = l1s[1];
@@ -681,7 +536,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             IReadOnlyList<CompositeOne> l1s,
             IReadOnlyList<CompositeTwo> l2s,
             IReadOnlyList<CompositeThree> l3s,
-            IReadOnlyList<CompositeFour> l4s)
+            IReadOnlyList<CompositeFour> l4s
+        )
         {
             l1s[0].OneToOne_Optional_PK1 = l2s[0];
             l1s[2].OneToOne_Optional_PK1 = l2s[2];
@@ -728,12 +584,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             l2s[6].OneToOne_Optional_FK2 = l3s[2];
             l2s[8].OneToOne_Optional_FK2 = l3s[0];
 
-            l2s[0].OneToMany_Optional2 = new List<CompositeThree>
-            {
-                l3s[1],
-                l3s[5],
-                l3s[9]
-            };
+            l2s[0].OneToMany_Optional2 = new List<CompositeThree> { l3s[1], l3s[5], l3s[9] };
             l2s[1].OneToMany_Optional2 = new List<CompositeThree> { l3s[3], l3s[7] };
 
             l2s[1].OneToMany_Optional_Self2 = new List<CompositeTwo> { l2s[0] };
@@ -792,7 +643,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             IReadOnlyList<CompositeOne> l1s,
             IReadOnlyList<CompositeTwo> l2s,
             IReadOnlyList<CompositeThree> l3s,
-            IReadOnlyList<CompositeFour> l4s)
+            IReadOnlyList<CompositeFour> l4s
+        )
         {
             l2s[0].OneToOne_Optional_PK_Inverse2 = l1s[0];
             l2s[2].OneToOne_Optional_PK_Inverse2 = l1s[2];

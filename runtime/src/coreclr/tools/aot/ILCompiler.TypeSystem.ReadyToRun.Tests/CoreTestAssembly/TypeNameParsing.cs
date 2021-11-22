@@ -3,7 +3,6 @@
 
 public class NonNamespaceQualifiedType
 {
-
 }
 
 namespace TypeNameParsing

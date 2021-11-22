@@ -48,7 +48,8 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
         {
             var message = Resources.FormatFormatter_NoMediaTypes(
                 GetType().FullName,
-                nameof(SupportedMediaTypes));
+                nameof(SupportedMediaTypes)
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -124,13 +125,17 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
     public abstract Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context);
 
     /// <inheritdoc />
-    public virtual IReadOnlyList<string>? GetSupportedContentTypes(string contentType, Type objectType)
+    public virtual IReadOnlyList<string>? GetSupportedContentTypes(
+        string contentType,
+        Type objectType
+    )
     {
         if (SupportedMediaTypes.Count == 0)
         {
             var message = Resources.FormatFormatter_NoMediaTypes(
                 GetType().FullName,
-                nameof(SupportedMediaTypes));
+                nameof(SupportedMediaTypes)
+            );
 
             throw new InvalidOperationException(message);
         }

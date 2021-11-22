@@ -41,22 +41,30 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
 
         try
         {
-            var serverConnectionCompletedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var serverConnectionCompletedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             async Task EchoServer(ConnectionContext connection)
             {
                 // For graceful shutdown
-                var notificationFeature = connection.Features.Get<IConnectionLifetimeNotificationFeature>();
+                var notificationFeature =
+                    connection.Features.Get<IConnectionLifetimeNotificationFeature>();
 
                 try
                 {
                     while (true)
                     {
-                        var result = await connection.Transport.Input.ReadAsync(notificationFeature.ConnectionClosedRequested);
+                        var result = await connection.Transport.Input.ReadAsync(
+                            notificationFeature.ConnectionClosedRequested
+                        );
 
                         if (result.IsCompleted)
                         {
-                            Logger.LogDebug("Application receive loop ending for connection {connectionId}.", connection.ConnectionId);
+                            Logger.LogDebug(
+                                "Application receive loop ending for connection {connectionId}.",
+                                connection.ConnectionId
+                            );
                             break;
                         }
 
@@ -67,7 +75,10 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                 }
                 catch (OperationCanceledException)
                 {
-                    Logger.LogDebug("Graceful shutdown triggered for {connectionId}.", connection.ConnectionId);
+                    Logger.LogDebug(
+                        "Graceful shutdown triggered for {connectionId}.",
+                        connection.ConnectionId
+                    );
                 }
                 finally
                 {
@@ -75,26 +86,40 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                 }
             }
 
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(o =>
-                        {
-                            o.ListenUnixSocket(path, builder =>
-                            {
-                                builder.Run(EchoServer);
-                            });
-                        })
-                        .Configure(c => { });
-                })
+            var hostBuilder = TransportSelector
+                .GetHostBuilder()
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseKestrel(
+                                o =>
+                                {
+                                    o.ListenUnixSocket(
+                                        path,
+                                        builder =>
+                                        {
+                                            builder.Run(EchoServer);
+                                        }
+                                    );
+                                }
+                            )
+                            .Configure(c => { });
+                    }
+                )
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
                 await host.StartAsync().DefaultTimeout();
 
-                using (var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
+                using (
+                    var socket = new Socket(
+                        AddressFamily.Unix,
+                        SocketType.Stream,
+                        ProtocolType.Unspecified
+                    )
+                )
                 {
                     await socket.ConnectAsync(new UnixDomainSocketEndPoint(path)).DefaultTimeout();
 
@@ -105,7 +130,12 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                     var read = 0;
                     while (read < data.Length)
                     {
-                        var bytesReceived = await socket.ReceiveAsync(buffer.AsMemory(read, buffer.Length - read), SocketFlags.None).DefaultTimeout();
+                        var bytesReceived = await socket
+                            .ReceiveAsync(
+                                buffer.AsMemory(read, buffer.Length - read),
+                                SocketFlags.None
+                            )
+                            .DefaultTimeout();
                         read += bytesReceived;
                         if (bytesReceived <= 0)
                         {
@@ -140,20 +170,27 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
 
         try
         {
-            var hostBuilder = TransportSelector.GetHostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseUrls(url)
-                        .UseKestrel()
-                        .Configure(app =>
-                        {
-                            app.Run(async context =>
-                            {
-                                await context.Response.WriteAsync("Hello World");
-                            });
-                        });
-                })
+            var hostBuilder = TransportSelector
+                .GetHostBuilder()
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseUrls(url)
+                            .UseKestrel()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        async context =>
+                                        {
+                                            await context.Response.WriteAsync("Hello World");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
@@ -162,18 +199,28 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
 
                 // https://github.com/dotnet/corefx/issues/5999
                 // .NET Core HttpClient does not support unix sockets, it's difficult to parse raw response data. below is a little hacky way.
-                using (var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
+                using (
+                    var socket = new Socket(
+                        AddressFamily.Unix,
+                        SocketType.Stream,
+                        ProtocolType.Unspecified
+                    )
+                )
                 {
                     await socket.ConnectAsync(new UnixDomainSocketEndPoint(path)).DefaultTimeout();
 
-                    var httpRequest = Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n");
+                    var httpRequest = Encoding.ASCII.GetBytes(
+                        "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n"
+                    );
                     await socket.SendAsync(httpRequest, SocketFlags.None).DefaultTimeout();
 
                     var readBuffer = new byte[512];
                     var read = 0;
                     while (true)
                     {
-                        var bytesReceived = await socket.ReceiveAsync(readBuffer.AsMemory(read), SocketFlags.None).DefaultTimeout();
+                        var bytesReceived = await socket
+                            .ReceiveAsync(readBuffer.AsMemory(read), SocketFlags.None)
+                            .DefaultTimeout();
                         read += bytesReceived;
                         if (bytesReceived <= 0)
                         {
@@ -185,11 +232,16 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                     int httpStatusStart = httpResponse.IndexOf(' ') + 1;
                     Assert.False(httpStatusStart == 0, $"Space not found in '{httpResponse}'.");
                     int httpStatusEnd = httpResponse.IndexOf(' ', httpStatusStart);
-                    Assert.False(httpStatusEnd == -1, $"Second space not found in '{httpResponse}'.");
+                    Assert.False(
+                        httpStatusEnd == -1,
+                        $"Second space not found in '{httpResponse}'."
+                    );
 
-                    var httpStatus = int.Parse(httpResponse.Substring(httpStatusStart, httpStatusEnd - httpStatusStart), CultureInfo.InvariantCulture);
+                    var httpStatus = int.Parse(
+                        httpResponse.Substring(httpStatusStart, httpStatusEnd - httpStatusStart),
+                        CultureInfo.InvariantCulture
+                    );
                     Assert.Equal(httpStatus, StatusCodes.Status200OK);
-
                 }
                 await host.StopAsync().DefaultTimeout();
             }
@@ -206,9 +258,6 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
         {
             File.Delete(path);
         }
-        catch (FileNotFoundException)
-        {
-
-        }
+        catch (FileNotFoundException) { }
     }
 }

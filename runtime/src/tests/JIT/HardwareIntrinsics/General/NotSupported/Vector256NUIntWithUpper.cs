@@ -23,7 +23,9 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                Vector256<nuint> result = default(Vector256<nuint>).WithUpper(default(Vector128<nuint>));
+                Vector256<nuint> result = default(Vector256<nuint>).WithUpper(
+                    default(Vector128<nuint>)
+                );
             }
             catch (NotSupportedException)
             {
@@ -32,7 +34,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256NUIntWithUpper: RunNotSupportedScenario failed to throw NotSupportedException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256NUIntWithUpper: RunNotSupportedScenario failed to throw NotSupportedException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 throw new Exception("One or more scenarios did not complete as expected.");

@@ -52,7 +52,8 @@ namespace SharedTypes
             l = MemoryMarshal.Cast<double, long>(MemoryMarshal.CreateSpan(ref d, 1))[0];
         }
 
-        public double ToManaged() => MemoryMarshal.Cast<long, double>(MemoryMarshal.CreateSpan(ref l, 1))[0];
+        public double ToManaged() =>
+            MemoryMarshal.Cast<long, double>(MemoryMarshal.CreateSpan(ref l, 1))[0];
 
         public long Value
         {
@@ -84,12 +85,7 @@ namespace SharedTypes
 
         public BoolStruct ToManaged()
         {
-            return new BoolStruct
-            {
-                b1 = b1 != 0,
-                b2 = b2 != 0,
-                b3 = b3 != 0
-            };
+            return new BoolStruct { b1 = b1 != 0, b2 = b2 != 0, b3 = b3 != 0 };
         }
     }
 
@@ -230,8 +226,7 @@ namespace SharedTypes
         private readonly int sizeOfNativeElement;
         private IntPtr allocatedMemory;
 
-        public ListMarshaller(int sizeOfNativeElement)
-            : this()
+        public ListMarshaller(int sizeOfNativeElement) : this()
         {
             this.sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -317,7 +312,10 @@ namespace SharedTypes
                 else
                 {
                     allocatedMemory = (IntPtr)value;
-                    NativeValueStorage = new Span<byte>(value, (managedList?.Count ?? 0) * sizeOfNativeElement);
+                    NativeValueStorage = new Span<byte>(
+                        value,
+                        (managedList?.Count ?? 0) * sizeOfNativeElement
+                    );
                 }
             }
         }

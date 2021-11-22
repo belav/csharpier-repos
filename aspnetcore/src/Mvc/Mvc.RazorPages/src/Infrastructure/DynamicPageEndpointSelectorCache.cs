@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 internal class DynamicPageEndpointSelectorCache
 {
     private readonly ConcurrentDictionary<int, EndpointDataSource> _dataSourceCache = new();
-    private readonly ConcurrentDictionary<int, DynamicPageEndpointSelector> _endpointSelectorCache = new();
+    private readonly ConcurrentDictionary<int, DynamicPageEndpointSelector> _endpointSelectorCache =
+        new();
 
     public void AddDataSource(PageActionEndpointDataSource dataSource)
     {

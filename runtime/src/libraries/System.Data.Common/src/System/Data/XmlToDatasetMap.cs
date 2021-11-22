@@ -30,8 +30,14 @@ namespace System.Data
             {
                 XmlNodeIdentety id = (XmlNodeIdentety)obj!;
                 return (
-                  (string.Equals(LocalName, id.LocalName, StringComparison.OrdinalIgnoreCase)) &&
-                  (string.Equals(NamespaceURI, id.NamespaceURI, StringComparison.OrdinalIgnoreCase))
+                    (string.Equals(LocalName, id.LocalName, StringComparison.OrdinalIgnoreCase))
+                    && (
+                        string.Equals(
+                            NamespaceURI,
+                            id.NamespaceURI,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                 );
             }
         }
@@ -41,9 +47,7 @@ namespace System.Data
         internal sealed class XmlNodeIdHashtable : Hashtable
         {
             private readonly XmlNodeIdentety _id = new XmlNodeIdentety(string.Empty, string.Empty);
-            public XmlNodeIdHashtable(int capacity)
-                : base(capacity)
-            { }
+            public XmlNodeIdHashtable(int capacity) : base(capacity) { }
             public object? this[XmlNode node]
             {
                 get
@@ -96,7 +100,7 @@ namespace System.Data
             }
         }
 
-        private XmlNodeIdHashtable _tableSchemaMap;              // Holds all the tables information
+        private XmlNodeIdHashtable _tableSchemaMap; // Holds all the tables information
 
         private TableSchemaInfo? _lastTableSchemaInfo;
 
@@ -174,40 +178,43 @@ namespace System.Data
             //       We decided encoded names in first case (instead of decoding them in second)
             //       because it save us time in LoadRows(). We have, as usual, more data them schemas
 
-            string _tableLocalName = table.EncodedTableName;            // Table name
+            string _tableLocalName = table.EncodedTableName; // Table name
 
-            string? tableLocalName = nameTable.Get(_tableLocalName);     // Look it up in nametable
+            string? tableLocalName = nameTable.Get(_tableLocalName); // Look it up in nametable
 
             if (tableLocalName == null)
-            {                                // If not found
-                tableLocalName = nameTable.Add(_tableLocalName);        // Add it
+            { // If not found
+                tableLocalName = nameTable.Add(_tableLocalName); // Add it
             }
 
-            table._encodedTableName = tableLocalName;                    // And set it back
+            table._encodedTableName = tableLocalName; // And set it back
 
-            string? tableNamespace = nameTable.Get(table.Namespace);     // Look ip table namespace
+            string? tableNamespace = nameTable.Get(table.Namespace); // Look ip table namespace
 
             if (tableNamespace == null)
-            {                               // If not found
-                tableNamespace = nameTable.Add(table.Namespace);        // Add it
+            { // If not found
+                tableNamespace = nameTable.Add(table.Namespace); // Add it
             }
             else
             {
-                if (table._tableNamespace != null)                       // Update table namespace
+                if (table._tableNamespace != null) // Update table namespace
                     table._tableNamespace = tableNamespace;
             }
-
 
             TableSchemaInfo tableSchemaInfo = new TableSchemaInfo(table);
             // Create new table schema info
             _tableSchemaMap[new XmlNodeIdentety(tableLocalName, tableNamespace)] = tableSchemaInfo;
             // And add it to the hashtable
-            return tableSchemaInfo;                                     // Return it as we have to populate
-                                                                        // Column schema map and Child table
-                                                                        // schema map in it
+            return tableSchemaInfo; // Return it as we have to populate
+            // Column schema map and Child table
+            // schema map in it
         }
 
-        private bool AddColumnSchema(DataColumn col, XmlNameTable nameTable, XmlNodeIdHashtable columns)
+        private bool AddColumnSchema(
+            DataColumn col,
+            XmlNameTable nameTable,
+            XmlNodeIdHashtable columns
+        )
         {
             string? columnLocalName = nameTable.Get(col.EncodedColumnName);
             string? columnNamespace = nameTable.Get(col.Namespace);
@@ -224,37 +231,40 @@ namespace System.Data
                 HandleSpecialColumn(col, nameTable, columns);
             }
 
-
             return true;
         }
 
-        private bool AddColumnSchema(XmlNameTable nameTable, DataColumn col, XmlNodeIdHashtable columns)
+        private bool AddColumnSchema(
+            XmlNameTable nameTable,
+            DataColumn col,
+            XmlNodeIdHashtable columns
+        )
         {
             string _columnLocalName = XmlConvert.EncodeLocalName(col.ColumnName);
-            string? columnLocalName = nameTable.Get(_columnLocalName);           // Look it up in a name table
+            string? columnLocalName = nameTable.Get(_columnLocalName); // Look it up in a name table
 
             if (columnLocalName == null)
-            {                                       // Not found?
-                columnLocalName = nameTable.Add(_columnLocalName);              // Add it
+            { // Not found?
+                columnLocalName = nameTable.Add(_columnLocalName); // Add it
             }
 
-            col._encodedColumnName = columnLocalName;                            // And set it back
+            col._encodedColumnName = columnLocalName; // And set it back
 
-            string? columnNamespace = nameTable.Get(col.Namespace);             // Get column namespace from nametable
+            string? columnNamespace = nameTable.Get(col.Namespace); // Get column namespace from nametable
 
             if (columnNamespace == null)
-            {                                       // Not found ?
-                columnNamespace = nameTable.Add(col.Namespace);                 // Add it
+            { // Not found ?
+                columnNamespace = nameTable.Add(col.Namespace); // Add it
             }
             else
             {
-                if (col._columnUri != null)                                    // Update namespace
+                if (col._columnUri != null) // Update namespace
                     col._columnUri = columnNamespace;
             }
             // Create XmlNodeIdentety
             // for this column
             XmlNodeIdentety idColumn = new XmlNodeIdentety(columnLocalName, columnNamespace);
-            columns[idColumn] = col;                                            // And add it to hashtable
+            columns[idColumn] = col; // And add it to hashtable
 
             if (col.ColumnName.StartsWith("xml", StringComparison.OrdinalIgnoreCase))
             {
@@ -297,43 +307,44 @@ namespace System.Data
             // Hash tables with columns schema maps
             // and child tables schema maps
 
-            string? dsNamespace = nameTable.Get(dataSet.Namespace);      // Attept to look up DataSet namespace
-                                                                        // in the name table
+            string? dsNamespace = nameTable.Get(dataSet.Namespace); // Attept to look up DataSet namespace
+            // in the name table
 
             if (dsNamespace == null)
-            {                                  // Found ?
-                dsNamespace = nameTable.Add(dataSet.Namespace);         // Nope. Add it
+            { // Found ?
+                dsNamespace = nameTable.Add(dataSet.Namespace); // Nope. Add it
             }
-            dataSet._namespaceURI = dsNamespace;                         // Set a DataSet namespace URI
-
+            dataSet._namespaceURI = dsNamespace; // Set a DataSet namespace URI
 
             foreach (DataTable t in dataSet.Tables)
-            {                    // For each table
+            { // For each table
                 TableSchemaInfo tableSchemaInfo = AddTableSchema(nameTable, t);
                 // Add table schema info to hash table
 
                 if (tableSchemaInfo != null)
                 {
                     foreach (DataColumn c in t.Columns)
-                    {              // Add column schema map
+                    { // Add column schema map
                         // don't include auto-generated PK, FK and any hidden columns to be part of mapping
                         if (IsMappedColumn(c))
-                        {                        // If mapped column
+                        { // If mapped column
                             AddColumnSchema(nameTable, c, tableSchemaInfo.ColumnsSchemaMap);
-                        }                                               // Add it to the map
+                        } // Add it to the map
                     }
 
                     // Add child nested tables to the schema
 
                     foreach (DataRelation r in t.ChildRelations)
-                    {     // Do we have a child tables ?
+                    { // Do we have a child tables ?
                         if (r.Nested)
-                        {                                 // Is it nested?
+                        { // Is it nested?
                             // don't include non nested tables
 
                             // Handle namespaces and names as usuall
 
-                            string _tableLocalName = XmlConvert.EncodeLocalName(r.ChildTable.TableName);
+                            string _tableLocalName = XmlConvert.EncodeLocalName(
+                                r.ChildTable.TableName
+                            );
                             string? tableLocalName = nameTable.Get(_tableLocalName);
 
                             if (tableLocalName == null)
@@ -348,7 +359,10 @@ namespace System.Data
                                 tableNamespace = nameTable.Add(r.ChildTable.Namespace);
                             }
 
-                            XmlNodeIdentety idTable = new XmlNodeIdentety(tableLocalName, tableNamespace);
+                            XmlNodeIdentety idTable = new XmlNodeIdentety(
+                                tableLocalName,
+                                tableNamespace
+                            );
                             tableSchemaInfo.ColumnsSchemaMap[idTable] = r.ChildTable;
                         }
                     }
@@ -380,22 +394,22 @@ namespace System.Data
         [MemberNotNull(nameof(_tableSchemaMap))]
         private void BuildIdentityMap(XmlNameTable nameTable, DataTable dataTable)
         {
-            ArrayList tableList = GetSelfAndDescendants(dataTable);     // Get list of tables we're loading
-                                                                        // This includes our table and
-                                                                        // related tables tree
+            ArrayList tableList = GetSelfAndDescendants(dataTable); // Get list of tables we're loading
+            // This includes our table and
+            // related tables tree
 
             _tableSchemaMap = new XmlNodeIdHashtable(tableList.Count);
             // Create hash table to hold all
             // tables to load.
 
             foreach (DataTable t in tableList)
-            {                        // For each table
+            { // For each table
                 TableSchemaInfo tableSchemaInfo = AddTableSchema(nameTable, t);
                 // Create schema info
                 if (tableSchemaInfo != null)
                 {
                     foreach (DataColumn c in t.Columns)
-                    {              // Add column information
+                    { // Add column information
                         // don't include auto-generated PK, FK and any hidden columns to be part of mapping
                         if (IsMappedColumn(c))
                         {
@@ -404,14 +418,16 @@ namespace System.Data
                     }
 
                     foreach (DataRelation r in t.ChildRelations)
-                    {     // Add nested tables information
+                    { // Add nested tables information
                         if (r.Nested)
-                        {                                 // Is it nested?
+                        { // Is it nested?
                             // don't include non nested tables
 
                             // Handle namespaces and names as usuall
 
-                            string _tableLocalName = XmlConvert.EncodeLocalName(r.ChildTable.TableName);
+                            string _tableLocalName = XmlConvert.EncodeLocalName(
+                                r.ChildTable.TableName
+                            );
                             string? tableLocalName = nameTable.Get(_tableLocalName);
 
                             if (tableLocalName == null)
@@ -426,7 +442,10 @@ namespace System.Data
                                 tableNamespace = nameTable.Add(r.ChildTable.Namespace);
                             }
 
-                            XmlNodeIdentety idTable = new XmlNodeIdentety(tableLocalName, tableNamespace);
+                            XmlNodeIdentety idTable = new XmlNodeIdentety(
+                                tableLocalName,
+                                tableNamespace
+                            );
                             tableSchemaInfo.ColumnsSchemaMap[idTable] = r.ChildTable;
                         }
                     }
@@ -442,7 +461,9 @@ namespace System.Data
 
             while (nCounter < tableList.Count)
             {
-                foreach (DataRelation childRelations in ((DataTable)tableList[nCounter]!).ChildRelations)
+                foreach (
+                    DataRelation childRelations in ((DataTable)tableList[nCounter]!).ChildRelations
+                )
                 {
                     if (!tableList.Contains(childRelations.ChildTable))
                         tableList.Add(childRelations.ChildTable);
@@ -459,7 +480,10 @@ namespace System.Data
             Debug.Assert(node != null, "Argument validation");
             TableSchemaInfo? tableSchemaInfo = null;
 
-            XmlNode? nodeRegion = (node.NodeType == XmlNodeType.Attribute) ? ((XmlAttribute)node).OwnerElement : node.ParentNode;
+            XmlNode? nodeRegion =
+                (node.NodeType == XmlNodeType.Attribute)
+                    ? ((XmlAttribute)node).OwnerElement
+                    : node.ParentNode;
 
             do
             {
@@ -467,7 +491,11 @@ namespace System.Data
                 {
                     return null;
                 }
-                tableSchemaInfo = (TableSchemaInfo?)(fIgnoreNamespace ? _tableSchemaMap[nodeRegion.LocalName] : _tableSchemaMap[nodeRegion]);
+                tableSchemaInfo = (TableSchemaInfo?)(
+                    fIgnoreNamespace
+                        ? _tableSchemaMap[nodeRegion.LocalName]
+                        : _tableSchemaMap[nodeRegion]
+                );
 
                 nodeRegion = nodeRegion.ParentNode;
             } while (tableSchemaInfo == null);
@@ -478,12 +506,15 @@ namespace System.Data
                 return tableSchemaInfo.ColumnsSchemaMap[node];
         }
 
-
         public object? GetColumnSchema(DataTable table, XmlReader dataReader, bool fIgnoreNamespace)
         {
             if ((_lastTableSchemaInfo == null) || (_lastTableSchemaInfo.TableSchema != table))
             {
-                _lastTableSchemaInfo = (TableSchemaInfo)(fIgnoreNamespace ? _tableSchemaMap[table.EncodedTableName]! : _tableSchemaMap[table]!);
+                _lastTableSchemaInfo = (TableSchemaInfo)(
+                    fIgnoreNamespace
+                        ? _tableSchemaMap[table.EncodedTableName]!
+                        : _tableSchemaMap[table]!
+                );
             }
 
             if (fIgnoreNamespace)
@@ -498,21 +529,25 @@ namespace System.Data
             TableSchemaInfo? tableSchemaInfo = null;
 
             if (node.NodeType == XmlNodeType.Element)
-            {         // If element
-                tableSchemaInfo = (TableSchemaInfo?)(fIgnoreNamespace ? _tableSchemaMap[node.LocalName] : _tableSchemaMap[node]);
-            }                                                   // Look up table schema info for it
+            { // If element
+                tableSchemaInfo = (TableSchemaInfo?)(
+                    fIgnoreNamespace ? _tableSchemaMap[node.LocalName] : _tableSchemaMap[node]
+                );
+            } // Look up table schema info for it
 
             if (tableSchemaInfo != null)
-            {                      // Got info ?
-                return tableSchemaInfo.TableSchema;             // Yes, Return table
+            { // Got info ?
+                return tableSchemaInfo.TableSchema; // Yes, Return table
             }
 
-            return GetColumnSchema(node, fIgnoreNamespace);     // Attempt to locate column
+            return GetColumnSchema(node, fIgnoreNamespace); // Attempt to locate column
         }
 
         public DataTable? GetTableForNode(XmlReader node, bool fIgnoreNamespace)
         {
-            TableSchemaInfo? tableSchemaInfo = (TableSchemaInfo?)(fIgnoreNamespace ? _tableSchemaMap[node.LocalName] : _tableSchemaMap[node]);
+            TableSchemaInfo? tableSchemaInfo = (TableSchemaInfo?)(
+                fIgnoreNamespace ? _tableSchemaMap[node.LocalName] : _tableSchemaMap[node]
+            );
             if (tableSchemaInfo != null)
             {
                 _lastTableSchemaInfo = tableSchemaInfo;
@@ -521,10 +556,17 @@ namespace System.Data
             return null;
         }
 
-        private void HandleSpecialColumn(DataColumn col, XmlNameTable nameTable, XmlNodeIdHashtable columns)
+        private void HandleSpecialColumn(
+            DataColumn col,
+            XmlNameTable nameTable,
+            XmlNodeIdHashtable columns
+        )
         {
             // if column name starts with xml, we encode it manualy and add it for look up
-            Debug.Assert(col.ColumnName.StartsWith("xml", StringComparison.OrdinalIgnoreCase), "column name should start with xml");
+            Debug.Assert(
+                col.ColumnName.StartsWith("xml", StringComparison.OrdinalIgnoreCase),
+                "column name should start with xml"
+            );
             string tempColumnName;
 
             if ('x' == col.ColumnName[0])

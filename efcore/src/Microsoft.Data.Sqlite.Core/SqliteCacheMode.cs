@@ -12,12 +12,10 @@ namespace Microsoft.Data.Sqlite
         ///     Default mode.
         /// </summary>
         Default,
-
         /// <summary>
         ///     Private-cache mode. Each connection uses a private cache.
         /// </summary>
         Private,
-
         /// <summary>
         ///     Shared-cache mode. Connections share a cache. This mode can change the behavior of transaction and table
         ///     locking.

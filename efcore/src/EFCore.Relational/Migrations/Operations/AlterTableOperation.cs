@@ -21,7 +21,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         public virtual TableOperation OldTable { get; set; } = new CreateTableOperation();
 
         /// <inheritdoc />
-        IMutableAnnotatable IAlterMigrationOperation.OldAnnotations
-            => OldTable;
+        IMutableAnnotatable IAlterMigrationOperation.OldAnnotations => OldTable;
     }
 }

@@ -27,9 +27,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         public abstract BlockSyntax GetBody(SyntaxNode declaration);
         public abstract ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode declaration);
 
-        public abstract bool CanOfferUseExpressionBody(OptionSet optionSet, SyntaxNode declaration, bool forAnalyzer);
-        public abstract (bool canOffer, bool fixesError) CanOfferUseBlockBody(OptionSet optionSet, SyntaxNode declaration, bool forAnalyzer);
-        public abstract SyntaxNode Update(SemanticModel semanticModel, SyntaxNode declaration, bool useExpressionBody);
+        public abstract bool CanOfferUseExpressionBody(
+            OptionSet optionSet,
+            SyntaxNode declaration,
+            bool forAnalyzer
+        );
+        public abstract (bool canOffer, bool fixesError) CanOfferUseBlockBody(
+            OptionSet optionSet,
+            SyntaxNode declaration,
+            bool forAnalyzer
+        );
+        public abstract SyntaxNode Update(
+            SemanticModel semanticModel,
+            SyntaxNode declaration,
+            bool useExpressionBody
+        );
 
         public abstract Location GetDiagnosticLocation(SyntaxNode declaration);
 
@@ -42,6 +54,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 UseExpressionBodyForOperatorsHelper.Instance,
                 UseExpressionBodyForPropertiesHelper.Instance,
                 UseExpressionBodyForAccessorsHelper.Instance,
-                UseExpressionBodyForLocalFunctionHelper.Instance);
+                UseExpressionBodyForLocalFunctionHelper.Instance
+            );
     }
 }

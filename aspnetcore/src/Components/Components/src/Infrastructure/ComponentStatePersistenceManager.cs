@@ -100,7 +100,10 @@ public class ComponentStatePersistenceManager
             return Task.CompletedTask;
         }
 
-        static Task ExecuteCallback(Func<Task> callback, ILogger<ComponentStatePersistenceManager> logger)
+        static Task ExecuteCallback(
+            Func<Task> callback,
+            ILogger<ComponentStatePersistenceManager> logger
+        )
         {
             try
             {
@@ -116,7 +119,11 @@ public class ComponentStatePersistenceManager
             }
             catch (Exception ex)
             {
-                logger.LogError(new EventId(1000, "PersistenceCallbackError"), ex, "There was an error executing a callback while pausing the application.");
+                logger.LogError(
+                    new EventId(1000, "PersistenceCallbackError"),
+                    ex,
+                    "There was an error executing a callback while pausing the application."
+                );
                 return Task.CompletedTask;
             }
 
@@ -128,7 +135,11 @@ public class ComponentStatePersistenceManager
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(new EventId(1000, "PersistenceCallbackError"), ex, "There was an error executing a callback while pausing the application.");
+                    logger.LogError(
+                        new EventId(1000, "PersistenceCallbackError"),
+                        ex,
+                        "There was an error executing a callback while pausing the application."
+                    );
                     return;
                 }
             }

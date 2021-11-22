@@ -36,7 +36,11 @@ public class DummyHubProtocol : IHubProtocol
         }
     }
 
-    public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+    public bool TryParseMessage(
+        ref ReadOnlySequence<byte> input,
+        IInvocationBinder binder,
+        out HubMessage message
+    )
     {
         throw new NotSupportedException();
     }

@@ -17,19 +17,20 @@ class Program
         // Configure
         var services = new ServiceCollection()
             .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
-            .AddDbContext<DataProtectionKeyContext>(o =>
-            {
-                o.UseInMemoryDatabase("DataProtection_EntityFrameworkCore");
+            .AddDbContext<DataProtectionKeyContext>(
+                o =>
+                {
+                    o.UseInMemoryDatabase("DataProtection_EntityFrameworkCore");
                     // Make sure to create a sql server called DataProtectionApp
                     //o.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=DataProtectionApp;Trusted_Connection=True;Connect Timeout=5;ConnectRetryCount=0");
                     o.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-                o.EnableSensitiveDataLogging();
-            })
+                    o.EnableSensitiveDataLogging();
+                }
+            )
             .AddDataProtection()
             .PersistKeysToDbContext<DataProtectionKeyContext>()
             .SetDefaultKeyLifetime(TimeSpan.FromDays(7))
-            .Services
-            .BuildServiceProvider(validateScopes: true);
+            .Services.BuildServiceProvider(validateScopes: true);
 
         using (services)
         {
@@ -43,7 +44,8 @@ class Program
 
 class DataProtectionKeyContext : DbContext, IDataProtectionKeyContext
 {
-    public DataProtectionKeyContext(DbContextOptions<DataProtectionKeyContext> options) : base(options) { }
+    public DataProtectionKeyContext(DbContextOptions<DataProtectionKeyContext> options)
+        : base(options) { }
 
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 }

@@ -12,7 +12,6 @@ public enum FormMethod
     /// Get form method.
     /// </summary>
     Get,
-
     /// <summary>
     /// Post form method.
     /// </summary>

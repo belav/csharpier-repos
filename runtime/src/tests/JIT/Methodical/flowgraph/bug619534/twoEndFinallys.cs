@@ -33,7 +33,8 @@ internal class Test
         Test t = TwoEndFinallys(args);
         if (t._temp == 101)
             return 100;
-        else return 101;
+        else
+            return 101;
     }
     private static Test TwoEndFinallys(string[] args)
     {
@@ -91,9 +92,6 @@ internal class Test
             }
             return null;
         }
-        finally
-        {
-        }
+        finally { }
     }
 }
-

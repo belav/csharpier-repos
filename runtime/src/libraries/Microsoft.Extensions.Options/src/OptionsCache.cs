@@ -11,11 +11,16 @@ namespace Microsoft.Extensions.Options
     /// Used to cache <typeparamref name="TOptions"/> instances.
     /// </summary>
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
-    public class OptionsCache<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions> :
-        IOptionsMonitorCache<TOptions>
-        where TOptions : class
+    public class OptionsCache<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > : IOptionsMonitorCache<TOptions> where TOptions : class
     {
-        private readonly ConcurrentDictionary<string, Lazy<TOptions>> _cache = new ConcurrentDictionary<string, Lazy<TOptions>>(concurrencyLevel: 1, capacity: 31, StringComparer.Ordinal); // 31 == default capacity
+        private readonly ConcurrentDictionary<string, Lazy<TOptions>> _cache =
+            new ConcurrentDictionary<string, Lazy<TOptions>>(
+                concurrencyLevel: 1,
+                capacity: 31,
+                StringComparer.Ordinal
+            ); // 31 == default capacity
 
         /// <summary>
         /// Clears all options instances from the cache.
@@ -39,7 +44,11 @@ namespace Microsoft.Extensions.Options
             Lazy<TOptions> value;
 
 #if NETSTANDARD2_1
-            value = _cache.GetOrAdd(name, static (name, createOptions) => new Lazy<TOptions>(createOptions), createOptions);
+            value = _cache.GetOrAdd(
+                name,
+                static (name, createOptions) => new Lazy<TOptions>(createOptions),
+                createOptions
+            );
 #else
             if (!_cache.TryGetValue(name, out value))
             {
@@ -81,11 +90,15 @@ namespace Microsoft.Extensions.Options
                 throw new ArgumentNullException(nameof(options));
             }
 
-            return _cache.TryAdd(name ?? Options.DefaultName, new Lazy<TOptions>(
+            return _cache.TryAdd(
+                name ?? Options.DefaultName,
+                new Lazy<TOptions>(
 #if !NETSTANDARD2_1
-                () =>
+                    () =>
 #endif
-                options));
+                    options
+                )
+            );
         }
 
         /// <summary>

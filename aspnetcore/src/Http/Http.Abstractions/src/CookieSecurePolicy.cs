@@ -16,13 +16,11 @@ public enum CookieSecurePolicy
     /// and for servers that do not have HTTPS support.
     /// </summary>
     SameAsRequest,
-
     /// <summary>
     /// Secure is always marked true. Use this value when your login page and all subsequent pages
     /// requiring the authenticated identity are HTTPS. Local development will also need to be done with HTTPS urls.
     /// </summary>
     Always,
-
     /// <summary>
     /// Secure is not marked true. Use this value when your login page is HTTPS, but other pages
     /// on the site which are HTTP also require authentication information. This setting is not recommended because

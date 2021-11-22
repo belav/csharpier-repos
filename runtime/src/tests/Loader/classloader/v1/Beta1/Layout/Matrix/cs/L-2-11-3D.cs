@@ -3,8 +3,9 @@
 
 using System;
 
-public struct A{
-/*public int Test(B b){
+public struct A
+{
+    /*public int Test(B b){
   int mi_RetCode = 100;
 
   /////////////////////////////////
@@ -65,49 +66,55 @@ public struct A{
   return mi_RetCode;
 }
 */
-  //////////////////////////////
-  // Instance Fields
-public int FldPubInst;
-private int FldPrivInst;
-internal int FldAsmInst;           //Translates to "assembly"
-  
-  //////////////////////////////
-  // Static Fields
-public static int FldPubStat;
-private static int FldPrivStat;
-internal static int FldAsmStat;    //assembly
+    //////////////////////////////
+    // Instance Fields
+    public int FldPubInst;
+    private int FldPrivInst;
+    internal int FldAsmInst; //Translates to "assembly"
 
-  //////////////////////////////
-  // Instance Methods
-public int MethPubInst(){
-  Console.WriteLine("A::MethPubInst()");
-  return 100;
-}
+    //////////////////////////////
+    // Static Fields
+    public static int FldPubStat;
+    private static int FldPrivStat;
+    internal static int FldAsmStat; //assembly
 
-private int MethPrivInst(){
-  Console.WriteLine("A::MethPrivInst()");
-  return 100;
-}
+    //////////////////////////////
+    // Instance Methods
+    public int MethPubInst()
+    {
+        Console.WriteLine("A::MethPubInst()");
+        return 100;
+    }
 
-internal int MethAsmInst(){
-  Console.WriteLine("A::MethAsmInst()");
-  return 100;
-}
+    private int MethPrivInst()
+    {
+        Console.WriteLine("A::MethPrivInst()");
+        return 100;
+    }
 
-  //////////////////////////////
-  // Static Methods
-public static int MethPubStat(){
-  Console.WriteLine("A::MethPubStat()");
-  return 100;
-}
+    internal int MethAsmInst()
+    {
+        Console.WriteLine("A::MethAsmInst()");
+        return 100;
+    }
 
-private static int MethPrivStat(){
-  Console.WriteLine("A::MethPrivStat()");
-  return 100;
-}
+    //////////////////////////////
+    // Static Methods
+    public static int MethPubStat()
+    {
+        Console.WriteLine("A::MethPubStat()");
+        return 100;
+    }
 
-internal static int MethAsmStat(){
-  Console.WriteLine("A::MethAsmStat()");
-  return 100;
-}
+    private static int MethPrivStat()
+    {
+        Console.WriteLine("A::MethPrivStat()");
+        return 100;
+    }
+
+    internal static int MethAsmStat()
+    {
+        Console.WriteLine("A::MethAsmStat()");
+        return 100;
+    }
 }

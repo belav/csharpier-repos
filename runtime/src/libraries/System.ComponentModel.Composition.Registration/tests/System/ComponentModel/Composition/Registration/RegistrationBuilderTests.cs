@@ -40,8 +40,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class DiscoveredCatalog : AssemblyCatalog
         {
-            public DiscoveredCatalog()
-                : base("") { }
+            public DiscoveredCatalog() : base("") { }
         }
 
         [Fact]
@@ -63,11 +62,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = new RegistrationBuilder();
 
-            builder.ForTypesDerivedFrom<IFoo>()
-                .Export<IFoo>();
+            builder.ForTypesDerivedFrom<IFoo>().Export<IFoo>();
 
             TypeInfo projectedType1 = builder.MapType(typeof(FooImpl).GetTypeInfo());
-            TypeInfo projectedType2 = builder.MapType(typeof(FooImplWithConstructors).GetTypeInfo());
+            TypeInfo projectedType2 = builder.MapType(
+                typeof(FooImplWithConstructors).GetTypeInfo()
+            );
 
             var exports = new List<object>();
 
@@ -87,18 +87,28 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = new RegistrationBuilder();
 
-            builder.ForTypesDerivedFrom<IFoo>()
-                .Export<IFoo>();
+            builder.ForTypesDerivedFrom<IFoo>().Export<IFoo>();
 
             TypeInfo projectedType1 = builder.MapType(typeof(FooImpl).GetTypeInfo());
-            TypeInfo projectedType2 = builder.MapType(typeof(FooImplWithConstructors).GetTypeInfo());
+            TypeInfo projectedType2 = builder.MapType(
+                typeof(FooImplWithConstructors).GetTypeInfo()
+            );
 
             // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
             var typeLevelAttrs = projectedType2.GetCustomAttributes(false);
 
-            ConstructorInfo constructor1 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 0).Single();
-            ConstructorInfo constructor2 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 1).Single();
-            ConstructorInfo constructor3 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 2).Single();
+            ConstructorInfo constructor1 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 0)
+                .Single();
+            ConstructorInfo constructor2 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 1)
+                .Single();
+            ConstructorInfo constructor3 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 2)
+                .Single();
 
             Assert.Equal(0, constructor1.GetCustomAttributes(false).Length);
             Assert.Equal(0, constructor2.GetCustomAttributes(false).Length);
@@ -114,18 +124,27 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = new RegistrationBuilder();
 
-            builder.ForTypesDerivedFrom<IFoo>()
-                .Export<IFoo>();
+            builder.ForTypesDerivedFrom<IFoo>().Export<IFoo>();
 
-            builder.ForType<FooImplWithConstructors>()
-                .SelectConstructor(cis => cis[1]);
+            builder.ForType<FooImplWithConstructors>().SelectConstructor(cis => cis[1]);
 
             TypeInfo projectedType1 = builder.MapType(typeof(FooImpl).GetTypeInfo().GetTypeInfo());
-            TypeInfo projectedType2 = builder.MapType(typeof(FooImplWithConstructors).GetTypeInfo().GetTypeInfo());
+            TypeInfo projectedType2 = builder.MapType(
+                typeof(FooImplWithConstructors).GetTypeInfo().GetTypeInfo()
+            );
 
-            ConstructorInfo constructor1 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 0).Single();
-            ConstructorInfo constructor2 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 1).Single();
-            ConstructorInfo constructor3 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 2).Single();
+            ConstructorInfo constructor1 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 0)
+                .Single();
+            ConstructorInfo constructor2 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 1)
+                .Single();
+            ConstructorInfo constructor3 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 2)
+                .Single();
 
             // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
             var typeLevelAttrs = projectedType2.GetCustomAttributes(false);
@@ -144,18 +163,31 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = new RegistrationBuilder();
 
-            builder.ForTypesDerivedFrom<IFoo>()
-                .Export<IFoo>();
+            builder.ForTypesDerivedFrom<IFoo>().Export<IFoo>();
 
-            builder.ForType<FooImplWithConstructors2>().
-                SelectConstructor(param => new FooImplWithConstructors2(param.Import<IEnumerable<IFoo>>()));
+            builder
+                .ForType<FooImplWithConstructors2>()
+                .SelectConstructor(
+                    param => new FooImplWithConstructors2(param.Import<IEnumerable<IFoo>>())
+                );
 
             TypeInfo projectedType1 = builder.MapType(typeof(FooImpl).GetTypeInfo().GetTypeInfo());
-            TypeInfo projectedType2 = builder.MapType(typeof(FooImplWithConstructors2).GetTypeInfo().GetTypeInfo());
+            TypeInfo projectedType2 = builder.MapType(
+                typeof(FooImplWithConstructors2).GetTypeInfo().GetTypeInfo()
+            );
 
-            ConstructorInfo constructor1 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 0).Single();
-            ConstructorInfo constructor2 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 1).Single();
-            ConstructorInfo constructor3 = projectedType2.GetConstructors().Where(c => c.GetParameters().Length == 2).Single();
+            ConstructorInfo constructor1 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 0)
+                .Single();
+            ConstructorInfo constructor2 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 1)
+                .Single();
+            ConstructorInfo constructor3 = projectedType2
+                .GetConstructors()
+                .Where(c => c.GetParameters().Length == 2)
+                .Single();
 
             // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
             var typeLevelAttrs = projectedType2.GetCustomAttributes(false);
@@ -178,7 +210,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/32743", TestRuntimes.Mono)]
         public void GenericInterfaceExportInRegistrationBuilder()
         {
-            CompositionContainer container = CreateRegistrationBuilderContainer(typeof(ClassExportingInterface<>));
+            CompositionContainer container = CreateRegistrationBuilderContainer(
+                typeof(ClassExportingInterface<>)
+            );
             IGenericInterface<string> v = container.GetExportedValue<IGenericInterface<string>>();
             Assert.IsAssignableFrom<IGenericInterface<string>>(v);
         }
@@ -192,7 +226,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/32743", TestRuntimes.Mono)]
         public void GenericBaseClassExportInRegistrationBuilder()
         {
-            CompositionContainer container = CreateRegistrationBuilderContainer(typeof(ClassExportingBaseClass<>));
+            CompositionContainer container = CreateRegistrationBuilderContainer(
+                typeof(ClassExportingBaseClass<>)
+            );
             GenericBaseClass<string> v = container.GetExportedValue<GenericBaseClass<string>>();
             Assert.IsAssignableFrom<GenericBaseClass<string>>(v);
         }
@@ -203,7 +239,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void GenericExportInRegistrationBuilder()
         {
-            CompositionContainer container = CreateRegistrationBuilderContainer(typeof(GenericClass<>));
+            CompositionContainer container = CreateRegistrationBuilderContainer(
+                typeof(GenericClass<>)
+            );
             GenericClass<string> v = container.GetExportedValue<GenericClass<string>>();
             Assert.IsType<GenericClass<string>>(v);
         }
@@ -215,8 +253,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/32743", TestRuntimes.Mono)]
         public void ExplicitGenericExportInRegistrationBuilder()
         {
-            CompositionContainer container = CreateRegistrationBuilderContainer(typeof(ExplicitGenericClass<>));
-            ExplicitGenericClass<string> v = container.GetExportedValue<ExplicitGenericClass<string>>();
+            CompositionContainer container = CreateRegistrationBuilderContainer(
+                typeof(ExplicitGenericClass<>)
+            );
+            ExplicitGenericClass<string> v = container.GetExportedValue<
+                ExplicitGenericClass<string>
+            >();
             Assert.IsType<ExplicitGenericClass<string>>(v);
         }
 
@@ -227,8 +269,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/32743", TestRuntimes.Mono)]
         public void ExplicitGenericArity2ExportInRegistrationBuilder()
         {
-            CompositionContainer container = CreateRegistrationBuilderContainer(typeof(ExplicitGenericClass<,>));
-            ExplicitGenericClass<int, string> v = container.GetExportedValue<ExplicitGenericClass<int, string>>();
+            CompositionContainer container = CreateRegistrationBuilderContainer(
+                typeof(ExplicitGenericClass<,>)
+            );
+            ExplicitGenericClass<int, string> v = container.GetExportedValue<
+                ExplicitGenericClass<int, string>
+            >();
             Assert.IsType<ExplicitGenericClass<int, string>>(v);
         }
 

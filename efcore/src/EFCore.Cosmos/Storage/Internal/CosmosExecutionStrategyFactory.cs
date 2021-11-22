@@ -15,7 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
     /// </summary>
     public class CosmosExecutionStrategyFactory : IExecutionStrategyFactory
     {
-        private readonly Func<ExecutionStrategyDependencies, IExecutionStrategy> _createExecutionStrategy;
+        private readonly Func<
+            ExecutionStrategyDependencies,
+            IExecutionStrategy
+        > _createExecutionStrategy;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -27,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             Dependencies = dependencies;
 
-            _createExecutionStrategy = dependencies.Options.FindExtension<CosmosOptionsExtension>()?.ExecutionStrategyFactory
+            _createExecutionStrategy =
+                dependencies.Options.FindExtension<CosmosOptionsExtension>()?.ExecutionStrategyFactory
                 ?? CreateDefaultStrategy;
         }
 
@@ -45,8 +49,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual IExecutionStrategy CreateDefaultStrategy(ExecutionStrategyDependencies dependencies)
-            => new CosmosExecutionStrategy(dependencies);
+        protected virtual IExecutionStrategy CreateDefaultStrategy(
+            ExecutionStrategyDependencies dependencies
+        ) => new CosmosExecutionStrategy(dependencies);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,7 +59,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IExecutionStrategy Create()
-            => _createExecutionStrategy(Dependencies);
+        public virtual IExecutionStrategy Create() => _createExecutionStrategy(Dependencies);
     }
 }

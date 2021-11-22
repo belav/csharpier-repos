@@ -25,7 +25,6 @@ namespace System.Linq
         /// overheads that will likely result in slow downs for parallel execution.
         /// </summary>
         Default = 0,
-
         /// <summary>
         /// Parallelize the entire query, even if that means using high-overhead algorithms.
         /// </summary>

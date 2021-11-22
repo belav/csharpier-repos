@@ -18,11 +18,18 @@ namespace System.Net
 
         public WebProxy(Uri? Address) : this(Address, false, null, null) { }
 
-        public WebProxy(Uri? Address, bool BypassOnLocal) : this(Address, BypassOnLocal, null, null) { }
+        public WebProxy(Uri? Address, bool BypassOnLocal) : this(Address, BypassOnLocal, null, null)
+        { }
 
-        public WebProxy(Uri? Address, bool BypassOnLocal, string[]? BypassList) : this(Address, BypassOnLocal, BypassList, null) { }
+        public WebProxy(Uri? Address, bool BypassOnLocal, string[]? BypassList)
+            : this(Address, BypassOnLocal, BypassList, null) { }
 
-        public WebProxy(Uri? Address, bool BypassOnLocal, string[]? BypassList, ICredentials? Credentials)
+        public WebProxy(
+            Uri? Address,
+            bool BypassOnLocal,
+            string[]? BypassList,
+            ICredentials? Credentials
+        )
         {
             this.Address = Address;
             this.Credentials = Credentials;
@@ -35,29 +42,27 @@ namespace System.Net
         }
 
         public WebProxy(string Host, int Port)
-            : this(new Uri(string.Create(CultureInfo.InvariantCulture, $"http://{Host}:{Port}")), false, null, null)
-        {
-        }
+            : this(
+                new Uri(string.Create(CultureInfo.InvariantCulture, $"http://{Host}:{Port}")),
+                false,
+                null,
+                null
+            ) { }
 
-        public WebProxy(string? Address)
-            : this(CreateProxyUri(Address), false, null, null)
-        {
-        }
+        public WebProxy(string? Address) : this(CreateProxyUri(Address), false, null, null) { }
 
         public WebProxy(string? Address, bool BypassOnLocal)
-            : this(CreateProxyUri(Address), BypassOnLocal, null, null)
-        {
-        }
+            : this(CreateProxyUri(Address), BypassOnLocal, null, null) { }
 
         public WebProxy(string? Address, bool BypassOnLocal, string[]? BypassList)
-            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, null)
-        {
-        }
+            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, null) { }
 
-        public WebProxy(string? Address, bool BypassOnLocal, string[]? BypassList, ICredentials? Credentials)
-            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, Credentials)
-        {
-        }
+        public WebProxy(
+            string? Address,
+            bool BypassOnLocal,
+            string[]? BypassList,
+            ICredentials? Credentials
+        ) : this(CreateProxyUri(Address), BypassOnLocal, BypassList, Credentials) { }
 
         public Uri? Address { get; set; }
 
@@ -103,9 +108,11 @@ namespace System.Net
         }
 
         private static Uri? CreateProxyUri(string? address) =>
-            address == null ? null :
-            !address.Contains("://") ? new Uri("http://" + address) :
-            new Uri(address);
+            address == null
+                ? null
+                : !address.Contains("://")
+                    ? new Uri("http://" + address)
+                    : new Uri(address);
 
         private void UpdateRegexList(bool canThrow)
         {
@@ -118,7 +125,10 @@ namespace System.Net
                     regexBypassList = new Regex[bypassList.Count];
                     for (int i = 0; i < bypassList.Count; i++)
                     {
-                        regexBypassList[i] = new Regex((string)bypassList[i]!, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+                        regexBypassList[i] = new Regex(
+                            (string)bypassList[i]!,
+                            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+                        );
                     }
                 }
             }
@@ -143,9 +153,13 @@ namespace System.Net
             if (_regexBypassList != null)
             {
                 Span<char> stackBuffer = stackalloc char[128];
-                string matchUriString = input.IsDefaultPort ?
-                    string.Create(null, stackBuffer, $"{input.Scheme}://{input.Host}") :
-                    string.Create(null, stackBuffer, $"{input.Scheme}://{input.Host}:{(uint)input.Port}");
+                string matchUriString = input.IsDefaultPort
+                    ? string.Create(null, stackBuffer, $"{input.Scheme}://{input.Host}")
+                    : string.Create(
+                          null,
+                          stackBuffer,
+                          $"{input.Scheme}://{input.Host}:{(uint)input.Port}"
+                      );
 
                 foreach (Regex r in _regexBypassList)
                 {
@@ -166,22 +180,29 @@ namespace System.Net
                 throw new ArgumentNullException(nameof(host));
             }
 
-            return
-                Address == null ||
-                (BypassProxyOnLocal && IsLocal(host)) ||
-                IsMatchInBypassList(host);
+            return Address == null
+                || (BypassProxyOnLocal && IsLocal(host))
+                || IsMatchInBypassList(host);
         }
 
-        protected WebProxy(SerializationInfo serializationInfo, StreamingContext streamingContext) =>
-            throw new PlatformNotSupportedException();
+        protected WebProxy(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) => throw new PlatformNotSupportedException();
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext) =>
-            throw new PlatformNotSupportedException();
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) => throw new PlatformNotSupportedException();
 
-        protected virtual void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext) =>
-            throw new PlatformNotSupportedException();
+        protected virtual void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) => throw new PlatformNotSupportedException();
 
-        [Obsolete("WebProxy.GetDefaultProxy has been deprecated. Use the proxy selected for you by default.")]
+        [Obsolete(
+            "WebProxy.GetDefaultProxy has been deprecated. Use the proxy selected for you by default."
+        )]
         public static WebProxy GetDefaultProxy() =>
             // The .NET Framework here returns a proxy that fetches IE settings and
             // executes JavaScript to determine the correct proxy.

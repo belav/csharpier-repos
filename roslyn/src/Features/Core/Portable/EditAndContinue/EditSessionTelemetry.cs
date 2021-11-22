@@ -80,9 +80,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public bool IsEmpty => !(_hadCompilationErrors || _hadRudeEdits || _hadValidChanges || _hadValidInsignificantChanges);
+        public bool IsEmpty =>
+            !(
+                _hadCompilationErrors
+                || _hadRudeEdits
+                || _hadValidChanges
+                || _hadValidInsignificantChanges
+            );
 
-        public void LogProjectAnalysisSummary(ProjectAnalysisSummary summary, Guid projectTelemetryId, ImmutableArray<string> errorsIds, bool inBreakState)
+        public void LogProjectAnalysisSummary(
+            ProjectAnalysisSummary summary,
+            Guid projectTelemetryId,
+            ImmutableArray<string> errorsIds,
+            bool inBreakState
+        )
         {
             lock (_guard)
             {
@@ -105,11 +116,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     case ProjectAnalysisSummary.ValidChanges:
                         _hadValidChanges = true;
 
-                        if (errorsIds.IsEmpty && _projectsWithValidDelta.Count < MaxReportedProjectIds)
+                        if (
+                            errorsIds.IsEmpty
+                            && _projectsWithValidDelta.Count < MaxReportedProjectIds
+                        )
                         {
                             _projectsWithValidDelta.Add(projectTelemetryId);
                         }
-
                         break;
 
                     case ProjectAnalysisSummary.ValidInsignificantChanges:
@@ -122,8 +135,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public void LogProjectAnalysisSummary(ProjectAnalysisSummary summary, Guid projectTelemetryId, ImmutableArray<Diagnostic> emitDiagnostics, bool inBreakState)
-            => LogProjectAnalysisSummary(summary, projectTelemetryId, emitDiagnostics.SelectAsArray(d => d.Severity == DiagnosticSeverity.Error, d => d.Id), inBreakState);
+        public void LogProjectAnalysisSummary(
+            ProjectAnalysisSummary summary,
+            Guid projectTelemetryId,
+            ImmutableArray<Diagnostic> emitDiagnostics,
+            bool inBreakState
+        ) =>
+            LogProjectAnalysisSummary(
+                summary,
+                projectTelemetryId,
+                emitDiagnostics.SelectAsArray(
+                    d => d.Severity == DiagnosticSeverity.Error,
+                    d => d.Id
+                ),
+                inBreakState
+            );
 
         public void LogRudeEditDiagnostics(ImmutableArray<RudeEditDiagnostic> diagnostics)
         {
@@ -140,12 +166,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             lock (_guard)
             {
-                Debug.Assert(_capabilities == EditAndContinueCapabilities.None || _capabilities == capabilities);
+                Debug.Assert(
+                    _capabilities == EditAndContinueCapabilities.None
+                        || _capabilities == capabilities
+                );
                 _capabilities = capabilities;
             }
         }
 
-        internal void LogCommitted()
-            => _committed = true;
+        internal void LogCommitted() => _committed = true;
     }
 }

@@ -48,20 +48,26 @@ public class CSharpTemplateTest : ParserTestBase
     [Fact]
     public void HandlesSimpleTemplateInStatementWithinCodeBlock()
     {
-        ParseDocumentTest("@foreach(foo in Bar) { Html.ExecuteTemplate(foo, @<p>Foo #@item</p>); }");
+        ParseDocumentTest(
+            "@foreach(foo in Bar) { Html.ExecuteTemplate(foo, @<p>Foo #@item</p>); }"
+        );
     }
 
     [Fact]
     public void HandlesTwoTemplatesInStatementWithinCodeBlock()
     {
-        ParseDocumentTest("@foreach(foo in Bar) { Html.ExecuteTemplate(foo, @<p>Foo #@item</p>, @<p>Foo #@item</p>); }");
+        ParseDocumentTest(
+            "@foreach(foo in Bar) { Html.ExecuteTemplate(foo, @<p>Foo #@item</p>, @<p>Foo #@item</p>); }"
+        );
     }
 
     [Fact]
     public void ProducesErrorButCorrectlyParsesNestedTemplateInStmtWithinCodeBlock()
     {
         // ParseBlockProducesErrorButCorrectlyParsesNestedTemplateInStatementWithinCodeBlock
-        ParseDocumentTest("@foreach(foo in Bar) { Html.ExecuteTemplate(foo, @<p>Foo #@Html.Repeat(10, @<p>@item</p>)</p>); }");
+        ParseDocumentTest(
+            "@foreach(foo in Bar) { Html.ExecuteTemplate(foo, @<p>Foo #@Html.Repeat(10, @<p>@item</p>)</p>); }"
+        );
     }
 
     [Fact]
@@ -73,19 +79,25 @@ public class CSharpTemplateTest : ParserTestBase
     [Fact]
     public void HandlessTwoTemplatesInStatementWithinStatementBlock()
     {
-        ParseDocumentTest("@{ var foo = bar; Html.ExecuteTemplate(foo, @<p>Foo #@item</p>, @<p>Foo #@item</p>); }");
+        ParseDocumentTest(
+            "@{ var foo = bar; Html.ExecuteTemplate(foo, @<p>Foo #@item</p>, @<p>Foo #@item</p>); }"
+        );
     }
 
     [Fact]
     public void ProducesErrorButCorrectlyParsesNestedTemplateInStmtWithinStmtBlock()
     {
         // ParseBlockProducesErrorButCorrectlyParsesNestedTemplateInStatementWithinStatementBlock
-        ParseDocumentTest("@{ var foo = bar; Html.ExecuteTemplate(foo, @<p>Foo #@Html.Repeat(10, @<p>@item</p>)</p>); }");
+        ParseDocumentTest(
+            "@{ var foo = bar; Html.ExecuteTemplate(foo, @<p>Foo #@Html.Repeat(10, @<p>@item</p>)</p>); }"
+        );
     }
 
     [Fact]
     public void _WithDoubleTransition_DoesNotThrow()
     {
-        ParseDocumentTest("@{ var foo = bar; Html.ExecuteTemplate(foo, @<p foo='@@'>Foo #@item</p>); }");
+        ParseDocumentTest(
+            "@{ var foo = bar; Html.ExecuteTemplate(foo, @<p foo='@@'>Foo #@item</p>); }"
+        );
     }
 }

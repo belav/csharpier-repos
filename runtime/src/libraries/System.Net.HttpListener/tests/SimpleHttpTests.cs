@@ -136,7 +136,10 @@ namespace System.Net.Tests
             {
                 client.DefaultRequestHeaders.ConnectionClose = true;
 
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, _factory.ListeningUrl);
+                HttpRequestMessage requestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    _factory.ListeningUrl
+                );
 
                 for (int i = 0; i < numHeaders; i++)
                 {
@@ -148,7 +151,10 @@ namespace System.Net.Tests
                 if (clientTask == await Task.WhenAny(server, clientTask))
                 {
                     (await clientTask).EnsureSuccessStatusCode();
-                    Assert.True(false, "Client should not have completed prior to server sending response");
+                    Assert.True(
+                        false,
+                        "Client should not have completed prior to server sending response"
+                    );
                 }
 
                 HttpListenerContext context = await server;

@@ -14,7 +14,11 @@ public sealed class ComponentEndpointConventionBuilder : IHubEndpointConventionB
     private readonly IEndpointConventionBuilder _disconnectEndpoint;
     private readonly IEndpointConventionBuilder _jsInitializersEndpoint;
 
-    internal ComponentEndpointConventionBuilder(IEndpointConventionBuilder hubEndpoint, IEndpointConventionBuilder disconnectEndpoint, IEndpointConventionBuilder jsInitializersEndpoint)
+    internal ComponentEndpointConventionBuilder(
+        IEndpointConventionBuilder hubEndpoint,
+        IEndpointConventionBuilder disconnectEndpoint,
+        IEndpointConventionBuilder jsInitializersEndpoint
+    )
     {
         _hubEndpoint = hubEndpoint;
         _disconnectEndpoint = disconnectEndpoint;

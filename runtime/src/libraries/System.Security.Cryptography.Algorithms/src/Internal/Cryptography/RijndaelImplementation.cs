@@ -13,14 +13,21 @@ namespace Internal.Cryptography
     /// be consistent with the rest of the static Create() methods which return opaque types.
     /// They both have the same implementation.
     /// </summary>
-    [Obsolete(Obsoletions.RijndaelMessage, DiagnosticId = Obsoletions.RijndaelDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.RijndaelMessage,
+        DiagnosticId = Obsoletions.RijndaelDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     internal sealed class RijndaelImplementation : Rijndael
     {
         private readonly Aes _impl;
 
         internal RijndaelImplementation()
         {
-            LegalBlockSizesValue = new KeySizes[] { new KeySizes(minSize: 128, maxSize: 128, skipSize: 0) };
+            LegalBlockSizesValue = new KeySizes[]
+            {
+                new KeySizes(minSize: 128, maxSize: 128, skipSize: 0)
+            };
 
             // This class wraps Aes
             _impl = Aes.Create();
@@ -81,9 +88,11 @@ namespace Internal.Cryptography
 
         public override KeySizes[] LegalKeySizes => _impl.LegalKeySizes;
         public override ICryptoTransform CreateEncryptor() => _impl.CreateEncryptor();
-        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => _impl.CreateEncryptor(rgbKey, rgbIV);
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) =>
+            _impl.CreateEncryptor(rgbKey, rgbIV);
         public override ICryptoTransform CreateDecryptor() => _impl.CreateDecryptor();
-        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) => _impl.CreateDecryptor(rgbKey, rgbIV);
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) =>
+            _impl.CreateDecryptor(rgbKey, rgbIV);
         public override void GenerateIV() => _impl.GenerateIV();
         public override void GenerateKey() => _impl.GenerateKey();
 

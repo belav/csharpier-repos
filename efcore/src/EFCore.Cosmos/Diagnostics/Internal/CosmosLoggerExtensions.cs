@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Database.Command> diagnostics,
             string containerId,
             string? partitionKey,
-            CosmosSqlQuery cosmosSqlQuery)
+            CosmosSqlQuery cosmosSqlQuery
+        )
         {
             var definition = CosmosResources.LogExecutingSqlQuery(diagnostics);
 
@@ -46,12 +47,22 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     diagnostics,
                     containerId,
                     logSensitiveData ? partitionKey : "?",
-                    FormatParameters(cosmosSqlQuery.Parameters, logSensitiveData && cosmosSqlQuery.Parameters.Count > 0),
+                    FormatParameters(
+                        cosmosSqlQuery.Parameters,
+                        logSensitiveData && cosmosSqlQuery.Parameters.Count > 0
+                    ),
                     Environment.NewLine,
-                    cosmosSqlQuery.Query);
+                    cosmosSqlQuery.Query
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosQueryEventData(
                     definition,
@@ -60,9 +71,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     partitionKey,
                     cosmosSqlQuery.Parameters.Select(p => (p.Name, p.Value)).ToList(),
                     cosmosSqlQuery.Query,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -75,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                 p.LogSensitiveData ? p.PartitionKey : "?",
                 FormatParameters(p.Parameters, p.LogSensitiveData && p.Parameters.Count > 0),
                 Environment.NewLine,
-                p.QuerySql);
+                p.QuerySql
+            );
         }
 
         /// <summary>
@@ -88,17 +106,29 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Database.Command> diagnostics,
             string containerId,
             string? partitionKey,
-            string resourceId)
+            string resourceId
+        )
         {
             var definition = CosmosResources.LogExecutingReadItem(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
                 var logSensitiveData = diagnostics.ShouldLogSensitiveData();
-                definition.Log(diagnostics, logSensitiveData ? resourceId : "?", containerId, logSensitiveData ? partitionKey : "?");
+                definition.Log(
+                    diagnostics,
+                    logSensitiveData ? resourceId : "?",
+                    containerId,
+                    logSensitiveData ? partitionKey : "?"
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosReadItemEventData(
                     definition,
@@ -106,9 +136,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     resourceId,
                     containerId,
                     partitionKey,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -116,7 +152,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
         {
             var d = (EventDefinition<string, string, string?>)definition;
             var p = (CosmosReadItemEventData)payload;
-            return d.GenerateMessage(p.LogSensitiveData ? p.ResourceId : "?", p.ContainerId, p.LogSensitiveData ? p.PartitionKey : "?");
+            return d.GenerateMessage(
+                p.LogSensitiveData ? p.ResourceId : "?",
+                p.ContainerId,
+                p.LogSensitiveData ? p.PartitionKey : "?"
+            );
         }
 
         /// <summary>
@@ -132,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string activityId,
             string containerId,
             string? partitionKey,
-            CosmosSqlQuery cosmosSqlQuery)
+            CosmosSqlQuery cosmosSqlQuery
+        )
         {
             var definition = CosmosResources.LogExecutedReadNext(diagnostics);
 
@@ -142,21 +183,33 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
 
                 definition.Log(
                     diagnostics,
-                    l => l.Log(
-                        definition.Level,
-                        definition.EventId,
-                        definition.MessageFormat,
-                        elapsed.TotalMilliseconds,
-                        requestCharge,
-                        activityId,
-                        containerId,
-                        logSensitiveData ? partitionKey : "?",
-                        FormatParameters(cosmosSqlQuery.Parameters, logSensitiveData && cosmosSqlQuery.Parameters.Count > 0),
-                        Environment.NewLine,
-                        cosmosSqlQuery.Query));
+                    l =>
+                        l.Log(
+                            definition.Level,
+                            definition.EventId,
+                            definition.MessageFormat,
+                            elapsed.TotalMilliseconds,
+                            requestCharge,
+                            activityId,
+                            containerId,
+                            logSensitiveData ? partitionKey : "?",
+                            FormatParameters(
+                                cosmosSqlQuery.Parameters,
+                                logSensitiveData && cosmosSqlQuery.Parameters.Count > 0
+                            ),
+                            Environment.NewLine,
+                            cosmosSqlQuery.Query
+                        )
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosQueryExecutedEventData(
                     definition,
@@ -168,9 +221,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     partitionKey,
                     cosmosSqlQuery.Parameters.Select(p => (p.Name, p.Value)).ToList(),
                     cosmosSqlQuery.Query,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -179,18 +238,24 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             var d = (FallbackEventDefinition)definition;
             var p = (CosmosQueryExecutedEventData)payload;
             return d.GenerateMessage(
-                l => l.Log(
-                    d.Level,
-                    d.EventId,
-                    d.MessageFormat,
-                    p.Elapsed.TotalMilliseconds,
-                    p.RequestCharge,
-                    p.ActivityId,
-                    p.ContainerId,
-                    p.LogSensitiveData ? p.PartitionKey : "?",
-                    FormatParameters(p.Parameters, p.LogSensitiveData && p.Parameters.Count > 0),
-                    Environment.NewLine,
-                    p.QuerySql));
+                l =>
+                    l.Log(
+                        d.Level,
+                        d.EventId,
+                        d.MessageFormat,
+                        p.Elapsed.TotalMilliseconds,
+                        p.RequestCharge,
+                        p.ActivityId,
+                        p.ContainerId,
+                        p.LogSensitiveData ? p.PartitionKey : "?",
+                        FormatParameters(
+                            p.Parameters,
+                            p.LogSensitiveData && p.Parameters.Count > 0
+                        ),
+                        Environment.NewLine,
+                        p.QuerySql
+                    )
+            );
         }
 
         /// <summary>
@@ -206,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string activityId,
             string resourceId,
             string containerId,
-            string? partitionKey)
+            string? partitionKey
+        )
         {
             var definition = CosmosResources.LogExecutedReadItem(diagnostics);
 
@@ -220,10 +286,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     activityId,
                     containerId,
                     logSensitiveData ? resourceId : "?",
-                    logSensitiveData ? partitionKey : "?");
+                    logSensitiveData ? partitionKey : "?"
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosItemCommandExecutedEventData(
                     definition,
@@ -234,9 +307,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     containerId,
                     resourceId,
                     partitionKey,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -250,7 +329,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                 p.ActivityId,
                 p.ContainerId,
                 p.LogSensitiveData ? p.ResourceId : "?",
-                p.LogSensitiveData ? p.PartitionKey : "?");
+                p.LogSensitiveData ? p.PartitionKey : "?"
+            );
         }
 
         /// <summary>
@@ -266,7 +346,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string activityId,
             string resourceId,
             string containerId,
-            string? partitionKey)
+            string? partitionKey
+        )
         {
             var definition = CosmosResources.LogExecutedCreateItem(diagnostics);
 
@@ -280,10 +361,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     activityId,
                     containerId,
                     logSensitiveData ? resourceId : "?",
-                    logSensitiveData ? partitionKey : "?");
+                    logSensitiveData ? partitionKey : "?"
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosItemCommandExecutedEventData(
                     definition,
@@ -294,9 +382,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     containerId,
                     resourceId,
                     partitionKey,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -310,7 +404,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                 p.ActivityId,
                 p.ContainerId,
                 p.LogSensitiveData ? p.ResourceId : "?",
-                p.LogSensitiveData ? p.PartitionKey : "?");
+                p.LogSensitiveData ? p.PartitionKey : "?"
+            );
         }
 
         /// <summary>
@@ -326,7 +421,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string activityId,
             string resourceId,
             string containerId,
-            string? partitionKey)
+            string? partitionKey
+        )
         {
             var definition = CosmosResources.LogExecutedDeleteItem(diagnostics);
 
@@ -340,10 +436,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     activityId,
                     containerId,
                     logSensitiveData ? resourceId : "?",
-                    logSensitiveData ? partitionKey : "?");
+                    logSensitiveData ? partitionKey : "?"
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosItemCommandExecutedEventData(
                     definition,
@@ -354,9 +457,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     containerId,
                     resourceId,
                     partitionKey,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -370,7 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                 p.ActivityId,
                 p.ContainerId,
                 p.LogSensitiveData ? p.ResourceId : "?",
-                p.LogSensitiveData ? p.PartitionKey : "?");
+                p.LogSensitiveData ? p.PartitionKey : "?"
+            );
         }
 
         /// <summary>
@@ -386,7 +496,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
             string activityId,
             string resourceId,
             string containerId,
-            string? partitionKey)
+            string? partitionKey
+        )
         {
             var definition = CosmosResources.LogExecutedReplaceItem(diagnostics);
 
@@ -400,10 +511,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     activityId,
                     containerId,
                     logSensitiveData ? resourceId : "?",
-                    logSensitiveData ? partitionKey : "?");
+                    logSensitiveData ? partitionKey : "?"
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new CosmosItemCommandExecutedEventData(
                     definition,
@@ -414,9 +532,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                     containerId,
                     resourceId,
                     partitionKey,
-                    diagnostics.ShouldLogSensitiveData());
+                    diagnostics.ShouldLogSensitiveData()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -430,23 +554,34 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Diagnostics.Internal
                 p.ActivityId,
                 p.ContainerId,
                 p.LogSensitiveData ? p.ResourceId : "?",
-                p.LogSensitiveData ? p.PartitionKey : "?");
+                p.LogSensitiveData ? p.PartitionKey : "?"
+            );
         }
 
-        private static string FormatParameters(IReadOnlyList<(string Name, object? Value)> parameters, bool shouldLogParameterValues)
-            => FormatParameters(parameters.Select(p => new SqlParameter(p.Name, p.Value)).ToList(), shouldLogParameterValues);
+        private static string FormatParameters(
+            IReadOnlyList<(string Name, object? Value)> parameters,
+            bool shouldLogParameterValues
+        ) =>
+            FormatParameters(
+                parameters.Select(p => new SqlParameter(p.Name, p.Value)).ToList(),
+                shouldLogParameterValues
+            );
 
-        private static string FormatParameters(IReadOnlyList<SqlParameter> parameters, bool shouldLogParameterValues)
-            => parameters.Count == 0
+        private static string FormatParameters(
+            IReadOnlyList<SqlParameter> parameters,
+            bool shouldLogParameterValues
+        ) =>
+            parameters.Count == 0
                 ? ""
-                : string.Join(", ", parameters.Select(e => FormatParameter(e, shouldLogParameterValues)));
+                : string.Join(
+                      ", ",
+                      parameters.Select(e => FormatParameter(e, shouldLogParameterValues))
+                  );
 
         private static string FormatParameter(SqlParameter parameter, bool shouldLogParameterValue)
         {
             var builder = new StringBuilder();
-            builder
-                .Append(parameter.Name)
-                .Append('=');
+            builder.Append(parameter.Name).Append('=');
 
             if (shouldLogParameterValue)
             {

@@ -26,10 +26,12 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
         /// <returns>The <see cref="CosmosClient" /></returns>
-        public static CosmosClient GetCosmosClient(this DatabaseFacade databaseFacade)
-            => GetService<ISingletonCosmosClientWrapper>(databaseFacade).Client;
+        public static CosmosClient GetCosmosClient(this DatabaseFacade databaseFacade) =>
+            GetService<ISingletonCosmosClientWrapper>(databaseFacade).Client;
 
-        private static TService GetService<TService>(IInfrastructure<IServiceProvider> databaseFacade)
+        private static TService GetService<TService>(
+            IInfrastructure<IServiceProvider> databaseFacade
+        )
         {
             var service = databaseFacade.Instance.GetService<TService>();
             if (service == null)
@@ -56,7 +58,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         /// <param name="database">The facade from <see cref="DbContext.Database" />.</param>
         /// <returns><see langword="true" /> if the Cosmos provider is being used.</returns>
-        public static bool IsCosmos(this DatabaseFacade database)
-            => database.ProviderName == typeof(CosmosOptionsExtension).Assembly.GetName().Name;
+        public static bool IsCosmos(this DatabaseFacade database) =>
+            database.ProviderName == typeof(CosmosOptionsExtension).Assembly.GetName().Name;
     }
 }

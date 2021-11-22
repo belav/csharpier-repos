@@ -21,12 +21,16 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
             var solution = testLspServer.GetCurrentSolution();
             var expected = solution.Projects.Select(p => CreateLspProject(p)).ToArray();
 
-            var results = (CustomProtocol.Project[])await TestHandleAsync<object, object[]>(solution, null, CustomProtocol.RoslynMethods.ProjectsName);
+            var results = (CustomProtocol.Project[])await TestHandleAsync<object, object[]>(
+                solution,
+                null,
+                CustomProtocol.RoslynMethods.ProjectsName
+            );
             AssertJsonEquals(expected, results);
         }
 
-        private static CustomProtocol.Project CreateLspProject(Project project)
-            => new CustomProtocol.Project()
+        private static CustomProtocol.Project CreateLspProject(Project project) =>
+            new CustomProtocol.Project()
             {
                 Language = project.Language,
                 Name = project.Name,

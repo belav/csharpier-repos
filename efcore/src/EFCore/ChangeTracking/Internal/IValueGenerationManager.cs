@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         Task GenerateAsync(
             InternalEntityEntry entry,
             bool includePrimaryKey = true,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

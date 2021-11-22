@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         internal const string Name = "CSharp Elastic trivia Formatting Rule";
 
-        public override void AddSuppressOperations(List<SuppressOperation> list, SyntaxNode node, in NextSuppressOperationAction nextOperation)
+        public override void AddSuppressOperations(
+            List<SuppressOperation> list,
+            SyntaxNode node,
+            in NextSuppressOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
 
@@ -35,41 +39,70 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             AddInitializerSuppressOperations(list, node);
         }
 
-        private static void AddPropertyDeclarationSuppressOperations(List<SuppressOperation> list, SyntaxNode node)
+        private static void AddPropertyDeclarationSuppressOperations(
+            List<SuppressOperation> list,
+            SyntaxNode node
+        )
         {
-            if (node is BasePropertyDeclarationSyntax basePropertyDeclaration && basePropertyDeclaration.AccessorList != null &&
-                basePropertyDeclaration.AccessorList.Accessors.All(a => a.Body == null) &&
-                basePropertyDeclaration.GetAnnotatedTrivia(SyntaxAnnotation.ElasticAnnotation).Any())
+            if (
+                node is BasePropertyDeclarationSyntax basePropertyDeclaration
+                && basePropertyDeclaration.AccessorList != null
+                && basePropertyDeclaration.AccessorList.Accessors.All(a => a.Body == null)
+                && basePropertyDeclaration
+                    .GetAnnotatedTrivia(SyntaxAnnotation.ElasticAnnotation)
+                    .Any()
+            )
             {
-                var (firstToken, lastToken) = basePropertyDeclaration.GetFirstAndLastMemberDeclarationTokensAfterAttributes();
+                var (firstToken, lastToken) =
+                    basePropertyDeclaration.GetFirstAndLastMemberDeclarationTokensAfterAttributes();
 
-                list.Add(FormattingOperations.CreateSuppressOperation(firstToken, lastToken, SuppressOption.NoWrapping | SuppressOption.IgnoreElasticWrapping));
+                list.Add(
+                    FormattingOperations.CreateSuppressOperation(
+                        firstToken,
+                        lastToken,
+                        SuppressOption.NoWrapping | SuppressOption.IgnoreElasticWrapping
+                    )
+                );
             }
         }
 
-        private static void AddInitializerSuppressOperations(List<SuppressOperation> list, SyntaxNode node)
+        private static void AddInitializerSuppressOperations(
+            List<SuppressOperation> list,
+            SyntaxNode node
+        )
         {
             var initializer = GetInitializerNode(node);
             var lastTokenOfType = GetLastTokenOfType(node);
             if (initializer != null && lastTokenOfType != null)
             {
-                AddSuppressWrappingIfOnSingleLineOperation(list, lastTokenOfType.Value, initializer.CloseBraceToken, SuppressOption.IgnoreElasticWrapping);
+                AddSuppressWrappingIfOnSingleLineOperation(
+                    list,
+                    lastTokenOfType.Value,
+                    initializer.CloseBraceToken,
+                    SuppressOption.IgnoreElasticWrapping
+                );
                 return;
             }
 
             if (node is AnonymousObjectCreationExpressionSyntax anonymousCreationNode)
             {
-                AddSuppressWrappingIfOnSingleLineOperation(list, anonymousCreationNode.NewKeyword, anonymousCreationNode.CloseBraceToken, SuppressOption.IgnoreElasticWrapping);
+                AddSuppressWrappingIfOnSingleLineOperation(
+                    list,
+                    anonymousCreationNode.NewKeyword,
+                    anonymousCreationNode.CloseBraceToken,
+                    SuppressOption.IgnoreElasticWrapping
+                );
                 return;
             }
         }
 
-        private static InitializerExpressionSyntax? GetInitializerNode(SyntaxNode node)
-            => node switch
+        private static InitializerExpressionSyntax? GetInitializerNode(SyntaxNode node) =>
+            node switch
             {
                 ObjectCreationExpressionSyntax objectCreationNode => objectCreationNode.Initializer,
                 ArrayCreationExpressionSyntax arrayCreationNode => arrayCreationNode.Initializer,
-                ImplicitArrayCreationExpressionSyntax implicitArrayNode => implicitArrayNode.Initializer,
+                ImplicitArrayCreationExpressionSyntax implicitArrayNode
+                  => implicitArrayNode.Initializer,
                 _ => null,
             };
 
@@ -93,30 +126,55 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return null;
         }
 
-        public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+        public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustNewLinesOperation nextOperation
+        )
         {
             var operation = nextOperation.Invoke(in previousToken, in currentToken);
             if (operation == null)
             {
                 // If there are more than one Type Parameter Constraint Clause then each go in separate line
-                if (CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(previousToken, currentToken) &&
-                    currentToken.IsKind(SyntaxKind.WhereKeyword) &&
-                    currentToken.Parent.IsKind(SyntaxKind.TypeParameterConstraintClause))
+                if (
+                    CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(
+                        previousToken,
+                        currentToken
+                    )
+                    && currentToken.IsKind(SyntaxKind.WhereKeyword)
+                    && currentToken.Parent.IsKind(SyntaxKind.TypeParameterConstraintClause)
+                )
                 {
                     RoslynDebug.AssertNotNull(previousToken.Parent);
 
                     // Check if there is another TypeParameterConstraintClause before
-                    if (previousToken.Parent.Ancestors().OfType<TypeParameterConstraintClauseSyntax>().Any())
+                    if (
+                        previousToken.Parent
+                            .Ancestors()
+                            .OfType<TypeParameterConstraintClauseSyntax>()
+                            .Any()
+                    )
                     {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
 
                     // Check if there is another TypeParameterConstraintClause after
-                    var firstTokenAfterTypeConstraint = currentToken.Parent.GetLastToken().GetNextToken();
-                    var lastTokenForTypeConstraint = currentToken.Parent.GetLastToken().GetNextToken();
-                    if (CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(lastTokenForTypeConstraint, firstTokenAfterTypeConstraint) &&
-                        firstTokenAfterTypeConstraint.IsKind(SyntaxKind.WhereKeyword) &&
-                        firstTokenAfterTypeConstraint.Parent.IsKind(SyntaxKind.TypeParameterConstraintClause))
+                    var firstTokenAfterTypeConstraint = currentToken.Parent
+                        .GetLastToken()
+                        .GetNextToken();
+                    var lastTokenForTypeConstraint = currentToken.Parent
+                        .GetLastToken()
+                        .GetNextToken();
+                    if (
+                        CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(
+                            lastTokenForTypeConstraint,
+                            firstTokenAfterTypeConstraint
+                        )
+                        && firstTokenAfterTypeConstraint.IsKind(SyntaxKind.WhereKeyword)
+                        && firstTokenAfterTypeConstraint.Parent.IsKind(
+                            SyntaxKind.TypeParameterConstraintClause
+                        )
+                    )
                     {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
@@ -132,11 +190,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (!CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(previousToken, currentToken))
                 return operation;
 
-            var afterFileScopedNamespaceOperation = GetAdjustNewLinesOperationAfterFileScopedNamespace(previousToken, currentToken);
+            var afterFileScopedNamespaceOperation =
+                GetAdjustNewLinesOperationAfterFileScopedNamespace(previousToken, currentToken);
             if (afterFileScopedNamespaceOperation != null)
                 return afterFileScopedNamespaceOperation;
 
-            var betweenMemberOperation = GetAdjustNewLinesOperationBetweenMembers(previousToken, currentToken);
+            var betweenMemberOperation = GetAdjustNewLinesOperationBetweenMembers(
+                previousToken,
+                currentToken
+            );
             if (betweenMemberOperation != null)
                 return betweenMemberOperation;
 
@@ -149,7 +211,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return CreateAdjustNewLinesOperation(line, AdjustNewLinesOption.ForceLines);
         }
 
-        private static AdjustNewLinesOperation? GetAdjustNewLinesOperationAfterFileScopedNamespace(SyntaxToken previousToken, SyntaxToken currentToken)
+        private static AdjustNewLinesOperation? GetAdjustNewLinesOperationAfterFileScopedNamespace(
+            SyntaxToken previousToken,
+            SyntaxToken currentToken
+        )
         {
             if (previousToken.Kind() != SyntaxKind.SemicolonToken)
                 return null;
@@ -166,10 +231,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (TryGetOperationBeforeDocComment(currentToken, out var operation))
                 return operation;
 
-            return FormattingOperations.CreateAdjustNewLinesOperation(2, AdjustNewLinesOption.ForceLines);
+            return FormattingOperations.CreateAdjustNewLinesOperation(
+                2,
+                AdjustNewLinesOption.ForceLines
+            );
         }
 
-        private static AdjustNewLinesOperation? GetAdjustNewLinesOperationBetweenMembers(SyntaxToken previousToken, SyntaxToken currentToken)
+        private static AdjustNewLinesOperation? GetAdjustNewLinesOperationBetweenMembers(
+            SyntaxToken previousToken,
+            SyntaxToken currentToken
+        )
         {
             if (!FormattingRangeHelper.InBetweenTwoMembers(previousToken, currentToken))
             {
@@ -191,8 +262,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (previousMember.Kind() == nextMember.Kind())
             {
                 // Easy cases:
-                if (previousMember.Kind() is SyntaxKind.FieldDeclaration or
-                    SyntaxKind.EventFieldDeclaration)
+                if (
+                    previousMember.Kind()
+                    is SyntaxKind.FieldDeclaration
+                        or SyntaxKind.EventFieldDeclaration
+                )
                 {
                     // Ensure that fields and events are each declared on a separate line.
                     return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.ForceLines);
@@ -203,8 +277,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 {
                     var nextProperty = (BasePropertyDeclarationSyntax)nextMember;
 
-                    if (previousProperty?.AccessorList?.Accessors.All(a => a.Body == null) == true &&
-                        nextProperty?.AccessorList?.Accessors.All(a => a.Body == null) == true)
+                    if (
+                        previousProperty?.AccessorList?.Accessors.All(a => a.Body == null) == true
+                        && nextProperty?.AccessorList?.Accessors.All(a => a.Body == null) == true
+                    )
                     {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
@@ -215,22 +291,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 {
                     var nextMethod = (BaseMethodDeclarationSyntax)nextMember;
 
-                    if (previousMethod.Body == null &&
-                        nextMethod.Body == null)
+                    if (previousMethod.Body == null && nextMethod.Body == null)
                     {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                     }
                 }
             }
 
-            return FormattingOperations.CreateAdjustNewLinesOperation(2 /* +1 for member itself and +1 for a blank line*/, AdjustNewLinesOption.ForceLines);
+            return FormattingOperations.CreateAdjustNewLinesOperation(
+                2 /* +1 for member itself and +1 for a blank line*/
+                ,
+                AdjustNewLinesOption.ForceLines
+            );
         }
 
-        private static bool TryGetOperationBeforeDocComment(SyntaxToken currentToken, [NotNullWhen(true)] out AdjustNewLinesOperation? operation)
+        private static bool TryGetOperationBeforeDocComment(
+            SyntaxToken currentToken,
+            [NotNullWhen(true)] out AdjustNewLinesOperation? operation
+        )
         {
             // see whether first non whitespace trivia after before the current member is a comment or not
             var triviaList = currentToken.LeadingTrivia;
-            var firstNonWhitespaceTrivia = triviaList.FirstOrDefault(trivia => !IsWhitespace(trivia));
+            var firstNonWhitespaceTrivia = triviaList.FirstOrDefault(
+                trivia => !IsWhitespace(trivia)
+            );
             if (!firstNonWhitespaceTrivia.IsRegularOrDocComment())
             {
                 operation = null;
@@ -239,13 +323,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             // the first one is a comment, add two more lines than existing number of lines
             var numberOfLines = GetNumberOfLines(triviaList);
-            var numberOfLinesBeforeComment = GetNumberOfLines(triviaList.Take(triviaList.IndexOf(firstNonWhitespaceTrivia)));
+            var numberOfLinesBeforeComment = GetNumberOfLines(
+                triviaList.Take(triviaList.IndexOf(firstNonWhitespaceTrivia))
+            );
             var addedLines = numberOfLinesBeforeComment < 1 ? 2 : 1;
-            operation = CreateAdjustNewLinesOperation(numberOfLines + addedLines, AdjustNewLinesOption.ForceLines);
+            operation = CreateAdjustNewLinesOperation(
+                numberOfLines + addedLines,
+                AdjustNewLinesOption.ForceLines
+            );
             return true;
         }
 
-        public override AdjustSpacesOperation? GetAdjustSpacesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustSpacesOperation nextOperation)
+        public override AdjustSpacesOperation? GetAdjustSpacesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustSpacesOperation nextOperation
+        )
         {
             var operation = nextOperation.Invoke(in previousToken, in currentToken);
             if (operation == null)
@@ -268,14 +361,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 //     then, engine will pick new line operation and ignore space operation
 
                 // make attributes have a space following
-                if (previousToken.IsKind(SyntaxKind.CloseBracketToken) && previousToken.Parent is AttributeListSyntax
-                    && !(currentToken.Parent is AttributeListSyntax))
+                if (
+                    previousToken.IsKind(SyntaxKind.CloseBracketToken)
+                    && previousToken.Parent is AttributeListSyntax
+                    && !(currentToken.Parent is AttributeListSyntax)
+                )
                 {
                     return CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
                 }
 
                 // make every operation forced
-                return CreateAdjustSpacesOperation(Math.Max(0, operation.Space), AdjustSpacesOption.ForceSpaces);
+                return CreateAdjustSpacesOperation(
+                    Math.Max(0, operation.Space),
+                    AdjustSpacesOption.ForceSpaces
+                );
             }
 
             return operation;
@@ -302,31 +401,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     return LineBreaksAfterCloseBrace(currentToken);
 
                 case SyntaxKind.CloseParenToken:
-                    return (((previousToken.Parent is StatementSyntax) && currentToken.Parent != previousToken.Parent)
-                        || currentToken.Kind() == SyntaxKind.OpenBraceToken) ? 1 : 0;
+                    return (
+                        (
+                            (previousToken.Parent is StatementSyntax)
+                            && currentToken.Parent != previousToken.Parent
+                        )
+                        || currentToken.Kind() == SyntaxKind.OpenBraceToken
+                    )
+                      ? 1
+                      : 0;
 
                 case SyntaxKind.CloseBracketToken:
                     // Assembly and module-level attributes followed by non-attributes should have a blank line after
                     // them, unless it's the end of the file which will already have a blank line.
                     if (previousToken.Parent is AttributeListSyntax parent)
                     {
-                        if (parent.Target != null &&
-                            (parent.Target.Identifier.IsKindOrHasMatchingText(SyntaxKind.AssemblyKeyword) ||
-                             parent.Target.Identifier.IsKindOrHasMatchingText(SyntaxKind.ModuleKeyword)))
+                        if (
+                            parent.Target != null
+                            && (
+                                parent.Target.Identifier.IsKindOrHasMatchingText(
+                                    SyntaxKind.AssemblyKeyword
+                                )
+                                || parent.Target.Identifier.IsKindOrHasMatchingText(
+                                    SyntaxKind.ModuleKeyword
+                                )
+                            )
+                        )
                         {
-                            if (!currentToken.IsKind(SyntaxKind.EndOfFileToken) && !(currentToken.Parent is AttributeListSyntax))
+                            if (
+                                !currentToken.IsKind(SyntaxKind.EndOfFileToken)
+                                && !(currentToken.Parent is AttributeListSyntax)
+                            )
                             {
                                 return 2;
                             }
                         }
 
-                        if (previousToken.GetAncestor<ParameterSyntax>() == null
-                            && previousToken.GetAncestor<TypeParameterSyntax>() == null)
+                        if (
+                            previousToken.GetAncestor<ParameterSyntax>() == null
+                            && previousToken.GetAncestor<TypeParameterSyntax>() == null
+                        )
                         {
                             return 1;
                         }
                     }
-
                     break;
 
                 case SyntaxKind.SemicolonToken:
@@ -343,18 +461,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     {
                         return 1;
                     }
-
                     break;
             }
 
-            if ((currentToken.Kind() == SyntaxKind.FromKeyword && currentToken.Parent.IsKind(SyntaxKind.FromClause)) ||
-                (currentToken.Kind() == SyntaxKind.LetKeyword && currentToken.Parent.IsKind(SyntaxKind.LetClause)) ||
-                (currentToken.Kind() == SyntaxKind.WhereKeyword && currentToken.Parent.IsKind(SyntaxKind.WhereClause)) ||
-                (currentToken.Kind() == SyntaxKind.JoinKeyword && currentToken.Parent.IsKind(SyntaxKind.JoinClause)) ||
-                (currentToken.Kind() == SyntaxKind.JoinKeyword && currentToken.Parent.IsKind(SyntaxKind.JoinIntoClause)) ||
-                (currentToken.Kind() == SyntaxKind.OrderByKeyword && currentToken.Parent.IsKind(SyntaxKind.OrderByClause)) ||
-                (currentToken.Kind() == SyntaxKind.SelectKeyword && currentToken.Parent.IsKind(SyntaxKind.SelectClause)) ||
-                (currentToken.Kind() == SyntaxKind.GroupKeyword && currentToken.Parent.IsKind(SyntaxKind.GroupClause)))
+            if (
+                (
+                    currentToken.Kind() == SyntaxKind.FromKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.FromClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.LetKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.LetClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.WhereKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.WhereClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.JoinKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.JoinClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.JoinKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.JoinIntoClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.OrderByKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.OrderByClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.SelectKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.SelectClause)
+                )
+                || (
+                    currentToken.Kind() == SyntaxKind.GroupKeyword
+                    && currentToken.Parent.IsKind(SyntaxKind.GroupClause)
+                )
+            )
             {
                 return 1;
             }
@@ -374,8 +517,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     {
                         if (parent.Target != null)
                         {
-                            if (parent.Target.Identifier == SyntaxFactory.Token(SyntaxKind.AssemblyKeyword) ||
-                                parent.Target.Identifier == SyntaxFactory.Token(SyntaxKind.ModuleKeyword))
+                            if (
+                                parent.Target.Identifier
+                                    == SyntaxFactory.Token(SyntaxKind.AssemblyKeyword)
+                                || parent.Target.Identifier
+                                    == SyntaxFactory.Token(SyntaxKind.ModuleKeyword)
+                            )
                             {
                                 if (previousToken.Parent is not AttributeListSyntax)
                                 {
@@ -392,7 +539,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
                         return 1;
                     }
-
                     break;
 
                 case SyntaxKind.WhereKeyword:
@@ -409,15 +555,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return 1;
             }
             else if (
-                nextToken.Kind() is SyntaxKind.CatchKeyword or
-                SyntaxKind.FinallyKeyword or
-                SyntaxKind.ElseKeyword)
+                nextToken.Kind()
+                is SyntaxKind.CatchKeyword
+                    or SyntaxKind.FinallyKeyword
+                    or SyntaxKind.ElseKeyword
+            )
             {
                 return 1;
             }
             else if (
-                nextToken.Kind() == SyntaxKind.WhileKeyword &&
-                nextToken.Parent.IsKind(SyntaxKind.DoStatement))
+                nextToken.Kind() == SyntaxKind.WhileKeyword
+                && nextToken.Parent.IsKind(SyntaxKind.DoStatement)
+            )
             {
                 return 1;
             }
@@ -431,7 +580,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
         }
 
-        private static int LineBreaksAfterSemicolon(SyntaxToken previousToken, SyntaxToken currentToken)
+        private static int LineBreaksAfterSemicolon(
+            SyntaxToken previousToken,
+            SyntaxToken currentToken
+        )
         {
             if (previousToken.Parent is ForStatementSyntax)
             {
@@ -461,11 +613,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private static bool IsWhitespace(SyntaxTrivia trivia)
         {
-            return trivia.Kind() is SyntaxKind.WhitespaceTrivia
-                or SyntaxKind.EndOfLineTrivia;
+            return trivia.Kind() is SyntaxKind.WhitespaceTrivia or SyntaxKind.EndOfLineTrivia;
         }
 
-        private static int GetNumberOfLines(IEnumerable<SyntaxTrivia> triviaList)
-            => triviaList.Sum(t => t.ToFullString().Replace("\r\n", "\r").Cast<char>().Count(c => SyntaxFacts.IsNewLine(c)));
+        private static int GetNumberOfLines(IEnumerable<SyntaxTrivia> triviaList) =>
+            triviaList.Sum(
+                t =>
+                    t.ToFullString()
+                        .Replace("\r\n", "\r")
+                        .Cast<char>()
+                        .Count(c => SyntaxFacts.IsNewLine(c))
+            );
     }
 }

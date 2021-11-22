@@ -14,7 +14,6 @@ internal enum SyntaxKind : byte
     RazorDirective,
     RazorDirectiveBody,
     UnclassifiedTextLiteral,
-
     // Markup
     MarkupBlock,
     MarkupTransition,
@@ -38,7 +37,6 @@ internal enum SyntaxKind : byte
     MarkupTagHelperDirectiveAttribute,
     MarkupMinimizedTagHelperDirectiveAttribute,
     MarkupTagHelperAttributeValue,
-
     // CSharp
     CSharpStatement,
     CSharpStatementBody,
@@ -67,7 +65,6 @@ internal enum SyntaxKind : byte
     LeftBracket,
     Equals,
     Transition,
-
     // HTML
     Text,
     OpenAngle,
@@ -77,7 +74,6 @@ internal enum SyntaxKind : byte
     CloseAngle,
     DoubleQuote,
     SingleQuote,
-
     // CSharp literals
     Identifier,
     Keyword,
@@ -86,7 +82,6 @@ internal enum SyntaxKind : byte
     RealLiteral,
     CharacterLiteral,
     StringLiteral,
-
     // CSharp operators
     Arrow,
     Minus,
@@ -131,7 +126,6 @@ internal enum SyntaxKind : byte
     RightShift,
     RightShiftAssign,
     Hash,
-
     // Razor specific
     RazorCommentLiteral,
     RazorCommentStar,

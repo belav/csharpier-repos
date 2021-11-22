@@ -16,9 +16,15 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial bool GetConsoleCursorInfo(IntPtr hConsoleOutput, out CONSOLE_CURSOR_INFO cci);
+        internal static partial bool GetConsoleCursorInfo(
+            IntPtr hConsoleOutput,
+            out CONSOLE_CURSOR_INFO cci
+        );
 
         [GeneratedDllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial bool SetConsoleCursorInfo(IntPtr hConsoleOutput, ref CONSOLE_CURSOR_INFO cci);
+        internal static partial bool SetConsoleCursorInfo(
+            IntPtr hConsoleOutput,
+            ref CONSOLE_CURSOR_INFO cci
+        );
     }
 }

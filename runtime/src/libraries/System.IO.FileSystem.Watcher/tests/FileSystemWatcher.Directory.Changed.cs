@@ -6,7 +6,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class Directory_Changed_Tests : FileSystemWatcherTest
     {
         [Fact]
@@ -14,9 +19,12 @@ namespace System.IO.Tests
         {
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
-            using (var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path)))
+            using (
+                var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
+            )
             {
-                Action action = () => Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = WatcherChangeTypes.Changed;
                 ExpectEvent(watcher, expected, action, expectedPath: dir.Path);
@@ -30,7 +38,8 @@ namespace System.IO.Tests
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
             using (var watcher = new FileSystemWatcher(dir.Path, "*"))
             {
-                Action action = () => Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, 0, action, expectedPath: dir.Path);
             }
@@ -50,10 +59,13 @@ namespace System.IO.Tests
                 watcher.NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.Attributes;
 
                 var attributes = File.GetAttributes(nestedDir.Path);
-                Action action = () => File.SetAttributes(nestedDir.Path, attributes | FileAttributes.ReadOnly);
+                Action action = () =>
+                    File.SetAttributes(nestedDir.Path, attributes | FileAttributes.ReadOnly);
                 Action cleanup = () => File.SetAttributes(nestedDir.Path, attributes);
 
-                WatcherChangeTypes expected = includeSubdirectories ? WatcherChangeTypes.Changed : 0;
+                WatcherChangeTypes expected = includeSubdirectories
+                    ? WatcherChangeTypes.Changed
+                    : 0;
                 ExpectEvent(watcher, expected, action, cleanup, nestedDir.Path);
             }
         }
@@ -84,12 +96,15 @@ namespace System.IO.Tests
         {
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var dir = new TempDirectory(Path.Combine(testDirectory.Path, "dir")))
-            using (var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path)))
+            using (
+                var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(dir.Path))
+            )
             {
                 TestISynchronizeInvoke invoker = new TestISynchronizeInvoke();
                 watcher.SynchronizingObject = invoker;
 
-                Action action = () => Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir.Path, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, WatcherChangeTypes.Changed, action, expectedPath: dir.Path);
                 Assert.True(invoker.BeginInvoke_Called);

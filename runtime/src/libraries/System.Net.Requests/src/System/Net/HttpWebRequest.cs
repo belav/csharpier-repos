@@ -41,14 +41,16 @@ namespace System.Net
 
         private Task<HttpResponseMessage>? _sendRequestTask;
 
-        private static int _defaultMaxResponseHeadersLength = HttpHandlerDefaults.DefaultMaxResponseHeadersLength;
+        private static int _defaultMaxResponseHeadersLength =
+            HttpHandlerDefaults.DefaultMaxResponseHeadersLength;
 
         private int _beginGetRequestStreamCalled;
         private int _beginGetResponseCalled;
         private int _endGetRequestStreamCalled;
         private int _endGetResponseCalled;
 
-        private int _maximumAllowedRedirections = HttpHandlerDefaults.DefaultMaxAutomaticRedirections;
+        private int _maximumAllowedRedirections =
+            HttpHandlerDefaults.DefaultMaxAutomaticRedirections;
         private int _maximumResponseHeadersLen = _defaultMaxResponseHeadersLength;
         private ServicePoint? _servicePoint;
         private int _timeout = WebRequest.DefaultTimeoutMilliseconds;
@@ -72,7 +74,8 @@ namespace System.Net
         private Booleans _booleans = Booleans.Default;
         private bool _pipelined = true;
         private bool _preAuthenticate;
-        private DecompressionMethods _automaticDecompression = HttpHandlerDefaults.DefaultAutomaticDecompression;
+        private DecompressionMethods _automaticDecompression =
+            HttpHandlerDefaults.DefaultAutomaticDecompression;
 
         private static readonly object s_syncRoot = new object();
         private static volatile HttpClient? s_cachedHttpClient;
@@ -85,9 +88,7 @@ namespace System.Net
             AllowAutoRedirect = 0x00000001,
             AllowWriteStreamBuffering = 0x00000002,
             ExpectContinue = 0x00000004,
-
             ProxySet = 0x00000010,
-
             UnsafeAuthenticatedConnectionSharing = 0x00000040,
             IsVersionHttp10 = 0x00000080,
             SendChunked = 0x00000100,
@@ -124,14 +125,17 @@ namespace System.Net
                 MaximumResponseHeadersLength = webRequest.MaximumResponseHeadersLength;
                 PreAuthenticate = webRequest.PreAuthenticate;
                 ReadWriteTimeout = webRequest.ReadWriteTimeout;
-                Timeout = webRequest.Timeout == Threading.Timeout.Infinite
-                    ? Threading.Timeout.InfiniteTimeSpan
-                    : TimeSpan.FromMilliseconds(webRequest.Timeout);
+                Timeout =
+                    webRequest.Timeout == Threading.Timeout.Infinite
+                        ? Threading.Timeout.InfiniteTimeSpan
+                        : TimeSpan.FromMilliseconds(webRequest.Timeout);
                 SslProtocols = ServicePointManager.SecurityProtocol;
                 CheckCertificateRevocationList = ServicePointManager.CheckCertificateRevocationList;
                 Credentials = webRequest._credentials;
                 Proxy = webRequest._proxy;
-                ServerCertificateValidationCallback = webRequest.ServerCertificateValidationCallback ?? ServicePointManager.ServerCertificateValidationCallback;
+                ServerCertificateValidationCallback =
+                    webRequest.ServerCertificateValidationCallback
+                    ?? ServicePointManager.ServerCertificateValidationCallback;
                 ClientCertificates = webRequest._clientCertificates;
                 CookieContainer = webRequest._cookieContainer;
             }
@@ -141,16 +145,22 @@ namespace System.Net
                 return Async == requestParameters.Async
                     && AutomaticDecompression == requestParameters.AutomaticDecompression
                     && AllowAutoRedirect == requestParameters.AllowAutoRedirect
-                    && MaximumAutomaticRedirections == requestParameters.MaximumAutomaticRedirections
-                    && MaximumResponseHeadersLength == requestParameters.MaximumResponseHeadersLength
+                    && MaximumAutomaticRedirections
+                        == requestParameters.MaximumAutomaticRedirections
+                    && MaximumResponseHeadersLength
+                        == requestParameters.MaximumResponseHeadersLength
                     && PreAuthenticate == requestParameters.PreAuthenticate
                     && ReadWriteTimeout == requestParameters.ReadWriteTimeout
                     && Timeout == requestParameters.Timeout
                     && SslProtocols == requestParameters.SslProtocols
-                    && CheckCertificateRevocationList == requestParameters.CheckCertificateRevocationList
+                    && CheckCertificateRevocationList
+                        == requestParameters.CheckCertificateRevocationList
                     && ReferenceEquals(Credentials, requestParameters.Credentials)
                     && ReferenceEquals(Proxy, requestParameters.Proxy)
-                    && ReferenceEquals(ServerCertificateValidationCallback, requestParameters.ServerCertificateValidationCallback)
+                    && ReferenceEquals(
+                        ServerCertificateValidationCallback,
+                        requestParameters.ServerCertificateValidationCallback
+                    )
                     && ReferenceEquals(ClientCertificates, requestParameters.ClientCertificates)
                     && ReferenceEquals(CookieContainer, requestParameters.CookieContainer);
             }
@@ -168,18 +178,31 @@ namespace System.Net
         private const string ContinueHeader = "100-continue";
         private const string ChunkedHeader = "chunked";
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        protected HttpWebRequest(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        protected HttpWebRequest(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -200,26 +223,14 @@ namespace System.Net
 
         public string? Accept
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.Accept];
-            }
-            set
-            {
-                SetSpecialHeaders(HttpKnownHeaderNames.Accept, value);
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.Accept]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.Accept, value); }
         }
 
         public virtual bool AllowReadStreamBuffering
         {
-            get
-            {
-                return _allowReadStreamBuffering;
-            }
-            set
-            {
-                _allowReadStreamBuffering = value;
-            }
+            get { return _allowReadStreamBuffering; }
+            set { _allowReadStreamBuffering = value; }
         }
 
         public int MaximumResponseHeadersLength
@@ -241,10 +252,7 @@ namespace System.Net
 
         public int MaximumAutomaticRedirections
         {
-            get
-            {
-                return _maximumAllowedRedirections;
-            }
+            get { return _maximumAllowedRedirections; }
             set
             {
                 if (value <= 0)
@@ -257,22 +265,13 @@ namespace System.Net
 
         public override string? ContentType
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.ContentType];
-            }
-            set
-            {
-                SetSpecialHeaders(HttpKnownHeaderNames.ContentType, value);
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.ContentType]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.ContentType, value); }
         }
 
         public int ContinueTimeout
         {
-            get
-            {
-                return _continueTimeout;
-            }
+            get { return _continueTimeout; }
             set
             {
                 if (RequestSubmitted)
@@ -281,7 +280,10 @@ namespace System.Net
                 }
                 if ((value < 0) && (value != System.Threading.Timeout.Infinite))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_ge_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_ge_zero
+                    );
                 }
                 _continueTimeout = value;
             }
@@ -289,15 +291,15 @@ namespace System.Net
 
         public override int Timeout
         {
-            get
-            {
-                return _timeout;
-            }
+            get { return _timeout; }
             set
             {
                 if (value < 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_ge_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_ge_zero
+                    );
                 }
 
                 _timeout = value;
@@ -328,22 +330,13 @@ namespace System.Net
 
         public Uri Address
         {
-            get
-            {
-                return _requestUri;
-            }
+            get { return _requestUri; }
         }
 
         public string? UserAgent
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.UserAgent];
-            }
-            set
-            {
-                SetSpecialHeaders(HttpKnownHeaderNames.UserAgent, value);
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.UserAgent]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.UserAgent, value); }
         }
 
         public string Host
@@ -351,9 +344,9 @@ namespace System.Net
             get
             {
                 Uri hostUri = _hostUri ?? Address;
-                return (_hostUri == null || !_hostHasPort) && Address.IsDefaultPort ?
-                    hostUri.Host :
-                    hostUri.Host + ":" + hostUri.Port;
+                return (_hostUri == null || !_hostHasPort) && Address.IsDefaultPort
+                  ? hostUri.Host
+                  : hostUri.Host + ":" + hostUri.Port;
             }
             set
             {
@@ -386,21 +379,16 @@ namespace System.Net
                 else
                 {
                     int endOfIPv6Address = value.IndexOf(']');
-                    _hostHasPort = endOfIPv6Address == -1 || value.LastIndexOf(':') > endOfIPv6Address;
+                    _hostHasPort =
+                        endOfIPv6Address == -1 || value.LastIndexOf(':') > endOfIPv6Address;
                 }
             }
         }
 
         public bool Pipelined
         {
-            get
-            {
-                return _pipelined;
-            }
-            set
-            {
-                _pipelined = value;
-            }
+            get { return _pipelined; }
+            set { _pipelined = value; }
         }
 
         /// <devdoc>
@@ -410,24 +398,14 @@ namespace System.Net
         /// </devdoc>
         public string? Referer
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.Referer];
-            }
-            set
-            {
-                SetSpecialHeaders(HttpKnownHeaderNames.Referer, value);
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.Referer]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.Referer, value); }
         }
 
         /// <devdoc>
         ///    <para>Sets the media type header</para>
         /// </devdoc>
-        public string? MediaType
-        {
-            get;
-            set;
-        }
+        public string? MediaType { get; set; }
 
         /// <devdoc>
         ///    <para>
@@ -436,10 +414,7 @@ namespace System.Net
         /// </devdoc>
         public string? TransferEncoding
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.TransferEncoding];
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.TransferEncoding]; }
             set
             {
                 bool fChunked;
@@ -485,10 +460,7 @@ namespace System.Net
 
         public bool UnsafeAuthenticatedConnectionSharing
         {
-            get
-            {
-                return (_booleans & Booleans.UnsafeAuthenticatedConnectionSharing) != 0;
-            }
+            get { return (_booleans & Booleans.UnsafeAuthenticatedConnectionSharing) != 0; }
             set
             {
                 if (value)
@@ -504,10 +476,7 @@ namespace System.Net
 
         public DecompressionMethods AutomaticDecompression
         {
-            get
-            {
-                return _automaticDecompression;
-            }
+            get { return _automaticDecompression; }
             set
             {
                 if (RequestSubmitted)
@@ -520,10 +489,7 @@ namespace System.Net
 
         public virtual bool AllowWriteStreamBuffering
         {
-            get
-            {
-                return (_booleans & Booleans.AllowWriteStreamBuffering) != 0;
-            }
+            get { return (_booleans & Booleans.AllowWriteStreamBuffering) != 0; }
             set
             {
                 if (value)
@@ -544,10 +510,7 @@ namespace System.Net
         /// </devdoc>
         public virtual bool AllowAutoRedirect
         {
-            get
-            {
-                return (_booleans & Booleans.AllowAutoRedirect) != 0;
-            }
+            get { return (_booleans & Booleans.AllowAutoRedirect) != 0; }
             set
             {
                 if (value)
@@ -565,22 +528,13 @@ namespace System.Net
 
         public override bool PreAuthenticate
         {
-            get
-            {
-                return _preAuthenticate;
-            }
-            set
-            {
-                _preAuthenticate = value;
-            }
+            get { return _preAuthenticate; }
+            set { _preAuthenticate = value; }
         }
 
         public string? Connection
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.Connection];
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.Connection]; }
             set
             {
                 bool fKeepAlive;
@@ -595,15 +549,16 @@ namespace System.Net
                     return;
                 }
 
-                fKeepAlive = (value.IndexOf("keep-alive", StringComparison.OrdinalIgnoreCase) != -1);
+                fKeepAlive = (
+                    value.IndexOf("keep-alive", StringComparison.OrdinalIgnoreCase) != -1
+                );
                 fClose = (value.IndexOf("close", StringComparison.OrdinalIgnoreCase) != -1);
 
                 //
                 // Prevent keep-alive and close from being added
                 //
 
-                if (fKeepAlive ||
-                    fClose)
+                if (fKeepAlive || fClose)
                 {
                     throw new ArgumentException(SR.net_connarg, nameof(value));
                 }
@@ -627,10 +582,7 @@ namespace System.Net
 
         public string? Expect
         {
-            get
-            {
-                return _webHeaderCollection[HttpKnownHeaderNames.Expect];
-            }
+            get { return _webHeaderCollection[HttpKnownHeaderNames.Expect]; }
             set
             {
                 // only remove everything other than 100-cont
@@ -650,7 +602,9 @@ namespace System.Net
                 // Prevent 100-continues from being added
                 //
 
-                fContinue100 = (value.IndexOf(ContinueHeader, StringComparison.OrdinalIgnoreCase) != -1);
+                fContinue100 = (
+                    value.IndexOf(ContinueHeader, StringComparison.OrdinalIgnoreCase) != -1
+                );
 
                 if (fContinue100)
                 {
@@ -674,31 +628,21 @@ namespace System.Net
         /// </devdoc>
         public static int DefaultMaximumResponseHeadersLength
         {
-            get
-            {
-                return _defaultMaxResponseHeadersLength;
-            }
-            set
-            {
-                _defaultMaxResponseHeadersLength = value;
-            }
+            get { return _defaultMaxResponseHeadersLength; }
+            set { _defaultMaxResponseHeadersLength = value; }
         }
 
         // NOP
-        public static int DefaultMaximumErrorResponseLength
-        {
-            get; set;
-        }
+        public static int DefaultMaximumErrorResponseLength { get; set; }
 
-        private static RequestCachePolicy? _defaultCachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+        private static RequestCachePolicy? _defaultCachePolicy = new RequestCachePolicy(
+            RequestCacheLevel.BypassCache
+        );
         private static bool _isDefaultCachePolicySet;
 
         public static new RequestCachePolicy? DefaultCachePolicy
         {
-            get
-            {
-                return _defaultCachePolicy;
-            }
+            get { return _defaultCachePolicy; }
             set
             {
                 _isDefaultCachePolicySet = true;
@@ -708,14 +652,8 @@ namespace System.Net
 
         public DateTime IfModifiedSince
         {
-            get
-            {
-                return GetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince);
-            }
-            set
-            {
-                SetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince, value);
-            }
+            get { return GetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince); }
+            set { SetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince, value); }
         }
 
         /// <devdoc>
@@ -725,22 +663,13 @@ namespace System.Net
         /// </devdoc>
         public DateTime Date
         {
-            get
-            {
-                return GetDateHeaderHelper(HttpKnownHeaderNames.Date);
-            }
-            set
-            {
-                SetDateHeaderHelper(HttpKnownHeaderNames.Date, value);
-            }
+            get { return GetDateHeaderHelper(HttpKnownHeaderNames.Date); }
+            set { SetDateHeaderHelper(HttpKnownHeaderNames.Date, value); }
         }
 
         public bool SendChunked
         {
-            get
-            {
-                return (_booleans & Booleans.SendChunked) != 0;
-            }
+            get { return (_booleans & Booleans.SendChunked) != 0; }
             set
             {
                 if (RequestSubmitted)
@@ -761,17 +690,12 @@ namespace System.Net
         public HttpContinueDelegate? ContinueDelegate
         {
             // Nop since the underlying API do not expose 100 continue.
-            get
-            {
-                return _continueDelegate;
-            }
-            set
-            {
-                _continueDelegate = value;
-            }
+            get { return _continueDelegate; }
+            set { _continueDelegate = value; }
         }
 
-        public ServicePoint ServicePoint => _servicePoint ??= ServicePointManager.FindServicePoint(Address, Proxy);
+        public ServicePoint ServicePoint =>
+            _servicePoint ??= ServicePointManager.FindServicePoint(Address, Proxy);
 
         public RemoteCertificateValidationCallback? ServerCertificateValidationCallback { get; set; }
 
@@ -796,10 +720,7 @@ namespace System.Net
         /// </devdoc>
         public Version ProtocolVersion
         {
-            get
-            {
-                return IsVersionHttp10 ? HttpVersion.Version10 : HttpVersion.Version11;
-            }
+            get { return IsVersionHttp10 ? HttpVersion.Version10 : HttpVersion.Version11; }
             set
             {
                 if (value.Equals(HttpVersion.Version11))
@@ -819,10 +740,7 @@ namespace System.Net
 
         public int ReadWriteTimeout
         {
-            get
-            {
-                return _readWriteTimeout;
-            }
+            get { return _readWriteTimeout; }
             set
             {
                 if (RequestSubmitted)
@@ -832,7 +750,10 @@ namespace System.Net
 
                 if (value <= 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_gt_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_gt_zero
+                    );
                 }
 
                 _readWriteTimeout = value;
@@ -841,42 +762,24 @@ namespace System.Net
 
         public virtual CookieContainer? CookieContainer
         {
-            get
-            {
-                return _cookieContainer;
-            }
-            set
-            {
-                _cookieContainer = value;
-            }
+            get { return _cookieContainer; }
+            set { _cookieContainer = value; }
         }
 
         public override ICredentials? Credentials
         {
-            get
-            {
-                return _credentials;
-            }
-            set
-            {
-                _credentials = value;
-            }
+            get { return _credentials; }
+            set { _credentials = value; }
         }
 
         public virtual bool HaveResponse
         {
-            get
-            {
-                return (_sendRequestTask != null) && (_sendRequestTask.IsCompletedSuccessfully);
-            }
+            get { return (_sendRequestTask != null) && (_sendRequestTask.IsCompletedSuccessfully); }
         }
 
         public override WebHeaderCollection Headers
         {
-            get
-            {
-                return _webHeaderCollection;
-            }
+            get { return _webHeaderCollection; }
             set
             {
                 // We can't change headers after they've already been sent.
@@ -903,10 +806,7 @@ namespace System.Net
 
         public override string Method
         {
-            get
-            {
-                return _originVerb;
-            }
+            get { return _originVerb; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -924,26 +824,17 @@ namespace System.Net
 
         public override Uri RequestUri
         {
-            get
-            {
-                return _requestUri;
-            }
+            get { return _requestUri; }
         }
 
         public virtual bool SupportsCookieContainer
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool UseDefaultCredentials
         {
-            get
-            {
-                return (_credentials == CredentialCache.DefaultCredentials);
-            }
+            get { return (_credentials == CredentialCache.DefaultCredentials); }
             set
             {
                 if (RequestSubmitted)
@@ -959,10 +850,7 @@ namespace System.Net
 
         public override IWebProxy? Proxy
         {
-            get
-            {
-                return _proxy;
-            }
+            get { return _proxy; }
             set
             {
                 // We can't change the proxy while the request is already fired.
@@ -1014,10 +902,7 @@ namespace System.Net
         // HTTP version of the request
         private bool IsVersionHttp10
         {
-            get
-            {
-                return (_booleans & Booleans.IsVersionHttp10) != 0;
-            }
+            get { return (_booleans & Booleans.IsVersionHttp10) != 0; }
             set
             {
                 if (value)
@@ -1056,9 +941,19 @@ namespace System.Net
             // Match Desktop behavior: prevent someone from getting a request stream
             // if the protocol verb/method doesn't support it. Note that this is not
             // entirely compliant RFC2616 for the aforementioned compatibility reasons.
-            if (string.Equals(HttpMethod.Get.Method, _originVerb, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(HttpMethod.Head.Method, _originVerb, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals("CONNECT", _originVerb, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    HttpMethod.Get.Method,
+                    _originVerb,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || string.Equals(
+                    HttpMethod.Head.Method,
+                    _originVerb,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || string.Equals("CONNECT", _originVerb, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 throw new ProtocolViolationException(SR.net_nouploadonget);
             }
@@ -1111,7 +1006,9 @@ namespace System.Net
 
             if (Interlocked.Exchange(ref _endGetRequestStreamCalled, 1) != 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, "EndGetRequestStream"));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_io_invalidendcall, "EndGetRequestStream")
+                );
             }
 
             Stream stream;
@@ -1169,11 +1066,17 @@ namespace System.Net
                             request.Content = new ByteArrayContent(Array.Empty<byte>());
                         }
 
-                        request.Content.Headers.TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
+                        request.Content.Headers.TryAddWithoutValidation(
+                            headerName,
+                            _webHeaderCollection[headerName!]
+                        );
                     }
                     else
                     {
-                        request.Headers.TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
+                        request.Headers.TryAddWithoutValidation(
+                            headerName,
+                            _webHeaderCollection[headerName!]
+                        );
                     }
                 }
 
@@ -1190,22 +1093,48 @@ namespace System.Net
 
                 request.Version = ProtocolVersion;
 
-                _sendRequestTask = async ?
-                    client.SendAsync(request, _allowReadStreamBuffering ? HttpCompletionOption.ResponseContentRead : HttpCompletionOption.ResponseHeadersRead, _sendRequestCts!.Token) :
-                    Task.FromResult(client.Send(request, _allowReadStreamBuffering ? HttpCompletionOption.ResponseContentRead : HttpCompletionOption.ResponseHeadersRead, _sendRequestCts!.Token));
+                _sendRequestTask = async
+                    ? client.SendAsync(
+                          request,
+                          _allowReadStreamBuffering
+                            ? HttpCompletionOption.ResponseContentRead
+                            : HttpCompletionOption.ResponseHeadersRead,
+                          _sendRequestCts!.Token
+                      )
+                    : Task.FromResult(
+                          client.Send(
+                              request,
+                              _allowReadStreamBuffering
+                                ? HttpCompletionOption.ResponseContentRead
+                                : HttpCompletionOption.ResponseHeadersRead,
+                              _sendRequestCts!.Token
+                          )
+                      );
 
                 HttpResponseMessage responseMessage = await _sendRequestTask.ConfigureAwait(false);
 
-                HttpWebResponse response = new HttpWebResponse(responseMessage, _requestUri, _cookieContainer);
+                HttpWebResponse response = new HttpWebResponse(
+                    responseMessage,
+                    _requestUri,
+                    _cookieContainer
+                );
 
                 int maxSuccessStatusCode = AllowAutoRedirect ? 299 : 399;
-                if ((int)response.StatusCode > maxSuccessStatusCode || (int)response.StatusCode < 200)
+                if (
+                    (int)response.StatusCode > maxSuccessStatusCode
+                    || (int)response.StatusCode < 200
+                )
                 {
                     throw new WebException(
-                        SR.Format(SR.net_servererror, (int)response.StatusCode, response.StatusDescription),
+                        SR.Format(
+                            SR.net_servererror,
+                            (int)response.StatusCode,
+                            response.StatusDescription
+                        ),
                         null,
                         WebExceptionStatus.ProtocolError,
-                        response);
+                        response
+                    );
                 }
 
                 return response;
@@ -1226,7 +1155,8 @@ namespace System.Net
             if (policy != null && policy.Level != RequestCacheLevel.BypassCache)
             {
                 CacheControlHeaderValue? cacheControl = null;
-                HttpHeaderValueCollection<NameValueHeaderValue> pragmaHeaders = request.Headers.Pragma;
+                HttpHeaderValueCollection<NameValueHeaderValue> pragmaHeaders =
+                    request.Headers.Pragma;
 
                 if (policy is HttpRequestCachePolicy httpRequestCachePolicy)
                 {
@@ -1241,19 +1171,16 @@ namespace System.Net
                             pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
                             break;
                         case HttpRequestCacheLevel.Reload:
-                            cacheControl = new CacheControlHeaderValue
-                            {
-                                NoCache = true
-                            };
+                            cacheControl = new CacheControlHeaderValue { NoCache = true };
                             pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
                             break;
                         case HttpRequestCacheLevel.CacheOnly:
-                            throw new WebException(SR.CacheEntryNotFound, WebExceptionStatus.CacheEntryNotFound);
+                            throw new WebException(
+                                SR.CacheEntryNotFound,
+                                WebExceptionStatus.CacheEntryNotFound
+                            );
                         case HttpRequestCacheLevel.CacheOrNextCacheOnly:
-                            cacheControl = new CacheControlHeaderValue
-                            {
-                                OnlyIfCached = true
-                            };
+                            cacheControl = new CacheControlHeaderValue { OnlyIfCached = true };
                             break;
                         case HttpRequestCacheLevel.Default:
                             cacheControl = new CacheControlHeaderValue();
@@ -1273,13 +1200,9 @@ namespace System.Net
                                 cacheControl.MaxStale = true;
                                 cacheControl.MaxStaleLimit = httpRequestCachePolicy.MaxStale;
                             }
-
                             break;
                         case HttpRequestCacheLevel.Refresh:
-                            cacheControl = new CacheControlHeaderValue
-                            {
-                                MaxAge = TimeSpan.Zero
-                            };
+                            cacheControl = new CacheControlHeaderValue { MaxAge = TimeSpan.Zero };
                             pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
                             break;
                     }
@@ -1297,14 +1220,14 @@ namespace System.Net
                             pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
                             break;
                         case RequestCacheLevel.Reload:
-                            cacheControl = new CacheControlHeaderValue
-                            {
-                                NoCache = true
-                            };
+                            cacheControl = new CacheControlHeaderValue { NoCache = true };
                             pragmaHeaders.Add(new NameValueHeaderValue("no-cache"));
                             break;
                         case RequestCacheLevel.CacheOnly:
-                            throw new WebException(SR.CacheEntryNotFound, WebExceptionStatus.CacheEntryNotFound);
+                            throw new WebException(
+                                SR.CacheEntryNotFound,
+                                WebExceptionStatus.CacheEntryNotFound
+                            );
                     }
                 }
 
@@ -1358,7 +1281,9 @@ namespace System.Net
 
             if (Interlocked.Exchange(ref _endGetResponseCalled, 1) != 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, "EndGetResponse"));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_io_invalidendcall, "EndGetResponse")
+                );
             }
 
             WebResponse response;
@@ -1439,7 +1364,10 @@ namespace System.Net
             }
             if ((from < 0) || (to < 0))
             {
-                throw new ArgumentOutOfRangeException(from < 0 ? nameof(from) : nameof(to), SR.net_rangetoosmall);
+                throw new ArgumentOutOfRangeException(
+                    from < 0 ? nameof(from) : nameof(to),
+                    SR.net_rangetoosmall
+                );
             }
             if (from > to)
             {
@@ -1449,7 +1377,13 @@ namespace System.Net
             {
                 throw new ArgumentException(SR.net_nottoken, nameof(rangeSpecifier));
             }
-            if (!AddRange(rangeSpecifier, from.ToString(NumberFormatInfo.InvariantInfo), to.ToString(NumberFormatInfo.InvariantInfo)))
+            if (
+                !AddRange(
+                    rangeSpecifier,
+                    from.ToString(NumberFormatInfo.InvariantInfo),
+                    to.ToString(NumberFormatInfo.InvariantInfo)
+                )
+            )
             {
                 throw new InvalidOperationException(SR.net_rangetype);
             }
@@ -1470,7 +1404,13 @@ namespace System.Net
             {
                 throw new ArgumentException(SR.net_nottoken, nameof(rangeSpecifier));
             }
-            if (!AddRange(rangeSpecifier, range.ToString(NumberFormatInfo.InvariantInfo), (range >= 0) ? "" : null))
+            if (
+                !AddRange(
+                    rangeSpecifier,
+                    range.ToString(NumberFormatInfo.InvariantInfo),
+                    (range >= 0) ? "" : null
+                )
+            )
             {
                 throw new InvalidOperationException(SR.net_rangetype);
             }
@@ -1486,7 +1426,13 @@ namespace System.Net
             }
             else
             {
-                if (!string.Equals(curRange.Substring(0, curRange.IndexOf('=')), rangeSpecifier, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !string.Equals(
+                        curRange.Substring(0, curRange.IndexOf('=')),
+                        rangeSpecifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return false;
                 }
@@ -1503,10 +1449,7 @@ namespace System.Net
 
         private bool RequestSubmitted
         {
-            get
-            {
-                return _sendRequestTask != null;
-            }
+            get { return _sendRequestTask != null; }
         }
 
         private void CheckAbort()
@@ -1517,7 +1460,8 @@ namespace System.Net
             }
         }
 
-        private static readonly string[] s_wellKnownContentHeaders = {
+        private static readonly string[] s_wellKnownContentHeaders =
+        {
             HttpKnownHeaderNames.ContentDisposition,
             HttpKnownHeaderNames.ContentEncoding,
             HttpKnownHeaderNames.ContentLanguage,
@@ -1566,7 +1510,10 @@ namespace System.Net
             if (dateTime == DateTime.MinValue)
                 SetSpecialHeaders(headerName, null); // remove header
             else
-                SetSpecialHeaders(headerName, HttpDateParser.DateToString(dateTime.ToUniversalTime()));
+                SetSpecialHeaders(
+                    headerName,
+                    HttpDateParser.DateToString(dateTime.ToUniversalTime())
+                );
         }
 
         private bool TryGetHostUri(string hostName, [NotNullWhen(true)] out Uri? hostUri)
@@ -1604,7 +1551,10 @@ namespace System.Net
             return CreateHttpClient(parameters, this);
         }
 
-        private static HttpClient CreateHttpClient(HttpClientParameters parameters, HttpWebRequest? request)
+        private static HttpClient CreateHttpClient(
+            HttpClientParameters parameters,
+            HttpWebRequest? request
+        )
         {
             HttpClient? client = null;
             try
@@ -1660,16 +1610,27 @@ namespace System.Net
 
                 if (parameters.ClientCertificates != null)
                 {
-                    handler.SslOptions.ClientCertificates = new X509CertificateCollection(parameters.ClientCertificates);
+                    handler.SslOptions.ClientCertificates = new X509CertificateCollection(
+                        parameters.ClientCertificates
+                    );
                 }
 
                 // Set relevant properties from ServicePointManager
                 handler.SslOptions.EnabledSslProtocols = (SslProtocols)parameters.SslProtocols;
-                handler.SslOptions.CertificateRevocationCheckMode = parameters.CheckCertificateRevocationList ? X509RevocationMode.Online : X509RevocationMode.NoCheck;
-                RemoteCertificateValidationCallback? rcvc = parameters.ServerCertificateValidationCallback;
+                handler.SslOptions.CertificateRevocationCheckMode =
+                    parameters.CheckCertificateRevocationList
+                        ? X509RevocationMode.Online
+                        : X509RevocationMode.NoCheck;
+                RemoteCertificateValidationCallback? rcvc =
+                    parameters.ServerCertificateValidationCallback;
                 if (rcvc != null)
                 {
-                    handler.SslOptions.RemoteCertificateValidationCallback = (message, cert, chain, errors) => rcvc(request!, cert, chain, errors);
+                    handler.SslOptions.RemoteCertificateValidationCallback = (
+                        message,
+                        cert,
+                        chain,
+                        errors
+                    ) => rcvc(request!, cert, chain, errors);
                 }
 
                 // Set up a ConnectCallback so that we can control Socket-specific settings, like ReadWriteTimeout => socket.Send/ReceiveTimeout.
@@ -1683,11 +1644,18 @@ namespace System.Net
 
                         if (parameters.Async)
                         {
-                            await socket.ConnectAsync(context.DnsEndPoint, cancellationToken).ConfigureAwait(false);
+                            await socket
+                                .ConnectAsync(context.DnsEndPoint, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                         else
                         {
-                            using (cancellationToken.UnsafeRegister(s => ((Socket)s!).Dispose(), socket))
+                            using (
+                                cancellationToken.UnsafeRegister(
+                                    s => ((Socket)s!).Dispose(),
+                                    socket
+                                )
+                            )
                             {
                                 socket.Connect(context.DnsEndPoint);
                             }
@@ -1698,7 +1666,8 @@ namespace System.Net
 
                         if (parameters.ReadWriteTimeout > 0) // default is 5 minutes, so this is generally going to be true
                         {
-                            socket.SendTimeout = socket.ReceiveTimeout = parameters.ReadWriteTimeout;
+                            socket.SendTimeout = socket.ReceiveTimeout =
+                                parameters.ReadWriteTimeout;
                         }
                     }
                     catch

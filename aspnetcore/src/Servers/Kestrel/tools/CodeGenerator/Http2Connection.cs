@@ -13,7 +13,8 @@ public static class Http2Connection
         return ReadOnlySpanStaticDataGenerator.GenerateFile(
             namespaceName: "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2",
             className: "Http2Connection",
-            allProperties: GetStrings());
+            allProperties: GetStrings()
+        );
     }
 
     private static IEnumerable<(string Name, string Value)> GetStrings()

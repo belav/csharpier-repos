@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<UInt64>>() / sizeof(UInt64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<UInt64>>() / sizeof(UInt64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -73,19 +74,27 @@ namespace JIT.HardwareIntrinsics.General
             Vector64<UInt64> value = Vector64.Create(values[0]);
 
             object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.ToScalar))
-                                .MakeGenericMethod(typeof(UInt64))
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.ToScalar))
+                .MakeGenericMethod(typeof(UInt64))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((UInt64)(result), values);
         }
 
-        private void ValidateResult(UInt64 result, UInt64[] values, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 result,
+            UInt64[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt64>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt64>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

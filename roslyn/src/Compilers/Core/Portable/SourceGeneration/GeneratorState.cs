@@ -16,43 +16,92 @@ namespace Microsoft.CodeAnalysis
         /// Creates a new generator state that just contains information
         /// </summary>
         public GeneratorState(GeneratorInfo info)
-            : this(info, ImmutableArray<GeneratedSyntaxTree>.Empty)
-        {
-        }
+            : this(info, ImmutableArray<GeneratedSyntaxTree>.Empty) { }
 
         /// <summary>
         /// Creates a new generator state that contains information and constant trees
         /// </summary>
         public GeneratorState(GeneratorInfo info, ImmutableArray<GeneratedSyntaxTree> postInitTrees)
-            : this(info, postInitTrees, ImmutableArray<ISyntaxInputNode>.Empty, ImmutableArray<IIncrementalGeneratorOutputNode>.Empty)
-        {
-        }
+            : this(
+                info,
+                postInitTrees,
+                ImmutableArray<ISyntaxInputNode>.Empty,
+                ImmutableArray<IIncrementalGeneratorOutputNode>.Empty
+            ) { }
 
         /// <summary>
         /// Creates a new generator state that contains information, constant trees and an execution pipeline
         /// </summary>
-        public GeneratorState(GeneratorInfo info, ImmutableArray<GeneratedSyntaxTree> postInitTrees, ImmutableArray<ISyntaxInputNode> inputNodes, ImmutableArray<IIncrementalGeneratorOutputNode> outputNodes)
-            : this(info, postInitTrees, inputNodes, outputNodes, ImmutableArray<GeneratedSyntaxTree>.Empty, ImmutableArray<Diagnostic>.Empty, exception: null, elapsedTime: TimeSpan.Zero)
-        {
-        }
+        public GeneratorState(
+            GeneratorInfo info,
+            ImmutableArray<GeneratedSyntaxTree> postInitTrees,
+            ImmutableArray<ISyntaxInputNode> inputNodes,
+            ImmutableArray<IIncrementalGeneratorOutputNode> outputNodes
+        )
+            : this(
+                info,
+                postInitTrees,
+                inputNodes,
+                outputNodes,
+                ImmutableArray<GeneratedSyntaxTree>.Empty,
+                ImmutableArray<Diagnostic>.Empty,
+                exception: null,
+                elapsedTime: TimeSpan.Zero
+            ) { }
 
         /// <summary>
         /// Creates a new generator state that contains an exception and the associated diagnostic
         /// </summary>
-        public GeneratorState(GeneratorInfo info, Exception e, Diagnostic error, TimeSpan elapsedTime)
-            : this(info, ImmutableArray<GeneratedSyntaxTree>.Empty, ImmutableArray<ISyntaxInputNode>.Empty, ImmutableArray<IIncrementalGeneratorOutputNode>.Empty, ImmutableArray<GeneratedSyntaxTree>.Empty, ImmutableArray.Create(error), exception: e, elapsedTime)
-        {
-        }
+        public GeneratorState(
+            GeneratorInfo info,
+            Exception e,
+            Diagnostic error,
+            TimeSpan elapsedTime
+        )
+            : this(
+                info,
+                ImmutableArray<GeneratedSyntaxTree>.Empty,
+                ImmutableArray<ISyntaxInputNode>.Empty,
+                ImmutableArray<IIncrementalGeneratorOutputNode>.Empty,
+                ImmutableArray<GeneratedSyntaxTree>.Empty,
+                ImmutableArray.Create(error),
+                exception: e,
+                elapsedTime
+            ) { }
 
         /// <summary>
         /// Creates a generator state that contains results
         /// </summary>
-        public GeneratorState(GeneratorInfo info, ImmutableArray<GeneratedSyntaxTree> postInitTrees, ImmutableArray<ISyntaxInputNode> inputNodes, ImmutableArray<IIncrementalGeneratorOutputNode> outputNodes, ImmutableArray<GeneratedSyntaxTree> generatedTrees, ImmutableArray<Diagnostic> diagnostics, TimeSpan elapsedTime)
-            : this(info, postInitTrees, inputNodes, outputNodes, generatedTrees, diagnostics, exception: null, elapsedTime)
-        {
-        }
+        public GeneratorState(
+            GeneratorInfo info,
+            ImmutableArray<GeneratedSyntaxTree> postInitTrees,
+            ImmutableArray<ISyntaxInputNode> inputNodes,
+            ImmutableArray<IIncrementalGeneratorOutputNode> outputNodes,
+            ImmutableArray<GeneratedSyntaxTree> generatedTrees,
+            ImmutableArray<Diagnostic> diagnostics,
+            TimeSpan elapsedTime
+        )
+            : this(
+                info,
+                postInitTrees,
+                inputNodes,
+                outputNodes,
+                generatedTrees,
+                diagnostics,
+                exception: null,
+                elapsedTime
+            ) { }
 
-        private GeneratorState(GeneratorInfo info, ImmutableArray<GeneratedSyntaxTree> postInitTrees, ImmutableArray<ISyntaxInputNode> inputNodes, ImmutableArray<IIncrementalGeneratorOutputNode> outputNodes, ImmutableArray<GeneratedSyntaxTree> generatedTrees, ImmutableArray<Diagnostic> diagnostics, Exception? exception, TimeSpan elapsedTime)
+        private GeneratorState(
+            GeneratorInfo info,
+            ImmutableArray<GeneratedSyntaxTree> postInitTrees,
+            ImmutableArray<ISyntaxInputNode> inputNodes,
+            ImmutableArray<IIncrementalGeneratorOutputNode> outputNodes,
+            ImmutableArray<GeneratedSyntaxTree> generatedTrees,
+            ImmutableArray<Diagnostic> diagnostics,
+            Exception? exception,
+            TimeSpan elapsedTime
+        )
         {
             this.Initialized = true;
             this.PostInitTrees = postInitTrees;

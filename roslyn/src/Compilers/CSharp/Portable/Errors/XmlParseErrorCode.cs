@@ -30,7 +30,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         XML_EndTagExpected,
         XML_ExpectedIdentifier,
         XML_ExpectedEndOfTag,
-
         // This is the default case for when we find an unexpected token. It
         // does not correspond to any MSXML error.
         XML_InvalidToken,

@@ -105,7 +105,6 @@ namespace SerializationTestTypes
         {
             return _data.GetEnumerator();
         }
-
         #endregion
     }
 
@@ -175,7 +174,6 @@ namespace SerializationTestTypes
         {
             return _data.GetEnumerator();
         }
-
         #endregion
     }
 
@@ -462,6 +460,5 @@ namespace SerializationTestTypes
             }
         }
     }
-
     #endregion
 }

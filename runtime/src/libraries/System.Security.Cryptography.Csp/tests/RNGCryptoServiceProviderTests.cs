@@ -64,7 +64,10 @@ namespace System.Security.Cryptography.RNG.Tests
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
-                AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetNonZeroBytes(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "data",
+                    () => rng.GetNonZeroBytes(null)
+                );
 
                 // Array should not have any zeros
                 byte[] rand = new byte[65536];
@@ -78,7 +81,10 @@ namespace System.Security.Cryptography.RNG.Tests
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
-                AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetNonZeroBytes(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "data",
+                    () => rng.GetNonZeroBytes(null)
+                );
 
                 // Array should not have any zeros
                 byte[] rand = new byte[65536];
@@ -117,8 +123,12 @@ namespace System.Security.Cryptography.RNG.Tests
             using (new RNGCryptoServiceProvider((string)null)) { }
             using (new RNGCryptoServiceProvider((CspParameters)null)) { }
 
-            Assert.Throws<PlatformNotSupportedException>(() =>
-            { using (new RNGCryptoServiceProvider(new CspParameters())) { } });
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                {
+                    using (new RNGCryptoServiceProvider(new CspParameters())) { }
+                }
+            );
         }
     }
 }

@@ -50,13 +50,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         private ImmutableArray<CSharpAttributeData> _lazyReturnTypeCustomAttributes;
 
         private ImmutableArray<MethodSymbol> _lazyExplicitInterfaceImplementations;
-        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo = CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
+        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo =
+            CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
 
         private TypeWithAnnotations.Boxed _lazyReturnType;
 
-        private UnmanagedCallersOnlyAttributeData _lazyUnmanagedAttributeData = UnmanagedCallersOnlyAttributeData.Uninitialized;
+        private UnmanagedCallersOnlyAttributeData _lazyUnmanagedAttributeData =
+            UnmanagedCallersOnlyAttributeData.Uninitialized;
 
-        public RetargetingMethodSymbol(RetargetingModuleSymbol retargetingModule, MethodSymbol underlyingMethod)
+        public RetargetingMethodSymbol(
+            RetargetingModuleSymbol retargetingModule,
+            MethodSymbol underlyingMethod
+        )
         {
             Debug.Assert((object)retargetingModule != null);
             Debug.Assert((object)underlyingMethod != null);
@@ -68,26 +73,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private RetargetingModuleSymbol.RetargetingSymbolTranslator RetargetingTranslator
         {
-            get
-            {
-                return _retargetingModule.RetargetingTranslator;
-            }
+            get { return _retargetingModule.RetargetingTranslator; }
         }
 
         public RetargetingModuleSymbol RetargetingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
         public override MethodSymbol UnderlyingMethod
         {
-            get
-            {
-                return _underlyingMethod;
-            }
+            get { return _underlyingMethod; }
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
@@ -102,8 +98,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
                     else
                     {
-                        ImmutableInterlocked.InterlockedCompareExchange(ref _lazyTypeParameters,
-                            this.RetargetingTranslator.Retarget(_underlyingMethod.TypeParameters), default(ImmutableArray<TypeParameterSymbol>));
+                        ImmutableInterlocked.InterlockedCompareExchange(
+                            ref _lazyTypeParameters,
+                            this.RetargetingTranslator.Retarget(_underlyingMethod.TypeParameters),
+                            default(ImmutableArray<TypeParameterSymbol>)
+                        );
                     }
                 }
 
@@ -132,9 +131,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 if (_lazyReturnType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyReturnType,
-                                                new TypeWithAnnotations.Boxed(this.RetargetingTranslator.Retarget(_underlyingMethod.ReturnTypeWithAnnotations, RetargetOptions.RetargetPrimitiveTypesByTypeCode, this.ContainingType)),
-                                                null);
+                    Interlocked.CompareExchange(
+                        ref _lazyReturnType,
+                        new TypeWithAnnotations.Boxed(
+                            this.RetargetingTranslator.Retarget(
+                                _underlyingMethod.ReturnTypeWithAnnotations,
+                                RetargetOptions.RetargetPrimitiveTypesByTypeCode,
+                                this.ContainingType
+                            )
+                        ),
+                        null
+                    );
                 }
                 return _lazyReturnType.Value;
             }
@@ -144,7 +151,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return RetargetingTranslator.RetargetModifiers(_underlyingMethod.RefCustomModifiers, ref _lazyRefCustomModifiers);
+                return RetargetingTranslator.RetargetModifiers(
+                    _underlyingMethod.RefCustomModifiers,
+                    ref _lazyRefCustomModifiers
+                );
             }
         }
 
@@ -154,7 +164,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 if (_lazyParameters.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyParameters, this.RetargetParameters());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyParameters,
+                        this.RetargetParameters()
+                    );
                 }
 
                 return _lazyParameters;
@@ -188,50 +201,73 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 var associatedPropertyOrEvent = _underlyingMethod.AssociatedSymbol;
-                return (object)associatedPropertyOrEvent == null ? null : this.RetargetingTranslator.Retarget(associatedPropertyOrEvent);
+                return (object)associatedPropertyOrEvent == null
+                  ? null
+                  : this.RetargetingTranslator.Retarget(associatedPropertyOrEvent);
             }
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return this.RetargetingTranslator.Retarget(_underlyingMethod.ContainingSymbol);
-            }
+            get { return this.RetargetingTranslator.Retarget(_underlyingMethod.ContainingSymbol); }
         }
 
         internal override MarshalPseudoCustomAttributeData ReturnValueMarshallingInformation
         {
             get
             {
-                return _retargetingModule.RetargetingTranslator.Retarget(_underlyingMethod.ReturnValueMarshallingInformation);
+                return _retargetingModule.RetargetingTranslator.Retarget(
+                    _underlyingMethod.ReturnValueMarshallingInformation
+                );
             }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(_underlyingMethod.GetAttributes(), ref _lazyCustomAttributes);
+            return this.RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingMethod.GetAttributes(),
+                ref _lazyCustomAttributes
+            );
         }
 
-        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return this.RetargetingTranslator.RetargetAttributes(_underlyingMethod.GetCustomAttributesToEmit(moduleBuilder));
+            return this.RetargetingTranslator.RetargetAttributes(
+                _underlyingMethod.GetCustomAttributesToEmit(moduleBuilder)
+            );
         }
 
         // Get return type attributes
         public override ImmutableArray<CSharpAttributeData> GetReturnTypeAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(_underlyingMethod.GetReturnTypeAttributes(), ref _lazyReturnTypeCustomAttributes);
+            return this.RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingMethod.GetReturnTypeAttributes(),
+                ref _lazyReturnTypeCustomAttributes
+            );
         }
 
 #nullable enable
-        internal override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(bool forceComplete)
+        internal override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        )
         {
-            if (ReferenceEquals(_lazyUnmanagedAttributeData, UnmanagedCallersOnlyAttributeData.Uninitialized))
+            if (
+                ReferenceEquals(
+                    _lazyUnmanagedAttributeData,
+                    UnmanagedCallersOnlyAttributeData.Uninitialized
+                )
+            )
             {
                 var data = _underlyingMethod.GetUnmanagedCallersOnlyAttributeData(forceComplete);
-                if (ReferenceEquals(data, UnmanagedCallersOnlyAttributeData.Uninitialized)
-                    || ReferenceEquals(data, UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound))
+                if (
+                    ReferenceEquals(data, UnmanagedCallersOnlyAttributeData.Uninitialized)
+                    || ReferenceEquals(
+                        data,
+                        UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
+                    )
+                )
                 {
                     // Underlying hasn't been found yet either, just return it. We'll check again the next
                     // time this is called
@@ -243,14 +279,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     var builder = PooledHashSet<INamedTypeSymbolInternal>.GetInstance();
                     foreach (var identifier in data.CallingConventionTypes)
                     {
-                        builder.Add((INamedTypeSymbolInternal)RetargetingTranslator.Retarget((NamedTypeSymbol)identifier));
+                        builder.Add(
+                            (INamedTypeSymbolInternal)RetargetingTranslator.Retarget(
+                                (NamedTypeSymbol)identifier
+                            )
+                        );
                     }
 
                     data = UnmanagedCallersOnlyAttributeData.Create(builder.ToImmutableHashSet());
                     builder.Free();
                 }
 
-                Interlocked.CompareExchange(ref _lazyUnmanagedAttributeData, data, UnmanagedCallersOnlyAttributeData.Uninitialized);
+                Interlocked.CompareExchange(
+                    ref _lazyUnmanagedAttributeData,
+                    data,
+                    UnmanagedCallersOnlyAttributeData.Uninitialized
+                );
             }
 
             return _lazyUnmanagedAttributeData;
@@ -259,18 +303,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _retargetingModule.ContainingAssembly;
-            }
+            get { return _retargetingModule.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
         internal override bool IsExplicitInterfaceImplementation
@@ -287,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     ImmutableInterlocked.InterlockedCompareExchange(
                         ref _lazyExplicitInterfaceImplementations,
                         this.RetargetExplicitInterfaceImplementations(),
-                        default(ImmutableArray<MethodSymbol>));
+                        default(ImmutableArray<MethodSymbol>)
+                    );
                 }
                 return _lazyExplicitInterfaceImplementations;
             }
@@ -308,7 +347,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             for (int i = 0; i < impls.Length; i++)
             {
-                var retargeted = this.RetargetingTranslator.Retarget(impls[i], MemberSignatureComparer.RetargetedExplicitImplementationComparer);
+                var retargeted = this.RetargetingTranslator.Retarget(
+                    impls[i],
+                    MemberSignatureComparer.RetargetedExplicitImplementationComparer
+                );
                 if ((object)retargeted != null)
                 {
                     builder.Add(retargeted);
@@ -325,10 +367,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return
-                    _underlyingMethod.RequiresExplicitOverride(out _)
-                        ? this.RetargetingTranslator.Retarget(_underlyingMethod.OverriddenMethod, MemberSignatureComparer.RetargetedExplicitImplementationComparer)
-                        : null;
+                return _underlyingMethod.RequiresExplicitOverride(out _)
+                  ? this.RetargetingTranslator.Retarget(
+                        _underlyingMethod.OverriddenMethod,
+                        MemberSignatureComparer.RetargetedExplicitImplementationComparer
+                    )
+                  : null;
             }
         }
 

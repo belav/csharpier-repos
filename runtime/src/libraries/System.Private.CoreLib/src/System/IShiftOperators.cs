@@ -13,8 +13,7 @@ namespace System
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
     /// <typeparam name="TResult">The type that contains the result of shifting <typeparamref name="TSelf" /> by <typeparamref name="TResult" />.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IShiftOperators<TSelf, TResult>
-        where TSelf : IShiftOperators<TSelf, TResult>
+    public interface IShiftOperators<TSelf, TResult> where TSelf : IShiftOperators<TSelf, TResult>
     {
         /// <summary>Shifts a value left by a given amount.</summary>
         /// <param name="value">The value which is shifted left by <paramref name="shiftAmount" />.</param>
@@ -28,7 +27,6 @@ namespace System
         /// <returns>The result of shifting <paramref name="value" /> right by <paramref name="shiftAmount" />.</returns>
         /// <remarks>This operation is meant to perform a signed (otherwise known as an arithmetic) right shift on signed types.</remarks>
         static abstract TResult operator >>(TSelf value, int shiftAmount); // TODO_GENERIC_MATH: shiftAmount should be TOther
-
         // /// <summary>Shifts a value right by a given amount.</summary>
         // /// <param name="value">The value which is shifted right by <paramref name="shiftAmount" />.</param>
         // /// <param name="shiftAmount">The amount by which <paramref name="value" /> is shifted right.</param>

@@ -30,14 +30,18 @@ internal sealed class SectionRegistry
     {
         if (!_providersByName.TryGetValue(name, out var providers))
         {
-            throw new InvalidOperationException($"There are no content providers with the name '{name}'.");
+            throw new InvalidOperationException(
+                $"There are no content providers with the name '{name}'."
+            );
         }
 
         var index = providers.LastIndexOf(provider);
 
         if (index < 0)
         {
-            throw new InvalidOperationException($"The provider was not found in the providers list of name '{name}'.");
+            throw new InvalidOperationException(
+                $"The provider was not found in the providers list of name '{name}'."
+            );
         }
 
         providers.RemoveAt(index);
@@ -55,7 +59,9 @@ internal sealed class SectionRegistry
     {
         if (_subscribersByName.ContainsKey(name))
         {
-            throw new InvalidOperationException($"There is already a subscriber to the content '{name}'.");
+            throw new InvalidOperationException(
+                $"There is already a subscriber to the content '{name}'."
+            );
         }
 
         // Notify the new subscriber with any existing content.
@@ -69,7 +75,9 @@ internal sealed class SectionRegistry
     {
         if (!_subscribersByName.Remove(name))
         {
-            throw new InvalidOperationException($"The subscriber with name '{name}' is already unsubscribed.");
+            throw new InvalidOperationException(
+                $"The subscriber with name '{name}' is already unsubscribed."
+            );
         }
     }
 
@@ -77,7 +85,9 @@ internal sealed class SectionRegistry
     {
         if (!_providersByName.TryGetValue(name, out var providers))
         {
-            throw new InvalidOperationException($"There are no content providers with the name '{name}'.");
+            throw new InvalidOperationException(
+                $"There are no content providers with the name '{name}'."
+            );
         }
 
         // We only notify content changed for subscribers when the content of the
@@ -88,13 +98,12 @@ internal sealed class SectionRegistry
         }
     }
 
-    private RenderFragment? GetCurrentProviderContentOrDefault(List<ISectionContentProvider> providers)
-        => providers.Count != 0
-            ? providers[^1].Content
-            : null;
+    private RenderFragment? GetCurrentProviderContentOrDefault(
+        List<ISectionContentProvider> providers
+    ) => providers.Count != 0 ? providers[^1].Content : null;
 
-    private RenderFragment? GetCurrentProviderContentOrDefault(string name)
-        => _providersByName.TryGetValue(name, out var existingList)
+    private RenderFragment? GetCurrentProviderContentOrDefault(string name) =>
+        _providersByName.TryGetValue(name, out var existingList)
             ? GetCurrentProviderContentOrDefault(existingList)
             : null;
 

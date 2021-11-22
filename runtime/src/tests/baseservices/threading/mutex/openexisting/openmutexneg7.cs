@@ -36,13 +36,12 @@ class OpenMutexNeg
         }
         catch (AbandonedMutexException)
         {
-            //Expected	
+            //Expected
             iRet = 100;
         }
         catch (Exception e)
         {
-            Console.WriteLine("Caught unexpected exception: " + 
-                e.ToString());
+            Console.WriteLine("Caught unexpected exception: " + e.ToString());
         }
 
         GC.KeepAlive(mut);

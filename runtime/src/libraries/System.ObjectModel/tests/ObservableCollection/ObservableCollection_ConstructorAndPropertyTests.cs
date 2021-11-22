@@ -78,7 +78,10 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void IEnumerableConstructorTest_Negative()
         {
-            AssertExtensions.Throws<ArgumentNullException>("collection", () => new ObservableCollection<string>((IEnumerable<string>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collection",
+                () => new ObservableCollection<string>((IEnumerable<string>)null)
+            );
         }
 
         /// <summary>
@@ -87,7 +90,9 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void ItemTestSet()
         {
-            var col = new ObservableCollection<Guid>(new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() });
+            var col = new ObservableCollection<Guid>(
+                new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() }
+            );
             for (int i = 0; i < col.Count; ++i)
             {
                 Guid guid = Guid.NewGuid();
@@ -113,28 +118,54 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void IsReadOnlyTest()
         {
-            var col = new ObservableCollection<Guid>(new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() });
+            var col = new ObservableCollection<Guid>(
+                new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() }
+            );
             Assert.False(((ICollection<Guid>)col).IsReadOnly);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttributeTests()
         {
-            ObservableCollection<int> col = new ObservableCollection<int>(new[] {1, 2, 3, 4});
+            ObservableCollection<int> col = new ObservableCollection<int>(new[] { 1, 2, 3, 4 });
             DebuggerAttributes.ValidateDebuggerDisplayReferences(col);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                col
+            );
+            PropertyInfo itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(col, items);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttribute_NullCollection_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() => DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(ObservableCollection<int>), null));
-            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(ex.InnerException);
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
+                () =>
+                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                        typeof(ObservableCollection<int>),
+                        null
+                    )
+            );
+            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
+                ex.InnerException
+            );
         }
 
         private partial class ObservableCollectionSubclass<T> : ObservableCollection<T>
@@ -150,7 +181,10 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void ListConstructorTest_Negative()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => new ObservableCollection<string>((List<string>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "list",
+                () => new ObservableCollection<string>((List<string>)null)
+            );
         }
 
         [Fact]

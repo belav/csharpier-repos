@@ -131,11 +131,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi2).GetMethod(nameof(Bmi2.ParallelBitExtract), new Type[] { typeof(UInt32), typeof(UInt32) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data2))
-                                     });
+            var result = typeof(Bmi2)
+                .GetMethod(
+                    nameof(Bmi2.ParallelBitExtract),
+                    new Type[] { typeof(UInt32), typeof(UInt32) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt32)result);
         }
@@ -144,10 +152,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Bmi2.ParallelBitExtract(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Bmi2.ParallelBitExtract(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,37 +225,43 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt32 left, UInt32 right, UInt32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32 left,
+            UInt32 right,
+            UInt32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            
-// The validation logic defined here for Bmi2.ParallelBitDeposit and Bmi2.ParallelBitExtract is
-// based on the 'Operation' pseudo-code defined for the pdep and pext instruction in the 'Intel®
-// 64 and IA-32 Architectures Software Developer’s Manual; Volume 2 (2A, 2B, 2C & 2D): Instruction
-// Set Reference, A-Z'
+            // The validation logic defined here for Bmi2.ParallelBitDeposit and Bmi2.ParallelBitExtract is
+            // based on the 'Operation' pseudo-code defined for the pdep and pext instruction in the 'Intel®
+            // 64 and IA-32 Architectures Software Developer’s Manual; Volume 2 (2A, 2B, 2C & 2D): Instruction
+            // Set Reference, A-Z'
 
-uint temp = left;
-uint mask = right;
-uint dest = 0;
-byte m = 0, k = 0;
+            uint temp = left;
+            uint mask = right;
+            uint dest = 0;
+            byte m = 0,
+                k = 0;
 
-while (m < 32)
-{
-    if (((mask >> m) & 1) == 1) // Extract bit at index m of mask
-    {
-        dest |= (((temp >> m) & 1) << k); // Extract bit at index m of temp and insert to index k of dest
-        k++;
-    }
-    m++;
-}
+            while (m < 32)
+            {
+                if (((mask >> m) & 1) == 1) // Extract bit at index m of mask
+                {
+                    dest |= (((temp >> m) & 1) << k); // Extract bit at index m of temp and insert to index k of dest
+                    k++;
+                }
+                m++;
+            }
 
-isUnexpectedResult = (dest != result);
-
+            isUnexpectedResult = (dest != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi2)}.{nameof(Bmi2.ParallelBitExtract)}<UInt32>(UInt32, UInt32): ParallelBitExtract failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi2)}.{nameof(Bmi2.ParallelBitExtract)}<UInt32>(UInt32, UInt32): ParallelBitExtract failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

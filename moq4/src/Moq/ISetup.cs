@@ -8,30 +8,30 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	///   A setup configured on a mock.
 	/// </summary>
 	/// <seealso cref="Mock.Setups"/>
-	public interface ISetup
-	{
-		/// <summary>
+    public interface ISetup
+    {
+        /// <summary>
 		///   The setup expression.
 		/// </summary>
-		LambdaExpression Expression { get; }
+        LambdaExpression Expression { get; }
 
-		// NOTE regarding the `InnerMock` and `InnerMocks` properties below:
-		//
-		// Moq has support for multi-method setups, but does not yet make actual use of them.
-		// Once that changes, some setups may have more than one inner mock. This possibility
-		// has already been accounted for in Moq's internals, but not in this interface:
-		// The `InnerMock` property should really be replaced with an `InnerMocks` one.
-		//
-		// Before making this change, let's wait a little longer to see whether it can be avoided.
-		// This is a distinct possibility since fixing Moq's recursive verification algorithm
-		// may do away with the need to expose the "inner mock" concept altogether. It would be
-		// a pity to add `InnerMocks`, only to have both properties become obsolete soon after.
+        // NOTE regarding the `InnerMock` and `InnerMocks` properties below:
+        //
+        // Moq has support for multi-method setups, but does not yet make actual use of them.
+        // Once that changes, some setups may have more than one inner mock. This possibility
+        // has already been accounted for in Moq's internals, but not in this interface:
+        // The `InnerMock` property should really be replaced with an `InnerMocks` one.
+        //
+        // Before making this change, let's wait a little longer to see whether it can be avoided.
+        // This is a distinct possibility since fixing Moq's recursive verification algorithm
+        // may do away with the need to expose the "inner mock" concept altogether. It would be
+        // a pity to add `InnerMocks`, only to have both properties become obsolete soon after.
 
-		/// <summary>
+        /// <summary>
 		///   Gets the inner mock of this setup (if present and known).
 		///   <para>
 		///     An "inner mock" is the <see cref="Moq.Mock"/> instance associated with a setup's return value,
@@ -46,46 +46,46 @@ namespace Moq
 		///     since calling a user-provided function could have effects beyond Moq's understanding and control.
 		///   </para>
 		/// </summary>
-		// /// <exception cref="InvalidOperationException">The setup has more than one inner mock.</exception>
-		// [Obsolete("Use 'InnerMocks' instead.")]
-		// [EditorBrowsable(EditorBrowsableState.Never)]
-		Mock InnerMock { get; }
+        // /// <exception cref="InvalidOperationException">The setup has more than one inner mock.</exception>
+        // [Obsolete("Use 'InnerMocks' instead.")]
+        // [EditorBrowsable(EditorBrowsableState.Never)]
+        Mock InnerMock { get; }
 
-		// /// <summary>
-		// ///   Gets the inner mocks of this setup (if present and known).
-		// ///   <para>
-		// ///     An "inner mock" is the <see cref="Moq.Mock"/> instance associated with a setup's return value,
-		// ///     if that setup is configured to return a mock object.
-		// ///   </para>
-		// ///   <para>
-		// ///     This property will return an empty sequence if a setup either does not return any mock objects,
-		// ///     or if Moq cannot safely determine its return value(s) without risking any side effects. For instance,
-		// ///     Moq is able to inspect the return value if it is a constant (e.g. <c>`.Returns(value)`</c>);
-		// ///     if, on the other hand, it gets computed by a factory function (e.g. <c>`.Returns(() => value)`</c>),
-		// ///     Moq will not attempt to retrieve that value just to find the inner mock,
-		// ///     since calling a user-provided function could have effects beyond Moq's understanding and control.
-		// ///   </para>
-		// /// </summary>
-		// IEnumerable<Mock> InnerMocks { get; }
+        // /// <summary>
+        // ///   Gets the inner mocks of this setup (if present and known).
+        // ///   <para>
+        // ///     An "inner mock" is the <see cref="Moq.Mock"/> instance associated with a setup's return value,
+        // ///     if that setup is configured to return a mock object.
+        // ///   </para>
+        // ///   <para>
+        // ///     This property will return an empty sequence if a setup either does not return any mock objects,
+        // ///     or if Moq cannot safely determine its return value(s) without risking any side effects. For instance,
+        // ///     Moq is able to inspect the return value if it is a constant (e.g. <c>`.Returns(value)`</c>);
+        // ///     if, on the other hand, it gets computed by a factory function (e.g. <c>`.Returns(() => value)`</c>),
+        // ///     Moq will not attempt to retrieve that value just to find the inner mock,
+        // ///     since calling a user-provided function could have effects beyond Moq's understanding and control.
+        // ///   </para>
+        // /// </summary>
+        // IEnumerable<Mock> InnerMocks { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup is conditional.
 		/// </summary>
 		/// <seealso cref="Mock{T}.When(Func{bool})"/>
-		bool IsConditional { get; }
+        bool IsConditional { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup was matched by at least one invocation on the mock.
 		/// </summary>
-		bool IsMatched { get; }
+        bool IsMatched { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup has been overridden
 		///   (that is, whether it is being shadowed by a more recent non-conditional setup with an equal expression).
 		/// </summary>
-		bool IsOverridden { get; }
+        bool IsOverridden { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this setup is "verifiable".
 		/// </summary>
 		/// <remarks>
@@ -96,14 +96,14 @@ namespace Moq
 		///     <see cref="Mock.Verify()"/>, however, will only verify setups where this property is <see langword="true"/>.
 		///   </para>
 		/// </remarks>
-		bool IsVerifiable { get; }
+        bool IsVerifiable { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Returns the <see cref="Mock"/> instance to which this setup belongs.
 		/// </summary>
-		Mock Mock { get; }
+        Mock Mock { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Returns the original setup expression from which this setup resulted.
 		///   <para>
 		///     For setups doing a simple member access or method invocation (such as <c>`mock => mock.Member`</c>),
@@ -126,9 +126,9 @@ namespace Moq
 		///     e.g. by <see cref="Mock{T}.SetupAllProperties"/> or by <see cref="DefaultValue.Mock"/>.
 		///   </para>
 		/// </summary>
-		Expression OriginalExpression { get; }
+        Expression OriginalExpression { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies this setup and optionally all verifiable setups of its inner mock (if present and known).
 		///   <para>
 		///     If <paramref name="recursive"/> is set to <see langword="true"/>,
@@ -145,9 +145,9 @@ namespace Moq
 		/// </exception>
 		/// <seealso cref="VerifyAll()"/>
 		/// <seealso cref="Mock.Verify()"/>
-		void Verify(bool recursive = true);
+        void Verify(bool recursive = true);
 
-		/// <summary>
+        /// <summary>
 		///   Verifies this setup and all setups of its inner mock (if present and known),
 		///   regardless of whether they have been flagged as verifiable.
 		///   <para>
@@ -160,6 +160,6 @@ namespace Moq
 		/// </exception>
 		/// <seealso cref="Verify(bool)"/>
 		/// <seealso cref="Mock.VerifyAll()"/>
-		void VerifyAll();
-	}
+        void VerifyAll();
+    }
 }

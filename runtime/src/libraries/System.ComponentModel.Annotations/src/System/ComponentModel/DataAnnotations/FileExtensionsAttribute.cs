@@ -8,14 +8,15 @@ using System.Linq;
 
 namespace System.ComponentModel.DataAnnotations
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class FileExtensionsAttribute : DataTypeAttribute
     {
         private string? _extensions;
 
-        public FileExtensionsAttribute()
-            : base(DataType.Upload)
+        public FileExtensionsAttribute() : base(DataType.Upload)
         {
             // Set DefaultErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.
@@ -29,7 +30,8 @@ namespace System.ComponentModel.DataAnnotations
             set => _extensions = value;
         }
 
-        private string ExtensionsFormatted => ExtensionsParsed.Aggregate((left, right) => left + ", " + right);
+        private string ExtensionsFormatted =>
+            ExtensionsParsed.Aggregate((left, right) => left + ", " + right);
 
         private string ExtensionsNormalized =>
             Extensions.Replace(" ", string.Empty).Replace(".", string.Empty).ToLowerInvariant();
@@ -40,7 +42,12 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         public override string FormatErrorMessage(string name) =>
-            string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, ExtensionsFormatted);
+            string.Format(
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                ExtensionsFormatted
+            );
 
         public override bool IsValid(object? value) =>
             value == null || value is string valueAsString && ValidateExtension(valueAsString);

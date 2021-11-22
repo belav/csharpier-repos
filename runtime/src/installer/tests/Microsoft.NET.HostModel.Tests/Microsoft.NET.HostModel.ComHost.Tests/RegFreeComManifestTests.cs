@@ -21,9 +21,7 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
         public void RegFreeComManifestCorrectlyIncludesComHostFile()
         {
             using TestDirectory directory = TestDirectory.Create();
-            JObject clsidMap = new JObject
-            {
-            };
+            JObject clsidMap = new JObject { };
 
             string clsidmapPath = Path.Combine(directory.Path, "test.clsidmap");
             string json = JsonConvert.SerializeObject(clsidMap);
@@ -34,7 +32,13 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
             string regFreeComManifestPath = Path.Combine(directory.Path, "test.manifest");
 
-            RegFreeComManifest.CreateManifestFromClsidmap("assemblyName", comHostName, "1.0.0.0", clsidmapPath, regFreeComManifestPath);
+            RegFreeComManifest.CreateManifestFromClsidmap(
+                "assemblyName",
+                comHostName,
+                "1.0.0.0",
+                clsidmapPath,
+                regFreeComManifestPath
+            );
 
             using FileStream manifestStream = File.OpenRead(regFreeComManifestPath);
 
@@ -56,10 +60,7 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
             string assemblyVersion = "1.0.0.0";
             JObject clsidMap = new JObject
             {
-                {
-                    guid,
-                    new JObject() { {"assembly", assemblyName }, {"type", typeName } }
-                }
+                { guid, new JObject() { { "assembly", assemblyName }, { "type", typeName } } }
             };
 
             string clsidmapPath = Path.Combine(directory.Path, "test.clsidmap");
@@ -70,7 +71,13 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
             string regFreeComManifestPath = Path.Combine(directory.Path, "test.manifest");
 
-            RegFreeComManifest.CreateManifestFromClsidmap(assemblyName, comHostName, assemblyVersion, clsidmapPath, regFreeComManifestPath);
+            RegFreeComManifest.CreateManifestFromClsidmap(
+                assemblyName,
+                comHostName,
+                assemblyVersion,
+                clsidmapPath,
+                regFreeComManifestPath
+            );
 
             using FileStream manifestStream = File.OpenRead(regFreeComManifestPath);
 
@@ -78,7 +85,11 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
             XElement fileElement = manifest.Element(regFreeComManifestNamespace + "file");
 
-            Assert.Single(fileElement.Elements(regFreeComManifestNamespace + "comClass").Where(cls => cls.Attribute("clsid").Value == guid));
+            Assert.Single(
+                fileElement
+                    .Elements(regFreeComManifestNamespace + "comClass")
+                    .Where(cls => cls.Attribute("clsid").Value == guid)
+            );
         }
 
         [Fact]
@@ -94,7 +105,12 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
             {
                 {
                     guid,
-                    new JObject() { {"assembly", assemblyName }, {"type", typeName }, { "progid", progId } }
+                    new JObject()
+                    {
+                        { "assembly", assemblyName },
+                        { "type", typeName },
+                        { "progid", progId }
+                    }
                 }
             };
 
@@ -106,7 +122,13 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
             string regFreeComManifestPath = Path.Combine(directory.Path, "test.manifest");
 
-            RegFreeComManifest.CreateManifestFromClsidmap(assemblyName, comHostName, assemblyVersion, clsidmapPath, regFreeComManifestPath);
+            RegFreeComManifest.CreateManifestFromClsidmap(
+                assemblyName,
+                comHostName,
+                assemblyVersion,
+                clsidmapPath,
+                regFreeComManifestPath
+            );
 
             using FileStream manifestStream = File.OpenRead(regFreeComManifestPath);
 
@@ -114,7 +136,15 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
             XElement fileElement = manifest.Element(regFreeComManifestNamespace + "file");
 
-            Assert.Single(fileElement.Elements(regFreeComManifestNamespace + "comClass").Where(cls => cls.Attribute("clsid").Value == guid && cls.Attribute("progid").Value == progId));
+            Assert.Single(
+                fileElement
+                    .Elements(regFreeComManifestNamespace + "comClass")
+                    .Where(
+                        cls =>
+                            cls.Attribute("clsid").Value == guid
+                            && cls.Attribute("progid").Value == progId
+                    )
+            );
         }
     }
 }

@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             SyntaxReference syntaxReference,
             SourceLocation nameLocation,
-            ImmutableArray<Diagnostic> diagnostics)
-            : base(name)
+            ImmutableArray<Diagnostic> diagnostics
+        ) : base(name)
         {
             _syntaxReference = syntaxReference;
             _nameLocation = nameLocation;
@@ -34,26 +34,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public SourceLocation Location
         {
-            get
-            {
-                return new SourceLocation(this.SyntaxReference);
-            }
+            get { return new SourceLocation(this.SyntaxReference); }
         }
 
         public SyntaxReference SyntaxReference
         {
-            get
-            {
-                return _syntaxReference;
-            }
+            get { return _syntaxReference; }
         }
 
         public SourceLocation NameLocation
         {
-            get
-            {
-                return _nameLocation;
-            }
+            get { return _nameLocation; }
         }
 
         protected override ImmutableArray<Declaration> GetDeclarationChildren()
@@ -63,10 +54,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public new ImmutableArray<SingleNamespaceOrTypeDeclaration> Children
         {
-            get
-            {
-                return this.GetNamespaceOrTypeDeclarationChildren();
-            }
+            get { return this.GetNamespaceOrTypeDeclarationChildren(); }
         }
 
         protected abstract ImmutableArray<SingleNamespaceOrTypeDeclaration> GetNamespaceOrTypeDeclarationChildren();

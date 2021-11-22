@@ -38,8 +38,8 @@ public class PageResultExecutor : ViewExecutor
         IRazorViewEngine razorViewEngine,
         IRazorPageActivator razorPageActivator,
         DiagnosticListener diagnosticListener,
-        HtmlEncoder htmlEncoder)
-        : base(writerFactory, compositeViewEngine, diagnosticListener)
+        HtmlEncoder htmlEncoder
+    ) : base(writerFactory, compositeViewEngine, diagnosticListener)
     {
         _razorViewEngine = razorViewEngine;
         _htmlEncoder = htmlEncoder;
@@ -76,7 +76,10 @@ public class PageResultExecutor : ViewExecutor
         }
 
         var viewContext = result.Page.ViewContext;
-        var pageAdapter = new RazorPageAdapter(result.Page, pageContext.ActionDescriptor.DeclaredModelTypeInfo!);
+        var pageAdapter = new RazorPageAdapter(
+            result.Page,
+            pageContext.ActionDescriptor.DeclaredModelTypeInfo!
+        );
 
         viewContext.View = new RazorView(
             _razorViewEngine,
@@ -84,7 +87,8 @@ public class PageResultExecutor : ViewExecutor
             viewStarts,
             pageAdapter,
             _htmlEncoder,
-            _diagnosticListener)
+            _diagnosticListener
+        )
         {
             OnAfterPageActivated = (page, currentViewContext) =>
             {
@@ -93,10 +97,10 @@ public class PageResultExecutor : ViewExecutor
                     return;
                 }
 
-                    // ViewContext is always activated with the "right" ViewData<T> type.
-                    // Copy that over to the PageContext since PageContext.ViewData is exposed
-                    // as the ViewData property on the Page that the user works with.
-                    pageContext.ViewData = currentViewContext.ViewData;
+                // ViewContext is always activated with the "right" ViewData<T> type.
+                // Copy that over to the PageContext since PageContext.ViewData is exposed
+                // as the ViewData property on the Page that the user works with.
+                pageContext.ViewData = currentViewContext.ViewData;
             },
         };
 
@@ -105,7 +109,8 @@ public class PageResultExecutor : ViewExecutor
 
     private void OnExecuting(PageContext pageContext)
     {
-        var viewDataValuesProvider = pageContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
+        var viewDataValuesProvider =
+            pageContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
         if (viewDataValuesProvider != null)
         {
             viewDataValuesProvider.ProvideViewDataValues(pageContext.ViewData);

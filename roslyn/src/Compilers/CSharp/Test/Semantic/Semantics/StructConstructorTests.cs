@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         public void PublicParameterlessConstructor(bool useCompilationReference)
         {
             var sourceA =
-@"public struct S<T>
+                @"public struct S<T>
 {
     public readonly bool Initialized;
     public S() { Initialized = true; }
@@ -28,14 +28,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             comp.VerifyDiagnostics(
                 // (4,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     public S() { Initialized = true; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S").WithArguments("parameterless struct constructors", "10.0").WithLocation(4, 12));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(4, 12)
+            );
 
             comp = CreateCompilation(sourceA);
             comp.VerifyDiagnostics();
             var refA = AsReference(comp, useCompilationReference);
 
             var sourceB =
-@"using System;
+                @"using System;
 class Program
 {
     static T CreateNew<T>() where T : new() => new T();
@@ -51,20 +54,23 @@ class Program
     }
 }";
             bool secondCall = ExecutionConditionUtil.IsCoreClr; // .NET Framework ignores constructor in second call to Activator.CreateInstance<T>().
-            CompileAndVerify(sourceB, references: new[] { refA }, expectedOutput:
-$@"True
+            CompileAndVerify(
+                sourceB,
+                references: new[] { refA },
+                expectedOutput: $@"True
 True
 {secondCall}
 True
 {secondCall}
-True");
+True"
+            );
         }
 
         [Fact]
         public void NonPublicParameterlessConstructor_01()
         {
             var source =
-@"public struct A0 { public A0() { } }
+                @"public struct A0 { public A0() { } }
 public struct A1 { internal A1() { } }
 public struct A2 { private A2() { } }
 public struct A3 { A3() { } }
@@ -100,58 +106,77 @@ public class C
             comp.VerifyDiagnostics(
                 // (2,29): error CS8938: The parameterless struct constructor must be 'public'.
                 // public struct A1 { internal A1() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A1").WithLocation(2, 29),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A1")
+                    .WithLocation(2, 29),
                 // (3,28): error CS8938: The parameterless struct constructor must be 'public'.
                 // public struct A2 { private A2() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A2").WithLocation(3, 28),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A2")
+                    .WithLocation(3, 28),
                 // (4,20): error CS8938: The parameterless struct constructor must be 'public'.
                 // public struct A3 { A3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A3").WithLocation(4, 20),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A3")
+                    .WithLocation(4, 20),
                 // (7,31): error CS8938: The parameterless struct constructor must be 'public'.
                 // internal struct B1 { internal B1() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "B1").WithLocation(7, 31),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "B1")
+                    .WithLocation(7, 31),
                 // (8,30): error CS8938: The parameterless struct constructor must be 'public'.
                 // internal struct B2 { private B2() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "B2").WithLocation(8, 30),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "B2")
+                    .WithLocation(8, 30),
                 // (9,22): error CS8938: The parameterless struct constructor must be 'public'.
                 // internal struct B3 { B3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "B3").WithLocation(9, 22),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "B3")
+                    .WithLocation(9, 22),
                 // (14,45): error CS8938: The parameterless struct constructor must be 'public'.
                 //     internal protected struct C1 { internal C1() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "C1").WithLocation(14, 45),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "C1")
+                    .WithLocation(14, 45),
                 // (15,44): error CS8938: The parameterless struct constructor must be 'public'.
                 //     internal protected struct C2 { private C2() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "C2").WithLocation(15, 44),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "C2")
+                    .WithLocation(15, 44),
                 // (16,36): error CS8938: The parameterless struct constructor must be 'public'.
                 //     internal protected struct C3 { C3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "C3").WithLocation(16, 36),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "C3")
+                    .WithLocation(16, 36),
                 // (19,36): error CS8938: The parameterless struct constructor must be 'public'.
                 //     protected struct D1 { internal D1() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "D1").WithLocation(19, 36),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "D1")
+                    .WithLocation(19, 36),
                 // (20,35): error CS8938: The parameterless struct constructor must be 'public'.
                 //     protected struct D2 { private D2() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "D2").WithLocation(20, 35),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "D2")
+                    .WithLocation(20, 35),
                 // (21,27): error CS8938: The parameterless struct constructor must be 'public'.
                 //     protected struct D3 { D3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "D3").WithLocation(21, 27),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "D3")
+                    .WithLocation(21, 27),
                 // (24,44): error CS8938: The parameterless struct constructor must be 'public'.
                 //     private protected struct E1 { internal E1() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "E1").WithLocation(24, 44),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "E1")
+                    .WithLocation(24, 44),
                 // (25,43): error CS8938: The parameterless struct constructor must be 'public'.
                 //     private protected struct E2 { private E2() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "E2").WithLocation(25, 43),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "E2")
+                    .WithLocation(25, 43),
                 // (26,35): error CS8938: The parameterless struct constructor must be 'public'.
                 //     private protected struct E3 { E3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "E3").WithLocation(26, 35),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "E3")
+                    .WithLocation(26, 35),
                 // (29,34): error CS8938: The parameterless struct constructor must be 'public'.
                 //     private struct F1 { internal F1() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "F1").WithLocation(29, 34),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "F1")
+                    .WithLocation(29, 34),
                 // (30,33): error CS8938: The parameterless struct constructor must be 'public'.
                 //     private struct F2 { private F2() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "F2").WithLocation(30, 33),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "F2")
+                    .WithLocation(30, 33),
                 // (31,25): error CS8938: The parameterless struct constructor must be 'public'.
                 //     private struct F3 { F3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "F3").WithLocation(31, 25));
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "F3")
+                    .WithLocation(31, 25)
+            );
         }
 
         [InlineData("assembly")]
@@ -160,14 +185,14 @@ public class C
         public void NonPublicParameterlessConstructor_02(string accessibility)
         {
             var sourceA =
-$@".class public sealed S extends [mscorlib]System.ValueType
+                $@".class public sealed S extends [mscorlib]System.ValueType
 {{
     .method {accessibility} hidebysig specialname rtspecialname instance void .ctor() cil managed {{ ret }}
 }}";
             var refA = CompileIL(sourceA);
 
             var sourceB =
-@"using System;
+                @"using System;
 class Program
 {
     static T CreateNew<T>() where T : new() => new T();
@@ -194,11 +219,14 @@ class Program
         Console.WriteLine(Invoke(() => CreateStruct2<S>()));
     }
 }";
-            CompileAndVerify(sourceB, references: new[] { refA }, expectedOutput:
-@"S
+            CompileAndVerify(
+                sourceB,
+                references: new[] { refA },
+                expectedOutput: @"S
 System.MissingMethodException
 System.MissingMethodException
-System.MissingMethodException");
+System.MissingMethodException"
+            );
         }
 
         [InlineData("internal")]
@@ -207,7 +235,7 @@ System.MissingMethodException");
         public void NonPublicParameterlessConstructor_03(string accessibility)
         {
             var sourceA =
-$@"public struct S
+                $@"public struct S
 {{
     {accessibility}
     S() {{ }}
@@ -216,12 +244,14 @@ $@"public struct S
             comp.VerifyDiagnostics(
                 // (4,5): error CS8938: The parameterless struct constructor must be 'public'.
                 //     S() { }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S").WithLocation(4, 5));
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S")
+                    .WithLocation(4, 5)
+            );
 
             var refA = comp.ToMetadataReference();
 
             var sourceB =
-@"class Program
+                @"class Program
 {
     static T CreateNew<T>() where T : new() => new T();
     static T CreateStruct<T>() where T : struct => new T();
@@ -236,13 +266,21 @@ $@"public struct S
             {
                 // (7,17): error CS0122: 'S.S()' is inaccessible due to its protection level
                 //         _ = new S();
-                Diagnostic(ErrorCode.ERR_BadAccess, "S").WithArguments("S.S()").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_BadAccess, "S")
+                    .WithArguments("S.S()")
+                    .WithLocation(7, 17),
                 // (8,13): error CS0310: 'S' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Program.CreateNew<T>()'
                 //         _ = CreateNew<S>();
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "CreateNew<S>").WithArguments("Program.CreateNew<T>()", "T", "S").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "CreateNew<S>")
+                    .WithArguments("Program.CreateNew<T>()", "T", "S")
+                    .WithLocation(8, 13),
             };
 
-            comp = CreateCompilation(sourceB, references: new[] { refA }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(expectedDiagnostics);
 
             comp = CreateCompilation(sourceB, references: new[] { refA });
@@ -258,7 +296,7 @@ $@"public struct S
         public void PublicConstructorPrivateStruct_NewConstraint(string accessibility)
         {
             var sourceA =
-$@"partial class Program
+                $@"partial class Program
 {{
     {accessibility} struct S
     {{
@@ -270,7 +308,7 @@ $@"partial class Program
     }}    
 }}";
             var sourceB =
-@"using System;
+                @"using System;
 partial class Program
 {
     static T CreateNew<T>() where T : new() => new T();
@@ -286,7 +324,7 @@ partial class Program
         public void ThisInitializer_01()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 using static Program;
 struct S1
 {
@@ -312,57 +350,67 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, expectedOutput:
-@"Two()
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"Two()
 new S1().Value: 2
 Two()
 new S1(null).Value: 2
 Three()
 new S2().Value: 3
-");
+"
+            );
 
-            verifier.VerifyIL("S1..ctor()",
-@"{
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.Two()""
   IL_0006:  stfld      ""int S1.Value""
   IL_000b:  ret
-}");
-            verifier.VerifyIL("S1..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor(object)",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""S1..ctor()""
   IL_0006:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldnull
   IL_0002:  call       ""S2..ctor(object)""
   IL_0007:  ret
-}");
-            verifier.VerifyIL("S2..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor(object)",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.Three()""
   IL_0006:  stfld      ""int S2.Value""
   IL_000b:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ThisInitializer_02()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 using static Program;
 struct S1
 {
@@ -388,8 +436,9 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, expectedOutput:
-@"Two()
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"Two()
 new S1().Value: 2
 Two()
 Three()
@@ -397,19 +446,23 @@ new S1(null).Value: 3
 Three()
 Two()
 new S2().Value: 2
-");
+"
+            );
 
-            verifier.VerifyIL("S1..ctor()",
-@"{
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.Two()""
   IL_0006:  stfld      ""int S1.Value""
   IL_000b:  ret
-}");
-            verifier.VerifyIL("S1..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor(object)",
+                @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -418,9 +471,11 @@ new S2().Value: 2
   IL_0007:  call       ""int Program.Three()""
   IL_000c:  stfld      ""int S1.Value""
   IL_0011:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -430,23 +485,26 @@ new S2().Value: 2
   IL_0008:  call       ""int Program.Two()""
   IL_000d:  stfld      ""int S2.Value""
   IL_0012:  ret
-}");
-            verifier.VerifyIL("S2..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor(object)",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.Three()""
   IL_0006:  stfld      ""int S2.Value""
   IL_000b:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ThisInitializer_03()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 using static Program;
 struct S0
 {
@@ -478,7 +536,9 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 new S0().Value: 0
 One()
 new S0(null).Value: 1
@@ -488,60 +548,71 @@ One()
 new S1(null).Value: 1
 One()
 new S2().Value: 1
-");
+"
+            );
 
             verifier.VerifyMissing("S0..ctor()");
-            verifier.VerifyIL("S0..ctor(object)",
-@"{
+            verifier.VerifyIL(
+                "S0..ctor(object)",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.One()""
   IL_0006:  stfld      ""int S0.Value""
   IL_000b:  ret
-}");
-            verifier.VerifyIL("S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.One()""
   IL_0006:  stfld      ""int S1.Value""
   IL_000b:  ret
-}");
-            verifier.VerifyIL("S1..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor(object)",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""S1..ctor()""
   IL_0006:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldnull
   IL_0002:  call       ""S2..ctor(object)""
   IL_0007:  ret
-}");
-            verifier.VerifyIL("S2..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor(object)",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  call       ""int Program.One()""
   IL_0006:  stfld      ""int S2.Value""
   IL_000b:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ThisInitializer_04()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 using static Program;
 struct S0
 {
@@ -575,8 +646,9 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, expectedOutput:
-@"new S0().Value: 0
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"new S0().Value: 0
 One()
 Two()
 new S0(null).Value: 2
@@ -591,11 +663,13 @@ One()
 Three()
 Two()
 new S2().Value: 2
-");
+"
+            );
 
             verifier.VerifyMissing("S0..ctor()");
-            verifier.VerifyIL("S0..ctor(object)",
-@"{
+            verifier.VerifyIL(
+                "S0..ctor(object)",
+                @"{
   // Code size       23 (0x17)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -605,9 +679,11 @@ new S2().Value: 2
   IL_000c:  call       ""int Program.Two()""
   IL_0011:  stfld      ""int S0.Value""
   IL_0016:  ret
-}");
-            verifier.VerifyIL("S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       23 (0x17)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -617,9 +693,11 @@ new S2().Value: 2
   IL_000c:  call       ""int Program.Two()""
   IL_0011:  stfld      ""int S1.Value""
   IL_0016:  ret
-}");
-            verifier.VerifyIL("S1..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor(object)",
+                @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -628,9 +706,11 @@ new S2().Value: 2
   IL_0007:  call       ""int Program.Three()""
   IL_000c:  stfld      ""int S1.Value""
   IL_0011:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -640,9 +720,11 @@ new S2().Value: 2
   IL_0008:  call       ""int Program.Two()""
   IL_000d:  stfld      ""int S2.Value""
   IL_0012:  ret
-}");
-            verifier.VerifyIL("S2..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor(object)",
+                @"{
   // Code size       23 (0x17)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -652,7 +734,8 @@ new S2().Value: 2
   IL_000c:  call       ""int Program.Three()""
   IL_0011:  stfld      ""int S2.Value""
   IL_0016:  ret
-}");
+}"
+            );
         }
 
         /// <summary>
@@ -663,7 +746,7 @@ new S2().Value: 2
         public void ThisInitializer_05()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 using static Program;
 struct S0
 {
@@ -696,8 +779,9 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, expectedOutput:
-@"new S0().Value: 0
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"new S0().Value: 0
 Two()
 new S0(null).Value: 2
 Two()
@@ -708,11 +792,13 @@ new S1(null).Value: 3
 Three()
 Two()
 new S2().Value: 2
-");
+"
+            );
 
             verifier.VerifyMissing("S0..ctor()");
-            verifier.VerifyIL("S0..ctor(object)",
-@"{
+            verifier.VerifyIL(
+                "S0..ctor(object)",
+                @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -722,9 +808,11 @@ new S2().Value: 2
   IL_0008:  call       ""int Program.Two()""
   IL_000d:  stfld      ""int S0.Value""
   IL_0012:  ret
-}");
-            verifier.VerifyIL("S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -734,9 +822,11 @@ new S2().Value: 2
   IL_0008:  call       ""int Program.Two()""
   IL_000d:  stfld      ""int S1.Value""
   IL_0012:  ret
-}");
-            verifier.VerifyIL("S1..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor(object)",
+                @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -745,9 +835,11 @@ new S2().Value: 2
   IL_0007:  call       ""int Program.Three()""
   IL_000c:  stfld      ""int S1.Value""
   IL_0011:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -757,9 +849,11 @@ new S2().Value: 2
   IL_0008:  call       ""int Program.Two()""
   IL_000d:  stfld      ""int S2.Value""
   IL_0012:  ret
-}");
-            verifier.VerifyIL("S2..ctor(object)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor(object)",
+                @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -769,14 +863,15 @@ new S2().Value: 2
   IL_0008:  call       ""int Program.Three()""
   IL_000d:  stfld      ""int S2.Value""
   IL_0012:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ThisInitializer_06()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 using static Program;
 struct S0
 {
@@ -804,8 +899,9 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, expectedOutput:
-@"new S0().Value: 0
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"new S0().Value: 0
 new S0(0).Value: 0
 Two()
 new S0((object)0).Value: 2
@@ -813,33 +909,38 @@ new S1().Value: 0
 new S1(1).Value: 0
 Two()
 new S1((object)1).Value: 2
-");
+"
+            );
 
             verifier.VerifyMissing("S0..ctor()");
-            verifier.VerifyIL("S0..ctor(int)",
-@"{
+            verifier.VerifyIL(
+                "S0..ctor(int)",
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  initobj    ""S0""
   IL_0007:  ret
-}");
+}"
+            );
             verifier.VerifyMissing("S1..ctor()");
-            verifier.VerifyIL("S1..ctor(int)",
-@"{
+            verifier.VerifyIL(
+                "S1..ctor(int)",
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  initobj    ""S1""
   IL_0007:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldInitializers_None()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 struct S0
 {
@@ -875,29 +976,41 @@ class Program
             comp.VerifyDiagnostics(
                 // (13,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     public S1() { Y = 1; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S1").WithArguments("parameterless struct constructors", "10.0").WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S1")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(13, 12),
                 // (13,12): error CS0171: Field 'S1.X' must be fully assigned before control is returned to the caller
                 //     public S1() { Y = 1; }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S1").WithArguments("S1.X").WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S1")
+                    .WithArguments("S1.X")
+                    .WithLocation(13, 12),
                 // (20,12): error CS0171: Field 'S2.X' must be fully assigned before control is returned to the caller
                 //     public S2(object y) { Y = y; }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S2").WithArguments("S2.X").WithLocation(20, 12));
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S2")
+                    .WithArguments("S2.X")
+                    .WithLocation(20, 12)
+            );
 
             comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             comp.VerifyDiagnostics(
                 // (13,12): error CS0171: Field 'S1.X' must be fully assigned before control is returned to the caller
                 //     public S1() { Y = 1; }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S1").WithArguments("S1.X").WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S1")
+                    .WithArguments("S1.X")
+                    .WithLocation(13, 12),
                 // (20,12): error CS0171: Field 'S2.X' must be fully assigned before control is returned to the caller
                 //     public S2(object y) { Y = y; }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S2").WithArguments("S2.X").WithLocation(20, 12));
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S2")
+                    .WithArguments("S2.X")
+                    .WithLocation(20, 12)
+            );
         }
 
         [Fact]
         public void FieldInitializers_01()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 struct S1
 {
@@ -933,26 +1046,38 @@ class Program
             comp.VerifyDiagnostics(
                 // (5,12): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     object X = null;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "X").WithArguments("struct field initializers", "10.0").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "X")
+                    .WithArguments("struct field initializers", "10.0")
+                    .WithLocation(5, 12),
                 // (11,12): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     object X = null;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "X").WithArguments("struct field initializers", "10.0").WithLocation(11, 12),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "X")
+                    .WithArguments("struct field initializers", "10.0")
+                    .WithLocation(11, 12),
                 // (13,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     public S2() { Y = 1; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2").WithArguments("parameterless struct constructors", "10.0").WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(13, 12),
                 // (19,12): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     object Y = null;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Y").WithArguments("struct field initializers", "10.0").WithLocation(19, 12));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Y")
+                    .WithArguments("struct field initializers", "10.0")
+                    .WithLocation(19, 12)
+            );
 
             comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             comp.VerifyDiagnostics();
 
-            var verifier = CompileAndVerify(comp, expectedOutput:
-@"(, )
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"(, )
 (, 1)
-(, )");
-            verifier.VerifyIL("Program.Main",
-@"{
+(, )"
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       50 (0x32)
   .maxstack  1
   .locals init (S3 V_0)
@@ -968,18 +1093,22 @@ class Program
   IL_0027:  box        ""S3""
   IL_002c:  call       ""void System.Console.WriteLine(object)""
   IL_0031:  ret
-}");
-            verifier.VerifyIL("S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldnull
   IL_0002:  stfld      ""object S1.X""
   IL_0007:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size       20 (0x14)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -990,10 +1119,12 @@ class Program
   IL_0009:  box        ""int""
   IL_000e:  stfld      ""object S2.Y""
   IL_0013:  ret
-}");
+}"
+            );
             verifier.VerifyMissing("S3..ctor()");
-            verifier.VerifyIL("S3..ctor(object)",
-@"{
+            verifier.VerifyIL(
+                "S3..ctor(object)",
+                @"{
   // Code size       15 (0xf)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1003,14 +1134,15 @@ class Program
   IL_0008:  ldarg.1
   IL_0009:  stfld      ""object S3.X""
   IL_000e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldInitializers_02()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 struct S1
 {
@@ -1048,8 +1180,10 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput:
-@"(1, )
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseExe,
+                expectedOutput: @"(1, )
 (2, 2)
 (, )
 (1, )
@@ -1057,9 +1191,11 @@ class Program
 (, )
 (1, 2)
 (2, 4)
-(, 6)");
-            verifier.VerifyIL("Program.Main",
-@"{
+(, 6)"
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size      193 (0xc1)
   .maxstack  2
   .locals init (S3 V_0,
@@ -1115,9 +1251,11 @@ class Program
   IL_00b6:  box        ""S3""
   IL_00bb:  call       ""void System.Console.WriteLine(object)""
   IL_00c0:  ret
-}");
-            verifier.VerifyIL("S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1125,9 +1263,11 @@ class Program
   IL_0002:  box        ""int""
   IL_0007:  stfld      ""object S1.X""
   IL_000c:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size       25 (0x19)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1139,10 +1279,12 @@ class Program
   IL_000e:  box        ""int""
   IL_0013:  stfld      ""object S2.Y""
   IL_0018:  ret
-}");
+}"
+            );
             verifier.VerifyMissing("S3..ctor()");
-            verifier.VerifyIL("S3..ctor(object)",
-@"{
+            verifier.VerifyIL(
+                "S3..ctor(object)",
+                @"{
   // Code size       25 (0x19)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1154,7 +1296,8 @@ class Program
   IL_000e:  box        ""int""
   IL_0013:  stfld      ""object S3.Y""
   IL_0018:  ret
-}");
+}"
+            );
         }
 
         // As above but with auto-properties.
@@ -1162,7 +1305,7 @@ class Program
         public void FieldInitializers_03()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 struct S1
 {
@@ -1199,17 +1342,22 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(new[] { source, IsExternalInitTypeDefinition }, options: TestOptions.ReleaseExe, verify: Verification.Skipped, expectedOutput:
-@"(1, )
+            var verifier = CompileAndVerify(
+                new[] { source, IsExternalInitTypeDefinition },
+                options: TestOptions.ReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: @"(1, )
 (2, 2)
 (, )
 (1, )
 (2, 2)
 (, )
 (2, 4)
-(, 6)");
-            verifier.VerifyIL("Program.Main",
-@"{
+(, 6)"
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size      162 (0xa2)
   .maxstack  2
   .locals init (S3 V_0,
@@ -1255,9 +1403,11 @@ class Program
   IL_0097:  box        ""S3""
   IL_009c:  call       ""void System.Console.WriteLine(object)""
   IL_00a1:  ret
-}");
-            verifier.VerifyIL("S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S1..ctor()",
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1265,9 +1415,11 @@ class Program
   IL_0002:  box        ""int""
   IL_0007:  stfld      ""object S1.<X>k__BackingField""
   IL_000c:  ret
-}");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size       25 (0x19)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1279,10 +1431,12 @@ class Program
   IL_000e:  box        ""int""
   IL_0013:  call       ""void S2.Y.init""
   IL_0018:  ret
-}");
+}"
+            );
             verifier.VerifyMissing("S3..ctor()");
-            verifier.VerifyIL("S3..ctor(object)",
-@"{
+            verifier.VerifyIL(
+                "S3..ctor(object)",
+                @"{
   // Code size       25 (0x19)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -1294,14 +1448,15 @@ class Program
   IL_000e:  box        ""int""
   IL_0013:  call       ""void S3.Y.set""
   IL_0018:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldInitializers_04()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 struct S1<T> { internal int X = 1; }
 struct S2<T> { internal int X = 2; public S2() { } }
@@ -1316,12 +1471,16 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput:
-@"1
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseExe,
+                expectedOutput: @"1
 2
-0");
-            verifier.VerifyIL("Program.Main",
-@"{
+0"
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       50 (0x32)
   .maxstack  1
   .locals init (S3<object> V_0)
@@ -1337,14 +1496,15 @@ class Program
   IL_0027:  ldfld      ""int S3<object>.X""
   IL_002c:  call       ""void System.Console.WriteLine(int)""
   IL_0031:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldInitializers_05()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 class A<T>
 {
@@ -1362,12 +1522,17 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(new[] { source, IsExternalInitTypeDefinition }, options: TestOptions.ReleaseExe, verify: Verification.Skipped, expectedOutput:
-@"1
+            var verifier = CompileAndVerify(
+                new[] { source, IsExternalInitTypeDefinition },
+                options: TestOptions.ReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: @"1
 2
-0");
-            verifier.VerifyIL("Program.Main",
-@"{
+0"
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       56 (0x38)
   .maxstack  2
   .locals init (A<object>.S1 V_0,
@@ -1389,41 +1554,48 @@ class Program
   IL_002d:  call       ""readonly int A<object>.S3.X.get""
   IL_0032:  call       ""void System.Console.WriteLine(int)""
   IL_0037:  ret
-}");
-            verifier.VerifyIL("A<T>.S1..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "A<T>.S1..ctor()",
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldc.i4.1
   IL_0002:  stfld      ""int A<T>.S1.<X>k__BackingField""
   IL_0007:  ret
-}");
-            verifier.VerifyIL("A<T>.S2..ctor()",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "A<T>.S2..ctor()",
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldc.i4.2
   IL_0002:  stfld      ""int A<T>.S2.<X>k__BackingField""
   IL_0007:  ret
-}");
-            verifier.VerifyIL("A<T>.S3..ctor(int)",
-@"{
+}"
+            );
+            verifier.VerifyIL(
+                "A<T>.S3..ctor(int)",
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldc.i4.3
   IL_0002:  stfld      ""int A<T>.S3.<X>k__BackingField""
   IL_0007:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExpressionTrees()
         {
             var source =
-@"#pragma warning disable 649
+                @"#pragma warning disable 649
 using System;
 using System.Linq.Expressions;
 struct S0
@@ -1457,12 +1629,16 @@ class Program
     }
 }";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput:
-@"0
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseExe,
+                expectedOutput: @"0
 1
-2");
-            verifier.VerifyIL("Program.Main",
-@"{
+2"
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size      111 (0x6f)
   .maxstack  2
   IL_0000:  ldtoken    ""S0""
@@ -1488,14 +1664,15 @@ class Program
   IL_0064:  call       ""System.Linq.Expressions.Expression<System.Func<S2>> System.Linq.Expressions.Expression.Lambda<System.Func<S2>>(System.Linq.Expressions.Expression, params System.Linq.Expressions.ParameterExpression[])""
   IL_0069:  call       ""void Program.Report<S2>(System.Linq.Expressions.Expression<System.Func<S2>>)""
   IL_006e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void Retargeting_01()
         {
             var sourceA =
-@"public struct S1
+                @"public struct S1
 {
     public int X = 1;
 }
@@ -1517,7 +1694,7 @@ public struct S3
             Assert.Equal(corLibA, typeA.ContainingAssembly);
 
             var sourceB =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -1527,17 +1704,27 @@ class Program
         Console.WriteLine(new S3().X);
     }
 }";
-            comp = CreateCompilation(sourceB, references: new[] { refA }, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9, targetFramework: TargetFramework.Mscorlib45);
-            CompileAndVerify(comp, expectedOutput:
-@"1
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular9,
+                targetFramework: TargetFramework.Mscorlib45
+            );
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"1
 2
-0");
+0"
+            );
 
             var corLibB = comp.Assembly.CorLibrary;
             Assert.NotEqual(corLibA, corLibB);
 
             var field = comp.GetMember<FieldSymbol>("S1.X");
-            Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(field);
+            Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
+                field
+            );
             var typeB = (NamedTypeSymbol)field.Type;
             Assert.Equal(corLibB, typeB.ContainingAssembly);
         }
@@ -1546,7 +1733,7 @@ class Program
         public void NullableAnalysis_01()
         {
             var source =
-@"#pragma warning disable 169
+                @"#pragma warning disable 169
 #nullable enable
 struct S0
 {
@@ -1573,29 +1760,41 @@ struct S3
             comp.VerifyDiagnostics(
                 // (10,12): warning CS8618: Non-nullable field 'F1' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
                 //     public S1() { }
-                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "S1").WithArguments("field", "F1").WithLocation(10, 12),
+                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "S1")
+                    .WithArguments("field", "F1")
+                    .WithLocation(10, 12),
                 // (10,12): error CS0171: Field 'S1.F1' must be fully assigned before control is returned to the caller
                 //     public S1() { }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S1").WithArguments("S1.F1").WithLocation(10, 12),
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S1")
+                    .WithArguments("S1.F1")
+                    .WithLocation(10, 12),
                 // (16,5): warning CS8618: Non-nullable field 'F2' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
                 //     S2(object? obj) { }
-                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "S2").WithArguments("field", "F2").WithLocation(16, 5),
+                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "S2")
+                    .WithArguments("field", "F2")
+                    .WithLocation(16, 5),
                 // (16,5): error CS0171: Field 'S2.F2' must be fully assigned before control is returned to the caller
                 //     S2(object? obj) { }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S2").WithArguments("S2.F2").WithLocation(16, 5),
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S2")
+                    .WithArguments("S2.F2")
+                    .WithLocation(16, 5),
                 // (21,12): warning CS8618: Non-nullable field 'F3' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
                 //     public S3() { F3 = GetValue(); }
-                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "S3").WithArguments("field", "F3").WithLocation(21, 12),
+                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "S3")
+                    .WithArguments("field", "F3")
+                    .WithLocation(21, 12),
                 // (21,24): warning CS8601: Possible null reference assignment.
                 //     public S3() { F3 = GetValue(); }
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "GetValue()").WithLocation(21, 24));
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "GetValue()")
+                    .WithLocation(21, 24)
+            );
         }
 
         [Fact]
         public void NullableAnalysis_02()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 struct S0
 {
     object F0 = Utils.GetValue();
@@ -1619,23 +1818,27 @@ static class Utils
             comp.VerifyDiagnostics(
                 // (4,17): warning CS8601: Possible null reference assignment.
                 //     object F0 = Utils.GetValue();
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "Utils.GetValue()").WithLocation(4, 17),
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "Utils.GetValue()")
+                    .WithLocation(4, 17),
                 // (8,17): warning CS8601: Possible null reference assignment.
                 //     object F1 = Utils.GetValue();
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "Utils.GetValue()").WithLocation(8, 17),
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "Utils.GetValue()")
+                    .WithLocation(8, 17),
                 // (13,17): warning CS8601: Possible null reference assignment.
                 //     object F2 = Utils.GetValue();
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "Utils.GetValue()").WithLocation(13, 17),
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "Utils.GetValue()")
+                    .WithLocation(13, 17),
                 // (14,24): warning CS8625: Cannot convert null literal to non-nullable reference type.
                 //     public S2() : this(null) { }
-                Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(14, 24));
+                Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(14, 24)
+            );
         }
 
         [Fact]
         public void DefiniteAssignment()
         {
             var source =
-@"#pragma warning disable 169
+                @"#pragma warning disable 169
 unsafe struct S0
 {
     fixed int Y[1];
@@ -1672,20 +1875,27 @@ unsafe struct S5
             comp.VerifyDiagnostics(
                 // (20,12): error CS0171: Field 'S3.X' must be fully assigned before control is returned to the caller
                 //     public S3() { }
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "S3").WithArguments("S3.X").WithLocation(20, 12),
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "S3")
+                    .WithArguments("S3.X")
+                    .WithLocation(20, 12),
                 // (24,9): warning CS0414: The field 'S4.X' is assigned but its value is never used
                 //     int X = 4;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X").WithArguments("S4.X").WithLocation(24, 9),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X")
+                    .WithArguments("S4.X")
+                    .WithLocation(24, 9),
                 // (29,9): warning CS0414: The field 'S5.X' is assigned but its value is never used
                 //     int X;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X").WithArguments("S5.X").WithLocation(29, 9));
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X")
+                    .WithArguments("S5.X")
+                    .WithLocation(29, 9)
+            );
         }
 
         [Fact]
         public void ParameterDefaultValues_01()
         {
             var source =
-@"struct S1 { }
+                @"struct S1 { }
 struct S2 { public S2() { } }
 struct S3 { internal S3() { } }
 struct S4 { private S4() { } }
@@ -1704,29 +1914,40 @@ class Program
             comp.VerifyDiagnostics(
                 // (3,22): error CS8938: The parameterless struct constructor must be 'public'.
                 // struct S3 { internal S3() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S3").WithLocation(3, 22),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S3")
+                    .WithLocation(3, 22),
                 // (4,21): error CS8938: The parameterless struct constructor must be 'public'.
                 // struct S4 { private S4() { } }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S4").WithLocation(4, 21),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S4")
+                    .WithLocation(4, 21),
                 // (12,27): error CS1736: Default parameter value for 's' must be a compile-time constant
                 //     static void G2(S2 s = new()) { }
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()").WithArguments("s").WithLocation(12, 27),
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()")
+                    .WithArguments("s")
+                    .WithLocation(12, 27),
                 // (13,27): error CS1736: Default parameter value for 's' must be a compile-time constant
                 //     static void G3(S3 s = new()) { }
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()").WithArguments("s").WithLocation(13, 27),
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()")
+                    .WithArguments("s")
+                    .WithLocation(13, 27),
                 // (14,27): error CS0122: 'S4.S4()' is inaccessible due to its protection level
                 //     static void G4(S4 s = new()) { }
-                Diagnostic(ErrorCode.ERR_BadAccess, "new()").WithArguments("S4.S4()").WithLocation(14, 27),
+                Diagnostic(ErrorCode.ERR_BadAccess, "new()")
+                    .WithArguments("S4.S4()")
+                    .WithLocation(14, 27),
                 // (14,27): error CS1736: Default parameter value for 's' must be a compile-time constant
                 //     static void G4(S4 s = new()) { }
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()").WithArguments("s").WithLocation(14, 27));
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()")
+                    .WithArguments("s")
+                    .WithLocation(14, 27)
+            );
         }
 
         [Fact]
         public void ParameterDefaultValues_02()
         {
             var source =
-@"struct S1
+                @"struct S1
 {
     object X = 1;
 }
@@ -1753,17 +1974,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (20,27): error CS1736: Default parameter value for 's' must be a compile-time constant
                 //     static void G1(S1 s = new()) { }
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()").WithArguments("s").WithLocation(20, 27),
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()")
+                    .WithArguments("s")
+                    .WithLocation(20, 27),
                 // (21,27): error CS1736: Default parameter value for 's' must be a compile-time constant
                 //     static void G2(S2 s = new()) { }
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()").WithArguments("s").WithLocation(21, 27));
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "new()")
+                    .WithArguments("s")
+                    .WithLocation(21, 27)
+            );
         }
 
         [Fact]
         public void Constants()
         {
             var source =
-@"struct S0
+                @"struct S0
 {
 }
 struct S1
@@ -1787,29 +2013,42 @@ class Program
             comp.VerifyDiagnostics(
                 // (14,23): error CS0133: The expression being assigned to 'Program.d0' must be constant
                 //     const object d0 = default(S0);
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "default(S0)").WithArguments("Program.d0").WithLocation(14, 23),
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "default(S0)")
+                    .WithArguments("Program.d0")
+                    .WithLocation(14, 23),
                 // (15,23): error CS0133: The expression being assigned to 'Program.d1' must be constant
                 //     const object d1 = default(S1);
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "default(S1)").WithArguments("Program.d1").WithLocation(15, 23),
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "default(S1)")
+                    .WithArguments("Program.d1")
+                    .WithLocation(15, 23),
                 // (16,23): error CS0133: The expression being assigned to 'Program.d2' must be constant
                 //     const object d2 = default(S2);
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "default(S2)").WithArguments("Program.d2").WithLocation(16, 23),
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "default(S2)")
+                    .WithArguments("Program.d2")
+                    .WithLocation(16, 23),
                 // (17,23): error CS0133: The expression being assigned to 'Program.s0' must be constant
                 //     const object s0 = new S0();
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "new S0()").WithArguments("Program.s0").WithLocation(17, 23),
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "new S0()")
+                    .WithArguments("Program.s0")
+                    .WithLocation(17, 23),
                 // (18,23): error CS0133: The expression being assigned to 'Program.s1' must be constant
                 //     const object s1 = new S1();
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "new S1()").WithArguments("Program.s1").WithLocation(18, 23),
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "new S1()")
+                    .WithArguments("Program.s1")
+                    .WithLocation(18, 23),
                 // (19,23): error CS0133: The expression being assigned to 'Program.s2' must be constant
                 //     const object s2 = new S2();
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "new S2()").WithArguments("Program.s2").WithLocation(19, 23));
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "new S2()")
+                    .WithArguments("Program.s2")
+                    .WithLocation(19, 23)
+            );
         }
 
         [Fact]
         public void NoPIA()
         {
             var sourceA =
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 [assembly: ImportedFromTypeLib(""_.dll"")]
 [assembly: Guid(""9758B46C-5297-4832-BB58-F2B5B78B0D01"")]
 [ComImport()]
@@ -1835,7 +2074,7 @@ public struct S2
             var refA = comp.EmitToImageReference(embedInteropTypes: true);
 
             var sourceB =
-@"class Program
+                @"class Program
 {
     static void M(I i)
     {
@@ -1848,10 +2087,15 @@ public struct S2
             comp.VerifyEmitDiagnostics(
                 // (6,18): error CS1757: Embedded interop struct 'S1' can contain only public instance fields.
                 //         var s1 = i.F1();
-                Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "i.F1()").WithArguments("S1").WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "i.F1()")
+                    .WithArguments("S1")
+                    .WithLocation(6, 18),
                 // (7,18): error CS1757: Embedded interop struct 'S2' can contain only public instance fields.
                 //         var s2 = i.F2();
-                Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "i.F2()").WithArguments("S2").WithLocation(7, 18));
+                Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "i.F2()")
+                    .WithArguments("S2")
+                    .WithLocation(7, 18)
+            );
         }
     }
 }

@@ -4,54 +4,49 @@
 using System;
 using System.Threading;
 
-interface IFoo 
+interface IFoo
 {
-	U Function<U>(U u);		
+    U Function<U>(U u);
 }
 
 struct Foo : IFoo
 {
-	public U Function<U>(U u)
-	{
-		return u;
-	}
-		
+    public U Function<U>(U u)
+    {
+        return u;
+    }
 }
 
 public class Test_method009
 {
-	public static int counter = 0;
-	public static bool result = true;
-	public static void Eval(bool exp)
-	{
-		counter++;
-		if (!exp)
-		{
-			result = exp;
-			Console.WriteLine("Test Failed at location: " + counter);
-		}
-	
-	}
-	
-	public static int Main()
-	{
-		IFoo f = new Foo();
+    public static int counter = 0;
+    public static bool result = true;
+    public static void Eval(bool exp)
+    {
+        counter++;
+        if (!exp)
+        {
+            result = exp;
+            Console.WriteLine("Test Failed at location: " + counter);
+        }
+    }
 
-		Eval(f.Function<int>(1).Equals(1));
-		Eval(f.Function<string>("string").Equals("string"));
-		
-		
-		if (result)
-		{
-			Console.WriteLine("Test Passed");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("Test Failed");
-			return 1;
-		}
-		
-	}
+    public static int Main()
+    {
+        IFoo f = new Foo();
+
+        Eval(f.Function<int>(1).Equals(1));
+        Eval(f.Function<string>("string").Equals("string"));
+
+        if (result)
+        {
+            Console.WriteLine("Test Passed");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("Test Failed");
+            return 1;
+        }
+    }
 }
-

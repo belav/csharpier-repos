@@ -72,7 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The new foreign key.</returns>
-        IConventionForeignKey? SetForeignKey(IConventionForeignKey? foreignKey, bool fromDataAnnotation = false);
+        IConventionForeignKey? SetForeignKey(
+            IConventionForeignKey? foreignKey,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="ForeignKey" />.
@@ -97,7 +100,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         [DebuggerStepThrough]
-        IConventionSkipNavigation? SetInverse(IConventionSkipNavigation? inverse, bool fromDataAnnotation = false);
+        IConventionSkipNavigation? SetInverse(
+            IConventionSkipNavigation? inverse,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="Inverse" />.

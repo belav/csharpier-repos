@@ -9,13 +9,9 @@ namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
 public class Operation<TModel> : Operation where TModel : class
 {
-    public Operation()
-    {
+    public Operation() { }
 
-    }
-
-    public Operation(string op, string path, string from, object value)
-        : base(op, path, from)
+    public Operation(string op, string path, string from, object value) : base(op, path, from)
     {
         if (op == null)
         {
@@ -30,8 +26,7 @@ public class Operation<TModel> : Operation where TModel : class
         this.value = value;
     }
 
-    public Operation(string op, string path, string from)
-        : base(op, path, from)
+    public Operation(string op, string path, string from) : base(op, path, from)
     {
         if (op == null)
         {
@@ -41,7 +36,6 @@ public class Operation<TModel> : Operation where TModel : class
         {
             throw new ArgumentNullException(nameof(path));
         }
-
     }
 
     public void Apply(TModel objectToApplyTo, IObjectAdapter adapter)
@@ -81,11 +75,19 @@ public class Operation<TModel> : Operation where TModel : class
                 }
                 else
                 {
-                    throw new JsonPatchException(new JsonPatchError(objectToApplyTo, this, Resources.TestOperationNotSupported));
+                    throw new JsonPatchException(
+                        new JsonPatchError(
+                            objectToApplyTo,
+                            this,
+                            Resources.TestOperationNotSupported
+                        )
+                    );
                 }
             case OperationType.Invalid:
                 throw new JsonPatchException(
-                    Resources.FormatInvalidJsonPatchOperation(op), innerException: null);
+                    Resources.FormatInvalidJsonPatchOperation(op),
+                    innerException: null
+                );
             default:
                 break;
         }

@@ -31,16 +31,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             Debug.Assert(!(underlyingParameter is RetargetingParameterSymbol));
         }
 
-        protected abstract RetargetingModuleSymbol RetargetingModule
-        {
-            get;
-        }
+        protected abstract RetargetingModuleSymbol RetargetingModule { get; }
 
         public sealed override TypeWithAnnotations TypeWithAnnotations
         {
             get
             {
-                return this.RetargetingModule.RetargetingTranslator.Retarget(_underlyingParameter.TypeWithAnnotations, RetargetOptions.RetargetPrimitiveTypesByTypeCode);
+                return this.RetargetingModule.RetargetingTranslator.Retarget(
+                    _underlyingParameter.TypeWithAnnotations,
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
             }
         }
 
@@ -48,7 +48,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return RetargetingModule.RetargetingTranslator.RetargetModifiers(_underlyingParameter.RefCustomModifiers, ref _lazyRefCustomModifiers);
+                return RetargetingModule.RetargetingTranslator.RetargetModifiers(
+                    _underlyingParameter.RefCustomModifiers,
+                    ref _lazyRefCustomModifiers
+                );
             }
         }
 
@@ -56,66 +59,62 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return this.RetargetingModule.RetargetingTranslator.Retarget(_underlyingParameter.ContainingSymbol);
+                return this.RetargetingModule.RetargetingTranslator.Retarget(
+                    _underlyingParameter.ContainingSymbol
+                );
             }
         }
 
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingModule.RetargetingTranslator.GetRetargetedAttributes(_underlyingParameter.GetAttributes(), ref _lazyCustomAttributes);
+            return this.RetargetingModule.RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingParameter.GetAttributes(),
+                ref _lazyCustomAttributes
+            );
         }
 
-        internal sealed override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal sealed override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return this.RetargetingModule.RetargetingTranslator.RetargetAttributes(_underlyingParameter.GetCustomAttributesToEmit(moduleBuilder));
+            return this.RetargetingModule.RetargetingTranslator.RetargetAttributes(
+                _underlyingParameter.GetCustomAttributesToEmit(moduleBuilder)
+            );
         }
 
         public sealed override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return this.RetargetingModule.ContainingAssembly;
-            }
+            get { return this.RetargetingModule.ContainingAssembly; }
         }
 
         internal sealed override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return this.RetargetingModule;
-            }
+            get { return this.RetargetingModule; }
         }
 
         internal sealed override bool HasMetadataConstantValue
         {
-            get
-            {
-                return _underlyingParameter.HasMetadataConstantValue;
-            }
+            get { return _underlyingParameter.HasMetadataConstantValue; }
         }
 
         internal sealed override bool IsMarshalledExplicitly
         {
-            get
-            {
-                return _underlyingParameter.IsMarshalledExplicitly;
-            }
+            get { return _underlyingParameter.IsMarshalledExplicitly; }
         }
 
         internal override MarshalPseudoCustomAttributeData MarshallingInformation
         {
             get
             {
-                return this.RetargetingModule.RetargetingTranslator.Retarget(_underlyingParameter.MarshallingInformation);
+                return this.RetargetingModule.RetargetingTranslator.Retarget(
+                    _underlyingParameter.MarshallingInformation
+                );
             }
         }
 
         internal override ImmutableArray<byte> MarshallingDescriptor
         {
-            get
-            {
-                return _underlyingParameter.MarshallingDescriptor;
-            }
+            get { return _underlyingParameter.MarshallingDescriptor; }
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness
@@ -123,9 +122,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get { return null; }
         }
 
-        internal sealed override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => _underlyingParameter.InterpolatedStringHandlerArgumentIndexes;
+        internal sealed override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            _underlyingParameter.InterpolatedStringHandlerArgumentIndexes;
 
-        internal override bool HasInterpolatedStringHandlerArgumentError => _underlyingParameter.HasInterpolatedStringHandlerArgumentError;
+        internal override bool HasInterpolatedStringHandlerArgumentError =>
+            _underlyingParameter.HasInterpolatedStringHandlerArgumentError;
     }
 
     internal sealed class RetargetingMethodParameterSymbol : RetargetingParameterSymbol
@@ -135,8 +136,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// </summary>
         private readonly RetargetingMethodSymbol _retargetingMethod;
 
-        public RetargetingMethodParameterSymbol(RetargetingMethodSymbol retargetingMethod, ParameterSymbol underlyingParameter)
-            : base(underlyingParameter)
+        public RetargetingMethodParameterSymbol(
+            RetargetingMethodSymbol retargetingMethod,
+            ParameterSymbol underlyingParameter
+        ) : base(underlyingParameter)
         {
             Debug.Assert((object)retargetingMethod != null);
             _retargetingMethod = retargetingMethod;
@@ -175,8 +178,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// </summary>
         private readonly RetargetingPropertySymbol _retargetingProperty;
 
-        public RetargetingPropertyParameterSymbol(RetargetingPropertySymbol retargetingProperty, ParameterSymbol underlyingParameter)
-            : base(underlyingParameter)
+        public RetargetingPropertyParameterSymbol(
+            RetargetingPropertySymbol retargetingProperty,
+            ParameterSymbol underlyingParameter
+        ) : base(underlyingParameter)
         {
             Debug.Assert((object)retargetingProperty != null);
             _retargetingProperty = retargetingProperty;

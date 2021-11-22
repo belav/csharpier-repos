@@ -43,16 +43,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     The internal builder being used to configure the property.
         /// </summary>
-        IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance
-            => Builder;
+        IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance => Builder;
 
         private InternalPropertyBuilder Builder { get; }
 
         /// <summary>
         ///     The property being configured.
         /// </summary>
-        public virtual IMutableProperty Metadata
-            => Builder.Metadata;
+        public virtual IMutableProperty Metadata => Builder.Metadata;
 
         /// <summary>
         ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -236,7 +234,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </remarks>
         /// <param name="factory">A delegate that will be used to create value generator instances.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertyBuilder HasValueGenerator(Func<IProperty, IEntityType, ValueGenerator> factory)
+        public virtual PropertyBuilder HasValueGenerator(
+            Func<IProperty, IEntityType, ValueGenerator> factory
+        )
         {
             Check.NotNull(factory, nameof(factory));
 
@@ -272,8 +272,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual PropertyBuilder HasValueGeneratorFactory<TFactory>()
-            where TFactory : ValueGeneratorFactory
-            => HasValueGeneratorFactory(typeof(TFactory));
+            where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
 
         /// <summary>
         ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -303,7 +302,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual PropertyBuilder HasValueGeneratorFactory(Type? valueGeneratorFactoryType)
         {
-            Builder.HasValueGeneratorFactory(valueGeneratorFactoryType, ConfigurationSource.Explicit);
+            Builder.HasValueGeneratorFactory(
+                valueGeneratorFactoryType,
+                ConfigurationSource.Explicit
+            );
 
             return this;
         }
@@ -444,8 +446,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <typeparam name="TConversion">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</typeparam>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertyBuilder HasConversion<TConversion>()
-            => HasConversion(typeof(TConversion));
+        public virtual PropertyBuilder HasConversion<TConversion>() =>
+            HasConversion(typeof(TConversion));
 
         /// <summary>
         ///     Configures the property so that the property value is converted before
@@ -487,8 +489,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="valueComparer">The comparer to use for values before conversion.</param>
         /// <typeparam name="TConversion">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</typeparam>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertyBuilder HasConversion<TConversion>(ValueComparer? valueComparer)
-            => HasConversion(typeof(TConversion), valueComparer);
+        public virtual PropertyBuilder HasConversion<TConversion>(ValueComparer? valueComparer) =>
+            HasConversion(typeof(TConversion), valueComparer);
 
         /// <summary>
         ///     Configures the property so that the property value is converted before
@@ -497,7 +499,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="conversionType">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</param>
         /// <param name="valueComparer">The comparer to use for values before conversion.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertyBuilder HasConversion(Type conversionType, ValueComparer? valueComparer)
+        public virtual PropertyBuilder HasConversion(
+            Type conversionType,
+            ValueComparer? valueComparer
+        )
         {
             Check.NotNull(conversionType, nameof(conversionType));
 
@@ -522,7 +527,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="converter">The converter to use.</param>
         /// <param name="valueComparer">The comparer to use for values before conversion.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertyBuilder HasConversion(ValueConverter? converter, ValueComparer? valueComparer)
+        public virtual PropertyBuilder HasConversion(
+            ValueConverter? converter,
+            ValueComparer? valueComparer
+        )
         {
             Builder.HasConversion(converter, ConfigurationSource.Explicit);
             Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
@@ -538,8 +546,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <typeparam name="TComparer">A type that derives from <see cref="ValueComparer" />.</typeparam>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual PropertyBuilder HasConversion<TConversion, TComparer>()
-            where TComparer : ValueComparer
-            => HasConversion(typeof(TConversion), typeof(TComparer));
+            where TComparer : ValueComparer =>
+            HasConversion(typeof(TConversion), typeof(TComparer));
 
         /// <summary>
         ///     Configures the property so that the property value is converted before
@@ -573,8 +581,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -583,8 +590,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -592,9 +598,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

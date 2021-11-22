@@ -4,19 +4,16 @@ using System;
 using System.Globalization;
 using System.IO;
 
-class MyException : Exception
-{
-}
+class MyException : Exception { }
 
 public class Help
 {
-	public static Exception s_exceptionToThrow;
-	public static bool s_matchingException;
+    public static Exception s_exceptionToThrow;
+    public static bool s_matchingException;
 
-	public static Object s_object = new object();
+    public static Object s_object = new object();
 }
-public class A<T>
-where T: Exception
+public class A<T> where T : Exception
 {
     public static void StaticFunctionWithManyArgs(int i, int j, int k, object o)
     {
@@ -52,7 +49,9 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         A<MyException>.StaticFunctionWithManyArgs(1, 2, 3, Help.s_object);
     }
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     public static int Main()
     {
         try

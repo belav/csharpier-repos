@@ -26,15 +26,31 @@ namespace System.Net.WebSockets
             _messageType = messageType;
         }
 
-        public bool BufferPayload(ArraySegment<byte> arraySegment, out WebSocketReceiveResult receiveResult)
+        public bool BufferPayload(
+            ArraySegment<byte> arraySegment,
+            out WebSocketReceiveResult receiveResult
+        )
         {
-            int bytesTransferred = Math.Min(_dataMessageReceived.Length - _unconsumedDataOffset, arraySegment.Count);
-            bool endOfMessage = (_dataMessageReceived.Length - _unconsumedDataOffset) <= arraySegment.Count;
-            Buffer.BlockCopy(_dataMessageReceived, _unconsumedDataOffset, arraySegment.Array!, arraySegment.Offset, bytesTransferred);
+            int bytesTransferred = Math.Min(
+                _dataMessageReceived.Length - _unconsumedDataOffset,
+                arraySegment.Count
+            );
+            bool endOfMessage =
+                (_dataMessageReceived.Length - _unconsumedDataOffset) <= arraySegment.Count;
+            Buffer.BlockCopy(
+                _dataMessageReceived,
+                _unconsumedDataOffset,
+                arraySegment.Array!,
+                arraySegment.Offset,
+                bytesTransferred
+            );
             _unconsumedDataOffset += arraySegment.Count;
-            receiveResult = new WebSocketReceiveResult(bytesTransferred, _messageType, endOfMessage);
+            receiveResult = new WebSocketReceiveResult(
+                bytesTransferred,
+                _messageType,
+                endOfMessage
+            );
             return endOfMessage;
         }
     }
-
 }

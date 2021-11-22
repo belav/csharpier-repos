@@ -37,9 +37,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// This type of array is a single dimensional array with zero lower bound for index values.
         /// </summary>
-        bool IsSZArray
-        {
-            get;
+        bool IsSZArray { get;
             // ^ ensures result ==> Rank == 1;
         }
 
@@ -47,18 +45,14 @@ namespace Microsoft.Cci
         /// A possibly empty list of lower bounds for dimension indices. When not explicitly specified, a lower bound defaults to zero.
         /// The first lower bound in the list corresponds to the first dimension. Dimensions cannot be skipped.
         /// </summary>
-        ImmutableArray<int> LowerBounds
-        {
-            get;
+        ImmutableArray<int> LowerBounds { get;
             // ^ ensures count(result) <= Rank;
         }
 
         /// <summary>
         /// The number of array dimensions.
         /// </summary>
-        int Rank
-        {
-            get;
+        int Rank { get;
             // ^ ensures result > 0;
         }
 
@@ -67,9 +61,7 @@ namespace Microsoft.Cci
         /// The first upper bound in the list corresponds to the first dimension. Dimensions cannot be skipped.
         /// An unspecified upper bound means that instances of this type can have an arbitrary upper bound for that dimension.
         /// </summary>
-        ImmutableArray<int> Sizes
-        {
-            get;
+        ImmutableArray<int> Sizes { get;
             // ^ ensures count(result) <= Rank;
         }
     }
@@ -99,18 +91,12 @@ namespace Microsoft.Cci
         /// <summary>
         /// The list of custom modifiers, if any, associated with the parameter type. 
         /// </summary>
-        ImmutableArray<ICustomModifier> CustomModifiers
-        {
-            get;
-        }
+        ImmutableArray<ICustomModifier> CustomModifiers { get; }
 
         /// <summary>
         /// The list of custom modifiers, if any, associated with the ref modifier. 
         /// </summary>
-        ImmutableArray<ICustomModifier> RefCustomModifiers
-        {
-            get;
-        }
+        ImmutableArray<ICustomModifier> RefCustomModifiers { get; }
 
         /// <summary>
         /// True if the parameter is passed by reference (using a managed pointer).
@@ -136,18 +122,14 @@ namespace Microsoft.Cci
         /// <summary>
         /// True if all type arguments matching this parameter are constrained to be reference types.
         /// </summary>
-        bool MustBeReferenceType
-        {
-            get;
+        bool MustBeReferenceType { get;
             // ^ ensures result ==> !this.MustBeValueType;
         }
 
         /// <summary>
         /// True if all type arguments matching this parameter are constrained to be value types.
         /// </summary>
-        bool MustBeValueType
-        {
-            get;
+        bool MustBeValueType { get;
             // ^ ensures result ==> !this.MustBeReferenceType;
         }
 
@@ -168,7 +150,10 @@ namespace Microsoft.Cci
     /// <summary>
     /// A reference to the definition of a type parameter of a generic type or method.
     /// </summary>
-    internal interface IGenericParameterReference : ITypeReference, INamedEntity, IParameterListEntry
+    internal interface IGenericParameterReference
+        : ITypeReference,
+          INamedEntity,
+          IParameterListEntry
     {
     }
 
@@ -180,9 +165,7 @@ namespace Microsoft.Cci
         /// <summary>
         /// The generic method that defines this type parameter.
         /// </summary>
-        new IMethodDefinition DefiningMethod
-        {
-            get;
+        new IMethodDefinition DefiningMethod { get;
             // ^ ensures result.IsGeneric;
         }
     }
@@ -308,7 +291,10 @@ namespace Microsoft.Cci
     /// <summary>
     /// A type definition that is a member of another type definition.
     /// </summary>
-    internal interface INestedTypeDefinition : INamedTypeDefinition, ITypeDefinitionMember, INestedTypeReference
+    internal interface INestedTypeDefinition
+        : INamedTypeDefinition,
+          ITypeDefinitionMember,
+          INestedTypeReference
     {
     }
 
@@ -348,7 +334,10 @@ namespace Microsoft.Cci
         /// </summary>
         public readonly Cci.IMethodReference ImplementedMethod;
 
-        public MethodImplementation(Cci.IMethodDefinition ImplementingMethod, Cci.IMethodReference ImplementedMethod)
+        public MethodImplementation(
+            Cci.IMethodDefinition ImplementingMethod,
+            Cci.IMethodReference ImplementedMethod
+        )
         {
             this.ImplementingMethod = ImplementingMethod;
             this.ImplementedMethod = ImplementedMethod;
@@ -428,7 +417,8 @@ namespace Microsoft.Cci
 
         public TypeReferenceWithAttributes(
             ITypeReference typeRef,
-            ImmutableArray<ICustomAttribute> attributes = default(ImmutableArray<ICustomAttribute>))
+            ImmutableArray<ICustomAttribute> attributes = default(ImmutableArray<ICustomAttribute>)
+        )
         {
             TypeRef = typeRef;
             Attributes = attributes.NullToEmpty();
@@ -469,17 +459,14 @@ namespace Microsoft.Cci
         /// <summary>
         /// Zero or more parameters that can be used as type annotations.
         /// </summary>
-        IEnumerable<IGenericTypeParameter> GenericParameters
-        {
-            get;
+        IEnumerable<IGenericTypeParameter> GenericParameters { get;
             // ^ requires this.IsGeneric;
         }
 
         /// <summary>
         /// The number of generic parameters. Zero if the type is not generic.
         /// </summary>
-        ushort GenericParameterCount
-        { // TODO: remove this
+        ushort GenericParameterCount { // TODO: remove this
             get;
             // ^ ensures !this.IsGeneric ==> result == 0;
             // ^ ensures this.IsGeneric ==> result > 0;
@@ -645,102 +632,82 @@ namespace Microsoft.Cci
         /// A single bit.
         /// </summary>
         Boolean,
-
         /// <summary>
         /// An unsigned 16 bit integer representing a Unicode UTF16 code point.
         /// </summary>
         Char,
-
         /// <summary>
         /// A signed 8 bit integer.
         /// </summary>
         Int8,
-
         /// <summary>
         /// A 32 bit IEEE floating point number.
         /// </summary>
         Float32,
-
         /// <summary>
         /// A 64 bit IEEE floating point number.
         /// </summary>
         Float64,
-
         /// <summary>
         /// A signed 16 bit integer.
         /// </summary>
         Int16,
-
         /// <summary>
         /// A signed 32 bit integer.
         /// </summary>
         Int32,
-
         /// <summary>
         /// A signed 64 bit integer.
         /// </summary>
         Int64,
-
         /// <summary>
         /// A signed 32 bit integer or 64 bit integer, depending on the native word size of the underlying processor.
         /// </summary>
         IntPtr,
-
         /// <summary>
         /// A pointer to fixed or unmanaged memory.
         /// </summary>
         Pointer,
-
         /// <summary>
         /// A reference to managed memory.
         /// </summary>
         Reference,
-
         /// <summary>
         /// A string.
         /// </summary>
         String,
-
         /// <summary>
         /// An unsigned 8 bit integer.
         /// </summary>
         UInt8,
-
         /// <summary>
         /// An unsigned 16 bit integer.
         /// </summary>
         UInt16,
-
         /// <summary>
         /// An unsigned 32 bit integer.
         /// </summary>
         UInt32,
-
         /// <summary>
         /// An unsigned 64 bit integer.
         /// </summary>
         UInt64,
-
         /// <summary>
         /// An unsigned 32 bit integer or 64 bit integer, depending on the native word size of the underlying processor.
         /// </summary>
         UIntPtr,
-
         /// <summary>
         /// A type that denotes the absence of a value.
         /// </summary>
         Void,
-
         /// <summary>
         /// Not a primitive type.
         /// </summary>
         NotPrimitive,
-
         /// <summary>
         /// A pointer to a function in fixed or managed memory.
         /// </summary>
         FunctionPointer,
-
         /// <summary>
         /// Type is a dummy type.
         /// </summary>
@@ -756,27 +723,22 @@ namespace Microsoft.Cci
         /// The member is visible only within its own type.
         /// </summary>
         Private = 1,
-
         /// <summary>
         /// The member is visible only within the intersection of its family (its own type and any subtypes) and assembly. 
         /// </summary>
         FamilyAndAssembly = 2,
-
         /// <summary>
         /// The member is visible only within its own assembly.
         /// </summary>
         Assembly = 3,
-
         /// <summary>
         /// The member is visible only within its own type and any subtypes.
         /// </summary>
         Family = 4,
-
         /// <summary>
         /// The member is visible only within the union of its family and assembly. 
         /// </summary>
         FamilyOrAssembly = 5,
-
         /// <summary>
         /// The member is visible everywhere its declaring type is visible.
         /// </summary>
@@ -792,13 +754,11 @@ namespace Microsoft.Cci
         /// Two type or method instances are compatible only if they have exactly the same type argument for this parameter.
         /// </summary>
         NonVariant = 0,
-
         /// <summary>
         /// A type or method instance will match another instance if it has a type for this parameter that is the same or a subtype of the type the
         /// other instance has for this parameter.
         /// </summary>
         Covariant = 1,
-
         /// <summary>
         /// A type or method instance will match another instance if it has a type for this parameter that is the same or a supertype of the type the
         /// other instance has for this parameter.

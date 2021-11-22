@@ -10,8 +10,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
     {
         internal static readonly EmptyFeatureController Instance = new EmptyFeatureController();
 
-        private EmptyFeatureController()
-        {
-        }
+        private EmptyFeatureController() { }
     }
 }

@@ -18,7 +18,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    [ExportLanguageService(typeof(INavigationBarItemService), InternalLanguageNames.TypeScript), Shared]
+    [
+        ExportLanguageService(typeof(INavigationBarItemService), InternalLanguageNames.TypeScript),
+        Shared
+    ]
     internal class VSTypeScriptNavigationBarItemService : INavigationBarItemService
     {
         private readonly IThreadingContext _threadingContext;
@@ -28,24 +31,41 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptNavigationBarItemService(
             IThreadingContext threadingContext,
-            IVSTypeScriptNavigationBarItemService service)
+            IVSTypeScriptNavigationBarItemService service
+        )
         {
             _threadingContext = threadingContext;
             _service = service;
         }
 
         public async Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(
-            Document document, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
-            var items = await _service.GetItemsAsync(document, cancellationToken).ConfigureAwait(false);
+            var items = await _service
+                .GetItemsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             return ConvertItems(items, textVersion);
         }
 
-        private static ImmutableArray<NavigationBarItem> ConvertItems(ImmutableArray<VSTypescriptNavigationBarItem> items, ITextVersion textVersion)
-            => items.SelectAsArray(x => !x.Spans.IsEmpty, x => ConvertToNavigationBarItem(x, textVersion));
+        private static ImmutableArray<NavigationBarItem> ConvertItems(
+            ImmutableArray<VSTypescriptNavigationBarItem> items,
+            ITextVersion textVersion
+        ) =>
+            items.SelectAsArray(
+                x => !x.Spans.IsEmpty,
+                x => ConvertToNavigationBarItem(x, textVersion)
+            );
 
         public async Task<bool> TryNavigateToItemAsync(
-            Document document, NavigationBarItem item, ITextView view, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            NavigationBarItem item,
+            ITextView view,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
             // Spans.First() is safe here as we filtered out any items with no spans above in ConvertItems.
             var navigationSpan = item.GetCurrentItemSpan(textVersion, item.Spans.First());
@@ -54,8 +74,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             var workspace = document.Project.Solution.Workspace;
             var navigationService = VSTypeScriptDocumentNavigationServiceWrapper.Create(workspace);
             navigationService.TryNavigateToPosition(
-                workspace, document.Id, navigationSpan.Start,
-                virtualSpace: 0, options: null, cancellationToken: cancellationToken);
+                workspace,
+                document.Id,
+                navigationSpan.Start,
+                virtualSpace: 0,
+                options: null,
+                cancellationToken: cancellationToken
+            );
 
             return true;
         }
@@ -65,7 +90,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             return true;
         }
 
-        private static NavigationBarItem ConvertToNavigationBarItem(VSTypescriptNavigationBarItem item, ITextVersion textVersion)
+        private static NavigationBarItem ConvertToNavigationBarItem(
+            VSTypescriptNavigationBarItem item,
+            ITextVersion textVersion
+        )
         {
             Contract.ThrowIfTrue(item.Spans.IsEmpty);
             return new SimpleNavigationBarItem(
@@ -76,7 +104,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 ConvertItems(item.ChildItems, textVersion),
                 item.Indent,
                 item.Bolded,
-                item.Grayed);
+                item.Grayed
+            );
         }
     }
 }

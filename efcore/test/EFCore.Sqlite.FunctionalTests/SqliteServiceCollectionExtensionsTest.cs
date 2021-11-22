@@ -5,11 +5,9 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class SqliteServiceCollectionExtensionsTest : RelationalServiceCollectionExtensionsTestBase
+    public class SqliteServiceCollectionExtensionsTest
+        : RelationalServiceCollectionExtensionsTestBase
     {
-        public SqliteServiceCollectionExtensionsTest()
-            : base(SqliteTestHelpers.Instance)
-        {
-        }
+        public SqliteServiceCollectionExtensionsTest() : base(SqliteTestHelpers.Instance) { }
     }
 }

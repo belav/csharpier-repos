@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging.Configuration
     /// </summary>
     public static class LoggerProviderOptions
     {
-        internal const string TrimmingRequiresUnreferencedCodeMessage = "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved.";
+        internal const string TrimmingRequiresUnreferencedCodeMessage =
+            "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved.";
 
         /// <summary>
         /// Indicates that settings for <typeparamref name="TProvider"/> should be loaded into <typeparamref name="TOptions"/> type.
@@ -22,10 +23,23 @@ namespace Microsoft.Extensions.Logging.Configuration
         /// <typeparam name="TOptions">The options class </typeparam>
         /// <typeparam name="TProvider">The provider class</typeparam>
         [RequiresUnreferencedCode(TrimmingRequiresUnreferencedCodeMessage)]
-        public static void RegisterProviderOptions<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions, TProvider>(IServiceCollection services) where TOptions : class
+        public static void RegisterProviderOptions<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions,
+            TProvider
+        >(IServiceCollection services) where TOptions : class
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<TOptions>, LoggerProviderConfigureOptions<TOptions, TProvider>>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IOptionsChangeTokenSource<TOptions>, LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<TOptions>,
+                    LoggerProviderConfigureOptions<TOptions, TProvider>
+                >()
+            );
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<TOptions>,
+                    LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
+                >()
+            );
         }
     }
 }

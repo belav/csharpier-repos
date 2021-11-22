@@ -22,11 +22,8 @@ namespace Microsoft.Interop
 
         public ParameterSyntax AsParameter(TypePositionInfo info)
         {
-            TypeSyntax type = info.IsByRef
-                ? PointerType(AsNativeType(info))
-                : AsNativeType(info);
-            return Parameter(Identifier(info.InstanceIdentifier))
-                .WithType(type);
+            TypeSyntax type = info.IsByRef ? PointerType(AsNativeType(info)) : AsNativeType(info);
+            return Parameter(Identifier(info.InstanceIdentifier)).WithType(type);
         }
 
         public ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context)
@@ -40,9 +37,11 @@ namespace Microsoft.Interop
                 return Argument(IdentifierName(context.GetIdentifiers(info).native));
             }
             return Argument(
-                    PrefixUnaryExpression(
-                        SyntaxKind.AddressOfExpression,
-                        IdentifierName(context.GetIdentifiers(info).native)));
+                PrefixUnaryExpression(
+                    SyntaxKind.AddressOfExpression,
+                    IdentifierName(context.GetIdentifiers(info).native)
+                )
+            );
         }
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
@@ -61,10 +60,14 @@ namespace Microsoft.Interop
                             PointerType(AsNativeType(info)),
                             SingletonSeparatedList(
                                 VariableDeclarator(Identifier(nativeIdentifier))
-                                    .WithInitializer(EqualsValueClause(
-                                        PrefixUnaryExpression(SyntaxKind.AddressOfExpression,
-                                            IdentifierName(managedIdentifier))
-                                    ))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            PrefixUnaryExpression(
+                                                SyntaxKind.AddressOfExpression,
+                                                IdentifierName(managedIdentifier)
+                                            )
+                                        )
+                                    )
                             )
                         ),
                         EmptyStatement()
@@ -84,16 +87,19 @@ namespace Microsoft.Interop
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(nativeIdentifier),
-                                IdentifierName(managedIdentifier)));
+                                IdentifierName(managedIdentifier)
+                            )
+                        );
                     }
-
                     break;
                 case StubCodeContext.Stage.Unmarshal:
                     yield return ExpressionStatement(
                         AssignmentExpression(
                             SyntaxKind.SimpleAssignmentExpression,
                             IdentifierName(managedIdentifier),
-                            IdentifierName(nativeIdentifier)));
+                            IdentifierName(nativeIdentifier)
+                        )
+                    );
                     break;
                 default:
                     break;
@@ -102,10 +108,14 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context)
         {
-            return info.IsByRef && !info.IsManagedReturnPosition && !context.SingleFrameSpansNativeContext;
+            return info.IsByRef
+                && !info.IsManagedReturnPosition
+                && !context.SingleFrameSpansNativeContext;
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
     }
-
 }

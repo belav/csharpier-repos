@@ -62,45 +62,102 @@ namespace System.IO.Tests
 
         public override IEnumerable<TimeFunction> TimeFunctions(bool requiresRoundtripping = false)
         {
-            if (IOInputs.SupportsGettingCreationTime && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime))
+            if (
+                IOInputs.SupportsGettingCreationTime
+                && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime)
+            )
             {
                 yield return TimeFunction.Create(
-                    ((testFile, time) => { testFile.CreationTime = time; }),
+                    (
+                        (testFile, time) =>
+                        {
+                            testFile.CreationTime = time;
+                        }
+                    ),
                     ((testFile) => testFile.CreationTime),
-                    DateTimeKind.Local);
+                    DateTimeKind.Local
+                );
                 yield return TimeFunction.Create(
-                    ((testFile, time) => { testFile.CreationTimeUtc = time; }),
+                    (
+                        (testFile, time) =>
+                        {
+                            testFile.CreationTimeUtc = time;
+                        }
+                    ),
                     ((testFile) => testFile.CreationTimeUtc),
-                    DateTimeKind.Unspecified);
+                    DateTimeKind.Unspecified
+                );
                 yield return TimeFunction.Create(
-                    ((testFile, time) => { testFile.CreationTimeUtc = time; }),
+                    (
+                        (testFile, time) =>
+                        {
+                            testFile.CreationTimeUtc = time;
+                        }
+                    ),
                     ((testFile) => testFile.CreationTimeUtc),
-                    DateTimeKind.Utc);
+                    DateTimeKind.Utc
+                );
             }
             yield return TimeFunction.Create(
-                ((testFile, time) => { testFile.LastAccessTime = time; }),
+                (
+                    (testFile, time) =>
+                    {
+                        testFile.LastAccessTime = time;
+                    }
+                ),
                 ((testFile) => testFile.LastAccessTime),
-                DateTimeKind.Local);
+                DateTimeKind.Local
+            );
             yield return TimeFunction.Create(
-                ((testFile, time) => { testFile.LastAccessTimeUtc = time; }),
+                (
+                    (testFile, time) =>
+                    {
+                        testFile.LastAccessTimeUtc = time;
+                    }
+                ),
                 ((testFile) => testFile.LastAccessTimeUtc),
-                DateTimeKind.Unspecified);
+                DateTimeKind.Unspecified
+            );
             yield return TimeFunction.Create(
-                ((testFile, time) => { testFile.LastAccessTimeUtc = time; }),
+                (
+                    (testFile, time) =>
+                    {
+                        testFile.LastAccessTimeUtc = time;
+                    }
+                ),
                 ((testFile) => testFile.LastAccessTimeUtc),
-                DateTimeKind.Utc);
+                DateTimeKind.Utc
+            );
             yield return TimeFunction.Create(
-                ((testFile, time) => { testFile.LastWriteTime = time; }),
+                (
+                    (testFile, time) =>
+                    {
+                        testFile.LastWriteTime = time;
+                    }
+                ),
                 ((testFile) => testFile.LastWriteTime),
-                DateTimeKind.Local);
+                DateTimeKind.Local
+            );
             yield return TimeFunction.Create(
-                ((testFile, time) => { testFile.LastWriteTimeUtc = time; }),
+                (
+                    (testFile, time) =>
+                    {
+                        testFile.LastWriteTimeUtc = time;
+                    }
+                ),
                 ((testFile) => testFile.LastWriteTimeUtc),
-                DateTimeKind.Unspecified);
+                DateTimeKind.Unspecified
+            );
             yield return TimeFunction.Create(
-                ((testFile, time) => { testFile.LastWriteTimeUtc = time; }),
+                (
+                    (testFile, time) =>
+                    {
+                        testFile.LastWriteTimeUtc = time;
+                    }
+                ),
                 ((testFile) => testFile.LastWriteTimeUtc),
-                DateTimeKind.Utc);
+                DateTimeKind.Utc
+            );
         }
 
         [ConditionalFact(nameof(HighTemporalResolution))]
@@ -194,7 +251,6 @@ namespace System.IO.Tests
             Assert.Equal(DateTime.FromFileTimeUtc(0), info.LastAccessTimeUtc);
         }
 
-
         [Fact]
         [PlatformSpecific(TestPlatforms.Linux)]
         public void BirthTimeIsNotNewerThanLowestOfAccessModifiedTimes()
@@ -221,11 +277,14 @@ namespace System.IO.Tests
             string pageFilePath = Directory.EnumerateFiles(@"C:\", "pagefile.sys").FirstOrDefault();
             if (pageFilePath != null)
             {
-                Assert.All(TimeFunctions(), (item) =>
-                {
-                    var time = item.Getter(new FileInfo(pageFilePath));
-                    Assert.NotEqual(DateTime.FromFileTime(0), time);
-                });
+                Assert.All(
+                    TimeFunctions(),
+                    (item) =>
+                    {
+                        var time = item.Getter(new FileInfo(pageFilePath));
+                        Assert.NotEqual(DateTime.FromFileTime(0), time);
+                    }
+                );
             }
         }
     }

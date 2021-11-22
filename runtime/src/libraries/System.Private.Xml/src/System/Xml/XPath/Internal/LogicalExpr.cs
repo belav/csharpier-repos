@@ -17,9 +17,12 @@ namespace MS.Internal.Xml.XPath
         public LogicalExpr(Operator.Op op, Query opnd1, Query opnd2)
         {
             Debug.Assert(
-                Operator.Op.LT == op || Operator.Op.GT == op ||
-                Operator.Op.LE == op || Operator.Op.GE == op ||
-                Operator.Op.EQ == op || Operator.Op.NE == op
+                Operator.Op.LT == op
+                    || Operator.Op.GT == op
+                    || Operator.Op.LE == op
+                    || Operator.Op.GE == op
+                    || Operator.Op.EQ == op
+                    || Operator.Op.NE == op
             );
             _op = op;
             _opnd1 = opnd1;
@@ -76,19 +79,75 @@ namespace MS.Internal.Xml.XPath
         //                  Number,                       String,                        Boolean,                     NodeSet,                      Navigator
         private static readonly cmpXslt?[][] s_CompXsltE =
         {
-            new cmpXslt?[] { new cmpXslt(cmpNumberNumber), null,                          null,                        null,                         null                    },
-            new cmpXslt?[] { new cmpXslt(cmpStringNumber), new cmpXslt(cmpStringStringE), null,                        null,                         null                    },
-            new cmpXslt?[] { new cmpXslt(cmpBoolNumberE ), new cmpXslt(cmpBoolStringE  ), new cmpXslt(cmpBoolBoolE  ), null,                         null                    },
-            new cmpXslt?[] { new cmpXslt(cmpQueryNumber ), new cmpXslt(cmpQueryStringE ), new cmpXslt(cmpQueryBoolE ), new cmpXslt(cmpQueryQueryE ), null                    },
-            new cmpXslt?[] { new cmpXslt(cmpRtfNumber   ), new cmpXslt(cmpRtfStringE   ), new cmpXslt(cmpRtfBoolE   ), new cmpXslt(cmpRtfQueryE   ), new cmpXslt(cmpRtfRtfE) },
+            new cmpXslt?[] { new cmpXslt(cmpNumberNumber), null, null, null, null },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpStringNumber),
+                new cmpXslt(cmpStringStringE),
+                null,
+                null,
+                null
+            },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpBoolNumberE),
+                new cmpXslt(cmpBoolStringE),
+                new cmpXslt(cmpBoolBoolE),
+                null,
+                null
+            },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpQueryNumber),
+                new cmpXslt(cmpQueryStringE),
+                new cmpXslt(cmpQueryBoolE),
+                new cmpXslt(cmpQueryQueryE),
+                null
+            },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpRtfNumber),
+                new cmpXslt(cmpRtfStringE),
+                new cmpXslt(cmpRtfBoolE),
+                new cmpXslt(cmpRtfQueryE),
+                new cmpXslt(cmpRtfRtfE)
+            },
         };
         private static readonly cmpXslt?[][] s_CompXsltO =
         {
-            new cmpXslt?[] { new cmpXslt(cmpNumberNumber), null,                          null,                        null,                         null                    },
-            new cmpXslt?[] { new cmpXslt(cmpStringNumber), new cmpXslt(cmpStringStringO), null,                        null,                         null                    },
-            new cmpXslt?[] { new cmpXslt(cmpBoolNumberO ), new cmpXslt(cmpBoolStringO  ), new cmpXslt(cmpBoolBoolO  ), null,                         null                    },
-            new cmpXslt?[] { new cmpXslt(cmpQueryNumber ), new cmpXslt(cmpQueryStringO ), new cmpXslt(cmpQueryBoolO ), new cmpXslt(cmpQueryQueryO ), null                    },
-            new cmpXslt?[] { new cmpXslt(cmpRtfNumber   ), new cmpXslt(cmpRtfStringO   ), new cmpXslt(cmpRtfBoolO   ), new cmpXslt(cmpRtfQueryO   ), new cmpXslt(cmpRtfRtfO) },
+            new cmpXslt?[] { new cmpXslt(cmpNumberNumber), null, null, null, null },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpStringNumber),
+                new cmpXslt(cmpStringStringO),
+                null,
+                null,
+                null
+            },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpBoolNumberO),
+                new cmpXslt(cmpBoolStringO),
+                new cmpXslt(cmpBoolBoolO),
+                null,
+                null
+            },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpQueryNumber),
+                new cmpXslt(cmpQueryStringO),
+                new cmpXslt(cmpQueryBoolO),
+                new cmpXslt(cmpQueryQueryO),
+                null
+            },
+            new cmpXslt?[]
+            {
+                new cmpXslt(cmpRtfNumber),
+                new cmpXslt(cmpRtfStringO),
+                new cmpXslt(cmpRtfBoolO),
+                new cmpXslt(cmpRtfQueryO),
+                new cmpXslt(cmpRtfRtfO)
+            },
         };
 
         /*cmpXslt:*/
@@ -128,8 +187,10 @@ namespace MS.Internal.Xml.XPath
         private static bool cmpQueryQueryO(Operator.Op op, object val1, object val2)
         {
             Debug.Assert(
-                op == Operator.Op.LT || op == Operator.Op.GT ||
-                op == Operator.Op.LE || op == Operator.Op.GE
+                op == Operator.Op.LT
+                    || op == Operator.Op.GT
+                    || op == Operator.Op.LE
+                    || op == Operator.Op.GE
             );
 
             NodeSet n1 = new NodeSet(val1);
@@ -251,7 +312,8 @@ namespace MS.Internal.Xml.XPath
 
         private static bool cmpBoolBoolE(Operator.Op op, bool n1, bool n2)
         {
-            Debug.Assert(op == Operator.Op.EQ || op == Operator.Op.NE,
+            Debug.Assert(
+                op == Operator.Op.EQ || op == Operator.Op.NE,
                 "Unexpected Operator.op code in cmpBoolBoolE()"
             );
             return (op == Operator.Op.EQ) == (n1 == n2);
@@ -300,7 +362,8 @@ namespace MS.Internal.Xml.XPath
 
         private static bool cmpBoolStringO(Operator.Op op, object val1, object val2)
         {
-            return cmpNumberNumberO(op,
+            return cmpNumberNumberO(
+                op,
                 NumberFunctions.Number((bool)val1),
                 NumberFunctions.Number((string)val2)
             );
@@ -308,7 +371,8 @@ namespace MS.Internal.Xml.XPath
 
         private static bool cmpRtfBoolO(Operator.Op op, object val1, object val2)
         {
-            return cmpNumberNumberO(op,
+            return cmpNumberNumberO(
+                op,
                 NumberFunctions.Number(Rtf(val1)),
                 NumberFunctions.Number((bool)val2)
             );
@@ -318,12 +382,18 @@ namespace MS.Internal.Xml.XPath
         {
             switch (op)
             {
-                case Operator.Op.LT: return (n1 < n2);
-                case Operator.Op.GT: return (n1 > n2);
-                case Operator.Op.LE: return (n1 <= n2);
-                case Operator.Op.GE: return (n1 >= n2);
-                case Operator.Op.EQ: return (n1 == n2);
-                case Operator.Op.NE: return (n1 != n2);
+                case Operator.Op.LT:
+                    return (n1 < n2);
+                case Operator.Op.GT:
+                    return (n1 > n2);
+                case Operator.Op.LE:
+                    return (n1 <= n2);
+                case Operator.Op.GE:
+                    return (n1 >= n2);
+                case Operator.Op.EQ:
+                    return (n1 == n2);
+                case Operator.Op.NE:
+                    return (n1 != n2);
             }
             Debug.Fail("Unexpected Operator.op code in cmpNumberNumber()");
             return false;
@@ -332,10 +402,14 @@ namespace MS.Internal.Xml.XPath
         {
             switch (op)
             {
-                case Operator.Op.LT: return (n1 < n2);
-                case Operator.Op.GT: return (n1 > n2);
-                case Operator.Op.LE: return (n1 <= n2);
-                case Operator.Op.GE: return (n1 >= n2);
+                case Operator.Op.LT:
+                    return (n1 < n2);
+                case Operator.Op.GT:
+                    return (n1 > n2);
+                case Operator.Op.LE:
+                    return (n1 <= n2);
+                case Operator.Op.GE:
+                    return (n1 >= n2);
             }
             Debug.Fail("Unexpected Operator.op code in cmpNumberNumber()");
             return false;
@@ -363,7 +437,8 @@ namespace MS.Internal.Xml.XPath
 
         private static bool cmpStringStringE(Operator.Op op, string n1, string n2)
         {
-            Debug.Assert(op == Operator.Op.EQ || op == Operator.Op.NE,
+            Debug.Assert(
+                op == Operator.Op.EQ || op == Operator.Op.NE,
                 "Unexpected Operator.op code in cmpStringStringE()"
             );
             return (op == Operator.Op.EQ) == (n1 == n2);
@@ -408,7 +483,10 @@ namespace MS.Internal.Xml.XPath
             return cmpNumberNumberO(op, n1, n2);
         }
 
-        public override XPathNodeIterator Clone() { return new LogicalExpr(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new LogicalExpr(this);
+        }
 
         private struct NodeSet
         {
@@ -431,11 +509,20 @@ namespace MS.Internal.Xml.XPath
                 _opnd.Reset();
             }
 
-            public string Value { get { return _current!.Value; } }
+            public string Value
+            {
+                get { return _current!.Value; }
+            }
         }
 
-        private static string Rtf(object o) { return ((XPathNavigator)o).Value; }
+        private static string Rtf(object o)
+        {
+            return ((XPathNavigator)o).Value;
+        }
 
-        public override XPathResultType StaticType { get { return XPathResultType.Boolean; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Boolean; }
+        }
     }
 }

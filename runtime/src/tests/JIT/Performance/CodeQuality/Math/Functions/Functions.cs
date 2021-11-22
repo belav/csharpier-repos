@@ -15,7 +15,11 @@ namespace Functions
         private const int defaultIterations = 1000;
 #endif
 
-        private static readonly IDictionary<string, Action> TestList = new Dictionary<string, Action>() {
+        private static readonly IDictionary<string, Action> TestList = new Dictionary<
+            string,
+            Action
+        >()
+        {
             ["absdouble"] = MathTests.AbsDoubleTest,
             ["abssingle"] = MathTests.AbsSingleTest,
             ["acosdouble"] = MathTests.AcosDoubleTest,
@@ -58,7 +62,8 @@ namespace Functions
 
         private static int Main(string[] args)
         {
-            var isPassing = true; var iterations = defaultIterations;
+            var isPassing = true;
+            var iterations = defaultIterations;
             ICollection<string> testsToRun = new HashSet<string>();
 
             try
@@ -115,19 +120,23 @@ namespace Functions
 
         private static void PrintUsage()
         {
-            Console.WriteLine(@"Usage:
+            Console.WriteLine(
+                @"Usage:
 Functions [name] [-bench #]
 
   [name]: The name of the function to test. Defaults to 'all'.
-    all");
+    all"
+            );
 
             foreach (var testName in TestList.Keys)
             {
                 Console.WriteLine($"  {testName}");
             }
 
-            Console.WriteLine($@"
-  [-bench #]: The number of iterations. Defaults to {defaultIterations}");
+            Console.WriteLine(
+                $@"
+  [-bench #]: The number of iterations. Defaults to {defaultIterations}"
+            );
         }
 
         private static void Test(int iterations, Action action)
@@ -163,8 +172,9 @@ Functions [name] [-bench #]
             totalElapsedTimeInSeconds = (totalElapsedTime / (double)(Stopwatch.Frequency));
 
             Console.WriteLine($"    Total Time: {totalElapsedTimeInSeconds} seconds");
-            Console.WriteLine($"    Average Time: {totalElapsedTimeInSeconds / iterations} seconds");
-
+            Console.WriteLine(
+                $"    Average Time: {totalElapsedTimeInSeconds / iterations} seconds"
+            );
             // ****************************************************************
         }
     }

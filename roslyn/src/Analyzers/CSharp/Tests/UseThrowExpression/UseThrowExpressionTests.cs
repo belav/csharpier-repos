@@ -20,21 +20,24 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 {
-    public partial class UseThrowExpressionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseThrowExpressionTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseThrowExpressionTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public UseThrowExpressionTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseThrowExpressionDiagnosticAnalyzer(), new UseThrowExpressionCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseThrowExpressionDiagnosticAnalyzer(),
+                new UseThrowExpressionCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task WithoutBraces()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -45,7 +48,7 @@ class C
         _s = s;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -53,7 +56,8 @@ class C
     {
         _s = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
@@ -61,7 +65,7 @@ class C
         public async Task TestMissingOnIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -71,14 +75,15 @@ class C
             throw new ArgumentNullException(nameof(s));
         _s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task WithBraces()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -92,7 +97,7 @@ class C
         _s = s;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -100,14 +105,15 @@ class C
     {
         _s = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task TestNotOnAssign()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -117,14 +123,15 @@ class C
             throw new ArgumentNullException(nameof(s));
         _s = [|s|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task OnlyInCSharp7AndHigher()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -135,14 +142,18 @@ class C
             [|throw|] new ArgumentNullException(nameof(s)) };
         _s = s;
     }
-}", new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task WithIntermediaryStatements()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -161,7 +172,7 @@ class C
         _s = s;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -174,14 +185,15 @@ class C
 
         _s = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task NotWithIntermediaryWrite()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -194,14 +206,15 @@ class C
         s = ""something"";
         _s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task NotWithIntermediaryMemberAccess()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -214,14 +227,15 @@ class C
         s.ToString();
         _s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task TestNullCheckOnLeft()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -232,7 +246,7 @@ class C
         _s = s;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -240,14 +254,15 @@ class C
     {
         _s = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task TestWithLocal()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -259,7 +274,7 @@ class C
         _s = s;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -268,14 +283,15 @@ class C
         string s = null;
         _s = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task TestNotOnField()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -287,14 +303,15 @@ class C
             [|throw|] new ArgumentNullException(nameof(s));
         _s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task TestAssignBeforeCheck()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -304,7 +321,8 @@ class C
         if (s == null)
             [|throw|] new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [WorkItem(16234, "https://github.com/dotnet/roslyn/issues/16234")]
@@ -312,7 +330,7 @@ class C
         public async Task TestNotInExpressionTree()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class C
@@ -329,7 +347,8 @@ class C
             _s = s;
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(404142, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=404142")]
@@ -337,7 +356,7 @@ class C
         public async Task TestNotWithAsCheck()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class BswParser3
 {
@@ -363,7 +382,8 @@ internal class ParserSyntax
 
 public interface ISyntax
 {
-}");
+}"
+            );
         }
 
         [WorkItem(18670, "https://github.com/dotnet/roslyn/issues/18670")]
@@ -371,7 +391,7 @@ public interface ISyntax
         public async Task TestNotWithElseClause()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -391,7 +411,8 @@ class C
 
         _x = x;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(19377, "https://github.com/dotnet/roslyn/issues/19377")]
@@ -399,7 +420,7 @@ class C
         public async Task TestNotWithMultipleStatementsInIf1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -412,7 +433,8 @@ class C
         }
         _s = s;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(19377, "https://github.com/dotnet/roslyn/issues/19377")]
@@ -420,7 +442,7 @@ class C
         public async Task TestNotWithMultipleStatementsInIf2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -433,7 +455,8 @@ class C
         }
         _s = s;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21612, "https://github.com/dotnet/roslyn/issues/21612")]
@@ -441,7 +464,7 @@ class C
         public async Task TestNotWhenAccessedOnLeftOfAssignment()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class A
@@ -457,7 +480,8 @@ class B
         if (a == null) [|throw|] new ArgumentNullException();
         map[a.Id] = a;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(24628, "https://github.com/dotnet/roslyn/issues/24628")]
@@ -465,7 +489,7 @@ class B
         public async Task TestNotWhenAccessedOnLineBefore()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class B
@@ -480,7 +504,8 @@ class B
     }
 
     object MakeKey(object x) => null;
-}");
+}"
+            );
         }
 
         [WorkItem(22926, "https://github.com/dotnet/roslyn/issues/22926")]
@@ -488,7 +513,7 @@ class B
         public async Task TestNotWhenUnconstrainedTypeParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class A<T>
 {
     T x;
@@ -497,7 +522,8 @@ class A<T>
         if (t == null) [|throw|] new ArgumentNullException();
         x = t;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(22926, "https://github.com/dotnet/roslyn/issues/22926")]
@@ -505,7 +531,7 @@ class A<T>
         public async Task TestWhenClassConstrainedTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class A<T> where T: class
 {
     T x;
@@ -515,7 +541,7 @@ class A<T> where T: class
         x = t;
     }
 }",
-@"using System;
+                @"using System;
 class A<T> where T: class
 {
     T x;
@@ -523,7 +549,8 @@ class A<T> where T: class
     {
         x = t ?? throw new ArgumentNullException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(22926, "https://github.com/dotnet/roslyn/issues/22926")]
@@ -531,7 +558,7 @@ class A<T> where T: class
         public async Task TestWhenStructConstrainedTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class A<T> where T: struct
 {
     T? x;
@@ -541,7 +568,7 @@ class A<T> where T: struct
         x = t;
     }
 }",
-@"using System;
+                @"using System;
 class A<T> where T: struct
 {
     T? x;
@@ -549,7 +576,8 @@ class A<T> where T: struct
     {
         x = t ?? throw new ArgumentNullException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(44454, "https://github.com/dotnet/roslyn/issues/44454")]
@@ -557,18 +585,20 @@ class A<T> where T: struct
         public async Task TopLevelStatement()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 string s = null;
 string x = null;
 if (s == null) [|throw|] new ArgumentNullException();
 x = s;
 ",
-@"using System;
+                @"using System;
 string s = null;
 string x = null;
 
 x = s ?? throw new ArgumentNullException();
-", TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+",
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
     }
 }

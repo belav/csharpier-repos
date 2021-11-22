@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public FindLiteralsSearchEngine(
             Solution solution,
-            IStreamingFindLiteralReferencesProgress progress, object value)
+            IStreamingFindLiteralReferencesProgress progress,
+            object value
+        )
         {
             _solution = solution;
             _progress = progress;
@@ -74,7 +76,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public async Task FindReferencesAsync(CancellationToken cancellationToken)
         {
-            var disposable = await _progressTracker.AddSingleItemAsync(cancellationToken).ConfigureAwait(false);
+            var disposable = await _progressTracker
+                .AddSingleItemAsync(cancellationToken)
+                .ConfigureAwait(false);
             await using var _ = disposable.ConfigureAwait(false);
 
             if (_searchKind != SearchKind.None)
@@ -93,7 +97,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var documentTasks = new List<Task>();
-                foreach (var document in await project.GetAllRegularAndSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false))
+                foreach (
+                    var document in await project
+                        .GetAllRegularAndSourceGeneratedDocumentsAsync(cancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
                     documentTasks.Add(ProcessDocumentAsync(document, cancellationToken));
                 }
@@ -102,7 +110,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private async Task ProcessDocumentAsync(Document document, CancellationToken cancellationToken)
+        private async Task ProcessDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -114,10 +125,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private async Task ProcessDocumentWorkerAsync(Document document, CancellationToken cancellationToken)
+        private async Task ProcessDocumentWorkerAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var index = await SyntaxTreeIndex.GetIndexAsync(
-                document, cancellationToken).ConfigureAwait(false);
+            var index = await SyntaxTreeIndex
+                .GetIndexAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             if (_searchKind == SearchKind.StringLiterals)
             {
@@ -132,7 +147,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private async Task SearchDocumentAsync(Document document, CancellationToken cancellationToken)
+        private async Task SearchDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
@@ -143,13 +161,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             foreach (var token in matches)
             {
-                await _progress.OnReferenceFoundAsync(document, token.Span, cancellationToken).ConfigureAwait(false);
+                await _progress
+                    .OnReferenceFoundAsync(document, token.Span, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
         private void ProcessNode(
-            ISyntaxFactsService syntaxFacts, SyntaxNode node,
-            ArrayBuilder<SyntaxToken> matches, CancellationToken cancellationToken)
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode node,
+            ArrayBuilder<SyntaxToken> matches,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             foreach (var child in node.ChildNodesAndTokens())
@@ -166,21 +189,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         private void ProcessToken(
-            ISyntaxFactsService syntaxFacts, SyntaxToken token,
-            ArrayBuilder<SyntaxToken> matches)
+            ISyntaxFactsService syntaxFacts,
+            SyntaxToken token,
+            ArrayBuilder<SyntaxToken> matches
+        )
         {
-            if (_searchKind == SearchKind.StringLiterals &&
-                syntaxFacts.IsStringLiteral(token))
+            if (_searchKind == SearchKind.StringLiterals && syntaxFacts.IsStringLiteral(token))
             {
                 CheckToken(token, matches);
             }
-            else if (_searchKind == SearchKind.CharacterLiterals &&
-                     syntaxFacts.IsCharacterLiteral(token))
+            else if (
+                _searchKind == SearchKind.CharacterLiterals && syntaxFacts.IsCharacterLiteral(token)
+            )
             {
                 CheckToken(token, matches);
             }
-            else if (_searchKind == SearchKind.NumericLiterals &&
-                     syntaxFacts.IsNumericLiteral(token))
+            else if (
+                _searchKind == SearchKind.NumericLiterals && syntaxFacts.IsNumericLiteral(token)
+            )
             {
                 CheckToken(token, matches);
             }

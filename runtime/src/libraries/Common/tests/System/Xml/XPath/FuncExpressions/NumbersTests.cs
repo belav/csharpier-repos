@@ -54,7 +54,12 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"1 + child::Para[1]";
             var expected = 11d;
 
-            Utils.XPathNumberTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -69,7 +74,12 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] + 1";
             var expected = 11d;
 
-            Utils.XPathNumberTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -196,7 +206,12 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"50 div child::Para[1]";
             var expected = 5d;
 
-            Utils.XPathNumberTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -211,7 +226,12 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] div 2";
             var expected = 5d;
 
-            Utils.XPathNumberTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>

@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(FindReferencesOfOverloadsCommandHandler))]
-    internal sealed class FindReferencesOfOverloadsCommandHandler :
-        AbstractNavigationCommandHandler<FindReferencesOfOverloadsCommandArgs>
+    internal sealed class FindReferencesOfOverloadsCommandHandler
+        : AbstractNavigationCommandHandler<FindReferencesOfOverloadsCommandArgs>
     {
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly IThreadingContext _threadingContext;
@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         public FindReferencesOfOverloadsCommandHandler(
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
-            : base(streamingPresenters)
+            IThreadingContext threadingContext
+        ) : base(streamingPresenters)
         {
             Contract.ThrowIfNull(streamingPresenters);
             Contract.ThrowIfNull(listenerProvider);
@@ -54,7 +54,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             _threadingContext = threadingContext;
         }
 
-        protected override bool TryExecuteCommand(int caretPosition, Document document, CommandExecutionContext context)
+        protected override bool TryExecuteCommand(
+            int caretPosition,
+            Document document,
+            CommandExecutionContext context
+        )
         {
             var streamingService = document.GetLanguageService<IFindUsagesService>();
             var streamingPresenter = GetStreamingPresenter();
@@ -71,9 +75,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             return false;
         }
 
-        private static async Task<ISymbol[]> GatherSymbolsAsync(ISymbol symbol, Microsoft.CodeAnalysis.Solution solution, CancellationToken token)
+        private static async Task<ISymbol[]> GatherSymbolsAsync(
+            ISymbol symbol,
+            Microsoft.CodeAnalysis.Solution solution,
+            CancellationToken token
+        )
         {
-            var implementations = await SymbolFinder.FindImplementationsAsync(symbol, solution, null, token).ConfigureAwait(false);
+            var implementations = await SymbolFinder
+                .FindImplementationsAsync(symbol, solution, null, token)
+                .ConfigureAwait(false);
             var result = new ISymbol[implementations.Count() + 1];
             result[0] = symbol;
             var i = 1;
@@ -86,32 +96,52 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         }
 
         private async Task StreamingFindReferencesAsync(
-            Document document, int caretPosition, IStreamingFindUsagesPresenter presenter)
+            Document document,
+            int caretPosition,
+            IStreamingFindUsagesPresenter presenter
+        )
         {
             try
             {
                 // first, let's see if we even have a comment, otherwise there's no use in starting a search
-                var relevantSymbol = await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(document, caretPosition, new CancellationToken()).ConfigureAwait(false);
+                var relevantSymbol = await FindUsagesHelpers
+                    .GetRelevantSymbolAndProjectAtPositionAsync(
+                        document,
+                        caretPosition,
+                        new CancellationToken()
+                    )
+                    .ConfigureAwait(false);
                 var symbol = relevantSymbol?.symbol;
                 if (symbol == null)
                     return; // would be useful if we could notify the user why we didn't do anything
-                            // maybe using something like an info bar?
+                // maybe using something like an info bar?
 
                 var findUsagesService = document.GetLanguageService<IFindUsagesService>();
 
-                using var token = _asyncListener.BeginAsyncOperation(nameof(StreamingFindReferencesAsync));
+                using var token = _asyncListener.BeginAsyncOperation(
+                    nameof(StreamingFindReferencesAsync)
+                );
 
-                var (context, cancellationToken) = presenter.StartSearch(EditorFeaturesResources.Find_References, supportsReferences: true);
+                var (context, cancellationToken) = presenter.StartSearch(
+                    EditorFeaturesResources.Find_References,
+                    supportsReferences: true
+                );
 
-                using (Logger.LogBlock(
-                    FunctionId.CommandHandler_FindAllReference,
-                    KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
-                    cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CommandHandler_FindAllReference,
+                        KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
+                        cancellationToken
+                    )
+                )
                 {
                     var symbolsToLookup = new List<ISymbol>();
 
-                    foreach (var curSymbol in symbol.ContainingType.GetMembers()
-                                                    .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name))
+                    foreach (
+                        var curSymbol in symbol.ContainingType
+                            .GetMembers()
+                            .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name)
+                    )
                     {
                         if (!document.Project.TryGetCompilation(out var compilation))
                         {
@@ -119,17 +149,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             continue;
                         }
 
-                        foreach (var sym in SymbolFinder.FindSimilarSymbols(curSymbol, compilation, cancellationToken))
+                        foreach (
+                            var sym in SymbolFinder.FindSimilarSymbols(
+                                curSymbol,
+                                compilation,
+                                cancellationToken
+                            )
+                        )
                         {
                             // assumption here is, that FindSimilarSymbols returns symbols inside same project
-                            var symbolsToAdd = await GatherSymbolsAsync(sym, document.Project.Solution, cancellationToken).ConfigureAwait(false);
+                            var symbolsToAdd = await GatherSymbolsAsync(
+                                    sym,
+                                    document.Project.Solution,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             symbolsToLookup.AddRange(symbolsToAdd);
                         }
                     }
 
                     foreach (var candidate in symbolsToLookup)
                     {
-                        await AbstractFindUsagesService.FindSymbolReferencesAsync(context, candidate, document.Project, cancellationToken).ConfigureAwait(false);
+                        await AbstractFindUsagesService
+                            .FindSymbolReferencesAsync(
+                                context,
+                                candidate,
+                                document.Project,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     // Note: we don't need to put this in a finally.  The only time we might not hit
@@ -140,12 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                     await context.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
     }
 }

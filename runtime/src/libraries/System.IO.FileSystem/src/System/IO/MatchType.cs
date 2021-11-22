@@ -13,7 +13,6 @@ namespace System.IO
         /// Match using '*' and '?' wildcards.
         /// </summary>
         Simple,
-
         /// <summary>
         /// Match using Win32 DOS style matching semantics. '*', '?', '&lt;', '&gt;', and '"'
         /// are all considered wildcards.

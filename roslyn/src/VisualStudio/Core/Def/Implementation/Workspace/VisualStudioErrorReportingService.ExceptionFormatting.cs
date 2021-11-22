@@ -31,12 +31,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return GetStackForException(exception, includeMessageOnly: false);
         }
 
-        private static string GetStackForAggregateException(Exception exception, AggregateException aggregate)
+        private static string GetStackForAggregateException(
+            Exception exception,
+            AggregateException aggregate
+        )
         {
             var text = GetStackForException(exception, includeMessageOnly: true);
             for (var i = 0; i < aggregate.InnerExceptions.Count; i++)
             {
-                text = $"{text}{Environment.NewLine}---> (Inner Exception #{i}) {GetFormattedExceptionStack(aggregate.InnerExceptions[i])} <--- {Environment.NewLine}";
+                text =
+                    $"{text}{Environment.NewLine}---> (Inner Exception #{i}) {GetFormattedExceptionStack(aggregate.InnerExceptions[i])} <--- {Environment.NewLine}";
             }
 
             return text;
@@ -46,9 +50,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             var message = exception.Message;
             var className = exception.GetType().ToString();
-            var stackText = message.Length <= 0
-                ? className
-                : className + " : " + message;
+            var stackText = message.Length <= 0 ? className : className + " : " + message;
             var innerException = exception.InnerException;
             if (innerException != null)
             {
@@ -62,8 +64,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
                 else
                 {
-                    stackText += " ---> " + GetFormattedExceptionStack(innerException) + Environment.NewLine +
-                                 "   " + ServicesVSResources.End_of_inner_exception_stack;
+                    stackText +=
+                        " ---> "
+                        + GetFormattedExceptionStack(innerException)
+                        + Environment.NewLine
+                        + "   "
+                        + ServicesVSResources.End_of_inner_exception_stack;
                 }
             }
 
@@ -79,11 +85,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return string.Empty;
             }
 
-            var stackFrameLines = from frame in stackFrames
-                                  let method = frame.GetMethod()
-                                  let declaringType = method?.DeclaringType
-                                  where ShouldShowFrame(declaringType)
-                                  select FormatFrame(method, declaringType);
+            var stackFrameLines =
+                from frame in stackFrames
+                let method = frame.GetMethod()
+                let declaringType = method?.DeclaringType
+                where ShouldShowFrame(declaringType)
+                select FormatFrame(method, declaringType);
             var stringBuilder = new StringBuilder();
             return string.Join(Environment.NewLine, stackFrameLines);
         }
@@ -157,17 +164,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
         }
 
-        private static void FormatGenericArguments(StringBuilder stringBuilder, Type[] genericTypeArguments)
+        private static void FormatGenericArguments(
+            StringBuilder stringBuilder,
+            Type[] genericTypeArguments
+        )
         {
             if (genericTypeArguments.Length <= 0)
             {
                 return;
             }
 
-            stringBuilder.Append("[" + string.Join(",", genericTypeArguments.Select(args => args.Name)) + "]");
+            stringBuilder.Append(
+                "[" + string.Join(",", genericTypeArguments.Select(args => args.Name)) + "]"
+            );
         }
 
         private static void FormatParameters(StringBuilder stringBuilder, MethodBase method) =>
-            stringBuilder.Append(string.Join(",", method?.GetParameters().Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name) ?? Array.Empty<string>()));
+            stringBuilder.Append(
+                string.Join(
+                    ",",
+                    method?
+                        .GetParameters()
+                        .Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name)
+                        ?? Array.Empty<string>()
+                )
+            );
     }
 }

@@ -9,9 +9,15 @@ namespace Internal.Cryptography
 {
     internal static class DesBCryptModes
     {
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = OpenDesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CBC);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = OpenDesAlgorithm(Cng.BCRYPT_CHAIN_MODE_ECB);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb8 = OpenDesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CFB);
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = OpenDesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CBC
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = OpenDesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_ECB
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb8 = OpenDesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CFB
+        );
 
         internal static SafeAlgorithmHandle GetSharedHandle(CipherMode cipherMode, int feedback) =>
             // Windows 8 added support to set the CipherMode value on a key,
@@ -26,16 +32,19 @@ namespace Internal.Cryptography
 
         private static Lazy<SafeAlgorithmHandle> OpenDesAlgorithm(string cipherMode)
         {
-            return new Lazy<SafeAlgorithmHandle>(() =>
-            {
-                SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
-                    Cng.BCRYPT_DES_ALGORITHM,
-                    null,
-                    Cng.OpenAlgorithmProviderFlags.NONE);
-                hAlg.SetCipherMode(cipherMode);
+            return new Lazy<SafeAlgorithmHandle>(
+                () =>
+                {
+                    SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
+                        Cng.BCRYPT_DES_ALGORITHM,
+                        null,
+                        Cng.OpenAlgorithmProviderFlags.NONE
+                    );
+                    hAlg.SetCipherMode(cipherMode);
 
-                return hAlg;
-            });
+                    return hAlg;
+                }
+            );
         }
     }
 }

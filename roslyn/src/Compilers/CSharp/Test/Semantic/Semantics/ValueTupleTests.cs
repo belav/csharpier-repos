@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.Semantics
         [Fact]
         public void TestWellKnownMembersForValueTuple()
         {
-            var source = @"
+            var source =
+                @"
 namespace System
 {
     struct ValueTuple<T1>
@@ -80,85 +81,193 @@ namespace System
     }
 }";
             var comp = CreateCompilation(source);
-            Assert.Equal("T1 System.ValueTuple<T1>.Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T1__Item1).ToTestDisplayString());
+            Assert.Equal(
+                "T1 System.ValueTuple<T1>.Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T1__Item1)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 (T1, T2).Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T2__Item1).ToTestDisplayString());
-            Assert.Equal("T2 (T1, T2).Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T2__Item2).ToTestDisplayString());
+            Assert.Equal(
+                "T1 (T1, T2).Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T2__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 (T1, T2).Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T2__Item2)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 (T1, T2, T3).Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T3__Item1).ToTestDisplayString());
-            Assert.Equal("T2 (T1, T2, T3).Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T3__Item2).ToTestDisplayString());
-            Assert.Equal("T3 (T1, T2, T3).Item3",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T3__Item3).ToTestDisplayString());
+            Assert.Equal(
+                "T1 (T1, T2, T3).Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T3__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 (T1, T2, T3).Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T3__Item2)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T3 (T1, T2, T3).Item3",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T3__Item3)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 (T1, T2, T3, T4).Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item1).ToTestDisplayString());
-            Assert.Equal("T2 (T1, T2, T3, T4).Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item2).ToTestDisplayString());
-            Assert.Equal("T3 (T1, T2, T3, T4).Item3",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item3).ToTestDisplayString());
-            Assert.Equal("T4 (T1, T2, T3, T4).Item4",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item4).ToTestDisplayString());
+            Assert.Equal(
+                "T1 (T1, T2, T3, T4).Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 (T1, T2, T3, T4).Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item2)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T3 (T1, T2, T3, T4).Item3",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item3)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T4 (T1, T2, T3, T4).Item4",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T4__Item4)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 (T1, T2, T3, T4, T5).Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item1).ToTestDisplayString());
-            Assert.Equal("T2 (T1, T2, T3, T4, T5).Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item2).ToTestDisplayString());
-            Assert.Equal("T3 (T1, T2, T3, T4, T5).Item3",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item3).ToTestDisplayString());
-            Assert.Equal("T4 (T1, T2, T3, T4, T5).Item4",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item4).ToTestDisplayString());
-            Assert.Equal("T5 (T1, T2, T3, T4, T5).Item5",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item5).ToTestDisplayString());
+            Assert.Equal(
+                "T1 (T1, T2, T3, T4, T5).Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 (T1, T2, T3, T4, T5).Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item2)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T3 (T1, T2, T3, T4, T5).Item3",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item3)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T4 (T1, T2, T3, T4, T5).Item4",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item4)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T5 (T1, T2, T3, T4, T5).Item5",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T5__Item5)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 (T1, T2, T3, T4, T5, T6).Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item1).ToTestDisplayString());
-            Assert.Equal("T2 (T1, T2, T3, T4, T5, T6).Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item2).ToTestDisplayString());
-            Assert.Equal("T3 (T1, T2, T3, T4, T5, T6).Item3",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item3).ToTestDisplayString());
-            Assert.Equal("T4 (T1, T2, T3, T4, T5, T6).Item4",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item4).ToTestDisplayString());
-            Assert.Equal("T5 (T1, T2, T3, T4, T5, T6).Item5",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item5).ToTestDisplayString());
-            Assert.Equal("T6 (T1, T2, T3, T4, T5, T6).Item6",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item6).ToTestDisplayString());
+            Assert.Equal(
+                "T1 (T1, T2, T3, T4, T5, T6).Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 (T1, T2, T3, T4, T5, T6).Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item2)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T3 (T1, T2, T3, T4, T5, T6).Item3",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item3)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T4 (T1, T2, T3, T4, T5, T6).Item4",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item4)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T5 (T1, T2, T3, T4, T5, T6).Item5",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item5)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T6 (T1, T2, T3, T4, T5, T6).Item6",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T6__Item6)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 (T1, T2, T3, T4, T5, T6, T7).Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item1).ToTestDisplayString());
-            Assert.Equal("T2 (T1, T2, T3, T4, T5, T6, T7).Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item2).ToTestDisplayString());
-            Assert.Equal("T3 (T1, T2, T3, T4, T5, T6, T7).Item3",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item3).ToTestDisplayString());
-            Assert.Equal("T4 (T1, T2, T3, T4, T5, T6, T7).Item4",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item4).ToTestDisplayString());
-            Assert.Equal("T5 (T1, T2, T3, T4, T5, T6, T7).Item5",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item5).ToTestDisplayString());
-            Assert.Equal("T6 (T1, T2, T3, T4, T5, T6, T7).Item6",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item6).ToTestDisplayString());
-            Assert.Equal("T7 (T1, T2, T3, T4, T5, T6, T7).Item7",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item7).ToTestDisplayString());
+            Assert.Equal(
+                "T1 (T1, T2, T3, T4, T5, T6, T7).Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 (T1, T2, T3, T4, T5, T6, T7).Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item2)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T3 (T1, T2, T3, T4, T5, T6, T7).Item3",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item3)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T4 (T1, T2, T3, T4, T5, T6, T7).Item4",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item4)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T5 (T1, T2, T3, T4, T5, T6, T7).Item5",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item5)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T6 (T1, T2, T3, T4, T5, T6, T7).Item6",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item6)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T7 (T1, T2, T3, T4, T5, T6, T7).Item7",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item7)
+                    .ToTestDisplayString()
+            );
 
-            Assert.Equal("T1 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item1",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item1).ToTestDisplayString());
-            Assert.Equal("T2 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item2",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item2).ToTestDisplayString());
-            Assert.Equal("T3 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item3",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item3).ToTestDisplayString());
-            Assert.Equal("T4 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item4",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item4).ToTestDisplayString());
-            Assert.Equal("T5 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item5",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item5).ToTestDisplayString());
-            Assert.Equal("T6 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item6",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item6).ToTestDisplayString());
-            Assert.Equal("T7 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item7",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item7).ToTestDisplayString());
-            Assert.Equal("TRest System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Rest",
-                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Rest).ToTestDisplayString());
+            Assert.Equal(
+                "T1 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item1",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item1)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T2 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item2",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item2)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T3 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item3",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item3)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T4 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item4",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item4)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T5 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item5",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item5)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T6 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item6",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item6)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "T7 System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item7",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item7)
+                    .ToTestDisplayString()
+            );
+            Assert.Equal(
+                "TRest System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Rest",
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Rest)
+                    .ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -206,12 +315,24 @@ namespace System
             Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_T7__Item7));
 
             Assert.True(comp.GetWellKnownType(WellKnownType.System_ValueTuple_TRest).IsErrorType());
-            Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item1));
-            Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item2));
-            Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item3));
-            Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item4));
-            Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item6));
-            Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item7));
+            Assert.Null(
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item1)
+            );
+            Assert.Null(
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item2)
+            );
+            Assert.Null(
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item3)
+            );
+            Assert.Null(
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item4)
+            );
+            Assert.Null(
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item6)
+            );
+            Assert.Null(
+                comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Item7)
+            );
             Assert.Null(comp.GetWellKnownTypeMember(WellKnownMember.System_ValueTuple_TRest__Rest));
         }
     }

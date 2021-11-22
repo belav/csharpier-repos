@@ -11,8 +11,7 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class EndToEndInMemoryTest : IClassFixture<InMemoryFixture>
     {
-        public EndToEndInMemoryTest(InMemoryFixture fixture)
-            => Fixture = fixture;
+        public EndToEndInMemoryTest(InMemoryFixture fixture) => Fixture = fixture;
 
         protected InMemoryFixture Fixture { get; }
 
@@ -29,8 +28,7 @@ namespace Microsoft.EntityFrameworkCore
         {
         }
 
-        private void Can_add_update_delete_end_to_end<T>()
-            where T : class, new()
+        private void Can_add_update_delete_end_to_end<T>() where T : class, new()
         {
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Entity<T>(
@@ -38,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     eb.Property<int>("Id");
                     eb.Property<string>("Name");
-                });
+                }
+            );
 
             var optionsBuilder = new DbContextOptionsBuilder()
                 .UseModel(modelBuilder.FinalizeModel())

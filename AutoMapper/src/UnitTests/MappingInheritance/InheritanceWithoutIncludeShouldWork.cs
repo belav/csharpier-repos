@@ -7,13 +7,21 @@
     {
         public class FooBase { }
         public class Foo : FooBase { }
-        public class FooDto { public int Value { get; set; } }
-
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+        public class FooDto
         {
-            cfg.CreateMap<FooBase, FooDto>().ForMember(d => d.Value, opt => opt.MapFrom(src => 10));
-            cfg.CreateMap<Foo, FooDto>().ForMember(d => d.Value, opt => opt.MapFrom(src => 5));
-        });
+            public int Value { get; set; }
+        }
+
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<FooBase, FooDto>()
+                        .ForMember(d => d.Value, opt => opt.MapFrom(src => 10));
+                    cfg.CreateMap<Foo, FooDto>()
+                        .ForMember(d => d.Value, opt => opt.MapFrom(src => 5));
+                }
+            );
 
         [Fact]
         public void Should_map_derived()

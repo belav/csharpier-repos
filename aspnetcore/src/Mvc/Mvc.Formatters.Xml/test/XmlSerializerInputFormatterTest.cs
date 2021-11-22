@@ -45,12 +45,22 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-            "<sampleString>" + expectedString + "</sampleString>" +
-            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
 
@@ -73,7 +83,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.SampleDate);
+            model.SampleDate
+        );
     }
 
     [Fact]
@@ -82,14 +93,26 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-            "<sampleString>" + expectedString + "</sampleString>" +
-            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
-        var formatter = new XmlSerializerInputFormatter(new MvcOptions { SuppressInputFormatterBuffering = true });
+        var formatter = new XmlSerializerInputFormatter(
+            new MvcOptions { SuppressInputFormatterBuffering = true }
+        );
 
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var httpContext = new DefaultHttpContext();
@@ -110,7 +133,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.SampleDate);
+            model.SampleDate
+        );
     }
 
     [Fact]
@@ -119,12 +143,22 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-            "<sampleString>" + expectedString + "</sampleString>" +
-            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         var contentBytes = Encoding.UTF8.GetBytes(input);
@@ -146,7 +180,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.SampleDate);
+            model.SampleDate
+        );
     }
 
     [Fact]
@@ -155,14 +190,26 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-            "<sampleString>" + expectedString + "</sampleString>" +
-            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
-        var formatter = new XmlSerializerInputFormatter(new MvcOptions() { SuppressInputFormatterBuffering = true });
+        var formatter = new XmlSerializerInputFormatter(
+            new MvcOptions() { SuppressInputFormatterBuffering = true }
+        );
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var httpContext = new DefaultHttpContext();
         httpContext.Features.Set<IHttpResponseFeature>(new TestResponseFeature());
@@ -182,7 +229,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.SampleDate);
+            model.SampleDate
+        );
 
         // Reading again should fail as buffering request body is disabled
         await Assert.ThrowsAsync<XmlException>(() => formatter.ReadAsync(context));
@@ -194,12 +242,22 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-            "<sampleString>" + expectedString + "</sampleString>" +
-            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
         var mvcOptions = new MvcOptions();
         mvcOptions.SuppressInputFormatterBuffering = false;
@@ -226,7 +284,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.SampleDate);
+            model.SampleDate
+        );
 
         // Reading again should fail as buffering request body is disabled
         await Assert.ThrowsAsync<XmlException>(() => formatter.ReadAsync(context));
@@ -248,7 +307,10 @@ public class XmlSerializerInputFormatterTest
     [InlineData("", false)]
     [InlineData("invalid", false)]
     [InlineData(null, false)]
-    public void CanRead_ReturnsTrueForAnySupportedContentType(string requestContentType, bool expectedCanRead)
+    public void CanRead_ReturnsTrueForAnySupportedContentType(
+        string requestContentType,
+        bool expectedCanRead
+    )
     {
         // Arrange
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
@@ -264,7 +326,8 @@ public class XmlSerializerInputFormatterTest
             modelName: string.Empty,
             modelState: modelState,
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(formatterContext);
@@ -276,7 +339,10 @@ public class XmlSerializerInputFormatterTest
     [Theory]
     [InlineData(typeof(Dictionary<string, object>), false)]
     [InlineData(typeof(string), true)]
-    public void CanRead_ReturnsFalse_ForAnyUnsupportedModelType(Type modelType, bool expectedCanRead)
+    public void CanRead_ReturnsFalse_ForAnyUnsupportedModelType(
+        Type modelType,
+        bool expectedCanRead
+    )
     {
         // Arrange
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
@@ -295,8 +361,9 @@ public class XmlSerializerInputFormatterTest
     public void XmlSerializer_CachesSerializerForType()
     {
         // Arrange
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<DummyClass><SampleInt>10</SampleInt></DummyClass>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<DummyClass><SampleInt>10</SampleInt></DummyClass>";
         var formatter = new TestXmlSerializerInputFormatter();
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
@@ -316,10 +383,14 @@ public class XmlSerializerInputFormatterTest
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
 
         // Assert
-        Assert.Contains("application/xml", formatter.SupportedMediaTypes
-                             .Select(content => content.ToString()));
-        Assert.Contains("text/xml", formatter.SupportedMediaTypes
-                             .Select(content => content.ToString()));
+        Assert.Contains(
+            "application/xml",
+            formatter.SupportedMediaTypes.Select(content => content.ToString())
+        );
+        Assert.Contains(
+            "text/xml",
+            formatter.SupportedMediaTypes.Select(content => content.ToString())
+        );
     }
 
     [Fact]
@@ -339,12 +410,22 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-                            "<sampleString>" + expectedString + "</sampleString>" +
-                            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         var contentBytes = Encoding.UTF8.GetBytes(input);
@@ -362,7 +443,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.SampleDate);
+            model.SampleDate
+        );
     }
 
     [Fact]
@@ -371,14 +453,26 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
         var expectedLevelTwoString = "102";
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                    "<TestLevelTwo><SampleString>" + expectedLevelTwoString + "</SampleString>" +
-                    "<TestOne><SampleInt>" + expectedInt + "</SampleInt>" +
-                    "<sampleString>" + expectedString + "</sampleString>" +
-                    "<SampleDate>" + expectedDateTime + "</SampleDate></TestOne></TestLevelTwo>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelTwo><SampleString>"
+            + expectedLevelTwoString
+            + "</SampleString>"
+            + "<TestOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestOne></TestLevelTwo>";
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         var contentBytes = Encoding.UTF8.GetBytes(input);
@@ -397,7 +491,8 @@ public class XmlSerializerInputFormatterTest
         Assert.Equal(expectedString, model.TestOne.sampleString);
         Assert.Equal(
             XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
-            model.TestOne.SampleDate);
+            model.TestOne.SampleDate
+        );
     }
 
     [Fact]
@@ -406,8 +501,11 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<DummyClass><SampleInt>" + expectedInt + "</SampleInt></DummyClass>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<DummyClass><SampleInt>"
+            + expectedInt
+            + "</SampleInt></DummyClass>";
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         formatter.MaxDepth = 10;
         var contentBytes = Encoding.UTF8.GetBytes(input);
@@ -429,12 +527,14 @@ public class XmlSerializerInputFormatterTest
     public async Task ReadAsync_ThrowsOnExceededMaxDepth()
     {
         // Arrange
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                    "<TestLevelTwo><SampleString>test</SampleString>" +
-                    "<TestOne><SampleInt>10</SampleInt>" +
-                    "<sampleString>test</sampleString>" +
-                    "<SampleDate>" + XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc)
-                    + "</SampleDate></TestOne></TestLevelTwo>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelTwo><SampleString>test</SampleString>"
+            + "<TestOne><SampleInt>10</SampleInt>"
+            + "<sampleString>test</sampleString>"
+            + "<SampleDate>"
+            + XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc)
+            + "</SampleDate></TestOne></TestLevelTwo>";
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         formatter.MaxDepth = 1;
         var contentBytes = Encoding.UTF8.GetBytes(input);
@@ -450,12 +550,14 @@ public class XmlSerializerInputFormatterTest
     public async Task ReadAsync_ThrowsWhenReaderQuotasAreChanged()
     {
         // Arrange
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                    "<TestLevelTwo><SampleString>test</SampleString>" +
-                    "<TestOne><SampleInt>10</SampleInt>" +
-                    "<sampleString>test</sampleString>" +
-                    "<SampleDate>" + XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc)
-                    + "</SampleDate></TestOne></TestLevelTwo>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelTwo><SampleString>test</SampleString>"
+            + "<TestOne><SampleInt>10</SampleInt>"
+            + "<sampleString>test</sampleString>"
+            + "<SampleDate>"
+            + XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc)
+            + "</SampleDate></TestOne></TestLevelTwo>";
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         formatter.XmlDictionaryReaderQuotas.MaxStringContentLength = 10;
         var contentBytes = Encoding.UTF8.GetBytes(input);
@@ -479,8 +581,9 @@ public class XmlSerializerInputFormatterTest
     public async Task ReadAsync_VerifyStreamIsOpenAfterRead()
     {
         // Arrange
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<DummyClass><SampleInt>10</SampleInt></DummyClass>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<DummyClass><SampleInt>10</SampleInt></DummyClass>";
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
@@ -501,10 +604,12 @@ public class XmlSerializerInputFormatterTest
     {
         // Arrange
         var expectedException = typeof(XmlException);
-        var expectedMessage = "The expected encoding 'utf-8' does not match the actual encoding 'utf-16LE'.";
+        var expectedMessage =
+            "The expected encoding 'utf-8' does not match the actual encoding 'utf-16LE'.";
 
-        var inpStart = Encoding.Unicode.GetBytes("<?xml version=\"1.0\" encoding=\"UTF-16\"?>" +
-            "<DummyClass><SampleInt>");
+        var inpStart = Encoding.Unicode.GetBytes(
+            "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "<DummyClass><SampleInt>"
+        );
         byte[] inp = { 192, 193 };
         var inpEnd = Encoding.Unicode.GetBytes("</SampleInt></DummyClass>");
 
@@ -527,15 +632,21 @@ public class XmlSerializerInputFormatterTest
     {
         // Arrange
         var expectedException = typeof(XmlException);
-        var expectedMessage = "The expected encoding 'utf-16LE' does not match the actual encoding 'utf-8'.";
+        var expectedMessage =
+            "The expected encoding 'utf-16LE' does not match the actual encoding 'utf-8'.";
 
-        var inputBytes = Encoding.UTF8.GetBytes("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<DummyClass><SampleInt>1000</SampleInt></DummyClass>");
+        var inputBytes = Encoding.UTF8.GetBytes(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<DummyClass><SampleInt>1000</SampleInt></DummyClass>"
+        );
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
 
         var modelState = new ModelStateDictionary();
-        var httpContext = GetHttpContext(inputBytes, contentType: "application/xml; charset=utf-16");
+        var httpContext = GetHttpContext(
+            inputBytes,
+            contentType: "application/xml; charset=utf-16"
+        );
 
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForType(typeof(TestLevelOne));
@@ -544,7 +655,8 @@ public class XmlSerializerInputFormatterTest
             modelName: string.Empty,
             modelState: modelState,
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act and Assert
         var ex = await Assert.ThrowsAsync(expectedException, () => formatter.ReadAsync(context));
@@ -557,8 +669,12 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var sampleString = "Test";
         var sampleStringBytes = Encoding.UTF8.GetBytes(sampleString);
-        var inputStart = Encoding.UTF8.GetBytes("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + Environment.NewLine +
-            "<TestLevelTwo><SampleString>" + sampleString);
+        var inputStart = Encoding.UTF8.GetBytes(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + Environment.NewLine
+                + "<TestLevelTwo><SampleString>"
+                + sampleString
+        );
         byte[] bom = { 0xef, 0xbb, 0xbf };
         var inputEnd = Encoding.UTF8.GetBytes("</SampleString></TestLevelTwo>");
         var expectedBytes = new byte[sampleString.Length + bom.Length];
@@ -566,7 +682,13 @@ public class XmlSerializerInputFormatterTest
         var contentBytes = new byte[inputStart.Length + bom.Length + inputEnd.Length];
         Buffer.BlockCopy(inputStart, 0, contentBytes, 0, inputStart.Length);
         Buffer.BlockCopy(bom, 0, contentBytes, inputStart.Length, bom.Length);
-        Buffer.BlockCopy(inputEnd, 0, contentBytes, inputStart.Length + bom.Length, inputEnd.Length);
+        Buffer.BlockCopy(
+            inputEnd,
+            0,
+            contentBytes,
+            inputStart.Length + bom.Length,
+            inputEnd.Length
+        );
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         var context = GetInputFormatterContext(contentBytes, typeof(TestLevelTwo));
@@ -589,18 +711,31 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var expectedInt = 10;
         var expectedString = "TestString";
-        var expectedDateTime = XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc);
+        var expectedDateTime = XmlConvert.ToString(
+            DateTime.UtcNow,
+            XmlDateTimeSerializationMode.Utc
+        );
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" +
-                            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-                            "<sampleString>" + expectedString + "</sampleString>" +
-                            "<SampleDate>" + expectedDateTime + "</SampleDate></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-16\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString>"
+            + "<SampleDate>"
+            + expectedDateTime
+            + "</SampleDate></TestLevelOne>";
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
         var contentBytes = Encoding.Unicode.GetBytes(input);
 
         var modelState = new ModelStateDictionary();
-        var httpContext = GetHttpContext(contentBytes, contentType: "application/xml; charset=utf-16");
+        var httpContext = GetHttpContext(
+            contentBytes,
+            contentType: "application/xml; charset=utf-16"
+        );
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForType(typeof(TestLevelOne));
         var context = new InputFormatterContext(
@@ -608,7 +743,8 @@ public class XmlSerializerInputFormatterTest
             modelName: string.Empty,
             modelState: modelState,
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = await formatter.ReadAsync(context);
@@ -620,7 +756,10 @@ public class XmlSerializerInputFormatterTest
 
         Assert.Equal(expectedInt, model.SampleInt);
         Assert.Equal(expectedString, model.sampleString);
-        Assert.Equal(XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc), model.SampleDate);
+        Assert.Equal(
+            XmlConvert.ToDateTime(expectedDateTime, XmlDateTimeSerializationMode.Utc),
+            model.SampleDate
+        );
     }
 
     [Fact]
@@ -630,15 +769,23 @@ public class XmlSerializerInputFormatterTest
         var expectedInt = 10;
         var expectedString = "TestString";
 
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<TestLevelOne><SampleInt>" + expectedInt + "</SampleInt>" +
-            "<sampleString>" + expectedString + "</sampleString></TestLevelOne>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<TestLevelOne><SampleInt>"
+            + expectedInt
+            + "</SampleInt>"
+            + "<sampleString>"
+            + expectedString
+            + "</sampleString></TestLevelOne>";
 
         var formatter = new XmlSerializerInputFormatter(new MvcOptions());
 
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var httpContext = new DefaultHttpContext();
-        var testBufferedReadStream = new VerifyDisposeFileBufferingReadStream(new MemoryStream(contentBytes), 1024);
+        var testBufferedReadStream = new VerifyDisposeFileBufferingReadStream(
+            new MemoryStream(contentBytes),
+            1024
+        );
         httpContext.Request.Body = testBufferedReadStream;
         var context = GetInputFormatterContext(httpContext, typeof(TestLevelOne));
 
@@ -670,12 +817,14 @@ public class XmlSerializerInputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
     }
 
     private static HttpContext GetHttpContext(
         byte[] contentBytes,
-        string contentType = "application/xml")
+        string contentType = "application/xml"
+    )
     {
         var request = new Mock<HttpRequest>();
         var headers = new Mock<IHeaderDictionary>();
@@ -693,10 +842,7 @@ public class XmlSerializerInputFormatterTest
     {
         public int createSerializerCalledCount = 0;
 
-        public TestXmlSerializerInputFormatter()
-            : base(new MvcOptions())
-        {
-        }
+        public TestXmlSerializerInputFormatter() : base(new MvcOptions()) { }
 
         protected override XmlSerializer CreateSerializer(Type type)
         {
@@ -716,9 +862,8 @@ public class XmlSerializerInputFormatterTest
     private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
     {
         public bool Disposed { get; private set; }
-        public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold) : base(inner, memoryThreshold)
-        {
-        }
+        public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
+            : base(inner, memoryThreshold) { }
 
         protected override void Dispose(bool disposing)
         {

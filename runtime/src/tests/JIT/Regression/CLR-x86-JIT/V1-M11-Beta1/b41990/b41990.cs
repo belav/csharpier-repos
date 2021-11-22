@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace Test
 {
     internal class AA

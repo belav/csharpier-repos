@@ -8,7 +8,6 @@ using System.IO;
 
 namespace TestUtil
 {
-
     // This class implements a string writer that writes to a string buffer and a
     // given text writer, which allows echoing the written string if stdout is
     // specified as the text writer.
@@ -16,8 +15,8 @@ namespace TestUtil
     public class StringRecorder : StringWriter
     {
         private TextWriter outStream;
-        private int outLimit;                   // maximum output size limit in characters
-        private bool bufferIsFull;              // if set, stop writting/recording output
+        private int outLimit; // maximum output size limit in characters
+        private bool bufferIsFull; // if set, stop writting/recording output
 
         // Constructs a new StringRecorder that writes to the given TextWriter.
         public StringRecorder(TextWriter ostream, int olimit)
@@ -31,9 +30,7 @@ namespace TestUtil
             this.bufferIsFull = false;
         }
 
-        public StringRecorder(TextWriter ostream) : this(ostream, 0)
-        {
-        }
+        public StringRecorder(TextWriter ostream) : this(ostream, 0) { }
 
         // Only these three methods need to be overridden in order to override
         // all different overloads of Write/WriteLine methods.
@@ -73,12 +70,12 @@ namespace TestUtil
             if (this.outLimit > 0 && this.ToString().Length > this.outLimit)
             {
                 this.bufferIsFull = true;
-                this.outStream.WriteLine("ERROR: Output exceeded maximum limit, extra output will be discarded!");
+                this.outStream.WriteLine(
+                    "ERROR: Output exceeded maximum limit, extra output will be discarded!"
+                );
             }
         }
     }
-
-
 
     // This class represents a test log. It allows for redirecting both stdout
     // and stderr of the test to StringRecorder objects. The redirected output
@@ -87,7 +84,6 @@ namespace TestUtil
 
     public class TestLog
     {
-
         const int SUCC_RET_CODE = 100;
         const int FAIL_RET_CODE = 1;
         const int OUTPUT_LIMIT_FACTOR = 100;
@@ -101,13 +97,9 @@ namespace TestUtil
         protected StringWriter testOut;
         protected StringWriter testError;
 
-        public TestLog() : this(null, null)
-        {
-        }
+        public TestLog() : this(null, null) { }
 
-        public TestLog(object expOut) : this(expOut, null)
-        {
-        }
+        public TestLog(object expOut) : this(expOut, null) { }
 
         // Creates a new TestLog and set both expected output, and
         // expected error to supplied values.
@@ -117,8 +109,18 @@ namespace TestUtil
             this.expectedError = expError == null ? String.Empty : expError.ToString();
             this.stdOut = System.Console.Out;
             this.stdError = System.Console.Error;
-            this.testOut = new StringRecorder(this.stdOut, this.expectedOut != null ? this.expectedOut.ToString().Length * OUTPUT_LIMIT_FACTOR : 0);
-            this.testError = new StringRecorder(this.stdError, this.expectedError != null ? this.expectedError.ToString().Length * OUTPUT_LIMIT_FACTOR : 0);
+            this.testOut = new StringRecorder(
+                this.stdOut,
+                this.expectedOut != null
+                  ? this.expectedOut.ToString().Length * OUTPUT_LIMIT_FACTOR
+                  : 0
+            );
+            this.testError = new StringRecorder(
+                this.stdError,
+                this.expectedError != null
+                  ? this.expectedError.ToString().Length * OUTPUT_LIMIT_FACTOR
+                  : 0
+            );
         }
 
         // Start recoding by redirecting both stdout and stderr to
@@ -144,7 +146,8 @@ namespace TestUtil
         // identical to actual output and actual error; false otherwise.
         protected bool Identical()
         {
-            return this.testOut.ToString().Equals(this.expectedOut) && this.testError.ToString().Equals(this.expectedError);
+            return this.testOut.ToString().Equals(this.expectedOut)
+                && this.testError.ToString().Equals(this.expectedError);
         }
 
         // Display differences between expected output and actual output.
@@ -155,9 +158,16 @@ namespace TestUtil
             {
                 string newLine = this.testOut.NewLine;
                 string delimStr = newLine[0].ToString();
-                string[] actualLines = ((this.ActualOutput.Trim()).Replace(newLine, delimStr)).Split(delimStr.ToCharArray());
-                string[] expectedLines = ((this.ExpectedOutput.Trim()).Replace(newLine, delimStr)).Split(delimStr.ToCharArray());
-                int commonLineCount = actualLines.Length < expectedLines.Length ? actualLines.Length : expectedLines.Length;
+                string[] actualLines = (
+                    (this.ActualOutput.Trim()).Replace(newLine, delimStr)
+                ).Split(delimStr.ToCharArray());
+                string[] expectedLines = (
+                    (this.ExpectedOutput.Trim()).Replace(newLine, delimStr)
+                ).Split(delimStr.ToCharArray());
+                int commonLineCount =
+                    actualLines.Length < expectedLines.Length
+                        ? actualLines.Length
+                        : expectedLines.Length;
                 bool identical = true;
                 for (int i = 0; i < commonLineCount && identical; ++i)
                 {
@@ -179,11 +189,15 @@ namespace TestUtil
                             int at = actualLine.IndexOf(expectedToken);
                             similar = (at == 0) || (ignoreMode && at > 0);
                             expectedLine = expectedLine.Substring(nextIgnore);
-                            actualLine = similar ? actualLine.Substring(at + expectedToken.Length) : actualLine;
+                            actualLine = similar
+                                ? actualLine.Substring(at + expectedToken.Length)
+                                : actualLine;
                         }
                         else
                         {
-                            similar = (ignoreMode && actualLine.EndsWith(expectedLine)) || actualLine.Equals(expectedLine);
+                            similar =
+                                (ignoreMode && actualLine.EndsWith(expectedLine))
+                                || actualLine.Equals(expectedLine);
                             expectedLine = String.Empty;
                             actualLine = String.Empty;
                         }
@@ -241,39 +255,25 @@ namespace TestUtil
         // Returns actual test output.
         public string ActualOutput
         {
-            get
-            {
-                return this.testOut.ToString();
-            }
+            get { return this.testOut.ToString(); }
         }
 
         // Returns actual test error.
         public string ActualError
         {
-            get
-            {
-                return this.testError.ToString();
-            }
+            get { return this.testError.ToString(); }
         }
 
         // Returns expected test output.
         public string ExpectedOutput
         {
-            get
-            {
-                return this.expectedOut.ToString();
-            }
+            get { return this.expectedOut.ToString(); }
         }
 
         // Returns expected test error.
         public string ExpectedError
         {
-            get
-            {
-                return this.expectedError.ToString();
-            }
+            get { return this.expectedError.ToString(); }
         }
     }
-
 }
-

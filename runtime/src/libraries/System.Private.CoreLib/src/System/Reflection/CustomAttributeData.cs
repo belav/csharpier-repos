@@ -43,9 +43,7 @@ namespace System.Reflection
         }
         #endregion
 
-        protected CustomAttributeData()
-        {
-        }
+        protected CustomAttributeData() { }
 
         #region Object Override
         public override string ToString()
@@ -62,7 +60,8 @@ namespace System.Reflection
             int constructorArgumentsCount = constructorArguments.Count;
             for (int i = 0; i < constructorArgumentsCount; i++)
             {
-                if (!first) vsb.Append(", ");
+                if (!first)
+                    vsb.Append(", ");
                 vsb.Append(constructorArguments[i].ToString());
                 first = false;
             }
@@ -71,7 +70,8 @@ namespace System.Reflection
             int namedArgumentsCount = namedArguments.Count;
             for (int i = 0; i < namedArgumentsCount; i++)
             {
-                if (!first) vsb.Append(", ");
+                if (!first)
+                    vsb.Append(", ");
                 vsb.Append(namedArguments[i].ToString());
                 first = false;
             }

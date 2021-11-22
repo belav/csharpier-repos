@@ -21,10 +21,11 @@ public sealed class LayoutAttribute : Attribute
 
         if (!typeof(IComponent).IsAssignableFrom(layoutType))
         {
-            throw new ArgumentException($"Invalid layout type: {layoutType.FullName} " +
-                $"does not implement {typeof(IComponent).FullName}.");
+            throw new ArgumentException(
+                $"Invalid layout type: {layoutType.FullName} "
+                    + $"does not implement {typeof(IComponent).FullName}."
+            );
         }
-
         // Note that we can't validate its acceptance of a 'Body' parameter at this stage,
         // because the contract doesn't force them to be known statically. However it will
         // be a runtime error if the referenced component type rejects the 'Body' parameter

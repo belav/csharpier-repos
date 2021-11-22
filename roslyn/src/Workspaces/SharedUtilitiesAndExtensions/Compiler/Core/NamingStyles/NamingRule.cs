@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         public readonly NamingStyle NamingStyle;
         public readonly ReportDiagnostic EnforcementLevel;
 
-        public NamingRule(SymbolSpecification symbolSpecification, NamingStyle namingStyle, ReportDiagnostic enforcementLevel)
+        public NamingRule(
+            SymbolSpecification symbolSpecification,
+            NamingStyle namingStyle,
+            ReportDiagnostic enforcementLevel
+        )
         {
             SymbolSpecification = symbolSpecification;
             NamingStyle = namingStyle;

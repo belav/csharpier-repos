@@ -22,7 +22,8 @@ internal class ApiResponseTypeProvider
     public ApiResponseTypeProvider(
         IModelMetadataProvider modelMetadataProvider,
         IActionResultTypeMapper mapper,
-        MvcOptions mvcOptions)
+        MvcOptions mvcOptions
+    )
     {
         _modelMetadataProvider = modelMetadataProvider;
         _mapper = mapper;
@@ -38,8 +39,10 @@ internal class ApiResponseTypeProvider
         var runtimeReturnType = GetRuntimeReturnType(declaredReturnType);
 
         var responseMetadataAttributes = GetResponseMetadataAttributes(action);
-        if (!HasSignificantMetadataProvider(responseMetadataAttributes) &&
-            action.Properties.TryGetValue(typeof(ApiConventionResult), out var result))
+        if (
+            !HasSignificantMetadataProvider(responseMetadataAttributes)
+            && action.Properties.TryGetValue(typeof(ApiConventionResult), out var result)
+        )
         {
             // Action does not have any conventions. Use conventions on it if present.
             var apiConventionResult = (ApiConventionResult)result!;
@@ -52,11 +55,17 @@ internal class ApiResponseTypeProvider
             defaultErrorType = ((ProducesErrorResponseTypeAttribute)result!).Type;
         }
 
-        var apiResponseTypes = GetApiResponseTypes(responseMetadataAttributes, runtimeReturnType, defaultErrorType);
+        var apiResponseTypes = GetApiResponseTypes(
+            responseMetadataAttributes,
+            runtimeReturnType,
+            defaultErrorType
+        );
         return apiResponseTypes;
     }
 
-    private static List<IApiResponseMetadataProvider> GetResponseMetadataAttributes(ControllerActionDescriptor action)
+    private static List<IApiResponseMetadataProvider> GetResponseMetadataAttributes(
+        ControllerActionDescriptor action
+    )
     {
         if (action.FilterDescriptors == null)
         {
@@ -74,28 +83,29 @@ internal class ApiResponseTypeProvider
     }
 
     private ICollection<ApiResponseType> GetApiResponseTypes(
-       IReadOnlyList<IApiResponseMetadataProvider> responseMetadataAttributes,
-       Type? type,
-       Type defaultErrorType)
+        IReadOnlyList<IApiResponseMetadataProvider> responseMetadataAttributes,
+        Type? type,
+        Type defaultErrorType
+    )
     {
         var contentTypes = new MediaTypeCollection();
-        var responseTypeMetadataProviders = _mvcOptions.OutputFormatters.OfType<IApiResponseTypeMetadataProvider>();
+        var responseTypeMetadataProviders =
+            _mvcOptions.OutputFormatters.OfType<IApiResponseTypeMetadataProvider>();
 
         var responseTypes = ReadResponseMetadata(
             responseMetadataAttributes,
             type,
             defaultErrorType,
             contentTypes,
-            responseTypeMetadataProviders);
+            responseTypeMetadataProviders
+        );
 
         // Set the default status only when no status has already been set explicitly
         if (responseTypes.Count == 0 && type != null)
         {
-            responseTypes.Add(new ApiResponseType
-            {
-                StatusCode = StatusCodes.Status200OK,
-                Type = type,
-            });
+            responseTypes.Add(
+                new ApiResponseType { StatusCode = StatusCodes.Status200OK, Type = type, }
+            );
         }
 
         if (contentTypes.Count == 0)
@@ -110,7 +120,12 @@ internal class ApiResponseTypeProvider
 
         foreach (var apiResponse in responseTypes)
         {
-            CalculateResponseFormatForType(apiResponse, contentTypes, responseTypeMetadataProviders, _modelMetadataProvider);
+            CalculateResponseFormatForType(
+                apiResponse,
+                contentTypes,
+                responseTypeMetadataProviders,
+                _modelMetadataProvider
+            );
         }
 
         return responseTypes;
@@ -123,7 +138,8 @@ internal class ApiResponseTypeProvider
         Type defaultErrorType,
         MediaTypeCollection contentTypes,
         IEnumerable<IApiResponseTypeMetadataProvider>? responseTypeMetadataProviders = null,
-        IModelMetadataProvider? modelMetadataProvider = null)
+        IModelMetadataProvider? modelMetadataProvider = null
+    )
     {
         var results = new Dictionary<int, ApiResponseType>();
 
@@ -158,7 +174,13 @@ internal class ApiResponseTypeProvider
 
                 if (apiResponseType.Type == typeof(void))
                 {
-                    if (type != null && (statusCode == StatusCodes.Status200OK || statusCode == StatusCodes.Status201Created))
+                    if (
+                        type != null
+                        && (
+                            statusCode == StatusCodes.Status200OK
+                            || statusCode == StatusCodes.Status201Created
+                        )
+                    )
                     {
                         // ProducesResponseTypeAttribute's constructor defaults to setting "Type" to void when no value is specified.
                         // In this event, use the action's return type for 200 or 201 status codes. This lets you decorate an action with a
@@ -170,8 +192,15 @@ internal class ApiResponseTypeProvider
                     {
                         // Determine whether or not the type was provided by the user. If so, favor it over the default
                         // error type for 4xx client errors if no response type is specified..
-                        var setByDefault = metadataAttribute is ProducesResponseTypeAttribute { IsResponseTypeSetByDefault: true };
-                        apiResponseType.Type = setByDefault ? defaultErrorType : apiResponseType.Type;
+                        var setByDefault =
+                            metadataAttribute
+                                is ProducesResponseTypeAttribute
+                                {
+                                    IsResponseTypeSetByDefault: true
+                                };
+                        apiResponseType.Type = setByDefault
+                            ? defaultErrorType
+                            : apiResponseType.Type;
                     }
                     else if (apiResponseType.IsDefaultResponse)
                     {
@@ -188,7 +217,12 @@ internal class ApiResponseTypeProvider
                 {
                     var attributeContentTypes = new MediaTypeCollection();
                     metadataAttribute.SetContentTypes(attributeContentTypes);
-                    CalculateResponseFormatForType(apiResponseType, attributeContentTypes, responseTypeMetadataProviders, modelMetadataProvider);
+                    CalculateResponseFormatForType(
+                        apiResponseType,
+                        attributeContentTypes,
+                        responseTypeMetadataProviders,
+                        modelMetadataProvider
+                    );
                 }
 
                 if (apiResponseType.Type != null)
@@ -202,7 +236,12 @@ internal class ApiResponseTypeProvider
     }
 
     // Shared with EndpointMetadataApiDescriptionProvider
-    internal static void CalculateResponseFormatForType(ApiResponseType apiResponse, MediaTypeCollection declaredContentTypes, IEnumerable<IApiResponseTypeMetadataProvider>? responseTypeMetadataProviders, IModelMetadataProvider? modelMetadataProvider)
+    internal static void CalculateResponseFormatForType(
+        ApiResponseType apiResponse,
+        MediaTypeCollection declaredContentTypes,
+        IEnumerable<IApiResponseTypeMetadataProvider>? responseTypeMetadataProviders,
+        IModelMetadataProvider? modelMetadataProvider
+    )
     {
         // If response formats have already been calculate for this type,
         // then exit early. This avoids populating the ApiResponseFormat for
@@ -236,9 +275,11 @@ internal class ApiResponseTypeProvider
             {
                 foreach (var responseTypeMetadataProvider in responseTypeMetadataProviders)
                 {
-                    var formatterSupportedContentTypes = responseTypeMetadataProvider.GetSupportedContentTypes(
-                        contentType,
-                        responseType);
+                    var formatterSupportedContentTypes =
+                        responseTypeMetadataProvider.GetSupportedContentTypes(
+                            contentType,
+                            responseType
+                        );
 
                     if (formatterSupportedContentTypes == null)
                     {
@@ -249,24 +290,23 @@ internal class ApiResponseTypeProvider
 
                     foreach (var formatterSupportedContentType in formatterSupportedContentTypes)
                     {
-                        apiResponse.ApiResponseFormats.Add(new ApiResponseFormat
-                        {
-                            Formatter = (IOutputFormatter)responseTypeMetadataProvider,
-                            MediaType = formatterSupportedContentType,
-                        });
+                        apiResponse.ApiResponseFormats.Add(
+                            new ApiResponseFormat
+                            {
+                                Formatter = (IOutputFormatter)responseTypeMetadataProvider,
+                                MediaType = formatterSupportedContentType,
+                            }
+                        );
                     }
                 }
             }
 
-
-
             if (!isSupportedContentType && contentType != null)
             {
                 // No output formatter was found that supports this content type. Add the user specified content type as-is to the result.
-                apiResponse.ApiResponseFormats.Add(new ApiResponseFormat
-                {
-                    MediaType = contentType,
-                });
+                apiResponse.ApiResponseFormats.Add(
+                    new ApiResponseFormat { MediaType = contentType, }
+                );
             }
         }
     }
@@ -274,17 +314,24 @@ internal class ApiResponseTypeProvider
     private Type? GetDeclaredReturnType(ControllerActionDescriptor action)
     {
         var declaredReturnType = action.MethodInfo.ReturnType;
-        if (declaredReturnType == typeof(void) ||
-            declaredReturnType == typeof(Task) ||
-            declaredReturnType == typeof(ValueTask))
+        if (
+            declaredReturnType == typeof(void)
+            || declaredReturnType == typeof(Task)
+            || declaredReturnType == typeof(ValueTask)
+        )
         {
             return typeof(void);
         }
 
         // Unwrap the type if it's a Task<T>. The Task (non-generic) case was already handled.
         var unwrappedType = declaredReturnType;
-        if (declaredReturnType.IsGenericType &&
-            (declaredReturnType.GetGenericTypeDefinition() == typeof(Task<>) || declaredReturnType.GetGenericTypeDefinition() == typeof(ValueTask<>)))
+        if (
+            declaredReturnType.IsGenericType
+            && (
+                declaredReturnType.GetGenericTypeDefinition() == typeof(Task<>)
+                || declaredReturnType.GetGenericTypeDefinition() == typeof(ValueTask<>)
+            )
+        )
         {
             unwrappedType = declaredReturnType.GetGenericArguments()[0];
         }
@@ -323,7 +370,9 @@ internal class ApiResponseTypeProvider
         return statusCode >= 400 && statusCode < 500;
     }
 
-    private static bool HasSignificantMetadataProvider(IReadOnlyList<IApiResponseMetadataProvider> providers)
+    private static bool HasSignificantMetadataProvider(
+        IReadOnlyList<IApiResponseMetadataProvider> providers
+    )
     {
         for (var i = 0; i < providers.Count; i++)
         {

@@ -72,9 +72,18 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="kind"/> is not a valid kind.
         /// </exception>
-        public SemanticEdit(SemanticEditKind kind, ISymbol? oldSymbol, ISymbol? newSymbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap = null, bool preserveLocalVariables = false)
+        public SemanticEdit(
+            SemanticEditKind kind,
+            ISymbol? oldSymbol,
+            ISymbol? newSymbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap = null,
+            bool preserveLocalVariables = false
+        )
         {
-            if (oldSymbol == null && kind is not (SemanticEditKind.Insert or SemanticEditKind.Replace))
+            if (
+                oldSymbol == null
+                && kind is not (SemanticEditKind.Insert or SemanticEditKind.Replace)
+            )
             {
                 throw new ArgumentNullException(nameof(oldSymbol));
             }
@@ -96,24 +105,33 @@ namespace Microsoft.CodeAnalysis.Emit
             SyntaxMap = syntaxMap;
         }
 
-        internal static SemanticEdit Create(SemanticEditKind kind, ISymbolInternal oldSymbol, ISymbolInternal newSymbol, Func<SyntaxNode, SyntaxNode>? syntaxMap = null, bool preserveLocalVariables = false)
-            => new SemanticEdit(kind, oldSymbol?.GetISymbol(), newSymbol?.GetISymbol(), syntaxMap, preserveLocalVariables);
+        internal static SemanticEdit Create(
+            SemanticEditKind kind,
+            ISymbolInternal oldSymbol,
+            ISymbolInternal newSymbol,
+            Func<SyntaxNode, SyntaxNode>? syntaxMap = null,
+            bool preserveLocalVariables = false
+        ) =>
+            new SemanticEdit(
+                kind,
+                oldSymbol?.GetISymbol(),
+                newSymbol?.GetISymbol(),
+                syntaxMap,
+                preserveLocalVariables
+            );
 
-        public override int GetHashCode()
-            => Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
+        public override int GetHashCode() =>
+            Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
 
-        public override bool Equals(object? obj)
-            => obj is SemanticEdit other && Equals(other);
+        public override bool Equals(object? obj) => obj is SemanticEdit other && Equals(other);
 
-        public bool Equals(SemanticEdit other)
-            => Kind == other.Kind
-                && (OldSymbol == null ? other.OldSymbol == null : OldSymbol.Equals(other.OldSymbol))
-                && (NewSymbol == null ? other.NewSymbol == null : NewSymbol.Equals(other.NewSymbol));
+        public bool Equals(SemanticEdit other) =>
+            Kind == other.Kind
+            && (OldSymbol == null ? other.OldSymbol == null : OldSymbol.Equals(other.OldSymbol))
+            && (NewSymbol == null ? other.NewSymbol == null : NewSymbol.Equals(other.NewSymbol));
 
-        public static bool operator ==(SemanticEdit left, SemanticEdit right)
-            => left.Equals(right);
+        public static bool operator ==(SemanticEdit left, SemanticEdit right) => left.Equals(right);
 
-        public static bool operator !=(SemanticEdit left, SemanticEdit right)
-            => !(left == right);
+        public static bool operator !=(SemanticEdit left, SemanticEdit right) => !(left == right);
     }
 }

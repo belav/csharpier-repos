@@ -8,10 +8,8 @@ namespace System.Xml
     {
         // A node is being inserted in the tree.
         Insert = 0,
-
         // A node is being removed from the tree.
         Remove = 1,
-
         // A node value is being changed.
         Change = 2
     }

@@ -12,9 +12,9 @@ namespace Roslyn.Utilities
     internal static class Contract
     {
         // Guidance on inlining:
-        // ThrowXxx methods are used heavily across the code base. 
+        // ThrowXxx methods are used heavily across the code base.
         // Inline their implementation of condition checking but don't inline the code that is only executed on failure.
-        // This approach makes the common path efficient (both execution time and code size) 
+        // This approach makes the common path efficient (both execution time and code size)
         // while keeping the rarely executed code in a separate method.
 
         /// <summary>
@@ -22,7 +22,8 @@ namespace Roslyn.Utilities
         /// all builds
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfNull<T>([NotNull] T value, [CallerLineNumber] int lineNumber = 0) where T : class?
+        public static void ThrowIfNull<T>([NotNull] T value, [CallerLineNumber] int lineNumber = 0)
+            where T : class?
         {
             if (value is null)
             {
@@ -35,7 +36,8 @@ namespace Roslyn.Utilities
         /// all builds
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfNull<T>([NotNull] T? value, [CallerLineNumber] int lineNumber = 0) where T : struct
+        public static void ThrowIfNull<T>([NotNull] T? value, [CallerLineNumber] int lineNumber = 0)
+            where T : struct
         {
             if (value is null)
             {
@@ -48,7 +50,11 @@ namespace Roslyn.Utilities
         /// all builds
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfNull<T>([NotNull] T value, string message, [CallerLineNumber] int lineNumber = 0)
+        public static void ThrowIfNull<T>(
+            [NotNull] T value,
+            string message,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             if (value is null)
             {
@@ -61,7 +67,10 @@ namespace Roslyn.Utilities
         /// in all builds
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfFalse([DoesNotReturnIf(parameterValue: false)] bool condition, [CallerLineNumber] int lineNumber = 0)
+        public static void ThrowIfFalse(
+            [DoesNotReturnIf(parameterValue: false)] bool condition,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             if (!condition)
             {
@@ -74,7 +83,11 @@ namespace Roslyn.Utilities
         /// in all builds
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfFalse([DoesNotReturnIf(parameterValue: false)] bool condition, string message, [CallerLineNumber] int lineNumber = 0)
+        public static void ThrowIfFalse(
+            [DoesNotReturnIf(parameterValue: false)] bool condition,
+            string message,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             if (!condition)
             {
@@ -87,7 +100,10 @@ namespace Roslyn.Utilities
         /// all builds.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfTrue([DoesNotReturnIf(parameterValue: true)] bool condition, [CallerLineNumber] int lineNumber = 0)
+        public static void ThrowIfTrue(
+            [DoesNotReturnIf(parameterValue: true)] bool condition,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             if (condition)
             {
@@ -100,7 +116,11 @@ namespace Roslyn.Utilities
         /// all builds.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfTrue([DoesNotReturnIf(parameterValue: true)] bool condition, string message, [CallerLineNumber] int lineNumber = 0)
+        public static void ThrowIfTrue(
+            [DoesNotReturnIf(parameterValue: true)] bool condition,
+            string message,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             if (condition)
             {
@@ -111,7 +131,9 @@ namespace Roslyn.Utilities
         [DebuggerHidden]
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void Fail(string message = "Unexpected", [CallerLineNumber] int lineNumber = 0)
-            => throw new InvalidOperationException($"{message} - line {lineNumber}");
+        public static void Fail(
+            string message = "Unexpected",
+            [CallerLineNumber] int lineNumber = 0
+        ) => throw new InvalidOperationException($"{message} - line {lineNumber}");
     }
 }

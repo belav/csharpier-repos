@@ -6,7 +6,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using Xunit;
 
-
 public static partial class DataContractSerializerTests
 {
     [Fact]
@@ -43,10 +42,7 @@ public static partial class DataContractSerializerTests
             }
 
             MemoryStream ms = new MemoryStream();
-            FamilyForStress myFamily = new FamilyForStress
-            {
-                Members = members
-            };
+            FamilyForStress myFamily = new FamilyForStress { Members = members };
             dcs.WriteObject(ms, myFamily);
             ms.Position = 0;
             var newFamily = (FamilyForStress)dcs.ReadObject(ms);

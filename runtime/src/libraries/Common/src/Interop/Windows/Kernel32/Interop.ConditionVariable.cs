@@ -15,12 +15,20 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe void InitializeConditionVariable(CONDITION_VARIABLE* ConditionVariable);
+        internal static extern unsafe void InitializeConditionVariable(
+            CONDITION_VARIABLE* ConditionVariable
+        );
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe void WakeConditionVariable(CONDITION_VARIABLE* ConditionVariable);
+        internal static extern unsafe void WakeConditionVariable(
+            CONDITION_VARIABLE* ConditionVariable
+        );
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe bool SleepConditionVariableCS(CONDITION_VARIABLE* ConditionVariable, CRITICAL_SECTION* CriticalSection, int dwMilliseconds);
+        internal static extern unsafe bool SleepConditionVariableCS(
+            CONDITION_VARIABLE* ConditionVariable,
+            CRITICAL_SECTION* CriticalSection,
+            int dwMilliseconds
+        );
     }
 }

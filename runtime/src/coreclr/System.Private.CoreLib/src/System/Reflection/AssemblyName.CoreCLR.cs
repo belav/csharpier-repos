@@ -15,15 +15,15 @@ namespace System.Reflection
         {
             if (assemblyName == null)
                 throw new ArgumentNullException(nameof(assemblyName));
-            if ((assemblyName.Length == 0) ||
-                (assemblyName[0] == '\0'))
+            if ((assemblyName.Length == 0) || (assemblyName[0] == '\0'))
                 throw new ArgumentException(SR.Format_StringZeroLength);
 
             _name = assemblyName;
             nInit();
         }
 
-        internal AssemblyName(string? name,
+        internal AssemblyName(
+            string? name,
             byte[]? publicKey,
             byte[]? publicKeyToken,
             Version? version,
@@ -31,7 +31,8 @@ namespace System.Reflection
             AssemblyHashAlgorithm hashAlgorithm,
             AssemblyVersionCompatibility versionCompatibility,
             string? codeBase,
-            AssemblyNameFlags flags)
+            AssemblyNameFlags flags
+        )
         {
             _name = name;
             _publicKey = publicKey;
@@ -66,7 +67,11 @@ namespace System.Reflection
             ProcessorArchitecture = CalculateProcArchIndex(pek, ifm, _flags);
         }
 
-        internal static ProcessorArchitecture CalculateProcArchIndex(PortableExecutableKinds pek, ImageFileMachine ifm, AssemblyNameFlags flags)
+        internal static ProcessorArchitecture CalculateProcArchIndex(
+            PortableExecutableKinds pek,
+            ImageFileMachine ifm,
+            AssemblyNameFlags flags
+        )
         {
             if (((uint)flags & 0xF0) == 0x70)
                 return ProcessorArchitecture.None;
@@ -80,7 +85,9 @@ namespace System.Reflection
                     case ImageFileMachine.AMD64:
                         return ProcessorArchitecture.Amd64;
                     case ImageFileMachine.I386:
-                        if ((pek & PortableExecutableKinds.ILOnly) == PortableExecutableKinds.ILOnly)
+                        if (
+                            (pek & PortableExecutableKinds.ILOnly) == PortableExecutableKinds.ILOnly
+                        )
                             return ProcessorArchitecture.MSIL;
                         break;
                 }
@@ -89,7 +96,10 @@ namespace System.Reflection
             {
                 if (ifm == ImageFileMachine.I386)
                 {
-                    if ((pek & PortableExecutableKinds.Required32Bit) == PortableExecutableKinds.Required32Bit)
+                    if (
+                        (pek & PortableExecutableKinds.Required32Bit)
+                        == PortableExecutableKinds.Required32Bit
+                    )
                         return ProcessorArchitecture.X86;
 
                     if ((pek & PortableExecutableKinds.ILOnly) == PortableExecutableKinds.ILOnly)

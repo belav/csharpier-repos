@@ -18,17 +18,19 @@ namespace System.ComponentModel.Design
         /// COM2 interface technologies such as doc objects and ActiveX
         /// controls.
         /// </summary>
-        [Obsolete("ViewTechnology.Passthrough has been deprecated. Use ViewTechnology.Default instead.")]
+        [Obsolete(
+            "ViewTechnology.Passthrough has been deprecated. Use ViewTechnology.Default instead."
+        )]
         Passthrough = 0,
-
         /// <summary>
         /// Specifies that the view for a root designer is supplied through
         /// a Windows Forms control object. The designer host will fill the
         /// development environment's document window with this control.
         /// </summary>
-        [Obsolete("ViewTechnology.WindowsForms has been deprecated. Use ViewTechnology.Default instead.")]
+        [Obsolete(
+            "ViewTechnology.WindowsForms has been deprecated. Use ViewTechnology.Default instead."
+        )]
         WindowsForms = 1,
-
         /// <summary>
         /// Specifies the default view technology support. Here, the root designer may return
         /// any type of object it wishes, but it must be an object that can be "fitted" with

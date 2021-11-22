@@ -15,7 +15,9 @@ using Microsoft.OData.ModelBuilder;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindODataQueryTestFixture : NorthwindQuerySqlServerFixture<NoopModelCustomizer>, IODataQueryTestFixture
+    public class NorthwindODataQueryTestFixture
+        : NorthwindQuerySqlServerFixture<NoopModelCustomizer>,
+          IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 
@@ -23,11 +25,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public NorthwindODataQueryTestFixture()
         {
-            (BaseAddress, ClientFactory, _selfHostServer)
-                = ODataQueryTestFixtureInitializer.Initialize<NorthwindODataContext>(
+            (BaseAddress, ClientFactory, _selfHostServer) =
+                ODataQueryTestFixtureInitializer.Initialize<NorthwindODataContext>(
                     StoreName,
                     GetEdmModel(),
-                    new List<IODataControllerActionConvention> { new OrderDetailsControllerActionConvention() });
+                    new List<IODataControllerActionConvention>
+                    {
+                        new OrderDetailsControllerActionConvention()
+                    }
+                );
         }
 
         private static IEdmModel GetEdmModel()
@@ -60,8 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         public int Order => 0;
 
-        public bool AppliesToController(ODataControllerActionContext context)
-            => context.Controller.ControllerName == "OrderDetails";
+        public bool AppliesToController(ODataControllerActionContext context) =>
+            context.Controller.ControllerName == "OrderDetails";
 
         public bool AppliesToAction(ODataControllerActionContext context)
         {
@@ -73,13 +79,21 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (parameters.Length == 0)
                 {
                     var path = new ODataPathTemplate(route);
-                    context.Action.AddSelector("get", context.Prefix, context.Model, path, context.Options.RouteOptions);
+                    context.Action.AddSelector(
+                        "get",
+                        context.Prefix,
+                        context.Model,
+                        path,
+                        context.Options.RouteOptions
+                    );
 
                     return true;
                 }
-                else if (parameters.Length == 2
+                else if (
+                    parameters.Length == 2
                     && parameters[0].Name == "keyOrderId"
-                    && parameters[1].Name == "keyProductId")
+                    && parameters[1].Name == "keyProductId"
+                )
                 {
                     var keys = new Dictionary<string, string>
                     {
@@ -87,10 +101,20 @@ namespace Microsoft.EntityFrameworkCore.Query
                         { "ProductID", "{keyProductId}" }
                     };
 
-                    var keyTemplate = new KeySegmentTemplate(keys, entitySet.EntityType(), entitySet);
+                    var keyTemplate = new KeySegmentTemplate(
+                        keys,
+                        entitySet.EntityType(),
+                        entitySet
+                    );
 
                     var path = new ODataPathTemplate(route, keyTemplate);
-                    context.Action.AddSelector("get", context.Prefix, context.Model, path, context.Options.RouteOptions);
+                    context.Action.AddSelector(
+                        "get",
+                        context.Prefix,
+                        context.Model,
+                        path,
+                        context.Options.RouteOptions
+                    );
 
                     return true;
                 }

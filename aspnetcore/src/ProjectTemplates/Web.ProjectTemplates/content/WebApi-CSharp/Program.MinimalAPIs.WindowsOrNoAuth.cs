@@ -1,8 +1,10 @@
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 #endif
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 #if (EnableOpenAPI)
@@ -11,17 +13,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 #endif
 #if (WindowsAuth)
-builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
+builder.Services
+    .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+    .AddNegotiate();
 
-builder.Services.AddAuthorization(options =>
-{
-    // By default, all incoming requests will be authorized according to the default policy.
-    options.FallbackPolicy = options.DefaultPolicy;
-});
+
+builder.Services.AddAuthorization(
+    options =>
+    {
+        // By default, all incoming requests will be authorized according to the default policy.
+        options.FallbackPolicy = options.DefaultPolicy;
+    }
+);
 #endif
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 #if (EnableOpenAPI)
@@ -41,25 +48,42 @@ app.UseAuthentication();
 
 var summaries = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "Freezing",
+    "Bracing",
+    "Chilly",
+    "Cool",
+    "Mild",
+    "Warm",
+    "Balmy",
+    "Hot",
+    "Sweltering",
+    "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+
+app.MapGet(
+    "/weatherforecast",
+    () =>
+    {
+        var forecast = Enumerable
+            .Range(1, 5)
+            .Select(
+                index =>
+                    new WeatherForecast(
+                        DateTime.Now.AddDays(index),
+                        Random.Shared.Next(-20, 55),
+                        summaries[Random.Shared.Next(summaries.Length)]
+                    )
+            )
+            .ToArray();
+        return forecast;
 #if (EnableOpenAPI)
-})
-.WithName("GetWeatherForecast");
+        }
+    )
+    .WithName("GetWeatherForecast");
 #else
-});
+    }
+);
 #endif
 
 app.Run();

@@ -19,12 +19,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The value set or changed will be sent to the database in the normal way.
         /// </summary>
         Save,
-
         /// <summary>
         ///     Any value set or changed will be ignored.
         /// </summary>
         Ignore,
-
         /// <summary>
         ///     If an explicit value is set or the value is changed, then an exception will be thrown.
         /// </summary>

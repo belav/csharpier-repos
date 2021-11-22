@@ -18,7 +18,8 @@ namespace System.Collections.Tests
             return GenericLinkedListFactory();
         }
 
-        protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
 
@@ -48,7 +49,9 @@ namespace System.Collections.Tests
         {
             T[] tempArray;
             int index;
-            LinkedListNode<T> currentNode, previousNode, nextNode;
+            LinkedListNode<T> currentNode,
+                previousNode,
+                nextNode;
 
             //[] Verify Count
             Assert.Equal(expectedItems.Length, linkedList.Count); //"Err_0821279 List.Count"
@@ -67,7 +70,13 @@ namespace System.Collections.Tests
             else
             {
                 VerifyLinkedListNode(linkedList.First, expectedItems[0], linkedList, true, false);
-                VerifyLinkedListNode(linkedList.Last, expectedItems[expectedItems.Length - 1], linkedList, false, true);
+                VerifyLinkedListNode(
+                    linkedList.Last,
+                    expectedItems[expectedItems.Length - 1],
+                    linkedList,
+                    false,
+                    true
+                );
             }
 
             //[] Moving forward through he collection starting at head
@@ -79,7 +88,13 @@ namespace System.Collections.Tests
             {
                 nextNode = currentNode.Next;
 
-                VerifyLinkedListNode(currentNode, expectedItems[index], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[index],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
 
                 previousNode = currentNode;
                 currentNode = currentNode.Next;
@@ -95,7 +110,13 @@ namespace System.Collections.Tests
             while (currentNode != null)
             {
                 previousNode = currentNode.Previous;
-                VerifyLinkedListNode(currentNode, expectedItems[expectedItems.Length - 1 - index], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[expectedItems.Length - 1 - index],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
 
                 nextNode = currentNode;
                 currentNode = currentNode.Previous;
@@ -106,7 +127,12 @@ namespace System.Collections.Tests
             //[] Verify Contains
             for (int i = 0; i < expectedItems.Length; i++)
             {
-                Assert.True(linkedList.Contains(expectedItems[i]), "Err_9872haid Expected Contains with item=" + expectedItems[i] + " to return true");
+                Assert.True(
+                    linkedList.Contains(expectedItems[i]),
+                    "Err_9872haid Expected Contains with item="
+                        + expectedItems[i]
+                        + " to return true"
+                );
             }
 
             //[] Verify CopyTo
@@ -130,8 +156,13 @@ namespace System.Collections.Tests
         /// <summary>
         /// Verifies that the contents of a linkedlistnode are correct.
         /// </summary>
-        private static void VerifyLinkedListNode(LinkedListNode<T> node, T expectedValue, LinkedList<T> expectedList,
-            LinkedListNode<T> expectedPrevious, LinkedListNode<T> expectedNext)
+        private static void VerifyLinkedListNode(
+            LinkedListNode<T> node,
+            T expectedValue,
+            LinkedList<T> expectedList,
+            LinkedListNode<T> expectedPrevious,
+            LinkedListNode<T> expectedNext
+        )
         {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Node List"
@@ -143,8 +174,13 @@ namespace System.Collections.Tests
         /// <summary>
         /// verifies that the contents of a linkedlist node are correct.
         /// </summary>
-        private static void VerifyLinkedListNode(LinkedListNode<T> node, T expectedValue, LinkedList<T> expectedList,
-            bool expectedPreviousNull, bool expectedNextNull)
+        private static void VerifyLinkedListNode(
+            LinkedListNode<T> node,
+            T expectedValue,
+            LinkedList<T> expectedList,
+            bool expectedPreviousNull,
+            bool expectedNextNull
+        )
         {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Expected Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Expected Node List"
@@ -186,8 +222,14 @@ namespace System.Collections.Tests
                 T tempItem;
 
                 //[] Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) than are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) than are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 //[] Verify Current returned the correct value
                 Assert.Equal(currentItem, expectedItems[iterations]); //"Err_1432pauy Current returned unexpected value at index: " + iterations
@@ -251,8 +293,14 @@ namespace System.Collections.Tests
                 object tempItem;
 
                 //[] Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) then are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) then are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 //[] Verify Current returned the correct value
                 itemFound = false;
@@ -261,15 +309,20 @@ namespace System.Collections.Tests
                 {
                     if (itemsVisited[i])
                         continue;
-                    if ((expectedItems[i] == null && currentItem == null)
-                        || (expectedItems[i] != null && expectedItems[i].Equals(currentItem)))
+                    if (
+                        (expectedItems[i] == null && currentItem == null)
+                        || (expectedItems[i] != null && expectedItems[i].Equals(currentItem))
+                    )
                     {
                         itemsVisited[i] = true;
                         itemFound = true;
                         break;
                     }
                 }
-                Assert.True(itemFound, "Err_1432pauy Current returned unexpected value=" + currentItem);
+                Assert.True(
+                    itemFound,
+                    "Err_1432pauy Current returned unexpected value=" + currentItem
+                );
 
                 //[] Verify Current always returns the same value every time it is called
                 for (int i = 0; i < 3; i++)
@@ -283,7 +336,13 @@ namespace System.Collections.Tests
 
             for (int i = 0; i < expectedCount; ++i)
             {
-                Assert.True(itemsVisited[i], "Err_052848ahiedoi Expected Current to return true for item: " + expectedItems[i] + "index: " + i);
+                Assert.True(
+                    itemsVisited[i],
+                    "Err_052848ahiedoi Expected Current to return true for item: "
+                        + expectedItems[i]
+                        + "index: "
+                        + i
+                );
             }
 
             Assert.Equal(expectedCount, iterations); //"Err_658805eauz Number of items to iterate through"
@@ -309,14 +368,20 @@ namespace System.Collections.Tests
             //[] Verify Contains
             for (int i = 0; i < expectedItems.Length; i++)
             {
-                Assert.True(linkedList.Contains(expectedItems[i]),
-                    "Err_9872haid Expected Contains with item=" + expectedItems[i] + " to return true");
+                Assert.True(
+                    linkedList.Contains(expectedItems[i]),
+                    "Err_9872haid Expected Contains with item="
+                        + expectedItems[i]
+                        + " to return true"
+                );
             }
         }
 
         private void VerifyFindLastDuplicates(LinkedList<T> linkedList, T[] expectedItems)
         {
-            LinkedListNode<T> previousNode, currentNode = null, nextNode;
+            LinkedListNode<T> previousNode,
+                currentNode = null,
+                nextNode;
             LinkedListNode<T>[] nodes = new LinkedListNode<T>[expectedItems.Length];
             int index = 0;
 
@@ -339,13 +404,21 @@ namespace System.Collections.Tests
 
                 Assert.Equal(nodes[index], currentNode); //"Node returned from FindLast index=" + i.ToString()
 
-                VerifyLinkedListNode(currentNode, expectedItems[i], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[i],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
             }
         }
 
         private void VerifyFindDuplicates(LinkedList<T> linkedList, T[] expectedItems)
         {
-            LinkedListNode<T> previousNode, currentNode = null, nextNode;
+            LinkedListNode<T> previousNode,
+                currentNode = null,
+                nextNode;
             LinkedListNode<T>[] nodes = new LinkedListNode<T>[expectedItems.Length];
             int index = 0;
 
@@ -368,13 +441,21 @@ namespace System.Collections.Tests
 
                 Assert.Equal(nodes[index], currentNode); //"Node returned from Find index=" + i.ToString()
 
-                VerifyLinkedListNode(currentNode, expectedItems[i], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[i],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
             }
         }
 
         private void VerifyFindLast(LinkedList<T> linkedList, T[] expectedItems)
         {
-            LinkedListNode<T> previousNode, currentNode, nextNode;
+            LinkedListNode<T> previousNode,
+                currentNode,
+                nextNode;
 
             currentNode = null;
             for (int i = 0; i < expectedItems.Length; ++i)
@@ -382,7 +463,13 @@ namespace System.Collections.Tests
                 previousNode = currentNode;
                 currentNode = linkedList.FindLast(expectedItems[i]);
                 nextNode = currentNode.Next;
-                VerifyLinkedListNode(currentNode, expectedItems[i], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[i],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
             }
 
             currentNode = null;
@@ -391,13 +478,21 @@ namespace System.Collections.Tests
                 nextNode = currentNode;
                 currentNode = linkedList.FindLast(expectedItems[i]);
                 previousNode = currentNode.Previous;
-                VerifyLinkedListNode(currentNode, expectedItems[i], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[i],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
             }
         }
 
         private void VerifyFind(LinkedList<T> linkedList, T[] expectedItems)
         {
-            LinkedListNode<T> previousNode, currentNode, nextNode;
+            LinkedListNode<T> previousNode,
+                currentNode,
+                nextNode;
 
             currentNode = null;
             for (int i = 0; i < expectedItems.Length; ++i)
@@ -405,7 +500,13 @@ namespace System.Collections.Tests
                 previousNode = currentNode;
                 currentNode = linkedList.Find(expectedItems[i]);
                 nextNode = currentNode.Next;
-                VerifyLinkedListNode(currentNode, expectedItems[i], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[i],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
             }
 
             currentNode = null;
@@ -414,14 +515,21 @@ namespace System.Collections.Tests
                 nextNode = currentNode;
                 currentNode = linkedList.Find(expectedItems[i]);
                 previousNode = currentNode.Previous;
-                VerifyLinkedListNode(currentNode, expectedItems[i], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[i],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
             }
         }
 
         private void VerifyRemovedNode(LinkedListNode<T> node, T expectedValue)
         {
             LinkedList<T> tempLinkedList = new LinkedList<T>();
-            LinkedListNode<T> headNode, tailNode;
+            LinkedListNode<T> headNode,
+                tailNode;
 
             tempLinkedList.AddLast(default(T));
             tempLinkedList.AddLast(default(T));
@@ -443,7 +551,11 @@ namespace System.Collections.Tests
             InitialItems_Tests(tempLinkedList, new T[] { default(T), expectedValue, default(T) });
         }
 
-        private void VerifyRemovedNode(LinkedList<T> linkedList, LinkedListNode<T> node, T expectedValue)
+        private void VerifyRemovedNode(
+            LinkedList<T> linkedList,
+            LinkedListNode<T> node,
+            T expectedValue
+        )
         {
             LinkedListNode<T> tailNode = linkedList.Last;
 
@@ -460,7 +572,12 @@ namespace System.Collections.Tests
             linkedList.RemoveLast();
         }
 
-        private void VerifyRemovedNode(LinkedList<T> linkedList, T[] linkedListValues, LinkedListNode<T> node, T expectedValue)
+        private void VerifyRemovedNode(
+            LinkedList<T> linkedList,
+            T[] linkedListValues,
+            LinkedListNode<T> node,
+            T expectedValue
+        )
         {
             LinkedListNode<T> tailNode = linkedList.Last;
 
@@ -489,11 +606,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void LinkedList_Generic_Constructor_IEnumerable(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void LinkedList_Generic_Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             LinkedList<T> queue = new LinkedList<T>(enumerable);
             Assert.Equal(enumerable, queue);
         }
@@ -501,9 +630,11 @@ namespace System.Collections.Tests
         [Fact]
         public void LinkedList_Generic_Constructor_IEnumerable_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("collection", () => new LinkedList<T>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collection",
+                () => new LinkedList<T>(null)
+            );
         }
-
         #endregion
     }
 }

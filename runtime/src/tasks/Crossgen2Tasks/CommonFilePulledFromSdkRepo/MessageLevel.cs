@@ -12,7 +12,6 @@ namespace Microsoft.NET.Build.Tasks
         LowImportance = MessageImportance.Low,
         NormalImportance = MessageImportance.Normal,
         HighImportance = MessageImportance.High,
-
         // And negative values are for levels that are not informational (warning/error):
         Warning = -1,
         Error = -2,
@@ -20,10 +19,10 @@ namespace Microsoft.NET.Build.Tasks
 
     internal static class MessageLevelExtensions
     {
-        public static MessageLevel ToLevel(this MessageImportance importance)
-            => (MessageLevel)(importance);
+        public static MessageLevel ToLevel(this MessageImportance importance) =>
+            (MessageLevel)(importance);
 
-        public static MessageImportance ToImportance(this MessageLevel level)
-            => level >= 0 ? (MessageImportance)level : throw new InvalidCastException();
+        public static MessageImportance ToImportance(this MessageLevel level) =>
+            level >= 0 ? (MessageImportance)level : throw new InvalidCastException();
     }
 }

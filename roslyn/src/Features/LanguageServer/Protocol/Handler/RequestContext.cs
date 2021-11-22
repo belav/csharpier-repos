@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             IDocumentChangeTracker documentChangeTracker,
             ImmutableDictionary<Uri, SourceText> trackedDocuments,
             ImmutableArray<string> supportedLanguages,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             Document = document;
             Solution = solution;
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LspWorkspaceManager lspWorkspaceManager,
             IDocumentChangeTracker documentChangeTracker,
             ImmutableArray<string> supportedLanguages,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             // Retrieve the current LSP tracked text as of this request.
             // This is safe as all creation of request contexts cannot happen concurrently.
@@ -107,7 +109,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             //    so they're not accidentally operating on stale solution state.
             if (!requiresLSPSolution)
             {
-                return new RequestContext(solution: null, logger.TraceInformation, clientCapabilities, clientName, document: null, documentChangeTracker, trackedDocuments, supportedLanguages, globalOptions);
+                return new RequestContext(
+                    solution: null,
+                    logger.TraceInformation,
+                    clientCapabilities,
+                    clientName,
+                    document: null,
+                    documentChangeTracker,
+                    trackedDocuments,
+                    supportedLanguages,
+                    globalOptions
+                );
             }
 
             // Go through each registered workspace, find the solution that contains the document that
@@ -140,7 +152,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 documentChangeTracker,
                 trackedDocuments,
                 supportedLanguages,
-                globalOptions);
+                globalOptions
+            );
             return context;
         }
 
@@ -148,19 +161,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// Allows a mutating request to open a document and start it being tracked.
         /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
         /// </summary>
-        public void StartTracking(Uri uri, SourceText initialText)
-            => _documentChangeTracker.StartTracking(uri, initialText);
+        public void StartTracking(Uri uri, SourceText initialText) =>
+            _documentChangeTracker.StartTracking(uri, initialText);
 
         /// <summary>
         /// Allows a mutating request to update the contents of a tracked document.
         /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
         /// </summary>
-        public void UpdateTrackedDocument(Uri uri, SourceText changedText)
-            => _documentChangeTracker.UpdateTrackedDocument(uri, changedText);
+        public void UpdateTrackedDocument(Uri uri, SourceText changedText) =>
+            _documentChangeTracker.UpdateTrackedDocument(uri, changedText);
 
         public SourceText GetTrackedDocumentSourceText(Uri documentUri)
         {
-            Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(documentUri), $"Attempted to get text for {documentUri} which is not open.");
+            Contract.ThrowIfFalse(
+                _trackedDocuments.ContainsKey(documentUri),
+                $"Attempted to get text for {documentUri} which is not open."
+            );
             return _trackedDocuments[documentUri];
         }
 
@@ -168,16 +184,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// Allows a mutating request to close a document and stop it being tracked.
         /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
         /// </summary>
-        public void StopTracking(Uri uri)
-            => _documentChangeTracker.StopTracking(uri);
+        public void StopTracking(Uri uri) => _documentChangeTracker.StopTracking(uri);
 
-        public bool IsTracking(Uri documentUri)
-            => _trackedDocuments.ContainsKey(documentUri);
+        public bool IsTracking(Uri documentUri) => _trackedDocuments.ContainsKey(documentUri);
 
         /// <summary>
         /// Logs an informational message.
         /// </summary>
-        public void TraceInformation(string message)
-            => _traceInformation(message);
+        public void TraceInformation(string message) => _traceInformation(message);
     }
 }

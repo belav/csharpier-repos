@@ -15,17 +15,17 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class NotSupportedException : SystemException
     {
-        public NotSupportedException()
-            : base(SR.Arg_NotSupportedException)
+        public NotSupportedException() : base(SR.Arg_NotSupportedException)
         {
             HResult = HResults.COR_E_NOTSUPPORTED;
         }
 
-        public NotSupportedException(string? message)
-            : base(message)
+        public NotSupportedException(string? message) : base(message)
         {
             HResult = HResults.COR_E_NOTSUPPORTED;
         }
@@ -36,8 +36,7 @@ namespace System
             HResult = HResults.COR_E_NOTSUPPORTED;
         }
 
-        protected NotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected NotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

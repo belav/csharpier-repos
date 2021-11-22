@@ -13,8 +13,10 @@ internal class MaxLengthAttributeAdapter : AttributeAdapterBase<MaxLengthAttribu
 {
     private readonly string _max;
 
-    public MaxLengthAttributeAdapter(MaxLengthAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
+    public MaxLengthAttributeAdapter(
+        MaxLengthAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    ) : base(attribute, stringLocalizer)
     {
         _max = Attribute.Length.ToString(CultureInfo.InvariantCulture);
     }
@@ -42,6 +44,7 @@ internal class MaxLengthAttributeAdapter : AttributeAdapterBase<MaxLengthAttribu
         return GetErrorMessage(
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
-            Attribute.Length);
+            Attribute.Length
+        );
     }
 }

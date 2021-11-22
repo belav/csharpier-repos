@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionForeignKeyBuilder relationshipBuilder,
             IReadOnlyList<IConventionProperty> oldDependentProperties,
             IConventionKey oldPrincipalKey,
-            IConventionContext<IReadOnlyList<IConventionProperty>> context);
+            IConventionContext<IReadOnlyList<IConventionProperty>> context
+        );
     }
 }

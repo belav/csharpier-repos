@@ -13,8 +13,8 @@ namespace Internal.Cryptography.Pal
     {
         public static T? GetPublicKey<T>(
             this X509Certificate2 certificate,
-            Predicate<X509Certificate2>? matchesConstraints = null)
-            where T : AsymmetricAlgorithm
+            Predicate<X509Certificate2>? matchesConstraints = null
+        ) where T : AsymmetricAlgorithm
         {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
@@ -33,7 +33,14 @@ namespace Internal.Cryptography.Pal
             {
                 byte[] rawEncodedKeyValue = publicKey.EncodedKeyValue.RawData;
                 byte[] rawEncodedParameters = publicKey.EncodedParameters.RawData;
-                return (T)(X509Pal.Instance.DecodePublicKey(algorithmOid, rawEncodedKeyValue, rawEncodedParameters, certificate.Pal));
+                return (T)(
+                    X509Pal.Instance.DecodePublicKey(
+                        algorithmOid,
+                        rawEncodedKeyValue,
+                        rawEncodedParameters,
+                        certificate.Pal
+                    )
+                );
             }
             else if (typeof(T) == typeof(ECDsa))
             {
@@ -41,7 +48,9 @@ namespace Internal.Cryptography.Pal
             }
             else if (typeof(T) == typeof(ECDiffieHellman))
             {
-                return (T)(object)(X509Pal.Instance.DecodeECDiffieHellmanPublicKey(certificate.Pal));
+                return (T)(object)(
+                    X509Pal.Instance.DecodeECDiffieHellmanPublicKey(certificate.Pal)
+                );
             }
 
             Debug.Fail("Expected GetExpectedOidValue() to have thrown before we got here.");
@@ -50,8 +59,8 @@ namespace Internal.Cryptography.Pal
 
         public static T? GetPrivateKey<T>(
             this X509Certificate2 certificate,
-            Predicate<X509Certificate2>? matchesConstraints = null)
-            where T : AsymmetricAlgorithm
+            Predicate<X509Certificate2>? matchesConstraints = null
+        ) where T : AsymmetricAlgorithm
         {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));

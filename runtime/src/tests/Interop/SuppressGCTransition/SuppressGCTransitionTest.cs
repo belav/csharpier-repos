@@ -10,49 +10,112 @@ using Xunit;
 
 unsafe static class SuppressGCTransitionNative
 {
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl)]
+    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention = CallingConvention.Cdecl)]
     public static extern unsafe void SetIsInCooperativeModeFunction(delegate* unmanaged<int> fn);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "NextUInt")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "NextUInt"
+    )]
     [SuppressGCTransition]
     public static extern unsafe int NextUInt_Inline_NoGCTransition(int* n);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "NextUInt")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "NextUInt"
+    )]
     public static extern unsafe int NextUInt_Inline_GCTransition(int* n);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "NextUInt")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "NextUInt"
+    )]
     [SuppressGCTransition]
     public static extern unsafe bool NextUInt_NoInline_NoGCTransition(int* n);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "NextUInt")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "NextUInt"
+    )]
     public static extern unsafe bool NextUInt_NoInline_GCTransition(int* n);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
     [SuppressGCTransition]
-    public static extern unsafe int InvokeCallbackFuncPtr_Inline_NoGCTransition(delegate* unmanaged[Cdecl]<int, int> cb, int* n);
+    public static extern unsafe int InvokeCallbackFuncPtr_Inline_NoGCTransition(
+        delegate* unmanaged[Cdecl]<int, int> cb,
+        int* n
+    );
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
-    public static extern unsafe int InvokeCallbackFuncPtr_Inline_GCTransition(delegate* unmanaged[Cdecl]<int, int> cb, int* n);
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
+    public static extern unsafe int InvokeCallbackFuncPtr_Inline_GCTransition(
+        delegate* unmanaged[Cdecl]<int, int> cb,
+        int* n
+    );
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
     [SuppressGCTransition]
-    public static extern unsafe bool InvokeCallbackFuncPtr_NoInline_NoGCTransition(delegate* unmanaged[Cdecl]<int, int> cb, int* n);
+    public static extern unsafe bool InvokeCallbackFuncPtr_NoInline_NoGCTransition(
+        delegate* unmanaged[Cdecl]<int, int> cb,
+        int* n
+    );
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
-    public static extern unsafe bool InvokeCallbackFuncPtr_NoInline_GCTransition(delegate* unmanaged[Cdecl]<int, int> cb, int* n);
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
+    public static extern unsafe bool InvokeCallbackFuncPtr_NoInline_GCTransition(
+        delegate* unmanaged[Cdecl]<int, int> cb,
+        int* n
+    );
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
     [SuppressGCTransition]
     public static extern unsafe int InvokeCallbackVoidPtr_Inline_NoGCTransition(void* cb, int* n);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
     public static extern unsafe int InvokeCallbackVoidPtr_Inline_GCTransition(void* cb, int* n);
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
     [SuppressGCTransition]
-    public static extern unsafe bool InvokeCallbackVoidPtr_NoInline_NoGCTransition(void* cb, int* n);
+    public static extern unsafe bool InvokeCallbackVoidPtr_NoInline_NoGCTransition(
+        void* cb,
+        int* n
+    );
 
-    [DllImport(nameof(SuppressGCTransitionNative), CallingConvention=CallingConvention.Cdecl, EntryPoint = "InvokeCallback")]
+    [DllImport(
+        nameof(SuppressGCTransitionNative),
+        CallingConvention = CallingConvention.Cdecl,
+        EntryPoint = "InvokeCallback"
+    )]
     public static extern unsafe bool InvokeCallbackVoidPtr_NoInline_GCTransition(void* cb, int* n);
 
     private static IntPtr nativeLibrary;
@@ -73,21 +136,29 @@ unsafe static class SuppressGCTransitionNative
         throw new Exception($"Failed to find native export");
     }
 
-    public static delegate* unmanaged[Cdecl]<int*, int> GetNextUIntFunctionPointer_Inline_GCTransition()
-        => (delegate* unmanaged[Cdecl]<int*, int>)GetNextUIntFunctionPointer();
+    public static delegate* unmanaged[Cdecl]<
+        int*,
+        int> GetNextUIntFunctionPointer_Inline_GCTransition() =>
+        (delegate* unmanaged[Cdecl]<int*, int>)GetNextUIntFunctionPointer();
 
-    public static delegate* unmanaged[Cdecl, SuppressGCTransition]<int*, int> GetNextUIntFunctionPointer_Inline_NoGCTransition()
-        => (delegate* unmanaged[Cdecl, SuppressGCTransition]<int*, int>)GetNextUIntFunctionPointer();
+    public static delegate* unmanaged[Cdecl, SuppressGCTransition]<
+        int*,
+        int> GetNextUIntFunctionPointer_Inline_NoGCTransition() =>
+        (delegate* unmanaged[Cdecl, SuppressGCTransition]<int*, int>)GetNextUIntFunctionPointer();
 
-    public static delegate* unmanaged[Cdecl]<int*, bool> GetNextUIntFunctionPointer_NoInline_GCTransition()
-        => (delegate* unmanaged[Cdecl]<int*, bool>)GetNextUIntFunctionPointer();
+    public static delegate* unmanaged[Cdecl]<
+        int*,
+        bool> GetNextUIntFunctionPointer_NoInline_GCTransition() =>
+        (delegate* unmanaged[Cdecl]<int*, bool>)GetNextUIntFunctionPointer();
 
-    public static delegate* unmanaged[Cdecl, SuppressGCTransition]<int*, bool> GetNextUIntFunctionPointer_NoInline_NoGCTransition()
-        => (delegate* unmanaged[Cdecl, SuppressGCTransition]<int*, bool>)GetNextUIntFunctionPointer();
+    public static delegate* unmanaged[Cdecl, SuppressGCTransition]<
+        int*,
+        bool> GetNextUIntFunctionPointer_NoInline_NoGCTransition() =>
+        (delegate* unmanaged[Cdecl, SuppressGCTransition]<int*, bool>)GetNextUIntFunctionPointer();
 
     private static IntPtr GetNativeLibrary()
     {
-        var libNames = new []
+        var libNames = new[]
         {
             $"{nameof(SuppressGCTransitionNative)}.dll",
             $"lib{nameof(SuppressGCTransitionNative)}.so",
@@ -215,7 +286,9 @@ unsafe class SuppressGCTransitionTest
     {
         Console.WriteLine($"{nameof(NoInline_NoGCTransition)} ({expected}) ...");
         int n;
-        bool ret = SuppressGCTransitionNative.GetNextUIntFunctionPointer_NoInline_NoGCTransition()(&n);
+        bool ret = SuppressGCTransitionNative.GetNextUIntFunctionPointer_NoInline_NoGCTransition()(
+            &n
+        );
         Assert.Equal(expected, n);
         CheckGCMode.Validate(transitionSuppressed: true, ret);
         return n + 1;
@@ -225,7 +298,9 @@ unsafe class SuppressGCTransitionTest
     {
         Console.WriteLine($"{nameof(NoInline_GCTransition)} ({expected}) ...");
         int n;
-        bool ret = SuppressGCTransitionNative.GetNextUIntFunctionPointer_NoInline_GCTransition()(&n);
+        bool ret = SuppressGCTransitionNative.GetNextUIntFunctionPointer_NoInline_GCTransition()(
+            &n
+        );
         Assert.Equal(expected, n);
         CheckGCMode.Validate(transitionSuppressed: false, ret);
         return n + 1;
@@ -340,7 +415,10 @@ unsafe class SuppressGCTransitionTest
             n = CallAsFunctionPointer(n);
             n = ILStubCache_NoGCTransition_GCTransition(n);
 
-            if (args.Length != 0 && args[0].Equals("ILStubCache", StringComparison.OrdinalIgnoreCase))
+            if (
+                args.Length != 0
+                && args[0].Equals("ILStubCache", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // This test intentionally results in a fatal error, so only run when manually specified
                 n = ILStubCache_GCTransition_NoGCTransition(n);

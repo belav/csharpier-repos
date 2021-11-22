@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -26,14 +26,20 @@ public class HttpResponseHeadersTests
     {
         using (var memoryPool = PinnedBlockMemoryPoolFactory.Create())
         {
-            var options = new PipeOptions(memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
             var pair = DuplexPipe.CreateConnectionPair(options, options);
             var http1ConnectionContext = TestContextFactory.CreateHttpConnectionContext(
                 serviceContext: new TestServiceContext(),
                 connectionContext: Mock.Of<ConnectionContext>(),
                 transport: pair.Transport,
                 memoryPool: memoryPool,
-                connectionFeatures: new FeatureCollection());
+                connectionFeatures: new FeatureCollection()
+            );
 
             var http1Connection = new Http1Connection(http1ConnectionContext);
 
@@ -102,32 +108,44 @@ public class HttpResponseHeadersTests
     {
         var responseHeaders = new HttpResponseHeaders();
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IHeaderDictionary)responseHeaders)[key] = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IHeaderDictionary)responseHeaders)[key] = value;
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IHeaderDictionary)responseHeaders)[key] = new StringValues(new[] { "valid", value });
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IHeaderDictionary)responseHeaders)[key] = new StringValues(
+                    new[] { "valid", value }
+                );
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            var kvp = new KeyValuePair<string, StringValues>(key, value);
-            ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                var kvp = new KeyValuePair<string, StringValues>(key, value);
+                ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            var kvp = new KeyValuePair<string, StringValues>(key, value);
-            ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                var kvp = new KeyValuePair<string, StringValues>(key, value);
+                ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
+            }
+        );
     }
 
     [Theory]
@@ -147,16 +165,20 @@ public class HttpResponseHeadersTests
         var responseHeaders = (IHeaderDictionary)new HttpResponseHeaders();
 
         // Known special header
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            responseHeaders.Allow = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                responseHeaders.Allow = value;
+            }
+        );
 
         // Unknown header fallback
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            responseHeaders.Accept = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                responseHeaders.Accept = value;
+            }
+        );
     }
 
     [Theory]
@@ -173,43 +195,59 @@ public class HttpResponseHeadersTests
         var responseHeaders = new HttpResponseHeaders(_ => Encoding.UTF8);
 
         // Known special header
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IHeaderDictionary)responseHeaders).Allow = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IHeaderDictionary)responseHeaders).Allow = value;
+            }
+        );
 
         // Unknown header fallback
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IHeaderDictionary)responseHeaders).Accept = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IHeaderDictionary)responseHeaders).Accept = value;
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IHeaderDictionary)responseHeaders)["Unknown"] = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IHeaderDictionary)responseHeaders)["Unknown"] = value;
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(new[] { "valid", value });
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(
+                    new[] { "valid", value }
+                );
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            ((IDictionary<string, StringValues>)responseHeaders)["Unknown"] = value;
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                ((IDictionary<string, StringValues>)responseHeaders)["Unknown"] = value;
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
-            ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
+                ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
+            }
+        );
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
-            ((IDictionary<string, StringValues>)responseHeaders).Add("Unknown", value);
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
+                ((IDictionary<string, StringValues>)responseHeaders).Add("Unknown", value);
+            }
+        );
     }
 
     [Theory]
@@ -228,7 +266,9 @@ public class HttpResponseHeadersTests
 
         ((IHeaderDictionary)responseHeaders)["Unknown"] = value;
 
-        ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(new[] { "valid", value });
+        ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(
+            new[] { "valid", value }
+        );
 
         ((IDictionary<string, StringValues>)responseHeaders)["Unknown"] = value;
 
@@ -247,7 +287,9 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         headers.SetReadOnly();
 
-        Assert.Throws<InvalidOperationException>(() => ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" }));
+        Assert.Throws<InvalidOperationException>(
+            () => ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" })
+        );
     }
 
     [Fact]
@@ -299,8 +341,13 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         var dictionary = (IDictionary<string, StringValues>)headers;
 
-        var exception = Assert.Throws<InvalidOperationException>(() => dictionary.Add("Content-Length", new[] { contentLength }));
-        Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => dictionary.Add("Content-Length", new[] { contentLength })
+        );
+        Assert.Equal(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+            exception.Message
+        );
     }
 
     [Theory]
@@ -310,8 +357,13 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         var dictionary = (IDictionary<string, StringValues>)headers;
 
-        var exception = Assert.Throws<InvalidOperationException>(() => ((IHeaderDictionary)headers)["Content-Length"] = contentLength);
-        Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ((IHeaderDictionary)headers)["Content-Length"] = contentLength
+        );
+        Assert.Equal(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+            exception.Message
+        );
     }
 
     [Theory]
@@ -320,8 +372,13 @@ public class HttpResponseHeadersTests
     {
         var headers = new HttpResponseHeaders();
 
-        var exception = Assert.Throws<InvalidOperationException>(() => headers.HeaderContentLength = contentLength);
-        Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => headers.HeaderContentLength = contentLength
+        );
+        Assert.Equal(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+            exception.Message
+        );
     }
 
     [Theory]
@@ -382,10 +439,15 @@ public class HttpResponseHeadersTests
 
     private static long ParseLong(string value)
     {
-        return long.Parse(value, NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite, CultureInfo.InvariantCulture);
+        return long.Parse(
+            value,
+            NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+            CultureInfo.InvariantCulture
+        );
     }
 
-    public static TheoryData<string> GoodContentLengths => new TheoryData<string>
+    public static TheoryData<string> GoodContentLengths =>
+        new TheoryData<string>
         {
             "0",
             "00",
@@ -394,7 +456,8 @@ public class HttpResponseHeadersTests
             long.MaxValue.ToString(CultureInfo.InvariantCulture)
         };
 
-    public static TheoryData<string> BadContentLengths => new TheoryData<string>
+    public static TheoryData<string> BadContentLengths =>
+        new TheoryData<string>
         {
             "",
             " ",

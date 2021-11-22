@@ -29,7 +29,10 @@ public class AssemblyTestLog : IDisposable
     private static readonly int MaxPathLength = GetMaxPathLength();
 
     private static readonly object _lock = new object();
-    private static readonly Dictionary<Assembly, AssemblyTestLog> _logs = new Dictionary<Assembly, AssemblyTestLog>();
+    private static readonly Dictionary<Assembly, AssemblyTestLog> _logs = new Dictionary<
+        Assembly,
+        AssemblyTestLog
+    >();
 
     private readonly ILoggerFactory _globalLoggerFactory;
     private readonly ILogger _globalLogger;
@@ -39,12 +42,22 @@ public class AssemblyTestLog : IDisposable
 
     private static int GetMaxPathLength()
     {
-        var maxPathString = Environment.GetEnvironmentVariable(MaxPathLengthEnvironmentVariableName);
+        var maxPathString = Environment.GetEnvironmentVariable(
+            MaxPathLengthEnvironmentVariableName
+        );
         var defaultMaxPath = 245;
-        return string.IsNullOrEmpty(maxPathString) ? defaultMaxPath : int.Parse(maxPathString, CultureInfo.InvariantCulture);
+        return string.IsNullOrEmpty(maxPathString)
+          ? defaultMaxPath
+          : int.Parse(maxPathString, CultureInfo.InvariantCulture);
     }
 
-    private AssemblyTestLog(ILoggerFactory globalLoggerFactory, ILogger globalLogger, string baseDirectory, Assembly assembly, IServiceProvider serviceProvider)
+    private AssemblyTestLog(
+        ILoggerFactory globalLoggerFactory,
+        ILogger globalLogger,
+        string baseDirectory,
+        Assembly assembly,
+        IServiceProvider serviceProvider
+    )
     {
         _globalLoggerFactory = globalLoggerFactory;
         _globalLogger = globalLogger;
@@ -53,18 +66,60 @@ public class AssemblyTestLog : IDisposable
         _serviceProvider = serviceProvider;
     }
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public IDisposable StartTestLog(ITestOutputHelper output, string className, out ILoggerFactory loggerFactory, [CallerMemberName] string testName = null) =>
-        StartTestLog(output, className, out loggerFactory, LogLevel.Debug, testName);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public IDisposable StartTestLog(
+        ITestOutputHelper output,
+        string className,
+        out ILoggerFactory loggerFactory,
+        [CallerMemberName] string testName = null
+    ) => StartTestLog(output, className, out loggerFactory, LogLevel.Debug, testName);
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public IDisposable StartTestLog(ITestOutputHelper output, string className, out ILoggerFactory loggerFactory, LogLevel minLogLevel, [CallerMemberName] string testName = null) =>
-        StartTestLog(output, className, out loggerFactory, minLogLevel, out var _, out var _, testName);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public IDisposable StartTestLog(
+        ITestOutputHelper output,
+        string className,
+        out ILoggerFactory loggerFactory,
+        LogLevel minLogLevel,
+        [CallerMemberName] string testName = null
+    ) =>
+        StartTestLog(
+            output,
+            className,
+            out loggerFactory,
+            minLogLevel,
+            out var _,
+            out var _,
+            testName
+        );
 
-    internal IDisposable StartTestLog(ITestOutputHelper output, string className, out ILoggerFactory loggerFactory, LogLevel minLogLevel, out string resolvedTestName, out string logOutputDirectory, [CallerMemberName] string testName = null)
+    internal IDisposable StartTestLog(
+        ITestOutputHelper output,
+        string className,
+        out ILoggerFactory loggerFactory,
+        LogLevel minLogLevel,
+        out string resolvedTestName,
+        out string logOutputDirectory,
+        [CallerMemberName] string testName = null
+    )
     {
         var logStart = DateTimeOffset.UtcNow;
-        var serviceProvider = CreateLoggerServices(output, className, minLogLevel, out resolvedTestName, out logOutputDirectory, testName, logStart);
+        var serviceProvider = CreateLoggerServices(
+            output,
+            className,
+            minLogLevel,
+            out resolvedTestName,
+            out logOutputDirectory,
+            testName,
+            logStart
+        );
         var factory = serviceProvider.GetRequiredService<ILoggerFactory>();
         loggerFactory = factory;
         var logger = loggerFactory.CreateLogger("TestLifetime");
@@ -74,33 +129,105 @@ public class AssemblyTestLog : IDisposable
         var scope = logger.BeginScope("Test: {testName}", testName);
 
         _globalLogger.LogInformation("Starting test {testName}", testName);
-        logger.LogInformation("Starting test {testName} at {logStart}", testName, logStart.ToString("s", CultureInfo.InvariantCulture));
+        logger.LogInformation(
+            "Starting test {testName} at {logStart}",
+            testName,
+            logStart.ToString("s", CultureInfo.InvariantCulture)
+        );
 
-        return new Disposable(() =>
-        {
-            stopwatch.Stop();
-            _globalLogger.LogInformation("Finished test {testName} in {duration}s", testName, stopwatch.Elapsed.TotalSeconds);
-            logger.LogInformation("Finished test {testName} in {duration}s", testName, stopwatch.Elapsed.TotalSeconds);
-            scope.Dispose();
-            factory.Dispose();
-            (serviceProvider as IDisposable)?.Dispose();
-        });
+        return new Disposable(
+            () =>
+            {
+                stopwatch.Stop();
+                _globalLogger.LogInformation(
+                    "Finished test {testName} in {duration}s",
+                    testName,
+                    stopwatch.Elapsed.TotalSeconds
+                );
+                logger.LogInformation(
+                    "Finished test {testName} in {duration}s",
+                    testName,
+                    stopwatch.Elapsed.TotalSeconds
+                );
+                scope.Dispose();
+                factory.Dispose();
+                (serviceProvider as IDisposable)?.Dispose();
+            }
+        );
     }
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public ILoggerFactory CreateLoggerFactory(ITestOutputHelper output, string className, [CallerMemberName] string testName = null, DateTimeOffset? logStart = null)
-        => CreateLoggerFactory(output, className, LogLevel.Trace, testName, logStart);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public ILoggerFactory CreateLoggerFactory(
+        ITestOutputHelper output,
+        string className,
+        [CallerMemberName] string testName = null,
+        DateTimeOffset? logStart = null
+    ) => CreateLoggerFactory(output, className, LogLevel.Trace, testName, logStart);
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public ILoggerFactory CreateLoggerFactory(ITestOutputHelper output, string className, LogLevel minLogLevel, [CallerMemberName] string testName = null, DateTimeOffset? logStart = null)
-        => CreateLoggerServices(output, className, minLogLevel, out var _, out var _, testName, logStart).GetRequiredService<ILoggerFactory>();
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public ILoggerFactory CreateLoggerFactory(
+        ITestOutputHelper output,
+        string className,
+        LogLevel minLogLevel,
+        [CallerMemberName] string testName = null,
+        DateTimeOffset? logStart = null
+    ) =>
+        CreateLoggerServices(
+                output,
+                className,
+                minLogLevel,
+                out var _,
+                out var _,
+                testName,
+                logStart
+            )
+            .GetRequiredService<ILoggerFactory>();
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public IServiceProvider CreateLoggerServices(ITestOutputHelper output, string className, LogLevel minLogLevel, out string normalizedTestName, [CallerMemberName] string testName = null, DateTimeOffset? logStart = null)
-        => CreateLoggerServices(output, className, minLogLevel, out normalizedTestName, out var _, testName, logStart);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public IServiceProvider CreateLoggerServices(
+        ITestOutputHelper output,
+        string className,
+        LogLevel minLogLevel,
+        out string normalizedTestName,
+        [CallerMemberName] string testName = null,
+        DateTimeOffset? logStart = null
+    ) =>
+        CreateLoggerServices(
+            output,
+            className,
+            minLogLevel,
+            out normalizedTestName,
+            out var _,
+            testName,
+            logStart
+        );
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public IServiceProvider CreateLoggerServices(ITestOutputHelper output, string className, LogLevel minLogLevel, out string normalizedTestName, out string logOutputDirectory, [CallerMemberName] string testName = null, DateTimeOffset? logStart = null)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public IServiceProvider CreateLoggerServices(
+        ITestOutputHelper output,
+        string className,
+        LogLevel minLogLevel,
+        out string normalizedTestName,
+        out string logOutputDirectory,
+        [CallerMemberName] string testName = null,
+        DateTimeOffset? logStart = null
+    )
     {
         normalizedTestName = string.Empty;
         logOutputDirectory = string.Empty;
@@ -118,36 +245,58 @@ public class AssemblyTestLog : IDisposable
             logOutputDirectory = Path.Combine(_baseDirectory, className);
             testName = TestFileOutputContext.RemoveIllegalFileChars(testName);
 
-            if (logOutputDirectory.Length + testName.Length + LogFileExtension.Length >= MaxPathLength)
+            if (
+                logOutputDirectory.Length + testName.Length + LogFileExtension.Length
+                >= MaxPathLength
+            )
             {
-                _globalLogger.LogWarning($"Test name {testName} is too long. Please shorten test name.");
+                _globalLogger.LogWarning(
+                    $"Test name {testName} is too long. Please shorten test name."
+                );
 
                 // Shorten the test name by removing the middle portion of the testname
-                var testNameLength = MaxPathLength - logOutputDirectory.Length - LogFileExtension.Length;
+                var testNameLength =
+                    MaxPathLength - logOutputDirectory.Length - LogFileExtension.Length;
 
                 if (testNameLength <= 0)
                 {
-                    throw new InvalidOperationException("Output file path could not be constructed due to max path length restrictions. Please shorten test assembly, class or method names.");
+                    throw new InvalidOperationException(
+                        "Output file path could not be constructed due to max path length restrictions. Please shorten test assembly, class or method names."
+                    );
                 }
 
-                testName = string.Concat(testName.AsSpan(0, testNameLength / 2).ToString(), testName.AsSpan(testName.Length - testNameLength / 2, testNameLength / 2).ToString());
+                testName = string.Concat(
+                    testName.AsSpan(0, testNameLength / 2).ToString(),
+                    testName
+                        .AsSpan(testName.Length - testNameLength / 2, testNameLength / 2)
+                        .ToString()
+                );
 
-                _globalLogger.LogWarning($"To prevent long paths test name was shortened to {testName}.");
+                _globalLogger.LogWarning(
+                    $"To prevent long paths test name was shortened to {testName}."
+                );
             }
 
             var testOutputFile = Path.Combine(logOutputDirectory, $"{testName}{LogFileExtension}");
 
             if (File.Exists(testOutputFile))
             {
-                _globalLogger.LogWarning($"Output log file {testOutputFile} already exists. Please try to keep log file names unique.");
+                _globalLogger.LogWarning(
+                    $"Output log file {testOutputFile} already exists. Please try to keep log file names unique."
+                );
 
                 for (var i = 0; i < 1000; i++)
                 {
-                    testOutputFile = Path.Combine(logOutputDirectory, $"{testName}.{i}{LogFileExtension}");
+                    testOutputFile = Path.Combine(
+                        logOutputDirectory,
+                        $"{testName}.{i}{LogFileExtension}"
+                    );
 
                     if (!File.Exists(testOutputFile))
                     {
-                        _globalLogger.LogWarning($"To resolve log file collision, the enumerated file {testOutputFile} will be used.");
+                        _globalLogger.LogWarning(
+                            $"To resolve log file collision, the enumerated file {testOutputFile} will be used."
+                        );
                         testName = $"{testName}.{i}";
                         break;
                     }
@@ -159,28 +308,30 @@ public class AssemblyTestLog : IDisposable
         }
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddLogging(builder =>
-        {
-            builder.SetMinimumLevel(minLogLevel);
-
-            if (output != null)
+        serviceCollection.AddLogging(
+            builder =>
             {
-                builder.AddXunit(output, minLogLevel, logStart);
-            }
+                builder.SetMinimumLevel(minLogLevel);
 
-            if (serilogLoggerProvider != null)
-            {
+                if (output != null)
+                {
+                    builder.AddXunit(output, minLogLevel, logStart);
+                }
+
+                if (serilogLoggerProvider != null)
+                {
                     // Use a factory so that the container will dispose it
                     builder.Services.AddSingleton<ILoggerProvider>(_ => serilogLoggerProvider);
+                }
             }
-        });
+        );
 
         return serviceCollection.BuildServiceProvider();
     }
 
     // For back compat
-    public static AssemblyTestLog Create(string assemblyName, string baseDirectory)
-        => Create(Assembly.Load(new AssemblyName(assemblyName)), baseDirectory);
+    public static AssemblyTestLog Create(string assemblyName, string baseDirectory) =>
+        Create(Assembly.Load(new AssemblyName(assemblyName)), baseDirectory);
 
     public static AssemblyTestLog Create(Assembly assembly, string baseDirectory)
     {
@@ -195,26 +346,30 @@ public class AssemblyTestLog : IDisposable
 
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddLogging(builder =>
-        {
+        serviceCollection.AddLogging(
+            builder =>
+            {
                 // Global logging, when it's written, is expected to be outputted. So set the log level to minimum.
                 builder.SetMinimumLevel(LogLevel.Trace);
 
-            if (serilogLoggerProvider != null)
-            {
+                if (serilogLoggerProvider != null)
+                {
                     // Use a factory so that the container will dispose it
                     builder.Services.AddSingleton<ILoggerProvider>(_ => serilogLoggerProvider);
+                }
             }
-        });
+        );
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
 
         var logger = loggerFactory.CreateLogger("GlobalTestLog");
-        logger.LogInformation("Global Test Logging initialized at {logStart}. "
-            + "Configure the output directory via 'LoggingTestingFileLoggingDirectory' MSBuild property "
-            + "or set 'LoggingTestingDisableFileLogging' to 'true' to disable file logging.",
-            logStart.ToString("s", CultureInfo.InvariantCulture));
+        logger.LogInformation(
+            "Global Test Logging initialized at {logStart}. "
+                + "Configure the output directory via 'LoggingTestingFileLoggingDirectory' MSBuild property "
+                + "or set 'LoggingTestingDisableFileLogging' to 'true' to disable file logging.",
+            logStart.ToString("s", CultureInfo.InvariantCulture)
+        );
         return new AssemblyTestLog(loggerFactory, logger, baseDirectory, assembly, serviceProvider);
     }
 
@@ -230,8 +385,13 @@ public class AssemblyTestLog : IDisposable
                 _logs[assembly] = log;
 
                 // Try to clear previous logs, continue if it fails.
-                var assemblyBaseDirectory = TestFileOutputContext.GetAssemblyBaseDirectory(assembly);
-                if (!string.IsNullOrEmpty(assemblyBaseDirectory) && !TestFileOutputContext.GetPreserveExistingLogsInOutput(assembly))
+                var assemblyBaseDirectory = TestFileOutputContext.GetAssemblyBaseDirectory(
+                    assembly
+                );
+                if (
+                    !string.IsNullOrEmpty(assemblyBaseDirectory)
+                    && !TestFileOutputContext.GetPreserveExistingLogsInOutput(assembly)
+                )
                 {
                     try
                     {
@@ -244,13 +404,18 @@ public class AssemblyTestLog : IDisposable
         }
     }
 
-    private static TestFrameworkFileLoggerAttribute GetFileLoggerAttribute(Assembly assembly)
-        => assembly.GetCustomAttribute<TestFrameworkFileLoggerAttribute>()
-            ?? throw new InvalidOperationException($"No {nameof(TestFrameworkFileLoggerAttribute)} found on the assembly {assembly.GetName().Name}. "
+    private static TestFrameworkFileLoggerAttribute GetFileLoggerAttribute(Assembly assembly) =>
+        assembly.GetCustomAttribute<TestFrameworkFileLoggerAttribute>()
+        ?? throw new InvalidOperationException(
+            $"No {nameof(TestFrameworkFileLoggerAttribute)} found on the assembly {assembly.GetName().Name}. "
                 + "The attribute is added via msbuild properties of the Microsoft.Extensions.Logging.Testing. "
-                + "Please ensure the msbuild property is imported or a direct reference to Microsoft.Extensions.Logging.Testing is added.");
+                + "Please ensure the msbuild property is imported or a direct reference to Microsoft.Extensions.Logging.Testing is added."
+        );
 
-    private static SerilogLoggerProvider ConfigureFileLogging(string fileName, DateTimeOffset? logStart)
+    private static SerilogLoggerProvider ConfigureFileLogging(
+        string fileName,
+        DateTimeOffset? logStart
+    )
     {
         var dir = Path.GetDirectoryName(fileName);
         if (!Directory.Exists(dir))
@@ -263,11 +428,16 @@ public class AssemblyTestLog : IDisposable
             File.Delete(fileName);
         }
 
-        var serilogger = new LoggerConfiguration()
-            .Enrich.FromLogContext()
+        var serilogger = new LoggerConfiguration().Enrich
+            .FromLogContext()
             .Enrich.With(new AssemblyLogTimestampOffsetEnricher(logStart))
             .MinimumLevel.Verbose()
-            .WriteTo.File(fileName, outputTemplate: "[{TimestampOffset}] [{SourceContext}] [{Level}] {Message:l}{NewLine}{Exception}", flushToDiskInterval: TimeSpan.FromSeconds(1), shared: true)
+            .WriteTo.File(
+                fileName,
+                outputTemplate: "[{TimestampOffset}] [{SourceContext}] [{Level}] {Message:l}{NewLine}{Exception}",
+                flushToDiskInterval: TimeSpan.FromSeconds(1),
+                shared: true
+            )
             .CreateLogger();
         return new SerilogLoggerProvider(serilogger, dispose: true);
     }
@@ -287,13 +457,15 @@ public class AssemblyTestLog : IDisposable
             _logStart = logStart;
         }
 
-        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
-            => logEvent.AddPropertyIfAbsent(
+        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory) =>
+            logEvent.AddPropertyIfAbsent(
                 propertyFactory.CreateProperty(
                     "TimestampOffset",
                     _logStart.HasValue
-                        ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
-                        : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture)));
+                      ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
+                      : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture)
+                )
+            );
     }
 
     private class Disposable : IDisposable

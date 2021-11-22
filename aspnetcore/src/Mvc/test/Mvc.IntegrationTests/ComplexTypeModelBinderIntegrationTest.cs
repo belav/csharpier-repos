@@ -16,7 +16,8 @@ public class ComplexTypeModelBinderIntegrationTest : ComplexTypeIntegrationTestB
     protected override ModelBindingTestContext GetTestContext(
         Action<HttpRequest> updateRequest = null,
         Action<MvcOptions> updateOptions = null,
-        IModelMetadataProvider metadataProvider = null)
+        IModelMetadataProvider metadataProvider = null
+    )
     {
         return ModelBindingTestHelper.GetTestContext(
             updateRequest,
@@ -27,7 +28,8 @@ public class ComplexTypeModelBinderIntegrationTest : ComplexTypeIntegrationTestB
 
                 updateOptions?.Invoke(options);
             },
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
     }
 #pragma warning restore CS0618 // Type or member is obsolete
 }

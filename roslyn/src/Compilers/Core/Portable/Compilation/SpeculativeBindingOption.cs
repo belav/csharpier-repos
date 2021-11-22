@@ -17,7 +17,6 @@ namespace Microsoft.CodeAnalysis
         /// that would occur during normal binding of expressions.
         /// </summary>
         BindAsExpression = 0,
-
         /// <summary>
         /// Binds the given expression as a type or namespace only. If this option
         /// is selected, then the given expression must derive from TypeSyntax.

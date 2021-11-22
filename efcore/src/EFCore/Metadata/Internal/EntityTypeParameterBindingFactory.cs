@@ -20,10 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanBind(
-            Type parameterType,
-            string parameterName)
-            => parameterType == typeof(IEntityType);
+        public virtual bool CanBind(Type parameterType, string parameterName) =>
+            parameterType == typeof(IEntityType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ParameterBinding Bind(
             IMutableEntityType entityType,
             Type parameterType,
-            string parameterName)
-            => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
+            string parameterName
+        ) => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,8 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ParameterBinding Bind(
             IConventionEntityType entityType,
             Type parameterType,
-            string parameterName)
-            => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
+            string parameterName
+        ) => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +56,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual ParameterBinding Bind(
             IReadOnlyEntityType entityType,
             Type parameterType,
-            string parameterName)
-            => new EntityTypeParameterBinding(
-                entityType.GetServiceProperties().Cast<IPropertyBase>().Where(p => p.ClrType == parameterType).ToArray());
+            string parameterName
+        ) =>
+            new EntityTypeParameterBinding(
+                entityType
+                    .GetServiceProperties()
+                    .Cast<IPropertyBase>()
+                    .Where(p => p.ClrType == parameterType)
+                    .ToArray()
+            );
     }
 }

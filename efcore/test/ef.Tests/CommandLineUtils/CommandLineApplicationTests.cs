@@ -20,7 +20,8 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     Assert.Equal("2", two.Value);
 
                     return 0;
-                });
+                }
+            );
 
             app.Execute("1", "2");
         }

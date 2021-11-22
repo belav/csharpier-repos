@@ -23,7 +23,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
     /// only alternative at our disposal.
     /// </para>
     /// </summary>
-    internal abstract class UnboundIdentifiersDiagnosticAnalyzerBase<TLanguageKindEnum, TSimpleNameSyntax, TQualifiedNameSyntax, TIncompleteMemberSyntax> : DiagnosticAnalyzer, IBuiltInAnalyzer
+    internal abstract class UnboundIdentifiersDiagnosticAnalyzerBase<
+        TLanguageKindEnum,
+        TSimpleNameSyntax,
+        TQualifiedNameSyntax,
+        TIncompleteMemberSyntax
+    > : DiagnosticAnalyzer, IBuiltInAnalyzer
         where TLanguageKindEnum : struct
         where TSimpleNameSyntax : SyntaxNode
         where TQualifiedNameSyntax : SyntaxNode
@@ -34,32 +39,40 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
         protected abstract bool IsNameOf(SyntaxNode node);
 
         // High priority as we need to know about unbound identifiers so that we can run add-using to fix them.
-        public CodeActionRequestPriority RequestPriority
-            => CodeActionRequestPriority.High;
+        public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.High;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(DiagnosticDescriptor);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(DiagnosticDescriptor);
 
-        public bool OpenFileOnly(OptionSet options)
-            => false;
+        public bool OpenFileOnly(OptionSet options) => false;
 
         public override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            context.ConfigureGeneratedCodeAnalysis(
+                GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+            );
 
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKindsOfInterest.ToArray());
         }
 
-        protected static DiagnosticDescriptor GetDiagnosticDescriptor(string id, LocalizableString messageFormat)
+        protected static DiagnosticDescriptor GetDiagnosticDescriptor(
+            string id,
+            LocalizableString messageFormat
+        )
         {
             // it is not configurable diagnostic, title doesn't matter
             return new DiagnosticDescriptor(
-                id, string.Empty, messageFormat,
+                id,
+                string.Empty,
+                messageFormat,
                 DiagnosticCategory.Compiler,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                customTags: DiagnosticCustomTags.Microsoft.Append(WellKnownDiagnosticTags.NotConfigurable));
+                customTags: DiagnosticCustomTags.Microsoft.Append(
+                    WellKnownDiagnosticTags.NotConfigurable
+                )
+            );
         }
 
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
@@ -70,9 +83,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
             }
         }
 
-        private void ReportUnboundIdentifierNames(SyntaxNodeAnalysisContext context, SyntaxNode member)
+        private void ReportUnboundIdentifierNames(
+            SyntaxNodeAnalysisContext context,
+            SyntaxNode member
+        )
         {
-            var typeNames = member.DescendantNodes().Where(n => IsQualifiedOrSimpleName(n) && !n.Span.IsEmpty);
+            var typeNames = member
+                .DescendantNodes()
+                .Where(n => IsQualifiedOrSimpleName(n) && !n.Span.IsEmpty);
             foreach (var typeName in typeNames)
             {
                 var info = context.SemanticModel.GetSymbolInfo(typeName);
@@ -84,15 +102,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
                         continue;
                     }
 
-                    context.ReportDiagnostic(Diagnostic.Create(DiagnosticDescriptor, typeName.GetLocation(), typeName.ToString()));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            DiagnosticDescriptor,
+                            typeName.GetLocation(),
+                            typeName.ToString()
+                        )
+                    );
                 }
             }
         }
 
-        private static bool IsQualifiedOrSimpleName(SyntaxNode n)
-            => n is TQualifiedNameSyntax or TSimpleNameSyntax;
+        private static bool IsQualifiedOrSimpleName(SyntaxNode n) =>
+            n is TQualifiedNameSyntax or TSimpleNameSyntax;
 
-        public DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

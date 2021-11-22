@@ -17,7 +17,9 @@ namespace System.Runtime.CompilerServices
         /// is valid for the mode in which we're operating.  As such, it's cached on the generic builder per TResult
         /// rather than having one sentinel instance for all types.
         /// </remarks>
-        internal static readonly Task<TResult> s_syncSuccessSentinel = new Task<TResult>(default(TResult)!);
+        internal static readonly Task<TResult> s_syncSuccessSentinel = new Task<TResult>(
+            default(TResult)!
+        );
 
         /// <summary>The wrapped task.  If the operation completed synchronously and successfully, this will be a sentinel object compared by reference identity.</summary>
         private Task<TResult>? m_task; // Debugger depends on the exact name of this field.
@@ -32,7 +34,8 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="stateMachine">The state machine instance, passed by reference.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine =>
+        public void Start<TStateMachine>(ref TStateMachine stateMachine)
+            where TStateMachine : IAsyncStateMachine =>
             AsyncMethodBuilderCore.Start(ref stateMachine);
 
         /// <summary>Associates the builder with the specified state machine.</summary>
@@ -88,10 +91,17 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">the awaiter</param>
         /// <param name="stateMachine">The state machine.</param>
-        public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<TResult>.AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            AsyncTaskMethodBuilder<TResult>.AwaitOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
@@ -99,10 +109,17 @@ namespace System.Runtime.CompilerServices
         /// <param name="awaiter">the awaiter</param>
         /// <param name="stateMachine">The state machine.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<TResult>.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            AsyncTaskMethodBuilder<TResult>.AwaitUnsafeOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>
         /// Gets an object that may be used to uniquely identify this builder to the debugger.
@@ -112,6 +129,7 @@ namespace System.Runtime.CompilerServices
         /// It must only be used by the debugger and tracing purposes, and only in a single-threaded manner
         /// when no other threads are in the middle of accessing this or other members that lazily initialize the box.
         /// </remarks>
-        internal object ObjectIdForDebugger => m_task ??= AsyncTaskMethodBuilder<TResult>.CreateWeaklyTypedStateMachineBox();
+        internal object ObjectIdForDebugger =>
+            m_task ??= AsyncTaskMethodBuilder<TResult>.CreateWeaklyTypedStateMachineBox();
     }
 }

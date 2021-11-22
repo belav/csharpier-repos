@@ -22,8 +22,11 @@ namespace System.Net.Http.Headers
             {
                 if (_allow == null)
                 {
-                    _allow = new HttpHeaderValueCollection<string>(KnownHeaders.Allow.Descriptor,
-                        this, HeaderUtilities.TokenValidator);
+                    _allow = new HttpHeaderValueCollection<string>(
+                        KnownHeaders.Allow.Descriptor,
+                        this,
+                        HeaderUtilities.TokenValidator
+                    );
                 }
                 return _allow;
             }
@@ -31,7 +34,12 @@ namespace System.Net.Http.Headers
 
         public ContentDispositionHeaderValue? ContentDisposition
         {
-            get { return (ContentDispositionHeaderValue?)GetParsedValues(KnownHeaders.ContentDisposition.Descriptor); }
+            get
+            {
+                return (ContentDispositionHeaderValue?)GetParsedValues(
+                    KnownHeaders.ContentDisposition.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentDisposition.Descriptor, value); }
         }
 
@@ -43,8 +51,11 @@ namespace System.Net.Http.Headers
             {
                 if (_contentEncoding == null)
                 {
-                    _contentEncoding = new HttpHeaderValueCollection<string>(KnownHeaders.ContentEncoding.Descriptor,
-                        this, HeaderUtilities.TokenValidator);
+                    _contentEncoding = new HttpHeaderValueCollection<string>(
+                        KnownHeaders.ContentEncoding.Descriptor,
+                        this,
+                        HeaderUtilities.TokenValidator
+                    );
                 }
                 return _contentEncoding;
             }
@@ -56,8 +67,11 @@ namespace System.Net.Http.Headers
             {
                 if (_contentLanguage == null)
                 {
-                    _contentLanguage = new HttpHeaderValueCollection<string>(KnownHeaders.ContentLanguage.Descriptor,
-                        this, HeaderUtilities.TokenValidator);
+                    _contentLanguage = new HttpHeaderValueCollection<string>(
+                        KnownHeaders.ContentLanguage.Descriptor,
+                        this,
+                        HeaderUtilities.TokenValidator
+                    );
                 }
                 return _contentLanguage;
             }
@@ -80,7 +94,10 @@ namespace System.Net.Http.Headers
 
                     if (calculatedLength != null)
                     {
-                        SetParsedValue(KnownHeaders.ContentLength.Descriptor, (object)calculatedLength.Value);
+                        SetParsedValue(
+                            KnownHeaders.ContentLength.Descriptor,
+                            (object)calculatedLength.Value
+                        );
                     }
 
                     return calculatedLength;
@@ -116,25 +133,46 @@ namespace System.Net.Http.Headers
 
         public ContentRangeHeaderValue? ContentRange
         {
-            get { return (ContentRangeHeaderValue?)GetParsedValues(KnownHeaders.ContentRange.Descriptor); }
+            get
+            {
+                return (ContentRangeHeaderValue?)GetParsedValues(
+                    KnownHeaders.ContentRange.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentRange.Descriptor, value); }
         }
 
         public MediaTypeHeaderValue? ContentType
         {
-            get { return (MediaTypeHeaderValue?)GetParsedValues(KnownHeaders.ContentType.Descriptor); }
+            get
+            {
+                return (MediaTypeHeaderValue?)GetParsedValues(KnownHeaders.ContentType.Descriptor);
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentType.Descriptor, value); }
         }
 
         public DateTimeOffset? Expires
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.Expires.Descriptor, this, DateTimeOffset.MinValue); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.Expires.Descriptor,
+                    this,
+                    DateTimeOffset.MinValue
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.Expires.Descriptor, value); }
         }
 
         public DateTimeOffset? LastModified
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.LastModified.Descriptor, this); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.LastModified.Descriptor,
+                    this
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.LastModified.Descriptor, value); }
         }
 

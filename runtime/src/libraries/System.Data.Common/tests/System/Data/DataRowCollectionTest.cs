@@ -181,7 +181,6 @@ namespace System.Data.Tests
 
             t.Columns[1].DefaultValue = "testme";
 
-
             // null test & missing columns
             DataRow r = t.Rows.Add(new object[] { null, null });
             Assert.Equal(10, (int)r[0]);

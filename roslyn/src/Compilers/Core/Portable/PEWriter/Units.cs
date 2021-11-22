@@ -32,8 +32,13 @@ namespace Microsoft.Cci
         public readonly int EndLine;
         public readonly int EndColumn;
 
-        public DefinitionWithLocation(IDefinition definition,
-            int startLine, int startColumn, int endLine, int endColumn)
+        public DefinitionWithLocation(
+            IDefinition definition,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             Debug.Assert(startLine >= 0);
             Debug.Assert(startColumn >= 0);
@@ -47,8 +52,8 @@ namespace Microsoft.Cci
             EndColumn = endColumn;
         }
 
-        private string GetDebuggerDisplay()
-            => $"{Definition} => ({StartLine},{StartColumn}) - ({EndLine}, {EndColumn})";
+        private string GetDebuggerDisplay() =>
+            $"{Definition} => ({StartLine},{StartColumn}) - ({EndLine}, {EndColumn})";
 
         public override bool Equals(object? obj)
         {
@@ -57,7 +62,11 @@ namespace Microsoft.Cci
 
         public bool Equals(DefinitionWithLocation other)
         {
-            return Definition == other.Definition && StartLine == other.StartLine && StartColumn == other.StartColumn && EndLine == other.EndLine && EndColumn == other.EndColumn;
+            return Definition == other.Definition
+                && StartLine == other.StartLine
+                && StartColumn == other.StartColumn
+                && EndLine == other.EndLine
+                && EndColumn == other.EndColumn;
         }
 
         public override int GetHashCode()

@@ -27,12 +27,12 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(attr1 != null);
             Debug.Assert(attr2 != null);
 
-            return attr1.AttributeClass == attr2.AttributeClass &&
-                attr1.AttributeConstructor == attr2.AttributeConstructor &&
-                attr1.HasErrors == attr2.HasErrors &&
-                attr1.IsConditionallyOmitted == attr2.IsConditionallyOmitted &&
-                attr1.CommonConstructorArguments.SequenceEqual(attr2.CommonConstructorArguments) &&
-                attr1.NamedArguments.SequenceEqual(attr2.NamedArguments);
+            return attr1.AttributeClass == attr2.AttributeClass
+                && attr1.AttributeConstructor == attr2.AttributeConstructor
+                && attr1.HasErrors == attr2.HasErrors
+                && attr1.IsConditionallyOmitted == attr2.IsConditionallyOmitted
+                && attr1.CommonConstructorArguments.SequenceEqual(attr2.CommonConstructorArguments)
+                && attr1.NamedArguments.SequenceEqual(attr2.NamedArguments);
         }
 
         public int GetHashCode(AttributeData attr)
@@ -40,16 +40,24 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(attr != null);
 
             int hash = attr.AttributeClass?.GetHashCode() ?? 0;
-            hash = attr.AttributeConstructor != null ? Hash.Combine(attr.AttributeConstructor.GetHashCode(), hash) : hash;
+            hash =
+                attr.AttributeConstructor != null
+                    ? Hash.Combine(attr.AttributeConstructor.GetHashCode(), hash)
+                    : hash;
             hash = Hash.Combine(attr.HasErrors, hash);
             hash = Hash.Combine(attr.IsConditionallyOmitted, hash);
-            hash = Hash.Combine(GetHashCodeForConstructorArguments(attr.CommonConstructorArguments), hash);
+            hash = Hash.Combine(
+                GetHashCodeForConstructorArguments(attr.CommonConstructorArguments),
+                hash
+            );
             hash = Hash.Combine(GetHashCodeForNamedArguments(attr.NamedArguments), hash);
 
             return hash;
         }
 
-        private static int GetHashCodeForConstructorArguments(ImmutableArray<TypedConstant> constructorArguments)
+        private static int GetHashCodeForConstructorArguments(
+            ImmutableArray<TypedConstant> constructorArguments
+        )
         {
             int hash = 0;
 
@@ -61,7 +69,9 @@ namespace Microsoft.CodeAnalysis
             return hash;
         }
 
-        private static int GetHashCodeForNamedArguments(ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments)
+        private static int GetHashCodeForNamedArguments(
+            ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
+        )
         {
             int hash = 0;
 

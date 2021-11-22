@@ -14,19 +14,15 @@ namespace System.CommandLine.Parsing
         private static readonly string[] _optionPrefixStrings = { "--", "-", "/" };
         private static readonly char[] _argumentDelimiters = { ':', '=' };
 
-        internal static bool ContainsCaseInsensitive(
-            this string source,
-            string value) =>
+        internal static bool ContainsCaseInsensitive(this string source, string value) =>
             source.IndexOfCaseInsensitive(value) >= 0;
 
-        internal static int IndexOfCaseInsensitive(
-            this string source,
-            string value) =>
-            CultureInfo.InvariantCulture
-                       .CompareInfo
-                       .IndexOf(source,
-                                value,
-                                CompareOptions.OrdinalIgnoreCase);
+        internal static int IndexOfCaseInsensitive(this string source, string value) =>
+            CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                source,
+                value,
+                CompareOptions.OrdinalIgnoreCase
+            );
 
         internal static string RemovePrefix(this string rawAlias)
         {
@@ -58,7 +54,8 @@ namespace System.CommandLine.Parsing
 
         internal static TokenizeResult Tokenize(
             this IReadOnlyList<string> args,
-            CommandLineConfiguration configuration)
+            CommandLineConfiguration configuration
+        )
         {
             var tokenList = new List<Token>();
             var errorList = new List<TokenizeError>();
@@ -87,8 +84,7 @@ namespace System.CommandLine.Parsing
                     continue;
                 }
 
-                if (!foundDoubleDash && 
-                    arg == "--")
+                if (!foundDoubleDash && arg == "--")
                 {
                     tokenList.Add(DoubleDash());
                     foundDoubleDash = true;
@@ -97,11 +93,13 @@ namespace System.CommandLine.Parsing
 
                 if (!foundEndOfDirectives)
                 {
-                    if (arg.Length > 2 &&
-                        arg[0] == '[' &&
-                        arg[1] != ']' &&
-                        arg[1] != ':' &&
-                        arg.EndsWith("]", StringComparison.Ordinal))
+                    if (
+                        arg.Length > 2
+                        && arg[0] == '['
+                        && arg[1] != ']'
+                        && arg[1] != ':'
+                        && arg.EndsWith("]", StringComparison.Ordinal)
+                    )
                     {
                         tokenList.Add(Directive(arg));
                         continue;
@@ -113,15 +111,16 @@ namespace System.CommandLine.Parsing
                     }
                 }
 
-                if (configuration.ResponseFileHandling != ResponseFileHandling.Disabled &&
-                    arg.GetResponseFileReference() is { } filePath)
+                if (
+                    configuration.ResponseFileHandling != ResponseFileHandling.Disabled
+                    && arg.GetResponseFileReference() is { } filePath
+                )
                 {
                     ReadResponseFile(filePath, i);
                     continue;
                 }
 
-                if (configuration.EnablePosixBundling &&
-                    CanBeUnbundled(arg, out var replacements))
+                if (configuration.EnablePosixBundling && CanBeUnbundled(arg, out var replacements))
                 {
                     for (var ri = 0; ri < replacements!.Count - 1; ri++)
                     {
@@ -161,8 +160,10 @@ namespace System.CommandLine.Parsing
                                     symbolSet = configuration.Symbols;
                                 }
 
-                                if (symbolSet.GetByAlias(arg) is Command cmd && 
-                                    cmd != currentCommand)
+                                if (
+                                    symbolSet.GetByAlias(arg) is Command cmd
+                                    && cmd != currentCommand
+                                )
                                 {
                                     currentCommand = cmd;
                                     knownTokens = currentCommand.ValidTokens();
@@ -172,15 +173,16 @@ namespace System.CommandLine.Parsing
                                 {
                                     tokenList.Add(Argument(arg));
                                 }
-
                                 break;
                         }
                     }
                 }
                 else if (arg.TrySplitIntoSubtokens(out var first, out var rest))
                 {
-                    if (knownTokens.TryGetValue(first, out var subtoken) &&
-                        subtoken.token is { Type: TokenType.Option })
+                    if (
+                        knownTokens.TryGetValue(first, out var subtoken)
+                        && subtoken.token is { Type: TokenType.Option }
+                    )
                     {
                         tokenList.Add(Option(first));
 
@@ -272,8 +274,10 @@ namespace System.CommandLine.Parsing
 
                     foreach (var token in knownTokens.Values)
                     {
-                        if (token.token is { Type : TokenType.Option } &&
-                            token.token.UnprefixedValue[0] == c)
+                        if (
+                            token.token is { Type: TokenType.Option }
+                            && token.token.UnprefixedValue[0] == c
+                        )
                         {
                             return token.token;
                         }
@@ -335,15 +339,16 @@ namespace System.CommandLine.Parsing
                         // `CanBeUnbundled` check to take the decision.
                         // A better option is probably introducing a new token-type, and resolve
                         // this after we have the correct model available.
-                        if (token is { Type: TokenType.Option } &&
-                            knownTokens.TryGetValue(token.Value, out var t))
+                        if (
+                            token is { Type: TokenType.Option }
+                            && knownTokens.TryGetValue(token.Value, out var t)
+                        )
                         {
                             lastTokenHasArgument = true;
 
                             // If i == arg.Length - 1, we're already at the end of the string
                             // so no need for the custom handling of argument.
-                            if (t.isGreedy &&
-                                i < alias.Length - 1)
+                            if (t.isGreedy && i < alias.Length - 1)
                             {
                                 // The current option requires an argument, and we're still in
                                 // the middle of unbundling a string. Example: `-lsomelib.so`
@@ -387,9 +392,12 @@ namespace System.CommandLine.Parsing
                 {
                     var next = i + 1;
 
-                    foreach (var newArg in ExpandResponseFile(
-                        filePath,
-                        configuration.ResponseFileHandling))
+                    foreach (
+                        var newArg in ExpandResponseFile(
+                            filePath,
+                            configuration.ResponseFileHandling
+                        )
+                    )
                     {
                         argList.Insert(next, newArg);
                         next += 1;
@@ -397,26 +405,28 @@ namespace System.CommandLine.Parsing
                 }
                 catch (FileNotFoundException)
                 {
-                    var message = configuration.LocalizationResources
-                                               .ResponseFileNotFound(filePath);
+                    var message = configuration.LocalizationResources.ResponseFileNotFound(
+                        filePath
+                    );
 
-                    errorList.Add(
-                        new TokenizeError(message));
+                    errorList.Add(new TokenizeError(message));
                 }
                 catch (IOException e)
                 {
-                    var message = configuration.LocalizationResources
-                                               .ErrorReadingResponseFile(filePath, e);
+                    var message = configuration.LocalizationResources.ErrorReadingResponseFile(
+                        filePath,
+                        e
+                    );
 
-                    errorList.Add(
-                        new TokenizeError(message));
+                    errorList.Add(new TokenizeError(message));
                 }
             }
         }
 
         private static List<string> NormalizeRootCommand(
             CommandLineConfiguration commandLineConfiguration,
-            IReadOnlyList<string>? args)
+            IReadOnlyList<string>? args
+        )
         {
             if (args is null)
             {
@@ -438,8 +448,10 @@ namespace System.CommandLine.Parsing
                     // possible exception for illegal characters in path on .NET Framework
                 }
 
-                if (potentialRootCommand != null &&
-                    commandLineConfiguration.RootCommand.HasAlias(potentialRootCommand))
+                if (
+                    potentialRootCommand != null
+                    && commandLineConfiguration.RootCommand.HasAlias(potentialRootCommand)
+                )
                 {
                     list.AddRange(args);
                     return list;
@@ -471,12 +483,22 @@ namespace System.CommandLine.Parsing
                     return false;
                 }
 
-                if (potentialRootCommand.Equals($"{commandName}.dll", StringComparison.OrdinalIgnoreCase))
+                if (
+                    potentialRootCommand.Equals(
+                        $"{commandName}.dll",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
 
-                if (potentialRootCommand.Equals($"{commandName}.exe", StringComparison.OrdinalIgnoreCase))
+                if (
+                    potentialRootCommand.Equals(
+                        $"{commandName}.exe",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -486,14 +508,13 @@ namespace System.CommandLine.Parsing
         }
 
         private static string? GetResponseFileReference(this string arg) =>
-            arg.Length > 1 && arg[0] == '@'
-                ? arg.Substring(1)
-                : null;
+            arg.Length > 1 && arg[0] == '@' ? arg.Substring(1) : null;
 
         internal static bool TrySplitIntoSubtokens(
             this string arg,
             out string first,
-            out string? rest)
+            out string? rest
+        )
         {
             var i = arg.IndexOfAny(_argumentDelimiters);
 
@@ -516,7 +537,8 @@ namespace System.CommandLine.Parsing
 
         private static IEnumerable<string> ExpandResponseFile(
             string filePath,
-            ResponseFileHandling responseFileHandling)
+            ResponseFileHandling responseFileHandling
+        )
         {
             var lines = File.ReadAllLines(filePath);
 
@@ -528,9 +550,7 @@ namespace System.CommandLine.Parsing
                 {
                     if (p.GetResponseFileReference() is { } path)
                     {
-                        foreach (var q in ExpandResponseFile(
-                            path,
-                            responseFileHandling))
+                        foreach (var q in ExpandResponseFile(path, responseFileHandling))
                         {
                             yield return q;
                         }
@@ -556,7 +576,6 @@ namespace System.CommandLine.Parsing
                     case ResponseFileHandling.ParseArgsAsLineSeparated:
 
                         yield return arg;
-
                         break;
                     case ResponseFileHandling.ParseArgsAsSpaceSeparated:
 
@@ -564,26 +583,29 @@ namespace System.CommandLine.Parsing
                         {
                             yield return word;
                         }
-
                         break;
                 }
             }
         }
 
-        private static Dictionary<string, (Token token, bool isGreedy)> ValidTokens(this ICommand command)
+        private static Dictionary<string, (Token token, bool isGreedy)> ValidTokens(
+            this ICommand command
+        )
         {
             var tokens = new Dictionary<string, (Token, bool isGreedy)>();
 
-            for (var commandAliasIndex = 0; commandAliasIndex < command.Aliases.Count; commandAliasIndex++)
+            for (
+                var commandAliasIndex = 0;
+                commandAliasIndex < command.Aliases.Count;
+                commandAliasIndex++
+            )
             {
                 var commandAlias = command.Aliases.ElementAt(commandAliasIndex);
 
                 tokens.Add(
                     commandAlias,
-                    (new Token(
-                            commandAlias,
-                            TokenType.Command,
-                            -1), isGreedy: false));
+                    (new Token(commandAlias, TokenType.Command, -1), isGreedy: false)
+                );
 
                 for (var childIndex = 0; childIndex < command.Children.Count; childIndex++)
                 {
@@ -596,15 +618,21 @@ namespace System.CommandLine.Parsing
                                 case Command cmd:
                                     tokens.TryAdd(
                                         childAlias,
-                                        (new Token(childAlias, TokenType.Command, -1),
-                                            isGreedy: false));
+                                        (
+                                            new Token(childAlias, TokenType.Command, -1),
+                                            isGreedy: false
+                                        )
+                                    );
                                     break;
 
                                 case Option option:
                                     tokens.TryAdd(
                                         childAlias,
-                                        (new Token(childAlias, TokenType.Option, -1),
-                                            isGreedy: option.IsGreedy));
+                                        (
+                                            new Token(childAlias, TokenType.Option, -1),
+                                            isGreedy: option.IsGreedy
+                                        )
+                                    );
                                     break;
                             }
                         }

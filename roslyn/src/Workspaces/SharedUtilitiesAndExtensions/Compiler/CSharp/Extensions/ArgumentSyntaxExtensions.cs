@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return default;
         }
 
-        public static RefKind GetRefKind(this ArgumentSyntax? argument)
-            => argument?.RefKindKeyword.Kind() switch
+        public static RefKind GetRefKind(this ArgumentSyntax? argument) =>
+            argument?.RefKindKeyword.Kind() switch
             {
                 SyntaxKind.RefKeyword => RefKind.Ref,
                 SyntaxKind.OutKeyword => RefKind.Out,
@@ -39,10 +39,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ArgumentSyntax argument,
             SemanticModel semanticModel,
             bool allowParams = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            if (argument.Parent is not BaseArgumentListSyntax argumentList ||
-                argumentList.Parent is null)
+            if (
+                argument.Parent is not BaseArgumentListSyntax argumentList
+                || argumentList.Parent is null
+            )
             {
                 return null;
             }

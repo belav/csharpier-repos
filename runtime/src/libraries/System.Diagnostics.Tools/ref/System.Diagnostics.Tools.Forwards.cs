@@ -4,6 +4,12 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.CodeDom.Compiler.GeneratedCodeAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Diagnostics.CodeAnalysis.SuppressMessageAttribute))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.CodeDom.Compiler.GeneratedCodeAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Diagnostics.CodeAnalysis.SuppressMessageAttribute)
+)]

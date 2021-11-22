@@ -15,12 +15,10 @@ public enum CertificateTypes
     /// Chained certificates.
     /// </summary>
     Chained = 1,
-
     /// <summary>
     /// SelfSigned certificates.
     /// </summary>
     SelfSigned = 2,
-
     /// <summary>
     /// All certificates.
     /// </summary>

@@ -17,7 +17,12 @@ internal class HttpConnectionMiddleware<TContext> where TContext : notnull
     private readonly HttpProtocols _endpointDefaultProtocols;
     private readonly bool _addAltSvcHeader;
 
-    public HttpConnectionMiddleware(ServiceContext serviceContext, IHttpApplication<TContext> application, HttpProtocols protocols, bool addAltSvcHeader)
+    public HttpConnectionMiddleware(
+        ServiceContext serviceContext,
+        IHttpApplication<TContext> application,
+        HttpProtocols protocols,
+        bool addAltSvcHeader
+    )
     {
         _serviceContext = serviceContext;
         _application = application;
@@ -28,9 +33,14 @@ internal class HttpConnectionMiddleware<TContext> where TContext : notnull
     public Task OnConnectionAsync(ConnectionContext connectionContext)
     {
         var memoryPoolFeature = connectionContext.Features.Get<IMemoryPoolFeature>();
-        var protocols = connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols ?? _endpointDefaultProtocols;
+        var protocols =
+            connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols
+            ?? _endpointDefaultProtocols;
         var localEndPoint = connectionContext.LocalEndPoint as IPEndPoint;
-        var altSvcHeader = _addAltSvcHeader && localEndPoint != null ? HttpUtilities.GetEndpointAltSvc(localEndPoint, protocols) : null;
+        var altSvcHeader =
+            _addAltSvcHeader && localEndPoint != null
+                ? HttpUtilities.GetEndpointAltSvc(localEndPoint, protocols)
+                : null;
 
         var httpConnectionContext = new HttpConnectionContext(
             connectionContext.ConnectionId,
@@ -41,7 +51,8 @@ internal class HttpConnectionMiddleware<TContext> where TContext : notnull
             connectionContext.Features,
             memoryPoolFeature?.MemoryPool ?? System.Buffers.MemoryPool<byte>.Shared,
             localEndPoint,
-            connectionContext.RemoteEndPoint as IPEndPoint);
+            connectionContext.RemoteEndPoint as IPEndPoint
+        );
         httpConnectionContext.Transport = connectionContext.Transport;
 
         var connection = new HttpConnection(httpConnectionContext);

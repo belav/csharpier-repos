@@ -13,12 +13,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Cascade up the inheritance hierarchy.
         /// </summary>
         Up = 1,
-
         /// <summary>
         /// Cascade down the inheritance hierarchy.
         /// </summary>
         Down = 2,
-
         /// <summary>
         /// Cascade in both directions.
         /// </summary>
@@ -27,7 +25,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
     internal static class FindReferencesCascadeDirectionExtensions
     {
-        public static bool HasFlag(this FindReferencesCascadeDirection value, FindReferencesCascadeDirection flag)
-            => (value & flag) == flag;
+        public static bool HasFlag(
+            this FindReferencesCascadeDirection value,
+            FindReferencesCascadeDirection flag
+        ) => (value & flag) == flag;
     }
 }

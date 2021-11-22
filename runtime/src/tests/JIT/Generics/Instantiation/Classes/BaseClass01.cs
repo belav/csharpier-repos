@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public class GenBase<T>
 {
     public T Fld1;
@@ -115,7 +114,6 @@ public class GenConstructedValue : GenBase<ValX1<string>>
     }
 }
 
-
 public class GenInt1DArray : GenBase<int[]>
 {
     public GenInt1DArray() : base(new int[1]) { }
@@ -146,7 +144,6 @@ public class GenIntJaggedArray : GenBase<int[][]>
     }
 }
 
-
 public class Test_BaseClass01
 {
     public static int counter = 0;
@@ -159,7 +156,6 @@ public class Test_BaseClass01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -186,5 +182,4 @@ public class Test_BaseClass01
             return 1;
         }
     }
-
 }

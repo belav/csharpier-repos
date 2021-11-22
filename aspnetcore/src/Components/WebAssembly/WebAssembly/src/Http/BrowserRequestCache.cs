@@ -13,19 +13,16 @@ public enum BrowserRequestCache
     /// The browser looks for a matching request in its HTTP cache.
     /// </summary>
     Default,
-
     /// <summary>
     /// The browser fetches the resource from the remote server without first looking in the cache,
     /// and will not update the cache with the downloaded resource.
     /// </summary>
     NoStore,
-
     /// <summary>
     /// The browser fetches the resource from the remote server without first looking in the cache,
     /// but then will update the cache with the downloaded resource.
     /// </summary>
     Reload,
-
     /// <summary>
     /// The browser looks for a matching request in its HTTP cache.
     /// <para>
@@ -38,7 +35,6 @@ public enum BrowserRequestCache
     /// </para>
     /// </summary>
     NoCache,
-
     /// <summary>
     /// The browser looks for a matching request in its HTTP cache.
     /// <para>
@@ -49,7 +45,6 @@ public enum BrowserRequestCache
     /// </para>
     /// </summary>
     ForceCache,
-
     /// <summary>
     /// The browser looks for a matching request in its HTTP cache.
     /// Mode can only be used if the request's mode is "same-origin"

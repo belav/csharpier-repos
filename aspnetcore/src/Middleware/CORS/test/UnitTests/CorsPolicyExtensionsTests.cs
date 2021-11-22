@@ -30,7 +30,9 @@ public sealed class CorsPolicyExtensionsTest
     [InlineData("http://*")]
     [InlineData("http://.domain")]
     [InlineData("http://.domain/hello")]
-    public void IsOriginAnAllowedSubdomain_ReturnsFalseIfOriginIsMalformedUri(string malformedOrigin)
+    public void IsOriginAnAllowedSubdomain_ReturnsFalseIfOriginIsMalformedUri(
+        string malformedOrigin
+    )
     {
         // Arrange
         var policy = new CorsPolicy();
@@ -48,7 +50,10 @@ public sealed class CorsPolicyExtensionsTest
     [InlineData("http://sub.sub.domain", "http://*.domain")]
     [InlineData("http://sub.sub.domain", "http://*.sub.domain")]
     [InlineData("http://sub.domain:4567", "http://*.domain:4567")]
-    public void IsOriginAnAllowedSubdomain_ReturnsTrue_WhenASubdomain(string origin, string allowedOrigin)
+    public void IsOriginAnAllowedSubdomain_ReturnsTrue_WhenASubdomain(
+        string origin,
+        string allowedOrigin
+    )
     {
         // Arrange
         var policy = new CorsPolicy();
@@ -69,7 +74,10 @@ public sealed class CorsPolicyExtensionsTest
     [InlineData("http://sub.sub.domain", "http://sub.*.domain")]
     [InlineData("http://sub.domain.hacker", "http://*.domain")]
     [InlineData("https://sub.domain", "http://*.domain")]
-    public void IsOriginAnAllowedSubdomain_ReturnsFalse_WhenNotASubdomain(string origin, string allowedOrigin)
+    public void IsOriginAnAllowedSubdomain_ReturnsFalse_WhenNotASubdomain(
+        string origin,
+        string allowedOrigin
+    )
     {
         // Arrange
         var policy = new CorsPolicy();

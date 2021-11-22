@@ -36,9 +36,11 @@ namespace System.Text.Json
                 }
             }
 
-            public void Add(string propertyName) => throw ThrowHelper.NotSupportedException_NodeCollectionIsReadOnly();
+            public void Add(string propertyName) =>
+                throw ThrowHelper.NotSupportedException_NodeCollectionIsReadOnly();
 
-            public void Clear() => throw ThrowHelper.NotSupportedException_NodeCollectionIsReadOnly();
+            public void Clear() =>
+                throw ThrowHelper.NotSupportedException_NodeCollectionIsReadOnly();
 
             public bool Contains(string propertyName) => _parent.ContainsProperty(propertyName);
 
@@ -46,14 +48,18 @@ namespace System.Text.Json
             {
                 if (index < 0)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException_NodeArrayIndexNegative(nameof(index));
+                    ThrowHelper.ThrowArgumentOutOfRangeException_NodeArrayIndexNegative(
+                        nameof(index)
+                    );
                 }
 
                 foreach (KeyValuePair<string, T?> item in _parent)
                 {
                     if (index >= propertyNameArray.Length)
                     {
-                        ThrowHelper.ThrowArgumentException_NodeArrayTooSmall(nameof(propertyNameArray));
+                        ThrowHelper.ThrowArgumentException_NodeArrayTooSmall(
+                            nameof(propertyNameArray)
+                        );
                     }
 
                     propertyNameArray[index++] = item.Key;
@@ -68,7 +74,8 @@ namespace System.Text.Json
                 }
             }
 
-            bool ICollection<string>.Remove(string propertyName) => throw ThrowHelper.NotSupportedException_NodeCollectionIsReadOnly();
+            bool ICollection<string>.Remove(string propertyName) =>
+                throw ThrowHelper.NotSupportedException_NodeCollectionIsReadOnly();
         }
     }
 }

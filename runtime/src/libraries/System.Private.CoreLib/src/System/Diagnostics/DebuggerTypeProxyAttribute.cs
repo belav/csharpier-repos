@@ -5,13 +5,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics
 {
-    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly,
+        AllowMultiple = true
+    )]
     public sealed class DebuggerTypeProxyAttribute : Attribute
     {
         private Type? _target;
 
         public DebuggerTypeProxyAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+        )
         {
             if (type == null)
             {
@@ -22,7 +26,8 @@ namespace System.Diagnostics
         }
 
         public DebuggerTypeProxyAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string typeName)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string typeName
+        )
         {
             ProxyTypeName = typeName;
         }

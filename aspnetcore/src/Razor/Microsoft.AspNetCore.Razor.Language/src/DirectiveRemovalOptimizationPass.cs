@@ -10,7 +10,10 @@ internal class DirectiveRemovalOptimizationPass : IntermediateNodePassBase, IRaz
 {
     public override int Order => DefaultFeatureOrder + 50;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var visitor = new Visitor();
         visitor.VisitDocument(documentNode);
@@ -29,7 +32,8 @@ internal class DirectiveRemovalOptimizationPass : IntermediateNodePassBase, IRaz
 
     private class Visitor : IntermediateNodeWalker
     {
-        public IList<IntermediateNodeReference> DirectiveNodes { get; } = new List<IntermediateNodeReference>();
+        public IList<IntermediateNodeReference> DirectiveNodes { get; } =
+            new List<IntermediateNodeReference>();
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {

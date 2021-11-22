@@ -12,12 +12,10 @@ namespace System.Drawing.Text
         /// No hotkey prefix.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Display the hotkey prefix.
         /// </summary>
         Show = 1,
-
         /// <summary>
         /// Do not display the hotkey prefix.
         /// </summary>

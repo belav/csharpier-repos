@@ -59,7 +59,9 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         return boolResult;
     }
 
-    public override async ValueTask<ReadResult> ReadAsyncInternal(CancellationToken cancellationToken = default)
+    public override async ValueTask<ReadResult> ReadAsyncInternal(
+        CancellationToken cancellationToken = default
+    )
     {
         await TryStartAsync();
 
@@ -127,7 +129,12 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
                     if (!readableBuffer.IsEmpty)
                     {
                         bool done;
-                        done = Read(readableBuffer, _requestBodyPipe.Writer, out consumed, out examined);
+                        done = Read(
+                            readableBuffer,
+                            _requestBodyPipe.Writer,
+                            out consumed,
+                            out examined
+                        );
 
                         await _requestBodyPipe.Writer.FlushAsync();
 
@@ -201,7 +208,12 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         return Task.CompletedTask;
     }
 
-    private bool Read(ReadOnlySequence<byte> readableBuffer, PipeWriter writableBuffer, out SequencePosition consumed, out SequencePosition examined)
+    private bool Read(
+        ReadOnlySequence<byte> readableBuffer,
+        PipeWriter writableBuffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         consumed = default;
         examined = default;
@@ -290,7 +302,11 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         return _mode == Mode.Complete;
     }
 
-    private void ParseChunkedPrefix(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+    private void ParseChunkedPrefix(
+        in ReadOnlySequence<byte> buffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         consumed = buffer.Start;
         var reader = new SequenceReader<byte>(buffer);
@@ -347,7 +363,11 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         KestrelBadHttpRequestException.Throw(RequestRejectionReason.BadChunkSizeData);
     }
 
-    private void ParseExtension(ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+    private void ParseExtension(
+        ReadOnlySequence<byte> buffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         // Chunk-extensions not currently parsed
         // Just drain the data
@@ -363,7 +383,8 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
                 examined = buffer.End;
                 AddAndCheckObservedBytes(buffer.Length);
                 return;
-            };
+            }
+            ;
 
             var extensionCursor = extensionCursorPosition.Value;
             var charsToByteCRExclusive = buffer.Slice(0, extensionCursor).Length;
@@ -399,7 +420,12 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         } while (_mode == Mode.Extension);
     }
 
-    private void ReadChunkedData(in ReadOnlySequence<byte> buffer, PipeWriter writableBuffer, out SequencePosition consumed, out SequencePosition examined)
+    private void ReadChunkedData(
+        in ReadOnlySequence<byte> buffer,
+        PipeWriter writableBuffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         var actual = Math.Min(buffer.Length, _inputLength);
         consumed = buffer.GetPosition(actual);
@@ -416,7 +442,11 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         }
     }
 
-    private void ParseChunkedSuffix(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+    private void ParseChunkedSuffix(
+        in ReadOnlySequence<byte> buffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         consumed = buffer.Start;
 
@@ -444,7 +474,11 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         }
     }
 
-    private void ParseChunkedTrailer(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+    private void ParseChunkedTrailer(
+        in ReadOnlySequence<byte> buffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         consumed = buffer.Start;
 
@@ -515,15 +549,16 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
         Complete
     };
 
-    private static Pipe CreateRequestBodyPipe(Http1Connection context)
-        => new Pipe(new PipeOptions
-        (
-            pool: context.MemoryPool,
-            readerScheduler: context.ServiceContext.Scheduler,
-            writerScheduler: PipeScheduler.Inline,
-            pauseWriterThreshold: 1,
-            resumeWriterThreshold: 1,
-            useSynchronizationContext: false,
-            minimumSegmentSize: context.MemoryPool.GetMinimumSegmentSize()
-        ));
+    private static Pipe CreateRequestBodyPipe(Http1Connection context) =>
+        new Pipe(
+            new PipeOptions(
+                pool: context.MemoryPool,
+                readerScheduler: context.ServiceContext.Scheduler,
+                writerScheduler: PipeScheduler.Inline,
+                pauseWriterThreshold: 1,
+                resumeWriterThreshold: 1,
+                useSynchronizationContext: false,
+                minimumSegmentSize: context.MemoryPool.GetMinimumSegmentSize()
+            )
+        );
 }

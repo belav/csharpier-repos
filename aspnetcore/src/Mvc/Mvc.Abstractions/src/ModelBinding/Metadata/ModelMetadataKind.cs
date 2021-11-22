@@ -12,17 +12,14 @@ public enum ModelMetadataKind
     /// Used for <see cref="ModelMetadata"/> for a <see cref="System.Type"/>.
     /// </summary>
     Type,
-
     /// <summary>
     /// Used for <see cref="ModelMetadata"/> for a property.
     /// </summary>
     Property,
-
     /// <summary>
     /// Used for <see cref="ModelMetadata"/> for a parameter.
     /// </summary>
     Parameter,
-
     /// <summary>
     /// <see cref="ModelMetadata"/> for a constructor.
     /// </summary>

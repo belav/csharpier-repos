@@ -22,10 +22,7 @@ internal sealed unsafe class SecureLocalAllocHandle : LocalAllocHandle
 
     public IntPtr Length
     {
-        get
-        {
-            return _cb;
-        }
+        get { return _cb; }
     }
 
     /// <summary>
@@ -39,7 +36,7 @@ internal sealed unsafe class SecureLocalAllocHandle : LocalAllocHandle
     }
 
 #if NETSTANDARD2_0
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+    [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #endif
     private void AllocateImpl(IntPtr cb)
     {

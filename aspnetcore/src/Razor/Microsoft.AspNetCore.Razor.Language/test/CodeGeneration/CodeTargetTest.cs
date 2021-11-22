@@ -27,7 +27,10 @@ public class CodeTargetTest
     {
         // Arrange
         var wasCalled = false;
-        Action<CodeTargetBuilder> @delegate = (b) => { wasCalled = true; };
+        Action<CodeTargetBuilder> @delegate = (b) =>
+        {
+            wasCalled = true;
+        };
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
         var options = RazorCodeGenerationOptions.CreateDefault();
@@ -48,7 +51,6 @@ public class CodeTargetTest
 
         // Act
         CodeTarget.CreateDefault(codeDocument, options, configure: null);
-
         // Assert (does not throw)
     }
 
@@ -61,7 +63,6 @@ public class CodeTargetTest
 
         // Act
         CodeTarget.CreateDefault(codeDocument, options, configure: null);
-
         // Assert (does not throw)
     }
 }

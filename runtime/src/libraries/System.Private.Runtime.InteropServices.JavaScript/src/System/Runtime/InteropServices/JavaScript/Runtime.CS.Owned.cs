@@ -7,7 +7,8 @@ namespace System.Runtime.InteropServices.JavaScript
 {
     public static partial class Runtime
     {
-        private static readonly Dictionary<int, WeakReference<JSObject>> _csOwnedObjects = new Dictionary<int, WeakReference<JSObject>>();
+        private static readonly Dictionary<int, WeakReference<JSObject>> _csOwnedObjects =
+            new Dictionary<int, WeakReference<JSObject>>();
 
         public static JSObject? GetCSOwnedObjectByJSHandle(int jsHandle, int shouldAddInflight)
         {
@@ -24,7 +25,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
             }
             return null;
-
         }
 
         public static int TryGetCSOwnedObjectJSHandle(object rawObj, int shouldAddInflight)
@@ -48,15 +48,24 @@ namespace System.Runtime.InteropServices.JavaScript
             return jsObject.JSHandle;
         }
 
-        public static JSObject CreateCSOwnedProxy(IntPtr jsHandle, MappedType mappedType, int shouldAddInflight)
+        public static JSObject CreateCSOwnedProxy(
+            IntPtr jsHandle,
+            MappedType mappedType,
+            int shouldAddInflight
+        )
         {
             JSObject? jsObject = null;
 
             lock (_csOwnedObjects)
             {
-                if (!_csOwnedObjects.TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference) ||
-                    !reference.TryGetTarget(out jsObject) ||
-                    jsObject.IsDisposed)
+                if (
+                    !_csOwnedObjects.TryGetValue(
+                        (int)jsHandle,
+                        out WeakReference<JSObject>? reference
+                    )
+                    || !reference.TryGetTarget(out jsObject)
+                    || jsObject.IsDisposed
+                )
                 {
                     jsObject = mappedType switch
                     {
@@ -78,7 +87,10 @@ namespace System.Runtime.InteropServices.JavaScript
                         MappedType.Float64Array => new Float64Array(jsHandle),
                         _ => throw new ArgumentOutOfRangeException(nameof(mappedType))
                     };
-                    _csOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(jsObject, trackResurrection: true);
+                    _csOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(
+                        jsObject,
+                        trackResurrection: true
+                    );
                 }
             }
             if (shouldAddInflight != 0)
@@ -103,7 +115,11 @@ namespace System.Runtime.InteropServices.JavaScript
             return true;
         }
 
-        internal static IntPtr CreateCSOwnedObject(JSObject proxy, string typeName, params object[] parms)
+        internal static IntPtr CreateCSOwnedObject(
+            JSObject proxy,
+            string typeName,
+            params object[] parms
+        )
         {
             object res = Interop.Runtime.CreateCSOwnedObject(typeName, parms, out int exception);
             if (exception != 0)
@@ -113,7 +129,10 @@ namespace System.Runtime.InteropServices.JavaScript
 
             lock (_csOwnedObjects)
             {
-                _csOwnedObjects[jsHandle] = new WeakReference<JSObject>(proxy, trackResurrection: true);
+                _csOwnedObjects[jsHandle] = new WeakReference<JSObject>(
+                    proxy,
+                    trackResurrection: true
+                );
             }
 
             return (IntPtr)jsHandle;

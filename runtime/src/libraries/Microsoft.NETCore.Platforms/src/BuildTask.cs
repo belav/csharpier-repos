@@ -16,21 +16,11 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             get { return _log ?? (_log = new Log(new TaskLoggingHelper(this))); }
         }
 
-        public BuildTask()
-        {
-        }
+        public BuildTask() { }
 
-        public IBuildEngine BuildEngine
-        {
-            get;
-            set;
-        }
+        public IBuildEngine BuildEngine { get; set; }
 
-        public ITaskHost HostObject
-        {
-            get;
-            set;
-        }
+        public ITaskHost HostObject { get; set; }
 
         public abstract bool Execute();
     }
@@ -58,7 +48,11 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             _logger.LogMessage(message, messageArgs);
         }
 
-        public void LogMessage(LogImportance importance, string message, params object[] messageArgs)
+        public void LogMessage(
+            LogImportance importance,
+            string message,
+            params object[] messageArgs
+        )
         {
             _logger.LogMessage((MessageImportance)importance, message, messageArgs);
         }
@@ -68,7 +62,10 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             _logger.LogWarning(message, messageArgs);
         }
 
-        public bool HasLoggedErrors { get { return _logger.HasLoggedErrors; } }
+        public bool HasLoggedErrors
+        {
+            get { return _logger.HasLoggedErrors; }
+        }
     }
 
     public enum LogImportance
@@ -77,7 +74,6 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         Normal = MessageImportance.Normal,
         High = MessageImportance.High
     }
-
 
     public interface ILog
     {

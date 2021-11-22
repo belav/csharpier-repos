@@ -12,7 +12,6 @@ namespace System.IO.Pipes
     public sealed class PipeAuditRule { }
     public static class PipesAclExtensions { }
     public class PipeSecurity { }
-
 #if NET5_0_OR_GREATER
     public static class AnonymousPipeServerStreamAcl { }
     public static class NamedPipeServerStreamAcl { }

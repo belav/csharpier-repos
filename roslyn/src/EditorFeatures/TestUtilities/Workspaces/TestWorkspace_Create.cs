@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         private const string AnalyzerElementName = "Analyzer";
         private const string AssemblyNameAttributeName = "AssemblyName";
         private const string CommonReferencesAttributeName = "CommonReferences";
-        private const string CommonReferencesWithoutValueTupleAttributeName = "CommonReferencesWithoutValueTuple";
+        private const string CommonReferencesWithoutValueTupleAttributeName =
+            "CommonReferencesWithoutValueTuple";
         private const string CommonReferencesWinRTAttributeName = "CommonReferencesWinRT";
         private const string CommonReferencesNet45AttributeName = "CommonReferencesNet45";
         private const string CommonReferencesPortableAttributeName = "CommonReferencesPortable";
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string language,
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
-            string content)
+            string content
+        )
         {
             return Create(language, compilationOptions, parseOptions, new[] { content });
         }
@@ -94,9 +96,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string language,
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
-            string content)
+            string content
+        )
         {
-            return Create(workspaceKind, language, compilationOptions, parseOptions, new[] { content });
+            return Create(
+                workspaceKind,
+                language,
+                compilationOptions,
+                parseOptions,
+                new[] { content }
+            );
         }
 
         /// <param name="files">Can pass in multiple file contents: files will be named test1.cs, test2.cs, etc.</param>
@@ -104,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string language,
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
-            params string[] files)
+            params string[] files
+        )
         {
             return Create(language, compilationOptions, parseOptions, files, exportProvider: null);
         }
@@ -115,13 +125,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string language,
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
-            params string[] files)
+            params string[] files
+        )
         {
-            return Create(language, compilationOptions, parseOptions, files, exportProvider: null, workspaceKind: workspaceKind);
+            return Create(
+                language,
+                compilationOptions,
+                parseOptions,
+                files,
+                exportProvider: null,
+                workspaceKind: workspaceKind
+            );
         }
 
-        internal static string GetDefaultTestSourceDocumentName(int index, string extension)
-           => "test" + (index + 1) + extension;
+        internal static string GetDefaultTestSourceDocumentName(int index, string extension) =>
+            "test" + (index + 1) + extension;
 
         internal static TestWorkspace Create(
             string language,
@@ -135,10 +153,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string extension = null,
             bool commonReferences = true,
             bool openDocuments = false,
-            IDocumentServiceProvider documentServiceProvider = null)
+            IDocumentServiceProvider documentServiceProvider = null
+        )
         {
-            var workspaceElement = CreateWorkspaceElement(language, compilationOptions, parseOptions, files, metadataReferences, extension, commonReferences);
-            return Create(workspaceElement, openDocuments, exportProvider, composition, workspaceKind, documentServiceProvider);
+            var workspaceElement = CreateWorkspaceElement(
+                language,
+                compilationOptions,
+                parseOptions,
+                files,
+                metadataReferences,
+                extension,
+                commonReferences
+            );
+            return Create(
+                workspaceElement,
+                openDocuments,
+                exportProvider,
+                composition,
+                workspaceKind,
+                documentServiceProvider
+            );
         }
 
         internal static TestWorkspace Create(
@@ -146,9 +180,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions[] parseOptions,
             string[] files,
-            ExportProvider exportProvider)
+            ExportProvider exportProvider
+        )
         {
-            Debug.Assert(parseOptions == null || (files.Length == parseOptions.Length), "Please specify a parse option for each file.");
+            Debug.Assert(
+                parseOptions == null || (files.Length == parseOptions.Length),
+                "Please specify a parse option for each file."
+            );
 
             var documentElements = new List<XElement>();
             var index = 0;
@@ -158,26 +196,42 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 if (language == LanguageNames.CSharp)
                 {
-                    extension = parseOptions[i].Kind == SourceCodeKind.Regular
-                        ? CSharpExtension
-                        : CSharpScriptExtension;
+                    extension =
+                        parseOptions[i].Kind == SourceCodeKind.Regular
+                            ? CSharpExtension
+                            : CSharpScriptExtension;
                 }
                 else if (language == LanguageNames.VisualBasic)
                 {
-                    extension = parseOptions[i].Kind == SourceCodeKind.Regular
-                        ? VisualBasicExtension
-                        : VisualBasicScriptExtension;
+                    extension =
+                        parseOptions[i].Kind == SourceCodeKind.Regular
+                            ? VisualBasicExtension
+                            : VisualBasicScriptExtension;
                 }
                 else
                 {
                     extension = language;
                 }
 
-                documentElements.Add(CreateDocumentElement(files[i], GetDefaultTestSourceDocumentName(index++, extension), parseOptions == null ? null : parseOptions[i]));
+                documentElements.Add(
+                    CreateDocumentElement(
+                        files[i],
+                        GetDefaultTestSourceDocumentName(index++, extension),
+                        parseOptions == null ? null : parseOptions[i]
+                    )
+                );
             }
 
             var workspaceElement = CreateWorkspaceElement(
-                CreateProjectElement("Test", language, true, parseOptions.FirstOrDefault(), compilationOptions, documentElements));
+                CreateProjectElement(
+                    "Test",
+                    language,
+                    true,
+                    parseOptions.FirstOrDefault(),
+                    compilationOptions,
+                    documentElements
+                )
+            );
 
             return Create(workspaceElement, exportProvider: exportProvider);
         }
@@ -191,9 +245,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ExportProvider exportProvider = null,
             TestComposition composition = null,
             string[] metadataReferences = null,
-            bool openDocuments = false)
+            bool openDocuments = false
+        )
         {
-            return CreateCSharp(new[] { file }, parseOptions, compilationOptions, exportProvider, composition, metadataReferences, openDocuments);
+            return CreateCSharp(
+                new[] { file },
+                parseOptions,
+                compilationOptions,
+                exportProvider,
+                composition,
+                metadataReferences,
+                openDocuments
+            );
         }
 
         public static TestWorkspace CreateCSharp(
@@ -203,18 +266,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ExportProvider exportProvider = null,
             TestComposition composition = null,
             string[] metadataReferences = null,
-            bool openDocuments = false)
+            bool openDocuments = false
+        )
         {
-            return Create(LanguageNames.CSharp, compilationOptions, parseOptions, files, exportProvider, composition, metadataReferences, openDocuments: openDocuments);
+            return Create(
+                LanguageNames.CSharp,
+                compilationOptions,
+                parseOptions,
+                files,
+                exportProvider,
+                composition,
+                metadataReferences,
+                openDocuments: openDocuments
+            );
         }
 
         public static TestWorkspace CreateCSharp2(
             string[] files,
             ParseOptions[] parseOptions = null,
             CompilationOptions compilationOptions = null,
-            ExportProvider exportProvider = null)
+            ExportProvider exportProvider = null
+        )
         {
-            return Create(LanguageNames.CSharp, compilationOptions, parseOptions, files, exportProvider);
+            return Create(
+                LanguageNames.CSharp,
+                compilationOptions,
+                parseOptions,
+                files,
+                exportProvider
+            );
         }
 
         #endregion
@@ -228,9 +308,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ExportProvider exportProvider = null,
             TestComposition composition = null,
             string[] metadataReferences = null,
-            bool openDocuments = false)
+            bool openDocuments = false
+        )
         {
-            return CreateVisualBasic(new[] { file }, parseOptions, compilationOptions, exportProvider, composition, metadataReferences, openDocuments);
+            return CreateVisualBasic(
+                new[] { file },
+                parseOptions,
+                compilationOptions,
+                exportProvider,
+                composition,
+                metadataReferences,
+                openDocuments
+            );
         }
 
         public static TestWorkspace CreateVisualBasic(
@@ -240,9 +329,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ExportProvider exportProvider = null,
             TestComposition composition = null,
             string[] metadataReferences = null,
-            bool openDocuments = false)
+            bool openDocuments = false
+        )
         {
-            return Create(LanguageNames.VisualBasic, compilationOptions, parseOptions, files, exportProvider, composition, metadataReferences, openDocuments: openDocuments);
+            return Create(
+                LanguageNames.VisualBasic,
+                compilationOptions,
+                parseOptions,
+                files,
+                exportProvider,
+                composition,
+                metadataReferences,
+                openDocuments: openDocuments
+            );
         }
 
         /// <param name="files">Can pass in multiple file contents with individual source kind: files will be named test1.vb, test2.vbx, etc.</param>
@@ -250,11 +349,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string[] files,
             ParseOptions[] parseOptions = null,
             CompilationOptions compilationOptions = null,
-            ExportProvider exportProvider = null)
+            ExportProvider exportProvider = null
+        )
         {
-            return Create(LanguageNames.VisualBasic, compilationOptions, parseOptions, files, exportProvider);
+            return Create(
+                LanguageNames.VisualBasic,
+                compilationOptions,
+                parseOptions,
+                files,
+                exportProvider
+            );
         }
-
         #endregion
     }
 }

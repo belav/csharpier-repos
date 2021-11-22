@@ -10,7 +10,7 @@ class Foo : IDisposable
 {
     public bool IsConstructed { get; } = true;
     public Foo(int ignored) { }
-    
+
     ~Foo()
     {
         if (!IsConstructed)
@@ -19,7 +19,7 @@ class Foo : IDisposable
             Runtime_4781.Fail();
         }
     }
-    
+
     public void Dispose() => GC.SuppressFinalize(this);
 }
 
@@ -27,8 +27,11 @@ class Runtime_4781
 {
     private static int Throw() => throw new NotSupportedException();
     private static bool failed = false;
-    public static void Fail() { failed = true; }
-    
+    public static void Fail()
+    {
+        failed = true;
+    }
+
     private static IDisposable Test()
     {
         try
@@ -36,12 +39,10 @@ class Runtime_4781
             int x = Throw();
             return new Foo(x);
         }
-        catch
-        {
-        }
+        catch { }
         return new Foo(2);
     }
-    
+
     static int Main(string[] args)
     {
         Test().Dispose();

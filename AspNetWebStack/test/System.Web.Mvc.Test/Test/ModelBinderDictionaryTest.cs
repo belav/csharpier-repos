@@ -40,8 +40,22 @@ namespace System.Web.Mvc.Test
             DictionaryHelper<Type, IModelBinder> helper = new DictionaryHelper<Type, IModelBinder>()
             {
                 Creator = () => new ModelBinderDictionary(),
-                SampleKeys = new Type[] { typeof(object), typeof(string), typeof(int), typeof(long), typeof(long) },
-                SampleValues = new IModelBinder[] { new DefaultModelBinder(), new DefaultModelBinder(), new DefaultModelBinder(), new DefaultModelBinder(), new DefaultModelBinder() },
+                SampleKeys = new Type[]
+                {
+                    typeof(object),
+                    typeof(string),
+                    typeof(int),
+                    typeof(long),
+                    typeof(long)
+                },
+                SampleValues = new IModelBinder[]
+                {
+                    new DefaultModelBinder(),
+                    new DefaultModelBinder(),
+                    new DefaultModelBinder(),
+                    new DefaultModelBinder(),
+                    new DefaultModelBinder()
+                },
                 ThrowOnKeyNotFound = false
             };
 
@@ -57,12 +71,13 @@ namespace System.Web.Mvc.Test
             IModelBinder expectedBinderFromProvider = new Mock<IModelBinder>().Object;
 
             Mock<IModelBinderProvider> locatedProvider = new Mock<IModelBinderProvider>();
-            locatedProvider.Setup(p => p.GetBinder(modelType))
-                .Returns(expectedBinderFromProvider);
+            locatedProvider.Setup(p => p.GetBinder(modelType)).Returns(expectedBinderFromProvider);
 
             Mock<IModelBinderProvider> secondProvider = new Mock<IModelBinderProvider>();
 
-            ModelBinderProviderCollection providers = new ModelBinderProviderCollection(new IModelBinderProvider[] { locatedProvider.Object, secondProvider.Object });
+            ModelBinderProviderCollection providers = new ModelBinderProviderCollection(
+                new IModelBinderProvider[] { locatedProvider.Object, secondProvider.Object }
+            );
             ModelBinderDictionary binders = new ModelBinderDictionary(providers);
 
             // Act
@@ -88,9 +103,18 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            IModelBinder binder1 = binders.GetBinder(typeof(MyFirstConvertibleType), false /* fallbackToDefault */);
-            IModelBinder binder2 = binders.GetBinder(typeof(MySecondConvertibleType), false /* fallbackToDefault */);
-            IModelBinder binder3 = binders.GetBinder(typeof(object), false /* fallbackToDefault */);
+            IModelBinder binder1 = binders.GetBinder(
+                typeof(MyFirstConvertibleType),
+                false /* fallbackToDefault */
+            );
+            IModelBinder binder2 = binders.GetBinder(
+                typeof(MySecondConvertibleType),
+                false /* fallbackToDefault */
+            );
+            IModelBinder binder3 = binders.GetBinder(
+                typeof(object),
+                false /* fallbackToDefault */
+            );
 
             // Assert
             Assert.Same(registeredFirstBinder, binder1);
@@ -135,8 +159,15 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { binders.GetBinder(typeof(ConvertibleTypeWithSeveralBinders), true /* fallbackToDefault */); },
-                "The type 'System.Web.Mvc.Test.ModelBinderDictionaryTest+ConvertibleTypeWithSeveralBinders' contains multiple attributes that inherit from CustomModelBinderAttribute.");
+                delegate
+                {
+                    binders.GetBinder(
+                        typeof(ConvertibleTypeWithSeveralBinders),
+                        true /* fallbackToDefault */
+                    );
+                },
+                "The type 'System.Web.Mvc.Test.ModelBinderDictionaryTest+ConvertibleTypeWithSeveralBinders' contains multiple attributes that inherit from CustomModelBinderAttribute."
+            );
         }
 
         [Fact]
@@ -147,7 +178,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { binders.GetBinder(null); }, "modelType");
+                delegate
+                {
+                    binders.GetBinder(null);
+                },
+                "modelType"
+            );
         }
 
         [ModelBinder(typeof(MyFirstBinder))]
@@ -157,7 +193,10 @@ namespace System.Web.Mvc.Test
 
         private class MyFirstBinder : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }
@@ -170,7 +209,10 @@ namespace System.Web.Mvc.Test
 
         private class MySecondBinder : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

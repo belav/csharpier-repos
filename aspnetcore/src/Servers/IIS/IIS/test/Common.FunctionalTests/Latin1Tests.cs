@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -29,9 +29,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class Latin1Tests : IISFunctionalTestBase
 {
-    public Latin1Tests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public Latin1Tests(PublishedSitesFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
     [RequiresNewHandler]
@@ -42,9 +40,17 @@ public class Latin1Tests : IISFunctionalTestBase
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var client = new HttpClient(new LoggingHandler(new WinHttpHandler() { SendTimeout = TimeSpan.FromMinutes(3) }, deploymentResult.Logger));
+        var client = new HttpClient(
+            new LoggingHandler(
+                new WinHttpHandler() { SendTimeout = TimeSpan.FromMinutes(3) },
+                deploymentResult.Logger
+            )
+        );
 
-        var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{deploymentResult.ApplicationBaseUri}Latin1");
+        var requestMessage = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"{deploymentResult.ApplicationBaseUri}Latin1"
+        );
         requestMessage.Headers.Add("foo", "£");
 
         var result = await client.SendAsync(requestMessage);
@@ -60,9 +66,17 @@ public class Latin1Tests : IISFunctionalTestBase
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var client = new HttpClient(new LoggingHandler(new WinHttpHandler() { SendTimeout = TimeSpan.FromMinutes(3) }, deploymentResult.Logger));
+        var client = new HttpClient(
+            new LoggingHandler(
+                new WinHttpHandler() { SendTimeout = TimeSpan.FromMinutes(3) },
+                deploymentResult.Logger
+            )
+        );
 
-        var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{deploymentResult.ApplicationBaseUri}InvalidCharacter");
+        var requestMessage = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"{deploymentResult.ApplicationBaseUri}InvalidCharacter"
+        );
         requestMessage.Headers.Add("foo", "£");
 
         var result = await client.SendAsync(requestMessage);
@@ -86,7 +100,8 @@ public class Latin1Tests : IISFunctionalTestBase
                 "Connection: close",
                 "foo: £\0a",
                 "",
-                "");
+                ""
+            );
 
             await connection.ReceiveStartsWith("HTTP/1.1 400 Bad Request");
         }

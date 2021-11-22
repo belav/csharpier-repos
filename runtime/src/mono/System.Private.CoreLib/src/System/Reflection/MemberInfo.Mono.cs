@@ -5,7 +5,8 @@ namespace System.Reflection
 {
     public abstract partial class MemberInfo
     {
-        internal bool HasSameMetadataDefinitionAsCore<TOther>(MemberInfo other) where TOther : MemberInfo
+        internal bool HasSameMetadataDefinitionAsCore<TOther>(MemberInfo other)
+            where TOther : MemberInfo
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));

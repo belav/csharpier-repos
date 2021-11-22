@@ -13,7 +13,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(@"System.Drawing.EnableUnixSupport", ref s_enableUnixSupport);
+                return GetCachedSwitchValue(
+                    @"System.Drawing.EnableUnixSupport",
+                    ref s_enableUnixSupport
+                );
             }
         }
     }

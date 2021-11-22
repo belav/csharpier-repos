@@ -55,8 +55,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public MigrationsAnnotationProviderDependencies()
-        {
-        }
+        public MigrationsAnnotationProviderDependencies() { }
     }
 }

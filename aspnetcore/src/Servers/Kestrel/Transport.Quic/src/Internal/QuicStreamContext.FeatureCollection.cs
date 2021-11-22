@@ -6,7 +6,12 @@ using Microsoft.AspNetCore.Connections.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
-internal sealed partial class QuicStreamContext : IPersistentStateFeature, IStreamDirectionFeature, IProtocolErrorCodeFeature, IStreamIdFeature, IStreamAbortFeature
+internal sealed partial class QuicStreamContext
+    : IPersistentStateFeature,
+      IStreamDirectionFeature,
+      IProtocolErrorCodeFeature,
+      IStreamIdFeature,
+      IStreamAbortFeature
 {
     private IDictionary<object, object?>? _persistentState;
     private long? _error;
@@ -45,7 +50,9 @@ internal sealed partial class QuicStreamContext : IPersistentStateFeature, IStre
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unable to abort reading from a stream that doesn't support reading.");
+                    throw new InvalidOperationException(
+                        "Unable to abort reading from a stream that doesn't support reading."
+                    );
                 }
             }
         }
@@ -65,7 +72,9 @@ internal sealed partial class QuicStreamContext : IPersistentStateFeature, IStre
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unable to abort writing to a stream that doesn't support writing.");
+                    throw new InvalidOperationException(
+                        "Unable to abort writing to a stream that doesn't support writing."
+                    );
                 }
             }
         }

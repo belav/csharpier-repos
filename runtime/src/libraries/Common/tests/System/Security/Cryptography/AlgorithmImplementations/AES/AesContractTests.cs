@@ -61,9 +61,9 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         }
 
         [Theory]
-        [InlineData(64, false)]        // too small
-        [InlineData(129, false)]       // in valid range but not valid increment
-        [InlineData(384, false)]       // too large
+        [InlineData(64, false)] // too small
+        [InlineData(129, false)] // in valid range but not valid increment
+        [InlineData(384, false)] // too large
         // Skip on .NET Framework because change is not ported https://github.com/dotnet/runtime/issues/21236
         [InlineData(536870928, true)] // number of bits overflows and wraps around to a valid size
         public static void InvalidKeySizes(int invalidKeySize, bool skipOnNetfx)
@@ -89,10 +89,16 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                     return;
                 }
                 Exception e = Record.Exception(() => aes.CreateEncryptor(key, iv));
-                Assert.True(e is ArgumentException || e is OutOfMemoryException, $"Got {(e?.ToString() ?? "null")}");
+                Assert.True(
+                    e is ArgumentException || e is OutOfMemoryException,
+                    $"Got {(e?.ToString() ?? "null")}"
+                );
 
                 e = Record.Exception(() => aes.CreateDecryptor(key, iv));
-                Assert.True(e is ArgumentException || e is OutOfMemoryException, $"Got {(e?.ToString() ?? "null")}");
+                Assert.True(
+                    e is ArgumentException || e is OutOfMemoryException,
+                    $"Got {(e?.ToString() ?? "null")}"
+                );
             }
         }
 
@@ -118,10 +124,12 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.Throws<CryptographicException>(() =>
-                    {
-                        aes.FeedbackSize = feedbackSize;
-                    });
+                    Assert.Throws<CryptographicException>(
+                        () =>
+                        {
+                            aes.FeedbackSize = feedbackSize;
+                        }
+                    );
                 }
                 else
                 {
@@ -162,8 +170,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         }
 
         [Theory]
-        [InlineData(64, false)]        // smaller than default BlockSize
-        [InlineData(129, false)]       // larger than default BlockSize
+        [InlineData(64, false)] // smaller than default BlockSize
+        [InlineData(129, false)] // larger than default BlockSize
         // Skip on .NET Framework because change is not ported https://github.com/dotnet/runtime/issues/21236
         [InlineData(536870928, true)] // number of bits overflows and wraps around to default BlockSize
         public static void InvalidIVSizes(int invalidIvSize, bool skipOnNetfx)
@@ -186,10 +194,16 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 }
 
                 Exception e = Record.Exception(() => aes.CreateEncryptor(key, iv));
-                Assert.True(e is ArgumentException || e is OutOfMemoryException, $"Got {(e?.ToString() ?? "null")}");
+                Assert.True(
+                    e is ArgumentException || e is OutOfMemoryException,
+                    $"Got {(e?.ToString() ?? "null")}"
+                );
 
                 e = Record.Exception(() => aes.CreateDecryptor(key, iv));
-                Assert.True(e is ArgumentException || e is OutOfMemoryException, $"Got {(e?.ToString() ?? "null")}");
+                Assert.True(
+                    e is ArgumentException || e is OutOfMemoryException,
+                    $"Got {(e?.ToString() ?? "null")}"
+                );
             }
         }
 
@@ -262,7 +276,10 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "In .NET Framework AesCryptoServiceProvider requires a set key and throws otherwise. See https://github.com/dotnet/runtime/issues/21393.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "In .NET Framework AesCryptoServiceProvider requires a set key and throws otherwise. See https://github.com/dotnet/runtime/issues/21393."
+        )]
         public static void ValidateDecryptorProperties()
         {
             using (Aes aes = AesFactory.Create())
@@ -358,22 +375,38 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
 
                 using (ICryptoTransform encryptor = aes.CreateEncryptor())
                 {
-                    firstBlockEncrypted = encryptor.TransformFinalBlock(firstBlock, 0, firstBlock.Length);
+                    firstBlockEncrypted = encryptor.TransformFinalBlock(
+                        firstBlock,
+                        0,
+                        firstBlock.Length
+                    );
                 }
 
                 using (ICryptoTransform encryptor = aes.CreateEncryptor())
                 {
-                    firstBlockEncryptedFromCount = encryptor.TransformFinalBlock(full, 0, firstBlock.Length);
+                    firstBlockEncryptedFromCount = encryptor.TransformFinalBlock(
+                        full,
+                        0,
+                        firstBlock.Length
+                    );
                 }
 
                 using (ICryptoTransform encryptor = aes.CreateEncryptor())
                 {
-                    middleHalfEncrypted = encryptor.TransformFinalBlock(middleHalf, 0, middleHalf.Length);
+                    middleHalfEncrypted = encryptor.TransformFinalBlock(
+                        middleHalf,
+                        0,
+                        middleHalf.Length
+                    );
                 }
 
                 using (ICryptoTransform encryptor = aes.CreateEncryptor())
                 {
-                    middleHalfEncryptedFromOffsetAndCount = encryptor.TransformFinalBlock(full, 2 * blockByteCount, middleHalf.Length);
+                    middleHalfEncryptedFromOffsetAndCount = encryptor.TransformFinalBlock(
+                        full,
+                        2 * blockByteCount,
+                        middleHalf.Length
+                    );
                 }
 
                 Assert.Equal(firstBlockEncrypted, firstBlockEncryptedFromCount);
@@ -388,7 +421,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
             {
                 // 1, 2, 3, 4, 5 encrypted with CFB8 but padded with block-size padding.
                 byte[] ciphertext = "68C272ACF16BE005A361DB1C147CA3AD".HexToByteArray();
-                aes.Key = "3279CE2E9669A54E038AA62818672150D0B5A13F6757C27F378115501F83B119".HexToByteArray();
+                aes.Key =
+                    "3279CE2E9669A54E038AA62818672150D0B5A13F6757C27F378115501F83B119".HexToByteArray();
                 aes.IV = new byte[16];
                 aes.Padding = PaddingMode.PKCS7;
                 aes.Mode = CipherMode.CFB;

@@ -40,10 +40,7 @@ public class RouteContext
     /// </summary>
     public RouteData RouteData
     {
-        get
-        {
-            return _routeData;
-        }
+        get { return _routeData; }
         set
         {
             if (value == null)

@@ -28,7 +28,8 @@ namespace BlazorWpfApp
             MessageBox.Show(
                 owner: this,
                 messageBoxText: $"Current counter value is: {_appState.Counter}",
-                caption: "Counter");
+                caption: "Counter"
+            );
         }
     }
 

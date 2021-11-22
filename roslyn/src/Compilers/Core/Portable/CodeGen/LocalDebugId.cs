@@ -57,16 +57,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public bool IsNone
         {
-            get
-            {
-                return Ordinal == -1;
-            }
+            get { return Ordinal == -1; }
         }
 
         public bool Equals(LocalDebugId other)
         {
-            return SyntaxOffset == other.SyntaxOffset
-                && Ordinal == other.Ordinal;
+            return SyntaxOffset == other.SyntaxOffset && Ordinal == other.Ordinal;
         }
 
         public override int GetHashCode()

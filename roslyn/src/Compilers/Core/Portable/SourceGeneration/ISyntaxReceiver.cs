@@ -76,5 +76,4 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     /// <returns>An instance of an <see cref="ISyntaxContextReceiver"/></returns>
     public delegate ISyntaxContextReceiver? SyntaxContextReceiverCreator();
-
 }

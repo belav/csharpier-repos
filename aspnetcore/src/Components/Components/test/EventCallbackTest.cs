@@ -30,7 +30,6 @@ public class EventCallbackTest
         await callback.InvokeAsync();
     }
 
-
     [Fact]
     public async Task EventCallback_NullReceiver()
     {
@@ -40,7 +39,6 @@ public class EventCallbackTest
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -55,7 +53,6 @@ public class EventCallbackTest
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -72,7 +69,6 @@ public class EventCallbackTest
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -91,7 +87,6 @@ public class EventCallbackTest
         // Act
         await callback.InvokeAsync(new EventArgs());
 
-
         // Assert
         Assert.Equal(1, runCount);
         Assert.Equal(1, component.Count);
@@ -105,11 +100,19 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Null(arg);
@@ -125,11 +128,19 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
-
 
         // Assert
         Assert.NotNull(arg);
@@ -145,11 +156,19 @@ public class EventCallbackTest
 
         int runCount = 0;
         int arg = -1;
-        var callback = new EventCallback(component, (Action<int>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<int>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(17);
-
 
         // Assert
         Assert.Equal(17, arg);
@@ -165,13 +184,24 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(() =>
-        {
-            return callback.InvokeAsync(new StringBuilder());
-        });
+        await Assert.ThrowsAsync<ArgumentException>(
+            () =>
+            {
+                return callback.InvokeAsync(new StringBuilder());
+            }
+        );
     }
 
     [Fact]
@@ -181,11 +211,19 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -199,11 +237,19 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -218,11 +264,20 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Null(arg);
@@ -238,11 +293,20 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
-
 
         // Assert
         Assert.NotNull(arg);
@@ -258,11 +322,20 @@ public class EventCallbackTest
 
         int runCount = 0;
         int arg = -1;
-        var callback = new EventCallback(component, (Func<int, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<int, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(17);
-
 
         // Assert
         Assert.Equal(17, arg);
@@ -278,13 +351,25 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(() =>
-        {
-            return callback.InvokeAsync(new StringBuilder());
-        });
+        await Assert.ThrowsAsync<ArgumentException>(
+            () =>
+            {
+                return callback.InvokeAsync(new StringBuilder());
+            }
+        );
     }
 
     [Fact]
@@ -298,7 +383,6 @@ public class EventCallbackTest
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -317,7 +401,6 @@ public class EventCallbackTest
         // Act
         await callback.InvokeAsync(new EventArgs());
 
-
         // Assert
         Assert.Equal(1, runCount);
         Assert.Equal(1, component.Count);
@@ -331,11 +414,19 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Null(arg);
@@ -351,11 +442,19 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
-
 
         // Assert
         Assert.NotNull(arg);
@@ -370,11 +469,19 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback<EventArgs>(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -388,11 +495,19 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback<EventArgs>(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
-
 
         // Assert
         Assert.Equal(1, runCount);
@@ -407,11 +522,20 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
-
 
         // Assert
         Assert.Null(arg);
@@ -427,11 +551,20 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
-
 
         // Assert
         Assert.NotNull(arg);
@@ -451,6 +584,7 @@ public class EventCallbackTest
 
         public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();
 
-        public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();
+        public Task SetParametersAsync(ParameterView parameters) =>
+            throw new NotImplementedException();
     }
 }

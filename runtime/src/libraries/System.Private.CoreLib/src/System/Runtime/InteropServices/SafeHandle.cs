@@ -137,7 +137,8 @@ namespace System.Runtime.InteropServices
 
             // Might have to perform the following steps multiple times due to
             // interference from other AddRef's and Release's.
-            int oldState, newState;
+            int oldState,
+                newState;
             do
             {
                 // First step is to read the current handle state. We use this as a
@@ -147,7 +148,10 @@ namespace System.Runtime.InteropServices
                 oldState = _state;
                 if ((oldState & StateBits.Closed) != 0)
                 {
-                    throw new ObjectDisposedException(nameof(SafeHandle), SR.ObjectDisposed_SafeHandleClosed);
+                    throw new ObjectDisposedException(
+                        nameof(SafeHandle),
+                        SR.ObjectDisposed_SafeHandleClosed
+                    );
                 }
 
                 // Not closed, let's propose an update (to the ref count, just add
@@ -183,7 +187,8 @@ namespace System.Runtime.InteropServices
 
             // Might have to perform the following steps multiple times due to
             // interference from other AddRef's and Release's.
-            int oldState, newState;
+            int oldState,
+                newState;
             do
             {
                 // First step is to read the current handle state. We use this cached
@@ -207,7 +212,10 @@ namespace System.Runtime.InteropServices
                 // used).
                 if ((oldState & StateBits.RefCount) == 0)
                 {
-                    throw new ObjectDisposedException(nameof(SafeHandle), SR.ObjectDisposed_SafeHandleClosed);
+                    throw new ObjectDisposedException(
+                        nameof(SafeHandle),
+                        SR.ObjectDisposed_SafeHandleClosed
+                    );
                 }
 
                 // If we're proposing a decrement to zero and the handle is not closed
@@ -216,9 +224,10 @@ namespace System.Runtime.InteropServices
                 // currently invalid by asking the SafeHandle subclass. We must do this before
                 // transitioning the handle to closed, however, since setting the closed
                 // state will cause IsInvalid to always return true.
-                performRelease = ((oldState & (StateBits.RefCount | StateBits.Closed)) == StateBits.RefCountOne) &&
-                                 _ownsHandle &&
-                                 !IsInvalid;
+                performRelease =
+                    ((oldState & (StateBits.RefCount | StateBits.Closed)) == StateBits.RefCountOne)
+                    && _ownsHandle
+                    && !IsInvalid;
 
                 // Attempt the update to the new state, fail and retry if the initial
                 // state has been modified in the meantime. Decrement the ref count by

@@ -72,7 +72,8 @@ namespace System
         // Array.Empty is intentionally omitted here, since we don't want to pay for generic instantiations that
         // wouldn't have otherwise been used.
 #pragma warning disable CA1825
-        internal static readonly SZGenericArrayEnumerator<T> Empty = new SZGenericArrayEnumerator<T>(new T[0]);
+        internal static readonly SZGenericArrayEnumerator<T> Empty =
+            new SZGenericArrayEnumerator<T>(new T[0]);
 #pragma warning restore CA1825
 
         internal SZGenericArrayEnumerator(T[] array)
@@ -115,8 +116,6 @@ namespace System
 
         void IEnumerator.Reset() => _index = -1;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

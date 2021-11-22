@@ -31,32 +31,31 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
         // Priority order of runnable suffixes to look for and run
         private static readonly string[] RunnableSuffixes = OperatingSystem.IsWindows()
-                                                         ? new string[] { ".exe", ".cmd", ".bat" }
-                                                         : new string[] { string.Empty };
+            ? new string[] { ".exe", ".cmd", ".bat" }
+            : new string[] { string.Empty };
 
         private Command(string executable, string args)
         {
             // Set the things we need
-            var psi = new ProcessStartInfo()
-            {
-                FileName = executable,
-                Arguments = args
-            };
+            var psi = new ProcessStartInfo() { FileName = executable, Arguments = args };
 
-            Process = new Process()
-            {
-                StartInfo = psi
-            };
+            Process = new Process() { StartInfo = psi };
         }
 
         public static Command Create(string executable, params string[] args)
         {
-            return Create(executable, ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(args));
+            return Create(
+                executable,
+                ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(args)
+            );
         }
 
         public static Command Create(string executable, IEnumerable<string> args)
         {
-            return Create(executable, ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(args));
+            return Create(
+                executable,
+                ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(args)
+            );
         }
 
         public static Command Create(string executable, string args)
@@ -70,13 +69,13 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         {
             foreach (string suffix in RunnableSuffixes)
             {
-                var fullExecutable = Path.GetFullPath(Path.Combine(
-                                        AppContext.BaseDirectory, executable + suffix));
+                var fullExecutable = Path.GetFullPath(
+                    Path.Combine(AppContext.BaseDirectory, executable + suffix)
+                );
 
                 if (File.Exists(fullExecutable))
                 {
                     executable = fullExecutable;
-
                     // In priority order we've found the best runnable extension, so break.
                     break;
                 }
@@ -122,7 +121,11 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 else
                 {
                     // Search the path to see if we can find it
-                    foreach (var path in System.Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator))
+                    foreach (
+                        var path in System.Environment
+                            .GetEnvironmentVariable("PATH")
+                            .Split(Path.PathSeparator)
+                    )
                     {
                         var candidate = Path.Combine(path, executable + ".exe");
                         if (File.Exists(candidate))
@@ -199,7 +202,7 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
             // Retry if we hit ETXTBSY due to Linux race
             // https://github.com/dotnet/runtime/issues/58964
-            for (int i = 0; ; i++)
+            for (int i = 0;; i++)
             {
                 try
                 {
@@ -225,7 +228,10 @@ namespace Microsoft.DotNet.Cli.Build.Framework
             return this;
         }
 
-        public CommandResult WaitForExit(bool fExpectedToFail, int timeoutMilliseconds = Timeout.Infinite)
+        public CommandResult WaitForExit(
+            bool fExpectedToFail,
+            int timeoutMilliseconds = Timeout.Infinite
+        )
         {
             ReportExecWaitOnExit();
 
@@ -245,7 +251,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 Process.StartInfo,
                 exitCode,
                 _stdOutCapture?.GetStringBuilder()?.ToString(),
-                _stdErrCapture?.GetStringBuilder()?.ToString());
+                _stdErrCapture?.GetStringBuilder()?.ToString()
+            );
         }
 
         public CommandResult Execute(bool fExpectedToFail)
@@ -360,9 +367,9 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
         private string FormatProcessInfo(ProcessStartInfo info, bool includeWorkingDirectory)
         {
-            string prefix = includeWorkingDirectory ?
-                $"{info.WorkingDirectory}> {info.FileName}" :
-                info.FileName;
+            string prefix = includeWorkingDirectory
+                ? $"{info.WorkingDirectory}> {info.FileName}"
+                : info.FileName;
 
             if (string.IsNullOrWhiteSpace(info.Arguments))
             {
@@ -376,7 +383,10 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         {
             if (!_quietBuildReporter)
             {
-                BuildReporter.BeginSection("EXEC", FormatProcessInfo(Process.StartInfo, includeWorkingDirectory: false));
+                BuildReporter.BeginSection(
+                    "EXEC",
+                    FormatProcessInfo(Process.StartInfo, includeWorkingDirectory: false)
+                );
             }
         }
 
@@ -384,7 +394,10 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         {
             if (!_quietBuildReporter)
             {
-                BuildReporter.SectionComment("EXEC", $"Waiting for process {Process.Id} to exit...");
+                BuildReporter.SectionComment(
+                    "EXEC",
+                    $"Waiting for process {Process.Id} to exit..."
+                );
             }
         }
 
@@ -401,12 +414,14 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                     msgExpectedToFail = "failed as expected and ";
                 }
 
-                var message = $"{FormatProcessInfo(Process.StartInfo, includeWorkingDirectory: !success)} {msgExpectedToFail}exited with {exitCode}";
+                var message =
+                    $"{FormatProcessInfo(Process.StartInfo, includeWorkingDirectory: !success)} {msgExpectedToFail}exited with {exitCode}";
 
                 BuildReporter.EndSection(
                     "EXEC",
                     success ? message.Green() : message.Red().Bold(),
-                    success);
+                    success
+                );
             }
         }
 
@@ -414,11 +429,18 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         {
             if (_running)
             {
-                throw new InvalidOperationException($"Unable to invoke {memberName} after the command has been run");
+                throw new InvalidOperationException(
+                    $"Unable to invoke {memberName} after the command has been run"
+                );
             }
         }
 
-        private void ProcessData(string data, StringWriter capture, Action<string> forward, Action<string> handler)
+        private void ProcessData(
+            string data,
+            StringWriter capture,
+            Action<string> forward,
+            Action<string> handler
+        )
         {
             if (data == null)
             {

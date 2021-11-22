@@ -15,14 +15,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class AwaitHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(AsyncAwaitHighlighter);
+        internal override Type GetHighlighterType() => typeof(AsyncAwaitHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample2_2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -44,14 +43,15 @@ class AsyncExample
         result = [|await|] resultTask;
         result = [|await|] lambda();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample2_3()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -73,14 +73,15 @@ class AsyncExample
         result = {|Cursor:[|await|]|} resultTask;
         result = [|await|] lambda();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample2_4()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -102,14 +103,15 @@ class AsyncExample
         result = [|await|] resultTask;
         result = {|Cursor:[|await|]|} lambda();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample3_2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -131,7 +133,8 @@ class AsyncExample
         result = await resultTask;
         result = await lambda();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(573625, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/573625")]
@@ -139,7 +142,7 @@ class AsyncExample
         public async Task TestNestedAwaits1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -166,7 +169,8 @@ class AsyncExample
         result = await await resultTask;
         result = await lambda();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(573625, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/573625")]
@@ -174,7 +178,7 @@ class AsyncExample
         public async Task TestNestedAwaits2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -201,14 +205,15 @@ class AsyncExample
         result = [|await await|] resultTask;
         result = [|await|] lambda();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAwaitUsing_OnAsync()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -216,14 +221,15 @@ class C
     {
         [|await|] using (var x = new object());
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAwaitUsing_OnAwait()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -231,14 +237,15 @@ class C
     {
         {|Cursor:[|await|]|} using (var x = new object());
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAwaitUsingDeclaration_OnAsync()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -246,14 +253,15 @@ class C
     {
         [|await|] using var x = new object();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAwaitUsingDeclaration_OnAwait()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -261,14 +269,15 @@ class C
     {
         {|Cursor:[|await|]|} using var x = new object();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAwaitForEach_OnAsync()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -276,14 +285,15 @@ class C
     {
         foreach [|await|] (var n in new int[] { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestAwaitForEach_OnAwait()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -291,14 +301,15 @@ class C
     {
         foreach {|Cursor:[|await|]|} (var n in new int[] { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestForEachVariableAwait_OnAsync()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -306,14 +317,15 @@ class C
     {
         foreach [|await|] (var (a, b) in new (int, int)[] { });
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestForEachVariableAwait_OnAwait()
         {
             await TestAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -321,7 +333,8 @@ class C
     {
         foreach {|Cursor:[|await|]|} (var (a, b) in new (int, int)[] { });
     }
-}");
+}"
+            );
         }
     }
 }

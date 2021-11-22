@@ -22,6 +22,7 @@ internal static partial class Interop
             FILE_INFORMATION_CLASS FileInformationClass,
             BOOLEAN ReturnSingleEntry,
             UNICODE_STRING* FileName,
-            BOOLEAN RestartScan);
+            BOOLEAN RestartScan
+        );
     }
 }

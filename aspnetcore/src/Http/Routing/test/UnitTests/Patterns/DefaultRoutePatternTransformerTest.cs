@@ -26,8 +26,8 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller=Home}/{action=Index}/{id?}";
-        var defaults = new { };
-        var policies = new { };
+        var defaults = new {  };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -40,7 +40,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("a", null), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("b", string.Empty), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("b", string.Empty), kvp)
+        );
     }
 
     [Fact]
@@ -48,8 +49,8 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller=Home}/{action=Index}/{id?}";
-        var defaults = new { };
-        var policies = new { };
+        var defaults = new {  };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -67,8 +68,8 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller=Home}/{action=Index}/{id?}";
-        var defaults = new { };
-        var policies = new { };
+        var defaults = new {  };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -81,11 +82,17 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.Defaults.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)); // default is preserved
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        ); // default is preserved
 
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", RoutePattern.RequiredValueAny), kvp));
+            kvp =>
+                Assert.Equal(
+                    new KeyValuePair<string, object>("controller", RoutePattern.RequiredValueAny),
+                    kvp
+                )
+        );
     }
 
     [Fact]
@@ -94,7 +101,7 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "{controller=Home}/{action=Index}/{id?}";
         var defaults = new { area = "Admin" };
-        var policies = new { };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -113,7 +120,7 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "{controller=Home}/{action=Index}/{id?}";
         var defaults = new { area = RoutePattern.RequiredValueAny };
-        var policies = new { };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -131,8 +138,8 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller}/{action}/{id?}";
-        var defaults = new { };
-        var policies = new { };
+        var defaults = new {  };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -145,7 +152,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
     }
 
     [Fact]
@@ -153,8 +161,8 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller=Home}/{action=Index}/{id?}";
-        var defaults = new { };
-        var policies = new { };
+        var defaults = new {  };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -167,7 +175,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
 
         // We should not need to rewrite anything in this case.
         Assert.Same(actual.Defaults, original.Defaults);
@@ -181,7 +190,7 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "{controller=Blog}/{action=ReadPost}/{id?}";
         var defaults = new { area = "Admin", };
-        var policies = new { };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -195,7 +204,8 @@ public class DefaultRoutePatternTransformerTest
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
             kvp => Assert.Equal(new KeyValuePair<string, object>("area", "Admin"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
 
         // We should not need to rewrite anything in this case.
         Assert.NotSame(actual.Defaults, original.Defaults);
@@ -203,7 +213,10 @@ public class DefaultRoutePatternTransformerTest
         Assert.NotSame(actual.PathSegments, original.PathSegments);
 
         // other defaults were wiped out
-        Assert.Equal(new KeyValuePair<string, object>("area", "Admin"), Assert.Single(actual.Defaults));
+        Assert.Equal(
+            new KeyValuePair<string, object>("area", "Admin"),
+            Assert.Single(actual.Defaults)
+        );
         Assert.Null(actual.GetParameter("controller").Default);
         Assert.False(actual.Defaults.ContainsKey("controller"));
         Assert.Null(actual.GetParameter("action").Default);
@@ -215,7 +228,7 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller}/{action}/{id?}";
-        var defaults = new { };
+        var defaults = new {  };
         var policies = new { controller = "Home", action = new RegexRouteConstraint("Index"), };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
@@ -229,7 +242,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
     }
 
     [Fact]
@@ -237,7 +251,7 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "{controller}/{action}/{id?}";
-        var defaults = new { };
+        var defaults = new {  };
         var policies = new { controller = "Home", action = new RegexRouteConstraint("Index"), };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
@@ -257,7 +271,7 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "Home/Index/{id?}";
         var defaults = new { controller = "Home", action = "Index", };
-        var policies = new { };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -270,7 +284,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
     }
 
     [Fact]
@@ -279,7 +294,7 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "Home/Index/{id?}";
         var defaults = new { controller = "Home", action = "Index", };
-        var policies = new { };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -298,7 +313,7 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "Home/Index/{id?}";
         var defaults = new { controller = (string)null, action = "", };
-        var policies = new { };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
@@ -311,7 +326,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", null), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", ""), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", ""), kvp)
+        );
     }
 
     [Fact]
@@ -333,7 +349,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
     }
 
     [Fact]
@@ -355,7 +372,8 @@ public class DefaultRoutePatternTransformerTest
         Assert.Collection(
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
     }
 
     [Fact]
@@ -364,9 +382,14 @@ public class DefaultRoutePatternTransformerTest
         // Arrange
         var template = "Home/Index/{id?}";
         var defaults = new { area = "Admin", controller = "Home", action = "Index", };
-        var policies = new { };
+        var policies = new {  };
 
-        var original = RoutePatternFactory.Parse(template, defaults, policies, new { area = "Admin", controller = "Home", });
+        var original = RoutePatternFactory.Parse(
+            template,
+            defaults,
+            policies,
+            new { area = "Admin", controller = "Home", }
+        );
 
         var requiredValues = new { controller = "Home", action = "Index", };
 
@@ -378,7 +401,8 @@ public class DefaultRoutePatternTransformerTest
             actual.RequiredValues.OrderBy(kvp => kvp.Key),
             kvp => Assert.Equal(new KeyValuePair<string, object>("action", "Index"), kvp),
             kvp => Assert.Equal(new KeyValuePair<string, object>("area", "Admin"), kvp),
-            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp));
+            kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
+        );
     }
 
     [Fact]
@@ -386,12 +410,24 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "PageRoute/Attribute/{page}";
-        var defaults = new { area = (string)null, page = (string)null, controller = "Home", action = "Index", };
-        var policies = new { };
+        var defaults = new
+        {
+            area = (string)null,
+            page = (string)null,
+            controller = "Home",
+            action = "Index",
+        };
+        var policies = new {  };
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
-        var requiredValues = new { area = (string)null, page = (string)null, controller = "Home", action = "Index", };
+        var requiredValues = new
+        {
+            area = (string)null,
+            page = (string)null,
+            controller = "Home",
+            action = "Index",
+        };
 
         // Act
         var actual = Transformer.SubstituteRequiredValues(original, requiredValues);

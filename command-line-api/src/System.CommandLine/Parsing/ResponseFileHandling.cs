@@ -8,7 +8,6 @@ namespace System.CommandLine.Parsing
     /// </summary>
     public enum ResponseFileHandling
     {
-
         ///<summary>
         /// Each line in the file is treated as a single argument, regardless of whitespace on the line.
         ///</summary>
@@ -16,12 +15,10 @@ namespace System.CommandLine.Parsing
         /// Empty lines and lines beginning with <c>#</c> are skipped.
         ///</remarks>
         ParseArgsAsLineSeparated,
-
         ///<summary>
         /// Arguments are separated by whitespace (spaces and/or new-lines)
         ///</summary>
         ParseArgsAsSpaceSeparated,
-
         ///<summary>
         /// Do not parse response files. Command line tokens beginning with <c>@</c> receive no special treatment.
         ///</summary>

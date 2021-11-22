@@ -29,17 +29,35 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly Action<Binder, SyntaxNode> _binderUpdatedHandler;
         private SmallDictionary<SyntaxNode, Binder> _lazyBinderMap;
 
-        internal ExecutableCodeBinder(SyntaxNode root, Symbol memberSymbol, Binder next, Action<Binder, SyntaxNode> binderUpdatedHandler = null)
-            : this(root, memberSymbol, next, next.Flags)
+        internal ExecutableCodeBinder(
+            SyntaxNode root,
+            Symbol memberSymbol,
+            Binder next,
+            Action<Binder, SyntaxNode> binderUpdatedHandler = null
+        ) : this(root, memberSymbol, next, next.Flags)
         {
             _binderUpdatedHandler = binderUpdatedHandler;
         }
 
-        internal ExecutableCodeBinder(SyntaxNode root, Symbol memberSymbol, Binder next, BinderFlags additionalFlags)
-            : base(next, (next.Flags | additionalFlags) & ~BinderFlags.AllClearedAtExecutableCodeBoundary)
+        internal ExecutableCodeBinder(
+            SyntaxNode root,
+            Symbol memberSymbol,
+            Binder next,
+            BinderFlags additionalFlags
+        )
+            : base(
+                next,
+                (next.Flags | additionalFlags) & ~BinderFlags.AllClearedAtExecutableCodeBoundary
+            )
         {
-            Debug.Assert((object)memberSymbol == null ||
-                         (memberSymbol.Kind != SymbolKind.Local && memberSymbol.Kind != SymbolKind.RangeVariable && memberSymbol.Kind != SymbolKind.Parameter));
+            Debug.Assert(
+                (object)memberSymbol == null
+                    || (
+                        memberSymbol.Kind != SymbolKind.Local
+                        && memberSymbol.Kind != SymbolKind.RangeVariable
+                        && memberSymbol.Kind != SymbolKind.Parameter
+                    )
+            );
 
             _memberSymbol = memberSymbol;
             _root = root;
@@ -50,10 +68,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             get { return _memberSymbol ?? Next.ContainingMemberOrLambda; }
         }
 
-        protected override bool InExecutableBinder
-            => true;
+        protected override bool InExecutableBinder => true;
 
-        internal Symbol MemberSymbol { get { return _memberSymbol; } }
+        internal Symbol MemberSymbol
+        {
+            get { return _memberSymbol; }
+        }
 
         internal override Binder GetBinder(SyntaxNode node)
         {
@@ -65,10 +85,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             SmallDictionary<SyntaxNode, Binder> map;
 
-            if (_memberSymbol is SynthesizedSimpleProgramEntryPointSymbol entryPoint && _root == entryPoint.SyntaxNode)
+            if (
+                _memberSymbol is SynthesizedSimpleProgramEntryPointSymbol entryPoint
+                && _root == entryPoint.SyntaxNode
+            )
             {
                 var scopeOwner = new SimpleProgramBinder(this, entryPoint);
-                map = LocalBinderFactory.BuildMap(_memberSymbol, _root, scopeOwner, _binderUpdatedHandler);
+                map = LocalBinderFactory.BuildMap(
+                    _memberSymbol,
+                    _root,
+                    scopeOwner,
+                    _binderUpdatedHandler
+                );
                 map.Add(_root, scopeOwner);
             }
             else
@@ -76,7 +104,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Ensure that the member symbol is a method symbol.
                 if ((object)_memberSymbol != null && _root != null)
                 {
-                    map = LocalBinderFactory.BuildMap(_memberSymbol, _root, this, _binderUpdatedHandler);
+                    map = LocalBinderFactory.BuildMap(
+                        _memberSymbol,
+                        _root,
+                        this,
+                        _binderUpdatedHandler
+                    );
                 }
                 else
                 {
@@ -100,7 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        public static void ValidateIteratorMethod(CSharpCompilation compilation, MethodSymbol iterator, BindingDiagnosticBag diagnostics)
+        public static void ValidateIteratorMethod(
+            CSharpCompilation compilation,
+            MethodSymbol iterator,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (!iterator.IsIterator)
             {
@@ -119,22 +156,35 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            Location errorLocation = (iterator as SynthesizedSimpleProgramEntryPointSymbol)?.ReturnTypeSyntax.GetLocation() ?? iterator.Locations[0];
+            Location errorLocation =
+                (
+                    iterator as SynthesizedSimpleProgramEntryPointSymbol
+                )?.ReturnTypeSyntax.GetLocation() ?? iterator.Locations[0];
             if (iterator.IsVararg)
             {
                 // error CS1636: __arglist is not allowed in the parameter list of iterators
                 diagnostics.Add(ErrorCode.ERR_VarargsIterator, errorLocation);
             }
 
-            if (((iterator as SourceMemberMethodSymbol)?.IsUnsafe == true || (iterator as LocalFunctionSymbol)?.IsUnsafe == true)
-                && compilation.Options.AllowUnsafe) // Don't cascade
+            if (
+                (
+                    (iterator as SourceMemberMethodSymbol)?.IsUnsafe == true
+                    || (iterator as LocalFunctionSymbol)?.IsUnsafe == true
+                ) && compilation.Options.AllowUnsafe
+            ) // Don't cascade
             {
                 diagnostics.Add(ErrorCode.ERR_IllegalInnerUnsafe, errorLocation);
             }
 
             var returnType = iterator.ReturnType;
             RefKind refKind = iterator.RefKind;
-            TypeWithAnnotations elementType = InMethodBinder.GetIteratorElementTypeFromReturnType(compilation, refKind, returnType, errorLocation, diagnostics);
+            TypeWithAnnotations elementType = InMethodBinder.GetIteratorElementTypeFromReturnType(
+                compilation,
+                refKind,
+                returnType,
+                errorLocation,
+                diagnostics
+            );
 
             if (elementType.IsDefault)
             {
@@ -144,14 +194,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (!returnType.IsErrorType())
                 {
-                    Error(diagnostics, ErrorCode.ERR_BadIteratorReturn, errorLocation, iterator, returnType);
+                    Error(
+                        diagnostics,
+                        ErrorCode.ERR_BadIteratorReturn,
+                        errorLocation,
+                        iterator,
+                        returnType
+                    );
                 }
             }
 
-            bool asyncInterface = InMethodBinder.IsAsyncStreamInterface(compilation, refKind, returnType);
+            bool asyncInterface = InMethodBinder.IsAsyncStreamInterface(
+                compilation,
+                refKind,
+                returnType
+            );
             if (asyncInterface && !iterator.IsAsync)
             {
-                diagnostics.Add(ErrorCode.ERR_IteratorMustBeAsync, errorLocation, iterator, returnType);
+                diagnostics.Add(
+                    ErrorCode.ERR_IteratorMustBeAsync,
+                    errorLocation,
+                    iterator,
+                    returnType
+                );
             }
         }
     }

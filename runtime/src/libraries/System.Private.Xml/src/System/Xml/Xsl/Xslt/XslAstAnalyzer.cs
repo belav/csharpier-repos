@@ -38,22 +38,30 @@ namespace System.Xml.Xsl.Xslt
         // 0/1     - for-each depth
         private Graph<ProtoTemplate>? _revCall0Graph = new Graph<ProtoTemplate>();
         private Graph<ProtoTemplate>? _revCall1Graph = new Graph<ProtoTemplate>();
-        private Dictionary<Template, Stylesheet>? _fwdApplyImportsGraph = new Dictionary<Template, Stylesheet>();
-        private Dictionary<QilName, List<ProtoTemplate>>? _revApplyTemplatesGraph = new Dictionary<QilName, List<ProtoTemplate>>();
+        private Dictionary<Template, Stylesheet>? _fwdApplyImportsGraph = new Dictionary<
+            Template,
+            Stylesheet
+        >();
+        private Dictionary<QilName, List<ProtoTemplate>>? _revApplyTemplatesGraph = new Dictionary<
+            QilName,
+            List<ProtoTemplate>
+        >();
 
         // Data flow graph
         private Graph<VarPar>? _dataFlow = new Graph<VarPar>();
 
         // Mapping (mode, param name) -> helper vertex in data flow graph
-        private readonly Dictionary<ModeName, VarPar> _applyTemplatesParams = new Dictionary<ModeName, VarPar>();
+        private readonly Dictionary<ModeName, VarPar> _applyTemplatesParams = new Dictionary<
+            ModeName,
+            VarPar
+        >();
 
         // ---------------------------------- Graph<V> ----------------------------------
         /// <summary>
         /// Represents a graph using hashtable of adjacency lists.
         /// </summary>
         /// <typeparam name="V">Vertex type</typeparam>
-        internal sealed class Graph<V> : Dictionary<V, List<V>?>
-            where V : XslNode
+        internal sealed class Graph<V> : Dictionary<V, List<V>?> where V : XslNode
         {
             private static readonly IList<V> s_empty = (new List<V>()).AsReadOnly();
 
@@ -119,7 +127,10 @@ namespace System.Xml.Xsl.Xslt
                     {
                         DepthFirstSearch(u, flag);
                     }
-                    Debug.Assert((u.Flags & flag) == flag, "Flag was not set on an adjacent vertex");
+                    Debug.Assert(
+                        (u.Flags & flag) == flag,
+                        "Flag was not set on an adjacent vertex"
+                    );
                 }
             }
         }
@@ -216,7 +227,10 @@ namespace System.Xml.Xsl.Xslt
             {
                 foreach (Stylesheet import in pair.Value.Imports!)
                 {
-                    AddImportDependencies(import, /*focusDonor:*/pair.Key);
+                    AddImportDependencies(
+                        import, /*focusDonor:*/
+                        pair.Key
+                    );
                 }
             }
             _fwdApplyImportsGraph = null; // Finaly done with this.
@@ -305,7 +319,10 @@ namespace System.Xml.Xsl.Xslt
             _scope.ExitScope();
 
             // Local variables and parameters must be added to the outer scope
-            if (_currentTemplate != null && (node.NodeType == XslNodeType.Variable || node.NodeType == XslNodeType.Param))
+            if (
+                _currentTemplate != null
+                && (node.NodeType == XslNodeType.Variable || node.NodeType == XslNodeType.Param)
+            )
             {
                 _scope.AddVariable(node.Name!, (VarPar)node);
             }
@@ -346,7 +363,10 @@ namespace System.Xml.Xsl.Xslt
         protected override XslFlags VisitApplyImports(XslNode node)
         {
             Debug.Assert(_forEachDepth == 0, "xsl:apply-imports cannot be inside of xsl:for-each");
-            Debug.Assert(_currentTemplate is Template, "xsl:apply-imports can only occur within xsl:template");
+            Debug.Assert(
+                _currentTemplate is Template,
+                "xsl:apply-imports can only occur within xsl:template"
+            );
             _fwdApplyImportsGraph![(Template)_currentTemplate] = (Stylesheet)node.Arg!;
             // xsl:apply-imports uses context node and is not in context of any for-each so it requires current
             return XslFlags.HasCalls | XslFlags.Current | XslFlags.Rtf;
@@ -354,7 +374,10 @@ namespace System.Xml.Xsl.Xslt
 
         protected override XslFlags VisitApplyTemplates(XslNode node)
         {
-            Debug.Assert(node.Select != null, "Absent @select should be replaced with 'node()' in XsltLoader");
+            Debug.Assert(
+                node.Select != null,
+                "Absent @select should be replaced with 'node()' in XsltLoader"
+            );
             XslFlags result = ProcessExpr(node.Select);
 
             foreach (XslNode instr in node.Content)
@@ -362,7 +385,10 @@ namespace System.Xml.Xsl.Xslt
                 result |= Visit(instr);
                 if (instr.NodeType == XslNodeType.WithParam)
                 {
-                    ModeName mn = new ModeName(/*mode:*/node.Name!, instr.Name!);
+                    ModeName mn = new ModeName( /*mode:*/
+                        node.Name!,
+                        instr.Name!
+                    );
                     VarPar? modePar;
 
                     if (!_applyTemplatesParams.TryGetValue(mn, out modePar))
@@ -383,7 +409,10 @@ namespace System.Xml.Xsl.Xslt
 
             if (_currentTemplate != null)
             {
-                AddApplyTemplatesEdge(/*mode:*/node.Name!, _currentTemplate);
+                AddApplyTemplatesEdge( /*mode:*/
+                    node.Name!,
+                    _currentTemplate
+                );
             }
 
             return XslFlags.HasCalls | XslFlags.Rtf | result;
@@ -392,10 +421,10 @@ namespace System.Xml.Xsl.Xslt
         protected override XslFlags VisitAttribute(NodeCtor node)
         {
             return (
-                XslFlags.Rtf |
-                ProcessAvt(node.NameAvt) |
-                ProcessAvt(node.NsAvt) |
-                VisitChildren(node)
+                XslFlags.Rtf
+                | ProcessAvt(node.NameAvt)
+                | ProcessAvt(node.NsAvt)
+                | VisitChildren(node)
             );
         }
 
@@ -514,10 +543,10 @@ namespace System.Xml.Xsl.Xslt
             // @use-attribute-sets was processed into a sequence of UseAttributeSet nodes,
             // which were prepended to the content of node
             return (
-                XslFlags.Rtf |
-                ProcessAvt(node.NameAvt) |
-                ProcessAvt(node.NsAvt) |
-                VisitChildren(node)
+                XslFlags.Rtf
+                | ProcessAvt(node.NameAvt)
+                | ProcessAvt(node.NsAvt)
+                | VisitChildren(node)
             );
         }
 
@@ -563,11 +592,7 @@ namespace System.Xml.Xsl.Xslt
 
         protected override XslFlags VisitLiteralAttribute(XslNode node)
         {
-            return (
-                XslFlags.Rtf |
-                ProcessAvt(node.Select!) |
-                VisitChildren(node)
-            );
+            return (XslFlags.Rtf | ProcessAvt(node.Select!) | VisitChildren(node));
         }
 
         protected override XslFlags VisitLiteralElement(XslNode node)
@@ -585,15 +610,15 @@ namespace System.Xml.Xsl.Xslt
         protected override XslFlags VisitNumber(Number node)
         {
             return (
-                XslFlags.Rtf |
-                ProcessPattern(node.Count) |
-                ProcessPattern(node.From) |
-                (node.Value != null ? ProcessExpr(node.Value) : XslFlags.Current) |
-                ProcessAvt(node.Format) |
-                ProcessAvt(node.Lang) |
-                ProcessAvt(node.LetterValue) |
-                ProcessAvt(node.GroupingSeparator) |
-                ProcessAvt(node.GroupingSize)
+                XslFlags.Rtf
+                | ProcessPattern(node.Count)
+                | ProcessPattern(node.From)
+                | (node.Value != null ? ProcessExpr(node.Value) : XslFlags.Current)
+                | ProcessAvt(node.Format)
+                | ProcessAvt(node.Lang)
+                | ProcessAvt(node.LetterValue)
+                | ProcessAvt(node.GroupingSeparator)
+                | ProcessAvt(node.GroupingSize)
             );
         }
 
@@ -601,11 +626,7 @@ namespace System.Xml.Xsl.Xslt
 
         protected override XslFlags VisitPI(XslNode node)
         {
-            return (
-                XslFlags.Rtf |
-                ProcessAvt(node.Select!) |
-                VisitChildren(node)
-            );
+            return (XslFlags.Rtf | ProcessAvt(node.Select!) | VisitChildren(node));
         }
 
         protected override XslFlags VisitSort(Sort node)
@@ -613,11 +634,11 @@ namespace System.Xml.Xsl.Xslt
             return (
                 // @select is calculated in context of xsl:for-each or xsl:apply-templates,
                 // so it does not affect focus flags
-                ProcessExpr(node.Select!) & ~XslFlags.FocusFilter |
-                ProcessAvt(node.Lang) |
-                ProcessAvt(node.DataType) |
-                ProcessAvt(node.Order) |
-                ProcessAvt(node.CaseOrder)
+                ProcessExpr(node.Select!) & ~XslFlags.FocusFilter
+                | ProcessAvt(node.Lang)
+                | ProcessAvt(node.DataType)
+                | ProcessAvt(node.Order)
+                | ProcessAvt(node.CaseOrder)
             );
         }
 
@@ -628,7 +649,10 @@ namespace System.Xml.Xsl.Xslt
 
         protected override XslFlags VisitUseAttributeSet(XslNode node)
         {
-            if (_compiler!.AttributeSets.TryGetValue(node.Name!, out AttributeSet? attSet) && _currentTemplate != null)
+            if (
+                _compiler!.AttributeSets.TryGetValue(node.Name!, out AttributeSet? attSet)
+                && _currentTemplate != null
+            )
             {
                 if (_forEachDepth == 0)
                 {
@@ -705,7 +729,10 @@ namespace System.Xml.Xsl.Xslt
                 {
                     // In case of incorrect stylesheet, variable or parameter may have both a 'select' attribute and non-empty content
                     // NOTE: This code must be in sync with recovery logic in QilGenerator
-                    result = _xpathAnalyzer!.Analyze(node.Select) | VisitChildren(node) | XslFlags.AnyType;
+                    result =
+                        _xpathAnalyzer!.Analyze(node.Select)
+                        | VisitChildren(node)
+                        | XslFlags.AnyType;
                     _typeDonor = null;
                 }
                 else
@@ -814,7 +841,10 @@ namespace System.Xml.Xsl.Xslt
                 {
                     DepthFirstSearch(u);
                 }
-                Debug.Assert((u.Flags & XslFlags.SideEffects) == XslFlags.SideEffects, "Flag was not set on an adjacent vertex");
+                Debug.Assert(
+                    (u.Flags & XslFlags.SideEffects) == XslFlags.SideEffects,
+                    "Flag was not set on an adjacent vertex"
+                );
             }
             foreach (ProtoTemplate u in _revCall1Graph!.GetAdjList(t))
             {
@@ -822,22 +852,29 @@ namespace System.Xml.Xsl.Xslt
                 {
                     DepthFirstSearch(u);
                 }
-                Debug.Assert((u.Flags & XslFlags.SideEffects) == XslFlags.SideEffects, "Flag was not set on an adjacent vertex");
+                Debug.Assert(
+                    (u.Flags & XslFlags.SideEffects) == XslFlags.SideEffects,
+                    "Flag was not set on an adjacent vertex"
+                );
             }
             Template? template = t as Template;
             if (
-                template != null &&                                     // This ProteTemplate is Template
-                _revApplyTemplatesGraph!.TryGetValue(template.Mode, out list)      // list - ProtoTemplates that have apply-templatess mode="{template.Mode}"
+                template != null
+                && // This ProteTemplate is Template
+                _revApplyTemplatesGraph!.TryGetValue(template.Mode, out list) // list - ProtoTemplates that have apply-templatess mode="{template.Mode}"
             )
             {
-                _revApplyTemplatesGraph.Remove(template.Mode);                    // to prevent recursion remove this list from dictionary
+                _revApplyTemplatesGraph.Remove(template.Mode); // to prevent recursion remove this list from dictionary
                 foreach (ProtoTemplate u in list)
                 {
                     if ((u.Flags & XslFlags.Stop) == 0)
                     {
                         DepthFirstSearch(u);
                     }
-                    Debug.Assert((u.Flags & XslFlags.SideEffects) == XslFlags.SideEffects, "Flag was not set on an adjacent vertex");
+                    Debug.Assert(
+                        (u.Flags & XslFlags.SideEffects) == XslFlags.SideEffects,
+                        "Flag was not set on an adjacent vertex"
+                    );
                 }
             }
         }
@@ -969,9 +1006,7 @@ namespace System.Xml.Xsl.Xslt
                 }
             }
 
-            public void StartBuild()
-            {
-            }
+            public void StartBuild() { }
 
             public XslFlags EndBuild(XslFlags result)
             {
@@ -990,23 +1025,24 @@ namespace System.Xml.Xsl.Xslt
                 return XslFlags.Number;
             }
 
-            private static readonly XslFlags[] s_operatorType = {
-                /*Unknown   */ XslFlags.AnyType,
-                /*Or        */ XslFlags.Boolean,
-                /*And       */ XslFlags.Boolean,
-                /*Eq        */ XslFlags.Boolean,
-                /*Ne        */ XslFlags.Boolean,
-                /*Lt        */ XslFlags.Boolean,
-                /*Le        */ XslFlags.Boolean,
-                /*Gt        */ XslFlags.Boolean,
-                /*Ge        */ XslFlags.Boolean,
-                /*Plus      */ XslFlags.Number,
-                /*Minus     */ XslFlags.Number,
-                /*Multiply  */ XslFlags.Number,
-                /*Divide    */ XslFlags.Number,
-                /*Modulo    */ XslFlags.Number,
-                /*UnaryMinus*/ XslFlags.Number,
-                /*Union     */ XslFlags.Nodeset,
+            private static readonly XslFlags[] s_operatorType =
+            {
+                /*Unknown   */XslFlags.AnyType,
+                /*Or        */XslFlags.Boolean,
+                /*And       */XslFlags.Boolean,
+                /*Eq        */XslFlags.Boolean,
+                /*Ne        */XslFlags.Boolean,
+                /*Lt        */XslFlags.Boolean,
+                /*Le        */XslFlags.Boolean,
+                /*Gt        */XslFlags.Boolean,
+                /*Ge        */XslFlags.Boolean,
+                /*Plus      */XslFlags.Number,
+                /*Minus     */XslFlags.Number,
+                /*Multiply  */XslFlags.Number,
+                /*Divide    */XslFlags.Number,
+                /*Modulo    */XslFlags.Number,
+                /*UnaryMinus*/XslFlags.Number,
+                /*Union     */XslFlags.Nodeset,
             };
 
             public XslFlags Operator(XPathOperator op, XslFlags left, XslFlags right)
@@ -1017,10 +1053,20 @@ namespace System.Xml.Xsl.Xslt
                 return result | s_operatorType[(int)op];
             }
 
-            public XslFlags Axis(XPathAxis xpathAxis, XPathNodeType nodeType, string? prefix, string? name)
+            public XslFlags Axis(
+                XPathAxis xpathAxis,
+                XPathNodeType nodeType,
+                string? prefix,
+                string? name
+            )
             {
                 _typeDonor = null;
-                if (xpathAxis == XPathAxis.Self && nodeType == XPathNodeType.All && prefix == null && name == null)
+                if (
+                    xpathAxis == XPathAxis.Self
+                    && nodeType == XPathNodeType.All
+                    && prefix == null
+                    && name == null
+                )
                 {
                     return XslFlags.Current | XslFlags.Node;
                 }
@@ -1041,7 +1087,9 @@ namespace System.Xml.Xsl.Xslt
             public XslFlags Predicate(XslFlags nodeset, XslFlags predicate, bool isReverseStep)
             {
                 _typeDonor = null;
-                return (nodeset & ~XslFlags.TypeFilter) | XslFlags.Nodeset | (predicate & XslFlags.SideEffects); // "ex:Foo(position())[Bar]"
+                return (nodeset & ~XslFlags.TypeFilter)
+                    | XslFlags.Nodeset
+                    | (predicate & XslFlags.SideEffects); // "ex:Foo(position())[Bar]"
             }
 
             public XslFlags Variable(string prefix, string name)
@@ -1054,9 +1102,12 @@ namespace System.Xml.Xsl.Xslt
                 return XslFlags.None;
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "Supressing warning about not having the RequiresUnreferencedCode attribute since xsl Scripts are " +
-                "not supported in .NET Core")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "Supressing warning about not having the RequiresUnreferencedCode attribute since xsl Scripts are "
+                    + "not supported in .NET Core"
+            )]
             public XslFlags Function(string prefix, string name, IList<XslFlags> args)
             {
                 _typeDonor = null;
@@ -1078,15 +1129,18 @@ namespace System.Xml.Xsl.Xslt
                     {
                         XPathBuilder.FuncId funcId = xpathFunc.id;
                         funcFlags = s_XPathFunctionFlags[(int)funcId];
-                        if (args.Count == 0 && (
-                            funcId == XPathBuilder.FuncId.LocalName ||
-                            funcId == XPathBuilder.FuncId.NamespaceUri ||
-                            funcId == XPathBuilder.FuncId.Name ||
-                            funcId == XPathBuilder.FuncId.String ||
-                            funcId == XPathBuilder.FuncId.Number ||
-                            funcId == XPathBuilder.FuncId.StringLength ||
-                            funcId == XPathBuilder.FuncId.Normalize
-                        ))
+                        if (
+                            args.Count == 0
+                            && (
+                                funcId == XPathBuilder.FuncId.LocalName
+                                || funcId == XPathBuilder.FuncId.NamespaceUri
+                                || funcId == XPathBuilder.FuncId.Name
+                                || funcId == XPathBuilder.FuncId.String
+                                || funcId == XPathBuilder.FuncId.Number
+                                || funcId == XPathBuilder.FuncId.StringLength
+                                || funcId == XPathBuilder.FuncId.Normalize
+                            )
+                        )
                         {
                             funcFlags |= XslFlags.Current;
                         }
@@ -1112,22 +1166,42 @@ namespace System.Xml.Xsl.Xslt
                     {
                         switch (name)
                         {
-                            case "node-set": funcFlags = XslFlags.Nodeset; break;
-                            case "string-compare": funcFlags = XslFlags.Number; break;
-                            case "utc": funcFlags = XslFlags.String; break;
-                            case "format-date": funcFlags = XslFlags.String; break;
-                            case "format-time": funcFlags = XslFlags.String; break;
-                            case "local-name": funcFlags = XslFlags.String; break;
-                            case "namespace-uri": funcFlags = XslFlags.String | XslFlags.Current; break;
-                            case "number": funcFlags = XslFlags.Number; break;
+                            case "node-set":
+                                funcFlags = XslFlags.Nodeset;
+                                break;
+                            case "string-compare":
+                                funcFlags = XslFlags.Number;
+                                break;
+                            case "utc":
+                                funcFlags = XslFlags.String;
+                                break;
+                            case "format-date":
+                                funcFlags = XslFlags.String;
+                                break;
+                            case "format-time":
+                                funcFlags = XslFlags.String;
+                                break;
+                            case "local-name":
+                                funcFlags = XslFlags.String;
+                                break;
+                            case "namespace-uri":
+                                funcFlags = XslFlags.String | XslFlags.Current;
+                                break;
+                            case "number":
+                                funcFlags = XslFlags.Number;
+                                break;
                         }
                     }
                     else if (ns == XmlReservedNs.NsExsltCommon)
                     {
                         switch (name)
                         {
-                            case "node-set": funcFlags = XslFlags.Nodeset; break;
-                            case "object-type": funcFlags = XslFlags.String; break;
+                            case "node-set":
+                                funcFlags = XslFlags.Nodeset;
+                                break;
+                            case "object-type":
+                                funcFlags = XslFlags.String;
+                                break;
                         }
                     }
 
@@ -1137,7 +1211,12 @@ namespace System.Xml.Xsl.Xslt
                         funcFlags = XslFlags.AnyType;
                         if (_compiler.Settings.EnableScript && ns != null)
                         {
-                            XmlExtensionFunction? scrFunc = _compiler.Scripts.ResolveFunction(name, ns, args.Count, default(NullErrorHelper));
+                            XmlExtensionFunction? scrFunc = _compiler.Scripts.ResolveFunction(
+                                name,
+                                ns,
+                                args.Count,
+                                default(NullErrorHelper)
+                            );
                             if (scrFunc != null)
                             {
                                 XmlQueryType xt = scrFunc.XmlReturnType;
@@ -1171,7 +1250,9 @@ namespace System.Xml.Xsl.Xslt
                                 }
                                 else
                                 {
-                                    Debug.Fail($"Unexpected XmlQueryType for script function: {xt}");
+                                    Debug.Fail(
+                                        $"Unexpected XmlQueryType for script function: {xt}"
+                                    );
                                 }
                             }
                         }
@@ -1183,49 +1264,51 @@ namespace System.Xml.Xsl.Xslt
             }
 
             #region XPath Function Flags
-            private static readonly XslFlags[] s_XPathFunctionFlags = {
-            /*Last              */ XslFlags.Number | XslFlags.Last,
-            /*Position          */ XslFlags.Number | XslFlags.Position,
-            /*Count             */ XslFlags.Number,
-            /*LocalName         */ XslFlags.String, // | XslFlags.Current if 0 args
-            /*NamespaceUri      */ XslFlags.String, // | XslFlags.Current if 0 args
-            /*Name              */ XslFlags.String, // | XslFlags.Current if 0 args
-            /*String            */ XslFlags.String, // | XslFlags.Current if 0 args
-            /*Number            */ XslFlags.Number, // | XslFlags.Current if 0 args
-            /*Boolean           */ XslFlags.Boolean,
-            /*True              */ XslFlags.Boolean,
-            /*False             */ XslFlags.Boolean,
-            /*Not               */ XslFlags.Boolean,
-            /*Id                */ XslFlags.Nodeset | XslFlags.Current,
-            /*Concat            */ XslFlags.String,
-            /*StartsWith        */ XslFlags.Boolean,
-            /*Contains          */ XslFlags.Boolean,
-            /*SubstringBefore   */ XslFlags.String,
-            /*SubstringAfter    */ XslFlags.String,
-            /*Substring         */ XslFlags.String,
-            /*StringLength      */ XslFlags.Number, // | XslFlags.Current if 0 args
-            /*Normalize         */ XslFlags.String, // | XslFlags.Current if 0 args
-            /*Translate         */ XslFlags.String,
-            /*Lang              */ XslFlags.Boolean | XslFlags.Current,
-            /*Sum               */ XslFlags.Number,
-            /*Floor             */ XslFlags.Number,
-            /*Ceiling           */ XslFlags.Number,
-            /*Round             */ XslFlags.Number,
-        };
+            private static readonly XslFlags[] s_XPathFunctionFlags =
+            {
+                /*Last              */XslFlags.Number | XslFlags.Last,
+                /*Position          */XslFlags.Number | XslFlags.Position,
+                /*Count             */XslFlags.Number,
+                /*LocalName         */XslFlags.String, // | XslFlags.Current if 0 args
+                /*NamespaceUri      */XslFlags.String, // | XslFlags.Current if 0 args
+                /*Name              */XslFlags.String, // | XslFlags.Current if 0 args
+                /*String            */XslFlags.String, // | XslFlags.Current if 0 args
+                /*Number            */XslFlags.Number, // | XslFlags.Current if 0 args
+                /*Boolean           */XslFlags.Boolean,
+                /*True              */XslFlags.Boolean,
+                /*False             */XslFlags.Boolean,
+                /*Not               */XslFlags.Boolean,
+                /*Id                */XslFlags.Nodeset | XslFlags.Current,
+                /*Concat            */XslFlags.String,
+                /*StartsWith        */XslFlags.Boolean,
+                /*Contains          */XslFlags.Boolean,
+                /*SubstringBefore   */XslFlags.String,
+                /*SubstringAfter    */XslFlags.String,
+                /*Substring         */XslFlags.String,
+                /*StringLength      */XslFlags.Number, // | XslFlags.Current if 0 args
+                /*Normalize         */XslFlags.String, // | XslFlags.Current if 0 args
+                /*Translate         */XslFlags.String,
+                /*Lang              */XslFlags.Boolean | XslFlags.Current,
+                /*Sum               */XslFlags.Number,
+                /*Floor             */XslFlags.Number,
+                /*Ceiling           */XslFlags.Number,
+                /*Round             */XslFlags.Number,
+            };
             #endregion
 
             #region Xslt Function Flags
-            private static readonly XslFlags[] s_xsltFunctionFlags = {
-            /*Current           */ XslFlags.Node,   // xsltCurrentNeeded = true
-            /*Document          */ XslFlags.Nodeset,
-            /*Key               */ XslFlags.Nodeset | XslFlags.Current,
-            /*FormatNumber      */ XslFlags.String,
-            /*UnparsedEntityUri */ XslFlags.String, // | XslFlags.Current if it is implemented
-            /*GenerateId        */ XslFlags.String, // | XslFlags.Current if 0 args
-            /*SystemProperty    */ XslFlags.String | XslFlags.Number,
-            /*ElementAvailable  */ XslFlags.Boolean,
-            /*FunctionAvailable */ XslFlags.Boolean,
-        };
+            private static readonly XslFlags[] s_xsltFunctionFlags =
+            {
+                /*Current           */XslFlags.Node, // xsltCurrentNeeded = true
+                /*Document          */XslFlags.Nodeset,
+                /*Key               */XslFlags.Nodeset | XslFlags.Current,
+                /*FormatNumber      */XslFlags.String,
+                /*UnparsedEntityUri */XslFlags.String, // | XslFlags.Current if it is implemented
+                /*GenerateId        */XslFlags.String, // | XslFlags.Current if 0 args
+                /*SystemProperty    */XslFlags.String | XslFlags.Number,
+                /*ElementAvailable  */XslFlags.Boolean,
+                /*FunctionAvailable */XslFlags.Boolean,
+            };
             #endregion
         }
     }
@@ -1289,42 +1372,44 @@ namespace System.Xml.Xsl.Xslt
         }
 
         // These values should be changed to achieve methods with ~2KB IL
-        private const int FixedNodeCost = 1;        // should probably depend on node type
-        private const int IteratorNodeCost = 2;     // XPath iterators are more expensive
-        private const int CallTemplateCost = 1;     // best kept at a minimum, 1
+        private const int FixedNodeCost = 1; // should probably depend on node type
+        private const int IteratorNodeCost = 2; // XPath iterators are more expensive
+        private const int CallTemplateCost = 1; // best kept at a minimum, 1
         private const int RewriteThreshold = 100;
 
         // These are all the node types for which the .Select member has an XPath expression
         private const int NodesWithSelect =
-            (1 << (int)XslNodeType.Param) |
-            (1 << (int)XslNodeType.Variable) |
-            (1 << (int)XslNodeType.WithParam) |
-            (1 << (int)XslNodeType.ApplyTemplates) |
-            (1 << (int)XslNodeType.CopyOf) |
-            (1 << (int)XslNodeType.ForEach) |
-            (1 << (int)XslNodeType.If) |
+            (1 << (int)XslNodeType.Param)
+            | (1 << (int)XslNodeType.Variable)
+            | (1 << (int)XslNodeType.WithParam)
+            | (1 << (int)XslNodeType.ApplyTemplates)
+            | (1 << (int)XslNodeType.CopyOf)
+            | (1 << (int)XslNodeType.ForEach)
+            | (1 << (int)XslNodeType.If)
+            |
             //(1 << (int)XslNodeType.Number) |          // has XPath, but not in .Select member
-            (1 << (int)XslNodeType.Sort) |
-            (1 << (int)XslNodeType.ValueOf) |
-            (1 << (int)XslNodeType.ValueOfDoe);
+            (1 << (int)XslNodeType.Sort)
+            | (1 << (int)XslNodeType.ValueOf)
+            | (1 << (int)XslNodeType.ValueOfDoe);
 
         // These are all the node types which can have call-template as a child and are therefor suitable for refactoring
         private const int ParentsOfCallTemplate =
-            (1 << (int)XslNodeType.Attribute) |
-            (1 << (int)XslNodeType.Comment) |
-            (1 << (int)XslNodeType.Copy) |
-            (1 << (int)XslNodeType.Element) |
-            (1 << (int)XslNodeType.ForEach) |
-            (1 << (int)XslNodeType.If) |                // also used for xsl:when
-            (1 << (int)XslNodeType.Message) |
-            (1 << (int)XslNodeType.Otherwise) |
-            (1 << (int)XslNodeType.Param) |
-            (1 << (int)XslNodeType.PI) |
-            (1 << (int)XslNodeType.Template) |
-            (1 << (int)XslNodeType.Variable) |
-            (1 << (int)XslNodeType.WithParam) |
-            (1 << (int)XslNodeType.LiteralAttribute) |
-            (1 << (int)XslNodeType.LiteralElement);
+            (1 << (int)XslNodeType.Attribute)
+            | (1 << (int)XslNodeType.Comment)
+            | (1 << (int)XslNodeType.Copy)
+            | (1 << (int)XslNodeType.Element)
+            | (1 << (int)XslNodeType.ForEach)
+            | (1 << (int)XslNodeType.If)
+            | // also used for xsl:when
+            (1 << (int)XslNodeType.Message)
+            | (1 << (int)XslNodeType.Otherwise)
+            | (1 << (int)XslNodeType.Param)
+            | (1 << (int)XslNodeType.PI)
+            | (1 << (int)XslNodeType.Template)
+            | (1 << (int)XslNodeType.Variable)
+            | (1 << (int)XslNodeType.WithParam)
+            | (1 << (int)XslNodeType.LiteralAttribute)
+            | (1 << (int)XslNodeType.LiteralElement);
 
         // Tests whether the specified XslNodeType bit is set in the provided flags
         private static bool NodeTypeTest(XslNodeType nodetype, int flags)
@@ -1355,7 +1440,7 @@ namespace System.Xml.Xsl.Xslt
             {
                 var child = content[t];
 
-                var costForChild = CheckNodeCost(child);        // recurse
+                var costForChild = CheckNodeCost(child); // recurse
 
                 nodeCost += costForChild;
                 if (canRewrite && nodeCost > RewriteThreshold)
@@ -1411,7 +1496,11 @@ namespace System.Xml.Xsl.Xslt
             var node = content[split];
 
             // Generate unique name for the new template
-            QilName templatename = AstFactory.QName("generated", _compiler!.CreatePhantomNamespace(), "compiler");
+            QilName templatename = AstFactory.QName(
+                "generated",
+                _compiler!.CreatePhantomNamespace(),
+                "compiler"
+            );
 
             // Create fake ContextInfo for the new nodes, based on the context for the old node
             var fakeCtxInfo = new XsltInput.ContextInfo(node.SourceLine);
@@ -1421,7 +1510,13 @@ namespace System.Xml.Xsl.Xslt
             XsltLoader.SetInfo(calltemplate, null, fakeCtxInfo);
 
             // Create a new template node
-            Template newtemplate = AstFactory.Template(templatename, null, XsltLoader.nullMode, double.NaN, node.XslVersion);
+            Template newtemplate = AstFactory.Template(
+                templatename,
+                null,
+                XsltLoader.nullMode,
+                double.NaN,
+                node.XslVersion
+            );
             XsltLoader.SetInfo(newtemplate, null, fakeCtxInfo);
             _newTemplates!.Push(newtemplate);
 
@@ -1436,7 +1531,11 @@ namespace System.Xml.Xsl.Xslt
                     // The scope record is either a namespace declaration or an exclusion namespace
                     Debug.Assert(scoperecord.IsNamespace || scoperecord.ncName == null);
                     Debug.Assert(!_compiler.IsPhantomNamespace(scoperecord.nsUri!));
-                    newtemplate.Namespaces = new NsDecl(newtemplate.Namespaces, scoperecord.ncName, scoperecord.nsUri);
+                    newtemplate.Namespaces = new NsDecl(
+                        newtemplate.Namespaces,
+                        scoperecord.ncName,
+                        scoperecord.nsUri
+                    );
                 }
                 else
                 {
@@ -1450,16 +1549,30 @@ namespace System.Xml.Xsl.Xslt
                     }
 
                     // Need to create a new QilName (can't reuse the one from the variable, eventhough it's exactly the same)
-                    var paramname = AstFactory.QName(variable.Name.LocalName, variable.Name.NamespaceUri, variable.Name.Prefix);
+                    var paramname = AstFactory.QName(
+                        variable.Name.LocalName,
+                        variable.Name.NamespaceUri,
+                        variable.Name.Prefix
+                    );
 
                     // For each variable in scope, add xsl:with-param to the xsl:call-template
-                    var withparam = AstFactory.VarPar(XslNodeType.WithParam, paramname, $"${paramname.QualifiedName}", XslVersion.Current);
+                    var withparam = AstFactory.VarPar(
+                        XslNodeType.WithParam,
+                        paramname,
+                        $"${paramname.QualifiedName}",
+                        XslVersion.Current
+                    );
                     XsltLoader.SetInfo(withparam, null, fakeCtxInfo);
                     withparam.Namespaces = variable.Namespaces;
                     calltemplate.AddContent(withparam);
 
                     // For each variable in scope, add xsl:param to the xsl:template
-                    var param = AstFactory.VarPar(XslNodeType.Param, paramname, null, XslVersion.Current);
+                    var param = AstFactory.VarPar(
+                        XslNodeType.Param,
+                        paramname,
+                        null,
+                        XslVersion.Current
+                    );
                     XsltLoader.SetInfo(param, null, fakeCtxInfo);
                     param.Namespaces = variable.Namespaces;
                     newtemplate.AddContent(param);

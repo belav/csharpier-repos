@@ -13,12 +13,10 @@ public enum RoutePatternParameterKind
     /// without optional or catch all behavior.
     /// </summary>
     Standard,
-
     /// <summary>
     /// The <see cref="RoutePatternParameterKind"/> of an optional parameter.
     /// </summary>
     Optional,
-
     /// <summary>
     /// The <see cref="RoutePatternParameterKind"/> of a catch-all parameter.
     /// </summary>

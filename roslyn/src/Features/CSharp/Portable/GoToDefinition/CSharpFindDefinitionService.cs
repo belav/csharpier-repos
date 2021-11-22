@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFindDefinitionService()
-        {
-        }
+        public CSharpFindDefinitionService() { }
     }
 }

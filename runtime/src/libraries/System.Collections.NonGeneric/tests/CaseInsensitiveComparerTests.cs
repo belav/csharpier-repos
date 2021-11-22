@@ -100,7 +100,10 @@ namespace System.Collections.Tests
         [Fact]
         public void Ctor_CultureInfo_NullCulture_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("culture", () => new CaseInsensitiveComparer(null)); // Culture is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "culture",
+                () => new CaseInsensitiveComparer(null)
+            ); // Culture is null
         }
 
         [Theory]
@@ -137,7 +140,8 @@ namespace System.Collections.Tests
                 using (new ThreadCultureChange(culture, culture))
                 {
                     // All cultures should sort the same way, irrespective of the thread's culture
-                    CaseInsensitiveComparer defaultInvComparer = CaseInsensitiveComparer.DefaultInvariant;
+                    CaseInsensitiveComparer defaultInvComparer =
+                        CaseInsensitiveComparer.DefaultInvariant;
                     Assert.Equal(expected, Math.Sign(defaultInvComparer.Compare(a, b)));
                 }
             }

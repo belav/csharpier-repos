@@ -8,7 +8,10 @@ namespace System.Formats.Asn1
         /// <summary>
         ///   Represents the End-of-Contents meta-tag.
         /// </summary>
-        internal static readonly Asn1Tag EndOfContents = new Asn1Tag(0, (int)UniversalTagNumber.EndOfContents);
+        internal static readonly Asn1Tag EndOfContents = new Asn1Tag(
+            0,
+            (int)UniversalTagNumber.EndOfContents
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a Boolean value.
@@ -23,24 +26,34 @@ namespace System.Formats.Asn1
         /// <summary>
         ///   Represents the universal class tag for a Bit String value under a primitive encoding.
         /// </summary>
-        public static readonly Asn1Tag PrimitiveBitString = new Asn1Tag(0, (int)UniversalTagNumber.BitString);
+        public static readonly Asn1Tag PrimitiveBitString = new Asn1Tag(
+            0,
+            (int)UniversalTagNumber.BitString
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a Bit String value under a constructed encoding.
         /// </summary>
-        public static readonly Asn1Tag ConstructedBitString =
-            new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.BitString);
+        public static readonly Asn1Tag ConstructedBitString = new Asn1Tag(
+            ConstructedMask,
+            (int)UniversalTagNumber.BitString
+        );
 
         /// <summary>
         ///   Represents the universal class tag for an Octet String value under a primitive encoding.
         /// </summary>
-        public static readonly Asn1Tag PrimitiveOctetString = new Asn1Tag(0, (int)UniversalTagNumber.OctetString);
+        public static readonly Asn1Tag PrimitiveOctetString = new Asn1Tag(
+            0,
+            (int)UniversalTagNumber.OctetString
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a Octet String value under a constructed encoding.
         /// </summary>
-        public static readonly Asn1Tag ConstructedOctetString =
-            new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.OctetString);
+        public static readonly Asn1Tag ConstructedOctetString = new Asn1Tag(
+            ConstructedMask,
+            (int)UniversalTagNumber.OctetString
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a Null value.
@@ -50,22 +63,34 @@ namespace System.Formats.Asn1
         /// <summary>
         ///   Represents the universal class tag for an Object Identifier value.
         /// </summary>
-        public static readonly Asn1Tag ObjectIdentifier = new Asn1Tag(0, (int)UniversalTagNumber.ObjectIdentifier);
+        public static readonly Asn1Tag ObjectIdentifier = new Asn1Tag(
+            0,
+            (int)UniversalTagNumber.ObjectIdentifier
+        );
 
         /// <summary>
         ///   Represents the universal class tag for an Enumerated value.
         /// </summary>
-        public static readonly Asn1Tag Enumerated = new Asn1Tag(0, (int)UniversalTagNumber.Enumerated);
+        public static readonly Asn1Tag Enumerated = new Asn1Tag(
+            0,
+            (int)UniversalTagNumber.Enumerated
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a Sequence value (always a constructed encoding).
         /// </summary>
-        public static readonly Asn1Tag Sequence = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.Sequence);
+        public static readonly Asn1Tag Sequence = new Asn1Tag(
+            ConstructedMask,
+            (int)UniversalTagNumber.Sequence
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a SetOf value (always a constructed encoding).
         /// </summary>
-        public static readonly Asn1Tag SetOf = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.SetOf);
+        public static readonly Asn1Tag SetOf = new Asn1Tag(
+            ConstructedMask,
+            (int)UniversalTagNumber.SetOf
+        );
 
         /// <summary>
         ///   Represents the universal class tag for a UtcTime value.
@@ -75,6 +100,9 @@ namespace System.Formats.Asn1
         /// <summary>
         ///   Represents the universal class tag for a GeneralizedTime value.
         /// </summary>
-        public static readonly Asn1Tag GeneralizedTime = new Asn1Tag(0, (int)UniversalTagNumber.GeneralizedTime);
+        public static readonly Asn1Tag GeneralizedTime = new Asn1Tag(
+            0,
+            (int)UniversalTagNumber.GeneralizedTime
+        );
     }
 }

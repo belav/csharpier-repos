@@ -14,7 +14,8 @@ internal class DefaultClientRequestParametersProvider : IClientRequestParameters
 {
     public DefaultClientRequestParametersProvider(
         IAbsoluteUrlFactory urlFactory,
-        IOptions<ApiAuthorizationOptions> options)
+        IOptions<ApiAuthorizationOptions> options
+    )
     {
         UrlFactory = urlFactory;
         Options = options;
@@ -31,7 +32,9 @@ internal class DefaultClientRequestParametersProvider : IClientRequestParameters
         var responseType = "";
         if (!client.Properties.TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type))
         {
-            throw new InvalidOperationException($"Can't determine the type for the client '{clientId}'");
+            throw new InvalidOperationException(
+                $"Can't determine the type for the client '{clientId}'"
+            );
         }
 
         switch (type)
@@ -42,7 +45,9 @@ internal class DefaultClientRequestParametersProvider : IClientRequestParameters
                 responseType = "code";
                 break;
             default:
-                throw new InvalidOperationException($"Invalid application type '{type}' for '{clientId}'.");
+                throw new InvalidOperationException(
+                    $"Invalid application type '{type}' for '{clientId}'."
+                );
         }
 
         return new Dictionary<string, string>
@@ -50,7 +55,10 @@ internal class DefaultClientRequestParametersProvider : IClientRequestParameters
             ["authority"] = authority,
             ["client_id"] = client.ClientId,
             ["redirect_uri"] = UrlFactory.GetAbsoluteUrl(context, client.RedirectUris.First()),
-            ["post_logout_redirect_uri"] = UrlFactory.GetAbsoluteUrl(context, client.PostLogoutRedirectUris.First()),
+            ["post_logout_redirect_uri"] = UrlFactory.GetAbsoluteUrl(
+                context,
+                client.PostLogoutRedirectUris.First()
+            ),
             ["response_type"] = responseType,
             ["scope"] = string.Join(" ", client.AllowedScopes)
         };

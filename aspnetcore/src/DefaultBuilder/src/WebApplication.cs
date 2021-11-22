@@ -17,7 +17,11 @@ namespace Microsoft.AspNetCore.Builder;
 /// <summary>
 /// The web application used to configure the HTTP pipeline, and routes.
 /// </summary>
-public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteBuilder, IAsyncDisposable
+public sealed class WebApplication
+    : IHost,
+      IApplicationBuilder,
+      IEndpointRouteBuilder,
+      IAsyncDisposable
 {
     internal const string GlobalEndpointRouteBuilderKey = "__GlobalEndpointRouteBuilder";
 
@@ -28,7 +32,9 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     {
         _host = host;
         ApplicationBuilder = new ApplicationBuilder(host.Services);
-        Logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger(Environment.ApplicationName);
+        Logger = host.Services
+            .GetRequiredService<ILoggerFactory>()
+            .CreateLogger(Environment.ApplicationName);
 
         Properties[GlobalEndpointRouteBuilderKey] = this;
     }
@@ -46,12 +52,14 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     /// <summary>
     /// The application's configured <see cref="IWebHostEnvironment"/>.
     /// </summary>
-    public IWebHostEnvironment Environment => _host.Services.GetRequiredService<IWebHostEnvironment>();
+    public IWebHostEnvironment Environment =>
+        _host.Services.GetRequiredService<IWebHostEnvironment>();
 
     /// <summary>
     /// Allows consumers to be notified of application lifetime events.
     /// </summary>
-    public IHostApplicationLifetime Lifetime => _host.Services.GetRequiredService<IHostApplicationLifetime>();
+    public IHostApplicationLifetime Lifetime =>
+        _host.Services.GetRequiredService<IHostApplicationLifetime>();
 
     /// <summary>
     /// The default logger for the application.
@@ -61,8 +69,11 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     /// <summary>
     /// The list of URLs that the HTTP server is bound to.
     /// </summary>
-    public ICollection<string> Urls => ServerFeatures.Get<IServerAddressesFeature>()?.Addresses ??
-        throw new InvalidOperationException($"{nameof(IServerAddressesFeature)} could not be found.");
+    public ICollection<string> Urls =>
+        ServerFeatures.Get<IServerAddressesFeature>()?.Addresses
+        ?? throw new InvalidOperationException(
+            $"{nameof(IServerAddressesFeature)} could not be found."
+        );
 
     IServiceProvider IApplicationBuilder.ApplicationServices
     {
@@ -70,7 +81,8 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         set => ApplicationBuilder.ApplicationServices = value;
     }
 
-    internal IFeatureCollection ServerFeatures => _host.Services.GetRequiredService<IServer>().Features;
+    internal IFeatureCollection ServerFeatures =>
+        _host.Services.GetRequiredService<IServer>().Features;
     IFeatureCollection IApplicationBuilder.ServerFeatures => ServerFeatures;
 
     internal IDictionary<string, object?> Properties => ApplicationBuilder.Properties;
@@ -95,16 +107,14 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with preconfigured defaults.
     /// </summary>
     /// <returns>The <see cref="WebApplicationBuilder"/>.</returns>
-    public static WebApplicationBuilder CreateBuilder() =>
-        new(new());
+    public static WebApplicationBuilder CreateBuilder() => new(new());
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with preconfigured defaults.
     /// </summary>
     /// <param name="args">Command line arguments</param>
     /// <returns>The <see cref="WebApplicationBuilder"/>.</returns>
-    public static WebApplicationBuilder CreateBuilder(string[] args) =>
-        new(new() { Args = args });
+    public static WebApplicationBuilder CreateBuilder(string[] args) => new(new() { Args = args });
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with preconfigured defaults.
@@ -192,7 +202,8 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         return this;
     }
 
-    IApplicationBuilder IEndpointRouteBuilder.CreateApplicationBuilder() => ((IApplicationBuilder)this).New();
+    IApplicationBuilder IEndpointRouteBuilder.CreateApplicationBuilder() =>
+        ((IApplicationBuilder)this).New();
 
     private void Listen(string? url)
     {
@@ -204,11 +215,15 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         var addresses = ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
         if (addresses is null)
         {
-            throw new InvalidOperationException($"Changing the URL is not supported because no valid {nameof(IServerAddressesFeature)} was found.");
+            throw new InvalidOperationException(
+                $"Changing the URL is not supported because no valid {nameof(IServerAddressesFeature)} was found."
+            );
         }
         if (addresses.IsReadOnly)
         {
-            throw new InvalidOperationException($"Changing the URL is not supported because {nameof(IServerAddressesFeature.Addresses)} {nameof(ICollection<string>.IsReadOnly)}.");
+            throw new InvalidOperationException(
+                $"Changing the URL is not supported because {nameof(IServerAddressesFeature.Addresses)} {nameof(ICollection<string>.IsReadOnly)}."
+            );
         }
 
         addresses.Clear();

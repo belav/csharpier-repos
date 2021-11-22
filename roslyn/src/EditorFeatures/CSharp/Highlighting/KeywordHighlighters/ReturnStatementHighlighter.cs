@@ -23,16 +23,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ReturnStatementHighlighter()
-        {
-        }
+        public ReturnStatementHighlighter() { }
 
         protected override void AddHighlights(
-            ReturnStatementSyntax returnStatement, List<TextSpan> spans, CancellationToken cancellationToken)
+            ReturnStatementSyntax returnStatement,
+            List<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
             var parent = returnStatement
-                             .GetAncestorsOrThis<SyntaxNode>()
-                             .FirstOrDefault(n => n.IsReturnableConstruct());
+                .GetAncestorsOrThis<SyntaxNode>()
+                .FirstOrDefault(n => n.IsReturnableConstruct());
 
             if (parent == null)
             {
@@ -63,7 +64,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
                         if (!child.AsNode().IsReturnableConstruct())
                             HighlightRelatedKeywords(child.AsNode(), spans);
                     }
-
                     break;
             }
         }

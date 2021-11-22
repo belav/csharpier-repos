@@ -66,7 +66,8 @@ internal class ResponseCacheFilterExecutor
             if (_cacheProfile.Duration == null && _cacheDuration == null)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatResponseCache_SpecifyDuration(nameof(NoStore), nameof(Duration)));
+                    Resources.FormatResponseCache_SpecifyDuration(nameof(NoStore), nameof(Duration))
+                );
             }
         }
 
@@ -84,11 +85,15 @@ internal class ResponseCacheFilterExecutor
 
         if (VaryByQueryKeys != null)
         {
-            var responseCachingFeature = context.HttpContext.Features.Get<IResponseCachingFeature>();
+            var responseCachingFeature =
+                context.HttpContext.Features.Get<IResponseCachingFeature>();
             if (responseCachingFeature == null)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatVaryByQueryKeys_Requires_ResponseCachingMiddleware(nameof(VaryByQueryKeys)));
+                    Resources.FormatVaryByQueryKeys_Requires_ResponseCachingMiddleware(
+                        nameof(VaryByQueryKeys)
+                    )
+                );
             }
             responseCachingFeature.VaryByQueryKeys = VaryByQueryKeys;
         }

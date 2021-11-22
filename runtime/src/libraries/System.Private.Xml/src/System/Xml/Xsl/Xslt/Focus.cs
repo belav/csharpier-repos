@@ -16,15 +16,12 @@ namespace System.Xml.Xsl.Xslt
         // No context set
         // Used to prevent bugs
         None,
-
         // Document node of the document containing the initial context node
         // Used while compiling global variables and params
         InitialDocumentNode,
-
         // Initial context node for the transformation
         // Used while compiling initial apply-templates
         InitialContextNode,
-
         // Context node is specified by iterator
         // Used while compiling keys
         Iterator,
@@ -66,7 +63,10 @@ namespace System.Xml.Xsl.Xslt
         [Conditional("DEBUG")]
         private void CheckFocus()
         {
-            Debug.Assert(_focusType != SingletonFocusType.None, "Focus is not set, call SetFocus first");
+            Debug.Assert(
+                _focusType != SingletonFocusType.None,
+                "Focus is not set, call SetFocus first"
+            );
         }
 
         public QilNode GetCurrent()
@@ -74,10 +74,15 @@ namespace System.Xml.Xsl.Xslt
             CheckFocus();
             switch (_focusType)
             {
-                case SingletonFocusType.InitialDocumentNode: return _f.Root(_f.XmlContext());
-                case SingletonFocusType.InitialContextNode: return _f.XmlContext();
+                case SingletonFocusType.InitialDocumentNode:
+                    return _f.Root(_f.XmlContext());
+                case SingletonFocusType.InitialContextNode:
+                    return _f.XmlContext();
                 default:
-                    Debug.Assert(_focusType == SingletonFocusType.Iterator && _current != null, "Unexpected singleton focus type");
+                    Debug.Assert(
+                        _focusType == SingletonFocusType.Iterator && _current != null,
+                        "Unexpected singleton focus type"
+                    );
                     return _current;
             }
         }
@@ -98,7 +103,9 @@ namespace System.Xml.Xsl.Xslt
     internal struct FunctionFocus : IFocus
     {
         private bool _isSet;
-        private QilParameter? _current, _position, _last;
+        private QilParameter? _current,
+            _position,
+            _last;
 
         public void StartFocus(IList<QilNode> args, XslFlags flags)
         {
@@ -107,17 +114,26 @@ namespace System.Xml.Xsl.Xslt
             if ((flags & XslFlags.Current) != 0)
             {
                 _current = (QilParameter)args[argNum++];
-                Debug.Assert(_current.Name!.NamespaceUri == XmlReservedNs.NsXslDebug && _current.Name.LocalName == "current");
+                Debug.Assert(
+                    _current.Name!.NamespaceUri == XmlReservedNs.NsXslDebug
+                        && _current.Name.LocalName == "current"
+                );
             }
             if ((flags & XslFlags.Position) != 0)
             {
                 _position = (QilParameter)args[argNum++];
-                Debug.Assert(_position.Name!.NamespaceUri == XmlReservedNs.NsXslDebug && _position.Name.LocalName == "position");
+                Debug.Assert(
+                    _position.Name!.NamespaceUri == XmlReservedNs.NsXslDebug
+                        && _position.Name.LocalName == "position"
+                );
             }
             if ((flags & XslFlags.Last) != 0)
             {
                 _last = (QilParameter)args[argNum++];
-                Debug.Assert(_last.Name!.NamespaceUri == XmlReservedNs.NsXslDebug && _last.Name.LocalName == "last");
+                Debug.Assert(
+                    _last.Name!.NamespaceUri == XmlReservedNs.NsXslDebug
+                        && _last.Name.LocalName == "last"
+                );
             }
             _isSet = true;
         }
@@ -154,7 +170,9 @@ namespace System.Xml.Xsl.Xslt
     internal struct LoopFocus : IFocus
     {
         private readonly XPathQilFactory _f;
-        private QilIterator? _current, _cached, _last;
+        private QilIterator? _current,
+            _cached,
+            _last;
 
         public LoopFocus(XPathQilFactory f)
         {

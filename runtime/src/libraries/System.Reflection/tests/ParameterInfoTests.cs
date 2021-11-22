@@ -14,13 +14,55 @@ namespace System.Reflection.Tests
     {
         public static IEnumerable<object[]> Parameters_TestData()
         {
-            yield return new object[] { typeof(ParameterInfoMetadata), "Method1", new string[] { "str", "iValue", "lValue" }, new Type[] { typeof(string), typeof(int), typeof(long) } };
-            yield return new object[] { typeof(ParameterInfoMetadata), "Method2", new string[0], new Type[0] };
-            yield return new object[] { typeof(ParameterInfoMetadata), "MethodWithArray", new string[] { "strArray" }, new Type[] { typeof(string[]) } };
-            yield return new object[] { typeof(ParameterInfoMetadata), "VirtualMethod", new string[] { "data" }, new Type[] { typeof(long) } };
-            yield return new object[] { typeof(ParameterInfoMetadata), "MethodWithRefParameter", new string[] { "str" }, new Type[] { typeof(string).MakeByRefType() } };
-            yield return new object[] { typeof(ParameterInfoMetadata), "MethodWithOutParameter", new string[] { "i", "str" }, new Type[] { typeof(int), typeof(string).MakeByRefType() } };
-            yield return new object[] { typeof(GenericClass<string>), "GenericMethod", new string[] { "t" }, new Type[] { typeof(string) } };
+            yield return new object[]
+            {
+                typeof(ParameterInfoMetadata),
+                "Method1",
+                new string[] { "str", "iValue", "lValue" },
+                new Type[] { typeof(string), typeof(int), typeof(long) }
+            };
+            yield return new object[]
+            {
+                typeof(ParameterInfoMetadata),
+                "Method2",
+                new string[0],
+                new Type[0]
+            };
+            yield return new object[]
+            {
+                typeof(ParameterInfoMetadata),
+                "MethodWithArray",
+                new string[] { "strArray" },
+                new Type[] { typeof(string[]) }
+            };
+            yield return new object[]
+            {
+                typeof(ParameterInfoMetadata),
+                "VirtualMethod",
+                new string[] { "data" },
+                new Type[] { typeof(long) }
+            };
+            yield return new object[]
+            {
+                typeof(ParameterInfoMetadata),
+                "MethodWithRefParameter",
+                new string[] { "str" },
+                new Type[] { typeof(string).MakeByRefType() }
+            };
+            yield return new object[]
+            {
+                typeof(ParameterInfoMetadata),
+                "MethodWithOutParameter",
+                new string[] { "i", "str" },
+                new Type[] { typeof(int), typeof(string).MakeByRefType() }
+            };
+            yield return new object[]
+            {
+                typeof(GenericClass<string>),
+                "GenericMethod",
+                new string[] { "t" },
+                new Type[] { typeof(string) }
+            };
         }
 
         [Theory]
@@ -73,7 +115,12 @@ namespace System.Reflection.Tests
 
         [Theory]
         [InlineData(typeof(ParameterInfoMetadata), "MethodWithDefaultDateTime", 0, true)]
-        public void HasDefaultValue_broken_on_NETFX(Type type, string name, int index, bool expected)
+        public void HasDefaultValue_broken_on_NETFX(
+            Type type,
+            string name,
+            int index,
+            bool expected
+        )
         {
             ParameterInfo parameterInfo = GetParameterInfo(type, name, index);
             Assert.Equal(expected, parameterInfo.HasDefaultValue);
@@ -82,7 +129,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void HasDefaultValue_ReturnParam()
         {
-            ParameterInfo parameterInfo = GetMethod(typeof(ParameterInfoMetadata), "Method1").ReturnParameter;
+            ParameterInfo parameterInfo =
+                GetMethod(typeof(ParameterInfoMetadata), "Method1").ReturnParameter;
             Assert.True(parameterInfo.HasDefaultValue);
         }
 
@@ -151,7 +199,12 @@ namespace System.Reflection.Tests
         [InlineData(typeof(ParameterInfoMetadata), "MethodWithDefault4", 0, '\0')]
         [InlineData(typeof(ParameterInfoMetadata), "MethodWithDefaultNullableDateTime", 0, null)]
         [InlineData(typeof(ParameterInfoMetadata), "MethodWithEnum", 0, AttributeTargets.All)]
-        [InlineData(typeof(ParameterInfoMetadata), "MethodWithNullableEnum", 0, (int)AttributeTargets.All)]
+        [InlineData(
+            typeof(ParameterInfoMetadata),
+            "MethodWithNullableEnum",
+            0,
+            (int)AttributeTargets.All
+        )]
         public void DefaultValue(Type type, string name, int index, object expected)
         {
             ParameterInfo parameterInfo = GetParameterInfo(type, name, index);
@@ -169,14 +222,22 @@ namespace System.Reflection.Tests
         [Fact]
         public void DefaultValue_NoDefaultValue()
         {
-            ParameterInfo parameterInfo = GetParameterInfo(typeof(ParameterInfoMetadata), "MethodWithOptionalAndNoDefault", 0);
+            ParameterInfo parameterInfo = GetParameterInfo(
+                typeof(ParameterInfoMetadata),
+                "MethodWithOptionalAndNoDefault",
+                0
+            );
             Assert.Equal(Missing.Value, parameterInfo.DefaultValue);
         }
 
         [Fact]
         public void DefaultValue_ForByRefLikeArg_ReturnsNull()
         {
-            ParameterInfo parameterInfo = GetParameterInfo(typeof(ParameterInfoMetadata), nameof(ParameterInfoMetadata.MethodWithByRefLikeArgWithDefault), 0);
+            ParameterInfo parameterInfo = GetParameterInfo(
+                typeof(ParameterInfoMetadata),
+                nameof(ParameterInfoMetadata.MethodWithByRefLikeArgWithDefault),
+                0
+            );
             Assert.True(parameterInfo.HasDefaultValue);
             Assert.Null(parameterInfo.DefaultValue);
             Assert.Null(parameterInfo.RawDefaultValue);
@@ -201,8 +262,16 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(ParameterInfoMetadata), "MethodWithOptionalDefaultOutInMarshalParam", 0,
-             ParameterAttributes.Optional | ParameterAttributes.HasDefault | ParameterAttributes.HasFieldMarshal | ParameterAttributes.Out | ParameterAttributes.In)]
+        [InlineData(
+            typeof(ParameterInfoMetadata),
+            "MethodWithOptionalDefaultOutInMarshalParam",
+            0,
+            ParameterAttributes.Optional
+                | ParameterAttributes.HasDefault
+                | ParameterAttributes.HasFieldMarshal
+                | ParameterAttributes.Out
+                | ParameterAttributes.In
+        )]
         public void Attributes(Type type, string name, int index, ParameterAttributes expected)
         {
             ParameterInfo parameterInfo = GetParameterInfo(type, name, index);
@@ -214,8 +283,14 @@ namespace System.Reflection.Tests
         [MemberData(nameof(s_CustomAttributesTestData))]
         public void CustomAttributesTest(Type attrType)
         {
-            ParameterInfo parameterInfo = GetParameterInfo(typeof(ParameterInfoMetadata), "MethodWithOptionalDefaultOutInMarshalParam", 0);
-            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(a => a.AttributeType.Equals(attrType));
+            ParameterInfo parameterInfo = GetParameterInfo(
+                typeof(ParameterInfoMetadata),
+                "MethodWithOptionalDefaultOutInMarshalParam",
+                0
+            );
+            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(
+                a => a.AttributeType.Equals(attrType)
+            );
             Assert.NotNull(attribute);
 
             Assert.NotNull(attribute);
@@ -223,8 +298,12 @@ namespace System.Reflection.Tests
             ICustomAttributeProvider prov = parameterInfo as ICustomAttributeProvider;
             Assert.NotNull(prov.GetCustomAttributes(attrType, false).SingleOrDefault());
             Assert.NotNull(prov.GetCustomAttributes(attrType, true).SingleOrDefault());
-            Assert.NotNull(prov.GetCustomAttributes(false).SingleOrDefault(a => a.GetType().Equals(attrType)));
-            Assert.NotNull(prov.GetCustomAttributes(true).SingleOrDefault(a => a.GetType().Equals(attrType)));
+            Assert.NotNull(
+                prov.GetCustomAttributes(false).SingleOrDefault(a => a.GetType().Equals(attrType))
+            );
+            Assert.NotNull(
+                prov.GetCustomAttributes(true).SingleOrDefault(a => a.GetType().Equals(attrType))
+            );
             Assert.True(prov.IsDefined(attrType, false));
             Assert.True(prov.IsDefined(attrType, true));
         }
@@ -233,22 +312,41 @@ namespace System.Reflection.Tests
         [InlineData(0, true, 30)]
         [InlineData(1, false, -1)]
         [InlineData(2, true, 50)]
-        public void CustomAttributesInheritanceTest(int paramIndex, bool exists, int expectedMyAttributeValue)
+        public void CustomAttributesInheritanceTest(
+            int paramIndex,
+            bool exists,
+            int expectedMyAttributeValue
+        )
         {
-            ParameterInfo parameterInfo = GetParameterInfo(typeof(DerivedParameterInfoMetadata), "VirtualMethodWithCustomAttributes", paramIndex);
-            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(a => a.AttributeType.Equals(typeof(MyAttribute)));
+            ParameterInfo parameterInfo = GetParameterInfo(
+                typeof(DerivedParameterInfoMetadata),
+                "VirtualMethodWithCustomAttributes",
+                paramIndex
+            );
+            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(
+                a => a.AttributeType.Equals(typeof(MyAttribute))
+            );
             Assert.Equal(exists, attribute != null);
 
             ICustomAttributeProvider prov = parameterInfo as ICustomAttributeProvider;
-            MyAttribute myAttribute = prov.GetCustomAttributes(typeof(MyAttribute), true).SingleOrDefault() as MyAttribute;
+            MyAttribute myAttribute =
+                prov.GetCustomAttributes(typeof(MyAttribute), true).SingleOrDefault()
+                as MyAttribute;
             Assert.Equal(exists, myAttribute != null);
-            Assert.Equal(expectedMyAttributeValue, exists ? myAttribute.Value : expectedMyAttributeValue);
+            Assert.Equal(
+                expectedMyAttributeValue,
+                exists ? myAttribute.Value : expectedMyAttributeValue
+            );
         }
 
         [Fact]
         public void VerifyGetCustomAttributesData()
         {
-            ParameterInfo p = GetParameterInfo(typeof(ParameterInfoMetadata), "MethodWithCustomAttribute", 0);
+            ParameterInfo p = GetParameterInfo(
+                typeof(ParameterInfoMetadata),
+                "MethodWithCustomAttribute",
+                0
+            );
             foreach (CustomAttributeData cad in p.GetCustomAttributesData())
             {
                 if (cad.AttributeType == typeof(MyAttribute))
@@ -303,7 +401,11 @@ namespace System.Reflection.Tests
 
         [Theory]
         [MemberData(nameof(VerifyParameterInfoGetRealObjectWorks_TestData))]
-        public void VerifyParameterInfoGetRealObjectWorks(MemberInfo pretendMember, int pretendPosition, string expectedParameterName)
+        public void VerifyParameterInfoGetRealObjectWorks(
+            MemberInfo pretendMember,
+            int pretendPosition,
+            string expectedParameterName
+        )
         {
             // Regression test for https://github.com/dotnet/runtime/issues/22081
             //
@@ -314,7 +416,10 @@ namespace System.Reflection.Tests
             // test ensures that support doesn't get vaporized.
 
             // Just pretend that we're BinaryFormatter and are deserializing a Parameter...
-            IObjectReference podParameter = new PodPersonParameterInfo(pretendMember, pretendPosition);
+            IObjectReference podParameter = new PodPersonParameterInfo(
+                pretendMember,
+                pretendPosition
+            );
             StreamingContext sc = new StreamingContext(StreamingContextStates.Clone);
             ParameterInfo result = (ParameterInfo)(podParameter.GetRealObject(sc));
 
@@ -350,18 +455,28 @@ namespace System.Reflection.Tests
 
         private static MethodInfo GetMethod(Type type, string name)
         {
-            return type.GetTypeInfo().DeclaredMethods.FirstOrDefault(methodInfo => methodInfo.Name.Equals(name));
+            return type.GetTypeInfo()
+                .DeclaredMethods.FirstOrDefault(methodInfo => methodInfo.Name.Equals(name));
         }
 
         // Metadata for reflection
         public class ParameterInfoMetadata
         {
             public void Foo1(BindingFlags bf = BindingFlags.DeclaredOnly) { }
-            public void Foo2([CustomBindingFlags(Value = BindingFlags.IgnoreCase)] BindingFlags bf) { }
-            public void Foo3([CustomBindingFlags(Value = BindingFlags.DeclaredOnly)] BindingFlags bf = BindingFlags.FlattenHierarchy ) { }
+            public void Foo2(
+                [CustomBindingFlags(Value = BindingFlags.IgnoreCase)] BindingFlags bf
+            ) { }
+            public void Foo3(
+                [CustomBindingFlags(Value = BindingFlags.DeclaredOnly)]
+                    BindingFlags bf = BindingFlags.FlattenHierarchy
+            ) { }
 
-            public void MethodWithCustomAttribute([My(2)]string str, int iValue, long lValue) { }
-            public virtual void VirtualMethodWithCustomAttributes([My(3)]int val1, [My(4)]int val2, int val3) { }
+            public void MethodWithCustomAttribute([My(2)] string str, int iValue, long lValue) { }
+            public virtual void VirtualMethodWithCustomAttributes(
+                [My(3)] int val1,
+                [My(4)] int val2,
+                int val3
+            ) { }
 
             public void Method1(string str, int iValue, long lValue) { }
             public void Method2() { }
@@ -369,13 +484,31 @@ namespace System.Reflection.Tests
 
             public virtual void VirtualMethod(long data) { }
 
-            public void MethodWithRefParameter(ref string str) { str = "newstring"; }
-            public void MethodWithOutParameter(int i, out string str) { str = "newstring"; }
+            public void MethodWithRefParameter(ref string str)
+            {
+                str = "newstring";
+            }
+            public void MethodWithOutParameter(int i, out string str)
+            {
+                str = "newstring";
+            }
 
-            public int MethodWithDefault1(long lValue, int iValue = 0) { return 1; }
-            public int MethodWithDefault2(string str = "abc") { return 1; }
-            public int MethodWithDefault3(bool result = false) { return 1; }
-            public int MethodWithDefault4(char c = '\0') { return 1; }
+            public int MethodWithDefault1(long lValue, int iValue = 0)
+            {
+                return 1;
+            }
+            public int MethodWithDefault2(string str = "abc")
+            {
+                return 1;
+            }
+            public int MethodWithDefault3(bool result = false)
+            {
+                return 1;
+            }
+            public int MethodWithDefault4(char c = '\0')
+            {
+                return 1;
+            }
 
             public void MethodWithDefaultDateTime(DateTime arg = default(DateTime)) { }
             public void MethodWithDefaultNullableDateTime(DateTime? arg = default(DateTime?)) { }
@@ -385,30 +518,52 @@ namespace System.Reflection.Tests
             public void MethodWithEnum(AttributeTargets arg = AttributeTargets.All) { }
             public void MethodWithNullableEnum(AttributeTargets? arg = AttributeTargets.All) { }
 
-            public int MethodWithOptionalAndNoDefault([Optional] object o) { return 1; }
-            public int MethodWithOptionalDefaultOutInMarshalParam([MarshalAs(UnmanagedType.LPWStr)][Out][In] string str = "") { return 1; }
+            public int MethodWithOptionalAndNoDefault([Optional] object o)
+            {
+                return 1;
+            }
+            public int MethodWithOptionalDefaultOutInMarshalParam(
+                [MarshalAs(UnmanagedType.LPWStr)] [Out] [In] string str = ""
+            )
+            {
+                return 1;
+            }
         }
 
         public class DerivedParameterInfoMetadata : ParameterInfoMetadata
         {
-            override public void VirtualMethodWithCustomAttributes([My(30)]int val1, int val2, [My(50)]int val3) { }
+            override public void VirtualMethodWithCustomAttributes(
+                [My(30)] int val1,
+                int val2,
+                [My(50)] int val3
+            ) { }
         }
 
         public class GenericClass<T>
         {
             public void GenericMethod(T t) { }
-            public string GenericMethodWithDefault(int i, T t = default(T)) { return "somestring"; }
+            public string GenericMethodWithDefault(int i, T t = default(T))
+            {
+                return "somestring";
+            }
         }
 
         private class MyAttribute : Attribute
         {
-            public int Value {get; private set;}
-            internal MyAttribute(int i) { Value = i;}
+            public int Value { get; private set; }
+            internal MyAttribute(int i)
+            {
+                Value = i;
+            }
         }
 
         internal sealed class CustomBindingFlagsAttribute : UsableCustomConstantAttribute
         {
-            public new object Value { get { return RealValue; } set { RealValue = value; } }
+            public new object Value
+            {
+                get { return RealValue; }
+                set { RealValue = value; }
+            }
         }
 
         internal abstract class UsableCustomConstantAttribute : CustomConstantAttribute
@@ -421,7 +576,10 @@ namespace System.Reflection.Tests
         {
             public PretendParent(int a, int b) { }
             public void PretendMethod(int x, int y) { }
-            public int this[int index1, int index2] { get { throw null; } }
+            public int this[int index1, int index2]
+            {
+                get { throw null; }
+            }
         }
 
         private sealed class PodPersonParameterInfo : MockParameterInfo

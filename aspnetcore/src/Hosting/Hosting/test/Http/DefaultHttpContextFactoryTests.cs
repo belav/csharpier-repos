@@ -53,9 +53,7 @@ public class DefaultHttpContextFactoryTests
     public void AllowsCreatingContextWithoutSettingAccessor()
     {
         // Arrange
-        var services = new ServiceCollection()
-            .AddOptions()
-            .BuildServiceProvider();
+        var services = new ServiceCollection().AddOptions().BuildServiceProvider();
         var contextFactory = new DefaultHttpContextFactory(services);
 
         // Act & Assert
@@ -67,9 +65,7 @@ public class DefaultHttpContextFactoryTests
     public void SetsDefaultPropertiesOnHttpContext()
     {
         // Arrange
-        var services = new ServiceCollection()
-            .AddOptions()
-            .BuildServiceProvider();
+        var services = new ServiceCollection().AddOptions().BuildServiceProvider();
         var contextFactory = new DefaultHttpContextFactory(services);
 
         // Act & Assert
@@ -78,6 +74,9 @@ public class DefaultHttpContextFactoryTests
         Assert.NotNull(context.FormOptions);
         Assert.NotNull(context.ServiceScopeFactory);
 
-        Assert.Same(services.GetRequiredService<IServiceScopeFactory>(), context.ServiceScopeFactory);
+        Assert.Same(
+            services.GetRequiredService<IServiceScopeFactory>(),
+            context.ServiceScopeFactory
+        );
     }
 }

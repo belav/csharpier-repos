@@ -66,9 +66,20 @@ namespace System.Threading.Tests
         public static void RunSemaphoreSlimTest1_Wait_NegativeCases()
         {
             // Invalid timeout
-            RunSemaphoreSlimTest1_Wait_Helper(10, 10, -10, true, typeof(ArgumentOutOfRangeException));
-            RunSemaphoreSlimTest1_Wait_Helper
-               (10, 10, new TimeSpan(0, 0, int.MaxValue), true, typeof(ArgumentOutOfRangeException));
+            RunSemaphoreSlimTest1_Wait_Helper(
+                10,
+                10,
+                -10,
+                true,
+                typeof(ArgumentOutOfRangeException)
+            );
+            RunSemaphoreSlimTest1_Wait_Helper(
+                10,
+                10,
+                new TimeSpan(0, 0, int.MaxValue),
+                true,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -93,9 +104,20 @@ namespace System.Threading.Tests
         public static void RunSemaphoreSlimTest1_WaitAsync_NegativeCases()
         {
             // Invalid timeout
-            RunSemaphoreSlimTest1_WaitAsync_Helper(10, 10, -10, true, typeof(ArgumentOutOfRangeException));
-            RunSemaphoreSlimTest1_WaitAsync_Helper
-               (10, 10, new TimeSpan(0, 0, int.MaxValue), true, typeof(ArgumentOutOfRangeException));
+            RunSemaphoreSlimTest1_WaitAsync_Helper(
+                10,
+                10,
+                -10,
+                true,
+                typeof(ArgumentOutOfRangeException)
+            );
+            RunSemaphoreSlimTest1_WaitAsync_Helper(
+                10,
+                10,
+                new TimeSpan(0, 0, int.MaxValue),
+                true,
+                typeof(ArgumentOutOfRangeException)
+            );
             RunSemaphoreSlimTest1_WaitAsync2();
         }
 
@@ -118,7 +140,12 @@ namespace System.Threading.Tests
             // Semaphore Full
             RunSemaphoreSlimTest2_Release_Helper(10, 10, 1, typeof(SemaphoreFullException));
             RunSemaphoreSlimTest2_Release_Helper(5, 10, 6, typeof(SemaphoreFullException));
-            RunSemaphoreSlimTest2_Release_Helper(int.MaxValue - 1, int.MaxValue, 10, typeof(SemaphoreFullException));
+            RunSemaphoreSlimTest2_Release_Helper(
+                int.MaxValue - 1,
+                int.MaxValue,
+                10,
+                typeof(SemaphoreFullException)
+            );
         }
 
         [Fact]
@@ -126,14 +153,30 @@ namespace System.Threading.Tests
         {
             RunSemaphoreSlimTest4_Dispose_Helper(5, 10, null, null);
             RunSemaphoreSlimTest4_Dispose_Helper(5, 10, SemaphoreSlimActions.CurrentCount, null);
-            RunSemaphoreSlimTest4_Dispose_Helper
-               (5, 10, SemaphoreSlimActions.Wait, typeof(ObjectDisposedException));
-            RunSemaphoreSlimTest4_Dispose_Helper
-               (5, 10, SemaphoreSlimActions.WaitAsync, typeof(ObjectDisposedException));
-            RunSemaphoreSlimTest4_Dispose_Helper
-              (5, 10, SemaphoreSlimActions.Release, typeof(ObjectDisposedException));
-            RunSemaphoreSlimTest4_Dispose_Helper
-              (5, 10, SemaphoreSlimActions.AvailableWaitHandle, typeof(ObjectDisposedException));
+            RunSemaphoreSlimTest4_Dispose_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.Wait,
+                typeof(ObjectDisposedException)
+            );
+            RunSemaphoreSlimTest4_Dispose_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.WaitAsync,
+                typeof(ObjectDisposedException)
+            );
+            RunSemaphoreSlimTest4_Dispose_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.Release,
+                typeof(ObjectDisposedException)
+            );
+            RunSemaphoreSlimTest4_Dispose_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.AvailableWaitHandle,
+                typeof(ObjectDisposedException)
+            );
         }
 
         [Fact]
@@ -151,14 +194,49 @@ namespace System.Threading.Tests
             RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(5, 10, null, true);
             RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(0, 10, null, false);
 
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(5, 10, SemaphoreSlimActions.Wait, true);
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(1, 10, SemaphoreSlimActions.Wait, false);
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(5, 10, SemaphoreSlimActions.Wait, true);
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.Wait,
+                true
+            );
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                1,
+                10,
+                SemaphoreSlimActions.Wait,
+                false
+            );
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.Wait,
+                true
+            );
 
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(5, 10, SemaphoreSlimActions.WaitAsync, true);
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(1, 10, SemaphoreSlimActions.WaitAsync, false);
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(5, 10, SemaphoreSlimActions.WaitAsync, true);
-            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(0, 10, SemaphoreSlimActions.Release, true);
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.WaitAsync,
+                true
+            );
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                1,
+                10,
+                SemaphoreSlimActions.WaitAsync,
+                false
+            );
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                5,
+                10,
+                SemaphoreSlimActions.WaitAsync,
+                true
+            );
+            RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+                0,
+                10,
+                SemaphoreSlimActions.Release,
+                true
+            );
         }
 
         /// <summary>
@@ -169,9 +247,14 @@ namespace System.Threading.Tests
         /// <param name="exceptionType">The type of the thrown exception in case of invalid cases,
         /// null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest0_Helper(int initial, int maximum, Type exceptionType)
+        private static void RunSemaphoreSlimTest0_Helper(
+            int initial,
+            int maximum,
+            Type exceptionType
+        )
         {
-            string methodFailed = "RunSemaphoreSlimTest0_Ctor(" + initial + "," + maximum + "):  FAILED.  ";
+            string methodFailed =
+                "RunSemaphoreSlimTest0_Ctor(" + initial + "," + maximum + "):  FAILED.  ";
             Exception exception = null;
             try
             {
@@ -196,8 +279,13 @@ namespace System.Threading.Tests
         /// <param name="exceptionType">The type of the thrown exception in case of invalid cases,
         /// null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest1_Wait_Helper
-            (int initial, int maximum, object timeout, bool returnValue, Type exceptionType)
+        private static void RunSemaphoreSlimTest1_Wait_Helper(
+            int initial,
+            int maximum,
+            object timeout,
+            bool returnValue,
+            Type exceptionType
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
@@ -234,8 +322,13 @@ namespace System.Threading.Tests
         /// <param name="exceptionType">The type of the thrown exception in case of invalid cases,
         /// null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest1_WaitAsync_Helper
-            (int initial, int maximum, object timeout, bool returnValue, Type exceptionType)
+        private static void RunSemaphoreSlimTest1_WaitAsync_Helper(
+            int initial,
+            int maximum,
+            object timeout,
+            bool returnValue,
+            Type exceptionType
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
@@ -276,7 +369,7 @@ namespace System.Threading.Tests
             int remAsyncActions = asyncActions;
             ManualResetEvent mre = new ManualResetEvent(false);
 
-            Action<int> doWorkAsync = async delegate (int i)
+            Action<int> doWorkAsync = async delegate(int i)
             {
                 await semaphore.WaitAsync();
                 if (counter.Value > 0)
@@ -288,16 +381,21 @@ namespace System.Threading.Tests
                 semaphore.Release();
                 counter.Value = counter.Value - 1;
 
-                if (Interlocked.Decrement(ref remAsyncActions) == 0) mre.Set();
+                if (Interlocked.Decrement(ref remAsyncActions) == 0)
+                    mre.Set();
             };
 
             semaphore.Wait();
-            for (int i = 0; i < asyncActions; i++) doWorkAsync(i);
+            for (int i = 0; i < asyncActions; i++)
+                doWorkAsync(i);
             semaphore.Release();
 
             mre.WaitOne();
 
-            Assert.False(nonZeroObserved, "RunSemaphoreSlimTest1_WaitAsync2:  FAILED.  SemaphoreSlim.Release() seems to have synchronously invoked a continuation.");
+            Assert.False(
+                nonZeroObserved,
+                "RunSemaphoreSlimTest1_WaitAsync2:  FAILED.  SemaphoreSlim.Release() seems to have synchronously invoked a continuation."
+            );
         }
 
         /// <summary>
@@ -309,8 +407,12 @@ namespace System.Threading.Tests
         /// <param name="exceptionType">The type of the thrown exception in case of invalid cases,
         /// null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest2_Release_Helper
-           (int initial, int maximum, int releaseCount, Type exceptionType)
+        private static void RunSemaphoreSlimTest2_Release_Helper(
+            int initial,
+            int maximum,
+            int releaseCount,
+            Type exceptionType
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
@@ -333,8 +435,11 @@ namespace System.Threading.Tests
         /// <param name="action">The action name</param>
         /// <param name="param">The action parameter, null if it takes no parameters</param>
         /// <returns>The action return value, null if the action returns void</returns>
-        private static object CallSemaphoreAction
-            (SemaphoreSlim semaphore, SemaphoreSlimActions? action, object param)
+        private static object CallSemaphoreAction(
+            SemaphoreSlim semaphore,
+            SemaphoreSlimActions? action,
+            object param
+        )
         {
             if (action == SemaphoreSlimActions.Wait)
             {
@@ -396,7 +501,12 @@ namespace System.Threading.Tests
         /// <param name="exceptionType">The type of the thrown exception in case of invalid cases,
         /// null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest4_Dispose_Helper(int initial, int maximum, SemaphoreSlimActions? action, Type exceptionType)
+        private static void RunSemaphoreSlimTest4_Dispose_Helper(
+            int initial,
+            int maximum,
+            SemaphoreSlimActions? action,
+            Type exceptionType
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             try
@@ -418,7 +528,11 @@ namespace System.Threading.Tests
         /// <param name="maximum">The maximum semaphore count</param>
         /// <param name="action">SemaphoreSlim action to be called before CurrentCount</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest5_CurrentCount_Helper(int initial, int maximum, SemaphoreSlimActions? action)
+        private static void RunSemaphoreSlimTest5_CurrentCount_Helper(
+            int initial,
+            int maximum,
+            SemaphoreSlimActions? action
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
 
@@ -429,7 +543,10 @@ namespace System.Threading.Tests
             }
             else
             {
-                Assert.Equal(initial + (action == SemaphoreSlimActions.Release ? 1 : -1), semaphore.CurrentCount);
+                Assert.Equal(
+                    initial + (action == SemaphoreSlimActions.Release ? 1 : -1),
+                    semaphore.CurrentCount
+                );
             }
         }
 
@@ -441,7 +558,12 @@ namespace System.Threading.Tests
         /// <param name="action">SemaphoreSlim action to be called before WaitHandle</param>
         /// <param name="state">The expected wait handle state</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(int initial, int maximum, SemaphoreSlimActions? action, bool state)
+        private static void RunSemaphoreSlimTest7_AvailableWaitHandle_Helper(
+            int initial,
+            int maximum,
+            SemaphoreSlimActions? action,
+            bool state
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
 
@@ -461,12 +583,23 @@ namespace System.Threading.Tests
         /// <param name="failedWait">Number of failed wait threads</param>
         /// <param name="finalCount">The final semaphore count</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(5, 1000, 50, 50, 50, 0, 5, 1000)]
         [InlineData(0, 1000, 50, 25, 25, 25, 0, 500)]
         [InlineData(0, 1000, 50, 0, 0, 50, 0, 100)]
-        public static void RunSemaphoreSlimTest8_ConcWaitAndRelease(int initial, int maximum,
-            int waitThreads, int releaseThreads, int succeededWait, int failedWait, int finalCount, int timeout)
+        public static void RunSemaphoreSlimTest8_ConcWaitAndRelease(
+            int initial,
+            int maximum,
+            int waitThreads,
+            int releaseThreads,
+            int succeededWait,
+            int failedWait,
+            int finalCount,
+            int timeout
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             Task[] threads = new Task[waitThreads + releaseThreads];
@@ -483,26 +616,31 @@ namespace System.Threading.Tests
                     // with its current implementation).  Without this, the release tasks will likely get
                     // queued behind the wait tasks in the pool, making it very likely that the wait tasks
                     // will starve the very tasks that when run would unblock them.
-                    threads[i] = new Task(delegate ()
-                       {
-                           mre.WaitOne();
-                           if (semaphore.Wait(timeout))
-                           {
-                               Interlocked.Increment(ref succeeded);
-                           }
-                           else
-                           {
-                               Interlocked.Increment(ref failed);
-                           }
-                       }, TaskCreationOptions.LongRunning);
+                    threads[i] = new Task(
+                        delegate()
+                        {
+                            mre.WaitOne();
+                            if (semaphore.Wait(timeout))
+                            {
+                                Interlocked.Increment(ref succeeded);
+                            }
+                            else
+                            {
+                                Interlocked.Increment(ref failed);
+                            }
+                        },
+                        TaskCreationOptions.LongRunning
+                    );
                 }
                 else
                 {
-                    threads[i] = new Task(delegate ()
-                       {
-                           mre.WaitOne();
-                           semaphore.Release();
-                       });
+                    threads[i] = new Task(
+                        delegate()
+                        {
+                            mre.WaitOne();
+                            semaphore.Release();
+                        }
+                    );
                 }
                 threads[i].Start(TaskScheduler.Default);
             }
@@ -527,12 +665,23 @@ namespace System.Threading.Tests
         /// <param name="failedWait">Number of failed wait threads</param>
         /// <param name="finalCount">The final semaphore count</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(5, 1000, 50, 50, 50, 0, 5, 500)]
         [InlineData(0, 1000, 50, 25, 25, 25, 0, 500)]
         [InlineData(0, 1000, 50, 0, 0, 50, 0, 100)]
-        public static void RunSemaphoreSlimTest8_ConcWaitAsyncAndRelease(int initial, int maximum,
-            int waitThreads, int releaseThreads, int succeededWait, int failedWait, int finalCount, int timeout)
+        public static void RunSemaphoreSlimTest8_ConcWaitAsyncAndRelease(
+            int initial,
+            int maximum,
+            int waitThreads,
+            int releaseThreads,
+            int succeededWait,
+            int failedWait,
+            int finalCount,
+            int timeout
+        )
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(initial, maximum);
             Task[] tasks = new Task[waitThreads + releaseThreads];
@@ -544,26 +693,30 @@ namespace System.Threading.Tests
             {
                 if (i < waitThreads)
                 {
-                    tasks[i] = Task.Run(async delegate
-                    {
-                        mre.WaitOne();
-                        if (await semaphore.WaitAsync(timeout))
+                    tasks[i] = Task.Run(
+                        async delegate
                         {
-                            Interlocked.Increment(ref succeeded);
+                            mre.WaitOne();
+                            if (await semaphore.WaitAsync(timeout))
+                            {
+                                Interlocked.Increment(ref succeeded);
+                            }
+                            else
+                            {
+                                Interlocked.Increment(ref failed);
+                            }
                         }
-                        else
-                        {
-                            Interlocked.Increment(ref failed);
-                        }
-                    });
+                    );
                 }
                 else
                 {
-                    tasks[i] = Task.Run(delegate
-                    {
-                        mre.WaitOne();
-                        semaphore.Release();
-                    });
+                    tasks[i] = Task.Run(
+                        delegate
+                        {
+                            mre.WaitOne();
+                            semaphore.Release();
+                        }
+                    );
                 }
             }
 
@@ -576,7 +729,10 @@ namespace System.Threading.Tests
             Assert.Equal(finalCount, semaphore.CurrentCount);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(10, 10)]
         [InlineData(1, 10)]
         [InlineData(10, 1)]
@@ -591,27 +747,31 @@ namespace System.Threading.Tests
             int randSeed = unchecked((int)DateTime.Now.Ticks);
             for (int i = 0; i < syncWaiters; i++)
             {
-                tasks[i] = Task.Run(delegate
-                {
-                    //Random rand = new Random(Interlocked.Increment(ref randSeed));
-                    for (int iter = 0; iter < ITERS; iter++)
+                tasks[i] = Task.Run(
+                    delegate
                     {
-                        semaphore.Wait();
-                        semaphore.Release();
+                        //Random rand = new Random(Interlocked.Increment(ref randSeed));
+                        for (int iter = 0; iter < ITERS; iter++)
+                        {
+                            semaphore.Wait();
+                            semaphore.Release();
+                        }
                     }
-                });
+                );
             }
             for (int i = syncWaiters; i < totalWaiters; i++)
             {
-                tasks[i] = Task.Run(async delegate
-                {
-                    //Random rand = new Random(Interlocked.Increment(ref randSeed));
-                    for (int iter = 0; iter < ITERS; iter++)
+                tasks[i] = Task.Run(
+                    async delegate
                     {
-                        await semaphore.WaitAsync();
-                        semaphore.Release();
+                        //Random rand = new Random(Interlocked.Increment(ref randSeed));
+                        for (int iter = 0; iter < ITERS; iter++)
+                        {
+                            await semaphore.WaitAsync();
+                            semaphore.Release();
+                        }
                     }
-                });
+                );
             }
 
             semaphore.Release(totalWaiters / 2);
@@ -621,24 +781,29 @@ namespace System.Threading.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void WaitAsync_Timeout_NoUnhandledException()
         {
-            RemoteExecutor.Invoke(async () =>
-            {
-                Exception error = null;
-                TaskScheduler.UnobservedTaskException += (s, e) => Volatile.Write(ref error, e.Exception);
+            RemoteExecutor
+                .Invoke(
+                    async () =>
+                    {
+                        Exception error = null;
+                        TaskScheduler.UnobservedTaskException += (s, e) =>
+                            Volatile.Write(ref error, e.Exception);
 
-                var sem = new SemaphoreSlim(0);
-                for (int i = 0; i < 2; ++i)
-                {
-                    await sem.WaitAsync(1);
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                }
+                        var sem = new SemaphoreSlim(0);
+                        for (int i = 0; i < 2; ++i)
+                        {
+                            await sem.WaitAsync(1);
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
 
-                if (Volatile.Read(ref error) is Exception e)
-                {
-                    throw e;
-                }
-            }).Dispose();
+                        if (Volatile.Read(ref error) is Exception e)
+                        {
+                            throw e;
+                        }
+                    }
+                )
+                .Dispose();
         }
     }
 }

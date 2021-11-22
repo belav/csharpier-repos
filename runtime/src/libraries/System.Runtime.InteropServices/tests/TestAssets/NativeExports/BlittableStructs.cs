@@ -14,17 +14,13 @@ namespace NativeExports
         [return: DNNE.C99Type("struct int_fields")]
         public static IntFields DoubleIntFields([DNNE.C99Type("struct int_fields")] IntFields input)
         {
-            return new IntFields()
-            {
-                a = input.a * 2,
-                b = input.b * 2,
-                c = input.c * 2,
-            };
+            return new IntFields() { a = input.a * 2, b = input.b * 2, c = input.c * 2, };
         }
 
         [UnmanagedCallersOnly(EntryPoint = "blittablestructs_double_intfields_byref")]
         public static void DoubleIntFieldsByRef(
-            [DNNE.C99Type("struct int_fields*")] IntFields* result)
+            [DNNE.C99Type("struct int_fields*")] IntFields* result
+        )
         {
             result->a *= 2;
             result->b *= 2;
@@ -34,7 +30,8 @@ namespace NativeExports
         [UnmanagedCallersOnly(EntryPoint = "blittablestructs_double_intfields_refreturn")]
         public static void DoubleIntFieldsRefReturn(
             [DNNE.C99Type("struct int_fields")] IntFields input,
-            [DNNE.C99Type("struct int_fields*")] IntFields* result)
+            [DNNE.C99Type("struct int_fields*")] IntFields* result
+        )
         {
             result->a = input.a * 2;
             result->b = input.b * 2;
@@ -44,7 +41,8 @@ namespace NativeExports
         [UnmanagedCallersOnly(EntryPoint = "blittablestructs_increment_invert_ptrfields_byref")]
         [DNNE.C99DeclCode("struct ptr_fields { int* i; int* b; uint16_t* c; };")]
         public static void IncrementInvertPointerFieldsByRef(
-            [DNNE.C99Type("struct ptr_fields*")] PointerFields* result)
+            [DNNE.C99Type("struct ptr_fields*")] PointerFields* result
+        )
         {
             *(result->i) += 1;
             *(result->b) = !*(result->b);
@@ -54,7 +52,8 @@ namespace NativeExports
         [UnmanagedCallersOnly(EntryPoint = "blittablestructs_increment_invert_ptrfields_refreturn")]
         public static void IncrementInvertPointerFieldsRefReturn(
             [DNNE.C99Type("struct ptr_fields")] PointerFields input,
-            [DNNE.C99Type("struct ptr_fields*")] PointerFields* result)
+            [DNNE.C99Type("struct ptr_fields*")] PointerFields* result
+        )
         {
             *(result->i) = *(input.i) + 1;
             *(result->b) = !(*input.b);

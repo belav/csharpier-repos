@@ -24,7 +24,9 @@ public class ParameterBindingMethodCacheTests
     [InlineData(typeof(ushort))]
     [InlineData(typeof(uint))]
     [InlineData(typeof(ulong))]
-    public void FindTryParseStringMethod_ReturnsTheExpectedTryParseMethodWithInvariantCulture(Type type)
+    public void FindTryParseStringMethod_ReturnsTheExpectedTryParseMethodWithInvariantCulture(
+        Type type
+    )
     {
         var methodFound = new ParameterBindingMethodCache().FindTryParseMethod(@type);
 
@@ -47,7 +49,9 @@ public class ParameterBindingMethodCacheTests
     [InlineData(typeof(DateTimeOffset))]
     [InlineData(typeof(TimeOnly))]
     [InlineData(typeof(TimeSpan))]
-    public void FindTryParseStringMethod_ReturnsTheExpectedTryParseMethodWithInvariantCultureDateType(Type type)
+    public void FindTryParseStringMethod_ReturnsTheExpectedTryParseMethodWithInvariantCultureDateType(
+        Type type
+    )
     {
         var methodFound = new ParameterBindingMethodCache().FindTryParseMethod(@type);
 
@@ -79,7 +83,9 @@ public class ParameterBindingMethodCacheTests
     [InlineData(typeof(TryParseStringStruct))]
     [InlineData(typeof(TryParseInheritClassWithFormatProvider))]
     [InlineData(typeof(TryParseFromInterfaceWithFormatProvider))]
-    public void FindTryParseStringMethod_ReturnsTheExpectedTryParseMethodWithInvariantCultureCustomType(Type type)
+    public void FindTryParseStringMethod_ReturnsTheExpectedTryParseMethodWithInvariantCultureCustomType(
+        Type type
+    )
     {
         var methodFound = new ParameterBindingMethodCache().FindTryParseMethod(@type);
 
@@ -93,7 +99,11 @@ public class ParameterBindingMethodCacheTests
         Assert.Equal(typeof(string), parameters[0].ParameterType);
         Assert.Equal(typeof(IFormatProvider), parameters[1].ParameterType);
         Assert.True(parameters[2].IsOut);
-        Assert.True(((call.Arguments[1] as ConstantExpression)!.Value as CultureInfo)!.Equals(CultureInfo.InvariantCulture));
+        Assert.True(
+            ((call.Arguments[1] as ConstantExpression)!.Value as CultureInfo)!.Equals(
+                CultureInfo.InvariantCulture
+            )
+        );
     }
 
     [Theory]
@@ -124,19 +134,25 @@ public class ParameterBindingMethodCacheTests
         {
             return new[]
             {
-                    new[]
-                    {
-                        GetFirstParameter((TryParseStringRecord arg) => TryParseStringRecordMethod(arg)),
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((TryParseStringStruct arg) => TryParseStringStructMethod(arg)),
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((TryParseStringStruct? arg) => TryParseStringNullableStructMethod(arg)),
-                    },
-                };
+                new[]
+                {
+                    GetFirstParameter(
+                        (TryParseStringRecord arg) => TryParseStringRecordMethod(arg)
+                    ),
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (TryParseStringStruct arg) => TryParseStringStructMethod(arg)
+                    ),
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (TryParseStringStruct? arg) => TryParseStringNullableStructMethod(arg)
+                    ),
+                },
+            };
         }
     }
 
@@ -181,9 +197,12 @@ public class ParameterBindingMethodCacheTests
         Assert.NotNull(block);
         Assert.Equal(typeof(bool), block!.Type);
 
-        var parseEnum = Expression.Lambda<Func<string, Choice>>(Expression.Block(new[] { parsedValue },
-            block,
-            parsedValue), ParameterBindingMethodCache.TempSourceStringExpr).Compile();
+        var parseEnum = Expression
+            .Lambda<Func<string, Choice>>(
+                Expression.Block(new[] { parsedValue }, block, parsedValue),
+                ParameterBindingMethodCache.TempSourceStringExpr
+            )
+            .Compile();
 
         Assert.Equal(Choice.One, parseEnum("One"));
         Assert.Equal(Choice.Two, parseEnum("Two"));
@@ -203,20 +222,14 @@ public class ParameterBindingMethodCacheTests
 
         var parsedValue = Expression.Variable(type, "parsedValue");
 
-        var parseHttpContext = Expression.Lambda<Func<HttpContext, ValueTask<object>>>(
-            Expression.Block(new[] { parsedValue }, methodFound.Expression!),
-            ParameterBindingMethodCache.HttpContextExpr).Compile();
+        var parseHttpContext = Expression
+            .Lambda<Func<HttpContext, ValueTask<object>>>(
+                Expression.Block(new[] { parsedValue }, methodFound.Expression!),
+                ParameterBindingMethodCache.HttpContextExpr
+            )
+            .Compile();
 
-        var httpContext = new DefaultHttpContext
-        {
-            Request =
-                {
-                    Headers =
-                    {
-                        ["ETag"] = "42",
-                    },
-                },
-        };
+        var httpContext = new DefaultHttpContext { Request = { Headers = { ["ETag"] = "42", }, }, };
 
         Assert.Equal(new BindAsyncRecord(42), await parseHttpContext(httpContext));
     }
@@ -234,20 +247,14 @@ public class ParameterBindingMethodCacheTests
 
         var parsedValue = Expression.Variable(type, "parsedValue");
 
-        var parseHttpContext = Expression.Lambda<Func<HttpContext, ValueTask<object>>>(
-            Expression.Block(new[] { parsedValue }, methodFound.Expression!),
-            ParameterBindingMethodCache.HttpContextExpr).Compile();
+        var parseHttpContext = Expression
+            .Lambda<Func<HttpContext, ValueTask<object>>>(
+                Expression.Block(new[] { parsedValue }, methodFound.Expression!),
+                ParameterBindingMethodCache.HttpContextExpr
+            )
+            .Compile();
 
-        var httpContext = new DefaultHttpContext
-        {
-            Request =
-                {
-                    Headers =
-                    {
-                        ["ETag"] = "42",
-                    },
-                },
-        };
+        var httpContext = new DefaultHttpContext { Request = { Headers = { ["ETag"] = "42", }, }, };
 
         Assert.Equal(new BindAsyncSingleArgStruct(42), await parseHttpContext(httpContext));
     }
@@ -258,51 +265,63 @@ public class ParameterBindingMethodCacheTests
         {
             return new[]
             {
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncRecord arg) => BindAsyncRecordMethod(arg)),
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncStruct arg) => BindAsyncStructMethod(arg)),
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncSingleArgRecord arg) => BindAsyncSingleArgRecordMethod(arg)),
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncSingleArgStruct arg) => BindAsyncSingleArgStructMethod(arg)),
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((InheritBindAsync arg) => InheritBindAsyncMethod(arg))
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((InheritBindAsyncWithParameterInfo arg) => InheritBindAsyncWithParameterInfoMethod(arg))
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncFromInterface arg) => BindAsyncFromInterfaceMethod(arg))
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncFromGrandparentInterface arg) => BindAsyncFromGrandparentInterfaceMethod(arg))
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncDirectlyAndFromInterface arg) => BindAsyncDirectlyAndFromInterfaceMethod(arg))
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncFromClassAndInterface arg) => BindAsyncFromClassAndInterfaceMethod(arg))
-                    },
-                    new[]
-                    {
-                        GetFirstParameter((BindAsyncFromInterfaceWithParameterInfo arg) => BindAsyncFromInterfaceWithParameterInfoMethod(arg))
-                    },
-                };
+                new[] { GetFirstParameter((BindAsyncRecord arg) => BindAsyncRecordMethod(arg)), },
+                new[] { GetFirstParameter((BindAsyncStruct arg) => BindAsyncStructMethod(arg)), },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncSingleArgRecord arg) => BindAsyncSingleArgRecordMethod(arg)
+                    ),
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncSingleArgStruct arg) => BindAsyncSingleArgStructMethod(arg)
+                    ),
+                },
+                new[] { GetFirstParameter((InheritBindAsync arg) => InheritBindAsyncMethod(arg)) },
+                new[]
+                {
+                    GetFirstParameter(
+                        (InheritBindAsyncWithParameterInfo arg) =>
+                            InheritBindAsyncWithParameterInfoMethod(arg)
+                    )
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncFromInterface arg) => BindAsyncFromInterfaceMethod(arg)
+                    )
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncFromGrandparentInterface arg) =>
+                            BindAsyncFromGrandparentInterfaceMethod(arg)
+                    )
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncDirectlyAndFromInterface arg) =>
+                            BindAsyncDirectlyAndFromInterfaceMethod(arg)
+                    )
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncFromClassAndInterface arg) =>
+                            BindAsyncFromClassAndInterfaceMethod(arg)
+                    )
+                },
+                new[]
+                {
+                    GetFirstParameter(
+                        (BindAsyncFromInterfaceWithParameterInfo arg) =>
+                            BindAsyncFromInterfaceWithParameterInfoMethod(arg)
+                    )
+                },
+            };
         }
     }
 
@@ -316,27 +335,37 @@ public class ParameterBindingMethodCacheTests
     [Fact]
     public void HasBindAsyncMethod_ReturnsTrueForNullableReturningBindAsyncStructMethod()
     {
-        var parameterInfo = GetFirstParameter((NullableReturningBindAsyncStruct arg) => NullableReturningBindAsyncStructMethod(arg));
+        var parameterInfo = GetFirstParameter(
+            (NullableReturningBindAsyncStruct arg) => NullableReturningBindAsyncStructMethod(arg)
+        );
         Assert.True(new ParameterBindingMethodCache().HasBindAsyncMethod(parameterInfo));
     }
 
     [Fact]
     public void FindBindAsyncMethod_FindsNonNullableReturningBindAsyncMethodGivenNullableType()
     {
-        var parameterInfo = GetFirstParameter((BindAsyncStruct? arg) => BindAsyncNullableStructMethod(arg));
+        var parameterInfo = GetFirstParameter(
+            (BindAsyncStruct? arg) => BindAsyncNullableStructMethod(arg)
+        );
         Assert.True(new ParameterBindingMethodCache().HasBindAsyncMethod(parameterInfo));
     }
 
     [Fact]
     public async Task FindBindAsyncMethod_FindsFallbackMethodWhenPreferredMethodsReturnTypeIsWrong()
     {
-        var parameterInfo = GetFirstParameter((BindAsyncFallsBack? arg) => BindAsyncFallbackMethod(arg));
+        var parameterInfo = GetFirstParameter(
+            (BindAsyncFallsBack? arg) => BindAsyncFallbackMethod(arg)
+        );
         var cache = new ParameterBindingMethodCache();
         Assert.True(cache.HasBindAsyncMethod(parameterInfo));
         var methodFound = cache.FindBindAsyncMethod(parameterInfo);
 
-        var parseHttpContext = Expression.Lambda<Func<HttpContext, ValueTask<object>>>(methodFound.Expression!,
-            ParameterBindingMethodCache.HttpContextExpr).Compile();
+        var parseHttpContext = Expression
+            .Lambda<Func<HttpContext, ValueTask<object>>>(
+                methodFound.Expression!,
+                ParameterBindingMethodCache.HttpContextExpr
+            )
+            .Compile();
 
         var httpContext = new DefaultHttpContext();
 
@@ -346,13 +375,19 @@ public class ParameterBindingMethodCacheTests
     [Fact]
     public async Task FindBindAsyncMethod_FindsFallbackMethodFromInheritedWhenPreferredMethodIsInvalid()
     {
-        var parameterInfo = GetFirstParameter((BindAsyncBadMethod? arg) => BindAsyncBadMethodMethod(arg));
+        var parameterInfo = GetFirstParameter(
+            (BindAsyncBadMethod? arg) => BindAsyncBadMethodMethod(arg)
+        );
         var cache = new ParameterBindingMethodCache();
         Assert.True(cache.HasBindAsyncMethod(parameterInfo));
         var methodFound = cache.FindBindAsyncMethod(parameterInfo);
 
-        var parseHttpContext = Expression.Lambda<Func<HttpContext, ValueTask<object>>>(methodFound.Expression!,
-            ParameterBindingMethodCache.HttpContextExpr).Compile();
+        var parseHttpContext = Expression
+            .Lambda<Func<HttpContext, ValueTask<object>>>(
+                methodFound.Expression!,
+                ParameterBindingMethodCache.HttpContextExpr
+            )
+            .Compile();
 
         var httpContext = new DefaultHttpContext();
 
@@ -374,18 +409,35 @@ public class ParameterBindingMethodCacheTests
     public void FindTryParseMethod_ThrowsIfInvalidTryParseOnType(Type type)
     {
         var ex = Assert.Throws<InvalidOperationException>(
-            () => new ParameterBindingMethodCache().FindTryParseMethod(type));
-        Assert.StartsWith($"TryParse method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format", ex.Message);
-        Assert.Contains($"bool TryParse(string, IFormatProvider, out {TypeNameHelper.GetTypeDisplayName(type, fullName: false)})", ex.Message);
-        Assert.Contains($"bool TryParse(string, out {TypeNameHelper.GetTypeDisplayName(type, fullName: false)})", ex.Message);
+            () => new ParameterBindingMethodCache().FindTryParseMethod(type)
+        );
+        Assert.StartsWith(
+            $"TryParse method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format",
+            ex.Message
+        );
+        Assert.Contains(
+            $"bool TryParse(string, IFormatProvider, out {TypeNameHelper.GetTypeDisplayName(type, fullName: false)})",
+            ex.Message
+        );
+        Assert.Contains(
+            $"bool TryParse(string, out {TypeNameHelper.GetTypeDisplayName(type, fullName: false)})",
+            ex.Message
+        );
     }
 
     [Fact]
     public void FindTryParseMethod_ThrowsIfMultipleInterfacesMatch()
     {
         var ex = Assert.Throws<InvalidOperationException>(
-            () => new ParameterBindingMethodCache().FindTryParseMethod(typeof(TryParseFromMultipleInterfaces)));
-        Assert.Equal("TryParseFromMultipleInterfaces implements multiple interfaces defining a static Boolean TryParse(System.String, TryParseFromMultipleInterfaces ByRef) method causing ambiguity.", ex.Message);
+            () =>
+                new ParameterBindingMethodCache().FindTryParseMethod(
+                    typeof(TryParseFromMultipleInterfaces)
+                )
+        );
+        Assert.Equal(
+            "TryParseFromMultipleInterfaces implements multiple interfaces defining a static Boolean TryParse(System.String, TryParseFromMultipleInterfaces ByRef) method causing ambiguity.",
+            ex.Message
+        );
     }
 
     [Theory]
@@ -411,12 +463,28 @@ public class ParameterBindingMethodCacheTests
         var cache = new ParameterBindingMethodCache();
         var parameter = new MockParameterInfo(type, "anything");
         var ex = Assert.Throws<InvalidOperationException>(
-            () => cache.FindBindAsyncMethod(parameter));
-        Assert.StartsWith($"BindAsync method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format", ex.Message);
-        Assert.Contains($"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}> BindAsync(HttpContext context, ParameterInfo parameter)", ex.Message);
-        Assert.Contains($"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}> BindAsync(HttpContext context)", ex.Message);
-        Assert.Contains($"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}?> BindAsync(HttpContext context, ParameterInfo parameter)", ex.Message);
-        Assert.Contains($"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}?> BindAsync(HttpContext context)", ex.Message);
+            () => cache.FindBindAsyncMethod(parameter)
+        );
+        Assert.StartsWith(
+            $"BindAsync method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format",
+            ex.Message
+        );
+        Assert.Contains(
+            $"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}> BindAsync(HttpContext context, ParameterInfo parameter)",
+            ex.Message
+        );
+        Assert.Contains(
+            $"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}> BindAsync(HttpContext context)",
+            ex.Message
+        );
+        Assert.Contains(
+            $"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}?> BindAsync(HttpContext context, ParameterInfo parameter)",
+            ex.Message
+        );
+        Assert.Contains(
+            $"ValueTask<{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}?> BindAsync(HttpContext context)",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -424,8 +492,13 @@ public class ParameterBindingMethodCacheTests
     {
         var cache = new ParameterBindingMethodCache();
         var parameter = new MockParameterInfo(typeof(BindAsyncFromMultipleInterfaces), "anything");
-        var ex = Assert.Throws<InvalidOperationException>(() => cache.FindBindAsyncMethod(parameter));
-        Assert.Equal("BindAsyncFromMultipleInterfaces implements multiple interfaces defining a static System.Threading.Tasks.ValueTask`1[Microsoft.AspNetCore.Http.Extensions.Tests.ParameterBindingMethodCacheTests+BindAsyncFromMultipleInterfaces] BindAsync(Microsoft.AspNetCore.Http.HttpContext) method causing ambiguity.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => cache.FindBindAsyncMethod(parameter)
+        );
+        Assert.Equal(
+            "BindAsyncFromMultipleInterfaces implements multiple interfaces defining a static System.Threading.Tasks.ValueTask`1[Microsoft.AspNetCore.Http.Extensions.Tests.ParameterBindingMethodCacheTests+BindAsyncFromMultipleInterfaces] BindAsync(Microsoft.AspNetCore.Http.HttpContext) method causing ambiguity.",
+            ex.Message
+        );
     }
 
     [Theory]
@@ -453,17 +526,27 @@ public class ParameterBindingMethodCacheTests
     private static void BindAsyncRecordMethod(BindAsyncRecord arg) { }
     private static void BindAsyncStructMethod(BindAsyncStruct arg) { }
     private static void BindAsyncNullableStructMethod(BindAsyncStruct? arg) { }
-    private static void NullableReturningBindAsyncStructMethod(NullableReturningBindAsyncStruct arg) { }
+    private static void NullableReturningBindAsyncStructMethod(
+        NullableReturningBindAsyncStruct arg
+    ) { }
 
     private static void BindAsyncSingleArgRecordMethod(BindAsyncSingleArgRecord arg) { }
     private static void BindAsyncSingleArgStructMethod(BindAsyncSingleArgStruct arg) { }
     private static void InheritBindAsyncMethod(InheritBindAsync arg) { }
-    private static void InheritBindAsyncWithParameterInfoMethod(InheritBindAsyncWithParameterInfo args) { }
+    private static void InheritBindAsyncWithParameterInfoMethod(
+        InheritBindAsyncWithParameterInfo args
+    ) { }
     private static void BindAsyncFromInterfaceMethod(BindAsyncFromInterface arg) { }
-    private static void BindAsyncFromGrandparentInterfaceMethod(BindAsyncFromGrandparentInterface arg) { }
-    private static void BindAsyncDirectlyAndFromInterfaceMethod(BindAsyncDirectlyAndFromInterface arg) { }
+    private static void BindAsyncFromGrandparentInterfaceMethod(
+        BindAsyncFromGrandparentInterface arg
+    ) { }
+    private static void BindAsyncDirectlyAndFromInterfaceMethod(
+        BindAsyncDirectlyAndFromInterface arg
+    ) { }
     private static void BindAsyncFromClassAndInterfaceMethod(BindAsyncFromClassAndInterface arg) { }
-    private static void BindAsyncFromInterfaceWithParameterInfoMethod(BindAsyncFromInterfaceWithParameterInfo args) { }
+    private static void BindAsyncFromInterfaceWithParameterInfoMethod(
+        BindAsyncFromInterfaceWithParameterInfo args
+    ) { }
     private static void BindAsyncFallbackMethod(BindAsyncFallsBack? arg) { }
     private static void BindAsyncBadMethodMethod(BindAsyncBadMethod? arg) { }
 
@@ -475,7 +558,11 @@ public class ParameterBindingMethodCacheTests
 
     private record TryParseStringRecord(int Value)
     {
-        public static bool TryParse(string? value, IFormatProvider formatProvider, out TryParseStringRecord? result)
+        public static bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out TryParseStringRecord? result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -490,7 +577,11 @@ public class ParameterBindingMethodCacheTests
 
     private record struct TryParseStringStruct(int Value)
     {
-        public static bool TryParse(string? value, IFormatProvider formatProvider, out TryParseStringStruct result)
+        public static bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out TryParseStringStruct result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -505,7 +596,11 @@ public class ParameterBindingMethodCacheTests
 
     private record struct InvalidVoidReturnTryParseStruct(int Value)
     {
-        public static void TryParse(string? value, IFormatProvider formatProvider, out InvalidVoidReturnTryParseStruct result)
+        public static void TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidVoidReturnTryParseStruct result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -520,7 +615,11 @@ public class ParameterBindingMethodCacheTests
 
     private record struct InvalidWrongTypeTryParseStruct(int Value)
     {
-        public static bool TryParse(string? value, IFormatProvider formatProvider, out InvalidVoidReturnTryParseStruct result)
+        public static bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidVoidReturnTryParseStruct result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -535,7 +634,11 @@ public class ParameterBindingMethodCacheTests
 
     private record struct InvalidTryParseNullableStruct(int Value)
     {
-        public static bool TryParse(string? value, IFormatProvider formatProvider, out InvalidTryParseNullableStruct? result)
+        public static bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidTryParseNullableStruct? result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -573,7 +676,11 @@ public class ParameterBindingMethodCacheTests
 
     private record struct InvalidNonStaticTryParseStruct(int Value)
     {
-        public bool TryParse(string? value, IFormatProvider formatProvider, out InvalidVoidReturnTryParseStruct result)
+        public bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidVoidReturnTryParseStruct result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -588,7 +695,11 @@ public class ParameterBindingMethodCacheTests
 
     private class InvalidVoidReturnTryParseClass
     {
-        public static void TryParse(string? value, IFormatProvider formatProvider, out InvalidVoidReturnTryParseClass result)
+        public static void TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidVoidReturnTryParseClass result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -602,7 +713,11 @@ public class ParameterBindingMethodCacheTests
 
     private class InvalidWrongTypeTryParseClass
     {
-        public static bool TryParse(string? value, IFormatProvider formatProvider, out InvalidVoidReturnTryParseClass result)
+        public static bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidVoidReturnTryParseClass result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -641,7 +756,11 @@ public class ParameterBindingMethodCacheTests
 
     private class InvalidNonStaticTryParseClass
     {
-        public bool TryParse(string? value, IFormatProvider formatProvider, out InvalidNonStaticTryParseClass result)
+        public bool TryParse(
+            string? value,
+            IFormatProvider formatProvider,
+            out InvalidNonStaticTryParseClass result
+        )
         {
             if (!int.TryParse(value, NumberStyles.Integer, formatProvider, out var val))
             {
@@ -711,7 +830,8 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private class TryParseInheritClassWithFormatProvider : BaseTryParseClassWithFormatProvider<TryParseInheritClassWithFormatProvider>
+    private class TryParseInheritClassWithFormatProvider
+        : BaseTryParseClassWithFormatProvider<TryParseInheritClassWithFormatProvider>
     {
     }
 
@@ -741,7 +861,8 @@ public class ParameterBindingMethodCacheTests
     {
     }
 
-    private class TryParseFromGrandparentInterface : IImplementITryParse<TryParseFromGrandparentInterface>
+    private class TryParseFromGrandparentInterface
+        : IImplementITryParse<TryParseFromGrandparentInterface>
     {
     }
 
@@ -780,13 +901,17 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private class TryParseFromInterfaceWithFormatProvider : ITryParseWithFormatProvider<TryParseFromInterfaceWithFormatProvider>
+    private class TryParseFromInterfaceWithFormatProvider
+        : ITryParseWithFormatProvider<TryParseFromInterfaceWithFormatProvider>
     {
     }
 
     private record BindAsyncRecord(int Value)
     {
-        public static ValueTask<BindAsyncRecord?> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static ValueTask<BindAsyncRecord?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             Assert.Equal(typeof(BindAsyncRecord), parameter.ParameterType);
             Assert.Equal("bindAsyncRecord", parameter.Name);
@@ -802,14 +927,19 @@ public class ParameterBindingMethodCacheTests
 
     private record struct BindAsyncStruct(int Value)
     {
-        public static ValueTask<BindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static ValueTask<BindAsyncStruct> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             Assert.Equal(typeof(BindAsyncStruct), parameter.ParameterType);
             Assert.Equal("bindAsyncStruct", parameter.Name);
 
             if (!int.TryParse(context.Request.Headers.ETag, out var val))
             {
-                throw new BadHttpRequestException("The request is missing the required ETag header.");
+                throw new BadHttpRequestException(
+                    "The request is missing the required ETag header."
+                );
             }
 
             return new(result: new(val));
@@ -818,8 +948,10 @@ public class ParameterBindingMethodCacheTests
 
     private record struct NullableReturningBindAsyncStruct(int Value)
     {
-        public static ValueTask<NullableReturningBindAsyncStruct?> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static ValueTask<NullableReturningBindAsyncStruct?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
     }
 
     private record BindAsyncSingleArgRecord(int Value)
@@ -841,7 +973,9 @@ public class ParameterBindingMethodCacheTests
         {
             if (!int.TryParse(context.Request.Headers.ETag, out var val))
             {
-                throw new BadHttpRequestException("The request is missing the required ETag header.");
+                throw new BadHttpRequestException(
+                    "The request is missing the required ETag header."
+                );
             }
 
             return new(result: new(val));
@@ -850,20 +984,25 @@ public class ParameterBindingMethodCacheTests
 
     private record struct InvalidWrongReturnBindAsyncStruct(int Value)
     {
-        public static Task<InvalidWrongReturnBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static Task<InvalidWrongReturnBindAsyncStruct> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
     }
 
     private class InvalidWrongReturnBindAsyncClass
     {
-        public static Task<InvalidWrongReturnBindAsyncClass> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static Task<InvalidWrongReturnBindAsyncClass> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
     }
 
     private record struct InvalidWrongParamBindAsyncStruct(int Value)
     {
-        public static ValueTask<InvalidWrongParamBindAsyncStruct> BindAsync(ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static ValueTask<InvalidWrongParamBindAsyncStruct> BindAsync(
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
     }
 
     private class InvalidWrongParamBindAsyncClass
@@ -874,8 +1013,10 @@ public class ParameterBindingMethodCacheTests
 
     private record struct BindAsyncStructWithGoodAndBad(int Value)
     {
-        public static ValueTask<BindAsyncStructWithGoodAndBad> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static ValueTask<BindAsyncStructWithGoodAndBad> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
 
         public static ValueTask<BindAsyncStructWithGoodAndBad> BindAsync(ParameterInfo parameter) =>
             throw new NotImplementedException();
@@ -883,8 +1024,10 @@ public class ParameterBindingMethodCacheTests
 
     private class BindAsyncClassWithGoodAndBad
     {
-        public static ValueTask<BindAsyncClassWithGoodAndBad> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static ValueTask<BindAsyncClassWithGoodAndBad> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
 
         public static ValueTask<BindAsyncClassWithGoodAndBad> BindAsync(ParameterInfo parameter) =>
             throw new NotImplementedException();
@@ -915,12 +1058,14 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private class InheritBindAsyncWithParameterInfo : BaseBindAsyncWithParameterInfo<InheritBindAsyncWithParameterInfo>
+    private class InheritBindAsyncWithParameterInfo
+        : BaseBindAsyncWithParameterInfo<InheritBindAsyncWithParameterInfo>
     {
     }
 
     // Using wrong T on purpose
-    private class BindAsyncWithParameterInfoWrongTypeInherit : BaseBindAsyncWithParameterInfo<InheritBindAsync>
+    private class BindAsyncWithParameterInfoWrongTypeInherit
+        : BaseBindAsyncWithParameterInfo<InheritBindAsync>
     {
     }
 
@@ -948,7 +1093,8 @@ public class ParameterBindingMethodCacheTests
     {
     }
 
-    private class BindAsyncFromGrandparentInterface : IImeplmentIBindAsync<BindAsyncFromGrandparentInterface>
+    private class BindAsyncFromGrandparentInterface
+        : IImeplmentIBindAsync<BindAsyncFromGrandparentInterface>
     {
     }
 
@@ -985,14 +1131,15 @@ public class ParameterBindingMethodCacheTests
         }
     }
 
-    private class BindAsyncFromInterfaceWithParameterInfo : IBindAsync<BindAsyncFromInterfaceWithParameterInfo>
+    private class BindAsyncFromInterfaceWithParameterInfo
+        : IBindAsync<BindAsyncFromInterfaceWithParameterInfo>
     {
     }
 
     private class BindAsyncFallsBack
     {
-        public static void BindAsync(HttpContext context, ParameterInfo parameter)
-            => throw new NotImplementedException();
+        public static void BindAsync(HttpContext context, ParameterInfo parameter) =>
+            throw new NotImplementedException();
 
         public static ValueTask<BindAsyncFallsBack?> BindAsync(HttpContext context)
         {
@@ -1002,17 +1149,16 @@ public class ParameterBindingMethodCacheTests
 
     private class BindAsyncBadMethod : IBindAsyncWithParameterInfo<BindAsyncBadMethod>
     {
-        public static void BindAsync(HttpContext context, ParameterInfo parameter)
-            => throw new NotImplementedException();
+        public static void BindAsync(HttpContext context, ParameterInfo parameter) =>
+            throw new NotImplementedException();
     }
 
     private class BindAsyncBothBadMethods
     {
-        public static void BindAsync(HttpContext context, ParameterInfo parameter)
-            => throw new NotImplementedException();
+        public static void BindAsync(HttpContext context, ParameterInfo parameter) =>
+            throw new NotImplementedException();
 
-        public static void BindAsync(HttpContext context)
-            => throw new NotImplementedException();
+        public static void BindAsync(HttpContext context) => throw new NotImplementedException();
     }
 
     private class MockParameterInfo : ParameterInfo

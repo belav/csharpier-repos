@@ -61,7 +61,6 @@ public class ModelMetadataProviderTest
         Assert.Equal("TypePrefix", metadata.BinderModelName);
     }
 
-
     [Fact]
     public void ModelMetadataProvider_ReadsScaffoldColumnAttribute_ForShowForDisplay()
     {
@@ -155,7 +154,10 @@ public class ModelMetadataProviderTest
         var provider = CreateProvider();
 
         // Act
-        var propertyMetadata = provider.GetMetadataForProperty(typeof(Person), nameof(Person.Parent));
+        var propertyMetadata = provider.GetMetadataForProperty(
+            typeof(Person),
+            nameof(Person.Parent)
+        );
 
         // Assert
         Assert.Equal("PersonType", propertyMetadata.BinderModelName);
@@ -168,7 +170,10 @@ public class ModelMetadataProviderTest
         var provider = CreateProvider();
 
         // Act
-        var propertyMetadata = provider.GetMetadataForProperty(typeof(Person), nameof(Person.GrandParent));
+        var propertyMetadata = provider.GetMetadataForProperty(
+            typeof(Person),
+            nameof(Person.GrandParent)
+        );
 
         // Assert
         Assert.Equal("GrandParentProperty", propertyMetadata.BinderModelName);
@@ -179,54 +184,56 @@ public class ModelMetadataProviderTest
         get
         {
             return new TheoryData<object, Func<ModelMetadata, string>>
+            {
+                { new DataTypeAttribute("value"), metadata => metadata.DataTypeName },
+                { new DataTypeWithCustomDisplayFormat(), metadata => metadata.DisplayFormatString },
+                { new DataTypeWithCustomEditFormat(), metadata => metadata.EditFormatString },
                 {
+                    new DisplayAttribute { Description = "value" },
+                    metadata => metadata.Description
+                },
+                { new DisplayAttribute { Name = "value" }, metadata => metadata.DisplayName },
+                { new DisplayAttribute { Prompt = "value" }, metadata => metadata.Placeholder },
+                {
+                    new DisplayFormatAttribute { DataFormatString = "value" },
+                    metadata => metadata.DisplayFormatString
+                },
+                {
+                    // DisplayFormatString does not ignore [DisplayFormat] if ApplyFormatInEditMode==true.
+                    new DisplayFormatAttribute
                     {
-                        new DataTypeAttribute("value"), metadata => metadata.DataTypeName
+                        ApplyFormatInEditMode = true,
+                        DataFormatString = "value"
                     },
+                    metadata => metadata.DisplayFormatString
+                },
+                {
+                    new DisplayFormatAttribute
                     {
-                        new DataTypeWithCustomDisplayFormat(), metadata => metadata.DisplayFormatString
+                        ApplyFormatInEditMode = true,
+                        DataFormatString = "value"
                     },
-                    {
-                        new DataTypeWithCustomEditFormat(), metadata => metadata.EditFormatString
-                    },
-                    {
-                        new DisplayAttribute { Description = "value" }, metadata => metadata.Description
-                    },
-                    {
-                        new DisplayAttribute { Name = "value" }, metadata => metadata.DisplayName
-                    },
-                    {
-                        new DisplayAttribute { Prompt = "value" }, metadata => metadata.Placeholder
-                    },
-                    {
-                        new DisplayFormatAttribute { DataFormatString = "value" },
-                        metadata => metadata.DisplayFormatString
-                    },
-                    {
-                        // DisplayFormatString does not ignore [DisplayFormat] if ApplyFormatInEditMode==true.
-                        new DisplayFormatAttribute { ApplyFormatInEditMode = true, DataFormatString = "value" },
-                        metadata => metadata.DisplayFormatString
-                    },
-                    {
-                        new DisplayFormatAttribute { ApplyFormatInEditMode = true, DataFormatString = "value" },
-                        metadata => metadata.EditFormatString
-                    },
-                    {
-                        new DisplayFormatAttribute { NullDisplayText = "value" }, metadata => metadata.NullDisplayText
-                    },
-                    {
-                        new TestModelNameProvider { Name = "value" }, metadata => metadata.BinderModelName
-                    },
-                    {
-                         new UIHintAttribute("value"), metadata => metadata.TemplateHint
-                    },
-                };
+                    metadata => metadata.EditFormatString
+                },
+                {
+                    new DisplayFormatAttribute { NullDisplayText = "value" },
+                    metadata => metadata.NullDisplayText
+                },
+                {
+                    new TestModelNameProvider { Name = "value" },
+                    metadata => metadata.BinderModelName
+                },
+                { new UIHintAttribute("value"), metadata => metadata.TemplateHint },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ExpectedAttributeDataStrings))]
-    public void AttributesOverrideMetadataStrings(object attribute, Func<ModelMetadata, string> accessor)
+    public void AttributesOverrideMetadataStrings(
+        object attribute,
+        Func<ModelMetadata, string> accessor
+    )
     {
         // Arrange
         var attributes = new[] { attribute };
@@ -257,86 +264,87 @@ public class ModelMetadataProviderTest
         Assert.Equal("Property", result);
     }
 
-    public static TheoryData<Attribute, Func<ModelMetadata, bool>, bool> ExpectedAttributeDataBooleans
+    public static TheoryData<
+        Attribute,
+        Func<ModelMetadata, bool>,
+        bool
+    > ExpectedAttributeDataBooleans
     {
         get
         {
             return new TheoryData<Attribute, Func<ModelMetadata, bool>, bool>
+            {
                 {
+                    // Edit formats from [DataType] subclass affect HasNonDefaultEditFormat.
+                    new DataTypeWithCustomEditFormat(),
+                    metadata => metadata.HasNonDefaultEditFormat,
+                    true
+                },
+                {
+                    // Edit formats from [DataType] do not affect HasNonDefaultEditFormat.
+                    new DataTypeAttribute(DataType.Date),
+                    metadata => metadata.HasNonDefaultEditFormat,
+                    false
+                },
+                {
+                    new DisplayFormatAttribute { ConvertEmptyStringToNull = false },
+                    metadata => metadata.ConvertEmptyStringToNull,
+                    false
+                },
+                {
+                    new DisplayFormatAttribute { ConvertEmptyStringToNull = true },
+                    metadata => metadata.ConvertEmptyStringToNull,
+                    true
+                },
+                {
+                    // Changes only to DisplayFormatString do not affect HasNonDefaultEditFormat.
+                    new DisplayFormatAttribute { DataFormatString = "value" },
+                    metadata => metadata.HasNonDefaultEditFormat,
+                    false
+                },
+                {
+                    new DisplayFormatAttribute
                     {
-                        // Edit formats from [DataType] subclass affect HasNonDefaultEditFormat.
-                        new DataTypeWithCustomEditFormat(),
-                        metadata => metadata.HasNonDefaultEditFormat,
-                        true
+                        ApplyFormatInEditMode = true,
+                        DataFormatString = "value"
                     },
-                    {
-                        // Edit formats from [DataType] do not affect HasNonDefaultEditFormat.
-                        new DataTypeAttribute(DataType.Date),
-                        metadata => metadata.HasNonDefaultEditFormat,
-                        false
-                    },
-                    {
-                        new DisplayFormatAttribute { ConvertEmptyStringToNull = false },
-                        metadata => metadata.ConvertEmptyStringToNull,
-                        false
-                    },
-                    {
-                        new DisplayFormatAttribute { ConvertEmptyStringToNull = true },
-                        metadata => metadata.ConvertEmptyStringToNull,
-                        true
-                    },
-                    {
-                        // Changes only to DisplayFormatString do not affect HasNonDefaultEditFormat.
-                        new DisplayFormatAttribute { DataFormatString = "value" },
-                        metadata => metadata.HasNonDefaultEditFormat,
-                        false
-                    },
-                    {
-                        new DisplayFormatAttribute { ApplyFormatInEditMode = true, DataFormatString = "value" },
-                        metadata => metadata.HasNonDefaultEditFormat,
-                        true
-                    },
-                    {
-                        new DisplayFormatAttribute { HtmlEncode = false },
-                        metadata => metadata.HtmlEncode,
-                        false
-                    },
-                    {
-                        new DisplayFormatAttribute { HtmlEncode = true },
-                        metadata => metadata.HtmlEncode,
-                        true
-                    },
-                    {
-                        new EditableAttribute(allowEdit: false),
-                        metadata => metadata.IsReadOnly,
-                        true
-                    },
-                    {
-                        new EditableAttribute(allowEdit: true),
-                        metadata => metadata.IsReadOnly,
-                        false
-                    },
-                    {
-                        new HiddenInputAttribute { DisplayValue = false },
-                        metadata => metadata.HideSurroundingHtml,
-                        true
-                    },
-                    {
-                        new HiddenInputAttribute { DisplayValue = true },
-                        metadata => metadata.HideSurroundingHtml,
-                        false
-                    },
-                    {
-                        new HiddenInputAttribute(),
-                        metadata => string.Equals("HiddenInput", metadata.TemplateHint, StringComparison.Ordinal),
-                        true
-                    },
-                    {
-                        new RequiredAttribute(),
-                        metadata => metadata.IsRequired,
-                        true
-                    },
-                };
+                    metadata => metadata.HasNonDefaultEditFormat,
+                    true
+                },
+                {
+                    new DisplayFormatAttribute { HtmlEncode = false },
+                    metadata => metadata.HtmlEncode,
+                    false
+                },
+                {
+                    new DisplayFormatAttribute { HtmlEncode = true },
+                    metadata => metadata.HtmlEncode,
+                    true
+                },
+                { new EditableAttribute(allowEdit: false), metadata => metadata.IsReadOnly, true },
+                { new EditableAttribute(allowEdit: true), metadata => metadata.IsReadOnly, false },
+                {
+                    new HiddenInputAttribute { DisplayValue = false },
+                    metadata => metadata.HideSurroundingHtml,
+                    true
+                },
+                {
+                    new HiddenInputAttribute { DisplayValue = true },
+                    metadata => metadata.HideSurroundingHtml,
+                    false
+                },
+                {
+                    new HiddenInputAttribute(),
+                    metadata =>
+                        string.Equals(
+                            "HiddenInput",
+                            metadata.TemplateHint,
+                            StringComparison.Ordinal
+                        ),
+                    true
+                },
+                { new RequiredAttribute(), metadata => metadata.IsRequired, true },
+            };
         }
     }
 
@@ -345,7 +353,8 @@ public class ModelMetadataProviderTest
     public void AttributesOverrideMetadataBooleans(
         Attribute attribute,
         Func<ModelMetadata, bool> accessor,
-        bool expectedResult)
+        bool expectedResult
+    )
     {
         // Arrange
         var attributes = new[] { attribute };
@@ -364,32 +373,16 @@ public class ModelMetadataProviderTest
         get
         {
             return new TheoryData<DisplayAttribute, int>
-                {
-                    {
-                        new DisplayAttribute(), ModelMetadata.DefaultOrder
-                    },
-                    {
-                        new DisplayAttribute { Order = int.MinValue }, int.MinValue
-                    },
-                    {
-                        new DisplayAttribute { Order = -100 }, -100
-                    },
-                    {
-                        new DisplayAttribute { Order = -1 }, -1
-                    },
-                    {
-                        new DisplayAttribute { Order = 0 }, 0
-                    },
-                    {
-                        new DisplayAttribute { Order = 1 }, 1
-                    },
-                    {
-                        new DisplayAttribute { Order = 200 }, 200
-                    },
-                    {
-                        new DisplayAttribute { Order = int.MaxValue }, int.MaxValue
-                    },
-                };
+            {
+                { new DisplayAttribute(), ModelMetadata.DefaultOrder },
+                { new DisplayAttribute { Order = int.MinValue }, int.MinValue },
+                { new DisplayAttribute { Order = -100 }, -100 },
+                { new DisplayAttribute { Order = -1 }, -1 },
+                { new DisplayAttribute { Order = 0 }, 0 },
+                { new DisplayAttribute { Order = 1 }, 1 },
+                { new DisplayAttribute { Order = 200 }, 200 },
+                { new DisplayAttribute { Order = int.MaxValue }, int.MaxValue },
+            };
         }
     }
 
@@ -608,11 +601,7 @@ public class ModelMetadataProviderTest
     public void BinderTypeProviders_Null()
     {
         // Arrange
-        var binderProviders = new[]
-        {
-                new TestBinderTypeProvider(),
-                new TestBinderTypeProvider(),
-            };
+        var binderProviders = new[] { new TestBinderTypeProvider(), new TestBinderTypeProvider(), };
 
         var provider = CreateProvider(binderProviders);
 
@@ -629,9 +618,9 @@ public class ModelMetadataProviderTest
         // Arrange
         var attributes = new[]
         {
-                new TestBinderTypeProvider(),
-                new TestBinderTypeProvider() { BinderType = typeof(ComplexObjectModelBinder) }
-            };
+            new TestBinderTypeProvider(),
+            new TestBinderTypeProvider() { BinderType = typeof(ComplexObjectModelBinder) }
+        };
 
         var provider = CreateProvider(attributes);
 
@@ -648,9 +637,9 @@ public class ModelMetadataProviderTest
         // Arrange
         var attributes = new[]
         {
-                new TestBinderTypeProvider() { BinderType = typeof(ComplexObjectModelBinder) },
-                new TestBinderTypeProvider() { BinderType = typeof(SimpleTypeModelBinder) }
-            };
+            new TestBinderTypeProvider() { BinderType = typeof(ComplexObjectModelBinder) },
+            new TestBinderTypeProvider() { BinderType = typeof(SimpleTypeModelBinder) }
+        };
 
         var provider = CreateProvider(attributes);
 
@@ -665,9 +654,7 @@ public class ModelMetadataProviderTest
     public void IsRequired_DefaultsToTrueForValueType()
     {
         // Arrange
-        var attributes = new object[]
-        {
-        };
+        var attributes = new object[] { };
 
         var provider = CreateProvider(attributes);
 
@@ -682,9 +669,7 @@ public class ModelMetadataProviderTest
     public void IsRequired_DefaultsToFalseForReferenceType()
     {
         // Arrange
-        var attributes = new object[]
-        {
-        };
+        var attributes = new object[] { };
 
         var provider = CreateProvider(attributes);
 
@@ -704,7 +689,8 @@ public class ModelMetadataProviderTest
         // Act
         var metadata = provider.GetMetadataForProperty(
             typeof(RequiredMember),
-            nameof(RequiredMember.RequiredProperty));
+            nameof(RequiredMember.RequiredProperty)
+        );
 
         // Assert
         Assert.True(metadata.IsRequired);
@@ -719,7 +705,8 @@ public class ModelMetadataProviderTest
         // Act
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ClassWithDataMemberIsRequiredTrue),
-            nameof(ClassWithDataMemberIsRequiredTrue.StringProperty));
+            nameof(ClassWithDataMemberIsRequiredTrue.StringProperty)
+        );
 
         // Assert
         Assert.True(metadata.IsBindingRequired);
@@ -734,7 +721,8 @@ public class ModelMetadataProviderTest
         // Act
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ClassWithDataMemberIsRequiredFalse),
-            nameof(ClassWithDataMemberIsRequiredFalse.StringProperty));
+            nameof(ClassWithDataMemberIsRequiredFalse.StringProperty)
+        );
 
         // Assert
         Assert.False(metadata.IsBindingRequired);
@@ -749,7 +737,8 @@ public class ModelMetadataProviderTest
         // Act
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract),
-            nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty));
+            nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty)
+        );
 
         // Assert
         Assert.False(metadata.IsBindingRequired);
@@ -764,7 +753,8 @@ public class ModelMetadataProviderTest
         // Act
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ClassWithPublicSetProperty),
-            nameof(ClassWithPublicSetProperty.StringProperty));
+            nameof(ClassWithPublicSetProperty.StringProperty)
+        );
 
         // Assert
         Assert.NotNull(metadata.PropertySetter);
@@ -780,7 +770,8 @@ public class ModelMetadataProviderTest
         // Act
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ClassWithPrivateSetProperty),
-            nameof(ClassWithPrivateSetProperty.StringProperty));
+            nameof(ClassWithPrivateSetProperty.StringProperty)
+        );
 
         // Assert
         Assert.Null(metadata.PropertySetter);
@@ -933,10 +924,7 @@ public class ModelMetadataProviderTest
     {
         public DataTypeWithCustomDisplayFormat() : base("Custom datatype")
         {
-            DisplayFormat = new DisplayFormatAttribute
-            {
-                DataFormatString = "value",
-            };
+            DisplayFormat = new DisplayFormatAttribute { DataFormatString = "value", };
         }
     }
 
@@ -975,13 +963,9 @@ public class ModelMetadataProviderTest
         [NonTypeBasedBinder(Name = "GrandParentProperty")]
         public Person GrandParent { get; set; }
 
-        public void Update(Person person)
-        {
-        }
+        public void Update(Person person) { }
 
-        public void Save([NonTypeBasedBinder(Name = "PersonParameter")] Person person)
-        {
-        }
+        public void Save([NonTypeBasedBinder(Name = "PersonParameter")] Person person) { }
     }
 
     private class ScaffoldColumnModel
@@ -1048,15 +1032,19 @@ public class ModelMetadataProviderTest
 
         public AttributeInjectModelMetadataProvider(object[] attributes)
             : base(
-                  new DefaultCompositeMetadataDetailsProvider(new IMetadataDetailsProvider[]
-                  {
-                          new DefaultBindingMetadataProvider(),
-                          new DataAnnotationsMetadataProvider(
-                              new MvcOptions(),
-                              Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                              stringLocalizerFactory: null),
-                  }),
-                  Options.Create(new MvcOptions()))
+                new DefaultCompositeMetadataDetailsProvider(
+                    new IMetadataDetailsProvider[]
+                    {
+                        new DefaultBindingMetadataProvider(),
+                        new DataAnnotationsMetadataProvider(
+                            new MvcOptions(),
+                            Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                            stringLocalizerFactory: null
+                        ),
+                    }
+                ),
+                Options.Create(new MvcOptions())
+            )
         {
             _attributes = attributes;
         }
@@ -1071,7 +1059,9 @@ public class ModelMetadataProviderTest
                     new ModelAttributes(
                         _attributes.Concat(entry.ModelAttributes.TypeAttributes).ToArray(),
                         Array.Empty<object>(),
-                        Array.Empty<object>()));
+                        Array.Empty<object>()
+                    )
+                );
             }
 
             return entry;
@@ -1080,16 +1070,21 @@ public class ModelMetadataProviderTest
         protected override DefaultMetadataDetails[] CreatePropertyDetails(ModelMetadataIdentity key)
         {
             var entries = base.CreatePropertyDetails(key);
-            return entries.Select(e =>
-            {
-                return new DefaultMetadataDetails(
-                    e.Key,
-                    new ModelAttributes(
-                        e.ModelAttributes.TypeAttributes,
-                        _attributes.Concat(e.ModelAttributes.PropertyAttributes),
-                        Array.Empty<object>()));
-            })
-            .ToArray();
+            return entries
+                .Select(
+                    e =>
+                    {
+                        return new DefaultMetadataDetails(
+                            e.Key,
+                            new ModelAttributes(
+                                e.ModelAttributes.TypeAttributes,
+                                _attributes.Concat(e.ModelAttributes.PropertyAttributes),
+                                Array.Empty<object>()
+                            )
+                        );
+                    }
+                )
+                .ToArray();
         }
     }
 }

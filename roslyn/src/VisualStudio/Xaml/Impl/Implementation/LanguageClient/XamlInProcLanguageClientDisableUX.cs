@@ -41,12 +41,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IAsynchronousOperationListenerProvider listenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             ILspLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(xamlDispatcherFactory, globalOptions, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, lspLoggerFactory, threadingContext, diagnosticsClientName: null)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(
+                xamlDispatcherFactory,
+                globalOptions,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                lspLoggerFactory,
+                threadingContext,
+                diagnosticsClientName: null
+            ) { }
 
-        protected override ImmutableArray<string> SupportedLanguages => ImmutableArray.Create(StringConstants.XamlLanguageName);
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ImmutableArray.Create(StringConstants.XamlLanguageName);
 
         /// <summary>
         /// Gets the name of the language client (displayed in yellow bars).
@@ -55,11 +64,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
-            var isLspExperimentEnabled = GlobalOptions.GetOption(XamlOptions.EnableLspIntelliSenseFeatureFlag);
-            var capabilities = isLspExperimentEnabled ? XamlCapabilities.None : XamlCapabilities.Current;
+            var isLspExperimentEnabled = GlobalOptions.GetOption(
+                XamlOptions.EnableLspIntelliSenseFeatureFlag
+            );
+            var capabilities = isLspExperimentEnabled
+                ? XamlCapabilities.None
+                : XamlCapabilities.Current;
 
             // Only turn on CodeAction support for client scenarios. Hosts will get non-LSP lightbulbs automatically.
-            capabilities.CodeActionProvider = new CodeActionOptions { CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor }, ResolveProvider = true };
+            capabilities.CodeActionProvider = new CodeActionOptions
+            {
+                CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor },
+                ResolveProvider = true
+            };
 
             return capabilities;
         }

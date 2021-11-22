@@ -42,7 +42,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void AddSchema()
         {
-            string first = @"{
+            string first =
+                @"{
   ""id"":""first"",
   ""type"":""object"",
   ""properties"":
@@ -59,7 +60,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""additionalProperties"":{}
 }";
 
-            string second = @"{
+            string second =
+                @"{
   ""id"":""second"",
   ""type"":""object"",
   ""extends"":{""$ref"":""first""},
@@ -95,13 +97,19 @@ namespace Newtonsoft.Json.Tests.Schema
             Assert.AreEqual(2, node.Schemas.Count);
             Assert.AreEqual(2, node.Properties["firstproperty"].Schemas.Count);
             Assert.AreEqual(3, node.Properties["secondproperty"].Schemas.Count);
-            Assert.AreEqual(3, node.Properties["secondproperty"].Properties["secondproperty_firstproperty"].Schemas.Count);
+            Assert.AreEqual(
+                3,
+                node.Properties["secondproperty"].Properties[
+                    "secondproperty_firstproperty"
+                ].Schemas.Count
+            );
         }
 
         [Test]
         public void CircularReference()
         {
-            string json = @"{
+            string json =
+                @"{
   ""id"":""CircularReferenceArray"",
   ""description"":""CircularReference"",
   ""type"":[""array""],

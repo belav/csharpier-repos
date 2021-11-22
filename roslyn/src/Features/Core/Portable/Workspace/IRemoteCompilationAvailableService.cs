@@ -10,6 +10,10 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal interface IRemoteCompilationAvailableService
     {
-        ValueTask ComputeCompilationAsync(PinnedSolutionInfo solutionInfo, ProjectId projectId, CancellationToken cancellationToken);
+        ValueTask ComputeCompilationAsync(
+            PinnedSolutionInfo solutionInfo,
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        );
     }
 }

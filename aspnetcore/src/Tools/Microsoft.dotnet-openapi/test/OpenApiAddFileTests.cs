@@ -40,9 +40,14 @@ public class OpenApiAddFileTests : OpenApiTestBase
         var app = GetApplication();
         _tempDir.Create();
         var csproj = "fake.csproj";
-        var run = app.Execute(new string[] { "add", "file", "--updateProject", csproj, "randomfile.json" });
+        var run = app.Execute(
+            new string[] { "add", "file", "--updateProject", csproj, "randomfile.json" }
+        );
 
-        Assert.Contains($"The project '{Path.Combine(_tempDir.Root, csproj)}' does not exist.", _error.ToString());
+        Assert.Contains(
+            $"The project '{Path.Combine(_tempDir.Root, csproj)}' does not exist.",
+            _error.ToString()
+        );
         Assert.Equal(1, run);
     }
 
@@ -87,7 +92,10 @@ public class OpenApiAddFileTests : OpenApiTestBase
         using (var reader = new StreamReader(csprojStream))
         {
             content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.Contains($"<OpenApiReference Include=\"{project.NSwagJsonFile}\"", content);
         }
         var projXml = new XmlDocument();
@@ -129,7 +137,9 @@ public class OpenApiAddFileTests : OpenApiTestBase
         var nswagJsonFile = project.NSwagJsonFile;
 
         var app = GetApplication();
-        var run = app.Execute(new[] { "add", "file", nswagJsonFile, "--code-generator", "NSwagTypeScript" });
+        var run = app.Execute(
+            new[] { "add", "file", nswagJsonFile, "--code-generator", "NSwagTypeScript" }
+        );
 
         AssertNoErrors(run);
 
@@ -138,8 +148,14 @@ public class OpenApiAddFileTests : OpenApiTestBase
         using var csprojStream = csproj.OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = await reader.ReadToEndAsync();
-        Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
-        Assert.Contains($"<OpenApiReference Include=\"{nswagJsonFile}\" CodeGenerator=\"NSwagTypeScript\" />", content);
+        Assert.Contains(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+            content
+        );
+        Assert.Contains(
+            $"<OpenApiReference Include=\"{nswagJsonFile}\" CodeGenerator=\"NSwagTypeScript\" />",
+            content
+        );
     }
 
     [Fact]
@@ -158,7 +174,10 @@ public class OpenApiAddFileTests : OpenApiTestBase
         using var csprojStream = csproj.OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = await reader.ReadToEndAsync();
-        Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+        Assert.Contains(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+            content
+        );
         Assert.Contains($"<OpenApiReference Include=\"{nswagJsonFile}\"", content);
     }
 
@@ -169,7 +188,9 @@ public class OpenApiAddFileTests : OpenApiTestBase
         var nswagJsonFIle = project.NSwagJsonFile;
 
         var app = GetApplication();
-        var run = app.Execute(new[] { "add", "file", "--updateProject", project.Project.Path, nswagJsonFIle });
+        var run = app.Execute(
+            new[] { "add", "file", "--updateProject", project.Project.Path, nswagJsonFIle }
+        );
 
         AssertNoErrors(run);
 
@@ -178,7 +199,10 @@ public class OpenApiAddFileTests : OpenApiTestBase
         using var csprojStream = csproj.OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = await reader.ReadToEndAsync();
-        Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+        Assert.Contains(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+            content
+        );
         Assert.Contains($"<OpenApiReference Include=\"{nswagJsonFIle}\"", content);
     }
 
@@ -203,7 +227,9 @@ public class OpenApiAddFileTests : OpenApiTestBase
         using var csprojStream = csproj.OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = await reader.ReadToEndAsync();
-        var escapedPkgRef = Regex.Escape("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"");
+        var escapedPkgRef = Regex.Escape(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\""
+        );
         Assert.Single(Regex.Matches(content, escapedPkgRef));
         var escapedApiRef = Regex.Escape($"<OpenApiReference Include=\"{nswagJsonFile}\"");
         Assert.Single(Regex.Matches(content, escapedApiRef));

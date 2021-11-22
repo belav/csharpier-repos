@@ -46,7 +46,6 @@ namespace System.IO.Tests
             testFile.Refresh();
             Assert.True((testFile.Attributes & FileAttributes.ReadOnly) != FileAttributes.ReadOnly);
         }
-
         #endregion
     }
 }

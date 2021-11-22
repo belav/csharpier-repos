@@ -8,5 +8,7 @@ namespace Microsoft.AspNetCore.Hosting;
 
 internal interface ISupportsUseDefaultServiceProvider
 {
-    IWebHostBuilder UseDefaultServiceProvider(Action<WebHostBuilderContext, ServiceProviderOptions> configure);
+    IWebHostBuilder UseDefaultServiceProvider(
+        Action<WebHostBuilderContext, ServiceProviderOptions> configure
+    );
 }

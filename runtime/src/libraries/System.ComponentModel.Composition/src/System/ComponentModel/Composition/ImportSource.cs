@@ -12,16 +12,13 @@ namespace System.ComponentModel.Composition
         /// The import can be satisfied with values from the current or parent (or other ancestor) containers  (scopes)
         /// </summary>
         Any = 0,
-
         /// <summary>
         /// The import can be satisfied with values from the current container (scope)
         /// </summary>
         Local = 1,
-
         /// <summary>
         /// The import can only be satisfied with values from the parent container (or other ancestor containers) (scopes)
         /// </summary>
         NonLocal = 2
-
     }
 }

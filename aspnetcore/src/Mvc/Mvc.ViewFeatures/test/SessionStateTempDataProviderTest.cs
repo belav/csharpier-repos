@@ -18,9 +18,9 @@ public class SessionStateTempDataProviderTest
 {
     private static readonly byte[] Bytes = Encoding.UTF8.GetBytes("test value");
     private static readonly IDictionary<string, object> Dictionary = new Dictionary<string, object>
-        {
-            { "key", "value" },
-        };
+    {
+        { "key", "value" },
+    };
 
     [Fact]
     public void Load_ThrowsException_WhenSessionIsNotEnabled()
@@ -29,10 +29,12 @@ public class SessionStateTempDataProviderTest
         var testProvider = CreateTempDataProvider();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            testProvider.LoadTempData(GetHttpContext(sessionEnabled: false));
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                testProvider.LoadTempData(GetHttpContext(sessionEnabled: false));
+            }
+        );
     }
 
     [Fact]
@@ -42,10 +44,12 @@ public class SessionStateTempDataProviderTest
         var testProvider = CreateTempDataProvider();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            testProvider.SaveTempData(GetHttpContext(sessionEnabled: false), Dictionary);
-        });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                testProvider.SaveTempData(GetHttpContext(sessionEnabled: false), Dictionary);
+            }
+        );
     }
 
     [Fact]
@@ -86,7 +90,9 @@ public class SessionStateTempDataProviderTest
         var httpContext = new DefaultHttpContext();
         if (sessionEnabled)
         {
-            httpContext.Features.Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
+            httpContext.Features.Set<ISessionFeature>(
+                new SessionFeature() { Session = new TestSession() }
+            );
         }
         return httpContext;
     }
@@ -104,9 +110,15 @@ public class SessionStateTempDataProviderTest
 
     private class TestSession : ISession
     {
-        private readonly Dictionary<string, byte[]> _innerDictionary = new Dictionary<string, byte[]>();
+        private readonly Dictionary<string, byte[]> _innerDictionary = new Dictionary<
+            string,
+            byte[]
+        >();
 
-        public IEnumerable<string> Keys { get { return _innerDictionary.Keys; } }
+        public IEnumerable<string> Keys
+        {
+            get { return _innerDictionary.Keys; }
+        }
 
         public string Id => "TestId";
 

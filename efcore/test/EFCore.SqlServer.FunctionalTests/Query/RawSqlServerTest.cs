@@ -37,17 +37,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             public virtual DbSet<Order13346> Orders { get; set; }
 
-            public MyContext13346(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public MyContext13346(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                modelBuilder.Entity<OrderSummary13346>()
+                modelBuilder
+                    .Entity<OrderSummary13346>()
                     .HasNoKey()
-                    .ToQuery(() => Set<OrderSummary13346>().FromSqlRaw("SELECT o.Amount From Orders AS o -- RAW"));
+                    .ToQuery(
+                        () =>
+                            Set<OrderSummary13346>()
+                                .FromSqlRaw("SELECT o.Amount From Orders AS o -- RAW")
+                    );
 #pragma warning restore CS0618 // Type or member is obsolete
             }
 
@@ -77,16 +79,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected override string StoreName { get; } = "RawSqlServerTest";
 
-        protected TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        protected TestSqlLoggerFactory TestSqlLoggerFactory =>
+            (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        protected void AssertSql(params string[] expected)
-            => TestSqlLoggerFactory.AssertBaseline(expected);
+        protected void AssertSql(params string[] expected) =>
+            TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected void ClearLog()
-            => TestSqlLoggerFactory.Clear();
+        protected void ClearLog() => TestSqlLoggerFactory.Clear();
     }
 }

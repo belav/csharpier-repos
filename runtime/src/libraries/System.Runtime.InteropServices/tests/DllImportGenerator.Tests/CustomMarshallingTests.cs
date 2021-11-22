@@ -13,18 +13,24 @@ namespace DllImportGenerator.IntegrationTests
     partial class NativeExportsNE
     {
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_deepduplicate")]
-        public static partial void DeepDuplicateStrings(StringContainer strings, out StringContainer pStringsOut);
+        public static partial void DeepDuplicateStrings(
+            StringContainer strings,
+            out StringContainer pStringsOut
+        );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_reverse_strings")]
         public static partial void ReverseStrings(ref StringContainer strings);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes_as_double")]
-        public static partial double GetLongBytesAsDouble([MarshalUsing(typeof(DoubleToLongMarshaler))] double d);
+        public static partial double GetLongBytesAsDouble(
+            [MarshalUsing(typeof(DoubleToLongMarshaler))] double d
+        );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "negate_bools")]
         public static partial void NegateBools(
             BoolStruct boolStruct,
-            out BoolStruct pBoolStructOut);
+            out BoolStruct pBoolStructOut
+        );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "and_bools_ref")]
         [return: MarshalAs(UnmanagedType.U1)]
@@ -34,10 +40,14 @@ namespace DllImportGenerator.IntegrationTests
         public static partial IntWrapper DoubleIntRef(IntWrapper pInt);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_replace_ref_ushort")]
-        public static partial void ReverseReplaceString([MarshalUsing(typeof(Utf16StringMarshaler))] ref string s);
+        public static partial void ReverseReplaceString(
+            [MarshalUsing(typeof(Utf16StringMarshaler))] ref string s
+        );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "return_length_ushort")]
-        public static partial int ReturnStringLength([MarshalUsing(typeof(Utf16StringMarshaler))] string s);
+        public static partial int ReturnStringLength(
+            [MarshalUsing(typeof(Utf16StringMarshaler))] string s
+        );
     }
 
     public class CustomMarshallingTests
@@ -45,11 +55,7 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableStructWithFree()
         {
-            var stringContainer = new StringContainer
-            {
-                str1 = "Foo",
-                str2 = "Bar"
-            };
+            var stringContainer = new StringContainer { str1 = "Foo", str2 = "Bar" };
 
             NativeExportsNE.DeepDuplicateStrings(stringContainer, out var stringContainer2);
 
@@ -67,12 +73,7 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableStructWithoutAllocation()
         {
-            var boolStruct = new BoolStruct
-            {
-                b1 = true,
-                b2 = false,
-                b3 = true
-            };
+            var boolStruct = new BoolStruct { b1 = true, b2 = false, b3 = true };
 
             NativeExportsNE.NegateBools(boolStruct, out BoolStruct boolStructNegated);
 
@@ -96,13 +97,9 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableStructRef()
         {
-            var stringContainer = new StringContainer
-            {
-                str1 = "Foo",
-                str2 = "Bar"
-            };
+            var stringContainer = new StringContainer { str1 = "Foo", str2 = "Bar" };
 
-            var expected = new StringContainer 
+            var expected = new StringContainer
             {
                 str1 = ReverseUTF8Bytes(stringContainer.str1),
                 str2 = ReverseUTF8Bytes(stringContainer.str2)
@@ -126,12 +123,7 @@ namespace DllImportGenerator.IntegrationTests
         [InlineData(false, false, false)]
         public void NonBlittableStructIn(bool b1, bool b2, bool b3)
         {
-            var container = new BoolStruct
-            {
-                b1 = b1,
-                b2 = b2,
-                b3 = b3
-            };
+            var container = new BoolStruct { b1 = b1, b2 = b2, b3 = b3 };
 
             Assert.Equal(b1 && b2 && b3, NativeExportsNE.AndBoolsRef(container));
         }

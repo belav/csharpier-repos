@@ -28,27 +28,24 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
             string storeType,
             DbType? dbType = null,
             bool unicode = false,
-            int? size = null)
-            : base(storeType, dbType, unicode, size)
-        {
-        }
+            int? size = null
+        ) : base(storeType, dbType, unicode, size) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteStringTypeMapping" /> class.
         /// </summary>
         /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
         protected SqliteStringTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters">The parameters for this mapping.</param>
         /// <returns>The newly created mapping.</returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqliteStringTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqliteStringTypeMapping(parameters);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -106,10 +103,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                             startIndexes.Add(builder.Length);
                         }
 
-                        builder
-                            .Append("CHAR(")
-                            .Append(lineFeed ? "10" : "13")
-                            .Append(')');
+                        builder.Append("CHAR(").Append(lineFeed ? "10" : "13").Append(')');
                     }
                     else if (apostrophe)
                     {
@@ -160,8 +154,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                 lengths.Add(builder.Length - startIndexes[^1]);
             }
 
-            if (lengths.Count == 0
-                && builder.Length == 0)
+            if (lengths.Count == 0 && builder.Length == 0)
             {
                 return "''";
             }

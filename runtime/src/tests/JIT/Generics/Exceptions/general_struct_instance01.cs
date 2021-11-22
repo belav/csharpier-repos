@@ -21,8 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
-
 public class GenException<T> : Exception { }
 public struct Gen<T>
 {
@@ -76,7 +74,6 @@ public class Test_general_struct_instance01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -90,30 +87,30 @@ public class Test_general_struct_instance01
         Eval(new Gen<int[]>().ExceptionTest(true));
         Eval(new Gen<double[,]>().ExceptionTest(true));
         Eval(new Gen<string[][][]>().ExceptionTest(true));
-        Eval(new Gen<object[, , ,]>().ExceptionTest(true));
-        Eval(new Gen<Guid[][, , ,][]>().ExceptionTest(true));
+        Eval(new Gen<object[,,,]>().ExceptionTest(true));
+        Eval(new Gen<Guid[][,,,][]>().ExceptionTest(true));
 
         Eval(new Gen<RefX1<int>[]>().ExceptionTest(true));
         Eval(new Gen<RefX1<double>[,]>().ExceptionTest(true));
         Eval(new Gen<RefX1<string>[][][]>().ExceptionTest(true));
-        Eval(new Gen<RefX1<object>[, , ,]>().ExceptionTest(true));
-        Eval(new Gen<RefX1<Guid>[][, , ,][]>().ExceptionTest(true));
+        Eval(new Gen<RefX1<object>[,,,]>().ExceptionTest(true));
+        Eval(new Gen<RefX1<Guid>[][,,,][]>().ExceptionTest(true));
         Eval(new Gen<RefX2<int, int>[]>().ExceptionTest(true));
         Eval(new Gen<RefX2<double, double>[,]>().ExceptionTest(true));
         Eval(new Gen<RefX2<string, string>[][][]>().ExceptionTest(true));
-        Eval(new Gen<RefX2<object, object>[, , ,]>().ExceptionTest(true));
-        Eval(new Gen<RefX2<Guid, Guid>[][, , ,][]>().ExceptionTest(true));
+        Eval(new Gen<RefX2<object, object>[,,,]>().ExceptionTest(true));
+        Eval(new Gen<RefX2<Guid, Guid>[][,,,][]>().ExceptionTest(true));
         Eval(new Gen<ValX1<int>[]>().ExceptionTest(true));
         Eval(new Gen<ValX1<double>[,]>().ExceptionTest(true));
         Eval(new Gen<ValX1<string>[][][]>().ExceptionTest(true));
-        Eval(new Gen<ValX1<object>[, , ,]>().ExceptionTest(true));
-        Eval(new Gen<ValX1<Guid>[][, , ,][]>().ExceptionTest(true));
+        Eval(new Gen<ValX1<object>[,,,]>().ExceptionTest(true));
+        Eval(new Gen<ValX1<Guid>[][,,,][]>().ExceptionTest(true));
 
         Eval(new Gen<ValX2<int, int>[]>().ExceptionTest(true));
         Eval(new Gen<ValX2<double, double>[,]>().ExceptionTest(true));
         Eval(new Gen<ValX2<string, string>[][][]>().ExceptionTest(true));
-        Eval(new Gen<ValX2<object, object>[, , ,]>().ExceptionTest(true));
-        Eval(new Gen<ValX2<Guid, Guid>[][, , ,][]>().ExceptionTest(true));
+        Eval(new Gen<ValX2<object, object>[,,,]>().ExceptionTest(true));
+        Eval(new Gen<ValX2<Guid, Guid>[][,,,][]>().ExceptionTest(true));
 
         Eval(new Gen<RefX1<int>>().ExceptionTest(true));
         Eval(new Gen<RefX1<ValX1<int>>>().ExceptionTest(true));
@@ -125,8 +122,27 @@ public class Test_general_struct_instance01
         Eval(new Gen<RefX1<RefX1<RefX1<RefX1<Guid>>>>>().ExceptionTest(true));
 
         Eval(new Gen<RefX1<RefX2<int, string>>>().ExceptionTest(true));
-        Eval(new Gen<RefX2<RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>, RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>>>().ExceptionTest(true));
-        Eval(new Gen<RefX3<RefX1<int[][, , ,]>, RefX2<object[, , ,][][], Guid[][][]>, RefX3<double[, , , , , , , , , ,], Guid[][][][, , , ,][, , , ,][][][], string[][][][][][][][][][][]>>>().ExceptionTest(true));
+        Eval(
+            new Gen<
+                RefX2<
+                    RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
+                    RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
+                >
+            >().ExceptionTest(true)
+        );
+        Eval(
+            new Gen<
+                RefX3<
+                    RefX1<int[][,,,]>,
+                    RefX2<object[,,,][][], Guid[][][]>,
+                    RefX3<
+                        double[,,,,,,,,,,],
+                        Guid[][][][,,,,][,,,,][][][],
+                        string[][][][][][][][][][][]
+                    >
+                >
+            >().ExceptionTest(true)
+        );
 
         Eval(new Gen<ValX1<int>>().ExceptionTest(true));
         Eval(new Gen<ValX1<RefX1<int>>>().ExceptionTest(true));
@@ -138,10 +154,27 @@ public class Test_general_struct_instance01
         Eval(new Gen<ValX1<ValX1<ValX1<ValX1<Guid>>>>>().ExceptionTest(true));
 
         Eval(new Gen<ValX1<ValX2<int, string>>>().ExceptionTest(true));
-        Eval(new Gen<ValX2<ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>, ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>>>().ExceptionTest(true));
-        Eval(new Gen<ValX3<ValX1<int[][, , ,]>, ValX2<object[, , ,][][], Guid[][][]>, ValX3<double[, , , , , , , , , ,], Guid[][][][, , , ,][, , , ,][][][], string[][][][][][][][][][][]>>>().ExceptionTest(true));
-
-
+        Eval(
+            new Gen<
+                ValX2<
+                    ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
+                    ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
+                >
+            >().ExceptionTest(true)
+        );
+        Eval(
+            new Gen<
+                ValX3<
+                    ValX1<int[][,,,]>,
+                    ValX2<object[,,,][][], Guid[][][]>,
+                    ValX3<
+                        double[,,,,,,,,,,],
+                        Guid[][][][,,,,][,,,,][][][],
+                        string[][][][][][][][][][][]
+                    >
+                >
+            >().ExceptionTest(true)
+        );
 
         if (result)
         {
@@ -154,5 +187,4 @@ public class Test_general_struct_instance01
             return 1;
         }
     }
-
 }

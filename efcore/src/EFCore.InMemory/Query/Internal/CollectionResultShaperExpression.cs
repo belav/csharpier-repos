@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Expression projection,
             Expression innerShaper,
             INavigationBase? navigation,
-            Type elementType)
+            Type elementType
+        )
         {
             Projection = projection;
             InnerShaper = innerShaper;
@@ -69,12 +70,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         public virtual Type ElementType { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+        public override Type Type =>
+            Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -93,9 +93,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual CollectionResultShaperExpression Update(
             Expression projection,
-            Expression innerShaper)
-            => projection != Projection || innerShaper != InnerShaper
-                ? new CollectionResultShaperExpression(projection, innerShaper, Navigation, ElementType)
+            Expression innerShaper
+        ) =>
+            projection != Projection || innerShaper != InnerShaper
+                ? new CollectionResultShaperExpression(
+                      projection,
+                      innerShaper,
+                      Navigation,
+                      ElementType
+                  )
                 : this;
 
         /// <inheritdoc />
@@ -108,7 +114,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 expressionPrinter.Visit(Projection);
                 expressionPrinter.Append(", ");
                 expressionPrinter.Visit(InnerShaper);
-                expressionPrinter.AppendLine($", {Navigation?.Name}, {ElementType.ShortDisplayName()})");
+                expressionPrinter.AppendLine(
+                    $", {Navigation?.Name}, {ElementType.ShortDisplayName()})"
+                );
             }
         }
     }

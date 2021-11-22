@@ -25,10 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public SqliteRuntimeModelConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     Updates the property annotations that will be set on the read-only object.
@@ -41,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IProperty property,
             RuntimeProperty runtimeProperty,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessPropertyAnnotations(annotations, property, runtimeProperty, runtime);
 

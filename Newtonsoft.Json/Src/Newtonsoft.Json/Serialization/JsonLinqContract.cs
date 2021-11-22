@@ -36,8 +36,7 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonLinqContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
-        public JsonLinqContract(Type underlyingType)
-            : base(underlyingType)
+        public JsonLinqContract(Type underlyingType) : base(underlyingType)
         {
             ContractType = JsonContractType.Linq;
         }

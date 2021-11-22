@@ -13,11 +13,15 @@ namespace System.Text.Json
             }
 
 #if BUILDING_INBOX_LIBRARY
-            return string.Create(name.Length, name, (chars, name) =>
-            {
-                name.AsSpan().CopyTo(chars);
-                FixCasing(chars);
-            });
+            return string.Create(
+                name.Length,
+                name,
+                (chars, name) =>
+                {
+                    name.AsSpan().CopyTo(chars);
+                    FixCasing(chars);
+                }
+            );
 #else
             char[] chars = name.ToCharArray();
             FixCasing(chars);
@@ -44,7 +48,6 @@ namespace System.Text.Json
                     {
                         chars[i] = char.ToLowerInvariant(chars[i]);
                     }
-
                     break;
                 }
 

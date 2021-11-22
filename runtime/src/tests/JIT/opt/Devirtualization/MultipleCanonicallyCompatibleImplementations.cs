@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 public class MultipleCanonicallyCompatibleImplementations
 {
     static int Main()
@@ -46,9 +45,11 @@ sealed class Foo<T> : Base, IFooable<T>
         var f = new Foo<T>();
         var fA1 = new Foo<Atom1>();
         var fA2 = new Foo<Atom2>();
-        return ((IFooable<T>)f).DoFoo(default) + ((IFooable<Atom2>)f).DoFoo(null)
-             + ((IFooable<Atom1>)fA1).DoFoo(default) + ((IFooable<Atom2>)fA1).DoFoo(null)
-             + ((IFooable<Atom2>)fA2).DoFoo(default);
+        return ((IFooable<T>)f).DoFoo(default)
+            + ((IFooable<Atom2>)f).DoFoo(null)
+            + ((IFooable<Atom1>)fA1).DoFoo(default)
+            + ((IFooable<Atom2>)fA1).DoFoo(null)
+            + ((IFooable<Atom2>)fA2).DoFoo(default);
     }
 }
 

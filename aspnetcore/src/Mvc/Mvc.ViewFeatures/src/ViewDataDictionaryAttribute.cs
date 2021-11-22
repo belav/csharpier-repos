@@ -11,6 +11,4 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// set method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class ViewDataDictionaryAttribute : Attribute
-{
-}
+public class ViewDataDictionaryAttribute : Attribute { }

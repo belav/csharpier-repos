@@ -21,5 +21,4 @@ public interface ILookupNormalizer
     /// <param name="email">The email to normalize.</param>
     /// <returns>A normalized representation of the specified <paramref name="email"/>.</returns>
     string NormalizeEmail(string email);
-
 }

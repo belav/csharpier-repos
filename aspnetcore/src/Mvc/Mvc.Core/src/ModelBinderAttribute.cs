@@ -11,20 +11,19 @@ namespace Microsoft.AspNetCore.Mvc;
 /// An attribute that can specify a model name or type of <see cref="IModelBinder"/> to use for binding.
 /// </summary>
 [AttributeUsage(
-
     // Support method parameters in actions.
-    AttributeTargets.Parameter |
-
-    // Support properties on model DTOs.
-    AttributeTargets.Property |
-
-    // Support model types.
-    AttributeTargets.Class |
-    AttributeTargets.Enum |
-    AttributeTargets.Struct,
-
+    AttributeTargets.Parameter
+        |
+        // Support properties on model DTOs.
+        AttributeTargets.Property
+        |
+        // Support model types.
+        AttributeTargets.Class
+        | AttributeTargets.Enum
+        | AttributeTargets.Struct,
     AllowMultiple = false,
-    Inherited = true)]
+    Inherited = true
+)]
 public class ModelBinderAttribute : Attribute, IModelNameProvider, IBinderTypeProviderMetadata
 {
     private BindingSource? _bindingSource;
@@ -33,9 +32,7 @@ public class ModelBinderAttribute : Attribute, IModelNameProvider, IBinderTypePr
     /// <summary>
     /// Initializes a new instance of <see cref="ModelBinderAttribute"/>.
     /// </summary>
-    public ModelBinderAttribute()
-    {
-    }
+    public ModelBinderAttribute() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ModelBinderAttribute"/>.
@@ -70,8 +67,10 @@ public class ModelBinderAttribute : Attribute, IModelNameProvider, IBinderTypePr
                 throw new ArgumentException(
                     Resources.FormatBinderType_MustBeIModelBinder(
                         value.FullName,
-                        typeof(IModelBinder).FullName),
-                    nameof(value));
+                        typeof(IModelBinder).FullName
+                    ),
+                    nameof(value)
+                );
             }
 
             _binderType = value;
@@ -94,10 +93,7 @@ public class ModelBinderAttribute : Attribute, IModelNameProvider, IBinderTypePr
 
             return _bindingSource;
         }
-        protected set
-        {
-            _bindingSource = value;
-        }
+        protected set { _bindingSource = value; }
     }
 
     /// <inheritdoc />

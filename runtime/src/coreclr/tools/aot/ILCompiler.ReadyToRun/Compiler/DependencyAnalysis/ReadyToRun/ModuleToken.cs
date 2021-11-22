@@ -55,8 +55,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool Equals(object obj)
         {
-            return obj is ModuleToken moduleToken &&
-                Equals(moduleToken);
+            return obj is ModuleToken moduleToken && Equals(moduleToken);
         }
 
         public bool Equals(ModuleToken moduleToken)

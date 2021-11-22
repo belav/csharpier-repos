@@ -143,76 +143,76 @@ namespace System.Tests
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, true)]     // Negative Infinity
-        [InlineData(double.MinValue, false)]            // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, false)]   // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, false)]   // Min Negative Subnormal
-        [InlineData(-double.Epsilon, false)]            // Max Negative Subnormal (Negative Epsilon)
-        [InlineData(-0.0, false)]                       // Negative Zero
-        [InlineData(double.NaN, false)]                 // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(double.Epsilon, false)]             // Min Positive Subnormal (Positive Epsilon)
-        [InlineData(2.2250738585072009E-308, false)]    // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, false)]    // Min Positive Normal
-        [InlineData(double.MaxValue, false)]            // Max Positive Normal
-        [InlineData(double.PositiveInfinity, true)]     // Positive Infinity
+        [InlineData(double.NegativeInfinity, true)] // Negative Infinity
+        [InlineData(double.MinValue, false)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, false)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, false)] // Min Negative Subnormal
+        [InlineData(-double.Epsilon, false)] // Max Negative Subnormal (Negative Epsilon)
+        [InlineData(-0.0, false)] // Negative Zero
+        [InlineData(double.NaN, false)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(double.Epsilon, false)] // Min Positive Subnormal (Positive Epsilon)
+        [InlineData(2.2250738585072009E-308, false)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, false)] // Min Positive Normal
+        [InlineData(double.MaxValue, false)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, true)] // Positive Infinity
         public static void IsInfinity(double d, bool expected)
         {
             Assert.Equal(expected, double.IsInfinity(d));
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, false)]    // Negative Infinity
-        [InlineData(double.MinValue, false)]            // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, false)]   // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, false)]   // Min Negative Subnormal
-        [InlineData(-double.Epsilon, false)]            // Max Negative Subnormal (Negative Epsilon)
-        [InlineData(-0.0, false)]                       // Negative Zero
-        [InlineData(double.NaN, true)]                  // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(double.Epsilon, false)]             // Min Positive Subnormal (Positive Epsilon)
-        [InlineData(2.2250738585072009E-308, false)]    // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, false)]    // Min Positive Normal
-        [InlineData(double.MaxValue, false)]            // Max Positive Normal
-        [InlineData(double.PositiveInfinity, false)]    // Positive Infinity
+        [InlineData(double.NegativeInfinity, false)] // Negative Infinity
+        [InlineData(double.MinValue, false)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, false)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, false)] // Min Negative Subnormal
+        [InlineData(-double.Epsilon, false)] // Max Negative Subnormal (Negative Epsilon)
+        [InlineData(-0.0, false)] // Negative Zero
+        [InlineData(double.NaN, true)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(double.Epsilon, false)] // Min Positive Subnormal (Positive Epsilon)
+        [InlineData(2.2250738585072009E-308, false)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, false)] // Min Positive Normal
+        [InlineData(double.MaxValue, false)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, false)] // Positive Infinity
         public static void IsNaN(double d, bool expected)
         {
             Assert.Equal(expected, double.IsNaN(d));
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, true)]     // Negative Infinity
-        [InlineData(double.MinValue, false)]            // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, false)]   // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, false)]   // Min Negative Subnormal
-        [InlineData(-double.Epsilon, false)]            // Max Negative Subnormal (Negative Epsilon)
-        [InlineData(-0.0, false)]                       // Negative Zero
-        [InlineData(double.NaN, false)]                 // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(double.Epsilon, false)]             // Min Positive Subnormal (Positive Epsilon)
-        [InlineData(2.2250738585072009E-308, false)]    // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, false)]    // Min Positive Normal
-        [InlineData(double.MaxValue, false)]            // Max Positive Normal
-        [InlineData(double.PositiveInfinity, false)]    // Positive Infinity
+        [InlineData(double.NegativeInfinity, true)] // Negative Infinity
+        [InlineData(double.MinValue, false)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, false)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, false)] // Min Negative Subnormal
+        [InlineData(-double.Epsilon, false)] // Max Negative Subnormal (Negative Epsilon)
+        [InlineData(-0.0, false)] // Negative Zero
+        [InlineData(double.NaN, false)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(double.Epsilon, false)] // Min Positive Subnormal (Positive Epsilon)
+        [InlineData(2.2250738585072009E-308, false)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, false)] // Min Positive Normal
+        [InlineData(double.MaxValue, false)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, false)] // Positive Infinity
         public static void IsNegativeInfinity(double d, bool expected)
         {
             Assert.Equal(expected, double.IsNegativeInfinity(d));
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, false)]    // Negative Infinity
-        [InlineData(double.MinValue, false)]            // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, false)]   // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, false)]   // Min Negative Subnormal
-        [InlineData(-double.Epsilon, false)]            // Max Negative Subnormal (Negative Epsilon)
-        [InlineData(-0.0, false)]                       // Negative Zero
-        [InlineData(double.NaN, false)]                 // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(double.Epsilon, false)]             // Min Positive Subnormal (Positive Epsilon)
-        [InlineData(2.2250738585072009E-308, false)]    // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, false)]    // Min Positive Normal
-        [InlineData(double.MaxValue, false)]            // Max Positive Normal
-        [InlineData(double.PositiveInfinity, true)]     // Positive Infinity
+        [InlineData(double.NegativeInfinity, false)] // Negative Infinity
+        [InlineData(double.MinValue, false)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, false)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, false)] // Min Negative Subnormal
+        [InlineData(-double.Epsilon, false)] // Max Negative Subnormal (Negative Epsilon)
+        [InlineData(-0.0, false)] // Negative Zero
+        [InlineData(double.NaN, false)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(double.Epsilon, false)] // Min Positive Subnormal (Positive Epsilon)
+        [InlineData(2.2250738585072009E-308, false)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, false)] // Min Positive Normal
+        [InlineData(double.MaxValue, false)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, true)] // Positive Infinity
         public static void IsPositiveInfinity(double d, bool expected)
         {
             Assert.Equal(expected, double.IsPositiveInfinity(d));
@@ -243,7 +243,10 @@ namespace System.Tests
         public static void NegativeInfinity()
         {
             Assert.Equal(-1.0 / 0.0, double.NegativeInfinity);
-            Assert.Equal(0xFFF00000_00000000u, BitConverter.DoubleToUInt64Bits(double.NegativeInfinity));
+            Assert.Equal(
+                0xFFF00000_00000000u,
+                BitConverter.DoubleToUInt64Bits(double.NegativeInfinity)
+            );
         }
 
         public static IEnumerable<object[]> Parse_Valid_TestData()
@@ -258,10 +261,7 @@ namespace System.Tests
                 CurrencyGroupSeparator = ","
             };
 
-            var decimalSeparatorFormat = new NumberFormatInfo()
-            {
-                NumberDecimalSeparator = "."
-            };
+            var decimalSeparatorFormat = new NumberFormatInfo() { NumberDecimalSeparator = "." };
 
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
 
@@ -272,31 +272,133 @@ namespace System.Tests
             yield return new object[] { (567.89).ToString(), defaultStyle, null, 567.89 };
             yield return new object[] { (-567.89).ToString(), defaultStyle, null, -567.89 };
             yield return new object[] { "1E23", defaultStyle, null, 1E23 };
-            yield return new object[] { "9007199254740997.0", defaultStyle, invariantFormat, 9007199254740996.0 };
-            yield return new object[] { "9007199254740997.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 9007199254740996.0 };
-            yield return new object[] { "9007199254740997.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 9007199254740996.0 };
-            yield return new object[] { "9007199254740997.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001", defaultStyle, invariantFormat, 9007199254740998.0 };
-            yield return new object[] { "9007199254740997.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001", defaultStyle, invariantFormat, 9007199254740998.0 };
-            yield return new object[] { "9007199254740997.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001", defaultStyle, invariantFormat, 9007199254740998.0 };
+            yield return new object[]
+            {
+                "9007199254740997.0",
+                defaultStyle,
+                invariantFormat,
+                9007199254740996.0
+            };
+            yield return new object[]
+            {
+                "9007199254740997.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                9007199254740996.0
+            };
+            yield return new object[]
+            {
+                "9007199254740997.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                9007199254740996.0
+            };
+            yield return new object[]
+            {
+                "9007199254740997.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+                defaultStyle,
+                invariantFormat,
+                9007199254740998.0
+            };
+            yield return new object[]
+            {
+                "9007199254740997.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+                defaultStyle,
+                invariantFormat,
+                9007199254740998.0
+            };
+            yield return new object[]
+            {
+                "9007199254740997.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+                defaultStyle,
+                invariantFormat,
+                9007199254740998.0
+            };
             yield return new object[] { "5.005", defaultStyle, invariantFormat, 5.005 };
             yield return new object[] { "5.050", defaultStyle, invariantFormat, 5.05 };
-            yield return new object[] { "5.005000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 5.005 };
-            yield return new object[] { "5.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005", defaultStyle, invariantFormat, 5.0 };
-            yield return new object[] { "5.0050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 5.005 };
+            yield return new object[]
+            {
+                "5.005000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                5.005
+            };
+            yield return new object[]
+            {
+                "5.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005",
+                defaultStyle,
+                invariantFormat,
+                5.0
+            };
+            yield return new object[]
+            {
+                "5.0050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                5.005
+            };
 
-            yield return new object[] { emptyFormat.NumberDecimalSeparator + "234", defaultStyle, null, 0.234 };
-            yield return new object[] { "234" + emptyFormat.NumberDecimalSeparator, defaultStyle, null, 234.0 };
-            yield return new object[] { new string('0', 458) + "1" + new string('0', 308) + emptyFormat.NumberDecimalSeparator, defaultStyle, null, 1E308 };
-            yield return new object[] { new string('0', 459) + "1" + new string('0', 308) + emptyFormat.NumberDecimalSeparator, defaultStyle, null, 1E308 };
+            yield return new object[]
+            {
+                emptyFormat.NumberDecimalSeparator + "234",
+                defaultStyle,
+                null,
+                0.234
+            };
+            yield return new object[]
+            {
+                "234" + emptyFormat.NumberDecimalSeparator,
+                defaultStyle,
+                null,
+                234.0
+            };
+            yield return new object[]
+            {
+                new string('0', 458)
+                    + "1"
+                    + new string('0', 308)
+                    + emptyFormat.NumberDecimalSeparator,
+                defaultStyle,
+                null,
+                1E308
+            };
+            yield return new object[]
+            {
+                new string('0', 459)
+                    + "1"
+                    + new string('0', 308)
+                    + emptyFormat.NumberDecimalSeparator,
+                defaultStyle,
+                null,
+                1E308
+            };
 
-            yield return new object[] { "5005.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 5005.0 };
+            yield return new object[]
+            {
+                "5005.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                5005.0
+            };
             yield return new object[] { "50050.0", defaultStyle, invariantFormat, 50050.0 };
             yield return new object[] { "5005", defaultStyle, invariantFormat, 5005.0 };
             yield return new object[] { "050050", defaultStyle, invariantFormat, 50050.0 };
-            yield return new object[] { "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 0.0 };
+            yield return new object[]
+            {
+                "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                0.0
+            };
             yield return new object[] { "0.005", defaultStyle, invariantFormat, 0.005 };
             yield return new object[] { "0.0500", defaultStyle, invariantFormat, 0.05 };
-            yield return new object[] { "6250000000000000000000000000000000e-12", defaultStyle, invariantFormat, 6.25e21 };
+            yield return new object[]
+            {
+                "6250000000000000000000000000000000e-12",
+                defaultStyle,
+                invariantFormat,
+                6.25e21
+            };
             yield return new object[] { "6250000e0", defaultStyle, invariantFormat, 6.25e6 };
             yield return new object[] { "6250100e-5", defaultStyle, invariantFormat, 62.501 };
             yield return new object[] { "625010.00e-4", defaultStyle, invariantFormat, 62.501 };
@@ -304,29 +406,91 @@ namespace System.Tests
             yield return new object[] { "62500", defaultStyle, invariantFormat, 62500.0 };
             yield return new object[] { "10e-3", defaultStyle, invariantFormat, 0.01 };
 
-            yield return new object[] { (123.1).ToString(), NumberStyles.AllowDecimalPoint, null, 123.1 };
-            yield return new object[] { (1000.0).ToString("N0"), NumberStyles.AllowThousands, null, 1000.0 };
+            yield return new object[]
+            {
+                (123.1).ToString(),
+                NumberStyles.AllowDecimalPoint,
+                null,
+                123.1
+            };
+            yield return new object[]
+            {
+                (1000.0).ToString("N0"),
+                NumberStyles.AllowThousands,
+                null,
+                1000.0
+            };
 
             yield return new object[] { "123", NumberStyles.Any, emptyFormat, 123.0 };
-            yield return new object[] { (123.567).ToString(), NumberStyles.Any, emptyFormat, 123.567 };
+            yield return new object[]
+            {
+                (123.567).ToString(),
+                NumberStyles.Any,
+                emptyFormat,
+                123.567
+            };
             yield return new object[] { "123", NumberStyles.Float, emptyFormat, 123.0 };
-            yield return new object[] { "$1,000", NumberStyles.Currency, dollarSignCommaSeparatorFormat, 1000.0 };
-            yield return new object[] { "$1000", NumberStyles.Currency, dollarSignCommaSeparatorFormat, 1000.0 };
-            yield return new object[] { "123.123", NumberStyles.Float, decimalSeparatorFormat, 123.123 };
-            yield return new object[] { "(123)", NumberStyles.AllowParentheses, decimalSeparatorFormat, -123.0 };
+            yield return new object[]
+            {
+                "$1,000",
+                NumberStyles.Currency,
+                dollarSignCommaSeparatorFormat,
+                1000.0
+            };
+            yield return new object[]
+            {
+                "$1000",
+                NumberStyles.Currency,
+                dollarSignCommaSeparatorFormat,
+                1000.0
+            };
+            yield return new object[]
+            {
+                "123.123",
+                NumberStyles.Float,
+                decimalSeparatorFormat,
+                123.123
+            };
+            yield return new object[]
+            {
+                "(123)",
+                NumberStyles.AllowParentheses,
+                decimalSeparatorFormat,
+                -123.0
+            };
 
             yield return new object[] { "NaN", NumberStyles.Any, invariantFormat, double.NaN };
-            yield return new object[] { "Infinity", NumberStyles.Any, invariantFormat, double.PositiveInfinity };
-            yield return new object[] { "-Infinity", NumberStyles.Any, invariantFormat, double.NegativeInfinity };
+            yield return new object[]
+            {
+                "Infinity",
+                NumberStyles.Any,
+                invariantFormat,
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                "-Infinity",
+                NumberStyles.Any,
+                invariantFormat,
+                double.NegativeInfinity
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_Valid_TestData))]
-        public static void Parse(string value, NumberStyles style, IFormatProvider provider, double expected)
+        public static void Parse(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            double expected
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             double result;
-            if ((style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0 && style != NumberStyles.None)
+            if (
+                (style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0
+                && style != NumberStyles.None
+            )
             {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
@@ -349,7 +513,9 @@ namespace System.Tests
             if (isDefaultProvider)
             {
                 // Use Parse(string, NumberStyles) or Parse(string, NumberStyles, IFormatProvider)
-                Assert.True(double.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result));
+                Assert.True(
+                    double.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result)
+                );
                 Assert.Equal(expected, result);
 
                 Assert.Equal(expected, double.Parse(value, style));
@@ -378,7 +544,13 @@ namespace System.Tests
         public static void ParsePatterns()
         {
             string path = Directory.GetCurrentDirectory();
-            using (FileStream file = new FileStream(Path.Combine(path, "ibm-fpgen.txt"), FileMode.Open, FileAccess.Read))
+            using (
+                FileStream file = new FileStream(
+                    Path.Combine(path, "ibm-fpgen.txt"),
+                    FileMode.Open,
+                    FileAccess.Read
+                )
+            )
             {
                 using (var streamReader = new StreamReader(file))
                 {
@@ -391,10 +563,20 @@ namespace System.Tests
                         string inputDoubleBytes = data[2];
                         string correctValue = data[3];
 
-                        double doubleValue = double.Parse(correctValue, NumberFormatInfo.InvariantInfo);
-                        string doubleBytes = BitConverter.ToString(BitConverter.GetBytes(doubleValue));
-                        float floatValue = float.Parse(correctValue, NumberFormatInfo.InvariantInfo);
-                        string floatBytes = BitConverter.ToString(BitConverter.GetBytes(floatValue));
+                        double doubleValue = double.Parse(
+                            correctValue,
+                            NumberFormatInfo.InvariantInfo
+                        );
+                        string doubleBytes = BitConverter.ToString(
+                            BitConverter.GetBytes(doubleValue)
+                        );
+                        float floatValue = float.Parse(
+                            correctValue,
+                            NumberFormatInfo.InvariantInfo
+                        );
+                        string floatBytes = BitConverter.ToString(
+                            BitConverter.GetBytes(floatValue)
+                        );
                         Half halfValue = Half.Parse(correctValue, NumberFormatInfo.InvariantInfo);
                         string halfBytes = BitConverter.ToString(BitConverter.GetBytes(halfValue));
 
@@ -435,24 +617,64 @@ namespace System.Tests
 
             yield return new object[] { "ab", defaultStyle, null, typeof(FormatException) }; // Hex value
             yield return new object[] { "(123)", defaultStyle, null, typeof(FormatException) }; // Parentheses
-            yield return new object[] { (100.0).ToString("C0"), defaultStyle, null, typeof(FormatException) }; // Currency
+            yield return new object[]
+            {
+                (100.0).ToString("C0"),
+                defaultStyle,
+                null,
+                typeof(FormatException)
+            }; // Currency
 
-            yield return new object[] { (123.456).ToString(), NumberStyles.Integer, null, typeof(FormatException) }; // Decimal
-            yield return new object[] { "  " + (123.456).ToString(), NumberStyles.None, null, typeof(FormatException) }; // Leading space
-            yield return new object[] { (123.456).ToString() + "   ", NumberStyles.None, null, typeof(FormatException) }; // Leading space
+            yield return new object[]
+            {
+                (123.456).ToString(),
+                NumberStyles.Integer,
+                null,
+                typeof(FormatException)
+            }; // Decimal
+            yield return new object[]
+            {
+                "  " + (123.456).ToString(),
+                NumberStyles.None,
+                null,
+                typeof(FormatException)
+            }; // Leading space
+            yield return new object[]
+            {
+                (123.456).ToString() + "   ",
+                NumberStyles.None,
+                null,
+                typeof(FormatException)
+            }; // Leading space
             yield return new object[] { "1E23", NumberStyles.None, null, typeof(FormatException) }; // Exponent
 
             yield return new object[] { "ab", NumberStyles.None, null, typeof(FormatException) }; // Negative hex value
-            yield return new object[] { "  123  ", NumberStyles.None, null, typeof(FormatException) }; // Trailing and leading whitespace
+            yield return new object[]
+            {
+                "  123  ",
+                NumberStyles.None,
+                null,
+                typeof(FormatException)
+            }; // Trailing and leading whitespace
         }
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             double result;
-            if ((style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0 && style != NumberStyles.None && (style & NumberStyles.AllowLeadingWhite) == (style & NumberStyles.AllowTrailingWhite))
+            if (
+                (style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0
+                && style != NumberStyles.None
+                && (style & NumberStyles.AllowLeadingWhite)
+                    == (style & NumberStyles.AllowTrailingWhite)
+            )
             {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
@@ -475,11 +697,16 @@ namespace System.Tests
             if (isDefaultProvider)
             {
                 // Use Parse(string, NumberStyles) or Parse(string, NumberStyles, IFormatProvider)
-                Assert.False(double.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result));
+                Assert.False(
+                    double.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result)
+                );
                 Assert.Equal(default(double), result);
 
                 Assert.Throws(exceptionType, () => double.Parse(value, style));
-                Assert.Throws(exceptionType, () => double.Parse(value, style, NumberFormatInfo.CurrentInfo));
+                Assert.Throws(
+                    exceptionType,
+                    () => double.Parse(value, style, NumberFormatInfo.CurrentInfo)
+                );
             }
         }
 
@@ -487,24 +714,58 @@ namespace System.Tests
         {
             foreach (object[] inputs in Parse_Valid_TestData())
             {
-                yield return new object[] { inputs[0], 0, ((string)inputs[0]).Length, inputs[1], inputs[2], inputs[3] };
+                yield return new object[]
+                {
+                    inputs[0],
+                    0,
+                    ((string)inputs[0]).Length,
+                    inputs[1],
+                    inputs[2],
+                    inputs[3]
+                };
             }
 
             const NumberStyles DefaultStyle = NumberStyles.Float | NumberStyles.AllowThousands;
             yield return new object[] { "-123", 0, 3, DefaultStyle, null, (double)-12 };
             yield return new object[] { "-123", 1, 3, DefaultStyle, null, (double)123 };
             yield return new object[] { "1E23", 0, 3, DefaultStyle, null, 1E2 };
-            yield return new object[] { "(123)", 1, 3, NumberStyles.AllowParentheses, new NumberFormatInfo() { NumberDecimalSeparator = "." }, 123 };
-            yield return new object[] { "-Infinity", 1, 8, NumberStyles.Any, NumberFormatInfo.InvariantInfo, double.PositiveInfinity };
+            yield return new object[]
+            {
+                "(123)",
+                1,
+                3,
+                NumberStyles.AllowParentheses,
+                new NumberFormatInfo() { NumberDecimalSeparator = "." },
+                123
+            };
+            yield return new object[]
+            {
+                "-Infinity",
+                1,
+                8,
+                NumberStyles.Any,
+                NumberFormatInfo.InvariantInfo,
+                double.PositiveInfinity
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, double expected)
+        public static void Parse_Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            double expected
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             double result;
-            if ((style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0 && style != NumberStyles.None)
+            if (
+                (style & ~(NumberStyles.Float | NumberStyles.AllowThousands)) == 0
+                && style != NumberStyles.None
+            )
             {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
@@ -515,7 +776,10 @@ namespace System.Tests
                     Assert.Equal(expected, double.Parse(value.AsSpan(offset, count)));
                 }
 
-                Assert.Equal(expected, double.Parse(value.AsSpan(offset, count), provider: provider));
+                Assert.Equal(
+                    expected,
+                    double.Parse(value.AsSpan(offset, count), provider: provider)
+                );
             }
 
             Assert.Equal(expected, double.Parse(value.AsSpan(offset, count), style, provider));
@@ -526,7 +790,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
@@ -541,7 +810,10 @@ namespace System.Tests
         public static void PositiveInfinity()
         {
             Assert.Equal(1.0 / 0.0, double.PositiveInfinity);
-            Assert.Equal(0x7FF00000_00000000u, BitConverter.DoubleToUInt64Bits(double.PositiveInfinity));
+            Assert.Equal(
+                0x7FF00000_00000000u,
+                BitConverter.DoubleToUInt64Bits(double.PositiveInfinity)
+            );
         }
 
         public static IEnumerable<object[]> ToString_TestData()
@@ -566,8 +838,20 @@ namespace System.Tests
                 NumberDecimalSeparator = "~",
                 NumberGroupSeparator = "*"
             };
-            yield return new object[] { -2468.0, "N", customNegativeSignDecimalGroupSeparator, "#2*468~00" };
-            yield return new object[] { 2468.0, "N", customNegativeSignDecimalGroupSeparator, "2*468~00" };
+            yield return new object[]
+            {
+                -2468.0,
+                "N",
+                customNegativeSignDecimalGroupSeparator,
+                "#2*468~00"
+            };
+            yield return new object[]
+            {
+                2468.0,
+                "N",
+                customNegativeSignDecimalGroupSeparator,
+                "2*468~00"
+            };
 
             var customNegativeSignGroupSeparatorNegativePattern = new NumberFormatInfo()
             {
@@ -575,12 +859,24 @@ namespace System.Tests
                 NumberGroupSeparator = "*",
                 NumberNegativePattern = 0,
             };
-            yield return new object[] { -2468.0, "N", customNegativeSignGroupSeparatorNegativePattern, "(2*468.00)" };
+            yield return new object[]
+            {
+                -2468.0,
+                "N",
+                customNegativeSignGroupSeparatorNegativePattern,
+                "(2*468.00)"
+            };
 
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
             yield return new object[] { double.NaN, "G", invariantFormat, "NaN" };
             yield return new object[] { double.PositiveInfinity, "G", invariantFormat, "Infinity" };
-            yield return new object[] { double.NegativeInfinity, "G", invariantFormat, "-Infinity" };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                "G",
+                invariantFormat,
+                "-Infinity"
+            };
         }
 
         public static IEnumerable<object[]> ToString_TestData_NotNetFramework()
@@ -590,7 +886,6 @@ namespace System.Tests
                 yield return testData;
             }
 
-
             yield return new object[] { double.MinValue, "G", null, "-1.7976931348623157E+308" };
             yield return new object[] { double.MaxValue, "G", null, "1.7976931348623157E+308" };
 
@@ -598,11 +893,41 @@ namespace System.Tests
 
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
             yield return new object[] { double.Epsilon, "G", invariantFormat, "5E-324" };
-            yield return new object[] { 32.5, "C100", invariantFormat, "¤32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { 32.5, "P100", invariantFormat, "3,250.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %" };
-            yield return new object[] { 32.5, "E100", invariantFormat, "3.2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001" };
-            yield return new object[] { 32.5, "F100", invariantFormat, "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { 32.5, "N100", invariantFormat, "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
+            yield return new object[]
+            {
+                32.5,
+                "C100",
+                invariantFormat,
+                "¤32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                32.5,
+                "P100",
+                invariantFormat,
+                "3,250.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %"
+            };
+            yield return new object[]
+            {
+                32.5,
+                "E100",
+                invariantFormat,
+                "3.2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001"
+            };
+            yield return new object[]
+            {
+                32.5,
+                "F100",
+                invariantFormat,
+                "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                32.5,
+                "N100",
+                invariantFormat,
+                "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
         }
 
         [Fact]
@@ -612,12 +937,22 @@ namespace System.Tests
             {
                 foreach (object[] testdata in ToString_TestData_NotNetFramework())
                 {
-                    ToString((double)testdata[0], (string)testdata[1], (IFormatProvider)testdata[2], (string)testdata[3]);
+                    ToString(
+                        (double)testdata[0],
+                        (string)testdata[1],
+                        (IFormatProvider)testdata[2],
+                        (string)testdata[3]
+                    );
                 }
             }
         }
 
-        private static void ToString(double d, string format, IFormatProvider provider, string expected)
+        private static void ToString(
+            double d,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             bool isDefaultProvider = (provider == null || provider == NumberFormatInfo.CurrentInfo);
             if (string.IsNullOrEmpty(format) || format.ToUpperInvariant() == "G")
@@ -633,11 +968,23 @@ namespace System.Tests
             {
                 Assert.Equal(expected.Replace('e', 'E'), d.ToString(format.ToUpperInvariant())); // If format is upper case, then exponents are printed in upper case
                 Assert.Equal(expected.Replace('E', 'e'), d.ToString(format.ToLowerInvariant())); // If format is lower case, then exponents are printed in upper case
-                Assert.Equal(expected.Replace('e', 'E'), d.ToString(format.ToUpperInvariant(), null));
-                Assert.Equal(expected.Replace('E', 'e'), d.ToString(format.ToLowerInvariant(), null));
+                Assert.Equal(
+                    expected.Replace('e', 'E'),
+                    d.ToString(format.ToUpperInvariant(), null)
+                );
+                Assert.Equal(
+                    expected.Replace('E', 'e'),
+                    d.ToString(format.ToLowerInvariant(), null)
+                );
             }
-            Assert.Equal(expected.Replace('e', 'E'), d.ToString(format.ToUpperInvariant(), provider));
-            Assert.Equal(expected.Replace('E', 'e'), d.ToString(format.ToLowerInvariant(), provider));
+            Assert.Equal(
+                expected.Replace('e', 'E'),
+                d.ToString(format.ToUpperInvariant(), provider)
+            );
+            Assert.Equal(
+                expected.Replace('E', 'e'),
+                d.ToString(format.ToLowerInvariant(), provider)
+            );
         }
 
         [Fact]
@@ -652,76 +999,76 @@ namespace System.Tests
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, false)]    // Negative Infinity
-        [InlineData(double.MinValue, true)]             // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, true)]    // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, true)]    // Min Negative Subnormal
-        [InlineData(-4.94065645841247E-324, true)]      // Max Negative Subnormal
-        [InlineData(-0.0, true)]                        // Negative Zero
-        [InlineData(double.NaN, false)]                 // NaN
-        [InlineData(0.0, true)]                         // Positive Zero
-        [InlineData(4.94065645841247E-324, true)]       // Min Positive Subnormal
-        [InlineData(2.2250738585072009E-308, true)]     // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, true)]     // Min Positive Normal
-        [InlineData(double.MaxValue, true)]             // Max Positive Normal
-        [InlineData(double.PositiveInfinity, false)]    // Positive Infinity
+        [InlineData(double.NegativeInfinity, false)] // Negative Infinity
+        [InlineData(double.MinValue, true)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, true)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, true)] // Min Negative Subnormal
+        [InlineData(-4.94065645841247E-324, true)] // Max Negative Subnormal
+        [InlineData(-0.0, true)] // Negative Zero
+        [InlineData(double.NaN, false)] // NaN
+        [InlineData(0.0, true)] // Positive Zero
+        [InlineData(4.94065645841247E-324, true)] // Min Positive Subnormal
+        [InlineData(2.2250738585072009E-308, true)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, true)] // Min Positive Normal
+        [InlineData(double.MaxValue, true)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, false)] // Positive Infinity
         public static void IsFinite(double d, bool expected)
         {
             Assert.Equal(expected, double.IsFinite(d));
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, true)]     // Negative Infinity
-        [InlineData(double.MinValue, true)]             // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, true)]    // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, true)]    // Min Negative Subnormal
-        [InlineData(-4.94065645841247E-324, true)]      // Max Negative Subnormal
-        [InlineData(-0.0, true)]                        // Negative Zero
-        [InlineData(double.NaN, true)]                  // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(4.94065645841247E-324, false)]      // Min Positive Subnormal
-        [InlineData(2.2250738585072009E-308, false)]    // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, false)]    // Min Positive Normal
-        [InlineData(double.MaxValue, false)]            // Max Positive Normal
-        [InlineData(double.PositiveInfinity, false)]    // Positive Infinity
+        [InlineData(double.NegativeInfinity, true)] // Negative Infinity
+        [InlineData(double.MinValue, true)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, true)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, true)] // Min Negative Subnormal
+        [InlineData(-4.94065645841247E-324, true)] // Max Negative Subnormal
+        [InlineData(-0.0, true)] // Negative Zero
+        [InlineData(double.NaN, true)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(4.94065645841247E-324, false)] // Min Positive Subnormal
+        [InlineData(2.2250738585072009E-308, false)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, false)] // Min Positive Normal
+        [InlineData(double.MaxValue, false)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, false)] // Positive Infinity
         public static void IsNegative(double d, bool expected)
         {
             Assert.Equal(expected, double.IsNegative(d));
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, false)]    // Negative Infinity
-        [InlineData(double.MinValue, true)]             // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, true)]    // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, false)]   // Min Negative Subnormal
-        [InlineData(-4.94065645841247E-324, false)]     // Max Negative Subnormal
-        [InlineData(-0.0, false)]                       // Negative Zero
-        [InlineData(double.NaN, false)]                 // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(4.94065645841247E-324, false)]      // Min Positive Subnormal
-        [InlineData(2.2250738585072009E-308, false)]    // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, true)]     // Min Positive Normal
-        [InlineData(double.MaxValue, true)]             // Max Positive Normal
-        [InlineData(double.PositiveInfinity, false)]    // Positive Infinity
+        [InlineData(double.NegativeInfinity, false)] // Negative Infinity
+        [InlineData(double.MinValue, true)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, true)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, false)] // Min Negative Subnormal
+        [InlineData(-4.94065645841247E-324, false)] // Max Negative Subnormal
+        [InlineData(-0.0, false)] // Negative Zero
+        [InlineData(double.NaN, false)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(4.94065645841247E-324, false)] // Min Positive Subnormal
+        [InlineData(2.2250738585072009E-308, false)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, true)] // Min Positive Normal
+        [InlineData(double.MaxValue, true)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, false)] // Positive Infinity
         public static void IsNormal(double d, bool expected)
         {
             Assert.Equal(expected, double.IsNormal(d));
         }
 
         [Theory]
-        [InlineData(double.NegativeInfinity, false)]    // Negative Infinity
-        [InlineData(double.MinValue, false)]            // Min Negative Normal
-        [InlineData(-2.2250738585072014E-308, false)]   // Max Negative Normal
-        [InlineData(-2.2250738585072009E-308, true)]    // Min Negative Subnormal
-        [InlineData(-4.94065645841247E-324, true)]      // Max Negative Subnormal
-        [InlineData(-0.0, false)]                       // Negative Zero
-        [InlineData(double.NaN, false)]                 // NaN
-        [InlineData(0.0, false)]                        // Positive Zero
-        [InlineData(4.94065645841247E-324, true)]       // Min Positive Subnormal
-        [InlineData(2.2250738585072009E-308, true)]     // Max Positive Subnormal
-        [InlineData(2.2250738585072014E-308, false)]    // Min Positive Normal
-        [InlineData(double.MaxValue, false)]            // Max Positive Normal
-        [InlineData(double.PositiveInfinity, false)]    // Positive Infinity
+        [InlineData(double.NegativeInfinity, false)] // Negative Infinity
+        [InlineData(double.MinValue, false)] // Min Negative Normal
+        [InlineData(-2.2250738585072014E-308, false)] // Max Negative Normal
+        [InlineData(-2.2250738585072009E-308, true)] // Min Negative Subnormal
+        [InlineData(-4.94065645841247E-324, true)] // Max Negative Subnormal
+        [InlineData(-0.0, false)] // Negative Zero
+        [InlineData(double.NaN, false)] // NaN
+        [InlineData(0.0, false)] // Positive Zero
+        [InlineData(4.94065645841247E-324, true)] // Min Positive Subnormal
+        [InlineData(2.2250738585072009E-308, true)] // Max Positive Subnormal
+        [InlineData(2.2250738585072014E-308, false)] // Min Positive Normal
+        [InlineData(double.MaxValue, false)] // Max Positive Normal
+        [InlineData(double.PositiveInfinity, false)] // Positive Infinity
         public static void IsSubnormal(double d, bool expected)
         {
             Assert.Equal(expected, double.IsSubnormal(d));
@@ -746,13 +1093,27 @@ namespace System.Tests
 
                         // Just right
                         actual = new char[localExpected.Length];
-                        Assert.True(localI.TryFormat(actual.AsSpan(), out charsWritten, localFormat, localProvider));
+                        Assert.True(
+                            localI.TryFormat(
+                                actual.AsSpan(),
+                                out charsWritten,
+                                localFormat,
+                                localProvider
+                            )
+                        );
                         Assert.Equal(localExpected.Length, charsWritten);
                         Assert.Equal(localExpected, new string(actual));
 
                         // Longer than needed
                         actual = new char[localExpected.Length + 1];
-                        Assert.True(localI.TryFormat(actual.AsSpan(), out charsWritten, localFormat, localProvider));
+                        Assert.True(
+                            localI.TryFormat(
+                                actual.AsSpan(),
+                                out charsWritten,
+                                localFormat,
+                                localProvider
+                            )
+                        );
                         Assert.Equal(localExpected.Length, charsWritten);
                         Assert.Equal(localExpected, new string(actual, 0, charsWritten));
 
@@ -760,13 +1121,22 @@ namespace System.Tests
                         if (localExpected.Length > 0)
                         {
                             actual = new char[localExpected.Length - 1];
-                            Assert.False(localI.TryFormat(actual.AsSpan(), out charsWritten, localFormat, localProvider));
+                            Assert.False(
+                                localI.TryFormat(
+                                    actual.AsSpan(),
+                                    out charsWritten,
+                                    localFormat,
+                                    localProvider
+                                )
+                            );
                             Assert.Equal(0, charsWritten);
                         }
                     }
                     catch (Exception exc)
                     {
-                        throw new Exception($"Failed on `{localI}`, `{localFormat}`, `{localProvider}`, `{localExpected}`. {exc}");
+                        throw new Exception(
+                            $"Failed on `{localI}`, `{localFormat}`, `{localProvider}`, `{localExpected}`. {exc}"
+                        );
                     }
                 }
             }
@@ -796,7 +1166,10 @@ namespace System.Tests
         public static void ToStringRoundtrip(double value)
         {
             double result = double.Parse(value.ToString());
-            Assert.Equal(BitConverter.DoubleToInt64Bits(value), BitConverter.DoubleToInt64Bits(result));
+            Assert.Equal(
+                BitConverter.DoubleToInt64Bits(value),
+                BitConverter.DoubleToInt64Bits(result)
+            );
         }
 
         [Theory]
@@ -804,7 +1177,10 @@ namespace System.Tests
         public static void ToStringRoundtrip_R(double value)
         {
             double result = double.Parse(value.ToString("R"));
-            Assert.Equal(BitConverter.DoubleToInt64Bits(value), BitConverter.DoubleToInt64Bits(result));
+            Assert.Equal(
+                BitConverter.DoubleToInt64Bits(value),
+                BitConverter.DoubleToInt64Bits(result)
+            );
         }
 
         [Fact]

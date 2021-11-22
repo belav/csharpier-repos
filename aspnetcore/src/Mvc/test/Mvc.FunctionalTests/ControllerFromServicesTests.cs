@@ -8,9 +8,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class ControllerFromServicesTest : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
+public class ControllerFromServicesTest
+    : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
 {
-    public ControllerFromServicesTest(MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture)
+    public ControllerFromServicesTest(
+        MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture
+    )
     {
         Client = fixture.CreateDefaultClient();
     }
@@ -22,7 +25,10 @@ public class ControllerFromServicesTest : IClassFixture<MvcTestFixture<Controlle
     {
         // Arrange
         var expected = "/constructorinjection 14 test-header-value";
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/constructorinjection?value=14");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/constructorinjection?value=14"
+        );
         request.Headers.TryAddWithoutValidation("Test-Header", "test-header-value");
 
         // Act
@@ -68,7 +74,8 @@ public class ControllerFromServicesTest : IClassFixture<MvcTestFixture<Controlle
         // Act
         var response = await Client.PutAsync(
             "http://localhost/employee/update_records?recordId=employee303",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
 
         // Assert
         response.EnsureSuccessStatusCode();
@@ -84,7 +91,8 @@ public class ControllerFromServicesTest : IClassFixture<MvcTestFixture<Controlle
         // Act
         var response = await Client.PostAsync(
             "http://localhost/employeerecords/save/211",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
 
         // Assert
         response.EnsureSuccessStatusCode();

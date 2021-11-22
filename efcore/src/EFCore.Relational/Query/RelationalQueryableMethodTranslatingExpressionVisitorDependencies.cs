@@ -50,9 +50,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public RelationalQueryableMethodTranslatingExpressionVisitorDependencies(
             IRelationalSqlTranslatingExpressionVisitorFactory relationalSqlTranslatingExpressionVisitorFactory,
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
-            RelationalSqlTranslatingExpressionVisitorFactory = relationalSqlTranslatingExpressionVisitorFactory;
+            RelationalSqlTranslatingExpressionVisitorFactory =
+                relationalSqlTranslatingExpressionVisitorFactory;
             SqlExpressionFactory = sqlExpressionFactory;
         }
 

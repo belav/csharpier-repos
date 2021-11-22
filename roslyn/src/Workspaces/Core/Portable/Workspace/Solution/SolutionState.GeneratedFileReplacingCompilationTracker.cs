@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis
             public SkeletonReferenceCache SkeletonReferenceCache { get; }
             public ProjectState ProjectState => _underlyingTracker.ProjectState;
 
-            public GeneratedFileReplacingCompilationTracker(ICompilationTracker underlyingTracker, SourceGeneratedDocumentState replacementDocumentState)
+            public GeneratedFileReplacingCompilationTracker(
+                ICompilationTracker underlyingTracker,
+                SourceGeneratedDocumentState replacementDocumentState
+            )
             {
                 _underlyingTracker = underlyingTracker;
                 _replacedGeneratedDocumentState = replacementDocumentState;
@@ -51,11 +54,18 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    return UnrootedSymbolSet.Create(_compilationWithReplacement).ContainsAssemblyOrModuleOrDynamic(symbol, primary);
+                    return UnrootedSymbolSet
+                        .Create(_compilationWithReplacement)
+                        .ContainsAssemblyOrModuleOrDynamic(symbol, primary);
                 }
             }
 
-            public ICompilationTracker Fork(SolutionServices solutionServices, ProjectState newProject, CompilationAndGeneratorDriverTranslationAction? translate = null, CancellationToken cancellationToken = default)
+            public ICompilationTracker Fork(
+                SolutionServices solutionServices,
+                ProjectState newProject,
+                CompilationAndGeneratorDriverTranslationAction? translate = null,
+                CancellationToken cancellationToken = default
+            )
             {
                 // TODO: This only needs to be implemented if a feature that operates from a source generated file then makes
                 // further mutations to that project, which isn't needed for now. This will be need to be fixed up when we complete
@@ -63,13 +73,21 @@ namespace Microsoft.CodeAnalysis
                 throw new NotImplementedException();
             }
 
-            public ICompilationTracker FreezePartialStateWithTree(SolutionState solution, DocumentState docState, SyntaxTree tree, CancellationToken cancellationToken)
+            public ICompilationTracker FreezePartialStateWithTree(
+                SolutionState solution,
+                DocumentState docState,
+                SyntaxTree tree,
+                CancellationToken cancellationToken
+            )
             {
                 // Because we override SourceGeneratedDocument.WithFrozenPartialSemantics directly, we shouldn't be able to get here.
                 throw ExceptionUtilities.Unreachable;
             }
 
-            public async Task<Compilation> GetCompilationAsync(SolutionState solution, CancellationToken cancellationToken)
+            public async Task<Compilation> GetCompilationAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            )
             {
                 // Fast path if we've definitely already done this before
                 if (_compilationWithReplacement != null)
@@ -77,21 +95,35 @@ namespace Microsoft.CodeAnalysis
                     return _compilationWithReplacement;
                 }
 
-                var underlyingCompilation = await _underlyingTracker.GetCompilationAsync(solution, cancellationToken).ConfigureAwait(false);
-                var underlyingSourceGeneratedDocuments = await _underlyingTracker.GetSourceGeneratedDocumentStatesAsync(solution, cancellationToken).ConfigureAwait(false);
+                var underlyingCompilation = await _underlyingTracker
+                    .GetCompilationAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
+                var underlyingSourceGeneratedDocuments = await _underlyingTracker
+                    .GetSourceGeneratedDocumentStatesAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
 
-                underlyingSourceGeneratedDocuments.TryGetState(_replacedGeneratedDocumentState.Id, out var existingState);
+                underlyingSourceGeneratedDocuments.TryGetState(
+                    _replacedGeneratedDocumentState.Id,
+                    out var existingState
+                );
 
                 Compilation newCompilation;
 
-                var newSyntaxTree = await _replacedGeneratedDocumentState.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var newSyntaxTree = await _replacedGeneratedDocumentState
+                    .GetSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (existingState != null)
                 {
                     // The generated file still exists in the underlying compilation, but the contents may not match the open file if the open file
                     // is stale. Replace the syntax tree so we have a tree that matches the text.
-                    var existingSyntaxTree = await existingState.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-                    newCompilation = underlyingCompilation.ReplaceSyntaxTree(existingSyntaxTree, newSyntaxTree);
+                    var existingSyntaxTree = await existingState
+                        .GetSyntaxTreeAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    newCompilation = underlyingCompilation.ReplaceSyntaxTree(
+                        existingSyntaxTree,
+                        newSyntaxTree
+                    );
                 }
                 else
                 {
@@ -107,30 +139,55 @@ namespace Microsoft.CodeAnalysis
                 return _compilationWithReplacement;
             }
 
-            public Task<VersionStamp> GetDependentVersionAsync(SolutionState solution, CancellationToken cancellationToken)
-                => _underlyingTracker.GetDependentVersionAsync(solution, cancellationToken);
+            public Task<VersionStamp> GetDependentVersionAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            ) => _underlyingTracker.GetDependentVersionAsync(solution, cancellationToken);
 
-            public Task<VersionStamp> GetDependentSemanticVersionAsync(SolutionState solution, CancellationToken cancellationToken)
-                => _underlyingTracker.GetDependentSemanticVersionAsync(solution, cancellationToken);
+            public Task<VersionStamp> GetDependentSemanticVersionAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            ) => _underlyingTracker.GetDependentSemanticVersionAsync(solution, cancellationToken);
 
-            public Task<Checksum> GetDependentChecksumAsync(SolutionState solution, CancellationToken cancellationToken)
+            public Task<Checksum> GetDependentChecksumAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            )
             {
                 if (_lazyDependentChecksum == null)
                 {
                     var tmp = solution; // temp. local to avoid a closure allocation for the fast path
                     // note: solution is captured here, but it will go away once GetValueAsync executes.
-                    Interlocked.CompareExchange(ref _lazyDependentChecksum, new AsyncLazy<Checksum>(c => ComputeDependentChecksumAsync(tmp, c), cacheResult: true), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyDependentChecksum,
+                        new AsyncLazy<Checksum>(
+                            c => ComputeDependentChecksumAsync(tmp, c),
+                            cacheResult: true
+                        ),
+                        null
+                    );
                 }
 
                 return _lazyDependentChecksum.GetValueAsync(cancellationToken);
             }
 
-            private async Task<Checksum> ComputeDependentChecksumAsync(SolutionState solution, CancellationToken cancellationToken)
-                => Checksum.Create(
-                    await _underlyingTracker.GetDependentChecksumAsync(solution, cancellationToken).ConfigureAwait(false),
-                    await _replacedGeneratedDocumentState.GetChecksumAsync(cancellationToken).ConfigureAwait(false));
+            private async Task<Checksum> ComputeDependentChecksumAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            ) =>
+                Checksum.Create(
+                    await _underlyingTracker
+                        .GetDependentChecksumAsync(solution, cancellationToken)
+                        .ConfigureAwait(false),
+                    await _replacedGeneratedDocumentState
+                        .GetChecksumAsync(cancellationToken)
+                        .ConfigureAwait(false)
+                );
 
-            public CompilationReference? GetPartialMetadataReference(ProjectState fromProject, ProjectReference projectReference)
+            public CompilationReference? GetPartialMetadataReference(
+                ProjectState fromProject,
+                ProjectReference projectReference
+            )
             {
                 // This method is used if you're forking a solution with partial semantics, and used to quickly produce references.
                 // So this method should only be called if:
@@ -142,15 +199,25 @@ namespace Microsoft.CodeAnalysis
                 throw new NotImplementedException();
             }
 
-            public async ValueTask<TextDocumentStates<SourceGeneratedDocumentState>> GetSourceGeneratedDocumentStatesAsync(SolutionState solution, CancellationToken cancellationToken)
+            public async ValueTask<
+                TextDocumentStates<SourceGeneratedDocumentState>
+            > GetSourceGeneratedDocumentStatesAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            )
             {
-                var underlyingGeneratedDocumentStates = await _underlyingTracker.GetSourceGeneratedDocumentStatesAsync(solution, cancellationToken).ConfigureAwait(false);
+                var underlyingGeneratedDocumentStates = await _underlyingTracker
+                    .GetSourceGeneratedDocumentStatesAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (underlyingGeneratedDocumentStates.Contains(_replacedGeneratedDocumentState.Id))
                 {
                     // The generated file still exists in the underlying compilation, but the contents may not match the open file if the open file
                     // is stale. Replace the syntax tree so we have a tree that matches the text.
-                    return underlyingGeneratedDocumentStates.SetState(_replacedGeneratedDocumentState.Id, _replacedGeneratedDocumentState);
+                    return underlyingGeneratedDocumentStates.SetState(
+                        _replacedGeneratedDocumentState.Id,
+                        _replacedGeneratedDocumentState
+                    );
                 }
                 else
                 {
@@ -158,11 +225,16 @@ namespace Microsoft.CodeAnalysis
                     // an edit which would cause this file to no longer exist, but they're still operating on an open representation
                     // of that file. To ensure that this snapshot is still usable, we'll just add this document back in. This is not a
                     // semantically correct operation, but working on stale snapshots never has that guarantee.
-                    return underlyingGeneratedDocumentStates.AddRange(ImmutableArray.Create(_replacedGeneratedDocumentState));
+                    return underlyingGeneratedDocumentStates.AddRange(
+                        ImmutableArray.Create(_replacedGeneratedDocumentState)
+                    );
                 }
             }
 
-            public Task<bool> HasSuccessfullyLoadedAsync(SolutionState solution, CancellationToken cancellationToken)
+            public Task<bool> HasSuccessfullyLoadedAsync(
+                SolutionState solution,
+                CancellationToken cancellationToken
+            )
             {
                 return _underlyingTracker.HasSuccessfullyLoadedAsync(solution, cancellationToken);
             }
@@ -173,7 +245,9 @@ namespace Microsoft.CodeAnalysis
                 return compilation != null;
             }
 
-            public SourceGeneratedDocumentState? TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(DocumentId documentId)
+            public SourceGeneratedDocumentState? TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(
+                DocumentId documentId
+            )
             {
                 if (documentId == _replacedGeneratedDocumentState.Id)
                 {
@@ -181,7 +255,9 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    return _underlyingTracker.TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(documentId);
+                    return _underlyingTracker.TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(
+                        documentId
+                    );
                 }
             }
         }

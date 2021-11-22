@@ -35,7 +35,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapGet(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, GetVerb, requestDelegate);
     }
@@ -51,7 +52,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapPost(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, PostVerb, requestDelegate);
     }
@@ -67,7 +69,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapPut(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, PutVerb, requestDelegate);
     }
@@ -83,7 +86,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapDelete(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, DeleteVerb, requestDelegate);
     }
@@ -99,7 +103,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapPatch(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, PatchVerb, requestDelegate);
     }
@@ -114,10 +119,11 @@ public static class EndpointRouteBuilderExtensions
     /// <param name="httpMethods">HTTP methods that the endpoint will match.</param>
     /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
     public static IEndpointConventionBuilder MapMethods(
-       this IEndpointRouteBuilder endpoints,
-       string pattern,
-       IEnumerable<string> httpMethods,
-       RequestDelegate requestDelegate)
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        IEnumerable<string> httpMethods,
+        RequestDelegate requestDelegate
+    )
     {
         if (httpMethods == null)
         {
@@ -141,7 +147,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder Map(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return Map(endpoints, RoutePatternFactory.Parse(pattern), requestDelegate);
     }
@@ -157,7 +164,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder Map(
         this IEndpointRouteBuilder endpoints,
         RoutePattern pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         if (endpoints == null)
         {
@@ -176,10 +184,7 @@ public static class EndpointRouteBuilderExtensions
 
         const int defaultOrder = 0;
 
-        var builder = new RouteEndpointBuilder(
-            requestDelegate,
-            pattern,
-            defaultOrder)
+        var builder = new RouteEndpointBuilder(requestDelegate, pattern, defaultOrder)
         {
             DisplayName = pattern.RawText ?? pattern.DebuggerToString(),
         };
@@ -206,7 +211,6 @@ public static class EndpointRouteBuilderExtensions
         return dataSource.AddEndpointBuilder(builder);
     }
 
-
     /// <summary>
     /// Adds a <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that matches HTTP GET requests
     /// for the specified pattern.
@@ -218,7 +222,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapGet(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, GetVerb, handler);
     }
@@ -234,7 +239,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapPost(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, PostVerb, handler);
     }
@@ -250,7 +256,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapPut(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, PutVerb, handler);
     }
@@ -266,11 +273,11 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapDelete(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, DeleteVerb, handler);
     }
-
 
     /// <summary>
     /// Adds a <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that matches HTTP PATCH requests
@@ -283,7 +290,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapPatch(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, PatchVerb, handler);
     }
@@ -298,10 +306,11 @@ public static class EndpointRouteBuilderExtensions
     /// <param name="httpMethods">HTTP methods that the endpoint will match.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
     public static RouteHandlerBuilder MapMethods(
-       this IEndpointRouteBuilder endpoints,
-       string pattern,
-       IEnumerable<string> httpMethods,
-       Delegate handler)
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        IEnumerable<string> httpMethods,
+        Delegate handler
+    )
     {
         if (httpMethods is null)
         {
@@ -318,7 +327,11 @@ public static class EndpointRouteBuilderExtensions
             }
         }
 
-        var builder = endpoints.Map(RoutePatternFactory.Parse(pattern), handler, disableInferredBody);
+        var builder = endpoints.Map(
+            RoutePatternFactory.Parse(pattern),
+            handler,
+            disableInferredBody
+        );
         // Prepends the HTTP method to the DisplayName produced with pattern + method name
         builder.Add(b => b.DisplayName = $"HTTP: {string.Join(", ", httpMethods)} {b.DisplayName}");
         builder.WithMetadata(new HttpMethodMetadata(httpMethods));
@@ -327,12 +340,12 @@ public static class EndpointRouteBuilderExtensions
         static bool ShouldDisableInferredBody(string method)
         {
             // GET, DELETE, HEAD, CONNECT, TRACE, and OPTIONS normally do not contain bodies
-            return method.Equals(HttpMethods.Get, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Delete, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Head, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Options, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Trace, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
+            return method.Equals(HttpMethods.Get, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Delete, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Head, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Options, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Trace, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
         }
     }
 
@@ -347,7 +360,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder Map(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return Map(endpoints, RoutePatternFactory.Parse(pattern), handler);
     }
@@ -363,7 +377,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder Map(
         this IEndpointRouteBuilder endpoints,
         RoutePattern pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return Map(endpoints, pattern, handler, disableInferBodyFromParameters: false);
     }
@@ -387,7 +402,10 @@ public static class EndpointRouteBuilderExtensions
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// </remarks>
-    public static RouteHandlerBuilder MapFallback(this IEndpointRouteBuilder endpoints, Delegate handler)
+    public static RouteHandlerBuilder MapFallback(
+        this IEndpointRouteBuilder endpoints,
+        Delegate handler
+    )
     {
         if (endpoints == null)
         {
@@ -426,7 +444,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapFallback(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         if (endpoints == null)
         {
@@ -453,7 +472,8 @@ public static class EndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         RoutePattern pattern,
         Delegate handler,
-        bool disableInferBodyFromParameters)
+        bool disableInferBodyFromParameters
+    )
     {
         if (endpoints is null)
         {
@@ -478,7 +498,9 @@ public static class EndpointRouteBuilderExtensions
             routeParams.Add(part.Name);
         }
 
-        var routeHandlerOptions = endpoints.ServiceProvider?.GetService<IOptions<RouteHandlerOptions>>();
+        var routeHandlerOptions = endpoints.ServiceProvider?.GetService<
+            IOptions<RouteHandlerOptions>
+        >();
 
         var options = new RequestDelegateFactoryOptions
         {
@@ -493,7 +515,8 @@ public static class EndpointRouteBuilderExtensions
         var builder = new RouteEndpointBuilder(
             requestDelegateResult.RequestDelegate,
             pattern,
-            defaultOrder)
+            defaultOrder
+        )
         {
             DisplayName = pattern.RawText ?? pattern.DebuggerToString(),
         };
@@ -507,8 +530,10 @@ public static class EndpointRouteBuilderExtensions
         // Methods defined in a top-level program are generated as statics so the delegate
         // target will be null. Inline lambdas are compiler generated method so they can
         // be filtered that way.
-        if (GeneratedNameParser.TryParseLocalFunctionName(handler.Method.Name, out var endpointName)
-            || !TypeHelper.IsCompilerGeneratedMethod(handler.Method))
+        if (
+            GeneratedNameParser.TryParseLocalFunctionName(handler.Method.Name, out var endpointName)
+            || !TypeHelper.IsCompilerGeneratedMethod(handler.Method)
+        )
         {
             endpointName ??= handler.Method.Name;
             builder.DisplayName = $"{builder.DisplayName} => {endpointName}";

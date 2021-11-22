@@ -51,18 +51,19 @@ public class ContactApiController : Controller
     public ActionResult<Contact> ActionWithInferredFromBodyParameter(Contact contact) => contact;
 
     [HttpPost(nameof(ActionWithInferredFromBodyParameterAndCancellationToken))]
-    public ActionResult<Contact> ActionWithInferredFromBodyParameterAndCancellationToken(Contact contact, CancellationToken cts)
-        => contact;
+    public ActionResult<Contact> ActionWithInferredFromBodyParameterAndCancellationToken(
+        Contact contact,
+        CancellationToken cts
+    ) => contact;
 
     [HttpPost("ActionWithInferredRouteAndQueryParameters/{name}/{id}")]
-    public ActionResult<Contact> ActionWithInferredRouteAndQueryParameter(int id, string name, string email)
+    public ActionResult<Contact> ActionWithInferredRouteAndQueryParameter(
+        int id,
+        string name,
+        string email
+    )
     {
-        return new Contact
-        {
-            ContactId = id,
-            Name = name,
-            Email = email,
-        };
+        return new Contact { ContactId = id, Name = name, Email = email, };
     }
 
     [HttpGet("[action]")]
@@ -73,14 +74,16 @@ public class ContactApiController : Controller
 
     [HttpGet("[action]")]
     public ActionResult<string> ActionWithInferredModelBinderType(
-        [ModelBinder(typeof(TestModelBinder))] string foo)
+        [ModelBinder(typeof(TestModelBinder))] string foo
+    )
     {
         return foo;
     }
 
     [HttpGet("[action]")]
     public ActionResult<string> ActionWithInferredModelBinderTypeWithExplicitModelName(
-        [ModelBinder(typeof(TestModelBinder), Name = "bar")] string foo)
+        [ModelBinder(typeof(TestModelBinder), Name = "bar")] string foo
+    )
     {
         return foo;
     }
@@ -94,36 +97,31 @@ public class ContactApiController : Controller
     [HttpGet("[action]")]
     public ActionResult<int> ActionReturningProblemDetails()
     {
-        return NotFound(new ProblemDetails
-        {
-            Title = "Not Found",
-            Type = "Type",
-            Detail = "Detail",
-            Status = 404,
-            Instance = "Instance",
-            Extensions =
-                {
-                    ["tracking-id"] = 27,
-                },
-        });
+        return NotFound(
+            new ProblemDetails
+            {
+                Title = "Not Found",
+                Type = "Type",
+                Detail = "Detail",
+                Status = 404,
+                Instance = "Instance",
+                Extensions = { ["tracking-id"] = 27, },
+            }
+        );
     }
 
     [HttpGet("[action]")]
     public ActionResult<int> ActionReturningValidationProblemDetails()
     {
-        return BadRequest(new ValidationProblemDetails
-        {
-            Title = "Error",
-            Status = 400,
-            Extensions =
-                {
-                    ["tracking-id"] = "27",
-                },
-            Errors =
-                {
-                    { "Error1", new[] { "Error Message" } },
-                },
-        });
+        return BadRequest(
+            new ValidationProblemDetails
+            {
+                Title = "Error",
+                Status = 400,
+                Extensions = { ["tracking-id"] = "27", },
+                Errors = { { "Error1", new[] { "Error Message" } }, },
+            }
+        );
     }
 
     private class TestModelBinder : IModelBinder

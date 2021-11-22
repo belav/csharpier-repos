@@ -44,8 +44,7 @@ public class HttpRequestStreamReader : TextReader
     /// <param name="encoding">The character encoding to use.</param>
     public HttpRequestStreamReader(Stream stream, Encoding encoding)
         : this(stream, encoding, DefaultBufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-    {
-    }
+    { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpRequestStreamReader"/>.
@@ -54,9 +53,7 @@ public class HttpRequestStreamReader : TextReader
     /// <param name="encoding">The character encoding to use.</param>
     /// <param name="bufferSize">The minimum buffer size.</param>
     public HttpRequestStreamReader(Stream stream, Encoding encoding, int bufferSize)
-        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-    {
-    }
+        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpRequestStreamReader"/>.
@@ -71,7 +68,8 @@ public class HttpRequestStreamReader : TextReader
         Encoding encoding,
         int bufferSize,
         ArrayPool<byte> bytePool,
-        ArrayPool<char> charPool)
+        ArrayPool<char> charPool
+    )
     {
         _stream = stream ?? throw new ArgumentNullException(nameof(stream));
         _encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
@@ -84,7 +82,10 @@ public class HttpRequestStreamReader : TextReader
         }
         if (!stream.CanRead)
         {
-            throw new ArgumentException(Resources.HttpRequestStreamReader_StreamNotReadable, nameof(stream));
+            throw new ArgumentException(
+                Resources.HttpRequestStreamReader_StreamNotReadable,
+                nameof(stream)
+            );
         }
 
         _byteBufferSize = bufferSize;
@@ -209,7 +210,7 @@ public class HttpRequestStreamReader : TextReader
 
             if (charsRemaining == 0)
             {
-                break;  // We're at EOF
+                break; // We're at EOF
             }
 
             if (charsRemaining > count)
@@ -261,8 +262,15 @@ public class HttpRequestStreamReader : TextReader
     }
 
     /// <inheritdoc />
-    [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.", Justification = "Required to maintain compatibility")]
-    public override async ValueTask<int> ReadAsync(Memory<char> buffer, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.",
+        Justification = "Required to maintain compatibility"
+    )]
+    public override async ValueTask<int> ReadAsync(
+        Memory<char> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         if (_disposed)
         {
@@ -294,8 +302,11 @@ public class HttpRequestStreamReader : TextReader
                 do
                 {
                     Debug.Assert(charsRemaining == 0);
-                    _bytesRead = await _stream.ReadAsync(_byteBuffer.AsMemory(0, _byteBufferSize), cancellationToken);
-                    if (_bytesRead == 0)  // EOF
+                    _bytesRead = await _stream.ReadAsync(
+                        _byteBuffer.AsMemory(0, _byteBufferSize),
+                        cancellationToken
+                    );
+                    if (_bytesRead == 0) // EOF
                     {
                         _isBlocked = true;
                         break;
@@ -307,18 +318,12 @@ public class HttpRequestStreamReader : TextReader
                     Debug.Assert(charsRemaining == 0);
 
                     _charBufferIndex = 0;
-                    charsRemaining = _decoder.GetChars(
-                        _byteBuffer,
-                        0,
-                        _bytesRead,
-                        _charBuffer,
-                        0);
+                    charsRemaining = _decoder.GetChars(_byteBuffer, 0, _bytesRead, _charBuffer, 0);
 
                     Debug.Assert(charsRemaining > 0);
 
                     _charsRead += charsRemaining; // Number of chars in StreamReader's buffer.
-                }
-                while (charsRemaining == 0);
+                } while (charsRemaining == 0);
 
                 if (charsRemaining == 0)
                 {
@@ -382,7 +387,6 @@ public class HttpRequestStreamReader : TextReader
             {
                 return stepResult.Result ?? sb?.ToString();
             }
-
             continue;
         }
     }
@@ -505,20 +509,14 @@ public class HttpRequestStreamReader : TextReader
         do
         {
             _bytesRead = _stream.Read(_byteBuffer, 0, _byteBufferSize);
-            if (_bytesRead == 0)  // We're at EOF
+            if (_bytesRead == 0) // We're at EOF
             {
                 return _charsRead;
             }
 
             _isBlocked = (_bytesRead < _byteBufferSize);
-            _charsRead += _decoder.GetChars(
-                _byteBuffer,
-                0,
-                _bytesRead,
-                _charBuffer,
-                _charsRead);
-        }
-        while (_charsRead == 0);
+            _charsRead += _decoder.GetChars(_byteBuffer, 0, _bytesRead, _charBuffer, _charsRead);
+        } while (_charsRead == 0);
 
         return _charsRead;
     }
@@ -531,7 +529,9 @@ public class HttpRequestStreamReader : TextReader
 
         do
         {
-            _bytesRead = await _stream.ReadAsync(_byteBuffer.AsMemory(0, _byteBufferSize)).ConfigureAwait(false);
+            _bytesRead = await _stream
+                .ReadAsync(_byteBuffer.AsMemory(0, _byteBufferSize))
+                .ConfigureAwait(false);
             if (_bytesRead == 0)
             {
                 // We're at EOF
@@ -541,14 +541,8 @@ public class HttpRequestStreamReader : TextReader
             // _isBlocked == whether we read fewer bytes than we asked for.
             _isBlocked = (_bytesRead < _byteBufferSize);
 
-            _charsRead += _decoder.GetChars(
-                _byteBuffer,
-                0,
-                _bytesRead,
-                _charBuffer,
-                _charsRead);
-        }
-        while (_charsRead == 0);
+            _charsRead += _decoder.GetChars(_byteBuffer, 0, _bytesRead, _charBuffer, _charsRead);
+        } while (_charsRead == 0);
 
         return _charsRead;
     }
@@ -561,7 +555,7 @@ public class HttpRequestStreamReader : TextReader
         {
             int tmpCharPos = _charBufferIndex;
             sb.Append(_charBuffer, tmpCharPos, _charsRead - tmpCharPos);
-            _charBufferIndex = _charsRead;  // We consumed these characters
+            _charBufferIndex = _charsRead; // We consumed these characters
             await ReadIntoBufferAsync().ConfigureAwait(false);
         } while (_charsRead > 0);
 
@@ -573,7 +567,8 @@ public class HttpRequestStreamReader : TextReader
         public static readonly ReadLineStepResult Done = new ReadLineStepResult(true, null);
         public static readonly ReadLineStepResult Continue = new ReadLineStepResult(false, null);
 
-        public static ReadLineStepResult FromResult(string value) => new ReadLineStepResult(true, value);
+        public static ReadLineStepResult FromResult(string value) =>
+            new ReadLineStepResult(true, value);
 
         private ReadLineStepResult(bool completed, string? result)
         {

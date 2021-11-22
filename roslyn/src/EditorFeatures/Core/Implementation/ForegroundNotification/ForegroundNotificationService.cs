@@ -21,7 +21,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
 {
     [Export(typeof(IForegroundNotificationService))]
-    internal class ForegroundNotificationService : ForegroundThreadAffinitizedObject, IForegroundNotificationService
+    internal class ForegroundNotificationService
+        : ForegroundThreadAffinitizedObject,
+          IForegroundNotificationService
     {
         // how much time we will give notifications to run on the UI thread
         private const int DefaultTimeSliceInMS = 15;
@@ -29,13 +31,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
         // Don't call NotifyOnForeground more than once per 50ms
         private const int MinimumDelayBetweenProcessing = 50;
 
-        private static readonly Func<int, string> s_notifyOnForegroundLogger = c => string.Format("Processed : {0}", c);
+        private static readonly Func<int, string> s_notifyOnForegroundLogger = c =>
+            string.Format("Processed : {0}", c);
         private readonly PriorityQueue _workQueue;
 
         private int _lastProcessedTimeInMS;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public ForegroundNotificationService(IThreadingContext threadingContext)
             : base(threadingContext)
         {
@@ -45,17 +52,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
             // Only start the background processing task if foreground work is allowed
             if (threadingContext.HasMainThread)
             {
-                Task.Factory.SafeStartNewFromAsync(ProcessAsync, CancellationToken.None, TaskScheduler.Default);
+                Task.Factory.SafeStartNewFromAsync(
+                    ProcessAsync,
+                    CancellationToken.None,
+                    TaskScheduler.Default
+                );
             }
         }
 
-        public void RegisterNotification(Action action, IAsyncToken asyncToken, CancellationToken cancellationToken)
-            => RegisterNotification(action, DefaultTimeSliceInMS, asyncToken, cancellationToken);
+        public void RegisterNotification(
+            Action action,
+            IAsyncToken asyncToken,
+            CancellationToken cancellationToken
+        ) => RegisterNotification(action, DefaultTimeSliceInMS, asyncToken, cancellationToken);
 
-        public void RegisterNotification(Func<bool> action, IAsyncToken asyncToken, CancellationToken cancellationToken)
-            => RegisterNotification(action, DefaultTimeSliceInMS, asyncToken, cancellationToken);
+        public void RegisterNotification(
+            Func<bool> action,
+            IAsyncToken asyncToken,
+            CancellationToken cancellationToken
+        ) => RegisterNotification(action, DefaultTimeSliceInMS, asyncToken, cancellationToken);
 
-        public void RegisterNotification(Action action, int delay, IAsyncToken asyncToken, CancellationToken cancellationToken)
+        public void RegisterNotification(
+            Action action,
+            int delay,
+            IAsyncToken asyncToken,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(delay >= 0);
 
@@ -70,10 +92,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
 
             var current = Environment.TickCount;
 
-            _workQueue.Enqueue(new PendingWork(current + delay, action, asyncToken, cancellationToken));
+            _workQueue.Enqueue(
+                new PendingWork(current + delay, action, asyncToken, cancellationToken)
+            );
         }
 
-        public void RegisterNotification(Func<bool> action, int delay, IAsyncToken asyncToken, CancellationToken cancellationToken)
+        public void RegisterNotification(
+            Func<bool> action,
+            int delay,
+            IAsyncToken asyncToken,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(delay >= 0);
 
@@ -88,7 +117,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
 
             var current = Environment.TickCount;
 
-            _workQueue.Enqueue(new PendingWork(current + delay, action, asyncToken, cancellationToken));
+            _workQueue.Enqueue(
+                new PendingWork(current + delay, action, asyncToken, cancellationToken)
+            );
         }
 
         internal void ReleaseCancelledItems() => _workQueue.ReleaseCancelledItems();
@@ -109,10 +140,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                     }
 
                     // wait until it is time to run next item
-                    await WaitForPendingWorkAsync().ConfigureAwait(continueOnCapturedContext: false);
+                    await WaitForPendingWorkAsync()
+                        .ConfigureAwait(continueOnCapturedContext: false);
 
                     // run them in UI thread
-                    await InvokeBelowInputPriorityAsync(NotifyOnForeground).ConfigureAwait(continueOnCapturedContext: false);
+                    await InvokeBelowInputPriorityAsync(NotifyOnForeground)
+                        .ConfigureAwait(continueOnCapturedContext: false);
                 }
                 catch (Exception ex) when (FatalError.ReportAndCatch(ex))
                 {
@@ -135,7 +168,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
         {
             AssertIsForeground();
 
-            using (Logger.LogBlock(FunctionId.ForegroundNotificationService_NotifyOnForeground, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.ForegroundNotificationService_NotifyOnForeground,
+                    CancellationToken.None
+                )
+            )
             {
                 var processedCount = 0;
                 var startProcessingTime = Environment.TickCount;
@@ -169,7 +207,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                         {
                             // The PendingWork callbacks should never throw.  In the case they do we
                             // must ensure the IAsyncToken implementation is completed.  If it is not
-                            // then the unit test code will end up in a deadlock doing an 'await' 
+                            // then the unit test code will end up in a deadlock doing an 'await'
                             // on the token instance.
                             Debug.Assert(false, ex.Message);
                             done = true;
@@ -184,7 +222,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                     processedCount++;
 
                     // there is input to process, or we've exceeded a time slice, postpone the remaining work
-                    if (IsInputPending() || Environment.TickCount - startProcessingTime > DefaultTimeSliceInMS)
+                    if (
+                        IsInputPending()
+                        || Environment.TickCount - startProcessingTime > DefaultTimeSliceInMS
+                    )
                     {
                         return;
                     }
@@ -192,7 +233,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
 
                 // Record the current timestamp so we don't immediately process newly added items.
                 _lastProcessedTimeInMS = Environment.TickCount;
-                Logger.Log(FunctionId.ForegroundNotificationService_Processed, s_notifyOnForegroundLogger, processedCount);
+                Logger.Log(
+                    FunctionId.ForegroundNotificationService_Processed,
+                    s_notifyOnForegroundLogger,
+                    processedCount
+                );
             }
         }
 
@@ -232,7 +277,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
             public readonly IAsyncToken AsyncToken;
             public readonly CancellationToken CancellationToken;
 
-            private PendingWork(int minimumRunPointInMS, Action action, Func<bool> func, IAsyncToken asyncToken, CancellationToken cancellationToken)
+            private PendingWork(
+                int minimumRunPointInMS,
+                Action action,
+                Func<bool> func,
+                IAsyncToken asyncToken,
+                CancellationToken cancellationToken
+            )
             {
                 this.MinimumRunPointInMS = minimumRunPointInMS;
                 this.DoWorkAction = action;
@@ -241,18 +292,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                 this.CancellationToken = cancellationToken;
             }
 
-            public PendingWork(int minimumRunPointInMS, Action work, IAsyncToken asyncToken, CancellationToken cancellationToken)
-                : this(minimumRunPointInMS, work, null, asyncToken, cancellationToken)
-            {
-            }
+            public PendingWork(
+                int minimumRunPointInMS,
+                Action work,
+                IAsyncToken asyncToken,
+                CancellationToken cancellationToken
+            ) : this(minimumRunPointInMS, work, null, asyncToken, cancellationToken) { }
 
-            public PendingWork(int minimumRunPointInMS, Func<bool> work, IAsyncToken asyncToken, CancellationToken cancellationToken)
-                : this(minimumRunPointInMS, null, work, asyncToken, cancellationToken)
-            {
-            }
+            public PendingWork(
+                int minimumRunPointInMS,
+                Func<bool> work,
+                IAsyncToken asyncToken,
+                CancellationToken cancellationToken
+            ) : this(minimumRunPointInMS, null, work, asyncToken, cancellationToken) { }
 
-            public PendingWork UpdateToCurrentTime()
-                => new(Environment.TickCount, DoWorkAction, DoWorkFunc, AsyncToken, CancellationToken);
+            public PendingWork UpdateToCurrentTime() =>
+                new(Environment.TickCount, DoWorkAction, DoWorkFunc, AsyncToken, CancellationToken);
         }
 
         private class PriorityQueue
@@ -378,8 +433,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                 }
             }
 
-            private bool ContainsMoreWork_NoLock(int currentTime)
-                => _list.Count > 0 && _list.First.Value.MinimumRunPointInMS <= currentTime;
+            private bool ContainsMoreWork_NoLock(int currentTime) =>
+                _list.Count > 0 && _list.First.Value.MinimumRunPointInMS <= currentTime;
 
             private PendingWork Dequeue_NoLock()
             {
@@ -401,9 +456,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
 
                 lock (_gate)
                 {
-                    for (LinkedListNode<PendingWork> current = _list.First, next = current?.Next;
+                    for (
+                        LinkedListNode<PendingWork> current = _list.First, next = current?.Next;
                         current != null;
-                        current = next, next = current?.Next)
+                        current = next, next = current?.Next
+                    )
                     {
                         if (current.Value.CancellationToken.IsCancellationRequested)
                         {

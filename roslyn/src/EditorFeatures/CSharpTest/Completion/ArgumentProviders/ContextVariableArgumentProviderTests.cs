@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class ContextVariableArgumentProviderTests : AbstractCSharpArgumentProviderTests
     {
-        internal override Type GetArgumentProviderType()
-            => typeof(ContextVariableArgumentProvider);
+        internal override Type GetArgumentProviderType() => typeof(ContextVariableArgumentProvider);
 
         [Theory]
         [InlineData("string")]
@@ -22,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [InlineData("int?")]
         public async Task TestLocalVariable(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -38,7 +38,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -47,7 +51,8 @@ class C
         [InlineData("int?")]
         public async Task TestParameter(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method({type} arg)
@@ -62,7 +67,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -71,7 +80,8 @@ class C
         [InlineData("int?")]
         public async Task TestInstanceVariable(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     {type} arg;
@@ -88,7 +98,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         // Note: The current implementation checks for exact type and name match. If this changes, some of these tests
@@ -101,7 +115,8 @@ class C
         [InlineData("int", "object")]
         public async Task TestMismatchType(string parameterType, string valueType)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method({valueType} arg)

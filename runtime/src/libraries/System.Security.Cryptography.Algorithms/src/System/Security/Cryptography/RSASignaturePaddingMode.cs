@@ -16,7 +16,6 @@ namespace System.Security.Cryptography
         /// It is supported for compatibility with existing applications.
         /// </remarks>
         Pkcs1,
-
         /// <summary>
         /// Probabilistic Signature Scheme.
         /// </summary>

@@ -32,12 +32,17 @@ namespace Internal.Cryptography.Pal
         public static ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return AppleCertificatePal.FromBlob(rawData, password, keyStorageFlags);
         }
 
-        public static ICertificatePal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return AppleCertificatePal.FromFile(fileName, password, keyStorageFlags);
         }

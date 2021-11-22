@@ -18,17 +18,23 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         {
             private readonly ImmutableArray<Diagnostic> _diagnostics;
 
-            public FixAllPredefinedDiagnosticProvider(ImmutableArray<Diagnostic> diagnostics)
-                => _diagnostics = diagnostics;
+            public FixAllPredefinedDiagnosticProvider(ImmutableArray<Diagnostic> diagnostics) =>
+                _diagnostics = diagnostics;
 
-            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-                => Task.FromResult<IEnumerable<Diagnostic>>(_diagnostics);
+            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) => Task.FromResult<IEnumerable<Diagnostic>>(_diagnostics);
 
-            public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken)
-                => Task.FromResult<IEnumerable<Diagnostic>>(_diagnostics);
+            public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => Task.FromResult<IEnumerable<Diagnostic>>(_diagnostics);
 
-            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-                => SpecializedTasks.EmptyEnumerable<Diagnostic>();
+            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) => SpecializedTasks.EmptyEnumerable<Diagnostic>();
         }
     }
 }

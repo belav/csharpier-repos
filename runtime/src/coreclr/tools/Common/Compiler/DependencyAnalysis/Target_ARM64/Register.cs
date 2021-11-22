@@ -42,9 +42,7 @@ namespace ILCompiler.DependencyAnalysis.ARM64
         X28 = 28,
         X29 = 29,
         X30 = 30,
-        
         X31 = 31,
-       
         None = 32,
         NoIndex = 128,
     }

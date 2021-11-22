@@ -42,7 +42,6 @@ namespace System.IO.Tests
                 Assert.True(info.Exists);
             }
         }
-
         #endregion
     }
 }

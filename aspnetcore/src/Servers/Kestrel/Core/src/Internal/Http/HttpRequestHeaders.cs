@@ -23,7 +23,10 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
     public bool ReuseHeaderValues { get; set; }
     public Func<string, Encoding?> EncodingSelector { get; set; }
 
-    public HttpRequestHeaders(bool reuseHeaderValues = true, Func<string, Encoding?>? encodingSelector = null)
+    public HttpRequestHeaders(
+        bool reuseHeaderValues = true,
+        Func<string, Encoding?>? encodingSelector = null
+    )
     {
         ReuseHeaderValues = reuseHeaderValues;
         EncodingSelector = encodingSelector ?? KestrelServerOptions.DefaultHeaderEncodingSelector;
@@ -74,7 +77,10 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
     {
         if (!HeaderUtilities.TryParseNonNegativeInt64(value, out var parsed))
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidContentLength, value);
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.InvalidContentLength,
+                value
+            );
         }
 
         return parsed;
@@ -88,11 +94,20 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
             KestrelBadHttpRequestException.Throw(RequestRejectionReason.MultipleContentLengths);
         }
 
-        if (!Utf8Parser.TryParse(value, out long parsed, out var consumed) ||
-            parsed < 0 ||
-            consumed != value.Length)
+        if (
+            !Utf8Parser.TryParse(value, out long parsed, out var consumed)
+            || parsed < 0
+            || consumed != value.Length
+        )
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidContentLength, value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector, checkForNewlineChars: false));
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.InvalidContentLength,
+                value.GetRequestHeaderString(
+                    HeaderNames.ContentLength,
+                    EncodingSelector,
+                    checkForNewlineChars: false
+                )
+            );
         }
 
         _contentLength = parsed;
@@ -100,7 +115,10 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [SkipLocalsInit]
-    private void AppendContentLengthCustomEncoding(ReadOnlySpan<byte> value, Encoding customEncoding)
+    private void AppendContentLengthCustomEncoding(
+        ReadOnlySpan<byte> value,
+        Encoding customEncoding
+    )
     {
         if (_contentLength.HasValue)
         {
@@ -112,11 +130,25 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
         var numChars = customEncoding.GetChars(value, decodedChars);
         long parsed = -1;
 
-        if (numChars > 19 ||
-            !long.TryParse(decodedChars.Slice(0, numChars), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) ||
-            parsed < 0)
+        if (
+            numChars > 19
+            || !long.TryParse(
+                decodedChars.Slice(0, numChars),
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out parsed
+            )
+            || parsed < 0
+        )
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidContentLength, value.GetRequestHeaderString(HeaderNames.ContentLength, EncodingSelector, checkForNewlineChars: false));
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.InvalidContentLength,
+                value.GetRequestHeaderString(
+                    HeaderNames.ContentLength,
+                    EncodingSelector,
+                    checkForNewlineChars: false
+                )
+            );
         }
 
         _contentLength = parsed;
@@ -236,18 +268,14 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
             _next = _currentBits != 0 ? BitOperations.TrailingZeroCount(_currentBits) : -1;
             _current = default;
             _hasUnknown = collection.MaybeUnknown != null;
-            _unknownEnumerator = _hasUnknown
-                ? collection.MaybeUnknown!.GetEnumerator()
-                : default;
+            _unknownEnumerator = _hasUnknown ? collection.MaybeUnknown!.GetEnumerator() : default;
         }
 
         public KeyValuePair<string, StringValues> Current => _current;
 
         object IEnumerator.Current => _current;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {

@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public ExpressionEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            Expression expression)
-            : base(eventDefinition, messageGenerator)
+            Expression expression
+        ) : base(eventDefinition, messageGenerator)
         {
             Expression = expression;
         }

@@ -43,7 +43,7 @@ public class Program
     static void x64_JIT_Bug(Derived d)
     {
         Base b = d;
-    loop:
+        loop:
         if (b != null)
         {
             if (b is Derived)
@@ -77,4 +77,3 @@ public class Program
         return 100; // Well, we made it here... should be good.
     }
 }
-

@@ -4,7 +4,15 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Principal.IIdentity))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Principal.IPrincipal))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Principal.PrincipalPolicy))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Principal.TokenImpersonationLevel))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Principal.IIdentity)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Principal.IPrincipal)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Principal.PrincipalPolicy)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Principal.TokenImpersonationLevel)
+)]

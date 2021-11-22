@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     public abstract class AbstractOptionPageControl : UserControl
     {
         internal readonly OptionStore OptionStore;
-        private readonly List<BindingExpressionBase> _bindingExpressions = new List<BindingExpressionBase>();
+        private readonly List<BindingExpressionBase> _bindingExpressions =
+            new List<BindingExpressionBase>();
 
         protected AbstractOptionPageControl(OptionStore optionStore)
         {
@@ -38,29 +39,69 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private void InitializeStyles()
         {
             var groupBoxStyle = new System.Windows.Style(typeof(GroupBox));
-            groupBoxStyle.Setters.Add(new Setter(GroupBox.PaddingProperty, new Thickness() { Left = 7, Right = 7, Top = 7 }));
-            groupBoxStyle.Setters.Add(new Setter(GroupBox.MarginProperty, new Thickness() { Bottom = 3 }));
-            groupBoxStyle.Setters.Add(new Setter(GroupBox.ForegroundProperty, new DynamicResourceExtension(SystemColors.WindowTextBrushKey)));
+            groupBoxStyle.Setters.Add(
+                new Setter(
+                    GroupBox.PaddingProperty,
+                    new Thickness() { Left = 7, Right = 7, Top = 7 }
+                )
+            );
+            groupBoxStyle.Setters.Add(
+                new Setter(GroupBox.MarginProperty, new Thickness() { Bottom = 3 })
+            );
+            groupBoxStyle.Setters.Add(
+                new Setter(
+                    GroupBox.ForegroundProperty,
+                    new DynamicResourceExtension(SystemColors.WindowTextBrushKey)
+                )
+            );
             Resources.Add(typeof(GroupBox), groupBoxStyle);
 
             var checkBoxStyle = new System.Windows.Style(typeof(CheckBox));
-            checkBoxStyle.Setters.Add(new Setter(CheckBox.MarginProperty, new Thickness() { Bottom = 7 }));
-            checkBoxStyle.Setters.Add(new Setter(CheckBox.ForegroundProperty, new DynamicResourceExtension(SystemColors.WindowTextBrushKey)));
+            checkBoxStyle.Setters.Add(
+                new Setter(CheckBox.MarginProperty, new Thickness() { Bottom = 7 })
+            );
+            checkBoxStyle.Setters.Add(
+                new Setter(
+                    CheckBox.ForegroundProperty,
+                    new DynamicResourceExtension(SystemColors.WindowTextBrushKey)
+                )
+            );
             Resources.Add(typeof(CheckBox), checkBoxStyle);
 
             var textBoxStyle = new System.Windows.Style(typeof(TextBox));
-            textBoxStyle.Setters.Add(new Setter(TextBox.MarginProperty, new Thickness() { Left = 7, Right = 7 }));
-            textBoxStyle.Setters.Add(new Setter(TextBox.ForegroundProperty, new DynamicResourceExtension(SystemColors.WindowTextBrushKey)));
+            textBoxStyle.Setters.Add(
+                new Setter(TextBox.MarginProperty, new Thickness() { Left = 7, Right = 7 })
+            );
+            textBoxStyle.Setters.Add(
+                new Setter(
+                    TextBox.ForegroundProperty,
+                    new DynamicResourceExtension(SystemColors.WindowTextBrushKey)
+                )
+            );
             Resources.Add(typeof(TextBox), textBoxStyle);
 
             var radioButtonStyle = new System.Windows.Style(typeof(RadioButton));
-            radioButtonStyle.Setters.Add(new Setter(RadioButton.MarginProperty, new Thickness() { Bottom = 7 }));
-            radioButtonStyle.Setters.Add(new Setter(RadioButton.ForegroundProperty, new DynamicResourceExtension(SystemColors.WindowTextBrushKey)));
+            radioButtonStyle.Setters.Add(
+                new Setter(RadioButton.MarginProperty, new Thickness() { Bottom = 7 })
+            );
+            radioButtonStyle.Setters.Add(
+                new Setter(
+                    RadioButton.ForegroundProperty,
+                    new DynamicResourceExtension(SystemColors.WindowTextBrushKey)
+                )
+            );
             Resources.Add(typeof(RadioButton), radioButtonStyle);
 
             var comboBoxStyle = new System.Windows.Style(typeof(ComboBox));
-            comboBoxStyle.Setters.Add(new Setter(ComboBox.MarginProperty, new Thickness() { Bottom = 7 }));
-            comboBoxStyle.Setters.Add(new Setter(ComboBox.ForegroundProperty, new DynamicResourceExtension(SystemColors.WindowTextBrushKey)));
+            comboBoxStyle.Setters.Add(
+                new Setter(ComboBox.MarginProperty, new Thickness() { Bottom = 7 })
+            );
+            comboBoxStyle.Setters.Add(
+                new Setter(
+                    ComboBox.ForegroundProperty,
+                    new DynamicResourceExtension(SystemColors.WindowTextBrushKey)
+                )
+            );
             Resources.Add(typeof(ComboBox), comboBoxStyle);
         }
 
@@ -77,7 +118,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _bindingExpressions.Add(bindingExpression);
         }
 
-        private protected void BindToOption(CheckBox checkbox, Option2<bool?> nullableOptionKey, Func<bool> onNullValue)
+        private protected void BindToOption(
+            CheckBox checkbox,
+            Option2<bool?> nullableOptionKey,
+            Func<bool> onNullValue
+        )
         {
             var binding = new Binding()
             {
@@ -91,7 +136,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _bindingExpressions.Add(bindingExpression);
         }
 
-        private protected void BindToOption(CheckBox checkbox, PerLanguageOption2<bool> optionKey, string languageName)
+        private protected void BindToOption(
+            CheckBox checkbox,
+            PerLanguageOption2<bool> optionKey,
+            string languageName
+        )
         {
             var binding = new Binding()
             {
@@ -104,11 +153,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _bindingExpressions.Add(bindingExpression);
         }
 
-        private protected void BindToOption(CheckBox checkbox, PerLanguageOption2<bool?> nullableOptionKey, string languageName, Func<bool> onNullValue)
+        private protected void BindToOption(
+            CheckBox checkbox,
+            PerLanguageOption2<bool?> nullableOptionKey,
+            string languageName,
+            Func<bool> onNullValue
+        )
         {
             var binding = new Binding()
             {
-                Source = new PerLanguageOptionBinding<bool?>(OptionStore, nullableOptionKey, languageName),
+                Source = new PerLanguageOptionBinding<bool?>(
+                    OptionStore,
+                    nullableOptionKey,
+                    languageName
+                ),
                 Path = new PropertyPath("Value"),
                 UpdateSourceTrigger = UpdateSourceTrigger.Default,
                 Converter = new NullableBoolOptionConverter(onNullValue)
@@ -131,7 +189,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _bindingExpressions.Add(bindingExpression);
         }
 
-        private protected void BindToOption(TextBox textBox, PerLanguageOption2<int> optionKey, string languageName)
+        private protected void BindToOption(
+            TextBox textBox,
+            PerLanguageOption2<int> optionKey,
+            string languageName
+        )
         {
             var binding = new Binding()
             {
@@ -158,7 +220,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _bindingExpressions.Add(bindingExpression);
         }
 
-        private protected void BindToOption<T>(ComboBox comboBox, PerLanguageOption2<T> optionKey, string languageName)
+        private protected void BindToOption<T>(
+            ComboBox comboBox,
+            PerLanguageOption2<T> optionKey,
+            string languageName
+        )
         {
             var binding = new Binding()
             {
@@ -172,7 +238,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _bindingExpressions.Add(bindingExpression);
         }
 
-        private protected void BindToOption<T>(RadioButton radiobutton, PerLanguageOption2<T> optionKey, T optionValue, string languageName)
+        private protected void BindToOption<T>(
+            RadioButton radiobutton,
+            PerLanguageOption2<T> optionKey,
+            T optionValue,
+            string languageName
+        )
         {
             var binding = new Binding()
             {
@@ -195,25 +266,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        internal virtual void OnSave()
-        {
-        }
+        internal virtual void OnSave() { }
 
-        internal virtual void Close()
-        {
-        }
+        internal virtual void Close() { }
     }
 
     public class RadioButtonCheckedConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             return value.Equals(parameter);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             return value.Equals(true) ? parameter : Binding.DoNothing;
         }
@@ -237,7 +312,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return -1;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             var index = (int)value;
             if (index == -1)

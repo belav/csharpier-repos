@@ -53,6 +53,9 @@ namespace System.Web.Http.Routing
         /// <param name="request">The request message.</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, IDictionary<string, object> values);
+        IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            IDictionary<string, object> values
+        );
     }
 }

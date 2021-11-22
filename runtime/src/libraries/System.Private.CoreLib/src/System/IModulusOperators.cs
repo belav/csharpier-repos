@@ -23,7 +23,6 @@ namespace System
         /// <param name="right">The value which divides <paramref name="left" />.</param>
         /// <returns>The modulus or remainder of <paramref name="left" /> divided-by <paramref name="right" />.</returns>
         static abstract TResult operator %(TSelf left, TOther right);
-
         // /// <summary>Divides two values together to compute their modulus or remainder.</summary>
         // /// <param name="left">The value which <paramref name="right" /> divides.</param>
         // /// <param name="right">The value which divides <paramref name="left" />.</param>

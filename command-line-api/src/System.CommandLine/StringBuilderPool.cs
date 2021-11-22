@@ -48,8 +48,10 @@ namespace System.CommandLine
         {
             for (var i = _pool.Length; --i >= 0;)
             {
-                if (Interlocked.Exchange(ref _pool[i], null) is { } builderReference && 
-                    builderReference.TryGetTarget(out var builder))
+                if (
+                    Interlocked.Exchange(ref _pool[i], null) is { } builderReference
+                    && builderReference.TryGetTarget(out var builder)
+                )
                 {
                     return builder.Clear();
                 }

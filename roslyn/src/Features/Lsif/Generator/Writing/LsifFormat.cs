@@ -10,7 +10,6 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
         /// Line format, where each line is a JSON object.
         /// </summary>
         Line,
-
         /// <summary>
         /// JSON format, where the entire output is a single JSON array.
         /// </summary>

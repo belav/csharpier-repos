@@ -39,9 +39,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             Engine firstEngine;
             using (var context = new EmbeddedTransportationContext(options))
             {
-                firstOperator = context.Set<Vehicle>().Select(v => v.Operator).OrderBy(o => o.VehicleName).First();
+                firstOperator = context
+                    .Set<Vehicle>()
+                    .Select(v => v.Operator)
+                    .OrderBy(o => o.VehicleName)
+                    .First();
                 firstOperator.Name += "1";
-                firstEngine = context.Set<PoweredVehicle>().Select(v => v.Engine).OrderBy(o => o.VehicleName).First();
+                firstEngine = context
+                    .Set<PoweredVehicle>()
+                    .Select(v => v.Engine)
+                    .OrderBy(o => o.VehicleName)
+                    .First();
                 firstEngine.Description += "1";
 
                 await context.SaveChangesAsync();
@@ -49,12 +57,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var @operator = await context.Set<Vehicle>()
-                    .Select(v => v.Operator).OrderBy(o => o.VehicleName).FirstAsync();
+                var @operator = await context
+                    .Set<Vehicle>()
+                    .Select(v => v.Operator)
+                    .OrderBy(o => o.VehicleName)
+                    .FirstAsync();
                 Assert.Equal(firstOperator.Name, @operator.Name);
 
-                var engine = await context.Set<PoweredVehicle>()
-                    .Select(v => v.Engine).OrderBy(o => o.VehicleName).FirstAsync();
+                var engine = await context
+                    .Set<PoweredVehicle>()
+                    .Select(v => v.Engine)
+                    .OrderBy(o => o.VehicleName)
+                    .FirstAsync();
                 Assert.Equal(firstEngine.Description, engine.Description);
             }
         }
@@ -130,7 +144,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     City = "Village",
                     Notes = new List<Note> { note1, note2 }
                 };
-                context.Add(new Person { Id = 2, Addresses = new List<Address> { existingAddress1Person2 } });
+                context.Add(
+                    new Person { Id = 2, Addresses = new List<Address> { existingAddress1Person2 } }
+                );
                 existingAddress1Person3 = new Address
                 {
                     Street = "First",
@@ -143,7 +159,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     City = "City",
                     AddressTitle = new AddressTitle { Title = "P3 Billing" }
                 };
-                context.Add(new Person { Id = 3, Addresses = new List<Address> { existingAddress1Person3, existingAddress2Person3 } });
+                context.Add(
+                    new Person
+                    {
+                        Id = 3,
+                        Addresses = new List<Address>
+                        {
+                            existingAddress1Person3,
+                            existingAddress2Person3
+                        }
+                    }
+                );
 
                 await context.SaveChangesAsync();
 
@@ -194,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 var existingFirstAddressEntry = context.Entry(people[2].Addresses.First());
 
-                var addressJson = existingFirstAddressEntry.Property<JObject>("__jObject").CurrentValue;
+                var addressJson =
+                    existingFirstAddressEntry.Property<JObject>("__jObject").CurrentValue;
 
                 Assert.Equal("First", addressJson[nameof(Address.Street)]);
                 addressJson["unmappedId"] = 2;
@@ -281,7 +308,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     AddressTitle = new AddressTitle()
                 };
 
-                context.Add(new Person { Id = 1, Addresses = new List<Address> { address} });
+                context.Add(new Person { Id = 1, Addresses = new List<Address> { address } });
                 Assert.Equal("DefaultTitle", address.AddressTitle.Title);
 
                 await context.SaveChangesAsync();
@@ -298,14 +325,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 modelBuilder =>
                 {
                     modelBuilder.Entity<Person>(
-                        eb => eb.OwnsMany(
-                            v => v.Addresses, b =>
-                            {
-                                b.Property<Guid>("Id");
-                            }));
+                        eb =>
+                            eb.OwnsMany(
+                                v => v.Addresses,
+                                b =>
+                                {
+                                    b.Property<Guid>("Id");
+                                }
+                            )
+                    );
                 },
                 additionalModelCacheKey: "Guid_key",
-                seed: false);
+                seed: false
+            );
 
             Address address;
             Guid addressGuid;
@@ -365,8 +397,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var options = Fixture.CreateOptions();
             using var context = new EmbeddedTransportationContext(options);
-            var firstOperator = await context.Set<Vehicle>().OrderBy(o => o.Name).Select(v => v.Operator)
-                .AsNoTracking().FirstAsync();
+            var firstOperator = await context
+                .Set<Vehicle>()
+                .OrderBy(o => o.Name)
+                .Select(v => v.Operator)
+                .AsNoTracking()
+                .FirstAsync();
 
             Assert.Equal("Albert Williams", firstOperator.Name);
             Assert.Null(firstOperator.Vehicle);
@@ -385,16 +421,22 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                         Id = 3,
                         Addresses = new[]
                         {
-                            new Address { Street = "First", City = "City" }, new Address { Street = "Second", City = "City" }
+                            new Address { Street = "First", City = "City" },
+                            new Address { Street = "Second", City = "City" }
                         }
-                    });
+                    }
+                );
 
                 await context.SaveChangesAsync();
             }
 
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var addresses = await context.Set<Person>().Select(p => p.Addresses).AsNoTracking().FirstAsync();
+                var addresses = await context
+                    .Set<Person>()
+                    .Select(p => p.Addresses)
+                    .AsNoTracking()
+                    .FirstAsync();
 
                 Assert.Equal(2, addresses.Count);
             }
@@ -411,12 +453,21 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     Name = "Jack Jackson",
                     LicenseType = "Class A CDC",
                     VehicleName = "Fuel transport"
-                });
+                }
+            );
 
             Assert.Equal(
                 CosmosStrings.OrphanedNestedDocumentSensitive(
-                    nameof(Operator), nameof(Vehicle), "{VehicleName: Fuel transport}"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(() => context.SaveChangesAsync())).Message);
+                    nameof(Operator),
+                    nameof(Vehicle),
+                    "{VehicleName: Fuel transport}"
+                ),
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => context.SaveChangesAsync()
+                    )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -425,7 +476,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var options = Fixture.CreateOptions();
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context.Vehicles.SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
 
                 bike.Operator = new Operator { Name = "Chris Horner" };
 
@@ -439,7 +492,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context.Vehicles.SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
                 Assert.Equal("repairman", bike.Operator.Name);
             }
         }
@@ -450,7 +505,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var options = Fixture.CreateOptions();
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context.Vehicles.SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
 
                 var newBike = new Vehicle
                 {
@@ -468,21 +525,23 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context.Vehicles.SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
 
                 Assert.Equal(2, bike.SeatingCapacity);
                 Assert.NotNull(bike.Operator);
             }
         }
 
-        protected TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)Fixture.ListLoggerFactory;
+        protected TestSqlLoggerFactory TestSqlLoggerFactory =>
+            (TestSqlLoggerFactory)Fixture.ListLoggerFactory;
 
-        protected void AssertSql(params string[] expected)
-            => TestSqlLoggerFactory.AssertBaseline(expected);
+        protected void AssertSql(params string[] expected) =>
+            TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected void AssertContainsSql(params string[] expected)
-            => TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
+        protected void AssertContainsSql(params string[] expected) =>
+            TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
 
         public class CosmosFixture : ServiceProviderFixtureBase, IAsyncLifetime
         {
@@ -491,8 +550,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 TestStore = CosmosTestStore.Create(DatabaseName);
             }
 
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
 
             public virtual CosmosTestStore TestStore { get; }
             private Action<ModelBuilder> OnModelCreatingAction { get; set; }
@@ -506,33 +565,39 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             public DbContextOptions CreateOptions(
                 Action<ModelBuilder> onModelCreating = null,
                 object additionalModelCacheKey = null,
-                bool seed = true)
+                bool seed = true
+            )
             {
                 OnModelCreatingAction = onModelCreating;
                 AdditionalModelCacheKey = additionalModelCacheKey;
                 var options = CreateOptions(TestStore);
                 TestStore.Initialize(
-                    ServiceProvider, () => new EmbeddedTransportationContext(options), c =>
+                    ServiceProvider,
+                    () => new EmbeddedTransportationContext(options),
+                    c =>
                     {
                         if (seed)
                         {
                             ((TransportationContext)c).Seed();
                         }
-                    });
+                    }
+                );
 
                 ListLoggerFactory.Clear();
                 return options;
             }
 
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection)
-                    .AddSingleton<IModelCacheKeyFactory>(new TestModelCacheKeyFactory(() => AdditionalModelCacheKey));
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) =>
+                base.AddServices(serviceCollection)
+                    .AddSingleton<IModelCacheKeyFactory>(
+                        new TestModelCacheKeyFactory(() => AdditionalModelCacheKey)
+                    );
 
-            public Task InitializeAsync()
-                => Task.CompletedTask;
+            public Task InitializeAsync() => Task.CompletedTask;
 
-            public Task DisposeAsync()
-                => TestStore.DisposeAsync();
+            public Task DisposeAsync() => TestStore.DisposeAsync();
 
             private class TestModelCacheKeyFactory : IModelCacheKeyFactory
             {
@@ -543,20 +608,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     _getAdditionalKey = getAdditionalKey;
                 }
 
-                public object Create(DbContext context)
-                    => Tuple.Create(context.GetType(), _getAdditionalKey());
+                public object Create(DbContext context) =>
+                    Tuple.Create(context.GetType(), _getAdditionalKey());
 
-                public object Create(DbContext context, bool designTime)
-                    => Tuple.Create(context.GetType(), _getAdditionalKey(), designTime);
+                public object Create(DbContext context, bool designTime) =>
+                    Tuple.Create(context.GetType(), _getAdditionalKey(), designTime);
             }
         }
 
         protected class EmbeddedTransportationContext : TransportationContext
         {
-            public EmbeddedTransportationContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public EmbeddedTransportationContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -565,7 +627,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     {
                         eb.HasKey(e => e.Name);
                         eb.OwnsOne(v => v.Operator).OwnsOne(v => v.Details);
-                    });
+                    }
+                );
                 modelBuilder.Entity<PoweredVehicle>();
 
                 modelBuilder.Entity<Engine>(
@@ -575,7 +638,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                         eb.HasOne(e => e.Vehicle)
                             .WithOne(e => e.Engine)
                             .HasForeignKey<Engine>(e => e.VehicleName);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<FuelTank>(
                     eb =>
@@ -585,10 +649,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                             .WithOne(e => e.FuelTank)
                             .HasForeignKey<FuelTank>(e => e.VehicleName)
                             .OnDelete(DeleteBehavior.Restrict);
-                        eb.HasOne(e => e.Vehicle)
-                            .WithOne()
-                            .HasForeignKey<FuelTank>("VehicleName1");
-                    });
+                        eb.HasOne(e => e.Vehicle).WithOne().HasForeignKey<FuelTank>("VehicleName1");
+                    }
+                );
 
                 modelBuilder.Entity<ContinuousCombustionEngine>();
                 modelBuilder.Entity<IntermittentCombustionEngine>();
@@ -598,13 +661,20 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 modelBuilder.Entity<PersonBase>();
                 modelBuilder.Entity<Person>(
-                    eb => eb.OwnsMany(
-                        v => v.Addresses, b =>
-                        {
-                            b.ToJsonProperty("Stored Addresses");
-                            b.OwnsOne(a => a.AddressTitle).Property(a => a.Title).HasValueGenerator<TitleGenerator>().IsRequired();
-                            b.OwnsMany(a => a.Notes);
-                        }));
+                    eb =>
+                        eb.OwnsMany(
+                            v => v.Addresses,
+                            b =>
+                            {
+                                b.ToJsonProperty("Stored Addresses");
+                                b.OwnsOne(a => a.AddressTitle)
+                                    .Property(a => a.Title)
+                                    .HasValueGenerator<TitleGenerator>()
+                                    .IsRequired();
+                                b.OwnsMany(a => a.Notes);
+                            }
+                        )
+                );
             }
         }
 

@@ -70,14 +70,12 @@ internal partial class SolutionState
         /// </summary>
         private SkeletonReferenceSet? _skeletonReferenceSet;
 
-        public SkeletonReferenceCache()
-            : this(version: null, skeletonReferenceSet: null)
-        {
-        }
+        public SkeletonReferenceCache() : this(version: null, skeletonReferenceSet: null) { }
 
         private SkeletonReferenceCache(
             VersionStamp? version,
-            SkeletonReferenceSet? skeletonReferenceSet)
+            SkeletonReferenceSet? skeletonReferenceSet
+        )
         {
             _version = version;
             _skeletonReferenceSet = skeletonReferenceSet;
@@ -105,11 +103,19 @@ internal partial class SolutionState
             ICompilationTracker compilationTracker,
             SolutionState solution,
             MetadataReferenceProperties properties,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var version = await compilationTracker.GetDependentSemanticVersionAsync(solution, cancellationToken).ConfigureAwait(false);
+            var version = await compilationTracker
+                .GetDependentSemanticVersionAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
             var referenceSet = await TryGetOrCreateReferenceSetAsync(
-                compilationTracker, solution, version, cancellationToken).ConfigureAwait(false);
+                    compilationTracker,
+                    solution,
+                    version,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return referenceSet?.GetMetadataReference(properties);
         }
 
@@ -117,7 +123,8 @@ internal partial class SolutionState
             ICompilationTracker compilationTracker,
             SolutionState solution,
             VersionStamp version,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // First, just see if we have cached a reference set that is complimentary with the version of the project
             // being passed in.  If so, we can just reuse what we already computed before.
@@ -135,8 +142,14 @@ internal partial class SolutionState
                 // Ok, first thread to get in and actually do this work.  Build the compilation and try to emit it.
                 // Regardless of if we succeed or fail, store this result so this only happens once.
 
-                var compilation = await compilationTracker.GetCompilationAsync(solution, cancellationToken).ConfigureAwait(false);
-                var storage = TryCreateMetadataStorage(solution.Workspace, compilation, cancellationToken);
+                var compilation = await compilationTracker
+                    .GetCompilationAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
+                var storage = TryCreateMetadataStorage(
+                    solution.Workspace,
+                    compilation,
+                    cancellationToken
+                );
 
                 lock (_stateGate)
                 {
@@ -145,7 +158,11 @@ internal partial class SolutionState
                     // return any prior computed reference set (including 'null' if we've never successfully made
                     // a skeleton).
                     if (storage != null)
-                        _skeletonReferenceSet = new SkeletonReferenceSet(storage, compilation.AssemblyName, new DeferredDocumentationProvider(compilation));
+                        _skeletonReferenceSet = new SkeletonReferenceSet(
+                            storage,
+                            compilation.AssemblyName,
+                            new DeferredDocumentationProvider(compilation)
+                        );
 
                     _version = version;
 
@@ -154,7 +171,10 @@ internal partial class SolutionState
             }
         }
 
-        private bool TryReadSkeletonReferenceSetAtThisVersion(VersionStamp version, out SkeletonReferenceSet? result)
+        private bool TryReadSkeletonReferenceSetAtThisVersion(
+            VersionStamp version,
+            out SkeletonReferenceSet? result
+        )
         {
             lock (_stateGate)
             {
@@ -171,27 +191,49 @@ internal partial class SolutionState
             return false;
         }
 
-        private static ITemporaryStreamStorage? TryCreateMetadataStorage(Workspace workspace, Compilation compilation, CancellationToken cancellationToken)
+        private static ITemporaryStreamStorage? TryCreateMetadataStorage(
+            Workspace workspace,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             try
             {
-                workspace.LogTestMessage($"Beginning to create a skeleton assembly for {compilation.AssemblyName}...");
+                workspace.LogTestMessage(
+                    $"Beginning to create a skeleton assembly for {compilation.AssemblyName}..."
+                );
 
-                using (Logger.LogBlock(FunctionId.Workspace_SkeletonAssembly_EmitMetadataOnlyImage, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Workspace_SkeletonAssembly_EmitMetadataOnlyImage,
+                        cancellationToken
+                    )
+                )
                 {
                     using var stream = SerializableBytes.CreateWritableStream();
                     // note: cloning compilation so we don't retain all the generated symbols after its emitted.
                     // * REVIEW * is cloning clone p2p reference compilation as well?
-                    var emitResult = compilation.Clone().Emit(stream, options: s_metadataOnlyEmitOptions, cancellationToken: cancellationToken);
+                    var emitResult = compilation
+                        .Clone()
+                        .Emit(
+                            stream,
+                            options: s_metadataOnlyEmitOptions,
+                            cancellationToken: cancellationToken
+                        );
 
                     if (emitResult.Success)
                     {
-                        workspace.LogTestMessage($"Successfully emitted a skeleton assembly for {compilation.AssemblyName}");
+                        workspace.LogTestMessage(
+                            $"Successfully emitted a skeleton assembly for {compilation.AssemblyName}"
+                        );
 
-                        var temporaryStorageService = workspace.Services.GetRequiredService<ITemporaryStorageService>();
-                        var storage = temporaryStorageService.CreateTemporaryStreamStorage(cancellationToken);
+                        var temporaryStorageService =
+                            workspace.Services.GetRequiredService<ITemporaryStorageService>();
+                        var storage = temporaryStorageService.CreateTemporaryStreamStorage(
+                            cancellationToken
+                        );
 
                         stream.Position = 0;
                         storage.WriteStream(stream, cancellationToken);
@@ -200,7 +242,9 @@ internal partial class SolutionState
                     }
                     else
                     {
-                        workspace.LogTestMessage($"Failed to create a skeleton assembly for {compilation.AssemblyName}:");
+                        workspace.LogTestMessage(
+                            $"Failed to create a skeleton assembly for {compilation.AssemblyName}:"
+                        );
 
                         foreach (var diagnostic in emitResult.Diagnostics)
                         {
@@ -208,13 +252,20 @@ internal partial class SolutionState
                         }
 
                         // log emit failures so that we can improve most common cases
-                        Logger.Log(FunctionId.MetadataOnlyImage_EmitFailure, KeyValueLogMessage.Create(m =>
-                        {
-                            // log errors in the format of
-                            // CS0001:1;CS002:10;...
-                            var groups = emitResult.Diagnostics.GroupBy(d => d.Id).Select(g => $"{g.Key}:{g.Count()}");
-                            m["Errors"] = string.Join(";", groups);
-                        }));
+                        Logger.Log(
+                            FunctionId.MetadataOnlyImage_EmitFailure,
+                            KeyValueLogMessage.Create(
+                                m =>
+                                {
+                                    // log errors in the format of
+                                    // CS0001:1;CS002:10;...
+                                    var groups = emitResult.Diagnostics
+                                        .GroupBy(d => d.Id)
+                                        .Select(g => $"{g.Key}:{g.Count()}");
+                                    m["Errors"] = string.Join(";", groups);
+                                }
+                            )
+                        );
 
                         return null;
                     }
@@ -222,7 +273,9 @@ internal partial class SolutionState
             }
             finally
             {
-                workspace.LogTestMessage($"Done trying to create a skeleton assembly for {compilation.AssemblyName}");
+                workspace.LogTestMessage(
+                    $"Done trying to create a skeleton assembly for {compilation.AssemblyName}"
+                );
             }
         }
 
@@ -232,7 +285,10 @@ internal partial class SolutionState
             /// A map to ensure that the streams from the temporary storage service that back the metadata we create stay alive as long
             /// as the metadata is alive.
             /// </summary>
-            private static readonly ConditionalWeakTable<AssemblyMetadata, ISupportDirectMemoryAccess> s_lifetime = new();
+            private static readonly ConditionalWeakTable<
+                AssemblyMetadata,
+                ISupportDirectMemoryAccess
+            > s_lifetime = new();
 
             private readonly ITemporaryStreamStorage? _storage;
             private readonly string? _assemblyName;
@@ -253,12 +309,16 @@ internal partial class SolutionState
             /// <remarks>
             /// This instance should be locked when being read/written.
             /// </remarks>
-            private readonly Dictionary<MetadataReferenceProperties, WeakReference<MetadataReference>?> _metadataReferences = new();
+            private readonly Dictionary<
+                MetadataReferenceProperties,
+                WeakReference<MetadataReference>?
+            > _metadataReferences = new();
 
             public SkeletonReferenceSet(
                 ITemporaryStreamStorage? storage,
                 string? assemblyName,
-                DeferredDocumentationProvider documentationProvider)
+                DeferredDocumentationProvider documentationProvider
+            )
             {
                 _storage = storage;
                 _assemblyName = assemblyName;
@@ -276,8 +336,15 @@ internal partial class SolutionState
 
                 // otherwise, create the metadata outside of the lock, and then try to assign it if no one else beat us
                 {
-                    var metadataReference = CreateReference(properties.Aliases, properties.EmbedInteropTypes, _documentationProvider);
-                    var weakMetadata = metadataReference == null ? null : new WeakReference<MetadataReference>(metadataReference);
+                    var metadataReference = CreateReference(
+                        properties.Aliases,
+                        properties.EmbedInteropTypes,
+                        _documentationProvider
+                    );
+                    var weakMetadata =
+                        metadataReference == null
+                            ? null
+                            : new WeakReference<MetadataReference>(metadataReference);
 
                     lock (_metadataReferences)
                     {
@@ -291,13 +358,16 @@ internal partial class SolutionState
                     return metadataReference;
                 }
 
-                bool TryGetExisting_NoLock(MetadataReferenceProperties properties, out MetadataReference? metadataReference)
+                bool TryGetExisting_NoLock(
+                    MetadataReferenceProperties properties,
+                    out MetadataReference? metadataReference
+                )
                 {
                     metadataReference = null;
                     if (!_metadataReferences.TryGetValue(properties, out var weakMetadata))
                         return false;
 
-                    // If we are pointing at a null-weak reference (not a weak reference that points to null), then we 
+                    // If we are pointing at a null-weak reference (not a weak reference that points to null), then we
                     // know we failed to create the metadata the last time around, and we can shortcircuit immediately,
                     // returning null *with* success to bubble that up.
                     if (weakMetadata == null)
@@ -307,7 +377,11 @@ internal partial class SolutionState
                 }
             }
 
-            private MetadataReference? CreateReference(ImmutableArray<string> aliases, bool embedInteropTypes, DocumentationProvider documentationProvider)
+            private MetadataReference? CreateReference(
+                ImmutableArray<string> aliases,
+                bool embedInteropTypes,
+                DocumentationProvider documentationProvider
+            )
             {
                 if (_storage == null)
                     return null;
@@ -318,10 +392,15 @@ internal partial class SolutionState
 
                 if (stream is ISupportDirectMemoryAccess supportNativeMemory)
                 {
-                    // this is unfortunate that if we give stream, compiler will just re-copy whole content to 
+                    // this is unfortunate that if we give stream, compiler will just re-copy whole content to
                     // native memory again. this is a way to get around the issue by we getting native memory ourselves and then
                     // give them pointer to the native memory. also we need to handle lifetime ourselves.
-                    metadata = AssemblyMetadata.Create(ModuleMetadata.CreateFromImage(supportNativeMemory.GetPointer(), (int)stream.Length));
+                    metadata = AssemblyMetadata.Create(
+                        ModuleMetadata.CreateFromImage(
+                            supportNativeMemory.GetPointer(),
+                            (int)stream.Length
+                        )
+                    );
 
                     // Tie lifetime of stream to metadata we created. It is important to tie this to the Metadata and not the
                     // metadata reference, as PE symbols hold onto just the Metadata. We can use Add here since we created
@@ -334,7 +413,7 @@ internal partial class SolutionState
                     // internally copy it to native memory again. since compiler owns lifetime of stream,
                     // it would be great if compiler can be little bit smarter on how it deals with stream.
 
-                    // We don't deterministically release the resulting metadata since we don't know 
+                    // We don't deterministically release the resulting metadata since we don't know
                     // when we should. So we leave it up to the GC to collect it and release all the associated resources.
                     metadata = AssemblyMetadata.CreateFromStream(stream);
                 }
@@ -343,7 +422,8 @@ internal partial class SolutionState
                     documentation: documentationProvider,
                     aliases: aliases,
                     embedInteropTypes: embedInteropTypes,
-                    display: _assemblyName);
+                    display: _assemblyName
+                );
             }
         }
     }

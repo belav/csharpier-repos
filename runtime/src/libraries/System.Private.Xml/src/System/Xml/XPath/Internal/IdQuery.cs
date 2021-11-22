@@ -57,7 +57,12 @@ namespace MS.Internal.Xml.XPath
 
         public override XPathNavigator? MatchNode(XPathNavigator? context)
         {
-            Evaluate(new XPathSingletonIterator(context!, /*moved:*/true));
+            Evaluate(
+                new XPathSingletonIterator(
+                    context!, /*moved:*/
+                    true
+                )
+            );
             XPathNavigator? result;
             while ((result = Advance()) != null)
             {
@@ -69,6 +74,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new IDQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new IDQuery(this);
+        }
     }
 }

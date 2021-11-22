@@ -21,13 +21,25 @@ namespace System.Text.Json.Serialization.Tests
                 MyNullableIntList = null,
                 MyObjectList = new List<object> { null },
                 MyListList = new List<List<object>> { new List<object> { null } },
-                MyDictionaryList = new List<Dictionary<string, string>> { new Dictionary<string, string>() { ["key"] = null } },
+                MyDictionaryList = new List<Dictionary<string, string>>
+                {
+                    new Dictionary<string, string>() { ["key"] = null }
+                },
                 MyStringDictionary = new Dictionary<string, string>() { ["key"] = null },
-                MyNullableDateTimeDictionary = new Dictionary<string, DateTime?>() { ["key"] = null },
+                MyNullableDateTimeDictionary = new Dictionary<string, DateTime?>()
+                {
+                    ["key"] = null
+                },
                 MyObjectDictionary = new Dictionary<string, object>() { ["key"] = null },
-                MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>() { ["key"] = null },
+                MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>()
+                {
+                    ["key"] = null
+                },
                 MyListDictionary = new Dictionary<string, List<object>>() { ["key"] = null },
-                MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>() { ["key"] = null }
+                MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>()
+                {
+                    ["key"] = null
+                }
             };
 
             string json = JsonSerializer.Serialize(obj);
@@ -64,19 +76,35 @@ namespace System.Text.Json.Serialization.Tests
                 MyNullableIntList = null,
                 MyObjectList = new List<object> { null },
                 MyListList = new List<List<object>> { new List<object> { null } },
-                MyDictionaryList = new List<Dictionary<string, string>> { new Dictionary<string, string>() { ["key"] = null } },
+                MyDictionaryList = new List<Dictionary<string, string>>
+                {
+                    new Dictionary<string, string>() { ["key"] = null }
+                },
                 MyStringDictionary = new Dictionary<string, string>() { ["key"] = null },
-                MyNullableDateTimeDictionary = new Dictionary<string, DateTime?>() { ["key"] = null },
+                MyNullableDateTimeDictionary = new Dictionary<string, DateTime?>()
+                {
+                    ["key"] = null
+                },
                 MyObjectDictionary = new Dictionary<string, object>() { ["key"] = null },
-                MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>() { ["key"] = new Dictionary<string, string>() { ["key"] = null } },
-                MyListDictionary = new Dictionary<string, List<object>>() { ["key"] = new List<object> { null } },
-                MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>() { ["key"] = new Dictionary<string, object>() { ["key"] = null } }
+                MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>()
+                {
+                    ["key"] = new Dictionary<string, string>() { ["key"] = null }
+                },
+                MyListDictionary = new Dictionary<string, List<object>>()
+                {
+                    ["key"] = new List<object> { null }
+                },
+                MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>()
+                {
+                    ["key"] = new Dictionary<string, object>() { ["key"] = null }
+                }
             };
 
             string json = JsonSerializer.Serialize(obj, options);
 
             // Roundtrip to verify serialize is accurate.
-            TestClassWithInitializedProperties newObj = JsonSerializer.Deserialize<TestClassWithInitializedProperties>(json);
+            TestClassWithInitializedProperties newObj =
+                JsonSerializer.Deserialize<TestClassWithInitializedProperties>(json);
             Assert.Equal("Hello", newObj.MyString);
             Assert.Equal(1, newObj.MyInt);
             Assert.Equal(new DateTime(1995, 4, 16), newObj.MyDateTime);
@@ -95,14 +123,12 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Null(newObj.MyListDictionary["key"][0]);
             Assert.Null(newObj.MyObjectDictionaryDictionary["key"]["key"]);
 
-            var parentObj = new WrapperForTestClassWithInitializedProperties
-            {
-                MyClass = obj
-            };
+            var parentObj = new WrapperForTestClassWithInitializedProperties { MyClass = obj };
             json = JsonSerializer.Serialize(parentObj, options);
 
             // Roundtrip to ensure serialize is accurate.
-            WrapperForTestClassWithInitializedProperties newParentObj = JsonSerializer.Deserialize<WrapperForTestClassWithInitializedProperties>(json);
+            WrapperForTestClassWithInitializedProperties newParentObj =
+                JsonSerializer.Deserialize<WrapperForTestClassWithInitializedProperties>(json);
             TestClassWithInitializedProperties nestedObj = newParentObj.MyClass;
             Assert.Equal("Hello", nestedObj.MyString);
             Assert.Equal(1, nestedObj.MyInt);
@@ -166,7 +192,7 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullArrayElement()
         {
-            string json = JsonSerializer.Serialize(new ObjectWithObjectProperties[]{ null });
+            string json = JsonSerializer.Serialize(new ObjectWithObjectProperties[] { null });
             Assert.Equal("[null]", json);
         }
 
@@ -210,13 +236,19 @@ namespace System.Text.Json.Serialization.Tests
             };
             Assert.Equal(@"{""key"":null}", JsonSerializer.Serialize(ObjVals));
 
-            Dictionary<string, Dictionary<string, string>> StringDictVals = new Dictionary<string, Dictionary<string, string>>()
+            Dictionary<string, Dictionary<string, string>> StringDictVals = new Dictionary<
+                string,
+                Dictionary<string, string>
+            >()
             {
                 ["key"] = null,
             };
             Assert.Equal(@"{""key"":null}", JsonSerializer.Serialize(StringDictVals));
 
-            Dictionary<string, Dictionary<string, object>> ObjectDictVals = new Dictionary<string, Dictionary<string, object>>()
+            Dictionary<string, Dictionary<string, object>> ObjectDictVals = new Dictionary<
+                string,
+                Dictionary<string, object>
+            >()
             {
                 ["key"] = null,
             };
@@ -228,7 +260,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             var input = new MyPoco[] { null, new MyPoco { Foo = "foo" } };
 
-            string json = JsonSerializer.Serialize(input, new JsonSerializerOptions { Converters = { new MyPocoConverter() } });
+            string json = JsonSerializer.Serialize(
+                input,
+                new JsonSerializerOptions { Converters = { new MyPocoConverter() } }
+            );
             Assert.Equal("[null,{\"Foo\":\"foo\"}]", json);
         }
 
@@ -239,16 +274,26 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyPocoConverter : JsonConverter<MyPoco>
         {
-            public override MyPoco Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override MyPoco Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, MyPoco value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                MyPoco value,
+                JsonSerializerOptions options
+            )
             {
                 if (value == null)
                 {
-                    throw new InvalidOperationException("The custom converter should never get called with null value.");
+                    throw new InvalidOperationException(
+                        "The custom converter should never get called with null value."
+                    );
                 }
 
                 writer.WriteStartObject();
@@ -263,13 +308,12 @@ namespace System.Text.Json.Serialization.Tests
             int[,] arr = null;
             Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize<int[,]>(arr));
 
-            var options = new JsonSerializerOptions
-            {
-                IgnoreNullValues = true
-            };
+            var options = new JsonSerializerOptions { IgnoreNullValues = true };
 
             // We still throw when we have an unsupported root.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize<int[,]>(arr, options));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Serialize<int[,]>(arr, options)
+            );
         }
     }
 }

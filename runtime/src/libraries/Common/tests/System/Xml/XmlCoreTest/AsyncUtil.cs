@@ -35,39 +35,27 @@ namespace XmlCoreTest.Common
             }
         }
 
-        private static bool _redirectReader = true;   // for debugging, set this to false if want to stop the async XmlReader testing temporary during debugging
+        private static bool _redirectReader = true; // for debugging, set this to false if want to stop the async XmlReader testing temporary during debugging
         public static bool RedirectReader
         {
-            get
-            {
-                return _redirectReader;
-            }
+            get { return _redirectReader; }
         }
 
-        private static bool _redirectWriter = true;   // for debugging, set this to false if want to stop the async XmlWriter testing temporary during debugging
+        private static bool _redirectWriter = true; // for debugging, set this to false if want to stop the async XmlWriter testing temporary during debugging
         public static bool RedirectWriter
         {
-            get
-            {
-                return _redirectWriter;
-            }
+            get { return _redirectWriter; }
         }
     }
-    public class RedirectSyncCallToAsyncCallXmlReader : XmlReader, IXmlLineInfo   //inherit from XmlReader so that we don't have the change the return type of function that returns a XmlReader
+    public class RedirectSyncCallToAsyncCallXmlReader : XmlReader, IXmlLineInfo //inherit from XmlReader so that we don't have the change the return type of function that returns a XmlReader
     {
         // the real XmlReader
         private XmlReader _reader = null;
 
         public XmlReader CoreReader
         {
-            get
-            {
-                return _reader;
-            }
-            set
-            {
-                _reader = value;
-            }
+            get { return _reader; }
+            set { _reader = value; }
         }
 
         public RedirectSyncCallToAsyncCallXmlReader(XmlReader xr)
@@ -101,7 +89,6 @@ namespace XmlCoreTest.Common
         {
             return CoreReader.ReadAsync();
         }
-
 
         public override string Value
         {
@@ -156,8 +143,10 @@ namespace XmlCoreTest.Common
             return CoreReader.MoveToContentAsync();
         }
 
-
-        public override object ReadContentAs(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override object ReadContentAs(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             if (AsyncUtil.RedirectReader)
             {
@@ -177,7 +166,10 @@ namespace XmlCoreTest.Common
                 return CoreReader.ReadContentAs(returnType, namespaceResolver);
             }
         }
-        public override Task<object> ReadContentAsAsync(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override Task<object> ReadContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             return CoreReader.ReadContentAsAsync(returnType, namespaceResolver);
         }
@@ -282,13 +274,19 @@ namespace XmlCoreTest.Common
             return CoreReader.ReadContentAsStringAsync();
         }
 
-        public override object ReadElementContentAs(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override object ReadElementContentAs(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             if (AsyncUtil.RedirectReader)
             {
                 try
                 {
-                    Task<object> t = CoreReader.ReadElementContentAsAsync(returnType, namespaceResolver);
+                    Task<object> t = CoreReader.ReadElementContentAsAsync(
+                        returnType,
+                        namespaceResolver
+                    );
                     t.Wait();
                     return t.Result;
                 }
@@ -302,7 +300,10 @@ namespace XmlCoreTest.Common
                 return CoreReader.ReadElementContentAs(returnType, namespaceResolver);
             }
         }
-        public override Task<object> ReadElementContentAsAsync(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override Task<object> ReadElementContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             return CoreReader.ReadElementContentAsAsync(returnType, namespaceResolver);
         }
@@ -327,11 +328,14 @@ namespace XmlCoreTest.Common
                 return CoreReader.ReadElementContentAsBase64(buffer, index, count);
             }
         }
-        public override Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public override Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             return CoreReader.ReadElementContentAsBase64Async(buffer, index, count);
         }
-
 
         public override int ReadElementContentAsBinHex(byte[] buffer, int index, int count)
         {
@@ -353,7 +357,11 @@ namespace XmlCoreTest.Common
                 return CoreReader.ReadElementContentAsBinHex(buffer, index, count);
             }
         }
-        public override Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             return CoreReader.ReadElementContentAsBinHexAsync(buffer, index, count);
         }
@@ -432,7 +440,6 @@ namespace XmlCoreTest.Common
         {
             return CoreReader.ReadInnerXmlAsync();
         }
-
 
         public override string ReadOuterXml()
         {
@@ -514,122 +521,77 @@ namespace XmlCoreTest.Common
         /// </summary>
         public override XmlReaderSettings Settings
         {
-            get
-            {
-                return CoreReader.Settings;
-            }
+            get { return CoreReader.Settings; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return CoreReader.NodeType;
-            }
+            get { return CoreReader.NodeType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return CoreReader.Name;
-            }
+            get { return CoreReader.Name; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return CoreReader.LocalName;
-            }
+            get { return CoreReader.LocalName; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return CoreReader.NamespaceURI;
-            }
+            get { return CoreReader.NamespaceURI; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return CoreReader.Prefix;
-            }
+            get { return CoreReader.Prefix; }
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return CoreReader.HasValue;
-            }
+            get { return CoreReader.HasValue; }
         }
 
         public override int Depth
         {
-            get
-            {
-                return CoreReader.Depth;
-            }
+            get { return CoreReader.Depth; }
         }
 
         public override string BaseURI
         {
-            get
-            {
-                return CoreReader.BaseURI;
-            }
+            get { return CoreReader.BaseURI; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return CoreReader.IsEmptyElement;
-            }
+            get { return CoreReader.IsEmptyElement; }
         }
 
         public override bool IsDefault
         {
-            get
-            {
-                return CoreReader.IsDefault;
-            }
+            get { return CoreReader.IsDefault; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return CoreReader.XmlSpace;
-            }
+            get { return CoreReader.XmlSpace; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return CoreReader.XmlLang;
-            }
+            get { return CoreReader.XmlLang; }
         }
 
         public override System.Type ValueType
         {
-            get
-            {
-                return CoreReader.ValueType;
-            }
+            get { return CoreReader.ValueType; }
         }
 
         public override int AttributeCount
         {
-            get
-            {
-                return CoreReader.AttributeCount;
-            }
+            get { return CoreReader.AttributeCount; }
         }
 
         public override string GetAttribute(string name)
@@ -649,26 +611,17 @@ namespace XmlCoreTest.Common
 
         public override string this[int i]
         {
-            get
-            {
-                return CoreReader.GetAttribute(i);
-            }
+            get { return CoreReader.GetAttribute(i); }
         }
 
         public override string this[string name]
         {
-            get
-            {
-                return CoreReader.GetAttribute(name);
-            }
+            get { return CoreReader.GetAttribute(name); }
         }
 
         public override string this[string name, string namespaceURI]
         {
-            get
-            {
-                return CoreReader.GetAttribute(name, namespaceURI);
-            }
+            get { return CoreReader.GetAttribute(name, namespaceURI); }
         }
 
         public override bool MoveToAttribute(string name)
@@ -711,26 +664,17 @@ namespace XmlCoreTest.Common
 
         public override bool EOF
         {
-            get
-            {
-                return CoreReader.EOF;
-            }
+            get { return CoreReader.EOF; }
         }
 
         public override ReadState ReadState
         {
-            get
-            {
-                return CoreReader.ReadState;
-            }
+            get { return CoreReader.ReadState; }
         }
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return CoreReader.NameTable;
-            }
+            get { return CoreReader.NameTable; }
         }
 
         public override string LookupNamespace(string prefix)
@@ -740,10 +684,7 @@ namespace XmlCoreTest.Common
 
         public override bool CanResolveEntity
         {
-            get
-            {
-                return CoreReader.CanResolveEntity;
-            }
+            get { return CoreReader.CanResolveEntity; }
         }
 
         public override void ResolveEntity()
@@ -753,18 +694,12 @@ namespace XmlCoreTest.Common
 
         public override bool CanReadBinaryContent
         {
-            get
-            {
-                return CoreReader.CanReadBinaryContent;
-            }
+            get { return CoreReader.CanReadBinaryContent; }
         }
 
         public override bool CanReadValueChunk
         {
-            get
-            {
-                return CoreReader.CanReadValueChunk;
-            }
+            get { return CoreReader.CanReadValueChunk; }
         }
 
         public override bool IsStartElement()
@@ -789,10 +724,7 @@ namespace XmlCoreTest.Common
 
         public override bool HasAttributes
         {
-            get
-            {
-                return CoreReader.HasAttributes;
-            }
+            get { return CoreReader.HasAttributes; }
         }
 
         public new void Dispose()
@@ -893,9 +825,19 @@ namespace XmlCoreTest.Common
         {
             return CoreReader.ReadElementContentAsString(localName, namespaceURI);
         }
-        public override object ReadElementContentAs(Type returnType, IXmlNamespaceResolver namespaceResolver, string localName, string namespaceURI)
+        public override object ReadElementContentAs(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver,
+            string localName,
+            string namespaceURI
+        )
         {
-            return CoreReader.ReadElementContentAs(returnType, namespaceResolver, localName, namespaceURI);
+            return CoreReader.ReadElementContentAs(
+                returnType,
+                namespaceResolver,
+                localName,
+                namespaceURI
+            );
         }
         public override void ReadStartElement()
         {
@@ -971,7 +913,11 @@ namespace XmlCoreTest.Common
     /// </summary>
     public class XmlReaderAsync
     {
-        public static XmlReader Create(string inputUri, XmlReaderSettings settings = null, XmlParserContext inputContext = null)
+        public static XmlReader Create(
+            string inputUri,
+            XmlReaderSettings settings = null,
+            XmlParserContext inputContext = null
+        )
         {
             if (settings == null)
             {
@@ -980,7 +926,7 @@ namespace XmlCoreTest.Common
 
             if (AsyncUtil.RedirectWriter)
             {
-                settings.Async = true;    // force async
+                settings.Async = true; // force async
             }
             inputContext = null;
             return new RedirectSyncCallToAsyncCallXmlReader(XmlReader.Create(inputUri, settings));
@@ -1004,13 +950,17 @@ namespace XmlCoreTest.Common
             }
             if (AsyncUtil.RedirectWriter)
             {
-                settings.Async = true;    // force async
+                settings.Async = true; // force async
             }
             baseUri = null;
             return new RedirectSyncCallToAsyncCallXmlReader(XmlReader.Create(input, settings));
         }
 
-        public static XmlReader Create(Stream input, XmlReaderSettings settings, XmlParserContext inputContext)
+        public static XmlReader Create(
+            Stream input,
+            XmlReaderSettings settings,
+            XmlParserContext inputContext
+        )
         {
             if (settings == null)
             {
@@ -1018,9 +968,11 @@ namespace XmlCoreTest.Common
             }
             if (AsyncUtil.RedirectWriter)
             {
-                settings.Async = true;    // force async
+                settings.Async = true; // force async
             }
-            return new RedirectSyncCallToAsyncCallXmlReader(XmlReader.Create(input, settings, inputContext));
+            return new RedirectSyncCallToAsyncCallXmlReader(
+                XmlReader.Create(input, settings, inputContext)
+            );
         }
 
         public static XmlReader Create(TextReader input)
@@ -1041,13 +993,17 @@ namespace XmlCoreTest.Common
             }
             if (AsyncUtil.RedirectWriter)
             {
-                settings.Async = true;    // force async
+                settings.Async = true; // force async
             }
             baseUri = null;
             return new RedirectSyncCallToAsyncCallXmlReader(XmlReader.Create(input, settings));
         }
 
-        public static XmlReader Create(TextReader input, XmlReaderSettings settings, XmlParserContext inputContext)
+        public static XmlReader Create(
+            TextReader input,
+            XmlReaderSettings settings,
+            XmlParserContext inputContext
+        )
         {
             if (settings == null)
             {
@@ -1055,9 +1011,11 @@ namespace XmlCoreTest.Common
             }
             if (AsyncUtil.RedirectWriter)
             {
-                settings.Async = true;    // force async
+                settings.Async = true; // force async
             }
-            return new RedirectSyncCallToAsyncCallXmlReader(XmlReader.Create(input, settings, inputContext));
+            return new RedirectSyncCallToAsyncCallXmlReader(
+                XmlReader.Create(input, settings, inputContext)
+            );
         }
 
         public static XmlReader Create(XmlReader reader, XmlReaderSettings settings)
@@ -1068,7 +1026,7 @@ namespace XmlCoreTest.Common
             }
             if (AsyncUtil.RedirectWriter)
             {
-                settings.Async = true;    // force async
+                settings.Async = true; // force async
             }
             return new RedirectSyncCallToAsyncCallXmlReader(XmlReader.Create(reader, settings));
         }
@@ -1076,18 +1034,12 @@ namespace XmlCoreTest.Common
 
     public class RedirectSyncCallToAsyncCallXmlWriter : XmlWriter
     {
-        private XmlWriter _writer = null;   // the core writer
+        private XmlWriter _writer = null; // the core writer
 
         public XmlWriter CoreWriter
         {
-            get
-            {
-                return _writer;
-            }
-            set
-            {
-                _writer = value;
-            }
+            get { return _writer; }
+            set { _writer = value; }
         }
         public RedirectSyncCallToAsyncCallXmlWriter(XmlWriter xw)
         {
@@ -1117,7 +1069,6 @@ namespace XmlCoreTest.Common
             return CoreWriter.FlushAsync();
         }
 
-
         public override void WriteAttributes(XmlReader reader, bool defattr)
         {
             if (AsyncUtil.RedirectWriter)
@@ -1141,7 +1092,12 @@ namespace XmlCoreTest.Common
             return CoreWriter.WriteAttributesAsync(reader, defattr);
         }
 
-        public new void WriteAttributeString(string prefix, string localName, string ns, string value)
+        public new void WriteAttributeString(
+            string prefix,
+            string localName,
+            string ns,
+            string value
+        )
         {
             if (AsyncUtil.RedirectWriter)
             {
@@ -1159,7 +1115,12 @@ namespace XmlCoreTest.Common
                 CoreWriter.WriteAttributeString(prefix, localName, ns, value);
             }
         }
-        public new Task WriteAttributeStringAsync(string prefix, string localName, string ns, string value)
+        public new Task WriteAttributeStringAsync(
+            string prefix,
+            string localName,
+            string ns,
+            string value
+        )
         {
             return CoreWriter.WriteAttributeStringAsync(prefix, localName, ns, value);
         }
@@ -1320,7 +1281,12 @@ namespace XmlCoreTest.Common
                 CoreWriter.WriteDocType(name, pubid, sysid, subset);
             }
         }
-        public override Task WriteDocTypeAsync(string name, string pubid, string sysid, string subset)
+        public override Task WriteDocTypeAsync(
+            string name,
+            string pubid,
+            string sysid,
+            string subset
+        )
         {
             return CoreWriter.WriteDocTypeAsync(name, pubid, sysid, subset);
         }
@@ -1343,7 +1309,12 @@ namespace XmlCoreTest.Common
                 CoreWriter.WriteElementString(prefix, localName, ns, value);
             }
         }
-        public new Task WriteElementStringAsync(string prefix, string localName, string ns, string value)
+        public new Task WriteElementStringAsync(
+            string prefix,
+            string localName,
+            string ns,
+            string value
+        )
         {
             return CoreWriter.WriteElementStringAsync(prefix, localName, ns, value);
         }
@@ -1393,7 +1364,6 @@ namespace XmlCoreTest.Common
         {
             return CoreWriter.WriteEndElementAsync();
         }
-
 
         public override void WriteEntityRef(string name)
         {
@@ -1755,18 +1725,12 @@ namespace XmlCoreTest.Common
 
         public override XmlWriterSettings Settings
         {
-            get
-            {
-                return CoreWriter.Settings;
-            }
+            get { return CoreWriter.Settings; }
         }
 
         public override WriteState WriteState
         {
-            get
-            {
-                return CoreWriter.WriteState;
-            }
+            get { return CoreWriter.WriteState; }
         }
 
         public override string LookupPrefix(string ns)
@@ -1776,18 +1740,12 @@ namespace XmlCoreTest.Common
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return CoreWriter.XmlSpace;
-            }
+            get { return CoreWriter.XmlSpace; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return CoreWriter.XmlLang;
-            }
+            get { return CoreWriter.XmlLang; }
         }
 
         public new void Dispose()

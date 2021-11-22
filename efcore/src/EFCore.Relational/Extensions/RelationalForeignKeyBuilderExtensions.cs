@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ReferenceCollectionBuilder HasConstraintName(
             this ReferenceCollectionBuilder referenceCollectionBuilder,
-            string? name)
+            string? name
+        )
         {
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -47,13 +48,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         /// <typeparam name="TEntity">The principal entity type in this relationship.</typeparam>
         /// <typeparam name="TRelatedEntity">The dependent entity type in this relationship.</typeparam>
-        public static ReferenceCollectionBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
+        public static ReferenceCollectionBuilder<TEntity, TRelatedEntity> HasConstraintName<
+            TEntity,
+            TRelatedEntity
+        >(
             this ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder,
-            string? name)
+            string? name
+        )
             where TEntity : class
-            where TRelatedEntity : class
-            => (ReferenceCollectionBuilder<TEntity, TRelatedEntity>)HasConstraintName(
-                (ReferenceCollectionBuilder)referenceCollectionBuilder, name);
+            where TRelatedEntity : class =>
+            (ReferenceCollectionBuilder<TEntity, TRelatedEntity>)HasConstraintName(
+                (ReferenceCollectionBuilder)referenceCollectionBuilder,
+                name
+            );
 
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
@@ -66,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static ReferenceReferenceBuilder HasConstraintName(
             this ReferenceReferenceBuilder referenceReferenceBuilder,
-            string? name)
+            string? name
+        )
         {
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -86,13 +94,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         /// <typeparam name="TEntity">The entity type on one end of the relationship.</typeparam>
         /// <typeparam name="TRelatedEntity">The entity type on the other end of the relationship.</typeparam>
-        public static ReferenceReferenceBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
+        public static ReferenceReferenceBuilder<TEntity, TRelatedEntity> HasConstraintName<
+            TEntity,
+            TRelatedEntity
+        >(
             this ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder,
-            string? name)
+            string? name
+        )
             where TEntity : class
-            where TRelatedEntity : class
-            => (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)HasConstraintName(
-                (ReferenceReferenceBuilder)referenceReferenceBuilder, name);
+            where TRelatedEntity : class =>
+            (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)HasConstraintName(
+                (ReferenceReferenceBuilder)referenceReferenceBuilder,
+                name
+            );
 
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
@@ -105,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static OwnershipBuilder HasConstraintName(
             this OwnershipBuilder ownershipBuilder,
-            string? name)
+            string? name
+        )
         {
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -125,13 +140,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         /// <typeparam name="TEntity">The entity type on one end of the relationship.</typeparam>
         /// <typeparam name="TDependentEntity">The entity type on the other end of the relationship.</typeparam>
-        public static OwnershipBuilder<TEntity, TDependentEntity> HasConstraintName<TEntity, TDependentEntity>(
-            this OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder,
-            string? name)
+        public static OwnershipBuilder<TEntity, TDependentEntity> HasConstraintName<
+            TEntity,
+            TDependentEntity
+        >(this OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder, string? name)
             where TEntity : class
-            where TDependentEntity : class
-            => (OwnershipBuilder<TEntity, TDependentEntity>)HasConstraintName(
-                (OwnershipBuilder)ownershipBuilder, name);
+            where TDependentEntity : class =>
+            (OwnershipBuilder<TEntity, TDependentEntity>)HasConstraintName(
+                (OwnershipBuilder)ownershipBuilder,
+                name
+            );
 
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
@@ -149,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionForeignKeyBuilder? HasConstraintName(
             this IConventionForeignKeyBuilder relationship,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (!relationship.CanSetConstraintName(name, fromDataAnnotation))
             {
@@ -174,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetConstraintName(
             this IConventionForeignKeyBuilder relationship,
             string? name,
-            bool fromDataAnnotation = false)
-            => relationship.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) =>
+            relationship.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
     }
 }

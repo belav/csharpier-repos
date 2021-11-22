@@ -17,119 +17,138 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
 {
-    public partial class AddRequiredPatternParenthesesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class AddRequiredPatternParenthesesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddRequiredPatternParenthesesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public AddRequiredPatternParenthesesTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer(), new AddRequiredParenthesesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer(),
+                new AddRequiredParenthesesCodeFixProvider()
+            );
 
-        private Task TestMissingAsync(string initialMarkup, OptionsCollection options)
-            => TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options));
+        private Task TestMissingAsync(string initialMarkup, OptionsCollection options) =>
+            TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options));
 
-        private Task TestAsync(string initialMarkup, string expected, OptionsCollection options)
-            => TestInRegularAndScript1Async(initialMarkup, expected, parameters: new TestParameters(options: options));
+        private Task TestAsync(string initialMarkup, string expected, OptionsCollection options) =>
+            TestInRegularAndScript1Async(
+                initialMarkup,
+                expected,
+                parameters: new TestParameters(options: options)
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
         public async Task TestLogicalPrecedence()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or b $$and c;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or (b and c);
     }
-}", RequireAllParenthesesForClarity);
+}",
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
         public async Task TestNoLogicalOnLowerPrecedence()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a $$or b and c;
     }
-}", RequireAllParenthesesForClarity);
+}",
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
         public async Task TestNotIfLogicalPrecedenceStaysTheSame()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or b $$or c;
     }
-}", RequireAllParenthesesForClarity);
+}",
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
         public async Task TestNotIfLogicalPrecedenceIsNotEnforced()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or b $$or c;
     }
-}", RequireArithmeticBinaryParenthesesForClarity);
+}",
+                RequireArithmeticBinaryParenthesesForClarity
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
         public async Task TestLogicalPrecedenceMultipleEqualPrecedenceParts1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or b $$and c and d;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or (b and c and d);
     }
-}", RequireAllParenthesesForClarity);
+}",
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
         public async Task TestLogicalPrecedenceMultipleEqualPrecedenceParts2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or b and c $$and d;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         object x = o is a or (b and c and d);
     }
-}", RequireAllParenthesesForClarity);
+}",
+                RequireAllParenthesesForClarity
+            );
         }
     }
 }

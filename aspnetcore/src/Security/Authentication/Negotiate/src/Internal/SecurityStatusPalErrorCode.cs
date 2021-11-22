@@ -13,7 +13,6 @@ internal enum SecurityStatusPalErrorCode
     ContextExpired,
     CredentialsNeeded,
     Renegotiate,
-
     // Errors
     OutOfMemory,
     InvalidHandle,

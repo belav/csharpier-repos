@@ -55,8 +55,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class PooledDictionaryIgnoringNullableModifiersForReferenceTypes
     {
-        private static readonly ObjectPool<PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>> s_poolInstance
-            = PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>.CreatePool(Symbols.SymbolEqualityComparer.IgnoringNullable);
+        private static readonly ObjectPool<
+            PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>
+        > s_poolInstance = PooledDictionary<NamedTypeSymbol, NamedTypeSymbol>.CreatePool(
+            Symbols.SymbolEqualityComparer.IgnoringNullable
+        );
 
         internal static PooledDictionary<NamedTypeSymbol, NamedTypeSymbol> GetInstance()
         {
@@ -66,7 +69,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    // Method type inference can fail, but we still might have some best guesses. 
+    // Method type inference can fail, but we still might have some best guesses.
     internal readonly struct MethodTypeInferenceResult
     {
         public readonly ImmutableArray<TypeWithAnnotations> InferredTypeArguments;
@@ -79,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public MethodTypeInferenceResult(
             bool success,
             ImmutableArray<TypeWithAnnotations> inferredTypeArguments,
-            bool hasTypeArgumentInferredFromFunctionType)
+            bool hasTypeArgumentInferredFromFunctionType
+        )
         {
             this.Success = success;
             this.InferredTypeArguments = inferredTypeArguments;
@@ -95,7 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             internal abstract TypeWithAnnotations GetTypeWithAnnotations(BoundExpression expr);
 
-            internal abstract TypeWithAnnotations GetMethodGroupResultType(BoundMethodGroup group, MethodSymbol method);
+            internal abstract TypeWithAnnotations GetMethodGroupResultType(
+                BoundMethodGroup group,
+                MethodSymbol method
+            );
 
             private sealed class DefaultExtensions : Extensions
             {
@@ -104,7 +111,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return TypeWithAnnotations.Create(expr.GetTypeOrFunctionType());
                 }
 
-                internal override TypeWithAnnotations GetMethodGroupResultType(BoundMethodGroup group, MethodSymbol method)
+                internal override TypeWithAnnotations GetMethodGroupResultType(
+                    BoundMethodGroup group,
+                    MethodSymbol method
+                )
                 {
                     return method.ReturnTypeWithAnnotations;
                 }
@@ -160,24 +170,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// For error recovery, we allow a mismatch between the number of arguments and parameters
         /// during type inference. This sometimes enables inferring the type for a lambda parameter.
         /// </summary>
-        private int NumberArgumentsToProcess => System.Math.Min(_arguments.Length, _formalParameterTypes.Length);
+        private int NumberArgumentsToProcess =>
+            System.Math.Min(_arguments.Length, _formalParameterTypes.Length);
 
         public static MethodTypeInferenceResult Infer(
             Binder binder,
             ConversionsBase conversions,
             ImmutableArray<TypeParameterSymbol> methodTypeParameters,
-            // We are attempting to build a map from method type parameters 
+            // We are attempting to build a map from method type parameters
             // to inferred type arguments.
 
             NamedTypeSymbol constructedContainingTypeOfMethod,
             ImmutableArray<TypeWithAnnotations> formalParameterTypes,
-
             // We have some unusual requirements for the types that flow into the inference engine.
             // Consider the following inference problems:
-            // 
-            // Scenario one: 
             //
-            // class C<T> 
+            // Scenario one:
+            //
+            // class C<T>
             // {
             //   delegate Y FT<X, Y>(T t, X x);
             //   static void M<U, V>(U u, FT<U, V> f);
@@ -187,12 +197,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // From the first argument we infer that U is int. How now must we make an inference on
             // the second argument? The *declared* type of the formal is C<T>.FT<U,V>. The
             // actual type at the time of inference is known to be C<double>.FT<int, something>
-            // where "something" is to be determined by inferring the return type of the 
-            // lambda by determine the type of "double + int". 
-            // 
+            // where "something" is to be determined by inferring the return type of the
+            // lambda by determine the type of "double + int".
+            //
             // Therefore when we do type inference, if a formal parameter type is a generic delegate
-            // then *its* formal parameter types must be the formal parameter types of the 
-            // *constructed* generic delegate C<double>.FT<...>, not C<T>.FT<...>. 
+            // then *its* formal parameter types must be the formal parameter types of the
+            // *constructed* generic delegate C<double>.FT<...>, not C<T>.FT<...>.
             //
             // One would therefore suppose that we'd expect the formal parameter types to here
             // be passed in with the types constructed with the information known from the
@@ -202,33 +212,33 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             // Scenario Two:
             //
-            // interface I<T> 
-            // { 
-            //    void M<U>(T t, U u); 
+            // interface I<T>
+            // {
+            //    void M<U>(T t, U u);
             // }
             // ...
-            // static void Goo<V>(V v, I<V> iv) 
+            // static void Goo<V>(V v, I<V> iv)
             // {
             //   iv.M(v, "");
             // }
             //
-            // Obviously inference should succeed here; it should infer that U is string. 
+            // Obviously inference should succeed here; it should infer that U is string.
             //
             // But consider what happens during the inference process on the first argument.
             // The first thing we will do is say "what's the type of the argument? V. What's
             // the type of the corresponding formal parameter? The first formal parameter of
-            // I<V>.M<whatever> is of type V. The inference engine will then say "V is a 
-            // method type parameter, and therefore we have an inference from V to V". 
-            // But *V* is not one of the method type parameters being inferred; the only 
+            // I<V>.M<whatever> is of type V. The inference engine will then say "V is a
+            // method type parameter, and therefore we have an inference from V to V".
+            // But *V* is not one of the method type parameters being inferred; the only
             // method type parameter being inferred here is *U*.
             //
             // This is perhaps some evidence that the formal parameters passed in should be
             // the formal parameters of the *declared* method; in this case, (T, U), not
-            // the formal parameters of the *constructed* method, (V, U). 
+            // the formal parameters of the *constructed* method, (V, U).
             //
             // However, one might make the argument that no, we could just add a check
             // to ensure that if we see a method type parameter as a formal parameter type,
-            // then we only perform the inference if the method type parameter is a type 
+            // then we only perform the inference if the method type parameter is a type
             // parameter of the method for which inference is being performed.
             //
             // Unfortunately, that does not work either:
@@ -268,22 +278,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             // the delegate.
 
             ImmutableArray<RefKind> formalParameterRefKinds, // Optional; assume all value if missing.
-            ImmutableArray<BoundExpression> arguments,// Required; in scenarios like method group conversions where there are
-                                                      // no arguments per se we cons up some fake arguments.
+            ImmutableArray<BoundExpression> arguments, // Required; in scenarios like method group conversions where there are
+            // no arguments per se we cons up some fake arguments.
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
-            Extensions extensions = null)
+            Extensions extensions = null
+        )
         {
             Debug.Assert(!methodTypeParameters.IsDefault);
             Debug.Assert(methodTypeParameters.Length > 0);
             Debug.Assert(!formalParameterTypes.IsDefault);
-            Debug.Assert(formalParameterRefKinds.IsDefault || formalParameterRefKinds.Length == formalParameterTypes.Length);
+            Debug.Assert(
+                formalParameterRefKinds.IsDefault
+                    || formalParameterRefKinds.Length == formalParameterTypes.Length
+            );
             Debug.Assert(!arguments.IsDefault);
 
             // Early out: if the method has no formal parameters then we know that inference will fail.
             if (formalParameterTypes.Length == 0)
             {
-                return new MethodTypeInferenceResult(success: false, inferredTypeArguments: default, hasTypeArgumentInferredFromFunctionType: false);
-
+                return new MethodTypeInferenceResult(
+                    success: false,
+                    inferredTypeArguments: default,
+                    hasTypeArgumentInferredFromFunctionType: false
+                );
                 // UNDONE: OPTIMIZATION: We could check to see whether there is a type
                 // UNDONE: parameter which is never used in any formal parameter; if
                 // UNDONE: so then we know ahead of time that inference will fail.
@@ -297,7 +314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 formalParameterTypes,
                 formalParameterRefKinds,
                 arguments,
-                extensions);
+                extensions
+            );
             return inferrer.InferTypeArgs(binder, ref useSiteInfo);
         }
 
@@ -318,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeWithAnnotations> formalParameterTypes,
             ImmutableArray<RefKind> formalParameterRefKinds,
             ImmutableArray<BoundExpression> arguments,
-            Extensions extensions)
+            Extensions extensions
+        )
         {
             _compilation = compilation;
             _conversions = conversions;
@@ -333,7 +352,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             _upperBounds = new HashSet<TypeWithAnnotations>[methodTypeParameters.Length];
             _lowerBounds = new HashSet<TypeWithAnnotations>[methodTypeParameters.Length];
             _nullableAnnotationLowerBounds = new NullableAnnotation[methodTypeParameters.Length];
-            Debug.Assert(_nullableAnnotationLowerBounds.All(annotation => annotation.IsNotAnnotated()));
+            Debug.Assert(
+                _nullableAnnotationLowerBounds.All(annotation => annotation.IsNotAnnotated())
+            );
             _dependencies = null;
             _dependenciesDirty = false;
         }
@@ -344,7 +365,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var sb = new System.Text.StringBuilder();
             sb.AppendLine("Method type inference internal state");
-            sb.AppendFormat("Inferring method type parameters <{0}>\n", string.Join(", ", _methodTypeParameters));
+            sb.AppendFormat(
+                "Inferring method type parameters <{0}>\n",
+                string.Join(", ", _methodTypeParameters)
+            );
             sb.Append("Formal parameter types (");
             for (int i = 0; i < _formalParameterTypes.Length; ++i)
             {
@@ -359,7 +383,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             sb.Append("\n");
 
-            sb.AppendFormat("Argument types ({0})\n", string.Join(", ", from a in _arguments select a.Type));
+            sb.AppendFormat(
+                "Argument types ({0})\n",
+                string.Join(", ", from a in _arguments select a.Type)
+            );
 
             if (_dependencies == null)
             {
@@ -367,7 +394,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                sb.AppendFormat("Dependencies are {0}\n", _dependenciesDirty ? "out of date" : "up to date");
+                sb.AppendFormat(
+                    "Dependencies are {0}\n",
+                    _dependenciesDirty ? "out of date" : "up to date"
+                );
                 sb.AppendLine("dependency matrix (Not dependent / Direct / Indirect / Unknown):");
                 for (int i = 0; i < _methodTypeParameters.Length; ++i)
                 {
@@ -408,9 +438,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     sb.AppendFormat("FIXED to {0} ", fixedType);
                 }
 
-                sb.AppendFormat("upper bounds: ({0}) ", (_upperBounds[i] == null) ? "" : string.Join(", ", _upperBounds[i]));
-                sb.AppendFormat("lower bounds: ({0}) ", (_lowerBounds[i] == null) ? "" : string.Join(", ", _lowerBounds[i]));
-                sb.AppendFormat("exact bounds: ({0}) ", (_exactBounds[i] == null) ? "" : string.Join(", ", _exactBounds[i]));
+                sb.AppendFormat(
+                    "upper bounds: ({0}) ",
+                    (_upperBounds[i] == null) ? "" : string.Join(", ", _upperBounds[i])
+                );
+                sb.AppendFormat(
+                    "lower bounds: ({0}) ",
+                    (_lowerBounds[i] == null) ? "" : string.Join(", ", _lowerBounds[i])
+                );
+                sb.AppendFormat(
+                    "exact bounds: ({0}) ",
+                    (_exactBounds[i] == null) ? "" : string.Join(", ", _exactBounds[i])
+                );
                 sb.AppendLine();
             }
 
@@ -422,7 +461,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private RefKind GetRefKind(int index)
         {
             Debug.Assert(0 <= index && index < _formalParameterTypes.Length);
-            return _formalParameterRefKinds.IsDefault ? RefKind.None : _formalParameterRefKinds[index];
+            return _formalParameterRefKinds.IsDefault
+              ? RefKind.None
+              : _formalParameterRefKinds[index];
         }
 
         private ImmutableArray<TypeWithAnnotations> GetResults(out bool inferredFromFunctionType)
@@ -450,9 +491,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (!fixedResultType.Type.IsErrorType())
                     {
-                        if (_conversions.IncludeNullability && _nullableAnnotationLowerBounds[i].IsAnnotated())
+                        if (
+                            _conversions.IncludeNullability
+                            && _nullableAnnotationLowerBounds[i].IsAnnotated()
+                        )
                         {
-                            _fixedResults[i] = _fixedResults[i] with { Type = fixedResultType.AsAnnotated() };
+                            _fixedResults[i] = _fixedResults[i] with
+                            {
+                                Type = fixedResultType.AsAnnotated()
+                            };
                         }
                         continue;
                     }
@@ -463,7 +510,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                         continue;
                     }
                 }
-                _fixedResults[i] = (TypeWithAnnotations.Create(new ExtendedErrorTypeSymbol(_constructedContainingTypeOfMethod, _methodTypeParameters[i].Name, 0, null, false)), false);
+                _fixedResults[i] = (
+                    TypeWithAnnotations.Create(
+                        new ExtendedErrorTypeSymbol(
+                            _constructedContainingTypeOfMethod,
+                            _methodTypeParameters[i].Name,
+                            0,
+                            null,
+                            false
+                        )
+                    ),
+                    false
+                );
             }
 
             return GetInferredTypeArguments(out inferredFromFunctionType);
@@ -484,18 +542,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(type.HasType);
 
-            if (type.TypeKind != TypeKind.TypeParameter) return false;
+            if (type.TypeKind != TypeKind.TypeParameter)
+                return false;
 
             TypeParameterSymbol typeParameter = (TypeParameterSymbol)type.Type;
             int ordinal = typeParameter.Ordinal;
-            return ValidIndex(ordinal) &&
-                TypeSymbol.Equals(typeParameter, _methodTypeParameters[ordinal], TypeCompareKind.ConsiderEverything2) &&
-                IsUnfixed(ordinal);
+            return ValidIndex(ordinal)
+                && TypeSymbol.Equals(
+                    typeParameter,
+                    _methodTypeParameters[ordinal],
+                    TypeCompareKind.ConsiderEverything2
+                )
+                && IsUnfixed(ordinal);
         }
 
         private bool AllFixed()
         {
-            for (int methodTypeParameterIndex = 0; methodTypeParameterIndex < _methodTypeParameters.Length; ++methodTypeParameterIndex)
+            for (
+                int methodTypeParameterIndex = 0;
+                methodTypeParameterIndex < _methodTypeParameters.Length;
+                ++methodTypeParameterIndex
+            )
             {
                 if (IsUnfixed(methodTypeParameterIndex))
                 {
@@ -505,7 +572,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private void AddBound(TypeWithAnnotations addedBound, HashSet<TypeWithAnnotations>[] collectedBounds, TypeWithAnnotations methodTypeParameterWithAnnotations)
+        private void AddBound(
+            TypeWithAnnotations addedBound,
+            HashSet<TypeWithAnnotations>[] collectedBounds,
+            TypeWithAnnotations methodTypeParameterWithAnnotations
+        )
         {
             Debug.Assert(IsUnfixedTypeParameter(methodTypeParameterWithAnnotations));
 
@@ -514,7 +585,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (collectedBounds[methodTypeParameterIndex] == null)
             {
-                collectedBounds[methodTypeParameterIndex] = new HashSet<TypeWithAnnotations>(TypeWithAnnotations.EqualsComparer.ConsiderEverythingComparer);
+                collectedBounds[methodTypeParameterIndex] = new HashSet<TypeWithAnnotations>(
+                    TypeWithAnnotations.EqualsComparer.ConsiderEverythingComparer
+                );
             }
 
             collectedBounds[methodTypeParameterIndex].Add(addedBound);
@@ -523,15 +596,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool HasBound(int methodTypeParameterIndex)
         {
             Debug.Assert(ValidIndex(methodTypeParameterIndex));
-            return _lowerBounds[methodTypeParameterIndex] != null ||
-                _upperBounds[methodTypeParameterIndex] != null ||
-                _exactBounds[methodTypeParameterIndex] != null;
+            return _lowerBounds[methodTypeParameterIndex] != null
+                || _upperBounds[methodTypeParameterIndex] != null
+                || _exactBounds[methodTypeParameterIndex] != null;
         }
 
-        private TypeSymbol GetFixedDelegateOrFunctionPointer(TypeSymbol delegateOrFunctionPointerType)
+        private TypeSymbol GetFixedDelegateOrFunctionPointer(
+            TypeSymbol delegateOrFunctionPointerType
+        )
         {
             Debug.Assert((object)delegateOrFunctionPointerType != null);
-            Debug.Assert(delegateOrFunctionPointerType.IsDelegateType() || delegateOrFunctionPointerType is FunctionPointerTypeSymbol);
+            Debug.Assert(
+                delegateOrFunctionPointerType.IsDelegateType()
+                    || delegateOrFunctionPointerType is FunctionPointerTypeSymbol
+            );
 
             // We have a delegate where the input types use no unfixed parameters.  Create
             // a substitution context; we can substitute unfixed parameters for themselves
@@ -540,9 +618,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Both of those scenarios are legal.)
 
             var fixedArguments = _methodTypeParameters.SelectAsArray(
-                static (typeParameter, i, self) => self.IsUnfixed(i) ? TypeWithAnnotations.Create(typeParameter) : self._fixedResults[i].Type,
-                this);
-            TypeMap typeMap = new TypeMap(_constructedContainingTypeOfMethod, _methodTypeParameters, fixedArguments);
+                static (typeParameter, i, self) =>
+                    self.IsUnfixed(i)
+                        ? TypeWithAnnotations.Create(typeParameter)
+                        : self._fixedResults[i].Type,
+                this
+            );
+            TypeMap typeMap = new TypeMap(
+                _constructedContainingTypeOfMethod,
+                _methodTypeParameters,
+                fixedArguments
+            );
             return typeMap.SubstituteType(delegateOrFunctionPointerType).Type;
         }
 
@@ -551,9 +637,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         // Phases
         //
 
-        private MethodTypeInferenceResult InferTypeArgs(Binder binder, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private MethodTypeInferenceResult InferTypeArgs(
+            Binder binder,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            // SPEC: Type inference takes place in phases. Each phase will try to infer type 
+            // SPEC: Type inference takes place in phases. Each phase will try to infer type
             // SPEC: arguments for more type parameters based on the findings of the previous
             // SPEC: phase. The first phase makes some initial inferences of bounds, whereas
             // SPEC: the second phase fixes type parameters to specific types and infers further
@@ -561,7 +650,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             InferTypeArgsFirstPhase(ref useSiteInfo);
             bool success = InferTypeArgsSecondPhase(binder, ref useSiteInfo);
             var inferredTypeArguments = GetResults(out bool inferredFromFunctionType);
-            return new MethodTypeInferenceResult(success, inferredTypeArguments, inferredFromFunctionType);
+            return new MethodTypeInferenceResult(
+                success,
+                inferredTypeArguments,
+                inferredFromFunctionType
+            );
         }
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -574,8 +667,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!_formalParameterTypes.IsDefault);
             Debug.Assert(!_arguments.IsDefault);
 
-            // We expect that we have been handed a list of arguments and a list of the 
-            // formal parameter types they correspond to; all the details about named and 
+            // We expect that we have been handed a list of arguments and a list of the
+            // formal parameter types they correspond to; all the details about named and
             // optional parameters have already been dealt with.
 
             // SPEC: For each of the method arguments Ei:
@@ -583,13 +676,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 BoundExpression argument = _arguments[arg];
                 TypeWithAnnotations target = _formalParameterTypes[arg];
-                ExactOrBoundsKind kind = GetRefKind(arg).IsManagedReference() || target.Type.IsPointerType() ? ExactOrBoundsKind.Exact : ExactOrBoundsKind.LowerBound;
+                ExactOrBoundsKind kind =
+                    GetRefKind(arg).IsManagedReference() || target.Type.IsPointerType()
+                        ? ExactOrBoundsKind.Exact
+                        : ExactOrBoundsKind.LowerBound;
 
                 MakeExplicitParameterTypeInferences(argument, target, kind, ref useSiteInfo);
             }
         }
 
-        private void MakeExplicitParameterTypeInferences(BoundExpression argument, TypeWithAnnotations target, ExactOrBoundsKind kind, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void MakeExplicitParameterTypeInferences(
+            BoundExpression argument,
+            TypeWithAnnotations target,
+            ExactOrBoundsKind kind,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: * If Ei is an anonymous function, and Ti is a delegate type or expression tree type,
             // SPEC:   an explicit type parameter inference is made from Ei to Ti and
@@ -599,7 +700,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // at this time because we have no fixed types yet to use for
             // overload resolution.)
 
-            // SPEC: * Otherwise, if Ei has a type U then a lower-bound inference 
+            // SPEC: * Otherwise, if Ei has a type U then a lower-bound inference
             // SPEC:   or exact inference is made from U to Ti.
 
             // SPEC: * Otherwise, no inference is made for this argument
@@ -609,8 +710,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ExplicitParameterTypeInference(argument, target, ref useSiteInfo);
                 ExplicitReturnTypeInference(argument, target, ref useSiteInfo);
             }
-            else if (argument.Kind != BoundKind.TupleLiteral ||
-                !MakeExplicitParameterTypeInferences((BoundTupleLiteral)argument, target, kind, ref useSiteInfo))
+            else if (
+                argument.Kind != BoundKind.TupleLiteral
+                || !MakeExplicitParameterTypeInferences(
+                    (BoundTupleLiteral)argument,
+                    target,
+                    kind,
+                    ref useSiteInfo
+                )
+            )
             {
                 // Either the argument is not a tuple literal, or we were unable to do the inference from its elements, let's try to infer from argument type
                 var argumentType = _extensions.GetTypeWithAnnotations(argument);
@@ -618,15 +726,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     ExactOrBoundsInference(kind, argumentType, target, ref useSiteInfo);
                 }
-                else if (IsUnfixedTypeParameter(target) && !target.NullableAnnotation.IsAnnotated() && kind is ExactOrBoundsKind.LowerBound)
+                else if (
+                    IsUnfixedTypeParameter(target)
+                    && !target.NullableAnnotation.IsAnnotated()
+                    && kind is ExactOrBoundsKind.LowerBound
+                )
                 {
                     var ordinal = ((TypeParameterSymbol)target.Type).Ordinal;
-                    _nullableAnnotationLowerBounds[ordinal] = _nullableAnnotationLowerBounds[ordinal].Join(argumentType.NullableAnnotation);
+                    _nullableAnnotationLowerBounds[ordinal] = _nullableAnnotationLowerBounds[
+                        ordinal
+                    ].Join(argumentType.NullableAnnotation);
                 }
             }
         }
 
-        private bool MakeExplicitParameterTypeInferences(BoundTupleLiteral argument, TypeWithAnnotations target, ExactOrBoundsKind kind, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool MakeExplicitParameterTypeInferences(
+            BoundTupleLiteral argument,
+            TypeWithAnnotations target,
+            ExactOrBoundsKind kind,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // try match up element-wise to the destination tuple (or underlying type)
             // Example:
@@ -652,14 +771,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(sourceArguments.Length == destTypes.Length);
 
             // NOTE: we are losing tuple element names when recursing into argument expressions.
-            //       that is ok, because we are inferring type parameters used in the matching elements, 
+            //       that is ok, because we are inferring type parameters used in the matching elements,
             //       This is not the situation where entire tuple literal is used to infer a single type param
 
             for (int i = 0; i < sourceArguments.Length; i++)
             {
                 var sourceArgument = sourceArguments[i];
                 var destType = destTypes[i];
-                MakeExplicitParameterTypeInferences(sourceArgument, destType, kind, ref useSiteInfo);
+                MakeExplicitParameterTypeInferences(
+                    sourceArgument,
+                    destType,
+                    kind,
+                    ref useSiteInfo
+                );
             }
 
             return true;
@@ -670,7 +794,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         // The second phase
         //
 
-        private bool InferTypeArgsSecondPhase(Binder binder, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool InferTypeArgsSecondPhase(
+            Binder binder,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: The second phase proceeds as follows:
             // SPEC: * If no unfixed type parameters exist then type inference succeeds.
@@ -679,14 +806,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:     o the output type of Ei with type Ti contains at least one unfixed
             // SPEC:       type parameter Xj, and
             // SPEC:     o none of the input types of Ei with type Ti contains any unfixed
-            // SPEC:       type parameter Xj, 
-            // SPEC:   then an output type inference is made from all such Ei to Ti. 
+            // SPEC:       type parameter Xj,
+            // SPEC:   then an output type inference is made from all such Ei to Ti.
             // SPEC: * Whether or not the previous step actually made an inference, we must
             // SPEC:   now fix at least one type parameter, as follows:
-            // SPEC: * If there exists one or more type parameters Xi such that 
+            // SPEC: * If there exists one or more type parameters Xi such that
             // SPEC:     o Xi is unfixed, and
             // SPEC:     o Xi has a non-empty set of bounds, and
-            // SPEC:     o Xi does not depend on any Xj 
+            // SPEC:     o Xi does not depend on any Xj
             // SPEC:   then each such Xi is fixed. If any fixing operation fails then type
             // SPEC:   inference fails.
             // SPEC: * Otherwise, if there exists one or more type parameters Xi such that
@@ -696,7 +823,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:   then each such Xi is fixed. If any fixing operation fails then
             // SPEC:   type inference fails.
             // SPEC: * Otherwise, we are unable to make progress and there are unfixed parameters.
-            // SPEC:   Type inference fails. 
+            // SPEC:   Type inference fails.
             // SPEC: * If type inference neither succeeds nor fails then the second phase is
             // SPEC:   repeated until type inference succeeds or fails. (Since each repetition of
             // SPEC:   the second phase either succeeds, fails or fixes an unfixed type parameter,
@@ -720,7 +847,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private InferenceResult DoSecondPhase(Binder binder, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private InferenceResult DoSecondPhase(
+            Binder binder,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: * If no unfixed type parameters exist then type inference succeeds.
             if (AllFixed())
@@ -768,7 +898,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return InferenceResult.InferenceFailed;
         }
 
-        private void MakeOutputTypeInferences(Binder binder, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void MakeOutputTypeInferences(
+            Binder binder,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: Otherwise, for all arguments Ei with corresponding parameter type Ti
             // SPEC: where the output types contain unfixed type parameters but the input
@@ -782,15 +915,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private void MakeOutputTypeInferences(Binder binder, BoundExpression argument, TypeWithAnnotations formalType, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void MakeOutputTypeInferences(
+            Binder binder,
+            BoundExpression argument,
+            TypeWithAnnotations formalType,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             if (argument.Kind == BoundKind.TupleLiteral && (object)argument.Type == null)
             {
-                MakeOutputTypeInferences(binder, (BoundTupleLiteral)argument, formalType, ref useSiteInfo);
+                MakeOutputTypeInferences(
+                    binder,
+                    (BoundTupleLiteral)argument,
+                    formalType,
+                    ref useSiteInfo
+                );
             }
             else
             {
-                if (HasUnfixedParamInOutputType(argument, formalType.Type) && !HasUnfixedParamInInputType(argument, formalType.Type))
+                if (
+                    HasUnfixedParamInOutputType(argument, formalType.Type)
+                    && !HasUnfixedParamInInputType(argument, formalType.Type)
+                )
                 {
                     //UNDONE: if (argument->isTYPEORNAMESPACEERROR() && argumentType->IsErrorType())
                     //UNDONE: {
@@ -801,7 +947,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private void MakeOutputTypeInferences(Binder binder, BoundTupleLiteral argument, TypeWithAnnotations formalType, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void MakeOutputTypeInferences(
+            Binder binder,
+            BoundTupleLiteral argument,
+            TypeWithAnnotations formalType,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             if (formalType.Type.Kind != SymbolKind.NamedType)
             {
@@ -811,7 +962,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var destination = (NamedTypeSymbol)formalType.Type;
 
-            Debug.Assert((object)argument.Type == null, "should not need to dig into elements if tuple has natural type");
+            Debug.Assert(
+                (object)argument.Type == null,
+                "should not need to dig into elements if tuple has natural type"
+            );
             var sourceArguments = argument.Arguments;
 
             // check if the type is actually compatible type for a tuple of given cardinality
@@ -831,31 +985,42 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private InferenceResult FixNondependentParameters(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private InferenceResult FixNondependentParameters(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: * Otherwise, if there exists one or more type parameters Xi such that
             // SPEC:     o Xi is unfixed, and
             // SPEC:     o Xi has a non-empty set of bounds, and
             // SPEC:     o Xi does not depend on any Xj
             // SPEC:   then each such Xi is fixed.
-            return FixParameters((inferrer, index) => !inferrer.DependsOnAny(index), ref useSiteInfo);
+            return FixParameters(
+                (inferrer, index) => !inferrer.DependsOnAny(index),
+                ref useSiteInfo
+            );
         }
 
-        private InferenceResult FixDependentParameters(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private InferenceResult FixDependentParameters(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: * All unfixed type parameters Xi are fixed for which all of the following hold:
             // SPEC:   * There is at least one type parameter Xj that depends on Xi.
             // SPEC:   * Xi has a non-empty set of bounds.
-            return FixParameters((inferrer, index) => inferrer.AnyDependsOn(index), ref useSiteInfo);
+            return FixParameters(
+                (inferrer, index) => inferrer.AnyDependsOn(index),
+                ref useSiteInfo
+            );
         }
 
         private InferenceResult FixParameters(
             Func<MethodTypeInferrer, int, bool> predicate,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // Dependency is only defined for unfixed parameters. Therefore, fixing
             // a parameter may cause all of its dependencies to become no longer
-            // dependent on anything. We need to first determine which parameters need to be 
+            // dependent on anything. We need to first determine which parameters need to be
             // fixed, and then fix them all at once.
 
             var needsFixing = new bool[_methodTypeParameters.Length];
@@ -888,21 +1053,31 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         // Input types
         //
-        private static bool DoesInputTypeContain(BoundExpression argument, TypeSymbol formalParameterType, TypeParameterSymbol typeParameter)
+        private static bool DoesInputTypeContain(
+            BoundExpression argument,
+            TypeSymbol formalParameterType,
+            TypeParameterSymbol typeParameter
+        )
         {
             // SPEC: If E is a method group or an anonymous function and T is a delegate
             // SPEC: type or expression tree type then all the parameter types of T are
             // SPEC: input types of E with type T.
 
-            var delegateOrFunctionPointerType = formalParameterType.GetDelegateOrFunctionPointerType();
+            var delegateOrFunctionPointerType =
+                formalParameterType.GetDelegateOrFunctionPointerType();
             if ((object)delegateOrFunctionPointerType == null)
             {
                 return false; // No input types.
             }
 
             var isFunctionPointer = delegateOrFunctionPointerType.IsFunctionPointer();
-            if ((isFunctionPointer && argument.Kind != BoundKind.UnconvertedAddressOfOperator) ||
-                (!isFunctionPointer && argument.Kind is not (BoundKind.UnboundLambda or BoundKind.MethodGroup)))
+            if (
+                (isFunctionPointer && argument.Kind != BoundKind.UnconvertedAddressOfOperator)
+                || (
+                    !isFunctionPointer
+                    && argument.Kind is not (BoundKind.UnboundLambda or BoundKind.MethodGroup)
+                )
+            )
             {
                 return false; // No input types.
             }
@@ -943,22 +1118,31 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         // Output types
         //
-        private static bool DoesOutputTypeContain(BoundExpression argument, TypeSymbol formalParameterType,
-            TypeParameterSymbol typeParameter)
+        private static bool DoesOutputTypeContain(
+            BoundExpression argument,
+            TypeSymbol formalParameterType,
+            TypeParameterSymbol typeParameter
+        )
         {
             // SPEC: If E is a method group or an anonymous function and T is a delegate
             // SPEC: type or expression tree type then the return type of T is an output type
             // SPEC: of E with type T.
 
-            var delegateOrFunctionPointerType = formalParameterType.GetDelegateOrFunctionPointerType();
+            var delegateOrFunctionPointerType =
+                formalParameterType.GetDelegateOrFunctionPointerType();
             if ((object)delegateOrFunctionPointerType == null)
             {
                 return false;
             }
 
             var isFunctionPointer = delegateOrFunctionPointerType.IsFunctionPointer();
-            if ((isFunctionPointer && argument.Kind != BoundKind.UnconvertedAddressOfOperator) ||
-                (!isFunctionPointer && argument.Kind is not (BoundKind.UnboundLambda or BoundKind.MethodGroup)))
+            if (
+                (isFunctionPointer && argument.Kind != BoundKind.UnconvertedAddressOfOperator)
+                || (
+                    !isFunctionPointer
+                    && argument.Kind is not (BoundKind.UnboundLambda or BoundKind.MethodGroup)
+                )
+            )
             {
                 return false;
             }
@@ -984,13 +1168,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             return returnType.ContainsTypeParameter(typeParameter);
         }
 
-        private bool HasUnfixedParamInOutputType(BoundExpression argument, TypeSymbol formalParameterType)
+        private bool HasUnfixedParamInOutputType(
+            BoundExpression argument,
+            TypeSymbol formalParameterType
+        )
         {
             for (int iParam = 0; iParam < _methodTypeParameters.Length; iParam++)
             {
                 if (IsUnfixed(iParam))
                 {
-                    if (DoesOutputTypeContain(argument, formalParameterType, _methodTypeParameters[iParam]))
+                    if (
+                        DoesOutputTypeContain(
+                            argument,
+                            formalParameterType,
+                            _methodTypeParameters[iParam]
+                        )
+                    )
                     {
                         return true;
                     }
@@ -1026,8 +1219,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var formalParameterType = _formalParameterTypes[iArg].Type;
                 var argument = _arguments[iArg];
-                if (DoesInputTypeContain(argument, formalParameterType, _methodTypeParameters[jParam]) &&
-                    DoesOutputTypeContain(argument, formalParameterType, _methodTypeParameters[iParam]))
+                if (
+                    DoesInputTypeContain(
+                        argument,
+                        formalParameterType,
+                        _methodTypeParameters[jParam]
+                    )
+                    && DoesOutputTypeContain(
+                        argument,
+                        formalParameterType,
+                        _methodTypeParameters[iParam]
+                    )
+                )
                 {
                     return true;
                 }
@@ -1067,13 +1270,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             // DependsTransitivelyOn, giving this algorithm a worst case of O(n^4).
             //
             // Of course, in reality, n is going to almost always be on the order of
-            // "smaller than 5", and there will not be O(n^2) dependency relationships 
+            // "smaller than 5", and there will not be O(n^2) dependency relationships
             // between type parameters; it is far more likely that the transitivity chains
             // will be very short and not branch or loop at all. This is much more likely to
             // be an O(n^2) algorithm in practice.
 
             Debug.Assert(_dependencies == null);
-            _dependencies = new Dependency[_methodTypeParameters.Length, _methodTypeParameters.Length];
+            _dependencies = new Dependency[
+                _methodTypeParameters.Length,
+                _methodTypeParameters.Length
+            ];
             int iParam;
             int jParam;
             Debug.Assert(0 == (int)Dependency.Unknown);
@@ -1126,8 +1332,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             for (int kParam = 0; kParam < _methodTypeParameters.Length; ++kParam)
             {
-                if (((_dependencies[iParam, kParam]) & Dependency.DependsMask) != 0 &&
-                    ((_dependencies[kParam, jParam]) & Dependency.DependsMask) != 0)
+                if (
+                    ((_dependencies[iParam, kParam]) & Dependency.DependsMask) != 0
+                    && ((_dependencies[kParam, jParam]) & Dependency.DependsMask) != 0
+                )
                 {
                     return true;
                 }
@@ -1247,7 +1455,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         ////////////////////////////////////////////////////////////////////////////////
 
-        private void OutputTypeInference(Binder binder, BoundExpression expression, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void OutputTypeInference(
+            Binder binder,
+            BoundExpression expression,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(expression != null);
             Debug.Assert(target.HasType);
@@ -1280,7 +1493,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC: * Otherwise, no inferences are made.
         }
 
-        private bool InferredReturnTypeInference(BoundExpression source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool InferredReturnTypeInference(
+            BoundExpression source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(target.HasType);
@@ -1296,8 +1513,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // cannot be hit, because an invalid delegate does not have an unfixed return type
             // this will be checked earlier.
-            Debug.Assert((object)delegateType.DelegateInvokeMethod != null && !delegateType.DelegateInvokeMethod.HasUseSiteError,
-                         "This method should only be called for valid delegate types.");
+            Debug.Assert(
+                (object)delegateType.DelegateInvokeMethod != null
+                    && !delegateType.DelegateInvokeMethod.HasUseSiteError,
+                "This method should only be called for valid delegate types."
+            );
             var returnType = delegateType.DelegateInvokeMethod.ReturnTypeWithAnnotations;
             if (!returnType.HasType || returnType.SpecialType == SpecialType.System_Void)
             {
@@ -1314,7 +1534,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private bool MethodGroupReturnTypeInference(Binder binder, BoundExpression source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool MethodGroupReturnTypeInference(
+            Binder binder,
+            BoundExpression source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert((object)target != null);
@@ -1324,7 +1549,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:   yields a single method with return type U then a lower-bound
             // SPEC:   inference is made from U to Tb.
 
-            if (source.Kind is not (BoundKind.MethodGroup or BoundKind.UnconvertedAddressOfOperator))
+            if (
+                source.Kind is not (BoundKind.MethodGroup or BoundKind.UnconvertedAddressOfOperator)
+            )
             {
                 return false;
             }
@@ -1335,13 +1562,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-
-            if (delegateOrFunctionPointerType.IsFunctionPointer() != (source.Kind == BoundKind.UnconvertedAddressOfOperator))
+            if (
+                delegateOrFunctionPointerType.IsFunctionPointer()
+                != (source.Kind == BoundKind.UnconvertedAddressOfOperator)
+            )
             {
                 return false;
             }
 
-            // this part of the code is only called if the targetType has an unfixed type argument in the output 
+            // this part of the code is only called if the targetType has an unfixed type argument in the output
             // type, which is not the case for invalid delegate invoke methods.
             var (method, isFunctionPointerResolution) = delegateOrFunctionPointerType switch
             {
@@ -1349,29 +1578,46 @@ namespace Microsoft.CodeAnalysis.CSharp
                 FunctionPointerTypeSymbol f => (f.Signature, true),
                 _ => throw ExceptionUtilities.UnexpectedValue(delegateOrFunctionPointerType),
             };
-            Debug.Assert(method is { HasUseSiteError: false },
-                         "This method should only be called for valid delegate or function pointer types");
+            Debug.Assert(
+                method is { HasUseSiteError: false },
+                "This method should only be called for valid delegate or function pointer types"
+            );
 
             TypeWithAnnotations sourceReturnType = method.ReturnTypeWithAnnotations;
-            if (!sourceReturnType.HasType || sourceReturnType.SpecialType == SpecialType.System_Void)
+            if (
+                !sourceReturnType.HasType || sourceReturnType.SpecialType == SpecialType.System_Void
+            )
             {
                 return false;
             }
 
             // At this point we are in the second phase; we know that all the input types are fixed.
 
-            var fixedParameters = GetFixedDelegateOrFunctionPointer(delegateOrFunctionPointerType).DelegateOrFunctionPointerParameters();
+            var fixedParameters = GetFixedDelegateOrFunctionPointer(delegateOrFunctionPointerType)
+                .DelegateOrFunctionPointerParameters();
             if (fixedParameters.IsDefault)
             {
                 return false;
             }
 
             CallingConventionInfo callingConventionInfo = isFunctionPointerResolution
-                ? new CallingConventionInfo(method.CallingConvention, ((FunctionPointerMethodSymbol)method).GetCallingConventionModifiers())
+                ? new CallingConventionInfo(
+                      method.CallingConvention,
+                      ((FunctionPointerMethodSymbol)method).GetCallingConventionModifiers()
+                  )
                 : default;
-            BoundMethodGroup originalMethodGroup = source as BoundMethodGroup ?? ((BoundUnconvertedAddressOfOperator)source).Operand;
+            BoundMethodGroup originalMethodGroup =
+                source as BoundMethodGroup ?? ((BoundUnconvertedAddressOfOperator)source).Operand;
 
-            var returnType = MethodGroupReturnType(binder, originalMethodGroup, fixedParameters, method.RefKind, isFunctionPointerResolution, ref useSiteInfo, in callingConventionInfo);
+            var returnType = MethodGroupReturnType(
+                binder,
+                originalMethodGroup,
+                fixedParameters,
+                method.RefKind,
+                isFunctionPointerResolution,
+                ref useSiteInfo,
+                in callingConventionInfo
+            );
             if (returnType.IsDefault || returnType.IsVoidType())
             {
                 return false;
@@ -1382,21 +1628,34 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         private TypeWithAnnotations MethodGroupReturnType(
-            Binder binder, BoundMethodGroup source,
+            Binder binder,
+            BoundMethodGroup source,
             ImmutableArray<ParameterSymbol> delegateParameters,
             RefKind delegateRefKind,
             bool isFunctionPointerResolution,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
-            in CallingConventionInfo callingConventionInfo)
+            in CallingConventionInfo callingConventionInfo
+        )
         {
             var analyzedArguments = AnalyzedArguments.GetInstance();
-            Conversions.GetDelegateOrFunctionPointerArguments(source.Syntax, analyzedArguments, delegateParameters, binder.Compilation);
+            Conversions.GetDelegateOrFunctionPointerArguments(
+                source.Syntax,
+                analyzedArguments,
+                delegateParameters,
+                binder.Compilation
+            );
 
-            var resolution = binder.ResolveMethodGroup(source, analyzedArguments, useSiteInfo: ref useSiteInfo,
-                isMethodGroupConversion: true, returnRefKind: delegateRefKind,
+            var resolution = binder.ResolveMethodGroup(
+                source,
+                analyzedArguments,
+                useSiteInfo: ref useSiteInfo,
+                isMethodGroupConversion: true,
+                returnRefKind: delegateRefKind,
                 // Since we are trying to infer the return type, it is not an input to resolving the method group
                 returnType: null,
-                isFunctionPointerResolution: isFunctionPointerResolution, callingConventionInfo: in callingConventionInfo);
+                isFunctionPointerResolution: isFunctionPointerResolution,
+                callingConventionInfo: in callingConventionInfo
+            );
 
             TypeWithAnnotations type = default;
 
@@ -1420,7 +1679,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         // Explicit parameter type inferences
         //
-        private void ExplicitParameterTypeInference(BoundExpression source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void ExplicitParameterTypeInference(
+            BoundExpression source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(target.HasType);
@@ -1471,11 +1734,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             for (int i = 0; i < size; ++i)
             {
-                ExactInference(anonymousFunction.ParameterTypeWithAnnotations(i), delegateParameters[i].TypeWithAnnotations, ref useSiteInfo);
+                ExactInference(
+                    anonymousFunction.ParameterTypeWithAnnotations(i),
+                    delegateParameters[i].TypeWithAnnotations,
+                    ref useSiteInfo
+                );
             }
         }
 
-        private void ExplicitReturnTypeInference(BoundExpression source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void ExplicitReturnTypeInference(
+            BoundExpression source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(target.HasType);
@@ -1492,7 +1763,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             UnboundLambda anonymousFunction = (UnboundLambda)source;
-            if (!anonymousFunction.HasExplicitReturnType(out _, out TypeWithAnnotations anonymousFunctionReturnType))
+            if (
+                !anonymousFunction.HasExplicitReturnType(
+                    out _,
+                    out TypeWithAnnotations anonymousFunctionReturnType
+                )
+            )
             {
                 return;
             }
@@ -1503,7 +1779,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            ExactInference(anonymousFunctionReturnType, delegateInvokeMethod.ReturnTypeWithAnnotations, ref useSiteInfo);
+            ExactInference(
+                anonymousFunctionReturnType,
+                delegateInvokeMethod.ReturnTypeWithAnnotations,
+                ref useSiteInfo
+            );
         }
 #nullable disable
 
@@ -1511,7 +1791,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         // Exact inferences
         //
-        private void ExactInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void ExactInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -1554,11 +1838,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return;
             }
-
             // SPEC: * Otherwise no inferences are made.
         }
 
-        private bool ExactTypeParameterInference(TypeWithAnnotations source, TypeWithAnnotations target)
+        private bool ExactTypeParameterInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -1573,7 +1859,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private bool ExactArrayInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool ExactArrayInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -1592,7 +1882,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            ExactInference(arraySource.ElementTypeWithAnnotations, arrayTarget.ElementTypeWithAnnotations, ref useSiteInfo);
+            ExactInference(
+                arraySource.ElementTypeWithAnnotations,
+                arrayTarget.ElementTypeWithAnnotations,
+                ref useSiteInfo
+            );
             return true;
         }
 
@@ -1603,7 +1897,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             UpperBound,
         }
 
-        private void ExactOrBoundsInference(ExactOrBoundsKind kind, TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void ExactOrBoundsInference(
+            ExactOrBoundsKind kind,
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             switch (kind)
             {
@@ -1619,50 +1918,84 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private bool ExactOrBoundsNullableInference(ExactOrBoundsKind kind, TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool ExactOrBoundsNullableInference(
+            ExactOrBoundsKind kind,
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
             if (source.IsNullableType() && target.IsNullableType())
             {
-                ExactOrBoundsInference(kind, ((NamedTypeSymbol)source.Type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0], ((NamedTypeSymbol)target.Type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0], ref useSiteInfo);
+                ExactOrBoundsInference(
+                    kind,
+                    ((NamedTypeSymbol)source.Type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                        0
+                    ],
+                    ((NamedTypeSymbol)target.Type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                        0
+                    ],
+                    ref useSiteInfo
+                );
                 return true;
             }
 
             if (isNullableOnly(source) && isNullableOnly(target))
             {
-                ExactOrBoundsInference(kind, source.AsNotNullableReferenceType(), target.AsNotNullableReferenceType(), ref useSiteInfo);
+                ExactOrBoundsInference(
+                    kind,
+                    source.AsNotNullableReferenceType(),
+                    target.AsNotNullableReferenceType(),
+                    ref useSiteInfo
+                );
                 return true;
             }
 
             return false;
 
             // True if the type is nullable.
-            static bool isNullableOnly(TypeWithAnnotations type)
-                => type.NullableAnnotation.IsAnnotated();
+            static bool isNullableOnly(TypeWithAnnotations type) =>
+                type.NullableAnnotation.IsAnnotated();
         }
 
-        private bool ExactNullableInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool ExactNullableInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            return ExactOrBoundsNullableInference(ExactOrBoundsKind.Exact, source, target, ref useSiteInfo);
+            return ExactOrBoundsNullableInference(
+                ExactOrBoundsKind.Exact,
+                source,
+                target,
+                ref useSiteInfo
+            );
         }
 
-        private bool LowerBoundTupleInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundTupleInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
             // NOTE: we are losing tuple element names when unwrapping tuple types to underlying types.
-            //       that is ok, because we are inferring type parameters used in the matching elements, 
+            //       that is ok, because we are inferring type parameters used in the matching elements,
             //       This is not the situation where entire tuple type used to infer a single type param
 
             ImmutableArray<TypeWithAnnotations> sourceTypes;
             ImmutableArray<TypeWithAnnotations> targetTypes;
 
-            if (!source.Type.TryGetElementTypesWithAnnotationsIfTupleType(out sourceTypes) ||
-                !target.Type.TryGetElementTypesWithAnnotationsIfTupleType(out targetTypes) ||
-                sourceTypes.Length != targetTypes.Length)
+            if (
+                !source.Type.TryGetElementTypesWithAnnotationsIfTupleType(out sourceTypes)
+                || !target.Type.TryGetElementTypesWithAnnotationsIfTupleType(out targetTypes)
+                || sourceTypes.Length != targetTypes.Length
+            )
             {
                 return false;
             }
@@ -1675,13 +2008,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private bool ExactConstructedInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool ExactConstructedInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
 
             // SPEC: * Otherwise, if V is a constructed type C<V1...Vk> and U is a constructed
-            // SPEC:   type C<U1...Uk> then an exact inference 
+            // SPEC:   type C<U1...Uk> then an exact inference
             // SPEC:   is made from each Ui to the corresponding Vi.
 
             var namedSource = source.Type as NamedTypeSymbol;
@@ -1696,7 +2033,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            if (!TypeSymbol.Equals(namedSource.OriginalDefinition, namedTarget.OriginalDefinition, TypeCompareKind.ConsiderEverything2))
+            if (
+                !TypeSymbol.Equals(
+                    namedSource.OriginalDefinition,
+                    namedTarget.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            )
             {
                 return false;
             }
@@ -1705,65 +2048,121 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private bool ExactPointerInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool ExactPointerInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             if (source.TypeKind == TypeKind.Pointer && target.TypeKind == TypeKind.Pointer)
             {
-                ExactInference(((PointerTypeSymbol)source.Type).PointedAtTypeWithAnnotations, ((PointerTypeSymbol)target.Type).PointedAtTypeWithAnnotations, ref useSiteInfo);
+                ExactInference(
+                    ((PointerTypeSymbol)source.Type).PointedAtTypeWithAnnotations,
+                    ((PointerTypeSymbol)target.Type).PointedAtTypeWithAnnotations,
+                    ref useSiteInfo
+                );
                 return true;
             }
-            else if (source.Type is FunctionPointerTypeSymbol { Signature: { ParameterCount: int sourceParameterCount } sourceSignature } &&
-                     target.Type is FunctionPointerTypeSymbol { Signature: { ParameterCount: int targetParameterCount } targetSignature } &&
-                     sourceParameterCount == targetParameterCount)
+            else if (
+                source.Type
+                    is FunctionPointerTypeSymbol
+                    {
+                        Signature: { ParameterCount: int sourceParameterCount } sourceSignature
+                    }
+                && target.Type
+                    is FunctionPointerTypeSymbol
+                    {
+                        Signature: { ParameterCount: int targetParameterCount } targetSignature
+                    }
+                && sourceParameterCount == targetParameterCount
+            )
             {
-                if (!FunctionPointerRefKindsEqual(sourceSignature, targetSignature) || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature))
+                if (
+                    !FunctionPointerRefKindsEqual(sourceSignature, targetSignature)
+                    || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature)
+                )
                 {
                     return false;
                 }
 
                 for (int i = 0; i < sourceParameterCount; i++)
                 {
-                    ExactInference(sourceSignature.ParameterTypesWithAnnotations[i], targetSignature.ParameterTypesWithAnnotations[i], ref useSiteInfo);
+                    ExactInference(
+                        sourceSignature.ParameterTypesWithAnnotations[i],
+                        targetSignature.ParameterTypesWithAnnotations[i],
+                        ref useSiteInfo
+                    );
                 }
 
-                ExactInference(sourceSignature.ReturnTypeWithAnnotations, targetSignature.ReturnTypeWithAnnotations, ref useSiteInfo);
+                ExactInference(
+                    sourceSignature.ReturnTypeWithAnnotations,
+                    targetSignature.ReturnTypeWithAnnotations,
+                    ref useSiteInfo
+                );
                 return true;
             }
 
             return false;
         }
 
-        private static bool FunctionPointerCallingConventionsEqual(FunctionPointerMethodSymbol sourceSignature, FunctionPointerMethodSymbol targetSignature)
+        private static bool FunctionPointerCallingConventionsEqual(
+            FunctionPointerMethodSymbol sourceSignature,
+            FunctionPointerMethodSymbol targetSignature
+        )
         {
             if (sourceSignature.CallingConvention != targetSignature.CallingConvention)
             {
                 return false;
             }
 
-            return (sourceSignature.GetCallingConventionModifiers(), targetSignature.GetCallingConventionModifiers()) switch
+            return (
+                sourceSignature.GetCallingConventionModifiers(),
+                targetSignature.GetCallingConventionModifiers()
+            ) switch
             {
                 (null, null) => true,
-                ({ } sourceModifiers, { } targetModifiers) when sourceModifiers.SetEquals(targetModifiers) => true,
+                ({ } sourceModifiers, { } targetModifiers)
+                    when sourceModifiers.SetEquals(targetModifiers)
+                  => true,
                 _ => false
             };
         }
 
-        private static bool FunctionPointerRefKindsEqual(FunctionPointerMethodSymbol sourceSignature, FunctionPointerMethodSymbol targetSignature)
+        private static bool FunctionPointerRefKindsEqual(
+            FunctionPointerMethodSymbol sourceSignature,
+            FunctionPointerMethodSymbol targetSignature
+        )
         {
             return sourceSignature.RefKind == targetSignature.RefKind
-                   && (sourceSignature.ParameterRefKinds.IsDefault, targetSignature.ParameterRefKinds.IsDefault) switch
-                   {
-                       (true, false) or (false, true) => false,
-                       (true, true) => true,
-                       _ => sourceSignature.ParameterRefKinds.SequenceEqual(targetSignature.ParameterRefKinds)
-                   };
+                && (
+                    sourceSignature.ParameterRefKinds.IsDefault,
+                    targetSignature.ParameterRefKinds.IsDefault
+                ) switch
+                {
+                    (true, false) or (false, true) => false,
+                    (true, true) => true,
+                    _
+                      => sourceSignature.ParameterRefKinds.SequenceEqual(
+                          targetSignature.ParameterRefKinds
+                      )
+                };
         }
 
-        private void ExactTypeArgumentInference(NamedTypeSymbol source, NamedTypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void ExactTypeArgumentInference(
+            NamedTypeSymbol source,
+            NamedTypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
-            Debug.Assert(TypeSymbol.Equals(source.OriginalDefinition, target.OriginalDefinition, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    source.OriginalDefinition,
+                    target.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            );
 
             var sourceTypeArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance();
             var targetTypeArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance();
@@ -1786,7 +2185,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         // Lower-bound inferences
         //
-        private void LowerBoundInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void LowerBoundInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -1807,7 +2210,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            // SPEC: * If V is one of the unfixed Xi then U is added to the set of 
+            // SPEC: * If V is one of the unfixed Xi then U is added to the set of
             // SPEC:   lower bounds for Xi.
 
             if (LowerBoundTypeParameterInference(source, target))
@@ -1830,10 +2233,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // UNDONE: At this point we could also do an inference from non-nullable U
             // UNDONE: to nullable V.
-            // UNDONE: 
+            // UNDONE:
             // UNDONE: We tried implementing lower bound nullable inference as follows:
             // UNDONE:
-            // UNDONE: * Otherwise, if V is nullable type V1? and U is a non-nullable 
+            // UNDONE: * Otherwise, if V is nullable type V1? and U is a non-nullable
             // UNDONE:   struct type then an exact inference is made from U to V1.
             // UNDONE:
             // UNDONE: However, this causes an unfortunate interaction with what
@@ -1869,11 +2272,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return;
             }
-
             // SPEC: * Otherwise, no inferences are made.
         }
 
-        private bool LowerBoundTypeParameterInference(TypeWithAnnotations source, TypeWithAnnotations target)
+        private bool LowerBoundTypeParameterInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -1888,7 +2293,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private static TypeWithAnnotations GetMatchingElementType(ArrayTypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private static TypeWithAnnotations GetMatchingElementType(
+            ArrayTypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -1920,10 +2329,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return default;
             }
 
-            return ((NamedTypeSymbol)target).TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo);
+            return ((NamedTypeSymbol)target).TypeArgumentWithDefinitionUseSiteDiagnostics(
+                0,
+                ref useSiteInfo
+            );
         }
 
-        private bool LowerBoundArrayInference(TypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundArrayInference(
+            TypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -1961,12 +2377,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private bool LowerBoundNullableInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundNullableInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            return ExactOrBoundsNullableInference(ExactOrBoundsKind.LowerBound, source, target, ref useSiteInfo);
+            return ExactOrBoundsNullableInference(
+                ExactOrBoundsKind.LowerBound,
+                source,
+                target,
+                ref useSiteInfo
+            );
         }
 
-        private bool LowerBoundConstructedInference(TypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundConstructedInference(
+            TypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -1982,26 +2411,40 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            // SPEC: * Otherwise, if V is a constructed class or struct type C<V1...Vk> 
+            // SPEC: * Otherwise, if V is a constructed class or struct type C<V1...Vk>
             // SPEC:   and U is C<U1...Uk> then an exact inference
             // SPEC:   is made from each Ui to the corresponding Vi.
 
-            // SPEC: * Otherwise, if V is a constructed interface or delegate type C<V1...Vk> 
+            // SPEC: * Otherwise, if V is a constructed interface or delegate type C<V1...Vk>
             // SPEC:   and U is C<U1...Uk> then an exact inference,
             // SPEC:   lower bound inference or upper bound inference
             // SPEC:   is made from each Ui to the corresponding Vi.
 
             var constructedSource = source as NamedTypeSymbol;
-            if ((object)constructedSource != null &&
-                TypeSymbol.Equals(constructedSource.OriginalDefinition, constructedTarget.OriginalDefinition, TypeCompareKind.ConsiderEverything2))
+            if (
+                (object)constructedSource != null
+                && TypeSymbol.Equals(
+                    constructedSource.OriginalDefinition,
+                    constructedTarget.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            )
             {
                 if (constructedSource.IsInterface || constructedSource.IsDelegateType())
                 {
-                    LowerBoundTypeArgumentInference(constructedSource, constructedTarget, ref useSiteInfo);
+                    LowerBoundTypeArgumentInference(
+                        constructedSource,
+                        constructedTarget,
+                        ref useSiteInfo
+                    );
                 }
                 else
                 {
-                    ExactTypeArgumentInference(constructedSource, constructedTarget, ref useSiteInfo);
+                    ExactTypeArgumentInference(
+                        constructedSource,
+                        constructedTarget,
+                        ref useSiteInfo
+                    );
                 }
                 return true;
             }
@@ -2017,7 +2460,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // SPEC: * Otherwise, if V is an interface type C<V1...Vk> and U is a class type
-            // SPEC:   or struct type and there is a unique set U1...Uk such that U directly 
+            // SPEC:   or struct type and there is a unique set U1...Uk such that U directly
             // SPEC:   or indirectly implements C<U1...Uk> then an exact ...
             // SPEC: * ... and U is an interface type ...
             // SPEC: * ... and U is a type parameter ...
@@ -2030,7 +2473,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private bool LowerBoundClassInference(TypeSymbol source, NamedTypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundClassInference(
+            TypeSymbol source,
+            NamedTypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -2040,12 +2487,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            // Spec: 7.5.2.9 Lower-bound interfaces 
+            // Spec: 7.5.2.9 Lower-bound interfaces
             // SPEC: * Otherwise, if V is a class type C<V1...Vk> and U is a class type which
-            // SPEC:   inherits directly or indirectly from C<U1...Uk> 
+            // SPEC:   inherits directly or indirectly from C<U1...Uk>
             // SPEC:   then an exact inference is made from each Ui to the corresponding Vi.
             // SPEC: * Otherwise, if V is a class type C<V1...Vk> and U is a type parameter
-            // SPEC:   with effective base class C<U1...Uk> 
+            // SPEC:   with effective base class C<U1...Uk>
             // SPEC:   then an exact inference is made from each Ui to the corresponding Vi.
             // SPEC: * Otherwise, if V is a class type C<V1...Vk> and U is a type parameter
             // SPEC:   with an effective base class which inherits directly or indirectly from
@@ -2065,7 +2512,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             while ((object)sourceBase != null)
             {
-                if (TypeSymbol.Equals(sourceBase.OriginalDefinition, target.OriginalDefinition, TypeCompareKind.ConsiderEverything2))
+                if (
+                    TypeSymbol.Equals(
+                        sourceBase.OriginalDefinition,
+                        target.OriginalDefinition,
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                )
                 {
                     ExactTypeArgumentInference(sourceBase, target, ref useSiteInfo);
                     return true;
@@ -2075,7 +2528,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private bool LowerBoundInterfaceInference(TypeSymbol source, NamedTypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundInterfaceInference(
+            TypeSymbol source,
+            NamedTypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -2087,7 +2544,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Spec 7.5.2.9 Lower-bound interfaces
             // SPEC: * Otherwise, if V [target] is an interface type C<V1...Vk> and U [source] is a class type
-            // SPEC:   or struct type and there is a unique set U1...Uk such that U directly 
+            // SPEC:   or struct type and there is a unique set U1...Uk such that U directly
             // SPEC:   or indirectly implements C<U1...Uk> then an
             // SPEC:   exact, upper-bound, or lower-bound inference ...
             // SPEC: * ... and U is an interface type ...
@@ -2099,14 +2556,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case TypeKind.Struct:
                 case TypeKind.Class:
                 case TypeKind.Interface:
-                    allInterfaces = source.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
+                    allInterfaces = source.AllInterfacesWithDefinitionUseSiteDiagnostics(
+                        ref useSiteInfo
+                    );
                     break;
 
                 case TypeKind.TypeParameter:
                     var typeParameter = (TypeParameterSymbol)source;
-                    allInterfaces = typeParameter.EffectiveBaseClass(ref useSiteInfo).
-                                        AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo).
-                                        Concat(typeParameter.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo));
+                    allInterfaces = typeParameter
+                        .EffectiveBaseClass(ref useSiteInfo)
+                        .AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
+                        .Concat(
+                            typeParameter.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(
+                                ref useSiteInfo
+                            )
+                        );
                     break;
 
                 default:
@@ -2114,7 +2578,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // duplicates with only nullability differences can be merged (to avoid an error in type inference)
-            allInterfaces = ModuloReferenceTypeNullabilityDifferences(allInterfaces, VarianceKind.In);
+            allInterfaces = ModuloReferenceTypeNullabilityDifferences(
+                allInterfaces,
+                VarianceKind.In
+            );
 
             NamedTypeSymbol matchingInterface = GetInterfaceInferenceBound(allInterfaces, target);
             if ((object)matchingInterface == null)
@@ -2125,9 +2592,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        internal static ImmutableArray<NamedTypeSymbol> ModuloReferenceTypeNullabilityDifferences(ImmutableArray<NamedTypeSymbol> interfaces, VarianceKind variance)
+        internal static ImmutableArray<NamedTypeSymbol> ModuloReferenceTypeNullabilityDifferences(
+            ImmutableArray<NamedTypeSymbol> interfaces,
+            VarianceKind variance
+        )
         {
-            var dictionary = PooledDictionaryIgnoringNullableModifiersForReferenceTypes.GetInstance();
+            var dictionary =
+                PooledDictionaryIgnoringNullableModifiersForReferenceTypes.GetInstance();
 
             foreach (var @interface in interfaces)
             {
@@ -2142,12 +2613,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            var result = dictionary.Count != interfaces.Length ? dictionary.Values.ToImmutableArray() : interfaces;
+            var result =
+                dictionary.Count != interfaces.Length
+                    ? dictionary.Values.ToImmutableArray()
+                    : interfaces;
             dictionary.Free();
             return result;
         }
 
-        private void LowerBoundTypeArgumentInference(NamedTypeSymbol source, NamedTypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void LowerBoundTypeArgumentInference(
+            NamedTypeSymbol source,
+            NamedTypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: The choice of inference for the i-th type argument is made
             // SPEC: based on the declaration of the i-th type parameter of C, as
@@ -2160,7 +2638,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
-            Debug.Assert(TypeSymbol.Equals(source.OriginalDefinition, target.OriginalDefinition, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    source.OriginalDefinition,
+                    target.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            );
 
             var typeParameters = ArrayBuilder<TypeParameterSymbol>.GetInstance();
             var sourceTypeArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance();
@@ -2179,11 +2663,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var sourceTypeArgument = sourceTypeArguments[arg];
                 var targetTypeArgument = targetTypeArguments[arg];
 
-                if (sourceTypeArgument.Type.IsReferenceType && typeParameter.Variance == VarianceKind.Out)
+                if (
+                    sourceTypeArgument.Type.IsReferenceType
+                    && typeParameter.Variance == VarianceKind.Out
+                )
                 {
                     LowerBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
-                else if (sourceTypeArgument.Type.IsReferenceType && typeParameter.Variance == VarianceKind.In)
+                else if (
+                    sourceTypeArgument.Type.IsReferenceType
+                    && typeParameter.Variance == VarianceKind.In
+                )
                 {
                     UpperBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
@@ -2199,9 +2689,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
 #nullable enable
-        private bool LowerBoundFunctionPointerTypeInference(TypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool LowerBoundFunctionPointerTypeInference(
+            TypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            if (source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature } || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature })
+            if (
+                source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature }
+                || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature }
+            )
             {
                 return false;
             }
@@ -2211,7 +2708,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            if (!FunctionPointerRefKindsEqual(sourceSignature, targetSignature) || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature))
+            if (
+                !FunctionPointerRefKindsEqual(sourceSignature, targetSignature)
+                || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature)
+            )
             {
                 return false;
             }
@@ -2223,23 +2723,48 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var sourceParam = sourceSignature.Parameters[i];
                 var targetParam = targetSignature.Parameters[i];
 
-                if ((sourceParam.Type.IsReferenceType || sourceParam.Type.IsFunctionPointer()) && sourceParam.RefKind == RefKind.None)
+                if (
+                    (sourceParam.Type.IsReferenceType || sourceParam.Type.IsFunctionPointer())
+                    && sourceParam.RefKind == RefKind.None
+                )
                 {
-                    UpperBoundInference(sourceParam.TypeWithAnnotations, targetParam.TypeWithAnnotations, ref useSiteInfo);
+                    UpperBoundInference(
+                        sourceParam.TypeWithAnnotations,
+                        targetParam.TypeWithAnnotations,
+                        ref useSiteInfo
+                    );
                 }
                 else
                 {
-                    ExactInference(sourceParam.TypeWithAnnotations, targetParam.TypeWithAnnotations, ref useSiteInfo);
+                    ExactInference(
+                        sourceParam.TypeWithAnnotations,
+                        targetParam.TypeWithAnnotations,
+                        ref useSiteInfo
+                    );
                 }
             }
 
-            if ((sourceSignature.ReturnType.IsReferenceType || sourceSignature.ReturnType.IsFunctionPointer()) && sourceSignature.RefKind == RefKind.None)
+            if (
+                (
+                    sourceSignature.ReturnType.IsReferenceType
+                    || sourceSignature.ReturnType.IsFunctionPointer()
+                )
+                && sourceSignature.RefKind == RefKind.None
+            )
             {
-                LowerBoundInference(sourceSignature.ReturnTypeWithAnnotations, targetSignature.ReturnTypeWithAnnotations, ref useSiteInfo);
+                LowerBoundInference(
+                    sourceSignature.ReturnTypeWithAnnotations,
+                    targetSignature.ReturnTypeWithAnnotations,
+                    ref useSiteInfo
+                );
             }
             else
             {
-                ExactInference(sourceSignature.ReturnTypeWithAnnotations, targetSignature.ReturnTypeWithAnnotations, ref useSiteInfo);
+                ExactInference(
+                    sourceSignature.ReturnTypeWithAnnotations,
+                    targetSignature.ReturnTypeWithAnnotations,
+                    ref useSiteInfo
+                );
             }
 
             return true;
@@ -2250,7 +2775,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         //
         // Upper-bound inferences
         //
-        private void UpperBoundInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void UpperBoundInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -2265,7 +2794,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            // SPEC: * If V is one of the unfixed Xi then U is added to the set of 
+            // SPEC: * If V is one of the unfixed Xi then U is added to the set of
             // SPEC:   upper bounds for Xi.
 
             if (UpperBoundTypeParameterInference(source, target))
@@ -2307,11 +2836,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return;
             }
-
             // SPEC: * Otherwise, no inferences are made.
         }
 
-        private bool UpperBoundTypeParameterInference(TypeWithAnnotations source, TypeWithAnnotations target)
+        private bool UpperBoundTypeParameterInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -2325,7 +2856,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private bool UpperBoundArrayInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool UpperBoundArrayInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(source.HasType);
             Debug.Assert(target.HasType);
@@ -2362,12 +2897,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private bool UpperBoundNullableInference(TypeWithAnnotations source, TypeWithAnnotations target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool UpperBoundNullableInference(
+            TypeWithAnnotations source,
+            TypeWithAnnotations target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            return ExactOrBoundsNullableInference(ExactOrBoundsKind.UpperBound, source, target, ref useSiteInfo);
+            return ExactOrBoundsNullableInference(
+                ExactOrBoundsKind.UpperBound,
+                source,
+                target,
+                ref useSiteInfo
+            );
         }
 
-        private bool UpperBoundConstructedInference(TypeWithAnnotations sourceWithAnnotations, TypeWithAnnotations targetWithAnnotations, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool UpperBoundConstructedInference(
+            TypeWithAnnotations sourceWithAnnotations,
+            TypeWithAnnotations targetWithAnnotations,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(sourceWithAnnotations.HasType);
             Debug.Assert(targetWithAnnotations.HasType);
@@ -2392,16 +2940,30 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var constructedTarget = target as NamedTypeSymbol;
 
-            if ((object)constructedTarget != null &&
-                TypeSymbol.Equals(constructedSource.OriginalDefinition, target.OriginalDefinition, TypeCompareKind.ConsiderEverything2))
+            if (
+                (object)constructedTarget != null
+                && TypeSymbol.Equals(
+                    constructedSource.OriginalDefinition,
+                    target.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            )
             {
                 if (constructedTarget.IsInterface || constructedTarget.IsDelegateType())
                 {
-                    UpperBoundTypeArgumentInference(constructedSource, constructedTarget, ref useSiteInfo);
+                    UpperBoundTypeArgumentInference(
+                        constructedSource,
+                        constructedTarget,
+                        ref useSiteInfo
+                    );
                 }
                 else
                 {
-                    ExactTypeArgumentInference(constructedSource, constructedTarget, ref useSiteInfo);
+                    ExactTypeArgumentInference(
+                        constructedSource,
+                        constructedTarget,
+                        ref useSiteInfo
+                    );
                 }
                 return true;
             }
@@ -2415,7 +2977,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // SPEC: * Otherwise, if U is an interface type C<U1...Uk> and V is a class type
-            // SPEC:   or struct type and there is a unique set V1...Vk such that V directly 
+            // SPEC:   or struct type and there is a unique set V1...Vk such that V directly
             // SPEC:   or indirectly implements C<V1...Vk> then an exact ...
             // SPEC: * ... and U is an interface type ...
 
@@ -2427,7 +2989,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private bool UpperBoundClassInference(NamedTypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool UpperBoundClassInference(
+            NamedTypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -2438,13 +3004,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // SPEC: * Otherwise, if U is a class type C<U1...Uk> and V is a class type which
-            // SPEC:   inherits directly or indirectly from C<V1...Vk> then an exact 
+            // SPEC:   inherits directly or indirectly from C<V1...Vk> then an exact
             // SPEC:   inference is made from each Ui to the corresponding Vi.
 
             var targetBase = target.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
             while ((object)targetBase != null)
             {
-                if (TypeSymbol.Equals(targetBase.OriginalDefinition, source.OriginalDefinition, TypeCompareKind.ConsiderEverything2))
+                if (
+                    TypeSymbol.Equals(
+                        targetBase.OriginalDefinition,
+                        source.OriginalDefinition,
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                )
                 {
                     ExactTypeArgumentInference(source, targetBase, ref useSiteInfo);
                     return true;
@@ -2456,7 +3028,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        private bool UpperBoundInterfaceInference(NamedTypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool UpperBoundInterfaceInference(
+            NamedTypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
@@ -2467,7 +3043,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // SPEC: * Otherwise, if U [source] is an interface type C<U1...Uk> and V [target] is a class type
-            // SPEC:   or struct type and there is a unique set V1...Vk such that V directly 
+            // SPEC:   or struct type and there is a unique set V1...Vk such that V directly
             // SPEC:   or indirectly implements C<V1...Vk> then an exact ...
             // SPEC: * ... and U is an interface type ...
 
@@ -2482,10 +3058,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
             }
 
-            ImmutableArray<NamedTypeSymbol> allInterfaces = target.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
+            ImmutableArray<NamedTypeSymbol> allInterfaces =
+                target.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
 
             // duplicates with only nullability differences can be merged (to avoid an error in type inference)
-            allInterfaces = ModuloReferenceTypeNullabilityDifferences(allInterfaces, VarianceKind.Out);
+            allInterfaces = ModuloReferenceTypeNullabilityDifferences(
+                allInterfaces,
+                VarianceKind.Out
+            );
 
             NamedTypeSymbol bestInterface = GetInterfaceInferenceBound(allInterfaces, source);
             if ((object)bestInterface == null)
@@ -2497,7 +3077,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private void UpperBoundTypeArgumentInference(NamedTypeSymbol source, NamedTypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private void UpperBoundTypeArgumentInference(
+            NamedTypeSymbol source,
+            NamedTypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // SPEC: The choice of inference for the i-th type argument is made
             // SPEC: based on the declaration of the i-th type parameter of C, as
@@ -2510,7 +3094,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert((object)source != null);
             Debug.Assert((object)target != null);
-            Debug.Assert(TypeSymbol.Equals(source.OriginalDefinition, target.OriginalDefinition, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    source.OriginalDefinition,
+                    target.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            );
 
             var typeParameters = ArrayBuilder<TypeParameterSymbol>.GetInstance();
             var sourceTypeArguments = ArrayBuilder<TypeWithAnnotations>.GetInstance();
@@ -2529,11 +3119,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var sourceTypeArgument = sourceTypeArguments[arg];
                 var targetTypeArgument = targetTypeArguments[arg];
 
-                if (sourceTypeArgument.Type.IsReferenceType && typeParameter.Variance == VarianceKind.Out)
+                if (
+                    sourceTypeArgument.Type.IsReferenceType
+                    && typeParameter.Variance == VarianceKind.Out
+                )
                 {
                     UpperBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
-                else if (sourceTypeArgument.Type.IsReferenceType && typeParameter.Variance == VarianceKind.In)
+                else if (
+                    sourceTypeArgument.Type.IsReferenceType
+                    && typeParameter.Variance == VarianceKind.In
+                )
                 {
                     LowerBoundInference(sourceTypeArgument, targetTypeArgument, ref useSiteInfo);
                 }
@@ -2549,9 +3145,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
 #nullable enable
-        private bool UpperBoundFunctionPointerTypeInference(TypeSymbol source, TypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool UpperBoundFunctionPointerTypeInference(
+            TypeSymbol source,
+            TypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            if (source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature } || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature })
+            if (
+                source is not FunctionPointerTypeSymbol { Signature: { } sourceSignature }
+                || target is not FunctionPointerTypeSymbol { Signature: { } targetSignature }
+            )
             {
                 return false;
             }
@@ -2561,7 +3164,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            if (!FunctionPointerRefKindsEqual(sourceSignature, targetSignature) || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature))
+            if (
+                !FunctionPointerRefKindsEqual(sourceSignature, targetSignature)
+                || !FunctionPointerCallingConventionsEqual(sourceSignature, targetSignature)
+            )
             {
                 return false;
             }
@@ -2573,23 +3179,48 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var sourceParam = sourceSignature.Parameters[i];
                 var targetParam = targetSignature.Parameters[i];
 
-                if ((sourceParam.Type.IsReferenceType || sourceParam.Type.IsFunctionPointer()) && sourceParam.RefKind == RefKind.None)
+                if (
+                    (sourceParam.Type.IsReferenceType || sourceParam.Type.IsFunctionPointer())
+                    && sourceParam.RefKind == RefKind.None
+                )
                 {
-                    LowerBoundInference(sourceParam.TypeWithAnnotations, targetParam.TypeWithAnnotations, ref useSiteInfo);
+                    LowerBoundInference(
+                        sourceParam.TypeWithAnnotations,
+                        targetParam.TypeWithAnnotations,
+                        ref useSiteInfo
+                    );
                 }
                 else
                 {
-                    ExactInference(sourceParam.TypeWithAnnotations, targetParam.TypeWithAnnotations, ref useSiteInfo);
+                    ExactInference(
+                        sourceParam.TypeWithAnnotations,
+                        targetParam.TypeWithAnnotations,
+                        ref useSiteInfo
+                    );
                 }
             }
 
-            if ((sourceSignature.ReturnType.IsReferenceType || sourceSignature.ReturnType.IsFunctionPointer()) && sourceSignature.RefKind == RefKind.None)
+            if (
+                (
+                    sourceSignature.ReturnType.IsReferenceType
+                    || sourceSignature.ReturnType.IsFunctionPointer()
+                )
+                && sourceSignature.RefKind == RefKind.None
+            )
             {
-                UpperBoundInference(sourceSignature.ReturnTypeWithAnnotations, targetSignature.ReturnTypeWithAnnotations, ref useSiteInfo);
+                UpperBoundInference(
+                    sourceSignature.ReturnTypeWithAnnotations,
+                    targetSignature.ReturnTypeWithAnnotations,
+                    ref useSiteInfo
+                );
             }
             else
             {
-                ExactInference(sourceSignature.ReturnTypeWithAnnotations, targetSignature.ReturnTypeWithAnnotations, ref useSiteInfo);
+                ExactInference(
+                    sourceSignature.ReturnTypeWithAnnotations,
+                    targetSignature.ReturnTypeWithAnnotations,
+                    ref useSiteInfo
+                );
             }
 
             return true;
@@ -2608,7 +3239,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             var lower = _lowerBounds[iParam];
             var upper = _upperBounds[iParam];
 
-            var best = Fix(_compilation, _conversions, typeParameter, exact, lower, upper, ref useSiteInfo);
+            var best = Fix(
+                _compilation,
+                _conversions,
+                typeParameter,
+                exact,
+                lower,
+                upper,
+                ref useSiteInfo
+            );
             if (!best.Type.HasType)
             {
                 return false;
@@ -2620,10 +3259,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If the first attempt succeeded, the result should be the same as
                 // the second attempt, although perhaps with different nullability.
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                var withoutNullability = Fix(_compilation, _conversions.WithNullability(false), typeParameter, exact, lower, upper, ref discardedUseSiteInfo).Type;
+                var withoutNullability =
+                    Fix(
+                        _compilation,
+                        _conversions.WithNullability(false),
+                        typeParameter,
+                        exact,
+                        lower,
+                        upper,
+                        ref discardedUseSiteInfo
+                    ).Type;
                 // https://github.com/dotnet/roslyn/issues/27961 Results may differ by tuple names or dynamic.
                 // See NullableReferenceTypesTests.TypeInference_TupleNameDifferences_01 for example.
-                Debug.Assert(best.Type.Type.Equals(withoutNullability.Type, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+                Debug.Assert(
+                    best.Type.Type.Equals(
+                        withoutNullability.Type,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
+                );
             }
 #endif
 
@@ -2639,7 +3293,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             HashSet<TypeWithAnnotations>? exact,
             HashSet<TypeWithAnnotations>? lower,
             HashSet<TypeWithAnnotations>? upper,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // UNDONE: This method makes a lot of garbage.
 
@@ -2653,14 +3308,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Optimization: if we have two or more exact bounds, fixing is impossible.
 
-            var candidates = new Dictionary<TypeWithAnnotations, TypeWithAnnotations>(EqualsIgnoringDynamicTupleNamesAndNullabilityComparer.Instance);
+            var candidates = new Dictionary<TypeWithAnnotations, TypeWithAnnotations>(
+                EqualsIgnoringDynamicTupleNamesAndNullabilityComparer.Instance
+            );
 
             Debug.Assert(!containsFunctionTypes(exact));
             Debug.Assert(!containsFunctionTypes(upper));
 
             // Function types are dropped if there are any non-function types.
-            if (containsFunctionTypes(lower) &&
-                (containsNonFunctionTypes(lower) || containsNonFunctionTypes(exact) || containsNonFunctionTypes(upper)))
+            if (
+                containsFunctionTypes(lower)
+                && (
+                    containsNonFunctionTypes(lower)
+                    || containsNonFunctionTypes(exact)
+                    || containsNonFunctionTypes(upper)
+                )
+            )
             {
                 lower = removeFunctionTypes(lower);
             }
@@ -2705,7 +3368,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (lower != null)
             {
-                MergeOrRemoveCandidates(candidates, lower, initialCandidates, conversions, VarianceKind.Out, ref useSiteInfo);
+                MergeOrRemoveCandidates(
+                    candidates,
+                    lower,
+                    initialCandidates,
+                    conversions,
+                    VarianceKind.Out,
+                    ref useSiteInfo
+                );
             }
 
             // SPEC:   For each upper bound U of Xi all types from which there is not an
@@ -2713,7 +3383,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (upper != null)
             {
-                MergeOrRemoveCandidates(candidates, upper, initialCandidates, conversions, VarianceKind.In, ref useSiteInfo);
+                MergeOrRemoveCandidates(
+                    candidates,
+                    upper,
+                    initialCandidates,
+                    conversions,
+                    VarianceKind.In,
+                    ref useSiteInfo
+                );
             }
 
             initialCandidates.Clear();
@@ -2727,8 +3404,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 foreach (var candidate2 in initialCandidates)
                 {
-                    if (!candidate.Equals(candidate2, TypeCompareKind.ConsiderEverything) &&
-                        !ImplicitConversionExists(candidate2, candidate, ref useSiteInfo, conversions.WithNullability(false)))
+                    if (
+                        !candidate.Equals(candidate2, TypeCompareKind.ConsiderEverything)
+                        && !ImplicitConversionExists(
+                            candidate2,
+                            candidate,
+                            ref useSiteInfo,
+                            conversions.WithNullability(false)
+                        )
+                    )
                     {
                         goto OuterBreak;
                     }
@@ -2740,13 +3424,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    Debug.Assert(!best.Equals(candidate, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+                    Debug.Assert(
+                        !best.Equals(
+                            candidate,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
+                    );
                     // best candidate is not unique
                     best = default;
                     break;
                 }
 
-OuterBreak:
+                OuterBreak:
                 ;
             }
 
@@ -2760,7 +3450,9 @@ OuterBreak:
                 var resultType = functionType.GetInternalDelegateType();
                 if (hasExpressionTypeConstraint(typeParameter))
                 {
-                    var expressionOfTType = compilation.GetWellKnownType(WellKnownType.System_Linq_Expressions_Expression_T);
+                    var expressionOfTType = compilation.GetWellKnownType(
+                        WellKnownType.System_Linq_Expressions_Expression_T
+                    );
                     resultType = expressionOfTType.Construct(resultType);
                 }
                 best = TypeWithAnnotations.Create(resultType, best.NullableAnnotation);
@@ -2769,17 +3461,24 @@ OuterBreak:
 
             return (best, fromFunctionType);
 
-            static bool containsFunctionTypes([NotNullWhen(true)] HashSet<TypeWithAnnotations>? types)
+            static bool containsFunctionTypes(
+                [NotNullWhen(true)] HashSet<TypeWithAnnotations>? types
+            )
             {
                 return types?.Any(t => isFunctionType(t, out _)) == true;
             }
 
-            static bool containsNonFunctionTypes([NotNullWhen(true)] HashSet<TypeWithAnnotations>? types)
+            static bool containsNonFunctionTypes(
+                [NotNullWhen(true)] HashSet<TypeWithAnnotations>? types
+            )
             {
                 return types?.Any(t => !isFunctionType(t, out _)) == true;
             }
 
-            static bool isFunctionType(TypeWithAnnotations type, [NotNullWhen(true)] out FunctionTypeSymbol? functionType)
+            static bool isFunctionType(
+                TypeWithAnnotations type,
+                [NotNullWhen(true)] out FunctionTypeSymbol? functionType
+            )
             {
                 functionType = type.Type as FunctionTypeSymbol;
                 return functionType is not null;
@@ -2804,14 +3503,18 @@ OuterBreak:
                 return false;
             }
 
-            static HashSet<TypeWithAnnotations>? removeFunctionTypes(HashSet<TypeWithAnnotations> types)
+            static HashSet<TypeWithAnnotations>? removeFunctionTypes(
+                HashSet<TypeWithAnnotations> types
+            )
             {
                 HashSet<TypeWithAnnotations>? updated = null;
                 foreach (var type in types)
                 {
                     if (!isFunctionType(type, out _))
                     {
-                        updated ??= new HashSet<TypeWithAnnotations>(TypeWithAnnotations.EqualsComparer.ConsiderEverythingComparer);
+                        updated ??= new HashSet<TypeWithAnnotations>(
+                            TypeWithAnnotations.EqualsComparer.ConsiderEverythingComparer
+                        );
                         updated.Add(type);
                     }
                 }
@@ -2819,7 +3522,12 @@ OuterBreak:
             }
         }
 
-        private static bool ImplicitConversionExists(TypeWithAnnotations sourceWithAnnotations, TypeWithAnnotations destinationWithAnnotations, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo, ConversionsBase conversions)
+        private static bool ImplicitConversionExists(
+            TypeWithAnnotations sourceWithAnnotations,
+            TypeWithAnnotations destinationWithAnnotations,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
+            ConversionsBase conversions
+        )
         {
             var source = sourceWithAnnotations.Type;
             var destination = destinationWithAnnotations.Type;
@@ -2830,12 +3538,21 @@ OuterBreak:
                 return false;
             }
 
-            if (!conversions.HasTopLevelNullabilityImplicitConversion(sourceWithAnnotations, destinationWithAnnotations))
+            if (
+                !conversions.HasTopLevelNullabilityImplicitConversion(
+                    sourceWithAnnotations,
+                    destinationWithAnnotations
+                )
+            )
             {
                 return false;
             }
 
-            return conversions.ClassifyImplicitConversionFromTypeWhenNeitherOrBothFunctionTypes(source, destination, ref useSiteInfo).Exists;
+            return conversions.ClassifyImplicitConversionFromTypeWhenNeitherOrBothFunctionTypes(
+                source,
+                destination,
+                ref useSiteInfo
+            ).Exists;
         }
 #nullable disable
 
@@ -2843,12 +3560,19 @@ OuterBreak:
         //
         // Inferred return type
         //
-        private TypeWithAnnotations InferReturnType(BoundExpression source, NamedTypeSymbol target, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private TypeWithAnnotations InferReturnType(
+            BoundExpression source,
+            NamedTypeSymbol target,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)target != null);
             Debug.Assert(target.IsDelegateType());
-            Debug.Assert((object)target.DelegateInvokeMethod != null && !target.DelegateInvokeMethod.HasUseSiteError,
-                         "This method should only be called for legal delegate types.");
+            Debug.Assert(
+                (object)target.DelegateInvokeMethod != null
+                    && !target.DelegateInvokeMethod.HasUseSiteError,
+                "This method should only be called for legal delegate types."
+            );
             Debug.Assert(!target.DelegateInvokeMethod.ReturnsVoid);
 
             // We should not be computing the inferred return type unless we are converting
@@ -2863,7 +3587,7 @@ OuterBreak:
             // through an anonymous function conversion, or inferred during type
             // inference on an enclosing generic method invocation.
             // The inferred return type is determined as follows:
-            // * If the body of F is an expression (that has a type) then the 
+            // * If the body of F is an expression (that has a type) then the
             //   inferred return type of F is the type of that expression.
             // * If the body of F is a block and the set of expressions in the
             //   blocks return statements has a best common type T then the
@@ -2878,7 +3602,7 @@ OuterBreak:
             var anonymousFunction = (UnboundLambda)source;
             if (anonymousFunction.HasSignature)
             {
-                // Optimization: 
+                // Optimization:
                 // We know that the anonymous function has a parameter list. If it does not
                 // have the same arity as the delegate, then it cannot possibly be applicable.
                 // Rather than have type inference fail, we will simply not make a return
@@ -2909,7 +3633,15 @@ OuterBreak:
             {
                 for (int p = 0; p < anonymousFunction.ParameterCount; ++p)
                 {
-                    if (!anonymousFunction.ParameterType(p).Equals(fixedDelegateParameters[p].Type, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes))
+                    if (
+                        !anonymousFunction
+                            .ParameterType(p)
+                            .Equals(
+                                fixedDelegateParameters[p].Type,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
+                    )
                     {
                         return default;
                     }
@@ -2932,19 +3664,34 @@ OuterBreak:
         /// the original definition of the target. If the are no matches,
         /// or multiple matches, the return value is null.
         /// </summary>
-        private static NamedTypeSymbol GetInterfaceInferenceBound(ImmutableArray<NamedTypeSymbol> interfaces, NamedTypeSymbol target)
+        private static NamedTypeSymbol GetInterfaceInferenceBound(
+            ImmutableArray<NamedTypeSymbol> interfaces,
+            NamedTypeSymbol target
+        )
         {
             Debug.Assert(target.IsInterface);
             NamedTypeSymbol matchingInterface = null;
             foreach (var currentInterface in interfaces)
             {
-                if (TypeSymbol.Equals(currentInterface.OriginalDefinition, target.OriginalDefinition, TypeCompareKind.ConsiderEverything))
+                if (
+                    TypeSymbol.Equals(
+                        currentInterface.OriginalDefinition,
+                        target.OriginalDefinition,
+                        TypeCompareKind.ConsiderEverything
+                    )
+                )
                 {
                     if ((object)matchingInterface == null)
                     {
                         matchingInterface = currentInterface;
                     }
-                    else if (!TypeSymbol.Equals(matchingInterface, currentInterface, TypeCompareKind.ConsiderEverything))
+                    else if (
+                        !TypeSymbol.Equals(
+                            matchingInterface,
+                            currentInterface,
+                            TypeCompareKind.ConsiderEverything
+                        )
+                    )
                     {
                         // Not unique. Bail out.
                         return null;
@@ -2974,7 +3721,7 @@ OuterBreak:
         //
         // What we would like to know is: given _only_ the expression x, can we infer
         // what T is in Bar<T> ?  If we can, then for error recovery and reporting
-        // we can provisionally consider Goo to be an extension method of x. If we 
+        // we can provisionally consider Goo to be an extension method of x. If we
         // cannot deduce this just from x then we should consider Goo to not be an
         // extension method of x, at least until we have more information.
         //
@@ -2984,7 +3731,8 @@ OuterBreak:
             ConversionsBase conversions,
             MethodSymbol method,
             ImmutableArray<BoundExpression> arguments,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert((object)method != null);
             Debug.Assert(method.Arity > 0);
@@ -3008,7 +3756,8 @@ OuterBreak:
                 constructedFromMethod.GetParameterTypes(),
                 constructedFromMethod.ParameterRefKinds,
                 arguments,
-                extensions: null);
+                extensions: null
+            );
 
             if (!inferrer.InferTypeArgumentsFromFirstArgument(ref useSiteInfo))
             {
@@ -3020,7 +3769,9 @@ OuterBreak:
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        private bool InferTypeArgumentsFromFirstArgument(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private bool InferTypeArgumentsFromFirstArgument(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(!_formalParameterTypes.IsDefault);
             Debug.Assert(_formalParameterTypes.Length >= 1);
@@ -3034,7 +3785,11 @@ OuterBreak:
             {
                 return false;
             }
-            LowerBoundInference(_extensions.GetTypeWithAnnotations(argument), dest, ref useSiteInfo);
+            LowerBoundInference(
+                _extensions.GetTypeWithAnnotations(argument),
+                dest,
+                ref useSiteInfo
+            );
             // Now check to see that every type parameter used by the first
             // formal parameter type was successfully inferred.
             for (int iParam = 0; iParam < _methodTypeParameters.Length; ++iParam)
@@ -3058,7 +3813,9 @@ OuterBreak:
         /// Return the inferred type arguments using null
         /// for any type arguments that were not inferred.
         /// </summary>
-        private ImmutableArray<TypeWithAnnotations> GetInferredTypeArguments(out bool inferredFromFunctionType)
+        private ImmutableArray<TypeWithAnnotations> GetInferredTypeArguments(
+            out bool inferredFromFunctionType
+        )
         {
             var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(_fixedResults.Length);
             inferredFromFunctionType = false;
@@ -3075,12 +3832,13 @@ OuterBreak:
 
         private static bool IsReallyAType(TypeSymbol? type)
         {
-            return type is { } &&
-                !type.IsErrorType() &&
-                !type.IsVoidType();
+            return type is { } && !type.IsErrorType() && !type.IsVoidType();
         }
 
-        private static void GetAllCandidates(Dictionary<TypeWithAnnotations, TypeWithAnnotations> candidates, ArrayBuilder<TypeWithAnnotations> builder)
+        private static void GetAllCandidates(
+            Dictionary<TypeWithAnnotations, TypeWithAnnotations> candidates,
+            ArrayBuilder<TypeWithAnnotations> builder
+        )
         {
             builder.AddRange(candidates.Values);
         }
@@ -3089,7 +3847,8 @@ OuterBreak:
             Dictionary<TypeWithAnnotations, TypeWithAnnotations> candidates,
             HashSet<TypeWithAnnotations> bounds,
             VarianceKind variance,
-            ConversionsBase conversions)
+            ConversionsBase conversions
+        )
         {
             foreach (var candidate in bounds)
             {
@@ -3109,14 +3868,25 @@ OuterBreak:
             Dictionary<TypeWithAnnotations, TypeWithAnnotations> candidates,
             TypeWithAnnotations newCandidate,
             VarianceKind variance,
-            ConversionsBase conversions)
+            ConversionsBase conversions
+        )
         {
-            Debug.Assert(conversions.IncludeNullability ||
-                newCandidate.SetUnknownNullabilityForReferenceTypes().Equals(newCandidate, TypeCompareKind.ConsiderEverything));
+            Debug.Assert(
+                conversions.IncludeNullability
+                    || newCandidate
+                        .SetUnknownNullabilityForReferenceTypes()
+                        .Equals(newCandidate, TypeCompareKind.ConsiderEverything)
+            );
 
             if (candidates.TryGetValue(newCandidate, out TypeWithAnnotations oldCandidate))
             {
-                MergeAndReplaceIfStillCandidate(candidates, oldCandidate, newCandidate, variance, conversions);
+                MergeAndReplaceIfStillCandidate(
+                    candidates,
+                    oldCandidate,
+                    newCandidate,
+                    variance,
+                    conversions
+                );
             }
             else
             {
@@ -3130,12 +3900,15 @@ OuterBreak:
             ArrayBuilder<TypeWithAnnotations> initialCandidates,
             ConversionsBase conversions,
             VarianceKind variance,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(variance == VarianceKind.In || variance == VarianceKind.Out);
             // SPEC:   For each lower (upper) bound U of Xi all types to which there is not an
             // SPEC:   implicit conversion from (to) U are removed from the candidate set.
-            var comparison = conversions.IncludeNullability ? TypeCompareKind.ConsiderEverything : TypeCompareKind.IgnoreNullableModifiersForReferenceTypes;
+            var comparison = conversions.IncludeNullability
+                ? TypeCompareKind.ConsiderEverything
+                : TypeCompareKind.IgnoreNullableModifiersForReferenceTypes;
             foreach (var bound in bounds)
             {
                 foreach (var candidate in initialCandidates)
@@ -3156,30 +3929,58 @@ OuterBreak:
                         source = candidate;
                         destination = bound;
                     }
-                    if (!ImplicitConversionExists(source, destination, ref useSiteInfo, conversions.WithNullability(false)))
+                    if (
+                        !ImplicitConversionExists(
+                            source,
+                            destination,
+                            ref useSiteInfo,
+                            conversions.WithNullability(false)
+                        )
+                    )
                     {
                         candidates.Remove(candidate);
-                        if (conversions.IncludeNullability && candidates.TryGetValue(bound, out var oldBound))
+                        if (
+                            conversions.IncludeNullability
+                            && candidates.TryGetValue(bound, out var oldBound)
+                        )
                         {
                             // merge the nullability from candidate into bound
                             var oldAnnotation = oldBound.NullableAnnotation;
-                            var newAnnotation = oldAnnotation.MergeNullableAnnotation(candidate.NullableAnnotation, variance);
+                            var newAnnotation = oldAnnotation.MergeNullableAnnotation(
+                                candidate.NullableAnnotation,
+                                variance
+                            );
                             if (oldAnnotation != newAnnotation)
                             {
-                                var newBound = TypeWithAnnotations.Create(oldBound.Type, newAnnotation);
+                                var newBound = TypeWithAnnotations.Create(
+                                    oldBound.Type,
+                                    newAnnotation
+                                );
                                 candidates[bound] = newBound;
                             }
                         }
                     }
-                    else if (bound.Equals(candidate, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes))
+                    else if (
+                        bound.Equals(
+                            candidate,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
+                    )
                     {
                         // SPEC: 4.7 The Dynamic Type
                         //       Type inference (7.5.2) will prefer dynamic over object if both are candidates.
                         //
-                        // This rule doesn't have to be implemented explicitly due to special handling of 
+                        // This rule doesn't have to be implemented explicitly due to special handling of
                         // conversions from dynamic in ImplicitConversionExists helper.
-                        // 
-                        MergeAndReplaceIfStillCandidate(candidates, candidate, bound, variance, conversions);
+                        //
+                        MergeAndReplaceIfStillCandidate(
+                            candidates,
+                            candidate,
+                            bound,
+                            variance,
+                            conversions
+                        );
                     }
                 }
             }
@@ -3190,9 +3991,10 @@ OuterBreak:
             TypeWithAnnotations oldCandidate,
             TypeWithAnnotations newCandidate,
             VarianceKind variance,
-            ConversionsBase conversions)
+            ConversionsBase conversions
+        )
         {
-            // We make an exception when new candidate is dynamic, for backwards compatibility 
+            // We make an exception when new candidate is dynamic, for backwards compatibility
             if (newCandidate.Type.IsDynamic())
             {
                 return;
@@ -3218,9 +4020,11 @@ OuterBreak:
         /// This is a comparer that ignores differences in dynamic-ness and tuple names.
         /// But it has a special case for top-level object vs. dynamic for purpose of method type inference.
         /// </summary>
-        private sealed class EqualsIgnoringDynamicTupleNamesAndNullabilityComparer : EqualityComparer<TypeWithAnnotations>
+        private sealed class EqualsIgnoringDynamicTupleNamesAndNullabilityComparer
+            : EqualityComparer<TypeWithAnnotations>
         {
-            internal static readonly EqualsIgnoringDynamicTupleNamesAndNullabilityComparer Instance = new EqualsIgnoringDynamicTupleNamesAndNullabilityComparer();
+            internal static readonly EqualsIgnoringDynamicTupleNamesAndNullabilityComparer Instance =
+                new EqualsIgnoringDynamicTupleNamesAndNullabilityComparer();
 
             public override int GetHashCode(TypeWithAnnotations obj)
             {
@@ -3231,11 +4035,17 @@ OuterBreak:
             {
                 // We do a equality test ignoring dynamic and tuple names differences,
                 // but dynamic and object are not considered equal for backwards compatibility.
-                if (x.Type.IsDynamic() ^ y.Type.IsDynamic()) { return false; }
+                if (x.Type.IsDynamic() ^ y.Type.IsDynamic())
+                {
+                    return false;
+                }
 
-                return x.Equals(y, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes);
+                return x.Equals(
+                    y,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                );
             }
         }
     }
 }
-

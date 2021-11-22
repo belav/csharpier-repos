@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public struct Gen<T>
 {
     public T Assign(T t)
@@ -43,12 +42,10 @@ public class Test_instance_assignment_struct01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-
         int _int = 1;
         Eval(new Gen<int>().Assign(_int).Equals(_int));
 
@@ -75,5 +72,4 @@ public class Test_instance_assignment_struct01
             return 1;
         }
     }
-
 }

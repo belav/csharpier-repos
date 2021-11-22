@@ -36,11 +36,18 @@ namespace System.Xml.Tests
                 throw new InvalidOperationException("Couldn't find element '" + elementName + "'");
         }
 
-        public static void PositionOnElementNonEmptyNoDoctype(this XmlReader reader, string elementName)
+        public static void PositionOnElementNonEmptyNoDoctype(
+            this XmlReader reader,
+            string elementName
+        )
         {
             while (reader.Read())
             {
-                if (reader.Name == elementName && !reader.IsEmptyElement && reader.NodeType != XmlNodeType.DocumentType)
+                if (
+                    reader.Name == elementName
+                    && !reader.IsEmptyElement
+                    && reader.NodeType != XmlNodeType.DocumentType
+                )
                     break;
             }
         }

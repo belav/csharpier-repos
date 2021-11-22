@@ -40,9 +40,7 @@ namespace System.Threading.Tasks.Dataflow
         private readonly JoinBlockTarget<T2> _target2;
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2}"/>.</summary>
-        public JoinBlock() :
-            this(GroupingDataflowBlockOptions.Default)
-        { }
+        public JoinBlock() : this(GroupingDataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2}"/>.</summary>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="JoinBlock{T1,T2}"/>.</param>
@@ -50,33 +48,45 @@ namespace System.Threading.Tasks.Dataflow
         public JoinBlock(GroupingDataflowBlockOptions dataflowBlockOptions)
         {
             // Validate arguments
-            if (dataflowBlockOptions == null) throw new ArgumentNullException(nameof(dataflowBlockOptions));
+            if (dataflowBlockOptions == null)
+                throw new ArgumentNullException(nameof(dataflowBlockOptions));
 
             // Ensure we have options that can't be changed by the caller
             dataflowBlockOptions = dataflowBlockOptions.DefaultOrClone();
 
             // Initialize bounding state if necessary
             Action<ISourceBlock<Tuple<T1, T2>>, int>? onItemsRemoved = null;
-            if (dataflowBlockOptions.BoundedCapacity > 0) onItemsRemoved = (owningSource, count) => ((JoinBlock<T1, T2>)owningSource)._sharedResources.OnItemsRemoved(count);
+            if (dataflowBlockOptions.BoundedCapacity > 0)
+                onItemsRemoved = (owningSource, count) =>
+                    ((JoinBlock<T1, T2>)owningSource)._sharedResources.OnItemsRemoved(count);
 
             // Configure the source
-            _source = new SourceCore<Tuple<T1, T2>>(this, dataflowBlockOptions,
-                owningSource => ((JoinBlock<T1, T2>)owningSource)._sharedResources.CompleteEachTarget(),
-                onItemsRemoved);
+            _source = new SourceCore<Tuple<T1, T2>>(
+                this,
+                dataflowBlockOptions,
+                owningSource =>
+                    ((JoinBlock<T1, T2>)owningSource)._sharedResources.CompleteEachTarget(),
+                onItemsRemoved
+            );
 
             // Configure targets
             var targets = new JoinBlockTargetBase[2];
-            _sharedResources = new JoinBlockTargetSharedResources(this, targets,
+            _sharedResources = new JoinBlockTargetSharedResources(
+                this,
+                targets,
                 () =>
                 {
-                    _source.AddMessage(Tuple.Create(_target1!.GetOneMessage(), _target2!.GetOneMessage()));
+                    _source.AddMessage(
+                        Tuple.Create(_target1!.GetOneMessage(), _target2!.GetOneMessage())
+                    );
                 },
                 exception =>
                 {
                     Volatile.Write(ref _sharedResources!._hasExceptions, true);
                     _source.AddException(exception);
                 },
-                dataflowBlockOptions);
+                dataflowBlockOptions
+            );
             targets[0] = _target1 = new JoinBlockTarget<T1>(_sharedResources);
             targets[1] = _target2 = new JoinBlockTarget<T2>(_sharedResources);
 
@@ -84,22 +94,38 @@ namespace System.Threading.Tasks.Dataflow
             Task.Factory.ContinueWhenAll(
                 new[] { _target1.CompletionTaskInternal, _target2.CompletionTaskInternal },
                 _ => _source.Complete(),
-                CancellationToken.None, Common.GetContinuationOptions(), TaskScheduler.Default);
+                CancellationToken.None,
+                Common.GetContinuationOptions(),
+                TaskScheduler.Default
+            );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith((completed, state) =>
-            {
-                var thisBlock = ((JoinBlock<T1, T2>)state!) as IDataflowBlock;
-                Debug.Assert(completed.IsFaulted, "The source must be faulted in order to trigger a target completion.");
-                thisBlock.Fault(completed.Exception!);
-            }, this, CancellationToken.None, Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            _source.Completion.ContinueWith(
+                (completed, state) =>
+                {
+                    var thisBlock = ((JoinBlock<T1, T2>)state!) as IDataflowBlock;
+                    Debug.Assert(
+                        completed.IsFaulted,
+                        "The source must be faulted in order to trigger a target completion."
+                    );
+                    thisBlock.Fault(completed.Exception!);
+                },
+                this,
+                CancellationToken.None,
+                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                TaskScheduler.Default
+            );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
-                dataflowBlockOptions.CancellationToken, _source.Completion, state => ((JoinBlock<T1, T2>)state!)._sharedResources.CompleteEachTarget(), this);
+                dataflowBlockOptions.CancellationToken,
+                _source.Completion,
+                state => ((JoinBlock<T1, T2>)state!)._sharedResources.CompleteEachTarget(),
+                this
+            );
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -108,25 +134,40 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
-        public IDisposable LinkTo(ITargetBlock<Tuple<T1, T2>> target, DataflowLinkOptions linkOptions)
+        public IDisposable LinkTo(
+            ITargetBlock<Tuple<T1, T2>> target,
+            DataflowLinkOptions linkOptions
+        )
         {
             return _source.LinkTo(target, linkOptions);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
-        public bool TryReceive(Predicate<Tuple<T1, T2>>? filter, [NotNullWhen(true)] out Tuple<T1, T2>? item)
+        public bool TryReceive(
+            Predicate<Tuple<T1, T2>>? filter,
+            [NotNullWhen(true)] out Tuple<T1, T2>? item
+        )
         {
             return _source.TryReceive(filter, out item);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
-        public bool TryReceiveAll([NotNullWhen(true)] out IList<Tuple<T1, T2>>? items) { return _source.TryReceiveAll(out items); }
+        public bool TryReceiveAll([NotNullWhen(true)] out IList<Tuple<T1, T2>>? items)
+        {
+            return _source.TryReceiveAll(out items);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="OutputCount"]/*' />
-        public int OutputCount { get { return _source.OutputCount; } }
+        public int OutputCount
+        {
+            get { return _source.OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        public Task Completion { get { return _source.Completion; } }
+        public Task Completion
+        {
+            get { return _source.Completion; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
         public void Complete()
@@ -134,62 +175,100 @@ namespace System.Threading.Tasks.Dataflow
             Debug.Assert(_target1 != null, "_target1 not initialized");
             Debug.Assert(_target2 != null, "_target2 not initialized");
 
-            _target1.CompleteCore(exception: null, dropPendingMessages: false, releaseReservedMessages: false);
-            _target2.CompleteCore(exception: null, dropPendingMessages: false, releaseReservedMessages: false);
+            _target1.CompleteCore(
+                exception: null,
+                dropPendingMessages: false,
+                releaseReservedMessages: false
+            );
+            _target2.CompleteCore(
+                exception: null,
+                dropPendingMessages: false,
+                releaseReservedMessages: false
+            );
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
         {
-            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
 
             Debug.Assert(_sharedResources != null, "_sharedResources not initialized");
-            Debug.Assert(_sharedResources._exceptionAction != null, "_sharedResources._exceptionAction not initialized");
+            Debug.Assert(
+                _sharedResources._exceptionAction != null,
+                "_sharedResources._exceptionAction not initialized"
+            );
 
             lock (_sharedResources.IncomingLock)
             {
-                if (!_sharedResources._decliningPermanently) _sharedResources._exceptionAction(exception);
+                if (!_sharedResources._decliningPermanently)
+                    _sharedResources._exceptionAction(exception);
             }
 
             Complete();
         }
 
         /// <summary>Gets a target that may be used to offer messages of the first type.</summary>
-        public ITargetBlock<T1> Target1 { get { return _target1; } }
+        public ITargetBlock<T1> Target1
+        {
+            get { return _target1; }
+        }
 
         /// <summary>Gets a target that may be used to offer messages of the second type.</summary>
-        public ITargetBlock<T2> Target2 { get { return _target2; } }
+        public ITargetBlock<T2> Target2
+        {
+            get { return _target2; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
-        Tuple<T1, T2>? ISourceBlock<Tuple<T1, T2>>.ConsumeMessage(DataflowMessageHeader messageHeader, ITargetBlock<Tuple<T1, T2>> target, out bool messageConsumed)
+        Tuple<T1, T2>? ISourceBlock<Tuple<T1, T2>>.ConsumeMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<Tuple<T1, T2>> target,
+            out bool messageConsumed
+        )
         {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
-        bool ISourceBlock<Tuple<T1, T2>>.ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<Tuple<T1, T2>> target)
+        bool ISourceBlock<Tuple<T1, T2>>.ReserveMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<Tuple<T1, T2>> target
+        )
         {
             return _source.ReserveMessage(messageHeader, target);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
-        void ISourceBlock<Tuple<T1, T2>>.ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<Tuple<T1, T2>> target)
+        void ISourceBlock<Tuple<T1, T2>>.ReleaseReservation(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<Tuple<T1, T2>> target
+        )
         {
             _source.ReleaseReservation(messageHeader, target);
         }
 
         /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
-        private int OutputCountForDebugger { get { return _source.GetDebuggingInformation().OutputCount; } }
+        private int OutputCountForDebugger
+        {
+            get { return _source.GetDebuggingInformation().OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
-        public override string ToString() { return Common.GetNameForDebugger(this, _source.DataflowBlockOptions); }
+        public override string ToString()
+        {
+            return Common.GetNameForDebugger(this, _source.DataflowBlockOptions);
+        }
 
         /// <summary>The data to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent =>
             $"{Common.GetNameForDebugger(this, _source.DataflowBlockOptions)}, OutputCount={OutputCountForDebugger}";
 
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
-        object IDebuggerDisplay.Content { get { return DebuggerDisplayContent; } }
+        object IDebuggerDisplay.Content
+        {
+            get { return DebuggerDisplayContent; }
+        }
 
         /// <summary>Provides a debugger type proxy for the JoinBlock.</summary>
         private sealed class DebugView
@@ -197,45 +276,89 @@ namespace System.Threading.Tasks.Dataflow
             /// <summary>The JoinBlock being viewed.</summary>
             private readonly JoinBlock<T1, T2> _joinBlock;
             /// <summary>The source half of the block being viewed.</summary>
-            private readonly SourceCore<Tuple<T1, T2>>.DebuggingInformation _sourceDebuggingInformation;
+            private readonly SourceCore<
+                Tuple<T1, T2>
+            >.DebuggingInformation _sourceDebuggingInformation;
 
             /// <summary>Initializes the debug view.</summary>
             /// <param name="joinBlock">The JoinBlock being viewed.</param>
             public DebugView(JoinBlock<T1, T2> joinBlock)
             {
-                Debug.Assert(joinBlock != null, "Need a block with which to construct the debug view.");
+                Debug.Assert(
+                    joinBlock != null,
+                    "Need a block with which to construct the debug view."
+                );
                 _joinBlock = joinBlock;
                 _sourceDebuggingInformation = joinBlock._source.GetDebuggingInformation();
             }
 
             /// <summary>Gets the messages waiting to be received.</summary>
-            public IEnumerable<Tuple<T1, T2>> OutputQueue { get { return _sourceDebuggingInformation.OutputQueue; } }
+            public IEnumerable<Tuple<T1, T2>> OutputQueue
+            {
+                get { return _sourceDebuggingInformation.OutputQueue; }
+            }
             /// <summary>Gets the number of joins created thus far.</summary>
-            public long JoinsCreated { get { return _joinBlock._sharedResources._joinsCreated; } }
+            public long JoinsCreated
+            {
+                get { return _joinBlock._sharedResources._joinsCreated; }
+            }
 
             /// <summary>Gets the task being used for input processing.</summary>
-            public Task? TaskForInputProcessing { get { return _joinBlock._sharedResources._taskForInputProcessing; } }
+            public Task? TaskForInputProcessing
+            {
+                get { return _joinBlock._sharedResources._taskForInputProcessing; }
+            }
             /// <summary>Gets the task being used for output processing.</summary>
-            public Task? TaskForOutputProcessing { get { return _sourceDebuggingInformation.TaskForOutputProcessing; } }
+            public Task? TaskForOutputProcessing
+            {
+                get { return _sourceDebuggingInformation.TaskForOutputProcessing; }
+            }
 
             /// <summary>Gets the GroupingDataflowBlockOptions used to configure this block.</summary>
-            public GroupingDataflowBlockOptions DataflowBlockOptions { get { return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions; } }
+            public GroupingDataflowBlockOptions DataflowBlockOptions
+            {
+                get
+                {
+                    return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions;
+                }
+            }
             /// <summary>Gets whether the block is declining further messages.</summary>
-            public bool IsDecliningPermanently { get { return _joinBlock._sharedResources._decliningPermanently; } }
+            public bool IsDecliningPermanently
+            {
+                get { return _joinBlock._sharedResources._decliningPermanently; }
+            }
             /// <summary>Gets whether the block is completed.</summary>
-            public bool IsCompleted { get { return _sourceDebuggingInformation.IsCompleted; } }
+            public bool IsCompleted
+            {
+                get { return _sourceDebuggingInformation.IsCompleted; }
+            }
             /// <summary>Gets the block's Id.</summary>
-            public int Id { get { return Common.GetBlockId(_joinBlock); } }
+            public int Id
+            {
+                get { return Common.GetBlockId(_joinBlock); }
+            }
 
             /// <summary>Gets the first target.</summary>
-            public ITargetBlock<T1> Target1 { get { return _joinBlock._target1; } }
+            public ITargetBlock<T1> Target1
+            {
+                get { return _joinBlock._target1; }
+            }
             /// <summary>Gets the second target.</summary>
-            public ITargetBlock<T2> Target2 { get { return _joinBlock._target2; } }
+            public ITargetBlock<T2> Target2
+            {
+                get { return _joinBlock._target2; }
+            }
 
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public TargetRegistry<Tuple<T1, T2>> LinkedTargets { get { return _sourceDebuggingInformation.LinkedTargets; } }
+            public TargetRegistry<Tuple<T1, T2>> LinkedTargets
+            {
+                get { return _sourceDebuggingInformation.LinkedTargets; }
+            }
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public ITargetBlock<Tuple<T1, T2>>? NextMessageReservedFor { get { return _sourceDebuggingInformation.NextMessageReservedFor; } }
+            public ITargetBlock<Tuple<T1, T2>>? NextMessageReservedFor
+            {
+                get { return _sourceDebuggingInformation.NextMessageReservedFor; }
+            }
         }
     }
 
@@ -248,7 +371,9 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T3">Specifies the type of data accepted by the block's third target.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(JoinBlock<,,>.DebugView))]
-    public sealed class JoinBlock<T1, T2, T3> : IReceivableSourceBlock<Tuple<T1, T2, T3>>, IDebuggerDisplay
+    public sealed class JoinBlock<T1, T2, T3>
+        : IReceivableSourceBlock<Tuple<T1, T2, T3>>,
+          IDebuggerDisplay
     {
         /// <summary>Resources shared by all targets for this join block.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
@@ -262,9 +387,7 @@ namespace System.Threading.Tasks.Dataflow
         private readonly JoinBlockTarget<T3> _target3;
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2,T3}"/>.</summary>
-        public JoinBlock() :
-            this(GroupingDataflowBlockOptions.Default)
-        { }
+        public JoinBlock() : this(GroupingDataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="JoinBlock{T1,T2,T3}"/>.</summary>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="JoinBlock{T1,T2}"/>.</param>
@@ -272,54 +395,92 @@ namespace System.Threading.Tasks.Dataflow
         public JoinBlock(GroupingDataflowBlockOptions dataflowBlockOptions)
         {
             // Validate arguments
-            if (dataflowBlockOptions == null) throw new ArgumentNullException(nameof(dataflowBlockOptions));
+            if (dataflowBlockOptions == null)
+                throw new ArgumentNullException(nameof(dataflowBlockOptions));
 
             // Ensure we have options that can't be changed by the caller
             dataflowBlockOptions = dataflowBlockOptions.DefaultOrClone();
 
             // Initialize bounding state if necessary
             Action<ISourceBlock<Tuple<T1, T2, T3>>, int>? onItemsRemoved = null;
-            if (dataflowBlockOptions.BoundedCapacity > 0) onItemsRemoved = (owningSource, count) => ((JoinBlock<T1, T2, T3>)owningSource)._sharedResources.OnItemsRemoved(count);
+            if (dataflowBlockOptions.BoundedCapacity > 0)
+                onItemsRemoved = (owningSource, count) =>
+                    ((JoinBlock<T1, T2, T3>)owningSource)._sharedResources.OnItemsRemoved(count);
 
             // Configure the source
-            _source = new SourceCore<Tuple<T1, T2, T3>>(this, dataflowBlockOptions,
-                owningSource => ((JoinBlock<T1, T2, T3>)owningSource)._sharedResources.CompleteEachTarget(),
-                onItemsRemoved);
+            _source = new SourceCore<Tuple<T1, T2, T3>>(
+                this,
+                dataflowBlockOptions,
+                owningSource =>
+                    ((JoinBlock<T1, T2, T3>)owningSource)._sharedResources.CompleteEachTarget(),
+                onItemsRemoved
+            );
 
             // Configure the targets
             var targets = new JoinBlockTargetBase[3];
-            _sharedResources = new JoinBlockTargetSharedResources(this, targets,
-                () => _source.AddMessage(Tuple.Create(_target1!.GetOneMessage(), _target2!.GetOneMessage(), _target3!.GetOneMessage())),
+            _sharedResources = new JoinBlockTargetSharedResources(
+                this,
+                targets,
+                () =>
+                    _source.AddMessage(
+                        Tuple.Create(
+                            _target1!.GetOneMessage(),
+                            _target2!.GetOneMessage(),
+                            _target3!.GetOneMessage()
+                        )
+                    ),
                 exception =>
                 {
                     Volatile.Write(ref _sharedResources!._hasExceptions, true);
                     _source.AddException(exception);
                 },
-                dataflowBlockOptions);
+                dataflowBlockOptions
+            );
             targets[0] = _target1 = new JoinBlockTarget<T1>(_sharedResources);
             targets[1] = _target2 = new JoinBlockTarget<T2>(_sharedResources);
             targets[2] = _target3 = new JoinBlockTarget<T3>(_sharedResources);
 
             // Let the source know when all targets have completed
             Task.Factory.ContinueWhenAll(
-                new[] { _target1.CompletionTaskInternal, _target2.CompletionTaskInternal, _target3.CompletionTaskInternal },
+                new[]
+                {
+                    _target1.CompletionTaskInternal,
+                    _target2.CompletionTaskInternal,
+                    _target3.CompletionTaskInternal
+                },
                 _ => _source.Complete(),
-                CancellationToken.None, Common.GetContinuationOptions(), TaskScheduler.Default);
+                CancellationToken.None,
+                Common.GetContinuationOptions(),
+                TaskScheduler.Default
+            );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith((completed, state) =>
-            {
-                var thisBlock = ((JoinBlock<T1, T2, T3>)state!) as IDataflowBlock;
-                Debug.Assert(completed.IsFaulted, "The source must be faulted in order to trigger a target completion.");
-                thisBlock.Fault(completed.Exception!);
-            }, this, CancellationToken.None, Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            _source.Completion.ContinueWith(
+                (completed, state) =>
+                {
+                    var thisBlock = ((JoinBlock<T1, T2, T3>)state!) as IDataflowBlock;
+                    Debug.Assert(
+                        completed.IsFaulted,
+                        "The source must be faulted in order to trigger a target completion."
+                    );
+                    thisBlock.Fault(completed.Exception!);
+                },
+                this,
+                CancellationToken.None,
+                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                TaskScheduler.Default
+            );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
-                dataflowBlockOptions.CancellationToken, _source.Completion, state => ((JoinBlock<T1, T2, T3>)state!)._sharedResources.CompleteEachTarget(), this);
+                dataflowBlockOptions.CancellationToken,
+                _source.Completion,
+                state => ((JoinBlock<T1, T2, T3>)state!)._sharedResources.CompleteEachTarget(),
+                this
+            );
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -328,25 +489,40 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
-        public IDisposable LinkTo(ITargetBlock<Tuple<T1, T2, T3>> target, DataflowLinkOptions linkOptions)
+        public IDisposable LinkTo(
+            ITargetBlock<Tuple<T1, T2, T3>> target,
+            DataflowLinkOptions linkOptions
+        )
         {
             return _source.LinkTo(target, linkOptions);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
-        public bool TryReceive(Predicate<Tuple<T1, T2, T3>>? filter, [NotNullWhen(true)] out Tuple<T1, T2, T3>? item)
+        public bool TryReceive(
+            Predicate<Tuple<T1, T2, T3>>? filter,
+            [NotNullWhen(true)] out Tuple<T1, T2, T3>? item
+        )
         {
             return _source.TryReceive(filter, out item);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
-        public bool TryReceiveAll([NotNullWhen(true)] out IList<Tuple<T1, T2, T3>>? items) { return _source.TryReceiveAll(out items); }
+        public bool TryReceiveAll([NotNullWhen(true)] out IList<Tuple<T1, T2, T3>>? items)
+        {
+            return _source.TryReceiveAll(out items);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="OutputCount"]/*' />
-        public int OutputCount { get { return _source.OutputCount; } }
+        public int OutputCount
+        {
+            get { return _source.OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        public Task Completion { get { return _source.Completion; } }
+        public Task Completion
+        {
+            get { return _source.Completion; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
         public void Complete()
@@ -355,66 +531,111 @@ namespace System.Threading.Tasks.Dataflow
             Debug.Assert(_target2 != null, "_target2 not initialized");
             Debug.Assert(_target3 != null, "_target3 not initialized");
 
-            _target1.CompleteCore(exception: null, dropPendingMessages: false, releaseReservedMessages: false);
-            _target2.CompleteCore(exception: null, dropPendingMessages: false, releaseReservedMessages: false);
-            _target3.CompleteCore(exception: null, dropPendingMessages: false, releaseReservedMessages: false);
+            _target1.CompleteCore(
+                exception: null,
+                dropPendingMessages: false,
+                releaseReservedMessages: false
+            );
+            _target2.CompleteCore(
+                exception: null,
+                dropPendingMessages: false,
+                releaseReservedMessages: false
+            );
+            _target3.CompleteCore(
+                exception: null,
+                dropPendingMessages: false,
+                releaseReservedMessages: false
+            );
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
         {
-            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
 
             Debug.Assert(_sharedResources != null, "_sharedResources not initialized");
-            Debug.Assert(_sharedResources._exceptionAction != null, "_sharedResources._exceptionAction not initialized");
+            Debug.Assert(
+                _sharedResources._exceptionAction != null,
+                "_sharedResources._exceptionAction not initialized"
+            );
 
             lock (_sharedResources.IncomingLock)
             {
-                if (!_sharedResources._decliningPermanently) _sharedResources._exceptionAction(exception);
+                if (!_sharedResources._decliningPermanently)
+                    _sharedResources._exceptionAction(exception);
             }
 
             Complete();
         }
 
         /// <summary>Gets a target that may be used to offer messages of the first type.</summary>
-        public ITargetBlock<T1> Target1 { get { return _target1; } }
+        public ITargetBlock<T1> Target1
+        {
+            get { return _target1; }
+        }
 
         /// <summary>Gets a target that may be used to offer messages of the second type.</summary>
-        public ITargetBlock<T2> Target2 { get { return _target2; } }
+        public ITargetBlock<T2> Target2
+        {
+            get { return _target2; }
+        }
 
         /// <summary>Gets a target that may be used to offer messages of the third type.</summary>
-        public ITargetBlock<T3> Target3 { get { return _target3; } }
+        public ITargetBlock<T3> Target3
+        {
+            get { return _target3; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
-        Tuple<T1, T2, T3>? ISourceBlock<Tuple<T1, T2, T3>>.ConsumeMessage(DataflowMessageHeader messageHeader, ITargetBlock<Tuple<T1, T2, T3>> target, out bool messageConsumed)
+        Tuple<T1, T2, T3>? ISourceBlock<Tuple<T1, T2, T3>>.ConsumeMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<Tuple<T1, T2, T3>> target,
+            out bool messageConsumed
+        )
         {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
-        bool ISourceBlock<Tuple<T1, T2, T3>>.ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<Tuple<T1, T2, T3>> target)
+        bool ISourceBlock<Tuple<T1, T2, T3>>.ReserveMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<Tuple<T1, T2, T3>> target
+        )
         {
             return _source.ReserveMessage(messageHeader, target);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
-        void ISourceBlock<Tuple<T1, T2, T3>>.ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<Tuple<T1, T2, T3>> target)
+        void ISourceBlock<Tuple<T1, T2, T3>>.ReleaseReservation(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<Tuple<T1, T2, T3>> target
+        )
         {
             _source.ReleaseReservation(messageHeader, target);
         }
 
         /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
-        private int OutputCountForDebugger { get { return _source.GetDebuggingInformation().OutputCount; } }
+        private int OutputCountForDebugger
+        {
+            get { return _source.GetDebuggingInformation().OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
-        public override string ToString() { return Common.GetNameForDebugger(this, _source.DataflowBlockOptions); }
+        public override string ToString()
+        {
+            return Common.GetNameForDebugger(this, _source.DataflowBlockOptions);
+        }
 
         /// <summary>The data to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent =>
             $"{Common.GetNameForDebugger(this, _source.DataflowBlockOptions)} OutputCount={OutputCountForDebugger}";
 
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
-        object IDebuggerDisplay.Content { get { return DebuggerDisplayContent; } }
+        object IDebuggerDisplay.Content
+        {
+            get { return DebuggerDisplayContent; }
+        }
 
         /// <summary>Provides a debugger type proxy for the Batch.</summary>
         private sealed class DebugView
@@ -422,47 +643,94 @@ namespace System.Threading.Tasks.Dataflow
             /// <summary>The JoinBlock being viewed.</summary>
             private readonly JoinBlock<T1, T2, T3> _joinBlock;
             /// <summary>The source half of the block being viewed.</summary>
-            private readonly SourceCore<Tuple<T1, T2, T3>>.DebuggingInformation _sourceDebuggingInformation;
+            private readonly SourceCore<
+                Tuple<T1, T2, T3>
+            >.DebuggingInformation _sourceDebuggingInformation;
 
             /// <summary>Initializes the debug view.</summary>
             /// <param name="joinBlock">The JoinBlock being viewed.</param>
             public DebugView(JoinBlock<T1, T2, T3> joinBlock)
             {
-                Debug.Assert(joinBlock != null, "Need a block with which to construct the debug view.");
+                Debug.Assert(
+                    joinBlock != null,
+                    "Need a block with which to construct the debug view."
+                );
                 _joinBlock = joinBlock;
                 _sourceDebuggingInformation = joinBlock._source.GetDebuggingInformation();
             }
 
             /// <summary>Gets the messages waiting to be received.</summary>
-            public IEnumerable<Tuple<T1, T2, T3>> OutputQueue { get { return _sourceDebuggingInformation.OutputQueue; } }
+            public IEnumerable<Tuple<T1, T2, T3>> OutputQueue
+            {
+                get { return _sourceDebuggingInformation.OutputQueue; }
+            }
             /// <summary>Gets the number of joins created thus far.</summary>
-            public long JoinsCreated { get { return _joinBlock._sharedResources._joinsCreated; } }
+            public long JoinsCreated
+            {
+                get { return _joinBlock._sharedResources._joinsCreated; }
+            }
 
             /// <summary>Gets the task being used for input processing.</summary>
-            public Task? TaskForInputProcessing { get { return _joinBlock._sharedResources._taskForInputProcessing; } }
+            public Task? TaskForInputProcessing
+            {
+                get { return _joinBlock._sharedResources._taskForInputProcessing; }
+            }
             /// <summary>Gets the task being used for output processing.</summary>
-            public Task? TaskForOutputProcessing { get { return _sourceDebuggingInformation.TaskForOutputProcessing; } }
+            public Task? TaskForOutputProcessing
+            {
+                get { return _sourceDebuggingInformation.TaskForOutputProcessing; }
+            }
 
             /// <summary>Gets the GroupingDataflowBlockOptions used to configure this block.</summary>
-            public GroupingDataflowBlockOptions DataflowBlockOptions { get { return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions; } }
+            public GroupingDataflowBlockOptions DataflowBlockOptions
+            {
+                get
+                {
+                    return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions;
+                }
+            }
             /// <summary>Gets whether the block is declining further messages.</summary>
-            public bool IsDecliningPermanently { get { return _joinBlock._sharedResources._decliningPermanently; } }
+            public bool IsDecliningPermanently
+            {
+                get { return _joinBlock._sharedResources._decliningPermanently; }
+            }
             /// <summary>Gets whether the block is completed.</summary>
-            public bool IsCompleted { get { return _sourceDebuggingInformation.IsCompleted; } }
+            public bool IsCompleted
+            {
+                get { return _sourceDebuggingInformation.IsCompleted; }
+            }
             /// <summary>Gets the block's Id.</summary>
-            public int Id { get { return Common.GetBlockId(_joinBlock); } }
+            public int Id
+            {
+                get { return Common.GetBlockId(_joinBlock); }
+            }
 
             /// <summary>Gets the first target.</summary>
-            public ITargetBlock<T1> Target1 { get { return _joinBlock._target1; } }
+            public ITargetBlock<T1> Target1
+            {
+                get { return _joinBlock._target1; }
+            }
             /// <summary>Gets the second target.</summary>
-            public ITargetBlock<T2> Target2 { get { return _joinBlock._target2; } }
+            public ITargetBlock<T2> Target2
+            {
+                get { return _joinBlock._target2; }
+            }
             /// <summary>Gets the third target.</summary>
-            public ITargetBlock<T3> Target3 { get { return _joinBlock._target3; } }
+            public ITargetBlock<T3> Target3
+            {
+                get { return _joinBlock._target3; }
+            }
 
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public TargetRegistry<Tuple<T1, T2, T3>> LinkedTargets { get { return _sourceDebuggingInformation.LinkedTargets; } }
+            public TargetRegistry<Tuple<T1, T2, T3>> LinkedTargets
+            {
+                get { return _sourceDebuggingInformation.LinkedTargets; }
+            }
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public ITargetBlock<Tuple<T1, T2, T3>>? NextMessageReservedFor { get { return _sourceDebuggingInformation.NextMessageReservedFor; } }
+            public ITargetBlock<Tuple<T1, T2, T3>>? NextMessageReservedFor
+            {
+                get { return _sourceDebuggingInformation.NextMessageReservedFor; }
+            }
         }
     }
 }
@@ -473,12 +741,16 @@ namespace System.Threading.Tasks.Dataflow.Internal
     /// <typeparam name="T">Specifies the type of data accepted by this target.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(JoinBlockTarget<>.DebugView))]
-    internal sealed class JoinBlockTarget<T> : JoinBlockTargetBase, ITargetBlock<T>, IDebuggerDisplay
+    internal sealed class JoinBlockTarget<T>
+        : JoinBlockTargetBase,
+          ITargetBlock<T>,
+          IDebuggerDisplay
     {
         /// <summary>The shared resources used by all targets associated with the same join instance.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
         /// <summary>A task representing the completion of the block.</summary>
-        private readonly TaskCompletionSource<VoidResult> _completionTask = new TaskCompletionSource<VoidResult>();
+        private readonly TaskCompletionSource<VoidResult> _completionTask =
+            new TaskCompletionSource<VoidResult>();
         /// <summary>Input messages for the next batch.</summary>
         private readonly Queue<T>? _messages;
         /// <summary>State used when in non-greedy mode.</summary>
@@ -490,7 +762,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private sealed class NonGreedyState
         {
             /// <summary>Collection of the last postponed message per source.</summary>
-            internal readonly QueuedMap<ISourceBlock<T>, DataflowMessageHeader> PostponedMessages = new QueuedMap<ISourceBlock<T>, DataflowMessageHeader>();
+            internal readonly QueuedMap<ISourceBlock<T>, DataflowMessageHeader> PostponedMessages =
+                new QueuedMap<ISourceBlock<T>, DataflowMessageHeader>();
             /// <summary>The currently reserved message.</summary>
             internal KeyValuePair<ISourceBlock<T>, DataflowMessageHeader> ReservedMessage;
             /// <summary>The currently consumed message.</summary>
@@ -501,13 +774,18 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="sharedResources">The shared resources used by all targets associated with this join.</param>
         internal JoinBlockTarget(JoinBlockTargetSharedResources sharedResources)
         {
-            Debug.Assert(sharedResources != null, "Targets need shared resources through which to communicate.");
+            Debug.Assert(
+                sharedResources != null,
+                "Targets need shared resources through which to communicate."
+            );
 
             // Store arguments and initialize configuration
             GroupingDataflowBlockOptions dbo = sharedResources._dataflowBlockOptions;
             _sharedResources = sharedResources;
-            if (!dbo.Greedy || dbo.BoundedCapacity > 0) _nonGreedy = new NonGreedyState();
-            if (dbo.Greedy) _messages = new Queue<T>();
+            if (!dbo.Greedy || dbo.BoundedCapacity > 0)
+                _nonGreedy = new NonGreedyState();
+            if (dbo.Greedy)
+                _messages = new Queue<T>();
         }
 
         /// <summary>Gets a message buffered by this target.</summary>
@@ -517,13 +795,22 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
             if (_sharedResources._dataflowBlockOptions.Greedy)
             {
-                Debug.Assert(_messages != null, "_messages must have been initialized in greedy mode");
-                Debug.Assert(_messages.Count >= 0, "A message must have been consumed by this point.");
+                Debug.Assert(
+                    _messages != null,
+                    "_messages must have been initialized in greedy mode"
+                );
+                Debug.Assert(
+                    _messages.Count >= 0,
+                    "A message must have been consumed by this point."
+                );
                 return _messages.Dequeue();
             }
             else
             {
-                Debug.Assert(_nonGreedy!.ConsumedMessage.Key, "A message must have been consumed by this point.");
+                Debug.Assert(
+                    _nonGreedy!.ConsumedMessage.Key,
+                    "A message must have been consumed by this point."
+                );
                 T value = _nonGreedy.ConsumedMessage.Value;
                 _nonGreedy.ConsumedMessage = new KeyValuePair<bool, T>(false, default(T)!);
                 return value;
@@ -548,7 +835,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
                 if (_sharedResources._dataflowBlockOptions.Greedy)
                 {
-                    Debug.Assert(_messages != null, "_messages must have been initialized in greedy mode");
+                    Debug.Assert(
+                        _messages != null,
+                        "_messages must have been initialized in greedy mode"
+                    );
                     return _messages.Count > 0;
                 }
                 else
@@ -574,7 +864,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
             get
             {
                 Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
-                return !_sharedResources._dataflowBlockOptions.Greedy ? _nonGreedy!.PostponedMessages.Count : _messages!.Count;
+                return !_sharedResources._dataflowBlockOptions.Greedy
+                  ? _nonGreedy!.PostponedMessages.Count
+                  : _messages!.Count;
             }
         }
 
@@ -583,7 +875,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             get
             {
-                Debug.Assert(_sharedResources._dataflowBlockOptions.Greedy, "This is only valid in greedy mode");
+                Debug.Assert(
+                    _sharedResources._dataflowBlockOptions.Greedy,
+                    "This is only valid in greedy mode"
+                );
                 Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
 
                 // Note: If there is a tie, we must return true
@@ -600,18 +895,25 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal override bool ReserveOneMessage()
         {
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: false);
-            Debug.Assert(!_sharedResources._dataflowBlockOptions.Greedy, "This is only used in non-greedy mode");
+            Debug.Assert(
+                !_sharedResources._dataflowBlockOptions.Greedy,
+                "This is only used in non-greedy mode"
+            );
 
             KeyValuePair<ISourceBlock<T>, DataflowMessageHeader> next;
 
             lock (_sharedResources.IncomingLock)
             {
                 // The queue must be empty between joins in non-greedy mode
-                Debug.Assert(!HasAtLeastOneMessageAvailable, "The queue must be empty between joins in non-greedy mode");
+                Debug.Assert(
+                    !HasAtLeastOneMessageAvailable,
+                    "The queue must be empty between joins in non-greedy mode"
+                );
 
                 // While we are holding the lock, try to pop a postponed message.
                 // If there are no postponed messages, we can't do anything.
-                if (!_nonGreedy!.PostponedMessages.TryPop(out next)) return false;
+                if (!_nonGreedy!.PostponedMessages.TryPop(out next))
+                    return false;
             }
 
             // We'll bail out of this loop either when we have reserved a message (true)
@@ -630,7 +932,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 lock (_sharedResources.IncomingLock)
                 {
                     // If there are no postponed messages, we can't do anything
-                    if (!_nonGreedy.PostponedMessages.TryPop(out next)) return false;
+                    if (!_nonGreedy.PostponedMessages.TryPop(out next))
+                        return false;
                 }
             }
         }
@@ -640,21 +943,38 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal override bool ConsumeReservedMessage()
         {
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: false);
-            Debug.Assert(!_sharedResources._dataflowBlockOptions.Greedy, "This is only used in non-greedy mode");
-            Debug.Assert(_nonGreedy!.ReservedMessage.Key != null, "This target must have a reserved message");
+            Debug.Assert(
+                !_sharedResources._dataflowBlockOptions.Greedy,
+                "This is only used in non-greedy mode"
+            );
+            Debug.Assert(
+                _nonGreedy!.ReservedMessage.Key != null,
+                "This target must have a reserved message"
+            );
 
             bool consumed;
-            T? consumedValue = _nonGreedy.ReservedMessage.Key.ConsumeMessage(_nonGreedy.ReservedMessage.Value, this, out consumed);
+            T? consumedValue = _nonGreedy.ReservedMessage.Key.ConsumeMessage(
+                _nonGreedy.ReservedMessage.Value,
+                this,
+                out consumed
+            );
 
             // Null out our reservation
-            _nonGreedy.ReservedMessage = default(KeyValuePair<ISourceBlock<T>, DataflowMessageHeader>);
+            _nonGreedy.ReservedMessage = default(KeyValuePair<
+                ISourceBlock<T>,
+                DataflowMessageHeader
+            >);
 
             // The protocol requires that a reserved message must be consumable,
             // but it is possible that the source may misbehave.
             // In that case complete the target and signal to the owning block to shut down gracefully.
             if (!consumed)
             {
-                _sharedResources._exceptionAction(new InvalidOperationException(SR.InvalidOperation_FailedToConsumeReservedMessage));
+                _sharedResources._exceptionAction(
+                    new InvalidOperationException(
+                        SR.InvalidOperation_FailedToConsumeReservedMessage
+                    )
+                );
 
                 // Complete this target, which will trigger completion of the owning join block.
                 CompleteOncePossible();
@@ -667,7 +987,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 lock (_sharedResources.IncomingLock)
                 {
                     // Now that we've consumed it, store its data.
-                    Debug.Assert(!_nonGreedy.ConsumedMessage.Key, "There must be no other consumed message");
+                    Debug.Assert(
+                        !_nonGreedy.ConsumedMessage.Key,
+                        "There must be no other consumed message"
+                    );
                     _nonGreedy.ConsumedMessage = new KeyValuePair<bool, T>(true, consumedValue!);
                     // We don't account bounding per target in non-greedy mode. We do it once per batch (in the loop).
 
@@ -682,8 +1005,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal override bool ConsumeOnePostponedMessage()
         {
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: false);
-            Debug.Assert(_sharedResources._dataflowBlockOptions.Greedy, "This is only used in greedy mode");
-            Debug.Assert(_sharedResources._boundingState != null, "This is only used in bounding mode");
+            Debug.Assert(
+                _sharedResources._dataflowBlockOptions.Greedy,
+                "This is only used in greedy mode"
+            );
+            Debug.Assert(
+                _sharedResources._boundingState != null,
+                "This is only used in bounding mode"
+            );
 
             // We'll bail out of this loop either when we have consumed a message (true)
             // or when we have exhausted the list of postponed messages (false)
@@ -697,9 +1026,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     // While we are holding the lock, check bounding capacity and try to pop a postponed message.
                     // If anything fails, we can't do anything.
                     hasTheHighestNumberOfMessagesAvailable = HasTheHighestNumberOfMessagesAvailable;
-                    bool boundingCapacityAvailable = _sharedResources._boundingState.CountIsLessThanBound || !hasTheHighestNumberOfMessagesAvailable;
-                    if (_decliningPermanently || _sharedResources._decliningPermanently ||
-                        !boundingCapacityAvailable || !_nonGreedy!.PostponedMessages.TryPop(out next))
+                    bool boundingCapacityAvailable =
+                        _sharedResources._boundingState.CountIsLessThanBound
+                        || !hasTheHighestNumberOfMessagesAvailable;
+                    if (
+                        _decliningPermanently
+                        || _sharedResources._decliningPermanently
+                        || !boundingCapacityAvailable
+                        || !_nonGreedy!.PostponedMessages.TryPop(out next)
+                    )
                         return false;
                 }
 
@@ -711,7 +1046,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     lock (_sharedResources.IncomingLock)
                     {
                         // The ranking in highest number of available messages cannot have changed because this task is causing OfferMessage to postpone
-                        if (hasTheHighestNumberOfMessagesAvailable) _sharedResources._boundingState.CurrentCount += 1; // track this new item against our bound
+                        if (hasTheHighestNumberOfMessagesAvailable)
+                            _sharedResources._boundingState.CurrentCount += 1; // track this new item against our bound
                         _messages!.Enqueue(consumedValue!);
 
                         CompleteIfLastJoinIsFeasible();
@@ -728,10 +1064,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private void CompleteIfLastJoinIsFeasible()
         {
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
-            int messageCount = _sharedResources._dataflowBlockOptions.Greedy ?
-                                    _messages!.Count :
-                                    _nonGreedy!.ConsumedMessage.Key ? 1 : 0;
-            if ((_sharedResources._joinsCreated + messageCount) >= _sharedResources._dataflowBlockOptions.ActualMaxNumberOfGroups)
+            int messageCount = _sharedResources._dataflowBlockOptions.Greedy
+                ? _messages!.Count
+                : _nonGreedy!.ConsumedMessage.Key
+                    ? 1
+                    : 0;
+            if (
+                (_sharedResources._joinsCreated + messageCount)
+                >= _sharedResources._dataflowBlockOptions.ActualMaxNumberOfGroups
+            )
             {
                 _decliningPermanently = true;
 
@@ -744,7 +1085,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         break;
                     }
                 }
-                if (allAreDecliningPermanently) _sharedResources._decliningPermanently = true;
+                if (allAreDecliningPermanently)
+                    _sharedResources._decliningPermanently = true;
             }
         }
 
@@ -758,8 +1100,17 @@ namespace System.Threading.Tasks.Dataflow.Internal
             if (_nonGreedy != null && _nonGreedy.ReservedMessage.Key != null)
             {
                 // Release the reservation and null out our reservation flag even if an exception occurs
-                try { _nonGreedy.ReservedMessage.Key.ReleaseReservation(_nonGreedy.ReservedMessage.Value, this); }
-                finally { ClearReservation(); }
+                try
+                {
+                    _nonGreedy.ReservedMessage.Key.ReleaseReservation(
+                        _nonGreedy.ReservedMessage.Value,
+                        this
+                    );
+                }
+                finally
+                {
+                    ClearReservation();
+                }
             }
         }
 
@@ -769,7 +1120,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: false);
             Debug.Assert(_nonGreedy != null, "Only valid in non-greedy mode.");
 
-            _nonGreedy.ReservedMessage = default(KeyValuePair<ISourceBlock<T>, DataflowMessageHeader>);
+            _nonGreedy.ReservedMessage = default(KeyValuePair<
+                ISourceBlock<T>,
+                DataflowMessageHeader
+            >);
         }
 
         /// <summary>Completes the target.</summary>
@@ -778,14 +1132,17 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: false);
 
             // This target must not have an outstanding reservation
-            Debug.Assert(_nonGreedy == null || _nonGreedy.ReservedMessage.Key == null,
-                "Must be in greedy mode, or in non-greedy mode but without any reserved messages.");
+            Debug.Assert(
+                _nonGreedy == null || _nonGreedy.ReservedMessage.Key == null,
+                "Must be in greedy mode, or in non-greedy mode but without any reserved messages."
+            );
 
             // Clean up any messages that may be stragglers left behind
             lock (_sharedResources.IncomingLock)
             {
                 _decliningPermanently = true;
-                if (_messages != null) _messages.Clear();
+                if (_messages != null)
+                    _messages.Clear();
             }
 
             // Release any postponed messages
@@ -793,7 +1150,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
             if (_nonGreedy != null)
             {
                 // Note: No locks should be held at this point
-                Common.ReleaseAllPostponedMessages(this, _nonGreedy.PostponedMessages, ref exceptions);
+                Common.ReleaseAllPostponedMessages(
+                    this,
+                    _nonGreedy.PostponedMessages,
+                    ref exceptions
+                );
             }
 
             if (exceptions != null)
@@ -813,11 +1174,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
-        DataflowMessageStatus ITargetBlock<T>.OfferMessage(DataflowMessageHeader messageHeader, T messageValue, ISourceBlock<T>? source, bool consumeToAccept)
+        DataflowMessageStatus ITargetBlock<T>.OfferMessage(
+            DataflowMessageHeader messageHeader,
+            T messageValue,
+            ISourceBlock<T>? source,
+            bool consumeToAccept
+        )
         {
             // Validate arguments
-            if (!messageHeader.IsValid) throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
-            if (source == null && consumeToAccept) throw new ArgumentException(SR.Argument_CantConsumeFromANullSource, nameof(consumeToAccept));
+            if (!messageHeader.IsValid)
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
+            if (source == null && consumeToAccept)
+                throw new ArgumentException(
+                    SR.Argument_CantConsumeFromANullSource,
+                    nameof(consumeToAccept)
+                );
 
             lock (_sharedResources.IncomingLock)
             {
@@ -834,21 +1208,38 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // (If there were any postponed messages, we would need to postpone so that ordering would be maintained.)
                 // (We should also postpone if we are currently processing, because there may be a race between consuming postponed messages and
                 // accepting new ones directly into the queue.)
-                if (_sharedResources._dataflowBlockOptions.Greedy &&
-                        (_sharedResources._boundingState == null
-                            ||
-                         ((_sharedResources._boundingState.CountIsLessThanBound || !HasTheHighestNumberOfMessagesAvailable) &&
-                          _nonGreedy!.PostponedMessages.Count == 0 && _sharedResources._taskForInputProcessing == null)))
+                if (
+                    _sharedResources._dataflowBlockOptions.Greedy
+                    && (
+                        _sharedResources._boundingState == null
+                        || (
+                            (
+                                _sharedResources._boundingState.CountIsLessThanBound
+                                || !HasTheHighestNumberOfMessagesAvailable
+                            )
+                            && _nonGreedy!.PostponedMessages.Count == 0
+                            && _sharedResources._taskForInputProcessing == null
+                        )
+                    )
+                )
                 {
                     if (consumeToAccept)
                     {
-                        Debug.Assert(source != null, "We must have thrown if source == null && consumeToAccept == true.");
+                        Debug.Assert(
+                            source != null,
+                            "We must have thrown if source == null && consumeToAccept == true."
+                        );
 
                         bool consumed;
                         messageValue = source.ConsumeMessage(messageHeader, this, out consumed)!;
-                        if (!consumed) return DataflowMessageStatus.NotAvailable;
+                        if (!consumed)
+                            return DataflowMessageStatus.NotAvailable;
                     }
-                    if (_sharedResources._boundingState != null && HasTheHighestNumberOfMessagesAvailable) _sharedResources._boundingState.CurrentCount += 1; // track this new item against our bound
+                    if (
+                        _sharedResources._boundingState != null
+                        && HasTheHighestNumberOfMessagesAvailable
+                    )
+                        _sharedResources._boundingState.CurrentCount += 1; // track this new item against our bound
                     _messages!.Enqueue(messageValue!);
                     CompleteIfLastJoinIsFeasible();
 
@@ -866,7 +1257,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Otherwise, we try to postpone if a source was provided
                 else if (source != null)
                 {
-                    Debug.Assert(_nonGreedy != null, "_nonGreedy must have been initialized during construction in non-greedy mode.");
+                    Debug.Assert(
+                        _nonGreedy != null,
+                        "_nonGreedy must have been initialized during construction in non-greedy mode."
+                    );
 
                     // Postpone the message now and kick off an async two-phase consumption.
                     _nonGreedy.PostponedMessages.Push(source, messageHeader);
@@ -882,14 +1276,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// In general, it is not safe to pass releaseReservedMessages:true, because releasing of reserved messages
         /// is done without taking a lock. We pass releaseReservedMessages:true only when an exception has been
         /// caught inside the message processing loop which is a single instance at any given moment.</summary>
-        internal override void CompleteCore(Exception? exception, bool dropPendingMessages, bool releaseReservedMessages)
+        internal override void CompleteCore(
+            Exception? exception,
+            bool dropPendingMessages,
+            bool releaseReservedMessages
+        )
         {
             bool greedy = _sharedResources._dataflowBlockOptions.Greedy;
             lock (_sharedResources.IncomingLock)
             {
                 // Faulting from outside is allowed until we start declining permanently.
                 // Faulting from inside is allowed at any time.
-                if (exception != null && ((!_decliningPermanently && !_sharedResources._decliningPermanently) || releaseReservedMessages))
+                if (
+                    exception != null
+                    && (
+                        (!_decliningPermanently && !_sharedResources._decliningPermanently)
+                        || releaseReservedMessages
+                    )
+                )
                 {
                     _sharedResources._exceptionAction(exception);
                 }
@@ -897,7 +1301,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Drop pending messages if requested
                 if (dropPendingMessages && greedy)
                 {
-                    Debug.Assert(_messages != null, "_messages must be initialized in greedy mode.");
+                    Debug.Assert(
+                        _messages != null,
+                        "_messages must be initialized in greedy mode."
+                    );
                     _messages.Clear();
                 }
             }
@@ -909,8 +1316,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Do this on all targets
                 foreach (JoinBlockTargetBase target in _sharedResources._targets)
                 {
-                    try { target.ReleaseReservedMessage(); }
-                    catch (Exception e) { _sharedResources._exceptionAction(e); }
+                    try
+                    {
+                        target.ReleaseReservedMessage();
+                    }
+                    catch (Exception e)
+                    {
+                        _sharedResources._exceptionAction(e);
+                    }
                 }
             }
 
@@ -926,18 +1339,35 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
         {
-            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
 
             CompleteCore(exception, dropPendingMessages: true, releaseReservedMessages: false);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        public Task Completion { get { throw new NotSupportedException(SR.NotSupported_MemberNotNeeded); } }
+        public Task Completion
+        {
+            get { throw new NotSupportedException(SR.NotSupported_MemberNotNeeded); }
+        }
         /// <summary>The completion task on Join targets is only hidden from the public. It still exists for internal purposes.</summary>
-        internal Task CompletionTaskInternal { get { return _completionTask.Task; } }
+        internal Task CompletionTaskInternal
+        {
+            get { return _completionTask.Task; }
+        }
 
         /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
-        private int InputCountForDebugger { get { return _messages != null ? _messages.Count : _nonGreedy!.ConsumedMessage.Key ? 1 : 0; } }
+        private int InputCountForDebugger
+        {
+            get
+            {
+                return _messages != null
+                  ? _messages.Count
+                  : _nonGreedy!.ConsumedMessage.Key
+                      ? 1
+                      : 0;
+            }
+        }
 
         /// <summary>The data to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent
@@ -949,7 +1379,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             }
         }
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
-        object IDebuggerDisplay.Content { get { return DebuggerDisplayContent; } }
+        object IDebuggerDisplay.Content
+        {
+            get { return DebuggerDisplayContent; }
+        }
 
         /// <summary>Provides a debugger type proxy for the Transform.</summary>
         private sealed class DebugView
@@ -961,14 +1394,27 @@ namespace System.Threading.Tasks.Dataflow.Internal
             /// <param name="joinBlockTarget">The join being viewed.</param>
             public DebugView(JoinBlockTarget<T> joinBlockTarget)
             {
-                Debug.Assert(joinBlockTarget != null, "Need a target with which to construct the debug view.");
+                Debug.Assert(
+                    joinBlockTarget != null,
+                    "Need a target with which to construct the debug view."
+                );
                 _joinBlockTarget = joinBlockTarget;
             }
 
             /// <summary>Gets the messages waiting to be processed.</summary>
-            public IEnumerable<T>? InputQueue { get { return _joinBlockTarget._messages; } }
+            public IEnumerable<T>? InputQueue
+            {
+                get { return _joinBlockTarget._messages; }
+            }
             /// <summary>Gets whether the block is declining further messages.</summary>
-            public bool IsDecliningPermanently { get { return _joinBlockTarget._decliningPermanently || _joinBlockTarget._sharedResources._decliningPermanently; } }
+            public bool IsDecliningPermanently
+            {
+                get
+                {
+                    return _joinBlockTarget._decliningPermanently
+                        || _joinBlockTarget._sharedResources._decliningPermanently;
+                }
+            }
         }
     }
 
@@ -1001,9 +1447,20 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal abstract void ClearReservation();
 
         /// <summary>Access point to the corresponding API method.</summary>
-        public void Complete() { CompleteCore(exception: null, dropPendingMessages: false, releaseReservedMessages: false); }
+        public void Complete()
+        {
+            CompleteCore(
+                exception: null,
+                dropPendingMessages: false,
+                releaseReservedMessages: false
+            );
+        }
         /// <summary>Internal implementation of the corresponding API method.</summary>
-        internal abstract void CompleteCore(Exception? exception, bool dropPendingMessages, bool releaseReservedMessages);
+        internal abstract void CompleteCore(
+            Exception? exception,
+            bool dropPendingMessages,
+            bool releaseReservedMessages
+        );
         /// <summary>Completes the target.</summary>
         internal abstract void CompleteOncePossible();
     }
@@ -1023,15 +1480,27 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="exceptionAction">The delegate to invoke when a target encounters an error.</param>
         /// <param name="dataflowBlockOptions">The options for the join.</param>
         internal JoinBlockTargetSharedResources(
-            IDataflowBlock ownerJoin, JoinBlockTargetBase[] targets,
-            Action joinFilledAction, Action<Exception> exceptionAction,
-            GroupingDataflowBlockOptions dataflowBlockOptions)
+            IDataflowBlock ownerJoin,
+            JoinBlockTargetBase[] targets,
+            Action joinFilledAction,
+            Action<Exception> exceptionAction,
+            GroupingDataflowBlockOptions dataflowBlockOptions
+        )
         {
             Debug.Assert(ownerJoin != null, "Resources must be associated with a join.");
             Debug.Assert(targets != null, "Resources must be shared between multiple targets.");
-            Debug.Assert(joinFilledAction != null, "An action to invoke when a join is created must be provided.");
-            Debug.Assert(exceptionAction != null, "An action to invoke for faults must be provided.");
-            Debug.Assert(dataflowBlockOptions != null, "Options must be provided to configure the resources.");
+            Debug.Assert(
+                joinFilledAction != null,
+                "An action to invoke when a join is created must be provided."
+            );
+            Debug.Assert(
+                exceptionAction != null,
+                "An action to invoke for faults must be provided."
+            );
+            Debug.Assert(
+                dataflowBlockOptions != null,
+                "Options must be provided to configure the resources."
+            );
 
             // Store arguments
             _ownerJoin = ownerJoin;
@@ -1041,7 +1510,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             _dataflowBlockOptions = dataflowBlockOptions;
 
             // Initialize bounding state if necessary
-            if (dataflowBlockOptions.BoundedCapacity > 0) _boundingState = new BoundingState(dataflowBlockOptions.BoundedCapacity);
+            if (dataflowBlockOptions.BoundedCapacity > 0)
+                _boundingState = new BoundingState(dataflowBlockOptions.BoundedCapacity);
         }
 
         // *** Accessible fields and properties
@@ -1070,14 +1540,21 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private bool _completionReserved;
 
         /// <summary>Gets the lock used to synchronize all incoming messages on all targets.</summary>
-        internal object IncomingLock { get { return _targets; } }
+        internal object IncomingLock
+        {
+            get { return _targets; }
+        }
 
         /// <summary>Invokes Complete on each target with dropping buffered messages.</summary>
         internal void CompleteEachTarget()
         {
             foreach (JoinBlockTargetBase target in _targets)
             {
-                target.CompleteCore(exception: null, dropPendingMessages: true, releaseReservedMessages: false);
+                target.CompleteCore(
+                    exception: null,
+                    dropPendingMessages: true,
+                    releaseReservedMessages: false
+                );
             }
         }
 
@@ -1089,7 +1566,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 Common.ContractAssertMonitorStatus(IncomingLock, held: true);
                 foreach (JoinBlockTargetBase target in _targets)
                 {
-                    if (!target.HasAtLeastOneMessageAvailable) return false;
+                    if (!target.HasAtLeastOneMessageAvailable)
+                        return false;
                 }
                 return true;
             }
@@ -1106,8 +1584,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 {
                     foreach (JoinBlockTargetBase target in _targets)
                     {
-                        if (!target.HasAtLeastOneMessageAvailable &&
-                            (_decliningPermanently || target.IsDecliningPermanently || !target.HasAtLeastOnePostponedMessage))
+                        if (
+                            !target.HasAtLeastOneMessageAvailable
+                            && (
+                                _decliningPermanently
+                                || target.IsDecliningPermanently
+                                || !target.HasAtLeastOnePostponedMessage
+                            )
+                        )
                             return false;
                     }
                     return true;
@@ -1129,24 +1613,38 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     bool joinWillNotAffectBoundingCount = false;
                     foreach (JoinBlockTargetBase target in _targets)
                     {
-                        bool targetCanConsumePostponedMessages = !_decliningPermanently && !target.IsDecliningPermanently && target.HasAtLeastOnePostponedMessage;
+                        bool targetCanConsumePostponedMessages =
+                            !_decliningPermanently
+                            && !target.IsDecliningPermanently
+                            && target.HasAtLeastOnePostponedMessage;
 
                         // Rule #1
-                        if (_dataflowBlockOptions.Greedy && targetCanConsumePostponedMessages && (boundingCapacityAvailable || !target.HasTheHighestNumberOfMessagesAvailable)) return true;
+                        if (
+                            _dataflowBlockOptions.Greedy
+                            && targetCanConsumePostponedMessages
+                            && (
+                                boundingCapacityAvailable
+                                || !target.HasTheHighestNumberOfMessagesAvailable
+                            )
+                        )
+                            return true;
 
                         // Rule #2a
                         bool targetHasMessagesAvailable = target.HasAtLeastOneMessageAvailable;
-                        joinIsPossible &= targetHasMessagesAvailable || targetCanConsumePostponedMessages;
+                        joinIsPossible &=
+                            targetHasMessagesAvailable || targetCanConsumePostponedMessages;
 
                         // Rule #2b
                         // If there is a target that has at least one queued message, bounding space availability
                         // is no longer an issue, because 1 item from the input side will be replaced with 1
                         // item on the output side.
-                        if (targetHasMessagesAvailable) joinWillNotAffectBoundingCount = true;
+                        if (targetHasMessagesAvailable)
+                            joinWillNotAffectBoundingCount = true;
                     }
 
                     // Rule #2
-                    return joinIsPossible && (joinWillNotAffectBoundingCount || boundingCapacityAvailable);
+                    return joinIsPossible
+                        && (joinWillNotAffectBoundingCount || boundingCapacityAvailable);
                 }
             }
         }
@@ -1160,7 +1658,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // If there are not enough postponed items, we have nothing to do.
             lock (IncomingLock)
             {
-                if (!TargetsHaveAtLeastOneMessageQueuedOrPostponed) return false;
+                if (!TargetsHaveAtLeastOneMessageQueuedOrPostponed)
+                    return false;
             } // Release the lock.  We must not hold it while calling Reserve/Consume/Release.
 
             // Try to reserve a postponed message on every target that doesn't already have messages available
@@ -1223,7 +1722,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             get
             {
                 Common.ContractAssertMonitorStatus(IncomingLock, held: true);
-                return _dataflowBlockOptions.CancellationToken.IsCancellationRequested || _hasExceptions;
+                return _dataflowBlockOptions.CancellationToken.IsCancellationRequested
+                    || _hasExceptions;
             }
         }
 
@@ -1236,9 +1736,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             get
             {
                 Common.ContractAssertMonitorStatus(IncomingLock, held: true);
-                return
-                    _taskForInputProcessing == null && // not currently processing asynchronously
-                    !CanceledOrFaulted && // not canceled or faulted
+                return _taskForInputProcessing == null
+                    && // not currently processing asynchronously
+                    !CanceledOrFaulted
+                    && // not canceled or faulted
                     TargetsHaveAtLeastOneMessageQueuedOrPostponed; // all targets have work queued or postponed
             }
         }
@@ -1266,19 +1767,31 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
             // Create task and store into _taskForInputProcessing prior to scheduling the task
             // so that _taskForInputProcessing will be visibly set in the task loop.
-            _taskForInputProcessing = new Task(thisSharedResources => ((JoinBlockTargetSharedResources)thisSharedResources!).ProcessMessagesLoopCore(), this,
-                                                Common.GetCreationOptionsForTask(isReplacementReplica));
+            _taskForInputProcessing = new Task(
+                thisSharedResources =>
+                    (
+                        (JoinBlockTargetSharedResources)thisSharedResources!
+                    ).ProcessMessagesLoopCore(),
+                this,
+                Common.GetCreationOptionsForTask(isReplacementReplica)
+            );
 
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
                 etwLog.TaskLaunchedForMessageHandling(
-                    _ownerJoin, _taskForInputProcessing, DataflowEtwProvider.TaskLaunchedReason.ProcessingInputMessages,
-                    _targets.Max(t => t.NumberOfMessagesAvailableOrPostponed));
+                    _ownerJoin,
+                    _taskForInputProcessing,
+                    DataflowEtwProvider.TaskLaunchedReason.ProcessingInputMessages,
+                    _targets.Max(t => t.NumberOfMessagesAvailableOrPostponed)
+                );
             }
 
             // Start the task handling scheduling exceptions
-            Exception? exception = Common.StartTaskSafe(_taskForInputProcessing, _dataflowBlockOptions.TaskScheduler);
+            Exception? exception = Common.StartTaskSafe(
+                _taskForInputProcessing,
+                _dataflowBlockOptions.TaskScheduler
+            );
             if (exception != null)
             {
                 // All of the following actions must be performed under the lock.
@@ -1302,7 +1815,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 // Check whether we're sure we'll never be able to fill another join.
                 // That could happen if we're not accepting more messages and not all targets have a message...
-                bool impossibleToCompleteAnotherJoin = _decliningPermanently && !AllTargetsHaveAtLeastOneMessage;
+                bool impossibleToCompleteAnotherJoin =
+                    _decliningPermanently && !AllTargetsHaveAtLeastOneMessage;
                 if (!impossibleToCompleteAnotherJoin)
                 {
                     //...or that could happen if an individual target isn't accepting messages and doesn't have any messages available
@@ -1319,7 +1833,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // We're done forever if there's no task currently processing and
                 // either it's impossible we'll have another join or we're canceled.
                 bool currentlyProcessing = _taskForInputProcessing != null;
-                bool shouldComplete = !currentlyProcessing && (impossibleToCompleteAnotherJoin || CanceledOrFaulted);
+                bool shouldComplete =
+                    !currentlyProcessing && (impossibleToCompleteAnotherJoin || CanceledOrFaulted);
 
                 if (shouldComplete)
                 {
@@ -1330,11 +1845,18 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     _decliningPermanently = true;
 
                     // Complete each target asynchronously so as not to invoke synchronous continuations under a lock
-                    Task.Factory.StartNew(state =>
-                    {
-                        var sharedResources = (JoinBlockTargetSharedResources)state!;
-                        foreach (JoinBlockTargetBase target in sharedResources._targets) target.CompleteOncePossible();
-                    }, this, CancellationToken.None, Common.GetCreationOptionsForTask(), TaskScheduler.Default);
+                    Task.Factory.StartNew(
+                        state =>
+                        {
+                            var sharedResources = (JoinBlockTargetSharedResources)state!;
+                            foreach (JoinBlockTargetBase target in sharedResources._targets)
+                                target.CompleteOncePossible();
+                        },
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
                 }
             }
         }
@@ -1342,7 +1864,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>Task body used to process messages.</summary>
         private void ProcessMessagesLoopCore()
         {
-            Debug.Assert(!_dataflowBlockOptions.Greedy || _boundingState != null, "This only makes sense in non-greedy or bounding mode");
+            Debug.Assert(
+                !_dataflowBlockOptions.Greedy || _boundingState != null,
+                "This only makes sense in non-greedy or bounding mode"
+            );
             Common.ContractAssertMonitorStatus(IncomingLock, held: false);
             try
             {
@@ -1354,9 +1879,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     // Retrieve postponed messages.
                     // In greedy bounded mode, consuming a message through a target is sufficient
                     // to consider we've made progress, i.e. to stay in the loop.
-                    madeProgress = !_dataflowBlockOptions.Greedy ?
-                                        RetrievePostponedItemsNonGreedy() :
-                                        RetrievePostponedItemsGreedyBounded();
+                    madeProgress = !_dataflowBlockOptions.Greedy
+                        ? RetrievePostponedItemsNonGreedy()
+                        : RetrievePostponedItemsGreedyBounded();
 
                     if (madeProgress)
                     {
@@ -1369,7 +1894,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                                 _joinsCreated++;
 
                                 // If we are in non-greedy mode, do this once per join
-                                if (!_dataflowBlockOptions.Greedy && _boundingState != null) _boundingState.CurrentCount += 1;
+                                if (!_dataflowBlockOptions.Greedy && _boundingState != null)
+                                    _boundingState.CurrentCount += 1;
                             }
                         }
                     }
@@ -1382,7 +1908,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // We can trigger completion of the JoinBlock by completing one target.
                 // It doesn't matter which one. So we always complete the first one.
                 Debug.Assert(_targets.Length > 0, "A join must have targets.");
-                _targets[0].CompleteCore(exception, dropPendingMessages: true, releaseReservedMessages: true);
+                _targets[0].CompleteCore(
+                    exception,
+                    dropPendingMessages: true,
+                    releaseReservedMessages: true
+                );
                 // The finally section will do the block completion.
             }
             finally
@@ -1419,8 +1949,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 lock (IncomingLock)
                 {
                     // Decrement the count, which mirrors the count in the source half
-                    Debug.Assert(_boundingState.CurrentCount - numItemsRemoved >= 0,
-                        "It should be impossible to have a negative number of items.");
+                    Debug.Assert(
+                        _boundingState.CurrentCount - numItemsRemoved >= 0,
+                        "It should be impossible to have a negative number of items."
+                    );
                     _boundingState.CurrentCount -= numItemsRemoved;
 
                     ProcessAsyncIfNecessary();

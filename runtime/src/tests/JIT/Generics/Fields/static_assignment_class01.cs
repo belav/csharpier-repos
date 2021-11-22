@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public class Gen<T>
 {
     public static T Fld1;
@@ -45,12 +44,10 @@ public class Test_static_assignment_class01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-
         int _int = 1;
         Eval(new Gen<int>().Assign(_int).Equals(_int));
 
@@ -77,5 +74,4 @@ public class Test_static_assignment_class01
             return 1;
         }
     }
-
 }

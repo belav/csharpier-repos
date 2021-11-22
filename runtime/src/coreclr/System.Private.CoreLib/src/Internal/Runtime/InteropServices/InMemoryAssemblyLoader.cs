@@ -15,7 +15,13 @@ namespace Internal.Runtime.InteropServices
 #if TARGET_WINDOWS
         private static bool IsSupported { get; } = InitializeIsSupported();
 
-        private static bool InitializeIsSupported() => AppContext.TryGetSwitch("System.Runtime.InteropServices.EnableCppCLIHostActivation", out bool isSupported) ? isSupported : true;
+        private static bool InitializeIsSupported() =>
+            AppContext.TryGetSwitch(
+                "System.Runtime.InteropServices.EnableCppCLIHostActivation",
+                out bool isSupported
+            )
+                ? isSupported
+                : true;
 #endif
 
         /// <summary>
@@ -27,7 +33,9 @@ namespace Internal.Runtime.InteropServices
         {
 #if TARGET_WINDOWS
             if (!IsSupported)
-                throw new NotSupportedException("This API is not enabled in trimmed scenarios. see https://aka.ms/dotnet-illink/nativehost for more details");
+                throw new NotSupportedException(
+                    "This API is not enabled in trimmed scenarios. see https://aka.ms/dotnet-illink/nativehost for more details"
+                );
 
             string? assemblyPathString = Marshal.PtrToStringUni(assemblyPath);
             if (assemblyPathString == null)

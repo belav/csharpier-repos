@@ -16,23 +16,49 @@ namespace System.IO.Pipes.Tests
         public static void CreateClient_CurrentUserOnly()
         {
             // Should not throw.
-            new NamedPipeClientStream(".", PipeStreamConformanceTests.GetUniquePipeName(), PipeDirection.InOut, PipeOptions.CurrentUserOnly).Dispose();
+            new NamedPipeClientStream(
+                ".",
+                PipeStreamConformanceTests.GetUniquePipeName(),
+                PipeDirection.InOut,
+                PipeOptions.CurrentUserOnly
+            ).Dispose();
         }
 
         [Fact]
         public static void CreateServer_CurrentUserOnly()
         {
             // Should not throw.
-            new NamedPipeServerStream(PipeStreamConformanceTests.GetUniquePipeName(), PipeDirection.InOut, 2, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly).Dispose();
+            new NamedPipeServerStream(
+                PipeStreamConformanceTests.GetUniquePipeName(),
+                PipeDirection.InOut,
+                2,
+                PipeTransmissionMode.Byte,
+                PipeOptions.CurrentUserOnly
+            ).Dispose();
         }
 
         [Fact]
         public static void CreateServer_ConnectClient()
         {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
-            using (var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
             {
-                using (var client = new NamedPipeClientStream(".", name, PipeDirection.InOut, PipeOptions.CurrentUserOnly))
+                using (
+                    var client = new NamedPipeClientStream(
+                        ".",
+                        name,
+                        PipeDirection.InOut,
+                        PipeOptions.CurrentUserOnly
+                    )
+                )
                 {
                     // Should not fail to connect since both, the server and client have the same owner.
                     client.Connect();
@@ -44,9 +70,24 @@ namespace System.IO.Pipes.Tests
         public static void CreateServer_ConnectClient_UsingUnixAbsolutePath()
         {
             string name = Path.Combine("/tmp", PipeStreamConformanceTests.GetUniquePipeName());
-            using (var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
             {
-                using (var client = new NamedPipeClientStream(".", name, PipeDirection.InOut, PipeOptions.CurrentUserOnly))
+                using (
+                    var client = new NamedPipeClientStream(
+                        ".",
+                        name,
+                        PipeDirection.InOut,
+                        PipeOptions.CurrentUserOnly
+                    )
+                )
                 {
                     client.Connect();
                 }
@@ -56,11 +97,29 @@ namespace System.IO.Pipes.Tests
         [Theory]
         [InlineData(PipeOptions.None, PipeOptions.CurrentUserOnly)]
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.None)]
-        public static void Connection_UnderSameUser_SingleSide_CurrentUserOnly_Works(PipeOptions serverPipeOptions, PipeOptions clientPipeOptions)
+        public static void Connection_UnderSameUser_SingleSide_CurrentUserOnly_Works(
+            PipeOptions serverPipeOptions,
+            PipeOptions clientPipeOptions
+        )
         {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
-            using (var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, serverPipeOptions))
-            using (var client = new NamedPipeClientStream(".", name, PipeDirection.InOut, clientPipeOptions))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    serverPipeOptions
+                )
+            )
+            using (
+                var client = new NamedPipeClientStream(
+                    ".",
+                    name,
+                    PipeDirection.InOut,
+                    clientPipeOptions
+                )
+            )
             {
                 Task[] tasks = new[]
                 {
@@ -78,13 +137,58 @@ namespace System.IO.Pipes.Tests
             string name1 = PipeStreamConformanceTests.GetUniquePipeName();
             string name2 = PipeStreamConformanceTests.GetUniquePipeName();
             string name3 = PipeStreamConformanceTests.GetUniquePipeName();
-            using (var server1 = new NamedPipeServerStream(name1, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
-            using (var server2 = new NamedPipeServerStream(name2, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
-            using (var server3 = new NamedPipeServerStream(name3, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
+            using (
+                var server1 = new NamedPipeServerStream(
+                    name1,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
+            using (
+                var server2 = new NamedPipeServerStream(
+                    name2,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
+            using (
+                var server3 = new NamedPipeServerStream(
+                    name3,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
             {
-                using (var client1 = new NamedPipeClientStream(".", name1, PipeDirection.InOut, PipeOptions.CurrentUserOnly))
-                using (var client2 = new NamedPipeClientStream(".", name2, PipeDirection.InOut, PipeOptions.CurrentUserOnly))
-                using (var client3 = new NamedPipeClientStream(".", name3, PipeDirection.InOut, PipeOptions.CurrentUserOnly))
+                using (
+                    var client1 = new NamedPipeClientStream(
+                        ".",
+                        name1,
+                        PipeDirection.InOut,
+                        PipeOptions.CurrentUserOnly
+                    )
+                )
+                using (
+                    var client2 = new NamedPipeClientStream(
+                        ".",
+                        name2,
+                        PipeDirection.InOut,
+                        PipeOptions.CurrentUserOnly
+                    )
+                )
+                using (
+                    var client3 = new NamedPipeClientStream(
+                        ".",
+                        name3,
+                        PipeDirection.InOut,
+                        PipeOptions.CurrentUserOnly
+                    )
+                )
                 {
                     client1.Connect();
                     client2.Connect();
@@ -99,18 +203,37 @@ namespace System.IO.Pipes.Tests
             List<Task> tasks = new List<Task>();
             for (int i = 0; i < 3; i++)
             {
-                tasks.Add(Task.Run(() =>
-                {
-                    var name = PipeStreamConformanceTests.GetUniquePipeName();
-                    using (var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
-                    {
-                        using (var client = new NamedPipeClientStream(".", name, PipeDirection.InOut, PipeOptions.CurrentUserOnly))
+                tasks.Add(
+                    Task.Run(
+                        () =>
                         {
-                            // Should not fail to connect since both, the server and client have the same owner.
-                            client.Connect();
+                            var name = PipeStreamConformanceTests.GetUniquePipeName();
+                            using (
+                                var server = new NamedPipeServerStream(
+                                    name,
+                                    PipeDirection.InOut,
+                                    1,
+                                    PipeTransmissionMode.Byte,
+                                    PipeOptions.CurrentUserOnly
+                                )
+                            )
+                            {
+                                using (
+                                    var client = new NamedPipeClientStream(
+                                        ".",
+                                        name,
+                                        PipeDirection.InOut,
+                                        PipeOptions.CurrentUserOnly
+                                    )
+                                )
+                                {
+                                    // Should not fail to connect since both, the server and client have the same owner.
+                                    client.Connect();
+                                }
+                            }
                         }
-                    }
-                }));
+                    )
+                );
             }
 
             Task.WaitAll(tasks.ToArray());
@@ -119,7 +242,9 @@ namespace System.IO.Pipes.Tests
         [Theory]
         [InlineData(PipeOptions.CurrentUserOnly)]
         [InlineData(PipeOptions.None)]
-        public static void CreateMultipleConcurrentServers_ConnectMultipleClients(PipeOptions extraPipeOptions)
+        public static void CreateMultipleConcurrentServers_ConnectMultipleClients(
+            PipeOptions extraPipeOptions
+        )
         {
             var pipeServers = new NamedPipeServerStream[5];
             var pipeClients = new NamedPipeClientStream[pipeServers.Length];
@@ -134,9 +259,15 @@ namespace System.IO.Pipes.Tests
                         PipeDirection.InOut,
                         NamedPipeServerStream.MaxAllowedServerInstances,
                         PipeTransmissionMode.Byte,
-                        PipeOptions.Asynchronous | PipeOptions.WriteThrough | extraPipeOptions);
+                        PipeOptions.Asynchronous | PipeOptions.WriteThrough | extraPipeOptions
+                    );
 
-                    pipeClients[i] = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous | extraPipeOptions);
+                    pipeClients[i] = new NamedPipeClientStream(
+                        ".",
+                        pipeName,
+                        PipeDirection.InOut,
+                        PipeOptions.Asynchronous | extraPipeOptions
+                    );
                     pipeClients[i].Connect(15_000);
                 }
             }

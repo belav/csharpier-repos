@@ -115,13 +115,15 @@ namespace System.Drawing.Printing
             {
                 if (default_pagesettings == null)
                 {
-                    default_pagesettings = new PageSettings(this,
+                    default_pagesettings = new PageSettings(
+                        this,
                         SupportsColor,
                         false,
                         // Real defaults are set by LoadPrinterSettings
                         new PaperSize("A4", 827, 1169),
                         new PaperSource(PaperSourceKind.FormSource, "Tray"),
-                        new PrinterResolution(PrinterResolutionKind.Medium, 200, 200));
+                        new PrinterResolution(PrinterResolutionKind.Medium, 200, 200)
+                    );
                 }
 
                 return default_pagesettings;
@@ -183,7 +185,9 @@ namespace System.Drawing.Printing
             {
                 // This not documented but behaves like MinimumPage
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.ValueLessThenZero, nameof(MaximumPage)));
+                    throw new ArgumentException(
+                        SR.Format(SR.ValueLessThenZero, nameof(MaximumPage))
+                    );
 
                 maximum_page = value;
             }
@@ -195,7 +199,9 @@ namespace System.Drawing.Printing
             set
             {
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.ValueLessThenZero, nameof(MinimumPage)));
+                    throw new ArgumentException(
+                        SR.Format(SR.ValueLessThenZero, nameof(MinimumPage))
+                    );
 
                 minimum_page = value;
             }
@@ -249,7 +255,9 @@ namespace System.Drawing.Printing
 
                 if (printer_resolutions == null)
                 {
-                    printer_resolutions = new PrinterSettings.PrinterResolutionCollection(Array.Empty<PrinterResolution>());
+                    printer_resolutions = new PrinterSettings.PrinterResolutionCollection(
+                        Array.Empty<PrinterResolution>()
+                    );
                     PrintingServices.LoadPrinterResolutions(printer_name, this);
                 }
 
@@ -262,9 +270,14 @@ namespace System.Drawing.Printing
             get { return print_range; }
             set
             {
-                if (value != PrintRange.AllPages && value != PrintRange.Selection &&
-                    value != PrintRange.SomePages)
-                    throw new InvalidEnumArgumentException(SR.Format(SR.ValueNotOneOfValues, nameof(PrintRange), nameof(PrintRange)));
+                if (
+                    value != PrintRange.AllPages
+                    && value != PrintRange.Selection
+                    && value != PrintRange.SomePages
+                )
+                    throw new InvalidEnumArgumentException(
+                        SR.Format(SR.ValueNotOneOfValues, nameof(PrintRange), nameof(PrintRange))
+                    );
 
                 print_range = value;
             }
@@ -325,7 +338,10 @@ namespace System.Drawing.Printing
             throw new NotImplementedException();
         }
 
-        public Graphics CreateMeasurementGraphics(PageSettings pageSettings, bool honorOriginAtMargins)
+        public Graphics CreateMeasurementGraphics(
+            PageSettings pageSettings,
+            bool honorOriginAtMargins
+        )
         {
             throw new NotImplementedException();
         }
@@ -365,7 +381,8 @@ namespace System.Drawing.Printing
             throw new NotImplementedException();
         }
 
-        public override string ToString() => $"Printer [PrinterSettings {printer_name} Copies={copies} Collate={collate} Duplex={can_duplex} FromPage={from_page} LandscapeAngle={landscape_angle} MaximumCopies={maximum_copies} OutputPort= ToPage={to_page}]";
+        public override string ToString() =>
+            $"Printer [PrinterSettings {printer_name} Copies={copies} Collate={collate} Duplex={can_duplex} FromPage={from_page} LandscapeAngle={landscape_angle} MaximumCopies={maximum_copies} OutputPort= ToPage={to_page}]";
 
         // Public subclasses
         #region Public Subclasses
@@ -381,13 +398,31 @@ namespace System.Drawing.Printing
                     _PaperSources.Add(ps);
             }
 
-            public int Count { get { return _PaperSources.Count; } }
-            int ICollection.Count { get { return _PaperSources.Count; } }
-            bool ICollection.IsSynchronized { get { return false; } }
-            object ICollection.SyncRoot { get { return this; } }
+            public int Count
+            {
+                get { return _PaperSources.Count; }
+            }
+            int ICollection.Count
+            {
+                get { return _PaperSources.Count; }
+            }
+            bool ICollection.IsSynchronized
+            {
+                get { return false; }
+            }
+            object ICollection.SyncRoot
+            {
+                get { return this; }
+            }
             [EditorBrowsable(EditorBrowsableState.Never)]
-            public int Add(PaperSource? paperSource) { return _PaperSources.Add(paperSource); }
-            public void CopyTo(PaperSource[] paperSources, int index) { throw new NotImplementedException(); }
+            public int Add(PaperSource? paperSource)
+            {
+                return _PaperSources.Add(paperSource);
+            }
+            public void CopyTo(PaperSource[] paperSources, int index)
+            {
+                throw new NotImplementedException();
+            }
 
             public virtual PaperSource? this[int index]
             {
@@ -413,7 +448,6 @@ namespace System.Drawing.Printing
             {
                 _PaperSources.Clear();
             }
-
         }
 
         public class PaperSizeCollection : ICollection, IEnumerable
@@ -426,13 +460,31 @@ namespace System.Drawing.Printing
                     _PaperSizes.Add(ps);
             }
 
-            public int Count { get { return _PaperSizes.Count; } }
-            int ICollection.Count { get { return _PaperSizes.Count; } }
-            bool ICollection.IsSynchronized { get { return false; } }
-            object ICollection.SyncRoot { get { return this; } }
+            public int Count
+            {
+                get { return _PaperSizes.Count; }
+            }
+            int ICollection.Count
+            {
+                get { return _PaperSizes.Count; }
+            }
+            bool ICollection.IsSynchronized
+            {
+                get { return false; }
+            }
+            object ICollection.SyncRoot
+            {
+                get { return this; }
+            }
             [EditorBrowsable(EditorBrowsableState.Never)]
-            public int Add(PaperSize? paperSize) { return _PaperSizes.Add(paperSize); }
-            public void CopyTo(PaperSize[] paperSizes, int index) { throw new NotImplementedException(); }
+            public int Add(PaperSize? paperSize)
+            {
+                return _PaperSizes.Add(paperSize);
+            }
+            public void CopyTo(PaperSize[] paperSizes, int index)
+            {
+                throw new NotImplementedException();
+            }
 
             public virtual PaperSize? this[int index]
             {
@@ -470,13 +522,31 @@ namespace System.Drawing.Printing
                     _PrinterResolutions.Add(pr);
             }
 
-            public int Count { get { return _PrinterResolutions.Count; } }
-            int ICollection.Count { get { return _PrinterResolutions.Count; } }
-            bool ICollection.IsSynchronized { get { return false; } }
-            object ICollection.SyncRoot { get { return this; } }
+            public int Count
+            {
+                get { return _PrinterResolutions.Count; }
+            }
+            int ICollection.Count
+            {
+                get { return _PrinterResolutions.Count; }
+            }
+            bool ICollection.IsSynchronized
+            {
+                get { return false; }
+            }
+            object ICollection.SyncRoot
+            {
+                get { return this; }
+            }
             [EditorBrowsable(EditorBrowsableState.Never)]
-            public int Add(PrinterResolution? printerResolution) { return _PrinterResolutions.Add(printerResolution); }
-            public void CopyTo(PrinterResolution[] printerResolutions, int index) { throw new NotImplementedException(); }
+            public int Add(PrinterResolution? printerResolution)
+            {
+                return _PrinterResolutions.Add(printerResolution);
+            }
+            public void CopyTo(PrinterResolution[] printerResolutions, int index)
+            {
+                throw new NotImplementedException();
+            }
 
             public virtual PrinterResolution? this[int index]
             {
@@ -514,18 +584,36 @@ namespace System.Drawing.Printing
                     _Strings.Add(s);
             }
 
-            public int Count { get { return _Strings.Count; } }
-            int ICollection.Count { get { return _Strings.Count; } }
-            bool ICollection.IsSynchronized { get { return false; } }
-            object ICollection.SyncRoot { get { return this; } }
+            public int Count
+            {
+                get { return _Strings.Count; }
+            }
+            int ICollection.Count
+            {
+                get { return _Strings.Count; }
+            }
+            bool ICollection.IsSynchronized
+            {
+                get { return false; }
+            }
+            object ICollection.SyncRoot
+            {
+                get { return this; }
+            }
 
             public virtual string this[int index]
             {
                 get { return (_Strings[index] as string)!; }
             }
             [EditorBrowsable(EditorBrowsableState.Never)]
-            public int Add(string value) { return _Strings.Add(value); }
-            public void CopyTo(string[] strings, int index) { throw new NotImplementedException(); }
+            public int Add(string value)
+            {
+                return _Strings.Add(value);
+            }
+            public void CopyTo(string[] strings, int index)
+            {
+                throw new NotImplementedException();
+            }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
@@ -542,7 +630,6 @@ namespace System.Drawing.Printing
                 _Strings.CopyTo(array, index);
             }
         }
-
         #endregion
         /*
                 void GetPrintDialogInfo (string printer_name, ref string port, ref string type, ref string status, ref string comment)

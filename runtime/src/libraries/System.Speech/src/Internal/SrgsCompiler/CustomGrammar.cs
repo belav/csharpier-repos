@@ -17,9 +17,7 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal CustomGrammar()
-        {
-        }
+        internal CustomGrammar() { }
 
         #endregion
 
@@ -166,7 +164,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
         // inline script
         internal StringBuilder _script = new();
-
         #endregion
     }
 }

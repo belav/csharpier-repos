@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public sealed class SectionDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var @class = documentNode.FindPrimaryClass();
         if (@class == null)
@@ -19,12 +22,11 @@ public sealed class SectionDirectivePass : IntermediateNodePassBase, IRazorDirec
 
         foreach (var directive in documentNode.FindDirectiveReferences(SectionDirective.Directive))
         {
-            var sectionName = ((DirectiveIntermediateNode)directive.Node).Tokens.FirstOrDefault()?.Content;
+            var sectionName = (
+                (DirectiveIntermediateNode)directive.Node
+            ).Tokens.FirstOrDefault()?.Content;
 
-            var section = new SectionIntermediateNode()
-            {
-                SectionName = sectionName,
-            };
+            var section = new SectionIntermediateNode() { SectionName = sectionName, };
 
             var i = 0;
             for (; i < directive.Node.Children.Count; i++)

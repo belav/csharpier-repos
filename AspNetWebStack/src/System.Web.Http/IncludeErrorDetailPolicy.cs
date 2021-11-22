@@ -13,17 +13,14 @@ namespace System.Web.Http
         /// defaults to LocalOnly in selfhost.
         /// </summary>
         Default = 0,
-
         /// <summary>
         /// Only include error details when responding to a local request.
         /// </summary>
         LocalOnly,
-
         /// <summary>
         /// Always include error details.
         /// </summary>
         Always,
-
         /// <summary>
         /// Never include error details.
         /// </summary>
