@@ -18,7 +18,9 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
     public ComponentDirectiveIntegrationTest()
     {
         // Include this assembly to use types defined in tests.
-        BaseCompilation = DefaultBaseCompilation.AddReferences(MetadataReference.CreateFromFile(GetType().Assembly.Location));
+        BaseCompilation = DefaultBaseCompilation.AddReferences(
+            MetadataReference.CreateFromFile(GetType().Assembly.Location)
+        );
     }
 
     internal override CSharpCompilation BaseCompilation { get; }
@@ -40,9 +42,7 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
     {
         // Arrange/Act
         var testComponentTypeName = FullTypeName<TestLayout>();
-        var component = CompileToComponent(
-            $"@layout {testComponentTypeName}\n" +
-            "Hello");
+        var component = CompileToComponent($"@layout {testComponentTypeName}\n" + "Hello");
 
         // Assert
         var layoutAttribute = component.GetType().GetCustomAttribute<LayoutAttribute>();
@@ -54,9 +54,7 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
     {
         // Arrange/Act
         var testInterfaceTypeName = FullTypeName<ITestInterface>();
-        var component = CompileToComponent(
-            $"@implements {testInterfaceTypeName}\n" +
-            "Hello");
+        var component = CompileToComponent($"@implements {testInterfaceTypeName}\n" + "Hello");
 
         // Assert
         Assert.IsAssignableFrom<ITestInterface>(component);
@@ -69,9 +67,10 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
         var testInterfaceTypeName = FullTypeName<ITestInterface>();
         var testInterfaceTypeName2 = FullTypeName<ITestInterface2>();
         var component = CompileToComponent(
-            $"@implements {testInterfaceTypeName}\n" +
-            $"@implements {testInterfaceTypeName2}\n" +
-            "Hello");
+            $"@implements {testInterfaceTypeName}\n"
+                + $"@implements {testInterfaceTypeName2}\n"
+                + "Hello"
+        );
 
         // Assert
         Assert.IsAssignableFrom<ITestInterface>(component);
@@ -84,8 +83,8 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
         // Arrange/Act
         var testBaseClassTypeName = FullTypeName<TestBaseClass>();
         var component = CompileToComponent(
-            $"@inherits {testBaseClassTypeName}" + Environment.NewLine +
-            "Hello");
+            $"@inherits {testBaseClassTypeName}" + Environment.NewLine + "Hello"
+        );
 
         // Assert
         Assert.IsAssignableFrom<TestBaseClass>(component);
@@ -96,15 +95,19 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
     {
         // Arrange/Act 1: Compilation
         var componentType = CompileToComponent(
-            $"@inject {FullTypeName<IMyService1>()} MyService1\n" +
-            $"@inject {FullTypeName<IMyService2>()} MyService2\n" +
-            $"Hello from @MyService1 and @MyService2").GetType();
+                $"@inject {FullTypeName<IMyService1>()} MyService1\n"
+                    + $"@inject {FullTypeName<IMyService2>()} MyService2\n"
+                    + $"Hello from @MyService1 and @MyService2"
+            )
+            .GetType();
 
         // Assert 1: Compiled type has correct properties
         var propertyFlags = BindingFlags.Instance | BindingFlags.NonPublic;
-        var injectableProperties = componentType.GetProperties(propertyFlags)
+        var injectableProperties = componentType
+            .GetProperties(propertyFlags)
             .Where(p => p.GetCustomAttribute<InjectAttribute>() != null);
-        Assert.Collection(injectableProperties.OrderBy(p => p.Name),
+        Assert.Collection(
+            injectableProperties.OrderBy(p => p.Name),
             property =>
             {
                 Assert.Equal("MyService1", property.Name);
@@ -118,7 +121,8 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
                 Assert.Equal(typeof(IMyService2), property.PropertyType);
                 Assert.False(property.GetMethod.IsPublic);
                 Assert.False(property.SetMethod.IsPublic);
-            });
+            }
+        );
     }
 
     public class TestLayout : IComponent

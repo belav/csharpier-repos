@@ -12,6 +12,7 @@ namespace System.Threading
     {
         internal static void UninterruptibleSleep0() => WaitSubsystem.UninterruptibleSleep0();
 
-        private static void SleepInternal(int millisecondsTimeout) => WaitSubsystem.Sleep(millisecondsTimeout);
+        private static void SleepInternal(int millisecondsTimeout) =>
+            WaitSubsystem.Sleep(millisecondsTimeout);
     }
 }

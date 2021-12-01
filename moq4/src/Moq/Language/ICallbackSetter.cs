@@ -8,14 +8,14 @@ using Moq.Language.Flow;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Callback</c> verb for property setter setups.
 	/// </summary>
 	/// <typeparam name="TProperty">Type of the property.</typeparam>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public interface ICallbackSetter<TProperty> : IFluentInterface
-	{ 
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface ICallbackSetter<TProperty> : IFluentInterface
+    {
+        /// <summary>
 		/// Specifies a callback to invoke when the property is set that receives the 
 		/// property value being set.
 		/// </summary>
@@ -27,6 +27,6 @@ namespace Moq.Language
 		///     .Callback((bool state) => Console.WriteLine(state));
 		/// </code>
 		/// </example>
-		ICallbackResult Callback(Action<TProperty> action);
-	}
+        ICallbackResult Callback(Action<TProperty> action);
+    }
 }

@@ -9,9 +9,7 @@ namespace My
 {
     public class CustomAssemblyLoadContext : AssemblyLoadContext
     {
-        public CustomAssemblyLoadContext() : base()
-        {
-        }
+        public CustomAssemblyLoadContext() : base() { }
     }
 }
 
@@ -96,16 +94,19 @@ public class Program
             Assert(AssembliesContainAssembly(alc, a));
             Assert(alc != AssemblyLoadContext.Default);
 
-
             Console.WriteLine(alc.Name);
             Assert(alc.Name == String.Format("Assembly.LoadFile({0})", path));
 
             Console.WriteLine(alc.GetType().ToString());
-            Assert(alc.GetType().ToString() == "System.Runtime.Loader.IndividualAssemblyLoadContext");
+            Assert(
+                alc.GetType().ToString() == "System.Runtime.Loader.IndividualAssemblyLoadContext"
+            );
 
             Console.WriteLine(alc.ToString());
             Assert(alc.ToString().Contains("\"" + String.Format("Assembly.LoadFile({0})", path)));
-            Assert(alc.ToString().Contains("\" System.Runtime.Loader.IndividualAssemblyLoadContext"));
+            Assert(
+                alc.ToString().Contains("\" System.Runtime.Loader.IndividualAssemblyLoadContext")
+            );
             Assert(alc.ToString().Contains(" #"));
         }
         catch (Exception e)
@@ -122,7 +123,7 @@ public class Program
             Console.WriteLine("AssemblyLoadByteArrayName()");
 
             String path = typeof(Program).Assembly.Location;
-            Byte [] byteArray = System.IO.File.ReadAllBytes(path);
+            Byte[] byteArray = System.IO.File.ReadAllBytes(path);
             Assembly a = Assembly.Load(byteArray);
             AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(a);
             Assert(PropertyAllContainsContext(alc));
@@ -132,11 +133,15 @@ public class Program
             Assert(alc.Name == "Assembly.Load(byte[], ...)");
 
             Console.WriteLine(alc.GetType().ToString());
-            Assert(alc.GetType().ToString() == "System.Runtime.Loader.IndividualAssemblyLoadContext");
+            Assert(
+                alc.GetType().ToString() == "System.Runtime.Loader.IndividualAssemblyLoadContext"
+            );
 
             Console.WriteLine(alc.ToString());
             Assert(alc.ToString().Contains("\"Assembly.Load(byte[], ...)\""));
-            Assert(alc.ToString().Contains("\" System.Runtime.Loader.IndividualAssemblyLoadContext"));
+            Assert(
+                alc.ToString().Contains("\" System.Runtime.Loader.IndividualAssemblyLoadContext")
+            );
             Assert(alc.ToString().Contains(" #"));
         }
         catch (Exception e)

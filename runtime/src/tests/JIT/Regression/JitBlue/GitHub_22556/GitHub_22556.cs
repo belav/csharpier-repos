@@ -42,4 +42,3 @@ public class Test_GitHub_22556
         return x;
     }
 }
-

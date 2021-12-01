@@ -31,7 +31,11 @@ namespace System.Threading
                 {
                     // For uniprocessor systems, start at the yield threshold since the pause instructions used for waiting
                     // prior to that threshold would not help other threads make progress
-                    for (int spinIndex = processorCount > 1 ? 0 : sleep0Threshold; spinIndex < spinCount; ++spinIndex)
+                    for (
+                        int spinIndex = processorCount > 1 ? 0 : sleep0Threshold;
+                        spinIndex < spinCount;
+                        ++spinIndex
+                    )
                     {
                         // The caller should check the condition in a fast path before calling this method, so wait first
                         Wait(spinIndex, sleep0Threshold, processorCount);
@@ -65,7 +69,10 @@ namespace System.Threading
             //     spin loop too early can cause excessive context switcing from the wait.
             //   - If there are multiple threads doing Yield and Sleep(0) (typically from the same spin loop due to contention),
             //     they may switch between one another, delaying work that can make progress.
-            if (processorCount > 1 && (spinIndex < sleep0Threshold || (spinIndex - sleep0Threshold) % 2 != 0))
+            if (
+                processorCount > 1
+                && (spinIndex < sleep0Threshold || (spinIndex - sleep0Threshold) % 2 != 0)
+            )
             {
                 // Cap the maximum spin count to a value such that many thousands of CPU cycles would not be wasted doing
                 // the equivalent of YieldProcessor(), as that that point SwitchToThread/Sleep(0) are more likely to be able to
@@ -83,7 +90,6 @@ namespace System.Threading
             // Thread.Sleep is interruptible. The current operation may not allow thread interrupt. Use the uninterruptible
             // version of Sleep(0). Not doing Thread.Yield, it does not seem to have any benefit over Sleep(0).
             Thread.UninterruptibleSleep0();
-
             // Don't want to Sleep(1) in this spin wait:
             //   - Don't want to spin for that long, since a proper wait will follow when the spin wait fails
             //   - Sleep(1) would put the thread into a wait state, and a proper wait will follow when the spin wait fails

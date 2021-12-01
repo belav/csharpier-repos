@@ -31,37 +31,44 @@ public class Startup
         app.UseClientCertBuffering();
 
         // Add an exception handler that prevents throwing due to large request body size
-        app.Use(async (context, next) =>
-        {
+        app.Use(
+            async (context, next) =>
+            {
                 // Limit the request body to 1kb
                 context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = 1024;
 
-            try
-            {
-                await next.Invoke(context);
+                try
+                {
+                    await next.Invoke(context);
+                }
+                catch (Microsoft.AspNetCore.Http.BadHttpRequestException ex)
+                    when (ex.StatusCode == StatusCodes.Status413RequestEntityTooLarge) { }
             }
-            catch (Microsoft.AspNetCore.Http.BadHttpRequestException ex) when (ex.StatusCode == StatusCodes.Status413RequestEntityTooLarge) { }
-        });
+        );
 
-        app.Run(async context =>
-        {
+        app.Run(
+            async context =>
+            {
                 // Drain the request body
                 // await context.Request.Body.CopyToAsync(Stream.Null);
 
                 var cert = await context.Connection.GetClientCertificateAsync();
 
-            var connectionFeature = context.Connection;
-            logger.LogDebug($"Peer: {connectionFeature.RemoteIpAddress?.ToString()}:{connectionFeature.RemotePort}"
-                + $"{Environment.NewLine}"
-                + $"Sock: {connectionFeature.LocalIpAddress?.ToString()}:{connectionFeature.LocalPort}"
-                + $"{Environment.NewLine}"
-                + cert);
+                var connectionFeature = context.Connection;
+                logger.LogDebug(
+                    $"Peer: {connectionFeature.RemoteIpAddress?.ToString()}:{connectionFeature.RemotePort}"
+                        + $"{Environment.NewLine}"
+                        + $"Sock: {connectionFeature.LocalIpAddress?.ToString()}:{connectionFeature.LocalPort}"
+                        + $"{Environment.NewLine}"
+                        + cert
+                );
 
-            var response = $"hello, world{Environment.NewLine}";
-            context.Response.ContentLength = response.Length;
-            context.Response.ContentType = "text/plain";
-            await context.Response.WriteAsync(response);
-        });
+                var response = $"hello, world{Environment.NewLine}";
+                context.Response.ContentLength = response.Length;
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync(response);
+            }
+        );
     }
 
     public static Task Main(string[] args)
@@ -72,109 +79,162 @@ public class Startup
         };
 
         var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel((context, options) =>
-                    {
-                        if (context.HostingEnvironment.IsDevelopment())
-                        {
-                            ShowConfig(context.Configuration);
-                        }
-
-                        var basePort = context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
-
-                        options.ConfigureHttpsDefaults(httpsOptions =>
-                        {
-                            httpsOptions.SslProtocols = SslProtocols.Tls12;
-                            httpsOptions.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
-                        });
-
-                        options.Listen(IPAddress.Loopback, basePort, listenOptions =>
-                        {
-                                // Uncomment the following to enable Nagle's algorithm for this endpoint.
-                                //listenOptions.NoDelay = false;
-
-                                listenOptions.UseConnectionLogging();
-                        });
-
-                        options.Listen(IPAddress.Loopback, basePort + 1, listenOptions =>
-                        {
-                            listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1;
-                            listenOptions.UseHttps();
-                            listenOptions.UseConnectionLogging();
-                        });
-
-                        options.ListenLocalhost(basePort + 2, listenOptions =>
-                        {
-                                // Use default dev cert
-                                listenOptions.UseHttps();
-                        });
-
-                        options.ListenAnyIP(basePort + 3);
-
-                        options.ListenAnyIP(basePort + 4, listenOptions =>
-                        {
-                            listenOptions.UseHttps(StoreName.My, "localhost", allowInvalid: true);
-                        });
-
-                        options.ListenAnyIP(basePort + 5, listenOptions =>
-                        {
-                            var localhostCert = CertificateLoader.LoadFromStoreCert("localhost", "My", StoreLocation.CurrentUser, allowInvalid: true);
-
-                            listenOptions.UseHttps((stream, clientHelloInfo, state, cancellationToken) =>
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            (context, options) =>
                             {
-                                    // Here you would check the name, select an appropriate cert, and provide a fallback or fail for null names.
-                                    var serverName = clientHelloInfo.ServerName;
-                                if (serverName != null && serverName != "localhost")
+                                if (context.HostingEnvironment.IsDevelopment())
                                 {
-                                    throw new AuthenticationException($"The endpoint is not configured for server name '{clientHelloInfo.ServerName}'.");
+                                    ShowConfig(context.Configuration);
                                 }
 
-                                return new ValueTask<SslServerAuthenticationOptions>(new SslServerAuthenticationOptions
-                                {
-                                    ServerCertificate = localhostCert
-                                });
-                            }, state: null);
-                        });
+                                var basePort =
+                                    context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
 
-                        options
-                            .Configure()
-                            .Endpoint(IPAddress.Loopback, basePort + 6)
-                            .LocalhostEndpoint(basePort + 7)
-                            .Load();
+                                options.ConfigureHttpsDefaults(
+                                    httpsOptions =>
+                                    {
+                                        httpsOptions.SslProtocols = SslProtocols.Tls12;
+                                        httpsOptions.ClientCertificateMode =
+                                            ClientCertificateMode.DelayCertificate;
+                                    }
+                                );
 
-                            // reloadOnChange: true is the default
-                            options
-                            .Configure(context.Configuration.GetSection("Kestrel"), reloadOnChange: true)
-                            .Endpoint("NamedEndpoint", opt =>
-                            {
+                                options.Listen(
+                                    IPAddress.Loopback,
+                                    basePort,
+                                    listenOptions =>
+                                    {
+                                        // Uncomment the following to enable Nagle's algorithm for this endpoint.
+                                        //listenOptions.NoDelay = false;
 
-                            })
-                            .Endpoint("NamedHttpsEndpoint", opt =>
-                            {
-                                opt.HttpsOptions.SslProtocols = SslProtocols.Tls12;
-                            });
+                                        listenOptions.UseConnectionLogging();
+                                    }
+                                );
 
-                        options.UseSystemd();
+                                options.Listen(
+                                    IPAddress.Loopback,
+                                    basePort + 1,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols =
+                                            Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1;
+                                        listenOptions.UseHttps();
+                                        listenOptions.UseConnectionLogging();
+                                    }
+                                );
 
-                            // The following section should be used to demo sockets
-                            //options.ListenUnixSocket("/tmp/kestrel-test.sock");
-                        })
-                    .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseStartup<Startup>();
-            })
-            .ConfigureLogging((_, factory) =>
-            {
-                factory.SetMinimumLevel(LogLevel.Debug);
-                factory.AddConsole();
-            })
-            .ConfigureAppConfiguration((hostingContext, config) =>
-            {
-                var env = hostingContext.HostingEnvironment;
-                config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-            });
+                                options.ListenLocalhost(
+                                    basePort + 2,
+                                    listenOptions =>
+                                    {
+                                        // Use default dev cert
+                                        listenOptions.UseHttps();
+                                    }
+                                );
+
+                                options.ListenAnyIP(basePort + 3);
+
+                                options.ListenAnyIP(
+                                    basePort + 4,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.UseHttps(
+                                            StoreName.My,
+                                            "localhost",
+                                            allowInvalid: true
+                                        );
+                                    }
+                                );
+
+                                options.ListenAnyIP(
+                                    basePort + 5,
+                                    listenOptions =>
+                                    {
+                                        var localhostCert = CertificateLoader.LoadFromStoreCert(
+                                            "localhost",
+                                            "My",
+                                            StoreLocation.CurrentUser,
+                                            allowInvalid: true
+                                        );
+
+                                        listenOptions.UseHttps(
+                                            (stream, clientHelloInfo, state, cancellationToken) =>
+                                            {
+                                                // Here you would check the name, select an appropriate cert, and provide a fallback or fail for null names.
+                                                var serverName = clientHelloInfo.ServerName;
+                                                if (serverName != null && serverName != "localhost")
+                                                {
+                                                    throw new AuthenticationException(
+                                                        $"The endpoint is not configured for server name '{clientHelloInfo.ServerName}'."
+                                                    );
+                                                }
+
+                                                return new ValueTask<SslServerAuthenticationOptions>(
+                                                    new SslServerAuthenticationOptions
+                                                    {
+                                                        ServerCertificate = localhostCert
+                                                    }
+                                                );
+                                            },
+                                            state: null
+                                        );
+                                    }
+                                );
+
+                                options
+                                    .Configure()
+                                    .Endpoint(IPAddress.Loopback, basePort + 6)
+                                    .LocalhostEndpoint(basePort + 7)
+                                    .Load();
+
+                                // reloadOnChange: true is the default
+                                options
+                                    .Configure(
+                                        context.Configuration.GetSection("Kestrel"),
+                                        reloadOnChange: true
+                                    )
+                                    .Endpoint("NamedEndpoint", opt => { })
+                                    .Endpoint(
+                                        "NamedHttpsEndpoint",
+                                        opt =>
+                                        {
+                                            opt.HttpsOptions.SslProtocols = SslProtocols.Tls12;
+                                        }
+                                    );
+
+                                options.UseSystemd();
+                                // The following section should be used to demo sockets
+                                //options.ListenUnixSocket("/tmp/kestrel-test.sock");
+                            }
+                        )
+                        .UseContentRoot(Directory.GetCurrentDirectory())
+                        .UseStartup<Startup>();
+                }
+            )
+            .ConfigureLogging(
+                (_, factory) =>
+                {
+                    factory.SetMinimumLevel(LogLevel.Debug);
+                    factory.AddConsole();
+                }
+            )
+            .ConfigureAppConfiguration(
+                (hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+                    config
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile(
+                            $"appsettings.{env.EnvironmentName}.json",
+                            optional: true,
+                            reloadOnChange: true
+                        );
+                }
+            );
 
         return hostBuilder.Build().RunAsync();
     }

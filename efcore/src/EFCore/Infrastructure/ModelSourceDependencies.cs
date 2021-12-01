@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public ModelSourceDependencies(
             IModelCustomizer modelCustomizer,
             IModelCacheKeyFactory modelCacheKeyFactory,
-            IMemoryCache memoryCache)
+            IMemoryCache memoryCache
+        )
         {
             ModelCustomizer = modelCustomizer;
             ModelCacheKeyFactory = modelCacheKeyFactory;

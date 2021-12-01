@@ -2,16 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //Regression test for Dev 10 bug 479239: GC hangs on x86 rather than throwing OOM
- 
+
 using System;
 using System.Runtime;
 
 class TestClass
 {
-	public static int Main()
-	{
+    public static int Main()
+    {
         ByteArrayList list = new ByteArrayList();
-
 
         try
         {
@@ -20,14 +19,12 @@ class TestClass
                 list.AddByteArray(84500);
             }
         }
-        catch (OutOfMemoryException)
-        {
-        }
+        catch (OutOfMemoryException) { }
 
         Console.Write("NodesAllocated: ");
         Console.WriteLine(list.NodeCount);
         return 100;
-	}
+    }
 
     class ByteArrayList
     {
@@ -39,12 +36,11 @@ class TestClass
 
             public Node(int Size)
             {
-              data = new byte[Size];
-              size = Size;
+                data = new byte[Size];
+                size = Size;
             }
-
         }
-       
+
         Node head;
 
         public int NodeCount = 0;
@@ -67,5 +63,4 @@ class TestClass
             NodeCount++;
         }
     }
-
-}			
+}

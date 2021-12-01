@@ -9,22 +9,51 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ImplementType
 {
     internal static class OmniSharpImplementTypeOptions
     {
-        public static OmniSharpImplementTypeInsertionBehavior GetInsertionBehavior(OptionSet options, string language)
-            => (OmniSharpImplementTypeInsertionBehavior)options.GetOption(ImplementTypeOptions.InsertionBehavior, language);
+        public static OmniSharpImplementTypeInsertionBehavior GetInsertionBehavior(
+            OptionSet options,
+            string language
+        ) =>
+            (OmniSharpImplementTypeInsertionBehavior)options.GetOption(
+                ImplementTypeOptions.InsertionBehavior,
+                language
+            );
 
-        public static OptionSet SetInsertionBehavior(OptionSet options, string language, OmniSharpImplementTypeInsertionBehavior value)
-            => options.WithChangedOption(ImplementTypeOptions.InsertionBehavior, language, (ImplementTypeInsertionBehavior)value);
+        public static OptionSet SetInsertionBehavior(
+            OptionSet options,
+            string language,
+            OmniSharpImplementTypeInsertionBehavior value
+        ) =>
+            options.WithChangedOption(
+                ImplementTypeOptions.InsertionBehavior,
+                language,
+                (ImplementTypeInsertionBehavior)value
+            );
 
-        public static OmniSharpImplementTypePropertyGenerationBehavior GetPropertyGenerationBehavior(OptionSet options, string language)
-            => (OmniSharpImplementTypePropertyGenerationBehavior)options.GetOption(ImplementTypeOptions.PropertyGenerationBehavior, language);
+        public static OmniSharpImplementTypePropertyGenerationBehavior GetPropertyGenerationBehavior(
+            OptionSet options,
+            string language
+        ) =>
+            (OmniSharpImplementTypePropertyGenerationBehavior)options.GetOption(
+                ImplementTypeOptions.PropertyGenerationBehavior,
+                language
+            );
 
-        public static OptionSet SetPropertyGenerationBehavior(OptionSet options, string language, OmniSharpImplementTypePropertyGenerationBehavior value)
-            => options.WithChangedOption(ImplementTypeOptions.PropertyGenerationBehavior, language, (ImplementTypePropertyGenerationBehavior)value);
+        public static OptionSet SetPropertyGenerationBehavior(
+            OptionSet options,
+            string language,
+            OmniSharpImplementTypePropertyGenerationBehavior value
+        ) =>
+            options.WithChangedOption(
+                ImplementTypeOptions.PropertyGenerationBehavior,
+                language,
+                (ImplementTypePropertyGenerationBehavior)value
+            );
     }
 
     internal enum OmniSharpImplementTypeInsertionBehavior
     {
-        WithOtherMembersOfTheSameKind = ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind,
+        WithOtherMembersOfTheSameKind =
+            ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind,
         AtTheEnd = ImplementTypeInsertionBehavior.AtTheEnd,
     }
 

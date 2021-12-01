@@ -102,10 +102,11 @@ public class UrlMatchingTree
             // to the list of matches, only if the remaining segments are optional. For example:
             // /{controller}/{action=Index}/{id} will be equivalent to /{controller}/{action}/{id}
             // for the purposes of route matching.
-            if (part.IsParameter &&
-                RemainingSegmentsAreOptional(entry.RouteTemplate.Segments, i))
+            if (part.IsParameter && RemainingSegmentsAreOptional(entry.RouteTemplate.Segments, i))
             {
-                current.Matches.Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
+                current.Matches.Add(
+                    new InboundMatch() { Entry = entry, TemplateMatcher = matcher }
+                );
             }
 
             if (part.IsParameter && part.InlineConstraints.Any() && !part.IsCatchAll)
@@ -134,7 +135,10 @@ public class UrlMatchingTree
             {
                 if (current.ConstrainedCatchAlls == null)
                 {
-                    current.ConstrainedCatchAlls = new UrlMatchingNode(length: i + 1) { IsCatchAll = true };
+                    current.ConstrainedCatchAlls = new UrlMatchingNode(length: i + 1)
+                    {
+                        IsCatchAll = true
+                    };
                 }
 
                 current = current.ConstrainedCatchAlls;
@@ -156,14 +160,25 @@ public class UrlMatchingTree
         }
 
         current.Matches.Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
-        current.Matches.Sort((x, y) =>
-        {
-            var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
-            return result == 0 ? string.Compare(x.Entry.RouteTemplate.TemplateText, y.Entry.RouteTemplate.TemplateText, StringComparison.Ordinal) : result;
-        });
+        current.Matches.Sort(
+            (x, y) =>
+            {
+                var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
+                return result == 0
+                  ? string.Compare(
+                        x.Entry.RouteTemplate.TemplateText,
+                        y.Entry.RouteTemplate.TemplateText,
+                        StringComparison.Ordinal
+                    )
+                  : result;
+            }
+        );
     }
 
-    private static bool RemainingSegmentsAreOptional(IList<TemplateSegment> segments, int currentParameterIndex)
+    private static bool RemainingSegmentsAreOptional(
+        IList<TemplateSegment> segments,
+        int currentParameterIndex
+    )
     {
         for (var i = currentParameterIndex; i < segments.Count; i++)
         {
@@ -180,9 +195,8 @@ public class UrlMatchingTree
                 return false;
             }
 
-            var isOptionlCatchAllOrHasDefaultValue = part.IsOptional ||
-                part.IsCatchAll ||
-                part.DefaultValue != null;
+            var isOptionlCatchAllOrHasDefaultValue =
+                part.IsOptional || part.IsCatchAll || part.DefaultValue != null;
 
             if (!isOptionlCatchAllOrHasDefaultValue)
             {

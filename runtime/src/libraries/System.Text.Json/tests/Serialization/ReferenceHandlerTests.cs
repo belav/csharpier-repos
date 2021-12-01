@@ -31,13 +31,19 @@ namespace System.Text.Json.Serialization.Tests
             angela.Manager = angela;
 
             // Compare parity with Newtonsoft.Json
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
             // Ensure round-trip
-            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(actual, s_serializerOptionsPreserve);
+            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(angelaCopy.Manager, angelaCopy);
         }
 
@@ -47,12 +53,18 @@ namespace System.Text.Json.Serialization.Tests
             Employee angela = new Employee();
             angela.Subordinates = new List<Employee> { angela };
 
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(actual, s_serializerOptionsPreserve);
+            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(angelaCopy.Subordinates[0], angelaCopy);
         }
 
@@ -62,30 +74,39 @@ namespace System.Text.Json.Serialization.Tests
             Employee angela = new Employee();
             angela.Contacts = new Dictionary<string, Employee> { { "555-5555", angela } };
 
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(actual, s_serializerOptionsPreserve);
+            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(angelaCopy.Contacts["555-5555"], angelaCopy);
         }
 
         [Fact]
         public static void ObjectPreserveDuplicateObjects()
         {
-            Employee angela = new Employee
-            {
-                Manager = new Employee { Name = "Bob" }
-            };
+            Employee angela = new Employee { Manager = new Employee { Name = "Bob" } };
             angela.Manager2 = angela.Manager;
 
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(actual, s_serializerOptionsPreserve);
+            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(angelaCopy.Manager, angelaCopy.Manager2);
         }
 
@@ -94,16 +115,28 @@ namespace System.Text.Json.Serialization.Tests
         {
             Employee angela = new Employee
             {
-                Contacts = new Dictionary<string, Employee> { { "444-4444", new Employee { Name = "Bob" } } }
+                Contacts = new Dictionary<string, Employee>
+                {
+                    {
+                        "444-4444",
+                        new Employee { Name = "Bob" }
+                    }
+                }
             };
             angela.Contacts2 = angela.Contacts;
 
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(actual, s_serializerOptionsPreserve);
+            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(angelaCopy.Contacts, angelaCopy.Contacts2);
         }
 
@@ -116,12 +149,18 @@ namespace System.Text.Json.Serialization.Tests
             };
             angela.Subordinates2 = angela.Subordinates;
 
-            string expected = JsonConvert.SerializeObject(angela, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                angela,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(angela, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(actual, s_serializerOptionsPreserve);
+            Employee angelaCopy = JsonSerializer.Deserialize<Employee>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(angelaCopy.Subordinates, angelaCopy.Subordinates2);
         }
 
@@ -130,7 +169,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var kvp = new KeyValuePair<string, string>("key", "value");
             string json = JsonSerializer.Serialize(kvp, s_deserializerOptionsPreserve);
-            KeyValuePair<string, string> kvp2 = JsonSerializer.Deserialize<KeyValuePair<string, string>>(json, s_deserializerOptionsPreserve);
+            KeyValuePair<string, string> kvp2 = JsonSerializer.Deserialize<
+                KeyValuePair<string, string>
+            >(json, s_deserializerOptionsPreserve);
 
             Assert.Equal(kvp.Key, kvp2.Key);
             Assert.Equal(kvp.Value, kvp2.Value);
@@ -147,28 +188,53 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Default
 
-            ClassWithZeroLengthProperty<int> rootValue = RoundTripZeroLengthProperty(new ClassWithZeroLengthProperty<int>(), 10);
+            ClassWithZeroLengthProperty<int> rootValue = RoundTripZeroLengthProperty(
+                new ClassWithZeroLengthProperty<int>(),
+                10
+            );
             Assert.Equal(10, rootValue.ZeroLengthProperty);
 
-            ClassWithZeroLengthProperty<Employee> rootObject = RoundTripZeroLengthProperty(new ClassWithZeroLengthProperty<Employee>(), new Employee { Name = "Test" });
+            ClassWithZeroLengthProperty<Employee> rootObject = RoundTripZeroLengthProperty(
+                new ClassWithZeroLengthProperty<Employee>(),
+                new Employee { Name = "Test" }
+            );
             Assert.Equal("Test", rootObject.ZeroLengthProperty.Name);
 
-            ClassWithZeroLengthProperty<List<int>> rootArray = RoundTripZeroLengthProperty(new ClassWithZeroLengthProperty<List<int>>(), new List<int>());
+            ClassWithZeroLengthProperty<List<int>> rootArray = RoundTripZeroLengthProperty(
+                new ClassWithZeroLengthProperty<List<int>>(),
+                new List<int>()
+            );
             Assert.Equal(0, rootArray.ZeroLengthProperty.Count);
 
             // Preserve
 
-            ClassWithZeroLengthProperty<int> rootValue2 = RoundTripZeroLengthProperty(new ClassWithZeroLengthProperty<int>(), 10, s_deserializerOptionsPreserve);
+            ClassWithZeroLengthProperty<int> rootValue2 = RoundTripZeroLengthProperty(
+                new ClassWithZeroLengthProperty<int>(),
+                10,
+                s_deserializerOptionsPreserve
+            );
             Assert.Equal(10, rootValue2.ZeroLengthProperty);
 
-            ClassWithZeroLengthProperty<Employee> rootObject2 = RoundTripZeroLengthProperty(new ClassWithZeroLengthProperty<Employee>(), new Employee { Name = "Test" }, s_deserializerOptionsPreserve);
+            ClassWithZeroLengthProperty<Employee> rootObject2 = RoundTripZeroLengthProperty(
+                new ClassWithZeroLengthProperty<Employee>(),
+                new Employee { Name = "Test" },
+                s_deserializerOptionsPreserve
+            );
             Assert.Equal("Test", rootObject2.ZeroLengthProperty.Name);
 
-            ClassWithZeroLengthProperty<List<int>> rootArray2 = RoundTripZeroLengthProperty(new ClassWithZeroLengthProperty<List<int>>(), new List<int>(), s_deserializerOptionsPreserve);
+            ClassWithZeroLengthProperty<List<int>> rootArray2 = RoundTripZeroLengthProperty(
+                new ClassWithZeroLengthProperty<List<int>>(),
+                new List<int>(),
+                s_deserializerOptionsPreserve
+            );
             Assert.Equal(0, rootArray2.ZeroLengthProperty.Count);
         }
 
-        private static ClassWithZeroLengthProperty<TValue> RoundTripZeroLengthProperty<TValue>(ClassWithZeroLengthProperty<TValue> obj, TValue value, JsonSerializerOptions opts = null)
+        private static ClassWithZeroLengthProperty<TValue> RoundTripZeroLengthProperty<TValue>(
+            ClassWithZeroLengthProperty<TValue> obj,
+            TValue value,
+            JsonSerializerOptions opts = null
+        )
         {
             obj.ZeroLengthProperty = value;
             string json = JsonSerializer.Serialize(obj, opts);
@@ -180,10 +246,7 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void UnicodePropertyNames()
         {
-            ClassWithUnicodeProperty obj = new ClassWithUnicodeProperty
-            {
-                A\u0467 = 1
-            };
+            ClassWithUnicodeProperty obj = new ClassWithUnicodeProperty { A\u0467 = 1 };
 
             // Verify the name is escaped after serialize.
             string json = JsonSerializer.Serialize(obj, s_serializerOptionsPreserve);
@@ -191,7 +254,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Contains(@"""A\u0467"":1", json);
 
             // Round-trip
-            ClassWithUnicodeProperty objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(json, s_serializerOptionsPreserve);
+            ClassWithUnicodeProperty objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(
+                json,
+                s_serializerOptionsPreserve
+            );
             Assert.Equal(1, objCopy.A\u0467);
 
             // With custom escaper
@@ -206,37 +272,60 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Contains("\"A\u0467\":1", json);
 
             // Round-trip
-            objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(json, optionsWithEncoder);
+            objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(
+                json,
+                optionsWithEncoder
+            );
             Assert.Equal(1, objCopy.A\u0467);
 
             // We want to go over StackallocThreshold=256 to force a pooled allocation, so this property is 400 chars and 401 bytes.
             obj = new ClassWithUnicodeProperty
             {
-                A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890 = 1
+                A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890 =
+                    1
             };
 
             // Verify the name is escaped after serialize.
             json = JsonSerializer.Serialize(obj, s_serializerOptionsPreserve);
             Assert.StartsWith("{\"$id\":\"1\",", json);
-            Assert.Contains(@"""A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"":1", json);
+            Assert.Contains(
+                @"""A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"":1",
+                json
+            );
 
             // Round-trip
-            objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(json, s_serializerOptionsPreserve);
-            Assert.Equal(1, objCopy.A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890);
+            objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(
+                json,
+                s_serializerOptionsPreserve
+            );
+            Assert.Equal(
+                1,
+                objCopy.A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+            );
 
             // With custom escaper
             json = JsonSerializer.Serialize(obj, optionsWithEncoder);
             Assert.StartsWith("{\"$id\":\"1\",", json);
-            Assert.Contains("\"A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\":1", json);
+            Assert.Contains(
+                "\"A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\":1",
+                json
+            );
 
             // Round-trip
-            objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(json, optionsWithEncoder);
-            Assert.Equal(1, objCopy.A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890);
+            objCopy = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(
+                json,
+                optionsWithEncoder
+            );
+            Assert.Equal(
+                1,
+                objCopy.A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+            );
         }
         #endregion Root Object
 
         #region Root Dictionary
-        private class DictionaryWithGenericCycle : Dictionary<string, DictionaryWithGenericCycle> { }
+        private class DictionaryWithGenericCycle
+            : Dictionary<string, DictionaryWithGenericCycle> { }
 
         [Fact]
         public static void DictionaryLoop()
@@ -245,12 +334,19 @@ namespace System.Text.Json.Serialization.Tests
             root["Self"] = root;
             root["Other"] = new DictionaryWithGenericCycle();
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            DictionaryWithGenericCycle rootCopy = JsonSerializer.Deserialize<DictionaryWithGenericCycle>(actual, s_serializerOptionsPreserve);
+            DictionaryWithGenericCycle rootCopy =
+                JsonSerializer.Deserialize<DictionaryWithGenericCycle>(
+                    actual,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy, rootCopy["Self"]);
         }
 
@@ -261,12 +357,19 @@ namespace System.Text.Json.Serialization.Tests
             root["Self1"] = root;
             root["Self2"] = root;
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            DictionaryWithGenericCycle rootCopy = JsonSerializer.Deserialize<DictionaryWithGenericCycle>(actual, s_serializerOptionsPreserve);
+            DictionaryWithGenericCycle rootCopy =
+                JsonSerializer.Deserialize<DictionaryWithGenericCycle>(
+                    actual,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy, rootCopy["Self1"]);
             Assert.Same(rootCopy, rootCopy["Self2"]);
         }
@@ -277,16 +380,22 @@ namespace System.Text.Json.Serialization.Tests
             Dictionary<string, Employee> root = new Dictionary<string, Employee>();
             root["Angela"] = new Employee() { Name = "Angela", Contacts = root };
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Dictionary<string, Employee> rootCopy = JsonSerializer.Deserialize<Dictionary<string, Employee>>(actual, s_serializerOptionsPreserve);
+            Dictionary<string, Employee> rootCopy = JsonSerializer.Deserialize<
+                Dictionary<string, Employee>
+            >(actual, s_serializerOptionsPreserve);
             Assert.Same(rootCopy, rootCopy["Angela"].Contacts);
         }
 
-        private class DictionaryWithGenericCycleWithinList : Dictionary<string, List<DictionaryWithGenericCycleWithinList>> { }
+        private class DictionaryWithGenericCycleWithinList
+            : Dictionary<string, List<DictionaryWithGenericCycleWithinList>> { }
 
         [Fact]
         public static void DictionaryArrayLoop()
@@ -294,12 +403,19 @@ namespace System.Text.Json.Serialization.Tests
             DictionaryWithGenericCycleWithinList root = new DictionaryWithGenericCycleWithinList();
             root["ArrayWithSelf"] = new List<DictionaryWithGenericCycleWithinList> { root };
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            DictionaryWithGenericCycleWithinList rootCopy = JsonSerializer.Deserialize<DictionaryWithGenericCycleWithinList>(actual, s_serializerOptionsPreserve);
+            DictionaryWithGenericCycleWithinList rootCopy =
+                JsonSerializer.Deserialize<DictionaryWithGenericCycleWithinList>(
+                    actual,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy, rootCopy["ArrayWithSelf"][0]);
         }
 
@@ -310,12 +426,19 @@ namespace System.Text.Json.Serialization.Tests
             root["Array1"] = new List<DictionaryWithGenericCycleWithinList> { root };
             root["Array2"] = root["Array1"];
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            DictionaryWithGenericCycleWithinList rootCopy = JsonSerializer.Deserialize<DictionaryWithGenericCycleWithinList>(actual, s_serializerOptionsPreserve);
+            DictionaryWithGenericCycleWithinList rootCopy =
+                JsonSerializer.Deserialize<DictionaryWithGenericCycleWithinList>(
+                    actual,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy, rootCopy["Array1"][0]);
             Assert.Same(rootCopy["Array2"], rootCopy["Array1"]);
         }
@@ -329,12 +452,17 @@ namespace System.Text.Json.Serialization.Tests
             };
             root["Employee2"] = root["Employee1"];
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            Dictionary<string, Employee> rootCopy = JsonSerializer.Deserialize<Dictionary<string, Employee>>(actual, s_serializerOptionsPreserve);
+            Dictionary<string, Employee> rootCopy = JsonSerializer.Deserialize<
+                Dictionary<string, Employee>
+            >(actual, s_serializerOptionsPreserve);
             Assert.Same(rootCopy["Employee1"], rootCopy["Employee2"]);
         }
 
@@ -343,28 +471,53 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Default
 
-            Dictionary<string, int> rootValue = RoundTripDictionaryZeroLengthKey(new Dictionary<string, int>(), 10);
+            Dictionary<string, int> rootValue = RoundTripDictionaryZeroLengthKey(
+                new Dictionary<string, int>(),
+                10
+            );
             Assert.Equal(10, rootValue[string.Empty]);
 
-            Dictionary<string, Employee> rootObject = RoundTripDictionaryZeroLengthKey(new Dictionary<string, Employee>(), new Employee { Name = "Test" });
+            Dictionary<string, Employee> rootObject = RoundTripDictionaryZeroLengthKey(
+                new Dictionary<string, Employee>(),
+                new Employee { Name = "Test" }
+            );
             Assert.Equal("Test", rootObject[string.Empty].Name);
 
-            Dictionary<string, List<int>> rootArray = RoundTripDictionaryZeroLengthKey(new Dictionary<string, List<int>>(), new List<int>());
+            Dictionary<string, List<int>> rootArray = RoundTripDictionaryZeroLengthKey(
+                new Dictionary<string, List<int>>(),
+                new List<int>()
+            );
             Assert.Equal(0, rootArray[string.Empty].Count);
 
             // Preserve
 
-            Dictionary<string, int> rootValue2 = RoundTripDictionaryZeroLengthKey(new Dictionary<string, int>(), 10, s_deserializerOptionsPreserve);
+            Dictionary<string, int> rootValue2 = RoundTripDictionaryZeroLengthKey(
+                new Dictionary<string, int>(),
+                10,
+                s_deserializerOptionsPreserve
+            );
             Assert.Equal(10, rootValue2[string.Empty]);
 
-            Dictionary<string, Employee> rootObject2 = RoundTripDictionaryZeroLengthKey(new Dictionary<string, Employee>(), new Employee { Name = "Test" }, s_deserializerOptionsPreserve);
+            Dictionary<string, Employee> rootObject2 = RoundTripDictionaryZeroLengthKey(
+                new Dictionary<string, Employee>(),
+                new Employee { Name = "Test" },
+                s_deserializerOptionsPreserve
+            );
             Assert.Equal("Test", rootObject2[string.Empty].Name);
 
-            Dictionary<string, List<int>> rootArray2 = RoundTripDictionaryZeroLengthKey(new Dictionary<string, List<int>>(), new List<int>(), s_deserializerOptionsPreserve);
+            Dictionary<string, List<int>> rootArray2 = RoundTripDictionaryZeroLengthKey(
+                new Dictionary<string, List<int>>(),
+                new List<int>(),
+                s_deserializerOptionsPreserve
+            );
             Assert.Equal(0, rootArray2[string.Empty].Count);
         }
 
-        private static Dictionary<string, TValue> RoundTripDictionaryZeroLengthKey<TValue>(Dictionary<string, TValue> dictionary, TValue value, JsonSerializerOptions opts = null)
+        private static Dictionary<string, TValue> RoundTripDictionaryZeroLengthKey<TValue>(
+            Dictionary<string, TValue> dictionary,
+            TValue value,
+            JsonSerializerOptions opts = null
+        )
         {
             dictionary[string.Empty] = value;
             string json = JsonSerializer.Serialize(dictionary, opts);
@@ -382,7 +535,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(@"{""$id"":""1"",""A\u0467"":1}", json);
 
             // Round-trip
-            Dictionary<string, int> objCopy = JsonSerializer.Deserialize<Dictionary<string, int>>(json, s_serializerOptionsPreserve);
+            Dictionary<string, int> objCopy = JsonSerializer.Deserialize<Dictionary<string, int>>(
+                json,
+                s_serializerOptionsPreserve
+            );
             Assert.Equal(1, objCopy["A\u0467"]);
 
             // Verify with encoder.
@@ -408,19 +564,26 @@ namespace System.Text.Json.Serialization.Tests
             json = JsonSerializer.Serialize(obj, s_serializerOptionsPreserve);
 
             // Duplicate the unicode character 'charsInProperty' times.
-            string longPropertyNameEscaped = new StringBuilder().Insert(0, @"\u0467", charsInProperty).ToString();
+            string longPropertyNameEscaped = new StringBuilder()
+                .Insert(0, @"\u0467", charsInProperty)
+                .ToString();
             string expectedJson = $"{{\"$id\":\"1\",\"{longPropertyNameEscaped}\":1}}";
             Assert.Equal(expectedJson, json);
 
             // Round-trip
-            objCopy = JsonSerializer.Deserialize<Dictionary<string, int>>(json, s_serializerOptionsPreserve);
+            objCopy = JsonSerializer.Deserialize<Dictionary<string, int>>(
+                json,
+                s_serializerOptionsPreserve
+            );
             Assert.Equal(1, objCopy[longPropertyName]);
 
             // Verify the name is escaped after serialize.
             json = JsonSerializer.Serialize(obj, optionsWithEncoder);
 
             // Duplicate the unicode character 'charsInProperty' times.
-            longPropertyNameEscaped = new StringBuilder().Insert(0, "\u0467", charsInProperty).ToString();
+            longPropertyNameEscaped = new StringBuilder()
+                .Insert(0, "\u0467", charsInProperty)
+                .ToString();
             expectedJson = $"{{\"$id\":\"1\",\"{longPropertyNameEscaped}\":1}}";
             Assert.Equal(expectedJson, json);
 
@@ -439,12 +602,18 @@ namespace System.Text.Json.Serialization.Tests
             ListWithGenericCycle root = new ListWithGenericCycle();
             root.Add(root);
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            ListWithGenericCycle rootCopy = JsonSerializer.Deserialize<ListWithGenericCycle>(actual, s_serializerOptionsPreserve);
+            ListWithGenericCycle rootCopy = JsonSerializer.Deserialize<ListWithGenericCycle>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(rootCopy, rootCopy[0]);
 
             // Duplicate reference
@@ -458,7 +627,10 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Equal(expected, actual);
 
-            rootCopy = JsonSerializer.Deserialize<ListWithGenericCycle>(actual, s_serializerOptionsPreserve);
+            rootCopy = JsonSerializer.Deserialize<ListWithGenericCycle>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(rootCopy, rootCopy[0]);
             Assert.Same(rootCopy, rootCopy[1]);
             Assert.Same(rootCopy, rootCopy[2]);
@@ -470,47 +642,66 @@ namespace System.Text.Json.Serialization.Tests
             List<Employee> root = new List<Employee>();
             root.Add(new Employee() { Name = "Angela", Subordinates = root });
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            List<Employee> rootCopy = JsonSerializer.Deserialize<List<Employee>>(actual, s_serializerOptionsPreserve);
+            List<Employee> rootCopy = JsonSerializer.Deserialize<List<Employee>>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(rootCopy, rootCopy[0].Subordinates);
         }
 
         [Fact]
         public static void ArrayPreserveDuplicateObjects()
         {
-            List<Employee> root = new List<Employee>
-            {
-                new Employee { Name = "Angela" }
-            };
+            List<Employee> root = new List<Employee> { new Employee { Name = "Angela" } };
             root.Add(root[0]);
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            List<Employee> rootCopy = JsonSerializer.Deserialize<List<Employee>>(actual, s_serializerOptionsPreserve);
+            List<Employee> rootCopy = JsonSerializer.Deserialize<List<Employee>>(
+                actual,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(rootCopy[0], rootCopy[1]);
         }
 
-        private class ListWithGenericCycleWithinDictionary : List<Dictionary<string, ListWithGenericCycleWithinDictionary>> { }
+        private class ListWithGenericCycleWithinDictionary
+            : List<Dictionary<string, ListWithGenericCycleWithinDictionary>> { }
 
         [Fact]
         public static void ArrayDictionaryLoop()
         {
             ListWithGenericCycleWithinDictionary root = new ListWithGenericCycleWithinDictionary();
-            root.Add(new Dictionary<string, ListWithGenericCycleWithinDictionary> { { "Root", root } });
+            root.Add(
+                new Dictionary<string, ListWithGenericCycleWithinDictionary> { { "Root", root } }
+            );
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            ListWithGenericCycleWithinDictionary rootCopy = JsonSerializer.Deserialize<ListWithGenericCycleWithinDictionary>(actual, s_serializerOptionsPreserve);
+            ListWithGenericCycleWithinDictionary rootCopy =
+                JsonSerializer.Deserialize<ListWithGenericCycleWithinDictionary>(
+                    actual,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy, rootCopy[0]["Root"]);
         }
 
@@ -523,12 +714,19 @@ namespace System.Text.Json.Serialization.Tests
             };
             root.Add(root[0]);
 
-            string expected = JsonConvert.SerializeObject(root, s_newtonsoftSerializerSettingsPreserve);
+            string expected = JsonConvert.SerializeObject(
+                root,
+                s_newtonsoftSerializerSettingsPreserve
+            );
             string actual = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
             Assert.Equal(expected, actual);
 
-            ListWithGenericCycleWithinDictionary rootCopy = JsonSerializer.Deserialize<ListWithGenericCycleWithinDictionary>(actual, s_serializerOptionsPreserve);
+            ListWithGenericCycleWithinDictionary rootCopy =
+                JsonSerializer.Deserialize<ListWithGenericCycleWithinDictionary>(
+                    actual,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy[0], rootCopy[1]);
         }
         #endregion
@@ -537,7 +735,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void CustomReferenceResolver()
         {
-            string json = @"[
+            string json =
+                @"[
   {
     ""$id"": ""0b64ffdf-d155-44ad-9689-58d9adb137f3"",
     ""Name"": ""John Smith"",
@@ -558,7 +757,9 @@ namespace System.Text.Json.Serialization.Tests
                 WriteIndented = true,
                 ReferenceHandler = new ReferenceHandler<GuidReferenceResolver>()
             };
-            ImmutableArray<PersonReference> people = JsonSerializer.Deserialize<ImmutableArray<PersonReference>>(json, options);
+            ImmutableArray<PersonReference> people = JsonSerializer.Deserialize<
+                ImmutableArray<PersonReference>
+            >(json, options);
 
             Assert.Equal(2, people.Length);
 
@@ -585,7 +786,7 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             string json =
-@"[
+                @"[
   {
     ""$id"": ""0b64ffdf-d155-44ad-9689-58d9adb137f3"",
     ""Name"": ""John Smith"",
@@ -601,10 +802,12 @@ namespace System.Text.Json.Serialization.Tests
     ""$ref"": ""ae3c399c-058d-431d-91b0-a36c266441b9""
   }
 ]";
-            ImmutableArray<PersonReference> firstListOfPeople = JsonSerializer.Deserialize<ImmutableArray<PersonReference>>(json, options);
+            ImmutableArray<PersonReference> firstListOfPeople = JsonSerializer.Deserialize<
+                ImmutableArray<PersonReference>
+            >(json, options);
 
             json =
-@"[
+                @"[
   {
     ""$ref"": ""0b64ffdf-d155-44ad-9689-58d9adb137f3""
   },
@@ -612,7 +815,9 @@ namespace System.Text.Json.Serialization.Tests
     ""$ref"": ""ae3c399c-058d-431d-91b0-a36c266441b9""
   }
 ]";
-            ImmutableArray<PersonReference> secondListOfPeople = JsonSerializer.Deserialize<ImmutableArray<PersonReference>>(json, options);
+            ImmutableArray<PersonReference> secondListOfPeople = JsonSerializer.Deserialize<
+                ImmutableArray<PersonReference>
+            >(json, options);
 
             Assert.Same(firstListOfPeople[0], secondListOfPeople[0]);
             Assert.Same(firstListOfPeople[1], secondListOfPeople[1]);
@@ -630,7 +835,10 @@ namespace System.Text.Json.Serialization.Tests
 
         public class GuidReferenceResolver : ReferenceResolver
         {
-            private readonly IDictionary<Guid, PersonReference> _people = new Dictionary<Guid, PersonReference>();
+            private readonly IDictionary<Guid, PersonReference> _people = new Dictionary<
+                Guid,
+                PersonReference
+            >();
 
             public override object ResolveReference(string referenceId)
             {
@@ -664,7 +872,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void TestBadReferenceResolver()
         {
-            var options = new JsonSerializerOptions { ReferenceHandler = new ReferenceHandler<BadReferenceResolver>() };
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = new ReferenceHandler<BadReferenceResolver>()
+            };
 
             PersonReference angela = new PersonReference { Name = "Angela" };
             PersonReference bob = new PersonReference { Name = "Bob" };
@@ -710,7 +921,10 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
-            ClassWithObjectProperty rootCopy = JsonSerializer.Deserialize<ClassWithObjectProperty>(json, s_serializerOptionsPreserve);
+            ClassWithObjectProperty rootCopy = JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                json,
+                s_serializerOptionsPreserve
+            );
             Assert.Same(rootCopy.Child, rootCopy.Sibling);
         }
 
@@ -727,7 +941,11 @@ namespace System.Text.Json.Serialization.Tests
             await JsonSerializer.SerializeAsync(stream, root, s_serializerOptionsPreserve);
             stream.Position = 0;
 
-            ClassWithObjectProperty rootCopy = await JsonSerializer.DeserializeAsync<ClassWithObjectProperty>(stream, s_serializerOptionsPreserve);
+            ClassWithObjectProperty rootCopy =
+                await JsonSerializer.DeserializeAsync<ClassWithObjectProperty>(
+                    stream,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy.Child, rootCopy.Sibling);
         }
 
@@ -743,7 +961,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Same(root.Child, root.ListOfObjects[0]);
 
             string json = JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
-            ClassWithListOfObjectProperty rootCopy = JsonSerializer.Deserialize<ClassWithListOfObjectProperty>(json, s_serializerOptionsPreserve);
+            ClassWithListOfObjectProperty rootCopy =
+                JsonSerializer.Deserialize<ClassWithListOfObjectProperty>(
+                    json,
+                    s_serializerOptionsPreserve
+                );
             Assert.Same(rootCopy.Child, rootCopy.ListOfObjects[0]);
         }
 
@@ -751,7 +973,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotPreserveReferenceWhenRefPropertyIsAbsent()
         {
             string json = @"{""Child"":{""$id"":""1""},""Sibling"":{""foo"":""1""}}";
-            ClassWithObjectProperty root = JsonSerializer.Deserialize<ClassWithObjectProperty>(json);
+            ClassWithObjectProperty root = JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                json
+            );
             Assert.IsType<JsonElement>(root.Sibling);
 
             // $ref with any escaped character shall not be treated as metadata, hence Sibling must be JsonElement.
@@ -767,16 +991,34 @@ namespace System.Text.Json.Serialization.Tests
 
             // A JSON object that contains a '$ref' metadata property must not contain any other properties.
             string testJson = baseJson + @"{""foo"":""value"",""$ref"":""1""}}";
-            JsonException ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithObjectProperty>(testJson, s_serializerOptionsPreserve));
+            JsonException ex = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                        testJson,
+                        s_serializerOptionsPreserve
+                    )
+            );
             Assert.Equal("$.Sibling", ex.Path);
 
             testJson = baseJson + @"{""$ref"":""1"",""bar"":""value""}}";
-            ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithObjectProperty>(testJson, s_serializerOptionsPreserve));
+            ex = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                        testJson,
+                        s_serializerOptionsPreserve
+                    )
+            );
             Assert.Equal("$.Sibling", ex.Path);
 
             // The '$id' and '$ref' metadata properties must be JSON strings.
             testJson = baseJson + @"{""$ref"":1}}";
-            ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithObjectProperty>(testJson, s_serializerOptionsPreserve));
+            ex = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                        testJson,
+                        s_serializerOptionsPreserve
+                    )
+            );
             Assert.Equal("$.Sibling", ex.Path);
         }
 

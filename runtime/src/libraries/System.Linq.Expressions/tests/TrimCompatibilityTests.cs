@@ -26,14 +26,23 @@ namespace System.Linq.Expressions.Tests
 
             foreach (Type type in types)
             {
-                foreach (MethodInfo method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                foreach (
+                    MethodInfo method in type.GetMethods(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    )
+                )
                 {
                     Type[] genericTypes = method.GetGenericArguments();
                     if (genericTypes != null)
                     {
                         foreach (Type genericType in genericTypes)
                         {
-                            Assert.Null(genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>());
+                            Assert.Null(
+                                genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>()
+                            );
                         }
                     }
                 }

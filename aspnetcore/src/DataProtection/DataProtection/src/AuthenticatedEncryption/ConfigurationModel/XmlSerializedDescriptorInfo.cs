@@ -32,11 +32,19 @@ public sealed class XmlSerializedDescriptorInfo
             throw new ArgumentNullException(nameof(deserializerType));
         }
 
-        if (!typeof(IAuthenticatedEncryptorDescriptorDeserializer).IsAssignableFrom(deserializerType))
+        if (
+            !typeof(IAuthenticatedEncryptorDescriptorDeserializer).IsAssignableFrom(
+                deserializerType
+            )
+        )
         {
             throw new ArgumentException(
-                Resources.FormatTypeExtensions_BadCast(deserializerType.FullName, typeof(IAuthenticatedEncryptorDescriptorDeserializer).FullName),
-                nameof(deserializerType));
+                Resources.FormatTypeExtensions_BadCast(
+                    deserializerType.FullName,
+                    typeof(IAuthenticatedEncryptorDescriptorDeserializer).FullName
+                ),
+                nameof(deserializerType)
+            );
         }
 
         SerializedDescriptorElement = serializedDescriptorElement;

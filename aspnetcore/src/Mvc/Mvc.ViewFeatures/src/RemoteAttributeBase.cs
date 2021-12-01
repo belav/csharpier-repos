@@ -17,7 +17,6 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Resources;
 
-
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
@@ -94,7 +93,8 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
             delimitedAdditionalFields = "," + delimitedAdditionalFields;
         }
 
-        var formattedString = FormatPropertyForClientValidation(property) + delimitedAdditionalFields;
+        var formattedString =
+            FormatPropertyForClientValidation(property) + delimitedAdditionalFields;
 
         return formattedString;
     }
@@ -167,11 +167,17 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
             MergeAttribute(context.Attributes, "data-val-remote-type", HttpMethod);
         }
 
-        var additionalFields = FormatAdditionalFieldsForClientValidation(context.ModelMetadata.PropertyName!);
+        var additionalFields = FormatAdditionalFieldsForClientValidation(
+            context.ModelMetadata.PropertyName!
+        );
         MergeAttribute(context.Attributes, "data-val-remote-additionalfields", additionalFields);
     }
 
-    private static void MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+    private static void MergeAttribute(
+        IDictionary<string, string> attributes,
+        string key,
+        string value
+    )
     {
         if (!attributes.ContainsKey(key))
         {
@@ -179,8 +185,9 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
         }
     }
 
-    private static IEnumerable<string> SplitAndTrimPropertyNames(string? original)
-        => original?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+    private static IEnumerable<string> SplitAndTrimPropertyNames(string? original) =>
+        original?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+        ?? Array.Empty<string>();
 
     private void CheckForLocalizer(ClientModelValidationContext context)
     {
@@ -189,7 +196,9 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
             _checkedForLocalizer = true;
 
             var services = context.ActionContext.HttpContext.RequestServices;
-            var options = services.GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+            var options = services.GetRequiredService<
+                IOptions<MvcDataAnnotationsLocalizationOptions>
+            >();
             var factory = services.GetService<IStringLocalizerFactory>();
 
             var provider = options.Value.DataAnnotationLocalizerProvider;
@@ -197,17 +206,20 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
             {
                 _stringLocalizer = provider(
                     context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                    factory);
+                    factory
+                );
             }
         }
     }
 
     private string GetErrorMessage(string displayName)
     {
-        if (_stringLocalizer != null &&
-            !string.IsNullOrEmpty(ErrorMessage) &&
-            string.IsNullOrEmpty(ErrorMessageResourceName) &&
-            ErrorMessageResourceType == null)
+        if (
+            _stringLocalizer != null
+            && !string.IsNullOrEmpty(ErrorMessage)
+            && string.IsNullOrEmpty(ErrorMessageResourceName)
+            && ErrorMessageResourceType == null
+        )
         {
             return _stringLocalizer[ErrorMessage, displayName];
         }
@@ -215,4 +227,3 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
         return FormatErrorMessage(displayName);
     }
 }
-

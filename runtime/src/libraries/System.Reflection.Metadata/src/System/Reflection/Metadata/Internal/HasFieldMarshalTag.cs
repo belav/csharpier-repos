@@ -12,15 +12,16 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint Field = 0x00000000;
         internal const uint Param = 0x00000001;
         internal const uint TagMask = 0x00000001;
-        internal const TableMask TablesReferenced =
-          TableMask.Field
-          | TableMask.Param;
-        internal const uint TagToTokenTypeByteVector = TokenTypeIds.FieldDef >> 24 | TokenTypeIds.ParamDef >> 16;
+        internal const TableMask TablesReferenced = TableMask.Field | TableMask.Param;
+        internal const uint TagToTokenTypeByteVector =
+            TokenTypeIds.FieldDef >> 24 | TokenTypeIds.ParamDef >> 16;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static EntityHandle ConvertToHandle(uint hasFieldMarshal)
         {
-            uint tokenType = (TagToTokenTypeByteVector >> ((int)(hasFieldMarshal & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;
+            uint tokenType =
+                (TagToTokenTypeByteVector >> ((int)(hasFieldMarshal & TagMask) << 3))
+                << TokenTypeIds.RowIdBitCount;
             uint rowId = (hasFieldMarshal >> NumberOfBits);
 
             if ((rowId & ~TokenTypeIds.RIDMask) != 0)

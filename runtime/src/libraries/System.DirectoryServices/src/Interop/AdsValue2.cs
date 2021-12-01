@@ -31,7 +31,8 @@ namespace System.DirectoryServices.Interop
     internal struct AdsValue
     {
         [FieldOffset(0)]
-        public int /*AdsType*/ dwType;
+        public int /*AdsType*/
+        dwType;
         [FieldOffset(4)]
         internal int pad;
         [FieldOffset(8)]

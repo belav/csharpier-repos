@@ -18,14 +18,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         {
             var codeGenerator = new SqliteCodeGenerator(
                 new ProviderCodeGeneratorDependencies(
-                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()));
+                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()
+                )
+            );
 
-            var result = codeGenerator.GenerateUseProvider("Data Source=Test", providerOptions: null);
+            var result = codeGenerator.GenerateUseProvider(
+                "Data Source=Test",
+                providerOptions: null
+            );
 
             Assert.Equal("UseSqlite", result.Method);
-            Assert.Collection(
-                result.Arguments,
-                a => Assert.Equal("Data Source=Test", a));
+            Assert.Collection(result.Arguments, a => Assert.Equal("Data Source=Test", a));
             Assert.Null(result.ChainedCall);
         }
 
@@ -34,7 +37,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         {
             var codeGenerator = new SqliteCodeGenerator(
                 new ProviderCodeGeneratorDependencies(
-                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()));
+                    Enumerable.Empty<IProviderCodeGeneratorPlugin>()
+                )
+            );
 
             var providerOptions = new MethodCallCodeFragment(_setProviderOptionMethodInfo);
 
@@ -50,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
 
                     Assert.Equal("x", nestedClosure.Parameter);
                     Assert.Same(providerOptions, nestedClosure.MethodCalls[0]);
-                });
+                }
+            );
             Assert.Null(result.ChainedCall);
         }
 
@@ -59,9 +65,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         {
             var codeGenerator = new SqliteCodeGenerator(
                 new ProviderCodeGeneratorDependencies(
-                    new[] { new SqliteNetTopologySuiteCodeGeneratorPlugin() }));
+                    new[] { new SqliteNetTopologySuiteCodeGeneratorPlugin() }
+                )
+            );
 
-            var result = ((IProviderConfigurationCodeGenerator)codeGenerator).GenerateUseProvider("Data Source=Test");
+            var result = ((IProviderConfigurationCodeGenerator)codeGenerator).GenerateUseProvider(
+                "Data Source=Test"
+            );
 
             Assert.Equal("UseSqlite", result.Method);
             Assert.Collection(
@@ -73,14 +83,19 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
 
                     Assert.Equal("x", nestedClosure.Parameter);
                     Assert.Equal("UseNetTopologySuite", nestedClosure.MethodCalls[0].Method);
-                });
+                }
+            );
             Assert.Null(result.ChainedCall);
         }
 
-        private static readonly MethodInfo _setProviderOptionMethodInfo
-            = typeof(SqliteCodeGeneratorTest).GetRuntimeMethod(nameof(SetProviderOption), new[] { typeof(DbContextOptionsBuilder) });
+        private static readonly MethodInfo _setProviderOptionMethodInfo =
+            typeof(SqliteCodeGeneratorTest).GetRuntimeMethod(
+                nameof(SetProviderOption),
+                new[] { typeof(DbContextOptionsBuilder) }
+            );
 
-        public static SqliteDbContextOptionsBuilder SetProviderOption(DbContextOptionsBuilder optionsBuilder)
-            => throw new NotSupportedException();
+        public static SqliteDbContextOptionsBuilder SetProviderOption(
+            DbContextOptionsBuilder optionsBuilder
+        ) => throw new NotSupportedException();
     }
 }

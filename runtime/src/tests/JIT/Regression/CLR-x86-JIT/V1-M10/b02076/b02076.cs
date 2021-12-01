@@ -20,7 +20,6 @@ class CSwarm
 {
     public CSwarm()
     {
-
         i = new MyInt();
         m_rScreen = new RECT();
 
@@ -38,7 +37,6 @@ class CSwarm
     MyInt i;
 };
 
-
 class MainClass
 {
     public static int Main(string[] args)
@@ -47,5 +45,3 @@ class MainClass
         return (100);
     }
 };
-
-

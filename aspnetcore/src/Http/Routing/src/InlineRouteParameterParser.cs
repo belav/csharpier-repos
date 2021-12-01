@@ -31,7 +31,8 @@ public static class InlineRouteParameterParser
                 isCatchAll: false,
                 isOptional: false,
                 defaultValue: null,
-                inlineConstraints: null);
+                inlineConstraints: null
+            );
         }
 
         var startIndex = 0;
@@ -84,23 +85,25 @@ public static class InlineRouteParameterParser
         currentIndex = parseResults.CurrentIndex;
 
         string? defaultValue = null;
-        if (currentIndex <= endIndex &&
-            routeParameter[currentIndex] == '=')
+        if (currentIndex <= endIndex && routeParameter[currentIndex] == '=')
         {
             defaultValue = routeParameter.Substring(currentIndex + 1, endIndex - currentIndex);
         }
 
-        return TemplatePart.CreateParameter(parameterName,
-                                            isCatchAll,
-                                            isOptional,
-                                            defaultValue,
-                                            parseResults.Constraints);
+        return TemplatePart.CreateParameter(
+            parameterName,
+            isCatchAll,
+            isOptional,
+            defaultValue,
+            parseResults.Constraints
+        );
     }
 
     private static ConstraintParseResults ParseConstraints(
         string routeParameter,
         int currentIndex,
-        int endIndex)
+        int endIndex
+    )
     {
         var inlineConstraints = new List<InlineConstraint>();
         var state = ParseState.Start;
@@ -134,7 +137,10 @@ public static class InlineRouteParameterParser
                     {
                         case null:
                             state = ParseState.End;
-                            var constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex);
+                            var constraintText = routeParameter.Substring(
+                                startIndex,
+                                currentIndex - startIndex
+                            );
                             inlineConstraints.Add(new InlineConstraint(constraintText));
                             break;
                         case ')':
@@ -143,23 +149,35 @@ public static class InlineRouteParameterParser
                             // (b) the next character is the start of the new constraint ':'
                             // (c) the next character is the start of the default value.
 
-                            var nextChar = currentIndex + 1 > endIndex ? null : (char?)routeParameter[currentIndex + 1];
+                            var nextChar =
+                                currentIndex + 1 > endIndex
+                                    ? null
+                                    : (char?)routeParameter[currentIndex + 1];
                             switch (nextChar)
                             {
                                 case null:
                                     state = ParseState.End;
-                                    constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex + 1);
+                                    constraintText = routeParameter.Substring(
+                                        startIndex,
+                                        currentIndex - startIndex + 1
+                                    );
                                     inlineConstraints.Add(new InlineConstraint(constraintText));
                                     break;
                                 case ':':
                                     state = ParseState.Start;
-                                    constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex + 1);
+                                    constraintText = routeParameter.Substring(
+                                        startIndex,
+                                        currentIndex - startIndex + 1
+                                    );
                                     inlineConstraints.Add(new InlineConstraint(constraintText));
                                     startIndex = currentIndex + 1;
                                     break;
                                 case '=':
                                     state = ParseState.End;
-                                    constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex + 1);
+                                    constraintText = routeParameter.Substring(
+                                        startIndex,
+                                        currentIndex - startIndex + 1
+                                    );
                                     inlineConstraints.Add(new InlineConstraint(constraintText));
                                     break;
                             }
@@ -171,10 +189,16 @@ public static class InlineRouteParameterParser
                             // Simply verifying that the parantheses will eventually be closed should suffice to
                             // determine if the terminator needs to be consumed as part of the current constraint
                             // specification.
-                            var indexOfClosingParantheses = routeParameter.IndexOf(')', currentIndex + 1);
+                            var indexOfClosingParantheses = routeParameter.IndexOf(
+                                ')',
+                                currentIndex + 1
+                            );
                             if (indexOfClosingParantheses == -1)
                             {
-                                constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex);
+                                constraintText = routeParameter.Substring(
+                                    startIndex,
+                                    currentIndex - startIndex
+                                );
                                 inlineConstraints.Add(new InlineConstraint(constraintText));
 
                                 if (currentChar == ':')
@@ -192,7 +216,6 @@ public static class InlineRouteParameterParser
                             {
                                 currentIndex = indexOfClosingParantheses;
                             }
-
                             break;
                     }
                     break;
@@ -201,11 +224,17 @@ public static class InlineRouteParameterParser
                     {
                         case null:
                             state = ParseState.End;
-                            var constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex);
+                            var constraintText = routeParameter.Substring(
+                                startIndex,
+                                currentIndex - startIndex
+                            );
                             inlineConstraints.Add(new InlineConstraint(constraintText));
                             break;
                         case ':':
-                            constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex);
+                            constraintText = routeParameter.Substring(
+                                startIndex,
+                                currentIndex - startIndex
+                            );
                             inlineConstraints.Add(new InlineConstraint(constraintText));
                             startIndex = currentIndex + 1;
                             break;
@@ -214,7 +243,10 @@ public static class InlineRouteParameterParser
                             break;
                         case '=':
                             state = ParseState.End;
-                            constraintText = routeParameter.Substring(startIndex, currentIndex - startIndex);
+                            constraintText = routeParameter.Substring(
+                                startIndex,
+                                currentIndex - startIndex
+                            );
                             inlineConstraints.Add(new InlineConstraint(constraintText));
                             currentIndex--;
                             break;
@@ -223,7 +255,6 @@ public static class InlineRouteParameterParser
             }
 
             currentIndex++;
-
         } while (state != ParseState.End);
 
         return new ConstraintParseResults(currentIndex, inlineConstraints);

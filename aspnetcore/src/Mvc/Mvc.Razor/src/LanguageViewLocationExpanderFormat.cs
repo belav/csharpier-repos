@@ -15,7 +15,6 @@ public enum LanguageViewLocationExpanderFormat
     /// Home/Views/en-US/Index.chtml
     /// </example>
     SubFolder,
-
     /// <summary>
     /// Locale is part of the view name as a suffix.
     /// </summary>

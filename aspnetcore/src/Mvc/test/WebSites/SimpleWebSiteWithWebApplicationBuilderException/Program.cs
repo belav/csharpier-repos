@@ -3,7 +3,9 @@
 
 var app = WebApplication.Create(args);
 
+
 app.MapGet("/", (Func<string>)(() => "Hello World"));
+
 
 throw new InvalidOperationException("This application failed to start");
 

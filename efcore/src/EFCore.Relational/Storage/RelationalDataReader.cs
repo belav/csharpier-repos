@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbCommand command,
             DbDataReader reader,
             Guid commandId,
-            IRelationalCommandDiagnosticsLogger? logger)
+            IRelationalCommandDiagnosticsLogger? logger
+        )
         {
             _relationalConnection = relationalConnection;
             _command = command;
@@ -65,14 +66,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Gets the underlying reader for the result set.
         /// </summary>
-        public virtual DbDataReader DbDataReader
-            => _reader;
+        public virtual DbDataReader DbDataReader => _reader;
 
         /// <summary>
         ///     Gets the underlying command for the result set.
         /// </summary>
-        public virtual DbCommand DbCommand
-            => _command;
+        public virtual DbCommand DbCommand => _command;
 
         /// <summary>
         ///     Calls <see cref="DbDataReader.Read()" /> on the underlying <see cref="System.Data.Common.DbDataReader" />.
@@ -119,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             _reader.RecordsAffected,
                             _readCount,
                             _startTime,
-                            _stopwatch.Elapsed); // can throw
+                            _stopwatch.Elapsed
+                        ); // can throw
                     }
                 }
                 finally
@@ -159,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             _reader.RecordsAffected,
                             _readCount,
                             _startTime,
-                            _stopwatch.Elapsed); // can throw
+                            _stopwatch.Elapsed
+                        ); // can throw
                     }
                 }
                 finally

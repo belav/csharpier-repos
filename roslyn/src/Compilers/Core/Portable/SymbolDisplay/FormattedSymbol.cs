@@ -38,16 +38,14 @@ namespace Microsoft.CodeAnalysis
         public override bool Equals(object obj)
         {
             var other = obj as FormattedSymbol;
-            return other != null &&
-                _symbol.Equals(other._symbol) &&
-                _symbolDisplayFormat == other._symbolDisplayFormat;
+            return other != null
+                && _symbol.Equals(other._symbol)
+                && _symbolDisplayFormat == other._symbolDisplayFormat;
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(
-                _symbol.GetHashCode(),
-                _symbolDisplayFormat.GetHashCode());
+            return Hash.Combine(_symbol.GetHashCode(), _symbolDisplayFormat.GetHashCode());
         }
 
         string IFormattable.ToString(string format, IFormatProvider formatProvider)

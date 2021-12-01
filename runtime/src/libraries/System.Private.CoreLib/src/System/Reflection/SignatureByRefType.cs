@@ -5,10 +5,7 @@ namespace System.Reflection
 {
     internal sealed class SignatureByRefType : SignatureHasElementType
     {
-        internal SignatureByRefType(SignatureType elementType)
-            : base(elementType)
-        {
-        }
+        internal SignatureByRefType(SignatureType elementType) : base(elementType) { }
 
         protected sealed override bool IsArrayImpl() => false;
         protected sealed override bool IsByRefImpl() => true;
@@ -17,7 +14,8 @@ namespace System.Reflection
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
 
-        public sealed override int GetArrayRank() => throw new ArgumentException(SR.Argument_HasToBeArrayClass);
+        public sealed override int GetArrayRank() =>
+            throw new ArgumentException(SR.Argument_HasToBeArrayClass);
 
         protected sealed override string Suffix => "&";
     }

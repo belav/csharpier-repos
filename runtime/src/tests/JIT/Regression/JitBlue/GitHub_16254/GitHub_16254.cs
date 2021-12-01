@@ -46,6 +46,5 @@ namespace UnsafeTesting
                 return -1;
             }
         }
-
     }
 }

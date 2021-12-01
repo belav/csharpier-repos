@@ -13,18 +13,22 @@ namespace AutoMapper.IntegrationTests.Net4
     {
         TrainingCourseDto _course;
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            //cfg.AllowNullDestinationValues = false;
-            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().MaxDepth(1);
-            cfg.CreateProjection<TrainingContent, TrainingContentDto>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    //cfg.AllowNullDestinationValues = false;
+                    cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().MaxDepth(1);
+                    cfg.CreateProjection<TrainingContent, TrainingContentDto>();
+                }
+            );
 
         protected override void Because_of()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
-                _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses).FirstOrDefault(n => n.CourseName == "Course 1");
+                _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses)
+                    .FirstOrDefault(n => n.CourseName == "Course 1");
             }
         }
 
@@ -66,7 +70,8 @@ namespace AutoMapper.IntegrationTests.Net4
 
             public string CourseName { get; set; }
 
-            public virtual IList<TrainingContent> Content { get; set; } = new List<TrainingContent>();
+            public virtual IList<TrainingContent> Content { get; set; } =
+                new List<TrainingContent>();
         }
 
         public class TrainingContent

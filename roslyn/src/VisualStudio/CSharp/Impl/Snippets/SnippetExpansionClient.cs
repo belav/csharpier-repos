@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             IEditorCommandHandlerServiceFactory editorCommandHandlerServiceFactory,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             ImmutableArray<Lazy<ArgumentProvider, OrderableLanguageMetadata>> argumentProviders,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
             : base(
                 threadingContext,
                 languageServiceGuid,
@@ -56,9 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 editorCommandHandlerServiceFactory,
                 editorAdaptersFactoryService,
                 argumentProviders,
-                globalOptions)
-        {
-        }
+                globalOptions
+            ) { }
 
         /// <returns>The tracking span of the inserted "/**/" if there is an $end$ location, null
         /// otherwise.</returns>
@@ -83,14 +83,27 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SubjectBuffer.Insert(endPosition, commentString);
 
             var commentSpan = new Span(endPosition, commentString.Length);
-            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(commentSpan, SpanTrackingMode.EdgeExclusive);
+            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(
+                commentSpan,
+                SpanTrackingMode.EdgeExclusive
+            );
         }
 
         protected override string FallbackDefaultLiteral => "default";
 
-        public override int GetExpansionFunction(IXMLDOMNode xmlFunctionNode, string bstrFieldName, out IVsExpansionFunction? pFunc)
+        public override int GetExpansionFunction(
+            IXMLDOMNode xmlFunctionNode,
+            string bstrFieldName,
+            out IVsExpansionFunction? pFunc
+        )
         {
-            if (!TryGetSnippetFunctionInfo(xmlFunctionNode, out var snippetFunctionName, out var param))
+            if (
+                !TryGetSnippetFunctionInfo(
+                    xmlFunctionNode,
+                    out var snippetFunctionName,
+                    out var param
+                )
+            )
             {
                 pFunc = null;
                 return VSConstants.E_INVALIDARG;
@@ -99,13 +112,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             switch (snippetFunctionName)
             {
                 case "SimpleTypeName":
-                    pFunc = new SnippetFunctionSimpleTypeName(this, SubjectBuffer, bstrFieldName, param);
+                    pFunc = new SnippetFunctionSimpleTypeName(
+                        this,
+                        SubjectBuffer,
+                        bstrFieldName,
+                        param
+                    );
                     return VSConstants.S_OK;
                 case "ClassName":
                     pFunc = new SnippetFunctionClassName(this, SubjectBuffer, bstrFieldName);
                     return VSConstants.S_OK;
                 case "GenerateSwitchCases":
-                    pFunc = new SnippetFunctionGenerateSwitchCases(this, SubjectBuffer, bstrFieldName, param);
+                    pFunc = new SnippetFunctionGenerateSwitchCases(
+                        this,
+                        SubjectBuffer,
+                        bstrFieldName,
+                        param
+                    );
                     return VSConstants.S_OK;
                 default:
                     pFunc = null;
@@ -114,13 +137,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         }
 
         internal override Document AddImports(
-            Document document, OptionSet options, int position, XElement snippetNode,
+            Document document,
+            OptionSet options,
+            int position,
+            XElement snippetNode,
             bool allowInHiddenRegions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var importsNode = snippetNode.Element(XName.Get("Imports", snippetNode.Name.NamespaceName));
-            if (importsNode == null ||
-                !importsNode.HasElements)
+            var importsNode = snippetNode.Element(
+                XName.Get("Imports", snippetNode.Name.NamespaceName)
+            );
+            if (importsNode == null || !importsNode.HasElements)
             {
                 return document;
             }
@@ -128,7 +156,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var contextLocation = root.FindToken(position).GetRequiredParent();
 
-            var newUsingDirectives = GetUsingDirectivesToAdd(contextLocation, snippetNode, importsNode);
+            var newUsingDirectives = GetUsingDirectivesToAdd(
+                contextLocation,
+                snippetNode,
+                importsNode
+            );
             if (!newUsingDirectives.Any())
             {
                 return document;
@@ -136,32 +168,64 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
 
             // In Venus/Razor, inserting imports statements into the subject buffer does not work.
             // Instead, we add the imports through the contained language host.
-            if (TryAddImportsToContainedDocument(document, newUsingDirectives.Where(u => u.Alias == null).Select(u => u.Name.ToString())))
+            if (
+                TryAddImportsToContainedDocument(
+                    document,
+                    newUsingDirectives.Where(u => u.Alias == null).Select(u => u.Name.ToString())
+                )
+            )
             {
                 return document;
             }
 
             var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
-            var compilation = document.Project.GetRequiredCompilationAsync(cancellationToken).WaitAndGetResult(cancellationToken);
-            var newRoot = addImportService.AddImports(compilation, root, contextLocation, newUsingDirectives, generator, options, allowInHiddenRegions, cancellationToken);
+            var compilation = document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .WaitAndGetResult(cancellationToken);
+            var newRoot = addImportService.AddImports(
+                compilation,
+                root,
+                contextLocation,
+                newUsingDirectives,
+                generator,
+                options,
+                allowInHiddenRegions,
+                cancellationToken
+            );
 
             var newDocument = document.WithSyntaxRoot(newRoot);
 
-            var formattedDocument = Formatter.FormatAsync(newDocument, Formatter.Annotation, cancellationToken: cancellationToken).WaitAndGetResult(cancellationToken);
-            document.Project.Solution.Workspace.ApplyDocumentChanges(formattedDocument, cancellationToken);
+            var formattedDocument = Formatter
+                .FormatAsync(
+                    newDocument,
+                    Formatter.Annotation,
+                    cancellationToken: cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
+            document.Project.Solution.Workspace.ApplyDocumentChanges(
+                formattedDocument,
+                cancellationToken
+            );
 
             return formattedDocument;
         }
 
         private static IList<UsingDirectiveSyntax> GetUsingDirectivesToAdd(
-            SyntaxNode contextLocation, XElement snippetNode, XElement importsNode)
+            SyntaxNode contextLocation,
+            XElement snippetNode,
+            XElement importsNode
+        )
         {
             var namespaceXmlName = XName.Get("Namespace", snippetNode.Name.NamespaceName);
             var existingUsings = contextLocation.GetEnclosingUsingDirectives();
             var newUsings = new List<UsingDirectiveSyntax>();
 
-            foreach (var import in importsNode.Elements(XName.Get("Import", snippetNode.Name.NamespaceName)))
+            foreach (
+                var import in importsNode.Elements(
+                    XName.Get("Import", snippetNode.Name.NamespaceName)
+                )
+            )
             {
                 var namespaceElement = import.Element(namespaceXmlName);
                 if (namespaceElement == null)
@@ -175,7 +239,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     continue;
                 }
 
-                var candidateUsing = SyntaxFactory.ParseCompilationUnit("using " + namespaceToImport + ";").DescendantNodes().OfType<UsingDirectiveSyntax>().FirstOrDefault();
+                var candidateUsing = SyntaxFactory
+                    .ParseCompilationUnit("using " + namespaceToImport + ";")
+                    .DescendantNodes()
+                    .OfType<UsingDirectiveSyntax>()
+                    .FirstOrDefault();
                 if (candidateUsing == null)
                 {
                     continue;
@@ -183,13 +251,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 else if (candidateUsing.ContainsDiagnostics && !namespaceToImport.Contains("="))
                 {
                     // Retry by parsing the namespace as a name and constructing a using directive from it
-                    candidateUsing = SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(namespaceToImport))
-                        .WithUsingKeyword(SyntaxFactory.Token(SyntaxKind.UsingKeyword).WithTrailingTrivia(SyntaxFactory.Space));
+                    candidateUsing = SyntaxFactory
+                        .UsingDirective(SyntaxFactory.ParseName(namespaceToImport))
+                        .WithUsingKeyword(
+                            SyntaxFactory
+                                .Token(SyntaxKind.UsingKeyword)
+                                .WithTrailingTrivia(SyntaxFactory.Space)
+                        );
                 }
 
                 if (!existingUsings.Any(u => u.IsEquivalentTo(candidateUsing, topLevel: false)))
                 {
-                    newUsings.Add(candidateUsing.WithAdditionalAnnotations(Formatter.Annotation).WithAppendedTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed));
+                    newUsings.Add(
+                        candidateUsing
+                            .WithAdditionalAnnotations(Formatter.Annotation)
+                            .WithAppendedTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
+                    );
                 }
             }
 

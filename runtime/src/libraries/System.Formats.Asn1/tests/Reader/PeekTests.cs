@@ -77,7 +77,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 {
                     AsnReader reader = new AsnReader(data, AsnEncodingRules.BER);
                     reader.PeekEncodedValue();
-                });
+                }
+            );
         }
 
         [Fact]
@@ -124,7 +125,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 {
                     AsnReader reader = new AsnReader(data, AsnEncodingRules.BER);
                     reader.PeekContentBytes();
-                });
+                }
+            );
         }
 
         [Theory]
@@ -164,7 +166,9 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnReader reader = new AsnReader(dataBytes, AsnEncodingRules.BER);
             ReadOnlyMemory<byte> contents = reader.PeekContentBytes();
             Assert.Equal(expectedLength, contents.Length);
-            Assert.True(Unsafe.AreSame(ref dataBytes[2], ref MemoryMarshal.GetReference(contents.Span)));
+            Assert.True(
+                Unsafe.AreSame(ref dataBytes[2], ref MemoryMarshal.GetReference(contents.Span))
+            );
         }
 
         [Theory]
@@ -199,7 +203,9 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnReader reader = new AsnReader(dataBytes, AsnEncodingRules.BER);
             ReadOnlyMemory<byte> contents = reader.PeekEncodedValue();
             Assert.Equal(expectedLength, contents.Length);
-            Assert.True(Unsafe.AreSame(ref dataBytes[0], ref MemoryMarshal.GetReference(contents.Span)));
+            Assert.True(
+                Unsafe.AreSame(ref dataBytes[0], ref MemoryMarshal.GetReference(contents.Span))
+            );
 
             Assert.True(
                 AsnDecoder.TryReadEncodedValue(
@@ -208,7 +214,9 @@ namespace System.Formats.Asn1.Tests.Reader
                     out Asn1Tag tag,
                     out int contentOffset,
                     out int contentLength,
-                    out int bytesConsumed));
+                    out int bytesConsumed
+                )
+            );
 
             Assert.Equal(2, contentOffset);
             Assert.Equal(expectedLength - 4, contentLength);
@@ -233,7 +241,9 @@ namespace System.Formats.Asn1.Tests.Reader
                     out Asn1Tag tag,
                     out int contentOffset,
                     out int contentLength,
-                    out int bytesConsumed));
+                    out int bytesConsumed
+                )
+            );
 
             Assert.Equal(0, contentOffset);
             Assert.Equal(0, contentLength);

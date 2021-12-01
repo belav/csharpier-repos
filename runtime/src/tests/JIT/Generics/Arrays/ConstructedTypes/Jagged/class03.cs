@@ -4,7 +4,6 @@
 
 using System;
 
-
 public struct ValX1<T>
 {
     public T t;
@@ -12,7 +11,6 @@ public struct ValX1<T>
     {
         this.t = t;
     }
-
 }
 public class RefX1<T>
 {
@@ -23,7 +21,6 @@ public class RefX1<T>
     }
 }
 
-
 public class Gen<T>
 {
     public T Fld1;
@@ -32,8 +29,6 @@ public class Gen<T>
     {
         Fld1 = fld1;
     }
-
-
 }
 
 public class Test_class03
@@ -48,13 +43,16 @@ public class Test_class03
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
         int size = 10;
-        int i, j, k, l, m;
+        int i,
+            j,
+            k,
+            l,
+            m;
         double sum = 0;
 
         Gen<string>[][][][][] GenStringArray = new Gen<string>[size][][][][];
@@ -72,7 +70,9 @@ public class Test_class03
                         GenStringArray[i][j][k][l] = new Gen<string>[l];
                         for (m = 0; m < l; m++)
                         {
-                            GenStringArray[i][j][k][l][m] = new Gen<string>((i * j * k * l * m).ToString());
+                            GenStringArray[i][j][k][l][m] = new Gen<string>(
+                                (i * j * k * l * m).ToString()
+                            );
                         }
                     }
                 }
@@ -110,6 +110,4 @@ public class Test_class03
             return 1;
         }
     }
-
 }
-

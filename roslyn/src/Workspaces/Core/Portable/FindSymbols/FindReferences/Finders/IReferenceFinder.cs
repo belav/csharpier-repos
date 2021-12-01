@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// in a search for <c>A.X</c> because they both end in <c>X</c>.
         /// </summary>
         Task<ImmutableArray<string>> DetermineGlobalAliasesAsync(
-            ISymbol symbol, Project project, CancellationToken cancellationToken);
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Called by the find references search engine when a new symbol definition is found.
@@ -35,7 +38,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// Implementations of this method must be thread-safe.
         /// </summary>
         Task<ImmutableArray<ISymbol>> DetermineCascadedSymbolsAsync(
-            ISymbol symbol, Solution solution, FindReferencesSearchOptions options, CancellationToken cancellationToken);
+            ISymbol symbol,
+            Solution solution,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Called by the find references search engine to determine which documents in the supplied
@@ -50,9 +57,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// Implementations of this method must be thread-safe.
         /// </summary>
         Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
-            ISymbol symbol, HashSet<string>? globalAliases,
-            Project project, IImmutableSet<Document>? documents,
-            FindReferencesSearchOptions options, CancellationToken cancellationToken);
+            ISymbol symbol,
+            HashSet<string>? globalAliases,
+            Project project,
+            IImmutableSet<Document>? documents,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Called by the find references search engine to determine the set of reference locations
@@ -62,8 +73,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// Implementations of this method must be thread-safe.
         /// </summary>
         ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
-            ISymbol symbol, HashSet<string>? globalAliases,
-            Document document, SemanticModel semanticModel,
-            FindReferencesSearchOptions options, CancellationToken cancellationToken);
+            ISymbol symbol,
+            HashSet<string>? globalAliases,
+            Document document,
+            SemanticModel semanticModel,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

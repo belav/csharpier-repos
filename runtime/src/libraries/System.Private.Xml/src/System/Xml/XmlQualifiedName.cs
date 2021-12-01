@@ -78,7 +78,9 @@ namespace System.Xml
                 return true;
             }
 
-            return other is XmlQualifiedName qName && Name == qName.Name && Namespace == qName.Namespace;
+            return other is XmlQualifiedName qName
+                && Name == qName.Name
+                && Namespace == qName.Namespace;
         }
 
         /// <devdoc>
@@ -143,7 +145,11 @@ namespace System.Xml
             Namespace = nameTable.Add(Namespace);
         }
 
-        internal static XmlQualifiedName Parse(string s, IXmlNamespaceResolver nsmgr, out string prefix)
+        internal static XmlQualifiedName Parse(
+            string s,
+            IXmlNamespaceResolver nsmgr,
+            out string prefix
+        )
         {
             ValidateNames.ParseQNameThrow(s, out prefix, out string localName);
 

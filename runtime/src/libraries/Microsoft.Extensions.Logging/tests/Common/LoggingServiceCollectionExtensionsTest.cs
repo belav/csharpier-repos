@@ -15,11 +15,13 @@ namespace Microsoft.Extensions.Logging.Test
             var services = new ServiceCollection();
 
             var callbackCalled = false;
-            var loggerBuilder = services.AddLogging(builder =>
-            {
-                callbackCalled = true;
-                Assert.Same(services, builder.Services);
-            });
+            var loggerBuilder = services.AddLogging(
+                builder =>
+                {
+                    callbackCalled = true;
+                    Assert.Same(services, builder.Services);
+                }
+            );
             Assert.True(callbackCalled);
         }
 
@@ -31,7 +33,9 @@ namespace Microsoft.Extensions.Logging.Test
 
             services.AddLogging(builder => builder.ClearProviders());
 
-            Assert.Empty(services.Where(desctriptor => desctriptor.ServiceType == typeof(ILoggerProvider)));
+            Assert.Empty(
+                services.Where(desctriptor => desctriptor.ServiceType == typeof(ILoggerProvider))
+            );
         }
     }
 }

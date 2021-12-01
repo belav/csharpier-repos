@@ -35,15 +35,25 @@ namespace NetClient
             ulong ul2 = ul1;
 
             Console.WriteLine($"Calling {nameof(DispatchTesting.DoubleNumeric_ReturnByRef)} ...");
-            dispatchTesting.DoubleNumeric_ReturnByRef (
-                b1, ref b2,
-                s1, ref s2,
-                us1, ref us2,
-                i1, ref i2,
-                ui1, ref ui2,
-                l1, ref l2,
-                ul1, ref ul2);
-            Console.WriteLine($"Call to {nameof(DispatchTesting.DoubleNumeric_ReturnByRef)} complete");
+            dispatchTesting.DoubleNumeric_ReturnByRef(
+                b1,
+                ref b2,
+                s1,
+                ref s2,
+                us1,
+                ref us2,
+                i1,
+                ref i2,
+                ui1,
+                ref ui2,
+                l1,
+                ref l2,
+                ul1,
+                ref ul2
+            );
+            Console.WriteLine(
+                $"Call to {nameof(DispatchTesting.DoubleNumeric_ReturnByRef)} complete"
+            );
 
             Assert.Equal(b1 * 2, b2);
             Assert.Equal(s1 * 2, s2);
@@ -78,11 +88,15 @@ namespace NetClient
             float b = .2f;
             float expected = a + b;
 
-            Console.WriteLine($"Calling {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} ...");
+            Console.WriteLine(
+                $"Calling {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} ..."
+            );
             float c = b;
-            float d = dispatchTesting.Add_Float_ReturnAndUpdateByRef (a, ref c);
+            float d = dispatchTesting.Add_Float_ReturnAndUpdateByRef(a, ref c);
 
-            Console.WriteLine($"Call to {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}");
+            Console.WriteLine(
+                $"Call to {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}"
+            );
             Assert.True(EqualByBound(expected, c));
             Assert.True(EqualByBound(expected, d));
         }
@@ -95,11 +109,15 @@ namespace NetClient
             double b = .2;
             double expected = a + b;
 
-            Console.WriteLine($"Calling {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} ...");
+            Console.WriteLine(
+                $"Calling {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} ..."
+            );
             double c = b;
-            double d = dispatchTesting.Add_Double_ReturnAndUpdateByRef (a, ref c);
+            double d = dispatchTesting.Add_Double_ReturnAndUpdateByRef(a, ref c);
 
-            Console.WriteLine($"Call to {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}");
+            Console.WriteLine(
+                $"Call to {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}"
+            );
             Assert.True(EqualByBound(expected, c));
             Assert.True(EqualByBound(expected, d));
         }
@@ -118,7 +136,9 @@ namespace NetClient
             string resultString = errorCode.ToString("x");
             try
             {
-                Console.WriteLine($"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.Disp)} {errorCode}...");
+                Console.WriteLine(
+                    $"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.Disp)} {errorCode}..."
+                );
                 dispatchTesting.TriggerException(IDispatchTesting_Exception.Disp, errorCode);
                 Assert.True(false, "DISP exception not thrown properly");
             }
@@ -130,7 +150,9 @@ namespace NetClient
 
             try
             {
-                Console.WriteLine($"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.HResult)} {errorCode}...");
+                Console.WriteLine(
+                    $"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.HResult)} {errorCode}..."
+                );
                 dispatchTesting.TriggerException(IDispatchTesting_Exception.HResult, errorCode);
                 Assert.True(false, "HRESULT exception not thrown properly");
             }
@@ -160,7 +182,7 @@ namespace NetClient
                 CultureInfo englishCulture = new CultureInfo("en-US", false);
                 CultureInfo.CurrentCulture = newCulture;
                 int lcid = dispatchTesting.PassThroughLCID();
-                Assert.Equal(englishCulture.LCID, lcid);  // CLR->Dispatch LCID marshalling is explicitly hardcoded to en-US instead of passing the current culture.
+                Assert.Equal(englishCulture.LCID, lcid); // CLR->Dispatch LCID marshalling is explicitly hardcoded to en-US instead of passing the current culture.
             }
             finally
             {
@@ -187,15 +209,17 @@ namespace NetClient
             enumeratorExplicit.Reset();
             AssertExtensions.CollectionEqual(expected, GetEnumerable(enumeratorExplicit));
 
-            System.Collections.Generic.IEnumerable<int> GetEnumerable(System.Collections.IEnumerator e)
+            System.Collections.Generic.IEnumerable<int> GetEnumerable(
+                System.Collections.IEnumerator e
+            )
             {
-               var list = new System.Collections.Generic.List<int>();
-               while (e.MoveNext())
-               {
-                   list.Add((int)e.Current);
-               }
+                var list = new System.Collections.Generic.List<int>();
+                while (e.MoveNext())
+                {
+                    list.Add((int)e.Current);
+                }
 
-               return list;
+                return list;
             }
         }
 

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             StackFrameMethodDeclarationNode? methodDeclaration = null,
             bool expectFailure = false,
             StackFrameFileInformationNode? fileInformation = null,
-            StackFrameToken? eolTokenOpt = null)
+            StackFrameToken? eolTokenOpt = null
+        )
         {
             FuzzyTest(input);
 
@@ -86,7 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             }
         }
 
-        private static void AssertEqual(StackFrameNodeOrToken expected, StackFrameNodeOrToken actual)
+        private static void AssertEqual(
+            StackFrameNodeOrToken expected,
+            StackFrameNodeOrToken actual
+        )
         {
             Assert.Equal(expected.IsNode, actual.IsNode);
             if (expected.IsNode)
@@ -110,7 +114,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             AssertEx.NotNull(actual);
 
             Assert.Equal(expected.Kind, actual.Kind);
-            Assert.True(expected.ChildCount == actual.ChildCount, PrintChildDifference(expected, actual));
+            Assert.True(
+                expected.ChildCount == actual.ChildCount,
+                PrintChildDifference(expected, actual)
+            );
 
             for (var i = 0; i < expected.ChildCount; i++)
             {
@@ -220,7 +227,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
                 sb.AppendLine();
 
                 sb.Append("Actual: \t");
-                var enumeratedString = new string(enumeratedParsedCharacters.Select(ch => (char)ch.Value).ToArray());
+                var enumeratedString = new string(
+                    enumeratedParsedCharacters.Select(ch => (char)ch.Value).ToArray()
+                );
                 PrintString(enumeratedString, start, end, sb);
                 sb.AppendLine();
 
@@ -288,7 +297,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             }
         }
 
-        private static void AssertEqual(ImmutableArray<StackFrameTrivia> expected, ImmutableArray<StackFrameTrivia> actual, StackFrameToken token)
+        private static void AssertEqual(
+            ImmutableArray<StackFrameTrivia> expected,
+            ImmutableArray<StackFrameTrivia> actual,
+            StackFrameToken token
+        )
         {
             var diffMessage = PrintDiff();
 

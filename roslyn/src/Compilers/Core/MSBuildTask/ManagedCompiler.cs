@@ -32,18 +32,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             /// the customer opted out of the compiler server
             /// </summary>
             Tool,
-
             /// <summary>
             /// Compilation occurred using the command line tool because the server was unable to complete
             /// the request
             /// </summary>
             ToolFallback,
-
             /// <summary>
             /// Compilation occurred in the compiler server process
             /// </summary>
             Server,
-
             /// <summary>
             /// Fatal error caused compilation to not even occur.
             /// </summary>
@@ -55,8 +52,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         internal abstract RequestLanguage Language { get; }
 
-        public ManagedCompiler()
-            : base(ErrorString.ResourceManager)
+        public ManagedCompiler() : base(ErrorString.ResourceManager)
         {
             // If there is a crash, the runtime error is output to stderr and
             // we want MSBuild to print it out regardless of verbosity.
@@ -375,9 +371,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         {
             set
             {
-                _store[nameof(TargetType)] = value != null
-                    ? CultureInfo.InvariantCulture.TextInfo.ToLower(value)
-                    : null;
+                _store[nameof(TargetType)] =
+                    value != null ? CultureInfo.InvariantCulture.TextInfo.ToLower(value) : null;
             }
             get { return (string?)_store[nameof(TargetType)]; }
         }
@@ -438,7 +433,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             get
             {
                 string? platform = Platform;
-                if ((RoslynString.IsNullOrEmpty(platform) || platform.Equals("anycpu", StringComparison.OrdinalIgnoreCase)) && Prefer32Bit)
+                if (
+                    (
+                        RoslynString.IsNullOrEmpty(platform)
+                        || platform.Equals("anycpu", StringComparison.OrdinalIgnoreCase)
+                    ) && Prefer32Bit
+                )
                 {
                     platform = "anycpu32bitpreferred";
                 }
@@ -451,10 +451,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected override Encoding StandardOutputEncoding
         {
-            get
-            {
-                return (Utf8Output) ? Encoding.UTF8 : base.StandardOutputEncoding;
-            }
+            get { return (Utf8Output) ? Encoding.UTF8 : base.StandardOutputEncoding; }
         }
 
         public string? LangVersion
@@ -470,7 +467,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         // explicitly overridden.  So, if both ToolPath is unset and
         // ToolExe == ToolName, we know nothing is overridden, and
         // we can use our own csc.
-        private bool HasToolBeenOverridden => !(string.IsNullOrEmpty(ToolPath) && ToolExe == ToolName);
+        private bool HasToolBeenOverridden =>
+            !(string.IsNullOrEmpty(ToolPath) && ToolExe == ToolName);
 
         protected sealed override bool IsManagedTool => !HasToolBeenOverridden;
 
@@ -482,22 +480,35 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             return GenerateFullPathToTool();
         }
 
-        protected sealed override string PathToManagedTool => Utilities.GenerateFullPathToTool(ToolName);
+        protected sealed override string PathToManagedTool =>
+            Utilities.GenerateFullPathToTool(ToolName);
 
         protected sealed override string PathToNativeTool => Path.Combine(ToolPath ?? "", ToolExe);
 
-        protected override int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands)
+        protected override int ExecuteTool(
+            string pathToTool,
+            string responseFileCommands,
+            string commandLineCommands
+        )
         {
-            using var logger = new CompilerServerLogger($"MSBuild {Process.GetCurrentProcess().Id}");
+            using var logger = new CompilerServerLogger(
+                $"MSBuild {Process.GetCurrentProcess().Id}"
+            );
             return ExecuteTool(pathToTool, responseFileCommands, commandLineCommands, logger);
         }
 
-        internal int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands, ICompilerServerLogger logger)
+        internal int ExecuteTool(
+            string pathToTool,
+            string responseFileCommands,
+            string commandLineCommands,
+            ICompilerServerLogger logger
+        )
         {
             if (ProvideCommandLineArgs)
             {
                 CommandLineArgs = GetArguments(commandLineCommands, responseFileCommands)
-                    .Select(arg => new TaskItem(arg)).ToArray();
+                    .Select(arg => new TaskItem(arg))
+                    .ToArray();
             }
 
             if (SkipCompilerExecution)
@@ -513,11 +524,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 string workingDirectory = CurrentDirectoryToUse();
                 string? tempDirectory = BuildServerConnection.GetTempPath(workingDirectory);
 
-                if (!UseSharedCompilation ||
-                    HasToolBeenOverridden ||
-                    !BuildServerConnection.IsCompilerServerSupported)
+                if (
+                    !UseSharedCompilation
+                    || HasToolBeenOverridden
+                    || !BuildServerConnection.IsCompilerServerSupported
+                )
                 {
-                    LogCompilationMessage(logger, requestId, CompilationKind.Tool, $"using command line tool by design '{pathToTool}'");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.Tool,
+                        $"using command line tool by design '{pathToTool}'"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
                 }
 
@@ -528,7 +546,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 var clientDirectory = Path.GetDirectoryName(PathToManagedTool);
                 if (clientDirectory is null || tempDirectory is null)
                 {
-                    LogCompilationMessage(logger, requestId, CompilationKind.Tool, $"using command line tool because we could not find client or temp directory '{PathToManagedTool}'");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.Tool,
+                        $"using command line tool because we could not find client or temp directory '{PathToManagedTool}'"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
                 }
 
@@ -542,7 +565,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     workingDirectory: workingDirectory,
                     tempDirectory: tempDirectory,
                     keepAlive: null,
-                    libDirectory: LibDirectoryToUse());
+                    libDirectory: LibDirectoryToUse()
+                );
 
                 var pipeName = !string.IsNullOrEmpty(SharedCompilationId)
                     ? SharedCompilationId
@@ -553,11 +577,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     pipeName,
                     clientDirectory,
                     logger: logger,
-                    cancellationToken: _sharedCompileCts.Token);
+                    cancellationToken: _sharedCompileCts.Token
+                );
 
                 responseTask.Wait(_sharedCompileCts.Token);
 
-                ExitCode = HandleResponse(requestId, responseTask.Result, pathToTool, responseFileCommands, commandLineCommands, logger);
+                ExitCode = HandleResponse(
+                    requestId,
+                    responseTask.Result,
+                    pathToTool,
+                    responseFileCommands,
+                    commandLineCommands,
+                    logger
+                );
             }
             catch (OperationCanceledException)
             {
@@ -640,17 +672,32 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Handle a response from the server, reporting messages and returning
         /// the appropriate exit code.
         /// </summary>
-        private int HandleResponse(Guid requestId, BuildResponse? response, string pathToTool, string responseFileCommands, string commandLineCommands, ICompilerServerLogger logger)
+        private int HandleResponse(
+            Guid requestId,
+            BuildResponse? response,
+            string pathToTool,
+            string responseFileCommands,
+            string commandLineCommands,
+            ICompilerServerLogger logger
+        )
         {
             if (response is null)
             {
-                LogCompilationMessage(logger, requestId, CompilationKind.ToolFallback, "could not launch server");
+                LogCompilationMessage(
+                    logger,
+                    requestId,
+                    CompilationKind.ToolFallback,
+                    "could not launch server"
+                );
                 return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
             }
 
             if (response.Type != BuildResponse.ResponseType.Completed)
             {
-                ValidateBootstrapUtil.AddFailedServerConnection(response.Type, OutputAssembly?.ItemSpec);
+                ValidateBootstrapUtil.AddFailedServerConnection(
+                    response.Type,
+                    OutputAssembly?.ItemSpec
+                );
             }
 
             switch (response.Type)
@@ -658,30 +705,63 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 case BuildResponse.ResponseType.Completed:
                     var completedResponse = (CompletedBuildResponse)response;
                     LogCompilerOutput(completedResponse.Output, StandardOutputImportanceToUse);
-                    LogCompilationMessage(logger, requestId, CompilationKind.Server, "server processed compilation");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.Server,
+                        "server processed compilation"
+                    );
                     return completedResponse.ReturnCode;
 
                 case BuildResponse.ResponseType.MismatchedVersion:
-                    LogCompilationMessage(logger, requestId, CompilationKind.FatalError, "server reports different protocol version than build task");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.FatalError,
+                        "server reports different protocol version than build task"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
 
                 case BuildResponse.ResponseType.IncorrectHash:
-                    LogCompilationMessage(logger, requestId, CompilationKind.FatalError, "server reports different hash version than build task");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.FatalError,
+                        "server reports different hash version than build task"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
 
                 case BuildResponse.ResponseType.Rejected:
                     var rejectedResponse = (RejectedBuildResponse)response;
-                    LogCompilationMessage(logger, requestId, CompilationKind.ToolFallback, $"server rejected the request '{rejectedResponse.Reason}'");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.ToolFallback,
+                        $"server rejected the request '{rejectedResponse.Reason}'"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
 
                 case BuildResponse.ResponseType.AnalyzerInconsistency:
                     var analyzerResponse = (AnalyzerInconsistencyBuildResponse)response;
-                    var combinedMessage = string.Join(", ", analyzerResponse.ErrorMessages.ToArray());
-                    LogCompilationMessage(logger, requestId, CompilationKind.ToolFallback, $"server rejected the request due to analyzer / generator issues '{combinedMessage}'");
+                    var combinedMessage = string.Join(
+                        ", ",
+                        analyzerResponse.ErrorMessages.ToArray()
+                    );
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.ToolFallback,
+                        $"server rejected the request due to analyzer / generator issues '{combinedMessage}'"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
 
                 default:
-                    LogCompilationMessage(logger, requestId, CompilationKind.ToolFallback, $"server gave an unrecognized response");
+                    LogCompilationMessage(
+                        logger,
+                        requestId,
+                        CompilationKind.ToolFallback,
+                        $"server gave an unrecognized response"
+                    );
                     return base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
             }
         }
@@ -691,7 +771,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// in the language specific manner. This often involves parsing the raw output and formatting it as 
         /// individual messages for MSBuild.
         /// </summary>
-        private protected abstract void LogCompilerOutput(string output, MessageImportance messageImportance);
+        private protected abstract void LogCompilerOutput(
+            string output,
+            MessageImportance messageImportance
+        );
 
         /// <summary>
         /// Used to log a message that should go into both the compiler server log as well as the MSBuild logs
@@ -699,7 +782,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// These are intended to be processed by automation in the binlog hence do not change the structure of
         /// the messages here.
         /// </summary>
-        private void LogCompilationMessage(ICompilerServerLogger logger, Guid requestId, CompilationKind kind, string diagnostic)
+        private void LogCompilationMessage(
+            ICompilerServerLogger logger,
+            Guid requestId,
+            CompilationKind kind,
+            string diagnostic
+        )
         {
             var category = kind switch
             {
@@ -733,10 +821,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         private string[] GetArguments(string commandLineCommands, string responseFileCommands)
         {
-            var commandLineArguments =
-                CommandLineUtilities.SplitCommandLineIntoArguments(commandLineCommands, removeHashComments: true);
-            var responseFileArguments =
-                CommandLineUtilities.SplitCommandLineIntoArguments(responseFileCommands, removeHashComments: true);
+            var commandLineArguments = CommandLineUtilities.SplitCommandLineIntoArguments(
+                commandLineCommands,
+                removeHashComments: true
+            );
+            var responseFileArguments = CommandLineUtilities.SplitCommandLineIntoArguments(
+                responseFileCommands,
+                removeHashComments: true
+            );
             return commandLineArguments.Concat(responseFileArguments).ToArray();
         }
 
@@ -774,7 +866,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Fills the provided CommandLineBuilderExtension with those switches and other information that can't go into a response file and
         /// must go directly onto the command line.
         /// </summary>
-        protected internal virtual void AddCommandLineCommands(CommandLineBuilderExtension commandLine)
+        protected internal virtual void AddCommandLineCommands(
+            CommandLineBuilderExtension commandLine
+        )
         {
             commandLine.AppendWhenTrue("/noconfig", _store, nameof(NoConfig));
         }
@@ -782,21 +876,25 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Fills the provided CommandLineBuilderExtension with those switches and other information that can go into a response file.
         /// </summary>
-        protected internal virtual void AddResponseFileCommands(CommandLineBuilderExtension commandLine)
+        protected internal virtual void AddResponseFileCommands(
+            CommandLineBuilderExtension commandLine
+        )
         {
             // If outputAssembly is not specified, then an "/out: <name>" option won't be added to
             // overwrite the one resulting from the OutputAssembly member of the CompilerParameters class.
             // In that case, we should set the outputAssembly member based on the first source file.
             if (
-                    (OutputAssembly == null) &&
-                    (Sources != null) &&
-                    (Sources.Length > 0) &&
-                    (ResponseFiles == null)    // The response file may already have a /out: switch in it, so don't try to be smart here.
-                )
+                (OutputAssembly == null)
+                && (Sources != null)
+                && (Sources.Length > 0)
+                && (ResponseFiles == null) // The response file may already have a /out: switch in it, so don't try to be smart here.
+            )
             {
                 try
                 {
-                    OutputAssembly = new TaskItem(Path.GetFileNameWithoutExtension(Sources[0].ItemSpec));
+                    OutputAssembly = new TaskItem(
+                        Path.GetFileNameWithoutExtension(Sources[0].ItemSpec)
+                    );
                 }
                 catch (ArgumentException e)
                 {
@@ -806,7 +904,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 {
                     OutputAssembly.ItemSpec += ".dll";
                 }
-                else if (string.Compare(TargetType, "module", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(TargetType, "module", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     OutputAssembly.ItemSpec += ".netmodule";
                 }
@@ -834,7 +934,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/keycontainer:", KeyContainer);
             commandLine.AppendSwitchIfNotNull("/keyfile:", KeyFile);
             // If the strings "LogicalName" or "Access" ever change, make sure to search/replace everywhere in vsproject.
-            commandLine.AppendSwitchIfNotNull("/linkresource:", LinkResources, new string[] { "LogicalName", "Access" });
+            commandLine.AppendSwitchIfNotNull(
+                "/linkresource:",
+                LinkResources,
+                new string[] { "LogicalName", "Access" }
+            );
             commandLine.AppendWhenTrue("/nologo", _store, nameof(NoLogo));
             commandLine.AppendWhenTrue("/nowin32manifest", _store, nameof(NoWin32Manifest));
             commandLine.AppendPlusOrMinusSwitch("/optimize", _store, nameof(Optimize));
@@ -847,14 +951,24 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/subsystemversion:", SubsystemVersion);
             commandLine.AppendWhenTrue("/reportanalyzer", _store, nameof(ReportAnalyzer));
             // If the strings "LogicalName" or "Access" ever change, make sure to search/replace everywhere in vsproject.
-            commandLine.AppendSwitchIfNotNull("/resource:", Resources, new string[] { "LogicalName", "Access" });
+            commandLine.AppendSwitchIfNotNull(
+                "/resource:",
+                Resources,
+                new string[] { "LogicalName", "Access" }
+            );
             commandLine.AppendSwitchIfNotNull("/target:", TargetType);
-            commandLine.AppendPlusOrMinusSwitch("/warnaserror", _store, nameof(TreatWarningsAsErrors));
+            commandLine.AppendPlusOrMinusSwitch(
+                "/warnaserror",
+                _store,
+                nameof(TreatWarningsAsErrors)
+            );
             commandLine.AppendWhenTrue("/utf8output", _store, nameof(Utf8Output));
             commandLine.AppendSwitchIfNotNull("/win32icon:", Win32Icon);
             commandLine.AppendSwitchIfNotNull("/win32manifest:", Win32Manifest);
 
-            AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(commandLine);
+            AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(
+                commandLine
+            );
             AddAnalyzersToCommandLine(commandLine, Analyzers);
             AddAdditionalFilesToCommandLine(commandLine);
 
@@ -862,7 +976,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendFileNamesIfNotNull(Sources, " ");
         }
 
-        internal void AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(CommandLineBuilderExtension commandLine)
+        internal void AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(
+            CommandLineBuilderExtension commandLine
+        )
         {
             commandLine.AppendPlusOrMinusSwitch("/deterministic", _store, nameof(Deterministic));
             commandLine.AppendPlusOrMinusSwitch("/publicsign", _store, nameof(PublicSign));
@@ -897,7 +1013,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Adds a "/analyzer:" switch to the command line for each provided analyzer.
         /// </summary>
-        internal static void AddAnalyzersToCommandLine(CommandLineBuilderExtension commandLine, ITaskItem[]? analyzers)
+        internal static void AddAnalyzersToCommandLine(
+            CommandLineBuilderExtension commandLine,
+            ITaskItem[]? analyzers
+        )
         {
             // If there were no analyzers passed in, don't add any /analyzer: switches
             // on the command-line.
@@ -954,7 +1073,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 foreach (ITaskItem analyzerConfigFile in AnalyzerConfigFiles)
                 {
-                    commandLine.AppendSwitchIfNotNull("/analyzerconfig:", analyzerConfigFile.ItemSpec);
+                    commandLine.AppendSwitchIfNotNull(
+                        "/analyzerconfig:",
+                        analyzerConfigFile.ItemSpec
+                    );
                 }
             }
         }
@@ -990,7 +1112,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             if (_store[nameof(DebugType)] != null)
             {
                 // If debugtype is none then only show debug- else use the debug type and the debugsymbols as is.
-                if (string.Compare((string?)_store[nameof(DebugType)], "none", StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        (string?)_store[nameof(DebugType)],
+                        "none",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     _store[nameof(DebugType)] = null;
                     _store[nameof(EmitDebugInformation)] = false;
@@ -1039,11 +1167,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Whether the command line compiler was invoked, instead
         /// of the host object compiler.
         /// </summary>
-        protected bool UsedCommandLineTool
-        {
-            get;
-            set;
-        }
+        protected bool UsedCommandLineTool { get; set; }
 
         private bool _hostCompilerSupportsAllParameters;
         protected bool HostCompilerSupportsAllParameters
@@ -1059,29 +1183,40 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// and set our state so we know not to call the host object to do the actual compilation.
         /// </summary>
         /// <owner>RGoel</owner>
-        protected void CheckHostObjectSupport
-            (
+        protected void CheckHostObjectSupport(
             string parameterName,
             bool resultFromHostObjectSetOperation
-            )
+        )
         {
             if (!resultFromHostObjectSetOperation)
             {
-                Log.LogMessageFromResources(MessageImportance.Normal, "General_ParameterUnsupportedOnHostCompiler", parameterName);
+                Log.LogMessageFromResources(
+                    MessageImportance.Normal,
+                    "General_ParameterUnsupportedOnHostCompiler",
+                    parameterName
+                );
                 _hostCompilerSupportsAllParameters = false;
             }
         }
 
-        internal void InitializeHostObjectSupportForNewSwitches(ITaskHost hostObject, ref string param)
+        internal void InitializeHostObjectSupportForNewSwitches(
+            ITaskHost hostObject,
+            ref string param
+        )
         {
             var compilerOptionsHostObject = hostObject as ICompilerOptionsHostObject;
 
             if (compilerOptionsHostObject != null)
             {
                 var commandLineBuilder = new CommandLineBuilderExtension();
-                AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(commandLineBuilder);
+                AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(
+                    commandLineBuilder
+                );
                 param = "CompilerOptions";
-                CheckHostObjectSupport(param, compilerOptionsHostObject.SetCompilerOptions(commandLineBuilder.ToString()));
+                CheckHostObjectSupport(
+                    param,
+                    compilerOptionsHostObject.SetCompilerOptions(commandLineBuilder.ToString())
+                );
             }
         }
 
@@ -1104,7 +1239,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 if (!File.Exists(reference.ItemSpec))
                 {
                     success = false;
-                    Log.LogErrorWithCodeFromResources("General_ReferenceDoesNotExist", reference.ItemSpec);
+                    Log.LogErrorWithCodeFromResources(
+                        "General_ReferenceDoesNotExist",
+                        reference.ItemSpec
+                    );
                 }
             }
 
@@ -1129,44 +1267,40 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// which is only used during IDE builds.
         /// </summary>
         /// <returns>the path to the win32 manifest to provide to the host object</returns>
-        internal string? GetWin32ManifestSwitch
-        (
-            bool noDefaultWin32Manifest,
-            string? win32Manifest
-        )
+        internal string? GetWin32ManifestSwitch(bool noDefaultWin32Manifest, string? win32Manifest)
         {
             if (!noDefaultWin32Manifest)
             {
                 if (string.IsNullOrEmpty(win32Manifest) && string.IsNullOrEmpty(Win32Resource))
                 {
                     // We only want to consider the default.win32manifest if this is an executable
-                    if (!string.Equals(TargetType, "library", StringComparison.OrdinalIgnoreCase)
-                       && !string.Equals(TargetType, "module", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !string.Equals(TargetType, "library", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(TargetType, "module", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         // We need to compute the path to the default win32 manifest
-                        string pathToDefaultManifest = ToolLocationHelper.GetPathToDotNetFrameworkFile
-                                                       (
-                                                           "default.win32manifest",
-
-                                                           // We are choosing to pass Version46 instead of VersionLatest. TargetDotNetFrameworkVersion
-                                                           // is an enum, and VersionLatest is not some sentinel value but rather a constant that is
-                                                           // equal to the highest version defined in the enum. Enum values, being constants, are baked
-                                                           // into consuming assembly, so specifying VersionLatest means not the latest version wherever
-                                                           // this code is running, but rather the latest version of the framework according to the
-                                                           // reference assembly with which this assembly was built. As of this writing, we are building
-                                                           // our bits on machines with Visual Studio 2015 that know about 4.6.1, so specifying
-                                                           // VersionLatest would bake in the enum value for 4.6.1. But we need to run on machines with
-                                                           // MSBuild that only know about Version46 (and no higher), so VersionLatest will fail there.
-                                                           // Explicitly passing Version46 prevents this problem.
-                                                           TargetDotNetFrameworkVersion.Version46
-                                                       );
+                        string pathToDefaultManifest =
+                            ToolLocationHelper.GetPathToDotNetFrameworkFile(
+                                "default.win32manifest",
+                                // We are choosing to pass Version46 instead of VersionLatest. TargetDotNetFrameworkVersion
+                                // is an enum, and VersionLatest is not some sentinel value but rather a constant that is
+                                // equal to the highest version defined in the enum. Enum values, being constants, are baked
+                                // into consuming assembly, so specifying VersionLatest means not the latest version wherever
+                                // this code is running, but rather the latest version of the framework according to the
+                                // reference assembly with which this assembly was built. As of this writing, we are building
+                                // our bits on machines with Visual Studio 2015 that know about 4.6.1, so specifying
+                                // VersionLatest would bake in the enum value for 4.6.1. But we need to run on machines with
+                                // MSBuild that only know about Version46 (and no higher), so VersionLatest will fail there.
+                                // Explicitly passing Version46 prevents this problem.
+                                TargetDotNetFrameworkVersion.Version46
+                            );
 
                         if (null == pathToDefaultManifest)
                         {
                             // This is rather unlikely, and the inproc compiler seems to log an error anyway.
                             // So just a message is fine.
-                            Log.LogMessageFromResources
-                            (
+                            Log.LogMessageFromResources(
                                 "General_ExpectedFileMissing",
                                 "default.win32manifest"
                             );

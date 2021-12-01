@@ -9,12 +9,18 @@ namespace Internal.Cryptography
 {
     internal static class SymmetricPadding
     {
-        public static int GetCiphertextLength(int plaintextLength, int paddingSizeInBytes, PaddingMode paddingMode)
+        public static int GetCiphertextLength(
+            int plaintextLength,
+            int paddingSizeInBytes,
+            PaddingMode paddingMode
+        )
         {
             Debug.Assert(plaintextLength >= 0);
 
-             //divisor and factor are same and won't overflow.
-            int wholeBlocks = Math.DivRem(plaintextLength, paddingSizeInBytes, out int remainder) * paddingSizeInBytes;
+            //divisor and factor are same and won't overflow.
+            int wholeBlocks =
+                Math.DivRem(plaintextLength, paddingSizeInBytes, out int remainder)
+                * paddingSizeInBytes;
 
             switch (paddingMode)
             {
@@ -34,7 +40,12 @@ namespace Internal.Cryptography
             }
         }
 
-        public static int PadBlock(ReadOnlySpan<byte> block, Span<byte> destination, int paddingSizeInBytes, PaddingMode paddingMode)
+        public static int PadBlock(
+            ReadOnlySpan<byte> block,
+            Span<byte> destination,
+            int paddingSizeInBytes,
+            PaddingMode paddingMode
+        )
         {
             int count = block.Length;
             int paddingRemainder = count % paddingSizeInBytes;
@@ -48,7 +59,10 @@ namespace Internal.Cryptography
                 case PaddingMode.None:
                     if (destination.Length < count)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -63,7 +77,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < ansiSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -80,7 +97,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < isoSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -97,7 +117,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < pkcsSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -118,7 +141,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < zeroSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -148,7 +174,11 @@ namespace Internal.Cryptography
             }
         }
 
-        public static int GetPaddingLength(ReadOnlySpan<byte> block, PaddingMode paddingMode, int blockSize)
+        public static int GetPaddingLength(
+            ReadOnlySpan<byte> block,
+            PaddingMode paddingMode,
+            int blockSize
+        )
         {
             int padBytes = 0;
 
@@ -172,7 +202,6 @@ namespace Internal.Cryptography
                             throw new CryptographicException(SR.Cryptography_InvalidPadding);
                         }
                     }
-
                     break;
 
                 case PaddingMode.ISO10126:
@@ -183,7 +212,6 @@ namespace Internal.Cryptography
                     {
                         throw new CryptographicException(SR.Cryptography_InvalidPadding);
                     }
-
                     // Since the padding consists of random bytes, we cannot verify the actual pad bytes themselves
                     break;
 
@@ -200,7 +228,6 @@ namespace Internal.Cryptography
                         if (block[i] != padBytes)
                             throw new CryptographicException(SR.Cryptography_InvalidPadding);
                     }
-
                     break;
 
                 // We cannot remove Zeros padding because we don't know if the zeros at the end of the block

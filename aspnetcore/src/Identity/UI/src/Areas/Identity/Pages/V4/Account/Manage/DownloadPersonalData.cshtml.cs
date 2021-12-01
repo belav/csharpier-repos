@@ -40,7 +40,8 @@ internal class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel wher
 
     public DownloadPersonalDataModel(
         UserManager<TUser> userManager,
-        ILogger<DownloadPersonalDataModel> logger)
+        ILogger<DownloadPersonalDataModel> logger
+    )
     {
         _userManager = userManager;
         _logger = logger;
@@ -59,12 +60,16 @@ internal class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel wher
             return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
         }
 
-        _logger.LogInformation(LoggerEventIds.PersonalDataRequested, "User asked for their personal data.");
+        _logger.LogInformation(
+            LoggerEventIds.PersonalDataRequested,
+            "User asked for their personal data."
+        );
 
         // Only include personal data for download
         var personalData = new Dictionary<string, string>();
-        var personalDataProps = typeof(TUser).GetProperties().Where(
-                        prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
+        var personalDataProps = typeof(TUser)
+            .GetProperties()
+            .Where(prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
         foreach (var p in personalDataProps)
         {
             personalData.Add(p.Name, p.GetValue(user)?.ToString() ?? "null");
@@ -79,6 +84,9 @@ internal class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel wher
         personalData.Add($"Authenticator Key", await _userManager.GetAuthenticatorKeyAsync(user));
 
         Response.Headers.Add("Content-Disposition", "attachment; filename=PersonalData.json");
-        return new FileContentResult(JsonSerializer.SerializeToUtf8Bytes(personalData), "application/json");
+        return new FileContentResult(
+            JsonSerializer.SerializeToUtf8Bytes(personalData),
+            "application/json"
+        );
     }
 }

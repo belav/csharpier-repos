@@ -9,12 +9,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct?)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct?)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     private static int Main()
@@ -27,5 +33,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

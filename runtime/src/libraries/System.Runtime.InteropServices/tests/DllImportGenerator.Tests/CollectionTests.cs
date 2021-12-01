@@ -17,47 +17,101 @@ namespace DllImportGenerator.IntegrationTests
         public partial class Collections
         {
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum([MarshalUsing(typeof(ListMarshaller<int>))] List<int> values, int numValues);
+            public static partial int Sum(
+                [MarshalUsing(typeof(ListMarshaller<int>))] List<int> values,
+                int numValues
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
             public static partial int Sum(ref int values, int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-            public static partial int SumInArray([MarshalUsing(typeof(ListMarshaller<int>))] in List<int> values, int numValues);
+            public static partial int SumInArray(
+                [MarshalUsing(typeof(ListMarshaller<int>))] in List<int> values,
+                int numValues
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate([MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")] ref List<int> values, int numValues);
+            public static partial void Duplicate(
+                [MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")]
+                    ref List<int> values,
+                int numValues
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
-            [return:MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")]
+            [return: MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")]
             public static partial List<int> CreateRange(int start, int end, out int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(int start, int end, out int numValues, [MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")] out List<int> res);
+            public static partial void CreateRange_Out(
+                int start,
+                int end,
+                out int numValues,
+                [MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")]
+                    out List<int> res
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_string_lengths")]
-            public static partial int SumStringLengths([MarshalUsing(typeof(ListMarshaller<string>)), MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)] List<string> strArray);
+            public static partial int SumStringLengths(
+                [
+                    MarshalUsing(typeof(ListMarshaller<string>)),
+                    MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
+                ]
+                    List<string> strArray
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_replace")]
-            public static partial void ReverseStrings_Ref([MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"), MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)] ref List<string> strArray, out int numElements);
+            public static partial void ReverseStrings_Ref(
+                [
+                    MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
+                    MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
+                ]
+                    ref List<string> strArray,
+                out int numElements
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_return")]
-            [return: MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"), MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)]
-            public static partial List<string> ReverseStrings_Return([MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"), MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)] List<string> strArray, out int numElements);
+            [return:
+                MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
+                MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
+            ]
+            public static partial List<string> ReverseStrings_Return(
+                [
+                    MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
+                    MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
+                ]
+                    List<string> strArray,
+                out int numElements
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_out")]
             public static partial void ReverseStrings_Out(
-                [MarshalUsing(typeof(ListMarshaller<string>)), MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)] List<string> strArray,
+                [
+                    MarshalUsing(typeof(ListMarshaller<string>)),
+                    MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
+                ]
+                    List<string> strArray,
                 out int numElements,
-                [MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"), MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)] out List<string> res);
+                [
+                    MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
+                    MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
+                ]
+                    out List<string> res
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes")]
-            [return:MarshalUsing(typeof(ListMarshaller<byte>), ConstantElementCount = sizeof(long))]
+            [return: MarshalUsing(
+                typeof(ListMarshaller<byte>),
+                ConstantElementCount = sizeof(long)
+            )]
             public static partial List<byte> GetLongBytes(long l);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "and_all_members")]
-            [return:MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndAllMembers([MarshalUsing(typeof(ListMarshaller<BoolStruct>))] List<BoolStruct> pArray, int length);
+            [return: MarshalAs(UnmanagedType.U1)]
+            public static partial bool AndAllMembers(
+                [MarshalUsing(typeof(ListMarshaller<BoolStruct>))] List<BoolStruct> pArray,
+                int length
+            );
         }
     }
 
@@ -122,7 +176,7 @@ namespace DllImportGenerator.IntegrationTests
             {
                 "ABCdef 123$%^",
                 "🍜 !! 🍜 !!",
-                "🌲 木 🔥 火 🌾 土 🛡 金 🌊 水" ,
+                "🌲 木 🔥 火 🌾 土 🛡 金 🌊 水",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit.",
                 string.Empty,
                 null
@@ -133,7 +187,10 @@ namespace DllImportGenerator.IntegrationTests
         public void ByValueCollectionWithNonBlittableElements()
         {
             var strings = GetStringList();
-            Assert.Equal(strings.Sum(str => str?.Length ?? 0), NativeExportsNE.Collections.SumStringLengths(strings));
+            Assert.Equal(
+                strings.Sum(str => str?.Length ?? 0),
+                NativeExportsNE.Collections.SumStringLengths(strings)
+            );
         }
 
         [Fact]
@@ -157,7 +214,10 @@ namespace DllImportGenerator.IntegrationTests
         {
             var strings = GetStringList();
             var expectedStrings = strings.Select(s => ReverseChars(s)).ToList();
-            Assert.Equal(expectedStrings, NativeExportsNE.Collections.ReverseStrings_Return(strings, out _));
+            Assert.Equal(
+                expectedStrings,
+                NativeExportsNE.Collections.ReverseStrings_Return(strings, out _)
+            );
 
             List<string> res;
             NativeExportsNE.Collections.ReverseStrings_Out(strings, out _, out res);
@@ -189,38 +249,36 @@ namespace DllImportGenerator.IntegrationTests
         {
             var longVal = 0x12345678ABCDEF10L;
 
-            Assert.Equal(longVal, MemoryMarshal.Read<long>(CollectionsMarshal.AsSpan(NativeExportsNE.Collections.GetLongBytes(longVal))));
+            Assert.Equal(
+                longVal,
+                MemoryMarshal.Read<long>(
+                    CollectionsMarshal.AsSpan(NativeExportsNE.Collections.GetLongBytes(longVal))
+                )
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60624", typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsArm64Process))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60624",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsArm64Process)
+        )]
         public void CollectionWithSimpleNonBlittableTypeMarshalling(bool result)
         {
             var boolValues = new List<BoolStruct>
             {
-                new BoolStruct
-                {
-                    b1 = true,
-                    b2 = true,
-                    b3 = true,
-                },
-                new BoolStruct
-                {
-                    b1 = true,
-                    b2 = true,
-                    b3 = true,
-                },
-                new BoolStruct
-                {
-                    b1 = true,
-                    b2 = true,
-                    b3 = result,
-                },
+                new BoolStruct { b1 = true, b2 = true, b3 = true, },
+                new BoolStruct { b1 = true, b2 = true, b3 = true, },
+                new BoolStruct { b1 = true, b2 = true, b3 = result, },
             };
 
-            Assert.Equal(result, NativeExportsNE.Collections.AndAllMembers(boolValues, boolValues.Count));
+            Assert.Equal(
+                result,
+                NativeExportsNE.Collections.AndAllMembers(boolValues, boolValues.Count)
+            );
         }
 
         private static string ReverseChars(string value)

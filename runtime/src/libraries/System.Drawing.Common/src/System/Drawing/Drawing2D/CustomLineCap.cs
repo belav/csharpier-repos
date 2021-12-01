@@ -20,17 +20,30 @@ namespace System.Drawing.Drawing2D
         // For subclass creation
         internal CustomLineCap() { }
 
-        public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath) : this(fillPath, strokePath, LineCap.Flat) { }
+        public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath)
+            : this(fillPath, strokePath, LineCap.Flat) { }
 
-        public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath, LineCap baseCap) : this(fillPath, strokePath, baseCap, 0) { }
+        public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath, LineCap baseCap)
+            : this(fillPath, strokePath, baseCap, 0) { }
 
-        public CustomLineCap(GraphicsPath? fillPath, GraphicsPath? strokePath, LineCap baseCap, float baseInset)
+        public CustomLineCap(
+            GraphicsPath? fillPath,
+            GraphicsPath? strokePath,
+            LineCap baseCap,
+            float baseInset
+        )
         {
             IntPtr nativeLineCap;
             int status = Gdip.GdipCreateCustomLineCap(
-                                new HandleRef(fillPath, (fillPath == null) ? IntPtr.Zero : fillPath._nativePath),
-                                new HandleRef(strokePath, (strokePath == null) ? IntPtr.Zero : strokePath._nativePath),
-                                baseCap, baseInset, out nativeLineCap);
+                new HandleRef(fillPath, (fillPath == null) ? IntPtr.Zero : fillPath._nativePath),
+                new HandleRef(
+                    strokePath,
+                    (strokePath == null) ? IntPtr.Zero : strokePath._nativePath
+                ),
+                baseCap,
+                baseInset,
+                out nativeLineCap
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -61,7 +74,9 @@ namespace System.Drawing.Drawing2D
 
 #if FINALIZATION_WATCH
             if (!disposing && nativeCap != null)
-                Debug.WriteLine("**********************\nDisposed through finalization:\n" + allocationSite);
+                Debug.WriteLine(
+                    "**********************\nDisposed through finalization:\n" + allocationSite
+                );
 #endif
             // propagate the explicit dispose call to the child
             if (disposing && nativeCap != null)
@@ -92,7 +107,11 @@ namespace System.Drawing.Drawing2D
 
         public void SetStrokeCaps(LineCap startCap, LineCap endCap)
         {
-            int status = Gdip.GdipSetCustomLineCapStrokeCaps(new HandleRef(this, nativeCap), startCap, endCap);
+            int status = Gdip.GdipSetCustomLineCapStrokeCaps(
+                new HandleRef(this, nativeCap),
+                startCap,
+                endCap
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -100,7 +119,11 @@ namespace System.Drawing.Drawing2D
 
         public void GetStrokeCaps(out LineCap startCap, out LineCap endCap)
         {
-            int status = Gdip.GdipGetCustomLineCapStrokeCaps(new HandleRef(this, nativeCap), out startCap, out endCap);
+            int status = Gdip.GdipGetCustomLineCapStrokeCaps(
+                new HandleRef(this, nativeCap),
+                out startCap,
+                out endCap
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -110,7 +133,10 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetCustomLineCapStrokeJoin(new HandleRef(this, nativeCap), out LineJoin lineJoin);
+                int status = Gdip.GdipGetCustomLineCapStrokeJoin(
+                    new HandleRef(this, nativeCap),
+                    out LineJoin lineJoin
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -119,7 +145,10 @@ namespace System.Drawing.Drawing2D
             }
             set
             {
-                int status = Gdip.GdipSetCustomLineCapStrokeJoin(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetCustomLineCapStrokeJoin(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -130,7 +159,10 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetCustomLineCapBaseCap(new HandleRef(this, nativeCap), out LineCap baseCap);
+                int status = Gdip.GdipGetCustomLineCapBaseCap(
+                    new HandleRef(this, nativeCap),
+                    out LineCap baseCap
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -139,7 +171,10 @@ namespace System.Drawing.Drawing2D
             }
             set
             {
-                int status = Gdip.GdipSetCustomLineCapBaseCap(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetCustomLineCapBaseCap(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -150,7 +185,10 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetCustomLineCapBaseInset(new HandleRef(this, nativeCap), out float inset);
+                int status = Gdip.GdipGetCustomLineCapBaseInset(
+                    new HandleRef(this, nativeCap),
+                    out float inset
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -159,7 +197,10 @@ namespace System.Drawing.Drawing2D
             }
             set
             {
-                int status = Gdip.GdipSetCustomLineCapBaseInset(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetCustomLineCapBaseInset(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -170,7 +211,10 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipGetCustomLineCapWidthScale(new HandleRef(this, nativeCap), out float widthScale);
+                int status = Gdip.GdipGetCustomLineCapWidthScale(
+                    new HandleRef(this, nativeCap),
+                    out float widthScale
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -179,7 +223,10 @@ namespace System.Drawing.Drawing2D
             }
             set
             {
-                int status = Gdip.GdipSetCustomLineCapWidthScale(new HandleRef(this, nativeCap), value);
+                int status = Gdip.GdipSetCustomLineCapWidthScale(
+                    new HandleRef(this, nativeCap),
+                    value
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);

@@ -36,7 +36,11 @@ internal sealed class HttpLoggingMiddleware
     /// <param name="next"></param>
     /// <param name="options"></param>
     /// <param name="logger"></param>
-    public HttpLoggingMiddleware(RequestDelegate next, IOptionsMonitor<HttpLoggingOptions> options, ILogger<HttpLoggingMiddleware> logger)
+    public HttpLoggingMiddleware(
+        RequestDelegate next,
+        IOptionsMonitor<HttpLoggingOptions> options,
+        ILogger<HttpLoggingMiddleware> logger
+    )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
 
@@ -80,7 +84,8 @@ internal sealed class HttpLoggingMiddleware
         {
             var request = context.Request;
             var list = new List<KeyValuePair<string, object?>>(
-                request.Headers.Count + DefaultRequestFieldsMinusHeaders);
+                request.Headers.Count + DefaultRequestFieldsMinusHeaders
+            );
 
             if (options.LoggingFields.HasFlag(HttpLoggingFields.RequestProtocol))
             {
@@ -115,16 +120,21 @@ internal sealed class HttpLoggingMiddleware
 
             if (options.LoggingFields.HasFlag(HttpLoggingFields.RequestBody))
             {
-                if (MediaTypeHelpers.TryGetEncodingForMediaType(request.ContentType,
-                    options.MediaTypeOptions.MediaTypeStates,
-                    out var encoding))
+                if (
+                    MediaTypeHelpers.TryGetEncodingForMediaType(
+                        request.ContentType,
+                        options.MediaTypeOptions.MediaTypeStates,
+                        out var encoding
+                    )
+                )
                 {
                     originalBody = request.Body;
                     requestBufferingStream = new RequestBufferingStream(
                         request.Body,
                         options.RequestBodyLogLimit,
                         _logger,
-                        encoding);
+                        encoding
+                    );
                     request.Body = requestBufferingStream;
                 }
                 else
@@ -150,12 +160,14 @@ internal sealed class HttpLoggingMiddleware
                 originalBodyFeature = context.Features.Get<IHttpResponseBodyFeature>()!;
 
                 // TODO pool these.
-                responseBufferingStream = new ResponseBufferingStream(originalBodyFeature,
+                responseBufferingStream = new ResponseBufferingStream(
+                    originalBodyFeature,
                     options.ResponseBodyLogLimit,
                     _logger,
                     context,
                     options.MediaTypeOptions.MediaTypeStates,
-                    options);
+                    options
+                );
                 response.Body = responseBufferingStream;
                 context.Features.Set<IHttpResponseBodyFeature>(responseBufferingStream);
             }
@@ -177,7 +189,9 @@ internal sealed class HttpLoggingMiddleware
 
             if (responseBufferingStream != null)
             {
-                var responseBody = responseBufferingStream.GetString(responseBufferingStream.Encoding);
+                var responseBody = responseBufferingStream.GetString(
+                    responseBufferingStream.Encoding
+                );
                 if (!string.IsNullOrEmpty(responseBody))
                 {
                     _logger.ResponseBody(responseBody);
@@ -202,19 +216,30 @@ internal sealed class HttpLoggingMiddleware
         }
     }
 
-    private static void AddToList(List<KeyValuePair<string, object?>> list, string key, string? value)
+    private static void AddToList(
+        List<KeyValuePair<string, object?>> list,
+        string key,
+        string? value
+    )
     {
         list.Add(new KeyValuePair<string, object?>(key, value));
     }
 
-    public static void LogResponseHeaders(HttpResponse response, HttpLoggingOptions options, ILogger logger)
+    public static void LogResponseHeaders(
+        HttpResponse response,
+        HttpLoggingOptions options,
+        ILogger logger
+    )
     {
         var list = new List<KeyValuePair<string, object?>>(
-            response.Headers.Count + DefaultResponseFieldsMinusHeaders);
+            response.Headers.Count + DefaultResponseFieldsMinusHeaders
+        );
 
         if (options.LoggingFields.HasFlag(HttpLoggingFields.ResponseStatusCode))
         {
-            list.Add(new KeyValuePair<string, object?>(nameof(response.StatusCode), response.StatusCode));
+            list.Add(
+                new KeyValuePair<string, object?>(nameof(response.StatusCode), response.StatusCode)
+            );
         }
 
         if (options.LoggingFields.HasFlag(HttpLoggingFields.ResponseHeaders))
@@ -227,9 +252,11 @@ internal sealed class HttpLoggingMiddleware
         logger.ResponseLog(httpResponseLog);
     }
 
-    internal static void FilterHeaders(List<KeyValuePair<string, object?>> keyValues,
+    internal static void FilterHeaders(
+        List<KeyValuePair<string, object?>> keyValues,
         IHeaderDictionary headers,
-        HashSet<string> allowedHeaders)
+        HashSet<string> allowedHeaders
+    )
     {
         foreach (var (key, value) in headers)
         {

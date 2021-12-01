@@ -10,10 +10,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class ExplicitInterfaceMethodReferenceFinder : AbstractReferenceFinder<IMethodSymbol>
+    internal sealed class ExplicitInterfaceMethodReferenceFinder
+        : AbstractReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind == MethodKind.ExplicitInterfaceImplementation;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.ExplicitInterfaceImplementation;
 
         protected sealed override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
@@ -21,22 +22,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // An explicit method can't be referenced anywhere.
             return SpecializedTasks.EmptyImmutableArray<Document>();
         }
 
-        protected sealed override ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected sealed override ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             IMethodSymbol symbol,
             HashSet<string>? globalAliases,
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // An explicit method can't be referenced anywhere.
-            return new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
+            return new ValueTask<ImmutableArray<FinderLocation>>(
+                ImmutableArray<FinderLocation>.Empty
+            );
         }
     }
 }

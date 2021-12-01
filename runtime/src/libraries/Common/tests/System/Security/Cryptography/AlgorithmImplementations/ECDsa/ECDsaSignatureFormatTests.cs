@@ -18,10 +18,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         {
             ECDsa dsa = ECDsaFactory.Create(curve);
 
-            return new KeyDescription(
-                dsa,
-                $"{dsa.KeySize}-bit random key",
-                dsa.KeySize);
+            return new KeyDescription(dsa, $"{dsa.KeySize}-bit random key", dsa.KeySize);
         }
 
         private static KeyDescription OpenKey(in ECParameters ecParameters)
@@ -29,10 +26,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
             ECDsa dsa = ECDsaFactory.Create();
             dsa.ImportParameters(ecParameters);
 
-            return new KeyDescription(
-                dsa,
-                $"{dsa.KeySize}-bit static key",
-                dsa.KeySize);
+            return new KeyDescription(dsa, $"{dsa.KeySize}-bit static key", dsa.KeySize);
         }
 
         protected static IEnumerable<KeyDescription> LocalGenerateTestKeys()
@@ -62,11 +56,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
         protected override bool IsArrayBased => true;
-        
+
         protected override byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((ECDsa)key.Key).SignHash(hash, signatureFormat);
         }
@@ -75,7 +70,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((ECDsa)key.Key).VerifyHash(hash, signature, signatureFormat);
         }
@@ -84,7 +80,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((ECDsa)key.Key).SignData(data, hashAlgorithm, signatureFormat);
         }
@@ -94,7 +91,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((ECDsa)key.Key).VerifyData(data, signature, hashAlgorithm, signatureFormat);
         }
@@ -110,7 +108,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
         protected override byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((ECDsa)key.Key).SignHash(hash, signatureFormat);
         }
@@ -119,7 +118,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((ECDsa)key.Key).VerifyHash(hash, signature, signatureFormat);
         }
@@ -128,7 +128,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             int offset = 0;
             int count = 0;
@@ -150,7 +151,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             int offset = 0;
             int count = 0;
@@ -164,7 +166,14 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 data = bigger;
             }
 
-            return ((ECDsa)key.Key).VerifyData(data, offset, count, signature, hashAlgorithm, signatureFormat);
+            return ((ECDsa)key.Key).VerifyData(
+                data,
+                offset,
+                count,
+                signature,
+                hashAlgorithm,
+                signatureFormat
+            );
         }
 
         [Fact]
@@ -180,43 +189,53 @@ namespace System.Security.Cryptography.EcDsa.Tests
             {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.SignData(buffer, -1, buffer.Length, hash, format));
+                    () => key.SignData(buffer, -1, buffer.Length, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.SignData(buffer, buffer.Length + 1, 0, hash, format));
+                    () => key.SignData(buffer, buffer.Length + 1, 0, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.VerifyData(buffer, -1, buffer.Length, buffer, hash, format));
+                    () => key.VerifyData(buffer, -1, buffer.Length, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.VerifyData(buffer, buffer.Length + 1, 0, buffer, hash, format));
+                    () => key.VerifyData(buffer, buffer.Length + 1, 0, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.SignData(buffer, 1, buffer.Length, hash, format));
+                    () => key.SignData(buffer, 1, buffer.Length, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.SignData(buffer, 0, buffer.Length + 1, hash, format));
+                    () => key.SignData(buffer, 0, buffer.Length + 1, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.SignData(buffer, buffer.Length, 1, hash, format));
+                    () => key.SignData(buffer, buffer.Length, 1, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.VerifyData(buffer, 1, buffer.Length, buffer, hash, format));
+                    () => key.VerifyData(buffer, 1, buffer.Length, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.VerifyData(buffer, 0, buffer.Length + 1, buffer, hash, format));
+                    () => key.VerifyData(buffer, 0, buffer.Length + 1, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.VerifyData(buffer, buffer.Length, 1, buffer, hash, format));
+                    () => key.VerifyData(buffer, buffer.Length, 1, buffer, hash, format)
+                );
             }
         }
     }
@@ -231,14 +250,16 @@ namespace System.Security.Cryptography.EcDsa.Tests
         protected override byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ECDsa dsa = (ECDsa)key.Key;
             byte[] predictedMax = new byte[dsa.GetMaxSignatureSize(signatureFormat)];
 
             Assert.True(
                 dsa.TrySignHash(hash, predictedMax, signatureFormat, out int written),
-                "TrySignHash with a GetMaxSignatureSize buffer");
+                "TrySignHash with a GetMaxSignatureSize buffer"
+            );
 
             if (signatureFormat == DSASignatureFormat.IeeeP1363FixedFieldConcatenation)
             {
@@ -258,7 +279,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ReadOnlySpan<byte> readOnlyHash = hash;
             ReadOnlySpan<byte> readOnlySignature = signature;
@@ -269,14 +291,22 @@ namespace System.Security.Cryptography.EcDsa.Tests
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ECDsa dsa = (ECDsa)key.Key;
             byte[] predictedMax = new byte[dsa.GetMaxSignatureSize(signatureFormat)];
 
             Assert.True(
-                dsa.TrySignData(data, predictedMax, hashAlgorithm, signatureFormat, out int written),
-                "TrySignData with a GetMaxSignatureSize buffer");
+                dsa.TrySignData(
+                    data,
+                    predictedMax,
+                    hashAlgorithm,
+                    signatureFormat,
+                    out int written
+                ),
+                "TrySignData with a GetMaxSignatureSize buffer"
+            );
 
             if (signatureFormat == DSASignatureFormat.IeeeP1363FixedFieldConcatenation)
             {
@@ -297,12 +327,18 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ReadOnlySpan<byte> readOnlyData = data;
             ReadOnlySpan<byte> readOnlySignature = signature;
 
-            return ((ECDsa)key.Key).VerifyData(readOnlyData, readOnlySignature, hashAlgorithm, signatureFormat);
+            return ((ECDsa)key.Key).VerifyData(
+                readOnlyData,
+                readOnlySignature,
+                hashAlgorithm,
+                signatureFormat
+            );
         }
 
         private static int GetExpectedSize(int fieldSizeInBits)
@@ -360,7 +396,10 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 Assert.Equal(0, written);
             }
 
-            Assert.True(false, $"TrySignHash eventually succeeds with a {expectedSize}/{maxSize}-byte destination");
+            Assert.True(
+                false,
+                $"TrySignHash eventually succeeds with a {expectedSize}/{maxSize}-byte destination"
+            );
         }
 
         [Fact]
@@ -382,7 +421,15 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
             for (int i = 0; i < retryCount; i++)
             {
-                if (key.TrySignData(Array.Empty<byte>(), signature, hashAlgorithm, SignatureFormat, out int written))
+                if (
+                    key.TrySignData(
+                        Array.Empty<byte>(),
+                        signature,
+                        hashAlgorithm,
+                        SignatureFormat,
+                        out int written
+                    )
+                )
                 {
                     return;
                 }
@@ -390,7 +437,10 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 Assert.Equal(0, written);
             }
 
-            Assert.True(false, $"TrySignData eventually succeeds with a {expectedSize}/{maxSize}-byte destination");
+            Assert.True(
+                false,
+                $"TrySignData eventually succeeds with a {expectedSize}/{maxSize}-byte destination"
+            );
         }
     }
 }

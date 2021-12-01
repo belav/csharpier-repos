@@ -18,14 +18,12 @@ namespace System.Composition.UnitTests
         public interface IHandler<T> where T : IThing { }
 
         [Export(typeof(IHandler<>))]
-        public class ThingHandler<T> : IHandler<T>
-            where T : IThing
+        public class ThingHandler<T> : IHandler<T> where T : IThing
         {
         }
 
         [Export(typeof(IHandler<>))]
-        public class BookHandler<T> : IHandler<T>
-            where T : IBook
+        public class BookHandler<T> : IHandler<T> where T : IBook
         {
         }
 

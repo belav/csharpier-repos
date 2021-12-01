@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentGenericTypeIntegrationTest : RazorIntegrationTestBase
 {
-    private readonly CSharpSyntaxTree GenericContextComponent = Parse(@"
+    private readonly CSharpSyntaxTree GenericContextComponent = Parse(
+        @"
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
@@ -48,9 +49,11 @@ namespace Test
         }
     }
 }
-");
+"
+    );
 
-    private readonly CSharpSyntaxTree MultipleGenericParameterComponent = Parse(@"
+    private readonly CSharpSyntaxTree MultipleGenericParameterComponent = Parse(
+        @"
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 namespace Test
@@ -74,7 +77,8 @@ namespace Test
         public TItem3 Item3 { get; set; }
     }
 }
-");
+"
+    );
 
     internal override string FileKind => FileKinds.Component;
 
@@ -87,16 +91,22 @@ namespace Test
         AdditionalSyntaxTrees.Add(GenericContextComponent);
 
         // Act
-        var generated = CompileToCSharp(@"
-<GenericContext />");
+        var generated = CompileToCSharp(
+            @"
+<GenericContext />"
+        );
 
         // Assert
         var diagnostic = Assert.Single(generated.Diagnostics);
-        Assert.Same(ComponentDiagnosticFactory.GenericComponentTypeInferenceUnderspecified.Id, diagnostic.Id);
+        Assert.Same(
+            ComponentDiagnosticFactory.GenericComponentTypeInferenceUnderspecified.Id,
+            diagnostic.Id
+        );
         Assert.Equal(
-            "The type of component 'GenericContext' cannot be inferred based on the values provided. Consider " +
-            "specifying the type arguments directly using the following attributes: 'TItem'.",
-            diagnostic.GetMessage(CultureInfo.CurrentCulture));
+            "The type of component 'GenericContext' cannot be inferred based on the values provided. Consider "
+                + "specifying the type arguments directly using the following attributes: 'TItem'.",
+            diagnostic.GetMessage(CultureInfo.CurrentCulture)
+        );
     }
 
     [Fact]
@@ -106,15 +116,21 @@ namespace Test
         AdditionalSyntaxTrees.Add(MultipleGenericParameterComponent);
 
         // Act
-        var generated = CompileToCSharp(@"
-<MultipleGenericParameter TItem1=int />");
+        var generated = CompileToCSharp(
+            @"
+<MultipleGenericParameter TItem1=int />"
+        );
 
         // Assert
         var diagnostic = Assert.Single(generated.Diagnostics);
-        Assert.Same(ComponentDiagnosticFactory.GenericComponentMissingTypeArgument.Id, diagnostic.Id);
+        Assert.Same(
+            ComponentDiagnosticFactory.GenericComponentMissingTypeArgument.Id,
+            diagnostic.Id
+        );
         Assert.Equal(
-            "The component 'MultipleGenericParameter' is missing required type arguments. " +
-            "Specify the missing types using the attributes: 'TItem2', 'TItem3'.",
-            diagnostic.GetMessage(CultureInfo.CurrentCulture));
+            "The component 'MultipleGenericParameter' is missing required type arguments. "
+                + "Specify the missing types using the attributes: 'TItem2', 'TItem3'.",
+            diagnostic.GetMessage(CultureInfo.CurrentCulture)
+        );
     }
 }

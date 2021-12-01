@@ -48,8 +48,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.diffnumberprms002.diffnumberprms002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -94,8 +92,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.diffnumberprms003.diffnumberprms003
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -120,7 +116,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -139,8 +134,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.moreprms001.moreprms001
 {
@@ -186,8 +179,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.moreprms002.moreprms002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -200,7 +191,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = -1;
-        public void Method(int x, float f, string s, decimal d, int xx, float ff, string ss, decimal dd, int xxx, float fff, string sss, decimal ddd)
+        public void Method(
+            int x,
+            float f,
+            string s,
+            decimal d,
+            int xx,
+            float ff,
+            string ss,
+            decimal dd,
+            int xxx,
+            float fff,
+            string sss,
+            decimal ddd
+        )
         {
             Target.Status = 2;
         }
@@ -226,8 +230,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.negtwoprms001.negtwoprms001
 {
@@ -270,7 +272,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Target.Method(int, float)", "Target.Method(float, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Target.Method(int, float)",
+                    "Target.Method(float, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -280,8 +287,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.negtwoprms002.negtwoprms002
 {
@@ -326,7 +331,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Target.Method(int, object)", "Target.Method(object, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Target.Method(int, object)",
+                    "Target.Method(object, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -336,8 +346,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.onedynamicparam001.onedynamicparam001
 {
@@ -388,8 +396,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.onedynamicparam002.onedynamicparam002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -439,8 +445,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.onedynamicparam003.onedynamicparam003
 {
@@ -497,12 +501,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.onedynamicparam004.onedynamicparam004
 {
     using System;
-    
+
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
     // <Description>
     // </Description>
@@ -532,7 +534,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", typeof(PlatformDetection), nameof(PlatformDetection.IsLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -550,8 +556,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.onedynamicparam006.onedynamicparam006
 {
@@ -599,7 +603,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindToVoidMethodButExpectResult,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -609,8 +616,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam001.oneparam001
 {
@@ -656,8 +661,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam002.oneparam002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -683,7 +686,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -703,8 +705,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam003.oneparam003
 {
@@ -751,8 +751,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam004.oneparam004
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -778,7 +776,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -797,8 +794,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam005.oneparam005
 {
@@ -844,8 +839,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam006.oneparam006
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -890,8 +883,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam007.oneparam007
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -918,7 +909,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -937,8 +927,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam008.oneparam008
 {
@@ -965,7 +953,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -984,8 +971,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam009.oneparam009
 {
@@ -1012,7 +997,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -1031,8 +1015,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam010.oneparam010
 {
@@ -1079,8 +1061,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam011.oneparam011
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1106,7 +1086,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -1125,8 +1104,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam012.oneparam012
 {
@@ -1173,8 +1150,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam013.oneparam013
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1218,8 +1193,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam014.oneparam014
 {
@@ -1265,8 +1238,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam015.oneparam015
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1310,8 +1281,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam016.oneparam016
 {
@@ -1362,8 +1331,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparam017.oneparam017
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1399,12 +1366,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         public static int MainMethod()
         {
             dynamic mc = new MemberClass();
-            List<string> list = new List<string>()
-            {
-            "Test"
-            }
-
-            ;
+            List<string> list = new List<string>() { "Test" };
             mc.Method_ReturnsDynamic<int, List<string>>(list);
             if (Test.Status == 1)
                 return 0;
@@ -1414,8 +1376,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv001.oneparamdifftypesconv001
 {
@@ -1461,8 +1421,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv002.oneparamdifftypesconv002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1506,8 +1464,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv003.oneparamdifftypesconv003
 {
@@ -1553,8 +1509,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv004.oneparamdifftypesconv004
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1597,8 +1551,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv005.oneparamdifftypesconv005
 {
@@ -1643,8 +1595,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv006.oneparamdifftypesconv006
 {
@@ -1697,8 +1647,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv007.oneparamdifftypesconv007
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1750,8 +1698,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv008.oneparamdifftypesconv008
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1802,8 +1748,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv009.oneparamdifftypesconv009
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1816,11 +1760,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
@@ -1848,12 +1788,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         public static int MainMethod(string[] args)
         {
             dynamic d = new Target();
-            myStruct s = new myStruct()
-            {
-                Ok = false
-            }
-
-            ;
+            myStruct s = new myStruct() { Ok = false };
             d.Method(s);
             if (Target.Status == 2)
                 return 0;
@@ -1863,8 +1798,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv010.oneparamdifftypesconv010
 {
@@ -1878,11 +1811,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
@@ -1910,12 +1839,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         public static int MainMethod(string[] args)
         {
             dynamic d = new Target();
-            myStruct s = new myStruct()
-            {
-                Ok = false
-            }
-
-            ;
+            myStruct s = new myStruct() { Ok = false };
             d.Method(s);
             if (Target.Status == 1)
                 return 0;
@@ -1925,8 +1849,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv011.oneparamdifftypesconv011
 {
@@ -1938,11 +1860,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
@@ -1970,12 +1888,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         public static int MainMethod(string[] args)
         {
             dynamic d = new Target();
-            myStruct s = new myStruct()
-            {
-                Ok = false
-            }
-
-            ;
+            myStruct s = new myStruct() { Ok = false };
             d.Method(s);
             if (Target.Status == 1)
                 return 0;
@@ -1985,8 +1898,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv012.oneparamdifftypesconv012
 {
@@ -1998,11 +1909,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
@@ -2039,8 +1946,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv013.oneparamdifftypesconv013
 {
@@ -2094,8 +1999,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv014.oneparamdifftypesconv014
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2147,8 +2050,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv015.oneparamdifftypesconv015
 {
@@ -2203,8 +2104,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv016.oneparamdifftypesconv016
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2256,8 +2155,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv017.oneparamdifftypesconv017
 {
@@ -2312,8 +2209,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesconv018.oneparamdifftypesconv018
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2366,8 +2261,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesnoconv001.oneparamdifftypesnoconv001
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2410,8 +2303,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesnoconv002.oneparamdifftypesnoconv002
 {
@@ -2456,8 +2347,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesuserconv001.oneparamdifftypesuserconv001
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2468,7 +2357,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public class Base
     {
-        public static implicit operator decimal (Base b)
+        public static implicit operator decimal(Base b)
         {
             return 1m;
         }
@@ -2510,8 +2399,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesuserconv002.oneparamdifftypesuserconv002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2522,12 +2409,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public class Base
     {
-        public static implicit operator int (Base b)
+        public static implicit operator int(Base b)
         {
             return 1;
         }
 
-        public static implicit operator long (Base b)
+        public static implicit operator long(Base b)
         {
             return 2;
         }
@@ -2569,8 +2456,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.oneparamdifftypesuserconv003.oneparamdifftypesuserconv003
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -2585,7 +2470,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class Derived : Base
     {
-        public static implicit operator decimal (Derived b)
+        public static implicit operator decimal(Derived b)
         {
             return 1m;
         }
@@ -2626,8 +2511,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype001.statictype001
 {
@@ -2678,8 +2561,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype002.statictype002
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -2729,8 +2610,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype003.statictype003
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -2776,8 +2655,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype004.statictype004
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -2822,8 +2699,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype005.statictype005
 {
@@ -2874,8 +2749,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype006.statictype006
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -2925,8 +2798,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype007.statictype007
 {
     public class Test
@@ -2955,8 +2826,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype008.statictype008
 {
@@ -2987,8 +2856,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype009.statictype009
 {
     public class Test
@@ -3017,8 +2884,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype010.statictype010
 {
@@ -3051,12 +2916,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         public static int MainMethod()
         {
             dynamic d = new Test();
-            S? s = new S()
-            {
-                Field = 3
-            }
-
-            ;
+            S? s = new S() { Field = 3 };
             d.Method(s);
             if (Test.Status == 1)
                 return 0;
@@ -3065,8 +2925,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype011.statictype011
 {
@@ -3108,8 +2966,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype012.statictype012
 {
@@ -3176,8 +3032,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype013.statictype013
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -3224,8 +3078,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype014.statictype014
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -3271,8 +3123,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype015.statictype015
 {
@@ -3324,8 +3174,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype016.statictype016
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -3376,8 +3224,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype017.statictype017
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -3423,8 +3269,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype018.statictype018
 {
@@ -3472,8 +3316,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype019.statictype019
 {
     public class Test
@@ -3508,8 +3350,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype020.statictype020
 {
@@ -3546,8 +3386,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype021.statictype021
 {
     public class Test
@@ -3582,8 +3420,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype022.statictype022
 {
     public class Test
@@ -3617,8 +3453,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype023.statictype023
 {
@@ -3665,8 +3499,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype024.statictype024
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -3711,8 +3543,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype025.statictype025
 {
@@ -3759,8 +3589,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.statictype026.statictype026
 {
     // <Title> Tests overload resolution when the static type of the variable is passed to the binder</Title>
@@ -3806,8 +3634,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.twoprms001.twoprms001
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -3849,7 +3675,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Target.Method(int, object)", "Target.Method(float, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Target.Method(int, object)",
+                    "Target.Method(float, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -3859,8 +3690,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.twoprms002.twoprms002
 {
@@ -3904,7 +3733,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Target.Method(int, object)", "Target.Method(float, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Target.Method(int, object)",
+                    "Target.Method(float, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -3914,8 +3748,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.twoprms003.twoprms003
 {
@@ -3959,7 +3791,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Target.Method(int, object)", "Target.Method(float, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Target.Method(int, object)",
+                    "Target.Method(float, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -3969,8 +3806,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.twoprms004.twoprms004
 {
@@ -4018,8 +3853,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.twoprms005.twoprms005
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -4064,8 +3897,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.twoprms006.twoprms006
 {
@@ -4112,8 +3943,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.generic001.generic001
 {
     // <Title> Tests overload resolution - Generic</Title>
@@ -4143,18 +3972,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             return 0;
         }
 
-        public void Bar<T, S>(Func<T, Func<S, int>> x)
-        {
-        }
+        public void Bar<T, S>(Func<T, Func<S, int>> x) { }
 
-        public void Bar<T, S>(Func<T, Func<S, S>> x)
-        {
-        }
+        public void Bar<T, S>(Func<T, Func<S, S>> x) { }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.generic002.generic002
 {
@@ -4191,8 +4014,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.literals01.literals01
 {
@@ -4284,8 +4105,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.bestmeth01.bestmeth01
 {
     // <Area>Overload resolution</Area>
@@ -4320,15 +4139,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.cnstraintegereger01.cnstraintegereger01
 {
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T>
-        where T : class
+    public class C<T> where T : class
     {
     }
 
@@ -4358,8 +4174,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.cnstraintegereger02.cnstraintegereger02
 {
     // <Area>Overload resolution</Area>
@@ -4369,8 +4183,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     {
     }
 
-    public class C<T>
-        where T : I
+    public class C<T> where T : I
     {
     }
 
@@ -4400,15 +4213,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.cnstraintegereger03.cnstraintegereger03
 {
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T>
-        where T : class
+    public class C<T> where T : class
     {
     }
 
@@ -4438,15 +4248,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.cnstraintegereger04.cnstraintegereger04
 {
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T>
-        where T : class
+    public class C<T> where T : class
     {
         public static implicit operator C<T>(int i)
         {
@@ -4480,8 +4287,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.operate001.operate001
 {
     // <Title> Tests overload resolution - Generic</Title>
@@ -4492,7 +4297,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class A
     {
-        public static explicit operator string (A x)
+        public static explicit operator string(A x)
         {
             return "A";
         }
@@ -4517,8 +4322,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.arglistprms002.arglistprms002
 {
@@ -4554,8 +4357,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Oneclass2methods.regression01.regression01
 {

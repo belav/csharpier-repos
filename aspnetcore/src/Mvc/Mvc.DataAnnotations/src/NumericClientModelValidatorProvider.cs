@@ -23,9 +23,11 @@ internal class NumericClientModelValidatorProvider : IClientModelValidatorProvid
         var typeToValidate = context.ModelMetadata.UnderlyingOrModelType;
 
         // Check only the numeric types for which we set type='text'.
-        if (typeToValidate == typeof(float) ||
-            typeToValidate == typeof(double) ||
-            typeToValidate == typeof(decimal))
+        if (
+            typeToValidate == typeof(float)
+            || typeToValidate == typeof(double)
+            || typeToValidate == typeof(decimal)
+        )
         {
             var results = context.Results;
             // Read interface .Count once rather than per iteration
@@ -40,11 +42,13 @@ internal class NumericClientModelValidatorProvider : IClientModelValidatorProvid
                 }
             }
 
-            results.Add(new ClientValidatorItem
-            {
-                Validator = new NumericClientModelValidator(),
-                IsReusable = true
-            });
+            results.Add(
+                new ClientValidatorItem
+                {
+                    Validator = new NumericClientModelValidator(),
+                    IsReusable = true
+                }
+            );
         }
     }
 }

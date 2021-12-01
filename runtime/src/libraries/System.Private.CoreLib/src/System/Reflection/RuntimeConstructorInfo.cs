@@ -11,22 +11,28 @@ namespace System.Reflection
     internal sealed partial class RuntimeConstructorInfo : ConstructorInfo
     {
         [MethodImpl(MethodImplOptions.NoInlining)] // move lazy invocation flags population out of the hot path
-        private static InvocationFlags ComputeAndUpdateInvocationFlags(ConstructorInfo constructorInfo, ref InvocationFlags flagsToUpdate)
+        private static InvocationFlags ComputeAndUpdateInvocationFlags(
+            ConstructorInfo constructorInfo,
+            ref InvocationFlags flagsToUpdate
+        )
         {
             InvocationFlags invocationFlags = InvocationFlags.IsConstructor; // this is a given
 
             Type? declaringType = constructorInfo.DeclaringType;
 
-            if (declaringType == typeof(void)
-                || declaringType != null && declaringType.ContainsGenericParameters  // Enclosing type has unbound generics
-                || (constructorInfo.CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs // Managed varargs
-                )
+            if (
+                declaringType == typeof(void)
+                || declaringType != null && declaringType.ContainsGenericParameters // Enclosing type has unbound generics
+                || (constructorInfo.CallingConvention & CallingConventions.VarArgs)
+                    == CallingConventions.VarArgs // Managed varargs
+            )
             {
                 invocationFlags |= InvocationFlags.NoInvoke;
             }
             else if (constructorInfo.IsStatic)
             {
-                invocationFlags |= InvocationFlags.RunClassConstructor | InvocationFlags.NoConstructorInvoke;
+                invocationFlags |=
+                    InvocationFlags.RunClassConstructor | InvocationFlags.NoConstructorInvoke;
             }
             else if (declaringType != null && declaringType.IsAbstract)
             {
@@ -55,29 +61,21 @@ namespace System.Reflection
 
             // ctor is declared on interface class
             if (declaringType.IsInterface)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
             // ctor is on an abstract class
             else if (declaringType.IsAbstract)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateAbstEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateAbstEx, declaringType));
             // ctor is on a class that contains stack pointers
             else if (declaringType.GetRootElementType() == typeof(ArgIterator))
                 throw new NotSupportedException();
-
             // ctor is vararg
             else if (isVarArg)
                 throw new NotSupportedException();
-
             // ctor is generic or on a generic class
             else if (declaringType.ContainsGenericParameters)
             {
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateGenericEx, declaringType));
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateGenericEx, declaringType));
             }
-
             // ctor is declared on System.Void
             else if (declaringType == typeof(void))
                 throw new MemberAccessException(SR.Access_Void);
@@ -86,7 +84,10 @@ namespace System.Reflection
         [DoesNotReturn]
         internal void ThrowNoInvokeException()
         {
-            CheckCanCreateInstance(DeclaringType!, (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs);
+            CheckCanCreateInstance(
+                DeclaringType!,
+                (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs
+            );
 
             // ctor is .cctor
             if ((Attributes & MethodAttributes.Static) == MethodAttributes.Static)
@@ -98,7 +99,12 @@ namespace System.Reflection
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
         public override object? Invoke(
-            object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             if ((InvocationFlags & InvocationFlags.NoInvoke) != 0)
                 ThrowNoInvokeException();
@@ -124,7 +130,14 @@ namespace System.Reflection
             Span<object?> arguments = default;
             if (actualCount != 0)
             {
-                arguments = CheckArguments(ref stackArgs, parameters, binder, invokeAttr, culture, ArgumentTypes);
+                arguments = CheckArguments(
+                    ref stackArgs,
+                    parameters,
+                    binder,
+                    invokeAttr,
+                    culture,
+                    ArgumentTypes
+                );
             }
 
             object? retValue = InvokeWorker(obj, invokeAttr, arguments);
@@ -141,9 +154,23 @@ namespace System.Reflection
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers | InvocationFlags.NoConstructorInvoke)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (
+                        InvocationFlags.NoInvoke
+                        | InvocationFlags.ContainsStackPointers
+                        | InvocationFlags.NoConstructorInvoke
+                    )
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -162,7 +189,14 @@ namespace System.Reflection
             Span<object?> arguments = default;
             if (actualCount != 0)
             {
-                arguments = CheckArguments(ref stackArgs, parameters, binder, invokeAttr, culture, ArgumentTypes);
+                arguments = CheckArguments(
+                    ref stackArgs,
+                    parameters,
+                    binder,
+                    invokeAttr,
+                    culture,
+                    ArgumentTypes
+                );
             }
 
             object retValue = InvokeCtorWorker(invokeAttr, arguments);

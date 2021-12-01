@@ -44,5 +44,6 @@ public abstract class WebSocketManager
     /// </summary>
     /// <param name="acceptContext"></param>
     /// <returns></returns>
-    public virtual Task<WebSocket> AcceptWebSocketAsync(WebSocketAcceptContext acceptContext) => throw new NotImplementedException();
+    public virtual Task<WebSocket> AcceptWebSocketAsync(WebSocketAcceptContext acceptContext) =>
+        throw new NotImplementedException();
 }

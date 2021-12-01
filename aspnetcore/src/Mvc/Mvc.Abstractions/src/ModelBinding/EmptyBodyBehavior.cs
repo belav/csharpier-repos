@@ -13,12 +13,10 @@ public enum EmptyBodyBehavior
     /// This is typically configured using <c>MvcOptions.AllowEmptyInputInBodyModelBinding</c>.
     /// </summary>
     Default,
-
     /// <summary>
     /// Empty bodies are treated as valid inputs.
     /// </summary>
     Allow,
-
     /// <summary>
     /// Empty bodies are treated as invalid inputs.
     /// </summary>

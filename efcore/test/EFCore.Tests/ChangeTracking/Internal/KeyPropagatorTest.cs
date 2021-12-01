@@ -20,7 +20,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Foreign_key_value_is_obtained_from_reference_to_principal(bool generateTemporary, bool async)
+        public void Foreign_key_value_is_obtained_from_reference_to_principal(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
 
@@ -29,7 +32,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var contextServices = CreateContextServices(model);
             model = contextServices.GetRequiredService<IModel>();
-            var dependentEntry = contextServices.GetRequiredService<IStateManager>().GetOrCreateEntry(dependent);
+            var dependentEntry = contextServices
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(dependent);
             var property = model.FindEntityType(typeof(Product)).FindProperty("CategoryId");
             var keyPropagator = contextServices.GetRequiredService<IKeyPropagator>();
 
@@ -44,7 +49,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Foreign_key_value_is_obtained_from_tracked_principal_with_populated_collection(bool generateTemporary, bool async)
+        public void Foreign_key_value_is_obtained_from_tracked_principal_with_populated_collection(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
             var contextServices = CreateContextServices(model);
@@ -71,7 +79,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Non_identifying_foreign_key_value_is_not_generated_if_principal_key_not_set(bool generateTemporary, bool async)
+        public void Non_identifying_foreign_key_value_is_not_generated_if_principal_key_not_set(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
 
@@ -79,7 +90,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var dependent = new Product { Id = 21, Category = principal };
 
             var contextServices = CreateContextServices(model);
-            var dependentEntry = contextServices.GetRequiredService<IStateManager>().GetOrCreateEntry(dependent);
+            var dependentEntry = contextServices
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(dependent);
             var property = model.FindEntityType(typeof(Product)).FindProperty("CategoryId");
             var keyPropagator = contextServices.GetRequiredService<IKeyPropagator>();
 
@@ -94,7 +107,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void One_to_one_foreign_key_value_is_obtained_from_reference_to_principal(bool generateTemporary, bool async)
+        public void One_to_one_foreign_key_value_is_obtained_from_reference_to_principal(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
 
@@ -103,7 +119,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var contextServices = CreateContextServices(model);
             model = contextServices.GetRequiredService<IModel>();
-            var dependentEntry = contextServices.GetRequiredService<IStateManager>().GetOrCreateEntry(dependent);
+            var dependentEntry = contextServices
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(dependent);
             var property = model.FindEntityType(typeof(ProductDetail)).FindProperty("Id");
             var keyPropagator = contextServices.GetRequiredService<IKeyPropagator>();
 
@@ -118,7 +136,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void One_to_one_foreign_key_value_is_obtained_from_tracked_principal(bool generateTemporary, bool async)
+        public void One_to_one_foreign_key_value_is_obtained_from_tracked_principal(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
             var contextServices = CreateContextServices(model);
@@ -144,7 +165,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Identifying_foreign_key_value_is_generated_if_principal_key_not_set(bool generateTemporary, bool async)
+        public void Identifying_foreign_key_value_is_generated_if_principal_key_not_set(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
 
@@ -152,7 +176,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var dependent = new ProductDetail { Product = principal };
 
             var contextServices = CreateContextServices(model);
-            var dependentEntry = contextServices.GetRequiredService<IStateManager>().GetOrCreateEntry(dependent);
+            var dependentEntry = contextServices
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(dependent);
             var property = model.FindEntityType(typeof(ProductDetail)).FindProperty("Id");
             var keyPropagator = contextServices.GetRequiredService<IKeyPropagator>();
 
@@ -167,7 +193,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Identifying_foreign_key_value_is_propagated_if_principal_key_is_generated(bool generateTemporary, bool async)
+        public void Identifying_foreign_key_value_is_propagated_if_principal_key_is_generated(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
 
@@ -179,8 +208,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var principalEntry = stateManager.GetOrCreateEntry(principal);
             principalEntry.SetEntityState(EntityState.Added);
             var dependentEntry = stateManager.GetOrCreateEntry(dependent);
-            var principalProperty = model.FindEntityType(typeof(Product)).FindProperty(nameof(Product.Id));
-            var dependentProperty = model.FindEntityType(typeof(ProductDetail)).FindProperty(nameof(ProductDetail.Id));
+            var principalProperty = model
+                .FindEntityType(typeof(Product))
+                .FindProperty(nameof(Product.Id));
+            var dependentProperty = model
+                .FindEntityType(typeof(ProductDetail))
+                .FindProperty(nameof(ProductDetail.Id));
             var keyPropagator = contextServices.GetRequiredService<IKeyPropagator>();
 
             PropagateValue(keyPropagator, dependentEntry, dependentProperty, async);
@@ -197,7 +230,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Composite_foreign_key_value_is_obtained_from_reference_to_principal(bool generateTemporary, bool async)
+        public void Composite_foreign_key_value_is_obtained_from_reference_to_principal(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
 
@@ -206,7 +242,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var contextServices = CreateContextServices(model);
             model = contextServices.GetRequiredService<IModel>();
-            var dependentEntry = contextServices.GetRequiredService<IStateManager>().GetOrCreateEntry(dependent);
+            var dependentEntry = contextServices
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(dependent);
             var property1 = model.FindEntityType(typeof(OrderLineDetail)).FindProperty("OrderId");
             var property2 = model.FindEntityType(typeof(OrderLineDetail)).FindProperty("ProductId");
             var keyPropagator = contextServices.GetRequiredService<IKeyPropagator>();
@@ -225,7 +263,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Composite_foreign_key_value_is_obtained_from_tracked_principal(bool generateTemporary, bool async)
+        public void Composite_foreign_key_value_is_obtained_from_tracked_principal(
+            bool generateTemporary,
+            bool async
+        )
         {
             var model = BuildModel(generateTemporary);
             var contextServices = CreateContextServices(model);
@@ -233,12 +274,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var manager = contextServices.GetRequiredService<IStateManager>();
 
             var dependent = new OrderLineDetail();
-            var principal = new OrderLine
-            {
-                OrderId = 11,
-                ProductId = 21,
-                Detail = dependent
-            };
+            var principal = new OrderLine { OrderId = 11, ProductId = 21, Detail = dependent };
 
             manager.GetOrCreateEntry(principal).SetEntityState(EntityState.Unchanged);
             var dependentEntry = manager.GetOrCreateEntry(dependent);
@@ -255,14 +291,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.False(dependentEntry.HasTemporaryValue(property1));
         }
 
-        private static IServiceProvider CreateContextServices(IModel model)
-            => InMemoryTestHelpers.Instance.CreateContextServices(model);
+        private static IServiceProvider CreateContextServices(IModel model) =>
+            InMemoryTestHelpers.Instance.CreateContextServices(model);
 
-        private static void PropagateValue(IKeyPropagator keyPropagator, InternalEntityEntry dependentEntry, IProperty property, bool async)
+        private static void PropagateValue(
+            IKeyPropagator keyPropagator,
+            InternalEntityEntry dependentEntry,
+            IProperty property,
+            bool async
+        )
         {
             if (async)
             {
-                keyPropagator.PropagateValueAsync(dependentEntry, property).GetAwaiter().GetResult();
+                keyPropagator
+                    .PropagateValueAsync(dependentEntry, property)
+                    .GetAwaiter()
+                    .GetResult();
             }
             else
             {
@@ -331,8 +375,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 b =>
                 {
                     b.HasMany(e => e.OrderLines).WithOne(e => e.Product);
-                    b.HasOne(e => e.Detail).WithOne(e => e.Product).HasForeignKey<ProductDetail>(e => e.Id);
-                });
+                    b.HasOne(e => e.Detail)
+                        .WithOne(e => e.Product)
+                        .HasForeignKey<ProductDetail>(e => e.Id);
+                }
+            );
 
             builder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
@@ -340,17 +387,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             builder.Entity<Order>().HasMany(e => e.OrderLines).WithOne(e => e.Order);
 
-            builder.Entity<OrderLineDetail>().HasKey(
-                e => new { e.OrderId, e.ProductId });
+            builder.Entity<OrderLineDetail>().HasKey(e => new { e.OrderId, e.ProductId });
 
             builder.Entity<OrderLine>(
                 b =>
                 {
-                    b.HasKey(
-                        e => new { e.OrderId, e.ProductId });
-                    b.HasOne(e => e.Detail).WithOne(e => e.OrderLine).HasForeignKey<OrderLineDetail>(
-                        e => new { e.OrderId, e.ProductId });
-                });
+                    b.HasKey(e => new { e.OrderId, e.ProductId });
+                    b.HasOne(e => e.Detail)
+                        .WithOne(e => e.OrderLine)
+                        .HasForeignKey<OrderLineDetail>(e => new { e.OrderId, e.ProductId });
+                }
+            );
 
             if (generateTemporary)
             {
@@ -360,7 +407,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     {
                         if (property.ValueGenerated == ValueGenerated.OnAdd)
                         {
-                            property.SetValueGeneratorFactory(new TemporaryNumberValueGeneratorFactory().Create);
+                            property.SetValueGeneratorFactory(
+                                new TemporaryNumberValueGeneratorFactory().Create
+                            );
                         }
                     }
                 }

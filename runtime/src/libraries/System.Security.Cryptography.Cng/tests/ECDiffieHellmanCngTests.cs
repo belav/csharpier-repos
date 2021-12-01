@@ -55,7 +55,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 new object[] { HashAlgorithmName.SHA256, true, false },
                 new object[] { HashAlgorithmName.SHA256, false, true },
                 new object[] { HashAlgorithmName.SHA256, true, true },
-
                 new object[] { HashAlgorithmName.SHA384, false, false },
                 new object[] { HashAlgorithmName.SHA384, true, false },
                 new object[] { HashAlgorithmName.SHA384, false, true },
@@ -73,7 +72,12 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 byte[] secretPrepend = prepend ? new byte[3] : null;
                 byte[] secretAppend = append ? new byte[4] : null;
 
-                byte[] newWay = ecdh.DeriveKeyFromHash(publicKey, algorithm, secretPrepend, secretAppend);
+                byte[] newWay = ecdh.DeriveKeyFromHash(
+                    publicKey,
+                    algorithm,
+                    secretPrepend,
+                    secretAppend
+                );
 
                 ecdh.HashAlgorithm = new CngAlgorithm(algorithm.Name);
                 ecdh.SecretPrepend = secretPrepend;
@@ -98,7 +102,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 new object[] { HashAlgorithmName.SHA256, true, true, false },
                 new object[] { HashAlgorithmName.SHA256, false, true, true },
                 new object[] { HashAlgorithmName.SHA256, true, true, true },
-
                 new object[] { HashAlgorithmName.SHA384, false, false, false },
                 new object[] { HashAlgorithmName.SHA384, true, false, false },
                 new object[] { HashAlgorithmName.SHA384, false, false, true },
@@ -112,7 +115,12 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
         [Theory]
         [MemberData(nameof(HmacEquivalenceData))]
-        public static void Equivalence_Hmac(HashAlgorithmName algorithm, bool useSecretAgreementAsHmac, bool prepend, bool append)
+        public static void Equivalence_Hmac(
+            HashAlgorithmName algorithm,
+            bool useSecretAgreementAsHmac,
+            bool prepend,
+            bool append
+        )
         {
             using (ECDiffieHellmanCng ecdh = NewDefaultECDHCng())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
@@ -121,7 +129,13 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 byte[] secretAppend = append ? new byte[4] : null;
                 byte[] hmacKey = useSecretAgreementAsHmac ? null : new byte[12];
 
-                byte[] newWay = ecdh.DeriveKeyFromHmac(publicKey, algorithm, hmacKey, secretPrepend, secretAppend);
+                byte[] newWay = ecdh.DeriveKeyFromHmac(
+                    publicKey,
+                    algorithm,
+                    hmacKey,
+                    secretPrepend,
+                    secretAppend
+                );
 
                 ecdh.HashAlgorithm = new CngAlgorithm(algorithm.Name);
                 ecdh.HmacKey = hmacKey;

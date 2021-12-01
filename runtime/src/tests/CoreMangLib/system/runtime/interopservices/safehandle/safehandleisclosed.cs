@@ -27,19 +27,20 @@ public class SafeHandleIsClosed
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest1: Check IsClosed return true when SetHandleAsInvalid method is called  ");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Check IsClosed return true when SetHandleAsInvalid method is called  "
+        );
         try
         {
             MySafeHandle msh = new MySafeHandle();
             IntPtr myIptr = new IntPtr(1000);
             msh.MySetHandle(myIptr);
             msh.SetHandleAsInvalid();
-            if (!msh.IsClosed )
+            if (!msh.IsClosed)
             {
                 TestLibrary.TestFramework.LogError("001.1", "IsClosed should return true");
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -54,7 +55,9 @@ public class SafeHandleIsClosed
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Check IsClosed return false when SetHandleAsInvalid method is not called and don't excute any close handle operation  ");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Check IsClosed return false when SetHandleAsInvalid method is not called and don't excute any close handle operation  "
+        );
         try
         {
             MySafeHandle msh = new MySafeHandle();
@@ -65,7 +68,6 @@ public class SafeHandleIsClosed
                 TestLibrary.TestFramework.LogError("002.1", "IsClosed should return false ");
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -103,8 +105,7 @@ public class SafeHandleIsClosed
 
 public class MySafeHandle : SafeHandle
 {
-    public MySafeHandle()
-        : base(IntPtr.Zero, true)
+    public MySafeHandle() : base(IntPtr.Zero, true)
     {
         this.handle = new IntPtr(100);
     }
@@ -113,7 +114,6 @@ public class MySafeHandle : SafeHandle
     {
         [SecurityCritical]
         get { return InvalidValue; }
-
     }
     public bool MyReleaseInvoke()
     {
@@ -133,7 +133,8 @@ public class MySafeHandle : SafeHandle
     [SecurityCritical]
     protected override bool ReleaseHandle()
     {
-        if (handle == IntPtr.Zero) return true;
+        if (handle == IntPtr.Zero)
+            return true;
         this.SetHandle(IntPtr.Zero);
         return true;
     }
@@ -148,5 +149,4 @@ public class MySafeHandle : SafeHandle
             return false;
         }
     }
-   
 }

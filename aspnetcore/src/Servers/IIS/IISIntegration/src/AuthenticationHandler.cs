@@ -21,7 +21,9 @@ internal class AuthenticationHandler : IAuthenticationHandler
 
         if (_user != null)
         {
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_user, _scheme.Name)));
+            return Task.FromResult(
+                AuthenticateResult.Success(new AuthenticationTicket(_user, _scheme.Name))
+            );
         }
         else
         {

@@ -307,10 +307,10 @@ namespace IsByRefLike
 
 namespace EnumAlignment
 {
-    public enum ByteEnum : byte {}
-    public enum ShortEnum : short {}
-    public enum IntEnum : int {}
-    public enum LongEnum : long {}
+    public enum ByteEnum : byte { }
+    public enum ShortEnum : short { }
+    public enum IntEnum : int { }
+    public enum LongEnum : long { }
 
     public struct LongIntEnumStruct
     {

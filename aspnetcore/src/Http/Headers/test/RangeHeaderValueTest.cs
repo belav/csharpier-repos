@@ -175,6 +175,5 @@ public class RangeHeaderValueTest
         Assert.False(RangeHeaderValue.TryParse(input, out var result));
         Assert.Null(result);
     }
-
     #endregion
 }

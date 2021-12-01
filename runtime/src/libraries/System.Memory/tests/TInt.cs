@@ -9,8 +9,7 @@ namespace System
     // A wrapped integer that invokes a custom delegate every time IEquatable<TInt>.Equals() is invoked.
     internal struct TInt : IEquatable<TInt>, IComparable<TInt>
     {
-        public TInt(int value)
-            : this(value, (Action<int, int>)null)
+        public TInt(int value) : this(value, (Action<int, int>)null)
         {
             // This constructor does not report comparisons but is still useful for catching uses of the boxing Equals().
         }
@@ -63,7 +62,9 @@ namespace System
     {
         public void Add(int x, int y) => _log.Add(Tuple.Create(x, y));
         public int Count => _log.Count;
-        public int CountCompares(int x, int y) => _log.Where(t => (t.Item1 == x && t.Item2 == y) || (t.Item1 == y && t.Item2 == x)).Count();
+        public int CountCompares(int x, int y) =>
+            _log.Where(t => (t.Item1 == x && t.Item2 == y) || (t.Item1 == y && t.Item2 == x))
+                .Count();
 
         private List<Tuple<int, int>> _log = new List<Tuple<int, int>>();
     }

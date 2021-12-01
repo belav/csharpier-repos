@@ -14,35 +14,44 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 {
     private static readonly string[] PublicModifiers = new[] { "public" };
 
-    public string TagHelperTypeName { get; set; } = "Microsoft.AspNetCore.Razor.TagHelpers.TagHelper";
+    public string TagHelperTypeName { get; set; } =
+        "Microsoft.AspNetCore.Razor.TagHelpers.TagHelper";
 
-    public string ViewComponentHelperTypeName { get; set; } = "global::Microsoft.AspNetCore.Mvc.IViewComponentHelper";
+    public string ViewComponentHelperTypeName { get; set; } =
+        "global::Microsoft.AspNetCore.Mvc.IViewComponentHelper";
 
     public string ViewComponentHelperVariableName { get; set; } = "__helper";
 
     public string ViewComponentInvokeMethodName { get; set; } = "InvokeAsync";
 
-    public string HtmlAttributeNotBoundAttributeTypeName { get; set; } = "Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNotBoundAttribute";
+    public string HtmlAttributeNotBoundAttributeTypeName { get; set; } =
+        "Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNotBoundAttribute";
 
-    public string ViewContextAttributeTypeName { get; set; } = "global::Microsoft.AspNetCore.Mvc.ViewFeatures.ViewContextAttribute";
+    public string ViewContextAttributeTypeName { get; set; } =
+        "global::Microsoft.AspNetCore.Mvc.ViewFeatures.ViewContextAttribute";
 
-    public string ViewContextTypeName { get; set; } = "global::Microsoft.AspNetCore.Mvc.Rendering.ViewContext";
+    public string ViewContextTypeName { get; set; } =
+        "global::Microsoft.AspNetCore.Mvc.Rendering.ViewContext";
 
     public string ViewContextPropertyName { get; set; } = "ViewContext";
 
-    public string HtmlTargetElementAttributeTypeName { get; set; } = "Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute";
+    public string HtmlTargetElementAttributeTypeName { get; set; } =
+        "Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute";
 
     public string TagHelperProcessMethodName { get; set; } = "ProcessAsync";
 
-    public string TagHelperProcessInvokeAsyncArgsMethodName { get; set; } = "ProcessInvokeAsyncArgs";
+    public string TagHelperProcessInvokeAsyncArgsMethodName { get; set; } =
+        "ProcessInvokeAsyncArgs";
 
-    public string TagHelperContextTypeName { get; set; } = "Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext";
+    public string TagHelperContextTypeName { get; set; } =
+        "Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext";
 
     public string TagHelperContextVariableName { get; set; } = "__context";
 
     public string TagHelperContextAttributesVariableName { get; set; } = "AllAttributes";
 
-    public string TagHelperOutputTypeName { get; set; } = "Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput";
+    public string TagHelperOutputTypeName { get; set; } =
+        "Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput";
 
     public string TagHelperOutputVariableName { get; set; } = "__output";
 
@@ -54,28 +63,36 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 
     public string TagHelperContentVariableName { get; set; } = "__helperContent";
 
-    public string IViewContextAwareTypeName { get; set; } = "global::Microsoft.AspNetCore.Mvc.ViewFeatures.IViewContextAware";
+    public string IViewContextAwareTypeName { get; set; } =
+        "global::Microsoft.AspNetCore.Mvc.ViewFeatures.IViewContextAware";
 
     public string IViewContextAwareContextualizeMethodName { get; set; } = "Contextualize";
 
-    public void WriteViewComponentTagHelper(CodeRenderingContext context, ViewComponentTagHelperIntermediateNode node)
+    public void WriteViewComponentTagHelper(
+        CodeRenderingContext context,
+        ViewComponentTagHelperIntermediateNode node
+    )
     {
         // Add target element.
         WriteTargetElementString(context.CodeWriter, node.TagHelper);
 
         // Initialize declaration.
-        using (context.CodeWriter.BuildClassDeclaration(
-            PublicModifiers,
-            node.ClassName,
-            TagHelperTypeName,
-            interfaces: null,
-            typeParameters: null))
+        using (
+            context.CodeWriter.BuildClassDeclaration(
+                PublicModifiers,
+                node.ClassName,
+                TagHelperTypeName,
+                interfaces: null,
+                typeParameters: null
+            )
+        )
         {
             // Add view component helper.
             context.CodeWriter.WriteVariableDeclaration(
                 $"private readonly {ViewComponentHelperTypeName}",
                 ViewComponentHelperVariableName,
-                value: null);
+                value: null
+            );
 
             // Add constructor.
             WriteConstructorString(context.CodeWriter, node.ClassName);
@@ -95,14 +112,16 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 
     private void WriteConstructorString(CodeWriter writer, string className)
     {
-        writer.Write("public ")
+        writer
+            .Write("public ")
             .Write(className)
             .Write("(")
             .Write($"{ViewComponentHelperTypeName} helper")
             .WriteLine(")");
         using (writer.BuildScope())
         {
-            writer.WriteStartAssignment(ViewComponentHelperVariableName)
+            writer
+                .WriteStartAssignment(ViewComponentHelperVariableName)
                 .Write("helper")
                 .WriteLine(";");
         }
@@ -110,27 +129,31 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 
     private void WriteAttributeDeclarations(CodeWriter writer, TagHelperDescriptor tagHelper)
     {
-        writer.Write("[")
-          .Write(HtmlAttributeNotBoundAttributeTypeName)
-          .WriteParameterSeparator()
-          .Write(ViewContextAttributeTypeName)
-          .WriteLine("]");
+        writer
+            .Write("[")
+            .Write(HtmlAttributeNotBoundAttributeTypeName)
+            .WriteParameterSeparator()
+            .Write(ViewContextAttributeTypeName)
+            .WriteLine("]");
 
         writer.WriteAutoPropertyDeclaration(
             PublicModifiers,
             ViewContextTypeName,
-            ViewContextPropertyName);
+            ViewContextPropertyName
+        );
 
         foreach (var attribute in tagHelper.BoundAttributes)
         {
             writer.WriteAutoPropertyDeclaration(
                 PublicModifiers,
                 attribute.TypeName,
-                attribute.GetPropertyName());
+                attribute.GetPropertyName()
+            );
 
             if (attribute.IndexerTypeName != null)
             {
-                writer.Write(" = ")
+                writer
+                    .Write(" = ")
                     .WriteStartNewObject(attribute.TypeName)
                     .WriteEndMethodInvocation();
             }
@@ -139,44 +162,67 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 
     private void WriteProcessMethodString(CodeWriter writer, TagHelperDescriptor tagHelper)
     {
-        using (writer.BuildMethodDeclaration(
+        using (
+            writer.BuildMethodDeclaration(
                 $"public override async",
                 $"global::{typeof(Task).FullName}",
                 TagHelperProcessMethodName,
                 new Dictionary<string, string>()
                 {
-                        { TagHelperContextTypeName, TagHelperContextVariableName },
-                        { TagHelperOutputTypeName, TagHelperOutputVariableName }
-                }))
+                    { TagHelperContextTypeName, TagHelperContextVariableName },
+                    { TagHelperOutputTypeName, TagHelperOutputVariableName }
+                }
+            )
+        )
         {
             writer.WriteInstanceMethodInvocation(
                 $"({ViewComponentHelperVariableName} as {IViewContextAwareTypeName})?",
                 IViewContextAwareContextualizeMethodName,
-                new[] { ViewContextPropertyName });
+                new[] { ViewContextPropertyName }
+            );
 
             var methodParameters = GetMethodParameters(tagHelper);
-            writer.Write("var ")
+            writer
+                .Write("var ")
                 .WriteStartAssignment(TagHelperContentVariableName)
-                .WriteInstanceMethodInvocation($"await {ViewComponentHelperVariableName}", ViewComponentInvokeMethodName, methodParameters);
-            writer.WriteStartAssignment($"{TagHelperOutputVariableName}.{TagHelperOutputTagNamePropertyName}")
+                .WriteInstanceMethodInvocation(
+                    $"await {ViewComponentHelperVariableName}",
+                    ViewComponentInvokeMethodName,
+                    methodParameters
+                );
+            writer
+                .WriteStartAssignment(
+                    $"{TagHelperOutputVariableName}.{TagHelperOutputTagNamePropertyName}"
+                )
                 .WriteLine("null;");
             writer.WriteInstanceMethodInvocation(
                 $"{TagHelperOutputVariableName}.{TagHelperOutputContentPropertyName}",
                 TagHelperContentSetMethodName,
-                new[] { TagHelperContentVariableName });
+                new[] { TagHelperContentVariableName }
+            );
         }
     }
 
-    private void WriteProcessInvokeAsyncArgsMethodString(CodeWriter writer, TagHelperDescriptor tagHelper)
+    private void WriteProcessInvokeAsyncArgsMethodString(
+        CodeWriter writer,
+        TagHelperDescriptor tagHelper
+    )
     {
         var methodReturnType = "Dictionary<string, object>";
-        using (writer.BuildMethodDeclaration(
-            "private",
-            methodReturnType,
-            TagHelperProcessInvokeAsyncArgsMethodName,
-            new Dictionary<string, string>() { { TagHelperContextTypeName, TagHelperContextVariableName } }))
+        using (
+            writer.BuildMethodDeclaration(
+                "private",
+                methodReturnType,
+                TagHelperProcessInvokeAsyncArgsMethodName,
+                new Dictionary<string, string>()
+                {
+                    { TagHelperContextTypeName, TagHelperContextVariableName }
+                }
+            )
+        )
         {
-            writer.WriteStartAssignment($"{methodReturnType} args")
+            writer
+                .WriteStartAssignment($"{methodReturnType} args")
                 .WriteStartNewObject(methodReturnType)
                 .WriteEndMethodInvocation();
 
@@ -198,7 +244,11 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
     private string[] GetMethodParameters(TagHelperDescriptor tagHelper)
     {
         var viewComponentName = tagHelper.GetViewComponentName();
-        var methodParameters = new[] { $"\"{viewComponentName}\"", $"{TagHelperProcessInvokeAsyncArgsMethodName}({TagHelperContextVariableName})" };
+        var methodParameters = new[]
+        {
+            $"\"{viewComponentName}\"",
+            $"{TagHelperProcessInvokeAsyncArgsMethodName}({TagHelperContextVariableName})"
+        };
         return methodParameters;
     }
 
@@ -208,7 +258,8 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 
         var rule = tagHelper.TagMatchingRules[0];
 
-        writer.Write("[")
+        writer
+            .Write("[")
             .WriteStartMethodInvocation(HtmlTargetElementAttributeTypeName)
             .WriteStringLiteral(rule.TagName)
             .WriteLine(")]");

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -68,10 +68,7 @@ public class DefaultHttpRequestTests
         // Arrange
         const string expected = "localhost:9001";
 
-        var headers = new HeaderDictionary()
-            {
-                { "Host", expected },
-            };
+        var headers = new HeaderDictionary() { { "Host", expected }, };
 
         var request = CreateRequest(headers);
 
@@ -88,10 +85,7 @@ public class DefaultHttpRequestTests
         // Arrange
         const string expected = "löcalhöst";
 
-        var headers = new HeaderDictionary()
-            {
-                { "Host", "xn--lcalhst-90ae" },
-            };
+        var headers = new HeaderDictionary() { { "Host", "xn--lcalhst-90ae" }, };
 
         var request = CreateRequest(headers);
 
@@ -153,10 +147,9 @@ public class DefaultHttpRequestTests
         Assert.Equal("value0", query1["name0"]);
         Assert.Equal("value1", query1["name1"]);
 
-        var query2 = new QueryCollection(new Dictionary<string, StringValues>()
-            {
-                { "name2", "value2" }
-            });
+        var query2 = new QueryCollection(
+            new Dictionary<string, StringValues>() { { "name2", "value2" } }
+        );
 
         request.Query = query2;
         Assert.Same(query2, request.Query);
@@ -186,10 +179,9 @@ public class DefaultHttpRequestTests
         Assert.Equal("value1", cookies1["name1"]);
         Assert.Equal(newCookies, request.Headers["Cookie"]);
 
-        var cookies2 = new RequestCookieCollection(new Dictionary<string, string>()
-            {
-                { "name2", "value2" }
-            });
+        var cookies2 = new RequestCookieCollection(
+            new Dictionary<string, string>() { { "name2", "value2" } }
+        );
         request.Cookies = cookies2;
         Assert.Equal(cookies2, request.Cookies);
         Assert.Equal("value2", request.Cookies["name2"]);

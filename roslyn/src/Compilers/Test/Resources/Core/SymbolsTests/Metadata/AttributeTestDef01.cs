@@ -10,10 +10,22 @@ namespace CustomAttribute
     [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
     public class AllInheritMultipleAttribute : Attribute
     {
-        public AllInheritMultipleAttribute() { UIntField = 1; }
-        public AllInheritMultipleAttribute(object p1, BindingFlags p2 = BindingFlags.Static) { UIntField = 2; }
-        public AllInheritMultipleAttribute(object p1, byte p2, sbyte p3 = -1) { UIntField = 3; }
-        public AllInheritMultipleAttribute(object p1, long p2, float p3 = 0.123f, short p4 = -2) { UIntField = 4; }
+        public AllInheritMultipleAttribute()
+        {
+            UIntField = 1;
+        }
+        public AllInheritMultipleAttribute(object p1, BindingFlags p2 = BindingFlags.Static)
+        {
+            UIntField = 2;
+        }
+        public AllInheritMultipleAttribute(object p1, byte p2, sbyte p3 = -1)
+        {
+            UIntField = 3;
+        }
+        public AllInheritMultipleAttribute(object p1, long p2, float p3 = 0.123f, short p4 = -2)
+        {
+            UIntField = 4;
+        }
         // Char array
         public AllInheritMultipleAttribute(char[] ary1, params string[] ary2) { }
 
@@ -32,7 +44,10 @@ namespace CustomAttribute
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property)]
     public class BaseAttribute : Attribute
     {
-        public BaseAttribute(object p) { ObjectField = p; }
+        public BaseAttribute(object p)
+        {
+            ObjectField = p;
+        }
         public object ObjectField;
     }
 

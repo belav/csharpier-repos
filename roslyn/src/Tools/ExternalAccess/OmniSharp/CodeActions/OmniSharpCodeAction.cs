@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
 {
     internal static class OmniSharpCodeAction
     {
-        public static ImmutableArray<CodeAction> GetNestedCodeActions(this CodeAction codeAction)
-            => codeAction.NestedCodeActions;
+        public static ImmutableArray<CodeAction> GetNestedCodeActions(this CodeAction codeAction) =>
+            codeAction.NestedCodeActions;
     }
 }

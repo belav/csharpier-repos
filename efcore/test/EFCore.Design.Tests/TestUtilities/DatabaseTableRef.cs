@@ -33,16 +33,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             set => throw new NotImplementedException();
         }
 
-        public override IList<DatabaseColumn> Columns
-            => throw new NotImplementedException();
+        public override IList<DatabaseColumn> Columns => throw new NotImplementedException();
 
-        public override IList<DatabaseUniqueConstraint> UniqueConstraints
-            => throw new NotImplementedException();
+        public override IList<DatabaseUniqueConstraint> UniqueConstraints =>
+            throw new NotImplementedException();
 
-        public override IList<DatabaseIndex> Indexes
-            => throw new NotImplementedException();
+        public override IList<DatabaseIndex> Indexes => throw new NotImplementedException();
 
-        public override IList<DatabaseForeignKey> ForeignKeys
-            => throw new NotImplementedException();
+        public override IList<DatabaseForeignKey> ForeignKeys =>
+            throw new NotImplementedException();
     }
 }

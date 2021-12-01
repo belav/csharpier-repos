@@ -19,7 +19,11 @@ internal class CustomResponseAction : UrlAction
         StatusCode = statusCode;
     }
 
-    public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override void ApplyAction(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var response = context.HttpContext.Response;
         response.StatusCode = StatusCode;

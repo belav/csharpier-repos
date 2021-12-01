@@ -10,7 +10,7 @@ class ThreadStartObject
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartObject <object>|min|max\n");
             return -1;

@@ -14,13 +14,27 @@ namespace Microsoft.CodeAnalysis.Serialization
 {
     internal abstract class AbstractOptionsSerializationService : IOptionsSerializationService
     {
-        public abstract void WriteTo(CompilationOptions options, ObjectWriter writer, CancellationToken cancellationToken);
+        public abstract void WriteTo(
+            CompilationOptions options,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        );
         public abstract void WriteTo(ParseOptions options, ObjectWriter writer);
 
-        public abstract CompilationOptions ReadCompilationOptionsFrom(ObjectReader reader, CancellationToken cancellationToken);
-        public abstract ParseOptions ReadParseOptionsFrom(ObjectReader reader, CancellationToken cancellationToken);
+        public abstract CompilationOptions ReadCompilationOptionsFrom(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        );
+        public abstract ParseOptions ReadParseOptionsFrom(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        );
 
-        protected static void WriteCompilationOptionsTo(CompilationOptions options, ObjectWriter writer, CancellationToken cancellationToken)
+        protected static void WriteCompilationOptionsTo(
+            CompilationOptions options,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -62,7 +76,6 @@ namespace Microsoft.CodeAnalysis.Serialization
             writer.WriteBoolean(options.PublicSign);
 
             writer.WriteByte((byte)options.MetadataImportOptions);
-
             // REVIEW: What should I do with these. we probably need to implement either out own one
             //         or somehow share these as service....
             //
@@ -99,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             out MetadataReferenceResolver metadataReferenceResolver,
             out AssemblyIdentityComparer assemblyIdentityComparer,
             out StrongNameProvider strongNameProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -134,7 +148,9 @@ namespace Microsoft.CodeAnalysis.Serialization
 
             if (count > 0)
             {
-                specificDiagnosticOptionsList = new List<KeyValuePair<string, ReportDiagnostic>>(count);
+                specificDiagnosticOptionsList = new List<KeyValuePair<string, ReportDiagnostic>>(
+                    count
+                );
 
                 for (var i = 0; i < count; i++)
                 {
@@ -145,7 +161,9 @@ namespace Microsoft.CodeAnalysis.Serialization
                 }
             }
 
-            specificDiagnosticOptions = specificDiagnosticOptionsList ?? SpecializedCollections.EmptyEnumerable<KeyValuePair<string, ReportDiagnostic>>();
+            specificDiagnosticOptions =
+                specificDiagnosticOptionsList
+                ?? SpecializedCollections.EmptyEnumerable<KeyValuePair<string, ReportDiagnostic>>();
 
             concurrentBuild = reader.ReadBoolean();
             deterministic = reader.ReadBoolean();
@@ -182,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             out SourceCodeKind kind,
             out DocumentationMode documentationMode,
             out IEnumerable<KeyValuePair<string, string>> features,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -209,7 +228,9 @@ namespace Microsoft.CodeAnalysis.Serialization
                 }
             }
 
-            features = featuresList ?? SpecializedCollections.EmptyEnumerable<KeyValuePair<string, string>>();
+            features =
+                featuresList
+                ?? SpecializedCollections.EmptyEnumerable<KeyValuePair<string, string>>();
         }
     }
 }

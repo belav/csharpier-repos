@@ -19,8 +19,7 @@ namespace Microsoft.TestCommon
         /// Instantiates a new <see cref="TheoryDiscoverer"/> instance.
         /// </summary>
         /// <param name="diagnosticMessageSink">The <see cref="IMessageSink"/> used to send diagnostic messages.</param>
-        public TheoryDiscoverer(IMessageSink diagnosticMessageSink)
-            : base(diagnosticMessageSink)
+        public TheoryDiscoverer(IMessageSink diagnosticMessageSink) : base(diagnosticMessageSink)
         {
             _diagnosticMessageSink = diagnosticMessageSink;
         }
@@ -37,7 +36,8 @@ namespace Microsoft.TestCommon
         public override IEnumerable<IXunitTestCase> Discover(
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
-            IAttributeInfo theoryAttribute)
+            IAttributeInfo theoryAttribute
+        )
         {
             var baseCases = base.Discover(discoveryOptions, testMethod, theoryAttribute);
             if (!String.IsNullOrEmpty(theoryAttribute.GetNamedArgument<string>("Skip")))
@@ -55,8 +55,14 @@ namespace Microsoft.TestCommon
 
             // Update the individual test cases as needed: Skip test cases that would otherwise run.
             var testCases = new List<IXunitTestCase>();
-            var platformJustification = theoryAttribute.GetNamedArgument<string>("PlatformJustification");
-            var skipReason = String.Format(platformJustification, platforms.ToString().Replace(", ", " | "), Platform);
+            var platformJustification = theoryAttribute.GetNamedArgument<string>(
+                "PlatformJustification"
+            );
+            var skipReason = String.Format(
+                platformJustification,
+                platforms.ToString().Replace(", ", " | "),
+                Platform
+            );
             foreach (var baseCase in baseCases)
             {
                 if (baseCase is ExecutionErrorTestCase)
@@ -79,7 +85,8 @@ namespace Microsoft.TestCommon
                     discoveryOptions.MethodDisplayOrDefault(),
                     skipReason,
                     baseCase.TestMethod,
-                    baseCase.TestMethodArguments);
+                    baseCase.TestMethodArguments
+                );
                 testCases.Add(testCase);
             }
 

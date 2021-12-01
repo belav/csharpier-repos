@@ -8,14 +8,23 @@ namespace System.Reflection.Metadata
 {
     public readonly partial struct AssemblyDefinition
     {
-        public System.Reflection.AssemblyName GetAssemblyName() { throw null; }
+        public System.Reflection.AssemblyName GetAssemblyName()
+        {
+            throw null;
+        }
     }
     public readonly partial struct AssemblyReference
     {
-        public System.Reflection.AssemblyName GetAssemblyName() { throw null; }
+        public System.Reflection.AssemblyName GetAssemblyName()
+        {
+            throw null;
+        }
     }
     public partial class ImageFormatLimitationException : System.Exception
     {
-        protected ImageFormatLimitationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected ImageFormatLimitationException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
     }
 }

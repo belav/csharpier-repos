@@ -61,7 +61,10 @@ namespace System.Diagnostics.Tracing
                 yield return new KeyValuePair<string, object?>("DisplayName", DisplayName);
                 yield return new KeyValuePair<string, object?>("DisplayUnits", DisplayUnits);
                 yield return new KeyValuePair<string, object?>("Mean", Mean);
-                yield return new KeyValuePair<string, object?>("StandardDeviation", StandardDeviation);
+                yield return new KeyValuePair<string, object?>(
+                    "StandardDeviation",
+                    StandardDeviation
+                );
                 yield return new KeyValuePair<string, object?>("Count", Count);
                 yield return new KeyValuePair<string, object?>("Min", Min);
                 yield return new KeyValuePair<string, object?>("Max", Max);
@@ -71,7 +74,6 @@ namespace System.Diagnostics.Tracing
                 yield return new KeyValuePair<string, object?>("Metadata", Metadata);
             }
         }
-
 #endregion // Implementation of the IEnumerable interface
     }
 
@@ -114,7 +116,10 @@ namespace System.Diagnostics.Tracing
             {
                 yield return new KeyValuePair<string, object?>("Name", Name);
                 yield return new KeyValuePair<string, object?>("DisplayName", DisplayName);
-                yield return new KeyValuePair<string, object?>("DisplayRateTimeScale", DisplayRateTimeScale);
+                yield return new KeyValuePair<string, object?>(
+                    "DisplayRateTimeScale",
+                    DisplayRateTimeScale
+                );
                 yield return new KeyValuePair<string, object?>("Increment", Increment);
                 yield return new KeyValuePair<string, object?>("IntervalSec", IntervalSec);
                 yield return new KeyValuePair<string, object?>("Series", $"Interval={IntervalSec}");
@@ -123,7 +128,6 @@ namespace System.Diagnostics.Tracing
                 yield return new KeyValuePair<string, object?>("DisplayUnits", DisplayUnits);
             }
         }
-
 #endregion // Implementation of the IEnumerable interface
     }
 }

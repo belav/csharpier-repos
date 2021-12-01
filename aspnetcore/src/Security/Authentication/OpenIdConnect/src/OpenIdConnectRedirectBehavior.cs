@@ -14,7 +14,6 @@ public enum OpenIdConnectRedirectBehavior
     /// the OpenID Connect provider using a GET request.
     /// </summary>
     RedirectGet = 0,
-
     /// <summary>
     /// Emits an HTML form to redirect the user agent to
     /// the OpenID Connect provider using a POST request.

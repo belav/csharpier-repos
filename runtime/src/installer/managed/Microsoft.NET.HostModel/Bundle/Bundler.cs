@@ -34,26 +34,32 @@ namespace Microsoft.NET.HostModel.Bundle
         private readonly BundleOptions _options;
         private readonly bool _macosCodesign;
 
-        public Bundler(string hostName,
-                       string outputDir,
-                       BundleOptions options = BundleOptions.None,
-                       OSPlatform? targetOS = null,
-                       Architecture? targetArch = null,
-                       Version targetFrameworkVersion = null,
-                       bool diagnosticOutput = false,
-                       string appAssemblyName = null,
-                       bool macosCodesign = true)
+        public Bundler(
+            string hostName,
+            string outputDir,
+            BundleOptions options = BundleOptions.None,
+            OSPlatform? targetOS = null,
+            Architecture? targetArch = null,
+            Version targetFrameworkVersion = null,
+            bool diagnosticOutput = false,
+            string appAssemblyName = null,
+            bool macosCodesign = true
+        )
         {
             _tracer = new Trace(diagnosticOutput);
 
             _hostName = hostName;
-            _outputDir = Path.GetFullPath(string.IsNullOrEmpty(outputDir) ? Environment.CurrentDirectory : outputDir);
+            _outputDir = Path.GetFullPath(
+                string.IsNullOrEmpty(outputDir) ? Environment.CurrentDirectory : outputDir
+            );
             _target = new TargetInfo(targetOS, targetArch, targetFrameworkVersion);
 
-            if (_target.BundleMajorVersion < 6 &&
-                (options & BundleOptions.EnableCompression) != 0)
+            if (_target.BundleMajorVersion < 6 && (options & BundleOptions.EnableCompression) != 0)
             {
-                throw new ArgumentException("Compression requires framework version 6.0 or above", nameof(options));
+                throw new ArgumentException(
+                    "Compression requires framework version 6.0 or above",
+                    nameof(options)
+                );
             }
 
             appAssemblyName ??= _target.GetAssemblyName(hostName);
@@ -61,7 +67,10 @@ namespace Microsoft.NET.HostModel.Bundle
             _runtimeConfigJson = appAssemblyName + ".runtimeconfig.json";
             _runtimeConfigDevJson = appAssemblyName + ".runtimeconfig.dev.json";
 
-            BundleManifest = new Manifest(_target.BundleMajorVersion, netcoreapp3CompatMode: options.HasFlag(BundleOptions.BundleAllContent));
+            BundleManifest = new Manifest(
+                _target.BundleMajorVersion,
+                netcoreapp3CompatMode: options.HasFlag(BundleOptions.BundleAllContent)
+            );
             _options = _target.DefaultOptions | options;
             _macosCodesign = macosCodesign;
         }
@@ -91,7 +100,11 @@ namespace Microsoft.NET.HostModel.Bundle
         /// startOffset: offset of the start 'file' within 'bundle'
         /// compressedSize: size of the compressed data, if entry was compressed, otherwise 0
         /// </returns>
-        private (long startOffset, long compressedSize) AddToBundle(Stream bundle, Stream file, FileType type)
+        private (long startOffset, long compressedSize) AddToBundle(
+            Stream bundle,
+            Stream file,
+            FileType type
+        )
         {
             long startOffset = bundle.Position;
             if (ShouldCompress(type))
@@ -101,7 +114,13 @@ namespace Microsoft.NET.HostModel.Bundle
 
                 // We use DeflateStream here.
                 // It uses GZip algorithm, but with a trivial header that does not contain file info.
-                using (DeflateStream compressionStream = new DeflateStream(bundle, CompressionLevel.Optimal, leaveOpen: true))
+                using (
+                    DeflateStream compressionStream = new DeflateStream(
+                        bundle,
+                        CompressionLevel.Optimal,
+                        leaveOpen: true
+                    )
+                )
                 {
                     file.CopyTo(compressionStream);
                 }
@@ -155,7 +174,8 @@ namespace Microsoft.NET.HostModel.Bundle
                     return false;
 
                 case FileType.NativeBinary:
-                    return !_options.HasFlag(BundleOptions.BundleNativeBinaries) || _target.ShouldExclude(relativePath);
+                    return !_options.HasFlag(BundleOptions.BundleNativeBinaries)
+                        || _target.ShouldExclude(relativePath);
 
                 case FileType.Symbols:
                     return !_options.HasFlag(BundleOptions.BundleSymbolFiles);
@@ -183,9 +203,7 @@ namespace Microsoft.NET.HostModel.Bundle
                     isPE = true; // If peReader.PEHeaders doesn't throw, it is a valid PEImage
                     return corHeader != null;
                 }
-                catch (BadImageFormatException)
-                {
-                }
+                catch (BadImageFormatException) { }
             }
 
             return false;
@@ -214,7 +232,9 @@ namespace Microsoft.NET.HostModel.Bundle
                 return FileType.Assembly;
             }
 
-            bool isNativeBinary = _target.IsWindows ? isPE : _target.IsNativeBinary(fileSpec.SourcePath);
+            bool isNativeBinary = _target.IsWindows
+                ? isPE
+                : _target.IsNativeBinary(fileSpec.SourcePath);
 
             if (isNativeBinary)
             {
@@ -250,17 +270,24 @@ namespace Microsoft.NET.HostModel.Bundle
 
             if (fileSpecs.Any(x => !x.IsValid()))
             {
-                throw new ArgumentException("Invalid input specification: Found entry with empty source-path or bundle-relative-path.");
+                throw new ArgumentException(
+                    "Invalid input specification: Found entry with empty source-path or bundle-relative-path."
+                );
             }
 
             string hostSource;
             try
             {
-                hostSource = fileSpecs.Where(x => x.BundleRelativePath.Equals(_hostName)).Single().SourcePath;
+                hostSource =
+                    fileSpecs
+                        .Where(x => x.BundleRelativePath.Equals(_hostName))
+                        .Single().SourcePath;
             }
             catch (InvalidOperationException)
             {
-                throw new ArgumentException("Invalid input specification: Must specify the host binary");
+                throw new ArgumentException(
+                    "Invalid input specification: Must specify the host binary"
+                );
             }
 
             string bundlePath = Path.Combine(_outputDir, _hostName);
@@ -271,7 +298,10 @@ namespace Microsoft.NET.HostModel.Bundle
 
             BinaryUtils.CopyFile(hostSource, bundlePath);
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) && HostModelUtils.IsCodesignAvailable())
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                && HostModelUtils.IsCodesignAvailable()
+            )
             {
                 RemoveCodesignIfNecessary(bundlePath);
             }
@@ -311,13 +341,25 @@ namespace Microsoft.NET.HostModel.Bundle
                         continue;
                     }
 
-                    if (relativePathToSpec.TryGetValue(fileSpec.BundleRelativePath, out var existingFileSpec))
+                    if (
+                        relativePathToSpec.TryGetValue(
+                            fileSpec.BundleRelativePath,
+                            out var existingFileSpec
+                        )
+                    )
                     {
-                        if (!string.Equals(fileSpec.SourcePath, existingFileSpec.SourcePath, StringComparison.Ordinal))
+                        if (
+                            !string.Equals(
+                                fileSpec.SourcePath,
+                                existingFileSpec.SourcePath,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
-                            throw new ArgumentException($"Invalid input specification: Found entries '{fileSpec.SourcePath}' and '{existingFileSpec.SourcePath}' with the same BundleRelativePath '{fileSpec.BundleRelativePath}'");
+                            throw new ArgumentException(
+                                $"Invalid input specification: Found entries '{fileSpec.SourcePath}' and '{existingFileSpec.SourcePath}' with the same BundleRelativePath '{fileSpec.BundleRelativePath}'"
+                            );
                         }
-
                         // Exact duplicate - intentionally skip and don't include a second copy in the bundle
                         continue;
                     }
@@ -329,8 +371,19 @@ namespace Microsoft.NET.HostModel.Bundle
                     using (FileStream file = File.OpenRead(fileSpec.SourcePath))
                     {
                         FileType targetType = _target.TargetSpecificFileType(type);
-                        (long startOffset, long compressedSize) = AddToBundle(bundle, file, targetType);
-                        FileEntry entry = BundleManifest.AddEntry(targetType, file, relativePath, startOffset, compressedSize, _target.BundleMajorVersion);
+                        (long startOffset, long compressedSize) = AddToBundle(
+                            bundle,
+                            file,
+                            targetType
+                        );
+                        FileEntry entry = BundleManifest.AddEntry(
+                            targetType,
+                            file,
+                            relativePath,
+                            startOffset,
+                            compressedSize,
+                            _target.BundleMajorVersion
+                        );
                         _tracer.Log($"Embed: {entry}");
                     }
                 }
@@ -345,12 +398,18 @@ namespace Microsoft.NET.HostModel.Bundle
             HostWriter.SetAsBundle(bundlePath, headerOffset);
 
             // Sign the bundle if requested
-            if (_macosCodesign && RuntimeInformation.IsOSPlatform(OSPlatform.OSX) && HostModelUtils.IsCodesignAvailable())
+            if (
+                _macosCodesign
+                && RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                && HostModelUtils.IsCodesignAvailable()
+            )
             {
                 var (exitCode, stdErr) = HostModelUtils.RunCodesign("-s -", bundlePath);
                 if (exitCode != 0)
                 {
-                    throw new InvalidOperationException($"Failed to codesign '{bundlePath}': {stdErr}");
+                    throw new InvalidOperationException(
+                        $"Failed to codesign '{bundlePath}': {stdErr}"
+                    );
                 }
             }
 
@@ -365,10 +424,15 @@ namespace Microsoft.NET.HostModel.Bundle
                 // `codesign -v` returns 0 if app is signed
                 if (HostModelUtils.RunCodesign("-v", bundlePath).ExitCode == 0)
                 {
-                    var (exitCode, stdErr) = HostModelUtils.RunCodesign("--remove-signature", bundlePath);
+                    var (exitCode, stdErr) = HostModelUtils.RunCodesign(
+                        "--remove-signature",
+                        bundlePath
+                    );
                     if (exitCode != 0)
                     {
-                        throw new InvalidOperationException($"Removing codesign from '{bundlePath}' failed: {stdErr}");
+                        throw new InvalidOperationException(
+                            $"Removing codesign from '{bundlePath}' failed: {stdErr}"
+                        );
                     }
                 }
             }

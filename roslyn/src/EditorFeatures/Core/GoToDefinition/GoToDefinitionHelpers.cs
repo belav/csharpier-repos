@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             ISymbol symbol,
             Solution solution,
             bool thirdPartyNavigationAllowed,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var alias = symbol as IAliasSymbol;
             if (alias != null)
@@ -46,7 +47,10 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             if (alias != null)
             {
                 var sourceLocations = NavigableItemFactory.GetPreferredSourceLocations(
-                    solution, symbol, cancellationToken);
+                    solution,
+                    symbol,
+                    cancellationToken
+                );
 
                 if (sourceLocations.All(l => solution.GetDocument(l.SourceTree) == null))
                 {
@@ -54,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 }
             }
 
-            var definition = await SymbolFinder.FindSourceDefinitionAsync(symbol, solution, cancellationToken).ConfigureAwait(false);
+            var definition = await SymbolFinder
+                .FindSourceDefinitionAsync(symbol, solution, cancellationToken)
+                .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
 
             symbol = definition ?? symbol;
@@ -66,7 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 symbol = method.PartialImplementationPart ?? symbol;
             }
 
-            using var definitionsDisposer = ArrayBuilder<DefinitionItem>.GetInstance(out var definitions);
+            using var definitionsDisposer = ArrayBuilder<DefinitionItem>.GetInstance(
+                out var definitions
+            );
 
             // Going to a symbol may end up actually showing the symbol in the Find-Usages window.
             // This happens when there is more than one location for the symbol (i.e. for partial
@@ -87,14 +95,24 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             // So, if we only have a single location to go to, this does no unnecessary work.  And,
             // if we do have multiple locations to show, it will just be done in the BG, unblocking
             // this command thread so it can return the user faster.
-            var definitionItem = symbol.ToNonClassifiedDefinitionItem(solution, includeHiddenLocations: true);
+            var definitionItem = symbol.ToNonClassifiedDefinitionItem(
+                solution,
+                includeHiddenLocations: true
+            );
 
             if (thirdPartyNavigationAllowed)
             {
-                var factory = solution.Workspace.Services.GetService<IDefinitionsAndReferencesFactory>();
+                var factory =
+                    solution.Workspace.Services.GetService<IDefinitionsAndReferencesFactory>();
                 if (factory != null)
                 {
-                    var thirdPartyItem = await factory.GetThirdPartyDefinitionItemAsync(solution, definitionItem, cancellationToken).ConfigureAwait(false);
+                    var thirdPartyItem = await factory
+                        .GetThirdPartyDefinitionItemAsync(
+                            solution,
+                            definitionItem,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     definitions.AddIfNotNull(thirdPartyItem);
                 }
             }
@@ -109,10 +127,20 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken,
-            bool thirdPartyNavigationAllowed = true)
+            bool thirdPartyNavigationAllowed = true
+        )
         {
             return threadingContext.JoinableTaskFactory.Run(
-                () => TryGoToDefinitionAsync(symbol, solution, threadingContext, streamingPresenter, cancellationToken, thirdPartyNavigationAllowed));
+                () =>
+                    TryGoToDefinitionAsync(
+                        symbol,
+                        solution,
+                        threadingContext,
+                        streamingPresenter,
+                        cancellationToken,
+                        thirdPartyNavigationAllowed
+                    )
+            );
         }
 
         public static async Task<bool> TryGoToDefinitionAsync(
@@ -121,34 +149,58 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken,
-            bool thirdPartyNavigationAllowed = true)
+            bool thirdPartyNavigationAllowed = true
+        )
         {
-            var title = string.Format(EditorFeaturesResources._0_declarations,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_declarations,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
-            var definitions = await GetDefinitionsAsync(symbol, solution, thirdPartyNavigationAllowed, cancellationToken).ConfigureAwait(false);
+            var definitions = await GetDefinitionsAsync(
+                    symbol,
+                    solution,
+                    thirdPartyNavigationAllowed,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return await streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                threadingContext, solution.Workspace, title, definitions, cancellationToken).ConfigureAwait(false);
+            return await streamingPresenter
+                .TryNavigateToOrPresentItemsAsync(
+                    threadingContext,
+                    solution.Workspace,
+                    title,
+                    definitions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
 #nullable enable
 
-        public static async Task<IEnumerable<INavigableItem>?> GetDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<INavigableItem>?> GetDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // Try IFindDefinitionService first. Until partners implement this, it could fail to find a service, so fall back if it's null.
             var findDefinitionService = document.GetLanguageService<IFindDefinitionService>();
             if (findDefinitionService != null)
             {
-                return await findDefinitionService.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+                return await findDefinitionService
+                    .FindDefinitionsAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             // Removal of this codepath is tracked by https://github.com/dotnet/roslyn/issues/50391. Once it is removed, this GetDefinitions method should
             // be inlined into call sites.
-            var goToDefinitionsService = document.GetRequiredLanguageService<IGoToDefinitionService>();
-            return await goToDefinitionsService.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var goToDefinitionsService =
+                document.GetRequiredLanguageService<IGoToDefinitionService>();
+            return await goToDefinitionsService
+                .FindDefinitionsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
         }
-
 #nullable restore
     }
 }

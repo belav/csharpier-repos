@@ -23,11 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="CosmosRuntimeModelConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        public CosmosRuntimeModelConvention(
-            ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public CosmosRuntimeModelConvention(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     Updates the model annotations that will be set on the read-only object.
@@ -40,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IModel model,
             RuntimeModel runtimeModel,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessModelAnnotations(annotations, model, runtimeModel, runtime);
 
@@ -61,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IEntityType entityType,
             RuntimeEntityType runtimeEntityType,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessEntityTypeAnnotations(annotations, entityType, runtimeEntityType, runtime);
 

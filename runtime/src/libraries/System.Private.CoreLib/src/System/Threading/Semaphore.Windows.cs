@@ -10,14 +10,22 @@ namespace System.Threading
 {
     public sealed partial class Semaphore
     {
-        private const uint AccessRights = (uint)Interop.Kernel32.MAXIMUM_ALLOWED | Interop.Kernel32.SYNCHRONIZE | Interop.Kernel32.SEMAPHORE_MODIFY_STATE;
+        private const uint AccessRights =
+            (uint)Interop.Kernel32.MAXIMUM_ALLOWED
+            | Interop.Kernel32.SYNCHRONIZE
+            | Interop.Kernel32.SEMAPHORE_MODIFY_STATE;
 
         private Semaphore(SafeWaitHandle handle)
         {
             SafeWaitHandle = handle;
         }
 
-        private void CreateSemaphoreCore(int initialCount, int maximumCount, string? name, out bool createdNew)
+        private void CreateSemaphoreCore(
+            int initialCount,
+            int maximumCount,
+            string? name,
+            out bool createdNew
+        )
         {
             Debug.Assert(initialCount >= 0);
             Debug.Assert(maximumCount >= 1);
@@ -25,16 +33,29 @@ namespace System.Threading
 
 #if TARGET_UNIX || TARGET_BROWSER
             if (name != null)
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_NamedSynchronizationPrimitives
+                );
 #endif
-            SafeWaitHandle myHandle = Interop.Kernel32.CreateSemaphoreEx(IntPtr.Zero, initialCount, maximumCount, name, 0, AccessRights);
+            SafeWaitHandle myHandle = Interop.Kernel32.CreateSemaphoreEx(
+                IntPtr.Zero,
+                initialCount,
+                maximumCount,
+                name,
+                0,
+                AccessRights
+            );
 
             int errorCode = Marshal.GetLastPInvokeError();
             if (myHandle.IsInvalid)
             {
                 if (!string.IsNullOrEmpty(name) && errorCode == Interop.Errors.ERROR_INVALID_HANDLE)
                     throw new WaitHandleCannotBeOpenedException(
-                        SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
 
                 throw Win32Marshal.GetExceptionForLastWin32Error();
             }
@@ -58,7 +79,10 @@ namespace System.Threading
                 result = null;
                 int errorCode = Marshal.GetLastPInvokeError();
 
-                if (errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND || errorCode == Interop.Errors.ERROR_INVALID_NAME)
+                if (
+                    errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                    || errorCode == Interop.Errors.ERROR_INVALID_NAME
+                )
                     return OpenExistingResult.NameNotFound;
                 if (errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND)
                     return OpenExistingResult.PathNotFound;
@@ -71,13 +95,21 @@ namespace System.Threading
             result = new Semaphore(myHandle);
             return OpenExistingResult.Success;
 #else
-            throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+            throw new PlatformNotSupportedException(
+                SR.PlatformNotSupported_NamedSynchronizationPrimitives
+            );
 #endif
         }
 
         private int ReleaseCore(int releaseCount)
         {
-            if (!Interop.Kernel32.ReleaseSemaphore(SafeWaitHandle!, releaseCount, out int previousCount))
+            if (
+                !Interop.Kernel32.ReleaseSemaphore(
+                    SafeWaitHandle!,
+                    releaseCount,
+                    out int previousCount
+                )
+            )
                 throw new SemaphoreFullException();
 
             return previousCount;

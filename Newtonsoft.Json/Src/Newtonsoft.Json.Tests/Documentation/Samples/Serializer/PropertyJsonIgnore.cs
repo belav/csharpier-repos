@@ -68,7 +68,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // {"FullName":"Joe User","EmailAddress":"joe@example.com"}
             #endregion
 
-            Assert.AreEqual(@"{""FullName"":""Joe User"",""EmailAddress"":""joe@example.com""}", json);
+            Assert.AreEqual(
+                @"{""FullName"":""Joe User"",""EmailAddress"":""joe@example.com""}",
+                json
+            );
         }
     }
 }

@@ -79,13 +79,16 @@ public class DynamicComponent : IComponent
             else
             {
                 throw new InvalidOperationException(
-                    $"{nameof(DynamicComponent)} does not accept a parameter with the name '{entry.Name}'. To pass parameters to the dynamically-rendered component, use the '{nameof(Parameters)}' parameter.");
+                    $"{nameof(DynamicComponent)} does not accept a parameter with the name '{entry.Name}'. To pass parameters to the dynamically-rendered component, use the '{nameof(Parameters)}' parameter."
+                );
             }
         }
 
         if (Type is null)
         {
-            throw new InvalidOperationException($"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(Type)}.");
+            throw new InvalidOperationException(
+                $"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(Type)}."
+            );
         }
 
         _renderHandle.Render(_cachedRenderFragment);

@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void AddComment_CommentMarkerStringBeforeSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -36,7 +36,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -54,7 +54,7 @@ class C
         public void AddComment_DirectiveWithCommentInsideSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -67,7 +67,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -87,7 +87,7 @@ class C
         public void AddComment_MarkerInsideSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -98,7 +98,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -116,7 +116,7 @@ class C
         public void AddComment_CloseCommentMarkerStringInSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -127,7 +127,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -145,7 +145,7 @@ class C
         public void AddComment_CommentMarkerStringAfterSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -156,7 +156,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -174,7 +174,7 @@ class C
         public void RemoveComment_CommentMarkerStringNearSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -186,7 +186,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -205,7 +205,7 @@ class C
         public void RemoveComment_CommentMarkerStringInSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -214,7 +214,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -226,13 +226,19 @@ class C
             ToggleComment(markup, expected);
         }
 
-        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(TestWorkspace workspace)
+        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(
+            TestWorkspace workspace
+        )
         {
-            return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider.GetExportedValues<ICommandHandler>()
-                .First(export => typeof(CSharpToggleBlockCommentCommandHandler).Equals(export.GetType()));
+            return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider
+                .GetExportedValues<ICommandHandler>()
+                .First(
+                    export =>
+                        typeof(CSharpToggleBlockCommentCommandHandler).Equals(export.GetType())
+                );
         }
 
-        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition)
-            => TestWorkspace.CreateCSharp(markup, composition: composition);
+        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition) =>
+            TestWorkspace.CreateCSharp(markup, composition: composition);
     }
 }

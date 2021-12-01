@@ -10,16 +10,20 @@ namespace System.Text.Json.Reflection
 {
     internal class CustomAttributeDataWrapper : CustomAttributeData
     {
-        public CustomAttributeDataWrapper(AttributeData a, MetadataLoadContextInternal metadataLoadContext)
+        public CustomAttributeDataWrapper(
+            AttributeData a,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             var namedArguments = new List<CustomAttributeNamedArgument>();
             foreach (KeyValuePair<string, TypedConstant> na in a.NamedArguments)
             {
                 var member = a.AttributeClass!.GetMembers(na.Key).First();
 
-                MemberInfo memberInfo = member is IPropertySymbol
-                    ? new PropertyInfoWrapper((IPropertySymbol)member, metadataLoadContext)
-                    : new FieldInfoWrapper((IFieldSymbol)member, metadataLoadContext);
+                MemberInfo memberInfo =
+                    member is IPropertySymbol
+                        ? new PropertyInfoWrapper((IPropertySymbol)member, metadataLoadContext)
+                        : new FieldInfoWrapper((IFieldSymbol)member, metadataLoadContext);
 
                 namedArguments.Add(new CustomAttributeNamedArgument(memberInfo, na.Value.Value));
             }
@@ -34,7 +38,9 @@ namespace System.Text.Json.Reflection
                 }
 
                 object value = ca.Kind == TypedConstantKind.Array ? ca.Values : ca.Value;
-                constructorArguments.Add(new CustomAttributeTypedArgument(ca.Type.AsType(metadataLoadContext), value));
+                constructorArguments.Add(
+                    new CustomAttributeTypedArgument(ca.Type.AsType(metadataLoadContext), value)
+                );
             }
 
             Constructor = new ConstructorInfoWrapper(a.AttributeConstructor!, metadataLoadContext);

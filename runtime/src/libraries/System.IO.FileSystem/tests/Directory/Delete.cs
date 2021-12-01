@@ -9,7 +9,8 @@ namespace System.IO.Tests
 {
     public class Directory_Delete_str : FileSystemTest
     {
-        static bool IsBindMountSupported => OperatingSystem.IsLinux() && !PlatformDetection.IsInContainer;
+        static bool IsBindMountSupported =>
+            OperatingSystem.IsLinux() && !PlatformDetection.IsInContainer;
 
         #region Utilities
 
@@ -67,7 +68,9 @@ namespace System.IO.Tests
         [OuterLoop]
         public void DeleteRoot()
         {
-            Assert.Throws<IOException>(() => Delete(Path.GetPathRoot(Directory.GetCurrentDirectory())));
+            Assert.Throws<IOException>(
+                () => Delete(Path.GetPathRoot(Directory.GetCurrentDirectory()))
+            );
         }
 
         [Fact]
@@ -122,7 +125,9 @@ namespace System.IO.Tests
         [ConditionalFact(nameof(UsingNewNormalization))]
         public void ExtendedDirectoryWithSubdirectories()
         {
-            DirectoryInfo testDir = Directory.CreateDirectory(IOInputs.ExtendedPrefix + GetTestFilePath());
+            DirectoryInfo testDir = Directory.CreateDirectory(
+                IOInputs.ExtendedPrefix + GetTestFilePath()
+            );
             testDir.CreateSubdirectory(GetTestFileName());
             Assert.Throws<IOException>(() => Delete(testDir.FullName));
             Assert.True(testDir.Exists);
@@ -131,7 +136,9 @@ namespace System.IO.Tests
         [ConditionalFact(nameof(LongPathsAreNotBlocked), nameof(UsingNewNormalization))]
         public void LongPathExtendedDirectory()
         {
-            DirectoryInfo testDir = Directory.CreateDirectory(IOServices.GetPath(IOInputs.ExtendedPrefix + TestDirectory, characterCount: 500));
+            DirectoryInfo testDir = Directory.CreateDirectory(
+                IOServices.GetPath(IOInputs.ExtendedPrefix + TestDirectory, characterCount: 500)
+            );
             Delete(testDir.FullName);
             Assert.False(testDir.Exists);
         }
@@ -141,7 +148,7 @@ namespace System.IO.Tests
         #region PlatformSpecific
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Deleting readonly directory throws IOException
+        [PlatformSpecific(TestPlatforms.Windows)] // Deleting readonly directory throws IOException
         public void WindowsDeleteReadOnlyDirectory()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
@@ -152,10 +159,12 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(nameof(UsingNewNormalization))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Deleting extended readonly directory throws IOException
+        [PlatformSpecific(TestPlatforms.Windows)] // Deleting extended readonly directory throws IOException
         public void WindowsDeleteExtendedReadOnlyDirectory()
         {
-            DirectoryInfo testDir = Directory.CreateDirectory(IOInputs.ExtendedPrefix + GetTestFilePath());
+            DirectoryInfo testDir = Directory.CreateDirectory(
+                IOInputs.ExtendedPrefix + GetTestFilePath()
+            );
             testDir.Attributes = FileAttributes.ReadOnly;
             Assert.Throws<IOException>(() => Delete(testDir.FullName));
             Assert.True(testDir.Exists);
@@ -163,7 +172,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Deleting readOnly directory succeeds
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Deleting readOnly directory succeeds
         public void UnixDeleteReadOnlyDirectory()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
@@ -173,7 +182,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Deleting hidden directory succeeds
+        [PlatformSpecific(TestPlatforms.Windows)] // Deleting hidden directory succeeds
         public void WindowsShouldBeAbleToDeleteHiddenDirectory()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
@@ -183,22 +192,30 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(nameof(UsingNewNormalization))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Deleting extended hidden directory succeeds
+        [PlatformSpecific(TestPlatforms.Windows)] // Deleting extended hidden directory succeeds
         public void WindowsShouldBeAbleToDeleteExtendedHiddenDirectory()
         {
-            DirectoryInfo testDir = Directory.CreateDirectory(IOInputs.ExtendedPrefix + GetTestFilePath());
+            DirectoryInfo testDir = Directory.CreateDirectory(
+                IOInputs.ExtendedPrefix + GetTestFilePath()
+            );
             testDir.Attributes = FileAttributes.Hidden;
             Delete(testDir.FullName);
             Assert.False(testDir.Exists);
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Deleting hidden directory succeeds
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Deleting hidden directory succeeds
         public void UnixShouldBeAbleToDeleteHiddenDirectory()
         {
             string testDir = "." + GetTestFileName();
             Directory.CreateDirectory(Path.Combine(TestDirectory, testDir));
-            Assert.True(0 != (new DirectoryInfo(Path.Combine(TestDirectory, testDir)).Attributes & FileAttributes.Hidden));
+            Assert.True(
+                0
+                    != (
+                        new DirectoryInfo(Path.Combine(TestDirectory, testDir)).Attributes
+                        & FileAttributes.Hidden
+                    )
+            );
             Delete(Path.Combine(TestDirectory, testDir));
             Assert.False(Directory.Exists(testDir));
         }
@@ -209,10 +226,14 @@ namespace System.IO.Tests
         [Trait(XunitConstants.Category, XunitConstants.RequiresElevation)]
         public void Unix_NotFoundDirectory_ReadOnlyVolume()
         {
-            ReadOnly_FileSystemHelper(readOnlyDirectory =>
-            {
-                Assert.Throws<DirectoryNotFoundException>(() => Delete(Path.Combine(readOnlyDirectory, "DoesNotExist")));
-            });
+            ReadOnly_FileSystemHelper(
+                readOnlyDirectory =>
+                {
+                    Assert.Throws<DirectoryNotFoundException>(
+                        () => Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"))
+                    );
+                }
+            );
         }
         #endregion
     }
@@ -280,7 +301,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Recursive delete throws IOException if directory contains in-use file
+        [PlatformSpecific(TestPlatforms.Windows)] // Recursive delete throws IOException if directory contains in-use file
         public void RecursiveDelete_ShouldThrowIOExceptionIfContainedFileInUse()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());

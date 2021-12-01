@@ -29,15 +29,38 @@ namespace AutoMapper.IntegrationTests
         }
         class Initializer : DropCreateDatabaseAlways<TestContext>
         {
-            protected override void Seed(TestContext context) => context.SourceTypes.Add(new SourceType { Parameters = { new Parameter { Name = "Index", Value = 101 } } });
+            protected override void Seed(TestContext context) =>
+                context.SourceTypes.Add(
+                    new SourceType
+                    {
+                        Parameters =
+                        {
+                            new Parameter { Name = "Index", Value = 101 }
+                        }
+                    }
+                );
         }
         class TestContext : DbContext
         {
-            protected override void OnModelCreating(DbModelBuilder modelBuilder) => Database.SetInitializer(new Initializer());
+            protected override void OnModelCreating(DbModelBuilder modelBuilder) =>
+                Database.SetInitializer(new Initializer());
             public DbSet<SourceType> SourceTypes { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-            cfg.CreateProjection<SourceType, DestinationType>().ForMember(d => d.Index, o => o.MapFrom(source => source.Parameters.FirstOrDefault(p => p.Name == "Index").Value)));
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                    cfg.CreateProjection<SourceType, DestinationType>()
+                        .ForMember(
+                            d => d.Index,
+                            o =>
+                                o.MapFrom(
+                                    source =>
+                                        source.Parameters.FirstOrDefault(
+                                            p => p.Name == "Index"
+                                        ).Value
+                                )
+                        )
+            );
         [Fact]
         public void Should_project_ok()
         {
@@ -49,7 +72,8 @@ namespace AutoMapper.IntegrationTests
     }
     public class NullChildItemTest : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<Parent, ParentDto>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.CreateProjection<Parent, ParentDto>());
         public class TestContext : DbContext
         {
             public TestContext() : base() => Database.SetInitializer(new DatabaseInitializer());
@@ -144,17 +168,21 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Students.Add(new Student{ Name = "Bob" });
+                context.Students.Add(new Student { Name = "Bob" });
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Student, StudentViewModel>().ForMember(d => d.Score, opts => opts.MapFrom(m => m.ScoreRecords));
-            cfg.CreateProjection<ICollection<ScoreRecord>, ScoreModel>()
-                .ForMember(d => d.MinScore, opts => opts.MapFrom(m => m.Min(s => s.Score)))
-                .ForMember(d => d.MaxScore, opts => opts.MapFrom(m => m.Max(s => s.Score)));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Student, StudentViewModel>()
+                        .ForMember(d => d.Score, opts => opts.MapFrom(m => m.ScoreRecords));
+                    cfg.CreateProjection<ICollection<ScoreRecord>, ScoreModel>()
+                        .ForMember(d => d.MinScore, opts => opts.MapFrom(m => m.Min(s => s.Score)))
+                        .ForMember(d => d.MaxScore, opts => opts.MapFrom(m => m.Max(s => s.Score)));
+                }
+            );
 
         [Fact]
         public void Can_map_with_projection()

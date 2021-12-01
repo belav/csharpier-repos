@@ -16,7 +16,8 @@ internal class SingleEntryJumpTable : JumpTable
         int defaultDestination,
         int exitDestination,
         string text,
-        int destination)
+        int destination
+    )
     {
         _defaultDestination = defaultDestination;
         _exitDestination = exitDestination;
@@ -31,14 +32,17 @@ internal class SingleEntryJumpTable : JumpTable
             return _exitDestination;
         }
 
-        if (segment.Length == _text.Length &&
-            string.Compare(
+        if (
+            segment.Length == _text.Length
+            && string.Compare(
                 path,
                 segment.Start,
                 _text,
                 0,
                 segment.Length,
-                StringComparison.OrdinalIgnoreCase) == 0)
+                StringComparison.OrdinalIgnoreCase
+            ) == 0
+        )
         {
             return _destination;
         }

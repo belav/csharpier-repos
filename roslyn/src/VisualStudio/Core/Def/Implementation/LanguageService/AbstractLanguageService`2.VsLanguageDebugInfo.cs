@@ -39,35 +39,59 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 Guid languageId,
                 TLanguageService languageService,
                 HostLanguageServices languageServiceProvider,
-                IUIThreadOperationExecutor uiThreadOperationExecutor)
+                IUIThreadOperationExecutor uiThreadOperationExecutor
+            )
             {
                 Contract.ThrowIfNull(languageService);
                 Contract.ThrowIfNull(languageServiceProvider);
 
                 _languageId = languageId;
                 _languageService = languageService;
-                _languageDebugInfo = languageServiceProvider.GetService<ILanguageDebugInfoService>();
-                _breakpointService = languageServiceProvider.GetService<IBreakpointResolutionService>();
-                _proximityExpressionsService = languageServiceProvider.GetService<IProximityExpressionsService>();
+                _languageDebugInfo =
+                    languageServiceProvider.GetService<ILanguageDebugInfoService>();
+                _breakpointService =
+                    languageServiceProvider.GetService<IBreakpointResolutionService>();
+                _proximityExpressionsService =
+                    languageServiceProvider.GetService<IProximityExpressionsService>();
                 _uiThreadOperationExecutor = uiThreadOperationExecutor;
             }
 
-            public int GetLanguageID(IVsTextBuffer pBuffer, int iLine, int iCol, out Guid pguidLanguageID)
+            public int GetLanguageID(
+                IVsTextBuffer pBuffer,
+                int iLine,
+                int iCol,
+                out Guid pguidLanguageID
+            )
             {
                 pguidLanguageID = _languageId;
                 return VSConstants.S_OK;
             }
 
-            public int GetLocationOfName(string pszName, out string? pbstrMkDoc, out VsTextSpan pspanLocation)
+            public int GetLocationOfName(
+                string pszName,
+                out string? pbstrMkDoc,
+                out VsTextSpan pspanLocation
+            )
             {
                 pbstrMkDoc = null;
                 pspanLocation = default;
                 return VSConstants.E_NOTIMPL;
             }
 
-            public int GetNameOfLocation(IVsTextBuffer pBuffer, int iLine, int iCol, out string? pbstrName, out int piLineOffset)
+            public int GetNameOfLocation(
+                IVsTextBuffer pBuffer,
+                int iLine,
+                int iCol,
+                out string? pbstrName,
+                out int piLineOffset
+            )
             {
-                using (Logger.LogBlock(FunctionId.Debugging_VsLanguageDebugInfo_GetNameOfLocation, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Debugging_VsLanguageDebugInfo_GetNameOfLocation,
+                        CancellationToken.None
+                    )
+                )
                 {
                     string? name = null;
                     var lineOffset = 0;
@@ -82,21 +106,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             action: waitContext =>
                             {
                                 var cancellationToken = waitContext.UserCancellationToken;
-                                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
+                                var textBuffer =
+                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
+                                        pBuffer
+                                    );
                                 if (textBuffer != null)
                                 {
-                                    var nullablePoint = textBuffer.CurrentSnapshot.TryGetPoint(iLine, iCol);
+                                    var nullablePoint = textBuffer.CurrentSnapshot.TryGetPoint(
+                                        iLine,
+                                        iCol
+                                    );
                                     if (nullablePoint.HasValue)
                                     {
                                         var point = nullablePoint.Value;
-                                        var document = point.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                                        var document =
+                                            point.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
 
                                         if (document != null)
                                         {
-                                            // NOTE(cyrusn): We have to wait here because the debuggers' 
-                                            // GetNameOfLocation is a blocking call.  In the future, it 
+                                            // NOTE(cyrusn): We have to wait here because the debuggers'
+                                            // GetNameOfLocation is a blocking call.  In the future, it
                                             // would be nice if they could make it async.
-                                            var debugLocationInfo = _languageDebugInfo.GetLocationInfoAsync(document, point, cancellationToken).WaitAndGetResult(cancellationToken);
+                                            var debugLocationInfo = _languageDebugInfo
+                                                .GetLocationInfoAsync(
+                                                    document,
+                                                    point,
+                                                    cancellationToken
+                                                )
+                                                .WaitAndGetResult(cancellationToken);
 
                                             if (!debugLocationInfo.IsDefault)
                                             {
@@ -106,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                         }
                                     }
                                 }
-                            });
+                            }
+                        );
 
                         if (name != null)
                         {
@@ -124,10 +162,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 }
             }
 
-            public int GetProximityExpressions(IVsTextBuffer pBuffer, int iLine, int iCol, int cLines, out IVsEnumBSTR? ppEnum)
+            public int GetProximityExpressions(
+                IVsTextBuffer pBuffer,
+                int iLine,
+                int iCol,
+                int cLines,
+                out IVsEnumBSTR? ppEnum
+            )
             {
                 // NOTE(cyrusn): cLines is ignored.  This is to match existing dev10 behavior.
-                using (Logger.LogBlock(FunctionId.Debugging_VsLanguageDebugInfo_GetProximityExpressions, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Debugging_VsLanguageDebugInfo_GetProximityExpressions,
+                        CancellationToken.None
+                    )
+                )
                 {
                     VsEnumBSTR? enumBSTR = null;
 
@@ -139,29 +188,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             allowCancellation: true,
                             showProgress: false,
                             action: context =>
-                        {
-                            var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
-
-                            if (textBuffer != null)
                             {
-                                var snapshot = textBuffer.CurrentSnapshot;
-                                var nullablePoint = snapshot.TryGetPoint(iLine, iCol);
-                                if (nullablePoint.HasValue)
-                                {
-                                    var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
-                                    if (document != null)
-                                    {
-                                        var point = nullablePoint.Value;
-                                        var proximityExpressions = _proximityExpressionsService.GetProximityExpressionsAsync(document, point.Position, context.UserCancellationToken).WaitAndGetResult(context.UserCancellationToken);
+                                var textBuffer =
+                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
+                                        pBuffer
+                                    );
 
-                                        if (proximityExpressions != null)
+                                if (textBuffer != null)
+                                {
+                                    var snapshot = textBuffer.CurrentSnapshot;
+                                    var nullablePoint = snapshot.TryGetPoint(iLine, iCol);
+                                    if (nullablePoint.HasValue)
+                                    {
+                                        var document =
+                                            snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                                        if (document != null)
                                         {
-                                            enumBSTR = new VsEnumBSTR(proximityExpressions);
+                                            var point = nullablePoint.Value;
+                                            var proximityExpressions = _proximityExpressionsService
+                                                .GetProximityExpressionsAsync(
+                                                    document,
+                                                    point.Position,
+                                                    context.UserCancellationToken
+                                                )
+                                                .WaitAndGetResult(context.UserCancellationToken);
+
+                                            if (proximityExpressions != null)
+                                            {
+                                                enumBSTR = new VsEnumBSTR(proximityExpressions);
+                                            }
                                         }
                                     }
                                 }
                             }
-                        });
+                        );
                     }
 
                     ppEnum = enumBSTR;
@@ -169,12 +229,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 }
             }
 
-            public int IsMappedLocation(IVsTextBuffer pBuffer, int iLine, int iCol)
-                => VSConstants.E_NOTIMPL;
+            public int IsMappedLocation(IVsTextBuffer pBuffer, int iLine, int iCol) =>
+                VSConstants.E_NOTIMPL;
 
             public int ResolveName(string pszName, uint dwFlags, out IVsEnumDebugName? ppNames)
             {
-                using (Logger.LogBlock(FunctionId.Debugging_VsLanguageDebugInfo_ResolveName, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Debugging_VsLanguageDebugInfo_ResolveName,
+                        CancellationToken.None
+                    )
+                )
                 {
                     // In VS, this method frequently get's called with an empty string to test if the language service
                     // supports this method (some language services, like F#, implement IVsLanguageDebugInfo but don't
@@ -193,30 +258,46 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         allowCancellation: true,
                         showProgress: false,
                         action: waitContext =>
-                    {
-                        var cancellationToken = waitContext.UserCancellationToken;
-                        if (dwFlags == (uint)RESOLVENAMEFLAGS.RNF_BREAKPOINT)
                         {
-                            var solution = _languageService.Workspace.CurrentSolution;
-
-                            // NOTE(cyrusn): We have to wait here because the debuggers' ResolveName
-                            // call is synchronous.  In the future it would be nice to make it async.
-                            if (_breakpointService != null)
+                            var cancellationToken = waitContext.UserCancellationToken;
+                            if (dwFlags == (uint)RESOLVENAMEFLAGS.RNF_BREAKPOINT)
                             {
-                                var breakpoints = _breakpointService.ResolveBreakpointsAsync(solution, pszName, cancellationToken).WaitAndGetResult(cancellationToken);
-                                var debugNames = breakpoints.Select(bp => CreateDebugName(bp, solution, cancellationToken)).WhereNotNull().ToList();
+                                var solution = _languageService.Workspace.CurrentSolution;
 
-                                enumName = new VsEnumDebugName(debugNames);
+                                // NOTE(cyrusn): We have to wait here because the debuggers' ResolveName
+                                // call is synchronous.  In the future it would be nice to make it async.
+                                if (_breakpointService != null)
+                                {
+                                    var breakpoints = _breakpointService
+                                        .ResolveBreakpointsAsync(
+                                            solution,
+                                            pszName,
+                                            cancellationToken
+                                        )
+                                        .WaitAndGetResult(cancellationToken);
+                                    var debugNames = breakpoints
+                                        .Select(
+                                            bp => CreateDebugName(bp, solution, cancellationToken)
+                                        )
+                                        .WhereNotNull()
+                                        .ToList();
+
+                                    enumName = new VsEnumDebugName(debugNames);
+                                }
                             }
                         }
-                    });
+                    );
 
                     ppNames = enumName;
                     return ppNames != null ? VSConstants.S_OK : VSConstants.E_NOTIMPL;
                 }
             }
 
-            private IVsDebugName CreateDebugName(BreakpointResolutionResult breakpoint, Solution solution, CancellationToken cancellationToken)
+            private IVsDebugName CreateDebugName(
+                BreakpointResolutionResult breakpoint,
+                Solution solution,
+                CancellationToken cancellationToken
+            )
             {
                 var document = breakpoint.Document;
                 var filePath = _languageService.Workspace.GetFilePath(document.Id);
@@ -224,7 +305,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 var span = text.GetVsTextSpanForSpan(breakpoint.TextSpan);
                 // If we're inside an Venus code nugget, we need to map the span to the surface buffer.
                 // Otherwise, we'll just use the original span.
-                if (!span.TryMapSpanFromSecondaryBufferToPrimaryBuffer(solution.Workspace, document.Id, out var mappedSpan))
+                if (
+                    !span.TryMapSpanFromSecondaryBufferToPrimaryBuffer(
+                        solution.Workspace,
+                        document.Id,
+                        out var mappedSpan
+                    )
+                )
                 {
                     mappedSpan = span;
                 }
@@ -232,9 +319,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 return new VsDebugName(breakpoint.LocationNameOpt, filePath, mappedSpan);
             }
 
-            public int ValidateBreakpointLocation(IVsTextBuffer pBuffer, int iLine, int iCol, VsTextSpan[] pCodeSpan)
+            public int ValidateBreakpointLocation(
+                IVsTextBuffer pBuffer,
+                int iLine,
+                int iCol,
+                VsTextSpan[] pCodeSpan
+            )
             {
-                using (Logger.LogBlock(FunctionId.Debugging_VsLanguageDebugInfo_ValidateBreakpointLocation, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Debugging_VsLanguageDebugInfo_ValidateBreakpointLocation,
+                        CancellationToken.None
+                    )
+                )
                 {
                     var result = VSConstants.E_NOTIMPL;
                     _uiThreadOperationExecutor.Execute(
@@ -243,9 +340,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         allowCancellation: true,
                         showProgress: false,
                         action: waitContext =>
-                    {
-                        result = ValidateBreakpointLocationWorker(pBuffer, iLine, iCol, pCodeSpan, waitContext.UserCancellationToken);
-                    });
+                        {
+                            result = ValidateBreakpointLocationWorker(
+                                pBuffer,
+                                iLine,
+                                iCol,
+                                pCodeSpan,
+                                waitContext.UserCancellationToken
+                            );
+                        }
+                    );
 
                     return result;
                 }
@@ -256,14 +360,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 int iLine,
                 int iCol,
                 VsTextSpan[] pCodeSpan,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (_breakpointService == null)
                 {
                     return VSConstants.E_FAIL;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
+                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
+                    pBuffer
+                );
                 if (textBuffer != null)
                 {
                     var snapshot = textBuffer.CurrentSnapshot;
@@ -274,7 +381,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         return VSConstants.E_FAIL;
                     }
 
-                    var document = snapshot.AsText().GetDocumentWithFrozenPartialSemantics(cancellationToken);
+                    var document = snapshot
+                        .AsText()
+                        .GetDocumentWithFrozenPartialSemantics(cancellationToken);
                     if (document != null)
                     {
                         var point = nullablePoint.Value;
@@ -303,7 +412,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             {
                                 var tree = document.GetSyntaxTreeSynchronously(cancellationToken);
                                 Contract.ThrowIfNull(tree);
-                                if (tree.GetDiagnostics(cancellationToken).Any(d => d.Severity == DiagnosticSeverity.Error))
+                                if (
+                                    tree.GetDiagnostics(cancellationToken)
+                                        .Any(d => d.Severity == DiagnosticSeverity.Error)
+                                )
                                 {
                                     // Keep the span as is.
                                     return VSConstants.S_OK;
@@ -316,14 +428,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             if (initialBreakpointSpan.Contains(point))
                             {
                                 point = initialBreakpointSpan.Start;
-                                length = pCodeSpan[0].iEndLine > pCodeSpan[0].iStartLine ? initialBreakpointSpan.Length : 0;
+                                length =
+                                    pCodeSpan[0].iEndLine > pCodeSpan[0].iStartLine
+                                        ? initialBreakpointSpan.Length
+                                        : 0;
                             }
                         }
 
                         // NOTE(cyrusn): we need to wait here because ValidateBreakpointLocation is
                         // synchronous.  In the future, it would be nice for the debugger to provide
                         // an async entry point for this.
-                        var breakpoint = _breakpointService.ResolveBreakpointAsync(document, new TextSpan(point.Position, length), cancellationToken).WaitAndGetResult(cancellationToken);
+                        var breakpoint = _breakpointService
+                            .ResolveBreakpointAsync(
+                                document,
+                                new TextSpan(point.Position, length),
+                                cancellationToken
+                            )
+                            .WaitAndGetResult(cancellationToken);
                         if (breakpoint == null)
                         {
                             // There should *not* be a breakpoint here.  E_FAIL to let the debugger know
@@ -345,7 +466,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         // There should be a breakpoint at the location passed back.
                         if (pCodeSpan != null && pCodeSpan.Length > 0)
                         {
-                            pCodeSpan[0] = breakpoint.TextSpan.ToSnapshotSpan(snapshot).ToVsTextSpan();
+                            pCodeSpan[0] = breakpoint.TextSpan
+                                .ToSnapshotSpan(snapshot)
+                                .ToVsTextSpan();
                         }
 
                         return VSConstants.S_OK;

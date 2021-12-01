@@ -27,9 +27,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IMigrator migrator,
-            IMigrationsAssembly migrationsAssembly)
-            : base(eventDefinition, messageGenerator, migrator)
-            => MigrationsAssembly = migrationsAssembly;
+            IMigrationsAssembly migrationsAssembly
+        ) : base(eventDefinition, messageGenerator, migrator) =>
+            MigrationsAssembly = migrationsAssembly;
 
         /// <summary>
         ///     The <see cref="IMigrationsAssembly" /> in use.

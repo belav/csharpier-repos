@@ -32,16 +32,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual string? Alias { get; internal set; }
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         /// <inheritdoc />
-        public override Type Type
-            => typeof(object);
+        public override Type Type => typeof(object);
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
@@ -50,21 +47,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         protected abstract void Print(ExpressionPrinter expressionPrinter);
 
         /// <inheritdoc />
-        void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-            => Print(expressionPrinter);
+        void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+            Print(expressionPrinter);
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is TableExpressionBase tableExpressionBase
-                    && Equals(tableExpressionBase));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is TableExpressionBase tableExpressionBase && Equals(tableExpressionBase)
+            );
 
-        private bool Equals(TableExpressionBase tableExpressionBase)
-            => Alias == tableExpressionBase.Alias;
+        private bool Equals(TableExpressionBase tableExpressionBase) =>
+            Alias == tableExpressionBase.Alias;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(Alias);
+        public override int GetHashCode() => HashCode.Combine(Alias);
     }
 }

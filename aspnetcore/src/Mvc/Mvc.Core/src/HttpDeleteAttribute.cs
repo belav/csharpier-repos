@@ -17,17 +17,13 @@ public class HttpDeleteAttribute : HttpMethodAttribute
     /// <summary>
     /// Creates a new <see cref="HttpDeleteAttribute"/>.
     /// </summary>
-    public HttpDeleteAttribute()
-        : base(_supportedMethods)
-    {
-    }
+    public HttpDeleteAttribute() : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpDeleteAttribute"/> with the given route template.
     /// </summary>
     /// <param name="template">The route template. May not be null.</param>
-    public HttpDeleteAttribute(string template)
-        : base(_supportedMethods, template)
+    public HttpDeleteAttribute(string template) : base(_supportedMethods, template)
     {
         if (template == null)
         {

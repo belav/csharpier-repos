@@ -28,11 +28,10 @@ namespace System.Threading
 
         public bool Equals(LockCookie obj)
         {
-            return
-                _flags == obj._flags &&
-                _readerLevel == obj._readerLevel &&
-                _writerLevel == obj._writerLevel &&
-                _threadID == obj._threadID;
+            return _flags == obj._flags
+                && _readerLevel == obj._readerLevel
+                && _writerLevel == obj._writerLevel
+                && _threadID == obj._threadID;
         }
 
         public static bool operator ==(LockCookie a, LockCookie b)

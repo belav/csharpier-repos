@@ -10,17 +10,14 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         /// No action needs to be performed.
         /// </summary>
         None,
-
         /// <summary>
         /// Indicates the reference should be marked as used.
         /// </summary>
         TreatAsUsed,
-
         /// <summary>
         /// Indicates the reference should be marked as unused
         /// </summary>
         TreatAsUnused,
-
         /// <summary>
         /// Indicates the reference should be removed from the project.
         /// </summary>

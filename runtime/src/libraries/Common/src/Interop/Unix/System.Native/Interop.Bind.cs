@@ -10,6 +10,11 @@ internal static partial class Interop
     internal static partial class Sys
     {
         [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_Bind")]
-        internal static unsafe partial Error Bind(SafeHandle socket, ProtocolType socketProtocolType, byte* socketAddress, int socketAddressLen);
+        internal static unsafe partial Error Bind(
+            SafeHandle socket,
+            ProtocolType socketProtocolType,
+            byte* socketAddress,
+            int socketAddressLen
+        );
     }
 }

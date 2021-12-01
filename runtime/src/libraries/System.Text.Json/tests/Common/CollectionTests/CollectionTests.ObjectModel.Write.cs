@@ -21,16 +21,34 @@ namespace System.Text.Json.Serialization.Tests
 
             SimpleKeyedCollection kc = new SimpleKeyedCollection() { true, false };
             Assert.Equal("[true,false]", await JsonSerializerWrapperForString.SerializeWrapper(kc));
-            Assert.Equal("[true,false]", await JsonSerializerWrapperForString.SerializeWrapper<KeyedCollection<string, bool>>(kc));
+            Assert.Equal(
+                "[true,false]",
+                await JsonSerializerWrapperForString.SerializeWrapper<
+                    KeyedCollection<string, bool>
+                >(kc)
+            );
 
-            ReadOnlyCollection<bool> roc = new ReadOnlyCollection<bool>(new List<bool> { true, false });
-            Assert.Equal("[true,false]", await JsonSerializerWrapperForString.SerializeWrapper(roc));
+            ReadOnlyCollection<bool> roc = new ReadOnlyCollection<bool>(
+                new List<bool> { true, false }
+            );
+            Assert.Equal(
+                "[true,false]",
+                await JsonSerializerWrapperForString.SerializeWrapper(roc)
+            );
 
             ReadOnlyObservableCollection<bool> rooc = new ReadOnlyObservableCollection<bool>(oc);
-            Assert.Equal("[true,false]", await JsonSerializerWrapperForString.SerializeWrapper(rooc));
+            Assert.Equal(
+                "[true,false]",
+                await JsonSerializerWrapperForString.SerializeWrapper(rooc)
+            );
 
-            ReadOnlyDictionary<string, bool> rod = new ReadOnlyDictionary<string, bool>(new Dictionary<string, bool> { ["true"] = false });
-            Assert.Equal(@"{""true"":false}", await JsonSerializerWrapperForString.SerializeWrapper(rod));
+            ReadOnlyDictionary<string, bool> rod = new ReadOnlyDictionary<string, bool>(
+                new Dictionary<string, bool> { ["true"] = false }
+            );
+            Assert.Equal(
+                @"{""true"":false}",
+                await JsonSerializerWrapperForString.SerializeWrapper(rod)
+            );
         }
     }
 }

@@ -18,10 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public SlimCheckConstraint(
-            string name,
-            SlimEntityType entityType,
-            string sql)
+        public SlimCheckConstraint(string name, SlimEntityType entityType, string sql)
         {
             EntityType = entityType;
             Name = name;
@@ -44,8 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
-        public override string ToString()
-            => ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,10 +51,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
-                () => ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
-                () => ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+        public virtual DebugView DebugView =>
+            new(
+                () =>
+                    ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
+                () => ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+            );
 
         /// <inheritdoc/>
         IReadOnlyEntityType IReadOnlyCheckConstraint.EntityType

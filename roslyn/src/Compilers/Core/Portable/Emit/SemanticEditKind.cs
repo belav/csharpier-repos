@@ -10,22 +10,18 @@ namespace Microsoft.CodeAnalysis.Emit
         /// No change.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Symbol is updated.
         /// </summary>
         Update = 1,
-
         /// <summary>
         /// Symbol is inserted.
         /// </summary>
         Insert = 2,
-
         /// <summary>
         /// Symbol is deleted.
         /// </summary>
         Delete = 3,
-
         /// <summary>
         /// Existing symbol is replaced by its new version.
         /// </summary>

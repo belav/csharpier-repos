@@ -44,10 +44,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsModuleType
         {
-            get
-            {
-                return Module.GetGlobalModuleType() == this;
-            }
+            get { return Module.GetGlobalModuleType() == this; }
         }
 
         /// <summary>

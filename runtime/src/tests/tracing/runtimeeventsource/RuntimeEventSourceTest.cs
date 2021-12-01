@@ -12,11 +12,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
+
 AppContext.SetSwitch("appContextSwitch", true);
 AppDomain.CurrentDomain.SetData("appContextBoolData", true); // Not loggeed, bool key
 AppDomain.CurrentDomain.SetData("appContextBoolAsStringData", "true");
 AppDomain.CurrentDomain.SetData("appContextStringData", "myString"); // Not logged, string does not parse as bool
 AppDomain.CurrentDomain.SetData("appContextSwitch", "false"); // should not override the SetSwitch above
+
 
 // Create an EventListener.
 using (var myListener = new RuntimeEventListener())
@@ -28,7 +30,9 @@ using (var myListener = new RuntimeEventListener())
     }
     else
     {
-        Console.WriteLine($"Test Failed - did not see one or more of the expected runtime counters.");
+        Console.WriteLine(
+            $"Test Failed - did not see one or more of the expected runtime counters."
+        );
         Console.WriteLine("Observed events: ");
         foreach (var (k, v) in myListener.ObservedEvents)
         {
@@ -42,13 +46,15 @@ public class RuntimeEventListener : EventListener
 {
     internal readonly Dictionary<string, bool> ObservedEvents = new Dictionary<string, bool>();
 
-    private static readonly string[] s_expectedEvents = new[] {
+    private static readonly string[] s_expectedEvents = new[]
+    {
         "appContextSwitch",
         "appContextBoolAsStringData",
         "RuntimeHostConfigSwitch", // Set in the project file
     };
 
-    private static readonly string[] s_unexpectedEvents = new[] {
+    private static readonly string[] s_unexpectedEvents = new[]
+    {
         "appContextBoolData",
         "appContextStringData",
     };
@@ -57,15 +63,18 @@ public class RuntimeEventListener : EventListener
     {
         if (source.Name.Equals("System.Runtime"))
         {
-            EnableEvents(source, EventLevel.Informational, (EventKeywords)1 /* RuntimeEventSource.Keywords.AppContext */);
+            EnableEvents(
+                source,
+                EventLevel.Informational,
+                (EventKeywords)1 /* RuntimeEventSource.Keywords.AppContext */
+            );
         }
     }
 
     protected override void OnEventWritten(EventWrittenEventArgs eventData)
     {
         // Check AppContext switches
-        if (eventData is { EventName: "LogAppContextSwitch",
-                           Payload: { Count: 2 } })
+        if (eventData is { EventName: "LogAppContextSwitch", Payload: { Count: 2 } })
         {
             var switchName = (string)eventData.Payload[0];
             ObservedEvents[switchName] = ((int)eventData.Payload[1]) == 1;

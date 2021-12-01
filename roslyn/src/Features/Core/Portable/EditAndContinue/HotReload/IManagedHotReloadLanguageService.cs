@@ -35,7 +35,10 @@ namespace Microsoft.VisualStudio.Debugger.Contracts.HotReload
         public ImmutableArray<ManagedHotReloadUpdate> Updates { get; }
         public ImmutableArray<ManagedHotReloadDiagnostic> Diagnostics { get; }
 
-        public ManagedHotReloadUpdates(ImmutableArray<ManagedHotReloadUpdate> updates, ImmutableArray<ManagedHotReloadDiagnostic> diagnostics)
+        public ManagedHotReloadUpdates(
+            ImmutableArray<ManagedHotReloadUpdate> updates,
+            ImmutableArray<ManagedHotReloadDiagnostic> diagnostics
+        )
         {
             Updates = updates;
             Diagnostics = diagnostics;
@@ -48,7 +51,11 @@ namespace Microsoft.VisualStudio.Debugger.Contracts.HotReload
         public ImmutableArray<byte> ILDelta { get; }
         public ImmutableArray<byte> MetadataDelta { get; }
 
-        public ManagedHotReloadUpdate(Guid module, ImmutableArray<byte> ilDelta, ImmutableArray<byte> metadataDelta)
+        public ManagedHotReloadUpdate(
+            Guid module,
+            ImmutableArray<byte> ilDelta,
+            ImmutableArray<byte> metadataDelta
+        )
         {
             Module = module;
             ILDelta = ilDelta;
@@ -64,7 +71,13 @@ namespace Microsoft.VisualStudio.Debugger.Contracts.HotReload
         public string FilePath { get; }
         public SourceSpan Span { get; }
 
-        public ManagedHotReloadDiagnostic(string id, string message, ManagedHotReloadDiagnosticSeverity severity, string filePath, SourceSpan span)
+        public ManagedHotReloadDiagnostic(
+            string id,
+            string message,
+            ManagedHotReloadDiagnosticSeverity severity,
+            string filePath,
+            SourceSpan span
+        )
         {
             Id = id;
             Message = message;

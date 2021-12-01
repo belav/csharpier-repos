@@ -21,8 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates a new <see cref="InstantiationBinding" /> instance.
         /// </summary>
         /// <param name="parameterBindings">The parameter bindings to use.</param>
-        protected InstantiationBinding(
-            IReadOnlyList<ParameterBinding> parameterBindings)
+        protected InstantiationBinding(IReadOnlyList<ParameterBinding> parameterBindings)
         {
             Check.NotNull(parameterBindings, nameof(parameterBindings));
 
@@ -53,6 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="parameterBindings">The new parameter bindings.</param>
         /// <returns>A copy with replaced parameter bindings.</returns>
-        public abstract InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings);
+        public abstract InstantiationBinding With(
+            IReadOnlyList<ParameterBinding> parameterBindings
+        );
     }
 }

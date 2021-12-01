@@ -16,19 +16,22 @@ namespace System.DirectoryServices.AccountManagement
     internal sealed class AuthZSet : ResultSet
     {
         internal AuthZSet(
-                    byte[] userSid,
-                    NetCred credentials,
-                    ContextOptions contextOptions,
-                    string flatUserAuthority,
-                    StoreCtx userStoreCtx,
-                    object userCtxBase)
+            byte[] userSid,
+            NetCred credentials,
+            ContextOptions contextOptions,
+            string flatUserAuthority,
+            StoreCtx userStoreCtx,
+            object userCtxBase
+        )
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                    "AuthZSet",
-                                    "AuthZSet: SID={0}, authority={1}, storeCtx={2}",
-                                    Utils.ByteArrayToString(userSid),
-                                    flatUserAuthority,
-                                    userStoreCtx.GetType());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthZSet",
+                "AuthZSet: SID={0}, authority={1}, storeCtx={2}",
+                Utils.ByteArrayToString(userSid),
+                flatUserAuthority,
+                userStoreCtx.GetType()
+            );
 
             _userType = userStoreCtx.OwningContext.ContextType;
             _userStoreCtx = userStoreCtx;
@@ -62,17 +65,21 @@ namespace System.DirectoryServices.AccountManagement
                 bool f;
                 int lastError = 0;
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "Initializing resource manager");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "AuthZSet",
+                    "Initializing resource manager"
+                );
 
                 // Create a resource manager
                 f = UnsafeNativeMethods.AuthzInitializeResourceManager(
-                                            UnsafeNativeMethods.AUTHZ_RM_FLAG.AUTHZ_RM_FLAG_NO_AUDIT,
-                                            IntPtr.Zero,
-                                            IntPtr.Zero,
-                                            IntPtr.Zero,
-                                            null,
-                                            out pResManager
-                                            );
+                    UnsafeNativeMethods.AUTHZ_RM_FLAG.AUTHZ_RM_FLAG_NO_AUDIT,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    null,
+                    out pResManager
+                );
 
                 if (f)
                 {
@@ -80,32 +87,43 @@ namespace System.DirectoryServices.AccountManagement
 
                     // Construct a context for the user based on the user's SID
                     f = UnsafeNativeMethods.AuthzInitializeContextFromSid(
-                                                0,                  // default flags
-                                                _psUserSid.DangerousGetHandle(),
-                                                pResManager,
-                                                IntPtr.Zero,
-                                                luid,
-                                                IntPtr.Zero,
-                                                out pClientContext
-                                                );
+                        0, // default flags
+                        _psUserSid.DangerousGetHandle(),
+                        pResManager,
+                        IntPtr.Zero,
+                        luid,
+                        IntPtr.Zero,
+                        out pClientContext
+                    );
 
                     if (f)
                     {
                         int bufferSize = 0;
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "Getting info from ctx");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "AuthZSet",
+                            "Getting info from ctx"
+                        );
 
                         // Extract the group SIDs from the user's context.  Determine the size of the buffer we need.
                         f = UnsafeNativeMethods.AuthzGetInformationFromContext(
-                                                    pClientContext,
-                                                    2,                    // AuthzContextInfoGroupsSids
-                                                    0,
-                                                    out bufferSize,
-                                                    IntPtr.Zero
-                                                    );
-                        if (!f && (bufferSize > 0) && (Marshal.GetLastWin32Error() == 122) /*ERROR_INSUFFICIENT_BUFFER*/)
+                            pClientContext,
+                            2, // AuthzContextInfoGroupsSids
+                            0,
+                            out bufferSize,
+                            IntPtr.Zero
+                        );
+                        if (
+                            !f && (bufferSize > 0) && (Marshal.GetLastWin32Error() == 122) /*ERROR_INSUFFICIENT_BUFFER*/
+                        )
                         {
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "Getting info from ctx (size={0})", bufferSize);
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "AuthZSet",
+                                "Getting info from ctx (size={0})",
+                                bufferSize
+                            );
 
                             Debug.Assert(bufferSize > 0);
 
@@ -114,12 +132,12 @@ namespace System.DirectoryServices.AccountManagement
 
                             // Extract the group SIDs from the user's context, into our buffer.0
                             f = UnsafeNativeMethods.AuthzGetInformationFromContext(
-                                                        pClientContext,
-                                                        2,                    // AuthzContextInfoGroupsSids
-                                                        bufferSize,
-                                                        out bufferSize,
-                                                        pBuffer
-                                                        );
+                                pClientContext,
+                                2, // AuthzContextInfoGroupsSids
+                                bufferSize,
+                                out bufferSize,
+                                pBuffer
+                            );
 
                             if (f)
                             {
@@ -134,23 +152,46 @@ namespace System.DirectoryServices.AccountManagement
 
                                 // Extract TOKEN_GROUPS.GroupCount
 
-                                UnsafeNativeMethods.TOKEN_GROUPS tokenGroups = (UnsafeNativeMethods.TOKEN_GROUPS)Marshal.PtrToStructure(pBuffer, typeof(UnsafeNativeMethods.TOKEN_GROUPS));
+                                UnsafeNativeMethods.TOKEN_GROUPS tokenGroups =
+                                    (UnsafeNativeMethods.TOKEN_GROUPS)Marshal.PtrToStructure(
+                                        pBuffer,
+                                        typeof(UnsafeNativeMethods.TOKEN_GROUPS)
+                                    );
 
                                 int groupCount = tokenGroups.groupCount;
 
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "Found {0} groups", groupCount);
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "AuthZSet",
+                                    "Found {0} groups",
+                                    groupCount
+                                );
 
                                 // Extract TOKEN_GROUPS.Groups, by iterating over the array and marshalling
                                 // each native SID_AND_ATTRIBUTES into a managed SID_AND_ATTR.
-                                UnsafeNativeMethods.SID_AND_ATTR[] groups = new UnsafeNativeMethods.SID_AND_ATTR[groupCount];
+                                UnsafeNativeMethods.SID_AND_ATTR[] groups =
+                                    new UnsafeNativeMethods.SID_AND_ATTR[groupCount];
 
-                                IntPtr currentItem = new IntPtr(pBuffer.ToInt64() + Marshal.SizeOf(typeof(UnsafeNativeMethods.TOKEN_GROUPS)) - IntPtr.Size);
+                                IntPtr currentItem = new IntPtr(
+                                    pBuffer.ToInt64()
+                                        + Marshal.SizeOf(typeof(UnsafeNativeMethods.TOKEN_GROUPS))
+                                        - IntPtr.Size
+                                );
 
                                 for (int i = 0; i < groupCount; i++)
                                 {
-                                    groups[i] = (UnsafeNativeMethods.SID_AND_ATTR)Marshal.PtrToStructure(currentItem, typeof(UnsafeNativeMethods.SID_AND_ATTR));
+                                    groups[i] =
+                                        (UnsafeNativeMethods.SID_AND_ATTR)Marshal.PtrToStructure(
+                                            currentItem,
+                                            typeof(UnsafeNativeMethods.SID_AND_ATTR)
+                                        );
 
-                                    currentItem = new IntPtr(currentItem.ToInt64() + Marshal.SizeOf(typeof(UnsafeNativeMethods.SID_AND_ATTR)));
+                                    currentItem = new IntPtr(
+                                        currentItem.ToInt64()
+                                            + Marshal.SizeOf(
+                                                typeof(UnsafeNativeMethods.SID_AND_ATTR)
+                                            )
+                                    );
                                 }
 
                                 _groupSidList = new SidList(groups);
@@ -163,7 +204,9 @@ namespace System.DirectoryServices.AccountManagement
                         else
                         {
                             lastError = Marshal.GetLastWin32Error();
-                            Debug.Fail("With a zero-length buffer, this should have never succeeded");
+                            Debug.Fail(
+                                "With a zero-length buffer, this should have never succeeded"
+                            );
                         }
                     }
                     else
@@ -178,12 +221,16 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (!f)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "AuthZSet", "Failed to retrieve group list, {0}", lastError);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "AuthZSet",
+                        "Failed to retrieve group list, {0}",
+                        lastError
+                    );
 
                     throw new PrincipalOperationException(
-                                    SR.Format(
-                                            SR.AuthZFailedToRetrieveGroupList,
-                                            lastError));
+                        SR.Format(SR.AuthZFailedToRetrieveGroupList, lastError)
+                    );
                 }
 
                 // Save off the buffer since it still holds the native SIDs referenced by SidList
@@ -192,7 +239,13 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (Exception e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "AuthZSet", "Caught exception {0} with message {1}", e.GetType(), e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "AuthZSet",
+                    "Caught exception {0} with message {1}",
+                    e.GetType(),
+                    e.Message
+                );
 
                 if (_psBuffer != null && !_psBuffer.IsInvalid)
                     _psBuffer.Close();
@@ -232,11 +285,12 @@ namespace System.DirectoryServices.AccountManagement
                 Debug.Assert(_currentGroup >= 0 && _currentGroup < _groupSidList.Length);
 
                 GlobalDebug.WriteLineIf(
-                                GlobalDebug.Info,
-                                "AuthZSet",
-                                "CurrentAsPrincipal: currentGroup={0}, list length={1}",
-                                _currentGroup,
-                                _groupSidList.Length);
+                    GlobalDebug.Info,
+                    "AuthZSet",
+                    "CurrentAsPrincipal: currentGroup={0}, list length={1}",
+                    _currentGroup,
+                    _groupSidList.Length
+                );
 
                 // Convert native SID to byte[] SID
                 IntPtr pSid = _groupSidList[_currentGroup].pSid;
@@ -266,7 +320,12 @@ namespace System.DirectoryServices.AccountManagement
                 // It's a fake principal.  Construct and respond the corresponding fake Principal object.
                 if (sidType == SidType.FakeObject)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: fake principal {0}", Utils.ByteArrayToString(sid));
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: fake principal {0}",
+                        Utils.ByteArrayToString(sid)
+                    );
                     return _userStoreCtx.ConstructFakePrincipalFromSID(sid);
                 }
 
@@ -276,18 +335,32 @@ namespace System.DirectoryServices.AccountManagement
                 if (sidType == SidType.RealObjectFakeDomain)
                 {
                     // BUILTIN principal --> issuer is the same authority as the user's SID
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: builtin principal {0}", Utils.ByteArrayToString(sid));
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: builtin principal {0}",
+                        Utils.ByteArrayToString(sid)
+                    );
 
                     sidIssuerName = _flatUserAuthority;
                 }
                 else
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: real principal {0}", Utils.ByteArrayToString(sid));
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: real principal {0}",
+                        Utils.ByteArrayToString(sid)
+                    );
 
                     // Is the SID from the same domain as the user?
                     bool sameDomain = false;
 
-                    bool success = UnsafeNativeMethods.EqualDomainSid(_psUserSid.DangerousGetHandle(), pSid, ref sameDomain);
+                    bool success = UnsafeNativeMethods.EqualDomainSid(
+                        _psUserSid.DangerousGetHandle(),
+                        pSid,
+                        ref sameDomain
+                    );
 
                     // if failed, psUserSid must not be a domain sid
                     if (!success)
@@ -302,7 +375,12 @@ namespace System.DirectoryServices.AccountManagement
                     // same domain --> issuer is the same authority as the user's SID
                     if (sameDomain)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: same domain as user ({0})", _flatUserAuthority);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "AuthZSet",
+                            "CurrentAsPrincipal: same domain as user ({0})",
+                            _flatUserAuthority
+                        );
                         sidIssuerName = _flatUserAuthority;
                     }
                 }
@@ -311,7 +389,13 @@ namespace System.DirectoryServices.AccountManagement
                 if (sidIssuerName == null)
                 {
                     sidIssuerName = _groupSidList[_currentGroup].sidIssuerName;
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: different domain ({0}) than user ({1})", sidIssuerName, _flatUserAuthority);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: different domain ({0}) than user ({1})",
+                        sidIssuerName,
+                        _flatUserAuthority
+                    );
                 }
 
                 Debug.Assert(sidIssuerName != null);
@@ -321,7 +405,11 @@ namespace System.DirectoryServices.AccountManagement
                 bool isLocalGroup = false;
                 if (_userType == ContextType.Machine)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: local group (user is SAM)");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: local group (user is SAM)"
+                    );
 
                     // Machine local user ---> must be a local group
                     isLocalGroup = true;
@@ -334,7 +422,13 @@ namespace System.DirectoryServices.AccountManagement
                     // EqualDomainSid will return false if pSid is a BUILTIN SID, but that's okay, we treat those as domain (not local)
                     // groups for domain users.
                     bool inMachineDomain = false;
-                    if (UnsafeNativeMethods.EqualDomainSid(_psMachineSid.DangerousGetHandle(), pSid, ref inMachineDomain))
+                    if (
+                        UnsafeNativeMethods.EqualDomainSid(
+                            _psMachineSid.DangerousGetHandle(),
+                            pSid,
+                            ref inMachineDomain
+                        )
+                    )
                         if (inMachineDomain)
                         {
                             // At this point we know that the group was issued by the local machine.  Now determine if this machine is
@@ -343,13 +437,23 @@ namespace System.DirectoryServices.AccountManagement
                             if (!_localMachineIsDC.HasValue)
                             {
                                 _localMachineIsDC = (bool?)Utils.IsMachineDC(null);
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: IsLocalMachine a DC, localMachineIsDC={0}", _localMachineIsDC.Value);
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "AuthZSet",
+                                    "CurrentAsPrincipal: IsLocalMachine a DC, localMachineIsDC={0}",
+                                    _localMachineIsDC.Value
+                                );
                             }
 
                             isLocalGroup = !_localMachineIsDC.Value;
                         }
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "CurrentAsPrincipal: user is non-SAM, isLocalGroup={0}", isLocalGroup);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: user is non-SAM, isLocalGroup={0}",
+                        isLocalGroup
+                    );
                 }
 
                 if (isLocalGroup)
@@ -359,23 +463,31 @@ namespace System.DirectoryServices.AccountManagement
                     // If we initially targetted AD then those options will not be valid for the machine store.
 
                     PrincipalContext ctx = SDSCache.LocalMachine.GetContext(
-                                                                    sidIssuerName,
-                                                                    _credentials,
-                                                                    DefaultContextOptions.MachineDefaultContextOption);
+                        sidIssuerName,
+                        _credentials,
+                        DefaultContextOptions.MachineDefaultContextOption
+                    );
                     SecurityIdentifier sidObj = new SecurityIdentifier(sid, 0);
                     group = GroupPrincipal.FindByIdentity(ctx, IdentityType.Sid, sidObj.ToString());
                 }
                 else
                 {
-                    Debug.Assert((_userType == ContextType.Domain) &&
-                                 !string.Equals(Utils.GetComputerFlatName(), sidIssuerName, StringComparison.OrdinalIgnoreCase));
+                    Debug.Assert(
+                        (_userType == ContextType.Domain)
+                            && !string.Equals(
+                                Utils.GetComputerFlatName(),
+                                sidIssuerName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    );
 
                     // It's a domain group, because it's a domain user and the SID issuer isn't the local machine
 
                     PrincipalContext ctx = SDSCache.Domain.GetContext(
-                                                                sidIssuerName,
-                                                                _credentials,
-                                                                _contextOptions);
+                        sidIssuerName,
+                        _credentials,
+                        _contextOptions
+                    );
 
                     // Retrieve the group.  We'd normally just do a Group.FindByIdentity here, but
                     // because the AZMan API can return "old" SIDs, we also need to check the SID
@@ -389,12 +501,20 @@ namespace System.DirectoryServices.AccountManagement
                     ir.UrnScheme = UrnScheme.SidScheme;
                     ir.UrnValue = sidObj.ToString();
 
-                    group = (GroupPrincipal)((ADStoreCtx)ctx.QueryCtx).FindPrincipalBySID(typeof(GroupPrincipal), ir, true);
+                    group = (GroupPrincipal)((ADStoreCtx)ctx.QueryCtx).FindPrincipalBySID(
+                        typeof(GroupPrincipal),
+                        ir,
+                        true
+                    );
                 }
 
                 if (group == null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "AuthZSet", "CurrentAsPrincipal: Couldn't find group {0}");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "AuthZSet",
+                        "CurrentAsPrincipal: Couldn't find group {0}"
+                    );
                     throw new NoMatchingPrincipalException(SR.AuthZCantFindGroup);
                 }
 
@@ -414,7 +534,12 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (_currentGroup >= _groupSidList.Length)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "MoveNext: ran off end of list ({0})", _groupSidList.Length);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthZSet",
+                        "MoveNext: ran off end of list ({0})",
+                        _groupSidList.Length
+                    );
                     return false;
                 }
 
@@ -427,25 +552,35 @@ namespace System.DirectoryServices.AccountManagement
                     IntPtr pSid = _groupSidList[_currentGroup].pSid;
 
                     bool sameDomain = false;
-                    if (Utils.ClassifySID(pSid) == SidType.RealObject && UnsafeNativeMethods.EqualDomainSid(_psUserSid.DangerousGetHandle(), pSid, ref sameDomain))
+                    if (
+                        Utils.ClassifySID(pSid) == SidType.RealObject
+                        && UnsafeNativeMethods.EqualDomainSid(
+                            _psUserSid.DangerousGetHandle(),
+                            pSid,
+                            ref sameDomain
+                        )
+                    )
                     {
                         if (sameDomain)
                         {
                             int lastRid = Utils.GetLastRidFromSid(pSid);
 
-                            if (lastRid == 513)     // DOMAIN_GROUP_RID_USERS
+                            if (lastRid == 513) // DOMAIN_GROUP_RID_USERS
                             {
                                 // This is the NONE group for a local user.  This isn't a real group, and
                                 // has no impact on authorization (per ColinBr).  Skip it.
                                 needToRetry = true;
 
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "MoveNext: found NONE group, skipping");
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "AuthZSet",
+                                    "MoveNext: found NONE group, skipping"
+                                );
                             }
                         }
                     }
                 }
-            }
-            while (needToRetry);
+            } while (needToRetry);
 
             return true;
         }
@@ -527,9 +662,7 @@ namespace System.DirectoryServices.AccountManagement
         //
         private sealed class SafeMemoryPtr : SafeHandle
         {
-            public SafeMemoryPtr() : base(IntPtr.Zero, true)
-            {
-            }
+            public SafeMemoryPtr() : base(IntPtr.Zero, true) { }
 
             internal SafeMemoryPtr(IntPtr handle) : base(IntPtr.Zero, true)
             {
@@ -550,7 +683,6 @@ namespace System.DirectoryServices.AccountManagement
                 return true;
             }
         }
-
         /*
                 //
                 // Holds the list of group SIDs.  Also translates them in bulk into domain name and group name.

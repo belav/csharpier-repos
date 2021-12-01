@@ -15,12 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// C# language version 1
         /// </summary>
         CSharp1 = 1,
-
         /// <summary>
         /// C# language version 2
         /// </summary>
         CSharp2 = 2,
-
         /// <summary>
         /// C# language version 3
         /// </summary>
@@ -28,7 +26,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Features: LINQ.
         /// </remarks>
         CSharp3 = 3,
-
         /// <summary>
         /// C# language version 4
         /// </summary>
@@ -36,7 +33,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Features: dynamic.
         /// </remarks>
         CSharp4 = 4,
-
         /// <summary>
         /// C# language version 5
         /// </summary>
@@ -44,7 +40,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Features: async, caller info attributes.
         /// </remarks>
         CSharp5 = 5,
-
         /// <summary>
         /// C# language version 6
         /// </summary>
@@ -63,7 +58,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp6 = 6,
-
         /// <summary>
         /// C# language version 7.0
         /// </summary>
@@ -84,7 +78,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp7 = 7,
-
         /// <summary>
         /// C# language version 7.1
         /// </summary>
@@ -98,7 +91,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp7_1 = 701,
-
         /// <summary>
         /// C# language version 7.2
         /// </summary>
@@ -115,7 +107,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp7_2 = 702,
-
         /// <summary>
         /// C# language version 7.3
         /// </summary>
@@ -136,7 +127,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp7_3 = 703,
-
         /// <summary>
         /// C# language version 8.0
         /// </summary>
@@ -160,7 +150,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp8 = 800,
-
         /// <summary>
         /// C# language version 9.0
         /// </summary>
@@ -186,7 +175,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp9 = 900,
-
         /// <summary>
         /// C# language version 10.0
         /// </summary>
@@ -206,22 +194,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </list>
         /// </remarks>
         CSharp10 = 1000,
-
         /// <summary>
         /// The latest major supported version.
         /// </summary>
         LatestMajor = int.MaxValue - 2,
-
         /// <summary>
         /// Preview of the next language version.
         /// </summary>
         Preview = int.MaxValue - 1,
-
         /// <summary>
         /// The latest supported version of the language.
         /// </summary>
         Latest = int.MaxValue,
-
         /// <summary>
         /// The default language version, which is the latest supported version.
         /// </summary>

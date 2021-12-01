@@ -9,7 +9,7 @@ namespace System
 {
     internal sealed unsafe class LogcatStream : CachedConsoleStream
     {
-        public LogcatStream(Encoding encoding) : base(encoding) {}
+        public LogcatStream(Encoding encoding) : base(encoding) { }
 
         protected override void Print(ReadOnlySpan<char> line)
         {
@@ -30,11 +30,13 @@ namespace System
 
         public static Encoding InputEncoding => throw new PlatformNotSupportedException();
 
-        public static void SetConsoleInputEncoding(Encoding enc) => throw new PlatformNotSupportedException();
+        public static void SetConsoleInputEncoding(Encoding enc) =>
+            throw new PlatformNotSupportedException();
 
         public static Encoding OutputEncoding => Encoding.Unicode;
 
-        public static void SetConsoleOutputEncoding(Encoding enc) => throw new PlatformNotSupportedException();
+        public static void SetConsoleOutputEncoding(Encoding enc) =>
+            throw new PlatformNotSupportedException();
 
         public static bool IsInputRedirectedCore() => false;
 
@@ -50,7 +52,8 @@ namespace System
 
         public static bool KeyAvailable => false;
 
-        public static ConsoleKeyInfo ReadKey(bool intercept) => throw new PlatformNotSupportedException();
+        public static ConsoleKeyInfo ReadKey(bool intercept) =>
+            throw new PlatformNotSupportedException();
 
         public static bool TreatControlCAsInput
         {
@@ -84,7 +87,8 @@ namespace System
             set => throw new PlatformNotSupportedException();
         }
 
-        public static (int Left, int Top) GetCursorPosition() => throw new PlatformNotSupportedException();
+        public static (int Left, int Top) GetCursorPosition() =>
+            throw new PlatformNotSupportedException();
 
         public static string Title
         {
@@ -94,16 +98,25 @@ namespace System
 
         public static void Beep() => throw new PlatformNotSupportedException();
 
-        public static void Beep(int frequency, int duration) => throw new PlatformNotSupportedException();
+        public static void Beep(int frequency, int duration) =>
+            throw new PlatformNotSupportedException();
 
-        public static void MoveBufferArea(int sourceLeft, int sourceTop,
-            int sourceWidth, int sourceHeight, int targetLeft, int targetTop,
-            char sourceChar, ConsoleColor sourceForeColor,
-            ConsoleColor sourceBackColor) => throw new PlatformNotSupportedException();
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop,
+            char sourceChar,
+            ConsoleColor sourceForeColor,
+            ConsoleColor sourceBackColor
+        ) => throw new PlatformNotSupportedException();
 
         public static void Clear() => throw new PlatformNotSupportedException();
 
-        public static void SetCursorPosition(int left, int top) => throw new PlatformNotSupportedException();
+        public static void SetCursorPosition(int left, int top) =>
+            throw new PlatformNotSupportedException();
 
         public static int BufferWidth
         {
@@ -117,7 +130,8 @@ namespace System
             set => throw new PlatformNotSupportedException();
         }
 
-        public static void SetBufferSize(int width, int height) => throw new PlatformNotSupportedException();
+        public static void SetBufferSize(int width, int height) =>
+            throw new PlatformNotSupportedException();
 
         public static int LargestWindowWidth => throw new PlatformNotSupportedException();
 
@@ -147,8 +161,10 @@ namespace System
             set => throw new PlatformNotSupportedException();
         }
 
-        public static void SetWindowPosition(int left, int top) => throw new PlatformNotSupportedException();
+        public static void SetWindowPosition(int left, int top) =>
+            throw new PlatformNotSupportedException();
 
-        public static void SetWindowSize(int width, int height) => throw new PlatformNotSupportedException();
+        public static void SetWindowSize(int width, int height) =>
+            throw new PlatformNotSupportedException();
     }
 }

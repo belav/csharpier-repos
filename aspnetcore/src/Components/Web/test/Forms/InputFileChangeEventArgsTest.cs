@@ -14,7 +14,9 @@ public class InputFileChangeEventArgsTest
         var emptySet = new InputFileChangeEventArgs(Array.Empty<IBrowserFile>());
         Assert.Equal(0, emptySet.FileCount);
 
-        var twoItemSet = new InputFileChangeEventArgs(new[] { new BrowserFile(), new BrowserFile() });
+        var twoItemSet = new InputFileChangeEventArgs(
+            new[] { new BrowserFile(), new BrowserFile() }
+        );
         Assert.Equal(2, twoItemSet.FileCount);
     }
 
@@ -63,6 +65,9 @@ public class InputFileChangeEventArgsTest
         var files = new[] { new BrowserFile(), new BrowserFile() };
         var instance = new InputFileChangeEventArgs(files);
         var ex = Assert.Throws<InvalidOperationException>(() => instance.GetMultipleFiles(1));
-        Assert.Equal($"The maximum number of files accepted is 1, but 2 were supplied.", ex.Message);
+        Assert.Equal(
+            $"The maximum number of files accepted is 1, but 2 were supplied.",
+            ex.Message
+        );
     }
 }

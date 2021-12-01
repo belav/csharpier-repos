@@ -45,7 +45,10 @@ namespace System.Reflection.Emit
         private TypeBuilderInstantiation instantiation;
         private PropertyInfo prop;
 
-        internal PropertyOnTypeBuilderInst(TypeBuilderInstantiation instantiation, PropertyInfo prop)
+        internal PropertyOnTypeBuilderInst(
+            TypeBuilderInstantiation instantiation,
+            PropertyInfo prop
+        )
         {
             this.instantiation = instantiation;
             this.prop = prop;
@@ -108,7 +111,6 @@ namespace System.Reflection.Emit
             return res;
         }
 
-
         public override MethodInfo? GetGetMethod(bool nonPublic)
         {
             MethodInfo? mi = prop.GetGetMethod(nonPublic);
@@ -143,12 +145,25 @@ namespace System.Reflection.Emit
             return string.Format("{0} {1}", PropertyType, Name);
         }
 
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }

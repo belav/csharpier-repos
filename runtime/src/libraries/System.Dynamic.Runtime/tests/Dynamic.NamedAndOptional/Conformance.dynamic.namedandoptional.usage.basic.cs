@@ -37,8 +37,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic01a.generic01a
 {
     // <Area>Use of Named parameters</Area>
@@ -74,8 +72,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic01b.generic01b
 {
@@ -113,8 +109,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic01c.generic01c
 {
     // <Area>Use of Named parameters</Area>
@@ -148,8 +142,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic01d.generic01d
 {
@@ -192,8 +184,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic02.generic02
 {
     // <Area>Use of Named parameters</Area>
@@ -227,8 +217,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic02a.generic02a
 {
@@ -266,8 +254,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic02b.generic02b
 {
     // <Area>Use of Named parameters</Area>
@@ -304,8 +290,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic02c.generic02c
 {
     // <Area>Use of Named parameters</Area>
@@ -339,8 +323,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic02d.generic02d
 {
@@ -383,8 +365,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic03.generic03
 {
     // <Area>Use of Named parameters</Area>
@@ -418,8 +398,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic03a.generic03a
 {
@@ -457,8 +435,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic03b.generic03b
 {
     // <Area>Use of Named parameters</Area>
@@ -495,8 +471,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic03c.generic03c
 {
     // <Area>Use of Named parameters</Area>
@@ -531,8 +505,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic03d.generic03d
 {
     // <Area>Use of Named parameters</Area>
@@ -557,10 +529,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 dynamic d2 = 2;
                 return Foo<int>(x: d1, y: d2) == 1 ? 0 : 1;
             }
-
-            set
-            {
-            }
+            set { }
         }
     }
 
@@ -580,8 +549,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic04.generic04
 {
@@ -616,8 +583,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic04a.generic04a
 {
@@ -655,8 +620,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic04b.generic04b
 {
     // <Area>Use of Named parameters</Area>
@@ -693,8 +656,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic04c.generic04c
 {
     // <Area>Use of Named parameters</Area>
@@ -728,8 +689,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.generic04d.generic04d
 {
@@ -775,8 +734,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage02.usage02
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -810,8 +767,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage02a.usage02a
 {
@@ -849,8 +804,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage02b.usage02b
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -887,8 +840,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage02c.usage02c
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -922,8 +873,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage02d.usage02d
 {
@@ -966,8 +915,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage03.usage03
 {
     // <Area>Use of Named parameters</Area>
@@ -1001,8 +948,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage03a.usage03a
 {
@@ -1040,8 +985,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage03b.usage03b
 {
     // <Area>Use of Named parameters</Area>
@@ -1078,8 +1021,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage03c.usage03c
 {
     // <Area>Use of Named parameters</Area>
@@ -1113,8 +1054,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage03d.usage03d
 {
@@ -1157,8 +1096,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage04.usage04
 {
     // <Area>Use of Named parameters</Area>
@@ -1192,8 +1129,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage04a.usage04a
 {
@@ -1231,8 +1166,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage04b.usage04b
 {
     // <Area>Use of Named parameters</Area>
@@ -1269,8 +1202,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage04c.usage04c
 {
     // <Area>Use of Named parameters</Area>
@@ -1304,8 +1235,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage04d.usage04d
 {
@@ -1351,8 +1280,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage05.usage05
 {
     // <Area>Use of Named parameters</Area>
@@ -1397,8 +1324,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage05b.usage05b
 {
@@ -1447,8 +1372,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage06.usage06
 {
     // <Area>Use of Named parameters</Area>
@@ -1483,7 +1406,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1493,8 +1420,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage07.usage07
 {
@@ -1530,7 +1455,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1540,8 +1469,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage07b.usage07b
 {
@@ -1579,7 +1506,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1589,8 +1520,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage09.usage09
 {
@@ -1626,7 +1555,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1636,8 +1569,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage09b.usage09b
 {
@@ -1675,7 +1606,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1685,8 +1620,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage10.usage10
 {
@@ -1721,8 +1654,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage10a.usage10a
 {
@@ -1760,8 +1691,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage10b.usage10b
 {
     // <Area>Use of Named parameters</Area>
@@ -1798,8 +1727,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage10c.usage10c
 {
     // <Area>Use of Named parameters</Area>
@@ -1833,8 +1760,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage10d.usage10d
 {
@@ -1880,8 +1805,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage12.usage12
 {
     // <Area>Use of Named parameters</Area>
@@ -1926,8 +1849,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage12b.usage12b
 {
@@ -1975,8 +1896,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage13.usage13
 {
     // <Area>Use of Named parameters</Area>
@@ -2010,8 +1929,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage13a.usage13a
 {
@@ -2048,8 +1965,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage13b.usage13b
 {
     // <Area>Use of Named parameters</Area>
@@ -2085,8 +2000,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage13c.usage13c
 {
     // <Area>Use of Named parameters</Area>
@@ -2120,8 +2033,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage13d.usage13d
 {
@@ -2163,8 +2074,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage14.usage14
 {
     // <Area>Use of Named parameters</Area>
@@ -2199,8 +2108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage14a.usage14a
 {
@@ -2237,8 +2144,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage14b.usage14b
 {
     // <Area>Use of Named parameters</Area>
@@ -2274,8 +2179,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage14c.usage14c
 {
     // <Area>Use of Named parameters</Area>
@@ -2310,8 +2213,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage14d.usage14d
 {
@@ -2353,8 +2254,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage15.usage15
 {
     // <Area>Use of Named parameters</Area>
@@ -2389,8 +2288,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage15a.usage15a
 {
@@ -2427,8 +2324,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage15b.usage15b
 {
     // <Area>Use of Named parameters</Area>
@@ -2464,8 +2359,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage15c.usage15c
 {
     // <Area>Use of Named parameters</Area>
@@ -2500,8 +2393,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage15d.usage15d
 {
@@ -2543,8 +2434,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage16.usage16
 {
     // <Area>Use of Named parameters</Area>
@@ -2579,8 +2468,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage16a.usage16a
 {
@@ -2617,8 +2504,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage16b.usage16b
 {
     // <Area>Use of Named parameters</Area>
@@ -2654,8 +2539,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage16c.usage16c
 {
     // <Area>Use of Named parameters</Area>
@@ -2690,8 +2573,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage16d.usage16d
 {
@@ -2735,8 +2616,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage17.usage17
 {
     // <Area>Use of Named parameters</Area>
@@ -2771,8 +2650,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage17a.usage17a
 {
@@ -2809,8 +2686,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage17b.usage17b
 {
     // <Area>Use of Named parameters</Area>
@@ -2845,8 +2720,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage17d.usage17d
 {
@@ -2890,8 +2763,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage18.usage18
 {
     // <Area>Use of Named parameters</Area>
@@ -2927,8 +2798,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage18a.usage18a
 {
@@ -2966,8 +2835,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage18b.usage18b
 {
     // <Area>Use of Named parameters</Area>
@@ -3003,8 +2870,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage18c.usage18c
 {
@@ -3042,8 +2907,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage18d.usage18d
 {
     // <Area>Use of Named parameters</Area>
@@ -3080,19 +2943,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            Test t = new Test()
-            {
-                Field = p.Method()
-            }
-
-            ;
+            Test t = new Test() { Field = p.Method() };
             return t.Field;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage19.usage19
 {
@@ -3130,8 +2986,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage19a.usage19a
 {
     // <Area>Use of Named parameters</Area>
@@ -3167,8 +3021,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage19b.usage19b
 {
@@ -3206,8 +3058,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage19d.usage19d
 {
     // <Area>Use of Named parameters</Area>
@@ -3243,18 +3093,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            int[] array = new int[]
-            {
-            (int)p.Method()}
-
-            ;
+            int[] array = new int[] { (int)p.Method() };
             return array[0];
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage22.usage22
 {
@@ -3303,8 +3147,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage22a.usage22a
 {
     // <Area>Use of Named parameters</Area>
@@ -3351,8 +3193,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage22b.usage22b
 {
@@ -3401,8 +3241,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage22c.usage22c
 {
     // <Area>Use of Named parameters</Area>
@@ -3449,8 +3287,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage22d.usage22d
 {
@@ -3504,8 +3340,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage23.usage23
 {
     // <Area>Use of Named parameters</Area>
@@ -3541,8 +3375,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage23a.usage23a
 {
@@ -3580,8 +3412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage23b.usage23b
 {
     // <Area>Use of Named parameters</Area>
@@ -3618,8 +3448,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage23c.usage23c
 {
     // <Area>Use of Named parameters</Area>
@@ -3655,8 +3483,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage23d.usage23d
 {
@@ -3698,8 +3524,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage24.usage24
 {
     // <Title> No ambiguity when calling methods with N&O</Title>
@@ -3718,7 +3542,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var s = new test();
             dynamic d = new test();
             tests++;
@@ -3730,9 +3555,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: "") == 2)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
-            {
-            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
 
             return tests == success ? 0 : 1;
         }
@@ -3749,8 +3572,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage25.usage25
 {
@@ -3770,7 +3591,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var s = new test();
             dynamic d = new test();
             tests++;
@@ -3782,9 +3604,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: "") == 2)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
-            {
-            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
 
             return tests == success ? 0 : 1;
         }
@@ -3801,8 +3621,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage26.usage26
 {
@@ -3822,7 +3640,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var s = new test();
             dynamic d = new test();
             tests++;
@@ -3834,9 +3653,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: "") == 1)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
-            {
-            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
 
             return tests == success ? 0 : 1;
         }
@@ -3853,8 +3670,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.basic.usage27.usage27
 {
@@ -3874,7 +3689,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
         public static int MainMethod()
         {
-            int tests = 0, success = 0;
+            int tests = 0,
+                success = 0;
             var s = new test();
             dynamic d = new test();
             tests++;
@@ -3886,9 +3702,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
                 if (d.Foo(x: 1, y: null) == 2)
                     success++;
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
-            {
-            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) { }
 
             return tests == success ? 0 : 1;
         }

@@ -42,8 +42,9 @@ namespace CseTest
             s.b = return_int(false, -4);
             s.c = return_int(false, 6);
             int v;
-#if LOOP            
-			do {
+#if LOOP
+            do
+            {
 #endif
             v = ((s.a + s.b) + s.c);
             if (v != -60)
@@ -88,7 +89,8 @@ namespace CseTest
             }
 
 #if LOOP
-				do {
+                do
+                {
 #endif
             v = (s.a + (s.b + s.c));
             if (v != -60)
@@ -98,28 +100,30 @@ namespace CseTest
             }
 
             v = (s.b + (s.a + s.c));
-#if TRY               
-					try {
-#endif
-            if (v != -60)
-            {
-                Console.WriteLine("test7: for (s.b+(s.a+s.c))  failed actual value {0} ", v);
-                ret = ret + 1;
-            }
-
-            v = (s.b + s.c);
-            if (v != 2)
-            {
-                Console.WriteLine("test8: for (s.b+s.c)  failed actual value {0} ", v);
-                ret = ret + 1;
-            }
 #if TRY
-					}
-					finally { 
+            try
+            {
 #endif
-            v = (s.c + s.b);
-#if TRY                  
-					}
+                if (v != -60)
+                {
+                    Console.WriteLine("test7: for (s.b+(s.a+s.c))  failed actual value {0} ", v);
+                    ret = ret + 1;
+                }
+
+                v = (s.b + s.c);
+                if (v != 2)
+                {
+                    Console.WriteLine("test8: for (s.b+s.c)  failed actual value {0} ", v);
+                    ret = ret + 1;
+                }
+#if TRY
+            }
+            finally
+            {
+#endif
+                v = (s.c + s.b);
+#if TRY
+            }
 #endif
 
             if (v != 2)
@@ -176,8 +180,8 @@ namespace CseTest
                 Console.WriteLine("test16: for (s.c+(s.a+s.b))  failed actual value {0} ", v);
                 ret = ret + 1;
             }
-#if LOOP               
-				} while (v == 0);
+#if LOOP
+                } while (v == 0);
 #endif
 
             v = ((s.a + s.b) + s.c);
@@ -186,8 +190,8 @@ namespace CseTest
                 Console.WriteLine("test17: for ((s.a+s.b)+s.c)  failed actual value {0} ", v);
                 ret = ret + 1;
             }
-#if LOOP            
-			} while (v == 0);
+#if LOOP
+            } while (v == 0);
 #endif
             Console.WriteLine(ret);
             return ret;
@@ -217,4 +221,3 @@ namespace CseTest
         public int c;
     }
 }
-

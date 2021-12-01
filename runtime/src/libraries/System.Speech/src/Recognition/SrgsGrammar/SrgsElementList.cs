@@ -17,7 +17,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             base.InsertItem(index, element);
         }
-
         #endregion
     }
 }

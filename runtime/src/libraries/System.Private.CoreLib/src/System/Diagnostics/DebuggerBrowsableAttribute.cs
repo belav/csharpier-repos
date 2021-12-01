@@ -22,7 +22,6 @@ namespace System.Diagnostics
         RootHidden = 3
     }
 
-
     // the one currently supported with the csee.dat
     // (mcee.dat, autoexp.dat) file.
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]

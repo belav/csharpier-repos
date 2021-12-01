@@ -15,12 +15,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     A warning is logged.
         /// </summary>
         Log,
-
         /// <summary>
         ///     No action is taken.
         /// </summary>
         Ignore,
-
         /// <summary>
         ///     An exception is thrown.
         /// </summary>

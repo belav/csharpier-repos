@@ -13,8 +13,16 @@ namespace System.Collections.Generic
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [TypeForwardedFrom("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class HashSet<T> : ICollection<T>, ISet<T>, IReadOnlyCollection<T>, IReadOnlySet<T>, ISerializable, IDeserializationCallback
+    [TypeForwardedFrom(
+        "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class HashSet<T>
+        : ICollection<T>,
+          ISet<T>,
+          IReadOnlyCollection<T>,
+          IReadOnlySet<T>,
+          ISerializable,
+          IDeserializationCallback
     {
         // This uses the same array-based implementation as Dictionary<TKey, TValue>.
 
@@ -64,7 +72,8 @@ namespace System.Collections.Generic
             // hash buckets become unbalanced.
             if (typeof(T) == typeof(string))
             {
-                IEqualityComparer<string>? stringComparer = NonRandomizedStringEqualityComparer.GetStringComparer(_comparer);
+                IEqualityComparer<string>? stringComparer =
+                    NonRandomizedStringEqualityComparer.GetStringComparer(_comparer);
                 if (stringComparer is not null)
                 {
                     _comparer = (IEqualityComparer<T>?)stringComparer;
@@ -83,7 +92,10 @@ namespace System.Collections.Generic
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.collection);
             }
 
-            if (collection is HashSet<T> otherAsHashSet && EqualityComparersAreEqual(this, otherAsHashSet))
+            if (
+                collection is HashSet<T> otherAsHashSet
+                && EqualityComparersAreEqual(this, otherAsHashSet)
+            )
             {
                 ConstructFrom(otherAsHashSet);
             }
@@ -224,7 +236,10 @@ namespace System.Collections.Generic
                         while (i >= 0)
                         {
                             ref Entry entry = ref entries[i];
-                            if (entry.HashCode == hashCode && EqualityComparer<T>.Default.Equals(entry.Value, item))
+                            if (
+                                entry.HashCode == hashCode
+                                && EqualityComparer<T>.Default.Equals(entry.Value, item)
+                            )
                             {
                                 return i;
                             }
@@ -247,7 +262,10 @@ namespace System.Collections.Generic
                         while (i >= 0)
                         {
                             ref Entry entry = ref entries[i];
-                            if (entry.HashCode == hashCode && defaultComparer.Equals(entry.Value, item))
+                            if (
+                                entry.HashCode == hashCode
+                                && defaultComparer.Equals(entry.Value, item)
+                            )
                             {
                                 return i;
                             }
@@ -294,7 +312,9 @@ namespace System.Collections.Generic
         {
             int[] buckets = _buckets!;
 #if TARGET_64BIT
-            return ref buckets[HashHelpers.FastMod((uint)hashCode, (uint)buckets.Length, _fastModMultiplier)];
+            return ref buckets[
+                HashHelpers.FastMod((uint)hashCode, (uint)buckets.Length, _fastModMultiplier)
+            ];
 #else
             return ref buckets[(uint)hashCode % (uint)buckets.Length];
 #endif
@@ -309,7 +329,8 @@ namespace System.Collections.Generic
 
                 uint collisionCount = 0;
                 int last = -1;
-                int hashCode = item != null ? (_comparer?.GetHashCode(item) ?? item.GetHashCode()) : 0;
+                int hashCode =
+                    item != null ? (_comparer?.GetHashCode(item) ?? item.GetHashCode()) : 0;
 
                 ref int bucket = ref GetBucketRef(hashCode);
                 int i = bucket - 1; // Value in buckets is 1-based
@@ -318,7 +339,13 @@ namespace System.Collections.Generic
                 {
                     ref Entry entry = ref entries[i];
 
-                    if (entry.HashCode == hashCode && (_comparer?.Equals(entry.Value, item) ?? EqualityComparer<T>.Default.Equals(entry.Value, item)))
+                    if (
+                        entry.HashCode == hashCode
+                        && (
+                            _comparer?.Equals(entry.Value, item)
+                            ?? EqualityComparer<T>.Default.Equals(entry.Value, item)
+                        )
+                    )
                     {
                         if (last < 0)
                         {
@@ -329,7 +356,10 @@ namespace System.Collections.Generic
                             entries[last].Next = entry.Next;
                         }
 
-                        Debug.Assert((StartOfFreeList - _freeList) < 0, "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646");
+                        Debug.Assert(
+                            (StartOfFreeList - _freeList) < 0,
+                            "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646"
+                        );
                         entry.Next = StartOfFreeList - _freeList;
 
                         if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
@@ -412,7 +442,8 @@ namespace System.Collections.Generic
             }
 
             int capacity = siInfo.GetInt32(CapacityName);
-            _comparer = (IEqualityComparer<T>)siInfo.GetValue(ComparerName, typeof(IEqualityComparer<T>))!;
+            _comparer =
+                (IEqualityComparer<T>)siInfo.GetValue(ComparerName, typeof(IEqualityComparer<T>))!;
             _freeList = -1;
             _freeCount = 0;
 
@@ -427,7 +458,9 @@ namespace System.Collections.Generic
                 T[]? array = (T[]?)siInfo.GetValue(ElementsName, typeof(T[]));
                 if (array == null)
                 {
-                    ThrowHelper.ThrowSerializationException(ExceptionResource.Serialization_MissingKeys);
+                    ThrowHelper.ThrowSerializationException(
+                        ExceptionResource.Serialization_MissingKeys
+                    );
                 }
 
                 // There are no resizes here because we already set capacity above.
@@ -631,7 +664,10 @@ namespace System.Collections.Generic
                 return IsSubsetOfHashSetWithSameComparer(otherAsSet);
             }
 
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: false);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: false
+            );
             return uniqueCount == Count && unfoundCount >= 0;
         }
 
@@ -679,7 +715,10 @@ namespace System.Collections.Generic
                 }
             }
 
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: false);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: false
+            );
             return uniqueCount == Count && unfoundCount > 0;
         }
 
@@ -709,9 +748,11 @@ namespace System.Collections.Generic
                 }
 
                 // Try to compare based on counts alone if other is a hashset with same equality comparer.
-                if (other is HashSet<T> otherAsSet &&
-                    EqualityComparersAreEqual(this, otherAsSet) &&
-                    otherAsSet.Count > Count)
+                if (
+                    other is HashSet<T> otherAsSet
+                    && EqualityComparersAreEqual(this, otherAsSet)
+                    && otherAsSet.Count > Count
+                )
                 {
                     return false;
                 }
@@ -759,7 +800,10 @@ namespace System.Collections.Generic
             }
 
             // Couldn't fall out in the above cases; do it the long way
-            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: true);
+            (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: true
+            );
             return uniqueCount < Count && unfoundCount == 0;
         }
 
@@ -828,14 +872,19 @@ namespace System.Collections.Generic
             else
             {
                 // If this count is 0 but other contains at least one element, they can't be equal.
-                if (Count == 0 &&
-                    other is ICollection<T> otherAsCollection &&
-                    otherAsCollection.Count > 0)
+                if (
+                    Count == 0
+                    && other is ICollection<T> otherAsCollection
+                    && otherAsCollection.Count > 0
+                )
                 {
                     return false;
                 }
 
-                (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: true);
+                (int uniqueCount, int unfoundCount) = CheckUniqueAndUnfoundElements(
+                    other,
+                    returnIfUnfound: true
+                );
                 return uniqueCount == Count && unfoundCount == 0;
             }
         }
@@ -857,13 +906,21 @@ namespace System.Collections.Generic
             // Check array index valid index into array.
             if (arrayIndex < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(arrayIndex),
+                    arrayIndex,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             // Also throw if count less than 0.
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), count, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    count,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             // Will the array, starting at arrayIndex, be able to hold elements? Note: not
@@ -924,7 +981,9 @@ namespace System.Collections.Generic
             {
                 if (typeof(T) == typeof(string))
                 {
-                    return (IEqualityComparer<T>)IInternalStringEqualityComparer.GetUnderlyingEqualityComparer((IEqualityComparer<string?>?)_comparer);
+                    return (IEqualityComparer<T>)IInternalStringEqualityComparer.GetUnderlyingEqualityComparer(
+                        (IEqualityComparer<string?>?)_comparer
+                    );
                 }
                 else
                 {
@@ -974,14 +1033,18 @@ namespace System.Collections.Generic
             if (!typeof(T).IsValueType && forceNewHashCodes)
             {
                 Debug.Assert(_comparer is NonRandomizedStringEqualityComparer);
-                _comparer = (IEqualityComparer<T>)((NonRandomizedStringEqualityComparer)_comparer).GetRandomizedEqualityComparer();
+                _comparer =
+                    (IEqualityComparer<T>)(
+                        (NonRandomizedStringEqualityComparer)_comparer
+                    ).GetRandomizedEqualityComparer();
 
                 for (int i = 0; i < count; i++)
                 {
                     ref Entry entry = ref entries[i];
                     if (entry.Next >= -1)
                     {
-                        entry.HashCode = entry.Value != null ? _comparer!.GetHashCode(entry.Value) : 0;
+                        entry.HashCode =
+                            entry.Value != null ? _comparer!.GetHashCode(entry.Value) : 0;
                     }
                 }
 
@@ -1054,7 +1117,8 @@ namespace System.Collections.Generic
         #region Helper methods
 
         /// <summary>Returns an <see cref="IEqualityComparer"/> object that can be used for equality testing of a <see cref="HashSet{T}"/> object.</summary>
-        public static IEqualityComparer<HashSet<T>> CreateSetComparer() => new HashSetEqualityComparer<T>();
+        public static IEqualityComparer<HashSet<T>> CreateSetComparer() =>
+            new HashSetEqualityComparer<T>();
 
         /// <summary>
         /// Initializes buckets and slots arrays. Uses suggested capacity by finding next prime
@@ -1109,7 +1173,10 @@ namespace System.Collections.Generic
                     while (i >= 0)
                     {
                         ref Entry entry = ref entries[i];
-                        if (entry.HashCode == hashCode && EqualityComparer<T>.Default.Equals(entry.Value, value))
+                        if (
+                            entry.HashCode == hashCode
+                            && EqualityComparer<T>.Default.Equals(entry.Value, value)
+                        )
                         {
                             location = i;
                             return false;
@@ -1132,7 +1199,9 @@ namespace System.Collections.Generic
                     while (i >= 0)
                     {
                         ref Entry entry = ref entries[i];
-                        if (entry.HashCode == hashCode && defaultComparer.Equals(entry.Value, value))
+                        if (
+                            entry.HashCode == hashCode && defaultComparer.Equals(entry.Value, value)
+                        )
                         {
                             location = i;
                             return false;
@@ -1177,7 +1246,10 @@ namespace System.Collections.Generic
             {
                 index = _freeList;
                 _freeCount--;
-                Debug.Assert((StartOfFreeList - entries![_freeList].Next) >= -1, "shouldn't overflow because `next` cannot underflow");
+                Debug.Assert(
+                    (StartOfFreeList - entries![_freeList].Next) >= -1,
+                    "shouldn't overflow because `next` cannot underflow"
+                );
                 _freeList = StartOfFreeList - entries[_freeList].Next;
             }
             else
@@ -1204,7 +1276,11 @@ namespace System.Collections.Generic
             }
 
             // Value types never rehash
-            if (!typeof(T).IsValueType && collisionCount > HashHelpers.HashCollisionThreshold && comparer is NonRandomizedStringEqualityComparer)
+            if (
+                !typeof(T).IsValueType
+                && collisionCount > HashHelpers.HashCollisionThreshold
+                && comparer is NonRandomizedStringEqualityComparer
+            )
             {
                 // If we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
                 // i.e. EqualityComparer<string>.Default.
@@ -1286,7 +1362,10 @@ namespace System.Collections.Generic
         /// </summary>
         private unsafe void IntersectWithEnumerable(IEnumerable<T> other)
         {
-            Debug.Assert(_buckets != null, "_buckets shouldn't be null; callers should check first");
+            Debug.Assert(
+                _buckets != null,
+                "_buckets shouldn't be null; callers should check first"
+            );
 
             // Keep track of current last index; don't want to move past the end of our bit array
             // (could happen if another thread is modifying the collection).
@@ -1294,9 +1373,10 @@ namespace System.Collections.Generic
             int intArrayLength = BitHelper.ToIntArrayLength(originalCount);
 
             Span<int> span = stackalloc int[StackAllocThreshold];
-            BitHelper bitHelper = intArrayLength <= StackAllocThreshold ?
-                new BitHelper(span.Slice(0, intArrayLength), clear: true) :
-                new BitHelper(new int[intArrayLength], clear: false);
+            BitHelper bitHelper =
+                intArrayLength <= StackAllocThreshold
+                    ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             // Mark if contains: find index of in slots array and mark corresponding element in bit array.
             foreach (T item in other)
@@ -1362,14 +1442,16 @@ namespace System.Collections.Generic
             int intArrayLength = BitHelper.ToIntArrayLength(originalCount);
 
             Span<int> itemsToRemoveSpan = stackalloc int[StackAllocThreshold / 2];
-            BitHelper itemsToRemove = intArrayLength <= StackAllocThreshold / 2 ?
-                new BitHelper(itemsToRemoveSpan.Slice(0, intArrayLength), clear: true) :
-                new BitHelper(new int[intArrayLength], clear: false);
+            BitHelper itemsToRemove =
+                intArrayLength <= StackAllocThreshold / 2
+                    ? new BitHelper(itemsToRemoveSpan.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             Span<int> itemsAddedFromOtherSpan = stackalloc int[StackAllocThreshold / 2];
-            BitHelper itemsAddedFromOther = intArrayLength <= StackAllocThreshold / 2 ?
-                new BitHelper(itemsAddedFromOtherSpan.Slice(0, intArrayLength), clear: true) :
-                new BitHelper(new int[intArrayLength], clear: false);
+            BitHelper itemsAddedFromOther =
+                intArrayLength <= StackAllocThreshold / 2
+                    ? new BitHelper(itemsAddedFromOtherSpan.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             foreach (T item in other)
             {
@@ -1429,7 +1511,10 @@ namespace System.Collections.Generic
         /// <param name="other"></param>
         /// <param name="returnIfUnfound">Allows us to finish faster for equals and proper superset
         /// because unfoundCount must be 0.</param>
-        private unsafe (int UniqueCount, int UnfoundCount) CheckUniqueAndUnfoundElements(IEnumerable<T> other, bool returnIfUnfound)
+        private unsafe (int UniqueCount, int UnfoundCount) CheckUniqueAndUnfoundElements(
+            IEnumerable<T> other,
+            bool returnIfUnfound
+        )
         {
             // Need special case in case this has no elements.
             if (_count == 0)
@@ -1444,15 +1529,19 @@ namespace System.Collections.Generic
                 return (UniqueCount: 0, UnfoundCount: numElementsInOther);
             }
 
-            Debug.Assert((_buckets != null) && (_count > 0), "_buckets was null but count greater than 0");
+            Debug.Assert(
+                (_buckets != null) && (_count > 0),
+                "_buckets was null but count greater than 0"
+            );
 
             int originalCount = _count;
             int intArrayLength = BitHelper.ToIntArrayLength(originalCount);
 
             Span<int> span = stackalloc int[StackAllocThreshold];
-            BitHelper bitHelper = intArrayLength <= StackAllocThreshold ?
-                new BitHelper(span.Slice(0, intArrayLength), clear: true) :
-                new BitHelper(new int[intArrayLength], clear: false);
+            BitHelper bitHelper =
+                intArrayLength <= StackAllocThreshold
+                    ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             int unfoundCount = 0; // count of items in other not found in this
             int uniqueFoundCount = 0; // count of unique items in other found in this
@@ -1487,7 +1576,8 @@ namespace System.Collections.Generic
         /// speed up if it knows the other item has unique elements. I.e. if they're using
         /// different equality comparers, then uniqueness assumption between sets break.
         /// </summary>
-        internal static bool EqualityComparersAreEqual(HashSet<T> set1, HashSet<T> set2) => set1.Comparer.Equals(set2.Comparer);
+        internal static bool EqualityComparersAreEqual(HashSet<T> set1, HashSet<T> set2) =>
+            set1.Comparer.Equals(set2.Comparer);
 
 #endregion
 

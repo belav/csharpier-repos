@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             FieldInfo? newFieldInfo,
             FieldInfo? oldFieldInfo,
-            IConventionContext<FieldInfo> context);
+            IConventionContext<FieldInfo> context
+        );
     }
 }

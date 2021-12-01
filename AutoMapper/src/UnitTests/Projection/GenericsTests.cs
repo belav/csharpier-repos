@@ -19,20 +19,17 @@
             public T Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof (Source<>), typeof (Dest<>));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source<>), typeof(Dest<>));
+                }
+            );
 
         protected override void Because_of()
         {
-            var sources = new[]
-            {
-                new Source<string>
-                {
-                    Value = "5"
-                }
-            }.AsQueryable();
+            var sources = new[] { new Source<string> { Value = "5" } }.AsQueryable();
 
             _dests = sources.ProjectTo<Dest<string>>(Configuration).ToArray();
         }

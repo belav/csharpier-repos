@@ -29,10 +29,7 @@ internal class RendererSynchronizationContext : SynchronizationContext
 
     public event UnhandledExceptionEventHandler UnhandledException;
 
-    public RendererSynchronizationContext()
-        : this(new State())
-    {
-    }
+    public RendererSynchronizationContext() : this(new State()) { }
 
     private RendererSynchronizationContext(State state)
     {
@@ -42,95 +39,120 @@ internal class RendererSynchronizationContext : SynchronizationContext
     public Task InvokeAsync(Action action)
     {
         var completion = new RendererSynchronizationTaskCompletionSource<Action, object>(action);
-        ExecuteSynchronouslyIfPossible((state) =>
-        {
-            var completion = (RendererSynchronizationTaskCompletionSource<Action, object>)state;
-            try
+        ExecuteSynchronouslyIfPossible(
+            (state) =>
             {
-                completion.Callback();
-                completion.SetResult(null);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion = (RendererSynchronizationTaskCompletionSource<Action, object>)state;
+                try
+                {
+                    completion.Callback();
+                    completion.SetResult(null);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
 
     public Task InvokeAsync(Func<Task> asyncAction)
     {
-        var completion = new RendererSynchronizationTaskCompletionSource<Func<Task>, object>(asyncAction);
-        ExecuteSynchronouslyIfPossible(async (state) =>
-        {
-            var completion = (RendererSynchronizationTaskCompletionSource<Func<Task>, object>)state;
-            try
+        var completion = new RendererSynchronizationTaskCompletionSource<Func<Task>, object>(
+            asyncAction
+        );
+        ExecuteSynchronouslyIfPossible(
+            async (state) =>
             {
-                await completion.Callback();
-                completion.SetResult(null);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion =
+                    (RendererSynchronizationTaskCompletionSource<Func<Task>, object>)state;
+                try
+                {
+                    await completion.Callback();
+                    completion.SetResult(null);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
 
     public Task<TResult> InvokeAsync<TResult>(Func<TResult> function)
     {
-        var completion = new RendererSynchronizationTaskCompletionSource<Func<TResult>, TResult>(function);
-        ExecuteSynchronouslyIfPossible((state) =>
-        {
-            var completion = (RendererSynchronizationTaskCompletionSource<Func<TResult>, TResult>)state;
-            try
+        var completion = new RendererSynchronizationTaskCompletionSource<Func<TResult>, TResult>(
+            function
+        );
+        ExecuteSynchronouslyIfPossible(
+            (state) =>
             {
-                var result = completion.Callback();
-                completion.SetResult(result);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion =
+                    (RendererSynchronizationTaskCompletionSource<Func<TResult>, TResult>)state;
+                try
+                {
+                    var result = completion.Callback();
+                    completion.SetResult(result);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
 
     public Task<TResult> InvokeAsync<TResult>(Func<Task<TResult>> asyncFunction)
     {
-        var completion = new RendererSynchronizationTaskCompletionSource<Func<Task<TResult>>, TResult>(asyncFunction);
-        ExecuteSynchronouslyIfPossible(async (state) =>
-        {
-            var completion = (RendererSynchronizationTaskCompletionSource<Func<Task<TResult>>, TResult>)state;
-            try
+        var completion = new RendererSynchronizationTaskCompletionSource<
+            Func<Task<TResult>>,
+            TResult
+        >(asyncFunction);
+        ExecuteSynchronouslyIfPossible(
+            async (state) =>
             {
-                var result = await completion.Callback();
-                completion.SetResult(result);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion =
+                    (RendererSynchronizationTaskCompletionSource<
+                        Func<Task<TResult>>,
+                        TResult
+                    >)state;
+                try
+                {
+                    var result = await completion.Callback();
+                    completion.SetResult(result);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
@@ -197,7 +219,12 @@ internal class RendererSynchronizationContext : SynchronizationContext
         ExecuteSynchronously(completion, d, state);
     }
 
-    private Task Enqueue(Task antecedent, SendOrPostCallback d, object state, bool forceAsync = false)
+    private Task Enqueue(
+        Task antecedent,
+        SendOrPostCallback d,
+        object state,
+        bool forceAsync = false
+    )
     {
         // If we get here is means that a callback is being explicitly queued. Let's instead add it to the queue and yield.
         //
@@ -213,20 +240,29 @@ internal class RendererSynchronizationContext : SynchronizationContext
             executionContext = ExecutionContext.Capture();
         }
 
-        var flags = forceAsync ? TaskContinuationOptions.RunContinuationsAsynchronously : TaskContinuationOptions.None;
-        return antecedent.ContinueWith(BackgroundWorkThunk, new WorkItem()
-        {
-            SynchronizationContext = this,
-            ExecutionContext = executionContext,
-            Callback = d,
-            State = state,
-        }, CancellationToken.None, flags, TaskScheduler.Current);
+        var flags = forceAsync
+            ? TaskContinuationOptions.RunContinuationsAsynchronously
+            : TaskContinuationOptions.None;
+        return antecedent.ContinueWith(
+            BackgroundWorkThunk,
+            new WorkItem()
+            {
+                SynchronizationContext = this,
+                ExecutionContext = executionContext,
+                Callback = d,
+                State = state,
+            },
+            CancellationToken.None,
+            flags,
+            TaskScheduler.Current
+        );
     }
 
     private void ExecuteSynchronously(
         TaskCompletionSource<object> completion,
         SendOrPostCallback d,
-        object state)
+        object state
+    )
     {
         var original = Current;
         try
@@ -301,7 +337,8 @@ internal class RendererSynchronizationContext : SynchronizationContext
         public object State;
     }
 
-    private class RendererSynchronizationTaskCompletionSource<TCallback, TResult> : TaskCompletionSource<TResult>
+    private class RendererSynchronizationTaskCompletionSource<TCallback, TResult>
+        : TaskCompletionSource<TResult>
     {
         public RendererSynchronizationTaskCompletionSource(TCallback callback)
         {

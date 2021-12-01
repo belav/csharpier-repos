@@ -27,16 +27,19 @@ public static class HtmlHelperValidationExtensions
     /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object. Message
     /// will always be visible but client-side validation may update the associated CSS class.
     /// </remarks>
-    public static IHtmlContent ValidationMessage(
-        this IHtmlHelper htmlHelper,
-        string expression)
+    public static IHtmlContent ValidationMessage(this IHtmlHelper htmlHelper, string expression)
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.ValidationMessage(expression, message: null, htmlAttributes: null, tag: null);
+        return htmlHelper.ValidationMessage(
+            expression,
+            message: null,
+            htmlAttributes: null,
+            tag: null
+        );
     }
 
     /// <summary>
@@ -58,7 +61,8 @@ public static class HtmlHelperValidationExtensions
     public static IHtmlContent ValidationMessage(
         this IHtmlHelper htmlHelper,
         string expression,
-        string message)
+        string message
+    )
     {
         if (htmlHelper == null)
         {
@@ -92,14 +96,20 @@ public static class HtmlHelperValidationExtensions
     public static IHtmlContent ValidationMessage(
         this IHtmlHelper htmlHelper,
         string expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.ValidationMessage(expression, message: null, htmlAttributes: htmlAttributes, tag: null);
+        return htmlHelper.ValidationMessage(
+            expression,
+            message: null,
+            htmlAttributes: htmlAttributes,
+            tag: null
+        );
     }
 
     /// <summary>
@@ -126,7 +136,8 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         string message,
-        string tag)
+        string tag
+    )
     {
         if (htmlHelper == null)
         {
@@ -162,7 +173,8 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         string message,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -191,7 +203,8 @@ public static class HtmlHelperValidationExtensions
     /// </remarks>
     public static IHtmlContent ValidationMessageFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -203,7 +216,12 @@ public static class HtmlHelperValidationExtensions
             throw new ArgumentNullException(nameof(expression));
         }
 
-        return htmlHelper.ValidationMessageFor(expression, message: null, htmlAttributes: null, tag: null);
+        return htmlHelper.ValidationMessageFor(
+            expression,
+            message: null,
+            htmlAttributes: null,
+            tag: null
+        );
     }
 
     /// <summary>
@@ -227,7 +245,8 @@ public static class HtmlHelperValidationExtensions
     public static IHtmlContent ValidationMessageFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        string message)
+        string message
+    )
     {
         if (htmlHelper == null)
         {
@@ -239,7 +258,12 @@ public static class HtmlHelperValidationExtensions
             throw new ArgumentNullException(nameof(expression));
         }
 
-        return htmlHelper.ValidationMessageFor(expression, message, htmlAttributes: null, tag: null);
+        return htmlHelper.ValidationMessageFor(
+            expression,
+            message,
+            htmlAttributes: null,
+            tag: null
+        );
     }
 
     /// <summary>
@@ -270,7 +294,8 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
         string message,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -311,7 +336,8 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
         string message,
-        string tag)
+        string tag
+    )
     {
         if (htmlHelper == null)
         {
@@ -346,7 +372,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
     }
 
     /// <summary>
@@ -361,7 +388,10 @@ public static class HtmlHelperValidationExtensions
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the &lt;ul&gt; element.
     /// An empty <see cref="IHtmlContent"/> if the current model is valid and client-side validation is disabled.
     /// </returns>
-    public static IHtmlContent ValidationSummary(this IHtmlHelper htmlHelper, bool excludePropertyErrors)
+    public static IHtmlContent ValidationSummary(
+        this IHtmlHelper htmlHelper,
+        bool excludePropertyErrors
+    )
     {
         if (htmlHelper == null)
         {
@@ -372,7 +402,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
     }
 
     /// <summary>
@@ -398,7 +429,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors: false,
             message: message,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
     }
 
     /// <summary>
@@ -416,7 +448,11 @@ public static class HtmlHelperValidationExtensions
     /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid and
     /// client-side validation is disabled.
     /// </returns>
-    public static IHtmlContent ValidationSummary(this IHtmlHelper htmlHelper, string message, string tag)
+    public static IHtmlContent ValidationSummary(
+        this IHtmlHelper htmlHelper,
+        string message,
+        string tag
+    )
     {
         if (htmlHelper == null)
         {
@@ -427,7 +463,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors: false,
             message: message,
             htmlAttributes: null,
-            tag: tag);
+            tag: tag
+        );
     }
 
     /// <summary>
@@ -448,7 +485,8 @@ public static class HtmlHelperValidationExtensions
     public static IHtmlContent ValidationSummary(
         this IHtmlHelper htmlHelper,
         bool excludePropertyErrors,
-        string message)
+        string message
+    )
     {
         if (htmlHelper == null)
         {
@@ -459,7 +497,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors,
             message,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
     }
 
     /// <summary>
@@ -482,7 +521,8 @@ public static class HtmlHelperValidationExtensions
     public static IHtmlContent ValidationSummary(
         this IHtmlHelper htmlHelper,
         string message,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -493,7 +533,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors: false,
             message: message,
             htmlAttributes: htmlAttributes,
-            tag: null);
+            tag: null
+        );
     }
 
     /// <summary>
@@ -520,7 +561,8 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper htmlHelper,
         string message,
         object htmlAttributes,
-        string tag)
+        string tag
+    )
     {
         if (htmlHelper == null)
         {
@@ -531,7 +573,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors: false,
             message: message,
             htmlAttributes: htmlAttributes,
-            tag: tag);
+            tag: tag
+        );
     }
 
     /// <summary>
@@ -556,7 +599,8 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper htmlHelper,
         bool excludePropertyErrors,
         string message,
-        string tag)
+        string tag
+    )
     {
         if (htmlHelper == null)
         {
@@ -567,7 +611,8 @@ public static class HtmlHelperValidationExtensions
             excludePropertyErrors,
             message,
             htmlAttributes: null,
-            tag: tag);
+            tag: tag
+        );
     }
 
     /// <summary>
@@ -594,13 +639,19 @@ public static class HtmlHelperValidationExtensions
         this IHtmlHelper htmlHelper,
         bool excludePropertyErrors,
         string message,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.ValidationSummary(excludePropertyErrors, message, htmlAttributes, tag: null);
+        return htmlHelper.ValidationSummary(
+            excludePropertyErrors,
+            message,
+            htmlAttributes,
+            tag: null
+        );
     }
 }

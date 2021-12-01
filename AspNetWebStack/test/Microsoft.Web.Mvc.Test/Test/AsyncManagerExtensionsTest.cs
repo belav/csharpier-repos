@@ -18,21 +18,32 @@ namespace Microsoft.Web.Mvc.Test
             AsyncManager asyncManager = new AsyncManager(syncContext);
             bool endDelegateWasCalled = false;
 
-            using (ManualResetEvent waitHandle = new ManualResetEvent(false /* initialState */))
+            using (
+                ManualResetEvent waitHandle = new ManualResetEvent(
+                    false /* initialState */
+                )
+            )
             {
                 Func<AsyncCallback, IAsyncResult> beginDelegate = callback =>
                 {
                     Assert.Equal(1, asyncManager.OutstandingOperations.Count);
-                    MockAsyncResult asyncResult = new MockAsyncResult(false /* completedSynchronously */);
-                    ThreadPool.QueueUserWorkItem(_ =>
-                    {
-                        Assert.Equal(1, asyncManager.OutstandingOperations.Count);
-                        callback(asyncResult);
-                        waitHandle.Set();
-                    });
+                    MockAsyncResult asyncResult = new MockAsyncResult(
+                        false /* completedSynchronously */
+                    );
+                    ThreadPool.QueueUserWorkItem(
+                        _ =>
+                        {
+                            Assert.Equal(1, asyncManager.OutstandingOperations.Count);
+                            callback(asyncResult);
+                            waitHandle.Set();
+                        }
+                    );
                     return asyncResult;
                 };
-                Action<IAsyncResult> endDelegate = delegate { endDelegateWasCalled = true; };
+                Action<IAsyncResult> endDelegate = delegate
+                {
+                    endDelegateWasCalled = true;
+                };
 
                 // Act
                 asyncManager.RegisterTask(beginDelegate, endDelegate);
@@ -53,16 +64,24 @@ namespace Microsoft.Web.Mvc.Test
             AsyncManager asyncManager = new AsyncManager(syncContext);
             bool endDelegateWasCalled = false;
 
-            using (ManualResetEvent waitHandle = new ManualResetEvent(false /* initialState */))
+            using (
+                ManualResetEvent waitHandle = new ManualResetEvent(
+                    false /* initialState */
+                )
+            )
             {
                 Func<AsyncCallback, IAsyncResult> beginDelegate = callback =>
                 {
-                    MockAsyncResult asyncResult = new MockAsyncResult(false /* completedSynchronously */);
-                    ThreadPool.QueueUserWorkItem(_ =>
-                    {
-                        callback(asyncResult);
-                        waitHandle.Set();
-                    });
+                    MockAsyncResult asyncResult = new MockAsyncResult(
+                        false /* completedSynchronously */
+                    );
+                    ThreadPool.QueueUserWorkItem(
+                        _ =>
+                        {
+                            callback(asyncResult);
+                            waitHandle.Set();
+                        }
+                    );
                     return asyncResult;
                 };
                 Action<IAsyncResult> endDelegate = delegate
@@ -88,12 +107,23 @@ namespace Microsoft.Web.Mvc.Test
             SimpleSynchronizationContext syncContext = new SimpleSynchronizationContext();
             AsyncManager asyncManager = new AsyncManager(syncContext);
 
-            Func<AsyncCallback, IAsyncResult> beginDelegate = cb => { throw new InvalidOperationException("BeginDelegate throws."); };
-            Action<IAsyncResult> endDelegate = ar => { Assert.True(false, "This should never be called."); };
+            Func<AsyncCallback, IAsyncResult> beginDelegate = cb =>
+            {
+                throw new InvalidOperationException("BeginDelegate throws.");
+            };
+            Action<IAsyncResult> endDelegate = ar =>
+            {
+                Assert.True(false, "This should never be called.");
+            };
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { asyncManager.RegisterTask(beginDelegate, endDelegate); }, "BeginDelegate throws.");
+                delegate
+                {
+                    asyncManager.RegisterTask(beginDelegate, endDelegate);
+                },
+                "BeginDelegate throws."
+            );
 
             Assert.Equal(0, asyncManager.OutstandingOperations.Count);
         }
@@ -109,11 +139,16 @@ namespace Microsoft.Web.Mvc.Test
             Func<AsyncCallback, IAsyncResult> beginDelegate = callback =>
             {
                 Assert.Equal(1, asyncManager.OutstandingOperations.Count);
-                MockAsyncResult asyncResult = new MockAsyncResult(true /* completedSynchronously */);
+                MockAsyncResult asyncResult = new MockAsyncResult(
+                    true /* completedSynchronously */
+                );
                 callback(asyncResult);
                 return asyncResult;
             };
-            Action<IAsyncResult> endDelegate = delegate { endDelegateWasCalled = true; };
+            Action<IAsyncResult> endDelegate = delegate
+            {
+                endDelegateWasCalled = true;
+            };
 
             // Act
             asyncManager.RegisterTask(beginDelegate, endDelegate);
@@ -129,7 +164,12 @@ namespace Microsoft.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { AsyncManagerExtensions.RegisterTask(null, _ => null, _ => { }); }, "asyncManager");
+                delegate
+                {
+                    AsyncManagerExtensions.RegisterTask(null, _ => null, _ => { });
+                },
+                "asyncManager"
+            );
         }
 
         [Fact]
@@ -137,7 +177,12 @@ namespace Microsoft.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new AsyncManager().RegisterTask(null, _ => { }); }, "beginDelegate");
+                delegate
+                {
+                    new AsyncManager().RegisterTask(null, _ => { });
+                },
+                "beginDelegate"
+            );
         }
 
         [Fact]
@@ -145,7 +190,12 @@ namespace Microsoft.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new AsyncManager().RegisterTask(_ => null, null); }, "endDelegate");
+                delegate
+                {
+                    new AsyncManager().RegisterTask(_ => null, null);
+                },
+                "endDelegate"
+            );
         }
 
         private class SimpleSynchronizationContext : SynchronizationContext

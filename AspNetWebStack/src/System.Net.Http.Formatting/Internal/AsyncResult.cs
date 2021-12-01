@@ -8,7 +8,11 @@ using System.Web.Http;
 
 namespace System.Net.Http.Internal
 {
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "_manualResetEvent is disposed in End<TAsyncResult>")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
+        Justification = "_manualResetEvent is disposed in End<TAsyncResult>"
+    )]
     internal abstract class AsyncResult : IAsyncResult
     {
         private AsyncCallback _callback;
@@ -35,7 +39,10 @@ namespace System.Net.Http.Internal
         {
             get
             {
-                Contract.Assert(false, "AsyncWaitHandle is not supported -- use callbacks instead.");
+                Contract.Assert(
+                    false,
+                    "AsyncWaitHandle is not supported -- use callbacks instead."
+                );
                 return null;
             }
         }
@@ -59,7 +66,10 @@ namespace System.Net.Http.Internal
         {
             if (_isCompleted)
             {
-                throw Error.InvalidOperation(Properties.Resources.AsyncResult_MultipleCompletes, GetType().Name);
+                throw Error.InvalidOperation(
+                    Properties.Resources.AsyncResult_MultipleCompletes,
+                    GetType().Name
+                );
             }
 
             _completedSynchronously = completedSynchronously;
@@ -73,7 +83,10 @@ namespace System.Net.Http.Internal
                 }
                 catch (Exception e)
                 {
-                    throw Error.InvalidOperation(e, Properties.Resources.AsyncResult_CallbackThrewException);
+                    throw Error.InvalidOperation(
+                        e,
+                        Properties.Resources.AsyncResult_CallbackThrewException
+                    );
                 }
             }
         }
@@ -84,7 +97,8 @@ namespace System.Net.Http.Internal
             Complete(completedSynchronously);
         }
 
-        protected static TAsyncResult End<TAsyncResult>(IAsyncResult result) where TAsyncResult : AsyncResult
+        protected static TAsyncResult End<TAsyncResult>(IAsyncResult result)
+            where TAsyncResult : AsyncResult
         {
             if (result == null)
             {

@@ -46,7 +46,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="value">The value to be stored in the annotation.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The newly added annotation.</returns>
-        IConventionAnnotation AddAnnotation(string name, object? value, bool fromDataAnnotation = false);
+        IConventionAnnotation AddAnnotation(
+            string name,
+            object? value,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -56,7 +60,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="value">The value to be stored in the annotation.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The new annotation.</returns>
-        IConventionAnnotation? SetAnnotation(string name, object? value, bool fromDataAnnotation = false);
+        IConventionAnnotation? SetAnnotation(
+            string name,
+            object? value,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Gets the annotation with the given name, returning <see langword="null" /> if it does not exist.
@@ -79,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="annotationName">The key of the annotation to find.</param>
         /// <returns>The annotation with the specified name.</returns>
-        new IConventionAnnotation GetAnnotation(string annotationName)
-            => (IConventionAnnotation)((IReadOnlyAnnotatable)this).GetAnnotation(annotationName);
+        new IConventionAnnotation GetAnnotation(string annotationName) =>
+            (IConventionAnnotation)((IReadOnlyAnnotatable)this).GetAnnotation(annotationName);
 
         /// <summary>
         ///     Adds annotations to an object.
@@ -89,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         void AddAnnotations(
             IEnumerable<IConventionAnnotation> annotations,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             foreach (var annotation in annotations)
             {
@@ -108,6 +117,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IConventionAnnotation? SetOrRemoveAnnotation(
             string name,
             object? value,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
     }
 }

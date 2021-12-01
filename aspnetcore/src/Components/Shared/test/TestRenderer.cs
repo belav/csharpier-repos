@@ -15,16 +15,16 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
 public class TestRenderer : Renderer
 {
-    public TestRenderer() : this(new TestServiceProvider())
-    {
-    }
+    public TestRenderer() : this(new TestServiceProvider()) { }
 
-    public TestRenderer(Dispatcher dispatcher) : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+    public TestRenderer(Dispatcher dispatcher)
+        : base(new TestServiceProvider(), NullLoggerFactory.Instance)
     {
         Dispatcher = dispatcher;
     }
 
-    public TestRenderer(IServiceProvider serviceProvider) : base(serviceProvider, NullLoggerFactory.Instance)
+    public TestRenderer(IServiceProvider serviceProvider)
+        : base(serviceProvider, NullLoggerFactory.Instance)
     {
         Dispatcher = Dispatcher.CreateDefault();
     }
@@ -43,8 +43,7 @@ public class TestRenderer : Renderer
 
     public Action OnUpdateDisplayComplete { get; set; }
 
-    public List<CapturedBatch> Batches { get; }
-        = new List<CapturedBatch>();
+    public List<CapturedBatch> Batches { get; } = new List<CapturedBatch>();
 
     public List<Exception> HandledExceptions { get; } = new List<Exception>();
 
@@ -52,32 +51,37 @@ public class TestRenderer : Renderer
 
     public Task NextRenderResultTask { get; set; } = Task.CompletedTask;
 
-    public new int AssignRootComponentId(IComponent component)
-        => base.AssignRootComponentId(component);
+    public new int AssignRootComponentId(IComponent component) =>
+        base.AssignRootComponentId(component);
 
-    public new void RemoveRootComponent(int componentId)
-        => base.RemoveRootComponent(componentId);
+    public new void RemoveRootComponent(int componentId) => base.RemoveRootComponent(componentId);
 
-    public new ArrayRange<RenderTreeFrame> GetCurrentRenderTreeFrames(int componentId)
-        => base.GetCurrentRenderTreeFrames(componentId);
+    public new ArrayRange<RenderTreeFrame> GetCurrentRenderTreeFrames(int componentId) =>
+        base.GetCurrentRenderTreeFrames(componentId);
 
     public void RenderRootComponent(int componentId, ParameterView? parameters = default)
     {
-        var task = Dispatcher.InvokeAsync(() => base.RenderRootComponentAsync(componentId, parameters ?? ParameterView.Empty));
+        var task = Dispatcher.InvokeAsync(
+            () => base.RenderRootComponentAsync(componentId, parameters ?? ParameterView.Empty)
+        );
         UnwrapTask(task);
     }
 
-    public new Task RenderRootComponentAsync(int componentId)
-        => Dispatcher.InvokeAsync(() => base.RenderRootComponentAsync(componentId));
+    public new Task RenderRootComponentAsync(int componentId) =>
+        Dispatcher.InvokeAsync(() => base.RenderRootComponentAsync(componentId));
 
-    public new Task RenderRootComponentAsync(int componentId, ParameterView parameters)
-        => Dispatcher.InvokeAsync(() => base.RenderRootComponentAsync(componentId, parameters));
+    public new Task RenderRootComponentAsync(int componentId, ParameterView parameters) =>
+        Dispatcher.InvokeAsync(() => base.RenderRootComponentAsync(componentId, parameters));
 
-    public Task DispatchEventAsync(ulong eventHandlerId, EventArgs args)
-        => Dispatcher.InvokeAsync(() => base.DispatchEventAsync(eventHandlerId, null, args));
+    public Task DispatchEventAsync(ulong eventHandlerId, EventArgs args) =>
+        Dispatcher.InvokeAsync(() => base.DispatchEventAsync(eventHandlerId, null, args));
 
-    public new Task DispatchEventAsync(ulong eventHandlerId, EventFieldInfo eventFieldInfo, EventArgs args)
-        => Dispatcher.InvokeAsync(() => base.DispatchEventAsync(eventHandlerId, eventFieldInfo, args));
+    public new Task DispatchEventAsync(
+        ulong eventHandlerId,
+        EventFieldInfo eventFieldInfo,
+        EventArgs args
+    ) =>
+        Dispatcher.InvokeAsync(() => base.DispatchEventAsync(eventHandlerId, eventFieldInfo, args));
 
     private static Task UnwrapTask(Task task)
     {
@@ -97,8 +101,7 @@ public class TestRenderer : Renderer
         return task;
     }
 
-    public IComponent InstantiateComponent<T>()
-        => InstantiateComponent(typeof(T));
+    public IComponent InstantiateComponent<T>() => InstantiateComponent(typeof(T));
 
     protected override void HandleException(Exception exception)
     {
@@ -126,7 +129,9 @@ public class TestRenderer : Renderer
 
         // Clone other data, as underlying storage will get reused by later batches
         capturedBatch.ReferenceFrames = renderBatch.ReferenceFrames.AsEnumerable().ToArray();
-        capturedBatch.DisposedComponentIDs = renderBatch.DisposedComponentIDs.AsEnumerable().ToList();
+        capturedBatch.DisposedComponentIDs = renderBatch.DisposedComponentIDs
+            .AsEnumerable()
+            .ToList();
 
         // This renderer updates the UI synchronously, like the WebAssembly one.
         // To test async UI updates, subclass TestRenderer and override UpdateDisplayAsync.
@@ -135,6 +140,5 @@ public class TestRenderer : Renderer
         return NextRenderResultTask;
     }
 
-    public new void ProcessPendingRender()
-        => base.ProcessPendingRender();
+    public new void ProcessPendingRender() => base.ProcessPendingRender();
 }

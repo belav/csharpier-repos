@@ -10,13 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
     {
         public static readonly CSharpSyntaxKinds Instance = new();
 
-        protected CSharpSyntaxKinds()
-        {
-        }
+        protected CSharpSyntaxKinds() { }
 
         // Boxing/Unboxing casts from Object to TSyntaxKind will be erased by jit.
-        public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct
-            => (TSyntaxKind)(object)(SyntaxKind)kind;
+        public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct =>
+            (TSyntaxKind)(object)(SyntaxKind)kind;
 
         public int ConflictMarkerTrivia => (int)SyntaxKind.ConflictMarkerTrivia;
         public int DisabledTextTrivia => (int)SyntaxKind.DisabledTextTrivia;
@@ -25,8 +23,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public int WhitespaceTrivia => (int)SyntaxKind.WhitespaceTrivia;
         public int SingleLineCommentTrivia => (int)SyntaxKind.SingleLineCommentTrivia;
         public int? MultiLineCommentTrivia => (int)SyntaxKind.MultiLineCommentTrivia;
-        public int SingleLineDocCommentTrivia => (int)SyntaxKind.SingleLineDocumentationCommentTrivia;
-        public int? MultiLineDocCommentTrivia => (int)SyntaxKind.MultiLineDocumentationCommentTrivia;
+        public int SingleLineDocCommentTrivia =>
+            (int)SyntaxKind.SingleLineDocumentationCommentTrivia;
+        public int? MultiLineDocCommentTrivia =>
+            (int)SyntaxKind.MultiLineDocumentationCommentTrivia;
         public int? ShebangDirectiveTrivia => (int)SyntaxKind.ShebangDirectiveTrivia;
 
         public int CloseBraceToken => (int)SyntaxKind.CloseBraceToken;
@@ -55,12 +55,14 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
         public int StringLiteralExpression => (int)SyntaxKind.StringLiteralExpression;
         public int TrueLiteralExpression => (int)SyntaxKind.TrueLiteralExpression;
 
-        public int AnonymousObjectCreationExpression => (int)SyntaxKind.AnonymousObjectCreationExpression;
+        public int AnonymousObjectCreationExpression =>
+            (int)SyntaxKind.AnonymousObjectCreationExpression;
         public int AwaitExpression => (int)SyntaxKind.AwaitExpression;
         public int BaseExpression => (int)SyntaxKind.BaseExpression;
         public int ConditionalAccessExpression => (int)SyntaxKind.ConditionalAccessExpression;
         public int ConditionalExpression => (int)SyntaxKind.ConditionalExpression;
-        public int? ImplicitObjectCreationExpression => (int)SyntaxKind.ImplicitObjectCreationExpression;
+        public int? ImplicitObjectCreationExpression =>
+            (int)SyntaxKind.ImplicitObjectCreationExpression;
         public int InvocationExpression => (int)SyntaxKind.InvocationExpression;
         public int LogicalAndExpression => (int)SyntaxKind.LogicalAndExpression;
         public int LogicalOrExpression => (int)SyntaxKind.LogicalOrExpression;

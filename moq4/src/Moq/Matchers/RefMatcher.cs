@@ -6,26 +6,27 @@ using System.Diagnostics;
 
 namespace Moq.Matchers
 {
-	internal class RefMatcher : IMatcher
-	{
-		private readonly object reference;
-		private readonly bool referenceIsValueType;
+    internal class RefMatcher : IMatcher
+    {
+        private readonly object reference;
+        private readonly bool referenceIsValueType;
 
-		public RefMatcher(object reference)
-		{
-			this.reference = reference;
-			this.referenceIsValueType = reference?.GetType().IsValueType ?? false;
-		}
+        public RefMatcher(object reference)
+        {
+            this.reference = reference;
+            this.referenceIsValueType = reference?.GetType().IsValueType ?? false;
+        }
 
-		public bool Matches(object argument, Type parameterType)
-		{
-			return this.referenceIsValueType ? object.Equals(this.reference, argument)
-			                                 : object.ReferenceEquals(this.reference, argument);
-		}
+        public bool Matches(object argument, Type parameterType)
+        {
+            return this.referenceIsValueType
+              ? object.Equals(this.reference, argument)
+              : object.ReferenceEquals(this.reference, argument);
+        }
 
-		public void SetupEvaluatedSuccessfully(object value, Type parameterType)
-		{
-			Debug.Assert(this.Matches(value, parameterType));
-		}
-	}
+        public void SetupEvaluatedSuccessfully(object value, Type parameterType)
+        {
+            Debug.Assert(this.Matches(value, parameterType));
+        }
+    }
 }

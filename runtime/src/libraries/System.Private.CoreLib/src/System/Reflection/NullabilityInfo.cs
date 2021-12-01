@@ -10,8 +10,13 @@ namespace System.Reflection
     /// </summary>
     public sealed class NullabilityInfo
     {
-        internal NullabilityInfo(Type type, NullabilityState readState, NullabilityState writeState,
-            NullabilityInfo? elementType, NullabilityInfo[] typeArguments)
+        internal NullabilityInfo(
+            Type type,
+            NullabilityState readState,
+            NullabilityState writeState,
+            NullabilityInfo? elementType,
+            NullabilityInfo[] typeArguments
+        )
         {
             Type = type;
             ReadState = readState;

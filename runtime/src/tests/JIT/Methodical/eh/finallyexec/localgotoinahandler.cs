@@ -56,7 +56,6 @@ class Class1
 
                 LABEL:
                 Console.WriteLine("Back in inner try 1...");
-
             }
             finally
             {

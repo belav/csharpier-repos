@@ -13,68 +13,89 @@ namespace Microsoft.Interop
     public static class MarshallerHelpers
     {
         public static readonly ExpressionSyntax IsWindows = InvocationExpression(
-                                                        MemberAccessExpression(
-                                                            SyntaxKind.SimpleMemberAccessExpression,
-                                                            ParseTypeName("System.OperatingSystem"),
-                                                            IdentifierName("IsWindows")));
+            MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                ParseTypeName("System.OperatingSystem"),
+                IdentifierName("IsWindows")
+            )
+        );
 
-        public static readonly TypeSyntax InteropServicesMarshalType = ParseTypeName(TypeNames.System_Runtime_InteropServices_Marshal);
+        public static readonly TypeSyntax InteropServicesMarshalType = ParseTypeName(
+            TypeNames.System_Runtime_InteropServices_Marshal
+        );
 
         public static readonly TypeSyntax SystemIntPtrType = ParseTypeName(TypeNames.System_IntPtr);
 
-        public static ForStatementSyntax GetForLoop(string collectionIdentifier, string indexerIdentifier)
+        public static ForStatementSyntax GetForLoop(
+            string collectionIdentifier,
+            string indexerIdentifier
+        )
         {
             // for(int <indexerIdentifier> = 0; <indexerIdentifier> < <collectionIdentifier>.Length; ++<indexerIdentifier>)
             //      ;
             return ForStatement(EmptyStatement())
-            .WithDeclaration(
-                VariableDeclaration(
-                    PredefinedType(
-                        Token(SyntaxKind.IntKeyword)))
-                .WithVariables(
-                    SingletonSeparatedList<VariableDeclaratorSyntax>(
-                        VariableDeclarator(
-                            Identifier(indexerIdentifier))
-                        .WithInitializer(
-                            EqualsValueClause(
-                                LiteralExpression(
-                                    SyntaxKind.NumericLiteralExpression,
-                                    Literal(0)))))))
-            .WithCondition(
-                BinaryExpression(
-                    SyntaxKind.LessThanExpression,
-                    IdentifierName(indexerIdentifier),
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        IdentifierName(collectionIdentifier),
-                        IdentifierName("Length"))))
-            .WithIncrementors(
-                SingletonSeparatedList<ExpressionSyntax>(
-                    PrefixUnaryExpression(
-                        SyntaxKind.PreIncrementExpression,
-                        IdentifierName(indexerIdentifier))));
+                .WithDeclaration(
+                    VariableDeclaration(PredefinedType(Token(SyntaxKind.IntKeyword)))
+                        .WithVariables(
+                            SingletonSeparatedList<VariableDeclaratorSyntax>(
+                                VariableDeclarator(Identifier(indexerIdentifier))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            LiteralExpression(
+                                                SyntaxKind.NumericLiteralExpression,
+                                                Literal(0)
+                                            )
+                                        )
+                                    )
+                            )
+                        )
+                )
+                .WithCondition(
+                    BinaryExpression(
+                        SyntaxKind.LessThanExpression,
+                        IdentifierName(indexerIdentifier),
+                        MemberAccessExpression(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            IdentifierName(collectionIdentifier),
+                            IdentifierName("Length")
+                        )
+                    )
+                )
+                .WithIncrementors(
+                    SingletonSeparatedList<ExpressionSyntax>(
+                        PrefixUnaryExpression(
+                            SyntaxKind.PreIncrementExpression,
+                            IdentifierName(indexerIdentifier)
+                        )
+                    )
+                );
         }
 
-        public static LocalDeclarationStatementSyntax Declare(TypeSyntax typeSyntax, string identifier, bool initializeToDefault)
+        public static LocalDeclarationStatementSyntax Declare(
+            TypeSyntax typeSyntax,
+            string identifier,
+            bool initializeToDefault
+        )
         {
             VariableDeclaratorSyntax decl = VariableDeclarator(identifier);
             if (initializeToDefault)
             {
                 decl = decl.WithInitializer(
-                    EqualsValueClause(
-                        LiteralExpression(SyntaxKind.DefaultLiteralExpression)));
+                    EqualsValueClause(LiteralExpression(SyntaxKind.DefaultLiteralExpression))
+                );
             }
 
             // <type> <identifier>;
             // or
             // <type> <identifier> = default;
             return LocalDeclarationStatement(
-                VariableDeclaration(
-                    typeSyntax,
-                    SingletonSeparatedList(decl)));
+                VariableDeclaration(typeSyntax, SingletonSeparatedList(decl))
+            );
         }
 
-        public static RefKind GetRefKindForByValueContentsKind(this ByValueContentsMarshalKind byValue)
+        public static RefKind GetRefKindForByValueContentsKind(
+            this ByValueContentsMarshalKind byValue
+        )
         {
             return byValue switch
             {
@@ -119,7 +140,8 @@ namespace Microsoft.Interop
         public static IEnumerable<T> GetTopologicallySortedElements<T, U>(
             ICollection<T> elements,
             Func<T, U> keyFn,
-            Func<T, IEnumerable<U>> getDependentIndicesFn)
+            Func<T, IEnumerable<U>> getDependentIndicesFn
+        )
         {
             Dictionary<U, int> elementIndexToEdgeMapNodeId = new(elements.Count);
             List<T> nodeIdToElement = new(elements.Count);
@@ -139,7 +161,10 @@ namespace Microsoft.Interop
                 {
                     // Add an edge from the node for dependentElementIndex-> the node for elementIndex
                     // This way, elements that have no dependencies have no edges pointing to them.
-                    edgeMap[elementIndexToEdgeMapNodeId[elementIndex], elementIndexToEdgeMapNodeId[dependentElementIndex]] = true;
+                    edgeMap[
+                        elementIndexToEdgeMapNodeId[elementIndex],
+                        elementIndexToEdgeMapNodeId[dependentElementIndex]
+                    ] = true;
                 }
             }
 
@@ -230,15 +255,27 @@ namespace Microsoft.Interop
         }
 
         public static IEnumerable<TypePositionInfo> GetDependentElementsOfMarshallingInfo(
-            MarshallingInfo elementMarshallingInfo)
+            MarshallingInfo elementMarshallingInfo
+        )
         {
-            if (elementMarshallingInfo is NativeContiguousCollectionMarshallingInfo nestedCollection)
+            if (
+                elementMarshallingInfo is NativeContiguousCollectionMarshallingInfo nestedCollection
+            )
             {
-                if (nestedCollection.ElementCountInfo is CountElementCountInfo { ElementInfo: TypePositionInfo nestedCountElement })
+                if (
+                    nestedCollection.ElementCountInfo is CountElementCountInfo
+                    {
+                        ElementInfo: TypePositionInfo nestedCountElement
+                    }
+                )
                 {
                     yield return nestedCountElement;
                 }
-                foreach (TypePositionInfo nestedElements in GetDependentElementsOfMarshallingInfo(nestedCollection.ElementMarshallingInfo))
+                foreach (
+                    TypePositionInfo nestedElements in GetDependentElementsOfMarshallingInfo(
+                        nestedCollection.ElementMarshallingInfo
+                    )
+                )
                 {
                     yield return nestedElements;
                 }
@@ -247,13 +284,18 @@ namespace Microsoft.Interop
 
         public static class StringMarshaller
         {
-            public static ExpressionSyntax AllocationExpression(CharEncoding encoding, string managedIdentifier)
+            public static ExpressionSyntax AllocationExpression(
+                CharEncoding encoding,
+                string managedIdentifier
+            )
             {
                 string methodName = encoding switch
                 {
                     CharEncoding.Utf8 => "StringToCoTaskMemUTF8", // Not in .NET Standard 2.0, so we use the hard-coded name
-                    CharEncoding.Utf16 => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemUni),
-                    CharEncoding.Ansi => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemAnsi),
+                    CharEncoding.Utf16
+                      => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemUni),
+                    CharEncoding.Ansi
+                      => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemAnsi),
                     _ => throw new System.ArgumentOutOfRangeException(nameof(encoding))
                 };
 
@@ -266,10 +308,14 @@ namespace Microsoft.Interop
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         InteropServicesMarshalType,
-                        IdentifierName(methodName)),
+                        IdentifierName(methodName)
+                    ),
                     ArgumentList(
                         SingletonSeparatedList<ArgumentSyntax>(
-                            Argument(IdentifierName(managedIdentifier)))));
+                            Argument(IdentifierName(managedIdentifier))
+                        )
+                    )
+                );
             }
 
             public static ExpressionSyntax FreeExpression(string nativeIdentifier)
@@ -279,12 +325,16 @@ namespace Microsoft.Interop
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         InteropServicesMarshalType,
-                        IdentifierName(nameof(System.Runtime.InteropServices.Marshal.FreeCoTaskMem))),
-                    ArgumentList(SingletonSeparatedList(
-                        Argument(
-                            CastExpression(
-                                SystemIntPtrType,
-                                IdentifierName(nativeIdentifier))))));
+                        IdentifierName(nameof(System.Runtime.InteropServices.Marshal.FreeCoTaskMem))
+                    ),
+                    ArgumentList(
+                        SingletonSeparatedList(
+                            Argument(
+                                CastExpression(SystemIntPtrType, IdentifierName(nativeIdentifier))
+                            )
+                        )
+                    )
+                );
             }
         }
     }

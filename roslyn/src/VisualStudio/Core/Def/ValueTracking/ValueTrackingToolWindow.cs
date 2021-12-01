@@ -49,8 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             Content = _root;
         }
 
-        public ValueTrackingToolWindow(ValueTrackingTreeViewModel viewModel)
-            : base(null)
+        public ValueTrackingToolWindow(ValueTrackingTreeViewModel viewModel) : base(null)
         {
             Caption = ServicesVSResources.Value_Tracking;
             Content = _root;

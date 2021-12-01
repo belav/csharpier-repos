@@ -18,7 +18,6 @@ public enum HttpLoggingFields : long
     /// No logging.
     /// </summary>
     None = 0x0,
-
     /// <summary>
     /// Flag for logging the HTTP Request Path, which includes both the <see cref="HttpRequest.Path"/>
     /// and <see cref="HttpRequest.PathBase"/>.
@@ -29,7 +28,6 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     RequestPath = 0x1,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="HttpRequest.QueryString"/>.
     /// <p>
@@ -43,7 +41,6 @@ public enum HttpLoggingFields : long
     /// and the privacy impact assessed.
     /// </summary>
     RequestQuery = 0x2,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="HttpRequest.Protocol"/>.
     /// <p>
@@ -52,7 +49,6 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     RequestProtocol = 0x4,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="HttpRequest.Method"/>.
     /// <p>
@@ -61,7 +57,6 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     RequestMethod = 0x8,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="HttpRequest.Scheme"/>.
     /// <p>
@@ -70,7 +65,6 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     RequestScheme = 0x10,
-
     /// <summary>
     /// Flag for logging the HTTP Response <see cref="HttpResponse.StatusCode"/>.
     /// <p>
@@ -79,7 +73,6 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     ResponseStatusCode = 0x20,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="HttpRequest.Headers"/>.
     /// Request Headers are logged as soon as the middleware is invoked.
@@ -92,7 +85,6 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     RequestHeaders = 0x40,
-
     /// <summary>
     /// Flag for logging the HTTP Response <see cref="HttpResponse.Headers"/>.
     /// Response Headers are logged when the <see cref="HttpResponse.Body"/> is written to
@@ -107,52 +99,44 @@ public enum HttpLoggingFields : long
     /// </p>
     /// </summary>
     ResponseHeaders = 0x80,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="IHttpRequestTrailersFeature.Trailers"/>.
     /// Request Trailers are currently not logged.
     /// </summary>
     RequestTrailers = 0x100,
-
     /// <summary>
     /// Flag for logging the HTTP Response <see cref="IHttpResponseTrailersFeature.Trailers"/>.
     /// Response Trailers are currently not logged.
     /// </summary>
     ResponseTrailers = 0x200,
-
     /// <summary>
     /// Flag for logging the HTTP Request <see cref="HttpRequest.Body"/>.
     /// Logging the request body has performance implications, as it requires buffering
     /// the entire request body up to <see cref="HttpLoggingOptions.RequestBodyLogLimit"/>.
     /// </summary>
     RequestBody = 0x400,
-
     /// <summary>
     /// Flag for logging the HTTP Response <see cref="HttpResponse.Body"/>.
     /// Logging the response body has performance implications, as it requires buffering
     /// the entire response body up to <see cref="HttpLoggingOptions.ResponseBodyLogLimit"/>.
     /// </summary>
     ResponseBody = 0x800,
-
     /// <summary>
     /// Flag for logging a collection of HTTP Request properties,
     /// including <see cref="RequestPath"/>, <see cref="RequestProtocol"/>,
     /// <see cref="RequestMethod"/>, and <see cref="RequestScheme"/>.
     /// </summary>
     RequestProperties = RequestPath | RequestProtocol | RequestMethod | RequestScheme,
-
     /// <summary>
     /// Flag for logging HTTP Request properties and headers.
     /// Includes <see cref="RequestProperties"/> and <see cref="RequestHeaders"/>
     /// </summary>
     RequestPropertiesAndHeaders = RequestProperties | RequestHeaders,
-
     /// <summary>
     /// Flag for logging HTTP Response properties and headers.
     /// Includes <see cref="ResponseStatusCode"/> and <see cref="ResponseHeaders"/>
     /// </summary>
     ResponsePropertiesAndHeaders = ResponseStatusCode | ResponseHeaders,
-
     /// <summary>
     /// Flag for logging the entire HTTP Request.
     /// Includes <see cref="RequestPropertiesAndHeaders"/> and <see cref="RequestBody"/>.
@@ -160,7 +144,6 @@ public enum HttpLoggingFields : long
     /// the entire request body up to <see cref="HttpLoggingOptions.RequestBodyLogLimit"/>.
     /// </summary>
     Request = RequestPropertiesAndHeaders | RequestBody,
-
     /// <summary>
     /// Flag for logging the entire HTTP Response.
     /// Includes <see cref="ResponsePropertiesAndHeaders"/> and <see cref="ResponseBody"/>.
@@ -168,7 +151,6 @@ public enum HttpLoggingFields : long
     /// the entire response body up to <see cref="HttpLoggingOptions.ResponseBodyLogLimit"/>.
     /// </summary>
     Response = ResponseStatusCode | ResponseHeaders | ResponseBody,
-
     /// <summary>
     /// Flag for logging both the HTTP Request and Response.
     /// Includes <see cref="Request"/> and <see cref="Response"/>.

@@ -22,7 +22,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel
         public virtual ICollection<EntityTwo> TwoSkipFull { get; set; }
         public virtual ICollection<JoinTwoToThree> JoinTwoFull { get; set; }
         public virtual ICollection<EntityOne> OneSkipPayloadFullShared { get; set; }
-        public virtual ICollection<Dictionary<string, object>> JoinOnePayloadFullShared { get; set; }
+        public virtual ICollection<
+            Dictionary<string, object>
+        > JoinOnePayloadFullShared { get; set; }
         public virtual ICollection<EntityCompositeKey> CompositeKeySkipFull { get; set; }
         public virtual ICollection<JoinThreeToCompositeKeyFull> JoinCompositeKeyFull { get; set; }
 

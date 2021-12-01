@@ -10,8 +10,8 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class ConcurrencyDetectorDisabledSqlServerTest : ConcurrencyDetectorDisabledRelationalTestBase<
-        ConcurrencyDetectorDisabledSqlServerTest.ConcurrencyDetectorSqlServerFixture>
+    public class ConcurrencyDetectorDisabledSqlServerTest
+        : ConcurrencyDetectorDisabledRelationalTestBase<ConcurrencyDetectorDisabledSqlServerTest.ConcurrencyDetectorSqlServerFixture>
     {
         public ConcurrencyDetectorDisabledSqlServerTest(ConcurrencyDetectorSqlServerFixture fixture)
             : base(fixture)
@@ -19,7 +19,9 @@ namespace Microsoft.EntityFrameworkCore
             Fixture.TestSqlLoggerFactory.Clear();
         }
 
-        protected override async Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test)
+        protected override async Task ConcurrencyDetectorTest(
+            Func<ConcurrencyDetectorDbContext, Task<object>> test
+        )
         {
             await base.ConcurrencyDetectorTest(test);
 
@@ -28,14 +30,14 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ConcurrencyDetectorSqlServerFixture : ConcurrencyDetectorFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => builder.EnableThreadSafetyChecks(enableChecks: false);
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                builder.EnableThreadSafetyChecks(enableChecks: false);
         }
     }
 }

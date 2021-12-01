@@ -50,7 +50,8 @@ namespace Dynamic.Tests
         [Fact]
         public void SubInterfaceWithNewMember_SubInterfaceWithNoMembers()
         {
-            dynamic d = new ExplicitlyImplementedSubInterfaceWithNewMemberAndSubInterfaceWithNoMembers();
+            dynamic d =
+                new ExplicitlyImplementedSubInterfaceWithNewMemberAndSubInterfaceWithNoMembers();
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
             var x = Helpers.Cast<SubInterfaceWithNoMembers>(d);
@@ -69,7 +70,8 @@ namespace Dynamic.Tests
         [Fact]
         public void InterfaceWithTwoMembers_InBaseClass()
         {
-            dynamic d = new SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass();
+            dynamic d =
+                new SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass();
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
             var x = Helpers.Cast<BaseInterfaceWithTwoMembers>(d);
@@ -112,7 +114,9 @@ namespace Dynamic.Tests
         int Bar();
     }
 
-    public class ExplicitlyImplementedBaseAndSubInterface : BaseInterfaceWithOneMember1, SubInterfaceWithOneMember1
+    public class ExplicitlyImplementedBaseAndSubInterface
+        : BaseInterfaceWithOneMember1,
+          SubInterfaceWithOneMember1
     {
         int BaseInterfaceWithOneMember1.Foo() => 0;
         public int Bar() => 1;
@@ -150,7 +154,9 @@ namespace Dynamic.Tests
         public int Bar() => 1;
     }
 
-    public class ExplicitlyImplementedSubInterfaceWithNewMemberAndSubInterfaceWithNoMembers : SubInterfaceWithNewMember, SubInterfaceWithNoMembers
+    public class ExplicitlyImplementedSubInterfaceWithNewMemberAndSubInterfaceWithNoMembers
+        : SubInterfaceWithNewMember,
+          SubInterfaceWithNoMembers
     {
         int SubInterfaceWithNewMember.Foo() => 0;
         int BaseInterfaceWithTwoMembers.Foo() => 2;
@@ -159,19 +165,23 @@ namespace Dynamic.Tests
 
     public class EmptyClass { }
 
-    public class ExplicitlyImplementedInterfaceWithTwoMembersAndEmptyBaseClass : EmptyClass, BaseInterfaceWithTwoMembers
+    public class ExplicitlyImplementedInterfaceWithTwoMembersAndEmptyBaseClass
+        : EmptyClass,
+          BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
         public int Bar() => 1;
     }
 
-    public class ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass : BaseInterfaceWithTwoMembers
+    public class ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass
+        : BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
         public int Bar() => 1;
     }
 
-    public class SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass : ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass { }
+    public class SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass
+        : ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass { }
 
     public partial class ExplicitlyImplementedInterfaceInPartialClass { }
 
@@ -212,7 +222,9 @@ namespace Dynamic.Tests
         int Foo();
     }
 
-    public class ExplicitlyImplementedSubInterfaceWithOneMemberAndVirtualBaseClass : BaseClassWithVirtualMethod, SubInterfaceWithOneMember2
+    public class ExplicitlyImplementedSubInterfaceWithOneMemberAndVirtualBaseClass
+        : BaseClassWithVirtualMethod,
+          SubInterfaceWithOneMember2
     {
         int SubInterfaceWithOneMember2.Foo() => -1;
         public override int Foo() => 1;

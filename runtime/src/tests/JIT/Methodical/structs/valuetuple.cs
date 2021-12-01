@@ -44,15 +44,11 @@ public struct ValueTuple<T1, T2, T3>
 
 public static class TupleExtensions
 {
-    public static ValueTuple<T1, T2, T3>
-        ToValueTuple<T1, T2, T3>(
-            this Tuple<T1, T2, T3> value)
+    public static ValueTuple<T1, T2, T3> ToValueTuple<T1, T2, T3>(this Tuple<T1, T2, T3> value)
     {
         return ValueTuple<T1, T2, T3>.Create(value.Item1, value.Item2, value.Item3);
     }
-    public static Tuple<T1, T2, T3>
-        ToTuple<T1, T2, T3>(
-            this ValueTuple<T1, T2, T3> value)
+    public static Tuple<T1, T2, T3> ToTuple<T1, T2, T3>(this ValueTuple<T1, T2, T3> value)
     {
         return Tuple.Create(value.Item1, value.Item2, value.Item3);
     }
@@ -66,7 +62,7 @@ public class StructOptsTest
     public static int ConvertToRef3()
     {
         var refTuple = Tuple.Create(-1, -1, -1);
-        var valueTuple = ValueTuple<int,int,int>.Create(1, 2, 3);
+        var valueTuple = ValueTuple<int, int, int>.Create(1, 2, 3);
 
         refTuple = valueTuple.ToTuple();
         if (!String.Equals("(1, 2, 3)", refTuple.ToString()))

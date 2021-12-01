@@ -110,9 +110,7 @@ namespace Test
                     double local13 = (0.0);
                     throw new NullReferenceException();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
             return 72u;
         }

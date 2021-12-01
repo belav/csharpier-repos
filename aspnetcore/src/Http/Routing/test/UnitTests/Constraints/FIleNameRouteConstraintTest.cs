@@ -12,20 +12,19 @@ public class FileNameRouteConstraintTest
         get
         {
             return new TheoryData<object>()
-                {
-                    "hello.txt",
-                    "hello.txt.jpg",
-                    "/hello.t",
-                    "/////hello.x",
-                    "a/b/c/d.e",
-                    "a/b./.c/d.e",
-                    ".gitnore",
-                    ".a",
-                    "/.......a"
-                };
+            {
+                "hello.txt",
+                "hello.txt.jpg",
+                "/hello.t",
+                "/////hello.x",
+                "a/b/c/d.e",
+                "a/b./.c/d.e",
+                ".gitnore",
+                ".a",
+                "/.......a"
+            };
         }
     }
-
 
     [Theory]
     [MemberData(nameof(FileNameData))]
@@ -38,7 +37,13 @@ public class FileNameRouteConstraintTest
         values.Add("path", value);
 
         // Act
-        var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+        var result = constraint.Match(
+            httpContext: null,
+            route: null,
+            "path",
+            values,
+            RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.True(result);
@@ -49,19 +54,19 @@ public class FileNameRouteConstraintTest
         get
         {
             return new TheoryData<object>()
-                {
-                    null,
-                    string.Empty,
-                    "/",
-                    ".",
-                    "..........",
-                    "hello.",
-                    "/hello",
-                    "//",
-                    "//b.c/",
-                    "/////hello.",
-                    "a/b./.c/d.",
-                };
+            {
+                null,
+                string.Empty,
+                "/",
+                ".",
+                "..........",
+                "hello.",
+                "/hello",
+                "//",
+                "//b.c/",
+                "/////hello.",
+                "a/b./.c/d.",
+            };
         }
     }
 
@@ -76,7 +81,13 @@ public class FileNameRouteConstraintTest
         values.Add("path", value);
 
         // Act
-        var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+        var result = constraint.Match(
+            httpContext: null,
+            route: null,
+            "path",
+            values,
+            RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.False(result);
@@ -91,7 +102,13 @@ public class FileNameRouteConstraintTest
         var values = new RouteValueDictionary();
 
         // Act
-        var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+        var result = constraint.Match(
+            httpContext: null,
+            route: null,
+            "path",
+            values,
+            RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.False(result);

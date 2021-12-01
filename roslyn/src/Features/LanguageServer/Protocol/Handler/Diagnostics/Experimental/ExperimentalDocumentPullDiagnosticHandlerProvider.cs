@@ -21,7 +21,8 @@ internal class ExperimentalDocumentPullDiagnosticHandlerProvider : AbstractReque
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public ExperimentalDocumentPullDiagnosticHandlerProvider(
         IDiagnosticService diagnosticService,
-        IDiagnosticAnalyzerService analyzerService)
+        IDiagnosticAnalyzerService analyzerService
+    )
     {
         _diagnosticService = diagnosticService;
         _analyzerService = analyzerService;
@@ -29,6 +30,8 @@ internal class ExperimentalDocumentPullDiagnosticHandlerProvider : AbstractReque
 
     public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
     {
-        return ImmutableArray.Create<IRequestHandler>(new ExperimentalDocumentPullDiagnosticsHandler(_diagnosticService, _analyzerService));
+        return ImmutableArray.Create<IRequestHandler>(
+            new ExperimentalDocumentPullDiagnosticsHandler(_diagnosticService, _analyzerService)
+        );
     }
 }

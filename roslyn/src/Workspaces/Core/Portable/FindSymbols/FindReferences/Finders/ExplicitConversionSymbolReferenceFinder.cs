@@ -13,22 +13,31 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed partial class ExplicitConversionSymbolReferenceFinder : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
+    internal sealed partial class ExplicitConversionSymbolReferenceFinder
+        : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol is { MethodKind: MethodKind.Conversion, Name: WellKnownMemberNames.ExplicitConversionName or WellKnownMemberNames.ImplicitConversionName } &&
-               GetUnderlyingNamedType(symbol.ReturnType) is not null;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol
+                is {
+                    MethodKind: MethodKind.Conversion,
+                    Name: WellKnownMemberNames.ExplicitConversionName
+                        or WellKnownMemberNames.ImplicitConversionName
+                }
+            && GetUnderlyingNamedType(symbol.ReturnType) is not null;
 
-        private static INamedTypeSymbol? GetUnderlyingNamedType(ITypeSymbol symbol)
-            => UnderlyingNamedTypeVisitor.Instance.Visit(symbol);
+        private static INamedTypeSymbol? GetUnderlyingNamedType(ITypeSymbol symbol) =>
+            UnderlyingNamedTypeVisitor.Instance.Visit(symbol);
 
-        protected sealed override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
+        protected sealed override async Task<
+            ImmutableArray<Document>
+        > DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
             HashSet<string>? globalAliases,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Look for documents that both contain an explicit cast in them as well as a reference to the type in the
             // explicit conversion.  i.e. if we have `public static explicit operator Goo(Bar b);` we want to find files
@@ -42,15 +51,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             var underlyingNamedType = GetUnderlyingNamedType(symbol.ReturnType);
             Contract.ThrowIfNull(underlyingNamedType);
-            var documentsWithName = await FindDocumentsAsync(project, documents, cancellationToken, underlyingNamedType.Name).ConfigureAwait(false);
-            var documentsWithType = await FindDocumentsAsync(project, documents, underlyingNamedType.SpecialType.ToPredefinedType(), cancellationToken).ConfigureAwait(false);
+            var documentsWithName = await FindDocumentsAsync(
+                    project,
+                    documents,
+                    cancellationToken,
+                    underlyingNamedType.Name
+                )
+                .ConfigureAwait(false);
+            var documentsWithType = await FindDocumentsAsync(
+                    project,
+                    documents,
+                    underlyingNamedType.SpecialType.ToPredefinedType(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<Document>.GetInstance(out var result);
 
             // Ignore any documents that don't also have an explicit cast in them.
             foreach (var document in documentsWithName.Concat(documentsWithType).Distinct())
             {
-                var index = await SyntaxTreeIndex.GetRequiredIndexAsync(document, cancellationToken).ConfigureAwait(false);
+                var index = await SyntaxTreeIndex
+                    .GetRequiredIndexAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
                 if (index.ContainsConversion)
                     result.Add(document);
             }
@@ -58,25 +81,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             return result.ToImmutable();
         }
 
-        protected sealed override ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected sealed override ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             IMethodSymbol symbol,
             HashSet<string>? globalAliases,
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             return FindReferencesInDocumentAsync(
-                symbol, document, semanticModel,
+                symbol,
+                document,
+                semanticModel,
                 t => IsPotentialReference(syntaxFacts, t),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        private static bool IsPotentialReference(
-            ISyntaxFactsService syntaxFacts,
-            SyntaxToken token)
+        private static bool IsPotentialReference(ISyntaxFactsService syntaxFacts, SyntaxToken token)
         {
             var node = token.GetRequiredParent();
             return node.GetFirstToken() == token && syntaxFacts.IsConversionExpression(node);

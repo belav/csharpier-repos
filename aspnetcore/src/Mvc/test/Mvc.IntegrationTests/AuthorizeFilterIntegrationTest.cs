@@ -42,9 +42,16 @@ public class AuthorizeFilterIntegrationTest
         var authorizeData = action.Attributes.OfType<AuthorizeAttribute>();
         var authorizeFilter = new AuthorizeFilter(policyProvider, authorizeData);
 
-        var actionContext = new ActionContext(GetHttpContext(), new RouteData(), new ControllerActionDescriptor());
+        var actionContext = new ActionContext(
+            GetHttpContext(),
+            new RouteData(),
+            new ControllerActionDescriptor()
+        );
 
-        var authorizationFilterContext = new AuthorizationFilterContext(actionContext, new[] { authorizeFilter });
+        var authorizationFilterContext = new AuthorizationFilterContext(
+            actionContext,
+            new[] { authorizeFilter }
+        );
 
         // Act
         await authorizeFilter.OnAuthorizationAsync(authorizationFilterContext);
@@ -61,18 +68,30 @@ public class AuthorizeFilterIntegrationTest
         var applicationModelProviderContext = GetProviderContext(typeof(AuthorizeController));
 
         var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
-        var policyProvider = new Mock<DefaultAuthorizationPolicyProvider>(Options.Create<AuthorizationOptions>(new AuthorizationOptions()));
+        var policyProvider = new Mock<DefaultAuthorizationPolicyProvider>(
+            Options.Create<AuthorizationOptions>(new AuthorizationOptions())
+        );
         var getPolicyCalled = 0;
-        policyProvider.Setup(p => p.GetPolicyAsync(It.IsAny<string>())).Callback(() => getPolicyCalled++).ReturnsAsync(policy);
+        policyProvider
+            .Setup(p => p.GetPolicyAsync(It.IsAny<string>()))
+            .Callback(() => getPolicyCalled++)
+            .ReturnsAsync(policy);
 
         var controller = Assert.Single(applicationModelProviderContext.Result.Controllers);
         var action = Assert.Single(controller.Actions);
         var authorizeData = action.Attributes.OfType<AuthorizeAttribute>();
         var authorizeFilter = new AuthorizeFilter(policyProvider.Object, authorizeData);
 
-        var actionContext = new ActionContext(GetHttpContext(), new RouteData(), new ControllerActionDescriptor());
+        var actionContext = new ActionContext(
+            GetHttpContext(),
+            new RouteData(),
+            new ControllerActionDescriptor()
+        );
 
-        var authorizationFilterContext = new AuthorizationFilterContext(actionContext, new[] { authorizeFilter });
+        var authorizationFilterContext = new AuthorizationFilterContext(
+            actionContext,
+            new[] { authorizeFilter }
+        );
 
         // Act
         await authorizeFilter.OnAuthorizationAsync(authorizationFilterContext);
@@ -92,22 +111,36 @@ public class AuthorizeFilterIntegrationTest
         var applicationModelProviderContext = GetProviderContext(typeof(AuthorizeController));
 
         var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
-        var policyProvider = new Mock<DefaultAuthorizationPolicyProvider>(Options.Create<AuthorizationOptions>(new AuthorizationOptions()));
+        var policyProvider = new Mock<DefaultAuthorizationPolicyProvider>(
+            Options.Create<AuthorizationOptions>(new AuthorizationOptions())
+        );
         var getPolicyCalled = 0;
-        policyProvider.Setup(p => p.GetPolicyAsync(It.IsAny<string>())).Callback(() => getPolicyCalled++).ReturnsAsync(policy);
+        policyProvider
+            .Setup(p => p.GetPolicyAsync(It.IsAny<string>()))
+            .Callback(() => getPolicyCalled++)
+            .ReturnsAsync(policy);
 
         var controller = Assert.Single(applicationModelProviderContext.Result.Controllers);
         var action = Assert.Single(controller.Actions);
         var authorizeData = action.Attributes.OfType<AuthorizeAttribute>();
         var authorizeFilter = new AuthorizeFilter(policyProvider.Object, authorizeData);
 
-        var actionContext = new ActionContext(GetHttpContext(), new RouteData(), new ControllerActionDescriptor());
+        var actionContext = new ActionContext(
+            GetHttpContext(),
+            new RouteData(),
+            new ControllerActionDescriptor()
+        );
 
-        var authorizationFilterContext = new AuthorizationFilterContext(actionContext, action.Filters);
+        var authorizationFilterContext = new AuthorizationFilterContext(
+            actionContext,
+            action.Filters
+        );
 
         authorizationFilterContext.Filters.Add(authorizeFilter);
 
-        var secondFilter = new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build());
+        var secondFilter = new AuthorizeFilter(
+            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+        );
         authorizationFilterContext.Filters.Add(secondFilter);
 
         var thirdFilter = new AuthorizeFilter(policyProvider.Object, authorizeData);
@@ -137,13 +170,22 @@ public class AuthorizeFilterIntegrationTest
         var authorizeData = action.Attributes.OfType<AuthorizeAttribute>();
         var authorizeFilter = new AuthorizeFilter(policyProvider, authorizeData);
 
-        var actionContext = new ActionContext(GetHttpContext(), new RouteData(), new ControllerActionDescriptor());
+        var actionContext = new ActionContext(
+            GetHttpContext(),
+            new RouteData(),
+            new ControllerActionDescriptor()
+        );
 
-        var authorizationFilterContext = new AuthorizationFilterContext(actionContext, action.Filters);
+        var authorizationFilterContext = new AuthorizationFilterContext(
+            actionContext,
+            action.Filters
+        );
 
         authorizationFilterContext.Filters.Add(authorizeFilter);
 
-        var secondFilter = new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build());
+        var secondFilter = new AuthorizeFilter(
+            new AuthorizationPolicyBuilder().RequireAssertion(a => true).Build()
+        );
         authorizationFilterContext.Filters.Add(secondFilter);
 
         var thirdFilter = new AuthorizeFilter(policyProvider, authorizeData);
@@ -159,10 +201,7 @@ public class AuthorizeFilterIntegrationTest
 
     private HttpContext GetHttpContext()
     {
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = GetServices()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = GetServices() };
 
         return httpContext;
     }
@@ -172,7 +211,8 @@ public class AuthorizeFilterIntegrationTest
         var context = new ApplicationModelProviderContext(new[] { controllerType.GetTypeInfo() });
         var provider = new DefaultApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            TestModelMetadataProvider.CreateDefaultProvider());
+            TestModelMetadataProvider.CreateDefaultProvider()
+        );
         provider.OnProvidersExecuting(context);
 
         return context;
@@ -185,7 +225,10 @@ public class AuthorizeFilterIntegrationTest
         serviceCollection.AddMvc();
         serviceCollection
             .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
-            .AddTransient<ILogger<DefaultAuthorizationService>, Logger<DefaultAuthorizationService>>();
+            .AddTransient<
+                ILogger<DefaultAuthorizationService>,
+                Logger<DefaultAuthorizationService>
+            >();
         return serviceCollection.BuildServiceProvider();
     }
 
@@ -204,7 +247,12 @@ public class AuthorizeFilterIntegrationTest
 
             var requirements = new IAuthorizationRequirement[]
             {
-                    new AssertionRequirement((con) => { return true; })
+                new AssertionRequirement(
+                    (con) =>
+                    {
+                        return true;
+                    }
+                )
             };
             return Task.FromResult(new AuthorizationPolicy(requirements, new string[] { }));
         }
@@ -218,7 +266,6 @@ public class AuthorizeFilterIntegrationTest
     public class AuthorizeController
     {
         [Authorize(Policy = "Base")]
-        public virtual void Authorize()
-        { }
+        public virtual void Authorize() { }
     }
 }

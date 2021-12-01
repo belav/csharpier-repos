@@ -12,31 +12,27 @@ using System.Diagnostics;
 
 namespace ILCompiler.DependencyAnalysisFramework
 {
-    public struct FirstMarkLogStrategy<DependencyContextType> : IDependencyAnalysisMarkStrategy<DependencyContextType>
+    public struct FirstMarkLogStrategy<DependencyContextType>
+        : IDependencyAnalysisMarkStrategy<DependencyContextType>
     {
         private class MarkData
         {
-            public MarkData(string reason, DependencyNodeCore<DependencyContextType> reason1, DependencyNodeCore<DependencyContextType> reason2)
+            public MarkData(
+                string reason,
+                DependencyNodeCore<DependencyContextType> reason1,
+                DependencyNodeCore<DependencyContextType> reason2
+            )
             {
                 Reason = reason;
                 Reason1 = reason1;
                 Reason2 = reason2;
             }
 
-            public string Reason
-            {
-                get;
-            }
+            public string Reason { get; }
 
-            public DependencyNodeCore<DependencyContextType> Reason1
-            {
-                get;
-            }
+            public DependencyNodeCore<DependencyContextType> Reason1 { get; }
 
-            public DependencyNodeCore<DependencyContextType> Reason2
-            {
-                get;
-            }
+            public DependencyNodeCore<DependencyContextType> Reason2 { get; }
         }
 
         private HashSet<string> _reasonStringOnlyNodes;
@@ -45,7 +41,8 @@ namespace ILCompiler.DependencyAnalysisFramework
             DependencyNodeCore<DependencyContextType> node,
             DependencyNodeCore<DependencyContextType> reasonNode,
             DependencyNodeCore<DependencyContextType> reasonNode2,
-            string reason)
+            string reason
+        )
         {
             if (node.Marked)
                 return false;
@@ -63,9 +60,17 @@ namespace ILCompiler.DependencyAnalysisFramework
             return true;
         }
 
-        void IDependencyAnalysisMarkStrategy<DependencyContextType>.VisitLogNodes(IEnumerable<DependencyNodeCore<DependencyContextType>> nodeList, IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor)
+        void IDependencyAnalysisMarkStrategy<DependencyContextType>.VisitLogNodes(
+            IEnumerable<DependencyNodeCore<DependencyContextType>> nodeList,
+            IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor
+        )
         {
-            var combinedNodesReported = new HashSet<Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>>>();
+            var combinedNodesReported = new HashSet<
+                Tuple<
+                    DependencyNodeCore<DependencyContextType>,
+                    DependencyNodeCore<DependencyContextType>
+                >
+            >();
 
             if (_reasonStringOnlyNodes != null)
             {
@@ -83,7 +88,10 @@ namespace ILCompiler.DependencyAnalysisFramework
 
                     if (markData.Reason2 != null)
                     {
-                        var combinedNode = new Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>>(markData.Reason1, markData.Reason2);
+                        var combinedNode = new Tuple<
+                            DependencyNodeCore<DependencyContextType>,
+                            DependencyNodeCore<DependencyContextType>
+                        >(markData.Reason1, markData.Reason2);
 
                         if (!combinedNodesReported.Contains(combinedNode))
                         {
@@ -95,7 +103,10 @@ namespace ILCompiler.DependencyAnalysisFramework
             }
         }
 
-        void IDependencyAnalysisMarkStrategy<DependencyContextType>.VisitLogEdges(IEnumerable<DependencyNodeCore<DependencyContextType>> nodeList, IDependencyAnalyzerLogEdgeVisitor<DependencyContextType> logEdgeVisitor)
+        void IDependencyAnalysisMarkStrategy<DependencyContextType>.VisitLogEdges(
+            IEnumerable<DependencyNodeCore<DependencyContextType>> nodeList,
+            IDependencyAnalyzerLogEdgeVisitor<DependencyContextType> logEdgeVisitor
+        )
         {
             foreach (DependencyNodeCore<DependencyContextType> node in nodeList)
             {
@@ -106,7 +117,12 @@ namespace ILCompiler.DependencyAnalysisFramework
                     if (markData.Reason2 != null)
                     {
                         Debug.Assert(markData.Reason1 != null);
-                        logEdgeVisitor.VisitEdge(markData.Reason1, markData.Reason2, node, markData.Reason);
+                        logEdgeVisitor.VisitEdge(
+                            markData.Reason1,
+                            markData.Reason2,
+                            node,
+                            markData.Reason
+                        );
                     }
                     else if (markData.Reason1 != null)
                     {
@@ -121,7 +137,9 @@ namespace ILCompiler.DependencyAnalysisFramework
             }
         }
 
-        void IDependencyAnalysisMarkStrategy<DependencyContextType>.AttachContext(DependencyContextType context)
+        void IDependencyAnalysisMarkStrategy<DependencyContextType>.AttachContext(
+            DependencyContextType context
+        )
         {
             // This logger does not need to use the context
         }

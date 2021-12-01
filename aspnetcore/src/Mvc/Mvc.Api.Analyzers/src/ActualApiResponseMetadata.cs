@@ -18,7 +18,11 @@ internal readonly struct ActualApiResponseMetadata
         _statusCode = null;
     }
 
-    public ActualApiResponseMetadata(IReturnOperation returnExpression, int statusCode, ITypeSymbol? returnType)
+    public ActualApiResponseMetadata(
+        IReturnOperation returnExpression,
+        int statusCode,
+        ITypeSymbol? returnType
+    )
     {
         ReturnOperation = returnExpression;
         _statusCode = statusCode;
@@ -27,7 +31,11 @@ internal readonly struct ActualApiResponseMetadata
 
     public IReturnOperation ReturnOperation { get; }
 
-    public int StatusCode => _statusCode ?? throw new ArgumentException("Status code is not available when IsDefaultResponse is true");
+    public int StatusCode =>
+        _statusCode
+        ?? throw new ArgumentException(
+            "Status code is not available when IsDefaultResponse is true"
+        );
 
     public bool IsDefaultResponse => _statusCode == null;
 

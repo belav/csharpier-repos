@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["AndNot.UInt64"] = AndNotUInt64,
                 ["ExtractLowestSetBit.UInt64"] = ExtractLowestSetBitUInt64,
                 ["GetMaskUpToLowestSetBit.UInt64"] = GetMaskUpToLowestSetBitUInt64,

@@ -27,7 +27,12 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// <summary>
         /// This is the first header in the custom debug info blob.
         /// </summary>
-        private static void ReadGlobalHeader(byte[] bytes, ref int offset, out byte version, out byte count)
+        private static void ReadGlobalHeader(
+            byte[] bytes,
+            ref int offset,
+            out byte version,
+            out byte count
+        )
         {
             version = bytes[offset + 0];
             count = bytes[offset + 1];
@@ -38,7 +43,14 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// After the global header (see <see cref="ReadGlobalHeader"/> comes list of custom debug info record.
         /// Each record begins with a standard header.
         /// </summary>
-        private static void ReadRecordHeader(byte[] bytes, ref int offset, out byte version, out CustomDebugInfoKind kind, out int size, out int alignmentSize)
+        private static void ReadRecordHeader(
+            byte[] bytes,
+            ref int offset,
+            out byte version,
+            out CustomDebugInfoKind kind,
+            out int size,
+            out int alignmentSize
+        )
         {
             version = bytes[offset + 0];
             kind = (CustomDebugInfoKind)bytes[offset + 1];
@@ -51,7 +63,10 @@ namespace Microsoft.CodeAnalysis.Debugging
         }
 
         /// <exception cref="InvalidOperationException"></exception>
-        public static ImmutableArray<byte> TryGetCustomDebugInfoRecord(byte[] customDebugInfo, CustomDebugInfoKind recordKind)
+        public static ImmutableArray<byte> TryGetCustomDebugInfoRecord(
+            byte[] customDebugInfo,
+            CustomDebugInfoKind recordKind
+        )
         {
             foreach (var record in GetCustomDebugInfoRecords(customDebugInfo))
             {
@@ -68,7 +83,9 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// Exposed for <see cref="T:Roslyn.Test.PdbUtilities.PdbToXmlConverter"/>.
         /// </remarks>
         /// <exception cref="InvalidOperationException"></exception>
-        public static IEnumerable<CustomDebugInfoRecord> GetCustomDebugInfoRecords(byte[] customDebugInfo)
+        public static IEnumerable<CustomDebugInfoRecord> GetCustomDebugInfoRecords(
+            byte[] customDebugInfo
+        )
         {
             if (customDebugInfo.Length < CustomDebugInfoConstants.GlobalHeaderSize)
             {
@@ -85,7 +102,14 @@ namespace Microsoft.CodeAnalysis.Debugging
 
             while (offset <= customDebugInfo.Length - CustomDebugInfoConstants.RecordHeaderSize)
             {
-                ReadRecordHeader(customDebugInfo, ref offset, out var version, out var kind, out var size, out var alignmentSize);
+                ReadRecordHeader(
+                    customDebugInfo,
+                    ref offset,
+                    out var version,
+                    out var kind,
+                    out var size,
+                    out var alignmentSize
+                );
                 if (size < CustomDebugInfoConstants.RecordHeaderSize)
                 {
                     throw new InvalidOperationException("Invalid header.");
@@ -104,12 +128,20 @@ namespace Microsoft.CodeAnalysis.Debugging
                 }
 
                 var bodySize = size - CustomDebugInfoConstants.RecordHeaderSize;
-                if (offset > customDebugInfo.Length - bodySize || alignmentSize > 3 || alignmentSize > bodySize)
+                if (
+                    offset > customDebugInfo.Length - bodySize
+                    || alignmentSize > 3
+                    || alignmentSize > bodySize
+                )
                 {
                     throw new InvalidOperationException("Invalid header.");
                 }
 
-                yield return new CustomDebugInfoRecord(kind, version, ImmutableArray.Create(customDebugInfo, offset, bodySize - alignmentSize));
+                yield return new CustomDebugInfoRecord(
+                    kind,
+                    version,
+                    ImmutableArray.Create(customDebugInfo, offset, bodySize - alignmentSize)
+                );
                 offset += bodySize;
             }
         }
@@ -170,7 +202,9 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// <remarks>
         /// Exposed for <see cref="T:Roslyn.Test.PdbUtilities.PdbToXmlConverter"/>.
         /// </remarks>
-        public static ImmutableArray<StateMachineHoistedLocalScope> DecodeStateMachineHoistedLocalScopesRecord(ImmutableArray<byte> bytes)
+        public static ImmutableArray<StateMachineHoistedLocalScope> DecodeStateMachineHoistedLocalScopesRecord(
+            ImmutableArray<byte> bytes
+        )
         {
             var offset = 0;
 
@@ -185,7 +219,7 @@ namespace Microsoft.CodeAnalysis.Debugging
                 // The range is stored as end-inclusive.
                 // The case [0,0] is ambiguous in Windows PDBs.
                 // It means either a user defined local with range [0, 1) or a synthesized local.
-                // It is unlikely that a user local scope spans just 1B from the start of the method. 
+                // It is unlikely that a user local scope spans just 1B from the start of the method.
                 // Assume therefore that [0,0] means a synthesized local.
                 if (startOffset != 0 || endOffset != 0)
                 {
@@ -234,7 +268,9 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// Exposed for <see cref="T:Roslyn.Test.PdbUtilities.PdbToXmlConverter"/>.
         /// </remarks>
         /// <exception cref="InvalidOperationException">Bad data.</exception>
-        public static ImmutableArray<DynamicLocalInfo> DecodeDynamicLocalsRecord(ImmutableArray<byte> bytes)
+        public static ImmutableArray<DynamicLocalInfo> DecodeDynamicLocalsRecord(
+            ImmutableArray<byte> bytes
+        )
         {
             const int FlagBytesCount = 64;
 
@@ -279,7 +315,9 @@ namespace Microsoft.CodeAnalysis.Debugging
                     nameBuilder.Append(ch);
                 }
 
-                builder.Add(new DynamicLocalInfo(flagsBuilder.ToImmutable(), slotId, nameBuilder.ToString()));
+                builder.Add(
+                    new DynamicLocalInfo(flagsBuilder.ToImmutable(), slotId, nameBuilder.ToString())
+                );
 
                 flagsBuilder.Clear();
                 nameBuilder.Clear();
@@ -293,7 +331,9 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// <summary>
         /// Tuple element names for locals.
         /// </summary>
-        public static ImmutableArray<TupleElementNamesInfo> DecodeTupleElementNamesRecord(ImmutableArray<byte> bytes)
+        public static ImmutableArray<TupleElementNamesInfo> DecodeTupleElementNamesRecord(
+            ImmutableArray<byte> bytes
+        )
         {
             var offset = 0;
             var n = ReadInt32(bytes, ref offset);
@@ -306,7 +346,10 @@ namespace Microsoft.CodeAnalysis.Debugging
             return builder.ToImmutableAndFree();
         }
 
-        private static TupleElementNamesInfo DecodeTupleElementNamesInfo(ImmutableArray<byte> bytes, ref int offset)
+        private static TupleElementNamesInfo DecodeTupleElementNamesInfo(
+            ImmutableArray<byte> bytes,
+            ref int offset
+        )
         {
             var n = ReadInt32(bytes, ref offset);
             var builder = ArrayBuilder<string>.GetInstance(n);
@@ -320,13 +363,24 @@ namespace Microsoft.CodeAnalysis.Debugging
             var scopeStart = ReadInt32(bytes, ref offset);
             var scopeEnd = ReadInt32(bytes, ref offset);
             var localName = ReadUtf8String(bytes, ref offset);
-            return new TupleElementNamesInfo(builder.ToImmutableAndFree(), slotIndex, localName, scopeStart, scopeEnd);
+            return new TupleElementNamesInfo(
+                builder.ToImmutableAndFree(),
+                slotIndex,
+                localName,
+                scopeStart,
+                scopeEnd
+            );
         }
 
         /// <summary>
         /// Returns the raw bytes of a record.
         /// </summary>
-        private static void ReadRawRecordBody(byte[] bytes, ref int offset, int size, out ImmutableArray<byte> body)
+        private static void ReadRawRecordBody(
+            byte[] bytes,
+            ref int offset,
+            int size,
+            out ImmutableArray<byte> body
+        )
         {
             var bodySize = size - CustomDebugInfoConstants.RecordHeaderSize;
             body = ImmutableArray.Create(bytes, offset, bodySize);
@@ -353,14 +407,15 @@ namespace Microsoft.CodeAnalysis.Debugging
             TArg arg,
             Func<int, TArg, byte[]> getMethodCustomDebugInfo,
             Func<int, TArg, ImmutableArray<string>> getMethodImportStrings,
-            out ImmutableArray<string> externAliasStrings)
+            out ImmutableArray<string> externAliasStrings
+        )
         {
             externAliasStrings = default;
 
             ImmutableArray<short> groupSizes = default;
             var seenForward = false;
 
-RETRY:
+            RETRY:
             var bytes = getMethodCustomDebugInfo(methodToken, arg);
             if (bytes == null)
             {
@@ -374,7 +429,12 @@ RETRY:
                     case CustomDebugInfoKind.UsingGroups:
                         if (!groupSizes.IsDefault)
                         {
-                            throw new InvalidOperationException(string.Format("Expected at most one Using record for method {0}", FormatMethodToken(methodToken)));
+                            throw new InvalidOperationException(
+                                string.Format(
+                                    "Expected at most one Using record for method {0}",
+                                    FormatMethodToken(methodToken)
+                                )
+                            );
                         }
 
                         groupSizes = DecodeUsingRecord(record.Data);
@@ -383,7 +443,12 @@ RETRY:
                     case CustomDebugInfoKind.ForwardMethodInfo:
                         if (!externAliasStrings.IsDefault)
                         {
-                            throw new InvalidOperationException(string.Format("Did not expect both Forward and ForwardToModule records for method {0}", FormatMethodToken(methodToken)));
+                            throw new InvalidOperationException(
+                                string.Format(
+                                    "Did not expect both Forward and ForwardToModule records for method {0}",
+                                    FormatMethodToken(methodToken)
+                                )
+                            );
                         }
 
                         methodToken = DecodeForwardRecord(record.Data);
@@ -395,18 +460,25 @@ RETRY:
                             seenForward = true;
                             goto RETRY;
                         }
-
                         break;
 
                     case CustomDebugInfoKind.ForwardModuleInfo:
                         if (!externAliasStrings.IsDefault)
                         {
-                            throw new InvalidOperationException(string.Format("Expected at most one ForwardToModule record for method {0}", FormatMethodToken(methodToken)));
+                            throw new InvalidOperationException(
+                                string.Format(
+                                    "Expected at most one ForwardToModule record for method {0}",
+                                    FormatMethodToken(methodToken)
+                                )
+                            );
                         }
 
                         var moduleInfoMethodToken = DecodeForwardToModuleRecord(record.Data);
 
-                        var allModuleInfoImportStrings = getMethodImportStrings(moduleInfoMethodToken, arg);
+                        var allModuleInfoImportStrings = getMethodImportStrings(
+                            moduleInfoMethodToken,
+                            arg
+                        );
                         Debug.Assert(!allModuleInfoImportStrings.IsDefault);
 
                         var externAliasBuilder = ArrayBuilder<string>.GetInstance();
@@ -443,13 +515,23 @@ RETRY:
                 {
                     if (pos >= importStrings.Length)
                     {
-                        throw new InvalidOperationException(string.Format("Group size indicates more imports than there are import strings (method {0}).", FormatMethodToken(methodToken)));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "Group size indicates more imports than there are import strings (method {0}).",
+                                FormatMethodToken(methodToken)
+                            )
+                        );
                     }
 
                     var importString = importStrings[pos];
                     if (IsCSharpExternAliasInfo(importString))
                     {
-                        throw new InvalidOperationException(string.Format("Encountered extern alias info before all import strings were consumed (method {0}).", FormatMethodToken(methodToken)));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "Encountered extern alias info before all import strings were consumed (method {0}).",
+                                FormatMethodToken(methodToken)
+                            )
+                        );
                     }
 
                     groupBuilder.Add(importString);
@@ -469,7 +551,12 @@ RETRY:
                     var importString = importStrings[pos];
                     if (!IsCSharpExternAliasInfo(importString))
                     {
-                        throw new InvalidOperationException(string.Format("Expected only extern alias info strings after consuming the indicated number of imports (method {0}).", FormatMethodToken(methodToken)));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "Expected only extern alias info strings after consuming the indicated number of imports (method {0}).",
+                                FormatMethodToken(methodToken)
+                            )
+                        );
                     }
 
                     groupBuilder.Add(importString);
@@ -483,7 +570,12 @@ RETRY:
 
                 if (pos < importStrings.Length)
                 {
-                    throw new InvalidOperationException(string.Format("Group size indicates fewer imports than there are import strings (method {0}).", FormatMethodToken(methodToken)));
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Group size indicates fewer imports than there are import strings (method {0}).",
+                            FormatMethodToken(methodToken)
+                        )
+                    );
                 }
             }
 
@@ -499,7 +591,8 @@ RETRY:
         public static ImmutableArray<string> GetVisualBasicImportStrings<TArg>(
             int methodToken,
             TArg arg,
-            Func<int, TArg, ImmutableArray<string>> getMethodImportStrings)
+            Func<int, TArg, ImmutableArray<string>> getMethodImportStrings
+        )
         {
             var importStrings = getMethodImportStrings(methodToken, arg);
             Debug.Assert(!importStrings.IsDefault);
@@ -518,7 +611,14 @@ RETRY:
                 var ch1 = importString[1];
                 if (ch1 is >= '0' and <= '9')
                 {
-                    if (int.TryParse(importString.Substring(1), NumberStyles.None, CultureInfo.InvariantCulture, out var tempMethodToken))
+                    if (
+                        int.TryParse(
+                            importString.Substring(1),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out var tempMethodToken
+                        )
+                    )
                     {
                         importStrings = getMethodImportStrings(tempMethodToken, arg);
                         Debug.Assert(!importStrings.IsDefault);
@@ -533,7 +633,14 @@ RETRY:
         {
             if (globalVersion != CustomDebugInfoConstants.Version)
             {
-                throw new InvalidOperationException(string.Format("Method {0}: Expected version {1}, but found version {2}.", FormatMethodToken(methodToken), CustomDebugInfoConstants.Version, globalVersion));
+                throw new InvalidOperationException(
+                    string.Format(
+                        "Method {0}: Expected version {1}, but found version {2}.",
+                        FormatMethodToken(methodToken),
+                        CustomDebugInfoConstants.Version,
+                        globalVersion
+                    )
+                );
             }
         }
 
@@ -594,7 +701,13 @@ RETRY:
         ///  "TSystem.Math" -> <type name="System.Math" />
         /// ]]>
         /// </remarks>
-        public static bool TryParseCSharpImportString(string import, out string alias, out string externAlias, out string target, out ImportTargetKind kind)
+        public static bool TryParseCSharpImportString(
+            string import,
+            out string alias,
+            out string externAlias,
+            out string target,
+            out ImportTargetKind kind
+        )
         {
             alias = null;
             externAlias = null;
@@ -695,7 +808,13 @@ RETRY:
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="import"/> is null.</exception>
         /// <exception cref="ArgumentException">Format of <paramref name="import"/> is not valid.</exception>
-        public static bool TryParseVisualBasicImportString(string import, out string alias, out string target, out ImportTargetKind kind, out VBImportScopeKind scope)
+        public static bool TryParseVisualBasicImportString(
+            string import,
+            out string alias,
+            out string target,
+            out ImportTargetKind kind,
+            out VBImportScopeKind scope
+        )
         {
             alias = null;
             target = null;
@@ -842,7 +961,13 @@ RETRY:
             }
         }
 
-        private static bool TrySplit(string input, int offset, char separator, out string before, out string after)
+        private static bool TrySplit(
+            string input,
+            int offset,
+            char separator,
+            out string before,
+            out string after
+        )
         {
             var separatorPos = input.IndexOf(separator, offset);
 
@@ -851,9 +976,7 @@ RETRY:
             if (offset <= separatorPos && separatorPos < input.Length)
             {
                 before = input.Substring(offset, separatorPos - offset);
-                after = separatorPos + 1 == input.Length
-                    ? ""
-                    : input.Substring(separatorPos + 1);
+                after = separatorPos + 1 == input.Length ? "" : input.Substring(separatorPos + 1);
                 return true;
             }
 

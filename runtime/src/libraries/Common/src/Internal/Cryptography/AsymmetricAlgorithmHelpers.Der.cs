@@ -25,7 +25,8 @@ namespace Internal.Cryptography
         internal static bool TryConvertIeee1363ToDer(
             ReadOnlySpan<byte> input,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             AsnWriter writer = WriteIeee1363ToDer(input);
             return writer.TryEncode(destination, out bytesWritten);
@@ -61,7 +62,11 @@ namespace Internal.Cryptography
             return response;
         }
 
-        internal static int ConvertDerToIeee1363(ReadOnlySpan<byte> input, int fieldSizeBits, Span<byte> destination)
+        internal static int ConvertDerToIeee1363(
+            ReadOnlySpan<byte> input,
+            int fieldSizeBits,
+            Span<byte> destination
+        )
         {
             int fieldSizeBytes = BitsToBytes(fieldSizeBits);
             int encodedSize = 2 * fieldSizeBytes;
@@ -147,7 +152,10 @@ namespace Internal.Cryptography
         /// <summary>
         /// Converts IeeeP1363 format to the specified signature format
         /// </summary>
-        internal static byte[] ConvertFromIeeeP1363Signature(byte[] signature, DSASignatureFormat targetFormat)
+        internal static byte[] ConvertFromIeeeP1363Signature(
+            byte[] signature,
+            DSASignatureFormat targetFormat
+        )
         {
             switch (targetFormat)
             {
@@ -158,7 +166,8 @@ namespace Internal.Cryptography
                 default:
                     throw new CryptographicException(
                         SR.Cryptography_UnknownSignatureFormat,
-                        targetFormat.ToString());
+                        targetFormat.ToString()
+                    );
             }
         }
 
@@ -168,7 +177,8 @@ namespace Internal.Cryptography
         internal static byte[] ConvertSignatureToIeeeP1363(
             DSASignatureFormat currentFormat,
             ReadOnlySpan<byte> signature,
-            int fieldSizeBits)
+            int fieldSizeBits
+        )
         {
             switch (currentFormat)
             {
@@ -179,7 +189,8 @@ namespace Internal.Cryptography
                 default:
                     throw new CryptographicException(
                         SR.Cryptography_UnknownSignatureFormat,
-                        currentFormat.ToString());
+                        currentFormat.ToString()
+                    );
             }
         }
 #endif
@@ -190,16 +201,23 @@ namespace Internal.Cryptography
             return byteLength;
         }
 
-        private static void CopySignatureField(ReadOnlySpan<byte> signatureField, Span<byte> response)
+        private static void CopySignatureField(
+            ReadOnlySpan<byte> signatureField,
+            Span<byte> response
+        )
         {
             if (signatureField.Length > response.Length)
             {
-                if (signatureField.Length != response.Length + 1 ||
-                    signatureField[0] != 0 ||
-                    signatureField[1] <= 0x7F)
+                if (
+                    signatureField.Length != response.Length + 1
+                    || signatureField[0] != 0
+                    || signatureField[1] <= 0x7F
+                )
                 {
                     // The only way this should be true is if the value required a zero-byte-pad.
-                    Debug.Fail($"A signature field was longer ({signatureField.Length}) than expected ({response.Length})");
+                    Debug.Fail(
+                        $"A signature field was longer ({signatureField.Length}) than expected ({response.Length})"
+                    );
                     throw new CryptographicException();
                 }
 
@@ -219,7 +237,8 @@ namespace Internal.Cryptography
             this DSA dsa,
             DSASignatureFormat currentFormat,
             ReadOnlySpan<byte> signature,
-            int fieldSizeBits = 0)
+            int fieldSizeBits = 0
+        )
         {
             try
             {
@@ -229,10 +248,7 @@ namespace Internal.Cryptography
                     fieldSizeBits = pars.Q!.Length * 8;
                 }
 
-                return ConvertSignatureToIeeeP1363(
-                    currentFormat,
-                    signature,
-                    fieldSizeBits);
+                return ConvertSignatureToIeeeP1363(currentFormat, signature, fieldSizeBits);
             }
             catch (CryptographicException)
             {
@@ -246,14 +262,12 @@ namespace Internal.Cryptography
         internal static byte[]? ConvertSignatureToIeeeP1363(
             this ECDsa ecdsa,
             DSASignatureFormat currentFormat,
-            ReadOnlySpan<byte> signature)
+            ReadOnlySpan<byte> signature
+        )
         {
             try
             {
-                return ConvertSignatureToIeeeP1363(
-                    currentFormat,
-                    signature,
-                    ecdsa.KeySize);
+                return ConvertSignatureToIeeeP1363(currentFormat, signature, ecdsa.KeySize);
             }
             catch (CryptographicException)
             {

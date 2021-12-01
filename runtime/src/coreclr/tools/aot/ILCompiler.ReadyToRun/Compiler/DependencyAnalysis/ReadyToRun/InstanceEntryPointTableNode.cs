@@ -22,8 +22,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly NodeFactory _factory;
         private bool _materializedSignature;
 
-        public InstanceEntryPointTableNode(NodeFactory factory)
-            : base(factory.Target)
+        public InstanceEntryPointTableNode(NodeFactory factory) : base(factory.Target)
         {
             _factory = factory;
             _factory.ManifestMetadataTable.RegisterEmitter(this);
@@ -35,7 +34,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 if (_factory.CompilationModuleGroup.IsInputBubble)
                 {
-                    foreach (MethodWithGCInfo method in _factory.EnumerateCompiledMethods(null, CompiledMethodCategory.Instantiated))
+                    foreach (
+                        MethodWithGCInfo method in _factory.EnumerateCompiledMethods(
+                            null,
+                            CompiledMethodCategory.Instantiated
+                        )
+                    )
                     {
                         BuildSignatureForMethod(method, _factory);
                     }
@@ -51,7 +55,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             sb.Append("__ReadyToRunInstanceEntryPointTable");
         }
 
-        private ArraySignatureBuilder BuildSignatureForMethod(MethodWithGCInfo method, NodeFactory factory)
+        private ArraySignatureBuilder BuildSignatureForMethod(
+            MethodWithGCInfo method,
+            NodeFactory factory
+        )
         {
             // In composite R2R format, always enforce owning type to let us share generic instantiations among modules
 
@@ -60,11 +67,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             ArraySignatureBuilder signatureBuilder = new ArraySignatureBuilder();
             signatureBuilder.EmitMethodSignature(
-                new MethodWithToken(method.Method, moduleToken, constrainedType: null, unboxing: false, context: null),
+                new MethodWithToken(
+                    method.Method,
+                    moduleToken,
+                    constrainedType: null,
+                    unboxing: false,
+                    context: null
+                ),
                 enforceDefEncoding: true,
-                enforceOwningType: _factory.CompilationModuleGroup.EnforceOwningType(moduleToken.Module),
+                enforceOwningType: _factory.CompilationModuleGroup.EnforceOwningType(
+                    moduleToken.Module
+                ),
                 factory.SignatureContext,
-                isInstantiatingStub: false);
+                isInstantiatingStub: false
+            );
 
             return signatureBuilder;
         }
@@ -73,7 +89,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
             }
 
             NativeWriter hashtableWriter = new NativeWriter();
@@ -82,12 +103,23 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             VertexHashtable vertexHashtable = new VertexHashtable();
             hashtableSection.Place(vertexHashtable);
 
-            Dictionary<byte[], BlobVertex> uniqueFixups = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
-            Dictionary<byte[], BlobVertex> uniqueSignatures = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
+            Dictionary<byte[], BlobVertex> uniqueFixups = new Dictionary<byte[], BlobVertex>(
+                ByteArrayComparer.Instance
+            );
+            Dictionary<byte[], BlobVertex> uniqueSignatures = new Dictionary<byte[], BlobVertex>(
+                ByteArrayComparer.Instance
+            );
 
-            foreach (MethodWithGCInfo method in factory.EnumerateCompiledMethods(null, CompiledMethodCategory.Instantiated))
+            foreach (
+                MethodWithGCInfo method in factory.EnumerateCompiledMethods(
+                    null,
+                    CompiledMethodCategory.Instantiated
+                )
+            )
             {
-                Debug.Assert(method.Method.HasInstantiation || method.Method.OwningType.HasInstantiation);
+                Debug.Assert(
+                    method.Method.HasInstantiation || method.Method.OwningType.HasInstantiation
+                );
 
                 int methodIndex = factory.RuntimeFunctionsTable.GetIndex(method);
 
@@ -108,9 +140,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     uniqueFixups.Add(fixup, fixupBlob);
                 }
 
-                EntryPointVertex entryPointVertex = new EntryPointWithBlobVertex((uint)methodIndex, fixupBlob, signatureBlob);
+                EntryPointVertex entryPointVertex = new EntryPointWithBlobVertex(
+                    (uint)methodIndex,
+                    fixupBlob,
+                    signatureBlob
+                );
                 hashtableSection.Place(entryPointVertex);
-                vertexHashtable.Append(unchecked((uint)ReadyToRunHashCode.MethodHashCode(method.Method)), entryPointVertex);
+                vertexHashtable.Append(
+                    unchecked((uint)ReadyToRunHashCode.MethodHashCode(method.Method)),
+                    entryPointVertex
+                );
             }
 
             MemoryStream hashtableContent = new MemoryStream();
@@ -119,7 +158,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: hashtableContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int ClassCode => -348722540;

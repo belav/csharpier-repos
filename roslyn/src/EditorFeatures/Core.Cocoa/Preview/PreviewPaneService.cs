@@ -21,20 +21,25 @@ using Microsoft.VisualStudio.Imaging;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     [ExportWorkspaceServiceFactory(typeof(IPreviewPaneService), ServiceLayer.Host), Shared]
-    internal class PreviewPaneService : ForegroundThreadAffinitizedObject, IPreviewPaneService, IWorkspaceServiceFactory
+    internal class PreviewPaneService
+        : ForegroundThreadAffinitizedObject,
+          IPreviewPaneService,
+          IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewPaneService(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+        public PreviewPaneService(IThreadingContext threadingContext) : base(threadingContext) { }
 
-        IWorkspaceService IWorkspaceServiceFactory.CreateService(HostWorkspaceServices workspaceServices)
+        IWorkspaceService IWorkspaceServiceFactory.CreateService(
+            HostWorkspaceServices workspaceServices
+        )
         {
             return this;
         }
-        object IPreviewPaneService.GetPreviewPane(DiagnosticData data, IReadOnlyList<object> previewContent)
+        object IPreviewPaneService.GetPreviewPane(
+            DiagnosticData data,
+            IReadOnlyList<object> previewContent
+        )
         {
             var title = data?.Message;
 
@@ -47,7 +52,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     return null;
                 }
 
-                return new PreviewPane(id: null, title: null, helpLink: null, helpLinkToolTipText: null, previewContent: previewContent);
+                return new PreviewPane(
+                    id: null,
+                    title: null,
+                    helpLink: null,
+                    helpLinkToolTipText: null,
+                    previewContent: previewContent
+                );
             }
             else
             {
@@ -62,10 +73,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             var helpLinkToolTip = BrowserHelper.GetHelpLinkToolTip(data.Id, helpLinkUri);
 
             return new PreviewPane(
-                id: data.Id, title: title,
+                id: data.Id,
+                title: title,
                 helpLink: helpLinkUri,
                 helpLinkToolTipText: helpLinkToolTip,
-                previewContent: previewContent);
+                previewContent: previewContent
+            );
         }
     }
 }

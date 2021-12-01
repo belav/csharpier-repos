@@ -16,7 +16,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SyncHttpHandler_HttpProtocolTests_Dribble : HttpProtocolTests_Dribble
     {
-        public SyncHttpHandler_HttpProtocolTests_Dribble(ITestOutputHelper output) : base(output) { }
+        public SyncHttpHandler_HttpProtocolTests_Dribble(ITestOutputHelper output) : base(output)
+        { }
         protected override bool TestAsync => false;
     }
 
@@ -26,7 +27,10 @@ namespace System.Net.Http.Functional.Tests
         protected override bool TestAsync => false;
     }
 
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowserDomSupportedOrNotBrowser))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsBrowserDomSupportedOrNotBrowser)
+    )]
     public sealed class SyncHttpHandler_PostScenarioTest : PostScenarioTest
     {
         public SyncHttpHandler_PostScenarioTest(ITestOutputHelper output) : base(output) { }
@@ -47,9 +51,11 @@ namespace System.Net.Http.Functional.Tests
         protected override bool TestAsync => false;
     }
 
-    public sealed class SyncHttpHandler_HttpClientHandler_Decompression_Tests : HttpClientHandler_Decompression_Test
+    public sealed class SyncHttpHandler_HttpClientHandler_Decompression_Tests
+        : HttpClientHandler_Decompression_Test
     {
-        public SyncHttpHandler_HttpClientHandler_Decompression_Tests(ITestOutputHelper output) : base(output) { }
+        public SyncHttpHandler_HttpClientHandler_Decompression_Tests(ITestOutputHelper output)
+            : base(output) { }
         protected override bool TestAsync => false;
     }
 
@@ -83,16 +89,20 @@ namespace System.Net.Http.Functional.Tests
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
-    public sealed class SyncHttpHandler_HttpClientHandler_Cancellation_Test : SocketsHttpHandler_Cancellation_Test
+    public sealed class SyncHttpHandler_HttpClientHandler_Cancellation_Test
+        : SocketsHttpHandler_Cancellation_Test
     {
-        public SyncHttpHandler_HttpClientHandler_Cancellation_Test(ITestOutputHelper output) : base(output) { }
+        public SyncHttpHandler_HttpClientHandler_Cancellation_Test(ITestOutputHelper output)
+            : base(output) { }
         protected override bool TestAsync => false;
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
-    public sealed class SyncHttpHandler_HttpClientHandler_Authentication_Test : HttpClientHandler_Authentication_Test
+    public sealed class SyncHttpHandler_HttpClientHandler_Authentication_Test
+        : HttpClientHandler_Authentication_Test
     {
-        public SyncHttpHandler_HttpClientHandler_Authentication_Test(ITestOutputHelper output) : base(output) { }
+        public SyncHttpHandler_HttpClientHandler_Authentication_Test(ITestOutputHelper output)
+            : base(output) { }
         protected override bool TestAsync => false;
     }
 
@@ -104,9 +114,11 @@ namespace System.Net.Http.Functional.Tests
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Sockets is not supported on this platform.")]
-    public sealed class SyncHttpHandlerTest_HttpClientHandlerTest_Headers : HttpClientHandlerTest_Headers
+    public sealed class SyncHttpHandlerTest_HttpClientHandlerTest_Headers
+        : HttpClientHandlerTest_Headers
     {
-        public SyncHttpHandlerTest_HttpClientHandlerTest_Headers(ITestOutputHelper output) : base(output) { }
+        public SyncHttpHandlerTest_HttpClientHandlerTest_Headers(ITestOutputHelper output)
+            : base(output) { }
         protected override bool TestAsync => false;
     }
 }

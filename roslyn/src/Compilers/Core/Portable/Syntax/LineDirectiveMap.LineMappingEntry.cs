@@ -20,32 +20,26 @@ namespace Microsoft.CodeAnalysis
             /// following.
             /// </summary>
             Unknown,
-
             /// <summary>
             /// Used in C# for spans preceding the first <c>#line</c> directive (if any) and for <c>#line default</c> spans
             /// </summary>
             Unmapped,
-
             /// <summary>
             /// Used in C# for spans inside of <c>#line linenumber</c> directive
             /// </summary>
             Remapped,
-
             /// <summary>
             /// Used in C# for spans inside of <c>#line (startLine, startChar) - (endLine, endChar) charOffset</c> directive
             /// </summary>
             RemappedSpan,
-
             /// <summary>
             /// Used in VB for spans inside of a <c>#ExternalSource</c> directive that followed an unknown span
             /// </summary>
             RemappedAfterUnknown,
-
             /// <summary>
             /// Used in VB for spans inside of a <c>#ExternalSource</c> directive that followed a hidden span
             /// </summary>
             RemappedAfterHidden,
-
             /// <summary>
             /// Used in C# and VB for spans that are inside of <c>#line hidden</c> (C#) or outside of <c>#ExternalSource</c> (VB) 
             /// directives
@@ -89,7 +83,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 int mappedLine,
                 string? mappedPathOpt,
-                PositionState state)
+                PositionState state
+            )
             {
                 Debug.Assert(state != PositionState.RemappedSpan);
 
@@ -105,7 +100,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 LinePositionSpan mappedSpan,
                 int? unmappedCharacterOffset,
-                string? mappedPathOpt)
+                string? mappedPathOpt
+            )
             {
                 this.UnmappedLine = unmappedLine;
                 this.MappedLine = -1;
@@ -115,11 +111,10 @@ namespace Microsoft.CodeAnalysis
                 this.State = PositionState.RemappedSpan;
             }
 
-            public int CompareTo(LineMappingEntry other)
-                => UnmappedLine.CompareTo(other.UnmappedLine);
+            public int CompareTo(LineMappingEntry other) =>
+                UnmappedLine.CompareTo(other.UnmappedLine);
 
-            public bool IsHidden
-                => State == PositionState.Hidden;
+            public bool IsHidden => State == PositionState.Hidden;
         }
     }
 }

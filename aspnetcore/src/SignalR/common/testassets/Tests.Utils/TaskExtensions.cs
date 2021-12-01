@@ -7,7 +7,7 @@ public
 #else
 internal
 #endif
-    static class TaskExtensions
+static class TaskExtensions
 {
     public static async Task OrThrowIfOtherFails(this Task task, Task otherTask)
     {

@@ -17,17 +17,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     internal static partial class CSharpFormattingOptions2
     {
-        internal static bool DetermineIfSpaceOptionIsSet(string value, SpacingWithinParenthesesOption parenthesesSpacingOption)
-            => (from v in value.Split(',').Select(v => v.Trim())
+        internal static bool DetermineIfSpaceOptionIsSet(
+            string value,
+            SpacingWithinParenthesesOption parenthesesSpacingOption
+        ) =>
+            (
+                from v in value.Split(',').Select(v => v.Trim())
                 let option = ConvertToSpacingOption(v)
                 where option.HasValue && option.Value == parenthesesSpacingOption
-                select option)
-                .Any();
+                select option
+            ).Any();
 
-        private static SpacingWithinParenthesesOption? ConvertToSpacingOption(string value)
-            => s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(value, out var option)
-               ? option
-               : null;
+        private static SpacingWithinParenthesesOption? ConvertToSpacingOption(string value) =>
+            s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(value, out var option)
+                ? option
+                : null;
 
         private static string GetSpacingWithParenthesesEditorConfigString(OptionSet optionSet)
         {
@@ -37,8 +41,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 var value = optionSet.GetOption(kvp.Key);
                 if (value)
                 {
-                    Debug.Assert(s_spacingWithinParenthesisOptionsEditorConfigMap.ContainsValue(kvp.Value));
-                    editorConfigStringBuilder.Add(s_spacingWithinParenthesisOptionsEditorConfigMap.GetKeyOrDefault(kvp.Value)!);
+                    Debug.Assert(
+                        s_spacingWithinParenthesisOptionsEditorConfigMap.ContainsValue(kvp.Value)
+                    );
+                    editorConfigStringBuilder.Add(
+                        s_spacingWithinParenthesisOptionsEditorConfigMap.GetKeyOrDefault(kvp.Value)!
+                    );
                 }
             }
 
@@ -53,17 +61,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
         }
 
-        internal static BinaryOperatorSpacingOptions ParseEditorConfigSpacingAroundBinaryOperator(string binaryOperatorSpacingValue)
-            => s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetValue(binaryOperatorSpacingValue.Trim(), out var value) ? value : BinaryOperatorSpacingOptions.Single;
+        internal static BinaryOperatorSpacingOptions ParseEditorConfigSpacingAroundBinaryOperator(
+            string binaryOperatorSpacingValue
+        ) =>
+            s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetValue(
+                binaryOperatorSpacingValue.Trim(),
+                out var value
+            )
+                ? value
+                : BinaryOperatorSpacingOptions.Single;
 
-        private static string GetSpacingAroundBinaryOperatorEditorConfigString(BinaryOperatorSpacingOptions value)
-            => s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
+        private static string GetSpacingAroundBinaryOperatorEditorConfigString(
+            BinaryOperatorSpacingOptions value
+        ) => s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
 
-        internal static LabelPositionOptions ParseEditorConfigLabelPositioning(string labelIndentationValue)
-            => s_labelPositionOptionsEditorConfigMap.TryGetValue(labelIndentationValue.Trim(), out var value) ? value : LabelPositionOptions.NoIndent;
+        internal static LabelPositionOptions ParseEditorConfigLabelPositioning(
+            string labelIndentationValue
+        ) =>
+            s_labelPositionOptionsEditorConfigMap.TryGetValue(
+                labelIndentationValue.Trim(),
+                out var value
+            )
+                ? value
+                : LabelPositionOptions.NoIndent;
 
-        private static string GetLabelPositionOptionEditorConfigString(LabelPositionOptions value)
-            => s_labelPositionOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
+        private static string GetLabelPositionOptionEditorConfigString(
+            LabelPositionOptions value
+        ) => s_labelPositionOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
 
         internal static bool DetermineIfNewLineOptionIsSet(string value, NewLineOption optionName)
         {
@@ -79,11 +103,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return false;
             }
 
-            return (from v in values
-                    let option = ConvertToNewLineOption(v)
-                    where option.HasValue && option.Value == optionName
-                    select option)
-                    .Any();
+            return (
+                from v in values
+                let option = ConvertToNewLineOption(v)
+                where option.HasValue && option.Value == optionName
+                select option
+            ).Any();
         }
 
         private static NewLineOption? ConvertToNewLineOption(string value)
@@ -110,7 +135,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 if (value)
                 {
                     Debug.Assert(s_newLineOptionsEditorConfigMap.ContainsValue(kvp.Value));
-                    editorConfigStringBuilder.Add(s_newLineOptionsEditorConfigMap.GetKeyOrDefault(kvp.Value)!);
+                    editorConfigStringBuilder.Add(
+                        s_newLineOptionsEditorConfigMap.GetKeyOrDefault(kvp.Value)!
+                    );
                 }
             }
 
@@ -130,8 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
         }
 
-        internal static bool DetermineIfIgnoreSpacesAroundVariableDeclarationIsSet(string value)
-            => value.Trim() == "ignore";
+        internal static bool DetermineIfIgnoreSpacesAroundVariableDeclarationIsSet(string value) =>
+            value.Trim() == "ignore";
 
         internal enum SpacingWithinParenthesesOption
         {

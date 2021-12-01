@@ -15,7 +15,8 @@ namespace System.Data
     /// </summary>
     internal sealed class ColumnTypeConverter : TypeConverter
     {
-        private static readonly Type[] s_types = new Type[] {
+        private static readonly Type[] s_types = new Type[]
+        {
             typeof(bool),
             typeof(byte),
             typeof(byte[]),
@@ -60,15 +61,23 @@ namespace System.Data
         /// Gets a value indicating whether this converter can convert an object to the given destination type using the context.
         /// </summary>
         public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType) =>
-            destinationType == typeof(InstanceDescriptor) ||
-            base.CanConvertTo(context, destinationType);
+            destinationType == typeof(InstanceDescriptor)
+            || base.CanConvertTo(context, destinationType);
 
         /// <summary>
         /// Converts the given value object to the specified destination type.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "InstanceDescriptor calls GetType(string) on AssemblyQualifiedName of instance of type we already have in here.")]
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "InstanceDescriptor calls GetType(string) on AssemblyQualifiedName of instance of type we already have in here."
+        )]
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {
@@ -96,10 +105,16 @@ namespace System.Data
 
                 if (value is Type || value is string)
                 {
-                    MethodInfo method = typeof(Type).GetMethod("GetType", new Type[] { typeof(string) })!;
+                    MethodInfo method = typeof(Type).GetMethod(
+                        "GetType",
+                        new Type[] { typeof(string) }
+                    )!;
                     if (method != null)
                     {
-                        return new InstanceDescriptor(method, new object[] { ((Type)newValue).AssemblyQualifiedName! });
+                        return new InstanceDescriptor(
+                            method,
+                            new object[] { ((Type)newValue).AssemblyQualifiedName! }
+                        );
                     }
                 }
             }
@@ -108,10 +123,13 @@ namespace System.Data
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
-            sourceType == typeof(string) ||
-            base.CanConvertTo(context, sourceType);
+            sourceType == typeof(string) || base.CanConvertTo(context, sourceType);
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value != null && value.GetType() == typeof(string))
             {

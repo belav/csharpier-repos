@@ -16,15 +16,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.IDynamicObject.regr001.
     {
         public double this[decimal d]
         {
-            get
-            {
-                return 4;
-            }
-
-            set
-            {
-                Program.Value = 0;
-            }
+            get { return 4; }
+            set { Program.Value = 0; }
         }
     }
 

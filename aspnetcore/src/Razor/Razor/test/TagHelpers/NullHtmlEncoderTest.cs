@@ -78,7 +78,8 @@ public class NullHtmlEncoderTest
         string value,
         int startIndex,
         int characterCount,
-        string expectedResult)
+        string expectedResult
+    )
     {
         // Arrange
         var encoder = NullHtmlEncoder.Default;
@@ -115,7 +116,8 @@ public class NullHtmlEncoderTest
         string value,
         int startIndex,
         int characterCount,
-        string expectedResult)
+        string expectedResult
+    )
     {
         // Arrange
         var encoder = NullHtmlEncoder.Default;

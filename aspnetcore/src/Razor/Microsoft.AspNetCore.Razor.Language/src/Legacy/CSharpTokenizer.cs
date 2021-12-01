@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -13,121 +13,162 @@ internal class CSharpTokenizer : Tokenizer
 {
     private readonly Dictionary<char, Func<SyntaxKind>> _operatorHandlers;
 
-    private static readonly Dictionary<string, CSharpKeyword> _keywords = new Dictionary<string, CSharpKeyword>(StringComparer.Ordinal)
-        {
-            { "await", CSharpKeyword.Await },
-            { "abstract", CSharpKeyword.Abstract },
-            { "byte", CSharpKeyword.Byte },
-            { "class", CSharpKeyword.Class },
-            { "delegate", CSharpKeyword.Delegate },
-            { "event", CSharpKeyword.Event },
-            { "fixed", CSharpKeyword.Fixed },
-            { "if", CSharpKeyword.If },
-            { "internal", CSharpKeyword.Internal },
-            { "new", CSharpKeyword.New },
-            { "override", CSharpKeyword.Override },
-            { "readonly", CSharpKeyword.Readonly },
-            { "short", CSharpKeyword.Short },
-            { "struct", CSharpKeyword.Struct },
-            { "try", CSharpKeyword.Try },
-            { "unsafe", CSharpKeyword.Unsafe },
-            { "volatile", CSharpKeyword.Volatile },
-            { "as", CSharpKeyword.As },
-            { "do", CSharpKeyword.Do },
-            { "is", CSharpKeyword.Is },
-            { "params", CSharpKeyword.Params },
-            { "ref", CSharpKeyword.Ref },
-            { "switch", CSharpKeyword.Switch },
-            { "ushort", CSharpKeyword.Ushort },
-            { "while", CSharpKeyword.While },
-            { "case", CSharpKeyword.Case },
-            { "const", CSharpKeyword.Const },
-            { "explicit", CSharpKeyword.Explicit },
-            { "float", CSharpKeyword.Float },
-            { "null", CSharpKeyword.Null },
-            { "sizeof", CSharpKeyword.Sizeof },
-            { "typeof", CSharpKeyword.Typeof },
-            { "implicit", CSharpKeyword.Implicit },
-            { "private", CSharpKeyword.Private },
-            { "this", CSharpKeyword.This },
-            { "using", CSharpKeyword.Using },
-            { "extern", CSharpKeyword.Extern },
-            { "return", CSharpKeyword.Return },
-            { "stackalloc", CSharpKeyword.Stackalloc },
-            { "uint", CSharpKeyword.Uint },
-            { "base", CSharpKeyword.Base },
-            { "catch", CSharpKeyword.Catch },
-            { "continue", CSharpKeyword.Continue },
-            { "double", CSharpKeyword.Double },
-            { "for", CSharpKeyword.For },
-            { "in", CSharpKeyword.In },
-            { "lock", CSharpKeyword.Lock },
-            { "object", CSharpKeyword.Object },
-            { "protected", CSharpKeyword.Protected },
-            { "static", CSharpKeyword.Static },
-            { "false", CSharpKeyword.False },
-            { "public", CSharpKeyword.Public },
-            { "sbyte", CSharpKeyword.Sbyte },
-            { "throw", CSharpKeyword.Throw },
-            { "virtual", CSharpKeyword.Virtual },
-            { "decimal", CSharpKeyword.Decimal },
-            { "else", CSharpKeyword.Else },
-            { "operator", CSharpKeyword.Operator },
-            { "string", CSharpKeyword.String },
-            { "ulong", CSharpKeyword.Ulong },
-            { "bool", CSharpKeyword.Bool },
-            { "char", CSharpKeyword.Char },
-            { "default", CSharpKeyword.Default },
-            { "foreach", CSharpKeyword.Foreach },
-            { "long", CSharpKeyword.Long },
-            { "void", CSharpKeyword.Void },
-            { "enum", CSharpKeyword.Enum },
-            { "finally", CSharpKeyword.Finally },
-            { "int", CSharpKeyword.Int },
-            { "out", CSharpKeyword.Out },
-            { "sealed", CSharpKeyword.Sealed },
-            { "true", CSharpKeyword.True },
-            { "goto", CSharpKeyword.Goto },
-            { "unchecked", CSharpKeyword.Unchecked },
-            { "interface", CSharpKeyword.Interface },
-            { "break", CSharpKeyword.Break },
-            { "checked", CSharpKeyword.Checked },
-            { "namespace", CSharpKeyword.Namespace },
-            { "when", CSharpKeyword.When },
-            { "where", CSharpKeyword.Where }
-        };
+    private static readonly Dictionary<string, CSharpKeyword> _keywords = new Dictionary<
+        string,
+        CSharpKeyword
+    >(StringComparer.Ordinal)
+    {
+        { "await", CSharpKeyword.Await },
+        { "abstract", CSharpKeyword.Abstract },
+        { "byte", CSharpKeyword.Byte },
+        { "class", CSharpKeyword.Class },
+        { "delegate", CSharpKeyword.Delegate },
+        { "event", CSharpKeyword.Event },
+        { "fixed", CSharpKeyword.Fixed },
+        { "if", CSharpKeyword.If },
+        { "internal", CSharpKeyword.Internal },
+        { "new", CSharpKeyword.New },
+        { "override", CSharpKeyword.Override },
+        { "readonly", CSharpKeyword.Readonly },
+        { "short", CSharpKeyword.Short },
+        { "struct", CSharpKeyword.Struct },
+        { "try", CSharpKeyword.Try },
+        { "unsafe", CSharpKeyword.Unsafe },
+        { "volatile", CSharpKeyword.Volatile },
+        { "as", CSharpKeyword.As },
+        { "do", CSharpKeyword.Do },
+        { "is", CSharpKeyword.Is },
+        { "params", CSharpKeyword.Params },
+        { "ref", CSharpKeyword.Ref },
+        { "switch", CSharpKeyword.Switch },
+        { "ushort", CSharpKeyword.Ushort },
+        { "while", CSharpKeyword.While },
+        { "case", CSharpKeyword.Case },
+        { "const", CSharpKeyword.Const },
+        { "explicit", CSharpKeyword.Explicit },
+        { "float", CSharpKeyword.Float },
+        { "null", CSharpKeyword.Null },
+        { "sizeof", CSharpKeyword.Sizeof },
+        { "typeof", CSharpKeyword.Typeof },
+        { "implicit", CSharpKeyword.Implicit },
+        { "private", CSharpKeyword.Private },
+        { "this", CSharpKeyword.This },
+        { "using", CSharpKeyword.Using },
+        { "extern", CSharpKeyword.Extern },
+        { "return", CSharpKeyword.Return },
+        { "stackalloc", CSharpKeyword.Stackalloc },
+        { "uint", CSharpKeyword.Uint },
+        { "base", CSharpKeyword.Base },
+        { "catch", CSharpKeyword.Catch },
+        { "continue", CSharpKeyword.Continue },
+        { "double", CSharpKeyword.Double },
+        { "for", CSharpKeyword.For },
+        { "in", CSharpKeyword.In },
+        { "lock", CSharpKeyword.Lock },
+        { "object", CSharpKeyword.Object },
+        { "protected", CSharpKeyword.Protected },
+        { "static", CSharpKeyword.Static },
+        { "false", CSharpKeyword.False },
+        { "public", CSharpKeyword.Public },
+        { "sbyte", CSharpKeyword.Sbyte },
+        { "throw", CSharpKeyword.Throw },
+        { "virtual", CSharpKeyword.Virtual },
+        { "decimal", CSharpKeyword.Decimal },
+        { "else", CSharpKeyword.Else },
+        { "operator", CSharpKeyword.Operator },
+        { "string", CSharpKeyword.String },
+        { "ulong", CSharpKeyword.Ulong },
+        { "bool", CSharpKeyword.Bool },
+        { "char", CSharpKeyword.Char },
+        { "default", CSharpKeyword.Default },
+        { "foreach", CSharpKeyword.Foreach },
+        { "long", CSharpKeyword.Long },
+        { "void", CSharpKeyword.Void },
+        { "enum", CSharpKeyword.Enum },
+        { "finally", CSharpKeyword.Finally },
+        { "int", CSharpKeyword.Int },
+        { "out", CSharpKeyword.Out },
+        { "sealed", CSharpKeyword.Sealed },
+        { "true", CSharpKeyword.True },
+        { "goto", CSharpKeyword.Goto },
+        { "unchecked", CSharpKeyword.Unchecked },
+        { "interface", CSharpKeyword.Interface },
+        { "break", CSharpKeyword.Break },
+        { "checked", CSharpKeyword.Checked },
+        { "namespace", CSharpKeyword.Namespace },
+        { "when", CSharpKeyword.When },
+        { "where", CSharpKeyword.Where }
+    };
 
-    public CSharpTokenizer(ITextDocument source)
-        : base(source)
+    public CSharpTokenizer(ITextDocument source) : base(source)
     {
         base.CurrentState = StartState;
 
         _operatorHandlers = new Dictionary<char, Func<SyntaxKind>>()
+        {
+            { '-', MinusOperator },
+            { '<', LessThanOperator },
+            { '>', GreaterThanOperator },
             {
-                { '-', MinusOperator },
-                { '<', LessThanOperator },
-                { '>', GreaterThanOperator },
-                { '&', CreateTwoCharOperatorHandler(SyntaxKind.And, '=', SyntaxKind.AndAssign, '&', SyntaxKind.DoubleAnd) },
-                { '|', CreateTwoCharOperatorHandler(SyntaxKind.Or, '=', SyntaxKind.OrAssign, '|', SyntaxKind.DoubleOr) },
-                { '+', CreateTwoCharOperatorHandler(SyntaxKind.Plus, '=', SyntaxKind.PlusAssign, '+', SyntaxKind.Increment) },
-                { '=', CreateTwoCharOperatorHandler(SyntaxKind.Assign, '=', SyntaxKind.Equals, '>', SyntaxKind.GreaterThanEqual) },
-                { '!', CreateTwoCharOperatorHandler(SyntaxKind.Not, '=', SyntaxKind.NotEqual) },
-                { '%', CreateTwoCharOperatorHandler(SyntaxKind.Modulo, '=', SyntaxKind.ModuloAssign) },
-                { '*', CreateTwoCharOperatorHandler(SyntaxKind.Star, '=', SyntaxKind.MultiplyAssign) },
-                { ':', CreateTwoCharOperatorHandler(SyntaxKind.Colon, ':', SyntaxKind.DoubleColon) },
-                { '?', CreateTwoCharOperatorHandler(SyntaxKind.QuestionMark, '?', SyntaxKind.NullCoalesce) },
-                { '^', CreateTwoCharOperatorHandler(SyntaxKind.Xor, '=', SyntaxKind.XorAssign) },
-                { '(', () => SyntaxKind.LeftParenthesis },
-                { ')', () => SyntaxKind.RightParenthesis },
-                { '{', () => SyntaxKind.LeftBrace },
-                { '}', () => SyntaxKind.RightBrace },
-                { '[', () => SyntaxKind.LeftBracket },
-                { ']', () => SyntaxKind.RightBracket },
-                { ',', () => SyntaxKind.Comma },
-                { ';', () => SyntaxKind.Semicolon },
-                { '~', () => SyntaxKind.Tilde },
-                { '#', () => SyntaxKind.Hash }
-            };
+                '&',
+                CreateTwoCharOperatorHandler(
+                    SyntaxKind.And,
+                    '=',
+                    SyntaxKind.AndAssign,
+                    '&',
+                    SyntaxKind.DoubleAnd
+                )
+            },
+            {
+                '|',
+                CreateTwoCharOperatorHandler(
+                    SyntaxKind.Or,
+                    '=',
+                    SyntaxKind.OrAssign,
+                    '|',
+                    SyntaxKind.DoubleOr
+                )
+            },
+            {
+                '+',
+                CreateTwoCharOperatorHandler(
+                    SyntaxKind.Plus,
+                    '=',
+                    SyntaxKind.PlusAssign,
+                    '+',
+                    SyntaxKind.Increment
+                )
+            },
+            {
+                '=',
+                CreateTwoCharOperatorHandler(
+                    SyntaxKind.Assign,
+                    '=',
+                    SyntaxKind.Equals,
+                    '>',
+                    SyntaxKind.GreaterThanEqual
+                )
+            },
+            { '!', CreateTwoCharOperatorHandler(SyntaxKind.Not, '=', SyntaxKind.NotEqual) },
+            { '%', CreateTwoCharOperatorHandler(SyntaxKind.Modulo, '=', SyntaxKind.ModuloAssign) },
+            { '*', CreateTwoCharOperatorHandler(SyntaxKind.Star, '=', SyntaxKind.MultiplyAssign) },
+            { ':', CreateTwoCharOperatorHandler(SyntaxKind.Colon, ':', SyntaxKind.DoubleColon) },
+            {
+                '?',
+                CreateTwoCharOperatorHandler(SyntaxKind.QuestionMark, '?', SyntaxKind.NullCoalesce)
+            },
+            { '^', CreateTwoCharOperatorHandler(SyntaxKind.Xor, '=', SyntaxKind.XorAssign) },
+            { '(', () => SyntaxKind.LeftParenthesis },
+            { ')', () => SyntaxKind.RightParenthesis },
+            { '{', () => SyntaxKind.LeftBrace },
+            { '}', () => SyntaxKind.RightBrace },
+            { '[', () => SyntaxKind.LeftBracket },
+            { ']', () => SyntaxKind.RightBracket },
+            { ',', () => SyntaxKind.Comma },
+            { ';', () => SyntaxKind.Semicolon },
+            { '~', () => SyntaxKind.Tilde },
+            { '#', () => SyntaxKind.Hash }
+        };
     }
 
     protected override int StartState => (int)CSharpTokenizerState.Data;
@@ -272,7 +313,6 @@ internal class CSharpTokenizer : Tokenizer
                     return "#";
                 case SyntaxKind.Transition:
                     return "@";
-
             }
         }
         else if (tokenLength == 2)
@@ -327,8 +367,6 @@ internal class CSharpTokenizer : Tokenizer
                     return ">=";
                 case SyntaxKind.RightShift:
                     return ">>";
-
-
             }
         }
         else if (tokenLength == 3)
@@ -345,7 +383,11 @@ internal class CSharpTokenizer : Tokenizer
         return base.GetTokenContent(type);
     }
 
-    protected override SyntaxToken CreateToken(string content, SyntaxKind kind, RazorDiagnostic[] errors)
+    protected override SyntaxToken CreateToken(
+        string content,
+        SyntaxKind kind,
+        RazorDiagnostic[] errors
+    )
     {
         return SyntaxFactory.Token(kind, content, errors);
     }
@@ -431,14 +473,16 @@ internal class CSharpTokenizer : Tokenizer
         {
             return Transition(
                 CSharpTokenizerState.AfterRazorCommentTransition,
-                EndToken(SyntaxKind.RazorCommentTransition));
+                EndToken(SyntaxKind.RazorCommentTransition)
+            );
         }
         else if (CurrentCharacter == '@')
         {
             // Could be escaped comment transition
             return Transition(
                 CSharpTokenizerState.EscapedRazorCommentTransition,
-                EndToken(SyntaxKind.Transition));
+                EndToken(SyntaxKind.Transition)
+            );
         }
 
         return Stay(EndToken(SyntaxKind.Transition));
@@ -502,7 +546,11 @@ internal class CSharpTokenizer : Tokenizer
         return SyntaxKind.Minus;
     }
 
-    private Func<SyntaxKind> CreateTwoCharOperatorHandler(SyntaxKind typeIfOnlyFirst, char second, SyntaxKind typeIfBoth)
+    private Func<SyntaxKind> CreateTwoCharOperatorHandler(
+        SyntaxKind typeIfOnlyFirst,
+        char second,
+        SyntaxKind typeIfBoth
+    )
     {
         return () =>
         {
@@ -515,7 +563,13 @@ internal class CSharpTokenizer : Tokenizer
         };
     }
 
-    private Func<SyntaxKind> CreateTwoCharOperatorHandler(SyntaxKind typeIfOnlyFirst, char option1, SyntaxKind typeIfOption1, char option2, SyntaxKind typeIfOption2)
+    private Func<SyntaxKind> CreateTwoCharOperatorHandler(
+        SyntaxKind typeIfOnlyFirst,
+        char option1,
+        SyntaxKind typeIfOption1,
+        char option2,
+        SyntaxKind typeIfOption2
+    )
     {
         return () =>
         {
@@ -550,19 +604,32 @@ internal class CSharpTokenizer : Tokenizer
         {
             CurrentErrors.Add(
                 RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                    new SourceSpan(CurrentStart, contentLength: 1 /* end of file */)));
+                    new SourceSpan(
+                        CurrentStart,
+                        contentLength: 1 /* end of file */
+                    )
+                )
+            );
         }
         return Transition(CSharpTokenizerState.Data, EndToken(SyntaxKind.StringLiteral));
     }
 
-    private StateResult QuotedCharacterLiteral() => QuotedLiteral('\'', IsEndQuotedCharacterLiteral, SyntaxKind.CharacterLiteral);
+    private StateResult QuotedCharacterLiteral() =>
+        QuotedLiteral('\'', IsEndQuotedCharacterLiteral, SyntaxKind.CharacterLiteral);
 
-    private StateResult QuotedStringLiteral() => QuotedLiteral('\"', IsEndQuotedStringLiteral, SyntaxKind.StringLiteral);
+    private StateResult QuotedStringLiteral() =>
+        QuotedLiteral('\"', IsEndQuotedStringLiteral, SyntaxKind.StringLiteral);
 
-    private readonly Func<char, bool> IsEndQuotedCharacterLiteral = (c) => c == '\\' || c == '\'' || ParserHelpers.IsNewLine(c);
-    private readonly Func<char, bool> IsEndQuotedStringLiteral = (c) => c == '\\' || c == '\"' || ParserHelpers.IsNewLine(c);
+    private readonly Func<char, bool> IsEndQuotedCharacterLiteral = (c) =>
+        c == '\\' || c == '\'' || ParserHelpers.IsNewLine(c);
+    private readonly Func<char, bool> IsEndQuotedStringLiteral = (c) =>
+        c == '\\' || c == '\"' || ParserHelpers.IsNewLine(c);
 
-    private StateResult QuotedLiteral(char quote, Func<char, bool> isEndQuotedLiteral, SyntaxKind literalType)
+    private StateResult QuotedLiteral(
+        char quote,
+        Func<char, bool> isEndQuotedLiteral,
+        SyntaxKind literalType
+    )
     {
         TakeUntil(isEndQuotedLiteral);
         if (CurrentCharacter == '\\')
@@ -580,7 +647,12 @@ internal class CSharpTokenizer : Tokenizer
         {
             CurrentErrors.Add(
                 RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                    new SourceSpan(CurrentStart, contentLength: 1 /* " */)));
+                    new SourceSpan(
+                        CurrentStart,
+                        contentLength: 1 /* " */
+                    )
+                )
+            );
         }
         else
         {
@@ -597,7 +669,12 @@ internal class CSharpTokenizer : Tokenizer
         {
             CurrentErrors.Add(
                 RazorDiagnosticFactory.CreateParsing_BlockCommentNotTerminated(
-                    new SourceSpan(CurrentStart, contentLength: 1 /* end of file */)));
+                    new SourceSpan(
+                        CurrentStart,
+                        contentLength: 1 /* end of file */
+                    )
+                )
+            );
 
             return Transition(CSharpTokenizerState.Data, EndToken(SyntaxKind.CSharpComment));
         }
@@ -647,8 +724,11 @@ internal class CSharpTokenizer : Tokenizer
         {
             return RealLiteral();
         }
-        else if (IsRealLiteralSuffix(CurrentCharacter) ||
-                 CurrentCharacter == 'E' || CurrentCharacter == 'e')
+        else if (
+            IsRealLiteralSuffix(CurrentCharacter)
+            || CurrentCharacter == 'E'
+            || CurrentCharacter == 'e'
+        )
         {
             return RealLiteralExponentPart();
         }
@@ -745,41 +825,46 @@ internal class CSharpTokenizer : Tokenizer
 
     private static bool IsIdentifierStart(char character)
     {
-        return char.IsLetter(character) ||
-               character == '_' ||
-               CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.LetterNumber;
+        return char.IsLetter(character)
+            || character == '_'
+            || CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.LetterNumber;
     }
 
     private static bool IsIdentifierPart(char character)
     {
-        return char.IsDigit(character) ||
-               IsIdentifierStart(character) ||
-               IsIdentifierPartByUnicodeCategory(character);
+        return char.IsDigit(character)
+            || IsIdentifierStart(character)
+            || IsIdentifierPartByUnicodeCategory(character);
     }
 
     private static bool IsRealLiteralSuffix(char character)
     {
-        return character == 'F' ||
-               character == 'f' ||
-               character == 'D' ||
-               character == 'd' ||
-               character == 'M' ||
-               character == 'm';
+        return character == 'F'
+            || character == 'f'
+            || character == 'D'
+            || character == 'd'
+            || character == 'M'
+            || character == 'm';
     }
 
     private static bool IsIdentifierPartByUnicodeCategory(char character)
     {
         var category = CharUnicodeInfo.GetUnicodeCategory(character);
 
-        return category == UnicodeCategory.NonSpacingMark || // Mn
-               category == UnicodeCategory.SpacingCombiningMark || // Mc
-               category == UnicodeCategory.ConnectorPunctuation || // Pc
-               category == UnicodeCategory.Format; // Cf
+        return category == UnicodeCategory.NonSpacingMark
+            || // Mn
+            category == UnicodeCategory.SpacingCombiningMark
+            || // Mc
+            category == UnicodeCategory.ConnectorPunctuation
+            || // Pc
+            category == UnicodeCategory.Format; // Cf
     }
 
     private static bool IsHexDigit(char value)
     {
-        return (value >= '0' && value <= '9') || (value >= 'A' && value <= 'F') || (value >= 'a' && value <= 'f');
+        return (value >= '0' && value <= '9')
+            || (value >= 'A' && value <= 'F')
+            || (value >= 'a' && value <= 'f');
     }
 
     internal static CSharpKeyword? GetTokenKeyword(SyntaxToken token)
@@ -799,7 +884,6 @@ internal class CSharpTokenizer : Tokenizer
         QuotedCharacterLiteral,
         QuotedStringLiteral,
         VerbatimStringLiteral,
-
         // Razor Comments - need to be the same for HTML and CSharp
         AfterRazorCommentTransition = RazorCommentTokenizerState.AfterRazorCommentTransition,
         EscapedRazorCommentTransition = RazorCommentTokenizerState.EscapedRazorCommentTransition,

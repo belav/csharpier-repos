@@ -17,6 +17,9 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial bool SetFileCompletionNotificationModes(SafeHandle handle, FileCompletionNotificationModes flags);
+        internal static partial bool SetFileCompletionNotificationModes(
+            SafeHandle handle,
+            FileCompletionNotificationModes flags
+        );
     }
 }

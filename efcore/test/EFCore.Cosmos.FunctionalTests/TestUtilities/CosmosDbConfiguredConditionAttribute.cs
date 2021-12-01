@@ -10,8 +10,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
     public class CosmosDbConfiguredConditionAttribute : Attribute, ITestCondition
     {
-        public string SkipReason
-            => "Unable to connect to Cosmos DB. Please install/start the emulator service or configure a valid endpoint.";
+        public string SkipReason =>
+            "Unable to connect to Cosmos DB. Please install/start the emulator service or configure a valid endpoint.";
 
         public ValueTask<bool> IsMetAsync() => CosmosTestStore.IsConnectionAvailableAsync();
     }

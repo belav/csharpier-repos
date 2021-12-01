@@ -6,13 +6,20 @@ using System.Collections;
 namespace System.Security.Permissions
 {
 #if NET5_0_OR_GREATER
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class KeyContainerPermissionAccessEntryEnumerator : IEnumerator
     {
         public KeyContainerPermissionAccessEntry Current { get; }
         object IEnumerator.Current { get; }
-        public bool MoveNext() { return false; }
+        public bool MoveNext()
+        {
+            return false;
+        }
         public void Reset() { }
     }
 }

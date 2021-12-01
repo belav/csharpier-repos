@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         void Generate(
             string builderName,
             IReadOnlyList<MigrationOperation> operations,
-            IndentedStringBuilder builder);
+            IndentedStringBuilder builder
+        );
     }
 }

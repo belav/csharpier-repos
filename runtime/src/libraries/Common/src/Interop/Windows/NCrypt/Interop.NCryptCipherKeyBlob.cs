@@ -8,6 +8,6 @@ internal static partial class Interop
     internal static partial class NCrypt
     {
         internal const string NCRYPT_CIPHER_KEY_BLOB = "CipherKeyBlob";
-        internal const int NCRYPT_CIPHER_KEY_BLOB_MAGIC = 0x52485043;  //'CPHR'
+        internal const int NCRYPT_CIPHER_KEY_BLOB_MAGIC = 0x52485043; //'CPHR'
     }
 }

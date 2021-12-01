@@ -17,7 +17,9 @@ namespace System.Diagnostics
                 EnsureState(State.HaveNonExitedId);
                 Interop.Process.proc_stats stat = Interop.Process.GetThreadInfo(_processId, 0);
 
-                return new DateTime(DateTime.UnixEpoch.Ticks + (stat.startTime * TimeSpan.TicksPerSecond)).ToLocalTime();
+                return new DateTime(
+                    DateTime.UnixEpoch.Ticks + (stat.startTime * TimeSpan.TicksPerSecond)
+                ).ToLocalTime();
             }
         }
 
@@ -70,7 +72,11 @@ namespace System.Diagnostics
             {
                 EnsureState(State.HaveNonExitedId);
 
-                Interop.Process.kinfo_proc* processInfo = Interop.Process.GetProcInfo(_processId, false, out int count);
+                Interop.Process.kinfo_proc* processInfo = Interop.Process.GetProcInfo(
+                    _processId,
+                    false,
+                    out int count
+                );
                 try
                 {
                     if (count <= 0)
@@ -82,7 +88,7 @@ namespace System.Diagnostics
                 }
                 finally
                 {
-                    Marshal.FreeHGlobal((IntPtr) processInfo);
+                    Marshal.FreeHGlobal((IntPtr)processInfo);
                 }
             }
         }
@@ -100,7 +106,6 @@ namespace System.Diagnostics
                 return null;
             }
         }
-
         // ----------------------------------
         // ---- Unix PAL layer ends here ----
         // ----------------------------------

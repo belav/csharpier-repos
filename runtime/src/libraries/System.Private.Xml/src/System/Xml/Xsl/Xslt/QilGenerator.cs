@@ -25,11 +25,10 @@ namespace System.Xml.Xsl.Xslt
 
     internal sealed class ReferenceReplacer : QilReplaceVisitor
     {
-        private QilReference? _lookFor, _replaceBy;
+        private QilReference? _lookFor,
+            _replaceBy;
 
-        public ReferenceReplacer(QilFactory f) : base(f)
-        {
-        }
+        public ReferenceReplacer(QilFactory f) : base(f) { }
 
         public QilNode Replace(QilNode expr, QilReference lookFor, QilReference replaceBy)
         {
@@ -129,8 +128,14 @@ namespace System.Xml.Xsl.Xslt
             get { return _compiler.IsDebug; }
         }
 
-        private bool EvaluateFuncCalls { get { return !IsDebug; } }
-        private bool InferXPathTypes { get { return !IsDebug; } }
+        private bool EvaluateFuncCalls
+        {
+            get { return !IsDebug; }
+        }
+        private bool InferXPathTypes
+        {
+            get { return !IsDebug; }
+        }
 
         private QilExpression Compile(Compiler compiler)
         {
@@ -227,13 +232,19 @@ namespace System.Xml.Xsl.Xslt
         {
             Debug.Assert(IsDebug && _curLoop.IsFocusSet);
             QilIterator i;
-            return _f.Loop(i = _f.Let(_f.InvokeOnCurrentNodeChanged(_curLoop.GetCurrent()!)), _f.Sequence());
+            return _f.Loop(
+                i = _f.Let(_f.InvokeOnCurrentNodeChanged(_curLoop.GetCurrent()!)),
+                _f.Sequence()
+            );
         }
 
         [Conditional("DEBUG")]
         private void CheckSingletonFocus()
         {
-            Debug.Assert(!_curLoop.IsFocusSet && !_funcFocus.IsFocusSet, "Must be compiled using singleton focus");
+            Debug.Assert(
+                !_curLoop.IsFocusSet && !_funcFocus.IsFocusSet,
+                "Must be compiled using singleton focus"
+            );
         }
 
         private void CompileInitializationCode()
@@ -270,7 +281,11 @@ namespace System.Xml.Xsl.Xslt
 
             if (init.NodeType == QilNodeType.Add)
             {
-                QilFunction initFunction = _f.Function(_f.FormalParameterList(), init, /*sideEffects:*/_f.True());
+                QilFunction initFunction = _f.Function(
+                    _f.FormalParameterList(),
+                    init, /*sideEffects:*/
+                    _f.True()
+                );
                 initFunction.DebugName = "Init";
                 _functions.Add(initFunction);
 
@@ -411,17 +426,28 @@ namespace System.Xml.Xsl.Xslt
 
             switch (var.Flags & XslFlags.TypeFilter)
             {
-                case XslFlags.String: return T.StringX;
-                case XslFlags.Number: return T.DoubleX;
-                case XslFlags.Boolean: return T.BooleanX;
-                case XslFlags.Node: return T.NodeNotRtf;
-                case XslFlags.Nodeset: return T.NodeNotRtfS;
-                case XslFlags.Rtf: return T.Node;
-                case XslFlags.Node | XslFlags.Rtf: return T.Node;
-                case XslFlags.Node | XslFlags.Nodeset: return T.NodeNotRtfS;
-                case XslFlags.Nodeset | XslFlags.Rtf: return T.NodeS;
-                case XslFlags.Node | XslFlags.Nodeset | XslFlags.Rtf: return T.NodeS;
-                default: return T.ItemS;
+                case XslFlags.String:
+                    return T.StringX;
+                case XslFlags.Number:
+                    return T.DoubleX;
+                case XslFlags.Boolean:
+                    return T.BooleanX;
+                case XslFlags.Node:
+                    return T.NodeNotRtf;
+                case XslFlags.Nodeset:
+                    return T.NodeNotRtfS;
+                case XslFlags.Rtf:
+                    return T.Node;
+                case XslFlags.Node | XslFlags.Rtf:
+                    return T.Node;
+                case XslFlags.Node | XslFlags.Nodeset:
+                    return T.NodeNotRtfS;
+                case XslFlags.Nodeset | XslFlags.Rtf:
+                    return T.NodeS;
+                case XslFlags.Node | XslFlags.Nodeset | XslFlags.Rtf:
+                    return T.NodeS;
+                default:
+                    return T.ItemS;
             }
         }
 
@@ -448,8 +474,10 @@ namespace System.Xml.Xsl.Xslt
                     Debug.Assert(nsList[i].NodeType == QilNodeType.NamespaceDecl);
                     Debug.Assert(varList[i].NodeType == QilNodeType.NamespaceDecl);
                     if (
-                        ((QilLiteral)((QilBinary)nsList[i]).Right).Value != ((QilLiteral)((QilBinary)varList[i]).Right).Value ||
-                        ((QilLiteral)((QilBinary)nsList[i]).Left).Value != ((QilLiteral)((QilBinary)varList[i]).Left).Value
+                        ((QilLiteral)((QilBinary)nsList[i]).Right).Value
+                            != ((QilLiteral)((QilBinary)varList[i]).Right).Value
+                        || ((QilLiteral)((QilBinary)nsList[i]).Left).Value
+                            != ((QilLiteral)((QilBinary)varList[i]).Left).Value
                     )
                     {
                         found = false;
@@ -458,7 +486,7 @@ namespace System.Xml.Xsl.Xslt
                 }
                 if (found)
                 {
-                    return var;  // Found!
+                    return var; // Found!
                 }
             }
             QilIterator newVar = _f.Let(nsList);
@@ -478,7 +506,10 @@ namespace System.Xml.Xsl.Xslt
             foreach (ProtoTemplate tmpl in _compiler.AllTemplates)
             {
                 Debug.Assert(tmpl != null && tmpl.Function == null);
-                Debug.Assert(tmpl.NodeType == XslNodeType.AttributeSet || tmpl.NodeType == XslNodeType.Template);
+                Debug.Assert(
+                    tmpl.NodeType == XslNodeType.AttributeSet
+                        || tmpl.NodeType == XslNodeType.Template
+                );
                 QilList args = _f.FormalParameterList();
                 XslFlags flags = !IsDebug ? tmpl.Flags : XslFlags.FullFocus;
 
@@ -524,11 +555,22 @@ namespace System.Xml.Xsl.Xslt
                         {
                             VarPar xslPar = (VarPar)node;
                             EnterScope(xslPar);
-                            if (_scope.IsLocalVariable(xslPar.Name!.LocalName, xslPar.Name.NamespaceUri))
+                            if (
+                                _scope.IsLocalVariable(
+                                    xslPar.Name!.LocalName,
+                                    xslPar.Name.NamespaceUri
+                                )
+                            )
                             {
-                                ReportError(/*[XT0580]*/SR.Xslt_DupLocalVariable, xslPar.Name.QualifiedName);
+                                ReportError( /*[XT0580]*/
+                                    SR.Xslt_DupLocalVariable,
+                                    xslPar.Name.QualifiedName
+                                );
                             }
-                            QilParameter param = CreateXslParam(xslPar.Name, ChooseBestType(xslPar));
+                            QilParameter param = CreateXslParam(
+                                xslPar.Name,
+                                ChooseBestType(xslPar)
+                            );
                             if (IsDebug)
                             {
                                 param.Annotation = xslPar;
@@ -563,12 +605,16 @@ namespace System.Xml.Xsl.Xslt
                                     // Param doesn't know what implicit args it needs, so we pass all implicit args that was passed to its template.
                                     // let's reflect this fact in parans FocusFlags:
                                     xslPar.Flags |= (template.Flags & XslFlags.FocusFilter);
-                                    QilFunction paramFunc = _f.Function(paramFormal,
-                                        _f.Boolean((xslPar.DefValueFlags & XslFlags.SideEffects) != 0),
+                                    QilFunction paramFunc = _f.Function(
+                                        paramFormal,
+                                        _f.Boolean(
+                                            (xslPar.DefValueFlags & XslFlags.SideEffects) != 0
+                                        ),
                                         ChooseBestType(xslPar)
                                     );
                                     paramFunc.SourceLine = SourceLineInfo.NoSource;
-                                    paramFunc.DebugName = $"<xsl:param name=\"{xslPar.Name.QualifiedName}\">";
+                                    paramFunc.DebugName =
+                                        $"<xsl:param name=\"{xslPar.Name.QualifiedName}\">";
                                     param.DefaultValue = _f.Invoke(paramFunc, paramActual);
                                     // store VarPar here to compile it on next pass:
                                     if (paramWithCalls == null)
@@ -596,12 +642,16 @@ namespace System.Xml.Xsl.Xslt
                 }
                 ExitScope();
 
-                tmpl.Function = _f.Function(args,
+                tmpl.Function = _f.Function(
+                    args,
                     _f.Boolean((tmpl.Flags & XslFlags.SideEffects) != 0),
                     tmpl is AttributeSet ? T.AttributeS : T.NodeNotRtfS
                 );
                 tmpl.Function.DebugName = tmpl.GetDebugName();
-                Debug.Assert((template != null) == (tmpl.SourceLine != null), "Templates must have line information, and attribute sets must not");
+                Debug.Assert(
+                    (template != null) == (tmpl.SourceLine != null),
+                    "Templates must have line information, and attribute sets must not"
+                );
                 SetLineInfo(tmpl.Function, tmpl.SourceLine ?? SourceLineInfo.NoSource);
                 _functions.Add(tmpl.Function);
             } // foreach (ProtoTemplate tmpl in compiler.AllTemplates)
@@ -609,7 +659,10 @@ namespace System.Xml.Xsl.Xslt
             // Finish compiling postponed parameters (those having calls in their default values)
             if (paramWithCalls != null)
             {
-                Debug.Assert(!IsDebug, "In debug mode we don't generate parumWithCalls functions. Otherwise focus flags should be adjusted");
+                Debug.Assert(
+                    !IsDebug,
+                    "In debug mode we don't generate parumWithCalls functions. Otherwise focus flags should be adjusted"
+                );
                 foreach (VarPar par in paramWithCalls)
                 {
                     Template tmpl = paramToTemplate![par];
@@ -642,12 +695,19 @@ namespace System.Xml.Xsl.Xslt
 
         private void CompileProtoTemplate(ProtoTemplate tmpl)
         {
-            Debug.Assert(tmpl != null && tmpl.Function != null && tmpl.Function.Definition.NodeType == QilNodeType.Unknown);
+            Debug.Assert(
+                tmpl != null
+                    && tmpl.Function != null
+                    && tmpl.Function.Definition.NodeType == QilNodeType.Unknown
+            );
 
             EnterScope(tmpl);
 
             CheckSingletonFocus();
-            _funcFocus.StartFocus(tmpl.Function.Arguments, !IsDebug ? tmpl.Flags : XslFlags.FullFocus);
+            _funcFocus.StartFocus(
+                tmpl.Function.Arguments,
+                !IsDebug ? tmpl.Flags : XslFlags.FullFocus
+            );
             foreach (QilParameter arg in tmpl.Function.Arguments)
             {
                 if (arg.Name!.NamespaceUri != XmlReservedNs.NsXslDebug)
@@ -713,36 +773,87 @@ namespace System.Xml.Xsl.Xslt
 
                 switch (nodeType)
                 {
-                    case XslNodeType.ApplyImports: result = CompileApplyImports(node); break;
-                    case XslNodeType.ApplyTemplates: result = CompileApplyTemplates((XslNodeEx)node); break;
-                    case XslNodeType.Attribute: result = CompileAttribute((NodeCtor)node); break;
-                    case XslNodeType.CallTemplate: result = CompileCallTemplate((XslNodeEx)node); break;
-                    case XslNodeType.Choose: result = CompileChoose(node); break;
-                    case XslNodeType.Comment: result = CompileComment(node); break;
-                    case XslNodeType.Copy: result = CompileCopy(node); break;
-                    case XslNodeType.CopyOf: result = CompileCopyOf(node); break;
-                    case XslNodeType.Element: result = CompileElement((NodeCtor)node); break;
-                    case XslNodeType.Error: result = CompileError(node); break;
-                    case XslNodeType.ForEach: result = CompileForEach((XslNodeEx)node); break;
-                    case XslNodeType.If: result = CompileIf(node); break;
-                    case XslNodeType.List: result = CompileList(node); break;
-                    case XslNodeType.LiteralAttribute: result = CompileLiteralAttribute(node); break;
-                    case XslNodeType.LiteralElement: result = CompileLiteralElement(node); break;
-                    case XslNodeType.Message: result = CompileMessage(node); break;
-                    case XslNodeType.Nop: result = CompileNop(node); break;
-                    case XslNodeType.Number: result = CompileNumber((Number)node); break;
+                    case XslNodeType.ApplyImports:
+                        result = CompileApplyImports(node);
+                        break;
+                    case XslNodeType.ApplyTemplates:
+                        result = CompileApplyTemplates((XslNodeEx)node);
+                        break;
+                    case XslNodeType.Attribute:
+                        result = CompileAttribute((NodeCtor)node);
+                        break;
+                    case XslNodeType.CallTemplate:
+                        result = CompileCallTemplate((XslNodeEx)node);
+                        break;
+                    case XslNodeType.Choose:
+                        result = CompileChoose(node);
+                        break;
+                    case XslNodeType.Comment:
+                        result = CompileComment(node);
+                        break;
+                    case XslNodeType.Copy:
+                        result = CompileCopy(node);
+                        break;
+                    case XslNodeType.CopyOf:
+                        result = CompileCopyOf(node);
+                        break;
+                    case XslNodeType.Element:
+                        result = CompileElement((NodeCtor)node);
+                        break;
+                    case XslNodeType.Error:
+                        result = CompileError(node);
+                        break;
+                    case XslNodeType.ForEach:
+                        result = CompileForEach((XslNodeEx)node);
+                        break;
+                    case XslNodeType.If:
+                        result = CompileIf(node);
+                        break;
+                    case XslNodeType.List:
+                        result = CompileList(node);
+                        break;
+                    case XslNodeType.LiteralAttribute:
+                        result = CompileLiteralAttribute(node);
+                        break;
+                    case XslNodeType.LiteralElement:
+                        result = CompileLiteralElement(node);
+                        break;
+                    case XslNodeType.Message:
+                        result = CompileMessage(node);
+                        break;
+                    case XslNodeType.Nop:
+                        result = CompileNop(node);
+                        break;
+                    case XslNodeType.Number:
+                        result = CompileNumber((Number)node);
+                        break;
                     //              case XslNodeType.Otherwise:         wrapped by Choose
                     //              case XslNodeType.Param:             already compiled by CompileProtoTemplate()
-                    case XslNodeType.PI: result = CompilePI(node); break;
+                    case XslNodeType.PI:
+                        result = CompilePI(node);
+                        break;
                     //              case XslNodeType.Sort:              wrapped by ForEach or ApplyTemplates, see CompileSorts()
                     //              case XslNodeType.Template:          global level element
-                    case XslNodeType.Text: result = CompileText((Text)node); break;
-                    case XslNodeType.UseAttributeSet: result = CompileUseAttributeSet(node); break;
-                    case XslNodeType.ValueOf: result = CompileValueOf(node); break;
-                    case XslNodeType.ValueOfDoe: result = CompileValueOfDoe(node); break;
-                    case XslNodeType.Variable: result = CompileVariable(node); break;
+                    case XslNodeType.Text:
+                        result = CompileText((Text)node);
+                        break;
+                    case XslNodeType.UseAttributeSet:
+                        result = CompileUseAttributeSet(node);
+                        break;
+                    case XslNodeType.ValueOf:
+                        result = CompileValueOf(node);
+                        break;
+                    case XslNodeType.ValueOfDoe:
+                        result = CompileValueOfDoe(node);
+                        break;
+                    case XslNodeType.Variable:
+                        result = CompileVariable(node);
+                        break;
                     //              case XslNodeType.WithParam:         wrapped by CallTemplate or ApplyTemplates, see CompileWithParam()
-                    default: Debug.Fail($"Unexpected type of AST node: {nodeType}"); result = null; break;
+                    default:
+                        Debug.Fail($"Unexpected type of AST node: {nodeType}");
+                        result = null;
+                        break;
                 }
 
                 ExitScope();
@@ -753,7 +864,10 @@ namespace System.Xml.Xsl.Xslt
                 }
 
                 // Do not create sequence points for literal attributes and use-attribute-sets
-                if (nodeType != XslNodeType.LiteralAttribute && nodeType != XslNodeType.UseAttributeSet)
+                if (
+                    nodeType != XslNodeType.LiteralAttribute
+                    && nodeType != XslNodeType.UseAttributeSet
+                )
                 {
                     SetLineInfoCheck(result, node.SourceLine);
                 }
@@ -807,7 +921,7 @@ namespace System.Xml.Xsl.Xslt
             // untouched, changing only namespace URIs.
             bool changePrefixes = true;
 
-        Start:
+            Start:
             _prefixesInUse.Clear();
 
             QilName qname = node.Name!;
@@ -875,16 +989,31 @@ namespace System.Xml.Xsl.Xslt
             QilNode qilName = CompileStringAvt(node.NameAvt);
             QilNode qname;
 
-            if (qilName.NodeType == QilNodeType.LiteralString && (qilNs == null || qilNs.NodeType == QilNodeType.LiteralString))
+            if (
+                qilName.NodeType == QilNodeType.LiteralString
+                && (qilNs == null || qilNs.NodeType == QilNodeType.LiteralString)
+            )
             {
                 string name = (string)(QilLiteral)qilName;
-                string prefix, local, nsUri;
+                string prefix,
+                    local,
+                    nsUri;
 
-                bool isValid = _compiler.ParseQName(name, out prefix, out local, (IErrorHelper)this);
+                bool isValid = _compiler.ParseQName(
+                    name,
+                    out prefix,
+                    out local,
+                    (IErrorHelper)this
+                );
 
                 if (qilNs == null)
                 {
-                    nsUri = isValid ? ResolvePrefix(/*ignoreDefaultNs:*/false, prefix) : _compiler.CreatePhantomNamespace();
+                    nsUri = isValid
+                        ? ResolvePrefix( /*ignoreDefaultNs:*/
+                              false,
+                              prefix
+                          )
+                        : _compiler.CreatePhantomNamespace();
                 }
                 else
                 {
@@ -893,14 +1022,17 @@ namespace System.Xml.Xsl.Xslt
                 qname = _f.QName(local, nsUri, prefix);
             }
             else
-            {           // Process AVT
+            { // Process AVT
                 if (qilNs != null)
                 {
                     qname = _f.StrParseQName(qilName, qilNs);
                 }
                 else
                 {
-                    qname = ResolveQNameDynamic(/*ignoreDefaultNs:*/false, qilName);
+                    qname = ResolveQNameDynamic( /*ignoreDefaultNs:*/
+                        false,
+                        qilName
+                    );
                 }
             }
 
@@ -934,16 +1066,31 @@ namespace System.Xml.Xsl.Xslt
             QilNode qname;
             bool explicitNamespace = false;
 
-            if (qilName.NodeType == QilNodeType.LiteralString && (qilNs == null || qilNs.NodeType == QilNodeType.LiteralString))
+            if (
+                qilName.NodeType == QilNodeType.LiteralString
+                && (qilNs == null || qilNs.NodeType == QilNodeType.LiteralString)
+            )
             {
                 string name = (string)(QilLiteral)qilName;
-                string prefix, local, nsUri;
+                string prefix,
+                    local,
+                    nsUri;
 
-                bool isValid = _compiler.ParseQName(name, out prefix, out local, (IErrorHelper)this);
+                bool isValid = _compiler.ParseQName(
+                    name,
+                    out prefix,
+                    out local,
+                    (IErrorHelper)this
+                );
 
                 if (qilNs == null)
                 {
-                    nsUri = isValid ? ResolvePrefix(/*ignoreDefaultNs:*/true, prefix) : _compiler.CreatePhantomNamespace();
+                    nsUri = isValid
+                        ? ResolvePrefix( /*ignoreDefaultNs:*/
+                              true,
+                              prefix
+                          )
+                        : _compiler.CreatePhantomNamespace();
                 }
                 else
                 {
@@ -954,7 +1101,11 @@ namespace System.Xml.Xsl.Xslt
                 // Check the case <xsl:attribute name="foo:xmlns" namespace=""/>
                 if (name == "xmlns" || local == "xmlns" && nsUri.Length == 0)
                 {
-                    ReportError(/*[XT_031]*/SR.Xslt_XmlnsAttr, "name", name);
+                    ReportError( /*[XT_031]*/
+                        SR.Xslt_XmlnsAttr,
+                        "name",
+                        name
+                    );
                 }
                 qname = _f.QName(local, nsUri, prefix);
             }
@@ -967,7 +1118,10 @@ namespace System.Xml.Xsl.Xslt
                 }
                 else
                 {
-                    qname = ResolveQNameDynamic(/*ignoreDefaultNs:*/true, qilName);
+                    qname = ResolveQNameDynamic( /*ignoreDefaultNs:*/
+                        true,
+                        qilName
+                    );
                 }
             }
             if (explicitNamespace)
@@ -983,7 +1137,8 @@ namespace System.Xml.Xsl.Xslt
         private QilNode? ExtractText(string source, ref int pos)
         {
             Debug.Assert(pos < source.Length);
-            int i, start = pos;
+            int i,
+                start = pos;
 
             _unescapedText.Length = 0;
             for (i = pos; i < source.Length; i++)
@@ -993,27 +1148,34 @@ namespace System.Xml.Xsl.Xslt
                 if (ch == '{' || ch == '}')
                 {
                     if (i + 1 < source.Length && source[i + 1] == ch)
-                    {     // "{{" or "}}"
+                    { // "{{" or "}}"
                         // Double curly brace outside an expression is replaced by a single one
                         i++;
                         _unescapedText.Append(source, start, i - start);
                         start = i + 1;
                     }
                     else if (ch == '{')
-                    {                                 // single '{'
+                    { // single '{'
                         // Expression encountered, returning
                         break;
                     }
                     else
-                    {                                                // single '}'
+                    { // single '}'
                         // Single '}' outside an expression is an error
                         pos = source.Length;
                         if (_xslVersion != XslVersion.ForwardsCompatible)
                         {
-                            ReportError(/*[XT0370]*/SR.Xslt_SingleRightBraceInAvt, source);
+                            ReportError( /*[XT0370]*/
+                                SR.Xslt_SingleRightBraceInAvt,
+                                source
+                            );
                             return null;
                         }
-                        return _f.Error(_lastScope!.SourceLine, SR.Xslt_SingleRightBraceInAvt, source);
+                        return _f.Error(
+                            _lastScope!.SourceLine,
+                            SR.Xslt_SingleRightBraceInAvt,
+                            source
+                        );
                     }
                 }
             }
@@ -1186,7 +1348,11 @@ namespace System.Xml.Xsl.Xslt
                     if (IsDebug || !(val is QilIterator || val is QilLiteral))
                     {
                         QilIterator let = _f.Let(val!);
-                        let.DebugName = _f.QName($"with-param {withParam.Name!.QualifiedName}", XmlReservedNs.NsXslDebug).ToString();
+                        let.DebugName = _f.QName(
+                                $"with-param {withParam.Name!.QualifiedName}",
+                                XmlReservedNs.NsXslDebug
+                            )
+                            .ToString();
                         _varHelper.AddVariable(let);
                         withParam.Value = let;
                     }
@@ -1217,7 +1383,10 @@ namespace System.Xml.Xsl.Xslt
         private QilNode CompileApplyImports(XslNode node)
         {
             Debug.Assert(node.NodeType == XslNodeType.ApplyImports);
-            Debug.Assert(!_curLoop.IsFocusSet, "xsl:apply-imports cannot be inside of xsl:for-each");
+            Debug.Assert(
+                !_curLoop.IsFocusSet,
+                "xsl:apply-imports cannot be inside of xsl:for-each"
+            );
 
             return GenerateApply((StylesheetLevel)node.Arg!, node);
         }
@@ -1236,7 +1405,11 @@ namespace System.Xml.Xsl.Xslt
                 {
                     QilNode val = withParam.Value!;
                     QilIterator let = _f.Let(val);
-                    let.DebugName = _f.QName($"with-param {withParam.Name!.QualifiedName}", XmlReservedNs.NsXslDebug).ToString();
+                    let.DebugName = _f.QName(
+                            $"with-param {withParam.Name!.QualifiedName}",
+                            XmlReservedNs.NsXslDebug
+                        )
+                        .ToString();
                     _varHelper.AddVariable(let);
                     withParam.Value = let;
                 }
@@ -1248,13 +1421,20 @@ namespace System.Xml.Xsl.Xslt
                 if (_compiler.NamedTemplates.TryGetValue(node.Name!, out tmpl))
                 {
                     Debug.Assert(tmpl.Function != null, "All templates should be already compiled");
-                    result = _invkGen.GenerateInvoke(tmpl.Function, AddRemoveImplicitArgs(node.Content, tmpl.Flags)!);
+                    result = _invkGen.GenerateInvoke(
+                        tmpl.Function,
+                        AddRemoveImplicitArgs(node.Content, tmpl.Flags)!
+                    );
                 }
                 else
                 {
                     if (!_compiler.IsPhantomName(node.Name!))
                     {
-                        _compiler.ReportError(/*[XT0710]*/node.SourceLine!, SR.Xslt_InvalidCallTemplate, node.Name!.QualifiedName);
+                        _compiler.ReportError( /*[XT0710]*/
+                            node.SourceLine!,
+                            SR.Xslt_InvalidCallTemplate,
+                            node.Name!.QualifiedName
+                        );
                     }
                     result = _f.Sequence();
                 }
@@ -1283,19 +1463,28 @@ namespace System.Xml.Xsl.Xslt
             if (_compiler.AttributeSets.TryGetValue(node.Name!, out attSet))
             {
                 Debug.Assert(attSet.Function != null, "All templates should be already compiled");
-                return _invkGen.GenerateInvoke(attSet.Function, AddRemoveImplicitArgs(node.Content, attSet.Flags)!);
+                return _invkGen.GenerateInvoke(
+                    attSet.Function,
+                    AddRemoveImplicitArgs(node.Content, attSet.Flags)!
+                );
             }
             else
             {
                 if (!_compiler.IsPhantomName(node.Name!))
                 {
-                    _compiler.ReportError(/*[XT0710]*/node.SourceLine!, SR.Xslt_NoAttributeSet, node.Name!.QualifiedName);
+                    _compiler.ReportError( /*[XT0710]*/
+                        node.SourceLine!,
+                        SR.Xslt_NoAttributeSet,
+                        node.Name!.QualifiedName
+                    );
                 }
                 return _f.Sequence();
             }
         }
 
-        private const XmlNodeKindFlags InvalidatingNodes = (XmlNodeKindFlags.Attribute | XmlNodeKindFlags.Namespace);
+        private const XmlNodeKindFlags InvalidatingNodes = (
+            XmlNodeKindFlags.Attribute | XmlNodeKindFlags.Namespace
+        );
 
         private QilNode CompileCopy(XslNode copy)
         {
@@ -1323,7 +1512,10 @@ namespace System.Xml.Xsl.Xslt
                 // xsl:copy will not create a document node, but will just use the content template
                 return CompileInstructions(copy.Content);
             }
-            else if ((node.XmlType.NodeKinds & (XmlNodeKindFlags.Element | XmlNodeKindFlags.Document)) == XmlNodeKindFlags.None)
+            else if (
+                (node.XmlType.NodeKinds & (XmlNodeKindFlags.Element | XmlNodeKindFlags.Document))
+                == XmlNodeKindFlags.None
+            )
             {
                 // Context node is neither an element, nor a document
                 // The content of xsl:copy is not instantiated
@@ -1346,7 +1538,11 @@ namespace System.Xml.Xsl.Xslt
                     _outputScope.InvalidateAllPrefixes();
                 }
 
-                if (selectExpr.XmlType.IsNotRtf && (selectExpr.XmlType.NodeKinds & XmlNodeKindFlags.Document) == XmlNodeKindFlags.None)
+                if (
+                    selectExpr.XmlType.IsNotRtf
+                    && (selectExpr.XmlType.NodeKinds & XmlNodeKindFlags.Document)
+                        == XmlNodeKindFlags.None
+                )
                 {
                     // Expression returns non-document nodes only
                     return selectExpr;
@@ -1377,7 +1573,8 @@ namespace System.Xml.Xsl.Xslt
                 _outputScope.InvalidateAllPrefixes();
                 return _f.Loop(
                     it = _f.For(selectExpr),
-                    _f.Conditional(_f.IsType(it, T.Node),
+                    _f.Conditional(
+                        _f.IsType(it, T.Node),
                         _f.XsltCopyOf(_f.TypeAssert(it, T.Node)),
                         _f.TextCtor(_f.XsltConvert(it, T.StringX))
                     )
@@ -1387,18 +1584,34 @@ namespace System.Xml.Xsl.Xslt
 
         private QilNode CompileValueOf(XslNode valueOf)
         {
-            return _f.TextCtor(_f.ConvertToString(CompileXPathExpression(/*select:*/valueOf.Select)));
+            return _f.TextCtor(
+                _f.ConvertToString(
+                    CompileXPathExpression( /*select:*/
+                        valueOf.Select
+                    )
+                )
+            );
         }
 
         private QilNode CompileValueOfDoe(XslNode valueOf)
         {
-            return _f.RawTextCtor(_f.ConvertToString(CompileXPathExpression(/*select:*/valueOf.Select)));
+            return _f.RawTextCtor(
+                _f.ConvertToString(
+                    CompileXPathExpression( /*select:*/
+                        valueOf.Select
+                    )
+                )
+            );
         }
 
         private QilNode CompileWhen(XslNode whenNode, QilNode otherwise)
         {
             return _f.Conditional(
-                _f.ConvertToBoolean(CompileXPathExpression(/*test:*/whenNode.Select)),
+                _f.ConvertToBoolean(
+                    CompileXPathExpression( /*test:*/
+                        whenNode.Select
+                    )
+                ),
                 CompileInstructions(whenNode.Content),
                 otherwise
             );
@@ -1418,16 +1631,24 @@ namespace System.Xml.Xsl.Xslt
             for (int i = cases.Count - 1; 0 <= i; i--)
             {
                 XslNode when = cases[i];
-                Debug.Assert(when.NodeType == XslNodeType.If || when.NodeType == XslNodeType.Otherwise);
+                Debug.Assert(
+                    when.NodeType == XslNodeType.If || when.NodeType == XslNodeType.Otherwise
+                );
                 QilList? nsList = EnterScope(when);
                 if (when.NodeType == XslNodeType.Otherwise)
                 {
-                    Debug.Assert(result == null, "xsl:otherwise must be the last child of xsl:choose");
+                    Debug.Assert(
+                        result == null,
+                        "xsl:otherwise must be the last child of xsl:choose"
+                    );
                     result = CompileInstructions(when.Content);
                 }
                 else
                 {
-                    result = CompileWhen(when, /*otherwise:*/result ?? InstructionList());
+                    result = CompileWhen(
+                        when, /*otherwise:*/
+                        result ?? InstructionList()
+                    );
                 }
                 ExitScope();
                 SetLineInfoCheck(result, when.SourceLine);
@@ -1464,14 +1685,21 @@ namespace System.Xml.Xsl.Xslt
             Debug.Assert(node.NodeType == XslNodeType.Variable);
             if (_scope.IsLocalVariable(node.Name!.LocalName, node.Name.NamespaceUri))
             {
-                ReportError(/*[XT_030]*/SR.Xslt_DupLocalVariable, node.Name.QualifiedName);
+                ReportError( /*[XT_030]*/
+                    SR.Xslt_DupLocalVariable,
+                    node.Name.QualifiedName
+                );
             }
             return CompileVarParValue(node);
         }
 
         private QilNode CompileVarParValue(XslNode node)
         {
-            Debug.Assert(node.NodeType == XslNodeType.Variable || node.NodeType == XslNodeType.Param || node.NodeType == XslNodeType.WithParam);
+            Debug.Assert(
+                node.NodeType == XslNodeType.Variable
+                    || node.NodeType == XslNodeType.Param
+                    || node.NodeType == XslNodeType.WithParam
+            );
             VerifyXPathQName(node.Name!);
 
             string? baseUri = _lastScope!.SourceLine!.Uri;
@@ -1557,7 +1785,11 @@ namespace System.Xml.Xsl.Xslt
             else if (result.NodeType == QilNodeType.LiteralString)
             {
                 string lang = (string)(QilLiteral)result;
-                string cultName = XsltLibrary.LangToNameInternal(lang, fwdCompat, (IErrorHelper)this);
+                string cultName = XsltLibrary.LangToNameInternal(
+                    lang,
+                    fwdCompat,
+                    (IErrorHelper)this
+                );
                 if (cultName == XsltLibrary.InvariantCultureName)
                 {
                     result = null;
@@ -1567,8 +1799,13 @@ namespace System.Xml.Xsl.Xslt
             {
                 // NOTE: We should have the same checks for both compile time and execution time
                 QilIterator i;
-                result = _f.Loop(i = _f.Let(result),
-                    _f.Conditional(_f.Eq(_f.InvokeLangToLcid(i, fwdCompat), _f.Int32(XsltLibrary.InvariantCultureLcid)),
+                result = _f.Loop(
+                    i = _f.Let(result),
+                    _f.Conditional(
+                        _f.Eq(
+                            _f.InvokeLangToLcid(i, fwdCompat),
+                            _f.Int32(XsltLibrary.InvariantCultureLcid)
+                        ),
                         _f.String(string.Empty),
                         i
                     )
@@ -1590,7 +1827,13 @@ namespace System.Xml.Xsl.Xslt
             }
             else if (lang.NodeType == QilNodeType.LiteralString)
             {
-                return _f.String(XsltLibrary.LangToNameInternal((string)(QilLiteral)lang, fwdCompat, (IErrorHelper)this));
+                return _f.String(
+                    XsltLibrary.LangToNameInternal(
+                        (string)(QilLiteral)lang,
+                        fwdCompat,
+                        (IErrorHelper)this
+                    )
+                );
             }
             else
             {
@@ -1598,7 +1841,12 @@ namespace System.Xml.Xsl.Xslt
             }
         }
 
-        private void CompileDataTypeAttribute(string? attValue, bool fwdCompat, ref QilNode select, out QilNode? select2)
+        private void CompileDataTypeAttribute(
+            string? attValue,
+            bool fwdCompat,
+            ref QilNode select,
+            out QilNode? select2
+        )
         {
             const string DtText = "text";
             const string DtNumber = "number";
@@ -1623,16 +1871,33 @@ namespace System.Xml.Xsl.Xslt
                         if (!fwdCompat)
                         {
                             // check for qname-but-not-ncname
-                            string prefix, local, nsUri;
-                            bool isValid = _compiler.ParseQName(dataType, out prefix, out local, (IErrorHelper)this);
-                            nsUri = isValid ? ResolvePrefix(/*ignoreDefaultNs:*/true, prefix) : _compiler.CreatePhantomNamespace();
+                            string prefix,
+                                local,
+                                nsUri;
+                            bool isValid = _compiler.ParseQName(
+                                dataType,
+                                out prefix,
+                                out local,
+                                (IErrorHelper)this
+                            );
+                            nsUri = isValid
+                                ? ResolvePrefix( /*ignoreDefaultNs:*/
+                                      true,
+                                      prefix
+                                  )
+                                : _compiler.CreatePhantomNamespace();
 
                             if (nsUri.Length == 0)
                             {
                                 // this is a ncname; we might report SR.Xslt_InvalidAttrValue,
                                 // but the following error message is more user friendly
                             }
-                            ReportError(/*[XT_034]*/SR.Xslt_BistateAttribute, "data-type", DtText, DtNumber);
+                            ReportError( /*[XT_034]*/
+                                SR.Xslt_BistateAttribute,
+                                "data-type",
+                                DtText,
+                                DtNumber
+                            );
                         }
                         // fall through to default case
                     }
@@ -1640,25 +1905,48 @@ namespace System.Xml.Xsl.Xslt
                 else
                 {
                     // Precalculate its value outside of for-each loop
-                    QilIterator dt, qname;
+                    QilIterator dt,
+                        qname;
 
-                    result = _f.Loop(dt = _f.Let(result),
-                        _f.Conditional(_f.Eq(dt, _f.String(DtNumber)), _f.False(),
-                        _f.Conditional(_f.Eq(dt, _f.String(DtText)), _f.True(),
-                        fwdCompat ? _f.True() :
-                        _f.Loop(qname = _f.Let(ResolveQNameDynamic(/*ignoreDefaultNs:*/true, dt)),
-                            _f.Error(_lastScope!.SourceLine,
-                                SR.Xslt_BistateAttribute, "data-type", DtText, DtNumber
+                    result = _f.Loop(
+                        dt = _f.Let(result),
+                        _f.Conditional(
+                            _f.Eq(dt, _f.String(DtNumber)),
+                            _f.False(),
+                            _f.Conditional(
+                                _f.Eq(dt, _f.String(DtText)),
+                                _f.True(),
+                                fwdCompat
+                                  ? _f.True()
+                                  : _f.Loop(
+                                        qname = _f.Let(
+                                            ResolveQNameDynamic( /*ignoreDefaultNs:*/
+                                                true,
+                                                dt
+                                            )
+                                        ),
+                                        _f.Error(
+                                            _lastScope!.SourceLine,
+                                            SR.Xslt_BistateAttribute,
+                                            "data-type",
+                                            DtText,
+                                            DtNumber
+                                        )
+                                    )
                             )
                         )
-                    )));
+                    );
 
                     QilIterator text = _f.Let(result);
                     _varHelper.AddVariable(text);
 
                     // Make two sort keys since heterogenous sort keys are not allowed
                     select2 = select.DeepClone(_f.BaseFactory);
-                    select = _f.Conditional(text, _f.ConvertToString(select), _f.String(string.Empty));
+                    select = _f.Conditional(
+                        text,
+                        _f.ConvertToString(select),
+                        _f.String(string.Empty)
+                    );
                     select2 = _f.Conditional(text, _f.Double(0), _f.ConvertToNumber(select2));
                     return;
                 }
@@ -1683,7 +1971,13 @@ namespace System.Xml.Xsl.Xslt
         /// If AVT evaluates to neither value0 nor value1 and fwdCompat == false, an error is reported.
         /// </returns>
         [return: NotNullIfNotNull("attName")]
-        private QilNode CompileOrderAttribute(string attName, string? attValue, string value0, string value1, bool fwdCompat)
+        private QilNode CompileOrderAttribute(
+            string attName,
+            string? attValue,
+            string value0,
+            string value1,
+            bool fwdCompat
+        )
         {
             QilNode? result = CompileStringAvt(attValue);
             if (result != null)
@@ -1699,7 +1993,12 @@ namespace System.Xml.Xsl.Xslt
                     {
                         if (value != value0 && !fwdCompat)
                         {
-                            ReportError(/*[XT_034]*/SR.Xslt_BistateAttribute, attName, value0, value1);
+                            ReportError( /*[XT_034]*/
+                                SR.Xslt_BistateAttribute,
+                                attName,
+                                value0,
+                                value1
+                            );
                         }
                         result = _f.String("0");
                     }
@@ -1707,14 +2006,26 @@ namespace System.Xml.Xsl.Xslt
                 else
                 {
                     QilIterator i;
-                    result = _f.Loop(i = _f.Let(result),
-                        _f.Conditional(_f.Eq(i, _f.String(value1)), _f.String("1"),
-                        fwdCompat ? _f.String("0") :
-                        _f.Conditional(_f.Eq(i, _f.String(value0)), _f.String("0"),
-                        _f.Error(_lastScope!.SourceLine,
-                            SR.Xslt_BistateAttribute, attName, value0, value1
+                    result = _f.Loop(
+                        i = _f.Let(result),
+                        _f.Conditional(
+                            _f.Eq(i, _f.String(value1)),
+                            _f.String("1"),
+                            fwdCompat
+                              ? _f.String("0")
+                              : _f.Conditional(
+                                    _f.Eq(i, _f.String(value0)),
+                                    _f.String("0"),
+                                    _f.Error(
+                                        _lastScope!.SourceLine,
+                                        SR.Xslt_BistateAttribute,
+                                        attName,
+                                        value0,
+                                        value1
+                                    )
+                                )
                         )
-                    )));
+                    );
                 }
                 Debug.Assert(result.XmlType == T.StringX);
             }
@@ -1726,7 +2037,10 @@ namespace System.Xml.Xsl.Xslt
         {
             Debug.Assert(sort.NodeType == XslNodeType.Sort);
             QilNode select;
-            QilNode? select2, lang, order, caseOrder;
+            QilNode? select2,
+                lang,
+                order,
+                caseOrder;
             bool fwdCompat;
 
             EnterScope(sort);
@@ -1734,7 +2048,12 @@ namespace System.Xml.Xsl.Xslt
 
             select = CompileXPathExpression(sort.Select);
 
-            if (sort.Lang != null || sort.DataType != null || sort.Order != null || sort.CaseOrder != null)
+            if (
+                sort.Lang != null
+                || sort.DataType != null
+                || sort.Order != null
+                || sort.CaseOrder != null
+            )
             {
                 // Calculate these attributes in the context of the parent loop
                 LoopFocus curLoopSaved = _curLoop;
@@ -1745,19 +2064,19 @@ namespace System.Xml.Xsl.Xslt
                 CompileDataTypeAttribute(sort.DataType, fwdCompat, ref select, out select2);
 
                 order = CompileOrderAttribute(
-                    /*attName:  */  "order",
-                    /*attValue: */  sort.Order,
-                    /*value0:   */  "ascending",
-                    /*value1:   */  "descending",
-                    /*fwdCompat:*/  fwdCompat
+                    /*attName:  */"order",
+                    /*attValue: */sort.Order,
+                    /*value0:   */"ascending",
+                    /*value1:   */"descending",
+                    /*fwdCompat:*/fwdCompat
                 );
 
                 caseOrder = CompileOrderAttribute(
-                    /*attName:  */  "case-order",
-                    /*attValue: */  sort.CaseOrder,
-                    /*value0:   */  "lower-first",
-                    /*value1:   */  "upper-first",
-                    /*fwdCompat:*/  fwdCompat
+                    /*attName:  */"case-order",
+                    /*attValue: */sort.CaseOrder,
+                    /*value0:   */"lower-first",
+                    /*value1:   */"upper-first",
+                    /*fwdCompat:*/fwdCompat
                 );
 
                 // Restore loop context
@@ -1864,23 +2183,41 @@ namespace System.Xml.Xsl.Xslt
                 // Otherwise generate IsType check along with expanded QName check
                 switch (nodeKinds)
                 {
-                    case XmlNodeKindFlags.Document: return _f.IsType(testNode, T.Document);
-                    case XmlNodeKindFlags.Element: result = _f.IsType(testNode, T.Element); break;
-                    case XmlNodeKindFlags.Attribute: result = _f.IsType(testNode, T.Attribute); break;
-                    case XmlNodeKindFlags.Text: return _f.IsType(testNode, T.Text);
-                    case XmlNodeKindFlags.Comment: return _f.IsType(testNode, T.Comment);
-                    case XmlNodeKindFlags.PI: return _f.And(_f.IsType(testNode, T.PI), _f.Eq(_f.LocalNameOf(testNode), _f.LocalNameOf(current)));
-                    case XmlNodeKindFlags.Namespace: return _f.And(_f.IsType(testNode, T.Namespace), _f.Eq(_f.LocalNameOf(testNode), _f.LocalNameOf(current)));
+                    case XmlNodeKindFlags.Document:
+                        return _f.IsType(testNode, T.Document);
+                    case XmlNodeKindFlags.Element:
+                        result = _f.IsType(testNode, T.Element);
+                        break;
+                    case XmlNodeKindFlags.Attribute:
+                        result = _f.IsType(testNode, T.Attribute);
+                        break;
+                    case XmlNodeKindFlags.Text:
+                        return _f.IsType(testNode, T.Text);
+                    case XmlNodeKindFlags.Comment:
+                        return _f.IsType(testNode, T.Comment);
+                    case XmlNodeKindFlags.PI:
+                        return _f.And(
+                            _f.IsType(testNode, T.PI),
+                            _f.Eq(_f.LocalNameOf(testNode), _f.LocalNameOf(current))
+                        );
+                    case XmlNodeKindFlags.Namespace:
+                        return _f.And(
+                            _f.IsType(testNode, T.Namespace),
+                            _f.Eq(_f.LocalNameOf(testNode), _f.LocalNameOf(current))
+                        );
                     default:
                         Debug.Fail($"Unexpected NodeKind: {nodeKinds}");
                         return _f.False();
                 }
 
                 // Elements and attributes have both local name and namespace URI
-                return _f.And(result, _f.And(
-                    _f.Eq(_f.LocalNameOf(testNode), _f.LocalNameOf(current)),
-                    _f.Eq(_f.NamespaceUriOf(testNode), _f.NamespaceUriOf(GetCurrentNode()))
-                ));
+                return _f.And(
+                    result,
+                    _f.And(
+                        _f.Eq(_f.LocalNameOf(testNode), _f.LocalNameOf(current)),
+                        _f.Eq(_f.NamespaceUriOf(testNode), _f.NamespaceUriOf(GetCurrentNode()))
+                    )
+                );
             }
         }
 
@@ -1907,11 +2244,19 @@ namespace System.Xml.Xsl.Xslt
             */
 
             QilNode? countPattern2;
-            QilNode countMatches, fromMatches, A, F, AF;
-            QilIterator i, j;
+            QilNode countMatches,
+                fromMatches,
+                A,
+                F,
+                AF;
+            QilIterator i,
+                j;
 
             countPattern2 = (countPattern != null) ? countPattern.DeepClone(_f.BaseFactory) : null;
-            countMatches = _f.Filter(i = _f.For(_f.AncestorOrSelf(GetCurrentNode())), MatchCountPattern(countPattern, i));
+            countMatches = _f.Filter(
+                i = _f.For(_f.AncestorOrSelf(GetCurrentNode())),
+                MatchCountPattern(countPattern, i)
+            );
             if (multiple)
             {
                 A = _f.DocOrderDistinct(countMatches);
@@ -1927,13 +2272,25 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                fromMatches = _f.Filter(i = _f.For(_f.AncestorOrSelf(GetCurrentNode())), MatchPattern(fromPattern, i));
+                fromMatches = _f.Filter(
+                    i = _f.For(_f.AncestorOrSelf(GetCurrentNode())),
+                    MatchPattern(fromPattern, i)
+                );
                 F = _f.Filter(i = _f.For(fromMatches), _f.Eq(_f.PositionOf(i), _f.Int32(1)));
                 AF = _f.Loop(i = _f.For(F), _f.Filter(j = _f.For(A), _f.Before(i, j)));
             }
 
-            return _f.Loop(j = _f.For(AF),
-                _f.Add(_f.Int32(1), _f.Length(_f.Filter(i = _f.For(_f.PrecedingSibling(j)), MatchCountPattern(countPattern2, i))))
+            return _f.Loop(
+                j = _f.For(AF),
+                _f.Add(
+                    _f.Int32(1),
+                    _f.Length(
+                        _f.Filter(
+                            i = _f.For(_f.PrecedingSibling(j)),
+                            MatchCountPattern(countPattern2, i)
+                        )
+                    )
+                )
             );
         }
 
@@ -1957,8 +2314,13 @@ namespace System.Xml.Xsl.Xslt
                      '$A[. >> $F]'  if the 'from' attribute is present.
             */
 
-            QilNode range, fromMatches, F, AF;
-            QilIterator i, j, k;
+            QilNode range,
+                fromMatches,
+                F,
+                AF;
+            QilIterator i,
+                j,
+                k;
 
             if (fromPattern == null)
             {
@@ -1970,19 +2332,29 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                fromMatches = _f.Filter(i = _f.For(_f.Preceding(GetCurrentNode())), MatchPattern(fromPattern, i));
+                fromMatches = _f.Filter(
+                    i = _f.For(_f.Preceding(GetCurrentNode())),
+                    MatchPattern(fromPattern, i)
+                );
                 F = _f.Filter(i = _f.For(fromMatches), _f.Eq(_f.PositionOf(i), _f.Int32(1)));
-                AF = _f.Loop(i = _f.For(F),
-                    _f.Filter(j = _f.For(_f.Filter(k = _f.For(_f.NodeRange(i, GetCurrentNode())), MatchCountPattern(countPattern, k))),
+                AF = _f.Loop(
+                    i = _f.For(F),
+                    _f.Filter(
+                        j = _f.For(
+                            _f.Filter(
+                                k = _f.For(_f.NodeRange(i, GetCurrentNode())),
+                                MatchCountPattern(countPattern, k)
+                            )
+                        ),
                         _f.Not(_f.Is(i, j))
                     )
                 );
             }
 
-            return _f.Loop(k = _f.Let(_f.Length(AF)),
-                _f.Conditional(_f.Eq(k, _f.Int32(0)), _f.Sequence(),
-                k
-            ));
+            return _f.Loop(
+                k = _f.Let(_f.Length(AF)),
+                _f.Conditional(_f.Eq(k, _f.Int32(0)), _f.Sequence(), k)
+            );
         }
 
         // Returns one of XsltLibrary.LetterValue enum values
@@ -2004,7 +2376,12 @@ namespace System.Xml.Xsl.Xslt
                     {
                         if (!fwdCompat)
                         {
-                            ReportError(/*[XT_034]*/SR.Xslt_BistateAttribute, "letter-value", Alphabetic, Traditional);
+                            ReportError( /*[XT_034]*/
+                                SR.Xslt_BistateAttribute,
+                                "letter-value",
+                                Alphabetic,
+                                Traditional
+                            );
                         }
                         else
                         {
@@ -2017,13 +2394,25 @@ namespace System.Xml.Xsl.Xslt
                 else
                 {
                     QilIterator i = _f.Let(result);
-                    return _f.Loop(i,
+                    return _f.Loop(
+                        i,
                         _f.Conditional(
-                            _f.Or(_f.Eq(i, _f.String(Alphabetic)), _f.Eq(i, _f.String(Traditional))),
+                            _f.Or(
+                                _f.Eq(i, _f.String(Alphabetic)),
+                                _f.Eq(i, _f.String(Traditional))
+                            ),
                             i,
-                            fwdCompat ? _f.String(Default) :
-                            _f.Error(_lastScope!.SourceLine, SR.Xslt_BistateAttribute, "letter-value", Alphabetic, Traditional)
-                    ));
+                            fwdCompat
+                              ? _f.String(Default)
+                              : _f.Error(
+                                    _lastScope!.SourceLine,
+                                    SR.Xslt_BistateAttribute,
+                                    "letter-value",
+                                    Alphabetic,
+                                    Traditional
+                                )
+                        )
+                    );
                 }
             }
             return _f.String(Default);
@@ -2045,7 +2434,10 @@ namespace System.Xml.Xsl.Xslt
                 {
                     if (!fwdCompat)
                     {
-                        ReportError(/*[XT_035]*/SR.Xslt_CharAttribute, "grouping-separator");
+                        ReportError( /*[XT_035]*/
+                            SR.Xslt_CharAttribute,
+                            "grouping-separator"
+                        );
                     }
                     // See the comment above
                     result = _f.String(string.Empty);
@@ -2054,11 +2446,20 @@ namespace System.Xml.Xsl.Xslt
             else
             {
                 QilIterator i = _f.Let(result);
-                result = _f.Loop(i,
-                    _f.Conditional(_f.Eq(_f.StrLength(i), _f.Int32(1)), i,
-                    fwdCompat ? _f.String(string.Empty) :
-                    _f.Error(_lastScope!.SourceLine, SR.Xslt_CharAttribute, "grouping-separator")
-                ));
+                result = _f.Loop(
+                    i,
+                    _f.Conditional(
+                        _f.Eq(_f.StrLength(i), _f.Int32(1)),
+                        i,
+                        fwdCompat
+                          ? _f.String(string.Empty)
+                          : _f.Error(
+                                _lastScope!.SourceLine,
+                                SR.Xslt_CharAttribute,
+                                "grouping-separator"
+                            )
+                    )
+                );
             }
             return result;
         }
@@ -2077,7 +2478,9 @@ namespace System.Xml.Xsl.Xslt
 
                 // NOTE: It is unclear from the spec what we should do with float numbers here.
                 // Let's apply XPath number and round functions as usual, suppressing any conversion errors.
-                double dblGroupingSize = XsltFunctions.Round(XPathConvert.StringToDouble(groupingSize));
+                double dblGroupingSize = XsltFunctions.Round(
+                    XPathConvert.StringToDouble(groupingSize)
+                );
                 if (0 <= dblGroupingSize && dblGroupingSize <= int.MaxValue)
                 {
                     return _f.Double(dblGroupingSize);
@@ -2089,8 +2492,10 @@ namespace System.Xml.Xsl.Xslt
             {
                 // NOTE: We should have the same checks for both compile time and execution time
                 QilIterator i = _f.Let(_f.ConvertToNumber(result));
-                return _f.Loop(i,
-                    _f.Conditional(_f.And(_f.Lt(_f.Double(0), i), _f.Lt(i, _f.Double(int.MaxValue))),
+                return _f.Loop(
+                    i,
+                    _f.Conditional(
+                        _f.And(_f.Lt(_f.Double(0), i), _f.Lt(i, _f.Double(int.MaxValue))),
                         i,
                         _f.Double(0)
                     )
@@ -2110,13 +2515,18 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                QilNode? countPattern = (num.Count != null) ? CompileNumberPattern(num.Count) : null;
+                QilNode? countPattern =
+                    (num.Count != null) ? CompileNumberPattern(num.Count) : null;
                 QilNode? fromPattern = (num.From != null) ? CompileNumberPattern(num.From) : null;
 
                 switch (num.Level)
                 {
-                    case NumberLevel.Single: value = PlaceMarker(countPattern, fromPattern, false); break;
-                    case NumberLevel.Multiple: value = PlaceMarker(countPattern, fromPattern, true); break;
+                    case NumberLevel.Single:
+                        value = PlaceMarker(countPattern, fromPattern, false);
+                        break;
+                    case NumberLevel.Multiple:
+                        value = PlaceMarker(countPattern, fromPattern, true);
+                        break;
                     default:
                         Debug.Assert(num.Level == NumberLevel.Any);
                         value = PlaceMarkerAny(countPattern, fromPattern);
@@ -2125,13 +2535,16 @@ namespace System.Xml.Xsl.Xslt
             }
 
             bool fwdCompat = num.ForwardsCompatible;
-            return _f.TextCtor(_f.InvokeNumberFormat(
-                value, CompileStringAvt(num.Format),
-                CompileLangAttributeToLcid(num.Lang, fwdCompat),
-                CompileLetterValueAttribute(num.LetterValue, fwdCompat),
-                CompileGroupingSeparatorAttribute(num.GroupingSeparator, fwdCompat),
-                CompileGroupingSizeAttribute(num.GroupingSize, fwdCompat)
-            ));
+            return _f.TextCtor(
+                _f.InvokeNumberFormat(
+                    value,
+                    CompileStringAvt(num.Format),
+                    CompileLangAttributeToLcid(num.Lang, fwdCompat),
+                    CompileLetterValueAttribute(num.LetterValue, fwdCompat),
+                    CompileGroupingSeparatorAttribute(num.GroupingSeparator, fwdCompat),
+                    CompileGroupingSizeAttribute(num.GroupingSize, fwdCompat)
+                )
+            );
         }
 
         // ------------- CompileAndSortMatchPatterns() -------------
@@ -2189,10 +2602,9 @@ namespace System.Xml.Xsl.Xslt
 
                     QilParameter value = _f.Parameter(T.StringX);
 
-                    QilFunction func = _f.Function(_f.FormalParameterList(context, value),
-                        _f.Filter(values,
-                            _f.Not(_f.IsEmpty(_f.Filter(keys, _f.Eq(keys, value))))
-                        ),
+                    QilFunction func = _f.Function(
+                        _f.FormalParameterList(context, value),
+                        _f.Filter(values, _f.Not(_f.IsEmpty(_f.Filter(keys, _f.Eq(keys, value))))),
                         _f.False()
                     );
 
@@ -2222,7 +2634,9 @@ namespace System.Xml.Xsl.Xslt
 
         private void CreateGlobalVarPar(VarPar varPar)
         {
-            Debug.Assert(varPar.NodeType == XslNodeType.Variable || varPar.NodeType == XslNodeType.Param);
+            Debug.Assert(
+                varPar.NodeType == XslNodeType.Variable || varPar.NodeType == XslNodeType.Param
+            );
             XmlQueryType xt = ChooseBestType(varPar);
             QilIterator it;
             if (varPar.NodeType == XslNodeType.Variable)
@@ -2258,7 +2672,9 @@ namespace System.Xml.Xsl.Xslt
 
         private QilIterator CompileGlobalVarPar(VarPar varPar)
         {
-            Debug.Assert(varPar.NodeType == XslNodeType.Variable || varPar.NodeType == XslNodeType.Param);
+            Debug.Assert(
+                varPar.NodeType == XslNodeType.Variable || varPar.NodeType == XslNodeType.Param
+            );
             QilIterator it = (QilIterator)varPar.Value!;
 
             QilList? nsList = EnterScope(varPar);
@@ -2298,7 +2714,11 @@ namespace System.Xml.Xsl.Xslt
             XPathScanner scanner;
             QilNode result;
 
-            SetEnvironmentFlags(/*allowVariables:*/true, /*allowCurrent:*/true, /*allowKey:*/true);
+            SetEnvironmentFlags( /*allowVariables:*/
+                true, /*allowCurrent:*/
+                true, /*allowKey:*/
+                true
+            );
             if (expr == null)
             {
                 result = PhantomXPathExpression();
@@ -2315,7 +2735,9 @@ namespace System.Xml.Xsl.Xslt
                 {
                     if (_xslVersion != XslVersion.ForwardsCompatible)
                     {
-                        ReportErrorInXPath(/*[XT0300]*/e);
+                        ReportErrorInXPath( /*[XT0300]*/
+                            e
+                        );
                     }
                     result = _f.Error(_f.String(e.Message));
                 }
@@ -2333,10 +2755,18 @@ namespace System.Xml.Xsl.Xslt
             if (result == null)
             {
                 // The expression is never a node-set
-                XPathCompileException e = new XPathCompileException(expr, 0, expr.Length, SR.XPath_NodeSetExpected, null);
+                XPathCompileException e = new XPathCompileException(
+                    expr,
+                    0,
+                    expr.Length,
+                    SR.XPath_NodeSetExpected,
+                    null
+                );
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
-                    ReportErrorInXPath(/*[XTTE_101]*/e);
+                    ReportErrorInXPath( /*[XTTE_101]*/
+                        e
+                    );
                 }
                 result = _f.Error(_f.String(e.Message));
             }
@@ -2349,7 +2779,11 @@ namespace System.Xml.Xsl.Xslt
             XPathScanner scanner;
             QilNode result;
 
-            SetEnvironmentFlags(/*allowVariables:*/true, /*allowCurrent:*/true, /*allowKey:*/true);
+            SetEnvironmentFlags( /*allowVariables:*/
+                true, /*allowCurrent:*/
+                true, /*allowKey:*/
+                true
+            );
             try
             {
                 scanner = new XPathScanner(expr, pos);
@@ -2360,7 +2794,9 @@ namespace System.Xml.Xsl.Xslt
             {
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
-                    ReportErrorInXPath(/*[XT0350][XT0360]*/e);
+                    ReportErrorInXPath( /*[XT0350][XT0360]*/
+                        e
+                    );
                 }
                 result = _f.Error(_f.String(e.Message));
                 pos = expr.Length;
@@ -2378,7 +2814,11 @@ namespace System.Xml.Xsl.Xslt
             XPathScanner scanner;
             QilNode result;
 
-            SetEnvironmentFlags(/*allowVariables:*/false, /*allowCurrent:*/false, /*allowKey:*/true);
+            SetEnvironmentFlags( /*allowVariables:*/
+                false, /*allowCurrent:*/
+                false, /*allowKey:*/
+                true
+            );
             try
             {
                 scanner = new XPathScanner(pttrn);
@@ -2388,11 +2828,11 @@ namespace System.Xml.Xsl.Xslt
             {
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
-                    ReportErrorInXPath(/*[XT0340]*/e);
+                    ReportErrorInXPath( /*[XT0340]*/
+                        e
+                    );
                 }
-                result = _f.Loop(_f.For(_ptrnBuilder.FixupNode),
-                    _f.Error(_f.String(e.Message))
-                );
+                result = _f.Loop(_f.For(_ptrnBuilder.FixupNode), _f.Error(_f.String(e.Message)));
                 XPathPatternBuilder.SetPriority(result, 0.5);
             }
             return result;
@@ -2404,7 +2844,11 @@ namespace System.Xml.Xsl.Xslt
             XPathScanner scanner;
             QilNode result;
 
-            SetEnvironmentFlags(/*allowVariables:*/true, /*allowCurrent:*/false, /*allowKey:*/true);
+            SetEnvironmentFlags( /*allowVariables:*/
+                true, /*allowCurrent:*/
+                false, /*allowKey:*/
+                true
+            );
             try
             {
                 scanner = new XPathScanner(pttrn);
@@ -2414,7 +2858,9 @@ namespace System.Xml.Xsl.Xslt
             {
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
-                    ReportErrorInXPath(/*[XT0340]*/e);
+                    ReportErrorInXPath( /*[XT0340]*/
+                        e
+                    );
                 }
                 result = _f.Error(_f.String(e.Message));
             }
@@ -2430,7 +2876,11 @@ namespace System.Xml.Xsl.Xslt
             {
                 _keyMatchBuilder = new KeyMatchBuilder((IXPathEnvironment)this);
             }
-            SetEnvironmentFlags(/*allowVariables:*/false, /*allowCurrent:*/false, /*allowKey:*/false);
+            SetEnvironmentFlags( /*allowVariables:*/
+                false, /*allowCurrent:*/
+                false, /*allowKey:*/
+                false
+            );
             if (pttrn == null)
             {
                 result = PhantomKeyMatch();
@@ -2446,7 +2896,9 @@ namespace System.Xml.Xsl.Xslt
                 {
                     if (_xslVersion != XslVersion.ForwardsCompatible)
                     {
-                        ReportErrorInXPath(/*[XT0340]*/e);
+                        ReportErrorInXPath( /*[XT0340]*/
+                            e
+                        );
                     }
                     result = _f.Error(_f.String(e.Message));
                 }
@@ -2460,10 +2912,22 @@ namespace System.Xml.Xsl.Xslt
             XPathScanner scanner;
             QilNode result;
 
-            SetEnvironmentFlags(/*allowVariables:*/false, /*allowCurrent:*/true, /*allowKey:*/false);
+            SetEnvironmentFlags( /*allowVariables:*/
+                false, /*allowCurrent:*/
+                true, /*allowKey:*/
+                false
+            );
             if (expr == null)
             {
-                result = _f.Error(_f.String(XslLoadException.CreateMessage(key.SourceLine, SR.Xslt_MissingAttribute, "use")));
+                result = _f.Error(
+                    _f.String(
+                        XslLoadException.CreateMessage(
+                            key.SourceLine,
+                            SR.Xslt_MissingAttribute,
+                            "use"
+                        )
+                    )
+                );
             }
             else
             {
@@ -2476,7 +2940,9 @@ namespace System.Xml.Xsl.Xslt
                 {
                     if (_xslVersion != XslVersion.ForwardsCompatible)
                     {
-                        ReportErrorInXPath(/*[XT0300]*/e);
+                        ReportErrorInXPath( /*[XT0300]*/
+                            e
+                        );
                     }
                     result = _f.Error(_f.String(e.Message));
                 }
@@ -2518,15 +2984,19 @@ namespace System.Xml.Xsl.Xslt
         private QilNode GenerateApply(StylesheetLevel sheet, XslNode node)
         {
             Debug.Assert(
-                node.NodeType == XslNodeType.ApplyTemplates && sheet is RootLevel ||
-                node.NodeType == XslNodeType.ApplyImports && sheet is Stylesheet
+                node.NodeType == XslNodeType.ApplyTemplates && sheet is RootLevel
+                    || node.NodeType == XslNodeType.ApplyImports && sheet is Stylesheet
             );
 
             if (_compiler.Settings.CheckOnly)
             {
                 return _f.Sequence();
             }
-            return InvokeApplyFunction(sheet, /*mode:*/node.Name!, node.Content);
+            return InvokeApplyFunction(
+                sheet, /*mode:*/
+                node.Name!,
+                node.Content
+            );
         }
 
         private void SetArg(IList<XslNode> args, int pos, QilName name, QilNode value)
@@ -2557,9 +3027,18 @@ namespace System.Xml.Xsl.Xslt
                     args = new List<XslNode>(3);
                 }
                 int pos = 0;
-                if ((flags & XslFlags.Current) != 0) { SetArg(args, pos++, _nameCurrent, GetCurrentNode()); }
-                if ((flags & XslFlags.Position) != 0) { SetArg(args, pos++, _namePosition, GetCurrentPosition()); }
-                if ((flags & XslFlags.Last) != 0) { SetArg(args, pos++, _nameLast, GetLastPosition()); }
+                if ((flags & XslFlags.Current) != 0)
+                {
+                    SetArg(args, pos++, _nameCurrent, GetCurrentNode());
+                }
+                if ((flags & XslFlags.Position) != 0)
+                {
+                    SetArg(args, pos++, _namePosition, GetCurrentPosition());
+                }
+                if ((flags & XslFlags.Last) != 0)
+                {
+                    SetArg(args, pos++, _nameLast, GetLastPosition());
+                }
             }
             return args;
         }
@@ -2568,7 +3047,11 @@ namespace System.Xml.Xsl.Xslt
         // Returns true if formalArgs maps 1:1 with actual args.
         // Formaly this is n*n algorithm. We can optimize it by calculationg "signature"
         // of the function as sum of all hashes of its args names.
-        private bool FillupInvokeArgs(IList<QilNode> formalArgs, IList<XslNode> actualArgs, QilList invokeArgs)
+        private bool FillupInvokeArgs(
+            IList<QilNode> formalArgs,
+            IList<XslNode> actualArgs,
+            QilList invokeArgs
+        )
         {
             if (actualArgs.Count != formalArgs.Count)
             {
@@ -2583,7 +3066,10 @@ namespace System.Xml.Xsl.Xslt
                 {
                     for (int actArg = 0; actArg < actualArgs.Count; actArg++)
                     {
-                        Debug.Assert(actualArgs[actArg].NodeType == XslNodeType.WithParam, "All Sorts was removed in CompileSorts()");
+                        Debug.Assert(
+                            actualArgs[actArg].NodeType == XslNodeType.WithParam,
+                            "All Sorts was removed in CompileSorts()"
+                        );
                         VarPar withParam = (VarPar)actualArgs[actArg];
                         if (formalArgName.Equals(withParam.Name))
                         {
@@ -2591,7 +3077,11 @@ namespace System.Xml.Xsl.Xslt
                             XmlQueryType valueType = value.XmlType!;
                             if (valueType != paramType)
                             {
-                                if (valueType.IsNode && paramType.IsNode && valueType.IsSubtypeOf(paramType))
+                                if (
+                                    valueType.IsNode
+                                    && paramType.IsNode
+                                    && valueType.IsSubtypeOf(paramType)
+                                )
                                 {
                                     // We can pass it
                                 }
@@ -2617,7 +3107,11 @@ namespace System.Xml.Xsl.Xslt
             return true;
         }
 
-        private QilNode InvokeApplyFunction(StylesheetLevel sheet, QilName mode, IList<XslNode>? actualArgs)
+        private QilNode InvokeApplyFunction(
+            StylesheetLevel sheet,
+            QilName mode,
+            IList<XslNode>? actualArgs
+        )
         {
             // Here we create function that has one argument for each with-param in apply-templates
             // We have actualArgs -- list of xsl:with-param(name, value)
@@ -2648,7 +3142,13 @@ namespace System.Xml.Xsl.Xslt
 
             foreach (QilFunction func in functionsForMode)
             {
-                if (FillupInvokeArgs(func.Arguments, actualArgs!, /*ref*/invokeArgs))
+                if (
+                    FillupInvokeArgs(
+                        func.Arguments,
+                        actualArgs!, /*ref*/
+                        invokeArgs
+                    )
+                )
                 {
                     applyFunction = func;
                     break;
@@ -2664,7 +3164,10 @@ namespace System.Xml.Xsl.Xslt
                 QilList formalArgs = _f.FormalParameterList();
                 for (int i = 0; i < actualArgs!.Count; i++)
                 {
-                    Debug.Assert(actualArgs[i].NodeType == XslNodeType.WithParam, "All Sorts was removed in CompileSorts()");
+                    Debug.Assert(
+                        actualArgs[i].NodeType == XslNodeType.WithParam,
+                        "All Sorts was removed in CompileSorts()"
+                    );
                     VarPar withParam = (VarPar)actualArgs[i];
 
                     // Add actual arg to 'invokeArgs' array. No need to clone it since it must be
@@ -2672,7 +3175,9 @@ namespace System.Xml.Xsl.Xslt
                     invokeArgs.Add(withParam.Value!);
 
                     // Create correspondent formal arg
-                    QilParameter formalArg = _f.Parameter(i == 0 ? T.NodeNotRtf : withParam.Value!.XmlType!);
+                    QilParameter formalArg = _f.Parameter(
+                        i == 0 ? T.NodeNotRtf : withParam.Value!.XmlType!
+                    );
                     formalArg.Name = CloneName(withParam.Name!);
                     formalArgs.Add(formalArg);
 
@@ -2681,17 +3186,23 @@ namespace System.Xml.Xsl.Xslt
                 }
 
                 // 2. Function header
-                applyFunction = _f.Function(formalArgs,
+                applyFunction = _f.Function(
+                    formalArgs,
                     _f.Boolean((flags & XslFlags.SideEffects) != 0),
                     T.NodeNotRtfS
                 );
-                string attMode = (mode.LocalName.Length == 0) ? string.Empty : $" mode=\"{mode.QualifiedName}\"";
-                applyFunction.DebugName = $"{(sheet is RootLevel ? "<xsl:apply-templates" : "<xsl:apply-imports")}{attMode}>";
+                string attMode =
+                    (mode.LocalName.Length == 0) ? string.Empty : $" mode=\"{mode.QualifiedName}\"";
+                applyFunction.DebugName =
+                    $"{(sheet is RootLevel ? "<xsl:apply-templates" : "<xsl:apply-imports")}{attMode}>";
                 functionsForMode.Add(applyFunction);
                 _functions.Add(applyFunction);
 
                 // 3. Function body
-                Debug.Assert(actualArgs[0].Name == _nameCurrent, "Caller should always pass $current as a first argument to apply-* calls.");
+                Debug.Assert(
+                    actualArgs[0].Name == _nameCurrent,
+                    "Caller should always pass $current as a first argument to apply-* calls."
+                );
                 QilIterator current = (QilIterator)formalArgs[0];
 
                 // 3.1 Built-in templates:
@@ -2700,7 +3211,7 @@ namespace System.Xml.Xsl.Xslt
                 {
                     QilIterator iChild = _f.For(_f.Content(current));
                     QilNode filter = _f.Filter(iChild, _f.IsType(iChild, T.Content));
-                    filter.XmlType = T.ContentS;    // not attribute
+                    filter.XmlType = T.ContentS; // not attribute
 
                     LoopFocus curLoopSaved = _curLoop;
                     _curLoop.SetFocus(_f.For(filter));
@@ -2713,7 +3224,11 @@ namespace System.Xml.Xsl.Xslt
                     // we can't just modify current/position/last of actualArgs in XSLT 2.0 as we tried before,
                     // becuase flags for apply-import amy now be different then flags for apply-templates, so
                     // we may need to add some space for additional position/last arguments
-                    QilNode body = InvokeApplyFunction(_compiler.Root!, mode, /*actualArgs:*/null);
+                    QilNode body = InvokeApplyFunction(
+                        _compiler.Root!,
+                        mode, /*actualArgs:*/
+                        null
+                    );
                     if (IsDebug)
                     {
                         body = _f.Sequence(InvokeOnCurrentNodeChanged(), body);
@@ -2723,9 +3238,11 @@ namespace System.Xml.Xsl.Xslt
                 }
 
                 // 3.1.2 switch on type of current node
-                QilTernary builtinTemplates = _f.BaseFactory.Conditional(_f.IsType(current, _elementOrDocumentType),
+                QilTernary builtinTemplates = _f.BaseFactory.Conditional(
+                    _f.IsType(current, _elementOrDocumentType),
                     loopOnContent,
-                    _f.Conditional(_f.IsType(current, _textOrAttributeType),
+                    _f.Conditional(
+                        _f.IsType(current, _textOrAttributeType),
                         _f.TextCtor(_f.XPathNodeValue(current)),
                         _f.Sequence()
                     )
@@ -2733,7 +3250,11 @@ namespace System.Xml.Xsl.Xslt
 
                 // 3.2 Stylesheet templates
                 _matcherBuilder.CollectPatterns(sheet, mode);
-                applyFunction.Definition = _matcherBuilder.BuildMatcher(current, actualArgs, /*otherwise:*/builtinTemplates);
+                applyFunction.Definition = _matcherBuilder.BuildMatcher(
+                    current,
+                    actualArgs, /*otherwise:*/
+                    builtinTemplates
+                );
             }
             return _f.Invoke(applyFunction, invokeArgs);
         }
@@ -2756,8 +3277,12 @@ namespace System.Xml.Xsl.Xslt
         private void VerifyXPathQName(QilName qname)
         {
             Debug.Assert(
-                _compiler.IsPhantomName(qname) ||
-                qname.NamespaceUri == ResolvePrefix(/*ignoreDefaultNs:*/true, qname.Prefix),
+                _compiler.IsPhantomName(qname)
+                    || qname.NamespaceUri
+                        == ResolvePrefix( /*ignoreDefaultNs:*/
+                            true,
+                            qname.Prefix
+                        ),
                 "QilGenerator must resolve the prefix to the same namespace as XsltLoader"
             );
         }
@@ -2779,7 +3304,10 @@ namespace System.Xml.Xsl.Xslt
                     }
                     else
                     {
-                        ReportError(/*[XT0280]*/SR.Xslt_InvalidPrefix, prefix);
+                        ReportError( /*[XT0280]*/
+                            SR.Xslt_InvalidPrefix,
+                            prefix
+                        );
                         ns = _compiler.CreatePhantomNamespace();
                     }
                 }

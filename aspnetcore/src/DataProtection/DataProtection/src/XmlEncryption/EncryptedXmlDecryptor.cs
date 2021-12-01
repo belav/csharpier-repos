@@ -23,10 +23,7 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
     /// </summary>
-    public EncryptedXmlDecryptor()
-        : this(services: null)
-    {
-    }
+    public EncryptedXmlDecryptor() : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
@@ -67,7 +64,9 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
         encryptedXml.DecryptDocument();
 
         // Strip the <root /> element back off and convert the XmlDocument to an XElement.
-        return XElement.Load(xmlDocument.DocumentElement!.FirstChild!.CreateNavigator()!.ReadSubtree());
+        return XElement.Load(
+            xmlDocument.DocumentElement!.FirstChild!.CreateNavigator()!.ReadSubtree()
+        );
     }
 
     void IInternalEncryptedXmlDecryptor.PerformPreDecryptionSetup(EncryptedXml encryptedXml)
@@ -82,8 +81,10 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
     {
         private readonly XmlKeyDecryptionOptions? _options;
 
-        public EncryptedXmlWithCertificateKeys(XmlKeyDecryptionOptions? options, XmlDocument document)
-            : base(document)
+        public EncryptedXmlWithCertificateKeys(
+            XmlKeyDecryptionOptions? options,
+            XmlDocument document
+        ) : base(document)
         {
             _options = options;
         }
@@ -131,7 +132,13 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
                     continue;
                 }
 
-                if (_options == null || !_options.TryGetKeyDecryptionCertificates(certInfo, out var keyDecryptionCerts))
+                if (
+                    _options == null
+                    || !_options.TryGetKeyDecryptionCertificates(
+                        certInfo,
+                        out var keyDecryptionCerts
+                    )
+                )
                 {
                     continue;
                 }
@@ -147,8 +154,13 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
                     {
                         if (privateKey != null)
                         {
-                            var useOAEP = encryptedKey.EncryptionMethod?.KeyAlgorithm == XmlEncRSAOAEPUrl;
-                            return DecryptKey(encryptedKey.CipherData.CipherValue, privateKey, useOAEP);
+                            var useOAEP =
+                                encryptedKey.EncryptionMethod?.KeyAlgorithm == XmlEncRSAOAEPUrl;
+                            return DecryptKey(
+                                encryptedKey.CipherData.CipherValue,
+                                privateKey,
+                                useOAEP
+                            );
                         }
                     }
                 }

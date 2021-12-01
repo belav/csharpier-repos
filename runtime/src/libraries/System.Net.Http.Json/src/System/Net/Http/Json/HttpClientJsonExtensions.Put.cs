@@ -12,7 +12,13 @@ namespace System.Net.Http.Json
     public static partial class HttpClientJsonExtensions
     {
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client == null)
             {
@@ -24,7 +30,13 @@ namespace System.Net.Http.Json
         }
 
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client == null)
             {
@@ -36,14 +48,28 @@ namespace System.Net.Http.Json
         }
 
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
 
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PutAsJsonAsync(requestUri, value, options: null, cancellationToken);
 
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client == null)
             {
@@ -54,7 +80,13 @@ namespace System.Net.Http.Json
             return client.PutAsync(requestUri, content, cancellationToken);
         }
 
-        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PutAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client == null)
             {

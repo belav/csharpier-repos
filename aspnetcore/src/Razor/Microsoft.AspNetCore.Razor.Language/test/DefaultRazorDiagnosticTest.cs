@@ -14,7 +14,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_Ctor()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "error", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "error",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         // Act
@@ -30,7 +34,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_GetMessage()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "error", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "error",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic = new DefaultRazorDiagnostic(descriptor, span, new object[0]);
@@ -42,12 +50,15 @@ public class DefaultRazorDiagnosticTest
         Assert.Equal("error", result);
     }
 
-
     [Fact]
     public void DefaultRazorDiagnostic_GetMessage_WithArgs()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic = new DefaultRazorDiagnostic(descriptor, span, new[] { "error" });
@@ -63,7 +74,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_GetMessage_WithArgs_FormatProvider()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic = new DefaultRazorDiagnostic(descriptor, span, new object[] { 1.3m });
@@ -75,12 +90,15 @@ public class DefaultRazorDiagnosticTest
         Assert.Equal("this is an 1,3", result);
     }
 
-
     [Fact]
     public void DefaultRazorDiagnostic_ToString()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an error", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an error",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic = new DefaultRazorDiagnostic(descriptor, span, new object[0]);
@@ -96,7 +114,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_ToString_FormatProvider()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic = new DefaultRazorDiagnostic(descriptor, span, new object[] { 1.3m });
@@ -112,7 +134,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_Equals()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic1 = new DefaultRazorDiagnostic(descriptor, span, new object[0]);
@@ -129,7 +155,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_NotEquals_DifferentLocation()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span1 = new SourceSpan("test.cs", 15, 1, 8, 5);
         var span2 = new SourceSpan("test.cs", 15, 1, 8, 3);
 
@@ -147,8 +177,16 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_NotEquals_DifferentId()
     {
         // Arrange
-        var descriptor1 = new RazorDiagnosticDescriptor("RZ0001", () => "this is an {0}", RazorDiagnosticSeverity.Error);
-        var descriptor2 = new RazorDiagnosticDescriptor("RZ0002", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor1 = new RazorDiagnosticDescriptor(
+            "RZ0001",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
+        var descriptor2 = new RazorDiagnosticDescriptor(
+            "RZ0002",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic1 = new DefaultRazorDiagnostic(descriptor1, span, new object[0]);
@@ -165,7 +203,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_HashCodesEqual()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic1 = new DefaultRazorDiagnostic(descriptor, span, new object[0]);
@@ -182,7 +224,11 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_HashCodesNotEqual_DifferentLocation()
     {
         // Arrange
-        var descriptor = new RazorDiagnosticDescriptor("RZ0000", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor = new RazorDiagnosticDescriptor(
+            "RZ0000",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span1 = new SourceSpan("test.cs", 15, 1, 8, 5);
         var span2 = new SourceSpan("test.cs", 15, 1, 8, 3);
 
@@ -200,8 +246,16 @@ public class DefaultRazorDiagnosticTest
     public void DefaultRazorDiagnostic_HashCodesNotEqual_DifferentId()
     {
         // Arrange
-        var descriptor1 = new RazorDiagnosticDescriptor("RZ0001", () => "this is an {0}", RazorDiagnosticSeverity.Error);
-        var descriptor2 = new RazorDiagnosticDescriptor("RZ0002", () => "this is an {0}", RazorDiagnosticSeverity.Error);
+        var descriptor1 = new RazorDiagnosticDescriptor(
+            "RZ0001",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
+        var descriptor2 = new RazorDiagnosticDescriptor(
+            "RZ0002",
+            () => "this is an {0}",
+            RazorDiagnosticSeverity.Error
+        );
         var span = new SourceSpan("test.cs", 15, 1, 8, 5);
 
         var diagnostic1 = new DefaultRazorDiagnostic(descriptor1, span, new object[0]);

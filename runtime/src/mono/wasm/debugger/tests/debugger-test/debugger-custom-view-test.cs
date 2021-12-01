@@ -13,12 +13,15 @@ namespace DebuggerTests
     {
         internal string Val1 = "one";
 
-        public int Val2 { get { return 2; } }
+        public int Val2
+        {
+            get { return 2; }
+        }
     }
 
     class WithToString
     {
-        public override string ToString ()
+        public override string ToString()
         {
             return "SomeString";
         }
@@ -27,7 +30,8 @@ namespace DebuggerTests
     [DebuggerTypeProxy(typeof(TheProxy))]
     class WithProxy
     {
-        public string Val1 {
+        public string Val1
+        {
             get { return "one"; }
         }
     }
@@ -36,12 +40,13 @@ namespace DebuggerTests
     {
         WithProxy wp;
 
-        public TheProxy (WithProxy wp)
+        public TheProxy(WithProxy wp)
         {
             this.wp = wp;
         }
 
-        public string Val2 {
+        public string Val2
+        {
             get { return wp.Val1; }
         }
     }
@@ -52,14 +57,15 @@ namespace DebuggerTests
         int someInt = 32;
         int someInt2 = 43;
 
-        string GetDebuggerDisplay ()
+        string GetDebuggerDisplay()
         {
             return "First Int:" + someInt + " Second Int:" + someInt2;
         }
     }
 
     [DebuggerDisplay("FirstName: {FirstName}, SurName: {SurName}, Age: {Age}")]
-    public class Person {
+    public class Person
+    {
         public string FirstName { get; set; }
         public string SurName { get; set; }
         public int Age { get; set; }
@@ -72,7 +78,7 @@ namespace DebuggerTests
             var a = new WithDisplayString();
             var b = new WithProxy();
             var c = new DebuggerDisplayMethodTest();
-            List<int> myList = new List<int>{ 1, 2, 3, 4 };
+            List<int> myList = new List<int> { 1, 2, 3, 4 };
             var listToTestToList = System.Linq.Enumerable.Range(1, 11);
 
             Dictionary<string, string> openWith = new Dictionary<string, string>();
@@ -80,8 +86,8 @@ namespace DebuggerTests
             openWith.Add("txt", "notepad");
             openWith.Add("bmp", "paint");
             openWith.Add("dib", "paint");
-            var person1 = new Person { FirstName = "Anton", SurName="Mueller", Age = 44};
-            var person2 = new Person { FirstName = "Lisa", SurName="Müller", Age = 41};
+            var person1 = new Person { FirstName = "Anton", SurName = "Mueller", Age = 44 };
+            var person2 = new Person { FirstName = "Lisa", SurName = "Müller", Age = 41 };
 
             Console.WriteLine("break here");
 
@@ -93,9 +99,9 @@ namespace DebuggerTests
     {
         public static void run()
         {
-            List<int> myList = new List<int> ();
-            List<int> myList2 = new List<int> ();
-            
+            List<int> myList = new List<int>();
+            List<int> myList2 = new List<int>();
+
             myList.Add(1);
             myList.Add(2);
             myList.Add(3);
@@ -104,7 +110,6 @@ namespace DebuggerTests
             myList2.Add(1);
             myList2.Add(1);
             myList2.Add(1);
-
         }
     }
 }

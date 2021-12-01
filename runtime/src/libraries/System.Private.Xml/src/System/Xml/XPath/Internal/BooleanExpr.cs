@@ -53,7 +53,13 @@ namespace MS.Internal.Xml.XPath
             return _opnd2.Evaluate(nodeIterator);
         }
 
-        public override XPathNodeIterator Clone() { return new BooleanExpr(this); }
-        public override XPathResultType StaticType { get { return XPathResultType.Boolean; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new BooleanExpr(this);
+        }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Boolean; }
+        }
     }
 }

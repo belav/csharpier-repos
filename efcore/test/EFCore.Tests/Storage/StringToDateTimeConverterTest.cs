@@ -31,7 +31,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _stringToDateTime.ConvertFromProviderExpression.Compile();
 
-            Assert.Equal("1973-09-03 00:10:15", converter(new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Utc)));
+            Assert.Equal(
+                "1973-09-03 00:10:15",
+                converter(new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Utc))
+            );
             Assert.Equal("1973-09-03 00:10:15", converter(new DateTime(1973, 9, 3, 0, 10, 15)));
             Assert.Equal("0001-01-01 00:00:00", converter(new DateTime()));
         }
@@ -56,7 +59,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _stringToDateTime.ConvertFromProvider;
 
-            Assert.Equal("1973-09-03 00:10:15", converter(new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Utc)));
+            Assert.Equal(
+                "1973-09-03 00:10:15",
+                converter(new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Utc))
+            );
             Assert.Equal("1973-09-03 00:10:15", converter(new DateTime(1973, 9, 3, 0, 10, 15)));
             Assert.Equal("0001-01-01 00:00:00", converter(new DateTime()));
         }

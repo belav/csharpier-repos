@@ -24,10 +24,13 @@ namespace System.Runtime.Loader.Tests
 
         public static void TestDelegateMarshalling()
         {
-            EnumWindows((IntPtr wnd, IntPtr param) =>
-            {
-                return true;
-            }, IntPtr.Zero);
+            EnumWindows(
+                (IntPtr wnd, IntPtr param) =>
+                {
+                    return true;
+                },
+                IntPtr.Zero
+            );
         }
 
         [ComImport]

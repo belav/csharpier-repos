@@ -7,10 +7,7 @@ namespace Internal.TypeSystem
     {
         public override string DiagnosticName
         {
-            get
-            {
-                return _methodDef.DiagnosticName;
-            }
+            get { return _methodDef.DiagnosticName; }
         }
     }
 }

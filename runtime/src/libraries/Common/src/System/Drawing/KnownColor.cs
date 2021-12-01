@@ -6,7 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace System.Drawing
 {
-    [TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public enum KnownColor
     {
         // This enum is order dependent!!!
@@ -43,7 +45,6 @@ namespace System.Drawing
         Window,
         WindowFrame,
         WindowText,
-
         // "Web" Colors, Part 1
         Transparent,
         AliceBlue,
@@ -186,7 +187,6 @@ namespace System.Drawing
         WhiteSmoke,
         Yellow,
         YellowGreen,
-
         // "System" colors, Part 2
         ButtonFace,
         ButtonHighlight,
@@ -195,7 +195,6 @@ namespace System.Drawing
         GradientInactiveCaption,
         MenuBar,
         MenuHighlight,
-
         // "Web" colors, Part 2
         /// <summary>
         /// A system defined color representing the ARGB value <c>#663399</c>.

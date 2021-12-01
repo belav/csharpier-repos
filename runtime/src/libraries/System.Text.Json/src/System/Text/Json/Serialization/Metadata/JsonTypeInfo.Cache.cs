@@ -56,12 +56,19 @@ namespace System.Text.Json.Serialization.Metadata
             Type parentClassType,
             bool isVirtual,
             JsonNumberHandling? parentTypeNumberHandling,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
-            JsonIgnoreCondition? ignoreCondition = JsonPropertyInfo.GetAttribute<JsonIgnoreAttribute>(memberInfo)?.Condition;
+            JsonIgnoreCondition? ignoreCondition =
+                JsonPropertyInfo.GetAttribute<JsonIgnoreAttribute>(memberInfo)?.Condition;
             if (ignoreCondition == JsonIgnoreCondition.Always)
             {
-                return JsonPropertyInfo.CreateIgnoredPropertyPlaceholder(memberInfo, memberType, isVirtual, options);
+                return JsonPropertyInfo.CreateIgnoredPropertyPlaceholder(
+                    memberInfo,
+                    memberType,
+                    isVirtual,
+                    options
+                );
             }
 
             JsonConverter converter = GetConverter(
@@ -69,7 +76,8 @@ namespace System.Text.Json.Serialization.Metadata
                 parentClassType,
                 memberInfo,
                 out Type runtimeType,
-                options);
+                options
+            );
 
             return CreateProperty(
                 declaredPropertyType: memberType,
@@ -80,7 +88,8 @@ namespace System.Text.Json.Serialization.Metadata
                 converter,
                 options,
                 parentTypeNumberHandling,
-                ignoreCondition);
+                ignoreCondition
+            );
         }
 
         internal static JsonPropertyInfo CreateProperty(
@@ -92,7 +101,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonConverter converter,
             JsonSerializerOptions options,
             JsonNumberHandling? parentTypeNumberHandling = null,
-            JsonIgnoreCondition? ignoreCondition = null)
+            JsonIgnoreCondition? ignoreCondition = null
+        )
         {
             // Create the JsonPropertyInfo instance.
             JsonPropertyInfo jsonPropertyInfo = converter.CreateJsonPropertyInfo();
@@ -107,7 +117,8 @@ namespace System.Text.Json.Serialization.Metadata
                 converter,
                 ignoreCondition,
                 parentTypeNumberHandling,
-                options);
+                options
+            );
 
             return jsonPropertyInfo;
         }
@@ -121,7 +132,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type runtimePropertyType,
             JsonConverter converter,
             JsonNumberHandling? numberHandling,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
             JsonPropertyInfo jsonPropertyInfo = CreateProperty(
                 declaredPropertyType: declaredPropertyType,
@@ -131,7 +143,8 @@ namespace System.Text.Json.Serialization.Metadata
                 isVirtual: false,
                 converter,
                 options,
-                parentTypeNumberHandling: numberHandling);
+                parentTypeNumberHandling: numberHandling
+            );
 
             Debug.Assert(jsonPropertyInfo.IsForTypeInfo);
 
@@ -143,7 +156,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal JsonPropertyInfo GetProperty(
             ReadOnlySpan<byte> propertyName,
             ref ReadStackFrame frame,
-            out byte[] utf8PropertyName)
+            out byte[] utf8PropertyName
+        )
         {
             PropertyRef propertyRef;
 
@@ -209,7 +223,12 @@ namespace System.Text.Json.Serialization.Metadata
             // No cached item was found. Try the main dictionary which has all of the properties.
             Debug.Assert(PropertyCache != null);
 
-            if (PropertyCache.TryGetValue(JsonHelpers.Utf8GetString(propertyName), out JsonPropertyInfo? info))
+            if (
+                PropertyCache.TryGetValue(
+                    JsonHelpers.Utf8GetString(propertyName),
+                    out JsonPropertyInfo? info
+                )
+            )
             {
                 Debug.Assert(info != null);
 
@@ -282,7 +301,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal JsonParameterInfo? GetParameter(
             ReadOnlySpan<byte> propertyName,
             ref ReadStackFrame frame,
-            out byte[] utf8PropertyName)
+            out byte[] utf8PropertyName
+        )
         {
             ParameterRef parameterRef;
 
@@ -348,7 +368,12 @@ namespace System.Text.Json.Serialization.Metadata
             // No cached item was found. Try the main dictionary which has all of the parameters.
             Debug.Assert(ParameterCache != null);
 
-            if (ParameterCache.TryGetValue(JsonHelpers.Utf8GetString(propertyName), out JsonParameterInfo? info))
+            if (
+                ParameterCache.TryGetValue(
+                    JsonHelpers.Utf8GetString(propertyName),
+                    out JsonParameterInfo? info
+                )
+            )
             {
                 Debug.Assert(info != null);
 
@@ -415,13 +440,19 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsPropertyRefEqual(in PropertyRef propertyRef, ReadOnlySpan<byte> propertyName, ulong key)
+        private static bool IsPropertyRefEqual(
+            in PropertyRef propertyRef,
+            ReadOnlySpan<byte> propertyName,
+            ulong key
+        )
         {
             if (key == propertyRef.Key)
             {
                 // We compare the whole name, although we could skip the first 7 bytes (but it's not any faster)
-                if (propertyName.Length <= PropertyNameKeyLength ||
-                    propertyName.SequenceEqual(propertyRef.NameFromJson))
+                if (
+                    propertyName.Length <= PropertyNameKeyLength
+                    || propertyName.SequenceEqual(propertyRef.NameFromJson)
+                )
                 {
                     return true;
                 }
@@ -431,13 +462,19 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsParameterRefEqual(in ParameterRef parameterRef, ReadOnlySpan<byte> parameterName, ulong key)
+        private static bool IsParameterRefEqual(
+            in ParameterRef parameterRef,
+            ReadOnlySpan<byte> parameterName,
+            ulong key
+        )
         {
             if (key == parameterRef.Key)
             {
                 // We compare the whole name, although we could skip the first 7 bytes (but it's not any faster)
-                if (parameterName.Length <= PropertyNameKeyLength ||
-                    parameterName.SequenceEqual(parameterRef.NameFromJson))
+                if (
+                    parameterName.Length <= PropertyNameKeyLength
+                    || parameterName.SequenceEqual(parameterRef.NameFromJson)
+                )
                 {
                     return true;
                 }
@@ -467,9 +504,15 @@ namespace System.Text.Json.Serialization.Metadata
             else
             {
                 key =
-                    length > 5 ? Unsafe.ReadUnaligned<uint>(ref reference) | (ulong)Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref reference, 4)) << 32 :
-                    length > 3 ? Unsafe.ReadUnaligned<uint>(ref reference) :
-                    length > 1 ? Unsafe.ReadUnaligned<ushort>(ref reference) : 0UL;
+                    length > 5
+                        ? Unsafe.ReadUnaligned<uint>(ref reference)
+                          | (ulong)Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref reference, 4))
+                              << 32
+                        : length > 3
+                            ? Unsafe.ReadUnaligned<uint>(ref reference)
+                            : length > 1
+                                ? Unsafe.ReadUnaligned<ushort>(ref reference)
+                                : 0UL;
                 key |= (ulong)length << 56;
 
                 if ((length & 1) != 0)
@@ -487,16 +530,52 @@ namespace System.Text.Json.Serialization.Metadata
                 const int BitsInByte = 8;
                 Debug.Assert(
                     // Verify embedded property name.
-                    (name.Length < 1 || name[0] == ((key & ((ulong)0xFF << BitsInByte * 0)) >> BitsInByte * 0)) &&
-                    (name.Length < 2 || name[1] == ((key & ((ulong)0xFF << BitsInByte * 1)) >> BitsInByte * 1)) &&
-                    (name.Length < 3 || name[2] == ((key & ((ulong)0xFF << BitsInByte * 2)) >> BitsInByte * 2)) &&
-                    (name.Length < 4 || name[3] == ((key & ((ulong)0xFF << BitsInByte * 3)) >> BitsInByte * 3)) &&
-                    (name.Length < 5 || name[4] == ((key & ((ulong)0xFF << BitsInByte * 4)) >> BitsInByte * 4)) &&
-                    (name.Length < 6 || name[5] == ((key & ((ulong)0xFF << BitsInByte * 5)) >> BitsInByte * 5)) &&
-                    (name.Length < 7 || name[6] == ((key & ((ulong)0xFF << BitsInByte * 6)) >> BitsInByte * 6)) &&
-                    // Verify embedded length.
-                    (name.Length >= 0xFF || (key & ((ulong)0xFF << BitsInByte * 7)) >> BitsInByte * 7 == (ulong)name.Length) &&
-                    (name.Length < 0xFF || (key & ((ulong)0xFF << BitsInByte * 7)) >> BitsInByte * 7 == 0xFF));
+                    (
+                        name.Length < 1
+                        || name[0] == ((key & ((ulong)0xFF << BitsInByte * 0)) >> BitsInByte * 0)
+                    )
+                        && (
+                            name.Length < 2
+                            || name[1]
+                                == ((key & ((ulong)0xFF << BitsInByte * 1)) >> BitsInByte * 1)
+                        )
+                        && (
+                            name.Length < 3
+                            || name[2]
+                                == ((key & ((ulong)0xFF << BitsInByte * 2)) >> BitsInByte * 2)
+                        )
+                        && (
+                            name.Length < 4
+                            || name[3]
+                                == ((key & ((ulong)0xFF << BitsInByte * 3)) >> BitsInByte * 3)
+                        )
+                        && (
+                            name.Length < 5
+                            || name[4]
+                                == ((key & ((ulong)0xFF << BitsInByte * 4)) >> BitsInByte * 4)
+                        )
+                        && (
+                            name.Length < 6
+                            || name[5]
+                                == ((key & ((ulong)0xFF << BitsInByte * 5)) >> BitsInByte * 5)
+                        )
+                        && (
+                            name.Length < 7
+                            || name[6]
+                                == ((key & ((ulong)0xFF << BitsInByte * 6)) >> BitsInByte * 6)
+                        )
+                        &&
+                        // Verify embedded length.
+                        (
+                            name.Length >= 0xFF
+                            || (key & ((ulong)0xFF << BitsInByte * 7)) >> BitsInByte * 7
+                                == (ulong)name.Length
+                        )
+                        && (
+                            name.Length < 0xFF
+                            || (key & ((ulong)0xFF << BitsInByte * 7)) >> BitsInByte * 7 == 0xFF
+                        )
+                );
             }
 #endif
 
@@ -557,7 +636,9 @@ namespace System.Text.Json.Serialization.Metadata
                 Debug.Assert(replacementList.Count <= ParameterNameCountCacheThreshold);
 
                 // Verify replacementList will not become too large.
-                while (replacementList.Count + listToAppend.Count > ParameterNameCountCacheThreshold)
+                while (
+                    replacementList.Count + listToAppend.Count > ParameterNameCountCacheThreshold
+                )
                 {
                     // This code path is rare; keep it simple by using RemoveAt() instead of RemoveRange() which requires calculating index\count.
                     listToAppend.RemoveAt(listToAppend.Count - 1);
@@ -586,12 +667,16 @@ namespace System.Text.Json.Serialization.Metadata
             JsonPropertyInfo[] array;
             if (PropInitFunc == null || (array = PropInitFunc(context)) == null)
             {
-                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(context, Type);
+                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(
+                    context,
+                    Type
+                );
                 return;
             }
 
             Dictionary<string, JsonPropertyInfo>? ignoredMembers = null;
-            JsonPropertyDictionary<JsonPropertyInfo> propertyCache = new(Options.PropertyNameCaseInsensitive, array.Length);
+            JsonPropertyDictionary<JsonPropertyInfo> propertyCache =
+                new(Options.PropertyNameCaseInsensitive, array.Length);
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -602,13 +687,19 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     if (hasJsonInclude)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_JsonIncludeOnNonPublicInvalid(jsonPropertyInfo.ClrName!, jsonPropertyInfo.DeclaringType);
+                        ThrowHelper.ThrowInvalidOperationException_JsonIncludeOnNonPublicInvalid(
+                            jsonPropertyInfo.ClrName!,
+                            jsonPropertyInfo.DeclaringType
+                        );
                     }
-
                     continue;
                 }
 
-                if (jsonPropertyInfo.MemberType == MemberTypes.Field && !hasJsonInclude && !Options.IncludeFields)
+                if (
+                    jsonPropertyInfo.MemberType == MemberTypes.Field
+                    && !hasJsonInclude
+                    && !Options.IncludeFields
+                )
                 {
                     continue;
                 }
@@ -642,7 +733,10 @@ namespace System.Text.Json.Serialization.Metadata
             JsonParameterInfoValues[] array;
             if (CtorParamInitFunc == null || (array = CtorParamInitFunc()) == null)
             {
-                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeCtorParams(context, Type);
+                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeCtorParams(
+                    context,
+                    Type
+                );
                 return;
             }
 

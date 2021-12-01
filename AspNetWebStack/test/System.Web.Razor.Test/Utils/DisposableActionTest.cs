@@ -19,7 +19,12 @@ namespace System.Web.Razor.Test.Utils
         {
             // Arrange
             bool called = false;
-            DisposableAction action = new DisposableAction(() => { called = true; });
+            DisposableAction action = new DisposableAction(
+                () =>
+                {
+                    called = true;
+                }
+            );
 
             // Act
             action.Dispose();

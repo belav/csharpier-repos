@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
         public RelationalQueryContext(
             QueryContextDependencies dependencies,
-            RelationalQueryContextDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalQueryContextDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     A factory for creating a readable query string from a <see cref="DbCommand" />
         /// </summary>
-        public virtual IRelationalQueryStringFactory RelationalQueryStringFactory
-            => RelationalDependencies.RelationalQueryStringFactory;
+        public virtual IRelationalQueryStringFactory RelationalQueryStringFactory =>
+            RelationalDependencies.RelationalQueryStringFactory;
 
         /// <summary>
         ///     Gets the active relational connection.
@@ -54,13 +54,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <value>
         ///     The connection.
         /// </value>
-        public virtual IRelationalConnection Connection
-            => RelationalDependencies.RelationalConnection;
+        public virtual IRelationalConnection Connection =>
+            RelationalDependencies.RelationalConnection;
 
         /// <summary>
         ///     The command logger to use while executing the query.
         /// </summary>
-        public new virtual IRelationalCommandDiagnosticsLogger CommandLogger
-            => (IRelationalCommandDiagnosticsLogger)base.CommandLogger;
+        public new virtual IRelationalCommandDiagnosticsLogger CommandLogger =>
+            (IRelationalCommandDiagnosticsLogger)base.CommandLogger;
     }
 }

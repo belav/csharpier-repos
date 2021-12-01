@@ -24,6 +24,12 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         /// <summary>
         /// Returns valid signature help items at the specified position in the document.
         /// </summary>
-        Task<SignatureHelpItems?> GetItemsAsync(Document document, int position, SignatureHelpTriggerInfo triggerInfo, SignatureHelpOptions options, CancellationToken cancellationToken);
+        Task<SignatureHelpItems?> GetItemsAsync(
+            Document document,
+            int position,
+            SignatureHelpTriggerInfo triggerInfo,
+            SignatureHelpOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

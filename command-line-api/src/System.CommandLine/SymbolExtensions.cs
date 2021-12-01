@@ -18,17 +18,11 @@ namespace System.CommandLine
             switch (symbol)
             {
                 case IOption option:
-                    return new[]
-                    {
-                        option.Argument
-                    };
+                    return new[] { option.Argument };
                 case ICommand command:
                     return command.Arguments;
                 case IArgument argument:
-                    return new[]
-                    {
-                        argument
-                    };
+                    return new[] { argument };
                 default:
                     throw new NotSupportedException();
             }
@@ -65,9 +59,7 @@ namespace System.CommandLine
                 return new RootCommand { symbol };
             }
 
-            var root = symbol.Parents
-                             .OfType<RootCommand>()
-                             .FirstOrDefault();
+            var root = symbol.Parents.OfType<RootCommand>().FirstOrDefault();
 
             if (root is null)
             {

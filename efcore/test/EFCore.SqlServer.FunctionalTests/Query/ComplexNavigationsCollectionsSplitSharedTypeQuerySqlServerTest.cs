@@ -5,13 +5,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsCollectionsSplitSharedTypeQuerySqlServerTest : ComplexNavigationsCollectionsSplitSharedTypeQueryRelationalTestBase<
-        ComplexNavigationsSharedTypeQuerySqlServerFixture>
+    public class ComplexNavigationsCollectionsSplitSharedTypeQuerySqlServerTest
+        : ComplexNavigationsCollectionsSplitSharedTypeQueryRelationalTestBase<ComplexNavigationsSharedTypeQuerySqlServerFixture>
     {
         public ComplexNavigationsCollectionsSplitSharedTypeQuerySqlServerTest(
             ComplexNavigationsSharedTypeQuerySqlServerFixture fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

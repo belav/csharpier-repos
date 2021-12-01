@@ -9,7 +9,6 @@ using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-
 namespace PInvokeTest
 {
     static class PInvokeExampleNative
@@ -45,7 +44,7 @@ namespace PInvokeTest
         static bool FromTryCatch()
         {
             bool result = false;
-            try 
+            try
             {
                 // All pinvokes should be inline, except on x64
                 result = (PInvokeExampleNative.GetConstant() == AsNormalInline());
@@ -55,14 +54,14 @@ namespace PInvokeTest
                 result = false;
             }
             return result;
-        }        
+        }
 
         static bool FromTryFinally()
         {
             bool result = false;
             bool result1 = false;
             bool result2 = false;
-            try 
+            try
             {
                 // All pinvokes should be inline, except on x64
                 result1 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
@@ -73,7 +72,7 @@ namespace PInvokeTest
                 result = result1 && result2;
             }
             return result;
-        }        
+        }
 
         static bool FromTryFinally2()
         {
@@ -81,7 +80,7 @@ namespace PInvokeTest
             bool result1 = false;
             bool result2 = false;
 
-            try 
+            try
             {
                 // These two pinvokes should be inline, except on x64
                 result1 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
@@ -94,7 +93,7 @@ namespace PInvokeTest
             }
 
             return result;
-        }        
+        }
 
         static bool FromTryFinally3()
         {
@@ -102,14 +101,14 @@ namespace PInvokeTest
             bool result1 = false;
             bool result2 = false;
 
-            try 
+            try
             {
                 // These two pinvokes should be inline, except on x64
                 result1 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
             }
             finally
             {
-                try 
+                try
                 {
                     // These two pinvokes should *not* be inline (finally)
                     result2 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
@@ -123,7 +122,7 @@ namespace PInvokeTest
             }
 
             return result;
-        }        
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool FromInline()
@@ -222,7 +221,7 @@ namespace PInvokeTest
             result &= FromTryFinally();
             result &= FromTryFinally2();
             result &= FromTryFinally3();
-            result &= FromInline();           
+            result &= FromInline();
             result &= FromInline2();
             result &= FromNoInline();
             result &= FromNoInline2();

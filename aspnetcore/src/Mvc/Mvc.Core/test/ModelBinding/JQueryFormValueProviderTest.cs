@@ -13,7 +13,8 @@ public class JQueryFormValueProviderTest : EnumerableValueProviderTest
     protected override IEnumerableValueProvider GetEnumerableValueProvider(
         BindingSource bindingSource,
         Dictionary<string, StringValues> values,
-        CultureInfo culture)
+        CultureInfo culture
+    )
     {
         return new JQueryFormValueProvider(bindingSource, values, culture);
     }
@@ -23,7 +24,11 @@ public class JQueryFormValueProviderTest : EnumerableValueProviderTest
     {
         // Arrange
         var dictionary = new Dictionary<string, StringValues>();
-        var provider = new JQueryFormValueProvider(BindingSource.Form, dictionary, CultureInfo.CurrentCulture);
+        var provider = new JQueryFormValueProvider(
+            BindingSource.Form,
+            dictionary,
+            CultureInfo.CurrentCulture
+        );
 
         // Act
         var result = provider.Filter();
@@ -37,9 +42,9 @@ public class JQueryFormValueProviderTest : EnumerableValueProviderTest
     {
         // Arrange
         var store = new Dictionary<string, StringValues>(BackingStore)
-            {
-                { string.Empty, "some-value" },
-            };
+        {
+            { string.Empty, "some-value" },
+        };
         var valueProvider = GetEnumerableValueProvider(BindingSource.Query, store, culture: null);
 
         // Act

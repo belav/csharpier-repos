@@ -18,7 +18,10 @@ namespace System.Security.Cryptography
                 if (pkeyHandle == null)
                     throw new ArgumentNullException(nameof(pkeyHandle));
                 if (pkeyHandle.IsInvalid)
-                    throw new ArgumentException(SR.Cryptography_OpenInvalidHandle, nameof(pkeyHandle));
+                    throw new ArgumentException(
+                        SR.Cryptography_OpenInvalidHandle,
+                        nameof(pkeyHandle)
+                    );
 
                 // If ecKey is valid it has already been up-ref'd, so we can just use this handle as-is.
                 SafeEcKeyHandle key = Interop.Crypto.EvpPkeyGetEcKey(pkeyHandle);
@@ -107,7 +110,7 @@ namespace System.Security.Cryptography
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS
                         nameof(ECDiffieHellmanPublicKey)
 #else
-                        nameof(ECDiffieHellmanOpenSslPublicKey)
+                    nameof(ECDiffieHellmanOpenSslPublicKey)
 #endif
                     );
                 }

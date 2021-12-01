@@ -12,14 +12,21 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use CopyFileEx.
         /// </summary>
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "CopyFileExW", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "CopyFileExW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         private static partial bool CopyFileExPrivate(
             string src,
             string dst,
             IntPtr progressRoutine,
             IntPtr progressData,
             ref int cancel,
-            int flags);
+            int flags
+        );
 
         internal static bool CopyFileEx(
             string src,
@@ -27,7 +34,8 @@ internal static partial class Interop
             IntPtr progressRoutine,
             IntPtr progressData,
             ref int cancel,
-            int flags)
+            int flags
+        )
         {
             src = PathInternal.EnsureExtendedPrefixIfNeeded(src);
             dst = PathInternal.EnsureExtendedPrefixIfNeeded(dst);

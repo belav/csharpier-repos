@@ -15,20 +15,30 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         [Fact]
         public void Should_not_fail()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<UserModel, UserDto>()
-                                .ForMember(dto => dto.FullName, opt => opt.MapFrom(src => src.LastName + " " + src.FirstName));
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<UserModel, UserDto>()
+                        .ForMember(
+                            dto => dto.FullName,
+                            opt => opt.MapFrom(src => src.LastName + " " + src.FirstName)
+                        );
+                }
+            );
 
-            typeof(NullReferenceException).ShouldNotBeThrownBy(() => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()); //null reference exception here
+            typeof(NullReferenceException).ShouldNotBeThrownBy(
+                () => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()
+            ); //null reference exception here
         }
 
         [Fact]
         public void Should_map_from_String()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserModel, UserDto>()
-                            .ForMember(dto => dto.FullName, opt => opt.MapFrom("FirstName")));
+            var config = new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<UserModel, UserDto>()
+                        .ForMember(dto => dto.FullName, opt => opt.MapFrom("FirstName"))
+            );
 
             var um = new UserModel();
             um.FirstName = "Hallo";
@@ -64,11 +74,19 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
             public string ShortDescription { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateProjection<Model, Dto>().ForMember(d => d.ShortDescription, o => o.MapFrom(s => "mappedFrom")));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                c =>
+                    c.CreateProjection<Model, Dto>()
+                        .ForMember(d => d.ShortDescription, o => o.MapFrom(s => "mappedFrom"))
+            );
 
         protected override void Because_of()
         {
-            _destination = new[] { new Model() }.AsQueryable().ProjectTo<Dto>(Configuration).Single();
+            _destination = new[] { new Model() }
+                .AsQueryable()
+                .ProjectTo<Dto>(Configuration)
+                .Single();
         }
 
         [Fact]
@@ -85,16 +103,24 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         }
         class InnerModel
         {
-            public InnerModel(string value) => Value = value ?? throw new ArgumentNullException(nameof(value));
+            public InnerModel(string value) =>
+                Value = value ?? throw new ArgumentNullException(nameof(value));
             private string Value { get; set; }
         }
         class Dto
         {
             public string Value { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateMap<Model, Dto>().ForMember(d => d.Value, o => o.MapFrom("Inner.Value")));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                c =>
+                    c.CreateMap<Model, Dto>().ForMember(d => d.Value, o => o.MapFrom("Inner.Value"))
+            );
         [Fact]
-        public void Should_map_ok() => Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe("mappedFrom");
+        public void Should_map_ok() =>
+            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe(
+                "mappedFrom"
+            );
     }
     public class When_mapping_from_private_method : AutoMapperSpecBase
     {
@@ -104,7 +130,8 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         }
         class InnerModel
         {
-            public InnerModel(string value) => SomeValue = value ?? throw new ArgumentNullException(nameof(value));
+            public InnerModel(string value) =>
+                SomeValue = value ?? throw new ArgumentNullException(nameof(value));
             private string SomeValue { get; set; }
             private string GetSomeValue() => SomeValue;
         }
@@ -112,8 +139,16 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         {
             public string Value { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(c => c.CreateMap<Model, Dto>().ForMember(d => d.Value, o => o.MapFrom("Inner.GetSomeValue")));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                c =>
+                    c.CreateMap<Model, Dto>()
+                        .ForMember(d => d.Value, o => o.MapFrom("Inner.GetSomeValue"))
+            );
         [Fact]
-        public void Should_map_ok() => Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe("mappedFrom");
+        public void Should_map_ok() =>
+            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe(
+                "mappedFrom"
+            );
     }
 }

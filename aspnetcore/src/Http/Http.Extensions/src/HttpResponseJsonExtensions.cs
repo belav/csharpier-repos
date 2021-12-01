@@ -26,13 +26,23 @@ public static partial class HttpResponseJsonExtensions
     /// <param name="value">The value to write as JSON.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static Task WriteAsJsonAsync<TValue>(
         this HttpResponse response,
         TValue value,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync<TValue>(value, options: null, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync<TValue>(
+            value,
+            options: null,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -45,14 +55,24 @@ public static partial class HttpResponseJsonExtensions
     /// <param name="options">The serializer options use when serializing the value.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static Task WriteAsJsonAsync<TValue>(
         this HttpResponse response,
         TValue value,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync<TValue>(value, options, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync<TValue>(
+            value,
+            options,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -66,13 +86,18 @@ public static partial class HttpResponseJsonExtensions
     /// <param name="contentType">The content-type to set on the response.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static Task WriteAsJsonAsync<TValue>(
         this HttpResponse response,
         TValue value,
         JsonSerializerOptions? options,
         string? contentType,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -85,17 +110,28 @@ public static partial class HttpResponseJsonExtensions
         // if no user provided token, pass the RequestAborted token and ignore OperationCanceledException
         if (!cancellationToken.CanBeCanceled)
         {
-            return WriteAsJsonAsyncSlow<TValue>(response.Body, value, options, response.HttpContext.RequestAborted);
+            return WriteAsJsonAsyncSlow<TValue>(
+                response.Body,
+                value,
+                options,
+                response.HttpContext.RequestAborted
+            );
         }
 
-        return JsonSerializer.SerializeAsync<TValue>(response.Body, value, options, cancellationToken);
+        return JsonSerializer.SerializeAsync<TValue>(
+            response.Body,
+            value,
+            options,
+            cancellationToken
+        );
     }
 
     private static async Task WriteAsJsonAsyncSlow<TValue>(
         Stream body,
         TValue value,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -113,14 +149,25 @@ public static partial class HttpResponseJsonExtensions
     /// <param name="type">The type of object to write.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static Task WriteAsJsonAsync(
         this HttpResponse response,
         object? value,
         Type type,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync(value, type, options: null, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync(
+            value,
+            type,
+            options: null,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -133,15 +180,26 @@ public static partial class HttpResponseJsonExtensions
     /// <param name="options">The serializer options use when serializing the value.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static Task WriteAsJsonAsync(
         this HttpResponse response,
         object? value,
         Type type,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync(value, type, options, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync(
+            value,
+            type,
+            options,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -155,14 +213,19 @@ public static partial class HttpResponseJsonExtensions
     /// <param name="contentType">The content-type to set on the response.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static Task WriteAsJsonAsync(
         this HttpResponse response,
         object? value,
         Type type,
         JsonSerializerOptions? options,
         string? contentType,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -180,10 +243,22 @@ public static partial class HttpResponseJsonExtensions
         // if no user provided token, pass the RequestAborted token and ignore OperationCanceledException
         if (!cancellationToken.CanBeCanceled)
         {
-            return WriteAsJsonAsyncSlow(response.Body, value, type, options, response.HttpContext.RequestAborted);
+            return WriteAsJsonAsyncSlow(
+                response.Body,
+                value,
+                type,
+                options,
+                response.HttpContext.RequestAborted
+            );
         }
 
-        return JsonSerializer.SerializeAsync(response.Body, value, type, options, cancellationToken);
+        return JsonSerializer.SerializeAsync(
+            response.Body,
+            value,
+            type,
+            options,
+            cancellationToken
+        );
     }
 
     private static async Task WriteAsJsonAsyncSlow(
@@ -191,7 +266,8 @@ public static partial class HttpResponseJsonExtensions
         object? value,
         Type type,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -203,6 +279,8 @@ public static partial class HttpResponseJsonExtensions
     private static JsonSerializerOptions ResolveSerializerOptions(HttpContext httpContext)
     {
         // Attempt to resolve options from DI then fallback to default options
-        return httpContext.RequestServices?.GetService<IOptions<JsonOptions>>()?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
+        return httpContext.RequestServices?.GetService<
+                IOptions<JsonOptions>
+            >()?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
     }
 }

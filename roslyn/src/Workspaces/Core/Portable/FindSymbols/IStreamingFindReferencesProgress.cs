@@ -34,14 +34,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Contract.ThrowIfTrue(symbols.IsDefaultOrEmpty, "Symbols should be non empty");
 
             Symbols = ImmutableHashSet.CreateRange(
-                MetadataUnifyingEquivalenceComparer.Instance, symbols);
+                MetadataUnifyingEquivalenceComparer.Instance,
+                symbols
+            );
         }
 
-        public override bool Equals(object? obj)
-            => obj is SymbolGroup group && Equals(group);
+        public override bool Equals(object? obj) => obj is SymbolGroup group && Equals(group);
 
-        public bool Equals(SymbolGroup? group)
-            => this == group || (group != null && Symbols.SetEquals(group.Symbols));
+        public bool Equals(SymbolGroup? group) =>
+            this == group || (group != null && Symbols.SetEquals(group.Symbols));
 
         public override int GetHashCode()
         {
@@ -68,17 +69,32 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         ValueTask OnStartedAsync(CancellationToken cancellationToken);
         ValueTask OnCompletedAsync(CancellationToken cancellationToken);
 
-        ValueTask OnFindInDocumentStartedAsync(Document document, CancellationToken cancellationToken);
-        ValueTask OnFindInDocumentCompletedAsync(Document document, CancellationToken cancellationToken);
+        ValueTask OnFindInDocumentStartedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
+        ValueTask OnFindInDocumentCompletedAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
         ValueTask OnDefinitionFoundAsync(SymbolGroup group, CancellationToken cancellationToken);
-        ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location, CancellationToken cancellationToken);
+        ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location,
+            CancellationToken cancellationToken
+        );
     }
 
     internal interface IStreamingFindLiteralReferencesProgress
     {
         IStreamingProgressTracker ProgressTracker { get; }
 
-        ValueTask OnReferenceFoundAsync(Document document, TextSpan span, CancellationToken cancellationToken);
+        ValueTask OnReferenceFoundAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        );
     }
 }

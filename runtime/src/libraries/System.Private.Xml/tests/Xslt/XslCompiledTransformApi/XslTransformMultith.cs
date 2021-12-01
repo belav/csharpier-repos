@@ -13,7 +13,7 @@ namespace System.Xml.Tests
     public class SameInstanceXslTransformTestCase : XsltApiTestCaseBase2
     {
         // Variables from init string
-        protected string _strPath;                    // Path of the data files
+        protected string _strPath; // Path of the data files
 
         // Other global variables
         public XslCompiledTransform xsltSameInstance; // Used for same instance testing of XsltArgumentList
@@ -36,8 +36,8 @@ namespace System.Xml.Tests
     //[TestCase(Name = "Same instance testing: Transform() - READER")]
     public class SameInstanceXslTransformReader : SameInstanceXslTransformTestCase
     {
-        private XPathDocument _xd;           // Loads XML file
-        private XmlReader _xrData;           // Loads XML File
+        private XPathDocument _xd; // Loads XML file
+        private XmlReader _xrData; // Loads XML File
 
         private ITestOutputHelper _output;
         public SameInstanceXslTransformReader(ITestOutputHelper output) : base(output)
@@ -69,7 +69,13 @@ namespace System.Xml.Tests
             {
                 StringWriter sw = new StringWriter();
                 xsltSameInstance.Transform(_xrData, null, sw);
-                _output.WriteLine("Transform: Thread " + args + "\tIteration " + i + "\tDone with READER transform...");
+                _output.WriteLine(
+                    "Transform: Thread "
+                        + args
+                        + "\tIteration "
+                        + i
+                        + "\tDone with READER transform..."
+                );
             }
             return 1;
         }
@@ -100,7 +106,10 @@ namespace System.Xml.Tests
         {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
-            Load("QFE505_multith_customer_repro_with_or_expr.xsl", "QFE505_multith_customer_repro_with_or_expr.xml");
+            Load(
+                "QFE505_multith_customer_repro_with_or_expr.xsl",
+                "QFE505_multith_customer_repro_with_or_expr.xml"
+            );
 
             CThreads rThreads = new CThreads(_output);
             rThreads.Add(new ThreadFunc(Transform), "1");
@@ -387,7 +396,10 @@ namespace System.Xml.Tests
         {
             AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
 
-            Load("QFE505_multith_customer_repro_with_or_expr.xsl", "QFE505_multith_customer_repro_with_or_expr.xml");
+            Load(
+                "QFE505_multith_customer_repro_with_or_expr.xsl",
+                "QFE505_multith_customer_repro_with_or_expr.xml"
+            );
 
             CThreads rThreads = new CThreads(_output);
             rThreads.Add(new ThreadFunc(Transform), "1");

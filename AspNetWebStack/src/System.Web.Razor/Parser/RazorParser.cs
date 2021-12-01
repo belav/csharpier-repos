@@ -61,7 +61,9 @@ namespace System.Web.Razor.Parser
         }
 
 #pragma warning disable 0618
-        [Obsolete("Lookahead-based readers have been deprecated, use overrides which accept a TextReader or ITextDocument instead")]
+        [Obsolete(
+            "Lookahead-based readers have been deprecated, use overrides which accept a TextReader or ITextDocument instead"
+        )]
         public virtual void Parse(LookaheadTextReader input, ParserVisitor visitor)
         {
             ParserResults results = ParseCore(new SeekableTextReader(input));
@@ -70,52 +72,91 @@ namespace System.Web.Razor.Parser
             visitor.Visit(results);
         }
 
-        [Obsolete("Lookahead-based readers have been deprecated, use overrides which accept a TextReader or ITextDocument instead")]
+        [Obsolete(
+            "Lookahead-based readers have been deprecated, use overrides which accept a TextReader or ITextDocument instead"
+        )]
         public virtual ParserResults Parse(LookaheadTextReader input)
         {
             return ParseCore(new SeekableTextReader(input));
         }
 #pragma warning restore 0618
 
-        public virtual Task CreateParseTask(TextReader input, Action<Span> spanCallback, Action<RazorError> errorCallback)
+        public virtual Task CreateParseTask(
+            TextReader input,
+            Action<Span> spanCallback,
+            Action<RazorError> errorCallback
+        )
         {
             return CreateParseTask(input, new CallbackVisitor(spanCallback, errorCallback));
         }
 
-        public virtual Task CreateParseTask(TextReader input, Action<Span> spanCallback, Action<RazorError> errorCallback, SynchronizationContext context)
+        public virtual Task CreateParseTask(
+            TextReader input,
+            Action<Span> spanCallback,
+            Action<RazorError> errorCallback,
+            SynchronizationContext context
+        )
         {
-            return CreateParseTask(input, new CallbackVisitor(spanCallback, errorCallback) { SynchronizationContext = context });
-        }
-
-        public virtual Task CreateParseTask(TextReader input, Action<Span> spanCallback, Action<RazorError> errorCallback, CancellationToken cancelToken)
-        {
-            return CreateParseTask(input, new CallbackVisitor(spanCallback, errorCallback) { CancelToken = cancelToken });
-        }
-
-        public virtual Task CreateParseTask(TextReader input, Action<Span> spanCallback, Action<RazorError> errorCallback, SynchronizationContext context, CancellationToken cancelToken)
-        {
-            return CreateParseTask(input, new CallbackVisitor(spanCallback, errorCallback)
-            {
-                SynchronizationContext = context,
-                CancelToken = cancelToken
-            });
-        }
-
-        [SuppressMessage("Microsoft.Web.FxCop", "MW1200:DoNotConstructTaskInstances", Justification = "This rule is not applicable to this assembly.")]
-        public virtual Task CreateParseTask(TextReader input,
-                                            ParserVisitor consumer)
-        {
-            return new Task(() =>
-            {
-                try
+            return CreateParseTask(
+                input,
+                new CallbackVisitor(spanCallback, errorCallback)
                 {
-                    Parse(input, consumer);
+                    SynchronizationContext = context
                 }
-                catch (OperationCanceledException)
+            );
+        }
+
+        public virtual Task CreateParseTask(
+            TextReader input,
+            Action<Span> spanCallback,
+            Action<RazorError> errorCallback,
+            CancellationToken cancelToken
+        )
+        {
+            return CreateParseTask(
+                input,
+                new CallbackVisitor(spanCallback, errorCallback) { CancelToken = cancelToken }
+            );
+        }
+
+        public virtual Task CreateParseTask(
+            TextReader input,
+            Action<Span> spanCallback,
+            Action<RazorError> errorCallback,
+            SynchronizationContext context,
+            CancellationToken cancelToken
+        )
+        {
+            return CreateParseTask(
+                input,
+                new CallbackVisitor(spanCallback, errorCallback)
                 {
-                    return; // Just return if we're cancelled.
+                    SynchronizationContext = context,
+                    CancelToken = cancelToken
                 }
-            });
+            );
+        }
+
+        [SuppressMessage(
+            "Microsoft.Web.FxCop",
+            "MW1200:DoNotConstructTaskInstances",
+            Justification = "This rule is not applicable to this assembly."
+        )]
+        public virtual Task CreateParseTask(TextReader input, ParserVisitor consumer)
+        {
+            return new Task(
+                () =>
+                {
+                    try
+                    {
+                        Parse(input, consumer);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        return; // Just return if we're cancelled.
+                    }
+                }
+            );
         }
 
         private ParserResults ParseCore(ITextDocument input)

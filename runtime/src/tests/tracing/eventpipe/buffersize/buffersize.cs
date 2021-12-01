@@ -15,9 +15,12 @@ namespace Tracing.Tests.BufferValidation
 {
     public sealed class MyEventSource : EventSource
     {
-        private MyEventSource() {}
+        private MyEventSource() { }
         public static MyEventSource Log = new MyEventSource();
-        public void MyEvent() { WriteEvent(1, "MyEvent"); }
+        public void MyEvent()
+        {
+            WriteEvent(1, "MyEvent");
+        }
     }
 
     public class BufferValidation
@@ -27,15 +30,27 @@ namespace Tracing.Tests.BufferValidation
             // This tests the resilience of message sending with
             // smaller buffers, specifically 1MB and 4MB
 
-            var providers = new List<Provider>()
-            {
-                new Provider("MyEventSource")
-            };
+            var providers = new List<Provider>() { new Provider("MyEventSource") };
 
             var tests = new int[] { 0, 2 }
                 .Select(x => (uint)Math.Pow(2, x))
-                .Select(bufferSize => new SessionConfiguration(circularBufferSizeMB: bufferSize, format: EventPipeSerializationFormat.NetTrace, providers: providers))
-                .Select<SessionConfiguration, Func<int>>(configuration => () => IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, configuration));
+                .Select(
+                    bufferSize =>
+                        new SessionConfiguration(
+                            circularBufferSizeMB: bufferSize,
+                            format: EventPipeSerializationFormat.NetTrace,
+                            providers: providers
+                        )
+                )
+                .Select<SessionConfiguration, Func<int>>(
+                    configuration =>
+                        () =>
+                            IpcTraceTest.RunAndValidateEventCounts(
+                                _expectedEventCounts,
+                                _eventGeneratingAction,
+                                configuration
+                            )
+                );
 
             foreach (var test in tests)
             {
@@ -47,7 +62,10 @@ namespace Tracing.Tests.BufferValidation
             return 100;
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             // We're testing small buffer sizes, so we expect some [read: many] dropped events
             // especially on the resource strapped CI machines.  Since the number of dropped events
@@ -56,9 +74,9 @@ namespace Tracing.Tests.BufferValidation
             { "MyEventSource", -1 }
         };
 
-        private static Action _eventGeneratingAction = () => 
+        private static Action _eventGeneratingAction = () =>
         {
-            foreach (var _ in Enumerable.Range(0,1000))
+            foreach (var _ in Enumerable.Range(0, 1000))
             {
                 MyEventSource.Log.MyEvent();
             }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -91,7 +91,12 @@ public class NameValueHeaderValueTest
         pair0.Value = "othervalue";
         Assert.Equal("othervalue", pair0.Value);
         Assert.Null(pair1.Value.Value);
-        Assert.Throws<InvalidOperationException>(() => { pair1.Value = "othervalue"; });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                pair1.Value = "othervalue";
+            }
+        );
     }
 
     [Fact]
@@ -124,7 +129,12 @@ public class NameValueHeaderValueTest
         pair0.Value = "othervalue";
         Assert.Equal("othervalue", pair0.Value);
         Assert.Equal("value", pair1.Value);
-        Assert.Throws<InvalidOperationException>(() => { pair1.Value = "othervalue"; });
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                pair1.Value = "othervalue";
+            }
+        );
     }
 
     [Fact]
@@ -147,8 +157,20 @@ public class NameValueHeaderValueTest
     public void Value_CallSetterWithInvalidValues_Throw()
     {
         // Just verify that the setter calls the same validation the ctor invokes.
-        Assert.Throws<FormatException>(() => { var x = new NameValueHeaderValue("name"); x.Value = " x "; });
-        Assert.Throws<FormatException>(() => { var x = new NameValueHeaderValue("name"); x.Value = "x y"; });
+        Assert.Throws<FormatException>(
+            () =>
+            {
+                var x = new NameValueHeaderValue("name");
+                x.Value = " x ";
+            }
+        );
+        Assert.Throws<FormatException>(
+            () =>
+            {
+                var x = new NameValueHeaderValue("name");
+                x.Value = "x y";
+            }
+        );
     }
 
     [Fact]
@@ -336,30 +358,30 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name=value1",
-                "",
-                " name = value2 ",
-                "\r\n name =value3\r\n ",
-                "name=\"value 4\"",
-                "name=\"value会5\"",
-                "name=value6,name=value7",
-                "name=\"value 8\", name= \"value 9\"",
-            };
+            "",
+            "name=value1",
+            "",
+            " name = value2 ",
+            "\r\n name =value3\r\n ",
+            "name=\"value 4\"",
+            "name=\"value会5\"",
+            "name=value6,name=value7",
+            "name=\"value 8\", name= \"value 9\"",
+        };
         var results = NameValueHeaderValue.ParseList(inputs);
 
         var expectedResults = new[]
         {
-                new NameValueHeaderValue("name", "value1"),
-                new NameValueHeaderValue("name", "value2"),
-                new NameValueHeaderValue("name", "value3"),
-                new NameValueHeaderValue("name", "\"value 4\""),
-                new NameValueHeaderValue("name", "\"value会5\""),
-                new NameValueHeaderValue("name", "value6"),
-                new NameValueHeaderValue("name", "value7"),
-                new NameValueHeaderValue("name", "\"value 8\""),
-                new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            new NameValueHeaderValue("name", "value1"),
+            new NameValueHeaderValue("name", "value2"),
+            new NameValueHeaderValue("name", "value3"),
+            new NameValueHeaderValue("name", "\"value 4\""),
+            new NameValueHeaderValue("name", "\"value会5\""),
+            new NameValueHeaderValue("name", "value6"),
+            new NameValueHeaderValue("name", "value7"),
+            new NameValueHeaderValue("name", "\"value 8\""),
+            new NameValueHeaderValue("name", "\"value 9\""),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -369,30 +391,30 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name=value1",
-                "",
-                " name = value2 ",
-                "\r\n name =value3\r\n ",
-                "name=\"value 4\"",
-                "name=\"value会5\"",
-                "name=value6,name=value7",
-                "name=\"value 8\", name= \"value 9\"",
-            };
+            "",
+            "name=value1",
+            "",
+            " name = value2 ",
+            "\r\n name =value3\r\n ",
+            "name=\"value 4\"",
+            "name=\"value会5\"",
+            "name=value6,name=value7",
+            "name=\"value 8\", name= \"value 9\"",
+        };
         var results = NameValueHeaderValue.ParseStrictList(inputs);
 
         var expectedResults = new[]
         {
-                new NameValueHeaderValue("name", "value1"),
-                new NameValueHeaderValue("name", "value2"),
-                new NameValueHeaderValue("name", "value3"),
-                new NameValueHeaderValue("name", "\"value 4\""),
-                new NameValueHeaderValue("name", "\"value会5\""),
-                new NameValueHeaderValue("name", "value6"),
-                new NameValueHeaderValue("name", "value7"),
-                new NameValueHeaderValue("name", "\"value 8\""),
-                new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            new NameValueHeaderValue("name", "value1"),
+            new NameValueHeaderValue("name", "value2"),
+            new NameValueHeaderValue("name", "value3"),
+            new NameValueHeaderValue("name", "\"value 4\""),
+            new NameValueHeaderValue("name", "\"value会5\""),
+            new NameValueHeaderValue("name", "value6"),
+            new NameValueHeaderValue("name", "value7"),
+            new NameValueHeaderValue("name", "\"value 8\""),
+            new NameValueHeaderValue("name", "\"value 9\""),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -402,30 +424,30 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name=value1",
-                "",
-                " name = value2 ",
-                "\r\n name =value3\r\n ",
-                "name=\"value 4\"",
-                "name=\"value会5\"",
-                "name=value6,name=value7",
-                "name=\"value 8\", name= \"value 9\"",
-            };
+            "",
+            "name=value1",
+            "",
+            " name = value2 ",
+            "\r\n name =value3\r\n ",
+            "name=\"value 4\"",
+            "name=\"value会5\"",
+            "name=value6,name=value7",
+            "name=\"value 8\", name= \"value 9\"",
+        };
         Assert.True(NameValueHeaderValue.TryParseList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new NameValueHeaderValue("name", "value1"),
-                new NameValueHeaderValue("name", "value2"),
-                new NameValueHeaderValue("name", "value3"),
-                new NameValueHeaderValue("name", "\"value 4\""),
-                new NameValueHeaderValue("name", "\"value会5\""),
-                new NameValueHeaderValue("name", "value6"),
-                new NameValueHeaderValue("name", "value7"),
-                new NameValueHeaderValue("name", "\"value 8\""),
-                new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            new NameValueHeaderValue("name", "value1"),
+            new NameValueHeaderValue("name", "value2"),
+            new NameValueHeaderValue("name", "value3"),
+            new NameValueHeaderValue("name", "\"value 4\""),
+            new NameValueHeaderValue("name", "\"value会5\""),
+            new NameValueHeaderValue("name", "value6"),
+            new NameValueHeaderValue("name", "value7"),
+            new NameValueHeaderValue("name", "\"value 8\""),
+            new NameValueHeaderValue("name", "\"value 9\""),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -435,30 +457,30 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name=value1",
-                "",
-                " name = value2 ",
-                "\r\n name =value3\r\n ",
-                "name=\"value 4\"",
-                "name=\"value会5\"",
-                "name=value6,name=value7",
-                "name=\"value 8\", name= \"value 9\"",
-            };
+            "",
+            "name=value1",
+            "",
+            " name = value2 ",
+            "\r\n name =value3\r\n ",
+            "name=\"value 4\"",
+            "name=\"value会5\"",
+            "name=value6,name=value7",
+            "name=\"value 8\", name= \"value 9\"",
+        };
         Assert.True(NameValueHeaderValue.TryParseStrictList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new NameValueHeaderValue("name", "value1"),
-                new NameValueHeaderValue("name", "value2"),
-                new NameValueHeaderValue("name", "value3"),
-                new NameValueHeaderValue("name", "\"value 4\""),
-                new NameValueHeaderValue("name", "\"value会5\""),
-                new NameValueHeaderValue("name", "value6"),
-                new NameValueHeaderValue("name", "value7"),
-                new NameValueHeaderValue("name", "\"value 8\""),
-                new NameValueHeaderValue("name", "\"value 9\""),
-            }.ToList();
+            new NameValueHeaderValue("name", "value1"),
+            new NameValueHeaderValue("name", "value2"),
+            new NameValueHeaderValue("name", "value3"),
+            new NameValueHeaderValue("name", "\"value 4\""),
+            new NameValueHeaderValue("name", "\"value会5\""),
+            new NameValueHeaderValue("name", "value6"),
+            new NameValueHeaderValue("name", "value7"),
+            new NameValueHeaderValue("name", "\"value 8\""),
+            new NameValueHeaderValue("name", "\"value 9\""),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -468,33 +490,33 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name1=value1",
-                "name2",
-                " name3 = 3, value a",
-                "name4 =value4, name5 = value5 b",
-                "name6=\"value 6",
-                "name7=\"value会7\"",
-                "name8=value8,name9=value9",
-                "name10=\"value 10\", name11= \"value 11\"",
-            };
+            "",
+            "name1=value1",
+            "name2",
+            " name3 = 3, value a",
+            "name4 =value4, name5 = value5 b",
+            "name6=\"value 6",
+            "name7=\"value会7\"",
+            "name8=value8,name9=value9",
+            "name10=\"value 10\", name11= \"value 11\"",
+        };
         var results = NameValueHeaderValue.ParseList(inputs);
 
         var expectedResults = new[]
         {
-                new NameValueHeaderValue("name1", "value1"),
-                new NameValueHeaderValue("name2"),
-                new NameValueHeaderValue("name3", "3"),
-                new NameValueHeaderValue("a"),
-                new NameValueHeaderValue("name4", "value4"),
-                new NameValueHeaderValue("b"),
-                new NameValueHeaderValue("6"),
-                new NameValueHeaderValue("name7", "\"value会7\""),
-                new NameValueHeaderValue("name8", "value8"),
-                new NameValueHeaderValue("name9", "value9"),
-                new NameValueHeaderValue("name10", "\"value 10\""),
-                new NameValueHeaderValue("name11", "\"value 11\""),
-            }.ToList();
+            new NameValueHeaderValue("name1", "value1"),
+            new NameValueHeaderValue("name2"),
+            new NameValueHeaderValue("name3", "3"),
+            new NameValueHeaderValue("a"),
+            new NameValueHeaderValue("name4", "value4"),
+            new NameValueHeaderValue("b"),
+            new NameValueHeaderValue("6"),
+            new NameValueHeaderValue("name7", "\"value会7\""),
+            new NameValueHeaderValue("name8", "value8"),
+            new NameValueHeaderValue("name9", "value9"),
+            new NameValueHeaderValue("name10", "\"value 10\""),
+            new NameValueHeaderValue("name11", "\"value 11\""),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -504,16 +526,16 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name1=value1",
-                "name2",
-                " name3 = 3, value a",
-                "name4 =value4, name5 = value5 b",
-                "name6=\"value 6",
-                "name7=\"value会7\"",
-                "name8=value8,name9=value9",
-                "name10=\"value 10\", name11= \"value 11\"",
-            };
+            "",
+            "name1=value1",
+            "name2",
+            " name3 = 3, value a",
+            "name4 =value4, name5 = value5 b",
+            "name6=\"value 6",
+            "name7=\"value会7\"",
+            "name8=value8,name9=value9",
+            "name10=\"value 10\", name11= \"value 11\"",
+        };
         Assert.Throws<FormatException>(() => NameValueHeaderValue.ParseStrictList(inputs));
     }
 
@@ -522,33 +544,33 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name1=value1",
-                "name2",
-                " name3 = 3, value a",
-                "name4 =value4, name5 = value5 b",
-                "name6=\"value 6",
-                "name7=\"value会7\"",
-                "name8=value8,name9=value9",
-                "name10=\"value 10\", name11= \"value 11\"",
-            };
+            "",
+            "name1=value1",
+            "name2",
+            " name3 = 3, value a",
+            "name4 =value4, name5 = value5 b",
+            "name6=\"value 6",
+            "name7=\"value会7\"",
+            "name8=value8,name9=value9",
+            "name10=\"value 10\", name11= \"value 11\"",
+        };
         Assert.True(NameValueHeaderValue.TryParseList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new NameValueHeaderValue("name1", "value1"),
-                new NameValueHeaderValue("name2"),
-                new NameValueHeaderValue("name3", "3"),
-                new NameValueHeaderValue("a"),
-                new NameValueHeaderValue("name4", "value4"),
-                new NameValueHeaderValue("b"),
-                new NameValueHeaderValue("6"),
-                new NameValueHeaderValue("name7", "\"value会7\""),
-                new NameValueHeaderValue("name8", "value8"),
-                new NameValueHeaderValue("name9", "value9"),
-                new NameValueHeaderValue("name10", "\"value 10\""),
-                new NameValueHeaderValue("name11", "\"value 11\""),
-            }.ToList();
+            new NameValueHeaderValue("name1", "value1"),
+            new NameValueHeaderValue("name2"),
+            new NameValueHeaderValue("name3", "3"),
+            new NameValueHeaderValue("a"),
+            new NameValueHeaderValue("name4", "value4"),
+            new NameValueHeaderValue("b"),
+            new NameValueHeaderValue("6"),
+            new NameValueHeaderValue("name7", "\"value会7\""),
+            new NameValueHeaderValue("name8", "value8"),
+            new NameValueHeaderValue("name9", "value9"),
+            new NameValueHeaderValue("name10", "\"value 10\""),
+            new NameValueHeaderValue("name11", "\"value 11\""),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -558,16 +580,16 @@ public class NameValueHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "name1=value1",
-                "name2",
-                " name3 = 3, value a",
-                "name4 =value4, name5 = value5 b",
-                "name6=\"value 6",
-                "name7=\"value会7\"",
-                "name8=value8,name9=value9",
-                "name10=\"value 10\", name11= \"value 11\"",
-            };
+            "",
+            "name1=value1",
+            "name2",
+            " name3 = 3, value a",
+            "name4 =value4, name5 = value5 b",
+            "name6=\"value 6",
+            "name7=\"value会7\"",
+            "name8=value8,name9=value9",
+            "name10=\"value 10\", name11= \"value 11\"",
+        };
         Assert.False(NameValueHeaderValue.TryParseStrictList(inputs, out var results));
     }
 
@@ -610,7 +632,6 @@ public class NameValueHeaderValueTest
         Assert.Equal(expected, actual);
     }
 
-
     [Theory]
     [InlineData("\n")]
     [InlineData("\b")]
@@ -651,7 +672,6 @@ public class NameValueHeaderValueTest
         Assert.NotEqual(input, actual);
     }
 
-
     #region Helper methods
 
     private void CheckValidParse(string? input, NameValueHeaderValue expectedResult)
@@ -687,6 +707,5 @@ public class NameValueHeaderValueTest
     {
         Assert.Throws<FormatException>(() => new NameValueHeaderValue(name, value));
     }
-
     #endregion
 }

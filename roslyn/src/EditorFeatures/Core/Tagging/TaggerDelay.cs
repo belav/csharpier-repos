@@ -20,19 +20,16 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// delay should be used.
         /// </summary>
         NearImmediate,
-
         /// <summary>
         /// Not as fast as NearImmediate.  A user typing quickly or navigating quickly should not
         /// trigger this.  However, any sort of pause will cause it to trigger
         /// </summary>
         Short,
-
         /// <summary>
         /// Not as fast as 'Short'. The user's pause should be more significant until the tag
         /// appears.
         /// </summary>
         Medium,
-
         /// <summary>
         /// Indicates that the tagger should run when the user appears to be 
         /// idle.  

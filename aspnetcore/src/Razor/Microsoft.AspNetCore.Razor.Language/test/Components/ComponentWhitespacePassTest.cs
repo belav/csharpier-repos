@@ -23,7 +23,8 @@ public class ComponentWhitespacePassTest
                 {
                     b.Features.Remove(b.Features.OfType<ComponentWhitespacePass>().Single());
                 }
-            });
+            }
+        );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;
@@ -39,11 +40,13 @@ public class ComponentWhitespacePassTest
     public void Execute_RemovesLeadingAndTrailingWhitespace()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 
 <span>@(""Hello, world"")</span>
 
-");
+"
+        );
 
         var documentNode = Lower(document);
 
@@ -60,11 +63,13 @@ public class ComponentWhitespacePassTest
     public void Execute_RemovesLeadingAndTrailingWhitespaceInsideElement()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <parent>
     <child>   Hello, @("" w o r l d "")   </child>
 </parent>
-");
+"
+        );
 
         var documentNode = Lower(document);
 
@@ -72,10 +77,15 @@ public class ComponentWhitespacePassTest
         Pass.Execute(document, documentNode);
 
         // Assert
-        var parentElement = Assert.IsType<MarkupElementIntermediateNode>(Assert.Single(documentNode.FindPrimaryMethod().Children));
-        var childElement = Assert.IsType<MarkupElementIntermediateNode>(Assert.Single(parentElement.Children));
+        var parentElement = Assert.IsType<MarkupElementIntermediateNode>(
+            Assert.Single(documentNode.FindPrimaryMethod().Children)
+        );
+        var childElement = Assert.IsType<MarkupElementIntermediateNode>(
+            Assert.Single(parentElement.Children)
+        );
         Assert.Equal("child", childElement.TagName);
-        Assert.Collection(childElement.Children,
+        Assert.Collection(
+            childElement.Children,
             node =>
             {
                 var htmlNode = Assert.IsType<HtmlContentIntermediateNode>(node);
@@ -85,7 +95,8 @@ public class ComponentWhitespacePassTest
             {
                 var csharpExpressionNode = Assert.IsType<CSharpExpressionIntermediateNode>(node);
                 Assert.Equal(@""" w o r l d """, GetContent(csharpExpressionNode));
-            });
+            }
+        );
     }
 
     [Fact]
@@ -100,17 +111,20 @@ public class ComponentWhitespacePassTest
         Pass.Execute(document, documentNode);
 
         // Assert
-        Assert.Collection(documentNode.FindPrimaryMethod().Children,
+        Assert.Collection(
+            documentNode.FindPrimaryMethod().Children,
             node => Assert.IsType<MarkupElementIntermediateNode>(node),
             node => Assert.IsType<HtmlContentIntermediateNode>(node),
-            node => Assert.IsType<MarkupElementIntermediateNode>(node));
+            node => Assert.IsType<MarkupElementIntermediateNode>(node)
+        );
     }
 
     [Fact]
     public void Execute_RemovesWhitespacePrecedingAndTrailingCSharpCode()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <parent>
     <child>@val1a @val1b</child>
 
@@ -118,7 +132,8 @@ public class ComponentWhitespacePassTest
 
     <child>@val2a @val2b</child>
 </parent>
-");
+"
+        );
 
         var documentNode = Lower(document);
 
@@ -126,25 +141,33 @@ public class ComponentWhitespacePassTest
         Pass.Execute(document, documentNode);
 
         // Assert
-        var parentElement = Assert.IsType<MarkupElementIntermediateNode>(Assert.Single(documentNode.FindPrimaryMethod().Children));
-        Assert.Collection(parentElement.Children,
+        var parentElement = Assert.IsType<MarkupElementIntermediateNode>(
+            Assert.Single(documentNode.FindPrimaryMethod().Children)
+        );
+        Assert.Collection(
+            parentElement.Children,
             node =>
             {
                 Assert.Equal("child", Assert.IsType<MarkupElementIntermediateNode>(node).TagName);
-                Assert.Collection(node.Children,
+                Assert.Collection(
+                    node.Children,
                     x => Assert.IsType<CSharpExpressionIntermediateNode>(x),
                     x => Assert.IsType<HtmlContentIntermediateNode>(x), // We don't remove whitespace before/after C# expressions
-                    x => Assert.IsType<CSharpExpressionIntermediateNode>(x));
+                    x => Assert.IsType<CSharpExpressionIntermediateNode>(x)
+                );
             },
             node => Assert.IsType<CSharpCodeIntermediateNode>(node),
             node =>
             {
                 Assert.Equal("child", Assert.IsType<MarkupElementIntermediateNode>(node).TagName);
-                Assert.Collection(node.Children,
+                Assert.Collection(
+                    node.Children,
                     x => Assert.IsType<CSharpExpressionIntermediateNode>(x),
                     x => Assert.IsType<HtmlContentIntermediateNode>(x), // We don't remove whitespace before/after C# expressions
-                    x => Assert.IsType<CSharpExpressionIntermediateNode>(x));
-            });
+                    x => Assert.IsType<CSharpExpressionIntermediateNode>(x)
+                );
+            }
+        );
     }
 
     private RazorCodeDocument CreateDocument(string content)

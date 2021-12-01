@@ -28,15 +28,20 @@ namespace Microsoft.AspNetCore.Components.Forms
             ElementReference inputFileElement,
             BrowserFile file,
             RemoteBrowserFileStreamOptions options,
-            CancellationToken cancellationToken)
-            : base(file)
+            CancellationToken cancellationToken
+        ) : base(file)
         {
             _jsRuntime = jsRuntime;
             _inputFileElement = inputFileElement;
             _maxSegmentSize = options.MaxSegmentSize;
             _segmentFetchTimeout = options.SegmentFetchTimeout;
 
-            var pipe = new Pipe(new PipeOptions(pauseWriterThreshold: options.MaxBufferSize, resumeWriterThreshold: options.MaxBufferSize));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    pauseWriterThreshold: options.MaxBufferSize,
+                    resumeWriterThreshold: options.MaxBufferSize
+                )
+            );
             _pipeReader = pipe.Reader;
             _fillBufferCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -54,7 +59,9 @@ namespace Microsoft.AspNetCore.Components.Forms
 
                 try
                 {
-                    using var readSegmentCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                    using var readSegmentCts = CancellationTokenSource.CreateLinkedTokenSource(
+                        cancellationToken
+                    );
                     readSegmentCts.CancelAfter(_segmentFetchTimeout);
 
                     var bytes = await _jsRuntime.InvokeAsync<byte[]>(
@@ -63,12 +70,14 @@ namespace Microsoft.AspNetCore.Components.Forms
                         _inputFileElement,
                         File.Id,
                         offset,
-                        segmentSize);
+                        segmentSize
+                    );
 
                     if (bytes is null || bytes.Length != segmentSize)
                     {
                         throw new InvalidOperationException(
-                            $"A segment with size {bytes?.Length ?? 0} bytes was received, but {segmentSize} bytes were expected.");
+                            $"A segment with size {bytes?.Length ?? 0} bytes was received, but {segmentSize} bytes were expected."
+                        );
                     }
 
                     bytes.CopyTo(pipeBuffer);
@@ -92,7 +101,11 @@ namespace Microsoft.AspNetCore.Components.Forms
             await writer.CompleteAsync();
         }
 
-        protected override async ValueTask<int> CopyFileDataIntoBuffer(long sourceOffset, Memory<byte> destination, CancellationToken cancellationToken)
+        protected override async ValueTask<int> CopyFileDataIntoBuffer(
+            long sourceOffset,
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        )
         {
             if (_isReadingCompleted)
             {
@@ -113,7 +126,6 @@ namespace Microsoft.AspNetCore.Components.Forms
                         _isReadingCompleted = true;
                         await _pipeReader.CompleteAsync();
                     }
-
                     break;
                 }
 

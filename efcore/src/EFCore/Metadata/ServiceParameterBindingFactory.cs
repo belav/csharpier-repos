@@ -40,10 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="parameterType">The parameter type.</param>
         /// <param name="parameterName">The parameter name.</param>
         /// <returns><see langword="true" /> if this parameter can be bound; <see langword="false" /> otherwise.</returns>
-        public virtual bool CanBind(
-            Type parameterType,
-            string parameterName)
-            => parameterType == _serviceType;
+        public virtual bool CanBind(Type parameterType, string parameterName) =>
+            parameterType == _serviceType;
 
         /// <summary>
         ///     Creates a <see cref="ParameterBinding" /> for the given type and name on the given entity type.
@@ -55,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual ParameterBinding Bind(
             IMutableEntityType entityType,
             Type parameterType,
-            string parameterName)
-            => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
+            string parameterName
+        ) => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
 
         /// <summary>
         ///     Creates a <see cref="ParameterBinding" /> for the given type and name on the given entity type.
@@ -68,8 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual ParameterBinding Bind(
             IConventionEntityType entityType,
             Type parameterType,
-            string parameterName)
-            => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
+            string parameterName
+        ) => Bind((IReadOnlyEntityType)entityType, parameterType, parameterName);
 
         /// <summary>
         ///     Creates a <see cref="ParameterBinding" /> for the given type and name on the given entity type.
@@ -81,10 +79,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual ParameterBinding Bind(
             IReadOnlyEntityType entityType,
             Type parameterType,
-            string parameterName)
-            => new DependencyInjectionParameterBinding(
+            string parameterName
+        ) =>
+            new DependencyInjectionParameterBinding(
                 _serviceType,
                 _serviceType,
-                entityType.GetServiceProperties().Cast<IPropertyBase>().Where(p => p.ClrType == _serviceType).ToArray());
+                entityType
+                    .GetServiceProperties()
+                    .Cast<IPropertyBase>()
+                    .Where(p => p.ClrType == _serviceType)
+                    .ToArray()
+            );
     }
 }

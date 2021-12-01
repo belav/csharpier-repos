@@ -10,7 +10,8 @@ namespace System.Text.Json
 {
     public static partial class JsonSerializer
     {
-        internal const string SerializationUnreferencedCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
+        internal const string SerializationUnreferencedCodeMessage =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
 
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         private static JsonTypeInfo GetTypeInfo(JsonSerializerOptions? options, Type runtimeType)
@@ -41,11 +42,15 @@ namespace System.Text.Json
         }
 
         internal static bool IsValidNumberHandlingValue(JsonNumberHandling handling) =>
-            JsonHelpers.IsInRangeInclusive((int)handling, 0,
+            JsonHelpers.IsInRangeInclusive(
+                (int)handling,
+                0,
                 (int)(
-                JsonNumberHandling.Strict |
-                JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.WriteAsString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals));
+                    JsonNumberHandling.Strict
+                    | JsonNumberHandling.AllowReadingFromString
+                    | JsonNumberHandling.WriteAsString
+                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                )
+            );
     }
 }

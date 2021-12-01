@@ -23,10 +23,13 @@ public class ServiceBasedPageModelActivatorProvider : IPageModelActivatorProvide
         var modelType = descriptor.ModelTypeInfo?.AsType();
         if (modelType == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(descriptor.ModelTypeInfo),
-                nameof(descriptor)),
-                nameof(descriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(descriptor.ModelTypeInfo),
+                    nameof(descriptor)
+                ),
+                nameof(descriptor)
+            );
         }
 
         return context =>
@@ -41,4 +44,3 @@ public class ServiceBasedPageModelActivatorProvider : IPageModelActivatorProvide
         return null;
     }
 }
-

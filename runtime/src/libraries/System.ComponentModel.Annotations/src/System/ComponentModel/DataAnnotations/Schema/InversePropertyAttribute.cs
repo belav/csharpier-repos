@@ -19,7 +19,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
         {
             if (string.IsNullOrWhiteSpace(property))
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(property)), nameof(property));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(property)),
+                    nameof(property)
+                );
             }
 
             Property = property;

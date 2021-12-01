@@ -25,8 +25,17 @@ namespace MS.Internal.Xml.XPath
             return qyInput.Evaluate(nodeIterator);
         }
 
-        public override XPathNodeIterator Clone() { return new GroupQuery(this); }
-        public override XPathResultType StaticType { get { return qyInput.StaticType; } }
-        public override QueryProps Properties { get { return QueryProps.Position; } } // Doesn't have QueryProps.Merge
+        public override XPathNodeIterator Clone()
+        {
+            return new GroupQuery(this);
+        }
+        public override XPathResultType StaticType
+        {
+            get { return qyInput.StaticType; }
+        }
+        public override QueryProps Properties
+        {
+            get { return QueryProps.Position; }
+        } // Doesn't have QueryProps.Merge
     }
 }

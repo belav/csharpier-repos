@@ -5,8 +5,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Numerics
 {
-    internal readonly struct VectorDebugView<T>
-        where T : struct
+    internal readonly struct VectorDebugView<T> where T : struct
     {
         private readonly Vector<T> _value;
 

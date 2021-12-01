@@ -11,8 +11,8 @@ namespace System.Web.WebPages
     internal static class BuildManagerExceptionUtil
     {
         // Checks the exception to see if it is from CompilationUtil.GetBuildProviderTypeFromExtension, which will throw
-        // an exception about an unsupported extension. 
-        // Actual error format: There is no build provider registered for the extension '.txt'. You can register one in the <compilation><buildProviders> section in machine.config or web.config. Make sure is has a BuildProviderAppliesToAttribute attribute which includes the value 'Web' or 'All'. 
+        // an exception about an unsupported extension.
+        // Actual error format: There is no build provider registered for the extension '.txt'. You can register one in the <compilation><buildProviders> section in machine.config or web.config. Make sure is has a BuildProviderAppliesToAttribute attribute which includes the value 'Web' or 'All'.
         internal static bool IsUnsupportedExtensionError(HttpException e)
         {
             Exception exception = e;
@@ -21,7 +21,12 @@ namespace System.Web.WebPages
             while (exception != null)
             {
                 var site = exception.TargetSite;
-                if (site != null && site.Name == "GetBuildProviderTypeFromExtension" && site.DeclaringType != null && site.DeclaringType.Name == "CompilationUtil")
+                if (
+                    site != null
+                    && site.Name == "GetBuildProviderTypeFromExtension"
+                    && site.DeclaringType != null
+                    && site.DeclaringType.Name == "CompilationUtil"
+                )
                 {
                     return true;
                 }
@@ -35,7 +40,14 @@ namespace System.Web.WebPages
             if (IsUnsupportedExtensionError(e))
             {
                 var extension = Path.GetExtension(virtualPath);
-                throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_FileNotSupported, extension, virtualPath));
+                throw new HttpException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.WebPage_FileNotSupported,
+                        extension,
+                        virtualPath
+                    )
+                );
             }
         }
 
@@ -46,7 +58,14 @@ namespace System.Web.WebPages
                 var extension = Path.GetExtension(virtualPath);
                 if (InfrastructureHelper.IsCodeDomDefinedExtension(extension))
                 {
-                    throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_FileNotSupported, extension, virtualPath));
+                    throw new HttpException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebPageResources.WebPage_FileNotSupported,
+                            extension,
+                            virtualPath
+                        )
+                    );
                 }
             }
         }

@@ -74,9 +74,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // Because hot path for logging
         bool ShouldLog(EventDefinitionBase definition)
             // No null checks; low-level code in hot path for logging.
-            => definition.WarningBehavior == WarningBehavior.Throw
-                || (Logger.IsEnabled(definition.Level)
-                    && definition.WarningBehavior != WarningBehavior.Ignore);
+            =>
+            definition.WarningBehavior == WarningBehavior.Throw
+            || (
+                Logger.IsEnabled(definition.Level)
+                && definition.WarningBehavior != WarningBehavior.Ignore
+            );
 
         /// <summary>
         ///     Dispatches the given <see cref="EventData" /> to a <see cref="DiagnosticSource" />, if enabled, and
@@ -91,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase definition,
             EventData eventData,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
+            bool simpleLogEnabled
+        )
         {
             // No null checks; low-level code in hot path for logging.
 
@@ -125,17 +129,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         bool NeedsEventData(
             EventDefinitionBase definition,
             out bool diagnosticSourceEnabled,
-            out bool simpleLogEnabled)
+            out bool simpleLogEnabled
+        )
         {
             // No null checks; low-level code in hot path for logging.
 
             diagnosticSourceEnabled = DiagnosticSource.IsEnabled(definition.EventId.Name!);
 
-            simpleLogEnabled = definition.WarningBehavior == WarningBehavior.Log
+            simpleLogEnabled =
+                definition.WarningBehavior == WarningBehavior.Log
                 && DbContextLogger.ShouldLog(definition.EventId, definition.Level);
 
-            return diagnosticSourceEnabled
-                || simpleLogEnabled;
+            return diagnosticSourceEnabled || simpleLogEnabled;
         }
 
         /// <summary>
@@ -162,8 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase definition,
             out TInterceptor? interceptor,
             out bool diagnosticSourceEnabled,
-            out bool simpleLogEnabled)
-            where TInterceptor : class, IInterceptor
+            out bool simpleLogEnabled
+        ) where TInterceptor : class, IInterceptor
         {
             // No null checks; low-level code in hot path for logging.
 
@@ -171,12 +176,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
 
             interceptor = Interceptors?.Aggregate<TInterceptor>();
 
-            simpleLogEnabled = definition.WarningBehavior == WarningBehavior.Log
+            simpleLogEnabled =
+                definition.WarningBehavior == WarningBehavior.Log
                 && DbContextLogger.ShouldLog(definition.EventId, definition.Level);
 
-            return diagnosticSourceEnabled
-                || simpleLogEnabled
-                || interceptor != null;
+            return diagnosticSourceEnabled || simpleLogEnabled || interceptor != null;
         }
     }
 }

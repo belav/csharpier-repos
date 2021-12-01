@@ -7,8 +7,14 @@ using System.Runtime.InteropServices;
 internal class QQ
 {
     public int val;
-    public QQ(int vv) { val = vv; }
-    public int ret_code() { return 100; }
+    public QQ(int vv)
+    {
+        val = vv;
+    }
+    public int ret_code()
+    {
+        return 100;
+    }
 };
 
 [StructLayout(LayoutKind.Sequential)]
@@ -16,8 +22,7 @@ internal class AA
 {
     public byte tmp1;
 
-
-    public QQ q;    //this field is the testing subject
+    public QQ q; //this field is the testing subject
 
     public byte tmp2;
 
@@ -33,15 +38,24 @@ internal class AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static QQ call_target(QQ arg) { return arg; }
-    public static QQ call_target_ref(ref QQ arg) { return arg; }
+    public static QQ call_target(QQ arg)
+    {
+        return arg;
+    }
+    public static QQ call_target_ref(ref QQ arg)
+    {
+        return arg;
+    }
 
     public void verify()
     {
-        if (tmp1 != 106) throw new Exception("tmp1 corrupted");
-        if (tmp2 != 107) throw new Exception("tmp2 corrupted");
+        if (tmp1 != 106)
+            throw new Exception("tmp1 corrupted");
+        if (tmp2 != 107)
+            throw new Exception("tmp2 corrupted");
     }
 
     public static void verify_all()
@@ -71,5 +85,6 @@ internal class AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }

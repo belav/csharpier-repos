@@ -12,23 +12,19 @@ namespace System.Drawing.Printing
         /// All pages are printed.
         /// </summary>
         AllPages = SafeNativeMethods.PD_ALLPAGES,
-
         /// <summary>
         /// The pages between <see cref='PrinterSettings.FromPage'/> and <see cref='PrinterSettings.ToPage'/> are printed.
         /// </summary>
         SomePages = SafeNativeMethods.PD_PAGENUMS,
-
         /// <summary>
         /// The selected pages are printed.
         /// </summary>
         Selection = SafeNativeMethods.PD_SELECTION,
-
         /// <summary>
         /// The current page is printed. The print dialog box requires Windows 2000 or later for this setting; if used
         /// with an earlier operating system, all pages will be printed.
         /// </summary>
         CurrentPage = SafeNativeMethods.PD_CURRENTPAGE,
-
         // When adding new members, be sure to update PrintDialog.printRangeMask.
     }
 }

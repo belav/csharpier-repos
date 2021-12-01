@@ -16,11 +16,7 @@ public class DefaultCodeTargetBuilderTest
 
         var builder = new DefaultCodeTargetBuilder(codeDocument, options);
 
-        var extensions = new ICodeTargetExtension[]
-        {
-                new MyExtension1(),
-                new MyExtension2(),
-        };
+        var extensions = new ICodeTargetExtension[] { new MyExtension1(), new MyExtension2(), };
 
         for (var i = 0; i < extensions.Length; i++)
         {

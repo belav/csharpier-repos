@@ -10,7 +10,12 @@ namespace System.Configuration.Internal
         private readonly DateTime _utcCreationTime;
         private readonly DateTime _utcLastWriteTime;
 
-        internal FileVersion(bool exists, long fileSize, DateTime utcCreationTime, DateTime utcLastWriteTime)
+        internal FileVersion(
+            bool exists,
+            long fileSize,
+            DateTime utcCreationTime,
+            DateTime utcLastWriteTime
+        )
         {
             _exists = exists;
             _fileSize = fileSize;
@@ -21,8 +26,7 @@ namespace System.Configuration.Internal
         public override bool Equals(object obj)
         {
             FileVersion other = obj as FileVersion;
-            return
-                (other != null)
+            return (other != null)
                 && (_exists == other._exists)
                 && (_fileSize == other._fileSize)
                 && (_utcCreationTime == other._utcCreationTime)

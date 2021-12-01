@@ -27,7 +27,12 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 return false;
             }
 
-            var success = StackFrameParserHelpers.TryParseMethodSignature(line.AsSpan().Slice(startPoint), out var classSpan, out var methodSpan, out var argsSpan);
+            var success = StackFrameParserHelpers.TryParseMethodSignature(
+                line.AsSpan().Slice(startPoint),
+                out var classSpan,
+                out var methodSpan,
+                out var argsSpan
+            );
 
             if (!success)
             {

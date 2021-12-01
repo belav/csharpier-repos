@@ -10,9 +10,7 @@ internal class measure
 }
 internal class test
 {
-    public static void f()
-    {
-    }
+    public static void f() { }
 
     static test()
     {

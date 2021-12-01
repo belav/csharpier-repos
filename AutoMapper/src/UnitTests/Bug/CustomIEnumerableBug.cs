@@ -25,7 +25,11 @@ namespace AutoMapper.UnitTests.Bug
 
     public class StringToItemConverter : ITypeConverter<IEnumerable<string>, IEnumerable<Item>>
     {
-        public IEnumerable<Item> Convert(IEnumerable<string> source, IEnumerable<Item> destination, ResolutionContext context)
+        public IEnumerable<Item> Convert(
+            IEnumerable<string> source,
+            IEnumerable<Item> destination,
+            ResolutionContext context
+        )
         {
             var result = new List<Item>();
             foreach (string s in source)
@@ -39,12 +43,15 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void ShouldMapOneToTwo()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<One, Two>();
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<One, Two>();
 
-                cfg.CreateMap<IEnumerable<string>, IEnumerable<Item>>().ConvertUsing<StringToItemConverter>();
-            });
+                    cfg.CreateMap<IEnumerable<string>, IEnumerable<Item>>()
+                        .ConvertUsing<StringToItemConverter>();
+                }
+            );
 
             config.AssertConfigurationIsValid();
 

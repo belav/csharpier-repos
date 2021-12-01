@@ -20,9 +20,7 @@ namespace System.CommandLine.Builder
 
         /// <param name="rootCommand">The root command of the application.</param>
         public CommandLineBuilder(Command? rootCommand = null)
-            : base(rootCommand ?? new RootCommand())
-        {
-        }
+            : base(rootCommand ?? new RootCommand()) { }
 
         /// <summary>
         /// Determines whether the parser recognizes command line directives.
@@ -71,26 +69,25 @@ namespace System.CommandLine.Builder
                     enableLegacyDoubleDashBehavior: EnableLegacyDoubleDashBehavior,
                     resources: LocalizationResources,
                     responseFileHandling: ResponseFileHandling,
-                    middlewarePipeline: _middlewareList.OrderBy(m => m.order)
-                                                       .Select(m => m.middleware)
-                                                       .ToArray(),
-                    helpBuilderFactory: HelpBuilderFactory));
-            
+                    middlewarePipeline: _middlewareList
+                        .OrderBy(m => m.order)
+                        .Select(m => m.middleware)
+                        .ToArray(),
+                    helpBuilderFactory: HelpBuilderFactory
+                )
+            );
+
             return parser;
         }
 
-        internal void AddMiddleware(
-            InvocationMiddleware middleware,
-            MiddlewareOrder order)
+        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrder order)
         {
-            _middlewareList.Add((middleware, (int) order));
+            _middlewareList.Add((middleware, (int)order));
         }
 
-        internal void AddMiddleware(
-            InvocationMiddleware middleware,
-            MiddlewareOrderInternal order)
+        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrderInternal order)
         {
-            _middlewareList.Add((middleware, (int) order));
+            _middlewareList.Add((middleware, (int)order));
         }
     }
 }

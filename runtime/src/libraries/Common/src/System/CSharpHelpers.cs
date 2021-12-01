@@ -155,19 +155,19 @@ namespace System
                 UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(ch);
                 switch (uc)
                 {
-                    case UnicodeCategory.UppercaseLetter:        // Lu
-                    case UnicodeCategory.LowercaseLetter:        // Ll
-                    case UnicodeCategory.TitlecaseLetter:        // Lt
-                    case UnicodeCategory.ModifierLetter:         // Lm
-                    case UnicodeCategory.LetterNumber:           // Lm
-                    case UnicodeCategory.OtherLetter:            // Lo
+                    case UnicodeCategory.UppercaseLetter: // Lu
+                    case UnicodeCategory.LowercaseLetter: // Ll
+                    case UnicodeCategory.TitlecaseLetter: // Lt
+                    case UnicodeCategory.ModifierLetter: // Lm
+                    case UnicodeCategory.LetterNumber: // Lm
+                    case UnicodeCategory.OtherLetter: // Lo
                         nextMustBeStartChar = false;
                         break;
 
-                    case UnicodeCategory.NonSpacingMark:         // Mn
-                    case UnicodeCategory.SpacingCombiningMark:   // Mc
-                    case UnicodeCategory.ConnectorPunctuation:   // Pc
-                    case UnicodeCategory.DecimalDigitNumber:     // Nd
+                    case UnicodeCategory.NonSpacingMark: // Mn
+                    case UnicodeCategory.SpacingCombiningMark: // Mc
+                    case UnicodeCategory.ConnectorPunctuation: // Pc
+                    case UnicodeCategory.DecimalDigitNumber: // Nd
                         // Underscore is a valid starting character, even though it is a ConnectorPunctuation.
                         if (nextMustBeStartChar && ch != '_')
                             return false;

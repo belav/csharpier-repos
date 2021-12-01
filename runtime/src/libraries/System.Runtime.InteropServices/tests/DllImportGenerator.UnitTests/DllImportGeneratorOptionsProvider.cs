@@ -19,7 +19,7 @@ namespace DllImportGenerator.UnitTests
             GlobalOptions = new GlobalGeneratorOptions(useMarshalType, generateForwarders);
         }
 
-        public override AnalyzerConfigOptions GlobalOptions  { get; }
+        public override AnalyzerConfigOptions GlobalOptions { get; }
 
         public override AnalyzerConfigOptions GetOptions(SyntaxTree tree)
         {
@@ -48,11 +48,11 @@ namespace DllImportGenerator.UnitTests
                     case OptionsHelper.UseMarshalTypeOption:
                         value = _useMarshalType.ToString();
                         return true;
-                    
+
                     case OptionsHelper.GenerateForwardersOption:
                         value = _generateForwarders.ToString();
                         return true;
-                    
+
                     default:
                         value = null;
                         return false;

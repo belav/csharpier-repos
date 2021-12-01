@@ -89,7 +89,8 @@ namespace System.Threading
             get
             {
                 ThreadState state = GetState(this);
-                return (state & (ThreadState.Unstarted | ThreadState.Stopped | ThreadState.Aborted)) == 0;
+                return (state & (ThreadState.Unstarted | ThreadState.Stopped | ThreadState.Aborted))
+                    == 0;
             }
         }
 
@@ -122,10 +123,7 @@ namespace System.Threading
                 ValidateThreadState();
                 return threadpool_thread;
             }
-            internal set
-            {
-                threadpool_thread = value;
-            }
+            internal set { threadpool_thread = value; }
         }
 
         public int ManagedThreadId => managed_id;
@@ -147,7 +145,11 @@ namespace System.Threading
 
                 WaitSubsystem.ThreadWaitInfo AllocateWaitInfo()
                 {
-                    Interlocked.CompareExchange(ref _waitInfo, new WaitSubsystem.ThreadWaitInfo(this), null!);
+                    Interlocked.CompareExchange(
+                        ref _waitInfo,
+                        new WaitSubsystem.ThreadWaitInfo(this),
+                        null!
+                    );
                     return _waitInfo;
                 }
             }
@@ -205,7 +207,11 @@ namespace System.Threading
         public bool Join(int millisecondsTimeout)
         {
             if (millisecondsTimeout < Timeout.Infinite)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), millisecondsTimeout, SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
             return JoinInternal(this, millisecondsTimeout);
         }
 
@@ -237,11 +243,12 @@ namespace System.Threading
         }
 
         // Called from the runtime
-        internal static void ThrowThreadStartException(Exception ex) => throw new ThreadStartException(ex);
+        internal static void ThrowThreadStartException(Exception ex) =>
+            throw new ThreadStartException(ex);
 
         private void StartCore()
         {
-             StartInternal(this, _startHelper?._maxStackSize ?? 0);
+            StartInternal(this, _startHelper?._maxStackSize ?? 0);
         }
 
         [DynamicDependency(nameof(StartCallback))]
@@ -262,17 +269,17 @@ namespace System.Threading
 
         private static bool SetApartmentStateUnchecked(ApartmentState state, bool throwOnError)
         {
-             if (state != ApartmentState.Unknown)
-             {
+            if (state != ApartmentState.Unknown)
+            {
                 if (throwOnError)
                 {
                     throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
                 }
 
                 return false;
-             }
+            }
 
-             return true;
+            return true;
         }
 
         private ThreadState ValidateThreadState()
@@ -352,9 +359,7 @@ namespace System.Threading
         private static extern bool YieldInternal();
 
         [Intrinsic]
-        private static void SpinWait_nop()
-        {
-        }
+        private static void SpinWait_nop() { }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool JoinInternal(Thread thread, int millisecondsTimeout);

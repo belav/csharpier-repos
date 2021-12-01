@@ -12,13 +12,11 @@ public enum HttpsCompressionMode
     /// No value has been specified, use the configured defaults.
     /// </summary>
     Default = 0,
-
     /// <summary>
     /// Opts out of compression over HTTPS. Enabling compression on HTTPS requests for remotely manipulable content
     /// may expose security problems.
     /// </summary>
     DoNotCompress,
-
     /// <summary>
     /// Opts into compression over HTTPS. Enabling compression on HTTPS requests for remotely manipulable content
     /// may expose security problems.

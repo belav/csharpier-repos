@@ -171,6 +171,5 @@ internal static class OwinConstants
 
         public const string User = "server.User";
     }
-
     #endregion
 }

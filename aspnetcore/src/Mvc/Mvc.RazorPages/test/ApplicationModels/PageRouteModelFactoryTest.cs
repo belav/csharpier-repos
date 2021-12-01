@@ -28,7 +28,8 @@ public class PageRouteModelFactoryTest
 
         Assert.Collection(
             routeModel.Selectors,
-            selector => Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template));
+            selector => Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template)
+        );
 
         Assert.Collection(
             routeModel.RouteValues,
@@ -36,7 +37,8 @@ public class PageRouteModelFactoryTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Users/Profile", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -56,8 +58,10 @@ public class PageRouteModelFactoryTest
 
         Assert.Collection(
             routeModel.Selectors,
-            selector => Assert.Equal("Users/Profile/Index/{id?}", selector.AttributeRouteModel.Template),
-            selector => Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template));
+            selector =>
+                Assert.Equal("Users/Profile/Index/{id?}", selector.AttributeRouteModel.Template),
+            selector => Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template)
+        );
 
         Assert.Collection(
             routeModel.RouteValues,
@@ -65,7 +69,8 @@ public class PageRouteModelFactoryTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Users/Profile/Index", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -85,7 +90,8 @@ public class PageRouteModelFactoryTest
 
         Assert.Collection(
             routeModel.Selectors,
-            selector => Assert.Equal("my-override", selector.AttributeRouteModel.Template));
+            selector => Assert.Equal("my-override", selector.AttributeRouteModel.Template)
+        );
 
         Assert.Collection(
             routeModel.RouteValues,
@@ -93,7 +99,8 @@ public class PageRouteModelFactoryTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Users/Profile/Index", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -114,7 +121,9 @@ public class PageRouteModelFactoryTest
 
         Assert.Collection(
             routeModel.Selectors,
-            selector => Assert.Equal("TestArea/Users/Profile/{id?}", selector.AttributeRouteModel.Template));
+            selector =>
+                Assert.Equal("TestArea/Users/Profile/{id?}", selector.AttributeRouteModel.Template)
+        );
 
         Assert.Collection(
             routeModel.RouteValues.OrderBy(kvp => kvp.Key),
@@ -127,7 +136,8 @@ public class PageRouteModelFactoryTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Users/Profile", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -148,8 +158,14 @@ public class PageRouteModelFactoryTest
 
         Assert.Collection(
             routeModel.Selectors,
-            selector => Assert.Equal("TestArea/Users/Profile/Index/{id?}", selector.AttributeRouteModel.Template),
-            selector => Assert.Equal("TestArea/Users/Profile/{id?}", selector.AttributeRouteModel.Template));
+            selector =>
+                Assert.Equal(
+                    "TestArea/Users/Profile/Index/{id?}",
+                    selector.AttributeRouteModel.Template
+                ),
+            selector =>
+                Assert.Equal("TestArea/Users/Profile/{id?}", selector.AttributeRouteModel.Template)
+        );
 
         Assert.Collection(
             routeModel.RouteValues.OrderBy(kvp => kvp.Key),
@@ -162,7 +178,8 @@ public class PageRouteModelFactoryTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Users/Profile/Index", kvp.Value);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -204,7 +221,8 @@ public class PageRouteModelFactoryTest
     public void TryParseAreaPath_ParsesAreaPath(
         string path,
         string expectedArea,
-        string expectedViewEnginePath)
+        string expectedViewEnginePath
+    )
     {
         // Arrange
         var options = new RazorPagesOptions();

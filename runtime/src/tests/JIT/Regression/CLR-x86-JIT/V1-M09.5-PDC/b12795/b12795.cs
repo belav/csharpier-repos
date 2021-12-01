@@ -19,12 +19,8 @@ namespace DefaultNamespace
 
         public static void Mainy()
         {
-            try
-            {
-            }
-            catch (Exception)
-            {
-            }
+            try { }
+            catch (Exception) { }
 
             STRMAP Strmap;
             Strmap = new STRMAP();

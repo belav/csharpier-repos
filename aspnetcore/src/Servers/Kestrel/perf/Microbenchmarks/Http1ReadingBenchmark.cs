@@ -88,19 +88,27 @@ public class Http1ReadingBenchmark
     {
         ResetState();
 
-        return _http1Connection.RequestBody.ReadAsync(new byte[100], default(CancellationToken)).AsTask();
+        return _http1Connection.RequestBody
+            .ReadAsync(new byte[100], default(CancellationToken))
+            .AsTask();
     }
 
     private TestHttp1Connection MakeHttp1Connection()
     {
-        var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
         _pair = pair;
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager());
+            dateHeaderValueManager: new DateHeaderValueManager()
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -108,12 +116,15 @@ public class Http1ReadingBenchmark
             transport: pair.Transport,
             timeoutControl: new TimeoutControl(timeoutHandler: null),
             memoryPool: _memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         var http1Connection = new TestHttp1Connection(connectionContext);
 
         http1Connection.Reset();
-        http1Connection.InitializeBodyControl(new Http1ContentLengthMessageBody(http1Connection, contentLength: 100, keepAlive: true));
+        http1Connection.InitializeBodyControl(
+            new Http1ContentLengthMessageBody(http1Connection, contentLength: 100, keepAlive: true)
+        );
         serviceContext.DateHeaderValueManager.OnHeartbeat(DateTimeOffset.UtcNow);
 
         return http1Connection;

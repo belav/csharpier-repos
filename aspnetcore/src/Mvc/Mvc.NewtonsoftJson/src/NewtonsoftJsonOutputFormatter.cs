@@ -41,9 +41,8 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
     public NewtonsoftJsonOutputFormatter(
         JsonSerializerSettings serializerSettings,
         ArrayPool<char> charPool,
-        MvcOptions mvcOptions) : this(serializerSettings, charPool, mvcOptions, jsonOptions: null)
-    {
-    }
+        MvcOptions mvcOptions
+    ) : this(serializerSettings, charPool, mvcOptions, jsonOptions: null) { }
 
     /// <summary>
     /// Initializes a new <see cref="NewtonsoftJsonOutputFormatter"/> instance.
@@ -60,7 +59,8 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         JsonSerializerSettings serializerSettings,
         ArrayPool<char> charPool,
         MvcOptions mvcOptions,
-        MvcNewtonsoftJsonOptions? jsonOptions)
+        MvcNewtonsoftJsonOptions? jsonOptions
+    )
     {
         if (serializerSettings == null)
         {
@@ -145,7 +145,10 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
     }
 
     /// <inheritdoc />
-    public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+    public override async Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding
+    )
     {
         if (context == null)
         {
@@ -158,7 +161,10 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         }
 
         // Compat mode for derived options
-        _jsonOptions ??= context.HttpContext.RequestServices.GetRequiredService<IOptions<MvcNewtonsoftJsonOptions>>().Value;
+        _jsonOptions ??=
+            context.HttpContext.RequestServices.GetRequiredService<
+                IOptions<MvcNewtonsoftJsonOptions>
+            >().Value;
 
         var response = context.HttpContext.Response;
 
@@ -166,14 +172,21 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         FileBufferingWriteStream? fileBufferingWriteStream = null;
         if (!_mvcOptions.SuppressOutputFormatterBuffering)
         {
-            fileBufferingWriteStream = new FileBufferingWriteStream(_jsonOptions.OutputFormatterMemoryBufferThreshold);
+            fileBufferingWriteStream = new FileBufferingWriteStream(
+                _jsonOptions.OutputFormatterMemoryBufferThreshold
+            );
             responseStream = fileBufferingWriteStream;
         }
 
         var value = context.Object;
-        if (value is not null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+        if (
+            value is not null
+            && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+        )
         {
-            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<NewtonsoftJsonOutputFormatter>>();
+            var logger = context.HttpContext.RequestServices.GetRequiredService<
+                ILogger<NewtonsoftJsonOutputFormatter>
+            >();
             Log.BufferingAsyncEnumerable(logger, value);
             try
             {
@@ -250,13 +263,16 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
 
     private static class Log
     {
-        private static readonly LogDefineOptions SkipEnabledCheckLogOptions = new() { SkipEnabledCheck = true };
+        private static readonly LogDefineOptions SkipEnabledCheckLogOptions =
+            new() { SkipEnabledCheck = true };
 
-        private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable = LoggerMessage.Define<string?>(
-            LogLevel.Debug,
-            new EventId(1, "BufferingAsyncEnumerable"),
-            "Buffering IAsyncEnumerable instance of type '{Type}'.",
-            SkipEnabledCheckLogOptions);
+        private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable =
+            LoggerMessage.Define<string?>(
+                LogLevel.Debug,
+                new EventId(1, "BufferingAsyncEnumerable"),
+                "Buffering IAsyncEnumerable instance of type '{Type}'.",
+                SkipEnabledCheckLogOptions
+            );
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
         {

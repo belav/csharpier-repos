@@ -58,7 +58,10 @@ public class KeyRingTests
 
         // Assert
         Assert.Equal(key3.KeyId, keyRing.DefaultKeyId);
-        Assert.Equal(key3.CreateEncryptor(), keyRing.GetAuthenticatedEncryptorByKeyId(key3.KeyId, out var _));
+        Assert.Equal(
+            key3.CreateEncryptor(),
+            keyRing.GetAuthenticatedEncryptorByKeyId(key3.KeyId, out var _)
+        );
     }
 
     [Fact]
@@ -68,26 +71,40 @@ public class KeyRingTests
         var expectedEncryptorInstance1 = new Mock<IAuthenticatedEncryptor>().Object;
         var expectedEncryptorInstance2 = new Mock<IAuthenticatedEncryptor>().Object;
 
-        var key1 = new MyKey(expectedEncryptorInstance: expectedEncryptorInstance1, isRevoked: true);
+        var key1 = new MyKey(
+            expectedEncryptorInstance: expectedEncryptorInstance1,
+            isRevoked: true
+        );
         var key2 = new MyKey(expectedEncryptorInstance: expectedEncryptorInstance2);
-
 
         // Act
         var keyRing = new KeyRing(key2, new[] { key1, key2 });
 
         // Assert
         Assert.Equal(0, key1.NumTimesCreateEncryptorInstanceCalled);
-        Assert.Same(expectedEncryptorInstance1, keyRing.GetAuthenticatedEncryptorByKeyId(key1.KeyId, out var isRevoked));
+        Assert.Same(
+            expectedEncryptorInstance1,
+            keyRing.GetAuthenticatedEncryptorByKeyId(key1.KeyId, out var isRevoked)
+        );
         Assert.True(isRevoked);
         Assert.Equal(1, key1.NumTimesCreateEncryptorInstanceCalled);
-        Assert.Same(expectedEncryptorInstance1, keyRing.GetAuthenticatedEncryptorByKeyId(key1.KeyId, out isRevoked));
+        Assert.Same(
+            expectedEncryptorInstance1,
+            keyRing.GetAuthenticatedEncryptorByKeyId(key1.KeyId, out isRevoked)
+        );
         Assert.True(isRevoked);
         Assert.Equal(1, key1.NumTimesCreateEncryptorInstanceCalled);
         Assert.Equal(0, key2.NumTimesCreateEncryptorInstanceCalled);
-        Assert.Same(expectedEncryptorInstance2, keyRing.GetAuthenticatedEncryptorByKeyId(key2.KeyId, out isRevoked));
+        Assert.Same(
+            expectedEncryptorInstance2,
+            keyRing.GetAuthenticatedEncryptorByKeyId(key2.KeyId, out isRevoked)
+        );
         Assert.False(isRevoked);
         Assert.Equal(1, key2.NumTimesCreateEncryptorInstanceCalled);
-        Assert.Same(expectedEncryptorInstance2, keyRing.GetAuthenticatedEncryptorByKeyId(key2.KeyId, out isRevoked));
+        Assert.Same(
+            expectedEncryptorInstance2,
+            keyRing.GetAuthenticatedEncryptorByKeyId(key2.KeyId, out isRevoked)
+        );
         Assert.False(isRevoked);
         Assert.Equal(1, key2.NumTimesCreateEncryptorInstanceCalled);
         Assert.Same(expectedEncryptorInstance2, keyRing.DefaultAuthenticatedEncryptor);
@@ -99,14 +116,18 @@ public class KeyRingTests
         public int NumTimesCreateEncryptorInstanceCalled;
         private readonly Func<IAuthenticatedEncryptor> _encryptorFactory;
 
-        public MyKey(bool isRevoked = false, IAuthenticatedEncryptor expectedEncryptorInstance = null)
+        public MyKey(
+            bool isRevoked = false,
+            IAuthenticatedEncryptor expectedEncryptorInstance = null
+        )
         {
             CreationDate = DateTimeOffset.Now;
             ActivationDate = CreationDate + TimeSpan.FromHours(1);
             ExpirationDate = CreationDate + TimeSpan.FromDays(30);
             IsRevoked = isRevoked;
             KeyId = Guid.NewGuid();
-            _encryptorFactory = () => expectedEncryptorInstance ?? new Mock<IAuthenticatedEncryptor>().Object;
+            _encryptorFactory = () =>
+                expectedEncryptorInstance ?? new Mock<IAuthenticatedEncryptor>().Object;
         }
 
         public DateTimeOffset ActivationDate { get; }

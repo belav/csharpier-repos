@@ -15,20 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpQuickInfoServiceFactory()
-        {
-        }
+        public CSharpQuickInfoServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new CSharpQuickInfoService(languageServices);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new CSharpQuickInfoService(languageServices);
     }
 
     internal class CSharpQuickInfoService : QuickInfoServiceWithProviders
     {
-        internal CSharpQuickInfoService(HostLanguageServices services)
-            : base(services)
-        {
-        }
+        internal CSharpQuickInfoService(HostLanguageServices services) : base(services) { }
     }
 }
-

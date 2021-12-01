@@ -70,7 +70,12 @@ namespace System.Collections.Concurrent.Tests
             Assert.NotNull(d);
 
             d.Dispose();
-            Assert.Throws<ObjectDisposedException>(() => { var enum1 = partition.GetEnumerator(); });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    var enum1 = partition.GetEnumerator();
+                }
+            );
         }
 
         /// <summary>
@@ -91,7 +96,8 @@ namespace System.Collections.Concurrent.Tests
             }
 
             // should not throw
-            using (var e = d.GetEnumerator()) { };
+            using (var e = d.GetEnumerator()) { }
+            ;
         }
 
         #endregion
@@ -104,7 +110,12 @@ namespace System.Collections.Concurrent.Tests
             OrderablePartitioner<int> partitioner;
             for (int algorithm = 0; algorithm < 5; algorithm++)
             {
-                Assert.Throws<ArgumentNullException>(() => { partitioner = PartitioningWithAlgorithm<int>(null, algorithm); });
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                    {
+                        partitioner = PartitioningWithAlgorithm<int>(null, algorithm);
+                    }
+                );
             }
             // Test NotSupportedException of Reset: already tested in RunTestWithAlgorithm
             // Test InvalidOperationException: already tested in TestPartitioningCore
@@ -119,7 +130,12 @@ namespace System.Collections.Concurrent.Tests
             {
                 partitioner = PartitioningWithAlgorithm<int>(data, algorithm);
 
-                Assert.Throws<ArgumentOutOfRangeException>(() => { var partitions1 = partitioner.GetOrderablePartitions(0); });
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                    {
+                        var partitions1 = partitioner.GetOrderablePartitions(0);
+                    }
+                );
             }
         }
 
@@ -139,7 +155,10 @@ namespace System.Collections.Concurrent.Tests
                 //verify all partitions are empty
                 for (int i = 0; i < 4; i++)
                 {
-                    Assert.False(partitions1[i].MoveNext(), "Should not be able to move next in an empty partition.");
+                    Assert.False(
+                        partitions1[i].MoveNext(),
+                        "Should not be able to move next in an empty partition."
+                    );
                 }
 
                 //test GetOrderableDynamicPartitions
@@ -149,11 +168,17 @@ namespace System.Collections.Concurrent.Tests
 
                     //verify all partitions are empty
                     var newPartition = partitions2.GetEnumerator();
-                    Assert.False(newPartition.MoveNext(), "Should not be able to move next in an empty partition.");
+                    Assert.False(
+                        newPartition.MoveNext(),
+                        "Should not be able to move next in an empty partition."
+                    );
                 }
                 catch (NotSupportedException)
                 {
-                    Assert.True(IsStaticPartition(algorithm), "TestEmptyPartitions:  IsStaticPartition(algorithm) should have been true.");
+                    Assert.True(
+                        IsStaticPartition(algorithm),
+                        "TestEmptyPartitions:  IsStaticPartition(algorithm) should have been true."
+                    );
                 }
             }
         }
@@ -167,7 +192,9 @@ namespace System.Collections.Concurrent.Tests
             for (int i = 0; i < dataSize; i++)
                 data[i] = i;
 
-            IEnumerator<KeyValuePair<long, int>>[] partitionsUnderTest = new IEnumerator<KeyValuePair<long, int>>[partitionCount];
+            IEnumerator<KeyValuePair<long, int>>[] partitionsUnderTest = new IEnumerator<
+                KeyValuePair<long, int>
+            >[partitionCount];
 
             //step 1: test GetOrderablePartitions
             OrderablePartitioner<int> partitioner = PartitioningWithAlgorithm<int>(data, algorithm);
@@ -179,7 +206,13 @@ namespace System.Collections.Concurrent.Tests
 
             Assert.Equal(partitionCount, partitions1.Count);
 
-            TestPartitioningCore(dataSize, partitionCount, data, IsStaticPartition(algorithm), partitionsUnderTest);
+            TestPartitioningCore(
+                dataSize,
+                partitionCount,
+                data,
+                IsStaticPartition(algorithm),
+                partitionsUnderTest
+            );
 
             //step 2: test GetOrderableDynamicPartitions
             bool gotException = false;
@@ -189,7 +222,13 @@ namespace System.Collections.Concurrent.Tests
                 for (int i = 0; i < partitionCount; i++)
                     partitionsUnderTest[i] = partitions2.GetEnumerator();
 
-                TestPartitioningCore(dataSize, partitionCount, data, IsStaticPartition(algorithm), partitionsUnderTest);
+                TestPartitioningCore(
+                    dataSize,
+                    partitionCount,
+                    data,
+                    IsStaticPartition(algorithm),
+                    partitionsUnderTest
+                );
             }
             catch (NotSupportedException)
             {
@@ -197,7 +236,10 @@ namespace System.Collections.Concurrent.Tests
                 gotException = true;
             }
 
-            Assert.False(IsStaticPartition(algorithm) && !gotException, "TestLoadBalanceIList: Failure: didn't catch \"NotSupportedException\" for static partitioning");
+            Assert.False(
+                IsStaticPartition(algorithm) && !gotException,
+                "TestLoadBalanceIList: Failure: didn't catch \"NotSupportedException\" for static partitioning"
+            );
         }
 
         private static OrderablePartitioner<T> PartitioningWithAlgorithm<T>(T[] data, int algorithm)
@@ -224,12 +266,19 @@ namespace System.Collections.Concurrent.Tests
                 case (4):
                     return Partitioner.Create((IEnumerable<T>)data);
                 default:
-                    throw new InvalidOperationException("PartitioningWithAlgorithm:  no such partitioning algorithm");
+                    throw new InvalidOperationException(
+                        "PartitioningWithAlgorithm:  no such partitioning algorithm"
+                    );
             }
         }
 
-        private static void TestPartitioningCore(int dataSize, int partitionCount, int[] data, bool staticPartitioning,
-            IEnumerator<KeyValuePair<long, int>>[] partitions)
+        private static void TestPartitioningCore(
+            int dataSize,
+            int partitionCount,
+            int[] data,
+            bool staticPartitioning,
+            IEnumerator<KeyValuePair<long, int>>[] partitions
+        )
         {
             bool[] boolarray = new bool[dataSize];
             bool keysOrderedWithinPartition = true,
@@ -240,56 +289,71 @@ namespace System.Collections.Concurrent.Tests
             for (int i = 0; i < partitionCount; i++)
             {
                 int my_i = i;
-                threadArray[i] = Task.Run(() =>
-                {
-                    int localOffset = 0;
-                    int lastElement = -1;
-
-                    //variables to compute key/value consistency for static partitioning.
-                    int quotient, remainder;
-                    quotient = dataSize / partitionCount;
-                    remainder = dataSize % partitionCount;
-                    Assert.Throws<InvalidOperationException>(() => { var temp = partitions[my_i].Current; });
-
-                    while (partitions[my_i].MoveNext())
+                threadArray[i] = Task.Run(
+                    () =>
                     {
-                        int key = (int)partitions[my_i].Current.Key,
-                            value = partitions[my_i].Current.Value;
+                        int localOffset = 0;
+                        int lastElement = -1;
 
-                        Assert.Equal(key, value);
+                        //variables to compute key/value consistency for static partitioning.
+                        int quotient,
+                            remainder;
+                        quotient = dataSize / partitionCount;
+                        remainder = dataSize % partitionCount;
+                        Assert.Throws<InvalidOperationException>(
+                            () =>
+                            {
+                                var temp = partitions[my_i].Current;
+                            }
+                        );
 
-                        boolarray[key] = true;
-                        Interlocked.Increment(ref enumCount);
-
-                        //todo: check if keys are ordered increasingly within each partition.
-                        keysOrderedWithinPartition &= (lastElement >= key);
-                        lastElement = key;
-
-                        //Only check this with static partitioning
-                        //check keys are ordered across the partitions
-                        if (staticPartitioning)
+                        while (partitions[my_i].MoveNext())
                         {
-                            int originalPosition;
-                            if (my_i < remainder)
-                                originalPosition = localOffset + my_i * (quotient + 1);
-                            else
-                                originalPosition = localOffset + remainder * (quotient + 1) + (my_i - remainder) * quotient;
-                            keysOrderedAcrossPartitions &= originalPosition == value;
+                            int key = (int)partitions[my_i].Current.Key,
+                                value = partitions[my_i].Current.Value;
+
+                            Assert.Equal(key, value);
+
+                            boolarray[key] = true;
+                            Interlocked.Increment(ref enumCount);
+
+                            //todo: check if keys are ordered increasingly within each partition.
+                            keysOrderedWithinPartition &= (lastElement >= key);
+                            lastElement = key;
+
+                            //Only check this with static partitioning
+                            //check keys are ordered across the partitions
+                            if (staticPartitioning)
+                            {
+                                int originalPosition;
+                                if (my_i < remainder)
+                                    originalPosition = localOffset + my_i * (quotient + 1);
+                                else
+                                    originalPosition =
+                                        localOffset
+                                        + remainder * (quotient + 1)
+                                        + (my_i - remainder) * quotient;
+                                keysOrderedAcrossPartitions &= originalPosition == value;
+                            }
+                            localOffset++;
                         }
-                        localOffset++;
                     }
-                }
                 );
             }
 
             Task.WaitAll(threadArray);
 
             if (keysOrderedWithinPartition)
-                Console.WriteLine("TestPartitioningCore:  Keys are not strictly ordered within each partition");
+                Console.WriteLine(
+                    "TestPartitioningCore:  Keys are not strictly ordered within each partition"
+                );
 
             // Only check this with static partitioning
             //check keys are ordered across the partitions
-            Assert.False(staticPartitioning && !keysOrderedAcrossPartitions, "TestPartitioningCore:  Keys are not strictly ordered across partitions");
+            Assert.False(
+                staticPartitioning && !keysOrderedAcrossPartitions,
+                "TestPartitioningCore:  Keys are not strictly ordered across partitions"
+            );
 
             //check data count
             Assert.Equal(enumCount, dataSize);
@@ -309,9 +373,9 @@ namespace System.Collections.Concurrent.Tests
         {
             Partitioner<int>[] partitioners = new[]
             {
-                Partitioner.Create(new int[] { 0 , 1, 2, 3, 4, 5}),
-                Partitioner.Create(new int[] { 0 , 1, 2, 3, 4, 5}, false),
-                Partitioner.Create(new int[] { 0 , 1, 2, 3, 4, 5}, true),
+                Partitioner.Create(new int[] { 0, 1, 2, 3, 4, 5 }),
+                Partitioner.Create(new int[] { 0, 1, 2, 3, 4, 5 }, false),
+                Partitioner.Create(new int[] { 0, 1, 2, 3, 4, 5 }, true),
                 Partitioner.Create(new int[] { 0 }),
                 Partitioner.Create(new int[] { 0 }, false),
                 Partitioner.Create(new int[] { 0 }, true),
@@ -323,9 +387,24 @@ namespace System.Collections.Concurrent.Tests
                 {
                     while (ee.MoveNext()) { }
 
-                    Assert.False(ee.MoveNext(), "TestExtraMoveNext:  FAILED.  Partitioner " + i + ": First extra MoveNext expected to return false.");
-                    Assert.False(ee.MoveNext(), "TestExtraMoveNext:  FAILED.  Partitioner " + i + ": Second extra MoveNext expected to return false.");
-                    Assert.False(ee.MoveNext(), "TestExtraMoveNext:  FAILED.  Partitioner " + i + ": Third extra MoveNext expected to return false.");
+                    Assert.False(
+                        ee.MoveNext(),
+                        "TestExtraMoveNext:  FAILED.  Partitioner "
+                            + i
+                            + ": First extra MoveNext expected to return false."
+                    );
+                    Assert.False(
+                        ee.MoveNext(),
+                        "TestExtraMoveNext:  FAILED.  Partitioner "
+                            + i
+                            + ": Second extra MoveNext expected to return false."
+                    );
+                    Assert.False(
+                        ee.MoveNext(),
+                        "TestExtraMoveNext:  FAILED.  Partitioner "
+                            + i
+                            + ": Third extra MoveNext expected to return false."
+                    );
                 }
             }
         }
@@ -335,7 +414,9 @@ namespace System.Collections.Concurrent.Tests
         private class DisposeTrackingEnumerable<T> : IEnumerable<T>
         {
             protected IEnumerable<T> m_data;
-            List<DisposeTrackingEnumerator<T>> s_enumerators = new List<DisposeTrackingEnumerator<T>>();
+            List<DisposeTrackingEnumerator<T>> s_enumerators = new List<
+                DisposeTrackingEnumerator<T>
+            >();
 
             public DisposeTrackingEnumerable(IEnumerable<T> enumerable)
             {
@@ -344,7 +425,9 @@ namespace System.Collections.Concurrent.Tests
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
-                DisposeTrackingEnumerator<T> walker = new DisposeTrackingEnumerator<T>(m_data.GetEnumerator());
+                DisposeTrackingEnumerator<T> walker = new DisposeTrackingEnumerator<T>(
+                    m_data.GetEnumerator()
+                );
                 lock (s_enumerators)
                 {
                     s_enumerators.Add(walker);
@@ -354,7 +437,9 @@ namespace System.Collections.Concurrent.Tests
 
             public IEnumerator<T> GetEnumerator()
             {
-                DisposeTrackingEnumerator<T> walker = new DisposeTrackingEnumerator<T>(m_data.GetEnumerator());
+                DisposeTrackingEnumerator<T> walker = new DisposeTrackingEnumerator<T>(
+                    m_data.GetEnumerator()
+                );
                 lock (s_enumerators)
                 {
                     s_enumerators.Add(walker);
@@ -366,8 +451,14 @@ namespace System.Collections.Concurrent.Tests
             {
                 for (int i = 0; i < s_enumerators.Count; i++)
                 {
-                    Assert.True(s_enumerators[i].IsDisposed(),
-                        string.Format("AreEnumeratorsDisposed:  FAILED.  enumerator {0} was not disposed for SCENARIO: {1}.", i, scenario));
+                    Assert.True(
+                        s_enumerators[i].IsDisposed(),
+                        string.Format(
+                            "AreEnumeratorsDisposed:  FAILED.  enumerator {0} was not disposed for SCENARIO: {1}.",
+                            i,
+                            scenario
+                        )
+                    );
                 }
             }
         }
@@ -429,7 +520,6 @@ namespace System.Collections.Concurrent.Tests
         {
             return algorithm < 2;
         }
-
         #endregion
     }
 }

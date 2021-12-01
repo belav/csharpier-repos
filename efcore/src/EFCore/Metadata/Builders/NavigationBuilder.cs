@@ -22,7 +22,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     ///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
     ///     </para>
     /// </remarks>
-    public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilder?>, IInfrastructure<IConventionNavigationBuilder?>
+    public class NavigationBuilder
+        : IInfrastructure<IConventionSkipNavigationBuilder?>,
+          IInfrastructure<IConventionNavigationBuilder?>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             Check.DebugAssert(
                 InternalNavigationBuilder != null || InternalSkipNavigationBuilder != null,
-                "Expected either a Navigation or SkipNavigation");
+                "Expected either a Navigation or SkipNavigation"
+            );
         }
 
         private InternalNavigationBuilder? InternalNavigationBuilder { get; set; }
@@ -67,11 +70,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             if (InternalNavigationBuilder != null)
             {
-                InternalNavigationBuilder.HasAnnotation(annotation, value, ConfigurationSource.Explicit);
+                InternalNavigationBuilder.HasAnnotation(
+                    annotation,
+                    value,
+                    ConfigurationSource.Explicit
+                );
             }
             else
             {
-                InternalSkipNavigationBuilder!.HasAnnotation(annotation, value, ConfigurationSource.Explicit);
+                InternalSkipNavigationBuilder!.HasAnnotation(
+                    annotation,
+                    value,
+                    ConfigurationSource.Explicit
+                );
             }
 
             return this;
@@ -94,15 +105,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </remarks>
         /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual NavigationBuilder UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
+        public virtual NavigationBuilder UsePropertyAccessMode(
+            PropertyAccessMode propertyAccessMode
+        )
         {
             if (InternalNavigationBuilder != null)
             {
-                InternalNavigationBuilder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
+                InternalNavigationBuilder.UsePropertyAccessMode(
+                    propertyAccessMode,
+                    ConfigurationSource.Explicit
+                );
             }
             else
             {
-                InternalSkipNavigationBuilder!.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
+                InternalSkipNavigationBuilder!.UsePropertyAccessMode(
+                    propertyAccessMode,
+                    ConfigurationSource.Explicit
+                );
             }
 
             return this;
@@ -140,7 +159,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             }
             else
             {
-                InternalSkipNavigationBuilder!.AutoInclude(autoInclude, ConfigurationSource.Explicit);
+                InternalSkipNavigationBuilder!.AutoInclude(
+                    autoInclude,
+                    ConfigurationSource.Explicit
+                );
             }
 
             return this;
@@ -155,14 +177,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             if (InternalNavigationBuilder != null)
             {
-                InternalNavigationBuilder = InternalNavigationBuilder.IsRequired(required, ConfigurationSource.Explicit);
+                InternalNavigationBuilder = InternalNavigationBuilder.IsRequired(
+                    required,
+                    ConfigurationSource.Explicit
+                );
             }
             else
             {
                 throw new InvalidOperationException(
                     CoreStrings.RequiredSkipNavigation(
                         InternalSkipNavigationBuilder!.Metadata.DeclaringEntityType.DisplayName(),
-                        InternalSkipNavigationBuilder.Metadata.Name));
+                        InternalSkipNavigationBuilder.Metadata.Name
+                    )
+                );
             }
 
             return this;
@@ -171,14 +198,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     The internal builder being used to configure the skip navigation.
         /// </summary>
-        IConventionSkipNavigationBuilder? IInfrastructure<IConventionSkipNavigationBuilder?>.Instance
-            => InternalSkipNavigationBuilder;
+        IConventionSkipNavigationBuilder? IInfrastructure<IConventionSkipNavigationBuilder?>.Instance =>
+            InternalSkipNavigationBuilder;
 
         /// <summary>
         ///     The internal builder being used to configure the navigation.
         /// </summary>
-        IConventionNavigationBuilder? IInfrastructure<IConventionNavigationBuilder?>.Instance
-            => InternalNavigationBuilder;
+        IConventionNavigationBuilder? IInfrastructure<IConventionNavigationBuilder?>.Instance =>
+            InternalNavigationBuilder;
 
         #region Hidden System.Object members
 
@@ -187,8 +214,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -197,8 +223,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -206,9 +231,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

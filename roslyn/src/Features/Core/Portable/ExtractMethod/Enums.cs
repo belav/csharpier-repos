@@ -40,17 +40,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
     internal enum OperationStatusFlag
     {
         None = 0x0,
-
         /// <summary>
         /// operation has succeeded
         /// </summary>
         Succeeded = 0x1,
-
         /// <summary>
         /// operation has succeeded with a span that is different than original span
         /// </summary>
         Suggestion = 0x2,
-
         /// <summary>
         /// operation has failed but can provide some best effort result
         /// </summary>

@@ -12,25 +12,28 @@ namespace Wasm.Build.Tests
 {
     public class BuildEnvironment
     {
-        public string                           DotNet                        { get; init; }
-        public string                           RuntimePackDir                { get; init; }
-        public bool                             IsWorkload                    { get; init; }
-        public string                           DefaultBuildArgs              { get; init; }
-        public IDictionary<string, string>      EnvVars                       { get; init; }
-        public string                           DirectoryBuildPropsContents   { get; init; }
-        public string                           DirectoryBuildTargetsContents { get; init; }
-        public string                           RuntimeNativeDir              { get; init; }
-        public string                           LogRootPath                   { get; init; }
+        public string DotNet { get; init; }
+        public string RuntimePackDir { get; init; }
+        public bool IsWorkload { get; init; }
+        public string DefaultBuildArgs { get; init; }
+        public IDictionary<string, string> EnvVars { get; init; }
+        public string DirectoryBuildPropsContents { get; init; }
+        public string DirectoryBuildTargetsContents { get; init; }
+        public string RuntimeNativeDir { get; init; }
+        public string LogRootPath { get; init; }
 
-        public static readonly string           RelativeTestAssetsPath = @"..\testassets\";
-        public static readonly string           TestAssetsPath = Path.Combine(AppContext.BaseDirectory, "testassets");
-        public static readonly string           TestDataPath = Path.Combine(AppContext.BaseDirectory, "data");
+        public static readonly string RelativeTestAssetsPath = @"..\testassets\";
+        public static readonly string TestAssetsPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "testassets"
+        );
+        public static readonly string TestDataPath = Path.Combine(AppContext.BaseDirectory, "data");
 
         private static string s_runtimeConfig = "Release";
 
         public BuildEnvironment()
         {
-            DirectoryInfo? solutionRoot = new (AppContext.BaseDirectory);
+            DirectoryInfo? solutionRoot = new(AppContext.BaseDirectory);
             while (solutionRoot != null)
             {
                 if (File.Exists(Path.Combine(solutionRoot.FullName, "NuGet.config")))
@@ -45,23 +48,36 @@ namespace Wasm.Build.Tests
             if (string.IsNullOrEmpty(sdkForWorkloadPath))
                 throw new Exception($"Environment variable SDK_FOR_WORKLOAD_TESTING_PATH not set");
             if (!Directory.Exists(sdkForWorkloadPath))
-                throw new Exception($"Could not find SDK_FOR_WORKLOAD_TESTING_PATH={sdkForWorkloadPath}");
+                throw new Exception(
+                    $"Could not find SDK_FOR_WORKLOAD_TESTING_PATH={sdkForWorkloadPath}"
+                );
 
-            bool workloadInstalled = EnvironmentVariables.SdkHasWorkloadInstalled != null && EnvironmentVariables.SdkHasWorkloadInstalled == "true";
+            bool workloadInstalled =
+                EnvironmentVariables.SdkHasWorkloadInstalled != null
+                && EnvironmentVariables.SdkHasWorkloadInstalled == "true";
             if (workloadInstalled)
             {
                 var workloadPacksVersion = EnvironmentVariables.WorkloadPacksVersion;
                 if (string.IsNullOrEmpty(workloadPacksVersion))
-                    throw new Exception($"Cannot test with workloads without WORKLOAD_PACKS_VER environment variable being set");
+                    throw new Exception(
+                        $"Cannot test with workloads without WORKLOAD_PACKS_VER environment variable being set"
+                    );
 
-                RuntimePackDir = Path.Combine(sdkForWorkloadPath, "packs", "Microsoft.NETCore.App.Runtime.Mono.browser-wasm", workloadPacksVersion);
+                RuntimePackDir = Path.Combine(
+                    sdkForWorkloadPath,
+                    "packs",
+                    "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+                    workloadPacksVersion
+                );
                 DirectoryBuildPropsContents = s_directoryBuildPropsForWorkloads;
                 DirectoryBuildTargetsContents = s_directoryBuildTargetsForWorkloads;
                 EnvVars = new Dictionary<string, string>();
 
                 var appRefDir = EnvironmentVariables.AppRefDir;
                 if (string.IsNullOrEmpty(appRefDir))
-                    throw new Exception($"Cannot test with workloads without AppRefDir environment variable being set");
+                    throw new Exception(
+                        $"Cannot test with workloads without AppRefDir environment variable being set"
+                    );
 
                 DefaultBuildArgs = $" /p:AppRefDir={appRefDir}";
                 IsWorkload = true;
@@ -73,30 +89,48 @@ namespace Wasm.Build.Tests
                 {
                     string? buildDir = EnvironmentVariables.WasmBuildSupportDir;
                     if (buildDir == null || !Directory.Exists(buildDir))
-                        throw new Exception($"Could not find the solution root, or a build dir: {buildDir}");
+                        throw new Exception(
+                            $"Could not find the solution root, or a build dir: {buildDir}"
+                        );
 
                     emsdkPath = Path.Combine(buildDir, "emsdk");
-                    RuntimePackDir = Path.Combine(buildDir, "microsoft.netcore.app.runtime.browser-wasm");
-                    DefaultBuildArgs = $" /p:WasmBuildSupportDir={buildDir} /p:EMSDK_PATH={emsdkPath} ";
+                    RuntimePackDir = Path.Combine(
+                        buildDir,
+                        "microsoft.netcore.app.runtime.browser-wasm"
+                    );
+                    DefaultBuildArgs =
+                        $" /p:WasmBuildSupportDir={buildDir} /p:EMSDK_PATH={emsdkPath} ";
                 }
                 else
                 {
-                    string artifactsBinDir = Path.Combine(solutionRoot.FullName, "artifacts", "bin");
-                    RuntimePackDir = Path.Combine(artifactsBinDir, "microsoft.netcore.app.runtime.browser-wasm", s_runtimeConfig);
+                    string artifactsBinDir = Path.Combine(
+                        solutionRoot.FullName,
+                        "artifacts",
+                        "bin"
+                    );
+                    RuntimePackDir = Path.Combine(
+                        artifactsBinDir,
+                        "microsoft.netcore.app.runtime.browser-wasm",
+                        s_runtimeConfig
+                    );
 
                     if (string.IsNullOrEmpty(EnvironmentVariables.EMSDK_PATH))
-                        emsdkPath = Path.Combine(solutionRoot.FullName, "src", "mono", "wasm", "emsdk");
+                        emsdkPath = Path.Combine(
+                            solutionRoot.FullName,
+                            "src",
+                            "mono",
+                            "wasm",
+                            "emsdk"
+                        );
                     else
                         emsdkPath = EnvironmentVariables.EMSDK_PATH;
 
-                    DefaultBuildArgs = $" /p:RuntimeSrcDir={solutionRoot.FullName} /p:RuntimeConfig={s_runtimeConfig} /p:EMSDK_PATH={emsdkPath} ";
+                    DefaultBuildArgs =
+                        $" /p:RuntimeSrcDir={solutionRoot.FullName} /p:RuntimeConfig={s_runtimeConfig} /p:EMSDK_PATH={emsdkPath} ";
                 }
 
                 IsWorkload = false;
-                EnvVars = new Dictionary<string, string>()
-                {
-                    ["EMSDK_PATH"] = emsdkPath
-                };
+                EnvVars = new Dictionary<string, string>() { ["EMSDK_PATH"] = emsdkPath };
 
                 DirectoryBuildPropsContents = s_directoryBuildPropsForLocal;
                 DirectoryBuildTargetsContents = s_directoryBuildTargetsForLocal;
@@ -109,7 +143,8 @@ namespace Wasm.Build.Tests
             EnvVars["DOTNET_MULTILEVEL_LOOKUP"] = "0";
             EnvVars["DOTNET_SKIP_FIRST_TIME_EXPERIENCE"] = "1";
             EnvVars["MSBuildSDKsPath"] = string.Empty;
-            EnvVars["PATH"] = $"{sdkForWorkloadPath}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}";
+            EnvVars["PATH"] =
+                $"{sdkForWorkloadPath}{Path.PathSeparator}{Environment.GetEnvironmentVariable("PATH")}";
 
             RuntimeNativeDir = Path.Combine(RuntimePackDir, "runtimes", "browser-wasm", "native");
             DotNet = Path.Combine(sdkForWorkloadPath!, "dotnet");
@@ -130,13 +165,25 @@ namespace Wasm.Build.Tests
             }
         }
 
-        protected static string s_directoryBuildPropsForWorkloads = File.ReadAllText(Path.Combine(TestDataPath, "Workloads.Directory.Build.props"));
-        protected static string s_directoryBuildTargetsForWorkloads = File.ReadAllText(Path.Combine(TestDataPath, "Workloads.Directory.Build.targets"));
+        protected static string s_directoryBuildPropsForWorkloads = File.ReadAllText(
+            Path.Combine(TestDataPath, "Workloads.Directory.Build.props")
+        );
+        protected static string s_directoryBuildTargetsForWorkloads = File.ReadAllText(
+            Path.Combine(TestDataPath, "Workloads.Directory.Build.targets")
+        );
 
-        protected static string s_directoryBuildPropsForLocal = File.ReadAllText(Path.Combine(TestDataPath, "Local.Directory.Build.props"));
-        protected static string s_directoryBuildTargetsForLocal = File.ReadAllText(Path.Combine(TestDataPath, "Local.Directory.Build.targets"));
+        protected static string s_directoryBuildPropsForLocal = File.ReadAllText(
+            Path.Combine(TestDataPath, "Local.Directory.Build.props")
+        );
+        protected static string s_directoryBuildTargetsForLocal = File.ReadAllText(
+            Path.Combine(TestDataPath, "Local.Directory.Build.targets")
+        );
 
-        protected static string s_directoryBuildPropsForBlazorLocal = File.ReadAllText(Path.Combine(TestDataPath, "Blazor.Local.Directory.Build.props"));
-        protected static string s_directoryBuildTargetsForBlazorLocal = File.ReadAllText(Path.Combine(TestDataPath, "Blazor.Local.Directory.Build.targets"));
+        protected static string s_directoryBuildPropsForBlazorLocal = File.ReadAllText(
+            Path.Combine(TestDataPath, "Blazor.Local.Directory.Build.props")
+        );
+        protected static string s_directoryBuildTargetsForBlazorLocal = File.ReadAllText(
+            Path.Combine(TestDataPath, "Blazor.Local.Directory.Build.targets")
+        );
     }
 }

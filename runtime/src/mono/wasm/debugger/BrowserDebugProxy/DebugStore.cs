@@ -25,27 +25,47 @@ namespace Microsoft.WebAssembly.Diagnostics
 {
     internal static class PortableCustomDebugInfoKinds
     {
-        public static readonly Guid AsyncMethodSteppingInformationBlob = new Guid("54FD2AC5-E925-401A-9C2A-F94F171072F8");
+        public static readonly Guid AsyncMethodSteppingInformationBlob = new Guid(
+            "54FD2AC5-E925-401A-9C2A-F94F171072F8"
+        );
 
-        public static readonly Guid StateMachineHoistedLocalScopes = new Guid("6DA9A61E-F8C7-4874-BE62-68BC5630DF71");
+        public static readonly Guid StateMachineHoistedLocalScopes = new Guid(
+            "6DA9A61E-F8C7-4874-BE62-68BC5630DF71"
+        );
 
-        public static readonly Guid DynamicLocalVariables = new Guid("83C563C4-B4F3-47D5-B824-BA5441477EA8");
+        public static readonly Guid DynamicLocalVariables = new Guid(
+            "83C563C4-B4F3-47D5-B824-BA5441477EA8"
+        );
 
-        public static readonly Guid TupleElementNames = new Guid("ED9FDF71-8879-4747-8ED3-FE5EDE3CE710");
+        public static readonly Guid TupleElementNames = new Guid(
+            "ED9FDF71-8879-4747-8ED3-FE5EDE3CE710"
+        );
 
-        public static readonly Guid DefaultNamespace = new Guid("58b2eab6-209f-4e4e-a22c-b2d0f910c782");
+        public static readonly Guid DefaultNamespace = new Guid(
+            "58b2eab6-209f-4e4e-a22c-b2d0f910c782"
+        );
 
-        public static readonly Guid EncLocalSlotMap = new Guid("755F52A8-91C5-45BE-B4B8-209571E552BD");
+        public static readonly Guid EncLocalSlotMap = new Guid(
+            "755F52A8-91C5-45BE-B4B8-209571E552BD"
+        );
 
-        public static readonly Guid EncLambdaAndClosureMap = new Guid("A643004C-0240-496F-A783-30D64F4979DE");
+        public static readonly Guid EncLambdaAndClosureMap = new Guid(
+            "A643004C-0240-496F-A783-30D64F4979DE"
+        );
 
         public static readonly Guid SourceLink = new Guid("CC110556-A091-4D38-9FEC-25AB9A351A6A");
 
-        public static readonly Guid EmbeddedSource = new Guid("0E8A571B-6926-466E-B4AD-8AB04611F5FE");
+        public static readonly Guid EmbeddedSource = new Guid(
+            "0E8A571B-6926-466E-B4AD-8AB04611F5FE"
+        );
 
-        public static readonly Guid CompilationMetadataReferences = new Guid("7E4D4708-096E-4C5C-AEDA-CB10BA6A740D");
+        public static readonly Guid CompilationMetadataReferences = new Guid(
+            "7E4D4708-096E-4C5C-AEDA-CB10BA6A740D"
+        );
 
-        public static readonly Guid CompilationOptions = new Guid("B5FEEC05-8CD0-4A83-96DA-466284BB4BD8");
+        public static readonly Guid CompilationOptions = new Guid(
+            "B5FEEC05-8CD0-4A83-96DA-466284BB4BD8"
+        );
     }
 
     internal static class HashKinds
@@ -69,12 +89,17 @@ namespace Microsoft.WebAssembly.Diagnostics
         public bool IsResolved => Assembly != null;
         public List<Breakpoint> Locations { get; set; } = new List<Breakpoint>();
 
-        public override string ToString() => $"BreakpointRequest Assembly: {Assembly} File: {File} Line: {Line} Column: {Column}";
+        public override string ToString() =>
+            $"BreakpointRequest Assembly: {Assembly} File: {File} Line: {Line} Column: {Column}";
 
-        public object AsSetBreakpointByUrlResponse(IEnumerable<object> jsloc) => new { breakpointId = Id, locations = Locations.Select(l => l.Location.AsLocation()).Concat(jsloc) };
+        public object AsSetBreakpointByUrlResponse(IEnumerable<object> jsloc) =>
+            new
+            {
+                breakpointId = Id,
+                locations = Locations.Select(l => l.Location.AsLocation()).Concat(jsloc)
+            };
 
-        public BreakpointRequest()
-        { }
+        public BreakpointRequest() { }
 
         public BreakpointRequest(string id, MethodInfo method)
         {
@@ -134,7 +159,6 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             return store.AllSources().FirstOrDefault(source => TryResolve(source)) != null;
         }
-
     }
 
     internal class VarInfo
@@ -191,9 +215,18 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.cliLoc = new NewCliLocation(mi, sp.Offset);
         }
 
-        public SourceId Id { get => id; }
-        public int Line { get => line; }
-        public int Column { get => column; }
+        public SourceId Id
+        {
+            get => id;
+        }
+        public int Line
+        {
+            get => line;
+        }
+        public int Column
+        {
+            get => column;
+        }
         public NewCliLocation CliLocation => this.cliLoc;
 
         public override string ToString() => $"{id}:{Line}:{Column}";
@@ -223,9 +256,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 else if (l1 == null || l2 == null)
                     return false;
 
-                return (l1.Line == l2.Line &&
-                    l1.Column == l2.Column &&
-                    l1.Id == l2.Id);
+                return (l1.Line == l2.Line && l1.Column == l2.Column && l1.Id == l2.Id);
             }
 
             public override int GetHashCode(SourceLocation loc)
@@ -235,19 +266,16 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        internal object AsLocation() => new
-        {
-            scriptId = id.ToString(),
-            lineNumber = line,
-            columnNumber = column
-        };
+        internal object AsLocation() =>
+            new { scriptId = id.ToString(), lineNumber = line, columnNumber = column };
     }
 
     internal class SourceId
     {
         private const string Scheme = "dotnet://";
 
-        private readonly int assembly, document;
+        private readonly int assembly,
+            document;
 
         public int Assembly => assembly;
         public int Document => document;
@@ -305,7 +333,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public override int GetHashCode() => assembly.GetHashCode() ^ document.GetHashCode();
 
-        public static bool operator ==(SourceId a, SourceId b) => a is null ? b is null : a.Equals(b);
+        public static bool operator ==(SourceId a, SourceId b) =>
+            a is null ? b is null : a.Equals(b);
 
         public static bool operator !=(SourceId a, SourceId b) => !a.Equals(b);
     }
@@ -331,12 +360,22 @@ namespace Microsoft.WebAssembly.Diagnostics
         public bool IsStatic() => (methodDef.Attributes & MethodAttributes.Static) != 0;
         public int IsAsync { get; set; }
         public bool IsHiddenFromDebugger { get; }
-        public MethodInfo(AssemblyInfo assembly, MethodDefinitionHandle methodDefHandle, int token, SourceFile source, TypeInfo type, MetadataReader asmMetadataReader, MetadataReader pdbMetadataReader)
+        public MethodInfo(
+            AssemblyInfo assembly,
+            MethodDefinitionHandle methodDefHandle,
+            int token,
+            SourceFile source,
+            TypeInfo type,
+            MetadataReader asmMetadataReader,
+            MetadataReader pdbMetadataReader
+        )
         {
             this.IsAsync = -1;
             this.Assembly = assembly;
             this.methodDef = asmMetadataReader.GetMethodDefinition(methodDefHandle);
-            this.DebugInformation = pdbMetadataReader.GetMethodDebugInformation(methodDefHandle.ToDebugInformationHandle());
+            this.DebugInformation = pdbMetadataReader.GetMethodDebugInformation(
+                methodDefHandle.ToDebugInformationHandle()
+            );
             this.source = source;
             this.Token = token;
             this.methodDefHandle = methodDefHandle;
@@ -370,23 +409,33 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var ctorHandle = asmMetadataReader.GetCustomAttribute(cattr).Constructor;
                     if (ctorHandle.Kind == HandleKind.MemberReference)
                     {
-                        var container = asmMetadataReader.GetMemberReference((MemberReferenceHandle)ctorHandle).Parent;
-                        var name = asmMetadataReader.GetString(asmMetadataReader.GetTypeReference((TypeReferenceHandle)container).Name);
+                        var container =
+                            asmMetadataReader.GetMemberReference(
+                                (MemberReferenceHandle)ctorHandle
+                            ).Parent;
+                        var name = asmMetadataReader.GetString(
+                            asmMetadataReader.GetTypeReference((TypeReferenceHandle)container).Name
+                        );
                         if (name == "DebuggerHiddenAttribute")
                         {
                             this.IsHiddenFromDebugger = true;
                             break;
                         }
-
                     }
                 }
             }
             localScopes = pdbMetadataReader.GetLocalScopes(methodDefHandle);
         }
 
-        public void UpdateEnC(MetadataReader asmMetadataReader, MetadataReader pdbMetadataReaderParm, int method_idx)
+        public void UpdateEnC(
+            MetadataReader asmMetadataReader,
+            MetadataReader pdbMetadataReaderParm,
+            int method_idx
+        )
         {
-            this.DebugInformation = pdbMetadataReaderParm.GetMethodDebugInformation(MetadataTokens.MethodDebugInformationHandle(method_idx));
+            this.DebugInformation = pdbMetadataReaderParm.GetMethodDebugInformation(
+                MetadataTokens.MethodDebugInformationHandle(method_idx)
+            );
             this.pdbMetadataReader = pdbMetadataReaderParm;
             this.IsEnCMethod = true;
             if (!DebugInformation.SequencePointsBlob.IsNil)
@@ -411,13 +460,16 @@ namespace Microsoft.WebAssembly.Diagnostics
                 StartLocation = new SourceLocation(this, start);
                 EndLocation = new SourceLocation(this, end);
             }
-            localScopes = pdbMetadataReader.GetLocalScopes(MetadataTokens.MethodDefinitionHandle(method_idx));
+            localScopes = pdbMetadataReader.GetLocalScopes(
+                MetadataTokens.MethodDefinitionHandle(method_idx)
+            );
         }
 
         public SourceLocation GetLocationByIl(int pos)
         {
             SequencePoint? prev = null;
-            if (!DebugInformation.SequencePointsBlob.IsNil) {
+            if (!DebugInformation.SequencePointsBlob.IsNil)
+            {
                 foreach (SequencePoint sp in DebugInformation.GetSequencePoints())
                 {
                     if (sp.Offset > pos)
@@ -447,7 +499,6 @@ namespace Microsoft.WebAssembly.Diagnostics
                 var parameter = Assembly.asmMetadataReader.GetParameter(parameterHandle);
                 res.Add(new VarInfo(parameter, Assembly.asmMetadataReader));
             }
-
 
             foreach (var localScopeHandle in localScopes)
             {
@@ -514,7 +565,6 @@ namespace Microsoft.WebAssembly.Diagnostics
         public override string ToString() => "TypeInfo('" + FullName + "')";
     }
 
-
     internal class AssemblyInfo
     {
         private static int next_id;
@@ -526,8 +576,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         internal string Url { get; }
         internal MetadataReader asmMetadataReader { get; }
         internal MetadataReader pdbMetadataReader { get; set; }
-        internal List<MemoryStream> enCMemoryStream  = new List<MemoryStream>();
-        internal List<MetadataReader> enCMetadataReader  = new List<MetadataReader>();
+        internal List<MemoryStream> enCMemoryStream = new List<MemoryStream>();
+        internal List<MetadataReader> enCMetadataReader = new List<MetadataReader>();
         internal PEReader peReader;
         internal MemoryStream asmStream;
         internal MemoryStream pdbStream;
@@ -544,28 +594,39 @@ namespace Microsoft.WebAssembly.Diagnostics
             if (pdb != null)
             {
                 pdbStream = new MemoryStream(pdb);
-                pdbMetadataReader = MetadataReaderProvider.FromPortablePdbStream(pdbStream).GetMetadataReader();
+                pdbMetadataReader = MetadataReaderProvider
+                    .FromPortablePdbStream(pdbStream)
+                    .GetMetadataReader();
             }
             else
             {
                 var entries = peReader.ReadDebugDirectory();
-                var embeddedPdbEntry = entries.FirstOrDefault(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+                var embeddedPdbEntry = entries.FirstOrDefault(
+                    e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb
+                );
                 if (embeddedPdbEntry.DataSize != 0)
                 {
-                    pdbMetadataReader = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry).GetMetadataReader();
+                    pdbMetadataReader = peReader
+                        .ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry)
+                        .GetMetadataReader();
                 }
             }
             Name = asmMetadataReader.GetAssemblyDefinition().GetAssemblyName().Name + ".dll";
-            AssemblyNameUnqualified = asmMetadataReader.GetAssemblyDefinition().GetAssemblyName().Name + ".dll";
+            AssemblyNameUnqualified =
+                asmMetadataReader.GetAssemblyDefinition().GetAssemblyName().Name + ".dll";
             Populate();
         }
 
         public bool EnC(byte[] meta, byte[] pdb)
         {
             var asmStream = new MemoryStream(meta);
-            MetadataReader asmMetadataReader = MetadataReaderProvider.FromMetadataStream(asmStream).GetMetadataReader();
+            MetadataReader asmMetadataReader = MetadataReaderProvider
+                .FromMetadataStream(asmStream)
+                .GetMetadataReader();
             var pdbStream = new MemoryStream(pdb);
-            MetadataReader pdbMetadataReader = MetadataReaderProvider.FromPortablePdbStream(pdbStream).GetMetadataReader();
+            MetadataReader pdbMetadataReader = MetadataReaderProvider
+                .FromPortablePdbStream(pdbStream)
+                .GetMetadataReader();
             enCMemoryStream.Add(asmStream);
             enCMemoryStream.Add(pdbStream);
             enCMetadataReader.Add(asmMetadataReader);
@@ -579,10 +640,15 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.logger = logger;
         }
 
-        private void PopulateEnC(MetadataReader asmMetadataReaderParm, MetadataReader pdbMetadataReaderParm)
+        private void PopulateEnC(
+            MetadataReader asmMetadataReaderParm,
+            MetadataReader pdbMetadataReaderParm
+        )
         {
             int i = 1;
-            foreach (EntityHandle encMapHandle in asmMetadataReaderParm.GetEditAndContinueMapEntries())
+            foreach (
+                EntityHandle encMapHandle in asmMetadataReaderParm.GetEditAndContinueMapEntries()
+            )
             {
                 if (encMapHandle.Kind == HandleKind.MethodDebugInformation)
                 {
@@ -602,11 +668,18 @@ namespace Microsoft.WebAssembly.Diagnostics
                 if (d2s.TryGetValue(rowid, out SourceFile source))
                     return source;
 
-                var src = new SourceFile(this, sources.Count, doc, GetSourceLinkUrl(documentName), documentName);
+                var src = new SourceFile(
+                    this,
+                    sources.Count,
+                    doc,
+                    GetSourceLinkUrl(documentName),
+                    documentName
+                );
                 sources.Add(src);
                 d2s[rowid] = src;
                 return src;
-            };
+            }
+            ;
 
             foreach (DocumentHandle dh in asmMetadataReader.Documents)
             {
@@ -630,13 +703,30 @@ namespace Microsoft.WebAssembly.Diagnostics
                         var methodDefinition = asmMetadataReader.GetMethodDefinition(method);
                         if (!method.ToDebugInformationHandle().IsNil)
                         {
-                            var methodDebugInformation = pdbMetadataReader.GetMethodDebugInformation(method.ToDebugInformationHandle());
+                            var methodDebugInformation =
+                                pdbMetadataReader.GetMethodDebugInformation(
+                                    method.ToDebugInformationHandle()
+                                );
                             if (!methodDebugInformation.Document.IsNil)
                             {
-                                var document = pdbMetadataReader.GetDocument(methodDebugInformation.Document);
+                                var document = pdbMetadataReader.GetDocument(
+                                    methodDebugInformation.Document
+                                );
                                 var documentName = pdbMetadataReader.GetString(document.Name);
-                                SourceFile source = FindSource(methodDebugInformation.Document, asmMetadataReader.GetRowNumber(methodDebugInformation.Document), documentName);
-                                var methodInfo = new MethodInfo(this, method, asmMetadataReader.GetRowNumber(method), source, typeInfo, asmMetadataReader, pdbMetadataReader);
+                                SourceFile source = FindSource(
+                                    methodDebugInformation.Document,
+                                    asmMetadataReader.GetRowNumber(methodDebugInformation.Document),
+                                    documentName
+                                );
+                                var methodInfo = new MethodInfo(
+                                    this,
+                                    method,
+                                    asmMetadataReader.GetRowNumber(method),
+                                    source,
+                                    typeInfo,
+                                    asmMetadataReader,
+                                    pdbMetadataReader
+                                );
                                 methods[asmMetadataReader.GetRowNumber(method)] = methodInfo;
 
                                 if (source != null)
@@ -648,25 +738,33 @@ namespace Microsoft.WebAssembly.Diagnostics
                     }
                 }
             }
-
         }
 
         private void ProcessSourceLink()
         {
-            var sourceLinkDebugInfo =
-                    (from cdiHandle in pdbMetadataReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
-                     let cdi = pdbMetadataReader.GetCustomDebugInformation(cdiHandle)
-                     where pdbMetadataReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
-                     select pdbMetadataReader.GetBlobBytes(cdi.Value)).SingleOrDefault();
+            var sourceLinkDebugInfo = (
+                from cdiHandle in pdbMetadataReader.GetCustomDebugInformation(
+                    EntityHandle.ModuleDefinition
+                )
+                let cdi = pdbMetadataReader.GetCustomDebugInformation(cdiHandle)
+                where pdbMetadataReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
+                select pdbMetadataReader.GetBlobBytes(cdi.Value)
+            ).SingleOrDefault();
 
             if (sourceLinkDebugInfo != null)
             {
-                var sourceLinkContent = System.Text.Encoding.UTF8.GetString(sourceLinkDebugInfo, 0, sourceLinkDebugInfo.Length);
+                var sourceLinkContent = System.Text.Encoding.UTF8.GetString(
+                    sourceLinkDebugInfo,
+                    0,
+                    sourceLinkDebugInfo.Length
+                );
 
                 if (sourceLinkContent != null)
                 {
                     JToken jObject = JObject.Parse(sourceLinkContent)["documents"];
-                    sourceLinkMappings = JsonConvert.DeserializeObject<Dictionary<string, string>>(jObject.ToString());
+                    sourceLinkMappings = JsonConvert.DeserializeObject<Dictionary<string, string>>(
+                        jObject.ToString()
+                    );
                 }
             }
         }
@@ -730,7 +828,9 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             pdbStream = new MemoryStream();
             streamToReadFrom.CopyTo(pdbStream);
-            pdbMetadataReader = MetadataReaderProvider.FromPortablePdbStream(pdbStream).GetMetadataReader();
+            pdbMetadataReader = MetadataReaderProvider
+                .FromPortablePdbStream(pdbStream)
+                .GetMetadataReader();
         }
     }
     internal class SourceFile
@@ -742,7 +842,13 @@ namespace Microsoft.WebAssembly.Diagnostics
         private DocumentHandle docHandle;
         private string url;
 
-        internal SourceFile(AssemblyInfo assembly, int id, DocumentHandle docHandle, Uri sourceLinkUri, string url)
+        internal SourceFile(
+            AssemblyInfo assembly,
+            int id,
+            DocumentHandle docHandle,
+            Uri sourceLinkUri,
+            string url
+        )
         {
             this.methods = new Dictionary<int, MethodInfo>();
             this.SourceLinkUri = sourceLinkUri;
@@ -753,7 +859,10 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.url = url;
             this.DebuggerFileName = url.Replace("\\", "/").Replace(":", "");
 
-            this.SourceUri = new Uri((Path.IsPathRooted(url) ? "file://" : "") + url, UriKind.RelativeOrAbsolute);
+            this.SourceUri = new Uri(
+                (Path.IsPathRooted(url) ? "file://" : "") + url,
+                UriKind.RelativeOrAbsolute
+            );
             if (SourceUri.IsFile && File.Exists(SourceUri.LocalPath))
             {
                 this.Url = this.SourceUri.ToString();
@@ -787,9 +896,20 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public (int startLine, int startColumn, int endLine, int endColumn) GetExtents()
         {
-            MethodInfo start = Methods.OrderBy(m => m.StartLocation.Line).ThenBy(m => m.StartLocation.Column).First();
-            MethodInfo end = Methods.OrderByDescending(m => m.EndLocation.Line).ThenByDescending(m => m.EndLocation.Column).First();
-            return (start.StartLocation.Line, start.StartLocation.Column, end.EndLocation.Line, end.EndLocation.Column);
+            MethodInfo start = Methods
+                .OrderBy(m => m.StartLocation.Line)
+                .ThenBy(m => m.StartLocation.Column)
+                .First();
+            MethodInfo end = Methods
+                .OrderByDescending(m => m.EndLocation.Line)
+                .ThenByDescending(m => m.EndLocation.Column)
+                .First();
+            return (
+                start.StartLocation.Line,
+                start.StartLocation.Column,
+                end.EndLocation.Line,
+                end.EndLocation.Column
+            );
         }
 
         private async Task<MemoryStream> GetDataAsync(Uri uri, CancellationToken token)
@@ -848,20 +968,27 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         private byte[] ComputePdbHash(Stream sourceStream)
         {
-            HashAlgorithm algorithm = GetHashAlgorithm(assembly.pdbMetadataReader.GetGuid(doc.HashAlgorithm));
+            HashAlgorithm algorithm = GetHashAlgorithm(
+                assembly.pdbMetadataReader.GetGuid(doc.HashAlgorithm)
+            );
             if (algorithm != null)
                 using (algorithm)
                     return algorithm.ComputeHash(sourceStream);
             return Array.Empty<byte>();
         }
 
-        public async Task<Stream> GetSourceAsync(bool checkHash, CancellationToken token = default(CancellationToken))
+        public async Task<Stream> GetSourceAsync(
+            bool checkHash,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             var reader = assembly.pdbMetadataReader;
-            byte[] bytes = (from handle in reader.GetCustomDebugInformation(docHandle)
-                            let cdi = reader.GetCustomDebugInformation(handle)
-                            where reader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.EmbeddedSource
-                            select reader.GetBlobBytes(cdi.Value)).SingleOrDefault();
+            byte[] bytes = (
+                from handle in reader.GetCustomDebugInformation(docHandle)
+                let cdi = reader.GetCustomDebugInformation(handle)
+                where reader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.EmbeddedSource
+                select reader.GetBlobBytes(cdi.Value)
+            ).SingleOrDefault();
 
             if (bytes != null)
             {
@@ -874,11 +1001,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
             }
 
-
             foreach (Uri url in new[] { SourceUri, SourceLinkUri })
             {
                 MemoryStream mem = await GetDataAsync(url, token).ConfigureAwait(false);
-                if (mem != null && mem.Length > 0 && (!checkHash || CheckPdbHash(ComputePdbHash(mem))))
+                if (
+                    mem != null
+                    && mem.Length > 0
+                    && (!checkHash || CheckPdbHash(ComputePdbHash(mem)))
+                )
                 {
                     mem.Position = 0;
                     return mem;
@@ -914,8 +1044,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.logger = logger;
         }
 
-        public DebugStore(ILogger logger) : this(logger, new HttpClient())
-        { }
+        public DebugStore(ILogger logger) : this(logger, new HttpClient()) { }
 
         private class DebugItem
         {
@@ -923,7 +1052,12 @@ namespace Microsoft.WebAssembly.Diagnostics
             public Task<byte[][]> Data { get; set; }
         }
 
-        public IEnumerable<MethodInfo> EnC(SessionId sessionId, AssemblyInfo asm, byte[] meta_data, byte[] pdb_data)
+        public IEnumerable<MethodInfo> EnC(
+            SessionId sessionId,
+            AssemblyInfo asm,
+            byte[] meta_data,
+            byte[] pdb_data
+        )
         {
             asm.EnC(meta_data, pdb_data);
             foreach (var method in asm.Methods)
@@ -933,7 +1067,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        public IEnumerable<SourceFile> Add(SessionId sessionId, byte[] assembly_data, byte[] pdb_data)
+        public IEnumerable<SourceFile> Add(
+            SessionId sessionId,
+            byte[] assembly_data,
+            byte[] pdb_data
+        )
         {
             AssemblyInfo assembly = null;
             try
@@ -951,7 +1089,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (GetAssemblyByUnqualifiedName(assembly.AssemblyNameUnqualified) != null)
             {
-                logger.LogDebug($"Skipping adding {assembly.Name} into the debug store, as it already exists");
+                logger.LogDebug(
+                    $"Skipping adding {assembly.Name} into the debug store, as it already exists"
+                );
                 yield break;
             }
 
@@ -962,7 +1102,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        public async IAsyncEnumerable<SourceFile> Load(SessionId sessionId, string[] loaded_files, [EnumeratorCancellation] CancellationToken token)
+        public async IAsyncEnumerable<SourceFile> Load(
+            SessionId sessionId,
+            string[] loaded_files,
+            [EnumeratorCancellation] CancellationToken token
+        )
         {
             var asm_files = new List<string>();
             var pdb_files = new List<string>();
@@ -986,8 +1130,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                         new DebugItem
                         {
                             Url = url,
-                            Data = Task.WhenAll(client.GetByteArrayAsync(url, token), pdb != null ? client.GetByteArrayAsync(pdb, token) : Task.FromResult<byte[]>(null))
-                        });
+                            Data = Task.WhenAll(
+                                client.GetByteArrayAsync(url, token),
+                                pdb != null
+                                  ? client.GetByteArrayAsync(pdb, token)
+                                  : Task.FromResult<byte[]>(null)
+                            )
+                        }
+                    );
                 }
                 catch (Exception e)
                 {
@@ -1012,7 +1162,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
                 if (GetAssemblyByUnqualifiedName(assembly.AssemblyNameUnqualified) != null)
                 {
-                    logger.LogDebug($"Skipping loading {assembly.Name} into the debug store, as it already exists");
+                    logger.LogDebug(
+                        $"Skipping loading {assembly.Name} into the debug store, as it already exists"
+                    );
                     continue;
                 }
 
@@ -1024,11 +1176,22 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public IEnumerable<SourceFile> AllSources() => assemblies.SelectMany(a => a.Sources);
 
-        public SourceFile GetFileById(SourceId id) => AllSources().SingleOrDefault(f => f.SourceId.Equals(id));
+        public SourceFile GetFileById(SourceId id) =>
+            AllSources().SingleOrDefault(f => f.SourceId.Equals(id));
 
-        public AssemblyInfo GetAssemblyByName(string name) => assemblies.FirstOrDefault(a => a.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        public AssemblyInfo GetAssemblyByName(string name) =>
+            assemblies.FirstOrDefault(
+                a => a.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)
+            );
 
-        public AssemblyInfo GetAssemblyByUnqualifiedName(string name) => assemblies.FirstOrDefault(a => a.AssemblyNameUnqualified.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        public AssemblyInfo GetAssemblyByUnqualifiedName(string name) =>
+            assemblies.FirstOrDefault(
+                a =>
+                    a.AssemblyNameUnqualified.Equals(
+                        name,
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+            );
 
         /*
         V8 uses zero based indexing for both line and column.
@@ -1054,12 +1217,17 @@ namespace Microsoft.WebAssembly.Diagnostics
             return true;
         }
 
-        public List<SourceLocation> FindPossibleBreakpoints(SourceLocation start, SourceLocation end)
+        public List<SourceLocation> FindPossibleBreakpoints(
+            SourceLocation start,
+            SourceLocation end
+        )
         {
             //XXX FIXME no idea what todo with locations on different files
             if (start.Id != end.Id)
             {
-                logger.LogDebug($"FindPossibleBreakpoints: documents differ (start: {start.Id}) (end {end.Id}");
+                logger.LogDebug(
+                    $"FindPossibleBreakpoints: documents differ (start: {start.Id}) (end {end.Id}"
+                );
                 return null;
             }
 
@@ -1078,7 +1246,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 if (!method.DebugInformation.SequencePointsBlob.IsNil)
                 {
-                    foreach (SequencePoint sequencePoint in method.DebugInformation.GetSequencePoints())
+                    foreach (
+                        SequencePoint sequencePoint in method.DebugInformation.GetSequencePoints()
+                    )
                     {
                         if (!sequencePoint.IsHidden && Match(sequencePoint, start, end))
                             res.Add(new SourceLocation(method, sequencePoint));
@@ -1116,8 +1286,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             request.TryResolve(this);
 
-            AssemblyInfo asm = assemblies.FirstOrDefault(a => a.Name.Equals(request.Assembly, StringComparison.OrdinalIgnoreCase));
-            SourceFile sourceFile = asm?.Sources?.SingleOrDefault(s => s.DebuggerFileName.Equals(request.File, StringComparison.OrdinalIgnoreCase));
+            AssemblyInfo asm = assemblies.FirstOrDefault(
+                a => a.Name.Equals(request.Assembly, StringComparison.OrdinalIgnoreCase)
+            );
+            SourceFile sourceFile = asm?.Sources?.SingleOrDefault(
+                s => s.DebuggerFileName.Equals(request.File, StringComparison.OrdinalIgnoreCase)
+            );
 
             if (sourceFile == null)
                 yield break;
@@ -1126,15 +1300,21 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 if (!method.DebugInformation.SequencePointsBlob.IsNil)
                 {
-                    foreach (SequencePoint sequencePoint in method.DebugInformation.GetSequencePoints())
+                    foreach (
+                        SequencePoint sequencePoint in method.DebugInformation.GetSequencePoints()
+                    )
                     {
-                        if (!sequencePoint.IsHidden && Match(sequencePoint, request.Line, request.Column))
+                        if (
+                            !sequencePoint.IsHidden
+                            && Match(sequencePoint, request.Line, request.Column)
+                        )
                             yield return new SourceLocation(method, sequencePoint);
                     }
                 }
             }
         }
 
-        public string ToUrl(SourceLocation location) => location != null ? GetFileById(location.Id).Url : "";
+        public string ToUrl(SourceLocation location) =>
+            location != null ? GetFileById(location.Id).Url : "";
     }
 }

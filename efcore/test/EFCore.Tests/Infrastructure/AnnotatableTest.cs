@@ -41,7 +41,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var annotatable = new Annotatable();
 
-            annotatable.AddAnnotations(new[] { new ConventionAnnotation("Foo", "Bar", ConfigurationSource.Convention) });
+            annotatable.AddAnnotations(
+                new[] { new ConventionAnnotation("Foo", "Bar", ConfigurationSource.Convention) }
+            );
 
             Assert.Equal(typeof(Annotation), annotatable.FindAnnotation("Foo").GetType());
 
@@ -49,7 +51,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             conventionAnnotatable.AddAnnotations(new[] { new Annotation("Foo", "Bar") });
 
-            Assert.Equal(typeof(ConventionAnnotation), conventionAnnotatable.FindAnnotation("Foo").GetType());
+            Assert.Equal(
+                typeof(ConventionAnnotation),
+                conventionAnnotatable.FindAnnotation("Foo").GetType()
+            );
         }
 
         [ConditionalFact]
@@ -61,7 +66,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
-                Assert.Throws<InvalidOperationException>(() => annotatable.AddAnnotation("Foo", "Bar")).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => annotatable.AddAnnotation("Foo", "Bar")
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -87,8 +95,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Empty(annotatable.GetAnnotations());
 
             Assert.Equal(
-                CoreStrings.AnnotationNotFound("Foo", "Microsoft.EntityFrameworkCore.Infrastructure.Annotatable"),
-                Assert.Throws<InvalidOperationException>(() => annotatable.GetAnnotation("Foo")).Message);
+                CoreStrings.AnnotationNotFound(
+                    "Foo",
+                    "Microsoft.EntityFrameworkCore.Infrastructure.Annotatable"
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => annotatable.GetAnnotation("Foo")
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -99,7 +113,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var annotation1 = annotatable.AddAnnotation("Z", "Foo");
             var annotation2 = annotatable.AddAnnotation("A", "Bar");
 
-            Assert.True(new[] { annotation2, annotation1 }.SequenceEqual(annotatable.GetAnnotations()));
+            Assert.True(
+                new[] { annotation2, annotation1 }.SequenceEqual(annotatable.GetAnnotations())
+            );
         }
 
         [ConditionalFact]
@@ -139,7 +155,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
-                Assert.Throws<InvalidOperationException>(() => annotatable.AddRuntimeAnnotation("Foo", "Bar")).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => annotatable.AddRuntimeAnnotation("Foo", "Bar")
+                ).Message
+            );
         }
     }
 }

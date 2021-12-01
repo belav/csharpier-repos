@@ -88,7 +88,7 @@ public struct InnerExplicit
     public String f3;
 }
 
-[StructLayout(LayoutKind.Sequential)]//struct containing one field of array type
+[StructLayout(LayoutKind.Sequential)] //struct containing one field of array type
 public struct InnerArraySequential
 {
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Common.NumArrElements)]
@@ -165,7 +165,11 @@ public struct S4
     public string name;
 }
 
-public enum Enum1 { e1 = 1, e2 = 3 };
+public enum Enum1
+{
+    e1 = 1,
+    e2 = 3
+};
 [StructLayout(LayoutKind.Sequential)]
 public struct S5
 {
@@ -408,7 +412,6 @@ public struct ManyInts
     }
 }
 
-
 [StructLayout(LayoutKind.Sequential)]
 public struct MultipleBool
 {
@@ -466,7 +469,7 @@ public struct NonBlittableFloat
 {
     public NonBlittableFloat(float f)
     {
-        arr = new []{f};
+        arr = new[] { f };
     }
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1)]

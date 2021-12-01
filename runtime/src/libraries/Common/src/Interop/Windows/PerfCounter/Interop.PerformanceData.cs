@@ -10,9 +10,7 @@ internal static partial class Interop
     internal static partial class PerfCounter
     {
         [GeneratedDllImport(Libraries.Advapi32, ExactSpelling = true)]
-        internal static partial uint PerfStopProvider(
-            IntPtr hProvider
-        );
+        internal static partial uint PerfStopProvider(IntPtr hProvider);
 
         internal unsafe delegate uint PERFLIBREQUEST(
             uint RequestCode,
@@ -62,7 +60,12 @@ internal static partial class Interop
         );
 
         // TODO: [DllImportGenerator] Switch to use GeneratedDllImport once we annotate blittable types used in interop in CoreLib (like Guid)
-        [DllImport(Libraries.Advapi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Unicode)]
+        [DllImport(
+            Libraries.Advapi32,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode
+        )]
         internal static extern unsafe PerfCounterSetInstanceStruct* PerfCreateInstance(
             SafePerfProviderHandle hProvider,
             ref Guid CounterSetGuid,

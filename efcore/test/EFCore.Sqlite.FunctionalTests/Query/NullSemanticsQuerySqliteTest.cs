@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NullSemanticsQuerySqliteTest : NullSemanticsQueryTestBase<NullSemanticsQuerySqliteFixture>
+    public class NullSemanticsQuerySqliteTest
+        : NullSemanticsQueryTestBase<NullSemanticsQuerySqliteFixture>
     {
-        public NullSemanticsQuerySqliteTest(NullSemanticsQuerySqliteFixture fixture)
-            : base(fixture)
+        public NullSemanticsQuerySqliteTest(NullSemanticsQuerySqliteFixture fixture) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
         }
@@ -32,7 +32,8 @@ WHERE @__prm_0 = (""e"".""NullableBoolA"" IS NOT NULL)",
                 //
                 @"SELECT ""e"".""Id"", ""e"".""BoolA"", ""e"".""BoolB"", ""e"".""BoolC"", ""e"".""IntA"", ""e"".""IntB"", ""e"".""IntC"", ""e"".""NullableBoolA"", ""e"".""NullableBoolB"", ""e"".""NullableBoolC"", ""e"".""NullableIntA"", ""e"".""NullableIntB"", ""e"".""NullableIntC"", ""e"".""NullableStringA"", ""e"".""NullableStringB"", ""e"".""NullableStringC"", ""e"".""StringA"", ""e"".""StringB"", ""e"".""StringC""
 FROM ""Entities1"" AS ""e""
-WHERE ""e"".""BoolB"" = (""e"".""NullableBoolA"" IS NOT NULL)");
+WHERE ""e"".""BoolB"" = (""e"".""NullableBoolA"" IS NOT NULL)"
+            );
         }
 
         public override async Task Bool_equal_nullable_bool_compared_to_null(bool async)
@@ -48,7 +49,8 @@ WHERE ""e"".""NullableBoolA"" IS NULL",
 
 SELECT ""e"".""Id"", ""e"".""BoolA"", ""e"".""BoolB"", ""e"".""BoolC"", ""e"".""IntA"", ""e"".""IntB"", ""e"".""IntC"", ""e"".""NullableBoolA"", ""e"".""NullableBoolB"", ""e"".""NullableBoolC"", ""e"".""NullableIntA"", ""e"".""NullableIntB"", ""e"".""NullableIntC"", ""e"".""NullableStringA"", ""e"".""NullableStringB"", ""e"".""NullableStringC"", ""e"".""StringA"", ""e"".""StringB"", ""e"".""StringC""
 FROM ""Entities1"" AS ""e""
-WHERE @__prm_0 = (""e"".""NullableBoolA"" IS NOT NULL)");
+WHERE @__prm_0 = (""e"".""NullableBoolA"" IS NOT NULL)"
+            );
         }
 
         public override async Task Bool_not_equal_nullable_bool_HasValue(bool async)
@@ -68,7 +70,8 @@ WHERE @__prm_0 <> (""e"".""NullableBoolA"" IS NOT NULL)",
                 //
                 @"SELECT ""e"".""Id"", ""e"".""BoolA"", ""e"".""BoolB"", ""e"".""BoolC"", ""e"".""IntA"", ""e"".""IntB"", ""e"".""IntC"", ""e"".""NullableBoolA"", ""e"".""NullableBoolB"", ""e"".""NullableBoolC"", ""e"".""NullableIntA"", ""e"".""NullableIntB"", ""e"".""NullableIntC"", ""e"".""NullableStringA"", ""e"".""NullableStringB"", ""e"".""NullableStringC"", ""e"".""StringA"", ""e"".""StringB"", ""e"".""StringC""
 FROM ""Entities1"" AS ""e""
-WHERE ""e"".""BoolB"" <> (""e"".""NullableBoolA"" IS NOT NULL)");
+WHERE ""e"".""BoolB"" <> (""e"".""NullableBoolA"" IS NOT NULL)"
+            );
         }
 
         public override async Task Bool_not_equal_nullable_bool_compared_to_null(bool async)
@@ -84,7 +87,8 @@ WHERE ""e"".""NullableBoolA"" IS NOT NULL",
 
 SELECT ""e"".""Id"", ""e"".""BoolA"", ""e"".""BoolB"", ""e"".""BoolC"", ""e"".""IntA"", ""e"".""IntB"", ""e"".""IntC"", ""e"".""NullableBoolA"", ""e"".""NullableBoolB"", ""e"".""NullableBoolC"", ""e"".""NullableIntA"", ""e"".""NullableIntB"", ""e"".""NullableIntC"", ""e"".""NullableStringA"", ""e"".""NullableStringB"", ""e"".""NullableStringC"", ""e"".""StringA"", ""e"".""StringB"", ""e"".""StringC""
 FROM ""Entities1"" AS ""e""
-WHERE @__prm_0 <> (""e"".""NullableBoolA"" IS NOT NULL)");
+WHERE @__prm_0 <> (""e"".""NullableBoolA"" IS NOT NULL)"
+            );
         }
 
         public override async Task Bool_logical_operation_with_nullable_bool_HasValue(bool async)
@@ -101,7 +105,8 @@ WHERE 0",
                 //
                 @"SELECT ""e"".""Id"", ""e"".""BoolA"", ""e"".""BoolB"", ""e"".""BoolC"", ""e"".""IntA"", ""e"".""IntB"", ""e"".""IntC"", ""e"".""NullableBoolA"", ""e"".""NullableBoolB"", ""e"".""NullableBoolC"", ""e"".""NullableIntA"", ""e"".""NullableIntB"", ""e"".""NullableIntC"", ""e"".""NullableStringA"", ""e"".""NullableStringB"", ""e"".""NullableStringC"", ""e"".""StringA"", ""e"".""StringB"", ""e"".""StringC""
 FROM ""Entities1"" AS ""e""
-WHERE ""e"".""BoolB"" | (""e"".""NullableBoolA"" IS NOT NULL)");
+WHERE ""e"".""BoolB"" | (""e"".""NullableBoolA"" IS NOT NULL)"
+            );
         }
 
         public override async Task Comparison_compared_to_null_check_on_bool(bool async)
@@ -115,11 +120,12 @@ WHERE (""e"".""IntA"" = ""e"".""IntB"") <> (""e"".""NullableBoolA"" IS NOT NULL)
                 //
                 @"SELECT ""e"".""Id"", ""e"".""BoolA"", ""e"".""BoolB"", ""e"".""BoolC"", ""e"".""IntA"", ""e"".""IntB"", ""e"".""IntC"", ""e"".""NullableBoolA"", ""e"".""NullableBoolB"", ""e"".""NullableBoolC"", ""e"".""NullableIntA"", ""e"".""NullableIntB"", ""e"".""NullableIntC"", ""e"".""NullableStringA"", ""e"".""NullableStringB"", ""e"".""NullableStringC"", ""e"".""StringA"", ""e"".""StringB"", ""e"".""StringC""
 FROM ""Entities1"" AS ""e""
-WHERE (""e"".""IntA"" <> ""e"".""IntB"") = (""e"".""NullableBoolA"" IS NOT NULL)");
+WHERE (""e"".""IntA"" <> ""e"".""IntB"") = (""e"".""NullableBoolA"" IS NOT NULL)"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         protected override NullSemanticsContext CreateContext(bool useRelationalNulls = false)
         {

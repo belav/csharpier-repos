@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             InternalEntityEntry entry,
             TState? state,
             InternalEntityEntry? sourceEntry,
-            INavigationBase? inboundNavigation)
-            : base(entry, sourceEntry, inboundNavigation)
+            INavigationBase? inboundNavigation
+        ) : base(entry, sourceEntry, inboundNavigation)
         {
             NodeState = state;
         }
@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public override EntityEntryGraphNode CreateNode(
             EntityEntryGraphNode currentNode,
             InternalEntityEntry internalEntityEntry,
-            INavigationBase reachedVia)
+            INavigationBase reachedVia
+        )
         {
             Check.NotNull(currentNode, nameof(currentNode));
             Check.NotNull(internalEntityEntry, nameof(internalEntityEntry));
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 internalEntityEntry,
                 ((EntityEntryGraphNode<TState>)currentNode).NodeState,
                 currentNode.Entry.GetInfrastructure(),
-                reachedVia);
+                reachedVia
+            );
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public IdleProcessor(
             IAsynchronousOperationListener listener,
             TimeSpan backOffTimeSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Listener = listener;
             CancellationToken = cancellationToken;
@@ -42,11 +43,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         protected void Start()
         {
             Contract.ThrowIfFalse(_processorTask == null);
-            _processorTask = Task.Factory.SafeStartNewFromAsync(ProcessAsync, CancellationToken, TaskScheduler.Default);
+            _processorTask = Task.Factory.SafeStartNewFromAsync(
+                ProcessAsync,
+                CancellationToken,
+                TaskScheduler.Default
+            );
         }
 
-        protected void UpdateLastAccessTime()
-            => _timeSinceLastAccess = SharedStopwatch.StartNew();
+        protected void UpdateLastAccessTime() => _timeSinceLastAccess = SharedStopwatch.StartNew();
 
         protected async Task WaitForIdleAsync(IExpeditableDelaySource expeditableDelaySource)
         {
@@ -65,7 +69,19 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 // TODO: will safestart/unwarp capture cancellation exception?
                 var timeLeft = BackOffTimeSpan - diff;
-                if (!await expeditableDelaySource.Delay(TimeSpan.FromMilliseconds(Math.Max(s_minimumDelay.TotalMilliseconds, timeLeft.TotalMilliseconds)), CancellationToken).ConfigureAwait(false))
+                if (
+                    !await expeditableDelaySource
+                        .Delay(
+                            TimeSpan.FromMilliseconds(
+                                Math.Max(
+                                    s_minimumDelay.TotalMilliseconds,
+                                    timeLeft.TotalMilliseconds
+                                )
+                            ),
+                            CancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     // The delay terminated early to accommodate a blocking operation. Make sure to yield so low
                     // priority (on idle) operations get a chance to be triggered.
@@ -102,7 +118,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
         }
 
-        public virtual Task AsyncProcessorTask
-            => _processorTask ?? Task.CompletedTask;
+        public virtual Task AsyncProcessorTask => _processorTask ?? Task.CompletedTask;
     }
 }

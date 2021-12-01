@@ -13,11 +13,9 @@ namespace Microsoft.CodeAnalysis.Simplification
     {
         private readonly ObjectPool<IReductionRewriter> _pool;
 
-        protected AbstractReducer(ObjectPool<IReductionRewriter> pool)
-            => _pool = pool;
+        protected AbstractReducer(ObjectPool<IReductionRewriter> pool) => _pool = pool;
 
-        public IReductionRewriter GetOrCreateRewriter()
-            => _pool.Allocate();
+        public IReductionRewriter GetOrCreateRewriter() => _pool.Allocate();
 
         public virtual bool IsApplicable(OptionSet optionSet) => true;
     }

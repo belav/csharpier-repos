@@ -12,7 +12,10 @@ namespace System.Data.ProviderBase
         protected readonly IDataReader _dataReader;
         protected int _fieldCount;
 
-        internal static DataReaderContainer Create(IDataReader dataReader, bool returnProviderSpecificTypes)
+        internal static DataReaderContainer Create(
+            IDataReader dataReader,
+            bool returnProviderSpecificTypes
+        )
         {
             if (returnProviderSpecificTypes)
             {
@@ -33,16 +36,16 @@ namespace System.Data.ProviderBase
 
         internal int FieldCount
         {
-            get
-            {
-                return _fieldCount;
-            }
+            get { return _fieldCount; }
         }
 
         internal abstract bool ReturnProviderSpecificTypes { get; }
         protected abstract int VisibleFieldCount { get; }
 
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         internal abstract Type GetFieldType(int ordinal);
         internal abstract object GetValue(int ordinal);
         internal abstract int GetValues(object[] values);
@@ -76,7 +79,8 @@ namespace System.Data.ProviderBase
         {
             private readonly DbDataReader _providerSpecificDataReader;
 
-            internal ProviderSpecificDataReader(IDataReader dataReader, DbDataReader dbDataReader) : base(dataReader)
+            internal ProviderSpecificDataReader(IDataReader dataReader, DbDataReader dbDataReader)
+                : base(dataReader)
             {
                 Debug.Assert(null != dataReader, "null dbDataReader");
                 _providerSpecificDataReader = dbDataReader;
@@ -85,10 +89,7 @@ namespace System.Data.ProviderBase
 
             internal override bool ReturnProviderSpecificTypes
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
             protected override int VisibleFieldCount
             {
@@ -100,7 +101,10 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+            [return: DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
             internal override Type GetFieldType(int ordinal)
             {
                 Type fieldType = _providerSpecificDataReader.GetProviderSpecificFieldType(ordinal);
@@ -126,10 +130,7 @@ namespace System.Data.ProviderBase
 
             internal override bool ReturnProviderSpecificTypes
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
             protected override int VisibleFieldCount
             {
@@ -141,7 +142,10 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+            [return: DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
             internal override Type GetFieldType(int ordinal)
             {
                 return _dataReader.GetFieldType(ordinal);

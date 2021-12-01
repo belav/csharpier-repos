@@ -15,21 +15,37 @@ namespace Microsoft.CodeAnalysis
         private readonly IEqualityComparer<TOutput> _comparer;
         private readonly IIncrementalGeneratorNode<TInput> _sourceNode;
 
-        public TransformNode(IIncrementalGeneratorNode<TInput> sourceNode, Func<TInput, CancellationToken, TOutput> userFunc, IEqualityComparer<TOutput>? comparer = null)
-            : this(sourceNode, userFunc: (i, token) => ImmutableArray.Create(userFunc(i, token)), comparer)
-        {
-        }
+        public TransformNode(
+            IIncrementalGeneratorNode<TInput> sourceNode,
+            Func<TInput, CancellationToken, TOutput> userFunc,
+            IEqualityComparer<TOutput>? comparer = null
+        )
+            : this(
+                sourceNode,
+                userFunc: (i, token) => ImmutableArray.Create(userFunc(i, token)),
+                comparer
+            ) { }
 
-        public TransformNode(IIncrementalGeneratorNode<TInput> sourceNode, Func<TInput, CancellationToken, ImmutableArray<TOutput>> userFunc, IEqualityComparer<TOutput>? comparer = null)
+        public TransformNode(
+            IIncrementalGeneratorNode<TInput> sourceNode,
+            Func<TInput, CancellationToken, ImmutableArray<TOutput>> userFunc,
+            IEqualityComparer<TOutput>? comparer = null
+        )
         {
             _sourceNode = sourceNode;
             _func = userFunc;
             _comparer = comparer ?? EqualityComparer<TOutput>.Default;
         }
 
-        public IIncrementalGeneratorNode<TOutput> WithComparer(IEqualityComparer<TOutput> comparer) => new TransformNode<TInput, TOutput>(_sourceNode, _func, comparer);
+        public IIncrementalGeneratorNode<TOutput> WithComparer(
+            IEqualityComparer<TOutput> comparer
+        ) => new TransformNode<TInput, TOutput>(_sourceNode, _func, comparer);
 
-        public NodeStateTable<TOutput> UpdateStateTable(DriverStateTable.Builder builder, NodeStateTable<TOutput> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<TOutput> UpdateStateTable(
+            DriverStateTable.Builder builder,
+            NodeStateTable<TOutput> previousTable,
+            CancellationToken cancellationToken
+        )
         {
             // grab the source inputs
             var sourceTable = builder.GetLatestStateTableForNode(_sourceNode);
@@ -57,7 +73,10 @@ namespace Microsoft.CodeAnalysis
                     // generate the new entries
                     var newOutputs = _func(entry.item, cancellationToken);
 
-                    if (entry.state != EntryState.Modified || !newTable.TryModifyEntries(newOutputs, _comparer))
+                    if (
+                        entry.state != EntryState.Modified
+                        || !newTable.TryModifyEntries(newOutputs, _comparer)
+                    )
                     {
                         newTable.AddEntries(newOutputs, EntryState.Added);
                     }
@@ -66,6 +85,7 @@ namespace Microsoft.CodeAnalysis
             return newTable.ToImmutableAndFree();
         }
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _sourceNode.RegisterOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _sourceNode.RegisterOutput(output);
     }
 }

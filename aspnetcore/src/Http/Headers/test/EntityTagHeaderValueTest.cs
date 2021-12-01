@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -106,85 +106,115 @@ public class EntityTagHeaderValueTest
         Assert.False(EntityTagHeaderValue.Any.Compare(null, useStrongComparison: false));
     }
 
-    public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> NotEquivalentUnderStrongComparison
+    public static TheoryData<
+        EntityTagHeaderValue,
+        EntityTagHeaderValue
+    > NotEquivalentUnderStrongComparison
     {
         get
         {
             return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
+            {
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"TAG\"") },
                 {
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"TAG\"") },
-                    { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"", true) },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag1\"") },
-                    { new EntityTagHeaderValue("\"tag\""), EntityTagHeaderValue.Any },
-                };
+                    new EntityTagHeaderValue("\"tag\"", true),
+                    new EntityTagHeaderValue("\"tag\"", true)
+                },
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag1\"") },
+                { new EntityTagHeaderValue("\"tag\""), EntityTagHeaderValue.Any },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(NotEquivalentUnderStrongComparison))]
-    public void CompareUsingStrongComparison_NonEquivalentPairs_ReturnFalse(EntityTagHeaderValue left, EntityTagHeaderValue right)
+    public void CompareUsingStrongComparison_NonEquivalentPairs_ReturnFalse(
+        EntityTagHeaderValue left,
+        EntityTagHeaderValue right
+    )
     {
         Assert.False(left.Compare(right, useStrongComparison: true));
         Assert.False(right.Compare(left, useStrongComparison: true));
     }
 
-    public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> EquivalentUnderStrongComparison
+    public static TheoryData<
+        EntityTagHeaderValue,
+        EntityTagHeaderValue
+    > EquivalentUnderStrongComparison
     {
         get
         {
             return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
-                {
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
-                };
+            {
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(EquivalentUnderStrongComparison))]
-    public void CompareUsingStrongComparison_EquivalentPairs_ReturnTrue(EntityTagHeaderValue left, EntityTagHeaderValue right)
+    public void CompareUsingStrongComparison_EquivalentPairs_ReturnTrue(
+        EntityTagHeaderValue left,
+        EntityTagHeaderValue right
+    )
     {
         Assert.True(left.Compare(right, useStrongComparison: true));
         Assert.True(right.Compare(left, useStrongComparison: true));
     }
 
-    public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> NotEquivalentUnderWeakComparison
+    public static TheoryData<
+        EntityTagHeaderValue,
+        EntityTagHeaderValue
+    > NotEquivalentUnderWeakComparison
     {
         get
         {
             return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
-                {
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"TAG\"") },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag1\"") },
-                    { new EntityTagHeaderValue("\"tag\""), EntityTagHeaderValue.Any },
-                };
+            {
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"TAG\"") },
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag1\"") },
+                { new EntityTagHeaderValue("\"tag\""), EntityTagHeaderValue.Any },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(NotEquivalentUnderWeakComparison))]
-    public void CompareUsingWeakComparison_NonEquivalentPairs_ReturnFalse(EntityTagHeaderValue left, EntityTagHeaderValue right)
+    public void CompareUsingWeakComparison_NonEquivalentPairs_ReturnFalse(
+        EntityTagHeaderValue left,
+        EntityTagHeaderValue right
+    )
     {
         Assert.False(left.Compare(right, useStrongComparison: false));
         Assert.False(right.Compare(left, useStrongComparison: false));
     }
 
-    public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> EquivalentUnderWeakComparison
+    public static TheoryData<
+        EntityTagHeaderValue,
+        EntityTagHeaderValue
+    > EquivalentUnderWeakComparison
     {
         get
         {
             return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
+            {
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
                 {
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
-                    { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"", true) },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
-                };
+                    new EntityTagHeaderValue("\"tag\"", true),
+                    new EntityTagHeaderValue("\"tag\"", true)
+                },
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(EquivalentUnderWeakComparison))]
-    public void CompareUsingWeakComparison_EquivalentPairs_ReturnTrue(EntityTagHeaderValue left, EntityTagHeaderValue right)
+    public void CompareUsingWeakComparison_EquivalentPairs_ReturnTrue(
+        EntityTagHeaderValue left,
+        EntityTagHeaderValue right
+    )
     {
         Assert.True(left.Compare(right, useStrongComparison: false));
         Assert.True(right.Compare(left, useStrongComparison: false));
@@ -274,30 +304,30 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\"",
-                "",
-                " \"tag\" ",
-                "\r\n \"tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\",\"tag\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\"",
+            "",
+            " \"tag\" ",
+            "\r\n \"tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\",\"tag\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         IList<EntityTagHeaderValue> results = EntityTagHeaderValue.ParseList(inputs);
 
         var expectedResults = new[]
         {
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag会\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag会\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\"", true),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -307,30 +337,30 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\"",
-                "",
-                " \"tag\" ",
-                "\r\n \"tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\",\"tag\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\"",
+            "",
+            " \"tag\" ",
+            "\r\n \"tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\",\"tag\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         IList<EntityTagHeaderValue> results = EntityTagHeaderValue.ParseStrictList(inputs);
 
         var expectedResults = new[]
         {
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag会\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag会\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\"", true),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -340,29 +370,29 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\"",
-                "",
-                " \"tag\" ",
-                "\r\n \"tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\",\"tag\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\"",
+            "",
+            " \"tag\" ",
+            "\r\n \"tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\",\"tag\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         Assert.True(EntityTagHeaderValue.TryParseList(inputs, out var results));
         var expectedResults = new[]
         {
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag会\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag会\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\"", true),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -372,29 +402,29 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\"",
-                "",
-                " \"tag\" ",
-                "\r\n \"tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\",\"tag\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\"",
+            "",
+            " \"tag\" ",
+            "\r\n \"tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\",\"tag\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         Assert.True(EntityTagHeaderValue.TryParseStrictList(inputs, out var results));
         var expectedResults = new[]
         {
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag会\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag会\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\"", true),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -404,27 +434,27 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\", tag, \"tag\"",
-                "tag, \"tag\"",
-                "",
-                " \"tag ",
-                "\r\n tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\", tag, \"tag\"",
+            "tag, \"tag\"",
+            "",
+            " \"tag ",
+            "\r\n tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         var results = EntityTagHeaderValue.ParseList(inputs);
         var expectedResults = new[]
         {
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag会\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag会\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\"", true),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -434,16 +464,16 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\", tag, \"tag\"",
-                "tag, \"tag\"",
-                "",
-                " \"tag ",
-                "\r\n tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\", tag, \"tag\"",
+            "tag, \"tag\"",
+            "",
+            " \"tag ",
+            "\r\n tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         Assert.Throws<FormatException>(() => EntityTagHeaderValue.ParseStrictList(inputs));
     }
 
@@ -452,27 +482,27 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\", tag, \"tag\"",
-                "tag, \"tag\"",
-                "",
-                " \"tag ",
-                "\r\n tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\", tag, \"tag\"",
+            "tag, \"tag\"",
+            "",
+            " \"tag ",
+            "\r\n tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         Assert.True(EntityTagHeaderValue.TryParseList(inputs, out var results));
         var expectedResults = new[]
         {
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag会\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\""),
-                new EntityTagHeaderValue("\"tag\"", true),
-            }.ToList();
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag会\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\""),
+            new EntityTagHeaderValue("\"tag\"", true),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -482,16 +512,16 @@ public class EntityTagHeaderValueTest
     {
         var inputs = new[]
         {
-                "",
-                "\"tag\", tag, \"tag\"",
-                "tag, \"tag\"",
-                "",
-                " \"tag ",
-                "\r\n tag\"\r\n ",
-                "\"tag会\"",
-                "\"tag\", \"tag\"",
-                "W/\"tag\"",
-            };
+            "",
+            "\"tag\", tag, \"tag\"",
+            "tag, \"tag\"",
+            "",
+            " \"tag ",
+            "\r\n tag\"\r\n ",
+            "\"tag会\"",
+            "\"tag\", \"tag\"",
+            "W/\"tag\"",
+        };
         Assert.False(EntityTagHeaderValue.TryParseStrictList(inputs, out var results));
     }
 

@@ -57,7 +57,8 @@ public class ConsumesConstraintForFormFileParameterConventionTest
 
     private static ApplicationModelProviderContext GetContext(
         Type type,
-        IModelMetadataProvider modelMetadataProvider = null)
+        IModelMetadataProvider modelMetadataProvider = null
+    )
     {
         var context = new ApplicationModelProviderContext(new[] { type.GetTypeInfo() });
         var mvcOptions = Options.Create(new MvcOptions());

@@ -32,8 +32,10 @@ internal class ModelEndpointDataSource : EndpointDataSource
         return NullChangeToken.Singleton;
     }
 
-    public override IReadOnlyList<Endpoint> Endpoints => _endpointConventionBuilders.Select(e => e.Build()).ToArray();
+    public override IReadOnlyList<Endpoint> Endpoints =>
+        _endpointConventionBuilders.Select(e => e.Build()).ToArray();
 
     // for testing
-    internal IEnumerable<EndpointBuilder> EndpointBuilders => _endpointConventionBuilders.Select(b => b.EndpointBuilder);
+    internal IEnumerable<EndpointBuilder> EndpointBuilders =>
+        _endpointConventionBuilders.Select(b => b.EndpointBuilder);
 }

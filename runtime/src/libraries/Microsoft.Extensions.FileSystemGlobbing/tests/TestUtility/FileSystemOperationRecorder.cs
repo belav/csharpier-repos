@@ -8,16 +8,18 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
 {
     internal class FileSystemOperationRecorder
     {
-        private const BindingFlags DeclaredOnlyLookup = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+        private const BindingFlags DeclaredOnlyLookup =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.DeclaredOnly;
 
         public IList<IDictionary<string, object>> Records = new List<IDictionary<string, object>>();
 
         public void Add(string action, object values)
         {
-            var record = new Dictionary<string, object>
-            {
-                {"action", action }
-            };
+            var record = new Dictionary<string, object> { { "action", action } };
 
             foreach (var p in values.GetType().GetProperties(DeclaredOnlyLookup))
             {

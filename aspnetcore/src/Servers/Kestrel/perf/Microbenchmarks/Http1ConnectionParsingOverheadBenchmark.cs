@@ -24,12 +24,18 @@ public class Http1ConnectionParsingOverheadBenchmark
     public void Setup()
     {
         var memoryPool = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
-            httpParser: NullParser<Http1ParsingHandler>.Instance);
+            httpParser: NullParser<Http1ParsingHandler>.Instance
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -37,7 +43,8 @@ public class Http1ConnectionParsingOverheadBenchmark
             transport: pair.Transport,
             timeoutControl: new TimeoutControl(timeoutHandler: null),
             memoryPool: memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         var http1Connection = new Http1Connection(connectionContext);
 

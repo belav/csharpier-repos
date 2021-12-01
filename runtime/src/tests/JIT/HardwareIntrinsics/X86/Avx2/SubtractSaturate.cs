@@ -21,12 +21,211 @@ namespace IntelHardwareIntrinsicTest
 
             if (Avx2.IsSupported)
             {
-                using (TestTable<byte, byte, byte> byteTable = new TestTable<byte, byte, byte>(new byte[32] { 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0 }, new byte[32] { 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0 }, new byte[32]))
-                using (TestTable<sbyte, sbyte, sbyte> sbyteTable = new TestTable<sbyte, sbyte, sbyte>(new sbyte[32] { 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0 }, new sbyte[32] { 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0 }, new sbyte[32]))
-                using (TestTable<short, short, short> shortTable = new TestTable<short, short, short>(new short[16] { 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0, 1, -5, 100, 0 }, new short[16] { 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0, 22, -1, -50, 0}, new short[16]))
-                using (TestTable<ushort, ushort, ushort> ushortTable = new TestTable<ushort, ushort, ushort>(new ushort[16] { 1, 5, 100, 0, 1, 5, 100, 0,  1, 5, 100, 0, 1, 5, 100, 0 }, new ushort[16] { 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0 }, new ushort[16]))
+                using (
+                    TestTable<byte, byte, byte> byteTable = new TestTable<byte, byte, byte>(
+                        new byte[32]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            5,
+                            100,
+                            0
+                        },
+                        new byte[32]
+                        {
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0,
+                            22,
+                            1,
+                            50,
+                            0
+                        },
+                        new byte[32]
+                    )
+                )
+                using (
+                    TestTable<sbyte, sbyte, sbyte> sbyteTable = new TestTable<sbyte, sbyte, sbyte>(
+                        new sbyte[32]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0
+                        },
+                        new sbyte[32]
+                        {
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0
+                        },
+                        new sbyte[32]
+                    )
+                )
+                using (
+                    TestTable<short, short, short> shortTable = new TestTable<short, short, short>(
+                        new short[16]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            -5,
+                            100,
+                            0
+                        },
+                        new short[16]
+                        {
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0,
+                            22,
+                            -1,
+                            -50,
+                            0
+                        },
+                        new short[16]
+                    )
+                )
+                using (
+                    TestTable<ushort, ushort, ushort> ushortTable = new TestTable<
+                        ushort,
+                        ushort,
+                        ushort
+                    >(
+                        new ushort[16] { 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0, 1, 5, 100, 0 },
+                        new ushort[16] { 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0, 22, 1, 50, 0 },
+                        new ushort[16]
+                    )
+                )
                 {
-
                     var vb1 = Unsafe.Read<Vector256<byte>>(byteTable.inArray1Ptr);
                     var vb2 = Unsafe.Read<Vector256<byte>>(byteTable.inArray2Ptr);
                     var vb3 = Avx2.SubtractSaturate(vb1, vb2);
@@ -46,7 +245,7 @@ namespace IntelHardwareIntrinsicTest
                     var vus2 = Unsafe.Read<Vector256<ushort>>(ushortTable.inArray2Ptr);
                     var vus3 = Avx2.SubtractSaturate(vus1, vus2);
                     Unsafe.Write(ushortTable.outArrayPtr, vus3);
-                    
+
                     for (int i = 0; i < byteTable.outArray.Length; i++)
                     {
                         int value = byteTable.inArray1[i] - byteTable.inArray2[i];
@@ -76,8 +275,7 @@ namespace IntelHardwareIntrinsicTest
                             break;
                         }
                     }
-                    
-                    
+
                     for (int i = 0; i < shortTable.outArray.Length; i++)
                     {
                         int value = shortTable.inArray1[i] - shortTable.inArray2[i];
@@ -87,12 +285,12 @@ namespace IntelHardwareIntrinsicTest
                         {
                             Console.WriteLine("AVX2 SubtractSaturate failed on short:");
                             Console.WriteLine();
-                            
+
                             testResult = Fail;
                             break;
                         }
                     }
-                    
+
                     for (int i = 0; i < ushortTable.outArray.Length; i++)
                     {
                         int value = ushortTable.inArray1[i] - ushortTable.inArray2[i];
@@ -113,7 +311,10 @@ namespace IntelHardwareIntrinsicTest
             return testResult;
         }
 
-        public unsafe struct TestTable<T1, T2, T3> : IDisposable where T1 : struct where T2 : struct where T3 : struct
+        public unsafe struct TestTable<T1, T2, T3> : IDisposable
+            where T1 : struct
+            where T2 : struct
+            where T3 : struct
         {
             public T1[] inArray1;
             public T2[] inArray2;
@@ -155,6 +356,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

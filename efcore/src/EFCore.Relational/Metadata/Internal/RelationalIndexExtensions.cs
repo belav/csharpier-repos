@@ -26,12 +26,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             this IReadOnlyIndex index,
             IReadOnlyIndex duplicateIndex,
             in StoreObjectIdentifier storeObject,
-            bool shouldThrow)
+            bool shouldThrow
+        )
         {
             var columnNames = index.Properties.GetColumnNames(storeObject);
             var duplicateColumnNames = duplicateIndex.Properties.GetColumnNames(storeObject);
-            if (columnNames == null
-                || duplicateColumnNames == null)
+            if (columnNames == null || duplicateColumnNames == null)
             {
                 if (shouldThrow)
                 {
@@ -43,7 +43,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             duplicateIndex.DeclaringEntityType.DisplayName(),
                             index.GetDatabaseName(storeObject),
                             index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                            duplicateIndex.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                            duplicateIndex.DeclaringEntityType.GetSchemaQualifiedTableName()
+                        )
+                    );
                 }
 
                 return false;
@@ -62,7 +64,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             index.DeclaringEntityType.GetSchemaQualifiedTableName(),
                             index.GetDatabaseName(storeObject),
                             index.Properties.FormatColumns(storeObject),
-                            duplicateIndex.Properties.FormatColumns(storeObject)));
+                            duplicateIndex.Properties.FormatColumns(storeObject)
+                        )
+                    );
                 }
 
                 return false;
@@ -79,7 +83,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             duplicateIndex.Properties.Format(),
                             duplicateIndex.DeclaringEntityType.DisplayName(),
                             index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                            index.GetDatabaseName(storeObject)));
+                            index.GetDatabaseName(storeObject)
+                        )
+                    );
                 }
 
                 return false;
@@ -96,7 +102,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         index.GetDatabaseName(storeObject),
                         index.GetFilter(),
-                        duplicateIndex.GetFilter()));
+                        duplicateIndex.GetFilter()
+                    )
+                );
             }
 
             return true;

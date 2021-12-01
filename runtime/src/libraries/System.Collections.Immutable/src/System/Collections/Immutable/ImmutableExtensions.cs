@@ -86,7 +86,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TEnumerator">The type of the Enumerator struct.</typeparam>
         /// <param name="enumerable">The collection to be enumerated.</param>
         /// <returns>A struct that enumerates the collection.</returns>
-        internal static DisposableEnumeratorAdapter<T, TEnumerator> GetEnumerableDisposable<T, TEnumerator>(this IEnumerable<T> enumerable)
+        internal static DisposableEnumeratorAdapter<T, TEnumerator> GetEnumerableDisposable<
+            T,
+            TEnumerator
+        >(this IEnumerable<T> enumerable)
             where TEnumerator : struct, IStrongEnumerator<T>, IEnumerator<T>
         {
             Requires.NotNull(enumerable, nameof(enumerable));
@@ -94,7 +97,9 @@ namespace System.Collections.Immutable
             var strongEnumerable = enumerable as IStrongEnumerable<T, TEnumerator>;
             if (strongEnumerable != null)
             {
-                return new DisposableEnumeratorAdapter<T, TEnumerator>(strongEnumerable.GetEnumerator());
+                return new DisposableEnumeratorAdapter<T, TEnumerator>(
+                    strongEnumerable.GetEnumerator()
+                );
             }
             else
             {

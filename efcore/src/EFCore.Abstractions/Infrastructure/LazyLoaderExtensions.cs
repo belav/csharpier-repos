@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             this ILazyLoader? loader,
             object entity,
             ref TRelated? navigationField,
-            [CallerMemberName] string navigationName = "")
-            where TRelated : class
+            [CallerMemberName] string navigationName = ""
+        ) where TRelated : class
         {
             loader?.Load(entity, navigationName);
 

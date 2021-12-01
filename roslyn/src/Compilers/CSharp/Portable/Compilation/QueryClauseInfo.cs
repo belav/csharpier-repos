@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool Equals(QueryClauseInfo other)
         {
-            return _castInfo.Equals(other._castInfo)
-                && _operationInfo.Equals(other._operationInfo);
+            return _castInfo.Equals(other._castInfo) && _operationInfo.Equals(other._operationInfo);
         }
 
         public override int GetHashCode()

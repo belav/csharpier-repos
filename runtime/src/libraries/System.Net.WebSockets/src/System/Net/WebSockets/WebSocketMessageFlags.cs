@@ -13,12 +13,10 @@ namespace System.Net.WebSockets
         /// None
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Indicates that the data in "buffer" is the last part of a message.
         /// </summary>
         EndOfMessage = 1,
-
         /// <summary>
         /// Disables compression for the message if compression has been enabled for the <see cref="WebSocket"/> instance.
         /// </summary>

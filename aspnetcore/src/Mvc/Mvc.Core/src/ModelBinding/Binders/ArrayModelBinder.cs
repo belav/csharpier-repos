@@ -25,9 +25,7 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
     /// </param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public ArrayModelBinder(IModelBinder elementBinder, ILoggerFactory loggerFactory)
-        : base(elementBinder, loggerFactory)
-    {
-    }
+        : base(elementBinder, loggerFactory) { }
 
     /// <summary>
     /// Creates a new <see cref="ArrayModelBinder{TElement}"/>.
@@ -49,10 +47,8 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
     public ArrayModelBinder(
         IModelBinder elementBinder,
         ILoggerFactory loggerFactory,
-        bool allowValidatingTopLevelNodes)
-        : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true)
-    {
-    }
+        bool allowValidatingTopLevelNodes
+    ) : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true) { }
 
     /// <summary>
     /// Creates a new <see cref="ArrayModelBinder{TElement}"/>.
@@ -79,10 +75,8 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
         IModelBinder elementBinder,
         ILoggerFactory loggerFactory,
         bool allowValidatingTopLevelNodes,
-        MvcOptions mvcOptions)
-        : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true, mvcOptions)
-    {
-    }
+        MvcOptions mvcOptions
+    ) : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true, mvcOptions) { }
 
     /// <inheritdoc />
     public override bool CanCreateInstance(Type targetType)
@@ -93,15 +87,24 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
     /// <inheritdoc />
     protected override object CreateEmptyCollection(Type targetType)
     {
-        Debug.Assert(targetType == typeof(TElement[]), "GenericModelBinder only creates this binder for arrays.");
+        Debug.Assert(
+            targetType == typeof(TElement[]),
+            "GenericModelBinder only creates this binder for arrays."
+        );
 
         return Array.Empty<TElement>();
     }
 
     /// <inheritdoc />
-    protected override object? ConvertToCollectionType(Type targetType, IEnumerable<TElement?> collection)
+    protected override object? ConvertToCollectionType(
+        Type targetType,
+        IEnumerable<TElement?> collection
+    )
     {
-        Debug.Assert(targetType == typeof(TElement?[]), "GenericModelBinder only creates this binder for arrays.");
+        Debug.Assert(
+            targetType == typeof(TElement?[]),
+            "GenericModelBinder only creates this binder for arrays."
+        );
 
         // If non-null, collection is a List<TElement>, never already a TElement[].
         return collection?.ToArray();
@@ -114,7 +117,6 @@ public class ArrayModelBinder<TElement> : CollectionModelBinder<TElement>
         {
             throw new ArgumentNullException(nameof(target));
         }
-
         // Do not attempt to copy values into an array because an array's length is immutable. This choice is also
         // consistent with our handling of a read-only array property.
     }

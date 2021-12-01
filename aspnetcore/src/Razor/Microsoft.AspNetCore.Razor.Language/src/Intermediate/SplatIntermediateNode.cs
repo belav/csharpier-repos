@@ -25,7 +25,6 @@ public sealed class SplatIntermediateNode : IntermediateNode
         {
             throw new ArgumentNullException(nameof(formatter));
         }
-
         // No properties => do nothing
     }
 }

@@ -38,17 +38,22 @@ public static class ExceptionHandlerExtensions
     /// <param name="app"></param>
     /// <param name="errorHandlingPath"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, string errorHandlingPath)
+    public static IApplicationBuilder UseExceptionHandler(
+        this IApplicationBuilder app,
+        string errorHandlingPath
+    )
     {
         if (app == null)
         {
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseExceptionHandler(new ExceptionHandlerOptions
-        {
-            ExceptionHandlingPath = new PathString(errorHandlingPath)
-        });
+        return app.UseExceptionHandler(
+            new ExceptionHandlerOptions
+            {
+                ExceptionHandlingPath = new PathString(errorHandlingPath)
+            }
+        );
     }
 
     /// <summary>
@@ -58,7 +63,10 @@ public static class ExceptionHandlerExtensions
     /// <param name="app"></param>
     /// <param name="configure"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, Action<IApplicationBuilder> configure)
+    public static IApplicationBuilder UseExceptionHandler(
+        this IApplicationBuilder app,
+        Action<IApplicationBuilder> configure
+    )
     {
         if (app == null)
         {
@@ -73,10 +81,9 @@ public static class ExceptionHandlerExtensions
         configure(subAppBuilder);
         var exceptionHandlerPipeline = subAppBuilder.Build();
 
-        return app.UseExceptionHandler(new ExceptionHandlerOptions
-        {
-            ExceptionHandler = exceptionHandlerPipeline
-        });
+        return app.UseExceptionHandler(
+            new ExceptionHandlerOptions { ExceptionHandler = exceptionHandlerPipeline }
+        );
     }
 
     /// <summary>
@@ -86,7 +93,10 @@ public static class ExceptionHandlerExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, ExceptionHandlerOptions options)
+    public static IApplicationBuilder UseExceptionHandler(
+        this IApplicationBuilder app,
+        ExceptionHandlerOptions options
+    )
     {
         if (app == null)
         {
@@ -101,38 +111,58 @@ public static class ExceptionHandlerExtensions
         return SetExceptionHandlerMiddleware(app, iOptions);
     }
 
-    private static IApplicationBuilder SetExceptionHandlerMiddleware(IApplicationBuilder app, IOptions<ExceptionHandlerOptions>? options)
+    private static IApplicationBuilder SetExceptionHandlerMiddleware(
+        IApplicationBuilder app,
+        IOptions<ExceptionHandlerOptions>? options
+    )
     {
         const string globalRouteBuilderKey = "__GlobalEndpointRouteBuilder";
         // Only use this path if there's a global router (in the 'WebApplication' case).
-        if (app.Properties.TryGetValue(globalRouteBuilderKey, out var routeBuilder) && routeBuilder is not null)
+        if (
+            app.Properties.TryGetValue(globalRouteBuilderKey, out var routeBuilder)
+            && routeBuilder is not null
+        )
         {
-            return app.Use(next =>
-            {
-                var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
-                var diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-
-                if (options is null)
+            return app.Use(
+                next =>
                 {
-                    options = app.ApplicationServices.GetRequiredService<IOptions<ExceptionHandlerOptions>>();
-                }
+                    var loggerFactory =
+                        app.ApplicationServices.GetRequiredService<ILoggerFactory>();
+                    var diagnosticListener =
+                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
 
-                if (!string.IsNullOrEmpty(options.Value.ExceptionHandlingPath) && options.Value.ExceptionHandler is null)
-                {
+                    if (options is null)
+                    {
+                        options = app.ApplicationServices.GetRequiredService<
+                            IOptions<ExceptionHandlerOptions>
+                        >();
+                    }
+
+                    if (
+                        !string.IsNullOrEmpty(options.Value.ExceptionHandlingPath)
+                        && options.Value.ExceptionHandler is null
+                    )
+                    {
                         // start a new middleware pipeline
                         var builder = app.New();
                         // use the old routing pipeline if it exists so we preserve all the routes and matching logic
                         // ((IApplicationBuilder)WebApplication).New() does not copy globalRouteBuilderKey automatically like it does for all other properties.
                         builder.Properties[globalRouteBuilderKey] = routeBuilder;
-                    builder.UseRouting();
+                        builder.UseRouting();
                         // apply the next middleware
                         builder.Run(next);
                         // store the pipeline for the error case
                         options.Value.ExceptionHandler = builder.Build();
-                }
+                    }
 
-                return new ExceptionHandlerMiddleware(next, loggerFactory, options, diagnosticListener).Invoke;
-            });
+                    return new ExceptionHandlerMiddleware(
+                        next,
+                        loggerFactory,
+                        options,
+                        diagnosticListener
+                    ).Invoke;
+                }
+            );
         }
 
         if (options is null)

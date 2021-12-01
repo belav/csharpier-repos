@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             IConcurrencyDetector concurrencyDetector,
             IRelationalConnection relationalConnection,
             IRawSqlCommandBuilder rawSqlCommandBuilder,
-            ICoreSingletonOptions coreOptions)
+            ICoreSingletonOptions coreOptions
+        )
         {
             TransactionManager = transactionManager;
             DatabaseCreator = databaseCreator;
@@ -93,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public virtual IRelationalCommandDiagnosticsLogger CommandLogger { get; init; }
 
-        IDiagnosticsLogger<DbLoggerCategory.Database.Command> IDatabaseFacadeDependencies.CommandLogger
-            => CommandLogger;
+        IDiagnosticsLogger<DbLoggerCategory.Database.Command> IDatabaseFacadeDependencies.CommandLogger =>
+            CommandLogger;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

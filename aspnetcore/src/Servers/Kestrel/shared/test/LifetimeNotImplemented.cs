@@ -11,26 +11,17 @@ public class LifetimeNotImplemented : IHostApplicationLifetime
 {
     public CancellationToken ApplicationStarted
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
+        get { throw new NotImplementedException(); }
     }
 
     public CancellationToken ApplicationStopped
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
+        get { throw new NotImplementedException(); }
     }
 
     public CancellationToken ApplicationStopping
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
+        get { throw new NotImplementedException(); }
     }
 
     public void StopApplication()

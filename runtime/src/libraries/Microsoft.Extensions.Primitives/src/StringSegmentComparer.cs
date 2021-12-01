@@ -8,11 +8,14 @@ namespace Microsoft.Extensions.Primitives
 {
     public class StringSegmentComparer : IComparer<StringSegment>, IEqualityComparer<StringSegment>
     {
-        public static StringSegmentComparer Ordinal { get; }
-            = new StringSegmentComparer(StringComparison.Ordinal, StringComparer.Ordinal);
+        public static StringSegmentComparer Ordinal { get; } =
+            new StringSegmentComparer(StringComparison.Ordinal, StringComparer.Ordinal);
 
-        public static StringSegmentComparer OrdinalIgnoreCase { get; }
-            = new StringSegmentComparer(StringComparison.OrdinalIgnoreCase, StringComparer.OrdinalIgnoreCase);
+        public static StringSegmentComparer OrdinalIgnoreCase { get; } =
+            new StringSegmentComparer(
+                StringComparison.OrdinalIgnoreCase,
+                StringComparer.OrdinalIgnoreCase
+            );
 
         private StringSegmentComparer(StringComparison comparison, StringComparer comparer)
         {

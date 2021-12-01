@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="queryCompilationContext">The query compilation context object to use.</param>
         public QueryTranslationPreprocessor(
             QueryTranslationPreprocessorDependencies dependencies,
-            QueryCompilationContext queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        )
         {
             Dependencies = dependencies;
             QueryCompilationContext = queryCompilationContext;
@@ -54,13 +55,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             query = new InvocationExpressionRemovingExpressionVisitor().Visit(query);
             query = NormalizeQueryableMethod(query);
             query = new NullCheckRemovingExpressionVisitor().Visit(query);
-            query = new SubqueryMemberPushdownExpressionVisitor(QueryCompilationContext.Model).Visit(query);
+            query = new SubqueryMemberPushdownExpressionVisitor(
+                QueryCompilationContext.Model
+            ).Visit(query);
             query = new NavigationExpandingExpressionVisitor(
-                    this,
-                    QueryCompilationContext,
-                    Dependencies.EvaluatableExpressionFilter,
-                    Dependencies.NavigationExpansionExtensibilityHelper)
-                .Expand(query);
+                this,
+                QueryCompilationContext,
+                Dependencies.EvaluatableExpressionFilter,
+                Dependencies.NavigationExpansionExtensibilityHelper
+            ).Expand(query);
             query = new QueryOptimizingExpressionVisitor().Visit(query);
             query = new NullCheckRemovingExpressionVisitor().Visit(query);
 
@@ -77,8 +80,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </remarks>
         /// <param name="expression">The query expression to normalize.</param>
         /// <returns>A query expression after normalization has been done.</returns>
-        public virtual Expression NormalizeQueryableMethod(Expression expression)
-            => new QueryableMethodNormalizingExpressionVisitor(QueryCompilationContext)
-                .Visit(expression);
+        public virtual Expression NormalizeQueryableMethod(Expression expression) =>
+            new QueryableMethodNormalizingExpressionVisitor(QueryCompilationContext).Visit(
+                expression
+            );
     }
 }

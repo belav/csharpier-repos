@@ -13,7 +13,6 @@ namespace System.Runtime.InteropServices
     public enum CreateComInterfaceFlags
     {
         None = 0,
-
         /// <summary>
         /// The caller will provide an IUnknown Vtable.
         /// </summary>
@@ -24,7 +23,6 @@ namespace System.Runtime.InteropServices
         /// calling of the IUnknown API during a GC is possible.
         /// </remarks>
         CallerDefinedIUnknown = 1,
-
         /// <summary>
         /// Flag used to indicate the COM interface should implement <see href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget">IReferenceTrackerTarget</see>.
         /// When this flag is passed, the resulting COM interface will have an internal implementation of IUnknown
@@ -40,22 +38,18 @@ namespace System.Runtime.InteropServices
     public enum CreateObjectFlags
     {
         None = 0,
-
         /// <summary>
         /// Indicate if the supplied external COM object implements the <see href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetracker">IReferenceTracker</see>.
         /// </summary>
         TrackerObject = 1,
-
         /// <summary>
         /// Ignore any internal caching and always create a unique instance.
         /// </summary>
         UniqueInstance = 2,
-
         /// <summary>
         /// Defined when COM aggregation is involved (that is an inner instance supplied).
         /// </summary>
         Aggregation = 4,
-
         /// <summary>
         /// Check if the supplied instance is actually a wrapper and if so return the underlying
         /// managed object rather than creating a new wrapper.
@@ -113,7 +107,11 @@ namespace System.Runtime.InteropServices
         /// If the interface entries cannot be created and a negative <paramref name="count" /> or <code>null</code> and a non-zero <paramref name="count" /> are returned,
         /// the call to <see cref="ComWrappers.GetOrCreateComInterfaceForObject(object, CreateComInterfaceFlags)"/> will throw a <see cref="System.ArgumentException"/>.
         /// </remarks>
-        protected unsafe abstract ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count);
+        protected unsafe abstract ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        );
 
         /// <summary>
         /// Create a managed object for the object pointed at by <paramref name="externalComObject"/> respecting the values of <paramref name="flags"/>.

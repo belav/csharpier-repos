@@ -15,18 +15,28 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteMissingImportDiscoveryService : BrokeredServiceBase, IRemoteMissingImportDiscoveryService
+    internal sealed class RemoteMissingImportDiscoveryService
+        : BrokeredServiceBase,
+          IRemoteMissingImportDiscoveryService
     {
-        internal sealed class Factory : FactoryBase<IRemoteMissingImportDiscoveryService, IRemoteMissingImportDiscoveryService.ICallback>
+        internal sealed class Factory
+            : FactoryBase<
+                  IRemoteMissingImportDiscoveryService,
+                  IRemoteMissingImportDiscoveryService.ICallback
+              >
         {
-            protected override IRemoteMissingImportDiscoveryService CreateService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback)
-                => new RemoteMissingImportDiscoveryService(arguments, callback);
+            protected override IRemoteMissingImportDiscoveryService CreateService(
+                in ServiceConstructionArguments arguments,
+                RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback
+            ) => new RemoteMissingImportDiscoveryService(arguments, callback);
         }
 
         private readonly RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> _callback;
 
-        public RemoteMissingImportDiscoveryService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback)
-            : base(arguments)
+        public RemoteMissingImportDiscoveryService(
+            in ServiceConstructionArguments arguments,
+            RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback
+        ) : base(arguments)
         {
             _callback = callback;
         }
@@ -41,25 +51,38 @@ namespace Microsoft.CodeAnalysis.Remote
             bool allowInHiddenRegions,
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetDocument(documentId);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document = solution.GetDocument(documentId);
 
-                var service = document.GetLanguageService<IAddImportFeatureService>();
+                    var service = document.GetLanguageService<IAddImportFeatureService>();
 
-                var symbolSearchService = new SymbolSearchService(_callback, callbackId);
+                    var symbolSearchService = new SymbolSearchService(_callback, callbackId);
 
-                var result = await service.GetFixesAsync(
-                    document, span, diagnosticId, maxResults,
-                    allowInHiddenRegions,
-                    symbolSearchService, searchReferenceAssemblies,
-                    packageSources, cancellationToken).ConfigureAwait(false);
+                    var result = await service
+                        .GetFixesAsync(
+                            document,
+                            span,
+                            diagnosticId,
+                            maxResults,
+                            allowInHiddenRegions,
+                            symbolSearchService,
+                            searchReferenceAssemblies,
+                            packageSources,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                return result;
-            }, cancellationToken);
+                    return result;
+                },
+                cancellationToken
+            );
         }
 
         public ValueTask<ImmutableArray<AddImportFixData>> GetUniqueFixesAsync(
@@ -70,24 +93,36 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> diagnosticIds,
             bool searchReferenceAssemblies,
             ImmutableArray<PackageSource> packageSources,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetDocument(documentId);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document = solution.GetDocument(documentId);
 
-                var service = document.GetLanguageService<IAddImportFeatureService>();
+                    var service = document.GetLanguageService<IAddImportFeatureService>();
 
-                var symbolSearchService = new SymbolSearchService(_callback, callbackId);
+                    var symbolSearchService = new SymbolSearchService(_callback, callbackId);
 
-                var result = await service.GetUniqueFixesAsync(
-                    document, span, diagnosticIds,
-                    symbolSearchService, searchReferenceAssemblies,
-                    packageSources, cancellationToken).ConfigureAwait(false);
+                    var result = await service
+                        .GetUniqueFixesAsync(
+                            document,
+                            span,
+                            diagnosticIds,
+                            symbolSearchService,
+                            searchReferenceAssemblies,
+                            packageSources,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                return result;
-            }, cancellationToken);
+                    return result;
+                },
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -105,20 +140,68 @@ namespace Microsoft.CodeAnalysis.Remote
             private readonly RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> _callback;
             private readonly RemoteServiceCallbackId _callbackId;
 
-            public SymbolSearchService(RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback, RemoteServiceCallbackId callbackId)
+            public SymbolSearchService(
+                RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback,
+                RemoteServiceCallbackId callbackId
+            )
             {
                 _callback = callback;
                 _callbackId = callbackId;
             }
 
-            public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(string source, string name, int arity, CancellationToken cancellationToken)
-                => _callback.InvokeAsync((callback, cancellationToken) => callback.FindPackagesWithTypeAsync(_callbackId, source, name, arity, cancellationToken), cancellationToken);
+            public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(
+                string source,
+                string name,
+                int arity,
+                CancellationToken cancellationToken
+            ) =>
+                _callback.InvokeAsync(
+                    (callback, cancellationToken) =>
+                        callback.FindPackagesWithTypeAsync(
+                            _callbackId,
+                            source,
+                            name,
+                            arity,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                );
 
-            public ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(string source, string assemblyName, CancellationToken cancellationToken)
-                => _callback.InvokeAsync((callback, cancellationToken) => callback.FindPackagesWithAssemblyAsync(_callbackId, source, assemblyName, cancellationToken), cancellationToken);
+            public ValueTask<
+                ImmutableArray<PackageWithAssemblyResult>
+            > FindPackagesWithAssemblyAsync(
+                string source,
+                string assemblyName,
+                CancellationToken cancellationToken
+            ) =>
+                _callback.InvokeAsync(
+                    (callback, cancellationToken) =>
+                        callback.FindPackagesWithAssemblyAsync(
+                            _callbackId,
+                            source,
+                            assemblyName,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                );
 
-            public ValueTask<ImmutableArray<ReferenceAssemblyWithTypeResult>> FindReferenceAssembliesWithTypeAsync(string name, int arity, CancellationToken cancellationToken)
-                => _callback.InvokeAsync((callback, cancellationToken) => callback.FindReferenceAssembliesWithTypeAsync(_callbackId, name, arity, cancellationToken), cancellationToken);
+            public ValueTask<
+                ImmutableArray<ReferenceAssemblyWithTypeResult>
+            > FindReferenceAssembliesWithTypeAsync(
+                string name,
+                int arity,
+                CancellationToken cancellationToken
+            ) =>
+                _callback.InvokeAsync(
+                    (callback, cancellationToken) =>
+                        callback.FindReferenceAssembliesWithTypeAsync(
+                            _callbackId,
+                            name,
+                            arity,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                );
         }
     }
 }

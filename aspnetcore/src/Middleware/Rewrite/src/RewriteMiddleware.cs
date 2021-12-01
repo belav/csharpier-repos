@@ -36,7 +36,8 @@ public class RewriteMiddleware
         RequestDelegate next,
         IWebHostEnvironment hostingEnvironment,
         ILoggerFactory loggerFactory,
-        IOptions<RewriteOptions> options)
+        IOptions<RewriteOptions> options
+    )
     {
         if (next == null)
         {
@@ -102,7 +103,12 @@ public class RewriteMiddleware
         return _next(context);
     }
 
-    static void RunRules(RewriteContext rewriteContext, RewriteOptions options, HttpContext httpContext, ILogger logger)
+    static void RunRules(
+        RewriteContext rewriteContext,
+        RewriteOptions options,
+        HttpContext httpContext,
+        ILogger logger
+    )
     {
         foreach (var rule in options.Rules)
         {
@@ -110,18 +116,23 @@ public class RewriteMiddleware
             switch (rewriteContext.Result)
             {
                 case RuleResult.ContinueRules:
-                    logger.RewriteMiddlewareRequestContinueResults(httpContext.Request.GetEncodedUrl());
+                    logger.RewriteMiddlewareRequestContinueResults(
+                        httpContext.Request.GetEncodedUrl()
+                    );
                     break;
                 case RuleResult.EndResponse:
                     logger.RewriteMiddlewareRequestResponseComplete(
                         httpContext.Response.Headers.Location.ToString(),
-                        httpContext.Response.StatusCode);
+                        httpContext.Response.StatusCode
+                    );
                     return;
                 case RuleResult.SkipRemainingRules:
                     logger.RewriteMiddlewareRequestStopRules(httpContext.Request.GetEncodedUrl());
                     return;
                 default:
-                    throw new ArgumentOutOfRangeException($"Invalid rule termination {rewriteContext.Result}");
+                    throw new ArgumentOutOfRangeException(
+                        $"Invalid rule termination {rewriteContext.Result}"
+                    );
             }
         }
     }

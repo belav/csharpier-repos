@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Information decoded from well-known custom attributes applied on an assembly.
     /// </summary>
-    internal class CommonAssemblyWellKnownAttributeData<TNamedTypeSymbol> : WellKnownAttributeData, ISecurityAttributeTarget
+    internal class CommonAssemblyWellKnownAttributeData<TNamedTypeSymbol>
+        : WellKnownAttributeData,
+          ISecurityAttributeTarget
     {
         #region AssemblySignatureKeyAttributeSetting
         private string _assemblySignatureKeyAttributeSetting;
@@ -431,10 +433,7 @@ namespace Microsoft.CodeAnalysis
         private HashSet<TNamedTypeSymbol> _forwardedTypes;
         public HashSet<TNamedTypeSymbol> ForwardedTypes
         {
-            get
-            {
-                return _forwardedTypes;
-            }
+            get { return _forwardedTypes; }
             set
             {
                 VerifySealed(expected: false);

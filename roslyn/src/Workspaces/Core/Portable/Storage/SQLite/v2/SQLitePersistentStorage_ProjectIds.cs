@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// use to find the data inside the ProjectData table.
         /// </summary>
         private bool TryGetProjectDataId(
-            SqlConnection connection, ProjectKey project, string name, bool allowWrite, out long dataId)
+            SqlConnection connection,
+            ProjectKey project,
+            string name,
+            bool allowWrite,
+            out long dataId
+        )
         {
             dataId = 0;
 
@@ -57,7 +62,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             return id;
         }
 
-        private int? TryGetProjectIdFromDatabase(SqlConnection connection, ProjectKey project, bool allowWrite)
+        private int? TryGetProjectIdFromDatabase(
+            SqlConnection connection,
+            ProjectKey project,
+            bool allowWrite
+        )
         {
             // Key the project off both its path and name.  That way we work properly
             // in host and test scenarios.
@@ -68,7 +77,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 return null;
 
             return TryGetStringId(
-                connection, GetProjectIdString(projectPathId.Value, projectNameId.Value), allowWrite);
+                connection,
+                GetProjectIdString(projectPathId.Value, projectNameId.Value),
+                allowWrite
+            );
         }
     }
 }

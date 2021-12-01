@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [EntityFrameworkInternal]
         public TypeMappingSourceDependencies(
             IValueConverterSelector valueConverterSelector,
-            IEnumerable<ITypeMappingSourcePlugin> plugins)
+            IEnumerable<ITypeMappingSourcePlugin> plugins
+        )
         {
             ValueConverterSelector = valueConverterSelector;
             Plugins = plugins;

@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
     internal sealed partial class CSharpFormatter : Formatter
     {
-        private void AppendEnumTypeAndName(StringBuilder builder, Type typeToDisplayOpt, string name)
+        private void AppendEnumTypeAndName(
+            StringBuilder builder,
+            Type typeToDisplayOpt,
+            string name
+        )
         {
             if (typeToDisplayOpt != null)
             {
@@ -34,9 +38,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     null,
                     ref index2,
                     escapeKeywordIdentifiers: true,
-                    sawInvalidIdentifier: out unused);
+                    sawInvalidIdentifier: out unused
+                );
                 builder.Append('.');
-                AppendIdentifierEscapingPotentialKeywords(builder, name, sawInvalidIdentifier: out unused);
+                AppendIdentifierEscapingPotentialKeywords(
+                    builder,
+                    name,
+                    sawInvalidIdentifier: out unused
+                );
             }
             else
             {
@@ -44,7 +53,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
         }
 
-        internal override string GetArrayDisplayString(DkmClrAppDomain appDomain, Type lmrType, ReadOnlyCollection<int> sizes, ReadOnlyCollection<int> lowerBounds, ObjectDisplayOptions options)
+        internal override string GetArrayDisplayString(
+            DkmClrAppDomain appDomain,
+            Type lmrType,
+            ReadOnlyCollection<int> sizes,
+            ReadOnlyCollection<int> lowerBounds,
+            ObjectDisplayOptions options
+        )
         {
             Debug.Assert(lmrType.IsArray);
 
@@ -62,7 +77,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             // We're showing the type of a value, so "dynamic" does not apply.
             bool unused;
-            builder.Append(GetTypeName(new TypeAndCustomInfo(DkmClrType.Create(appDomain, lmrType)), escapeKeywordIdentifiers: false, sawInvalidIdentifier: out unused)); // NOTE: call our impl directly, since we're coupled anyway.
+            builder.Append(
+                GetTypeName(
+                    new TypeAndCustomInfo(DkmClrType.Create(appDomain, lmrType)),
+                    escapeKeywordIdentifiers: false,
+                    sawInvalidIdentifier: out unused
+                )
+            ); // NOTE: call our impl directly, since we're coupled anyway.
 
             var numSizes = sizes.Count;
 
@@ -107,7 +128,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return indices.ToCommaSeparatedString('[', ']');
         }
 
-        internal override string GetCastExpression(string argument, string type, DkmClrCastExpressionOptions options)
+        internal override string GetCastExpression(
+            string argument,
+            string type,
+            DkmClrCastExpressionOptions options
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(argument));
             Debug.Assert(!string.IsNullOrEmpty(type));
@@ -149,7 +174,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return values.ToCommaSeparatedString('(', ')');
         }
 
-        internal override string GetNamesForFlagsEnumValue(ArrayBuilder<EnumField> fields, object value, ulong underlyingValue, ObjectDisplayOptions options, Type typeToDisplayOpt)
+        internal override string GetNamesForFlagsEnumValue(
+            ArrayBuilder<EnumField> fields,
+            object value,
+            ulong underlyingValue,
+            ObjectDisplayOptions options,
+            Type typeToDisplayOpt
+        )
         {
             var usedFields = ArrayBuilder<EnumField>.GetInstance();
             FillUsedEnumFields(usedFields, fields, underlyingValue);
@@ -177,7 +208,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return pooled.ToStringAndFree();
         }
 
-        internal override string GetNameForEnumValue(ArrayBuilder<EnumField> fields, object value, ulong underlyingValue, ObjectDisplayOptions options, Type typeToDisplayOpt)
+        internal override string GetNameForEnumValue(
+            ArrayBuilder<EnumField> fields,
+            object value,
+            ulong underlyingValue,
+            ObjectDisplayOptions options,
+            Type typeToDisplayOpt
+        )
         {
             foreach (var field in fields)
             {
@@ -219,7 +256,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override string FormatLiteral(int value, ObjectDisplayOptions options)
         {
-            return ObjectDisplay.FormatLiteral(value, options & ~(ObjectDisplayOptions.UseQuotes | ObjectDisplayOptions.EscapeNonPrintableCharacters));
+            return ObjectDisplay.FormatLiteral(
+                value,
+                options
+                    & ~(
+                        ObjectDisplayOptions.UseQuotes
+                        | ObjectDisplayOptions.EscapeNonPrintableCharacters
+                    )
+            );
         }
 
         internal override string FormatPrimitiveObject(object value, ObjectDisplayOptions options)

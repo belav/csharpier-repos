@@ -59,7 +59,10 @@ namespace System.Linq.Tests
             IQueryable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.DefaultIfEmpty());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.DefaultIfEmpty(42));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.DefaultIfEmpty(42)
+            );
         }
 
         [Fact]
@@ -75,6 +78,5 @@ namespace System.Linq.Tests
             var count = (new int[] { }).AsQueryable().DefaultIfEmpty(3).Count();
             Assert.Equal(1, count);
         }
-
     }
 }

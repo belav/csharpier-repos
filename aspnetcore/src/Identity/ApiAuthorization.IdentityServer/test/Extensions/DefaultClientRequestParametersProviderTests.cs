@@ -19,14 +19,23 @@ public class DefaultClientRequestParametersProviderTests
     {
         // Arrange
         var absoluteUrlFactory = new Mock<IAbsoluteUrlFactory>();
-        absoluteUrlFactory.Setup(auf => auf.GetAbsoluteUrl(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns<HttpContext, string>((_, s) => Uri.IsWellFormedUriString(s, UriKind.Absolute) ? s : new Uri(new Uri("http://localhost/"), s).ToString());
+        absoluteUrlFactory
+            .Setup(auf => auf.GetAbsoluteUrl(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns<HttpContext, string>(
+                (_, s) =>
+                    Uri.IsWellFormedUriString(s, UriKind.Absolute)
+                        ? s
+                        : new Uri(new Uri("http://localhost/"), s).ToString()
+            );
 
         var options = Options.Create(new ApiAuthorizationOptions());
-        options.Value.Clients.AddIdentityServerSPA("SPA", cb =>
-             cb.WithScopes("a/b", "c/d")
-                .WithRedirectUri("authentication/login-callback")
-                .WithLogoutRedirectUri("authentication/logout-callback"));
+        options.Value.Clients.AddIdentityServerSPA(
+            "SPA",
+            cb =>
+                cb.WithScopes("a/b", "c/d")
+                    .WithRedirectUri("authentication/login-callback")
+                    .WithLogoutRedirectUri("authentication/logout-callback")
+        );
 
         var context = new DefaultHttpContext();
         context.Request.Scheme = "http";
@@ -35,10 +44,10 @@ public class DefaultClientRequestParametersProviderTests
             .AddSingleton(new IdentityServerOptions())
             .BuildServiceProvider();
 
-        var clientRequestParametersProvider =
-            new DefaultClientRequestParametersProvider(
-                absoluteUrlFactory.Object,
-                options);
+        var clientRequestParametersProvider = new DefaultClientRequestParametersProvider(
+            absoluteUrlFactory.Object,
+            options
+        );
 
         var expectedParameters = new Dictionary<string, string>
         {

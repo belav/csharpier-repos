@@ -7,8 +7,8 @@ using Xunit;
 
 namespace System.ComponentModel.Composition
 {
-    public interface IContract {}
-    public class ContractImpl : IContract {}
+    public interface IContract { }
+    public class ContractImpl : IContract { }
     public class MyEmptyClass
     {
         public ExportFactory<IContract> MyFactoryProperty { get; set; }
@@ -18,12 +18,20 @@ namespace System.ComponentModel.Composition
     public class MyEmptyClassWithFactoryConstructor : MyEmptyClass
     {
         [ImportingConstructor]
-        public MyEmptyClassWithFactoryConstructor([Import]ExportFactory<IContract> myFactoryProperty) {  this.MyFactoryProperty = myFactoryProperty; }
+        public MyEmptyClassWithFactoryConstructor(
+            [Import] ExportFactory<IContract> myFactoryProperty
+        )
+        {
+            this.MyFactoryProperty = myFactoryProperty;
+        }
     }
     public class MyEmptyClassWithStandardConstructor : MyEmptyClass
     {
         [ImportingConstructor]
-        public MyEmptyClassWithStandardConstructor([Import]IContract myProperty) {  this.MyProperty = myProperty; }
+        public MyEmptyClassWithStandardConstructor([Import] IContract myProperty)
+        {
+            this.MyProperty = myProperty;
+        }
     }
 
     internal static class Helpers
@@ -33,9 +41,13 @@ namespace System.ComponentModel.Composition
             return types;
         }
 
-        public const string ComImportAvailable = nameof(Helpers) + "." + nameof(CheckComImportAvailable);
+        public const string ComImportAvailable =
+            nameof(Helpers) + "." + nameof(CheckComImportAvailable);
 
-        private static bool CheckComImportAvailable() => PlatformDetection.IsWindows && PlatformDetection.IsNotWindowsNanoServer && !PlatformDetection.IsInAppContainer;
+        private static bool CheckComImportAvailable() =>
+            PlatformDetection.IsWindows
+            && PlatformDetection.IsNotWindowsNanoServer
+            && !PlatformDetection.IsInAppContainer;
     }
 
     public class ComposablePartDefinitionTests
@@ -59,10 +71,12 @@ namespace System.ComponentModel.Composition
         {
             var definition = PartDefinitionFactory.Create();
 
-            Assert.Throws<NotSupportedException>(() =>
-            {
-                definition.Metadata["Value"] = "Value";
-            });
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    definition.Metadata["Value"] = "Value";
+                }
+            );
         }
     }
 }

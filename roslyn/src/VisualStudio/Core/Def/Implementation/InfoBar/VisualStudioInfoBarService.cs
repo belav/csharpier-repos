@@ -41,8 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public VisualStudioInfoBarService(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext)
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
             _listener = listenerProvider.GetListener(FeatureAttribute.InfoBar);
@@ -53,13 +53,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ThisCanBeCalledOnAnyThread();
 
             // We can be called from any thread since errors can occur anywhere, however we can only construct and InfoBar from the UI thread.
-            this.ThreadingContext.JoinableTaskFactory.RunAsync(async () =>
-            {
-                using var _ = _listener.BeginAsyncOperation(nameof(ShowInfoBar));
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(ThreadingContext.DisposalToken);
-                if (TryGetInfoBarData(out var infoBarHost))
-                    CreateInfoBar(infoBarHost, message, items);
-            });
+            this.ThreadingContext.JoinableTaskFactory.RunAsync(
+                async () =>
+                {
+                    using var _ = _listener.BeginAsyncOperation(nameof(ShowInfoBar));
+                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        ThreadingContext.DisposalToken
+                    );
+                    if (TryGetInfoBarData(out var infoBarHost))
+                        CreateInfoBar(infoBarHost, message, items);
+                }
+            );
         }
 
         private bool TryGetInfoBarData(out IVsInfoBarHost infoBarHost)
@@ -69,8 +73,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             infoBarHost = null;
 
             // global error info, show it on main window info bar
-            if (_serviceProvider.GetService(typeof(SVsShell)) is not IVsShell shell ||
-                ErrorHandler.Failed(shell.GetProperty((int)__VSSPROPID7.VSSPROPID_MainWindowInfoBarHost, out var globalInfoBar)))
+            if (
+                _serviceProvider.GetService(typeof(SVsShell)) is not IVsShell shell
+                || ErrorHandler.Failed(
+                    shell.GetProperty(
+                        (int)__VSSPROPID7.VSSPROPID_MainWindowInfoBarHost,
+                        out var globalInfoBar
+                    )
+                )
+            )
             {
                 return false;
             }
@@ -83,7 +94,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             this.AssertIsForeground();
 
-            if (_serviceProvider.GetService(typeof(SVsInfoBarUIFactory)) is not IVsInfoBarUIFactory factory)
+            if (
+                _serviceProvider.GetService(typeof(SVsInfoBarUIFactory))
+                is not IVsInfoBarUIFactory factory
+            )
             {
                 // no info bar factory, don't do anything
                 return;
@@ -94,10 +108,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (_currentlyShowingMessages.Contains(message))
                 return;
 
-            var textSpans = new List<IVsInfoBarTextSpan>()
-            {
-                new InfoBarTextSpan(message)
-            };
+            var textSpans = new List<IVsInfoBarTextSpan>() { new InfoBarTextSpan(message) };
 
             // create action item list
             var actionItems = new List<IVsInfoBarActionItem>();
@@ -123,27 +134,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 textSpans,
                 actionItems,
                 KnownMonikers.StatusInformation,
-                isCloseButtonVisible: true);
+                isCloseButtonVisible: true
+            );
 
             var infoBarUI = factory.CreateInfoBar(infoBarModel);
             if (infoBarUI == null)
                 return;
 
             uint? infoBarCookie = null;
-            var eventSink = new InfoBarEvents(items, onClose: () =>
-            {
-                // Remove the message from the list that we're keeping track of.  Future identical
-                // messages can now be shown.
-                _currentlyShowingMessages.Remove(message);
-
-                // Run given onClose action if there is one.
-                items.FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close).Action?.Invoke();
-
-                if (infoBarCookie.HasValue)
+            var eventSink = new InfoBarEvents(
+                items,
+                onClose: () =>
                 {
-                    infoBarUI.Unadvise(infoBarCookie.Value);
+                    // Remove the message from the list that we're keeping track of.  Future identical
+                    // messages can now be shown.
+                    _currentlyShowingMessages.Remove(message);
+
+                    // Run given onClose action if there is one.
+                    items.FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close).Action?.Invoke();
+
+                    if (infoBarCookie.HasValue)
+                    {
+                        infoBarUI.Unadvise(infoBarCookie.Value);
+                    }
                 }
-            });
+            );
 
             infoBarUI.Advise(eventSink, out var cookie);
             infoBarCookie = cookie;
@@ -165,7 +180,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _onClose = onClose;
             }
 
-            public void OnActionItemClicked(IVsInfoBarUIElement infoBarUIElement, IVsInfoBarActionItem actionItem)
+            public void OnActionItemClicked(
+                IVsInfoBarUIElement infoBarUIElement,
+                IVsInfoBarActionItem actionItem
+            )
             {
                 var item = _items.FirstOrDefault(i => i.Title == actionItem.Text);
                 if (item.IsDefault)
@@ -183,8 +201,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 infoBarUIElement.Close();
             }
 
-            public void OnClosed(IVsInfoBarUIElement infoBarUIElement)
-                => _onClose();
+            public void OnClosed(IVsInfoBarUIElement infoBarUIElement) => _onClose();
         }
     }
 }

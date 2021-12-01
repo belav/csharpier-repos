@@ -14,8 +14,15 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    [ExportEventListener(WellKnownEventListeners.TodoListProvider, WorkspaceKind.MiscellaneousFiles), Shared]
-    internal sealed class MiscellaneousTodoListTableWorkspaceEventListener : IEventListener<ITodoListProvider>
+    [
+        ExportEventListener(
+            WellKnownEventListeners.TodoListProvider,
+            WorkspaceKind.MiscellaneousFiles
+        ),
+        Shared
+    ]
+    internal sealed class MiscellaneousTodoListTableWorkspaceEventListener
+        : IEventListener<ITodoListProvider>
     {
         internal const string IdentifierString = nameof(MiscellaneousTodoListTable);
 
@@ -23,16 +30,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MiscellaneousTodoListTableWorkspaceEventListener(ITableManagerProvider tableManagerProvider)
-            => _tableManagerProvider = tableManagerProvider;
+        public MiscellaneousTodoListTableWorkspaceEventListener(
+            ITableManagerProvider tableManagerProvider
+        ) => _tableManagerProvider = tableManagerProvider;
 
-        public void StartListening(Workspace workspace, ITodoListProvider service)
-            => new MiscellaneousTodoListTable(workspace, service, _tableManagerProvider);
+        public void StartListening(Workspace workspace, ITodoListProvider service) =>
+            new MiscellaneousTodoListTable(workspace, service, _tableManagerProvider);
 
         private sealed class MiscellaneousTodoListTable : VisualStudioBaseTodoListTable
         {
-            public MiscellaneousTodoListTable(Workspace workspace, ITodoListProvider todoListProvider, ITableManagerProvider provider)
-                : base(workspace, todoListProvider, IdentifierString, provider)
+            public MiscellaneousTodoListTable(
+                Workspace workspace,
+                ITodoListProvider todoListProvider,
+                ITableManagerProvider provider
+            ) : base(workspace, todoListProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();
             }
