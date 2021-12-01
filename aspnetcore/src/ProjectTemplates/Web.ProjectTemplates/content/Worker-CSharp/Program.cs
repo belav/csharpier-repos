@@ -1,6 +1,5 @@
 using Company.Application1;
 
-
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(
         services =>
@@ -9,6 +8,5 @@ IHost host = Host.CreateDefaultBuilder(args)
         }
     )
     .Build();
-
 
 await host.RunAsync();

@@ -21,7 +21,6 @@ using ComponentsWebAssembly_CSharp.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 #if (IndividualLocalAuth)
 var connectionString =
@@ -37,14 +36,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-
 builder.Services
     .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
 builder.Services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
 
 builder.Services.AddAuthentication().AddIdentityServerJwt();
 #endif
@@ -80,9 +76,7 @@ builder.Services
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -101,18 +95,14 @@ else
 #endif
 }
 
-
 #if (RequiresHttps)
 app.UseHttpsRedirection();
-
 
 #endif
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
-
 app.UseRouting();
-
 
 #if (IndividualLocalAuth)
 app.UseIdentityServer();
@@ -123,12 +113,10 @@ app.UseAuthentication();
 #if (!NoAuth)
 app.UseAuthorization();
 
-
 #endif
 
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
-
 
 app.Run();

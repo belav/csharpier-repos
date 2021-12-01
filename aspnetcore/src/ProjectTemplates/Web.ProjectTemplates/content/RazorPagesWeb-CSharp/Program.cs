@@ -33,7 +33,6 @@ using Company.WebApplication1.Data;
 #endif
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 #if (IndividualLocalAuth)
 var connectionString =
@@ -48,7 +47,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 );
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 
 builder.Services
     .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -109,7 +107,6 @@ builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 
-
 builder.Services.AddAuthorization(
     options =>
     {
@@ -123,7 +120,6 @@ builder.Services.AddRazorPages();
 #endif
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 #if (IndividualLocalAuth)
@@ -142,22 +138,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
 #else
 }
 #endif
 app.UseStaticFiles();
 
-
 app.UseRouting();
-
 
 #if (OrganizationalAuth || IndividualAuth || WindowsAuth)
 app.UseAuthentication();
 #endif
 app.UseAuthorization();
-
 
 app.MapRazorPages();
 #if (IndividualB2CAuth || OrganizationalAuth)

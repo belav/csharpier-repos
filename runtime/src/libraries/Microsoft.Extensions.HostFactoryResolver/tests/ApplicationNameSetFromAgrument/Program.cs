@@ -5,7 +5,6 @@ using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-
 var host = new HostBuilder()
     .ConfigureAppConfiguration(builder => builder.AddCommandLine(args))
     .Build();

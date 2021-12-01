@@ -16,7 +16,6 @@ using Microsoft.Identity.Web;
 #endif
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 #if (OrganizationalAuth)
 builder.Services
@@ -59,7 +58,6 @@ builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 
-
 builder.Services.AddAuthorization(
     options =>
     {
@@ -70,7 +68,6 @@ builder.Services.AddAuthorization(
 #endif
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 #if (EnableOpenAPI)
@@ -90,8 +87,6 @@ app.UseAuthentication();
 #endif
 app.UseAuthorization();
 
-
 app.MapControllers();
-
 
 app.Run();

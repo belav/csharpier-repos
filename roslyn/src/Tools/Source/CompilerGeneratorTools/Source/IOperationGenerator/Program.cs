@@ -8,10 +8,8 @@ using System.Xml;
 using System.Xml.Serialization;
 using IOperationGenerator;
 
-
 string inFileName;
 string outFilePath;
-
 
 if (args.Length != 2)
 {
@@ -22,10 +20,8 @@ if (args.Length != 2)
     return 1;
 }
 
-
 inFileName = args[0];
 outFilePath = args[1];
-
 
 Tree? tree;
 var serializer = new XmlSerializer(typeof(Tree));
@@ -39,15 +35,12 @@ using (
     tree = (Tree?)serializer.Deserialize(reader);
 }
 
-
 if (tree is null)
 {
     Console.WriteLine("Deserialize returned null.");
     return 1;
 }
 
-
 IOperationClassWriter.Write(tree, outFilePath);
-
 
 return 0;

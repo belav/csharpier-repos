@@ -12,13 +12,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-
 AppContext.SetSwitch("appContextSwitch", true);
 AppDomain.CurrentDomain.SetData("appContextBoolData", true); // Not loggeed, bool key
 AppDomain.CurrentDomain.SetData("appContextBoolAsStringData", "true");
 AppDomain.CurrentDomain.SetData("appContextStringData", "myString"); // Not logged, string does not parse as bool
 AppDomain.CurrentDomain.SetData("appContextSwitch", "false"); // should not override the SetSwitch above
-
 
 // Create an EventListener.
 using (var myListener = new RuntimeEventListener())

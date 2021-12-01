@@ -12,9 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -51,12 +49,9 @@ builder.Services
         }
     );
 
-
 var app = builder.Build();
 
-
 app.UseAuthentication();
-
 
 app.MapGet(
     "/",
@@ -82,7 +77,6 @@ app.MapGet(
     }
 );
 
-
 app.MapGet(
     "/ticket",
     async context =>
@@ -100,6 +94,5 @@ app.MapGet(
         }
     }
 );
-
 
 app.Run();

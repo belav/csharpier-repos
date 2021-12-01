@@ -37,9 +37,7 @@ using BlazorServerWeb_CSharp.Areas.Identity;
 #endif
 using BlazorServerWeb_CSharp.Data;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Add services to the container.
 #if (IndividualLocalAuth)
@@ -99,7 +97,6 @@ builder.Services
     .AddControllersWithViews()
     .AddMicrosoftIdentityUI();
 
-
 builder.Services.AddAuthorization(
     options =>
     {
@@ -108,12 +105,10 @@ builder.Services.AddAuthorization(
     }
 );
 
-
 #elif (WindowsAuth)
 builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
-
 
 builder.Services.AddAuthorization(
     options =>
@@ -122,7 +117,6 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
-
 
 #endif
 builder.Services.AddRazorPages();
@@ -139,9 +133,7 @@ builder.Services.AddScoped<
 #endif
 builder.Services.AddSingleton<WeatherForecastService>();
 
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 #if (IndividualLocalAuth)
@@ -160,24 +152,19 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
 #else
 }
-
 
 #endif
 
 app.UseStaticFiles();
 
-
 app.UseRouting();
-
 
 #if (OrganizationalAuth || IndividualAuth || WindowsAuth)
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 #endif
 #if (OrganizationalAuth || IndividualAuth)
@@ -185,6 +172,5 @@ app.MapControllers();
 #endif
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
-
 
 app.Run();

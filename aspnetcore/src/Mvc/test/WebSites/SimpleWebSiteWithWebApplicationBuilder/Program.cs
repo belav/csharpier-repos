@@ -5,30 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 
 using static Microsoft.AspNetCore.Http.Results;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddControllers();
 
-
 var app = builder.Build();
-
 
 app.MapControllers();
 
-
 app.MapGet("/", () => "Hello World");
-
 
 app.MapGet("/json", () => Json(new Person("John", 42)));
 
-
 app.MapGet("/ok-object", () => Ok(new Person("John", 42)));
 
-
 app.MapGet("/accepted-object", () => Accepted("/ok-object", new Person("John", 42)));
-
 
 app.MapGet(
     "/many-results",
@@ -43,20 +34,15 @@ app.MapGet(
     }
 );
 
-
 app.MapGet("/problem", () => Results.Problem("Some problem"));
-
 
 app.MapGet("/environment", (IHostEnvironment environment) => environment.EnvironmentName);
 app.MapGet("/webroot", (IWebHostEnvironment environment) => environment.WebRootPath);
 
-
 app.MapGet("/greeting", (IConfiguration config) => config["Greeting"]);
-
 
 app.MapPost("/accepts-default", (Person person) => Results.Ok(person.Name));
 app.MapPost("/accepts-xml", () => Accepted()).Accepts<Person>("application/xml");
-
 
 app.Run();
 

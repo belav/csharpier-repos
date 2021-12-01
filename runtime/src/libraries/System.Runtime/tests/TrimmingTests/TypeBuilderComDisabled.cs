@@ -5,19 +5,16 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-
 AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
     new AssemblyName("GeneratedAssembly"),
     AssemblyBuilderAccess.Run
 );
 ModuleBuilder module = assembly.DefineDynamicModule("GeneratedModule");
 
-
 string typeName = "GeneratedType";
 TypeBuilder genericType = module.DefineType(typeName);
 genericType.DefineField("_int", typeof(int), FieldAttributes.Private);
 genericType.DefineProperty("Prop", PropertyAttributes.None, typeof(string), null);
-
 
 Type generatedType = genericType.CreateType();
 if (generatedType.Name != typeName)
@@ -28,7 +25,6 @@ if (generatedType.Name != typeName)
     return -1;
 }
 
-
 object obj = Activator.CreateInstance(generatedType);
 string objAsString = obj.ToString();
 if (objAsString != typeName)
@@ -38,6 +34,5 @@ if (objAsString != typeName)
     );
     return -2;
 }
-
 
 return 100;

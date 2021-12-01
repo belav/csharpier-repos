@@ -1,10 +1,8 @@
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 #endif
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Add services to the container.
 #if (EnableOpenAPI)
@@ -17,7 +15,6 @@ builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 
-
 builder.Services.AddAuthorization(
     options =>
     {
@@ -28,7 +25,6 @@ builder.Services.AddAuthorization(
 #endif
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 #if (EnableOpenAPI)
@@ -59,7 +55,6 @@ var summaries = new[]
     "Sweltering",
     "Scorching"
 };
-
 
 app.MapGet(
     "/weatherforecast",
