@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     <see langword="true" /> if the property is a shadow property, otherwise <see langword="false" />.
         /// </returns>
         [Obsolete("Use IReadOnlyPropertyBase.IsShadowProperty")]
-        public static bool IsShadowProperty(this IPropertyBase property)
-            => property.IsShadowProperty();
+        public static bool IsShadowProperty(this IPropertyBase property) =>
+            property.IsShadowProperty();
 
         /// <summary>
         ///     Creates a formatted string representation of the given properties such as is useful
@@ -35,12 +35,21 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="properties">The properties to format.</param>
         /// <param name="includeTypes">If true, then type names are included in the string. The default is <see langword="false" />.</param>
         /// <returns>The string representation.</returns>
-        public static string Format(this IEnumerable<IReadOnlyPropertyBase> properties, bool includeTypes = false)
-            => "{"
-                + string.Join(
-                    ", ",
-                    properties.Select(
-                        p => "'" + p.Name + "'" + (includeTypes ? " : " + p.ClrType.DisplayName(fullName: false) : "")))
-                + "}";
+        public static string Format(
+            this IEnumerable<IReadOnlyPropertyBase> properties,
+            bool includeTypes = false
+        ) =>
+            "{"
+            + string.Join(
+                ", ",
+                properties.Select(
+                    p =>
+                        "'"
+                        + p.Name
+                        + "'"
+                        + (includeTypes ? " : " + p.ClrType.DisplayName(fullName: false) : "")
+                )
+            )
+            + "}";
     }
 }

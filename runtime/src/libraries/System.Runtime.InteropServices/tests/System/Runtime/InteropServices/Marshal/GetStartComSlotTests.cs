@@ -22,23 +22,35 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetStartComSlot_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(null, () => Marshal.GetStartComSlot(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                null,
+                () => Marshal.GetStartComSlot(null)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetStartComSlot_NotRuntimeType_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetStartComSlot(typeBuilder));
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.GetStartComSlot(typeBuilder)
+            );
         }
 
         public static IEnumerable<object[]> GetStartComSlot_InvalidGenericType_TestData()
         {
             yield return new object[] { typeof(int).MakeByRefType() };
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+            };
         }
 
         [Theory]
@@ -46,7 +58,10 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetStartComSlot_InvalidGenericType_ThrowsArgumentNullException(Type type)
         {
-            AssertExtensions.Throws<ArgumentNullException>(null, () => Marshal.GetStartComSlot(type));
+            AssertExtensions.Throws<ArgumentNullException>(
+                null,
+                () => Marshal.GetStartComSlot(type)
+            );
         }
         public static IEnumerable<object[]> GetStartComSlot_NotComVisibleType_TestData()
         {
@@ -63,7 +78,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(int[][]) };
             yield return new object[] { typeof(int[,]) };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();

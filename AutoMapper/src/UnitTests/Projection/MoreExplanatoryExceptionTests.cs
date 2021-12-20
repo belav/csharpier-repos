@@ -14,15 +14,21 @@ namespace AutoMapper.UnitTests.Projection
         public void ConstructorWithUnknownParameterTypeThrowsExplicitException()
         {
             // Arrange
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateProjection<EntitySource, EntityDestination>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateProjection<EntitySource, EntityDestination>()
+            );
 
             // Act
-            var exception = Assert.Throws<AutoMapperMappingException>(() =>
-                new EntitySource[0].AsQueryable().ProjectTo<EntityDestination>(config));
+            var exception = Assert.Throws<AutoMapperMappingException>(
+                () => new EntitySource[0].AsQueryable().ProjectTo<EntityDestination>(config)
+            );
 
             // Assert
-            Assert.Contains("parameter notSupported", exception.Message, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "parameter notSupported",
+                exception.Message,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         class EntitySource

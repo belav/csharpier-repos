@@ -105,7 +105,6 @@ namespace System.Threading
             ResetOwnerThread();
             Signal_ReleaseCore();
         }
-
         // The following methods typical in a monitor are omitted since they are currently not necessary for the way in which
         // this class is used:
         //   - TryAcquire

@@ -27,17 +27,31 @@ namespace Microsoft.CodeAnalysis.Text
 
                 var solution = workspace.CurrentSolution;
 
-                if (workspace.TryGetOpenSourceGeneratedDocumentIdentity(documentId, out var documentIdentity))
+                if (
+                    workspace.TryGetOpenSourceGeneratedDocumentIdentity(
+                        documentId,
+                        out var documentIdentity
+                    )
+                )
                 {
                     // For source generated documents, we won't count them as linked across multiple projects; this is because
                     // the generated documents in each target may have different source so other features might be surprised if we
                     // return the same documents but with different text. So in this case, we'll just return a single document.
-                    return ImmutableArray.Create(solution.WithFrozenSourceGeneratedDocument(documentIdentity, text));
+                    return ImmutableArray.Create(
+                        solution.WithFrozenSourceGeneratedDocument(documentIdentity, text)
+                    );
                 }
 
                 var relatedIds = solution.GetRelatedDocumentIds(documentId);
-                solution = solution.WithDocumentText(relatedIds, text, PreservationMode.PreserveIdentity);
-                return relatedIds.SelectAsArray((id, solution) => solution.GetRequiredDocument(id), solution);
+                solution = solution.WithDocumentText(
+                    relatedIds,
+                    text,
+                    PreservationMode.PreserveIdentity
+                );
+                return relatedIds.SelectAsArray(
+                    (id, solution) => solution.GetRequiredDocument(id),
+                    solution
+                );
             }
 
             return ImmutableArray<Document>.Empty;
@@ -58,7 +72,12 @@ namespace Microsoft.CodeAnalysis.Text
                     return null;
                 }
 
-                if (workspace.TryGetOpenSourceGeneratedDocumentIdentity(id, out var documentIdentity))
+                if (
+                    workspace.TryGetOpenSourceGeneratedDocumentIdentity(
+                        id,
+                        out var documentIdentity
+                    )
+                )
                 {
                     return solution.WithFrozenSourceGeneratedDocument(documentIdentity, text);
                 }
@@ -66,8 +85,9 @@ namespace Microsoft.CodeAnalysis.Text
                 // We update all linked files to ensure they are all in sync. Otherwise code might try to jump from
                 // one linked file to another and be surprised if the text is entirely different.
                 var allIds = solution.GetRelatedDocumentIds(id);
-                return solution.WithDocumentText(allIds, text, PreservationMode.PreserveIdentity)
-                               .GetDocument(id);
+                return solution
+                    .WithDocumentText(allIds, text, PreservationMode.PreserveIdentity)
+                    .GetDocument(id);
             }
 
             return null;
@@ -76,7 +96,9 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// Gets the documents from the corresponding workspace's current solution that are associated with the text container. 
         /// </summary>
-        public static ImmutableArray<Document> GetRelatedDocuments(this SourceTextContainer container)
+        public static ImmutableArray<Document> GetRelatedDocuments(
+            this SourceTextContainer container
+        )
         {
             if (Workspace.TryGetWorkspace(container, out var workspace))
             {
@@ -85,7 +107,10 @@ namespace Microsoft.CodeAnalysis.Text
                 if (documentId != null)
                 {
                     var relatedIds = solution.GetRelatedDocumentIds(documentId);
-                    return relatedIds.SelectAsArray((id, solution) => solution.GetRequiredDocument(id), solution);
+                    return relatedIds.SelectAsArray(
+                        (id, solution) => solution.GetRequiredDocument(id),
+                        solution
+                    );
                 }
             }
 
@@ -114,7 +139,10 @@ namespace Microsoft.CodeAnalysis.Text
         /// with the specified text's container, or the text's container isn't associated with a workspace,
         /// then the method returns false.
         /// </summary>
-        internal static Document? GetDocumentWithFrozenPartialSemantics(this SourceText text, CancellationToken cancellationToken)
+        internal static Document? GetDocumentWithFrozenPartialSemantics(
+            this SourceText text,
+            CancellationToken cancellationToken
+        )
         {
             var document = text.GetOpenDocumentInCurrentContextWithChanges();
             return document?.WithFrozenPartialSemantics(cancellationToken);

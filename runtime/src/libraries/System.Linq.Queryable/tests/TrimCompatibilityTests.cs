@@ -16,17 +16,22 @@ namespace System.Linq.Tests
         /// preserve the corresponding Enumerable method when trimming.
         /// </summary>
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50712", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50712",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void QueryableMethodsContainCorrectDynamicDependency()
         {
-            IEnumerable<MethodInfo> dependentMethods =
-                typeof(Queryable)
-                    .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    .Where(m => m.Name != "AsQueryable");
+            IEnumerable<MethodInfo> dependentMethods = typeof(Queryable)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(m => m.Name != "AsQueryable");
 
             foreach (MethodInfo method in dependentMethods)
             {
-                DynamicDependencyAttribute dependency = method.GetCustomAttribute<DynamicDependencyAttribute>();
+                DynamicDependencyAttribute dependency =
+                    method.GetCustomAttribute<DynamicDependencyAttribute>();
                 Assert.NotNull(dependency);
                 Assert.Equal(typeof(Enumerable), dependency.Type);
 
@@ -55,11 +60,10 @@ namespace System.Linq.Tests
         [Fact]
         public static void CachedReflectionInfoMethodsNoAnnotations()
         {
-            IEnumerable<MethodInfo> methods =
-                typeof(Queryable).Assembly
-                    .GetType("System.Linq.CachedReflectionInfo")
-                    .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
-                    .Where(m => m.GetParameters().Length > 0);
+            IEnumerable<MethodInfo> methods = typeof(Queryable).Assembly
+                .GetType("System.Linq.CachedReflectionInfo")
+                .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                .Where(m => m.GetParameters().Length > 0);
 
             // If you are adding a new method to this class, ensure the method meets these requirements
             Assert.Equal(131, methods.Count());
@@ -75,7 +79,8 @@ namespace System.Linq.Tests
 
                 MethodInfo resultMethodInfo = (MethodInfo)method.Invoke(null, args);
                 Assert.True(resultMethodInfo.IsConstructedGenericMethod);
-                MethodInfo originalGenericDefinition = resultMethodInfo.GetGenericMethodDefinition();
+                MethodInfo originalGenericDefinition =
+                    resultMethodInfo.GetGenericMethodDefinition();
 
                 EnsureNoTrimAnnotations(originalGenericDefinition);
             }
@@ -90,10 +95,9 @@ namespace System.Linq.Tests
         [Fact]
         public static void EnumerableMethodsNoAnnotations()
         {
-            IEnumerable<MethodInfo> methods =
-                typeof(Enumerable)
-                    .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    .Where(m => m.IsGenericMethodDefinition);
+            IEnumerable<MethodInfo> methods = typeof(Enumerable)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(m => m.IsGenericMethodDefinition);
 
             foreach (MethodInfo method in methods)
             {
@@ -110,7 +114,11 @@ namespace System.Linq.Tests
                 Assert.Null(genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>());
 
                 // The generic type should not have a 'where new()' constraint since that will tell the trimmer to keep the ctor
-                Assert.False(genericType.GenericParameterAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint));
+                Assert.False(
+                    genericType.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    )
+                );
             }
         }
     }

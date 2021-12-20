@@ -40,7 +40,11 @@ namespace System.Drawing.Printing
             {
                 if (value < PrinterResolutionKind.High || value > PrinterResolutionKind.Custom)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), unchecked((int)value), typeof(PrinterResolutionKind));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        unchecked((int)value),
+                        typeof(PrinterResolutionKind)
+                    );
                 }
 
                 _kind = value;
@@ -74,7 +78,6 @@ namespace System.Drawing.Printing
             {
                 return $"[PrinterResolution {Kind}]";
             }
-
 
             return FormattableString.Invariant($"[PrinterResolution X={X} Y={Y}]");
         }

@@ -29,10 +29,14 @@ public class TestServer : IDisposable
     private const string AspNetCoreModuleDll = "aspnetcorev2.dll";
     private const string HWebCoreDll = "hwebcore.dll";
 
-    internal static string HostableWebCoreLocation => Environment.ExpandEnvironmentVariables($@"%windir%\system32\inetsrv\{HWebCoreDll}");
-    internal static string BasePath => Path.Combine(Path.GetDirectoryName(typeof(TestServer).Assembly.Location),
-                                                    "ANCM",
-                                                    Environment.Is64BitProcess ? "x64" : "x86");
+    internal static string HostableWebCoreLocation =>
+        Environment.ExpandEnvironmentVariables($@"%windir%\system32\inetsrv\{HWebCoreDll}");
+    internal static string BasePath =>
+        Path.Combine(
+            Path.GetDirectoryName(typeof(TestServer).Assembly.Location),
+            "ANCM",
+            Environment.Is64BitProcess ? "x64" : "x86"
+        );
 
     internal static string AspNetCoreModuleLocation => Path.Combine(BasePath, AspNetCoreModuleDll);
 
@@ -40,7 +44,8 @@ public class TestServer : IDisposable
 
     private static readonly int PortRetryCount = 10;
 
-    private readonly TaskCompletionSource<object> _startedTaskCompletionSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource<object> _startedTaskCompletionSource =
+        new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
 
     private readonly Action<IApplicationBuilder> _appBuilder;
     private readonly ILoggerFactory _loggerFactory;
@@ -63,7 +68,11 @@ public class TestServer : IDisposable
         _loggerFactory = loggerFactory;
     }
 
-    public static async Task<TestServer> Create(Action<IApplicationBuilder> appBuilder, ILoggerFactory loggerFactory, IISServerOptions options)
+    public static async Task<TestServer> Create(
+        Action<IApplicationBuilder> appBuilder,
+        ILoggerFactory loggerFactory,
+        IISServerOptions options
+    )
     {
         await WebCoreLock.WaitAsync();
         _options = options;
@@ -79,7 +88,11 @@ public class TestServer : IDisposable
         return Create(builder => builder.Run(app), loggerFactory, new IISServerOptions());
     }
 
-    public static Task<TestServer> Create(RequestDelegate app, ILoggerFactory loggerFactory, IISServerOptions options)
+    public static Task<TestServer> Create(
+        RequestDelegate app,
+        ILoggerFactory loggerFactory,
+        IISServerOptions options
+    )
     {
         return Create(builder => builder.Run(app), loggerFactory, options);
     }
@@ -91,20 +104,27 @@ public class TestServer : IDisposable
 
         set_main_handler(_hostfxrMainFn);
 
-        Retry(() =>
-        {
-            _currentPort = TestPortHelper.GetNextPort();
-
-            InitializeConfig(_currentPort);
-
-            var startResult = WebCoreActivate(_appHostConfigPath, null, "Instance");
-            if (startResult != 0)
+        Retry(
+            () =>
             {
-                throw new InvalidOperationException($"Error while running WebCoreActivate: {startResult} on port {_currentPort}");
-            }
-        }, PortRetryCount);
+                _currentPort = TestPortHelper.GetNextPort();
 
-        HttpClient = new HttpClient(new LoggingHandler(new SocketsHttpHandler(), _loggerFactory.CreateLogger<TestServer>()))
+                InitializeConfig(_currentPort);
+
+                var startResult = WebCoreActivate(_appHostConfigPath, null, "Instance");
+                if (startResult != 0)
+                {
+                    throw new InvalidOperationException(
+                        $"Error while running WebCoreActivate: {startResult} on port {_currentPort}"
+                    );
+                }
+            },
+            PortRetryCount
+        );
+
+        HttpClient = new HttpClient(
+            new LoggingHandler(new SocketsHttpHandler(), _loggerFactory.CreateLogger<TestServer>())
+        )
         {
             BaseAddress = BaseUri
         };
@@ -113,7 +133,10 @@ public class TestServer : IDisposable
     private void InitializeConfig(int port)
     {
         var webHostConfig = XDocument.Load(Path.GetFullPath("HostableWebCore.config"));
-        webHostConfig.XPathSelectElement("/configuration/system.webServer/globalModules/add[@name='AspNetCoreModuleV2']")
+        webHostConfig
+            .XPathSelectElement(
+                "/configuration/system.webServer/globalModules/add[@name='AspNetCoreModuleV2']"
+            )
             .SetAttributeValue("image", AspNetCoreModuleLocation);
 
         var siteElement = webHostConfig.Root
@@ -132,22 +155,38 @@ public class TestServer : IDisposable
     private int Main(IntPtr argc, IntPtr argv)
     {
         _host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseIIS()
-                    .UseSetting(WebHostDefaults.ApplicationKey, typeof(TestServer).GetTypeInfo().Assembly.FullName)
-                    .Configure(app =>
-                    {
-                        app.Map("/start", builder => builder.Run(context => context.Response.WriteAsync("Done")));
-                        _appBuilder(app);
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.Configure<IISServerOptions>(options => options.MaxRequestBodySize = _options.MaxRequestBodySize);
-                        services.AddSingleton(_loggerFactory);
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseIIS()
+                        .UseSetting(
+                            WebHostDefaults.ApplicationKey,
+                            typeof(TestServer).GetTypeInfo().Assembly.FullName
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Map(
+                                    "/start",
+                                    builder =>
+                                        builder.Run(context => context.Response.WriteAsync("Done"))
+                                );
+                                _appBuilder(app);
+                            }
+                        )
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.Configure<IISServerOptions>(
+                                    options =>
+                                        options.MaxRequestBodySize = _options.MaxRequestBodySize
+                                );
+                                services.AddSingleton(_loggerFactory);
+                            }
+                        );
+                }
+            )
             .Build();
 
         var doneEvent = new ManualResetEventSlim();
@@ -179,12 +218,10 @@ public class TestServer : IDisposable
 
     [DllImport(HWebCoreDll)]
     private static extern int WebCoreActivate(
-        [In, MarshalAs(UnmanagedType.LPWStr)]
-            string appHostConfigPath,
-        [In, MarshalAs(UnmanagedType.LPWStr)]
-            string rootWebConfigPath,
-        [In, MarshalAs(UnmanagedType.LPWStr)]
-            string instanceName);
+        [In, MarshalAs(UnmanagedType.LPWStr)] string appHostConfigPath,
+        [In, MarshalAs(UnmanagedType.LPWStr)] string rootWebConfigPath,
+        [In, MarshalAs(UnmanagedType.LPWStr)] string instanceName
+    );
 
     [DllImport(HWebCoreDll)]
     private static extern int WebCoreShutdown(bool immediate);

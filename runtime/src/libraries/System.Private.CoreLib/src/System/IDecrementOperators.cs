@@ -12,14 +12,12 @@ namespace System
     /// <summary>Defines a mechanism for decrementing a given value.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IDecrementOperators<TSelf>
-        where TSelf : IDecrementOperators<TSelf>
+    public interface IDecrementOperators<TSelf> where TSelf : IDecrementOperators<TSelf>
     {
         /// <summary>Decrements a value.</summary>
         /// <param name="value">The value to decrement.</param>
         /// <returns>The result of decrementing <paramref name="value" />.</returns>
         static abstract TSelf operator --(TSelf value);
-
         // /// <summary>Decrements a value.</summary>
         // /// <param name="value">The value to decrement.</param>
         // /// <returns>The result of decrementing <paramref name="value" />.</returns>

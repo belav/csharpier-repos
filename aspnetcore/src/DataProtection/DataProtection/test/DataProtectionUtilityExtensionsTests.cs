@@ -27,8 +27,7 @@ public class DataProtectionUtilityExtensionsTests
         var services = new ServiceCollection()
             .AddSingleton(mockEnvironment.Object)
             .AddDataProtection()
-            .Services
-            .BuildServiceProvider();
+            .Services.BuildServiceProvider();
 
         // Act
         var actual = services.GetApplicationUniqueIdentifier();
@@ -42,21 +41,25 @@ public class DataProtectionUtilityExtensionsTests
     [InlineData(" discriminator", "discriminator")] // normalized trim
     [InlineData("  ", null)] // normalized whitespace -> null
     [InlineData(null, null)] // nothing provided at all
-    public void GetApplicationIdentifierFromApplicationDiscriminator(string discriminator, string expected)
+    public void GetApplicationIdentifierFromApplicationDiscriminator(
+        string discriminator,
+        string expected
+    )
     {
         // Arrange
         var mockAppDiscriminator = new Mock<IApplicationDiscriminator>();
         mockAppDiscriminator.Setup(o => o.Discriminator).Returns(discriminator);
 
         var mockEnvironment = new Mock<IHostEnvironment>();
-        mockEnvironment.SetupGet(o => o.ContentRootPath).Throws(new InvalidOperationException("Hosting environment should not be checked"));
+        mockEnvironment
+            .SetupGet(o => o.ContentRootPath)
+            .Throws(new InvalidOperationException("Hosting environment should not be checked"));
 
         var services = new ServiceCollection()
             .AddSingleton(mockEnvironment.Object)
             .AddSingleton(mockAppDiscriminator.Object)
             .AddDataProtection()
-            .Services
-            .BuildServiceProvider();
+            .Services.BuildServiceProvider();
 
         // Act
         var actual = services.GetApplicationUniqueIdentifier();
@@ -76,10 +79,7 @@ public class DataProtectionUtilityExtensionsTests
     public void GetApplicationUniqueIdentifier_NoHostingEnvironment_ReturnsNull()
     {
         // arrange
-        var services = new ServiceCollection()
-          .AddDataProtection()
-          .Services
-          .BuildServiceProvider();
+        var services = new ServiceCollection().AddDataProtection().Services.BuildServiceProvider();
 
         // act & assert
         Assert.Null(services.GetApplicationUniqueIdentifier());

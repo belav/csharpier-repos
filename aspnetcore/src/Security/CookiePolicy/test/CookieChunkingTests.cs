@@ -16,7 +16,12 @@ public class CookieChunkingTests
         HttpContext context = new DefaultHttpContext();
 
         string testString = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        new ChunkingCookieManager() { ChunkSize = null }.AppendResponseCookie(context, "TestCookie", testString, new CookieOptions());
+        new ChunkingCookieManager() { ChunkSize = null }.AppendResponseCookie(
+            context,
+            "TestCookie",
+            testString,
+            new CookieOptions()
+        );
         var values = context.Response.Headers["Set-Cookie"];
         Assert.Single(values);
         Assert.Equal("TestCookie=" + testString + "; path=/", values[0]);
@@ -38,11 +43,19 @@ public class CookieChunkingTests
             MaxAge = TimeSpan.FromMinutes(5)
         };
         var testString = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        new ChunkingCookieManager() { ChunkSize = null }.AppendResponseCookie(context, "TestCookie", testString, options);
+        new ChunkingCookieManager() { ChunkSize = null }.AppendResponseCookie(
+            context,
+            "TestCookie",
+            testString,
+            options
+        );
 
         var values = context.Response.Headers["Set-Cookie"];
         Assert.Single(values);
-        Assert.Equal($"TestCookie={testString}; expires={now.AddMinutes(5).ToString("R")}; max-age=300; domain=foo.com; path=/bar; secure; samesite=strict; httponly", values[0]);
+        Assert.Equal(
+            $"TestCookie={testString}; expires={now.AddMinutes(5).ToString("R")}; max-age=300; domain=foo.com; path=/bar; secure; samesite=strict; httponly",
+            values[0]
+        );
     }
 
     [Fact]
@@ -51,16 +64,24 @@ public class CookieChunkingTests
         HttpContext context = new DefaultHttpContext();
 
         string testString = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        new ChunkingCookieManager() { ChunkSize = 44 }.AppendResponseCookie(context, "TestCookie", testString, new CookieOptions());
+        new ChunkingCookieManager() { ChunkSize = 44 }.AppendResponseCookie(
+            context,
+            "TestCookie",
+            testString,
+            new CookieOptions()
+        );
         var values = context.Response.Headers["Set-Cookie"];
         Assert.Equal(4, values.Count);
-        Assert.Equal<string[]>(new[]
-        {
+        Assert.Equal<string[]>(
+            new[]
+            {
                 "TestCookie=chunks-3; path=/",
                 "TestCookieC1=abcdefghijklmnopqrstuv; path=/",
                 "TestCookieC2=wxyz0123456789ABCDEFGH; path=/",
                 "TestCookieC3=IJKLMNOPQRSTUVWXYZ; path=/",
-            }, values);
+            },
+            values
+        );
     }
 
     [Fact]
@@ -69,15 +90,15 @@ public class CookieChunkingTests
         HttpContext context = new DefaultHttpContext();
         context.Request.Headers["Cookie"] = new[]
         {
-                "TestCookie=chunks-7",
-                "TestCookieC1=abcdefghi",
-                "TestCookieC2=jklmnopqr",
-                "TestCookieC3=stuvwxyz0",
-                "TestCookieC4=123456789",
-                "TestCookieC5=ABCDEFGHI",
-                "TestCookieC6=JKLMNOPQR",
-                "TestCookieC7=STUVWXYZ"
-            };
+            "TestCookie=chunks-7",
+            "TestCookieC1=abcdefghi",
+            "TestCookieC2=jklmnopqr",
+            "TestCookieC3=stuvwxyz0",
+            "TestCookieC4=123456789",
+            "TestCookieC5=ABCDEFGHI",
+            "TestCookieC6=JKLMNOPQR",
+            "TestCookieC7=STUVWXYZ"
+        };
 
         string result = new ChunkingCookieManager().GetRequestCookie(context, "TestCookie");
         string testString = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -90,18 +111,23 @@ public class CookieChunkingTests
         HttpContext context = new DefaultHttpContext();
         context.Request.Headers["Cookie"] = new[]
         {
-                "TestCookie=chunks-7",
-                "TestCookieC1=abcdefghi",
-                // Missing chunk "TestCookieC2=jklmnopqr",
-                "TestCookieC3=stuvwxyz0",
-                "TestCookieC4=123456789",
-                "TestCookieC5=ABCDEFGHI",
-                "TestCookieC6=JKLMNOPQR",
-                "TestCookieC7=STUVWXYZ"
-            };
+            "TestCookie=chunks-7",
+            "TestCookieC1=abcdefghi",
+            // Missing chunk "TestCookieC2=jklmnopqr",
+            "TestCookieC3=stuvwxyz0",
+            "TestCookieC4=123456789",
+            "TestCookieC5=ABCDEFGHI",
+            "TestCookieC6=JKLMNOPQR",
+            "TestCookieC7=STUVWXYZ"
+        };
 
-        Assert.Throws<FormatException>(() => new ChunkingCookieManager() { ThrowForPartialCookies = true }
-            .GetRequestCookie(context, "TestCookie"));
+        Assert.Throws<FormatException>(
+            () =>
+                new ChunkingCookieManager() { ThrowForPartialCookies = true }.GetRequestCookie(
+                    context,
+                    "TestCookie"
+                )
+        );
     }
 
     [Fact]
@@ -110,17 +136,20 @@ public class CookieChunkingTests
         HttpContext context = new DefaultHttpContext();
         context.Request.Headers["Cookie"] = new[]
         {
-                "TestCookie=chunks-7",
-                "TestCookieC1=abcdefghi",
-                // Missing chunk "TestCookieC2=jklmnopqr",
-                "TestCookieC3=stuvwxyz0",
-                "TestCookieC4=123456789",
-                "TestCookieC5=ABCDEFGHI",
-                "TestCookieC6=JKLMNOPQR",
-                "TestCookieC7=STUVWXYZ"
-            };
+            "TestCookie=chunks-7",
+            "TestCookieC1=abcdefghi",
+            // Missing chunk "TestCookieC2=jklmnopqr",
+            "TestCookieC3=stuvwxyz0",
+            "TestCookieC4=123456789",
+            "TestCookieC5=ABCDEFGHI",
+            "TestCookieC6=JKLMNOPQR",
+            "TestCookieC7=STUVWXYZ"
+        };
 
-        string result = new ChunkingCookieManager() { ThrowForPartialCookies = false }.GetRequestCookie(context, "TestCookie");
+        string result = new ChunkingCookieManager()
+        {
+            ThrowForPartialCookies = false
+        }.GetRequestCookie(context, "TestCookie");
         string testString = "chunks-7";
         Assert.Equal(testString, result);
     }
@@ -131,11 +160,16 @@ public class CookieChunkingTests
         HttpContext context = new DefaultHttpContext();
         context.Request.Headers.Append("Cookie", "TestCookie=chunks-7");
 
-        new ChunkingCookieManager().DeleteCookie(context, "TestCookie", new CookieOptions() { Domain = "foo.com", Secure = true });
+        new ChunkingCookieManager().DeleteCookie(
+            context,
+            "TestCookie",
+            new CookieOptions() { Domain = "foo.com", Secure = true }
+        );
         var cookies = context.Response.Headers["Set-Cookie"];
         Assert.Equal(8, cookies.Count);
-        Assert.Equal(new[]
-        {
+        Assert.Equal(
+            new[]
+            {
                 "TestCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC1=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC2=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
@@ -144,10 +178,10 @@ public class CookieChunkingTests
                 "TestCookieC5=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC6=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC7=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
-            }, cookies);
+            },
+            cookies
+        );
     }
-
-
 
     [Fact]
     public void DeleteChunkedCookieWithOptionsAndResponseCookies_AllDeleted()
@@ -157,39 +191,35 @@ public class CookieChunkingTests
 
         httpContext.Request.Headers["Cookie"] = new[]
         {
-                "TestCookie=chunks-7",
-                "TestCookieC1=abcdefghi",
-                "TestCookieC2=jklmnopqr",
-                "TestCookieC3=stuvwxyz0",
-                "TestCookieC4=123456789",
-                "TestCookieC5=ABCDEFGHI",
-                "TestCookieC6=JKLMNOPQR",
-                "TestCookieC7=STUVWXYZ"
-            };
-
-        var cookieOptions = new CookieOptions()
-        {
-            Domain = "foo.com",
-            Path = "/",
-            Secure = true
+            "TestCookie=chunks-7",
+            "TestCookieC1=abcdefghi",
+            "TestCookieC2=jklmnopqr",
+            "TestCookieC3=stuvwxyz0",
+            "TestCookieC4=123456789",
+            "TestCookieC5=ABCDEFGHI",
+            "TestCookieC6=JKLMNOPQR",
+            "TestCookieC7=STUVWXYZ"
         };
+
+        var cookieOptions = new CookieOptions() { Domain = "foo.com", Path = "/", Secure = true };
 
         httpContext.Response.Headers[HeaderNames.SetCookie] = new[]
         {
-                "TestCookie=chunks-7; domain=foo.com; path=/; secure",
-                "TestCookieC1=STUVWXYZ; domain=foo.com; path=/; secure",
-                "TestCookieC2=123456789; domain=foo.com; path=/; secure",
-                "TestCookieC3=stuvwxyz0; domain=foo.com; path=/; secure",
-                "TestCookieC4=123456789; domain=foo.com; path=/; secure",
-                "TestCookieC5=ABCDEFGHI; domain=foo.com; path=/; secure",
-                "TestCookieC6=JKLMNOPQR; domain=foo.com; path=/; secure",
-                "TestCookieC7=STUVWXYZ; domain=foo.com; path=/; secure"
-            };
+            "TestCookie=chunks-7; domain=foo.com; path=/; secure",
+            "TestCookieC1=STUVWXYZ; domain=foo.com; path=/; secure",
+            "TestCookieC2=123456789; domain=foo.com; path=/; secure",
+            "TestCookieC3=stuvwxyz0; domain=foo.com; path=/; secure",
+            "TestCookieC4=123456789; domain=foo.com; path=/; secure",
+            "TestCookieC5=ABCDEFGHI; domain=foo.com; path=/; secure",
+            "TestCookieC6=JKLMNOPQR; domain=foo.com; path=/; secure",
+            "TestCookieC7=STUVWXYZ; domain=foo.com; path=/; secure"
+        };
 
         chunkingCookieManager.DeleteCookie(httpContext, "TestCookie", cookieOptions);
         Assert.Equal(8, httpContext.Response.Headers[HeaderNames.SetCookie].Count);
-        Assert.Equal(new[]
-        {
+        Assert.Equal(
+            new[]
+            {
                 "TestCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC1=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC2=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
@@ -198,6 +228,8 @@ public class CookieChunkingTests
                 "TestCookieC5=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC6=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure",
                 "TestCookieC7=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=foo.com; path=/; secure"
-            }, httpContext.Response.Headers[HeaderNames.SetCookie]);
+            },
+            httpContext.Response.Headers[HeaderNames.SetCookie]
+        );
     }
 }

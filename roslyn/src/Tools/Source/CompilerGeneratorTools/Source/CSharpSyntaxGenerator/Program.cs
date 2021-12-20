@@ -70,8 +70,14 @@ namespace CSharpSyntaxGenerator
             }
 
             return writeGrammar
-                ? WriteGrammarFile(inputFile, outputFile)
-                : WriteCSharpSourceFiles(inputFile, writeSource, writeTests, writeSignatures, outputFile);
+              ? WriteGrammarFile(inputFile, outputFile)
+              : WriteCSharpSourceFiles(
+                    inputFile,
+                    writeSource,
+                    writeTests,
+                    writeSignatures,
+                    outputFile
+                );
         }
 
         private static int WriteUsage()
@@ -85,7 +91,10 @@ namespace CSharpSyntaxGenerator
 
         private static Tree ReadTree(string inputFile)
         {
-            var reader = XmlReader.Create(inputFile, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit });
+            var reader = XmlReader.Create(
+                inputFile,
+                new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+            );
             var serializer = new XmlSerializer(typeof(Tree));
             return (Tree)serializer.Deserialize(reader);
         }
@@ -97,14 +106,16 @@ namespace CSharpSyntaxGenerator
                 var grammarText = GrammarGenerator.Run(ReadTree(inputFile).Types);
                 var outputMainFile = Path.Combine(outputLocation.Trim('"'), $"CSharp.Generated.g4");
 
-                using var outFile = new StreamWriter(File.Open(outputMainFile, FileMode.Create), Encoding.UTF8);
+                using var outFile = new StreamWriter(
+                    File.Open(outputMainFile, FileMode.Create),
+                    Encoding.UTF8
+                );
                 outFile.Write(grammarText);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Generating grammar failed.");
                 Console.WriteLine(ex);
-
                 // purposefully fall out here and don't return an error code.  We don't want to fail
                 // the build in this case.  Instead, we want to have the program fixed up if
                 // necessary.
@@ -113,7 +124,13 @@ namespace CSharpSyntaxGenerator
             return 0;
         }
 
-        private static int WriteCSharpSourceFiles(string inputFile, bool writeSource, bool writeTests, bool writeSignatures, string outputFile)
+        private static int WriteCSharpSourceFiles(
+            string inputFile,
+            bool writeSource,
+            bool writeTests,
+            bool writeSignatures,
+            string outputFile
+        )
         {
             var tree = ReadTree(inputFile);
 
@@ -136,11 +153,20 @@ namespace CSharpSyntaxGenerator
                     var outputPath = outputFile.Trim('"');
                     var prefix = Path.GetFileName(inputFile);
                     var outputMainFile = Path.Combine(outputPath, $"{prefix}.Main.Generated.cs");
-                    var outputInternalFile = Path.Combine(outputPath, $"{prefix}.Internal.Generated.cs");
-                    var outputSyntaxFile = Path.Combine(outputPath, $"{prefix}.Syntax.Generated.cs");
+                    var outputInternalFile = Path.Combine(
+                        outputPath,
+                        $"{prefix}.Internal.Generated.cs"
+                    );
+                    var outputSyntaxFile = Path.Combine(
+                        outputPath,
+                        $"{prefix}.Syntax.Generated.cs"
+                    );
 
                     WriteToFile(writer => SourceWriter.WriteMain(writer, tree), outputMainFile);
-                    WriteToFile(writer => SourceWriter.WriteInternal(writer, tree), outputInternalFile);
+                    WriteToFile(
+                        writer => SourceWriter.WriteInternal(writer, tree),
+                        outputInternalFile
+                    );
                     WriteToFile(writer => SourceWriter.WriteSyntax(writer, tree), outputSyntaxFile);
                 }
                 if (writeTests)
@@ -163,12 +189,18 @@ namespace CSharpSyntaxGenerator
             do
             {
                 length = text.Length;
-                text = text.Replace($"{{{Environment.NewLine}{Environment.NewLine}", $"{{{Environment.NewLine}");
+                text = text.Replace(
+                    $"{{{Environment.NewLine}{Environment.NewLine}",
+                    $"{{{Environment.NewLine}"
+                );
             } while (text.Length != length);
 
             try
             {
-                using var outFile = new StreamWriter(File.Open(outputFile, FileMode.Create), Encoding.UTF8);
+                using var outFile = new StreamWriter(
+                    File.Open(outputFile, FileMode.Create),
+                    Encoding.UTF8
+                );
                 outFile.Write(text);
             }
             catch (UnauthorizedAccessException)

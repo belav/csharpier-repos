@@ -32,30 +32,30 @@ internal static partial class Interop
         internal enum FSEventStreamEventFlags : uint
         {
             /* flags when creating the stream. */
-            kFSEventStreamEventFlagNone                 = 0x00000000,
-            kFSEventStreamEventFlagMustScanSubDirs      = 0x00000001,
-            kFSEventStreamEventFlagUserDropped          = 0x00000002,
-            kFSEventStreamEventFlagKernelDropped        = 0x00000004,
-            kFSEventStreamEventFlagEventIdsWrapped      = 0x00000008,
-            kFSEventStreamEventFlagHistoryDone          = 0x00000010,
-            kFSEventStreamEventFlagRootChanged          = 0x00000020,
-            kFSEventStreamEventFlagMount                = 0x00000040,
-            kFSEventStreamEventFlagUnmount              = 0x00000080,
+            kFSEventStreamEventFlagNone = 0x00000000,
+            kFSEventStreamEventFlagMustScanSubDirs = 0x00000001,
+            kFSEventStreamEventFlagUserDropped = 0x00000002,
+            kFSEventStreamEventFlagKernelDropped = 0x00000004,
+            kFSEventStreamEventFlagEventIdsWrapped = 0x00000008,
+            kFSEventStreamEventFlagHistoryDone = 0x00000010,
+            kFSEventStreamEventFlagRootChanged = 0x00000020,
+            kFSEventStreamEventFlagMount = 0x00000040,
+            kFSEventStreamEventFlagUnmount = 0x00000080,
             /* These flags are only set if you specified the FileEvents */
-            kFSEventStreamEventFlagItemCreated          = 0x00000100,
-            kFSEventStreamEventFlagItemRemoved          = 0x00000200,
-            kFSEventStreamEventFlagItemInodeMetaMod     = 0x00000400,
-            kFSEventStreamEventFlagItemRenamed          = 0x00000800,
-            kFSEventStreamEventFlagItemModified         = 0x00001000,
-            kFSEventStreamEventFlagItemFinderInfoMod    = 0x00002000,
-            kFSEventStreamEventFlagItemChangeOwner      = 0x00004000,
-            kFSEventStreamEventFlagItemXattrMod         = 0x00008000,
-            kFSEventStreamEventFlagItemIsFile           = 0x00010000,
-            kFSEventStreamEventFlagItemIsDir            = 0x00020000,
-            kFSEventStreamEventFlagItemIsSymlink        = 0x00040000,
-            kFSEventStreamEventFlagOwnEvent             = 0x00080000,
-            kFSEventStreamEventFlagItemIsHardlink       = 0x00100000,
-            kFSEventStreamEventFlagItemIsLastHardlink   = 0x00200000,
+            kFSEventStreamEventFlagItemCreated = 0x00000100,
+            kFSEventStreamEventFlagItemRemoved = 0x00000200,
+            kFSEventStreamEventFlagItemInodeMetaMod = 0x00000400,
+            kFSEventStreamEventFlagItemRenamed = 0x00000800,
+            kFSEventStreamEventFlagItemModified = 0x00001000,
+            kFSEventStreamEventFlagItemFinderInfoMod = 0x00002000,
+            kFSEventStreamEventFlagItemChangeOwner = 0x00004000,
+            kFSEventStreamEventFlagItemXattrMod = 0x00008000,
+            kFSEventStreamEventFlagItemIsFile = 0x00010000,
+            kFSEventStreamEventFlagItemIsDir = 0x00020000,
+            kFSEventStreamEventFlagItemIsSymlink = 0x00040000,
+            kFSEventStreamEventFlagOwnEvent = 0x00080000,
+            kFSEventStreamEventFlagItemIsHardlink = 0x00100000,
+            kFSEventStreamEventFlagItemIsLastHardlink = 0x00200000,
         }
 
         /// <summary>
@@ -65,12 +65,12 @@ internal static partial class Interop
         [Flags]
         internal enum FSEventStreamCreateFlags : uint
         {
-            kFSEventStreamCreateFlagNone        = 0x00000000,
-            kFSEventStreamCreateFlagUseCFTypes  = 0x00000001,
-            kFSEventStreamCreateFlagNoDefer     = 0x00000002,
-            kFSEventStreamCreateFlagWatchRoot   = 0x00000004,
-            kFSEventStreamCreateFlagIgnoreSelf  = 0x00000008,
-            kFSEventStreamCreateFlagFileEvents  = 0x00000010
+            kFSEventStreamCreateFlagNone = 0x00000000,
+            kFSEventStreamCreateFlagUseCFTypes = 0x00000001,
+            kFSEventStreamCreateFlagNoDefer = 0x00000002,
+            kFSEventStreamCreateFlagWatchRoot = 0x00000004,
+            kFSEventStreamCreateFlagIgnoreSelf = 0x00000008,
+            kFSEventStreamCreateFlagFileEvents = 0x00000010
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -101,13 +101,21 @@ internal static partial class Interop
         /// <remarks>For *nix systems, the CLR maps ANSI to UTF-8, so be explicit about that</remarks>
         [GeneratedDllImport(Interop.Libraries.CoreServicesLibrary, CharSet = CharSet.Ansi)]
         internal static unsafe partial SafeEventStreamHandle FSEventStreamCreate(
-            IntPtr                      allocator,
-            delegate* unmanaged<FSEventStreamRef, IntPtr, size_t, byte**, FSEventStreamEventFlags*, FSEventStreamEventId*, void> callback,
-            FSEventStreamContext*       context,
-            SafeCreateHandle            pathsToWatch,
-            FSEventStreamEventId        sinceWhen,
-            CFTimeInterval              latency,
-            FSEventStreamCreateFlags    flags);
+            IntPtr allocator,
+            delegate* unmanaged<
+                FSEventStreamRef,
+                IntPtr,
+                size_t,
+                byte**,
+                FSEventStreamEventFlags*,
+                FSEventStreamEventId*,
+                void> callback,
+            FSEventStreamContext* context,
+            SafeCreateHandle pathsToWatch,
+            FSEventStreamEventId sinceWhen,
+            CFTimeInterval latency,
+            FSEventStreamCreateFlags flags
+        );
 
         /// <summary>
         /// Attaches an EventStream to a RunLoop so events can be received. This should usually be the current thread's RunLoop.
@@ -117,9 +125,10 @@ internal static partial class Interop
         /// <param name="runLoopMode">The mode of the RunLoop; this should usually be kCFRunLoopDefaultMode. See the documentation for RunLoops for more info.</param>
         [GeneratedDllImport(Interop.Libraries.CoreServicesLibrary)]
         internal static partial void FSEventStreamScheduleWithRunLoop(
-            SafeEventStreamHandle   streamRef,
-            CFRunLoopRef            runLoop,
-            SafeCreateHandle        runLoopMode);
+            SafeEventStreamHandle streamRef,
+            CFRunLoopRef runLoop,
+            SafeCreateHandle runLoopMode
+        );
 
         /// <summary>
         /// Starts receiving events on the specified stream.
@@ -159,9 +168,10 @@ internal static partial class Interop
         /// <param name="runLoopMode">The mode of the RunLoop; this should usually be kCFRunLoopDefaultMode. See the documentation for RunLoops for more info.</param>
         [GeneratedDllImport(Interop.Libraries.CoreServicesLibrary)]
         internal static partial void FSEventStreamUnscheduleFromRunLoop(
-            SafeEventStreamHandle   streamRef,
-            CFRunLoopRef            runLoop,
-            SafeCreateHandle        runLoopMode);
+            SafeEventStreamHandle streamRef,
+            CFRunLoopRef runLoop,
+            SafeCreateHandle runLoopMode
+        );
 
         /// <summary>
         /// Releases a reference count on the specified EventStream and, if necessary, cleans the stream up.

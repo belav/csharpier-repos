@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                 _namespace!.Value(),
                 _contextNamespace!.Value(),
                 _suppressOnConfiguring!.HasValue(),
-                _noPluralize!.HasValue());
+                _noPluralize!.HasValue()
+            );
             if (_json!.HasValue())
             {
                 ReportJsonResults(result);
@@ -54,7 +55,9 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         private static void ReportJsonResults(IDictionary result)
         {
             Reporter.WriteData("{");
-            Reporter.WriteData("  \"contextFile\": " + Json.Literal(result["ContextFile"] as string) + ",");
+            Reporter.WriteData(
+                "  \"contextFile\": " + Json.Literal(result["ContextFile"] as string) + ","
+            );
             Reporter.WriteData("  \"entityTypeFiles\": [");
 
             var files = (IReadOnlyList<string?>)result["EntityTypeFiles"]!;

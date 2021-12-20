@@ -31,10 +31,7 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
             public TNode Current
             {
-                get
-                {
-                    return _list[_index]!;
-                }
+                get { return _list[_index]!; }
             }
         }
     }

@@ -18,14 +18,16 @@ namespace ConsoleApplication1
             buffer[2] = 0x56;
             buffer[3] = 0x78;
             short shrt = SerializerShort.Deserialize(buffer, index + byteCount, out byteCount);
-            if (shrt != 0x3412) result = 101;
-            Console.WriteLine(shrt.ToString("x")); // Prints "3412"    
+            if (shrt != 0x3412)
+                result = 101;
+            Console.WriteLine(shrt.ToString("x")); // Prints "3412"
             byteCount = 0;
             int i1 = SerializerInt.Deserialize(buffer, index + byteCount, out byteCount);
-            if ((i1 != 0x78563412) || (index != 0) || (byteCount != 1)) result = 101;
-            Console.WriteLine(i1.ToString("x")); // Prints "78563412"      
-            Console.WriteLine(index); // Prints "0"      
-            Console.WriteLine(byteCount); // Should be Prints 1 !! Prints "2"      
+            if ((i1 != 0x78563412) || (index != 0) || (byteCount != 1))
+                result = 101;
+            Console.WriteLine(i1.ToString("x")); // Prints "78563412"
+            Console.WriteLine(index); // Prints "0"
+            Console.WriteLine(byteCount); // Should be Prints 1 !! Prints "2"
             return result;
         }
 

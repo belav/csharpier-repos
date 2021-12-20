@@ -41,7 +41,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         LeftBracket,
         Dollar,
         Transition,
-
         RazorCommentTransition,
         RazorCommentStar,
         RazorComment

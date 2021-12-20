@@ -12,17 +12,14 @@ namespace System.CommandLine.Invocation
         /// The position in the pipeline at which the exception handler middleware is invoked.
         /// </summary>
         ExceptionHandler = -2000,
-
         /// <summary>
         /// The position in the pipeline at which configuration middleware is invoked.
         /// </summary>
         Configuration = -1000,
-
         /// <summary>
         /// The default position in the pipeline.
         /// </summary>
         Default = default,
-
         /// <summary>
         /// The position in the pipeline at which error reporting middleware is invoked.
         /// </summary>

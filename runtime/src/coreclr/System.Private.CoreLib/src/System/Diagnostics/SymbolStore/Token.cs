@@ -17,11 +17,20 @@ namespace System.Diagnostics.SymbolStore
     {
         internal int m_token;
 
-        public SymbolToken(int val) { m_token = val; }
+        public SymbolToken(int val)
+        {
+            m_token = val;
+        }
 
-        public int GetToken() { return m_token; }
+        public int GetToken()
+        {
+            return m_token;
+        }
 
-        public override int GetHashCode() { return m_token; }
+        public override int GetHashCode()
+        {
+            return m_token;
+        }
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {

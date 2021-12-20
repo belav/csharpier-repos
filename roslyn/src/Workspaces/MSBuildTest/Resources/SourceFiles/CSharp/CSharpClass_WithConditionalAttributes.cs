@@ -20,7 +20,4 @@ namespace CSharpProject
 }
 
 [System.Diagnostics.Conditional("EnableMyAttribute")]
-public class MyAttr : Attribute
-{
-}
-
+public class MyAttr : Attribute { }

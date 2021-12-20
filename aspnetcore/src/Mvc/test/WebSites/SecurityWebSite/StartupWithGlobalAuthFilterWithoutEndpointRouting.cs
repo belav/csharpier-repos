@@ -16,27 +16,40 @@ public class StartupWithGlobalAuthFilterWithoutEndpointRouting
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie()
-            .AddJwtBearer(options =>
+            .AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters =
+                        BearerAuth.CreateTokenValidationParameters();
+                }
+            );
+
+        services.AddAuthorization(
+            options =>
             {
-                options.TokenValidationParameters = BearerAuth.CreateTokenValidationParameters();
-            });
+                options.AddPolicy("RequireClaimA", policy => policy.RequireClaim("ClaimA"));
+                options.AddPolicy("RequireClaimB", policy => policy.RequireClaim("ClaimB"));
+            }
+        );
 
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("RequireClaimA", policy => policy.RequireClaim("ClaimA"));
-            options.AddPolicy("RequireClaimB", policy => policy.RequireClaim("ClaimB"));
-        });
-
-        services.AddMvc(o =>
-        {
-            o.EnableEndpointRouting = false;
-            o.Filters.Add(new AuthorizeFilter("RequireClaimA"));
-        })
-        .AddRazorPagesOptions(options =>
-        {
-            options.Conventions.AllowAnonymousToPage("/AllowAnonymousPageViaConvention");
-            options.Conventions.AuthorizePage("/AuthorizePageViaConvention", "RequireClaimB");
-        });
+        services
+            .AddMvc(
+                o =>
+                {
+                    o.EnableEndpointRouting = false;
+                    o.Filters.Add(new AuthorizeFilter("RequireClaimA"));
+                }
+            )
+            .AddRazorPagesOptions(
+                options =>
+                {
+                    options.Conventions.AllowAnonymousToPage("/AllowAnonymousPageViaConvention");
+                    options.Conventions.AuthorizePage(
+                        "/AuthorizePageViaConvention",
+                        "RequireClaimB"
+                    );
+                }
+            );
     }
 
     public void Configure(IApplicationBuilder app)

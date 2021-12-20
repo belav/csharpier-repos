@@ -13,14 +13,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 {
     public static TheoryData<Type> ConvertibleTypeData
     {
-        get
-        {
-            return new TheoryData<Type>
-                {
-                    typeof(TFloatingPoint),
-                    typeof(TFloatingPoint?),
-                };
-        }
+        get { return new TheoryData<Type> { typeof(TFloatingPoint), typeof(TFloatingPoint?), }; }
     }
 
     protected abstract TFloatingPoint Twelve { get; }
@@ -37,10 +30,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "some-value" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "some-value" } };
         var binder = GetBinder();
 
         // Act
@@ -58,9 +48,9 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
         var message = "The value 'not a number' is not valid.";
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "not a number" },
-            };
+        {
+            { "theModelName", "not a number" },
+        };
         var binder = GetBinder();
 
         // Act
@@ -77,14 +67,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_CreatesError_IfAttemptedValueCannotBeCompletelyParsed(Type destinationType)
+    public async Task BindModel_CreatesError_IfAttemptedValueCannotBeCompletelyParsed(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "12_5" }
-            };
+        {
+            { "theModelName", "12_5" }
+        };
         var binder = GetBinder();
 
         // Act
@@ -101,14 +93,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedWhitespace(Type destinationType)
+    public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedWhitespace(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", " 12" }
-            };
+        {
+            { "theModelName", " 12" }
+        };
         var binder = GetBinder(NumberStyles.Float & ~NumberStyles.AllowLeadingWhite);
 
         // Act
@@ -125,14 +119,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedDecimal(Type destinationType)
+    public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedDecimal(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "12.5" }
-            };
+        {
+            { "theModelName", "12.5" }
+        };
         var binder = GetBinder(NumberStyles.Float & ~NumberStyles.AllowDecimalPoint);
 
         // Act
@@ -149,14 +145,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedThousandsSeparator(Type destinationType)
+    public async Task BindModel_CreatesError_IfAttemptedValueContainsDisallowedThousandsSeparator(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "32,000" }
-            };
+        {
+            { "theModelName", "32,000" }
+        };
         var binder = GetBinder(NumberStyles.Float);
 
         // Act
@@ -167,7 +165,11 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
         Assert.Null(bindingContext.Result.Model);
 
         var error = Assert.Single(bindingContext.ModelState["theModelName"].Errors);
-        Assert.Equal("The value '32,000' is not valid.", error.ErrorMessage, StringComparer.Ordinal);
+        Assert.Equal(
+            "The value '32,000' is not valid.",
+            error.ErrorMessage,
+            StringComparer.Ordinal
+        );
         Assert.Null(error.Exception);
     }
 
@@ -190,15 +192,14 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
     [Theory]
     [InlineData("")]
     [InlineData(" \t \r\n ")]
-    public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(string value)
+    public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(
+        string value
+    )
     {
         // Arrange
         var message = $"The value '{value}' is invalid.";
         var bindingContext = GetBindingContext(typeof(TFloatingPoint));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value },
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value }, };
         var binder = GetBinder();
 
         // Act
@@ -216,14 +217,13 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
     [Theory]
     [InlineData("")]
     [InlineData(" \t \r\n ")]
-    public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(string value)
+    public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(
+        string value
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(TFloatingPoint?));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
         var binder = GetBinder();
 
         // Act
@@ -241,10 +241,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12" } };
         var binder = GetBinder();
 
         // Act
@@ -259,14 +256,13 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
     [ReplaceCulture("en-GB", "en-GB")]
-    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_TwelvePointFive(Type destinationType)
+    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_TwelvePointFive(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12.5" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12.5" } };
         var binder = GetBinder();
 
         // Act
@@ -280,14 +276,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_FrenchTwelvePointFive(Type destinationType)
+    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_FrenchTwelvePointFive(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
-            {
-                { "theModelName", "12,5" }
-            };
+        {
+            { "theModelName", "12,5" }
+        };
         var binder = GetBinder();
 
         // Act
@@ -301,14 +299,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_ThirtyTwoThousand(Type destinationType)
+    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_ThirtyTwoThousand(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "32,000" }
-            };
+        {
+            { "theModelName", "32,000" }
+        };
         var binder = GetBinder();
 
         // Act
@@ -322,14 +322,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_ThirtyTwoThousandPointOne(Type destinationType)
+    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_ThirtyTwoThousandPointOne(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "32,000.1" }
-            };
+        {
+            { "theModelName", "32,000.1" }
+        };
         var binder = GetBinder();
 
         // Act
@@ -343,14 +345,16 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_FrenchThirtyTwoThousandPointOne(Type destinationType)
+    public async Task BindModel_ReturnsModel_IfAttemptedValueIsValid_FrenchThirtyTwoThousandPointOne(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
-            {
-                { "theModelName", "32000,1" }
-            };
+        {
+            { "theModelName", "32000,1" }
+        };
         var binder = GetBinder();
 
         // Act

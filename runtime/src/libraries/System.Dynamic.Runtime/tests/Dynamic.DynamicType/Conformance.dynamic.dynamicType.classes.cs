@@ -46,8 +46,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abstract002.abstract002
 {
     // <Title>Classes</Title>
@@ -90,8 +88,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abstract003.abstract003
 {
@@ -150,8 +146,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abstract004.abstract004
 {
     // <Title>Classes</Title>
@@ -195,8 +189,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abstract005.abstract005
 {
     // <Title>Classes</Title>
@@ -239,8 +231,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.virtual001.virtual001
 {
@@ -289,8 +279,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.virtual002.virtual002
 {
     // <Title>Classes</Title>
@@ -338,8 +326,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.virtual003.virtual003
 {
     // <Title>Classes</Title>
@@ -386,8 +372,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.virtual004.virtual004
 {
@@ -445,8 +429,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.virtual005.virtual005
 {
     // <Title>Classes</Title>
@@ -503,8 +485,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.virtual006.virtual006
 {
     // <Title>Classes</Title>
@@ -558,8 +538,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.simplename001.simplename001
 {
     // <Title>Classes - Simple Name (Method) Calling</Title>
@@ -591,8 +569,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.simplename003.simplename003
 {
@@ -679,8 +655,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.simplename004.simplename004
 {
     // <Title>Classes - Simple Name (Method) Calling</Title>
@@ -740,7 +714,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
 
         public class Test
         {
-
             public static void DynamicCSharpRunTest()
             {
                 Assert.Equal(0, MainMethod(null));
@@ -755,8 +728,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.simplename005.simplename005
 {
@@ -888,8 +859,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.memberaccess002.memberaccess002
 {

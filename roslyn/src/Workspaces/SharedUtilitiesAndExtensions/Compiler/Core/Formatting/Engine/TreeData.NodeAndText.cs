@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             private readonly SourceText _text;
 
-            public NodeAndText(SyntaxNode root, SourceText text)
-                : base(root)
+            public NodeAndText(SyntaxNode root, SourceText text) : base(root)
             {
                 Contract.ThrowIfNull(text);
                 _text = text;
@@ -35,13 +34,17 @@ namespace Microsoft.CodeAnalysis.Formatting
                 if (token1.RawKind == 0)
                 {
                     // get leading trivia text
-                    return _text.ToString(TextSpan.FromBounds(token2.FullSpan.Start, token2.SpanStart));
+                    return _text.ToString(
+                        TextSpan.FromBounds(token2.FullSpan.Start, token2.SpanStart)
+                    );
                 }
 
                 if (token2.RawKind == 0)
                 {
                     // get trailing trivia text
-                    return _text.ToString(TextSpan.FromBounds(token1.Span.End, token1.FullSpan.End));
+                    return _text.ToString(
+                        TextSpan.FromBounds(token1.Span.End, token1.FullSpan.End)
+                    );
                 }
 
                 return _text.ToString(TextSpan.FromBounds(token1.Span.End, token2.SpanStart));

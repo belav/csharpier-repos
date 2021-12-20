@@ -10,10 +10,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 internal class RegularExpressionAttributeAdapter : AttributeAdapterBase<RegularExpressionAttribute>
 {
-    public RegularExpressionAttributeAdapter(RegularExpressionAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
-    {
-    }
+    public RegularExpressionAttributeAdapter(
+        RegularExpressionAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    ) : base(attribute, stringLocalizer) { }
 
     public override void AddValidation(ClientModelValidationContext context)
     {
@@ -38,6 +38,7 @@ internal class RegularExpressionAttributeAdapter : AttributeAdapterBase<RegularE
         return GetErrorMessage(
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
-            Attribute.Pattern);
+            Attribute.Pattern
+        );
     }
 }

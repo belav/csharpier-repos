@@ -40,8 +40,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRouting()
-                .Configure<TestHarnessOptions>(Configuration);
+            services.AddRouting().Configure<TestHarnessOptions>(Configuration);
         }
 
         async Task SendNodeVersion(HttpContext context)
@@ -60,26 +59,36 @@ namespace Microsoft.WebAssembly.Diagnostics
             Logger.LogTrace("webserver: hello chrome! json/list");
             try
             {
-                var response = new JArray(JObject.FromObject(new
-                {
-                    description = "node.js instance",
-                    devtoolsFrontendUrl = "chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4",
-                    faviconUrl = "https://nodejs.org/static/favicon.ico",
-                    id = "91d87807-8a81-4f49-878c-a5604103b0a4",
-                    title = "foo.js",
-                    type = "node",
-                    webSocketDebuggerUrl = "ws://localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4"
-                })).ToString();
+                var response = new JArray(
+                    JObject.FromObject(
+                        new
+                        {
+                            description = "node.js instance",
+                            devtoolsFrontendUrl = "chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4",
+                            faviconUrl = "https://nodejs.org/static/favicon.ico",
+                            id = "91d87807-8a81-4f49-878c-a5604103b0a4",
+                            title = "foo.js",
+                            type = "node",
+                            webSocketDebuggerUrl = "ws://localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4"
+                        }
+                    )
+                ).ToString();
 
                 Logger.LogTrace($"webserver: sending: {response}");
                 await context.Response.WriteAsync(response, new CancellationTokenSource().Token);
             }
-            catch (Exception e) { Logger.LogError(e, "webserver: SendNodeList failed"); }
+            catch (Exception e)
+            {
+                Logger.LogError(e, "webserver: SendNodeList failed");
+            }
         }
 
-        public async Task LaunchAndServe(ProcessStartInfo psi, HttpContext context, Func<string, Task<string>> extract_conn_url)
+        public async Task LaunchAndServe(
+            ProcessStartInfo psi,
+            HttpContext context,
+            Func<string, Task<string>> extract_conn_url
+        )
         {
-
             if (!context.WebSockets.IsWebSocketRequest)
             {
                 context.Response.StatusCode = 400;
@@ -146,7 +155,13 @@ namespace Microsoft.WebAssembly.Diagnostics
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IOptionsMonitor<TestHarnessOptions> optionsAccessor, IWebHostEnvironment env, ILogger<TestHarnessProxy> logger, ILoggerFactory loggerFactory)
+        public void Configure(
+            IApplicationBuilder app,
+            IOptionsMonitor<TestHarnessOptions> optionsAccessor,
+            IWebHostEnvironment env,
+            ILogger<TestHarnessProxy> logger,
+            ILoggerFactory loggerFactory
+        )
         {
             this.Logger = logger;
             this._loggerFactory = loggerFactory;
@@ -159,75 +174,95 @@ namespace Microsoft.WebAssembly.Diagnostics
             var provider = new FileExtensionContentTypeProvider();
             provider.Mappings[".wasm"] = "application/wasm";
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(options.AppPath),
-                ServeUnknownFileTypes = true, //Cuz .wasm is not a known file type :cry:
-                RequestPath = "",
-                ContentTypeProvider = provider
-            });
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(options.AppPath),
+                    ServeUnknownFileTypes = true, //Cuz .wasm is not a known file type :cry:
+                    RequestPath = "",
+                    ContentTypeProvider = provider
+                }
+            );
 
             var devToolsUrl = options.DevToolsUrl;
-            app.UseRouter(router =>
-            {
-                router.MapGet("launch-chrome-and-connect", async context =>
+            app.UseRouter(
+                router =>
                 {
-                    Logger.LogInformation("New test request");
-                    try
-                    {
-                        var client = new HttpClient();
-                        var psi = new ProcessStartInfo();
-
-                        psi.Arguments = $"--headless --disable-gpu --lang=en-US --incognito --remote-debugging-port={devToolsUrl.Port} http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}";
-                        psi.UseShellExecute = false;
-                        psi.FileName = options.ChromePath;
-                        psi.RedirectStandardError = true;
-                        psi.RedirectStandardOutput = true;
-
-                        await LaunchAndServe(psi, context, async (str) =>
+                    router.MapGet(
+                        "launch-chrome-and-connect",
+                        async context =>
                         {
-                            var start = DateTime.Now;
-                            JArray obj = null;
-
-                            while (true)
+                            Logger.LogInformation("New test request");
+                            try
                             {
-                                // Unfortunately it does look like we have to wait
-                                // for a bit after getting the response but before
-                                // making the list request.  We get an empty result
-                                // if we make the request too soon.
-                                await Task.Delay(100);
+                                var client = new HttpClient();
+                                var psi = new ProcessStartInfo();
 
-                                var res = await client.GetStringAsync(new Uri(new Uri(str), "/json/list"));
-                                Logger.LogTrace("res is {0}", res);
+                                psi.Arguments =
+                                    $"--headless --disable-gpu --lang=en-US --incognito --remote-debugging-port={devToolsUrl.Port} http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}";
+                                psi.UseShellExecute = false;
+                                psi.FileName = options.ChromePath;
+                                psi.RedirectStandardError = true;
+                                psi.RedirectStandardOutput = true;
 
-                                if (!String.IsNullOrEmpty(res))
-                                {
-                                    // Sometimes we seem to get an empty array `[ ]`
-                                    obj = JArray.Parse(res);
-                                    if (obj != null && obj.Count >= 1)
-                                        break;
-                                }
+                                await LaunchAndServe(
+                                    psi,
+                                    context,
+                                    async (str) =>
+                                    {
+                                        var start = DateTime.Now;
+                                        JArray obj = null;
 
-                                var elapsed = DateTime.Now - start;
-                                if (elapsed.Milliseconds > 5000)
-                                {
-                                    Logger.LogError($"Unable to get DevTools /json/list response in {elapsed.Seconds} seconds, stopping");
-                                    return null;
-                                }
+                                        while (true)
+                                        {
+                                            // Unfortunately it does look like we have to wait
+                                            // for a bit after getting the response but before
+                                            // making the list request.  We get an empty result
+                                            // if we make the request too soon.
+                                            await Task.Delay(100);
+
+                                            var res = await client.GetStringAsync(
+                                                new Uri(new Uri(str), "/json/list")
+                                            );
+                                            Logger.LogTrace("res is {0}", res);
+
+                                            if (!String.IsNullOrEmpty(res))
+                                            {
+                                                // Sometimes we seem to get an empty array `[ ]`
+                                                obj = JArray.Parse(res);
+                                                if (obj != null && obj.Count >= 1)
+                                                    break;
+                                            }
+
+                                            var elapsed = DateTime.Now - start;
+                                            if (elapsed.Milliseconds > 5000)
+                                            {
+                                                Logger.LogError(
+                                                    $"Unable to get DevTools /json/list response in {elapsed.Seconds} seconds, stopping"
+                                                );
+                                                return null;
+                                            }
+                                        }
+
+                                        var wsURl = obj[0]?[
+                                            "webSocketDebuggerUrl"
+                                        ]?.Value<string>();
+                                        Logger.LogTrace(">>> {0}", wsURl);
+
+                                        return wsURl;
+                                    }
+                                );
                             }
-
-                            var wsURl = obj[0]?["webSocketDebuggerUrl"]?.Value<string>();
-                            Logger.LogTrace(">>> {0}", wsURl);
-
-                            return wsURl;
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.LogError($"launch-chrome-and-connect failed with {ex.ToString()}");
-                    }
-                });
-            });
+                            catch (Exception ex)
+                            {
+                                Logger.LogError(
+                                    $"launch-chrome-and-connect failed with {ex.ToString()}"
+                                );
+                            }
+                        }
+                    );
+                }
+            );
 
             if (options.NodeApp != null)
             {
@@ -243,17 +278,22 @@ namespace Microsoft.WebAssembly.Diagnostics
                 psi.Arguments = $"--inspect-brk=localhost:0 {nodeFullPath}";
                 psi.FileName = "node";
 
-                app.UseRouter(router =>
-                {
-                    //Inspector API for using chrome devtools directly
-                    router.MapGet("json", SendNodeList);
-                    router.MapGet("json/list", SendNodeList);
-                    router.MapGet("json/version", SendNodeVersion);
-                    router.MapGet("launch-done-and-connect", async context =>
+                app.UseRouter(
+                    router =>
                     {
-                        await LaunchAndServe(psi, context, null);
-                    });
-                });
+                        //Inspector API for using chrome devtools directly
+                        router.MapGet("json", SendNodeList);
+                        router.MapGet("json/list", SendNodeList);
+                        router.MapGet("json/version", SendNodeVersion);
+                        router.MapGet(
+                            "launch-done-and-connect",
+                            async context =>
+                            {
+                                await LaunchAndServe(psi, context, null);
+                            }
+                        );
+                    }
+                );
             }
         }
     }

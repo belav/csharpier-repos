@@ -6,12 +6,18 @@
 
 namespace System.Diagnostics.CodeAnalysis
 {
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property,
+        Inherited = false
+    )]
     internal sealed class AllowNullAttribute : Attribute
     {
     }
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property,
+        Inherited = false
+    )]
     internal sealed class DisallowNullAttribute : Attribute
     {
     }
@@ -26,15 +32,34 @@ namespace System.Diagnostics.CodeAnalysis
     {
         public DoesNotReturnIfAttribute(bool parameterValue) { }
 
-        public bool ParameterValue { get { throw null!; } }
+        public bool ParameterValue
+        {
+            get { throw null!; }
+        }
     }
 
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Struct, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Event
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Struct,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     internal sealed class ExcludeFromCodeCoverageAttribute : Attribute
     {
     }
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue,
+        Inherited = false
+    )]
     internal sealed class MaybeNullAttribute : Attribute
     {
     }
@@ -44,20 +69,36 @@ namespace System.Diagnostics.CodeAnalysis
     {
         public MaybeNullWhenAttribute(bool returnValue) { }
 
-        public bool ReturnValue { get { throw null!; } }
+        public bool ReturnValue
+        {
+            get { throw null!; }
+        }
     }
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue,
+        Inherited = false
+    )]
     internal sealed class NotNullAttribute : Attribute
     {
     }
 
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     internal sealed class NotNullIfNotNullAttribute : Attribute
     {
         public NotNullIfNotNullAttribute(string parameterName) { }
 
-        public string ParameterName { get { throw null!; } }
+        public string ParameterName
+        {
+            get { throw null!; }
+        }
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
@@ -65,6 +106,9 @@ namespace System.Diagnostics.CodeAnalysis
     {
         public NotNullWhenAttribute(bool returnValue) { }
 
-        public bool ReturnValue { get { throw null!; } }
+        public bool ReturnValue
+        {
+            get { throw null!; }
+        }
     }
 }

@@ -14,10 +14,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         public readonly object Value;
 
-        public PiiValue(object value)
-            => Value = value;
+        public PiiValue(object value) => Value = value;
 
-        public override string? ToString()
-            => Value.ToString();
+        public override string? ToString() => Value.ToString();
     }
 }

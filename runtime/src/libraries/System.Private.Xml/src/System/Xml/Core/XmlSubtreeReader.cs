@@ -10,7 +10,10 @@ using System.Collections.Generic;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlSubtreeReader : XmlWrappingReader, IXmlLineInfo, IXmlNamespaceResolver
+    internal sealed partial class XmlSubtreeReader
+        : XmlWrappingReader,
+          IXmlLineInfo,
+          IXmlNamespaceResolver
     {
         //
         // Private types
@@ -24,7 +27,14 @@ namespace System.Xml
             internal string namespaceUri;
             internal string value;
 
-            internal NodeData(XmlNodeType nodeType, string localName, string prefix, string name, string namespaceUri, string value)
+            internal NodeData(
+                XmlNodeType nodeType,
+                string localName,
+                string prefix,
+                string name,
+                string namespaceUri,
+                string value
+            )
             {
                 this.type = nodeType;
                 this.localName = localName;
@@ -34,7 +44,14 @@ namespace System.Xml
                 this.value = value;
             }
 
-            internal void Set(XmlNodeType nodeType, string localName, string prefix, string name, string namespaceUri, string value)
+            internal void Set(
+                XmlNodeType nodeType,
+                string localName,
+                string prefix,
+                string name,
+                string namespaceUri,
+                string value
+            )
             {
                 this.type = nodeType;
                 this.localName = localName;
@@ -104,7 +121,14 @@ namespace System.Xml
             _xmlns = reader.NameTable.Add("xmlns");
             _xmlnsUri = reader.NameTable.Add(XmlReservedNs.NsXmlNs);
 
-            _tmpNode = new NodeData(XmlNodeType.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+            _tmpNode = new NodeData(
+                XmlNodeType.None,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty
+            );
 
             SetCurrentNode(_tmpNode);
         }
@@ -114,50 +138,32 @@ namespace System.Xml
         //
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return _useCurNode ? _curNode.type : reader.NodeType;
-            }
+            get { return _useCurNode ? _curNode.type : reader.NodeType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _useCurNode ? _curNode.name : reader.Name;
-            }
+            get { return _useCurNode ? _curNode.name : reader.Name; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return _useCurNode ? _curNode.localName : reader.LocalName;
-            }
+            get { return _useCurNode ? _curNode.localName : reader.LocalName; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return _useCurNode ? _curNode.namespaceUri : reader.NamespaceURI;
-            }
+            get { return _useCurNode ? _curNode.namespaceUri : reader.NamespaceURI; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return _useCurNode ? _curNode.prefix : reader.Prefix;
-            }
+            get { return _useCurNode ? _curNode.prefix : reader.Prefix; }
         }
 
         public override string Value
         {
-            get
-            {
-                return _useCurNode ? _curNode.value : reader.Value;
-            }
+            get { return _useCurNode ? _curNode.value : reader.Value; }
         }
 
         public override int Depth
@@ -182,26 +188,17 @@ namespace System.Xml
 
         public override string BaseURI
         {
-            get
-            {
-                return reader.BaseURI;
-            }
+            get { return reader.BaseURI; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return reader.IsEmptyElement;
-            }
+            get { return reader.IsEmptyElement; }
         }
 
         public override bool EOF
         {
-            get
-            {
-                return _state == State.EndOfFile || _state == State.Closed;
-            }
+            get { return _state == State.EndOfFile || _state == State.Closed; }
         }
 
         public override ReadState ReadState
@@ -228,18 +225,12 @@ namespace System.Xml
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return reader.NameTable;
-            }
+            get { return reader.NameTable; }
         }
 
         public override int AttributeCount
         {
-            get
-            {
-                return InAttributeActiveState ? reader.AttributeCount + _nsAttrCount : 0;
-            }
+            get { return InAttributeActiveState ? reader.AttributeCount + _nsAttrCount : 0; }
         }
 
         public override string? GetAttribute(string name)
@@ -479,14 +470,18 @@ namespace System.Xml
                     Debug.Assert(reader.Depth >= _initialDepth);
                     if (reader.Depth == _initialDepth)
                     {
-                        if (reader.NodeType == XmlNodeType.EndElement ||
-                            (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement))
+                        if (
+                            reader.NodeType == XmlNodeType.EndElement
+                            || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement)
+                        )
                         {
                             _state = State.EndOfFile;
                             SetEmptyNode();
                             return false;
                         }
-                        Debug.Assert(reader.NodeType == XmlNodeType.Element && !reader.IsEmptyElement);
+                        Debug.Assert(
+                            reader.NodeType == XmlNodeType.Element && !reader.IsEmptyElement
+                        );
                     }
                     if (reader.Read())
                     {
@@ -549,7 +544,11 @@ namespace System.Xml
                     reader.MoveToElement();
                     Debug.Assert(reader.Depth >= _initialDepth);
                     // move off the root of the subtree
-                    if (reader.Depth == _initialDepth && reader.NodeType == XmlNodeType.Element && !reader.IsEmptyElement)
+                    if (
+                        reader.Depth == _initialDepth
+                        && reader.NodeType == XmlNodeType.Element
+                        && !reader.IsEmptyElement
+                    )
                     {
                         reader.Read();
                     }
@@ -592,15 +591,20 @@ namespace System.Xml
                             // we are on root of the subtree -> skip to the end element and set to Eof state
                             if (reader.Read())
                             {
-                                while (reader.NodeType != XmlNodeType.EndElement && reader.Depth > _initialDepth)
+                                while (
+                                    reader.NodeType != XmlNodeType.EndElement
+                                    && reader.Depth > _initialDepth
+                                )
                                 {
                                     reader.Skip();
                                 }
                             }
                         }
-                        Debug.Assert(reader.NodeType == XmlNodeType.EndElement ||
-                                      reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement ||
-                                      reader.ReadState != ReadState.Interactive);
+                        Debug.Assert(
+                            reader.NodeType == XmlNodeType.EndElement
+                                || reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement
+                                || reader.ReadState != ReadState.Interactive
+                        );
                         _state = State.EndOfFile;
                         SetEmptyNode();
                         return;
@@ -798,7 +802,10 @@ namespace System.Xml
             }
         }
 
-        public override object ReadContentAs(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public override object ReadContentAs(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             try
             {
@@ -816,10 +823,7 @@ namespace System.Xml
 
         public override bool CanReadBinaryContent
         {
-            get
-            {
-                return reader.CanReadBinaryContent;
-            }
+            get { return reader.CanReadBinaryContent; }
         }
 
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
@@ -867,7 +871,11 @@ namespace System.Xml
 
                                 Debug.Assert(_binDecoder != null);
                                 _binDecoder.SetNextOutputBuffer(buffer, index, count);
-                                _nsIncReadOffset += _binDecoder.Decode(_curNode.value, _nsIncReadOffset, _curNode.value.Length - _nsIncReadOffset);
+                                _nsIncReadOffset += _binDecoder.Decode(
+                                    _curNode.value,
+                                    _nsIncReadOffset,
+                                    _curNode.value.Length - _nsIncReadOffset
+                                );
                                 return _binDecoder.DecodedCount;
                             }
                             goto case XmlNodeType.Text;
@@ -930,7 +938,11 @@ namespace System.Xml
                     }
                     if (NodeType != XmlNodeType.EndElement)
                     {
-                        throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                        throw new XmlException(
+                            SR.Xml_InvalidNodeType,
+                            reader.NodeType.ToString(),
+                            reader as IXmlLineInfo
+                        );
                     }
 
                     // pop namespace scope
@@ -1005,7 +1017,11 @@ namespace System.Xml
 
                                 Debug.Assert(_binDecoder != null);
                                 _binDecoder.SetNextOutputBuffer(buffer, index, count);
-                                _nsIncReadOffset += _binDecoder.Decode(_curNode.value, _nsIncReadOffset, _curNode.value.Length - _nsIncReadOffset);
+                                _nsIncReadOffset += _binDecoder.Decode(
+                                    _curNode.value,
+                                    _nsIncReadOffset,
+                                    _curNode.value.Length - _nsIncReadOffset
+                                );
                                 return _binDecoder.DecodedCount;
                             }
                             goto case XmlNodeType.Text;
@@ -1067,7 +1083,11 @@ namespace System.Xml
                     }
                     if (NodeType != XmlNodeType.EndElement)
                     {
-                        throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                        throw new XmlException(
+                            SR.Xml_InvalidNodeType,
+                            reader.NodeType.ToString(),
+                            reader as IXmlLineInfo
+                        );
                     }
 
                     // pop namespace scope
@@ -1099,10 +1119,7 @@ namespace System.Xml
 
         public override bool CanReadValueChunk
         {
-            get
-            {
-                return reader.CanReadValueChunk;
-            }
+            get { return reader.CanReadValueChunk; }
         }
 
         public override int ReadValueChunk(char[] buffer, int index, int count)
@@ -1211,7 +1228,9 @@ namespace System.Xml
         //
         // IXmlNamespaceResolver implementation
         //
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             if (!InNamespaceActiveState)
             {
@@ -1331,14 +1350,32 @@ namespace System.Xml
 
             if (_nsAttributes[index] == null)
             {
-                _nsAttributes[index] = new NodeData(XmlNodeType.Attribute, localName, attrPrefix, name, _xmlnsUri, ns);
+                _nsAttributes[index] = new NodeData(
+                    XmlNodeType.Attribute,
+                    localName,
+                    attrPrefix,
+                    name,
+                    _xmlnsUri,
+                    ns
+                );
             }
             else
             {
-                _nsAttributes[index].Set(XmlNodeType.Attribute, localName, attrPrefix, name, _xmlnsUri, ns);
+                _nsAttributes[index].Set(
+                    XmlNodeType.Attribute,
+                    localName,
+                    attrPrefix,
+                    name,
+                    _xmlnsUri,
+                    ns
+                );
             }
 
-            Debug.Assert(_state == State.ClearNsAttributes || _state == State.Interactive || _state == State.PopNamespaceScope);
+            Debug.Assert(
+                _state == State.ClearNsAttributes
+                    || _state == State.Interactive
+                    || _state == State.PopNamespaceScope
+            );
             _state = State.ClearNsAttributes;
 
             _curNsAttr = -1;
@@ -1348,8 +1385,10 @@ namespace System.Xml
         {
             for (int i = 0; i < _nsAttrCount; i++)
             {
-                if (Ref.Equal(prefix, _nsAttributes![i].prefix) &&
-                    Ref.Equal(localName, _nsAttributes[i].localName))
+                if (
+                    Ref.Equal(prefix, _nsAttributes![i].prefix)
+                    && Ref.Equal(localName, _nsAttributes[i].localName)
+                )
                 {
                     if (i < _nsAttrCount - 1)
                     {
@@ -1377,7 +1416,9 @@ namespace System.Xml
         {
             if (NodeType != XmlNodeType.Element)
             {
-                throw reader.CreateReadElementContentAsException(nameof(ReadElementContentAsBase64));
+                throw reader.CreateReadElementContentAsException(
+                    nameof(ReadElementContentAsBase64)
+                );
             }
 
             bool isEmpty = IsEmptyElement;
@@ -1391,7 +1432,11 @@ namespace System.Xml
             switch (NodeType)
             {
                 case XmlNodeType.Element:
-                    throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_InvalidNodeType,
+                        reader.NodeType.ToString(),
+                        reader as IXmlLineInfo
+                    );
                 case XmlNodeType.EndElement:
                     // pop scope & move off end element
                     ProcessNamespaces();
@@ -1406,21 +1451,30 @@ namespace System.Xml
 
         private bool FinishReadElementContentAsBinary()
         {
-            Debug.Assert(_state == State.ReadElementContentAsBase64 || _state == State.ReadElementContentAsBinHex);
+            Debug.Assert(
+                _state == State.ReadElementContentAsBase64
+                    || _state == State.ReadElementContentAsBinHex
+            );
 
             byte[] bytes = new byte[256];
             if (_state == State.ReadElementContentAsBase64)
             {
-                while (reader.ReadContentAsBase64(bytes, 0, 256) > 0) ;
+                while (reader.ReadContentAsBase64(bytes, 0, 256) > 0)
+                    ;
             }
             else
             {
-                while (reader.ReadContentAsBinHex(bytes, 0, 256) > 0) ;
+                while (reader.ReadContentAsBinHex(bytes, 0, 256) > 0)
+                    ;
             }
 
             if (NodeType != XmlNodeType.EndElement)
             {
-                throw new XmlException(SR.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_InvalidNodeType,
+                    reader.NodeType.ToString(),
+                    reader as IXmlLineInfo
+                );
             }
 
             // pop namespace scope
@@ -1440,16 +1494,20 @@ namespace System.Xml
 
         private bool FinishReadContentAsBinary()
         {
-            Debug.Assert(_state == State.ReadContentAsBase64 || _state == State.ReadContentAsBinHex);
+            Debug.Assert(
+                _state == State.ReadContentAsBase64 || _state == State.ReadContentAsBinHex
+            );
 
             byte[] bytes = new byte[256];
             if (_state == State.ReadContentAsBase64)
             {
-                while (reader.ReadContentAsBase64(bytes, 0, 256) > 0) ;
+                while (reader.ReadContentAsBase64(bytes, 0, 256) > 0)
+                    ;
             }
             else
             {
-                while (reader.ReadContentAsBinHex(bytes, 0, 256) > 0) ;
+                while (reader.ReadContentAsBinHex(bytes, 0, 256) > 0)
+                    ;
             }
 
             _state = State.Interactive;
@@ -1477,8 +1535,12 @@ namespace System.Xml
                 Debug.Assert(0 == (AttributeActiveStates & (1 << (int)State.Closed)));
                 Debug.Assert(0 != (AttributeActiveStates & (1 << (int)State.PopNamespaceScope)));
                 Debug.Assert(0 != (AttributeActiveStates & (1 << (int)State.ClearNsAttributes)));
-                Debug.Assert(0 == (AttributeActiveStates & (1 << (int)State.ReadElementContentAsBase64)));
-                Debug.Assert(0 == (AttributeActiveStates & (1 << (int)State.ReadElementContentAsBinHex)));
+                Debug.Assert(
+                    0 == (AttributeActiveStates & (1 << (int)State.ReadElementContentAsBase64))
+                );
+                Debug.Assert(
+                    0 == (AttributeActiveStates & (1 << (int)State.ReadElementContentAsBinHex))
+                );
                 Debug.Assert(0 == (AttributeActiveStates & (1 << (int)State.ReadContentAsBase64)));
                 Debug.Assert(0 == (AttributeActiveStates & (1 << (int)State.ReadContentAsBinHex)));
 #endif
@@ -1498,8 +1560,12 @@ namespace System.Xml
                 Debug.Assert(0 == (NamespaceActiveStates & (1 << (int)State.Closed)));
                 Debug.Assert(0 != (NamespaceActiveStates & (1 << (int)State.PopNamespaceScope)));
                 Debug.Assert(0 != (NamespaceActiveStates & (1 << (int)State.ClearNsAttributes)));
-                Debug.Assert(0 != (NamespaceActiveStates & (1 << (int)State.ReadElementContentAsBase64)));
-                Debug.Assert(0 != (NamespaceActiveStates & (1 << (int)State.ReadElementContentAsBinHex)));
+                Debug.Assert(
+                    0 != (NamespaceActiveStates & (1 << (int)State.ReadElementContentAsBase64))
+                );
+                Debug.Assert(
+                    0 != (NamespaceActiveStates & (1 << (int)State.ReadElementContentAsBinHex))
+                );
                 Debug.Assert(0 != (NamespaceActiveStates & (1 << (int)State.ReadContentAsBase64)));
                 Debug.Assert(0 != (NamespaceActiveStates & (1 << (int)State.ReadContentAsBinHex)));
 #endif
@@ -1509,7 +1575,12 @@ namespace System.Xml
 
         private void SetEmptyNode()
         {
-            Debug.Assert(_tmpNode.localName == string.Empty && _tmpNode.prefix == string.Empty && _tmpNode.name == string.Empty && _tmpNode.namespaceUri == string.Empty);
+            Debug.Assert(
+                _tmpNode.localName == string.Empty
+                    && _tmpNode.prefix == string.Empty
+                    && _tmpNode.name == string.Empty
+                    && _tmpNode.namespaceUri == string.Empty
+            );
             _tmpNode.type = XmlNodeType.None;
             _tmpNode.value = string.Empty;
 
@@ -1560,9 +1631,11 @@ namespace System.Xml
 
         private void FinishReadContentAsType()
         {
-            Debug.Assert(_state == State.Interactive ||
-                          _state == State.PopNamespaceScope ||
-                          _state == State.ClearNsAttributes);
+            Debug.Assert(
+                _state == State.Interactive
+                    || _state == State.PopNamespaceScope
+                    || _state == State.ClearNsAttributes
+            );
 
             switch (NodeType)
             {

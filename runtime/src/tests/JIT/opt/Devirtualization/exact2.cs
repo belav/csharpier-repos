@@ -17,7 +17,6 @@ class D<T> : B
 
 class E : D<string>
 {
-
 }
 
 class G<T> : E

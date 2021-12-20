@@ -17,22 +17,18 @@ namespace Microsoft.Interop
             /// Invalid stage
             /// </summary>
             Invalid,
-
             /// <summary>
             /// Perform any setup required
             /// </summary>
             Setup,
-
             /// <summary>
             /// Convert managed data to native data
             /// </summary>
             Marshal,
-
             /// <summary>
             /// Pin data in preparation for calling the generated P/Invoke
             /// </summary>
             Pin,
-
             /// <summary>
             /// Call the generated P/Invoke
             /// </summary>
@@ -41,22 +37,18 @@ namespace Microsoft.Interop
             /// argument to pass to the P/Invoke
             /// </remarks>
             Invoke,
-
             /// <summary>
             /// Convert native data to managed data
             /// </summary>
             Unmarshal,
-
             /// <summary>
             /// Perform any cleanup required
             /// </summary>
             Cleanup,
-
             /// <summary>
             /// Keep alive any managed objects that need to stay alive across the call.
             /// </summary>
             KeepAlive,
-
             /// <summary>
             /// Convert native data to managed data even in the case of an exception during
             /// the non-cleanup phases.
@@ -100,7 +92,10 @@ namespace Microsoft.Interop
         /// <returns>Managed and native identifiers</returns>
         public virtual (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {
-            return (info.InstanceIdentifier, $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}");
+            return (
+                info.InstanceIdentifier,
+                $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}"
+            );
         }
 
         public virtual string GetAdditionalIdentifier(TypePositionInfo info, string name)

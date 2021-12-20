@@ -80,7 +80,10 @@ namespace Newtonsoft.Json.Tests.Converters
             string result;
 
             result = JsonConvert.SerializeObject(t, converter);
-            Assert.AreEqual(@"{""PreField"":null,""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":null}", result);
+            Assert.AreEqual(
+                @"{""PreField"":null,""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":null}",
+                result
+            );
 
             t = new NullableDateTimeTestClass()
             {
@@ -89,17 +92,25 @@ namespace Newtonsoft.Json.Tests.Converters
             };
 
             result = JsonConvert.SerializeObject(t, converter);
-            Assert.AreEqual(@"{""PreField"":null,""DateTimeField"":new Date(976918263055),""DateTimeOffsetField"":new Date(976918263055),""PostField"":null}", result);
+            Assert.AreEqual(
+                @"{""PreField"":null,""DateTimeField"":new Date(976918263055),""DateTimeOffsetField"":new Date(976918263055),""PostField"":null}",
+                result
+            );
         }
 
         [Test]
         public void DeserializeNullToNonNullable()
         {
-            ExceptionAssert.Throws<Exception>(() =>
-            {
-                DateTimeTestClass c2 =
-                    JsonConvert.DeserializeObject<DateTimeTestClass>(@"{""PreField"":""Pre"",""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":""Post""}", new JavaScriptDateTimeConverter());
-            }, "Cannot convert null value to System.DateTime. Path 'DateTimeField', line 1, position 38.");
+            ExceptionAssert.Throws<Exception>(
+                () =>
+                {
+                    DateTimeTestClass c2 = JsonConvert.DeserializeObject<DateTimeTestClass>(
+                        @"{""PreField"":""Pre"",""DateTimeField"":null,""DateTimeOffsetField"":null,""PostField"":""Post""}",
+                        new JavaScriptDateTimeConverter()
+                    );
+                },
+                "Cannot convert null value to System.DateTime. Path 'DateTimeField', line 1, position 38."
+            );
         }
 
         [Test]
@@ -120,7 +131,10 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JavaScriptDateTimeConverter converter = new JavaScriptDateTimeConverter();
 
-            DateTime result = JsonConvert.DeserializeObject<DateTime>("new Date(976918263055)", converter);
+            DateTime result = JsonConvert.DeserializeObject<DateTime>(
+                "new Date(976918263055)",
+                converter
+            );
             Assert.AreEqual(new DateTime(2000, 12, 15, 22, 11, 3, 55, DateTimeKind.Utc), result);
         }
 
@@ -137,19 +151,34 @@ namespace Newtonsoft.Json.Tests.Converters
             result = JsonConvert.DeserializeObject<DateTime>("new Date(2000, 11, 12)", converter);
             Assert.AreEqual(new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Utc), result);
 
-            result = JsonConvert.DeserializeObject<DateTime>("new Date(2000, 11, 12, 20)", converter);
+            result = JsonConvert.DeserializeObject<DateTime>(
+                "new Date(2000, 11, 12, 20)",
+                converter
+            );
             Assert.AreEqual(new DateTime(2000, 12, 12, 20, 0, 0, 0, DateTimeKind.Utc), result);
 
-            result = JsonConvert.DeserializeObject<DateTime>("new Date(2000, 11, 12, 20, 1)", converter);
+            result = JsonConvert.DeserializeObject<DateTime>(
+                "new Date(2000, 11, 12, 20, 1)",
+                converter
+            );
             Assert.AreEqual(new DateTime(2000, 12, 12, 20, 1, 0, 0, DateTimeKind.Utc), result);
 
-            result = JsonConvert.DeserializeObject<DateTime>("new Date(2000, 11, 12, 20, 1, 2)", converter);
+            result = JsonConvert.DeserializeObject<DateTime>(
+                "new Date(2000, 11, 12, 20, 1, 2)",
+                converter
+            );
             Assert.AreEqual(new DateTime(2000, 12, 12, 20, 1, 2, 0, DateTimeKind.Utc), result);
 
-            result = JsonConvert.DeserializeObject<DateTime>("new Date(2000, 11, 12, 20, 1, 2, 3)", converter);
+            result = JsonConvert.DeserializeObject<DateTime>(
+                "new Date(2000, 11, 12, 20, 1, 2, 3)",
+                converter
+            );
             Assert.AreEqual(new DateTime(2000, 12, 12, 20, 1, 2, 3, DateTimeKind.Utc), result);
 
-            result = JsonConvert.DeserializeObject<DateTime>("new Date(2000, 11, 1, 0, 0, 0, 0)", converter);
+            result = JsonConvert.DeserializeObject<DateTime>(
+                "new Date(2000, 11, 1, 0, 0, 0, 0)",
+                converter
+            );
             Assert.AreEqual(new DateTime(2000, 12, 1, 0, 0, 0, 0, DateTimeKind.Utc), result);
         }
 
@@ -158,10 +187,16 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JavaScriptDateTimeConverter converter = new JavaScriptDateTimeConverter();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<DateTime>("new Date(1, 2, 3, 4, 5, 6, 7, 8)", converter);
-            }, "Unexpected number of arguments when reading date constructor. Path '', line 1, position 32.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<DateTime>(
+                        "new Date(1, 2, 3, 4, 5, 6, 7, 8)",
+                        converter
+                    );
+                },
+                "Unexpected number of arguments when reading date constructor. Path '', line 1, position 32."
+            );
         }
 
         [Test]
@@ -169,10 +204,13 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JavaScriptDateTimeConverter converter = new JavaScriptDateTimeConverter();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<DateTime>("new Date()", converter);
-            }, "Date constructor has no arguments. Path '', line 1, position 10.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<DateTime>("new Date()", converter);
+                },
+                "Date constructor has no arguments. Path '', line 1, position 10."
+            );
         }
 
         [Test]
@@ -180,10 +218,13 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JavaScriptDateTimeConverter converter = new JavaScriptDateTimeConverter();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<DateTime>("new Date(", converter);
-            }, "Unexpected end when reading date constructor. Path '', line 1, position 9.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<DateTime>("new Date(", converter);
+                },
+                "Unexpected end when reading date constructor. Path '', line 1, position 9."
+            );
         }
 
         [Test]
@@ -191,10 +232,13 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JavaScriptDateTimeConverter converter = new JavaScriptDateTimeConverter();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<DateTime>("new Date(2, 3", converter);
-            }, "Unexpected end when reading date constructor. Path '[1]', line 1, position 13.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<DateTime>("new Date(2, 3", converter);
+                },
+                "Unexpected end when reading date constructor. Path '[1]', line 1, position 13."
+            );
         }
 
         [Test]
@@ -205,14 +249,17 @@ namespace Newtonsoft.Json.Tests.Converters
             l1.Add(new DateTime(1983, 10, 9, 23, 10, 0, DateTimeKind.Utc));
 
             string json = JsonConvert.SerializeObject(l1, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   new Date(
     976651800000
   ),
   new Date(
     434589000000
   )
-]", json);
+]",
+                json
+            );
 
             ConverterList<object> l2 = JsonConvert.DeserializeObject<ConverterList<object>>(json);
             Assert.IsNotNull(l2);
@@ -229,16 +276,21 @@ namespace Newtonsoft.Json.Tests.Converters
             l1.Add("Second", new DateTime(1983, 10, 9, 23, 10, 0, DateTimeKind.Utc));
 
             string json = JsonConvert.SerializeObject(l1, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""First"": new Date(
     976651800000
   ),
   ""Second"": new Date(
     434589000000
   )
-}", json);
+}",
+                json
+            );
 
-            ConverterDictionary<object> l2 = JsonConvert.DeserializeObject<ConverterDictionary<object>>(json);
+            ConverterDictionary<object> l2 = JsonConvert.DeserializeObject<
+                ConverterDictionary<object>
+            >(json);
             Assert.IsNotNull(l2);
 
             Assert.AreEqual(new DateTime(2000, 12, 12, 20, 10, 0, DateTimeKind.Utc), l2["First"]);
@@ -254,17 +306,19 @@ namespace Newtonsoft.Json.Tests.Converters
             l1.ObjectNotHandled = new DateTime(2000, 12, 12, 20, 10, 0, DateTimeKind.Utc);
 
             string json = JsonConvert.SerializeObject(l1, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Object1"": new Date(
     976651800000
   ),
   ""Object2"": null,
   ""ObjectNotHandled"": 631122486000000000
-}", json);
+}",
+                json
+            );
 
             ConverterObject l2 = JsonConvert.DeserializeObject<ConverterObject>(json);
             Assert.IsNotNull(l2);
-
             //Assert.AreEqual(new DateTime(2000, 12, 12, 20, 10, 0, DateTimeKind.Utc), l2["First"]);
             //Assert.AreEqual(new DateTime(1983, 10, 9, 23, 10, 0, DateTimeKind.Utc), l2["Second"]);
         }
@@ -305,7 +359,12 @@ namespace Newtonsoft.Json.Tests.Converters
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             return new DateTime(Convert.ToInt64(reader.Value), DateTimeKind.Utc);
         }

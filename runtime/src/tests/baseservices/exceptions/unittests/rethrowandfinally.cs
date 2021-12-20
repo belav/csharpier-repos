@@ -26,7 +26,7 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new RethrowAndFinallysTest().Run(),        ref nSuccesses, ref nFailures);
+        CountResults(new RethrowAndFinallysTest().Run(), ref nSuccesses, ref nFailures);
 
         if (0 == nFailures)
         {
@@ -44,23 +44,23 @@ public class TestSet
 public class RethrowAndFinallysTest
 {
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("RethrowAndFinallysTest", "abcdefF3ED2CB1A[done]");
-        try 
+        try
         {
             _trace.Write("a");
             try
             {
                 _trace.Write("b");
-                try 
+                try
                 {
                     _trace.Write("c");
                     try
                     {
                         _trace.Write("d");
-                        try 
+                        try
                         {
                             _trace.Write("e");
                             try
@@ -73,7 +73,7 @@ public class RethrowAndFinallysTest
                                 _trace.Write("F");
                             }
                         }
-                        catch(Exception e) 
+                        catch (Exception e)
                         {
                             Console.WriteLine(e);
                             _trace.Write("3");
@@ -89,7 +89,7 @@ public class RethrowAndFinallysTest
                         _trace.Write("D");
                     }
                 }
-                catch(Exception e) 
+                catch (Exception e)
                 {
                     Console.WriteLine(e);
                     _trace.Write("2");
@@ -105,7 +105,7 @@ public class RethrowAndFinallysTest
                 _trace.Write("B");
             }
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("1");
@@ -120,5 +120,3 @@ public class RethrowAndFinallysTest
         return _trace.Match();
     }
 }
-
-

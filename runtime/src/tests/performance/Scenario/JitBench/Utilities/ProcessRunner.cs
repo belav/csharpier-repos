@@ -72,29 +72,53 @@ namespace JitBench
                 _killReason = null;
                 _waitForProcessStartTaskSource = new TaskCompletionSource<Process>();
                 Task<Process> startTask = _waitForProcessStartTaskSource.Task;
-                
+
                 // unfortunately we can't use the default Process stream reading because it only returns full lines and we have scenarios
                 // that need to receive the output before the newline character is written
-                _readStdOutTask = startTask.ContinueWith(t =>
-                {
-                    ReadStreamToLoggers(_p.StandardOutput, ProcessStream.StandardOut, _cancelSource.Token);
-                }, 
-                _cancelSource.Token, TaskContinuationOptions.LongRunning, TaskScheduler.Default);
+                _readStdOutTask = startTask.ContinueWith(
+                    t =>
+                    {
+                        ReadStreamToLoggers(
+                            _p.StandardOutput,
+                            ProcessStream.StandardOut,
+                            _cancelSource.Token
+                        );
+                    },
+                    _cancelSource.Token,
+                    TaskContinuationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
 
-                _readStdErrTask = startTask.ContinueWith(t =>
-                {
-                    ReadStreamToLoggers(_p.StandardError, ProcessStream.StandardError, _cancelSource.Token);
-                }, 
-                _cancelSource.Token, TaskContinuationOptions.LongRunning, TaskScheduler.Default);
+                _readStdErrTask = startTask.ContinueWith(
+                    t =>
+                    {
+                        ReadStreamToLoggers(
+                            _p.StandardError,
+                            ProcessStream.StandardError,
+                            _cancelSource.Token
+                        );
+                    },
+                    _cancelSource.Token,
+                    TaskContinuationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
 
-                _timeoutProcessTask = startTask.ContinueWith(t =>
-                {
-                    Task.Delay(_timeout, _cancelSource.Token).ContinueWith(t2 => Kill(KillReason.TimedOut), TaskContinuationOptions.NotOnCanceled);
-                },
-                _cancelSource.Token, TaskContinuationOptions.LongRunning, TaskScheduler.Default);
+                _timeoutProcessTask = startTask.ContinueWith(
+                    t =>
+                    {
+                        Task.Delay(_timeout, _cancelSource.Token)
+                            .ContinueWith(
+                                t2 => Kill(KillReason.TimedOut),
+                                TaskContinuationOptions.NotOnCanceled
+                            );
+                    },
+                    _cancelSource.Token,
+                    TaskContinuationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
 
                 _waitForExitTask = InternalWaitForExit(startTask, _readStdOutTask, _readStdErrTask);
-                
+
                 if (replayCommand == null)
                 {
                     _replayCommand = ExePath + " " + Arguments;
@@ -105,10 +129,16 @@ namespace JitBench
                 }
             }
         }
-        
+
         public string ReplayCommand
         {
-            get { lock (_lock) { return _replayCommand; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _replayCommand;
+                }
+            }
         }
 
         public ProcessRunner WithEnvironmentVariable(string key, string value)
@@ -120,16 +150,16 @@ namespace JitBench
             return this;
         }
 
-        public ProcessRunner WithEnvironment(IDictionary<string,string> environmentVariables)
+        public ProcessRunner WithEnvironment(IDictionary<string, string> environmentVariables)
         {
             lock (_lock)
             {
-                if(environmentVariables != null)
+                if (environmentVariables != null)
                 {
                     foreach (KeyValuePair<string, string> kv in environmentVariables)
                     {
                         _p.StartInfo.Environment[kv.Key] = kv.Value;
-                    }    
+                    }
                 }
             }
             return this;
@@ -173,7 +203,13 @@ namespace JitBench
 
         public IProcessLogger[] Loggers
         {
-            get { lock (_lock) { return _loggers.ToArray(); } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _loggers.ToArray();
+                }
+            }
         }
 
         public ProcessRunner WithTimeout(TimeSpan timeout)
@@ -196,42 +232,90 @@ namespace JitBench
 
         public string ExePath
         {
-            get { lock (_lock) { return _p.StartInfo.FileName; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _p.StartInfo.FileName;
+                }
+            }
         }
 
         public string Arguments
         {
-            get { lock (_lock) { return _p.StartInfo.Arguments; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _p.StartInfo.Arguments;
+                }
+            }
         }
 
         public string WorkingDirectory
         {
-            get { lock (_lock) { return _p.StartInfo.WorkingDirectory; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _p.StartInfo.WorkingDirectory;
+                }
+            }
         }
 
         public int ProcessId
         {
-            get { lock (_lock) { return _p.Id; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _p.Id;
+                }
+            }
         }
 
-        public Dictionary<string,string> EnvironmentVariables
+        public Dictionary<string, string> EnvironmentVariables
         {
-            get { lock (_lock) { return new Dictionary<string, string>(_p.StartInfo.Environment); } }
+            get
+            {
+                lock (_lock)
+                {
+                    return new Dictionary<string, string>(_p.StartInfo.Environment);
+                }
+            }
         }
 
         public bool IsStarted
         {
-            get { lock (_lock) { return _waitForProcessStartTaskSource.Task.IsCompleted; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _waitForProcessStartTaskSource.Task.IsCompleted;
+                }
+            }
         }
 
         public DateTime StartTime
         {
-            get { lock (_lock) { return _startTime; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _startTime;
+                }
+            }
         }
 
         public int ExitCode
         {
-            get { lock (_lock) { return _p.ExitCode; } }
+            get
+            {
+                lock (_lock)
+                {
+                    return _p.ExitCode;
+                }
+            }
         }
 
         public void StandardInputWriteLine(string line)
@@ -298,7 +382,11 @@ namespace JitBench
             return this;
         }
 
-        private void ReadStreamToLoggers(StreamReader reader, ProcessStream stream, CancellationToken cancelToken)
+        private void ReadStreamToLoggers(
+            StreamReader reader,
+            ProcessStream stream,
+            CancellationToken cancelToken
+        )
         {
             IProcessLogger[] loggers = Loggers;
 
@@ -354,8 +442,7 @@ namespace JitBench
                         }
                     }
                 }
-            }
-            while (!reader.EndOfStream && !cancelToken.IsCancellationRequested);
+            } while (!reader.EndOfStream && !cancelToken.IsCancellationRequested);
         }
 
         public void Kill(KillReason reason = KillReason.Unknown)
@@ -400,19 +487,25 @@ namespace JitBench
             }
         }
 
-        private async Task<int> InternalWaitForExit(Task<Process> startProcessTask, Task stdOutTask, Task stdErrTask)
+        private async Task<int> InternalWaitForExit(
+            Task<Process> startProcessTask,
+            Task stdOutTask,
+            Task stdErrTask
+        )
         {
             DebugTrace("starting InternalWaitForExit");
             Process p = await startProcessTask;
             DebugTrace("InternalWaitForExit {0} '{1}'", p.Id, _replayCommand);
 
-            Task processExit = Task.Factory.StartNew(() =>
-            {
-                DebugTrace("starting Process.WaitForExit {0}", p.Id);
-                p.WaitForExit();
-                DebugTrace("ending Process.WaitForExit {0}", p.Id);
-            },
-            TaskCreationOptions.LongRunning);
+            Task processExit = Task.Factory.StartNew(
+                () =>
+                {
+                    DebugTrace("starting Process.WaitForExit {0}", p.Id);
+                    p.WaitForExit();
+                    DebugTrace("ending Process.WaitForExit {0}", p.Id);
+                },
+                TaskCreationOptions.LongRunning
+            );
 
             DebugTrace("awaiting process {0} exit, stdOut, and stdErr", p.Id);
             await Task.WhenAll(processExit, stdOutTask, stdErrTask);
@@ -427,9 +520,18 @@ namespace JitBench
             {
                 if (_expectedExitCode.HasValue && p.ExitCode != _expectedExitCode.Value)
                 {
-                    throw new Exception("Process returned exit code " + p.ExitCode + ", expected " + _expectedExitCode.Value + Environment.NewLine +
-                                        "Command Line: " + ReplayCommand + Environment.NewLine +
-                                        "Working Directory: " + WorkingDirectory);
+                    throw new Exception(
+                        "Process returned exit code "
+                            + p.ExitCode
+                            + ", expected "
+                            + _expectedExitCode.Value
+                            + Environment.NewLine
+                            + "Command Line: "
+                            + ReplayCommand
+                            + Environment.NewLine
+                            + "Working Directory: "
+                            + WorkingDirectory
+                    );
                 }
                 DebugTrace("InternalWaitForExit {0} returning {1}", p.Id, p.ExitCode);
                 return p.ExitCode;

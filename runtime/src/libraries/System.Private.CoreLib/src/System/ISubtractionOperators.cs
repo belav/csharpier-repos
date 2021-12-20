@@ -22,7 +22,6 @@ namespace System
         /// <param name="right">The value which is subtracted from <paramref name="left" />.</param>
         /// <returns>The difference of <paramref name="right" /> subtracted from <paramref name="left" />.</returns>
         static abstract TResult operator -(TSelf left, TOther right);
-
         // /// <summary>Subtracts two values to compute their difference.</summary>
         // /// <param name="left">The value from which <paramref name="right" /> is subtracted.</param>
         // /// <param name="right">The value which is subtracted from <paramref name="left" />.</param>

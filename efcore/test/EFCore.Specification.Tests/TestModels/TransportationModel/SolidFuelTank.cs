@@ -10,12 +10,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel
         public string GrainGeometry { get; set; }
         public SolidRocket Rocket { get; set; }
 
-        public override bool Equals(object obj)
-            => obj is SolidFuelTank other
-                && base.Equals(other)
-                && GrainGeometry == other.GrainGeometry;
+        public override bool Equals(object obj) =>
+            obj is SolidFuelTank other
+            && base.Equals(other)
+            && GrainGeometry == other.GrainGeometry;
 
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), GrainGeometry);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), GrainGeometry);
     }
 }

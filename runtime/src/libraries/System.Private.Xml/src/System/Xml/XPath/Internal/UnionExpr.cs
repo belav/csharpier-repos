@@ -10,8 +10,10 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class UnionExpr : Query
     {
-        internal Query qy1, qy2;
-        private bool _advance1, _advance2;
+        internal Query qy1,
+            qy2;
+        private bool _advance1,
+            _advance2;
         private XPathNavigator? _currentNode;
         private XPathNavigator? _nextNode;
 
@@ -85,7 +87,8 @@ namespace MS.Internal.Xml.XPath
 
         public override XPathNavigator? Advance()
         {
-            XPathNavigator? res1, res2;
+            XPathNavigator? res1,
+                res2;
             XmlNodeOrder order = 0;
             if (_advance1)
             {
@@ -153,11 +156,23 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.NodeSet; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
 
-        public override XPathNodeIterator Clone() { return new UnionExpr(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new UnionExpr(this);
+        }
 
-        public override XPathNavigator? Current { get { return _currentNode; } }
-        public override int CurrentPosition { get { throw new InvalidOperationException(); } }
+        public override XPathNavigator? Current
+        {
+            get { return _currentNode; }
+        }
+        public override int CurrentPosition
+        {
+            get { throw new InvalidOperationException(); }
+        }
     }
 }

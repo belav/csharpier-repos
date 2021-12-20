@@ -13,7 +13,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 {
-    using VerifyCS = CSharpCodeFixVerifier<ConvertToBlockScopedNamespaceDiagnosticAnalyzer, ConvertNamespaceCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        ConvertToBlockScopedNamespaceDiagnosticAnalyzer,
+        ConvertNamespaceCodeFixProvider
+    >;
 
     public class ConvertToBlockScopedNamespaceAnalyzerTests
     {
@@ -24,17 +27,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|{|CS8773:namespace|} N;|]
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -44,17 +52,23 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 {|CS8773:namespace|} [|N|];
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Suggestion }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped,
+                        NotificationOption2.Suggestion
+                    }
                 }
             }.RunAsync();
         }
@@ -62,7 +76,8 @@ namespace N
         [Fact]
         public async Task TestNoConvertToBlockScopedInCSharp10WithBlockScopedPreference()
         {
-            var code = @"
+            var code =
+                @"
 namespace N {}
 ";
             await new VerifyCS.Test
@@ -72,7 +87,10 @@ namespace N {}
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -82,17 +100,22 @@ namespace N {}
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
 }",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -102,17 +125,22 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
 }",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -122,14 +150,16 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 namespace {|CS8955:N2|}
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
     namespace N2
@@ -139,7 +169,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -149,11 +182,13 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 [|namespace {|CS8954:N2|};|]",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
     namespace N2
@@ -164,7 +199,10 @@ namespace N
                 NumberOfFixAllIterations = 2,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -174,13 +212,15 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 namespace N
 {
     [|namespace {|CS8955:N2|};|]
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
     namespace $$N2
@@ -191,7 +231,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -201,12 +244,14 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 {|CS8805:int i = 0;|}
 
 [|namespace {|CS8956:N|};|]
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 {|CS8805:int i = 0;|}
 
 namespace N
@@ -215,7 +260,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -225,12 +273,14 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 int {|CS0116:i|} = 0;
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
     int {|CS0116:i|} = 0;
@@ -238,7 +288,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -248,12 +301,14 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 [|namespace N;|]
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 namespace N
@@ -262,7 +317,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -272,12 +330,14 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 using System;
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N
 {
     using System;
@@ -285,7 +345,10 @@ namespace $$N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -295,14 +358,16 @@ namespace $$N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 class C
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N
 {
     class C
@@ -312,7 +377,10 @@ namespace $$N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -322,7 +390,8 @@ namespace $$N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 /// <summary/>
@@ -330,7 +399,8 @@ class C
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
     /// <summary/>
@@ -341,7 +411,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -351,13 +424,15 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|]
 
 /// <summary/>
 class C
 {{|CS1513:|}",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 {
     /// <summary/>
@@ -367,7 +442,10 @@ namespace N
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -377,14 +455,16 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N;|] // comment
 
 class C
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N
 { // comment
     class C
@@ -394,7 +474,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -404,7 +487,8 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 // copyright
 [|namespace N;|]
 
@@ -412,7 +496,8 @@ class C
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 // copyright
 namespace N
 {
@@ -423,11 +508,13 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
-
         #endregion
     }
 }

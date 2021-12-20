@@ -13,7 +13,12 @@ namespace AutoMapper.UnitTests.Bug
 
         public class Res : IRes
         {
-            public int Resolve(Source source, Destination destination, int destMember, ResolutionContext context)
+            public int Resolve(
+                Source source,
+                Destination destination,
+                int destMember,
+                ResolutionContext context
+            )
             {
                 return 1000;
             }
@@ -28,13 +33,16 @@ namespace AutoMapper.UnitTests.Bug
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.ConstructServicesUsing(t => new Res());
-            cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom<IRes>());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.ConstructServicesUsing(t => new Res());
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(d => d.Value, o => o.MapFrom<IRes>());
+                }
+            );
     }
-
 
     public class InitializeNRE : AutoMapperSpecBase
     {
@@ -56,9 +64,12 @@ namespace AutoMapper.UnitTests.Bug
             public string Tags { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<TestEntity, TestViewModel>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<TestEntity, TestViewModel>();
+                }
+            );
     }
 }

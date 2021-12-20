@@ -34,7 +34,8 @@ namespace System.Threading
                 _start = start;
             }
 
-            internal static readonly ContextCallback s_threadStartContextCallback = new ContextCallback(Callback);
+            internal static readonly ContextCallback s_threadStartContextCallback =
+                new ContextCallback(Callback);
 
             private static void Callback(object? state)
             {
@@ -47,7 +48,11 @@ namespace System.Threading
             {
                 if (_executionContext != null && !_executionContext.IsDefault)
                 {
-                    ExecutionContext.RunInternal(_executionContext, s_threadStartContextCallback, this);
+                    ExecutionContext.RunInternal(
+                        _executionContext,
+                        s_threadStartContextCallback,
+                        this
+                    );
                 }
                 else
                 {
@@ -74,14 +79,14 @@ namespace System.Threading
                 }
                 else
                 {
-                    ParameterizedThreadStart parameterizedThreadStart = (ParameterizedThreadStart)start;
+                    ParameterizedThreadStart parameterizedThreadStart =
+                        (ParameterizedThreadStart)start;
 
                     object? startArg = _startArg;
                     _startArg = null;
 
                     parameterizedThreadStart(startArg);
                 }
-
 #if FEATURE_OBJCMARSHAL
                 // There is no need to wrap this "clean up" code in a finally block since
                 // if an exception is thrown above, the process is going to terminate.
@@ -127,7 +132,10 @@ namespace System.Threading
             }
             if (maxStackSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(maxStackSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxStackSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             _startHelper = new StartHelper(start) { _maxStackSize = maxStackSize };
@@ -155,7 +163,10 @@ namespace System.Threading
             }
             if (maxStackSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(maxStackSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxStackSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             _startHelper = new StartHelper(start) { _maxStackSize = maxStackSize };
@@ -333,7 +344,11 @@ namespace System.Threading
                     {
                         return;
                     }
-                    Interlocked.CompareExchange(ref s_asyncLocalPrincipal, new AsyncLocal<IPrincipal?>(), null);
+                    Interlocked.CompareExchange(
+                        ref s_asyncLocalPrincipal,
+                        new AsyncLocal<IPrincipal?>(),
+                        null
+                    );
                 }
                 s_asyncLocalPrincipal.Value = value;
             }
@@ -342,17 +357,18 @@ namespace System.Threading
         public static Thread CurrentThread
         {
             [Intrinsic]
-            get
-            {
-                return t_currentThread ?? InitializeCurrentThread();
-            }
+            get { return t_currentThread ?? InitializeCurrentThread(); }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)] // Slow path method. Make sure that the caller frame does not pay for PInvoke overhead.
         public static void Sleep(int millisecondsTimeout)
         {
             if (millisecondsTimeout < Timeout.Infinite)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), millisecondsTimeout, SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
             SleepInternal(millisecondsTimeout);
         }
 
@@ -429,31 +445,47 @@ namespace System.Threading
             }
         }
 
-        [Obsolete(Obsoletions.ThreadAbortMessage, DiagnosticId = Obsoletions.ThreadAbortDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.ThreadAbortMessage,
+            DiagnosticId = Obsoletions.ThreadAbortDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public void Abort()
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ThreadAbort);
         }
 
-        [Obsolete(Obsoletions.ThreadAbortMessage, DiagnosticId = Obsoletions.ThreadAbortDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.ThreadAbortMessage,
+            DiagnosticId = Obsoletions.ThreadAbortDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public void Abort(object? stateInfo)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ThreadAbort);
         }
 
-        [Obsolete(Obsoletions.ThreadAbortMessage, DiagnosticId = Obsoletions.ThreadAbortDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.ThreadAbortMessage,
+            DiagnosticId = Obsoletions.ThreadAbortDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static void ResetAbort()
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ThreadAbort);
         }
 
-        [Obsolete("Thread.Suspend has been deprecated. Use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.")]
+        [Obsolete(
+            "Thread.Suspend has been deprecated. Use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources."
+        )]
         public void Suspend()
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ThreadSuspend);
         }
 
-        [Obsolete("Thread.Resume has been deprecated. Use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.")]
+        [Obsolete(
+            "Thread.Resume has been deprecated. Use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources."
+        )]
         public void Resume()
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ThreadSuspend);
@@ -467,13 +499,18 @@ namespace System.Threading
         public static void EndThreadAffinity() { }
 
         public static LocalDataStoreSlot AllocateDataSlot() => LocalDataStore.AllocateSlot();
-        public static LocalDataStoreSlot AllocateNamedDataSlot(string name) => LocalDataStore.AllocateNamedSlot(name);
-        public static LocalDataStoreSlot GetNamedDataSlot(string name) => LocalDataStore.GetNamedSlot(name);
+        public static LocalDataStoreSlot AllocateNamedDataSlot(string name) =>
+            LocalDataStore.AllocateNamedSlot(name);
+        public static LocalDataStoreSlot GetNamedDataSlot(string name) =>
+            LocalDataStore.GetNamedSlot(name);
         public static void FreeNamedDataSlot(string name) => LocalDataStore.FreeNamedSlot(name);
         public static object? GetData(LocalDataStoreSlot slot) => LocalDataStore.GetData(slot);
-        public static void SetData(LocalDataStoreSlot slot, object? data) => LocalDataStore.SetData(slot, data);
+        public static void SetData(LocalDataStoreSlot slot, object? data) =>
+            LocalDataStore.SetData(slot, data);
 
-        [Obsolete("The ApartmentState property has been deprecated. Use GetApartmentState, SetApartmentState or TrySetApartmentState.")]
+        [Obsolete(
+            "The ApartmentState property has been deprecated. Use GetApartmentState, SetApartmentState or TrySetApartmentState."
+        )]
         public ApartmentState ApartmentState
         {
             get => GetApartmentState();
@@ -483,12 +520,12 @@ namespace System.Threading
         [SupportedOSPlatform("windows")]
         public void SetApartmentState(ApartmentState state)
         {
-            SetApartmentState(state, throwOnError:true);
+            SetApartmentState(state, throwOnError: true);
         }
 
         public bool TrySetApartmentState(ApartmentState state)
         {
-            return SetApartmentState(state, throwOnError:false);
+            return SetApartmentState(state, throwOnError: false);
         }
 
         private bool SetApartmentState(ApartmentState state, bool throwOnError)
@@ -501,19 +538,30 @@ namespace System.Threading
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(state), SR.ArgumentOutOfRange_Enum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(state),
+                        SR.ArgumentOutOfRange_Enum
+                    );
             }
 
             return SetApartmentStateUnchecked(state, throwOnError);
         }
 
-        [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CodeAccessSecurityMessage,
+            DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public CompressedStack GetCompressedStack()
         {
             throw new InvalidOperationException(SR.Thread_GetSetCompressedStack_NotSupported);
         }
 
-        [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CodeAccessSecurityMessage,
+            DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public void SetCompressedStack(CompressedStack stack)
         {
             throw new InvalidOperationException(SR.Thread_GetSetCompressedStack_NotSupported);
@@ -525,7 +573,8 @@ namespace System.Threading
         public void Join() => Join(-1);
         public bool Join(TimeSpan timeout) => Join(WaitHandle.ToTimeoutMilliseconds(timeout));
         public static void MemoryBarrier() => Interlocked.MemoryBarrier();
-        public static void Sleep(TimeSpan timeout) => Sleep(WaitHandle.ToTimeoutMilliseconds(timeout));
+        public static void Sleep(TimeSpan timeout) =>
+            Sleep(WaitHandle.ToTimeoutMilliseconds(timeout));
 
         public static byte VolatileRead(ref byte address) => Volatile.Read(ref address);
         public static double VolatileRead(ref double address) => Volatile.Read(ref address);
@@ -534,7 +583,8 @@ namespace System.Threading
         public static long VolatileRead(ref long address) => Volatile.Read(ref address);
         public static IntPtr VolatileRead(ref IntPtr address) => Volatile.Read(ref address);
         [return: NotNullIfNotNull("address")]
-        public static object? VolatileRead([NotNullIfNotNull("address")] ref object? address) => Volatile.Read(ref address);
+        public static object? VolatileRead([NotNullIfNotNull("address")] ref object? address) =>
+            Volatile.Read(ref address);
         [CLSCompliant(false)]
         public static sbyte VolatileRead(ref sbyte address) => Volatile.Read(ref address);
         public static float VolatileRead(ref float address) => Volatile.Read(ref address);
@@ -546,24 +596,39 @@ namespace System.Threading
         public static ulong VolatileRead(ref ulong address) => Volatile.Read(ref address);
         [CLSCompliant(false)]
         public static UIntPtr VolatileRead(ref UIntPtr address) => Volatile.Read(ref address);
-        public static void VolatileWrite(ref byte address, byte value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite(ref double address, double value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite(ref short address, short value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite(ref int address, int value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite(ref long address, long value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite(ref IntPtr address, IntPtr value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite([NotNullIfNotNull("value")] ref object? address, object? value) => Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref byte address, byte value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref double address, double value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref short address, short value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref int address, int value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref long address, long value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref IntPtr address, IntPtr value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(
+            [NotNullIfNotNull("value")] ref object? address,
+            object? value
+        ) => Volatile.Write(ref address, value);
         [CLSCompliant(false)]
-        public static void VolatileWrite(ref sbyte address, sbyte value) => Volatile.Write(ref address, value);
-        public static void VolatileWrite(ref float address, float value) => Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref sbyte address, sbyte value) =>
+            Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref float address, float value) =>
+            Volatile.Write(ref address, value);
         [CLSCompliant(false)]
-        public static void VolatileWrite(ref ushort address, ushort value) => Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref ushort address, ushort value) =>
+            Volatile.Write(ref address, value);
         [CLSCompliant(false)]
-        public static void VolatileWrite(ref uint address, uint value) => Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref uint address, uint value) =>
+            Volatile.Write(ref address, value);
         [CLSCompliant(false)]
-        public static void VolatileWrite(ref ulong address, ulong value) => Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref ulong address, ulong value) =>
+            Volatile.Write(ref address, value);
         [CLSCompliant(false)]
-        public static void VolatileWrite(ref UIntPtr address, UIntPtr value) => Volatile.Write(ref address, value);
+        public static void VolatileWrite(ref UIntPtr address, UIntPtr value) =>
+            Volatile.Write(ref address, value);
 
         /// <summary>
         /// Manages functionality required to support members of <see cref="Thread"/> dealing with thread-local data
@@ -586,7 +651,8 @@ namespace System.Threading
                 }
 
                 nameToSlotMap = new Dictionary<string, LocalDataStoreSlot>();
-                return Interlocked.CompareExchange(ref s_nameToSlotMap, nameToSlotMap, null) ?? nameToSlotMap;
+                return Interlocked.CompareExchange(ref s_nameToSlotMap, nameToSlotMap, null)
+                    ?? nameToSlotMap;
             }
 
             public static LocalDataStoreSlot AllocateNamedSlot(string name)

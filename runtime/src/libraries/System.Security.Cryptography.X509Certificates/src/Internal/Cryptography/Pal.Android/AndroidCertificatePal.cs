@@ -44,11 +44,17 @@ namespace Internal.Cryptography.Pal
                 return certPal.CopyWithPrivateKeyHandle(certPal.PrivateKeyHandle.DuplicateHandle());
             }
 
-            SafeX509Handle handle = new SafeX509Handle(Interop.JObjectLifetime.NewGlobalReference(certPal.Handle));
+            SafeX509Handle handle = new SafeX509Handle(
+                Interop.JObjectLifetime.NewGlobalReference(certPal.Handle)
+            );
             return new AndroidCertificatePal(handle);
         }
 
-        public static ICertificatePal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -63,9 +69,14 @@ namespace Internal.Cryptography.Pal
                     // We don't support determining this on Android right now, so we throw.
                     throw new CryptographicException(SR.Cryptography_X509_PKCS7_NoSigner);
                 case X509ContentType.Pkcs12:
-                    if ((keyStorageFlags & X509KeyStorageFlags.PersistKeySet) == X509KeyStorageFlags.PersistKeySet)
+                    if (
+                        (keyStorageFlags & X509KeyStorageFlags.PersistKeySet)
+                        == X509KeyStorageFlags.PersistKeySet
+                    )
                     {
-                        throw new PlatformNotSupportedException(SR.Cryptography_X509_PKCS12_PersistKeySetNotSupported);
+                        throw new PlatformNotSupportedException(
+                            SR.Cryptography_X509_PKCS12_PersistKeySetNotSupported
+                        );
                     }
 
                     return ReadPkcs12(rawData, password, ephemeralSpecified);
@@ -77,7 +88,6 @@ namespace Internal.Cryptography.Pal
                     {
                         return cert;
                     }
-
                     break;
                 }
             }
@@ -86,19 +96,27 @@ namespace Internal.Cryptography.Pal
             throw new CryptographicException();
         }
 
-        public static ICertificatePal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             byte[] fileBytes = System.IO.File.ReadAllBytes(fileName);
             return FromBlob(fileBytes, password, keyStorageFlags);
         }
 
         // Handles both DER and PEM
-        internal static bool TryReadX509(ReadOnlySpan<byte> rawData, [NotNullWhen(true)] out ICertificatePal? handle)
+        internal static bool TryReadX509(
+            ReadOnlySpan<byte> rawData,
+            [NotNullWhen(true)] out ICertificatePal? handle
+        )
         {
             handle = null;
             SafeX509Handle certHandle = Interop.AndroidCrypto.X509Decode(
                 ref MemoryMarshal.GetReference(rawData),
-                rawData.Length);
+                rawData.Length
+            );
 
             if (certHandle.IsInvalid)
             {
@@ -110,7 +128,11 @@ namespace Internal.Cryptography.Pal
             return true;
         }
 
-        private static ICertificatePal ReadPkcs12(ReadOnlySpan<byte> rawData, SafePasswordHandle password, bool ephemeralSpecified)
+        private static ICertificatePal ReadPkcs12(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            bool ephemeralSpecified
+        )
         {
             using (var reader = new AndroidPkcs12Reader(rawData))
             {
@@ -166,7 +188,11 @@ namespace Internal.Cryptography.Pal
 
         public string LegacySubject => SubjectName.Decode(X500DistinguishedNameFlags.None);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required for Compat")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is required for Compat"
+        )]
         public byte[] Thumbprint
         {
             get
@@ -265,7 +291,8 @@ namespace Internal.Cryptography.Pal
             set
             {
                 throw new PlatformNotSupportedException(
-                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(Archived)));
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(Archived))
+                );
             }
         }
 
@@ -275,7 +302,8 @@ namespace Internal.Cryptography.Pal
             set
             {
                 throw new PlatformNotSupportedException(
-                  SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(FriendlyName)));
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(FriendlyName))
+                );
             }
         }
 
@@ -411,12 +439,14 @@ namespace Internal.Cryptography.Pal
             {
                 typedKey.ImportParameters(dsaParameters);
                 return CopyWithPrivateKeyHandle(typedKey.DuplicateKeyHandle());
-            };
+            }
+            ;
         }
 
         public ICertificatePal CopyWithPrivateKey(ECDsa privateKey)
         {
-            ECDsaImplementation.ECDsaAndroid? typedKey = privateKey as ECDsaImplementation.ECDsaAndroid;
+            ECDsaImplementation.ECDsaAndroid? typedKey =
+                privateKey as ECDsaImplementation.ECDsaAndroid;
             if (typedKey != null)
             {
                 return CopyWithPrivateKeyHandle(typedKey.DuplicateKeyHandle());
@@ -433,7 +463,8 @@ namespace Internal.Cryptography.Pal
 
         public ICertificatePal CopyWithPrivateKey(ECDiffieHellman privateKey)
         {
-            ECDiffieHellmanImplementation.ECDiffieHellmanAndroid? typedKey = privateKey as ECDiffieHellmanImplementation.ECDiffieHellmanAndroid;
+            ECDiffieHellmanImplementation.ECDiffieHellmanAndroid? typedKey =
+                privateKey as ECDiffieHellmanImplementation.ECDiffieHellmanAndroid;
             if (typedKey != null)
             {
                 return CopyWithPrivateKeyHandle(typedKey.DuplicateKeyHandle());
@@ -526,7 +557,9 @@ namespace Internal.Cryptography.Pal
         private ICertificatePal CopyWithPrivateKeyHandle(SafeKeyHandle privateKey)
         {
             // Add a global reference to the underlying cert object.
-            SafeX509Handle handle = new SafeX509Handle(Interop.JObjectLifetime.NewGlobalReference(Handle));
+            SafeX509Handle handle = new SafeX509Handle(
+                Interop.JObjectLifetime.NewGlobalReference(Handle)
+            );
             return new AndroidCertificatePal(handle, privateKey);
         }
     }

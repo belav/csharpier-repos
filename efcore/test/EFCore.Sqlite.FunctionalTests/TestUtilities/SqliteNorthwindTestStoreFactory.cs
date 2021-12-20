@@ -7,11 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static new SqliteNorthwindTestStoreFactory Instance { get; } = new();
 
-        protected SqliteNorthwindTestStoreFactory()
-        {
-        }
+        protected SqliteNorthwindTestStoreFactory() { }
 
-        public override TestStore GetOrCreate(string storeName)
-            => SqliteTestStore.GetExisting("northwind");
+        public override TestStore GetOrCreate(string storeName) =>
+            SqliteTestStore.GetExisting("northwind");
     }
 }

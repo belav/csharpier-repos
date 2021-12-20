@@ -46,7 +46,8 @@ namespace System.Tests.Types
 
         public virtual bool IsGenericParameter => false;
 
-        public virtual bool IsGenericMethodParameter => IsGenericParameter && DeclaringMethod != null;
+        public virtual bool IsGenericMethodParameter =>
+            IsGenericParameter && DeclaringMethod != null;
 
         public virtual bool IsGenericTypeDefinition => false;
 
@@ -74,11 +75,14 @@ namespace System.Tests.Types
 
         public virtual bool IsTypeDefinition => true;
 
-        public virtual bool IsValueType => BaseType == typeof(Enum) || (BaseType == typeof(ValueType) && CreateType() != typeof(Enum));
+        public virtual bool IsValueType =>
+            BaseType == typeof(Enum)
+            || (BaseType == typeof(ValueType) && CreateType() != typeof(Enum));
 
         public virtual bool IsVariableBoundArray => false;
 
-        public virtual MemberTypes MemberType => IsNested ? MemberTypes.TypeInfo : MemberTypes.NestedType;
+        public virtual MemberTypes MemberType =>
+            IsNested ? MemberTypes.TypeInfo : MemberTypes.NestedType;
 
         public virtual Type ReflectedType => DeclaringType;
 
@@ -94,26 +98,77 @@ namespace System.Tests.Types
             Assert.Equal((Attributes & TypeAttributes.Import) != 0, t.IsImport);
             Assert.Equal((Attributes & TypeAttributes.Sealed) != 0, t.IsSealed);
             Assert.Equal((Attributes & TypeAttributes.SpecialName) != 0, t.IsSpecialName);
-            Assert.Equal((Attributes & TypeAttributes.Serializable) != 0 || t.IsEnum || t == typeof(Delegate), t.IsSerializable);
+            Assert.Equal(
+                (Attributes & TypeAttributes.Serializable) != 0
+                    || t.IsEnum
+                    || t == typeof(Delegate),
+                t.IsSerializable
+            );
 
-            Assert.Equal((Attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Class && !t.IsValueType, t.IsClass);
-            Assert.Equal((Attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Interface, t.IsInterface);
+            Assert.Equal(
+                (Attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Class
+                    && !t.IsValueType,
+                t.IsClass
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Interface,
+                t.IsInterface
+            );
 
-            Assert.Equal((Attributes & TypeAttributes.StringFormatMask) == TypeAttributes.AnsiClass, t.IsAnsiClass);
-            Assert.Equal((Attributes & TypeAttributes.StringFormatMask) == TypeAttributes.AutoClass, t.IsAutoClass);
-            Assert.Equal((Attributes & TypeAttributes.StringFormatMask) == TypeAttributes.UnicodeClass, t.IsUnicodeClass);
+            Assert.Equal(
+                (Attributes & TypeAttributes.StringFormatMask) == TypeAttributes.AnsiClass,
+                t.IsAnsiClass
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.StringFormatMask) == TypeAttributes.AutoClass,
+                t.IsAutoClass
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.StringFormatMask) == TypeAttributes.UnicodeClass,
+                t.IsUnicodeClass
+            );
 
-            Assert.Equal((Attributes & TypeAttributes.LayoutMask) == TypeAttributes.AutoLayout, t.IsAutoLayout);
-            Assert.Equal((Attributes & TypeAttributes.LayoutMask) == TypeAttributes.ExplicitLayout, t.IsExplicitLayout);
-            Assert.Equal((Attributes & TypeAttributes.LayoutMask) == TypeAttributes.SequentialLayout, t.IsLayoutSequential);
+            Assert.Equal(
+                (Attributes & TypeAttributes.LayoutMask) == TypeAttributes.AutoLayout,
+                t.IsAutoLayout
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.LayoutMask) == TypeAttributes.ExplicitLayout,
+                t.IsExplicitLayout
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.LayoutMask) == TypeAttributes.SequentialLayout,
+                t.IsLayoutSequential
+            );
 
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedAssembly, t.IsNestedAssembly);
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedFamANDAssem, t.IsNestedFamANDAssem);
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedFamily, t.IsNestedFamily);
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedFamORAssem, t.IsNestedFamORAssem);
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedPrivate, t.IsNestedPrivate);
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NotPublic, t.IsNotPublic);
-            Assert.Equal((Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.Public, t.IsPublic);
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedAssembly,
+                t.IsNestedAssembly
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedFamANDAssem,
+                t.IsNestedFamANDAssem
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedFamily,
+                t.IsNestedFamily
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedFamORAssem,
+                t.IsNestedFamORAssem
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedPrivate,
+                t.IsNestedPrivate
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NotPublic,
+                t.IsNotPublic
+            );
+            Assert.Equal(
+                (Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.Public,
+                t.IsPublic
+            );
         }
 
         [Fact]
@@ -162,7 +217,9 @@ namespace System.Tests.Types
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() => CreateType().GetGenericTypeDefinition());
+                Assert.Throws<InvalidOperationException>(
+                    () => CreateType().GetGenericTypeDefinition()
+                );
             }
         }
 
@@ -175,7 +232,9 @@ namespace System.Tests.Types
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() => CreateType().GenericParameterAttributes);
+                Assert.Throws<InvalidOperationException>(
+                    () => CreateType().GenericParameterAttributes
+                );
             }
         }
 
@@ -188,7 +247,9 @@ namespace System.Tests.Types
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() => CreateType().GenericParameterPosition);
+                Assert.Throws<InvalidOperationException>(
+                    () => CreateType().GenericParameterPosition
+                );
             }
         }
 
@@ -382,7 +443,13 @@ namespace System.Tests.Types
     {
         public override bool IsArray => true;
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Serializable;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Sealed
+            | TypeAttributes.Serializable;
 
         public override Type BaseType => typeof(Array);
 
@@ -393,33 +460,64 @@ namespace System.Tests.Types
 
     public abstract class ClassTypeTestBase : TypePropertyTestBase
     {
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.BeforeFieldInit;
     }
 
     public abstract class StructTypeTestBase : TypePropertyTestBase
     {
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.SequentialLayout
+            | TypeAttributes.Sealed
+            | TypeAttributes.BeforeFieldInit;
 
         public override Type BaseType => typeof(ValueType);
     }
 
     public abstract class InterfaceTypeTestBase : TypePropertyTestBase
     {
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.ClassSemanticsMask | TypeAttributes.Abstract;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.ClassSemanticsMask
+            | TypeAttributes.Abstract;
 
         public override Type BaseType => null;
     }
 
     public abstract class PrimitiveTypeTestBase : StructTypeTestBase
     {
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.Sealed | TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.SequentialLayout
+            | TypeAttributes.Sealed
+            | TypeAttributes.Serializable
+            | TypeAttributes.BeforeFieldInit;
 
         public override bool IsPrimitive => true;
     }
 
     public abstract class EnumTypeTestBase : StructTypeTestBase
     {
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Sealed;
 
         public override Type BaseType => typeof(Enum);
     }
@@ -429,7 +527,14 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(string);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Sealed
+            | TypeAttributes.Serializable
+            | TypeAttributes.BeforeFieldInit;
     }
 
     public class SByteTests : PrimitiveTypeTestBase
@@ -511,7 +616,13 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(object);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Serializable
+            | TypeAttributes.BeforeFieldInit;
 
         public override Type BaseType => null;
     }
@@ -520,30 +631,65 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(Array);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Abstract
+            | TypeAttributes.Serializable
+            | TypeAttributes.BeforeFieldInit;
     }
 
     public class ValueTypeTypeTests : ClassTypeTestBase
     {
         public override Type CreateType() => typeof(ValueType);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Public
+            | TypeAttributes.Abstract
+            | TypeAttributes.Serializable
+            | TypeAttributes.BeforeFieldInit;
     }
 
     public class DelegateTypeTests : ClassTypeTestBase
     {
         public override Type CreateType() => typeof(Delegate);
 
-        public override TypeAttributes Attributes => PlatformDetection.IsMonoRuntime
-            ? TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.Abstract | TypeAttributes.BeforeFieldInit
-            : TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            PlatformDetection.IsMonoRuntime
+                ? TypeAttributes.AutoLayout
+                  | TypeAttributes.AnsiClass
+                  | TypeAttributes.Class
+                  | TypeAttributes.Public
+                  | TypeAttributes.SequentialLayout
+                  | TypeAttributes.Abstract
+                  | TypeAttributes.BeforeFieldInit
+                : TypeAttributes.AutoLayout
+                  | TypeAttributes.AnsiClass
+                  | TypeAttributes.Class
+                  | TypeAttributes.Public
+                  | TypeAttributes.Abstract
+                  | TypeAttributes.BeforeFieldInit;
     }
 
     public class EnumTypeTests : ClassTypeTestBase
     {
         public override Type CreateType() => typeof(Enum);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Serializable | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Public
+            | TypeAttributes.Abstract
+            | TypeAttributes.Serializable
+            | TypeAttributes.BeforeFieldInit;
 
         public override Type BaseType => typeof(ValueType);
     }
@@ -759,7 +905,8 @@ namespace System.Tests.Types
 
     public class OpenGenericNestedClassTypeTests : ClassTypeTestBase
     {
-        public override Type CreateType() => typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>));
+        public override Type CreateType() =>
+            typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>));
 
         public override bool ContainsGenericParameters => true;
 
@@ -860,7 +1007,13 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(AbstractClass);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Abstract
+            | TypeAttributes.BeforeFieldInit;
     }
 
     public class OpenGenericInterfaceTests : InterfaceTypeTestBase
@@ -880,7 +1033,12 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(Outside.Inside);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.NestedPublic | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.NestedPublic
+            | TypeAttributes.BeforeFieldInit;
 
         public override Type DeclaringType => typeof(Outside);
     }
@@ -889,7 +1047,12 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(Outside<int>.Inside<double>);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.NestedPublic | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.NestedPublic
+            | TypeAttributes.BeforeFieldInit;
 
         public override Type DeclaringType => typeof(Outside<>);
 
@@ -908,7 +1071,12 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(Outside<>.Inside<>);
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.NestedPublic | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.NestedPublic
+            | TypeAttributes.BeforeFieldInit;
 
         public override bool ContainsGenericParameters => true;
 
@@ -923,15 +1091,21 @@ namespace System.Tests.Types
 
     public class GenericTypeParameter1Of1Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(Outside<>).GetTypeInfo().GenericTypeParameters[0];
+        public override Type CreateType() =>
+            typeof(Outside<>).GetTypeInfo().GenericTypeParameters[0];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
         public override Type DeclaringType => typeof(Outside<>);
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override bool IsGenericParameter => true;
 
@@ -942,15 +1116,21 @@ namespace System.Tests.Types
 
     public class GenericTypeParameter1Of2Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(GenericClass<,>).GetTypeInfo().GenericTypeParameters[0];
+        public override Type CreateType() =>
+            typeof(GenericClass<,>).GetTypeInfo().GenericTypeParameters[0];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
         public override Type DeclaringType => typeof(GenericClass<,>);
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override bool IsGenericParameter => true;
 
@@ -961,15 +1141,21 @@ namespace System.Tests.Types
 
     public class GenericTypeParameter2Of2Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(GenericClass<,>).GetTypeInfo().GenericTypeParameters[1];
+        public override Type CreateType() =>
+            typeof(GenericClass<,>).GetTypeInfo().GenericTypeParameters[1];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
         public override Type DeclaringType => typeof(GenericClass<,>);
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override bool IsGenericParameter => true;
 
@@ -980,13 +1166,19 @@ namespace System.Tests.Types
 
     public class NestedGenericTypeParameter1Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(Outside<>.Inside<>).GetTypeInfo().GenericTypeParameters[0];
+        public override Type CreateType() =>
+            typeof(Outside<>.Inside<>).GetTypeInfo().GenericTypeParameters[0];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override Type DeclaringType => typeof(Outside<>.Inside<>);
 
@@ -999,15 +1191,21 @@ namespace System.Tests.Types
 
     public class NestedGenericTypeParameter2Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(Outside<>.Inside<>).GetTypeInfo().GenericTypeParameters[1];
+        public override Type CreateType() =>
+            typeof(Outside<>.Inside<>).GetTypeInfo().GenericTypeParameters[1];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
         public override Type DeclaringType => typeof(Outside<>.Inside<>);
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override bool IsGenericParameter => true;
 
@@ -1018,17 +1216,26 @@ namespace System.Tests.Types
 
     public class GenericMethodParameter1Of2Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod)).GetGenericArguments()[0];
+        public override Type CreateType() =>
+            typeof(Outside<>)
+                .GetMethod(nameof(Outside<string>.TwoGenericMethod))
+                .GetGenericArguments()[0];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
-        public override MethodBase DeclaringMethod => typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod));
+        public override MethodBase DeclaringMethod =>
+            typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod));
 
         public override Type DeclaringType => typeof(Outside<>);
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override bool IsGenericParameter => true;
 
@@ -1039,17 +1246,26 @@ namespace System.Tests.Types
 
     public class GenericMethodParameter2Of2Tests : TypePropertyTestBase
     {
-        public override Type CreateType() => typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod)).GetGenericArguments()[1];
+        public override Type CreateType() =>
+            typeof(Outside<>)
+                .GetMethod(nameof(Outside<string>.TwoGenericMethod))
+                .GetGenericArguments()[1];
 
-        public override TypeAttributes Attributes => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public;
+        public override TypeAttributes Attributes =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public;
 
         public override bool ContainsGenericParameters => true;
 
-        public override MethodBase DeclaringMethod => typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod));
+        public override MethodBase DeclaringMethod =>
+            typeof(Outside<>).GetMethod(nameof(Outside<string>.TwoGenericMethod));
 
         public override Type DeclaringType => typeof(Outside<>);
 
-        public override GenericParameterAttributes? GenericParameterAttributes => Reflection.GenericParameterAttributes.None;
+        public override GenericParameterAttributes? GenericParameterAttributes =>
+            Reflection.GenericParameterAttributes.None;
 
         public override bool IsGenericParameter => true;
 
@@ -1091,9 +1307,21 @@ namespace System.Tests.Types
     {
         public override Type CreateType() => typeof(ArgIterator);
 
-        public override TypeAttributes Attributes => PlatformDetection.IsMonoRuntime
-            ? TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit
-            : TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
+        public override TypeAttributes Attributes =>
+            PlatformDetection.IsMonoRuntime
+                ? TypeAttributes.AutoLayout
+                  | TypeAttributes.AnsiClass
+                  | TypeAttributes.Class
+                  | TypeAttributes.Public
+                  | TypeAttributes.Sealed
+                  | TypeAttributes.BeforeFieldInit
+                : TypeAttributes.AutoLayout
+                  | TypeAttributes.AnsiClass
+                  | TypeAttributes.Class
+                  | TypeAttributes.Public
+                  | TypeAttributes.SequentialLayout
+                  | TypeAttributes.Sealed
+                  | TypeAttributes.BeforeFieldInit;
     }
 
     public class RuntimeArgumentHandleTypeTests : StructTypeTestBase

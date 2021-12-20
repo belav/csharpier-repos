@@ -8,7 +8,8 @@ namespace System.Data
 {
     internal sealed class DataRelationPropertyDescriptor : PropertyDescriptor
     {
-        internal DataRelationPropertyDescriptor(DataRelation dataRelation) : base(dataRelation.RelationName, null)
+        internal DataRelationPropertyDescriptor(DataRelation dataRelation)
+            : base(dataRelation.RelationName, null)
         {
             Relation = dataRelation;
         }

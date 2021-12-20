@@ -38,7 +38,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
     [InlineData("", false)]
     [InlineData(null, false)]
     [InlineData("invalid", false)]
-    public void CanRead_ReturnsTrueForAnySupportedContentType(string requestContentType, bool expectedCanRead)
+    public void CanRead_ReturnsTrueForAnySupportedContentType(
+        string requestContentType,
+        bool expectedCanRead
+    )
     {
         // Arrange
         var formatter = GetInputFormatter();
@@ -129,7 +132,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         Assert.False(result.HasError);
         var stringValue = Assert.IsType<string>(result.Model);
         Assert.Equal(content, stringValue);
-        Assert.True(httpContext.Request.Body.CanRead, "Verify that the request stream hasn't been disposed");
+        Assert.True(
+            httpContext.Request.Body.CanRead,
+            "Verify that the request stream hasn't been disposed"
+        );
     }
 
     [Fact]
@@ -144,7 +150,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = GetHttpContext(contentBytes);
 
-        var formatterContext = CreateInputFormatterContext(typeof(IEnumerable<IDictionary<string, short>>), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(IEnumerable<IDictionary<string, short>>),
+            httpContext
+        );
 
         // Act
         var result = await formatter.ReadAsync(formatterContext);
@@ -156,7 +165,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
             kvp =>
             {
                 Assert.Equal(expectedKey, kvp.Key);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -172,7 +182,9 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         var httpContext = GetHttpContext(contentBytes);
 
         var formatterContext = CreateInputFormatterContext(
-            typeof(IEnumerable<IDictionary<string, short>>), httpContext);
+            typeof(IEnumerable<IDictionary<string, short>>),
+            httpContext
+        );
 
         // Act
         var result = await formatter.ReadAsync(formatterContext);
@@ -184,7 +196,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
             kvp =>
             {
                 Assert.Equal(expectedKey, kvp.Key);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -253,16 +266,20 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
     }
 
     [Fact]
-    public virtual Task ReadAsync_ReadsValidArray_AsListOfT() => ReadAsync_ReadsValidArray_AsList(typeof(List<int>));
+    public virtual Task ReadAsync_ReadsValidArray_AsListOfT() =>
+        ReadAsync_ReadsValidArray_AsList(typeof(List<int>));
 
     [Fact]
-    public virtual Task ReadAsync_ReadsValidArray_AsIListOfT() => ReadAsync_ReadsValidArray_AsList(typeof(IList<int>));
+    public virtual Task ReadAsync_ReadsValidArray_AsIListOfT() =>
+        ReadAsync_ReadsValidArray_AsList(typeof(IList<int>));
 
     [Fact]
-    public virtual Task ReadAsync_ReadsValidArray_AsCollectionOfT() => ReadAsync_ReadsValidArray_AsList(typeof(ICollection<int>));
+    public virtual Task ReadAsync_ReadsValidArray_AsCollectionOfT() =>
+        ReadAsync_ReadsValidArray_AsList(typeof(ICollection<int>));
 
     [Fact]
-    public virtual Task ReadAsync_ReadsValidArray_AsEnumerableOfT() => ReadAsync_ReadsValidArray_AsList(typeof(IEnumerable<int>));
+    public virtual Task ReadAsync_ReadsValidArray_AsEnumerableOfT() =>
+        ReadAsync_ReadsValidArray_AsList(typeof(IEnumerable<int>));
 
     protected async Task ReadAsync_ReadsValidArray_AsList(Type requestedType)
     {
@@ -303,12 +320,14 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+        Assert.Collection(
+            formatterContext.ModelState.OrderBy(k => k.Key),
             kvp =>
             {
                 Assert.Equal(expectedKey, kvp.Key);
                 Assert.Single(kvp.Value.Errors);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -329,12 +348,14 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+        Assert.Collection(
+            formatterContext.ModelState.OrderBy(k => k.Key),
             kvp =>
             {
                 Assert.Equal(expectedKey, kvp.Key);
                 Assert.Single(kvp.Value.Errors);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -356,11 +377,13 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have produced an error!");
-        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+        Assert.Collection(
+            formatterContext.ModelState.OrderBy(k => k.Key),
             kvp =>
             {
                 Assert.Equal(expectedValue, kvp.Key);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -369,11 +392,16 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         // Arrange
         var formatter = GetInputFormatter();
 
-        var content = "[{ \"Name\": \"Name One\", \"Age\": 30}, { \"Name\": \"Name Two\", \"Small\": 300}]";
+        var content =
+            "[{ \"Name\": \"Name One\", \"Age\": 30}, { \"Name\": \"Name Two\", \"Small\": 300}]";
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = GetHttpContext(contentBytes);
 
-        var formatterContext = CreateInputFormatterContext(typeof(ComplexModel[]), httpContext, modelName: "names");
+        var formatterContext = CreateInputFormatterContext(
+            typeof(ComplexModel[]),
+            httpContext,
+            modelName: "names"
+        );
         var expectedKey = ReadAsync_InvalidComplexArray_AddsOverflowErrorsToModelState_Expected;
 
         // Act
@@ -387,7 +415,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
             {
                 Assert.Equal(expectedKey, kvp.Key);
                 Assert.Single(kvp.Value.Errors);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -422,7 +451,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
     public async Task ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(
         string content,
         bool treatEmptyInputAsDefaultValue,
-        bool expectedIsModelSet)
+        bool expectedIsModelSet
+    )
     {
         // Arrange
         var formatter = GetInputFormatter();
@@ -433,7 +463,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         var formatterContext = CreateInputFormatterContext(
             typeof(string),
             httpContext,
-            treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue);
+            treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue
+        );
 
         // Act
         var result = await formatter.ReadAsync(formatterContext);
@@ -450,7 +481,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         // Arrange
         var formatter = GetInputFormatter();
 
-        var content = "{ \"Id\": 5, \"Person\": { \"Name\": \"name\", \"Numbers\": [3, 2, \"Hamburger\"]} }";
+        var content =
+            "{ \"Id\": 5, \"Person\": { \"Name\": \"name\", \"Numbers\": [3, 2, \"Hamburger\"]} }";
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = GetHttpContext(contentBytes);
 
@@ -463,12 +495,14 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+        Assert.Collection(
+            formatterContext.ModelState.OrderBy(k => k.Key),
             kvp =>
             {
                 Assert.Equal(expectedKey, kvp.Key);
                 Assert.Single(kvp.Value.Errors);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -499,7 +533,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         var content = "{\"name\": \"Test\"}";
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = GetHttpContext(contentBytes);
-        var testBufferedReadStream = new VerifyDisposeFileBufferingReadStream(httpContext.Request.Body, 1024);
+        var testBufferedReadStream = new VerifyDisposeFileBufferingReadStream(
+            httpContext.Request.Body,
+            1024
+        );
         httpContext.Request.Body = testBufferedReadStream;
 
         var formatterContext = CreateInputFormatterContext(typeof(ComplexModel), httpContext);
@@ -576,18 +613,22 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
     internal abstract string ReadAsync_ComplexPoco_Expected { get; }
 
-    protected abstract TextInputFormatter GetInputFormatter(bool allowInputFormatterExceptionMessages = true);
+    protected abstract TextInputFormatter GetInputFormatter(
+        bool allowInputFormatterExceptionMessages = true
+    );
 
     protected static HttpContext GetHttpContext(
         byte[] contentBytes,
-        string contentType = "application/json")
+        string contentType = "application/json"
+    )
     {
         return GetHttpContext(new MemoryStream(contentBytes), contentType);
     }
 
     protected static HttpContext GetHttpContext(
         Stream requestStream,
-        string contentType = "application/json")
+        string contentType = "application/json"
+    )
     {
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Body = requestStream;
@@ -600,7 +641,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         Type modelType,
         HttpContext httpContext,
         string modelName = null,
-        bool treatEmptyInputAsDefaultValue = false)
+        bool treatEmptyInputAsDefaultValue = false
+    )
     {
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForType(modelType);
@@ -611,7 +653,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
             modelState: new ModelStateDictionary(),
             metadata: metadata,
             readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader,
-            treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue);
+            treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue
+        );
     }
 
     protected sealed class ComplexPoco
@@ -640,9 +683,8 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
     private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
     {
         public bool Disposed { get; private set; }
-        public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold) : base(inner, memoryThreshold)
-        {
-        }
+        public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
+            : base(inner, memoryThreshold) { }
 
         protected override void Dispose(bool disposing)
         {

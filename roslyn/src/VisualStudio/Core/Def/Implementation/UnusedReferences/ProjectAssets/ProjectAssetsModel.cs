@@ -13,7 +13,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
     internal class ProjectAssetsFile
     {
         public int Version { get; set; }
-        public Dictionary<string, Dictionary<string, ProjectAssetsTargetLibrary>>? Targets { get; set; }
+        public Dictionary<
+            string,
+            Dictionary<string, ProjectAssetsTargetLibrary>
+        >? Targets { get; set; }
         public Dictionary<string, ProjectAssetsLibrary>? Libraries { get; set; }
         public Dictionary<string, List<string>>? ProjectFileDependencyGroups { get; set; }
         public ProjectAssetsProject? Project { get; set; }
@@ -28,7 +31,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
     internal class ProjectAssetsTargetLibraryCompile
     {
-
     }
 
     internal class ProjectAssetsLibrary
@@ -51,7 +53,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
     internal class ProjectAssetsProjectFramework
     {
         public string? TargetAlias { get; set; }
-        public Dictionary<string, ProjectAssetsProjectFrameworkDependency>? Dependencies { get; set; }
+        public Dictionary<
+            string,
+            ProjectAssetsProjectFrameworkDependency
+        >? Dependencies { get; set; }
     }
 
     internal class ProjectAssetsProjectFrameworkDependency

@@ -6,13 +6,13 @@
 // Seed: 13788434105727734599
 // Reduced from 365.1 KiB to 0.9 KiB in 02:25:35
 // Exits with error:
-// 
+//
 // Assert failure(PID 11828 [0x00002e34], Thread: 24792 [0x60d8]): Assertion failed 'm_VariableLiveRanges != nullptr && !m_VariableLiveRanges->empty()' in 'Program:M53(byref,byref)' during 'Generate code' (IL size 177)
-// 
+//
 //     File: D:\dev\dotnet\runtime\src\coreclr\jit\codegencommon.cpp Line: 11987
 //     Image: D:\dev\Fuzzlyn\Fuzzlyn\publish\windows-x64\Fuzzlyn.exe
-// 
-// 
+//
+//
 public class Runtime_57752_2
 {
     internal static ulong s_46;
@@ -37,19 +37,27 @@ public class Runtime_57752_2
         }
         finally
         {
-            for (int var2 = 0; var2 < -1; var2++)
-            {
-            }
+            for (int var2 = 0; var2 < -1; var2++) { }
 
-            try
-            {
-            }
+            try { }
             finally
             {
                 System.Console.WriteLine(var11);
             }
 
-            var vr7 = new uint[][]{new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}, new uint[]{0}};
+            var vr7 = new uint[][]
+            {
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 },
+                new uint[] { 0 }
+            };
         }
 
         System.Console.WriteLine(arg0);

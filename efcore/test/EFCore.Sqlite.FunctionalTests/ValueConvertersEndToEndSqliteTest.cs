@@ -14,9 +14,7 @@ namespace Microsoft.EntityFrameworkCore
         : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndSqliteTest.ValueConvertersEndToEndSqliteFixture>
     {
         public ValueConvertersEndToEndSqliteTest(ValueConvertersEndToEndSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         [ConditionalTheory]
         [InlineData(nameof(ConvertingEntity.BoolAsChar), "TEXT", false)]
@@ -96,7 +94,11 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(nameof(ConvertingEntity.NullableBytesAsString), "TEXT", true)]
         [InlineData(nameof(ConvertingEntity.NullableBytesAsNullableString), "TEXT", true)]
         [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToBinary), "INTEGER", true)]
-        [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToNullableBinary), "INTEGER", true)]
+        [InlineData(
+            nameof(ConvertingEntity.NullableDateTimeOffsetToNullableBinary),
+            "INTEGER",
+            true
+        )]
         [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToString), "TEXT", true)]
         [InlineData(nameof(ConvertingEntity.NullableDateTimeOffsetToNullableString), "TEXT", true)]
         [InlineData(nameof(ConvertingEntity.NullableDateTimeToBinary), "INTEGER", true)]
@@ -152,11 +154,14 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Properties_with_conversions_map_to_appropriately_null_columns(
             string propertyName,
             string databaseType,
-            bool isNullable)
+            bool isNullable
+        )
         {
             using var context = CreateContext();
 
-            var property = context.Model.FindEntityType(typeof(ConvertingEntity))!.FindProperty(propertyName);
+            var property = context.Model.FindEntityType(typeof(ConvertingEntity))!.FindProperty(
+                propertyName
+            );
 
             Assert.Equal(databaseType, property!.GetColumnType());
             Assert.Equal(isNullable, property!.IsNullable);
@@ -164,8 +169,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ValueConvertersEndToEndSqliteFixture : ValueConvertersEndToEndFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -176,9 +181,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
                         b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
-                        b.Property(e => e.NullableEnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
+                        b.Property(e => e.NullableEnumerableOfInt)
+                            .HasDefaultValue(Enumerable.Empty<int>());
                         b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
-                    });
+                    }
+                );
             }
         }
     }

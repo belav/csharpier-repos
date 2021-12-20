@@ -77,7 +77,8 @@ public class SocketTransportOptions
     /// calls <see cref="Socket.Bind"/> as part of its implementation, so implementors
     /// using this method do not need to call it again.
     /// </remarks>
-    public Func<EndPoint, Socket> CreateBoundListenSocket { get; set; } = CreateDefaultBoundListenSocket;
+    public Func<EndPoint, Socket> CreateBoundListenSocket { get; set; } =
+        CreateDefaultBoundListenSocket;
 
     /// <summary>
     /// Creates a default instance of <see cref="Socket"/> for the given <see cref="EndPoint"/>
@@ -110,7 +111,11 @@ public class SocketTransportOptions
                 );
                 break;
             case UnixDomainSocketEndPoint unix:
-                listenSocket = new Socket(unix.AddressFamily, SocketType.Stream, ProtocolType.Unspecified);
+                listenSocket = new Socket(
+                    unix.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                );
                 break;
             case IPEndPoint ip:
                 listenSocket = new Socket(ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -120,10 +125,13 @@ public class SocketTransportOptions
                 {
                     listenSocket.DualMode = true;
                 }
-
                 break;
             default:
-                listenSocket = new Socket(endpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                listenSocket = new Socket(
+                    endpoint.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 break;
         }
 
@@ -139,5 +147,6 @@ public class SocketTransportOptions
         return listenSocket;
     }
 
-    internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } = System.Buffers.PinnedBlockMemoryPoolFactory.Create;
+    internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } =
+        System.Buffers.PinnedBlockMemoryPoolFactory.Create;
 }

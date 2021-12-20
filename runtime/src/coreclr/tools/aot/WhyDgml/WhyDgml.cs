@@ -13,7 +13,7 @@ using System.Reflection;
 //
 // It works best if FirstMarkLogStrategy is used. It might hit cycles if full
 // marking strategy is used, so better not try that. That's untested.
-// 
+//
 // Given the name of the DGML file and a name of the node in the DGML graph,
 // it prints the path from the node to the roots.
 

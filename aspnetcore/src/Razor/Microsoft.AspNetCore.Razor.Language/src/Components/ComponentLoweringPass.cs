@@ -12,7 +12,10 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
     // This pass runs earlier than our other passes that 'lower' specific kinds of attributes.
     public override int Order => 0;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (!IsComponentDocument(documentNode))
         {
@@ -50,7 +53,13 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                     // the first one and ignore the others.
                     if (++count > 1)
                     {
-                        node.Diagnostics.Add(ComponentDiagnosticFactory.Create_MultipleComponents(node.Source, node.TagName, node.TagHelpers));
+                        node.Diagnostics.Add(
+                            ComponentDiagnosticFactory.Create_MultipleComponents(
+                                node.Source,
+                                node.TagName,
+                                node.TagHelpers
+                            )
+                        );
                         break;
                     }
                 }
@@ -58,7 +67,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
 
             if (count >= 1)
             {
-                reference.Replace(RewriteAsComponent(node, node.TagHelpers.First(t => t.IsComponentTagHelper())));
+                reference.Replace(
+                    RewriteAsComponent(node, node.TagHelpers.First(t => t.IsComponentTagHelper()))
+                );
             }
             else
             {
@@ -67,7 +78,10 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
         }
     }
 
-    private static ComponentIntermediateNode RewriteAsComponent(TagHelperIntermediateNode node, TagHelperDescriptor tagHelper)
+    private static ComponentIntermediateNode RewriteAsComponent(
+        TagHelperIntermediateNode node,
+        TagHelperDescriptor tagHelper
+    )
     {
         var component = new ComponentIntermediateNode()
         {
@@ -89,7 +103,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
         // because we see the nodes in the wrong order.
         foreach (var childContent in component.ChildContents)
         {
-            childContent.ParameterName ??= component.ChildContentParameterName ?? ComponentMetadata.ChildContent.DefaultParameterName;
+            childContent.ParameterName ??=
+                component.ChildContentParameterName
+                ?? ComponentMetadata.ChildContent.DefaultParameterName;
         }
 
         ValidateRequiredAttributes(node, tagHelper, component);
@@ -97,9 +113,19 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
         return component;
     }
 
-    private static void ValidateRequiredAttributes(TagHelperIntermediateNode node, TagHelperDescriptor tagHelper, ComponentIntermediateNode intermediateNode)
+    private static void ValidateRequiredAttributes(
+        TagHelperIntermediateNode node,
+        TagHelperDescriptor tagHelper,
+        ComponentIntermediateNode intermediateNode
+    )
     {
-        if (intermediateNode.Children.Any(c => c is TagHelperDirectiveAttributeIntermediateNode node && (node.TagHelper?.IsSplatTagHelper() ?? false)))
+        if (
+            intermediateNode.Children.Any(
+                c =>
+                    c is TagHelperDirectiveAttributeIntermediateNode node
+                    && (node.TagHelper?.IsSplatTagHelper() ?? false)
+            )
+        )
         {
             // If there are any splat attributes, assume the user may have provided all values.
             // This pass runs earlier than ComponentSplatLoweringPass, so we cannot rely on the presence of SplatIntermediateNode to make this check.
@@ -111,22 +137,33 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             if (!IsPresentAsAttribute(requiredAttribute.Name, intermediateNode))
             {
                 intermediateNode.Diagnostics.Add(
-                  RazorDiagnosticFactory.CreateComponent_EditorRequiredParameterNotSpecified(
-                      node.Source ?? SourceSpan.Undefined,
-                      intermediateNode.TagName,
-                      requiredAttribute.Name));
+                    RazorDiagnosticFactory.CreateComponent_EditorRequiredParameterNotSpecified(
+                        node.Source ?? SourceSpan.Undefined,
+                        intermediateNode.TagName,
+                        requiredAttribute.Name
+                    )
+                );
             }
         }
 
-        static bool IsPresentAsAttribute(string attributeName, ComponentIntermediateNode intermediateNode)
+        static bool IsPresentAsAttribute(
+            string attributeName,
+            ComponentIntermediateNode intermediateNode
+        )
         {
             foreach (var child in intermediateNode.Children)
             {
-                if (child is ComponentAttributeIntermediateNode attributeNode && attributeName == attributeNode.AttributeName)
+                if (
+                    child is ComponentAttributeIntermediateNode attributeNode
+                    && attributeName == attributeNode.AttributeName
+                )
                 {
                     return true;
                 }
-                else if (child is ComponentChildContentIntermediateNode childContent && attributeName == childContent.AttributeName)
+                else if (
+                    child is ComponentChildContentIntermediateNode childContent
+                    && attributeName == childContent.AttributeName
+                )
                 {
                     return true;
                 }
@@ -209,11 +246,22 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             //    which is always allowed.
             // 5. Each 'child content' element will generate its own lambda, and be assigned to the property
             //    that matches the element name.
-            if (!node.Children.OfType<TagHelperIntermediateNode>().Any(t => t.TagHelpers.Any(th => th.IsChildContentTagHelper())))
+            if (
+                !node.Children
+                    .OfType<TagHelperIntermediateNode>()
+                    .Any(t => t.TagHelpers.Any(th => th.IsChildContentTagHelper()))
+            )
             {
                 // This node has implicit child content. It may or may not have an attribute that matches.
                 var attribute = _component.Component.BoundAttributes
-                    .Where(a => string.Equals(a.Name, ComponentsApi.RenderTreeBuilder.ChildContent, StringComparison.Ordinal))
+                    .Where(
+                        a =>
+                            string.Equals(
+                                a.Name,
+                                ComponentsApi.RenderTreeBuilder.ChildContent,
+                                StringComparison.Ordinal
+                            )
+                    )
                     .FirstOrDefault();
                 _children.Add(RewriteChildContent(attribute, node.Source, node.Children));
                 return;
@@ -231,28 +279,44 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                     continue;
                 }
 
-                if (child is TagHelperIntermediateNode tagHelperNode &&
-                    tagHelperNode.TagHelpers.Any(th => th.IsChildContentTagHelper()))
+                if (
+                    child is TagHelperIntermediateNode tagHelperNode
+                    && tagHelperNode.TagHelpers.Any(th => th.IsChildContentTagHelper())
+                )
                 {
                     // This is a child content element
                     var attribute = _component.Component.BoundAttributes
-                        .Where(a => string.Equals(a.Name, tagHelperNode.TagName, StringComparison.Ordinal))
+                        .Where(
+                            a =>
+                                string.Equals(
+                                    a.Name,
+                                    tagHelperNode.TagName,
+                                    StringComparison.Ordinal
+                                )
+                        )
                         .FirstOrDefault();
                     _children.Add(RewriteChildContent(attribute, child.Source, child.Children));
                     continue;
                 }
 
                 // If we get here then this is significant content inside a component with explicit child content.
-                child.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(child.Source, _component));
+                child.Diagnostics.Add(
+                    ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(
+                        child.Source,
+                        _component
+                    )
+                );
                 _children.Add(child);
             }
 
             bool IsIgnorableWhitespace(IntermediateNode n)
             {
-                if (n is HtmlContentIntermediateNode html &&
-                    html.Children.Count == 1 &&
-                    html.Children[0] is IntermediateToken token &&
-                    string.IsNullOrWhiteSpace(token.Content))
+                if (
+                    n is HtmlContentIntermediateNode html
+                    && html.Children.Count == 1
+                    && html.Children[0] is IntermediateToken token
+                    && string.IsNullOrWhiteSpace(token.Content)
+                )
                 {
                     return true;
                 }
@@ -261,7 +325,11 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             }
         }
 
-        private ComponentChildContentIntermediateNode RewriteChildContent(BoundAttributeDescriptor attribute, SourceSpan? source, IntermediateNodeCollection children)
+        private ComponentChildContentIntermediateNode RewriteChildContent(
+            BoundAttributeDescriptor attribute,
+            SourceSpan? source,
+            IntermediateNodeCollection children
+        )
         {
             var childContent = new ComponentChildContentIntermediateNode()
             {
@@ -300,22 +368,46 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                         }
 
                         // The parameter name is invalid.
-                        childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(property.Source, property.AttributeName, attribute.Name));
+                        childContent.Diagnostics.Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(
+                                property.Source,
+                                property.AttributeName,
+                                attribute.Name
+                            )
+                        );
                         continue;
                     }
 
                     // This is an unrecognized tag helper bound attribute. This will practically never happen unless the child content descriptor was misconfigured.
-                    childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(property.Source, property.AttributeName, attribute.Name));
+                    childContent.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                            property.Source,
+                            property.AttributeName,
+                            attribute.Name
+                        )
+                    );
                 }
                 else if (child is TagHelperHtmlAttributeIntermediateNode a)
                 {
                     // This is an HTML attribute on a child content.
-                    childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(a.Source, a.AttributeName, attribute.Name));
+                    childContent.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                            a.Source,
+                            a.AttributeName,
+                            attribute.Name
+                        )
+                    );
                 }
                 else if (child is TagHelperDirectiveAttributeIntermediateNode directiveAttribute)
                 {
                     // We don't support directive attributes inside child content, this is possible if you try to do something like put '@ref' on a child content.
-                    childContent.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(directiveAttribute.Source, directiveAttribute.OriginalAttributeName, attribute.Name));
+                    childContent.Diagnostics.Add(
+                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                            directiveAttribute.Source,
+                            directiveAttribute.OriginalAttributeName,
+                            attribute.Name
+                        )
+                    );
                 }
                 else
                 {
@@ -327,13 +419,21 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             return childContent;
         }
 
-        private bool TryGetAttributeStringContent(TagHelperPropertyIntermediateNode property, out string content)
+        private bool TryGetAttributeStringContent(
+            TagHelperPropertyIntermediateNode property,
+            out string content
+        )
         {
             // The success path looks like - a single HTML Attribute Value node with tokens
-            if (property.Children.Count == 1 &&
-                property.Children[0] is HtmlContentIntermediateNode html)
+            if (
+                property.Children.Count == 1
+                && property.Children[0] is HtmlContentIntermediateNode html
+            )
             {
-                content = string.Join(string.Empty, html.Children.OfType<IntermediateToken>().Select(n => n.Content));
+                content = string.Join(
+                    string.Empty,
+                    html.Children.OfType<IntermediateToken>().Select(n => n.Content)
+                );
                 return true;
             }
 
@@ -341,7 +441,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             return false;
         }
 
-        public override void VisitTagHelperHtmlAttribute(TagHelperHtmlAttributeIntermediateNode node)
+        public override void VisitTagHelperHtmlAttribute(
+            TagHelperHtmlAttributeIntermediateNode node
+        )
         {
             var attribute = new ComponentAttributeIntermediateNode(node);
             _children.Add(attribute);
@@ -352,10 +454,7 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             {
                 if (attribute.Children[i] is HtmlAttributeValueIntermediateNode htmlValue)
                 {
-                    var newNode = new HtmlContentIntermediateNode()
-                    {
-                        Source = htmlValue.Source,
-                    };
+                    var newNode = new HtmlContentIntermediateNode() { Source = htmlValue.Source, };
                     for (var j = 0; j < htmlValue.Children.Count; j++)
                     {
                         newNode.Children.Add(htmlValue.Children[j]);
@@ -363,7 +462,10 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
 
                     attribute.Children[i] = newNode;
                 }
-                else if (attribute.Children[i] is CSharpExpressionAttributeValueIntermediateNode expressionValue)
+                else if (
+                    attribute.Children[i]
+                    is CSharpExpressionAttributeValueIntermediateNode expressionValue
+                )
                 {
                     var newNode = new CSharpExpressionIntermediateNode()
                     {
@@ -376,7 +478,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
 
                     attribute.Children[i] = newNode;
                 }
-                else if (attribute.Children[i] is CSharpCodeAttributeValueIntermediateNode codeValue)
+                else if (
+                    attribute.Children[i] is CSharpCodeAttributeValueIntermediateNode codeValue
+                )
                 {
                     var newNode = new CSharpExpressionIntermediateNode()
                     {
@@ -405,7 +509,10 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
 
             // Another special case here - this might be a type argument. These don't represent 'real' parameters
             // that get passed to the component, it needs special code generation support.
-            if (node.TagHelper.IsGenericTypedComponent() && node.BoundAttribute.IsTypeParameterProperty())
+            if (
+                node.TagHelper.IsGenericTypedComponent()
+                && node.BoundAttribute.IsTypeParameterProperty()
+            )
             {
                 _children.Add(new ComponentTypeArgumentIntermediateNode(node));
                 return;
@@ -426,14 +533,22 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                 }
 
                 // The parameter name is invalid.
-                _component.Diagnostics.Add(ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(node.Source, node.AttributeName, _component.TagName));
+                _component.Diagnostics.Add(
+                    ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(
+                        node.Source,
+                        node.AttributeName,
+                        _component.TagName
+                    )
+                );
                 return;
             }
 
             _children.Add(new ComponentAttributeIntermediateNode(node));
         }
 
-        public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
+        public override void VisitTagHelperDirectiveAttribute(
+            TagHelperDirectiveAttributeIntermediateNode node
+        )
         {
             // We don't want to do anything special with directive attributes here.
             // Let their corresponding lowering pass take care of processing them.
@@ -472,7 +587,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             }
         }
 
-        public override void VisitTagHelperHtmlAttribute(TagHelperHtmlAttributeIntermediateNode node)
+        public override void VisitTagHelperHtmlAttribute(
+            TagHelperHtmlAttributeIntermediateNode node
+        )
         {
             var attribute = new HtmlAttributeIntermediateNode()
             {
@@ -506,7 +623,6 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                     {
                         attribute.Children.Add(RewriteAttributeContent(node.Children[i]));
                     }
-
                     break;
             }
 
@@ -532,7 +648,6 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                     return value;
                 }
 
-
                 return content;
             }
         }
@@ -542,10 +657,16 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             // Each 'tag helper property' belongs to a specific tag helper. We want to handle
             // the cases for components, but leave others alone. This allows our other passes
             // to handle those cases.
-            _children.Add(node.TagHelper.IsComponentTagHelper() ? (IntermediateNode)new ComponentAttributeIntermediateNode(node) : node);
+            _children.Add(
+                node.TagHelper.IsComponentTagHelper()
+                  ? (IntermediateNode)new ComponentAttributeIntermediateNode(node)
+                  : node
+            );
         }
 
-        public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
+        public override void VisitTagHelperDirectiveAttribute(
+            TagHelperDirectiveAttributeIntermediateNode node
+        )
         {
             // We don't want to do anything special with directive attributes here.
             // Let their corresponding lowering pass take care of processing them.

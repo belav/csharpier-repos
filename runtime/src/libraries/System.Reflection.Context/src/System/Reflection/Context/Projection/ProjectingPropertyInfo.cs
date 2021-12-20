@@ -11,8 +11,7 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given property
     internal class ProjectingPropertyInfo : DelegatingPropertyInfo, IProjectable
     {
-        public ProjectingPropertyInfo(PropertyInfo property, Projector projector)
-            : base(property)
+        public ProjectingPropertyInfo(PropertyInfo property, Projector projector) : base(property)
         {
             Debug.Assert(null != projector);
 
@@ -70,7 +69,10 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return Projector.Project(base.GetCustomAttributesData(), Projector.ProjectCustomAttributeData);
+            return Projector.Project(
+                base.GetCustomAttributesData(),
+                Projector.ProjectCustomAttributeData
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -92,9 +94,9 @@ namespace System.Reflection.Context.Projection
 
         public override bool Equals([NotNullWhen(true)] object? o)
         {
-            return o is ProjectingPropertyInfo other &&
-                Projector == other.Projector &&
-                UnderlyingProperty.Equals(other.UnderlyingProperty);
+            return o is ProjectingPropertyInfo other
+                && Projector == other.Projector
+                && UnderlyingProperty.Equals(other.UnderlyingProperty);
         }
 
         public override int GetHashCode()

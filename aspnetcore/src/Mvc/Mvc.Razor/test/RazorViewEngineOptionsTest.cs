@@ -19,20 +19,22 @@ public class RazorViewEngineOptionsTest
         var services = new ServiceCollection().AddOptions();
         var areaViewLocations = new[]
         {
-                "/Areas/{2}/MvcViews/{1}/{0}.cshtml",
-                "/Areas/{2}/MvcViews/Shared/{0}.cshtml",
-                "/MvcViews/Shared/{0}.cshtml"
-            };
+            "/Areas/{2}/MvcViews/{1}/{0}.cshtml",
+            "/Areas/{2}/MvcViews/Shared/{0}.cshtml",
+            "/MvcViews/Shared/{0}.cshtml"
+        };
         var builder = new MvcBuilder(services, new ApplicationPartManager());
-        builder.AddRazorOptions(options =>
-        {
-            options.AreaViewLocationFormats.Clear();
-
-            foreach (var location in areaViewLocations)
+        builder.AddRazorOptions(
+            options =>
             {
-                options.AreaViewLocationFormats.Add(location);
+                options.AreaViewLocationFormats.Clear();
+
+                foreach (var location in areaViewLocations)
+                {
+                    options.AreaViewLocationFormats.Add(location);
+                }
             }
-        });
+        );
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RazorViewEngineOptions>>();
 
@@ -48,21 +50,19 @@ public class RazorViewEngineOptionsTest
     {
         // Arrange
         var services = new ServiceCollection().AddOptions();
-        var viewLocations = new[]
-        {
-                "/MvcViews/{1}/{0}.cshtml",
-                "/MvcViews/Shared/{0}.cshtml"
-            };
+        var viewLocations = new[] { "/MvcViews/{1}/{0}.cshtml", "/MvcViews/Shared/{0}.cshtml" };
         var builder = new MvcBuilder(services, new ApplicationPartManager());
-        builder.AddRazorOptions(options =>
-        {
-            options.ViewLocationFormats.Clear();
-
-            foreach (var location in viewLocations)
+        builder.AddRazorOptions(
+            options =>
             {
-                options.ViewLocationFormats.Add(location);
+                options.ViewLocationFormats.Clear();
+
+                foreach (var location in viewLocations)
+                {
+                    options.ViewLocationFormats.Add(location);
+                }
             }
-        });
+        );
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RazorViewEngineOptions>>();
 

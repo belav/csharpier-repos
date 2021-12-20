@@ -15,7 +15,11 @@ namespace System.Text.Json.Tests.Serialization
     {
         [Theory]
         [MemberData(nameof(GetAsyncEnumerableSources))]
-        public static async Task WriteRootLevelAsyncEnumerable<TElement>(IEnumerable<TElement> source, int delayInterval, int bufferSize)
+        public static async Task WriteRootLevelAsyncEnumerable<TElement>(
+            IEnumerable<TElement> source,
+            int delayInterval,
+            int bufferSize
+        )
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
@@ -35,7 +39,11 @@ namespace System.Text.Json.Tests.Serialization
 
         [Theory]
         [MemberData(nameof(GetAsyncEnumerableSources))]
-        public static async Task WriteNestedAsyncEnumerable<TElement>(IEnumerable<TElement> source, int delayInterval, int bufferSize)
+        public static async Task WriteNestedAsyncEnumerable<TElement>(
+            IEnumerable<TElement> source,
+            int delayInterval,
+            int bufferSize
+        )
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
@@ -55,7 +63,11 @@ namespace System.Text.Json.Tests.Serialization
 
         [Theory]
         [MemberData(nameof(GetAsyncEnumerableSources))]
-        public static async Task WriteNestedAsyncEnumerable_DTO<TElement>(IEnumerable<TElement> source, int delayInterval, int bufferSize)
+        public static async Task WriteNestedAsyncEnumerable_DTO<TElement>(
+            IEnumerable<TElement> source,
+            int delayInterval,
+            int bufferSize
+        )
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
@@ -66,7 +78,11 @@ namespace System.Text.Json.Tests.Serialization
 
             using var stream = new Utf8MemoryStream();
             var asyncEnumerable = new MockedAsyncEnumerable<TElement>(source, delayInterval);
-            await JsonSerializer.SerializeAsync(stream, new AsyncEnumerableDto<TElement> { Data = asyncEnumerable }, options);
+            await JsonSerializer.SerializeAsync(
+                stream,
+                new AsyncEnumerableDto<TElement> { Data = asyncEnumerable },
+                options
+            );
 
             JsonTestHelper.AssertJsonEqual(expectedJson, stream.ToString());
             Assert.Equal(1, asyncEnumerable.TotalCreatedEnumerators);
@@ -79,12 +95,19 @@ namespace System.Text.Json.Tests.Serialization
             var longRunningEnumerable = new MockedAsyncEnumerable<int>(
                 source: Enumerable.Range(1, 100),
                 delayInterval: 1,
-                delay: TimeSpan.FromMinutes(1));
+                delay: TimeSpan.FromMinutes(1)
+            );
 
             using var utf8Stream = new Utf8MemoryStream();
             using var cts = new CancellationTokenSource(delay: TimeSpan.FromSeconds(5));
-            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await JsonSerializer.SerializeAsync(utf8Stream, longRunningEnumerable, cancellationToken: cts.Token));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                async () =>
+                    await JsonSerializer.SerializeAsync(
+                        utf8Stream,
+                        longRunningEnumerable,
+                        cancellationToken: cts.Token
+                    )
+            );
 
             Assert.Equal(1, longRunningEnumerable.TotalCreatedEnumerators);
             Assert.Equal(1, longRunningEnumerable.TotalDisposedEnumerators);
@@ -97,7 +120,11 @@ namespace System.Text.Json.Tests.Serialization
 
         [Theory]
         [MemberData(nameof(GetAsyncEnumerableSources))]
-        public static async Task WriteSequentialNestedAsyncEnumerables<TElement>(IEnumerable<TElement> source, int delayInterval, int bufferSize)
+        public static async Task WriteSequentialNestedAsyncEnumerables<TElement>(
+            IEnumerable<TElement> source,
+            int delayInterval,
+            int bufferSize
+        )
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
@@ -108,7 +135,11 @@ namespace System.Text.Json.Tests.Serialization
 
             using var stream = new Utf8MemoryStream();
             var asyncEnumerable = new MockedAsyncEnumerable<TElement>(source, delayInterval);
-            await JsonSerializer.SerializeAsync(stream, new { Data1 = asyncEnumerable, Data2 = asyncEnumerable }, options);
+            await JsonSerializer.SerializeAsync(
+                stream,
+                new { Data1 = asyncEnumerable, Data2 = asyncEnumerable },
+                options
+            );
 
             JsonTestHelper.AssertJsonEqual(expectedJson, stream.ToString());
             Assert.Equal(2, asyncEnumerable.TotalCreatedEnumerators);
@@ -117,7 +148,11 @@ namespace System.Text.Json.Tests.Serialization
 
         [Theory]
         [MemberData(nameof(GetAsyncEnumerableSources))]
-        public static async Task WriteAsyncEnumerableOfAsyncEnumerables<TElement>(IEnumerable<TElement> source, int delayInterval, int bufferSize)
+        public static async Task WriteAsyncEnumerableOfAsyncEnumerables<TElement>(
+            IEnumerable<TElement> source,
+            int delayInterval,
+            int bufferSize
+        )
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
@@ -125,12 +160,15 @@ namespace System.Text.Json.Tests.Serialization
             };
 
             const int OuterEnumerableCount = 5;
-            string expectedJson = JsonSerializer.Serialize(Enumerable.Repeat(source, OuterEnumerableCount));
+            string expectedJson = JsonSerializer.Serialize(
+                Enumerable.Repeat(source, OuterEnumerableCount)
+            );
 
             var innerAsyncEnumerable = new MockedAsyncEnumerable<TElement>(source, delayInterval);
-            var outerAsyncEnumerable =
-                new MockedAsyncEnumerable<IAsyncEnumerable<TElement>>(
-                    Enumerable.Repeat(innerAsyncEnumerable, OuterEnumerableCount), delayInterval);
+            var outerAsyncEnumerable = new MockedAsyncEnumerable<IAsyncEnumerable<TElement>>(
+                Enumerable.Repeat(innerAsyncEnumerable, OuterEnumerableCount),
+                delayInterval
+            );
 
             using var stream = new Utf8MemoryStream();
             await JsonSerializer.SerializeAsync(stream, outerAsyncEnumerable, options);
@@ -145,24 +183,34 @@ namespace System.Text.Json.Tests.Serialization
         [Fact]
         public static void WriteRootLevelAsyncEnumerableSync_ThrowsNotSupportedException()
         {
-            IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(Enumerable.Range(1, 10));
+            IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(
+                Enumerable.Range(1, 10)
+            );
             Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(asyncEnumerable));
         }
 
         [Fact]
         public static void WriteNestedAsyncEnumerableSync_ThrowsNotSupportedException()
         {
-            IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(Enumerable.Range(1, 10));
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(new { Data = asyncEnumerable }));
+            IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(
+                Enumerable.Range(1, 10)
+            );
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Serialize(new { Data = asyncEnumerable })
+            );
         }
 
         [Fact]
         public static async Task WriteAsyncEnumerable_ElementSerializationThrows_ShouldDisposeEnumerator()
         {
             using var stream = new Utf8MemoryStream();
-            var asyncEnumerable = new MockedAsyncEnumerable<IEnumerable<int>>(Enumerable.Repeat(ThrowingEnumerable(), 2));
+            var asyncEnumerable = new MockedAsyncEnumerable<IEnumerable<int>>(
+                Enumerable.Repeat(ThrowingEnumerable(), 2)
+            );
 
-            await Assert.ThrowsAsync<DivideByZeroException>(() => JsonSerializer.SerializeAsync(stream, new { Data = asyncEnumerable }));
+            await Assert.ThrowsAsync<DivideByZeroException>(
+                () => JsonSerializer.SerializeAsync(stream, new { Data = asyncEnumerable })
+            );
             Assert.Equal(1, asyncEnumerable.TotalCreatedEnumerators);
             Assert.Equal(1, asyncEnumerable.TotalDisposedEnumerators);
 
@@ -178,7 +226,9 @@ namespace System.Text.Json.Tests.Serialization
         {
             var utf8Stream = new Utf8MemoryStream("[0,1,2,3,4]");
 
-            IAsyncEnumerable<int> result = await JsonSerializer.DeserializeAsync<IAsyncEnumerable<int>>(utf8Stream);
+            IAsyncEnumerable<int> result = await JsonSerializer.DeserializeAsync<
+                IAsyncEnumerable<int>
+            >(utf8Stream);
             Assert.Equal(new int[] { 0, 1, 2, 3, 4 }, await result.ToListAsync());
         }
 
@@ -196,7 +246,9 @@ namespace System.Text.Json.Tests.Serialization
         {
             var utf8Stream = new Utf8MemoryStream("[[0,1,2,3,4], []]");
 
-            var result = await JsonSerializer.DeserializeAsync<IAsyncEnumerable<IAsyncEnumerable<int>>>(utf8Stream);
+            var result = await JsonSerializer.DeserializeAsync<
+                IAsyncEnumerable<IAsyncEnumerable<int>>
+            >(utf8Stream);
             var resultArray = await result.ToListAsync();
 
             Assert.Equal(2, resultArray.Count);
@@ -208,7 +260,10 @@ namespace System.Text.Json.Tests.Serialization
         public static async Task ReadRootLevelAsyncEnumerableDerivative_ThrowsNotSupportedException()
         {
             var utf8Stream = new Utf8MemoryStream("[0,1,2,3,4]");
-            await Assert.ThrowsAsync<NotSupportedException>(async () => await JsonSerializer.DeserializeAsync<MockedAsyncEnumerable<int>>(utf8Stream));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializer.DeserializeAsync<MockedAsyncEnumerable<int>>(utf8Stream)
+            );
         }
 
         public static IEnumerable<object[]> GetAsyncEnumerableSources()
@@ -217,11 +272,47 @@ namespace System.Text.Json.Tests.Serialization
             yield return WrapArgs(Enumerable.Range(0, 20), 0, 1);
             yield return WrapArgs(Enumerable.Range(0, 100), 20, 20);
             yield return WrapArgs(Enumerable.Range(0, 1000), 20, 20);
-            yield return WrapArgs(Enumerable.Range(0, 100).Select(i => $"lorem ipsum dolor: {i}"), 20, 100);
-            yield return WrapArgs(Enumerable.Range(0, 10).Select(i => new { Field1 = i, Field2 = $"lorem ipsum dolor: {i}", Field3 = i % 2 == 0 }), 3, 100);
-            yield return WrapArgs(Enumerable.Range(0, 100).Select(i => new { Field1 = i, Field2 = $"lorem ipsum dolor: {i}", Field3 = i % 2 == 0 }), 20, 100);
+            yield return WrapArgs(
+                Enumerable.Range(0, 100).Select(i => $"lorem ipsum dolor: {i}"),
+                20,
+                100
+            );
+            yield return WrapArgs(
+                Enumerable
+                    .Range(0, 10)
+                    .Select(
+                        i =>
+                            new
+                            {
+                                Field1 = i,
+                                Field2 = $"lorem ipsum dolor: {i}",
+                                Field3 = i % 2 == 0
+                            }
+                    ),
+                3,
+                100
+            );
+            yield return WrapArgs(
+                Enumerable
+                    .Range(0, 100)
+                    .Select(
+                        i =>
+                            new
+                            {
+                                Field1 = i,
+                                Field2 = $"lorem ipsum dolor: {i}",
+                                Field3 = i % 2 == 0
+                            }
+                    ),
+                20,
+                100
+            );
 
-            static object[] WrapArgs<TSource>(IEnumerable<TSource> source, int delayInterval, int bufferSize) => new object[]{ source, delayInterval, bufferSize };
+            static object[] WrapArgs<TSource>(
+                IEnumerable<TSource> source,
+                int delayInterval,
+                int bufferSize
+            ) => new object[] { source, delayInterval, bufferSize };
         }
 
         private static async Task<List<T>> ToListAsync<T>(this IAsyncEnumerable<T> source)
@@ -234,7 +325,9 @@ namespace System.Text.Json.Tests.Serialization
             return list;
         }
 
-        private class MockedAsyncEnumerable<TElement> : IAsyncEnumerable<TElement>, IEnumerable<TElement>
+        private class MockedAsyncEnumerable<TElement>
+            : IAsyncEnumerable<TElement>,
+              IEnumerable<TElement>
         {
             private readonly IEnumerable<TElement> _source;
             private readonly TimeSpan _delay;
@@ -244,14 +337,20 @@ namespace System.Text.Json.Tests.Serialization
             internal int TotalDisposedEnumerators { get; private set; }
             internal int TotalEnumeratedElements { get; private set; }
 
-            public MockedAsyncEnumerable(IEnumerable<TElement> source, int delayInterval = 0, TimeSpan? delay = null)
+            public MockedAsyncEnumerable(
+                IEnumerable<TElement> source,
+                int delayInterval = 0,
+                TimeSpan? delay = null
+            )
             {
                 _source = source;
                 _delay = delay ?? TimeSpan.FromMilliseconds(20);
                 _delayInterval = delayInterval;
             }
 
-            public IAsyncEnumerator<TElement> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+            public IAsyncEnumerator<TElement> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            )
             {
                 return new MockedAsyncEnumerator(this, cancellationToken);
             }
@@ -262,7 +361,10 @@ namespace System.Text.Json.Tests.Serialization
                 private readonly MockedAsyncEnumerable<TElement> _enumerable;
                 private IAsyncEnumerator<TElement> _innerEnumerator;
 
-                public MockedAsyncEnumerator(MockedAsyncEnumerable<TElement> enumerable, CancellationToken token)
+                public MockedAsyncEnumerator(
+                    MockedAsyncEnumerable<TElement> enumerable,
+                    CancellationToken token
+                )
                 {
                     _enumerable = enumerable;
                     _innerEnumerator = enumerable.GetAsyncEnumeratorInner(token);
@@ -278,7 +380,9 @@ namespace System.Text.Json.Tests.Serialization
                 public ValueTask<bool> MoveNextAsync() => _innerEnumerator.MoveNextAsync();
             }
 
-            private async IAsyncEnumerator<TElement> GetAsyncEnumeratorInner(CancellationToken cancellationToken = default)
+            private async IAsyncEnumerator<TElement> GetAsyncEnumeratorInner(
+                CancellationToken cancellationToken = default
+            )
             {
                 TotalCreatedEnumerators++;
                 int i = 0;
@@ -300,19 +404,18 @@ namespace System.Text.Json.Tests.Serialization
                 }
             }
 
-            public IEnumerator<TElement> GetEnumerator() => throw new InvalidOperationException("Collection should not be enumerated synchronously.");
+            public IEnumerator<TElement> GetEnumerator() =>
+                throw new InvalidOperationException(
+                    "Collection should not be enumerated synchronously."
+                );
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
         private class Utf8MemoryStream : MemoryStream
         {
-            public Utf8MemoryStream() : base()
-            {
-            }
+            public Utf8MemoryStream() : base() { }
 
-            public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text))
-            {
-            }
+            public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text)) { }
 
             public override string ToString() => Encoding.UTF8.GetString(ToArray());
         }

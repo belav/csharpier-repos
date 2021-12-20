@@ -19,9 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             internal readonly ImmutableArray<SyntaxTree> SyntaxTrees; // In ordinal order.
             internal readonly ImmutableDictionary<SyntaxTree, int> OrdinalMap; // Inverse of syntaxTrees array (i.e. maps tree to index)
-            internal readonly ImmutableDictionary<SyntaxTree, ImmutableArray<LoadDirective>> LoadDirectiveMap;
+            internal readonly ImmutableDictionary<
+                SyntaxTree,
+                ImmutableArray<LoadDirective>
+            > LoadDirectiveMap;
             internal readonly ImmutableDictionary<string, SyntaxTree> LoadedSyntaxTreeMap;
-            internal readonly ImmutableDictionary<SyntaxTree, Lazy<RootSingleNamespaceDeclaration>> RootNamespaces;
+            internal readonly ImmutableDictionary<
+                SyntaxTree,
+                Lazy<RootSingleNamespaceDeclaration>
+            > RootNamespaces;
             internal readonly DeclarationTable DeclarationTable;
 
             internal State(
@@ -29,11 +35,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableDictionary<SyntaxTree, int> syntaxTreeOrdinalMap,
                 ImmutableDictionary<SyntaxTree, ImmutableArray<LoadDirective>> loadDirectiveMap,
                 ImmutableDictionary<string, SyntaxTree> loadedSyntaxTreeMap,
-                ImmutableDictionary<SyntaxTree, Lazy<RootSingleNamespaceDeclaration>> rootNamespaces,
-                DeclarationTable declarationTable)
+                ImmutableDictionary<
+                    SyntaxTree,
+                    Lazy<RootSingleNamespaceDeclaration>
+                > rootNamespaces,
+                DeclarationTable declarationTable
+            )
             {
-                Debug.Assert(syntaxTrees.All(tree => syntaxTrees[syntaxTreeOrdinalMap[tree]] == tree));
-                Debug.Assert(syntaxTrees.SetEquals(rootNamespaces.Keys.AsImmutable(), EqualityComparer<SyntaxTree>.Default));
+                Debug.Assert(
+                    syntaxTrees.All(tree => syntaxTrees[syntaxTreeOrdinalMap[tree]] == tree)
+                );
+                Debug.Assert(
+                    syntaxTrees.SetEquals(
+                        rootNamespaces.Keys.AsImmutable(),
+                        EqualityComparer<SyntaxTree>.Default
+                    )
+                );
 
                 this.SyntaxTrees = syntaxTrees;
                 this.OrdinalMap = syntaxTreeOrdinalMap;

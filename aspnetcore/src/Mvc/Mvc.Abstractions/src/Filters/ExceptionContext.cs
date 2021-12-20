@@ -22,9 +22,7 @@ public class ExceptionContext : FilterContext
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="filters">All applicable <see cref="IFilterMetadata"/> implementations.</param>
     public ExceptionContext(ActionContext actionContext, IList<IFilterMetadata> filters)
-        : base(actionContext, filters)
-    {
-    }
+        : base(actionContext, filters) { }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Exception"/> caught while executing the action.
@@ -42,7 +40,6 @@ public class ExceptionContext : FilterContext
                 return _exception!;
             }
         }
-
         set
         {
             _exceptionDispatchInfo = null;
@@ -56,11 +53,7 @@ public class ExceptionContext : FilterContext
     /// </summary>
     public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
     {
-        get
-        {
-            return _exceptionDispatchInfo;
-        }
-
+        get { return _exceptionDispatchInfo; }
         set
         {
             _exception = null;

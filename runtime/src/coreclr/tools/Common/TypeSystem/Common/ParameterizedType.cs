@@ -16,18 +16,12 @@ namespace Internal.TypeSystem
 
         public TypeDesc ParameterType
         {
-            get
-            {
-                return _parameterType;
-            }
+            get { return _parameterType; }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _parameterType.Context;
-            }
+            get { return _parameterType.Context; }
         }
     }
 }

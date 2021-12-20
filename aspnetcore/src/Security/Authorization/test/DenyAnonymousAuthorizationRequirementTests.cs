@@ -23,6 +23,9 @@ public class DenyAnonymousAuthorizationRequirementTests
         var formattedValue = requirement.ToString();
 
         // Assert
-        Assert.Equal("DenyAnonymousAuthorizationRequirement: Requires an authenticated user.", formattedValue);
+        Assert.Equal(
+            "DenyAnonymousAuthorizationRequirement: Requires an authenticated user.",
+            formattedValue
+        );
     }
 }

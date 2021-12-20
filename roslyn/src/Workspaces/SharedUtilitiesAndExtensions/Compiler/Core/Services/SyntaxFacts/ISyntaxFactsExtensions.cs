@@ -17,10 +17,17 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 {
     internal static class ISyntaxFactsExtensions
     {
-        private static readonly ObjectPool<Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>> s_stackPool
-            = SharedPools.Default<Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>>();
+        private static readonly ObjectPool<
+            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>
+        > s_stackPool = SharedPools.Default<
+            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>
+        >();
 
-        public static bool IsOnSingleLine(this ISyntaxFacts syntaxFacts, SyntaxNode node, bool fullSpan)
+        public static bool IsOnSingleLine(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node,
+            bool fullSpan
+        )
         {
             // The stack logic assumes the initial node is not null
             Contract.ThrowIfNull(node);
@@ -44,7 +51,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         private static bool IsOnSingleLine(
-            ISyntaxFacts syntaxFacts, Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)> stack)
+            ISyntaxFacts syntaxFacts,
+            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)> stack
+        )
         {
             while (stack.Count > 0)
             {
@@ -53,7 +62,14 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 {
                     // If this token isn't on a single line, then the original node definitely
                     // isn't on a single line.
-                    if (!IsOnSingleLine(syntaxFacts, currentNodeOrToken.AsToken(), currentLeading, currentTrailing))
+                    if (
+                        !IsOnSingleLine(
+                            syntaxFacts,
+                            currentNodeOrToken.AsToken(),
+                            currentLeading,
+                            currentTrailing
+                        )
+                    )
                         return false;
                 }
                 else
@@ -90,18 +106,27 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return true;
         }
 
-        private static bool IsOnSingleLine(ISyntaxFacts syntaxFacts, SyntaxToken token, bool leading, bool trailing)
+        private static bool IsOnSingleLine(
+            ISyntaxFacts syntaxFacts,
+            SyntaxToken token,
+            bool leading,
+            bool trailing
+        )
         {
             // If any of our trivia is not on a single line, then we're not on a single line.
-            if (!IsOnSingleLine(syntaxFacts, token.LeadingTrivia, leading) ||
-                !IsOnSingleLine(syntaxFacts, token.TrailingTrivia, trailing))
+            if (
+                !IsOnSingleLine(syntaxFacts, token.LeadingTrivia, leading)
+                || !IsOnSingleLine(syntaxFacts, token.TrailingTrivia, trailing)
+            )
             {
                 return false;
             }
 
             // Only string literals can span multiple lines.  Only need to check those.
-            if (syntaxFacts.SyntaxKinds.StringLiteralToken == token.RawKind ||
-                syntaxFacts.SyntaxKinds.InterpolatedStringTextToken == token.RawKind)
+            if (
+                syntaxFacts.SyntaxKinds.StringLiteralToken == token.RawKind
+                || syntaxFacts.SyntaxKinds.InterpolatedStringTextToken == token.RawKind
+            )
             {
                 // This allocated.  But we only do it in the string case. For all other tokens
                 // we don't need any allocations.
@@ -115,7 +140,11 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return true;
         }
 
-        private static bool IsOnSingleLine(ISyntaxFacts syntaxFacts, SyntaxTriviaList triviaList, bool checkTrivia)
+        private static bool IsOnSingleLine(
+            ISyntaxFacts syntaxFacts,
+            SyntaxTriviaList triviaList,
+            bool checkTrivia
+        )
         {
             if (checkTrivia)
             {
@@ -152,11 +181,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return true;
         }
 
-        private static bool IsOnSingleLine(string value)
-            => value.GetNumberOfLineBreaks() == 0;
+        private static bool IsOnSingleLine(string value) => value.GetNumberOfLineBreaks() == 0;
 
         public static bool ContainsInterleavedDirective(
-            this ISyntaxFacts syntaxFacts, ImmutableArray<SyntaxNode> nodes, CancellationToken cancellationToken)
+            this ISyntaxFacts syntaxFacts,
+            ImmutableArray<SyntaxNode> nodes,
+            CancellationToken cancellationToken
+        )
         {
             if (nodes.Length > 0)
             {
@@ -174,11 +205,18 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return false;
         }
 
-        public static bool ContainsInterleavedDirective(this ISyntaxFacts syntaxFacts, SyntaxNode node, CancellationToken cancellationToken)
-            => ContainsInterleavedDirective(syntaxFacts, node.Span, node, cancellationToken);
+        public static bool ContainsInterleavedDirective(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) => ContainsInterleavedDirective(syntaxFacts, node.Span, node, cancellationToken);
 
         public static bool ContainsInterleavedDirective(
-            this ISyntaxFacts syntaxFacts, TextSpan span, SyntaxNode node, CancellationToken cancellationToken)
+            this ISyntaxFacts syntaxFacts,
+            TextSpan span,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var token in node.DescendantTokens())
             {
@@ -189,14 +227,20 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return false;
         }
 
-        public static bool SpansPreprocessorDirective(this ISyntaxFacts syntaxFacts, IEnumerable<SyntaxNode> nodes)
+        public static bool SpansPreprocessorDirective(
+            this ISyntaxFacts syntaxFacts,
+            IEnumerable<SyntaxNode> nodes
+        )
         {
             if (nodes == null || nodes.IsEmpty())
             {
                 return false;
             }
 
-            return SpansPreprocessorDirective(syntaxFacts, nodes.SelectMany(n => n.DescendantTokens()));
+            return SpansPreprocessorDirective(
+                syntaxFacts,
+                nodes.SelectMany(n => n.DescendantTokens())
+            );
         }
 
         /// <summary>
@@ -206,9 +250,12 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// token will not have it's trailing trivia checked.  All other trivia will be checked to
         /// see if it contains a preprocessor directive.
         /// </summary>
-        public static bool SpansPreprocessorDirective(this ISyntaxFacts syntaxFacts, IEnumerable<SyntaxToken> tokens)
+        public static bool SpansPreprocessorDirective(
+            this ISyntaxFacts syntaxFacts,
+            IEnumerable<SyntaxToken> tokens
+        )
         {
-            // we want to check all leading trivia of all tokens (except the 
+            // we want to check all leading trivia of all tokens (except the
             // first one), and all trailing trivia of all tokens (except the
             // last one).
 
@@ -229,8 +276,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 {
                     // check the leading trivia of this token, and the trailing trivia
                     // of the previous token.
-                    if (SpansPreprocessorDirective(syntaxFacts, token.LeadingTrivia) ||
-                        SpansPreprocessorDirective(syntaxFacts, previousToken.TrailingTrivia))
+                    if (
+                        SpansPreprocessorDirective(syntaxFacts, token.LeadingTrivia)
+                        || SpansPreprocessorDirective(syntaxFacts, previousToken.TrailingTrivia)
+                    )
                     {
                         return true;
                     }
@@ -242,8 +291,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return false;
         }
 
-        private static bool SpansPreprocessorDirective(this ISyntaxFacts syntaxFacts, SyntaxTriviaList list)
-            => list.Any(t => syntaxFacts.IsPreprocessorDirective(t));
+        private static bool SpansPreprocessorDirective(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTriviaList list
+        ) => list.Any(t => syntaxFacts.IsPreprocessorDirective(t));
 
         public static bool IsLegalIdentifier(this ISyntaxFacts syntaxFacts, string name)
         {
@@ -268,8 +319,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return true;
         }
 
-        public static bool IsReservedOrContextualKeyword(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => syntaxFacts.IsReservedKeyword(token) || syntaxFacts.IsContextualKeyword(token);
+        public static bool IsReservedOrContextualKeyword(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxToken token
+        ) => syntaxFacts.IsReservedKeyword(token) || syntaxFacts.IsContextualKeyword(token);
 
         public static bool IsWord(this ISyntaxFacts syntaxFacts, SyntaxToken token)
         {
@@ -278,25 +331,31 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 || syntaxFacts.IsPreprocessorKeyword(token);
         }
 
-        public static bool IsRegularOrDocumentationComment(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => syntaxFacts.IsRegularComment(trivia) || syntaxFacts.IsDocumentationComment(trivia);
+        public static bool IsRegularOrDocumentationComment(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => syntaxFacts.IsRegularComment(trivia) || syntaxFacts.IsDocumentationComment(trivia);
 
         public static void GetPartsOfAssignmentStatement(
-            this ISyntaxFacts syntaxFacts, SyntaxNode statement,
-            out SyntaxNode left, out SyntaxNode right)
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode statement,
+            out SyntaxNode left,
+            out SyntaxNode right
+        )
         {
             syntaxFacts.GetPartsOfAssignmentStatement(statement, out left, out _, out right);
         }
 
         public static SyntaxNode GetExpressionOfInvocationExpression(
-            this ISyntaxFacts syntaxFacts, SyntaxNode node)
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfInvocationExpression(node, out var expression, out _);
             return expression;
         }
 
-        public static SyntaxNode Unparenthesize(
-            this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode Unparenthesize(this ISyntaxFacts syntaxFacts, SyntaxNode node)
         {
             SyntaxToken openParenToken;
             SyntaxNode operand;
@@ -304,13 +363,21 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
             if (syntaxFacts.IsParenthesizedPattern(node))
             {
-                syntaxFacts.GetPartsOfParenthesizedPattern(node,
-                    out openParenToken, out operand, out closeParenToken);
+                syntaxFacts.GetPartsOfParenthesizedPattern(
+                    node,
+                    out openParenToken,
+                    out operand,
+                    out closeParenToken
+                );
             }
             else
             {
-                syntaxFacts.GetPartsOfParenthesizedExpression(node,
-                    out openParenToken, out operand, out closeParenToken);
+                syntaxFacts.GetPartsOfParenthesizedExpression(
+                    node,
+                    out openParenToken,
+                    out operand,
+                    out closeParenToken
+                );
             }
 
             var leadingTrivia = openParenToken.LeadingTrivia
@@ -318,7 +385,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 .Where(t => !syntaxFacts.IsElastic(t))
                 .Concat(operand.GetLeadingTrivia());
 
-            var trailingTrivia = operand.GetTrailingTrivia()
+            var trailingTrivia = operand
+                .GetTrailingTrivia()
                 .Concat(closeParenToken.LeadingTrivia)
                 .Where(t => !syntaxFacts.IsElastic(t))
                 .Concat(closeParenToken.TrailingTrivia);
@@ -333,9 +401,11 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (resultNode.GetLeadingTrivia().Count == 0)
             {
                 var previousToken = node.GetFirstToken().GetPreviousToken();
-                if (previousToken.TrailingTrivia.Count == 0 &&
-                    syntaxFacts.IsWordOrNumber(previousToken) &&
-                    syntaxFacts.IsWordOrNumber(resultNode.GetFirstToken()))
+                if (
+                    previousToken.TrailingTrivia.Count == 0
+                    && syntaxFacts.IsWordOrNumber(previousToken)
+                    && syntaxFacts.IsWordOrNumber(resultNode.GetFirstToken())
+                )
                 {
                     resultNode = resultNode.WithPrependedLeadingTrivia(syntaxFacts.ElasticMarker);
                 }
@@ -344,9 +414,11 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (resultNode.GetTrailingTrivia().Count == 0)
             {
                 var nextToken = node.GetLastToken().GetNextToken();
-                if (nextToken.LeadingTrivia.Count == 0 &&
-                    syntaxFacts.IsWordOrNumber(nextToken) &&
-                    syntaxFacts.IsWordOrNumber(resultNode.GetLastToken()))
+                if (
+                    nextToken.LeadingTrivia.Count == 0
+                    && syntaxFacts.IsWordOrNumber(nextToken)
+                    && syntaxFacts.IsWordOrNumber(resultNode.GetLastToken())
+                )
                 {
                     resultNode = resultNode.WithAppendedTrailingTrivia(syntaxFacts.ElasticMarker);
                 }
@@ -355,68 +427,115 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return resultNode;
         }
 
-        private static bool IsWordOrNumber(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => syntaxFacts.IsWord(token) || syntaxFacts.IsNumericLiteral(token);
+        private static bool IsWordOrNumber(this ISyntaxFacts syntaxFacts, SyntaxToken token) =>
+            syntaxFacts.IsWord(token) || syntaxFacts.IsNumericLiteral(token);
 
-        public static bool SpansPreprocessorDirective(this ISyntaxFacts service, SyntaxNode node)
-            => service.SpansPreprocessorDirective(SpecializedCollections.SingletonEnumerable(node));
+        public static bool SpansPreprocessorDirective(this ISyntaxFacts service, SyntaxNode node) =>
+            service.SpansPreprocessorDirective(SpecializedCollections.SingletonEnumerable(node));
 
-        public static bool SpansPreprocessorDirective(this ISyntaxFacts service, params SyntaxNode[] nodes)
-            => service.SpansPreprocessorDirective((IEnumerable<SyntaxNode>)nodes);
+        public static bool SpansPreprocessorDirective(
+            this ISyntaxFacts service,
+            params SyntaxNode[] nodes
+        ) => service.SpansPreprocessorDirective((IEnumerable<SyntaxNode>)nodes);
 
-        public static bool IsWhitespaceOrEndOfLineTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => syntaxFacts.IsWhitespaceTrivia(trivia) || syntaxFacts.IsEndOfLineTrivia(trivia);
+        public static bool IsWhitespaceOrEndOfLineTrivia(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => syntaxFacts.IsWhitespaceTrivia(trivia) || syntaxFacts.IsEndOfLineTrivia(trivia);
 
-        public static void GetPartsOfBinaryExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node, out SyntaxNode left, out SyntaxNode right)
-            => syntaxFacts.GetPartsOfBinaryExpression(node, out left, out _, out right);
+        public static void GetPartsOfBinaryExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node,
+            out SyntaxNode left,
+            out SyntaxNode right
+        ) => syntaxFacts.GetPartsOfBinaryExpression(node, out left, out _, out right);
 
-        public static SyntaxNode GetPatternOfParenthesizedPattern(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetPatternOfParenthesizedPattern(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfParenthesizedPattern(node, out _, out var pattern, out _);
             return pattern;
         }
 
-        public static SyntaxToken GetOperatorTokenOfBinaryExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxToken GetOperatorTokenOfBinaryExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfBinaryExpression(node, out _, out var token, out _);
             return token;
         }
 
-        public static bool IsAnonymousOrLocalFunction(this ISyntaxFacts syntaxFacts, SyntaxNode node)
-            => syntaxFacts.IsAnonymousFunctionExpression(node) ||
-               syntaxFacts.IsLocalFunctionStatement(node);
+        public static bool IsAnonymousOrLocalFunction(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        ) =>
+            syntaxFacts.IsAnonymousFunctionExpression(node)
+            || syntaxFacts.IsLocalFunctionStatement(node);
 
-        public static SyntaxNode? GetExpressionOfElementAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode? GetExpressionOfElementAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfElementAccessExpression(node, out var expression, out _);
             return expression;
         }
 
-        public static SyntaxNode? GetArgumentListOfElementAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode? GetArgumentListOfElementAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfElementAccessExpression(node, out _, out var argumentList);
             return argumentList;
         }
 
-        public static SyntaxNode GetExpressionOfConditionalAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetExpressionOfConditionalAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfConditionalAccessExpression(node, out var expression, out _);
             return expression;
         }
 
-        public static SyntaxToken GetOperatorTokenOfMemberAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxToken GetOperatorTokenOfMemberAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfMemberAccessExpression(node, out _, out var operatorToken, out _);
             return operatorToken;
         }
 
-        public static void GetPartsOfMemberAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node, out SyntaxNode expression, out SyntaxNode name)
-            => syntaxFacts.GetPartsOfMemberAccessExpression(node, out expression, out _, out name);
+        public static void GetPartsOfMemberAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node,
+            out SyntaxNode expression,
+            out SyntaxNode name
+        ) => syntaxFacts.GetPartsOfMemberAccessExpression(node, out expression, out _, out name);
 
-        public static void GetPartsOfConditionalAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node, out SyntaxNode expression, out SyntaxNode whenNotNull)
-            => syntaxFacts.GetPartsOfConditionalAccessExpression(node, out expression, out _, out whenNotNull);
+        public static void GetPartsOfConditionalAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node,
+            out SyntaxNode expression,
+            out SyntaxNode whenNotNull
+        ) =>
+            syntaxFacts.GetPartsOfConditionalAccessExpression(
+                node,
+                out expression,
+                out _,
+                out whenNotNull
+            );
 
-        public static TextSpan GetSpanWithoutAttributes(this ISyntaxFacts syntaxFacts, SyntaxNode root, SyntaxNode node)
+        public static TextSpan GetSpanWithoutAttributes(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode root,
+            SyntaxNode node
+        )
         {
             // Span without AttributeLists
             // - No AttributeLists -> original .Span
@@ -434,7 +553,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 var afterAttributesToken = root.FindTokenOnRightOfPosition(endOfAttributeLists);
 
                 var endOfNode = node.Span.End;
-                var startOfNodeWithoutAttributes = Math.Min(afterAttributesToken.Span.Start, endOfNode);
+                var startOfNodeWithoutAttributes = Math.Min(
+                    afterAttributesToken.Span.Start,
+                    endOfNode
+                );
 
                 return TextSpan.FromBounds(startOfNodeWithoutAttributes, endOfNode);
             }
@@ -448,7 +570,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// <param name="syntaxFacts">The <see cref="ISyntaxFacts"/> implementation.</param>
         /// <param name="node">The statement.</param>
         /// <returns>The statement container for <paramref name="node"/>.</returns>
-        public static SyntaxNode? GetStatementContainer(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode? GetStatementContainer(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             for (var current = node; current is object; current = current.Parent)
             {
@@ -472,7 +597,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// legal).  However, in <c>a?.b()</c>, then <c>a</c> itself could be replaced with <c>(1 + 1)?.b()</c> to form
         /// a legal expression.
         /// </summary>
-        public static SyntaxNode GetRootStandaloneExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetRootStandaloneExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             // First, make sure we're on a construct the language things is a standalone expression.
             var standalone = syntaxFacts.GetStandaloneExpression(node);
@@ -483,79 +611,123 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         #region GetXXXOfYYY Members
 
-        public static SyntaxNode? GetArgumentListOfInvocationExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode? GetArgumentListOfInvocationExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfInvocationExpression(node, out _, out var argumentList);
             return argumentList;
         }
 
-        public static SyntaxNode? GetArgumentListOfObjectCreationExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode? GetArgumentListOfObjectCreationExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
-            syntaxFacts.GetPartsOfObjectCreationExpression(node, out _, out var argumentList, out _);
+            syntaxFacts.GetPartsOfObjectCreationExpression(
+                node,
+                out _,
+                out var argumentList,
+                out _
+            );
             return argumentList;
         }
 
-        public static SyntaxNode GetExpressionOfParenthesizedExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetExpressionOfParenthesizedExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfParenthesizedExpression(node, out _, out var expression, out _);
             return expression;
         }
 
-        public static SyntaxList<SyntaxNode> GetImportsOfBaseNamespaceDeclaration(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxList<SyntaxNode> GetImportsOfBaseNamespaceDeclaration(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfBaseNamespaceDeclaration(node, out _, out var imports, out _);
             return imports;
         }
 
-        public static SyntaxList<SyntaxNode> GetImportsOfCompilationUnit(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxList<SyntaxNode> GetImportsOfCompilationUnit(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfCompilationUnit(node, out var imports, out _, out _);
             return imports;
         }
 
-        public static SyntaxNode? GetInitializerOfObjectCreationExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode? GetInitializerOfObjectCreationExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfObjectCreationExpression(node, out _, out _, out var initializer);
             return initializer;
         }
 
-        public static SyntaxList<SyntaxNode> GetMembersOfBaseNamespaceDeclaration(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxList<SyntaxNode> GetMembersOfBaseNamespaceDeclaration(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfBaseNamespaceDeclaration(node, out _, out _, out var members);
             return members;
         }
 
-        public static SyntaxList<SyntaxNode> GetMembersOfCompilationUnit(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxList<SyntaxNode> GetMembersOfCompilationUnit(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfCompilationUnit(node, out _, out _, out var members);
             return members;
         }
 
-        public static SyntaxNode GetNameOfBaseNamespaceDeclaration(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetNameOfBaseNamespaceDeclaration(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfBaseNamespaceDeclaration(node, out var name, out _, out _);
             return name;
         }
 
-        public static SyntaxNode GetNameOfMemberAccessExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetNameOfMemberAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfMemberAccessExpression(node, out _, out var name);
             return name;
         }
 
-        public static SyntaxNode GetOperandOfPrefixUnaryExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetOperandOfPrefixUnaryExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfPrefixUnaryExpression(node, out _, out var operand);
             return operand;
         }
 
-        public static SyntaxToken GetOperatorTokenOfPrefixUnaryExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxToken GetOperatorTokenOfPrefixUnaryExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfPrefixUnaryExpression(node, out var operatorToken, out _);
             return operatorToken;
         }
 
-        public static SyntaxNode GetTypeOfObjectCreationExpression(this ISyntaxFacts syntaxFacts, SyntaxNode node)
+        public static SyntaxNode GetTypeOfObjectCreationExpression(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        )
         {
             syntaxFacts.GetPartsOfObjectCreationExpression(node, out var type, out _, out _);
             return type;
@@ -565,7 +737,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         #region IsXXXOfYYY members
 
-        public static bool IsExpressionOfAwaitExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
+        public static bool IsExpressionOfAwaitExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        )
         {
             var parent = node?.Parent;
             if (!syntaxFacts.IsAwaitExpression(parent))
@@ -574,7 +749,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return node == syntaxFacts.GetExpressionOfAwaitExpression(parent);
         }
 
-        public static bool IsExpressionOfInvocationExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
+        public static bool IsExpressionOfInvocationExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        )
         {
             var parent = node?.Parent;
             if (!syntaxFacts.IsInvocationExpression(parent))
@@ -584,7 +762,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return node == expression;
         }
 
-        public static bool IsExpressionOfMemberAccessExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
+        public static bool IsExpressionOfMemberAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        )
         {
             var parent = node?.Parent;
             if (!syntaxFacts.IsMemberAccessExpression(parent))
@@ -594,7 +775,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return node == expression;
         }
 
-        public static bool IsRightOfQualifiedName(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
+        public static bool IsRightOfQualifiedName(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        )
         {
             var parent = node?.Parent;
             if (!syntaxFacts.IsQualifiedName(parent))
@@ -604,7 +788,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return node == right;
         }
 
-        public static bool IsTypeOfObjectCreationExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
+        public static bool IsTypeOfObjectCreationExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        )
         {
             var parent = node?.Parent;
             if (!syntaxFacts.IsObjectCreationExpression(parent))
@@ -620,232 +807,345 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         #region trivia
 
-        public static bool IsEndOfLineTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.EndOfLineTrivia;
+        public static bool IsEndOfLineTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia) =>
+            trivia.RawKind == syntaxFacts.SyntaxKinds.EndOfLineTrivia;
 
-        public static bool IsMultiLineCommentTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.MultiLineCommentTrivia;
+        public static bool IsMultiLineCommentTrivia(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => trivia.RawKind == syntaxFacts.SyntaxKinds.MultiLineCommentTrivia;
 
-        public static bool IsMultiLineDocCommentTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.MultiLineDocCommentTrivia;
+        public static bool IsMultiLineDocCommentTrivia(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => trivia.RawKind == syntaxFacts.SyntaxKinds.MultiLineDocCommentTrivia;
 
-        public static bool IsShebangDirectiveTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.ShebangDirectiveTrivia;
+        public static bool IsShebangDirectiveTrivia(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => trivia.RawKind == syntaxFacts.SyntaxKinds.ShebangDirectiveTrivia;
 
-        public static bool IsSingleLineCommentTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.SingleLineCommentTrivia;
+        public static bool IsSingleLineCommentTrivia(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => trivia.RawKind == syntaxFacts.SyntaxKinds.SingleLineCommentTrivia;
 
-        public static bool IsSingleLineDocCommentTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.SingleLineDocCommentTrivia;
+        public static bool IsSingleLineDocCommentTrivia(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxTrivia trivia
+        ) => trivia.RawKind == syntaxFacts.SyntaxKinds.SingleLineDocCommentTrivia;
 
-        public static bool IsWhitespaceTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia)
-            => trivia.RawKind == syntaxFacts.SyntaxKinds.WhitespaceTrivia;
+        public static bool IsWhitespaceTrivia(this ISyntaxFacts syntaxFacts, SyntaxTrivia trivia) =>
+            trivia.RawKind == syntaxFacts.SyntaxKinds.WhitespaceTrivia;
 
-        public static bool IsSkippedTokensTrivia(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.SkippedTokensTrivia;
+        public static bool IsSkippedTokensTrivia(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.SkippedTokensTrivia;
 
         #endregion
 
         #region keywords
 
-        public static bool IsAwaitKeyword(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.AwaitKeyword;
+        public static bool IsAwaitKeyword(this ISyntaxFacts syntaxFacts, SyntaxToken token) =>
+            token.RawKind == syntaxFacts.SyntaxKinds.AwaitKeyword;
 
-        public static bool IsGlobalNamespaceKeyword(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.GlobalKeyword;
+        public static bool IsGlobalNamespaceKeyword(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxToken token
+        ) => token.RawKind == syntaxFacts.SyntaxKinds.GlobalKeyword;
 
         #endregion
 
         #region literal tokens
 
-        public static bool IsCharacterLiteral(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.CharacterLiteralToken;
+        public static bool IsCharacterLiteral(this ISyntaxFacts syntaxFacts, SyntaxToken token) =>
+            token.RawKind == syntaxFacts.SyntaxKinds.CharacterLiteralToken;
 
-        public static bool IsStringLiteral(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.StringLiteralToken;
+        public static bool IsStringLiteral(this ISyntaxFacts syntaxFacts, SyntaxToken token) =>
+            token.RawKind == syntaxFacts.SyntaxKinds.StringLiteralToken;
 
         #endregion
 
         #region tokens
 
-        public static bool IsIdentifier(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.IdentifierToken;
+        public static bool IsIdentifier(this ISyntaxFacts syntaxFacts, SyntaxToken token) =>
+            token.RawKind == syntaxFacts.SyntaxKinds.IdentifierToken;
 
-        public static bool IsHashToken(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.HashToken;
+        public static bool IsHashToken(this ISyntaxFacts syntaxFacts, SyntaxToken token) =>
+            token.RawKind == syntaxFacts.SyntaxKinds.HashToken;
 
-        public static bool IsInterpolatedStringTextToken(this ISyntaxFacts syntaxFacts, SyntaxToken token)
-            => token.RawKind == syntaxFacts.SyntaxKinds.InterpolatedStringTextToken;
+        public static bool IsInterpolatedStringTextToken(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxToken token
+        ) => token.RawKind == syntaxFacts.SyntaxKinds.InterpolatedStringTextToken;
 
         #endregion
 
         #region names
 
-        public static bool IsGenericName(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.GenericName;
+        public static bool IsGenericName(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.GenericName;
 
-        public static bool IsIdentifierName(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.IdentifierName;
+        public static bool IsIdentifierName(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.IdentifierName;
 
-        public static bool IsQualifiedName(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.QualifiedName;
+        public static bool IsQualifiedName(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.QualifiedName;
 
         #endregion
 
         #region types
 
-        public static bool IsTupleType(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.TupleType;
+        public static bool IsTupleType(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.TupleType;
 
         #endregion
 
         #region literal expressions
 
-        public static bool IsCharacterLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.CharacterLiteralExpression;
+        public static bool IsCharacterLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.CharacterLiteralExpression;
 
-        public static bool IsDefaultLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.DefaultLiteralExpression;
+        public static bool IsDefaultLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.DefaultLiteralExpression;
 
-        public static bool IsFalseLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.FalseLiteralExpression;
+        public static bool IsFalseLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.FalseLiteralExpression;
 
-        public static bool IsNumericLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.NumericLiteralExpression;
+        public static bool IsNumericLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.NumericLiteralExpression;
 
-        public static bool IsNullLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.NullLiteralExpression;
+        public static bool IsNullLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.NullLiteralExpression;
 
-        public static bool IsStringLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.StringLiteralExpression;
+        public static bool IsStringLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.StringLiteralExpression;
 
-        public static bool IsTrueLiteralExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.TrueLiteralExpression;
+        public static bool IsTrueLiteralExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.TrueLiteralExpression;
 
         #endregion
 
         #region expressions
 
-        public static bool IsAwaitExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.AwaitExpression;
+        public static bool IsAwaitExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.AwaitExpression;
 
-        public static bool IsBaseExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.BaseExpression;
+        public static bool IsBaseExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.BaseExpression;
 
-        public static bool IsConditionalAccessExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ConditionalAccessExpression;
+        public static bool IsConditionalAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ConditionalAccessExpression;
 
-        public static bool IsImplicitObjectCreationExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node != null && node.RawKind == syntaxFacts.SyntaxKinds.ImplicitObjectCreationExpression;
+        public static bool IsImplicitObjectCreationExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) =>
+            node != null
+            && node.RawKind == syntaxFacts.SyntaxKinds.ImplicitObjectCreationExpression;
 
-        public static bool IsInterpolatedStringExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.InterpolatedStringExpression;
+        public static bool IsInterpolatedStringExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.InterpolatedStringExpression;
 
-        public static bool IsInterpolation(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.Interpolation;
+        public static bool IsInterpolation(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.Interpolation;
 
-        public static bool IsInterpolatedStringText(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.InterpolatedStringText;
+        public static bool IsInterpolatedStringText(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.InterpolatedStringText;
 
-        public static bool IsInvocationExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.InvocationExpression;
+        public static bool IsInvocationExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.InvocationExpression;
 
-        public static bool IsLogicalAndExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.LogicalAndExpression;
+        public static bool IsLogicalAndExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.LogicalAndExpression;
 
-        public static bool IsLogicalOrExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.LogicalOrExpression;
+        public static bool IsLogicalOrExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.LogicalOrExpression;
 
-        public static bool IsLogicalNotExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.LogicalNotExpression;
+        public static bool IsLogicalNotExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.LogicalNotExpression;
 
-        public static bool IsObjectCreationExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ObjectCreationExpression;
+        public static bool IsObjectCreationExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ObjectCreationExpression;
 
-        public static bool IsParenthesizedExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ParenthesizedExpression;
+        public static bool IsParenthesizedExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ParenthesizedExpression;
 
-        public static bool IsQueryExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.QueryExpression;
+        public static bool IsQueryExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.QueryExpression;
 
-        public static bool IsSimpleMemberAccessExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.SimpleMemberAccessExpression;
+        public static bool IsSimpleMemberAccessExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.SimpleMemberAccessExpression;
 
-        public static bool IsThisExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ThisExpression;
+        public static bool IsThisExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ThisExpression;
 
-        public static bool IsThrowExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node != null && node.RawKind == syntaxFacts.SyntaxKinds.ThrowExpression;
+        public static bool IsThrowExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node != null && node.RawKind == syntaxFacts.SyntaxKinds.ThrowExpression;
 
-        public static bool IsTupleExpression(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.TupleExpression;
+        public static bool IsTupleExpression(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.TupleExpression;
 
-        public static bool ContainsGlobalStatement(this ISyntaxFacts syntaxFacts, SyntaxNode node)
-            => node.ChildNodes().Any(c => c.RawKind == syntaxFacts.SyntaxKinds.GlobalStatement);
+        public static bool ContainsGlobalStatement(
+            this ISyntaxFacts syntaxFacts,
+            SyntaxNode node
+        ) => node.ChildNodes().Any(c => c.RawKind == syntaxFacts.SyntaxKinds.GlobalStatement);
 
         #endregion
 
         #region statements
 
-        public static bool IsExpressionStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ExpressionStatement;
+        public static bool IsExpressionStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ExpressionStatement;
 
-        public static bool IsForEachStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ForEachStatement;
+        public static bool IsForEachStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ForEachStatement;
 
-        public static bool IsLocalDeclarationStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.LocalDeclarationStatement;
+        public static bool IsLocalDeclarationStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.LocalDeclarationStatement;
 
-        public static bool IsLocalFunctionStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node != null && node.RawKind == syntaxFacts.SyntaxKinds.LocalFunctionStatement;
+        public static bool IsLocalFunctionStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node != null && node.RawKind == syntaxFacts.SyntaxKinds.LocalFunctionStatement;
 
-        public static bool IsLockStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.LockStatement;
+        public static bool IsLockStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.LockStatement;
 
-        public static bool IsReturnStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ReturnStatement;
+        public static bool IsReturnStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ReturnStatement;
 
-        public static bool IsThrowStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ThrowStatement;
+        public static bool IsThrowStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ThrowStatement;
 
-        public static bool IsUsingStatement(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.UsingStatement;
+        public static bool IsUsingStatement(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.UsingStatement;
 
         #endregion
 
         #region members/declarations
 
-        public static bool IsAttribute(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.Attribute;
+        public static bool IsAttribute(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.Attribute;
 
-        public static bool IsClassDeclaration(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.ClassDeclaration;
+        public static bool IsClassDeclaration(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.ClassDeclaration;
 
-        public static bool IsGlobalAttribute(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => syntaxFacts.IsGlobalAssemblyAttribute(node) || syntaxFacts.IsGlobalModuleAttribute(node);
+        public static bool IsGlobalAttribute(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) =>
+            syntaxFacts.IsGlobalAssemblyAttribute(node)
+            || syntaxFacts.IsGlobalModuleAttribute(node);
 
-        public static bool IsParameter(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.Parameter;
+        public static bool IsParameter(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.Parameter;
 
-        public static bool IsTypeConstraint(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.TypeConstraint;
+        public static bool IsTypeConstraint(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.TypeConstraint;
 
-        public static bool IsVariableDeclarator(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.VariableDeclarator;
+        public static bool IsVariableDeclarator(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.VariableDeclarator;
 
-        public static bool IsFieldDeclaration(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.FieldDeclaration;
+        public static bool IsFieldDeclaration(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.FieldDeclaration;
 
-        public static bool IsTypeArgumentList(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.TypeArgumentList;
+        public static bool IsTypeArgumentList(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.TypeArgumentList;
 
         #endregion
 
         #region clauses
 
-        public static bool IsEqualsValueClause(this ISyntaxFacts syntaxFacts, [NotNullWhen(true)] SyntaxNode? node)
-            => node?.RawKind == syntaxFacts.SyntaxKinds.EqualsValueClause;
-
+        public static bool IsEqualsValueClause(
+            this ISyntaxFacts syntaxFacts,
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.RawKind == syntaxFacts.SyntaxKinds.EqualsValueClause;
         #endregion
 
         #endregion

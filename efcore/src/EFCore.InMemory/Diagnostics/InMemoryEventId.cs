@@ -29,15 +29,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         {
             // Transaction events
             TransactionIgnoredWarning = CoreEventId.ProviderBaseId,
-
             // Update events
             ChangesSaved = CoreEventId.ProviderBaseId + 100
         }
 
-        private static readonly string _transactionPrefix = DbLoggerCategory.Database.Transaction.Name + ".";
+        private static readonly string _transactionPrefix =
+            DbLoggerCategory.Database.Transaction.Name + ".";
 
-        private static EventId MakeTransactionId(Id id)
-            => new((int)id, _transactionPrefix + id);
+        private static EventId MakeTransactionId(Id id) => new((int)id, _transactionPrefix + id);
 
         /// <summary>
         ///     A transaction operation was requested, but ignored because in-memory does not support transactions.
@@ -50,12 +49,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="EventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </remarks>
-        public static readonly EventId TransactionIgnoredWarning = MakeTransactionId(Id.TransactionIgnoredWarning);
+        public static readonly EventId TransactionIgnoredWarning = MakeTransactionId(
+            Id.TransactionIgnoredWarning
+        );
 
         private static readonly string _updatePrefix = DbLoggerCategory.Update.Name + ".";
 
-        private static EventId MakeUpdateId(Id id)
-            => new((int)id, _updatePrefix + id);
+        private static EventId MakeUpdateId(Id id) => new((int)id, _updatePrefix + id);
 
         /// <summary>
         ///     Changes were saved to the database.

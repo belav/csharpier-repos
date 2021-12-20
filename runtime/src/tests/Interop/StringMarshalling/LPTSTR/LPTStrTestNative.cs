@@ -42,8 +42,15 @@ class LPTStrTestNative
     [DllImport(nameof(LPTStrTestNative), CharSet = CharSet.Unicode)]
     public static extern bool Verify_NullTerminators_PastEnd(StringBuilder builder, int length);
 
-    [DllImport(nameof(LPTStrTestNative), EntryPoint = "Verify_NullTerminators_PastEnd", CharSet = CharSet.Unicode)]
-    public static extern bool Verify_NullTerminators_PastEnd_Out([Out] StringBuilder builder, int length);
+    [DllImport(
+        nameof(LPTStrTestNative),
+        EntryPoint = "Verify_NullTerminators_PastEnd",
+        CharSet = CharSet.Unicode
+    )]
+    public static extern bool Verify_NullTerminators_PastEnd_Out(
+        [Out] StringBuilder builder,
+        int length
+    );
 
     [DllImport(nameof(LPTStrTestNative))]
     public static extern bool MatchFuncNameAnsi(ByValStringInStructAnsi str);
@@ -56,7 +63,13 @@ class LPTStrTestNative
     public static extern void ReverseByValStringUni(ref ByValStringInStructUnicode str);
 
     [DllImport(nameof(LPTStrTestNative))]
-    public static extern void ReverseCopyByValStringAnsi(ByValStringInStructAnsi str, out ByValStringInStructSplitAnsi strOut);
+    public static extern void ReverseCopyByValStringAnsi(
+        ByValStringInStructAnsi str,
+        out ByValStringInStructSplitAnsi strOut
+    );
     [DllImport(nameof(LPTStrTestNative))]
-    public static extern void ReverseCopyByValStringUni(ByValStringInStructUnicode str, out ByValStringInStructSplitUnicode strOut);
+    public static extern void ReverseCopyByValStringUni(
+        ByValStringInStructUnicode str,
+        out ByValStringInStructSplitUnicode strOut
+    );
 }

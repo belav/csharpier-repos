@@ -31,18 +31,17 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         ///     Creates a new <see cref="InMemoryConventionSetBuilder" /> instance.
         /// </summary>
         /// <param name="dependencies">The core dependencies for this service.</param>
-        public InMemoryConventionSetBuilder(
-            ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public InMemoryConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <inheritdoc />
         public override ConventionSet CreateConventionSet()
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelFinalizingConventions.Add(new DefiningQueryRewritingConvention(Dependencies));
+            conventionSet.ModelFinalizingConventions.Add(
+                new DefiningQueryRewritingConvention(Dependencies)
+            );
 
             return conventionSet;
         }
@@ -74,7 +73,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         {
             using var serviceScope = CreateServiceScope();
             using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-            return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+            return new ModelBuilder(
+                ConventionSet.CreateConventionSet(context),
+                context.GetService<ModelDependencies>()
+            );
         }
 
         private static IServiceScope CreateServiceScope()
@@ -84,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
                 .AddDbContext<DbContext>(
                     (p, o) =>
                         o.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                            .UseInternalServiceProvider(p))
+                            .UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider();
 
             return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();

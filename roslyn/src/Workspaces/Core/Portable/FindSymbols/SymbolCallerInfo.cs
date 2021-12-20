@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol callingSymbol,
             ISymbol calledSymbol,
             IEnumerable<Location> locations,
-            bool isDirect)
+            bool isDirect
+        )
         {
             CallingSymbol = callingSymbol;
             CalledSymbol = calledSymbol;

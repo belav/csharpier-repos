@@ -12,8 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     public class StringToEnumConverterTest
     {
-        private static readonly ValueConverter<string, Beatles> _stringToEnum
-            = new StringToEnumConverter<Beatles>();
+        private static readonly ValueConverter<string, Beatles> _stringToEnum =
+            new StringToEnumConverter<Beatles>();
 
         [ConditionalFact]
         public void Can_convert_strings_to_enums()
@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 CoreStrings.CannotConvertEnumValue("Jon", "Beatles"),
-                Assert.Throws<InvalidOperationException>(() => converter("Jon")).Message);
+                Assert.Throws<InvalidOperationException>(() => converter("Jon")).Message
+            );
         }
 
         [ConditionalFact]
@@ -90,9 +91,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 CoreStrings.ConverterBadType(
                     typeof(StringEnumConverter<string, Guid, Guid>).ShortDisplayName(),
                     "Guid",
-                    "enum types"),
+                    "enum types"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => new StringToEnumConverter<Guid>()).Message);
+                    () => new StringToEnumConverter<Guid>()
+                ).Message
+            );
         }
 
         private enum Beatles

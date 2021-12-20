@@ -16,9 +16,7 @@ namespace Issue_4115
         private GCHandle _pinHandle;
         private IntPtr _dataArrayPtr;
         public ArraySegment<byte> Data;
-        public MyClass()
-        {
-        }
+        public MyClass() { }
 
         public object Obj { get; private set; }
         public byte[] Array => Data.Array;
@@ -37,24 +35,25 @@ namespace Issue_4115
 
         public bool IsDefault
         {
-            get
-            {
-                return this._class == null;
-            }
+            get { return this._class == null; }
         }
 
         public bool IsEnd
         {
             get
             {
-                if (this._class == null) {
+                if (this._class == null)
+                {
                     return true;
                 }
-                if (this._index < this._class.End) {
+                if (this._index < this._class.End)
+                {
                     return false;
                 }
-                for (MyClass next = this._class.Next; next != null; next = next.Next) {
-                    if (next.Start < next.End) {
+                for (MyClass next = this._class.Next; next != null; next = next.Next)
+                {
+                    if (next.Start < next.End)
+                    {
                         return false;
                     }
                 }
@@ -64,18 +63,12 @@ namespace Issue_4115
 
         public MyClass Class
         {
-            get
-            {
-                return this._class;
-            }
+            get { return this._class; }
         }
 
         public int Index
         {
-            get
-            {
-                return this._index;
-            }
+            get { return this._index; }
         }
 
         public MyIterator(MyClass clazz)
@@ -94,19 +87,19 @@ namespace Issue_4115
 
     public class MainClass
     {
-        private readonly object _returnLock = new object(); 
- 
-        private MyClass _head; 
-        private MyClass _tail; 
+        private readonly object _returnLock = new object();
+
+        private MyClass _head;
+        private MyClass _tail;
         private MyIterator _lastStart;
 
         public MyIterator TestMethod()
         {
-            lock (_returnLock) 
+            lock (_returnLock)
             {
-                if (_tail == null) 
-                { 
-                    return default(MyIterator); 
+                if (_tail == null)
+                {
+                    return default(MyIterator);
                 }
 
                 // In this assignment there could be a GC hole:
@@ -121,8 +114,8 @@ namespace Issue_4115
                 // New gcrReg live regs = 00000000 { }
 
                 _lastStart = new MyIterator(_tail, _tail.End);
-                return _lastStart; 
-            } 
+                return _lastStart;
+            }
         }
 
         static int Main(string[] args)

@@ -15,7 +15,6 @@ internal static partial class Interop
             /// Stat includes the name.
             /// </summary>
             STATFLAG_DEFAULT = 0,
-
             /// <summary>
             /// Stat doesn't include the name.
             /// </summary>

@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         IReadOnlyList<string> ScaffoldModel(
             IModel model,
             string outputDir,
-            CompiledModelCodeGenerationOptions options);
+            CompiledModelCodeGenerationOptions options
+        );
     }
 }

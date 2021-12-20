@@ -39,7 +39,11 @@ namespace System.Diagnostics.Metrics
         internal KeyValuePair<string, object?> Tag1;
         internal KeyValuePair<string, object?> Tag2;
         internal KeyValuePair<string, object?> Tag3;
-        internal ThreeTagsBag(KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2, KeyValuePair<string, object?> tag3)
+        internal ThreeTagsBag(
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2,
+            KeyValuePair<string, object?> tag3
+        )
         {
             Tag1 = tag1;
             Tag2 = tag2;
@@ -73,7 +77,11 @@ namespace System.Diagnostics.Metrics
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
         /// <param name="tag2">A second key-value pair tag associated with the measurement.</param>
-        protected void RecordMeasurement(T measurement, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2)
+        protected void RecordMeasurement(
+            T measurement,
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2
+        )
         {
             TwoTagsBag tags = new TwoTagsBag(tag1, tag2);
 
@@ -87,7 +95,12 @@ namespace System.Diagnostics.Metrics
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
         /// <param name="tag2">A second key-value pair tag associated with the measurement.</param>
         /// <param name="tag3">A third key-value pair tag associated with the measurement.</param>
-        protected void RecordMeasurement(T measurement, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2, KeyValuePair<string, object?> tag3)
+        protected void RecordMeasurement(
+            T measurement,
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2,
+            KeyValuePair<string, object?> tag3
+        )
         {
             ThreeTagsBag tags = new ThreeTagsBag(tag1, tag2, tag3);
 
@@ -108,7 +121,10 @@ namespace System.Diagnostics.Metrics
                 return;
             }
 
-            RecordMeasurement(measurement, MemoryMarshal.CreateReadOnlySpan(ref Unsafe.AsRef(in tagList.Tag1), tagList.Count));
-       }
+            RecordMeasurement(
+                measurement,
+                MemoryMarshal.CreateReadOnlySpan(ref Unsafe.AsRef(in tagList.Tag1), tagList.Count)
+            );
+        }
     }
 }

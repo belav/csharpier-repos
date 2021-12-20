@@ -58,9 +58,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                 if (segment == null && endSegment - beginSegment == 3)
                 {
-                    if (pattern[beginSegment] == '*' &&
-                        pattern[beginSegment + 1] == '.' &&
-                        pattern[beginSegment + 2] == '*')
+                    if (
+                        pattern[beginSegment] == '*'
+                        && pattern[beginSegment + 1] == '.'
+                        && pattern[beginSegment + 2] == '*'
+                    )
                     {
                         // turn *.* into *
                         beginSegment += 2;
@@ -69,20 +71,20 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                 if (segment == null && endSegment - beginSegment == 2)
                 {
-                    if (pattern[beginSegment] == '*' &&
-                        pattern[beginSegment + 1] == '*')
+                    if (pattern[beginSegment] == '*' && pattern[beginSegment + 1] == '*')
                     {
                         // recognized **
                         segment = new RecursiveWildcardSegment();
                     }
-                    else if (pattern[beginSegment] == '.' &&
-                             pattern[beginSegment + 1] == '.')
+                    else if (pattern[beginSegment] == '.' && pattern[beginSegment + 1] == '.')
                     {
                         // recognized ..
 
                         if (!isParentSegmentLegal)
                         {
-                            throw new ArgumentException("\"..\" can be only added at the beginning of the pattern.");
+                            throw new ArgumentException(
+                                "\"..\" can be only added at the beginning of the pattern."
+                            );
                         }
                         segment = new ParentPathSegment();
                     }
@@ -99,9 +101,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                 if (segment == null && endSegment - beginSegment > 2)
                 {
-                    if (pattern[beginSegment] == '*' &&
-                        pattern[beginSegment + 1] == '*' &&
-                        pattern[beginSegment + 2] == '.')
+                    if (
+                        pattern[beginSegment] == '*'
+                        && pattern[beginSegment + 1] == '*'
+                        && pattern[beginSegment + 2] == '.'
+                    )
                     {
                         // recognize **.
                         // swallow the first *, add the recursive path segment and
@@ -127,7 +131,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                             if (endLiteral == endSegment)
                             {
                                 // and the only bit
-                                segment = new LiteralPathSegment(Portion(pattern, beginLiteral, endLiteral), ComparisonType);
+                                segment = new LiteralPathSegment(
+                                    Portion(pattern, beginLiteral, endLiteral),
+                                    ComparisonType
+                                );
                             }
                             else
                             {
@@ -159,7 +166,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                     if (segment == null)
                     {
-                        segment = new WildcardPathSegment(beginsWith, contains, endsWith, ComparisonType);
+                        segment = new WildcardPathSegment(
+                            beginsWith,
+                            contains,
+                            endsWith,
+                            ComparisonType
+                        );
                     }
                 }
 
@@ -205,7 +217,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
             }
             else
             {
-                return new RaggedPattern(allSegments, segmentsPatternStartsWith, segmentsPatternEndsWith!, segmentsPatternContains!);
+                return new RaggedPattern(
+                    allSegments,
+                    segmentsPatternStartsWith,
+                    segmentsPatternEndsWith!,
+                    segmentsPatternContains!
+                );
             }
         }
 
@@ -242,7 +259,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
         private sealed class RaggedPattern : IRaggedPattern
         {
-            public RaggedPattern(List<IPathSegment> allSegments, IList<IPathSegment> segmentsPatternStartsWith, IList<IPathSegment> segmentsPatternEndsWith, IList<IList<IPathSegment>> segmentsPatternContains)
+            public RaggedPattern(
+                List<IPathSegment> allSegments,
+                IList<IPathSegment> segmentsPatternStartsWith,
+                IList<IPathSegment> segmentsPatternEndsWith,
+                IList<IList<IPathSegment>> segmentsPatternContains
+            )
             {
                 Segments = allSegments;
                 StartsWith = segmentsPatternStartsWith;

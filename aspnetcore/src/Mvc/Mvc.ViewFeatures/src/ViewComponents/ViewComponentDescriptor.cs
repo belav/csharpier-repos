@@ -38,7 +38,6 @@ public class ViewComponentDescriptor
 
             return _displayName;
         }
-
         set
         {
             if (value == null)

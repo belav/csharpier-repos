@@ -93,14 +93,20 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultSpan,
             CompletionTrigger trigger,
             OptionSet options,
-            CancellationToken cancellationToken)
-            : this(provider ?? throw new ArgumentNullException(nameof(provider)),
-                   document ?? throw new ArgumentNullException(nameof(document)),
-                   position,
-                   defaultSpan,
-                   trigger,
-                   CompletionOptions.From(options ?? throw new ArgumentNullException(nameof(options)), document.Project.Language),
-                   cancellationToken)
+            CancellationToken cancellationToken
+        )
+            : this(
+                provider ?? throw new ArgumentNullException(nameof(provider)),
+                document ?? throw new ArgumentNullException(nameof(document)),
+                position,
+                defaultSpan,
+                trigger,
+                CompletionOptions.From(
+                    options ?? throw new ArgumentNullException(nameof(options)),
+                    document.Project.Language
+                ),
+                cancellationToken
+            )
         {
             _lazyOptionSet = options;
         }
@@ -115,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultSpan,
             CompletionTrigger trigger,
             in CompletionOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Provider = provider;
             Document = document;
@@ -130,8 +137,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The options that completion was started with.
         /// </summary>
-        public OptionSet Options
-            => _lazyOptionSet ??= CompletionOptions.ToSet(Document.Project.Language);
+        public OptionSet Options =>
+            _lazyOptionSet ??= CompletionOptions.ToSet(Document.Project.Language);
 
         internal IReadOnlyList<CompletionItem> Items => _items;
 
@@ -171,11 +178,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         public CompletionItem? SuggestionModeItem
         {
-            get
-            {
-                return _suggestionModeItem;
-            }
-
+            get { return _suggestionModeItem; }
             set
             {
                 if (value != null)

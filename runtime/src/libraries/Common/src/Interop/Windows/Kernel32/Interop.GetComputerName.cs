@@ -9,7 +9,12 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "GetComputerNameW", CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "GetComputerNameW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         private static unsafe partial int GetComputerName(char* lpBuffer, uint* nSize);
 
         // maximum length of the NETBIOS name (not including NULL)
@@ -23,9 +28,9 @@ internal static partial class Interop
             {
                 fixed (char* lpBuffer = &MemoryMarshal.GetReference(buffer))
                 {
-                    return GetComputerName(lpBuffer, &length) != 0 ?
-                        buffer.Slice(0, (int)length).ToString() :
-                        null;
+                    return GetComputerName(lpBuffer, &length) != 0
+                      ? buffer.Slice(0, (int)length).ToString()
+                      : null;
                 }
             }
         }

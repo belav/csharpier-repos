@@ -13,12 +13,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
     internal enum ActiveStatementFlags
     {
         None = 0,
-
         /// <summary>
         /// At least one of the threads whom this active statement belongs to is in a leaf frame.
         /// </summary>
         LeafFrame = 1,
-
         /// <summary>
         /// The statement is partially executed.
         /// </summary>
@@ -30,12 +28,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// Partially executed active statement can't be edited.
         /// </remarks>
         PartiallyExecuted = 2,
-
         /// <summary>
         /// The statement IL is not in user code.
         /// </summary>
         NonUserCode = 4,
-
         /// <summary>
         /// Indicates that the active statement instruction belongs to the latest version of the containing method.
         /// If not set, the containing method was updated but the active statement was not remapped yet because the thread 
@@ -46,12 +42,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// and ICorDebugFunction.GetCurrentVersionNumber() to determine the value of this flag.
         /// </remarks>
         MethodUpToDate = 8,
-
         /// <summary>
         /// At least one of the threads whom this active statement belongs to is in a non-leaf frame.
         /// </summary>
         NonLeafFrame = 16,
-
         /// <summary>
         /// When applying updates while the code is executing, we will not attempt any remap for methods which are on the
         /// executing stack. This is done so we can avoid blocking an edit due an executing active statement. 

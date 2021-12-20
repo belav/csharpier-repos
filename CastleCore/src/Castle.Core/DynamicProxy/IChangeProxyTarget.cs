@@ -14,14 +14,14 @@
 
 namespace Castle.DynamicProxy
 {
-	using System;
+    using System;
 
-	/// <summary>
+    /// <summary>
 	///   Exposes means to change target objects of proxies and invocations.
 	/// </summary>
-	public interface IChangeProxyTarget
-	{
-		/// <summary>
+    public interface IChangeProxyTarget
+    {
+        /// <summary>
 		///   Changes the target object (<see cref = "IInvocation.InvocationTarget" />) of current <see cref = "IInvocation" />.
 		/// </summary>
 		/// <param name = "target">The new value of target of invocation.</param>
@@ -36,9 +36,9 @@ namespace Castle.DynamicProxy
 		///    cref = "InvalidOperationException" /> will be throws.
 		/// </remarks>
 		/// <exception cref = "InvalidCastException">Thrown when <paramref name = "target" /> is not assignable to the proxied type.</exception>
-		void ChangeInvocationTarget(object target);
+        void ChangeInvocationTarget(object target);
 
-		/// <summary>
+        /// <summary>
 		///   Permanently changes the target object of the proxy. This does not affect target of the current invocation.
 		/// </summary>
 		/// <param name = "target">The new value of target of the proxy.</param>
@@ -53,7 +53,9 @@ namespace Castle.DynamicProxy
 		///    cref = "InvalidOperationException" /> will be throws.
 		/// </remarks>
 		/// <exception cref = "InvalidCastException">Thrown when <paramref name = "target" /> is not assignable to the proxied type.</exception>
-		[Obsolete("Use ((IProxyTargetAccessor)invocation.Proxy).DynProxySetTarget(target) instead.")]
-		void ChangeProxyTarget(object target);
-	}
+        [Obsolete(
+            "Use ((IProxyTargetAccessor)invocation.Proxy).DynProxySetTarget(target) instead."
+        )]
+        void ChangeProxyTarget(object target);
+    }
 }

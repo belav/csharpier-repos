@@ -59,7 +59,8 @@ namespace System.Security.Cryptography
             ThrowIfNotSupported();
             SafeEvpPKeyHandle newKey = Interop.Crypto.EvpPKeyDuplicate(
                 pkeyHandle,
-                Interop.Crypto.EvpAlgorithmId.RSA);
+                Interop.Crypto.EvpAlgorithmId.RSA
+            );
 
             SetKey(newKey);
         }
@@ -78,7 +79,9 @@ namespace System.Security.Cryptography
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RSAOpenSsl)));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RSAOpenSsl))
+                );
             }
         }
     }

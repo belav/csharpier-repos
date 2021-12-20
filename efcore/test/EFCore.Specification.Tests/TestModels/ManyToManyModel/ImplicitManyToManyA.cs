@@ -14,6 +14,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel
 
         public virtual string Name { get; set; }
 
-        public virtual ICollection<ImplicitManyToManyB> Bs { get; } = new ObservableCollection<ImplicitManyToManyB>();
+        public virtual ICollection<ImplicitManyToManyB> Bs { get; } =
+            new ObservableCollection<ImplicitManyToManyB>();
     }
 }

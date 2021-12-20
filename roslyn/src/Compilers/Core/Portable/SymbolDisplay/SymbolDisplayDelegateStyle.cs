@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis
         /// Shows only the name of the delegate (e.g. "SomeDelegate").
         /// </summary>
         NameOnly = 0,
-
         /// <summary>
         /// Shows the name and the parameters of the delegate (e.g. "SomeDelegate(int x)").  
         /// </summary>
@@ -21,7 +20,6 @@ namespace Microsoft.CodeAnalysis
         /// The format of the parameters will be determined by the other flags passed.
         /// </remarks>
         NameAndParameters = 1,
-
         /// <summary>
         /// Shows the name and the signature of the delegate (e.g. "void SomeDelegate(int x)").  
         /// </summary>

@@ -41,9 +41,7 @@ namespace Roslyn.Utilities
         /// Returns -1 for path "goo.".
         /// </remarks>
         private static int IndexOfExtension(string? path) =>
-            path is null
-                ? -1
-                : IndexOfExtension(path.AsSpan());
+            path is null ? -1 : IndexOfExtension(path.AsSpan());
 
         private static int IndexOfExtension(ReadOnlySpan<char> path)
         {
@@ -63,7 +61,11 @@ namespace Roslyn.Utilities
                     return -1;
                 }
 
-                if (c == DirectorySeparatorChar || c == AltDirectorySeparatorChar || c == VolumeSeparatorChar)
+                if (
+                    c == DirectorySeparatorChar
+                    || c == AltDirectorySeparatorChar
+                    || c == VolumeSeparatorChar
+                )
                 {
                     break;
                 }
@@ -173,7 +175,11 @@ namespace Roslyn.Utilities
             for (int i = path.Length - 1; i >= 0; i--)
             {
                 char ch = path[i];
-                if (ch == DirectorySeparatorChar || ch == AltDirectorySeparatorChar || ch == VolumeSeparatorChar)
+                if (
+                    ch == DirectorySeparatorChar
+                    || ch == AltDirectorySeparatorChar
+                    || ch == VolumeSeparatorChar
+                )
                 {
                     return i + 1;
                 }

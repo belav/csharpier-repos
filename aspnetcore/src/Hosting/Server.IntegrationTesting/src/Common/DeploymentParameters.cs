@@ -18,7 +18,9 @@ public class DeploymentParameters
     {
         EnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "true";
 
-        var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+        var configAttribute = Assembly
+            .GetCallingAssembly()
+            .GetCustomAttribute<AssemblyConfigurationAttribute>();
         if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
         {
             Configuration = configAttribute.Configuration;
@@ -29,7 +31,9 @@ public class DeploymentParameters
     {
         EnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "true";
 
-        var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+        var configAttribute = Assembly
+            .GetCallingAssembly()
+            .GetCustomAttribute<AssemblyConfigurationAttribute>();
         if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
         {
             Configuration = configAttribute.Configuration;
@@ -53,7 +57,8 @@ public class DeploymentParameters
         string applicationPath,
         ServerType serverType,
         RuntimeFlavor runtimeFlavor,
-        RuntimeArchitecture runtimeArchitecture)
+        RuntimeArchitecture runtimeArchitecture
+    )
     {
         if (string.IsNullOrEmpty(applicationPath))
         {
@@ -62,7 +67,9 @@ public class DeploymentParameters
 
         if (!Directory.Exists(applicationPath))
         {
-            throw new DirectoryNotFoundException($"Application path {applicationPath} does not exist.");
+            throw new DirectoryNotFoundException(
+                $"Application path {applicationPath} does not exist."
+            );
         }
 
         ApplicationPath = applicationPath;
@@ -71,7 +78,9 @@ public class DeploymentParameters
         RuntimeFlavor = runtimeFlavor;
         EnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "true";
 
-        var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+        var configAttribute = Assembly
+            .GetCallingAssembly()
+            .GetCustomAttribute<AssemblyConfigurationAttribute>();
         if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
         {
             Configuration = configAttribute.Configuration;
@@ -168,12 +177,14 @@ public class DeploymentParameters
     /// Environment variables to be set before starting the host.
     /// Not applicable for IIS Scenarios.
     /// </summary>
-    public IDictionary<string, string> EnvironmentVariables { get; } = new Dictionary<string, string>();
+    public IDictionary<string, string> EnvironmentVariables { get; } =
+        new Dictionary<string, string>();
 
     /// <summary>
     /// Environment variables used when invoking dotnet publish.
     /// </summary>
-    public IDictionary<string, string> PublishEnvironmentVariables { get; } = new Dictionary<string, string>();
+    public IDictionary<string, string> PublishEnvironmentVariables { get; } =
+        new Dictionary<string, string>();
 
     /// <summary>
     /// For any application level cleanup to be invoked after performing host cleanup.
@@ -194,6 +205,7 @@ public class DeploymentParameters
             RuntimeFlavor,
             RuntimeArchitecture,
             ApplicationBaseUriHint,
-            PublishApplicationBeforeDeployment);
+            PublishApplicationBeforeDeployment
+        );
     }
 }

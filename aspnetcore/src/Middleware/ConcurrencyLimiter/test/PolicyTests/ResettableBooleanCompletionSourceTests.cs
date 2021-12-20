@@ -36,10 +36,12 @@ public static class ResettableBooleanCompletionSourceTests
     {
         var tcs = new ResettableBooleanCompletionSource(_testQueue);
 
-        _ = Task.Run(() =>
-        {
-            tcs.Complete(true);
-        });
+        _ = Task.Run(
+            () =>
+            {
+                tcs.Complete(true);
+            }
+        );
 
         var result = await tcs.GetValueTask();
         Assert.True(result);
@@ -50,10 +52,12 @@ public static class ResettableBooleanCompletionSourceTests
     {
         var tcs = new ResettableBooleanCompletionSource(_testQueue);
 
-        _ = Task.Run(() =>
-        {
-            tcs.Complete(false);
-        });
+        _ = Task.Run(
+            () =>
+            {
+                tcs.Complete(false);
+            }
+        );
 
         var result = await tcs.GetValueTask();
         Assert.False(result);

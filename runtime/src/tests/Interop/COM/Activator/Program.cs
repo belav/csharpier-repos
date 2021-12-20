@@ -24,12 +24,10 @@ namespace Activator
                 () =>
                 {
                     var notIClassFactory = new Guid("ED53F949-63E4-43B5-A13D-5655478AADD5");
-                    var cxt = new ComActivationContext()
-                    {
-                        InterfaceId = notIClassFactory
-                    };
+                    var cxt = new ComActivationContext() { InterfaceId = notIClassFactory };
                     ComActivator.GetClassFactoryForType(cxt);
-                });
+                }
+            );
         }
 
         static void NonrootedAssemblyPath(bool builtInComDisabled)
@@ -37,14 +35,14 @@ namespace Activator
             Console.WriteLine($"Running {nameof(NonrootedAssemblyPath)}...");
 
             Action action = () =>
+            {
+                var cxt = new ComActivationContext()
                 {
-                    var cxt = new ComActivationContext()
-                    {
-                        InterfaceId = typeof(IClassFactory).GUID,
-                        AssemblyPath = "foo.dll"
-                    };
-                    ComActivator.GetClassFactoryForType(cxt);
+                    InterfaceId = typeof(IClassFactory).GUID,
+                    AssemblyPath = "foo.dll"
                 };
+                ComActivator.GetClassFactoryForType(cxt);
+            };
 
             if (!builtInComDisabled)
             {
@@ -61,16 +59,16 @@ namespace Activator
             Console.WriteLine($"Running {nameof(ClassNotRegistered)}...");
 
             Action action = () =>
+            {
+                var CLSID_NotRegistered = new Guid("328FF83E-3F6C-4BE9-A742-752562032925"); // Random GUID
+                var cxt = new ComActivationContext()
                 {
-                    var CLSID_NotRegistered = new Guid("328FF83E-3F6C-4BE9-A742-752562032925"); // Random GUID
-                    var cxt = new ComActivationContext()
-                    {
-                        ClassId = CLSID_NotRegistered,
-                        InterfaceId = typeof(IClassFactory).GUID,
-                        AssemblyPath = @"C:\foo.dll"
-                    };
-                    ComActivator.GetClassFactoryForType(cxt);
+                    ClassId = CLSID_NotRegistered,
+                    InterfaceId = typeof(IClassFactory).GUID,
+                    AssemblyPath = @"C:\foo.dll"
                 };
+                ComActivator.GetClassFactoryForType(cxt);
+            };
 
             if (!builtInComDisabled)
             {
@@ -92,7 +90,8 @@ namespace Activator
             string assemblyAPath = Path.Combine(assemblySubPath, "AssemblyA.dll");
             string assemblyBPath = Path.Combine(assemblySubPath, "AssemblyB.dll");
             string assemblyCPath = Path.Combine(assemblySubPath, "AssemblyC.dll");
-            string assemblyPaths = $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
+            string assemblyPaths =
+                $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
 
             HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
 
@@ -101,11 +100,14 @@ namespace Activator
             Type typeCFromAssemblyA;
             Type typeCFromAssemblyB;
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
                 var cxt = new ComActivationContext()
                 {
@@ -119,7 +121,8 @@ namespace Activator
                 if (builtInComDisabled)
                 {
                     Assert.Throws<NotSupportedException>(
-                        () => ComActivator.GetClassFactoryForType(cxt));
+                        () => ComActivator.GetClassFactoryForType(cxt)
+                    );
                     return;
                 }
 
@@ -132,11 +135,14 @@ namespace Activator
                 typeCFromAssemblyA = (Type)svr.GetTypeFromC();
             }
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
                 var cxt = new ComActivationContext()
                 {
@@ -167,20 +173,25 @@ namespace Activator
             string assemblyAPath = Path.Combine(assemblySubPath, "AssemblyA.dll");
             string assemblyBPath = Path.Combine(assemblySubPath, "AssemblyB.dll");
             string assemblyCPath = Path.Combine(assemblySubPath, "AssemblyC.dll");
-            string assemblyPaths = $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
+            string assemblyPaths =
+                $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
 
             HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
 
             var CLSID_NotUsed = Guid.Empty; // During this phase of activation the GUID is not used.
             Guid iid = typeof(IValidateRegistrationCallbacks).GUID;
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
-                string[] typeNamesToValidate = {
+                string[] typeNamesToValidate =
+                {
                     "ValidRegistrationTypeCallbacks",
                     "ValidRegistrationStringCallbacks",
                     "InheritedRegistrationTypeCallbacks",
@@ -215,18 +226,35 @@ namespace Activator
                     ComActivator.ClassRegistrationScenarioForType(cxt, register: true);
                     ComActivator.ClassRegistrationScenarioForType(cxt, register: false);
 
-                    Assert.True(inst.DidRegister(), $"User-defined register function should have been called.");
-                    Assert.True(inst.DidUnregister(), $"User-defined unregister function should have been called.");
+                    Assert.True(
+                        inst.DidRegister(),
+                        $"User-defined register function should have been called."
+                    );
+                    Assert.True(
+                        inst.DidUnregister(),
+                        $"User-defined unregister function should have been called."
+                    );
                 }
             }
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
-                foreach (string typename in new[] { "NoRegistrationCallbacks",  "InvalidArgRegistrationCallbacks", "InvalidInstanceRegistrationCallbacks", "MultipleRegistrationCallbacks" })
+                foreach (
+                    string typename in new[]
+                    {
+                        "NoRegistrationCallbacks",
+                        "InvalidArgRegistrationCallbacks",
+                        "InvalidInstanceRegistrationCallbacks",
+                        "MultipleRegistrationCallbacks"
+                    }
+                )
                 {
                     Console.WriteLine($"Validating {typename}...");
 
@@ -280,7 +308,9 @@ namespace Activator
             try
             {
                 bool builtInComDisabled = false;
-                var comConfig = AppContext.GetData("System.Runtime.InteropServices.BuiltInComInterop.IsSupported");
+                var comConfig = AppContext.GetData(
+                    "System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
+                );
                 if (comConfig != null && !bool.Parse(comConfig.ToString()))
                 {
                     builtInComDisabled = true;

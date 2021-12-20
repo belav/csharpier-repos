@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         None = 0,
         SearchExtensionMethods = 1,
-
         /// <summary>
         /// Set if the group has a receiver but one was not specified in syntax.
         /// </summary>

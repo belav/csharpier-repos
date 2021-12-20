@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// </summary>
     internal sealed class ItemTokenMap<T> where T : class
     {
-        private readonly ConcurrentDictionary<T, uint> _itemToToken = new ConcurrentDictionary<T, uint>(ReferenceEqualityComparer.Instance);
+        private readonly ConcurrentDictionary<T, uint> _itemToToken = new ConcurrentDictionary<
+            T,
+            uint
+        >(ReferenceEqualityComparer.Instance);
         private readonly ArrayBuilder<T> _items = new ArrayBuilder<T>();
 
         public uint GetOrAddTokenFor(T item)

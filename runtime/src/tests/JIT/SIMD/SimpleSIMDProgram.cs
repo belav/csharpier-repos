@@ -56,7 +56,6 @@ namespace SIMDDebugTest
                     Vector4 v3 = v1 + v2;
                     return v3;
                 }
-
             }
 
             public class SubTest
@@ -133,7 +132,6 @@ namespace SIMDDebugTest
                     Vector4 v2 = v1 * v;
                     return v2;
                 }
-
             }
 
             public class DivTest
@@ -298,7 +296,6 @@ namespace SIMDDebugTest
                     Vector3 v2 = v1 * v;
                     return v2;
                 }
-
             }
 
             public class DivTest
@@ -466,7 +463,6 @@ namespace SIMDDebugTest
                     Vector2 v2 = v1 * v;
                     return v2;
                 }
-
             }
 
             public class DivTest
@@ -525,7 +521,7 @@ namespace SIMDDebugTest
                 Vector3 v3a = new Vector3(2f);
                 Vector3 v3b = new Vector3(3f);
                 Vector2 v2a = new Vector2(2f);
-                Vector2 v2b = new Vector2(3f);    
+                Vector2 v2b = new Vector2(3f);
             }
         }
     }

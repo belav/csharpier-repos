@@ -7,39 +7,39 @@ using System.Reflection;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Provides information about an invocation of a mock object.
 	/// </summary>
-	public interface IInvocation
-	{
-		/// <summary>
+    public interface IInvocation
+    {
+        /// <summary>
 		/// Gets the method of the invocation.
 		/// </summary>
-		MethodInfo Method { get; }
+        MethodInfo Method { get; }
 
-		/// <summary>
+        /// <summary>
 		/// Gets the arguments of the invocation.
 		/// </summary>
-		IReadOnlyList<object> Arguments { get; }
+        IReadOnlyList<object> Arguments { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets the setup that matched this invocation (or <see langword="null"/> if there was no matching setup).
 		/// </summary>
-		ISetup MatchingSetup { get; }
+        ISetup MatchingSetup { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Gets whether this invocation was successfully verified by any of the various <c>`Verify`</c> methods.
 		/// </summary>
-		bool IsVerified { get; }
+        bool IsVerified { get; }
 
-		/// <summary>
+        /// <summary>
 		/// The value being returned for a non-void method if no exception was thrown.
 		/// </summary>
-		object ReturnValue { get; }
+        object ReturnValue { get; }
 
-		/// <summary>
+        /// <summary>
 		/// Optional exception if the method invocation results in an exception being thrown.
 		/// </summary>
-		Exception Exception { get; }
-	}
+        Exception Exception { get; }
+    }
 }

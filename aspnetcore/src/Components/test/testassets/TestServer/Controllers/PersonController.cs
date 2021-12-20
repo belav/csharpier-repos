@@ -54,7 +54,11 @@ public class PersonController : Controller
         var result = new StringBuilder();
         foreach (var header in Request.Headers)
         {
-            result.AppendLine(FormattableString.Invariant($"{header.Key}: {string.Join(",", header.Value.ToArray())}"));
+            result.AppendLine(
+                FormattableString.Invariant(
+                    $"{header.Key}: {string.Join(",", header.Value.ToArray())}"
+                )
+            );
         }
         return "REQUEST HEADERS:\n" + result.ToString();
     }

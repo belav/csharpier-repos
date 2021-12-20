@@ -12,12 +12,10 @@ namespace System.Net.Connections
         /// The connection should be flushed and closed.
         /// </summary>
         GracefulShutdown,
-
         /// <summary>
         /// The connection should be aborted gracefully, performing any I/O needed to notify the other side of the connection that it has been aborted.
         /// </summary>
         Abort,
-
         /// <summary>
         /// The connection should be aborted immediately, avoiding any I/O needed to notify the other side of the connection that it has been aborted.
         /// </summary>

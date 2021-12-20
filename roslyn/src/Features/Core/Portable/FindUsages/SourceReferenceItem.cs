@@ -47,30 +47,46 @@ namespace Microsoft.CodeAnalysis.FindUsages
             DocumentSpan sourceSpan,
             SymbolUsageInfo symbolUsageInfo,
             ImmutableDictionary<string, string> additionalProperties,
-            bool isWrittenTo)
+            bool isWrittenTo
+        )
         {
             Definition = definition;
             SourceSpan = sourceSpan;
             SymbolUsageInfo = symbolUsageInfo;
             IsWrittenTo = isWrittenTo;
-            AdditionalProperties = additionalProperties ?? ImmutableDictionary<string, string>.Empty;
+            AdditionalProperties =
+                additionalProperties ?? ImmutableDictionary<string, string>.Empty;
         }
 
         // Used by F#
         internal SourceReferenceItem(DefinitionItem definition, DocumentSpan sourceSpan)
-            : this(definition, sourceSpan, SymbolUsageInfo.None)
-        {
-        }
+            : this(definition, sourceSpan, SymbolUsageInfo.None) { }
 
         // Used by TypeScript
-        internal SourceReferenceItem(DefinitionItem definition, DocumentSpan sourceSpan, SymbolUsageInfo symbolUsageInfo)
-            : this(definition, sourceSpan, symbolUsageInfo, additionalProperties: ImmutableDictionary<string, string>.Empty)
-        {
-        }
+        internal SourceReferenceItem(
+            DefinitionItem definition,
+            DocumentSpan sourceSpan,
+            SymbolUsageInfo symbolUsageInfo
+        )
+            : this(
+                definition,
+                sourceSpan,
+                symbolUsageInfo,
+                additionalProperties: ImmutableDictionary<string, string>.Empty
+            ) { }
 
-        internal SourceReferenceItem(DefinitionItem definition, DocumentSpan sourceSpan, SymbolUsageInfo symbolUsageInfo, ImmutableDictionary<string, string> additionalProperties)
-            : this(definition, sourceSpan, symbolUsageInfo, additionalProperties, isWrittenTo: symbolUsageInfo.IsWrittenTo())
-        {
-        }
+        internal SourceReferenceItem(
+            DefinitionItem definition,
+            DocumentSpan sourceSpan,
+            SymbolUsageInfo symbolUsageInfo,
+            ImmutableDictionary<string, string> additionalProperties
+        )
+            : this(
+                definition,
+                sourceSpan,
+                symbolUsageInfo,
+                additionalProperties,
+                isWrittenTo: symbolUsageInfo.IsWrittenTo()
+            ) { }
     }
 }

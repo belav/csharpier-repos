@@ -22,12 +22,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStructuralTypeDisplayService()
-        {
-        }
+        public CSharpStructuralTypeDisplayService() { }
 
         public override ImmutableArray<SymbolDisplayPart> GetAnonymousTypeParts(
-            INamedTypeSymbol anonymousType, SemanticModel semanticModel, int position)
+            INamedTypeSymbol anonymousType,
+            SemanticModel semanticModel,
+            int position
+        )
         {
             using var _ = ArrayBuilder<SymbolDisplayPart>.GetInstance(out var members);
 
@@ -46,9 +47,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 }
 
                 first = false;
-                members.AddRange(property.Type.ToMinimalDisplayParts(semanticModel, position, s_minimalWithoutExpandedTuples).Select(p => p.MassageErrorTypeNames("?")));
+                members.AddRange(
+                    property.Type
+                        .ToMinimalDisplayParts(
+                            semanticModel,
+                            position,
+                            s_minimalWithoutExpandedTuples
+                        )
+                        .Select(p => p.MassageErrorTypeNames("?"))
+                );
                 members.AddRange(Space());
-                members.Add(new SymbolDisplayPart(SymbolDisplayPartKind.PropertyName, property, property.Name));
+                members.Add(
+                    new SymbolDisplayPart(
+                        SymbolDisplayPartKind.PropertyName,
+                        property,
+                        property.Name
+                    )
+                );
             }
 
             members.AddRange(Space());

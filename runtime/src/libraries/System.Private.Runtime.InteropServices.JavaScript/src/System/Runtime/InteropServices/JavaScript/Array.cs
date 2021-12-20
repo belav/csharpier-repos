@@ -14,15 +14,13 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the Array class.
         /// </summary>
         /// <param name="_params">Parameters.</param>
-        public Array(params object[] _params) : base(nameof(Array), _params)
-        { }
+        public Array(params object[] _params) : base(nameof(Array), _params) { }
 
         /// <summary>
         /// Initializes a new instance of the Array/> class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal Array(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Array(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// Push the specified elements.
@@ -56,7 +54,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>The index of first occurrence of searchElement in the Array or -1 if not Found</returns>
         /// <param name="searchElement">Search element.</param>
         /// <param name="fromIndex">The index to start the search from</param>
-        public int IndexOf(object searchElement, int fromIndex = 0) => (int)Invoke("indexOf", searchElement, fromIndex);
+        public int IndexOf(object searchElement, int fromIndex = 0) =>
+            (int)Invoke("indexOf", searchElement, fromIndex);
 
         /// <summary>
         /// Finds the index of the last occurrence of<paramref name="searchElement" />
@@ -71,7 +70,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>The index of the last occurrence.</returns>
         /// <param name="searchElement">Search element.</param>
         /// <param name="endIndex">End index.</param>
-        public int LastIndexOf(object searchElement, int endIndex) => (int)Invoke("lastIndexOf", searchElement, endIndex);
+        public int LastIndexOf(object searchElement, int endIndex) =>
+            (int)Invoke("lastIndexOf", searchElement, endIndex);
 
         /// <summary>
         /// Gets or sets the Array with the index specified by <paramref name="i" />.
@@ -98,7 +98,6 @@ namespace System.Runtime.InteropServices.JavaScript
 
                 if (exception != 0)
                     throw new JSException((string)res);
-
             }
         }
     }

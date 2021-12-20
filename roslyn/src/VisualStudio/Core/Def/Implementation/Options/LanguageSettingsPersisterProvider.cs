@@ -29,14 +29,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public LanguageSettingsPersisterProvider(
             IThreadingContext threadingContext,
             [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider,
-            IGlobalOptionService optionService)
+            IGlobalOptionService optionService
+        )
         {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
             _optionService = optionService;
         }
 
-        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
+        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        )
         {
             if (_lazyPersister is not null)
             {
@@ -46,12 +49,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             // Asynchronously load dependent package prior to calling synchronous APIs on IVsTextManager4
-            _ = await _serviceProvider.GetServiceAsync(typeof(SVsManagedFontAndColorInformation)).ConfigureAwait(true);
+            _ = await _serviceProvider
+                .GetServiceAsync(typeof(SVsManagedFontAndColorInformation))
+                .ConfigureAwait(true);
 
-            var textManager = (IVsTextManager4?)await _serviceProvider.GetServiceAsync(typeof(SVsTextManager)).ConfigureAwait(true);
+            var textManager = (IVsTextManager4?)await _serviceProvider
+                .GetServiceAsync(typeof(SVsTextManager))
+                .ConfigureAwait(true);
             Assumes.Present(textManager);
 
-            _lazyPersister ??= new LanguageSettingsPersister(_threadingContext, textManager, _optionService);
+            _lazyPersister ??= new LanguageSettingsPersister(
+                _threadingContext,
+                textManager,
+                _optionService
+            );
             return _lazyPersister;
         }
 

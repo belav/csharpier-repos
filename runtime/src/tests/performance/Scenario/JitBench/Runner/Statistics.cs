@@ -29,14 +29,14 @@ namespace JitBench
         {
             double[] dataArr = data.ToArray();
             Array.Sort(dataArr);
-            if(dataArr.Length % 2 == 1)
+            if (dataArr.Length % 2 == 1)
             {
                 return dataArr[dataArr.Length / 2];
             }
             else
             {
                 int midpoint = dataArr.Length / 2;
-                return (dataArr[midpoint-1] + dataArr[midpoint]) / 2;
+                return (dataArr[midpoint - 1] + dataArr[midpoint]) / 2;
             }
         }
 
@@ -60,7 +60,7 @@ namespace JitBench
             Array.Sort(dataArr);
             if (dataArr.Length % 2 == 1)
             {
-                return Median(dataArr.Skip(dataArr.Length / 2 ));
+                return Median(dataArr.Skip(dataArr.Length / 2));
             }
             else
             {

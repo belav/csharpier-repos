@@ -15,7 +15,11 @@ namespace System.Security.Cryptography
             PaddingValue = PaddingMode.PKCS7;
         }
 
-        [Obsolete(Obsoletions.DefaultCryptoAlgorithmsMessage, DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.DefaultCryptoAlgorithmsMessage,
+            DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static SymmetricAlgorithm Create() =>
             throw new PlatformNotSupportedException(SR.Cryptography_DefaultAlgorithm_NotSupported);
 
@@ -25,10 +29,7 @@ namespace System.Security.Cryptography
 
         public virtual int FeedbackSize
         {
-            get
-            {
-                return FeedbackSizeValue;
-            }
+            get { return FeedbackSizeValue; }
             set
             {
                 if (value <= 0 || value > BlockSizeValue || (value % 8) != 0)
@@ -39,11 +40,7 @@ namespace System.Security.Cryptography
 
         public virtual int BlockSize
         {
-            get
-            {
-                return BlockSizeValue;
-            }
-
+            get { return BlockSizeValue; }
             set
             {
                 bool validatedByZeroSkipSizeKeySizes;
@@ -67,7 +64,6 @@ namespace System.Security.Cryptography
                     GenerateIV();
                 return IVValue.CloneByteArray()!;
             }
-
             set
             {
                 if (value == null)
@@ -87,7 +83,6 @@ namespace System.Security.Cryptography
                     GenerateKey();
                 return KeyValue.CloneByteArray()!;
             }
-
             set
             {
                 if (value == null)
@@ -105,11 +100,7 @@ namespace System.Security.Cryptography
 
         public virtual int KeySize
         {
-            get
-            {
-                return KeySizeValue;
-            }
-
+            get { return KeySizeValue; }
             set
             {
                 if (!ValidKeySize(value))
@@ -140,14 +131,12 @@ namespace System.Security.Cryptography
 
         public virtual CipherMode Mode
         {
-            get
-            {
-                return ModeValue;
-            }
-
+            get { return ModeValue; }
             set
             {
-                if (!(value == CipherMode.CBC || value == CipherMode.ECB || value == CipherMode.CFB))
+                if (
+                    !(value == CipherMode.CBC || value == CipherMode.ECB || value == CipherMode.CFB)
+                )
                     throw new CryptographicException(SR.Cryptography_InvalidCipherMode);
 
                 ModeValue = value;
@@ -156,11 +145,7 @@ namespace System.Security.Cryptography
 
         public virtual PaddingMode Padding
         {
-            get
-            {
-                return PaddingValue;
-            }
-
+            get { return PaddingValue; }
             set
             {
                 if ((value < PaddingMode.None) || (value > PaddingMode.ISO10126))
@@ -308,13 +293,18 @@ namespace System.Security.Cryptography
         ///   is not a whole number of blocks.
         ///   </para>
         /// </exception>
-        public int GetCiphertextLengthCbc(int plaintextLength, PaddingMode paddingMode = PaddingMode.PKCS7) =>
-            GetCiphertextLengthBlockAligned(plaintextLength, paddingMode);
+        public int GetCiphertextLengthCbc(
+            int plaintextLength,
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        ) => GetCiphertextLengthBlockAligned(plaintextLength, paddingMode);
 
         private int GetCiphertextLengthBlockAligned(int plaintextLength, PaddingMode paddingMode)
         {
             if (plaintextLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(plaintextLength),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             int blockSizeBits = BlockSize; // The BlockSize property is in bits.
 
@@ -322,12 +312,16 @@ namespace System.Security.Cryptography
                 throw new InvalidOperationException(SR.InvalidOperation_UnsupportedBlockSize);
 
             int blockSizeBytes = blockSizeBits >> 3;
-            int wholeBlocks = Math.DivRem(plaintextLength, blockSizeBytes, out int remainder) * blockSizeBytes;
+            int wholeBlocks =
+                Math.DivRem(plaintextLength, blockSizeBytes, out int remainder) * blockSizeBytes;
 
             switch (paddingMode)
             {
                 case PaddingMode.None when remainder != 0:
-                    throw new ArgumentException(SR.Cryptography_MatchBlockSize, nameof(plaintextLength));
+                    throw new ArgumentException(
+                        SR.Cryptography_MatchBlockSize,
+                        nameof(plaintextLength)
+                    );
                 case PaddingMode.None:
                 case PaddingMode.Zeros when remainder == 0:
                     return plaintextLength;
@@ -337,12 +331,18 @@ namespace System.Security.Cryptography
                 case PaddingMode.ISO10126:
                     if (int.MaxValue - wholeBlocks < blockSizeBytes)
                     {
-                        throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.Cryptography_PlaintextTooLarge);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(plaintextLength),
+                            SR.Cryptography_PlaintextTooLarge
+                        );
                     }
 
                     return wholeBlocks + blockSizeBytes;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(paddingMode), SR.Cryptography_InvalidPaddingMode);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(paddingMode),
+                        SR.Cryptography_InvalidPaddingMode
+                    );
             }
         }
 
@@ -393,24 +393,42 @@ namespace System.Security.Cryptography
         /// <paramref name="feedbackSizeInBits" /> accepts any value that is a valid feedback size, regardless if the algorithm
         /// supports the specified feedback size.
         /// </remarks>
-        public int GetCiphertextLengthCfb(int plaintextLength, PaddingMode paddingMode = PaddingMode.None, int feedbackSizeInBits = 8)
+        public int GetCiphertextLengthCfb(
+            int plaintextLength,
+            PaddingMode paddingMode = PaddingMode.None,
+            int feedbackSizeInBits = 8
+        )
         {
             if (plaintextLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(plaintextLength),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (feedbackSizeInBits <= 0)
-                throw new ArgumentOutOfRangeException(nameof(feedbackSizeInBits), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(feedbackSizeInBits),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             if ((feedbackSizeInBits & 0b111) != 0)
-                throw new ArgumentException(SR.Argument_BitsMustBeWholeBytes, nameof(feedbackSizeInBits));
+                throw new ArgumentException(
+                    SR.Argument_BitsMustBeWholeBytes,
+                    nameof(feedbackSizeInBits)
+                );
 
             int feedbackSizeInBytes = feedbackSizeInBits >> 3;
-            int feedbackAligned = Math.DivRem(plaintextLength, feedbackSizeInBytes, out int remainder) * feedbackSizeInBytes;
+            int feedbackAligned =
+                Math.DivRem(plaintextLength, feedbackSizeInBytes, out int remainder)
+                * feedbackSizeInBytes;
 
             switch (paddingMode)
             {
                 case PaddingMode.None when remainder != 0:
-                    throw new ArgumentException(SR.Cryptography_MatchFeedbackSize, nameof(plaintextLength));
+                    throw new ArgumentException(
+                        SR.Cryptography_MatchFeedbackSize,
+                        nameof(plaintextLength)
+                    );
                 case PaddingMode.None:
                 case PaddingMode.Zeros when remainder == 0:
                     return plaintextLength;
@@ -420,12 +438,18 @@ namespace System.Security.Cryptography
                 case PaddingMode.ISO10126:
                     if (int.MaxValue - feedbackAligned < feedbackSizeInBytes)
                     {
-                        throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.Cryptography_PlaintextTooLarge);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(plaintextLength),
+                            SR.Cryptography_PlaintextTooLarge
+                        );
                     }
 
                     return feedbackAligned + feedbackSizeInBytes;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(paddingMode), SR.Cryptography_InvalidPaddingMode);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(paddingMode),
+                        SR.Cryptography_InvalidPaddingMode
+                    );
             }
         }
 
@@ -479,8 +503,10 @@ namespace System.Security.Cryptography
             // that needed to get removed, so don't rent from a pool.
             byte[] decryptBuffer = GC.AllocateUninitializedArray<byte>(ciphertext.Length);
 
-            if (!TryDecryptEcbCore(ciphertext, decryptBuffer, paddingMode, out int written)
-                || (uint)written > decryptBuffer.Length)
+            if (
+                !TryDecryptEcbCore(ciphertext, decryptBuffer, paddingMode, out int written)
+                || (uint)written > decryptBuffer.Length
+            )
             {
                 // This means decrypting the ciphertext grew in to a larger plaintext or overflowed.
                 // A user-derived class could do this, but it is not expected in any of the
@@ -513,7 +539,11 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryDecryptEcbCore" />.
         /// </remarks>
-        public int DecryptEcb(ReadOnlySpan<byte> ciphertext, Span<byte> destination, PaddingMode paddingMode)
+        public int DecryptEcb(
+            ReadOnlySpan<byte> ciphertext,
+            Span<byte> destination,
+            PaddingMode paddingMode
+        )
         {
             CheckPaddingMode(paddingMode);
 
@@ -542,7 +572,12 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryDecryptEcbCore" />.
         /// </remarks>
-        public bool TryDecryptEcb(ReadOnlySpan<byte> ciphertext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+        public bool TryDecryptEcb(
+            ReadOnlySpan<byte> ciphertext,
+            Span<byte> destination,
+            PaddingMode paddingMode,
+            out int bytesWritten
+        )
         {
             CheckPaddingMode(paddingMode);
             return TryDecryptEcbCore(ciphertext, destination, paddingMode, out bytesWritten);
@@ -599,15 +634,19 @@ namespace System.Security.Cryptography
             // We expect most if not all uses to encrypt to exactly the ciphertextLength
             byte[] buffer = GC.AllocateUninitializedArray<byte>(ciphertextLength);
 
-            if (!TryEncryptEcbCore(plaintext, buffer, paddingMode, out int written) ||
-                written != ciphertextLength)
+            if (
+                !TryEncryptEcbCore(plaintext, buffer, paddingMode, out int written)
+                || written != ciphertextLength
+            )
             {
                 // This means a user-derived implementation added more padding than we expected or
                 // did something non-standard (encrypt to a partial block). This can't happen for
                 // multiple padding blocks since the buffer would have been too small in the first
                 // place. It doesn't make sense to try and support partial block encryption, likely
                 // something went very wrong. So throw.
-                throw new CryptographicException(SR.Format(SR.Cryptography_EncryptedIncorrectLength, nameof(TryEncryptEcbCore)));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_EncryptedIncorrectLength, nameof(TryEncryptEcbCore))
+                );
             }
 
             return buffer;
@@ -632,7 +671,11 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryEncryptEcbCore" />.
         /// </remarks>
-        public int EncryptEcb(ReadOnlySpan<byte> plaintext, Span<byte> destination, PaddingMode paddingMode)
+        public int EncryptEcb(
+            ReadOnlySpan<byte> plaintext,
+            Span<byte> destination,
+            PaddingMode paddingMode
+        )
         {
             CheckPaddingMode(paddingMode);
 
@@ -661,7 +704,12 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryEncryptEcbCore" />.
         /// </remarks>
-        public bool TryEncryptEcb(ReadOnlySpan<byte> plaintext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+        public bool TryEncryptEcb(
+            ReadOnlySpan<byte> plaintext,
+            Span<byte> destination,
+            PaddingMode paddingMode,
+            out int bytesWritten
+        )
         {
             CheckPaddingMode(paddingMode);
             return TryEncryptEcbCore(plaintext, destination, paddingMode, out bytesWritten);
@@ -690,14 +738,22 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryDecryptCbcCore" />.
         /// </remarks>
-        public byte[] DecryptCbc(byte[] ciphertext, byte[] iv, PaddingMode paddingMode = PaddingMode.PKCS7)
+        public byte[] DecryptCbc(
+            byte[] ciphertext,
+            byte[] iv,
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             if (ciphertext is null)
                 throw new ArgumentNullException(nameof(ciphertext));
             if (iv is null)
                 throw new ArgumentNullException(nameof(iv));
 
-            return DecryptCbc(new ReadOnlySpan<byte>(ciphertext), new ReadOnlySpan<byte>(iv), paddingMode);
+            return DecryptCbc(
+                new ReadOnlySpan<byte>(ciphertext),
+                new ReadOnlySpan<byte>(iv),
+                paddingMode
+            );
         }
 
         /// <summary>
@@ -720,7 +776,11 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryDecryptCbcCore" />.
         /// </remarks>
-        public byte[] DecryptCbc(ReadOnlySpan<byte> ciphertext, ReadOnlySpan<byte> iv, PaddingMode paddingMode = PaddingMode.PKCS7)
+        public byte[] DecryptCbc(
+            ReadOnlySpan<byte> ciphertext,
+            ReadOnlySpan<byte> iv,
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -733,8 +793,10 @@ namespace System.Security.Cryptography
             byte[] decryptRent = ArrayPool<byte>.Shared.Rent(ciphertext.Length);
             Span<byte> decryptBuffer = decryptRent.AsSpan(0, ciphertext.Length);
 
-            if (!TryDecryptCbcCore(ciphertext, iv, decryptBuffer, paddingMode, out int written)
-                || (uint)written > decryptBuffer.Length)
+            if (
+                !TryDecryptCbcCore(ciphertext, iv, decryptBuffer, paddingMode, out int written)
+                || (uint)written > decryptBuffer.Length
+            )
             {
                 // This means decrypting the ciphertext grew in to a larger plaintext or overflowed.
                 // A user-derived class could do this, but it is not expected in any of the
@@ -777,7 +839,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
-            PaddingMode paddingMode = PaddingMode.PKCS7)
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -817,7 +880,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             out int bytesWritten,
-            PaddingMode paddingMode = PaddingMode.PKCS7)
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -847,14 +911,22 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryEncryptCbcCore" />.
         /// </remarks>
-        public byte[] EncryptCbc(byte[] plaintext, byte[] iv, PaddingMode paddingMode = PaddingMode.PKCS7)
+        public byte[] EncryptCbc(
+            byte[] plaintext,
+            byte[] iv,
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             if (plaintext is null)
                 throw new ArgumentNullException(nameof(plaintext));
             if (iv is null)
                 throw new ArgumentNullException(nameof(iv));
 
-            return EncryptCbc(new ReadOnlySpan<byte>(plaintext), new ReadOnlySpan<byte>(iv), paddingMode);
+            return EncryptCbc(
+                new ReadOnlySpan<byte>(plaintext),
+                new ReadOnlySpan<byte>(iv),
+                paddingMode
+            );
         }
 
         /// <summary>
@@ -880,7 +952,8 @@ namespace System.Security.Cryptography
         public byte[] EncryptCbc(
             ReadOnlySpan<byte> plaintext,
             ReadOnlySpan<byte> iv,
-            PaddingMode paddingMode = PaddingMode.PKCS7)
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -890,15 +963,19 @@ namespace System.Security.Cryptography
             // We expect most if not all uses to encrypt to exactly the ciphertextLength
             byte[] buffer = GC.AllocateUninitializedArray<byte>(ciphertextLength);
 
-            if (!TryEncryptCbcCore(plaintext, iv, buffer, paddingMode, out int written) ||
-                written != ciphertextLength)
+            if (
+                !TryEncryptCbcCore(plaintext, iv, buffer, paddingMode, out int written)
+                || written != ciphertextLength
+            )
             {
                 // This means a user-derived implementation added more padding than we expected or
                 // did something non-standard (encrypt to a partial block). This can't happen for
                 // multiple padding blocks since the buffer would have been too small in the first
                 // place. It doesn't make sense to try and support partial block encryption, likely
                 // something went very wrong. So throw.
-                throw new CryptographicException(SR.Format(SR.Cryptography_EncryptedIncorrectLength, nameof(TryEncryptCbcCore)));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_EncryptedIncorrectLength, nameof(TryEncryptCbcCore))
+                );
             }
 
             return buffer;
@@ -932,7 +1009,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
-            PaddingMode paddingMode = PaddingMode.PKCS7)
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -972,7 +1050,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             out int bytesWritten,
-            PaddingMode paddingMode = PaddingMode.PKCS7)
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -1021,7 +1100,12 @@ namespace System.Security.Cryptography
         /// <remarks>
         ///   This method's behavior is defined by <see cref="TryDecryptCfbCore" />.
         /// </remarks>
-        public byte[] DecryptCfb(byte[] ciphertext, byte[] iv, PaddingMode paddingMode = PaddingMode.None, int feedbackSizeInBits = 8)
+        public byte[] DecryptCfb(
+            byte[] ciphertext,
+            byte[] iv,
+            PaddingMode paddingMode = PaddingMode.None,
+            int feedbackSizeInBits = 8
+        )
         {
             if (ciphertext is null)
                 throw new ArgumentNullException(nameof(ciphertext));
@@ -1032,7 +1116,8 @@ namespace System.Security.Cryptography
                 new ReadOnlySpan<byte>(ciphertext),
                 new ReadOnlySpan<byte>(iv),
                 paddingMode,
-                feedbackSizeInBits);
+                feedbackSizeInBits
+            );
         }
 
         /// <summary>
@@ -1077,7 +1162,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> iv,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
@@ -1088,8 +1174,17 @@ namespace System.Security.Cryptography
             // padding does not need to be removed.
             byte[] decryptBuffer = GC.AllocateUninitializedArray<byte>(ciphertext.Length);
 
-            if (!TryDecryptCfbCore(ciphertext, iv, decryptBuffer, paddingMode, feedbackSizeInBits, out int written)
-                || (uint)written > decryptBuffer.Length)
+            if (
+                !TryDecryptCfbCore(
+                    ciphertext,
+                    iv,
+                    decryptBuffer,
+                    paddingMode,
+                    feedbackSizeInBits,
+                    out int written
+                )
+                || (uint)written > decryptBuffer.Length
+            )
             {
                 // This means decrypting the ciphertext grew in to a larger plaintext or overflowed.
                 // A user-derived class could do this, but it is not expected in any of the
@@ -1154,13 +1249,23 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
             CheckFeedbackSize(feedbackSizeInBits);
 
-            if (!TryDecryptCfbCore(ciphertext, iv, destination, paddingMode, feedbackSizeInBits, out int written))
+            if (
+                !TryDecryptCfbCore(
+                    ciphertext,
+                    iv,
+                    destination,
+                    paddingMode,
+                    feedbackSizeInBits,
+                    out int written
+                )
+            )
             {
                 throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
             }
@@ -1214,13 +1319,21 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             out int bytesWritten,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
             CheckFeedbackSize(feedbackSizeInBits);
 
-            return TryDecryptCfbCore(ciphertext, iv, destination, paddingMode, feedbackSizeInBits, out bytesWritten);
+            return TryDecryptCfbCore(
+                ciphertext,
+                iv,
+                destination,
+                paddingMode,
+                feedbackSizeInBits,
+                out bytesWritten
+            );
         }
 
         /// <summary>
@@ -1267,13 +1380,15 @@ namespace System.Security.Cryptography
             byte[] plaintext,
             byte[] iv,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             return EncryptCfb(
                 new ReadOnlySpan<byte>(plaintext),
                 new ReadOnlySpan<byte>(iv),
                 paddingMode,
-                feedbackSizeInBits);
+                feedbackSizeInBits
+            );
         }
 
         /// <summary>
@@ -1317,26 +1432,42 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             ReadOnlySpan<byte> iv,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
             CheckFeedbackSize(feedbackSizeInBits);
 
-            int ciphertextLength = GetCiphertextLengthCfb(plaintext.Length, paddingMode, feedbackSizeInBits);
+            int ciphertextLength = GetCiphertextLengthCfb(
+                plaintext.Length,
+                paddingMode,
+                feedbackSizeInBits
+            );
 
             // We expect most if not all uses to encrypt to exactly the ciphertextLength
             byte[] buffer = GC.AllocateUninitializedArray<byte>(ciphertextLength);
 
-            if (!TryEncryptCfbCore(plaintext, iv, buffer, paddingMode, feedbackSizeInBits, out int written) ||
-                written != ciphertextLength)
+            if (
+                !TryEncryptCfbCore(
+                    plaintext,
+                    iv,
+                    buffer,
+                    paddingMode,
+                    feedbackSizeInBits,
+                    out int written
+                )
+                || written != ciphertextLength
+            )
             {
                 // This means a user-derived implementation added more padding than we expected or
                 // did something non-standard (encrypt to a partial block). This can't happen for
                 // multiple padding blocks since the buffer would have been too small in the first
                 // place. It doesn't make sense to try and support partial block encryption, likely
                 // something went very wrong. So throw.
-                throw new CryptographicException(SR.Format(SR.Cryptography_EncryptedIncorrectLength, nameof(TryEncryptCfbCore)));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_EncryptedIncorrectLength, nameof(TryEncryptCfbCore))
+                );
             }
 
             return buffer;
@@ -1386,13 +1517,23 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
             CheckFeedbackSize(feedbackSizeInBits);
 
-            if (!TryEncryptCfbCore(plaintext, iv, destination, paddingMode, feedbackSizeInBits, out int written))
+            if (
+                !TryEncryptCfbCore(
+                    plaintext,
+                    iv,
+                    destination,
+                    paddingMode,
+                    feedbackSizeInBits,
+                    out int written
+                )
+            )
             {
                 throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
             }
@@ -1446,13 +1587,21 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             out int bytesWritten,
             PaddingMode paddingMode = PaddingMode.None,
-            int feedbackSizeInBits = 8)
+            int feedbackSizeInBits = 8
+        )
         {
             CheckPaddingMode(paddingMode);
             CheckInitializationVectorSize(iv);
             CheckFeedbackSize(feedbackSizeInBits);
 
-            return TryEncryptCfbCore(plaintext, iv, destination, paddingMode, feedbackSizeInBits, out bytesWritten);
+            return TryEncryptCfbCore(
+                plaintext,
+                iv,
+                destination,
+                paddingMode,
+                feedbackSizeInBits,
+                out bytesWritten
+            );
         }
 
         /// <summary>
@@ -1479,7 +1628,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
@@ -1503,7 +1653,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
@@ -1534,7 +1685,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
@@ -1560,7 +1712,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
@@ -1589,7 +1742,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
@@ -1622,7 +1776,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
@@ -1630,7 +1785,10 @@ namespace System.Security.Cryptography
         private static void CheckPaddingMode(PaddingMode paddingMode)
         {
             if (paddingMode < PaddingMode.None || paddingMode > PaddingMode.ISO10126)
-                throw new ArgumentOutOfRangeException(nameof(paddingMode), SR.Cryptography_InvalidPaddingMode);
+                throw new ArgumentOutOfRangeException(
+                    nameof(paddingMode),
+                    SR.Cryptography_InvalidPaddingMode
+                );
         }
 
         private void CheckInitializationVectorSize(ReadOnlySpan<byte> iv)
@@ -1641,9 +1799,16 @@ namespace System.Security.Cryptography
 
         private void CheckFeedbackSize(int feedbackSizeInBits)
         {
-            if (feedbackSizeInBits < 8 || (feedbackSizeInBits & 0b111) != 0 || feedbackSizeInBits > BlockSize)
+            if (
+                feedbackSizeInBits < 8
+                || (feedbackSizeInBits & 0b111) != 0
+                || feedbackSizeInBits > BlockSize
+            )
             {
-                throw new ArgumentException(SR.Cryptography_InvalidFeedbackSize, nameof(feedbackSizeInBits));
+                throw new ArgumentException(
+                    SR.Cryptography_InvalidFeedbackSize,
+                    nameof(feedbackSizeInBits)
+                );
             }
         }
 
@@ -1654,7 +1819,9 @@ namespace System.Security.Cryptography
         protected int BlockSizeValue;
         protected int FeedbackSizeValue;
         protected int KeySizeValue;
-        [MaybeNull] protected KeySizes[] LegalBlockSizesValue = null!;
-        [MaybeNull] protected KeySizes[] LegalKeySizesValue = null!;
+        [MaybeNull]
+        protected KeySizes[] LegalBlockSizesValue = null!;
+        [MaybeNull]
+        protected KeySizes[] LegalKeySizesValue = null!;
     }
 }

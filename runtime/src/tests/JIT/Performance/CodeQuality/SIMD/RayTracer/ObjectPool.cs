@@ -25,13 +25,17 @@ namespace System.Collections.Concurrent
         public ObjectPool(Func<T> generator, IProducerConsumerCollection<T> collection)
             : base(collection)
         {
-            if (generator == null) throw new ArgumentNullException("generator");
+            if (generator == null)
+                throw new ArgumentNullException("generator");
             _generator = generator;
         }
 
         /// <summary>Adds the provided item into the pool.</summary>
         /// <param name="item">The item to be added.</param>
-        public void PutObject(T item) { base.TryAdd(item); }
+        public void PutObject(T item)
+        {
+            base.TryAdd(item);
+        }
 
         /// <summary>Gets an item from the pool.</summary>
         /// <returns>The removed or created item.</returns>
@@ -48,7 +52,8 @@ namespace System.Collections.Concurrent
         {
             var items = new List<T>();
             T value;
-            while (base.TryTake(out value)) items.Add(value);
+            while (base.TryTake(out value))
+                items.Add(value);
             return items.ToArray();
         }
 

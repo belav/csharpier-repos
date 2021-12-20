@@ -16,33 +16,35 @@ public class Startup
         var fileProvider = new UpdateableFileProvider();
         services.AddSingleton(fileProvider);
 
-        services.AddMvc()
+        services
+            .AddMvc()
             .AddRazorRuntimeCompilation(options => options.FileProviders.Add(fileProvider));
     }
 
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
-            endpoints.MapFallbackToPage("/Fallback");
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+                endpoints.MapFallbackToPage("/Fallback");
+            }
+        );
     }
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         new WebHostBuilder()
-        .UseContentRoot(Directory.GetCurrentDirectory())
-        .UseStartup<Startup>()
-        .UseKestrel()
-        .UseIISIntegration();
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseStartup<Startup>()
+            .UseKestrel()
+            .UseIISIntegration();
 }

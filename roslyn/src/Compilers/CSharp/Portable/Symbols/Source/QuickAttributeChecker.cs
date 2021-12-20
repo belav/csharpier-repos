@@ -36,7 +36,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyPredefinedQuickAttributeChecker is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyPredefinedQuickAttributeChecker, CreatePredefinedQuickAttributeChecker(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyPredefinedQuickAttributeChecker,
+                        CreatePredefinedQuickAttributeChecker(),
+                        null
+                    );
                 }
 
                 return _lazyPredefinedQuickAttributeChecker;
@@ -46,11 +50,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static QuickAttributeChecker CreatePredefinedQuickAttributeChecker()
         {
             var result = new QuickAttributeChecker();
-            result.AddName(AttributeDescription.TypeIdentifierAttribute.Name, QuickAttributes.TypeIdentifier);
-            result.AddName(AttributeDescription.TypeForwardedToAttribute.Name, QuickAttributes.TypeForwardedTo);
-            result.AddName(AttributeDescription.AssemblyKeyNameAttribute.Name, QuickAttributes.AssemblyKeyName);
-            result.AddName(AttributeDescription.AssemblyKeyFileAttribute.Name, QuickAttributes.AssemblyKeyFile);
-            result.AddName(AttributeDescription.AssemblySignatureKeyAttribute.Name, QuickAttributes.AssemblySignatureKey);
+            result.AddName(
+                AttributeDescription.TypeIdentifierAttribute.Name,
+                QuickAttributes.TypeIdentifier
+            );
+            result.AddName(
+                AttributeDescription.TypeForwardedToAttribute.Name,
+                QuickAttributes.TypeForwardedTo
+            );
+            result.AddName(
+                AttributeDescription.AssemblyKeyNameAttribute.Name,
+                QuickAttributes.AssemblyKeyName
+            );
+            result.AddName(
+                AttributeDescription.AssemblyKeyFileAttribute.Name,
+                QuickAttributes.AssemblyKeyFile
+            );
+            result.AddName(
+                AttributeDescription.AssemblySignatureKeyAttribute.Name,
+                QuickAttributes.AssemblySignatureKey
+            );
 
 #if DEBUG
             result._sealed = true;
@@ -66,7 +85,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private QuickAttributeChecker(QuickAttributeChecker previous)
         {
-            _nameToAttributeMap = new Dictionary<string, QuickAttributes>(previous._nameToAttributeMap, StringComparer.Ordinal);
+            _nameToAttributeMap = new Dictionary<string, QuickAttributes>(
+                previous._nameToAttributeMap,
+                StringComparer.Ordinal
+            );
             // NOTE: caller must seal
         }
 
@@ -82,7 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _nameToAttributeMap[name] = newValue;
         }
 
-        internal QuickAttributeChecker AddAliasesIfAny(SyntaxList<UsingDirectiveSyntax> usingsSyntax, bool onlyGlobalAliases = false)
+        internal QuickAttributeChecker AddAliasesIfAny(
+            SyntaxList<UsingDirectiveSyntax> usingsSyntax,
+            bool onlyGlobalAliases = false
+        )
         {
             if (usingsSyntax.Count == 0)
             {
@@ -93,7 +118,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var usingDirective in usingsSyntax)
             {
-                if (usingDirective.Alias != null && (!onlyGlobalAliases || usingDirective.GlobalKeyword.IsKind(SyntaxKind.GlobalKeyword)))
+                if (
+                    usingDirective.Alias != null
+                    && (
+                        !onlyGlobalAliases
+                        || usingDirective.GlobalKeyword.IsKind(SyntaxKind.GlobalKeyword)
+                    )
+                )
                 {
                     string name = usingDirective.Alias.Name.Identifier.ValueText;
                     string target = usingDirective.Name.GetUnqualifiedName().Identifier.ValueText;
@@ -101,7 +132,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (_nameToAttributeMap.TryGetValue(target, out var foundAttributes))
                     {
                         // copy the QuickAttributes from alias target to alias name
-                        (newChecker ?? (newChecker = new QuickAttributeChecker(this))).AddName(name, foundAttributes);
+                        (newChecker ?? (newChecker = new QuickAttributeChecker(this))).AddName(
+                            name,
+                            foundAttributes
+                        );
                     }
                 }
             }
@@ -126,8 +160,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             QuickAttributes foundAttributes;
 
             // We allow "Name" to bind to "NameAttribute"
-            if (_nameToAttributeMap.TryGetValue(name, out foundAttributes) ||
-                _nameToAttributeMap.TryGetValue(name + "Attribute", out foundAttributes))
+            if (
+                _nameToAttributeMap.TryGetValue(name, out foundAttributes)
+                || _nameToAttributeMap.TryGetValue(name + "Attribute", out foundAttributes)
+            )
             {
                 return (foundAttributes & pattern) != 0;
             }
@@ -195,9 +231,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // In an attribute context the name might be referenced as the full name (like 'TypeForwardedToAttribute')
                 // or the short name (like 'TypeForwardedTo').
-                if (inAttribute &&
-                    (name.Length + nameof(System.Attribute).Length) == attributeDescription.Name.Length &&
-                    attributeDescription.Name.StartsWith(name))
+                if (
+                    inAttribute
+                    && (name.Length + nameof(System.Attribute).Length)
+                        == attributeDescription.Name.Length
+                    && attributeDescription.Name.StartsWith(name)
+                )
                 {
                     return true;
                 }

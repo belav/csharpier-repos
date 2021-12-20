@@ -26,9 +26,7 @@ namespace System.ComponentModel
         private static readonly object s_internalSyncObject = new object();
 
         // not creatable...
-        private LicenseManager()
-        {
-        }
+        private LicenseManager() { }
 
         /// <summary>
         /// Gets or sets the current <see cref='System.ComponentModel.LicenseContext'/> which specifies when the licensed object can be
@@ -63,7 +61,6 @@ namespace System.ComponentModel
             }
         }
 
-
         /// <summary>
         /// Gets the <see cref='System.ComponentModel.LicenseUsageMode'/> that
         /// specifies when the licensed object can be used, for the <see cref='System.ComponentModel.LicenseManager.CurrentContext'/>.
@@ -79,7 +76,6 @@ namespace System.ComponentModel
                 return LicenseUsageMode.Runtime;
             }
         }
-
 
         /// <summary>
         /// Caches the provider, both in the instance cache, and the type
@@ -112,7 +108,6 @@ namespace System.ComponentModel
             }
         }
 
-
         /// <summary>
         /// Creates an instance of the specified type, using
         /// creationContext
@@ -120,8 +115,10 @@ namespace System.ComponentModel
         /// </summary>
         [UnsupportedOSPlatform("browser")]
         public static object? CreateWithContext(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
-            LicenseContext creationContext)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type,
+            LicenseContext creationContext
+        )
         {
             return CreateWithContext(type, creationContext, Array.Empty<object>());
         }
@@ -133,9 +130,11 @@ namespace System.ComponentModel
         /// </summary>
         [UnsupportedOSPlatform("browser")]
         public static object? CreateWithContext(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type,
             LicenseContext creationContext,
-            object[] args)
+            object[] args
+        )
         {
             object? created = null;
 
@@ -165,7 +164,6 @@ namespace System.ComponentModel
             return created;
         }
 
-
         /// <summary>
         /// Determines if type was actually cached to have _no_ provider,
         /// as opposed to not being cached.
@@ -179,7 +177,6 @@ namespace System.ComponentModel
             return false;
         }
 
-
         /// <summary>
         /// Retrieves a cached instance of the provider associated with the
         /// specified type.
@@ -188,7 +185,6 @@ namespace System.ComponentModel
         {
             return (LicenseProvider?)s_providers?[type];
         }
-
 
         /// <summary>
         /// Retrieves a cached instance of the provider of the specified
@@ -266,34 +262,54 @@ namespace System.ComponentModel
         /// <summary>
         /// Internal validation helper.
         /// </summary>
-        private static bool ValidateInternal(Type type, object? instance, bool allowExceptions, out License? license)
+        private static bool ValidateInternal(
+            Type type,
+            object? instance,
+            bool allowExceptions,
+            out License? license
+        )
         {
-            return ValidateInternalRecursive(CurrentContext,
-                                             type,
-                                             instance,
-                                             allowExceptions,
-                                             out license,
-                                             out string? licenseKey);
+            return ValidateInternalRecursive(
+                CurrentContext,
+                type,
+                instance,
+                allowExceptions,
+                out license,
+                out string? licenseKey
+            );
         }
-
 
         /// <summary>
         /// Since we want to walk up the entire inheritance change, when not
         /// give an instance, we need another helper method to walk up
         /// the chain...
         /// </summary>
-        private static bool ValidateInternalRecursive(LicenseContext context, Type type, object? instance, bool allowExceptions, out License? license, out string? licenseKey)
+        private static bool ValidateInternalRecursive(
+            LicenseContext context,
+            Type type,
+            object? instance,
+            bool allowExceptions,
+            out License? license,
+            out string? licenseKey
+        )
         {
             LicenseProvider? provider = GetCachedProvider(type);
             if (provider == null && !GetCachedNoLicenseProvider(type))
             {
                 // NOTE : Must look directly at the class, we want no inheritance.
-                LicenseProviderAttribute? attr = (LicenseProviderAttribute?)Attribute.GetCustomAttribute(type, typeof(LicenseProviderAttribute), false);
+                LicenseProviderAttribute? attr =
+                    (LicenseProviderAttribute?)Attribute.GetCustomAttribute(
+                        type,
+                        typeof(LicenseProviderAttribute),
+                        false
+                    );
 
                 if (attr != null)
                 {
                     Type providerType = attr.LicenseProvider!;
-                    provider = GetCachedProviderInstance(providerType) ?? (LicenseProvider)Activator.CreateInstance(providerType)!;
+                    provider =
+                        GetCachedProviderInstance(providerType)
+                        ?? (LicenseProvider)Activator.CreateInstance(providerType)!;
                 }
 
                 CacheProvider(type, provider);
@@ -332,7 +348,14 @@ namespace System.ComponentModel
                         license = null;
                     }
                     string? temp;
-                    isValid = ValidateInternalRecursive(context, baseType, null, allowExceptions, out license, out temp);
+                    isValid = ValidateInternalRecursive(
+                        context,
+                        baseType,
+                        null,
+                        allowExceptions,
+                        out license,
+                        out temp
+                    );
                     if (license != null)
                     {
                         license.Dispose();
@@ -343,7 +366,6 @@ namespace System.ComponentModel
 
             return isValid;
         }
-
 
         /// <summary>
         /// Determines if a license can be granted for the specified type.
@@ -361,7 +383,6 @@ namespace System.ComponentModel
                 lic = null;
             }
         }
-
 
         /// <summary>
         /// Determines if a license can be granted for the instance of the specified type.

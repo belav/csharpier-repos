@@ -20,7 +20,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         /// <param name="delay">the amount of time to wait between retries</param>
         /// <typeparam name="T">type of return value</typeparam>
         /// <returns>the return value of <paramref name="action"/></returns>
-        public static Task<T?> RetryAsync<T>(Func<CancellationToken, Task<T>> action, TimeSpan delay, CancellationToken cancellationToken)
+        public static Task<T?> RetryAsync<T>(
+            Func<CancellationToken, Task<T>> action,
+            TimeSpan delay,
+            CancellationToken cancellationToken
+        )
         {
             return RetryAsyncHelper(
                 async cancellationToken =>
@@ -36,10 +40,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     }
                 },
                 delay,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        private static async Task<T> RetryAsyncHelper<T>(Func<CancellationToken, Task<T>> action, TimeSpan delay, CancellationToken cancellationToken)
+        private static async Task<T> RetryAsyncHelper<T>(
+            Func<CancellationToken, Task<T>> action,
+            TimeSpan delay,
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {

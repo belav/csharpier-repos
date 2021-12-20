@@ -142,14 +142,15 @@ namespace ILCompiler.PettisHansenSort
                 }
 
                 phEdges[loser].Clear();
-
 #if DEBUG
                 // Assert that there are only edges between representatives.
                 for (int i = 0; i < phEdges.Length; i++)
                 {
                     foreach (var edge in phEdges[i])
                     {
-                        Debug.Assert(unionFind.FindSet(i) == i && unionFind.FindSet(edge.Key) == edge.Key);
+                        Debug.Assert(
+                            unionFind.FindSet(i) == i && unionFind.FindSet(edge.Key) == edge.Key
+                        );
                         Debug.Assert(phEdges[edge.Key][i] == phEdges[i][edge.Key]);
                     }
                 }
@@ -161,14 +162,18 @@ namespace ILCompiler.PettisHansenSort
             // single method (meaning that we did not see any call edges) in
             // the same order as it was in the input (i.e. increasing indices,
             // asserted below).
-            List<List<int>> components =
-                phNodes
+            List<List<int>> components = phNodes
                 .Where(n => n.Count != 0)
                 .OrderByDescending(n => n.Count)
                 .ToList();
 
             // We also expect to see a permutation.
-            Debug.Assert(components.SelectMany(l => l).OrderBy(i => i).SequenceEqual(Enumerable.Range(0, graph.Count)));
+            Debug.Assert(
+                components
+                    .SelectMany(l => l)
+                    .OrderBy(i => i)
+                    .SequenceEqual(Enumerable.Range(0, graph.Count))
+            );
 
 #if DEBUG
             int prev = -1;

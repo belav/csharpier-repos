@@ -35,8 +35,14 @@ namespace DefaultNamespace
             return a == 1 && b == -2 && c == 3 && d == -4 && e == 5 && f == -6 && g == 7;
         }
 
-        public override bool Equals(Object o) { return false; }
-        public override int GetHashCode() { return 0; }
+        public override bool Equals(Object o)
+        {
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
 
     public class jitBug

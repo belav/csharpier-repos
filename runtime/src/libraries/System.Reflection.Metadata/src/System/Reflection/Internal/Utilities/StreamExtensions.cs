@@ -65,9 +65,7 @@ namespace System.Reflection.Internal
             {
                 // Note: Don't attempt to save state in-between calls to .Read as it would
                 // require a possibly massive intermediate buffer array
-                bytesRead = stream.Read(buffer,
-                                        offset + totalBytesRead,
-                                        count - totalBytesRead);
+                bytesRead = stream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
                 if (bytesRead == 0)
                 {
                     break;

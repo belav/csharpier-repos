@@ -5,4 +5,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-internal delegate Task<IActionResult?> PageHandlerExecutorDelegate(object handler, object?[]? arguments);
+internal delegate Task<IActionResult?> PageHandlerExecutorDelegate(
+    object handler,
+    object?[]? arguments
+);

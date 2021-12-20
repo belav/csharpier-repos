@@ -23,33 +23,55 @@ public class AuthenticationMiddlewareTests
     public async Task OnlyInvokesCanHandleRequestHandlers()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                    })
-                    .ConfigureServices(services => services.AddAuthentication(o =>
-                    {
-                        o.AddScheme("Skip", s =>
-                        {
-                            s.HandlerType = typeof(SkipHandler);
-                        });
-                            // Won't get hit since CanHandleRequests is false
-                            o.AddScheme("throws", s =>
-                        {
-                            s.HandlerType = typeof(ThrowsHandler);
-                        });
-                        o.AddScheme("607", s =>
-                        {
-                            s.HandlerType = typeof(SixOhSevenHandler);
-                        });
-                            // Won't get run since 607 will finish
-                            o.AddScheme("305", s =>
-                        {
-                            s.HandlerType = typeof(ThreeOhFiveHandler);
-                        });
-                    })))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                            }
+                        )
+                        .ConfigureServices(
+                            services =>
+                                services.AddAuthentication(
+                                    o =>
+                                    {
+                                        o.AddScheme(
+                                            "Skip",
+                                            s =>
+                                            {
+                                                s.HandlerType = typeof(SkipHandler);
+                                            }
+                                        );
+                                        // Won't get hit since CanHandleRequests is false
+                                        o.AddScheme(
+                                            "throws",
+                                            s =>
+                                            {
+                                                s.HandlerType = typeof(ThrowsHandler);
+                                            }
+                                        );
+                                        o.AddScheme(
+                                            "607",
+                                            s =>
+                                            {
+                                                s.HandlerType = typeof(SixOhSevenHandler);
+                                            }
+                                        );
+                                        // Won't get run since 607 will finish
+                                        o.AddScheme(
+                                            "305",
+                                            s =>
+                                            {
+                                                s.HandlerType = typeof(ThreeOhFiveHandler);
+                                            }
+                                        );
+                                    }
+                                )
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -62,12 +84,27 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_SetOnSuccessfulAuthenticate()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns(Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "custom"))));
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns(
+                Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(new ClaimsPrincipal(), "custom")
+                    )
+                )
+            );
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -85,12 +122,21 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_NotSetOnUnsuccessfulAuthenticate()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
             .Returns(Task.FromResult(AuthenticateResult.Fail("not authenticated")));
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -105,12 +151,27 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_NullResultWhenUserSetAfter()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns(Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "custom"))));
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns(
+                Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(new ClaimsPrincipal(), "custom")
+                    )
+                )
+            );
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -131,12 +192,27 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_SettingResultSetsUser()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns(Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "custom"))));
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns(
+                Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(new ClaimsPrincipal(), "custom")
+                    )
+                )
+            );
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -156,7 +232,8 @@ public class AuthenticationMiddlewareTests
 
     private HttpContext GetHttpContext(
         Action<IServiceCollection> registerServices = null,
-        IAuthenticationService authenticationService = null)
+        IAuthenticationService authenticationService = null
+    )
     {
         // ServiceProvider
         var serviceCollection = new ServiceCollection();

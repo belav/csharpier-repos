@@ -15,16 +15,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryDiscardDesignationDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider>;
+        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
+    >;
 
     public class RemoveUnnecessaryDiscardDesignationTests
     {
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestDeclarationPatternInSwitchStatement()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -36,7 +41,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -52,12 +58,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestNotInCSharp8()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -73,12 +83,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestDeclarationPatternInSwitchExpression()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -89,7 +103,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -104,12 +119,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestDeclarationPatternInIfStatement()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -117,7 +136,8 @@ class C
         if (o is int [|_|]) { }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -129,12 +149,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestRecursivePropertyPattern()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -145,7 +169,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -160,12 +185,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestEmptyRecursiveParameterPattern()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -176,7 +205,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -191,12 +221,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestTwoElementRecursiveParameterPattern()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -207,7 +241,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -222,12 +257,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestNotWithOneElementRecursiveParameterPattern()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -242,12 +281,16 @@ class C
             }.RunAsync();
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)
+        ]
         public async Task TestNestedFixAll()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(string o)
@@ -258,7 +301,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(string o)

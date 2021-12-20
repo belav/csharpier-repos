@@ -7,7 +7,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetTerminalInvalidationHandler")]
-        internal static extern unsafe void SetTerminalInvalidationHandler(delegate* unmanaged<void> handler);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SetTerminalInvalidationHandler"
+        )]
+        internal static extern unsafe void SetTerminalInvalidationHandler(
+            delegate* unmanaged<void> handler
+        );
     }
 }

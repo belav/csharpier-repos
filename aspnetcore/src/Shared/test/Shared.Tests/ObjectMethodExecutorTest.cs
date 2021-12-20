@@ -22,9 +22,7 @@ public class ObjectMethodExecutorTest
     public void ExecuteValueMethod()
     {
         var executor = GetExecutorForMethod("ValueMethod");
-        var result = executor.Execute(
-            _targetObject,
-            new object[] { 10, 20 });
+        var result = executor.Execute(_targetObject, new object[] { 10, 20 });
         Assert.False(executor.IsMethodAsync);
         Assert.Equal(30, (int)result);
     }
@@ -33,9 +31,7 @@ public class ObjectMethodExecutorTest
     public void ExecuteVoidValueMethod()
     {
         var executor = GetExecutorForMethod("VoidValueMethod");
-        var result = executor.Execute(
-            _targetObject,
-            new object[] { 10 });
+        var result = executor.Execute(_targetObject, new object[] { 10 });
         Assert.False(executor.IsMethodAsync);
         Assert.Null(result);
     }
@@ -44,9 +40,7 @@ public class ObjectMethodExecutorTest
     public void ExecuteValueMethodWithReturnType()
     {
         var executor = GetExecutorForMethod("ValueMethodWithReturnType");
-        var result = executor.Execute(
-            _targetObject,
-            new object[] { 10 });
+        var result = executor.Execute(_targetObject, new object[] { 10 });
         var resultObject = Assert.IsType<TestObject>(result);
         Assert.False(executor.IsMethodAsync);
         Assert.Equal("Hello", resultObject.value);
@@ -57,9 +51,7 @@ public class ObjectMethodExecutorTest
     {
         var executor = GetExecutorForMethod("ValueMethodUpdateValue");
         var parameter = new TestObject();
-        var result = executor.Execute(
-            _targetObject,
-            new object[] { parameter });
+        var result = executor.Execute(_targetObject, new object[] { parameter });
         var resultObject = Assert.IsType<TestObject>(result);
         Assert.False(executor.IsMethodAsync);
         Assert.Equal("HelloWorld", resultObject.value);
@@ -72,18 +64,15 @@ public class ObjectMethodExecutorTest
         var parameter = new TestObject();
         Assert.False(executor.IsMethodAsync);
         Assert.Throws<NotImplementedException>(
-                    () => executor.Execute(
-                        _targetObject,
-                        new object[] { parameter }));
+            () => executor.Execute(_targetObject, new object[] { parameter })
+        );
     }
 
     [Fact]
     public async Task ExecuteValueMethodAsync()
     {
         var executor = GetExecutorForMethod("ValueMethodAsync");
-        var result = await executor.ExecuteAsync(
-            _targetObject,
-            new object[] { 10, 20 });
+        var result = await executor.ExecuteAsync(_targetObject, new object[] { 10, 20 });
         Assert.True(executor.IsMethodAsync);
         Assert.Equal(30, (int)result);
     }
@@ -92,9 +81,7 @@ public class ObjectMethodExecutorTest
     public async Task ExecuteValueMethodWithReturnTypeAsync()
     {
         var executor = GetExecutorForMethod("ValueMethodWithReturnTypeAsync");
-        var result = await executor.ExecuteAsync(
-            _targetObject,
-            new object[] { 10 });
+        var result = await executor.ExecuteAsync(_targetObject, new object[] { 10 });
         var resultObject = Assert.IsType<TestObject>(result);
         Assert.True(executor.IsMethodAsync);
         Assert.Equal("Hello", resultObject.value);
@@ -105,9 +92,7 @@ public class ObjectMethodExecutorTest
     {
         var executor = GetExecutorForMethod("ValueMethodUpdateValueAsync");
         var parameter = new TestObject();
-        var result = await executor.ExecuteAsync(
-            _targetObject,
-            new object[] { parameter });
+        var result = await executor.ExecuteAsync(_targetObject, new object[] { parameter });
         var resultObject = Assert.IsType<TestObject>(result);
         Assert.True(executor.IsMethodAsync);
         Assert.Equal("HelloWorld", resultObject.value);
@@ -120,9 +105,8 @@ public class ObjectMethodExecutorTest
         var parameter = new TestObject();
         Assert.True(executor.IsMethodAsync);
         await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await executor.ExecuteAsync(
-                        _targetObject,
-                        new object[] { parameter }));
+            async () => await executor.ExecuteAsync(_targetObject, new object[] { parameter })
+        );
     }
 
     [Fact]
@@ -132,9 +116,8 @@ public class ObjectMethodExecutorTest
         var parameter = new TestObject();
         Assert.True(executor.IsMethodAsync);
         await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await executor.ExecuteAsync(
-                        _targetObject,
-                        new object[] { parameter }));
+            async () => await executor.ExecuteAsync(_targetObject, new object[] { parameter })
+        );
     }
 
     [Fact]
@@ -161,7 +144,10 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("CustomAwaitableOfReferenceTypeAsync");
 
         // Act
-        var result = await (TestAwaitable<TestObject>)executor.Execute(_targetObject, new object[] { "Hello", 123 });
+        var result = await (TestAwaitable<TestObject>)executor.Execute(
+            _targetObject,
+            new object[] { "Hello", 123 }
+        );
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -177,7 +163,10 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("CustomAwaitableOfValueTypeAsync");
 
         // Act
-        var result = await (TestAwaitable<int>)executor.Execute(_targetObject, new object[] { 123, 456 });
+        var result = await (TestAwaitable<int>)executor.Execute(
+            _targetObject,
+            new object[] { 123, 456 }
+        );
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -286,7 +275,10 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("ValueTaskOfReferenceType");
 
         // Act
-        var result = await (ValueTask<string>)executor.Execute(_targetObject, new object[] { "test result" });
+        var result = await (ValueTask<string>)executor.Execute(
+            _targetObject,
+            new object[] { "test result" }
+        );
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -332,10 +324,13 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("FSharpAsyncMethod");
 
         // Act
-        var fsharpAsync = (FSharpAsync<string>)executor.Execute(_targetObject, new object[] { "test result" });
-        var result = await FSharpAsync.StartAsTask(fsharpAsync,
+        var fsharpAsync =
+            (FSharpAsync<string>)executor.Execute(_targetObject, new object[] { "test result" });
+        var result = await FSharpAsync.StartAsTask(
+            fsharpAsync,
             FSharpOption<TaskCreationOptions>.None,
-            FSharpOption<CancellationToken>.None);
+            FSharpOption<CancellationToken>.None
+        );
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -350,10 +345,13 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("FSharpAsyncFailureMethod");
 
         // Act
-        var fsharpAsync = (FSharpAsync<string>)executor.Execute(_targetObject, new object[] { "test result" });
-        var resultTask = FSharpAsync.StartAsTask(fsharpAsync,
+        var fsharpAsync =
+            (FSharpAsync<string>)executor.Execute(_targetObject, new object[] { "test result" });
+        var resultTask = FSharpAsync.StartAsTask(
+            fsharpAsync,
             FSharpOption<TaskCreationOptions>.None,
-            FSharpOption<CancellationToken>.None);
+            FSharpOption<CancellationToken>.None
+        );
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -403,7 +401,10 @@ public class ObjectMethodExecutorTest
         return ObjectMethodExecutor.Create(method, targetTypeInfo);
     }
 
-    private ObjectMethodExecutor GetExecutorForMethod(string methodName, object[] parameterDefaultValues)
+    private ObjectMethodExecutor GetExecutorForMethod(
+        string methodName,
+        object[] parameterDefaultValues
+    )
     {
         var method = typeof(TestObject).GetMethod(methodName);
         return ObjectMethodExecutor.Create(method, targetTypeInfo, parameterDefaultValues);
@@ -417,14 +418,12 @@ public class ObjectMethodExecutorTest
             return i + j;
         }
 
-        public void VoidValueMethod(int i)
-        {
-
-        }
+        public void VoidValueMethod(int i) { }
 
         public TestObject ValueMethodWithReturnType(int i)
         {
-            return new TestObject() { value = "Hello" }; ;
+            return new TestObject() { value = "Hello" };
+            ;
         }
 
         public TestObject ValueMethodWithReturnTypeThrowsException(TestObject i)
@@ -472,17 +471,13 @@ public class ObjectMethodExecutorTest
 
         public TestAwaitable<TestObject> CustomAwaitableOfReferenceTypeAsync(
             string input1,
-            int input2)
+            int input2
+        )
         {
-            return new TestAwaitable<TestObject>(new TestObject
-            {
-                value = $"{input1} {input2}"
-            });
+            return new TestAwaitable<TestObject>(new TestObject { value = $"{input1} {input2}" });
         }
 
-        public TestAwaitable<int> CustomAwaitableOfValueTypeAsync(
-            int input1,
-            int input2)
+        public TestAwaitable<int> CustomAwaitableOfValueTypeAsync(int input1, int input2)
         {
             return new TestAwaitable<int>(input1 + input2);
         }
@@ -507,9 +502,7 @@ public class ObjectMethodExecutorTest
             return new ValueTask<string>(result);
         }
 
-        public void MethodWithMultipleParameters(int valueTypeParam, string referenceTypeParam)
-        {
-        }
+        public void MethodWithMultipleParameters(int valueTypeParam, string referenceTypeParam) { }
 
         public FSharpAsync<string> FSharpAsyncMethod(string parameter)
         {
@@ -519,7 +512,8 @@ public class ObjectMethodExecutorTest
         public FSharpAsync<string> FSharpAsyncFailureMethod(string parameter)
         {
             return FSharpAsync.AwaitTask(
-                Task.FromException<string>(new InvalidOperationException("Test exception")));
+                Task.FromException<string>(new InvalidOperationException("Test exception"))
+            );
         }
     }
 
@@ -534,11 +528,13 @@ public class ObjectMethodExecutorTest
             _result = result;
 
             // Simulate a brief delay before completion
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                Thread.Sleep(100);
-                SetCompleted();
-            });
+            ThreadPool.QueueUserWorkItem(
+                _ =>
+                {
+                    Thread.Sleep(100);
+                    SetCompleted();
+                }
+            );
         }
 
         private void SetCompleted()
@@ -588,23 +584,25 @@ public class ObjectMethodExecutorTest
 
     public class TestAwaitableWithICriticalNotifyCompletion
     {
-        public TestAwaiterWithICriticalNotifyCompletion GetAwaiter()
-            => new TestAwaiterWithICriticalNotifyCompletion();
+        public TestAwaiterWithICriticalNotifyCompletion GetAwaiter() =>
+            new TestAwaiterWithICriticalNotifyCompletion();
     }
 
     public class TestAwaitableWithoutICriticalNotifyCompletion
     {
-        public TestAwaiterWithoutICriticalNotifyCompletion GetAwaiter()
-            => new TestAwaiterWithoutICriticalNotifyCompletion();
+        public TestAwaiterWithoutICriticalNotifyCompletion GetAwaiter() =>
+            new TestAwaiterWithoutICriticalNotifyCompletion();
     }
 
     public class TestAwaiterWithICriticalNotifyCompletion
-        : CompletionTrackingAwaiterBase, ICriticalNotifyCompletion
+        : CompletionTrackingAwaiterBase,
+          ICriticalNotifyCompletion
     {
     }
 
     public class TestAwaiterWithoutICriticalNotifyCompletion
-        : CompletionTrackingAwaiterBase, INotifyCompletion
+        : CompletionTrackingAwaiterBase,
+          INotifyCompletion
     {
     }
 

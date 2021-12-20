@@ -27,7 +27,8 @@ namespace HttpStress
                 try
                 {
                     File.Delete(filename);
-                } catch {}
+                }
+                catch { }
             }
             _log = new StreamWriter("client.log", false) { AutoFlush = true };
 
@@ -51,7 +52,9 @@ namespace HttpStress
             try
             {
                 int i = 0;
-                await foreach (string message in _messagesChannel.Reader.ReadAllAsync(_stopProcessing.Token))
+                await foreach (
+                    string message in _messagesChannel.Reader.ReadAllAsync(_stopProcessing.Token)
+                )
                 {
                     if ((++i % 10_000) == 0)
                     {
@@ -72,14 +75,19 @@ namespace HttpStress
                 if (_log.BaseStream.Length > (50 << 20))
                 {
                     _log.Close();
-                    _log = new StreamWriter($"client_{++_lastLogNumber:000}.log", false) { AutoFlush = true };
+                    _log = new StreamWriter($"client_{++_lastLogNumber:000}.log", false)
+                    {
+                        AutoFlush = true
+                    };
                 }
             }
         }
 
         protected override async void OnEventWritten(EventWrittenEventArgs eventData)
         {
-            var sb = new StringBuilder().Append($"{eventData.TimeStamp:HH:mm:ss.fffffff}[{eventData.EventName}] ");
+            var sb = new StringBuilder().Append(
+                $"{eventData.TimeStamp:HH:mm:ss.fffffff}[{eventData.EventName}] "
+            );
             for (int i = 0; i < eventData.Payload?.Count; i++)
             {
                 if (i > 0)

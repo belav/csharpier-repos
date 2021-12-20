@@ -11,15 +11,26 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
     {
         // https://docs.microsoft.com/en-us/windows/desktop/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot
         [DllImport("kernel32", SetLastError = true)]
-        private static extern IntPtr CreateToolhelp32Snapshot(SnapshotFlags dwFlags, uint th32ProcessID);
+        private static extern IntPtr CreateToolhelp32Snapshot(
+            SnapshotFlags dwFlags,
+            uint th32ProcessID
+        );
 
         // https://docs.microsoft.com/en-us/windows/desktop/api/tlhelp32/nf-tlhelp32-process32first
-        [DllImport("kernel32", SetLastError = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private static extern bool Process32First([In]IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
+        [DllImport(
+            "kernel32",
+            SetLastError = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
+        private static extern bool Process32First([In] IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
 
         // https://docs.microsoft.com/en-us/windows/desktop/api/tlhelp32/nf-tlhelp32-process32next
-        [DllImport("kernel32", SetLastError = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private static extern bool Process32Next([In]IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
+        [DllImport(
+            "kernel32",
+            SetLastError = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
+        private static extern bool Process32Next([In] IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
 
         [DllImport("kernel32", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -44,13 +55,10 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
                         {
                             return Process.GetProcessById((int)procEntry.th32ParentProcessID);
                         }
-                    }
-                    while (Process32Next(snapshotHandle, ref procEntry));
+                    } while (Process32Next(snapshotHandle, ref procEntry));
                 }
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             finally
             {
                 CloseHandle(snapshotHandle);

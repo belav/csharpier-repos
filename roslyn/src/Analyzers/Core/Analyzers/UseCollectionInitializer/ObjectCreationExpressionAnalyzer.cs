@@ -19,12 +19,15 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         TMemberAccessExpressionSyntax,
         TInvocationExpressionSyntax,
         TExpressionStatementSyntax,
-        TVariableDeclaratorSyntax> : AbstractObjectCreationExpressionAnalyzer<
-            TExpressionSyntax,
-            TStatementSyntax,
-            TObjectCreationExpressionSyntax,
-            TVariableDeclaratorSyntax,
-            TExpressionStatementSyntax>
+        TVariableDeclaratorSyntax
+    >
+        : AbstractObjectCreationExpressionAnalyzer<
+              TExpressionSyntax,
+              TStatementSyntax,
+              TObjectCreationExpressionSyntax,
+              TVariableDeclaratorSyntax,
+              TExpressionStatementSyntax
+          >
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : TExpressionSyntax
@@ -33,17 +36,42 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         where TExpressionStatementSyntax : TStatementSyntax
         where TVariableDeclaratorSyntax : SyntaxNode
     {
-        private static readonly ObjectPool<ObjectCreationExpressionAnalyzer<TExpressionSyntax, TStatementSyntax, TObjectCreationExpressionSyntax, TMemberAccessExpressionSyntax, TInvocationExpressionSyntax, TExpressionStatementSyntax, TVariableDeclaratorSyntax>> s_pool
-            = SharedPools.Default<ObjectCreationExpressionAnalyzer<TExpressionSyntax, TStatementSyntax, TObjectCreationExpressionSyntax, TMemberAccessExpressionSyntax, TInvocationExpressionSyntax, TExpressionStatementSyntax, TVariableDeclaratorSyntax>>();
+        private static readonly ObjectPool<
+            ObjectCreationExpressionAnalyzer<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TObjectCreationExpressionSyntax,
+                TMemberAccessExpressionSyntax,
+                TInvocationExpressionSyntax,
+                TExpressionStatementSyntax,
+                TVariableDeclaratorSyntax
+            >
+        > s_pool = SharedPools.Default<
+            ObjectCreationExpressionAnalyzer<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TObjectCreationExpressionSyntax,
+                TMemberAccessExpressionSyntax,
+                TInvocationExpressionSyntax,
+                TExpressionStatementSyntax,
+                TVariableDeclaratorSyntax
+            >
+        >();
 
         public static ImmutableArray<TExpressionStatementSyntax>? Analyze(
             SemanticModel semanticModel,
             ISyntaxFacts syntaxFacts,
             TObjectCreationExpressionSyntax objectCreationExpression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var analyzer = s_pool.Allocate();
-            analyzer.Initialize(semanticModel, syntaxFacts, objectCreationExpression, cancellationToken);
+            analyzer.Initialize(
+                semanticModel,
+                syntaxFacts,
+                objectCreationExpression,
+                cancellationToken
+            );
             try
             {
                 return analyzer.AnalyzeWorker();
@@ -71,7 +99,6 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     {
                         foundStatement = true;
                     }
-
                     continue;
                 }
 
@@ -104,7 +131,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
         protected override bool ShouldAnalyze()
         {
-            var type = _semanticModel.GetTypeInfo(_objectCreationExpression, _cancellationToken).Type;
+            var type =
+                _semanticModel.GetTypeInfo(_objectCreationExpression, _cancellationToken).Type;
             if (type == null)
             {
                 return false;
@@ -114,14 +142,18 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                 _objectCreationExpression.SpanStart,
                 container: type,
                 name: WellKnownMemberNames.CollectionInitializerAddMethodName,
-                includeReducedExtensionMethods: true);
+                includeReducedExtensionMethods: true
+            );
 
-            return addMethods.Any(m => m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any());
+            return addMethods.Any(
+                m => m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any()
+            );
         }
 
         private bool TryAnalyzeIndexAssignment(
             TExpressionStatementSyntax statement,
-            [NotNullWhen(true)] out SyntaxNode? instance)
+            [NotNullWhen(true)] out SyntaxNode? instance
+        )
         {
             instance = null;
             if (!_syntaxFacts.SupportsIndexingInitializer(statement.SyntaxTree.Options))
@@ -130,13 +162,12 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             if (!_syntaxFacts.IsSimpleAssignmentStatement(statement))
                 return false;
 
-            _syntaxFacts.GetPartsOfAssignmentStatement(statement,
-                out var left, out var right);
+            _syntaxFacts.GetPartsOfAssignmentStatement(statement, out var left, out var right);
 
             if (!_syntaxFacts.IsElementAccessExpression(left))
                 return false;
 
-            // If we're initializing a variable, then we can't reference that variable on the right 
+            // If we're initializing a variable, then we can't reference that variable on the right
             // side of the initialization.  Rewriting this into a collection initializer would lead
             // to a definite-assignment error.
             if (ExpressionContainsValuePatternOrReferencesInitializedSymbol(right))
@@ -148,10 +179,14 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
         private bool TryAnalyzeAddInvocation(
             TExpressionStatementSyntax statement,
-            [NotNullWhen(true)] out SyntaxNode? instance)
+            [NotNullWhen(true)] out SyntaxNode? instance
+        )
         {
             instance = null;
-            if (_syntaxFacts.GetExpressionOfExpressionStatement(statement) is not TInvocationExpressionSyntax invocationExpression)
+            if (
+                _syntaxFacts.GetExpressionOfExpressionStatement(statement)
+                is not TInvocationExpressionSyntax invocationExpression
+            )
                 return false;
 
             var arguments = _syntaxFacts.GetArgumentsOfInvocationExpression(invocationExpression);
@@ -168,16 +203,25 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     return false;
             }
 
-            if (_syntaxFacts.GetExpressionOfInvocationExpression(invocationExpression) is not TMemberAccessExpressionSyntax memberAccess)
+            if (
+                _syntaxFacts.GetExpressionOfInvocationExpression(invocationExpression)
+                is not TMemberAccessExpressionSyntax memberAccess
+            )
                 return false;
 
             if (!_syntaxFacts.IsSimpleMemberAccessExpression(memberAccess))
                 return false;
 
-            _syntaxFacts.GetPartsOfMemberAccessExpression(memberAccess, out var localInstance, out var memberName);
+            _syntaxFacts.GetPartsOfMemberAccessExpression(
+                memberAccess,
+                out var localInstance,
+                out var memberName
+            );
             _syntaxFacts.GetNameAndArityOfSimpleName(memberName, out var name, out var arity);
 
-            if (arity != 0 || !Equals(name, WellKnownMemberNames.CollectionInitializerAddMethodName))
+            if (
+                arity != 0 || !Equals(name, WellKnownMemberNames.CollectionInitializerAddMethodName)
+            )
                 return false;
 
             instance = localInstance;

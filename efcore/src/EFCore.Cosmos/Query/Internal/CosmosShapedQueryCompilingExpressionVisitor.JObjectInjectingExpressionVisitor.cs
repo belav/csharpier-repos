@@ -28,26 +28,27 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                         var jObjectVariable = Expression.Variable(
                             typeof(JObject),
-                            "jObject" + _currentEntityIndex);
+                            "jObject" + _currentEntityIndex
+                        );
                         var variables = new List<ParameterExpression> { jObjectVariable };
 
                         var expressions = new List<Expression>
                         {
                             Expression.Assign(
                                 jObjectVariable,
-                                Expression.TypeAs(
-                                    valueBufferExpression,
-                                    typeof(JObject))),
+                                Expression.TypeAs(valueBufferExpression, typeof(JObject))
+                            ),
                             Expression.Condition(
-                                Expression.Equal(jObjectVariable, Expression.Constant(null, jObjectVariable.Type)),
+                                Expression.Equal(
+                                    jObjectVariable,
+                                    Expression.Constant(null, jObjectVariable.Type)
+                                ),
                                 Expression.Constant(null, shaperExpression.Type),
-                                shaperExpression)
+                                shaperExpression
+                            )
                         };
 
-                        return Expression.Block(
-                            shaperExpression.Type,
-                            variables,
-                            expressions);
+                        return Expression.Block(shaperExpression.Type, variables, expressions);
                     }
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                         var jArrayVariable = Expression.Variable(
                             typeof(JArray),
-                            "jArray" + _currentEntityIndex);
+                            "jArray" + _currentEntityIndex
+                        );
                         var variables = new List<ParameterExpression> { jArrayVariable };
 
                         var expressions = new List<Expression>
@@ -67,17 +69,24 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 jArrayVariable,
                                 Expression.TypeAs(
                                     collectionShaperExpression.Projection,
-                                    typeof(JArray))),
+                                    typeof(JArray)
+                                )
+                            ),
                             Expression.Condition(
-                                Expression.Equal(jArrayVariable, Expression.Constant(null, jArrayVariable.Type)),
+                                Expression.Equal(
+                                    jArrayVariable,
+                                    Expression.Constant(null, jArrayVariable.Type)
+                                ),
                                 Expression.Constant(null, collectionShaperExpression.Type),
-                                collectionShaperExpression)
+                                collectionShaperExpression
+                            )
                         };
 
                         return Expression.Block(
                             collectionShaperExpression.Type,
                             variables,
-                            expressions);
+                            expressions
+                        );
                     }
                 }
 

@@ -14,17 +14,14 @@ namespace Test
             try
             {
                 while (m_abStatic1[1]) { }
-                for (; ; ) { throw new Exception(); }
-                try
+                for (;;)
                 {
+                    throw new Exception();
                 }
-                finally
-                {
-                }
+                try { }
+                finally { }
             }
-            catch (DivideByZeroException)
-            {
-            }
+            catch (DivideByZeroException) { }
             return 0;
         }
         static int Main()

@@ -24,12 +24,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PN_INDEXERINTERNAL,
         PN_COMBINE,
         PN_REMOVE,
-
         // internal method name for conversion operators
         // these get mangled when converted to CLS names
         PN_OPEXPLICITMN,
         PN_OPIMPLICITMN,
-
         // CLS method names for user defined operators
         PN_OPUNARYPLUS,
         PN_OPUNARYMINUS,
@@ -57,7 +55,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PN_OPTRUE,
         PN_OPFALSE,
         PN_OPNEGATION,
-
         PN_CONCAT,
         PN_ADD,
         PN_GETLENGTH,
@@ -110,15 +107,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PN_NOT,
         PN_NEWARRAYINIT,
         PN_EXPRESSION_PROPERTY,
-
         PN_ADDEVENTHANDLER,
         PN_REMOVEEVENTHANDLER,
         PN_INVOCATIONLIST,
         PN_GETORCREATEEVENTREGISTRATIONTOKENTABLE,
-
         PN_VOID,
         PN_EMPTY,
-
-        PN_COUNT,  // Not a name, this is the total count of predefined names
+        PN_COUNT, // Not a name, this is the total count of predefined names
     }
 }

@@ -13,7 +13,6 @@ namespace Microsoft.Win32
         ///    <para> The system is about to resume.</para>
         /// </devdoc>
         Resume = 1,
-
         /// <devdoc>
         ///      The power mode status has changed.  This may
         ///      indicate a weak or charging battery, a transition
@@ -21,7 +20,6 @@ namespace Microsoft.Win32
         ///      status of the system power supply.
         /// </devdoc>
         StatusChange = 2,
-
         /// <devdoc>
         ///      The system is about to be suspended.
         /// </devdoc>

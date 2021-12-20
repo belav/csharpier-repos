@@ -7,9 +7,7 @@ namespace System.CommandLine.Parsing
 {
     internal class TokenizeResult
     {
-        internal TokenizeResult(
-            List<Token> tokens,
-            List<TokenizeError> errors)
+        internal TokenizeResult(List<Token> tokens, List<TokenizeError> errors)
         {
             Tokens = tokens;
             Errors = errors;

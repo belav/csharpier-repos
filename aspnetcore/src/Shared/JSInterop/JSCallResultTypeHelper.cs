@@ -15,9 +15,11 @@ internal static class JSCallResultTypeHelper
     {
         if (typeof(TResult).Assembly == _currentAssembly)
         {
-            if (typeof(TResult) == typeof(IJSObjectReference) ||
-                typeof(TResult) == typeof(IJSInProcessObjectReference) ||
-                typeof(TResult) == typeof(IJSUnmarshalledObjectReference))
+            if (
+                typeof(TResult) == typeof(IJSObjectReference)
+                || typeof(TResult) == typeof(IJSInProcessObjectReference)
+                || typeof(TResult) == typeof(IJSUnmarshalledObjectReference)
+            )
             {
                 return JSCallResultType.JSObjectReference;
             }

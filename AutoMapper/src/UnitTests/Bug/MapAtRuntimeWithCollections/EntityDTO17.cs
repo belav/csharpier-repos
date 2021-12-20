@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OmmitedDTOModel3WithCollections
 {
-    public class EntityDTO17 :BaseEntity
+    public class EntityDTO17 : BaseEntity
     {
         public EntityDTO17()
         {

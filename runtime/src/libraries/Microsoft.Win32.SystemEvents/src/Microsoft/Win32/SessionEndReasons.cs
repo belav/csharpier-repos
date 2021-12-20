@@ -15,7 +15,6 @@ namespace Microsoft.Win32
         ///      is logging off.
         /// </devdoc>
         Logoff = 1,
-
         /// <devdoc>
         ///      The system is shutting down.
         /// </devdoc>

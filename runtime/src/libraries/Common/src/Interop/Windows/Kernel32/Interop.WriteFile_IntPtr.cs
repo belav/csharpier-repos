@@ -13,6 +13,7 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToWrite,
             out int numBytesWritten,
-            IntPtr mustBeZero);
+            IntPtr mustBeZero
+        );
     }
 }

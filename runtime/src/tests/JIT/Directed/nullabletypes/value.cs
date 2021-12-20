@@ -8,7 +8,6 @@
 
 using System;
 
-
 interface BaseInter { }
 interface GenInter<T> { }
 
@@ -28,7 +27,6 @@ class NullableTest1
     static ImplStruct? imps;
     static OpenGenImplStruct<Foo>? genfoo;
     static CloseGenImplStruct? genint;
-
 
     public static void Run()
     {
@@ -83,7 +81,6 @@ class NullableTest3
     static OpenGenImplStruct<Foo>? genfoo = new OpenGenImplStruct<Foo>();
     static CloseGenImplStruct? genint = new CloseGenImplStruct();
 
-
     public static void Run()
     {
         Test_nullabletypes.Eval(i.Value, default(int));
@@ -103,4 +100,3 @@ class NullableTests
     }
 }
 //</Code>
-

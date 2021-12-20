@@ -11,12 +11,16 @@ namespace Microsoft.Extensions.Logging.Console
     internal sealed class SimpleConsoleFormatter : ConsoleFormatter, IDisposable
     {
         private const string LoglevelPadding = ": ";
-        private static readonly string _messagePadding = new string(' ', GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length);
-        private static readonly string _newLineWithMessagePadding = Environment.NewLine + _messagePadding;
+        private static readonly string _messagePadding = new string(
+            ' ',
+            GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length
+        );
+        private static readonly string _newLineWithMessagePadding =
+            Environment.NewLine + _messagePadding;
         private IDisposable _optionsReloadToken;
 
         public SimpleConsoleFormatter(IOptionsMonitor<SimpleConsoleFormatterOptions> options)
-            : base (ConsoleFormatterNames.Simple)
+            : base(ConsoleFormatterNames.Simple)
         {
             ReloadLoggerOptions(options.CurrentValue);
             _optionsReloadToken = options.OnChange(ReloadLoggerOptions);
@@ -34,7 +38,11 @@ namespace Microsoft.Extensions.Logging.Console
 
         internal SimpleConsoleFormatterOptions FormatterOptions { get; set; }
 
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider scopeProvider,
+            TextWriter textWriter
+        )
         {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
@@ -58,12 +66,21 @@ namespace Microsoft.Extensions.Logging.Console
             }
             if (logLevelString != null)
             {
-                textWriter.WriteColoredMessage(logLevelString, logLevelColors.Background, logLevelColors.Foreground);
+                textWriter.WriteColoredMessage(
+                    logLevelString,
+                    logLevelColors.Background,
+                    logLevelColors.Foreground
+                );
             }
             CreateDefaultLogMessage(textWriter, logEntry, message, scopeProvider);
         }
 
-        private void CreateDefaultLogMessage<TState>(TextWriter textWriter, in LogEntry<TState> logEntry, string message, IExternalScopeProvider scopeProvider)
+        private void CreateDefaultLogMessage<TState>(
+            TextWriter textWriter,
+            in LogEntry<TState> logEntry,
+            string message,
+            IExternalScopeProvider scopeProvider
+        )
         {
             bool singleLine = FormatterOptions.SingleLine;
             int eventId = logEntry.EventId.Id;
@@ -122,12 +139,22 @@ namespace Microsoft.Extensions.Logging.Console
                 else
                 {
                     textWriter.Write(_messagePadding);
-                    WriteReplacing(textWriter, Environment.NewLine, _newLineWithMessagePadding, message);
+                    WriteReplacing(
+                        textWriter,
+                        Environment.NewLine,
+                        _newLineWithMessagePadding,
+                        message
+                    );
                     textWriter.Write(Environment.NewLine);
                 }
             }
 
-            static void WriteReplacing(TextWriter writer, string oldValue, string newValue, string message)
+            static void WriteReplacing(
+                TextWriter writer,
+                string oldValue,
+                string newValue,
+                string message
+            )
             {
                 string newMessage = message.Replace(oldValue, newValue);
                 writer.Write(newMessage);
@@ -155,8 +182,12 @@ namespace Microsoft.Extensions.Logging.Console
 
         private ConsoleColors GetLogLevelConsoleColors(LogLevel logLevel)
         {
-            bool disableColors = (FormatterOptions.ColorBehavior == LoggerColorBehavior.Disabled) ||
-                (FormatterOptions.ColorBehavior == LoggerColorBehavior.Default && System.Console.IsOutputRedirected);
+            bool disableColors =
+                (FormatterOptions.ColorBehavior == LoggerColorBehavior.Disabled)
+                || (
+                    FormatterOptions.ColorBehavior == LoggerColorBehavior.Default
+                    && System.Console.IsOutputRedirected
+                );
             if (disableColors)
             {
                 return new ConsoleColors(null, null);
@@ -167,7 +198,8 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 LogLevel.Trace => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
                 LogLevel.Debug => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
-                LogLevel.Information => new ConsoleColors(ConsoleColor.DarkGreen, ConsoleColor.Black),
+                LogLevel.Information
+                  => new ConsoleColors(ConsoleColor.DarkGreen, ConsoleColor.Black),
                 LogLevel.Warning => new ConsoleColors(ConsoleColor.Yellow, ConsoleColor.Black),
                 LogLevel.Error => new ConsoleColors(ConsoleColor.Black, ConsoleColor.DarkRed),
                 LogLevel.Critical => new ConsoleColors(ConsoleColor.White, ConsoleColor.DarkRed),
@@ -175,25 +207,32 @@ namespace Microsoft.Extensions.Logging.Console
             };
         }
 
-        private void WriteScopeInformation(TextWriter textWriter, IExternalScopeProvider scopeProvider, bool singleLine)
+        private void WriteScopeInformation(
+            TextWriter textWriter,
+            IExternalScopeProvider scopeProvider,
+            bool singleLine
+        )
         {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
                 bool paddingNeeded = !singleLine;
-                scopeProvider.ForEachScope((scope, state) =>
-                {
-                    if (paddingNeeded)
+                scopeProvider.ForEachScope(
+                    (scope, state) =>
                     {
-                        paddingNeeded = false;
-                        state.Write(_messagePadding);
-                        state.Write("=> ");
-                    }
-                    else
-                    {
-                        state.Write(" => ");
-                    }
-                    state.Write(scope);
-                }, textWriter);
+                        if (paddingNeeded)
+                        {
+                            paddingNeeded = false;
+                            state.Write(_messagePadding);
+                            state.Write("=> ");
+                        }
+                        else
+                        {
+                            state.Write(" => ");
+                        }
+                        state.Write(scope);
+                    },
+                    textWriter
+                );
 
                 if (!paddingNeeded && !singleLine)
                 {

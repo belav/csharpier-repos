@@ -13,7 +13,6 @@ public enum NavLinkMatch
     /// of the current URL.
     /// </summary>
     Prefix,
-
     /// <summary>
     /// Specifies that the <see cref="NavLink"/> should be active when it matches the entire
     /// current URL.

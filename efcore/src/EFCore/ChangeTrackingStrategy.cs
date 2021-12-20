@@ -21,14 +21,12 @@ namespace Microsoft.EntityFrameworkCore
         ///     triggers the change detection process.
         /// </summary>
         Snapshot,
-
         /// <summary>
         ///     To use this strategy, the entity class must implement <see cref="INotifyPropertyChanged" />.
         ///     Original values are recorded when an entity is queried from the database. Properties are marked as modified when the
         ///     entity raises the <see cref="INotifyPropertyChanged.PropertyChanged" /> event.
         /// </summary>
         ChangedNotifications,
-
         /// <summary>
         ///     To use this strategy, the entity class must implement <see cref="INotifyPropertyChanged" /> and
         ///     <see cref="INotifyPropertyChanging" />.
@@ -40,7 +38,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     configured as concurrency tokens.
         /// </remarks>
         ChangingAndChangedNotifications,
-
         /// <summary>
         ///     To use this strategy, the entity class must implement <see cref="INotifyPropertyChanged" /> and
         ///     <see cref="INotifyPropertyChanging" />.

@@ -54,10 +54,9 @@ internal class SocketAddress
         }
         _size = size;
         _buffer = new byte[((size / IntPtr.Size) + 2) * IntPtr.Size]; // sizeof DWORD
-
 #if BIGENDIAN
-            m_Buffer[0] = unchecked((byte)((int)family>>8));
-            m_Buffer[1] = unchecked((byte)((int)family   ));
+        m_Buffer[0] = unchecked((byte)((int)family >> 8));
+        m_Buffer[1] = unchecked((byte)((int)family));
 #else
         _buffer[0] = unchecked((byte)((int)family));
         _buffer[1] = unchecked((byte)((int)family >> 8));
@@ -75,7 +74,7 @@ internal class SocketAddress
         {
             int family;
 #if BIGENDIAN
-                family = ((int)m_Buffer[0]<<8) | m_Buffer[1];
+            family = ((int)m_Buffer[0] << 8) | m_Buffer[1];
 #else
             family = _buffer[0] | ((int)_buffer[1] << 8);
 #endif
@@ -85,10 +84,7 @@ internal class SocketAddress
 
     internal int Size
     {
-        get
-        {
-            return _size;
-        }
+        get { return _size; }
     }
 
     // access to unmanaged serialized data. this doesn't
@@ -148,10 +144,11 @@ internal class SocketAddress
 
             for (i = 0; i < size; i += 4)
             {
-                _hash ^= (int)_buffer[i]
-                        | ((int)_buffer[i + 1] << 8)
-                        | ((int)_buffer[i + 2] << 16)
-                        | ((int)_buffer[i + 3] << 24);
+                _hash ^=
+                    (int)_buffer[i]
+                    | ((int)_buffer[i + 1] << 8)
+                    | ((int)_buffer[i + 2] << 16)
+                    | ((int)_buffer[i + 3] << 24);
             }
             if ((Size & 3) != 0)
             {
@@ -210,7 +207,12 @@ internal class SocketAddress
             }
             bytes.Append(this[i].ToString(NumberFormatInfo.InvariantInfo));
         }
-        return Family.ToString() + ":" + Size.ToString(NumberFormatInfo.InvariantInfo) + ":{" + bytes.ToString() + "}";
+        return Family.ToString()
+            + ":"
+            + Size.ToString(NumberFormatInfo.InvariantInfo)
+            + ":{"
+            + bytes.ToString()
+            + "}";
     }
 
     internal string? GetIPAddressString()
@@ -233,8 +235,14 @@ internal class SocketAddress
     {
         Contract.Assert(Size >= IPv4AddressSize);
 
-        return string.Format(CultureInfo.InvariantCulture, IPv4StringFormat,
-            _buffer[4], _buffer[5], _buffer[6], _buffer[7]);
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            IPv4StringFormat,
+            _buffer[4],
+            _buffer[5],
+            _buffer[6],
+            _buffer[7]
+        );
     }
 
     // TODO: Does scope ID ever matter?
@@ -271,8 +279,16 @@ internal class SocketAddress
             {
                 // Write the remaining digits as an IPv4 address
                 builder.Append(IPv6StringSeparator);
-                builder.Append(string.Format(CultureInfo.InvariantCulture, IPv4StringFormat,
-                    numbers[i] >> 8, numbers[i] & 0xFF, numbers[i + 1] >> 8, numbers[i + 1] & 0xFF));
+                builder.Append(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        IPv4StringFormat,
+                        numbers[i] >> 8,
+                        numbers[i] & 0xFF,
+                        numbers[i + 1] >> 8,
+                        numbers[i + 1] & 0xFF
+                    )
+                );
                 break;
             }
 
@@ -297,7 +313,9 @@ internal class SocketAddress
             {
                 builder.Append(IPv6StringSeparator);
             }
-            builder.Append(string.Format(CultureInfo.InvariantCulture, IPv6NumberFormat, numbers[i]));
+            builder.Append(
+                string.Format(CultureInfo.InvariantCulture, IPv6NumberFormat, numbers[i])
+            );
         }
 
         return builder.ToString();
@@ -333,8 +351,10 @@ internal class SocketAddress
 
         if (longestSequenceLength >= 2)
         {
-            return new KeyValuePair<int, int>(longestSequenceStart,
-                longestSequenceStart + longestSequenceLength - 1);
+            return new KeyValuePair<int, int>(
+                longestSequenceStart,
+                longestSequenceStart + longestSequenceLength - 1
+            );
         }
 
         return new KeyValuePair<int, int>(-1, -1); // No compression
@@ -345,13 +365,18 @@ internal class SocketAddress
     private static unsafe bool ShouldHaveIpv4Embedded(ushort* numbers)
     {
         // 0:0 : 0:0 : x:x : x.x.x.x
-        if (numbers[0] == 0 && numbers[1] == 0 && numbers[2] == 0 && numbers[3] == 0 && numbers[6] != 0)
+        if (
+            numbers[0] == 0
+            && numbers[1] == 0
+            && numbers[2] == 0
+            && numbers[3] == 0
+            && numbers[6] != 0
+        )
         {
             // RFC 5952 Section 5 - 0:0 : 0:0 : 0:[0 | FFFF] : x.x.x.x
             if (numbers[4] == 0 && (numbers[5] == 0 || numbers[5] == 0xFFFF))
             {
                 return true;
-
                 // SIIT - 0:0 : 0:0 : FFFF:0 : x.x.x.x
             }
             else if (numbers[4] == 0xFFFF && numbers[5] == 0)

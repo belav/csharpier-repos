@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ILoggingOptions loggingOptions,
             EventId eventId,
             LogLevel level,
-            string eventIdCode)
+            string eventIdCode
+        )
         {
             EventId = eventId;
             EventIdCode = eventIdCode;
@@ -45,11 +46,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 }
 
                 var behavior = warningsConfiguration.GetBehavior(eventId);
-                WarningBehavior = behavior
-                    ?? (level == LogLevel.Warning
+                WarningBehavior =
+                    behavior
+                    ?? (
+                        level == LogLevel.Warning
                         && warningsConfiguration.DefaultBehavior == WarningBehavior.Throw
                             ? WarningBehavior.Throw
-                            : WarningBehavior.Log);
+                            : WarningBehavior.Log
+                    );
             }
             else
             {
@@ -62,12 +66,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The <see cref="EventId" />.
         /// </summary>
-        public virtual EventId EventId { [DebuggerStepThrough] get; }
+        public virtual EventId EventId
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     The <see cref="LogLevel" /> at which the event will be logged.
         /// </summary>
-        public virtual LogLevel Level { [DebuggerStepThrough] get; }
+        public virtual LogLevel Level
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" /> to suppress this event
@@ -79,9 +91,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     Returns a warning-as-error exception wrapping the given message for this event.
         /// </summary>
         /// <param name="message">The message to wrap.</param>
-        protected virtual Exception WarningAsError(string message)
-            => new InvalidOperationException(
-                CoreStrings.WarningAsErrorTemplate(EventId.ToString(), message, EventIdCode));
+        protected virtual Exception WarningAsError(string message) =>
+            new InvalidOperationException(
+                CoreStrings.WarningAsErrorTemplate(EventId.ToString(), message, EventIdCode)
+            );
 
         /// <summary>
         ///     The configured <see cref="WarningBehavior" />.
@@ -103,16 +116,16 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 EventId eventId,
                 TState state,
                 Exception? exception,
-                Func<TState, Exception?, string> formatter)
+                Func<TState, Exception?, string> formatter
+            )
             {
                 Message = formatter(state, exception);
             }
 
-            bool ILogger.IsEnabled(LogLevel logLevel)
-                => true;
+            bool ILogger.IsEnabled(LogLevel logLevel) => true;
 
-            IDisposable ILogger.BeginScope<TState>(TState state)
-                => throw new NotSupportedException();
+            IDisposable ILogger.BeginScope<TState>(TState state) =>
+                throw new NotSupportedException();
         }
     }
 }

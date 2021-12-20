@@ -13,7 +13,9 @@ public class EditContextDataAnnotationsExtensionsTest
     public void CannotUseNullEditContext()
     {
         var editContext = (EditContext)null;
-        var ex = Assert.Throws<ArgumentNullException>(() => editContext.EnableDataAnnotationsValidation());
+        var ex = Assert.Throws<ArgumentNullException>(
+            () => editContext.EnableDataAnnotationsValidation()
+        );
         Assert.Equal("editContext", ex.ParamName);
     }
 
@@ -41,20 +43,22 @@ public class EditContextDataAnnotationsExtensionsTest
         // Assert
         Assert.False(isValid);
 
-        Assert.Equal(new string[]
-            {
-                    "RequiredString:required",
-                    "IntFrom1To100:range"
-            },
-            editContext.GetValidationMessages());
+        Assert.Equal(
+            new string[] { "RequiredString:required", "IntFrom1To100:range" },
+            editContext.GetValidationMessages()
+        );
 
-        Assert.Equal(new string[] { "RequiredString:required" },
-            editContext.GetValidationMessages(editContext.Field(nameof(TestModel.RequiredString))));
+        Assert.Equal(
+            new string[] { "RequiredString:required" },
+            editContext.GetValidationMessages(editContext.Field(nameof(TestModel.RequiredString)))
+        );
 
         // This shows we're including non-[Required] properties in the validation results, i.e,
         // that we're correctly passing "validateAllProperties: true" to DataAnnotations
-        Assert.Equal(new string[] { "IntFrom1To100:range" },
-            editContext.GetValidationMessages(editContext.Field(nameof(TestModel.IntFrom1To100))));
+        Assert.Equal(
+            new string[] { "IntFrom1To100:range" },
+            editContext.GetValidationMessages(editContext.Field(nameof(TestModel.IntFrom1To100)))
+        );
     }
 
     [Fact]
@@ -82,7 +86,8 @@ public class EditContextDataAnnotationsExtensionsTest
         var editContext = new EditContext(model);
         editContext.EnableDataAnnotationsValidation();
         var onValidationStateChangedCount = 0;
-        editContext.OnValidationStateChanged += (sender, eventArgs) => onValidationStateChangedCount++;
+        editContext.OnValidationStateChanged += (sender, eventArgs) =>
+            onValidationStateChangedCount++;
 
         // Act/Assert 1: Notifies after invalid results
         Assert.False(editContext.Validate());
@@ -112,7 +117,8 @@ public class EditContextDataAnnotationsExtensionsTest
         var onValidationStateChangedCount = 0;
         var requiredStringIdentifier = new FieldIdentifier(model, nameof(TestModel.RequiredString));
         var intFrom1To100Identifier = new FieldIdentifier(model, nameof(TestModel.IntFrom1To100));
-        editContext.OnValidationStateChanged += (sender, eventArgs) => onValidationStateChangedCount++;
+        editContext.OnValidationStateChanged += (sender, eventArgs) =>
+            onValidationStateChangedCount++;
 
         // Act/Assert 1: Notify about RequiredString
         // Only RequiredString gets validated, even though IntFrom1To100 also holds an invalid value
@@ -125,12 +131,10 @@ public class EditContextDataAnnotationsExtensionsTest
         model.RequiredString = "This string is very cool and very legal";
         editContext.NotifyFieldChanged(intFrom1To100Identifier);
         Assert.Equal(2, onValidationStateChangedCount);
-        Assert.Equal(new string[]
-            {
-                    "RequiredString:required",
-                    "IntFrom1To100:range"
-            },
-            editContext.GetValidationMessages());
+        Assert.Equal(
+            new string[] { "RequiredString:required", "IntFrom1To100:range" },
+            editContext.GetValidationMessages()
+        );
 
         // Act/Assert 3: Notify about RequiredString
         editContext.NotifyFieldChanged(requiredStringIdentifier);
@@ -150,7 +154,8 @@ public class EditContextDataAnnotationsExtensionsTest
         var editContext = new EditContext(new TestModel());
         editContext.EnableDataAnnotationsValidation();
         var onValidationStateChangedCount = 0;
-        editContext.OnValidationStateChanged += (sender, eventArgs) => onValidationStateChangedCount++;
+        editContext.OnValidationStateChanged += (sender, eventArgs) =>
+            onValidationStateChangedCount++;
 
         // Act/Assert: Ignores field changes that don't correspond to a validatable property
         editContext.NotifyFieldChanged(editContext.Field(fieldName));
@@ -181,14 +186,19 @@ public class EditContextDataAnnotationsExtensionsTest
 
     class TestModel
     {
-        [Required(ErrorMessage = "RequiredString:required")] public string RequiredString { get; set; }
+        [Required(ErrorMessage = "RequiredString:required")]
+        public string RequiredString { get; set; }
 
-        [Range(1, 100, ErrorMessage = "IntFrom1To100:range")] public int IntFrom1To100 { get; set; }
+        [Range(1, 100, ErrorMessage = "IntFrom1To100:range")]
+        public int IntFrom1To100 { get; set; }
 
 #pragma warning disable 649
-        [Required] public string ThisWillNotBeValidatedBecauseItIsAField;
-        [Required] string ThisWillNotBeValidatedBecauseItIsPrivate { get; set; }
-        [Required] internal string ThisWillNotBeValidatedBecauseItIsInternal { get; set; }
+        [Required]
+        public string ThisWillNotBeValidatedBecauseItIsAField;
+        [Required]
+        string ThisWillNotBeValidatedBecauseItIsPrivate { get; set; }
+        [Required]
+        internal string ThisWillNotBeValidatedBecauseItIsInternal { get; set; }
 #pragma warning restore 649
     }
 }

@@ -28,7 +28,10 @@ namespace System.Tests
 
             Assert.Equal(shift, (cki.Modifiers & ConsoleModifiers.Shift) == ConsoleModifiers.Shift);
             Assert.Equal(alt, (cki.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt);
-            Assert.Equal(ctrl, (cki.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control);
+            Assert.Equal(
+                ctrl,
+                (cki.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control
+            );
         }
 
         [Theory]
@@ -70,17 +73,42 @@ namespace System.Tests
         }
 
         [Fact]
-        public void ImplementsIEquatableInterface() => Assert.True(typeof(IEquatable<ConsoleKeyInfo>).IsAssignableFrom(typeof(ConsoleKeyInfo)));
+        public void ImplementsIEquatableInterface() =>
+            Assert.True(
+                typeof(IEquatable<ConsoleKeyInfo>).IsAssignableFrom(typeof(ConsoleKeyInfo))
+            );
 
-        public static readonly object[][] NotEqualConsoleKeyInfos = {
-            new object[] { new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true), new ConsoleKeyInfo('b', ConsoleKey.A, true, true, true)  },
-            new object[] { new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true), new ConsoleKeyInfo('a', ConsoleKey.B, true, true, true)  },
-            new object[] { new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true), new ConsoleKeyInfo('a', ConsoleKey.A, false, true, true) },
-            new object[] { new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true), new ConsoleKeyInfo('a', ConsoleKey.A, true, false, true) },
-            new object[] { new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true), new ConsoleKeyInfo('a', ConsoleKey.A, true, true, false) }
+        public static readonly object[][] NotEqualConsoleKeyInfos =
+        {
+            new object[]
+            {
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
+                new ConsoleKeyInfo('b', ConsoleKey.A, true, true, true)
+            },
+            new object[]
+            {
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
+                new ConsoleKeyInfo('a', ConsoleKey.B, true, true, true)
+            },
+            new object[]
+            {
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
+                new ConsoleKeyInfo('a', ConsoleKey.A, false, true, true)
+            },
+            new object[]
+            {
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, false, true)
+            },
+            new object[]
+            {
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, false)
+            }
         };
 
-        public static readonly object[][] SampleConsoleKeyInfos = {
+        public static readonly object[][] SampleConsoleKeyInfos =
+        {
             new object[] { new ConsoleKeyInfo() },
             new object[] { new ConsoleKeyInfo('a', ConsoleKey.A, true, false, true) },
             new object[] { new ConsoleKeyInfo('b', ConsoleKey.B, false, true, true) },

@@ -21,7 +21,10 @@ namespace Microsoft.Data.Sqlite
         private volatile bool _active;
         private volatile bool _canBePooled = true;
 
-        public SqliteConnectionInternal(SqliteConnectionStringBuilder connectionOptions, SqliteConnectionPool? pool = null)
+        public SqliteConnectionInternal(
+            SqliteConnectionStringBuilder connectionOptions,
+            SqliteConnectionPool? pool = null
+        )
         {
             var filename = connectionOptions.DataSource;
             var flags = 0;
@@ -48,13 +51,13 @@ namespace Microsoft.Data.Sqlite
                         flags |= SQLITE_OPEN_URI;
                         filename = "file:" + filename;
                     }
-
                     break;
 
                 default:
                     Debug.Assert(
                         connectionOptions.Mode == SqliteOpenMode.ReadWriteCreate,
-                        "connectionOptions.Mode is not ReadWriteCreate");
+                        "connectionOptions.Mode is not ReadWriteCreate"
+                    );
                     flags |= SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE;
                     break;
             }
@@ -72,18 +75,29 @@ namespace Microsoft.Data.Sqlite
                 default:
                     Debug.Assert(
                         connectionOptions.Cache == SqliteCacheMode.Default,
-                        "connectionOptions.Cache is not Default.");
+                        "connectionOptions.Cache is not Default."
+                    );
                     break;
             }
 
             var dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory") as string;
-            if (!string.IsNullOrEmpty(dataDirectory)
+            if (
+                !string.IsNullOrEmpty(dataDirectory)
                 && (flags & SQLITE_OPEN_URI) == 0
-                && !filename.Equals(":memory:", StringComparison.OrdinalIgnoreCase))
+                && !filename.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                if (filename.StartsWith(DataDirectoryMacro, StringComparison.InvariantCultureIgnoreCase))
+                if (
+                    filename.StartsWith(
+                        DataDirectoryMacro,
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+                )
                 {
-                    filename = Path.Combine(dataDirectory, filename.Substring(DataDirectoryMacro.Length));
+                    filename = Path.Combine(
+                        dataDirectory,
+                        filename.Substring(DataDirectoryMacro.Length)
+                    );
                 }
                 else if (!Path.IsPathRooted(filename))
                 {
@@ -97,17 +111,13 @@ namespace Microsoft.Data.Sqlite
             _pool = pool;
         }
 
-        public bool Leaked
-            => _active && !_outerConnection.TryGetTarget(out _);
+        public bool Leaked => _active && !_outerConnection.TryGetTarget(out _);
 
-        public bool CanBePooled
-            => _canBePooled && !_outerConnection.TryGetTarget(out _);
+        public bool CanBePooled => _canBePooled && !_outerConnection.TryGetTarget(out _);
 
-        public sqlite3? Handle
-            => _db;
+        public sqlite3? Handle => _db;
 
-        public void DoNotPool()
-            => _canBePooled = false;
+        public void DoNotPool() => _canBePooled = false;
 
         public void Activate(SqliteConnection outerConnection)
         {

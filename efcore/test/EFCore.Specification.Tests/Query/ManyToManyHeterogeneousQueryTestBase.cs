@@ -12,7 +12,11 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class ManyToManyHeterogeneousQueryTestBase : NonSharedModelTestBase
     {
-        public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+        public static IEnumerable<object[]> IsAsyncData = new[]
+        {
+            new object[] { false },
+            new object[] { true }
+        };
 
         protected override string StoreName => "ManyToManyHeterogeneousQueryTests";
 
@@ -20,7 +24,9 @@ namespace Microsoft.EntityFrameworkCore
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Many_to_many_load_works_when_join_entity_has_custom_key(bool async)
+        public virtual async Task Many_to_many_load_works_when_join_entity_has_custom_key(
+            bool async
+        )
         {
             var contextFactory = await InitializeAsync<Context20277>();
 
@@ -84,20 +90,25 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class Context20277 : DbContext
         {
-            public Context20277(DbContextOptions options)
-                   : base(options)
-            {
-            }
+            public Context20277(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<ManyM_DB>()
+                modelBuilder
+                    .Entity<ManyM_DB>()
                     .HasMany(e => e.ManyN_DB)
                     .WithMany(e => e.ManyM_DB)
                     .UsingEntity<ManyMN_DB>(
-                        r => r.HasOne(e => e.ManyN_DB).WithMany(e => e.ManyNM_DB).HasForeignKey(e => e.ManyN_Id),
-                        l => l.HasOne(e => e.ManyM_DB).WithMany(e => e.ManyNM_DB).HasForeignKey(e => e.ManyM_Id),
-                        b => b.HasKey(e => e.Id));
+                        r =>
+                            r.HasOne(e => e.ManyN_DB)
+                                .WithMany(e => e.ManyNM_DB)
+                                .HasForeignKey(e => e.ManyN_Id),
+                        l =>
+                            l.HasOne(e => e.ManyM_DB)
+                                .WithMany(e => e.ManyNM_DB)
+                                .HasForeignKey(e => e.ManyM_Id),
+                        b => b.HasKey(e => e.Id)
+                    );
             }
         }
 

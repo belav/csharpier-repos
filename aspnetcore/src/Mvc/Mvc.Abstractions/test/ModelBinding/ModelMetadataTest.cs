@@ -69,12 +69,12 @@ public class ModelMetadataTest
         get
         {
             return new TheoryData<Type>
-                {
-                    typeof(object),
-                    typeof(int),
-                    typeof(NonCollectionType),
-                    typeof(string),
-                };
+            {
+                typeof(object),
+                typeof(int),
+                typeof(NonCollectionType),
+                typeof(string),
+            };
         }
     }
 
@@ -83,14 +83,14 @@ public class ModelMetadataTest
         get
         {
             return new TheoryData<Type>
-                {
-                    typeof(int[]),
-                    typeof(List<string>),
-                    typeof(DerivedList),
-                    typeof(Collection<int>),
-                    typeof(Dictionary<object, object>),
-                    typeof(CollectionImplementation),
-                };
+            {
+                typeof(int[]),
+                typeof(List<string>),
+                typeof(DerivedList),
+                typeof(Collection<int>),
+                typeof(Dictionary<object, object>),
+                typeof(CollectionImplementation),
+            };
         }
     }
 
@@ -258,7 +258,9 @@ public class ModelMetadataTest
     public void ContainerType_IsNull_ForParameter()
     {
         // Arrange & Act
-        var method = typeof(CollectionImplementation).GetMethod(nameof(CollectionImplementation.Add));
+        var method = typeof(CollectionImplementation).GetMethod(
+            nameof(CollectionImplementation.Add)
+        );
         var parameter = method.GetParameters()[0]; // Add(string item)
         var metadata = new TestModelMetadata(parameter);
 
@@ -295,7 +297,9 @@ public class ModelMetadataTest
     public void Names_ReturnExpectedMetadata_ForParameter()
     {
         // Arrange & Act
-        var method = typeof(CollectionImplementation).GetMethod(nameof(CollectionImplementation.Add));
+        var method = typeof(CollectionImplementation).GetMethod(
+            nameof(CollectionImplementation.Add)
+        );
         var parameter = method.GetParameters()[0]; // Add(string item)
         var metadata = new TestModelMetadata(parameter);
 
@@ -339,7 +343,9 @@ public class ModelMetadataTest
     public void GetDisplayName_ReturnsParameterName_WhenSetAndDisplayNameIsNull()
     {
         // Arrange
-        var method = typeof(CollectionImplementation).GetMethod(nameof(CollectionImplementation.Add));
+        var method = typeof(CollectionImplementation).GetMethod(
+            nameof(CollectionImplementation.Add)
+        );
         var parameter = method.GetParameters()[0]; // Add(string item)
         var metadata = new TestModelMetadata(parameter);
 
@@ -396,7 +402,9 @@ public class ModelMetadataTest
         var metadata = new TestModelMetadata(typeof(string));
 
         // Act & Assert
-        var result = Assert.Throws<NotImplementedException>(() => metadata.GetMetadataForType(typeof(string)));
+        var result = Assert.Throws<NotImplementedException>(
+            () => metadata.GetMetadataForType(typeof(string))
+        );
     }
 
     [Fact]
@@ -406,98 +414,67 @@ public class ModelMetadataTest
         var metadata = new TestModelMetadata(typeof(string));
 
         // Act & Assert
-        var result = Assert.Throws<NotImplementedException>(() => metadata.GetMetadataForProperties(typeof(string)));
+        var result = Assert.Throws<NotImplementedException>(
+            () => metadata.GetMetadataForProperties(typeof(string))
+        );
     }
 
     private class TestModelMetadata : ModelMetadata
     {
         private string _displayName;
 
-        public TestModelMetadata(Type modelType)
-            : base(ModelMetadataIdentity.ForType(modelType))
-        {
-        }
+        public TestModelMetadata(Type modelType) : base(ModelMetadataIdentity.ForType(modelType))
+        { }
 
         public TestModelMetadata(ParameterInfo parameter)
-            : base(ModelMetadataIdentity.ForParameter(parameter))
-        {
-        }
+            : base(ModelMetadataIdentity.ForParameter(parameter)) { }
 
         public TestModelMetadata(PropertyInfo propertyInfo, Type modelType, Type containerType)
-            : base(ModelMetadataIdentity.ForProperty(propertyInfo, modelType, containerType))
-        {
-        }
+            : base(ModelMetadataIdentity.ForProperty(propertyInfo, modelType, containerType)) { }
 
         public override IReadOnlyDictionary<object, object> AdditionalValues
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string BinderModelName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Type BinderType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override BindingSource BindingSource
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool ConvertEmptyStringToNull
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string DataTypeName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string Description
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string DisplayFormatString
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string DisplayName
         {
-            get
-            {
-                return _displayName;
-            }
+            get { return _displayName; }
         }
 
         public void SetDisplayName(string displayName)
@@ -507,251 +484,165 @@ public class ModelMetadataTest
 
         public override string EditFormatString
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override ModelMetadata ElementMetadata
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public override IEnumerable<KeyValuePair<EnumGroupAndName, string>> EnumGroupedDisplayNamesAndValues
+        public override IEnumerable<
+            KeyValuePair<EnumGroupAndName, string>
+        > EnumGroupedDisplayNamesAndValues
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override IReadOnlyDictionary<string, string> EnumNamesAndValues
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool HasNonDefaultEditFormat
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool HideSurroundingHtml
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool HtmlEncode
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsBindingAllowed
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsBindingRequired
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsEnum
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsFlagsEnum
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsRequired
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override ModelBindingMessageProvider ModelBindingMessageProvider
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string NullDisplayText
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int Order
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string Placeholder
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override ModelPropertyCollection Properties
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override IPropertyFilterProvider PropertyFilterProvider
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool ShowForDisplay
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool ShowForEdit
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string SimpleDisplayProperty
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string TemplateHint
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override IPropertyValidationFilter PropertyValidationFilter
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool ValidateChildren
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override IReadOnlyList<object> ValidatorMetadata
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Func<object, object> PropertyGetter
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Action<object, object> PropertySetter
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override ModelMetadata BoundConstructor => throw new NotImplementedException();
 
-        public override Func<object[], object> BoundConstructorInvoker => throw new NotImplementedException();
+        public override Func<object[], object> BoundConstructorInvoker =>
+            throw new NotImplementedException();
 
-        public override IReadOnlyList<ModelMetadata> BoundConstructorParameters => throw new NotImplementedException();
+        public override IReadOnlyList<ModelMetadata> BoundConstructorParameters =>
+            throw new NotImplementedException();
     }
 
     private class CollectionImplementation : ICollection<string>
     {
         public int Count
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public void Add(string item)

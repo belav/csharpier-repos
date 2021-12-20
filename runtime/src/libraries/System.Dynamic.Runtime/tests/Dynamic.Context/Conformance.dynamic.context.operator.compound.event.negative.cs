@@ -23,7 +23,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return i;
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -39,7 +38,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "*=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "*=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 1;
             }
 
@@ -49,7 +56,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "/=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "/=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 2;
             }
 
@@ -59,7 +74,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "%=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "%=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 4;
             }
 
@@ -69,7 +92,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "&=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "&=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 8;
             }
 
@@ -79,7 +110,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "|=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "|=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 16;
             }
 
@@ -89,7 +128,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "^=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "^=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 32;
             }
 
@@ -99,7 +146,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "<<=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "<<=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 64;
             }
 
@@ -109,7 +164,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, ">>=", "Dele", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        ">>=",
+                        "Dele",
+                        "Dele"
+                    )
+                )
                     result += 128;
             }
 
@@ -129,8 +192,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.negative.neg002.neg002
 {
@@ -185,8 +246,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.negative.neg003.neg003
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -224,7 +283,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "System.Func<int,int>", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "System.Func<int,int>",
+                        "Dele"
+                    )
+                )
                     result += 1;
             }
 
@@ -234,7 +300,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "System.Func<int,int>", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "System.Func<int,int>",
+                        "Dele"
+                    )
+                )
                     result += 2;
             }
 
@@ -254,8 +327,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.negative.neg004.neg004
 {
@@ -341,8 +412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.negative.neg005.neg005
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -376,7 +445,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "System.Func<int,int>", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "System.Func<int,int>",
+                        "Dele"
+                    )
+                )
                     result += 1;
             }
 
@@ -386,7 +462,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "System.Func<int,int,int>", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "System.Func<int,int,int>",
+                        "Dele"
+                    )
+                )
                     result += 2;
             }
 
@@ -398,7 +481,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "System.Func<int,int>", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "System.Func<int,int>",
+                        "Dele"
+                    )
+                )
                     result += 4;
             }
 
@@ -409,7 +499,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "System.Func<int,int,int>", "Dele"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "System.Func<int,int,int>",
+                        "Dele"
+                    )
+                )
                     result += 8;
             }
 

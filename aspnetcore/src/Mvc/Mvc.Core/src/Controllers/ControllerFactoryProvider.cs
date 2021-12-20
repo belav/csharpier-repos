@@ -20,7 +20,8 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
     public ControllerFactoryProvider(
         IControllerActivatorProvider activatorProvider,
         IControllerFactory controllerFactory,
-        IEnumerable<IControllerPropertyActivator> propertyActivators)
+        IEnumerable<IControllerPropertyActivator> propertyActivators
+    )
     {
         if (activatorProvider == null)
         {
@@ -45,7 +46,9 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         _propertyActivators = propertyActivators.ToArray();
     }
 
-    public Func<ControllerContext, object> CreateControllerFactory(ControllerActionDescriptor descriptor)
+    public Func<ControllerContext, object> CreateControllerFactory(
+        ControllerActionDescriptor descriptor
+    )
     {
         if (descriptor == null)
         {
@@ -55,10 +58,13 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         var controllerType = descriptor.ControllerTypeInfo?.AsType();
         if (controllerType == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(descriptor.ControllerTypeInfo),
-                nameof(descriptor)),
-                nameof(descriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(descriptor.ControllerTypeInfo),
+                    nameof(descriptor)
+                ),
+                nameof(descriptor)
+            );
         }
 
         if (_factoryCreateController != null)
@@ -83,7 +89,9 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         return CreateController;
     }
 
-    public Action<ControllerContext, object>? CreateControllerReleaser(ControllerActionDescriptor descriptor)
+    public Action<ControllerContext, object>? CreateControllerReleaser(
+        ControllerActionDescriptor descriptor
+    )
     {
         if (descriptor == null)
         {
@@ -93,10 +101,13 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         var controllerType = descriptor.ControllerTypeInfo?.AsType();
         if (controllerType == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(descriptor.ControllerTypeInfo),
-                nameof(descriptor)),
-                nameof(descriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(descriptor.ControllerTypeInfo),
+                    nameof(descriptor)
+                ),
+                nameof(descriptor)
+            );
         }
 
         if (_factoryReleaseController != null)
@@ -107,7 +118,9 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         return _activatorProvider.CreateReleaser(descriptor);
     }
 
-    public Func<ControllerContext, object, ValueTask>? CreateAsyncControllerReleaser(ControllerActionDescriptor descriptor)
+    public Func<ControllerContext, object, ValueTask>? CreateAsyncControllerReleaser(
+        ControllerActionDescriptor descriptor
+    )
     {
         if (descriptor == null)
         {
@@ -117,10 +130,13 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         var controllerType = descriptor.ControllerTypeInfo?.AsType();
         if (controllerType == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(descriptor.ControllerTypeInfo),
-                nameof(descriptor)),
-                nameof(descriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(descriptor.ControllerTypeInfo),
+                    nameof(descriptor)
+                ),
+                nameof(descriptor)
+            );
         }
 
         if (_factoryReleaseControllerAsync != null)
@@ -131,7 +147,9 @@ internal class ControllerFactoryProvider : IControllerFactoryProvider
         return _activatorProvider.CreateAsyncReleaser(descriptor);
     }
 
-    private Action<ControllerContext, object>[] GetPropertiesToActivate(ControllerActionDescriptor actionDescriptor)
+    private Action<ControllerContext, object>[] GetPropertiesToActivate(
+        ControllerActionDescriptor actionDescriptor
+    )
     {
         var propertyActivators = new Action<ControllerContext, object>[_propertyActivators.Length];
         for (var i = 0; i < _propertyActivators.Length; i++)

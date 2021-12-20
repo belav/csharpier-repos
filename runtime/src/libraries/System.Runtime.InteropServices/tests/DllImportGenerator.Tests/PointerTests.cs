@@ -17,7 +17,10 @@ namespace DllImportGenerator.IntegrationTests
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "subtract_ref_byte")]
         public static unsafe partial void Subtract_Byte_Ptr(byte a, byte* b);
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_double_intfields_byref")]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_double_intfields_byref"
+        )]
         public static unsafe partial void DoubleIntFields_Ptr(IntFields* result);
     }
 
@@ -45,13 +48,10 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public unsafe void BlittableStruct()
         {
-            const int A = 24, B = 37, C = 59;
-            var initial = new IntFields()
-            {
-                a = A,
-                b = B,
-                c = C,
-            };
+            const int A = 24,
+                B = 37,
+                C = 59;
+            var initial = new IntFields() { a = A, b = B, c = C, };
             var expected = new IntFields()
             {
                 a = initial.a * 2,

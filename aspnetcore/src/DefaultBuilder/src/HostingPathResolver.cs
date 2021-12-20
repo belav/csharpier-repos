@@ -8,7 +8,9 @@ internal static class HostingPathResolver
     public static string ResolvePath(string? contentRootPath)
     {
         var canonicalPath = ResolvePath(contentRootPath, AppContext.BaseDirectory);
-        return Path.EndsInDirectorySeparator(canonicalPath) ? canonicalPath : canonicalPath + Path.DirectorySeparatorChar;
+        return Path.EndsInDirectorySeparator(canonicalPath)
+          ? canonicalPath
+          : canonicalPath + Path.DirectorySeparatorChar;
     }
 
     public static string ResolvePath(string? contentRootPath, string basePath)

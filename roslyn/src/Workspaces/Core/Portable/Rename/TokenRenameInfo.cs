@@ -35,11 +35,12 @@ namespace Microsoft.CodeAnalysis.Rename
             };
         }
 
-        public static TokenRenameInfo NoSymbolsTokenInfo = new()
-        {
-            HasSymbols = false,
-            IsMemberGroup = false,
-            Symbols = SpecializedCollections.EmptyEnumerable<ISymbol>()
-        };
+        public static TokenRenameInfo NoSymbolsTokenInfo =
+            new()
+            {
+                HasSymbols = false,
+                IsMemberGroup = false,
+                Symbols = SpecializedCollections.EmptyEnumerable<ISymbol>()
+            };
     }
 }

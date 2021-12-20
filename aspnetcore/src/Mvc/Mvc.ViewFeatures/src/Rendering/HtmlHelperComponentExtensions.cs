@@ -21,8 +21,11 @@ public static class HtmlHelperComponentExtensions
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/>.</param>
     /// <param name="renderMode">The <see cref="RenderMode"/> for the component.</param>
     /// <returns>The HTML produced by the rendered <typeparamref name="TComponent"/>.</returns>
-    public static Task<IHtmlContent> RenderComponentAsync<TComponent>(this IHtmlHelper htmlHelper, RenderMode renderMode) where TComponent : IComponent
-        => RenderComponentAsync<TComponent>(htmlHelper, renderMode, parameters: null);
+    public static Task<IHtmlContent> RenderComponentAsync<TComponent>(
+        this IHtmlHelper htmlHelper,
+        RenderMode renderMode
+    ) where TComponent : IComponent =>
+        RenderComponentAsync<TComponent>(htmlHelper, renderMode, parameters: null);
 
     /// <summary>
     /// Renders the <typeparamref name="TComponent"/>.
@@ -35,8 +38,9 @@ public static class HtmlHelperComponentExtensions
     public static Task<IHtmlContent> RenderComponentAsync<TComponent>(
         this IHtmlHelper htmlHelper,
         RenderMode renderMode,
-        object parameters) where TComponent : IComponent
-        => RenderComponentAsync(htmlHelper, typeof(TComponent), renderMode, parameters);
+        object parameters
+    ) where TComponent : IComponent =>
+        RenderComponentAsync(htmlHelper, typeof(TComponent), renderMode, parameters);
 
     /// <summary>
     /// Renders the specified <paramref name="componentType"/>.
@@ -50,7 +54,8 @@ public static class HtmlHelperComponentExtensions
         this IHtmlHelper htmlHelper,
         Type componentType,
         RenderMode renderMode,
-        object parameters)
+        object parameters
+    )
     {
         if (htmlHelper is null)
         {
@@ -63,7 +68,13 @@ public static class HtmlHelperComponentExtensions
         }
 
         var viewContext = htmlHelper.ViewContext;
-        var componentRenderer = viewContext.HttpContext.RequestServices.GetRequiredService<IComponentRenderer>();
-        return componentRenderer.RenderComponentAsync(viewContext, componentType, renderMode, parameters);
+        var componentRenderer =
+            viewContext.HttpContext.RequestServices.GetRequiredService<IComponentRenderer>();
+        return componentRenderer.RenderComponentAsync(
+            viewContext,
+            componentType,
+            renderMode,
+            parameters
+        );
     }
 }

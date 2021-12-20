@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
     /// </summary>
     internal class TaggerEventArgs : EventArgs
     {
-        public TaggerEventArgs()
-        {
-        }
+        public TaggerEventArgs() { }
     }
 }

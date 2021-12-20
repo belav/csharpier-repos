@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
         protected override string GetPathToLoad(string fullPath)
         {
-            var fixedPath = Path.GetFullPath(Path.Combine(_baseDirectory, Path.GetFileName(fullPath)));
+            var fixedPath = Path.GetFullPath(
+                Path.Combine(_baseDirectory, Path.GetFileName(fullPath))
+            );
             return File.Exists(fixedPath) ? fixedPath : fullPath;
         }
 
@@ -34,17 +36,20 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         // we must ensure they are only loaded once and in the same ALC compiler asemblies are loaded into.
         // Otherwise these analyzers will fail to interoperate with the host due to mismatch in assembly identity.
         private static readonly ImmutableHashSet<string> s_ideAssemblySimpleNames =
-            CompilerAssemblySimpleNames.Union(new[]
-            {
+            CompilerAssemblySimpleNames.Union(
+                new[]
+                {
                     "Microsoft.CodeAnalysis.Features",
                     "Microsoft.CodeAnalysis.CSharp.Features",
                     "Microsoft.CodeAnalysis.VisualBasic.Features",
                     "Microsoft.CodeAnalysis.Workspaces",
                     "Microsoft.CodeAnalysis.CSharp.Workspaces",
                     "Microsoft.CodeAnalysis.VisualBasic.Workspaces",
-            });
+                }
+            );
 
-        internal override ImmutableHashSet<string> AssemblySimpleNamesToBeLoadedInCompilerContext => s_ideAssemblySimpleNames;
+        internal override ImmutableHashSet<string> AssemblySimpleNamesToBeLoadedInCompilerContext =>
+            s_ideAssemblySimpleNames;
 #endif
     }
 }

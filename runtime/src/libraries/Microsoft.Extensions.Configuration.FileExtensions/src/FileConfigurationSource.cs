@@ -66,15 +66,20 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         public void ResolveFileProvider()
         {
-            if (FileProvider == null &&
-                !string.IsNullOrEmpty(Path) &&
-                System.IO.Path.IsPathRooted(Path))
+            if (
+                FileProvider == null
+                && !string.IsNullOrEmpty(Path)
+                && System.IO.Path.IsPathRooted(Path)
+            )
             {
                 string directory = System.IO.Path.GetDirectoryName(Path);
                 string pathToFile = System.IO.Path.GetFileName(Path);
                 while (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 {
-                    pathToFile = System.IO.Path.Combine(System.IO.Path.GetFileName(directory), pathToFile);
+                    pathToFile = System.IO.Path.Combine(
+                        System.IO.Path.GetFileName(directory),
+                        pathToFile
+                    );
                     directory = System.IO.Path.GetDirectoryName(directory);
                 }
                 if (Directory.Exists(directory))
@@ -84,6 +89,5 @@ namespace Microsoft.Extensions.Configuration
                 }
             }
         }
-
     }
 }

@@ -54,10 +54,18 @@ namespace System.Linq.Parallel
         // shouldn't need to worry about.
         //
 
-        private SortHelper(QueryOperatorEnumerator<TInputOutput, TKey> source, int partitionCount, int partitionIndex,
-            QueryTaskGroupState groupState, int[][] sharedIndices,
-            OrdinalIndexState indexState, IComparer<TKey> keyComparer,
-            GrowingArray<TKey>[] sharedkeys, TInputOutput[][] sharedValues, Barrier[][] sharedBarriers)
+        private SortHelper(
+            QueryOperatorEnumerator<TInputOutput, TKey> source,
+            int partitionCount,
+            int partitionIndex,
+            QueryTaskGroupState groupState,
+            int[][] sharedIndices,
+            OrdinalIndexState indexState,
+            IComparer<TKey> keyComparer,
+            GrowingArray<TKey>[] sharedkeys,
+            TInputOutput[][] sharedValues,
+            Barrier[][] sharedBarriers
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(groupState != null);
@@ -99,14 +107,19 @@ namespace System.Linq.Parallel
         //
 
         internal static SortHelper<TInputOutput, TKey>[] GenerateSortHelpers(
-            PartitionedStream<TInputOutput, TKey> partitions, QueryTaskGroupState groupState)
+            PartitionedStream<TInputOutput, TKey> partitions,
+            QueryTaskGroupState groupState
+        )
         {
             int degreeOfParallelism = partitions.PartitionCount;
-            SortHelper<TInputOutput, TKey>[] helpers = new SortHelper<TInputOutput, TKey>[degreeOfParallelism];
+            SortHelper<TInputOutput, TKey>[] helpers = new SortHelper<TInputOutput, TKey>[
+                degreeOfParallelism
+            ];
 
             // Calculate the next highest power of two greater than or equal to the DOP.
             // Also, calculate phaseCount = log2(degreeOfParallelismPow2)
-            int degreeOfParallelismPow2 = 1, phaseCount = 0;
+            int degreeOfParallelismPow2 = 1,
+                phaseCount = 0;
             while (degreeOfParallelismPow2 < degreeOfParallelism)
             {
                 phaseCount++;
@@ -118,7 +131,10 @@ namespace System.Linq.Parallel
             GrowingArray<TKey>[] sharedKeys = new GrowingArray<TKey>[degreeOfParallelism];
             TInputOutput[][] sharedValues = new TInputOutput[degreeOfParallelism][];
             // Note that it is possible that phaseCount is 0.
-            Barrier[][] sharedBarriers = JaggedArray<Barrier>.Allocate(phaseCount, degreeOfParallelism);
+            Barrier[][] sharedBarriers = JaggedArray<Barrier>.Allocate(
+                phaseCount,
+                degreeOfParallelism
+            );
 
             if (degreeOfParallelism > 1)
             {
@@ -144,10 +160,17 @@ namespace System.Linq.Parallel
             for (int i = 0; i < degreeOfParallelism; i++)
             {
                 helpers[i] = new SortHelper<TInputOutput, TKey>(
-                    partitions[i], degreeOfParallelism, i,
-                    groupState, sharedIndices,
-                    partitions.OrdinalIndexState, partitions.KeyComparer,
-                    sharedKeys, sharedValues, sharedBarriers);
+                    partitions[i],
+                    degreeOfParallelism,
+                    i,
+                    groupState,
+                    sharedIndices,
+                    partitions.OrdinalIndexState,
+                    partitions.KeyComparer,
+                    sharedKeys,
+                    sharedValues,
+                    sharedBarriers
+                );
             }
 
             return helpers;
@@ -220,7 +243,10 @@ namespace System.Linq.Parallel
         //    Should only be called once per sort helper.
         //
 
-        private void BuildKeysFromSource(ref GrowingArray<TKey>? keys, ref List<TInputOutput>? values)
+        private void BuildKeysFromSource(
+            ref GrowingArray<TKey>? keys,
+            ref List<TInputOutput>? values
+        )
         {
             values = new List<TInputOutput>();
 
@@ -248,8 +274,7 @@ namespace System.Linq.Parallel
                         // Accumulate the keys and values so that we can sort them in a moment.
                         keys.Add(currentKey);
                         values.Add(current);
-                    }
-                    while (_source.MoveNext(ref current!, ref currentKey));
+                    } while (_source.MoveNext(ref current!, ref currentKey));
                 }
             }
             finally
@@ -268,7 +293,11 @@ namespace System.Linq.Parallel
         //     according to the sort criteria used.
         //
 
-        private void QuickSortIndicesInPlace(GrowingArray<TKey> keys, List<TInputOutput> values, OrdinalIndexState ordinalIndexState)
+        private void QuickSortIndicesInPlace(
+            GrowingArray<TKey> keys,
+            List<TInputOutput> values,
+            OrdinalIndexState ordinalIndexState
+        )
         {
             Debug.Assert(keys != null);
             Debug.Assert(values != null);
@@ -282,10 +311,15 @@ namespace System.Linq.Parallel
             }
 
             // Now sort the indices in place.
-            if (indices.Length > 1
-                && ordinalIndexState.IsWorseThan(OrdinalIndexState.Increasing))
+            if (indices.Length > 1 && ordinalIndexState.IsWorseThan(OrdinalIndexState.Increasing))
             {
-                QuickSort(0, indices.Length - 1, keys.InternalArray, indices, _groupState.CancellationState.MergedCancellationToken);
+                QuickSort(
+                    0,
+                    indices.Length - 1,
+                    keys.InternalArray,
+                    indices,
+                    _groupState.CancellationState.MergedCancellationToken
+                );
             }
 
             if (_partitionCount == 1)
@@ -380,11 +414,12 @@ namespace System.Linq.Parallel
 
                     TInputOutput[] myValues = _sharedValues[_partitionIndex];
 
-
                     // First we must rendezvous with our merge partner so we know the previous sort
                     // and merge phase has been completed.  By convention, we always use the left-most
                     // partner's barrier for this; all that matters is that both uses the same.
-                    _sharedBarriers[phase][Math.Min(_partitionIndex, partnerIndex)].SignalAndWait(cancelToken);
+                    _sharedBarriers[phase][Math.Min(_partitionIndex, partnerIndex)].SignalAndWait(
+                        cancelToken
+                    );
 
                     // Grab the two sorted inputs and then merge them cooperatively into one list.  One
                     // worker merges from left-to-right until it's placed elements up to the half-way
@@ -434,16 +469,25 @@ namespace System.Linq.Parallel
                         // is doing the same for the right half).  Note that during the last phase we only
                         // copy the values and not the indices or keys.
                         int m = (totalCount + 1) / 2;
-                        int i = 0, j0 = 0, j1 = 0;
+                        int i = 0,
+                            j0 = 0,
+                            j1 = 0;
                         Debug.Assert(myIndices != null);
                         while (i < m)
                         {
                             if ((i & CancellationState.POLL_INTERVAL) == 0)
                                 cancelToken.ThrowIfCancellationRequested();
 
-                            if (j0 < leftCount && (j1 >= rightCount ||
-                                                   _keyComparer.Compare(myKeysArr[myIndices[j0]],
-                                                                         rightKeys[rightIndices![j1]]) <= 0))
+                            if (
+                                j0 < leftCount
+                                && (
+                                    j1 >= rightCount
+                                    || _keyComparer.Compare(
+                                        myKeysArr[myIndices[j0]],
+                                        rightKeys[rightIndices![j1]]
+                                    ) <= 0
+                                )
+                            )
                             {
                                 if (isLastPhase)
                                 {
@@ -511,16 +555,25 @@ namespace System.Linq.Parallel
                         // is doing the same for the left half).  Note that during the last phase we only
                         // copy the values and not the indices or keys.
                         int m = (totalCount + 1) / 2;
-                        int i = totalCount - 1, j0 = leftCount - 1, j1 = rightCount - 1;
+                        int i = totalCount - 1,
+                            j0 = leftCount - 1,
+                            j1 = rightCount - 1;
                         Debug.Assert(myIndices != null);
                         while (i >= m)
                         {
                             if ((i & CancellationState.POLL_INTERVAL) == 0)
                                 cancelToken.ThrowIfCancellationRequested();
 
-                            if (j0 >= 0 && (j1 < 0 ||
-                                            _keyComparer.Compare(leftKeys[leftIndices![j0]],
-                                                                  myKeysArr[myIndices[j1]]) > 0))
+                            if (
+                                j0 >= 0
+                                && (
+                                    j1 < 0
+                                    || _keyComparer.Compare(
+                                        leftKeys[leftIndices![j0]],
+                                        myKeysArr[myIndices[j1]]
+                                    ) > 0
+                                )
+                            )
                             {
                                 Debug.Assert(leftIndices != null);
                                 if (isLastPhase)
@@ -559,7 +612,6 @@ namespace System.Linq.Parallel
 
                         // Wait for our partner to finish copying too.
                         _sharedBarriers[phase][partnerIndex].SignalAndWait(cancelToken);
-
                         // Now the greater of the two partners can leave, it's done.
                         break;
                     }
@@ -582,7 +634,13 @@ namespace System.Linq.Parallel
         // will have been placed in sorted order based on the keys provided.
         //
 
-        private void QuickSort(int left, int right, TKey[] keys, int[] indices, CancellationToken cancelToken)
+        private void QuickSort(
+            int left,
+            int right,
+            TKey[] keys,
+            int[] indices,
+            CancellationToken cancelToken
+        )
         {
             Debug.Assert(keys != null, "need a non-null keyset");
             Debug.Assert(keys.Length >= indices.Length);
@@ -605,10 +663,15 @@ namespace System.Linq.Parallel
 
                 do
                 {
-                    while (_keyComparer.Compare(keys[indices[i]], pivotKey) < 0) i++;
-                    while (_keyComparer.Compare(keys[indices[j]], pivotKey) > 0) j--;
+                    while (_keyComparer.Compare(keys[indices[i]], pivotKey) < 0)
+                        i++;
+                    while (_keyComparer.Compare(keys[indices[j]], pivotKey) > 0)
+                        j--;
 
-                    Debug.Assert(i >= left && j <= right, "(i>=left && j<=right) sort failed - bogus IComparer?");
+                    Debug.Assert(
+                        i >= left && j <= right,
+                        "(i>=left && j<=right) sort failed - bogus IComparer?"
+                    );
 
                     if (i > j)
                     {
@@ -625,8 +688,7 @@ namespace System.Linq.Parallel
 
                     i++;
                     j--;
-                }
-                while (i <= j);
+                } while (i <= j);
 
                 if (j - left <= right - i)
                 {
@@ -644,8 +706,7 @@ namespace System.Linq.Parallel
                     }
                     right = j;
                 }
-            }
-            while (left < right);
+            } while (left < right);
         }
     }
 }

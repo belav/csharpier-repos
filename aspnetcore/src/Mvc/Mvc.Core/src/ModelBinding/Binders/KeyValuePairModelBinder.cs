@@ -27,7 +27,11 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
     /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public KeyValuePairModelBinder(IModelBinder keyBinder, IModelBinder valueBinder, ILoggerFactory loggerFactory)
+    public KeyValuePairModelBinder(
+        IModelBinder keyBinder,
+        IModelBinder valueBinder,
+        ILoggerFactory loggerFactory
+    )
     {
         if (keyBinder == null)
         {
@@ -60,16 +64,27 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
         _logger.AttemptingToBindModel(bindingContext);
 
         var keyModelName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Key");
-        var keyResult = await TryBindStrongModel<TKey?>(bindingContext, _keyBinder, "Key", keyModelName);
+        var keyResult = await TryBindStrongModel<TKey?>(
+            bindingContext,
+            _keyBinder,
+            "Key",
+            keyModelName
+        );
 
         var valueModelName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Value");
-        var valueResult = await TryBindStrongModel<TValue?>(bindingContext, _valueBinder, "Value", valueModelName);
+        var valueResult = await TryBindStrongModel<TValue?>(
+            bindingContext,
+            _valueBinder,
+            "Value",
+            valueModelName
+        );
 
         if (keyResult.IsModelSet && valueResult.IsModelSet)
         {
             var model = new KeyValuePair<TKey?, TValue?>(
                 ModelBindingHelper.CastOrDefault<TKey?>(keyResult.Model),
-                ModelBindingHelper.CastOrDefault<TValue?>(valueResult.Model));
+                ModelBindingHelper.CastOrDefault<TValue?>(valueResult.Model)
+            );
 
             bindingContext.Result = ModelBindingResult.Success(model);
             _logger.DoneAttemptingToBindModel(bindingContext);
@@ -80,7 +95,8 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
         {
             bindingContext.ModelState.TryAddModelError(
                 keyModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor());
+                bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor()
+            );
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }
@@ -89,7 +105,8 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
         {
             bindingContext.ModelState.TryAddModelError(
                 valueModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor());
+                bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor()
+            );
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }
@@ -108,15 +125,19 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
         ModelBindingContext bindingContext,
         IModelBinder binder,
         string propertyName,
-        string propertyModelName)
+        string propertyModelName
+    )
     {
         var propertyModelMetadata = bindingContext.ModelMetadata.Properties[propertyName]!;
 
-        using (bindingContext.EnterNestedScope(
-            modelMetadata: propertyModelMetadata,
-            fieldName: propertyName,
-            modelName: propertyModelName,
-            model: null))
+        using (
+            bindingContext.EnterNestedScope(
+                modelMetadata: propertyModelMetadata,
+                fieldName: propertyName,
+                modelName: propertyModelName,
+                model: null
+            )
+        )
         {
             await binder.BindModelAsync(bindingContext);
 

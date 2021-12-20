@@ -25,8 +25,16 @@ public static class SendFileResponseExtensions
     /// <param name="response"></param>
     /// <param name="file">The file.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static Task SendFileAsync(this HttpResponse response, IFileInfo file, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static Task SendFileAsync(
+        this HttpResponse response,
+        IFileInfo file,
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -49,8 +57,18 @@ public static class SendFileResponseExtensions
     /// <param name="count">The number of bytes to send, or null to send the remainder of the file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static Task SendFileAsync(this HttpResponse response, IFileInfo file, long offset, long? count, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static Task SendFileAsync(
+        this HttpResponse response,
+        IFileInfo file,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -71,8 +89,16 @@ public static class SendFileResponseExtensions
     /// <param name="fileName">The full path to the file.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
     /// <returns></returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static Task SendFileAsync(this HttpResponse response, string fileName, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static Task SendFileAsync(
+        this HttpResponse response,
+        string fileName,
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -96,8 +122,18 @@ public static class SendFileResponseExtensions
     /// <param name="count">The number of bytes to send, or null to send the remainder of the file.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static Task SendFileAsync(this HttpResponse response, string fileName, long offset, long? count, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static Task SendFileAsync(
+        this HttpResponse response,
+        string fileName,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -112,7 +148,13 @@ public static class SendFileResponseExtensions
         return SendFileAsyncCore(response, fileName, offset, count, cancellationToken);
     }
 
-    private static async Task SendFileAsyncCore(HttpResponse response, IFileInfo file, long offset, long? count, CancellationToken cancellationToken)
+    private static async Task SendFileAsyncCore(
+        HttpResponse response,
+        IFileInfo file,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken
+    )
     {
         if (string.IsNullOrEmpty(file.PhysicalPath))
         {
@@ -120,7 +162,9 @@ public static class SendFileResponseExtensions
             await using var fileContent = file.CreateReadStream();
 
             var useRequestAborted = !cancellationToken.CanBeCanceled;
-            var localCancel = useRequestAborted ? response.HttpContext.RequestAborted : cancellationToken;
+            var localCancel = useRequestAborted
+                ? response.HttpContext.RequestAborted
+                : cancellationToken;
 
             try
             {
@@ -129,7 +173,13 @@ public static class SendFileResponseExtensions
                 {
                     fileContent.Seek(offset, SeekOrigin.Begin);
                 }
-                await StreamCopyOperation.CopyToAsync(fileContent, response.Body, count, StreamCopyBufferSize, localCancel);
+                await StreamCopyOperation.CopyToAsync(
+                    fileContent,
+                    response.Body,
+                    count,
+                    StreamCopyBufferSize,
+                    localCancel
+                );
             }
             catch (OperationCanceledException) when (useRequestAborted) { }
         }
@@ -139,10 +189,18 @@ public static class SendFileResponseExtensions
         }
     }
 
-    private static async Task SendFileAsyncCore(HttpResponse response, string fileName, long offset, long? count, CancellationToken cancellationToken = default)
+    private static async Task SendFileAsyncCore(
+        HttpResponse response,
+        string fileName,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken = default
+    )
     {
         var useRequestAborted = !cancellationToken.CanBeCanceled;
-        var localCancel = useRequestAborted ? response.HttpContext.RequestAborted : cancellationToken;
+        var localCancel = useRequestAborted
+            ? response.HttpContext.RequestAborted
+            : cancellationToken;
         var sendFile = response.HttpContext.Features.Get<IHttpResponseBodyFeature>()!;
 
         try
@@ -158,8 +216,10 @@ public static class SendFileResponseExtensions
         {
             throw new ArgumentOutOfRangeException(nameof(offset), offset, string.Empty);
         }
-        if (count.HasValue &&
-            (count.GetValueOrDefault() < 0 || count.GetValueOrDefault() > fileLength - offset))
+        if (
+            count.HasValue
+            && (count.GetValueOrDefault() < 0 || count.GetValueOrDefault() > fileLength - offset)
+        )
         {
             throw new ArgumentOutOfRangeException(nameof(count), count, string.Empty);
         }

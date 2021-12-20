@@ -16,7 +16,8 @@ public class TypedJsonPatchDocumentConverter : JsonPatchDocumentConverter
         JsonReader reader,
         Type objectType,
         object existingValue,
-        JsonSerializer serializer)
+        JsonSerializer serializer
+    )
     {
         try
         {
@@ -50,7 +51,11 @@ public class TypedJsonPatchDocumentConverter : JsonPatchDocumentConverter
             serializer.Populate(jObjectReader, targetOperations);
 
             // container target: the typed JsonPatchDocument.
-            var container = Activator.CreateInstance(objectType, targetOperations, JsonPatchDocumentConverter.DefaultContractResolver);
+            var container = Activator.CreateInstance(
+                objectType,
+                targetOperations,
+                JsonPatchDocumentConverter.DefaultContractResolver
+            );
 
             return container;
         }

@@ -40,13 +40,11 @@ namespace Newtonsoft.Json
         /// This is the default member serialization mode.
         /// </summary>
         OptOut = 0,
-
         /// <summary>
         /// Only members marked with <see cref="JsonPropertyAttribute"/> or <see cref="DataMemberAttribute"/> are serialized.
         /// This member serialization mode can also be set by marking the class with <see cref="DataContractAttribute"/>.
         /// </summary>
         OptIn = 1,
-
         /// <summary>
         /// All public and private fields are serialized. Members can be excluded using <see cref="JsonIgnoreAttribute"/> or <see cref="NonSerializedAttribute"/>.
         /// This member serialization mode can also be set by marking the class with <see cref="SerializableAttribute"/>

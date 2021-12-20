@@ -23,8 +23,10 @@ namespace System.Net.Test.Common
     public sealed class LoopbackProxyServer : IDisposable
     {
         private const string ProxyAuthorizationHeader = "Proxy-Authorization";
-        private const string ProxyAuthenticateBasicHeader = "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n";
-        private const string ProxyAuthenticateDigestHeader = "Proxy-Authenticate: Digest realm=\"NetCore\", nonce=\"PwOnWgAAAAAAjnbW438AAJSQi1kAAAAA\", qop=\"auth\", stale=false\r\n";
+        private const string ProxyAuthenticateBasicHeader =
+            "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n";
+        private const string ProxyAuthenticateDigestHeader =
+            "Proxy-Authenticate: Digest realm=\"NetCore\", nonce=\"PwOnWgAAAAAAjnbW438AAJSQi1kAAAAA\", qop=\"auth\", stale=false\r\n";
         private const string ProxyAuthenticateNtlmHeader = "Proxy-Authenticate: NTLM\r\n";
         private const string ProxyAuthenticateNegotiateHeader = "Proxy-Authenticate: Negotiate\r\n";
 
@@ -62,52 +64,60 @@ namespace System.Net.Test.Common
 
         private void Start()
         {
-            Task.Run(async () =>
-            {
-                var activeTasks = new ConcurrentDictionary<Task, int>();
-
-                try
+            Task.Run(
+                async () =>
                 {
-                    while (true)
+                    var activeTasks = new ConcurrentDictionary<Task, int>();
+
+                    try
                     {
-                        Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
-
-                        var connectionTask = Task.Run(async () =>
+                        while (true)
                         {
-                            try
-                            {
-                                await ProcessConnection(s).ConfigureAwait(false);
-                            }
-                            catch (Exception ex)
-                            {
-                                EventSourceTestLogging.Log.TestAncillaryError(ex);
-                            }
-                        });
+                            Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
 
-                        activeTasks.TryAdd(connectionTask, 0);
-                        _ = connectionTask.ContinueWith(t => activeTasks.TryRemove(connectionTask, out _), TaskContinuationOptions.ExecuteSynchronously);
+                            var connectionTask = Task.Run(
+                                async () =>
+                                {
+                                    try
+                                    {
+                                        await ProcessConnection(s).ConfigureAwait(false);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        EventSourceTestLogging.Log.TestAncillaryError(ex);
+                                    }
+                                }
+                            );
+
+                            activeTasks.TryAdd(connectionTask, 0);
+                            _ = connectionTask.ContinueWith(
+                                t => activeTasks.TryRemove(connectionTask, out _),
+                                TaskContinuationOptions.ExecuteSynchronously
+                            );
+                        }
                     }
-                }
-                catch (SocketException ex) when (ex.SocketErrorCode == SocketError.OperationAborted)
-                {
-                    // caused during Dispose() to cancel the loop. ignore.
-                }
-                catch (Exception ex)
-                {
-                    EventSourceTestLogging.Log.TestAncillaryError(ex);
-                }
+                    catch (SocketException ex)
+                        when (ex.SocketErrorCode == SocketError.OperationAborted)
+                    {
+                        // caused during Dispose() to cancel the loop. ignore.
+                    }
+                    catch (Exception ex)
+                    {
+                        EventSourceTestLogging.Log.TestAncillaryError(ex);
+                    }
 
-                try
-                {
-                    await Task.WhenAll(activeTasks.Keys).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    EventSourceTestLogging.Log.TestAncillaryError(ex);
-                }
+                    try
+                    {
+                        await Task.WhenAll(activeTasks.Keys).ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        EventSourceTestLogging.Log.TestAncillaryError(ex);
+                    }
 
-                _serverStopped.Set();
-            });
+                    _serverStopped.Set();
+                }
+            );
         }
 
         private async Task ProcessConnection(Socket s)
@@ -118,7 +128,7 @@ namespace System.Net.Test.Common
             using (var reader = new StreamReader(ns))
             using (var writer = new StreamWriter(ns) { AutoFlush = true })
             {
-                while(true)
+                while (true)
                 {
                     if (!(await ProcessRequest(s, reader, writer).ConfigureAwait(false)))
                     {
@@ -128,7 +138,11 @@ namespace System.Net.Test.Common
             }
         }
 
-        private async Task<bool> ProcessRequest(Socket clientSocket, StreamReader reader, StreamWriter writer)
+        private async Task<bool> ProcessRequest(
+            Socket clientSocket,
+            StreamReader reader,
+            StreamWriter writer
+        )
         {
             var headers = new Dictionary<string, string>();
             string url = null;
@@ -185,7 +199,13 @@ namespace System.Net.Test.Common
                 int remotePort = int.Parse(tokens[1]);
 
                 Send200Response(writer);
-                await ProcessConnectMethod(clientSocket, (NetworkStream)reader.BaseStream, remoteHost, remotePort).ConfigureAwait(false);
+                await ProcessConnectMethod(
+                        clientSocket,
+                        (NetworkStream)reader.BaseStream,
+                        remoteHost,
+                        remotePort
+                    )
+                    .ConfigureAwait(false);
 
                 return false; // connection can't be used for any more requests
             }
@@ -208,15 +228,23 @@ namespace System.Net.Test.Common
 
             var handler = new HttpClientHandler() { UseProxy = false };
             using (HttpClient outboundClient = new HttpClient(handler))
-            using (HttpResponseMessage response = await outboundClient.SendAsync(requestMessage).ConfigureAwait(false))
+            using (
+                HttpResponseMessage response = await outboundClient
+                    .SendAsync(requestMessage)
+                    .ConfigureAwait(false)
+            )
             {
                 // Transfer the response headers from the server to the client.
-                var sb = new StringBuilder($"HTTP/{response.Version.ToString(2)} {(int)response.StatusCode} {response.ReasonPhrase}\r\n");
+                var sb = new StringBuilder(
+                    $"HTTP/{response.Version.ToString(2)} {(int)response.StatusCode} {response.ReasonPhrase}\r\n"
+                );
                 foreach (KeyValuePair<string, IEnumerable<string>> header in response.Headers)
                 {
                     sb.Append($"{header.Key}: {string.Join(", ", header.Value)}\r\n");
                 }
-                foreach (KeyValuePair<string, IEnumerable<string>> header in response.Content.Headers)
+                foreach (
+                    KeyValuePair<string, IEnumerable<string>> header in response.Content.Headers
+                )
                 {
                     sb.Append($"{header.Key}: {string.Join(", ", header.Value)}\r\n");
                 }
@@ -224,53 +252,69 @@ namespace System.Net.Test.Common
                 writer.Write(sb.ToString());
 
                 // Forward the response body from the server to the client.
-                string responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                string responseBody = await response.Content
+                    .ReadAsStringAsync()
+                    .ConfigureAwait(false);
                 writer.Write(responseBody);
 
                 return true;
             }
         }
 
-        private async Task ProcessConnectMethod(Socket clientSocket, NetworkStream clientStream, string remoteHost, int remotePort)
+        private async Task ProcessConnectMethod(
+            Socket clientSocket,
+            NetworkStream clientStream,
+            string remoteHost,
+            int remotePort
+        )
         {
             // Open connection to destination server.
-            using Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using Socket serverSocket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             await serverSocket.ConnectAsync(remoteHost, remotePort).ConfigureAwait(false);
             NetworkStream serverStream = new NetworkStream(serverSocket);
 
             // Relay traffic to/from client and destination server.
-            Task clientCopyTask = Task.Run(async () =>
-            {
-                try
+            Task clientCopyTask = Task.Run(
+                async () =>
                 {
-                    await clientStream.CopyToAsync(serverStream).ConfigureAwait(false);
-                    serverSocket.Shutdown(SocketShutdown.Send);
+                    try
+                    {
+                        await clientStream.CopyToAsync(serverStream).ConfigureAwait(false);
+                        serverSocket.Shutdown(SocketShutdown.Send);
+                    }
+                    catch (Exception ex)
+                    {
+                        HandleExceptions(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    HandleExceptions(ex);
-                }
-            });
+            );
 
-            Task serverCopyTask = Task.Run(async () =>
-            {
-                try
+            Task serverCopyTask = Task.Run(
+                async () =>
                 {
-                    await serverStream.CopyToAsync(clientStream).ConfigureAwait(false);
-                    clientSocket.Shutdown(SocketShutdown.Send);
+                    try
+                    {
+                        await serverStream.CopyToAsync(clientStream).ConfigureAwait(false);
+                        clientSocket.Shutdown(SocketShutdown.Send);
+                    }
+                    catch (Exception ex)
+                    {
+                        HandleExceptions(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    HandleExceptions(ex);
-                }
-            });
+            );
 
             await Task.WhenAll(new[] { clientCopyTask, serverCopyTask }).ConfigureAwait(false);
 
             /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted errors.</summary>
             void HandleExceptions(Exception ex)
             {
-                SocketError sockErr = (ex.InnerException as SocketException)?.SocketErrorCode ?? SocketError.Success;
+                SocketError sockErr =
+                    (ex.InnerException as SocketException)?.SocketErrorCode ?? SocketError.Success;
 
                 // If aborted, the other task failed and is asking this task to end.
                 if (sockErr == SocketError.OperationAborted)
@@ -283,20 +327,19 @@ namespace System.Net.Test.Common
                 {
                     clientSocket.Close();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
 
                 try
                 {
                     serverSocket.Close();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
 
                 // Eat reset/abort.
-                if (sockErr != SocketError.ConnectionReset && sockErr != SocketError.ConnectionAborted)
+                if (
+                    sockErr != SocketError.ConnectionReset
+                    && sockErr != SocketError.ConnectionAborted
+                )
                 {
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }
@@ -306,9 +349,9 @@ namespace System.Net.Test.Common
         private void Send200Response(StreamWriter writer)
         {
             string response =
-                "HTTP/1.1 200 OK\r\n" +
-                $"Date: {DateTimeOffset.UtcNow:R}\r\n" +
-                "Content-Length: 0\r\n\r\n";
+                "HTTP/1.1 200 OK\r\n"
+                + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+                + "Content-Length: 0\r\n\r\n";
             writer.Write(response);
         }
 
@@ -336,11 +379,11 @@ namespace System.Net.Test.Common
             }
 
             string response =
-                "HTTP/1.1 407 Proxy Authentication Required\r\n" +
-                $"Date: {DateTimeOffset.UtcNow:R}\r\n" +
-                proxyAuthenticateHeaders +
-                (_connectionCloseAfter407 ? "Connection: close\r\n" : "") +
-                "Content-Length: 0\r\n\r\n";
+                "HTTP/1.1 407 Proxy Authentication Required\r\n"
+                + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+                + proxyAuthenticateHeaders
+                + (_connectionCloseAfter407 ? "Connection: close\r\n" : "")
+                + "Content-Length: 0\r\n\r\n";
             writer.Write(response);
         }
 
@@ -375,7 +418,8 @@ namespace System.Net.Test.Common
 
         public class Options
         {
-            public AuthenticationSchemes AuthenticationSchemes { get; set; } = AuthenticationSchemes.None;
+            public AuthenticationSchemes AuthenticationSchemes { get; set; } =
+                AuthenticationSchemes.None;
             public bool ConnectionCloseAfter407 { get; set; } = false;
             public bool AddViaRequestHeader { get; set; } = false;
         }

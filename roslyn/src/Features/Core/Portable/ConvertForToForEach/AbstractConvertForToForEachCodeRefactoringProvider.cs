@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
         TExpressionSyntax,
         TMemberAccessExpressionSyntax,
         TTypeNode,
-        TVariableDeclaratorSyntax> : CodeRefactoringProvider
+        TVariableDeclaratorSyntax
+    > : CodeRefactoringProvider
         where TStatementSyntax : SyntaxNode
         where TForStatementSyntax : TStatementSyntax
         where TExpressionSyntax : SyntaxNode
@@ -36,47 +37,75 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
     {
         protected abstract string GetTitle();
 
-        protected abstract SyntaxList<TStatementSyntax> GetBodyStatements(TForStatementSyntax forStatement);
+        protected abstract SyntaxList<TStatementSyntax> GetBodyStatements(
+            TForStatementSyntax forStatement
+        );
         protected abstract bool IsValidVariableDeclarator(TVariableDeclaratorSyntax firstVariable);
 
         protected abstract bool TryGetForStatementComponents(
             TForStatementSyntax forStatement,
-            out SyntaxToken iterationVariable, out TExpressionSyntax initializer,
-            out TMemberAccessExpressionSyntax memberAccess, out TExpressionSyntax stepValueExpressionOpt,
-            CancellationToken cancellationToken);
+            out SyntaxToken iterationVariable,
+            out TExpressionSyntax initializer,
+            out TMemberAccessExpressionSyntax memberAccess,
+            out TExpressionSyntax stepValueExpressionOpt,
+            CancellationToken cancellationToken
+        );
 
         protected abstract SyntaxNode ConvertForNode(
-            TForStatementSyntax currentFor, TTypeNode? typeNode, SyntaxToken foreachIdentifier,
-            TExpressionSyntax collectionExpression, ITypeSymbol iterationVariableType, OptionSet options);
+            TForStatementSyntax currentFor,
+            TTypeNode? typeNode,
+            SyntaxToken foreachIdentifier,
+            TExpressionSyntax collectionExpression,
+            ITypeSymbol iterationVariableType,
+            OptionSet options
+        );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, textSpan, cancellationToken) = context;
-            var forStatement = await context.TryGetRelevantNodeAsync<TForStatementSyntax>().ConfigureAwait(false);
+            var forStatement = await context
+                .TryGetRelevantNodeAsync<TForStatementSyntax>()
+                .ConfigureAwait(false);
             if (forStatement == null)
             {
                 return;
             }
 
-            if (!TryGetForStatementComponents(forStatement,
-                    out var iterationVariable, out var initializer,
-                    out var memberAccess, out var stepValueExpressionOpt, cancellationToken))
+            if (
+                !TryGetForStatementComponents(
+                    forStatement,
+                    out var iterationVariable,
+                    out var initializer,
+                    out var memberAccess,
+                    out var stepValueExpressionOpt,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            syntaxFacts.GetPartsOfMemberAccessExpression(memberAccess,
-                out var collectionExpressionNode, out var memberAccessNameNode);
+            syntaxFacts.GetPartsOfMemberAccessExpression(
+                memberAccess,
+                out var collectionExpressionNode,
+                out var memberAccessNameNode
+            );
 
             var collectionExpression = (TExpressionSyntax)collectionExpressionNode;
-            syntaxFacts.GetNameAndArityOfSimpleName(memberAccessNameNode, out var memberAccessName, out _);
+            syntaxFacts.GetNameAndArityOfSimpleName(
+                memberAccessNameNode,
+                out var memberAccessName,
+                out _
+            );
             if (memberAccessName is not nameof(Array.Length) and not nameof(IList.Count))
             {
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Make sure it's a single-variable for loop and that we're not a loop where we're
             // referencing some previously declared symbol.  i.e
@@ -89,7 +118,11 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             // NOTE: we could potentially update this if we saw that the variable was not used
             // after the for-loop.  But, for now, we'll just be conservative and assume this means
             // the user wanted the 'i' for some other purpose and we should keep things as is.
-            if (semanticModel.GetOperation(forStatement, cancellationToken) is not ILoopOperation operation || operation.Locals.Length != 1)
+            if (
+                semanticModel.GetOperation(forStatement, cancellationToken)
+                    is not ILoopOperation operation
+                || operation.Locals.Length != 1
+            )
             {
                 return;
             }
@@ -117,20 +150,32 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 return;
             }
 
-            var containingType = semanticModel.GetEnclosingNamedType(textSpan.Start, cancellationToken);
+            var containingType = semanticModel.GetEnclosingNamedType(
+                textSpan.Start,
+                cancellationToken
+            );
             if (containingType == null)
             {
                 return;
             }
 
-            var ienumerableType = semanticModel.Compilation.GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
-            var ienumeratorType = semanticModel.Compilation.GetSpecialType(SpecialType.System_Collections_Generic_IEnumerator_T);
+            var ienumerableType = semanticModel.Compilation.GetSpecialType(
+                SpecialType.System_Collections_Generic_IEnumerable_T
+            );
+            var ienumeratorType = semanticModel.Compilation.GetSpecialType(
+                SpecialType.System_Collections_Generic_IEnumerator_T
+            );
 
             // make sure the collection can be iterated.
-            if (!TryGetIterationElementType(
-                    containingType, collectionType.Type,
-                    ienumerableType, ienumeratorType,
-                    out var iterationType))
+            if (
+                !TryGetIterationElementType(
+                    containingType,
+                    collectionType.Type,
+                    ienumerableType,
+                    ienumeratorType,
+                    out var iterationType
+                )
+            )
             {
                 return;
             }
@@ -147,11 +192,22 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
 
             // Looks good.  We can convert this.
             context.RegisterRefactoring(
-                new MyCodeAction(GetTitle(),
-                    c => ConvertForToForEachAsync(
-                        document, forStatement, iterationVariable, collectionExpression,
-                        containingType, collectionType.Type, iterationType, c)),
-                forStatement.Span);
+                new MyCodeAction(
+                    GetTitle(),
+                    c =>
+                        ConvertForToForEachAsync(
+                            document,
+                            forStatement,
+                            iterationVariable,
+                            collectionExpression,
+                            containingType,
+                            collectionType.Type,
+                            iterationType,
+                            c
+                        )
+                ),
+                forStatement.Span
+            );
 
             return;
 
@@ -166,29 +222,36 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                         // found a reference.  make sure it's only used inside something like
                         // list[i]
 
-                        if (!syntaxFacts.IsSimpleArgument(current.Parent) ||
-                            !syntaxFacts.IsElementAccessExpression(current.Parent?.Parent?.Parent))
+                        if (
+                            !syntaxFacts.IsSimpleArgument(current.Parent)
+                            || !syntaxFacts.IsElementAccessExpression(
+                                current.Parent?.Parent?.Parent
+                            )
+                        )
                         {
                             // used in something other than accessing into a collection.
                             // can't convert this for-loop.
                             return true;
                         }
 
-                        var arguments = syntaxFacts.GetArgumentsOfArgumentList(current.Parent.Parent);
+                        var arguments = syntaxFacts.GetArgumentsOfArgumentList(
+                            current.Parent.Parent
+                        );
                         if (arguments.Count != 1)
                         {
                             // was used in a multi-dimensional indexing.  Can't conver this.
                             return true;
                         }
 
-                        var expr = syntaxFacts.GetExpressionOfElementAccessExpression(current.Parent.Parent.Parent);
+                        var expr = syntaxFacts.GetExpressionOfElementAccessExpression(
+                            current.Parent.Parent.Parent
+                        );
                         if (!syntaxFacts.AreEquivalent(expr, collectionExpression))
                         {
                             // was indexing into something other than the collection.
                             // can't convert this for-loop.
                             return true;
                         }
-
                         // this usage of the for-variable is fine.
                     }
                 }
@@ -209,22 +272,32 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
         }
 
         private static IEnumerable<TSymbol> TryFindMembersInThisOrBaseTypes<TSymbol>(
-            INamedTypeSymbol containingType, ITypeSymbol type, string memberName) where TSymbol : class, ISymbol
+            INamedTypeSymbol containingType,
+            ITypeSymbol type,
+            string memberName
+        ) where TSymbol : class, ISymbol
         {
             var methods = type.GetAccessibleMembersInThisAndBaseTypes<TSymbol>(containingType);
             return methods.Where(m => m.Name == memberName);
         }
 
         private static TSymbol TryFindMemberInThisOrBaseTypes<TSymbol>(
-            INamedTypeSymbol containingType, ITypeSymbol type, string memberName) where TSymbol : class, ISymbol
+            INamedTypeSymbol containingType,
+            ITypeSymbol type,
+            string memberName
+        ) where TSymbol : class, ISymbol
         {
-            return TryFindMembersInThisOrBaseTypes<TSymbol>(containingType, type, memberName).FirstOrDefault();
+            return TryFindMembersInThisOrBaseTypes<TSymbol>(containingType, type, memberName)
+                .FirstOrDefault();
         }
 
         private static bool TryGetIterationElementType(
-            INamedTypeSymbol containingType, ITypeSymbol collectionType,
-            INamedTypeSymbol ienumerableType, INamedTypeSymbol ienumeratorType,
-            [NotNullWhen(true)] out ITypeSymbol? iterationType)
+            INamedTypeSymbol containingType,
+            ITypeSymbol collectionType,
+            INamedTypeSymbol ienumerableType,
+            INamedTypeSymbol ienumeratorType,
+            [NotNullWhen(true)] out ITypeSymbol? iterationType
+        )
         {
             if (collectionType is IArrayTypeSymbol arrayType)
             {
@@ -236,16 +309,24 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
 
             // Check in the class/struct hierarchy first.
             var getEnumeratorMethod = TryFindMemberInThisOrBaseTypes<IMethodSymbol>(
-                containingType, collectionType, WellKnownMemberNames.GetEnumeratorMethodName);
+                containingType,
+                collectionType,
+                WellKnownMemberNames.GetEnumeratorMethodName
+            );
             if (getEnumeratorMethod != null)
             {
                 return TryGetIterationElementTypeFromGetEnumerator(
-                    containingType, getEnumeratorMethod, ienumeratorType, out iterationType);
+                    containingType,
+                    getEnumeratorMethod,
+                    ienumeratorType,
+                    out iterationType
+                );
             }
 
             // couldn't find .GetEnumerator on the class/struct.  Check the interface hierarchy.
-            var instantiatedIEnumerableType = collectionType.GetAllInterfacesIncludingThis().FirstOrDefault(
-                t => Equals(t.OriginalDefinition, ienumerableType));
+            var instantiatedIEnumerableType = collectionType
+                .GetAllInterfacesIncludingThis()
+                .FirstOrDefault(t => Equals(t.OriginalDefinition, ienumerableType));
 
             if (instantiatedIEnumerableType != null)
             {
@@ -258,14 +339,20 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
         }
 
         private static bool TryGetIterationElementTypeFromGetEnumerator(
-            INamedTypeSymbol containingType, IMethodSymbol getEnumeratorMethod,
-            INamedTypeSymbol ienumeratorType, [NotNullWhen(true)] out ITypeSymbol? iterationType)
+            INamedTypeSymbol containingType,
+            IMethodSymbol getEnumeratorMethod,
+            INamedTypeSymbol ienumeratorType,
+            [NotNullWhen(true)] out ITypeSymbol? iterationType
+        )
         {
             var getEnumeratorReturnType = getEnumeratorMethod.ReturnType;
 
             // Check in the class/struct hierarchy first.
             var currentProperty = TryFindMemberInThisOrBaseTypes<IPropertySymbol>(
-                containingType, getEnumeratorReturnType, WellKnownMemberNames.CurrentPropertyName);
+                containingType,
+                getEnumeratorReturnType,
+                WellKnownMemberNames.CurrentPropertyName
+            );
             if (currentProperty != null)
             {
                 iterationType = currentProperty.Type;
@@ -273,8 +360,9 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             }
 
             // couldn't find .Current on the class/struct.  Check the interface hierarchy.
-            var instantiatedIEnumeratorType = getEnumeratorReturnType.GetAllInterfacesIncludingThis().FirstOrDefault(
-                t => Equals(t.OriginalDefinition, ienumeratorType));
+            var instantiatedIEnumeratorType = getEnumeratorReturnType
+                .GetAllInterfacesIncludingThis()
+                .FirstOrDefault(t => Equals(t.OriginalDefinition, ienumeratorType));
 
             if (instantiatedIEnumeratorType != null)
             {
@@ -287,29 +375,41 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
         }
 
         private async Task<Document> ConvertForToForEachAsync(
-            Document document, TForStatementSyntax forStatement,
-            SyntaxToken iterationVariable, TExpressionSyntax collectionExpression,
-            INamedTypeSymbol containingType, ITypeSymbol collectionType,
-            ITypeSymbol iterationType, CancellationToken cancellationToken)
+            Document document,
+            TForStatementSyntax forStatement,
+            SyntaxToken iterationVariable,
+            TExpressionSyntax collectionExpression,
+            INamedTypeSymbol containingType,
+            ITypeSymbol collectionType,
+            ITypeSymbol iterationType,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
             var generator = SyntaxGenerator.GetGenerator(document);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var editor = new SyntaxEditor(root, generator);
 
             // create a dummy "list[i]" expression.  We'll use this to find all places to replace
             // in the current for statement.
             var indexExpression = generator.ElementAccessExpression(
-                collectionExpression, generator.IdentifierName(iterationVariable));
+                collectionExpression,
+                generator.IdentifierName(iterationVariable)
+            );
 
             // See if the first statement in the for loop is of the form:
             //      var x = list[i]   or
             //
             // If so, we'll use those as the iteration variables for the new foreach statement.
-            var (typeNode, foreachIdentifier, declarationStatement) = TryDeconstructInitialDeclaration();
+            var (typeNode, foreachIdentifier, declarationStatement) =
+                TryDeconstructInitialDeclaration();
 
             if (typeNode == null)
             {
@@ -320,7 +420,9 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 if (!Equals(indexerType, iterationType))
                 {
                     typeNode = (TTypeNode)generator.TypeExpression(
-                        indexerType ?? semanticModel.Compilation.GetSpecialType(SpecialType.System_Object));
+                        indexerType
+                            ?? semanticModel.Compilation.GetSpecialType(SpecialType.System_Object)
+                    );
                 }
             }
 
@@ -329,12 +431,22 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             if (foreachIdentifier.RawKind == 0)
             {
                 foreachIdentifier = semanticFacts.GenerateUniqueName(
-                    semanticModel, forStatement, containerOpt: null, baseName: "v", usedNames: Enumerable.Empty<string>(), cancellationToken);
-                foreachIdentifier = foreachIdentifier.WithAdditionalAnnotations(RenameAnnotation.Create());
+                    semanticModel,
+                    forStatement,
+                    containerOpt: null,
+                    baseName: "v",
+                    usedNames: Enumerable.Empty<string>(),
+                    cancellationToken
+                );
+                foreachIdentifier = foreachIdentifier.WithAdditionalAnnotations(
+                    RenameAnnotation.Create()
+                );
             }
 
             // Create the expression we'll use to replace all matches in the for-body.
-            var foreachIdentifierReference = foreachIdentifier.WithoutAnnotations(RenameAnnotation.Kind).WithoutTrivia();
+            var foreachIdentifierReference = foreachIdentifier
+                .WithoutAnnotations(RenameAnnotation.Kind)
+                .WithoutTrivia();
 
             // Walk the for statement, replacing any matches we find.
             FindAndReplaceMatches(forStatement);
@@ -343,16 +455,25 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             // trivia to the next statement.
             if (declarationStatement != null)
             {
-                editor.RemoveNode(declarationStatement,
-                    SyntaxGenerator.DefaultRemoveOptions | SyntaxRemoveOptions.KeepLeadingTrivia);
+                editor.RemoveNode(
+                    declarationStatement,
+                    SyntaxGenerator.DefaultRemoveOptions | SyntaxRemoveOptions.KeepLeadingTrivia
+                );
             }
 
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             editor.ReplaceNode(
                 forStatement,
-                (currentFor, _) => ConvertForNode(
-                    (TForStatementSyntax)currentFor, typeNode, foreachIdentifier,
-                    collectionExpression, iterationType, options));
+                (currentFor, _) =>
+                    ConvertForNode(
+                        (TForStatementSyntax)currentFor,
+                        typeNode,
+                        foreachIdentifier,
+                        collectionExpression,
+                        iterationType,
+                        options
+                    )
+            );
 
             return document.WithSyntaxRoot(editor.GetChangedRoot());
 
@@ -366,18 +487,33 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                     var firstStatement = bodyStatements[0];
                     if (syntaxFacts.IsLocalDeclarationStatement(firstStatement))
                     {
-                        var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(firstStatement);
+                        var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
+                            firstStatement
+                        );
                         if (variables.Count == 1)
                         {
                             var firstVariable = (TVariableDeclaratorSyntax)variables[0];
                             if (IsValidVariableDeclarator(firstVariable))
                             {
-                                var firstVariableInitializer = syntaxFacts.GetValueOfEqualsValueClause(
-                                    syntaxFacts.GetInitializerOfVariableDeclarator(firstVariable));
-                                if (syntaxFacts.AreEquivalent(firstVariableInitializer, indexExpression))
+                                var firstVariableInitializer =
+                                    syntaxFacts.GetValueOfEqualsValueClause(
+                                        syntaxFacts.GetInitializerOfVariableDeclarator(
+                                            firstVariable
+                                        )
+                                    );
+                                if (
+                                    syntaxFacts.AreEquivalent(
+                                        firstVariableInitializer,
+                                        indexExpression
+                                    )
+                                )
                                 {
-                                    var type = (TTypeNode?)syntaxFacts.GetTypeOfVariableDeclarator(firstVariable)?.WithoutLeadingTrivia();
-                                    var identifier = syntaxFacts.GetIdentifierOfVariableDeclarator(firstVariable);
+                                    var type = (TTypeNode?)syntaxFacts.GetTypeOfVariableDeclarator(
+                                        firstVariable
+                                    )?.WithoutLeadingTrivia();
+                                    var identifier = syntaxFacts.GetIdentifierOfVariableDeclarator(
+                                        firstVariable
+                                    );
                                     var statement = firstStatement;
                                     return (type, identifier, statement);
                                 }
@@ -402,18 +538,25 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                         if (semanticFacts.IsWrittenTo(semanticModel, indexMatch, cancellationToken))
                         {
                             replacementToken = replacementToken.WithAdditionalAnnotations(
-                                WarningAnnotation.Create(FeaturesResources.Warning_colon_Collection_was_modified_during_iteration));
+                                WarningAnnotation.Create(
+                                    FeaturesResources.Warning_colon_Collection_was_modified_during_iteration
+                                )
+                            );
                         }
 
                         if (CrossesFunctionBoundary(current))
                         {
                             replacementToken = replacementToken.WithAdditionalAnnotations(
-                                WarningAnnotation.Create(FeaturesResources.Warning_colon_Iteration_variable_crossed_function_boundary));
+                                WarningAnnotation.Create(
+                                    FeaturesResources.Warning_colon_Iteration_variable_crossed_function_boundary
+                                )
+                            );
                         }
 
                         editor.ReplaceNode(
                             indexMatch,
-                            generator.IdentifierName(replacementToken).WithTriviaFrom(indexMatch));
+                            generator.IdentifierName(replacementToken).WithTriviaFrom(indexMatch)
+                        );
                     }
                     else
                     {
@@ -421,17 +564,26 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                         // to something, or is written to, or has a method invoked on it, we'll warn
                         // that it's potentially changing and may break if you switch to a foreach loop.
                         var shouldWarn = syntaxFacts.IsArgument(current.Parent);
-                        shouldWarn |= semanticFacts.IsWrittenTo(semanticModel, current, cancellationToken);
+                        shouldWarn |= semanticFacts.IsWrittenTo(
+                            semanticModel,
+                            current,
+                            cancellationToken
+                        );
                         shouldWarn |=
-                            syntaxFacts.IsMemberAccessExpression(current.Parent) &&
-                            syntaxFacts.IsInvocationExpression(current.Parent.Parent);
+                            syntaxFacts.IsMemberAccessExpression(current.Parent)
+                            && syntaxFacts.IsInvocationExpression(current.Parent.Parent);
 
                         if (shouldWarn)
                         {
                             editor.ReplaceNode(
                                 current,
-                                (node, _) => node.WithAdditionalAnnotations(
-                                    WarningAnnotation.Create(FeaturesResources.Warning_colon_Iteration_variable_crossed_function_boundary)));
+                                (node, _) =>
+                                    node.WithAdditionalAnnotations(
+                                        WarningAnnotation.Create(
+                                            FeaturesResources.Warning_colon_Iteration_variable_crossed_function_boundary
+                                        )
+                                    )
+                            );
                         }
                     }
 
@@ -449,8 +601,12 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
 
             bool CrossesFunctionBoundary(SyntaxNode node)
             {
-                var containingFunction = node.AncestorsAndSelf().FirstOrDefault(
-                    n => syntaxFacts.IsLocalFunctionStatement(n) || syntaxFacts.IsAnonymousFunctionExpression(n));
+                var containingFunction = node.AncestorsAndSelf()
+                    .FirstOrDefault(
+                        n =>
+                            syntaxFacts.IsLocalFunctionStatement(n)
+                            || syntaxFacts.IsAnonymousFunctionExpression(n)
+                    );
 
                 if (containingFunction == null)
                 {
@@ -461,17 +617,20 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             }
         }
 
-        private static ITypeSymbol? GetIndexerType(INamedTypeSymbol containingType, ITypeSymbol collectionType)
+        private static ITypeSymbol? GetIndexerType(
+            INamedTypeSymbol containingType,
+            ITypeSymbol collectionType
+        )
         {
             if (collectionType is IArrayTypeSymbol arrayType)
             {
                 return arrayType.Rank == 1 ? arrayType.ElementType : null;
             }
 
-            var indexer =
-                collectionType.GetAccessibleMembersInThisAndBaseTypes<IPropertySymbol>(containingType)
-                              .Where(IsViableIndexer)
-                              .FirstOrDefault();
+            var indexer = collectionType
+                .GetAccessibleMembersInThisAndBaseTypes<IPropertySymbol>(containingType)
+                .Where(IsViableIndexer)
+                .FirstOrDefault();
 
             if (indexer?.Type != null)
             {
@@ -481,8 +640,11 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             if (collectionType.IsInterfaceType())
             {
                 var interfaces = collectionType.GetAllInterfacesIncludingThis();
-                indexer = interfaces.SelectMany(i => i.GetMembers().OfType<IPropertySymbol>().Where(IsViableIndexer))
-                                    .FirstOrDefault();
+                indexer = interfaces
+                    .SelectMany(
+                        i => i.GetMembers().OfType<IPropertySymbol>().Where(IsViableIndexer)
+                    )
+                    .FirstOrDefault();
 
                 return indexer?.Type;
             }
@@ -490,17 +652,17 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             return null;
         }
 
-        private static bool IsViableIndexer(IPropertySymbol property)
-            => property.IsIndexer &&
-               property.Parameters.Length == 1 &&
-               property.Parameters[0].Type?.SpecialType == SpecialType.System_Int32;
+        private static bool IsViableIndexer(IPropertySymbol property) =>
+            property.IsIndexer
+            && property.Parameters.Length == 1
+            && property.Parameters[0].Type?.SpecialType == SpecialType.System_Int32;
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, title) { }
         }
     }
 }

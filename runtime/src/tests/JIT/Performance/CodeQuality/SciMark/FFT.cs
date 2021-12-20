@@ -33,7 +33,8 @@ namespace SciMark2
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new System.Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+              => new System.Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -45,7 +46,6 @@ namespace SciMark2
 
             return (5.0 * Nd - 2) * logN + 2 * (Nd + 1);
         }
-
 
         /// <summary>
         /// Compute Fast Fourier Transform of (complex) data, in place.
@@ -185,7 +185,6 @@ namespace SciMark2
             }
         }
 
-
         protected internal static void bitreverse(double[] data)
         {
             /* This is the Goldrader bit-reversal algorithm */
@@ -219,7 +218,7 @@ namespace SciMark2
                     //j = j - k ;
                     j -= k;
 
-                    //k = k / 2 ; 
+                    //k = k / 2 ;
                     k >>= 1;
                 }
                 j += k;

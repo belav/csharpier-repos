@@ -59,8 +59,13 @@ namespace System.Runtime.Caching
                 _expires.Add(entry);
             }
 
-            if (entry.HasUsage()
-                && (!entry.HasExpiration() || entry.UtcAbsExp - DateTime.UtcNow >= CacheUsage.MIN_LIFETIME_FOR_USAGE))
+            if (
+                entry.HasUsage()
+                && (
+                    !entry.HasExpiration()
+                    || entry.UtcAbsExp - DateTime.UtcNow >= CacheUsage.MIN_LIFETIME_FOR_USAGE
+                )
+            )
             {
                 _usage.Add(entry);
             }
@@ -93,7 +98,11 @@ namespace System.Runtime.Caching
             _expires.EnableExpirationTimer(true);
         }
 
-        private void RemoveFromCache(MemoryCacheEntry entry, CacheEntryRemovedReason reason, bool delayRelease = false)
+        private void RemoveFromCache(
+            MemoryCacheEntry entry,
+            CacheEntryRemovedReason reason,
+            bool delayRelease = false
+        )
         {
             // release outside of lock
             if (entry != null)
@@ -108,7 +117,10 @@ namespace System.Runtime.Caching
                     _usage.Remove(entry);
                 }
 
-                Debug.Assert(entry.State == EntryState.RemovingFromCache, "entry.State = EntryState.RemovingFromCache");
+                Debug.Assert(
+                    entry.State == EntryState.RemovingFromCache,
+                    "entry.State = EntryState.RemovingFromCache"
+                );
 
                 entry.State = EntryState.RemovedFromCache;
                 if (!delayRelease)
@@ -167,7 +179,10 @@ namespace System.Runtime.Caching
 
         // public/internal members
 
-        internal CacheUsage Usage { get { return _usage; } }
+        internal CacheUsage Usage
+        {
+            get { return _usage; }
+        }
 
         internal MemoryCacheEntry AddOrGetExisting(MemoryCacheKey key, MemoryCacheEntry entry)
         {
@@ -245,10 +260,7 @@ namespace System.Runtime.Caching
 
         internal int Count
         {
-            get
-            {
-                return _entries.Count;
-            }
+            get { return _entries.Count; }
         }
 
         public void Dispose()
@@ -283,7 +295,6 @@ namespace System.Runtime.Caching
                 // _insertBlock except for potential threads in WaitInsertBlock (which won't care if we call Close).
                 Debug.Assert(_useInsertBlock == false, "_useInsertBlock == false");
                 _insertBlock.Close();
-
                 // Don't need to call GC.SuppressFinalize(this) for sealed types without finalizers.
             }
         }
@@ -302,7 +313,11 @@ namespace System.Runtime.Caching
             return entry;
         }
 
-        internal MemoryCacheEntry Remove(MemoryCacheKey key, MemoryCacheEntry entryToRemove, CacheEntryRemovedReason reason)
+        internal MemoryCacheEntry Remove(
+            MemoryCacheKey key,
+            MemoryCacheEntry entryToRemove,
+            CacheEntryRemovedReason reason
+        )
         {
             MemoryCacheEntry entry = null;
             lock (_entriesLock)
@@ -418,11 +433,18 @@ namespace System.Runtime.Caching
             }
 
 #if DEBUG
-            Dbg.Trace("MemoryCacheStore", "TrimInternal:"
-                        + " beginTotalCount=" + beginTotalCount
-                        + ", endTotalCount=" + count
-                        + ", percent=" + percent
-                        + ", trimmed=" + trimmed);
+            Dbg.Trace(
+                "MemoryCacheStore",
+                "TrimInternal:"
+                    + " beginTotalCount="
+                    + beginTotalCount
+                    + ", endTotalCount="
+                    + count
+                    + ", percent="
+                    + percent
+                    + ", trimmed="
+                    + trimmed
+            );
 #endif
             return trimmedOrExpired;
         }

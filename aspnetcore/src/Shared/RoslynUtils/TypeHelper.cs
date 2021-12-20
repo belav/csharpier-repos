@@ -22,7 +22,8 @@ internal static class TypeHelper
     {
         if (type is not null)
         {
-            return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute)) || IsCompilerGeneratedType(type.DeclaringType);
+            return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute))
+                || IsCompilerGeneratedType(type.DeclaringType);
         }
         return false;
     }
@@ -34,6 +35,7 @@ internal static class TypeHelper
     /// <returns><see langword="true" /> if <paramref name="method"/> is compiler generated.</returns>
     internal static bool IsCompilerGeneratedMethod(MethodInfo method)
     {
-        return Attribute.IsDefined(method, typeof(CompilerGeneratedAttribute)) || IsCompilerGeneratedType(method.DeclaringType);
+        return Attribute.IsDefined(method, typeof(CompilerGeneratedAttribute))
+            || IsCompilerGeneratedType(method.DeclaringType);
     }
 }

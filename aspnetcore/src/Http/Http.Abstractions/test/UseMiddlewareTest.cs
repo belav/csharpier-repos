@@ -24,8 +24,10 @@ public class UseMiddlewareTest
             Resources.FormatException_UseMiddlewareNoParameters(
                 UseMiddlewareExtensions.InvokeMethodName,
                 UseMiddlewareExtensions.InvokeAsyncMethodName,
-                nameof(HttpContext)),
-            exception.Message);
+                nameof(HttpContext)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -39,8 +41,10 @@ public class UseMiddlewareTest
             Resources.FormatException_UseMiddlewareNoParameters(
                 UseMiddlewareExtensions.InvokeMethodName,
                 UseMiddlewareExtensions.InvokeAsyncMethodName,
-                nameof(HttpContext)),
-            exception.Message);
+                nameof(HttpContext)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -54,8 +58,10 @@ public class UseMiddlewareTest
             Resources.FormatException_UseMiddlewareNonTaskReturnType(
                 UseMiddlewareExtensions.InvokeMethodName,
                 UseMiddlewareExtensions.InvokeAsyncMethodName,
-                nameof(Task)),
-            exception.Message);
+                nameof(Task)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -69,8 +75,10 @@ public class UseMiddlewareTest
             Resources.FormatException_UseMiddlewareNonTaskReturnType(
                 UseMiddlewareExtensions.InvokeMethodName,
                 UseMiddlewareExtensions.InvokeAsyncMethodName,
-                nameof(Task)),
-            exception.Message);
+                nameof(Task)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -83,8 +91,11 @@ public class UseMiddlewareTest
         Assert.Equal(
             Resources.FormatException_UseMiddlewareNoInvokeMethod(
                 UseMiddlewareExtensions.InvokeMethodName,
-                UseMiddlewareExtensions.InvokeAsyncMethodName, typeof(MiddlewareNoInvokeStub)),
-            exception.Message);
+                UseMiddlewareExtensions.InvokeAsyncMethodName,
+                typeof(MiddlewareNoInvokeStub)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -97,8 +108,10 @@ public class UseMiddlewareTest
         Assert.Equal(
             Resources.FormatException_UseMiddleMutlipleInvokes(
                 UseMiddlewareExtensions.InvokeMethodName,
-                UseMiddlewareExtensions.InvokeAsyncMethodName),
-            exception.Message);
+                UseMiddlewareExtensions.InvokeAsyncMethodName
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -111,8 +124,10 @@ public class UseMiddlewareTest
         Assert.Equal(
             Resources.FormatException_UseMiddleMutlipleInvokes(
                 UseMiddlewareExtensions.InvokeMethodName,
-                UseMiddlewareExtensions.InvokeAsyncMethodName),
-            exception.Message);
+                UseMiddlewareExtensions.InvokeAsyncMethodName
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -125,8 +140,10 @@ public class UseMiddlewareTest
         Assert.Equal(
             Resources.FormatException_UseMiddleMutlipleInvokes(
                 UseMiddlewareExtensions.InvokeMethodName,
-                UseMiddlewareExtensions.InvokeAsyncMethodName),
-            exception.Message);
+                UseMiddlewareExtensions.InvokeAsyncMethodName
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -135,12 +152,16 @@ public class UseMiddlewareTest
         var builder = new ApplicationBuilder(new DummyServiceProvider());
         builder.UseMiddleware(typeof(MiddlewareInjectInvokeNoService));
         var app = builder.Build();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => app(new DefaultHttpContext()));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => app(new DefaultHttpContext())
+        );
         Assert.Equal(
             Resources.FormatException_InvokeMiddlewareNoService(
                 typeof(object),
-                typeof(MiddlewareInjectInvokeNoService)),
-            exception.Message);
+                typeof(MiddlewareInjectInvokeNoService)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -166,8 +187,15 @@ public class UseMiddlewareTest
     {
         var mockServiceProvider = new DummyServiceProvider();
         var builder = new ApplicationBuilder(mockServiceProvider);
-        var exception = Assert.Throws<NotSupportedException>(() => builder.UseMiddleware(typeof(Middleware), "arg"));
-        Assert.Equal(Resources.FormatException_UseMiddlewareExplicitArgumentsNotSupported(typeof(IMiddleware)), exception.Message);
+        var exception = Assert.Throws<NotSupportedException>(
+            () => builder.UseMiddleware(typeof(Middleware), "arg")
+        );
+        Assert.Equal(
+            Resources.FormatException_UseMiddlewareExplicitArgumentsNotSupported(
+                typeof(IMiddleware)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -177,14 +205,19 @@ public class UseMiddlewareTest
         var builder = new ApplicationBuilder(mockServiceProvider);
         builder.UseMiddleware(typeof(Middleware));
         var app = builder.Build();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-        {
-            var context = new DefaultHttpContext();
-            var sp = new DummyServiceProvider();
-            context.RequestServices = sp;
-            await app(context);
-        });
-        Assert.Equal(Resources.FormatException_UseMiddlewareNoMiddlewareFactory(typeof(IMiddlewareFactory)), exception.Message);
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+            {
+                var context = new DefaultHttpContext();
+                var sp = new DummyServiceProvider();
+                context.RequestServices = sp;
+                await app(context);
+            }
+        );
+        Assert.Equal(
+            Resources.FormatException_UseMiddlewareNoMiddlewareFactory(typeof(IMiddlewareFactory)),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -194,20 +227,24 @@ public class UseMiddlewareTest
         var builder = new ApplicationBuilder(mockServiceProvider);
         builder.UseMiddleware(typeof(Middleware));
         var app = builder.Build();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-        {
-            var context = new DefaultHttpContext();
-            var sp = new DummyServiceProvider();
-            sp.AddService(typeof(IMiddlewareFactory), new BadMiddlewareFactory());
-            context.RequestServices = sp;
-            await app(context);
-        });
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+            {
+                var context = new DefaultHttpContext();
+                var sp = new DummyServiceProvider();
+                sp.AddService(typeof(IMiddlewareFactory), new BadMiddlewareFactory());
+                context.RequestServices = sp;
+                await app(context);
+            }
+        );
 
         Assert.Equal(
             Resources.FormatException_UseMiddlewareUnableToCreateMiddleware(
                 typeof(BadMiddlewareFactory),
-                typeof(Middleware)),
-            exception.Message);
+                typeof(Middleware)
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -291,7 +328,11 @@ public class UseMiddlewareTest
     {
         public MiddlewareInjectWithOutAndRefParams(RequestDelegate next) { }
 
-        public Task Invoke(HttpContext context, ref IServiceProvider? sp1, out IServiceProvider? sp2)
+        public Task Invoke(
+            HttpContext context,
+            ref IServiceProvider? sp1,
+            out IServiceProvider? sp2
+        )
         {
             sp1 = null;
             sp2 = null;

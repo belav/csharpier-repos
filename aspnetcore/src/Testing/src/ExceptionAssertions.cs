@@ -17,8 +17,7 @@ public static class ExceptionAssert
     /// <typeparam name="TException">The type of the exception expected to be thrown</typeparam>
     /// <param name="testCode">A delegate to the code to be tested</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static TException Throws<TException>(Action testCode)
-        where TException : Exception
+    public static TException Throws<TException>(Action testCode) where TException : Exception
     {
         return VerifyException<TException>(RecordException(testCode));
     }
@@ -47,8 +46,10 @@ public static class ExceptionAssert
     /// <param name="testCode">A delegate to the code to be tested</param>
     /// <param name="exceptionMessage">The exception message to verify</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static async Task<TException> ThrowsAsync<TException>(Func<Task> testCode, string exceptionMessage)
-        where TException : Exception
+    public static async Task<TException> ThrowsAsync<TException>(
+        Func<Task> testCode,
+        string exceptionMessage
+    ) where TException : Exception
     {
         // The 'testCode' Task might execute asynchronously in a different thread making it hard to enforce the thread culture.
         // The correct way to verify exception messages in such a scenario would be to run the task synchronously inside of a
@@ -69,7 +70,13 @@ public static class ExceptionAssert
     public static TException Throws<TException>(Func<object> testCode, string exceptionMessage)
         where TException : Exception
     {
-        return Throws<TException>(() => { testCode(); }, exceptionMessage);
+        return Throws<TException>(
+            () =>
+            {
+                testCode();
+            },
+            exceptionMessage
+        );
     }
 
     /// <summary>
@@ -79,7 +86,11 @@ public static class ExceptionAssert
     /// <param name="paramName">The name of the parameter that should throw the exception</param>
     /// <param name="exceptionMessage">The exception message to verify</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static ArgumentException ThrowsArgument(Action testCode, string paramName, string exceptionMessage)
+    public static ArgumentException ThrowsArgument(
+        Action testCode,
+        string paramName,
+        string exceptionMessage
+    )
     {
         return ThrowsArgumentInternal<ArgumentException>(testCode, paramName, exceptionMessage);
     }
@@ -87,8 +98,8 @@ public static class ExceptionAssert
     private static TException ThrowsArgumentInternal<TException>(
         Action testCode,
         string paramName,
-        string exceptionMessage)
-        where TException : ArgumentException
+        string exceptionMessage
+    ) where TException : ArgumentException
     {
         var ex = Throws<TException>(testCode);
         if (paramName != null)
@@ -106,16 +117,24 @@ public static class ExceptionAssert
     /// <param name="paramName">The name of the parameter that should throw the exception</param>
     /// <param name="exceptionMessage">The exception message to verify</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static Task<ArgumentException> ThrowsArgumentAsync(Func<Task> testCode, string paramName, string exceptionMessage)
+    public static Task<ArgumentException> ThrowsArgumentAsync(
+        Func<Task> testCode,
+        string paramName,
+        string exceptionMessage
+    )
     {
-        return ThrowsArgumentAsyncInternal<ArgumentException>(testCode, paramName, exceptionMessage);
+        return ThrowsArgumentAsyncInternal<ArgumentException>(
+            testCode,
+            paramName,
+            exceptionMessage
+        );
     }
 
     private static async Task<TException> ThrowsArgumentAsyncInternal<TException>(
         Func<Task> testCode,
         string paramName,
-        string exceptionMessage)
-        where TException : ArgumentException
+        string exceptionMessage
+    ) where TException : ArgumentException
     {
         var ex = await Assert.ThrowsAsync<TException>(testCode);
         if (paramName != null)
@@ -151,7 +170,11 @@ public static class ExceptionAssert
     /// <returns>The exception that was thrown, when successful</returns>
     public static ArgumentException ThrowsArgumentNullOrEmpty(Action testCode, string paramName)
     {
-        return ThrowsArgumentInternal<ArgumentException>(testCode, paramName, "Value cannot be null or empty.");
+        return ThrowsArgumentInternal<ArgumentException>(
+            testCode,
+            paramName,
+            "Value cannot be null or empty."
+        );
     }
 
     /// <summary>
@@ -161,9 +184,16 @@ public static class ExceptionAssert
     /// <param name="testCode">A delegate to the code to be tested</param>
     /// <param name="paramName">The name of the parameter that should throw the exception</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static Task<ArgumentException> ThrowsArgumentNullOrEmptyAsync(Func<Task> testCode, string paramName)
+    public static Task<ArgumentException> ThrowsArgumentNullOrEmptyAsync(
+        Func<Task> testCode,
+        string paramName
+    )
     {
-        return ThrowsArgumentAsyncInternal<ArgumentException>(testCode, paramName, "Value cannot be null or empty.");
+        return ThrowsArgumentAsyncInternal<ArgumentException>(
+            testCode,
+            paramName,
+            "Value cannot be null or empty."
+        );
     }
 
     /// <summary>
@@ -173,9 +203,16 @@ public static class ExceptionAssert
     /// <param name="testCode">A delegate to the code to be tested</param>
     /// <param name="paramName">The name of the parameter that should throw the exception</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static ArgumentException ThrowsArgumentNullOrEmptyString(Action testCode, string paramName)
+    public static ArgumentException ThrowsArgumentNullOrEmptyString(
+        Action testCode,
+        string paramName
+    )
     {
-        return ThrowsArgumentInternal<ArgumentException>(testCode, paramName, "Value cannot be null or an empty string.");
+        return ThrowsArgumentInternal<ArgumentException>(
+            testCode,
+            paramName,
+            "Value cannot be null or an empty string."
+        );
     }
 
     /// <summary>
@@ -185,9 +222,16 @@ public static class ExceptionAssert
     /// <param name="testCode">A delegate to the code to be tested</param>
     /// <param name="paramName">The name of the parameter that should throw the exception</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static Task<ArgumentException> ThrowsArgumentNullOrEmptyStringAsync(Func<Task> testCode, string paramName)
+    public static Task<ArgumentException> ThrowsArgumentNullOrEmptyStringAsync(
+        Func<Task> testCode,
+        string paramName
+    )
     {
-        return ThrowsArgumentAsyncInternal<ArgumentException>(testCode, paramName, "Value cannot be null or an empty string.");
+        return ThrowsArgumentAsyncInternal<ArgumentException>(
+            testCode,
+            paramName,
+            "Value cannot be null or an empty string."
+        );
     }
 
     /// <summary>
@@ -198,9 +242,18 @@ public static class ExceptionAssert
     /// <param name="exceptionMessage">The exception message to verify</param>
     /// <param name="actualValue">The actual value provided</param>
     /// <returns>The exception that was thrown, when successful</returns>
-    public static ArgumentOutOfRangeException ThrowsArgumentOutOfRange(Action testCode, string paramName, string exceptionMessage, object actualValue = null)
+    public static ArgumentOutOfRangeException ThrowsArgumentOutOfRange(
+        Action testCode,
+        string paramName,
+        string exceptionMessage,
+        object actualValue = null
+    )
     {
-        var ex = ThrowsArgumentInternal<ArgumentOutOfRangeException>(testCode, paramName, exceptionMessage);
+        var ex = ThrowsArgumentInternal<ArgumentOutOfRangeException>(
+            testCode,
+            paramName,
+            exceptionMessage
+        );
 
         if (paramName != null)
         {
@@ -253,7 +306,11 @@ public static class ExceptionAssert
         return Assert.IsAssignableFrom<TException>(exception);
     }
 
-    private static void VerifyExceptionMessage(Exception exception, string expectedMessage, bool partialMatch = false)
+    private static void VerifyExceptionMessage(
+        Exception exception,
+        string expectedMessage,
+        bool partialMatch = false
+    )
     {
         if (expectedMessage != null)
         {

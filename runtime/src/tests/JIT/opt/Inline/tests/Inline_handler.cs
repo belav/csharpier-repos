@@ -48,5 +48,3 @@ internal class MainApp
         return retval;
     }
 }
-
-

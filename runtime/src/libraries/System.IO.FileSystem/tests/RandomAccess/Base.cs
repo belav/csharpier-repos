@@ -28,7 +28,10 @@ namespace System.IO.Tests
         [Fact]
         public void ThrowsArgumentNullExceptionForNullHandle()
         {
-            AssertExtensions.Throws<ArgumentNullException>("handle", () => MethodUnderTest(null, Array.Empty<byte>(), 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "handle",
+                () => MethodUnderTest(null, Array.Empty<byte>(), 0)
+            );
         }
 
         [Fact]
@@ -36,16 +39,25 @@ namespace System.IO.Tests
         {
             SafeFileHandle handle = new SafeFileHandle(new IntPtr(-1), ownsHandle: false);
 
-            AssertExtensions.Throws<ArgumentException>("handle", () => MethodUnderTest(handle, Array.Empty<byte>(), 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "handle",
+                () => MethodUnderTest(handle, Array.Empty<byte>(), 0)
+            );
         }
 
         [Fact]
         public void ThrowsObjectDisposedExceptionForDisposedHandle()
         {
-            SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write);
+            SafeFileHandle handle = File.OpenHandle(
+                GetTestFilePath(),
+                FileMode.Create,
+                FileAccess.Write
+            );
             handle.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => MethodUnderTest(handle, Array.Empty<byte>(), 0));
+            Assert.Throws<ObjectDisposedException>(
+                () => MethodUnderTest(handle, Array.Empty<byte>(), 0)
+            );
         }
 
         [Fact]
@@ -53,9 +65,16 @@ namespace System.IO.Tests
         public void ThrowsNotSupportedExceptionForUnseekableFile()
         {
             using (var server = new AnonymousPipeServerStream(PipeDirection.Out))
-            using (SafeFileHandle handle = new SafeFileHandle(server.SafePipeHandle.DangerousGetHandle(), ownsHandle: false))
+            using (
+                SafeFileHandle handle = new SafeFileHandle(
+                    server.SafePipeHandle.DangerousGetHandle(),
+                    ownsHandle: false
+                )
+            )
             {
-                Assert.Throws<NotSupportedException>(() => MethodUnderTest(handle, Array.Empty<byte>(), 0));
+                Assert.Throws<NotSupportedException>(
+                    () => MethodUnderTest(handle, Array.Empty<byte>(), 0)
+                );
             }
         }
 
@@ -65,9 +84,19 @@ namespace System.IO.Tests
         {
             if (UsesOffsets)
             {
-                using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write, options: options))
+                using (
+                    SafeFileHandle handle = File.OpenHandle(
+                        GetTestFilePath(),
+                        FileMode.CreateNew,
+                        FileAccess.Write,
+                        options: options
+                    )
+                )
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>("fileOffset", () => MethodUnderTest(handle, Array.Empty<byte>(), -1));
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        "fileOffset",
+                        () => MethodUnderTest(handle, Array.Empty<byte>(), -1)
+                    );
                 }
             }
         }

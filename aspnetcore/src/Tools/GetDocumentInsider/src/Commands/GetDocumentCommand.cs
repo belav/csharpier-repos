@@ -18,9 +18,7 @@ internal class GetDocumentCommand : ProjectCommandBase
     private CommandOption _fileListPath;
     private CommandOption _output;
 
-    public GetDocumentCommand(IConsole console) : base(console)
-    {
-    }
+    public GetDocumentCommand(IConsole console) : base(console) { }
 
     public override void Configure(CommandLineApplication command)
     {
@@ -53,7 +51,10 @@ internal class GetDocumentCommand : ProjectCommandBase
         var packagedAssemblies = Directory
             .EnumerateFiles(toolsDirectory, "*.dll")
             .Except(new[] { Path.GetFullPath(thisAssembly.Location) })
-            .ToDictionary(path => Path.GetFileNameWithoutExtension(path), path => new AssemblyInfo(path));
+            .ToDictionary(
+                path => Path.GetFileNameWithoutExtension(path),
+                path => new AssemblyInfo(path)
+            );
 
         // Explicitly load all assemblies we need first to preserve target project as much as possible. This
         // executable is always run in the target project's context (either through location or .deps.json file).
@@ -82,7 +83,8 @@ internal class GetDocumentCommand : ProjectCommandBase
             if (!File.Exists(assemblyPath))
             {
                 throw new InvalidOperationException(
-                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'.");
+                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'."
+                );
             }
 
             return loadContext.LoadFromAssemblyPath(assemblyPath);
@@ -109,7 +111,8 @@ internal class GetDocumentCommand : ProjectCommandBase
             if (!File.Exists(assemblyPath))
             {
                 throw new InvalidOperationException(
-                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'.");
+                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'."
+                );
             }
 
             return Assembly.LoadFile(assemblyPath);

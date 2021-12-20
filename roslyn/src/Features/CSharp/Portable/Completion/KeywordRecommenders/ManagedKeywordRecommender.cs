@@ -9,14 +9,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ManagedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public ManagedKeywordRecommender()
-            : base(SyntaxKind.ManagedKeyword)
-        {
-        }
+        public ManagedKeywordRecommender() : base(SyntaxKind.ManagedKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return context.SyntaxTree.IsFunctionPointerCallingConventionContext(context.TargetToken);
+            return context.SyntaxTree.IsFunctionPointerCallingConventionContext(
+                context.TargetToken
+            );
         }
     }
 }

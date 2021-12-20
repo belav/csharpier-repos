@@ -13,7 +13,8 @@ public class Program
     const int Pass = 100;
     const int Fail = -1;
 
-    struct RetSt2 {
+    struct RetSt2
+    {
         public Object _key;
         public Object _value;
 
@@ -24,7 +25,8 @@ public class Program
         }
     }
 
-    class Test {
+    class Test
+    {
         private Object lockObject;
 
         internal Test(Object reader)
@@ -45,15 +47,19 @@ public class Program
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public RetSt2 foo(int d) {
+        public RetSt2 foo(int d)
+        {
             Object value = null;
             lock (lockObject)
             {
                 lock (lockObject)
                 {
-                    if (d == -1) {
+                    if (d == -1)
+                    {
                         value = FirstValue();
-                    } else {
+                    }
+                    else
+                    {
                         value = SecondValue();
                     }
                 }
@@ -61,8 +67,6 @@ public class Program
             return new RetSt2(value);
         }
     }
-
-
 
     public static int Main()
     {

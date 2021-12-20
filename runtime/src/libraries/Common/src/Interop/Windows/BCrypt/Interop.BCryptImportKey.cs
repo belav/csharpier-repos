@@ -11,7 +11,10 @@ internal static partial class Interop
 {
     internal static partial class BCrypt
     {
-        internal static unsafe SafeKeyHandle BCryptImportKey(SafeAlgorithmHandle hAlg, ReadOnlySpan<byte> key)
+        internal static unsafe SafeKeyHandle BCryptImportKey(
+            SafeAlgorithmHandle hAlg,
+            ReadOnlySpan<byte> key
+        )
         {
             const string BCRYPT_KEY_DATA_BLOB = "KeyDataBlob";
             int keySize = key.Length;
@@ -27,7 +30,17 @@ internal static partial class Interop
 
             key.CopyTo(blob.AsSpan(sizeof(BCRYPT_KEY_DATA_BLOB_HEADER)));
             SafeKeyHandle hKey;
-            NTSTATUS ntStatus = BCryptImportKey(hAlg, IntPtr.Zero, BCRYPT_KEY_DATA_BLOB, out hKey, IntPtr.Zero, 0, blob, blobSize, 0);
+            NTSTATUS ntStatus = BCryptImportKey(
+                hAlg,
+                IntPtr.Zero,
+                BCRYPT_KEY_DATA_BLOB,
+                out hKey,
+                IntPtr.Zero,
+                0,
+                blob,
+                blobSize,
+                0
+            );
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
                 throw CreateCryptographicException(ntStatus);
@@ -48,6 +61,16 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.BCrypt, CharSet = CharSet.Unicode)]
-        private static partial NTSTATUS BCryptImportKey(SafeAlgorithmHandle hAlgorithm, IntPtr hImportKey, string pszBlobType, out SafeKeyHandle hKey, IntPtr pbKeyObject, int cbKeyObject, byte[] pbInput, int cbInput, int dwFlags);
+        private static partial NTSTATUS BCryptImportKey(
+            SafeAlgorithmHandle hAlgorithm,
+            IntPtr hImportKey,
+            string pszBlobType,
+            out SafeKeyHandle hKey,
+            IntPtr pbKeyObject,
+            int cbKeyObject,
+            byte[] pbInput,
+            int cbInput,
+            int dwFlags
+        );
     }
 }

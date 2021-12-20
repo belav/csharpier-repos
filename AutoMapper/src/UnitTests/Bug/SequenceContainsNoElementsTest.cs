@@ -10,10 +10,13 @@ namespace AutoMapper.UnitTests.Bug
 {
     public class SequenceContainsNoElementsTest : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Person, PersonModel>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Person, PersonModel>();
+                }
+            );
 
         [Fact]
         public void should_not_throw_InvalidOperationException()

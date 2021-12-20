@@ -12,7 +12,10 @@ namespace System.Runtime.Serialization
     internal static class DataContractSurrogateCaller
     {
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static Type GetDataContractType(ISerializationSurrogateProvider surrogateProvider, Type type)
+        internal static Type GetDataContractType(
+            ISerializationSurrogateProvider surrogateProvider,
+            Type type
+        )
         {
             if (DataContract.GetBuiltInDataContract(type) != null)
                 return type;
@@ -21,7 +24,12 @@ namespace System.Runtime.Serialization
 
         [return: NotNullIfNotNull("obj")]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static object? GetObjectToSerialize(ISerializationSurrogateProvider surrogateProvider, object? obj, Type objType, Type membertype)
+        internal static object? GetObjectToSerialize(
+            ISerializationSurrogateProvider surrogateProvider,
+            object? obj,
+            Type objType,
+            Type membertype
+        )
         {
             if (obj == null)
                 return null;
@@ -32,7 +40,12 @@ namespace System.Runtime.Serialization
 
         [return: NotNullIfNotNull("obj")]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static object? GetDeserializedObject(ISerializationSurrogateProvider surrogateProvider, object? obj, Type objType, Type memberType)
+        internal static object? GetDeserializedObject(
+            ISerializationSurrogateProvider surrogateProvider,
+            object? obj,
+            Type objType,
+            Type memberType
+        )
         {
             if (obj == null)
                 return null;

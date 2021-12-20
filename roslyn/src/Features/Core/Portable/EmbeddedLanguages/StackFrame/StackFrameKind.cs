@@ -7,7 +7,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     internal enum StackFrameKind
     {
         None = 0,
-
         // Nodes
         CompilationUnit,
         MethodDeclaration,
@@ -20,8 +19,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         ParameterList,
         ArrayExpression,
         FileInformation,
-
-        // Tokens 
+        // Tokens
         EndOfFrame,
         AmpersandToken,
         OpenBracketToken,
@@ -43,7 +41,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         IdentifierToken,
         PathToken,
         NumberToken,
-
         // Trivia
         WhitespaceTrivia,
         AtTrivia, // "at " portion of the stack frame

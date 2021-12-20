@@ -15,7 +15,8 @@ public class JObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var obj = (JObject)target;
 
@@ -30,7 +31,8 @@ public class JObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var obj = (JObject)target;
 
@@ -50,7 +52,8 @@ public class JObjectAdapter : IAdapter
         object target,
         string segment,
         IContractResolver contractResolver,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var obj = (JObject)target;
 
@@ -69,7 +72,8 @@ public class JObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var obj = (JObject)target;
 
@@ -90,7 +94,8 @@ public class JObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var obj = (JObject)target;
 
@@ -106,7 +111,12 @@ public class JObjectAdapter : IAdapter
             return false;
         }
 
-        if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(value)))
+        if (
+            !JToken.DeepEquals(
+                JsonConvert.SerializeObject(currentValue),
+                JsonConvert.SerializeObject(value)
+            )
+        )
         {
             errorMessage = Resources.FormatValueNotEqualToTestValue(currentValue, value, segment);
             return false;
@@ -121,7 +131,8 @@ public class JObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object nextTarget,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var obj = (JObject)target;
 

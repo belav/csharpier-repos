@@ -28,13 +28,18 @@ namespace System.Web.WebPages
         private int _ticksBeforeReset;
 
         // Overload used mainly for testing
-        public FileExistenceCache(VirtualPathProvider virtualPathProvider, int milliSecondsBeforeReset = 1000)
-            : this(() => virtualPathProvider, milliSecondsBeforeReset)
+        public FileExistenceCache(
+            VirtualPathProvider virtualPathProvider,
+            int milliSecondsBeforeReset = 1000
+        ) : this(() => virtualPathProvider, milliSecondsBeforeReset)
         {
             Contract.Assert(virtualPathProvider != null);
         }
 
-        public FileExistenceCache(Func<VirtualPathProvider> virtualPathProviderFunc, int milliSecondsBeforeReset = 1000)
+        public FileExistenceCache(
+            Func<VirtualPathProvider> virtualPathProviderFunc,
+            int milliSecondsBeforeReset = 1000
+        )
         {
             Contract.Assert(virtualPathProviderFunc != null);
 
@@ -63,7 +68,11 @@ namespace System.Web.WebPages
 
         public bool TimeExceeded
         {
-            get { return (DateTime.UtcNow.Ticks - Interlocked.Read(ref _creationTick)) > _ticksBeforeReset; }
+            get
+            {
+                return (DateTime.UtcNow.Ticks - Interlocked.Read(ref _creationTick))
+                    > _ticksBeforeReset;
+            }
         }
 
         public void Reset()

@@ -1,4 +1,3 @@
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -35,13 +34,17 @@ public class ClientCertificateTests : IISFunctionalTestBase
 {
     private readonly ClientCertificateFixture _certFixture;
 
-    public ClientCertificateTests(PublishedSitesFixture fixture, ClientCertificateFixture certFixture) : base(fixture)
+    public ClientCertificateTests(
+        PublishedSitesFixture fixture,
+        ClientCertificateFixture certFixture
+    ) : base(fixture)
     {
         _certFixture = certFixture;
     }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels();

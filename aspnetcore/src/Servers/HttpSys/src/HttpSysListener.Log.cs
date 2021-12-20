@@ -14,7 +14,11 @@ internal partial class HttpSysListener
             LoggerMessage.Define(LogLevel.Error, LoggerEventIds.ListenerDisposeError, "Dispose");
 
         private static readonly Action<ILogger, Exception?> _listenerDisposing =
-            LoggerMessage.Define(LogLevel.Trace, LoggerEventIds.ListenerDisposing, "Disposing the listener.");
+            LoggerMessage.Define(
+                LogLevel.Trace,
+                LoggerEventIds.ListenerDisposing,
+                "Disposing the listener."
+            );
 
         private static readonly Action<ILogger, Exception?> _httpSysListenerCtorError =
             LoggerMessage.Define(LogLevel.Error, LoggerEventIds.HttpSysListenerCtorError, ".Ctor");
@@ -23,16 +27,28 @@ internal partial class HttpSysListener
             LoggerMessage.Define(LogLevel.Error, LoggerEventIds.ListenerStartError, "Start");
 
         private static readonly Action<ILogger, Exception?> _listenerStarting =
-            LoggerMessage.Define(LogLevel.Trace, LoggerEventIds.ListenerStarting, "Starting the listener.");
+            LoggerMessage.Define(
+                LogLevel.Trace,
+                LoggerEventIds.ListenerStarting,
+                "Starting the listener."
+            );
 
         private static readonly Action<ILogger, Exception?> _listenerStopError =
             LoggerMessage.Define(LogLevel.Error, LoggerEventIds.ListenerStopError, "Stop");
 
         private static readonly Action<ILogger, Exception?> _listenerStopping =
-            LoggerMessage.Define(LogLevel.Trace, LoggerEventIds.ListenerStopping, "Stopping the listener.");
+            LoggerMessage.Define(
+                LogLevel.Trace,
+                LoggerEventIds.ListenerStopping,
+                "Stopping the listener."
+            );
 
         private static readonly Action<ILogger, ulong, Exception?> _requestValidationFailed =
-            LoggerMessage.Define<ulong>(LogLevel.Error, LoggerEventIds.RequestValidationFailed, "Error validating request {RequestId}");
+            LoggerMessage.Define<ulong>(
+                LogLevel.Error,
+                LoggerEventIds.RequestValidationFailed,
+                "Error validating request {RequestId}"
+            );
 
         public static void ListenerDisposeError(ILogger logger, Exception exception)
         {
@@ -69,7 +85,11 @@ internal partial class HttpSysListener
             _listenerStopping(logger, null);
         }
 
-        public static void RequestValidationFailed(ILogger logger, Exception exception, ulong requestId)
+        public static void RequestValidationFailed(
+            ILogger logger,
+            Exception exception,
+            ulong requestId
+        )
         {
             _requestValidationFailed(logger, requestId, exception);
         }

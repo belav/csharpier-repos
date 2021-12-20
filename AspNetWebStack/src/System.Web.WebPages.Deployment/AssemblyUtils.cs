@@ -17,14 +17,21 @@ namespace System.Web.WebPages.Deployment
         // Copied from AssemblyRefs.cs
         private const string SharedLibPublicKey = "31bf3856ad364e35";
 
-        internal static readonly AssemblyName ThisAssemblyName = new AssemblyName(typeof(AssemblyUtils).Assembly.FullName);
+        internal static readonly AssemblyName ThisAssemblyName = new AssemblyName(
+            typeof(AssemblyUtils).Assembly.FullName
+        );
         internal static readonly Version WebPagesV1Version = new Version(1, 0, 0, 0);
-        private static readonly string _binFileName = Path.GetFileName(ThisAssemblyName.Name) + ".dll";
+        private static readonly string _binFileName =
+            Path.GetFileName(ThisAssemblyName.Name) + ".dll";
 
         // Special case MWI because it does not share the same assembly version as the rest of WebPages.
-        private static readonly Version _mwiVersion = new AssemblyName(typeof(InfrastructureHelper).Assembly.FullName).Version;
+        private static readonly Version _mwiVersion =
+            new AssemblyName(typeof(InfrastructureHelper).Assembly.FullName).Version;
 
-        private static readonly AssemblyName _mwiAssemblyName = GetFullName("Microsoft.Web.Infrastructure", _mwiVersion);
+        private static readonly AssemblyName _mwiAssemblyName = GetFullName(
+            "Microsoft.Web.Infrastructure",
+            _mwiVersion
+        );
 
         private static readonly AssemblyName[] _version1AssemblyList = new[]
         {
@@ -65,16 +72,23 @@ namespace System.Web.WebPages.Deployment
             return IsVersionAvailable(GetLoadedAssemblies(), version);
         }
 
-        internal static bool IsVersionAvailable(IEnumerable<AssemblyName> loadedAssemblies, Version version)
+        internal static bool IsVersionAvailable(
+            IEnumerable<AssemblyName> loadedAssemblies,
+            Version version
+        )
         {
             return GetWebPagesAssemblies(loadedAssemblies).Any(c => c.Version == version);
         }
 
-        private static IEnumerable<AssemblyName> GetWebPagesAssemblies(IEnumerable<AssemblyName> loadedAssemblies)
+        private static IEnumerable<AssemblyName> GetWebPagesAssemblies(
+            IEnumerable<AssemblyName> loadedAssemblies
+        )
         {
-            return (from otherName in loadedAssemblies
-                    where NamesMatch(ThisAssemblyName, otherName, matchVersion: false)
-                    select otherName);
+            return (
+                from otherName in loadedAssemblies
+                where NamesMatch(ThisAssemblyName, otherName, matchVersion: false)
+                select otherName
+            );
         }
 
         /// <summary>
@@ -82,7 +96,11 @@ namespace System.Web.WebPages.Deployment
         /// public key token of the current assembly.
         /// </summary>
         /// <returns>Version from bin if present, null otherwise.</returns>
-        internal static Version GetVersionFromBin(string binDirectory, IFileSystem fileSystem, Func<string, AssemblyName> getAssemblyNameThunk = null)
+        internal static Version GetVersionFromBin(
+            string binDirectory,
+            IFileSystem fileSystem,
+            Func<string, AssemblyName> getAssemblyNameThunk = null
+        )
         {
             // If a version of the assembly is present both in the bin and the GAC, the GAC would win.
             // To work around this, we'll look for a physical file on disk with the same name as the current assembly and load it to determine the version.
@@ -101,7 +119,7 @@ namespace System.Web.WebPages.Deployment
                 }
                 catch (BadImageFormatException)
                 {
-                    // Do nothing. 
+                    // Do nothing.
                 }
                 catch (SecurityException)
                 {
@@ -117,17 +135,15 @@ namespace System.Web.WebPages.Deployment
 
         internal static bool NamesMatch(AssemblyName left, AssemblyName right, bool matchVersion)
         {
-            return Equals(left.Name, right.Name) &&
-                   Equals(left.CultureInfo, right.CultureInfo) &&
-                   Enumerable.SequenceEqual(left.GetPublicKeyToken(), right.GetPublicKeyToken()) &&
-                   (!matchVersion || Equals(left.Version, right.Version));
+            return Equals(left.Name, right.Name)
+                && Equals(left.CultureInfo, right.CultureInfo)
+                && Enumerable.SequenceEqual(left.GetPublicKeyToken(), right.GetPublicKeyToken())
+                && (!matchVersion || Equals(left.Version, right.Version));
         }
 
         internal static IEnumerable<AssemblyName> GetLoadedAssemblies()
         {
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .Select(GetAssemblyName)
-                .ToList();
+            return AppDomain.CurrentDomain.GetAssemblies().Select(GetAssemblyName).ToList();
         }
 
         internal static IEnumerable<AssemblyName> GetAssembliesForVersion(Version version)
@@ -146,9 +162,15 @@ namespace System.Web.WebPages.Deployment
 
         private static AssemblyName GetFullName(string name, Version version, string publicKeyToken)
         {
-            return new AssemblyName(String.Format(CultureInfo.InvariantCulture,
-                                                  "{0}, Version={1}, Culture=neutral, PublicKeyToken={2}",
-                                                  name, version, publicKeyToken));
+            return new AssemblyName(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}, Version={1}, Culture=neutral, PublicKeyToken={2}",
+                    name,
+                    version,
+                    publicKeyToken
+                )
+            );
         }
 
         internal static AssemblyName GetFullName(string name, Version version)
@@ -156,29 +178,44 @@ namespace System.Web.WebPages.Deployment
             return GetFullName(name, version, SharedLibPublicKey);
         }
 
-        public static IDictionary<string, Version> GetAssembliesMatchingOtherVersions(IDictionary<string, IEnumerable<string>> references)
+        public static IDictionary<string, Version> GetAssembliesMatchingOtherVersions(
+            IDictionary<string, IEnumerable<string>> references
+        )
         {
-            var webPagesAssemblies = AssemblyUtils.GetAssembliesForVersion(AssemblyUtils.ThisAssemblyName.Version);
+            var webPagesAssemblies = AssemblyUtils.GetAssembliesForVersion(
+                AssemblyUtils.ThisAssemblyName.Version
+            );
             if (references == null || webPagesAssemblies == null || !webPagesAssemblies.Any())
             {
                 return new Dictionary<string, Version>(0);
             }
 
-            var matchingVersions = from item in references
-                                   let matchedVersion = GetMatchingVersion(webPagesAssemblies, item.Value)
-                                   where matchedVersion != null
-                                   select new KeyValuePair<string, Version>(item.Key, matchedVersion);
+            var matchingVersions =
+                from item in references
+                let matchedVersion = GetMatchingVersion(webPagesAssemblies, item.Value)
+                where matchedVersion != null
+                select new KeyValuePair<string, Version>(item.Key, matchedVersion);
             return matchingVersions.ToDictionary(k => k.Key, k => k.Value);
         }
 
-        private static Version GetMatchingVersion(IEnumerable<AssemblyName> webPagesAssemblies, IEnumerable<string> references)
+        private static Version GetMatchingVersion(
+            IEnumerable<AssemblyName> webPagesAssemblies,
+            IEnumerable<string> references
+        )
         {
             // Return assemblies that match in name but not in version.
-            var matchingVersions = from webPagesAssembly in webPagesAssemblies
-                                   from referenceName in references
-                                   let referencedAssembly = new AssemblyName(referenceName)
-                                   where AssemblyUtils.NamesMatch(webPagesAssembly, referencedAssembly, matchVersion: false) && webPagesAssembly.Version != referencedAssembly.Version
-                                   select referencedAssembly.Version;
+            var matchingVersions =
+                from webPagesAssembly in webPagesAssemblies
+                from referenceName in references
+                let referencedAssembly = new AssemblyName(referenceName)
+                where
+                    AssemblyUtils.NamesMatch(
+                        webPagesAssembly,
+                        referencedAssembly,
+                        matchVersion: false
+                    )
+                    && webPagesAssembly.Version != referencedAssembly.Version
+                select referencedAssembly.Version;
             return matchingVersions.FirstOrDefault();
         }
     }

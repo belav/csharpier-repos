@@ -27,7 +27,12 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             {
                 return false;
             }
-            return parent.SessionId == 0 && string.Equals("services", parent.ProcessName, StringComparison.OrdinalIgnoreCase);
+            return parent.SessionId == 0
+                && string.Equals(
+                    "services",
+                    parent.ProcessName,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
     }
 }

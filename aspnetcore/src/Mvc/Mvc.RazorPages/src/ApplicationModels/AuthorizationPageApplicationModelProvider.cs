@@ -16,7 +16,8 @@ internal class AuthorizationPageApplicationModelProvider : IPageApplicationModel
 
     public AuthorizationPageApplicationModelProvider(
         IAuthorizationPolicyProvider policyProvider,
-        IOptions<MvcOptions> mvcOptions)
+        IOptions<MvcOptions> mvcOptions
+    )
     {
         _policyProvider = policyProvider;
         _mvcOptions = mvcOptions.Value;
@@ -43,7 +44,9 @@ internal class AuthorizationPageApplicationModelProvider : IPageApplicationModel
         var authorizeData = pageModel.HandlerTypeAttributes.OfType<IAuthorizeData>().ToArray();
         if (authorizeData.Length > 0)
         {
-            pageModel.Filters.Add(AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData));
+            pageModel.Filters.Add(
+                AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData)
+            );
         }
         foreach (var attribute in pageModel.HandlerTypeAttributes.OfType<IAllowAnonymous>())
         {
@@ -51,7 +54,5 @@ internal class AuthorizationPageApplicationModelProvider : IPageApplicationModel
         }
     }
 
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
 }

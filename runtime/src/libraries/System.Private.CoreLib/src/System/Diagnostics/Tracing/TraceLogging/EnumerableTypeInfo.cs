@@ -18,18 +18,21 @@ namespace System.Diagnostics.Tracing
     {
         private readonly TraceLoggingTypeInfo elementInfo;
 
-        public EnumerableTypeInfo(Type type, TraceLoggingTypeInfo elementInfo)
-            : base(type)
+        public EnumerableTypeInfo(Type type, TraceLoggingTypeInfo elementInfo) : base(type)
         {
             this.elementInfo = elementInfo;
         }
 
-        internal TraceLoggingTypeInfo ElementInfo { get { return elementInfo; } }
+        internal TraceLoggingTypeInfo ElementInfo
+        {
+            get { return elementInfo; }
+        }
 
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string? name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);

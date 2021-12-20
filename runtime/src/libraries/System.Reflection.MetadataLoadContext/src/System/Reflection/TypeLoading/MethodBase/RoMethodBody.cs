@@ -7,9 +7,7 @@ namespace System.Reflection.TypeLoading
 {
     internal abstract partial class RoMethodBody : MethodBody
     {
-        protected RoMethodBody()
-        {
-        }
+        protected RoMethodBody() { }
 
         public abstract override bool InitLocals { get; }
         public abstract override int MaxStackSize { get; }

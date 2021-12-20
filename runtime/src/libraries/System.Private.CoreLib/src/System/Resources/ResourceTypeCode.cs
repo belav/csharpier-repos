@@ -32,14 +32,11 @@ namespace System.Resources
         Decimal = 0xe,
         DateTime = 0xf,
         TimeSpan = 0x10,
-
         // A meta-value - change this if you add new primitives
         LastPrimitive = TimeSpan,
-
         // Types with a special representation, like byte[] and Stream
         ByteArray = 0x20,
         Stream = 0x21,
-
         // User types - serialized using the binary formatter.
         StartOfUserTypes = 0x40
     }

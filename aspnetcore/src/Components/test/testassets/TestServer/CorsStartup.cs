@@ -25,19 +25,32 @@ public class CorsStartup
     {
         services.AddSignalR();
         services.AddMvc();
-        services.AddCors(options =>
-        {
+        services.AddCors(
+            options =>
+            {
                 // It's not enough just to return "Access-Control-Allow-Origin: *", because
                 // browsers don't allow wildcards in conjunction with credentials. So we must
                 // specify explicitly which origin we want to allow.
 
-                options.AddPolicy("AllowAll", policy => policy
-                .SetIsOriginAllowed(host => host.StartsWith("http://localhost:", StringComparison.Ordinal) || host.StartsWith("http://127.0.0.1:", StringComparison.Ordinal))
-                .AllowAnyHeader()
-                .WithExposedHeaders("MyCustomHeader")
-                .AllowAnyMethod()
-                .AllowCredentials());
-        });
+                options.AddPolicy(
+                    "AllowAll",
+                    policy =>
+                        policy
+                            .SetIsOriginAllowed(
+                                host =>
+                                    host.StartsWith("http://localhost:", StringComparison.Ordinal)
+                                    || host.StartsWith(
+                                        "http://127.0.0.1:",
+                                        StringComparison.Ordinal
+                                    )
+                            )
+                            .AllowAnyHeader()
+                            .WithExposedHeaders("MyCustomHeader")
+                            .AllowAnyMethod()
+                            .AllowCredentials()
+                );
+            }
+        );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,21 +66,26 @@ public class CorsStartup
         }
 
         // Mount the server-side Blazor app on /subdir
-        app.Map("/subdir", app =>
-        {
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseCors("AllowAll");
-
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/subdir",
+            app =>
             {
-                endpoints.MapHub<ChatHub>("/chathub");
-                endpoints.MapControllers();
-                endpoints.MapFallbackToFile("index.html");
-            });
-        });
+                app.UseBlazorFrameworkFiles();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseCors("AllowAll");
+
+                app.UseEndpoints(
+                    endpoints =>
+                    {
+                        endpoints.MapHub<ChatHub>("/chathub");
+                        endpoints.MapControllers();
+                        endpoints.MapFallbackToFile("index.html");
+                    }
+                );
+            }
+        );
     }
 }

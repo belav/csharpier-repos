@@ -20,7 +20,6 @@ internal static partial class Interop
             /// [STGM_DIRECT] [STGM_READ] [STGM_FAILIFTHERE] [STGM_SHARE_DENY_WRITE]
             /// </summary>
             Default = 0x00000000,
-
             STGM_TRANSACTED = 0x00010000,
             STGM_SIMPLE = 0x08000000,
             STGM_WRITE = 0x00000001,

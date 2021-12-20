@@ -20,20 +20,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedAccessorValueParameterSymbol : SourceComplexParameterSymbol
     {
-        public SynthesizedAccessorValueParameterSymbol(SourceMemberMethodSymbol accessor, TypeWithAnnotations paramType, int ordinal)
-            : base(accessor, ordinal, paramType, RefKind.None, ParameterSymbol.ValueParameterName, accessor.Locations,
-                   syntaxRef: null,
-                   isParams: false,
-                   isExtensionMethodThis: false)
-        {
-        }
+        public SynthesizedAccessorValueParameterSymbol(
+            SourceMemberMethodSymbol accessor,
+            TypeWithAnnotations paramType,
+            int ordinal
+        )
+            : base(
+                accessor,
+                ordinal,
+                paramType,
+                RefKind.None,
+                ParameterSymbol.ValueParameterName,
+                accessor.Locations,
+                syntaxRef: null,
+                isParams: false,
+                isExtensionMethodThis: false
+            ) { }
 
         internal override FlowAnalysisAnnotations FlowAnalysisAnnotations
         {
             get
             {
                 var result = FlowAnalysisAnnotations.None;
-                if (ContainingSymbol is SourcePropertyAccessorSymbol propertyAccessor && propertyAccessor.AssociatedSymbol is SourcePropertySymbolBase property)
+                if (
+                    ContainingSymbol is SourcePropertyAccessorSymbol propertyAccessor
+                    && propertyAccessor.AssociatedSymbol is SourcePropertySymbolBase property
+                )
                 {
                     if (property.HasDisallowNull)
                     {
@@ -48,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override ImmutableHashSet<string> NotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        internal override ImmutableHashSet<string> NotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
@@ -75,20 +88,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return accessor.GetAttributeDeclarations();
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-            if (ContainingSymbol is SourcePropertyAccessorSymbol propertyAccessor && propertyAccessor.AssociatedSymbol is SourcePropertySymbolBase property)
+            if (
+                ContainingSymbol is SourcePropertyAccessorSymbol propertyAccessor
+                && propertyAccessor.AssociatedSymbol is SourcePropertySymbolBase property
+            )
             {
                 var annotations = FlowAnalysisAnnotations;
                 if ((annotations & FlowAnalysisAnnotations.DisallowNull) != 0)
                 {
-                    AddSynthesizedAttribute(ref attributes, new SynthesizedAttributeData(property.DisallowNullAttributeIfExists));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        new SynthesizedAttributeData(property.DisallowNullAttributeIfExists)
+                    );
                 }
                 if ((annotations & FlowAnalysisAnnotations.AllowNull) != 0)
                 {
-                    AddSynthesizedAttribute(ref attributes, new SynthesizedAttributeData(property.AllowNullAttributeIfExists));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        new SynthesizedAttributeData(property.AllowNullAttributeIfExists)
+                    );
                 }
             }
         }

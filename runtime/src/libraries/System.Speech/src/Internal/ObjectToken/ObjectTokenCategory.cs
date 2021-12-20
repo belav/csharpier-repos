@@ -13,10 +13,7 @@ namespace System.Speech.Internal.ObjectTokens
     {
         #region Constructors
 
-        protected ObjectTokenCategory(string keyId, RegistryDataKey key)
-            : base(keyId, key)
-        {
-        }
+        protected ObjectTokenCategory(string keyId, RegistryDataKey key) : base(keyId, key) { }
 
         internal static ObjectTokenCategory Create(string sCategoryId)
         {
@@ -32,15 +29,26 @@ namespace System.Speech.Internal.ObjectTokens
         {
             // Check if the token is for a voice
             string tokenName = keyName;
-            if (!string.IsNullOrEmpty(tokenName) && tokenName.IndexOf("HKEY_", StringComparison.Ordinal) != 0)
+            if (
+                !string.IsNullOrEmpty(tokenName)
+                && tokenName.IndexOf("HKEY_", StringComparison.Ordinal) != 0
+            )
             {
-                tokenName = string.Format(CultureInfo.InvariantCulture, @"{0}\Tokens\{1}", Id, tokenName);
+                tokenName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"{0}\Tokens\{1}",
+                    Id,
+                    tokenName
+                );
             }
 
             return ObjectToken.Open(null, tokenName, false);
         }
 
-        internal IList<ObjectToken> FindMatchingTokens(string requiredAttributes, string optionalAttributes)
+        internal IList<ObjectToken> FindMatchingTokens(
+            string requiredAttributes,
+            string optionalAttributes
+        )
         {
             IList<ObjectToken> objectTokenList = new List<ObjectToken>();
             ISpObjectTokenCategory category = null;
@@ -95,7 +103,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             return ((IEnumerable<ObjectToken>)this).GetEnumerator();
         }
-
         #endregion
 
         #endregion

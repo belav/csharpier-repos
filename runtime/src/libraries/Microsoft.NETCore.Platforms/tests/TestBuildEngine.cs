@@ -28,7 +28,12 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
 
         public string ProjectFileOfTaskNode { get; set; }
 
-        public bool BuildProjectFile(string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs)
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        )
         {
             throw new NotImplementedException();
         }

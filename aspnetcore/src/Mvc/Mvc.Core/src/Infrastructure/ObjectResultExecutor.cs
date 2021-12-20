@@ -32,7 +32,8 @@ public class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
         OutputFormatterSelector formatterSelector,
         IHttpResponseStreamWriterFactory writerFactory,
         ILoggerFactory loggerFactory,
-        IOptions<MvcOptions> mvcOptions)
+        IOptions<MvcOptions> mvcOptions
+    )
     {
         if (formatterSelector == null)
         {
@@ -102,18 +103,25 @@ public class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
         return ExecuteAsyncCore(context, result, objectType, value);
     }
 
-    private Task ExecuteAsyncCore(ActionContext context, ObjectResult result, Type? objectType, object? value)
+    private Task ExecuteAsyncCore(
+        ActionContext context,
+        ObjectResult result,
+        Type? objectType,
+        object? value
+    )
     {
         var formatterContext = new OutputFormatterWriteContext(
             context.HttpContext,
             WriterFactory,
             objectType,
-            value);
+            value
+        );
 
         var selectedFormatter = FormatterSelector.SelectFormatter(
             formatterContext,
             (IList<IOutputFormatter>)result.Formatters ?? Array.Empty<IOutputFormatter>(),
-            result.ContentTypes);
+            result.ContentTypes
+        );
         if (selectedFormatter == null)
         {
             // No formatter supports this.
@@ -147,7 +155,6 @@ public class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
             result.ContentTypes.Add("application/problem+xml");
         }
     }
-
     // Removed Log.
     // new EventId(1, "BufferingAsyncEnumerable")
 }

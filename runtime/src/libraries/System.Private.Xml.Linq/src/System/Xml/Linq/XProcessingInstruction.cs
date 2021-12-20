@@ -28,7 +28,8 @@ namespace System.Xml.Linq
         /// </exception>
         public XProcessingInstruction(string target, string data)
         {
-            if (data == null) throw new ArgumentNullException(nameof(data));
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
             ValidateName(target);
             this.target = target;
             this.data = data;
@@ -41,7 +42,8 @@ namespace System.Xml.Linq
         /// <param name="other">XML processing instruction to copy from.</param>
         public XProcessingInstruction(XProcessingInstruction other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
             this.target = other.target;
             this.data = other.data;
         }
@@ -61,16 +63,15 @@ namespace System.Xml.Linq
         /// </exception>
         public string Data
         {
-            get
-            {
-                return data;
-            }
+            get { return data; }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 data = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 
@@ -82,10 +83,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.ProcessingInstruction;
-            }
+            get { return XmlNodeType.ProcessingInstruction; }
         }
 
         /// <summary>
@@ -96,16 +94,14 @@ namespace System.Xml.Linq
         /// </exception>
         public string Target
         {
-            get
-            {
-                return target;
-            }
+            get { return target; }
             set
             {
                 ValidateName(value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Name);
                 target = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Name);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Name);
             }
         }
 
@@ -117,7 +113,8 @@ namespace System.Xml.Linq
         /// </param>
         public override void WriteTo(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             writer.WriteProcessingInstruction(target, data);
         }
 
@@ -156,7 +153,8 @@ namespace System.Xml.Linq
         private static void ValidateName(string name)
         {
             XmlConvert.VerifyNCName(name);
-            if (string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException(SR.Format(SR.Argument_InvalidPIName, name));
+            if (string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException(SR.Format(SR.Argument_InvalidPIName, name));
         }
     }
 }

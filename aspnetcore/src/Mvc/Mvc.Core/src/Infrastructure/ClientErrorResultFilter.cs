@@ -17,9 +17,11 @@ internal class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter
 
     public ClientErrorResultFilter(
         IClientErrorFactory clientErrorFactory,
-        ILogger<ClientErrorResultFilter> logger)
+        ILogger<ClientErrorResultFilter> logger
+    )
     {
-        _clientErrorFactory = clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
+        _clientErrorFactory =
+            clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -28,9 +30,7 @@ internal class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter
     /// </summary>
     public int Order => FilterOrder;
 
-    public void OnResultExecuted(ResultExecutedContext context)
-    {
-    }
+    public void OnResultExecuted(ResultExecutedContext context) { }
 
     public void OnResultExecuting(ResultExecutingContext context)
     {
@@ -57,7 +57,11 @@ internal class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter
             return;
         }
 
-        _logger.TransformingClientError(context.Result.GetType(), result.GetType(), clientError.StatusCode);
+        _logger.TransformingClientError(
+            context.Result.GetType(),
+            result.GetType(),
+            clientError.StatusCode
+        );
         context.Result = result;
     }
 }

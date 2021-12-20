@@ -12,12 +12,10 @@ public enum ValidationSummary
     /// No validation summary.
     /// </summary>
     None,
-
     /// <summary>
     /// Validation summary with model-level errors only (excludes all property errors).
     /// </summary>
     ModelOnly,
-
     /// <summary>
     /// Validation summary with all errors.
     /// </summary>

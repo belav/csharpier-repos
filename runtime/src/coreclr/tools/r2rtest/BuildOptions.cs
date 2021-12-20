@@ -61,14 +61,19 @@ namespace R2RTest
                     _dotnetCli = Process.GetCurrentProcess().MainModule.FileName;
                     Console.WriteLine($"Using dotnet: {_dotnetCli}");
 
-                    if (Path.GetFileNameWithoutExtension(_dotnetCli).Equals("r2rtest", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        Path.GetFileNameWithoutExtension(_dotnetCli)
+                            .Equals("r2rtest", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        throw new ArgumentException("Error: --dotnet-cli argument is required to run crossgen2. Cannot use the host running r2rtest itself when launched by its native app host.");
+                        throw new ArgumentException(
+                            "Error: --dotnet-cli argument is required to run crossgen2. Cannot use the host running r2rtest itself when launched by its native app host."
+                        );
                     }
                 }
 
                 return _dotnetCli;
-            } 
+            }
             set
             {
                 _dotnetCli = value;
@@ -76,7 +81,6 @@ namespace R2RTest
             }
         }
         private string _dotnetCli;
-
 
         public IEnumerable<string> ReferencePaths()
         {
@@ -114,7 +118,11 @@ namespace R2RTest
         /// </summary>
         /// <param name="isFramework">True if compiling the CoreFX framework assemblies</param>
         /// <param name="referencePaths">Optional set of reference paths to use instead of BuildOptions.ReferencePaths()</param>
-        public IEnumerable<CompilerRunner> CompilerRunners(bool isFramework, IEnumerable<string> overrideReferencePaths = null, string overrideOutputPath = null)
+        public IEnumerable<CompilerRunner> CompilerRunners(
+            bool isFramework,
+            IEnumerable<string> overrideReferencePaths = null,
+            string overrideOutputPath = null
+        )
         {
             List<CompilerRunner> runners = new List<CompilerRunner>();
 
@@ -122,8 +130,17 @@ namespace R2RTest
             {
                 List<string> cpaotReferencePaths = new List<string>();
                 cpaotReferencePaths.Add(CoreRootOutputPath(CompilerIndex.CPAOT, isFramework));
-                cpaotReferencePaths.AddRange(overrideReferencePaths != null ? overrideReferencePaths : ReferencePaths());
-                runners.Add(new Crossgen2Runner(this, new Crossgen2RunnerOptions() { Composite = this.Composite }, cpaotReferencePaths, overrideOutputPath));
+                cpaotReferencePaths.AddRange(
+                    overrideReferencePaths != null ? overrideReferencePaths : ReferencePaths()
+                );
+                runners.Add(
+                    new Crossgen2Runner(
+                        this,
+                        new Crossgen2RunnerOptions() { Composite = this.Composite },
+                        cpaotReferencePaths,
+                        overrideOutputPath
+                    )
+                );
             }
 
             if (!NoJit)
@@ -141,7 +158,9 @@ namespace R2RTest
             string coreRunPath = Path.Combine(coreRunDir, coreRunExe);
             if (!File.Exists(coreRunPath))
             {
-                Console.Error.WriteLine($@"{coreRunExe} not found in {coreRunDir}, explicit exe launches won't work");
+                Console.Error.WriteLine(
+                    $@"{coreRunExe} not found in {coreRunDir}, explicit exe launches won't work"
+                );
             }
             return coreRunPath;
         }

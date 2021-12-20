@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [DllImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetDefaultTimeZone", CharSet = CharSet.Ansi, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetDefaultTimeZone",
+            CharSet = CharSet.Ansi,
+            SetLastError = true
+        )]
         internal static extern string? GetDefaultTimeZone();
     }
 }

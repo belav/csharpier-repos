@@ -12,38 +12,65 @@ namespace Microsoft.AspNetCore.Cryptography.Cng;
 /// </summary>
 internal static class CachedAlgorithmHandles
 {
-    private static CachedAlgorithmInfo _aesCbc = new CachedAlgorithmInfo(() => GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_CBC));
-    private static CachedAlgorithmInfo _aesGcm = new CachedAlgorithmInfo(() => GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_GCM));
-    private static CachedAlgorithmInfo _hmacSha1 = new CachedAlgorithmInfo(() => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM));
-    private static CachedAlgorithmInfo _hmacSha256 = new CachedAlgorithmInfo(() => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM));
-    private static CachedAlgorithmInfo _hmacSha512 = new CachedAlgorithmInfo(() => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM));
+    private static CachedAlgorithmInfo _aesCbc = new CachedAlgorithmInfo(
+        () => GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_CBC)
+    );
+    private static CachedAlgorithmInfo _aesGcm = new CachedAlgorithmInfo(
+        () => GetAesAlgorithm(chainingMode: Constants.BCRYPT_CHAIN_MODE_GCM)
+    );
+    private static CachedAlgorithmInfo _hmacSha1 = new CachedAlgorithmInfo(
+        () => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM)
+    );
+    private static CachedAlgorithmInfo _hmacSha256 = new CachedAlgorithmInfo(
+        () => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM)
+    );
+    private static CachedAlgorithmInfo _hmacSha512 = new CachedAlgorithmInfo(
+        () => GetHmacAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
+    );
     private static CachedAlgorithmInfo _pbkdf2 = new CachedAlgorithmInfo(GetPbkdf2Algorithm);
-    private static CachedAlgorithmInfo _sha1 = new CachedAlgorithmInfo(() => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM));
-    private static CachedAlgorithmInfo _sha256 = new CachedAlgorithmInfo(() => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM));
-    private static CachedAlgorithmInfo _sha512 = new CachedAlgorithmInfo(() => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM));
-    private static CachedAlgorithmInfo _sp800_108_ctr_hmac = new CachedAlgorithmInfo(GetSP800_108_CTR_HMACAlgorithm);
+    private static CachedAlgorithmInfo _sha1 = new CachedAlgorithmInfo(
+        () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA1_ALGORITHM)
+    );
+    private static CachedAlgorithmInfo _sha256 = new CachedAlgorithmInfo(
+        () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA256_ALGORITHM)
+    );
+    private static CachedAlgorithmInfo _sha512 = new CachedAlgorithmInfo(
+        () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
+    );
+    private static CachedAlgorithmInfo _sp800_108_ctr_hmac = new CachedAlgorithmInfo(
+        GetSP800_108_CTR_HMACAlgorithm
+    );
 
-    public static BCryptAlgorithmHandle AES_CBC => CachedAlgorithmInfo.GetAlgorithmHandle(ref _aesCbc);
+    public static BCryptAlgorithmHandle AES_CBC =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _aesCbc);
 
-    public static BCryptAlgorithmHandle AES_GCM => CachedAlgorithmInfo.GetAlgorithmHandle(ref _aesGcm);
+    public static BCryptAlgorithmHandle AES_GCM =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _aesGcm);
 
-    public static BCryptAlgorithmHandle HMAC_SHA1 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _hmacSha1);
+    public static BCryptAlgorithmHandle HMAC_SHA1 =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _hmacSha1);
 
-    public static BCryptAlgorithmHandle HMAC_SHA256 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _hmacSha256);
+    public static BCryptAlgorithmHandle HMAC_SHA256 =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _hmacSha256);
 
-    public static BCryptAlgorithmHandle HMAC_SHA512 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _hmacSha512);
+    public static BCryptAlgorithmHandle HMAC_SHA512 =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _hmacSha512);
 
     // Only available on Win8+.
-    public static BCryptAlgorithmHandle PBKDF2 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _pbkdf2);
+    public static BCryptAlgorithmHandle PBKDF2 =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _pbkdf2);
 
     public static BCryptAlgorithmHandle SHA1 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _sha1);
 
-    public static BCryptAlgorithmHandle SHA256 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _sha256);
+    public static BCryptAlgorithmHandle SHA256 =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _sha256);
 
-    public static BCryptAlgorithmHandle SHA512 => CachedAlgorithmInfo.GetAlgorithmHandle(ref _sha512);
+    public static BCryptAlgorithmHandle SHA512 =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _sha512);
 
     // Only available on Win8+.
-    public static BCryptAlgorithmHandle SP800_108_CTR_HMAC => CachedAlgorithmInfo.GetAlgorithmHandle(ref _sp800_108_ctr_hmac);
+    public static BCryptAlgorithmHandle SP800_108_CTR_HMAC =>
+        CachedAlgorithmInfo.GetAlgorithmHandle(ref _sp800_108_ctr_hmac);
 
     private static BCryptAlgorithmHandle GetAesAlgorithm(string chainingMode)
     {
@@ -64,12 +91,18 @@ internal static class CachedAlgorithmHandles
 
     private static BCryptAlgorithmHandle GetPbkdf2Algorithm()
     {
-        return BCryptAlgorithmHandle.OpenAlgorithmHandle(Constants.BCRYPT_PBKDF2_ALGORITHM, implementation: Constants.MS_PRIMITIVE_PROVIDER);
+        return BCryptAlgorithmHandle.OpenAlgorithmHandle(
+            Constants.BCRYPT_PBKDF2_ALGORITHM,
+            implementation: Constants.MS_PRIMITIVE_PROVIDER
+        );
     }
 
     private static BCryptAlgorithmHandle GetSP800_108_CTR_HMACAlgorithm()
     {
-        return BCryptAlgorithmHandle.OpenAlgorithmHandle(Constants.BCRYPT_SP800108_CTR_HMAC_ALGORITHM, implementation: Constants.MS_PRIMITIVE_PROVIDER);
+        return BCryptAlgorithmHandle.OpenAlgorithmHandle(
+            Constants.BCRYPT_SP800108_CTR_HMAC_ALGORITHM,
+            implementation: Constants.MS_PRIMITIVE_PROVIDER
+        );
     }
 
     // Warning: mutable struct!
@@ -84,9 +117,14 @@ internal static class CachedAlgorithmHandles
             _factory = factory;
         }
 
-        public static BCryptAlgorithmHandle GetAlgorithmHandle(ref CachedAlgorithmInfo cachedAlgorithmInfo)
+        public static BCryptAlgorithmHandle GetAlgorithmHandle(
+            ref CachedAlgorithmInfo cachedAlgorithmInfo
+        )
         {
-            return WeakReferenceHelpers.GetSharedInstance(ref cachedAlgorithmInfo._algorithmHandle, cachedAlgorithmInfo._factory);
+            return WeakReferenceHelpers.GetSharedInstance(
+                ref cachedAlgorithmInfo._algorithmHandle,
+                cachedAlgorithmInfo._factory
+            );
         }
     }
 }

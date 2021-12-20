@@ -50,7 +50,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options">Options for generating the string.</param>
         /// <param name="indent">The number of indent spaces to use before each new line.</param>
         /// <returns>A human-readable representation.</returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        )
         {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
@@ -63,13 +66,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append("Index: ");
             }
 
-            builder
-                .AppendJoin(
-                    ", ",
-                    Properties.Select(
-                        p => singleLine
+            builder.AppendJoin(
+                ", ",
+                Properties.Select(
+                    p =>
+                        singleLine
                             ? p.DeclaringEntityType.DisplayName(omitSharedType: true) + "." + p.Name
-                            : p.Name));
+                            : p.Name
+                )
+            );
 
             builder.Append(" " + Name ?? "<unnamed>");
 
@@ -78,8 +83,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append(" Unique");
             }
 
-            if (!singleLine
-                && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
+            if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
             {
                 builder.Append(AnnotationsToDebugString(indent + 2));
             }

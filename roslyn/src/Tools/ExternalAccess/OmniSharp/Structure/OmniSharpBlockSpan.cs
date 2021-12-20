@@ -45,13 +45,32 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
         public string Type { get; }
 
         public OmniSharpBlockSpan(
-            string type, bool isCollapsible, TextSpan textSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
-            : this(type, isCollapsible, textSpan, textSpan, bannerText, autoCollapse, isDefaultCollapsed)
-        {
-        }
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
+            : this(
+                type,
+                isCollapsible,
+                textSpan,
+                textSpan,
+                bannerText,
+                autoCollapse,
+                isDefaultCollapsed
+            ) { }
 
         public OmniSharpBlockSpan(
-            string type, bool isCollapsible, TextSpan textSpan, TextSpan hintSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            TextSpan hintSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
         {
             TextSpan = textSpan;
             BannerText = bannerText;
@@ -65,8 +84,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
         public override string ToString()
         {
             return this.TextSpan != this.HintSpan
-                ? $"{{Span={TextSpan}, HintSpan={HintSpan}, BannerText=\"{BannerText}\", AutoCollapse={AutoCollapse}, IsDefaultCollapsed={IsDefaultCollapsed}}}"
-                : $"{{Span={TextSpan}, BannerText=\"{BannerText}\", AutoCollapse={AutoCollapse}, IsDefaultCollapsed={IsDefaultCollapsed}}}";
+              ? $"{{Span={TextSpan}, HintSpan={HintSpan}, BannerText=\"{BannerText}\", AutoCollapse={AutoCollapse}, IsDefaultCollapsed={IsDefaultCollapsed}}}"
+              : $"{{Span={TextSpan}, BannerText=\"{BannerText}\", AutoCollapse={AutoCollapse}, IsDefaultCollapsed={IsDefaultCollapsed}}}";
         }
     }
 }

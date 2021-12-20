@@ -22,13 +22,20 @@ namespace AutoMapper.UnitTests.Bug
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(config =>
-        {
-            config.AllowNullDestinationValues = false;
-            config.CreateMap<Inner, Inner>();
-            config.CreateMap<Source, Destination>()
-                .ForMember(dest => dest.SomeOtherProperty, opt => opt.MapFrom(src => src.Property));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                config =>
+                {
+                    config.AllowNullDestinationValues = false;
+                    config.CreateMap<Inner, Inner>();
+                    config
+                        .CreateMap<Source, Destination>()
+                        .ForMember(
+                            dest => dest.SomeOtherProperty,
+                            opt => opt.MapFrom(src => src.Property)
+                        );
+                }
+            );
 
         protected override void Because_of()
         {
@@ -52,12 +59,16 @@ namespace AutoMapper.UnitTests.Bug
         public class Destination
         {
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(config =>
-        {
-            config.AllowNullDestinationValues = false;
-            config.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                config =>
+                {
+                    config.AllowNullDestinationValues = false;
+                    config.CreateMap<Source, Destination>();
+                }
+            );
         [Fact]
-        public void Null_should_map_to_non_null() => Mapper.Map<Destination>(null).ShouldNotBeNull();
+        public void Null_should_map_to_non_null() =>
+            Mapper.Map<Destination>(null).ShouldNotBeNull();
     }
 }

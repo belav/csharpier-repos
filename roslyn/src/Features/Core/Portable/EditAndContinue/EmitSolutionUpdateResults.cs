@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ManagedModuleUpdates moduleUpdates,
                 ImmutableArray<DiagnosticData> diagnostics,
                 ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits,
-                DiagnosticData? syntaxError)
+                DiagnosticData? syntaxError
+            )
             {
                 ModuleUpdates = moduleUpdates;
                 Diagnostics = diagnostics;
@@ -47,10 +48,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         public static readonly EmitSolutionUpdateResults Empty =
-            new(moduleUpdates: new ManagedModuleUpdates(ManagedModuleUpdateStatus.None, ImmutableArray<ManagedModuleUpdate>.Empty),
+            new(
+                moduleUpdates: new ManagedModuleUpdates(
+                    ManagedModuleUpdateStatus.None,
+                    ImmutableArray<ManagedModuleUpdate>.Empty
+                ),
                 diagnostics: ImmutableArray<(ProjectId, ImmutableArray<Diagnostic>)>.Empty,
                 documentsWithRudeEdits: ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)>.Empty,
-                syntaxError: null);
+                syntaxError: null
+            );
 
         public readonly ManagedModuleUpdates ModuleUpdates;
         public readonly ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostics)> Diagnostics;
@@ -61,7 +67,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ManagedModuleUpdates moduleUpdates,
             ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostic)> diagnostics,
             ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> documentsWithRudeEdits,
-            Diagnostic? syntaxError)
+            Diagnostic? syntaxError
+        )
         {
             ModuleUpdates = moduleUpdates;
             Diagnostics = diagnostics;
@@ -69,8 +76,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SyntaxError = syntaxError;
         }
 
-        public Data Dehydrate(Solution solution)
-            => new(ModuleUpdates, GetDiagnosticData(solution), RudeEdits, GetSyntaxErrorData(solution));
+        public Data Dehydrate(Solution solution) =>
+            new(
+                ModuleUpdates,
+                GetDiagnosticData(solution),
+                RudeEdits,
+                GetSyntaxErrorData(solution)
+            );
 
         public ImmutableArray<DiagnosticData> GetDiagnosticData(Solution solution)
         {
@@ -83,7 +95,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 foreach (var diagnostic in diagnostics)
                 {
                     var document = solution.GetDocument(diagnostic.Location.SourceTree);
-                    var data = (document != null) ? DiagnosticData.Create(diagnostic, document) : DiagnosticData.Create(diagnostic, project);
+                    var data =
+                        (document != null)
+                            ? DiagnosticData.Create(diagnostic, document)
+                            : DiagnosticData.Create(diagnostic, project);
                     result.Add(data);
                 }
             }
@@ -99,20 +114,30 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             Debug.Assert(SyntaxError.Location.SourceTree != null);
-            return DiagnosticData.Create(SyntaxError, solution.GetRequiredDocument(SyntaxError.Location.SourceTree));
+            return DiagnosticData.Create(
+                SyntaxError,
+                solution.GetRequiredDocument(SyntaxError.Location.SourceTree)
+            );
         }
 
-        public async Task<ImmutableArray<Diagnostic>> GetAllDiagnosticsAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<Diagnostic>> GetAllDiagnosticsAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<Diagnostic>.GetInstance(out var diagnostics);
 
             // add rude edits:
             foreach (var (documentId, documentRudeEdits) in RudeEdits)
             {
-                var document = await solution.GetDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+                var document = await solution
+                    .GetDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken)
+                    .ConfigureAwait(false);
                 Contract.ThrowIfNull(document);
 
-                var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 foreach (var documentRudeEdit in documentRudeEdits)
                 {
                     diagnostics.Add(documentRudeEdit.ToDiagnostic(tree));
@@ -128,12 +153,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return diagnostics.ToImmutable();
         }
 
-        internal static async ValueTask<ImmutableArray<ManagedHotReloadDiagnostic>> GetHotReloadDiagnosticsAsync(
+        internal static async ValueTask<
+            ImmutableArray<ManagedHotReloadDiagnostic>
+        > GetHotReloadDiagnosticsAsync(
             Solution solution,
             ImmutableArray<DiagnosticData> diagnosticData,
             ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits,
             DiagnosticData? syntaxError,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<ManagedHotReloadDiagnostic>.GetInstance(out var builder);
 
@@ -150,13 +178,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 var fileSpan = data.DataLocation?.GetFileLinePositionSpan();
 
-                builder.Add(new ManagedHotReloadDiagnostic(
-                    data.Id,
-                    data.Message ?? FeaturesResources.Unknown_error_occurred,
-                    ManagedHotReloadDiagnosticSeverity.Error,
-                    fileSpan?.Path ?? "",
-                    fileSpan?.Span.ToSourceSpan() ?? default));
-
+                builder.Add(
+                    new ManagedHotReloadDiagnostic(
+                        data.Id,
+                        data.Message ?? FeaturesResources.Unknown_error_occurred,
+                        ManagedHotReloadDiagnosticSeverity.Error,
+                        fileSpan?.Path ?? "",
+                        fileSpan?.Span.ToSourceSpan() ?? default
+                    )
+                );
                 // only report first error
                 break;
             }
@@ -168,40 +198,60 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 var fileSpan = syntaxError.DataLocation.GetFileLinePositionSpan();
 
-                builder.Add(new ManagedHotReloadDiagnostic(
-                    syntaxError.Id,
-                    syntaxError.Message,
-                    ManagedHotReloadDiagnosticSeverity.Error,
-                    fileSpan.Path,
-                    fileSpan.Span.ToSourceSpan()));
+                builder.Add(
+                    new ManagedHotReloadDiagnostic(
+                        syntaxError.Id,
+                        syntaxError.Message,
+                        ManagedHotReloadDiagnosticSeverity.Error,
+                        fileSpan.Path,
+                        fileSpan.Span.ToSourceSpan()
+                    )
+                );
             }
 
             // Report all rude edits.
 
             foreach (var (documentId, diagnostics) in rudeEdits)
             {
-                var document = await solution.GetRequiredDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
-                var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var document = await solution
+                    .GetRequiredDocumentAsync(
+                        documentId,
+                        includeSourceGenerated: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var tree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 foreach (var diagnostic in diagnostics)
                 {
-                    var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(diagnostic.Kind);
+                    var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
+                        diagnostic.Kind
+                    );
 
                     var severity = descriptor.DefaultSeverity switch
                     {
-                        DiagnosticSeverity.Error => ManagedHotReloadDiagnosticSeverity.RestartRequired,
+                        DiagnosticSeverity.Error
+                          => ManagedHotReloadDiagnosticSeverity.RestartRequired,
                         DiagnosticSeverity.Warning => ManagedHotReloadDiagnosticSeverity.Warning,
                         _ => throw ExceptionUtilities.UnexpectedValue(descriptor.DefaultSeverity)
                     };
 
                     var fileSpan = tree.GetMappedLineSpan(diagnostic.Span, cancellationToken);
 
-                    builder.Add(new ManagedHotReloadDiagnostic(
-                        descriptor.Id,
-                        string.Format(descriptor.MessageFormat.ToString(CultureInfo.CurrentUICulture), diagnostic.Arguments),
-                        severity,
-                        fileSpan.Path ?? "",
-                        fileSpan.Span.ToSourceSpan()));
+                    builder.Add(
+                        new ManagedHotReloadDiagnostic(
+                            descriptor.Id,
+                            string.Format(
+                                descriptor.MessageFormat.ToString(CultureInfo.CurrentUICulture),
+                                diagnostic.Arguments
+                            ),
+                            severity,
+                            fileSpan.Path ?? "",
+                            fileSpan.Span.ToSourceSpan()
+                        )
+                    );
                 }
             }
 

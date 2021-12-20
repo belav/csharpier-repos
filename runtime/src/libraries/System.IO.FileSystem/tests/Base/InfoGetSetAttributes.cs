@@ -23,7 +23,10 @@ namespace System.IO.Tests
         [Theory, MemberData(nameof(TrailingCharacters))]
         public void GetAttributes_MissingDirectory(char trailingChar)
         {
-            Assert.Equal((FileAttributes)(-1), GetAttributes(Path.Combine(GetTestFilePath(), "file" + trailingChar)));
+            Assert.Equal(
+                (FileAttributes)(-1),
+                GetAttributes(Path.Combine(GetTestFilePath(), "file" + trailingChar))
+            );
         }
 
         [Theory, MemberData(nameof(TrailingCharacters))]
@@ -51,7 +54,9 @@ namespace System.IO.Tests
         {
             // When enumerating we populate the state as we already have it.
             string path = CreateItem();
-            FileSystemInfo info = new DirectoryInfo(TestDirectory).EnumerateFileSystemInfos().First();
+            FileSystemInfo info = new DirectoryInfo(TestDirectory)
+                .EnumerateFileSystemInfos()
+                .First();
             DeleteItem(path);
 
             // The actual value will vary depending on the OS and what is running.

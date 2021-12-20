@@ -23,22 +23,31 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
     private bool _finalAdvanceCalled;
     private bool _cannotResetInputPipe;
 
-    public Http1ContentLengthMessageBody(Http1Connection context, long contentLength, bool keepAlive)
-        : base(context, keepAlive)
+    public Http1ContentLengthMessageBody(
+        Http1Connection context,
+        long contentLength,
+        bool keepAlive
+    ) : base(context, keepAlive)
     {
         _contentLength = contentLength;
         _unexaminedInputLength = contentLength;
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    public override async ValueTask<ReadResult> ReadAsyncInternal(CancellationToken cancellationToken = default)
+    public override async ValueTask<ReadResult> ReadAsyncInternal(
+        CancellationToken cancellationToken = default
+    )
     {
         VerifyIsNotReading();
 
         if (_readCompleted)
         {
             _isReading = true;
-            return new ReadResult(_readResult.Buffer, Interlocked.Exchange(ref _userCanceled, 0) == 1, isCompleted: true);
+            return new ReadResult(
+                _readResult.Buffer,
+                Interlocked.Exchange(ref _userCanceled, 0) == 1,
+                isCompleted: true
+            );
         }
 
         // The issue is that TryRead can get a canceled read result
@@ -56,7 +65,6 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         // We internally track an int for that.
         while (true)
         {
-
             try
             {
                 var readAwaitable = _context.Input.ReadAsync(cancellationToken);
@@ -98,7 +106,11 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
             // Normally we do not return a canceled ReadResult unless CancelPendingRead was called on the request body PipeReader itself,
             // but if the last call to AdvanceTo examined data it did not consume, we cannot reset the state of the Input pipe.
             // https://github.com/dotnet/aspnetcore/issues/19476
-            if (!_readResult.IsCanceled || Interlocked.Exchange(ref _userCanceled, 0) == 1 || _cannotResetInputPipe)
+            if (
+                !_readResult.IsCanceled
+                || Interlocked.Exchange(ref _userCanceled, 0) == 1
+                || _cannotResetInputPipe
+            )
             {
                 var returnedReadResultLength = CreateReadResultFromConnectionReadResult();
 
@@ -109,7 +121,6 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
                 {
                     TryStop();
                 }
-
                 break;
             }
 
@@ -126,7 +137,11 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         if (_readCompleted)
         {
             _isReading = true;
-            readResult = new ReadResult(_readResult.Buffer, Interlocked.Exchange(ref _userCanceled, 0) == 1, isCompleted: true);
+            readResult = new ReadResult(
+                _readResult.Buffer,
+                Interlocked.Exchange(ref _userCanceled, 0) == 1,
+                isCompleted: true
+            );
             return true;
         }
 
@@ -146,7 +161,11 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
                 return false;
             }
 
-            if (!_readResult.IsCanceled || Interlocked.Exchange(ref _userCanceled, 0) == 1 || _cannotResetInputPipe)
+            if (
+                !_readResult.IsCanceled
+                || Interlocked.Exchange(ref _userCanceled, 0) == 1
+                || _cannotResetInputPipe
+            )
             {
                 break;
             }
@@ -199,7 +218,8 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         _readResult = new ReadResult(
             _readResult.Buffer.Slice(0, maxLength),
             _readResult.IsCanceled,
-            isCompleted: true);
+            isCompleted: true
+        );
 
         return maxLength;
     }
@@ -216,7 +236,11 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         if (_readCompleted)
         {
             // If the old stored _readResult was canceled, it's already been observed. Do not store a canceled read result permanently.
-            _readResult = new ReadResult(_readResult.Buffer.Slice(consumed, _readResult.Buffer.End), isCanceled: false, isCompleted: true);
+            _readResult = new ReadResult(
+                _readResult.Buffer.Slice(consumed, _readResult.Buffer.End),
+                isCanceled: false,
+                isCompleted: true
+            );
 
             if (!_finalAdvanceCalled && _readResult.Buffer.Length == 0)
             {
@@ -241,7 +265,10 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         var maxRequestBodySize = _context.MaxRequestBodySize;
         if (_contentLength > maxRequestBodySize)
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.RequestBodyTooLarge, maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.RequestBodyTooLarge,
+                maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)
+            );
         }
     }
 
@@ -263,7 +290,9 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         {
             if (_readResult.IsCompleted)
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.UnexpectedEndOfRequestContent);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.UnexpectedEndOfRequestContent
+                );
             }
 
             if (_context.RequestTimedOut)

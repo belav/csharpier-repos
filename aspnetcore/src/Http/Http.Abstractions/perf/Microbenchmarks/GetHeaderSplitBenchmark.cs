@@ -18,12 +18,15 @@ public class GetHeaderSplitBenchmark
     public void GlobalSetup()
     {
         var dict = new Dictionary<string, StringValues>()
+        {
+            { "singleValue", new StringValues("single") },
+            { "singleValueQuoted", new StringValues("\"single\"") },
+            { "doubleValue", new StringValues(new[] { "first", "second" }) },
             {
-                { "singleValue", new StringValues("single") },
-                { "singleValueQuoted", new StringValues("\"single\"") },
-                { "doubleValue", new StringValues(new [] { "first", "second" }) },
-                { "manyValue", new StringValues(new [] { "first", "second", "third", "fourth", "fifth", "sixth" }) }
-            };
+                "manyValue",
+                new StringValues(new[] { "first", "second", "third", "fourth", "fifth", "sixth" })
+            }
+        };
         _dictionary = new HeaderDictionary(dict);
     }
 

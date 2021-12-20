@@ -98,7 +98,10 @@ namespace AssemblyStripper
 
             PatchHeap(metadata_writer.StringWriter, original.MetadataRoot.Streams.StringsHeap);
             PatchHeap(metadata_writer.GuidWriter, original.MetadataRoot.Streams.GuidHeap);
-            PatchHeap(metadata_writer.UserStringWriter, original.MetadataRoot.Streams.UserStringsHeap);
+            PatchHeap(
+                metadata_writer.UserStringWriter,
+                original.MetadataRoot.Streams.UserStringsHeap
+            );
             PatchHeap(metadata_writer.BlobWriter, original.MetadataRoot.Streams.BlobHeap);
 
             if (assembly.EntryPoint != null)
@@ -130,13 +133,16 @@ namespace AssemblyStripper
 
                 MetadataToken methodToken = MetadataToken.FromMetadataRow(TokenType.Method, i);
 
-                MethodDefinition method = (MethodDefinition)assembly.MainModule.LookupByToken(methodToken);
+                MethodDefinition method = (MethodDefinition)assembly.MainModule.LookupByToken(
+                    methodToken
+                );
 
                 if (method.HasBody)
                 {
-                    method_rva = method_rva != RVA.Zero
-                        ? method_rva
-                        : reflection_writer.CodeWriter.WriteMethodBody(method);
+                    method_rva =
+                        method_rva != RVA.Zero
+                            ? method_rva
+                            : reflection_writer.CodeWriter.WriteMethodBody(method);
 
                     methodRow.RVA = method_rva;
                 }
@@ -157,7 +163,9 @@ namespace AssemblyStripper
 
                 MetadataToken fieldToken = new MetadataToken(TokenType.Field, fieldRvaRow.Field);
 
-                FieldDefinition field = (FieldDefinition)assembly.MainModule.LookupByToken(fieldToken);
+                FieldDefinition field = (FieldDefinition)assembly.MainModule.LookupByToken(
+                    fieldToken
+                );
 
                 fieldRvaRow.RVA = metadata_writer.GetDataCursor();
                 metadata_writer.AddData(field.InitialValue.Length + 3 & (~3));
@@ -167,7 +175,9 @@ namespace AssemblyStripper
 
         void PatchResources()
         {
-            ManifestResourceTable resourceTable = (ManifestResourceTable)stripped_tables[ManifestResourceTable.RId];
+            ManifestResourceTable resourceTable = (ManifestResourceTable)stripped_tables[
+                ManifestResourceTable.RId
+            ];
             if (resourceTable == null)
                 return;
 
@@ -184,7 +194,9 @@ namespace AssemblyStripper
                     if (er == null)
                         continue;
 
-                    if (resource.Name != original.MetadataRoot.Streams.StringsHeap[resourceRow.Name])
+                    if (
+                        resource.Name != original.MetadataRoot.Streams.StringsHeap[resourceRow.Name]
+                    )
                         continue;
 
                     resourceRow.Offset = metadata_writer.AddResource(er.Data);
@@ -199,7 +211,14 @@ namespace AssemblyStripper
 
         internal static void StripAssembly(AssemblyDefinition assembly, string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (
+                FileStream fs = new FileStream(
+                    file,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.None
+                )
+            )
             {
                 new AssemblyStripper(assembly, new BinaryWriter(fs)).Strip();
             }
@@ -209,7 +228,6 @@ namespace AssemblyStripper
         {
             AssemblyDefinition assembly = AssemblyFactory.GetAssembly(assemblyFile);
             AssemblyStripper.StripAssembly(assembly, outputPath);
-            
         }
     }
 }

@@ -10,6 +10,4 @@ namespace Microsoft.AspNetCore.Components;
 /// service provider during initialization.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public sealed class InjectAttribute : Attribute
-{
-}
+public sealed class InjectAttribute : Attribute { }

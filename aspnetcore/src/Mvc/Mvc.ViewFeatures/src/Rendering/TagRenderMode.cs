@@ -12,17 +12,14 @@ public enum TagRenderMode
     /// Normal mode.
     /// </summary>
     Normal,
-
     /// <summary>
     /// Start tag mode.
     /// </summary>
     StartTag,
-
     /// <summary>
     /// End tag mode.
     /// </summary>
     EndTag,
-
     /// <summary>
     /// Self closing mode.
     /// </summary>

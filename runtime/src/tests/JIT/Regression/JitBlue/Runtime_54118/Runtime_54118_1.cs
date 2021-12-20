@@ -25,7 +25,7 @@ public class Runtime_54118
 
     public static int Main()
     {
-        byte[] vr7 = new byte[]{0};
+        byte[] vr7 = new byte[] { 0 };
         bool vr11 = default(bool);
         bool ok = false;
         int k = Bound();

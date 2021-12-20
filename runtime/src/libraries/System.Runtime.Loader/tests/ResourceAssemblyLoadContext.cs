@@ -27,7 +27,9 @@ namespace System.Runtime.Loader.Tests
         {
             string assembly = assemblyName.Name + ".dll";
             var currentAsm = typeof(ResourceAssemblyLoadContext).GetTypeInfo().Assembly;
-            var asmStream = currentAsm.GetManifestResourceStream("System.Runtime.Loader.Tests." + assembly);
+            var asmStream = currentAsm.GetManifestResourceStream(
+                "System.Runtime.Loader.Tests." + assembly
+            );
 
             if (asmStream == null)
             {

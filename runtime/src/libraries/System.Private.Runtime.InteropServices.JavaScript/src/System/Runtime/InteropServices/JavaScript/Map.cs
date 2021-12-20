@@ -14,15 +14,13 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the Map class.
         /// </summary>
-        public Map() : base(nameof(Map))
-        { }
+        public Map() : base(nameof(Map)) { }
 
         /// <summary>
         /// Initializes a new instance of the Map class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal Map(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Map(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// Gets a value indicating whether the Map object has a fixed size.
@@ -71,14 +69,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="key">The key.</param>
         public object? this[object key]
         {
-            get
-            {
-                return Invoke("get", key);
-            }
-            set
-            {
-                Invoke("set", key, value);
-            }
+            get { return Invoke("get", key); }
+            set { Invoke("set", key, value); }
         }
 
         private sealed class MapEnumerator : IDictionaryEnumerator, IDisposable
@@ -166,13 +158,12 @@ namespace System.Runtime.InteropServices.JavaScript
         private sealed class MapItemCollection : ICollection
         {
             private readonly Map _map;
-            private readonly string _iterator;  // "keys" or "values"
+            private readonly string _iterator; // "keys" or "values"
 
             public MapItemCollection(Map map, string iterator)
             {
                 _map = map;
                 _iterator = iterator;
-
             }
             public int Count => _map.Count;
 
@@ -180,7 +171,8 @@ namespace System.Runtime.InteropServices.JavaScript
 
             public object SyncRoot => this;
 
-            public void CopyTo(System.Array array, int index) => throw new NotImplementedException();
+            public void CopyTo(System.Array array, int index) =>
+                throw new NotImplementedException();
 
             // Construct and return an enumerator.
             public IEnumerator GetEnumerator() => new MapItemEnumerator(this);
@@ -190,7 +182,6 @@ namespace System.Runtime.InteropServices.JavaScript
             /// </summary>
             private sealed class MapItemEnumerator : IEnumerator
             {
-
                 private readonly MapItemCollection _mapItemCollection;
                 private JSObject? _mapItemIterator;
 
@@ -204,7 +195,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 public bool MoveNext()
                 {
                     if (_mapItemIterator == null)
-                        _mapItemIterator = (JSObject)_mapItemCollection._map.Invoke(_mapItemCollection._iterator);
+                        _mapItemIterator = (JSObject)_mapItemCollection._map.Invoke(
+                            _mapItemCollection._iterator
+                        );
 
                     var done = false;
                     using (var result = (JSObject)_mapItemIterator.Invoke("next"))
@@ -229,7 +222,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 {
                     if (!_disposedValue)
                     {
-
                         _mapItemIterator?.Dispose();
                         _mapItemIterator = null;
                         _disposedValue = true;

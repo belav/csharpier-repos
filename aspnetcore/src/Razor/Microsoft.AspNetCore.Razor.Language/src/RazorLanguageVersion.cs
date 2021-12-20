@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 // Note: RazorSDK is aware of version monikers such as "latest", and "experimental". Update it if we introduce new monikers.
 [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
-public sealed class RazorLanguageVersion : IEquatable<RazorLanguageVersion>, IComparable<RazorLanguageVersion>
+public sealed class RazorLanguageVersion
+    : IEquatable<RazorLanguageVersion>,
+      IComparable<RazorLanguageVersion>
 {
     public static readonly RazorLanguageVersion Version_1_0 = new RazorLanguageVersion(1, 0);
 
@@ -99,7 +101,8 @@ public sealed class RazorLanguageVersion : IEquatable<RazorLanguageVersion>, ICo
 
         throw new ArgumentException(
             Resources.FormatRazorLanguageVersion_InvalidVersion(languageVersion),
-            nameof(languageVersion));
+            nameof(languageVersion)
+        );
     }
 
     // Don't want anyone else constructing language versions.

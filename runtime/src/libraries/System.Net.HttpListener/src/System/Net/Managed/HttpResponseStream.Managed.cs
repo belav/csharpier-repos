@@ -46,7 +46,11 @@ namespace System.Net
         private bool _trailer_sent;
         private Stream _stream;
 
-        internal HttpResponseStream(Stream stream, HttpListenerResponse response, bool ignore_errors)
+        internal HttpResponseStream(
+            Stream stream,
+            HttpListenerResponse response,
+            bool ignore_errors
+        )
         {
             _response = response;
             _ignore_errors = ignore_errors;
@@ -107,7 +111,8 @@ namespace System.Net
                     ms.Write(bytes, 0, bytes.Length);
                 }
 
-                await InternalWriteAsync(ms.GetBuffer(), (int)start, (int)(ms.Length - start)).ConfigureAwait(false);
+                await InternalWriteAsync(ms.GetBuffer(), (int)start, (int)(ms.Length - start))
+                    .ConfigureAwait(false);
                 await _stream.FlushAsync().ConfigureAwait(false);
             }
         }
@@ -156,11 +161,16 @@ namespace System.Net
         }
 
         internal Task InternalWriteAsync(byte[] buffer, int offset, int count) =>
-            _ignore_errors ? InternalWriteIgnoreErrorsAsync(buffer, offset, count) : _stream.WriteAsync(buffer, offset, count);
+            _ignore_errors
+                ? InternalWriteIgnoreErrorsAsync(buffer, offset, count)
+                : _stream.WriteAsync(buffer, offset, count);
 
         private async Task InternalWriteIgnoreErrorsAsync(byte[] buffer, int offset, int count)
         {
-            try { await _stream.WriteAsync(buffer.AsMemory(offset, count)).ConfigureAwait(false); }
+            try
+            {
+                await _stream.WriteAsync(buffer.AsMemory(offset, count)).ConfigureAwait(false);
+            }
             catch { }
         }
 
@@ -202,7 +212,13 @@ namespace System.Net
                 InternalWrite(s_crlf, 0, 2);
         }
 
-        private IAsyncResult BeginWriteCore(byte[] buffer, int offset, int size, AsyncCallback? cback, object? state)
+        private IAsyncResult BeginWriteCore(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? cback,
+            object? state
+        )
         {
             if (_closed)
             {
@@ -285,7 +301,10 @@ namespace System.Net
                     // NetworkStream wraps exceptions in IOExceptions; if the underlying socket operation
                     // failed because of invalid arguments or usage, propagate that error.  Otherwise
                     // wrap the whole thing in an HttpListenerException.  This is all to match Windows behavior.
-                    if (ex.InnerException is ArgumentException || ex.InnerException is InvalidOperationException)
+                    if (
+                        ex.InnerException is ArgumentException
+                        || ex.InnerException is InvalidOperationException
+                    )
                     {
                         ExceptionDispatchInfo.Throw(ex.InnerException);
                     }

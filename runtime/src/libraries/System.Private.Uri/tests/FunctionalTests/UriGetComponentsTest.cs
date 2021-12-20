@@ -11,7 +11,10 @@ namespace System.PrivateUri.Tests
         public void GetComponents_ASCIIHost_LowerCaseResult()
         {
             Uri testUri = new Uri("http://MixedCase.HostName");
-            Assert.Equal("mixedcase.hostname", testUri.GetComponents(UriComponents.Host, UriFormat.UriEscaped));
+            Assert.Equal(
+                "mixedcase.hostname",
+                testUri.GetComponents(UriComponents.Host, UriFormat.UriEscaped)
+            );
             Assert.Equal("mixedcase.hostname", testUri.Host);
         }
 
@@ -19,7 +22,10 @@ namespace System.PrivateUri.Tests
         public void GetComponents_PunycodeHostIriOnIdnOff_LowerCaseResult()
         {
             Uri testUri = new Uri("http://wWw.xn--pCk.Com");
-            Assert.Equal("www.xn--pck.com", testUri.GetComponents(UriComponents.Host, UriFormat.UriEscaped));
+            Assert.Equal(
+                "www.xn--pck.com",
+                testUri.GetComponents(UriComponents.Host, UriFormat.UriEscaped)
+            );
             Assert.Equal("www.xn--pck.com", testUri.Host);
             Assert.Equal("www.xn--pck.com", testUri.DnsSafeHost);
         }
@@ -35,7 +41,10 @@ namespace System.PrivateUri.Tests
             Assert.Equal("/dir1/dir2", testUri.AbsolutePath);
             Assert.Equal("?query=expression", testUri.Query);
             Assert.Equal("#fragment", testUri.Fragment);
-            Assert.Equal("eb://00000000000000000000000/dir1/dir2?query=expression#fragment", testUri.AbsoluteUri);
+            Assert.Equal(
+                "eb://00000000000000000000000/dir1/dir2?query=expression#fragment",
+                testUri.AbsoluteUri
+            );
 
             // Hex numbers should not be converted
             testUri = new Uri("eb://123.231.0x0f.1/dir");

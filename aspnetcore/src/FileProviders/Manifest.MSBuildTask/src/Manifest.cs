@@ -44,10 +44,11 @@ public class Manifest
     public XDocument ToXmlDocument()
     {
         var document = new XDocument(new XDeclaration("1.0", "utf-8", "yes"));
-        var root = new XElement(ElementNames.Root,
+        var root = new XElement(
+            ElementNames.Root,
             new XElement(ElementNames.ManifestVersion, "1.0"),
-            new XElement(ElementNames.FileSystem,
-            Root.Children.Select(e => BuildNode(e))));
+            new XElement(ElementNames.FileSystem, Root.Children.Select(e => BuildNode(e)))
+        );
 
         document.Add(root);
 
@@ -58,13 +59,18 @@ public class Manifest
     {
         if (entry.IsFile)
         {
-            return new XElement(ElementNames.File,
+            return new XElement(
+                ElementNames.File,
                 new XAttribute(ElementNames.Name, entry.Name),
-                new XElement(ElementNames.ResourcePath, entry.AssemblyResourceName));
+                new XElement(ElementNames.ResourcePath, entry.AssemblyResourceName)
+            );
         }
         else
         {
-            var directory = new XElement(ElementNames.Directory, new XAttribute(ElementNames.Name, entry.Name));
+            var directory = new XElement(
+                ElementNames.Directory,
+                new XAttribute(ElementNames.Name, entry.Name)
+            );
             directory.Add(entry.Children.Select(c => BuildNode(c)));
             return directory;
         }

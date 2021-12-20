@@ -30,7 +30,6 @@ internal class Test
             Console.WriteLine("Hello from Crash!");
             s_result = 100;
         }
-
         finally
         {
             var unused = new bool[] { s_someField };
@@ -47,4 +46,3 @@ internal class Test
         return s_result;
     }
 }
-

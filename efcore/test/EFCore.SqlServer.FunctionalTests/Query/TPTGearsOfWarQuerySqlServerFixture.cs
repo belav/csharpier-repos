@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class TPTGearsOfWarQuerySqlServerFixture : TPTGearsOfWarQueryRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
@@ -23,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     b.Ignore(m => m.Date);
                     b.Ignore(m => m.Time);
-                });
+                }
+            );
         }
     }
 }

@@ -38,7 +38,6 @@ internal class Buffer
     }
 }
 
-
 internal class Test_bug595776
 {
     private static int Main()
@@ -70,5 +69,3 @@ internal class Test_bug595776
         }
     }
 }
-
-

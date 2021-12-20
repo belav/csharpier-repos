@@ -17,7 +17,8 @@ internal static partial class Interop
             int cbKeyObject,
             byte* pbSecret,
             int cbSecret,
-            uint dwFlags);
+            uint dwFlags
+        );
 
         [GeneratedDllImport(Libraries.BCrypt, CharSet = CharSet.Unicode)]
         internal static unsafe partial NTSTATUS BCryptGenerateSymmetricKey(
@@ -27,6 +28,7 @@ internal static partial class Interop
             int cbKeyObject,
             byte* pbSecret,
             int cbSecret,
-            uint dwFlags);
+            uint dwFlags
+        );
     }
 }

@@ -34,32 +34,60 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioLogHubLoggerFactory(
-            [Import(typeof(SAsyncServiceProvider))] VSShell.IAsyncServiceProvider asyncServiceProvider)
+            [Import(typeof(SAsyncServiceProvider))]
+                VSShell.IAsyncServiceProvider asyncServiceProvider
+        )
         {
             _asyncServiceProvider = asyncServiceProvider;
         }
 
-        public async Task<ILspLogger> CreateLoggerAsync(string serverTypeName, string? clientName, JsonRpc jsonRpc, CancellationToken cancellationToken)
+        public async Task<ILspLogger> CreateLoggerAsync(
+            string serverTypeName,
+            string? clientName,
+            JsonRpc jsonRpc,
+            CancellationToken cancellationToken
+        )
         {
-            var logName = $"Roslyn.{serverTypeName}.{clientName ?? "Default"}.{Interlocked.Increment(ref s_logHubSessionId)}";
-            var logId = new LogId(logName, new ServiceMoniker(typeof(LanguageServerTarget).FullName));
+            var logName =
+                $"Roslyn.{serverTypeName}.{clientName ?? "Default"}.{Interlocked.Increment(ref s_logHubSessionId)}";
+            var logId = new LogId(
+                logName,
+                new ServiceMoniker(typeof(LanguageServerTarget).FullName)
+            );
 
-            var serviceContainer = await VSShell.ServiceExtensions.GetServiceAsync<SVsBrokeredServiceContainer, IBrokeredServiceContainer>(_asyncServiceProvider).ConfigureAwait(false);
+            var serviceContainer = await VSShell.ServiceExtensions
+                .GetServiceAsync<SVsBrokeredServiceContainer, IBrokeredServiceContainer>(
+                    _asyncServiceProvider
+                )
+                .ConfigureAwait(false);
             var service = serviceContainer.GetFullAccessServiceBroker();
 
-            var configuration = await TraceConfiguration.CreateTraceConfigurationInstanceAsync(service, ownsServiceBroker: true, cancellationToken).ConfigureAwait(false);
+            var configuration = await TraceConfiguration
+                .CreateTraceConfigurationInstanceAsync(
+                    service,
+                    ownsServiceBroker: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Register the default log level as information.
             // Loghub will take care of cleaning up older logs from past sessions / current session
             // if it decides the log file sizes are too large.
             var loggingLevel = SourceLevels.ActivityTracing | SourceLevels.Information;
 
-            var logOptions = new RpcContracts.Logging.LoggerOptions(new LoggingLevelSettings(loggingLevel));
-            var traceSource = await configuration.RegisterLogSourceAsync(logId, logOptions, cancellationToken).ConfigureAwait(false);
+            var logOptions = new RpcContracts.Logging.LoggerOptions(
+                new LoggingLevelSettings(loggingLevel)
+            );
+            var traceSource = await configuration
+                .RegisterLogSourceAsync(logId, logOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             // Associate this trace source with the jsonrpc conduit.  This ensures that we can associate logs we report
             // with our callers and the operations they are performing.
-            jsonRpc.ActivityTracingStrategy = new CorrelationManagerTracingStrategy { TraceSource = traceSource };
+            jsonRpc.ActivityTracingStrategy = new CorrelationManagerTracingStrategy
+            {
+                TraceSource = traceSource
+            };
 
             return new LogHubLspLogger(configuration, traceSource);
         }

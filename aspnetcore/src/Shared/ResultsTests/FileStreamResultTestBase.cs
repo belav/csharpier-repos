@@ -19,14 +19,20 @@ public abstract class FileStreamResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false);
+        bool enableRangeProcessing = false
+    );
 
     [Theory]
     [InlineData(0, 4, "Hello", 5)]
     [InlineData(6, 10, "World", 5)]
     [InlineData(null, 5, "World", 5)]
     [InlineData(6, null, "World", 5)]
-    public async Task WriteFileAsync_PreconditionStateShouldProcess_WritesRangeRequested(long? start, long? end, string expectedString, long contentLength)
+    public async Task WriteFileAsync_PreconditionStateShouldProcess_WritesRangeRequested(
+        long? start,
+        long? end,
+        string expectedString,
+        long contentLength
+    )
     {
         // Arrange
         var contentType = "text/plain";
@@ -39,15 +45,19 @@ public abstract class FileStreamResultTestBase
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.Range = new RangeHeaderValue(start, end);
-        requestHeaders.IfMatch = new[]
-        {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         start = start ?? 11 - end;
@@ -80,17 +90,23 @@ public abstract class FileStreamResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[]
-        {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
         requestHeaders.Range = new RangeHeaderValue(0, 4);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"Etag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -121,10 +137,7 @@ public abstract class FileStreamResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[]
-        {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
         requestHeaders.Range = new RangeHeaderValue(0, 4);
         requestHeaders.IfRange = new RangeConditionHeaderValue(DateTimeOffset.MinValue);
         httpContext.Request.Method = HttpMethods.Get;
@@ -158,17 +171,21 @@ public abstract class FileStreamResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[]
-        {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
         requestHeaders.Range = new RangeHeaderValue(0, 4);
         requestHeaders.IfRange = new RangeConditionHeaderValue(DateTimeOffset.MinValue);
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -186,7 +203,9 @@ public abstract class FileStreamResultTestBase
     [InlineData("0-5")]
     [InlineData("bytes = ")]
     [InlineData("bytes = 1-4, 5-11")]
-    public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestIgnored(string rangeString)
+    public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestIgnored(
+        string rangeString
+    )
     {
         // Arrange
         var contentType = "text/plain";
@@ -202,7 +221,14 @@ public abstract class FileStreamResultTestBase
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -220,7 +246,9 @@ public abstract class FileStreamResultTestBase
     [Theory]
     [InlineData("bytes = 12-13")]
     [InlineData("bytes = -0")]
-    public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestedNotSatisfiable(string rangeString)
+    public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestedNotSatisfiable(
+        string rangeString
+    )
     {
         // Arrange
         var contentType = "text/plain";
@@ -235,7 +263,14 @@ public abstract class FileStreamResultTestBase
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -265,16 +300,20 @@ public abstract class FileStreamResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[]
-        {
-                new EntityTagHeaderValue("\"NotEtag\""),
-            };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"NotEtag\""), };
         httpContext.Request.Headers.Range = "bytes = 0-6";
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -301,16 +340,20 @@ public abstract class FileStreamResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfNoneMatch = new[]
-        {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+        requestHeaders.IfNoneMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
         httpContext.Request.Headers.Range = "bytes = 0-6";
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -343,15 +386,19 @@ public abstract class FileStreamResultTestBase
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.Range = new RangeHeaderValue(0, 5);
-        requestHeaders.IfMatch = new[]
-        {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
         // Act
-        await ExecuteAsync(httpContext, readStream, contentType, lastModified, entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            readStream,
+            contentType,
+            lastModified,
+            entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -375,8 +422,7 @@ public abstract class FileStreamResultTestBase
         // Arrange
         // Generate an array of bytes with a predictable pattern
         // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, 13
-        var originalBytes = Enumerable.Range(0, 0x1234)
-            .Select(b => (byte)(b % 20)).ToArray();
+        var originalBytes = Enumerable.Range(0, 0x1234).Select(b => (byte)(b % 20)).ToArray();
 
         var originalStream = new MemoryStream(originalBytes);
 
@@ -400,8 +446,7 @@ public abstract class FileStreamResultTestBase
         var expectedContentType = "text/foo; charset=us-ascii";
         // Generate an array of bytes with a predictable pattern
         // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, 13
-        var originalBytes = Enumerable.Range(0, 0x1234)
-            .Select(b => (byte)(b % 20)).ToArray();
+        var originalBytes = Enumerable.Range(0, 0x1234).Select(b => (byte)(b % 20)).ToArray();
 
         var originalStream = new MemoryStream(originalBytes);
 

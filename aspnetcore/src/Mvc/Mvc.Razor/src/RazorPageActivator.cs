@@ -33,7 +33,8 @@ public class RazorPageActivator : IRazorPageActivator
         IJsonHelper jsonHelper,
         DiagnosticSource diagnosticSource,
         HtmlEncoder htmlEncoder,
-        IModelExpressionProvider modelExpressionProvider)
+        IModelExpressionProvider modelExpressionProvider
+    )
     {
         _activationInfo = new ConcurrentDictionary<CacheKey, RazorPagePropertyActivator>();
         _metadataProvider = metadataProvider;
@@ -53,7 +54,8 @@ public class RazorPageActivator : IRazorPageActivator
         _activationInfo.Clear();
     }
 
-    internal ConcurrentDictionary<CacheKey, RazorPagePropertyActivator> ActivationInfo => _activationInfo;
+    internal ConcurrentDictionary<CacheKey, RazorPagePropertyActivator> ActivationInfo =>
+        _activationInfo;
 
     /// <inheritdoc />
     public void Activate(IRazorPage page, ViewContext context)
@@ -101,7 +103,8 @@ public class RazorPageActivator : IRazorPageActivator
                 pageType,
                 modelType,
                 _metadataProvider,
-                _propertyAccessors);
+                _propertyAccessors
+            );
 
             propertyActivator = _activationInfo.GetOrAdd(cacheKey, propertyActivator);
         }
@@ -123,8 +126,7 @@ public class RazorPageActivator : IRazorPageActivator
 
         public bool Equals(CacheKey other)
         {
-            return PageType == other.PageType &&
-                ProvidedModelType == other.ProvidedModelType;
+            return PageType == other.PageType && ProvidedModelType == other.ProvidedModelType;
         }
 
         public override int GetHashCode()

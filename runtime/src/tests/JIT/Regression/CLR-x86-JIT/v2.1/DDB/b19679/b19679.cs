@@ -3622,5 +3622,3 @@ public class Test_b19679
         return 100;
     }
 }
-
-

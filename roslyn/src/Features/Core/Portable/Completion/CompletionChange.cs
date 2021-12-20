@@ -41,7 +41,11 @@ namespace Microsoft.CodeAnalysis.Completion
         public bool IncludesCommitCharacter { get; }
 
         private CompletionChange(
-            TextChange textChange, ImmutableArray<TextChange> textChanges, int? newPosition, bool includesCommitCharacter)
+            TextChange textChange,
+            ImmutableArray<TextChange> textChanges,
+            int? newPosition,
+            bool includesCommitCharacter
+        )
         {
             TextChange = textChange;
             NewPosition = newPosition;
@@ -65,13 +69,22 @@ namespace Microsoft.CodeAnalysis.Completion
         /// are multiple entries, <see cref="Create(TextChange, ImmutableArray{TextChange}, int?, bool)"/> must be called instead,
         /// with both the individual text changes, and an aggregated text change for hosts that only support that.
         /// </remarks>
-        [Obsolete("Use Create overload that takes a single TextChange and multiple TextChanges instead", error: true)]
+        [Obsolete(
+            "Use Create overload that takes a single TextChange and multiple TextChanges instead",
+            error: true
+        )]
         public static CompletionChange Create(
             ImmutableArray<TextChange> textChanges,
             int? newPosition = null,
-            bool includesCommitCharacter = false)
+            bool includesCommitCharacter = false
+        )
         {
-            return new CompletionChange(textChanges.Single(), textChanges, newPosition, includesCommitCharacter);
+            return new CompletionChange(
+                textChanges.Single(),
+                textChanges,
+                newPosition,
+                includesCommitCharacter
+            );
         }
 
 #pragma warning disable RS0027 // Public API with optional parameter(s) should have the most parameters amongst its public overloads
@@ -79,9 +92,15 @@ namespace Microsoft.CodeAnalysis.Completion
 #pragma warning restore RS0027 // Public API with optional parameter(s) should have the most parameters amongst its public overloads
             TextChange textChange,
             int? newPosition = null,
-            bool includesCommitCharacter = false)
+            bool includesCommitCharacter = false
+        )
         {
-            return new CompletionChange(textChange, textChanges: default, newPosition, includesCommitCharacter);
+            return new CompletionChange(
+                textChange,
+                textChanges: default,
+                newPosition,
+                includesCommitCharacter
+            );
         }
 
 #pragma warning disable RS0027 // Public API with optional parameter(s) should have the most parameters amongst its public overloads.
@@ -92,33 +111,39 @@ namespace Microsoft.CodeAnalysis.Completion
             TextChange textChange,
             ImmutableArray<TextChange> textChanges,
             int? newPosition = null,
-            bool includesCommitCharacter = false)
+            bool includesCommitCharacter = false
+        )
         {
-            return new CompletionChange(textChange, textChanges, newPosition, includesCommitCharacter);
+            return new CompletionChange(
+                textChange,
+                textChanges,
+                newPosition,
+                includesCommitCharacter
+            );
         }
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionChange"/> with the <see cref="TextChange"/> property changed.
         /// </summary>
-        public CompletionChange WithTextChange(TextChange textChange)
-            => new(textChange, TextChanges, NewPosition, IncludesCommitCharacter);
+        public CompletionChange WithTextChange(TextChange textChange) =>
+            new(textChange, TextChanges, NewPosition, IncludesCommitCharacter);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionChange"/> with the <see cref="TextChanges"/> property changed.
         /// </summary>
-        public CompletionChange WithTextChanges(ImmutableArray<TextChange> textChanges)
-            => new(TextChange, textChanges, NewPosition, IncludesCommitCharacter);
+        public CompletionChange WithTextChanges(ImmutableArray<TextChange> textChanges) =>
+            new(TextChange, textChanges, NewPosition, IncludesCommitCharacter);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionChange"/> with the <see cref="NewPosition"/> property changed.
         /// </summary>
-        public CompletionChange WithNewPosition(int? newPostion)
-            => new(TextChange, TextChanges, newPostion, IncludesCommitCharacter);
+        public CompletionChange WithNewPosition(int? newPostion) =>
+            new(TextChange, TextChanges, newPostion, IncludesCommitCharacter);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionChange"/> with the <see cref="IncludesCommitCharacter"/> property changed.
         /// </summary>
-        public CompletionChange WithIncludesCommitCharacter(bool includesCommitCharacter)
-            => new(TextChange, TextChanges, NewPosition, includesCommitCharacter);
+        public CompletionChange WithIncludesCommitCharacter(bool includesCommitCharacter) =>
+            new(TextChange, TextChanges, NewPosition, includesCommitCharacter);
     }
 }

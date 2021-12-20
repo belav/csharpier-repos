@@ -21,9 +21,7 @@ namespace System.Threading
         private bool _isScheduled;
         private long _scheduledDueTimeMs;
 
-        private TimerQueue(int id)
-        {
-        }
+        private TimerQueue(int id) { }
 
         [DynamicDependency("TimeoutCallback")]
         // The id argument is unused in netcore

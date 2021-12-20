@@ -12,13 +12,32 @@ namespace PInvokeTests
 {
     class VarargsTest
     {
-        [DllImport("VarargsNative", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void TestVarArgs(StringBuilder builder, IntPtr bufferSize, string formatString, __arglist);
+        [DllImport(
+            "VarargsNative",
+            CharSet = CharSet.Unicode,
+            CallingConvention = CallingConvention.Cdecl
+        )]
+        private static extern void TestVarArgs(
+            StringBuilder builder,
+            IntPtr bufferSize,
+            string formatString,
+            __arglist
+        );
 
         [DllImport("VarargsNative", CharSet = CharSet.Unicode)]
-        private static extern void TestArgIterator(StringBuilder builder, IntPtr bufferSize, string formatString, ArgIterator arguments);
+        private static extern void TestArgIterator(
+            StringBuilder builder,
+            IntPtr bufferSize,
+            string formatString,
+            ArgIterator arguments
+        );
 
-        private static void TestArgIteratorWrapper(StringBuilder builder, IntPtr bufferSize, string formatString, __arglist)
+        private static void TestArgIteratorWrapper(
+            StringBuilder builder,
+            IntPtr bufferSize,
+            string formatString,
+            __arglist
+        )
         {
             TestArgIterator(builder, bufferSize, formatString, new ArgIterator(__arglist));
         }
@@ -49,7 +68,12 @@ namespace PInvokeTests
             passed &= AssertEqual(builder.ToString(), expected);
 
             builder = new StringBuilder(30);
-            TestArgIteratorWrapper(builder, (IntPtr)30, "%i, %i, %.1f", __arglist(arg1, arg2, arg3));
+            TestArgIteratorWrapper(
+                builder,
+                (IntPtr)30,
+                "%i, %i, %.1f",
+                __arglist(arg1, arg2, arg3)
+            );
             passed &= AssertEqual(builder.ToString(), expected);
 
             return passed ? 100 : 101;

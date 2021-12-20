@@ -15,7 +15,8 @@ public partial class DetectMisplacedLambdaAttributeTest
     public async Task MinimalAction_WithCorrectlyPlacedAttribute_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
@@ -33,14 +34,16 @@ void Hello() { }
     public async Task MinimalAction_WithMisplacedAttribute_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", /*MM*/() => Hello());
 [Authorize]
 void Hello() { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -48,21 +51,26 @@ void Hello() { }
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.DetectMisplacedLambdaAttribute, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task MinimalAction_WithMisplacedAttributeAndBlockSyntax_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", /*MM*/() => { return Hello(); });
 [Authorize]
 string Hello() { return ""foo""; }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -70,14 +78,18 @@ string Hello() { return ""foo""; }
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.DetectMisplacedLambdaAttribute, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task MinimalAction_WithMultipleMisplacedAttributes_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -86,21 +98,43 @@ app.MapGet(""/"", /*MM*/() => Hello());
 [Authorize]
 [Produces(""application/xml"")]
 void Hello() { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
-        Assert.Collection(diagnostics,
-            diagnostic => {
-                Assert.Same(DiagnosticDescriptors.DetectMisplacedLambdaAttribute, diagnostic.Descriptor);
-                AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                Assert.Equal("'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Collection(
+            diagnostics,
+            diagnostic =>
+            {
+                Assert.Same(
+                    DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
+                    diagnostic.Descriptor
+                );
+                AnalyzerAssert.DiagnosticLocation(
+                    source.DefaultMarkerLocation,
+                    diagnostic.Location
+                );
+                Assert.Equal(
+                    "'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective",
+                    diagnostic.GetMessage(CultureInfo.InvariantCulture)
+                );
             },
-            diagnostic => {
-                Assert.Same(DiagnosticDescriptors.DetectMisplacedLambdaAttribute, diagnostic.Descriptor);
-                AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                Assert.Equal("'ProducesAttribute' should be placed directly on the route handler lambda to be effective", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+            diagnostic =>
+            {
+                Assert.Same(
+                    DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
+                    diagnostic.Descriptor
+                );
+                AnalyzerAssert.DiagnosticLocation(
+                    source.DefaultMarkerLocation,
+                    diagnostic.Location
+                );
+                Assert.Equal(
+                    "'ProducesAttribute' should be placed directly on the route handler lambda to be effective",
+                    diagnostic.GetMessage(CultureInfo.InvariantCulture)
+                );
             }
         );
     }
@@ -109,7 +143,8 @@ void Hello() { }
     public async Task MinimalAction_WithSingleMisplacedAttribute_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -117,16 +152,28 @@ var app = WebApplication.Create();
 app.MapGet(""/"", /*MM*/[Authorize]() => Hello());
 [Produces(""application/xml"")]
 void Hello() { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
-        Assert.Collection(diagnostics,
-            diagnostic => {
-                Assert.Same(DiagnosticDescriptors.DetectMisplacedLambdaAttribute, diagnostic.Descriptor);
-                AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                Assert.Equal("'ProducesAttribute' should be placed directly on the route handler lambda to be effective", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Collection(
+            diagnostics,
+            diagnostic =>
+            {
+                Assert.Same(
+                    DiagnosticDescriptors.DetectMisplacedLambdaAttribute,
+                    diagnostic.Descriptor
+                );
+                AnalyzerAssert.DiagnosticLocation(
+                    source.DefaultMarkerLocation,
+                    diagnostic.Location
+                );
+                Assert.Equal(
+                    "'ProducesAttribute' should be placed directly on the route handler lambda to be effective",
+                    diagnostic.GetMessage(CultureInfo.InvariantCulture)
+                );
             }
         );
     }
@@ -135,7 +182,8 @@ void Hello() { }
     public async Task MinimalAction_DoesNotWarnOnNonReturningMethods()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -155,7 +203,8 @@ app.MapGet(""/"", /*MM*/() => {
     public async Task MinimalAction_DoesNotWarnOrErrorOnNonExistantLambdas()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
@@ -172,14 +221,16 @@ app.MapGet(""/"", () => ThereIsNoMethod());";
     public async Task MinimalAction_WithMisplacedAttributeOnMethodGroup_DoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", Hello);
 [Authorize]
 void Hello() { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -191,7 +242,8 @@ void Hello() { }
     public async Task MinimalAction_WithMisplacedAttributeOnExternalReference_DoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 class Program {
@@ -207,7 +259,8 @@ public static class Helpers
     [Authorize]
     public static void Hello() { }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -215,7 +268,10 @@ public static class Helpers
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.DetectMisplacedLambdaAttribute, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "'AuthorizeAttribute' should be placed directly on the route handler lambda to be effective",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
@@ -224,12 +280,14 @@ public static class Helpers
         // Arrange
         // WriteLine has nullability annotation attributes that should
         // not warn
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", /*MM*/() => System.Console.WriteLine(""foo""));
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -237,4 +295,3 @@ app.MapGet(""/"", /*MM*/() => System.Console.WriteLine(""foo""));
         Assert.Empty(diagnostics);
     }
 }
-

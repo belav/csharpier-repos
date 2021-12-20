@@ -13,16 +13,19 @@ public class DataAnnotationsValidator : ComponentBase, IDisposable
     private IDisposable? _subscriptions;
     private EditContext? _originalEditContext;
 
-    [CascadingParameter] EditContext? CurrentEditContext { get; set; }
+    [CascadingParameter]
+    EditContext? CurrentEditContext { get; set; }
 
     /// <inheritdoc />
     protected override void OnInitialized()
     {
         if (CurrentEditContext == null)
         {
-            throw new InvalidOperationException($"{nameof(DataAnnotationsValidator)} requires a cascading " +
-                $"parameter of type {nameof(EditContext)}. For example, you can use {nameof(DataAnnotationsValidator)} " +
-                $"inside an EditForm.");
+            throw new InvalidOperationException(
+                $"{nameof(DataAnnotationsValidator)} requires a cascading "
+                    + $"parameter of type {nameof(EditContext)}. For example, you can use {nameof(DataAnnotationsValidator)} "
+                    + $"inside an EditForm."
+            );
         }
 
         _subscriptions = CurrentEditContext.EnableDataAnnotationsValidation();
@@ -36,15 +39,15 @@ public class DataAnnotationsValidator : ComponentBase, IDisposable
         {
             // While we could support this, there's no known use case presently. Since InputBase doesn't support it,
             // it's more understandable to have the same restriction.
-            throw new InvalidOperationException($"{GetType()} does not support changing the " +
-                $"{nameof(EditContext)} dynamically.");
+            throw new InvalidOperationException(
+                $"{GetType()} does not support changing the "
+                    + $"{nameof(EditContext)} dynamically."
+            );
         }
     }
 
     /// <inheritdoc/>
-    protected virtual void Dispose(bool disposing)
-    {
-    }
+    protected virtual void Dispose(bool disposing) { }
 
     void IDisposable.Dispose()
     {

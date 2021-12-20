@@ -54,7 +54,6 @@ public class Program
         var startInfo = new ProcessStartInfo()
         {
             FileName = startExe,
-
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true

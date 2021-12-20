@@ -12,7 +12,6 @@ namespace System.ComponentModel
         /// The template can only accept property values. Used with a generic ITemplate.
         /// </summary>
         OneWay = 0,
-
         /// <summary>
         /// The template can accept and expose property values. Used with an IBindableTemplate.
         /// </summary>

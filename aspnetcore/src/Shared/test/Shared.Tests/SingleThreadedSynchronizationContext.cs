@@ -11,11 +11,14 @@ namespace Microsoft.Extensions.Internal;
 
 internal class SingleThreadedSynchronizationContext : SynchronizationContext
 {
-    private readonly BlockingCollection<(SendOrPostCallback Callback, object? State)> _queue = new BlockingCollection<(SendOrPostCallback Callback, object? State)>();
+    private readonly BlockingCollection<(SendOrPostCallback Callback, object? State)> _queue =
+        new BlockingCollection<(SendOrPostCallback Callback, object? State)>();
 
     public override void Send(SendOrPostCallback d, object? state) // Sync operations
     {
-        throw new NotSupportedException($"{nameof(SingleThreadedSynchronizationContext)} does not support synchronous operations.");
+        throw new NotSupportedException(
+            $"{nameof(SingleThreadedSynchronizationContext)} does not support synchronous operations."
+        );
     }
 
     public override void Post(SendOrPostCallback d, object? state) // Async operations

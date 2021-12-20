@@ -31,8 +31,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Gives about 8% win on subsequent lookups in some scenarios.     
         /// </summary>
         /// <remarks></remarks>
-        private readonly ConcurrentDictionary<MetadataTypeName.Key, NamedTypeSymbol> _emittedNameToTypeMap =
-            new ConcurrentDictionary<MetadataTypeName.Key, NamedTypeSymbol>();
+        private readonly ConcurrentDictionary<
+            MetadataTypeName.Key,
+            NamedTypeSymbol
+        > _emittedNameToTypeMap = new ConcurrentDictionary<MetadataTypeName.Key, NamedTypeSymbol>();
 
         private NamespaceSymbol _globalNamespace;
 
@@ -41,10 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal sealed override bool IsMissing
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -58,13 +57,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if ((object)_globalNamespace == null)
                 {
-                    // Get the root namespace from each module, and merge them all together. If there is only one, 
+                    // Get the root namespace from each module, and merge them all together. If there is only one,
                     // then MergedNamespaceSymbol.Create will just return that one.
 
-                    IEnumerable<NamespaceSymbol> allGlobalNamespaces = from m in Modules select m.GlobalNamespace;
-                    var result = MergedNamespaceSymbol.Create(new NamespaceExtent(this),
-                                                        null,
-                                                        allGlobalNamespaces.AsImmutable());
+                    IEnumerable<NamespaceSymbol> allGlobalNamespaces =
+                        from m in Modules
+                        select m.GlobalNamespace;
+                    var result = MergedNamespaceSymbol.Create(
+                        new NamespaceExtent(this),
+                        null,
+                        allGlobalNamespaces.AsImmutable()
+                    );
                     Interlocked.CompareExchange(ref _globalNamespace, result, null);
                 }
 
@@ -85,7 +88,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="digThroughForwardedTypes">
         /// Take forwarded types into account.
         /// </param>
-        internal sealed override NamedTypeSymbol LookupTopLevelMetadataTypeWithCycleDetection(ref MetadataTypeName emittedName, ConsList<AssemblySymbol> visitedAssemblies, bool digThroughForwardedTypes)
+        internal sealed override NamedTypeSymbol LookupTopLevelMetadataTypeWithCycleDetection(
+            ref MetadataTypeName emittedName,
+            ConsList<AssemblySymbol> visitedAssemblies,
+            bool digThroughForwardedTypes
+        )
         {
             NamedTypeSymbol result = null;
 
@@ -94,8 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // loads types. Here we are populating the cache only with things we looked for, so that
             // next time we are looking for the same thing, the lookup is fast. This cache also
             // takes care of TypeForwarders. Gives about 8% win on subsequent lookups in some
-            // scenarios.     
-            //    
+            // scenarios.
+            //
             // CONSIDER !!!
             //
             // However, it is questionable how often subsequent lookup by name  is going to happen.
@@ -112,9 +119,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if ((object)result != null)
             {
                 // We only cache result equivalent to digging through type forwarders, which
-                // might produce a forwarder specific ErrorTypeSymbol. We don't want to 
+                // might produce a forwarder specific ErrorTypeSymbol. We don't want to
                 // return that error symbol, unless digThroughForwardedTypes is true.
-                if (digThroughForwardedTypes || (!result.IsErrorType() && (object)result.ContainingAssembly == (object)this))
+                if (
+                    digThroughForwardedTypes
+                    || (!result.IsErrorType() && (object)result.ContainingAssembly == (object)this)
+                )
                 {
                     return result;
                 }
@@ -150,14 +160,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 bool foundMatchInThisAssembly = (i < count);
 
-                Debug.Assert(!foundMatchInThisAssembly || (object)result.ContainingAssembly == (object)this);
+                Debug.Assert(
+                    !foundMatchInThisAssembly || (object)result.ContainingAssembly == (object)this
+                );
 
                 if (!foundMatchInThisAssembly && digThroughForwardedTypes)
                 {
                     // We didn't find the type
                     System.Diagnostics.Debug.Assert(result is MissingMetadataTypeSymbol);
 
-                    NamedTypeSymbol forwarded = TryLookupForwardedMetadataTypeWithCycleDetection(ref emittedName, visitedAssemblies);
+                    NamedTypeSymbol forwarded = TryLookupForwardedMetadataTypeWithCycleDetection(
+                        ref emittedName,
+                        visitedAssemblies
+                    );
                     if ((object)forwarded != null)
                     {
                         result = forwarded;
@@ -176,7 +191,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal abstract override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(ref MetadataTypeName emittedName, ConsList<AssemblySymbol> visitedAssemblies);
+        internal abstract override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
+            ref MetadataTypeName emittedName,
+            ConsList<AssemblySymbol> visitedAssemblies
+        );
 
         private NamedTypeSymbol LookupTopLevelMetadataTypeInCache(ref MetadataTypeName emittedName)
         {
@@ -203,19 +221,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal int EmittedNameToTypeMapCount
         {
-            get
-            {
-                return _emittedNameToTypeMap.Count;
-            }
+            get { return _emittedNameToTypeMap.Count; }
         }
 
         private void CacheTopLevelMetadataType(
             ref MetadataTypeName emittedName,
-            NamedTypeSymbol result)
+            NamedTypeSymbol result
+        )
         {
             NamedTypeSymbol result1 = null;
             result1 = _emittedNameToTypeMap.GetOrAdd(emittedName.ToKey(), result);
-            System.Diagnostics.Debug.Assert(TypeSymbol.Equals(result1, result, TypeCompareKind.ConsiderEverything2)); // object identity may differ in error cases
+            System.Diagnostics.Debug.Assert(
+                TypeSymbol.Equals(result1, result, TypeCompareKind.ConsiderEverything2)
+            ); // object identity may differ in error cases
         }
     }
 }

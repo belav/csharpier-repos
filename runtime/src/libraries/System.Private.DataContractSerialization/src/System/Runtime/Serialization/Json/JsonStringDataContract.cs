@@ -14,16 +14,19 @@ namespace System.Runtime.Serialization.Json
     {
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonStringDataContract(StringDataContract traditionalStringDataContract)
-            : base(traditionalStringDataContract)
-        {
-        }
+            : base(traditionalStringDataContract) { }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        )
         {
             if (context == null)
             {
-                return TryReadNullAtTopLevel(jsonReader) ? null : jsonReader.ReadElementContentAsString();
+                return TryReadNullAtTopLevel(jsonReader)
+                  ? null
+                  : jsonReader.ReadElementContentAsString();
             }
             else
             {

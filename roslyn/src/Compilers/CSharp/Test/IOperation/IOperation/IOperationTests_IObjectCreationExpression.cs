@@ -15,13 +15,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class IOperationTests_IObjectCreationExpression : SemanticModelTestBase
     {
-        private static readonly CSharpParseOptions ImplicitObjectCreationOptions = TestOptions.Regular9;
+        private static readonly CSharpParseOptions ImplicitObjectCreationOptions =
+            TestOptions.Regular9;
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithArguments()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public C(byte i, long j)
@@ -38,7 +40,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (4 statements, 4 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: C x1
     Local_2: C x2
@@ -149,14 +152,20 @@ IBlockOperation (4 statements, 4 locals) (OperationKind.Block, Type: null) (Synt
       Initializer: 
         null
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithMemberInitializers()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 struct B
 {
     public bool Field;
@@ -180,8 +189,10 @@ class C
         F e2 = new() { """" };
     }/*</bind>*/
 }
-");
-            string expectedOperationTree = @"
+"
+            );
+            string expectedOperationTree =
+                @"
 IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   Locals: Local_1: F x1
     Local_2: F x2
@@ -340,17 +351,28 @@ IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInv
       Initializer: 
         null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(21,36): error CS0029: Cannot implicitly convert type 'int' to 'B'
                 //         F e1 = new() { Property2 = 1 };
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "B").WithLocation(21, 36),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "B")
+                    .WithLocation(21, 36),
                 // file.cs(22,22): error CS1922: Cannot initialize type 'F' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         F e2 = new() { "" };
-                Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }").WithArguments("F").WithLocation(22, 22)
+                Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }")
+                    .WithArguments("F")
+                    .WithLocation(22, 22)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, expectedOperationTree, expectedDiagnostics);
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -576,14 +598,16 @@ Block[B0] - Entry
 Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -595,7 +619,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Int32>..ctor()) (OperationKind.ObjectCreation, Type: System.Collections.Generic.List<System.Int32>) (Syntax: 'new() { x, y, field }')
   Arguments(0)
   Initializer: 
@@ -628,20 +653,29 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.In
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(5,23): warning CS0649: Field 'C.field' is never assigned to, and will always have its default value 0
                 //     private readonly int field;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field").WithArguments("C.field", "0").WithLocation(5, 26)
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
+                    .WithArguments("C.field", "0")
+                    .WithLocation(5, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithNestedCollectionInitializer()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -656,8 +690,10 @@ class C
         }/*</bind>*/;
     }
 }
-");
-            string expectedOperationTree = @"
+"
+            );
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Collections.Generic.List<System.Int32>>..ctor()) (OperationKind.ObjectCreation, Type: System.Collections.Generic.List<System.Collections.Generic.List<System.Int32>>) (Syntax: 'new() { ... }')
   Arguments(0)
   Initializer: 
@@ -713,10 +749,21 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Co
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            var m1 = comp.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
-            VerifyFlowGraph(comp, m1, @"
+            var m1 = comp.SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
+            VerifyFlowGraph(
+                comp,
+                m1,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -834,14 +881,16 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithMemberAndCollectionInitializers()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 internal class Class
 {
@@ -862,7 +911,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: Class..ctor()) (OperationKind.ObjectCreation, Type: Class) (Syntax: 'new() { ... }')
   Arguments(0)
   Initializer: 
@@ -947,14 +997,20 @@ IObjectCreationOperation (Constructor: Class..ctor()) (OperationKind.ObjectCreat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithArrayInitializer()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C
 {
     int[] a;
@@ -963,8 +1019,10 @@ class C
         C a = /*<bind>*/new() { a = { [0] = 1, [1] = 2 } }/*</bind>*/;
     }
 }
-");
-            string expectedOperationTree = @"
+"
+            );
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C) (Syntax: 'new() { a = ... [1] = 2 } }')
   Arguments(0)
   Initializer: 
@@ -1001,14 +1059,27 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
             {
                 // warning CS0414: The field 'C.a' is assigned but its value is never used
                 //     int[] a;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a").WithArguments("C.a").WithLocation(4, 11)
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
+                    .WithArguments("C.a")
+                    .WithLocation(4, 11)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            var main = comp.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var main = comp.SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(comp, main, @"
+            VerifyFlowGraph(
+                comp,
+                main,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1099,14 +1170,16 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M1()
@@ -1115,7 +1188,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new() { Mis ... ember = 1 }')
   Arguments(0)
   Initializer: 
@@ -1131,20 +1205,29 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
             Right: 
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,34): error CS0117: 'C' does not contain a definition for 'MissingMember'
                 //         C x1 = /*<bind>*/new() { MissingMember = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingMember").WithArguments("C", "MissingMember").WithLocation(6, 34)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingMember")
+                    .WithArguments("C", "MissingMember")
+                    .WithLocation(6, 34)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithInvalidMemberInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M1()
@@ -1153,7 +1236,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new(){ Miss ... { x = 1 } }')
   Arguments(0)
   Initializer: 
@@ -1179,20 +1263,29 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                       Right: 
                         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,33): error CS0117: 'C' does not contain a definition for 'MissingField'
                 //         C x1 = /*<bind>*/new(){ MissingField = { x = 1 } }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField").WithArguments("C", "MissingField").WithLocation(6, 33)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
+                    .WithArguments("C", "MissingField")
+                    .WithLocation(6, 33)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithInvalidCollectionInitializer()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -1201,8 +1294,10 @@ class C
         C x1 = /*<bind>*/new(){ MissingField = new List<int>() { 1 }}/*</bind>*/;
     }
 }
-");
-            string expectedOperationTree = @"
+"
+            );
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new(){ Miss ... t>() { 1 }}')
   Arguments(0)
   Initializer: 
@@ -1230,17 +1325,31 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                                 InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                                 OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,33): error CS0117: 'C' does not contain a definition for 'MissingField'
                 //         C x1 = /*<bind>*/new(){ MissingField = new List<int>() { 1 }}/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField").WithArguments("C", "MissingField").WithLocation(7, 33)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
+                    .WithArguments("C", "MissingField")
+                    .WithLocation(7, 33)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            var m1 = comp.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var m1 = comp.SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(comp, m1, @"
+            VerifyFlowGraph(
+                comp,
+                m1,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1319,7 +1428,8 @@ Block[B0] - Entry
 Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -1328,40 +1438,57 @@ Block[B4] - Exit
         {
             var comp = CreateCompilation("_ = new int[/*<bind>*/new(bad)/*</bind>*/];");
 
-            var expectedDiagnostics = new DiagnosticDescription[] { 
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (1,27): error CS0103: The name 'bad' does not exist in the current context
                 // _ = new int[/*<bind>*/new(bad)/*</bind>*/];
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad").WithArguments("bad").WithLocation(1, 27)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
+                    .WithArguments("bad")
+                    .WithLocation(1, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)')
   Children(1):
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'bad')
         Children(0)
-            ", expectedDiagnostics);
+            ",
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(1198816, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1198816/")]
         public void ImplicitObjectCreationUnconverted_IfCondition()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 if (/*<bind>*/new(bad)/*</bind>*/) {}
-", options: TestOptions.UnsafeReleaseExe);
+",
+                options: TestOptions.UnsafeReleaseExe
+            );
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (2,19): error CS0103: The name 'bad' does not exist in the current context
                 // if (/*<bind>*/new(bad)/*</bind>*/) {}
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad").WithArguments("bad").WithLocation(2, 19)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
+                    .WithArguments("bad")
+                    .WithLocation(2, 19)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)')
   Children(1):
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'bad')
         Children(0)
-            ", expectedDiagnostics);
+            ",
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -1369,7 +1496,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
         public void ImplicitObjectCreationUnconverted_ConditionalOperator()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1378,18 +1505,25 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
 }";
             var comp = CreateCompilation(source);
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (5,27): error CS0103: The name 'bad' does not exist in the current context
                 //         _ = /*<bind>*/new(bad)/*</bind>*/ ? null : new object();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad").WithArguments("bad").WithLocation(5, 27)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
+                    .WithArguments("bad")
+                    .WithLocation(5, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)')
   Children(1):
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'bad')
         Children(0)
-            ", expectedDiagnostics);
+            ",
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -1397,7 +1531,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
         public void ImplicitObjectCreationUnconverted_ConditionalOperator_Nested1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1406,18 +1540,25 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
 }";
             var comp = CreateCompilation(source);
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (5,28): error CS0103: The name 'bad' does not exist in the current context
                 //         _ = (/*<bind>*/new(bad)/*</bind>*/, null) ? null : new object();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad").WithArguments("bad").WithLocation(5, 28)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
+                    .WithArguments("bad")
+                    .WithLocation(5, 28)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)')
   Children(1):
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'bad')
         Children(0)
-            ", expectedDiagnostics);
+            ",
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -1425,7 +1566,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
         public void ImplicitObjectCreationUnconverted_ConditionalOperator_Nested2()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(int i)
     {
@@ -1434,25 +1575,33 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
 }";
             var comp = CreateCompilation(source);
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (5,43): error CS0103: The name 'bad' does not exist in the current context
                 //         _ = i switch { 1 => /*<bind>*/new(bad)/*</bind>*/, _ => null } ? null : new object();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad").WithArguments("bad").WithLocation(5, 43)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
+                    .WithArguments("bad")
+                    .WithLocation(5, 43)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                comp,
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)')
   Children(1):
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'bad')
         Children(0)
-            ", expectedDiagnostics);
+            ",
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithDynamicMemberInitializer_01()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -1477,8 +1626,10 @@ class A
         A _ = new() {/*<bind>*/[y: x, x: x] = { X = 1, Y = 1, Z = 1 }/*</bind>*/ };
     }
 }
-");
-            string expectedOperationTree = @"
+"
+            );
+            string expectedOperationTree =
+                @"
 IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Syntax: '[y: x, x: x ...  1, Z = 1 }')
   InitializedMember: 
     IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: '[y: x, x: x]')
@@ -1521,10 +1672,21 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            var main = comp.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
-            VerifyFlowGraph(comp, main, @"
+            var main = comp.SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
+            VerifyFlowGraph(
+                comp,
+                main,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1654,14 +1816,16 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
-            ");
+            "
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithDynamicMemberInitializer_02()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -1687,7 +1851,8 @@ class A
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Syntax: '[y: x, x: x] = { }')
   InitializedMember: 
     IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: '[y: x, x: x]')
@@ -1706,14 +1871,20 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationWithDynamicMemberInitializer_03()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -1739,7 +1910,8 @@ class A
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: '[y: x, x: x]')
   Expression: 
     IInstanceReferenceOperation (ReferenceKind: ImplicitReceiver) (OperationKind.InstanceReference, Type: A, IsImplicit) (Syntax: '[y: x, x: x]')
@@ -1753,14 +1925,20 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationDynamicCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 class C1 : IEnumerable<int>
@@ -1776,7 +1954,8 @@ class C1 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C1..ctor()) (OperationKind.ObjectCreation, Type: C1) (Syntax: 'new() { d1 }')
   Arguments(0)
   Initializer: 
@@ -1793,14 +1972,20 @@ IObjectCreationOperation (Constructor: C1..ctor()) (OperationKind.ObjectCreation
             ArgumentNames(0)
             ArgumentRefKinds(0)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationCollectionInitializerWithRefAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1823,7 +2008,8 @@ class C : IEnumerable<int>
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C, IsInvalid) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid, IsImplicit) (Syntax: '1')
@@ -1836,26 +2022,39 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
         Children(1):
             ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3, IsInvalid) (Syntax: '3')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(9,33): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1").WithArguments("C.Add(ref int)").WithLocation(9, 33),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
+                    .WithArguments("C.Add(ref int)")
+                    .WithLocation(9, 33),
                 // file.cs(9,36): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "2").WithArguments("C.Add(ref int)").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "2")
+                    .WithArguments("C.Add(ref int)")
+                    .WithLocation(9, 36),
                 // file.cs(9,39): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3").WithArguments("C.Add(ref int)").WithLocation(9, 39)
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3")
+                    .WithArguments("C.Add(ref int)")
+                    .WithLocation(9, 39)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationCollectionInitializerWithDefaultParameterAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1878,7 +2077,8 @@ class C : IEnumerable<int>
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation ( void C.Add(System.Int32 i, [System.Object o = null])) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -1920,14 +2120,20 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationCollectionInitializerWithParamsAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 class C : IEnumerable<int>
@@ -1951,7 +2157,8 @@ class C : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation ( void C.Add(params System.Int32[] ints)) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -1997,14 +2204,20 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
               InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
               OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationCollectionInitializerExtensionAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 class C : IEnumerable<int>
@@ -2031,7 +2244,8 @@ static class CExtensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation (void CExtensions.Add(this C c, System.Int32 i)) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -2071,14 +2285,20 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
               InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
               OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationCollectionInitializerStaticAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -2101,19 +2321,27 @@ class C : IEnumerable<int>
     }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(9,33): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "1").WithArguments("C.Add(int)").WithLocation(9, 33),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "1")
+                    .WithArguments("C.Add(int)")
+                    .WithLocation(9, 33),
                 // file.cs(9,36): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "2").WithArguments("C.Add(int)").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "2")
+                    .WithArguments("C.Add(int)")
+                    .WithLocation(9, 36),
                 // file.cs(9,39): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3").WithArguments("C.Add(int)").WithLocation(9, 39)
+                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3")
+                    .WithArguments("C.Add(int)")
+                    .WithLocation(9, 39)
             };
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C, IsInvalid) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid, IsImplicit) (Syntax: '1')
@@ -2126,14 +2354,20 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
         Children(1):
             ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3, IsInvalid) (Syntax: '3')
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: ImplicitObjectCreationOptions);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: ImplicitObjectCreationOptions
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationCollectionInitializerAddMethodOnInterface()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 [ComImport()]
@@ -2156,7 +2390,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: IInterface) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation (virtual void IInterface.Add(System.Int32 i)) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -2184,14 +2419,20 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
               InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
               OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: TestOptions.Regular9);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationNestedObjectInitializerNoSet()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C1
 {
     void M(C1 c1)
@@ -2204,10 +2445,12 @@ class C2
 {
     public int A { get; set; }
 }
-");
+"
+            );
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C1) (Syntax: '{ [1] = { A = 1 } }')
   Initializers(1):
       IMemberInitializerOperation (OperationKind.MemberInitializer, Type: C2) (Syntax: '[1] = { A = 1 }')
@@ -2231,11 +2474,22 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                   Right: 
                     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            var m = comp.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var m = comp.SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(comp, m, @"
+            VerifyFlowGraph(
+                comp,
+                m,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2308,14 +2562,16 @@ Block[B0] - Entry
 Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitObjectCreationNestedCollectionInitializerNoSet()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Collections;
 using System.Collections.Generic;
 class C1
@@ -2332,10 +2588,12 @@ class C2 : IEnumerable<int>
     IEnumerator IEnumerable.GetEnumerator() => throw new System.NotImplementedException();
     public void Add(int i) { }
 }
-");
+"
+            );
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C1) (Syntax: '{ [1] = { 1 } }')
   Initializers(1):
       IMemberInitializerOperation (OperationKind.MemberInitializer, Type: C2) (Syntax: '[1] = { 1 }')
@@ -2360,10 +2618,21 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                         InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            var m = comp.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M");
-            VerifyFlowGraph(comp, m, @"
+            var m = comp.SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M");
+            VerifyFlowGraph(
+                comp,
+                m,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2428,14 +2697,16 @@ Block[B0] - Entry
 Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17588, "https://github.com/dotnet/roslyn/issues/17588")]
         public void ObjectCreationWithMemberInitializers()
         {
-            string source = @"
+            string source =
+                @"
 struct B
 {
     public bool Field;
@@ -2463,7 +2734,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   Locals: Local_1: F x1
     Local_2: F x2
@@ -2622,23 +2894,33 @@ IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInv
       Initializer: 
         null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'int' to 'B'
                 //         var e1 = new F() { Property2 = 1 };
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "B").WithLocation(24, 40),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "B")
+                    .WithLocation(24, 40),
                 // CS1922: Cannot initialize type 'F' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         var e2 = new F() { "" };
-                Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }").WithArguments("F").WithLocation(25, 26)
+                Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }")
+                    .WithArguments("F")
+                    .WithLocation(25, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17588, "https://github.com/dotnet/roslyn/issues/17588")]
         public void ObjectCreationWithCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -2651,7 +2933,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Int32>..ctor()) (OperationKind.ObjectCreation, Type: System.Collections.Generic.List<System.Int32>) (Syntax: 'new List<in ...  y, field }')
   Arguments(0)
   Initializer: 
@@ -2684,20 +2967,28 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.In
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0649: Field 'C.field' is never assigned to, and will always have its default value 0
                 //     private readonly int field;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field").WithArguments("C.field", "0").WithLocation(6, 26)
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
+                    .WithArguments("C.field", "0")
+                    .WithLocation(6, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17588, "https://github.com/dotnet/roslyn/issues/17588")]
         public void ObjectCreationWithNestedCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2714,7 +3005,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Collections.Generic.List<System.Int32>>..ctor()) (OperationKind.ObjectCreation, Type: System.Collections.Generic.List<System.Collections.Generic.List<System.Int32>>) (Syntax: 'new List<Li ... }')
   Arguments(0)
   Initializer: 
@@ -2770,14 +3062,19 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.Co
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17588, "https://github.com/dotnet/roslyn/issues/17588")]
         public void ObjectCreationWithMemberAndCollectionInitializers()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 internal class Class
@@ -2801,7 +3098,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: Class..ctor()) (OperationKind.ObjectCreation, Type: Class) (Syntax: 'new Class() ... }')
   Arguments(0)
   Initializer: 
@@ -2886,14 +3184,19 @@ IObjectCreationOperation (Constructor: Class..ctor()) (OperationKind.ObjectCreat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17588, "https://github.com/dotnet/roslyn/issues/17588")]
         public void ObjectCreationWithArrayInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int[] a;
@@ -2904,7 +3207,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C) (Syntax: 'new C { a = ... [1] = 2 } }')
   Arguments(0)
   Initializer: 
@@ -2941,17 +3245,24 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
             {
                 // warning CS0414: The field 'C.a' is assigned but its value is never used
                 //     int[] a;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a").WithArguments("C.a").WithLocation(4, 11)
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
+                    .WithArguments("C.a")
+                    .WithLocation(4, 11)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22967, "https://github.com/dotnet/roslyn/issues/22967")]
         public void ObjectCreationWithInvalidInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M1()
@@ -2960,7 +3271,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new C() { M ... ember = 1 }')
   Arguments(0)
   Initializer: 
@@ -2976,20 +3288,28 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
             Right: 
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,38): error CS0117: 'C' does not contain a definition for 'MissingMember'
                 //         var x1 = /*<bind>*/new C() { MissingMember = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingMember").WithArguments("C", "MissingMember").WithLocation(6, 38)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingMember")
+                    .WithArguments("C", "MissingMember")
+                    .WithLocation(6, 38)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22967, "https://github.com/dotnet/roslyn/issues/22967")]
         public void ObjectCreationWithInvalidMemberInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M1()
@@ -2998,7 +3318,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new C(){ Mi ... { x = 1 } }')
   Arguments(0)
   Initializer: 
@@ -3024,20 +3345,28 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                       Right: 
                         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,37): error CS0117: 'C' does not contain a definition for 'MissingField'
                 //         var x1 = /*<bind>*/new C(){ MissingField = { x = 1 } }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField").WithArguments("C", "MissingField").WithLocation(6, 37)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
+                    .WithArguments("C", "MissingField")
+                    .WithLocation(6, 37)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22967, "https://github.com/dotnet/roslyn/issues/22967")]
         public void ObjectCreationWithInvalidCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -3048,7 +3377,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new C(){ Mi ... t>() { 1 }}')
   Arguments(0)
   Initializer: 
@@ -3076,13 +3406,20 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                                 InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                                 OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,37): error CS0117: 'C' does not contain a definition for 'MissingField'
                 //         var x1 = /*<bind>*/new C(){ MissingField = new List<int>() { 1 }}/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField").WithArguments("C", "MissingField").WithLocation(8, 37)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
+                    .WithArguments("C", "MissingField")
+                    .WithLocation(8, 37)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -3090,7 +3427,8 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
         [WorkItem(23154, "https://github.com/dotnet/roslyn/issues/23154")]
         public void ObjectCreationWithDynamicMemberInitializer_01()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -3119,7 +3457,8 @@ class A
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Syntax: '[y: x, x: x ...  1, Z = 1 }')
   InitializedMember: 
     IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: '[y: x, x: x]')
@@ -3162,7 +3501,11 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -3170,7 +3513,8 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
         [WorkItem(23154, "https://github.com/dotnet/roslyn/issues/23154")]
         public void ObjectCreationWithDynamicMemberInitializer_02()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -3199,7 +3543,8 @@ class A
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Syntax: '[y: x, x: x] = { }')
   InitializedMember: 
     IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: '[y: x, x: x]')
@@ -3218,7 +3563,11 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -3226,7 +3575,8 @@ IMemberInitializerOperation (OperationKind.MemberInitializer, Type: dynamic) (Sy
         [WorkItem(23154, "https://github.com/dotnet/roslyn/issues/23154")]
         public void ObjectCreationWithDynamicMemberInitializer_03()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -3255,7 +3605,8 @@ class A
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: '[y: x, x: x]')
   Expression: 
     IInstanceReferenceOperation (ReferenceKind: ImplicitReceiver) (OperationKind.InstanceReference, Type: A, IsImplicit) (Syntax: '[y: x, x: x]')
@@ -3269,14 +3620,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationDynamicCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -3293,7 +3649,8 @@ class C1 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: C1..ctor()) (OperationKind.ObjectCreation, Type: C1) (Syntax: 'new C1 { d1 }')
   Arguments(0)
   Initializer: 
@@ -3310,14 +3667,19 @@ IObjectCreationOperation (Constructor: C1..ctor()) (OperationKind.ObjectCreation
             ArgumentNames(0)
             ArgumentRefKinds(0)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerWithRefAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -3344,7 +3706,8 @@ class C : IEnumerable<int>
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C, IsInvalid) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid, IsImplicit) (Syntax: '1')
@@ -3357,26 +3720,38 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
         Children(1):
             ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3, IsInvalid) (Syntax: '3')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1").WithArguments("C.Add(ref int)").WithLocation(10, 35),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
+                    .WithArguments("C.Add(ref int)")
+                    .WithLocation(10, 35),
                 // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "2").WithArguments("C.Add(ref int)").WithLocation(10, 38),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "2")
+                    .WithArguments("C.Add(ref int)")
+                    .WithLocation(10, 38),
                 // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3").WithArguments("C.Add(ref int)").WithLocation(10, 41)
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3")
+                    .WithArguments("C.Add(ref int)")
+                    .WithLocation(10, 41)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerWithDefaultParameterAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -3403,7 +3778,8 @@ class C : IEnumerable<int>
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation ( void C.Add(System.Int32 i, [System.Object o = null])) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -3445,14 +3821,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerWithParamsAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -3480,7 +3861,8 @@ class C : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation ( void C.Add(params System.Int32[] ints)) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -3526,14 +3908,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
               InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
               OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerExtensionAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -3563,7 +3950,8 @@ static class CExtensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation (void CExtensions.Add(this C c, System.Int32 i)) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -3603,14 +3991,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
               InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
               OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerStaticAddMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -3637,19 +4030,27 @@ class C : IEnumerable<int>
     }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "1").WithArguments("C.Add(int)").WithLocation(10, 35),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "1")
+                    .WithArguments("C.Add(int)")
+                    .WithLocation(10, 35),
                 // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "2").WithArguments("C.Add(int)").WithLocation(10, 38),
+                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "2")
+                    .WithArguments("C.Add(int)")
+                    .WithLocation(10, 38),
                 // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3").WithArguments("C.Add(int)").WithLocation(10, 41)
+                Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3")
+                    .WithArguments("C.Add(int)")
+                    .WithLocation(10, 41)
             };
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C, IsInvalid) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid, IsImplicit) (Syntax: '1')
@@ -3662,14 +4063,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
         Children(1):
             ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3, IsInvalid) (Syntax: '3')
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerAddMethodOnInterface()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -3695,7 +4101,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: IInterface) (Syntax: '{ 1, 2, 3 }')
   Initializers(3):
       IInvocationOperation (virtual void IInterface.Add(System.Int32 i)) (OperationKind.Invocation, Type: System.Void, IsImplicit) (Syntax: '1')
@@ -3723,14 +4130,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
               InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
               OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationCollectionInitializerBoxingConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 struct S : IEnumerable
 {
@@ -3745,7 +4157,8 @@ static class Program
     }
 }";
             var expectedDiagnostics = DiagnosticDescription.None;
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: S..ctor()) (OperationKind.ObjectCreation, Type: S) (Syntax: 'new S() { 1, 2 }')
   Arguments(0)
   Initializer: 
@@ -3781,14 +4194,19 @@ IObjectCreationOperation (Constructor: S..ctor()) (OperationKind.ObjectCreation,
                   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)";
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationNestedObjectInitializerNoSet()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M(C1 c1)
@@ -3804,7 +4222,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C1) (Syntax: '{ [1] = { A = 1 } }')
   Initializers(1):
       IMemberInitializerOperation (OperationKind.MemberInitializer, Type: C2) (Syntax: '[1] = { A = 1 }')
@@ -3828,14 +4247,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                   Right: 
                     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ObjectCreationNestedCollectionInitializerNoSet()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -3856,7 +4280,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: C1) (Syntax: '{ [1] = { 1 } }')
   Initializers(1):
       IMemberInitializerOperation (OperationKind.MemberInitializer, Type: C2) (Syntax: '[1] = { 1 }')
@@ -3881,14 +4306,19 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                         InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public MyClass(int i1, int i2, int i3) { }
@@ -3900,7 +4330,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3973,14 +4404,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public MyClass(int i1, int i2, int i3) { }
@@ -3992,7 +4428,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4065,14 +4502,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public MyClass(int i1, int i2, int i3) { }
@@ -4084,7 +4526,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4157,14 +4600,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public MyClass(int i1, int i2, int i3 = 0) { }
@@ -4176,7 +4624,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4245,14 +4694,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public int A { get; set; }
@@ -4267,7 +4721,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4309,14 +4764,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public int A { get; set; }
@@ -4333,7 +4793,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4422,14 +4883,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public object A { get; set; }
@@ -4444,7 +4910,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4524,14 +4991,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public MyClass(int a, int b) { }
@@ -4549,7 +5021,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4691,14 +5164,19 @@ Block[B11] - Exit
     Predecessors: [B10]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -4727,7 +5205,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4785,14 +5264,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -4821,7 +5305,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4946,14 +5431,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -4982,7 +5472,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5107,14 +5598,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -5142,22 +5638,31 @@ class C3
     public int P2 { get; set; }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term '{'
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(8, 70),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(8, 70),
                 // CS1026: ) expected
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "{").WithLocation(8, 70),
                 // CS1003: Syntax error, ':' expected
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(":", "{").WithLocation(8, 70),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(":", "{")
+                    .WithLocation(8, 70),
                 // CS1525: Invalid expression term '{'
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(8, 70),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(8, 70),
                 // CS1003: Syntax error, ',' expected
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",", "{").WithLocation(8, 70),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(",", "{")
+                    .WithLocation(8, 70),
                 // CS1513: } expected
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(8, 88),
@@ -5172,7 +5677,9 @@ class C3
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(8, 88),
                 // CS1525: Invalid expression term '{'
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(8, 93),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(8, 93),
                 // CS1026: ) expected
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "{").WithLocation(8, 93),
@@ -5199,22 +5706,32 @@ class C3
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(11, 1),
                 // CS0103: The name 'P1' does not exist in the current context
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "P1").WithArguments("P1").WithLocation(8, 72),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "P1")
+                    .WithArguments("P1")
+                    .WithLocation(8, 72),
                 // CS0103: The name 'P2' does not exist in the current context
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "P2").WithArguments("P2").WithLocation(8, 80),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "P2")
+                    .WithArguments("P2")
+                    .WithLocation(8, 80),
                 // CS0747: Invalid initializer member declarator
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "{ P1 = 3, P2 = 4 }").WithLocation(8, 70),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "{ P1 = 3, P2 = 4 }")
+                    .WithLocation(8, 70),
                 // CS0103: The name 'P1' does not exist in the current context
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "P1").WithArguments("P1").WithLocation(8, 95),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "P1")
+                    .WithArguments("P1")
+                    .WithLocation(8, 95),
                 // CS0103: The name 'P2' does not exist in the current context
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "P2").WithArguments("P2").WithLocation(8, 103)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "P2")
+                    .WithArguments("P2")
+                    .WithLocation(8, 103)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5378,14 +5895,19 @@ Block[B8] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -5418,7 +5940,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5598,14 +6121,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -5638,7 +6166,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5837,14 +6366,19 @@ Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -5877,7 +6411,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6084,14 +6619,19 @@ Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; } = new C2();
@@ -6127,7 +6667,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6414,14 +6955,19 @@ Block[B16] - Exit
     Predecessors: [B15]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; }
@@ -6455,7 +7001,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6571,14 +7118,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M(bool b)
@@ -6595,7 +7147,8 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6693,14 +7246,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2 { get; set; }
@@ -6734,7 +7292,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6885,14 +7444,19 @@ Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_20()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public void M(bool b)
@@ -6904,16 +7468,27 @@ class C1
 }
 
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1922: Cannot initialize type 'C1' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         var x = new C1 { O[b ? 1 : 2] = null };
-                Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, "{ O[b ? 1 : 2] = null }").WithArguments("C1").WithLocation(6, 24),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionInitRequiresIEnumerable,
+                        "{ O[b ? 1 : 2] = null }"
+                    )
+                    .WithArguments("C1")
+                    .WithLocation(6, 24),
                 // CS0747: Invalid initializer member declarator
                 //         var x = new C1 { O[b ? 1 : 2] = null };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "O[b ? 1 : 2] = null").WithLocation(6, 26)
+                Diagnostic(
+                        ErrorCode.ERR_InvalidInitializerElementInitializer,
+                        "O[b ? 1 : 2] = null"
+                    )
+                    .WithLocation(6, 26)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7008,14 +7583,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_21()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public int A;
@@ -7030,7 +7610,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7072,13 +7653,18 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_22()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public int A;
@@ -7095,7 +7681,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7184,14 +7771,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_23()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public object A;
@@ -7206,7 +7798,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7286,14 +7879,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_24()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -7320,13 +7918,17 @@ class C3
     public int P2;
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0649: Field 'C2.C32' is never assigned to, and will always have its default value null
                 //     public C3 C32;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C32").WithArguments("C2.C32", "null").WithLocation(19, 15)
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C32")
+                    .WithArguments("C2.C32", "null")
+                    .WithLocation(19, 15)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7384,14 +7986,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ControlFlow_25()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -7420,7 +8027,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7545,14 +8153,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_26()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -7581,7 +8194,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7706,14 +8320,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_27()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -7746,7 +8365,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7926,14 +8546,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_28()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -7966,7 +8591,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8165,14 +8791,19 @@ Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_29()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -8204,7 +8835,8 @@ class C3
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8491,14 +9123,19 @@ Block[B16] - Exit
     Predecessors: [B15]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_30()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     public C2 C2;
@@ -8530,13 +9167,17 @@ class C3
     }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0649: Field 'C2.C32' is never assigned to, and will always have its default value null
                 //     public C3 C32;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C32").WithArguments("C2.C32", "null").WithLocation(21, 15)
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C32")
+                    .WithArguments("C2.C32", "null")
+                    .WithLocation(21, 15)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8687,14 +9328,19 @@ Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_31()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -8707,13 +9353,17 @@ class C1
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0067: The event 'C1.ev' is never used
                 //     public event EventHandler<object> ev;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev").WithArguments("C1.ev").WithLocation(6, 39)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev")
+                    .WithArguments("C1.ev")
+                    .WithLocation(6, 39)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8759,14 +9409,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_32()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -8779,13 +9434,17 @@ class C1
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0067: The event 'C1.ev' is never used
                 //     public event EventHandler<object> ev;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev").WithArguments("C1.ev").WithLocation(6, 39)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev")
+                    .WithArguments("C1.ev")
+                    .WithLocation(6, 39)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8874,14 +9533,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_33()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -8899,16 +9563,22 @@ class C2
     public event EventHandler<object> ev;
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0070: The event 'C2.ev' can only appear on the left hand side of += or -= (except when used from within the type 'C2')
                 //         var x = new C1 { C2 = { ev = b ? (EventHandler<object>)o : null } };
-                Diagnostic(ErrorCode.ERR_BadEventUsage, "ev").WithArguments("C2.ev", "C2").WithLocation(10, 33),
+                Diagnostic(ErrorCode.ERR_BadEventUsage, "ev")
+                    .WithArguments("C2.ev", "C2")
+                    .WithLocation(10, 33),
                 // CS0067: The event 'C2.ev' is never used
                 //     public event EventHandler<object> ev;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev").WithArguments("C2.ev").WithLocation(16, 39)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev")
+                    .WithArguments("C2.ev")
+                    .WithLocation(16, 39)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9003,14 +9673,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_34()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -9024,16 +9699,19 @@ class C1
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         var x = new C1 { P1 = null, (P1 ?? P2) = null };
                 Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "P1 ?? P2").WithLocation(11, 38),
                 // CS0747: Invalid initializer member declarator
                 //         var x = new C1 { P1 = null, (P1 ?? P2) = null };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "(P1 ?? P2) = null").WithLocation(11, 37)
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "(P1 ?? P2) = null")
+                    .WithLocation(11, 37)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9143,14 +9821,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_35()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C1
@@ -9164,19 +9847,24 @@ class C1
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         var x = new C1 { P1 = null, (P1 ?? P2) = null };
                 Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "P1 ?? P2").WithLocation(11, 38),
                 // CS0747: Invalid initializer member declarator
                 //         var x = new C1 { P1 = null, (P1 ?? P2) = null };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "(P1 ?? P2) = null").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "(P1 ?? P2) = null")
+                    .WithLocation(11, 37),
                 // CS0649: Field 'C1.P2' is never assigned to, and will always have its default value null
                 //     public object P2;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "P2").WithArguments("C1.P2", "null").WithLocation(7, 19)
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "P2")
+                    .WithArguments("C1.P2", "null")
+                    .WithLocation(7, 19)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9286,14 +9974,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_36()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -9321,7 +10014,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9412,14 +10106,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_37()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -9438,16 +10137,27 @@ class C2
     public int I1 { get; set; }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1922: Cannot initialize type 'Class' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
                 //         Class c = new Class { (C21 ?? C22).I1 = 1 };
-                Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, "{ (C21 ?? C22).I1 = 1 }").WithArguments("Class").WithLocation(8, 29),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionInitRequiresIEnumerable,
+                        "{ (C21 ?? C22).I1 = 1 }"
+                    )
+                    .WithArguments("Class")
+                    .WithLocation(8, 29),
                 // CS0747: Invalid initializer member declarator
                 //         Class c = new Class { (C21 ?? C22).I1 = 1 };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "(C21 ?? C22).I1 = 1").WithLocation(8, 31)
+                Diagnostic(
+                        ErrorCode.ERR_InvalidInitializerElementInitializer,
+                        "(C21 ?? C22).I1 = 1"
+                    )
+                    .WithLocation(8, 31)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9547,14 +10257,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_38()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -9582,7 +10297,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9708,14 +10424,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_39()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(bool b)
@@ -9724,13 +10445,17 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0117: 'Class' does not contain a definition for 'C21'
                 //         Class c = new Class { C21 = { I1 = 1, I2 = 2 } };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "C21").WithArguments("Class", "C21").WithLocation(6, 31)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "C21")
+                    .WithArguments("Class", "C21")
+                    .WithLocation(6, 31)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9792,14 +10517,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_40()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(bool b)
@@ -9810,13 +10540,17 @@ internal class Class
     int GetInt() => 1;
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0021: Cannot apply indexing with [] to an expression of type 'Class'
                 //         Class c = new Class { [GetInt()] = { I1 = 1, I2 = 2 } };
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[GetInt()]").WithArguments("Class").WithLocation(6, 31)
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[GetInt()]")
+                    .WithArguments("Class")
+                    .WithLocation(6, 31)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9882,14 +10616,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_41()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(bool b)
@@ -9900,13 +10639,17 @@ internal class Class
     int? GetInt() => 1;
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0021: Cannot apply indexing with [] to an expression of type 'Class'
                 //         Class c = new Class { [GetInt() ?? 1] = { I1 = 1, I2 = 2 } };
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[GetInt() ?? 1]").WithArguments("Class").WithLocation(6, 31)
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[GetInt() ?? 1]")
+                    .WithArguments("Class")
+                    .WithLocation(6, 31)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10024,14 +10767,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_42()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10053,7 +10801,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10138,14 +10887,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_43()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10167,7 +10921,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10287,14 +11042,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_44()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10316,7 +11076,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10472,14 +11233,19 @@ Block[B12] - Exit
     Predecessors: [B11]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_45()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10501,7 +11267,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10586,14 +11353,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_46()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10615,7 +11387,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10735,14 +11508,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_47()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10763,7 +11541,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10916,14 +11695,19 @@ Block[B8] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_48()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -10944,7 +11728,8 @@ class C2
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11119,14 +11904,19 @@ Block[B12] - Exit
     Predecessors: [B11]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_49()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(Class c, int i, bool b)
@@ -11139,7 +11929,8 @@ internal class Class
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11219,14 +12010,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_50()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(Class c, int i, bool b)
@@ -11239,7 +12035,8 @@ internal class Class
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11334,14 +12131,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_51()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(Class c, int i, bool b)
@@ -11354,7 +12156,8 @@ internal class Class
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11449,14 +12252,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_52()
         {
-            string source = @"
+            string source =
+                @"
 internal class Class
 {
     public void M(Class c, int i, bool b)
@@ -11467,13 +12275,15 @@ internal class Class
     public int[,] P1 { get; set; }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0443: Syntax error; value expected
                 //         c = new Class { P1 = { [] = 3 } };
                 Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 33)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11545,14 +12355,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_53()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11570,7 +12385,8 @@ class C : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11636,14 +12452,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_54()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11667,7 +12488,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -11802,14 +12624,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_55()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11833,7 +12660,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -12046,14 +12874,19 @@ Block[B13] - Exit
     Predecessors: [B12]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_56()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12081,7 +12914,8 @@ static class C2Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -12352,14 +13186,19 @@ Block[B16] - Exit
     Predecessors: [B15]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_57()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12382,7 +13221,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -12649,14 +13489,19 @@ Block[B16] - Exit
     Predecessors: [B15]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_58()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12679,7 +13524,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -12959,14 +13805,19 @@ Block[B16] - Exit
     Predecessors: [B15]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_59()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12990,7 +13841,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13233,14 +14085,19 @@ Block[B15] - Exit
     Predecessors: [B14]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_60()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13257,7 +14114,8 @@ class C1 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13318,14 +14176,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_61()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13342,7 +14205,8 @@ class C1 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13442,14 +14306,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_62()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13471,7 +14340,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13610,14 +14480,20 @@ Block[B8] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics, useLatestFrameworkReferences: true);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                useLatestFrameworkReferences: true
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_63()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13639,7 +14515,8 @@ class C2 : IEnumerable<int>
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13785,14 +14662,20 @@ Block[B8] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics, useLatestFrameworkReferences: true);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                useLatestFrameworkReferences: true
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_64()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13809,13 +14692,17 @@ class C1 : IEnumerable<int>
     public void Add(int c2) { }
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(11,17): error CS7036: There is no argument given that corresponds to the required formal parameter 'x' of 'C1.C1(int)'
                 //         c = new C1 { i1 };
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C1").WithArguments("x", "C1.C1(int)").WithLocation(11, 17)
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C1")
+                    .WithArguments("x", "C1.C1(int)")
+                    .WithLocation(11, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13861,14 +14748,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_65()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13882,13 +14774,17 @@ class C1
     public int F;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(9,17): error CS1729: 'C1' does not contain a constructor that takes 1 arguments
                 //         c = new C1(i1) { F = i2 };
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1").WithArguments("C1", "1").WithLocation(9, 17)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1")
+                    .WithArguments("C1", "1")
+                    .WithLocation(9, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -13934,14 +14830,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_66()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13955,13 +14856,17 @@ class C1
     public int F;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(9,17): error CS1729: 'C1' does not contain a constructor that takes 2 arguments
                 //         c = new C1(i1, c1 ?? c2) { F = i2 };
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1").WithArguments("C1", "2").WithLocation(9, 17)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1")
+                    .WithArguments("C1", "2")
+                    .WithLocation(9, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14070,14 +14975,19 @@ Block[B8] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_67()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14091,13 +15001,17 @@ class C1
     public C1 F;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(9,17): error CS1729: 'C1' does not contain a constructor that takes 1 arguments
                 //         c = new C1(i1) { F = c1 ?? c2 };
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1").WithArguments("C1", "1").WithLocation(9, 17)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1")
+                    .WithArguments("C1", "1")
+                    .WithLocation(9, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14195,14 +15109,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_68()
         {
-            string source = @"
+            string source =
+                @"
 public class MemberInitializerTest
 {
     public int x, y;
@@ -14212,16 +15131,21 @@ public class MemberInitializerTest
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(7,52): error CS0120: An object reference is required for the non-static field, method, or property 'MemberInitializerTest.y'
                 //         var i = new MemberInitializerTest { x = 0, y++ };
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "y").WithArguments("MemberInitializerTest.y").WithLocation(7, 52),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "y")
+                    .WithArguments("MemberInitializerTest.y")
+                    .WithLocation(7, 52),
                 // file.cs(7,52): error CS0747: Invalid initializer member declarator
                 //         var i = new MemberInitializerTest { x = 0, y++ };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "y++").WithLocation(7, 52)
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "y++")
+                    .WithLocation(7, 52)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14269,14 +15193,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_69()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -14298,7 +15227,8 @@ class A
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14409,14 +15339,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_70()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -14430,7 +15365,8 @@ class A
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14534,14 +15470,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_71()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 0169
 class A
 {
@@ -14572,7 +15513,8 @@ class A
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14647,14 +15589,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_72()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     public MyClass(int i1, int i2, int i3) { }
@@ -14666,7 +15613,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14739,14 +15687,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_73()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static int i1;
@@ -14756,16 +15709,22 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(7,25): error CS1914: Static field or property 'C.i1' cannot be assigned in an object initializer
                 //         var c = new C { i1 = 1 };
-                Diagnostic(ErrorCode.ERR_StaticMemberInObjectInitializer, "i1").WithArguments("C.i1").WithLocation(7, 25),
+                Diagnostic(ErrorCode.ERR_StaticMemberInObjectInitializer, "i1")
+                    .WithArguments("C.i1")
+                    .WithLocation(7, 25),
                 // file.cs(4,16): warning CS0414: The field 'C.i1' is assigned but its value is never used
                 //     static int i1;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "i1").WithArguments("C.i1").WithLocation(4, 16)
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "i1")
+                    .WithArguments("C.i1")
+                    .WithLocation(4, 16)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14807,14 +15766,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_74()
         {
-            string source = @"
+            string source =
+                @"
 struct S1
 {
     public int x;
@@ -14832,7 +15796,8 @@ struct S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -14989,13 +15954,18 @@ Block[B8] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void ObjectCreationExpression_NoNewConstraint()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void F2<T2>()
@@ -15006,13 +15976,17 @@ class C
 }";
             var comp = CreateCompilation(source);
 
-            var diagnostics = new DiagnosticDescription[] {
+            var diagnostics = new DiagnosticDescription[]
+            {
                 // (7,14): error CS0304: Cannot create an instance of the variable type 'T2' because it does not have the new() constraint
                 //         x2 = new T2 { };
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T2 { }").WithArguments("T2").WithLocation(7, 14)
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T2 { }")
+                    .WithArguments("T2")
+                    .WithLocation(7, 14)
             };
 
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IBlockOperation (2 statements, 1 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   Locals: Local_1: System.Object x2
   IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'object x2;')
@@ -15037,9 +16011,15 @@ IBlockOperation (2 statements, 1 locals) (OperationKind.Block, Type: null, IsInv
                     IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: T2, IsInvalid) (Syntax: '{ }')
                       Initializers(0)";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, expectedOperationTree, diagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedOperationTree,
+                diagnostics
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -15075,14 +16055,15 @@ Block[B0] - Entry
 
 Block[B2] - Exit
     Predecessors: [B1]
-    Statements (0)");
+    Statements (0)"
+            );
         }
 
         [Fact]
         public void ObjectCreationFlow_ParenthesizedReferenceOffConstructedObject()
         {
             var source =
-@"
+                @"
 class A
 {
     internal object F1;
@@ -15100,7 +16081,9 @@ class Program
 }";
 
             var comp = CreateCompilation(source);
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -15181,14 +16164,15 @@ Block[B0] - Entry
 
 Block[B4] - Exit
     Predecessors: [B3]
-    Statements (0)");
+    Statements (0)"
+            );
         }
 
         [Fact]
         public void IndexedPropertyWithDefaultArgumentInVB()
         {
             var source1 =
-@"Imports System
+                @"Imports System
 Imports System.Collections.Generic
 Imports System.Runtime.InteropServices
 <Assembly: PrimaryInteropAssembly(0, 0)> 
@@ -15215,9 +16199,12 @@ Public Class A
         End Get
     End Property
 End Class";
-            var reference1 = BasicCompilationUtils.CompileToMetadata(source1, verify: Verification.Passes);
+            var reference1 = BasicCompilationUtils.CompileToMetadata(
+                source1,
+                verify: Verification.Passes
+            );
             var source2 =
-@"class B
+                @"class B
 {
     static void M(IA a)
     /*<bind>*/{
@@ -15225,7 +16212,10 @@ End Class";
     }/*</bind>*/
 }";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source2, expectedDiagnostics: DiagnosticDescription.None, references: new[] { reference1 },
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source2,
+                expectedDiagnostics: DiagnosticDescription.None,
+                references: new[] { reference1 },
                 expectedFlowGraph: @"
 Block[B0] - Entry
     Statements (0)
@@ -15311,7 +16301,8 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
-");
+"
+            );
         }
     }
 }

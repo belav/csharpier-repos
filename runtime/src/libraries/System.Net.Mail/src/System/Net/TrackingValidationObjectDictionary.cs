@@ -28,7 +28,9 @@ namespace System.Net
         #region Constructors
 
         // it is valid for validators to be null.  this means that no validation should be performed
-        internal TrackingValidationObjectDictionary(Dictionary<string, ValidateAndParseValue> validators)
+        internal TrackingValidationObjectDictionary(
+            Dictionary<string, ValidateAndParseValue> validators
+        )
         {
             IsChanged = false;
             _validators = validators;
@@ -159,10 +161,7 @@ namespace System.Net
                 // already have been set correctly when the value was originally passed in
                 return base[key];
             }
-            set
-            {
-                PersistValue(key, value, false);
-            }
+            set { PersistValue(key, value, false); }
         }
 
         #endregion
@@ -193,7 +192,6 @@ namespace System.Net
             base.Remove(key);
             IsChanged = true;
         }
-
         #endregion
     }
 }

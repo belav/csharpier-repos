@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     //          return // <- note the missing semicolon
                     //      }
                     //
-                    // in this case, the compiler will insert a missing semicolon token at the 
+                    // in this case, the compiler will insert a missing semicolon token at the
                     // start of the line containing the close curly.  This is problematic as it
                     // means that if we're looking at the token-pair for the semicolon and close-
                     // curly, then we'll think there is no newline here.  Because we think there
@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     // Here we detect if our previous token is an empty missing token.  If so,
                     // we look back to the previous non-missing token to see if it ends with a
                     // newline.  If so, we keep track of that so we'll appropriately indent later
-                    // on. 
+                    // on.
 
                     // Keep walking backward until we hit a token whose *full width* is greater than
                     // 0.  See if this token has an end of line trivia at the end of it.  Note:
@@ -65,7 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
                     for (var currentToken = token1; !currentToken.IsKind(SyntaxKind.None);)
                     {
-                        var previousToken = currentToken.GetPreviousToken(includeSkipped: false, includeZeroWidth: true);
+                        var previousToken = currentToken.GetPreviousToken(
+                            includeSkipped: false,
+                            includeZeroWidth: true
+                        );
                         if (previousToken.FullWidth() == 0)
                         {
                             currentToken = previousToken;
@@ -73,12 +76,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         }
 
                         // Finally hit the first previous token with non-zero full width.
-                        if (previousToken.TrailingTrivia.Count > 0 &&
-                            previousToken.TrailingTrivia.Last().Kind() == SyntaxKind.EndOfLineTrivia)
+                        if (
+                            previousToken.TrailingTrivia.Count > 0
+                            && previousToken.TrailingTrivia.Last().Kind()
+                                == SyntaxKind.EndOfLineTrivia
+                        )
                         {
                             result.LineBreaks = 1;
                         }
-
                         break;
                     }
                 }
@@ -117,8 +122,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     {
                         result.HasSkippedTokens = true;
                     }
-                    else if (trivia.Kind() is SyntaxKind.DisabledTextTrivia or
-                             SyntaxKind.PreprocessingMessageTrivia)
+                    else if (
+                        trivia.Kind()
+                        is SyntaxKind.DisabledTextTrivia
+                            or SyntaxKind.PreprocessingMessageTrivia
+                    )
                     {
                         result.HasSkippedOrDisabledText = true;
                     }
@@ -152,7 +160,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 result.TreatAsElastic |= trivia.IsElastic();
             }
 
-            private static void AnalyzeWhitespacesInTrivia(SyntaxTrivia trivia, ref AnalysisResult result)
+            private static void AnalyzeWhitespacesInTrivia(
+                SyntaxTrivia trivia,
+                ref AnalysisResult result
+            )
             {
                 // trivia already has text. getting text should be noop
                 Debug.Assert(trivia.Kind() == SyntaxKind.WhitespaceTrivia);

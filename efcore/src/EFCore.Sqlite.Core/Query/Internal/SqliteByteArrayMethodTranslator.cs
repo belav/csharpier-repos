@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         /// </summary>
         public SqliteByteArrayMethodTranslator(
             ISqlExpressionFactory sqlExpressionFactory,
-            IRelationalTypeMappingSource typeMappingSource)
+            IRelationalTypeMappingSource typeMappingSource
+        )
         {
             _sqlExpressionFactory = sqlExpressionFactory;
             _typeMappingSource = typeMappingSource;
@@ -46,26 +47,33 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            if (method.IsGenericMethod
+            if (
+                method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
-                && arguments[0].Type == typeof(byte[]))
+                && arguments[0].Type == typeof(byte[])
+            )
             {
                 var source = arguments[0];
 
                 var value = arguments[1] is SqlConstantExpression constantValue
-                    ? (SqlExpression)_sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, source.TypeMapping)
+                    ? (SqlExpression)_sqlExpressionFactory.Constant(
+                          new[] { (byte)constantValue.Value! },
+                          source.TypeMapping
+                      )
                     : _sqlExpressionFactory.Function(
-                        "char",
-                        new[] { arguments[1] },
-                        nullable: false,
-                        argumentsPropagateNullability: new[] { false },
-                        typeof(string));
+                          "char",
+                          new[] { arguments[1] },
+                          nullable: false,
+                          argumentsPropagateNullability: new[] { false },
+                          typeof(string)
+                      );
 
                 return _sqlExpressionFactory.GreaterThan(
                     _sqlExpressionFactory.Function(
@@ -73,8 +81,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         new[] { source, value },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true },
-                        typeof(int)),
-                    _sqlExpressionFactory.Constant(0));
+                        typeof(int)
+                    ),
+                    _sqlExpressionFactory.Constant(0)
+                );
             }
 
             // See issue#16428

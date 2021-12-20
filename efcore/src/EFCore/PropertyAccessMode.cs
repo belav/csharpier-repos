@@ -30,7 +30,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     from or write to the field.
         /// </remarks>
         Field,
-
         /// <summary>
         ///     Enforces that all accesses to the property must go through the field when
         ///     new instances are being constructed. New instances are typically constructed when
@@ -44,7 +43,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     case these accesses will also use the field.
         /// </remarks>
         FieldDuringConstruction,
-
         /// <summary>
         ///     Enforces that all accesses to the property must go through the property
         ///     getters and setters, even when new objects are being constructed.
@@ -54,13 +52,11 @@ namespace Microsoft.EntityFrameworkCore
         ///     from or write to the property, for example because it is read-only.
         /// </remarks>
         Property,
-
         /// <summary>
         ///     All accesses to the property goes directly to the field, unless the field is
         ///     not known, in which as access goes through the property.
         /// </summary>
         PreferField,
-
         /// <summary>
         ///     All accesses to the property when constructing new entity instances goes directly
         ///     to the field, unless the field is not known, in which as access goes through the property.
@@ -69,7 +65,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     case these accesses will also use the field.
         /// </summary>
         PreferFieldDuringConstruction,
-
         /// <summary>
         ///     All accesses to the property go through the property, unless there is no property or
         ///     it is missing a setter/getter, in which as access goes directly to the field.

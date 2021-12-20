@@ -14,17 +14,18 @@ namespace Wasm.Build.Tests
 {
     public static class HelperExtensions
     {
-        public static IEnumerable<object?[]> UnwrapItemsAsArrays(this IEnumerable<IEnumerable<object?>> enumerable)
-            => enumerable.Select(e => e.ToArray());
+        public static IEnumerable<object?[]> UnwrapItemsAsArrays(
+            this IEnumerable<IEnumerable<object?>> enumerable
+        ) => enumerable.Select(e => e.ToArray());
 
         public static IEnumerable<object?[]> Dump(this IEnumerable<object?[]> enumerable)
         {
             foreach (var row in enumerable)
             {
-                Console.WriteLine ("{");
+                Console.WriteLine("{");
                 foreach (var param in row)
-                    Console.WriteLine ($"\t{param}");
-                Console.WriteLine ("}");
+                    Console.WriteLine($"\t{param}");
+                Console.WriteLine("}");
             }
             return enumerable;
         }
@@ -54,9 +55,10 @@ namespace Wasm.Build.Tests
         /// <param name="data"></param>
         /// <param name="rowsWithColumnArrays"></param>
         /// <returns></returns>
-        public static IEnumerable<IEnumerable<object?>> Multiply(this IEnumerable<IEnumerable<object?>> data, params object?[][] rowsWithColumnArrays)
-            => data.SelectMany(row =>
-                        rowsWithColumnArrays.Select(new_cols => row.Concat(new_cols)));
+        public static IEnumerable<IEnumerable<object?>> Multiply(
+            this IEnumerable<IEnumerable<object?>> data,
+            params object?[][] rowsWithColumnArrays
+        ) => data.SelectMany(row => rowsWithColumnArrays.Select(new_cols => row.Concat(new_cols)));
 
         public static object?[] Enumerate(this RunHost host)
         {
@@ -80,22 +82,29 @@ namespace Wasm.Build.Tests
             return list.ToArray();
         }
 
-        public static IEnumerable<IEnumerable<object?>> WithRunHosts(this IEnumerable<IEnumerable<object?>> data, RunHost hosts)
+        public static IEnumerable<IEnumerable<object?>> WithRunHosts(
+            this IEnumerable<IEnumerable<object?>> data,
+            RunHost hosts
+        )
         {
             IEnumerable<object?> hostsEnumerable = hosts.Enumerate();
             if (hosts == RunHost.None)
-                return data.Select(d => d.Append((object?) Path.GetRandomFileName()));
+                return data.Select(d => d.Append((object?)Path.GetRandomFileName()));
 
-            return data.SelectMany(d =>
-            {
-                string runId = Path.GetRandomFileName();
-                return hostsEnumerable.Select(o =>
-                        d.Append((object?)o)
-                         .Append((object?)runId));
-            });
+            return data.SelectMany(
+                d =>
+                {
+                    string runId = Path.GetRandomFileName();
+                    return hostsEnumerable.Select(o => d.Append((object?)o).Append((object?)runId));
+                }
+            );
         }
 
-        public static void UpdateTo(this IDictionary<string, (string fullPath, bool unchanged)> dict, bool unchanged, params string[] filenames)
+        public static void UpdateTo(
+            this IDictionary<string, (string fullPath, bool unchanged)> dict,
+            bool unchanged,
+            params string[] filenames
+        )
         {
             IEnumerable<string> keys = filenames.Length == 0 ? dict.Keys.ToList() : filenames;
 

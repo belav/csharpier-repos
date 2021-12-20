@@ -18,9 +18,21 @@ namespace System.ComponentModel.Tests
 
         public override IEnumerable<ConvertTest> ConvertFromTestData()
         {
-            yield return ConvertTest.Valid(string.Empty, CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
-            yield return ConvertTest.Valid("nl-BE", new CultureInfo("nl-BE"), CultureInfo.InvariantCulture);
-            yield return ConvertTest.Valid("(Default)", CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
+            yield return ConvertTest.Valid(
+                string.Empty,
+                CultureInfo.InvariantCulture,
+                CultureInfo.InvariantCulture
+            );
+            yield return ConvertTest.Valid(
+                "nl-BE",
+                new CultureInfo("nl-BE"),
+                CultureInfo.InvariantCulture
+            );
+            yield return ConvertTest.Valid(
+                "(Default)",
+                CultureInfo.InvariantCulture,
+                CultureInfo.InvariantCulture
+            );
             CultureInfo culture = null;
             try
             {
@@ -30,8 +42,16 @@ namespace System.ComponentModel.Tests
 
             if (culture != null)
             {
-                yield return ConvertTest.Valid("nl-B", new CultureInfo("nl--B"), CultureInfo.InvariantCulture);
-                yield return ConvertTest.Valid("nl-B", new CultureInfo("nl--B"), new CultureInfo("en-US"));
+                yield return ConvertTest.Valid(
+                    "nl-B",
+                    new CultureInfo("nl--B"),
+                    CultureInfo.InvariantCulture
+                );
+                yield return ConvertTest.Valid(
+                    "nl-B",
+                    new CultureInfo("nl--B"),
+                    new CultureInfo("en-US")
+                );
             }
             if (PlatformDetection.IsNotBrowser)
             {
@@ -48,12 +68,19 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid(new CustomCultureInfo(), "nl-BE");
             yield return ConvertTest.Valid(null, "(Default)");
             yield return ConvertTest.Valid(CultureInfo.InvariantCulture, "(Default)");
-            yield return ConvertTest.Valid(CultureInfo.InvariantCulture, "(Default)", CultureInfo.InvariantCulture);
+            yield return ConvertTest.Valid(
+                CultureInfo.InvariantCulture,
+                "(Default)",
+                CultureInfo.InvariantCulture
+            );
             yield return ConvertTest.Valid(new CultureInfo("nl-BE"), "nl-BE");
             yield return ConvertTest.Valid(1, "1");
 
             yield return ConvertTest.CantConvertTo(CultureInfo.InvariantCulture, typeof(object));
-            yield return ConvertTest.CantConvertTo(CultureInfo.InvariantCulture, typeof(CultureInfo));
+            yield return ConvertTest.CantConvertTo(
+                CultureInfo.InvariantCulture,
+                typeof(CultureInfo)
+            );
             yield return ConvertTest.CantConvertTo(CultureInfo.InvariantCulture, typeof(int));
         }
 
@@ -72,7 +99,10 @@ namespace System.ComponentModel.Tests
             catch (CultureNotFoundException)
             {
                 // If we cannot create the cultures we should get exception from the Converter too.
-                AssertExtensions.Throws<ArgumentException>("value", () => Converter.ConvertFrom(null, CultureInfo.InvariantCulture, cultureName));
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    () => Converter.ConvertFrom(null, CultureInfo.InvariantCulture, cultureName)
+                );
             }
         }
 
@@ -82,8 +112,16 @@ namespace System.ComponentModel.Tests
             var culture = new CultureInfo("en-US");
             Assert.True(Converter.CanConvertTo(typeof(InstanceDescriptor)));
 
-            InstanceDescriptor instanceDescriptor = Assert.IsType<InstanceDescriptor>(Converter.ConvertTo(culture, typeof(InstanceDescriptor)));
-            Assert.Equal(new Type[] { typeof(string) }, Assert.IsAssignableFrom<ConstructorInfo>(instanceDescriptor.MemberInfo).GetParameters().Select(p => p.ParameterType));
+            InstanceDescriptor instanceDescriptor = Assert.IsType<InstanceDescriptor>(
+                Converter.ConvertTo(culture, typeof(InstanceDescriptor))
+            );
+            Assert.Equal(
+                new Type[] { typeof(string) },
+                Assert
+                    .IsAssignableFrom<ConstructorInfo>(instanceDescriptor.MemberInfo)
+                    .GetParameters()
+                    .Select(p => p.ParameterType)
+            );
             Assert.Equal(new object[] { culture.Name }, instanceDescriptor.Arguments);
         }
 
@@ -92,13 +130,17 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void ConvertTo_InvalidValue_ThrowsNotSupportedException(Type destinationType)
         {
-            Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(new object(), destinationType));
+            Assert.Throws<NotSupportedException>(
+                () => Converter.ConvertTo(new object(), destinationType)
+            );
         }
 
         [Theory]
         [InlineData(typeof(InstanceDescriptor))]
         [InlineData(typeof(int))]
-        public void ConvertTo_InstanceAndNullCulture_ThrowsNotSupportedException(Type destinationType)
+        public void ConvertTo_InstanceAndNullCulture_ThrowsNotSupportedException(
+            Type destinationType
+        )
         {
             Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(null, destinationType));
         }
@@ -132,23 +174,24 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(ConvertFrom_OverridenGetCultureName_TestData))]
-        public void ConvertFrom_OverridenGetCultureName_ReturnsExpected(string fixedValue, string text, CultureInfo expected)
+        public void ConvertFrom_OverridenGetCultureName_ReturnsExpected(
+            string fixedValue,
+            string text,
+            CultureInfo expected
+        )
         {
-            var converter = new FixedCultureInfoConverter
-            {
-                FixedValue = fixedValue
-            };
+            var converter = new FixedCultureInfoConverter { FixedValue = fixedValue };
             Assert.Equal(expected, converter.ConvertFromString(text));
         }
 
         [Fact]
         public void GetCultureName_Overriden_ConversionsReturnsExpected()
         {
-            var converter = new FixedCultureInfoConverter
-            {
-                FixedValue = "Fixed"
-            };
-            Assert.Equal("(Default)", converter.ConvertTo(CultureInfo.InvariantCulture, typeof(string)));
+            var converter = new FixedCultureInfoConverter { FixedValue = "Fixed" };
+            Assert.Equal(
+                "(Default)",
+                converter.ConvertTo(CultureInfo.InvariantCulture, typeof(string))
+            );
             Assert.Equal("Fixed", converter.ConvertTo(new CultureInfo("en-US"), typeof(string)));
         }
 
@@ -170,9 +213,7 @@ namespace System.ComponentModel.Tests
         [Serializable]
         private sealed class CustomCultureInfo : CultureInfo
         {
-            public CustomCultureInfo() : base("nl-BE")
-            {
-            }
+            public CustomCultureInfo() : base("nl-BE") { }
 
             public override string DisplayName => "display";
 

@@ -62,12 +62,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.as01.as
         {
             int result = 0;
             // scenario 1
-            dynamic f11 = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f11 =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             Foo<Animal> f12 = f11 as Foo<Tiger>;
             Animal t1 = f12();
             if (t1.speakName() != "Tiger")
@@ -76,20 +77,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.as01.as
             Foo<Tiger> f21 = () =>
             {
                 return new Tiger();
-            }
-
-            ;
+            };
             dynamic f22 = (Foo<Animal>)(f21 as Foo<Tiger>);
             Animal t2 = f22();
             if (t2.speakName() != "Tiger")
                 result++;
             // scenario 3
-            dynamic f31 = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f31 =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             dynamic f32 = (Foo<Animal>)(f31 as Foo<Tiger>);
             Animal t3 = f32();
             if (t3.speakName() != "Tiger")
@@ -98,8 +98,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.as01.as
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment01.assignment01
 {
@@ -132,17 +130,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
     public class C
     {
-        public static iVariance<Animal> p1
-        {
-            get;
-            set;
-        }
+        public static iVariance<Animal> p1 { get; set; }
 
-        public static dynamic p2
-        {
-            get;
-            set;
-        }
+        public static dynamic p2 { get; set; }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -174,8 +164,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment02.assignment02
 {
     // <Area>variance</Area>
@@ -191,9 +179,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class Animal
@@ -206,17 +192,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
     public class C
     {
-        public static iVariance<Tiger> p1
-        {
-            get;
-            set;
-        }
+        public static iVariance<Tiger> p1 { get; set; }
 
-        public static iVariance<Tiger> p2
-        {
-            get;
-            set;
-        }
+        public static iVariance<Tiger> p2 { get; set; }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -248,8 +226,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment03.assignment03
 {
     // <Area>variance</Area>
@@ -269,17 +245,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     public class C
     {
         public delegate void Foo<in T>(T t);
-        public static Foo<Tiger> p1
-        {
-            get;
-            set;
-        }
+        public static Foo<Tiger> p1 { get; set; }
 
-        public static dynamic p2
-        {
-            get;
-            set;
-        }
+        public static dynamic p2 { get; set; }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -289,16 +257,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            Foo<Animal> v1 = (Animal a) =>
-            {
-            }
-
-            ;
-            dynamic v2 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            Foo<Animal> v1 = (Animal a) => { };
+            dynamic v2 = (Foo<Animal>)((Animal a) => { });
             try
             {
                 p1 = v2;
@@ -318,8 +278,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment04.assignment04
 {
@@ -349,12 +307,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            dynamic f = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             e += f;
             Animal t = e();
             return 0;
@@ -362,8 +321,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment05.assignment05
 {
@@ -393,11 +350,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             f2 += f1;
             f2(new Tiger());
             return 0;
@@ -405,8 +358,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment06.assignment06
 {
@@ -472,12 +423,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment07.assignment07
 {
     using System;
-    
+
     // <Area>variance</Area>
     // <Title> assignment Contravariant delegates</Title>
     // <Description> contravariance on delegates assigned to arrays</Description>
@@ -501,7 +450,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
         private static dynamic s_array3;
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55119", typeof(PlatformDetection), nameof(PlatformDetection.IsLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55119",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -509,16 +462,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
         public static int MainMethod()
         {
-            Foo<Animal> f1 = (Animal a) =>
-            {
-            }
-
-            ;
-            dynamic f2 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            Foo<Animal> f1 = (Animal a) => { };
+            dynamic f2 = (Foo<Animal>)((Animal a) => { });
             s_array1 = new Foo<Tiger>[1];
             s_array1[0] = f2;
             s_array1[0](new Tiger());
@@ -537,8 +482,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment08.assignment08
 {
@@ -570,15 +513,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             Foo<Tiger> f1 = () =>
             {
                 return new Tiger();
-            }
-
-            ;
-            dynamic f2 = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            };
+            dynamic f2 =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             try
             {
                 Bar1(f2);
@@ -593,18 +535,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public static void Bar1(Foo<Animal> f)
-        {
-        }
+        public static void Bar1(Foo<Animal> f) { }
 
-        public static void Bar2(dynamic f)
-        {
-        }
+        public static void Bar2(dynamic f) { }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment09.assignment09
 {
@@ -621,9 +557,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class Animal
@@ -660,18 +594,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public static void Bar1(iVariance<Tiger> f)
-        {
-        }
+        public static void Bar1(iVariance<Tiger> f) { }
 
-        public static void Bar2(dynamic f)
-        {
-        }
+        public static void Bar2(dynamic f) { }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment10.assignment10
 {
@@ -700,9 +628,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public void Foo(IA<string> x)
-        {
-        }
+        public void Foo(IA<string> x) { }
     }
 
     public interface IA<in T>
@@ -714,8 +640,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignment11.assignment11
 {
@@ -744,9 +668,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
             return 0;
         }
 
-        public void Foo(IA<string> x)
-        {
-        }
+        public void Foo(IA<string> x) { }
     }
 
     public interface IA<in T>
@@ -758,8 +680,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overload01.overload01
 {
@@ -818,13 +738,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
         public static int MainMethod()
         {
-            int result = 0, count = 0;
-            dynamic f11 = (Foo<Giraffe>)(() =>
-            {
-                return new Giraffe();
-            }
-
-            );
+            int result = 0,
+                count = 0;
+            dynamic f11 =
+                (Foo<Giraffe>)(
+                    () =>
+                    {
+                        return new Giraffe();
+                    }
+                );
             try
             {
                 result++;
@@ -832,7 +754,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, ex.Message, "C.Foo<Giraffe>", "C.Foo<Tiger>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    ex.Message,
+                    "C.Foo<Giraffe>",
+                    "C.Foo<Tiger>"
+                );
                 if (ret)
                 {
                     result--;
@@ -850,12 +777,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             //    result--;
             //    System.Console.WriteLine("Scenario {0} passed.", ++count);
             //}
-            dynamic f31 = (Foo<Giraffe>)(() =>
-            {
-                return new Giraffe();
-            }
-
-            );
+            dynamic f31 =
+                (Foo<Giraffe>)(
+                    () =>
+                    {
+                        return new Giraffe();
+                    }
+                );
             try
             {
                 result++;
@@ -863,7 +791,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoExplicitConv, ex.Message, "C.Foo<Giraffe>", "C.Foo<Tiger>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoExplicitConv,
+                    ex.Message,
+                    "C.Foo<Giraffe>",
+                    "C.Foo<Tiger>"
+                );
                 if (ret)
                 {
                     result--;
@@ -875,8 +808,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overload02.overload02
 {
@@ -893,9 +824,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class Animal
@@ -942,7 +871,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "C.Bar(iVariance<Tiger>)", "C.Bar(iVariance<Bear>)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "C.Bar(iVariance<Tiger>)",
+                    "C.Bar(iVariance<Bear>)"
+                );
                 if (ret)
                 {
                     return 0;
@@ -954,8 +888,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overload03.overload03
 {
@@ -1013,19 +945,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
         public static int MainMethod()
         {
-            Foo<Animal> f10 = (Animal a) =>
-            {
-            }
-
-            ;
+            Foo<Animal> f10 = (Animal a) => { };
             dynamic f11 = (Foo<Tiger>)f10;
             Foo<Giraffe> f12 = (Foo<Giraffe>)f11;
             f11(new Tiger());
-            Foo<Animal> f20 = (Animal a) =>
-            {
-            }
-
-            ;
+            Foo<Animal> f20 = (Animal a) => { };
             dynamic f21 = (Foo<Tiger>)f20;
             dynamic f22 = (Foo<Giraffe>)f21;
             f22(new Tiger());
@@ -1034,8 +958,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overload04.overload04
 {
@@ -1094,11 +1016,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
         public static int MainMethod()
         {
-            Foo<Animal> f = (Animal a) =>
-            {
-            }
-
-            ;
+            Foo<Animal> f = (Animal a) => { };
             dynamic f11 = (Foo<Tiger>)f;
             Foo<Giraffe> f12 = (Foo<Giraffe>)f11;
             f11(new Tiger());
@@ -1110,8 +1028,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overload05.overload05
 {
@@ -1165,9 +1081,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class C
@@ -1180,7 +1094,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
 
         public static int MainMethod()
         {
-            int result = 0, count = 0;
+            int result = 0,
+                count = 0;
             dynamic v11 = new Variance<Tiger>();
             try
             {
@@ -1189,7 +1104,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "Variance<Tiger>", "iVariance<Giraffe>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "Variance<Tiger>",
+                    "iVariance<Giraffe>"
+                );
                 if (ret)
                 {
                     result--;
@@ -1212,8 +1132,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolution01.resolution01
 {
@@ -1278,8 +1196,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolution02.resolution02
 {
     // <Area>variance</Area>
@@ -1295,9 +1211,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class Animal
@@ -1353,8 +1267,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolution03.resolution03
 {
     // <Area>variance</Area>
@@ -1370,9 +1282,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class Animal
@@ -1419,8 +1329,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolution04.resolution04
 {
@@ -1485,8 +1393,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolut
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.resolution05.resolution05
 {

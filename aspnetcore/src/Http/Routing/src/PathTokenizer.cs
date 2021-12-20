@@ -75,7 +75,6 @@ internal struct PathTokenizer : IReadOnlyList<StringSegment>
                 throw new IndexOutOfRangeException();
             }
 
-
             var currentSegmentIndex = 0;
             var currentSegmentStart = 1;
 
@@ -85,7 +84,11 @@ internal struct PathTokenizer : IReadOnlyList<StringSegment>
             {
                 if (currentSegmentIndex++ == index)
                 {
-                    return new StringSegment(_path, currentSegmentStart, delimiterIndex - currentSegmentStart);
+                    return new StringSegment(
+                        _path,
+                        currentSegmentStart,
+                        delimiterIndex - currentSegmentStart
+                    );
                 }
                 else
                 {
@@ -99,7 +102,11 @@ internal struct PathTokenizer : IReadOnlyList<StringSegment>
             Debug.Assert(_path[_path.Length - 1] != '/');
             Debug.Assert(currentSegmentIndex == index);
 
-            return new StringSegment(_path, currentSegmentStart, _path.Length - currentSegmentStart);
+            return new StringSegment(
+                _path,
+                currentSegmentStart,
+                _path.Length - currentSegmentStart
+            );
         }
     }
 
@@ -135,23 +142,15 @@ internal struct PathTokenizer : IReadOnlyList<StringSegment>
 
         public StringSegment Current
         {
-            get
-            {
-                return new StringSegment(_path, _index, _length);
-            }
+            get { return new StringSegment(_path, _index, _length); }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {

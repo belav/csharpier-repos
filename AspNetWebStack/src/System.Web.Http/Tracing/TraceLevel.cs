@@ -19,27 +19,22 @@ namespace System.Web.Http.Tracing
         /// Tracing is disabled
         /// </summary>
         Off = 0,
-
         /// <summary>
         /// Trace level for debugging traces
         /// </summary>
         Debug = 1,
-
         /// <summary>
         /// Trace level for informational traces
         /// </summary>
         Info = 2,
-
         /// <summary>
         /// Trace level for warning traces
         /// </summary>
         Warn = 3,
-
         /// <summary>
         /// Trace level for error traces
         /// </summary>
         Error = 4,
-
         /// <summary>
         /// Trace level for fatal traces
         /// </summary>

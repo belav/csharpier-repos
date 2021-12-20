@@ -6,9 +6,6 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     internal class ErrorListInProcess : InProcComponent
     {
-        public ErrorListInProcess(TestServices testServices)
-            : base(testServices)
-        {
-        }
+        public ErrorListInProcess(TestServices testServices) : base(testServices) { }
     }
 }

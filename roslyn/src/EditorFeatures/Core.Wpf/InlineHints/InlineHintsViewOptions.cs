@@ -16,22 +16,31 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InlineHintsViewOptions()
-        {
-        }
+        public InlineHintsViewOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            DisplayAllHintsWhilePressingAltF1,
-            ColorHints);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(DisplayAllHintsWhilePressingAltF1, ColorHints);
 
         private const string FeatureName = "InlineHintsOptions";
 
-        public static readonly Option2<bool> DisplayAllHintsWhilePressingAltF1 = new(
-            FeatureName, "DisplayAllHintsWhilePressingAltF1", defaultValue: true,
-            storageLocation: new RoamingProfileStorageLocation("TextEditor.Specific.DisplayAllHintsWhilePressingAltF1"));
+        public static readonly Option2<bool> DisplayAllHintsWhilePressingAltF1 =
+            new(
+                FeatureName,
+                "DisplayAllHintsWhilePressingAltF1",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.Specific.DisplayAllHintsWhilePressingAltF1"
+                )
+            );
 
-        public static readonly PerLanguageOption2<bool> ColorHints = new(
-            FeatureName, "ColorHints", defaultValue: true,
-            storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ColorHints"));
+        public static readonly PerLanguageOption2<bool> ColorHints =
+            new(
+                FeatureName,
+                "ColorHints",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ColorHints"
+                )
+            );
     }
 }

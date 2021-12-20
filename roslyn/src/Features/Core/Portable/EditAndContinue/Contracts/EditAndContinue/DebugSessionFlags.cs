@@ -12,7 +12,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// No flags.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Edit and Continue has been disabled by the client.
         /// </summary>

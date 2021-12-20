@@ -77,7 +77,9 @@ namespace Opt_Error
             uint cse_uval_1 = fb.uval * 2 - 5 + fb.uval;
             int cse_val_1 = fb.val * 7 - 4 + fb.val * 7;
 
-            Console.WriteLine("First result: " + cseb0_1 + ", " + cse_uval_1 + ", " + cse_val_1 + ";");
+            Console.WriteLine(
+                "First result: " + cseb0_1 + ", " + cse_uval_1 + ", " + cse_val_1 + ";"
+            );
             Debug.Assert(cseb0_1 == 13);
             Debug.Assert(cse_uval_1 == 1);
             Debug.Assert(cse_val_1 == 24);
@@ -86,7 +88,9 @@ namespace Opt_Error
             uint cse_uval_2 = fb.uval * 2 - 5 + fb.uval;
             int cse_val_2 = fb.val * 7 - 4 + fb.val * 7;
 
-            Console.WriteLine("Second result: " + cseb0_2 + ", " + cse_uval_2 + ", " + cse_val_2 + ";");
+            Console.WriteLine(
+                "Second result: " + cseb0_2 + ", " + cse_uval_2 + ", " + cse_val_2 + ";"
+            );
             Debug.Assert(cseb0_2 == 23);
             Debug.Assert(cse_uval_2 == 7);
             Debug.Assert(cse_val_2 == 52);
@@ -103,7 +107,9 @@ namespace Opt_Error
             uint cse_uval_1 = fb.uval * 2 - 5 + fb.uval;
             int cse_val_1 = fb.val * 7 - 4 + fb.val * 7;
 
-            Console.WriteLine("First result: " + cseb0_1 + ", " + cse_uval_1 + ", " + cse_val_1 + ";");
+            Console.WriteLine(
+                "First result: " + cseb0_1 + ", " + cse_uval_1 + ", " + cse_val_1 + ";"
+            );
             Debug.Assert(cseb0_1 == 13);
             Debug.Assert(cse_uval_1 == 1);
             Debug.Assert(cse_val_1 == 24);
@@ -112,7 +118,9 @@ namespace Opt_Error
             uint cse_uval_2 = fb.uval * 2 - 5 + fb.uval;
             int cse_val_2 = fb.val * 7 - 4 + fb.val * 7;
 
-            Console.WriteLine("Second result: " + cseb0_2 + ", " + cse_uval_2 + ", " + cse_val_2 + ";");
+            Console.WriteLine(
+                "Second result: " + cseb0_2 + ", " + cse_uval_2 + ", " + cse_val_2 + ";"
+            );
             Debug.Assert(cseb0_2 == 23);
             Debug.Assert(cse_uval_2 == 7);
             Debug.Assert(cse_val_2 == 52);

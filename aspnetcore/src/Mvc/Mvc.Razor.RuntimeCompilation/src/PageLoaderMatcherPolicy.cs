@@ -96,7 +96,11 @@ internal class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelectorPolicy
         return Task.CompletedTask;
     }
 
-    private async Task ApplyAsyncAwaited(CandidateSet candidates, Task<CompiledPageActionDescriptor> actionDescriptorTask, int index)
+    private async Task ApplyAsyncAwaited(
+        CandidateSet candidates,
+        Task<CompiledPageActionDescriptor> actionDescriptorTask,
+        int index
+    )
     {
         var compiled = await actionDescriptorTask;
 

@@ -32,10 +32,16 @@ internal class ControllerRequestDelegateFactory : IRequestDelegateFactory
         IOptions<MvcOptions> optionsAccessor,
         ILoggerFactory loggerFactory,
         DiagnosticListener diagnosticListener,
-        IActionResultTypeMapper mapper)
-        : this(controllerActionInvokerCache, optionsAccessor, loggerFactory, diagnosticListener, mapper, null)
-    {
-    }
+        IActionResultTypeMapper mapper
+    )
+        : this(
+            controllerActionInvokerCache,
+            optionsAccessor,
+            loggerFactory,
+            diagnosticListener,
+            mapper,
+            null
+        ) { }
 
     public ControllerRequestDelegateFactory(
         ControllerActionInvokerCache controllerActionInvokerCache,
@@ -43,7 +49,8 @@ internal class ControllerRequestDelegateFactory : IRequestDelegateFactory
         ILoggerFactory loggerFactory,
         DiagnosticListener diagnosticListener,
         IActionResultTypeMapper mapper,
-        IActionContextAccessor? actionContextAccessor)
+        IActionContextAccessor? actionContextAccessor
+    )
     {
         _controllerActionInvokerCache = controllerActionInvokerCache;
         _valueProviderFactories = optionsAccessor.Value.ValueProviderFactories.ToArray();
@@ -55,7 +62,10 @@ internal class ControllerRequestDelegateFactory : IRequestDelegateFactory
         _actionContextAccessor = actionContextAccessor ?? ActionContextAccessor.Null;
     }
 
-    public RequestDelegate? CreateRequestDelegate(ActionDescriptor actionDescriptor, RouteValueDictionary? dataTokens)
+    public RequestDelegate? CreateRequestDelegate(
+        ActionDescriptor actionDescriptor,
+        RouteValueDictionary? dataTokens
+    )
     {
         // Fallback to action invoker extensibility so that invokers can override any default behaviors
         if (_enableActionInvokers || actionDescriptor is not ControllerActionDescriptor)
@@ -81,13 +91,17 @@ internal class ControllerRequestDelegateFactory : IRequestDelegateFactory
 
             var controllerContext = new ControllerContext(actionContext)
             {
-                    // PERF: These are rarely going to be changed, so let's go copy-on-write.
-                    ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(_valueProviderFactories)
+                // PERF: These are rarely going to be changed, so let's go copy-on-write.
+                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
+                    _valueProviderFactories
+                )
             };
 
             controllerContext.ModelState.MaxAllowedErrors = _maxModelValidationErrors;
 
-            var (cacheEntry, filters) = _controllerActionInvokerCache.GetCachedResult(controllerContext);
+            var (cacheEntry, filters) = _controllerActionInvokerCache.GetCachedResult(
+                controllerContext
+            );
 
             var invoker = new ControllerActionInvoker(
                 _logger,
@@ -96,7 +110,8 @@ internal class ControllerRequestDelegateFactory : IRequestDelegateFactory
                 _mapper,
                 controllerContext,
                 cacheEntry,
-                filters);
+                filters
+            );
 
             return invoker.InvokeAsync();
         };

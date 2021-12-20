@@ -12,45 +12,44 @@ internal static class TagHelperDescriptorExtensions
 {
     public static bool IsAnyComponentDocumentTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.IsComponentTagHelper() || tagHelper.Metadata.ContainsKey(ComponentMetadata.SpecialKindKey);
+        return tagHelper.IsComponentTagHelper()
+            || tagHelper.Metadata.ContainsKey(ComponentMetadata.SpecialKindKey);
     }
 
     public static bool IsBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Bind.TagHelperKind, kind);
+        return tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind)
+            && string.Equals(ComponentMetadata.Bind.TagHelperKind, kind);
     }
 
     public static bool IsFallbackBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.IsBindTagHelper() &&
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.Bind.FallbackKey, out var fallback) &&
-            string.Equals(bool.TrueString, fallback);
+        return tagHelper.IsBindTagHelper()
+            && tagHelper.Metadata.TryGetValue(ComponentMetadata.Bind.FallbackKey, out var fallback)
+            && string.Equals(bool.TrueString, fallback);
     }
 
     public static bool IsGenericTypedComponent(this TagHelperDescriptor tagHelper)
     {
-        return
-            IsComponentTagHelper(tagHelper) &&
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value) &&
-            string.Equals(bool.TrueString, value);
+        return IsComponentTagHelper(tagHelper)
+            && tagHelper.Metadata.TryGetValue(
+                ComponentMetadata.Component.GenericTypedKey,
+                out var value
+            )
+            && string.Equals(bool.TrueString, value);
     }
 
     public static bool IsInputElementBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.IsBindTagHelper() &&
-            tagHelper.TagMatchingRules.Count == 1 &&
-            string.Equals("input", tagHelper.TagMatchingRules[0].TagName);
+        return tagHelper.IsBindTagHelper()
+            && tagHelper.TagMatchingRules.Count == 1
+            && string.Equals("input", tagHelper.TagMatchingRules[0].TagName);
     }
 
     public static bool IsInputElementFallbackBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.IsInputElementBindTagHelper() &&
-            !tagHelper.Metadata.ContainsKey(ComponentMetadata.Bind.TypeAttribute);
+        return tagHelper.IsInputElementBindTagHelper()
+            && !tagHelper.Metadata.ContainsKey(ComponentMetadata.Bind.TypeAttribute);
     }
 
     public static string GetValueAttributeName(this TagHelperDescriptor tagHelper)
@@ -81,10 +80,12 @@ internal static class TagHelperDescriptorExtensions
     /// </returns>
     public static bool IsInvariantCultureBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.Bind.IsInvariantCulture, out var text) &&
-            bool.TryParse(text, out var result) &&
-            result;
+        return tagHelper.Metadata.TryGetValue(
+                ComponentMetadata.Bind.IsInvariantCulture,
+                out var text
+            )
+            && bool.TryParse(text, out var result)
+            && result;
     }
 
     /// <summary>
@@ -105,8 +106,13 @@ internal static class TagHelperDescriptorExtensions
             return value;
         }
 
-        value = tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var specialKey) &&
-            string.Equals(specialKey, ComponentMetadata.ChildContent.TagHelperKind, StringComparison.Ordinal);
+        value =
+            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var specialKey)
+            && string.Equals(
+                specialKey,
+                ComponentMetadata.ChildContent.TagHelperKind,
+                StringComparison.Ordinal
+            );
 
         tagHelper.IsChildContentTagHelperCache = value;
         return value;
@@ -114,37 +120,32 @@ internal static class TagHelperDescriptorExtensions
 
     public static bool IsComponentTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            string.Equals(tagHelper.Kind, ComponentMetadata.Component.TagHelperKind) &&
-            !tagHelper.Metadata.ContainsKey(ComponentMetadata.SpecialKindKey);
+        return string.Equals(tagHelper.Kind, ComponentMetadata.Component.TagHelperKind)
+            && !tagHelper.Metadata.ContainsKey(ComponentMetadata.SpecialKindKey);
     }
 
     public static bool IsEventHandlerTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.EventHandler.TagHelperKind, kind);
+        return tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind)
+            && string.Equals(ComponentMetadata.EventHandler.TagHelperKind, kind);
     }
 
     public static bool IsKeyTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Key.TagHelperKind, kind);
+        return tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind)
+            && string.Equals(ComponentMetadata.Key.TagHelperKind, kind);
     }
 
     public static bool IsSplatTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Splat.TagHelperKind, kind);
+        return tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind)
+            && string.Equals(ComponentMetadata.Splat.TagHelperKind, kind);
     }
 
     public static bool IsRefTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return
-            tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind) &&
-            string.Equals(ComponentMetadata.Ref.TagHelperKind, kind);
+        return tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var kind)
+            && string.Equals(ComponentMetadata.Ref.TagHelperKind, kind);
     }
 
     /// <summary>
@@ -158,15 +159,21 @@ internal static class TagHelperDescriptorExtensions
             return value;
         }
 
-        value = tagHelper.Metadata.TryGetValue(ComponentMetadata.Component.NameMatchKey, out var matchType) &&
-            string.Equals(ComponentMetadata.Component.FullyQualifiedNameMatch, matchType);
+        value =
+            tagHelper.Metadata.TryGetValue(
+                ComponentMetadata.Component.NameMatchKey,
+                out var matchType
+            ) && string.Equals(ComponentMetadata.Component.FullyQualifiedNameMatch, matchType);
         tagHelper.IsComponentFullyQualifiedNameMatchCache = value;
         return value;
     }
 
     public static string GetEventArgsType(this TagHelperDescriptor tagHelper)
     {
-        tagHelper.Metadata.TryGetValue(ComponentMetadata.EventHandler.EventArgsType, out var result);
+        tagHelper.Metadata.TryGetValue(
+            ComponentMetadata.EventHandler.EventArgsType,
+            out var result
+        );
         return result;
     }
 
@@ -175,7 +182,9 @@ internal static class TagHelperDescriptorExtensions
     /// </summary>
     /// <param name="tagHelper">The <see cref="TagHelperDescriptor"/>.</param>
     /// <returns>The child content attributes</returns>
-    public static IEnumerable<BoundAttributeDescriptor> GetChildContentProperties(this TagHelperDescriptor tagHelper)
+    public static IEnumerable<BoundAttributeDescriptor> GetChildContentProperties(
+        this TagHelperDescriptor tagHelper
+    )
     {
         for (var i = 0; i < tagHelper.BoundAttributes.Count; i++)
         {
@@ -192,7 +201,9 @@ internal static class TagHelperDescriptorExtensions
     /// </summary>
     /// <param name="tagHelper">The <see cref="TagHelperDescriptor"/>.</param>
     /// <returns>The type parameter attributes</returns>
-    public static IEnumerable<BoundAttributeDescriptor> GetTypeParameters(this TagHelperDescriptor tagHelper)
+    public static IEnumerable<BoundAttributeDescriptor> GetTypeParameters(
+        this TagHelperDescriptor tagHelper
+    )
     {
         for (var i = 0; i < tagHelper.BoundAttributes.Count; i++)
         {

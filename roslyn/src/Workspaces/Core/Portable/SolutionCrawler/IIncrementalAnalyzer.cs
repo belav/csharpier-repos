@@ -22,9 +22,23 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         /// </summary>
         Task DocumentResetAsync(Document document, CancellationToken cancellationToken);
 
-        Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken);
-        Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken);
-        Task AnalyzeProjectAsync(Project project, bool semanticsChanged, InvocationReasons reasons, CancellationToken cancellationToken);
+        Task AnalyzeSyntaxAsync(
+            Document document,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        );
+        Task AnalyzeDocumentAsync(
+            Document document,
+            SyntaxNode bodyOpt,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        );
+        Task AnalyzeProjectAsync(
+            Project project,
+            bool semanticsChanged,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        );
 
         Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken);
         Task RemoveProjectAsync(ProjectId projectId, CancellationToken cancellationToken);

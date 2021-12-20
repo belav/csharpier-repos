@@ -13,13 +13,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// Display structure of the object on a single line.
         /// </summary>
         SingleLine,
-
         /// <summary>
         /// Displays a simple description of the object followed by list of members. Each member is
         /// displayed on a separate line.
         /// </summary>
         SeparateLines,
-
         /// <summary>
         /// Display just a simple description of the object, like type name or ToString(). Don't
         /// display any members of the object.

@@ -20,13 +20,15 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                 builder.AddTypeToken();
-            });
+            }
+        );
 
         // Act & Assert
         ParseDocumentTest(
-@"@custom System.Text.Encoding.ASCIIEncoding
+            @"@custom System.Text.Encoding.ASCIIEncoding
 @custom System.Text.Encoding.UTF8Encoding",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -40,13 +42,15 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.AddTypeToken();
-            });
+            }
+        );
 
         // Act & Assert
         ParseDocumentTest(
-@"@custom System.Text.Encoding.ASCIIEncoding
+            @"@custom System.Text.Encoding.ASCIIEncoding
 @custom System.Text.Encoding.UTF8Encoding",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -60,7 +64,8 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.AddTypeToken();
-            });
+            }
+        );
         var somethingDescriptor = DirectiveDescriptor.CreateDirective(
             "something",
             DirectiveKind.SingleLine,
@@ -68,13 +73,15 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                 builder.AddMemberToken();
-            });
+            }
+        );
 
         // Act & Assert
         ParseDocumentTest(
-@"@custom System.Text.Encoding.ASCIIEncoding
+            @"@custom System.Text.Encoding.ASCIIEncoding
 @something Else",
-            new[] { customDescriptor, somethingDescriptor });
+            new[] { customDescriptor, somethingDescriptor }
+        );
     }
 
     [Fact]
@@ -88,7 +95,8 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.AddTypeToken();
-            });
+            }
+        );
         var somethingDescriptor = DirectiveDescriptor.CreateDirective(
             "something",
             DirectiveKind.SingleLine,
@@ -96,17 +104,19 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                 builder.AddMemberToken();
-            });
+            }
+        );
 
         // Act & Assert
         ParseDocumentTest(
-@"@* There are two directives beneath this *@
+            @"@* There are two directives beneath this *@
 @custom System.Text.Encoding.ASCIIEncoding
 
 @something Else
 
 <p>This is extra</p>",
-            new[] { customDescriptor, somethingDescriptor });
+            new[] { customDescriptor, somethingDescriptor }
+        );
     }
 
     [Fact]
@@ -116,12 +126,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken().AddStringToken());
+            b => b.AddStringToken().AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"string1\"\"string2\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"string1\"\"string2\"", new[] { descriptor });
     }
 
     [Fact]
@@ -131,12 +140,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddNamespaceToken());
+            b => b.AddNamespaceToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom System.",
-            new[] { descriptor });
+        ParseDocumentTest("@custom System.", new[] { descriptor });
     }
 
     [Fact]
@@ -146,12 +154,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddNamespaceToken());
+            b => b.AddNamespaceToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom System<",
-            new[] { descriptor });
+        ParseDocumentTest("@custom System<", new[] { descriptor });
     }
     [Fact]
     public void DirectiveDescriptor_CanHandleIncompleteNamespaceTokens()
@@ -160,12 +167,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddNamespaceToken());
+            b => b.AddNamespaceToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom System." + Environment.NewLine,
-            new[] { descriptor });
+        ParseDocumentTest("@custom System." + Environment.NewLine, new[] { descriptor });
     }
 
     [Fact]
@@ -175,12 +181,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddNamespaceToken());
+            b => b.AddNamespaceToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom System<" + Environment.NewLine,
-            new[] { descriptor });
+        ParseDocumentTest("@custom System<" + Environment.NewLine, new[] { descriptor });
     }
 
     [Fact]
@@ -190,11 +195,14 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddTypeToken());
+            b => b.AddTypeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(Environment.NewLine + "  @custom System.Text.Encoding.ASCIIEncoding",
-            new[] { descriptor });
+        ParseDocumentTest(
+            Environment.NewLine + "  @custom System.Text.Encoding.ASCIIEncoding",
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -218,12 +226,14 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddTypeToken());
+            b => b.AddTypeToken()
+        );
 
         // Act & Assert
         ParseDocumentTest(
             "{  @custom System.Text.Encoding.ASCIIEncoding" + Environment.NewLine + "}",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -233,12 +243,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddTypeToken());
+            b => b.AddTypeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom System.Text.Encoding.ASCIIEncoding",
-            new[] { descriptor });
+        ParseDocumentTest("@custom System.Text.Encoding.ASCIIEncoding", new[] { descriptor });
     }
 
     [Fact]
@@ -248,12 +257,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddMemberToken());
+            b => b.AddMemberToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom Some_Member",
-            new[] { descriptor });
+        ParseDocumentTest("@custom Some_Member", new[] { descriptor });
     }
 
     [Fact]
@@ -263,12 +271,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddNamespaceToken());
+            b => b.AddNamespaceToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom BaseNamespace",
-            new[] { descriptor });
+        ParseDocumentTest("@custom BaseNamespace", new[] { descriptor });
     }
 
     [Fact]
@@ -278,12 +285,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddNamespaceToken());
+            b => b.AddNamespaceToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom BaseNamespace.Foo.Bar",
-            new[] { descriptor });
+        ParseDocumentTest("@custom BaseNamespace.Foo.Bar", new[] { descriptor });
     }
 
     [Fact]
@@ -293,12 +299,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"AString\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"AString\"", new[] { descriptor });
     }
 
     [Fact]
@@ -308,12 +313,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom AString",
-            new[] { descriptor });
+        ParseDocumentTest("@custom AString", new[] { descriptor });
     }
 
     [Fact]
@@ -323,12 +327,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom {foo?}",
-            new[] { descriptor });
+        ParseDocumentTest("@custom {foo?}", new[] { descriptor });
     }
 
     [Fact]
@@ -338,12 +341,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom 'AString'",
-            new[] { descriptor });
+        ParseDocumentTest("@custom 'AString'", new[] { descriptor });
     }
 
     [Fact]
@@ -353,12 +355,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom AString\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom AString\"", new[] { descriptor });
     }
 
     [Fact]
@@ -368,12 +369,14 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddTypeToken().AddMemberToken().AddStringToken());
+            b => b.AddTypeToken().AddMemberToken().AddStringToken()
+        );
 
         // Act & Assert
         ParseDocumentTest(
             "@custom System.Text.Encoding.ASCIIEncoding Some_Member \"AString\"",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -383,12 +386,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.RazorBlock,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"Header\" { <p>F{o}o</p> }",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"Header\" { <p>F{o}o</p> }", new[] { descriptor });
     }
 
     [Fact]
@@ -398,12 +400,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.CodeBlock,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"Name\" { foo(); bar(); }",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"Name\" { foo(); bar(); }", new[] { descriptor });
     }
 
     [Fact]
@@ -413,12 +414,14 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddTypeToken().AddMemberToken());
+            b => b.AddTypeToken().AddMemberToken()
+        );
 
         // Act & Assert
         ParseDocumentTest(
             "@custom    System.Text.Encoding.ASCIIEncoding       Some_Member    ",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -428,12 +431,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddMemberToken());
+            b => b.AddMemberToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom -Some_Member",
-            new[] { descriptor });
+        ParseDocumentTest("@custom -Some_Member", new[] { descriptor });
     }
 
     [Fact]
@@ -443,12 +445,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"hello\" ;  ",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"hello\" ;  ", new[] { descriptor });
     }
 
     [Fact]
@@ -457,13 +458,13 @@ public class RazorDirectivesTest : ParserTestBase
         // Arrange
         var variants = new[]
         {
-                "string?",
-                "string?[]",
-                "global::System.Int32?",
-                "KeyValuePair<string, string>?",
-                "KeyValuePair<string, string>?[]",
-                "global::System.Collections.Generic.KeyValuePair<string, string>?[]",
-            };
+            "string?",
+            "string?[]",
+            "global::System.Int32?",
+            "KeyValuePair<string, string>?",
+            "KeyValuePair<string, string>?[]",
+            "global::System.Collections.Generic.KeyValuePair<string, string>?[]",
+        };
 
         var directiveName = "custom";
         var source = $"@{directiveName}";
@@ -478,7 +479,8 @@ public class RazorDirectivesTest : ParserTestBase
                 b.AddTypeToken();
                 b.AddTypeToken();
                 b.AddTypeToken();
-            });
+            }
+        );
 
         for (var i = 0; i < variants.Length; i++)
         {
@@ -495,13 +497,13 @@ public class RazorDirectivesTest : ParserTestBase
         // Arrange
         var variants = new[]
         {
-                "(bool, int)",
-                "(int aa, string bb)?",
-                "(  int?   q   ,  bool   w   )",
-                "( int  ?  q, bool ?w ,(long ?  [])) ?",
-                "(List<(int, string)?> aa, string bb)",
-                "(string ss, (int u, List<(string, int)> k, (Char c, bool b, List<int> l)), global::System.Int32[] a)",
-            };
+            "(bool, int)",
+            "(int aa, string bb)?",
+            "(  int?   q   ,  bool   w   )",
+            "( int  ?  q, bool ?w ,(long ?  [])) ?",
+            "(List<(int, string)?> aa, string bb)",
+            "(string ss, (int u, List<(string, int)> k, (Char c, bool b, List<int> l)), global::System.Int32[] a)",
+        };
 
         var directiveName = "custom";
         var source = $"@{directiveName}";
@@ -516,7 +518,8 @@ public class RazorDirectivesTest : ParserTestBase
                 b.AddTypeToken();
                 b.AddTypeToken();
                 b.AddTypeToken();
-            });
+            }
+        );
 
         for (var i = 0; i < variants.Length; i++)
         {
@@ -534,12 +537,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddTypeToken());
+            b => b.AddTypeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            $"@custom (bool, int?)   ",
-            new[] { descriptor });
+        ParseDocumentTest($"@custom (bool, int?)   ", new[] { descriptor });
     }
 
     [Fact]
@@ -549,12 +551,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"hello\" \"world\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"hello\" \"world\"", new[] { descriptor });
     }
 
     [Fact]
@@ -564,12 +565,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.CodeBlock,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"Hello\" World { foo(); bar(); }",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"Hello\" World { foo(); bar(); }", new[] { descriptor });
     }
 
     [Fact]
@@ -579,12 +579,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.CodeBlock,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"Hello\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"Hello\"", new[] { descriptor });
     }
 
     [Fact]
@@ -594,12 +593,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.CodeBlock,
-            b => b.AddStringToken());
+            b => b.AddStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"Hello\" {",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"Hello\" {", new[] { descriptor });
     }
 
     [Fact]
@@ -738,9 +736,7 @@ public class RazorDirectivesTest : ParserTestBase
     [Fact]
     public void InheritsDirectiveSupportsArrays()
     {
-        ParseDocumentTest(
-            "@inherits string[[]][]",
-            new[] { InheritsDirective.Directive, });
+        ParseDocumentTest("@inherits string[[]][]", new[] { InheritsDirective.Directive, });
     }
 
     [Fact]
@@ -748,31 +744,26 @@ public class RazorDirectivesTest : ParserTestBase
     {
         ParseDocumentTest(
             "@inherits System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>",
-            new[] { InheritsDirective.Directive, });
+            new[] { InheritsDirective.Directive, }
+        );
     }
 
     [Fact]
     public void InheritsDirectiveSupportsTypeKeywords()
     {
-        ParseDocumentTest(
-            "@inherits string",
-            new[] { InheritsDirective.Directive, });
+        ParseDocumentTest("@inherits string", new[] { InheritsDirective.Directive, });
     }
 
     [Fact]
     public void Parse_FunctionsDirective()
     {
-        ParseDocumentTest(
-            "@functions { foo(); bar(); }",
-            new[] { FunctionsDirective.Directive, });
+        ParseDocumentTest("@functions { foo(); bar(); }", new[] { FunctionsDirective.Directive, });
     }
 
     [Fact]
     public void EmptyFunctionsDirective()
     {
-        ParseDocumentTest(
-            "@functions { }",
-            new[] { FunctionsDirective.Directive, });
+        ParseDocumentTest("@functions { }", new[] { FunctionsDirective.Directive, });
     }
 
     [Fact]
@@ -780,7 +771,8 @@ public class RazorDirectivesTest : ParserTestBase
     {
         ParseDocumentTest(
             "@section Header { <p>F{o}o</p> }",
-            new[] { SectionDirective.Directive, });
+            new[] { SectionDirective.Directive, }
+        );
     }
 
     [Fact]
@@ -790,12 +782,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddOptionalStringToken());
+            b => b.AddOptionalStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom ",
-            new[] { descriptor });
+        ParseDocumentTest("@custom ", new[] { descriptor });
     }
 
     [Fact]
@@ -805,12 +796,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddOptionalStringToken());
+            b => b.AddOptionalStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"simple-value\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"simple-value\"", new[] { descriptor });
     }
 
     [Fact]
@@ -820,12 +810,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddOptionalStringToken());
+            b => b.AddOptionalStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"{formaction}?/{id}?\"",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"{formaction}?/{id}?\"", new[] { descriptor });
     }
 
     [Fact]
@@ -835,12 +824,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddOptionalStringToken().AddOptionalTypeToken());
+            b => b.AddOptionalStringToken().AddOptionalTypeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@custom \"{formaction}?/{id}?\" System.String",
-            new[] { descriptor });
+        ParseDocumentTest("@custom \"{formaction}?/{id}?\" System.String", new[] { descriptor });
     }
 
     [Fact]
@@ -850,12 +838,11 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "TestDirective",
             DirectiveKind.SingleLine,
-            b => b.AddOptionalMemberToken().AddOptionalStringToken());
+            b => b.AddOptionalMemberToken().AddOptionalStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@TestDirective ",
-            new[] { descriptor });
+        ParseDocumentTest("@TestDirective ", new[] { descriptor });
     }
 
     [Fact]
@@ -865,40 +852,31 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "TestDirective",
             DirectiveKind.SingleLine,
-            b => b.AddOptionalMemberToken().AddOptionalStringToken());
+            b => b.AddOptionalMemberToken().AddOptionalStringToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(
-            "@TestDirective PropertyName",
-            new[] { descriptor });
+        ParseDocumentTest("@TestDirective PropertyName", new[] { descriptor });
     }
 
     [Fact]
     public void Directives_CanUseReservedWord_Class()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
-            "class",
-            DirectiveKind.SingleLine);
+        var descriptor = DirectiveDescriptor.CreateDirective("class", DirectiveKind.SingleLine);
 
         // Act & Assert
-        ParseDocumentTest(
-            "@class",
-            new[] { descriptor });
+        ParseDocumentTest("@class", new[] { descriptor });
     }
 
     [Fact]
     public void Directives_CanUseReservedWord_Namespace()
     {
         // Arrange
-        var descriptor = DirectiveDescriptor.CreateDirective(
-            "namespace",
-            DirectiveKind.SingleLine);
+        var descriptor = DirectiveDescriptor.CreateDirective("namespace", DirectiveKind.SingleLine);
 
         // Act & Assert
-        ParseDocumentTest(
-            "@namespace",
-            new[] { descriptor });
+        ParseDocumentTest("@namespace", new[] { descriptor });
     }
 
     [Fact]
@@ -918,13 +896,16 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 b.AddMemberToken();
                 b.AddOptionalGenericTypeConstraintToken("name", "description");
-            });
+            }
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom TSomething where TSomething : class
 ",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -938,12 +919,15 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 b.AddMemberToken();
                 b.AddOptionalGenericTypeConstraintToken("name", "description");
-            });
+            }
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom TSomething where TSomething : class",
-            directives: new[] { descriptor });
+            directives: new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -957,12 +941,15 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 b.AddMemberToken();
                 b.AddOptionalGenericTypeConstraintToken("name", "description");
-            });
+            }
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom TSomething maybe TSomething : class",
-            directives: new[] { descriptor });
+            directives: new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -976,12 +963,15 @@ public class RazorDirectivesTest : ParserTestBase
             {
                 b.AddMemberToken();
                 b.AddOptionalGenericTypeConstraintToken("name", "description");
-            });
+            }
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom TSomething where TElse : class",
-            directives: new[] { descriptor });
+            directives: new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -991,14 +981,17 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddAttributeToken());
+            b => b.AddAttributeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom [Serializable]
 @custom [DllImport(""user32.dll"", SetLastError=false, ExactSpelling=false)]
 ",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -1008,13 +1001,16 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddAttributeToken());
+            b => b.AddAttributeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom [SomeCustom(new int[] { 1, 2, 3 }
 ",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -1024,10 +1020,12 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddAttributeToken());
+            b => b.AddAttributeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @custom [SomeCustom(new int[]
     {
         1,
@@ -1035,7 +1033,8 @@ public class RazorDirectivesTest : ParserTestBase
         3
     }]
 ",
-            new[] { descriptor });
+            new[] { descriptor }
+        );
     }
 
     [Fact]
@@ -1045,10 +1044,10 @@ public class RazorDirectivesTest : ParserTestBase
         var descriptor = DirectiveDescriptor.CreateDirective(
             "custom",
             DirectiveKind.SingleLine,
-            b => b.AddAttributeToken());
+            b => b.AddAttributeToken()
+        );
 
         // Act & Assert
-        ParseDocumentTest("@custom Serializable]",
-            new[] { descriptor });
+        ParseDocumentTest("@custom Serializable]", new[] { descriptor });
     }
 }

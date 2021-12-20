@@ -54,35 +54,95 @@ class testout1
         t1_i.mfb = true;
         t1_i.mfb_false = false;
         t1_i.mfb_true = true;
-        if (ab_true[index] && func_sb_true() ? static_field_bool : t1_i.mfb) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? static_field_bool : simple_func_bool()) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? static_field_bool : ab_true[index]) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? static_field_bool : ab_false[index]) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : true) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : false) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : local_bool) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : static_field_bool) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : t1_i.mfb) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : simple_func_bool()) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : ab_true[index]) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? t1_i.mfb : ab_false[index]) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : true) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : false) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : local_bool) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : static_field_bool) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : t1_i.mfb) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : simple_func_bool()) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : ab_true[index]) True_Sum++; else False_Sum++;
-        if (ab_true[index] && func_sb_true() ? simple_func_bool() : ab_false[index]) True_Sum++; else False_Sum++;
+        if (ab_true[index] && func_sb_true() ? static_field_bool : t1_i.mfb)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? static_field_bool : simple_func_bool())
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? static_field_bool : ab_true[index])
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? static_field_bool : ab_false[index])
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : true)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : false)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : local_bool)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : static_field_bool)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : t1_i.mfb)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : simple_func_bool())
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : ab_true[index])
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? t1_i.mfb : ab_false[index])
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : true)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : false)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : local_bool)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : static_field_bool)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : t1_i.mfb)
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : simple_func_bool())
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : ab_true[index])
+            True_Sum++;
+        else
+            False_Sum++;
+        if (ab_true[index] && func_sb_true() ? simple_func_bool() : ab_false[index])
+            True_Sum++;
+        else
+            False_Sum++;
         return (True_Sum * 2) - False_Sum;
     }
-  
+
     public static int Main()
     {
         int Sum = 0;
-       
+
         Sum += Sub_Funclet_411();
-      
+
         if (Sum == 40)
         {
             Console.WriteLine("PASSED");
@@ -93,6 +153,5 @@ class testout1
             Console.WriteLine("FAILED");
             return -1;
         }
-
     }
 }

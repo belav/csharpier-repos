@@ -22,8 +22,8 @@ public class ResourceExecutingContext : FilterContext
     public ResourceExecutingContext(
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
-        IList<IValueProviderFactory> valueProviderFactories)
-        : base(actionContext, filters)
+        IList<IValueProviderFactory> valueProviderFactories
+    ) : base(actionContext, filters)
     {
         if (valueProviderFactories == null)
         {

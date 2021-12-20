@@ -4,4 +4,6 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Cryptography.AsymmetricKeyExchangeFormatter))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Cryptography.AsymmetricKeyExchangeFormatter)
+)]

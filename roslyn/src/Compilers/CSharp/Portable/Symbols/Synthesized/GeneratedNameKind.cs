@@ -9,7 +9,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal enum GeneratedNameKind
     {
         None = 0,
-
         // Used by EE:
         ThisProxyField = '4',
         HoistedLocalField = '5',
@@ -18,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         LambdaDisplayClass = 'c',
         StateMachineType = 'd',
         LocalFunction = 'g', // note collision with Deprecated_InitializerLocal, however this one is only used for method names
-
         // Used by EnC:
         AwaiterField = 'u',
         HoistedSynthesizedLocalField = 's',
-
         // Currently not parsed:
         StateMachineStateField = '1',
         IteratorCurrentBackingField = '2',
@@ -44,7 +41,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         AsyncIteratorPromiseOfValueOrEndBackingField = 'v',
         DisposeModeField = 'w',
         CombinedTokensField = 'x', // last
-
         // Deprecated - emitted by Dev12, but not by Roslyn.
         // Don't reuse the values because the debugger might encounter them when consuming old binaries.
         [Obsolete]
@@ -61,7 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
     internal static class GeneratedNameKindExtensions
     {
-        internal static bool IsTypeName(this GeneratedNameKind kind)
-            => kind is GeneratedNameKind.LambdaDisplayClass or GeneratedNameKind.StateMachineType or GeneratedNameKind.DynamicCallSiteContainerType;
+        internal static bool IsTypeName(this GeneratedNameKind kind) =>
+            kind
+                is GeneratedNameKind.LambdaDisplayClass
+                    or GeneratedNameKind.StateMachineType
+                    or GeneratedNameKind.DynamicCallSiteContainerType;
     }
 }

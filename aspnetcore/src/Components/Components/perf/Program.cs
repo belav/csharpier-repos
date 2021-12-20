@@ -15,7 +15,6 @@ internal partial class Program
         {
             return;
         }
-
         // Write code here if you want to profile something. Normally Benchmark.NET launches
         // a separate process, which can be hard to profile.
         //

@@ -8,7 +8,13 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "GetVolumeInformationW", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "GetVolumeInformationW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         internal static unsafe partial bool GetVolumeInformation(
             string drive,
             char* volumeName,
@@ -17,7 +23,8 @@ internal static partial class Interop
             int* maxFileNameLen,
             out int fileSystemFlags,
             char* fileSystemName,
-            int fileSystemNameBufLen);
+            int fileSystemNameBufLen
+        );
 
         internal const uint FILE_SUPPORTS_ENCRYPTION = 0x00020000;
     }

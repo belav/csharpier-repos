@@ -90,7 +90,9 @@ public class DecimalModelBinder : IModelBinder
                 modelState.TryAddModelError(
                     modelName,
                     metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                        valueProviderResult.ToString()));
+                        valueProviderResult.ToString()
+                    )
+                );
             }
             else
             {
@@ -108,7 +110,6 @@ public class DecimalModelBinder : IModelBinder
             }
 
             modelState.TryAddModelError(modelName, exception, metadata);
-
             // Conversion failed.
         }
 

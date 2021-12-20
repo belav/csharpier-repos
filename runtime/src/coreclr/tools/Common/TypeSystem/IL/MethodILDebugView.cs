@@ -101,7 +101,7 @@ namespace Internal.IL
                     ILDisassembler.AppendOffset(sb, region.TryOffset);
                     sb.Append(" to ");
                     ILDisassembler.AppendOffset(sb, region.TryOffset + region.TryLength);
-                                        
+
                     switch (region.Kind)
                     {
                         case ILExceptionRegionKind.Catch:

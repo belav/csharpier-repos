@@ -35,12 +35,15 @@ namespace BenchmarksGame
         }
 
         static int taskCount;
-        static int[] fact, chkSums, maxFlips;
+        static int[] fact,
+            chkSums,
+            maxFlips;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void FirstPermutation(short* p, short* pp, int* count, int n, int idx)
         {
-            for (int i = 0; i < n; ++i) p[i] = (byte)i;
+            for (int i = 0; i < n; ++i)
+                p[i] = (byte)i;
             for (int i = n - 1; i > 0; --i)
             {
                 int d = idx / fact[i];
@@ -48,8 +51,10 @@ namespace BenchmarksGame
                 if (d > 0)
                 {
                     idx %= fact[i];
-                    for (int j = i; j >= 0; --j) pp[j] = p[j];
-                    for (int j = 0; j <= i; ++j) p[j] = pp[(j + d) % (i + 1)];
+                    for (int j = i; j >= 0; --j)
+                        pp[j] = p[j];
+                    for (int j = 0; j <= i; ++j)
+                        p[j] = pp[(j + d) % (i + 1)];
                 }
             }
         }
@@ -66,7 +71,8 @@ namespace BenchmarksGame
                 count[i++] = 0;
                 var next = p[1];
                 p[0] = next;
-                for (int j = 1; j < i;) p[j] = p[++j];
+                for (int j = 1; j < i;)
+                    p[j] = p[++j];
                 p[i] = first;
                 first = next;
             }
@@ -103,7 +109,8 @@ namespace BenchmarksGame
                     ++flips;
                     if (first > 2)
                     {
-                        short* lo = pp + 1, hi = pp + first - 1;
+                        short* lo = pp + 1,
+                            hi = pp + first - 1;
                         do
                         {
                             temp = *lo;
@@ -122,7 +129,9 @@ namespace BenchmarksGame
         static void Run(int n, int taskSize)
         {
             int* count = stackalloc int[n];
-            int taskId, chksum = 0, maxflips = 0;
+            int taskId,
+                chksum = 0,
+                maxflips = 0;
             short* p = stackalloc short[n];
             short* pp = stackalloc short[n];
             while ((taskId = Interlocked.Decrement(ref taskCount)) >= 0)
@@ -132,7 +141,8 @@ namespace BenchmarksGame
                 {
                     var flips = CountFlips(p, pp, n);
                     chksum += flips;
-                    if (flips > maxflips) maxflips = flips;
+                    if (flips > maxflips)
+                        maxflips = flips;
                 }
                 for (int i = 1; i < taskSize; i++)
                 {
@@ -141,7 +151,8 @@ namespace BenchmarksGame
                     {
                         var flips = CountFlips(p, pp, n);
                         chksum += (1 - (i & 1) * 2) * flips;
-                        if (flips > maxflips) maxflips = flips;
+                        if (flips > maxflips)
+                            maxflips = flips;
                     }
                 }
             }
@@ -181,7 +192,8 @@ namespace BenchmarksGame
                 threads[i].Join();
             }
             int chkSum = chkSums.Sum();
-            if (verbose) Console.WriteLine(chkSum + "\nPfannkuchen(" + n + ") = " + maxFlips.Max());
+            if (verbose)
+                Console.WriteLine(chkSum + "\nPfannkuchen(" + n + ") = " + maxFlips.Max());
 
             return chkSum;
         }

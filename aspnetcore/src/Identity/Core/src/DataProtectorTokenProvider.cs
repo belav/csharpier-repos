@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides protection and validation of identity tokens.
 /// </summary>
 /// <typeparam name="TUser">The type used to represent a user.</typeparam>
-public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUser> where TUser : class
+public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DataProtectorTokenProvider{TUser}"/> class.
@@ -24,9 +25,11 @@ public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// <param name="dataProtectionProvider">The system data protection provider.</param>
     /// <param name="options">The configured <see cref="DataProtectionTokenProviderOptions"/>.</param>
     /// <param name="logger">The logger used to log messages, warnings and errors.</param>
-    public DataProtectorTokenProvider(IDataProtectionProvider dataProtectionProvider,
-                                      IOptions<DataProtectionTokenProviderOptions> options,
-                                      ILogger<DataProtectorTokenProvider<TUser>> logger)
+    public DataProtectorTokenProvider(
+        IDataProtectionProvider dataProtectionProvider,
+        IOptions<DataProtectionTokenProviderOptions> options,
+        ILogger<DataProtectorTokenProvider<TUser>> logger
+    )
     {
         if (dataProtectionProvider == null)
         {
@@ -62,7 +65,10 @@ public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// <value>
     /// The name of this instance.
     /// </value>
-    public string Name { get { return Options.Name; } }
+    public string Name
+    {
+        get { return Options.Name; }
+    }
 
     /// <summary>
     /// Gets the <see cref="ILogger"/> used to log messages from the provider.
@@ -79,7 +85,11 @@ public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve user properties from.</param>
     /// <param name="user">The <typeparamref name="TUser"/> the token will be generated from.</param>
     /// <returns>A <see cref="Task{TResult}"/> representing the generated token.</returns>
-    public virtual async Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user)
+    public virtual async Task<string> GenerateAsync(
+        string purpose,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         if (user == null)
         {
@@ -114,7 +124,12 @@ public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous validation,
     /// containing true if the token is valid, otherwise false.
     /// </returns>
-    public virtual async Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user)
+    public virtual async Task<bool> ValidateAsync(
+        string purpose,
+        string token,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         try
         {
@@ -162,7 +177,6 @@ public class DataProtectorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
 
                     return isEqualsSecurityStamp;
                 }
-
 
                 var stampIsEmpty = stamp == "";
                 if (!stampIsEmpty)

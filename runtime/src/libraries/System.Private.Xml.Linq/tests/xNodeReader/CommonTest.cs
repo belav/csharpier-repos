@@ -11,7 +11,6 @@ namespace CoreXml.Test.XLinq
 {
     public partial class XNodeReaderFunctionalTests : TestModule
     {
-
         public partial class XNodeReaderTests : XLinqTestCase
         {
             public partial class TCDispose : BridgeHelpers
@@ -42,7 +41,11 @@ namespace CoreXml.Test.XLinq
                     catch (InvalidCastException) { }
                     try
                     {
-                        TestLog.Compare(((IXmlLineInfo)DataReader).LinePosition, 0, "Line Position");
+                        TestLog.Compare(
+                            ((IXmlLineInfo)DataReader).LinePosition,
+                            0,
+                            "Line Position"
+                        );
                     }
                     catch (InvalidCastException) { }
                     TestLog.Compare(DataReader.IsEmptyElement, false, "IsEmptyElement");
@@ -69,13 +72,20 @@ namespace CoreXml.Test.XLinq
                 {
                     List<XNode> xNode = new List<XNode>();
 
-                    xNode.Add(new XDocument(new XDocumentType("root", "", "", "<!ELEMENT root ANY>"), new XElement("root")));
+                    xNode.Add(
+                        new XDocument(
+                            new XDocumentType("root", "", "", "<!ELEMENT root ANY>"),
+                            new XElement("root")
+                        )
+                    );
                     xNode.Add(new XElement("elem1"));
                     xNode.Add(new XText("text1"));
                     xNode.Add(new XComment("comment1"));
                     xNode.Add(new XProcessingInstruction("pi1", "pi1pi1pi1pi1pi1"));
                     xNode.Add(new XCData("cdata cdata"));
-                    xNode.Add(new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1"));
+                    xNode.Add(
+                        new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1")
+                    );
                     return xNode;
                 }
             }

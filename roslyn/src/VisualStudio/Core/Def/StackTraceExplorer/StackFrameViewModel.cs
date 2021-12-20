@@ -39,8 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Workspace workspace,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap,
-            IStreamingFindUsagesPresenter streamingPresenter)
-            : base(formatMap, typeMap)
+            IStreamingFindUsagesPresenter streamingPresenter
+        ) : base(formatMap, typeMap)
         {
             _frame = frame;
             _threadingContext = threadingContext;
@@ -53,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         public void NavigateToClass()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            Task.Run(() => NavigateToClassAsync(cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+            Task.Run(() => NavigateToClassAsync(cancellationToken), cancellationToken)
+                .ReportNonFatalErrorAsync();
         }
 
         public async Task NavigateToClassAsync(CancellationToken cancellationToken)
@@ -78,22 +79,24 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     return;
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-            {
-            }
+            catch (Exception ex)
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
         }
 
         public void NavigateToSymbol()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            Task.Run(() => NavigateToMethodAsync(cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+            Task.Run(() => NavigateToMethodAsync(cancellationToken), cancellationToken)
+                .ReportNonFatalErrorAsync();
         }
 
         public async Task NavigateToMethodAsync(CancellationToken cancellationToken)
         {
             try
             {
-                var symbol = await _frame.ResolveSymbolAsync(_workspace.CurrentSolution, cancellationToken).ConfigureAwait(false);
+                var symbol = await _frame
+                    .ResolveSymbolAsync(_workspace.CurrentSolution, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (symbol is null)
                 {
@@ -109,24 +112,25 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     return;
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-            {
-            }
+            catch (Exception ex)
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
         }
 
-        private bool NavigateToSymbol(ISymbol symbol, CancellationToken cancellationToken)
-            => GoToDefinitionHelpers.TryGoToDefinition(
-                    symbol,
-                    _workspace.CurrentSolution,
-                    _threadingContext,
-                    _streamingPresenter,
-                    thirdPartyNavigationAllowed: true,
-                    cancellationToken: cancellationToken);
+        private bool NavigateToSymbol(ISymbol symbol, CancellationToken cancellationToken) =>
+            GoToDefinitionHelpers.TryGoToDefinition(
+                symbol,
+                _workspace.CurrentSolution,
+                _threadingContext,
+                _streamingPresenter,
+                thirdPartyNavigationAllowed: true,
+                cancellationToken: cancellationToken
+            );
 
         public void NavigateToFile()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            Task.Run(() => NavigateToFileAsync(cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+            Task.Run(() => NavigateToFileAsync(cancellationToken), cancellationToken)
+                .ReportNonFatalErrorAsync();
         }
 
         public async Task NavigateToFileAsync(CancellationToken cancellationToken)
@@ -139,10 +143,15 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 {
                     // While navigating do not activate the tab, which will change focus from the tool window
                     var options = _workspace.Options
-                            .WithChangedOption(new OptionKey(NavigationOptions.PreferProvisionalTab), true)
-                            .WithChangedOption(new OptionKey(NavigationOptions.ActivateTab), false);
+                        .WithChangedOption(
+                            new OptionKey(NavigationOptions.PreferProvisionalTab),
+                            true
+                        )
+                        .WithChangedOption(new OptionKey(NavigationOptions.ActivateTab), false);
 
-                    var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                    var sourceText = await document
+                        .GetTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     // If the line number is larger than the total lines in the file
                     // then just go to the end of the file (lines count). This can happen
@@ -150,33 +159,48 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     // version of the file.
                     lineNumber = Math.Min(sourceText.Lines.Count, lineNumber);
 
-                    var navigationService = _workspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService =
+                        _workspace.Services.GetService<IDocumentNavigationService>();
                     if (navigationService is null)
                     {
                         return;
                     }
 
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                    navigationService.TryNavigateToLineAndOffset(_workspace, document.Id, lineNumber - 1, 0, cancellationToken);
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationToken
+                    );
+                    navigationService.TryNavigateToLineAndOffset(
+                        _workspace,
+                        document.Id,
+                        lineNumber - 1,
+                        0,
+                        cancellationToken
+                    );
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-            {
-            }
+            catch (Exception ex)
+                when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
         }
 
         protected override IEnumerable<Inline> CreateInlines()
         {
-            yield return MakeClassifiedRun(ClassificationTypeNames.Text, _frame.GetTextBeforeType());
+            yield return MakeClassifiedRun(
+                ClassificationTypeNames.Text,
+                _frame.GetTextBeforeType()
+            );
 
             var classLink = new Hyperlink();
-            classLink.Inlines.Add(MakeClassifiedRun(ClassificationTypeNames.ClassName, _frame.GetQualifiedTypeText()));
+            classLink.Inlines.Add(
+                MakeClassifiedRun(ClassificationTypeNames.ClassName, _frame.GetQualifiedTypeText())
+            );
             classLink.Click += (s, a) => NavigateToClass();
             classLink.RequestNavigate += (s, a) => NavigateToClass();
             yield return classLink;
 
             var methodLink = new Hyperlink();
-            methodLink.Inlines.Add(MakeClassifiedRun(ClassificationTypeNames.MethodName, _frame.GetMethodText()));
+            methodLink.Inlines.Add(
+                MakeClassifiedRun(ClassificationTypeNames.MethodName, _frame.GetMethodText())
+            );
             methodLink.Click += (s, a) => NavigateToSymbol();
             methodLink.RequestNavigate += (s, a) => NavigateToSymbol();
             yield return methodLink;
@@ -193,7 +217,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 RoslynDebug.AssertNotNull(fileText);
 
                 var fileHyperlink = new Hyperlink();
-                fileHyperlink.Inlines.Add(MakeClassifiedRun(ClassificationTypeNames.Text, fileText));
+                fileHyperlink.Inlines.Add(
+                    MakeClassifiedRun(ClassificationTypeNames.Text, fileText)
+                );
                 fileHyperlink.RequestNavigate += (s, e) => NavigateToFile();
                 fileHyperlink.Click += (s, e) => NavigateToFile();
                 yield return fileHyperlink;
@@ -209,7 +235,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 return (_cachedDocument, _cachedLineNumber);
             }
 
-            (_cachedDocument, _cachedLineNumber) = _frame.GetDocumentAndLine(_workspace.CurrentSolution);
+            (_cachedDocument, _cachedLineNumber) = _frame.GetDocumentAndLine(
+                _workspace.CurrentSolution
+            );
             return (_cachedDocument, _cachedLineNumber);
         }
 
@@ -220,7 +248,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 return _cachedSymbol;
             }
 
-            _cachedSymbol = await _frame.ResolveSymbolAsync(_workspace.CurrentSolution, cancellationToken).ConfigureAwait(false);
+            _cachedSymbol = await _frame
+                .ResolveSymbolAsync(_workspace.CurrentSolution, cancellationToken)
+                .ConfigureAwait(false);
             return _cachedSymbol;
         }
     }

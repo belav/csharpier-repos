@@ -44,7 +44,7 @@ namespace System.IO.Tests
             Assert.Throws<ArgumentNullException>(() => Write(path, null));
 
             Write(path, new string[] { null });
-            Assert.Equal(new string[] {""}, Read(path));
+            Assert.Equal(new string[] { "" }, Read(path));
         }
 
         [Fact]
@@ -133,7 +133,9 @@ namespace System.IO.Tests
                     Assert.Equal(new string[] { "text" }, Read(path));
                 }
                 else
-                    Assert.Throws<UnauthorizedAccessException>(() => Write(path, new string[] { "text" }));
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => Write(path, new string[] { "text" })
+                    );
             }
             finally
             {
@@ -158,7 +160,6 @@ namespace System.IO.Tests
             // File should be closed deterministically; this shouldn't throw.
             File.OpenWrite(path).Dispose();
         }
-
         #endregion
     }
 
@@ -178,7 +179,9 @@ namespace System.IO.Tests
         public void NullEncoding()
         {
             string path = GetTestFilePath();
-            Assert.Throws<ArgumentNullException>(() => File.WriteAllLines(path, (IEnumerable<string>)new string[] { "Text" }, null));
+            Assert.Throws<ArgumentNullException>(
+                () => File.WriteAllLines(path, (IEnumerable<string>)new string[] { "Text" }, null)
+            );
             Assert.Throws<ArgumentNullException>(() => File.ReadAllLines(path, null));
         }
     }
@@ -207,7 +210,9 @@ namespace System.IO.Tests
         public void NullEncoding()
         {
             string path = GetTestFilePath();
-            Assert.Throws<ArgumentNullException>(() => File.WriteAllLines(path, (IEnumerable<string>)new string[] { "Text" }, null));
+            Assert.Throws<ArgumentNullException>(
+                () => File.WriteAllLines(path, (IEnumerable<string>)new string[] { "Text" }, null)
+            );
             Assert.Throws<ArgumentNullException>(() => File.ReadLines(path, null));
         }
     }
@@ -246,7 +251,7 @@ namespace System.IO.Tests
             Assert.Throws<ArgumentNullException>(() => Write(path, null));
 
             Write(path, new string[] { null });
-            Assert.Equal(new string[] {""}, Read(path));
+            Assert.Equal(new string[] { "" }, Read(path));
         }
 
         [Fact]
@@ -322,7 +327,9 @@ namespace System.IO.Tests
                     Assert.Equal(new string[] { "text" }, Read(path));
                 }
                 else
-                    Assert.Throws<UnauthorizedAccessException>(() => Write(path, new string[] { "text" }));
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => Write(path, new string[] { "text" })
+                    );
             }
             finally
             {
@@ -347,7 +354,6 @@ namespace System.IO.Tests
             // File should be closed deterministically; this shouldn't throw.
             File.OpenWrite(path).Dispose();
         }
-
         #endregion
     }
 
@@ -367,7 +373,9 @@ namespace System.IO.Tests
         public void NullEncoding()
         {
             string path = GetTestFilePath();
-            Assert.Throws<ArgumentNullException>(() => File.WriteAllLines(path, new string[] { "Text" }, null));
+            Assert.Throws<ArgumentNullException>(
+                () => File.WriteAllLines(path, new string[] { "Text" }, null)
+            );
             Assert.Throws<ArgumentNullException>(() => File.ReadAllLines(path, null));
         }
     }

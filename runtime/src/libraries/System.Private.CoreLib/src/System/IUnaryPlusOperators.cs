@@ -20,7 +20,6 @@ namespace System
         /// <param name="value">The value for which to compute its unary plus.</param>
         /// <returns>The unary plus of <paramref name="value" />.</returns>
         static abstract TResult operator +(TSelf value);
-
         // /// <summary>Computes the unary plus of a value.</summary>
         // /// <param name="value">The value for which to compute its unary plus.</param>
         // /// <returns>The unary plus of <paramref name="value" />.</returns>

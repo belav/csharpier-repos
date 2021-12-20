@@ -49,9 +49,13 @@ internal class DefaultRazorSourceLineCollection : RazorSourceLineCollection
             // We have an exact match for the start of a line.
             Debug.Assert(_lineStarts[index] == position);
 
-            return new SourceLocation(_document.GetFilePathForDisplay(), position, index, characterIndex: 0);
+            return new SourceLocation(
+                _document.GetFilePathForDisplay(),
+                position,
+                index,
+                characterIndex: 0
+            );
         }
-
 
         // Index is the complement of the line *after* the one we want, because BinarySearch tells
         // us where we'd put position *if* it were the start of a line.
@@ -64,7 +68,12 @@ internal class DefaultRazorSourceLineCollection : RazorSourceLineCollection
         else
         {
             var characterIndex = position - _lineStarts[index];
-            return new SourceLocation(_document.GetFilePathForDisplay(), position, index, characterIndex);
+            return new SourceLocation(
+                _document.GetFilePathForDisplay(),
+                position,
+                index,
+                characterIndex
+            );
         }
     }
 

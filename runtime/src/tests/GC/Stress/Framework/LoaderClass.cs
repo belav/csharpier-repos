@@ -18,7 +18,6 @@ public enum eReasonForUnload
     Replay
 }
 
-
 /// <summary>
 /// The LoaderClass is how we communicate with other app domains.  It has to do 3 important things:  1) Load assemblies into the
 /// remote app domain (via Load/LoadFrom), 2) get back an object which represents the test (this is either an I...RelibilityTest or 
@@ -29,9 +28,7 @@ public class LoaderClass
     private Assembly assem;
     string assembly;
 
-    public LoaderClass()
-    {
-    }
+    public LoaderClass() { }
 
     public void SuppressConsole()
     {
@@ -46,10 +43,11 @@ public class LoaderClass
     /// </summary>
     /// <param name="path">The assembly to load</param>
     /// <param name="paths">Paths to search for the given assembly</param>
-    public void LoadFrom(string path, string[] paths
-        )
+    public void LoadFrom(string path, string[] paths)
     {
-        AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly());
+        AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(
+            Assembly.GetExecutingAssembly()
+        );
         try
         {
             assembly = path;
@@ -71,13 +69,15 @@ public class LoaderClass
                     {
                         try
                         {
-                            assembly = ReliabilityConfig.ConvertPotentiallyRelativeFilenameToFullPath(basePath, path);
+                            assembly =
+                                ReliabilityConfig.ConvertPotentiallyRelativeFilenameToFullPath(
+                                    basePath,
+                                    path
+                                );
                             assem = alc.LoadFromAssemblyPath(assembly);
                             break;
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
                 }
             }
@@ -145,7 +145,9 @@ public class LoaderClass
         {
             if (assembly.ToLower().IndexOf(".dll") != -1)
                 return (assembly);
-            throw new Exception(String.Format("Couldn't GetTypes for {0} ({1})", assembly, e.Message));
+            throw new Exception(
+                String.Format("Couldn't GetTypes for {0} ({1})", assembly, e.Message)
+            );
         }
 
         // now create an instance of the correct type in the app domain
@@ -154,11 +156,13 @@ public class LoaderClass
         {
             foreach (Type t in assemTypes)
             {
-                if (t.GetInterface("ISingleReliabilityTest") != null || t.GetInterface("IMultipleReliabilityTest") != null)
+                if (
+                    t.GetInterface("ISingleReliabilityTest") != null
+                    || t.GetInterface("IMultipleReliabilityTest") != null
+                )
                 {
                     ourObj = Activator.CreateInstance(t);
                 }
-
             }
         }
 
@@ -168,5 +172,3 @@ public class LoaderClass
         return (ourObj);
     }
 }
-
-

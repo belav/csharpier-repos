@@ -10,8 +10,17 @@ namespace MS.Internal.Xml.XPath
         public ReversePositionQuery(Query input) : base(input) { }
         private ReversePositionQuery(ReversePositionQuery other) : base(other) { }
 
-        public override XPathNodeIterator Clone() { return new ReversePositionQuery(this); }
-        public override int CurrentPosition { get { return outputBuffer.Count - count + 1; } }
-        public override QueryProps Properties { get { return base.Properties | QueryProps.Reverse; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new ReversePositionQuery(this);
+        }
+        public override int CurrentPosition
+        {
+            get { return outputBuffer.Count - count + 1; }
+        }
+        public override QueryProps Properties
+        {
+            get { return base.Properties | QueryProps.Reverse; }
+        }
     }
 }

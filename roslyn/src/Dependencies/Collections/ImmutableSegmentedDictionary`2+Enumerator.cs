@@ -30,7 +30,6 @@ namespace Microsoft.CodeAnalysis.Collections
                 /// enumerator.
                 /// </summary>
                 KeyValuePair,
-
                 /// <summary>
                 /// The return value from the implementation of <see cref="IEnumerable.GetEnumerator"/> is
                 /// <see cref="System.Collections.DictionaryEntry"/>. This is the return value for instances of this
@@ -42,7 +41,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             public KeyValuePair<TKey, TValue> Current => _enumerator.Current;
 
-            object IEnumerator.Current => _returnType == ReturnType.DictionaryEntry ? ((IDictionaryEnumerator)this).Entry : Current;
+            object IEnumerator.Current =>
+                _returnType == ReturnType.DictionaryEntry
+                    ? ((IDictionaryEnumerator)this).Entry
+                    : Current;
 
             DictionaryEntry IDictionaryEnumerator.Entry => new(Current.Key, Current.Value);
 
@@ -50,11 +52,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             object? IDictionaryEnumerator.Value => Current.Value;
 
-            public void Dispose()
-                => _enumerator.Dispose();
+            public void Dispose() => _enumerator.Dispose();
 
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             public void Reset()
             {

@@ -21,15 +21,20 @@ internal partial class VectorTest
 
             do
             {
-                if (Vector.LessThanOrEqualAll<T>(Vector.Abs(term), epsilonVec)) break;
+                if (Vector.LessThanOrEqualAll<T>(Vector.Abs(term), epsilonVec))
+                    break;
 
                 sum = sum + term;
                 count = count + Vector<T>.One;
                 term = term * (x / count);
-            }
-            while (true);
+            } while (true);
 
-            if (Vector.LessThanOrEqualAll<T>((Vector.Abs(sum) - new Vector<T>(checkValue)), new Vector<T>(allowableError)))
+            if (
+                Vector.LessThanOrEqualAll<T>(
+                    (Vector.Abs(sum) - new Vector<T>(checkValue)),
+                    new Vector<T>(allowableError)
+                )
+            )
             {
                 return Pass;
             }
@@ -46,12 +51,22 @@ internal partial class VectorTest
     {
         int returnVal = Pass;
 
-        if (VectorExpTest<float>.VectorExp(Vector<float>.One, (float)Math.Exp(1d), Single.Epsilon, 1E-06f) != Pass)
+        if (
+            VectorExpTest<float>.VectorExp(
+                Vector<float>.One,
+                (float)Math.Exp(1d),
+                Single.Epsilon,
+                1E-06f
+            ) != Pass
+        )
         {
             returnVal = Fail;
         }
 
-        if (VectorExpTest<double>.VectorExp(Vector<double>.One, Math.Exp(1d), Double.Epsilon, 1E-14) != Pass)
+        if (
+            VectorExpTest<double>.VectorExp(Vector<double>.One, Math.Exp(1d), Double.Epsilon, 1E-14)
+            != Pass
+        )
         {
             returnVal = Fail;
         }

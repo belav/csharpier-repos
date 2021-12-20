@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 string name,
                 object? tag = null,
                 [CallerFilePath] string filePath = "",
-                [CallerLineNumber] int lineNumber = 0) => EmptyAsyncToken.Instance;
+                [CallerLineNumber] int lineNumber = 0
+            ) => EmptyAsyncToken.Instance;
 
             public Task<bool> Delay(TimeSpan delay, CancellationToken cancellationToken)
             {
@@ -43,16 +44,17 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                     // Avoid ContinueWith overheads for a 0 delay or if race conditions resulted
                     // in the delay task being complete by the time we checked.
                     return t.Status == TaskStatus.RanToCompletion
-                        ? SpecializedTasks.True
-                        : Task.FromCanceled<bool>(cancellationToken);
+                      ? SpecializedTasks.True
+                      : Task.FromCanceled<bool>(cancellationToken);
                 }
 
                 return t.ContinueWith(
                     _ => true,
                     CancellationToken.None,
-                    TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.NotOnCanceled,
-                    TaskScheduler.Default);
-
+                    TaskContinuationOptions.ExecuteSynchronously
+                        | TaskContinuationOptions.NotOnCanceled,
+                    TaskScheduler.Default
+                );
                 // Note the above passes CancellationToken.None and TaskContinuationOptions.NotOnCanceled.
                 // That's cheaper than passing cancellationToken and with the same semantics except
                 // that if the returned task does end up being canceled, any operation canceled exception

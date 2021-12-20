@@ -38,12 +38,10 @@ namespace Newtonsoft.Json
         /// Throw a <see cref="JsonSerializationException"/> when a loop is encountered.
         /// </summary>
         Error = 0,
-
         /// <summary>
         /// Ignore loop references and do not serialize.
         /// </summary>
         Ignore = 1,
-
         /// <summary>
         /// Serialize loop references.
         /// </summary>

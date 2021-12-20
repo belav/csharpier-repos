@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyModel
         public DependencyContextPaths(
             string? application,
             string? sharedRuntime,
-            IEnumerable<string>? nonApplicationPaths)
+            IEnumerable<string>? nonApplicationPaths
+        )
         {
             Application = application;
             SharedRuntime = sharedRuntime;
@@ -40,17 +41,17 @@ namespace Microsoft.Extensions.DependencyModel
 
         internal static DependencyContextPaths Create(string? depsFiles, string? sharedRuntime)
         {
-            string[]? files = depsFiles?.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            string[]? files = depsFiles?.Split(
+                new[] { ';' },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             string? application = files != null && files.Length > 0 ? files[0] : null;
 
             string[]? nonApplicationPaths = files?
                 .Skip(1) // the application path
                 .ToArray();
 
-            return new DependencyContextPaths(
-                application,
-                sharedRuntime,
-                nonApplicationPaths);
+            return new DependencyContextPaths(application, sharedRuntime, nonApplicationPaths);
         }
     }
 }

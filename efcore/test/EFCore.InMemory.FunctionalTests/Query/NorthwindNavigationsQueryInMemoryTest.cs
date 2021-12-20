@@ -8,13 +8,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindNavigationsQueryInMemoryTest : NorthwindNavigationsQueryTestBase<
-        NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+    public class NorthwindNavigationsQueryInMemoryTest
+        : NorthwindNavigationsQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
     {
         public NorthwindNavigationsQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }

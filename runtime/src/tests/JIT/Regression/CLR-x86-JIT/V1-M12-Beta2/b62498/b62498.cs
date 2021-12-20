@@ -8,7 +8,6 @@ namespace Test
 
     public class BB
     {
-
         public static String Method3()
         {
             try

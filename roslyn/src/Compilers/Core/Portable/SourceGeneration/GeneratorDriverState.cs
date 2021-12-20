@@ -11,15 +11,17 @@ namespace Microsoft.CodeAnalysis
 {
     internal readonly struct GeneratorDriverState
     {
-        internal GeneratorDriverState(ParseOptions parseOptions,
-                                      AnalyzerConfigOptionsProvider optionsProvider,
-                                      ImmutableArray<ISourceGenerator> sourceGenerators,
-                                      ImmutableArray<IIncrementalGenerator> incrementalGenerators,
-                                      ImmutableArray<AdditionalText> additionalTexts,
-                                      ImmutableArray<GeneratorState> generatorStates,
-                                      DriverStateTable stateTable,
-                                      IncrementalGeneratorOutputKind disabledOutputs,
-                                      TimeSpan runtime)
+        internal GeneratorDriverState(
+            ParseOptions parseOptions,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<ISourceGenerator> sourceGenerators,
+            ImmutableArray<IIncrementalGenerator> incrementalGenerators,
+            ImmutableArray<AdditionalText> additionalTexts,
+            ImmutableArray<GeneratorState> generatorStates,
+            DriverStateTable stateTable,
+            IncrementalGeneratorOutputKind disabledOutputs,
+            TimeSpan runtime
+        )
         {
             Generators = sourceGenerators;
             IncrementalGenerators = incrementalGenerators;
@@ -94,7 +96,8 @@ namespace Microsoft.CodeAnalysis
             ParseOptions? parseOptions = null,
             AnalyzerConfigOptionsProvider? optionsProvider = null,
             IncrementalGeneratorOutputKind? disabledOutputs = null,
-            TimeSpan? runTime = null)
+            TimeSpan? runTime = null
+        )
         {
             return new GeneratorDriverState(
                 parseOptions ?? this.ParseOptions,
@@ -106,7 +109,7 @@ namespace Microsoft.CodeAnalysis
                 stateTable ?? this.StateTable,
                 disabledOutputs ?? this.DisabledOutputs,
                 runTime ?? this.RunTime
-                );
+            );
         }
     }
 }

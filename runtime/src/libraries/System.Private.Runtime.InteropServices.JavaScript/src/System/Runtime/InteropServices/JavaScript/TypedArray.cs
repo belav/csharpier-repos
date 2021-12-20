@@ -49,34 +49,29 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </summary>
     public abstract class TypedArray<T, U> : CoreObject, ITypedArray, ITypedArray<T, U>
         where U : struct
-        where T: JSObject
+        where T : JSObject
     {
-        protected TypedArray() : base(typeof(T).Name)
-        { }
+        protected TypedArray() : base(typeof(T).Name) { }
 
-        protected TypedArray(int length) : base(typeof(T).Name, length)
-        { }
+        protected TypedArray(int length) : base(typeof(T).Name, length) { }
 
-        protected TypedArray(ArrayBuffer buffer) : base(typeof(T).Name, buffer)
-        { }
+        protected TypedArray(ArrayBuffer buffer) : base(typeof(T).Name, buffer) { }
 
-        protected TypedArray(ArrayBuffer buffer, int byteOffset) : base(typeof(T).Name, buffer, byteOffset)
-        { }
+        protected TypedArray(ArrayBuffer buffer, int byteOffset)
+            : base(typeof(T).Name, buffer, byteOffset) { }
 
-        protected TypedArray(ArrayBuffer buffer, int byteOffset, int length) : base(typeof(T).Name, buffer, byteOffset, length)
-        { }
+        protected TypedArray(ArrayBuffer buffer, int byteOffset, int length)
+            : base(typeof(T).Name, buffer, byteOffset, length) { }
 
-        protected TypedArray(SharedArrayBuffer buffer) : base(typeof(T).Name, buffer)
-        { }
+        protected TypedArray(SharedArrayBuffer buffer) : base(typeof(T).Name, buffer) { }
 
-        protected TypedArray(SharedArrayBuffer buffer, int byteOffset) : base(typeof(T).Name, buffer, byteOffset)
-        { }
+        protected TypedArray(SharedArrayBuffer buffer, int byteOffset)
+            : base(typeof(T).Name, buffer, byteOffset) { }
 
-        protected TypedArray(SharedArrayBuffer buffer, int byteOffset, int length) : base(typeof(T).Name, buffer, byteOffset, length)
-        { }
+        protected TypedArray(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(typeof(T).Name, buffer, byteOffset, length) { }
 
-        internal TypedArray(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal TypedArray(IntPtr jsHandle) : base(jsHandle) { }
 
         public TypedArrayTypeCode GetTypedArrayType()
         {
@@ -149,7 +144,6 @@ namespace System.Runtime.InteropServices.JavaScript
 
                 if (exception != 0)
                     throw new JSException((string)res);
-
             }
         }
 
@@ -177,25 +171,33 @@ namespace System.Runtime.InteropServices.JavaScript
             // source has to be instantiated.
             if (span == null)
             {
-                throw new System.ArgumentException(SR.Format(SR.ArgumentCannotBeNull, nameof(span)));
+                throw new System.ArgumentException(
+                    SR.Format(SR.ArgumentCannotBeNull, nameof(span))
+                );
             }
 
             TypedArrayTypeCode type = (TypedArrayTypeCode)Type.GetTypeCode(typeof(U));
             // Special case for Uint8ClampedArray, a clamped array which represents an array of 8-bit unsigned integers clamped to 0-255;
             if (type == TypedArrayTypeCode.Uint8Array && typeof(T) == typeof(Uint8ClampedArray))
-                type = TypedArrayTypeCode.Uint8ClampedArray;  // This is only passed to the JavaScript side so it knows it will be a Uint8ClampedArray
+                type = TypedArrayTypeCode.Uint8ClampedArray; // This is only passed to the JavaScript side so it knows it will be a Uint8ClampedArray
 
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop.Runtime.TypedArrayFrom((int)ptr, 0, span.Length, Unsafe.SizeOf<U>(), (int)type, out int exception);
+                object res = Interop.Runtime.TypedArrayFrom(
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    (int)type,
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 var r = (T)res;
                 r.ReleaseInFlight();
                 return r;
             }
-
         }
 
         public unsafe int CopyTo(Span<U> span)
@@ -205,7 +207,14 @@ namespace System.Runtime.InteropServices.JavaScript
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop.Runtime.TypedArrayCopyTo(JSHandle, (int)ptr, 0, span.Length, Unsafe.SizeOf<U>(), out int exception);
+                object res = Interop.Runtime.TypedArrayCopyTo(
+                    JSHandle,
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 return (int)res / Unsafe.SizeOf<U>();
@@ -219,13 +228,22 @@ namespace System.Runtime.InteropServices.JavaScript
             // source has to be instantiated.
             if (span == null || span.Length == 0)
             {
-                throw new System.ArgumentException(SR.Format(SR.ArgumentCannotBeNullWithLength, nameof(span)));
+                throw new System.ArgumentException(
+                    SR.Format(SR.ArgumentCannotBeNullWithLength, nameof(span))
+                );
             }
 
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop.Runtime.TypedArrayCopyFrom(JSHandle, (int)ptr, 0, span.Length, Unsafe.SizeOf<U>(), out int exception);
+                object res = Interop.Runtime.TypedArrayCopyFrom(
+                    JSHandle,
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 return (int)res / Unsafe.SizeOf<U>();

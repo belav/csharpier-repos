@@ -7,23 +7,26 @@ using System.IO;
 using System.Collections;
 using System.Threading;
 
-namespace System.Xml {
-
+namespace System.Xml
+{
 #if !SPLAY_MTNAMETABLE
 
     // MTNameTable is a modified version of our normal NameTable
     // that is thread-safe on read & write.  The design is kept
     // simple by using the Entry[] as the atomic update pivot point.
-    public class MTNameTable : XmlNameTable {
+    public class MTNameTable : XmlNameTable
+    {
         //
         // Private types
         //
-        class Entry {
+        class Entry
+        {
             internal string str;
-            internal int    hashCode;
-            internal Entry  next;
+            internal int hashCode;
+            internal Entry next;
 
-            internal Entry( string str, int hashCode, Entry next ) {
+            internal Entry(string str, int hashCode, Entry next)
+            {
                 this.str = str;
                 this.hashCode = hashCode;
                 this.next = next;
@@ -34,13 +37,14 @@ namespace System.Xml {
         // Fields
         //
         Entry[] entries;
-        int     count;
-        int     hashCodeRandomizer;
+        int count;
+        int hashCodeRandomizer;
 
         //
         // Constructor
         //
-        public MTNameTable() {
+        public MTNameTable()
+        {
             entries = new Entry[32];
             hashCodeRandomizer = Environment.TickCount;
         }
@@ -48,18 +52,22 @@ namespace System.Xml {
         //
         // XmlNameTable public methods
         //
-        public override string Add( string key ) {
-            if ( key == null ) {
-                throw new ArgumentNullException( "key" );
+        public override string Add(string key)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
             }
             int len = key.Length;
-            if ( len == 0 ) {
+            if (len == 0)
+            {
                 return string.Empty;
             }
             int hashCode = len + hashCodeRandomizer;
             // use key.Length to eliminate the range check
-            for ( int i = 0; i < key.Length; i++ ) {
-                hashCode += ( hashCode << 7 ) ^ key[i];
+            for (int i = 0; i < key.Length; i++)
+            {
+                hashCode += (hashCode << 7) ^ key[i];
             }
             // mix it a bit more
             hashCode -= hashCode >> 17;
@@ -67,26 +75,29 @@ namespace System.Xml {
             hashCode -= hashCode >> 5;
 
             Entry[] entries = this.entries;
-            for ( Entry e = entries[hashCode & (entries.Length-1)];
-                  e != null;
-                  e = e.next ) {
-                if ( e.hashCode == hashCode && e.str.Equals( key ) ) {
+            for (Entry e = entries[hashCode & (entries.Length - 1)]; e != null; e = e.next)
+            {
+                if (e.hashCode == hashCode && e.str.Equals(key))
+                {
                     return e.str;
                 }
             }
-            return AddEntry( key, hashCode );
+            return AddEntry(key, hashCode);
         }
 
-        public override string Add( char[] key, int start, int len ) {
-            if ( len == 0 ) {
+        public override string Add(char[] key, int start, int len)
+        {
+            if (len == 0)
+            {
                 return string.Empty;
             }
 
             int hashCode = len + hashCodeRandomizer;
-            hashCode += ( hashCode << 7 ) ^ key[start];   // this will throw IndexOutOfRangeException in case the start index is invalid
-            int end = start+len;
-            for ( int i = start + 1; i < end; i++) {
-                hashCode += ( hashCode << 7 ) ^ key[i];
+            hashCode += (hashCode << 7) ^ key[start]; // this will throw IndexOutOfRangeException in case the start index is invalid
+            int end = start + len;
+            for (int i = start + 1; i < end; i++)
+            {
+                hashCode += (hashCode << 7) ^ key[i];
             }
             // mix it a bit more
             hashCode -= hashCode >> 17;
@@ -94,29 +105,33 @@ namespace System.Xml {
             hashCode -= hashCode >> 5;
 
             Entry[] entries = this.entries;
-            for ( Entry e = entries[hashCode & (entries.Length-1)];
-                  e != null;
-                  e = e.next ) {
-                if ( e.hashCode == hashCode && TextEquals( e.str, key, start ) ) {
+            for (Entry e = entries[hashCode & (entries.Length - 1)]; e != null; e = e.next)
+            {
+                if (e.hashCode == hashCode && TextEquals(e.str, key, start))
+                {
                     return e.str;
                 }
             }
-            return AddEntry( new string( key, start, len ), hashCode );
+            return AddEntry(new string(key, start, len), hashCode);
         }
 
-        public override string Get( string value ) {
-            if ( value == null ) {
+        public override string Get(string value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException(nameof(value));
             }
-            if ( value.Length == 0 ) {
+            if (value.Length == 0)
+            {
                 return string.Empty;
             }
 
             int len = value.Length + hashCodeRandomizer;
             int hashCode = len;
             // use value.Length to eliminate the range check
-            for ( int i = 0; i < value.Length; i++ ) {
-                hashCode += ( hashCode << 7 ) ^ value[i];
+            for (int i = 0; i < value.Length; i++)
+            {
+                hashCode += (hashCode << 7) ^ value[i];
             }
             // mix it a bit more
             hashCode -= hashCode >> 17;
@@ -124,26 +139,29 @@ namespace System.Xml {
             hashCode -= hashCode >> 5;
 
             Entry[] entries = this.entries;
-            for ( Entry e = entries[hashCode & (entries.Length-1)];
-                  e != null;
-                  e = e.next ) {
-                if ( e.hashCode == hashCode && e.str.Equals( value ) ) {
+            for (Entry e = entries[hashCode & (entries.Length - 1)]; e != null; e = e.next)
+            {
+                if (e.hashCode == hashCode && e.str.Equals(value))
+                {
                     return e.str;
                 }
             }
             return null;
         }
 
-        public override string Get( char[] key, int start, int len ) {
-            if ( len == 0 ) {
+        public override string Get(char[] key, int start, int len)
+        {
+            if (len == 0)
+            {
                 return string.Empty;
             }
 
             int hashCode = len + hashCodeRandomizer;
-            hashCode += ( hashCode << 7 ) ^ key[start]; // this will throw IndexOutOfRangeException in case the start index is invalid
-            int end = start+len;
-            for ( int i = start + 1; i < end; i++) {
-                hashCode += ( hashCode << 7 ) ^ key[i];
+            hashCode += (hashCode << 7) ^ key[start]; // this will throw IndexOutOfRangeException in case the start index is invalid
+            int end = start + len;
+            for (int i = start + 1; i < end; i++)
+            {
+                hashCode += (hashCode << 7) ^ key[i];
             }
             // mix it a bit more
             hashCode -= hashCode >> 17;
@@ -151,10 +169,10 @@ namespace System.Xml {
             hashCode -= hashCode >> 5;
 
             Entry[] entries = this.entries;
-            for ( Entry e = entries[hashCode & (entries.Length-1)];
-                  e != null;
-                  e = e.next ) {
-                if ( e.hashCode == hashCode && TextEquals( e.str, key, start ) ) {
+            for (Entry e = entries[hashCode & (entries.Length - 1)]; e != null; e = e.next)
+            {
+                if (e.hashCode == hashCode && TextEquals(e.str, key, start))
+                {
                     return e.str;
                 }
             }
@@ -165,34 +183,42 @@ namespace System.Xml {
         // Private methods
         //
 
-        private string AddEntry( string str, int hashCode ) {
+        private string AddEntry(string str, int hashCode)
+        {
             Entry e;
-            lock (this) {
+            lock (this)
+            {
                 Entry[] entries = this.entries;
-                int index = hashCode & entries.Length-1;
-                for ( e = entries[index]; e != null; e = e.next ) {
-                    if ( e.hashCode == hashCode && e.str.Equals( str ) ) {
+                int index = hashCode & entries.Length - 1;
+                for (e = entries[index]; e != null; e = e.next)
+                {
+                    if (e.hashCode == hashCode && e.str.Equals(str))
+                    {
                         return e.str;
                     }
                 }
-                e = new Entry( str, hashCode, entries[index] );
+                e = new Entry(str, hashCode, entries[index]);
                 entries[index] = e;
-                if ( count++ == mask ) {
+                if (count++ == mask)
+                {
                     Grow();
                 }
             }
             return e.str;
         }
 
-        private void Grow() {
+        private void Grow()
+        {
             int newMask = mask * 2 + 1;
             Entry[] oldEntries = entries;
-            Entry[] newEntries = new Entry[newMask+1];
+            Entry[] newEntries = new Entry[newMask + 1];
 
             // use oldEntries.Length to eliminate the range check
-            for ( int i = 0; i < oldEntries.Length; i++ ) {
+            for (int i = 0; i < oldEntries.Length; i++)
+            {
                 Entry e = oldEntries[i];
-                while ( e != null ) {
+                while (e != null)
+                {
                     int newIndex = e.hashCode & newMask;
                     Entry tmp = e.next;
                     e.next = newEntries[newIndex];
@@ -205,17 +231,19 @@ namespace System.Xml {
             mask = newMask;
         }
 
-        private static bool TextEquals( string array, char[] text, int start ) {
+        private static bool TextEquals(string array, char[] text, int start)
+        {
             // use array.Length to eliminate the range check
-            for ( int i = 0; i < array.Length; i++ ) {
-                if ( array[i] != text[start+i] ) {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] != text[start + i])
+                {
                     return false;
                 }
             }
             return true;
         }
     }
-
 #else
 
     // XmlNameTable implemented as a multi-threaded splay tree.

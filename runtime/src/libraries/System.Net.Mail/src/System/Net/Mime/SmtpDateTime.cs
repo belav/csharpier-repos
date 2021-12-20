@@ -67,11 +67,13 @@ namespace System.Net.Mime
 
         internal static readonly char[] s_allowedWhiteSpaceChars = new char[] { ' ', '\t' };
 
-        internal static readonly Dictionary<string, TimeSpan> s_timeZoneOffsetLookup = InitializeShortHandLookups();
+        internal static readonly Dictionary<string, TimeSpan> s_timeZoneOffsetLookup =
+            InitializeShortHandLookups();
 
         // a TimeSpan must be between these two values in order for it to be within the range allowed
         // by RFC 2822
-        internal const long TimeSpanMaxTicks = TimeSpan.TicksPerHour * 99 + TimeSpan.TicksPerMinute * 59;
+        internal const long TimeSpanMaxTicks =
+            TimeSpan.TicksPerHour * 99 + TimeSpan.TicksPerMinute * 59;
 
         // allowed max values for each digit.  min value is always 0
         internal const int OffsetMaxValue = 9959;
@@ -171,7 +173,8 @@ namespace System.Net.Mime
 
 #if DEBUG
         // this method is only called by test code
-        internal string TimeZone => _unknownTimeZone ? UnknownTimeZoneDefaultOffset : TimeSpanToOffset(_timeZone);
+        internal string TimeZone =>
+            _unknownTimeZone ? UnknownTimeZoneDefaultOffset : TimeSpanToOffset(_timeZone);
 #endif
 
         #endregion
@@ -180,15 +183,31 @@ namespace System.Net.Mime
 
         // outputs the RFC 2822 formatted date string including time zone
         public override string ToString() =>
-            FormatDate(_date) + " " + (_unknownTimeZone ? UnknownTimeZoneDefaultOffset : TimeSpanToOffset(_timeZone));
+            FormatDate(_date)
+            + " "
+            + (_unknownTimeZone ? UnknownTimeZoneDefaultOffset : TimeSpanToOffset(_timeZone));
 
         // returns true if the offset is of the form [+|-]dddd and
         // within the range 0000 to 9959
-        internal void ValidateAndGetTimeZoneOffsetValues(string offset, out bool positive, out int hours, out int minutes)
+        internal void ValidateAndGetTimeZoneOffsetValues(
+            string offset,
+            out bool positive,
+            out int hours,
+            out int minutes
+        )
         {
-            Debug.Assert(!string.IsNullOrEmpty(offset), "violation of precondition: offset must not be null or empty");
-            Debug.Assert(offset != UnknownTimeZoneDefaultOffset, "Violation of precondition: do not pass an unknown offset");
-            Debug.Assert(offset.StartsWith('-') || offset.StartsWith('+'), "offset initial character was not a + or -");
+            Debug.Assert(
+                !string.IsNullOrEmpty(offset),
+                "violation of precondition: offset must not be null or empty"
+            );
+            Debug.Assert(
+                offset != UnknownTimeZoneDefaultOffset,
+                "Violation of precondition: do not pass an unknown offset"
+            );
+            Debug.Assert(
+                offset.StartsWith('-') || offset.StartsWith('+'),
+                "offset initial character was not a + or -"
+            );
 
             if (offset.Length != OffsetLength)
             {
@@ -199,12 +218,26 @@ namespace System.Net.Mime
 
             // TryParse will parse in base 10 by default.  do not allow any styles of input beyond the default
             // which is numeric values only
-            if (!int.TryParse(offset.AsSpan(1, 2), NumberStyles.None, CultureInfo.InvariantCulture, out hours))
+            if (
+                !int.TryParse(
+                    offset.AsSpan(1, 2),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out hours
+                )
+            )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
 
-            if (!int.TryParse(offset.AsSpan(3, 2), NumberStyles.None, CultureInfo.InvariantCulture, out minutes))
+            if (
+                !int.TryParse(
+                    offset.AsSpan(3, 2),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out minutes
+                )
+            )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
@@ -222,7 +255,10 @@ namespace System.Net.Mime
         internal void ValidateTimeZoneShortHandValue(string value)
         {
             // time zones can't be empty
-            Debug.Assert(!string.IsNullOrEmpty(value), "violation of precondition: offset must not be null or empty");
+            Debug.Assert(
+                !string.IsNullOrEmpty(value),
+                "violation of precondition: offset must not be null or empty"
+            );
 
             // time zones must all be alphabetical characters
             for (int i = 0; i < value.Length; i++)
@@ -235,7 +271,8 @@ namespace System.Net.Mime
         }
 
         // formats a date only.  Does not include time zone
-        internal string FormatDate(DateTime value) => value.ToString("ddd, dd MMM yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+        internal string FormatDate(DateTime value) =>
+            value.ToString("ddd, dd MMM yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 
         // parses the date and time zone
         // postconditions:
@@ -264,7 +301,10 @@ namespace System.Net.Mime
             // that MUST be the separator between the time portion and the timezone portion
             // timezone may have additional spaces, characters, or comments after it but
             // this is ok since we'll parse that whole section later
-            int indexOfTimeZoneSeparator = data.IndexOfAny(s_allowedWhiteSpaceChars, indexOfHourSeparator);
+            int indexOfTimeZoneSeparator = data.IndexOfAny(
+                s_allowedWhiteSpaceChars,
+                indexOfHourSeparator
+            );
 
             if (indexOfTimeZoneSeparator == -1)
             {
@@ -276,7 +316,15 @@ namespace System.Net.Mime
 
             // attempt to parse the DateTime component.
             DateTime dateValue;
-            if (!DateTime.TryParseExact(date, s_validDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out dateValue))
+            if (
+                !DateTime.TryParseExact(
+                    date,
+                    s_validDateTimeFormats,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AllowWhiteSpaces,
+                    out dateValue
+                )
+            )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
@@ -324,7 +372,12 @@ namespace System.Net.Mime
                 int hours;
                 int minutes;
 
-                ValidateAndGetTimeZoneOffsetValues(timeZoneString, out positive, out hours, out minutes);
+                ValidateAndGetTimeZoneOffsetValues(
+                    timeZoneString,
+                    out positive,
+                    out hours,
+                    out minutes
+                );
 
                 // Apply the negative sign, if applicable, to whichever of hours or minutes is NOT 0.
                 if (!positive)
@@ -383,7 +436,10 @@ namespace System.Net.Mime
                 uint hours = (uint)Math.Abs(Math.Floor(span.TotalHours));
                 uint minutes = (uint)Math.Abs(span.Minutes);
 
-                Debug.Assert((hours != 0) || (minutes != 0), "Input validation ensures hours or minutes isn't zero");
+                Debug.Assert(
+                    (hours != 0) || (minutes != 0),
+                    "Input validation ensures hours or minutes isn't zero"
+                );
 
                 string output = span.Ticks > 0 ? "+" : "-";
 
@@ -405,7 +461,6 @@ namespace System.Net.Mime
                 return output;
             }
         }
-
         #endregion
     }
 }

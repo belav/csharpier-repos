@@ -25,8 +25,8 @@ namespace System.CommandLine.Parsing
         /// <returns>A task whose result can be used as a process exit code.</returns>
         public static async Task<int> InvokeAsync(
             this ParseResult parseResult,
-            IConsole? console = null) =>
-            await new InvocationPipeline(parseResult).InvokeAsync(console);
+            IConsole? console = null
+        ) => await new InvocationPipeline(parseResult).InvokeAsync(console);
 
         /// <summary>
         /// Invokes the appropriate command handler for a parsed command line input.
@@ -34,9 +34,7 @@ namespace System.CommandLine.Parsing
         /// <param name="parseResult">A parse result on which the invocation is based.</param>
         /// <param name="console">A console to which output can be written. By default, <see cref="System.Console"/> is used.</param>
         /// <returns>A value that can be used as a process exit code.</returns>
-        public static int Invoke(
-            this ParseResult parseResult,
-            IConsole? console = null) =>
+        public static int Invoke(this ParseResult parseResult, IConsole? console = null) =>
             new InvocationPipeline(parseResult).Invoke(console);
 
         /// <summary>
@@ -45,9 +43,7 @@ namespace System.CommandLine.Parsing
         /// <param name="parseResult">A parse result.</param>
         /// <param name="position">The position within the raw input, if available, at which to provide suggestions.</param>
         /// <returns>A string containing the user-entered text to be matched for suggestions.</returns>
-        public static string TextToMatch(
-            this ParseResult parseResult,
-            int? position = null)
+        public static string TextToMatch(this ParseResult parseResult, int? position = null)
         {
             Token? lastToken = parseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive);
 
@@ -77,8 +73,7 @@ namespace System.CommandLine.Parsing
 
             if (string.IsNullOrWhiteSpace(rawInput))
             {
-                if (parseResult.UnmatchedTokens.Count > 0 ||
-                    lastToken?.Type == TokenType.Argument)
+                if (parseResult.UnmatchedTokens.Count > 0 || lastToken?.Type == TokenType.Argument)
                 {
                     return textToMatch ?? "";
                 }
@@ -89,8 +84,8 @@ namespace System.CommandLine.Parsing
 
                 var textAfterCursor = rawInput.Substring(position.Value);
 
-                return textBeforeCursor.Split(' ').LastOrDefault() +
-                       textAfterCursor.Split(' ').FirstOrDefault();
+                return textBeforeCursor.Split(' ').LastOrDefault()
+                    + textAfterCursor.Split(' ').FirstOrDefault();
             }
 
             return "";
@@ -132,26 +127,25 @@ namespace System.CommandLine.Parsing
         private static void Diagram(
             this StringBuilder builder,
             SymbolResult symbolResult,
-            ParseResult parseResult)
+            ParseResult parseResult
+        )
         {
             if (parseResult.Errors.Any(e => e.SymbolResult == symbolResult))
             {
                 builder.Append("!");
             }
 
-            if (symbolResult is OptionResult optionResult &&
-                optionResult.IsImplicit)
+            if (symbolResult is OptionResult optionResult && optionResult.IsImplicit)
             {
                 builder.Append("*");
             }
 
             if (symbolResult is ArgumentResult argumentResult)
             {
-
                 var includeArgumentName =
-                    argumentResult.Argument is Argument argument &&
-                    argument.Parents[0] is ICommand command &&
-                    command.Arguments.Count > 1;
+                    argumentResult.Argument is Argument argument
+                    && argument.Parents[0] is ICommand command
+                    && command.Arguments.Count > 1;
 
                 if (includeArgumentName)
                 {
@@ -175,8 +169,8 @@ namespace System.CommandLine.Parsing
                                 case IEnumerable items:
                                     builder.Append("<");
                                     builder.Append(
-                                        string.Join("> <",
-                                                    items.Cast<object>().ToArray()));
+                                        string.Join("> <", items.Cast<object>().ToArray())
+                                    );
                                     builder.Append(">");
                                     break;
 
@@ -186,15 +180,15 @@ namespace System.CommandLine.Parsing
                                     builder.Append(">");
                                     break;
                             }
-
                             break;
 
                         case FailedArgumentConversionResult _:
 
                             builder.Append("<");
-                            builder.Append(string.Join("> <", symbolResult.Tokens.Select(t => t.Value)));
+                            builder.Append(
+                                string.Join("> <", symbolResult.Tokens.Select(t => t.Value))
+                            );
                             builder.Append(">");
-
                             break;
                     }
                 }
@@ -213,8 +207,9 @@ namespace System.CommandLine.Parsing
                 {
                     var child = symbolResult.Children[i];
 
-                    if (child is ArgumentResult arg && 
-                        arg.Argument.Arity.MaximumNumberOfValues == 0)
+                    if (
+                        child is ArgumentResult arg && arg.Argument.Arity.MaximumNumberOfValues == 0
+                    )
                     {
                         continue;
                     }
@@ -234,9 +229,7 @@ namespace System.CommandLine.Parsing
         /// <param name="parseResult">The parse result to check for the presence of the option.</param>
         /// <param name="option">The option to check for the presence of.</param>
         /// <returns><see langword="true"/> if the option is present; otherwise,  <see langword="false"/>.</returns>
-        public static bool HasOption(
-            this ParseResult parseResult,
-            IOption option)
+        public static bool HasOption(this ParseResult parseResult, IOption option)
         {
             if (parseResult is null)
             {
@@ -247,10 +240,10 @@ namespace System.CommandLine.Parsing
         }
 
         /// <inheritdoc cref="HasOption(System.CommandLine.Parsing.ParseResult,System.CommandLine.IOption)"/>
-        [Obsolete("This method is obsolete and will be removed in a future version. Please use ParseResultExtensions.HasOption(ParseResult, IOption) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public static bool HasOption(
-            this ParseResult parseResult,
-            string alias)
+        [Obsolete(
+            "This method is obsolete and will be removed in a future version. Please use ParseResultExtensions.HasOption(ParseResult, IOption) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
+        public static bool HasOption(this ParseResult parseResult, string alias)
         {
             if (parseResult is null)
             {
@@ -268,43 +261,43 @@ namespace System.CommandLine.Parsing
         /// <returns>A set of suggestions for completion.</returns>
         public static IEnumerable<string?> GetSuggestions(
             this ParseResult parseResult,
-            int? position = null)
+            int? position = null
+        )
         {
             var textToMatch = parseResult.TextToMatch(position);
             var currentSymbolResult = parseResult.SymbolToComplete(position);
             var currentSymbol = currentSymbolResult.Symbol;
 
-            var currentSymbolSuggestions =
-                currentSymbol is ISuggestionSource currentSuggestionSource
-                    ? currentSuggestionSource.GetSuggestions(parseResult, textToMatch)
-                    : Array.Empty<string>();
+            var currentSymbolSuggestions = currentSymbol
+                is ISuggestionSource currentSuggestionSource
+                ? currentSuggestionSource.GetSuggestions(parseResult, textToMatch)
+                : Array.Empty<string>();
 
             IEnumerable<string?> siblingSuggestions;
             var parentSymbol = currentSymbolResult.Parent?.Symbol;
 
-            if (parentSymbol is null ||
-                !currentSymbolResult.IsArgumentLimitReached)
+            if (parentSymbol is null || !currentSymbolResult.IsArgumentLimitReached)
             {
                 siblingSuggestions = Array.Empty<string?>();
             }
             else
             {
                 siblingSuggestions = parentSymbol
-                                     .GetSuggestions(parseResult, textToMatch)
-                                     .Except(parentSymbol
-                                             .Children
-                                             .OfType<ICommand>()
-                                             .SelectMany(c => c.Aliases));
+                    .GetSuggestions(parseResult, textToMatch)
+                    .Except(parentSymbol.Children.OfType<ICommand>().SelectMany(c => c.Aliases));
             }
 
             if (currentSymbolResult is CommandResult commandResult)
             {
-                currentSymbolSuggestions = currentSymbolSuggestions
-                    .Except(OptionsWithArgumentLimitReached(currentSymbolResult));
+                currentSymbolSuggestions = currentSymbolSuggestions.Except(
+                    OptionsWithArgumentLimitReached(currentSymbolResult)
+                );
 
                 if (currentSymbolResult.Parent is CommandResult parent)
                 {
-                    siblingSuggestions = siblingSuggestions.Except(OptionsWithArgumentLimitReached(parent));
+                    siblingSuggestions = siblingSuggestions.Except(
+                        OptionsWithArgumentLimitReached(parent)
+                    );
                 }
             }
 
@@ -312,18 +305,17 @@ namespace System.CommandLine.Parsing
 
             string[] OptionsWithArgumentLimitReached(SymbolResult symbolResult)
             {
-                var optionsWithArgLimitReached =
-                    symbolResult
-                        .Children
-                        .Where(c => c.IsArgumentLimitReached);
+                var optionsWithArgLimitReached = symbolResult.Children.Where(
+                    c => c.IsArgumentLimitReached
+                );
 
                 var exclude = optionsWithArgLimitReached
-                              .OfType<OptionResult>()
-                              .Select(o => o.Symbol)
-                              .OfType<IIdentifierSymbol>()
-                              .SelectMany(c => c.Aliases)
-                              .Concat(commandResult.Command.Aliases)
-                              .ToArray();
+                    .OfType<OptionResult>()
+                    .Select(o => o.Symbol)
+                    .OfType<IIdentifierSymbol>()
+                    .SelectMany(c => c.Aliases)
+                    .Concat(commandResult.Command.Aliases)
+                    .ToArray();
 
                 return exclude;
             }
@@ -331,12 +323,12 @@ namespace System.CommandLine.Parsing
 
         internal static SymbolResult SymbolToComplete(
             this ParseResult parseResult,
-            int? position = null)
+            int? position = null
+        )
         {
             var commandResult = parseResult.CommandResult;
 
-            var currentSymbol = AllSymbolResultsForCompletion()
-                .LastOrDefault();
+            var currentSymbol = AllSymbolResultsForCompletion().LastOrDefault();
 
             return currentSymbol;
 
@@ -351,9 +343,11 @@ namespace System.CommandLine.Parsing
                     else if (item is OptionResult option)
                     {
                         var willAcceptAnArgument =
-                            !option.IsImplicit &&
-                            (!option.IsArgumentLimitReached ||
-                             parseResult.TextToMatch(position).Length > 0);
+                            !option.IsImplicit
+                            && (
+                                !option.IsArgumentLimitReached
+                                || parseResult.TextToMatch(position).Length > 0
+                            );
 
                         if (willAcceptAnArgument)
                         {
