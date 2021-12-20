@@ -611,7 +611,12 @@ namespace Microsoft.EntityFrameworkCore
                         using (BeginTransaction(context.Database))
                         {
                             var entry = context.Drivers.Add(
-                                new Driver { Id = 676, Name = "Larry David", TeamId = Team.Ferrari }
+                                new Driver
+                                {
+                                    Id = 676,
+                                    Name = "Larry David",
+                                    TeamId = Team.Ferrari
+                                }
                             );
 
                             entry.State = state;

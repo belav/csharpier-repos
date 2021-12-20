@@ -348,7 +348,12 @@ namespace System.ComponentModel.TypeConverterTests
             var conv = new ColorConverter();
             Assert.Null(
                 conv.CreateInstance(
-                    new Dictionary<string, object> { ["R"] = 10, ["G"] = 20, ["B"] = 30, }
+                    new Dictionary<string, object>
+                    {
+                        ["R"] = 10,
+                        ["G"] = 20,
+                        ["B"] = 30,
+                    }
                 )
             );
 

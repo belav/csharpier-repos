@@ -314,7 +314,15 @@ namespace System.Linq.Tests
 
             var memberships = Enumerable
                 .Range(0, 50)
-                .Select(i => new Membership { Id = i, Role = roles[i % 3], CountMe = i % 3 == 0 });
+                .Select(
+                    i =>
+                        new Membership
+                        {
+                            Id = i,
+                            Role = roles[i % 3],
+                            CountMe = i % 3 == 0
+                        }
+                );
 
             //Run actual test
             var grouping = memberships.GroupBy(

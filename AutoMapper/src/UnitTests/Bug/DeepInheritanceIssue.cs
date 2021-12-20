@@ -21,7 +21,12 @@ namespace AutoMapper.UnitTests.Bug
                 }
             );
 
-            var expectedCSrc = new CSrc() { StringA = "A", StringB = "B", StringC = "C" };
+            var expectedCSrc = new CSrc()
+            {
+                StringA = "A",
+                StringB = "B",
+                StringC = "C"
+            };
             var expectedBSrc = new BSrc() { StringA = "A", StringB = "B" };
 
             var expectedContCSrc = new ContainsASrc() { A = expectedCSrc };

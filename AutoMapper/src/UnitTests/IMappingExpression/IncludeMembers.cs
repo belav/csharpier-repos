@@ -278,7 +278,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
         }
@@ -926,7 +931,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.Name.ShouldBe("name");
@@ -978,7 +988,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.ShouldBeNull();
@@ -1446,7 +1461,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.Name.ShouldBe("name");
@@ -1498,7 +1518,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.ShouldBeNull();

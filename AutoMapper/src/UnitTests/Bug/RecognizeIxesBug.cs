@@ -21,7 +21,12 @@ namespace AutoMapper.UnitTests.Bug
 
             protected override void Because_of()
             {
-                _source = new Stuff { Id = 4, Name = "Foo", RankCode = "Bar" };
+                _source = new Stuff
+                {
+                    Id = 4,
+                    Name = "Foo",
+                    RankCode = "Bar"
+                };
                 _dest = Mapper.Map<Stuff, StuffView>(_source);
             }
 

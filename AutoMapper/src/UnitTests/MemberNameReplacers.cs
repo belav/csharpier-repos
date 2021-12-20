@@ -35,7 +35,12 @@ namespace AutoMapper.UnitTests
                 }
             );
 
-            var source = new Source() { Value = 5, Ävíator = 3, SubAirlinaFlight = 4 };
+            var source = new Source()
+            {
+                Value = 5,
+                Ävíator = 3,
+                SubAirlinaFlight = 4
+            };
 
             //Mapper.AddMemberConvention().AddName<ReplaceName>(_ => _.AddReplace("A", "Ä").AddReplace("i", "í").AddReplace("Airline", "Airlina")).SetMemberInfo<FieldPropertyMemberInfo>();
             var mapper = config.CreateMapper();

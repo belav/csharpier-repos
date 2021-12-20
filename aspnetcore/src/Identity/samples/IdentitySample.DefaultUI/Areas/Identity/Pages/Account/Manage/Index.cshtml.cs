@@ -59,7 +59,12 @@ public class IndexModel : PageModel
         }
 
         Username = user.UserName;
-        Input = new InputModel { Name = user.Name, Age = user.Age, PhoneNumber = user.PhoneNumber };
+        Input = new InputModel
+        {
+            Name = user.Name,
+            Age = user.Age,
+            PhoneNumber = user.PhoneNumber
+        };
 
         return Page();
     }

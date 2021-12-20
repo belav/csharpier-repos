@@ -128,7 +128,13 @@ namespace System.Drawing.Printing.Tests
             MarginsConverter mc = new MarginsConverter();
             Guid guid = Guid.NewGuid();
             CultureInfo culture = CultureInfo.InvariantCulture;
-            Margins margins = new Margins() { Left = 1, Right = 2, Top = 3, Bottom = 4 };
+            Margins margins = new Margins()
+            {
+                Left = 1,
+                Right = 2,
+                Top = 3,
+                Bottom = 4
+            };
 
             // try once with then once without context
             for (var context = new MyTypeDescriptorContext(); context != null; context = null)

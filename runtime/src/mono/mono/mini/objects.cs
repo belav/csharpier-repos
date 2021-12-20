@@ -2144,7 +2144,13 @@ class Tests
 
     static int test_0_arm64_hfa_on_stack()
     {
-        var s = new HFA4D() { a = 1.0, b = 2.0, c = 3.0, d = 4.0 };
+        var s = new HFA4D()
+        {
+            a = 1.0,
+            b = 2.0,
+            c = 3.0,
+            d = 4.0
+        };
         var res = arm64_hfa_on_stack_inner(1, 2, 3, 4, 5, 6, 7, 8, s);
         return res == 10.0 ? 0 : 1;
     }

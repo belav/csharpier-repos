@@ -176,7 +176,12 @@ namespace System.Drawing.Drawing2D
             fixed (byte* t = pathData.Types)
             fixed (PointF* p = pathData.Points)
             {
-                GpPathData data = new GpPathData { Count = count, Points = p, Types = t };
+                GpPathData data = new GpPathData
+                {
+                    Count = count,
+                    Points = p,
+                    Types = t
+                };
 
                 Gdip.CheckStatus(Gdip.GdipGetPathData(new HandleRef(this, _nativePath), &data));
             }

@@ -72,7 +72,15 @@ public class TemporaryCSharpProject
         string itemName,
         string include,
         string condition = null
-    ) => WithItem(new ItemSpec { Name = itemName, Include = include, Condition = condition });
+    ) =>
+        WithItem(
+            new ItemSpec
+            {
+                Name = itemName,
+                Include = include,
+                Condition = condition
+            }
+        );
 
     public TemporaryCSharpProject WithItem(ItemSpec item)
     {
@@ -106,7 +114,12 @@ public class TemporaryCSharpProject
         }
 
         return WithItem(
-            new ItemSpec { Name = "ProjectReference", Include = reference.Path, Watch = watch }
+            new ItemSpec
+            {
+                Name = "ProjectReference",
+                Include = reference.Path,
+                Watch = watch
+            }
         );
     }
 

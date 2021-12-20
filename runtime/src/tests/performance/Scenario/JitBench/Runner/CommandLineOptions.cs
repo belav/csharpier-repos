@@ -225,9 +225,7 @@ namespace JitBench
                 AdditionalNewLineAfterOption = false,
                 Heading = "JitBench",
                 MaximumDisplayWidth = 80,
-            }
-                .AddOptions(parser.ParseArguments<CommandLineOptions>(new string[] { "--help" }))
-                .ToString();
+            }.AddOptions(parser.ParseArguments<CommandLineOptions>(new string[] { "--help" })).ToString();
             return helpTextString;
         }
 

@@ -133,7 +133,12 @@ namespace System.Net.Http.Formatting
                     { new { Anon1 = 56, Anon2 = "foo" }, "{\"Anon1\":56,\"Anon2\":\"foo\"}" },
                     // Classes
                     {
-                        new DataContractType() { s = "foo", i = 49, NotAMember = "Error" },
+                        new DataContractType()
+                        {
+                            s = "foo",
+                            i = 49,
+                            NotAMember = "Error"
+                        },
                         "{\"s\":\"foo\",\"i\":49}"
                     },
                     {

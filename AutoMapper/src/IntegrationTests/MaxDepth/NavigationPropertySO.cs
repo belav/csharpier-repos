@@ -73,7 +73,13 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 var cust = new Cust { CustomerID = 1 };
                 context.Custs.Add(cust);
-                var customer = new Customer { Id = 1, Name1 = "Bob", CustomerId = 1, Cust = cust, };
+                var customer = new Customer
+                {
+                    Id = 1,
+                    Name1 = "Bob",
+                    CustomerId = 1,
+                    Cust = cust,
+                };
                 context.Customers.Add(customer);
                 cust.Customers.Add(customer);
                 base.Seed(context);

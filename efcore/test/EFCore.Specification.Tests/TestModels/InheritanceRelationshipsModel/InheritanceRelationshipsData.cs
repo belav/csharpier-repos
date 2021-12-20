@@ -473,8 +473,18 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
         public static IReadOnlyList<ReferencedEntity> CreateReferencedEntities() =>
             new List<ReferencedEntity>
             {
-                new() { Id = 1, Name = "RE1", Principals = new List<PrincipalEntity>() },
-                new() { Id = 2, Name = "RE2", Principals = new List<PrincipalEntity>() },
+                new()
+                {
+                    Id = 1,
+                    Name = "RE1",
+                    Principals = new List<PrincipalEntity>()
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "RE2",
+                    Principals = new List<PrincipalEntity>()
+                },
             };
 
         public static void WireUp(

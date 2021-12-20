@@ -902,7 +902,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
-            var operation = new DropColumnOperation { Schema = schema, Table = table, Name = name };
+            var operation = new DropColumnOperation
+            {
+                Schema = schema,
+                Table = table,
+                Name = name
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<DropColumnOperation>(operation);
@@ -956,7 +961,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             Check.NotEmpty(name, nameof(name));
 
-            var operation = new DropIndexOperation { Schema = schema, Table = table, Name = name };
+            var operation = new DropIndexOperation
+            {
+                Schema = schema,
+                Table = table,
+                Name = name
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<DropIndexOperation>(operation);

@@ -3586,7 +3586,14 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder
                     .Entity<AnimalDetails>()
-                    .HasData(new AnimalDetails { Id = 1, AnimalId = 1, BoolField = true });
+                    .HasData(
+                        new AnimalDetails
+                        {
+                            Id = 1,
+                            AnimalId = 1,
+                            BoolField = true
+                        }
+                    );
 
                 modelBuilder
                     .Entity<AnimalIdentification>()

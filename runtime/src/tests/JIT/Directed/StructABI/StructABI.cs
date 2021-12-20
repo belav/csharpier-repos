@@ -191,7 +191,12 @@ unsafe struct ByteFloatAndPointer
     public static ByteFloatAndPointer Get()
     {
         byte unused;
-        return new ByteFloatAndPointer { Pointer = &unused, Float = 3.14159f, Byte = 42 };
+        return new ByteFloatAndPointer
+        {
+            Pointer = &unused,
+            Float = 3.14159f,
+            Byte = 42
+        };
     }
 
     public bool Equals(ByteFloatAndPointer other)
@@ -209,7 +214,12 @@ unsafe struct PointerFloatAndByte
     public static PointerFloatAndByte Get()
     {
         byte unused;
-        return new PointerFloatAndByte { Pointer = &unused, Float = 3.14159f, Byte = 42 };
+        return new PointerFloatAndByte
+        {
+            Pointer = &unused,
+            Float = 3.14159f,
+            Byte = 42
+        };
     }
 
     public bool Equals(PointerFloatAndByte other)
@@ -228,7 +238,13 @@ struct ShortIntFloatIntPtr
     public static ShortIntFloatIntPtr Get()
     {
         IntPtr unused = new IntPtr(42);
-        return new ShortIntFloatIntPtr { Short = 10, Int = 11, Float = 3.14f, Pointer = unused };
+        return new ShortIntFloatIntPtr
+        {
+            Short = 10,
+            Int = 11,
+            Float = 3.14f,
+            Pointer = unused
+        };
     }
 
     public bool Equals(ShortIntFloatIntPtr other)

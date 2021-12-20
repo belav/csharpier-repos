@@ -217,7 +217,13 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Id = 5, CodeName = "007", Nickname = "Jimmy", ScreenName = "jbogard" }
+                new Source
+                {
+                    Id = 5,
+                    CodeName = "007",
+                    Nickname = "Jimmy",
+                    ScreenName = "jbogard"
+                }
             );
         }
 
@@ -304,7 +310,13 @@ namespace AutoMapper.UnitTests.ConditionalMapping
 
         protected override void Because_of()
         {
-            var source = new Source { Id = 5, Name = "Bob", Age = 35, Force = "With You" };
+            var source = new Source
+            {
+                Id = 5,
+                Name = "Bob",
+                Age = 35,
+                Force = "With You"
+            };
             source.Initialize();
             _destination = Mapper.Map<Source, Destination>(source);
             _source = Mapper.Map<Destination, Source>(_destination);

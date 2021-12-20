@@ -1788,7 +1788,12 @@ namespace System.Text.Json.Serialization.Tests
             name = "Microsoft";
             sites = new List<BasicJsonAddress>
             {
-                new BasicJsonAddress { street = "1 Lone Tree Rd S", city = "Fargo", zip = 58104 },
+                new BasicJsonAddress
+                {
+                    street = "1 Lone Tree Rd S",
+                    city = "Fargo",
+                    zip = 58104
+                },
                 new BasicJsonAddress
                 {
                     street = "8055 Microsoft Way",

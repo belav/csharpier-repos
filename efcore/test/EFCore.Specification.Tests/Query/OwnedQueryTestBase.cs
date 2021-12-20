@@ -1771,7 +1771,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 modelBuilder.Entity<Planet>(pb => pb.HasData(new Planet { Id = 1, StarId = 1 }));
 
                 modelBuilder.Entity<Moon>(
-                    mb => mb.HasData(new Moon { Id = 1, PlanetId = 1, Diameter = 3474 })
+                    mb =>
+                        mb.HasData(
+                            new Moon
+                            {
+                                Id = 1,
+                                PlanetId = 1,
+                                Diameter = 3474
+                            }
+                        )
                 );
 
                 modelBuilder.Entity<Star>(
@@ -1901,8 +1909,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Name = "Sol",
                         Composition = new List<Element>
                         {
-                            new() { Id = "H", Name = "Hydrogen", StarId = 1 },
-                            new() { Id = "He", Name = "Helium", StarId = 1 }
+                            new()
+                            {
+                                Id = "H",
+                                Name = "Hydrogen",
+                                StarId = 1
+                            },
+                            new()
+                            {
+                                Id = "He",
+                                Name = "Helium",
+                                StarId = 1
+                            }
                         }
                     }
                 };
@@ -1910,7 +1928,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             private static IReadOnlyList<Moon> CreateMoons() =>
                 new List<Moon>
                 {
-                    new() { Id = 1, PlanetId = 1, Diameter = 3474 }
+                    new()
+                    {
+                        Id = 1,
+                        PlanetId = 1,
+                        Diameter = 3474
+                    }
                 };
 
             private static IReadOnlyList<OwnedPerson> CreateOwnedPeople()

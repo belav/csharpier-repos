@@ -246,7 +246,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_work()
         {
-            var entity = new SubEntity { BaseMember = "foo", Id = 695, SubMember = "bar" };
+            var entity = new SubEntity
+            {
+                BaseMember = "foo",
+                Id = 695,
+                SubMember = "bar"
+            };
 
             var model = this.Mapper.Map<SubModel>(entity);
 

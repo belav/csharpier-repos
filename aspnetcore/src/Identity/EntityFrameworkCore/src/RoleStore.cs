@@ -503,5 +503,10 @@ public class RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
     /// <param name="claim">The associated claim.</param>
     /// <returns>The role claim entity.</returns>
     protected virtual TRoleClaim CreateRoleClaim(TRole role, Claim claim) =>
-        new TRoleClaim { RoleId = role.Id, ClaimType = claim.Type, ClaimValue = claim.Value };
+        new TRoleClaim
+        {
+            RoleId = role.Id,
+            ClaimType = claim.Type,
+            ClaimValue = claim.Value
+        };
 }

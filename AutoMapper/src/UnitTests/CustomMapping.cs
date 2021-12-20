@@ -1649,7 +1649,12 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            _source = new Source { Name = "jon", Value = "value", Foo = "bar" };
+            _source = new Source
+            {
+                Name = "jon",
+                Value = "value",
+                Foo = "bar"
+            };
             _dest = new Destination();
             _dest = Mapper.Map<Source, Destination>(_source);
         }

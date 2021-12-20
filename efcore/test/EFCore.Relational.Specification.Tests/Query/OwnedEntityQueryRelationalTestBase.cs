@@ -93,8 +93,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 ob.HasKey(x => x.Id);
                                 ob.WithOwner().HasForeignKey(e => e.RootId);
                                 ob.HasData(
-                                    new MiddleB24777 { Id = 1, RootId = 1, Enabled = true },
-                                    new MiddleB24777 { Id = 2, RootId = 3, Enabled = true }
+                                    new MiddleB24777
+                                    {
+                                        Id = 1,
+                                        RootId = 1,
+                                        Enabled = true
+                                    },
+                                    new MiddleB24777
+                                    {
+                                        Id = 2,
+                                        RootId = 3,
+                                        Enabled = true
+                                    }
                                 );
                             }
                         );

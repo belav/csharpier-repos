@@ -4580,8 +4580,22 @@ Path '', line 1, position 1."
         {
             ThisGenericTest<KeyValueId> g = new ThisGenericTest<KeyValueId>();
 
-            g.Add(new KeyValueId { Id = 1, Key = "key1", Value = "value1" });
-            g.Add(new KeyValueId { Id = 2, Key = "key2", Value = "value2" });
+            g.Add(
+                new KeyValueId
+                {
+                    Id = 1,
+                    Key = "key1",
+                    Value = "value1"
+                }
+            );
+            g.Add(
+                new KeyValueId
+                {
+                    Id = 2,
+                    Key = "key2",
+                    Value = "value2"
+                }
+            );
 
             g.MyProperty = "some value";
 
@@ -5932,7 +5946,12 @@ Path '', line 1, position 1."
         public void DeserializeStructProperty()
         {
             VectorParent obj = new VectorParent();
-            obj.Position = new TestObjects.Vector { X = 1, Y = 2, Z = 3 };
+            obj.Position = new TestObjects.Vector
+            {
+                X = 1,
+                Y = 2,
+                Z = 3
+            };
 
             string str = JsonConvert.SerializeObject(obj);
 

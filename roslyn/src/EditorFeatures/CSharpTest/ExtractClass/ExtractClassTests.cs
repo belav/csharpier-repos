@@ -1500,7 +1500,12 @@ class Test : MyBase
 {
 }";
 
-            await new Test { TestCode = input, FixedCode = expected, SameFile = true, }.RunAsync();
+            await new Test
+            {
+                TestCode = input,
+                FixedCode = expected,
+                SameFile = true,
+            }.RunAsync();
         }
 
         [Fact]

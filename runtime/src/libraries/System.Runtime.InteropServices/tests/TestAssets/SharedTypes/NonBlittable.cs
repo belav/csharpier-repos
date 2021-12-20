@@ -85,7 +85,12 @@ namespace SharedTypes
 
         public BoolStruct ToManaged()
         {
-            return new BoolStruct { b1 = b1 != 0, b2 = b2 != 0, b3 = b3 != 0 };
+            return new BoolStruct
+            {
+                b1 = b1 != 0,
+                b2 = b2 != 0,
+                b3 = b3 != 0
+            };
         }
     }
 

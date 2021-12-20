@@ -405,7 +405,12 @@ namespace Microsoft.Data.Sqlite
         ///     transaction.
         /// </remarks>
         public new virtual SqliteCommand CreateCommand() =>
-            new() { Connection = this, CommandTimeout = DefaultTimeout, Transaction = Transaction };
+            new()
+            {
+                Connection = this,
+                CommandTimeout = DefaultTimeout,
+                Transaction = Transaction
+            };
 
         /// <summary>
         ///     Creates a new command associated with the connection.

@@ -91,12 +91,29 @@ namespace System.Web.Mvc.Html.Test
                 };
                 items.Add(new SelectListItem() { Text = "Alice", Value = "a" });
                 items.Add(
-                    new SelectListItem() { Text = "Bob", Value = "b", Group = disabledGroup }
+                    new SelectListItem()
+                    {
+                        Text = "Bob",
+                        Value = "b",
+                        Group = disabledGroup
+                    }
                 );
                 items.Add(
-                    new SelectListItem() { Text = "Charlie", Value = "c", Group = disabledGroup }
+                    new SelectListItem()
+                    {
+                        Text = "Charlie",
+                        Value = "c",
+                        Group = disabledGroup
+                    }
                 );
-                items.Add(new SelectListItem() { Text = "David", Value = "d", Disabled = true });
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Text = "David",
+                        Value = "d",
+                        Disabled = true
+                    }
+                );
 
                 return items;
             }
@@ -115,14 +132,29 @@ namespace System.Web.Mvc.Html.Test
                 items.Add(new SelectListItem() { Text = "other1", Value = "other1" });
                 items.Add(new SelectListItem() { Text = "other2", Value = "other2" });
                 items.Add(
-                    new SelectListItem() { Group = swedish, Text = "Volvo", Value = "volvo" }
+                    new SelectListItem()
+                    {
+                        Group = swedish,
+                        Text = "Volvo",
+                        Value = "volvo"
+                    }
                 );
                 items.Add(new SelectListItem() { Text = "other3", Value = "other3" });
                 items.Add(
-                    new SelectListItem() { Group = unnamed, Text = "other4", Value = "other4" }
+                    new SelectListItem()
+                    {
+                        Group = unnamed,
+                        Text = "other4",
+                        Value = "other4"
+                    }
                 );
                 items.Add(
-                    new SelectListItem() { Group = unnamed, Text = "other5", Value = "other5" }
+                    new SelectListItem()
+                    {
+                        Group = unnamed,
+                        Text = "other5",
+                        Value = "other5"
+                    }
                 );
                 items.Add(
                     new SelectListItem()

@@ -356,7 +356,12 @@ public class CookieTempDataProviderTest
 
         public void Append(string key, string value, CookieOptions options)
         {
-            _cookies[key] = new CookieInfo() { Key = key, Value = value, Options = options };
+            _cookies[key] = new CookieInfo()
+            {
+                Key = key,
+                Value = value,
+                Options = options
+            };
         }
 
         public void Append(string key, string value)

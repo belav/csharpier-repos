@@ -1350,13 +1350,33 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var tmp_a = new A19253[]
             {
-                new() { a = "a0", a1 = "a1", forkey = "a" },
-                new() { a = "a2", a1 = "a1", forkey = "d" },
+                new()
+                {
+                    a = "a0",
+                    a1 = "a1",
+                    forkey = "a"
+                },
+                new()
+                {
+                    a = "a2",
+                    a1 = "a1",
+                    forkey = "d"
+                },
             };
             var tmp_b = new B19253[]
             {
-                new() { b = "b0", b1 = "b1", forkey = "a" },
-                new() { b = "b2", b1 = "b1", forkey = "c" },
+                new()
+                {
+                    b = "b0",
+                    b1 = "b1",
+                    forkey = "a"
+                },
+                new()
+                {
+                    b = "b2",
+                    b1 = "b1",
+                    forkey = "c"
+                },
             };
             context.A.AddRange(tmp_a);
             context.B.AddRange(tmp_b);
@@ -1699,7 +1719,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new RootEntity18435
                 {
                     Value = "test",
-                    Owned = new TestOwned18435 { First = 2, Second = 4, AnotherValueType = "yay" },
+                    Owned = new TestOwned18435
+                    {
+                        First = 2,
+                        Second = 4,
+                        AnotherValueType = "yay"
+                    },
                     Child = new ChildEntity18435
                     {
                         Owned = new TestOwned18435

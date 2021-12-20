@@ -24,7 +24,14 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                context.Add(new Pegasus { Id1 = ticks, Id2 = ticks + 1, Name = "Rainbow Dash" });
+                context.Add(
+                    new Pegasus
+                    {
+                        Id1 = ticks,
+                        Id2 = ticks + 1,
+                        Name = "Rainbow Dash"
+                    }
+                );
                 await context.SaveChangesAsync();
             }
 

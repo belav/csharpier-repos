@@ -35,19 +35,97 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         {
             var result = new List<CompositeOne>
             {
-                new() { Id1 = "L0", Id2 = 1, Name = "L1 01", Date = new DateTime(2001, 1, 1) },
-                new() { Id1 = "L0", Id2 = 2, Name = "L1 02", Date = new DateTime(2002, 2, 2) },
-                new() { Id1 = "L0", Id2 = 3, Name = "L1 03", Date = new DateTime(2003, 3, 3) },
-                new() { Id1 = "L0", Id2 = 4, Name = "L1 04", Date = new DateTime(2004, 4, 4) },
-                new() { Id1 = "L0", Id2 = 5, Name = "L1 05", Date = new DateTime(2005, 5, 5) },
-                new() { Id1 = "L1", Id2 = 1, Name = "L1 06", Date = new DateTime(2006, 6, 6) },
-                new() { Id1 = "L1", Id2 = 2, Name = "L1 07", Date = new DateTime(2007, 7, 7) },
-                new() { Id1 = "L1", Id2 = 3, Name = "L1 08", Date = new DateTime(2008, 8, 8) },
-                new() { Id1 = "L1", Id2 = 4, Name = "L1 09", Date = new DateTime(2009, 9, 9) },
-                new() { Id1 = "L1", Id2 = 5, Name = "L1 10", Date = new DateTime(2010, 10, 10) },
-                new() { Id1 = "L2", Id2 = 1, Name = "L1 11", Date = new DateTime(2009, 11, 11) },
-                new() { Id1 = "L2", Id2 = 2, Name = "L1 12", Date = new DateTime(2008, 12, 12) },
-                new() { Id1 = "L2", Id2 = 3, Name = "L1 13", Date = new DateTime(2007, 1, 1) }
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 1,
+                    Name = "L1 01",
+                    Date = new DateTime(2001, 1, 1)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 2,
+                    Name = "L1 02",
+                    Date = new DateTime(2002, 2, 2)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 3,
+                    Name = "L1 03",
+                    Date = new DateTime(2003, 3, 3)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 4,
+                    Name = "L1 04",
+                    Date = new DateTime(2004, 4, 4)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 5,
+                    Name = "L1 05",
+                    Date = new DateTime(2005, 5, 5)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 1,
+                    Name = "L1 06",
+                    Date = new DateTime(2006, 6, 6)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 2,
+                    Name = "L1 07",
+                    Date = new DateTime(2007, 7, 7)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 3,
+                    Name = "L1 08",
+                    Date = new DateTime(2008, 8, 8)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 4,
+                    Name = "L1 09",
+                    Date = new DateTime(2009, 9, 9)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 5,
+                    Name = "L1 10",
+                    Date = new DateTime(2010, 10, 10)
+                },
+                new()
+                {
+                    Id1 = "L2",
+                    Id2 = 1,
+                    Name = "L1 11",
+                    Date = new DateTime(2009, 11, 11)
+                },
+                new()
+                {
+                    Id1 = "L2",
+                    Id2 = 2,
+                    Name = "L1 12",
+                    Date = new DateTime(2008, 12, 12)
+                },
+                new()
+                {
+                    Id1 = "L2",
+                    Id2 = 3,
+                    Name = "L1 13",
+                    Date = new DateTime(2007, 1, 1)
+                }
             };
 
             foreach (var l1 in result)
@@ -65,17 +143,83 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         {
             var result = new List<CompositeTwo>
             {
-                new() { Id1 = "L0", Id2 = 1, Name = "L2 01", Date = new DateTime(2010, 10, 10) },
-                new() { Id1 = "L0", Id2 = 2, Name = "L2 02", Date = new DateTime(2002, 2, 2) },
-                new() { Id1 = "L0", Id2 = 3, Name = "L2 03", Date = new DateTime(2008, 8, 8) },
-                new() { Id1 = "L0", Id2 = 4, Name = "L2 04", Date = new DateTime(2004, 4, 4) },
-                new() { Id1 = "L0", Id2 = 5, Name = "L2 05", Date = new DateTime(2006, 6, 6) },
-                new() { Id1 = "L1", Id2 = 1, Name = "L2 06", Date = new DateTime(2005, 5, 5) },
-                new() { Id1 = "L1", Id2 = 2, Name = "L2 07", Date = new DateTime(2007, 7, 7) },
-                new() { Id1 = "L1", Id2 = 3, Name = "L2 08", Date = new DateTime(2003, 3, 3) },
-                new() { Id1 = "L1", Id2 = 4, Name = "L2 09", Date = new DateTime(2009, 9, 9) },
-                new() { Id1 = "L1", Id2 = 5, Name = "L2 10", Date = new DateTime(2001, 1, 1) },
-                new() { Id1 = "L2", Id2 = 1, Name = "L2 11", Date = new DateTime(2000, 1, 1) }
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 1,
+                    Name = "L2 01",
+                    Date = new DateTime(2010, 10, 10)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 2,
+                    Name = "L2 02",
+                    Date = new DateTime(2002, 2, 2)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 3,
+                    Name = "L2 03",
+                    Date = new DateTime(2008, 8, 8)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 4,
+                    Name = "L2 04",
+                    Date = new DateTime(2004, 4, 4)
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 5,
+                    Name = "L2 05",
+                    Date = new DateTime(2006, 6, 6)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 1,
+                    Name = "L2 06",
+                    Date = new DateTime(2005, 5, 5)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 2,
+                    Name = "L2 07",
+                    Date = new DateTime(2007, 7, 7)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 3,
+                    Name = "L2 08",
+                    Date = new DateTime(2003, 3, 3)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 4,
+                    Name = "L2 09",
+                    Date = new DateTime(2009, 9, 9)
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 5,
+                    Name = "L2 10",
+                    Date = new DateTime(2001, 1, 1)
+                },
+                new()
+                {
+                    Id1 = "L2",
+                    Id2 = 1,
+                    Name = "L2 11",
+                    Date = new DateTime(2000, 1, 1)
+                }
             };
 
             foreach (var l2 in result)
@@ -93,16 +237,66 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         {
             var result = new List<CompositeThree>
             {
-                new() { Id1 = "L0", Id2 = 1, Name = "L3 01" },
-                new() { Id1 = "L0", Id2 = 2, Name = "L3 02" },
-                new() { Id1 = "L0", Id2 = 3, Name = "L3 03" },
-                new() { Id1 = "L0", Id2 = 4, Name = "L3 04" },
-                new() { Id1 = "L0", Id2 = 5, Name = "L3 05" },
-                new() { Id1 = "L1", Id2 = 1, Name = "L3 06" },
-                new() { Id1 = "L1", Id2 = 2, Name = "L3 07" },
-                new() { Id1 = "L1", Id2 = 3, Name = "L3 08" },
-                new() { Id1 = "L1", Id2 = 4, Name = "L3 09" },
-                new() { Id1 = "L1", Id2 = 5, Name = "L3 10" }
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 1,
+                    Name = "L3 01"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 2,
+                    Name = "L3 02"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 3,
+                    Name = "L3 03"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 4,
+                    Name = "L3 04"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 5,
+                    Name = "L3 05"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 1,
+                    Name = "L3 06"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 2,
+                    Name = "L3 07"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 3,
+                    Name = "L3 08"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 4,
+                    Name = "L3 09"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 5,
+                    Name = "L3 10"
+                }
             };
 
             foreach (var l3 in result)
@@ -120,16 +314,66 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
         {
             var result = new List<CompositeFour>
             {
-                new() { Id1 = "L0", Id2 = 1, Name = "L4 01" },
-                new() { Id1 = "L0", Id2 = 2, Name = "L4 02" },
-                new() { Id1 = "L0", Id2 = 3, Name = "L4 03" },
-                new() { Id1 = "L0", Id2 = 4, Name = "L4 04" },
-                new() { Id1 = "L0", Id2 = 5, Name = "L4 05" },
-                new() { Id1 = "L1", Id2 = 1, Name = "L4 06" },
-                new() { Id1 = "L1", Id2 = 2, Name = "L4 07" },
-                new() { Id1 = "L1", Id2 = 3, Name = "L4 08" },
-                new() { Id1 = "L1", Id2 = 4, Name = "L4 09" },
-                new() { Id1 = "L1", Id2 = 5, Name = "L4 10" }
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 1,
+                    Name = "L4 01"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 2,
+                    Name = "L4 02"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 3,
+                    Name = "L4 03"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 4,
+                    Name = "L4 04"
+                },
+                new()
+                {
+                    Id1 = "L0",
+                    Id2 = 5,
+                    Name = "L4 05"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 1,
+                    Name = "L4 06"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 2,
+                    Name = "L4 07"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 3,
+                    Name = "L4 08"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 4,
+                    Name = "L4 09"
+                },
+                new()
+                {
+                    Id1 = "L1",
+                    Id2 = 5,
+                    Name = "L4 10"
+                }
             };
 
             foreach (var l4 in result)

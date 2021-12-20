@@ -23,7 +23,12 @@ public class ChunkingCookieManagerBenchmark
 
         _httpContext = new DefaultHttpContext();
 
-        _cookieOptions = new CookieOptions() { Domain = "foo.com", Path = "/", Secure = true };
+        _cookieOptions = new CookieOptions()
+        {
+            Domain = "foo.com",
+            Path = "/",
+            Secure = true
+        };
 
         _httpContext.Request.Headers["Cookie"] = new[]
         {

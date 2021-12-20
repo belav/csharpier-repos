@@ -1021,7 +1021,13 @@ namespace System.Runtime.CompilerServices
             Unsafe.SkipInit(out doubleValue);
             Assert.Equal<double>(10, doubleValue);
 
-            Byte4 byte4Value = new Byte4 { B0 = 11, B1 = 12, B2 = 13, B3 = 14 };
+            Byte4 byte4Value = new Byte4
+            {
+                B0 = 11,
+                B1 = 12,
+                B2 = 13,
+                B3 = 14
+            };
             Unsafe.SkipInit(out byte4Value);
             Assert.Equal<byte>(11, byte4Value.B0);
             Assert.Equal<byte>(12, byte4Value.B1);

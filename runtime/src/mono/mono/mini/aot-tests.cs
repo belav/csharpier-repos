@@ -340,7 +340,12 @@ class Tests
     public static int test_0_arm64_gsharedvt_out_vtypebyref()
     {
         /* gsharedvt out trampoline with vtypebyref argument */
-        var s = new VTypeByRefStruct() { o1 = 1, o2 = 2, o3 = 3 };
+        var s = new VTypeByRefStruct()
+        {
+            o1 = 1,
+            o2 = 2,
+            o3 = 3
+        };
 
         // Call Foo2.Get_T directly, so its gets an instance
         Foo2<VTypeByRefStruct>.Get_T(1.0f, s);
@@ -376,7 +381,12 @@ class Tests
     [Category("GSHAREDVT")]
     static int test_0_arm64_dyncall_vtypebyref_ret()
     {
-        var s = new VTypeByRefStruct() { o1 = 1, o2 = 2, o3 = 3 };
+        var s = new VTypeByRefStruct()
+        {
+            o1 = 1,
+            o2 = 2,
+            o3 = 3
+        };
         Type t = typeof(Foo5<>).MakeGenericType(new Type[] { typeof(VTypeByRefStruct) });
         var o = Activator.CreateInstance(t);
         try
@@ -702,7 +712,13 @@ class Tests
     [Category("DYNCALL")]
     public static int test_0_arm64_dyncall_vtypebyrefonstack()
     {
-        var s = new LargeStruct() { a = 1, b = 2, c = 3, d = 4 };
+        var s = new LargeStruct()
+        {
+            a = 1,
+            b = 2,
+            c = 3,
+            d = 4
+        };
 
         NullableMethods.GetHasValueManyArgs<LargeStruct>(1, 2, 3, 4, 5, 6, 7, 8, s);
 
@@ -870,7 +886,13 @@ class Tests
     [Category("DYNCALL")]
     public static int test_0_large_nullable_invoke()
     {
-        var s = new LargeStruct() { a = 1, b = 2, c = 3, d = 4 };
+        var s = new LargeStruct()
+        {
+            a = 1,
+            b = 2,
+            c = 3,
+            d = 4
+        };
 
         NullableMethods.GetHasValue<LargeStruct>(s);
 
@@ -923,7 +945,12 @@ class Tests
             for (int j = 0; j < 10; ++j)
                 arr[i, j].x = new FpStruct();
 
-        var s1 = new FpStruct() { a = 1, b = 1, c = 10 };
+        var s1 = new FpStruct()
+        {
+            a = 1,
+            b = 1,
+            c = 10
+        };
         return pass_hfa_on_stack(s1, s1, s1);
     }
 

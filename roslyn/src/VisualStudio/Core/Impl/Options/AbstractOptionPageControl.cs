@@ -42,7 +42,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             groupBoxStyle.Setters.Add(
                 new Setter(
                     GroupBox.PaddingProperty,
-                    new Thickness() { Left = 7, Right = 7, Top = 7 }
+                    new Thickness()
+                    {
+                        Left = 7,
+                        Right = 7,
+                        Top = 7
+                    }
                 )
             );
             groupBoxStyle.Setters.Add(

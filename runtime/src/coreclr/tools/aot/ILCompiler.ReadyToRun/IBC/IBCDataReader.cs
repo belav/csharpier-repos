@@ -447,7 +447,12 @@ namespace ILCompiler.IBC
                 }
 
                 result.Add(
-                    new IBC.TokenData { Token = token, Flags = flags, ScenarioMask = scenarioMask }
+                    new IBC.TokenData
+                    {
+                        Token = token,
+                        Flags = flags,
+                        ScenarioMask = scenarioMask
+                    }
                 );
             }
 

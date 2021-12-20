@@ -964,7 +964,13 @@ public class Managed
                     break;
                 case StructID.HFAId:
                 {
-                    HFA hfa = new HFA { f1 = 2.0f, f2 = 10.5f, f3 = 15.2f, f4 = 0.12f };
+                    HFA hfa = new HFA
+                    {
+                        f1 = 2.0f,
+                        f2 = 10.5f,
+                        f3 = 15.2f,
+                        f4 = 0.12f
+                    };
 
                     float expected = hfa.f1 * hfa.f2 * hfa.f3 * hfa.f4;
                     float actual;

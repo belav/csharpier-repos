@@ -14,7 +14,12 @@ public class DefaultComplexObjectValidationStrategyTest
     public void GetChildren_ReturnsExpectedElements()
     {
         // Arrange
-        var model = new Person() { Age = 23, Id = 1, Name = "Joey", };
+        var model = new Person()
+        {
+            Age = 23,
+            Id = 1,
+            Name = "Joey",
+        };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()

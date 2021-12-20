@@ -2351,7 +2351,12 @@ public static partial class XmlSerializerTests
         soapImporter.IncludeType(typeof(MySpecialOrder2));
         XmlTypeMapping myTypeMapping = soapImporter.ImportTypeMapping(typeof(MyOrder));
         var ser = new XmlSerializer(myTypeMapping);
-        var value = new MySpecialOrder() { ID = 10, Name = "MyName", SecondaryID = 1000 };
+        var value = new MySpecialOrder()
+        {
+            ID = 10,
+            Name = "MyName",
+            SecondaryID = 1000
+        };
 
         var actual = SerializeAndDeserialize(
             value: value,

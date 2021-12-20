@@ -724,7 +724,12 @@ public class PropertyHelperTest
     public void ObjectToDictionary_ReturnsInheritedProperties()
     {
         // Arrange
-        var value = new ThreeDPoint() { X = 5, Y = 10, Z = 17 };
+        var value = new ThreeDPoint()
+        {
+            X = 5,
+            Y = 10,
+            Z = 17
+        };
 
         // Act
         var dictValues = PropertyHelper.ObjectToDictionary(value);

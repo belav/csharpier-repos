@@ -5142,7 +5142,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var info = new Info { Title = "MyBook" };
 
-            var book = new Book { BookId = MyBookId, Pages = 99, EnglishInfo = info };
+            var book = new Book
+            {
+                BookId = MyBookId,
+                Pages = 99,
+                EnglishInfo = info
+            };
 
             using (var context = new BooksContext(nameof(BooksContext)))
             {
@@ -5173,7 +5178,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 var newInfo = new Info { Title = "MyBook Rev 2" };
 
-                var newBook = new Book { BookId = MyBookId, Pages = 100, EnglishInfo = newInfo };
+                var newBook = new Book
+                {
+                    BookId = MyBookId,
+                    Pages = 100,
+                    EnglishInfo = newInfo
+                };
 
                 context.Remove(book);
 
@@ -5216,7 +5226,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var info = new Info { Title = "MyBook" };
 
-            var book = new Book { BookId = MyBookId, Pages = 99, EnglishInfo = info };
+            var book = new Book
+            {
+                BookId = MyBookId,
+                Pages = 99,
+                EnglishInfo = info
+            };
 
             using (var context = new BooksContext(nameof(BooksContext)))
             {
@@ -5247,7 +5262,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 var newInfo = new Info { Title = "MyBook Rev 2" };
 
-                var newBook = new Book { BookId = MyBookId, Pages = 100, EnglishInfo = newInfo };
+                var newBook = new Book
+                {
+                    BookId = MyBookId,
+                    Pages = 100,
+                    EnglishInfo = newInfo
+                };
 
                 context.Remove(book);
 

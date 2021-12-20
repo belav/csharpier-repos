@@ -114,7 +114,12 @@ namespace AutoMapper.UnitTests.ValueTypes
         [Fact]
         public void Should_map_correctly()
         {
-            var source = new matrixDigiInStruct1 { CNCinfo = 5, Reg1 = 6, Reg2 = 7 };
+            var source = new matrixDigiInStruct1
+            {
+                CNCinfo = 5,
+                Reg1 = 6,
+                Reg2 = 7
+            };
             var dest = Mapper.Map<matrixDigiInStruct1, DigiIn1>(source);
 
             dest.CncInfo.ShouldBe(source.CNCinfo);

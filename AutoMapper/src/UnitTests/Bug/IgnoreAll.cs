@@ -61,7 +61,12 @@ namespace AutoMapper.UnitTests.Bug
         protected override void Because_of()
         {
             var source = new Source();
-            _destination = new Dest { Value1 = "Foo", Value2 = 10, Unmapped = "Asdf" };
+            _destination = new Dest
+            {
+                Value1 = "Foo",
+                Value2 = 10,
+                Unmapped = "Asdf"
+            };
             Mapper.Map(source, _destination);
         }
 

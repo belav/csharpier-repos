@@ -14,7 +14,12 @@ namespace NativeExports
         [return: DNNE.C99Type("struct int_fields")]
         public static IntFields DoubleIntFields([DNNE.C99Type("struct int_fields")] IntFields input)
         {
-            return new IntFields() { a = input.a * 2, b = input.b * 2, c = input.c * 2, };
+            return new IntFields()
+            {
+                a = input.a * 2,
+                b = input.b * 2,
+                c = input.c * 2,
+            };
         }
 
         [UnmanagedCallersOnly(EntryPoint = "blittablestructs_double_intfields_byref")]

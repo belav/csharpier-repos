@@ -102,7 +102,12 @@ public class NameValueHeaderValue
             return this;
         }
 
-        return new NameValueHeaderValue() { _name = _name, _value = _value, _isReadOnly = true };
+        return new NameValueHeaderValue()
+        {
+            _name = _name,
+            _value = _value,
+            _isReadOnly = true
+        };
     }
 
     /// <inheritdoc/>

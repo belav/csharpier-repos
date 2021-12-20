@@ -62,8 +62,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             };
             var posts = new[]
             {
-                new Post { Id = 55, BlogId = 66, Comments = comments0.ToList() },
-                new Post { Id = 56, BlogId = 66, Comments = comments1.ToList() }
+                new Post
+                {
+                    Id = 55,
+                    BlogId = 66,
+                    Comments = comments0.ToList()
+                },
+                new Post
+                {
+                    Id = 56,
+                    BlogId = 66,
+                    Comments = comments1.ToList()
+                }
             };
             var blog = new Blog { Id = 66, Posts = posts.ToList() };
 
@@ -144,7 +154,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             };
             var posts = new[]
             {
-                new Post { Id = 55, BlogId = 66, Comments = comments0.ToList() },
+                new Post
+                {
+                    Id = 55,
+                    BlogId = 66,
+                    Comments = comments0.ToList()
+                },
                 new Post { BlogId = 66, Comments = comments1.ToList() }
             };
             var blog = new Blog { Id = 66, Posts = posts.ToList() };
@@ -196,10 +211,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             };
             var posts = new[]
             {
-                new Post { Id = 55, Author = author, Comments = comments0.ToList() },
-                new Post { Id = 56, Author = author, Comments = comments1.ToList() }
+                new Post
+                {
+                    Id = 55,
+                    Author = author,
+                    Comments = comments0.ToList()
+                },
+                new Post
+                {
+                    Id = 56,
+                    Author = author,
+                    Comments = comments1.ToList()
+                }
             };
-            var blog = new Blog { Id = 66, Author = author, Posts = posts.ToList() };
+            var blog = new Blog
+            {
+                Id = 66,
+                Author = author,
+                Posts = posts.ToList()
+            };
 
             context.Add(blog);
 
@@ -238,10 +268,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             };
             var posts = new[]
             {
-                new Post { Id = 55, Author = author, Comments = comments0.ToList() },
-                new Post { Id = 56, Author = author, Comments = comments1.ToList() }
+                new Post
+                {
+                    Id = 55,
+                    Author = author,
+                    Comments = comments0.ToList()
+                },
+                new Post
+                {
+                    Id = 56,
+                    Author = author,
+                    Comments = comments1.ToList()
+                }
             };
-            var blog = new Blog { Id = 66, Author = author, Posts = posts.ToList() };
+            var blog = new Blog
+            {
+                Id = 66,
+                Author = author,
+                Posts = posts.ToList()
+            };
 
             author.Comments = comments0.Concat(comments1).ToList();
             comments0[0].Post = posts[0];
@@ -274,14 +319,38 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             var comments0 = new[]
             {
-                new Comment { Id = 33, AuthorId = 22, PostId = 55, Author = author },
-                new Comment { Id = 34, AuthorId = 22, PostId = 55, Author = author }
+                new Comment
+                {
+                    Id = 33,
+                    AuthorId = 22,
+                    PostId = 55,
+                    Author = author
+                },
+                new Comment
+                {
+                    Id = 34,
+                    AuthorId = 22,
+                    PostId = 55,
+                    Author = author
+                }
             };
 
             var comments1 = new[]
             {
-                new Comment { Id = 44, AuthorId = 22, PostId = 56, Author = author },
-                new Comment { Id = 45, AuthorId = 22, PostId = 56, Author = author }
+                new Comment
+                {
+                    Id = 44,
+                    AuthorId = 22,
+                    PostId = 56,
+                    Author = author
+                },
+                new Comment
+                {
+                    Id = 45,
+                    AuthorId = 22,
+                    PostId = 56,
+                    Author = author
+                }
             };
 
             var posts = new[]
@@ -304,7 +373,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 }
             };
 
-            var blog = new Blog { Id = 66, AuthorId = 22, Author = author, Posts = posts.ToList() };
+            var blog = new Blog
+            {
+                Id = 66,
+                AuthorId = 22,
+                Author = author,
+                Posts = posts.ToList()
+            };
 
             context.Attach(blog);
 
@@ -343,10 +418,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             };
             var posts = new[]
             {
-                new Post { Id = 55, Author = author, Comments = comments0.ToList() },
-                new Post { Id = 56, Author = author, Comments = comments1.ToList() }
+                new Post
+                {
+                    Id = 55,
+                    Author = author,
+                    Comments = comments0.ToList()
+                },
+                new Post
+                {
+                    Id = 56,
+                    Author = author,
+                    Comments = comments1.ToList()
+                }
             };
-            var blog = new Blog { Id = 66, Author = author, Posts = posts.ToList() };
+            var blog = new Blog
+            {
+                Id = 66,
+                Author = author,
+                Posts = posts.ToList()
+            };
 
             context.AddRange(blog, author);
 

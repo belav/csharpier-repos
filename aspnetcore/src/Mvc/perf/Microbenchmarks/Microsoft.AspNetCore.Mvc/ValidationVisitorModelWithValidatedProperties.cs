@@ -44,8 +44,18 @@ public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBe
             Name = "Test",
             Address = new List<Address>
             {
-                new Address { Street = "1 Microsoft Way", Type = "Work", Zip = "98056", },
-                new Address { Street = "15701 NE 39th St", Type = "Home", Zip = "98052", }
+                new Address
+                {
+                    Street = "1 Microsoft Way",
+                    Type = "Work",
+                    Zip = "98056",
+                },
+                new Address
+                {
+                    Street = "15701 NE 39th St",
+                    Type = "Home",
+                    Zip = "98052",
+                }
             },
         };
 

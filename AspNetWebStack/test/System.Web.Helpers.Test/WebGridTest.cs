@@ -2277,9 +2277,30 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "-" }
                 }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 5,
+                    Manager = employees[1]
+                }
+            );
 
             var grid = new WebGrid(context, defaultSort: "Name").Bind(employees);
 
@@ -2306,9 +2327,30 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "-" }
                 }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 5,
+                    Manager = employees[1]
+                }
+            );
 
             var grid = new WebGrid(context, canSort: true, defaultSort: "Name").Bind(employees);
 
@@ -2343,9 +2385,30 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "-" }
                 }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 10,
+                    Manager = employees[1]
+                }
+            );
 
             var grid = new WebGrid(context, canSort: true).Bind(employees);
 
@@ -2381,9 +2444,30 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "-" }
                 }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 5,
+                    Manager = employees[1]
+                }
+            );
             var grid = new WebGrid(context).Bind(
                 employees,
                 columnNames: new[] { "Name", "Manager.Name" }
@@ -2410,8 +2494,22 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "-" }
                 }
             );
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 10,
+                    Manager = employees[1]
+                }
+            );
 
             // Act
             var grid = new WebGrid(context).Bind(
@@ -2453,8 +2551,22 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "-" }
                 }
             );
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 10,
+                    Manager = employees[1]
+                }
+            );
 
             // Act
             var grid = new WebGrid(context, defaultSort: "Salary").Bind(
@@ -2495,7 +2607,14 @@ namespace System.Web.Helpers.Test
                     Manager = new Employee { Name = "C" }
                 }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = null });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = null
+                }
+            );
             employees.Add(
                 new Employee
                 {

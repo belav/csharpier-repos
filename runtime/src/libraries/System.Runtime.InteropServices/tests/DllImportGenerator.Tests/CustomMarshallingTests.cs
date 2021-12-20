@@ -73,7 +73,12 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableStructWithoutAllocation()
         {
-            var boolStruct = new BoolStruct { b1 = true, b2 = false, b3 = true };
+            var boolStruct = new BoolStruct
+            {
+                b1 = true,
+                b2 = false,
+                b3 = true
+            };
 
             NativeExportsNE.NegateBools(boolStruct, out BoolStruct boolStructNegated);
 
@@ -123,7 +128,12 @@ namespace DllImportGenerator.IntegrationTests
         [InlineData(false, false, false)]
         public void NonBlittableStructIn(bool b1, bool b2, bool b3)
         {
-            var container = new BoolStruct { b1 = b1, b2 = b2, b3 = b3 };
+            var container = new BoolStruct
+            {
+                b1 = b1,
+                b2 = b2,
+                b3 = b3
+            };
 
             Assert.Equal(b1 && b2 && b3, NativeExportsNE.AndBoolsRef(container));
         }

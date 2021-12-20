@@ -91,11 +91,23 @@ namespace Newtonsoft.Json.Tests.Issues
             {
                 new TestClass
                 {
-                    Color = new Color { A = 1, G = 1, B = 1, R = 1 }
+                    Color = new Color
+                    {
+                        A = 1,
+                        G = 1,
+                        B = 1,
+                        R = 1
+                    }
                 },
                 new TestClass
                 {
-                    Color = new Color { A = 2, G = 2, B = 2, R = 2 }
+                    Color = new Color
+                    {
+                        A = 2,
+                        G = 2,
+                        B = 2,
+                        R = 2
+                    }
                 }
             };
             var settings = new JsonSerializerSettings
@@ -128,11 +140,23 @@ namespace Newtonsoft.Json.Tests.Issues
             {
                 new TestClass
                 {
-                    Color = new Color { A = 1, G = 1, B = 1, R = 1 }
+                    Color = new Color
+                    {
+                        A = 1,
+                        G = 1,
+                        B = 1,
+                        R = 1
+                    }
                 },
                 new TestClass
                 {
-                    Color = new Color { A = 2, G = 2, B = 2, R = 2 }
+                    Color = new Color
+                    {
+                        A = 2,
+                        G = 2,
+                        B = 2,
+                        R = 2
+                    }
                 }
             };
             var settings = new JsonSerializerSettings

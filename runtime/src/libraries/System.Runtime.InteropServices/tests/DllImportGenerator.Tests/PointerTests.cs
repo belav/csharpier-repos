@@ -51,7 +51,12 @@ namespace DllImportGenerator.IntegrationTests
             const int A = 24,
                 B = 37,
                 C = 59;
-            var initial = new IntFields() { a = A, b = B, c = C, };
+            var initial = new IntFields()
+            {
+                a = A,
+                b = B,
+                c = C,
+            };
             var expected = new IntFields()
             {
                 a = initial.a * 2,

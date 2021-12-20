@@ -51,7 +51,13 @@ namespace Benchmark.Flattening
                         Id = 5,
                         Street = "istiklal cad."
                     },
-                    new Address() { City = "izmir", Country = "turkey", Id = 6, Street = "konak" }
+                    new Address()
+                    {
+                        City = "izmir",
+                        Country = "turkey",
+                        Id = 6,
+                        Street = "konak"
+                    }
                 },
                 Addresses = new List<Address>()
                 {
@@ -62,7 +68,13 @@ namespace Benchmark.Flattening
                         Id = 3,
                         Street = "istiklal cad."
                     },
-                    new Address() { City = "izmir", Country = "turkey", Id = 4, Street = "konak" }
+                    new Address()
+                    {
+                        City = "izmir",
+                        Country = "turkey",
+                        Id = 4,
+                        Street = "konak"
+                    }
                 }.ToArray()
             };
         }
@@ -144,7 +156,13 @@ namespace Benchmark.Flattening
                         Id = 5,
                         Street = "istiklal cad."
                     },
-                    new Address() { City = "izmir", Country = "turkey", Id = 6, Street = "konak" }
+                    new Address()
+                    {
+                        City = "izmir",
+                        Country = "turkey",
+                        Id = 6,
+                        Street = "konak"
+                    }
                 },
                 Addresses = new List<Address>()
                 {
@@ -155,7 +173,13 @@ namespace Benchmark.Flattening
                         Id = 3,
                         Street = "istiklal cad."
                     },
-                    new Address() { City = "izmir", Country = "turkey", Id = 4, Street = "konak" }
+                    new Address()
+                    {
+                        City = "izmir",
+                        Country = "turkey",
+                        Id = 4,
+                        Street = "konak"
+                    }
                 }.ToArray()
             };
         }
@@ -289,9 +313,24 @@ namespace Benchmark.Flattening
                 Foo1 = new InnerFoo { Name = "foo one" },
                 Foos = new List<InnerFoo>
                 {
-                    new InnerFoo { Name = "j1", Int64 = 123, NullInt = 321 },
-                    new InnerFoo { Name = "j2", Int32 = 12345, NullInt = 54321 },
-                    new InnerFoo { Name = "j3", Int32 = 12345, NullInt = 54321 },
+                    new InnerFoo
+                    {
+                        Name = "j1",
+                        Int64 = 123,
+                        NullInt = 321
+                    },
+                    new InnerFoo
+                    {
+                        Name = "j2",
+                        Int32 = 12345,
+                        NullInt = 54321
+                    },
+                    new InnerFoo
+                    {
+                        Name = "j3",
+                        Int32 = 12345,
+                        NullInt = 54321
+                    },
                 },
                 FooArr = new[]
                 {
@@ -400,7 +439,12 @@ namespace Benchmark.Flattening
             foreach (var foo in _foo.Foos)
             {
                 dest.Foos.Add(
-                    new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt }
+                    new InnerFooDest
+                    {
+                        Name = foo.Name,
+                        Int64 = foo.Int64,
+                        NullInt = foo.NullInt
+                    }
                 );
             }
             ;

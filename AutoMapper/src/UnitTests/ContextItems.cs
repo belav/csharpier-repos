@@ -280,8 +280,18 @@ namespace AutoMapper.UnitTests
                 {
                     FromCars = new List<FromCar>
                     {
-                        new FromCar { Door = door, Id = 2, Name = "Volvo" },
-                        new FromCar { Door = door, Id = 3, Name = "Hyundai" },
+                        new FromCar
+                        {
+                            Door = door,
+                            Id = 2,
+                            Name = "Volvo"
+                        },
+                        new FromCar
+                        {
+                            Door = door,
+                            Id = 3,
+                            Name = "Hyundai"
+                        },
                     }
                 };
 

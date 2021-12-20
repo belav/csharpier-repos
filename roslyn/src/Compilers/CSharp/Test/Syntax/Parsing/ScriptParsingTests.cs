@@ -69,7 +69,12 @@ static partial class C { }
 ";
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1585, Line = 4, Column = 1 } //static must precede type
+                new ErrorDescription
+                {
+                    Code = 1585,
+                    Line = 4,
+                    Column = 1
+                } //static must precede type
             );
         }
 
@@ -323,7 +328,15 @@ Script() { }
                 @"
 static Script() { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1520, Line = 2, Column = 8 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1520,
+                    Line = 2,
+                    Column = 8
+                }
+            );
         }
 
         [Fact]
@@ -1784,12 +1797,42 @@ new public bool this[int index] { get; }
             var test = @"string this ="""";";
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1001, Line = 1, Column = 13 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 13 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 16 },
-                new ErrorDescription { Code = 1514, Line = 1, Column = 16 },
-                new ErrorDescription { Code = 1014, Line = 1, Column = 16 },
-                new ErrorDescription { Code = 1513, Line = 1, Column = 17 }
+                new ErrorDescription
+                {
+                    Code = 1001,
+                    Line = 1,
+                    Column = 13
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 13
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 16
+                },
+                new ErrorDescription
+                {
+                    Code = 1514,
+                    Line = 1,
+                    Column = 16
+                },
+                new ErrorDescription
+                {
+                    Code = 1014,
+                    Line = 1,
+                    Column = 16
+                },
+                new ErrorDescription
+                {
+                    Code = 1513,
+                    Line = 1,
+                    Column = 17
+                }
             );
 
             CreateCompilation(test)
@@ -1949,7 +1992,15 @@ extern alias Goo();
 extern alias Goo { get; }
 extern alias Goo<T> { get; }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 7002, Line = 5, Column = 14 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 7002,
+                    Line = 5,
+                    Column = 14
+                }
+            );
         }
 
         [Fact]
@@ -1960,7 +2011,15 @@ extern alias Goo<T> { get; }
 using(var x = 1) { }
 extern alias Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -1971,7 +2030,15 @@ extern alias Goo;
 extern void goo();
 extern alias Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -1982,7 +2049,15 @@ extern alias Goo;
 int a = 1;
 extern alias Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -1994,7 +2069,15 @@ extern alias Goo { get; }
 extern alias Goo;
 ";
 
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -2005,7 +2088,15 @@ extern alias Goo;
 using(var x = 1) { }
 using Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1529, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1529,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -2016,7 +2107,15 @@ using Goo;
 void goo() { }
 using Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1529, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1529,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         #endregion
@@ -2089,7 +2188,15 @@ new partial void Goo();
                 @"
 partial void Goo(){};
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1597, Line = 2, Column = 21 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1597,
+                    Line = 2,
+                    Column = 21
+                }
+            );
         }
 
         [Fact]
@@ -8777,10 +8884,30 @@ Console.Goo()
             var test = @"operator";
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 1 },
-                new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1031,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 1
+                },
+                new ErrorDescription
+                {
+                    Code = 1026,
+                    Line = 1,
+                    Column = 9
+                },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_SemicolonExpected,
@@ -8796,10 +8923,30 @@ Console.Goo()
             var test = @"implicit";
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1031,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1026,
+                    Line = 1,
+                    Column = 9
+                },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_SemicolonExpected,
@@ -8815,10 +8962,30 @@ Console.Goo()
             var test = @"explicit";
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1031,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1026,
+                    Line = 1,
+                    Column = 9
+                },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_SemicolonExpected,
@@ -8840,7 +9007,15 @@ const int w;
 readonly int y;
 static int z;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 145, Line = 3, Column = 11 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 145,
+                    Line = 3,
+                    Column = 11
+                }
+            );
         }
 
         /// bug="3782" project = "Roslyn"
@@ -8876,16 +9051,36 @@ interface IC { }
 ";
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1525, Line = 2, Column = 1 },
+                new ErrorDescription
+                {
+                    Code = 1525,
+                    Line = 2,
+                    Column = 1
+                },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_SemicolonExpected,
                     Line = 2,
                     Column = 10
                 },
-                new ErrorDescription { Code = 1525, Line = 2, Column = 25 },
-                new ErrorDescription { Code = 1525, Line = 2, Column = 26 },
-                new ErrorDescription { Code = 1733, Line = 2, Column = 35 }
+                new ErrorDescription
+                {
+                    Code = 1525,
+                    Line = 2,
+                    Column = 25
+                },
+                new ErrorDescription
+                {
+                    Code = 1525,
+                    Line = 2,
+                    Column = 26
+                },
+                new ErrorDescription
+                {
+                    Code = 1733,
+                    Line = 2,
+                    Column = 35
+                }
             );
         }
 
@@ -8951,9 +9146,24 @@ p class A
 
             ParseAndValidate(
                 test,
-                new ErrorDescription { Code = 1733, Line = 1, Column = 28 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 28 },
-                new ErrorDescription { Code = 1733, Line = 1, Column = 28 }
+                new ErrorDescription
+                {
+                    Code = 1733,
+                    Line = 1,
+                    Column = 28
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 28
+                },
+                new ErrorDescription
+                {
+                    Code = 1733,
+                    Line = 1,
+                    Column = 28
+                }
             );
         }
 

@@ -684,7 +684,13 @@ class Program
 
             {
                 Func<MediumStruct, MediumStruct> f = o.MediumStructGeneric<object>;
-                MediumStruct x = new MediumStruct { X = 12, Y = 34, Z = 56, W = 78 };
+                MediumStruct x = new MediumStruct
+                {
+                    X = 12,
+                    Y = 34,
+                    Z = 56,
+                    W = 78
+                };
                 MediumStruct result = f(x);
                 if (result.X != x.X || result.Y != x.Y || result.Z != x.Z || result.W != x.W)
                     throw new Exception();

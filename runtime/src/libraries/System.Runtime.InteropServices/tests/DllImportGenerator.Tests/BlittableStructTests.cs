@@ -71,7 +71,12 @@ namespace DllImportGenerator.IntegrationTests
             const int A = 24,
                 B = 37,
                 C = 59;
-            var initial = new IntFields() { a = A, b = B, c = C, };
+            var initial = new IntFields()
+            {
+                a = A,
+                b = B,
+                c = C,
+            };
             var expected = new IntFields()
             {
                 a = initial.a * 2,
@@ -126,14 +131,24 @@ namespace DllImportGenerator.IntegrationTests
             int i = iInitial;
             bool b = bInitial;
             char c = cInitial;
-            var initial = new PointerFields() { i = &i, b = &b, c = &c, };
+            var initial = new PointerFields()
+            {
+                i = &i,
+                b = &b,
+                c = &c,
+            };
 
             PointerFields input = initial;
             {
                 int iResult;
                 bool bResult;
                 char cResult;
-                var result = new PointerFields() { i = &iResult, b = &bResult, c = &cResult };
+                var result = new PointerFields()
+                {
+                    i = &iResult,
+                    b = &bResult,
+                    c = &cResult
+                };
                 NativeExportsNE.IncrementInvertPointerFieldsRefReturn(input, ref result);
                 Assert.Equal(initial, input);
                 ValidateFieldValues(result);

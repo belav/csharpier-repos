@@ -20,7 +20,12 @@ namespace System.IO.Tests
         public void CharacterDevice_FileStream_Write(string devicePath, FileOptions fileOptions)
         {
             FileStreamOptions options =
-                new() { Options = fileOptions, Access = FileAccess.Write, Share = FileShare.Write };
+                new()
+                {
+                    Options = fileOptions,
+                    Access = FileAccess.Write,
+                    Share = FileShare.Write
+                };
             using FileStream fs = new(devicePath, options);
             fs.Write(Encoding.UTF8.GetBytes("foo"));
         }
@@ -33,7 +38,12 @@ namespace System.IO.Tests
         )
         {
             FileStreamOptions options =
-                new() { Options = fileOptions, Access = FileAccess.Write, Share = FileShare.Write };
+                new()
+                {
+                    Options = fileOptions,
+                    Access = FileAccess.Write,
+                    Share = FileShare.Write
+                };
             using FileStream fs = new(devicePath, options);
             await fs.WriteAsync(Encoding.UTF8.GetBytes("foo"));
         }

@@ -2301,7 +2301,12 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
         }
 
         private static DoubleDataTypes CreateDoubleDataTypes(int id) =>
-            new() { Id = id, Double3 = 83.3f, Double25 = 83.33f };
+            new()
+            {
+                Id = id,
+                Double3 = 83.3f,
+                Double25 = 83.33f
+            };
 
         [ConditionalFact]
         public virtual void Can_insert_and_read_back_all_mapped_data_types_with_precision_and_scale()

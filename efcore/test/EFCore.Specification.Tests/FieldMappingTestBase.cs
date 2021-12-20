@@ -1925,8 +1925,18 @@ namespace Microsoft.EntityFrameworkCore
 
             return new List<TPost>
             {
-                new() { AccessId = 20, AccessTitle = "Post20", AccessBlog = blog },
-                new() { AccessId = 21, AccessTitle = "Post21", AccessBlog = blog }
+                new()
+                {
+                    AccessId = 20,
+                    AccessTitle = "Post20",
+                    AccessBlog = blog
+                },
+                new()
+                {
+                    AccessId = 21,
+                    AccessTitle = "Post21",
+                    AccessBlog = blog
+                }
             };
         }
 

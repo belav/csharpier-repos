@@ -397,7 +397,12 @@ namespace Microsoft.EntityFrameworkCore.Update
             relatedFakeEntry.SetEntityState(EntityState.Added);
 
             var fakeEntry2 = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 2, RelatedId = 1, Value = "Test2" }
+                new FakeEntity
+                {
+                    Id = 2,
+                    RelatedId = 1,
+                    Value = "Test2"
+                }
             );
             fakeEntry2.SetEntityState(EntityState.Modified);
             fakeEntry2.SetOriginalValue(
@@ -509,7 +514,12 @@ ForeignKey { 'RelatedId' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabl
             relatedFakeEntry.SetEntityState(EntityState.Added);
 
             var fakeEntry2 = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 2, RelatedId = 1, UniqueValue = "Test2" }
+                new FakeEntity
+                {
+                    Id = 2,
+                    RelatedId = 1,
+                    UniqueValue = "Test2"
+                }
             );
             fakeEntry2.SetEntityState(EntityState.Modified);
             fakeEntry2.SetOriginalValue(

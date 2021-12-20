@@ -854,9 +854,7 @@ public class Class1
                 TestCode = initialMarkup,
                 FixedState = { Sources = { expectedResult1, (newFileName, expectedResult2) } },
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp10
-            }
-                .RunAsync()
-                .ConfigureAwait(false);
+            }.RunAsync().ConfigureAwait(false);
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMoveStaticMembers)]

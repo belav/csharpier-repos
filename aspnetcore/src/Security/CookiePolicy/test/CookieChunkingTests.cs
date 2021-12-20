@@ -201,7 +201,12 @@ public class CookieChunkingTests
             "TestCookieC7=STUVWXYZ"
         };
 
-        var cookieOptions = new CookieOptions() { Domain = "foo.com", Path = "/", Secure = true };
+        var cookieOptions = new CookieOptions()
+        {
+            Domain = "foo.com",
+            Path = "/",
+            Secure = true
+        };
 
         httpContext.Response.Headers[HeaderNames.SetCookie] = new[]
         {

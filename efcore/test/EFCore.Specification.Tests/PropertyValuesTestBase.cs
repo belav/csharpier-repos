@@ -2776,7 +2776,12 @@ namespace Microsoft.EntityFrameworkCore
             private Building() { }
 
             public static Building Create(Guid buildingId, string name, decimal value) =>
-                new() { BuildingId = buildingId, Name = name, Value = value };
+                new()
+                {
+                    BuildingId = buildingId,
+                    Name = name,
+                    Value = value
+                };
 
             public Guid BuildingId { get; set; }
             public string Name { get; set; }

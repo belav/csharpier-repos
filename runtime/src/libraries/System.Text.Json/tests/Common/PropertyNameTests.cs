@@ -560,7 +560,15 @@ namespace System.Text.Json.Serialization.Tests
         public async Task SpecialCharacters()
         {
             ClassWithSpecialCharacters obj =
-                new() { Baseline = 1, Schema = 2, SmtpId = 3, Emojies = 4, ꀀ = 5, YiIt_2 = 6 };
+                new()
+                {
+                    Baseline = 1,
+                    Schema = 2,
+                    SmtpId = 3,
+                    Emojies = 4,
+                    ꀀ = 5,
+                    YiIt_2 = 6
+                };
 
             string json = await JsonSerializerWrapperForString.SerializeWrapper(obj);
             Assert.Equal(

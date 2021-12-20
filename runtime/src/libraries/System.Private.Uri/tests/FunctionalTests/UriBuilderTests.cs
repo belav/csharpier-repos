@@ -638,7 +638,12 @@ namespace System.PrivateUri.Tests
             };
             yield return new object[]
             {
-                new UriBuilder() { Scheme = "unknown", Host = "", Path = "path1/path2" },
+                new UriBuilder()
+                {
+                    Scheme = "unknown",
+                    Host = "",
+                    Path = "path1/path2"
+                },
                 "unknown:path1/path2"
             };
             yield return new object[]
@@ -688,12 +693,22 @@ namespace System.PrivateUri.Tests
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "path", Query = "query" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Query = "query"
+                },
                 "http://host/path?query"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "path", Fragment = "fragment" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Fragment = "fragment"
+                },
                 "http://host/path#fragment"
             };
             yield return new object[]
@@ -719,7 +734,12 @@ namespace System.PrivateUri.Tests
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Query = "query", Fragment = "fragment" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Query = "query",
+                    Fragment = "fragment"
+                },
                 "http://host/?query#fragment"
             };
         }

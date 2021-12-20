@@ -45,7 +45,12 @@ namespace System.Net.Formatting.Tests
         [Fact]
         public Task NormalClass()
         {
-            var source = new NormalClass { FirstName = "John", LastName = "Smith", Item = "Socks" };
+            var source = new NormalClass
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Item = "Socks"
+            };
             return SerializerConsistencyHepers.TestAsync(source);
         }
 

@@ -99,9 +99,19 @@ OFFSET 0 LIMIT 1";
             int listCount
         )
         {
-            var customer1 = new Customer { Id = 42, Name = "Theon", PartitionKey = 1 };
+            var customer1 = new Customer
+            {
+                Id = 42,
+                Name = "Theon",
+                PartitionKey = 1
+            };
 
-            var customer2 = new Customer { Id = 42, Name = "Theon Twin", PartitionKey = 2 };
+            var customer2 = new Customer
+            {
+                Id = 42,
+                Name = "Theon Twin",
+                PartitionKey = 2
+            };
 
             await using (var innerContext = CreateContext())
             {

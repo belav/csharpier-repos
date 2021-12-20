@@ -90,8 +90,18 @@ namespace System.Linq.Tests
             CustomerRec[] outer = { };
             OrderRec[] inner = new[]
             {
-                new OrderRec { orderID = 45321, custID = 98022, total = 50 },
-                new OrderRec { orderID = 97865, custID = 32103, total = 25 }
+                new OrderRec
+                {
+                    orderID = 45321,
+                    custID = 98022,
+                    total = 50
+                },
+                new OrderRec
+                {
+                    orderID = 97865,
+                    custID = 32103,
+                    total = 25
+                }
             };
             Assert.Empty(
                 outer
@@ -122,8 +132,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
             JoinRec[] expected = new[]
             {
@@ -133,7 +153,12 @@ namespace System.Linq.Tests
                     orderID = new int?[] { 93489 },
                     total = new int?[] { 45 }
                 },
-                new JoinRec { name = "Bob", orderID = new int?[] { }, total = new int?[] { } },
+                new JoinRec
+                {
+                    name = "Bob",
+                    orderID = new int?[] { },
+                    total = new int?[] { }
+                },
                 new JoinRec
                 {
                     name = "Robert",
@@ -168,8 +193,18 @@ namespace System.Linq.Tests
             IQueryable<CustomerRec> outer = null;
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -234,8 +269,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -270,8 +315,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -306,8 +361,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -331,8 +396,18 @@ namespace System.Linq.Tests
             IQueryable<CustomerRec> outer = null;
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -395,8 +470,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -430,8 +515,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -465,8 +560,18 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -494,13 +599,33 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = new[]
             {
-                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec
+                {
+                    name = "Robert",
+                    orderID = 93483,
+                    total = 19
+                },
+                new AnagramRec
+                {
+                    name = "miT",
+                    orderID = 93489,
+                    total = 45
+                }
             };
             JoinRec[] expected = new[]
             {
-                new JoinRec { name = "Tim", orderID = new int?[] { }, total = new int?[] { } },
-                new JoinRec { name = "Bob", orderID = new int?[] { }, total = new int?[] { } },
+                new JoinRec
+                {
+                    name = "Tim",
+                    orderID = new int?[] { },
+                    total = new int?[] { }
+                },
+                new JoinRec
+                {
+                    name = "Bob",
+                    orderID = new int?[] { },
+                    total = new int?[] { }
+                },
                 new JoinRec
                 {
                     name = "Robert",

@@ -57,7 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public void AddColumnOperation_required_args()
         {
             Test(
-                new AddColumnOperation { Name = "Id", Table = "Post", ClrType = typeof(int) },
+                new AddColumnOperation
+                {
+                    Name = "Id",
+                    Table = "Post",
+                    ClrType = typeof(int)
+                },
                 "mb.AddColumn<int>("
                     + _eol
                     + "    name: \"Id\","
@@ -592,7 +597,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public void AlterColumnOperation_required_args()
         {
             Test(
-                new AlterColumnOperation { Name = "Id", Table = "Post", ClrType = typeof(int) },
+                new AlterColumnOperation
+                {
+                    Name = "Id",
+                    Table = "Post",
+                    ClrType = typeof(int)
+                },
                 "mb.AlterColumn<int>("
                     + _eol
                     + "    name: \"Id\","
@@ -957,7 +967,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     MinValue = 2,
                     MaxValue = 4,
                     IsCyclic = true,
-                    OldSequence = { IncrementBy = 4, MinValue = 3, MaxValue = 5, IsCyclic = true }
+                    OldSequence =
+                    {
+                        IncrementBy = 4,
+                        MinValue = 3,
+                        MaxValue = 5,
+                        IsCyclic = true
+                    }
                 },
                 "mb.AlterSequence("
                     + _eol
@@ -2277,7 +2293,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public void DropColumnOperation_all_args()
         {
             Test(
-                new DropColumnOperation { Name = "Id", Schema = "dbo", Table = "Post" },
+                new DropColumnOperation
+                {
+                    Name = "Id",
+                    Schema = "dbo",
+                    Table = "Post"
+                },
                 "mb.DropColumn("
                     + _eol
                     + "    name: \"Id\","
@@ -2355,7 +2376,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public void DropIndexOperation_all_args()
         {
             Test(
-                new DropIndexOperation { Name = "IX_Post_Title", Schema = "dbo", Table = "Post" },
+                new DropIndexOperation
+                {
+                    Name = "IX_Post_Title",
+                    Schema = "dbo",
+                    Table = "Post"
+                },
                 "mb.DropIndex("
                     + _eol
                     + "    name: \"IX_Post_Title\","
@@ -2394,7 +2420,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public void DropPrimaryKeyOperation_all_args()
         {
             Test(
-                new DropPrimaryKeyOperation { Name = "PK_Post", Schema = "dbo", Table = "Post" },
+                new DropPrimaryKeyOperation
+                {
+                    Name = "PK_Post",
+                    Schema = "dbo",
+                    Table = "Post"
+                },
                 "mb.DropPrimaryKey("
                     + _eol
                     + "    name: \"PK_Post\","
@@ -2565,7 +2596,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public void RenameColumnOperation_required_args()
         {
             Test(
-                new RenameColumnOperation { Name = "Id", Table = "Post", NewName = "PostId" },
+                new RenameColumnOperation
+                {
+                    Name = "Id",
+                    Table = "Post",
+                    NewName = "PostId"
+                },
                 "mb.RenameColumn("
                     + _eol
                     + "    name: \"Id\","

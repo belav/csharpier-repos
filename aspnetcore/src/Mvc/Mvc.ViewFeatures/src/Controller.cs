@@ -155,7 +155,12 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     {
         ViewData.Model = model;
 
-        return new ViewResult() { ViewName = viewName, ViewData = ViewData, TempData = TempData };
+        return new ViewResult()
+        {
+            ViewName = viewName,
+            ViewData = ViewData,
+            TempData = TempData
+        };
     }
 
     /// <summary>

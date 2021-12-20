@@ -194,7 +194,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Child c = new Child { PropertyName = "value?" };
             IList<string> l = new List<string> { "value!" };
-            Parent p = new Parent { Child1 = c, Child2 = c, List1 = l, List2 = l };
+            Parent p = new Parent
+            {
+                Child1 = c,
+                Child2 = c,
+                List1 = l,
+                List2 = l
+            };
 
             string json = JsonConvert.SerializeObject(
                 p,

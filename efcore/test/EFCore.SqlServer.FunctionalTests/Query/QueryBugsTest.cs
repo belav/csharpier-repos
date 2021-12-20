@@ -823,9 +823,24 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                     .Entity<Dragon>()
                     .ToTable("Dragon")
                     .HasData(
-                        new Dragon { Id = 1, Name = "Drogon", MotherId = 2 },
-                        new Dragon { Id = 2, Name = "Rhaegal", MotherId = 2 },
-                        new Dragon { Id = 3, Name = "Viserion", MotherId = 2 },
+                        new Dragon
+                        {
+                            Id = 1,
+                            Name = "Drogon",
+                            MotherId = 2
+                        },
+                        new Dragon
+                        {
+                            Id = 2,
+                            Name = "Rhaegal",
+                            MotherId = 2
+                        },
+                        new Dragon
+                        {
+                            Id = 3,
+                            Name = "Viserion",
+                            MotherId = 2
+                        },
                         new Dragon { Id = 4, Name = "Balerion" }
                     );
             }
@@ -2662,7 +2677,12 @@ BEGIN
                 };
                 var students = new List<PersonKid9038>
                 {
-                    new PersonKid9038 { Name = "Arnold", Grade = 2, Teacher = teachers[0] },
+                    new PersonKid9038
+                    {
+                        Name = "Arnold",
+                        Grade = 2,
+                        Teacher = teachers[0]
+                    },
                     new PersonKid9038
                     {
                         Name = "Eric",
@@ -9701,13 +9721,33 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]"
             {
                 var tmp_a = new A19253[]
                 {
-                    new A19253 { a = "a0", a1 = "a1", forkey = "a" },
-                    new A19253 { a = "a2", a1 = "a1", forkey = "d" },
+                    new A19253
+                    {
+                        a = "a0",
+                        a1 = "a1",
+                        forkey = "a"
+                    },
+                    new A19253
+                    {
+                        a = "a2",
+                        a1 = "a1",
+                        forkey = "d"
+                    },
                 };
                 var tmp_b = new B19253[]
                 {
-                    new B19253 { b = "b0", b1 = "b1", forkey = "a" },
-                    new B19253 { b = "b2", b1 = "b1", forkey = "c" },
+                    new B19253
+                    {
+                        b = "b0",
+                        b1 = "b1",
+                        forkey = "a"
+                    },
+                    new B19253
+                    {
+                        b = "b2",
+                        b1 = "b1",
+                        forkey = "c"
+                    },
                 };
                 A.AddRange(tmp_a);
                 B.AddRange(tmp_b);

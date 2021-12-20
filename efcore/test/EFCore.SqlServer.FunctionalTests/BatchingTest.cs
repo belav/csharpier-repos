@@ -89,7 +89,12 @@ namespace Microsoft.EntityFrameworkCore
                     context.Owners.Add(owner1);
                     context.Owners.Add(owner2);
 
-                    var blog1 = new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 };
+                    var blog1 = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner1,
+                        Order = 1
+                    };
 
                     context.Set<Blog>().Add(blog1);
                     expectedBlogs.Add(blog1);
@@ -99,12 +104,22 @@ namespace Microsoft.EntityFrameworkCore
                     owner2.Name = "2";
 
                     blog1.Order = 0;
-                    var blog2 = new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 };
+                    var blog2 = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner1,
+                        Order = 1
+                    };
 
                     context.Set<Blog>().Add(blog2);
                     expectedBlogs.Add(blog2);
 
-                    var blog3 = new Blog { Id = Guid.NewGuid(), Owner = owner2, Order = 2 };
+                    var blog3 = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner2,
+                        Order = 2
+                    };
 
                     context.Set<Blog>().Add(blog3);
                     expectedBlogs.Add(blog3);
@@ -172,10 +187,38 @@ namespace Microsoft.EntityFrameworkCore
                 context.Owners.Add(owner1);
                 context.Owners.Add(owner2);
 
-                blogs.Add(new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 });
-                blogs.Add(new Blog { Id = Guid.NewGuid(), Owner = owner2, Order = 2 });
-                blogs.Add(new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 3 });
-                blogs.Add(new Blog { Id = Guid.NewGuid(), Owner = owner2, Order = 4 });
+                blogs.Add(
+                    new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner1,
+                        Order = 1
+                    }
+                );
+                blogs.Add(
+                    new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner2,
+                        Order = 2
+                    }
+                );
+                blogs.Add(
+                    new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner1,
+                        Order = 3
+                    }
+                );
+                blogs.Add(
+                    new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner2,
+                        Order = 4
+                    }
+                );
 
                 context.AddRange(blogs);
 
@@ -227,7 +270,12 @@ namespace Microsoft.EntityFrameworkCore
                 for (var h = 0; h <= 40; h++)
                 {
                     var owner = owners[h % 2];
-                    var blog = new Blog { Id = Guid.NewGuid(), Owner = owner, Order = h };
+                    var blog = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner,
+                        Order = h
+                    };
 
                     for (var i = 0; i <= 40; i++)
                     {

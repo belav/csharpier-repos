@@ -19,8 +19,18 @@ namespace Microsoft.EntityFrameworkCore
                 null
             );
             var table = new DatabaseTable { Database = new DatabaseModel(), Name = "foo" };
-            var input1 = new DatabaseColumn { Table = table, Name = "Id", StoreType = "int" };
-            var input2 = new DatabaseColumn { Table = table, Name = "Id", StoreType = "int" };
+            var input1 = new DatabaseColumn
+            {
+                Table = table,
+                Name = "Id",
+                StoreType = "int"
+            };
+            var input2 = new DatabaseColumn
+            {
+                Table = table,
+                Name = "Id",
+                StoreType = "int"
+            };
 
             Assert.Equal("Id", namer.GetName(input1));
             Assert.Equal("Id", namer.GetName(input1));

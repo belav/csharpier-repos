@@ -164,7 +164,12 @@ public class HtmlGenerationTest
 
         AssertImgElement(
             document.GetElementById("1"),
-            new() { ["src"] = "/images/red.png", ["alt"] = "Red block", ["title"] = "<the title>", }
+            new()
+            {
+                ["src"] = "/images/red.png",
+                ["alt"] = "Red block",
+                ["title"] = "<the title>",
+            }
         );
 
         // <img src = "/images/red.png?v=W2F5D366_nQ2fQqUk3URdgWy2ZekXjHzHJaY5yaiOOk" alt = "Red versioned" title = "Red versioned" />

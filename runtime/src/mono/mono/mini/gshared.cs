@@ -634,7 +634,12 @@ public class Tests
     {
         object o = t;
         T t2 = (T)o;
-        return new A() { a = 1, b = 2, c = 3 };
+        return new A()
+        {
+            a = 1,
+            b = 2,
+            c = 3
+        };
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -673,7 +678,12 @@ public class Tests
             return 3;
         if (return2_t_out(2.0f) != 2.0f)
             return 4;
-        A a = new A() { a = 1, b = 2, c = 3 };
+        A a = new A()
+        {
+            a = 1,
+            b = 2,
+            c = 3
+        };
         A a2 = return2_t_out(a);
         if (a2.a != 1 || a2.b != 2 || a2.c != 3)
             return 5;
@@ -762,7 +772,14 @@ public class Tests
         int i = 1;
         for (int j = 0; j < 10; ++j)
             i++;
-        locals<Foo1>(new Foo1() { i1 = 1, i2 = 2, i3 = 3 });
+        locals<Foo1>(
+            new Foo1()
+            {
+                i1 = 1,
+                i2 = 2,
+                i3 = 3
+            }
+        );
         return 0;
     }
 
@@ -2461,7 +2478,13 @@ public class Tests
             6,
             7,
             8,
-            new BStruct() { a = 1, b = 2, c = 3, d = 4 }
+            new BStruct()
+            {
+                a = 1,
+                b = 2,
+                c = 3,
+                d = 4
+            }
         );
         if (res != 10)
             return 1;

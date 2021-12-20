@@ -675,7 +675,12 @@ DROP DATABASE [Northwind];
         public virtual void MoveTableOperation_legacy()
         {
             Generate(
-                new RenameTableOperation { Name = "People", Schema = "dbo", NewSchema = "hr" }
+                new RenameTableOperation
+                {
+                    Name = "People",
+                    Schema = "dbo",
+                    NewSchema = "hr"
+                }
             );
 
             AssertSql(

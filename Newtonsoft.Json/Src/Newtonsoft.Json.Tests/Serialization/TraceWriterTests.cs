@@ -1873,7 +1873,14 @@ Newtonsoft.Json Error: 0 : Error!
 
         public void Trace(TraceLevel level, string message, Exception ex)
         {
-            TraceRecords.Add(new TraceRecord { Level = level, Message = message, Exception = ex });
+            TraceRecords.Add(
+                new TraceRecord
+                {
+                    Level = level,
+                    Message = message,
+                    Exception = ex
+                }
+            );
         }
 
         public override string ToString()

@@ -265,7 +265,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 context.Add(new WithStringKey { Id = "Fire" });
                 context.Add(new WithStringKey { Id = "Empire" });
 
-                context.Add(new WithStringFk { Id = "Wendy", Fk = "Stereo", SelfFk = "Rodrigue" });
+                context.Add(
+                    new WithStringFk
+                    {
+                        Id = "Wendy",
+                        Fk = "Stereo",
+                        SelfFk = "Rodrigue"
+                    }
+                );
                 context.Add(new WithStringFk { Id = "And", SelfFk = "By" });
                 context.Add(new WithStringFk { Id = "Me", Fk = "Fire" });
                 context.Add(new WithStringFk { Id = "By" });

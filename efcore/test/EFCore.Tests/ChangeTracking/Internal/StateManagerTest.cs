@@ -68,7 +68,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new IdentityConflictContext();
             context.Attach(
-                new SingleKey { Id = 77, AlternateId = 66, Owned = new SingleKeyOwned() }
+                new SingleKey
+                {
+                    Id = 77,
+                    AlternateId = 66,
+                    Owned = new SingleKeyOwned()
+                }
             );
 
             var duplicateOwned = new SingleKeyOwned();
@@ -79,7 +84,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         context.Attach(
-                            new SingleKey { Id = 78, AlternateId = 67, Owned = duplicateOwned }
+                            new SingleKey
+                            {
+                                Id = 78,
+                                AlternateId = 67,
+                                Owned = duplicateOwned
+                            }
                         )
                 ).Message
             );
@@ -90,7 +100,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new IdentityConflictContext();
             context.Attach(
-                new CompositeKey { Id1 = 77, Id2 = 78, AlternateId1 = 66, AlternateId2 = 67 }
+                new CompositeKey
+                {
+                    Id1 = 77,
+                    Id2 = 78,
+                    AlternateId1 = 66,
+                    AlternateId2 = 67
+                }
             );
 
             Assert.Equal(
@@ -115,7 +131,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new IdentityConflictContext();
             context.Attach(
-                new CompositeKey { Id1 = 77, Id2 = 78, AlternateId1 = 66, AlternateId2 = 67 }
+                new CompositeKey
+                {
+                    Id1 = 77,
+                    Id2 = 78,
+                    AlternateId1 = 66,
+                    AlternateId2 = 67
+                }
             );
 
             Assert.Equal(
@@ -208,7 +230,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new SensitiveIdentityConflictContext();
             context.Attach(
-                new SingleKey { Id = 77, AlternateId = 66, Owned = new SingleKeyOwned() }
+                new SingleKey
+                {
+                    Id = 77,
+                    AlternateId = 66,
+                    Owned = new SingleKeyOwned()
+                }
             );
 
             var duplicateOwned = new SingleKeyOwned();
@@ -219,7 +246,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         context.Attach(
-                            new SingleKey { Id = 78, AlternateId = 67, Owned = duplicateOwned }
+                            new SingleKey
+                            {
+                                Id = 78,
+                                AlternateId = 67,
+                                Owned = duplicateOwned
+                            }
                         )
                 ).Message
             );
@@ -230,7 +262,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new SensitiveIdentityConflictContext();
             context.Attach(
-                new CompositeKey { Id1 = 77, Id2 = 78, AlternateId1 = 66, AlternateId2 = 67 }
+                new CompositeKey
+                {
+                    Id1 = 77,
+                    Id2 = 78,
+                    AlternateId1 = 66,
+                    AlternateId2 = 67
+                }
             );
 
             Assert.Equal(
@@ -255,7 +293,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new SensitiveIdentityConflictContext();
             context.Attach(
-                new CompositeKey { Id1 = 77, Id2 = 78, AlternateId1 = 66, AlternateId2 = 67 }
+                new CompositeKey
+                {
+                    Id1 = 77,
+                    Id2 = 78,
+                    AlternateId1 = 66,
+                    AlternateId2 = 67
+                }
             );
 
             Assert.Equal(
@@ -726,13 +770,28 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var stateManager = contextServices.GetRequiredService<IStateManager>();
 
             var entry1 = stateManager.GetOrCreateEntry(
-                new Category { Id = 77, Name = "Beverages", PrincipalId = 777 }
+                new Category
+                {
+                    Id = 77,
+                    Name = "Beverages",
+                    PrincipalId = 777
+                }
             );
             var entry2 = stateManager.GetOrCreateEntry(
-                new Category { Id = 78, Name = "Foods", PrincipalId = 778 }
+                new Category
+                {
+                    Id = 78,
+                    Name = "Foods",
+                    PrincipalId = 778
+                }
             );
             var entry3 = stateManager.GetOrCreateEntry(
-                new Category { Id = 79, Name = "Stuff", PrincipalId = 779 }
+                new Category
+                {
+                    Id = 79,
+                    Name = "Stuff",
+                    PrincipalId = 779
+                }
             );
 
             entry1.SetEntityState(EntityState.Unchanged);

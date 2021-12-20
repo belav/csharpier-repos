@@ -117,7 +117,12 @@ public class HtmlGeneration_HomeController : Controller
     {
         var employees = new List<Employee>
         {
-            new Employee { Name = "EmployeeName_0", Number = 0, Address = "Employee_0 address" },
+            new Employee
+            {
+                Name = "EmployeeName_0",
+                Number = 0,
+                Address = "Employee_0 address"
+            },
             new Employee
             {
                 Name = "EmployeeName_1",
@@ -125,7 +130,12 @@ public class HtmlGeneration_HomeController : Controller
                 OfficeNumber = "1002",
                 Gender = Gender.Female
             },
-            new Employee { Name = "EmployeeName_2", Number = 2, Remote = true },
+            new Employee
+            {
+                Name = "EmployeeName_2",
+                Number = 2,
+                Remote = true
+            },
         };
 
         // Extra data that should be ignored / not used within a template.

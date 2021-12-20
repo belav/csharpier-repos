@@ -376,7 +376,13 @@ namespace Microsoft.EntityFrameworkCore
                             var cartItems = Enumerable
                                 .Range(1, itemCount)
                                 .Select(
-                                    n => new CartItem { Album = album, Count = 1, CartId = cartId }
+                                    n =>
+                                        new CartItem
+                                        {
+                                            Album = album,
+                                            Count = 1,
+                                            CartId = cartId
+                                        }
                                 )
                                 .ToArray();
 

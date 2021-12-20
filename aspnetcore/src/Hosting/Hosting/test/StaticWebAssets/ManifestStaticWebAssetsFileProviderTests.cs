@@ -574,7 +574,12 @@ public class ManifestStaticWebAssetsFileProviderTest
                                     Patterns =
                                         new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
                                         {
-                                            new() { Pattern = "**", ContentRoot = 0, Depth = 3, }
+                                            new()
+                                            {
+                                                Pattern = "**",
+                                                ContentRoot = 0,
+                                                Depth = 3,
+                                            }
                                         }
                                 }
                             }
@@ -715,7 +720,12 @@ public class ManifestStaticWebAssetsFileProviderTest
                     IsDirectory = false,
                     Name = "styles.css"
                 };
-                var js = new TestFileInfo { Exists = true, IsDirectory = true, Name = "js" };
+                var js = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = true,
+                    Name = "js"
+                };
                 var file = new TestFileInfo
                 {
                     Exists = true,
@@ -758,14 +768,24 @@ public class ManifestStaticWebAssetsFileProviderTest
             }
             if (contentRoot == "Uno")
             {
-                var css = new TestFileInfo { Exists = true, IsDirectory = true, Name = "css" };
+                var css = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = true,
+                    Name = "css"
+                };
                 var site = new TestFileInfo
                 {
                     Exists = true,
                     IsDirectory = false,
                     Name = "site.css"
                 };
-                var js = new TestFileInfo { Exists = true, IsDirectory = true, Name = "js" };
+                var js = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = true,
+                    Name = "js"
+                };
                 var projectDirectDep = new TestFileInfo
                 {
                     Exists = true,
@@ -815,7 +835,12 @@ public class ManifestStaticWebAssetsFileProviderTest
                             Patterns =
                                 new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
                                 {
-                                    new() { ContentRoot = 0, Depth = 2, Pattern = "**/*.js" }
+                                    new()
+                                    {
+                                        ContentRoot = 0,
+                                        Depth = 2,
+                                        Pattern = "**/*.js"
+                                    }
                                 },
                         },
                         ["AnotherClassLibrary"] = new()
@@ -823,7 +848,12 @@ public class ManifestStaticWebAssetsFileProviderTest
                             Patterns =
                                 new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
                                 {
-                                    new() { ContentRoot = 1, Depth = 2, Pattern = "**" }
+                                    new()
+                                    {
+                                        ContentRoot = 1,
+                                        Depth = 2,
+                                        Pattern = "**"
+                                    }
                                 }
                         }
                     }

@@ -1650,7 +1650,12 @@ public static partial class XmlSerializerTests
             "<?xml version=\"1.0\"?>\r\n<Dog xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Age>5</Age>\r\n  <Name>Bear</Name>\r\n  <Breed>GermanShepherd</Breed>\r\n</Dog>";
         var xsf = new XmlSerializerFactory();
         Func<XmlSerializer> serializerfunc = () => xsf.CreateSerializer(typeof(Dog));
-        var dog1 = new Dog() { Name = "Bear", Age = 5, Breed = DogBreed.GermanShepherd };
+        var dog1 = new Dog()
+        {
+            Name = "Bear",
+            Age = 5,
+            Breed = DogBreed.GermanShepherd
+        };
         var dog2 = SerializeAndDeserialize(dog1, baseline, serializerfunc);
         Assert.Equal(dog1.Name, dog2.Name);
         Assert.Equal(dog1.Age, dog2.Age);
@@ -2101,7 +2106,12 @@ public static partial class XmlSerializerTests
         }
 
         band = new Orchestra();
-        var trumpet = new Trumpet() { Name = "TrumpetKeyC", IsValved = false, Modulation = 'C' };
+        var trumpet = new Trumpet()
+        {
+            Name = "TrumpetKeyC",
+            IsValved = false,
+            Modulation = 'C'
+        };
         band.Instruments = new Instrument[2] { brass, trumpet };
 
         attrs = new XmlAttributes();

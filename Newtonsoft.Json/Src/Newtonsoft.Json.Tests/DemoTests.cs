@@ -65,7 +65,12 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void JsonConverter()
         {
-            HtmlColor red = new HtmlColor { Red = 255, Green = 0, Blue = 0 };
+            HtmlColor red = new HtmlColor
+            {
+                Red = 255,
+                Green = 0,
+                Blue = 0
+            };
 
             string json = JsonConvert.SerializeObject(
                 red,

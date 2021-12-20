@@ -1423,10 +1423,30 @@ namespace Microsoft.EntityFrameworkCore.Query
             private static IReadOnlyList<CustomerForLinq> CreateCustomersForLinq() =>
                 new List<CustomerForLinq>
                 {
-                    new() { Id = 1, Region = "WA", CompanyName = "Microsoft" },
-                    new() { Id = 2, Region = "WA", CompanyName = "NewMonics" },
-                    new() { Id = 3, Region = "OR", CompanyName = "NewMonics" },
-                    new() { Id = 4, Region = "CA", CompanyName = "Microsoft" }
+                    new()
+                    {
+                        Id = 1,
+                        Region = "WA",
+                        CompanyName = "Microsoft"
+                    },
+                    new()
+                    {
+                        Id = 2,
+                        Region = "WA",
+                        CompanyName = "NewMonics"
+                    },
+                    new()
+                    {
+                        Id = 3,
+                        Region = "OR",
+                        CompanyName = "NewMonics"
+                    },
+                    new()
+                    {
+                        Id = 4,
+                        Region = "CA",
+                        CompanyName = "Microsoft"
+                    }
                 };
 
             private static IReadOnlyList<OrderForLinq> CreateOrdersForLinq(
@@ -1526,8 +1546,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 1, Size = 11 },
                         Shoes =
                         {
-                            new() { Id = 1, Style = "Sneakers", Age = 19 },
-                            new() { Id = 2, Style = "Dress", Age = 20 }
+                            new()
+                            {
+                                Id = 1,
+                                Style = "Sneakers",
+                                Age = 19
+                            },
+                            new()
+                            {
+                                Id = 2,
+                                Style = "Dress",
+                                Age = 20
+                            }
                         }
                     },
                     new()
@@ -1540,8 +1570,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 2, Size = 12 },
                         Shoes =
                         {
-                            new() { Id = 3, Style = "Sneakers", Age = 21 },
-                            new() { Id = 4, Style = "Dress", Age = 19 }
+                            new()
+                            {
+                                Id = 3,
+                                Style = "Sneakers",
+                                Age = 21
+                            },
+                            new()
+                            {
+                                Id = 4,
+                                Style = "Dress",
+                                Age = 19
+                            }
                         }
                     },
                     new()
@@ -1554,8 +1594,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 3, Size = 12 },
                         Shoes =
                         {
-                            new() { Id = 5, Style = "Sneakers", Age = 20 },
-                            new() { Id = 6, Style = "Dress", Age = 21 }
+                            new()
+                            {
+                                Id = 5,
+                                Style = "Sneakers",
+                                Age = 20
+                            },
+                            new()
+                            {
+                                Id = 6,
+                                Style = "Dress",
+                                Age = 21
+                            }
                         }
                     },
                     new()
@@ -1568,8 +1618,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 4, Size = 11 },
                         Shoes =
                         {
-                            new() { Id = 7, Style = "Sneakers", Age = 19 },
-                            new() { Id = 8, Style = "Dress", Age = 20 }
+                            new()
+                            {
+                                Id = 7,
+                                Style = "Sneakers",
+                                Age = 19
+                            },
+                            new()
+                            {
+                                Id = 8,
+                                Style = "Dress",
+                                Age = 20
+                            }
                         }
                     },
                     new()
@@ -1582,8 +1642,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 5, Size = 11 },
                         Shoes =
                         {
-                            new() { Id = 9, Style = "Sneakers", Age = 21 },
-                            new() { Id = 10, Style = "Dress", Age = 19 }
+                            new()
+                            {
+                                Id = 9,
+                                Style = "Sneakers",
+                                Age = 21
+                            },
+                            new()
+                            {
+                                Id = 10,
+                                Style = "Dress",
+                                Age = 19
+                            }
                         }
                     },
                     new()
@@ -1596,8 +1666,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 6, Size = 12 },
                         Shoes =
                         {
-                            new() { Id = 11, Style = "Sneakers", Age = 20 },
-                            new() { Id = 12, Style = "Dress", Age = 21 }
+                            new()
+                            {
+                                Id = 11,
+                                Style = "Sneakers",
+                                Age = 20
+                            },
+                            new()
+                            {
+                                Id = 12,
+                                Style = "Dress",
+                                Age = 21
+                            }
                         }
                     },
                     new()
@@ -1610,8 +1690,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 7, Size = 12 },
                         Shoes =
                         {
-                            new() { Id = 13, Style = "Sneakers", Age = 19 },
-                            new() { Id = 14, Style = "Dress", Age = 20 }
+                            new()
+                            {
+                                Id = 13,
+                                Style = "Sneakers",
+                                Age = 19
+                            },
+                            new()
+                            {
+                                Id = 14,
+                                Style = "Dress",
+                                Age = 20
+                            }
                         }
                     },
                     new()
@@ -1624,8 +1714,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 8, Size = 11 },
                         Shoes =
                         {
-                            new() { Id = 15, Style = "Sneakers", Age = 21 },
-                            new() { Id = 16, Style = "Dress", Age = 19 }
+                            new()
+                            {
+                                Id = 15,
+                                Style = "Sneakers",
+                                Age = 21
+                            },
+                            new()
+                            {
+                                Id = 16,
+                                Style = "Dress",
+                                Age = 19
+                            }
                         }
                     },
                     new()
@@ -1638,8 +1738,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 9, Size = 11 },
                         Shoes =
                         {
-                            new() { Id = 17, Style = "Sneakers", Age = 20 },
-                            new() { Id = 18, Style = "Dress", Age = 21 }
+                            new()
+                            {
+                                Id = 17,
+                                Style = "Sneakers",
+                                Age = 20
+                            },
+                            new()
+                            {
+                                Id = 18,
+                                Style = "Dress",
+                                Age = 21
+                            }
                         }
                     },
                     new()
@@ -1652,8 +1762,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 10, Size = 12 },
                         Shoes =
                         {
-                            new() { Id = 19, Style = "Sneakers", Age = 19 },
-                            new() { Id = 20, Style = "Dress", Age = 20 }
+                            new()
+                            {
+                                Id = 19,
+                                Style = "Sneakers",
+                                Age = 19
+                            },
+                            new()
+                            {
+                                Id = 20,
+                                Style = "Dress",
+                                Age = 20
+                            }
                         }
                     },
                     new()
@@ -1666,8 +1786,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 11, Size = 12 },
                         Shoes =
                         {
-                            new() { Id = 21, Style = "Sneakers", Age = 21 },
-                            new() { Id = 22, Style = "Dress", Age = 19 }
+                            new()
+                            {
+                                Id = 21,
+                                Style = "Sneakers",
+                                Age = 21
+                            },
+                            new()
+                            {
+                                Id = 22,
+                                Style = "Dress",
+                                Age = 19
+                            }
                         }
                     },
                     new()
@@ -1680,8 +1810,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Feet = new Feet { Id = 12, Size = 11 },
                         Shoes =
                         {
-                            new() { Id = 23, Style = "Sneakers", Age = 20 },
-                            new() { Id = 24, Style = "Dress", Age = 21 }
+                            new()
+                            {
+                                Id = 23,
+                                Style = "Sneakers",
+                                Age = 20
+                            },
+                            new()
+                            {
+                                Id = 24,
+                                Style = "Dress",
+                                Age = 21
+                            }
                         }
                     }
                 };

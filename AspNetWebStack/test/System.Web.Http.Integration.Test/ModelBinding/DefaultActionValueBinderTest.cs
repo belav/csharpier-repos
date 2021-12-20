@@ -1421,7 +1421,12 @@ namespace System.Web.Http.ModelBinding
             string lastName = "DefaultLastName"
         )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName
+            };
         }
 
         // Demonstrates an explicit override to obtain parameters from URL
@@ -1431,7 +1436,12 @@ namespace System.Web.Http.ModelBinding
             [FromUri] string lastName = "DefaultLastName"
         )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName
+            };
         }
 
         // Complex objects default to body. But we can bind from URI with an attribute.
@@ -1453,7 +1463,12 @@ namespace System.Web.Http.ModelBinding
             [FromUri(Name = "last")] string lastName
         )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName
+            };
         }
 
         public void GetTestEmptyString([FromUri] ConvertEmptyStringContainer x) { }
@@ -1473,7 +1488,12 @@ namespace System.Web.Http.ModelBinding
                 string lastName
         )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName
+            };
         }
 
         // Demonstrates ModelBinding to the CancellationToken of the current request
@@ -1534,7 +1554,12 @@ namespace System.Web.Http.ModelBinding
         // Demonstrates how body can be shredded to name/value pairs to bind to simple types
         public ActionValueItem PostToSimpleTypes(int id, string firstName, string lastName)
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName
+            };
         }
 
         // Demonstrates binding to ObjectContent<T> from request body

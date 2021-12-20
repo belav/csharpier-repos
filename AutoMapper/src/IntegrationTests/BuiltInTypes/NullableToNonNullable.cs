@@ -41,7 +41,12 @@ namespace AutoMapper.IntegrationTests
             protected override void Seed(Context context)
             {
                 context.Customers.Add(
-                    new Customer { Id = 1, FirstName = "Bob", LastName = "Smith", }
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                    }
                 );
 
                 base.Seed(context);
@@ -101,7 +106,12 @@ namespace AutoMapper.IntegrationTests
             protected override void Seed(Context context)
             {
                 context.Customers.Add(
-                    new Customer { Id = 1, FirstName = "Bob", LastName = "Smith", }
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                    }
                 );
 
                 base.Seed(context);

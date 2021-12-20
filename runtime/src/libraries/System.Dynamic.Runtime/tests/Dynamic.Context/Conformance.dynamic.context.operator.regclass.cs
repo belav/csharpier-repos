@@ -1982,8 +1982,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
                     _field3 = byte.MaxValue
                 },
                 new Test(),
-                new Test() { _field1 = null, _field2 = null, _field3 = 0 },
-                new Test() { _field1 = decimal.MinValue, _field2 = int.MaxValue, _field3 = 10 },
+                new Test()
+                {
+                    _field1 = null,
+                    _field2 = null,
+                    _field3 = 0
+                },
+                new Test()
+                {
+                    _field1 = decimal.MinValue,
+                    _field2 = int.MaxValue,
+                    _field3 = 10
+                },
             };
             MyStruct mc = new MyStruct();
             dynamic dy = mc;

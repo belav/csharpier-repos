@@ -891,6 +891,11 @@ public class AttributeRouteModelTests
         string name = null
     )
     {
-        return new AttributeRouteModel { Template = template, Order = order, Name = name };
+        return new AttributeRouteModel
+        {
+            Template = template,
+            Order = order,
+            Name = name
+        };
     }
 }

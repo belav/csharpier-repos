@@ -300,7 +300,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -419,7 +424,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -539,7 +549,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -662,7 +677,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -672,7 +692,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 2 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 2
+                            }
                         }
                     }
                 );
@@ -805,7 +830,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -953,7 +983,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );

@@ -402,9 +402,24 @@ namespace DllImportGenerator.IntegrationTests
         {
             var boolValues = new[]
             {
-                new BoolStruct { b1 = true, b2 = true, b3 = true, },
-                new BoolStruct { b1 = true, b2 = true, b3 = true, },
-                new BoolStruct { b1 = true, b2 = true, b3 = result, },
+                new BoolStruct
+                {
+                    b1 = true,
+                    b2 = true,
+                    b3 = true,
+                },
+                new BoolStruct
+                {
+                    b1 = true,
+                    b2 = true,
+                    b3 = true,
+                },
+                new BoolStruct
+                {
+                    b1 = true,
+                    b2 = true,
+                    b3 = result,
+                },
             };
 
             Assert.Equal(

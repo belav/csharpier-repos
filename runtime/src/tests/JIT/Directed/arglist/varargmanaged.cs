@@ -1537,7 +1537,13 @@ namespace NativeVarargTest
             ref double d
         )
         {
-            return new FourDoubleStruct { a = a, b = b, c = c, d = d };
+            return new FourDoubleStruct
+            {
+                a = a,
+                b = b,
+                c = c,
+                d = d
+            };
         }
     }
 }
